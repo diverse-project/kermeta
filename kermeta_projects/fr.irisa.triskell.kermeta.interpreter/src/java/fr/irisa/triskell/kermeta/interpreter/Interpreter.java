@@ -1,6 +1,6 @@
-/* $Id: Interpreter.java,v 1.3 2005-03-22 12:49:29 zdrey Exp $
+/* $Id: Interpreter.java,v 1.4 2005-03-22 12:50:42 zdrey Exp $
 * Project : Kermeta (First iteration)
-* File : InterpreterAsMMClass.java
+* File : Interpreter.java
 * License : GPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
@@ -13,17 +13,17 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.Hashtable;
 
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
-import fr.irisa.triskell.kermeta.runtime.factory.KermetaObjectFactory;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
 /**
  */
 
-public class Interpreter extends KermetaObject {
+public class Interpreter extends RuntimeObject {
 	
 	public Hashtable allClasses;
 	
-	public Interpreter(RuntimeObjectFactory factory, KermetaObject metaclass) {
+	public Interpreter(RuntimeObjectFactory factory, RuntimeObject metaclass) {
 		super(factory,metaclass);
 		this.allClasses=new Hashtable();
 	}
