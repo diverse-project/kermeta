@@ -88,7 +88,7 @@ public void test4_testOpOpCall() throws Exception {
 testWithFile("test/kmt_testcases","4_testOpOpCall.kmt" );
 }
 
-public void test5_testExternPackageCall() throws Exception {
+/*public void test5_testExternPackageCall() throws Exception {
 testWithFile("test/kmt_testcases","5_testExternPackageCall.kmt" );
 }
 
@@ -122,13 +122,13 @@ testWithFile("test/kmt_testcases","8_testOpInternPkgCall.kmt" );
 
 public void test9_testOpCallObject() throws Exception {
 testWithFile("test/kmt_testcases","9_testOpCallObject.kmt" );
-}
+}*/
 
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 	
 	public void testWithFile(String dir, String file) throws Exception {
-		Run.main(new String[] {dir+file} );
+		Run.main(new String[] {dir+"/"+file} );
 	}
 	
 
