@@ -46,6 +46,19 @@ In the second case, it is used to "call" a lambda expression, which stands as an
 In a non functional language, we need a syntax to specify a lambda expression : here,
 we have" function" and the curlies...So it is too much!
 
+Another problem :
+The arguments in an operation call (in an assignment) are defined as a postfixlst :
+
+list postfixlst : postfix* ;
+abstract postfix : callPostfix | fLambdaExpression | paramPostfix;
+
+This allows the following examples of notations :
+
+* f1.f2.f3(a, b, c) -> correct
+* f1(a, b, f4.f5(c)) -> correct
+* f1(a, b)(c, d)     -> coherent but this is a functional orientation
+* f1 { a | not(a) } { b | not(b) } -> coherent as well but priority rules to define
+
 
 
 	
