@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.5 2005-02-21 09:11:20 zdrey Exp $
+/* $Id: FrameworkGen.java,v 1.6 2005-02-21 10:06:32 zdrey Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -51,7 +51,7 @@ public class FrameworkGen {
 		
 		abstract_unit = KermetaLoader.getDefaultLoader().load("src/ecore/kermeta.emf");
 			
-		//concrete_unit = KermetaLoader.getDefaultLoader().load("src/ecore/kermeta.emf");
+		concrete_unit = KermetaLoader.getDefaultLoader().load("src/ecore/kermeta_c.emf");
 		
 		//System.out.println(abstract_unit.error.size());
 		
@@ -72,10 +72,21 @@ public class FrameworkGen {
 */
 		// Create the abstract.kmt reflection module
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-		pp.ppPackage(abstract_unit.packageLookup("kermeta"), new File("src/kmt/reflection/abstract.kmt"));
+		pp.ppPackage(abstract_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/abstract.kmt"));
 
-		makeConcreteClasses(abstract_unit.packageLookup("kermeta"));
-		pp.ppPackage(abstract_unit.packageLookup("kermeta"), new File("src/kmt/reflection/concrete.kmt"));
+		// Define impl package
+		FPackage impl = concrete_unit.packageLookup("kermeta::structure");
+		impl.setFName("impl");
+		
+		FPackage structure = concrete_unit.struct_factory.createFPackage();
+		structure.setFName("structure");
+		
+		structure.setFNestingPackage(concrete_unit.packageLookup("kermeta"));
+		impl.setFNestingPackage(structure);
+		
+		
+		makeConcreteClasses(concrete_unit.packageLookup("kermeta::structure"));
+		pp.ppPackage(concrete_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/concrete.kmt"));
 	}
 	
 	protected File createKMTBodiesFile(String filename)
