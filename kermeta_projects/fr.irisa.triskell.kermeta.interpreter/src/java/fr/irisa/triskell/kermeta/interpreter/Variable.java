@@ -1,4 +1,4 @@
-/* $Id: Variable.java,v 1.1 2005-03-18 10:22:53 zdrey Exp $
+/* $Id: Variable.java,v 1.2 2005-03-21 08:47:27 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : Variable.java
  * License : GPL
@@ -24,7 +24,7 @@ public class Variable {
     /** The declaration in kermeta that correspond to this Variable */
     protected FVariableDecl declaration ;
     /** The value of the variable */
-    protected KermetaObject value;
+    protected KermetaObject kermetaObject;
     /** The name of the variable */
     protected String name;
     /**
@@ -63,13 +63,13 @@ public class Variable {
     /**
      * @return Returns the value.
      */
-    public KermetaObject getValue() {
-        return value;
+    public KermetaObject getKermetaObject() {
+        return kermetaObject;
     }
     /**
      * @param value2 The value to set.
      */
-    public void setValue(KermetaObject value) {
-        this.value = value;
+    public void setKermetaObject(KermetaObject kObject) {
+        this.kermetaObject = kObject;
     }
 }
