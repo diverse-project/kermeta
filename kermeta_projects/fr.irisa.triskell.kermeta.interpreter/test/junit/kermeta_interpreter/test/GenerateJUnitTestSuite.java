@@ -33,7 +33,7 @@ public class GenerateJUnitTestSuite {
 		return template;
 	}
 
-	protected static String junitfile = "test/junit/kermeta_io/test/JunitTestSuite.java";
+	protected static String junitfile = "test/junit/kermeta_interpreter/test/JunitTestSuite.java";
 
 	public static void main(String[] args) {
 		String tcs = "";
@@ -83,9 +83,14 @@ public class GenerateJUnitTestSuite {
 		File[] files = dir.listFiles();
 		for (int i=0; i<files.length; i++) {
 			//System.out.println("Processing file " +files[i].getName() );
-			if (files[i].isFile() && files[i].getName().indexOf('.') > 0) {
+			if (files[i].isFile() && files[i].getName().indexOf('.') > 0
+			 && files[i].getName().substring(
+			         files[i].getName().indexOf('.'), files[i].getName().length()).equals(".main.kmt")
+			         
+			) {
 				String name = files[i].getName().substring(0, files[i].getName().indexOf('.'));
-				String ext = files[i].getName().substring(files[i].getName().indexOf('.')+1);
+				
+				String ext = files[i].getName().substring(files[i].getName().lastIndexOf('.')+1);
 				//System.out.println("Adding file " + name + "." + ext );
 				if (containsFileType(ext)) {
 					//System.out.println("Adding file " +files[i].getName() );
