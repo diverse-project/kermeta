@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
+import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 /**
  * @author Franck Fleurey
@@ -42,11 +43,12 @@ public class StandardKermetaUnit extends KMTUnit {
 	 * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#importModelFromURI(java.lang.String)
 	 */
 	public void importModelFromURI(String str_uri) {
-		URI uri = URI.createURI(str_uri);
-		URIConverter c = new URIConverterImpl();
+		if (str_uri.startsWith("file:"))
+			str_uri=str_uri.substring(5,str_uri.length());
+		URI uri = URI.createFileURI(str_uri);
 		if (uri.isRelative() && this.uri != null) {
-			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
-			
+//			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
+			str_uri = "file:"+UserDirURI.createURI(str_uri,this.uri,false).toFileString().replaceAll("\\\\","/");
 		}
 		
 		// To import method bodies from another file

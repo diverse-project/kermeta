@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.7 2005-03-02 17:31:18 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.8 2005-03-07 17:35:29 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -56,6 +56,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
+import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 /**
  * @author Franck Fleurey
@@ -308,10 +309,12 @@ public abstract class KermetaUnit {
 	}
 	
 	public void importModelFromURI(String str_uri) {
-		URI uri = URI.createURI(str_uri);
-		URIConverter c = new URIConverterImpl();
+		if (str_uri.startsWith("file:"))
+			str_uri=str_uri.substring(5,str_uri.length());
+		URI uri = URI.createFileURI(str_uri);
 		if (uri.isRelative() && this.uri != null) {
-			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
+//			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
+			str_uri = "file:"+UserDirURI.createURI(str_uri,this.uri,false).toFileString().replaceAll("\\\\","/");
 			
 		}
 		
@@ -506,11 +509,13 @@ public abstract class KermetaUnit {
 		        if (!iu.visited) iu.saveMetaCoreModel(directory);
 		    }
 			visited = false;
-			String file_name = URI.createURI(uri).lastSegment().replace('.', '_') + ".kcore";
+//			String file_name = URI.createURI(uri).lastSegment().replace('.', '_') + ".kcore";
+			String file_name = uri.replace('.', '_') + ".kcore";
 			
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("kcore",new XMIResourceFactoryImpl()); 
 			ResourceSet resource_set = new ResourceSetImpl();
-			Resource resource = resource_set.createResource(URI.createURI(directory + "/" + file_name));
+			URI _uri=UserDirURI.createURI(file_name,null,true);
+			Resource resource = resource_set.createResource(_uri);
 			fixTypeContainement();
 			
 			if (rootPackage.eContainer() != null) {

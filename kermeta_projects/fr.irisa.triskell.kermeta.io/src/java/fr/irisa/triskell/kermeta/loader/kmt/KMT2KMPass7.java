@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.7 2005-03-07 17:29:07 jpthibau Exp $
+/* $Id: KMT2KMPass7.java,v 1.8 2005-03-07 17:36:11 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -51,7 +51,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
-import com.sun.rsasign.t;
+//import com.sun.rsasign.t;
 
 import fr.irisa.triskell.kermeta.ast.*;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;

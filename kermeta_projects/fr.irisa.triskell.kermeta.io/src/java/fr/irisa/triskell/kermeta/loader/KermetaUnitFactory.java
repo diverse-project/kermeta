@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import fr.irisa.triskell.kermeta.loader.emfatic.KMLoaderModuleEmfatic;
 import fr.irisa.triskell.kermeta.loader.km.KMLoaderModuleMCore;
 import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
+import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 
 /**
@@ -82,10 +83,13 @@ public class KermetaUnitFactory {
     	if (kmPath.containsKey(uri)) uri = (String)kmPath.get(uri);
     	
     	// resolve uri
-    	URI u = URI.createURI(uri);
+    	if (uri.startsWith("file:"))
+    		uri=uri.substring(5,uri.length());
+    	URI u = URI.createFileURI(uri);
     	if (u.isRelative()) {
-    		URIConverter c = new URIConverterImpl();
-    		u = u.resolve(c.normalize(URI.createURI(".")));    			
+/*    		URIConverter c = new URIConverterImpl();
+    		u = u.resolve(c.normalize(URI.createURI(".")));*/
+    		u=UserDirURI.createURI(u);
     	}
     	
     
@@ -100,11 +104,12 @@ public class KermetaUnitFactory {
     	if (u.fileExtension() != null) 
         	loader = (KermetaLoaderModule)loadModules.get(u.fileExtension());
         if (loader == null) {
+            	System.err.println("TODO: manage this error : loader is null !");
         	// TODO : generate an error
         	//result.error.add(new KMUnitError("Unable to load resource " + uri + " : no loader registered.", null));
         	//return result;
         }
-        result = loader.createKermetaUnit(u.toString());
+        result = loader.createKermetaUnit("file:"+u.toFileString().replaceAll("\\\\","/"));
         loadedUnits.put(u.toString(), result);
     	return result;
     }

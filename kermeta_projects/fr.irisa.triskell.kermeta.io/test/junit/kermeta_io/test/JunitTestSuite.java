@@ -11,9 +11,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.URI;
+
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 import junit.framework.TestCase;
 
@@ -52,8 +55,21 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*** BEGIN GENERATED TESTS ***/
-/*public void testmetacore() throws Exception {
+public void testmetacore() throws Exception {
 testWithFile("test/emfatic_testcases","metacore.emf" );
 }
 
@@ -73,12 +89,76 @@ public void testtestConditional() throws Exception {
 testWithFile("test/kmt_testcases","testConditional.kmt" );
 }
 
+public void testtestCycleA() throws Exception {
+testWithFile("test/kmt_testcases","testCycleA.kmt" );
+}
+
+public void testtestCycleB() throws Exception {
+testWithFile("test/kmt_testcases","testCycleB.kmt" );
+}
+
+public void testtestCycleC() throws Exception {
+testWithFile("test/kmt_testcases","testCycleC.kmt" );
+}
+
+public void testtestCycleD() throws Exception {
+testWithFile("test/kmt_testcases","testCycleD.kmt" );
+}
+
+public void testtestCycleE() throws Exception {
+testWithFile("test/kmt_testcases","testCycleE.kmt" );
+}
+
 public void testtestEnum() throws Exception {
 testWithFile("test/kmt_testcases","testEnum.kmt" );
 }
 
 public void testtestExpression() throws Exception {
 testWithFile("test/kmt_testcases","testExpression.kmt" );
+}
+
+public void testtestExtractOperation() throws Exception {
+testWithFile("test/kmt_testcases","testExtractOperation.kmt" );
+}
+
+public void testtestImportAlias() throws Exception {
+testWithFile("test/kmt_testcases","testImportAlias.kmt" );
+}
+
+public void testtestInjectOperation() throws Exception {
+testWithFile("test/kmt_testcases","testInjectOperation.kmt" );
+}
+
+public void testtestInterDependA() throws Exception {
+testWithFile("test/kmt_testcases","testInterDependA.kmt" );
+}
+
+public void testtestInterDependB() throws Exception {
+testWithFile("test/kmt_testcases","testInterDependB.kmt" );
+}
+
+public void testtestMCommentAlone() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentAlone.kmt" );
+}
+
+public void testtestMCommentBegin() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentBegin.kmt" );
+}
+
+public void testtestMCommentEmptyOp() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentEmptyOp.kmt" );
+}
+
+public void testtestMCommentInline() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentInline.kmt" );
+}
+
+public void testtestMCommentMany() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentMany.kmt" );
+}
+
+public void testtestMCommentMiddleOfLoop() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentMiddleOfLoop.kmt" );
 }
 
 public void testtestOperation() throws Exception {
@@ -101,6 +181,34 @@ public void testtestResult() throws Exception {
 testWithFile("test/kmt_testcases","testResult.kmt" );
 }
 
+public void testtestSCommentAlone() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentAlone.kmt" );
+}
+
+public void testtestSCommentBegin() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentBegin.kmt" );
+}
+
+public void testtestSCommentEmptyOp() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentEmptyOp.kmt" );
+}
+
+public void testtestSCommentEndOfFile() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentEndOfFile.kmt" );
+}
+
+public void testtestSCommentInline() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentInline.kmt" );
+}
+
+public void testtestSCommentMany() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentMany.kmt" );
+}
+
+public void testtestSCommentMiddleOfLoop() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentMiddleOfLoop.kmt" );
+}
+
 public void testtestSimpleAnnotations() throws Exception {
 testWithFile("test/kmt_testcases","testSimpleAnnotations.kmt" );
 }
@@ -121,110 +229,10 @@ public void testtestVariable() throws Exception {
 testWithFile("test/kmt_testcases","testVariable.kmt" );
 }
 
-public void testtestImportAlias() throws Exception {
-testWithFile("test/kmt_testcases","testImportAlias.kmt" );
-}
-
-public void testtestExtractOperation() throws Exception {
-testWithFile("test/kmt_testcases","testExtractOperation.kmt" );
-}
-
-public void testtestInjectOperation() throws Exception {
-testWithFile("test/kmt_testcases","testInjectOperation.kmt" );
-}
-
-public void testtestCycleA() throws Exception {
-testWithFile("test/kmt_testcases","testCycleA.kmt" );
-}
-
-public void testtestSCommentBegin() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentBegin.kmt" );
-}
-
-public void testtestSCommentAlone() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentAlone.kmt" );
-}
-
-public void testtestSCommentInline() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentInline.kmt" );
-}
-
-public void testtestSCommentMany() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentMany.kmt" );
-}
-
-public void testtestCycleB() throws Exception {
-testWithFile("test/kmt_testcases","testCycleB.kmt" );
-}
-
-public void testtestCycleC() throws Exception {
-testWithFile("test/kmt_testcases","testCycleC.kmt" );
-}
-
-public void testtestSCommentMiddleOfLoop() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentMiddleOfLoop.kmt" );
-}
-
-public void testtestCycleD() throws Exception {
-testWithFile("test/kmt_testcases","testCycleD.kmt" );
-}
-
-public void testtestCycleE() throws Exception {
-testWithFile("test/kmt_testcases","testCycleE.kmt" );
-}
-
-public void testtestInterDependA() throws Exception {
-testWithFile("test/kmt_testcases","testInterDependA.kmt" );
-}
-
-public void testtestInterDependB() throws Exception {
-testWithFile("test/kmt_testcases","testInterDependB.kmt" );
-}
-*/
-public void testtestClassesComment() throws Exception {
-testWithFile("test/kmt_testcases","testClassesComment.kmt" );
-}
-/*
-public void testtestSCommentEmptyOp() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentEmptyOp.kmt" );
-}
-
-public void testtestMCommentBegin() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentBegin.kmt" );
-}
-
-public void testtestMCommentAlone() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentAlone.kmt" );
-}
-
-public void testtestMCommentInline() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentInline.kmt" );
-}
-
-public void testtestMCommentMany() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentMany.kmt" );
-}
-
-public void testtestMCommentMiddleOfLoop() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentMiddleOfLoop.kmt" );
-}
-
-public void testtestMCommentEmptyOp() throws Exception {
-testWithFile("test/kmt_testcases","testMCommentEmptyOp.kmt" );
-}
-
-public void testtestSCommentEndOfFile() throws Exception {
-testWithFile("test/kmt_testcases","testSCommentEndOfFile.kmt" );
-}
-
-public void testtestComplexAnnotations() throws Exception {
-testWithFile("test/kmt_testcases","testComplexAnnotations.kmt" );
-}
-
 public void testtestExtOperation() throws Exception {
 testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 }
-*/
+
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 	
@@ -245,7 +253,8 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		// the xmi :
 		builder.saveMetaCoreModel(dir + "/" + "output");
 		// try to pretty-print the result in another file
-		String ppfile =dir + "/output/"  + file.replace('.', '_') + ".kmt";
+		URI userLocatedPpfile=UserDirURI.createURI(dir + "/output/"  + file.replace('.', '_') + ".kmt",null,true);
+		String ppfile =userLocatedPpfile.toFileString();
 		//builder.prettyPrint(ppfile);
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		
