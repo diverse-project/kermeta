@@ -9,9 +9,9 @@ import java.util.Iterator;
 import fr.irisa.triskell.kermeta.builder.KMBuilder;
 import fr.irisa.triskell.kermeta.builder.KMMetaBuilder;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.interpreter.InterpreterAsMMClass;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.runtime.KermetaMetaMetaClass;
 import fr.irisa.triskell.kermeta.runtime.factory.KermetaObjectFactory;
 import junit.framework.TestCase;
 
@@ -25,7 +25,7 @@ public class Run extends TestCase {
 	public static MiniMofJavaDriverFactory javaDriverFactory=null;
 	public static MiniMofEMFDriverFactory emfDriverFactory=null;*/
 	public static KermetaObjectFactory kermetaObjectFactory=null;
-	public static KermetaMetaMetaClass metametaclass=null;
+	public static InterpreterAsMMClass interpreter=null;
 
 	public static void main(String[] args) {
 		if (args.length < 3)
@@ -33,7 +33,7 @@ public class Run extends TestCase {
 		else {
 			//prepare the kermetaObject factory and the metametaclass to allow kermeta metamodel traversing
 			kermetaObjectFactory=new KermetaObjectFactory();
-			metametaclass=new KermetaMetaMetaClass(kermetaObjectFactory);
+			interpreter=new InterpreterAsMMClass(kermetaObjectFactory);
 			String modelName=args[0];
 			KermetaUnitFactory.getDefaultLoader().unloadAll();
 			KermetaUnit metabuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.framework/src/kermeta/language/behavior.kmt");
@@ -62,7 +62,7 @@ public class Run extends TestCase {
 				System.out.println("model "+modelName+" loaded successfully !");
 				KMBuilder pp = new KMBuilder();
 				
-				Hashtable allClasses = pp.ppPackage(builder.rootPackage,allMetaClasses);
+				Hashtable allClasses = pp.ppPackage(builder,allMetaClasses);
 			}
 		}
 			}

@@ -5,6 +5,7 @@
 package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.Hashtable;
+import java.util.List;
 
 import fr.irisa.triskell.kermeta.runtime.factory.KermetaObjectFactory;
 
@@ -117,4 +118,10 @@ public class KermetaObject {
 	public KermetaObjectFactory getFactory() {
 		return factory;
 	}
+	
+	public KermetaObject instanciate(List attributes) {
+		return null;
+	}
+	
+	
 }

@@ -1,4 +1,4 @@
-/* $Id: KMBuilder.java,v 1.2 2005-03-10 13:52:23 jpthibau Exp $
+/* $Id: KMBuilder.java,v 1.3 2005-03-11 08:36:06 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -30,6 +30,8 @@ import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.behavior.*;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
+import fr.irisa.triskell.kermeta.reflect.KMReflect;
+import fr.irisa.triskell.kermeta.runtime.KermetaObject;
 import fr.irisa.triskell.kermeta.structure.*;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -43,52 +45,49 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
  */
 public class KMBuilder extends KermetaVisitor {
 
-	protected ArrayList usings = new ArrayList();
-	protected ArrayList imports = new ArrayList();
-	protected String root_pname;
-	protected String current_pname;
+	protected Hashtable allMetaClasses;
+	protected Hashtable allClasses;
+	protected Stack packagesStack;
+	protected KermetaObject currentClassNode;
 	
 	protected boolean typedef = false;
 	
 	public Hashtable ppPackage(KermetaUnit unit,Hashtable allMetaClasses) {
-/*		allMetaClasses=new Hashtable();
+		this.allMetaClasses=allMetaClasses;
+		allClasses=new Hashtable();
 		String currentpackageName=unit.getQualifiedName(unit.rootPackage);
 		List packagesNames=new ArrayList();
 		packagesNames.add(currentpackageName);
-		this.packageNamesStack=new Stack();
-		ppPackageContents(unit.rootPackage,allMetaClasses,currentpackageName);
-		ppPackageImportedpackagess(unit,allMetaClasses,packagesNames);
-		return allMetaClasses;*/
-		return null;
+		this.packagesStack=new Stack();
+		ppPackageContents(unit.rootPackage,unit);
+		ppPackageImportedpackagess(unit,packagesNames);
+		return allClasses;
 	}
 
-	public String ppPackage(FPackage p) {
-		root_pname = getQualifiedName(p);
-		String result = "package " + root_pname + ";\n\n";
-		for(int i=0; i<imports.size();i++) result += "require \"" + imports.get(i) + "\"\n";
-		if (imports.size()>0) result += "\n";
-		for(int i=0; i<usings.size();i++) result += "using " + usings.get(i) + "\n";
-		if (usings.size()>0) result += "\n";
-		current_pname = root_pname;
-		typedef = true;
-		result += ppCRSeparatedNode(p.getFOwnedTypeDefinition());
-		typedef = false;
-		result += ppCRSeparatedNode(p.getFNestedPackage());
-		
-		// temporary handle of orphan tags
-		//result +=
-		return result;
+	public void ppPackageImportedpackagess(KermetaUnit unit,List packagesNames) {
+		Iterator it = unit.importedUnits.iterator();
+		while(it.hasNext()) {
+			KermetaUnit iu = (KermetaUnit)it.next();
+			String iuName=iu.getQualifiedName(iu.rootPackage);
+			if ( !packagesNames.contains(iuName)) {
+				packagesNames.add(iuName);
+				this.packagesStack=new Stack();
+				ppPackageContents(iu.rootPackage,iu);
+				ppPackageImportedpackagess(iu,packagesNames);
+			}
+		}
 	}
-	
-	public String ppPackageContents(FPackage p) {
-		root_pname = getQualifiedName(p);
-		String result = "";
-		current_pname = root_pname;
-		typedef = true;
-		result += ppCRSeparatedNode(p.getFOwnedTypeDefinition());
-		typedef = false;
-		result += ppCRSeparatedNode(p.getFNestedPackage());
-		return result;
+
+	public void ppPackageContents(FPackage p,KermetaUnit unit) {
+		KermetaObject pMetaclass=(KermetaObject)this.allMetaClasses.get("kermeta::language::structure::Package");
+		KermetaObject pNode=pMetaclass.instanciate(KMReflect.allAttributes(unit,pMetaclass,allMetaClasses));
+		Hashtable data=new Hashtable();
+		data.put("kcoreObject",p);
+		pNode.setData(data);
+		this.packagesStack.push(pNode);
+		ppCRSeparatedNode(p.getFOwnedTypeDefinition());
+		ppCRSeparatedNode(p.getFNestedPackage());
+		this.packagesStack.pop();
 	}
 	
 	protected String ppIdentifier(String id) {

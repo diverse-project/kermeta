@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.2 2005-03-10 13:19:25 jpthibau Exp $
+/* $Id: KMMetaBuilder.java,v 1.3 2005-03-11 08:36:07 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -49,18 +49,19 @@ public class KMMetaBuilder extends KermetaVisitor {
 	protected Stack packageNamesStack;
 	protected KermetaObject currentClassNode;
 	
+	
 	public Hashtable ppPackage(KermetaUnit unit) {
 		allMetaClasses=new Hashtable();
 		String currentpackageName=unit.getQualifiedName(unit.rootPackage);
 		List packagesNames=new ArrayList();
 		packagesNames.add(currentpackageName);
 		this.packageNamesStack=new Stack();
-		ppPackageContents(unit.rootPackage,allMetaClasses,currentpackageName);
-		ppPackageImportedpackagess(unit,allMetaClasses,packagesNames);
+		ppPackageContents(unit.rootPackage,currentpackageName);
+		ppPackageImportedpackagess(unit,packagesNames);
 		return allMetaClasses;
 	}
 
-	public void ppPackageImportedpackagess(KermetaUnit unit,Hashtable allMetaClasses,List packagesNames) {
+	public void ppPackageImportedpackagess(KermetaUnit unit,List packagesNames) {
 		Iterator it = unit.importedUnits.iterator();
 		while(it.hasNext()) {
 			KermetaUnit iu = (KermetaUnit)it.next();
@@ -68,13 +69,13 @@ public class KMMetaBuilder extends KermetaVisitor {
 			if ( !packagesNames.contains(iuName)) {
 				packagesNames.add(iuName);
 				this.packageNamesStack=new Stack();
-				ppPackageContents(iu.rootPackage,allMetaClasses,iuName);
-				ppPackageImportedpackagess(iu,allMetaClasses,packagesNames);
+				ppPackageContents(iu.rootPackage,iuName);
+				ppPackageImportedpackagess(iu,packagesNames);
 			}
 		}
 	}
 
-	public void ppPackageContents(FPackage p,Hashtable allMetaClasses,String packageName) {
+	public void ppPackageContents(FPackage p,String packageName) {
 		this.packageNamesStack.push(packageName);
 		ppCRSeparatedNode(p.getFOwnedTypeDefinition());
 		ppCRSeparatedNode(p.getFNestedPackage());
@@ -196,7 +197,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
 	public Object visit(FClassDefinition node) {
-		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaclass);
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.interpreter);
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);
@@ -239,7 +240,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
 	 */
 	public Object visit(FPrimitiveType node) {
-		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaclass);
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.interpreter);
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);
@@ -379,7 +380,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
-		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaclass);
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.interpreter);
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);
@@ -444,7 +445,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
 	public Object visit(FProperty node) {
-		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaclass);
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.interpreter);
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);
