@@ -1,7 +1,19 @@
-/*
- * Created on 17 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: ExternJavaClassGenerator.java,v 1.5 2005-03-11 14:03:17 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : ExternJavaClassGenerator.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 17, 2005
+ * Authors : 
+ * 	Franck Fleurey	ffleurey@irisa.fr
+ * Description :
+ * 	Generate the external java wrapper for a given kermeta model that makes extern calls
+ *  to a system class (the basic classes of kermeta that are implemented in Java) 
+ * History :
+ * 	- Method modified to handle the generation of only
+ * 
+*/
 package fr.irisa.triskell.kermeta.dev.framework;
 
 import java.io.BufferedWriter;
@@ -43,7 +55,11 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 	}
 	
 	public void loadmodel() {
-		unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("src/kermeta/kermeta.kmt");
+		loadmodelfromfile("src/kermeta/kermeta.kmt");
+	}
+	
+	public void loadmodelfromfile(String kmt_filename) {
+	    unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(kmt_filename);
 		unit.load();
 		if (unit.error.size() > 0) {
 			System.out.println(unit.error.size() + " Load error : " + ((KMUnitMessage)unit.error.get(0)).getMessage());
@@ -185,9 +201,24 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 		return method_template;
 	}
 	
+	/**
+	 * 
+	 * @param args if no args are given, all kermeta wrapped classes are regenerated. Otherwise
+	 * we assume that the first args is a kermeta file, and we only generate its classes. 
+	 */
 	public static void main(String[] args) {
-		ExternJavaClassGenerator g = new ExternJavaClassGenerator(); 
-		g.loadmodel();
+	    ExternJavaClassGenerator g = new ExternJavaClassGenerator();
+	    if (args.length == 0)
+	        g.loadmodel();
+	    else
+	    {
+	        File f = new File(args[0]);
+	        if (f.exists())
+	            g.loadmodelfromfile(args[0]);
+	        else
+	            System.err.println("'"+args[0]+"' is not a valid file name");
+	    }
+		
 	}
 	
 	
