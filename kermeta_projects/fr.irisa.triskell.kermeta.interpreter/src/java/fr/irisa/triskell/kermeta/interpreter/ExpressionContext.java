@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.4 2005-03-30 16:32:31 jpthibau Exp $
+/* $Id: ExpressionContext.java,v 1.5 2005-04-04 14:34:18 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -31,24 +31,15 @@ import fr.irisa.triskell.kermeta.structure.FType;
 public class ExpressionContext {
 
     /**
-     * 
-     * @uml.property name="root"
-     * @uml.associationEnd multiplicity="(0 1)"
-     */
-    // The expression associated to this context
-    // Typically : a FLoop, FConditional, and one for the FOperationBody if any var.
-    // is declared inside it and at the top level. 
-    FExpression root; // should be a RuntimeObject?
+     * The expression associated to this context
+     * Typically : a FLoop, FConditional, and one for the FOperationBody if any var.
+     * is declared inside it and at the top level. */ 
+    FExpression root;
 
     /**
-     * 
-     * @uml.property name="variables"
-     * @uml.associationEnd qualifier="name:java.lang.String fr.irisa.triskell.kermeta.interpreter.Variable"
-     * multiplicity="(0 1)"
-     */
-    // The set of variable defined in this block
-    // key : the name of the variable (String)
-    // value : the variable itself (Variable)
+     * The set of variables defined in this block
+     * key : the name of the variable (String)
+     * value : the variable itself (Variable) */
     Hashtable variables;
 
 	
@@ -77,7 +68,7 @@ public class ExpressionContext {
 	/**
 	 * @deprecated 
 	 * Add a new variable, from its declaration, in the context
-	 * Copy-try from ff. Did not understand -
+	 * Copy-try from ff.
 	 * FVariableDecl is "var toto" in kermeta 
 	 * @param declaration the variable declaration of the variable, to add in the context
 	 * @return the RuntimeObject that was added as the value of this variable
@@ -91,10 +82,13 @@ public class ExpressionContext {
 	}
 	
 	/** 
-	 * Add a new variable, from its declaration, in the context
-	 * Copy-try from ff. Did not understand -
-	 * FVariableDecl is "var toto" in kermeta 
-	 * @param declaration the variable declaration of the variable, to add in the context
+	 * Add a new variable, from its type, name and initial value, in the context.
+	 * This variable comes either from a VarDecl or a parameter definition of an FOperation
+	 * - operation op(var : varType) : ...
+	 * - var : varType
+	 * @param type the type of the variable to define as new in the expr. context
+	 * @param name name of the variable
+	 * @param init the initial value of this variable
 	 * @return the RuntimeObject that was added as the value of this variable
 	 */
 	public Variable defineVariable(FType type, String name, RuntimeObject init)
@@ -127,7 +121,7 @@ public class ExpressionContext {
 	}
 	
 	/***
-	 * 
+	 * Get the variable by its name in the variables hashtable
 	 * @param name
 	 * @return the Variable corresponding to name
 	 */
@@ -139,10 +133,6 @@ public class ExpressionContext {
 	    return result;
 	}
 
-    /**
-     * 
-     * @uml.property name="root"
-     */
     /*
      * 
      * A C C E S S O R S
@@ -152,11 +142,7 @@ public class ExpressionContext {
     public void setRoot(FExpression pRoot) {
         root = pRoot;
     }
-
-    /**
-     * 
-     * @uml.property name="variables"
-     */
+    
     public Hashtable getVariables() {
         return variables;
     }
