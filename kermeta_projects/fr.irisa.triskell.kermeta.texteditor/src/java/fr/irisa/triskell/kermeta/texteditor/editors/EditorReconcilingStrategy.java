@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
@@ -22,7 +23,9 @@ import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.KMUnitWarning;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 
 /**
@@ -87,12 +90,24 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     {
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();
-    	KermetaUnit result = new KermetaUnit();
     	org.eclipse.core.resources.IFile file = _editor.getFile();
-    	result.setUri(file.getFullPath().toString());
+    	KermetaUnitFactory.getDefaultLoader().unloadAll();
+    	KMTUnit result = null;
         EditorReconcilingStrategy.clearMarkers(file);
-        KMLoaderModuleMCT parser = new KMLoaderModuleMCT();
-        parser.loadFromString(result, file.getFullPath().toString(), _document.get().replace('\t', ' ') );
+       // System.out.println("file.getFullPath().toOSString() : " + file.getFullPath().toOSString());
+        try {
+        	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit("platform:/resource" + file.getFullPath().toString());
+	        result.parseString(_document.get().replace('\t', ' '));
+	        result.load();
+        }
+        catch(Exception e) {
+        	if (result == null) {
+        		e.printStackTrace();
+        		return null;
+        	}
+        	else if (result.error.size() == 0)
+        		result.error.add(new KMUnitError("INTERNAL ERROR : " + e, null));
+        }
         
         EditorReconcilingStrategy.createMarker(file, result);
         return result;

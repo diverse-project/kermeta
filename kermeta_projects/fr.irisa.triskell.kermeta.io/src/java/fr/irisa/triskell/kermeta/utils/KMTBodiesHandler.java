@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesHandler.java,v 1.1 2005-02-21 15:25:24 zdrey Exp $
+/* $Id: KMTBodiesHandler.java,v 1.2 2005-02-22 08:24:23 ffleurey Exp $
  * Created on Feb 21, 2005
  * Author : zdrey
  * Description : describe here your class role
@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaLoader;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.expression.OperationBodyLoader;
 
 /**
@@ -47,9 +47,11 @@ public class KMTBodiesHandler {
     public void extractAndInjectForPackageFromFiles(String source_kmt, String target_kmt, String pkg_str)
     {
         // get the kermeta mmodel from file spec. by source_kmt
-        KermetaUnit source_unit = KermetaLoader.getDefaultLoader().load(source_kmt);
+        KermetaUnit source_unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(source_kmt);
+        source_unit.load();
         // get the kermeta model in which we want to inject
-        KermetaUnit target_unit = KermetaLoader.getDefaultLoader().load(target_kmt);
+        KermetaUnit target_unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(target_kmt);
+        target_unit.load();
         // extract from one to another
         extractAndInject(PKG_PREFIX, source_unit, target_unit, pkg_str);
         
