@@ -1,3 +1,5 @@
+// $Id : $
+
 class KermetaLexer extends Lexer;
 
 options
@@ -70,12 +72,20 @@ WS : (' ' | '\t' | '\f' | '\r' | '\n')+
 { $setType(Token.SKIP); }
 ;
 
-SINGLE_LINE_COMMENT : "//" (~('\n'|'\r'))* ('\n'|'\r')?
-{ $setType(Token.SKIP); }
+SINGLE_LINE_COMMENT : "//" (~('\n'|'\r'))* ('\n'|'\r'('\n')?)
+{newline();}
 ;
 
-MULTI_LINE_COMMENT : "/*" ("*/" | (~'!' (~'*' | '*' ~'/')* "*/"))
-{ $setType(Token.SKIP); }
+MULTI_LINE_COMMENT : 
+	"/*"
+	(
+		{ LA(2)!='/' }? '*'
+		|	'\r' '\n'		{newline();}
+		|	'\r'			{newline();}
+		|	'\n'			{newline();}
+		|	~('*'|'\n'|'\r')
+		)*
+		"*/"
 ;
 //
 //
