@@ -1,15 +1,13 @@
-/* $Id: Interpreter.java,v 1.2 2005-03-17 16:28:08 jpthibau Exp $
+/* $Id: Interpreter.java,v 1.3 2005-03-22 12:49:29 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : InterpreterAsMMClass.java
 * License : GPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 11 mars 2005
-* Author : jpthibau
+* Author : 
+* 	Jean-Philippe Thibaut <jpthibau@irisa.fr>
 * Description : describe here file content
-* TODO :
-*     - write here your TODO actions
-*  - ...
 */
 package fr.irisa.triskell.kermeta.interpreter;
 
@@ -19,17 +17,13 @@ import fr.irisa.triskell.kermeta.runtime.KermetaObject;
 import fr.irisa.triskell.kermeta.runtime.factory.KermetaObjectFactory;
 
 /**
- * @author jpthibau
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 
 public class Interpreter extends KermetaObject {
 	
 	public Hashtable allClasses;
 	
-	public Interpreter(KermetaObjectFactory factory, KermetaObject metaclass) {
+	public Interpreter(RuntimeObjectFactory factory, KermetaObject metaclass) {
 		super(factory,metaclass);
 		this.allClasses=new Hashtable();
 	}
