@@ -5,6 +5,7 @@
 package fr.irisa.triskell.kermeta.dev.framework;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
@@ -26,6 +27,7 @@ public class FrameworkGen {
 	
 	KermetaUnit abstract_unit;
 	KermetaUnit concrete_unit;
+	String KMTBODIES_DIR = "kmtbodies/";
 	
 	/**
 	 * 
@@ -49,12 +51,43 @@ public class FrameworkGen {
 		createVisitor(abstract_unit.packageLookup("kermeta"));
 		
 		makeAbstractClasses(abstract_unit.packageLookup("kermeta::structure"));
+		// TODO Create the bodies of setter and getter
 		
+		// Create the extern file where to put the bodies
+		// Convention : class_<name_of_the_meta_class>.mctbodies or classdef_<name_of_the_class>
+/*		File mctbodies_file = createKMTBodiesFile("class_Class.kmtbodies");
+		
+		// Extract the properties and operations for a given class..
+		KMTBodiesExtractor bextractor = new KMTBodiesExtractor(abstract_unit, kmtbodies_file);
+		bextractor.visit(abstract_unit.getTypeDefinitionByName("kermeta::structure::Class"));
+*/
+		// Create the abstract.kmt reflection module
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		pp.ppPackage(abstract_unit.packageLookup("kermeta"), new File("src/kmt/reflection/abstract.kmt"));
 
 	}
 	
+	protected File createKMTBodiesFile(String filename)
+	{
+		String[] listdir = new File(KMTBODIES_DIR).list();
+		int save_i = 0;
+		for (int i=0; i < listdir.length; i++)
+		{
+			if (listdir[i].startsWith(filename))
+			{
+				save_i += 1 ;
+			}
+		}
+		if (new File(KMTBODIES_DIR+filename).exists())
+		{
+			File oldf = new File(KMTBODIES_DIR+filename);
+			File newf = new File(KMTBODIES_DIR+filename+".bak."+(save_i+1));
+			oldf.renameTo(newf);
+		}
+	
+		return new File(KMTBODIES_DIR+filename);
+		
+	}
 	
 	public FClassDefinition createVisitor(FPackage pkg) {
 		// abstract class Visitor<ContextType> {
@@ -79,6 +112,11 @@ public class FrameworkGen {
 	public void makeAbstractClasses(FPackage pkg) {
 		MakeAbstractClass visitor = new MakeAbstractClass();
 		visitor.accept(pkg);
+	}
+	
+	public void makePropertyBodies(FTypeDefinition typedef) {
+		MakePropertyBodies pbodies = new MakePropertyBodies(abstract_unit);
+		pbodies.accept(typedef);
 	}
 	
 	
