@@ -48,7 +48,7 @@ import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
  */
 public class KermetaUnit {
 	
-	private static String STD_LIB_URI = null;
+	public static String STD_LIB_URI = null;
 	
 	private static StandardKermetaUnit std_lib = null;
 	
@@ -437,9 +437,9 @@ public class KermetaUnit {
 		        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
 		        iu.saveMetaCoreModel(directory);
 		    }
-			String file_name = URI.createURI(uri).lastSegment().replace('.', '_') + ".mcore";
+			String file_name = URI.createURI(uri).lastSegment().replace('.', '_') + ".kcore";
 			
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("mcore",new XMIResourceFactoryImpl()); 
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("kcore",new XMIResourceFactoryImpl()); 
 			ResourceSet resource_set = new ResourceSetImpl();
 			Resource resource = resource_set.createResource(URI.createURI(directory + "/" + file_name));
 			fixTypeContainement();

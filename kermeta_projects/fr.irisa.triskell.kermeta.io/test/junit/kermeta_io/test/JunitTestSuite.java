@@ -38,9 +38,14 @@ public class JunitTestSuite extends TestCase {
 	
 
 
+
 /*** BEGIN GENERATED TESTS ***/
 public void testmetacore() throws Exception {
 testWithFile("test/emfatic_testcases","metacore.emf" );
+}
+
+public void testkermeta() throws Exception {
+testWithFile("test/emfatic_testcases","kermeta.emf" );
 }
 
 public void testtestEnum() throws Exception {
