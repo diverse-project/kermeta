@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.6 2005-02-21 10:06:32 zdrey Exp $
+/* $Id: FrameworkGen.java,v 1.7 2005-02-21 10:19:19 zdrey Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -64,12 +64,18 @@ public class FrameworkGen {
 		
 		// Create the extern file where to put the bodies
 		// Convention : class_<name_of_the_meta_class>.mctbodies or classdef_<name_of_the_class>
-/*		File mctbodies_file = createKMTBodiesFile("class_Class.kmtbodies");
+		File kmtbodies_file = createKMTBodiesFile("class_Class.kmtbodies");
 		
 		// Extract the properties and operations for a given class..
 		KMTBodiesExtractor bextractor = new KMTBodiesExtractor(abstract_unit, kmtbodies_file);
 		bextractor.visit(abstract_unit.getTypeDefinitionByName("kermeta::structure::Class"));
-*/
+		try {
+            bextractor.getWriter().close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
 		// Create the abstract.kmt reflection module
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		pp.ppPackage(abstract_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/abstract.kmt"));
@@ -91,8 +97,14 @@ public class FrameworkGen {
 	
 	protected File createKMTBodiesFile(String filename)
 	{
-		String[] listdir = new File(KMTBODIES_DIR).list();
+	    File dir = new File(KMTBODIES_DIR);
+	    if (!dir.exists())
+	    {
+	        dir.mkdir();
+	    }
+		String[] listdir = dir.list();
 		int save_i = 0;
+		
 		for (int i=0; i < listdir.length; i++)
 		{
 			if (listdir[i].startsWith(filename))
