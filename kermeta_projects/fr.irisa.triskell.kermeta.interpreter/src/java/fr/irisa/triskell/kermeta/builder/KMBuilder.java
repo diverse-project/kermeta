@@ -1,4 +1,4 @@
-/* $Id: KMBuilder.java,v 1.5 2005-03-15 07:39:39 jpthibau Exp $
+/* $Id: KMBuilder.java,v 1.6 2005-03-15 11:22:37 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -51,8 +51,8 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
  */
 public class KMBuilder extends KermetaVisitor {
 
-	protected Hashtable allMetaClasses;
-	protected Hashtable allClasses;
+//	protected Hashtable allMetaClasses;
+//	protected Hashtable allClasses;
 	protected Stack packagesStack;
 	protected KermetaObject currentClassNode;
 	protected KermetaObject currentOperationNode;
@@ -60,17 +60,14 @@ public class KMBuilder extends KermetaVisitor {
 	
 	protected boolean typedef = false;
 	
-	public Hashtable ppPackage(KermetaUnit unit,Hashtable allMetaClasses) {
-		this.allMetaClasses=allMetaClasses;
-		allClasses=new Hashtable();
-		reflectivecollectionMetaclass=(KermetaObject)this.allMetaClasses.get("kermeta::language::reflective_collections::ReflectiveCollection");
+	public void ppPackage(KermetaUnit unit) {
+		reflectivecollectionMetaclass=(KermetaObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::reflective_collections::ReflectiveCollection");
 		String currentpackageName=unit.getQualifiedName(unit.rootPackage);
 		List packagesNames=new ArrayList();
 		packagesNames.add(currentpackageName);
 		this.packagesStack=new Stack();
 		ppPackageContents(unit.rootPackage);
 		ppPackageImportedpackagess(unit,packagesNames);
-		return allClasses;
 	}
 
 	public void ppPackageImportedpackagess(KermetaUnit unit,List packagesNames) {
@@ -88,8 +85,8 @@ public class KMBuilder extends KermetaVisitor {
 	}
 
 	public void ppPackageContents(FPackage p) {
-		KermetaObject pMetaclass=(KermetaObject)this.allMetaClasses.get("kermeta::language::structure::Package");
-		KermetaObject pNode=pMetaclass.instanciate(KMReflect.allAttributes(pMetaclass,allMetaClasses));
+		KermetaObject pMetaclass=(KermetaObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Package");
+		KermetaObject pNode=pMetaclass.instanciate(KMReflect.allAttributes(pMetaclass));
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",p);
 		pNode.setData(data);
@@ -227,17 +224,17 @@ public class KMBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
 	public Object visit(FClassDefinition node) {
-		KermetaObject nodeMetaclass=(KermetaObject)this.allMetaClasses.get("kermeta::language::structure::Class");
-		KermetaObject knode=nodeMetaclass.instanciate(KMReflect.allAttributes(nodeMetaclass,allMetaClasses));
+		KermetaObject nodeMetaclass=(KermetaObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Class");
+		KermetaObject knode=nodeMetaclass.instanciate(KMReflect.allAttributes(nodeMetaclass));
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);
 		this.currentClassNode=knode;
 		String qualifiedName=KMReflect.getQualifiedName(node);
-		this.allClasses.put(qualifiedName,knode);
+		Run.koFactory.getClassDefTable().put(qualifiedName,knode);
 
 		Hashtable properties=knode.getProperties();
-		properties.put("tag",KMDummyObject.INSTANCE);	
+		properties.put("tag",ReflectiveCollection.createReflectiveCollection(nodeMetaclass,Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Tag")));	
 		// Get the pre Annotation of this class 
 		if (node.getFTag().size()>0)
 		{
@@ -255,10 +252,10 @@ public class KMBuilder extends KermetaVisitor {
 		if (node.getFTypeParameter().size() > 0)
 			properties.put("typeParamBinding",ppTypeVariableDeclaration(node.getFTypeParameter()));
 
-		properties.put("ownedAttribute",KMDummyObject.INSTANCE);	
+		properties.put("ownedAttribute",ReflectiveCollection.createReflectiveCollection(nodeMetaclass,Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Attribute")));	
 		ppCRSeparatedNode(node.getFOwnedAttributes());
 
-		properties.put("ownedOperation",KMDummyObject.INSTANCE);
+		properties.put("ownedOperation",ReflectiveCollection.createReflectiveCollection(nodeMetaclass,Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Operation")));
 		ppCRSeparatedNode(node.getFOwnedOperation());
 
 		// Get post annotations
@@ -418,8 +415,8 @@ public class KMBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
-		KermetaObject nodeMetaclass=(KermetaObject)this.allMetaClasses.get("kermeta::language::structure::Operation");
-		KermetaObject knode=nodeMetaclass.instanciate(KMReflect.allAttributes(nodeMetaclass,allMetaClasses));
+		KermetaObject nodeMetaclass=(KermetaObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Operation");
+		KermetaObject knode=nodeMetaclass.instanciate(KMReflect.allAttributes(nodeMetaclass));
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);

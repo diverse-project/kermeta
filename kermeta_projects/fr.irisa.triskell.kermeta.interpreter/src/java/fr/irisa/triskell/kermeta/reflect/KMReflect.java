@@ -1,4 +1,4 @@
-/* $Id: KMReflect.java,v 1.2 2005-03-11 16:30:37 jpthibau Exp $
+/* $Id: KMReflect.java,v 1.3 2005-03-15 11:22:39 jpthibau Exp $
 * Project : Kermeta (First iteration)
 * File : KMReflect.java
 * License : GPL
@@ -20,10 +20,12 @@ import java.util.List;
 
 import antlr.collections.impl.Vector;
 
+import fr.irisa.triskell.kermeta.launcher.Run;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.KermetaObject;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FNamedElement;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 
 /**
@@ -34,7 +36,7 @@ import fr.irisa.triskell.kermeta.structure.FPackage;
  */
 public class KMReflect {
 	
-	public static String getQualifiedName(FClassDefinition classdef) {
+/*	public static String getQualifiedName(FClassDefinition classdef) {
 		List names=new ArrayList();
 		String result="";
 		FPackage container=(FPackage)classdef.eContainer();
@@ -46,9 +48,16 @@ public class KMReflect {
 			result=result+names.get(i)+"::";
 		result=result+classdef.getFName();
 		return result;
+	}*/
+	public static String getQualifiedName(FNamedElement element) {
+	String previousElts="";
+	if (element.eContainer() != null && element.eContainer() instanceof FNamedElement)
+		previousElts=getQualifiedName( (FNamedElement)element.eContainer() ) + "::";
+	return previousElts+element.getFName();
 	}
 
-	public static List allAttributes(KermetaObject metaclass,Hashtable allMetaClasses) {
+
+	public static List allAttributes(KermetaObject metaclass) {
 		List result=new ArrayList();
 		FClassDefinition classdef=(FClassDefinition)metaclass.getData().get("kcoreObject");
 		Hashtable attributes=(Hashtable)metaclass.getProperties().get("FOwnedAttributes");
@@ -56,7 +65,7 @@ public class KMReflect {
 		while (it.hasNext()) {
 			result.add(attributes.get((String)it.next()));
 		}
-		Iterator parentIt = allSuperTypes(classdef,allMetaClasses).iterator();
+		Iterator parentIt = allSuperTypes(classdef).iterator();
 		while (parentIt.hasNext()) {
 			attributes=(Hashtable)((KermetaObject)parentIt.next()).getProperties().get("FOwnedAttributes");
 			it=attributes.keySet().iterator();
@@ -67,19 +76,19 @@ public class KMReflect {
 		return result;
 	}
 	
-	public static List allSuperTypes(FClassDefinition classdef,Hashtable allMetaClasses) {
+	public static List allSuperTypes(FClassDefinition classdef) {
 		List result=new ArrayList();
 		Iterator it=classdef.getFSuperType().iterator();
 		while (it.hasNext()) {
 			FClass c=(FClass)it.next();
 			FClassDefinition parentclassdef=c.getFClassDefinition();
 			String parentqualifiedName=KMReflect.getQualifiedName(parentclassdef);
-			KermetaObject metaclass=(KermetaObject)allMetaClasses.get(parentqualifiedName);
+			KermetaObject metaclass=(KermetaObject)Run.koFactory.getTypeDefinitionByName(parentqualifiedName);
 			if (metaclass==null) System.err.println("parent metaclass not found : "+parentqualifiedName);
 			else {
 				if (!result.contains(metaclass))
 					result.add(metaclass);
-				List allParents =allSuperTypes((FClassDefinition)metaclass.getData().get("kcoreObject"),allMetaClasses);
+				List allParents =allSuperTypes((FClassDefinition)metaclass.getData().get("kcoreObject"));
 				Iterator it2=allParents.iterator();
 				while (it2.hasNext()) {
 					Object parent=it2.next();

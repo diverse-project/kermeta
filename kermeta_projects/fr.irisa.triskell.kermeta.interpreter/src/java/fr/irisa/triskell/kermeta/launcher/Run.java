@@ -26,7 +26,7 @@ public class Run extends TestCase {
 	public static MiniMofFactory miniMofFactory=null;
 	public static MiniMofJavaDriverFactory javaDriverFactory=null;
 	public static MiniMofEMFDriverFactory emfDriverFactory=null;*/
-	public static KermetaObjectFactory kermetaObjectFactory=null;
+	public static KermetaObjectFactory koFactory=null;
 	public static KMmetaClass metametaClass=null;
 	public static Interpreter theInterpreter=null;
 
@@ -35,12 +35,13 @@ public class Run extends TestCase {
 			System.err.println("Usage : run <modelName> <typeName> <operationName> <args...>");
 		else {
 			//prepare the kermetaObject factory and the metametaclass to allow kermeta metamodel traversing
-			kermetaObjectFactory=new KermetaObjectFactory();
-			metametaClass=new KMmetaClass(kermetaObjectFactory);
-			theInterpreter=new Interpreter(kermetaObjectFactory,metametaClass);
+			koFactory=new KermetaObjectFactory();
+			metametaClass=new KMmetaClass(koFactory);
+			theInterpreter=new Interpreter(koFactory,metametaClass);
 			String modelName=args[0];
 			KermetaUnitFactory.getDefaultLoader().unloadAll();
-			KermetaUnit metabuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.framework/src/kermeta/language/behavior.kmt");
+//			KermetaUnit metabuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.framework/src/kermeta/language/behavior.kmt");
+			KermetaUnit metabuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.interpreter/src/kermeta/interpreter.kmt");
 			try {
 			metabuilder.load();
 			} catch(Exception e ) {if (metabuilder.getError().size() == 0) e.printStackTrace();};
@@ -50,9 +51,9 @@ public class Run extends TestCase {
 			}
 			else {
 				System.out.println("model kermeta metamodel loaded successfully !");
-				KMMetaBuilder ppm = new KMMetaBuilder();
+				KMMetaBuilder metaClassesBuilder = new KMMetaBuilder();
 				
-				Hashtable allMetaClasses = ppm.ppPackage(metabuilder);
+				metaClassesBuilder.ppPackage(metabuilder);
 				// Do not write again the package declaration..
 			KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(modelName);
 			try {
@@ -64,9 +65,9 @@ public class Run extends TestCase {
 			}
 			else {
 				System.out.println("model "+modelName+" loaded successfully !");
-				KMBuilder pp = new KMBuilder();
+				KMBuilder classesBuilder = new KMBuilder();
 				
-				Hashtable allClasses = pp.ppPackage(builder,allMetaClasses);
+				classesBuilder.ppPackage(builder);
 			}
 		}
 			}
