@@ -1,6 +1,15 @@
-/*
- * Created on 21 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: KMTUnit.java,v 1.2 2005-02-25 15:59:58 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : KMTUnit.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 23, 2005
+ * Author : ffleurey
+ * Description : 
+ *   -
+ * TODO : 
+ * 	 -
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
@@ -20,9 +29,7 @@ import fr.irisa.triskell.kermeta.parser.KermetaParser;
 
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * A class that contains methods that load a KermetaUnit from a model/object? AST
  */
 public class KMTUnit extends KermetaUnit {
 
@@ -73,6 +80,16 @@ public class KMTUnit extends KermetaUnit {
 		if (mctAST == null) parse();
 	}
 	
+	
+	
+    /**
+     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadAnnotations()
+     */
+    public void loadAnnotations() {
+        KMT2KMPass pass = new KMT2KMPass7(this);
+        mctAST.accept(pass);
+
+    }
 	public void loadBodies() {
 		KMT2KMPass pass = new KMT2KMPass6(this); 
 		mctAST.accept(pass);
