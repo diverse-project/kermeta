@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesExtractor.java,v 1.3 2005-02-18 12:50:03 zdrey Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.4 2005-02-21 09:12:23 zdrey Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
@@ -41,19 +41,20 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	
 	/**
 	 * Constructor
+	 * @param u : the kermetaUnit : we need it to construct Ftags and an Emptybody
+	 * @param f
 	 */
-	public KMTBodiesExtractor(KermetaUnit unit, File file) {
+	public KMTBodiesExtractor(KermetaUnit u, File f) {
 		super();
-		mctbodies_file = file;
-		
+		mctbodies_file = f;
+		unit = u;
+		pprinter = new KM2KMTPrettyPrinter();
 		try {
 			w = new FileWriter(mctbodies_file);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
-		this.unit = unit;
-		pprinter = new KM2KMTPrettyPrinter();
+		}
 	}
 	
 	/**

@@ -1,6 +1,8 @@
-/*
+/* $Id : $
  * Created on 17 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
+ * Description : 
+ * 		A class that transforms all the classes defined in kermeta model to abstract classes.
  */
 package fr.irisa.triskell.kermeta.dev.framework;
 
