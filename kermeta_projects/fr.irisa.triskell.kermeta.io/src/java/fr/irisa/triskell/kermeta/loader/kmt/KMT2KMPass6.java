@@ -1,6 +1,15 @@
-/*
- * Created on 5 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: KMT2KMPass6.java,v 1.2 2005-02-25 14:37:26 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : KMT2KMPass6.java
+ * Package : fr.irisa.triskell
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 23, 2005
+ * Author : ffleurey
+ * Description :
+ *  The 6th pass to convert a KMT to KM
+ * 
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
@@ -23,10 +32,6 @@ import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
- * 
  * Operation and derived properties body
  * 
  */
@@ -37,6 +42,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 */
 	public KMT2KMPass6(KermetaUnit builder) {
 		super(builder);
+		System.out.println("Pass 6");
 		// TODO Auto-generated constructor stub
 	}
 	
