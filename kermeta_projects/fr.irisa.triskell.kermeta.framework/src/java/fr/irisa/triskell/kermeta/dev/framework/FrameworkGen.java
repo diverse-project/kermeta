@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.4 2005-02-21 08:30:11 ffleurey Exp $
+/* $Id: FrameworkGen.java,v 1.5 2005-02-21 09:11:20 zdrey Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -33,30 +33,33 @@ public class FrameworkGen {
 	String KMTBODIES_DIR = "kmtbodies/";
 	
 	/**
-	 * 
+	 * Constructor 
 	 */
 	public FrameworkGen() {
 		super();
 	}
 
+	/**
+	 * Loads the models of kermeta and store them in the reflection directory.
+	 * - abstract.kmt : the model of kermeta (the meta-model kermeta)
+	 * - concrete.kmt : the concrete classes for basic reflection
+	 * - jpt.kmt      : the concrete classes for ...
+	 */
 	public void loadModels() {
 		
 		KermetaUnit.STD_LIB_URI = "src/kmt/Standard.kmt";
 		
 		abstract_unit = KermetaLoader.getDefaultLoader().load("src/ecore/kermeta.emf");
+			
+		//concrete_unit = KermetaLoader.getDefaultLoader().load("src/ecore/kermeta.emf");
 		
-		
-		
-		//concrete_unit = KermetaLoader.getDefaultLoader().load("../src/ecore/kermeta.emf");
-		
-		if (abstract_unit.error.size() > 0) {
-			System.err.println(abstract_unit.getMessagesAsString());
-			System.exit(-1);
-		}
+		//System.out.println(abstract_unit.error.size());
 		
 		createVisitor(abstract_unit.packageLookup("kermeta"));
 		
+		// Create the abstract classes
 		makeAbstractClasses(abstract_unit.packageLookup("kermeta::structure"));
+		
 		// TODO Create the bodies of setter and getter
 		
 		// Create the extern file where to put the bodies
@@ -69,9 +72,10 @@ public class FrameworkGen {
 */
 		// Create the abstract.kmt reflection module
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-		pp.ppPackage(abstract_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/AbstractStructure.kmt"));
-		pp.ppPackage(abstract_unit.packageLookup("kermeta::behavior"), new File("src/kmt/reflection/KermetaBehavior.kmt"));
-		pp.ppPackage(abstract_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/KermetaStructure.kmt"));
+		pp.ppPackage(abstract_unit.packageLookup("kermeta"), new File("src/kmt/reflection/abstract.kmt"));
+
+		makeConcreteClasses(abstract_unit.packageLookup("kermeta"));
+		pp.ppPackage(abstract_unit.packageLookup("kermeta"), new File("src/kmt/reflection/concrete.kmt"));
 	}
 	
 	protected File createKMTBodiesFile(String filename)
@@ -118,6 +122,16 @@ public class FrameworkGen {
 	 */
 	public void makeAbstractClasses(FPackage pkg) {
 		MakeAbstractClass visitor = new MakeAbstractClass();
+		visitor.accept(pkg);
+	}
+	
+	/**
+	 * All classes of the packages are made concrete, excepts the ones that are already abstract
+	 * (eg ContainerType).
+	 * @param pkg
+	 */
+	public void makeConcreteClasses(FPackage pkg) {
+		MakeConcreteClass visitor = new MakeConcreteClass(abstract_unit);
 		visitor.accept(pkg);
 	}
 	
