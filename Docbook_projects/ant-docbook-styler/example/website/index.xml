@@ -1,0 +1,18 @@
+<!DOCTYPE webpage PUBLIC "-//Norman Walsh//DTD Website V2.4.0//EN"
+		  "http://docbook.sourceforge.net/release/website/2.4.0/schema/dtd/website.dtd">
+
+<webpage id="index">
+<config param="desc" value="Welcome to the Test"/>
+<config param="rcsdate" value="$Date: 2005-01-10 10:39:22 $"/>
+
+<head>
+	<title>Test page</title>
+	<titleabbrev>Test</titleabbrev>
+</head>
+
+<para>
+Welcome to the test project's Website. This Website has been generated
+using a modified set of Docbook Website stylesheets. 
+</para>
+
+</webpage>

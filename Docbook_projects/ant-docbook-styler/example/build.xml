@@ -1,0 +1,138 @@
+<!-- (MM 20040304) As the filtering of XSL is only working for website currently, I changed
+     the default target temporarily (till I fix it for docbook, too) -->
+<project name="Docbook styler test." default="all">
+
+    <!-- (MM 20040303) split the ant.docbook.styler property into dir and xml file
+         to be able to reuse the dir in the ant-build-docbook.xml 
+     Example:
+     
+     <property name="ant.docbook.styler.dir" value="/java/ant-docbook-styler" />
+
+     On a windows box, this would resolve e.g. to: "c:/java/ant-docbook-styler"
+     -->
+    <!-- DW 20040307 These are just tests for internal purposes, so
+         we can hardcode the path as '..' - this is the CVS directory
+         layout anyway.
+      -->
+    <property name="ant.docbook.styler.dir" location=".." />
+    <property name="ant.docbook.styler"     value="ant-build-docbook.xml" />
+
+    <target name="all" depends="docbook,website,pdf.fop,pdf.xep">
+    </target>
+    
+    <target name="website" depends="check.required-properties">
+        <antcall target="clean" />
+        <mkdir dir="tmp/website" />
+        <ant antfile="${ant.docbook.styler}" dir="${ant.docbook.styler.dir}" inheritall="false"
+             target="website">
+             <property name="website.xml.dir" location="website" />
+             <property name="distribution.dir" location="tmp/website" />
+             <property name="build.dir" location="tmp/build" />
+        </ant>
+
+        <available property="tmp:website.ok" file="tmp/website/index.html" />
+        <fail message="not good: website not found" unless="tmp:website.ok" />
+        
+    </target>
+    
+    <target name="docbook">
+        <antcall target="clean" />
+        <mkdir dir="tmp/chunked" />
+        <ant antfile="${ant.docbook.styler}" dir="${ant.docbook.styler.dir}" inheritall="false"
+            target="html.chunked">
+             <property name="docbook.xml.dir" location="xml" />
+             <property name="docbook.resources.dir" location="figures" />
+             <property name="distribution.dir" location="tmp/chunked" />
+             <property name="build.dir" location="tmp/build" />
+        </ant>
+        
+        <available property="tmp:chunked.ok" file="tmp/chunked/index.html" />
+        <fail message="not good: chunked html not found." unless="tmp:chunked.ok" />
+
+        <antcall target="clean" />
+        <mkdir dir="tmp/single" />
+        <ant antfile="${ant.docbook.styler}" dir="${ant.docbook.styler.dir}" inheritall="false"
+              target="html.single">
+             <property name="docbook.xml.dir" location="xml" />
+             <property name="docbook.resources.dir" location="figures" />
+             <property name="distribution.dir" location="tmp/single" />
+             <property name="build.dir" location="tmp/build" />
+        </ant>
+
+        <available property="tmp:single.ok" file="tmp/single/index.html" />
+        <fail message="not good: single HTML failed." unless="tmp:single.ok" />
+    </target>
+    
+    <target name="pdf.fop">
+        <antcall target="clean" />
+        <mkdir dir="tmp/pdf.fop" />
+
+	    <available file="${ant.docbook.styler.dir}/module-fop" type="dir"
+               property="module.fop.present" value="true" /> 
+        
+        <antcall target="pdf.fop.internal" />
+
+        <available property="tmp:pdf.fop.ok" file="tmp/pdf.fop/index.pdf" />
+        <fail message="not good: pdf fop not found." unless="tmp:pdf.fop.ok" />
+        
+    </target>
+    
+    <target name="pdf.fop.internal" if="module.fop.present">
+        <ant antfile="${ant.docbook.styler}" dir="${ant.docbook.styler.dir}" inheritall="false"
+              target="pdf.fop">
+             <property name="docbook.xml.dir" location="xml" />
+             <property name="docbook.resources.dir" location="figures" />
+             <property name="distribution.dir" location="tmp/pdf.fop" />
+             <property name="build.dir" location="tmp/build" />
+        </ant>
+    </target>
+
+    <target name="pdf.xep">
+        <antcall target="clean" />
+        <mkdir dir="tmp/pdf.xep" />
+
+	    <available file="${ant.docbook.styler.dir}/module-xep" type="dir"
+               property="module.xep.present" value="true" /> 
+        
+        <antcall target="pdf.xep.internal" />
+        <available property="tmp:pdf.xep.ok" file="tmp/pdf.xep/index.pdf" />
+        <fail message="not good: pdf xep not found." unless="tmp:pdf.xep.ok" />
+    </target>
+    
+    <target name="pdf.xep.internal" if="module.xep.present">
+        <ant antfile="${ant.docbook.styler}" dir="${ant.docbook.styler.dir}" inheritall="false"
+              target="pdf.xep">
+             <property name="docbook.xml.dir" location="xml" />
+             <property name="docbook.resources.dir" location="figures" />
+             <property name="distribution.dir" location="tmp/pdf.xep" />
+             <property name="build.dir" location="tmp/build" />
+        </ant>
+    </target>
+
+
+    <target name="clean">
+        <delete dir="tmp/build" failonerror="false" quiet="true" />
+        <mkdir dir="tmp/build" />
+    </target>
+    
+    <!-- ##################################### -->
+    <!-- ### {{{ CHECK REQUIRED PROPS      ### -->
+    <!-- ##################################### -->
+    <!-- (MM 20040304) This targed ensures that the ant-docbook-styler install directory is set -->
+    <target name="check.required-properties">
+        <condition property="tmp:ant.docbook.styler.dir.ok" value="true">
+            <and>
+                <not>
+                    <equals arg1="${ant.docbook.styler.dir}" arg2="${undefined}" />
+                </not>
+                <available file="${ant.docbook.styler.dir}" type="dir" />
+            </and>
+        </condition>
+        <fail message="### Define 'ant.docbook.styler.dir' property pointing at the
+                       ant-docbook-styler install dir (as URL, like '/java/ant-docbook-styler')."
+              unless="tmp:ant.docbook.styler.dir.ok" />
+    </target>
+    
+
+</project>
+

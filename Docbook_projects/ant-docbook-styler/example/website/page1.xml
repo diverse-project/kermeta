@@ -1,0 +1,22 @@
+<!DOCTYPE webpage PUBLIC "-//Norman Walsh//DTD Website V2.4.0//EN"
+		  "http://docbook.sourceforge.net/release/website/2.4.0/schema/dtd/website.dtd" [
+
+<!ENTITY page2 SYSTEM "page2.xml" NDATA XML>
+
+]>
+
+<webpage id="page1">
+<config param="desc" value="Linking Pages"/>
+<config param="rcsdate" value="$Date: 2005-01-10 10:39:22 $"/>
+
+<head>
+	<title>Linking Pages</title>
+	<titleabbrev>Linking Pages</titleabbrev>
+</head>
+
+<para>
+In order to link to another page, use this construct:
+    <olink targetdocent="page2">link to page2</olink>.
+</para>
+
+</webpage>

@@ -1,0 +1,159 @@
+
+<configuration>
+  <entry>
+    <key>version</key>
+    <value>FOP 0.20.5</value>
+  </entry>
+
+  <!-- default values for commandline options -->
+  <!-- suppress all progress information, error message are still displayed -->
+  <entry>
+    <key>quiet</key>
+    <value>true</value>
+  </entry>
+
+  <entry>
+    <key>debugMode</key>
+    <value>false</value>
+  </entry>
+
+  <entry>
+    <key>dumpConfiguration</key>
+    <value>false</value>
+  </entry>
+
+
+  <entry role="pdf">
+    <key>stream-filter-list</key>
+    <list>
+      <!-- provides compression using zlib flate (default is on)-->
+      <value>flate</value>
+      
+      <!-- encodes binary data into printable ascii characters (default off)
+           This provides about a 4:5 expansion of data size -->
+      <value>ascii-85</value>
+    </list>
+  </entry>
+
+  <entry>
+    <key>fontBaseDir</key>
+    <value>file:///C:/eclipse3.0/eclipse/DocBookWorkspace/ant-docbook-styler/module-fop/fonts/</value>
+  </entry>
+ 
+  <fonts>
+
+	<font metrics-file="qbkb.xml" kerning="yes" embed-file="qbkb.ttf">
+		<font-triplet name="QuasiBookmanTTF" style="normal" weight="bold"/>
+	</font>
+	<font metrics-file="qbkbi.xml" kerning="yes" embed-file="qbkbi.ttf">
+		<font-triplet name="QuasiBookmanTTF" style="oblique" weight="bold"/>
+		<font-triplet name="QuasiBookmanTTF" style="italic" weight="bold"/>
+	</font>
+	<font metrics-file="qbkr.xml" kerning="yes" embed-file="qbkr.ttf">
+		<font-triplet name="QuasiBookmanTTF" style="normal" weight="normal"/>
+	</font>
+	<font metrics-file="qbkri.xml" kerning="yes" embed-file="qbkri.ttf">
+		<font-triplet name="QuasiBookmanTTF" style="oblique" weight="normal"/>
+		<font-triplet name="QuasiBookmanTTF" style="italic" weight="normal"/>
+	</font>
+
+	<font metrics-file="qcrb.xml" kerning="yes" embed-file="qcrb.ttf">
+		<font-triplet name="QuasiCourierTTF" style="normal" weight="bold"/>
+	</font>
+	<font metrics-file="qcrbi.xml" kerning="yes" embed-file="qcrbi.ttf">
+		<font-triplet name="QuasiCourierTTF" style="oblique" weight="bold"/>
+		<font-triplet name="QuasiCourierTTF" style="italic" weight="bold"/>
+	</font>
+
+	<font metrics-file="qcrr.xml" kerning="yes" embed-file="qcrr.ttf">
+		<font-triplet name="QuasiCourierTTF" style="normal" weight="normal"/>
+	</font>
+
+	<font metrics-file="qcrri.xml" kerning="yes" embed-file="qcrri.ttf">
+		<font-triplet name="QuasiCourierTTF" style="oblique" weight="normal"/>
+		<font-triplet name="QuasiCourierTTF" style="italic" weight="normal"/>
+	</font>
+
+	<font metrics-file="qhvb.xml" kerning="yes" embed-file="qhvb.ttf">
+		<font-triplet name="QuasiSwissTTF" style="normal" weight="bold"/>
+	</font>
+
+	<font metrics-file="qhvbi.xml" kerning="yes" embed-file="qhvbi.ttf">
+		<font-triplet name="QuasiSwissTTF" style="oblique" weight="bold"/>
+		<font-triplet name="QuasiSwissTTF" style="italic" weight="bold"/>
+	</font>
+
+	<font metrics-file="qhvcb.xml" kerning="yes" embed-file="qhvcb.ttf">
+		<font-triplet name="QuasiSwissCondensedTTF" style="normal" weight="bold"/>
+	</font>
+
+	<font metrics-file="qhvcbi.xml" kerning="yes" embed-file="qhvcbi.ttf">
+		<font-triplet name="QuasiSwissCondensedTTF" style="oblique" weight="bold"/>
+		<font-triplet name="QuasiSwissCondensedTTF" style="italic" weight="bold"/>
+	</font>
+
+	<font metrics-file="qhvcr.xml" kerning="yes" embed-file="qhvcr.ttf">
+		<font-triplet name="QuasiSwissCondensedTTF" style="normal" weight="normal"/>
+	</font>
+
+	<font metrics-file="qhvcri.xml" kerning="yes" embed-file="qhvcri.ttf">
+		<font-triplet name="QuasiSwissCondensedTTF" style="oblique" weight="normal"/>
+		<font-triplet name="QuasiSwissCondensedTTF" style="italic" weight="normal"/>
+	</font>
+
+	<font metrics-file="qhvr.xml" kerning="yes" embed-file="qhvr.ttf">
+		<font-triplet name="QuasiSwissTTF" style="normal" weight="normal"/>
+	</font>
+
+	<font metrics-file="qhvri.xml" kerning="yes" embed-file="qhvri.ttf">
+		<font-triplet name="QuasiSwissTTF" style="oblique" weight="normal"/>
+		<font-triplet name="QuasiSwissTTF" style="italic" weight="normal"/>
+	</font>
+
+	<font metrics-file="qplb.xml" kerning="yes" embed-file="qplb.ttf">
+		<font-triplet name="QuasiPalatinoTTF" style="normal" weight="bold"/>
+	</font>
+
+	<font metrics-file="qplbi.xml" kerning="yes" embed-file="qplbi.ttf">
+		<font-triplet name="QuasiPalatinoTTF" style="oblique" weight="bold"/>
+		<font-triplet name="QuasiPalatinoTTF" style="italic" weight="bold"/>
+	</font>
+
+	<font metrics-file="qplr.xml" kerning="yes" embed-file="qplr.ttf">
+		<font-triplet name="QuasiPalatinoTTF" style="normal" weight="normal"/>
+	</font>
+
+	<font metrics-file="qplri.xml" kerning="yes" embed-file="qplri.ttf">
+		<font-triplet name="QuasiPalatinoTTF" style="oblique" weight="normal"/>
+		<font-triplet name="QuasiPalatinoTTF" style="italic" weight="normal"/>
+	</font>
+
+	<font metrics-file="qtmb.xml" kerning="yes" embed-file="qtmb.ttf">
+		<font-triplet name="QuasiTimesTTF" style="normal" weight="bold"/>
+	</font>
+
+	<font metrics-file="qtmbi.xml" kerning="yes" embed-file="qtmbi.ttf">
+		<font-triplet name="QuasiTimesTTF" style="oblique" weight="bold"/>
+		<font-triplet name="QuasiTimesTTF" style="italic" weight="bold"/>
+	</font>
+
+	<font metrics-file="qtmr.xml" kerning="yes" embed-file="qtmr.ttf">
+		<font-triplet name="QuasiTimesTTF" style="normal" weight="normal"/>
+	</font>
+
+	<font metrics-file="qtmri.xml" kerning="yes" embed-file="qtmri.ttf">
+		<font-triplet name="QuasiTimesTTF" style="oblique" weight="normal"/>
+		<font-triplet name="QuasiTimesTTF" style="italic" weight="normal"/>
+	</font>
+
+	<font metrics-file="qzcmi.xml" kerning="yes" embed-file="qzcmi.ttf">
+		<font-triplet name="QuasiChanceryTTF" style="oblique" weight="medium"/>
+		<font-triplet name="QuasiChanceryTTF" style="oblique" weight="normal"/>
+		<font-triplet name="QuasiChanceryTTF" style="italic" weight="medium"/>
+		<font-triplet name="QuasiChanceryTTF" style="italic" weight="normal"/>
+	</font>
+
+
+
+  </fonts>
+</configuration>

@@ -1,0 +1,30 @@
+<!DOCTYPE webpage PUBLIC "-//Norman Walsh//DTD Website V2.4.0//EN"
+		  "http://docbook.sourceforge.net/release/website/2.4.0/schema/dtd/website.dtd" [
+
+<!ENTITY % local SYSTEM "local.ent"> 
+%local;
+
+]>
+
+<webpage id="page2">
+<config param="desc" value="Linking Pages"/>
+<config param="rcsdate" value="$Date: 2005-01-10 10:39:23 $"/>
+
+<head>
+	<title>Other resources</title>
+	<titleabbrev>Resources</titleabbrev>
+</head>
+
+<para>
+Other useful resources:
+</para>
+<itemizedlist>
+    <listitem>
+        <para>&docbook; &mdash; an excellent typesetting system.</para>
+    </listitem>
+    <listitem>
+        <para>&jedit; &mdash; an excellent Java text editor.</para>
+    </listitem>
+</itemizedlist>
+
+</webpage>

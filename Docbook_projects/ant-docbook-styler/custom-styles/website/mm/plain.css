@@ -1,0 +1,63 @@
+
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: "verdana ce", verdana, "tahoma ce", tahoma, "arial ce", arial, helvetica;
+    font-size: 11px;
+    color: black;    
+}
+
+table {
+    font-family: "verdana ce", verdana, "tahoma ce", tahoma, "arial ce", arial, helvetica;
+    font-size: 11px;
+}
+
+/* table of contents */
+.toc {
+    background-color: black;
+    padding-right: 5px;
+}
+
+.webpage {
+    width: 100%;
+    height: 100%;
+}
+
+.navfoot {
+    color: black;
+    font-size: 9px;
+    margin-top: 2em;
+}
+
+.navfoot TABLE {
+    color: black;
+    font-size: 9px;
+    margin-top: 2em;
+    border-top: 1px solid #e0e0e0;
+}
+
+DIV.webpage {
+    width: 100%;
+    height: 500px;
+}
+
+pre.programlisting {
+    font-size: 80%;
+}
+
+A {
+    text-decoration: none;
+}
+
+A:link    { color: red; }
+A:visited { color: #224589; }
+A:hover   { color: red; }
+
+SPAN.curpage {
+    color: red;
+}
+                       
+SPAN.shrink1           { font-size: 80%; }
+SPAN.shrink2           { font-size: 70%; }
+SPAN.shrink3           { font-size: 70%; }
+

@@ -1,0 +1,32 @@
+
+<project name="all tests" default="all">
+
+    <target name="all" depends="normal,xsltprocoff,saxonoff,default">
+    </target>
+    
+    <target name="normal">
+        <exec executable="ant" dir="." failonerror="true"
+        vmlauncher="false" newenvironment="true">
+            <arg line="" /> 
+        </exec>
+    </target>
+    
+    <target name="xsltprocoff">
+        <exec executable="ant" dir="." failonerror="true" vmlauncher="false" newenvironment="true">
+            <arg line="-Ddisable.xsltproc=true" /> 
+        </exec>
+    </target>
+
+    <target name="saxonoff">
+        <exec executable="ant" dir="." failonerror="true" vmlauncher="false" newenvironment="true">
+            <arg line="-Ddisable.saxon=true" /> 
+        </exec>
+    </target>
+
+    <target name="default">
+        <exec executable="ant" dir="." failonerror="true" vmlauncher="false" newenvironment="true">
+            <arg line="-Ddisable.saxon=true -Ddisable.xsltproc=true" /> 
+        </exec>
+    </target>
+
+</project>

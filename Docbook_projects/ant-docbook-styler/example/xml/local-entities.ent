@@ -1,0 +1,37 @@
+
+<!-- Define any local entities in this file -->
+
+<!ENTITY  xslt                "<acronym>XSLT</acronym>" >
+<!ENTITY  xsltproc            "<ulink url='http://xmlsoft.org/XSLT/xsltproc2.html'>XsltProc</ulink>" >  
+<!ENTITY  ant                 "<ulink url='http://ant.apache.org/'>ANT</ulink>" >
+<!ENTITY  docbook             "<ulink url='http://www.docbook.org/'>DocBook</ulink>" >
+<!ENTITY  antstyler           "Ant-DocBook Styler" >
+<!ENTITY  dweiss              "Dawid Weiss">
+<!ENTITY  sgml                "<acronym>SGML</acronym>">
+<!ENTITY  xml                 "<acronym>XML</acronym>">
+<!ENTITY  xmlschema           "<acronym>XML Schema</acronym>">
+<!ENTITY  cvs                 "<acronym>CVS</acronym>">
+<!ENTITY  url                 "<acronym>URL</acronym>">
+<!ENTITY  http                "<acronym>HTTP</acronym>">
+<!ENTITY  post                "<acronym>POST</acronym>">
+<!ENTITY  get                 "<acronym>GET</acronym>">
+<!ENTITY  utf8                "<acronym>UTF-8</acronym>">
+<!ENTITY  mime                "<acronym>MIME</acronym>">
+<!ENTITY  saxon               "<ulink url='http://saxon.sourceforge.net/'>Saxon</ulink>">
+<!ENTITY  beanshell           "<ulink url='http://www.beanshell.org'>BeanShell</ulink>">
+<!ENTITY  javascript          "<acronym>JavaScript</acronym>">
+<!ENTITY  log4j               "<ulink url='http://jakarta.apache.org/log4j'>Log4j</ulink>">
+<!ENTITY  tomcat              "<ulink url='http://jakarta.apache.org/tomcat/'>Tomcat</ulink>">
+<!ENTITY  resin               "<ulink url='http://www.caucho.com/'>Resin</ulink>">
+<!ENTITY  jboss               "<ulink url='http://www.jboss.org'>JBoss</ulink>">
+<!ENTITY  java                "<ulink url='http://java.sun.com/'>Java</ulink>">
+<!ENTITY  devmanual           "<ulink url='http://www.cs.put.poznan.pl/dweiss/carrot/index.php/developers/index.xml'><citetitle pubwork='book'>Developers Manual</citetitle></ulink>">
+<!ENTITY  jedit               "<ulink url='http://www.jedit.org'>JEdit</ulink>">
+
+<!ENTITY  fop                 "<ulink url='http://xml.apache.org/fop/'>Apache FOP</ulink>">
+<!ENTITY  miktex              "<ulink url='http://www.miktex.org'>MiKTeX</ulink>">
+
+<!ENTITY  xslfo               "<ulink url='http://www.w3.org/Style/XSL/'>XSL:FO</ulink>">
+<!ENTITY  renderx             "<ulink url='http://www.renderx.com'>RenderX</ulink>">
+<!ENTITY  xep                 "<ulink url='http://www.renderx.com/xep'>XEP</ulink>">
+

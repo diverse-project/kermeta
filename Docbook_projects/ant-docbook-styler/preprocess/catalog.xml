@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+
+
+<!-- Rewrite rules for the whole tree -->
+
+<!-- <system
+  systemId="figures/"
+  uri="../../img/" />
+
+<rewriteURI uriStartString="figures/ModelElement_MTLObject_Analogy.gif"
+            rewritePrefix="../../img/ModelElement_MTLObject_Analogy.gif"/>
+
+<public publicId="figures/" 
+     	uri="../../img/" />
+-->
+<public publicId="-//Dawid Weiss//DTD DocBook V3.1-Based Extension for XML and graphics inclusion//EN" 
+     	uri="dweiss-docbook-extensions.dtd" />
+
+<public publicId="-//OASIS//DTD DocBook XML V4.2//EN" 
+		uri="../docbook/dtd/docbookx.dtd" />
+
+
+</catalog>

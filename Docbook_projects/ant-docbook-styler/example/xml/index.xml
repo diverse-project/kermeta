@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC 
+    "-//Dawid Weiss//DTD DocBook V3.1-Based Extension for XML and graphics inclusion//EN" 
+    "http://www.cs.put.poznan.pl/dweiss/dtd/dweiss-docbook-extensions.dtd" [
+<!ENTITY % isopub SYSTEM "iso-pub.ent"> 
+%isopub;
+<!ENTITY % local SYSTEM "local-entities.ent">
+%local; 
+]>
+
+<article>
+    <title>&antstyler; package</title>
+    <subtitle>Rendering DocBook documents in an easier (?) way</subtitle>
+
+    <articleinfo>
+        <authorgroup>
+            <author>
+                <firstname>Dawid</firstname>
+                <surname>Weiss</surname>
+            </author>
+        </authorgroup>
+
+        <copyright>
+            <year>2003</year>
+            <year>2004</year>
+            <holder>Dawid Weiss, Institute of Computing Science, Poznań University of Technology</holder>
+        </copyright>
+    
+        <releaseinfo>Release (CVS Id): $Id: index.xml,v 1.1 2005-01-10 10:39:24 dvojtise Exp $</releaseinfo>
+    </articleinfo>
+
+    <section>
+        <title>What is &antstyler;?</title>
+        
+        <para>
+        This is a specialized &ant; task for rendering &docbook; documentation. &docbook; is 
+        provided within the package, an extension for file inclusion is also added to 
+        the base &docbook;.
+        </para>
+        
+        <para>
+        &xsltproc; is used if present in path for rendering &xslt; transformations. The 
+        problem with &xsltproc; is that it is difficult to pass catalog information to it. 
+        If you must use catalogs, use &xml; version of catalogs, not &sgml; ones.
+        </para>
+
+        <para>
+        For &java; &xslt; processing, &saxon; is used by default. &saxon; is superior to most
+        other &xslt; processing engines in that it has a <emphasis>really</emphasis>
+        small memory footprint.
+        If you want to use other <acronym>TraX</acronym>-compliant engine, set
+        system properties accordingly
+        and disable the use of &saxon; using:
+        </para>
+        
+        <screen>ant -Ddisable.saxon=true -Ddisable.xsltproc=true ...</screen>
+    </section>
+    
+    <section>
+        <title>Package installation</title>
+        
+        <para>
+        Download <ulink url="http://xml.apache.org/commons/">Jakarta Commons' Resolver</ulink><footnote><para>
+        Available at <literal>http://xml.apache.org/commons/</literal></para></footnote>,
+        package and install it in &ant;'s lib directory.  
+        </para>
+        
+        <para>
+        If you need additional modules, such as modules for PDF creation,
+        refer to <xref linkend="additional.modules" />.
+        </para>
+        
+        <para>Type the following in the directory where you copied
+        &antstyler;.</para>
+        <screen>ant -f ant-build-docbook.xml install</screen>
+        
+        <para>
+        The installation
+        process is actually only about pasting fixed paths in some files (DTDs, catalogs)
+        that we have found to be problematic with various &xslt; processors. In addition 
+        to that, the install target also expands &docbook; ZIPs.
+        </para>
+
+    </section>
+
+    <section id="target.formats">
+        <title>Available target formats</title>
+    
+        <para>
+        &antstyler; comes with several output formats to which a &docbook; file can 
+        be converted.
+        </para>
+
+        <table frame="topbot">
+            <title>&antstyler; output formats for &docbook; documents.</title>
+            <tgroup cols="3" align="center" colsep='1' rowsep='1'>
+                <colspec />
+                <colspec />
+                <colspec align="justify" colwidth="3*" />
+
+                <thead>
+                    <row>
+                        <entry>Styler's target name</entry>
+                        <entry>Output format</entry>
+                        <entry>Details</entry>
+                    </row>
+                </thead>
+                <tbody>
+                    <row>
+                        <entry>html.single</entry>
+                        <entry>Single HTML file</entry>
+                        <entry>Creates a single HTML file.</entry>
+                    </row>                    
+                    <row>
+                        <entry>html.chunked</entry>
+                        <entry>Chunked HTML file</entry>
+                        <entry>Creates a set of HTML files corresponding
+                        to sections, chapters etc.</entry>
+                    </row>
+                    <row>
+                        <entry>pdf.fop</entry>
+                        <entry>PDF</entry>
+                        <entry>Creates a PDF file using &fop;. This output
+                        format requires an additional module to be installed.
+                        See <xref linkend="pdf.fop"/> for details.</entry>
+                    </row>
+                    <row>
+                        <entry>pdf.xep</entry>
+                        <entry>PDF</entry>
+                        <entry>Creates a PDF file using &xep;. This output
+                        format requires an additional module to be installed,
+                        plus it requires an installed version of XEP, which
+                        is a commercial product.</entry>
+                    </row>
+                </tbody>
+            </tgroup>
+        </table>
+    </section>
+    
+    <section id="additional.modules">
+        <title>Additional modules</title>
+        
+        <para>
+        The baseline version of the styler comes with HTML rendering capabilities for 
+        &docbook; and &docbook; Website to single and chunked HTML.        
+        Additional modules extend the basic functionality with other 
+        target formats. Modules are available as ZIP files and should be extracted over 
+        the existing styler installation. It is important to execute the install 
+        target again once the module has been unzipped from its distribution form:
+        </para>
+        
+        <screen>ant -f ant-build-docbook.xml install</screen>
+        
+        <para>
+        Specific modules may have additional requirements, please see <filename>readme.txt</filename>
+        file distributed with each module.
+        </para>
+        
+        <section id="pdf.fop">
+            <title>PDF generation module using &fop;</title>
+            
+            <para>
+            This module includes a preconfigured version of &fop; and
+            a set of TrueType fonts from &miktex; distribution. The font files
+            are added so that diacritic glyphs can be embedded into the PDF file
+            correctly.
+            </para>
+            <para>
+            You are free to customize the module to adjust it to your needs.
+            </para>
+        </section>
+
+        <section id="pdf.xep">
+            <title>PDF generation module using &xep;</title>
+            
+            <para>
+            This module includes several configuration files for &xep; &mdash;
+            a commercial &xslfo; renderer from &renderx;. The module also
+            includes a set of TrueType fonts from &miktex; distribution. The font files
+            are added so that diacritic glyphs can be embedded into the PDF file
+            correctly.
+            </para>
+            <para>
+            You are free to customize the module to adjust it to your needs.
+            </para>
+            <important>
+                <para>
+                &xep; is <emphasis>not</emphasis> part of the module and is
+                not distributed with the &antstyler; package. You must purchase
+                it from &renderx;. 
+                </para>
+            </important>
+        </section>
+    </section>
+    
+    <section>
+        <title>Invoking &antstyler; from your &ant; build file</title>
+        
+        <para>
+        &antstyler; is not an independent script &mdash; it is more like a
+        <quote>library</quote> of predefined &ant; targets, ready to use in your
+        own &ant; script.
+        </para>
+        
+        <para>
+        What you need to get started is to write your own &ant; build file,
+        define several properties and invoke
+        the selected target from &antstyler;.
+        </para>
+        
+        <para>
+        Consider the following example:
+        </para>
+        
+        <screen><![CDATA[<ant antfile="${ant.docbook.styler}" ]]><co id="styler.file" /><![CDATA[ inheritall="false" ]]><co id="inheritance" /><![CDATA[ target="html.chunked"> ]]><co id="target" /><![CDATA[
+    <property name="ant.docbook.styler.dir" location="c:/styler" /> ]]><co id="styler.dir" /><![CDATA[
+    <property name="docbook.xml.dir" location="xml" /> ]]><co id="xml.dir" /><![CDATA[
+    <property name="docbook.resources.dir" location="figures" /> ]]><co id="resources.dir" /><![CDATA[
+    <property name="distribution.dir" location="tmp/chunked" /> ]]><co id="distribution.dir" /><![CDATA[
+    <property name="build.dir" location="tmp/build" />  ]]><co id="build.dir" /><![CDATA[
+</ant>
+        ]]></screen>
+        <calloutlist>
+            <callout arearefs="styler.file">
+            <para>
+            <literal>antfile</literal> property must point to the
+            main &antstyler; build file, usually named 
+            <filename>ant-build-docbook.xml</filename>. This path 
+            <emphasis>must be absolute</emphasis>.
+            </para>
+            </callout>
+            
+            <callout arearefs="inheritance">
+            <para>
+            Setting <literal>inheritall</literal> to <literal>false</literal>
+            ensures that the styler will run with a fresh set of properties.
+            </para>
+            </callout>
+            
+            <callout arearefs="target">
+            <para>
+            Choose any of the available output formats by
+            selecting a target here. Output formats
+            are listed in <xref linkend="target.formats"/>.
+            </para>
+            </callout>
+
+            <callout arearefs="styler.dir">
+            <para>
+            This property is obligatory and should point to 
+            the styler's installation directory. It can be easily
+            and automatically 
+            derived from <literal>ant.docbook.styler</literal>
+            property using <literal>dirname</literal> task
+            of &ant; (but the styler cannot do it internally,
+            so you must pass this property explicitly).
+            </para>
+            </callout>
+            
+            <callout arearefs="xml.dir resources.dir">
+            <para>
+            <literal>docbook.xml.dir</literal> property must
+            point to a directory where your &docbook; files
+            can be found. Similarily,
+            <literal>docbook.figures.dir</literal> should point
+            to external resources, pictures etc. These resources
+            are copied automatically by &antstyler; to the
+            distribution directory.
+            </para>
+            </callout>
+
+            <callout arearefs="distribution.dir">
+            <para>
+            A directory where the output files should be placed.
+            Please note that output files may be a single file (PDF),
+            or a structure of folders and files (HTML, CSS, images&ell;).
+            </para>
+            </callout>
+            
+            <callout arearefs="build.dir">
+            <para>
+            Build directory for temporary files.
+            </para>
+            </callout>
+        </calloutlist>
+        
+        <para>
+        Note that switching to another output format usually requires <emphasis>only</emphasis>
+        chaning the name of the target. 
+        </para>
+        
+        <note>
+            <para>
+                It is a good idea to start using &antstyler; by modifying
+                the provided example. The example includes a directory
+                structure and an &ant; script rendering the &docbook;
+                files to various output formats.
+            </para>
+        </note>
+        
+    </section>
+
+    <section>
+        <title>Bugs</title>
+        
+        <para>
+        If you encounter any problems, first try to disable &xsltproc; by adding 
+        <literal>disable.xsltproc</literal> property to your &ant; build file.
+        You can also do this from command-line like this:
+        </para>
+        
+        <screen>ant -Ddisable.xsltproc=true ...</screen>
+
+        <para>
+        Also, make sure you are using a current version of &ant;. Older versions
+        are known to cause problems.
+        </para>
+        
+        <para>
+        If the error persists, please contact with the author of the package
+        at the following e-mail address:
+        <email>dawid.weiss@cs.put.poznan.pl</email>.
+        </para>
+    </section>
+    
+    <section>
+        <title>Known issues</title>
+
+        <section>
+            <title>Memory problems</title>
+            
+            <para>
+            If you assemble your &docbook; from many independent &xml; files using 
+            Dawid Weiss' extensions
+            to &docbook;, you may encounter a problem with &xsltproc; consuming large chunks of
+            memory; it is a known bug in &xsltproc;. Try disabling it and using Java's
+            &xslt; processor.
+            </para>
+            
+            <para>
+            If Java fails with <literal>OutOfMemory</literal> error,
+            increase the memory for JVM by setting <envar>ANT_OPTS</envar>
+            variable to a higher value. Example:
+            </para>
+            
+            <screen>ANT_OPTS=-Xmx500m</screen>
+        </section>
+
+        <section>
+            <title>Firewall and network issues</title>
+            
+            <para>
+            Most &xslt; processors will dynamically attempt to connect to a remote
+            site to perform DTD validation. The styler package contains catalogues that
+            map &docbook; and &docbook; WebSite DTDs to local files, but if you either change
+            the version of &docbook;, or put an incorrect public identifier in your &xml;
+            files you might encounter strange <quote>network</quote>
+            errors thrown from the styler.
+            </para>
+            <para>
+            If you are behind a firewall, setting a proxy server might help.
+            Add the following line to your build file:
+            </para>
+            <screen><![CDATA[<setproxy proxyhost="my.proxy.host" proxyport="xxx"/>]]></screen>
+            <para>
+            Replace host and port according to your configuration.
+            </para>
+        </section>
+        
+        <section>
+            <title>&xsltproc; compatibility</title>
+            
+            <para>
+            Occasionally, you may encounter problems with &xsltproc; (although it
+            is a rock-solid program for most of the time).
+            </para>
+            
+            <para>
+            We test &antstyler; with &xsltproc; on Windows with version:
+            </para>
+            
+            <screen>Using libxml 20606, libxslt 10102 and libexslt 802
+xsltproc was compiled against libxml 20604, libxslt 10102 and libexslt 802
+libxslt 10102 was compiled against libxml 20604
+libexslt 802 was compiled against libxml 20604</screen>
+        </section>
+    </section>
+
+        <section>
+            <title>Licensing information</title>
+            
+            <para>
+            This program is freeware.
+            </para>
+            
+            <para>
+            If you like it, send me an e-mail to keep me motivated:
+            <email>dawid.weiss@cs.put.poznan.pl</email>. Obviously,
+            money donations, postcards, gifts, anything is also welcome ;)
+            </para>
+        </section>
+        
+        <section>
+            <title>About authors of &antstyler;</title>
+
+            <informaltable frame="none">
+                <tgroup cols="2">
+                    <colspec colwidth="3*" colsep="0" rowsep="0" />
+                    <colspec colwidth="*"  colsep="0" rowsep="0" />
+                    <tbody>
+                        <row>
+                            <entry>
+                            <para>
+                            &antstyler; was written and is maintained by Dawid Weiss.
+                            </para>
+                            </entry>
+                            
+                            <entry align="center" valign="top">
+                                <inlinemediaobject>
+                                <imageobject>
+                                <imagedata width="3cm" fileref="figures/dawidweiss.jpg" />
+                                </imageobject>
+                                </inlinemediaobject>
+                            </entry>
+                        </row>
+                        <row>
+                            <entry>
+                            <para>
+                            Matthias Marschall added several
+                            contributions &mdash; he split the styles into separate directories,
+                            and added various other improvements.
+                            </para>
+                            </entry>
+                            <entry>
+                            </entry>
+                        </row>
+                        <row>
+                        </row>
+                    </tbody>
+                </tgroup>
+            </informaltable>
+        </section>
+    
+</article>
