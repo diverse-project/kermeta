@@ -9,8 +9,6 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
 public class String {
     
-    public static RuntimeObjectFactory factory = new RuntimeObjectFactory();
-
 	// Implementation of method compareTo called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::compareTo(other)
 	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
@@ -75,7 +73,7 @@ public class String {
 		return (java.lang.String)str.getData().get("StringValue");
 	}
 	
-	public static RuntimeObject create(java.lang.String value) {
+	public static RuntimeObject create(java.lang.String value, RuntimeObjectFactory factory) {
 	    RuntimeObject result = factory.createObjectFromClassName("kermeta::standard::String");
 	    setValue(result, value);
 	    return result;

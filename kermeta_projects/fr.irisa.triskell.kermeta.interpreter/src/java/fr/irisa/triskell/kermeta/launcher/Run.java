@@ -3,8 +3,10 @@ package fr.irisa.triskell.kermeta.launcher;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.irisa.triskell.kermeta.builder.KMBuilderPass1;
 import fr.irisa.triskell.kermeta.builder.KMBuilderPass2;
@@ -16,6 +18,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import junit.framework.TestCase;
 
@@ -100,74 +103,36 @@ public class Run extends TestCase {
 				classesBuilderPass1.ppPackage(builder);
 /*				KMBuilderPass2 classesBuilderPass2 = new KMBuilderPass2();			
 				classesBuilderPass2.ppPackage(builder);*/
-			}
 		}
-//			}
 	}
-/*		//EMF MiniMof package and factory setup
-		MiniMofPackageImpl.init();
-		miniMofFactory=MiniMofFactory.eINSTANCE;
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("miniMof",new XMIResourceFactoryImpl());
-		resourceSet=new ResourceSetImpl();
 		/*
-		 * Context creation and setup
+		 * Context setup
 		 */
-/*		MiniURIExtent evalContext=miniMofFactory.createMiniURIExtent();
-		//necessary visitors
-		evalContext.setModelLoader(new ModelLoader());
-		evalContext.setTypeResolver(new TypesResolver());
-		//FOR DEBUG ONLY
-		evalContext.setTypesBrowser(new TypesBrowser());
-		evalContext.setInterpreter(new Interprter());
-		//ModelLoader manage context initialization through accept call in initialize()
-		evalContext.initialize(Run.class);
-		//necessary METAminiMof and minimof factories
-		evalContext.getRegisteredFactories().put("METAminiMof",miniMofFactory);
-		MiniFactory miniMofModelsFactory=miniMofFactory.createMiniFactory();
-		evalContext.getRegisteredFactories().put("miniMof",miniMofModelsFactory);
-		/*
-		 * process arguments model,class, method and build args list if necessary
-		 */
-/*		miniMofModelsFactory.loadModel(args[0],evalContext);
-		//Replace unresolved elements with true cooresponding elements that point to real types
-		evalContext.accept(evalContext.getTypeResolver(),null);
-		//FOR DEBUG ONLY
-/*		File outputFile = new File("temp/model.miniMof");
-		URI outputFileURI = URI.createFileURI(outputFile.getAbsolutePath());
-		Resource outResource = resourceSet.createResource(outputFileURI);
-		outResource.getContents().add(evalContext);
-		Iterator modelsIt=evalContext.getRegisteredModels().keySet().iterator();
-		while (modelsIt.hasNext())
-			outResource.getContents().add(evalContext.getRegisteredModels().get(modelsIt.next()));
-		try {
-			if (outResource != null) {
-				outResource.save(Collections.EMPTY_MAP);
-				System.out.println(" => model written for debug in temp/model.miniMof"); }
-		} catch (IOException e) { e.printStackTrace(); } */
-/*		evalContext.accept(evalContext.getTypesBrowser(),null);
-		//END DEBUG ONLY
-		MiniClass mainClass=(MiniClass)evalContext.getType("miniMof:"+args[0]+":"+args[1]);
-		Iterator it=mainClass.getOperations().iterator();
+		//TODO ?
+		/* 
+		 * mainClass : class where the first operation to call is registered
+		 */ 
+		RuntimeObject mainClass=(RuntimeObject)Run.koFactory.getClassDefTable().get(args[1]);
+		RuntimeObject mainClassInstance=Run.koFactory.createRuntimeObject(mainClass);
+		FClassDefinition mainClassDef=(FClassDefinition)mainClass.getData().get("kcoreObject");
+		Iterator it=mainClassDef.getFOwnedOperation().iterator();
 		boolean found=false;
 		while (it.hasNext() && !found) {
-			MiniOperation mainOp=(MiniOperation)it.next();
-			if (mainOp.getName().equals(args[2])) {
+			FOperation mainOp=(FOperation)it.next();
+			if (mainOp.getFName().equals(args[2])) {
 				found=true;
-				Vector arguments=new Vector();
+				List arguments=new ArrayList();
 				if (args.length>3) {//set a collection of arguments for the operation
 					//assume the first parameter of mainOp is a ref(0,*) StringLiteral
 					for (int i=3;i<args.length;i++) {
-						MiniStringLiteral arg=miniMofFactory.createMiniStringLiteral();
-						arg.setValue(args[i]);
+						RuntimeObject arg=fr.irisa.triskell.kermeta.runtime.basetypes.String.create(args[i],koFactory);
 						arguments.add(arg);
 					}
 				}
-				Interprter.installParametersAndLocalVariables(evalContext,mainOp,arguments,null);
 				System.err.println("\nSTARTING INTERPRETATION OF MAIN OPERATION...");
 				System.err.println("############################################");
-				mainOp.accept(evalContext.getInterpreter(),evalContext);
 			}
 		}
 	}
-}*/
 }
+
