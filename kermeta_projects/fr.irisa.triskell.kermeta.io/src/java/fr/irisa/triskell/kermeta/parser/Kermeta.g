@@ -55,9 +55,9 @@ postUnitAnnotations=annotations ;
 
 packageDecl returns [ PackageDecl retVal = null ]
 :
-{ Annotations annotations = null; QualifiedID name = null; }
-  annotations=annotations package_KW:"package" name=qualifiedID semi:SEMI 
-{ retVal = new PackageDecl(annotations, package_KW, name, semi); }
+{ Annotations preAnnotations = null; QualifiedID name = null; Annotations postAnnotations = null; }
+  preAnnotations=annotations package_KW:"package" name=qualifiedID semi:SEMI postAnnotations=annotations 
+{ retVal = new PackageDecl(preAnnotations, package_KW, name, semi, postAnnotations); }
 ;
 
 qualifiedID returns [ QualifiedID retVal = new QualifiedID() ]

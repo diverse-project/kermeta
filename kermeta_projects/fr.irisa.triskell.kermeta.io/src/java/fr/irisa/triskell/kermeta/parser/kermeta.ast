@@ -14,7 +14,7 @@ sequence scompUnit : packageDecl importStmts usingStmts topLevelDecls  ;
 
 abstract compUnit [entry] : scompUnit (postUnitAnnotations=annotations);
 
-sequence packageDecl : annotations "package" name=qualifiedID SEMI ;
+sequence packageDecl : preAnnotations=annotations "package" name=qualifiedID SEMI postAnnotations=annotations;
 
 list qualifiedID : id1=ID (qidSeparator idn=ID)* ;
 token qidSeparator : COL_COL ;
