@@ -9,9 +9,6 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
 public class Integer {
     
-    // FIXME : is it tidy to do this?
-    public static RuntimeObjectFactory factory = new RuntimeObjectFactory();
-
 	// Implementation of method plus called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::plus(other)
 	public static RuntimeObject plus(RuntimeObject self, RuntimeObject param0) {
@@ -68,7 +65,7 @@ public class Integer {
 		return Numeric.getNumericValue(integer).intValue();
 	}
 
-	public static RuntimeObject create(int value)
+	public static RuntimeObject create(int value, RuntimeObjectFactory factory)
 	{
 	    RuntimeObject result = factory.createObjectFromClassName("kermeta::standard::Integer");
 	    setValue(result, value);
