@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.8 2005-03-07 17:36:11 jpthibau Exp $
+/* $Id: KMT2KMPass7.java,v 1.9 2005-03-31 15:24:56 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -96,8 +96,10 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    
 	    /* Get the corresponding kermeta object */
 	    builder.current_class = (FClassDefinition)builder.getModelElementByNode(classDecl);
-	    /* left annotations, and right annotations*/
-	    Annotations preAnnLst  = classDecl.getPreAnnotations();
+	    /* left annotations, and right annotations 
+	     * FIXME FIXME : this code does not work as we want anymore!
+	     * */
+	    Annotations preAnnLst  = null ;
 	    Annotations postAnnLst = classDecl.getPostAnnotations();
 	    
 	    /* If preAnnLst is too far away from classDecl
