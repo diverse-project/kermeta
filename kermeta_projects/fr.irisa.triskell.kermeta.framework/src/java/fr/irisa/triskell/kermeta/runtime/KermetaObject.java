@@ -97,4 +97,10 @@ public class KermetaObject {
 	public Hashtable getProperties() {
 		return properties;
 	}
+	/**
+	 * @param metaclass The metaclass to set.
+	 */
+	public void setMetaclass(KermetaObject metaclass) {
+		this.metaclass = metaclass;
+	}
 }

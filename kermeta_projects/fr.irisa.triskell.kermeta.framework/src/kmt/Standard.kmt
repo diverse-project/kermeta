@@ -1,3 +1,5 @@
 package kermeta::standard;
 
+
 require "base/Collections.kmt"
+require "base/ReflectiveCollections.kmt"
