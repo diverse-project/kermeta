@@ -764,7 +764,7 @@ tryAgain:
 		
 		match('"');
 		{
-		_loop5154:
+		_loop231:
 		do {
 			if ((LA(1)=='\\')) {
 				mESC(false);
@@ -773,7 +773,7 @@ tryAgain:
 				matchNot('"');
 			}
 			else {
-				break _loop5154;
+				break _loop231;
 			}
 			
 		} while (true);
@@ -963,7 +963,7 @@ tryAgain:
 		}
 		}
 		{
-		_loop5164:
+		_loop241:
 		do {
 			switch ( LA(1)) {
 			case 'a':  case 'b':  case 'c':  case 'd':
@@ -1002,7 +1002,7 @@ tryAgain:
 			}
 			default:
 			{
-				break _loop5164;
+				break _loop241;
 			}
 			}
 		} while (true);
@@ -1021,17 +1021,17 @@ tryAgain:
 		int _saveIndex;
 		
 		{
-		int _cnt5167=0;
-		_loop5167:
+		int _cnt244=0;
+		_loop244:
 		do {
 			if (((LA(1) >= '0' && LA(1) <= '9'))) {
 				mDIGIT(false);
 			}
 			else {
-				if ( _cnt5167>=1 ) { break _loop5167; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+				if ( _cnt244>=1 ) { break _loop244; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 			}
 			
-			_cnt5167++;
+			_cnt244++;
 		} while (true);
 		}
 		if ( _createToken && _token==null && _ttype!=Token.SKIP ) {
@@ -1047,8 +1047,8 @@ tryAgain:
 		int _saveIndex;
 		
 		{
-		int _cnt5171=0;
-		_loop5171:
+		int _cnt248=0;
+		_loop248:
 		do {
 			switch ( LA(1)) {
 			case ' ':
@@ -1078,10 +1078,10 @@ tryAgain:
 			}
 			default:
 			{
-				if ( _cnt5171>=1 ) { break _loop5171; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+				if ( _cnt248>=1 ) { break _loop248; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 			}
 			}
-			_cnt5171++;
+			_cnt248++;
 		} while (true);
 		}
 		_ttype = Token.SKIP;
@@ -1099,7 +1099,7 @@ tryAgain:
 		
 		match("//");
 		{
-		_loop5175:
+		_loop252:
 		do {
 			if ((_tokenSet_2.member(LA(1)))) {
 				{
@@ -1107,7 +1107,7 @@ tryAgain:
 				}
 			}
 			else {
-				break _loop5175;
+				break _loop252;
 			}
 			
 		} while (true);
@@ -1152,7 +1152,7 @@ tryAgain:
 		
 		match("/*");
 		{
-		_loop5181:
+		_loop258:
 		do {
 			if (((LA(1)=='*') && ((LA(2) >= '\u0000' && LA(2) <= '\ufffe')) && ((LA(3) >= '\u0000' && LA(3) <= '\ufffe')))&&( LA(2)!='/' )) {
 				match('*');
@@ -1173,7 +1173,7 @@ tryAgain:
 				}
 			}
 			else {
-				break _loop5181;
+				break _loop258;
 			}
 			
 		} while (true);

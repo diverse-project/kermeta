@@ -154,6 +154,13 @@ topLevelDecls returns [ TopLevelDecls retVal = new TopLevelDecls() ]
 
 topLevelDecl returns [ TopLevelDecl retVal = null ]
 :
+{ Annotations preAnnotations = null; AnnotableElement annotableElement = null; }
+  preAnnotations=annotations annotableElement=annotableElement 
+{ retVal = new TopLevelDecl(preAnnotations, annotableElement); }
+;
+
+annotableElement returns [ AnnotableElement retVal = null ]
+:
   ( retVal=subPackageDecl
   | retVal=classDecl
   | retVal=enumDecl
@@ -163,16 +170,16 @@ topLevelDecl returns [ TopLevelDecl retVal = null ]
 
 subPackageDecl returns [ SubPackageDecl retVal = null ]
 :
-{ Annotations preAnnotations = null; TopLevelDecls topLevelDecls = null; }
-  preAnnotations=annotations package_KW:"package" name:ID lcurly:LCURLY topLevelDecls=topLevelDecls rcurly:RCURLY 
-{ retVal = new SubPackageDecl(preAnnotations, package_KW, name, lcurly, topLevelDecls, rcurly); }
+{ TopLevelDecls topLevelDecls = null; }
+  package_KW:"package" name:ID lcurly:LCURLY topLevelDecls=topLevelDecls rcurly:RCURLY 
+{ retVal = new SubPackageDecl(package_KW, name, lcurly, topLevelDecls, rcurly); }
 ;
 
 classDecl returns [ ClassDecl retVal = null ]
 :
-{ Annotations preAnnotations = null; AbstractModifier abstractModifier = null; ClassKind classKind = null; TypeVarDecllst typeVarDecllst = null; Typelst superTypes = null; ClassMemberDecls classMemberDecls = null; Annotations postAnnotations = null; }
-  preAnnotations=annotations ( abstractModifier=abstractModifier )? classKind=classKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? ( inherits_KW:"inherits" superTypes=typelst )? lcurly:LCURLY classMemberDecls=classMemberDecls rcurly:RCURLY postAnnotations=annotations 
-{ retVal = new ClassDecl(preAnnotations, abstractModifier, classKind, name, lt, typeVarDecllst, gt, inherits_KW, superTypes, lcurly, classMemberDecls, rcurly, postAnnotations); }
+{ AbstractModifier abstractModifier = null; ClassKind classKind = null; TypeVarDecllst typeVarDecllst = null; Typelst superTypes = null; ClassMemberDecls classMemberDecls = null; Annotations postAnnotations = null; }
+  ( abstractModifier=abstractModifier )? classKind=classKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? ( inherits_KW:"inherits" superTypes=typelst )? lcurly:LCURLY classMemberDecls=classMemberDecls rcurly:RCURLY postAnnotations=annotations 
+{ retVal = new ClassDecl(abstractModifier, classKind, name, lt, typeVarDecllst, gt, inherits_KW, superTypes, lcurly, classMemberDecls, rcurly, postAnnotations); }
 ;
 
 classKind returns [ ClassKind retVal = null ]
