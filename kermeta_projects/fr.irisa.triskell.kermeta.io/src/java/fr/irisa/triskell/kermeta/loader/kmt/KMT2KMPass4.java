@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.3 2005-03-11 11:38:36 zdrey Exp $
+/* $Id: KMT2KMPass4.java,v 1.4 2005-04-05 15:07:22 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -35,10 +35,6 @@ import fr.irisa.triskell.kermeta.structure.FProperty;
 
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
- * 
  * PASS 4 :
  *  - Set property opposites (the matching of opposite properties shoud be checked in next PASS)
  *  - Set super operations

@@ -1,6 +1,14 @@
-/*
- * Created on 2 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: KMT2KMPass3.java,v 1.3 2005-04-05 15:07:22 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : KMT2KMPass3.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 2, 2005
+ * Author : Franck Fleurey <ffleurey@irisa.fr>
+ * Description :
+ * 	4th pass for the construct kcore representation of 
+ *  a Kermeta program, 
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 

@@ -1,6 +1,15 @@
-/*
- * Created on 2 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: KMT2KMPass.java,v 1.3 2005-04-05 15:07:22 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : KMT2KMPass.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 25, 2005
+ * Author : Franck Fleurey <ffleurey@irisa.fr>
+ * Description :
+ * 	This is the abstract class of the Visitor dedicated to the visit of a Kermeta 
+ *  AST (AST nodes and generic visitor are defined in fr.irisa.triskell.ast
+ *  package)
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
@@ -30,16 +39,15 @@ import fr.irisa.triskell.kermeta.structure.FType;
 
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Abstract class that defines a set of methods aimed at easing the visit of
+ * a Kermeta AST, and a references to the KermetaUnit that is "completed" after
+ * the necessary visits (see KMT2KMPass 1 to 7). 
  */
 public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	
     
     /**
-     * Define the tag names of the tags to attach to the KMElements
-     */
+     * Define the tag names of the tags to attach to the KMElements  */
     public static String PRE_TAGNAME = "pre";
     public static String POST_TAGNAME= "post";
     
@@ -50,6 +58,12 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		this.builder = builder;
 	}
 	
+	/**
+	 * Returns a String corresponding to the AST node of type QualifiedID, as a list
+	 * of terms separated by a "::" ("this::is::an::id"=> qualified id of "id").
+	 * @param node the AST representation of a Qualified ID
+	 * @return a String corresponding to the QualifiedID node.
+	 */
 	protected String qualifiedIDAsString(QualifiedID node) {
 		String result = "";
 		ASTNode[] ids = node.getChildren();
@@ -61,6 +75,16 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		return result;
 	}
 	
+	/**
+	 * If qualified_name qualifies an existing package, we return the corresponding
+	 * FPackage. Otherwise, we recursively get or create the package, and set at
+	 * the same time its parents packages. At the same time, we store the relationship
+	 * between the AST node and its kcore object in the tracers of KermetaUnit (see 
+	 * KermetaUnit documentation) 
+	 * @param qualified_name the complete name of a package
+	 * @param node the AST node to link to a FPackage
+	 * @return the FPackage corresponding to <code>node</code>
+	 */
 	protected FPackage getOrCreatePackage(String qualified_name, KermetaASTNode node) {
 		FPackage result = builder.packageLookup(qualified_name);
 		if (result != null) return result;
@@ -83,6 +107,11 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		return result;
 	}
 	
+	/**
+	 * Returns the upper bound of the multiplicity for a type reference.
+	 * @param ref
+	 * @return the upper bound of a typeref
+	 */
 	protected int getUpper(TypeRef ref) {
 		Multiplicity mul = ref.getMultiplicity();
 		if (mul == null) return 1;
@@ -106,6 +135,11 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		}
 	}
 	
+	/**
+	 * Returns the lower bound of the multiplicity for a type reference.
+	 * @param ref
+	 * @return the lower bound of a typeref
+	 */
 	protected int getLower(TypeRef ref) {
 		Multiplicity mul = ref.getMultiplicity();
 		if (mul == null) return 0;
@@ -119,18 +153,35 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		return lower;
 	}
 	
+	/**
+	 * Returns true if type reference is unique (multiplicity is 1), false
+	 * otherwise.
+	 * @param ref
+	 * @return true if <code>ref</code> is unique (multiplicity is 1), false
+	 * otherwise
+	 */
 	protected boolean isUnique(TypeRef ref) {
 		CollectionType t = ref.getCollectionType();
 		if (t==null) return true; // by default it is an ordered set
 		else return t.getText().equals("oset") || t.getText().equals("set");
 	}
 	
+	/**
+	 * Returns true if ref is ordered (specified as "{isOrdered}"), false otherwise.
+	 * @param ref
+	 * @return true if ref is ordered, false otherwise
+	 */
 	protected boolean isOrdered(TypeRef ref) {
 		CollectionType t = ref.getCollectionType();
 		if (t==null) return true; // by default it is an ordered set
 		else return t.getText().equals("oset") || t.getText().equals("seq");
 	}
 	
+	/**
+	 * Returns the type corresponding to the type reference <code>ref</code>.
+	 * @param ref
+	 * @return the kcore type (FType) corresponding to the type reference <code>ref</code>.
+	 */
 	protected FType getFType(TypeRef ref) {
 		FType result = KMT2KMTypeBuilder.process(ref.getReftype(), builder);
 		return result;

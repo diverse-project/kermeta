@@ -1,6 +1,14 @@
-/*
- * Created on 2 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: KMT2KMPass2.java,v 1.2 2005-04-05 15:07:22 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : KMT2KMPass2.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 2, 2005
+ * Author : Franck Fleurey <ffleurey@irisa.fr>
+ * Description :
+ * 	Second pass for the construct kcore representation of 
+ *  a Kermeta program, mainly construct packages and types.
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
@@ -24,10 +32,6 @@ import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
- * 
  * PASS 2 : Create Packages and types (classes and enums) objects
  * For class and enums it creates the objects, adds it in the package
  * and sets the name.
