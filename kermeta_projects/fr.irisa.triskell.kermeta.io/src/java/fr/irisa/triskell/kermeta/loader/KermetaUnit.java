@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.9 2005-03-08 14:48:14 jpthibau Exp $
+/* $Id: KermetaUnit.java,v 1.10 2005-03-12 08:40:09 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -411,7 +411,11 @@ public abstract class KermetaUnit {
 			result = findOperationByName(sc, name);
 			if (result != null) return result;
 		}
-		return null;
+		if (result != null) {
+			if (typeDefinitionLookup(ROOT_CLASS_QNAME) != null && !getQualifiedName(c).equals(ROOT_CLASS_QNAME))
+				result = findOperationByName((FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME), name);
+		}
+		return result;
 	}
 	
 	/**
@@ -614,12 +618,15 @@ public abstract class KermetaUnit {
 	
 	boolean loading = false;
 	
+	
 	private void loadAllImportedUnits() {
 //		System.out.println("loadAllImportedUnits " + uri);
+		if (doneLoadImportedUnits) return;
 		loading = true;
 		// load imported units
 		preLoad();
 		loadImportedUnits();
+		doneLoadImportedUnits = true;
 		for(int i=0; i<importedUnits.size(); i++) {
 			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
 			if (!iu.loading) iu.loadAllImportedUnits();
@@ -629,7 +636,9 @@ public abstract class KermetaUnit {
 	
 	private void loadAllTypeDefinitions() {
 		//		System.out.println("loadAllTypeDefinitions " + uri);
+		if (doneLoadTypeDefinitions) return;
 		loading = true;
+		doneLoadTypeDefinitions = true;
 		// load imported units
 		for(int i=0; i<importedUnits.size(); i++) {
 			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
@@ -641,9 +650,11 @@ public abstract class KermetaUnit {
 	
 	private void loadAllStructuralFeatures() {
 		//		System.out.println("loadAllStructuralFeatures " + uri);
+		if (doneLoadStructuralFeatures) return;
 		loading = true;
 		// load imported units
 		loadStructuralFeatures();
+		doneLoadStructuralFeatures = true;
 		for(int i=0; i<importedUnits.size(); i++) {
 			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
 			if (!iu.loading) iu.loadAllStructuralFeatures();
@@ -653,9 +664,11 @@ public abstract class KermetaUnit {
 	
 	private void loadAllOppositeProperties() {
 		//	System.out.println("loadAllOppositeProperties " + uri);
+		if (doneLoadOppositeProperties) return;
 		loading = true;
 		// load imported units
 		loadOppositeProperties();
+		doneLoadOppositeProperties = true;
 		for(int i=0; i<importedUnits.size(); i++) {
 			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
 			if (!iu.loading) iu.loadAllOppositeProperties();
@@ -665,9 +678,11 @@ public abstract class KermetaUnit {
 	
 	private void loadAllBodies() {
 		//	System.out.println("loadAllBodies " + uri);
+		if (doneLoadBodies) return;
 		loading = true;
 		// load imported units
 		loadBodies();
+		doneLoadBodies = true;
 		for(int i=0; i<importedUnits.size(); i++) {
 			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
 			if (!iu.loading) iu.loadAllBodies();
@@ -699,24 +714,29 @@ public abstract class KermetaUnit {
 	 * Loads dependencies ( handles require, using, ...)
 	 */
 	public abstract void loadImportedUnits();
+	private boolean doneLoadImportedUnits = false;
 	/**
 	 * Create packages and type definitions
 	 */
 	public abstract void loadTypeDefinitions();
+	private boolean doneLoadTypeDefinitions = false;
 	/**
 	 * Updates type definitions relationships (inheritance, ...)
 	 * Create properties / operations
 	 */
 	public abstract void loadStructuralFeatures();
+	private boolean doneLoadStructuralFeatures = false;
 	/**
 	 * Update structural features relationships
 	 * opposite properties...
 	 */
 	public abstract void loadOppositeProperties();
+	private boolean doneLoadOppositeProperties = false;
 	/**
 	 * Creates Bodies for operations and derived properties
 	 */
 	public abstract void loadBodies();
+	private boolean doneLoadBodies = false;
 	
 	/**
 	 * @return Returns the error.
