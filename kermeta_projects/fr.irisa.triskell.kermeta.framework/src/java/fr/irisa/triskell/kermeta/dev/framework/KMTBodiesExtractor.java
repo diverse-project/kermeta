@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesExtractor.java,v 1.5 2005-02-21 10:20:35 zdrey Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.6 2005-02-21 11:45:08 zdrey Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
@@ -31,26 +31,26 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  */
 public class KMTBodiesExtractor extends KermetaVisitor {
 	
-	/**File where to store the external mctbodies */
-	protected File mctbodies_file ;
+	/**File where to store the external kmtbodies */
+    String KMTBODIES_DIR = "kmtbodies/";
+	protected File kmtbodies_file ;
 	protected FileWriter w;
 	protected KermetaUnit unit;
-	protected FTypeDefinition dclass;
 	/**To pretty print the body of visited operations/properties*/
 	protected KM2KMTPrettyPrinter pprinter;
 	
 	/**
 	 * Constructor
 	 * @param u : the kermetaUnit : we need it to construct Ftags and an Emptybody
-	 * @param f
+	 * @param kmtb_filename : <file>.kmtbodies to create
 	 */
-	public KMTBodiesExtractor(KermetaUnit u, File f) {
+	public KMTBodiesExtractor(KermetaUnit u, String kmtb_filename) {
 		super();
-		mctbodies_file = f;
+		kmtbodies_file = createKMTBodiesFile(kmtb_filename);
 		unit = u;
 		pprinter = new KM2KMTPrettyPrinter();
 		try {
-			w = new FileWriter(mctbodies_file);
+			w = new FileWriter(kmtbodies_file);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -104,7 +104,6 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 		
 		if (!operation.isFIsAbstract())
 		{
-		    System.out.println("toto");
 		    op += "$"+unit.getQualifiedName(operation.getFOwningClass());
 		    op += "::"+operation.getFName();
 		    System.out.println(op);
@@ -125,7 +124,7 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	}
 	
 	/**
-	 * @return The file writer where we write mctbodies 
+	 * @return The file writer where we write kmtbodies 
 	 */
 	public FileWriter getWriter()
 	{
@@ -145,6 +144,39 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 
 		
 		return null;
+	}
+	
+	/**
+	 * Create the kmtbodies file from specified filename
+	 * @param filename
+	 * @return
+	 */
+	protected File createKMTBodiesFile(String filename)
+	{
+	    File dir = new File(KMTBODIES_DIR);
+	    if (!dir.exists())
+	    {
+	        dir.mkdir();
+	    }
+		String[] listdir = dir.list();
+		int save_i = 0;
+		
+		for (int i=0; i < listdir.length; i++)
+		{
+			if (listdir[i].startsWith(filename))
+			{
+				save_i += 1 ;
+			}
+		}
+		if (new File(KMTBODIES_DIR+filename).exists())
+		{
+			File oldf = new File(KMTBODIES_DIR+filename);
+			File newf = new File(KMTBODIES_DIR+filename+".bak."+(save_i+1));
+			oldf.renameTo(newf);
+		}
+	
+		return new File(KMTBODIES_DIR+filename);
+		
 	}
 	
 }
