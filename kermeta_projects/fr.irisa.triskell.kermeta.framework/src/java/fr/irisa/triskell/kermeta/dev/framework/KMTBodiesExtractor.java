@@ -28,7 +28,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * @author zdrey
  *
  */
-public class BodyExtractor extends KermetaVisitor {
+public class KMTBodiesExtractor extends KermetaVisitor {
 	
 	/**File where to store the external mctbodies */
 	protected File mctbodies_file ;
@@ -41,7 +41,7 @@ public class BodyExtractor extends KermetaVisitor {
 	/**
 	 * Constructor
 	 */
-	public BodyExtractor(KermetaUnit unit, File file) {
+	public KMTBodiesExtractor(KermetaUnit unit, File file) {
 		super();
 		mctbodies_file = file;
 		
