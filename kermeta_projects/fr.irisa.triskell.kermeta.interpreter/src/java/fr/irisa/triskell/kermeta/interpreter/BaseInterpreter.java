@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.2 2005-03-22 13:03:44 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.3 2005-03-23 15:18:21 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -31,8 +31,10 @@ import org.eclipse.emf.ecore.EObject;
 import sun.nio.cs.KOI8_R;
 
 import fr.irisa.triskell.kermeta.behavior.*;
+import fr.irisa.triskell.kermeta.builder.KMBuilder;
 import fr.irisa.triskell.kermeta.structure.*;
 
+import fr.irisa.triskell.kermeta.launcher.Run;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
@@ -56,14 +58,38 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * 
  */
 public class BaseInterpreter extends KermetaVisitor {
-    
+
+    /**
+     * 
+     * @uml.property name="interpreterContext"
+     * @uml.associationEnd multiplicity="(1 1)"
+     */
     protected InterpreterContext interpreterContext;
+
+    /**
+     * 
+     * @uml.property name="currentContext"
+     * @uml.associationEnd multiplicity="(0 1)"
+     */
     protected ExpressionContext currentContext;
-    /** We use it to create the RuntimeObject equivalent to the visited node*/
+
+    /**
+     * We use it to create the RuntimeObject equivalent to the visited node
+     * 
+     * @uml.property name="factory"
+     * @uml.associationEnd multiplicity="(1 1)"
+     */
     protected RuntimeObjectFactory factory;
+
     // Should we access the interpreter context defined in KMT?
-    /** The main unit  */
+    /**
+     * The main unit
+     * 
+     * @uml.property name="unit"
+     * @uml.associationEnd multiplicity="(1 1)"
+     */
     protected KermetaUnit unit;
+
     
     /**
      * 
@@ -88,11 +114,19 @@ public class BaseInterpreter extends KermetaVisitor {
     {
         return null;
     }
-    
-    
 
-	protected ArrayList usings = new ArrayList();
-	protected ArrayList imports = new ArrayList();
+    /**
+     * 
+     * @uml.property name="usings" multiplicity="(0 1)"
+     */
+    protected ArrayList usings = new ArrayList();
+
+    /**
+     * 
+     * @uml.property name="imports" multiplicity="(0 1)"
+     */
+    protected ArrayList imports = new ArrayList();
+
 	protected String root_pname;
 	protected String current_pname;
 	
@@ -457,11 +491,31 @@ public class BaseInterpreter extends KermetaVisitor {
 		// TypeLiteral : a class (we can have .new, .a_reflective_property, an enumeration
 		if (FTypeLiteral.class.isInstance(target))
 		{
-		    // TODO 
+		    // Is it a class creation? result -> a new RO which type is this class
+		    FType type = ((FTypeLiteral)target).getFTyperef().getFType();
+		    if (FClass.class.isInstance(type))
+		    {
+		        FClassDefinition class_def = ((FClass)type).getFClassDefinition();
+		        result = factory.createObjectFromClassName(class_def.getFName());
+		    }
+		    // Is it an enum literal? result -> a RO which type is an enumliteral
+		    else if (FEnumeration.class.isInstance(target))
+		    {
+		        result = null; // TODO : get the enumliteral in the registered RuntimeObjects//From KMBuilder
+		    }
+		    
+		    // Is it something else?
+		    else
+		    {
+		        
+		    }
+		    
 		}
 		// else : it is assumed that it is self object
 		return result;
 	}
+	
+	
 	
 	
 	
@@ -540,7 +594,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FIntegerLiteral) 
 	 */
 	public Object visit(FIntegerLiteral node) {
-	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue());
+	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue(), factory);
 	}
 	
 	/**
@@ -636,19 +690,25 @@ public class BaseInterpreter extends KermetaVisitor {
 		}
 		return result_list;
 	}
-	
-	/**
-	 * @return Returns the imports.
-	 */
-	public ArrayList getImports() {
-		return imports;
-	}
-	/**
-	 * @return Returns the usings.
-	 */
-	public ArrayList getUsings() {
-		return usings;
-	}
+
+    /**
+     * @return Returns the imports.
+     * 
+     * @uml.property name="imports"
+     */
+    public ArrayList getImports() {
+        return imports;
+    }
+
+    /**
+     * @return Returns the usings.
+     * 
+     * @uml.property name="usings"
+     */
+    public ArrayList getUsings() {
+        return usings;
+    }
+
 	/**
 	 * Get the fully qualified name of an FNamedElemenet
 	 */
@@ -746,29 +806,14 @@ public class BaseInterpreter extends KermetaVisitor {
         Object result_elt = null;
         // If type is a FClass
         if (FClass.class.isInstance(type))
-        {	// map... 
-            EList operations = ((FClass)type).getFOwnedOperation();
-            int i = 0;
-            while (i < operations.size() && result == null)
-            {	
-                result_elt = operations.get(i++);
-                if (((FOperation)operations.get(i)).getFName().equals(feature.getFName()))
-                    result_str = "FOperation";
-            }
-            if (result_str == null)
+        {
+            FClassDefinition class_def = ((FClass)type).getFClassDefinition();
+            // Is the feature in the class definition of *type*?
+            result = getFlatFeatureType(class_def, feature);
+            // If it is still null, we have to find it in the Super classes, recursively
+            if (result == null)
             {
-                EList attributes = ((FClass)type).getFOwnedAttribute();
-                while (i < attributes.size() && result == null)
-                {
-                    result_elt = attributes.get(i++);
-                    if (((FProperty)operations.get(i++)).getFName().equals(feature.getFName()))
-                        result_str = "FProperty";
-                }   
-            }
-            if (result_str!=null)
-            {
-                result = new Vector(2);
-                result.add(result_str); result.add(result_elt);
+                result = getSuperFeatureType(class_def, feature);;
             }
         }
         // TODO : test for other kinds of types or Exception? -- is feature valuable
@@ -776,8 +821,61 @@ public class BaseInterpreter extends KermetaVisitor {
         return result;
     }
      
+    /**
+     * Get the super operation or the super attribute in super classes of classDef 
+     * @param classDef
+     * @return the ecore object representing this super op or super attr.
+     */
+    public static Vector getSuperFeatureType(FClassDefinition classDef, FCallFeature feature)
+    {
+        Vector result = null;
+        Iterator st_it = classDef.getFSuperType().iterator();
+        while (st_it.hasNext() && result == null)
+        {
+            FClassDefinition next = (FClassDefinition)st_it.next();
+            result = getFlatFeatureType(next, feature);
+            // If we still have not found them, find in super types! 
+            if (result == null)
+            {
+                return getSuperFeatureType(next, feature);
+            }
+            else
+            {
+                return result;
+            }
+        }
+        return result;
+    }
     
-    
+    protected static Vector getFlatFeatureType(FClassDefinition type, FCallFeature feature)
+    {
+        Object result_elt = null; String result_str = null; Vector result = null;
+        EList operations = type.getFOwnedOperation();
+        int i = 0;
+        while (i < operations.size() && result_str == null)
+        {	
+            result_elt = operations.get(i++);
+            if (((FOperation)operations.get(i)).getFName().equals(feature.getFName()))
+                result_str = "FOperation";
+        }
+        if (result_str == null)
+        {
+            EList attributes = type.getFOwnedAttributes();
+            while (i < attributes.size() && result == null)
+            {
+                result_elt = attributes.get(i++);
+                if (((FProperty)operations.get(i++)).getFName().equals(feature.getFName()))
+                    result_str = "FProperty";
+            }   
+        }
+        if (result_str!=null)
+        {
+            result = new Vector(2);
+            result.add(result_str); result.add(result_elt);
+            result_str = (result_elt!=null)?"FOperation":null;
+        }
+        return result;
+    }
     
 }
 
