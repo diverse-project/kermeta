@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="fr.irisa.triskell.traceability.feature"
-      label="fr.irisa.triskell.traceability.feature"
+      label="Traceability Framework"
       version="0.0.1"
       provider-name="INRIA/IRISA">
 
