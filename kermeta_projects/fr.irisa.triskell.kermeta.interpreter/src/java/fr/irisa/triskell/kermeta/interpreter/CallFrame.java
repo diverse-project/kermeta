@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.2 2005-03-25 16:44:35 zdrey Exp $
+/* $Id: CallFrame.java,v 1.3 2005-04-05 14:59:53 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -27,53 +27,27 @@ public class CallFrame {
 
     /**
      * the interpreter global context
-     * 
-     * @uml.property name="context"
-     * @uml.associationEnd inverse="frame_stack:fr.irisa.triskell.kermeta.interpreter.InterpreterContext"
-     * multiplicity="(1 1)"
      */
     InterpreterContext context;
 
     /**
      * self object (inside which the operation call is done)
-     * 
-     * @uml.property name="self"
-     * @uml.associationEnd qualifier="constant:java.lang.String java.util.ArrayList" multiplicity=
-     * "(0 1)"
      */
     RuntimeObject self;
 
     /**
      * the operation result of the operation linked to this CallFrame
-     * 
-     * @uml.property name="operation_result"
-     * @uml.associationEnd multiplicity="(0 1)"
      */
     RuntimeObject operation_result;
 
-    /**
-     * the current expression context block_stack.peek()
-     * 
-     * @uml.property name="current_context"
-     * @uml.associationEnd multiplicity="(0 1)"
-     */
-    ExpressionContext current_context;
 
     /**
      * the list of variables for the operation associated with this CallFrame (RuntimeObjects)
-     * 
-     * @uml.property name="parameters"
-     * @uml.associationEnd elementType="fr.irisa.triskell.kermeta.runtime.RuntimeObject"
-     * multiplicity="(0 -1)"
      */
     ArrayList parameters;
 
     /**
      * the list of expression contexts that are linked to this frame (@see ExpressionContext class javadoc)
-     * 
-     * @uml.property name="block_stack"
-     * @uml.associationEnd elementType="fr.irisa.triskell.kermeta.interpreter.ExpressionContext"
-     * multiplicity="(0 -1)"
      */
     Stack block_stack = new Stack();
 
@@ -119,8 +93,6 @@ public class CallFrame {
 
     /**
      * @return the context of interpreter
-     * 
-     * @uml.property name="context"
      */
     public InterpreterContext getContext() {
         return context;
