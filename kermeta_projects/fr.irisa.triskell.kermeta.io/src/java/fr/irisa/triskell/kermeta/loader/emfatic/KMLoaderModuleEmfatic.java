@@ -42,7 +42,6 @@ public class KMLoaderModuleEmfatic extends KermetaLoaderModule {
     public boolean load(KermetaUnit unit, String str_uri) {
         URI uri = URI.createURI(str_uri);
         URIConverter converter = new URIConverterImpl();
-        
         ECore2KMPass pass;
 		com.ibm.eclipse.emfatic.core.ast.CompUnit u = null;
 		EmfaticParser p;

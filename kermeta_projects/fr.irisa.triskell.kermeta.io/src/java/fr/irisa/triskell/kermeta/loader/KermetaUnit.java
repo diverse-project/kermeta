@@ -56,7 +56,7 @@ public class KermetaUnit {
 		if (std_lib == null) {
 			std_lib = new StandardKermetaUnit();
 			try {
-				KermetaUnit unit = KermetaLoader.getDefaultLoader().load(STD_LIB_URI, std_lib);
+				KermetaLoader.getDefaultLoader().load(STD_LIB_URI, std_lib);
 			}
 			catch(Throwable e) {
 				std_lib.error.add(new KMUnitError("Exception while importing the standartd library : " + e, null));
@@ -183,7 +183,15 @@ public class KermetaUnit {
 	 * Returns null is not found
 	 */
 	public FPackage packageLookup(String qname) {
-		return (FPackage)packages.get(qname);
+		FPackage result = (FPackage)packages.get(qname);
+		if (result != null) return result;
+		Iterator it = importedUnits.iterator();
+		while(it.hasNext()) {
+			KermetaUnit iu = (KermetaUnit)it.next();
+			result = iu.packageLookup(qname);
+			if (result != null) return result;
+		}
+		return result;
 	}
 	
 	/**

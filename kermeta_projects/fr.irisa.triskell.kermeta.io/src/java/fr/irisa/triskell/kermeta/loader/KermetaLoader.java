@@ -67,18 +67,20 @@ public class KermetaLoader {
     
     
     public KermetaUnit load(String uri) {
-    	KermetaUnit result = new KermetaUnit();
-    	load(uri, result);
+    	KermetaUnit result = load(uri, new KermetaUnit());
         return result;
     }
     
     public KermetaUnit load(String uri, KermetaUnit result) {
+    	//System.out.println("loading " + uri );
     	if (uri == null) {
     		result.error.add(new KMUnitError("Unable to load resource " + uri + " : no loader registered.", null));
     		return result;
     	}
     	if (loadedUnits.containsKey(uri)) return (KermetaUnit)loadedUnits.get(uri);
     	result.setUri(uri);
+    	//System.out.println("adding " + uri + " to loaded units");
+        loadedUnits.put(uri, result);
         if (metaCorePath.containsKey(uri)) uri = (String)metaCorePath.get(uri);
         URI u = URI.createURI(uri);
         KermetaLoaderModule loader = null;
@@ -88,6 +90,7 @@ public class KermetaLoader {
         	result.error.add(new KMUnitError("Unable to load resource " + uri + " : no loader registered.", null));
         }
         else loader.load(result, uri);
+     
         return result;
     	
     }
