@@ -90,7 +90,9 @@ public class GenerateJUnitTestSuite {
 				if (containsFileType(ext)) {
 					//System.out.println("Adding file " +files[i].getName() );
 					String method = getTemplate();
-					method = method.replaceAll("DIR", dir.getPath());
+					String dirPath=dir.getPath();
+					dirPath=dirPath.replaceAll("\\\\","/");
+					method = method.replaceAll("DIR", dirPath);
 					method = method.replaceAll("FILENAME", name);
 					method = method.replaceAll("FILE", files[i].getName());
 					result += method + "\n";
