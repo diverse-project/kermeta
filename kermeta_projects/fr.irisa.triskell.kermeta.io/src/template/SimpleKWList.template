@@ -1,0 +1,47 @@
+/*
+ * Created on 9 févr. 2005
+ * By Franck FLEUREY (ffleurey@irisa.fr)
+ */
+package kermeta.parser;
+
+import java.util.Hashtable;
+
+/**
+ * @author Franck Fleurey
+ * IRISA / University of rennes 1
+ * Distributed under the terms of the GPL license
+ */
+public class SimpleKWList {
+
+	protected static SimpleKWList instance = null;
+	public static SimpleKWList getInstance() {
+		if (instance==null) instance = new SimpleKWList();
+		return instance;
+	}
+
+	protected Hashtable keywords;
+	
+	/**
+	 * 
+	 */
+	protected SimpleKWList() {
+		super();
+		keywords = new Hashtable();
+		KEWORDS
+	}
+
+	public void addKeyword(String kw) {
+		keywords.put(kw, kw);
+	}
+	
+	public boolean isKeyword(String kw) {
+		return keywords.containsKey(kw);
+	}
+	
+	/**
+	 * @return Returns the keywords.
+	 */
+	public Hashtable getKeywords() {
+		return keywords;
+	}
+}

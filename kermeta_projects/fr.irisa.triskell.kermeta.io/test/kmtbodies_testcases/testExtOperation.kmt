@@ -1,0 +1,24 @@
+package testExtOperation;
+
+require "testExtOperation_bodies.mctbodies" 
+
+class String {}
+class Integer {}
+class Boolean {}
+
+class Class1 {
+	
+	operation operation1() : String is do
+		// TODO : completer
+	end
+	
+	operation operation2() : String is do
+		// TODO : completer
+	end
+	
+}
+
+package toto {
+
+
+}

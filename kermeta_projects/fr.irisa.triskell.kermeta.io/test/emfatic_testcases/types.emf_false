@@ -1,0 +1,124 @@
+package ftm;
+
+package standard {
+  class Integer extends Comparable, ValueType {
+    op Integer plus(Integer other);
+    op Integer minus(Integer other);
+    op Integer times(Integer other);
+    op Integer div(Integer other);
+    op Integer mod(Integer other);
+    op structure.String toString();
+    op UnlimitedNatural toUnlimitedNatural();
+    op Real toReal();
+    op Integer uminus();
+  }
+
+//kldsfmlksdfj
+
+
+  class UnlimitedNatural extends ValueType, Comparable {
+    op Integer toInteger();
+    op structure.Boolean isInfinite();
+    op structure.String toString();
+  }
+
+  class Real extends Comparable, ValueType {
+    op Real plus(Real other);
+    op Real minus(Real other);
+    op Real times(Real other);
+    op Real div(Real other);
+    op Real uminus();
+    op structure.String toString();
+  }
+
+  abstract class Comparable extends structure.Object {
+    op structure.Boolean isGreater(Comparable other);
+    op structure.Boolean isLower(Comparable other);
+    op structure.Boolean isGreaterOrEqual(Comparable other);
+    op structure.Boolean isLowerOrEqual(Comparable other);
+  }
+
+  class ValueType extends structure.Object {
+  }
+
+  abstract class Collection extends structure.Object {
+    op void add(structure.Object element);
+    op void remove(structure.Object element);
+    op void clear();
+    op void addAll(Collection elements);
+    op structure.Boolean contains(structure.Object element);
+    op structure.Integer size();
+    op Iterator iterator();
+  }
+
+  class Set extends Collection {
+  }
+
+  class OrderedSet extends Set {
+    op void addAt(structure.Integer index, structure.Object object);
+    op void removeAt(structure.Integer index);
+    op structure.Object elementAt(structure.Integer index);
+  }
+
+  class Bag extends Collection {
+  }
+
+  class Sequence extends Bag {
+    op void addAt(structure.Integer index, structure.Object object);
+    op void removeAt(structure.Integer index);
+    op structure.Object elementAt(structure.Integer index);
+  }
+
+  class Iterator extends structure.Object {
+    op structure.Boolean hasNext();
+    op structure.Object next();
+  }
+
+  class String extends structure.Object, Comparable {
+    op String plus(String other);
+    op void append(String other);
+    op Character elementAt(structure.Integer index);
+    op structure.Integer indexOf(String str);
+    op String subString(structure.Integer index, structure.Integer size);
+    op structure.Integer size();
+  }
+
+  class Character extends ValueType, Comparable {
+    op structure.String toString();
+  }
+
+  class Boolean {
+    op Boolean and(Boolean other);
+    op Boolean or(Boolean other);
+    op Boolean not();
+  }
+
+  class Void {
+    op structure.Boolean isVoid();
+  }
+
+}
+
+package structure {
+  class Object {
+    op Boolean isVoid();
+    op Boolean isFrozen();
+    op void freeze();
+    op Boolean idEquals(Object other);
+    op String toString();
+  }
+
+  datatype Boolean : standard.Boolean;
+
+  datatype String : standard.String;
+
+  datatype Integer : standard.Integer;
+
+  class ReflectiveCollection extends standard.Set {
+  }
+
+  class ReflectiveSequence extends standard.OrderedSet {
+  }
+
+}
+

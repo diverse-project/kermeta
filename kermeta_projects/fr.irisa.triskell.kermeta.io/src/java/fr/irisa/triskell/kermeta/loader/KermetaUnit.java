@@ -1,0 +1,520 @@
+/*
+ * Created on 2 févr. 2005
+ * By Franck FLEUREY (ffleurey@irisa.fr)
+ */
+package fr.irisa.triskell.kermeta.loader;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Stack;
+
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import fr.irisa.triskell.kermeta.behavior.BehaviorFactory;
+import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.loader.expression.OperationBodyLoader;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
+import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FEnumeration;
+import fr.irisa.triskell.kermeta.structure.FNamedElement;
+import fr.irisa.triskell.kermeta.structure.FObject;
+import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.structure.FTypeContainer;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+
+/**
+ * @author Franck Fleurey
+ * IRISA / University of rennes 1
+ * Distributed under the terms of the GPL license
+ */
+public class KermetaUnit {
+	
+	private static String STD_LIB_URI = null;
+	
+	private static StandardKermetaUnit std_lib = null;
+	
+	public static StandardKermetaUnit getStdLib() {
+		if (std_lib == null) {
+			std_lib = new StandardKermetaUnit();
+			try {
+				KermetaUnit unit = KermetaLoader.getDefaultLoader().load(STD_LIB_URI, std_lib);
+			}
+			catch(Throwable e) {
+				std_lib.error.add(new KMUnitError("Exception while importing the standartd library : " + e, null));
+			}
+		}
+		return std_lib;
+	}
+	
+	
+	public KermetaUnit() {
+		struct_factory = StructurePackageImpl.init().getStructureFactory();
+		behav_factory = BehaviorPackageImpl.init().getBehaviorFactory();
+		importStdlib();
+	}
+	
+	protected void importStdlib() {
+		if (STD_LIB_URI != null) importedUnits.add(getStdLib());
+	}
+
+	
+	protected String uri;
+	
+	/**
+	 * Factory to build MC structural elements
+	 */
+	public StructureFactory struct_factory;
+	/**
+	 * Factory to build MC behavioral elements
+	 */
+	public BehaviorFactory behav_factory;
+	
+	public FPackage current_package;
+	public FClassDefinition current_class;
+	public FOperation current_operation;
+	public FProperty current_property;
+	public FEnumeration current_enum;
+	
+	/**
+	 * The root package of the model being built
+	 */
+	public FPackage rootPackage = null;
+	
+	/**
+	 * The FPackage objects by qualified names
+	 */
+	public Hashtable packages = new Hashtable();
+	
+	/**
+	 * Pre loaded operation bodies as strings
+	 * key = operation qualified name
+	 * value = body of the op as a string 
+	 */
+	public Hashtable operation_bodies = new Hashtable();
+	
+	/**
+	 * This tables store the mapping between Metacore model elements
+	 * and AST nodes in both directions.
+	 */
+	protected Hashtable traceT2M = new Hashtable();
+	protected Hashtable traceM2T = new Hashtable();
+	
+	public void storeTrace(FObject model_element, Object node) {
+		traceM2T.put(model_element, node);
+		traceT2M.put(node, model_element);
+	}
+
+	public FObject getModelElementByNode(Object node) {
+		return (FObject)traceT2M.get(node);
+	}
+	
+	public Object getNodeByModelElement(FObject object) {
+		return traceM2T.get(object);
+	}
+	
+	/**
+	 * This is a symbol table. It is a stack of hashtable.
+	 * it contains 
+	 *    - the attributes and methods of the current class and its superclasses.
+	 * 	  - the parameters of the operation that is being defined.
+	 * 	  - the local variables of the current block.
+	 * 	  - the parameters of the current lambda expression.
+	 * Each hashtable contains a mapping
+	 * symbol : String -> MCSymbol
+	 */
+	protected Stack symbols = new Stack();
+	
+	/**
+	 * This is a the same principle ast the symbol table
+	 * but for type variables.
+	 */
+	protected Stack typeVars = new Stack();
+	
+	/**
+	 * The list of errors detected while building the model
+	 */
+	public ArrayList error = new ArrayList();
+	
+	/**
+	 * The list of warning detected while building the model
+	 */
+	public ArrayList warning = new ArrayList();
+	
+	/**
+	 * The imported metacore units
+	 */
+	protected ArrayList importedUnits = new ArrayList();
+	
+	/**
+	 * A table of types defined in the current Metacore model
+	 * (This table is filled by a first pass).
+	 * Qualified_name -> TypeDefinition
+	 */
+	public Hashtable typeDefs = new Hashtable();
+	
+	/**
+	 * A list of strings representing names of packages that are
+	 * used in the unit.
+	 * It allows writing short names instead of fully qualified names
+	 */
+	protected ArrayList usings = new ArrayList();
+	
+	/**
+	 * Get a package by its qualified name
+	 * Returns null is not found
+	 */
+	public FPackage packageLookup(String qname) {
+		return (FPackage)packages.get(qname);
+	}
+	
+	/**
+	 * Get the TypeDefinition from its qualified name
+	 * It looks first in the "local" type definitions and
+	 * then in the imported Metacore models
+	 * returns null if type not found
+	 */
+	public FTypeDefinition typeDefinitionLookup(String fully_qualified_name) {
+		FTypeDefinition result = (FTypeDefinition)typeDefs.get(fully_qualified_name);
+		if (result == null) {
+		    for (int i=0; i<importedUnits.size(); i++) {
+		        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+		        result = iu.typeDefinitionLookup(fully_qualified_name);
+		        if (result != null) return result;
+		    }
+		}
+		return result;
+	}
+	
+	/**
+	 * Get a typeDefinition from its name. The name can be either a fully qualified
+	 * name or a short name. In case of a qualified name, this method just calls
+	 * typeDefinitionLookup. In case of a short name, the name is qualified by
+	 * the usings directives.
+	 * returns null if type not found
+	 */
+	public FTypeDefinition getTypeDefinitionByName(String name) {
+		FTypeDefinition result = typeDefinitionLookup(name);
+		if (result == null && current_package != null) result = typeDefinitionLookup(getQualifiedName(current_package) + "::" + name);
+		if (result == null) result = typeDefinitionLookup(getQualifiedName(rootPackage) + "::" + name);
+		for(int i=0; i<usings.size() && result == null; i++) {
+			result = typeDefinitionLookup(usings.get(i) + "::" + name);
+		}
+		return result;
+	}
+	
+	public void pushContext() {
+		symbols.push(new Hashtable());
+		typeVars.push(new Hashtable());
+	}
+	
+	public void popContext() {
+		symbols.pop();
+		typeVars.pop();
+	}
+	
+	public void addSymbol(KMSymbol s) {
+		((Hashtable)symbols.peek()).put(s.getIdentifier(), s);
+	}
+	
+	public void addTypeVar(FTypeVariable var){
+		((Hashtable)typeVars.peek()).put(var.getFName(), var);
+	}
+	
+	public void addUsing(String name) {
+		//TODO: check that the package exists. generate a warning if not.
+		usings.add(name);
+	}
+	
+	protected String getResolvedURI(String base_uri) {
+		String result = this.uri;
+		URI uri = URI.createURI(result);
+		if (uri.isRelative()) {
+			URIConverter c = new URIConverterImpl();
+			result = uri.resolve(c.normalize(URI.createURI(base_uri))).toString();
+		}
+		return result;
+	}
+	
+	public void importModelFromURI(String str_uri) {
+		URI uri = URI.createURI(str_uri);
+		URIConverter c = new URIConverterImpl();
+		if (uri.isRelative() && this.uri != null) {
+			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
+			
+		}
+		
+		// To import method bodies from another file
+		if (uri.fileExtension().equals("mctbodies")) {
+			new OperationBodyLoader().load(this, str_uri);
+		}
+		else {
+			KermetaUnit unit;
+			// This is a normal behavior
+			unit = KermetaLoader.getDefaultLoader().load(str_uri);
+			if (unit.error.size() > 0) {
+				error.add(new KMUnitError("Errors in imported model " + str_uri + " : \n" +  ((KMUnitMessage)unit.error.get(0)).getMessage(), null));
+			}
+			importedUnits.add(unit);
+		}
+	}
+	
+	public void importModelFromID(String qid) {
+		importModelFromURI(qid);
+	}
+	
+	/**
+	 * Find a symbol in the symbol tables
+	 * It starts from the top of the stack.
+	 * returns null if the symbol was not found
+	 */
+	public KMSymbol symbolLookup(String symbol) {
+		KMSymbol result = null;
+		for (int i=symbols.size()-1; i >-1; i--) {
+			Hashtable table = (Hashtable)symbols.get(i);
+			result = (KMSymbol)table.get(symbol);
+			if (result != null) break;
+		}
+		return result;
+	}
+	
+	/**
+	 * Find a type variable in the context.
+	 * returns null if the variable was not found
+	 */
+	public FTypeVariable typeVariableLookup(String name) {
+		FTypeVariable result = null;
+		for (int i=typeVars.size()-1; i >-1; i--) {
+			Hashtable table = (Hashtable)typeVars.get(i);
+			result = (FTypeVariable)table.get(name);
+			if (result != null) break;
+		}
+		return result;
+	}
+	
+	/**
+	 * Get the fully qualified name of an FNamedElemenet
+	 */
+	public String getQualifiedName(FNamedElement element) {
+		if (element.eContainer() != null && element.eContainer() instanceof FNamedElement)
+			return getQualifiedName( (FNamedElement)element.eContainer() ) + "::" + element.getFName();
+		else return element.getFName();
+	}
+	
+	/**
+	 * Get an operation by its name
+	 */
+	public FOperation getOperationByName(FClassDefinition c, String name) {
+		EList ops = c.getFOwnedOperation();
+		for (int i=0; i<ops.size(); i++) {
+			FOperation op = (FOperation)ops.get(i);
+			if (op.getFName().equals(name)) return op;
+		}
+		return null;
+	}
+	
+	/**
+	 * Get a property by its name
+	 */
+	public FProperty getPropertyByName(FClassDefinition c, String name) {
+		EList props = c.getFOwnedAttributes();
+		for (int i=0; i<props.size(); i++) {
+			FProperty prop = (FProperty)props.get(i);
+			if (prop.getFName().equals(name)) return prop;
+		}
+		return null;
+	}
+	
+	/**
+	 * Get an operation by its name. search in the inheritance tree
+	 */
+	public FOperation findOperationByName(FClassDefinition c, String name) {
+		FOperation result = getOperationByName(c, name);
+		if (result != null) return result;
+		EList superclasses = c.getFSuperType();
+		for(int i=0; i<superclasses.size();i++) {
+			FClassDefinition sc = ((FClass)superclasses.get(i)).getFClassDefinition();
+			result = findOperationByName(sc, name);
+			if (result != null) return result;
+		}
+		return null;
+	}
+	
+	/**
+	 * Get an property by its name. search in the inheritance tree
+	 */
+	public FProperty findPropertyByName(FClassDefinition c, String name) {
+		FProperty result = getPropertyByName(c, name);
+		if (result != null) return result;
+		EList superclasses = c.getFSuperType();
+		for(int i=0; i<superclasses.size();i++) {
+			FClassDefinition sc = ((FClass)superclasses.get(i)).getFClassDefinition();
+			result = findPropertyByName(sc, name);
+			if (result != null) return result;
+		}
+		return null;
+	}
+	
+	public boolean isSuperClass(FClassDefinition supercls, FClassDefinition cls) {
+		EList stypes = cls.getFSuperType();
+		for(int i=0; i< stypes.size(); i++) {
+			FClassDefinition scls = ((FClass)stypes.get(i)).getFClassDefinition();
+			if (supercls == scls) return true;
+			else if(isSuperClass(supercls, scls)) return true;
+		}
+		return false;
+	}
+	
+	public FClassDefinition[] getDirectSuperClasses(FClassDefinition cls) {
+		EList scs = cls.getFSuperType();
+		FClassDefinition[] result = new FClassDefinition[scs.size()];
+		for(int i=0; i<scs.size(); i++) {
+			result[i] = ((FClass)scs.get(i)).getFClassDefinition();
+		}
+		return result;
+	}
+	
+	public ArrayList getAllOperations(FClassDefinition cls) {
+		ArrayList result = new ArrayList();
+		Iterator it = cls.getFOwnedOperation().iterator();
+		while(it.hasNext()) {
+			FOperation op = (FOperation)it.next();
+			// only take operation. no methods
+			if (op.getFSuperOperation() == null) result.add(op);
+		}
+		// search recursively in super classes
+		it = cls.getFSuperType().iterator();
+		while(it.hasNext()) {
+			result.addAll(getAllOperations(((FClass)it.next()).getFClassDefinition()));
+		}
+		return result;
+	}
+	
+	public ArrayList getAllProperties(FClassDefinition cls) {
+		ArrayList result = new ArrayList();
+		result.addAll(cls.getFOwnedAttributes());
+		// search recursively in super classes
+		Iterator it = cls.getFSuperType().iterator();
+		while(it.hasNext()) {
+			result.addAll(getAllProperties(((FClass)it.next()).getFClassDefinition()));
+		}
+		return result;
+	}
+	
+	public void prettyPrint(String file_name) {
+		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
+		for (int i=0; i<importedUnits.size(); i++) {
+	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+	        if (iu == getStdLib()) continue;
+	        pp.getImports().add(iu.getResolvedURI(uri));
+	    }
+		pp.getUsings().addAll(usings);
+		pp.ppPackage(rootPackage, new File(file_name));
+	}
+	
+	public void saveMetaCoreModel(String directory) {
+		if (rootPackage.eResource() == null) {
+			
+			for (int i=0; i<importedUnits.size(); i++) {
+		        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+		        iu.saveMetaCoreModel(directory);
+		    }
+			String file_name = URI.createURI(uri).lastSegment().replace('.', '_') + ".mcore";
+			
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("mcore",new XMIResourceFactoryImpl()); 
+			ResourceSet resource_set = new ResourceSetImpl();
+			Resource resource = resource_set.createResource(URI.createURI(directory + "/" + file_name));
+			fixTypeContainement();
+			
+			if (rootPackage.eContainer() != null) {
+				
+				
+			}
+			resource.getContents().add(getRootPackageForSerialization(rootPackage));
+			try {
+				resource.save(null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				throw new Error(e);
+			}
+		}
+		//resource.getContents().addAll(rootPackage.eAllContents());
+		
+	}
+	
+	public FPackage getRootPackageForSerialization(FPackage containedPackage) {
+		
+		FPackage container = containedPackage.getFNestingPackage();
+		if (container == null) return containedPackage;
+		FPackage newContainer = copyPackageStructure(container);
+		newContainer.getFNestedPackage().add(containedPackage);
+		FPackage result = newContainer;
+		while(result.getFNestingPackage() != null) result = result.getFNestingPackage();
+		return result;
+	}
+	
+	private FPackage copyPackageStructure(FPackage toCopy) {
+		FPackage result = struct_factory.createFPackage();
+		result.setFName(toCopy.getFName());
+		if (toCopy.eContainer() != null) {
+			result.setFNestingPackage(copyPackageStructure(toCopy.getFNestingPackage()));
+		}
+		return result;
+	}
+	
+	
+	public void fixTypeContainement() {
+		TreeIterator it = rootPackage.eAllContents();
+		TypeContainementFixer fixer = new TypeContainementFixer();
+		while(it.hasNext()) {
+			FObject o = (FObject)it.next();
+			if (o instanceof FTypeContainer) {
+				if (o != null) fixer.accept(o);
+			}
+		}
+	}
+	
+	/**
+	 * @return Returns the error.
+	 */
+	public ArrayList getError() {
+		return error;
+	}
+	/**
+	 * @return Returns the warning.
+	 */
+	public ArrayList getWarning() {
+		return warning;
+	}
+	/**
+	 * @return Returns the uri.
+	 */
+	public String getUri() {
+		return uri;
+	}
+	/**
+	 * @param uri The uri to set.
+	 */
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
+}
+
