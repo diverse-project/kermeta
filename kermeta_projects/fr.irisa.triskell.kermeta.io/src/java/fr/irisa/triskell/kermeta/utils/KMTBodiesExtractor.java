@@ -1,10 +1,11 @@
-/* $Id: KMTBodiesExtractor.java,v 1.2 2005-02-21 15:24:39 zdrey Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.3 2005-02-22 14:34:00 zdrey Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
  * Description : contains the BodyExtractor which extracts the operations/properties
  * and their body and write them into an external file
- * Todo : put TODO actions here
+ * Todo : 
+ * 	* Change all dirty paths to URIs
  */
 package fr.irisa.triskell.kermeta.utils;
 
@@ -33,7 +34,9 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 public class KMTBodiesExtractor extends KermetaVisitor {
 	
 	/**File where to store the external kmtbodies */
-    String KMTBODIES_DIR = "kmtbodies/";
+    protected static String KMTBODIES_DIR = "kmtbodies/";
+    /**Dir. where to store the kmtbodies directory*/
+    protected String rootDir = "./";
 	protected File kmtbodies_file ;
 	protected FileWriter w;
 	protected KermetaUnit unit;
@@ -53,10 +56,17 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 		pprinter = new KM2KMTPrettyPrinter();
 	}
 	
-	public void extractFromPackage(FPackage pkg, String file)
+	/**
+	 * Extract bodies from package pkg and output them into a file (file)
+	 * @param pkg
+	 * @param basename : basename of the file (directory is "controlled" through
+	 * rootDir attribute, and static KMTBODIES_DIR : which is a mandatory directory
+	 * inside which users must store its kmtbodies) 
+	 */
+	public void extractFromPackage(FPackage pkg, String basename)
 	{
-	    visit(pkg);
-	    writeKMTBodies(file);
+	    super.visit(pkg);
+	    writeKMTBodies(basename);
 	}
 	
 	/**
@@ -137,31 +147,39 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	 */
 	protected File createKMTBodiesFile(String filename)
 	{
-	    File dir = new File(KMTBODIES_DIR);
+	    File dir = new File(rootDir+KMTBODIES_DIR);
 	    if (!dir.exists())
 	    {
 	        dir.mkdir();
 	    }
-		String[] listdir = dir.list();
-		int save_i = 0;
-		
-		for (int i=0; i < listdir.length; i++)
-		{
-			if (listdir[i].startsWith(filename))
-			{
-				save_i += 1 ;
-			}
-		}
-		if (new File(KMTBODIES_DIR+filename).exists())
-		{
-			File oldf = new File(KMTBODIES_DIR+filename);
-			File newf = new File(KMTBODIES_DIR+filename+".bak."+(save_i+1));
-			oldf.renameTo(newf);
-		}
-	
-		return new File(KMTBODIES_DIR+filename);
-		
+	    return backupFile(rootDir+KMTBODIES_DIR, filename);
 	}
+	
+	protected File backupFile(String backupdir, String filename)
+	{
+	    File dir = new File(backupdir);
+	    File newf = null;
+	    String[] listdir = dir.list();
+	    int save_i = 0;
+	    for (int i=0; i < listdir.length; i++)
+	    {
+	        if (listdir[i].startsWith(filename))
+	        {
+	            save_i += 1 ;
+	        }
+	    }
+	    
+	    String filepath = backupdir+"/"+filename; // fixme : use java facilities
+	    File oldf = new File(filepath);
+	    
+	    if (oldf.exists())
+	    {
+	        newf = new File(filepath+".bak."+(save_i+1));
+	        oldf.renameTo(newf);
+	    }
+	    return oldf;
+	}
+	
 	
 	public void writeKMTBodies(String kmtb_filename)
 	{
@@ -174,6 +192,22 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void setRootDir(String rootdir)
+	{
+	    rootDir = rootdir+"/";
+	}
+	
+	public String getRootDir()
+	{
+	    return rootDir;
+	}
+	
+	/** Returns the "complete" path of the directory KMTBodies (rootDir+KMTBODIES_DIR) */
+	public String getCompleteKMTBodiesDir()
+	{
+	    return rootDir+"/"+KMTBODIES_DIR;
 	}
 	
 }
