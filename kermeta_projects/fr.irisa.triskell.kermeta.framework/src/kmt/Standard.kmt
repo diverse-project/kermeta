@@ -1,0 +1,3 @@
+package kermeta::standard;
+
+require "base/Collections.mct"

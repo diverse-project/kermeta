@@ -1,0 +1,64 @@
+package kermeta::standard;
+
+require "Collections.mct"
+
+/***************************************************
+ * Franck FLEUREY - 14/02/2005
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * Distributed under the terms of the GPL licence
+ *
+ * Implementation of Metacore hashtable types.
+ *************************************************** */
+ 
+/**
+ * An implementation of hashtable
+ */
+class Hashtable<K, V>
+{
+	/**
+	 * returns an iterator on the keys of the map
+	 */
+	operation keyIterator() : Iterator<K> is do
+		extern metacore::runtime::Map.keyIterator()
+	end
+	
+	/**
+	 * returns an iterator on the keys of the map
+	 */
+	operation valueIterator() : Iterator<V> is do
+		extern metacore::runtime::Map.valueIterator()
+	end
+	
+	/**
+	 * returns the value for key 'key'
+	 */
+	operation get(key : K) : V is do
+		extern metacore::runtime::Map.get(key)
+	end
+	
+	/**
+	 * Adds a entry in the Hashtable
+	 */
+	operation put(key : K, ~value : V) : Void is do
+		extern metacore::runtime::Map.put(key, ~value)
+	end
+	
+	/**
+	 * Removes the entry which key equals 'key'
+	 */
+	operation remove(key : K) : Void is do
+		extern metacore::runtime::Map.remove(key)
+	end
+	
+	/**
+	 * Remove all elements from the Hashtable
+	 */
+	operation clear() : Void is do
+		extern metacore::runtime::Collection.clear()
+	end
+	
+	// TODO: complete this class
+	// The rest might be writable in metacore directly
+	
+}
