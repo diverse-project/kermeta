@@ -30,6 +30,8 @@ public class Run extends TestCase {
 	public static MiniMofEMFDriverFactory emfDriverFactory=null;*/
 	public static RuntimeObjectFactory koFactory=null;
 	public static RuntimeObject metametaClass=null;
+	public static RuntimeObject selfINSTANCE=null;
+	public static RuntimeObject voidINSTANCE=null;
 	public static Interpreter theInterpreter=null;
 
 	public static void main(String[] args) {
@@ -70,6 +72,8 @@ public class Run extends TestCase {
 						FClassDefinition classdef=(FClassDefinition)interpreterbuilder.getTypeDefinitionByName("kermeta::reflection::Class");
 						koFactory.setClassClass(classdef);
 						metametaClass=koFactory.getClassClass();
+						selfINSTANCE=new RuntimeObject("The self instance");
+						voidINSTANCE=new RuntimeObject("The void instance");
 						theInterpreter=new Interpreter(koFactory,metametaClass);
 						KMMetaBuilder metaClassesBuilder = new KMMetaBuilder(interpreterbuilder);
 //						metaClassesBuilder.ppPackage(interpreterbuilder);
@@ -77,8 +81,8 @@ public class Run extends TestCase {
 						
 						KMBuilderPass1 builderPass1 = new KMBuilderPass1();
 						builderPass1.ppPackage(interpreterbuilder);
-						KMBuilderPass2 builderPass2 = new KMBuilderPass2();
-						builderPass2.ppPackage(interpreterbuilder);
+/*						KMBuilderPass2 builderPass2 = new KMBuilderPass2();
+						builderPass2.ppPackage(interpreterbuilder);*/
 					}
 				// Do not write again the package declaration..
 			KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(modelName);
@@ -94,8 +98,8 @@ public class Run extends TestCase {
 				
 				KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1();			
 				classesBuilderPass1.ppPackage(builder);
-				KMBuilderPass2 classesBuilderPass2 = new KMBuilderPass2();			
-				classesBuilderPass2.ppPackage(builder);
+/*				KMBuilderPass2 classesBuilderPass2 = new KMBuilderPass2();			
+				classesBuilderPass2.ppPackage(builder);*/
 			}
 		}
 //			}

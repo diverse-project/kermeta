@@ -1,4 +1,4 @@
-/* $Id: Interpreter.java,v 1.5 2005-03-22 13:00:14 jpthibau Exp $
+/* $Id: Interpreter.java,v 1.6 2005-03-25 11:16:59 jpthibau Exp $
 * Project : Kermeta (First iteration)
 * File : Interpreter.java
 * License : GPL
@@ -10,8 +10,6 @@
 * Description : describe here file content
 */
 package fr.irisa.triskell.kermeta.interpreter;
-
-import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
