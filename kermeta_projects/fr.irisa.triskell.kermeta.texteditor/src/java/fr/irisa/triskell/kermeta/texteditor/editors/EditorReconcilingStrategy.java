@@ -45,6 +45,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 
     public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion)
     {
+    	System.out.println("reconcile(DirtyRegion dirtyRegion, IRegion subRegion)");
         try
         {
         	KermetaUnit unit = parse();
@@ -59,6 +60,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 
     public void reconcile(IRegion partition)
     {
+    	System.out.println("reconcile(DirtyRegion dirtyRegion, IRegion subRegion)");
         try
         {
         	KermetaUnit unit = parse();
@@ -88,15 +90,17 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 
     private KermetaUnit parse()
     {
+    	
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();
     	org.eclipse.core.resources.IFile file = _editor.getFile();
+    	String uri = "platform:/resource" + file.getFullPath().toString();
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
     	KMTUnit result = null;
         EditorReconcilingStrategy.clearMarkers(file);
        // System.out.println("file.getFullPath().toOSString() : " + file.getFullPath().toOSString());
         try {
-        	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit("platform:/resource" + file.getFullPath().toString());
+        	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
 	        result.parseString(_document.get().replace('\t', ' '));
 	        result.load();
         }
