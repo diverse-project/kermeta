@@ -1,4 +1,4 @@
-/* $Id: ConditionnalCommand.java,v 1.2 2005-03-14 18:03:11 zdrey Exp $
+/* $Id: ConditionnalCommand.java,v 1.3 2005-03-15 08:20:56 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ConditionalCommand.java
  * License : GPL
@@ -32,8 +32,12 @@ public class ConditionnalCommand extends ABaseCommand {
     public void execute() {
         
         //
-        //FConditionnal conditional = (FConditionnal)kObject;
-        //FExpression cond = conditional.getFCondition(); 
+        FConditionnal conditional = (FConditionnal)kObject;
+        FExpression cond = conditional.getFCondition();
+        // cond_result is a boolean
+        KermetaObject cond_result = invokeAccept("acceptKMExpressionVisitor", cond);
+        if (cond == )
+        //if (cond.)
         
         // 
         // TODO Auto-generated method stub
