@@ -7,6 +7,6 @@ alias Integer : kermeta::standard::Integer;
 // operation called in another package
 class Test_opcall {
     operation operation_asg() : Integer is do
-       Test_opcall.new.operation_asg()
+       testExternPackage2::Test_opcall2.new.operation_asg()
     end
 }

@@ -7,7 +7,7 @@ require "7_testInterPackageCall.kmt"
 // of this package.
 class Test_opcall {
     operation operation1() : kermeta::standard::Integer is do
-        result := testInterPackage::Test_opcall.new.operation1()
+        result := testInterPackage::Test_intercall.new.operation1()
     end
     
     operation operation2() : kermeta::standard::Integer is do
