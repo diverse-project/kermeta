@@ -1,6 +1,9 @@
-/*
+/* $Id: FrameworkGen.java,v 1.3 2005-02-18 13:05:20 zdrey Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
+ * Description :
+ * 
+ * Todo : put TODO actions here
  */
 package fr.irisa.triskell.kermeta.dev.framework;
 
@@ -114,11 +117,11 @@ public class FrameworkGen {
 		visitor.accept(pkg);
 	}
 	
-	public void makePropertyBodies(FTypeDefinition typedef) {
+/*	public void makePropertyBodies(FTypeDefinition typedef) {
 		MakePropertyBodies pbodies = new MakePropertyBodies(abstract_unit);
 		pbodies.accept(typedef);
 	}
-	
+*/	
 	
 	public static void main(String[] args) {
 		FrameworkGen g = new FrameworkGen();
