@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.6 2005-03-07 16:55:10 zdrey Exp $
+/* $Id: KMT2KMPass7.java,v 1.7 2005-03-07 17:29:07 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -36,6 +36,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -57,6 +58,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FTag;
+import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 /**
  * Pass that adds the comments (annotations) as tags of a model element (class, assignment,
@@ -184,9 +186,9 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    
 	    try {
 	      //  BufferedReader r = new BufferedReader(new FileReader(uri));
-	         URIConverter converter = new URIConverterImpl();
+			URI _uri = UserDirURI.createURI(str_uri,null,false);
 	         BufferedReader r = new BufferedReader(
-	         new InputStreamReader(converter.createInputStream(URI.createURI(str_uri))));
+	   	         new InputStreamReader(new FileInputStream(new File(_uri.toFileString()))));
 	        
 	        while (r.ready()) {
 	            char[] c = {(char)r.read()};

@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.5 2005-03-07 16:57:03 zdrey Exp $
+/* $Id: KMTUnit.java,v 1.6 2005-03-07 17:27:51 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -19,10 +19,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 
+import org.eclipse.emf.common.util.URI;
+
 //import org.eclipse.emf.common.util.URI;
-import java.net.URI;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
@@ -48,10 +47,10 @@ public class KMTUnit extends KermetaUnit {
 	
 	
 	public void parse() {
-		URI _uri = UserDirURI.createURI(this.uri);
+		URI _uri = UserDirURI.createURI(this.uri,null,false);
 		KermetaParser p;
 		try {
-		    p = new KermetaParser(new KermetaLexer(new FileInputStream(new File(_uri))));
+		    p = new KermetaParser(new KermetaLexer(new FileInputStream(new File(_uri.toFileString()))));
 		} 
 		catch (IOException e1) {
 		    error.add(new KMUnitError("i/o error loading ressource '"+this.uri+"': " + e1, null));
