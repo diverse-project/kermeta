@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.3 2005-03-23 15:18:21 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.4 2005-03-23 15:31:56 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -47,27 +47,20 @@ import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
- * This is the Command handler. It is the <b>Invoker</b> in the command pattern architecture.
- * The goal of this class is to unify in one process, the handle of the basic 
- * interpreter commands which are written in Java. Those commands are used to evaluate  
- * the Conditional, Loop, Operation call, and Assignment. 
- * 
- * The interpreter.kmt visitor call the static method of this base interpreter, in each
- * of its "visit" method of a "system type" (Conditional, Loop, Assignment, OpCall), 
- * to evaluate each AST node
- * 
+ * This is the Java version of kermeta interpreter. It extends the KermetaVisitor, and each
+ * visit returns a result of type <code>RuntimeObject</code>.
  */
 public class BaseInterpreter extends KermetaVisitor {
 
     /**
-     * 
+     * The global context
      * @uml.property name="interpreterContext"
      * @uml.associationEnd multiplicity="(1 1)"
      */
     protected InterpreterContext interpreterContext;
 
     /**
-     * 
+     * The current ExpressionContext (entity in the CallFrame stack of contexts)
      * @uml.property name="currentContext"
      * @uml.associationEnd multiplicity="(0 1)"
      */
@@ -92,7 +85,7 @@ public class BaseInterpreter extends KermetaVisitor {
 
     
     /**
-     * 
+     * Constructor
      * @param pContext
      * @param unit the main kermetaUnit ..
      */
@@ -847,6 +840,13 @@ public class BaseInterpreter extends KermetaVisitor {
         return result;
     }
     
+    /**
+     * Get the type of the <b>feature</b> given as argument in the <b>type</b>. Return null if 
+     * the feature is not defined <i>directly<i> in the given type.
+     * @param type
+     * @param feature
+     * @return
+     */
     protected static Vector getFlatFeatureType(FClassDefinition type, FCallFeature feature)
     {
         Object result_elt = null; String result_str = null; Vector result = null;
