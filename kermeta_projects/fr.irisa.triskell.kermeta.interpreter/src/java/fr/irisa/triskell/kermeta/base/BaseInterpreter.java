@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.1 2005-03-14 16:02:39 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.2 2005-03-14 18:03:10 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -33,12 +33,15 @@ public class BaseInterpreter {
     /**
      * The main method that is called on a KermetaObject to evaluate it.
      * It uses : 
-     * - createCommand : to create the command that is specialized in this object
-     * @param kObject
+     * - createCommand : to create the command that is dedicated to the execution of this object
+     * - executeCommand : execute the command (method delegator)
+     * @param kObject the KermetaObject to evaluate
+     * @param pContext the interpreter context
      */
-    public static void evaluate(KermetaObject kObject)
+    public static void evaluate(KermetaObject kObject, KermetaObject pContext)
     {
         ABaseCommand command = createCommand(kObject);
+        command.setInterpreterContext(pContext);
         executeCommand(command);
     }
 
@@ -96,9 +99,7 @@ public class BaseInterpreter {
         String kName = kObject.getClass().getName();
         // 1st letter : "F"
         return kName.substring(1, kName.length())+"Command";
-     
     }
-    
 }
 
 

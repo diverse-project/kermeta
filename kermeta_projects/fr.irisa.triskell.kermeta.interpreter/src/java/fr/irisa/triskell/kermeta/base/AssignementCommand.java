@@ -2,7 +2,7 @@ package fr.irisa.triskell.kermeta.base;
 
 import fr.irisa.triskell.kermeta.runtime.KermetaObject;
 
-/* $Id: AssignementCommand.java,v 1.1 2005-03-14 16:02:40 zdrey Exp $
+/* $Id: AssignementCommand.java,v 1.2 2005-03-14 18:03:10 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : AssignmentCommand.java
  * License : GPL
@@ -30,6 +30,7 @@ public class AssignementCommand extends ABaseCommand {
     public void execute() {
         
         //System.out.println(kObject);
+        
         
         
     }

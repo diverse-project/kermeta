@@ -1,4 +1,4 @@
-/* $Id: ABaseCommand.java,v 1.1 2005-03-14 16:02:41 zdrey Exp $
+/* $Id: ABaseCommand.java,v 1.2 2005-03-14 18:03:11 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ICommand.java
  * License : GPL
@@ -20,14 +20,31 @@ import fr.irisa.triskell.kermeta.runtime.KermetaObject;
  */
 public abstract class ABaseCommand {
  
+    /** The KermetaObject that we evaluate.*/
     protected KermetaObject kObject;
+    /** The interpreter current context */
+    protected KermetaObject context;
     /**
      * Set the kObject attribute to <code>object</code>
      * @param object KermetaObject instance to set
      */
-    public void setKermetaObject(KermetaObject object)
-    {
+    public void setKermetaObject(KermetaObject object) {
         kObject = object;
+    }
+    
+    /**
+     * Set the global context to evaluate this kObject
+     * @param context
+     */
+    public void setInterpreterContext(KermetaObject pContext) {
+        context = pContext;
+    }
+    
+    /**
+     * @return the interpreter context
+     */
+    public KermetaObject getInterpreterContext() {
+        return context;
     }
     
     /**
