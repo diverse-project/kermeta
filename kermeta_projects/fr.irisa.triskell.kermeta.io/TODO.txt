@@ -36,15 +36,21 @@ function { parametres | appel(avec les parametres)}
 or : 
 { parametres | appel(avec les parametres) }
 
-In the first case, function is used to "define" a lambda expression and affect an element of type 
-FunctionType. Example : 
+In the first case, function keyword is used to "define" a lambda 
+expression and can then be assigned to an element of type FunctionType.
+
+Example : 
+---------
 	result : FunctionType
 	result := function { a | not(a) }
-In the second case, it is used to "call" a lambda expression, which stands as an argument :
-	acall( { a | not(a) } )
+	
+In the second case, it is used to "call" a lambda expression, 
+which stands as an argument :
 
-In a non functional language, we need a syntax to specify a lambda expression : here,
-we have" function" and the curlies...So it is too much!
+	some_call { a | not(a) } 
+
+In a non functional language, we need a syntax to specify a lambda expression : 
+here, we have" function" and/or the curlies...So, isn't that too sugared?
 
 Another problem :
 The arguments in an operation call (in an assignment) are defined as a postfixlst :
@@ -59,7 +65,29 @@ This allows the following examples of notations :
 * f1(a, b)(c, d)     -> coherent but this is a functional orientation
 * f1 { a | not(a) } { b | not(b) } -> coherent as well but priority rules to define
 
+But not this one, which is though coherent as well :
 
+	f1 ( { a | not(a) } )
+	
+Nor any other call that mixes lambda expressions and "normal" expresssions (fExpressions),
+like :
+
+	f1 ( {a | not(a) } , i : Integer)
+
+**************** 08/03/2005 (2) ************************
+
+We have to decide, later, if the following cases will be allowed by Kermeta grammar 
+or not :
+
+* f1 ({lambda}, fExp)
+* f1 ({lambda},{lambda})
+* f1 {lambda}
+* f1 ({lambda})
+* f1 (fExp, fExp)
+
+i.e, in a regexp formalism, something like : 
+	operationCall = operationName LPAREN paramList RPAREN
+	paramList = ( lambdaExpression | fExpression ) +
 
 	
 (chsais au moins faire les TODO;-P
