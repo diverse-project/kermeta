@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.2 2005-02-16 11:29:28 ffleurey Exp $
+$Id: README.txt,v 1.3 2005-02-17 08:47:18 ffleurey Exp $
 
 
 Leaders :
@@ -9,6 +9,11 @@ F. Fleurey
 Description :
 -------------
 This project contains the model of the Kermeta language as ecore models.
+
+Projets that relies on this project:
+-------------------------------------
+
+All metacore dev projects !!!
 
 
 How to build this project :
@@ -32,6 +37,9 @@ How to build this project :
 History :
 ---------
 $Log: not supported by cvs2svn $
+Revision 1.2  2005/02/16 11:29:28  ffleurey
+Initial version
+
 Revision 1.1  2005/02/16 10:29:56  ffleurey
 Initial revision
 

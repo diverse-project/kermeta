@@ -8,7 +8,7 @@
             <packagesToUnSeal/>
         </sealing>
     </manifest>
-    <selectedElements exportClassFiles="true" exportOutputFolder="false" exportJavaFiles="true">
+    <selectedElements exportClassFiles="false" exportOutputFolder="true" exportJavaFiles="true">
         <folder path="/fr.irisa.triskell.kermeta.model/build/class"/>
     </selectedElements>
 </jardesc>
