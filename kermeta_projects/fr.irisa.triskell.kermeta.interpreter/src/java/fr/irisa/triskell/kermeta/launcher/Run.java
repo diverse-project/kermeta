@@ -48,20 +48,7 @@ public class Run extends TestCase {
 				System.out.println("model kermeta metamodel loaded successfully !");
 				KMMetaBuilder ppm = new KMMetaBuilder();
 				
-/*				String pkg_name = "package " + metabuilder.getQualifiedName(metabuilder.rootPackage) + ";\n\n";
-				
-				System.out.println("package " + metabuilder.getQualifiedName(metabuilder.rootPackage) + ";\n\n");
-			
-				/* imported units needed to recognize the imported classes...*/
-/*				Iterator it = metabuilder.importedUnits.iterator();
-				while(it.hasNext()) {
-					KermetaUnit iu = (KermetaUnit)it.next();
-					if (iu.rootPackage != metabuilder.rootPackage) {
-						System.out.println("require \"" + iu.getUri() + "\"\n");
-					}
-				}*/
-				
-				Hashtable metaPackages = ppm.ppPackage(metabuilder);
+				Hashtable allMetaClasses = ppm.ppPackage(metabuilder);
 				// Do not write again the package declaration..
 			KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(modelName);
 			try {
@@ -75,22 +62,7 @@ public class Run extends TestCase {
 				System.out.println("model "+modelName+" loaded successfully !");
 				KMBuilder pp = new KMBuilder();
 				
-				String pkg_name = "package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n";
-				
-				System.out.println("package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n");
-			
-				/* imported units needed to recognize the imported classes...*/
-				Iterator it = builder.importedUnits.iterator();
-				while(it.hasNext()) {
-					KermetaUnit iu = (KermetaUnit)it.next();
-					if (iu.rootPackage != builder.rootPackage) {
-						System.out.println("require \"" + iu.getUri() + "\"\n");
-					}
-				}
-				
-				String str_kmt = pp.ppPackage(builder.rootPackage);
-				// Do not write again the package declaration..
-				System.out.println(str_kmt.substring(pkg_name.length()));
+				Hashtable allClasses = pp.ppPackage(builder.rootPackage,allMetaClasses);
 			}
 		}
 			}

@@ -1,4 +1,4 @@
-/* $Id: KMBuilder.java,v 1.1 2005-03-09 13:53:54 jpthibau Exp $
+/* $Id: KMBuilder.java,v 1.2 2005-03-10 13:52:23 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -19,7 +19,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -30,6 +33,7 @@ import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.structure.*;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
 
 
@@ -46,15 +50,16 @@ public class KMBuilder extends KermetaVisitor {
 	
 	protected boolean typedef = false;
 	
-	public void ppPackage(FPackage p, File file) {
-		try {
-			FileWriter w = new FileWriter(file);
-			w.write(ppPackage(p));
-			w.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public Hashtable ppPackage(KermetaUnit unit,Hashtable allMetaClasses) {
+/*		allMetaClasses=new Hashtable();
+		String currentpackageName=unit.getQualifiedName(unit.rootPackage);
+		List packagesNames=new ArrayList();
+		packagesNames.add(currentpackageName);
+		this.packageNamesStack=new Stack();
+		ppPackageContents(unit.rootPackage,allMetaClasses,currentpackageName);
+		ppPackageImportedpackagess(unit,allMetaClasses,packagesNames);
+		return allMetaClasses;*/
+		return null;
 	}
 
 	public String ppPackage(FPackage p) {
