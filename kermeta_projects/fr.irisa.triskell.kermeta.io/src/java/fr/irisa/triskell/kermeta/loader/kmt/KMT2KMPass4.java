@@ -1,7 +1,19 @@
-/*
- * Created on 3 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: KMT2KMPass4.java,v 1.3 2005-03-11 11:38:36 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : KMT2KMPass4.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 25, 2005
+ * Authors : 
+ * 	Franck Fleurey	ffleurey@irisa.fr
+ * Description :
+ * 	For each class declaration
+ * 	   - Set the property opposites
+ *     - Set the super operations 
+ * 
+ * 
+*/
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.util.Enumeration;
@@ -69,6 +81,11 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	*/
 	
 	/**
+	 * Visit the AST node called Operation.
+	 * operation : operationKind name=ID 
+	 * 			   (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)?  
+	 * 			   ("from" superSelection=qualifiedID)? ("raises" exceptions=typelst)? 
+	 * 			   "is" operationBody;
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Operation)
 	 */
 	public boolean beginVisit(Operation operation) {
@@ -110,7 +127,9 @@ public class KMT2KMPass4 extends KMT2KMPass {
 						}
 					}
 				}
+				// FIXED : superoperation finding is not correct
 				else { // the super method has to be chosen
+				    
 					String possible_selection = "";
 					Enumeration enum = superops.keys();
 					while (enum.hasMoreElements()) {
@@ -119,7 +138,6 @@ public class KMT2KMPass4 extends KMT2KMPass {
 					possible_selection = possible_selection.substring(0, possible_selection.length()-2);
 					if (operation.getSuperSelection() != null) { // the user has chosen
 						String provided_name = qualifiedIDAsString(operation.getSuperSelection());
-					
 						FOperation superop = null;
 						superop = (FOperation)superops.get(provided_name);
 						
@@ -133,8 +151,8 @@ public class KMT2KMPass4 extends KMT2KMPass {
 							}
 						}
 						
-						if (superop != null) {
-							builder.current_operation.setFSuperOperation((FOperation)superops.get(provided_name));
+						if (superop != null) { 
+							builder.current_operation.setFSuperOperation(superop);
 						}
 						
 						else {
@@ -184,16 +202,25 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		return super.beginVisit(property);
 	}
 
-	
+	/**
+	 * Get the super operation/methods for given method name <code>methname</code>
+	 * of the class <code>cls</code>, and add it to a hashtable.
+	 * @param cls
+	 * @param methname
+	 * @return
+	 */
 	public Hashtable getSupersForMethod(FClassDefinition cls, String methname) {
 		Hashtable result = new Hashtable();
 		FClassDefinition[] supers = builder.getDirectSuperClasses(cls);
+		
 		for(int i=0; i<supers.length; i++) {
 			FOperation superop = builder.getOperationByName(supers[i], methname);
-			if (superop != null) {
+			if (superop != null)
+			{
 				result.put(builder.getQualifiedName(supers[i]), superop);
 			}
-			else { // search in supertypes of supers[i]
+			else 
+			{ // search in supertypes of supers[i]
 				result.putAll(getSupersForMethod(supers[i], methname));
 			}
 		}
