@@ -395,6 +395,7 @@ set up XEP's installation directory in the module's configuration property file.
   
   <!-- ########################################################## -->
   <!-- ### {{{ builds HTML documentation (single and chunked) ### -->
+  <!-- ### {{{ and HTMLHelp 								  ### -->
   <!-- ########################################################## -->
 
   <target name="html.single" depends="docbook.consolidate"
@@ -458,6 +459,54 @@ set up XEP's installation directory in the module's configuration property file.
 
   </target>
 
+  <target name="html.help" depends="docbook.consolidate"
+          description="Renders a docbook documentation to a HTMLHelp file.">
+
+    <copy file="${docbook.styles}/${docbook.style}/xsl/customized.htmlhelp.xsl"
+          tofile="${build.dir}/customized.htmlhelp.xsl.tmp"
+          overwrite="true"
+    >
+        <filterset refid="filterset.fileuris" />
+    </copy>
+
+    <style
+        in      = "${temp:docbook.ready.file}"
+        style   = "${build.dir}/customized.htmlhelp.xsl.tmp"
+        out     = "${distribution.dir}/${manual.name}.html"
+        processor = "${xslt.processor}"
+        >
+        <classpath refid="ant-extensions" />
+    </style>
+    
+    <delete file="${build.dir}/customized.htmlhelp.xsl.tmp" />
+
+  </target>
+  <target name="eclipse.help" depends="docbook.consolidate"
+          description="Renders a docbook documentation to Eclipse Help files.">
+
+    <copy file="${docbook.styles}/${docbook.style}/xsl/customized.eclipse-help.xsl"
+          tofile="${build.dir}/customized.eclipse-help.xsl.tmp"
+          overwrite="true"
+    >
+        <filterset refid="filterset.fileuris" />
+    </copy>
+
+	<mkdir dir="${distribution.dir}/help/html" />
+    <style
+        in      = "${temp:docbook.ready.file}"
+        style   = "${build.dir}/customized.eclipse-help.xsl.tmp"
+        out     = "${distribution.dir}/${manual.name}.html"
+        processor = "${xslt.processor}"
+        >
+        <classpath refid="ant-extensions" />
+        <param name="eclipse.plugin.name"  expression="${docbook.eclipse.plugin.name}" />
+        <param name="eclipse.plugin.id"  expression="${docbook.eclipse.plugin.id}" />
+        <param name="eclipse.plugin.provider"  expression="${docbook.eclipse.plugin.provider}" />
+    </style>
+    
+    <delete file="${build.dir}/customized.eclipse-help.xsl.tmp" />
+
+  </target>
   <!-- }}} -->
 
   <!-- ########################################################################## -->
