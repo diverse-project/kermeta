@@ -1,0 +1,11 @@
+package testOpPkgCall;
+
+require "testExternPackageCall.kmt"
+
+// call an operation from another package 
+class Test_opcall {
+
+    operation operation1() : Integer is do
+        result := testExternPackage::Test_opcall::operation_asg(~result)
+    end
+}
