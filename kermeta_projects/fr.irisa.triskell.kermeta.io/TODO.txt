@@ -1,0 +1,15 @@
+-----------------------------------------------------------------
+$Id : $
+TODO for fr.irisa.triskell.kermeta.io project
+-----------------------------------------------------------------
+
+* 25/02/2005 : 
+Dans loader
+	KMT2KMExperessionBuilder
+	KMT2KMExperessionListBuilder
+	KMT2KMLogicalExperessionBuilder
+	-> y a un "e" en trop...
+Dans ast
+	fAssignement : y a aussi un "e" en trop...
+	
+(chsais au moins faire les TODO;-P
