@@ -1,4 +1,4 @@
-/* $Id: KMReflect.java,v 1.3 2005-03-15 11:22:39 jpthibau Exp $
+/* $Id: oldKMReflect.java,v 1.1 2005-03-22 13:02:25 jpthibau Exp $
 * Project : Kermeta (First iteration)
 * File : KMReflect.java
 * License : GPL
@@ -22,7 +22,7 @@ import antlr.collections.impl.Vector;
 
 import fr.irisa.triskell.kermeta.launcher.Run;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
@@ -34,7 +34,7 @@ import fr.irisa.triskell.kermeta.structure.FPackage;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class KMReflect {
+public class oldKMReflect {
 	
 /*	public static String getQualifiedName(FClassDefinition classdef) {
 		List names=new ArrayList();
@@ -49,7 +49,7 @@ public class KMReflect {
 		result=result+classdef.getFName();
 		return result;
 	}*/
-	public static String getQualifiedName(FNamedElement element) {
+/*	public static String getQualifiedName(FNamedElement element) {
 	String previousElts="";
 	if (element.eContainer() != null && element.eContainer() instanceof FNamedElement)
 		previousElts=getQualifiedName( (FNamedElement)element.eContainer() ) + "::";
@@ -99,6 +99,6 @@ public class KMReflect {
 			}
 		}
 		return result;
-	}	
+	}*/	
 	
 }

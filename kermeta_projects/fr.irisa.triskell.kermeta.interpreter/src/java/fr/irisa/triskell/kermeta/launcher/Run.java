@@ -6,15 +6,17 @@ import java.io.FileWriter;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.builder.KMBuilder;
+import fr.irisa.triskell.kermeta.builder.KMBuilderPass1;
+import fr.irisa.triskell.kermeta.builder.KMBuilderPass2;
 import fr.irisa.triskell.kermeta.builder.KMMetaBuilder;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.interpreter.Interpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.runtime.KMmetaClass;
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
-import fr.irisa.triskell.kermeta.runtime.factory.KermetaObjectFactory;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import junit.framework.TestCase;
 
 
@@ -26,8 +28,8 @@ public class Run extends TestCase {
 	public static MiniMofFactory miniMofFactory=null;
 	public static MiniMofJavaDriverFactory javaDriverFactory=null;
 	public static MiniMofEMFDriverFactory emfDriverFactory=null;*/
-	public static KermetaObjectFactory koFactory=null;
-	public static KMmetaClass metametaClass=null;
+	public static RuntimeObjectFactory koFactory=null;
+	public static RuntimeObject metametaClass=null;
 	public static Interpreter theInterpreter=null;
 
 	public static void main(String[] args) {
@@ -35,13 +37,10 @@ public class Run extends TestCase {
 			System.err.println("Usage : run <modelName> <typeName> <operationName> <args...>");
 		else {
 			//prepare the kermetaObject factory and the metametaclass to allow kermeta metamodel traversing
-			koFactory=new KermetaObjectFactory();
-			metametaClass=new KMmetaClass(koFactory);
-			theInterpreter=new Interpreter(koFactory,metametaClass);
+			koFactory=new RuntimeObjectFactory();
 			String modelName=args[0];
 			KermetaUnitFactory.getDefaultLoader().unloadAll();
-//			KermetaUnit metabuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.framework/src/kermeta/language/behavior.kmt");
-			KermetaUnit metabuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.interpreter/src/kermeta/interpreter.kmt");
+/*			KermetaUnit metabuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.framework/src/kermeta/kermeta.kmt");
 			try {
 			metabuilder.load();
 			} catch(Exception e ) {if (metabuilder.getError().size() == 0) e.printStackTrace();};
@@ -54,6 +53,33 @@ public class Run extends TestCase {
 				KMMetaBuilder metaClassesBuilder = new KMMetaBuilder();
 				
 				metaClassesBuilder.ppPackage(metabuilder);
+/*				Iterator it=koFactory.getClassDefTable().keySet().iterator();
+				while(it.hasNext())
+					System.out.println(it.next());
+				System.out.println("***> "+koFactory.getClassDefTable().keySet().size()+" "+koFactory);*/
+				KermetaUnit interpreterbuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.interpreter/src/kermeta/interpreter.kmt");
+				try {
+					interpreterbuilder.load();
+					} catch(Exception e ) {if (interpreterbuilder.getError().size() == 0) e.printStackTrace();};
+					
+					if (interpreterbuilder.getError().size() > 0) {
+						assertTrue(interpreterbuilder.getMessagesAsString(), false);
+					}
+					else {
+						System.out.println("model for the interpreter loaded successfully !");
+						FClassDefinition classdef=(FClassDefinition)interpreterbuilder.getTypeDefinitionByName("kermeta::reflection::Class");
+						koFactory.setClassClass(classdef);
+						metametaClass=koFactory.getClassClass();
+						theInterpreter=new Interpreter(koFactory,metametaClass);
+						KMMetaBuilder metaClassesBuilder = new KMMetaBuilder(interpreterbuilder);
+//						metaClassesBuilder.ppPackage(interpreterbuilder);
+//						KMMetaBuilder.processParametricTypes();
+						
+						KMBuilderPass1 builderPass1 = new KMBuilderPass1();
+						builderPass1.ppPackage(interpreterbuilder);
+						KMBuilderPass2 builderPass2 = new KMBuilderPass2();
+						builderPass2.ppPackage(interpreterbuilder);
+					}
 				// Do not write again the package declaration..
 			KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(modelName);
 			try {
@@ -65,12 +91,14 @@ public class Run extends TestCase {
 			}
 			else {
 				System.out.println("model "+modelName+" loaded successfully !");
-				KMBuilder classesBuilder = new KMBuilder();
 				
-				classesBuilder.ppPackage(builder);
+				KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1();			
+				classesBuilderPass1.ppPackage(builder);
+				KMBuilderPass2 classesBuilderPass2 = new KMBuilderPass2();			
+				classesBuilderPass2.ppPackage(builder);
 			}
 		}
-			}
+//			}
 	}
 /*		//EMF MiniMof package and factory setup
 		MiniMofPackageImpl.init();
