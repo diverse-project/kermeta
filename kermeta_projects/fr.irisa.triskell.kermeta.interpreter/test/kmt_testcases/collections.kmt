@@ -1,0 +1,272 @@
+package kermeta::standard;
+
+require "primitive_types.kmt"
+
+/***************************************************
+ * Franck FLEUREY - 14/02/2005
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * Distributed under the terms of the GPL licence
+ *
+ * Implementation of Metacore collection types.
+ *************************************************** */
+ 
+/**
+ * Collection is the root class for all metacore collections
+ */
+abstract class Collection<G>
+{
+	/**
+	 * Add an element in the collection
+	 */
+	operation add(element : G) : Void is do
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(element)
+	end
+	
+	/**
+	 * Remove an element from the collection
+	 */
+	operation remove(element : G) : Void is do
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(element)
+	end
+	
+	/**
+	 * Remove all elements from the collection
+	 */
+	operation clear() : Void is do
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.clear()
+	end
+	
+	/**
+	 * Add all elements from the collection elements in the collection
+	 */
+	operation addAll(elements : Collection<G>) : Void is do
+		elements.each { element | add(element) } 
+	end
+	
+	/**
+	 * returns true if the collection contains element
+	 */
+	operation contains(element : G) : Boolean is do
+		result := false
+		from var it : Iterator<G> init iterator
+		until it.isOff or result
+		loop
+			result := element == it.next
+		end
+	end
+	
+	/**
+	 * returns the number of elements in the collection
+	 */
+	operation size() : Integer is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.size()
+	end
+	
+	/**
+	 * returns true if the collection is empty
+	 */
+	operation empty() : Boolean is do
+		result := size == 0
+	end
+	
+	/**
+	 * returns an iterator on the collection
+	 */
+	operation iterator() : Iterator<G> is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator()
+	end
+	
+	/**
+	 * returns an element from the collection or void
+	 * if the collection is empty
+	 */
+	operation one() : G is do
+		var it : Iterator<G> init iterator
+		if it.hasNext then
+			result := it.next
+		else
+			result := void
+		end
+	end
+	
+	/**
+	 * runs func on each element of the collection
+	 */
+	operation each(func : <G -> Void>) : Void is do
+		from var it : Iterator<G> init iterator
+		until it.isOff
+		loop
+			func(it.next)
+		end
+	end
+	
+	/**
+	 * returns a new Collection with the results of running collector 
+	 * once for every element in self.
+	 */
+	operation collect<T> (collector : <G -> T>) : Sequence<T> is do
+		result := Sequence<T>.new
+		from var it : Iterator<G> init iterator
+		until it.isOff
+		loop
+			result.add( collector(it.next) )
+		end
+	end
+	
+	/**
+	 * Passes each element of the collection to detector. 
+	 * Returns the first element for which detector is not false. 
+	 * Returns void if no object matches.
+	 */
+	operation detect(detector : <G -> Boolean>) : Void is do
+		var elem : G
+		result := void
+		from var it : Iterator<G> init iterator
+		until it.isOff or result != void
+		loop
+			elem := iterator.next
+			if detector(elem) then result := elem end
+		end
+	end
+	
+	/**
+	 * Passes each element of the collection to selector. 
+	 * returns a Collection for all elements for which selector is true
+	 */
+	operation ~select(selector : <G -> Boolean>, a : Integer) : Sequence<G>  is do
+		var elem : G
+		result := Sequence<G>.new
+		from var it : Iterator<G> init iterator
+		until it.isOff
+		loop
+			elem := iterator.next
+			if selector(elem) then result.add(elem) end
+		end
+	end
+	
+	/**
+	 * Passes each element of the collection to rejector. 
+	 * returns a Collection for all elements for which rejector is false
+	 */
+	operation reject(rejector : <G -> Boolean>) : Sequence<G>  is do
+		result := self.~select { elem | not rejector(elem) }
+
+	end
+	
+}
+
+/**
+ * A Set is a collection that contains distinct elements
+ */
+class Set<G> inherits Collection<G>
+{
+	/**
+	 * The method 'add' adds the element in the Set
+	 * only if it is not yet in the set
+	 */
+	method add(element : G) : Void is do
+		if not self.contains(element) then
+			super(element)
+		end
+		// TODO : should it raise an exception otherwise ?
+	end
+}
+
+/**
+ * A Bag is a Collection
+ */
+class Bag<G> inherits Collection<G>
+{
+	// Everything is defined in Collection<G>
+}
+
+abstract class OrderedCollection<G> inherits Collection<G> {
+	
+	/**
+	 * adds element in the OrderedCollection at index
+	 */
+	operation addAt(index : Integer, element : G) : Void is do
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.addAt(index, element)
+	end
+	
+	/**
+	 * removes the element at index of the OrderedCollection
+	 */
+	operation removeAt(index : Integer) : Void is do
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.removeAt(index)
+	end
+	
+	/**
+	 * returns the element at index in the OrderedCollection
+	 */
+	operation elementAt(index : Integer) : G is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.elementAt(index)
+	end
+	
+	operation first() : G is do
+		result := elementAt(0)
+	end
+
+	operation last() : G is do
+		result := elementAt(size - 1)
+	end
+}
+
+/**
+ * class OrderedSet
+ */
+class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
+{
+	/**
+	 * Select the method add from Set
+	 */
+	method add(element : G) from Set is do super(element) end
+
+	/**
+	 * overides addAt to ensure element uniqueness
+	 */
+	method addAt(index : Integer, element : G) : Void is do
+		if not self.contains(element) then
+			super(index, element)
+		end
+		// TODO : should it raise an exception otherwise ?
+	end
+}
+
+/**
+ * class Sequence
+ */
+class Sequence<G> inherits Bag<G>, OrderedCollection<G>
+{
+	// Everything is defined in Bag<G>, OrderedCollection<G>
+}
+
+/**
+ * Iterator
+ */
+class Iterator<G>
+{
+	/**
+	 * Returns true if the iterator is on the last element
+	 * i.e. returns not self.hasNext()
+	 */
+	operation isOff() : Boolean is do
+		result := not hasNext
+	end
+	
+	/**
+	 * returns true if the iterator has a next element
+	 */
+	operation hasNext() : Boolean is do
+	 	result := extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext()
+	end
+	
+	/**
+	 * returns the next element of the iterator
+	 */
+	operation next() : G is do
+		result := extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next()
+	end
+
+}

@@ -1,11 +1,12 @@
 package testOpOpCall;
 
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 // Call of an operation from another class inside an operation
 class Test_opopcall {
 
-    attribut e : Integer
+    attribut e : kermeta::standard::Integer
 
-    operation operation1() : Integer is do
+    operation operation1() : kermeta::standard::Integer is do
         result := Test_opcalled.new.operation_asg()
     end
 
@@ -14,7 +15,7 @@ class Test_opopcall {
 
 class Test_opcalled {
     
-    operation operation_asg(): Integer is do
+    operation operation_asg(): kermeta::standard::Integer is do
         result := 5
     end
 }

@@ -5,15 +5,15 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 // Creation of an object
 class MyObject {
 
-	attribut attr1 : Integer
-	attribut attr2 : Boolean
+	attribut attr1 : kermeta::standard::Integer
+	attribut attr2 : kermeta::standard::Boolean
 
-	operation set_attr1(arg0 : Integer) : Void is do
+	operation set_attr1(arg0 : kermeta::standard::Integer) : Void is do
 	
 		attr1 := arg0
 	end
 	
-	operation set_attr2(arg0 : Boolean) : Void is do
+	operation set_attr2(arg0 : kermeta::standard::Boolean) : Void is do
 
 		attr2 := arg0
 	end
@@ -24,8 +24,8 @@ class MyObjectCreation {
 
 	operation createMyObject() : MyObject is do
 		var object : MyObject
-		var bool   : Boolean
-		var int    : Integer
+		var bool   : kermeta::standard::Boolean
+		var int    : kermeta::standard::Integer
 		bool := true
 		int  := 4
 		object := MyObject.new

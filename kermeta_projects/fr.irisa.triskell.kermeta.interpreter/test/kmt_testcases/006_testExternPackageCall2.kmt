@@ -3,8 +3,8 @@ package testExternPackage2;
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 
 // operation called in another package
-class Test_opcall {
-    operation operation_asg() : Integer is do
+class Test_opcall2 {
+    operation operation_asg() : kermeta::standard::Integer is do
         result := 4 * 3
     end
 }
