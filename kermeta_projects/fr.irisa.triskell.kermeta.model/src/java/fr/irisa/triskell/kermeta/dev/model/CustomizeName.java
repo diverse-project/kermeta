@@ -4,7 +4,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package fr.irisa.triskell.kermeta.dev.transfo.ecore;
+package fr.irisa.triskell.kermeta.dev.model;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class FixPackageNSUri {
+public class CustomizeName {
 	
 	
 	/**
@@ -62,38 +62,27 @@ public class FixPackageNSUri {
 			e.printStackTrace();
 		}
 	}
-	
-	public static String getPrefix(EPackage p) {
-		if (p.eContainer() != null && p.eContainer() instanceof EPackage) {
-			return getPrefix((EPackage)p.eContainer()) + "_" + p.getName();
-		}
-		return p.getName();
-	}
-	
-	public static void processPackage(EPackage p) {
-		String prefix = getPrefix(p);
-		System.out.println("Package " + p.getName() + " nsURI = " + getPrefix(p));
-		p.setNsURI("http://" + prefix + "/kermeta.ecore");
-		p.setNsPrefix(prefix);
-	}
 
 	public static void main(String[] args) {
 //		 Set the ecore map entry
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 		
-		FixPackageNSUri cn = new FixPackageNSUri();
+		CustomizeName cn = new CustomizeName();
 		Resource model1 = cn.load(args[0]);
 		
 		TreeIterator it = ((EPackage)model1.getContents().get(0)).eAllContents();
-		EPackage root = (EPackage)model1.getContents().get(0);
-		root.setName("kermeta");
-		processPackage(root);
+		
 		while(it.hasNext()) {
 			EObject o = (EObject)it.next();
-			if (o instanceof EPackage) {
-				EPackage p = (EPackage)o;
-				processPackage(p);
+			if (o instanceof EClassifier) {
+				EClassifier c = (EClassifier)o;
+				c.setName("F" + c.getName());
 			}
+			if (o instanceof EOperation || o instanceof EStructuralFeature) {
+				ENamedElement c = (ENamedElement)o;
+				c.setName("f" + c.getName().substring(0, 1).toUpperCase() + c.getName().substring(1));
+			}
+			
 		}
 		
 		cn.store(model1);

@@ -4,7 +4,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package fr.irisa.triskell.kermeta.dev.transfo.ecore;
+package fr.irisa.triskell.kermeta.dev.model;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -31,7 +30,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class KermetaPrimitiveTypes {
+public class FixPackageNSUri {
 	
 	
 	/**
@@ -82,16 +81,18 @@ public class KermetaPrimitiveTypes {
 //		 Set the ecore map entry
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 		
-		KermetaPrimitiveTypes cn = new KermetaPrimitiveTypes();
+		FixPackageNSUri cn = new FixPackageNSUri();
 		Resource model1 = cn.load(args[0]);
 		
 		TreeIterator it = ((EPackage)model1.getContents().get(0)).eAllContents();
-
+		EPackage root = (EPackage)model1.getContents().get(0);
+		root.setName("kermeta");
+		processPackage(root);
 		while(it.hasNext()) {
 			EObject o = (EObject)it.next();
-			if (o instanceof EDataType) {
-				EDataType dt = (EDataType)o;
-				dt.setInstanceClassName("kermeta::standard::" + dt.getName());
+			if (o instanceof EPackage) {
+				EPackage p = (EPackage)o;
+				processPackage(p);
 			}
 		}
 		

@@ -1,4 +1,4 @@
-package fr.irisa.triskell.kermeta.dev.transfo.ecore;
+package fr.irisa.triskell.kermeta.dev.model;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;

@@ -4,7 +4,7 @@
  * TODO To change the template for this generated file go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-package fr.irisa.triskell.kermeta.dev.transfo.ecore;
+package fr.irisa.triskell.kermeta.dev.model;
 
 import java.io.File;
 import java.io.FileWriter;
