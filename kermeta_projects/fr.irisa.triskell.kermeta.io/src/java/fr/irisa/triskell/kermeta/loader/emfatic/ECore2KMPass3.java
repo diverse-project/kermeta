@@ -28,6 +28,7 @@ import com.ibm.eclipse.emfatic.core.ast.SubPackageDecl;
 import com.ibm.eclipse.emfatic.core.ast.TypeRef;
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
+import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
@@ -116,7 +117,9 @@ public class ECore2KMPass3 extends ECore2KMPass {
 			ASTNode[] sts = node.getSuperTypes().getChildren();
 			for(int i=0; i<sts.length; i++) {
 				if (sts[i] instanceof QualifiedID) {
-					builder.current_class.getFSuperType().add(getFTypeByID((QualifiedID)sts[i]));
+					FType t = getFTypeByID((QualifiedID)sts[i]);
+					if (t == null) builder.error.add(new KMUnitError("Cannot resulve type " + qualifiedIDAsString((QualifiedID)sts[i]), null));
+					else builder.current_class.getFSuperType().add(t);
 				}
 			}
 		}

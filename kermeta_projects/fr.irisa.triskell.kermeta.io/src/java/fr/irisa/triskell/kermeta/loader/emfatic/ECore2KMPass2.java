@@ -44,12 +44,14 @@ public class ECore2KMPass2 extends ECore2KMPass {
 	
 	public boolean beginVisit(PackageDecl node) {
 		builder.rootPackage = getOrCreatePackage(qualifiedIDAsString(node.getName()), node);
+		builder.storeTrace(builder.rootPackage, node);
 		pkgs.push(builder.rootPackage);
 		return super.beginVisit(node);
 	}
 	
 	public boolean beginVisit(SubPackageDecl node) {
 		String qname = builder.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
+		builder.storeTrace(getOrCreatePackage(qname, node), node);
 		pkgs.push(getOrCreatePackage(qname, node));
 		return super.beginVisit(node);
 	}
