@@ -1,0 +1,44 @@
+package kermeta::utils;
+
+require "../standard/collections.kmt"
+
+using kermeta::standard
+
+/***************************************************
+ * Franck FLEUREY - 23/02/2005
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * Distributed under the terms of the GPL licence
+ *
+ * Implementation of Metacore stack types.
+ *************************************************** */
+ 
+/**
+ * An implementation of stack
+ */
+class Stack<G> inherits Sequence<G>
+{
+	/**
+	 * Push an element in the stack
+	 */
+	operation push(element : G) : Void is do
+		self.addAt(0, element)
+	end
+	
+	/**
+	 * Get the element at the top of the stack
+	 */
+	operation peek(element : G) : G is do
+		result := self.first
+	end
+	
+	/**
+	 * Get the element at the top of the stack and 
+	 * removes it from the stack
+	 */
+	operation pop() : G is do
+		result := peek
+		self.removeAt(0)
+	end
+	
+}

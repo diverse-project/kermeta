@@ -119,7 +119,7 @@ abstract class Collection<G>
 	 * Returns the first element for which detector is not false. 
 	 * Returns void if no object matches.
 	 */
-	operation detect(detector : <G -> Boolean>) is do
+	operation detect(detector : <G -> Boolean>) : Void is do
 		var elem : G
 		result := void
 		from var it : Iterator<G> init iterator
@@ -202,7 +202,14 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 	operation elementAt(index : Integer) : G is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.elementAt(index)
 	end
+	
+	operation first() : G is do
+		result := elementAt(0)
+	end
 
+	operation last() : G is do
+		result := elementAt(size - 1)
+	end
 }
 
 /**

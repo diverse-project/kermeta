@@ -1,6 +1,8 @@
-package kermeta::standard;
+package kermeta::utils;
 
-require "Collections.kmt"
+require "../standard/collections.kmt"
+
+using kermeta::standard
 
 /***************************************************
  * Franck FLEUREY - 14/02/2005

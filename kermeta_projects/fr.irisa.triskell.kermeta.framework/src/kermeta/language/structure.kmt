@@ -34,7 +34,7 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 		extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(~property)
 	end
 	
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitObject(self, context)
 		end
@@ -46,14 +46,14 @@ class Class inherits Type, kermeta::reflection::Class, KMStructureVisitable
 	method new() : kermeta::reflection::Object from kermeta::reflection::Class is do
 		extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject()
 	end
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitClass(self, context)
 		end
 }
 class MultiplicityElement inherits TypedElement, kermeta::reflection::MultiplicityElement, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitMultiplicityElement(self, context)
 		end
@@ -62,14 +62,14 @@ class Operation inherits MultiplicityElement, kermeta::reflection::Operation, KM
 {
 	attribut body : kermeta::language::behavior::Expression
 
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitOperation(self, context)
 		end
 }
 class Tag inherits Object, kermeta::reflection::Tag, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitTag(self, context)
 		end
@@ -80,7 +80,7 @@ class Property inherits MultiplicityElement, kermeta::reflection::Property, KMSt
 	attribut getterbody : kermeta::language::behavior::Expression
 	attribut setterbody : kermeta::language::behavior::Expression
 	
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitProperty(self, context)
 		end
@@ -90,35 +90,35 @@ abstract class TypeContainer inherits Object, kermeta::reflection::TypeContainer
 }
 class ClassDefinition inherits TypeContainer, TypeDefinition, kermeta::reflection::ClassDefinition, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitClassDefinition(self, context)
 		end
 }
 class TypedElement inherits TypeContainer, NamedElement, kermeta::reflection::TypedElement, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitTypedElement(self, context)
 		end
 }
 class TypeVariable inherits TypeContainer, Type, NamedElement, kermeta::reflection::TypeVariable, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitTypeVariable(self, context)
 		end
 }
 class ProductType inherits TypeContainer, Type, kermeta::reflection::ProductType, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitProductType(self, context)
 		end
 }
 class FunctionType inherits TypeContainer, Type, kermeta::reflection::FunctionType, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitFunctionType(self, context)
 		end
@@ -128,117 +128,117 @@ class Type inherits Object, kermeta::reflection::Type, KMStructureVisitable
 	method isInstance(element : Object) : Boolean from kermeta::reflection::Type is do
 		//TODO: implement operation isInstance
 	end
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitType(self, context)
 		end
 }
 class TypeVariableBinding inherits TypeContainer, Object, kermeta::reflection::TypeVariableBinding, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitTypeVariableBinding(self, context)
 		end
 }
 class PrimitiveType inherits TypeContainer, DataType, kermeta::reflection::PrimitiveType, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitPrimitiveType(self, context)
 		end
 }
 class NamedElement inherits Object, kermeta::reflection::NamedElement, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitNamedElement(self, context)
 		end
 }
 class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitSelfType(self, context)
 		end
 }
 class Package inherits NamedElement, kermeta::reflection::Package, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitPackage(self, context)
 		end
 }
 class TypeDefinition inherits NamedElement, kermeta::reflection::TypeDefinition, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitTypeDefinition(self, context)
 		end
 }
 class VoidType inherits Type, kermeta::reflection::VoidType, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitVoidType(self, context)
 		end
 }
 class DataType inherits TypeDefinition, Type, kermeta::reflection::DataType, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitDataType(self, context)
 		end
 }
 class Enumeration inherits DataType, kermeta::reflection::Enumeration, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitEnumeration(self, context)
 		end
 }
 class EnumerationLiteral inherits NamedElement, kermeta::reflection::EnumerationLiteral, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitEnumerationLiteral(self, context)
 		end
 }
 class Parameter inherits MultiplicityElement, kermeta::reflection::Parameter, KMStructureVisitable
 {
-	method acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::structure::KMStructureVisitable is
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitParameter(self, context)
 		end
 }
 alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
-abstract class KMStructureVisitor<ContextType>
+abstract class KMStructureVisitor<ContextType, ResultType>
 {
-	operation visitObject(node : Object) : ContextType is abstract
-	operation visitClass(node : Class) : ContextType is abstract
-	operation visitMultiplicityElement(node : MultiplicityElement) : ContextType is abstract
-	operation visitOperation(node : Operation) : ContextType is abstract
-	operation visitTag(node : Tag) : ContextType is abstract
-	operation visitProperty(node : Property) : ContextType is abstract
-	operation visitClassDefinition(node : ClassDefinition) : ContextType is abstract
-	operation visitTypedElement(node : TypedElement) : ContextType is abstract
-	operation visitTypeVariable(node : TypeVariable) : ContextType is abstract
-	operation visitProductType(node : ProductType) : ContextType is abstract
-	operation visitFunctionType(node : FunctionType) : ContextType is abstract
-	operation visitType(node : Type) : ContextType is abstract
-	operation visitTypeVariableBinding(node : TypeVariableBinding) : ContextType is abstract
-	operation visitPrimitiveType(node : PrimitiveType) : ContextType is abstract
-	operation visitNamedElement(node : NamedElement) : ContextType is abstract
-	operation visitSelfType(node : SelfType) : ContextType is abstract
-	operation visitPackage(node : Package) : ContextType is abstract
-	operation visitTypeDefinition(node : TypeDefinition) : ContextType is abstract
-	operation visitVoidType(node : VoidType) : ContextType is abstract
-	operation visitDataType(node : DataType) : ContextType is abstract
-	operation visitEnumeration(node : Enumeration) : ContextType is abstract
-	operation visitEnumerationLiteral(node : EnumerationLiteral) : ContextType is abstract
-	operation visitParameter(node : Parameter) : ContextType is abstract
+	operation visitObject(node : Object, context : ContextType) : ResultType is abstract
+	operation visitClass(node : Class, context : ContextType) : ResultType is abstract
+	operation visitMultiplicityElement(node : MultiplicityElement, context : ContextType) : ResultType is abstract
+	operation visitOperation(node : Operation, context : ContextType) : ResultType is abstract
+	operation visitTag(node : Tag, context : ContextType) : ResultType is abstract
+	operation visitProperty(node : Property, context : ContextType) : ResultType is abstract
+	operation visitClassDefinition(node : ClassDefinition, context : ContextType) : ResultType is abstract
+	operation visitTypedElement(node : TypedElement, context : ContextType) : ResultType is abstract
+	operation visitTypeVariable(node : TypeVariable, context : ContextType) : ResultType is abstract
+	operation visitProductType(node : ProductType, context : ContextType) : ResultType is abstract
+	operation visitFunctionType(node : FunctionType, context : ContextType) : ResultType is abstract
+	operation visitType(node : Type, context : ContextType) : ResultType is abstract
+	operation visitTypeVariableBinding(node : TypeVariableBinding, context : ContextType) : ResultType is abstract
+	operation visitPrimitiveType(node : PrimitiveType, context : ContextType) : ResultType is abstract
+	operation visitNamedElement(node : NamedElement, context : ContextType) : ResultType is abstract
+	operation visitSelfType(node : SelfType, context : ContextType) : ResultType is abstract
+	operation visitPackage(node : Package, context : ContextType) : ResultType is abstract
+	operation visitTypeDefinition(node : TypeDefinition, context : ContextType) : ResultType is abstract
+	operation visitVoidType(node : VoidType, context : ContextType) : ResultType is abstract
+	operation visitDataType(node : DataType, context : ContextType) : ResultType is abstract
+	operation visitEnumeration(node : Enumeration, context : ContextType) : ResultType is abstract
+	operation visitEnumerationLiteral(node : EnumerationLiteral, context : ContextType) : ResultType is abstract
+	operation visitParameter(node : Parameter, context : ContextType) : ResultType is abstract
 }
 abstract class KMStructureVisitable
 {
-	operation acceptKMStructureVisitor<ContextType>(visitor : KMStructureVisitor<ContextType>, context : ContextType) : set ContextType[0..0] is abstract
+	operation acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType is abstract
 }
 

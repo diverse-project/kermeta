@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.7 2005-02-21 10:19:19 zdrey Exp $
+/* $Id: FrameworkGen.java,v 1.8 2005-02-24 13:59:07 ffleurey Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -7,14 +7,17 @@
  */
 package fr.irisa.triskell.kermeta.dev.framework;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaLoader;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FNamedElement;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
@@ -31,12 +34,15 @@ public class FrameworkGen {
 	KermetaUnit abstract_unit;
 	KermetaUnit concrete_unit;
 	String KMTBODIES_DIR = "kmtbodies/";
+	KM2KMTPrettyPrinter pp;
 	
 	/**
 	 * Constructor 
 	 */
 	public FrameworkGen() {
 		super();
+		pp = new KM2KMTPrettyPrinter();
+		
 	}
 
 	/**
@@ -47,18 +53,20 @@ public class FrameworkGen {
 	 */
 	public void loadModels() {
 		
-		KermetaUnit.STD_LIB_URI = "src/kmt/Standard.kmt";
 		
-		abstract_unit = KermetaLoader.getDefaultLoader().load("src/ecore/kermeta.emf");
-			
-		concrete_unit = KermetaLoader.getDefaultLoader().load("src/ecore/kermeta_c.emf");
+		KermetaUnit.STD_LIB_URI = "src/kermeta/Standard.kmt";
 		
-		//System.out.println(abstract_unit.error.size());
+		if (KermetaUnit.getStdLib().error.size() > 0) {
+			System.err.println(KermetaUnit.getStdLib().getMessagesAsString());
+			System.exit(-1);
+		}
 		
-		createVisitor(abstract_unit.packageLookup("kermeta"));
 		
-		// Create the abstract classes
-		makeAbstractClasses(abstract_unit.packageLookup("kermeta::structure"));
+		abstract_unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("src/ecore/kermeta.emf");
+		abstract_unit.load();
+		concrete_unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("src/ecore/kermeta_c.emf");
+		concrete_unit.load();
+		
 		
 		// TODO Create the bodies of setter and getter
 		
@@ -77,23 +85,96 @@ public class FrameworkGen {
         }
 
 		// Create the abstract.kmt reflection module
-		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-		pp.ppPackage(abstract_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/abstract.kmt"));
-
+	
+		
 		// Define impl package
 		FPackage impl = concrete_unit.packageLookup("kermeta::structure");
-		impl.setFName("impl");
+		impl.setFName("structure");
+		concrete_unit.packageLookup("kermeta").getFNestedPackage().remove(impl);
+		
+		//FClassDefinition visitorClass = createVisitor(abstract_unit.packageLookup("kermeta::structure"));
+		//visitorClass.setFName("KMStructureVisitor");
+		//abstract_unit.packageLookup("kermeta::structure").getFOwnedTypeDefinition().add(visitorClass);
+		
+		FPackage behavior = abstract_unit.packageLookup("kermeta::behavior");
+		
+		
+		
+		
+		abstract_unit.packageLookup("kermeta").getFNestedPackage().remove(behavior);
+		
+		FPackage langpack = abstract_unit.struct_factory.createFPackage();
+		langpack.setFName("language");
+		langpack.setFNestingPackage(abstract_unit.packageLookup("kermeta"));
+		
+		langpack.getFNestedPackage().add(behavior);
+		
+		createVisitor(behavior, "KMExpression");
+		
+		//visitorClass.setFName("KMExpressionVisitor");
+		//abstract_unit.packageLookup("kermeta::behavior").getFOwnedTypeDefinition().add(visitorClass);
 		
 		FPackage structure = concrete_unit.struct_factory.createFPackage();
-		structure.setFName("structure");
-		
+		structure.setFName("language");
 		structure.setFNestingPackage(concrete_unit.packageLookup("kermeta"));
 		impl.setFNestingPackage(structure);
 		
+		if (abstract_unit.error.size() > 0) {
+			System.err.println(abstract_unit.getMessagesAsString());
+			System.exit(-1);
+		}
 		
-		makeConcreteClasses(concrete_unit.packageLookup("kermeta::structure"));
-		pp.ppPackage(concrete_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/concrete.kmt"));
+		
+		
+		// Create the abstract classes
+		makeAbstractClasses(abstract_unit.packageLookup("kermeta::structure"));
+		
+		makeConcreteClasses(impl);
+		
+		createVisitor(impl, "KMStructure");
+		
+		abstract_unit.packageLookup("kermeta::structure").setFName("reflection");
+		
+		
+		try {
+			writeAbstractStructure(abstract_unit.packageLookup("kermeta::structure"));
+			writeKermetaStructure(impl);
+//			//writeVisitor(visitorClass);
+			writeBehavior(abstract_unit.packageLookup("kermeta::behavior"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
+	
+	
+	
+	public void writeAbstractStructure(FPackage abstract_structure) throws Exception {
+		BufferedWriter w = new BufferedWriter(new FileWriter(new File("src/kermeta/reflection/reflection.kmt")));
+		w.write("package " + abstract_unit.getQualifiedName(abstract_structure) + ";\n\n");
+		w.write("require \"../standard/Collections.kmt\"\n\n");
+		w.write(pp.ppPackageContents(abstract_structure) + "\n");
+		w.close();
+	}
+	
+	public void writeKermetaStructure(FPackage kermeta_structure) throws Exception {
+		BufferedWriter w = new BufferedWriter(new FileWriter(new File("src/kermeta/language/structure.kmt")));
+		w.write("package " + abstract_unit.getQualifiedName(kermeta_structure) + ";\n\n");
+		w.write("require \"../reflection/reflection.kmt\"\n\n");
+		w.write(pp.ppPackageContents(kermeta_structure) + "\n");
+		w.close();
+	}
+	
+	
+	public void writeBehavior(FPackage behavior_pack) throws Exception {
+		BufferedWriter w = new BufferedWriter(new FileWriter(new File("src/kermeta/language/behavior.kmt")));
+		w.write("package " + abstract_unit.getQualifiedName(behavior_pack) + ";\n\n");
+		w.write("require \"structure.kmt\"\n\n");
+		w.write(pp.ppPackageContents(behavior_pack) + "\n");
+		w.close();
+	}
+	
 	
 	protected File createKMTBodiesFile(String filename)
 	{
@@ -123,20 +204,11 @@ public class FrameworkGen {
 		
 	}
 	
-	public FClassDefinition createVisitor(FPackage pkg) {
-		// abstract class Visitor<ContextType> {
-		FClassDefinition visitor = abstract_unit.struct_factory.createFClassDefinition();
-		visitor.setFName("KMVisitor");
-		visitor.setFIsAbstract(true);
-		FTypeVariable typevar = abstract_unit.struct_factory.createFTypeVariable();
-		typevar.setFName("ContextType");
-		visitor.getFTypeParameter().add(typevar);
-		// ClassVisitor
-		ClassVisitor cvisitor = new ClassVisitor(abstract_unit, visitor);
-		cvisitor.accept(pkg);
-		pkg.getFOwnedTypeDefinition().add(visitor);
-		return visitor;
-		
+	ClassVisitor cvisitor;
+	
+	public void createVisitor(FPackage pkg, String name) {
+		cvisitor =  new ClassVisitor(abstract_unit);
+		cvisitor.createVisitorForPackage(pkg, name);
 	}
 	
 	/**

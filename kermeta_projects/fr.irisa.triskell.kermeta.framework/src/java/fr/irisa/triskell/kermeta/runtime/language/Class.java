@@ -9,8 +9,7 @@ public class Class {
 	// Implementation of method newObject called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject()
 	public static KermetaObject newObject(KermetaObject self) {
-		// TODO : implement that
-		return null;
+		return self.getFactory().createKermetaObject(self);
 	}
 
 
