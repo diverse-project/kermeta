@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesHandler.java,v 1.3 2005-02-22 14:30:12 zdrey Exp $
+/* $Id: KMTBodiesHandler.java,v 1.4 2005-02-22 17:20:39 zdrey Exp $
  * Created on Feb 21, 2005
  * Author : zdrey
  * Description : describe here your class role
@@ -109,17 +109,30 @@ public class KMTBodiesHandler {
     }
     
     /**
-     * Get the method in the target file from the given method name in the source extern-file
-     * @param methodName
+     * export the kermeta <b>unit</b> to the file specified by target_file.
+     * @param unit the kermeta unit to save
+     * @param target_pkg the package from which we begin the export (usually, should be 
+     * the rootPackage) 
+     * @param target_file : the target filepath in which we save the kermeta unit
      */
     public void exportKM2KMT(KermetaUnit unit, String target_pkg, String target_file) {
         // Create the target_file.kmt module
         KMTBodiesExtractor extractor = new KMTBodiesExtractor(unit);
-        extractor.backupFile(ARCH_DIR, target_file); //fixme 
+        BackupHelper.backupFile(ARCH_DIR, target_file); //fixme
         unit.load();
         pp.ppPackage(unit.packageLookup(target_pkg), new File(target_file));
+        
+        
+
+        
     }
     
+    /**
+     * @param prefix : "package" or "class" (usually, package). Use class if operations of only one 
+     * one class are written in this kmtbodies file
+     * @param qname the qualified name of the package or class in which we injected 
+     * @return a appropriate name for the &lt;file&gt;.kmtbodies...
+     */
     public String setKMTBodiesFilename(String prefix, String qname)
     {
         return prefix + "_" + qname + SUFFIX;
