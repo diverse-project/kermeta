@@ -1,6 +1,16 @@
-/*
- * Created on 16 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: RuntimeObject.java,v 1.2 2005-03-21 13:44:59 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : RuntimeObject.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mar 14, 2005
+ * Authors : 
+ * 		Franck Fleurey <ffleurey@irisa.fr>
+ * 		Jean-Philippe Thibault <jpthibau@irisa.fr>
+ * Description : This is the java representation of the Kermeta objects during the execution
+ * of a kermeta source code. Typically, a RuntimeObject corresponds to 
+ * a Kermeta object during its "life" execution. 
  */
 package fr.irisa.triskell.kermeta.runtime;
 
