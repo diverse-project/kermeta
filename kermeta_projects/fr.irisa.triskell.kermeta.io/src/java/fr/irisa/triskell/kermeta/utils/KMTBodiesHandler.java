@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesHandler.java,v 1.2 2005-02-22 08:24:23 ffleurey Exp $
+/* $Id: KMTBodiesHandler.java,v 1.3 2005-02-22 14:30:12 zdrey Exp $
  * Created on Feb 21, 2005
  * Author : zdrey
  * Description : describe here your class role
@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.expression.OperationBodyLoader;
 
 /**
  * @author zdrey
@@ -26,13 +25,17 @@ import fr.irisa.triskell.kermeta.loader.expression.OperationBodyLoader;
  */
 public class KMTBodiesHandler {
 
+    /** The class containing the method to load operation */
     protected OperationBodyLoader bodyLoader;
-    protected KermetaUnit unit;
+    /** The directory where one can find kmtbodies (a/path/+"kmtbodies") */
     protected String kmtbodies_dir;
+    /** A pretty printer to extract the bodies and "copy"(inject) them in the target unit*/
     protected KM2KMTPrettyPrinter pp; 
+    /** A set of static strings ..*/
     protected static String PKG_PREFIX = "package";
     protected static String CLASS_PREFIX = "class";
     protected static String SUFFIX = ".kmtbodies";
+    protected static String ARCH_DIR = "kmt_archives";
     
     /**
      * @param dir : the directory that contains the kmtbodies file on which we work with.
@@ -41,9 +44,15 @@ public class KMTBodiesHandler {
 
         kmtbodies_dir = dir;
         bodyLoader = new OperationBodyLoader();
-        KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
+        pp = new KM2KMTPrettyPrinter();
     }
     
+    /**
+     * Extract bodies from source_kmt file (in pkg_str) and inject them in target_kmt file
+     * @param source_kmt
+     * @param target_kmt
+     * @param pkg_str
+     */
     public void extractAndInjectForPackageFromFiles(String source_kmt, String target_kmt, String pkg_str)
     {
         // get the kermeta mmodel from file spec. by source_kmt
@@ -51,10 +60,21 @@ public class KMTBodiesHandler {
         source_unit.load();
         // get the kermeta model in which we want to inject
         KermetaUnit target_unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(target_kmt);
-        target_unit.load();
-        // extract from one to another
-        extractAndInject(PKG_PREFIX, source_unit, target_unit, pkg_str);
         
+        // extract from one to another
+        this.extractAndInject(PKG_PREFIX, source_unit, target_unit, pkg_str);
+        
+        // load the target unit so that we can pretty print its content from its root package...
+        target_unit.load();
+        
+        // archivate the target_kmt before modifying it
+        String rootpkgstr = target_unit.rootPackage.getFName();
+        
+        // save new injected-file, and archive former ones
+        File dir = new File(ARCH_DIR);
+	    if (!dir.exists()) 
+	        dir.mkdir();
+        exportKM2KMT(target_unit, rootpkgstr, target_kmt);
     }
     
     /**
@@ -71,17 +91,20 @@ public class KMTBodiesHandler {
         
         // Set a name for the extern bodies file
         String kmtb_filename = setKMTBodiesFilename(elt_type, qname);
-        // extract
+        // Create the extractor
         KMTBodiesExtractor extractor = new KMTBodiesExtractor(source_unit);
-        
+        extractor.setRootDir(kmtbodies_dir); // directory in which we work
         if (elt_type.equals(PKG_PREFIX))
             extractor.extractFromPackage(source_unit.packageLookup(qname), kmtb_filename);
         /*if (elt_type.equals(CLASS_PREFIX))
             extractor.visit(source_unit.getTypeDefinitionByName(qname));
             */
+
+        // We want to archive the target unit before modifying it.
         
-        // inject : read from source_uri
-        bodyLoader.load(target_unit, kmtb_filename);
+        // Inject : read from kmtb_filename the bodies
+        // FIXME : work with URI, refactor extractor? (put it in the handler?)
+        bodyLoader.load(target_unit, extractor.getCompleteKMTBodiesDir()+"/"+kmtb_filename);
         return target_unit;
     }
     
@@ -91,12 +114,15 @@ public class KMTBodiesHandler {
      */
     public void exportKM2KMT(KermetaUnit unit, String target_pkg, String target_file) {
         // Create the target_file.kmt module
-		pp.ppPackage(unit.packageLookup(target_pkg), new File(target_file));     
+        KMTBodiesExtractor extractor = new KMTBodiesExtractor(unit);
+        extractor.backupFile(ARCH_DIR, target_file); //fixme 
+        unit.load();
+        pp.ppPackage(unit.packageLookup(target_pkg), new File(target_file));
     }
     
     public String setKMTBodiesFilename(String prefix, String qname)
     {
-        return kmtbodies_dir + "/" + prefix + "_" + qname + SUFFIX;
+        return prefix + "_" + qname + SUFFIX;
     }
 
 }
