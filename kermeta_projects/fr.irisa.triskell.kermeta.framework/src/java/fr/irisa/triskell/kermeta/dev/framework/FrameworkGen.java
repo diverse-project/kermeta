@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.8 2005-02-24 13:59:07 ffleurey Exp $
+/* $Id: FrameworkGen.java,v 1.9 2005-02-25 15:26:36 zdrey Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -22,6 +22,7 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.utils.KMTBodiesExtractor;
 
 
 /**
@@ -33,8 +34,7 @@ public class FrameworkGen {
 	
 	KermetaUnit abstract_unit;
 	KermetaUnit concrete_unit;
-	String KMTBODIES_DIR = "kmtbodies/";
-	KM2KMTPrettyPrinter pp;
+	
 	
 	/**
 	 * Constructor 
@@ -71,18 +71,11 @@ public class FrameworkGen {
 		// TODO Create the bodies of setter and getter
 		
 		// Create the extern file where to put the bodies
-		// Convention : class_<name_of_the_meta_class>.mctbodies or classdef_<name_of_the_class>
-		File kmtbodies_file = createKMTBodiesFile("class_Class.kmtbodies");
-		
+		// Convention : class_<name_of_the_meta_class>.kmtbodies or classdef_<name_of_the_class>
+		// pkg_<pkg name>.kmtbodies
 		// Extract the properties and operations for a given class..
-		KMTBodiesExtractor bextractor = new KMTBodiesExtractor(abstract_unit, kmtbodies_file);
-		bextractor.visit(abstract_unit.getTypeDefinitionByName("kermeta::structure::Class"));
-		try {
-            bextractor.getWriter().close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		KMTBodiesExtractor bextractor = new KMTBodiesExtractor(abstract_unit);
+		bextractor.extractFromPackage(abstract_unit.packageLookup("kermeta::structure"), "package_structure.kmtbodies");
 
 		// Create the abstract.kmt reflection module
 	
@@ -119,6 +112,9 @@ public class FrameworkGen {
 		structure.setFNestingPackage(concrete_unit.packageLookup("kermeta"));
 		impl.setFNestingPackage(structure);
 		
+		// Create the concrete.kmt reflection module
+		makeConcreteClasses(concrete_unit.packageLookup("kermeta::structure"));
+		pp.ppPackage(concrete_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/concrete.kmt"));
 		if (abstract_unit.error.size() > 0) {
 			System.err.println(abstract_unit.getMessagesAsString());
 			System.exit(-1);
@@ -148,6 +144,20 @@ public class FrameworkGen {
 		
 	}
 	
+	public FClassDefinition createVisitor(FPackage pkg) {
+		// abstract class Visitor<ContextType> {
+		FClassDefinition visitor = abstract_unit.struct_factory.createFClassDefinition();
+		visitor.setFName("KMVisitor");
+		visitor.setFIsAbstract(true);
+		FTypeVariable typevar = abstract_unit.struct_factory.createFTypeVariable();
+		typevar.setFName("ContextType");
+		visitor.getFTypeParameter().add(typevar);
+		// ClassVisitor
+		ClassVisitor cvisitor = new ClassVisitor(abstract_unit, visitor);
+		cvisitor.accept(pkg);
+		pkg.getFOwnedTypeDefinition().add(visitor);
+		return visitor;
+		
 	
 	
 	public void writeAbstractStructure(FPackage abstract_structure) throws Exception {
@@ -176,33 +186,7 @@ public class FrameworkGen {
 	}
 	
 	
-	protected File createKMTBodiesFile(String filename)
-	{
-	    File dir = new File(KMTBODIES_DIR);
-	    if (!dir.exists())
-	    {
-	        dir.mkdir();
-	    }
-		String[] listdir = dir.list();
-		int save_i = 0;
-		
-		for (int i=0; i < listdir.length; i++)
-		{
-			if (listdir[i].startsWith(filename))
-			{
-				save_i += 1 ;
-			}
-		}
-		if (new File(KMTBODIES_DIR+filename).exists())
-		{
-			File oldf = new File(KMTBODIES_DIR+filename);
-			File newf = new File(KMTBODIES_DIR+filename+".bak."+(save_i+1));
-			oldf.renameTo(newf);
-		}
 	
-		return new File(KMTBODIES_DIR+filename);
-		
-	}
 	
 	ClassVisitor cvisitor;
 	
