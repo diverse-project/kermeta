@@ -5,5 +5,5 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="/fr.irisa.triskell.kermeta.io"/>
 	<classpathentry kind="src" path="/fr.irisa.triskell.kermeta.framework"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="output" path="build/class"/>
 </classpath>
