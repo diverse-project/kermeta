@@ -58,6 +58,14 @@ public class KermetaObject {
 	protected KermetaObjectFactory factory;
 	
 	/**
+	 * The constructor of unique instance
+	 */
+	public KermetaObject(String uniqueInstanceName) {
+		super();
+		this.properties.put("singleton instance",uniqueInstanceName);
+	}
+
+	/**
 	 * The constructor
 	 */
 	public KermetaObject(KermetaObjectFactory factory, KermetaObject metaclass) {

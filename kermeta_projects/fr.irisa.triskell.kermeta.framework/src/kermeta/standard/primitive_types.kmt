@@ -102,6 +102,12 @@ class Boolean
 	
 } // Boolean
 
+class TRUE inherits Boolean
+{}
+
+class FALSE inherits Boolean
+{}
+
 /**
  * The abstract class Numeric is the root class for all
  * numeric types
