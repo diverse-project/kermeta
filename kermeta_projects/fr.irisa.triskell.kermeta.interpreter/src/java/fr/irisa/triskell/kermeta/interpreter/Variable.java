@@ -1,4 +1,4 @@
-/* $Id: Variable.java,v 1.2 2005-03-21 08:47:27 zdrey Exp $
+/* $Id: Variable.java,v 1.3 2005-03-22 12:58:14 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : Variable.java
  * License : GPL
@@ -14,17 +14,20 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FType;
 
 /**
  * 
  */
 public class Variable {
 
-    /** The declaration in kermeta that correspond to this Variable */
+    /** @deprecated The declaration in kermeta that correspond to this Variable */
     protected FVariableDecl declaration ;
+    /** The type of the variable */
+    protected FType type;
     /** The value of the variable */
-    protected KermetaObject kermetaObject;
+    protected RuntimeObject RuntimeObject;
     /** The name of the variable */
     protected String name;
     /**
@@ -63,13 +66,21 @@ public class Variable {
     /**
      * @return Returns the value.
      */
-    public KermetaObject getKermetaObject() {
-        return kermetaObject;
+    public RuntimeObject getRuntimeObject() {
+        return RuntimeObject;
     }
     /**
      * @param value2 The value to set.
      */
-    public void setKermetaObject(KermetaObject kObject) {
-        this.kermetaObject = kObject;
+    public void setRuntimeObject(RuntimeObject kObject) {
+        this.RuntimeObject = kObject;
+    }
+    
+    public FType getType() {
+        return type;
+    }
+    
+    public void setType(FType pType) {
+        type = pType;
     }
 }
