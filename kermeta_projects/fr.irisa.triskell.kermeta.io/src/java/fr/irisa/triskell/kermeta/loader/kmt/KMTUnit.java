@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.4 2005-03-03 15:28:14 zdrey Exp $
+/* $Id: KMTUnit.java,v 1.5 2005-03-07 16:57:03 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -50,7 +50,6 @@ public class KMTUnit extends KermetaUnit {
 	public void parse() {
 		URI _uri = UserDirURI.createURI(this.uri);
 		KermetaParser p;
-		System.out.println("URI="+_uri);
 		try {
 		    p = new KermetaParser(new KermetaLexer(new FileInputStream(new File(_uri))));
 		} 
