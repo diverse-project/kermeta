@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.5 2005-03-02 17:31:20 zdrey Exp $
+/* $Id: KMT2KMPass7.java,v 1.6 2005-03-07 16:55:10 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -24,17 +24,26 @@
  *  the above rules dominate the below ones :
 	n1 > n3 and n2 > n1 : // c1 C "someclass1, n1 > n3 and n1 > n2 : // c1 C "someclass2"
 	n1 < n3 and n2 < n3 : // c2 C "someclass1", n1 < n3 and n2 > n3 : // c2 C "someclass2"
+	
+	
+	In a first time we will consider the following more simple rules:
+	
+	* a space between a post annotation list and its class -> post is a pre
+	* a space inside a post annotation list -> cut it into 2 sets of annotations.
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -61,8 +70,11 @@ public class KMT2KMPass7 extends KMT2KMPass {
 
     protected Stack tagStack;
     protected Annotations preceding_annLst = null; // we need it to "position" it as a pre-tag for preceding class or a post tag for next class (current class)
+    /* The annotationsList of precding_annLst as an array of FTags*/
+    protected ArrayList preceding_annArrayList = new ArrayList();
     protected FClassDefinition preceding_class;
     protected String fileData =  null;
+    protected static Pattern pattern = Pattern.compile("[\t\\s]*[\r\n][\r\n\t\\s]*"); 
 	/**
 	 * 
 	 */
@@ -89,40 +101,55 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    /* If preAnnLst is too far away from classDecl
 	     * we need to get preceding classDecl and attach it to this preceding one
 	     */
-	    System.out.print("Classe:"+builder.current_class.getFName());
+	    //System.out.print("Classe:"+builder.current_class.getFName());
 
 	    // If preceding_annLst is null, it means that our parser won't find a preAnnLst (null as well so) 
-	    preAnnLst = (preceding_annLst!=null)?preceding_annLst:preAnnLst;
-	    this.processAnnotations(preAnnLst, PRE_TAGNAME, (ASTNode)classDecl);
+	    if (preceding_annArrayList.size()>0)
+	    {
+	        processFTagArrayList(preceding_annArrayList);
+	        preceding_annArrayList.clear();
+	    }
 	    
-	    // if space between post-annotation and this class end is not one or more new
-	    java.util.regex.Pattern p = java.util.regex.Pattern.compile("\n[\n\r]+");
-	   // java.util.regex.Matcher m = p.matcher("aaaaab");
-	   // boolean b = m.matches();
+	    /* ------------ process the pre-annotations */
+	    processAnnotations(preAnnLst, PRE_TAGNAME, null);
+
+	    /* ------------ process the post annotations */
 	    // Get the chars between current class and its post annotation
-	     
 	    int class_end = classDecl.getChild(getBeforeLastChildPosition(classDecl)).getRangeEnd();
-	    int posta_start = postAnnLst.getRangeStart();
-	    // TODO : find out what the chars betwxeen class_end and posta_start are.
-	    System.out.println("class end:"+class_end+" - post start:"+classDecl.getRangeStart());
-	    System.out.println("post_dfsdf:"+postAnnLst.getFirstChild().getFirstChild().getText());
-//	    System.out.println(fileData.charAt(class_end));
-	    System.out.println("class=end="+class_end);
-	    String spacelines = fileData.substring(class_end, posta_start);
 	    
-	    // If there is at least one new line between post annotation and its class
-	    // then we do not consider it as a post annotation
-	    if (p.matcher(spacelines).matches())
+	    int posta_start = -1;
+	    if (postAnnLst.getChildCount()>0 && class_end < fileData.length())
 	    {
-	        preceding_annLst = postAnnLst; 
+	        posta_start = postAnnLst.getRangeStart();
+	        // Do we have any separating char between post annotation and class end?
+	        if (posta_start-class_end>0)
+	        {
+	            String spacelines = fileData.substring(class_end, posta_start-1);
+	            // If there is at least one new line between post annotation and its class
+	            // then we do not consider it as a post annotation
+	            if (pattern.matcher(spacelines).matches())
+	            {
+	                preceding_annLst = postAnnLst; 
+	            }
+	            else
+	            {
+	                // Do we have spacelines *inside* this postAnnList (between two Annotation objects)
+	                
+	                ArrayList[] annArrayList = createFTagFromAnnotationLst(postAnnLst);
+	                preceding_annArrayList = annArrayList[1];
+	                this.processFTagArrayList(annArrayList[0]);
+	            }
+	        }
 	    }
-	    else
-	    {
-	        preceding_annLst = null;
-		    this.processAnnotations(postAnnLst, POST_TAGNAME, (ASTNode)classDecl);
-	    }
-	    
 	    return super.beginVisit(classDecl);
+	        
+	}
+	
+	public Annotations[] cutAnnotationLst(Annotations annLst)
+	{
+	    Annotations[] annArray = new Annotations[2];
+	    
+	    return annArray;
 	}
 
 	/**
@@ -134,12 +161,14 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	public int getBeforeLastChildPosition(ClassDecl classDecl)
 	{
 	    int count = 0;
-	    if (classDecl.getChildCount() > 1 ) //&& classDecl.getLastChild() != null)
+	    if (classDecl.getChildCount() > 1 && classDecl.getLastChild() != null)
 	        count = classDecl.getChildCount()-2;
-	    else if ((classDecl.getChildCount() > 1 && classDecl.getLastChild()!=null)||classDecl.getChildCount()==1)
+	    	
+	    else if ((classDecl.getChildCount() > 1 && classDecl.getLastChild()==null)||classDecl.getChildCount()==1)
 	        count = classDecl.getChildCount()-1;
 	    else 
 	        count = 0;
+	    //System.out.println("count vaut :"+ count+ classDecl.getChild(count).getText());
 	    return count;
 	}
 	
@@ -152,15 +181,18 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    
 	    String str_uri = builder.getUri();
 	    String result = "";
+	    
 	    try {
 	      //  BufferedReader r = new BufferedReader(new FileReader(uri));
-	        			
 	         URIConverter converter = new URIConverterImpl();
 	         BufferedReader r = new BufferedReader(
 	         new InputStreamReader(converter.createInputStream(URI.createURI(str_uri))));
 	        
 	        while (r.ready()) {
-	            result += r.read(); //.readLine() + "\r\n"; // FIXME : new line are not same according to the filetype..
+	            char[] c = {(char)r.read()};
+	            String sc = (c[0]=='\t')?" ":new String(c);
+	            result += sc;
+	            //result += r.readLine() + "\r\n"; // FIXME : new line are not same according to the filetype..
 	            //System.getProperty("line.separator").length(); 
 	        }
 	        r.close();
@@ -171,7 +203,6 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
-	 
 		return result;
 	}
 
@@ -210,62 +241,109 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 * 
 	 * @param annLst The annotation list from which we get the Tag value
 	 * @param name the name of the tag 
-	 * @return a FTag KMElement
-	 * TODO :
-	 *    - annLst can contain the post Annotations of the preceding classDeclaration.
-	 * We have to manage it correctly later.
-	 * Idea : get the end-range of preceding class : 
-	 *  n1 = end-range postAnnLst minus begin-range this preAnnLst
-	 * OR
-	 *  n1bis = end-range of preceding classDecl minus begin-range of this preAnnLst
-	 * 
-	 * ???? n2 = greatest(number-of-empty-lines inside this preAnnLst??)  
+	 * @return an Array that contains 2 lists, one for the tags that belong
+	 * If there is one or more lines separating the annotation list (Annotations), we consider
+	 * that we have 2 list of tags : one list for the current class (if there is one), as "post" tags,
+	 * and one for the next class, as "pre" tags;
 	 */
-	public FTag createFTagFromAnnotationLst(Annotations annLst, String name)
+	public ArrayList[] createFTagFromAnnotationLst(Annotations annLst)
 	{
+	    boolean isDouble = false;
+	    ArrayList ftagLstPre = new ArrayList(); // list of post tags
+	    ArrayList ftagLstPost = new ArrayList();// list of pre tags (for following class)
+	    ArrayList[] ftagLstArray = new ArrayList[2];
 	    Annotation prec_a = null; // the preceding annotation
 	    String tag_value = "";
-	    String tag_name =name;
+	    //String tag_name = name;
+	    String tag_name = "";
+	    String spacelines = "";
+	    String tag_value1 = ""; String tag_value2 = "";
         ASTNode[] children = annLst.getChildren();
+        FTag tag;
         
-        // annLst.getChildCount TODO->unseparate <annotation> eleemnts only are added.
-        // "unseparate" means that the number of separating emtpy-lines is < to the number
-        // of lines after the postAnnotationList of the preceding class
+        // Get each single annotation
         for (int i=0; i< annLst.getChildCount(); i++) // children.length
         {
             if (i>0) prec_a = (Annotation)children[i-1];
             Annotation a = (Annotation)children[i];
-            /*if (a!=null) System.out.println(
-                    "offset:"+a.getRangeLength()+"=="+"text:"+a.getTextLength()+
-                    ".   beg:"+a.getRangeStart()+"-cur_beg:"+a.getRangeEnd());
-                    */
-            if (Tag.class.isInstance(a))
+            // Space between Annotation elements
+            int sep = (prec_a!=null)?(prec_a.getRangeEnd() - a.getRangeStart()):0;
+            spacelines = (sep>0)?fileData.substring(a.getRangeStart()-prec_a.getRangeEnd()):"";
+            
+            // The first separator found inside the annotationLst is enough to decide that
+            // its preceding part is a postTag for current Class and its following one is a preTag
+            // for the following class
+            if (pattern.matcher(spacelines).matches() || isDouble == true)
             {
-                tag_name  = ((Tag)a).getName().getFirstChild().getText();
-                tag_value += ((Tag)a).getVal().getText();
+                if (isDouble == false)
+                {
+                    tag_value = "";
+                }
+                isDouble = true;
+                if (Tag.class.isInstance(a))
+                {
+                    tag_name  = ((Tag)a).getName().getFirstChild().getText();
+                    tag_value = ((Tag)a).getVal().getText();
+                    tag = builder.struct_factory.createFTag();
+                    tag.setFName(tag_name); tag.setFValue(tag_value);
+                    // add the tag the second list of tags
+                    ftagLstPre.add(tag);
+                    
+                }
+                // A multiline comment? [tested] FIXME : many juxt. single lines are 1 tag
+                // We assume that user commented in a tidy way. We reassemble here all
+                // comments that are not @tags in a unique tag. This is one of the many
+                // choices that we could make.
+                else
+                {
+                    
+                    tag_value2 += a.getFirstChild().getText() + "\n";
+                }
             }
-            // A multiline comment? [tested]
             else
             {
-                tag_value += a.getFirstChild().getText();
+      //          System.out.println("No double annotation");
+                if (Tag.class.isInstance(a))
+                {
+                    tag_name  = ((Tag)a).getName().getFirstChild().getText();
+                    tag_value = ((Tag)a).getVal().getText();
+                    tag = builder.struct_factory.createFTag();
+                    tag.setFName(tag_name); tag.setFValue(tag_value);
+                    // add the tag the first list of tags
+                    ftagLstPost.add(tag);
+                }
+                // A multiline comment? [tested]
+                else
+                {
+                    tag_value2 += a.getFirstChild().getText();
+                }
             }
-            
-            
         }
-        System.out.println("list start : "+annLst.getRangeStart());
+        // Create one FTag for each assembled tag_value
+        if (tag_value1 != "")
+        {
+            tag = builder.struct_factory.createFTag();
+            tag.setFName(POST_TAGNAME); tag.setFValue(tag_value1);
+            ftagLstPost.add(tag);
+        }
+        if (tag_value2 != "")
+        {
+            tag = builder.struct_factory.createFTag();
+            tag.setFName(PRE_TAGNAME); tag.setFValue(tag_value2);
+            ftagLstPre.add(tag);
+        }
+        // remember : post tags for current class, pre tags for next class
+        ftagLstArray[0] = ftagLstPost; ftagLstArray[1] = ftagLstPre;
         
-        System.out.println("content : ["+tag_value+"]");
-        FTag tag = builder.struct_factory.createFTag();
-        tag.setFName(name);
-        tag.setFValue(tag_value);
-	    return tag;
+        return ftagLstArray;
 	}
+	
 	
 	public FTag createFTagFromAnnotation(Annotation a)
 	{
 	    String tag_value = "";
         String tag_name = "ann";
-	    System.out.println("COMMENTAIRES :"+a.getFirstChild().getText());
+	//    System.out.println("COMMENTAIRES :"+a.getFirstChild().getText());
         // Is it a Tag? [tested]
         if (Tag.class.isInstance(a))
         {
@@ -295,15 +373,38 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    FTag tag = null;
 	    // tagStack.push(tag)? // 
 	    if (annLst!=null && annLst.hasChildren())
-	    {
-	        tag = this.createFTagFromAnnotationLst(annLst, annType);
+	    {/*
+	        ArrayList[] tagListArray = this.createFTagFromAnnotationLst(annLst, annType);
             builder.current_class.getFTag().add(tag);
-	        builder.tags.put(tag.toString(), tag);// FIXME : tag.toStirng() is not a relevant key...
+	        map_put(tagListArray[0]);// FIXME : tag.toStirng() is not a relevant key...
+	        map_put(tagListArray[1]);*/
 	    }
 	    
 	    
 	    
 	    return tag;
 	}
+	
+	/**
+	 * Add the tags to current visited class
+	 * @param annALst
+	 * @param refnode
+	 */
+	protected void processFTagArrayList(ArrayList annALst)
+	{
+	    map_put(annALst);
+	}
+	
+	protected void map_put(ArrayList tagLst)
+	{
+	    Iterator it = tagLst.iterator();
+	    while (it.hasNext())
+	    {
+	        FTag tag = (FTag)it.next();
+	        builder.current_class.getFTag().add(tag);
+	        builder.tags.put(tag.toString(), tag);
+	    }
+	}
+	
 
 }
