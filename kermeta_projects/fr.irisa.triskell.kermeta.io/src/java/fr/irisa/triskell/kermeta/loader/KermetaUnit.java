@@ -1,6 +1,17 @@
-/*
- * Created on 2 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: KermetaUnit.java,v 1.6 2005-02-25 16:00:48 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : KermetaUnit.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 23, 2005
+ * Author : ffleurey
+ * Description : 
+ * 		-
+ * TODO : 
+ * 
+ * History :
+ * 		- (zd) added loadAnnotations/loadAllannotations
  */
 package fr.irisa.triskell.kermeta.loader;
 
@@ -25,7 +36,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import fr.irisa.triskell.kermeta.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.expression.OperationBodyLoader;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
@@ -40,6 +50,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
 
 /**
  * @author Franck Fleurey
@@ -540,6 +551,7 @@ public abstract class KermetaUnit {
 		loadAllStructuralFeatures();
 		loadAllOppositeProperties();
 		loadAllBodies();
+		loadAllAnnotations();
 	}
 	
 	boolean loading = false;
@@ -605,10 +617,25 @@ public abstract class KermetaUnit {
 		loading = false;
 	}
 	
+	private void loadAllAnnotations() {
+	    loading = true;
+	    loadAnnotations();
+	    for (int i=0; i<importedUnits.size(); i++) {
+	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+	        if (!iu.loading) iu.loadAllAnnotations();
+	    }
+	    loading = false;
+	}
+	
 	/**
 	 * Any pre-load action like parsing for instance
 	 */
 	public abstract void preLoad();
+	
+	/**
+	 * Loads annotations : attach annotation to the corresponding Kermeta elements
+	 */
+	public abstract void loadAnnotations();
 	
 	/**
 	 * Loads dependencies ( handles require, using, ...)
