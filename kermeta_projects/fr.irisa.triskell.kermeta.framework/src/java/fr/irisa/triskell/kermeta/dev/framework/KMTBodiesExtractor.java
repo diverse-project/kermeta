@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesExtractor.java,v 1.4 2005-02-21 09:12:23 zdrey Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.5 2005-02-21 10:20:35 zdrey Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
@@ -100,23 +100,26 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	 */
 	public Object visit(FOperation operation)
 	{
-		String op = "$";
+		String op = "";
 		
-		op += unit.getQualifiedName(operation.getFOwningClass());
-		op += "::"+operation.getFName();
-		System.out.println(op);
-		if (operation.getFBody()!=null)
-			op += "\n"+(String)pprinter.accept(operation.getFBody());
-		
-		// Write in file
-		try
+		if (!operation.isFIsAbstract())
 		{
-			w.write(op+"\n");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		    System.out.println("toto");
+		    op += "$"+unit.getQualifiedName(operation.getFOwningClass());
+		    op += "::"+operation.getFName();
+		    System.out.println(op);
+		    if (operation.getFBody()!=null)
+		        op += "\n"+(String)pprinter.accept(operation.getFBody());
+		    
+		    // Write in file
+		    try
+		    {
+		        w.write(op+"\n");
+		    } catch (IOException e) {
+		        // TODO Auto-generated catch block
+		        e.printStackTrace();
+		    }
 		}
-
 		return op;
 		
 	}
