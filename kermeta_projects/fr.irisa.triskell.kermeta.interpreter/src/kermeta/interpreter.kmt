@@ -1,6 +1,6 @@
 package kermeta::virtualmachine;
 
-require "../kermeta.kmt"
+require "../../../kermeta.kmt"
 
 using kermeta::language::behavior
 using kermeta::language::structure
@@ -141,16 +141,32 @@ class InterpreterContext {
 			result := call_stack.peek
 		end
 	
-	// returns the a Variable from its name
-	operation getVariable(variable_name : String) : Variable is do
+	// returns the a Variable from its name in current_frame
+	operation getVariableFromCurrentFrame(variable_name : String) : Variable is do
+		result := getVariableFromFrame(variable_name, current_frame)
+	end
+
+	//	returns a Variable from its name in frame
+	operation getVariableFromFrame(variable_name : String , frame : CallFrame) : Variable is do
 		var expr_context : ExpressionContext
-		from var it : Iterator<ExpressionContext> init current_frame.context_stack.iterator
+		from var it : Iterator<ExpressionContext> init frame.context_stack.iterator
 		until it.isOff or result != void
 		loop
 			expr_context := it.next
 			if expr_context.variables.containsKey(variable_name) then 
 				result := expr_context.variables.get(variable_name)
 			end
+		end
+	end	
+	
+	// find and returns a variable from its name in the entire InterpreterContext
+	operation getVariable(variable_name : String) : Variable is do
+		var frame : CallFrame
+		from var i : Integer init call_stack.size
+		until i.equals(0) or result != void
+		loop
+			result := getVariableFromFrame(variable_name, call_stack.elementAt(i))
+			i := i - 1
 		end
 	end
 	
