@@ -1,6 +1,6 @@
 package kermeta::standard;
 
-require "Base.mct"
+require "Base.kmt"
 
 /***************************************************
  * Franck FLEUREY - 14/02/2005
@@ -20,21 +20,21 @@ abstract class Collection<G>
 	 * Add an element in the collection
 	 */
 	operation add(element : G) : Void is do
-		extern metacore::runtime::Collection.add(element)
+		extern fr::irisa::triskell::kermeta::runtime::statics::Collection.add(element)
 	end
 	
 	/**
 	 * Remove an element from the collection
 	 */
 	operation remove(element : G) : Void is do
-		extern metacore::runtime::Collection.remove(element)
+		extern fr::irisa::triskell::kermeta::runtime::statics::Collection.remove(element)
 	end
 	
 	/**
 	 * Remove all elements from the collection
 	 */
 	operation clear() : Void is do
-		extern metacore::runtime::Collection.clear()
+		extern fr::irisa::triskell::kermeta::runtime::statics::Collection.clear()
 	end
 	
 	/**
@@ -60,7 +60,7 @@ abstract class Collection<G>
 	 * returns the number of elements in the collection
 	 */
 	operation size() : Integer is do
-		result ?= extern metacore::runtime::Collection.size()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Collection.size()
 	end
 	
 	/**
@@ -74,7 +74,7 @@ abstract class Collection<G>
 	 * returns an iterator on the collection
 	 */
 	operation iterator() : Iterator<G> is do
-		result ?= extern metacore::runtime::Collection.iterator()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Collection.iterator()
 	end
 	
 	/**
@@ -186,21 +186,21 @@ abstract class OrderedCollection<G> inherits Collection<G> {
 	 * adds element in the OrderedCollection at index
 	 */
 	operation addAt(index : Integer, element : G) : Void is do
-		extern metacore::runtime::OrderedCollection.addAt(index, element)
+		extern fr::irisa::triskell::kermeta::runtime::statics::OrderedCollection.addAt(index, element)
 	end
 	
 	/**
 	 * removes the element at index of the OrderedCollection
 	 */
 	operation removeAt(index : Integer) : Void is do
-		extern metacore::runtime::OrderedCollection.removeAt(index)
+		extern fr::irisa::triskell::kermeta::runtime::statics::OrderedCollection.removeAt(index)
 	end
 	
 	/**
 	 * returns the element at index in the OrderedCollection
 	 */
 	operation elementAt(index : Integer) : G is do
-		result ?= extern metacore::runtime::OrderedCollection.elementAt(index)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::OrderedCollection.elementAt(index)
 	end
 
 }
@@ -251,13 +251,13 @@ class Iterator<G>
 	 * returns true if the iterator has a next element
 	 */
 	operation hasNext() : Boolean is do
-	 	result := extern metacore::runtime::Iterator.hasNext()
+	 	result := extern fr::irisa::triskell::kermeta::runtime::statics::Iterator.hasNext()
 	end
 	
 	/**
 	 * returns the next element of the iterator
 	 */
 	operation next() : G is do
-		result := extern metacore::runtime::Iterator.next()
+		result := extern fr::irisa::triskell::kermeta::runtime::statics::Iterator.next()
 	end
 }

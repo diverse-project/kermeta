@@ -1,6 +1,6 @@
 package kermeta::standard;
 
-require "Collections.mct"
+require "Collections.kmt"
 
 /***************************************************
  * Franck FLEUREY - 14/02/2005
@@ -20,42 +20,42 @@ class Hashtable<K, V>
 	 * returns an iterator on the keys of the map
 	 */
 	operation keyIterator() : Iterator<K> is do
-		extern metacore::runtime::Map.keyIterator()
+		extern fr::irisa::triskell::kermeta::runtime::statics::Map.keyIterator()
 	end
 	
 	/**
 	 * returns an iterator on the keys of the map
 	 */
 	operation valueIterator() : Iterator<V> is do
-		extern metacore::runtime::Map.valueIterator()
+		extern fr::irisa::triskell::kermeta::runtime::statics::Map.valueIterator()
 	end
 	
 	/**
 	 * returns the value for key 'key'
 	 */
 	operation get(key : K) : V is do
-		extern metacore::runtime::Map.get(key)
+		extern fr::irisa::triskell::kermeta::runtime::statics::Map.get(key)
 	end
 	
 	/**
 	 * Adds a entry in the Hashtable
 	 */
 	operation put(key : K, ~value : V) : Void is do
-		extern metacore::runtime::Map.put(key, ~value)
+		extern fr::irisa::triskell::kermeta::runtime::statics::Map.put(key, ~value)
 	end
 	
 	/**
 	 * Removes the entry which key equals 'key'
 	 */
 	operation remove(key : K) : Void is do
-		extern metacore::runtime::Map.remove(key)
+		extern fr::irisa::triskell::kermeta::runtime::statics::Map.remove(key)
 	end
 	
 	/**
 	 * Remove all elements from the Hashtable
 	 */
 	operation clear() : Void is do
-		extern metacore::runtime::Collection.clear()
+		extern fr::irisa::triskell::kermeta::runtime::statics::Collection.clear()
 	end
 	
 	// TODO: complete this class

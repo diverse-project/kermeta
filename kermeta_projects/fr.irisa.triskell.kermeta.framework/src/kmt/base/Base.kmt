@@ -73,14 +73,14 @@ class Boolean
 	 * return self and other
 	 */ 
 	operation ~and(other : Boolean) : Boolean is do
-		result ?= extern metacore::runtime::Boolean.~and(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Boolean.~and(other)
 	end
 	
 	/**
 	 * return not self
 	 */ 
 	operation ~not() : Boolean is do
-		result ?= extern metacore::runtime::Boolean.~not()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Boolean.~not()
 	end
 	
 	/**
@@ -102,7 +102,7 @@ abstract class Numeric inherits Comparable, ValueType
 	 * Comparaison between two numerics
 	 */
 	method compareTo(other : Self) : Integer is do
-		result ?= extern metacore::runtime::Numeric.compareTo(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Numeric.compareTo(other)
 	end
 }
 
@@ -115,35 +115,35 @@ class Integer inherits Numeric
 	 * returns self + other
 	 */
 	operation plus(other : Integer) : Integer is do
-		result ?= extern metacore::runtime::Integer.plus(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Integer.plus(other)
 	end
 	
 	/**
 	 * returns self - other
 	 */
 	operation minus(other : Integer) : Integer is do
-		result ?= extern metacore::runtime::Integer.minus(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Integer.minus(other)
 	end
 	
 	/**
 	 * returns self * other
 	 */
 	operation times(other : Integer) : Integer is do
-		result ?= extern metacore::runtime::Integer.times(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Integer.times(other)
 	end
 	
 	/**
 	 * returns self / other
 	 */
 	operation div(other : Integer) : Integer is do
-		result ?= extern metacore::runtime::Integer.div(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Integer.div(other)
 	end
 	
 	/**
 	 * returns self modulo other
 	 */
 	operation mod(other : Integer) : Integer is do
-		result ?= extern metacore::runtime::Integer.mod(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Integer.mod(other)
 	end
 	
 	/**
@@ -157,14 +157,14 @@ class Integer inherits Numeric
 	 * Convert self as a Real
 	 */
 	operation toReal() : Real is do
-		result ?= extern metacore::runtime::Integer.toReal()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Integer.toReal()
 	end
 	
 	/**
 	 * returns the Integer value of String str
 	 */
 	operation parse(str : String) : Integer is do
-		extern metacore::runtime::Integer.parse()
+		extern fr::irisa::triskell::kermeta::runtime::statics::Integer.parse()
 	end
 }
 
@@ -177,35 +177,35 @@ class Real inherits Numeric
 	 * returns self + other
 	 */
 	operation plus(other : Numeric) : Integer is do
-		result ?= extern metacore::runtime::Real.plus(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Real.plus(other)
 	end
 	
 	/**
 	 * returns self - other
 	 */
 	operation minus(other : Numeric) : Integer is do
-		result ?= extern metacore::runtime::Real.minus(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Real.minus(other)
 	end
 	
 	/**
 	 * returns self * other
 	 */
 	operation times(other : Numeric) : Integer is do
-		result ?= extern metacore::runtime::Real.times(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Real.times(other)
 	end
 	
 	/**
 	 * returns self / other
 	 */
 	operation div(other : Numeric) : Integer is do
-		result ?= extern metacore::runtime::Real.div(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Real.div(other)
 	end
 	
 	/**
 	 * Convert self as a Real
 	 */
 	operation toInteger() : Integer is do
-		result ?= extern metacore::runtime::Real.toInteger()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Real.toInteger()
 	end
 	
 	/**
@@ -225,7 +225,7 @@ class Character inherits ValueType, Comparable
 	 * Comparaison
 	 */
 	method compareTo(other : Self) : Integer is do
-		result ?= extern metacore::runtime::Character.compareTo(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::Character.compareTo(other)
 	end
 }
 
@@ -239,28 +239,28 @@ class String inherits ValueType, Comparable
 	 * Comparaison
 	 */
 	method compareTo(other : Self) : Integer is do
-		result ?= extern metacore::runtime::String.compareTo(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::String.compareTo(other)
 	end
 	
 	/**
 	 * returns a new string self + other
 	 */
 	operation plus(other : String) : String is do
-		result ?= extern metacore::runtime::String.plus(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::String.plus(other)
 	end
 	
 	/**
 	 * Appends other at the end of self
 	 */
 	operation append(other : String) : Void is do
-		extern metacore::runtime::String.append(other)
+		extern fr::irisa::triskell::kermeta::runtime::statics::String.append(other)
 	end
 	
 	/**
 	 * returns the character at index in the String
 	 */
 	operation elementAt(index : Integer) : Character is do
-		result ?= extern metacore::runtime::String.elementAt(index)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::String.elementAt(index)
 	end
 	
 	/**
@@ -268,18 +268,18 @@ class String inherits ValueType, Comparable
 	 * occurrence of the specified substring
 	 */
 	operation indexOf(str : String) : Integer is do
-		result ?= extern metacore::runtime::String.indexOf(str)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::String.indexOf(str)
 	end
 	
 	/**
 	 * returns a new string that is a substring of this string
 	 */
 	operation subString(index : Integer, length : Integer) : String is do
-		result ?= extern metacore::runtime::String.subString(index, length)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::String.subString(index, length)
 	end
 	
 	operation size() : Integer is do
-		result ?= extern metacore::runtime::String.size()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::statics::String.size()
 	end
 }
 
