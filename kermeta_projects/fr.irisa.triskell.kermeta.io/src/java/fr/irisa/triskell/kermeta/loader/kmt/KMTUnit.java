@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.3 2005-03-03 10:37:35 zdrey Exp $
+/* $Id: KMTUnit.java,v 1.4 2005-03-03 15:28:14 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -13,11 +13,14 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 
-import org.eclipse.emf.common.util.URI;
+//import org.eclipse.emf.common.util.URI;
+import java.net.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
@@ -26,10 +29,11 @@ import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
+import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 
 /**
- * A class that contains methods that load a KermetaUnit from a model/object? AST
+ * A class that contains methods that load a KermetaUnit from a 
  */
 public class KMTUnit extends KermetaUnit {
 
@@ -44,11 +48,11 @@ public class KMTUnit extends KermetaUnit {
 	
 	
 	public void parse() {
-		URI uri = URI.createURI(this.uri);
-		URIConverter converter = new URIConverterImpl();
+		URI _uri = UserDirURI.createURI(this.uri);
 		KermetaParser p;
+		System.out.println("URI="+_uri);
 		try {
-		    p = new KermetaParser(new KermetaLexer(new InputStreamReader(converter.createInputStream(uri))));
+		    p = new KermetaParser(new KermetaLexer(new FileInputStream(new File(_uri))));
 		} 
 		catch (IOException e1) {
 		    error.add(new KMUnitError("i/o error loading ressource '"+this.uri+"': " + e1, null));
@@ -86,8 +90,8 @@ public class KMTUnit extends KermetaUnit {
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadAnnotations()
      */
     public void loadAnnotations() {
-        /*KMT2KMPass pass = new KMT2KMPass7(this);
-        mctAST.accept(pass);*/
+        KMT2KMPass pass = new KMT2KMPass7(this);
+        mctAST.accept(pass);
 
     }
 	public void loadBodies() {
