@@ -39,12 +39,19 @@ options {
     }
 }
 
-compUnit returns [ CompUnit retVal = null ]
+scompUnit [ Annotations postUnitAnnotations ]  returns [ ScompUnit retVal = null ]
 :
 { PackageDecl packageDecl = null; ImportStmts importStmts = null; UsingStmts usingStmts = null; TopLevelDecls topLevelDecls = null; }
-  packageDecl=packageDecl importStmts=importStmts usingStmts=usingStmts topLevelDecls=topLevelDecls EOF
-{ retVal = new CompUnit(packageDecl, importStmts, usingStmts, topLevelDecls); }
+  packageDecl=packageDecl importStmts=importStmts usingStmts=usingStmts topLevelDecls=topLevelDecls 
+{ retVal = new ScompUnit(postUnitAnnotations, packageDecl, importStmts, usingStmts, topLevelDecls); }
 ;
+
+compUnit returns [ CompUnit retVal = null ]
+:
+{ Annotations postUnitAnnotations = null; }
+  ( retVal=scompUnit[postUnitAnnotations]
+  )
+postUnitAnnotations=annotations ;
 
 packageDecl returns [ PackageDecl retVal = null ]
 :
@@ -89,6 +96,8 @@ annotations returns [ Annotations retVal = new Annotations() ]
 annotation returns [ Annotation retVal = null ]
 :
   ( retVal=tag
+  | retVal=singleLineComment
+  | retVal=multiLineComment
   )
 ;
 
@@ -97,6 +106,18 @@ tag returns [ Tag retVal = null ]
 { QualifiedID name = null; }
   at:AT name=qualifiedID val:STRING_LITERAL 
 { retVal = new Tag(at, name, val); }
+;
+
+singleLineComment returns [ SingleLineComment retVal = null ]
+:
+  single_line_comment:SINGLE_LINE_COMMENT 
+{ retVal = new SingleLineComment(single_line_comment); }
+;
+
+multiLineComment returns [ MultiLineComment retVal = null ]
+:
+  multi_line_comment:MULTI_LINE_COMMENT 
+{ retVal = new MultiLineComment(multi_line_comment); }
 ;
 
 importStmts returns [ ImportStmts retVal = new ImportStmts() ]
@@ -133,27 +154,25 @@ topLevelDecls returns [ TopLevelDecls retVal = new TopLevelDecls() ]
 
 topLevelDecl returns [ TopLevelDecl retVal = null ]
 :
-{ Annotations annotations = null; }
-annotations=annotations 
-  ( retVal=subPackageDecl[annotations]
-  | retVal=classDecl[annotations]
-  | retVal=enumDecl[annotations]
-  | retVal=dataTypeDecl[annotations]
+  ( retVal=subPackageDecl
+  | retVal=classDecl
+  | retVal=enumDecl
+  | retVal=dataTypeDecl
   )
 ;
 
-subPackageDecl [ Annotations annotations ]  returns [ SubPackageDecl retVal = null ]
+subPackageDecl returns [ SubPackageDecl retVal = null ]
 :
 { TopLevelDecls topLevelDecls = null; }
   package_KW:"package" name:ID lcurly:LCURLY topLevelDecls=topLevelDecls rcurly:RCURLY 
-{ retVal = new SubPackageDecl(annotations, package_KW, name, lcurly, topLevelDecls, rcurly); }
+{ retVal = new SubPackageDecl(package_KW, name, lcurly, topLevelDecls, rcurly); }
 ;
 
-classDecl [ Annotations annotations ]  returns [ ClassDecl retVal = null ]
+classDecl returns [ ClassDecl retVal = null ]
 :
-{ AbstractModifier abstractModifier = null; ClassKind classKind = null; TypeVarDecllst typeVarDecllst = null; Typelst superTypes = null; ClassMemberDecls classMemberDecls = null; }
-  ( abstractModifier=abstractModifier )? classKind=classKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? ( inherits_KW:"inherits" superTypes=typelst )? lcurly:LCURLY classMemberDecls=classMemberDecls rcurly:RCURLY 
-{ retVal = new ClassDecl(annotations, abstractModifier, classKind, name, lt, typeVarDecllst, gt, inherits_KW, superTypes, lcurly, classMemberDecls, rcurly); }
+{ Annotations preAnnotations = null; AbstractModifier abstractModifier = null; ClassKind classKind = null; TypeVarDecllst typeVarDecllst = null; Typelst superTypes = null; ClassMemberDecls classMemberDecls = null; Annotations postAnnotations = null; }
+  preAnnotations=annotations ( abstractModifier=abstractModifier )? classKind=classKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? ( inherits_KW:"inherits" superTypes=typelst )? lcurly:LCURLY classMemberDecls=classMemberDecls rcurly:RCURLY postAnnotations=annotations 
+{ retVal = new ClassDecl(preAnnotations, abstractModifier, classKind, name, lt, typeVarDecllst, gt, inherits_KW, superTypes, lcurly, classMemberDecls, rcurly, postAnnotations); }
 ;
 
 classKind returns [ ClassKind retVal = null ]
@@ -242,18 +261,17 @@ classMemberDecls returns [ ClassMemberDecls retVal = new ClassMemberDecls() ]
 
 classMemberDecl returns [ ClassMemberDecl retVal = null ]
 :
-{ Annotations annotations = null; }
-annotations=annotations 
-  ( retVal=operation[annotations]
-  | retVal=property[annotations]
+  ( retVal=annotation
+  | retVal=operation
+  | retVal=property
   )
 ;
 
-property [ Annotations annotations ]  returns [ Property retVal = null ]
+property returns [ Property retVal = null ]
 :
 { PropertyKind propertyKind = null; ReadOnlyModifier readOnlyModifier = null; TypeRef typeRef = null; PropertyBody propertyBody = null; }
   propertyKind=propertyKind ( readOnlyModifier=readOnlyModifier )? name:ID colon:COLON typeRef=typeRef ( hash:HASH oppositeName:ID )? ( propertyBody=propertyBody )? 
-{ retVal = new Property(annotations, propertyKind, readOnlyModifier, name, colon, typeRef, hash, oppositeName, propertyBody); }
+{ retVal = new Property(propertyKind, readOnlyModifier, name, colon, typeRef, hash, oppositeName, propertyBody); }
 ;
 
 propertyKind returns [ PropertyKind retVal = null ]
@@ -293,11 +311,11 @@ setterBody returns [ SetterBody retVal = null ]
 { retVal = new SetterBody(annotations, setter_KW, is_KW, setterbody); }
 ;
 
-operation [ Annotations annotations ]  returns [ Operation retVal = null ]
+operation returns [ Operation retVal = null ]
 :
 { OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; OperationBody operationBody = null; }
   operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( from_KW:"from" superSelection=qualifiedID )? ( raises_KW:"raises" exceptions=typelst )? is_KW:"is" operationBody=operationBody 
-{ retVal = new Operation(annotations, operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, operationBody); }
+{ retVal = new Operation(operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, operationBody); }
 ;
 
 operationKind returns [ OperationKind retVal = null ]
@@ -337,9 +355,9 @@ params returns [ Params retVal = new Params() ]
 
 param returns [ Param retVal = null ]
 :
-{ Annotations leadingAnnotations = null; TypeRef typeRef = null; Annotations trailingAnnotations = null; }
-  leadingAnnotations=annotations name:ID colon:COLON typeRef=typeRef trailingAnnotations=annotations 
-{ retVal = new Param(leadingAnnotations, name, colon, typeRef, trailingAnnotations); }
+{ Annotations preAnnotations = null; TypeRef typeRef = null; Annotations postAnnotations = null; }
+  preAnnotations=annotations name:ID colon:COLON typeRef=typeRef postAnnotations=annotations 
+{ retVal = new Param(preAnnotations, name, colon, typeRef, postAnnotations); }
 ;
 
 typeRef returns [ TypeRef retVal = null ]
@@ -383,18 +401,18 @@ simpleMultiplicityExpr returns [ SimpleMultiplicityExpr retVal = null ]
 { retVal = new SimpleMultiplicityExpr(tok); }
 ;
 
-dataTypeDecl [ Annotations annotations ]  returns [ DataTypeDecl retVal = null ]
+dataTypeDecl returns [ DataTypeDecl retVal = null ]
 :
 { Type instanceClass = null; }
   alias_KW:"alias" name:ID colon:COLON instanceClass=type semi:SEMI 
-{ retVal = new DataTypeDecl(annotations, alias_KW, name, colon, instanceClass, semi); }
+{ retVal = new DataTypeDecl(alias_KW, name, colon, instanceClass, semi); }
 ;
 
-enumDecl [ Annotations annotations ]  returns [ EnumDecl retVal = null ]
+enumDecl returns [ EnumDecl retVal = null ]
 :
 { EnumLiterals enumLiterals = null; }
   enumeration_KW:"enumeration" name:ID lcurly:LCURLY enumLiterals=enumLiterals rcurly:RCURLY 
-{ retVal = new EnumDecl(annotations, enumeration_KW, name, lcurly, enumLiterals, rcurly); }
+{ retVal = new EnumDecl(enumeration_KW, name, lcurly, enumLiterals, rcurly); }
 ;
 
 enumLiterals returns [ EnumLiterals retVal = new EnumLiterals() ]
@@ -405,9 +423,9 @@ enumLiterals returns [ EnumLiterals retVal = new EnumLiterals() ]
 
 enumLiteral returns [ EnumLiteral retVal = null ]
 :
-{ Annotations leadingAnnotations = null; }
-  leadingAnnotations=annotations name:ID semi:SEMI 
-{ retVal = new EnumLiteral(leadingAnnotations, name, semi); }
+{ Annotations preAnnotations = null; }
+  preAnnotations=annotations name:ID semi:SEMI 
+{ retVal = new EnumLiteral(preAnnotations, name, semi); }
 ;
 
 fExpressionLst returns [ FExpressionLst retVal = new FExpressionLst() ]
@@ -425,17 +443,15 @@ asingleExpression returns [ AsingleExpression retVal = null ]
 
 fExpression returns [ FExpression retVal = null ]
 :
-{ Annotations annotations = null; }
-annotations=annotations 
-  ( retVal=fAssignement[annotations]
+  ( retVal=fAssignement
   )
 ;
 
-fAssignement [ Annotations annotations ]  returns [ FAssignement retVal = null ]
+fAssignement returns [ FAssignement retVal = null ]
 :
-{ LogicalExpression expression = null; AssignementOp assignementOp = null; LogicalExpression newvalue = null; }
-  expression=logicalExpression ( assignementOp=assignementOp equals:EQUALS newvalue=logicalExpression )? 
-{ retVal = new FAssignement(annotations, expression, assignementOp, equals, newvalue); }
+{ Annotations preAnnotations = null; LogicalExpression expression = null; AssignementOp assignementOp = null; LogicalExpression newvalue = null; Annotations postAnnotations = null; }
+  preAnnotations=annotations expression=logicalExpression ( assignementOp=assignementOp equals:EQUALS newvalue=logicalExpression )? postAnnotations=annotations 
+{ retVal = new FAssignement(preAnnotations, expression, assignementOp, equals, newvalue, postAnnotations); }
 ;
 
 assignementOp returns [ AssignementOp retVal = null ]
@@ -576,8 +592,8 @@ actualParameter returns [ ActualParameter retVal = null ]
 lambdaPostfix returns [ LambdaPostfix retVal = null ]
 :
 { LambdaPostfixParamLst params = null; FExpression expression = null; }
-  lcurly:LCURLY params=lambdaPostfixParamLst pipe:PIPE expression=fExpression rcurly:RCURLY 
-{ retVal = new LambdaPostfix(lcurly, params, pipe, expression, rcurly); }
+  lcurly:LCURLY params=lambdaPostfixParamLst pipe:PIPE expression=fExpression 
+{ retVal = new LambdaPostfix(lcurly, params, pipe, expression); }
 ;
 
 lambdaPostfixParamLst returns [ LambdaPostfixParamLst retVal = new LambdaPostfixParamLst() ]
@@ -637,9 +653,9 @@ resultCall returns [ ResultCall retVal = null ]
 
 fBlock returns [ FBlock retVal = null ]
 :
-{ FExpressionLst fExpressionLst = null; FRescueLst fRescueLst = null; }
-  do_KW:"do" fExpressionLst=fExpressionLst fRescueLst=fRescueLst end_KW:"end" 
-{ retVal = new FBlock(do_KW, fExpressionLst, fRescueLst, end_KW); }
+{ Annotations annotations = null; FExpressionLst fExpressionLst = null; FRescueLst fRescueLst = null; }
+  do_KW:"do" annotations=annotations fExpressionLst=fExpressionLst fRescueLst=fRescueLst end_KW:"end" 
+{ retVal = new FBlock(do_KW, annotations, fExpressionLst, fRescueLst, end_KW); }
 ;
 
 fLambdaExpression returns [ FLambdaExpression retVal = null ]
@@ -762,6 +778,8 @@ fTypeOrVarLiteral returns [ FTypeOrVarLiteral retVal = null ]
 ;
 
 
+// $Id : $
+
 class KermetaLexer extends Lexer;
 
 options
@@ -834,44 +852,21 @@ WS : (' ' | '\t' | '\f' | '\r' | '\n')+
 { $setType(Token.SKIP); }
 ;
 
-SINGLE_LINE_COMMENT : "//" (~('\n'|'\r'))* ('\n'|'\r')?
-{ $setType(Token.SKIP); }
-;
+SINGLE_LINE_COMMENT : "//" (~('\n'|'\r'))* ('\n'|'\r'('\n')?) ;
 
-MULTI_LINE_COMMENT : "/*" ("*/" | (~'!' (~'*' | '*' ~'/')* "*/"))
-{ $setType(Token.SKIP); }
+MULTI_LINE_COMMENT : 
+	"/*"
+	(
+		{ LA(2)!='/' }? '*'
+		|	'\r' '\n'
+		|	'\r'	
+		|	'\n'	
+		|	~('*'|'\n'|'\r')
+		)*
+		"*/"
 ;
 //
 //
 //WS : (' ' | '\t' | '\f' | '\r' | '\n' )+ //{newline();}
 //{ $setType(Token.SKIP); }
 //;
-//
-//SINGLE_LINE_COMMENT : ("--" | "//" ) (~('\n'|'\r'))* ('\n'|'\r')? //{newline();}
-//{ $setType(Token.SKIP); }
-//;
-//
-//// multiple-line comments
-//MULTI_LINE_COMMENT
-//	:	"/*"
-//		(	/*	'\r' '\n' can be matched in one alternative or by matching
-//				'\r' in one iteration and '\n' in another.  I am trying to
-//				handle any flavor of newline that comes in, but the language
-//				that allows both "\r\n" and "\r" and "\n" to all be valid
-//				newline is ambiguous.  Consequently, the resulting grammar
-//				must be ambiguous.  I'm shutting this warning off.
-//			 */
-//			options {
-//				generateAmbigWarnings=false;
-//			}
-//		:
-//			{ LA(2)!='/' }? '*'
-//		|	'\r' '\n'		//{newline();}
-//		|	'\r'			//{newline();}
-//		|	'\n'			//{newline();}
-//		|	~('*'|'\n'|'\r')
-//		)*
-//		"*/"
-//	{ $setType(Token.SKIP); }
-//	;
-//

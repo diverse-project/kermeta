@@ -72,17 +72,15 @@ WS : (' ' | '\t' | '\f' | '\r' | '\n')+
 { $setType(Token.SKIP); }
 ;
 
-SINGLE_LINE_COMMENT : "//" (~('\n'|'\r'))* ('\n'|'\r'('\n')?)
-{newline();}
-;
+SINGLE_LINE_COMMENT : "//" (~('\n'|'\r'))* ('\n'|'\r'('\n')?) ;
 
 MULTI_LINE_COMMENT : 
 	"/*"
 	(
 		{ LA(2)!='/' }? '*'
-		|	'\r' '\n'		{newline();}
-		|	'\r'			{newline();}
-		|	'\n'			{newline();}
+		|	'\r' '\n'
+		|	'\r'	
+		|	'\n'	
 		|	~('*'|'\n'|'\r')
 		)*
 		"*/"
@@ -92,32 +90,3 @@ MULTI_LINE_COMMENT :
 //WS : (' ' | '\t' | '\f' | '\r' | '\n' )+ //{newline();}
 //{ $setType(Token.SKIP); }
 //;
-//
-//SINGLE_LINE_COMMENT : ("--" | "//" ) (~('\n'|'\r'))* ('\n'|'\r')? //{newline();}
-//{ $setType(Token.SKIP); }
-//;
-//
-//// multiple-line comments
-//MULTI_LINE_COMMENT
-//	:	"/*"
-//		(	/*	'\r' '\n' can be matched in one alternative or by matching
-//				'\r' in one iteration and '\n' in another.  I am trying to
-//				handle any flavor of newline that comes in, but the language
-//				that allows both "\r\n" and "\r" and "\n" to all be valid
-//				newline is ambiguous.  Consequently, the resulting grammar
-//				must be ambiguous.  I'm shutting this warning off.
-//			 */
-//			options {
-//				generateAmbigWarnings=false;
-//			}
-//		:
-//			{ LA(2)!='/' }? '*'
-//		|	'\r' '\n'		//{newline();}
-//		|	'\r'			//{newline();}
-//		|	'\n'			//{newline();}
-//		|	~('*'|'\n'|'\r')
-//		)*
-//		"*/"
-//	{ $setType(Token.SKIP); }
-//	;
-//
