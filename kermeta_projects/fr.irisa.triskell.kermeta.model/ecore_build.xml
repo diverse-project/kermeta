@@ -1,0 +1,71 @@
+<project name="MetaCore" default="build_kermeta_model" basedir=".">
+	
+	<description>
+        Build file for MetaCore
+    </description>
+
+	<!-- CLASSPATH AND LIBRARY : Change that to fit your config -->
+	<property name="eclipse_dir" location="/home/apps/eclipse3"/>
+	
+	<property name="libdir" location="./lib"/>
+	
+	<path id="full.classpath">
+			<pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.common_2.0.1/runtime/common.jar"/>
+		    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore_2.0.1/runtime/ecore.jar"/>
+		    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore.xmi_2.0.1/runtime/ecore.xmi.jar"/>
+			<pathelement location="../EcoreMerge/runtime/"/>
+		    <pathelement path="${classpath}"/>
+			<pathelement path="./build/class/"/>
+			<fileset dir="${libdir}" includes="**/*.jar"/>
+	</path>
+	
+		<!-- SOURCE DIR -->
+		<property name="src.dir" location="./src/ecore"/>	
+		
+		<!-- BUILD DIR -->
+		<property name="build.dir" location="./build/ecore"/>		
+	
+		<!-- DIST DIR -->
+		<property name="dist.dir" location="./dist"/>		
+	
+	
+	<!-- BUILD kermeta MODEL -->
+	<target name="build_kermeta_model">
+		<echo> Merging  base models</echo>
+		<java classname="fr.irisa.triskell.kermeta.dev.transfo.ecore.PackageMerge" fork="yes" classpathref="full.classpath">
+			<arg line="${build.dir}/kermeta.ecore ${src.dir}/behavior ${src.dir}/structure"/>
+		</java>
+
+		<echo> Updating package NSUri and NS prefix...</echo>
+		<java classname="fr.irisa.triskell.kermeta.dev.transfo.ecore.FixPackageNSUri" fork="yes" classpathref="full.classpath">
+			<arg line="${build.dir}/kermeta.ecore"/>
+		</java>
+		
+		
+		<copyfile dest="${build.dir}/kermeta_java.ecore" src="${build.dir}/kermeta.ecore"/>
+		
+		<copyfile dest="${dist.dir}/kermeta.ecore" src="${build.dir}/kermeta.ecore"/>
+		
+		<java classname="fr.irisa.triskell.kermeta.dev.transfo.ecore.KermetaPrimitiveTypes" fork="yes" classpathref="full.classpath">
+						<arg line="${build.dir}/kermeta.ecore"/>
+				</java> 
+		
+		<echo> Updating element names for eclipse plugin... </echo>
+		<java classname="fr.irisa.triskell.kermeta.dev.transfo.ecore.CustomizeName" fork="yes" classpathref="full.classpath">
+				<arg line="${build.dir}/kermeta_java.ecore"/>
+		</java> 
+		
+		<echo> Generating visitor... </echo>
+		<mkdir dir="src/java/fr/irisa/triskell/kermeta/visitor"/>
+		<java classname="fr.irisa.triskell.kermeta.dev.transfo.ecore.CreateGenericVisitor" fork="yes" classpathref="full.classpath">
+			<arg line="${build.dir}/kermeta_java.ecore fr.irisa.triskell.kermeta.visitor ./src/java/fr/irisa/triskell/kermeta/visitor Kermeta"/>
+		</java> 
+
+		<echo> Done. </echo>
+	</target>
+	
+	
+
+	
+	
+</project>

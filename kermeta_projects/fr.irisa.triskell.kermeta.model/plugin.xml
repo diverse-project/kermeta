@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: plugin.xml,v 1.1 2005-02-16 11:29:29 ffleurey Exp $
+ */
+-->
+
+<plugin
+    name = "%pluginName"
+    id = "fr.irisa.triskell.kermeta.model"
+    version = "1.0.0"
+    provider-name = "%providerName">
+
+  <requires>
+    <import plugin="org.eclipse.core.runtime" />
+    <import plugin="org.eclipse.emf.ecore" export="true"/>
+  </requires>
+
+  <runtime>
+    <library name="runtime/fr.irisa.triskell.kermeta.model.jar">
+      <export name="*"/>
+    </library>
+  </runtime>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://kermeta_behavior/kermeta.ecore" 
+       class = "kermeta.behavior.BehaviorPackage" />
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://kermeta_structure/kermeta.ecore" 
+       class = "kermeta.structure.StructurePackage" />
+  </extension>
+
+</plugin>
+

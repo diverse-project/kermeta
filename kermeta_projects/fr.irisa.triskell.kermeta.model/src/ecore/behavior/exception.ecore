@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
+    nsURI="http://ftm" nsPrefix="ftm/">
+  <eSubpackages name="behavior" nsURI="" nsPrefix="">
+    <eClassifiers xsi:type="ecore:EClass" name="Raise" eSuperTypes="#//behavior/Expression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+          eType="#//behavior/Expression" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Rescue" eSuperTypes="#//structure/Object">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" lowerBound="1"
+          upperBound="-1" eType="#//behavior/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="exceptionType" lowerBound="1"
+          eType="#//behavior/TypeReference" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionName" eType="#//structure/String"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Block">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" upperBound="-1"
+          eType="#//behavior/Rescue" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeReference"/>
+  </eSubpackages>
+  <eSubpackages name="structure">
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Object"/>
+  </eSubpackages>
+</ecore:EPackage>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
+    nsURI="http://ftm" nsPrefix="ftm">
+  <eSubpackages name="structure" nsPrefix="ftm/structure">
+    <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true" eSuperTypes="#//structure/Object">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" upperBound="-1"
+          eType="#//structure/Type" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//structure/TypeContainer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//structure/TypeContainer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" eSuperTypes="#//structure/TypeContainer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ProductType" eSuperTypes="#//structure/TypeContainer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FunctionType" eSuperTypes="#//structure/TypeContainer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Object"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Type"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeVariableBinding" eSuperTypes="#//structure/TypeContainer"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//structure/TypeContainer"/>
+  </eSubpackages>
+</ecore:EPackage>

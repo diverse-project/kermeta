@@ -1,0 +1,159 @@
+/*
+ * Created on 8 janv. 2005
+ *
+ * TODO To change the template for this generated file go to
+ * Window - Preferences - Java - Code Style - Code Templates
+ */
+package fr.irisa.triskell.kermeta.dev.transfo.ecore;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Iterator;
+
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EObject;
+
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+/**
+ * @author franck
+ *
+ * TODO To change the template for this generated type comment go to
+ * Window - Preferences - Java - Code Style - Code Templates
+ */
+public class CreateGenericVisitor {
+	
+	public static void main(String[] args) {
+		
+		// there should be 3 args :
+		// 1/ the model (.ecore)
+		// 2/ the name of the package to generate in
+		// 3/ output directory
+		// 4/ Class name
+		String ecorefile = args[0];
+		String packagename = args[1];
+		String outdir = args[2];		
+		String className = args[3];
+		
+		// load the ecore model
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
+		ResourceSet resource_set = new ResourceSetImpl();
+		Resource resource = resource_set.getResource(URI.createFileURI(args[0]), true);
+		
+		String result = getClassTemplate();
+		result = result.replaceAll("XclassNameX", className + "Visitor");
+		result = result.replaceAll("XpackageNameX", packagename);
+		
+		String methods = "";
+		// add a method per concrete class
+		TreeIterator it = resource.getAllContents();
+		while(it.hasNext()) {
+			EObject o = (EObject)it.next();
+			if (o instanceof EClass) {
+				EClass c = (EClass)o;
+				if (!c.isAbstract()) {
+					String myOp = getvisitMethodTemplate();
+					myOp = myOp.replaceAll("XtypeNameX", getQualifiedName(c));
+					methods += myOp + '\n';
+				}
+			}
+		}
+		result = result.replaceAll("XvisitMethodsX", methods);
+		
+		String outfile = new File(outdir).getAbsolutePath() + "/" +className + "Visitor" + ".java";
+		
+		try {
+			FileWriter w = new FileWriter(outfile);
+			w.write(result);
+			w.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private static String getQualifiedName(ENamedElement element) {
+		if (element.eContainer() != null && element.eContainer() instanceof ENamedElement)
+			return getQualifiedName((ENamedElement)element.eContainer()) + "." + element.getName();
+		else return element.getName();
+	}
+	
+	protected static String visitMethodTemplate;
+	protected static String getvisitMethodTemplate() {
+		if (visitMethodTemplate == null) {
+			visitMethodTemplate = "	public Object visit(fr.irisa.triskell.XtypeNameX node) {\n";
+			visitMethodTemplate += "	return genericVisitChildren(node);\n";
+			visitMethodTemplate += "	}\n";
+		}
+		return visitMethodTemplate;
+	}
+	
+	protected static String classTemplate;
+	protected static String getClassTemplate() {
+		if (classTemplate == null) {
+			classTemplate = "/*\n";
+			classTemplate += " * This code has been generated to visit an ecore model\n";
+			classTemplate += " * Template Created on 7 févr. 2005\n";
+			classTemplate += " * By Franck FLEUREY (ffleurey@irisa.fr)\n";
+			classTemplate += " */\n";
+			classTemplate += "package XpackageNameX;\n";
+			classTemplate += "\n";
+			classTemplate += "import java.lang.reflect.*;\n";
+			classTemplate += "import java.util.Iterator;\n";
+			classTemplate += "import org.eclipse.emf.ecore.EObject;\n";
+			classTemplate += "\n";
+			classTemplate += "/**\n";
+			classTemplate += " * @author Franck Fleurey\n";
+			classTemplate += " * IRISA / University of rennes 1\n";
+			classTemplate += " * Distributed under the terms of the GPL license\n";
+			classTemplate += " */\n";
+			classTemplate += "public class XclassNameX {\n";
+			classTemplate += "\n";	
+			classTemplate +="			// This is a generic visit method.\n";
+			classTemplate +="			public Object genericVisitChildren(EObject node) {\n";
+			classTemplate +="				Object result = null;\n";
+			classTemplate +="				Iterator children = node.eContents().iterator();\n";
+			classTemplate +="				while (children.hasNext()) {\n";
+			classTemplate +="					EObject child = (EObject)children.next();\n";
+			classTemplate +="					accept(child);\n";
+			classTemplate +="				}\n";
+			classTemplate +="				return result;\n";
+			classTemplate +="			}\n";
+			classTemplate +="			\n";
+			classTemplate +="			public Object accept(EObject node) {\n";
+			classTemplate +="				Object result = null;\n";
+			classTemplate +="				try {\n";
+			classTemplate +="					Class[] ptypes = new Class[1];\n";
+			classTemplate +="					String cname = node.getClass().getName();\n";
+			classTemplate +="					cname = cname.substring(0, cname.length()-4).replaceAll(\".impl\", \"\");\n";
+			classTemplate +="					ptypes[0] = Class.forName(cname);\n";
+			classTemplate +="					Method m = this.getClass().getMethod(\"visit\", ptypes);\n";
+			classTemplate +="					Object[] params = new Object[1];\n";
+			classTemplate +="					params[0] = node;\n";
+			classTemplate +="					result = m.invoke(this, params);\n";
+			classTemplate +="				}\n";
+			classTemplate +="				catch (SecurityException e) {	e.printStackTrace(); }\n";
+			classTemplate +="				catch (NoSuchMethodException e) { e.printStackTrace(); } \n";
+			classTemplate +="				catch (IllegalArgumentException e) { e.printStackTrace(); } \n";
+			classTemplate +="				catch (IllegalAccessException e) { e.printStackTrace(); }\n";
+			classTemplate +="				catch (InvocationTargetException e) { e.printStackTrace(); }\n";
+			classTemplate +="				catch (ClassNotFoundException e) {e.printStackTrace();}\n";
+			classTemplate +="				return result;\n";
+			classTemplate +="			}\n";
+			classTemplate += "\n";	
+			classTemplate += "XvisitMethodsX\n";	
+			classTemplate += "\n";	
+			classTemplate += "}\n";	
+		}
+		return classTemplate;
+	}
+}

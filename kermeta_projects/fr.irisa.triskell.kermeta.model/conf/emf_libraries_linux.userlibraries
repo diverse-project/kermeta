@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries version="1">
+    <library name="emf_libraries" systemlibrary="false">
+        <archive path="/home/apps/eclipse3/plugins/org.eclipse.emf.common_2.0.1/runtime/common.jar"/>
+        <archive path="/home/apps/eclipse3/plugins/org.eclipse.emf.ecore_2.0.1/runtime/ecore.jar"/>
+        <archive path="/home/apps/eclipse3/plugins/org.eclipse.emf.ecore.xmi_2.0.1/runtime/ecore.xmi.jar"/>
+    </library>
+</eclipse-userlibraries>

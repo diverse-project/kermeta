@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
+    nsURI="http://ftm" nsPrefix="ftm">
+  <eSubpackages name="behavior">
+    <eClassifiers xsi:type="ecore:EClass" name="TypeReference" eSuperTypes="#//structure/MultiplicityElement"/>
+  </eSubpackages>
+  <eSubpackages name="structure" nsPrefix="ftm/structure">
+    <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement"/>
+  </eSubpackages>
+</ecore:EPackage>
