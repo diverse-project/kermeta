@@ -1,4 +1,4 @@
-/* $Id: UserDirURI.java,v 1.2 2005-03-07 17:36:11 jpthibau Exp $
+/* $Id: UserDirURI.java,v 1.3 2005-03-08 14:47:01 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : UserDirURI.java
  * License : GPL
@@ -44,7 +44,7 @@ public class UserDirURI
 			}
 			curSlash=curSlash+1+filenameWithSlashes.substring(curSlash+1).indexOf('/');
 		} while (! reached);
-		System.out.println("creating file "+userDir+filename+"...");
+		System.out.println("creating file "+filenameWithSlashes+"...");
 		File lookedFile=new File(filenameWithSlashes);
 		try {
 			if (! lookedFile.createNewFile())

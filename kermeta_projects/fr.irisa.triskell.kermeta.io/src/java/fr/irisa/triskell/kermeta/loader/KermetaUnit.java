@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.8 2005-03-07 17:35:29 jpthibau Exp $
+/* $Id: KermetaUnit.java,v 1.9 2005-03-08 14:48:14 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -510,7 +510,8 @@ public abstract class KermetaUnit {
 		    }
 			visited = false;
 //			String file_name = URI.createURI(uri).lastSegment().replace('.', '_') + ".kcore";
-			String file_name = uri.replace('.', '_') + ".kcore";
+			int lastSlash=uri.lastIndexOf('/');
+			String file_name = uri.substring(0,lastSlash+1)+uri.substring(lastSlash+1,uri.length()).replace('.', '_') + ".kcore";
 			
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("kcore",new XMIResourceFactoryImpl()); 
 			ResourceSet resource_set = new ResourceSetImpl();
