@@ -1,9 +1,7 @@
 package kermeta;
 
-require "./standard/collections.kmt"
-require "./reflection/reflection.kmt"
-require "./language/structure.kmt"
+require "./language/behavior.kmt"
+require "./utils/stack.kmt"
+require "./utils/hashtable.kmt"
 require "./language/reflective_collections.kmt"
 
-require "./utils/hashtable.kmt"
-require "./utils/stack.kmt"
