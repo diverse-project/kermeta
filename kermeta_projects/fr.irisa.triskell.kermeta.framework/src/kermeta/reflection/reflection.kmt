@@ -22,23 +22,23 @@ abstract class Class inherits Type
 	attribut typeParamBinding : set TypeVariableBinding[0..*]
 	property readonly ownedAttribute : set Property[0..*]
 		getter is do
-			//TODO: implement getter for derived property ownedAttribute
+			result := classDefinition.ownedAttribute
 		end
 	property readonly ownedOperation : set Operation[0..*]
 		getter is do
-			//TODO: implement getter for derived property ownedOperation
+			result := classDefinition.ownedOperation
 		end
 	property readonly superClass : set Class[0..*]
 		getter is do
-			//TODO: implement getter for derived property superClass
+			result := classDefinition.superType
 		end
 	property readonly isAbstract : Boolean
 		getter is do
-			//TODO: implement getter for derived property isAbstract
+			result := classDefinition.isAbstract
 		end
 	property readonly name : String
 		getter is do
-			//TODO: implement getter for derived property name
+			result := classDefinition.name
 		end
 	operation new() : Object is abstract
 }
@@ -52,7 +52,7 @@ abstract class MultiplicityElement inherits TypedElement
 abstract class Operation inherits MultiplicityElement
 {
 	attribut isAbstract : Boolean
-	attribut body : kermeta::language::behavior::Expression
+
 	reference superOperation : Operation
 	reference owningClass : ClassDefinition#ownedOperation
 	reference typeParameter : set TypeVariable[0..*]
@@ -67,8 +67,6 @@ abstract class Tag inherits Object
 }
 abstract class Property inherits MultiplicityElement
 {
-	attribut getterbody : kermeta::language::behavior::Expression
-	attribut setterbody : kermeta::language::behavior::Expression
 	reference owningClass : ClassDefinition#ownedAttributes
 	reference opposite : Property
 	attribut isReadOnly : Boolean
