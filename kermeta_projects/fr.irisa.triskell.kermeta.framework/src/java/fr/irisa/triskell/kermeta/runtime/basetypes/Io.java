@@ -1,4 +1,4 @@
-/* $Id: Io.java,v 1.1 2005-03-30 14:51:38 zdrey Exp $
+/* $Id: Io.java,v 1.2 2005-03-31 15:36:22 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : GPL
@@ -46,7 +46,7 @@ public class Io {
 		    System.out.println("JavaStaticCall error : IO error trying to read from input");
 		    
 		}
-		RuntimeObject result = String.create(input);
+		RuntimeObject result = String.create(input, self.getFactory());
 		return result;
 	}
 
