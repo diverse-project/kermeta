@@ -5,9 +5,11 @@
 package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 
 import fr.irisa.triskell.kermeta.runtime.factory.KermetaObjectFactory;
+import fr.irisa.triskell.kermeta.structure.FProperty;
 
 /**
  * @author Franck Fleurey
@@ -33,6 +35,12 @@ public class KermetaObject {
 	 * Indexed by the name of the property
 	 */
 	protected Hashtable properties = new Hashtable();
+	
+	/**
+	 * The values of propertiesGenerators. 
+	 * Indexed by the name of the property
+	 */
+	protected Hashtable propertiesGenerators = new Hashtable();
 	
 	/**
 	 * Data contained in the object
@@ -107,6 +115,12 @@ public class KermetaObject {
 		return properties;
 	}
 	/**
+	 * @return Returns the propertiesGenerators.
+	 */
+	public Hashtable getPropertiesGenerators() {
+		return propertiesGenerators;
+	}
+	/**
 	 * @param metaclass The metaclass to set.
 	 */
 	public void setMetaclass(KermetaObject metaclass) {
@@ -120,7 +134,17 @@ public class KermetaObject {
 	}
 	
 	public KermetaObject instanciate(List attributes) {
-		return null;
+		KermetaObject instance=new KermetaObject(this.getFactory(),this);
+		Hashtable propertiesGenerators=instance.getPropertiesGenerators();
+		Hashtable properties=instance.getProperties();
+		Iterator it=attributes.iterator();
+		while (it.hasNext()) {
+			KermetaObject attribute=(KermetaObject)it.next();
+			String attribName=((FProperty)attribute.getData().get("kcoreObject")).getFName();
+			propertiesGenerators.put(attribName,attribute);
+			properties.put(attribName,KMDummyObject.INSTANCE);
+		}
+		return instance;
 	}
 	
 	

@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.3 2005-03-11 08:36:07 jpthibau Exp $
+/* $Id: KMMetaBuilder.java,v 1.4 2005-03-11 16:30:37 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -386,6 +386,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 		knode.setData(data);
 		Hashtable properties=(Hashtable)this.currentClassNode.getProperties().get("FOwnedOperation");
 		properties.put(node.getFName(),knode);
+		knode.getProperties().put("container",this.currentClassNode);
 		return null;
 	}
 	
@@ -450,8 +451,9 @@ public class KMMetaBuilder extends KermetaVisitor {
 		data.put("kcoreObject",node);
 		knode.setData(data);
 		Hashtable properties=(Hashtable)this.currentClassNode.getProperties().get("FOwnedAttributes");
-		String nameFirstcharUp=node.getFName().substring(0,1).toUpperCase()+node.getFName().substring(1,node.getFName().length());
-		properties.put(nameFirstcharUp,knode);
+//		String nameFirstcharUp=node.getFName().substring(0,1).toUpperCase()+node.getFName().substring(1,node.getFName().length());
+		properties.put(node.getFName(),knode);
+		knode.getProperties().put("container",this.currentClassNode);
 		return null;
 	}
 	

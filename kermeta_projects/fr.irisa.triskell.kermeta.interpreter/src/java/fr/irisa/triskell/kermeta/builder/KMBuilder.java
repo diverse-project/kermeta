@@ -1,4 +1,4 @@
-/* $Id: KMBuilder.java,v 1.3 2005-03-11 08:36:06 jpthibau Exp $
+/* $Id: KMBuilder.java,v 1.4 2005-03-11 16:30:36 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -32,9 +32,11 @@ import fr.irisa.triskell.kermeta.behavior.*;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.reflect.KMReflect;
 import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.structure.*;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
+import fr.irisa.triskell.kermeta.launcher.Run;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
 
@@ -49,17 +51,19 @@ public class KMBuilder extends KermetaVisitor {
 	protected Hashtable allClasses;
 	protected Stack packagesStack;
 	protected KermetaObject currentClassNode;
+	protected KermetaObject reflectivecollectionMetaclass;
 	
 	protected boolean typedef = false;
 	
 	public Hashtable ppPackage(KermetaUnit unit,Hashtable allMetaClasses) {
 		this.allMetaClasses=allMetaClasses;
 		allClasses=new Hashtable();
+		reflectivecollectionMetaclass=(KermetaObject)this.allMetaClasses.get("kermeta::language::reflective_collections::ReflectiveCollection");
 		String currentpackageName=unit.getQualifiedName(unit.rootPackage);
 		List packagesNames=new ArrayList();
 		packagesNames.add(currentpackageName);
 		this.packagesStack=new Stack();
-		ppPackageContents(unit.rootPackage,unit);
+		ppPackageContents(unit.rootPackage);
 		ppPackageImportedpackagess(unit,packagesNames);
 		return allClasses;
 	}
@@ -72,18 +76,20 @@ public class KMBuilder extends KermetaVisitor {
 			if ( !packagesNames.contains(iuName)) {
 				packagesNames.add(iuName);
 				this.packagesStack=new Stack();
-				ppPackageContents(iu.rootPackage,iu);
+				ppPackageContents(iu.rootPackage);
 				ppPackageImportedpackagess(iu,packagesNames);
 			}
 		}
 	}
 
-	public void ppPackageContents(FPackage p,KermetaUnit unit) {
+	public void ppPackageContents(FPackage p) {
 		KermetaObject pMetaclass=(KermetaObject)this.allMetaClasses.get("kermeta::language::structure::Package");
-		KermetaObject pNode=pMetaclass.instanciate(KMReflect.allAttributes(unit,pMetaclass,allMetaClasses));
+		KermetaObject pNode=pMetaclass.instanciate(KMReflect.allAttributes(pMetaclass,allMetaClasses));
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",p);
 		pNode.setData(data);
+		if (! this.packagesStack.isEmpty())
+			pNode.getProperties().put("container",this.packagesStack.peek());
 		this.packagesStack.push(pNode);
 		ppCRSeparatedNode(p.getFOwnedTypeDefinition());
 		ppCRSeparatedNode(p.getFNestedPackage());
@@ -138,13 +144,11 @@ public class KMBuilder extends KermetaVisitor {
 		return result;
 	}
 	
-	public String ppCRSeparatedNode(EList expressions) {
-		String result = "";
+	public void ppCRSeparatedNode(EList expressions) {
 		Iterator it = expressions.iterator();
 		while(it.hasNext()) {
-			result += getPrefix() + this.accept((EObject)it.next()) + "\n";
+			this.accept((EObject)it.next());
 		}
-		return result;
 	}
 	
 	/**
@@ -218,9 +222,14 @@ public class KMBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
 	public Object visit(FClassDefinition node) {
-		typedef = false;
-		String result = "";
-		
+		KermetaObject nodeMetaclass=(KermetaObject)this.allMetaClasses.get("kermeta::language::structure::Class");
+		KermetaObject knode=nodeMetaclass.instanciate(KMReflect.allAttributes(nodeMetaclass,allMetaClasses));
+		Hashtable data=new Hashtable();
+		data.put("kcoreObject",node);
+		knode.setData(data);
+		this.currentClassNode=knode;
+		String qualifiedName=KMReflect.getQualifiedName(node);
+		this.allClasses.put(qualifiedName,knode);
 
 		// Get the pre Annotation of this class 
 		if (node.getFTag().size()>0)
@@ -228,44 +237,40 @@ public class KMBuilder extends KermetaVisitor {
 		    FTag[] pretagArray = this.getFTagsByName(node.getFTag(), KMT2KMPass.PRE_TAGNAME);
 		    for (int i=0; i< pretagArray.length && pretagArray[i]!=null; i++)
 		    {
-		        result += this.accept((EObject)pretagArray[i]);
+		        this.accept((EObject)pretagArray[i]);
 		    }
 		}
-		
-		
-		if (node.isFIsAbstract()) result += "abstract ";
-		result += "class " + ppIdentifier(node.getFName());
-		if (node.getFTypeParameter().size() > 0) {
-			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
-			result += ">";
-		}
-		if (node.getFSuperType().size() > 0) {
-			result += " inherits ";
-			result += ppComaSeparatedNodes(node.getFSuperType());
-		}
-		result += "\n" + getPrefix() + "{\n";
-		pushPrefix();
-		result += ppCRSeparatedNode(node.getFOwnedAttributes());
-		result += ppCRSeparatedNode(node.getFOwnedOperation());
-		popPrefix();
-		result += getPrefix() + "}";		
-		
-		typedef = true;
-		
+		Hashtable properties=knode.getProperties();
+		Iterator it=properties.keySet().iterator();
+		while (it.hasNext())
+			System.out.println(it.next());
+		KermetaObject test=//Boolean.TRUE;
+		if (node.isFIsAbstract())
+			properties.put("isAbstract",Boolean.FALSE);
+		else properties.put("isAbstract",Boolean.TRUE);
+		properties.put("name",node.getFName());
+		if (node.getFTypeParameter().size() > 0)
+			properties.put("typeParamBinding",ppTypeVariableDeclaration(node.getFTypeParameter()));
+
+		KermetaObject aRefCollection=this.reflectivecollectionMetaclass.instanciate(KMReflect.allAttributes(this.reflectivecollectionMetaclass,allMetaClasses));
+		properties.put("ownedAttribute",aRefCollection);	
+		ppCRSeparatedNode(node.getFOwnedAttributes());
+
+		aRefCollection=this.reflectivecollectionMetaclass.instanciate(KMReflect.allAttributes(this.reflectivecollectionMetaclass,allMetaClasses));
+		properties.put("ownedOperation",aRefCollection);
+		ppCRSeparatedNode(node.getFOwnedOperation());
+
 		// Get post annotations
 		if (node.getFTag().size()>0)
 		{
-		    // get pre annotation
+		    // get post annotation
 		    FTag[] posttagArray = this.getFTagsByName(node.getFTag(), KMT2KMPass.POST_TAGNAME);
 		    for (int i=0; i< posttagArray.length && posttagArray[i]!=null; i++)
 		    {
-		        result += this.accept(posttagArray[i]);
+		        this.accept(posttagArray[i]);
 		    }
 		}
-		
-		
-		return result;
+		return null;
 	}
 	
 	/**
