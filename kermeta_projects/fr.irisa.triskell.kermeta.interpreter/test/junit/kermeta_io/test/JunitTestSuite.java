@@ -71,7 +71,16 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
+public void test10_testLoop() throws Exception {
+testWithFile("test/kmt_testcases","10_testLoop.kmt" );
+}
+
+/*public void test11_testBenchmark() throws Exception {
+testWithFile("test/kmt_testcases","11_testBenchmark.kmt" );
+}*/
+
 public void test1_testAssignment() throws Exception {
 testWithFile("test/kmt_testcases","1_testAssignment.kmt" );
 }
@@ -88,12 +97,20 @@ public void test4_testOpOpCall() throws Exception {
 testWithFile("test/kmt_testcases","4_testOpOpCall.kmt" );
 }
 
+/*public void test5_failtestExternPackageCall() throws Exception {
+testWithFile("test/kmt_testcases","5_failtestExternPackageCall.kmt" );
+}
+
 public void test5_testExternPackageCall() throws Exception {
 testWithFile("test/kmt_testcases","5_testExternPackageCall.kmt" );
 }
 
 public void test5_testOpPkgCall() throws Exception {
 testWithFile("test/kmt_testcases","5_testOpPkgCall.kmt" );
+}
+
+public void test6_failtestExternPackageCall() throws Exception {
+testWithFile("test/kmt_testcases","6_failtestExternPackageCall.kmt" );
 }
 
 public void test6_testExternPackageCall() throws Exception {
@@ -124,11 +141,19 @@ public void test9_testOpCallObject() throws Exception {
 testWithFile("test/kmt_testcases","9_testOpCallObject.kmt" );
 }
 
+public void testcollections() throws Exception {
+testWithFile("test/kmt_testcases","collections.kmt" );
+}
+
+public void testprimitive_types() throws Exception {
+testWithFile("test/kmt_testcases","primitive_types.kmt" );
+}*/
+
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 	
 	public void testWithFile(String dir, String file) throws Exception {
-		Run.main(new String[] {dir+file} );
+		Run.main(new String[] {dir+"/"+file} );
 	}
 	
 

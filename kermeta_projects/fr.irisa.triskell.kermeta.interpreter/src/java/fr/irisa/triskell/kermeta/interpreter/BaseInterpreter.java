@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.9 2005-04-05 12:56:04 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.10 2005-04-05 14:33:25 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -566,7 +566,8 @@ public class BaseInterpreter extends KermetaVisitor {
 		    if (FClass.class.isInstance(type))
 		    {
 		        FClassDefinition class_def = ((FClass)type).getFClassDefinition();
-		        result = Run.koFactory.createObjectFromClassName(class_def.getFName());
+		        RuntimeObject runtimeClass=(RuntimeObject)Run.koFactory.getClassDefTable().get(KMReflect.getQualifiedName(class_def));
+		        result = Run.koFactory.createRuntimeObject(runtimeClass);
 		    }
 		    // Is it an enum literal? result -> a RO which type is an enumliteral
 		    else if (FEnumeration.class.isInstance(target))
