@@ -1,4 +1,4 @@
-/* $Id: Variable.java,v 1.4 2005-03-25 16:42:17 zdrey Exp $
+/* $Id: Variable.java,v 1.5 2005-04-04 14:37:28 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : Variable.java
  * License : GPL
@@ -24,33 +24,22 @@ public class Variable {
 
     /**
      * @deprecated The declaration in kermeta that correspond to this Variable
-     * 
-     * @uml.property name="declaration"
-     * @uml.associationEnd multiplicity="(0 1)"
      */
     protected FVariableDecl declaration;
 
     /**
      * The type of the variable
      * 
-     * @uml.property name="type"
-     * @uml.associationEnd multiplicity="(0 1)"
      */
     protected FType type;
 
     /**
      * The value of the variable
-     * 
-     * @uml.property name="runtimeObject"
-     * @uml.associationEnd qualifier="constant:java.lang.String java.util.ArrayList" multiplicity=
-     * "(0 1)"
      */
-    protected RuntimeObject RuntimeObject;
+    protected RuntimeObject runtimeObject;
 
     /**
      * The name of the variable
-     * 
-     * @uml.property name="name" multiplicity="(0 1)"
      */
     protected String name;
 
@@ -98,34 +87,28 @@ public class Variable {
     }
 
     /**
-     * @return Returns the value.
-     * 
-     * @uml.property name="runtimeObject"
+     * @return Returns the value of this variable.
      */
     public RuntimeObject getRuntimeObject() {
-        return RuntimeObject;
+        return runtimeObject;
     }
 
     /**
-     * @param value2 The value to set.
-     * 
-     * @uml.property name="runtimeObject"
+     * @param kObject value to set for this variable.
      */
     public void setRuntimeObject(RuntimeObject kObject) {
-        this.RuntimeObject = kObject;
+        this.runtimeObject = kObject;
     }
 
     /**
-     * 
-     * @uml.property name="type"
+     * @return type of this variable
      */
     public FType getType() {
         return type;
     }
 
     /**
-     * 
-     * @uml.property name="type"
+     * @param type type to set for this variable. 
      */
     public void setType(FType pType) {
         type = pType;
