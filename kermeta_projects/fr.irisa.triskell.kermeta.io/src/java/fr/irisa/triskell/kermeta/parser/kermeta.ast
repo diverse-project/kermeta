@@ -1,3 +1,5 @@
+// $Id: $
+
 language Kermeta;
 	
 options { 
@@ -7,10 +9,10 @@ defaultErrorHandler=false;
 
 //abstract abstractCompUnit : (annotations) compUnit (annotations) ;
 
-//sequence compUnit [entry] : scompUnit;
-sequence scompUnit : packageDecl importStmts usingStmts topLevelDecls ;
+// not ok : (annotations) added at the end of just below sequence - conflicts
+sequence scompUnit : packageDecl importStmts usingStmts topLevelDecls  ;
 
-abstract compUnit [entry] : scompUnit | annotations;
+abstract compUnit [entry] : scompUnit (postUnitAnnotations=annotations);
 
 sequence packageDecl : annotations "package" name=qualifiedID SEMI ;
 
@@ -39,7 +41,7 @@ sequence usingStmt : "using" name=qualifiedID ;
 
 list topLevelDecls : topLevelDecl* ;
 
-abstract topLevelDecl : (annotations) subPackageDecl | classDecl | enumDecl | dataTypeDecl (annotations); //| enumDecl | mapEntryDecl ;
+abstract topLevelDecl : (preAnnotations=annotations) subPackageDecl | classDecl | enumDecl | dataTypeDecl (postAnnotations=annotations); //| enumDecl | mapEntryDecl ;
 
 sequence subPackageDecl : "package" name=ID LCURLY topLevelDecls RCURLY ;
 
@@ -110,7 +112,7 @@ list fExpressionLst : fExpression* ;
 
 sequence asingleExpression : fExpression ;
 // an annotation is considered as an fExpression. In 
-abstract fExpression : (annotations) fAssignement (annotations);
+abstract fExpression : (preAnnotations=annotations) fAssignement (postAnnotations=annotations);
 			
 sequence fAssignement : expression=logicalExpression (assignementOp EQUALS newvalue=logicalExpression)?;
 token assignementOp : COLON | QMARK ;
