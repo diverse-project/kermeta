@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesExtractor.java,v 1.1 2005-02-21 14:09:56 zdrey Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.2 2005-02-21 15:24:39 zdrey Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
@@ -21,6 +21,7 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
@@ -38,23 +39,24 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	protected KermetaUnit unit;
 	/**To pretty print the body of visited operations/properties*/
 	protected KM2KMTPrettyPrinter pprinter;
+	protected String kmtbodies;
 	
 	/**
 	 * Constructor
 	 * @param u : the kermetaUnit : we need it to construct Ftags and an Emptybody
 	 * @param kmtb_filename : <file>.kmtbodies to create
 	 */
-	public KMTBodiesExtractor(KermetaUnit u, String kmtb_filename) {
+	public KMTBodiesExtractor(KermetaUnit u) {
 		super();
-		kmtbodies_file = createKMTBodiesFile(kmtb_filename);
+		kmtbodies = "";
 		unit = u;
 		pprinter = new KM2KMTPrettyPrinter();
-		try {
-			w = new FileWriter(kmtbodies_file);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	}
+	
+	public void extractFromPackage(FPackage pkg, String file)
+	{
+	    visit(pkg);
+	    writeKMTBodies(file);
 	}
 	
 	/**
@@ -81,17 +83,7 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 		
 		String ops = setter+"\n\n"+getter+"\n\n"; 
 		
-		// Write in file
-		try
-		{
-			w.write(ops);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
+		kmtbodies += ops;
 		return ops;
 	}
 	
@@ -109,16 +101,8 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 		    System.out.println(op);
 		    if (operation.getFBody()!=null)
 		        op += "\n"+(String)pprinter.accept(operation.getFBody());
-		    
-		    // Write in file
-		    try
-		    {
-		        w.write(op+"\n");
-		    } catch (IOException e) {
-		        // TODO Auto-generated catch block
-		        e.printStackTrace();
-		    }
 		}
+		kmtbodies += op+"\n";
 		return op;
 		
 	}
@@ -177,6 +161,19 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	
 		return new File(KMTBODIES_DIR+filename);
 		
+	}
+	
+	public void writeKMTBodies(String kmtb_filename)
+	{
+	    kmtbodies_file = createKMTBodiesFile(kmtb_filename);
+		try {
+			w = new FileWriter(kmtbodies_file);
+			w.write(kmtbodies);
+		    w.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
