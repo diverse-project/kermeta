@@ -1,4 +1,4 @@
-package kermeta::structure;
+package kermeta::standard::reflection;
 
 require "Collections.kmt"
 

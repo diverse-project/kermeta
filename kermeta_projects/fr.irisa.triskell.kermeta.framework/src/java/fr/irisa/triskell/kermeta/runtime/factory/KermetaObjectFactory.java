@@ -73,7 +73,7 @@ public class KermetaObjectFactory {
 	private KermetaObject class_class;
 	protected KermetaObject getClassClass() {
 		if (class_class == null) {
-			class_class = new KermetaObject(null);
+			class_class = new KermetaObject(this, null);
 			class_class.setMetaclass(class_class);
 			class_class.getProperties().put("classDefinition", classdef_table.get("kermeta::structure::Class"));
 		}
@@ -88,11 +88,11 @@ public class KermetaObjectFactory {
 	public KermetaObject createObject(String class_name) {
 		KermetaObject metaclass = (KermetaObject)class_table.get(class_name);
 		if (metaclass == null) {
-			metaclass = new KermetaObject(class_class);
+			metaclass = new KermetaObject(this, class_class);
 			metaclass.getProperties().put("classDefinition", classdef_table.get(class_name));
 			class_table.put(class_name, metaclass);
 		}
-		KermetaObject result = new KermetaObject(metaclass);
+		KermetaObject result = new KermetaObject(this, metaclass);
 		//TODO : take care of default values here
 		CreationCommand command = getCommandForClass(class_name);
 		// TODO : it should call the creation commands of all superclasses

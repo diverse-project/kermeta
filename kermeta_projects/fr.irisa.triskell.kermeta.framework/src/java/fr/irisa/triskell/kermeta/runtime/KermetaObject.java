@@ -6,6 +6,8 @@ package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.Hashtable;
 
+import fr.irisa.triskell.kermeta.runtime.factory.KermetaObjectFactory;
+
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
@@ -14,7 +16,7 @@ import java.util.Hashtable;
  * This is the java implemetation of a Kermeta object 
  */
 public class KermetaObject {
-
+	
 	/**
 	 * The meta class
 	 */
@@ -42,11 +44,17 @@ public class KermetaObject {
 	protected boolean frozen = false;
 	
 	/**
+	 * The kermeta object factory used to create this object 
+	 */
+	protected KermetaObjectFactory factory;
+	
+	/**
 	 * The constructor
 	 */
-	public KermetaObject(KermetaObject metaclass) {
+	public KermetaObject(KermetaObjectFactory factory, KermetaObject metaclass) {
 		super();
 		this.metaclass = metaclass;
+		this.factory = factory;
 	}
 
 	/**
@@ -102,5 +110,11 @@ public class KermetaObject {
 	 */
 	public void setMetaclass(KermetaObject metaclass) {
 		this.metaclass = metaclass;
+	}
+	/**
+	 * @return Returns the factory.
+	 */
+	public KermetaObjectFactory getFactory() {
+		return factory;
 	}
 }

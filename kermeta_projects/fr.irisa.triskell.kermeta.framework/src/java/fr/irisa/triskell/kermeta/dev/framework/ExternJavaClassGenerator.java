@@ -19,6 +19,8 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.KermetaLoader;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.factory.CreationCommand;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
@@ -95,7 +97,24 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 			
 		}
 		
+		/*
+		String createcode = getCreateTemplate();
+		createcode = createcode.replaceAll("CLASSNAME", cname);
 		
+		out = new File(out_dir + "/fr/irisa/triskell/kermeta/runtime/factory/" + cname + "CreationCommand.java");
+		
+		if (!out.exists()) {
+			try {
+				BufferedWriter w = new BufferedWriter(new FileWriter(out));
+				w.write(createcode);
+				w.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		*/
 		return result;
 	}
 	
@@ -122,6 +141,7 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 	}
 	
 	public static String class_template = null;
+	public static String create_template = null;
 	public static String method_template = null;
 	
 	public static String getCTemplate() {
@@ -136,6 +156,21 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 			class_template += "/* END OF FILE */\n";
 		}
 		return class_template;
+	}
+	
+	public static String getCreateTemplate() {
+		if (create_template == null) {
+			create_template  = "/* Implementation of Kermeta base type CLASSNAME */\n\n";
+			create_template += "package fr.irisa.triskell.kermeta.runtime.factory;\n\nimport fr.irisa.triskell.kermeta.runtime.KermetaObject;\n\n";
+			create_template += "public class CLASSNAMECreationCommand extends CreationCommand {\n";
+			create_template += "\n";
+			create_template += "\tpublic void execute(KermetaObject object) {\n";
+			create_template += "\t\t// TODO Auto-generated method stub\n";
+			create_template += "\t}\n\n";
+			create_template += "}\n";
+			create_template += "/* END OF FILE */\n";
+		}
+		return create_template;
 	}
 	
 	public static String getMTemplate() {

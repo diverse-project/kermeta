@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.3 2005-02-18 13:05:20 zdrey Exp $
+/* $Id: FrameworkGen.java,v 1.4 2005-02-21 08:30:11 ffleurey Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -49,7 +49,10 @@ public class FrameworkGen {
 		
 		//concrete_unit = KermetaLoader.getDefaultLoader().load("../src/ecore/kermeta.emf");
 		
-		//System.out.println(abstract_unit.error.size());
+		if (abstract_unit.error.size() > 0) {
+			System.err.println(abstract_unit.getMessagesAsString());
+			System.exit(-1);
+		}
 		
 		createVisitor(abstract_unit.packageLookup("kermeta"));
 		
@@ -66,8 +69,9 @@ public class FrameworkGen {
 */
 		// Create the abstract.kmt reflection module
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-		pp.ppPackage(abstract_unit.packageLookup("kermeta"), new File("src/kmt/reflection/abstract.kmt"));
-
+		pp.ppPackage(abstract_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/AbstractStructure.kmt"));
+		pp.ppPackage(abstract_unit.packageLookup("kermeta::behavior"), new File("src/kmt/reflection/KermetaBehavior.kmt"));
+		pp.ppPackage(abstract_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/KermetaStructure.kmt"));
 	}
 	
 	protected File createKMTBodiesFile(String filename)

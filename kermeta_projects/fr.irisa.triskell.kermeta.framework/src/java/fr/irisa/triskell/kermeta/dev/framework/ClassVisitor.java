@@ -5,6 +5,7 @@
 package fr.irisa.triskell.kermeta.dev.framework;
 
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
+import fr.irisa.triskell.kermeta.behavior.FBlock;
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
 import fr.irisa.triskell.kermeta.behavior.FCallResult;
 import fr.irisa.triskell.kermeta.behavior.FCallVariable;
@@ -116,7 +117,9 @@ public class ClassVisitor extends KermetaVisitor {
 		fc.getFParameters().add(varcontext);
 		ass.setFIsCast(false);
 		ass.setFValue(fc);
-		result.setFBody(ass);
+		FBlock block = unit.behav_factory.createFBlock();
+		block.getFStatement().add(ass);
+		result.setFBody(block);
 		result.setFUpper(1);
 		
 		// And then add visit<> to visitor

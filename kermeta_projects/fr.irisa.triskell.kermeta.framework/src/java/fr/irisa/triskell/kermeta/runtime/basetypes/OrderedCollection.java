@@ -9,22 +9,22 @@ public class OrderedCollection {
 	// Implementation of method addAt called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection::addAt(index, element)
 	public static KermetaObject addAt(KermetaObject self, KermetaObject param0, KermetaObject param1) {
-		// TODO : implement that
-		return null;
+		Collection.getArrayList(self).add(Integer.getValue(param0), param1);
+		return Void.VOID;
 	}
 
 	// Implementation of method removeAt called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection::removeAt(index)
 	public static KermetaObject removeAt(KermetaObject self, KermetaObject param0) {
-		// TODO : implement that
-		return null;
+		Collection.getArrayList(self).remove(Integer.getValue(param0));
+		return Void.VOID;
 	}
 
 	// Implementation of method elementAt called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection::elementAt(index)
 	public static KermetaObject elementAt(KermetaObject self, KermetaObject param0) {
-		// TODO : implement that
-		return null;
+		KermetaObject result = (KermetaObject)Collection.getArrayList(self).get(Integer.getValue(param0));
+		return result;
 	}
 
 

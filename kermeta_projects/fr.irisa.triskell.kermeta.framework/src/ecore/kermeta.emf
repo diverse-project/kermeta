@@ -132,13 +132,14 @@ package structure {
   datatype Integer : "kermeta::standard::Integer";
 
   class Class extends Type {
-    op Object create();
+    op Object new();
     ref ClassDefinition[1] classDefinition;
     val TypeVariableBinding[*] typeParamBinding;
-    derived ref Property[*] ownedAttribute;
-    derived ref Operation[*] ownedOperation;
-    derived ref Class[*] superClass;
-    derived attr Boolean isAbstract = "false";
+    readonly derived ref Property[*] ownedAttribute;
+    readonly derived ref Operation[*] ownedOperation;
+    readonly derived ref Class[*] superClass;
+    readonly derived attr Boolean isAbstract = "false";
+    readonly derived attr String name;
   }
 
   class MultiplicityElement extends TypedElement {
@@ -176,11 +177,6 @@ package structure {
     attr Boolean isID;
   }
 
-  class ReflectiveCollection extends Object {
-    ref Object object;
-    ref Property property;
-  }
-
   abstract class TypeContainer extends Object {
     val Type[*] containedType;
   }
@@ -197,7 +193,7 @@ package structure {
     ref Type type;
   }
 
-  class TypeVariable extends TypeContainer, Type {
+  class TypeVariable extends TypeContainer, Type, NamedElement {
     ref Type supertype;
   }
 
@@ -210,7 +206,7 @@ package structure {
     ref Type right;
   }
 
-  class Type extends NamedElement {
+  class Type extends Object {
     op Boolean isInstance(Object element);
   }
 
@@ -259,27 +255,6 @@ package structure {
   }
 
   datatype UnlimitedNatural : "kermeta::standard::UnlimitedNatural";
-
-  class Factory extends Object {
-    op Object createFromString(DataType dataType, String string);
-    op String convertToString(DataType dataType, Object element);
-    op Object create(Class metaClass);
-    ref Package[1] ~package;
-  }
-
-  class Extent extends Object {
-    op Boolean useContainment();
-    op ReflectiveSequence objects();
-  }
-
-  class URIExtent extends Extent {
-    op String contextURI();
-    op String uri(Object object);
-    op Object object(String uri);
-  }
-
-  class ReflectiveSequence extends ReflectiveCollection {
-  }
 
 }
 

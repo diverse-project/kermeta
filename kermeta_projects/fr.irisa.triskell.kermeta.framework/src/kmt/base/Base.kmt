@@ -10,6 +10,13 @@ package kermeta::standard;
  *************************************************** */
 
 /**
+ * The class Void 
+ * By convention it is a sub-type of everything
+ */
+class ~Void {}
+
+
+/**
  * The abstract class ValueType does not contain any feature
  * but any instance of a sub-class of ValueType will be passed by value 
  * instead of by reference for any other objects.
@@ -90,6 +97,7 @@ class Boolean
 		// using the 'and' and 'not' operators
 		result := not (self.~not() and other.~not()) 
 	end
+	
 } // Boolean
 
 /**
@@ -160,12 +168,6 @@ class Integer inherits Numeric
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toReal()
 	end
 	
-	/**
-	 * returns the Integer value of String str
-	 */
-	operation parse(str : String) : Integer is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.parse()
-	end
 }
 
 /**
