@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.2 2005-03-22 12:56:50 zdrey Exp $
+/* $Id: ExpressionContext.java,v 1.3 2005-03-25 16:43:40 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -29,17 +29,28 @@ import fr.irisa.triskell.kermeta.structure.FType;
  * inside a block.
  */
 public class ExpressionContext {
-    
-       
-	// The expression associated to this context
+
+    /**
+     * 
+     * @uml.property name="root"
+     * @uml.associationEnd multiplicity="(0 1)"
+     */
+    // The expression associated to this context
     // Typically : a FLoop, FConditional, and one for the FOperationBody if any var.
     // is declared inside it and at the top level. 
-	FExpression root; // should be a RuntimeObject?
+    FExpression root; // should be a RuntimeObject?
 
-	// The set of variable defined in this block
-	// key : the name of the variable (String)
-	// value : the variable itself (Variable)
-	Hashtable variables ;
+    /**
+     * 
+     * @uml.property name="variables"
+     * @uml.associationEnd qualifier="name:java.lang.String fr.irisa.triskell.kermeta.interpreter.Variable"
+     * multiplicity="(0 1)"
+     */
+    // The set of variable defined in this block
+    // key : the name of the variable (String)
+    // value : the variable itself (Variable)
+    Hashtable variables;
+
 	
 	/**
 	 * Constructor 
@@ -132,21 +143,27 @@ public class ExpressionContext {
 	        result = (Variable)variables.get(name);
 	    return result;
 	}
-	
-	/*
-	 * 
-	 * A C C E S S O R S
-	 * 
-	 *
-	 */
-	public void setRoot(FExpression pRoot)
-	{
-	    root = pRoot;
-	}
-	
-	public Hashtable getVariables()
-	{
-	    return variables;
-	}
+
+    /**
+     * 
+     * @uml.property name="root"
+     */
+    /*
+     * 
+     * A C C E S S O R S
+     * 
+     *
+     */
+    public void setRoot(FExpression pRoot) {
+        root = pRoot;
+    }
+
+    /**
+     * 
+     * @uml.property name="variables"
+     */
+    public Hashtable getVariables() {
+        return variables;
+    }
 
 }
