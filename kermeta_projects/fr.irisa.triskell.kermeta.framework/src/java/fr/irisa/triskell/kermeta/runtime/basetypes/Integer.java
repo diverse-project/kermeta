@@ -1,10 +1,16 @@
-/* Implementation of Kermeta base type Integer */
+/* $Id :$ 
+ * Implementation of Kermeta base type Integer 
+ */
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
 public class Integer {
+    
+    // FIXME : is it tidy to do this?
+    public static RuntimeObjectFactory factory = new RuntimeObjectFactory();
 
 	// Implementation of method plus called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::plus(other)
@@ -62,6 +68,12 @@ public class Integer {
 		return Numeric.getNumericValue(integer).intValue();
 	}
 
+	public static RuntimeObject create(int value)
+	{
+	    RuntimeObject result = factory.createObjectFromClassName("kermeta::standard::Integer");
+	    setValue(result, value);
+	    return result;
+	}
 
 }
 /* END OF FILE */

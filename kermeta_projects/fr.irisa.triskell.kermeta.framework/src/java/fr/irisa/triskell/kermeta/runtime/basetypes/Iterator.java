@@ -1,4 +1,6 @@
-/* Implementation of Kermeta base type Iterator */
+/* $Id: Iterator.java,v 1.6 2005-03-22 10:58:15 zdrey Exp $
+ * Implementation of Kermeta base type Iterator 
+ */
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 

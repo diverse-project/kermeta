@@ -1,10 +1,15 @@
-/* Implementation of Kermeta base type String */
+/* $Id : $
+ * Implementation of Kermeta base type String 
+ */
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
 public class String {
+    
+    public static RuntimeObjectFactory factory = new RuntimeObjectFactory();
 
 	// Implementation of method compareTo called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::compareTo(other)
@@ -68,6 +73,12 @@ public class String {
 	public static java.lang.String getValue(RuntimeObject str) {
 		if (!str.getData().containsKey("StringValue")) setValue(str, "");
 		return (java.lang.String)str.getData().get("StringValue");
+	}
+	
+	public static RuntimeObject create(java.lang.String value) {
+	    RuntimeObject result = factory.createObjectFromClassName("kermeta::standard::String");
+	    setValue(result, value);
+	    return result;
 	}
 	
 }
