@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.3 2005-03-25 16:43:40 zdrey Exp $
+/* $Id: ExpressionContext.java,v 1.4 2005-03-30 16:32:31 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -115,20 +115,15 @@ public class ExpressionContext {
 	 */
 	public void setVariable(String name, RuntimeObject object)
 	{
-		//RuntimeObject result = declaration.getFactory().createClassFromClassDefinition(type_def);
-		Variable var = new Variable();
-		var.setName(name);
-		var.setRuntimeObject(object);
-		
 		if (variables.containsKey(name))
 		{
-		    variables.put(name, var);
+			Variable var = (Variable)variables.get(name);
+			var.setRuntimeObject(object);
 		}
-		/*else
+		else
 		{
-		    System.err.println("Interpreter Error : "+ could not add variable : not declared);
-		}*/
-		//return result;
+		    System.err.println("Interpreter Error : could not set the undeclared variable "+name);
+		}
 	}
 	
 	/***

@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.7 2005-03-29 17:06:01 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.8 2005-03-30 16:32:33 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -314,27 +314,53 @@ public class BaseInterpreter extends KermetaVisitor {
 	 */
 	public Object visit(FLoop node)
 	{
-	    RuntimeObject cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
-        String value = null;
-        // Get boolean value
-        if (cond_result.getProperties().containsKey("singleton instance"))
-            value = (String)cond_result.getProperties().get("singleton instance");
-        else
-        {
-            // TODO : throw an InterpreterException 
-        }
-        
         // Push a new expressionContext in the current CallFrame. 
         interpreterContext.getCurrentFrame().pushNewExpressionContext(node);
         // Accept initialization (a FVariableDecl) : add a new variable in the ExpressionContext
         this.accept(node.getFInitiatization());
+        String value = null;
         
-	    while (value.equals("TRUE INSTANCE"))
+	    do
 	    {
-	        this.accept(node.getFBody());
-	        cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
-	        value = (String)cond_result.getProperties().get("singleton instance");
-	    }
+/*	    	//	    	TO DEBUG STACK
+	        ExpressionContext context = null;
+	        int stackSize = this.interpreterContext.getFrameStack().size();
+	        int i=stackSize;
+	        CallFrame frame;
+	        while (i>0) {
+	        	System.out.println("CallFrame "+i);
+	            frame = (CallFrame)interpreterContext.getFrameStack().get(i-1);
+	            int blockStackSize = frame.getBlockStack().size();
+	            int j = blockStackSize;
+	            while (j>0) 
+	            {
+	            	System.out.println("ExpressionFrame "+j);
+	                context = (ExpressionContext)frame.getBlockStack().get(j-1);
+	                Iterator it=context.getVariables().keySet().iterator();
+	                while (it.hasNext())
+	                {
+	                	String key=(String)it.next();
+	                    System.out.println(key+" : "+context.getVariables().get(key));
+	                }
+	                j--;
+	            }
+	            i--;
+	        }
+	        //TO DEBUG STACK */
+	    	
+		    RuntimeObject cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
+	        // Get boolean value
+	        if (cond_result.getProperties().containsKey("singleton instance"))
+	            value = (String)cond_result.getProperties().get("singleton instance");
+	        else
+	        {
+	            // TODO : throw an InterpreterException 
+	        	System.err.println("Loop : evaluation of the condition ^part does not result in a boolean value.");
+	        }
+	        
+	        if (value.equals("FALSE INSTANCE"))
+	        	this.accept(node.getFBody());
+	    } while (value.equals("FALSE INSTANCE"));
 	    
 	    // Pop the expression context
 	    interpreterContext.getCurrentFrame().popExpressionContext();
@@ -809,6 +835,7 @@ public class BaseInterpreter extends KermetaVisitor {
                 }
                 j--;
             }
+            i--;
         }
         return context;
     }
@@ -868,7 +895,7 @@ public class BaseInterpreter extends KermetaVisitor {
         Iterator st_it = classDef.getFSuperType().iterator();
         while (st_it.hasNext() && result == null)
         {
-            FClassDefinition next = (FClassDefinition)st_it.next();
+            FClassDefinition next = ((FClass)st_it.next()).getFClassDefinition();
             result = getFlatFeatureType(next, feature);
             // If we still have not found them, find in super types! 
             if (result == null)

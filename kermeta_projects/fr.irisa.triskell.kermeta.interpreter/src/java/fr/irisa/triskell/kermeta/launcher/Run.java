@@ -133,7 +133,8 @@ public class Run extends TestCase {
 				System.err.println("\nSTARTING INTERPRETATION OF MAIN OPERATION...");
 				System.err.println("############################################");
 				BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder);
-				System.out.println("RESULT : "+baseInterpreter.invoke(mainClassInstance,mainOp,arguments));
+				Object result=baseInterpreter.invoke(mainClassInstance,mainOp,arguments);
+				System.out.println("RESULT : "+result);
 			}
 		}
 		}
