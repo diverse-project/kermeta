@@ -18,6 +18,13 @@ public class Numeric {
 		return result;
 	}
 
+	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
+		double self_v = getNumericValue(self).doubleValue();
+		double param0_v = getNumericValue(param0).doubleValue();
+		if (self_v == param0_v) return Boolean.TRUE;
+		else return Boolean.FALSE;
+	}
+
 	public static Number getNumericValue(RuntimeObject numeric) {
 		if (!numeric.getData().containsKey("NumericValue")) numeric.getData().put("NumericValue", new java.lang.Integer(0));
 		return ((java.lang.Number)numeric.getData().get("NumericValue"));
