@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.4 2005-03-23 15:31:56 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.5 2005-03-25 13:53:31 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -137,6 +137,7 @@ public class BaseInterpreter extends KermetaVisitor {
 				);
 				*/
 	    //RuntimeObject ko = factory.createRuntimeObject(node);
+	    // TODO : node.getFInit can be null -
 	    RuntimeObject ro_init = (RuntimeObject)this.accept(node.getFInitialization());
 	    interpreterContext.getCurrentFrame().getCurrentExpressionContext().defineVariable(
 	            node.getFType().getFType(), node.getFIdentifier(), ro_init);
@@ -496,7 +497,6 @@ public class BaseInterpreter extends KermetaVisitor {
 		    {
 		        result = null; // TODO : get the enumliteral in the registered RuntimeObjects//From KMBuilder
 		    }
-		    
 		    // Is it something else?
 		    else
 		    {
@@ -596,6 +596,11 @@ public class BaseInterpreter extends KermetaVisitor {
 	 */
 	public Object visit(FBooleanLiteral node) {
 	    return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(node.isFValue());
+	}
+	
+	public Object visit(FEnumerationLiteral node)
+	{
+	    return null;
 	}
 	
     /** 
