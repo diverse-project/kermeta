@@ -23,6 +23,7 @@ using kermeta::utils
 class Interpreter inherits KMExpressionVisitor<InterpreterContext, Object>
 {
 	method visitCallVariable(node : CallVariable, context : InterpreterContext) : Object is do
+		// What if it has parameters
 		result := context.getVariable(node.name).value
 	end
 	
