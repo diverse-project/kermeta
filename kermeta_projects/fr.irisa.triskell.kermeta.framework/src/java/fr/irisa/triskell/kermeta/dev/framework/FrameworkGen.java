@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.9 2005-02-25 15:26:36 zdrey Exp $
+/* $Id: FrameworkGen.java,v 1.10 2005-02-25 15:36:39 zdrey Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -112,9 +112,7 @@ public class FrameworkGen {
 		structure.setFNestingPackage(concrete_unit.packageLookup("kermeta"));
 		impl.setFNestingPackage(structure);
 		
-		// Create the concrete.kmt reflection module
-		makeConcreteClasses(concrete_unit.packageLookup("kermeta::structure"));
-		pp.ppPackage(concrete_unit.packageLookup("kermeta::structure"), new File("src/kmt/reflection/concrete.kmt"));
+				
 		if (abstract_unit.error.size() > 0) {
 			System.err.println(abstract_unit.getMessagesAsString());
 			System.exit(-1);
@@ -124,7 +122,7 @@ public class FrameworkGen {
 		
 		// Create the abstract classes
 		makeAbstractClasses(abstract_unit.packageLookup("kermeta::structure"));
-		
+		// Create the concrete.kmt reflection module
 		makeConcreteClasses(impl);
 		
 		createVisitor(impl, "KMStructure");
