@@ -2,6 +2,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 version='1.0'>
 
+<!-- support for xi:include -->
+<!--<xsl:import href="xinclude.xsl"/>-->
+
 <xsl:param name="remove.images.width" select="'1'" />
 <xsl:param name="conditionals"        select="''"  />
 <xsl:variable name="normalized"       select="concat(' ',normalize-space($conditionals),' ')"/>
@@ -49,7 +52,9 @@
 <xsl:template match="include">
     <xsl:apply-templates select="document(@file,.)" />
 </xsl:template>
-
+<xsl:template match="include">
+    <xsl:apply-templates select="document(@file,.)" />
+</xsl:template>
 
 <!-- Conditional rendering -->
 
