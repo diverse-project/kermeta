@@ -1,6 +1,6 @@
 -----------------------------------------------------------------
 $Id : $
-TODO for fr.irisa.triskell.kermeta.io project
+TODO and FIXME for fr.irisa.triskell.kermeta.io project
 -----------------------------------------------------------------
 
 * 25/02/2005 : 
@@ -11,5 +11,19 @@ Dans loader
 	-> y a un "e" en trop...
 Dans ast
 	fAssignement : y a aussi un "e" en trop...
+	
+FIXME :
+1/ Weird cases where errors are not detected :
+example : 
+
+	class Toto{}
+	awrongtoken
+	class Titi{}
+	
+This could be because "awrongtoken" is a valuable expression
+But an assertion failure is thrown when such a weird token appears before any class definition...
+
+2/ The method from Gymnat generated ASTNode "getTextLength" returns always the 0 value.
+
 	
 (chsais au moins faire les TODO;-P
