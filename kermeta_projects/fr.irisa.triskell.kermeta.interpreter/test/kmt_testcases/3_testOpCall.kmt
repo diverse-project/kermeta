@@ -1,3 +1,6 @@
+@mainClass "testOpCall::Test_opcall"
+@mainOperation "operation1"
+
 package testOpCall;
 
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"

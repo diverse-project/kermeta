@@ -21,6 +21,8 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import junit.framework.TestCase;
 
@@ -34,17 +36,22 @@ public class Run extends TestCase {
 	public static MiniMofJavaDriverFactory javaDriverFactory=null;
 	public static MiniMofEMFDriverFactory emfDriverFactory=null;*/
 	public static RuntimeObjectFactory koFactory=null;
+	public static Hashtable correspondanceTable=null; //for each kcore Object gives its RuntimeObject
 	public static RuntimeObject metametaClass=null;
 	public static RuntimeObject selfINSTANCE=null;
 	public static RuntimeObject voidINSTANCE=null;
 	public static Interpreter theInterpreter=null;
 
 	public static void main(String[] args) {
-		if (args.length < 3)
+		String mainClassValue=null;
+		String mainOperationValue=null;
+		String mainArgsValue=null;
+		if (args.length < 1)
 			System.err.println("Usage : run <modelName> <typeName> <operationName> <args...>");
 		else {
 			//prepare the kermetaObject factory and the metametaclass to allow kermeta metamodel traversing
 			koFactory=new RuntimeObjectFactory();
+			correspondanceTable=new Hashtable();
 			String modelName=args[0];
 			KermetaUnitFactory.getDefaultLoader().unloadAll();
 /*			KermetaUnit metabuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.framework/src/kermeta/kermeta.kmt");
@@ -103,6 +110,27 @@ public class Run extends TestCase {
 				
 				KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1();			
 				classesBuilderPass1.ppPackage(builder);
+				FPackage rootPackage=builder.rootPackage;
+				if (rootPackage.getFTag() !=null) {
+					Iterator tagsIt=rootPackage.getFTag().iterator();
+					while(tagsIt.hasNext()) {
+						FTag tag=(FTag)tagsIt.next();
+						if (tag.getFName().equals("mainClass"))
+							mainClassValue=tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
+						if (tag.getFName().equals("mainOperation"))
+							mainOperationValue=tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
+						if (tag.getFName().equals("mainArgs"))
+							mainArgsValue=tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
+					}
+				}
+				if (mainClassValue==null)
+					if (args.length>1)
+						mainClassValue=args[1];
+					else System.err.println("You should provide a mainClass argument to launch this program !");
+				if (mainOperationValue==null)
+					if (args.length>2)
+					mainOperationValue=args[2];
+					else System.err.println("You should provide a mainOperation argument to launch this program !");
 /*				KMBuilderPass2 classesBuilderPass2 = new KMBuilderPass2();			
 				classesBuilderPass2.ppPackage(builder);*/
 		}
@@ -113,17 +141,19 @@ public class Run extends TestCase {
 		/* 
 		 * mainClass : class where the first operation to call is registered
 		 */ 
-		RuntimeObject mainClass=(RuntimeObject)Run.koFactory.getClassDefTable().get(args[1]);
+		RuntimeObject mainClass=(RuntimeObject)Run.koFactory.getClassDefTable().get(mainClassValue);
 		RuntimeObject mainClassInstance=Run.koFactory.createRuntimeObject(mainClass);
 		FClassDefinition mainClassDef=(FClassDefinition)mainClass.getData().get("kcoreObject");
 		Iterator it=mainClassDef.getFOwnedOperation().iterator();
 		boolean found=false;
 		while (it.hasNext() && !found) {
 			FOperation mainOp=(FOperation)it.next();
-			if (mainOp.getFName().equals(args[2])) {
+			if (mainOp.getFName().equals(mainOperationValue)) {
 				found=true;
 				ArrayList arguments=new ArrayList();
-				if (args.length>3) {//set a collection of arguments for the operation
+				if (mainArgsValue!=null || args.length>3) {//set a collection of arguments for the operation
+					System.err.println("Arguments to main operation : TODO adapt args to operation parameters types.");
+					//TODO manage the arguments conversion to kermeta ty^pes of parameters
 					//assume the first parameter of mainOp is a ref(0,*) StringLiteral
 					for (int i=3;i<args.length;i++) {
 						RuntimeObject arg=fr.irisa.triskell.kermeta.runtime.basetypes.String.create(args[i],koFactory);

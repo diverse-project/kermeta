@@ -1,3 +1,6 @@
+@mainClass "testArithm::Test_arithm"
+@mainOperation "operation1"
+
 package testArithm;
 
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"

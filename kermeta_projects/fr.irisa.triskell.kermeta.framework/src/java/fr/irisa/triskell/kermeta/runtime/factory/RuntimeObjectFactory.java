@@ -103,7 +103,7 @@ public class RuntimeObjectFactory {
 	public RuntimeObject createClassDefinition(FClassDefinition classdef) {
 		RuntimeObject result=new RuntimeObject(this,class_class);
 		result.setData(new Hashtable());
-		result.getData().put("FClassDefinition",classdef);
+		result.getData().put("kcoreObject",classdef);
 		return result;
 	}
 	

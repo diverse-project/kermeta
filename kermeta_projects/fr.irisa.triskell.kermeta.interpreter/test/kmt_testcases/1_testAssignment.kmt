@@ -1,3 +1,6 @@
+@mainClass "testAssignment::Test_assignment"
+@mainOperation "operation1"
+
 package testAssignment;
 
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"

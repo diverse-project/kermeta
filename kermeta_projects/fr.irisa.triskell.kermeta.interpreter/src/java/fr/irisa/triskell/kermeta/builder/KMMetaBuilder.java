@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.7 2005-03-21 11:07:53 jpthibau Exp $
+/* $Id: KMMetaBuilder.java,v 1.8 2005-04-05 12:56:04 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -95,8 +95,8 @@ public class KMMetaBuilder {
 		Iterator it=Run.koFactory.getClassDefTable().keySet().iterator();
 		while (it.hasNext()) {
 			RuntimeObject type=(RuntimeObject)Run.koFactory.getClassDefTable().get(it.next());
-			if (type.getData().containsKey("FClassDefinition")) {
-				FClassDefinition classdef=(FClassDefinition)type.getData().get("FClassDefinition");
+			if (type.getData().containsKey("kcoreObject")) {
+				FClassDefinition classdef=(FClassDefinition)type.getData().get("kcoreObject");
 				if (classdef.getFTypeParameter().size()>0)
 					addTypeParameters(type,classdef.getFTypeParameter());
 			}

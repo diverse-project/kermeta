@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.8 2005-03-30 16:32:33 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.9 2005-04-05 12:56:04 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -461,9 +461,23 @@ public class BaseInterpreter extends KermetaVisitor {
 		// target.node -> target1.toto.node 
 		if (FCallFeature.class.isInstance(target))
 		{
-		    result = (RuntimeObject)this.accept(target); 
+		    ro_target = (RuntimeObject)this.accept(target);
+		    RuntimeObject metaClass=ro_target.getMetaclass();
+		    Object typedef = null;
+		    if (metaClass.getData()!=null) typedef=metaClass.getData().get("kcoreObject");
+		    if (typedef==null) {
+		    	typedef=metaClass.getProperties().get("classDefinition");
+		    	if (typedef==null) System.err.println("Cannot get type of ro_target result");
+		    	typedef=((RuntimeObject)typedef).getData().get("kcoreObject");
+		    }
+		    t_target=(FTypeDefinition)typedef;
 		}
 		
+		if (FIntegerLiteral.class.isInstance(target)) {
+			ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
+			RuntimeObject integerClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::Integer");
+			t_target=(FTypeDefinition)integerClassRO.getData().get("kcoreObject");
+		}
 		// If target is a CallVariable :
 		// Get the precise type of the CallFeature node.
 		// If the type of CallFeature is a property :
@@ -494,7 +508,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		    
 		}
 		// Now we can process either Self (target==null) or FCallVariable (the 2nd test)
-		if (target==null || FCallVariable.class.isInstance(target))
+		if (target==null || FCallVariable.class.isInstance(target) || FIntegerLiteral.class.isInstance(target) || FCallFeature.class.isInstance(target))
 		{
 			// RuntimeObject feature = factory.getTypeDefinitionByName(qname);
 			Vector feature = getFeatureType(t_target, node);
