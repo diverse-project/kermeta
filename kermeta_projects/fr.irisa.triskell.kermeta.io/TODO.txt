@@ -3,7 +3,8 @@ $Id : $
 TODO and FIXME for fr.irisa.triskell.kermeta.io project
 -----------------------------------------------------------------
 
-* 25/02/2005 : 
+************** 25/02/2005 : ********************
+
 Dans loader
 	KMT2KMExperessionBuilder
 	KMT2KMExperessionListBuilder
@@ -24,6 +25,28 @@ This could be because "awrongtoken" is a valuable expression
 But an assertion failure is thrown when such a weird token appears before any class definition...
 
 2/ The method from Gymnat generated ASTNode "getTextLength" returns always the 0 value.
+
+
+**************** 08/03/2005 ************************
+
+Definition of the lambda expression :
+There is a redundant syntax : 
+
+function { parametres | appel(avec les parametres)} 
+or : 
+{ parametres | appel(avec les parametres) }
+
+In the first case, function is used to "define" a lambda expression and affect an element of type 
+FunctionType. Example : 
+	result : FunctionType
+	result := function { a | not(a) }
+In the second case, it is used to "call" a lambda expression, which stands as an argument :
+	acall( { a | not(a) } )
+
+In a non functional language, we need a syntax to specify a lambda expression : here,
+we have" function" and the curlies...So it is too much!
+
+
 
 	
 (chsais au moins faire les TODO;-P
