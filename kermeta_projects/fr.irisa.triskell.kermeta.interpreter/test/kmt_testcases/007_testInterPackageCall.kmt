@@ -1,6 +1,6 @@
 package testInterPackage;
 
-require "7_testOpPkgCall.kmt"
+require "7_testOpPkgCall.main.kmt"
 alias Integer : kermeta::standard::Integer;
 alias Test_opcall : testOpPackage::Test_opcall;
 // operation called in another package

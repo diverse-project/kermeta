@@ -1,5 +1,5 @@
-@mainClass "testOpInternPkgCall::Test_package1"
-@mainOperation "Test_operation_pkg1"
+@mainClass "testOpInternPkgCall::test_package1::Test_operation_pkg1"
+@mainOperation "operation_pkg1"
 package testOpInternPkgCall;
 
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
