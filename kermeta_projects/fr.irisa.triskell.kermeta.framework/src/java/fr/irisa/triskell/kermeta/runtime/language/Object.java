@@ -4,10 +4,8 @@ package fr.irisa.triskell.kermeta.runtime.language;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
-import fr.irisa.triskell.kermeta.runtime.basetypes.FALSE;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
-import fr.irisa.triskell.kermeta.runtime.basetypes.TRUE;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 
 public class Object {
@@ -28,8 +26,8 @@ public class Object {
 	// Implementation of method equals called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(element)
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
-		if(self == param0) return TRUE.INSTANCE;
-		else return FALSE.INSTANCE;
+		if(self == param0) return Boolean.TRUE;
+		else return Boolean.FALSE;
 	}
 
 	// Implementation of method get called as :
@@ -60,7 +58,7 @@ public class Object {
 	
 	public static void set(RuntimeObject self, RuntimeObject param0, RuntimeObject param1, boolean handle_opposite) {
 		// Unset first if there is an object
-		if (isSet(self, param0) == TRUE.INSTANCE)  unSet(self, param0);
+		if (isSet(self, param0) == Boolean.TRUE)  unSet(self, param0);
 		// set the new object
 		self.getProperties().put(getPropertyName(param0), param1);
 		// set containement
@@ -91,8 +89,8 @@ public class Object {
 	// Implementation of method isSet called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(~property)
 	public static RuntimeObject isSet(RuntimeObject self, RuntimeObject param0) {
-		if (self.getProperties().get(getPropertyName(param0)) != null) return TRUE.INSTANCE;
-		else return FALSE.INSTANCE;
+		if (self.getProperties().get(getPropertyName(param0)) != null) return Boolean.TRUE;
+		else return Boolean.FALSE;
 	}
 
 	// Implementation of method unSet called as :
@@ -103,7 +101,7 @@ public class Object {
 	}
 	
 	public static void unSet(RuntimeObject self, RuntimeObject param0, boolean handle_opposite) {
-		if (isSet(self, param0) == FALSE.INSTANCE) return;
+		if (isSet(self, param0) == Boolean.FALSE) return;
 		RuntimeObject value = (RuntimeObject)self.getProperties().get(getPropertyName(param0));
 		if (getPropertyUpper(param0) == 1) {
 			if (isPropertyContainment(param0)) value.setContainer(null);
@@ -139,15 +137,15 @@ public class Object {
 	}
 	
 	public static boolean isPropertyContainment(RuntimeObject property) {
-		return property.getProperties().get("upper") == TRUE.INSTANCE;
+		return property.getProperties().get("upper") == Boolean.TRUE;
 	}
 	
 	public static boolean isPropertyOrdered(RuntimeObject property) {
-		return property.getProperties().get("upper") == TRUE.INSTANCE;
+		return property.getProperties().get("upper") == Boolean.TRUE;
 	}
 	
 	public static boolean isPropertyUnique(RuntimeObject property) {
-		return property.getProperties().get("upper") == TRUE.INSTANCE;
+		return property.getProperties().get("upper") == Boolean.TRUE;
 	}
 	
 	public static java.lang.String getPropertyName(RuntimeObject property) {

@@ -11,7 +11,6 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
-import fr.irisa.triskell.kermeta.runtime.basetypes.TRUE;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
@@ -122,11 +121,11 @@ public class ReflectiveCollection {
 	}
 	
 	public static boolean isaSet(RuntimeObject reflective_collection) {
-		return ((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("unique") == TRUE.INSTANCE;
+		return ((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("unique") == Boolean.TRUE;
 	}
 	
 	public static boolean isaContainer(RuntimeObject reflective_collection) {
-		return ((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("isComposite") == TRUE.INSTANCE;
+		return ((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("isComposite") == Boolean.TRUE;
 	}
 	
 	public static RuntimeObject getOppositeProperty(RuntimeObject reflective_collection) {

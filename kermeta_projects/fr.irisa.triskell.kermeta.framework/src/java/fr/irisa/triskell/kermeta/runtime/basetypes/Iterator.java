@@ -11,8 +11,8 @@ public class Iterator {
 	// Implementation of method hasNext called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator::hasNext()
 	public static RuntimeObject hasNext(RuntimeObject self) {
-		if (getValue(self).hasNext()) return TRUE.INSTANCE;
-		else return FALSE.INSTANCE;
+		if (getValue(self).hasNext()) return Boolean.TRUE;
+		else return Boolean.FALSE;
 	}
 
 	// Implementation of method next called as :
