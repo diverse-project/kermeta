@@ -1,4 +1,4 @@
-/* $Id: MakeConcreteClass.java,v 1.1 2005-02-21 09:12:23 zdrey Exp $
+/* $Id: MakeConcreteClass.java,v 1.2 2005-02-21 10:05:25 zdrey Exp $
  * Created on Feb 18, 2005
  * By zdrey
  * Description :
@@ -28,55 +28,32 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  */
 public class MakeConcreteClass extends KermetaVisitor {
 
-    protected KermetaUnit unit;
+    protected KermetaUnit abstract_unit;
     protected FPackage impl_pkg;
     /**
      * Constructor
      */
     public MakeConcreteClass(KermetaUnit unit) {
         super();
-        impl_pkg = unit.struct_factory.createFPackage();
-        impl_pkg.setFName("impl");
         
-        this.unit = unit;
+        this.abstract_unit = unit;
     }
     
     /**
-     * Create a sub package
-     * @return
-     */
-/*    public Object visit(FPackage pkg)
-    {
-        if (pkg.getFNestedPackage()==null)
-        {
-            impl_pkg.setFNestingPackage(pkg);
-        }
-        return super.visit(pkg);
-    }
-*/    
-    /**
-     * Concretize the classes : change the name of classes (KM<class>) and add extend <class>. (
+     * Concretize the classes : add extend <class>. (
      * remove all the initial inherited packs)
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FClassDefinition)
      */
     public Object visit(FClassDefinition classdef) {
         
         // create the class of classdefinition
-        FClass parent_fclass = unit.struct_factory.createFClass();
-        parent_fclass.setFName(unit.getQualifiedName(classdef));
+        FClass parent_fclass = abstract_unit.struct_factory.createFClass();
+        System.out.println(classdef.getFName());
+        parent_fclass.setFClassDefinition((FClassDefinition)abstract_unit.getTypeDefinitionByName(
+                "kermeta::structure::"+classdef.getFName()));
         
-        if (classdef.isFIsAbstract() == false)
-            classdef.setFIsAbstract(false);
-        else 
-            System.out.println(classdef.getFName()+"is Abstract!");
-        
-        System.out.println(unit.getQualifiedName(classdef));
        //FClassDefinition cClassdef = unit.struct_factory.createFClassDefinition();
-       
-        
-        //if (classdef.getFSuperType()!=null)
-        //{	classdef.getFSuperType().add(parent_fclass); }
-        //classdef.g
+       classdef.getFSuperType().add(parent_fclass);
         return super.visit(classdef);
     }
     
@@ -85,25 +62,6 @@ public class MakeConcreteClass extends KermetaVisitor {
      */
     public Object visit(FOperation operation) {
         
-    	if (operation.isFIsAbstract() == true)
-    		operation.setFIsAbstract(true);
-    	else
-    	{
-    	    operation.setFIsAbstract(false);
-    	    // set a body, even empty
-    	    // create a comment tag?
-    	    if (operation.getFBody() == null)
-    	    {  
-    	        FTag tagComment = unit.struct_factory.createFTag();
-        	    
-        	    tagComment.setFName("comment");
-        	    tagComment.setFValue("Implement this method");
-        	    // TODO : add this comment in the body of this operation
-        	    
-    	        operation.setFBody(null);
-    	    }
-    	    
-    	}
         return null;
     }
 }
