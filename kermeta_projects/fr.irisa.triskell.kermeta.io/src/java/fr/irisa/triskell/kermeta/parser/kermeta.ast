@@ -5,7 +5,12 @@ k=3;
 defaultErrorHandler=false;
 }
 
-sequence compUnit [entry] : packageDecl importStmts usingStmts topLevelDecls ;
+//abstract abstractCompUnit : (annotations) compUnit (annotations) ;
+
+//sequence compUnit [entry] : scompUnit;
+sequence scompUnit : packageDecl importStmts usingStmts topLevelDecls ;
+
+abstract compUnit [entry] : scompUnit | annotations;
 
 sequence packageDecl : annotations "package" name=qualifiedID SEMI ;
 
@@ -16,11 +21,11 @@ abstract stringLiteralOrQualifiedID : stringLiteralContainer | qualifiedID ;
 sequence stringLiteralContainer : STRING_LITERAL ;
 
 list annotations : annotation* ;
-abstract annotation : tag ;//singleLineComment | multiLineComment | 
+abstract annotation : tag | singleLineComment | multiLineComment; 
 
 sequence tag : AT name=qualifiedID val=STRING_LITERAL ;
-//sequence singleLineComment : SINGLE_LINE_COMMENT ;
-//sequence multiLineComment : MULTI_LINE_COMMENT ;
+sequence singleLineComment : SINGLE_LINE_COMMENT ;
+sequence multiLineComment : MULTI_LINE_COMMENT ;
 
 //sequence annotation : AT source=stringLiteralOrQualifiedID LPAREN keyEqualsValueList RPAREN ;
 //list keyEqualsValueList : kv1=keyEqualsValue (COMMA kvn=keyEqualsValue)* ;
@@ -34,7 +39,7 @@ sequence usingStmt : "using" name=qualifiedID ;
 
 list topLevelDecls : topLevelDecl* ;
 
-abstract topLevelDecl : (annotations) subPackageDecl | classDecl | enumDecl | dataTypeDecl; //| enumDecl | mapEntryDecl ;
+abstract topLevelDecl : (annotations) subPackageDecl | classDecl | enumDecl | dataTypeDecl (annotations); //| enumDecl | mapEntryDecl ;
 
 sequence subPackageDecl : "package" name=ID LCURLY topLevelDecls RCURLY ;
 
@@ -55,7 +60,7 @@ sequence selftype : "Self" ;
 sequence voidType : "Void" ;
 
 list classMemberDecls : classMemberDecl * ;
-abstract classMemberDecl : (annotations) operation | property; //attribute | reference | operation ;
+abstract classMemberDecl : annotation | operation | property; //attribute | reference | operation ;
 
 //sequence attribute : MINUS modifiers typeRef name=ID (EQUALS defaultValueExpr)? SEMI ;
 
@@ -72,8 +77,9 @@ sequence setterBody : (annotations)? "setter" "is" setterbody = fExpression ;
 sequence operation : operationKind name=ID (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)?  ("from" superSelection=qualifiedID)? ("raises" exceptions=typelst)? "is" operationBody;
 token operationKind : "operation" | "method" ;
 
-abstract operationBody : operationEmptyBody | operationExpressionBody ;
-sequence operationExpressionBody : fExpression;
+abstract operationBody : operationAnnotationBody | operationEmptyBody | operationExpressionBody ;
+sequence operationAnnotationBody : annotation ;
+sequence operationExpressionBody : fExpression ;
 sequence  operationEmptyBody : "abstract" ;
 
 list params : p1=param (COMMA pn=param)*;
@@ -103,8 +109,8 @@ sequence enumLiteral : leadingAnnotations=annotations name=ID SEMI ; // (EQUALS 
 list fExpressionLst : fExpression* ;
 
 sequence asingleExpression : fExpression ;
-
-abstract fExpression : (annotations) fAssignement ;
+// an annotation is considered as an fExpression. In 
+abstract fExpression : (annotations) fAssignement (annotations);
 			
 sequence fAssignement : expression=logicalExpression (assignementOp EQUALS newvalue=logicalExpression)?;
 token assignementOp : COLON | QMARK ;
@@ -133,7 +139,7 @@ sequence callPostfix : DOT name=ID ;
 sequence paramPostfix : LPAREN (parameters=actualParameterList)? RPAREN ;
 list actualParameterList : p1=actualParameter (COMMA pn=actualParameter)* ;
 sequence actualParameter : expression=fExpression ;
-sequence lambdaPostfix : LCURLY params=lambdaPostfixParamLst PIPE expression=fExpression RCURLY ;
+sequence lambdaPostfix : LCURLY params=lambdaPostfixParamLst PIPE expression=fExpression  ;
 list lambdaPostfixParamLst : p1=lambdaPostfixParam (COMMA pn=lambdaPostfixParam)* ;
 sequence lambdaPostfixParam : name=ID;
 
@@ -151,7 +157,7 @@ sequence fSelfCall : "self" ;
 sequence fSuperCall : "super" ;
 sequence resultCall : "result" ;
 
-sequence fBlock : "do" fExpressionLst fRescueLst "end" ;
+sequence fBlock : "do" annotations fExpressionLst fRescueLst "end" ;
 
 sequence fLambdaExpression : "function" LCURLY params=fLambdaparamlst PIPE expression=fExpression RCURLY ;
 list fLambdaparamlst : p1=fLambdaparam (COMMA pn=fLambdaparam)* ;
