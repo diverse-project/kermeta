@@ -9,7 +9,7 @@ public class String {
 	// Implementation of method compareTo called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::compareTo(other)
 	public static KermetaObject compareTo(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObject("kermeta::standard::Integer");
+		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, getValue(self).compareTo(getValue(param0)));
 		return result;
 	}
@@ -17,7 +17,7 @@ public class String {
 	// Implementation of method plus called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::plus(other)
 	public static KermetaObject plus(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObject("kermeta::standard::String");
+		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		setValue(result, getValue(self) + getValue(param0));
 		return result;
 	}
@@ -32,7 +32,7 @@ public class String {
 	// Implementation of method elementAt called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::elementAt(index)
 	public static KermetaObject elementAt(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObject("kermeta::standard::Character");
+		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Character");
 		Character.setValue(result, getValue(self).charAt(Integer.getValue(param0)));
 		return result;
 	}
@@ -40,7 +40,7 @@ public class String {
 	// Implementation of method indexOf called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::indexOf(str)
 	public static KermetaObject indexOf(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObject("kermeta::standard::Integer");
+		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, getValue(self).indexOf(getValue(param0)));
 		return result;
 	}
@@ -48,7 +48,7 @@ public class String {
 	// Implementation of method subString called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::subString(index, length)
 	public static KermetaObject subString(KermetaObject self, KermetaObject param0, KermetaObject param1) {
-		KermetaObject result = self.getFactory().createObject("kermeta::standard::String");
+		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		setValue(result, getValue(self).substring(Integer.getValue(param0), Integer.getValue(param1)));
 		return result;
 	}
@@ -56,7 +56,7 @@ public class String {
 	// Implementation of method size called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::size()
 	public static KermetaObject size(KermetaObject self) {
-		KermetaObject result = self.getFactory().createObject("kermeta::standard::Integer");
+		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, getValue(self).length());
 		return result;
 	}

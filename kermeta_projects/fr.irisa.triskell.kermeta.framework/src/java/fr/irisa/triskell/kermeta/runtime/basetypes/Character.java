@@ -9,7 +9,7 @@ public class Character {
 	// Implementation of method compareTo called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Character::compareTo(other)
 	public static KermetaObject compareTo(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObject("kermeta::standard::Integer");
+		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, getCharacterValue(self).compareTo(getCharacterValue(param0)));
 		return result;
 	}

@@ -32,7 +32,7 @@ public class Collection {
 	// Implementation of method size called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection::size()
 	public static KermetaObject size(KermetaObject self) {
-		KermetaObject result = self.getFactory().createObject("kermeta::standard::Integer");
+		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, getArrayList(self).size());
 		return result;
 	}
@@ -40,7 +40,7 @@ public class Collection {
 	// Implementation of method iterator called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection::iterator()
 	public static KermetaObject iterator(KermetaObject self) {
-		KermetaObject result = self.getFactory().createObject("kermeta::standard::Iterator");
+		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Iterator");
 		Iterator.setValue(result, getArrayList(self).iterator());
 		return result;
 	}

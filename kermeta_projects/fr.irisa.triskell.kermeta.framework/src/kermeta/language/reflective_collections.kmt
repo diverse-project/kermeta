@@ -56,10 +56,6 @@ abstract class ReflectiveSequence<G> inherits OrderedSet<G>, ReflectiveCollectio
 	method removeAt(index : Integer) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(index)
 	end
-	
-	method elementAt(index : Integer) : G is do
-		result ?= extern fr::irisa::triskell::kermeta::language::ReflectiveSequence.elementAt(index)
-	end
 
 }
 
