@@ -1,0 +1,19 @@
+/* ----------------------------------------------------------------------------- 
+ * $Id: launcher.kmt,v 1.1 2005-03-07 17:30:36 zdrey Exp $
+ * Filename : launcher.kmt
+ * Author :
+ * Creation Date : 
+ * Description :
+ * 	This package contains the main class of the Kermeta interpreter.
+ *	The interpreter will be launched through a java command that will, as a
+ *	bootstrapper, create the KermetaObject for the interpreter (an instance of 
+ *	Launcher)
+ *	The Launcher stands as a Facade for any action that the interpreter can do :
+ *	Generate Stats, Launch a debugger, etc.. We will launch those actions according
+ *	to options that user added when executing the java bootstrapper.
+ *-----------------------------------------------------------------------------*/
+package launcher;
+
+class Launcher
+{
+}
