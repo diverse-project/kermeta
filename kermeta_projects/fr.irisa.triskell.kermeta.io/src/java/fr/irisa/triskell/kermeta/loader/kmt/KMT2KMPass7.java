@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.9 2005-03-31 15:24:56 zdrey Exp $
+/* $Id: KMT2KMPass7.java,v 1.10 2005-04-05 12:37:24 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -57,6 +57,7 @@ import fr.irisa.triskell.kermeta.ast.*;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FNamedElement;
 import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
@@ -92,70 +93,14 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 *
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ClassDecl)
 	 */
-	public boolean beginVisit(ClassDecl classDecl) {
-	    
-	    /* Get the corresponding kermeta object */
-	    builder.current_class = (FClassDefinition)builder.getModelElementByNode(classDecl);
-	    /* left annotations, and right annotations 
-	     * FIXME FIXME : this code does not work as we want anymore!
-	     * */
-	    Annotations preAnnLst  = null ;
-	    Annotations postAnnLst = classDecl.getPostAnnotations();
-	    
-	    /* If preAnnLst is too far away from classDecl
-	     * we need to get preceding classDecl and attach it to this preceding one
-	     */
-	    //System.out.print("Classe:"+builder.current_class.getFName());
-
-	    // If preceding_annLst is null, it means that our parser won't find a preAnnLst (null as well so) 
-	    if (preceding_annArrayList.size()>0)
-	    {
-	        processFTagArrayList(preceding_annArrayList);
-	        preceding_annArrayList.clear();
-	    }
-	    
-	    /* ------------ process the pre-annotations */
-	    processAnnotations(preAnnLst, PRE_TAGNAME, null);
-
-	    /* ------------ process the post annotations */
-	    // Get the chars between current class and its post annotation
-	    int class_end = classDecl.getChild(getBeforeLastChildPosition(classDecl)).getRangeEnd();
-	    
-	    int posta_start = -1;
-	    if (postAnnLst.getChildCount()>0 && class_end < fileData.length())
-	    {
-	        posta_start = postAnnLst.getRangeStart();
-	        // Do we have any separating char between post annotation and class end?
-	        if (posta_start-class_end>0)
-	        {
-	            String spacelines = fileData.substring(class_end, posta_start-1);
-	            // If there is at least one new line between post annotation and its class
-	            // then we do not consider it as a post annotation
-	            if (pattern.matcher(spacelines).matches())
-	            {
-	                preceding_annLst = postAnnLst; 
-	            }
-	            else
-	            {
-	                // Do we have spacelines *inside* this postAnnList (between two Annotation objects)
-	                
-	                ArrayList[] annArrayList = createFTagFromAnnotationLst(postAnnLst);
-	                preceding_annArrayList = annArrayList[1];
-	                this.processFTagArrayList(annArrayList[0]);
-	            }
-	        }
-	    }
-	    return super.beginVisit(classDecl);
+	public boolean beginVisit(PackageDecl packageDecl) {
+	    Annotations annLst = packageDecl.getPreAnnotations();
+	    FNamedElement pkg = (FNamedElement)builder.getModelElementByNode(packageDecl);
+	    processAnnotations(annLst, pkg);
+	    return super.beginVisit(packageDecl);
 	        
 	}
 	
-	public Annotations[] cutAnnotationLst(Annotations annLst)
-	{
-	    Annotations[] annArray = new Annotations[2];
-	    
-	    return annArray;
-	}
-
 	/**
 	 * Get the before-lastchild position for the given file
 	 * TODO : extend it to any ASTNode
@@ -366,49 +311,40 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	}
 
 	/**
-	 * Create a Tag from annLst, add it to the current_class tags and
+	 * Create a list of FTags from annLst, add it to the current_class tags and
      * to the builder tag list.
-	 * @param annLst the list of annotations
+	 * @param annLst the list of annotations to process
 	 * @param annType the name of the tag that will be defined with annotations text 
-	 * (like "pre", "post", "orphan")
-	 */
-	protected FTag processAnnotations(Annotations annLst, String annType, ASTNode refnode)
-	{
-	    FTag tag = null;
-	    // tagStack.push(tag)? // 
-	    if (annLst!=null && annLst.hasChildren())
-	    {/*
-	        ArrayList[] tagListArray = this.createFTagFromAnnotationLst(annLst, annType);
-            builder.current_class.getFTag().add(tag);
-	        map_put(tagListArray[0]);// FIXME : tag.toStirng() is not a relevant key...
-	        map_put(tagListArray[1]);*/
-	    }
-	    
-	    
-	    
-	    return tag;
-	}
-	
-	/**
-	 * Add the tags to current visited class
-	 * @param annALst
+	 * (in @annType annotation)
 	 * @param refnode
 	 */
-	protected void processFTagArrayList(ArrayList annALst)
+	protected void processAnnotations(Annotations annLst, FNamedElement element)
 	{
-	    map_put(annALst);
-	}
-	
-	protected void map_put(ArrayList tagLst)
-	{
-	    Iterator it = tagLst.iterator();
-	    while (it.hasNext())
+		
+	    String tag_name = null;
+	    String tag_value = null;
+	    FTag tag = null;
+	    int i = 0;
+	    // tagStack.push(tag)? // 
+	    if (annLst!=null && annLst.hasChildren())
 	    {
-	        FTag tag = (FTag)it.next();
-	        builder.current_class.getFTag().add(tag);
-	        builder.tags.put(tag.toString(), tag);
+	    	for (i=0; i<annLst.getChildCount();i++)
+	    	{
+	    		Annotation a = (Annotation)annLst.getChild(i);
+	    		if (Tag.class.isInstance(a))
+	    		{
+	    			tag_name  = ((Tag)a).getName().getFirstChild().getText();
+	    			tag_value = ((Tag)a).getVal().getText();
+	    			// Create the FTag in kcore repr.
+	    			tag = builder.struct_factory.createFTag();
+	    			tag.setFName(tag_name);
+	    			tag.setFValue(tag_value);
+	    			element.getFTag().add(tag);
+	    		}
+	    	}
 	    }
 	}
 	
+
 
 }

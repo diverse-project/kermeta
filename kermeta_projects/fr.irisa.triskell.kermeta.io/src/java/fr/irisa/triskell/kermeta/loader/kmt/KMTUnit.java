@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.8 2005-03-12 08:45:45 ffleurey Exp $
+/* $Id: KMTUnit.java,v 1.9 2005-04-05 12:37:24 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -89,8 +89,8 @@ public class KMTUnit extends KermetaUnit {
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadAnnotations()
      */
     public void loadAnnotations() {
- //       KMT2KMPass pass = new KMT2KMPass7(this);
-  //      mctAST.accept(pass);
+        KMT2KMPass pass = new KMT2KMPass7(this);
+       mctAST.accept(pass);
 
     }
 	public void loadBodies() {
