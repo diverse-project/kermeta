@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.1 2005-03-09 13:53:53 jpthibau Exp $
+/* $Id: KMMetaBuilder.java,v 1.2 2005-03-10 13:19:25 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -28,9 +30,11 @@ import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.behavior.*;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
+import fr.irisa.triskell.kermeta.runtime.KermetaObject;
 import fr.irisa.triskell.kermeta.structure.*;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
+import fr.irisa.triskell.kermeta.launcher.Run;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
 
@@ -41,54 +45,47 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
  */
 public class KMMetaBuilder extends KermetaVisitor {
 
-	protected ArrayList usings = new ArrayList();
-	protected ArrayList imports = new ArrayList();
-	protected String root_pname;
-	protected String current_pname;
-	
-	protected boolean typedef = false;
+	protected Hashtable allMetaClasses;
+	protected Stack packageNamesStack;
+	protected KermetaObject currentClassNode;
 	
 	public Hashtable ppPackage(KermetaUnit unit) {
-		Hashtable allMetaClasses=new Hashtable();
-/*		root_pname = getQualifiedName(p);
-		String result = "package " + root_pname + ";\n\n";
-		for(int i=0; i<imports.size();i++) result += "require \"" + imports.get(i) + "\"\n";
-		if (imports.size()>0) result += "\n";
-		for(int i=0; i<usings.size();i++) result += "using " + usings.get(i) + "\n";
-		if (usings.size()>0) result += "\n";
-		current_pname = root_pname;
-		typedef = true;
-		result += ppCRSeparatedNode(p.getFOwnedTypeDefinition());
-		typedef = false;
-		result += ppCRSeparatedNode(p.getFNestedPackage());
-		
-		// temporary handle of orphan tags
-		//result +=*/
+		allMetaClasses=new Hashtable();
+		String currentpackageName=unit.getQualifiedName(unit.rootPackage);
+		List packagesNames=new ArrayList();
+		packagesNames.add(currentpackageName);
+		this.packageNamesStack=new Stack();
+		ppPackageContents(unit.rootPackage,allMetaClasses,currentpackageName);
+		ppPackageImportedpackagess(unit,allMetaClasses,packagesNames);
 		return allMetaClasses;
 	}
-	
-	public String ppPackageContents(FPackage p) {
-		root_pname = getQualifiedName(p);
-		String result = "";
-		current_pname = root_pname;
-		typedef = true;
-		result += ppCRSeparatedNode(p.getFOwnedTypeDefinition());
-		typedef = false;
-		result += ppCRSeparatedNode(p.getFNestedPackage());
-		return result;
+
+	public void ppPackageImportedpackagess(KermetaUnit unit,Hashtable allMetaClasses,List packagesNames) {
+		Iterator it = unit.importedUnits.iterator();
+		while(it.hasNext()) {
+			KermetaUnit iu = (KermetaUnit)it.next();
+			String iuName=iu.getQualifiedName(iu.rootPackage);
+			if ( !packagesNames.contains(iuName)) {
+				packagesNames.add(iuName);
+				this.packageNamesStack=new Stack();
+				ppPackageContents(iu.rootPackage,allMetaClasses,iuName);
+				ppPackageImportedpackagess(iu,allMetaClasses,packagesNames);
+			}
+		}
+	}
+
+	public void ppPackageContents(FPackage p,Hashtable allMetaClasses,String packageName) {
+		this.packageNamesStack.push(packageName);
+		ppCRSeparatedNode(p.getFOwnedTypeDefinition());
+		ppCRSeparatedNode(p.getFNestedPackage());
+		this.packageNamesStack.pop();
 	}
 	
-	protected String ppIdentifier(String id) {
-		if (id == null) return id;
-		if (SimpleKWList.getInstance().isKeyword(id))
-			return "~" + id;
-		else return id;
-	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FAssignement)
 	 */
-	public Object visit(FAssignement node) {
+/*	public Object visit(FAssignement node) {
 		String left = this.accept(node.getFTarget()).toString();
 		String right = this.accept(node.getFValue()).toString();
 		String op = (node.isFIsCast())?"?":":";
@@ -98,7 +95,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBlock)
 	 */
-	public Object visit(FBlock node) {
+/*	public Object visit(FBlock node) {
 		String result = "do\n";
 		pushPrefix();
 		result += ppCRSeparatedNode(node.getFStatement());
@@ -114,7 +111,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FRescue)
 	 */
-	public Object visit(FRescue node) {
+/*	public Object visit(FRescue node) {
 		String result = "rescue";
 		if (node.getFExceptionName() != null) {
 			result += "(" + node.getFExceptionName() + " : " + this.accept(node.getFExceptionType()) + ")";
@@ -124,28 +121,26 @@ public class KMMetaBuilder extends KermetaVisitor {
 		result += ppCRSeparatedNode(node.getFBody());
 		popPrefix();
 		return result;
-	}
+	}*/
 	
-	public String ppCRSeparatedNode(EList expressions) {
-		String result = "";
+	public void ppCRSeparatedNode(EList expressions) {
 		Iterator it = expressions.iterator();
 		while(it.hasNext()) {
-			result += getPrefix() + this.accept((EObject)it.next()) + "\n";
+			this.accept((EObject)it.next());
 		}
-		return result;
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral)
 	 */
-	public Object visit(FBooleanLiteral node) {
+/*	public Object visit(FBooleanLiteral node) {
 		return ""+node.isFValue();
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FCallSuperOperation)
 	 */
-	public Object visit(FCallSuperOperation node) {
+/*	public Object visit(FCallSuperOperation node) {
 		String result = "super(";
 		result += ppComaSeparatedNodes(node.getFParameters());
 		result += ")";
@@ -168,16 +163,11 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
 	public Object visit(FClass node) {
-		String qname = getQualifiedName(node.getFClassDefinition());
-		String name = ppIdentifier(node.getFClassDefinition().getFName());
-		String result = ppTypeName(qname, name);
-		if (node.getFTypeParamBinding().size() > 0) {
-			result += "<" + ppComaSeparatedNodes(node.getFTypeParamBinding()) + ">";
-		}
-		return result;
+		this.currentClassNode.getProperties().put("InstanceType",node);
+		return null;
 	}
 	
-	protected String ppTypeName(String qname, String name) {
+/*	protected String ppTypeName(String qname, String name) {
 		String result = "";
 		if (qname.equals(current_pname + "::" + name)) result += name;
 		else {
@@ -198,7 +188,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariableBinding)
 	 */
-	public Object visit(FTypeVariableBinding node) {
+/*	public Object visit(FTypeVariableBinding node) {
 		return this.accept(node.getFType());
 	}
 	
@@ -206,9 +196,18 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
 	public Object visit(FClassDefinition node) {
-		typedef = false;
-		String result = "";
-		
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaclass);
+		Hashtable data=new Hashtable();
+		data.put("kcoreObject",node);
+		knode.setData(data);
+		knode.getProperties().put("FOwnedAttributes",new Hashtable());
+		knode.getProperties().put("FOwnedOperation",new Hashtable());
+		this.currentClassNode=knode;
+		String qualifiedPrefix="";
+		Iterator it=this.packageNamesStack.iterator();
+		while (it.hasNext())
+			qualifiedPrefix=qualifiedPrefix.concat((String)it.next())+"::";
+		this.allMetaClasses.put(qualifiedPrefix+node.getFName(),knode);
 
 		// Get the pre Annotation of this class 
 		if (node.getFTag().size()>0)
@@ -216,65 +215,45 @@ public class KMMetaBuilder extends KermetaVisitor {
 		    FTag[] pretagArray = this.getFTagsByName(node.getFTag(), KMT2KMPass.PRE_TAGNAME);
 		    for (int i=0; i< pretagArray.length && pretagArray[i]!=null; i++)
 		    {
-		        result += this.accept((EObject)pretagArray[i]);
+		        this.accept((EObject)pretagArray[i]);
 		    }
 		}
 		
 		
-		if (node.isFIsAbstract()) result += "abstract ";
-		result += "class " + ppIdentifier(node.getFName());
-		if (node.getFTypeParameter().size() > 0) {
-			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
-			result += ">";
-		}
-		if (node.getFSuperType().size() > 0) {
-			result += " inherits ";
-			result += ppComaSeparatedNodes(node.getFSuperType());
-		}
-		result += "\n" + getPrefix() + "{\n";
-		pushPrefix();
-		result += ppCRSeparatedNode(node.getFOwnedAttributes());
-		result += ppCRSeparatedNode(node.getFOwnedOperation());
-		popPrefix();
-		result += getPrefix() + "}";		
-		
-		typedef = true;
-		
+		ppCRSeparatedNode(node.getFOwnedAttributes());
+		ppCRSeparatedNode(node.getFOwnedOperation());
 		// Get post annotations
 		if (node.getFTag().size()>0)
 		{
-		    // get pre annotation
+		    // get post annotation
 		    FTag[] posttagArray = this.getFTagsByName(node.getFTag(), KMT2KMPass.POST_TAGNAME);
 		    for (int i=0; i< posttagArray.length && posttagArray[i]!=null; i++)
 		    {
-		        result += this.accept(posttagArray[i]);
+		        this.accept(posttagArray[i]);
 		    }
 		}
-		
-		
-		return result;
+		return null;
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
 	 */
 	public Object visit(FPrimitiveType node) {
-		if (typedef == true) {
-			typedef = false;
-			String result = "alias " + node.getFName() + " : " + this.accept(node.getFInstanceType()) + ";";
-			typedef = true;
-			return result;
-		}
-		else {
-			String qname = getQualifiedName(node);
-			String name = ppIdentifier(node.getFName());
-			String result = ppTypeName(qname, name);
-			return result;
-		}
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaclass);
+		Hashtable data=new Hashtable();
+		data.put("kcoreObject",node);
+		knode.setData(data);
+		this.currentClassNode=knode;
+		String qualifiedPrefix="";
+		Iterator it=this.packageNamesStack.iterator();
+		while (it.hasNext())
+			qualifiedPrefix=qualifiedPrefix.concat((String)it.next())+"::";
+		this.allMetaClasses.put(qualifiedPrefix+node.getFName(),knode);
+		this.accept(node.getFInstanceType());
+		return null;
 	}
 	
-	public String ppTypeVariableDeclaration(EList tparams) {
+/*	public String ppTypeVariableDeclaration(EList tparams) {
 		String result = "";
 		Iterator it = tparams.iterator();
 		while (it.hasNext()) {
@@ -289,7 +268,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FConditionnal)
 	 */
-	public Object visit(FConditionnal node) {
+/*	public Object visit(FConditionnal node) {
 		String result = "if " + this.accept(node.getFCondition()) + " then\n";
 		pushPrefix();
 		if (node.getFThenBody() != null) result += getPrefix() + this.accept(node.getFThenBody()) + "\n";
@@ -307,7 +286,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FEnumeration)
 	 */
-	public Object visit(FEnumeration node) {
+/*	public Object visit(FEnumeration node) {
 		if (typedef == true) {
 			typedef = false;
 			String result = "enumeration " + ppIdentifier(node.getFName()) + "\n";
@@ -330,28 +309,28 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FEnumerationLiteral)
 	 */
-	public Object visit(FEnumerationLiteral node) {
+/*	public Object visit(FEnumerationLiteral node) {
 		return ppIdentifier(node.getFName()) + ";";
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FFunctionType)
 	 */
-	public Object visit(FFunctionType node) {
+/*	public Object visit(FFunctionType node) {
 		return "< " + this.accept(node.getFLeft()) + "->" + this.accept(node.getFRight()) + " >";
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FIntegerLiteral)
 	 */
-	public Object visit(FIntegerLiteral node) {
+/*	public Object visit(FIntegerLiteral node) {
 		return "" + node.getFValue();
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FJavaStaticCall)
 	 */
-	public Object visit(FJavaStaticCall node) {
+/*	public Object visit(FJavaStaticCall node) {
 		String result = "extern " + node.getFJclass() + "." + ppIdentifier(node.getFJmethod()) + "(";
 		result += ppComaSeparatedNodes(node.getFParameters());
 		result += ")";
@@ -360,7 +339,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FLambdaExpression)
 	 */
-	public Object visit(FLambdaExpression node) {
+/*	public Object visit(FLambdaExpression node) {
 		String result = "function {";
 		System.out.println("nodes:"+node.getFParameters());
 		result += ppComaSeparatedNodes(node.getFParameters());
@@ -374,7 +353,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FLambdaParameter)
 	 */
-	public Object visit(FLambdaParameter node) {
+/*	public Object visit(FLambdaParameter node) {
 		String result = ppIdentifier(node.getFName());
 		if (node.getFType() != null) {
 			result += " : " + this.accept(node.getFType());
@@ -384,7 +363,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FLoop)
 	 */
-	public Object visit(FLoop node) {
+/*	public Object visit(FLoop node) {
 		String result = "from " ; 
 		result += this.accept(node.getFInitiatization()) + "\n";
 		result += getPrefix() + "until " + this.accept(node.getFStopCondition()) + "\n";
@@ -400,49 +379,19 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
-		String result = "";
-		if (node.getFSuperOperation() != null) result += "method ";
-		else result += "operation ";
-		result += ppIdentifier(node.getFName());
-		if (node.getFTypeParameter().size() > 0) {
-			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
-			result += ">";
-		}
-		result += "(";
-		result += ppComaSeparatedNodes(node.getFOwnedParameter());
-		result += ")";
-		if(node.getFType() != null) {
-			result += " : " + ppTypeFromMultiplicityElement(node);
-		}
-	
-		if (node.getFSuperOperation() != null) {
-			result += " from " + ppIdentifier(getQualifiedName(node.getFSuperOperation().getFOwningClass()));
-		}
-		if (node.getFRaisedException().size() > 0) {
-			result += " raises " + ppComaSeparatedNodes(node.getFRaisedException());
-		}
-		if (node.getFBody() != null) {
-			result += " is\n";
-			pushPrefix();
-			result += getPrefix() + this.accept(node.getFBody());
-			popPrefix();
-		}
-		else if (node.isFIsAbstract()) result += " is abstract";
-		else {
-			result += " is do\n";
-			pushPrefix();
-			result += getPrefix() + "//TODO: implement operation " + node.getFName() + "\n"; 
-			popPrefix();
-			result += getPrefix() + "end";
-		}
-		return result;
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaclass);
+		Hashtable data=new Hashtable();
+		data.put("kcoreObject",node);
+		knode.setData(data);
+		Hashtable properties=(Hashtable)this.currentClassNode.getProperties().get("FOwnedOperation");
+		properties.put(node.getFName(),knode);
+		return null;
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FParameter)
 	 */
-	public Object visit(FParameter node) {
+/*	public Object visit(FParameter node) {
 		return ppIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node);
 	}
 	
@@ -469,7 +418,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FPackage)
 	 */
-	public Object visit(FPackage node) {
+/*	public Object visit(FPackage node) {
 		String result = "package " + ppIdentifier(node.getFName()) + "\n";
 		result += getPrefix() + "{\n";
 		String old_cname = current_pname;
@@ -486,7 +435,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProductType)
 	 */
-	public Object visit(FProductType node) {
+/*	public Object visit(FProductType node) {
 		String result = "[" + ppComaSeparatedNodes(node.getFType()) + "]";
 		return result;
 	}
@@ -495,87 +444,63 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
 	public Object visit(FProperty node) {
-		String result = "";
-		if (node.isFIsComposite()) result += "attribut ";
-		else if (node.isFIsDerived()) result += "property ";
-		else result += "reference ";
-		if (node.isFIsReadOnly()) result += "readonly ";
-		result += ppIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node);
-		if (node.getFOpposite() != null) result += "#" + ppIdentifier(node.getFOpposite().getFName());
-		if (node.isFIsDerived()) {
-			pushPrefix();
-			result += "\n" + getPrefix() + "getter is " ;
-			if (node.getFGetterbody() != null) result += this.accept(node.getFGetterbody());
-			else {
-				result += "do\n";
-				pushPrefix();
-				result += getPrefix() + "//TODO: implement getter for derived property " + node.getFName() + "\n"; 
-				popPrefix();
-				result += getPrefix() + "end";
-			}
-			if (! node.isFIsReadOnly()) {
-				result += "\n" + getPrefix() + "setter is ";
-				if (node.getFGetterbody() != null) result += this.accept(node.getFSetterbody());
-				else {
-					result += "do\n";
-					pushPrefix();
-					result += getPrefix() + "//TODO: implement setter for derived property " + node.getFName() + "\n"; 
-					popPrefix();
-					result += getPrefix() + "end";
-				}
-			}
-			popPrefix();
-		}
-		return result;
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaclass);
+		Hashtable data=new Hashtable();
+		data.put("kcoreObject",node);
+		knode.setData(data);
+		Hashtable properties=(Hashtable)this.currentClassNode.getProperties().get("FOwnedAttributes");
+		String nameFirstcharUp=node.getFName().substring(0,1).toUpperCase()+node.getFName().substring(1,node.getFName().length());
+		properties.put(nameFirstcharUp,knode);
+		return null;
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FRaise)
 	 */
-	public Object visit(FRaise node) {
+/*	public Object visit(FRaise node) {
 		return "raise " + this.accept(node.getFExpression());
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FSelfExpression)
 	 */
-	public Object visit(FSelfExpression node) {
+/*	public Object visit(FSelfExpression node) {
 		return "self";
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FSelfType)
 	 */
-	public Object visit(FSelfType node) {
+/*	public Object visit(FSelfType node) {
 		return "Self";
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FStringLiteral)
 	 */
-	public Object visit(FStringLiteral node) {
+/*	public Object visit(FStringLiteral node) {
 		return "\"" + node.getFValue() +"\""; //TODO : escape characters ?
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeLiteral)
 	 */
-	public Object visit(FTypeLiteral node) {
+/*	public Object visit(FTypeLiteral node) {
 		return this.accept(node.getFTyperef());
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeReference)
 	 */
-	public Object visit(FTypeReference node) {
+/*	public Object visit(FTypeReference node) {
 		return ppTypeFromMultiplicityElement(node);
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariable)
 	 */
-	public Object visit(FTypeVariable node) {
+/*	public Object visit(FTypeVariable node) {
 		return ppIdentifier(node.getFName());
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FVariableDecl)
 	 */
-	public Object visit(FVariableDecl node) {
+/*	public Object visit(FVariableDecl node) {
 		String result = "var " + ppIdentifier(node.getFIdentifier()) + " : " + this.accept(node.getFType());
 		if (node.getFInitialization() != null)
 			result += " init " + this.accept(node.getFInitialization());
@@ -584,20 +509,20 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FVoidLiteral)
 	 */
-	public Object visit(FVoidLiteral node) {
+/*	public Object visit(FVoidLiteral node) {
 		return "void";
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FVoidType)
 	 */
-	public Object visit(FVoidType node) {
+/*	public Object visit(FVoidType node) {
 		return "Void";
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FCallFeature)
 	 */
-	public Object visit(FCallFeature node) {
+/*	public Object visit(FCallFeature node) {
 		String result = "";
 		if (node.getFTarget() != null) result += this.accept(node.getFTarget());
 		else result += "self";
@@ -613,13 +538,13 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.KermetaVisitor#visit(kermeta.behavior.FCallResult)
 	 */
-	public Object visit(FCallResult node) {
+/*	public Object visit(FCallResult node) {
 		return "result";
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FCallVariable)
 	 */
-	public Object visit(FCallVariable node) {
+/*	public Object visit(FCallVariable node) {
 		String result = ppIdentifier(node.getFName());
 		if (node.getFParameters().size()> 0) {
 			result += "(" + ppComaSeparatedNodes(node.getFParameters()) + ")";
@@ -631,14 +556,14 @@ public class KMMetaBuilder extends KermetaVisitor {
      * FTag is a special model element that we should have
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FTag)
      */
-    public Object visit(FTag node) {
+ /*   public Object visit(FTag node) {
         String result = "";
         //result = "@pre : \"" + node.getFValue() + "\"";
-        result = "/*{"+node.getFName()+"}*/\r\n"+ node.getFValue() + "\n";
+        result = "/*{"+node.getFName()+"}*//*\r\n"+ node.getFValue() + "\n";
         return result;
     }
     
-	protected String prefix = "";
+/*	protected String prefix = "";
 	
 	protected String getPrefix() {
 		return prefix;
@@ -654,19 +579,19 @@ public class KMMetaBuilder extends KermetaVisitor {
 	/**
 	 * @return Returns the imports.
 	 */
-	public ArrayList getImports() {
+/*	public ArrayList getImports() {
 		return imports;
 	}
 	/**
 	 * @return Returns the usings.
 	 */
-	public ArrayList getUsings() {
+/*	public ArrayList getUsings() {
 		return usings;
 	}
 	/**
 	 * Get the fully qualified name of an FNamedElemenet
 	 */
-	public String getQualifiedName(FNamedElement element) {
+/*	public String getQualifiedName(FNamedElement element) {
 		if (element.eContainer() != null && element.eContainer() instanceof FNamedElement)
 			return getQualifiedName( (FNamedElement)element.eContainer() ) + "::" + ppIdentifier(element.getFName());
 		else return element.getFName();

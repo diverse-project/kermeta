@@ -24,14 +24,16 @@ public class Run extends TestCase {
 	public static MiniMofFactory miniMofFactory=null;
 	public static MiniMofJavaDriverFactory javaDriverFactory=null;
 	public static MiniMofEMFDriverFactory emfDriverFactory=null;*/
+	public static KermetaObjectFactory kermetaObjectFactory=null;
+	public static KermetaMetaMetaClass metametaclass=null;
 
 	public static void main(String[] args) {
 		if (args.length < 3)
 			System.err.println("Usage : run <modelName> <typeName> <operationName> <args...>");
 		else {
 			//prepare the kermetaObject factory and the metametaclass to allow kermeta metamodel traversing
-			KermetaObjectFactory kermetaObjectFactory=new KermetaObjectFactory();
-			KermetaMetaMetaClass metametaclass=new KermetaMetaMetaClass(kermetaObjectFactory);
+			kermetaObjectFactory=new KermetaObjectFactory();
+			metametaclass=new KermetaMetaMetaClass(kermetaObjectFactory);
 			String modelName=args[0];
 			KermetaUnitFactory.getDefaultLoader().unloadAll();
 			KermetaUnit metabuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.framework/src/kermeta/language/behavior.kmt");
