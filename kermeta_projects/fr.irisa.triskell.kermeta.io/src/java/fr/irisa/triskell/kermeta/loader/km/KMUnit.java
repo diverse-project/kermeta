@@ -91,5 +91,13 @@ public class KMUnit extends KermetaUnit {
 		// TODO Auto-generated method stub
 
 	}
+	
 
+    /* (non-Javadoc)
+     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadAnnotations()
+     */
+    public void loadAnnotations() {
+        // TODO Auto-generated method stub
+
+    }
 }

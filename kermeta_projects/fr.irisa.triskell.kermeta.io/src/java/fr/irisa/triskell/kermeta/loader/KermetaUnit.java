@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.6 2005-02-25 16:00:48 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.7 2005-03-02 17:31:18 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -18,6 +18,7 @@ package fr.irisa.triskell.kermeta.loader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
@@ -33,7 +34,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import com.ibm.eclipse.emfatic.core.ast.ClassMemberDecl;
+
 import fr.irisa.triskell.kermeta.behavior.BehaviorFactory;
+import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
@@ -45,6 +49,7 @@ import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.structure.FTypeContainer;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
@@ -108,6 +113,8 @@ public abstract class KermetaUnit {
 	public FOperation current_operation;
 	public FProperty current_property;
 	public FEnumeration current_enum;
+	public FAssignement current_assignment;
+	
 	
 	/**
 	 * The root package of the model being built
@@ -125,6 +132,11 @@ public abstract class KermetaUnit {
 	 * value = body of the op as a string 
 	 */
 	public Hashtable operation_bodies = new Hashtable();
+	
+	/**
+	 * The tags
+	 */
+	public Hashtable tags = new Hashtable();
 	
 	/**
 	 * This tables store the mapping between Metacore model elements
@@ -424,6 +436,11 @@ public abstract class KermetaUnit {
 		return false;
 	}
 	
+	/**
+	 * Get the list of direct parents of a class
+	 * @param cls Class for which we get the first-level parents
+	 * @return a Array of the <b>cls</b>'s first-level parents
+	 */
 	public FClassDefinition[] getDirectSuperClasses(FClassDefinition cls) {
 		EList scs = cls.getFSuperType();
 		ArrayList result = new ArrayList();
@@ -477,6 +494,10 @@ public abstract class KermetaUnit {
 		pp.ppPackage(rootPackage, new File(file_name));
 	}
 	
+	/**
+	 * Save Kermeta model
+	 * @param directory
+	 */
 	public void saveMetaCoreModel(String directory) {
 		if (rootPackage.eResource() == null) {
 			visited = true;
@@ -496,7 +517,12 @@ public abstract class KermetaUnit {
 				
 				
 			}
+			
+			// add root package
 			resource.getContents().add(getRootPackageForSerialization(rootPackage));
+			
+			// add tags to the resource
+			addFTagToResource(resource);
 			try {
 				resource.save(null);
 			} catch (IOException e) {
@@ -508,6 +534,27 @@ public abstract class KermetaUnit {
 		
 	}
 	
+	/**
+	 * Add the given tag to resource. Used in the KMT2KMPass7.java, to add tag in resource without
+	 * adding it to a container (since a tag can be linked to one or more elements, and unlinked as well).
+	 */
+	public void addFTagToResource(Resource resource)
+	{
+	    Enumeration enum = this.tags.elements();
+	    FTag tag;
+	    while (enum.hasMoreElements())
+	    {   
+	        tag = (FTag)enum.nextElement();
+	        resource.getContents().add(tag);
+	    }
+	}
+	
+	/**
+	 * If containedPackage has no container, we return it unchanged, else, we return its container,
+	 * with only this containedPackage container, and the container containers. 
+	 * @param containedPackage
+	 * @return
+	 */
 	public FPackage getRootPackageForSerialization(FPackage containedPackage) {
 		
 		FPackage container = containedPackage.getFNestingPackage();
@@ -519,6 +566,9 @@ public abstract class KermetaUnit {
 		return result;
 	}
 	
+	/**
+	 * Create and return a copy of the given package
+	 */
 	private FPackage copyPackageStructure(FPackage toCopy) {
 		FPackage result = struct_factory.createFPackage();
 		result.setFName(toCopy.getFName());
@@ -528,7 +578,9 @@ public abstract class KermetaUnit {
 		return result;
 	}
 	
-	
+	/**
+	 * Define a container for each element of the root package
+	 */
 	public void fixTypeContainement() {
 		TreeIterator it = rootPackage.eAllContents();
 		TypeContainementFixer fixer = new TypeContainementFixer();

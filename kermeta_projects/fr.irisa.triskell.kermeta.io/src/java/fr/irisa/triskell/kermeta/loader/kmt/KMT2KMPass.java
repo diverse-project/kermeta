@@ -36,6 +36,13 @@ import fr.irisa.triskell.kermeta.structure.FType;
  */
 public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	
+    
+    /**
+     * Define the tag names of the tags to attach to the KMElements
+     */
+    public static String PRE_TAGNAME = "pre";
+    public static String POST_TAGNAME= "post";
+    
 	protected KermetaUnit builder;
 	
 	// the constructor

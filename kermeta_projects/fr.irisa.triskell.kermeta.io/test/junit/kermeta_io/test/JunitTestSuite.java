@@ -4,8 +4,10 @@
  */
 package kermeta_io.test;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Iterator;
 
@@ -42,89 +44,113 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
+
+
+
+
+
+
 /*** BEGIN GENERATED TESTS ***/
-public void testmetacore() throws Exception {
+/*public void testmetacore() throws Exception {
 testWithFile("test/emfatic_testcases","metacore.emf" );
-}
-
-public void testtestEnum() throws Exception {
-testWithFile("test/kmt_testcases","testEnum.kmt" );
-}
-
-public void testtestVariable() throws Exception {
-testWithFile("test/kmt_testcases","testVariable.kmt" );
-}
-
-public void testtestPackage() throws Exception {
-testWithFile("test/kmt_testcases","testPackage.kmt" );
-}
-
-public void testtestSimpleExpression() throws Exception {
-testWithFile("test/kmt_testcases","testSimpleExpression.kmt" );
-}
-
-public void testtestExpression() throws Exception {
-testWithFile("test/kmt_testcases","testExpression.kmt" );
-}
-
-public void testtestClass() throws Exception {
-testWithFile("test/kmt_testcases","testClass.kmt" );
-}
-
-public void testtestResult() throws Exception {
-testWithFile("test/kmt_testcases","testResult.kmt" );
-}
-
-public void testtestProperty() throws Exception {
-testWithFile("test/kmt_testcases","testProperty.kmt" );
-}
-
-public void testtestSimpleCond() throws Exception {
-testWithFile("test/kmt_testcases","testSimpleCond.kmt" );
-}
-
-public void testtestSimpleLoop() throws Exception {
-testWithFile("test/kmt_testcases","testSimpleLoop.kmt" );
-}
-
-public void testtestOperation() throws Exception {
-testWithFile("test/kmt_testcases","testOperation.kmt" );
-}
-
-public void testtestCallExp() throws Exception {
-testWithFile("test/kmt_testcases","testCallExp.kmt" );
-}
-
-public void testtestPrimitiveType() throws Exception {
-testWithFile("test/kmt_testcases","testPrimitiveType.kmt" );
-}
-
-public void testtestImportAlias() throws Exception {
-testWithFile("test/kmt_testcases","testImportAlias.kmt" );
 }
 
 public void testtestBlock() throws Exception {
 testWithFile("test/kmt_testcases","testBlock.kmt" );
 }
 
+public void testtestCallExp() throws Exception {
+testWithFile("test/kmt_testcases","testCallExp.kmt" );
+}
+
+public void testtestClass() throws Exception {
+testWithFile("test/kmt_testcases","testClass.kmt" );
+}
+
 public void testtestConditional() throws Exception {
 testWithFile("test/kmt_testcases","testConditional.kmt" );
+}
+
+public void testtestEnum() throws Exception {
+testWithFile("test/kmt_testcases","testEnum.kmt" );
+}
+
+public void testtestExpression() throws Exception {
+testWithFile("test/kmt_testcases","testExpression.kmt" );
+}
+
+public void testtestOperation() throws Exception {
+testWithFile("test/kmt_testcases","testOperation.kmt" );
+}
+
+public void testtestPackage() throws Exception {
+testWithFile("test/kmt_testcases","testPackage.kmt" );
+}
+
+public void testtestPrimitiveType() throws Exception {
+testWithFile("test/kmt_testcases","testPrimitiveType.kmt" );
+}
+
+public void testtestProperty() throws Exception {
+testWithFile("test/kmt_testcases","testProperty.kmt" );
+}
+
+public void testtestResult() throws Exception {
+testWithFile("test/kmt_testcases","testResult.kmt" );
 }
 
 public void testtestSimpleAnnotations() throws Exception {
 testWithFile("test/kmt_testcases","testSimpleAnnotations.kmt" );
 }
 
-public void testtestInterDependA() throws Exception {
-testWithFile("test/kmt_testcases","testInterDependA.kmt" );
+public void testtestSimpleCond() throws Exception {
+testWithFile("test/kmt_testcases","testSimpleCond.kmt" );
 }
 
-public void testtestInterDependB() throws Exception {
-testWithFile("test/kmt_testcases","testInterDependB.kmt" );
+public void testtestSimpleExpression() throws Exception {
+testWithFile("test/kmt_testcases","testSimpleExpression.kmt" );
+}
+
+public void testtestSimpleLoop() throws Exception {
+testWithFile("test/kmt_testcases","testSimpleLoop.kmt" );
+}
+
+public void testtestVariable() throws Exception {
+testWithFile("test/kmt_testcases","testVariable.kmt" );
+}
+
+public void testtestImportAlias() throws Exception {
+testWithFile("test/kmt_testcases","testImportAlias.kmt" );
+}
+
+public void testtestExtractOperation() throws Exception {
+testWithFile("test/kmt_testcases","testExtractOperation.kmt" );
+}
+
+public void testtestInjectOperation() throws Exception {
+testWithFile("test/kmt_testcases","testInjectOperation.kmt" );
 }
 
 public void testtestCycleA() throws Exception {
 testWithFile("test/kmt_testcases","testCycleA.kmt" );
+}
+
+public void testtestSCommentBegin() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentBegin.kmt" );
+}
+
+public void testtestSCommentAlone() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentAlone.kmt" );
+}
+
+public void testtestSCommentInline() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentInline.kmt" );
+}
+
+public void testtestSCommentMany() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentMany.kmt" );
 }
 
 public void testtestCycleB() throws Exception {
@@ -135,6 +161,10 @@ public void testtestCycleC() throws Exception {
 testWithFile("test/kmt_testcases","testCycleC.kmt" );
 }
 
+public void testtestSCommentMiddleOfLoop() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentMiddleOfLoop.kmt" );
+}
+
 public void testtestCycleD() throws Exception {
 testWithFile("test/kmt_testcases","testCycleD.kmt" );
 }
@@ -143,10 +173,58 @@ public void testtestCycleE() throws Exception {
 testWithFile("test/kmt_testcases","testCycleE.kmt" );
 }
 
+public void testtestInterDependA() throws Exception {
+testWithFile("test/kmt_testcases","testInterDependA.kmt" );
+}
+
+public void testtestInterDependB() throws Exception {
+testWithFile("test/kmt_testcases","testInterDependB.kmt" );
+}
+*/
+public void testtestClassesComment() throws Exception {
+testWithFile("test/kmt_testcases","testClassesComment.kmt" );
+}
+/*
+public void testtestSCommentEmptyOp() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentEmptyOp.kmt" );
+}
+
+public void testtestMCommentBegin() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentBegin.kmt" );
+}
+
+public void testtestMCommentAlone() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentAlone.kmt" );
+}
+
+public void testtestMCommentInline() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentInline.kmt" );
+}
+
+public void testtestMCommentMany() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentMany.kmt" );
+}
+
+public void testtestMCommentMiddleOfLoop() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentMiddleOfLoop.kmt" );
+}
+
+public void testtestMCommentEmptyOp() throws Exception {
+testWithFile("test/kmt_testcases","testMCommentEmptyOp.kmt" );
+}
+
+public void testtestSCommentEndOfFile() throws Exception {
+testWithFile("test/kmt_testcases","testSCommentEndOfFile.kmt" );
+}
+
+public void testtestComplexAnnotations() throws Exception {
+testWithFile("test/kmt_testcases","testComplexAnnotations.kmt" );
+}
+
 public void testtestExtOperation() throws Exception {
 testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 }
-
+*/
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 	
@@ -172,9 +250,11 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		
 		BufferedWriter w = new BufferedWriter(new FileWriter(new File(ppfile)));
+		String pkg_name = "package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n";
+		
 		w.write("package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n");
-		
-		
+	
+		/* imported units needed to recognize the imported classes...*/
 		Iterator it = builder.importedUnits.iterator();
 		while(it.hasNext()) {
 			KermetaUnit iu = (KermetaUnit)it.next();
@@ -183,11 +263,10 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 			}
 		}
 		
-		w.write(pp.ppPackageContents(builder.rootPackage));
-		
+		String str_kmt = pp.ppPackage(builder.rootPackage);
+		// Do not write again the package declaration..
+		w.write(str_kmt.substring(pkg_name.length()));
 		w.close();
-		
-		
 		
 		// try to re-parse the pretty-printed version
 		KermetaUnit builder2 = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ppfile);

@@ -1,14 +1,7 @@
 package testPrimitiveType;
 
-
-
-//require "testClass.mct"
-
-//using testClass
-
 alias PClass1 : Coucou ;
 
-/* sjlksjd */
 class Coucou {
 
  attribut toto : PClass1

@@ -16,6 +16,7 @@ class Class1 {
 	@return "of the jedi"
 	operation operation1() is do
 		// v1 is a variable
+		// another
 		var v1 : Boolean
 		var v2 : Boolean // super variable v2
 		v1 := v1 and v2
@@ -26,3 +27,5 @@ class Class1 {
 }
 
 /* END OF FILE */
+
+// Another end of file

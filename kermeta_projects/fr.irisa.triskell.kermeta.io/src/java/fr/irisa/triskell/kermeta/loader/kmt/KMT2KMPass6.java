@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.2 2005-02-25 14:37:26 zdrey Exp $
+/* $Id: KMT2KMPass6.java,v 1.3 2005-03-02 17:31:20 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -42,7 +42,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 */
 	public KMT2KMPass6(KermetaUnit builder) {
 		super(builder);
-		System.out.println("Pass 6");
+		//System.out.println("Pass 6");
 		// TODO Auto-generated constructor stub
 	}
 	

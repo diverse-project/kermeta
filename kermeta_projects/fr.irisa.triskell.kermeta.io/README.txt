@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.2 2005-02-23 10:49:31 zdrey Exp $
+$Id: README.txt,v 1.3 2005-03-02 17:31:29 zdrey Exp $
 
 
 Leaders :
@@ -15,6 +15,17 @@ When the first kermeta iteration will be completed, this project should be refac
 
 How to build this project :
 ---------------------------
+
+
+How the project is organized :
+------------------------------
+
+* doc : documentation. ...
+* build : the generated classes
+* dist : the .jar of this project
+* kmt_archives :
+* kmtbodies :
+* 
 
 
 
@@ -81,6 +92,9 @@ How the packages are organized :
 History :
 ---------
 $Log: not supported by cvs2svn $
+Revision 1.2  2005/02/23 10:49:31  zdrey
+add skeleton to describe the package in io.
+
 Revision 1.1  2005/02/16 15:53:10  ffleurey
 Initial revision
 

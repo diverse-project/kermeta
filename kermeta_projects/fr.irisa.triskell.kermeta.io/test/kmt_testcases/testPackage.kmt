@@ -1,7 +1,5 @@
 package testPackage;
 
-//require "tools/metacore/parser/tests/testClass.mct"
-
 using metacore::standard
 
 package package1 {

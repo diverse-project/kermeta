@@ -1,6 +1,14 @@
-/*
- * Created on 21 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: EmfaticUnit.java,v 1.2 2005-03-02 17:31:31 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : EmfaticUnit.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 23, 2005
+ * Author : ffleurey
+ * Description : The Emfatic unit allows to load a kermeta object from an Emfatic AST .?
+ * TODO : 
+ * 		- 
  */
 package fr.irisa.triskell.kermeta.loader.emfatic;
 
@@ -18,9 +26,7 @@ import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * 
  */
 public class EmfaticUnit extends KermetaUnit {
 
@@ -61,6 +67,15 @@ public class EmfaticUnit extends KermetaUnit {
 		parse();
 	}
 	
+	
+	
+    /* (non-Javadoc)
+     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadAnnotations()
+     */
+    public void loadAnnotations() {
+        // TODO Auto-generated method stub
+
+    }
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadImportedUnits()
 	 */

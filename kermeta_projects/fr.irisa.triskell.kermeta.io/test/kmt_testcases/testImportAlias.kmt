@@ -6,7 +6,6 @@ using testClass::package1
 
 alias PClass1 : Coucou ;
 
-/* sjlksjd */
 class Coucou {
 
  attribut toto : PClass1

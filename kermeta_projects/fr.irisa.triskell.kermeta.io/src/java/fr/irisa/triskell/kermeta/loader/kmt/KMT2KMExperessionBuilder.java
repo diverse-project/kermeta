@@ -1,4 +1,4 @@
-/*
+/* $Id : $
  * Created on 5 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 public class KMT2KMExperessionBuilder extends KMT2KMPass {
 
 	public static FExpression process(fr.irisa.triskell.kermeta.ast.FExpression node, KermetaUnit builder) {
+	    
 		if (node == null) return null;
 		KMT2KMExperessionBuilder visitor = new KMT2KMExperessionBuilder(builder);
 		int old_errs = builder.getError().size();

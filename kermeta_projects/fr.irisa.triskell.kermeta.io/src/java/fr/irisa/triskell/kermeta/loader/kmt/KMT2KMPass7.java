@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.4 2005-03-02 16:56:56 zdrey Exp $
+/* $Id: KMT2KMPass7.java,v 1.5 2005-03-02 17:31:20 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -104,11 +104,12 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    int class_end = classDecl.getChild(getBeforeLastChildPosition(classDecl)).getRangeEnd();
 	    int posta_start = postAnnLst.getRangeStart();
 	    // TODO : find out what the chars betwxeen class_end and posta_start are.
-	    //System.out.println("class end:"+class_end-1+" - post start:"+posta_start-1);
+	    System.out.println("class end:"+class_end+" - post start:"+classDecl.getRangeStart());
 	    System.out.println("post_dfsdf:"+postAnnLst.getFirstChild().getFirstChild().getText());
 //	    System.out.println(fileData.charAt(class_end));
-	 //   String spacelines = fileData.substring(class_end, posta_start);
-	   String spacelines = "-"; 
+	    System.out.println("class=end="+class_end);
+	    String spacelines = fileData.substring(class_end, posta_start);
+	    
 	    // If there is at least one new line between post annotation and its class
 	    // then we do not consider it as a post annotation
 	    if (p.matcher(spacelines).matches())
@@ -159,7 +160,8 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	         new InputStreamReader(converter.createInputStream(URI.createURI(str_uri))));
 	        
 	        while (r.ready()) {
-	            result += r.readLine() + "\n";
+	            result += r.read(); //.readLine() + "\r\n"; // FIXME : new line are not same according to the filetype..
+	            //System.getProperty("line.separator").length(); 
 	        }
 	        r.close();
 	    } catch (FileNotFoundException e) {

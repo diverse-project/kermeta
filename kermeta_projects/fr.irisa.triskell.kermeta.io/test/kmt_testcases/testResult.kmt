@@ -1,6 +1,7 @@
 package testResult;
 
 
+
 class String {}
 class Integer {}
 class Boolean {}
@@ -17,3 +18,7 @@ class Class1 {
 	
 }
 
+
+
+package toto{
+}

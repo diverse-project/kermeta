@@ -7,8 +7,6 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import fr.irisa.triskell.kermeta.ast.*;
 
-import com.sun.corba.se.internal.orbutil.resources.sunorb;
-
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 

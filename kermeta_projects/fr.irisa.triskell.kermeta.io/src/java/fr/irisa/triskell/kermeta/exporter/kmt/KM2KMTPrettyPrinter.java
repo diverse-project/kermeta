@@ -1,7 +1,18 @@
-/*
- * Created on 7 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: KM2KMTPrettyPrinter.java,v 1.4 2005-03-02 17:31:27 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : KM2KMTPrettyPrinter.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 25, 2005
+ * Authors : 
+ * 	Franck Fleurey	ffleurey@irisa.fr
+ *  Zoe Drey 		zdrey@irisa.fr
+ * Description :
+ * 	Prints a kermeta model into a human-readable form (which is KMT)
+ * 
+ * 
+*/
 package fr.irisa.triskell.kermeta.exporter.kmt;
 
 import java.io.File;
@@ -19,13 +30,12 @@ import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.structure.*;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
+import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
 
 
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ *
  */
 public class KM2KMTPrettyPrinter extends KermetaVisitor {
 
@@ -59,6 +69,9 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		result += ppCRSeparatedNode(p.getFOwnedTypeDefinition());
 		typedef = false;
 		result += ppCRSeparatedNode(p.getFNestedPackage());
+		
+		// temporary handle of orphan tags
+		//result +=
 		return result;
 	}
 	
@@ -203,6 +216,19 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	public Object visit(FClassDefinition node) {
 		typedef = false;
 		String result = "";
+		
+
+		// Get the pre Annotation of this class 
+		if (node.getFTag().size()>0)
+		{
+		    FTag pretag = this.getFTagByName(node.getFTag(), KMT2KMPass.PRE_TAGNAME);
+		    if (pretag!=null)
+		    {
+		        result += this.accept((EObject)pretag);
+		    }
+		}
+		
+		
 		if (node.isFIsAbstract()) result += "abstract ";
 		result += "class " + ppIdentifier(node.getFName());
 		if (node.getFTypeParameter().size() > 0) {
@@ -219,8 +245,22 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		result += ppCRSeparatedNode(node.getFOwnedAttributes());
 		result += ppCRSeparatedNode(node.getFOwnedOperation());
 		popPrefix();
-		result += getPrefix() + "}";
+		result += getPrefix() + "}";		
+		
 		typedef = true;
+		
+		// Get post annotations
+		if (node.getFTag().size()>0)
+		{
+		    // get pre annotation
+		    FTag posttag = this.getFTagByName(node.getFTag(), KMT2KMPass.POST_TAGNAME);
+		    if (posttag!=null)
+		    {
+		        result += this.accept(posttag);
+		    }
+		}
+		
+		
 		return result;
 	}
 	
@@ -594,6 +634,17 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		return result;
 	}
 	
+    /**
+     * FTag is a special model element that we should have
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FTag)
+     */
+    public Object visit(FTag node) {
+        String result = "";
+        //result = "@pre : \"" + node.getFValue() + "\"";
+        result = "/*{"+node.getFName()+"}*/\r\n"+ node.getFValue() + "\n";
+        return result;
+    }
+    
 	protected String prefix = "";
 	
 	protected String getPrefix() {
@@ -628,4 +679,28 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		else return element.getFName();
 	}
 	
+	/**
+	 * Get a tag in a list of tags  by its name
+	 * In a first time we assume that the name of each tag of a class is unique.
+	 * Later, we will think about the relevance of having not unique tags (depends on how we handle
+	 * code documentation => extern system, or integrated?)
+	 */
+	public FTag getFTagByName(EList ftagList, String name)
+	{
+	    Iterator it = ftagList.iterator();
+	    FTag result_tag = null;
+	    boolean ok = false;
+	    while (it.hasNext() && !ok)
+	    {
+	        FTag tag = (FTag)it.next();
+	        if (tag.getFName().equals(name))
+	        {
+	            result_tag = tag;
+	            ok = true;
+	        }
+	    }
+	    return result_tag;
+	}
+	
 }
+

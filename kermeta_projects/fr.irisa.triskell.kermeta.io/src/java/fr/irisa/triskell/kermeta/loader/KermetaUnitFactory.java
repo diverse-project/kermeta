@@ -1,4 +1,4 @@
-/*
+/* $Id : $
  * Created on 10 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * 
@@ -66,9 +66,14 @@ public class KermetaUnitFactory {
         kmPath = new Hashtable();
     }
     
+    /**
+     * Create a kermeta unit (without loading it?)
+     * @param uri
+     * @return
+     */
     public KermetaUnit createKermetaUnit(String uri) {
     	
-    	System.out.println("ASK UNIT " + uri);
+    	//System.out.println("ASK UNIT " + uri);
     	
     	// TODO : reslove URI if it is not
     	KermetaUnit result = null;
@@ -87,7 +92,7 @@ public class KermetaUnitFactory {
     	// return the unit if it already exists
     	if (loadedUnits.containsKey(u.toString())) return (KermetaUnit)loadedUnits.get(u.toString());
     	
-    	System.out.println("CREATE UNIT " + u.toString());
+    	//System.out.println("CREATE UNIT " + u.toString());
     	
     	// Create the appropriate Unit using the loader registerered for the file extension
     	
