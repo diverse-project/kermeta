@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.1 2005-03-22 08:14:11 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.2 2005-03-22 13:03:44 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -110,7 +110,9 @@ public class BaseInterpreter extends KermetaVisitor {
 				);
 				*/
 	    //RuntimeObject ko = factory.createRuntimeObject(node);
-	    interpreterContext.getCurrentFrame().getCurrentExpressionContext().defineVariable(node);
+	    RuntimeObject ro_init = (RuntimeObject)this.accept(node.getFInitialization());
+	    interpreterContext.getCurrentFrame().getCurrentExpressionContext().defineVariable(
+	            node.getFType().getFType(), node.getFIdentifier(), ro_init);
 	    return null;
 	}
 	
@@ -293,20 +295,19 @@ public class BaseInterpreter extends KermetaVisitor {
         }
         
         // Push a new expressionContext in the current CallFrame. 
-        interpreterContext.getCurrentFrame().pushNewBlockStack(node);
+        interpreterContext.getCurrentFrame().pushNewExpressionContext(node);
+        // Accept initialization (a FVariableDecl) : add a new variable in the ExpressionContext
+        this.accept(node.getFInitiatization());
         
 	    while (value.equals("TRUE INSTANCE"))
 	    {
-	        // cond_result = this.accept(node.getFStopCondition());
-	        // Accept initialization will add a new variable in the ExpressionContext
-	        this.accept(node.getFInitiatization());
 	        this.accept(node.getFBody());
-	        
+	        cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
+	        value = (String)cond_result.getProperties().get("singleton instance");
 	    }
 	    
 	    // Pop the expression context
-	    interpreterContext.getCurrentFrame().popBlockStack();
-	    
+	    interpreterContext.getCurrentFrame().popExpressionContext();
 	    return null;
 	}
 	
@@ -321,13 +322,34 @@ public class BaseInterpreter extends KermetaVisitor {
 	public Object visit(FOperation node) {
 	    // Push a new ExpressionContext. The root expression associated with this context : 
 	    // a FCallFeature? ... -> accessible attribute of BaseInterpreter?
-	    interpreterContext.getCurrentFrame().pushNewBlockStack(null);
+	    interpreterContext.getCurrentFrame().pushNewExpressionContext(null);
+	    CallFrame current_frame = interpreterContext.getCurrentFrame();
+	    Iterator it = current_frame.getParameters().iterator();
+	    
+	    // Resolve parameters with the values given in the call of this operation
+	    // add them to the context
+	    EList params = node.getFOwnedParameter();
+	    int i = 0;
+	    while (it.hasNext())
+	    {
+	        RuntimeObject called_param = (RuntimeObject)it.next();
+	        FParameter p = (FParameter)params.get(i);
+	        // Define a context variable
+	        // PATCH? FParameter to VariableDeclaration
+	        current_frame.getCurrentExpressionContext().defineVariable(
+	                p.getFType(), p.getFName(), called_param);
+	        i+=1;
+	    }
 	    
 	    this.accept(node.getFBody());
 	    
-	    // If operation returns something that is not VOID, return it. else, return the Runtime Singleton VoiD
+	    // Visit raised Exception if any
+	    visitList(node.getFRaisedException());
+	    
+	    // If operation returns something that is not VOID, return it?
 	    
 	    // Pop the expressionContext
+	    interpreterContext.getCurrentFrame().popExpressionContext();
 		return null;
 	}
 
@@ -378,11 +400,11 @@ public class BaseInterpreter extends KermetaVisitor {
 		    if (e_context != null)
 		    {
 		        ro_target = (ro_target!=null)?ro_target:((Variable)e_context.getVariables().get(var_name)).getRuntimeObject();
-		        FTypeReference tr_target = 
-		            ((Variable)e_context.getVariables().get(var_name)).getDeclaration().getFType();
+		        FType t_target = 
+		            ((Variable)e_context.getVariables().get(var_name)).getType();
 		        
 		        // RuntimeObject feature = factory.getTypeDefinitionByName(qname);
-		        Vector feature = getFeatureType(tr_target, node);
+		        Vector feature = getFeatureType(t_target, node);
 		        
 		        // Is the callfeature an operation call? So that we create a new call
 		        // frame and accept this operation in order to process it.
@@ -506,16 +528,36 @@ public class BaseInterpreter extends KermetaVisitor {
         return result;
 	}
     
+	/* -----------------------------------------------------------------------------
+	 * 
+	 * VISIT PRIMITIVE TYPES
+	 * 
+	 * -----------------------------------------------------------------------------
+	 */
+	
 	/**
 	 * @return the value of this node as an integer
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FIntegerLiteral) 
 	 */
-	public Object visit(FIntegerLiteral node)
-	{
-	    return node;
-	    //return new Integer(node.getFValue());
+	public Object visit(FIntegerLiteral node) {
+	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue());
 	}
 	
+	/**
+	 * @return the value of this node as a boolean
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral) 
+	 */
+	public Object visit(FBooleanLiteral node) {
+	    return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(node.isFValue());
+	}
+	
+    /** 
+     * @return the value of this node as a runtime object
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FStringLiteral)
+     */
+    public Object visit(FStringLiteral node) {
+        return fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue());
+    }
 	/**
 	 * Visit a classDefinition node has the following consequences :
 	 * - create the "self" RuntimeObject and link it to the current CallFrame context 
@@ -530,6 +572,25 @@ public class BaseInterpreter extends KermetaVisitor {
 	    return result;
 	}
 	
+	
+	
+    /**
+     * visit a raise node
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FRaise)
+     */
+    public Object visit(FRaise node) {
+        return this.accept(node.getFExpression());
+    }
+    /**
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FRescue)
+     */
+    public Object visit(FRescue node) {
+        
+        visitList(node.getFBody());
+        // node.getFExceptionName()
+        // node.getFExceptionType()
+        return null;
+    }
 	/*
 	 * 
 	 * Helpers
@@ -673,21 +734,20 @@ public class BaseInterpreter extends KermetaVisitor {
      * If the type of the type reference of the target is a "FClass", then we have to find out
      * if feature is an operation or an attribute. We can find that it is an operation if there
      * are parameters, but in the other case (no parameters) we have no way to find it.
-     * @param target the type reference of the "callee" element on which feature is "called"
+     * @param type the type reference of the "callee" element on which feature is "called"
      * @param feature the feature of which we want the type (FOperation, FAttribute)
      * @return a Vector of 2 elements. First one is the name of the feature type, 
      * second one the ecore object of the feature. 
      */
-    public static Vector getFeatureType(FTypeReference target, FCallFeature feature)
+    public static Vector getFeatureType(FType type, FCallFeature feature)
     {
         Vector result = null;
         String result_str = null;
         Object result_elt = null;
-        FType type = target.getFType();
         // If type is a FClass
         if (FClass.class.isInstance(type))
-        {	// map...
-            EList operations = ((FClass)target).getFOwnedOperation();
+        {	// map... 
+            EList operations = ((FClass)type).getFOwnedOperation();
             int i = 0;
             while (i < operations.size() && result == null)
             {	
@@ -697,7 +757,7 @@ public class BaseInterpreter extends KermetaVisitor {
             }
             if (result_str == null)
             {
-                EList attributes = ((FClass)target).getFOwnedAttribute();
+                EList attributes = ((FClass)type).getFOwnedAttribute();
                 while (i < attributes.size() && result == null)
                 {
                     result_elt = attributes.get(i++);
