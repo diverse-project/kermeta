@@ -43,7 +43,7 @@ list topLevelDecls : topLevelDecl* ;
 
 abstract topLevelDecl : subPackageDecl | classDecl | enumDecl | dataTypeDecl; //| enumDecl | mapEntryDecl ;
 
-sequence subPackageDecl : "package" name=ID LCURLY topLevelDecls RCURLY ;
+sequence subPackageDecl : preAnnotations=annotations "package" name=ID LCURLY topLevelDecls RCURLY;
 
 sequence classDecl : preAnnotations=annotations (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY postAnnotations=annotations; 
 //(COLON instClassName=stringLiteralOrQualifiedID)? LCURLY classMemberDecls RCURLY ;
@@ -140,7 +140,7 @@ sequence callPostfix : DOT name=ID ;
 sequence paramPostfix : LPAREN (parameters=actualParameterList)? RPAREN ;
 list actualParameterList : p1=actualParameter (COMMA pn=actualParameter)* ;
 sequence actualParameter : expression=fExpression ;
-sequence lambdaPostfix : LCURLY params=lambdaPostfixParamLst PIPE expression=fExpression  ;
+sequence lambdaPostfix : LCURLY params=lambdaPostfixParamLst PIPE expression=fExpression RCURLY ;
 list lambdaPostfixParamLst : p1=lambdaPostfixParam (COMMA pn=lambdaPostfixParam)* ;
 sequence lambdaPostfixParam : name=ID;
 

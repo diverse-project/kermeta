@@ -163,9 +163,9 @@ topLevelDecl returns [ TopLevelDecl retVal = null ]
 
 subPackageDecl returns [ SubPackageDecl retVal = null ]
 :
-{ TopLevelDecls topLevelDecls = null; }
-  package_KW:"package" name:ID lcurly:LCURLY topLevelDecls=topLevelDecls rcurly:RCURLY 
-{ retVal = new SubPackageDecl(package_KW, name, lcurly, topLevelDecls, rcurly); }
+{ Annotations preAnnotations = null; TopLevelDecls topLevelDecls = null; }
+  preAnnotations=annotations package_KW:"package" name:ID lcurly:LCURLY topLevelDecls=topLevelDecls rcurly:RCURLY 
+{ retVal = new SubPackageDecl(preAnnotations, package_KW, name, lcurly, topLevelDecls, rcurly); }
 ;
 
 classDecl returns [ ClassDecl retVal = null ]
@@ -592,8 +592,8 @@ actualParameter returns [ ActualParameter retVal = null ]
 lambdaPostfix returns [ LambdaPostfix retVal = null ]
 :
 { LambdaPostfixParamLst params = null; FExpression expression = null; }
-  lcurly:LCURLY params=lambdaPostfixParamLst pipe:PIPE expression=fExpression 
-{ retVal = new LambdaPostfix(lcurly, params, pipe, expression); }
+  lcurly:LCURLY params=lambdaPostfixParamLst pipe:PIPE expression=fExpression rcurly:RCURLY 
+{ retVal = new LambdaPostfix(lcurly, params, pipe, expression, rcurly); }
 ;
 
 lambdaPostfixParamLst returns [ LambdaPostfixParamLst retVal = new LambdaPostfixParamLst() ]
