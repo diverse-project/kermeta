@@ -1,0 +1,17 @@
+package testArithm;
+
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+// assignment of the return variable
+class Test_arithm {
+
+    operation operation1() : Integer is do
+        var ~result : Integer
+        var a : Integer
+        a := 4
+        ~result := ( 3 + a ) * 2
+        result := ~result
+    end
+}
+
+

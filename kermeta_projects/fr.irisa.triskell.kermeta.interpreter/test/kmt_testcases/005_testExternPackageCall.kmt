@@ -1,0 +1,8 @@
+package testExternPackage;
+
+// operation called in another package
+class Test_opcall {
+    operation operation_asg() : Integer is do
+        result := 4 * 3
+    end
+}

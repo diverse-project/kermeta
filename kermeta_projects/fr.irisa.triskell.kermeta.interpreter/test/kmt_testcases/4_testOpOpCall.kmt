@@ -1,0 +1,20 @@
+package testOpOpCall;
+
+// Call of an operation from another class inside an operation
+class Test_opopcall {
+
+    attribut e : Integer
+
+    operation operation1() : Integer is do
+        result := Test_opcalled.new.operation_asg()
+    end
+
+
+}
+
+class Test_opcalled {
+    
+    operation operation_asg(): Integer is do
+        result := 5
+    end
+}

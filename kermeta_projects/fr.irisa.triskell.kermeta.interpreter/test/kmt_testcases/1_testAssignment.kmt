@@ -1,0 +1,13 @@
+package testAssignment;
+
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+class Test_assignment {
+
+    operation operation1() : Integer is do
+        var ~result : Integer
+        ~result := 4
+        result := ~result
+    end
+}
+
