@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.1 2005-03-21 08:48:42 zdrey Exp $
+/* $Id: ExpressionContext.java,v 1.2 2005-03-22 12:56:50 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -15,19 +15,26 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.Hashtable;
 
+import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
-import fr.irisa.triskell.kermeta.runtime.factory.KermetaObjectFactory;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.structure.FType;
 
 /**
- * The context associated to an Expression (usually, an instruction at the lowest level, or a block,
- * or a class). The former name was "ExpressionContext", but using a lower level title seemed clearer...
+ * This is the context associated to a block inside the definition of an operation
+ * A block is a set of instructions, or an IF or WHILE instruction. It is a entity of
+ * the stack of blocks (block_stack) of a CallFrame.
+ * It contains a hashtable of variables which is filled as soon as a declaration of variable occurs
+ * inside a block.
  */
 public class ExpressionContext {
     
        
-	// The first expression associated to this context
-	KermetaObject root;
+	// The expression associated to this context
+    // Typically : a FLoop, FConditional, and one for the FOperationBody if any var.
+    // is declared inside it and at the top level. 
+	FExpression root; // should be a RuntimeObject?
 
 	// The set of variable defined in this block
 	// key : the name of the variable (String)
@@ -49,27 +56,45 @@ public class ExpressionContext {
 	 * @param root
 	 * @param variables
 	 */
-	public ExpressionContext(KermetaObject pRoot, Hashtable pVariables)
+	public ExpressionContext(FExpression pRoot, Hashtable pVariables)
 	{
 	    root = pRoot;
 	    variables = pVariables;
 	}
 	
 	
-	/** 
+	/**
+	 * @deprecated 
 	 * Add a new variable, from its declaration, in the context
 	 * Copy-try from ff. Did not understand -
 	 * FVariableDecl is "var toto" in kermeta 
 	 * @param declaration the variable declaration of the variable, to add in the context
-	 * @return the KermetaObject that was added as the value of this variable
+	 * @return the RuntimeObject that was added as the value of this variable
 	 */
 	public Variable defineVariable(FVariableDecl declaration)
 	{
 		Variable var = new Variable();
 		
-		// FIXME : create an intermediate class "Variable" like in kmt implementation?
 		variables.put(((FVariableDecl)declaration).getFIdentifier(), var);
 		return var;
+	}
+	
+	/** 
+	 * Add a new variable, from its declaration, in the context
+	 * Copy-try from ff. Did not understand -
+	 * FVariableDecl is "var toto" in kermeta 
+	 * @param declaration the variable declaration of the variable, to add in the context
+	 * @return the RuntimeObject that was added as the value of this variable
+	 */
+	public Variable defineVariable(FType type, String name, RuntimeObject init)
+	{
+	    Variable var = new Variable();
+	    var.setType(type);
+	    if (init!=null)
+	        var.setRuntimeObject(init);
+		variables.put(name, var);
+		return var;
+	    
 	}
 	
 	/**
@@ -77,12 +102,12 @@ public class ExpressionContext {
 	 * @param name
 	 * @param value
 	 */
-	public void setVariable(String name, KermetaObject object)
+	public void setVariable(String name, RuntimeObject object)
 	{
-		//KermetaObject result = declaration.getFactory().createClassFromClassDefinition(type_def);
+		//RuntimeObject result = declaration.getFactory().createClassFromClassDefinition(type_def);
 		Variable var = new Variable();
 		var.setName(name);
-		var.setKermetaObject(object);
+		var.setRuntimeObject(object);
 		
 		if (variables.containsKey(name))
 		{
@@ -114,7 +139,7 @@ public class ExpressionContext {
 	 * 
 	 *
 	 */
-	public void setRoot(KermetaObject pRoot)
+	public void setRoot(FExpression pRoot)
 	{
 	    root = pRoot;
 	}
