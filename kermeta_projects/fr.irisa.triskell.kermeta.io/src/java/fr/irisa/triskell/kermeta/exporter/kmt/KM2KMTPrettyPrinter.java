@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.7 2005-03-09 13:38:13 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.8 2005-03-10 14:57:46 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -186,6 +186,15 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param qname the qualified name of the type
+	 * @param name the name of the type
+	 * @return a String. 
+	 * FIXED : test of qname.startsWith was not good
+	 * examples : if rootpackage is "a" and qname="a1" the test considers that
+	 * the type (identified by qname) belongs to current root package
+	 */
 	protected String ppTypeName(String qname, String name) {
 		String result = "";
 		if (qname.equals(current_pname + "::" + name)) result += name;
@@ -196,11 +205,12 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 					break;
 				}
 			}
-			if (qname.startsWith(root_pname))
+			if (qname.startsWith(root_pname+"::"))
+			{
 				result += qname.substring(root_pname.length() + 2);
+			}
 		}
 		if (result.equals("")) result += qname;
-		
 		return result;
 	}
 	
@@ -575,7 +585,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeReference)
 	 */
 	public Object visit(FTypeReference node) {
-		return ppTypeFromMultiplicityElement(node);
+	    return ppTypeFromMultiplicityElement(node);
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariable)
