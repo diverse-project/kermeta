@@ -1,6 +1,6 @@
 package kermeta::reflection;
 
-require "../standard/Collections.kmt"
+require "../standard/collections.kmt"
 
 alias String : kermeta::standard::String;
 abstract class Object
