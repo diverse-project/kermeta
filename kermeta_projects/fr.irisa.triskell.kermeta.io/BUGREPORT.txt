@@ -1,0 +1,55 @@
+$Id: BUGREPORT.txt,v 1.1 2005-03-10 11:53:50 zdrey Exp $
+This file is a bug report for the fr.irisa.triskell.kermeta.io project.
+--------------------------------------------------------------------------------
+
+---------------------------------------------------------------------
+Bug 1 : error when calling an operation coming from an extern package
+---------------------------------------------------------------------
+
+Assuming the following example :
+
+|	File1.kmt :
+|-------------------------------------------
+|	package file1;
+|	class class1  {
+|		operation op1() : Void is do
+|			result := 1
+|		end
+|	}
+|--------------------------------------------
+
+If we want to use op1() in another file, we want to do it this way (assuming
+we defined a "require" inside it!):
+
+(1)	result := file1::class1.new.op1()
+
+or this way :
+	
+(2)	result := class1.new.op1()
+
+But first case (1) does not work and truncates, during prettyprinting, the 
+class1 qualified name in ":class1" instead of putting "file1::class1"
+
+(1)
+         <fTarget xsi:type="kermeta_behavior:FCallFeature" fName="new">
+            <fTarget xsi:type="kermeta_behavior:FTypeLiteral">
+              <fTyperef fType="//@fOwnedTypeDefinition.1/@fOwnedOperation.0/@fBody/@fStatement.0/@fTarget/@fTarget/@fTyperef/@fContainedType.0" fUpper="1">
+                <fContainedType xsi:type="kermeta_structure:FClass">
+                  <fClassDefinition href="6_testExternPackageCall2_kmt.kcore#//@fOwnedTypeDefinition.0"/>
+                </fContainedType>
+              </fTyperef>
+            </fTarget>
+
+(2)
+
+          <fTarget xsi:type="kermeta_behavior:FCallFeature" fName="new">
+            <fTarget xsi:type="kermeta_behavior:FTypeLiteral">
+              <fTyperef fType="//@fOwnedTypeDefinition.1/@fOwnedOperation.0/@fBody/@fStatement.0/@fTarget/@fTarget/@fTyperef/@fContainedType.0" fUpper="1">
+                <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fOwnedTypeDefinition.1"/>
+              </fTyperef>
+            </fTarget>
+          </fTarget>
+
+In fact, 2nd case kcore is wrong : the fContainedType refers to a class as if it was a local type whereas it
+is not.
+
