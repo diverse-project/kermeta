@@ -1,0 +1,28 @@
+@mainClass "testBenchmark::Test_benchmark"
+@mainOperation "operation1"
+
+package testBenchmark;
+
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+class Test_benchmark {
+
+    operation operation1() : kermeta::standard::Integer is do
+ 		var v1 : kermeta::standard::Integer init 0
+		
+		from var i : kermeta::standard::Integer init 0
+		until i == 100
+		loop
+			v1 := operation_asg(v1)
+			i := i + 1
+		end
+		result := v1
+    end
+
+    operation operation_asg(in : kermeta::standard::Integer) : kermeta::standard::Integer is do
+        result := in + 1
+    end
+
+
+}
+
