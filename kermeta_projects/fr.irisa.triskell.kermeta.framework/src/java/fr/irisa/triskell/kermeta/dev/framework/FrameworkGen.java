@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.10 2005-02-25 15:36:39 zdrey Exp $
+/* $Id: FrameworkGen.java,v 1.11 2005-03-02 16:53:50 zdrey Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -34,6 +34,7 @@ public class FrameworkGen {
 	
 	KermetaUnit abstract_unit;
 	KermetaUnit concrete_unit;
+	KM2KMTPrettyPrinter pp;
 	
 	
 	/**
@@ -55,6 +56,7 @@ public class FrameworkGen {
 		
 		
 		KermetaUnit.STD_LIB_URI = "src/kermeta/Standard.kmt";
+		
 		
 		if (KermetaUnit.getStdLib().error.size() > 0) {
 			System.err.println(KermetaUnit.getStdLib().getMessagesAsString());
@@ -141,21 +143,6 @@ public class FrameworkGen {
 		}
 		
 	}
-	
-	public FClassDefinition createVisitor(FPackage pkg) {
-		// abstract class Visitor<ContextType> {
-		FClassDefinition visitor = abstract_unit.struct_factory.createFClassDefinition();
-		visitor.setFName("KMVisitor");
-		visitor.setFIsAbstract(true);
-		FTypeVariable typevar = abstract_unit.struct_factory.createFTypeVariable();
-		typevar.setFName("ContextType");
-		visitor.getFTypeParameter().add(typevar);
-		// ClassVisitor
-		ClassVisitor cvisitor = new ClassVisitor(abstract_unit, visitor);
-		cvisitor.accept(pkg);
-		pkg.getFOwnedTypeDefinition().add(visitor);
-		return visitor;
-		
 	
 	
 	public void writeAbstractStructure(FPackage abstract_structure) throws Exception {
