@@ -4,8 +4,10 @@ package fr.irisa.triskell.kermeta.runtime.language;
 
 import fr.irisa.triskell.kermeta.runtime.KermetaObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
+import fr.irisa.triskell.kermeta.runtime.basetypes.FALSE;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
+import fr.irisa.triskell.kermeta.runtime.basetypes.TRUE;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 
 public class Object {
@@ -26,8 +28,8 @@ public class Object {
 	// Implementation of method equals called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(element)
 	public static KermetaObject equals(KermetaObject self, KermetaObject param0) {
-		if(self == param0) return Boolean.TRUE;
-		else return Boolean.FALSE;
+		if(self == param0) return TRUE.INSTANCE;
+		else return FALSE.INSTANCE;
 	}
 
 	// Implementation of method get called as :
@@ -58,7 +60,7 @@ public class Object {
 	
 	public static void set(KermetaObject self, KermetaObject param0, KermetaObject param1, boolean handle_opposite) {
 		// Unset first if there is an object
-		if (isSet(self, param0) == Boolean.TRUE)  unSet(self, param0);
+		if (isSet(self, param0) == TRUE.INSTANCE)  unSet(self, param0);
 		// set the new object
 		self.getProperties().put(getPropertyName(param0), param1);
 		// set containement
@@ -89,8 +91,8 @@ public class Object {
 	// Implementation of method isSet called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(~property)
 	public static KermetaObject isSet(KermetaObject self, KermetaObject param0) {
-		if (self.getProperties().get(getPropertyName(param0)) != null) return Boolean.TRUE;
-		else return Boolean.FALSE;
+		if (self.getProperties().get(getPropertyName(param0)) != null) return TRUE.INSTANCE;
+		else return FALSE.INSTANCE;
 	}
 
 	// Implementation of method unSet called as :
@@ -101,7 +103,7 @@ public class Object {
 	}
 	
 	public static void unSet(KermetaObject self, KermetaObject param0, boolean handle_opposite) {
-		if (isSet(self, param0) == Boolean.FALSE) return;
+		if (isSet(self, param0) == FALSE.INSTANCE) return;
 		KermetaObject value = (KermetaObject)self.getProperties().get(getPropertyName(param0));
 		if (getPropertyUpper(param0) == 1) {
 			if (isPropertyContainment(param0)) value.setContainer(null);
@@ -137,15 +139,15 @@ public class Object {
 	}
 	
 	public static boolean isPropertyContainment(KermetaObject property) {
-		return property.getProperties().get("upper") == Boolean.TRUE;
+		return property.getProperties().get("upper") == TRUE.INSTANCE;
 	}
 	
 	public static boolean isPropertyOrdered(KermetaObject property) {
-		return property.getProperties().get("upper") == Boolean.TRUE;
+		return property.getProperties().get("upper") == TRUE.INSTANCE;
 	}
 	
 	public static boolean isPropertyUnique(KermetaObject property) {
-		return property.getProperties().get("upper") == Boolean.TRUE;
+		return property.getProperties().get("upper") == TRUE.INSTANCE;
 	}
 	
 	public static java.lang.String getPropertyName(KermetaObject property) {
