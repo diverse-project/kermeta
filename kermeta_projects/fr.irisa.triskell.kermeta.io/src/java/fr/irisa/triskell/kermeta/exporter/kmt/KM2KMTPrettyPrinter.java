@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.5 2005-03-07 16:56:19 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.6 2005-03-09 13:35:31 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
 
 
 import fr.irisa.triskell.kermeta.behavior.*;
+import fr.irisa.triskell.kermeta.behavior.impl.FCallFeatureImpl;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.structure.*;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
@@ -366,13 +367,17 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		return result;
 	}
 	/**
+	 * A lambda expression is printed differently according to its use.
+	 * But for now we will only authorize it to be :
+	 * - a CallFeature (a parameter)
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FLambdaExpression)
 	 */
 	public Object visit(FLambdaExpression node) {
-		String result = "function {";
+		String result = "{";
 		result += ppComaSeparatedNodes(node.getFParameters());
 		result += " | ";
 		pushPrefix();
+		System.out.println("body:"+this.accept(node.getFBody()));
 		result += this.accept(node.getFBody());
 		popPrefix();
 		result += "}";
@@ -609,12 +614,20 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		if (node.getFTarget() != null) result += this.accept(node.getFTarget());
 		else result += "self";
 		result += "." + ppIdentifier(node.getFName());
-		if (node.getFParameters().size()> 0) {
+		// handle the special case where there is 1 parameter, and when This
+		// parameter is a lambdaPostFix
+		//	TODO : throw an exception if type is not a LambdaExpression
+		if (node.getFParameters().size()==1 && FLambdaExpression.class.isInstance(node.getFParameters().get(0)))
+		{
+		   result+= ppComaSeparatedNodes(node.getFParameters());
+		}
+		// the classic case : a list of parameters
+		else if (node.getFParameters().size()> 0) {
 			result += "(" + ppComaSeparatedNodes(node.getFParameters()) + ")";
 		}
+		
 		return result;
 	}
-	
 	
 	
 	/**
@@ -686,6 +699,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 */
 	public FTag[] getFTagsByName(EList ftagList, String name)
 	{
+	    
 	    Iterator it = ftagList.iterator();
 	    FTag[] result_tagArray = new FTag[10];
 	    int i = 0;
