@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.6 2005-03-25 17:30:14 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.7 2005-03-29 17:06:01 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import sun.nio.cs.KOI8_R;
 
+import fr.irisa.triskell.kermeta.ast.FSelfCall;
 import fr.irisa.triskell.kermeta.behavior.*;
 import fr.irisa.triskell.kermeta.structure.*;
 
@@ -129,7 +130,9 @@ public class BaseInterpreter extends KermetaVisitor {
 				*/
 	    //RuntimeObject ko = factory.createRuntimeObject(node);
 	    // TODO : node.getFInit can be null -
-	    RuntimeObject ro_init = (RuntimeObject)this.accept(node.getFInitialization());
+		RuntimeObject ro_init=null;
+		if (node.getFInitialization()!=null)
+			ro_init = (RuntimeObject)this.accept(node.getFInitialization());
 	    interpreterContext.getCurrentFrame().getCurrentExpressionContext().defineVariable(
 	            node.getFType().getFType(), node.getFIdentifier(), ro_init);
 	    return null;
@@ -227,10 +230,18 @@ public class BaseInterpreter extends KermetaVisitor {
 	    RuntimeObject value = null;
 	    if (found_context!=null)
 	        value = found_context.getVariable(node.getFName()).getRuntimeObject();
+	    else
+	    	// TODO
+	    	System.err.println("Var not declared");
 	    return value;
 	}
 
 	
+	public Object visit(FSelfExpression node)
+	{
+	    return interpreterContext.getCurrentFrame().getSelf();
+	}
+
 	/**
 	 * Evaluate the sequence of instructions in this block.
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBlock)
@@ -363,13 +374,39 @@ public class BaseInterpreter extends KermetaVisitor {
 	    this.accept(node.getFBody());
 	    
 	    // Visit raised Exception if any
-	    visitList(node.getFRaisedException());
+//	    visitList(node.getFRaisedException());
 	    
 	    // If operation returns something that is not VOID, return it?
 	    
+	    RuntimeObject result = interpreterContext.getCurrentFrame().getOperationResult();
 	    // Pop the expressionContext
 	    interpreterContext.getCurrentFrame().popExpressionContext();
-		return null;
+		return result;
+	}
+	
+	/**
+	 * Invoke the foperation argument on the ro_target Runtime Object;
+	 *  arguments to this call are given as an ArrayList
+	 * @param ro_target
+	 * @param foperation
+	 * @param arguments
+	 * @return
+	 */
+	public Object invoke(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
+		RuntimeObject result=null;
+        // Create a context for this operation call, setting self object to ro_target
+        interpreterContext.pushNewCallFrame(ro_target);
+        interpreterContext.getCurrentFrame().setParameters(arguments);
+    	    
+        //memorize self object
+        interpreterContext.getCurrentFrame().setSelf(ro_target);
+
+        // Resolve this operation call
+        result = (RuntimeObject)this.accept(foperation);
+        
+        // After operation has been evaluated, pop its context
+        interpreterContext.getFrameStack().pop();
+		return result;
 	}
 
 	/**
@@ -383,17 +420,19 @@ public class BaseInterpreter extends KermetaVisitor {
 	public Object visit(FCallFeature node) {
 	    
 	    FExpression target = node.getFTarget();
+	    FTypeDefinition t_target = null; // Type of the "callee"
 	    RuntimeObject result = null; // The result to be returned by this visit
 	    RuntimeObject ro_target = null; // Runtime repr. of target
 	    // if target is null, means that it is an attribute of self object. We find self
-	    // object in current callFrame
+	    // object in current callFrame  self.node
 		if (target == null)
 		{
 		    ro_target = interpreterContext.getCurrentFrame().getSelf();
+		    t_target =(FTypeDefinition)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
 		}
 		
-		// TODO : handle the case of calls like "toto.titi.tutu" -> recursive
-		// FIXME : is this done automatically
+		// handle the case of calls like "toto.titi.tutu" -> recursive
+		// target.node -> target1.toto.node 
 		if (FCallFeature.class.isInstance(target))
 		{
 		    result = (RuntimeObject)this.accept(target); 
@@ -418,59 +457,65 @@ public class BaseInterpreter extends KermetaVisitor {
 		    // (in ko.mycallfeature)
 		    if (e_context != null)
 		    {
-		        ro_target = (ro_target!=null)?ro_target:((Variable)e_context.getVariables().get(var_name)).getRuntimeObject();
-		        FType t_target = 
-		            ((Variable)e_context.getVariables().get(var_name)).getType();
-		        
-		        // RuntimeObject feature = factory.getTypeDefinitionByName(qname);
-		        Vector feature = getFeatureType(t_target, node);
-		        
-		        // Is the callfeature an operation call? So that we create a new call
-		        // frame and accept this operation in order to process it.
-		        if (feature!=null && feature.get(0).equals("FOperation"))
-		        {
-		            // Create a context for this operation call, setting self object to ro_target
-		            interpreterContext.pushNewCallFrame(ro_target);
-		            // Get the FOperation corresponding to this operation call
-		            FOperation foperation = (FOperation)feature.get(1);
-		            // Get the parameters of this operation
-		        	ArrayList parameters = visitList(node.getFParameters());
-		            interpreterContext.getCurrentFrame().setParameters(parameters);
-		            
-		            // Resolve this operation call
-		            result = (RuntimeObject)this.accept(foperation);
-		            
-		            // After operation has been evaluated, pop its context
-		            interpreterContext.getFrameStack().pop();
-		        }
-		        // Is it a property? If yes, update the RuntimeObject repr.g the target node !
-		        else if (feature!=null && feature.get(0).equals("FProperty"))
-		        {
-		            // The property 
-		            FProperty fproperty = (FProperty)feature.get(1);
-		            // The Runtime representation of this property. 
-		            RuntimeObject ro_property = null;
-		            RuntimeObject attributes = (RuntimeObject)ro_target.getMetaclass().getProperties().get("ownedAttributes");
-		            
-		            Iterator it = ((ArrayList)attributes.getData().get("CollectionArrayList")).iterator();
-		            while (it.hasNext() && ro_property == null)
-		            {
-		                RuntimeObject attr = (RuntimeObject)it.next();
-		                if (attr.getProperties().get("name").equals(fproperty.getFName()))
-		                {
-		                    ro_property = attr;
-		                    // Get the value of the property
-		                    result = fr.irisa.triskell.kermeta.runtime.language.Object.get(
-		                            ro_target, ro_property);
-		                }
-		            }
-			     }
+		    	Variable var=(Variable)e_context.getVariables().get(var_name);
+		        ro_target = (ro_target!=null)?ro_target:var.getRuntimeObject();
+		        t_target = ((FClass)var.getType()).getFClassDefinition();
 		    }
 		    else
 		    {
-		        // TODO raise an exception / undefined variable?
+		    	// TODO : raise an interpretation exception 
 		    }
 		    
+		}
+		// Now we can process either Self (target==null) or FCallVariable (the 2nd test)
+		if (target==null || FCallVariable.class.isInstance(target))
+		{
+			// RuntimeObject feature = factory.getTypeDefinitionByName(qname);
+			Vector feature = getFeatureType(t_target, node);
+			
+			// Is the callfeature an operation call? So that we create a new call
+			// frame and accept this operation in order to process it.
+			if (feature!=null && feature.get(0).equals("FOperation"))
+			{
+				// Create a context for this operation call, setting self object to ro_target
+				interpreterContext.pushNewCallFrame(ro_target);
+				// Get the FOperation corresponding to this operation call
+				FOperation foperation = (FOperation)feature.get(1);
+				// Get the parameters of this operation
+				ArrayList parameters = visitList(node.getFParameters());
+				interpreterContext.getCurrentFrame().setParameters(parameters);
+				
+				//memorize self object
+				interpreterContext.getCurrentFrame().setSelf(ro_target);
+				
+				// Resolve this operation call
+				result = (RuntimeObject)this.accept(foperation);
+				
+				// After operation has been evaluated, pop its context
+				interpreterContext.getFrameStack().pop();
+			}
+			// Is it a property? If yes, update the RuntimeObject repr.g the target node !
+			else if (feature!=null && feature.get(0).equals("FProperty"))
+			{
+				// The property 
+				FProperty fproperty = (FProperty)feature.get(1);
+				// The Runtime representation of this property. 
+				RuntimeObject ro_property = null;
+				RuntimeObject attributes = (RuntimeObject)ro_target.getMetaclass().getProperties().get("ownedAttributes");
+				
+				Iterator it = ((ArrayList)attributes.getData().get("CollectionArrayList")).iterator();
+				while (it.hasNext() && ro_property == null)
+				{
+					RuntimeObject attr = (RuntimeObject)it.next();
+					if (attr.getProperties().get("name").equals(fproperty.getFName()))
+					{
+						ro_property = attr;
+						// Get the value of the property
+						result = fr.irisa.triskell.kermeta.runtime.language.Object.get(
+								ro_target, ro_property);
+					}
+				}
+			}
 		}
 		// else it is a class (kermeta_behavior::TypeLiteral).
 		// TypeLiteral : a class (we can have .new, .a_reflective_property, an enumeration
@@ -515,19 +560,21 @@ public class BaseInterpreter extends KermetaVisitor {
 	 */
 	public Object visit(FJavaStaticCall node) {
 	    
-		String jclassName  = node.getFJclass(); 
+		String jclassName  = node.getFJclass().replaceAll("::","."); 
 		String jmethodName = node.getFJmethod();
 		
 		Object[] paramsArray = new Object[node.getFParameters().size()];
 		Class[] paramtypes = new Class[node.getFParameters().size()];
 		
+		// Get the parameters of this operation
+		ArrayList parameters = visitList(node.getFParameters());
 		// Get the param types for invokated method
-		Iterator it = node.getFParameters().iterator();
+		Iterator it = parameters.iterator();
 		int i = 0;
 		while (it.hasNext())
 		{
 		    paramtypes[i] = RuntimeObject.class;
-		    paramsArray[i] = it.next();
+		    paramsArray[i++] = it.next();
 		}
 		// Invoke the java method
 		Class jclass = null;
@@ -755,7 +802,7 @@ public class BaseInterpreter extends KermetaVisitor {
             // Search from last to beginning
             while (!found && j>0) 
             {
-                context = (ExpressionContext)frame.getBlockStack().get(i-1);
+                context = (ExpressionContext)frame.getBlockStack().get(j-1);
                 if (context.getVariables().containsKey(varName))
                 {
                     found=true;
@@ -788,15 +835,15 @@ public class BaseInterpreter extends KermetaVisitor {
      * @return a Vector of 2 elements. First one is the name of the feature type, 
      * second one the ecore object of the feature. 
      */
-    public static Vector getFeatureType(FType type, FCallFeature feature)
+    public static Vector getFeatureType(FTypeDefinition type, FCallFeature feature)
     {
         Vector result = null;
         String result_str = null;
         Object result_elt = null;
         // If type is a FClass
-        if (FClass.class.isInstance(type))
+        if (FClassDefinition.class.isInstance(type))
         {
-            FClassDefinition class_def = ((FClass)type).getFClassDefinition();
+            FClassDefinition class_def = (FClassDefinition)type;
             // Is the feature in the class definition of *type*?
             result = getFlatFeatureType(class_def, feature);
             // If it is still null, we have to find it in the Super classes, recursively
@@ -850,9 +897,10 @@ public class BaseInterpreter extends KermetaVisitor {
         int i = 0;
         while (i < operations.size() && result_str == null)
         {	
-            result_elt = operations.get(i++);
+            result_elt = operations.get(i);
             if (((FOperation)operations.get(i)).getFName().equals(feature.getFName()))
                 result_str = "FOperation";
+            i++;
         }
         if (result_str == null)
         {

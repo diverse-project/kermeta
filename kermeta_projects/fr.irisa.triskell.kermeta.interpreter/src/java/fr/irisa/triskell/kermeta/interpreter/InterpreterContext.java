@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.2 2005-03-25 16:40:18 zdrey Exp $
+/* $Id: InterpreterContext.java,v 1.3 2005-03-29 17:06:01 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : GPL
@@ -48,7 +48,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
  * The CallFrame of operation call of f1() has the following hashtables as its ExpressionContexts:
  * 1) 1st element of stack	: expressionContext for the if	[(a, 1), (b, 2), (c, 3), (d, f2())]
  * 2) 2nd element of stack  : eC for the included if [(e, 1)]
- * 3) 3rd element of stack	: eC for the while	[(d, f2())]
+ * 3) after pop of the precedings : new 1st element of stack : eC for the while	[(d, f2())]
  * 
  * There is 2 other callFrames :
  * - one for f2
@@ -90,6 +90,13 @@ public class InterpreterContext {
      */
     protected CallFrame current_frame; // stack.peek should return the current one
 
+    /**
+     * 
+     */
+    public InterpreterContext()
+    {
+    	frame_stack = new Stack();
+    }
 	
 
 	/**

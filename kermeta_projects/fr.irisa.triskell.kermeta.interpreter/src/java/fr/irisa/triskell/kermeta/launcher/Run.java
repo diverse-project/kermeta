@@ -12,7 +12,9 @@ import fr.irisa.triskell.kermeta.builder.KMBuilderPass1;
 import fr.irisa.triskell.kermeta.builder.KMBuilderPass2;
 import fr.irisa.triskell.kermeta.builder.KMMetaBuilder;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.interpreter.BaseInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.Interpreter;
+import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -104,7 +106,6 @@ public class Run extends TestCase {
 /*				KMBuilderPass2 classesBuilderPass2 = new KMBuilderPass2();			
 				classesBuilderPass2.ppPackage(builder);*/
 		}
-	}
 		/*
 		 * Context setup
 		 */
@@ -121,7 +122,7 @@ public class Run extends TestCase {
 			FOperation mainOp=(FOperation)it.next();
 			if (mainOp.getFName().equals(args[2])) {
 				found=true;
-				List arguments=new ArrayList();
+				ArrayList arguments=new ArrayList();
 				if (args.length>3) {//set a collection of arguments for the operation
 					//assume the first parameter of mainOp is a ref(0,*) StringLiteral
 					for (int i=3;i<args.length;i++) {
@@ -131,7 +132,10 @@ public class Run extends TestCase {
 				}
 				System.err.println("\nSTARTING INTERPRETATION OF MAIN OPERATION...");
 				System.err.println("############################################");
+				BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder);
+				System.out.println("RESULT : "+baseInterpreter.invoke(mainClassInstance,mainOp,arguments));
 			}
+		}
 		}
 	}
 }

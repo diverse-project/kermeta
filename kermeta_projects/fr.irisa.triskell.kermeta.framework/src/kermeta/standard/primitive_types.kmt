@@ -125,7 +125,7 @@ class Integer inherits Numeric
 	 * returns self + other
 	 */
 	operation plus(other : Integer) : Integer is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.plus(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.plus(self,other)
 	end
 	
 	/**
