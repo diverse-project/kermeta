@@ -1,6 +1,6 @@
 package kermeta;
 
 
-require "standard/Collections.kmt"
+require "standard/collections.kmt"
 //require "reflection/kermeta_structure.kmt"
 //require "base/ReflectiveCollections.kmt"
