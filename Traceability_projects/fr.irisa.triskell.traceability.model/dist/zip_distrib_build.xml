@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build" default="plugin_export">
+	<target name="plugin_export">
+		<pde.exportPlugins plugins="fr.irisa.triskell.traceability,fr.irisa.triskell.traceability.edit,fr.irisa.triskell.traceability.editor" destination="C:\eclipse3.0\eclipse\workspace\fr.irisa.triskell.traceability.model\dist" filename="fr.irisa.triskell.traceability.plugins.distrib.zip" exportType="zip" exportSource="true"/>
+	</target>
+</project>
