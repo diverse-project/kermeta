@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.3 2005-03-25 11:17:00 jpthibau Exp $
+/* $Id: KMBuilderPass1.java,v 1.4 2005-03-25 16:37:43 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -717,9 +717,9 @@ public class KMBuilderPass1 extends KermetaVisitor {
 			knode.getProperties().put("icReadOnly",fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.TRUE);
 		knode.getProperties().put("name",node.getFName());
 		knode.getProperties().put("name",ppTypeFromMultiplicityElement(node));
-//TODO manage opposites in a second pass
-/*		if (node.getFOpposite() != null)
-			result += "#" + ppIdentifier(node.getFOpposite().getFName());*/
+//TODO manage opposites in a second pass of KMBuilder ?
+		if (node.getFOpposite() != null)
+			knode.getProperties().put("opposite",node.getFOpposite().getFName());
 		if (node.isFIsDerived()) {
 			if (node.getFGetterbody() != null)
 				knode.getProperties().put("getterBody",this.accept(node.getFGetterbody()));
