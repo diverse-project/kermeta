@@ -1,4 +1,4 @@
-/* $Id: MakeConcreteClass.java,v 1.2 2005-02-21 10:05:25 zdrey Exp $
+/* $Id: MakeConcreteClass.java,v 1.3 2005-02-21 10:09:00 zdrey Exp $
  * Created on Feb 18, 2005
  * By zdrey
  * Description :
@@ -40,7 +40,7 @@ public class MakeConcreteClass extends KermetaVisitor {
     }
     
     /**
-     * Concretize the classes : add extend <class>. (
+     * Concretize the classes : add extend <class> from abstract unit. (
      * remove all the initial inherited packs)
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FClassDefinition)
      */
@@ -48,12 +48,10 @@ public class MakeConcreteClass extends KermetaVisitor {
         
         // create the class of classdefinition
         FClass parent_fclass = abstract_unit.struct_factory.createFClass();
-        System.out.println(classdef.getFName());
         parent_fclass.setFClassDefinition((FClassDefinition)abstract_unit.getTypeDefinitionByName(
                 "kermeta::structure::"+classdef.getFName()));
         
-       //FClassDefinition cClassdef = unit.struct_factory.createFClassDefinition();
-       classdef.getFSuperType().add(parent_fclass);
+        classdef.getFSuperType().add(parent_fclass);
         return super.visit(classdef);
     }
     
@@ -62,7 +60,7 @@ public class MakeConcreteClass extends KermetaVisitor {
      */
     public Object visit(FOperation operation) {
         
-        return null;
+        return super.visit(operation);
     }
 }
 
