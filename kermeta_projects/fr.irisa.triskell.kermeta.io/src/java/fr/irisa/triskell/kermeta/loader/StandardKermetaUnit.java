@@ -10,23 +10,27 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.loader.expression.OperationBodyLoader;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class StandardKermetaUnit extends KermetaUnit {
+public class StandardKermetaUnit extends KMTUnit {
 
 	/**
 	 * @param importStdLib
 	 */
 	public StandardKermetaUnit() {
-		super();
+		super(KermetaUnit.STD_LIB_URI);
 		// TODO Auto-generated constructor stub
 	}
-
 	
+	public StandardKermetaUnit(String uri) {
+		super(uri);
+		// TODO Auto-generated constructor stub
+	}
 	
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#importStdlib()
@@ -51,7 +55,8 @@ public class StandardKermetaUnit extends KermetaUnit {
 		}
 		else {
 			KermetaUnit unit;
-			unit = KermetaLoader.getDefaultLoader().load(str_uri, new StandardKermetaUnit());
+			//unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri, new StandardKermetaUnit());
+			unit =  new StandardKermetaUnit(str_uri);
 			if (unit.error.size() > 0) {
 				error.add(new KMUnitError("Errors in imported model " + str_uri + " : \n" +  ((KMUnitMessage)unit.error.get(0)).getMessage(), null));
 			}

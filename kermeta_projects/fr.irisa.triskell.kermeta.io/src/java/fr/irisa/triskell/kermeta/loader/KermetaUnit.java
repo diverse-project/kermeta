@@ -46,9 +46,10 @@ import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class KermetaUnit {
+public abstract class KermetaUnit {
 	
 	public static String STD_LIB_URI = null;
+	public static String ROOT_CLASS_QNAME = "kermeta::structure::Object";
 	
 	private static StandardKermetaUnit std_lib = null;
 	
@@ -56,17 +57,20 @@ public class KermetaUnit {
 		if (std_lib == null) {
 			std_lib = new StandardKermetaUnit();
 			try {
-				KermetaLoader.getDefaultLoader().load(STD_LIB_URI, std_lib);
+				std_lib = new StandardKermetaUnit();
+				std_lib.load();
 			}
 			catch(Throwable e) {
 				std_lib.error.add(new KMUnitError("Exception while importing the standartd library : " + e, null));
+				e.printStackTrace();
 			}
 		}
 		return std_lib;
 	}
 	
 	
-	public KermetaUnit() {
+	public KermetaUnit(String uri) {
+		this.uri = uri;
 		struct_factory = StructurePackageImpl.init().getStructureFactory();
 		behav_factory = BehaviorPackageImpl.init().getBehaviorFactory();
 		importStdlib();
@@ -162,7 +166,7 @@ public class KermetaUnit {
 	/**
 	 * The imported metacore units
 	 */
-	protected ArrayList importedUnits = new ArrayList();
+	public ArrayList importedUnits = new ArrayList();
 	
 	/**
 	 * A table of types defined in the current Metacore model
@@ -176,7 +180,7 @@ public class KermetaUnit {
 	 * used in the unit.
 	 * It allows writing short names instead of fully qualified names
 	 */
-	protected ArrayList usings = new ArrayList();
+	public ArrayList usings = new ArrayList();
 	
 	
 	public String getMessagesAsString() {
@@ -188,19 +192,24 @@ public class KermetaUnit {
 		return result;
 	}
 	
+	protected boolean visited = false;
+	
 	/**
 	 * Get a package by its qualified name
 	 * Returns null is not found
 	 */
 	public FPackage packageLookup(String qname) {
+		
 		FPackage result = (FPackage)packages.get(qname);
 		if (result != null) return result;
 		Iterator it = importedUnits.iterator();
+		visited = true;
 		while(it.hasNext()) {
 			KermetaUnit iu = (KermetaUnit)it.next();
-			result = iu.packageLookup(qname);
-			if (result != null) return result;
+			if (!iu.visited) result = iu.packageLookup(qname);
+			if (result != null) break;
 		}
+		visited = false;
 		return result;
 	}
 	
@@ -211,13 +220,16 @@ public class KermetaUnit {
 	 * returns null if type not found
 	 */
 	public FTypeDefinition typeDefinitionLookup(String fully_qualified_name) {
+	//	System.out.println("typeDefinitionLookup " + uri + " " +fully_qualified_name);
 		FTypeDefinition result = (FTypeDefinition)typeDefs.get(fully_qualified_name);
 		if (result == null) {
+			visited = true;
 		    for (int i=0; i<importedUnits.size(); i++) {
 		        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-		        result = iu.typeDefinitionLookup(fully_qualified_name);
-		        if (result != null) return result;
+		        if (!iu.visited) result = iu.typeDefinitionLookup(fully_qualified_name);
+		        if (result != null) break;
 		    }
+		    visited = false;
 		}
 		return result;
 	}
@@ -287,7 +299,7 @@ public class KermetaUnit {
 		else {
 			KermetaUnit unit;
 			// This is a normal behavior
-			unit = KermetaLoader.getDefaultLoader().load(str_uri);
+			unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri);
 			if (unit.error.size() > 0) {
 				error.add(new KMUnitError("Errors in imported model " + str_uri + " : \n" +  ((KMUnitMessage)unit.error.get(0)).getMessage(), null));
 			}
@@ -403,11 +415,17 @@ public class KermetaUnit {
 	
 	public FClassDefinition[] getDirectSuperClasses(FClassDefinition cls) {
 		EList scs = cls.getFSuperType();
-		FClassDefinition[] result = new FClassDefinition[scs.size()];
+		ArrayList result = new ArrayList();
 		for(int i=0; i<scs.size(); i++) {
-			result[i] = ((FClass)scs.get(i)).getFClassDefinition();
+			result.add( ((FClass)scs.get(i)).getFClassDefinition() );
 		}
-		return result;
+		// Add the type Object which is implicilty a direct supertype of everything
+		if (typeDefinitionLookup(ROOT_CLASS_QNAME) != null && !getQualifiedName(cls).equals(ROOT_CLASS_QNAME))
+			result.add(typeDefinitionLookup(ROOT_CLASS_QNAME));
+			
+			
+		
+		return (FClassDefinition[])result.toArray(new FClassDefinition[result.size()]);
 	}
 	
 	public ArrayList getAllOperations(FClassDefinition cls) {
@@ -441,7 +459,7 @@ public class KermetaUnit {
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		for (int i=0; i<importedUnits.size(); i++) {
 	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-	        if (iu == getStdLib()) continue;
+	        if (STD_LIB_URI != null && iu == getStdLib()) continue;
 	        pp.getImports().add(iu.getResolvedURI(uri));
 	    }
 		pp.getUsings().addAll(usings);
@@ -450,11 +468,12 @@ public class KermetaUnit {
 	
 	public void saveMetaCoreModel(String directory) {
 		if (rootPackage.eResource() == null) {
-			
+			visited = true;
 			for (int i=0; i<importedUnits.size(); i++) {
 		        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-		        iu.saveMetaCoreModel(directory);
+		        if (!iu.visited) iu.saveMetaCoreModel(directory);
 		    }
+			visited = false;
 			String file_name = URI.createURI(uri).lastSegment().replace('.', '_') + ".kcore";
 			
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("kcore",new XMIResourceFactoryImpl()); 
@@ -509,6 +528,110 @@ public class KermetaUnit {
 			}
 		}
 	}
+	
+	
+	
+	
+	public void load() {
+		//System.out.println("\nLOAD " + uri);
+		// load imported units
+		loadAllImportedUnits();
+		loadAllTypeDefinitions();
+		loadAllStructuralFeatures();
+		loadAllOppositeProperties();
+		loadAllBodies();
+	}
+	
+	boolean loading = false;
+	
+	private void loadAllImportedUnits() {
+//		System.out.println("loadAllImportedUnits " + uri);
+		loading = true;
+		// load imported units
+		preLoad();
+		loadImportedUnits();
+		for(int i=0; i<importedUnits.size(); i++) {
+			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+			if (!iu.loading) iu.loadAllImportedUnits();
+		}
+		loading = false;
+	}
+	
+	private void loadAllTypeDefinitions() {
+		//		System.out.println("loadAllTypeDefinitions " + uri);
+		loading = true;
+		// load imported units
+		for(int i=0; i<importedUnits.size(); i++) {
+			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+			if (!iu.loading) iu.loadAllTypeDefinitions();
+		}
+		loadTypeDefinitions();
+		loading = false;
+	}
+	
+	private void loadAllStructuralFeatures() {
+		//		System.out.println("loadAllStructuralFeatures " + uri);
+		loading = true;
+		// load imported units
+		loadStructuralFeatures();
+		for(int i=0; i<importedUnits.size(); i++) {
+			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+			if (!iu.loading) iu.loadAllStructuralFeatures();
+		}
+		loading = false;
+	}
+	
+	private void loadAllOppositeProperties() {
+		//	System.out.println("loadAllOppositeProperties " + uri);
+		loading = true;
+		// load imported units
+		loadOppositeProperties();
+		for(int i=0; i<importedUnits.size(); i++) {
+			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+			if (!iu.loading) iu.loadAllOppositeProperties();
+		}
+		loading = false;
+	}
+	
+	private void loadAllBodies() {
+		//	System.out.println("loadAllBodies " + uri);
+		loading = true;
+		// load imported units
+		loadBodies();
+		for(int i=0; i<importedUnits.size(); i++) {
+			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+			if (!iu.loading) iu.loadAllBodies();
+		}
+		loading = false;
+	}
+	
+	/**
+	 * Any pre-load action like parsing for instance
+	 */
+	public abstract void preLoad();
+	
+	/**
+	 * Loads dependencies ( handles require, using, ...)
+	 */
+	public abstract void loadImportedUnits();
+	/**
+	 * Create packages and type definitions
+	 */
+	public abstract void loadTypeDefinitions();
+	/**
+	 * Updates type definitions relationships (inheritance, ...)
+	 * Create properties / operations
+	 */
+	public abstract void loadStructuralFeatures();
+	/**
+	 * Update structural features relationships
+	 * opposite properties...
+	 */
+	public abstract void loadOppositeProperties();
+	/**
+	 * Creates Bodies for operations and derived properties
+	 */
+	public abstract void loadBodies();
 	
 	/**
 	 * @return Returns the error.

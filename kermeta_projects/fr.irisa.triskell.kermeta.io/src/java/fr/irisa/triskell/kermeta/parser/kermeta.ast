@@ -69,7 +69,7 @@ sequence propertyBody : getterBody (setterBody)? ;
 sequence getterBody : (annotations)? "getter" "is" getterbody = fExpression ;
 sequence setterBody : (annotations)? "setter" "is" setterbody = fExpression ;
 
-sequence operation : operationKind name=ID (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)? ("raises" exceptions=typelst)? ("select" superSelection=ID)? "is" operationBody;
+sequence operation : operationKind name=ID (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)?  ("from" superSelection=qualifiedID)? ("raises" exceptions=typelst)? "is" operationBody;
 token operationKind : "operation" | "method" ;
 
 abstract operationBody : operationEmptyBody | operationExpressionBody ;

@@ -1,0 +1,9 @@
+package testCycle;
+
+require "testCycleE.kmt"
+
+class A {
+
+	attribut e : E
+ 
+}

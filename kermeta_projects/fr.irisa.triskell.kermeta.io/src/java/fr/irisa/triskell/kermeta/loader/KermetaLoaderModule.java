@@ -28,6 +28,6 @@ public abstract class KermetaLoaderModule {
      * @param uri
      * @return
      */
-    public abstract boolean load(KermetaUnit unit, String uri);
+    public abstract KermetaUnit createKermetaUnit(String uri);
 
 }

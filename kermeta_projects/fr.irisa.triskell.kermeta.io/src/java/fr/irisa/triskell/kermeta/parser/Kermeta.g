@@ -295,9 +295,9 @@ setterBody returns [ SetterBody retVal = null ]
 
 operation [ Annotations annotations ]  returns [ Operation retVal = null ]
 :
-{ OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; Typelst exceptions = null; OperationBody operationBody = null; }
-  operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( raises_KW:"raises" exceptions=typelst )? ( select_KW:"select" superSelection:ID )? is_KW:"is" operationBody=operationBody 
-{ retVal = new Operation(annotations, operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, raises_KW, exceptions, select_KW, superSelection, is_KW, operationBody); }
+{ OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; OperationBody operationBody = null; }
+  operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( from_KW:"from" superSelection=qualifiedID )? ( raises_KW:"raises" exceptions=typelst )? is_KW:"is" operationBody=operationBody 
+{ retVal = new Operation(annotations, operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, operationBody); }
 ;
 
 operationKind returns [ OperationKind retVal = null ]

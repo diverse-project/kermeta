@@ -1,25 +1,32 @@
 // $ANTLR : "Kermeta.g" -> "KermetaLexer.java"$
 
 package fr.irisa.triskell.kermeta.parser;
-import java.io.InputStream;
-import java.io.Reader;
-import java.util.Hashtable;
+import fr.irisa.triskell.kermeta.ast.*;
+import com.ibm.eclipse.ldt.core.parser.*;
 
-import antlr.ANTLRHashString;
-import antlr.ByteBuffer;
-import antlr.CharBuffer;
-import antlr.CharStreamException;
-import antlr.CharStreamIOException;
-import antlr.InputBuffer;
-import antlr.LexerSharedInputState;
-import antlr.NoViableAltForCharException;
-import antlr.RecognitionException;
-import antlr.Token;
-import antlr.TokenStream;
+import java.io.InputStream;
 import antlr.TokenStreamException;
 import antlr.TokenStreamIOException;
 import antlr.TokenStreamRecognitionException;
+import antlr.CharStreamException;
+import antlr.CharStreamIOException;
+import antlr.ANTLRException;
+import java.io.Reader;
+import java.util.Hashtable;
+import antlr.CharScanner;
+import antlr.InputBuffer;
+import antlr.ByteBuffer;
+import antlr.CharBuffer;
+import antlr.Token;
+import antlr.CommonToken;
+import antlr.RecognitionException;
+import antlr.NoViableAltForCharException;
+import antlr.MismatchedCharException;
+import antlr.TokenStream;
+import antlr.ANTLRHashString;
+import antlr.LexerSharedInputState;
 import antlr.collections.impl.BitSet;
+import antlr.SemanticException;
 
 public class KermetaLexer extends antlr.CharScanner implements KermetaParserTokenTypes, TokenStream
  {
@@ -37,28 +44,27 @@ public KermetaLexer(LexerSharedInputState state) {
 	caseSensitiveLiterals = true;
 	setCaseSensitive(true);
 	literals = new Hashtable();
-	literals.put(new ANTLRHashString("raise", this), new Integer(76));
-	literals.put(new ANTLRHashString("loop", this), new Integer(72));
+	literals.put(new ANTLRHashString("raise", this), new Integer(75));
+	literals.put(new ANTLRHashString("loop", this), new Integer(71));
 	literals.put(new ANTLRHashString("method", this), new Integer(39));
 	literals.put(new ANTLRHashString("class", this), new Integer(17));
-	literals.put(new ANTLRHashString("init", this), new Integer(78));
+	literals.put(new ANTLRHashString("init", this), new Integer(77));
 	literals.put(new ANTLRHashString("self", this), new Integer(63));
-	literals.put(new ANTLRHashString("false", this), new Integer(81));
-	literals.put(new ANTLRHashString("true", this), new Integer(80));
+	literals.put(new ANTLRHashString("false", this), new Integer(80));
+	literals.put(new ANTLRHashString("true", this), new Integer(79));
 	literals.put(new ANTLRHashString("bag", this), new Integer(40));
 	literals.put(new ANTLRHashString("Self", this), new Integer(24));
 	literals.put(new ANTLRHashString("result", this), new Integer(65));
 	literals.put(new ANTLRHashString("require", this), new Integer(10));
 	literals.put(new ANTLRHashString("oset", this), new Integer(43));
 	literals.put(new ANTLRHashString("and", this), new Integer(52));
-	literals.put(new ANTLRHashString("select", this), new Integer(37));
-	literals.put(new ANTLRHashString("void", this), new Integer(82));
+	literals.put(new ANTLRHashString("void", this), new Integer(81));
 	literals.put(new ANTLRHashString("Void", this), new Integer(25));
 	literals.put(new ANTLRHashString("end", this), new Integer(67));
 	literals.put(new ANTLRHashString("set", this), new Integer(41));
 	literals.put(new ANTLRHashString("setter", this), new Integer(33));
 	literals.put(new ANTLRHashString("inherits", this), new Integer(16));
-	literals.put(new ANTLRHashString("until", this), new Integer(71));
+	literals.put(new ANTLRHashString("until", this), new Integer(70));
 	literals.put(new ANTLRHashString("reference", this), new Integer(28));
 	literals.put(new ANTLRHashString("do", this), new Integer(66));
 	literals.put(new ANTLRHashString("alias", this), new Integer(49));
@@ -67,13 +73,13 @@ public KermetaLexer(LexerSharedInputState state) {
 	literals.put(new ANTLRHashString("function", this), new Integer(68));
 	literals.put(new ANTLRHashString("or", this), new Integer(53));
 	literals.put(new ANTLRHashString("abstract", this), new Integer(18));
-	literals.put(new ANTLRHashString("from", this), new Integer(70));
+	literals.put(new ANTLRHashString("from", this), new Integer(36));
 	literals.put(new ANTLRHashString("is", this), new Integer(32));
-	literals.put(new ANTLRHashString("extern", this), new Integer(79));
+	literals.put(new ANTLRHashString("extern", this), new Integer(78));
 	literals.put(new ANTLRHashString("attribut", this), new Integer(27));
-	literals.put(new ANTLRHashString("raises", this), new Integer(36));
+	literals.put(new ANTLRHashString("raises", this), new Integer(37));
 	literals.put(new ANTLRHashString("property", this), new Integer(29));
-	literals.put(new ANTLRHashString("if", this), new Integer(73));
+	literals.put(new ANTLRHashString("if", this), new Integer(72));
 	literals.put(new ANTLRHashString("enumeration", this), new Integer(50));
 	literals.put(new ANTLRHashString("rescue", this), new Integer(69));
 	literals.put(new ANTLRHashString("seq", this), new Integer(42));
@@ -81,10 +87,10 @@ public KermetaLexer(LexerSharedInputState state) {
 	literals.put(new ANTLRHashString("using", this), new Integer(11));
 	literals.put(new ANTLRHashString("operation", this), new Integer(38));
 	literals.put(new ANTLRHashString("package", this), new Integer(4));
-	literals.put(new ANTLRHashString("else", this), new Integer(75));
-	literals.put(new ANTLRHashString("var", this), new Integer(77));
+	literals.put(new ANTLRHashString("else", this), new Integer(74));
+	literals.put(new ANTLRHashString("var", this), new Integer(76));
 	literals.put(new ANTLRHashString("not", this), new Integer(60));
-	literals.put(new ANTLRHashString("then", this), new Integer(74));
+	literals.put(new ANTLRHashString("then", this), new Integer(73));
 }
 
 public Token nextToken() throws TokenStreamException {

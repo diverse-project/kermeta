@@ -62,6 +62,17 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		return result;
 	}
 	
+	public String ppPackageContents(FPackage p) {
+		root_pname = getQualifiedName(p);
+		String result = "";
+		current_pname = root_pname;
+		typedef = true;
+		result += ppCRSeparatedNode(p.getFOwnedTypeDefinition());
+		typedef = false;
+		result += ppCRSeparatedNode(p.getFNestedPackage());
+		return result;
+	}
+	
 	protected String ppIdentifier(String id) {
 		if (id == null) return id;
 		if (SimpleKWList.getInstance().isKeyword(id))
@@ -371,11 +382,12 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		if(node.getFType() != null) {
 			result += " : " + ppTypeFromMultiplicityElement(node);
 		}
+	
+		if (node.getFSuperOperation() != null) {
+			result += " from " + ppIdentifier(getQualifiedName(node.getFSuperOperation().getFOwningClass()));
+		}
 		if (node.getFRaisedException().size() > 0) {
 			result += " raises " + ppComaSeparatedNodes(node.getFRaisedException());
-		}
-		if (node.getFSuperOperation() != null) {
-			result += " select " + ppIdentifier(node.getFSuperOperation().getFOwningClass().getFName());
 		}
 		if (node.getFBody() != null) {
 			result += " is\n";

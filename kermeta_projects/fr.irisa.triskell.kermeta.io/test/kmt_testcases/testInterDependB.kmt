@@ -1,0 +1,8 @@
+package testInterDepend;
+
+require "testInterDependA.kmt"
+
+class B {
+
+ 	attribut a : A
+}

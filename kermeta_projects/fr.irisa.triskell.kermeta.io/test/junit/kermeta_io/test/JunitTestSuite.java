@@ -4,11 +4,13 @@
  */
 package kermeta_io.test;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
-import fr.irisa.triskell.kermeta.loader.KermetaLoader;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 import junit.framework.TestCase;
@@ -35,7 +37,6 @@ public class JunitTestSuite extends TestCase {
 	}
 	
 	// do not modify this comment
-	
 
 
 
@@ -114,6 +115,34 @@ public void testtestSimpleAnnotations() throws Exception {
 testWithFile("test/kmt_testcases","testSimpleAnnotations.kmt" );
 }
 
+public void testtestInterDependA() throws Exception {
+testWithFile("test/kmt_testcases","testInterDependA.kmt" );
+}
+
+public void testtestInterDependB() throws Exception {
+testWithFile("test/kmt_testcases","testInterDependB.kmt" );
+}
+
+public void testtestCycleA() throws Exception {
+testWithFile("test/kmt_testcases","testCycleA.kmt" );
+}
+
+public void testtestCycleB() throws Exception {
+testWithFile("test/kmt_testcases","testCycleB.kmt" );
+}
+
+public void testtestCycleC() throws Exception {
+testWithFile("test/kmt_testcases","testCycleC.kmt" );
+}
+
+public void testtestCycleD() throws Exception {
+testWithFile("test/kmt_testcases","testCycleD.kmt" );
+}
+
+public void testtestCycleE() throws Exception {
+testWithFile("test/kmt_testcases","testCycleE.kmt" );
+}
+
 public void testtestExtOperation() throws Exception {
 testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 }
@@ -124,22 +153,49 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 	public void testWithFile(String dir, String file) throws Exception {
 	//	MetaCoreUnit builder = new MetaCoreUnit();
 	//	builder.loadMCT(new File(baseDir + file));
-		
-		KermetaUnit builder = KermetaLoader.getDefaultLoader().load(dir + "/" + file);
+		KermetaUnitFactory.getDefaultLoader().unloadAll();
+		KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
+		try {
+		builder.load();
+		} catch(Exception e ) {if (builder.getError().size() == 0) throw e;};
 		
 		if (builder.getError().size() > 0) {
-			assertTrue(((KMUnitMessage)builder.getError().get(0)).getMessage(), false);
+			assertTrue(builder.getMessagesAsString(), false);
 		}
 		else {	
+			
 		// the xmi :
 		builder.saveMetaCoreModel(dir + "/" + "output");
 		// try to pretty-print the result in another file
 		String ppfile =dir + "/output/"  + file.replace('.', '_') + ".kmt";
-		builder.prettyPrint(ppfile);
+		//builder.prettyPrint(ppfile);
+		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
+		
+		BufferedWriter w = new BufferedWriter(new FileWriter(new File(ppfile)));
+		w.write("package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n");
+		
+		
+		Iterator it = builder.importedUnits.iterator();
+		while(it.hasNext()) {
+			KermetaUnit iu = (KermetaUnit)it.next();
+			if (iu.rootPackage != builder.rootPackage) {
+				w.write("require \"" + iu.getUri() + "\"\n");
+			}
+		}
+		
+		w.write(pp.ppPackageContents(builder.rootPackage));
+		
+		w.close();
+		
+		
+		
 		// try to re-parse the pretty-printed version
-		KermetaUnit builder2 = KermetaLoader.getDefaultLoader().load(ppfile);
-			if (builder2.getError().size() > 0) {
-				assertTrue("RE-PARSE : " + ((KMUnitMessage)builder2.getError().get(0)).getMessage(), false);
+		KermetaUnit builder2 = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ppfile);
+		try {
+		builder2.load();
+		} catch(Exception e ) {if (builder2.getError().size() == 0) throw e;};
+		if (builder2.getError().size() > 0) {
+				assertTrue("RE-PARSE : " + builder2.getMessagesAsString(), false);
 			}
 		}
 	}

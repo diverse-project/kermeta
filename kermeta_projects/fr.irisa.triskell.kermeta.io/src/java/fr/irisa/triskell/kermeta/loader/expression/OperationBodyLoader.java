@@ -21,7 +21,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class OperationBodyLoader extends KermetaLoaderModule {
+public class OperationBodyLoader {
 
 	
 	/**

@@ -1,6 +1,8 @@
 // $ANTLR : "Kermeta.g" -> "KermetaParser.java"$
 
 package fr.irisa.triskell.kermeta.parser;
+import fr.irisa.triskell.kermeta.ast.*;
+import com.ibm.eclipse.ldt.core.parser.*;
 
 public interface KermetaParserTokenTypes {
 	int EOF = 1;
@@ -37,8 +39,8 @@ public interface KermetaParserTokenTypes {
 	int LITERAL_setter = 33;
 	int LPAREN = 34;
 	int RPAREN = 35;
-	int LITERAL_raises = 36;
-	int LITERAL_select = 37;
+	int LITERAL_from = 36;
+	int LITERAL_raises = 37;
 	int LITERAL_operation = 38;
 	int LITERAL_method = 39;
 	int LITERAL_bag = 40;
@@ -71,27 +73,26 @@ public interface KermetaParserTokenTypes {
 	int LITERAL_end = 67;
 	int LITERAL_function = 68;
 	int LITERAL_rescue = 69;
-	int LITERAL_from = 70;
-	int LITERAL_until = 71;
-	int LITERAL_loop = 72;
-	int LITERAL_if = 73;
-	int LITERAL_then = 74;
-	int LITERAL_else = 75;
-	int LITERAL_raise = 76;
-	int LITERAL_var = 77;
-	int LITERAL_init = 78;
-	int LITERAL_extern = 79;
-	int LITERAL_true = 80;
-	int LITERAL_false = 81;
-	int LITERAL_void = 82;
-	int BANG = 83;
-	int DOLLAR = 84;
-	int GT_LT = 85;
-	int LT_GT = 86;
-	int CHAR_LITERAL = 87;
-	int ESC = 88;
-	int DIGIT = 89;
-	int WS = 90;
-	int SINGLE_LINE_COMMENT = 91;
-	int MULTI_LINE_COMMENT = 92;
+	int LITERAL_until = 70;
+	int LITERAL_loop = 71;
+	int LITERAL_if = 72;
+	int LITERAL_then = 73;
+	int LITERAL_else = 74;
+	int LITERAL_raise = 75;
+	int LITERAL_var = 76;
+	int LITERAL_init = 77;
+	int LITERAL_extern = 78;
+	int LITERAL_true = 79;
+	int LITERAL_false = 80;
+	int LITERAL_void = 81;
+	int BANG = 82;
+	int DOLLAR = 83;
+	int GT_LT = 84;
+	int LT_GT = 85;
+	int CHAR_LITERAL = 86;
+	int ESC = 87;
+	int DIGIT = 88;
+	int WS = 89;
+	int SINGLE_LINE_COMMENT = 90;
+	int MULTI_LINE_COMMENT = 91;
 }
