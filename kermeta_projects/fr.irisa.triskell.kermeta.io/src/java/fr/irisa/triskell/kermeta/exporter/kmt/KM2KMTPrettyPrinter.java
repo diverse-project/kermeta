@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.4 2005-03-02 17:31:27 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.5 2005-03-07 16:56:19 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -221,10 +221,10 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		// Get the pre Annotation of this class 
 		if (node.getFTag().size()>0)
 		{
-		    FTag pretag = this.getFTagByName(node.getFTag(), KMT2KMPass.PRE_TAGNAME);
-		    if (pretag!=null)
+		    FTag[] pretagArray = this.getFTagsByName(node.getFTag(), KMT2KMPass.PRE_TAGNAME);
+		    for (int i=0; i< pretagArray.length && pretagArray[i]!=null; i++)
 		    {
-		        result += this.accept((EObject)pretag);
+		        result += this.accept((EObject)pretagArray[i]);
 		    }
 		}
 		
@@ -253,10 +253,10 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		if (node.getFTag().size()>0)
 		{
 		    // get pre annotation
-		    FTag posttag = this.getFTagByName(node.getFTag(), KMT2KMPass.POST_TAGNAME);
-		    if (posttag!=null)
+		    FTag[] posttagArray = this.getFTagsByName(node.getFTag(), KMT2KMPass.POST_TAGNAME);
+		    for (int i=0; i< posttagArray.length && posttagArray[i]!=null; i++)
 		    {
-		        result += this.accept(posttag);
+		        result += this.accept(posttagArray[i]);
 		    }
 		}
 		
@@ -680,26 +680,25 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	}
 	
 	/**
-	 * Get a tag in a list of tags  by its name
-	 * In a first time we assume that the name of each tag of a class is unique.
+	 * Get a list of tag which name is <code>name</code>
 	 * Later, we will think about the relevance of having not unique tags (depends on how we handle
 	 * code documentation => extern system, or integrated?)
 	 */
-	public FTag getFTagByName(EList ftagList, String name)
+	public FTag[] getFTagsByName(EList ftagList, String name)
 	{
 	    Iterator it = ftagList.iterator();
-	    FTag result_tag = null;
-	    boolean ok = false;
-	    while (it.hasNext() && !ok)
+	    FTag[] result_tagArray = new FTag[10];
+	    int i = 0;
+	    while (it.hasNext())
 	    {
 	        FTag tag = (FTag)it.next();
 	        if (tag.getFName().equals(name))
 	        {
-	            result_tag = tag;
-	            ok = true;
+	            result_tagArray[i] = tag;
+	            i++;
 	        }
 	    }
-	    return result_tag;
+	    return result_tagArray;
 	}
 	
 }
