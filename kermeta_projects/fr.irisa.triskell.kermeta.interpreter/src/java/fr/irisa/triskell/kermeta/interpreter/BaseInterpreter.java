@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.5 2005-03-25 13:53:31 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.6 2005-03-25 17:30:14 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.EObject;
 import sun.nio.cs.KOI8_R;
 
 import fr.irisa.triskell.kermeta.behavior.*;
-import fr.irisa.triskell.kermeta.builder.KMBuilder;
 import fr.irisa.triskell.kermeta.structure.*;
 
 import fr.irisa.triskell.kermeta.launcher.Run;
@@ -66,13 +65,6 @@ public class BaseInterpreter extends KermetaVisitor {
      */
     protected ExpressionContext currentContext;
 
-    /**
-     * We use it to create the RuntimeObject equivalent to the visited node
-     * 
-     * @uml.property name="factory"
-     * @uml.associationEnd multiplicity="(1 1)"
-     */
-    protected RuntimeObjectFactory factory;
 
     // Should we access the interpreter context defined in KMT?
     /**
@@ -89,9 +81,8 @@ public class BaseInterpreter extends KermetaVisitor {
      * @param pContext
      * @param unit the main kermetaUnit ..
      */
-    public BaseInterpreter(InterpreterContext pContext, KermetaUnit pUnit, RuntimeObjectFactory pFactory)
+    public BaseInterpreter(InterpreterContext pContext, KermetaUnit pUnit)
     {
-        factory = pFactory;
         interpreterContext = pContext;
         unit = pUnit;
     }
@@ -490,7 +481,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		    if (FClass.class.isInstance(type))
 		    {
 		        FClassDefinition class_def = ((FClass)type).getFClassDefinition();
-		        result = factory.createObjectFromClassName(class_def.getFName());
+		        result = Run.koFactory.createObjectFromClassName(class_def.getFName());
 		    }
 		    // Is it an enum literal? result -> a RO which type is an enumliteral
 		    else if (FEnumeration.class.isInstance(target))
@@ -587,7 +578,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FIntegerLiteral) 
 	 */
 	public Object visit(FIntegerLiteral node) {
-	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue(), factory);
+	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue(), Run.koFactory);
 	}
 	
 	/**
@@ -608,7 +599,7 @@ public class BaseInterpreter extends KermetaVisitor {
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FStringLiteral)
      */
     public Object visit(FStringLiteral node) {
-        return fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue());
+        return fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue(), Run.koFactory);
     }
 	/**
 	 * Visit a classDefinition node has the following consequences :
@@ -618,7 +609,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	{
 	    // Get the qualified name of this class
 	    String qname = KMReflect.getQualifiedName(node);
-	    RuntimeObject result = factory.getTypeDefinitionByName(qname);
+	    RuntimeObject result = Run.koFactory.getTypeDefinitionByName(qname);
 	    //node.getFOwnedOperation().
 	    // Set the attribute self_object of current frame, so that we can manipulate it
 	    return result;

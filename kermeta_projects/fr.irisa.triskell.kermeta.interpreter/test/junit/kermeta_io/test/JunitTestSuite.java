@@ -13,7 +13,8 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.URI;
 
-import fr.irisa.triskell.kermeta.builder.KMBuilder;
+import fr.irisa.triskell.kermeta.builder.KMBuilderPass1;
+import fr.irisa.triskell.kermeta.launcher.Run;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
@@ -127,56 +128,7 @@ testWithFile("test/kmt_testcases","9_testOpCallObject.kmt" );
 	// do not modify this comment
 	
 	public void testWithFile(String dir, String file) throws Exception {
-	//	MetaCoreUnit builder = new MetaCoreUnit();
-	//	builder.loadMCT(new File(baseDir + file));
-		KermetaUnitFactory.getDefaultLoader().unloadAll();
-		KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
-		try {
-		builder.load();
-		} catch(Exception e ) { // throw
-			if (builder.getError().size() == 0)  e.printStackTrace();};
-		
-		if (builder.getError().size() > 0) {
-			assertTrue(builder.getMessagesAsString(), false);
-		}
-		else {	
-			
-		// the xmi :
-		builder.saveMetaCoreModel(dir + "../kcore_testcases");
-		// try to pretty-print the result in another file
-		URI userLocatedPpfile=UserDirURI.createURI(dir + "../kcore_testcases"  + file.replace('.', '_') + ".kmt",null,true);
-		String ppfile =userLocatedPpfile.toFileString();
-		//builder.prettyPrint(ppfile);
-		KMBuilder pp = new KMBuilder();
-		
-		BufferedWriter w = new BufferedWriter(new FileWriter(new File(ppfile)));
-		String pkg_name = "package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n";
-		
-		w.write("package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n");
-	
-		/* imported units needed to recognize the imported classes...*/
-		Iterator it = builder.importedUnits.iterator();
-		while(it.hasNext()) {
-			KermetaUnit iu = (KermetaUnit)it.next();
-			if (iu.rootPackage != builder.rootPackage) {
-				w.write("require \"" + iu.getUri() + "\"\n");
-			}
-		}
-		
-		String str_kmt = pp.ppPackage(builder.rootPackage);
-		// Do not write again the package declaration..
-		w.write(str_kmt.substring(pkg_name.length()));
-		w.close();
-		
-		// try to re-parse the pretty-printed version
-		KermetaUnit builder2 = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ppfile);
-		try {
-		builder2.load();
-		} catch(Exception e ) {if (builder2.getError().size() == 0) throw e;};
-		if (builder2.getError().size() > 0) {
-				assertTrue("RE-PARSE : " + builder2.getMessagesAsString(), false);
-			}
-		}
+		Run.main(new String[] {dir+file} );
 	}
 	
 
