@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.3 2005-03-29 17:06:01 jpthibau Exp $
+/* $Id: InterpreterContext.java,v 1.4 2005-04-04 14:22:44 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : GPL
@@ -83,22 +83,12 @@ public class InterpreterContext {
     protected Stack frame_stack;
 
     /**
-     * Current frame
-     * 
-     * @uml.property name="current_frame"
-     * @uml.associationEnd multiplicity="(0 1)"
+     * Constructor
      */
-    protected CallFrame current_frame; // stack.peek should return the current one
-
-    /**
-     * 
-     */
-    public InterpreterContext()
-    {
+    public InterpreterContext() {
     	frame_stack = new Stack();
     }
 	
-
 	/**
 	 * @param self_object : the object on which an operation was applied. This operation is
 	 * the one that led to the creation of this new CallFrame
