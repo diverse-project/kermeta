@@ -1,4 +1,4 @@
-$Id: BUGREPORT.txt,v 1.1 2005-03-10 11:53:50 zdrey Exp $
+$Id: BUGREPORT.txt,v 1.2 2005-03-10 16:44:07 zdrey Exp $
 This file is a bug report for the fr.irisa.triskell.kermeta.io project.
 --------------------------------------------------------------------------------
 
@@ -6,50 +6,23 @@ This file is a bug report for the fr.irisa.triskell.kermeta.io project.
 Bug 1 : error when calling an operation coming from an extern package
 ---------------------------------------------------------------------
 
-Assuming the following example :
+Resolved.
+The problem was : detecting if a class belongs to the current package or not
+(there was a test like "qname.startswith(root_package_name)" that were dangerous
+if the name of the root_package and this qname real root_package were different
+but had the same prefix... simply added "::" to the string inside startswith-test.
 
-|	File1.kmt :
-|-------------------------------------------
-|	package file1;
-|	class class1  {
-|		operation op1() : Void is do
-|			result := 1
-|		end
-|	}
-|--------------------------------------------
+---------------------------------------------------------------------
+Bug 2 : problem with annotations
+---------------------------------------------------------------------
+Resolved.
+Problem : Conflicts were not correctly resolved by antlr. Added an abstract type
+(AnnotableElement)
 
-If we want to use op1() in another file, we want to do it this way (assuming
-we defined a "require" inside it!):
-
-(1)	result := file1::class1.new.op1()
-
-or this way :
-	
-(2)	result := class1.new.op1()
-
-But first case (1) does not work and truncates, during prettyprinting, the 
-class1 qualified name in ":class1" instead of putting "file1::class1"
-
-(1)
-         <fTarget xsi:type="kermeta_behavior:FCallFeature" fName="new">
-            <fTarget xsi:type="kermeta_behavior:FTypeLiteral">
-              <fTyperef fType="//@fOwnedTypeDefinition.1/@fOwnedOperation.0/@fBody/@fStatement.0/@fTarget/@fTarget/@fTyperef/@fContainedType.0" fUpper="1">
-                <fContainedType xsi:type="kermeta_structure:FClass">
-                  <fClassDefinition href="6_testExternPackageCall2_kmt.kcore#//@fOwnedTypeDefinition.0"/>
-                </fContainedType>
-              </fTyperef>
-            </fTarget>
-
-(2)
-
-          <fTarget xsi:type="kermeta_behavior:FCallFeature" fName="new">
-            <fTarget xsi:type="kermeta_behavior:FTypeLiteral">
-              <fTyperef fType="//@fOwnedTypeDefinition.1/@fOwnedOperation.0/@fBody/@fStatement.0/@fTarget/@fTarget/@fTyperef/@fContainedType.0" fUpper="1">
-                <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fOwnedTypeDefinition.1"/>
-              </fTyperef>
-            </fTarget>
-          </fTarget>
-
-In fact, 2nd case kcore is wrong : the fContainedType refers to a class as if it was a local type whereas it
-is not.
-
+---------------------------------------------------------------------
+Bug 3 : problem with circular references
+---------------------------------------------------------------------
+Unresolved.
+KMT2KMPass : a test of the existence of a type which is dangerous : 
+a type can already exists in the resource for the following reason : circular
+references. (interdependant package requires)
