@@ -1,15 +1,18 @@
-/* $Id: KMTBodiesExtractor.java,v 1.3 2005-02-22 14:34:00 zdrey Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.4 2005-02-22 17:20:15 zdrey Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
- * Description : contains the BodyExtractor which extracts the operations/properties
- * and their body and write them into an external file
- * Todo : 
- * 	* Change all dirty paths to URIs
+ * Description : 
+ * 		contains the BodyExtractor which extracts the operations/properties
+ * 		and their body and write them into an external file
+ * TODO : 
+ * 	* Handle filepaths correctly (use URIs..)
  */
 package fr.irisa.triskell.kermeta.utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
@@ -28,7 +31,6 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
- * @author zdrey
  *
  */
 public class KMTBodiesExtractor extends KermetaVisitor {
@@ -143,41 +145,17 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	/**
 	 * Create the kmtbodies file from specified filename
 	 * @param filename
-	 * @return
+	 * @return a new filepath corresponding to the kmtbodies file location
 	 */
 	protected File createKMTBodiesFile(String filename)
 	{
-	    File dir = new File(rootDir+KMTBODIES_DIR);
+	    File dir = new File(rootDir+File.separator+KMTBODIES_DIR);
 	    if (!dir.exists())
 	    {
 	        dir.mkdir();
 	    }
-	    return backupFile(rootDir+KMTBODIES_DIR, filename);
-	}
-	
-	protected File backupFile(String backupdir, String filename)
-	{
-	    File dir = new File(backupdir);
-	    File newf = null;
-	    String[] listdir = dir.list();
-	    int save_i = 0;
-	    for (int i=0; i < listdir.length; i++)
-	    {
-	        if (listdir[i].startsWith(filename))
-	        {
-	            save_i += 1 ;
-	        }
-	    }
-	    
-	    String filepath = backupdir+"/"+filename; // fixme : use java facilities
-	    File oldf = new File(filepath);
-	    
-	    if (oldf.exists())
-	    {
-	        newf = new File(filepath+".bak."+(save_i+1));
-	        oldf.renameTo(newf);
-	    }
-	    return oldf;
+	    BackupHelper.backupFile(rootDir+KMTBODIES_DIR, filename);
+	    return new File(rootDir+File.separator+KMTBODIES_DIR+File.separator+filename);
 	}
 	
 	
@@ -207,7 +185,7 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	/** Returns the "complete" path of the directory KMTBodies (rootDir+KMTBODIES_DIR) */
 	public String getCompleteKMTBodiesDir()
 	{
-	    return rootDir+"/"+KMTBODIES_DIR;
+	    return rootDir+File.separator+KMTBODIES_DIR;
 	}
 	
 }
