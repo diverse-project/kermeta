@@ -137,15 +137,15 @@ public class Object {
 	}
 	
 	public static boolean isPropertyContainment(RuntimeObject property) {
-		return property.getProperties().get("upper") == Boolean.TRUE;
+		return property.getProperties().get("isComposite") == Boolean.TRUE;
 	}
 	
 	public static boolean isPropertyOrdered(RuntimeObject property) {
-		return property.getProperties().get("upper") == Boolean.TRUE;
+		return property.getProperties().get("isOrdered") == Boolean.TRUE;
 	}
 	
 	public static boolean isPropertyUnique(RuntimeObject property) {
-		return property.getProperties().get("upper") == Boolean.TRUE;
+		return property.getProperties().get("isUnique") == Boolean.TRUE;
 	}
 	
 	public static java.lang.String getPropertyName(RuntimeObject property) {
