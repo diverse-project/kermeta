@@ -4,29 +4,29 @@ package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 import java.util.ArrayList;
 
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class Iterator {
 
 	// Implementation of method hasNext called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator::hasNext()
-	public static KermetaObject hasNext(KermetaObject self) {
+	public static RuntimeObject hasNext(RuntimeObject self) {
 		if (getValue(self).hasNext()) return TRUE.INSTANCE;
 		else return FALSE.INSTANCE;
 	}
 
 	// Implementation of method next called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator::next()
-	public static KermetaObject next(KermetaObject self) {
-		return (KermetaObject)getValue(self).next();
+	public static RuntimeObject next(RuntimeObject self) {
+		return (RuntimeObject)getValue(self).next();
 	}
 
-	public static java.util.Iterator getValue(KermetaObject iterator) {
+	public static java.util.Iterator getValue(RuntimeObject iterator) {
 		if (!iterator.getData().containsKey("Iterator")) setValue(iterator, new ArrayList().iterator());
 		return (java.util.Iterator)iterator.getData().get("Iterator");
 	}
 	
-	public static void setValue(KermetaObject iterator, java.util.Iterator it) {
+	public static void setValue(RuntimeObject iterator, java.util.Iterator it) {
 		iterator.getData().put("Iterator", it);
 	}
 

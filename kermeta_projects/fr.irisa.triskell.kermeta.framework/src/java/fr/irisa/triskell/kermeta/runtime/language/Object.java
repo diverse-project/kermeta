@@ -2,7 +2,7 @@
 
 package fr.irisa.triskell.kermeta.runtime.language;
 
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.FALSE;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
@@ -14,29 +14,29 @@ public class Object {
 
 	// Implementation of method getMetaClass called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass()
-	public static KermetaObject getMetaClass(KermetaObject self) {
+	public static RuntimeObject getMetaClass(RuntimeObject self) {
 		return self.getMetaclass();
 	}
 
 	// Implementation of method container called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.container()
-	public static KermetaObject container(KermetaObject self) {
+	public static RuntimeObject container(RuntimeObject self) {
 		if (self.getContainer() == null) return Void.VOID;
 		return self.getContainer();
 	}
 
 	// Implementation of method equals called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(element)
-	public static KermetaObject equals(KermetaObject self, KermetaObject param0) {
+	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
 		if(self == param0) return TRUE.INSTANCE;
 		else return FALSE.INSTANCE;
 	}
 
 	// Implementation of method get called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property)
-	public static KermetaObject get(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = null;
-		result = (KermetaObject)self.getProperties().get(getPropertyName(param0));
+	public static RuntimeObject get(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = null;
+		result = (RuntimeObject)self.getProperties().get(getPropertyName(param0));
 		if (getPropertyUpper(param0) == 1) {
 			if (result == null) result = Void.VOID;
 		}
@@ -53,12 +53,12 @@ public class Object {
 
 	// Implementation of method set called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(~property, element)
-	public static KermetaObject set(KermetaObject self, KermetaObject param0, KermetaObject param1) {
+	public static RuntimeObject set(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
 		set(self, param0, param1, true);
 		return Void.VOID;
 	}
 	
-	public static void set(KermetaObject self, KermetaObject param0, KermetaObject param1, boolean handle_opposite) {
+	public static void set(RuntimeObject self, RuntimeObject param0, RuntimeObject param1, boolean handle_opposite) {
 		// Unset first if there is an object
 		if (isSet(self, param0) == TRUE.INSTANCE)  unSet(self, param0);
 		// set the new object
@@ -67,7 +67,7 @@ public class Object {
 		if (isPropertyContainment(param0)) param1.setContainer(self);
 		// handle opposite
 		if(handle_opposite) {
-			KermetaObject oproperty = getPropertyOpposite(param0);
+			RuntimeObject oproperty = getPropertyOpposite(param0);
 			if (oproperty != null) {
 				handleOppositeProperySet(param1, oproperty, self);
 			}
@@ -79,7 +79,7 @@ public class Object {
 	 * @param oproperty
 	 * @param self
 	 */
-	public static void handleOppositeProperySet(KermetaObject object, KermetaObject property, KermetaObject value) {
+	public static void handleOppositeProperySet(RuntimeObject object, RuntimeObject property, RuntimeObject value) {
 		if (getPropertyUpper(property) == 1) {
 			Object.set(object, property, value, false);
 		}
@@ -90,21 +90,21 @@ public class Object {
 
 	// Implementation of method isSet called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(~property)
-	public static KermetaObject isSet(KermetaObject self, KermetaObject param0) {
+	public static RuntimeObject isSet(RuntimeObject self, RuntimeObject param0) {
 		if (self.getProperties().get(getPropertyName(param0)) != null) return TRUE.INSTANCE;
 		else return FALSE.INSTANCE;
 	}
 
 	// Implementation of method unSet called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(~property)
-	public static KermetaObject unSet(KermetaObject self, KermetaObject param0) {
+	public static RuntimeObject unSet(RuntimeObject self, RuntimeObject param0) {
 		unSet(self,param0, true);
 		return Void.VOID;
 	}
 	
-	public static void unSet(KermetaObject self, KermetaObject param0, boolean handle_opposite) {
+	public static void unSet(RuntimeObject self, RuntimeObject param0, boolean handle_opposite) {
 		if (isSet(self, param0) == FALSE.INSTANCE) return;
-		KermetaObject value = (KermetaObject)self.getProperties().get(getPropertyName(param0));
+		RuntimeObject value = (RuntimeObject)self.getProperties().get(getPropertyName(param0));
 		if (getPropertyUpper(param0) == 1) {
 			if (isPropertyContainment(param0)) value.setContainer(null);
 			self.getProperties().remove(getPropertyName(param0));
@@ -113,14 +113,14 @@ public class Object {
 			ReflectiveCollection.clear(value);
 		}
 		if (handle_opposite) {
-			KermetaObject oproperty = getPropertyOpposite(param0);
+			RuntimeObject oproperty = getPropertyOpposite(param0);
 			if (oproperty != null) {
 				handleOppositeProperyUnSet(value, oproperty);
 			}
 		}
 	}
 	
-	public static void handleOppositeProperyUnSet(KermetaObject object, KermetaObject property) {
+	public static void handleOppositeProperyUnSet(RuntimeObject object, RuntimeObject property) {
 		if (getPropertyUpper(property) == 1) {
 			Object.unSet(object, property, false);
 		}
@@ -130,28 +130,28 @@ public class Object {
 	}
 	
 
-	public static int getPropertyUpper(KermetaObject property) {
-		return Integer.getValue((KermetaObject)property.getProperties().get("upper"));
+	public static int getPropertyUpper(RuntimeObject property) {
+		return Integer.getValue((RuntimeObject)property.getProperties().get("upper"));
 	}
 	
-	public static KermetaObject getPropertyOpposite(KermetaObject property) {
-		return (KermetaObject)property.getProperties().get("opposite");
+	public static RuntimeObject getPropertyOpposite(RuntimeObject property) {
+		return (RuntimeObject)property.getProperties().get("opposite");
 	}
 	
-	public static boolean isPropertyContainment(KermetaObject property) {
+	public static boolean isPropertyContainment(RuntimeObject property) {
 		return property.getProperties().get("upper") == TRUE.INSTANCE;
 	}
 	
-	public static boolean isPropertyOrdered(KermetaObject property) {
+	public static boolean isPropertyOrdered(RuntimeObject property) {
 		return property.getProperties().get("upper") == TRUE.INSTANCE;
 	}
 	
-	public static boolean isPropertyUnique(KermetaObject property) {
+	public static boolean isPropertyUnique(RuntimeObject property) {
 		return property.getProperties().get("upper") == TRUE.INSTANCE;
 	}
 	
-	public static java.lang.String getPropertyName(KermetaObject property) {
-		return String.getValue((KermetaObject)property.getProperties().get("name"));
+	public static java.lang.String getPropertyName(RuntimeObject property) {
+		return String.getValue((RuntimeObject)property.getProperties().get("name"));
 	}
 }
 /* END OF FILE */

@@ -1,4 +1,4 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.5 2005-03-11 14:03:17 zdrey Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.6 2005-03-21 10:41:22 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
  * License : GPL
@@ -31,7 +31,7 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;

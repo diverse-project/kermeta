@@ -8,7 +8,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.irisa.triskell.kermeta.runtime.factory.KermetaObjectFactory;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 
 /**
@@ -18,17 +18,17 @@ import fr.irisa.triskell.kermeta.structure.FProperty;
  * 
  * This is the java implemetation of a Kermeta object 
  */
-public class KermetaObject {
+public class RuntimeObject {
 	
 	/**
 	 * The meta class
 	 */
-	protected KermetaObject metaclass;
+	protected RuntimeObject metaclass;
 	
 	/**
 	 * The container
 	 */
-	protected KermetaObject container = null;
+	protected RuntimeObject container = null;
 	
 	/**
 	 * The values of properties. 
@@ -55,12 +55,12 @@ public class KermetaObject {
 	/**
 	 * The kermeta object factory used to create this object 
 	 */
-	protected KermetaObjectFactory factory;
+	protected RuntimeObjectFactory factory;
 	
 	/**
 	 * The constructor of unique instance
 	 */
-	public KermetaObject(String uniqueInstanceName) {
+	public RuntimeObject(String uniqueInstanceName) {
 		super();
 		this.properties.put("singleton instance",uniqueInstanceName);
 	}
@@ -68,7 +68,7 @@ public class KermetaObject {
 	/**
 	 * The constructor
 	 */
-	public KermetaObject(KermetaObjectFactory factory, KermetaObject metaclass) {
+	public RuntimeObject(RuntimeObjectFactory factory, RuntimeObject metaclass) {
 		super();
 		this.metaclass = metaclass;
 		this.factory = factory;
@@ -77,13 +77,13 @@ public class KermetaObject {
 	/**
 	 * @return Returns the container.
 	 */
-	public KermetaObject getContainer() {
+	public RuntimeObject getContainer() {
 		return container;
 	}
 	/**
 	 * @param container The container to set.
 	 */
-	public void setContainer(KermetaObject container) {
+	public void setContainer(RuntimeObject container) {
 		this.container = container;
 	}
 	/**
@@ -113,7 +113,7 @@ public class KermetaObject {
 	/**
 	 * @return Returns the metaclass.
 	 */
-	public KermetaObject getMetaclass() {
+	public RuntimeObject getMetaclass() {
 		return metaclass;
 	}
 	/**
@@ -131,17 +131,17 @@ public class KermetaObject {
 	/**
 	 * @param metaclass The metaclass to set.
 	 */
-	public void setMetaclass(KermetaObject metaclass) {
+	public void setMetaclass(RuntimeObject metaclass) {
 		this.metaclass = metaclass;
 	}
 	/**
 	 * @return Returns the factory.
 	 */
-	public KermetaObjectFactory getFactory() {
+	public RuntimeObjectFactory getFactory() {
 		return factory;
 	}
 	
-	public KermetaObject instanciate(List attributes) {
+/*	public KermetaObject instanciate(List attributes) {
 		KermetaObject instance=new KermetaObject(this.getFactory(),this);
 		Hashtable propertiesGenerators=instance.getPropertiesGenerators();
 		Hashtable properties=instance.getProperties();
@@ -153,7 +153,7 @@ public class KermetaObject {
 			properties.put(attribName,KMDummyObject.INSTANCE);
 		}
 		return instance;
-	}
+	}*/
 	
 	
 }

@@ -2,63 +2,63 @@
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class Integer {
 
 	// Implementation of method plus called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::plus(other)
-	public static KermetaObject plus(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+	public static RuntimeObject plus(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		setValue(result, getValue(self) + getValue(param0));
 		return result;
 	}
 
 	// Implementation of method minus called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::minus(other)
-	public static KermetaObject minus(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+	public static RuntimeObject minus(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		setValue(result, getValue(self) - getValue(param0));
 		return result;
 	}
 
 	// Implementation of method times called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::times(other)
-	public static KermetaObject times(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+	public static RuntimeObject times(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		setValue(result, getValue(self) * getValue(param0));
 		return result;
 	}
 
 	// Implementation of method div called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::div(other)
-	public static KermetaObject div(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+	public static RuntimeObject div(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		setValue(result, getValue(self) / getValue(param0));
 		return result;
 	}
 
 	// Implementation of method mod called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
-	public static KermetaObject mod(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+	public static RuntimeObject mod(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		setValue(result, getValue(self) % getValue(param0));
 		return result;
 	}
 
 	// Implementation of method toReal called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::toReal()
-	public static KermetaObject toReal(KermetaObject self) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Real");
+	public static RuntimeObject toReal(RuntimeObject self) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Real");
 		Real.setValue(result, getValue(self));
 		return result;
 	}
 	
-	public static void setValue(KermetaObject integer, int value) {
+	public static void setValue(RuntimeObject integer, int value) {
 		integer.getData().put("NumericValue", new java.lang.Integer(value));
 	}
 	
-	public static int getValue(KermetaObject integer) {
+	public static int getValue(RuntimeObject integer) {
 		return Numeric.getNumericValue(integer).intValue();
 	}
 

@@ -2,9 +2,9 @@
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class Void {
-	public static KermetaObject VOID;
+	public static RuntimeObject VOID;
 }
 /* END OF FILE */

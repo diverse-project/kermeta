@@ -2,25 +2,25 @@
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class Boolean {
 	
 	// Implementation of method and called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::and(other)
-	public static KermetaObject and(KermetaObject self, KermetaObject param0) {
+	public static RuntimeObject and(RuntimeObject self, RuntimeObject param0) {
 		if (getValue(self) && getValue(param0)) return TRUE.INSTANCE;
 		else return FALSE.INSTANCE;
 	}
 
 	// Implementation of method not called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::not()
-	public static KermetaObject not(KermetaObject self) {
+	public static RuntimeObject not(RuntimeObject self) {
 		if (getValue(self)) return FALSE.INSTANCE;
 		else return TRUE.INSTANCE;
 	}
 
-	protected static boolean getValue(KermetaObject bool) {
+	protected static boolean getValue(RuntimeObject bool) {
 		return ((java.lang.Boolean)bool.getData().get("BooleanValue")).booleanValue();
 	}
 

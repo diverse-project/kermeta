@@ -1,4 +1,4 @@
-/* $Id: TRUE.java,v 1.1 2005-03-14 17:59:44 jpthibau Exp $
+/* $Id: TRUE.java,v 1.2 2005-03-21 10:41:15 jpthibau Exp $
 * Project : Kermeta (First iteration)
 * File : KMDummyObject.java
 * License : GPL
@@ -13,7 +13,7 @@
 */
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**
  * @author jpthibau
@@ -21,7 +21,7 @@ import fr.irisa.triskell.kermeta.runtime.KermetaObject;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class TRUE extends KermetaObject {
+public class TRUE extends RuntimeObject {
 	
 	public static TRUE INSTANCE=new TRUE();
 	

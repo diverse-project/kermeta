@@ -2,70 +2,70 @@
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class String {
 
 	// Implementation of method compareTo called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::compareTo(other)
-	public static KermetaObject compareTo(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, getValue(self).compareTo(getValue(param0)));
 		return result;
 	}
 
 	// Implementation of method plus called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::plus(other)
-	public static KermetaObject plus(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
+	public static RuntimeObject plus(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		setValue(result, getValue(self) + getValue(param0));
 		return result;
 	}
 
 	// Implementation of method append called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::append(other)
-	public static KermetaObject append(KermetaObject self, KermetaObject param0) {
+	public static RuntimeObject append(RuntimeObject self, RuntimeObject param0) {
 		setValue(self, getValue(self) + getValue(param0));
 		return Void.VOID;
 	}
 
 	// Implementation of method elementAt called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::elementAt(index)
-	public static KermetaObject elementAt(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Character");
+	public static RuntimeObject elementAt(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Character");
 		Character.setValue(result, getValue(self).charAt(Integer.getValue(param0)));
 		return result;
 	}
 
 	// Implementation of method indexOf called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::indexOf(str)
-	public static KermetaObject indexOf(KermetaObject self, KermetaObject param0) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+	public static RuntimeObject indexOf(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, getValue(self).indexOf(getValue(param0)));
 		return result;
 	}
 
 	// Implementation of method subString called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::subString(index, length)
-	public static KermetaObject subString(KermetaObject self, KermetaObject param0, KermetaObject param1) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
+	public static RuntimeObject subString(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		setValue(result, getValue(self).substring(Integer.getValue(param0), Integer.getValue(param1)));
 		return result;
 	}
 
 	// Implementation of method size called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::size()
-	public static KermetaObject size(KermetaObject self) {
-		KermetaObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+	public static RuntimeObject size(RuntimeObject self) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, getValue(self).length());
 		return result;
 	}
 
-	public static void setValue(KermetaObject str, java.lang.String value) {
+	public static void setValue(RuntimeObject str, java.lang.String value) {
 		str.getData().put("StringValue", value);
 	}
 	
-	public static java.lang.String getValue(KermetaObject str) {
+	public static java.lang.String getValue(RuntimeObject str) {
 		if (!str.getData().containsKey("StringValue")) setValue(str, "");
 		return (java.lang.String)str.getData().get("StringValue");
 	}

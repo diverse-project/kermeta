@@ -2,14 +2,14 @@
 
 package fr.irisa.triskell.kermeta.runtime.language;
 
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class Class {
 
 	// Implementation of method newObject called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject()
-	public static KermetaObject newObject(KermetaObject self) {
-		return self.getFactory().createKermetaObject(self);
+	public static RuntimeObject newObject(RuntimeObject self) {
+		return self.getFactory().createRuntimeObject(self);
 	}
 
 
