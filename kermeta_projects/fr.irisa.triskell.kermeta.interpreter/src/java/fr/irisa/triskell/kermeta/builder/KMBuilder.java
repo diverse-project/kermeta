@@ -1,4 +1,4 @@
-/* $Id: KMBuilder.java,v 1.6 2005-03-15 11:22:37 jpthibau Exp $
+/* $Id: KMBuilder.java,v 1.7 2005-03-21 11:07:53 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -31,15 +31,17 @@ import org.eclipse.emf.ecore.EObject;
 import fr.irisa.triskell.kermeta.behavior.*;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.reflect.KMReflect;
-import fr.irisa.triskell.kermeta.runtime.KMDummyObject;
-import fr.irisa.triskell.kermeta.runtime.KermetaObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.TRUE;
 import fr.irisa.triskell.kermeta.runtime.basetypes.FALSE;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.structure.*;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
+import fr.irisa.triskell.kermeta.interpreter.Interpreter;
 import fr.irisa.triskell.kermeta.launcher.Run;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
@@ -50,18 +52,43 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
  *
  */
 public class KMBuilder extends KermetaVisitor {
+	
+/*	public static RuntimeObject createCollection() {
+		RuntimeObject result;
+		RuntimeObject collectionMetaclass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::standard::Collection");
+		result=new RuntimeObject(collectionMetaclass.getFactory(),collectionMetaclass);
+		result.setData(new Hashtable());
+		result.getData().put("CollectionArrayList",new ArrayList());
+		return result;
+	}*/
+	
+	public static RuntimeObject createPropertyNode(FProperty property) {
+		RuntimeObject result;
+		RuntimeObject propertyMetaclass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::reflection::Property");
+		result=new RuntimeObject(propertyMetaclass.getFactory(),propertyMetaclass);
+		result.setData(new Hashtable());
+		result.getData().put("propertyDefinition",property);
+		FClass fclass=(FClass)property.getFType();
+		String qn=KMReflect.getQualifiedName((FNamedElement)fclass.getFClassDefinition());
+		RuntimeObject type=(RuntimeObject)Run.koFactory.getClassDefTable().get(qn);
+//		RuntimeObject type=(RuntimeObject)Run.koFactory.getClassDefTable().get(KMReflect.getQualifiedName((FNamedElement)property.getFType()));
+		result.getProperties().put("type",type);
+		return result;
+	}
 
 //	protected Hashtable allMetaClasses;
 //	protected Hashtable allClasses;
 	protected Stack packagesStack;
-	protected KermetaObject currentClassNode;
-	protected KermetaObject currentOperationNode;
-	protected KermetaObject reflectivecollectionMetaclass;
+	protected RuntimeObject currentClassNode;
+	protected RuntimeObject currentOperationNode;
+	protected RuntimeObject reflectivecollectionMetaclass;
+	protected KermetaUnit currentUnit;
 	
 	protected boolean typedef = false;
 	
 	public void ppPackage(KermetaUnit unit) {
-		reflectivecollectionMetaclass=(KermetaObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::reflective_collections::ReflectiveCollection");
+		this.currentUnit=unit;
+		reflectivecollectionMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::reflective_collections::ReflectiveCollection");
 		String currentpackageName=unit.getQualifiedName(unit.rootPackage);
 		List packagesNames=new ArrayList();
 		packagesNames.add(currentpackageName);
@@ -85,16 +112,30 @@ public class KMBuilder extends KermetaVisitor {
 	}
 
 	public void ppPackageContents(FPackage p) {
-		KermetaObject pMetaclass=(KermetaObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Package");
-		KermetaObject pNode=pMetaclass.instanciate(KMReflect.allAttributes(pMetaclass));
+		RuntimeObject pMetaclass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::reflection::Package");
+		FClassDefinition packClassDef=(FClassDefinition)pMetaclass.getData().get("FClassDefinition");
+		RuntimeObject pNode=new RuntimeObject(pMetaclass.getFactory(),pMetaclass);//.instanciate(KMReflect.allAttributes(pMetaclass));
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",p);
 		pNode.setData(data);
+		pNode.getProperties().put("ownedTypeDefinition",Collection.createCollection((RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::language::structure::Type")));
+		FProperty nestedPackage=null;
+		FProperty ownedTypeDefinition=null;
+		Iterator it=packClassDef.getFOwnedAttributes().iterator();
+		while(it.hasNext()) {
+			FProperty property=(FProperty)it.next();
+			if (property.getFName().equals("nestedPackage"))
+				nestedPackage=property;
+			if (property.getFName().equals("ownedTypeDefinition"))
+				ownedTypeDefinition=property;
+		}
+		pNode.getProperties().put("nestedPackage",ReflectiveCollection.createReflectiveCollection(pNode,createPropertyNode(nestedPackage)));
 		if (! this.packagesStack.isEmpty())
 			pNode.getProperties().put("container",this.packagesStack.peek());
 		this.packagesStack.push(pNode);
-		ppCRSeparatedNode(p.getFOwnedTypeDefinition());
 		ppCRSeparatedNode(p.getFNestedPackage());
+		pNode.getProperties().put("ownedTypeDefinition",ReflectiveCollection.createReflectiveCollection(pNode,createPropertyNode(ownedTypeDefinition)));
+		ppCRSeparatedNode(p.getFOwnedTypeDefinition());
 		this.packagesStack.pop();
 	}
 	
@@ -224,14 +265,16 @@ public class KMBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
 	public Object visit(FClassDefinition node) {
-		KermetaObject nodeMetaclass=(KermetaObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Class");
-		KermetaObject knode=nodeMetaclass.instanciate(KMReflect.allAttributes(nodeMetaclass));
+		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Class");
+		RuntimeObject knode=nodeMetaclass.getFactory().createClassFromClassDefinition(nodeMetaclass);
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);
 		this.currentClassNode=knode;
 		String qualifiedName=KMReflect.getQualifiedName(node);
 		Run.koFactory.getClassDefTable().put(qualifiedName,knode);
+		RuntimeObject owningPackage=(RuntimeObject)this.packagesStack.peek();
+		ReflectiveCollection.add((RuntimeObject)owningPackage.getProperties().get("ownedTypeDefinition"),knode);
 
 		Hashtable properties=knode.getProperties();
 		properties.put("tag",ReflectiveCollection.createReflectiveCollection(nodeMetaclass,Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Tag")));	
@@ -244,7 +287,7 @@ public class KMBuilder extends KermetaVisitor {
 		        this.accept((EObject)pretagArray[i]);
 		    }
 		}
-		KermetaObject test=TRUE.INSTANCE;
+		RuntimeObject test=TRUE.INSTANCE;
 		if (node.isFIsAbstract())
 			properties.put("isAbstract",FALSE.INSTANCE);
 		else properties.put("isAbstract",TRUE.INSTANCE);
@@ -415,61 +458,36 @@ public class KMBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
-		KermetaObject nodeMetaclass=(KermetaObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Operation");
-		KermetaObject knode=nodeMetaclass.instanciate(KMReflect.allAttributes(nodeMetaclass));
+		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Operation");
+		RuntimeObject knode=nodeMetaclass.instanciate(KMReflect.allAttributes(nodeMetaclass));
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);
 		this.currentOperationNode=knode;
-		KermetaObject opList=null; //ReflectiveCollection
-/*		Iterator it=this.currentClassNode.getProperties().keySet().iterator();
-		while (it.hasNext()) {
-			String key=(String)it.next();
-			System.out.println(key);
-			System.out.println(this.currentClassNode.getProperties().get(key));
-		}*/
-		Object ownedOperation=this.currentClassNode.getProperties().get("ownedOperation");
-		if (ownedOperation.equals(KMDummyObject.INSTANCE)) {
-			//first operation to add : create the reflective collection
-			opList=ReflectiveCollection.createReflectiveCollection(this.currentClassNode,knode);
-		}
-		String result = "";
-		if (node.getFSuperOperation() != null) result += "method ";
-		else result += "operation ";
-		result += ppIdentifier(node.getFName());
-		if (node.getFTypeParameter().size() > 0) {
-			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
-			result += ">";
-		}
-		result += "(";
-		result += ppComaSeparatedNodes(node.getFOwnedParameter());
-		result += ")";
-		if(node.getFType() != null) {
-			result += " : " + ppTypeFromMultiplicityElement(node);
-		}
+		RuntimeObject opList=(RuntimeObject)this.currentClassNode.getProperties().get("ownedOperation");
+		ReflectiveCollection.add(opList,knode);
+		Hashtable properties=knode.getProperties();
+		properties.put("name",node.getFName());
+		if (node.getFTypeParameter().size() > 0)
+			properties.put("typeParamBinding",ppTypeVariableDeclaration(node.getFTypeParameter()));
+		properties.put("FOwnedParameter",ReflectiveCollection.createReflectiveCollection(nodeMetaclass,Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Parameter")));	
+		ppComaSeparatedNodes(node.getFOwnedParameter());
+		if(node.getFType() != null)
+			properties.put("type",ppTypeFromMultiplicityElement(node));
 	
 		if (node.getFSuperOperation() != null) {
-			result += " from " + ppIdentifier(getQualifiedName(node.getFSuperOperation().getFOwningClass()));
+			properties.put("SuperOperation",ppIdentifier(getQualifiedName(node.getFSuperOperation().getFOwningClass())));
 		}
 		if (node.getFRaisedException().size() > 0) {
-			result += " raises " + ppComaSeparatedNodes(node.getFRaisedException());
+			properties.put("raisedException",ppComaSeparatedNodes(node.getFRaisedException()));
 		}
 		if (node.getFBody() != null) {
-			result += " is\n";
-			pushPrefix();
-			result += getPrefix() + this.accept(node.getFBody());
-			popPrefix();
+			properties.put("FBody",ReflectiveCollection.createReflectiveCollection(nodeMetaclass,Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Instruction")));	
+			this.accept(node.getFBody());
 		}
-		else if (node.isFIsAbstract()) result += " is abstract";
-		else {
-			result += " is do\n";
-			pushPrefix();
-			result += getPrefix() + "//TODO: implement operation " + node.getFName() + "\n"; 
-			popPrefix();
-			result += getPrefix() + "end";
-		}
-		return result;
+		else if (node.isFIsAbstract())
+			properties.put("isAbstract",TRUE.INSTANCE);
+		return null;
 	}
 	
 	/**
