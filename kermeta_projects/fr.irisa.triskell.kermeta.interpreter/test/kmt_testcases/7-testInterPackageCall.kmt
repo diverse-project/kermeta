@@ -5,6 +5,6 @@ require "7-testOpPackageCall.kmt"
 // operation called in another package
 class Test_opcall {
     operation operation1() : Integer is do
-        result := testOpPackage::Test_opcall::operation2()
+        result := testOpPackage::Test_opcall.new.operation2()
     end
 }

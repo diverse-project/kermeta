@@ -1,23 +1,12 @@
-package testOpInternPkgCall;
+package testAssignment;
 
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 
-package test_package1 
-{
-	class Test_operation_pkg1 {
-	
-	    operation operation_pkg1() : Integer is do
-	        result :=  test_package2::Test_operation_pkg2::operation_pkg2()
-	    end
-	}
+class Test_assignment {
+
+    operation operation1() : Integer is do
+        var ~result : Integer
+        ~result := 4
+    end
 }
 
-package test_package2
-{
-	class Test_operation_pkg2 {
-
-		operation operation_pkg2() : Integer is do
-	        result := 4
-	    end
-	}
-}

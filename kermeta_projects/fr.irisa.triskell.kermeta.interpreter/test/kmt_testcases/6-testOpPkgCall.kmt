@@ -6,6 +6,6 @@ require "6-testExternPackageCall.kmt"
 class Test_opcall {
 
     operation operation1() : Integer is do
-        result := externPackage::Test_opcall::operation_asg()
+        result := externPackage::Test_opcall.new.operation_asg()
     end
 }

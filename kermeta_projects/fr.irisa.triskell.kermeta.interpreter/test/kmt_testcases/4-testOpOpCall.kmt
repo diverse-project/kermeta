@@ -6,7 +6,7 @@ class Test_opopcall {
     attribut e : Integer
 
     operation operation1() : Integer is do
-        result := Test_opcalled::operation_asg()
+        result := Test_opcalled.new.operation_asg()
     end
 
 

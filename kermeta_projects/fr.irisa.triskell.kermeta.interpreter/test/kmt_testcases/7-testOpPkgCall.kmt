@@ -6,7 +6,7 @@ require "6-testExternPackageCall2.kmt"
 // of this package.
 class Test_opcall {
     operation operation1 : Integer is do
-        result := testInterPackage::Test_opcall::operation1()
+        result := testInterPackage::Test_opcall.new.operation1()
     end
     
     operation operation2 : Integer is do

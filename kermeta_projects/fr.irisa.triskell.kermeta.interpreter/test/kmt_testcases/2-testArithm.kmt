@@ -1,36 +1,17 @@
-package testOpCallObject;
+package testArithm;
 
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 
-// Creation of an object
-class MyObject {
+// assignment of the return variable
+class Test_arithm {
 
-	attribut attr1 : Integer
-	attribut attr2 : Boolean
-
-	operation set_attr1(arg0 : Integer) : Void is do
-	
-		attr1 := arg0
-	end
-	
-	operation set_attr2(arg0 : Boolean) : Void is do
-
-		attr2 := arg0
-	end
-
+    operation operation1() : Integer is do
+        var ~result : Integer
+        var a : Integer
+        a := 4
+        ~result := ( 3 + a ) * 2
+        result := ~result
+    end
 }
 
-class MyObjectCreation {
 
-	operation createMyObject() : MyObject is do
-		var object : MyObject
-		var bool   : Boolean
-		var int    : Integer
-		bool := true
-		int  := 4
-		object := MyObject.new
-		object.set_attr1(int)
-		object.set_attr2(bool)
-		result := object
-	end
-}
