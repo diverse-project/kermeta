@@ -1,6 +1,6 @@
-package kermeta::virtualmachine;
+package kermeta::interpreter;
 
-require "../../../kermeta.kmt"
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/kermeta.kmt"
 
 using kermeta::language::behavior
 using kermeta::language::structure
