@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.4 2005-03-11 16:30:37 jpthibau Exp $
+/* $Id: KMMetaBuilder.java,v 1.5 2005-03-15 07:39:40 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -197,7 +197,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
 	public Object visit(FClassDefinition node) {
-		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.interpreter);
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaClass);
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);
@@ -240,7 +240,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
 	 */
 	public Object visit(FPrimitiveType node) {
-		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.interpreter);
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaClass);
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);
@@ -380,7 +380,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
-		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.interpreter);
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaClass);
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);
@@ -446,7 +446,7 @@ public class KMMetaBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
 	public Object visit(FProperty node) {
-		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.interpreter);
+		KermetaObject knode=Run.kermetaObjectFactory.createKermetaObject(Run.metametaClass);
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);

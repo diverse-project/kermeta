@@ -1,4 +1,4 @@
-/* $Id: KMBuilder.java,v 1.4 2005-03-11 16:30:36 jpthibau Exp $
+/* $Id: KMBuilder.java,v 1.5 2005-03-15 07:39:39 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -31,8 +31,12 @@ import org.eclipse.emf.ecore.EObject;
 import fr.irisa.triskell.kermeta.behavior.*;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.reflect.KMReflect;
+import fr.irisa.triskell.kermeta.runtime.KMDummyObject;
 import fr.irisa.triskell.kermeta.runtime.KermetaObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
+import fr.irisa.triskell.kermeta.runtime.basetypes.TRUE;
+import fr.irisa.triskell.kermeta.runtime.basetypes.FALSE;
+import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.structure.*;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -51,6 +55,7 @@ public class KMBuilder extends KermetaVisitor {
 	protected Hashtable allClasses;
 	protected Stack packagesStack;
 	protected KermetaObject currentClassNode;
+	protected KermetaObject currentOperationNode;
 	protected KermetaObject reflectivecollectionMetaclass;
 	
 	protected boolean typedef = false;
@@ -231,6 +236,8 @@ public class KMBuilder extends KermetaVisitor {
 		String qualifiedName=KMReflect.getQualifiedName(node);
 		this.allClasses.put(qualifiedName,knode);
 
+		Hashtable properties=knode.getProperties();
+		properties.put("tag",KMDummyObject.INSTANCE);	
 		// Get the pre Annotation of this class 
 		if (node.getFTag().size()>0)
 		{
@@ -240,24 +247,18 @@ public class KMBuilder extends KermetaVisitor {
 		        this.accept((EObject)pretagArray[i]);
 		    }
 		}
-		Hashtable properties=knode.getProperties();
-		Iterator it=properties.keySet().iterator();
-		while (it.hasNext())
-			System.out.println(it.next());
-		KermetaObject test=//Boolean.TRUE;
+		KermetaObject test=TRUE.INSTANCE;
 		if (node.isFIsAbstract())
-			properties.put("isAbstract",Boolean.FALSE);
-		else properties.put("isAbstract",Boolean.TRUE);
+			properties.put("isAbstract",FALSE.INSTANCE);
+		else properties.put("isAbstract",TRUE.INSTANCE);
 		properties.put("name",node.getFName());
 		if (node.getFTypeParameter().size() > 0)
 			properties.put("typeParamBinding",ppTypeVariableDeclaration(node.getFTypeParameter()));
 
-		KermetaObject aRefCollection=this.reflectivecollectionMetaclass.instanciate(KMReflect.allAttributes(this.reflectivecollectionMetaclass,allMetaClasses));
-		properties.put("ownedAttribute",aRefCollection);	
+		properties.put("ownedAttribute",KMDummyObject.INSTANCE);	
 		ppCRSeparatedNode(node.getFOwnedAttributes());
 
-		aRefCollection=this.reflectivecollectionMetaclass.instanciate(KMReflect.allAttributes(this.reflectivecollectionMetaclass,allMetaClasses));
-		properties.put("ownedOperation",aRefCollection);
+		properties.put("ownedOperation",KMDummyObject.INSTANCE);
 		ppCRSeparatedNode(node.getFOwnedOperation());
 
 		// Get post annotations
@@ -417,6 +418,24 @@ public class KMBuilder extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
+		KermetaObject nodeMetaclass=(KermetaObject)this.allMetaClasses.get("kermeta::language::structure::Operation");
+		KermetaObject knode=nodeMetaclass.instanciate(KMReflect.allAttributes(nodeMetaclass,allMetaClasses));
+		Hashtable data=new Hashtable();
+		data.put("kcoreObject",node);
+		knode.setData(data);
+		this.currentOperationNode=knode;
+		KermetaObject opList=null; //ReflectiveCollection
+/*		Iterator it=this.currentClassNode.getProperties().keySet().iterator();
+		while (it.hasNext()) {
+			String key=(String)it.next();
+			System.out.println(key);
+			System.out.println(this.currentClassNode.getProperties().get(key));
+		}*/
+		Object ownedOperation=this.currentClassNode.getProperties().get("ownedOperation");
+		if (ownedOperation.equals(KMDummyObject.INSTANCE)) {
+			//first operation to add : create the reflective collection
+			opList=ReflectiveCollection.createReflectiveCollection(this.currentClassNode,knode);
+		}
 		String result = "";
 		if (node.getFSuperOperation() != null) result += "method ";
 		else result += "operation ";
