@@ -1,0 +1,7 @@
+
+Dawid Weiss
+	The author of the first version of the DocBook styler and package
+	maintenance.
+
+Matthias Marschall
+	contributions - split styles into separate dir, various improvements.

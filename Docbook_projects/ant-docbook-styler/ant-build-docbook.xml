@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project name="Docbook styler module for ANT" default="help" basedir=".">
+  <property name="undefined"               value="__UNDEFINED__VALUE__" />
+
+  <!-- ## (DW 20040307) Added explicit property 'ant.docbook.styler.dir'. This
+       will be autoinitialized by default, but just in case somebody wants to
+       override the defaults...
+    -->
+  <property name="ant.docbook.styler.dir"  value="${basedir}" />
+
+  <!-- A directory where your docbook XMLs are -->
+  <property name="docbook.xml.dir"         value="${undefined}" />
+  
+  <!-- A directory where all the figures are -->
+  <property name="docbook.resources.dir"   value="${undefined}" />
+  
+  <!-- A directory for output files -->
+  <property name="distribution.dir"        location="${undefined}" />
+
+  <!-- A temp directory -->
+  <property name="build.dir"               location="${undefined}" />
+
+  <!-- Output file name for the rendered docbook file -->
+  <property name="manual.name"             value="index" />
+  
+  <!-- Start file for Docbook processing. -->
+  <property name="index.name"              value="${manual.name}" />
+  
+  <property name="docbook.style"           value="plain" />
+  <property name="website.style"           value="plain" />
+
+  <!-- website rendering -->
+  <property name="website.xml.dir"         value="${undefined}" />
+
+  <!-- ## override these properties, if needed -->
+  <property name="temp:docbook.ready.file" location="${build.dir}/docbook-ready-file.tmp"/>
+  <property name="temp:fo.ready.file"      location="${build.dir}/fo-ready-file.tmp" />
+  <!-- ## (MM 20040303) moved all styles (for docbook and for website into sub-folders 
+       ## of the styles folder -->
+  <property name="docbook.styles"          location="${ant.docbook.styler.dir}/custom-styles/docbook" />
+  <!-- ## (MM 20040303) added parameter for finding the styles folder for website projects -->
+  <property name="website.styles"          location="${ant.docbook.styler.dir}/custom-styles/website" />
+
+  <path id="ant-extensions">
+    <fileset dir="${ant.docbook.styler.dir}/ant-extensions" includes="**/*.jar" />
+    <pathelement path="${ant.docbook.styler.dir}/ant-extensions" />
+  </path>
+
+  <!-- ##################################### -->
+  <!-- ### {{{ CHECK REQUIRED PROPS      ### -->
+  <!-- ##################################### -->
+  
+  <target name="check.required-properties">
+  
+    <condition property="tmp:ant.docbook.styler.dir" value="true">
+        <and>
+            <!-- ## (dw 20040307) check that we really point at the base directory 
+                 of ant-docbook-styler -->
+            <available file="${ant.docbook.styler.dir}" type="dir" />
+            <available file="${ant.docbook.styler.dir}/custom-styles" type="dir" />
+            <available file="${ant.docbook.styler.dir}/docbook" type="dir" />
+        </and>
+    </condition>
+    <fail message="### 'ant.docbook.styler.dir' does not point at the styler's installation directory: ${ant.docbook.styler.dir}"
+        unless="tmp:ant.docbook.styler.dir"/>
+  
+    <condition property="tmp:docbook.xml.dir.ok" value="true">
+        <and>
+            <not>
+                <equals arg1="${docbook.xml.dir}" arg2="${undefined}" />
+            </not>
+            <available file="${docbook.xml.dir}" type="dir" />
+        </and>
+    </condition>
+    <fail message="### Define 'docbook.xml.dir' property pointing at Docbook XMLs folder."
+          unless="tmp:docbook.xml.dir.ok" />
+
+    <condition property="tmp:docbook.resources.dir.ok" value="true">
+        <and>
+            <not>
+                <equals arg1="${docbook.resources.dir}" arg2="${undefined}" />
+            </not>
+            <available file="${docbook.resources.dir}" type="dir" />
+        </and>
+    </condition>
+    <fail message="### Define 'docbook.resources.dir' property pointing at your resources folder."
+          unless="tmp:docbook.resources.dir.ok" />
+
+    <condition property="tmp:docbook.startfile.ok" value="true">
+        <and>
+            <available file="${docbook.xml.dir}/${index.name}.xml" type="file" />
+        </and>
+    </condition>
+    <fail message="### Cannot find root docbook file: ${docbook.xml.dir}/${index.name}.xml"
+          unless="tmp:docbook.startfile.ok" />
+
+    <condition property="tmp:docbook.build.dir.ok" value="true">
+        <and>
+            <not>
+                <equals arg1="${build.dir}" arg2="${undefined}" />
+            </not>
+            <available file="${build.dir}" type="dir" />
+        </and>
+    </condition>
+    <fail message="### Define 'build.dir' property pointing at a temporary folder (will be erased!)."
+          unless="tmp:docbook.build.dir.ok" />          
+
+    <condition property="tmp:docbook.distribution.dir.ok" value="true">
+        <and>
+            <not>
+                <equals arg1="${distribution.dir}" arg2="${undefined}" />
+            </not>
+            <available file="${distribution.dir}" type="dir" />
+        </and>
+    </condition>
+    <fail message="### Define 'distribution.dir' property pointing at your destination folder."
+          unless="tmp:docbook.distribution.dir.ok" />          
+  </target>
+
+  <target name="check.expand.zips">
+    <antcall target="check.expand.docbook-distribution.zip" />
+    <antcall target="check.expand.website-distribution.zip" />
+  </target>
+  
+  <target name="check.expand.docbook-distribution.zip">
+    <condition property="tmp:docbook.available" value="true">
+        <and>
+        <available file="${ant.docbook.styler.dir}/docbook/dtd" type="dir" />
+        <available file="${ant.docbook.styler.dir}/docbook/xsl/fo" type="dir" />
+        <available file="${ant.docbook.styler.dir}/docbook/xsl/html" type="dir" />
+        <uptodate srcfile="${ant.docbook.styler.dir}/docbook/docbook.zip" 
+        		  targetfile="${ant.docbook.styler.dir}/docbook/docbook.zip.tstamp" />
+        </and>
+    </condition>
+    <antcall target="expand.docbook-distribution.zip" />
+  </target>
+  
+  <target name="expand.docbook-distribution.zip" unless="tmp:docbook.available">
+    <echo>
+    #####################################################
+        UNPACKING OR UPGRADING DOCBOOK DISTRIBUTION
+    #####################################################
+    </echo>
+    <delete failonerror="false" quiet="true">
+        <fileset dir="docbook">
+        <include name="dtd/**" />
+        <include name="xsl/**" />
+        </fileset>
+    </delete>
+    <unzip src="docbook/docbook.zip" dest="docbook" overwrite="true" />
+    
+    <taskdef name="LastModifiedMillis" classname="LastModifiedMillis">
+        <classpath refid="ant-extensions" />
+    </taskdef>
+
+    <LastModifiedMillis file="docbook/docbook.zip" property="millis" />
+    <touch file="docbook/docbook.zip.tstamp" millis="${millis}" />
+  </target>
+  
+  <target name="clean">
+    <delete failonerror="false" quiet="true" includeEmptyDirs="true">
+        <fileset dir="docbook">
+        <include name="dtd/**" />
+        <include name="xsl/**" />
+        </fileset>
+    </delete>
+  </target>  
+
+  <target name="check.expand.website-distribution.zip">
+    <condition property="tmp:website.available" value="true">
+        <and>
+        <available file="${ant.docbook.styler.dir}/website/schema" type="dir" />
+        <available file="${ant.docbook.styler.dir}/website/schema/dtd" type="dir" />
+        <available file="${ant.docbook.styler.dir}/website/xsl" type="dir" />
+        <uptodate srcfile="${ant.docbook.styler.dir}/website/website.zip"
+        		  targetfile="${ant.docbook.styler.dir}/website/website.zip.tstamp" />
+        </and>
+    </condition>
+    <antcall target="expand.website-distribution.zip" />
+  </target>
+  
+  <target name="expand.website-distribution.zip" unless="tmp:website.available">
+    <echo>
+    #####################################################
+        UNPACKING OR UPGRADING WEBSITE DISTRIBUTION
+    #####################################################
+    </echo>
+    <delete failonerror="false" quiet="true">
+        <fileset dir="website">
+        <include name="schema/**" />
+        <include name="xsl/**" />
+        </fileset>
+    </delete>
+    <unzip src="website/website.zip" dest="website" overwrite="true" />
+    
+    <taskdef name="LastModifiedMillis" classname="LastModifiedMillis">
+        <classpath refid="ant-extensions" />
+    </taskdef>
+
+    <LastModifiedMillis file="website/website.zip" property="millis" />
+    <touch file="website/website.zip.tstamp" millis="${millis}" />
+  </target>
+  <!-- }}} -->
+
+
+  <!-- ##################################### -->
+  <!-- ### {{{ PREPARE OUTPUT PATHS      ### -->
+  <!-- ##################################### -->
+
+  <target name="prepare" depends="modules.detection,check.expand.zips, check.required-properties, xsltprocessor">
+  </target>
+  
+  <target name="modules.detection">
+    <available file="${ant.docbook.styler.dir}/module-fop" type="dir"
+               property="module.fop.present" value="true" />
+               
+    <available file="${ant.docbook.styler.dir}/module-xep" type="dir"
+               property="module.xep.present" value="true" />
+    <property file="${ant.docbook.styler.dir}/module-xep/xep-config.properties" />
+
+  </target>
+
+  <!-- }}} -->  
+
+
+  <!-- ########################################################## -->
+  <!-- ### {{{ Prepare for building with docbook              ### -->
+  <!-- ########################################################## -->
+  <target name="copyResources-distribution" unless="resources.nocopy">
+    <copy todir="${distribution.dir}/css" includeemptydirs="false">
+        <fileset dir="${docbook.styles}/${docbook.style}/css"/>
+    </copy>
+    <copy todir="${distribution.dir}/gfx/admonitions" includeemptydirs="false">
+        <fileset dir="${docbook.styles}/${docbook.style}/admonitions" />
+    </copy>
+    <copy todir="${distribution.dir}/figures" includeemptydirs="false">
+        <fileset dir="${docbook.resources.dir}" includes="**/*" />
+    </copy>
+  </target>
+  <target name="copyResources-build">
+    <copy todir="${build.dir}/css" includeemptydirs="false">
+        <fileset dir="${docbook.styles}/${docbook.style}/css"/>
+    </copy>
+    <copy todir="${build.dir}/gfx/admonitions" includeemptydirs="false">
+        <fileset dir="${docbook.styles}/${docbook.style}/admonitions" />
+    </copy>
+    <copy todir="${build.dir}/figures" includeemptydirs="false">
+        <fileset dir="${docbook.resources.dir}" includes="**/*" />
+    </copy>
+  </target>
+
+  <target name="disable.resources.copy">
+    <property name="resources.nocopy" value="true" />
+  </target>
+    
+  <target name="docbook.consolidate"
+          depends="prepare, copyResources-build, copyResources-distribution, create.styler.uri">
+
+    <copy todir="${build.dir}" overwrite="true" filtering="false">
+        <fileset dir="${docbook.xml.dir}" />
+    </copy>
+
+    <property name="catalog.location" location="${ant.docbook.styler.dir}/preprocess/catalog.xml" />
+    
+    <!-- (MM 20040314) make the Java XSLT use the same catalog as the XSLTProc -->
+    <!-- works only with ant 1.6 and newer, but avoids problems when upgrading 
+         from Java XSLT to XSLTProc later                                      -->
+    <xmlcatalog id="dtdcatalog">
+            <catalogpath>
+                <fileset file="${catalog.location}"/>
+            </catalogpath>
+    </xmlcatalog>
+
+	<echo> preprocess catalog.location= ${catalog.location}</echo>
+    <style
+        in      = "${build.dir}/${index.name}.xml"
+        style   = "${ant.docbook.styler.dir}/preprocess/preprocess.xsl"
+        out     = "${temp:docbook.ready.file}"
+        processor = "${xslt.processor}"
+        >
+        <xmlcatalog refid="dtdcatalog"/>
+        <classpath refid="ant-extensions" />
+
+        <param name="xsltproc.option.debug"  expression="" /> 
+        <param name="xsltproc.catalog" expression="${catalog.location}" />
+        <param name="xsltproc.option.--nonet"  expression="" />
+    </style>
+  </target>
+  <!-- }}} -->
+
+
+  <!-- ########################################################## -->
+  <!-- ### {{{ builds PDF documentation using FOP             ### -->
+  <!-- ########################################################## -->
+  <property name="module.fop.basedir" location="${ant.docbook.styler.dir}/module-fop" />
+  <target name="pdf.fop" depends="modules.detection,pdf.fop.internal">
+    <fail unless="module.fop.present">
+    ### ERROR: module for PDF FOP rendering not installed. Please download
+    it, and reinstall the styler using 'ant -f ant-build.docbook.xml install'.
+    </fail>
+  </target>
+
+  <target name="pdf.fop.internal" depends="disable.resources.copy,docbook.consolidate" if="module.fop.present">
+
+    <copy file="${docbook.styles}/${docbook.style}/xsl/customized.pdf-fop.xsl"
+          tofile="${build.dir}/customized.pdf-fop.xsl.tmp"
+          overwrite="true"
+    >
+        <filterset refid="filterset.fileuris" />
+    </copy>
+
+    <style
+        in      = "${temp:docbook.ready.file}"
+        style   = "${build.dir}/customized.pdf-fop.xsl.tmp"
+        out     = "${build.dir}/fop-ready.fo"
+        processor = "${xslt.processor}"
+        >
+        <classpath refid="ant-extensions" />
+    </style>
+
+    <taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop">
+             <classpath>
+                <fileset dir="${module.fop.basedir}">
+                    <include name="**/*.jar" />
+                </fileset>
+             </classpath>
+    </taskdef>
+
+    <fop format     = "application/pdf" 
+         fofile     = "${build.dir}/fop-ready.fo"
+         outfile    = "${distribution.dir}/${manual.name}.pdf"
+         messagelevel = "info"
+         userconfig = "${module.fop.basedir}/conf/config.xml"
+        />
+
+  </target>
+  <!-- }}} -->
+  
+  <!-- ########################################################## -->
+  <!-- ### {{{ builds PDF documentation using FOP             ### -->
+  <!-- ########################################################## -->
+  <property name="module.xep.basedir" location="${ant.docbook.styler.dir}/module-xep" />
+
+  <target name="pdf.xep" depends="modules.detection, pdf.xep.internal">
+    <fail unless="module.xep.present">
+    ### ERROR: module for PDF XEP rendering not installed. Please download
+    it and look in the readme file for installation instructions.
+    </fail>
+  </target>
+
+  <target name="pdf.xep.internal" depends="disable.resources.copy,docbook.consolidate" if="module.xep.present">
+
+    <copy file="${docbook.styles}/${docbook.style}/xsl/customized.pdf-xep.xsl"
+          tofile="${build.dir}/customized.pdf-xep.xsl.tmp"
+          overwrite="true"
+    >
+        <filterset refid="filterset.fileuris" />
+    </copy>
+
+    <path id="xep.classpath">
+        <fileset dir="${xep.installation.dir}" includes="lib/*.jar" />
+    </path>
+    <available property="xep.task.available" value="true"
+        classname="com.renderx.ant.XEPTask" classpathref="xep.classpath" >
+    </available>
+    <fail unless="xep.task.available">
+** ERROR: XEP task is not available. Make sure you installed XEP module correctly and
+set up XEP's installation directory in the module's configuration property file.
+    </fail>
+    <taskdef name="xep" classname="com.renderx.ant.XEPTask">
+        <classpath refid="xep.classpath" />
+    </taskdef>
+
+    <style
+        in      = "${temp:docbook.ready.file}"
+        style   = "${build.dir}/customized.pdf-xep.xsl.tmp"
+        out     = "${build.dir}/xep-ready.fo"
+        processor = "${xslt.processor}"
+        >
+        <classpath refid="ant-extensions" />
+    </style>
+
+    <xep in="${build.dir}/xep-ready.fo" out="${distribution.dir}/${manual.name}.pdf" format="PDF">
+        <sysproperty key="com.renderx.xep.ROOT" value="${xep.installation.dir}"/>
+        <sysproperty key="com.renderx.xep.FONTLIST" value="${module.xep.basedir}/conf/fonts.xml" />
+        <sysproperty key="com.renderx.xep.METRICS" value="${module.xep.basedir}/conf" />
+    </xep>
+
+  </target>
+  <!-- }}} -->
+
+
+
+  
+  <!-- ########################################################## -->
+  <!-- ### {{{ builds HTML documentation (single and chunked) ### -->
+  <!-- ########################################################## -->
+
+  <target name="html.single" depends="docbook.consolidate"
+          description="Renders a docbook documentation to a single HTML file.">
+
+    <copy file="${docbook.styles}/${docbook.style}/xsl/customized.single.xsl"
+          tofile="${build.dir}/customized.single.xsl.tmp"
+          overwrite="true"
+    >
+        <filterset refid="filterset.fileuris" />
+    </copy>
+
+    <style
+        in      = "${temp:docbook.ready.file}"
+        style   = "${build.dir}/customized.single.xsl.tmp"
+        out     = "${distribution.dir}/${manual.name}.html"
+        processor = "${xslt.processor}"
+        >
+        <classpath refid="ant-extensions" />
+    </style>
+    
+    <delete file="${build.dir}/customized.single.xsl.tmp" />
+
+  </target>
+
+
+  <target name="html.chunked" depends="docbook.consolidate" 
+          description="Renders the manual to a set of HTML files (sectioned).">
+  
+    <pathconvert property="docbook:tmp:chunked.dir" pathSep=",">
+        <path>
+            <pathelement location="${distribution.dir}" />
+        </path>
+    </pathconvert>
+
+    <copy file="${docbook.styles}/${docbook.style}/xsl/customized.chunked.xsl"
+          tofile="${build.dir}/customized.chunked.xsl.tmp"
+          overwrite="true"
+    >
+        <filterset refid="filterset.fileuris" />
+        <filterset>
+            <!-- (MM20040315) base.dir and root.filename are tokens used in customized.chunked.xsl
+                 to set the xsl:params correctly there -->
+            <filter token="base.dir" value="${docbook:tmp:chunked.dir}" />
+            <filter token="root.filename" value="${manual.name}" />
+        </filterset>
+    </copy>
+
+    <style
+        in      = "${temp:docbook.ready.file}"
+        style   = "${build.dir}/customized.chunked.xsl.tmp"
+        out     = "${distribution.dir}/docbook-ref-file.tmp"
+        processor = "${xslt.processor}"
+        >
+
+        <classpath refid="ant-extensions" />
+        <!-- <param name="chunker.output.encoding" expression="'UTF-8'" /> -->
+    </style>
+    
+    <delete file="${build.dir}/customized.chunked.xsl.tmp" />
+
+  </target>
+
+  <!-- }}} -->
+
+  <!-- ########################################################################## -->
+  <!-- ### {{{ INSTALLATION                                                       -->
+  <!-- ########################################################################## -->
+  <target name="install.step1">
+    <property name="ant.docbook.styler.dir" location="${basedir}" />
+  </target>
+
+  <target name="install" depends="modules.detection,install.step1,create.styler.uri,check.expand.zips">
+
+    <available classname="org.apache.xml.resolver.Resolver" property="ok:resolver.available" />
+    <fail unless="ok:resolver.available">
+ ##
+ ## FAILED: you must download Jakarta Commons' Resolver
+ ## package and install it in ANT's lib directory.
+ ## Download it from: http://xml.apache.org/commons/
+ ## 
+    </fail>
+    
+    <!-- Install modules, if present. -->
+    <antcall target="install.module.fop" />
+
+    <echo>
+ ##
+ ## ANT-DOCBOOK-STYLER INSTALLED.
+ ## ant.docbook.styler.dir is:
+ ## ${basedir}
+ ## 
+    </echo>
+    
+  </target>
+  
+  <target name="install.module.fop" if="module.fop.present">
+    <echo>Installing FOP module</echo>
+
+    <copy file="${ant.docbook.styler.dir}/module-fop/conf/config.xml-preinstall"
+          tofile="${ant.docbook.styler.dir}/module-fop/conf/config.xml"
+          overwrite="true"
+    >
+        <filterset refid="filterset.fileuris" />
+    </copy>
+  </target>
+  
+  <!-- }}} -->  
+
+  <!-- ########################################################################## -->
+  <!-- ### {{{ Renders DocBook Website project into HTML                          -->
+  <!-- ########################################################################## -->
+  
+  <target name="website.check.required-properties">
+    <condition property="tmp:ant.docbook.styler.dir" value="true">
+        <and>
+            <!-- ## (dw 20040307) check that we really point at the base directory 
+                 of ant-docbook-styler -->
+            <available file="${ant.docbook.styler.dir}" type="dir" />
+            <available file="${ant.docbook.styler.dir}/custom-styles" type="dir" />
+            <available file="${ant.docbook.styler.dir}/docbook" type="dir" />
+        </and>
+    </condition>
+    <fail message="### 'ant.docbook.styler.dir' does not point at the styler's installation directory: ${ant.docbook.styler.dir}"
+        unless="tmp:ant.docbook.styler.dir"/>
+
+    <condition property="tmp:website.xml.dir.ok" value="true">
+        <and>
+            <not>
+                <equals arg1="${website.xml.dir}" arg2="${undefined}" />
+            </not>
+            <available file="${website.xml.dir}" type="dir" />
+        </and>
+    </condition>
+    <fail message="### Define 'website.xml.dir' property pointing at Website XMLs folder."
+          unless="tmp:website.xml.dir.ok" />
+
+    <condition property="tmp:website.startfile.ok" value="true">
+        <and>
+            <available file="${website.xml.dir}/layout.xml" type="file" />
+        </and>
+    </condition>
+    <fail message="### Cannot find root Website file: ${website.xml.dir}/layout.xml"
+          unless="tmp:website.startfile.ok" />
+
+    <condition property="tmp:website.build.dir.ok" value="true">
+        <and>
+            <not>
+                <equals arg1="${build.dir}" arg2="${undefined}" />
+            </not>
+            <available file="${build.dir}" type="dir" />
+        </and>
+    </condition>
+    <fail message="### Define 'build.dir' property pointing at a temporary folder (will be erased!)."
+          unless="tmp:website.build.dir.ok" />          
+
+    <condition property="tmp:website.distribution.dir.ok" value="true">
+        <and>
+            <not>
+                <equals arg1="${distribution.dir}" arg2="${undefined}" />
+            </not>
+            <available file="${distribution.dir}" type="dir" />
+        </and>
+    </condition>
+    <fail message="### Define 'distribution.dir' property pointing at your destination folder."
+          unless="tmp:website.distribution.dir.ok" />          
+  </target>
+  
+
+  <target name="website" depends="check.expand.zips, website.check.required-properties, xsltprocessor, create.styler.uri"
+          description="Renders a docbook Website project into HTML.">
+
+    <property name="website.catalog.location" location="${ant.docbook.styler.dir}/website/catalog.xml" />
+
+    <!-- (MM 20040314) make the Java XSLT use the same catalog as the XSLTProc -->
+    <!-- works only with ant 1.6 and newer, but avoids problems when upgrading 
+         from Java XSLT to XSLTProc later                                      -->
+    <xmlcatalog id="websitedtdcatalog">
+            <catalogpath>
+                <fileset file="${website.catalog.location}"/>
+            </catalogpath>
+    </xmlcatalog>
+    
+    <copy todir="${build.dir}" includeemptydirs="false">
+        <fileset dir="${website.styles}/${website.style}" excludes="**/*.xsl" />
+    </copy>
+    <copy todir="${build.dir}" includeemptydirs="false">
+        <fileset dir="${website.xml.dir}" includes="**/*" />
+    </copy>
+    <delete file="${build.dir}/autolayout.xml" />
+
+    <style
+        in      = "${build.dir}/layout.xml"
+        style   = "website/xsl/autolayout.xsl"
+        out     = "${build.dir}/autolayout.xml"
+        processor = "${xslt.processor}"
+        >
+        <xmlcatalog refid="websitedtdcatalog"/>
+        <classpath refid="ant-extensions" />
+        <param name="xsltproc.catalog" expression="${website.catalog.location}" />        
+        <param name="xsltproc.option.--nonet"  expression="" />
+    </style>
+
+    <!-- (MM 20040315) Make sure that XSLT was successful
+              It doesn't fail, if the DTDs cannot be found, though ... -->
+    <condition property="tmp:website.autolayout.xml.ok" value="true">
+            <available file="${build.dir}/autolayout.xml" type="file" />
+    </condition>
+    <fail message="### First step (creation of autolayout.xml) failed while building website."
+          unless="tmp:website.autolayout.xml.ok" />          
+
+    <delete file="${build.dir}/tmp.ref" />
+    <property name="abs.build.dir" location="${build.dir}" />
+
+    <copy file="${website.styles}/${website.style}/style-driver.xsl"
+          tofile="${build.dir}/style-driver.xsl.tmp"
+          overwrite="true"
+    >
+        <filterset refid="filterset.fileuris" />
+    </copy>
+
+    <!-- (MM 20040303) <style...> uses now the temporary style-driver.xsl having the real path
+         for the import file -->
+    <style
+        in      = "${build.dir}/autolayout.xml"
+        style   = "${build.dir}/style-driver.xsl.tmp"
+        out     = "${build.dir}/tmp.ref"
+        processor = "${xslt.processor}"
+        >
+        <xmlcatalog refid="websitedtdcatalog"/>
+        <classpath refid="ant-extensions" />
+        <param name="xsltproc.catalog" expression="${website.catalog.location}" />
+        <param name="xsltproc.option.--nonet"  expression="" />
+        <param name="output-root" expression="${abs.build.dir}" />        
+    </style>
+    <!-- (MM 20040315) Make sure that XSLT was successful
+          It doesn't fail, if the DTDs cannot be found, though ... -->
+    <condition property="tmp:website.tmp.ref.ok" value="true">
+            <available file="${build.dir}/tmp.ref" type="file" />
+    </condition>
+    <fail message="### Second step (creation of HTML files) failed while building website."
+          unless="tmp:website.tmp.ref.ok" />          
+    
+    <!-- (MM 20040303) deleting temporary style-driver.xsl -->
+    <delete file="${build.dir}/style-driver.xsl.tmp" />
+
+    <delete file="${build.dir}/tmp.ref" />
+    <copy todir="${distribution.dir}" includeemptydirs="false">
+        <fileset dir="${build.dir}" excludes="**/*.xml" />
+    </copy>
+  </target>
+  <!-- }}} -->  
+
+  <!-- ########################################################################## -->
+  <!-- ### {{{ XSLT processor recognition. If xsltproc[.exe] is found in path,    -->
+  <!-- ### it will be used for stylesheet processing (much faster than Xalan)     -->
+  <!-- ########################################################################## -->
+  <target name="xsltprocessor">
+    <property environment="env"/>
+
+    <condition  property="executable.file.extension"
+                value=".exe">
+            <os family="windows"/>
+    </condition>
+    <condition  property="executable.file.extension"
+                value="">
+            <os family="unix"/>
+    </condition>
+    
+    <condition  property="tmp:xsltproc.available"
+                value="xsltproc${executable.file.extension}">
+        <or>
+            <and>
+                <os family="windows"/>
+                <available file="xsltproc${executable.file.extension}" filepath="${env.Path}" />
+            </and>
+            <and>
+                <os family="unix"/>
+                <available file="xsltproc${executable.file.extension}" filepath="${env.PATH}" />
+            </and>
+        </or>
+    </condition>
+    
+    <condition property="xslt.processor" value="com.dawidweiss.ant.taskdefs.XsltProcLiaison">
+        <and>
+            <isset property="tmp:xsltproc.available" />
+            <not>
+                <isset property="disable.xsltproc" />
+            </not>
+        </and>
+    </condition>
+    
+    <condition property="xslt.processor" value="com.dawidweiss.ant.taskdefs.SaxonLiaison">
+    		<not>
+    	  	  <isset property="disable.saxon" />
+    	  </not>
+    </condition>
+
+    <condition property="xslt.processor" value="trax">
+        <not>
+        <and>
+                <isset property="tmp:xsltproc.available" />
+                <not>
+                    <isset property="disable.xsltproc" />
+                </not>
+        </and>
+        </not>
+    </condition>
+
+    <antcall target="displayXsltProcessorInfo" />
+  </target>
+
+  <target name="displayXsltProcessorInfo"
+          if="tmp:xsltproc.available"
+          unless="disable.xsltproc">
+    <echo>
+    
+#####################################################
+XSLTProc has been found in your path and will be used
+for processing XSLT transformations. If you experience
+any problems, you can switch to Java's default XSLT 
+processor by defining 'disable.xsltproc' property.
+#####################################################
+
+    </echo>
+  </target>
+  
+  
+  <target name="create.styler.uri">
+    <pathconvert dirsep="/" property="tmp:ant.docbook.styler.abs">
+        <path>
+        <pathelement location="${ant.docbook.styler.dir}" />
+        </path>
+    </pathconvert>
+    <condition  property="tmp:file.uri.prefix"
+                value="file:///">
+            <os family="windows"/>
+    </condition>
+    <condition  property="tmp:file.uri.prefix"
+                value="file://">
+            <os family="unix"/>
+    </condition>
+    <property name="tmp:ant.docbook.styler.uri"
+        value="${tmp:file.uri.prefix}${tmp:ant.docbook.styler.abs}" />
+
+    <pathconvert dirsep="/" property="tmp:style.abs">
+        <path>
+        <pathelement location="${docbook.styles}/${docbook.style}" />
+        </path>
+    </pathconvert>
+    <property name="tmp:style.uri"
+        value="${tmp:file.uri.prefix}${tmp:style.abs}" />
+     
+    <filterset id="filterset.fileuris">
+        <filter token="ant.docbook.styler.fileuri" value="${tmp:ant.docbook.styler.uri}" />
+        <filter token="docbook.style.fileuri" value="${tmp:style.uri}" />
+    </filterset>
+
+  </target>
+  <!-- }}} -->
+  
+  
+
+
+  <!-- ##################################### -->
+  <!-- ### {{{ HELP ON THIS FILE             ### -->
+  <!-- ##################################### -->
+  <target name="help" description="Displays help about the project.">
+    <echo>
+    Project name: ${ant.project.name}
+    (c) Dawid Weiss, Poznań University of Technology.
+
+    Current JDK: ${ant.java.version}
+    Basedir    : ${basedir}
+    -----------------------------------
+    
+    Use ant -projecthelp for description of available tasks.
+    See the test folder for an example of use.
+
+    </echo>
+  </target>
+  <!-- }}} -->
+
+</project>

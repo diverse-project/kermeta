@@ -1,0 +1,5 @@
+
+The following people have contributed their time and effort
+to track down bugs and other issues:
+
+- Dimitri Herla [saxon output bug]
