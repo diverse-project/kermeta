@@ -44,11 +44,12 @@
 		
 		<copyfile dest="${build.dir}/kermeta_java.ecore" src="${build.dir}/kermeta.ecore"/>
 		
-		<copyfile dest="${dist.dir}/kermeta.ecore" src="${build.dir}/kermeta.ecore"/>
+		
 		
 		<java classname="fr.irisa.triskell.kermeta.dev.model.KermetaPrimitiveTypes" fork="yes" classpathref="full.classpath">
 						<arg line="${build.dir}/kermeta.ecore"/>
 				</java> 
+		<copyfile dest="${dist.dir}/kermeta.ecore" src="${build.dir}/kermeta.ecore"/>
 		
 		<echo> Updating element names for eclipse plugin... </echo>
 		<java classname="fr.irisa.triskell.kermeta.dev.model.CustomizeName" fork="yes" classpathref="full.classpath">

@@ -131,7 +131,7 @@ public class ECore2KMPass extends EmfaticASTNodeVisitor {
 	    else {
 	        FClassDefinition cd = (FClassDefinition)typeDef;
 	        FClass result = builder.struct_factory.createFClass();
-	        result.setFName(cd.getFName());
+	        //result.setFName(cd.getFName());
 	        result.setFClassDefinition(cd);
 	        return result;
 	    }

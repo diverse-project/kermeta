@@ -1,0 +1,16 @@
+package testPrimitiveType;
+
+require "testClass.kmt"
+
+using testClass::package1
+
+alias PClass1 : Coucou ;
+
+/* sjlksjd */
+class Coucou {
+
+ attribut toto : PClass1
+
+}
+
+alias AType : Class12 ;

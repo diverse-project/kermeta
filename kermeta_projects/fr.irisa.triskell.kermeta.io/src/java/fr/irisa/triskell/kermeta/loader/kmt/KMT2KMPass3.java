@@ -315,7 +315,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.PropertyKind)
 	 */
 	public boolean beginVisit(PropertyKind propertyKind) {
-		if (propertyKind.getText().equals("attribute")) {
+		if (propertyKind.getText().equals("attribut")) {
 			builder.current_property.setFIsDerived(false);
 			builder.current_property.setFIsComposite(true);
 		}

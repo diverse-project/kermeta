@@ -110,7 +110,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		return result;
 	}
 	
-	protected String ppCRSeparatedNode(EList expressions) {
+	public String ppCRSeparatedNode(EList expressions) {
 		String result = "";
 		Iterator it = expressions.iterator();
 		while(it.hasNext()) {
@@ -136,7 +136,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		return result;
 	}
 	
-	protected String ppComaSeparatedNodes(EList expressions) {
+	public String ppComaSeparatedNodes(EList expressions) {
 		String result = "";
 		Iterator it = expressions.iterator();
 		while(it.hasNext()) {
@@ -231,7 +231,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		}
 	}
 	
-	protected String ppTypeVariableDeclaration(EList tparams) {
+	public String ppTypeVariableDeclaration(EList tparams) {
 		String result = "";
 		Iterator it = tparams.iterator();
 		while (it.hasNext()) {
@@ -309,7 +309,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FJavaStaticCall)
 	 */
 	public Object visit(FJavaStaticCall node) {
-		String result = "extern " + node.getFJclass() + "::" + node.getFJmethod() + "(";
+		String result = "extern " + node.getFJclass() + "." + ppIdentifier(node.getFJmethod()) + "(";
 		result += ppComaSeparatedNodes(node.getFParameters());
 		result += ")";
 		return result;
@@ -401,7 +401,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		return ppIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node);
 	}
 	
-	protected String ppTypeFromMultiplicityElement(FMultiplicityElement elem) {
+	public String ppTypeFromMultiplicityElement(FMultiplicityElement elem) {
 		String result = "";
 		if (elem.getFUpper() != 1) {
 			if (elem.isFIsOrdered()) {

@@ -4,7 +4,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm">
   <eSubpackages name="structure">
     <eClassifiers xsi:type="ecore:EClass" name="Class">
-      <eOperations name="create" eType="#//structure/Object"/>
+      <eOperations name="new" eType="#//structure/Object"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Object"/>
   </eSubpackages>

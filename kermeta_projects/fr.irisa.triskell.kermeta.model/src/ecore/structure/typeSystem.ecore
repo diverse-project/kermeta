@@ -4,7 +4,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm">
   <eSubpackages name="structure">
     <eClassifiers xsi:type="ecore:EClass" name="Type"/>
-    <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" eSuperTypes="#//structure/Type">
+    <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" eSuperTypes="#//structure/Type #//structure/NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="#//structure/Type"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement"/>

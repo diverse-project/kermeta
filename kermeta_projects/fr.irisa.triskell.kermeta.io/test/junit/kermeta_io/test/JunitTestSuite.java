@@ -40,6 +40,7 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
 public void testmetacore() throws Exception {
 testWithFile("test/emfatic_testcases","metacore.emf" );
@@ -95,6 +96,10 @@ testWithFile("test/kmt_testcases","testCallExp.kmt" );
 
 public void testtestPrimitiveType() throws Exception {
 testWithFile("test/kmt_testcases","testPrimitiveType.kmt" );
+}
+
+public void testtestImportAlias() throws Exception {
+testWithFile("test/kmt_testcases","testImportAlias.kmt" );
 }
 
 public void testtestBlock() throws Exception {

@@ -112,7 +112,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			builder.storeTrace(res, basictype);
 			result = res;
 			res.setFClassDefinition(classdef);
-			res.setFName(classdef.getFName());
+			//res.setFName(classdef.getFName());
 			FType[] actual_params = getTypeFromLst(basictype.getParams());
 			if (actual_params.length != classdef.getFTypeParameter().size()) {
 				builder.error.add(new KMUnitError("Wrong number of type parameter for class '" + qname + "'.",basictype));

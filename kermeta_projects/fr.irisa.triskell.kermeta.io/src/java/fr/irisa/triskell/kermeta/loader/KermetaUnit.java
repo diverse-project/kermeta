@@ -178,6 +178,16 @@ public class KermetaUnit {
 	 */
 	protected ArrayList usings = new ArrayList();
 	
+	
+	public String getMessagesAsString() {
+		String result = "";
+		Iterator it = error.iterator();
+		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
+		it = warning.iterator();
+		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
+		return result;
+	}
+	
 	/**
 	 * Get a package by its qualified name
 	 * Returns null is not found
