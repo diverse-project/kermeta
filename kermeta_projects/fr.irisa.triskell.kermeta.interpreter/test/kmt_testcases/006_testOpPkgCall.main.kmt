@@ -1,5 +1,5 @@
-@mainclass "testOpPkgCall::Test_opcall1"
-@mainoperation "operation1"
+@mainClass "testOpPkgCall::Test_opcall1"
+@mainOperation "operation1"
 package testOpPkgCall;
 
 require "6_testExternPackageCall.kmt"
