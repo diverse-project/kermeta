@@ -132,9 +132,14 @@ public class Run extends TestCase {
 				}
 				System.err.println("\nSTARTING INTERPRETATION OF MAIN OPERATION...");
 				System.err.println("############################################");
+				long elapsedTime=System.currentTimeMillis();
 				BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder);
 				Object result=baseInterpreter.invoke(mainClassInstance,mainOp,arguments);
-				System.out.println("RESULT : "+result);
+				elapsedTime=System.currentTimeMillis()-elapsedTime;
+				long minutes=elapsedTime/60000;
+				long seconds=(elapsedTime - 60000*minutes)/1000;
+				long hundredth=(elapsedTime - 60000*minutes - 1000*seconds)/10;
+				System.out.println("RESULT : "+result+"; ElapsedTime : "+minutes+"mn "+seconds+"s "+hundredth+"'");
 			}
 		}
 		}
