@@ -1,0 +1,6 @@
+package kermeta;
+
+require "./standard/collections.kmt"
+require "./reflection/reflection.kmt"
+require "./language/structure.kmt"
+require "./language/reflective_collections.kmt"

@@ -14,6 +14,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FParameter;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
@@ -29,18 +30,44 @@ public class ClassVisitor extends KermetaVisitor {
 	
 	protected KermetaUnit unit;
 	protected FClassDefinition visitor;
+	protected FClassDefinition visitable;
 	protected FOperation acceptOp;
 
 	
 	/**
 	 * 
 	 */
-	public ClassVisitor(KermetaUnit unit, FClassDefinition visitor) {
+	public ClassVisitor(KermetaUnit unit) {
 		super();
 		this.unit = unit;
-		this.visitor = visitor;
-		acceptOp = unit.struct_factory.createFOperation();
+		//acceptOp = unit.struct_factory.createFOperation();
 		
+	}
+	
+	
+	public void createVisitorForPackage(FPackage pkg, String visitor_name) {
+		// Create visitor
+		visitor = unit.struct_factory.createFClassDefinition();
+		visitor.setFName(visitor_name + "Visitor");
+		visitor.setFIsAbstract(true);
+		FTypeVariable typevar = unit.struct_factory.createFTypeVariable();
+		typevar.setFName("ContextType");
+		visitor.getFTypeParameter().add(typevar);
+		
+		// Create visitable
+		visitable = unit.struct_factory.createFClassDefinition();
+		visitable.setFName(visitor_name + "Visitable");
+		visitable.setFIsAbstract(true);
+		
+		acceptOp = buildAcceptOp();
+		acceptOp.setFIsAbstract(true);
+		
+		visitable.getFOwnedOperation().add(acceptOp);
+		
+		// ClassVisitor
+		this.accept(pkg);
+		pkg.getFOwnedTypeDefinition().add(visitor);
+		pkg.getFOwnedTypeDefinition().add(visitable);
 	}
 
 	/**
@@ -54,30 +81,13 @@ public class ClassVisitor extends KermetaVisitor {
 	}
 	
 	
-	/**
-	 * Build a method accept
-	 * 
-	 *  operation accept<ContextType>(visitor : Visitor<ContextType>, context : ContextType) : ContextType is do
-			result := visitor.visitObject(self, context)
-		end
-	 * @param arg0
-	 * @return
-	 */
 	
-	public FOperation createAcceptMethod(FClassDefinition arg0) {
-		
+	
+	protected FOperation buildAcceptOp() {
 		FOperation result;
-		if (arg0.getFName().equals("Object"))
-		{
-			result = acceptOp;
-		}
-		else
-		{
-			result = unit.struct_factory.createFOperation();
-			result.setFSuperOperation(acceptOp);
-		}
-		
-		result.setFName("accept");
+		result = unit.struct_factory.createFOperation();
+		result.setFSuperOperation(acceptOp);
+		result.setFName("accept" + visitor.getFName());
 		FTypeVariable typevar = unit.struct_factory.createFTypeVariable();
 		typevar.setFName("ContextType");
 		result.getFTypeParameter().add(typevar);
@@ -101,6 +111,30 @@ public class ClassVisitor extends KermetaVisitor {
 		result.getFOwnedParameter().add(p2);
 		// : ContextType
 		result.setFType(typevar);
+		return result;
+	}
+	
+	
+	/**
+	 * Build a method accept
+	 * 
+	 *  operation accept<ContextType>(visitor : Visitor<ContextType>, context : ContextType) : ContextType is do
+			result := visitor.visitObject(self, context)
+		end
+	 * @param arg0
+	 * @return
+	 */
+	
+	public FOperation createAcceptMethod(FClassDefinition arg0) {
+		
+		
+		// Make the class inherit from visitable :
+		FClass visitable_class = unit.struct_factory.createFClass();
+		visitable_class.setFClassDefinition(visitable);
+		
+		arg0.getFSuperType().add(visitable_class);
+		
+		FOperation result = buildAcceptOp();
 		// Body :
 		FAssignement ass = unit.behav_factory.createFAssignement();
 		FCallResult res = unit.behav_factory.createFCallResult();
@@ -140,7 +174,7 @@ public class ClassVisitor extends KermetaVisitor {
 		pv2.setFName("context");
 		pv2.setFType((FType)visitor.getFTypeParameter().get(0));
 		pv2.setFUpper(1);
-		visitOp.setFType(typevar);
+		visitOp.setFType((FType)visitor.getFTypeParameter().get(0));
 		visitOp.setFUpper(1);
 		visitor.getFOwnedOperation().add(visitOp);
 		

@@ -1,6 +1,7 @@
-package kermeta::standard::reflection;
+package kermeta::language;
 
-require "Collections.kmt"
+require "../standard/collections.kmt"
+require "structure.kmt"
 
 using kermeta::standard
 
@@ -19,15 +20,15 @@ using kermeta::standard
 abstract class ReflectiveCollection<G> inherits Set<G>
 {
 	method add(element : G) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::ReflectiveCollection.add(element)
+		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(element)
 	end
 	
 	method remove(element : G) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::ReflectiveCollection.remove(element)
+		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(element)
 	end
 	
 	method clear() : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::ReflectiveCollection.clear()
+		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear()
 	end
 }
 
@@ -36,28 +37,28 @@ abstract class ReflectiveCollection<G> inherits Set<G>
  */
 abstract class ReflectiveSequence<G> inherits OrderedSet<G>, ReflectiveCollection<G> {
 	
-	method add(element : G) : Void select ReflectiveCollection is do
+	method add(element : G) : Void from ReflectiveCollection is do
 		super()
 	end
 	
-	method remove(element : G) : Void select ReflectiveCollection is do
+	method remove(element : G) : Void from ReflectiveCollection is do
 		super()
 	end
 	
-	method clear() : Void select ReflectiveCollection is do
+	method clear() : Void from ReflectiveCollection is do
 		super()
 	end
 	
 	method addAt(index : Integer, element : G) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::ReflectiveSequence.addAt(index, element)
+		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.addAt(index, element)
 	end
 	
 	method removeAt(index : Integer) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::ReflectiveSequence.removeAt(index)
+		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(index)
 	end
 	
 	method elementAt(index : Integer) : G is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::ReflectiveSequence.elementAt(index)
+		result ?= extern fr::irisa::triskell::kermeta::language::ReflectiveSequence.elementAt(index)
 	end
 
 }

@@ -1,0 +1,260 @@
+@namespace(uri="http://kermeta/kermeta.ecore", prefix="kermeta")
+package kermeta;
+
+@namespace(uri="http://kermeta_behavior/kermeta.ecore", prefix="kermeta_behavior")
+package behavior {
+  abstract class CallExpression extends Expression {
+    val Expression[*] parameters;
+    attr structure.String name;
+  }
+
+  abstract class Expression extends structure.Object {
+  }
+
+  class CallVariable extends CallExpression {
+  }
+
+  class CallFeature extends CallExpression {
+    val Expression target;
+  }
+
+  class CallSuperOperation extends CallExpression {
+  }
+
+  class CallResult extends CallVariable {
+  }
+
+  class Assignement extends Expression {
+    val CallExpression[1] target;
+    val Expression[1] value;
+    attr structure.Boolean isCast;
+  }
+
+  class Block extends Expression {
+    val Expression[+] statement;
+    val Rescue[*] rescueBlock;
+  }
+
+  class Conditionnal extends Expression {
+    val Expression thenBody;
+    val Expression elseBody;
+    val Expression condition;
+  }
+
+  abstract class Literal extends Expression {
+  }
+
+  class EmptyExpression extends Expression {
+  }
+
+  class IntegerLiteral extends Literal {
+    attr structure.Integer value;
+  }
+
+  class StringLiteral extends Literal {
+    attr structure.String value;
+  }
+
+  class BooleanLiteral extends Literal {
+    attr structure.Boolean value;
+  }
+
+  class TypeLiteral extends Literal {
+    val TypeReference[1] typeref;
+  }
+
+  class TypeReference extends structure.MultiplicityElement {
+  }
+
+  class VoidLiteral extends Literal {
+  }
+
+  class Loop extends Expression {
+    val Expression initiatization;
+    val Expression body;
+    val Expression stopCondition;
+  }
+
+  class SelfExpression extends Expression {
+  }
+
+  class VariableDecl extends Expression {
+    val Expression[1] initialization;
+    attr structure.String identifier;
+    val TypeReference type;
+  }
+
+  class Raise extends Expression {
+    val Expression[1] expression;
+  }
+
+  class Rescue extends structure.Object {
+    val Expression[+] body;
+    val TypeReference[1] exceptionType;
+    attr structure.String exceptionName;
+  }
+
+  class JavaStaticCall extends Expression {
+    val Expression[*] parameters;
+    attr structure.String jclass;
+    attr structure.String jmethod;
+  }
+
+  class LambdaExpression extends Expression {
+    val LambdaParameter[*] parameters;
+    val Expression body;
+  }
+
+  class LambdaParameter extends structure.Object {
+    attr structure.String name;
+    val TypeReference type;
+  }
+
+}
+
+@namespace(uri="http://kermeta_structure/kermeta.ecore", prefix="kermeta_structure")
+package structure {
+  datatype String : "kermeta::standard::String";
+
+  class Object {
+    op Class getMetaClass();
+    op Object container();
+    op Boolean equals(Object element);
+    op Object get(Property property);
+    op void set(Property property, Object element);
+    op Boolean isSet(Property property);
+    op void unset(Property property);
+    ref Tag[*]#object tag;
+  }
+
+  datatype Boolean : "kermeta::standard::Boolean";
+
+  datatype Integer : "kermeta::standard::Integer";
+
+  class Class extends Type {
+    op Object new();
+    ref ClassDefinition[1] classDefinition;
+    val TypeVariableBinding[*] typeParamBinding;
+    readonly derived ref Property[*] ownedAttribute;
+    readonly derived ref Operation[*] ownedOperation;
+    readonly derived ref Class[*] superClass;
+    readonly derived attr Boolean isAbstract = "false";
+    readonly derived attr String name;
+  }
+
+  class MultiplicityElement extends TypedElement {
+    attr Boolean isOrdered = "false";
+    attr Boolean isUnique = "true";
+    attr Integer lower;
+    attr UnlimitedNatural upper;
+  }
+
+  class Operation extends MultiplicityElement {
+    attr Boolean isAbstract;
+    val behavior.Expression body;
+    ref Operation superOperation;
+    ref ClassDefinition#ownedOperation owningClass;
+    ref TypeVariable[*] typeParameter;
+    ref Type[*] raisedException;
+    val Parameter[*]#operation ownedParameter;
+  }
+
+  class Tag extends Object {
+    ref Object[+]#tag object;
+    attr String name;
+    attr String value;
+  }
+
+  class Property extends MultiplicityElement {
+    val behavior.Expression getterbody;
+    val behavior.Expression setterbody;
+    ref ClassDefinition#ownedAttributes owningClass;
+    ref Property opposite;
+    attr Boolean isReadOnly = "false";
+    attr String default;
+    attr Boolean isComposite = "false";
+    attr Boolean isDerived = "false";
+    attr Boolean isID;
+  }
+
+  abstract class TypeContainer extends Object {
+    val Type[*] containedType;
+  }
+
+  class ClassDefinition extends TypeContainer, TypeDefinition {
+    attr Boolean isAbstract;
+    val Property[*]#owningClass ownedAttributes;
+    val Operation[*]#owningClass ownedOperation;
+    ref Type[*] superType;
+    val TypeVariable[*] typeParameter;
+  }
+
+  class TypedElement extends TypeContainer, NamedElement {
+    ref Type type;
+  }
+
+  class TypeVariable extends TypeContainer, Type, NamedElement {
+    ref Type supertype;
+  }
+
+  class ProductType extends TypeContainer, Type {
+    ref Type[+] type;
+  }
+
+  class FunctionType extends TypeContainer, Type {
+    ref Type left;
+    ref Type right;
+  }
+
+  class Type extends Object {
+    op Boolean isInstance(Object element);
+  }
+
+  class TypeVariableBinding extends TypeContainer, Object {
+    ref TypeVariable[1] variable;
+    ref Type[1] type;
+  }
+
+  class PrimitiveType extends TypeContainer, DataType {
+    ref Type instanceType;
+  }
+
+  class NamedElement extends Object {
+    attr String name;
+  }
+
+  class SelfType extends Type {
+  }
+
+  class Package extends NamedElement {
+    val TypeDefinition[*] ownedTypeDefinition;
+    val Package[*]#nestingPackage nestedPackage;
+    transient ref Package#nestedPackage nestingPackage;
+    attr String uri;
+  }
+
+  class TypeDefinition extends NamedElement {
+  }
+
+  class VoidType extends Type {
+  }
+
+  class DataType extends TypeDefinition, Type {
+  }
+
+  class Enumeration extends DataType {
+    val EnumerationLiteral[*]#enumeration ownedLiteral;
+  }
+
+  class EnumerationLiteral extends NamedElement {
+    transient ref Enumeration#ownedLiteral enumeration;
+  }
+
+  class Parameter extends MultiplicityElement {
+    transient ref Operation#ownedParameter operation;
+  }
+
+  datatype UnlimitedNatural : "kermeta::standard::UnlimitedNatural";
+
+}
+

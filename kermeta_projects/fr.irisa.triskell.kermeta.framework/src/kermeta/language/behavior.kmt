@@ -1,0 +1,229 @@
+package kermeta::language::behavior;
+
+require "structure.kmt"
+
+abstract class CallExpression inherits Expression
+{
+	attribut parameters : set Expression[0..*]
+	attribut name : kermeta::reflection::String
+}
+abstract class Expression inherits kermeta::reflection::Object
+{
+}
+class CallVariable inherits CallExpression, KMExpressionVisitable
+{
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitCallVariable(self, context)
+		end
+}
+class CallFeature inherits CallExpression, KMExpressionVisitable
+{
+	attribut target : Expression
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitCallFeature(self, context)
+		end
+}
+class CallSuperOperation inherits CallExpression, KMExpressionVisitable
+{
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitCallSuperOperation(self, context)
+		end
+}
+class CallResult inherits CallVariable, KMExpressionVisitable
+{
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitCallResult(self, context)
+		end
+}
+class Assignement inherits Expression, KMExpressionVisitable
+{
+	attribut target : CallExpression[1..1]
+	attribut value : Expression[1..1]
+	attribut isCast : kermeta::reflection::Boolean
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitAssignement(self, context)
+		end
+}
+class Block inherits Expression, KMExpressionVisitable
+{
+	attribut statement : set Expression[1..*]
+	attribut rescueBlock : set Rescue[0..*]
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitBlock(self, context)
+		end
+}
+class Conditionnal inherits Expression, KMExpressionVisitable
+{
+	attribut thenBody : Expression
+	attribut elseBody : Expression
+	attribut condition : Expression
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitConditionnal(self, context)
+		end
+}
+abstract class Literal inherits Expression
+{
+}
+class EmptyExpression inherits Expression, KMExpressionVisitable
+{
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitEmptyExpression(self, context)
+		end
+}
+class IntegerLiteral inherits Literal, KMExpressionVisitable
+{
+	attribut value : kermeta::reflection::Integer
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitIntegerLiteral(self, context)
+		end
+}
+class StringLiteral inherits Literal, KMExpressionVisitable
+{
+	attribut value : kermeta::reflection::String
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitStringLiteral(self, context)
+		end
+}
+class BooleanLiteral inherits Literal, KMExpressionVisitable
+{
+	attribut value : kermeta::reflection::Boolean
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitBooleanLiteral(self, context)
+		end
+}
+class TypeLiteral inherits Literal, KMExpressionVisitable
+{
+	attribut typeref : TypeReference[1..1]
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitTypeLiteral(self, context)
+		end
+}
+class TypeReference inherits kermeta::reflection::MultiplicityElement, KMExpressionVisitable
+{
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitTypeReference(self, context)
+		end
+}
+class VoidLiteral inherits Literal, KMExpressionVisitable
+{
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitVoidLiteral(self, context)
+		end
+}
+class Loop inherits Expression, KMExpressionVisitable
+{
+	attribut initiatization : Expression
+	attribut body : Expression
+	attribut stopCondition : Expression
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitLoop(self, context)
+		end
+}
+class SelfExpression inherits Expression, KMExpressionVisitable
+{
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitSelfExpression(self, context)
+		end
+}
+class VariableDecl inherits Expression, KMExpressionVisitable
+{
+	attribut initialization : Expression[1..1]
+	attribut identifier : kermeta::reflection::String
+	attribut type : TypeReference
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitVariableDecl(self, context)
+		end
+}
+class Raise inherits Expression, KMExpressionVisitable
+{
+	attribut expression : Expression[1..1]
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitRaise(self, context)
+		end
+}
+class Rescue inherits kermeta::reflection::Object, KMExpressionVisitable
+{
+	attribut body : set Expression[1..*]
+	attribut exceptionType : TypeReference[1..1]
+	attribut exceptionName : kermeta::reflection::String
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitRescue(self, context)
+		end
+}
+class JavaStaticCall inherits Expression, KMExpressionVisitable
+{
+	attribut parameters : set Expression[0..*]
+	attribut jclass : kermeta::reflection::String
+	attribut jmethod : kermeta::reflection::String
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitJavaStaticCall(self, context)
+		end
+}
+class LambdaExpression inherits Expression, KMExpressionVisitable
+{
+	attribut parameters : set LambdaParameter[0..*]
+	attribut body : Expression
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitLambdaExpression(self, context)
+		end
+}
+class LambdaParameter inherits kermeta::reflection::Object, KMExpressionVisitable
+{
+	attribut name : kermeta::reflection::String
+	attribut type : TypeReference
+	method acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : ContextType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitLambdaParameter(self, context)
+		end
+}
+abstract class KMExpressionVisitor<ContextType>
+{
+	operation visitCallVariable(node : CallVariable) : ContextType is abstract
+	operation visitCallFeature(node : CallFeature) : ContextType is abstract
+	operation visitCallSuperOperation(node : CallSuperOperation) : ContextType is abstract
+	operation visitCallResult(node : CallResult) : ContextType is abstract
+	operation visitAssignement(node : Assignement) : ContextType is abstract
+	operation visitBlock(node : Block) : ContextType is abstract
+	operation visitConditionnal(node : Conditionnal) : ContextType is abstract
+	operation visitEmptyExpression(node : EmptyExpression) : ContextType is abstract
+	operation visitIntegerLiteral(node : IntegerLiteral) : ContextType is abstract
+	operation visitStringLiteral(node : StringLiteral) : ContextType is abstract
+	operation visitBooleanLiteral(node : BooleanLiteral) : ContextType is abstract
+	operation visitTypeLiteral(node : TypeLiteral) : ContextType is abstract
+	operation visitTypeReference(node : TypeReference) : ContextType is abstract
+	operation visitVoidLiteral(node : VoidLiteral) : ContextType is abstract
+	operation visitLoop(node : Loop) : ContextType is abstract
+	operation visitSelfExpression(node : SelfExpression) : ContextType is abstract
+	operation visitVariableDecl(node : VariableDecl) : ContextType is abstract
+	operation visitRaise(node : Raise) : ContextType is abstract
+	operation visitRescue(node : Rescue) : ContextType is abstract
+	operation visitJavaStaticCall(node : JavaStaticCall) : ContextType is abstract
+	operation visitLambdaExpression(node : LambdaExpression) : ContextType is abstract
+	operation visitLambdaParameter(node : LambdaParameter) : ContextType is abstract
+}
+abstract class KMExpressionVisitable
+{
+	operation acceptKMExpressionVisitor<ContextType>(visitor : KMExpressionVisitor<ContextType>, context : ContextType) : set ContextType[0..0] is abstract
+}
+

@@ -4,7 +4,6 @@
  */
 package fr.irisa.triskell.kermeta.runtime.factory;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -32,12 +31,6 @@ public class KermetaObjectFactory {
 	protected Hashtable class_table = new Hashtable();
 	
 	/**
-	 * A command to execute just after the creation of a instance a a class
-	 * indexed by the class qualified name
-	 */
-	protected Hashtable post_creation_commands = new Hashtable();
-	
-	/**
 	 * The constructor
 	 */
 	public KermetaObjectFactory() {
@@ -58,14 +51,6 @@ public class KermetaObjectFactory {
 		}
 	}
 	*/
-	/**
-	 * Get the creation command for a particular class
-	 * returns null if there is no specific commant for the specified class
-	 */
-	protected CreationCommand getCommandForClass(String class_name) {
-		CreationCommand result = (CreationCommand)post_creation_commands.get(class_name);
-		return result;
-	}
 	
 	/**
 	 * The meta-class Class (bootstrap)
@@ -94,9 +79,6 @@ public class KermetaObjectFactory {
 		}
 		KermetaObject result = new KermetaObject(this, metaclass);
 		//TODO : take care of default values here
-		CreationCommand command = getCommandForClass(class_name);
-		// TODO : it should call the creation commands of all superclasses
-		if(command != null) command.execute(result);
 		return result;
 	}
 

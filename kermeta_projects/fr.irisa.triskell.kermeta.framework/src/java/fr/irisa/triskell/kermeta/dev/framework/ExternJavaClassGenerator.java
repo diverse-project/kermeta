@@ -17,8 +17,8 @@ import javax.naming.ldap.HasControls;
 import fr.irisa.triskell.kermeta.behavior.FJavaStaticCall;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
-import fr.irisa.triskell.kermeta.loader.KermetaLoader;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.KermetaObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
@@ -43,7 +43,8 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 	}
 	
 	public void loadmodel() {
-		unit = KermetaLoader.getDefaultLoader().load("src/kmt/Standard.kmt");
+		unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("src/kermeta/kermeta.kmt");
+		unit.load();
 		if (unit.error.size() > 0) {
 			System.out.println(unit.error.size() + " Load error : " + ((KMUnitMessage)unit.error.get(0)).getMessage());
 		}

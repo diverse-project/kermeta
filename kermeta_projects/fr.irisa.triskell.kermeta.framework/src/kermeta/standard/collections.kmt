@@ -1,6 +1,6 @@
 package kermeta::standard;
 
-require "Base.kmt"
+require "primitive_types.kmt"
 
 /***************************************************
  * Franck FLEUREY - 14/02/2005
@@ -213,7 +213,7 @@ class OrderedSet<G> inherits Set<G>, OrderedCollection<G>
 	/**
 	 * Select the method add from Set
 	 */
-	method add(element : G) select Set is do super(element) end
+	method add(element : G) from Set is do super(element) end
 
 	/**
 	 * overides addAt to ensure element uniqueness

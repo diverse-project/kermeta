@@ -1,5 +1,7 @@
 package kermeta::standard;
 
+//require "../Standard.kmt"
+
 /***************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
