@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.6 2005-03-07 17:27:51 jpthibau Exp $
+/* $Id: KMTUnit.java,v 1.7 2005-03-09 15:31:36 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -62,6 +62,7 @@ public class KMTUnit extends KermetaUnit {
 		}
 		catch(Exception e) {
 		    error.add(new KMUnitError("Parse error : " + e, null));
+		    System.out.println("Parse error : "+e);
 		    return;
 		}
 	}
@@ -88,8 +89,8 @@ public class KMTUnit extends KermetaUnit {
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadAnnotations()
      */
     public void loadAnnotations() {
-        KMT2KMPass pass = new KMT2KMPass7(this);
-        mctAST.accept(pass);
+ //       KMT2KMPass pass = new KMT2KMPass7(this);
+  //      mctAST.accept(pass);
 
     }
 	public void loadBodies() {
