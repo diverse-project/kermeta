@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.6 2005-03-09 13:35:31 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.7 2005-03-09 13:38:13 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -377,7 +377,6 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		result += ppComaSeparatedNodes(node.getFParameters());
 		result += " | ";
 		pushPrefix();
-		System.out.println("body:"+this.accept(node.getFBody()));
 		result += this.accept(node.getFBody());
 		popPrefix();
 		result += "}";
