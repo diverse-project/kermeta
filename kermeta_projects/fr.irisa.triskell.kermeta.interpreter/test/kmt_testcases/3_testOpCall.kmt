@@ -5,14 +5,13 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 class Test_opcall {
 
     operation operation1() : kermeta::standard::Integer is do
-        var ~result : kermeta::standard::Integer
-        ~result := operation_asg(~result)
+        result := operation_asg(1234)
     end
 
     operation operation_asg(in : kermeta::standard::Integer) : kermeta::standard::Integer is do
-        var ~result : kermeta::standard::Integer
-        ~result := in + 3
+        result := in + 3
     end
 
 
 }
+
