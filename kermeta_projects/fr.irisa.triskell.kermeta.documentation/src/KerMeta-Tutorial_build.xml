@@ -3,10 +3,14 @@
 	<!-- tool location -->
 	<property name="ant.docbook.styler.dir" location="../../ant-docbook-styler" />
     <property name="ant.docbook.styler"     value="ant-build-docbook.xml" />
-	<property name="ooo2dbk.dir"			location="/udd/triskell/bin/multiplatform/ooo2dbk"/>
+	<!--<property name="ooo2dbk.dir"			location="/udd/triskell/bin/multiplatform/ooo2dbk"/>-->
+	<property name="ooo2dbk.dir"			location="t:/bin/multiplatform/ooo2dbk"/>
 	<property name="ooo2dbk.file"			location="${ooo2dbk.dir}/ooo2dbk"/>
 	<!--<property name="python.exe"				location="C:\OpenOffice.org1.1.4\program\python.bat"/>-->
-	<property name="python.exe"				location="/usr/bin/python"/>
+	<!--<property name="python.exe"				location="/usr/bin/python"/>-->
+	<property name="python.exe"				location="C:\python24\python.exe"/>
+	<property name="hhc.exe"				location="C:\Program Files\HTML Help Workshop\hhc.exe"/>
+	
 	
 	<!-- project configuration -->
 	<property name="project.base.dir" location=".."/>
@@ -15,6 +19,7 @@
 	<property name="build.docbook.dir" location="${build.dir}/docbook42"/>
 	<property name="OOo.source.dir" location="${project.base.dir}/src/OOo"/>
 	<property name="OOo.source.file" location="${OOo.source.dir}/${project.name}.sxw"/>
+	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>
 	
 	<target name="all" depends="OOo2dbk, html.single, html.chunked ,pdf.fop">
 	</target>
@@ -36,7 +41,6 @@
 		<copy todir="${build.docbook.dir}/${project.name}/figures">
 			<fileset dir="${OOo.source.dir}/figures"/>
 		</copy>
-		<echo>Je copie les images qui vont bien de ${OOo.source.dir}/${project.name}_figures</echo>
 		<copy todir="${build.docbook.dir}/${project.name}/${project.name}_figures">
 			<fileset dir="${OOo.source.dir}/${project.name}_figures"/>
 		</copy>
@@ -97,7 +101,7 @@
 		<copy todir="${build.dir}/html.help/${project.name}/${project.name}_figures">
 			    	    <fileset dir="${build.docbook.dir}/${project.name}/${project.name}_figures"/>
 			</copy>
-		<ant antfile="${ant.docbook.styler}" dir="${ant.docbook.styler.dir}" inheritall="false"
+        <ant antfile="${ant.docbook.styler}" dir="${ant.docbook.styler.dir}" inheritall="false"
               target="html.help">
              <property name="docbook.xml.dir" location="${build.docbook.dir}/${project.name}" />
              <property name="docbook.resources.dir" location="${build.dir}/figures" />
@@ -107,6 +111,12 @@
 
         <available property="tmp:help.ok" file="${build.dir}/html.help/${project.name}/index.html" />
         <fail message="not good: HTMLHelp failed." unless="tmp:help.ok" />
+		<!-- I don't know any linux version of hhc -->
+		<exec dir="${build.dir}/html.help/${project.name}" executable="${hhc.exe}">
+			<arg line="htmlhelp.hhp"/>
+		</exec>
+		<copy tofile="${build.dir}/html.help/${project.name}/${project.name}.chm" 
+			file="${build.dir}/html.help/${project.name}/htmlhelp.chm"/>
 	</target>
 	
 	<target name="eclipse.help" depends="prepare_index.xml">
@@ -170,6 +180,24 @@
 			<copy file="${build.dir}/pdf.fop/${project.name}/index.pdf" 
 				tofile="${build.dir}/pdf.fop/${project.name}/${project.name}.pdf"/>
 		</target>
+
+	<target name="deploy" description="copy documentation files to http://www.irisa.fr/triskell/prive/docs" depends="OOo2dbk, html.single, html.chunked, html.help">
+	  	<delete dir="${deployment.dest}\\html.single\\${project.name}" failonerror="false"/>
+	  	<delete dir="${deployment.dest}\\html.chunked\\${project.name}" failonerror="false"/>
+		<copy todir="${deployment.dest}\\html.chunked\\${project.name}">
+	  		<fileset dir="${build.dir}\\html.chunked\\${project.name}">
+	  		</fileset>  			
+	  	</copy>
+	  	<copy todir="${deployment.dest}\\html.single\\${project.name}">
+	  		<fileset dir="${build.dir}\\html.single\\${project.name}">
+	  		</fileset>  			
+	  	</copy>
+	<!--	<copy file="${build.dir}/pdf.fop/${project.name}/${project.name}.pdf" 
+				todir="${deployment.dest}"/>-->
+		<copy file="${build.dir}/html.help/${project.name}/${project.name}.chm" 
+			todir="${deployment.dest}"/>
+
+	</target>
 
 	<!-- Cleaning targets -->
     <target name="clean">
