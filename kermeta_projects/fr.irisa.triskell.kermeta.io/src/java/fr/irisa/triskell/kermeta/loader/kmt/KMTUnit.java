@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.7 2005-03-09 15:31:36 jpthibau Exp $
+/* $Id: KMTUnit.java,v 1.8 2005-03-12 08:45:45 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.URI;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
@@ -61,8 +62,7 @@ public class KMTUnit extends KermetaUnit {
 			mctAST = p.compUnit();
 		}
 		catch(Exception e) {
-		    error.add(new KMUnitError("Parse error : " + e, null));
-		    System.out.println("Parse error : "+e);
+		    error.add(new KMUnitParseError(e));
 		    return;
 		}
 	}
@@ -74,7 +74,7 @@ public class KMTUnit extends KermetaUnit {
 			mctAST = p.compUnit();
 		}
 		catch(Exception e) {
-		    error.add(new KMUnitError("Parse error : " + e, null));
+			 error.add(new KMUnitParseError(e));
 		    return;
 		}
 	}
