@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="fr.irisa.triskell.traceability.feature"
+      label="fr.irisa.triskell.traceability.feature"
+      version="0.0.1"
+      provider-name="INRIA/IRISA">
+
+   <install-handler/>
+
+   <description url="[Enter Feature URL here.]">
+      This Eclipse feature contains the plugins for Traceability metamodel.
+It includes:
+- The traceability model;
+- The traceability edit plugin;
+- The traceability editor plugin (generated with EMF);
+   </description>
+
+   <copyright url="[Enter Copyright URL here.]">
+      Copyright 2005 - INRIA - LGPL license
+   </copyright>
+
+   <license url="[Enter License URL here.]">
+      Usage Of Content
+INRIA MAKES AVAILABLE SOFTWARE, DOCUMENTATION, INFORMATION AND/OR
+OTHER MATERIALS FOR OPEN SOURCE PROJECTS (COLLECTIVELY &quot;CONTENT&quot;).
+USE OF THE CONTENT IS GOVERNED BY THE TERMS AND CONDITIONS OF
+THIS
+AGREEMENT AND/OR THE TERMS AND CONDITIONS OF LICENSE AGREEMENTS
+OR
+NOTICES INDICATED OR REFERENCED BELOW. BY USING THE CONTENT,
+YOU
+AGREE THAT YOUR USE OF THE CONTENT IS GOVERNED BY THIS AGREEMENT
+AND/OR THE TERMS AND CONDITIONS OF ANY APPLICABLE LICENSE AGREEMENTS
+OR NOTICES INDICATED OR REFERENCED BELOW. IF YOU DO NOT AGREE
+TO THE
+TERMS AND CONDITIONS OF THIS AGREEMENT AND THE TERMS AND CONDITIONS
+OF ANY APPLICABLE LICENSE AGREEMENTS OR NOTICES INDICATED OR
+REFERENCED
+BELOW, THEN YOU MAY NOT USE THE CONTENT.
+Applicable Licenses
+Unless otherwise indicated, all Content made available here
+is provided to you under the terms and conditions of the Lesser
+General Public
+License Version 1.0 (&quot;LGPL&quot;). A copy of the LGPL is provided
+with this
+Content and is also available at http://www.gnu.org/copyleft/lesser.html.
+   </license>
+
+   <url>
+      <update label="UmlautNG update site" url="http://modelware.inria.fr/umlautng_update"/>
+      <discovery label="UmlautNG discovery site" url="http://modelware.inria.fr/umlautng_update"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+   </requires>
+
+   <plugin
+         id="fr.irisa.triskell.traceability"
+         download-size="0"
+         install-size="0"
+         version="0.0.1"/>
+
+   <plugin
+         id="fr.irisa.triskell.traceability.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.1"/>
+
+   <plugin
+         id="fr.irisa.triskell.traceability.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.1"/>
+
+</feature>
