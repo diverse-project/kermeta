@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.2 2005-03-21 13:44:59 zdrey Exp $
+/* $Id: RuntimeObject.java,v 1.3 2005-03-21 17:48:06 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -151,19 +151,6 @@ public class RuntimeObject {
 		return factory;
 	}
 	
-/*	public KermetaObject instanciate(List attributes) {
-		KermetaObject instance=new KermetaObject(this.getFactory(),this);
-		Hashtable propertiesGenerators=instance.getPropertiesGenerators();
-		Hashtable properties=instance.getProperties();
-		Iterator it=attributes.iterator();
-		while (it.hasNext()) {
-			KermetaObject attribute=(KermetaObject)it.next();
-			String attribName=((FProperty)attribute.getData().get("kcoreObject")).getFName();
-			propertiesGenerators.put(attribName,attribute);
-			properties.put(attribName,KMDummyObject.INSTANCE);
-		}
-		return instance;
-	}*/
 	
 	
 }
