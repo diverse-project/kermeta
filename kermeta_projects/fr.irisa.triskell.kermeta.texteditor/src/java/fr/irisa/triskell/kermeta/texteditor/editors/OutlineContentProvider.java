@@ -27,7 +27,7 @@ public class OutlineContentProvider implements ITreeContentProvider {
 	 */
 	public OutlineContentProvider() {
 		super();
-		getChildren = new GetChildrenVisitor();
+		getChildren = new GetChildrenVisitor(unit);
 	}
 
 	/**

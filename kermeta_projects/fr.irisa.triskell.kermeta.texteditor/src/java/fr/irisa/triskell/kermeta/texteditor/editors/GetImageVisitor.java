@@ -28,12 +28,18 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 public class GetImageVisitor extends KermetaVisitor {
 	
 	
-	public static Image CLASS_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/class.gif").createImage();
-	public static Image ENUM_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class,  "/fr/irisa/triskell/kermeta/texteditor/icons/enumeration.gif").createImage();
-	public static Image DATATYPE_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/enumeration.gif").createImage();
-	public static Image PROPERTY_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/property.gif").createImage();
-	public static Image OPERATION_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/operation.gif").createImage();
-	public static Image PACKAGE_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package.gif").createImage();
+	public static Image CLASS_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/class.png").createImage();
+	public static Image CLASS_ABSTRACT_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/class_abstract.png").createImage();
+	public static Image ENUM_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class,  "/fr/irisa/triskell/kermeta/texteditor/icons/enumeration.png").createImage();
+	public static Image ENUM_LIT_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class,  "/fr/irisa/triskell/kermeta/texteditor/icons/enum_literal.png").createImage();
+	public static Image DATATYPE_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/datatype.png").createImage();
+	public static Image PROPERTY_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/property.png").createImage();
+	public static Image PROPERTY_CONTAINED_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/property_contained.png").createImage();
+	public static Image PROPERTY_DERIVED_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/property_derived.png").createImage();
+	public static Image OPERATION_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/operation.png").createImage();
+	public static Image OPERATION_ABSTRACT_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/operation_abstract.png").createImage();
+	public static Image METHOD_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/method.png").createImage();
+	public static Image PACKAGE_IMG = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package.png").createImage();
 	
 	
 	/**
@@ -47,6 +53,7 @@ public class GetImageVisitor extends KermetaVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
 	public Object visit(FClassDefinition arg0) {
+		if (arg0.isFIsAbstract()) return CLASS_ABSTRACT_IMG;
 		return CLASS_IMG;
 	}
 	/**
@@ -59,13 +66,15 @@ public class GetImageVisitor extends KermetaVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumerationLiteral)
 	 */
 	public Object visit(FEnumerationLiteral arg0) {
-		return PROPERTY_IMG;
+		return ENUM_LIT_IMG;
 	}
 	
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation arg0) {
+		if (arg0.isFIsAbstract()) return OPERATION_ABSTRACT_IMG;
+		if (arg0.getFSuperOperation() != null) return METHOD_IMG;
 		return OPERATION_IMG;
 	}
 	/**
@@ -83,7 +92,9 @@ public class GetImageVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
-	public Object visit(FProperty arg0) {
+	public Object visit(FProperty node) {
+		if (node.isFIsComposite()) return PROPERTY_CONTAINED_IMG;
+		if (node.isFIsDerived()) return PROPERTY_DERIVED_IMG;
 		return PROPERTY_IMG;
 	}
 }

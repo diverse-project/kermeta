@@ -5,9 +5,11 @@
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
@@ -15,6 +17,7 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -23,6 +26,16 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * Distributed under the terms of the GPL license
  */
 public class GetChildrenVisitor extends KermetaVisitor {
+	
+	protected KermetaUnit unit;
+	
+	/**
+	 * @param unit
+	 */
+	public GetChildrenVisitor(KermetaUnit unit) {
+		super();
+		this.unit = unit;
+	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#genericVisitChildren(org.eclipse.emf.ecore.EObject)
 	 */
@@ -66,6 +79,14 @@ public class GetChildrenVisitor extends KermetaVisitor {
 		ArrayList result = new ArrayList();
 		result.addAll(arg0.getFNestedPackage());
 		result.addAll(arg0.getFOwnedTypeDefinition());
+		/*
+		Iterator it = arg0.getFOwnedTypeDefinition().iterator();
+		while(it.hasNext()) {
+			FTypeDefinition td = (FTypeDefinition)it.next();
+			if (unit.typeDefs.containsKey(unit.getQualifiedName(td)))
+				result.add(td);
+		}
+		*/
 		return result.toArray();
 	}
 	/**
