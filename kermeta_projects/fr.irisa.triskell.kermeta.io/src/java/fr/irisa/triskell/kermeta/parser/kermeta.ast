@@ -41,11 +41,11 @@ sequence usingStmt : "using" name=qualifiedID ;
 
 list topLevelDecls : topLevelDecl* ;
 
-abstract topLevelDecl : (preAnnotations=annotations) subPackageDecl | classDecl | enumDecl | dataTypeDecl (postAnnotations=annotations); //| enumDecl | mapEntryDecl ;
+abstract topLevelDecl : subPackageDecl | classDecl | enumDecl | dataTypeDecl; //| enumDecl | mapEntryDecl ;
 
 sequence subPackageDecl : "package" name=ID LCURLY topLevelDecls RCURLY ;
 
-sequence classDecl : (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY ; 
+sequence classDecl : preAnnotations=annotations (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY postAnnotations=annotations; 
 //(COLON instClassName=stringLiteralOrQualifiedID)? LCURLY classMemberDecls RCURLY ;
 token classKind : "class" ; //| "interface" ;
 token abstractModifier : "abstract" ;
@@ -79,14 +79,13 @@ sequence setterBody : (annotations)? "setter" "is" setterbody = fExpression ;
 sequence operation : operationKind name=ID (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)?  ("from" superSelection=qualifiedID)? ("raises" exceptions=typelst)? "is" operationBody;
 token operationKind : "operation" | "method" ;
 
-abstract operationBody : operationAnnotationBody | operationEmptyBody | operationExpressionBody ;
-sequence operationAnnotationBody : annotation ;
+abstract operationBody : operationEmptyBody | operationExpressionBody ;
 sequence operationExpressionBody : fExpression ;
 sequence  operationEmptyBody : "abstract" ;
 
 list params : p1=param (COMMA pn=param)*;
 //sequence param : leadingAnnotations=annotations modifiers typeRef name=ID trailingAnnotations=annotations ;
-sequence param : leadingAnnotations=annotations  name=ID COLON typeRef  trailingAnnotations=annotations ;
+sequence param : preAnnotations=annotations  name=ID COLON typeRef  postAnnotations=annotations ;
 
 sequence typeRef : (collectionType)? reftype=type (multiplicity)? ;
 token collectionType : "bag" | "set"| "seq" | "oset";
@@ -101,7 +100,7 @@ sequence dataTypeDecl : "alias" name=ID COLON instanceClass=type SEMI ;
 
 sequence enumDecl : "enumeration" name=ID LCURLY enumLiterals RCURLY ;
 list enumLiterals : enumLiteral* ;
-sequence enumLiteral : leadingAnnotations=annotations name=ID SEMI ; // (EQUALS val=INT_LITERAL)? trailingAnnotations=annotations 
+sequence enumLiteral : preAnnotations=annotations name=ID SEMI ; // (EQUALS val=INT_LITERAL)? postAnnotations=annotations 
 
 //sequence mapEntryDecl : "mapentry" name=ID COLON key=typeRef MINUS_GT value=typeRef SEMI ;
 
@@ -112,9 +111,9 @@ list fExpressionLst : fExpression* ;
 
 sequence asingleExpression : fExpression ;
 // an annotation is considered as an fExpression. In 
-abstract fExpression : (preAnnotations=annotations) fAssignement (postAnnotations=annotations);
+abstract fExpression : fAssignement ;
 			
-sequence fAssignement : expression=logicalExpression (assignementOp EQUALS newvalue=logicalExpression)?;
+sequence fAssignement : preAnnotations=annotations expression=logicalExpression (assignementOp EQUALS newvalue=logicalExpression)? postAnnotations=annotations;
 token assignementOp : COLON | QMARK ;
 
 list logicalExpression : exp1=relationalExpression (logicalOp expn=relationalExpression )* ;
