@@ -1,4 +1,4 @@
-package testSCommentAlone;
+package testMCommentAlone;
 
 class String {}
 class Integer {}
@@ -20,8 +20,8 @@ class Class1 {
 		until i == 10
 		loop
 			v1 := v1*v1 + v2
-   /* this is a comment attached to nothing    this is a comment attached to nothing*/
-	
+   /* this is a comment attached to nothing   */
+   		end
 	end
 	
 }
