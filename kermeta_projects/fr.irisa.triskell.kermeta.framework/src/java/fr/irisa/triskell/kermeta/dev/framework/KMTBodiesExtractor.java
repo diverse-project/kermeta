@@ -1,9 +1,10 @@
-/*
+/* $Id: KMTBodiesExtractor.java,v 1.3 2005-02-18 12:50:03 zdrey Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
  * Description : contains the BodyExtractor which extracts the operations/properties
  * and their body and write them into an external file
+ * Todo : put TODO actions here
  */
 package fr.irisa.triskell.kermeta.dev.framework;
 
