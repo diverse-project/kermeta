@@ -1,0 +1,43 @@
+package kermeta::utils;
+
+require "../standard/collections.kmt"
+
+using kermeta::standard
+
+/***************************************************
+ * Franck FLEUREY - 23/02/2005
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * Distributed under the terms of the GPL licence
+ *
+ * Implementation of Kermeta In and Out types.
+ *************************************************** */
+ 
+/**
+ * An implementation of In : standard input
+ */
+class In
+{
+	operation read_prompt(prompt : standard::kermeta::String) : standard::kermeta::String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.read_prompt(prompt, self)
+	end
+
+	operation read() : standard::kermeta::String is do
+		result ?= read_prompt("")
+	end
+	
+}
+
+/**
+ * An implementation of In : standard output
+ */
+class Out
+{
+	operation write(output : standard::kermeta::String) : Void is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(self, output)
+	end
+	
+	operation writeln(output : standard::kermeta::String) : Void is do
+		result ?= self.write(output.plus("\n"))
+	end
+}
