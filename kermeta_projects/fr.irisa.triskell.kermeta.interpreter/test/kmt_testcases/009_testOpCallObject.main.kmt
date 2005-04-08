@@ -33,6 +33,6 @@ class MyObjectCreation {
 		object := MyObject.new
 		object.set_attr1(int)
 		object.set_attr2(bool)
-		result := object
+		result := object.get_attr1
 	end
 }

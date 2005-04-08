@@ -6,6 +6,6 @@ alias Test_opcall : testOpPackage::Test_opcall;
 // operation called in another package
 class Test_intercall {
     operation operation1() : Integer is do
-    	result := Test_opcall.new.operation2()
+    	result := testOpPackage::Test_opcall.new.operation2()
     end
 }
