@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.5 2005-04-05 12:56:05 jpthibau Exp $
+/* $Id: KMBuilderPass1.java,v 1.6 2005-04-08 10:15:38 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -319,7 +319,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
 	public Object visit(FClassDefinition node) {
-		System.out.println("Visiting class definition "+node.getFName());
+		//System.out.println("Visiting class definition "+node.getFName());
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::reflection::Class");
 		FClassDefinition nodeClassDef=(FClassDefinition)nodeMetaclass.getData().get("kcoreObject");
 		RuntimeObject objectMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::reflection::Object");
@@ -547,7 +547,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
-		System.out.println("Visiting Operation "+node.getFName());
+	//	System.out.println("Visiting Operation "+node.getFName());
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::reflection::Operation");
 		FClassDefinition nodeClassDef=(FClassDefinition)nodeMetaclass.getData().get("kcoreObject");
 		RuntimeObject knode=createROFromClassDef(node,nodeMetaclass);
