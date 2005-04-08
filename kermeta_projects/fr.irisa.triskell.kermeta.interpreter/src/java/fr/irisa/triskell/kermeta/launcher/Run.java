@@ -40,6 +40,8 @@ public class Run extends TestCase {
 	public static RuntimeObject metametaClass=null;
 	public static RuntimeObject selfINSTANCE=null;
 	public static RuntimeObject voidINSTANCE=null;
+	public static RuntimeObject inINSTANCE=null;
+	public static RuntimeObject outINSTANCE=null;
 	public static Interpreter theInterpreter=null;
 
 	public static void main(String[] args) {
@@ -86,6 +88,8 @@ public class Run extends TestCase {
 						metametaClass=koFactory.getClassClass();
 						selfINSTANCE=new RuntimeObject("The self instance");
 						voidINSTANCE=new RuntimeObject("The void instance");
+						inINSTANCE=new RuntimeObject("The in instance");
+						outINSTANCE=new RuntimeObject("The out instance");
 						theInterpreter=new Interpreter(koFactory,metametaClass);
 						KMMetaBuilder metaClassesBuilder = new KMMetaBuilder(interpreterbuilder);
 //						metaClassesBuilder.ppPackage(interpreterbuilder);
