@@ -97,6 +97,7 @@ public class RuntimeObjectFactory {
 		RuntimeObject result = new RuntimeObject(this, meta_class);
 //		TODO : take care of default values here ?
 		result.setData(new Hashtable());
+		result.getProperties().put("classDefinition", meta_class);
 		return result;
 	}
 	
