@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.6 2005-04-08 10:15:38 zdrey Exp $
+/* $Id: KMBuilderPass1.java,v 1.7 2005-04-08 13:16:11 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -14,7 +14,6 @@
  * 
 */
 package fr.irisa.triskell.kermeta.builder;
-
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -319,7 +318,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
 	public Object visit(FClassDefinition node) {
-		//System.out.println("Visiting class definition "+node.getFName());
+//		System.out.println("Visiting class definition "+node.getFName());
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::reflection::Class");
 		FClassDefinition nodeClassDef=(FClassDefinition)nodeMetaclass.getData().get("kcoreObject");
 		RuntimeObject objectMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::reflection::Object");
@@ -395,7 +394,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	public Object visit(FPrimitiveType node) {
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::reflection::PrimitiveType");
 		RuntimeObject knode=createROFromClassDef(node,nodeMetaclass);
-		knode.getProperties().put("name",node.getFName());
+		knode.getProperties().put("name",fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFName(),Run.koFactory));
 		knode.getProperties().put("instanceType",node.getFInstanceType());
 		return knode;
 	}
@@ -436,7 +435,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 			RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::reflection::Enumeration");
 			FClassDefinition enumerationClassDef=(FClassDefinition)nodeMetaclass.getData().get("kcoreObject");
 			knode=createROFromClassDef(node,nodeMetaclass);
-			knode.getProperties().put("name",node.getFName());
+			knode.getProperties().put("name",fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFName(),Run.koFactory));
 			FProperty ownedLiteral=findProperty(enumerationClassDef,"ownedLiteral");
 			RuntimeObject literals =ReflectiveCollection.createReflectiveCollection(knode,createPropertyNode(ownedLiteral));
 			knode.getProperties().put("ownedLiteral",literals);
@@ -523,7 +522,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	public Object visit(FLambdaParameter node) {
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::behavior::LambdaParameter");
 		RuntimeObject knode=createROFromClassDef(node,nodeMetaclass);
-		knode.getProperties().put("name",node.getFName());
+		knode.getProperties().put("name",fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFName(),Run.koFactory));
 		if (node.getFType() != null) {
 			knode.getProperties().put("type",this.accept(node.getFType()));
 		}
@@ -547,7 +546,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
-	//	System.out.println("Visiting Operation "+node.getFName());
+		System.out.println("Visiting Operation "+node.getFName());
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::reflection::Operation");
 		FClassDefinition nodeClassDef=(FClassDefinition)nodeMetaclass.getData().get("kcoreObject");
 		RuntimeObject knode=createROFromClassDef(node,nodeMetaclass);
@@ -660,7 +659,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 			knode.getProperties().put("icDerived",fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.TRUE);
 		if (node.isFIsReadOnly())
 			knode.getProperties().put("icReadOnly",fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.TRUE);
-		knode.getProperties().put("name",node.getFName());
+		knode.getProperties().put("name",fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFName(),Run.koFactory));
 		knode.getProperties().put("name",ppTypeFromMultiplicityElement(node));
 //TODO manage opposites in a second pass of KMBuilder ?
 		if (node.getFOpposite() != null)
@@ -728,7 +727,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	public Object visit(FTypeVariable node) {
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::TypeVariable");
 		RuntimeObject knode=createROFromClassDef(node,nodeMetaclass);
-		knode.getProperties().put("name",node.getFName());
+		knode.getProperties().put("name",fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFName(),Run.koFactory));
 		return knode;
 	}
 	/**
@@ -765,7 +764,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 		if (node.getFTarget() != null)
 			knode.getProperties().put("target",this.accept(node.getFTarget()));
 		else knode.getProperties().put("target",Run.selfINSTANCE);
-		knode.getProperties().put("name",node.getFName());
+		knode.getProperties().put("name",fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFName(),Run.koFactory));
 		if (node.getFParameters().size()> 0) {
 			RuntimeObject exprCallMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::behavior::CallExpression");
 			FClassDefinition callExprClassDef=(FClassDefinition)exprCallMetaclass.getData().get("kcoreObject");
@@ -794,7 +793,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	public Object visit(FCallVariable node) {
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::behavior::CallVariable");
 		RuntimeObject knode=createROFromClassDef(node,nodeMetaclass);
-		knode.getProperties().put("name",node.getFName());
+		knode.getProperties().put("name",fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFName(),Run.koFactory));
 		if (node.getFParameters().size()> 0) {
 			RuntimeObject exprCallMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::behavior::CallExpression");
 			FClassDefinition callExprClassDef=(FClassDefinition)nodeMetaclass.getData().get("kcoreObject");
@@ -814,7 +813,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
     public Object visit(FTag node) {
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::structure::Tag");
 		RuntimeObject knode=createROFromClassDef(node,nodeMetaclass);
-		knode.getProperties().put("name",node.getFName());
+		knode.getProperties().put("name",fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFName(),Run.koFactory));
 		knode.getProperties().put("value",node.getFValue());
         return knode;
     }
