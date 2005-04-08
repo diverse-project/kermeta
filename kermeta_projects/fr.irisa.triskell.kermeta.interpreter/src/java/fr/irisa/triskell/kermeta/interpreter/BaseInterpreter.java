@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.10 2005-04-05 14:33:25 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.11 2005-04-08 10:23:29 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -89,18 +89,6 @@ public class BaseInterpreter extends KermetaVisitor {
     }
     
     /**
-     * The main method that is called on a RuntimeObject to evaluate it.
-     * It uses : 
-     * - createCommand : to create the command that is dedicated to the execution of this object
-     * - executeCommand : execute the command (method delegator)
-     * @param kObject the RuntimeObject/EObject? to evaluate
-     */
-    public RuntimeObject evaluate(EObject object)
-    {
-        return null;
-    }
-
-    /**
      * 
      * @uml.property name="usings" multiplicity="(0 1)"
      */
@@ -129,13 +117,12 @@ public class BaseInterpreter extends KermetaVisitor {
 				);
 				*/
 	    //RuntimeObject ko = factory.createRuntimeObject(node);
-	    // TODO : node.getFInit can be null -
 		RuntimeObject ro_init=null;
 		if (node.getFInitialization()!=null)
 			ro_init = (RuntimeObject)this.accept(node.getFInitialization());
 	    interpreterContext.getCurrentFrame().getCurrentExpressionContext().defineVariable(
 	            node.getFType().getFType(), node.getFIdentifier(), ro_init);
-	    return null;
+	    return ro_init;
 	}
 	
 	/**
@@ -250,13 +237,14 @@ public class BaseInterpreter extends KermetaVisitor {
 
 	    // process the statements
 	    visitList(node.getFStatement());
+	    RuntimeObject result = null;
 		// process the rescues
 	    Iterator it;
 		it = node.getFRescueBlock().iterator();
 		while(it.hasNext()) {
-			this.accept((FRescue)it.next());
+			result = (RuntimeObject)this.accept((FRescue)it.next());
 		}
-		return null;
+		return result;
 	}
 	
 	/**
@@ -281,7 +269,7 @@ public class BaseInterpreter extends KermetaVisitor {
         FExpression cond = node.getFCondition();
 
         // Object should be a Boolean
-        RuntimeObject cond_result = this.evaluate(cond);
+        RuntimeObject cond_result = (RuntimeObject)this.accept(cond);
         String value = null;
         // Get boolean value
         if (cond_result.getProperties().containsKey("singleton instance"))
@@ -310,6 +298,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		
 	
 	/**
+	 * Loop instruction that return the void RuntimeObject
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FLoop)
 	 */
 	public Object visit(FLoop node)
@@ -319,8 +308,7 @@ public class BaseInterpreter extends KermetaVisitor {
         // Accept initialization (a FVariableDecl) : add a new variable in the ExpressionContext
         this.accept(node.getFInitiatization());
         String value = null;
-        
-	    do
+        do
 	    {
 /*	    	//	    	TO DEBUG STACK
 	        ExpressionContext context = null;
@@ -364,7 +352,8 @@ public class BaseInterpreter extends KermetaVisitor {
 	    
 	    // Pop the expression context
 	    interpreterContext.getCurrentFrame().popExpressionContext();
-	    return null;
+	    // Return the void runtimeObject
+	    return Run.voidINSTANCE;
 	}
 	
 	/**
