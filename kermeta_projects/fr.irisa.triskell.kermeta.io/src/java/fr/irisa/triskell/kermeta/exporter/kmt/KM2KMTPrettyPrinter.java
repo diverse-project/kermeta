@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.8 2005-03-10 14:57:46 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.9 2005-04-11 16:27:03 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -45,7 +45,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	protected String root_pname;
 	protected String current_pname;
 	
-	protected boolean typedef = false;
+	protected boolean typedef = true;
 	
 	public void ppPackage(FPackage p, File file) {
 		try {
@@ -496,6 +496,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		String old_cname = current_pname;
 		current_pname = getQualifiedName(node);
 		pushPrefix();
+		typedef = true;
 		result += ppCRSeparatedNode(node.getFOwnedTypeDefinition());
 		result += ppCRSeparatedNode(node.getFNestedPackage());
 		popPrefix();
