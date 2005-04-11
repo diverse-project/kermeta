@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.12 2005-04-11 08:20:27 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.13 2005-04-11 13:25:21 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -41,6 +41,7 @@ import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
@@ -90,6 +91,11 @@ public abstract class KermetaUnit {
 		this.uri = uri;
 		struct_factory = StructurePackageImpl.init().getStructureFactory();
 		behav_factory = BehaviorPackageImpl.init().getBehaviorFactory();
+		
+		interpreter_symbols = new Hashtable();
+		
+		interpreter_symbols.put("stdio", new KMSymbolInterpreterVariable("stdio"));
+		
 		importStdlib();
 	}
 	
@@ -363,6 +369,9 @@ public abstract class KermetaUnit {
 		importModelFromURI(qid);
 	}
 	
+	
+	protected Hashtable interpreter_symbols;
+	
 	/**
 	 * Find a symbol in the symbol tables
 	 * It starts from the top of the stack.
@@ -374,6 +383,10 @@ public abstract class KermetaUnit {
 			Hashtable table = (Hashtable)symbols.get(i);
 			result = (KMSymbol)table.get(symbol);
 			if (result != null) break;
+		}
+		// search in the interpreter variables :
+		if (result == null) {
+			result = (KMSymbol)interpreter_symbols.get(symbol);
 		}
 		return result;
 	}
