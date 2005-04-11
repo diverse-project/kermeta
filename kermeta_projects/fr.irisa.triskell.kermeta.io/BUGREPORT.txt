@@ -1,4 +1,4 @@
-$Id: BUGREPORT.txt,v 1.2 2005-03-10 16:44:07 zdrey Exp $
+$Id: BUGREPORT.txt,v 1.3 2005-04-11 08:21:24 ffleurey Exp $
 This file is a bug report for the fr.irisa.triskell.kermeta.io project.
 --------------------------------------------------------------------------------
 
@@ -26,3 +26,18 @@ Unresolved.
 KMT2KMPass : a test of the existence of a type which is dangerous : 
 a type can already exists in the resource for the following reason : circular
 references. (interdependant package requires)
+
+---------------------------------------------------------------------
+Bug 4 : problem with URIs
+---------------------------------------------------------------------
+Unresolved.
+KermetaUnitFactory, KermetaUnit, MCTUnit : Windows / Unix URI compatibility
+see file KermetaUnitFactory.java for more info
+
+---------------------------------------------------------------------
+Bug 5 : problem with URI / annotation / comments
+---------------------------------------------------------------------
+Unresolved.
+PASS 7 : Loading the content of the source file fail.
+Related to Bug 4. Should only use eclipse / emf URI management
+to avoid compatibility issues.

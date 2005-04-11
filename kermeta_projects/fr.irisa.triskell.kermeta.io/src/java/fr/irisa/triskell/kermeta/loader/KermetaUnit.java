@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.11 2005-03-25 16:06:38 jpthibau Exp $
+/* $Id: KermetaUnit.java,v 1.12 2005-04-11 08:20:27 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -308,16 +308,15 @@ public abstract class KermetaUnit {
 		return result;
 	}
 	
+	
 	public void importModelFromURI(String str_uri) {
-		if (str_uri.startsWith("file:"))
-			str_uri=str_uri.substring(5,str_uri.length());
-		URI uri = URI.createFileURI(str_uri);
+		URI uri = URI.createURI(str_uri);
+		URIConverter c = new URIConverterImpl();
 		if (uri.isRelative() && this.uri != null) {
-//			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
-			str_uri = "file:"+UserDirURI.createURI(str_uri,this.uri,false).toFileString().replaceAll("\\\\","/");
+			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
 			
 		}
-		
+
 		// To import method bodies from another file
 		if (uri.fileExtension().equals("mctbodies")) {
 			new OperationBodyLoader().load(this, str_uri);
@@ -332,6 +331,33 @@ public abstract class KermetaUnit {
 			importedUnits.add(unit);
 		}
 	}
+	
+	
+	/*
+	 * CECI N'EST PAS UNE BONNE SOLUTION POUR REGLER LES
+	 * PROBLEMES D'URI !!
+	 * 
+	 * Ca ne marche que sous windows et que pour les file:
+	 * 
+	 * Il ne faut pas oublier que dans eclipse on peut avoir
+	 * 
+	 * platform:/... ou http:/...
+	 *  
+	 * Il faut utiliser la gestion d'eclipse qui est déja multiplatforme
+	 * et ne pas inventer des patchs qui ne sont pas des solution viables !!
+	 */
+	
+	/*
+	public void importModelFromURI(String str_uri) {
+		if (str_uri.startsWith("file:"))
+			str_uri=str_uri.substring(5,str_uri.length());
+		URI uri = URI.createFileURI(str_uri);
+		if (uri.isRelative() && this.uri != null) {
+//			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
+			str_uri = "file:"+UserDirURI.createURI(str_uri,this.uri,false).toFileString().replaceAll("\\\\","/");
+			
+		}
+		*/
 	
 	public void importModelFromID(String qid) {
 		importModelFromURI(qid);

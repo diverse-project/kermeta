@@ -86,12 +86,15 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	public boolean beginVisit(FRescue fRescue) {
 		fr.irisa.triskell.kermeta.behavior.FRescue resc = builder.behav_factory.createFRescue();
 		builder.storeTrace(resc,fRescue);
+		builder.pushContext();
 		if (fRescue.getVarName() != null) {
 			resc.setFExceptionName(getTextForID(fRescue.getVarName()));
 			resc.setFExceptionType(KMT2KMTypeReferenceBuilder.process(fRescue.getExTypeRef(), builder));
+			builder.addSymbol(new KMSymbolRescueParameter(resc));
 		}
 		resc.getFBody().addAll(KMT2KMExperessionListBuilder.process(fRescue.getRescstmts(), builder));
 		((fr.irisa.triskell.kermeta.behavior.FBlock)result).getFRescueBlock().add(resc);
+		builder.popContext();
 		return false;
 	}
 	

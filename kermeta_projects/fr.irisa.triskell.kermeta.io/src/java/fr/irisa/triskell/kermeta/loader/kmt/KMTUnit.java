@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.9 2005-04-05 12:37:24 jpthibau Exp $
+/* $Id: KMTUnit.java,v 1.10 2005-04-11 08:20:29 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -20,6 +20,8 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 //import org.eclipse.emf.common.util.URI;
 
@@ -48,6 +50,21 @@ public class KMTUnit extends KermetaUnit {
 	
 	
 	public void parse() {
+		
+		
+		URI uri = URI.createURI(this.uri);
+		URIConverter converter = new URIConverterImpl();
+		KermetaParser p;
+		try {
+		    p = new KermetaParser(new KermetaLexer(new InputStreamReader(converter.createInputStream(uri))));
+		} 
+		catch (IOException e1) {
+		    error.add(new KMUnitError("i/o error loading ressource '"+this.uri+"': " + e1, null));
+		    return;
+		}
+
+		/* GESTION DES URI A REVOIR
+		
 		URI _uri = UserDirURI.createURI(this.uri,null,false);
 		KermetaParser p;
 		try {
@@ -57,7 +74,7 @@ public class KMTUnit extends KermetaUnit {
 		    error.add(new KMUnitError("i/o error loading ressource '"+this.uri+"': " + e1, null));
 		    return;
 		}
-			
+		*/	
 		try {
 			mctAST = p.compUnit();
 		}
