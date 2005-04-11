@@ -1,0 +1,10 @@
+package testPackDep;
+
+
+package toto {
+
+	class D {
+		attribut d : D
+	}
+
+}

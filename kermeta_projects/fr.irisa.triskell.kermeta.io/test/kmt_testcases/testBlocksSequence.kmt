@@ -19,7 +19,7 @@ class Class1 {
 		end	
 		do
 			var v4 : String init "blah"
-			v1 := v3
+			v1 := v4
 		end
 		var v3 : Integer
 		v3 := 2

@@ -1,0 +1,11 @@
+package testPackDep;
+
+require "testPackageDepD2.kmt"
+
+package toto {
+
+	class C {
+		attribut c : C
+	}
+
+}

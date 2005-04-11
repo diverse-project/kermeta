@@ -1,0 +1,11 @@
+package testPackDep;
+
+require "testPackageDepB2.kmt"
+
+require "testPackageDepC2.kmt"
+
+class A {
+
+	attribut e : toto::C
+ 
+}
