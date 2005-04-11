@@ -1,4 +1,4 @@
-/* $Id: Io.java,v 1.2 2005-03-31 15:36:22 zdrey Exp $
+/* $Id: StdIO.java,v 1.1 2005-04-11 12:49:51 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : GPL
@@ -22,7 +22,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 /**
  * Implementation of input and output methods (see io.kmt)
  */
-public class Io {
+public class StdIO {
     
 	// Implementation of method write called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(output)
