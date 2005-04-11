@@ -93,6 +93,8 @@ public interface KermetaParserTokenTypes {
 	int LT_GT = 87;
 	int CHAR_LITERAL = 88;
 	int ESC = 89;
-	int DIGIT = 90;
-	int WS = 91;
+	int REAL_LITERAL = 90;
+	int EXPONENT = 91;
+	int DIGIT = 92;
+	int WS = 93;
 }

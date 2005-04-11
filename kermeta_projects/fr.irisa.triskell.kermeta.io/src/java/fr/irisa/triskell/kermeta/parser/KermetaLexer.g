@@ -63,7 +63,21 @@ protected ESC :
 ID options { testLiterals=true; }
 : ('~')? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | DIGIT)* ;
 
-INT_LITERAL : (DIGIT)+ ;
+// INT_LITERAL completed on 08/04/2005
+// INT_LITERAL : (DIGIT)+ ;
+INT_LITERAL	:	('-')?(DIGIT)+	;
+
+protected
+REAL_LITERAL  : INT_LITERAL '.' INT_LITERAL (EXPONENT)? ;
+
+
+
+// need to add floating point
+// a couple protected methods to assist in matching floating point numbers
+protected
+EXPONENT
+ : ('e') ('+'|'-')? (DIGIT)+
+ ;
 
 protected DIGIT : '0'..'9';
 
