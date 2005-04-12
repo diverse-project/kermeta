@@ -68,13 +68,71 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
 /*** BEGIN GENERATED TESTS ***/
 public void testmetacore() throws Exception {
 testWithFile("test/emfatic_testcases","metacore.emf" );
 }
 
+public void test1_testAssignment() throws Exception {
+testWithFile("test/kmt_testcases","1_testAssignment.kmt" );
+}
+
+public void test2_testArithm() throws Exception {
+testWithFile("test/kmt_testcases","2_testArithm.kmt" );
+}
+
+public void test3_testOpCall() throws Exception {
+testWithFile("test/kmt_testcases","3_testOpCall.kmt" );
+}
+
+public void test4_testOpOpCall() throws Exception {
+testWithFile("test/kmt_testcases","4_testOpOpCall.kmt" );
+}
+
+public void test5_testExternPackageCall() throws Exception {
+testWithFile("test/kmt_testcases","5_testExternPackageCall.kmt" );
+}
+
+public void test5_testOpPkgCall() throws Exception {
+testWithFile("test/kmt_testcases","5_testOpPkgCall.kmt" );
+}
+
+public void test6_testExternPackageCall() throws Exception {
+testWithFile("test/kmt_testcases","6_testExternPackageCall.kmt" );
+}
+
+public void test6_testExternPackageCall2() throws Exception {
+testWithFile("test/kmt_testcases","6_testExternPackageCall2.kmt" );
+}
+
+public void test6_testOpPkgCall() throws Exception {
+testWithFile("test/kmt_testcases","6_testOpPkgCall.kmt" );
+}
+
+public void test7_testInterPackageCall() throws Exception {
+testWithFile("test/kmt_testcases","7_testInterPackageCall.kmt" );
+}
+
+public void test7_testOpPkgCall() throws Exception {
+testWithFile("test/kmt_testcases","7_testOpPkgCall.kmt" );
+}
+
+public void test8_testOpInternPkgCall() throws Exception {
+testWithFile("test/kmt_testcases","8_testOpInternPkgCall.kmt" );
+}
+
+public void test9_testOpCallObject() throws Exception {
+testWithFile("test/kmt_testcases","9_testOpCallObject.kmt" );
+}
+
 public void testtestBlock() throws Exception {
 testWithFile("test/kmt_testcases","testBlock.kmt" );
+}
+
+public void testtestBlocksSequence() throws Exception {
+testWithFile("test/kmt_testcases","testBlocksSequence.kmt" );
 }
 
 public void testtestCallExp() throws Exception {
