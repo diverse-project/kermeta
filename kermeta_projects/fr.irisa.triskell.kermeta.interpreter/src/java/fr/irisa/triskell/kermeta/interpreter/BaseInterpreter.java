@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.13 2005-04-11 17:36:28 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.14 2005-04-12 09:55:36 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -27,7 +27,6 @@ import java.util.Vector;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import sun.nio.cs.KOI8_R;
 
 import fr.irisa.triskell.kermeta.ast.FSelfCall;
 import fr.irisa.triskell.kermeta.behavior.*;
