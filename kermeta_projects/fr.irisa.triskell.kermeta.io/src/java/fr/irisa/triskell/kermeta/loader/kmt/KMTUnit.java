@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.10 2005-04-11 08:20:29 ffleurey Exp $
+/* $Id: KMTUnit.java,v 1.11 2005-04-12 13:19:15 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -56,6 +56,7 @@ public class KMTUnit extends KermetaUnit {
 		URIConverter converter = new URIConverterImpl();
 		KermetaParser p;
 		try {
+			System.out.println("PARSE UNIT : " + uri.toString());
 		    p = new KermetaParser(new KermetaLexer(new InputStreamReader(converter.createInputStream(uri))));
 		} 
 		catch (IOException e1) {
