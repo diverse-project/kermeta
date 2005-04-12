@@ -312,11 +312,11 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		builder.saveMetaCoreModel(dir + "/" + "output");
 		// try to pretty-print the result in another file
 		URI userLocatedPpfile=UserDirURI.createURI(dir + "/output/"  + file.replace('.', '_') + ".kmt",null,true);
-		String ppfile =userLocatedPpfile.toFileString();
+		String ppfile =userLocatedPpfile.toString();
 		//builder.prettyPrint(ppfile);
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		
-		BufferedWriter w = new BufferedWriter(new FileWriter(new File(ppfile)));
+		BufferedWriter w = new BufferedWriter(new FileWriter(new File(userLocatedPpfile.toFileString())));
 		String pkg_name = "package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n";
 		
 		w.write("package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n");
