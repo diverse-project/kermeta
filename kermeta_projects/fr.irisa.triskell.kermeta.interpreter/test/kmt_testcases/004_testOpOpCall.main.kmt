@@ -11,6 +11,7 @@ class Test_opopcall {
 
     operation operation1() : kermeta::standard::Integer is do
         result := Test_opcalled.new.operation_asg()
+        stdio.writeln(result)
     end
 
 

@@ -19,6 +19,7 @@ class TestLoop {
 			v1 := v1*v1 + v2
 			i := i + 1
 		end
+        stdio.writeln(v1)
 		result := v1
     end
 }

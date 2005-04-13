@@ -16,6 +16,7 @@ class Test_benchmark {
 			v1 := operation_asg(v1)
 			i := i + 1
 		end
+        stdio.writeln(v1)
 		result := v1
     end
 

@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.7 2005-04-08 13:16:11 jpthibau Exp $
+/* $Id: KMBuilderPass1.java,v 1.8 2005-04-13 09:34:25 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -46,7 +46,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
 public class KMBuilderPass1 extends KermetaVisitor {
 	
 	public static RuntimeObject createROFromClassDef(FObject node,RuntimeObject nodeMetaclass) {
-		RuntimeObject knode=nodeMetaclass.getFactory().createClassFromClassDefinition(nodeMetaclass);
+		RuntimeObject knode=nodeMetaclass.getFactory().createRuntimeObject(nodeMetaclass);
 		Hashtable data=new Hashtable();
 		data.put("kcoreObject",node);
 		knode.setData(data);

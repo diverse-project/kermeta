@@ -50,17 +50,6 @@ public class RuntimeObjectFactory {
 		return this.classdef_table;
 	}
 	
-	/*
-	protected ArrayList getAllSuperClasses(String class_name) {
-		KermetaObject cls = (KermetaObject)classdef_table.get(class_name);
-		KermetaObject clsdef = (KermetaObject)cls.getProperties().get("classDefinition");
-		ArrayList supercls = (ArrayList)clsdef.getProperties().get("superType");
-		for(int i=0; i<supercls.size(); i++) {
-			clsdef = (KermetaObject)((KermetaObject)supercls.get(i)).getProperties().get("classDefinition");
-		}
-	}
-	*/
-	
 	
 	public RuntimeObject getTypeDefinitionByName(String qname) {
 		return (RuntimeObject)classdef_table.get(qname);
@@ -74,8 +63,7 @@ public class RuntimeObjectFactory {
 		class_class = new RuntimeObject(this, null);
 		class_class.setMetaclass(class_class);
 		class_class.setData(new Hashtable());
-		class_class.getData().put("classDefinition",classdef);
-		class_class.getProperties().put("classDefinition",class_class);
+		class_class.getData().put("kcoreObject",classdef);
 	}
 	public RuntimeObject getClassClass() {
 		return class_class;
@@ -97,7 +85,6 @@ public class RuntimeObjectFactory {
 		RuntimeObject result = new RuntimeObject(this, meta_class);
 //		TODO : take care of default values here ?
 		result.setData(new Hashtable());
-		result.getProperties().put("classDefinition", meta_class);
 		return result;
 	}
 	
@@ -127,10 +114,11 @@ public class RuntimeObjectFactory {
 	 * @return a new instance of the class
 	 */
 	public RuntimeObject createObjectFromClassName(String class_name) {
-		RuntimeObject metaclass = (RuntimeObject)class_table.get(class_name);
+		RuntimeObject metaclass = (RuntimeObject)this.getClassDefTable().get(class_name);
 		if (metaclass == null) {
-			metaclass = createClassFromClassDefinition((RuntimeObject)classdef_table.get(class_name));
-			class_table.put(class_name, metaclass);
+			System.err.println("SHOULD NEVER OCCUR...");
+/*			metaclass = createClassFromClassDefinition((RuntimeObject)classdef_table.get(class_name));
+			class_table.put(class_name, metaclass);*/
 		}
 		RuntimeObject result = createRuntimeObject(metaclass);
 		return result;
@@ -139,7 +127,7 @@ public class RuntimeObjectFactory {
 	protected  RuntimeObject class_typeParamBinding_properety = null;
 	public  RuntimeObject getClass_typeParamBinding_properety() {
 		if (class_typeParamBinding_properety == null) {
-			RuntimeObject class_def = (RuntimeObject)this.getClassClass().getProperties().get("classDefinition");
+			RuntimeObject class_def = (RuntimeObject)this.getClassClass().getData().get("kcoreObject");
 			Iterator it = Collection.getArrayList((RuntimeObject)class_def.getProperties().get("ownedAttributes")).iterator();
 			while (it.hasNext()) {
 				RuntimeObject prop = (RuntimeObject)it.next();

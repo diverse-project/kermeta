@@ -34,5 +34,6 @@ class MyObjectCreation {
 		object.set_attr1(int)
 		object.set_attr2(bool)
 		result := object.attr1
+        stdio.writeln(result)
 	end
 }

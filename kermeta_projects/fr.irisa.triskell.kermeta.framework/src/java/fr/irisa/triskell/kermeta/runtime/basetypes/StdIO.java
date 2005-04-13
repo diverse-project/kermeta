@@ -1,4 +1,4 @@
-/* $Id: StdIO.java,v 1.1 2005-04-11 12:49:51 jpthibau Exp $
+/* $Id: StdIO.java,v 1.2 2005-04-13 09:41:48 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : GPL
@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 
 /**
  * Implementation of input and output methods (see io.kmt)
@@ -26,8 +27,19 @@ public class StdIO {
     
 	// Implementation of method write called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(output)
-	public static RuntimeObject write(RuntimeObject self, RuntimeObject output) {
-		System.out.print(String.getValue(output));
+	public static RuntimeObject write(RuntimeObject output) {
+		FClassDefinition classDef=(FClassDefinition)output.getMetaclass().getData().get("kcoreObject");
+		if (classDef.getFName().equals("Integer"))
+			System.out.print(output.getData().get("NumericValue"));
+		else System.out.print(output);
+		return Void.VOID;
+	}
+
+	// Implementation of method writeln called as :
+	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.writeln(output)
+	public static RuntimeObject writeln(RuntimeObject output) {
+		write(output);
+		System.out.println();
 		return Void.VOID;
 	}
 

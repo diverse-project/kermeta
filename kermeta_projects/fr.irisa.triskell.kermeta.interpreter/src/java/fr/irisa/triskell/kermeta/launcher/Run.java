@@ -1,5 +1,4 @@
 package fr.irisa.triskell.kermeta.launcher;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -19,10 +18,12 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FTag;
+import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import junit.framework.TestCase;
 
@@ -40,11 +41,13 @@ public class Run extends TestCase {
 	public static RuntimeObject metametaClass=null;
 	public static RuntimeObject selfINSTANCE=null;
 	public static RuntimeObject voidINSTANCE=null;
-	public static RuntimeObject inINSTANCE=null;
-	public static RuntimeObject outINSTANCE=null;
 	public static Interpreter theInterpreter=null;
 
 	public static void main(String[] args) {
+		RuntimeObject interpreterInstance=null;
+		RuntimeObject stdIOmetaClass=null;
+		FClass stdioFClass=null;
+		RuntimeObject stdioInstance=null;
 		String mainClassValue=null;
 		String mainOperationValue=null;
 		String mainArgsValue=null;
@@ -88,8 +91,6 @@ public class Run extends TestCase {
 						metametaClass=koFactory.getClassClass();
 						selfINSTANCE=new RuntimeObject("The self instance");
 						voidINSTANCE=new RuntimeObject("The void instance");
-						inINSTANCE=new RuntimeObject("The in instance");
-						outINSTANCE=new RuntimeObject("The out instance");
 						theInterpreter=new Interpreter(koFactory,metametaClass);
 						KMMetaBuilder metaClassesBuilder = new KMMetaBuilder(interpreterbuilder);
 //						metaClassesBuilder.ppPackage(interpreterbuilder);
@@ -97,6 +98,16 @@ public class Run extends TestCase {
 						
 						KMBuilderPass1 builderPass1 = new KMBuilderPass1();
 						builderPass1.ppPackage(interpreterbuilder);
+						/* create the stdio default variable and push it in the interpreter context
+						 * to ensure any program may use stdio.print(...) and stdio.read("prompt>")
+						 */
+						RuntimeObject interpretermetaClass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::interpreter::Interpreter");
+						interpreterInstance=Run.koFactory.createRuntimeObject(interpretermetaClass);
+						stdIOmetaClass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::utils::StdIO");
+						stdioInstance=Run.koFactory.createRuntimeObject(stdIOmetaClass);
+						stdioFClass=interpreterbuilder.struct_factory.createFClass();
+						stdioFClass.setFClassDefinition((FClassDefinition)stdIOmetaClass.getData().get("kcoreObject"));
+						
 /*						KMBuilderPass2 builderPass2 = new KMBuilderPass2();
 						builderPass2.ppPackage(interpreterbuilder);*/
 					}
@@ -168,6 +179,10 @@ public class Run extends TestCase {
 				System.err.println("############################################");
 				long elapsedTime=System.currentTimeMillis();
 				BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder);
+				baseInterpreter.getInterpreterContext().pushNewCallFrame(interpreterInstance);
+				baseInterpreter.getInterpreterContext().getCurrentFrame().pushNewExpressionContext(null);
+				baseInterpreter.getInterpreterContext().getCurrentFrame().getCurrentExpressionContext().defineVariable(
+			            (FType)stdioFClass, "stdio", stdioInstance);
 				Object result=baseInterpreter.invoke(mainClassInstance,mainOp,arguments);
 				elapsedTime=System.currentTimeMillis()-elapsedTime;
 				long minutes=elapsedTime/60000;

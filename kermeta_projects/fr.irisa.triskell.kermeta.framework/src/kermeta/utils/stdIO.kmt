@@ -26,6 +26,13 @@ class StdIO
 	end
 	
 	/**
+	 * writeln the object to standard output
+	 */ 
+	operation writeln(object : Object) : Object is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.writeln(object)
+	end
+	
+	/**
 	 * read an object from standard input
 	 */ 
 	operation read(prompt : String) : Object is do

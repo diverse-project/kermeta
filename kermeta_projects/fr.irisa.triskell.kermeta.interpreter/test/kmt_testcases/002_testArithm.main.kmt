@@ -13,6 +13,7 @@ class Test_arithm {
         var a : kermeta::standard::Integer
         a := 4
         ~result := ( 3 + a ) * 2
+         stdio.writeln(~result)
         result := ~result
     end
 }
