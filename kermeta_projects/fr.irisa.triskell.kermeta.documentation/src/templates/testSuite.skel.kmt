@@ -1,0 +1,84 @@
+/*****************************************************************************
+ * $Id:
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : testSuite.skel
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * Creation date : Mar 14, 2005
+ * Author : zdrey
+ * Description : This file describes how to organise your tests in kmt language
+ *
+ ****************************************************************************/
+
+ 
+/*
+ * Test specific header :
+ *   - mainClass : the qualified name of the class that contains the operation to
+ * launch
+ *   - mainOperation : the operation inside mainClass that will be launched
+ */
+@mainClass "qualified_name::MyClass::inside::root_package"
+@mainOperation "main_operation::of::MyClass"
+
+package root_package;
+
+/*
+ * General description of the test suite defined inside this class
+ */
+class MyClass
+{
+
+    /*
+     * How to write the tests : 
+     * Describe the test plans first,
+     * in such a way that you only have then to "implement" each test case
+     * inside an operation.
+     *
+    */
+    
+    /* NOTE : how to prepare the introduction of the "assert" keyword
+     * In order to ease the test verifications, there are two ways to proceed :
+     *      - first one is to use the stdio singleton class and write()
+     *      operation
+     *      - second one is to use the exception handling
+     * Tips stolen from dotnetcoders.com :
+     *      - Consider valid and invalid inputs
+     *      - Check for exception handling
+     *      - Cover all return cases
+     *      - Verify side effects
+     */
+
+
+    /*
+     * Main operation that embeds all the tests
+     */
+     operation main_operation() : kermeta::standard::void is do
+         var result1, result2, resultN : some::type
+
+         // short reminder of op1 test goal
+         
+         // short reminder of op2 test goal
+
+         // short reminder of opN test goal
+     
+     end
+     
+
+    /*
+     * First test definition of the test plan.
+     * Describe it here :
+     *    - what it tests
+     *    - its params
+     *    - what it returns
+     */
+     operation op1() : kermeta::standard::void is do
+     end
+
+     /*
+     * idem
+     */
+    operation op2() : kermeta::standard::void is do
+     end
+
+}
