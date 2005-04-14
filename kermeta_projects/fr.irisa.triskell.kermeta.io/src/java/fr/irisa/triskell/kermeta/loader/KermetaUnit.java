@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.13 2005-04-11 13:25:21 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.14 2005-04-14 14:15:31 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -56,6 +57,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
@@ -66,6 +68,7 @@ import fr.irisa.triskell.kermeta.utils.UserDirURI;
  */
 public abstract class KermetaUnit {
 	
+    final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaUnit");
 	public static String STD_LIB_URI = null;
 	public static String ROOT_CLASS_QNAME = "kermeta::structure::Object";
 	

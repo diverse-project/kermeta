@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.11 2005-04-12 13:19:15 jpthibau Exp $
+/* $Id: KMTUnit.java,v 1.12 2005-04-14 14:15:32 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -56,11 +56,12 @@ public class KMTUnit extends KermetaUnit {
 		URIConverter converter = new URIConverterImpl();
 		KermetaParser p;
 		try {
-			System.out.println("PARSE UNIT : " + uri.toString());
+			KermetaUnit.internalLog.info("PARSE UNIT : " + uri.toString());
 		    p = new KermetaParser(new KermetaLexer(new InputStreamReader(converter.createInputStream(uri))));
 		} 
 		catch (IOException e1) {
 		    error.add(new KMUnitError("i/o error loading ressource '"+this.uri+"': " + e1, null));
+		    KermetaUnit.internalLog.debug("i/o error loading ressource '"+this.uri+"': " + e1, null);
 		    return;
 		}
 

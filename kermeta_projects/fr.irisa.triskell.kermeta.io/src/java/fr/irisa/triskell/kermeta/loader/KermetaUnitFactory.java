@@ -16,6 +16,9 @@ import fr.irisa.triskell.kermeta.loader.emfatic.KMLoaderModuleEmfatic;
 import fr.irisa.triskell.kermeta.loader.km.KMLoaderModuleMCore;
 import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
 
+import org.apache.log4j.Logger;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
 
 /**
  * @author Franck Fleurey
@@ -24,7 +27,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
  * 
  */
 public class KermetaUnitFactory {
-
+    
 	protected static KermetaUnitFactory defaultLoader;
 	
 	public static KermetaUnitFactory getDefaultLoader() {
@@ -73,7 +76,7 @@ public class KermetaUnitFactory {
      */
     public KermetaUnit createKermetaUnit(String uri) {
     	
-    	System.out.println("ASK UNIT " + uri);
+        KermetaUnit.internalLog.info("ASK UNIT " + uri);
     	
     	// TODO : reslove URI if it is not
     	KermetaUnit result = null;
@@ -92,7 +95,7 @@ public class KermetaUnitFactory {
     	// return the unit if it already exists
     	if (loadedUnits.containsKey(u.toString())) return (KermetaUnit)loadedUnits.get(u.toString());
     	
-    	System.out.println("CREATE UNIT " + u.toString());
+    	KermetaUnit.internalLog.info("CREATE UNIT " + u.toString());
     	
     	// Create the appropriate Unit using the loader registerered for the file extension
     	
@@ -101,7 +104,7 @@ public class KermetaUnitFactory {
         	loader = (KermetaLoaderModule)loadModules.get(u.fileExtension());
         if (loader == null) {
         	// TODO : generate an error
-        	System.err.println("TODO: manage this error : loader is null !");
+            KermetaUnit.internalLog.error("TODO: manage this error : loader is null !");
         	//result.error.add(new KMUnitError("Unable to load resource " + uri + " : no loader registered.", null));
         	//return result;
         }
