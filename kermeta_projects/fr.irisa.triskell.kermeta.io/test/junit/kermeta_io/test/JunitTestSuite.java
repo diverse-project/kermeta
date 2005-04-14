@@ -1,7 +1,18 @@
-/*
- * Created on 27 janv. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: JunitTestSuite.java,v 1.10 2005-04-14 15:33:08 dvojtise Exp $
+ * Project    : fr.irisa.triskell.kermeta.io
+ * File       : JunitTestSuite.java
+ * License    : GPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 janv. 2005
+ * Authors : 
+ *        	Franck FLEUREY (ffleurey@irisa.fr)
+ * Description : 
+ *        	Kermeta TestSuite for io project
+ * 			this file is partially generated using GenerateJUnitTestSuite. 
+ * 			Do not manually modify the generated part. 
  */
+
 package kermeta_io.test;
 
 import java.io.BufferedReader;
@@ -20,16 +31,19 @@ import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 import junit.framework.TestCase;
 
+
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Kermeta TestSuite for io project
  */
 public class JunitTestSuite extends TestCase {
 
 
 	public JunitTestSuite(String arg0) {
 		super(arg0);
+		System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
+		        "../fr.irisa.triskell.kermeta.texteditor/kermeta_log4j_configuration.xml");
+		
 	}
 	
 	protected void setUp() throws Exception {
@@ -42,33 +56,6 @@ public class JunitTestSuite extends TestCase {
 	}
 	
 	// do not modify this comment
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*** BEGIN GENERATED TESTS ***/
 public void testmetacore() throws Exception {
