@@ -1,0 +1,15 @@
+$Id: TODO.txt,v 1.1 2005-04-14 15:46:31 zdrey Exp $
+
+TODO
+----
+
+- put "kermeta_framework.jar" in lib/ directory
+- KMBuilderPass2 to set the opposite properties
+- a small tool to run kermeta unit tests
+
+
+History :
+---------
+$Log: not supported by cvs2svn $
+
+
