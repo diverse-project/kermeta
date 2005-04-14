@@ -1,17 +1,22 @@
-/*
- * Created on 8 janv. 2005
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/* $Id: CreateGenericVisitor.java,v 1.2 2005-04-14 13:35:21 dvojtise Exp $
+ * Project    : fr.irisa.triskell.kermeta.model
+ * File       : CreateGenericVisitor.java
+ * License    : GPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 8 janv. 2005
+ * Authors : 
+ *       Franck Fleurey  <ffleurey@irisa.fr>
+ *       Didier Vojtisek <dvojtise@irisa.fr>
+ * Description : 
+ *       this Programs aims to generate a visitor (in java) for an ecore model
  */
+
 package fr.irisa.triskell.kermeta.dev.model;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Iterator;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -24,21 +29,24 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+
 /**
  * @author franck
  *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * this Programs generates a visitor (in java) for an ecore model
  */
 public class CreateGenericVisitor {
 	
+	/**
+	 * @param args
+	 * there should be 3 args :
+	 * 1/ the model (.ecore)
+	 * 2/ the name of the package to generate in
+	 * 3/ output directory
+	 * 4/ Class name
+	 */
 	public static void main(String[] args) {
 		
-		// there should be 3 args :
-		// 1/ the model (.ecore)
-		// 2/ the name of the package to generate in
-		// 3/ output directory
-		// 4/ Class name
 		String ecorefile = args[0];
 		String packagename = args[1];
 		String outdir = args[2];		
@@ -102,6 +110,7 @@ public class CreateGenericVisitor {
 		if (classTemplate == null) {
 			classTemplate = "/*\n";
 			classTemplate += " * This code has been generated to visit an ecore model\n";
+			classTemplate += " * Creation date: " + new java.util.Date().toString() + "\n" ;
 			classTemplate += " * Template Created on 7 févr. 2005\n";
 			classTemplate += " * By Franck FLEUREY (ffleurey@irisa.fr)\n";
 			classTemplate += " */\n";
@@ -110,14 +119,18 @@ public class CreateGenericVisitor {
 			classTemplate += "import java.lang.reflect.*;\n";
 			classTemplate += "import java.util.Iterator;\n";
 			classTemplate += "import org.eclipse.emf.ecore.EObject;\n";
+			classTemplate += "import fr.irisa.triskell.kermeta.error.KermetaVisitorError;\n";
+			classTemplate += "import org.apache.log4j.Logger;\n";
+			classTemplate += "import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;\n";
 			classTemplate += "\n";
 			classTemplate += "/**\n";
 			classTemplate += " * @author Franck Fleurey\n";
-			classTemplate += " * IRISA / University of rennes 1\n";
+			classTemplate += " * IRISA / INRIA / University of rennes 1\n";
 			classTemplate += " * Distributed under the terms of the GPL license\n";
 			classTemplate += " */\n";
 			classTemplate += "public class XclassNameX {\n";
-			classTemplate += "\n";	
+			classTemplate += "\n";
+			classTemplate += "	final static Logger internalLog = LogConfigurationHelper.getLogger(\"KMT.model\");\n";
 			classTemplate +="			// This is a generic visit method.\n";
 			classTemplate +="			public Object genericVisitChildren(EObject node) {\n";
 			classTemplate +="				Object result = null;\n";
@@ -131,22 +144,23 @@ public class CreateGenericVisitor {
 			classTemplate +="			\n";
 			classTemplate +="			public Object accept(EObject node) {\n";
 			classTemplate +="				Object result = null;\n";
+			classTemplate +="				String cname=\"\";\n";
+			classTemplate +="				String methodName=\"\";\n";
 			classTemplate +="				try {\n";
 			classTemplate +="					Class[] ptypes = new Class[1];\n";
-			classTemplate +="					String cname = node.getClass().getName();\n";
+			classTemplate +="					cname = node.getClass().getName();\n";
 			classTemplate +="					cname = cname.substring(0, cname.length()-4).replaceAll(\".impl\", \"\");\n";
 			classTemplate +="					ptypes[0] = Class.forName(cname);\n";
 			classTemplate +="					Method m = this.getClass().getMethod(\"visit\", ptypes);\n";
+			classTemplate +="					methodName = m.getName();\n";
 			classTemplate +="					Object[] params = new Object[1];\n";
 			classTemplate +="					params[0] = node;\n";
 			classTemplate +="					result = m.invoke(this, params);\n";
 			classTemplate +="				}\n";
-			classTemplate +="				catch (SecurityException e) {	e.printStackTrace(); }\n";
-			classTemplate +="				catch (NoSuchMethodException e) { e.printStackTrace(); } \n";
-			classTemplate +="				catch (IllegalArgumentException e) { e.printStackTrace(); } \n";
-			classTemplate +="				catch (IllegalAccessException e) { e.printStackTrace(); }\n";
-			classTemplate +="				catch (InvocationTargetException e) { e.printStackTrace(); }\n";
-			classTemplate +="				catch (ClassNotFoundException e) {e.printStackTrace();}\n";
+			classTemplate +="				catch (Exception e) {\n";
+			classTemplate +="					internalLog.error(\"invoking \"+ methodName + \" on Class \" +cname + \" => Throwing KermetaVisitorError !!!\");\n";
+			classTemplate +="					throw	new KermetaVisitorError(e.toString() + \" invoking \"+ methodName + \" on Class \" +cname  ,e); \n";
+			classTemplate +="				}\n";
 			classTemplate +="				return result;\n";
 			classTemplate +="			}\n";
 			classTemplate += "\n";	
