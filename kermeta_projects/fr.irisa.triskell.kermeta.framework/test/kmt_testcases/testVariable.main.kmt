@@ -1,0 +1,51 @@
+@testOperation "yes"
+@mainClass "root::TestVariable"
+@mainOperation "main_operation"
+
+package root;
+
+require "../../src/kermeta/Standard.kmt"
+
+
+/*****************************************************************************
+ * $Id:
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : testVariable.main.kmt
+ * 		
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * Creation date : Mar 14, 2005
+ * Author : zdrey
+ * Description : Around variable 
+ *
+ ****************************************************************************/
+
+/*
+ * General description of the test suite defined inside this class
+ */
+
+class TestVariable
+{    
+    /** Main operation that embeds all the tests */
+     operation main_operation() is do
+     end
+     
+
+    /** test the init of a String var */
+     operation op1() : kermeta::standard::String is do
+     	var v : kermeta::standard::String init "hello"
+     	if (v != "hello") then 
+     		raise "error"
+     	end
+     end
+
+     /** test the init of a  */
+    operation op2() : kermeta::standard::Integer is do
+    	var v : kermeta::standard::Integer init 1
+    	if (v != 1) then 
+    		raise "error"
+    	end
+     end
+
+}
