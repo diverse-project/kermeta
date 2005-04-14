@@ -49,4 +49,8 @@ public class KMSymbolRescueParameter extends KMSymbol {
 	public void setRescue(FRescue rescue) {
 		this.rescue = rescue;
 	}
+	
+	public String getDesciption() {
+		return "rescue block parameter " + identifier;
+	}
 }

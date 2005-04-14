@@ -47,6 +47,10 @@ public class KMSymbolParameter extends KMSymbol {
 		this.parameter = parameter;
 	}
 	
+	public String getDesciption() {
+		return "operation paprameter " + identifier;
+	}
+	
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#generateCallExpression()
 	 */

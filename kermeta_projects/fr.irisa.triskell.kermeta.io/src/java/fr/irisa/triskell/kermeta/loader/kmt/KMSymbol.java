@@ -31,4 +31,6 @@ public abstract class KMSymbol {
 	public abstract FObject getFObject();
 	
 	public abstract FCallExpression generateCallExpression(KermetaUnit builder);
+	
+	public abstract String getDesciption();
 }

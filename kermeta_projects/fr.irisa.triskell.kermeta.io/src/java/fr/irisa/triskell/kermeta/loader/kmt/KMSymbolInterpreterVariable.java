@@ -43,4 +43,8 @@ public class KMSymbolInterpreterVariable extends KMSymbol {
 		return call;
 	}
 	
+	public String getDesciption() {
+		return "interpreter variable " + identifier;
+	}
+	
 }

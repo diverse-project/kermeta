@@ -47,6 +47,10 @@ public class KMSymbolVariable extends KMSymbol {
 		this.variable = variable;
 	}
 	
+	public String getDesciption() {
+		return "local variable " + identifier;
+	}
+	
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#generateCallExpression()
 	 */

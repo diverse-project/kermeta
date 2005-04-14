@@ -42,5 +42,9 @@ public class KMSymbolResult extends KMSymbol {
 		call.setFName("result");
 		return call;
 	}
+	
+	public String getDesciption() {
+		return "operation result";
+	}
 
 }

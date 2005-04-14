@@ -46,6 +46,10 @@ public class KMSymbolProperty extends KMSymbol {
 		this.property = property;
 	}
 	
+	public String getDesciption() {
+		return "property " + identifier;
+	}
+	
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#generateCallExpression()
 	 */
