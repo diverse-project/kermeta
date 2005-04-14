@@ -88,20 +88,6 @@ public class RuntimeObjectFactory {
 		return result;
 	}
 	
-	public RuntimeObject createClassDefinition(FClassDefinition classdef) {
-		RuntimeObject result=new RuntimeObject(this,class_class);
-		result.setData(new Hashtable());
-		result.getData().put("kcoreObject",classdef);
-		return result;
-	}
-	
-	public RuntimeObject createPrimitiveType(FPrimitiveType typedef) {
-		RuntimeObject result=new RuntimeObject(this,class_class);
-		result.setData(new Hashtable());
-		result.getData().put("FPrimitiveType",typedef);
-		return result;
-	}
-
 	public RuntimeObject createTypeVariable(FTypeVariable typevar) {
 		RuntimeObject result=new RuntimeObject(this,(RuntimeObject)this.getClassDefTable().get("kermeta::reflection::TypeVariable"));
 		result.setData(new Hashtable());

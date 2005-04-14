@@ -42,6 +42,7 @@ public class Run extends TestCase {
 	public static RuntimeObject selfINSTANCE=null;
 	public static RuntimeObject voidINSTANCE=null;
 	public static Interpreter theInterpreter=null;
+	public static KermetaUnit interpreterbuilder=null;
 
 	public static void main(String[] args) {
 		RuntimeObject interpreterInstance=null;
@@ -76,7 +77,7 @@ public class Run extends TestCase {
 				while(it.hasNext())
 					System.out.println(it.next());
 				System.out.println("***> "+koFactory.getClassDefTable().keySet().size()+" "+koFactory);*/
-				KermetaUnit interpreterbuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.interpreter/src/kermeta/interpreter.kmt");
+				interpreterbuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("../fr.irisa.triskell.kermeta.interpreter/src/kermeta/interpreter.kmt");
 				try {
 					interpreterbuilder.load();
 					} catch(Exception e ) {if (interpreterbuilder.getError().size() == 0) e.printStackTrace();};
@@ -106,7 +107,7 @@ public class Run extends TestCase {
 						stdIOmetaClass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::utils::StdIO");
 						stdioInstance=Run.koFactory.createRuntimeObject(stdIOmetaClass);
 						stdioFClass=interpreterbuilder.struct_factory.createFClass();
-						stdioFClass.setFClassDefinition((FClassDefinition)stdIOmetaClass.getData().get("kcoreObject"));
+						stdioFClass.setFClassDefinition(((FClass)stdIOmetaClass.getData().get("kcoreObject")).getFClassDefinition());
 						
 /*						KMBuilderPass2 builderPass2 = new KMBuilderPass2();
 						builderPass2.ppPackage(interpreterbuilder);*/
@@ -158,7 +159,7 @@ public class Run extends TestCase {
 		 */ 
 		RuntimeObject mainClass=(RuntimeObject)Run.koFactory.getClassDefTable().get(mainClassValue);
 		RuntimeObject mainClassInstance=Run.koFactory.createRuntimeObject(mainClass);
-		FClassDefinition mainClassDef=(FClassDefinition)mainClass.getData().get("kcoreObject");
+		FClassDefinition mainClassDef=((FClass)mainClass.getData().get("kcoreObject")).getFClassDefinition();
 		Iterator it=mainClassDef.getFOwnedOperation().iterator();
 		boolean found=false;
 		while (it.hasNext() && !found) {

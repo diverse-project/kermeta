@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.15 2005-04-13 09:39:21 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.16 2005-04-14 09:52:09 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseCommand.java
  * License : GPL
@@ -27,7 +27,6 @@ import java.util.Vector;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import sun.nio.cs.KOI8_R;
 
 import fr.irisa.triskell.kermeta.ast.FSelfCall;
 import fr.irisa.triskell.kermeta.behavior.*;
@@ -452,7 +451,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	public Object visit(FCallFeature node) {
 	    
 	    FExpression target = node.getFTarget();
-	    FTypeDefinition t_target = null; // Type of the "callee"
+	    FType t_target = null; // Type of the "callee"
 	    RuntimeObject result = null; // The result to be returned by this visit
 	    RuntimeObject ro_target = null; // Runtime repr. of target
 	    // if target is null, means that it is an attribute of self object. We find self
@@ -460,7 +459,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		if (target == null)
 		{
 		    ro_target = interpreterContext.getCurrentFrame().getSelf();
-		    t_target =(FTypeDefinition)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
+		    t_target =(FType)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
 		}
 		
 		// handle the case of calls like "toto.titi.tutu" -> recursive
@@ -469,21 +468,16 @@ public class BaseInterpreter extends KermetaVisitor {
 		{
 		    ro_target = (RuntimeObject)this.accept(target);
 		    RuntimeObject metaClass=ro_target.getMetaclass();
-		    Object typedef = null;
-		    if (metaClass.getData()!=null) typedef=metaClass.getData().get("kcoreObject");
-		    if (typedef==null) {
+		    if (metaClass.getData()!=null)
+		    	t_target=(FType)metaClass.getData().get("kcoreObject");
+		    if (t_target==null)
 		    	System.err.println("The runtimeObjet ro_target has to be typed with a wel initialized metaclass");
-/*		    	typedef=metaClass.getProperties().get("classDefinition");
-		    	if (typedef==null) System.err.println("Cannot get type of ro_target result");
-		    	typedef=((RuntimeObject)typedef).getData().get("kcoreObject");*/
-		    }
-		    t_target=(FTypeDefinition)typedef;
 		}
 		
 		if (FIntegerLiteral.class.isInstance(target)) {
 			ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
 			RuntimeObject integerClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::Integer");
-			t_target=(FTypeDefinition)integerClassRO.getData().get("kcoreObject");
+			t_target=(FType)integerClassRO.getData().get("kcoreObject");
 		}
 		// If target is a CallVariable :
 		// Get the precise type of the CallFeature node.
@@ -506,7 +500,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		    {
 		    	Variable var=(Variable)e_context.getVariables().get(var_name);
 		        ro_target = (ro_target!=null)?ro_target:var.getRuntimeObject();
-		        t_target = ((FClass)var.getType()).getFClassDefinition();
+		        t_target = var.getType();
 		    }
 		    else
 		    {
@@ -884,15 +878,15 @@ public class BaseInterpreter extends KermetaVisitor {
      * @return a Vector of 2 elements. First one is the name of the feature type, 
      * second one the ecore object of the feature. 
      */
-    public static Vector getFeatureType(FTypeDefinition type, FCallFeature feature)
+    public static Vector getFeatureType(FType type, FCallFeature feature)
     {
         Vector result = null;
         String result_str = null;
         Object result_elt = null;
         // If type is a FClass
-        if (FClassDefinition.class.isInstance(type))
+        if (FClass.class.isInstance(type))
         {
-            FClassDefinition class_def = (FClassDefinition)type;
+            FClassDefinition class_def = ((FClass)type).getFClassDefinition();
             // Is the feature in the class definition of *type*?
             result = getFlatFeatureType(class_def, feature);
             // If it is still null, we have to find it in the Super classes, recursively

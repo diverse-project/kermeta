@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.8 2005-04-05 12:56:04 jpthibau Exp $
+/* $Id: KMMetaBuilder.java,v 1.9 2005-04-14 09:52:12 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -54,6 +54,20 @@ public class KMMetaBuilder {
 	 * units required from it.
 	 * 
 	 */
+	public static RuntimeObject createROFromClassDef(FObject node,RuntimeObject nodeMetaclass) {
+		RuntimeObject knode=nodeMetaclass.getFactory().createRuntimeObject(nodeMetaclass);
+		Hashtable data=new Hashtable();
+		if (node instanceof FClassDefinition) {
+			FClass fClass=Run.interpreterbuilder.struct_factory.createFClass();
+			fClass.setFClassDefinition((FClassDefinition)node);
+			data.put("kcoreObject",fClass);
+		}
+		else data.put("kcoreObject",node);
+		knode.setData(data);
+		Run.correspondanceTable.put(node,knode);
+		return knode;
+	}
+	
 	public KMMetaBuilder(KermetaUnit unit) {
 		//update the metametaclass definition
 		Run.koFactory.setClassClass((FClassDefinition)unit.getTypeDefinitionByName("kermeta::reflection::Class"));
@@ -78,12 +92,8 @@ public class KMMetaBuilder {
 				System.err.println("KMMetaBuilder : Interpreter owns twice same typenames :"+typeName);
 			else {
 				FTypeDefinition typedef=unit.getTypeDefinitionByName(typeName);
-				if (typedef instanceof FClassDefinition) {
-					runtimeFactory.getClassDefTable().put(typeName,runtimeFactory.createClassDefinition((FClassDefinition)typedef));
-					System.out.println(typeName);
-				}
-				else if (typedef instanceof FPrimitiveType) {
-					runtimeFactory.getClassDefTable().put(typeName,runtimeFactory.createPrimitiveType((FPrimitiveType)typedef));
+				if (typedef instanceof FClassDefinition || typedef instanceof FPrimitiveType) {
+					runtimeFactory.getClassDefTable().put(typeName,createROFromClassDef(typedef,Run.koFactory.getClassClass()));
 					System.out.println(typeName);
 				}
 				else System.err.println("KMMetaBuilder: not a good typedef kind =>"+typedef);
@@ -96,9 +106,12 @@ public class KMMetaBuilder {
 		while (it.hasNext()) {
 			RuntimeObject type=(RuntimeObject)Run.koFactory.getClassDefTable().get(it.next());
 			if (type.getData().containsKey("kcoreObject")) {
-				FClassDefinition classdef=(FClassDefinition)type.getData().get("kcoreObject");
-				if (classdef.getFTypeParameter().size()>0)
-					addTypeParameters(type,classdef.getFTypeParameter());
+				FObject kcoreObject=(FObject)type.getData().get("kcoreObject");
+				if (kcoreObject instanceof FClass) {
+					FClassDefinition classdef=((FClass)kcoreObject).getFClassDefinition();
+					if (classdef.getFTypeParameter().size()>0)
+						addTypeParameters(type,classdef.getFTypeParameter());
+				}
 			}
 		}
 	}
