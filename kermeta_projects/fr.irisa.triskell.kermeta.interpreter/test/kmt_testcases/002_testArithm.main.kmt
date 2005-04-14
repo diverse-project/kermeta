@@ -9,9 +9,18 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 class Test_arithm {
 
     operation main_operation() : kermeta::standard::Integer is do
-        var r1, r2, r3, rptm : kermeta::standard::Integer
-        var r1_8, r2_8, r3_8, rptm : kermeta::standard::Integer
-        var r1_m8, r2_m8, r3_m8, rptm : kermeta::standard::Integer
+        var r1 : kermeta::standard::Integer
+        var r2 : kermeta::standard::Integer
+        var r3 : kermeta::standard::Integer
+        var rptm : kermeta::standard::Integer
+        var r1_8 :  kermeta::standard::Integer
+        var r2_8 :  kermeta::standard::Integer
+        var r3_8 :  kermeta::standard::Integer
+        var rptm : kermeta::standard::Integer
+        var r1_m8 : kermeta::standard::Integer
+        var r2_m8  : kermeta::standard::Integer
+        var r3_m8  : kermeta::standard::Integer
+        var rptm : kermeta::standard::Integer
         
         // melting
         rptm := operation_ptm(2)
