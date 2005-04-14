@@ -1,27 +1,23 @@
+@mainClass "TestVariable" // qualified name of class of the operation to launch
+@mainOperation "main_operation" // operation to launch
+
+package root_package;
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
 /*****************************************************************************
  * $Id:
  * Project : Kermeta (First iteration)
  * Creation date :  
- * File : testSuite.skel
+ * File : testVariable.main.kmt
+ * 		
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
  * Creation date : Mar 14, 2005
  * Author : zdrey
- * Description : This file describes how to organise your tests in kmt language
+ * Description : Around variable 
  *
  ****************************************************************************/
 
- 
-/*
- * Test specific header :
- *   - mainClass : the qualified name of the class that contains the operation to
- * launch
- *   - mainOperation : the operation inside mainClass that will be launched
- */
-@mainClass "qualified_name::MyClass::inside::root_package"
-@mainOperation "main_operation::of::MyClass"
-
-package root_package;
 
 /*
  * General description of the test suite defined inside this class
@@ -53,8 +49,8 @@ class MyClass
     /*
      * Main operation that embeds all the tests
      */
-     operation main_operation() : kermeta::standard::void is do
-         var result1, result2, resultN : some::type
+     operation main_operation() : Void is do
+         var result1 : some::type
 
          // short reminder of op1 test goal
          
@@ -72,13 +68,13 @@ class MyClass
      *    - its params
      *    - what it returns
      */
-     operation op1() : kermeta::standard::void is do
+     operation op1() : Void is do
      end
 
      /*
      * idem
      */
-    operation op2() : kermeta::standard::void is do
+    operation op2() : Void is do
      end
 
 }
