@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.9 2005-04-14 09:52:14 jpthibau Exp $
+/* $Id: KMBuilderPass1.java,v 1.10 2005-04-15 15:43:03 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -537,7 +537,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
-		System.out.println("Visiting Operation "+node.getFName());
+		//System.out.println("Visiting Operation "+node.getFName());
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::reflection::Operation");
 		FClassDefinition nodeClassDef=((FClass)nodeMetaclass.getData().get("kcoreObject")).getFClassDefinition();
 		RuntimeObject knode=KMMetaBuilder.createROFromClassDef(node,nodeMetaclass);

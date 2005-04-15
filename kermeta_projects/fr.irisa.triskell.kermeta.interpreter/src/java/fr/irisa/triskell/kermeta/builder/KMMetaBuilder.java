@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.9 2005-04-14 09:52:12 jpthibau Exp $
+/* $Id: KMMetaBuilder.java,v 1.10 2005-04-15 15:43:58 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -94,7 +94,7 @@ public class KMMetaBuilder {
 				FTypeDefinition typedef=unit.getTypeDefinitionByName(typeName);
 				if (typedef instanceof FClassDefinition || typedef instanceof FPrimitiveType) {
 					runtimeFactory.getClassDefTable().put(typeName,createROFromClassDef(typedef,Run.koFactory.getClassClass()));
-					System.out.println(typeName);
+					//System.out.println(typeName);
 				}
 				else System.err.println("KMMetaBuilder: not a good typedef kind =>"+typedef);
 			}
