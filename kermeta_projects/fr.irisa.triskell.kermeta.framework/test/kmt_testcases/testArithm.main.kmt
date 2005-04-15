@@ -6,9 +6,9 @@ package testArithm;
 
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/test/unittest.kmt"
-
+alias Integer : kermeta::standard::Integer;
 // arithmetic operations - clone of 2_testArithm.main.kmt
-class TestArithm {
+class TestArithm inherits kermeta::unittest::TestCase {
 
 	// test plus
 	operation testop1() : Void is do
@@ -115,7 +115,7 @@ class TestArithm {
     end
     
     // div2 -> should be zero
-	operation operation4bis()
+	operation operation4bis() : Integer is do
 		result := 0 / 4
 	end
 	
