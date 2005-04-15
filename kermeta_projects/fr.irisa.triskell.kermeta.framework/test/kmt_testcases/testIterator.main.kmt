@@ -1,0 +1,87 @@
+@testOperation "yes"
+@mainClass "testPackage::TestIterator"
+@mainOperation "main_operation"
+
+package testPackage;
+require "../../src/kermeta/Standard.kmt"
+require "../../src/kermeta/test/unittest.kmt"
+alias Integer : kermeta::standard::Integer;
+/*****************************************************************************
+ * $Id: testIterator.main.kmt,v 1.1 2005-04-15 15:04:28 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : testBooleanResults.kmt
+ * 		
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * Creation date : Mar 14, 2005
+ * Author : zdrey
+ * Description : 
+ *		test for Iterator
+ *		for that use Integer, then String as single elements of a Set 
+ ***************************************************************************
+ */
+
+class TestIterator inherits kermeta::unittest::TestCase
+{    
+	attribut aset : kermeta::standard::Set<Integer>
+
+    // Main operation that embeds all the tests 
+     operation main_operation() is do
+     end
+     
+    //  test "hasNext" operation
+	operation testhasNext() : Void is do
+     	aset := kermeta::standard::Set<Integer>.new
+		// to do : "setUp" testCase method!
+     	//var it : kermeta::standard::Iterator<Integer> init kermeta::standard::Iterator<Integer>.new
+     	aset.add(23)
+     	var it : kermeta::standard::Iterator<Integer> init aset.iterator()
+     	assert(it.hasNext == true)
+     	
+    end
+    
+    // test "next" operation with a void Set
+    operation testnext() : Void is do
+       	aset := kermeta::standard::Set<Integer>.new
+    	assert(aset.next==void)
+    end
+    
+    // test "next" operation
+    operation testnextbis() : Void is do
+       	aset := kermeta::standard::Set<Integer>.new
+       	aset.add(23)
+    	assert(aset.next==23)
+    end
+    
+     // test "isOff" operation with a void Set
+    operation testisOff() : Void is do
+       	aset := kermeta::standard::Set<Integer>.new
+    	assert(aset.isOff==true)
+    end
+    
+    // test "isOff" operation when it is true
+    operation testisOffbis() : Void is do
+//        var it : kermeta::standard::Iterator<Integer> init kermeta::standard::Iterator<Integer>.new
+       	aset := kermeta::standard::Set<Integer>.new
+     	var it : kermeta::standard::Iterator<Integer> init aset.iterator()
+       	aset.add(23)
+        it.next()
+    	assert(it.isOff == true)
+    end
+    
+    // test "isOff" operation when it is false
+    operation testisOffter() : Void is do
+//        var it : kermeta::standard::Iterator<Integer> init kermeta::standard::Iterator<Integer>.new
+       	aset := kermeta::standard::Set<Integer>.new
+     	var it : kermeta::standard::Iterator<Integer> init aset.iterator()
+       	aset.add(23)
+    	assert(it.isOff == false)
+    end
+    
+    
+    
+    
+    
+
+}
