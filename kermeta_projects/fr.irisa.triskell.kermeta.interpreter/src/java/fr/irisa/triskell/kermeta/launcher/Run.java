@@ -7,9 +7,12 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import fr.irisa.triskell.kermeta.builder.KMBuilderPass1;
 import fr.irisa.triskell.kermeta.builder.KMBuilderPass2;
 import fr.irisa.triskell.kermeta.builder.KMMetaBuilder;
+import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.interpreter.BaseInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.Interpreter;
@@ -25,6 +28,7 @@ import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import junit.framework.TestCase;
 
 
@@ -41,19 +45,24 @@ public class Run extends TestCase {
 	public static RuntimeObject metametaClass=null;
 	public static RuntimeObject selfINSTANCE=null;
 	public static RuntimeObject voidINSTANCE=null;
-	public static Interpreter theInterpreter=null;
+	public static RuntimeObject inINSTANCE=null;
+	public static RuntimeObject outINSTANCE=null;
+	public static Interpreter theInterpreter=null;	
 	public static KermetaUnit interpreterbuilder=null;
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
+
 
 	public static void main(String[] args) {
 		RuntimeObject interpreterInstance=null;
 		RuntimeObject stdIOmetaClass=null;
 		FClass stdioFClass=null;
 		RuntimeObject stdioInstance=null;
+
 		String mainClassValue=null;
 		String mainOperationValue=null;
 		String mainArgsValue=null;
 		if (args.length < 1)
-			System.err.println("Usage : run <modelName> <typeName> <operationName> <args...>");
+		    internalLog.error("Usage : run <modelName> <typeName> <operationName> <args...>");
 		else {
 			//prepare the kermetaObject factory and the metametaclass to allow kermeta metamodel traversing
 			koFactory=new RuntimeObjectFactory();
@@ -86,7 +95,7 @@ public class Run extends TestCase {
 						assertTrue(interpreterbuilder.getMessagesAsString(), false);
 					}
 					else {
-						System.out.println("model for the interpreter loaded successfully !");
+					    internalLog.info("model for the interpreter loaded successfully !");
 						FClassDefinition classdef=(FClassDefinition)interpreterbuilder.getTypeDefinitionByName("kermeta::reflection::Class");
 						koFactory.setClassClass(classdef);
 						metametaClass=koFactory.getClassClass();
@@ -142,11 +151,11 @@ public class Run extends TestCase {
 				if (mainClassValue==null)
 					if (args.length>1)
 						mainClassValue=args[1];
-					else System.err.println("You should provide a mainClass argument to launch this program !");
+					else internalLog.error("You should provide a mainClass argument to launch this program !");
 				if (mainOperationValue==null)
 					if (args.length>2)
 					mainOperationValue=args[2];
-					else System.err.println("You should provide a mainOperation argument to launch this program !");
+					else internalLog.error("You should provide a mainOperation argument to launch this program !");
 /*				KMBuilderPass2 classesBuilderPass2 = new KMBuilderPass2();			
 				classesBuilderPass2.ppPackage(builder);*/
 		}
@@ -168,7 +177,7 @@ public class Run extends TestCase {
 				found=true;
 				ArrayList arguments=new ArrayList();
 				if (mainArgsValue!=null || args.length>3) {//set a collection of arguments for the operation
-					System.err.println("Arguments to main operation : TODO adapt args to operation parameters types.");
+				    internalLog.error("Arguments to main operation : TODO adapt args to operation parameters types.");
 					//TODO manage the arguments conversion to kermeta ty^pes of parameters
 					//assume the first parameter of mainOp is a ref(0,*) StringLiteral
 					for (int i=3;i<args.length;i++) {
@@ -176,20 +185,35 @@ public class Run extends TestCase {
 						arguments.add(arg);
 					}
 				}
-				System.err.println("\nSTARTING INTERPRETATION OF MAIN OPERATION...");
-				System.err.println("############################################");
-				long elapsedTime=System.currentTimeMillis();
-				BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder);
-				baseInterpreter.getInterpreterContext().pushNewCallFrame(interpreterInstance);
-				baseInterpreter.getInterpreterContext().getCurrentFrame().pushNewExpressionContext(null);
-				baseInterpreter.getInterpreterContext().getCurrentFrame().getCurrentExpressionContext().defineVariable(
-			            (FType)stdioFClass, "stdio", stdioInstance);
-				Object result=baseInterpreter.invoke(mainClassInstance,mainOp,arguments);
-				elapsedTime=System.currentTimeMillis()-elapsedTime;
-				long minutes=elapsedTime/60000;
-				long seconds=(elapsedTime - 60000*minutes)/1000;
-				long hundredth=(elapsedTime - 60000*minutes - 1000*seconds)/10;
-				System.out.println("RESULT : "+result+"; ElapsedTime : "+minutes+"mn "+seconds+"s "+hundredth+"'");
+				try{
+				    System.err.println("\nSTARTING INTERPRETATION OF MAIN OPERATION...");
+					System.err.println("############################################");
+					long elapsedTime=System.currentTimeMillis();
+					BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder);
+					baseInterpreter.getInterpreterContext().pushNewCallFrame(interpreterInstance);
+					baseInterpreter.getInterpreterContext().getCurrentFrame().pushNewExpressionContext(null);
+					baseInterpreter.getInterpreterContext().getCurrentFrame().getCurrentExpressionContext().defineVariable(
+				            (FType)stdioFClass, "stdio", stdioInstance);
+					Object result=baseInterpreter.invoke(mainClassInstance,mainOp,arguments);
+					elapsedTime=System.currentTimeMillis()-elapsedTime;
+					long minutes=elapsedTime/60000;
+					long seconds=(elapsedTime - 60000*minutes)/1000;
+					long hundredth=(elapsedTime - 60000*minutes - 1000*seconds)/10;
+					System.out.println("RESULT : "+result+"; ElapsedTime : "+minutes+"mn "+seconds+"s "+hundredth+"'");
+				}
+
+				catch (KermetaVisitorError e)
+				{
+				    // log the problem on the error logger
+				    internalLog.error(e);
+				    for(int i = 0; i < e.getCause().getStackTrace().length; i++)
+				    {
+				        internalLog.error(e.getCause().getStackTrace()[i]);
+				    }
+				    // do not catch it, so the junit testsuite will be able to detect it.
+				    throw e;
+				}								
+
 			}
 		}
 		}
