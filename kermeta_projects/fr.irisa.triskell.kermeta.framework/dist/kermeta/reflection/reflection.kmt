@@ -1,0 +1,156 @@
+package kermeta::reflection;
+
+require "../standard/collections.kmt"
+
+alias String : kermeta::standard::String;
+abstract class Object
+{
+	reference tag : set Tag[0..*]#object
+	operation getMetaClass() : Class is abstract
+	operation container() : Object is abstract
+	operation equals(element : Object) : Boolean is abstract
+	operation get(~property : Property) : Object is abstract
+	operation ~set(~property : Property, element : Object) : Void is abstract
+	operation isSet(~property : Property) : Boolean is abstract
+	operation unset(~property : Property) : Void is abstract
+}
+alias Boolean : kermeta::standard::Boolean;
+alias Integer : kermeta::standard::Integer;
+abstract class Class inherits Type
+{
+	reference classDefinition : ClassDefinition[1..1]
+	attribut typeParamBinding : set TypeVariableBinding[0..*]
+	property readonly ownedAttribute : set Property[0..*]
+		getter is do
+			result := classDefinition.ownedAttribute
+		end
+	property readonly ownedOperation : set Operation[0..*]
+		getter is do
+			result := classDefinition.ownedOperation
+		end
+	property readonly superClass : set Class[0..*]
+		getter is do
+			result := classDefinition.superType
+		end
+	property readonly isAbstract : Boolean
+		getter is do
+			result := classDefinition.isAbstract
+		end
+	property readonly name : String
+		getter is do
+			result := classDefinition.name
+		end
+	operation new() : Object is abstract
+}
+abstract class MultiplicityElement inherits TypedElement
+{
+	attribut isOrdered : Boolean
+	attribut isUnique : Boolean
+	attribut lower : Integer
+	attribut upper : UnlimitedNatural
+}
+abstract class Operation inherits MultiplicityElement
+{
+	attribut isAbstract : Boolean
+
+	reference superOperation : Operation
+	reference owningClass : ClassDefinition#ownedOperation
+	reference typeParameter : set TypeVariable[0..*]
+	reference raisedException : set Type[0..*]
+	attribut ownedParameter : set Parameter[0..*]#~operation
+}
+abstract class Tag inherits Object
+{
+	reference object : set Object[1..*]#tag
+	attribut name : String
+	attribut value : String
+}
+abstract class Property inherits MultiplicityElement
+{
+	reference owningClass : ClassDefinition#ownedAttributes
+	reference opposite : Property
+	attribut isReadOnly : Boolean
+	attribut default : String
+	attribut isComposite : Boolean
+	attribut isDerived : Boolean
+	attribut isID : Boolean
+}
+abstract class TypeContainer inherits Object
+{
+	attribut containedType : set Type[0..*]
+}
+abstract class ClassDefinition inherits TypeContainer, TypeDefinition
+{
+	attribut isAbstract : Boolean
+	attribut ownedAttributes : set Property[0..*]#owningClass
+	attribut ownedOperation : set Operation[0..*]#owningClass
+	reference superType : set Type[0..*]
+	attribut typeParameter : set TypeVariable[0..*]
+}
+abstract class TypedElement inherits TypeContainer, NamedElement
+{
+	reference type : Type
+}
+abstract class TypeVariable inherits TypeContainer, Type, NamedElement
+{
+	reference supertype : Type
+}
+abstract class ProductType inherits TypeContainer, Type
+{
+	reference type : set Type[1..*]
+}
+abstract class FunctionType inherits TypeContainer, Type
+{
+	reference left : Type
+	reference right : Type
+}
+abstract class Type inherits Object
+{
+	operation isInstance(element : Object) : Boolean is abstract
+}
+abstract class TypeVariableBinding inherits TypeContainer, Object
+{
+	reference variable : TypeVariable[1..1]
+	reference type : Type[1..1]
+}
+abstract class PrimitiveType inherits TypeContainer, DataType
+{
+	reference instanceType : Type
+}
+abstract class NamedElement inherits Object
+{
+	attribut name : String
+}
+abstract class SelfType inherits Type
+{
+}
+abstract class Package inherits NamedElement
+{
+	attribut ownedTypeDefinition : set TypeDefinition[0..*]
+	attribut nestedPackage : set Package[0..*]#nestingPackage
+	reference nestingPackage : Package#nestedPackage
+	attribut uri : String
+}
+abstract class TypeDefinition inherits NamedElement
+{
+}
+abstract class VoidType inherits Type
+{
+}
+abstract class DataType inherits TypeDefinition, Type
+{
+}
+abstract class Enumeration inherits DataType
+{
+	attribut ownedLiteral : set EnumerationLiteral[0..*]#~enumeration
+}
+abstract class EnumerationLiteral inherits NamedElement
+{
+	reference ~enumeration : Enumeration#ownedLiteral
+}
+abstract class Parameter inherits MultiplicityElement
+{
+	reference ~operation : Operation#ownedParameter
+}
+alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
+

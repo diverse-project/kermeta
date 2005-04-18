@@ -1,0 +1,8 @@
+package kermeta;
+
+require "./language/behavior.kmt"
+require "./utils/stack.kmt"
+require "./utils/hashtable.kmt"
+require "./utils/stdIO.kmt"
+require "./language/reflective_collections.kmt"
+
