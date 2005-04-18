@@ -1,0 +1,106 @@
+/*****************************************************************************
+ * $Id: testLambda.main.kmt,v 1.1 2005-04-18 16:34:50 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : testLambda.kmt
+ * 		
+ * License : GPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * Creation date : Apr 18 11:13:50 2005
+ * Author : zdrey
+ * Description : 
+ *		test for Lambda
+ * 		test all the possible maneers to use a lambda expression
+ ***************************************************************************
+ */
+
+@testOperation "yes"
+@mainClass "testLambda::TestLambda"
+@mainOperation " "
+
+package testLambda;
+
+require "../../src/kermeta/Standard.kmt"
+require "../../src/kermeta/test/unittest.kmt"
+require "../../src/kermeta/language/structure.kmt"
+alias Integer : kermeta::standard::Integer;
+alias String : kermeta::standard::String;
+
+
+class TestLambda inherits kermeta::unittest::TestCase
+{
+
+	/** test a simple lambda expression call with one argument */
+	operation testLambda1() : Void is do
+		var lf1 : kermeta::language::structure::FunctionType
+		lf1 := function { i : Integer | i.plus(1) }
+		assert(lf1(3))
+	end
+	
+	/** test an operation call with a lambda expression */
+	operation testLambdaWithDef() : Void is do
+		var lf1 : kermeta::language::structure::FunctionType
+		lf1 := function { i : Integer | i.plus(1) }
+		assert(lf1(3))
+	end
+	
+	/** test a lambda exp. with 2 parameters */
+	operation testLambdaWithTwoParams() : Void is do
+		var lf1 : kermeta::language::structure::FunctionType
+		lf1 := function { i : Integer, j : Integer | i.plus(j) }
+		assert(lf1(3, 4) == 7)
+	end
+	
+	/** Test with a lambda exp. with 2 parameters, and a wrong call of it */
+	operation testFailLambdaWithTwoParams() : Void is do
+		var lf1 : kermeta::language::structure::FunctionType
+		lf1 := function { i : Integer, j : Integer | i.plus(j) }
+		assert(lf1(3, 4, 5) == 6)
+	end
+	
+	/** test a lambda exp. with 3 parameters */
+	operation testLambdaWithThreeParams() : Void is do
+		var lf1 : kermeta::language::structure::FunctionType
+		lf1 := function { i : Integer, j : Integer, k : String | k.index(i.plus(j)) }
+		assert(lf1(3, 4, "stringOfMoreThanSevenChars")=="f")
+	end
+	
+	// test a nested lambda exp. 
+	operation testNestedLambda() : Void is do
+		var lf1 : kermeta::language::structure::FunctionType
+		var lf2 : kermeta::language::structure::FunctionType
+		lf1 := function { i : Integer, j : Integer, k : String | k.index(i.plus(j)) }
+		lf2 := function { s1 : String, s2 : String | lf1(1, 2, s1+s2) }
+		assert(lf2("abcde", "fghi")=="d")
+	end
+	
+	// lambda exp. as parameter of an operation?
+	operation testLambdaInOperation() : Void is do
+		var lf1 : kermeta::language::structure::FunctionType
+		lf1 := function { i : Integer, j : Integer | i.plus(j) }
+		// 3 * 2 * 5
+		assert(3.times(lf1(2, 5))==30)
+	end
+	
+	// TODO : lambda exp. as a parameter binding of a parametric class? 
+	
+
+	// lambda exp. to get elements in a collection TODO : finish
+	operation testPrettyGet() : Void is do
+		var coll : kermeta::standard::Set<String>
+		var a : Integer
+		a := 0
+		coll.add(44)
+		coll.add(32)
+		coll.add(20)
+		var it : kermeta::standard::Iterator<String> init coll.iterator()
+		
+	end
+	
+	// Create a collection of elements on which we will working.
+	// We choose String as the type of elements for the first revision of this 
+	// test.
+	operation createTestSet() : Void is do
+	end
+
+}
