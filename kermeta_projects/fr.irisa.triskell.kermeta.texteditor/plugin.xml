@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta.texteditor"
    name="Kermeta Text Editor"
-   version="0.0.1"
+   version="0.0.2"
    provider-name="fr.irisa.triskell"
    class="fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin">
 
@@ -24,6 +24,9 @@
          <export name="*"/>
       </library>
       <library name="lib/model_kermeta.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/thirdparty/log4j.jar">
          <export name="*"/>
       </library>
    </runtime>

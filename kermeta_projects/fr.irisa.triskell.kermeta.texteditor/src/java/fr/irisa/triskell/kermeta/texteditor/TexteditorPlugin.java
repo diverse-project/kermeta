@@ -1,7 +1,11 @@
 package fr.irisa.triskell.kermeta.texteditor;
 
+import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
+
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+
 import java.util.*;
 
 /**
@@ -12,6 +16,8 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	private static TexteditorPlugin plugin;
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
+	
+	final static public Logger pluginLog = LogConfigurationHelper.getLogger("PutainDeLog4J2Merde");
 	
 	/**
 	 * The constructor.
