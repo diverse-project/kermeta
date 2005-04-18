@@ -1,4 +1,19 @@
+/* $Id: Run.java,v 1.18 2005-04-18 09:08:40 dvojtise Exp $
+ * Project : Kermeta.interpreter
+ * File : Run.java
+ * License : GPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mar 14, 2005
+ * Authors : 
+ * 		zdrey 		<zdrey@irisa.fr>
+ * 		jpthibau	<jpthibau@irisa.fr>
+ * 		dvojtise	<dvojtise@irisa.fr>
+ * Description :  	
+ * 	see class javadoc.	 
+ */
 package fr.irisa.triskell.kermeta.launcher;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +27,7 @@ import org.apache.log4j.Logger;
 import fr.irisa.triskell.kermeta.builder.KMBuilderPass1;
 import fr.irisa.triskell.kermeta.builder.KMBuilderPass2;
 import fr.irisa.triskell.kermeta.builder.KMMetaBuilder;
-import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
+import fr.irisa.triskell.kermeta.error.KermetaError;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.interpreter.BaseInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.Interpreter;
@@ -33,6 +48,11 @@ import junit.framework.TestCase;
 
 
 
+/**
+ * Launcher for Kermeta interpreter. It can be run from the command line or as a test case for JUnit.
+ * @author zdrey, jpthibau, dvojtise
+ *
+ */
 public class Run extends TestCase {
 	
 /*	public static ResourceSet resourceSet=null;
@@ -202,7 +222,7 @@ public class Run extends TestCase {
 					System.out.println("RESULT : "+result+"; ElapsedTime : "+minutes+"mn "+seconds+"s "+hundredth+"'");
 				}
 
-				catch (KermetaVisitorError e)
+				catch (KermetaError e)
 				{
 				    // log the problem on the error logger
 				    internalLog.error(e);
@@ -212,7 +232,8 @@ public class Run extends TestCase {
 				    }
 				    // do not catch it, so the junit testsuite will be able to detect it.
 				    throw e;
-				}								
+				}
+							
 
 			}
 		}

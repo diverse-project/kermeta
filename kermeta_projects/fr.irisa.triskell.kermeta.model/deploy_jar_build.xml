@@ -1,0 +1,13 @@
+<project name="MetaCore" default="deploy" basedir=".">
+	
+	<description>
+        Deploy the dist jar to the projects that use it
+    </description>
+
+	<target name="deploy">
+		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.texteditor/lib/"/>
+		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.io/lib/"/>
+		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.interpreter/lib/"/>
+		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.framework/lib/"/>
+	</target>
+</project>

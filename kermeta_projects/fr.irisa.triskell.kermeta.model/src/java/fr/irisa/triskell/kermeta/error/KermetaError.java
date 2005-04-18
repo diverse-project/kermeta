@@ -1,4 +1,4 @@
-/* $Id: KermetaVisitorError.java,v 1.2 2005-04-18 09:05:03 dvojtise Exp $
+/* $Id: KermetaError.java,v 1.1 2005-04-18 09:05:03 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : KermetaVisitorError.java
  * License    : GPL
@@ -13,16 +13,17 @@
 package fr.irisa.triskell.kermeta.error;
 
 /**
- * Internal error/exception that occurs while visiting a Kermeta model
+ * Internal error/exception that occurs while using a Kermeta model.
+ * This is an abstract class.
  * @author dvojtise
  */
-public class KermetaVisitorError extends KermetaError {
+public abstract class KermetaError extends Error {
 
     /**
      * Constructs a new Kermeta error with the specified cause.
      * @param cause
      */
-    public KermetaVisitorError(Throwable cause) {
+    public KermetaError(Throwable cause) {
         
         super(cause);
     }
@@ -32,7 +33,7 @@ public class KermetaVisitorError extends KermetaError {
      * @param message
      * @param cause
      */
-    public KermetaVisitorError(String message,
+    public KermetaError(String message,
             Throwable cause) {
         
         super(message, cause);
@@ -43,7 +44,7 @@ public class KermetaVisitorError extends KermetaError {
      * @param message
      * @param cause
      */
-    public KermetaVisitorError(String message) {
+    public KermetaError(String message) {
         
         super(message);
     }
