@@ -1,3 +1,15 @@
+/* $Id: GenerateJUnitTestSuite.java,v 1.3 2005-04-18 09:24:07 dvojtise Exp $
+ * Project : Kermeta.interpreter
+ * File : GenerateJUnitTestSuite.java
+ * License : GPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 16 févr. 2005
+ * Authors : 
+ * 		Franck FLEUREY (ffleurey@irisa.fr)
+ * Description :  	
+ * 	see class javadoc.	 
+ */
 package kermeta_interpreter.test;
 
 import java.io.BufferedReader;
@@ -7,15 +19,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/*
- * Created on 16 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
 
 /**
+ * Generate or Regenerate the JunitTestSuite by looking for *.main.kmt files in the test folder.
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class GenerateJUnitTestSuite {
 
@@ -53,6 +60,7 @@ public class GenerateJUnitTestSuite {
 			FileWriter w = new FileWriter(junitfile);
 			w.write(result);
 			w.close();
+			System.out.println("successfully generated " + junitfile + "\n");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
