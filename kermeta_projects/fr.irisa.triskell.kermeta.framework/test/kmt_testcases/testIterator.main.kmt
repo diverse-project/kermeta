@@ -7,10 +7,10 @@ require "../../src/kermeta/Standard.kmt"
 require "../../src/kermeta/test/unittest.kmt"
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: testIterator.main.kmt,v 1.1 2005-04-15 15:04:28 zdrey Exp $
+ * $Id: testIterator.main.kmt,v 1.2 2005-04-18 08:21:26 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
- * File : testBooleanResults.kmt
+ * File : testIterator.kmt
  * 		
  * License : GPL
  * Copyright : IRISA / Universite de Rennes 1
@@ -18,7 +18,7 @@ alias Integer : kermeta::standard::Integer;
  * Author : zdrey
  * Description : 
  *		test for Iterator
- *		for that use Integer, then String as single elements of a Set 
+ *		use Integer, then String as single elements of a Set 
  ***************************************************************************
  */
 
