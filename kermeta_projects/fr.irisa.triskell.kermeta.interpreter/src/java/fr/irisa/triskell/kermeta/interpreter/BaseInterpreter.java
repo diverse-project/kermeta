@@ -1,17 +1,16 @@
-/* $Id: BaseInterpreter.java,v 1.16 2005-04-14 09:52:09 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.17 2005-04-18 09:09:38 dvojtise Exp $
  * Project : Kermeta (First iteration)
- * File : BaseCommand.java
+ * File : BaseInterpreter.java
  * License : GPL
- * Copyright : IRISA / Universite de Rennes 1
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 14, 2005
- * Author : zdrey
- * Description : describe here file content
- * TODO : 
- * 	- write here your TODO actions
- *  - ...
- * Notes : 
- * 		 
+ * Authors : 
+ * 		zdrey 		<zdrey@irisa.fr>
+ * 		jpthibau	<jpthibau@irisa.fr>
+ * 		dvojtise	<dvojtise@irisa.fr>
+ * Description :  	
+ * 	see class javadoc.	 
  */
 package fr.irisa.triskell.kermeta.interpreter;
 import java.io.File;
@@ -30,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.ast.FSelfCall;
 import fr.irisa.triskell.kermeta.behavior.*;
+import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.structure.*;
 
 import fr.irisa.triskell.kermeta.launcher.Run;
@@ -623,34 +623,34 @@ public class BaseInterpreter extends KermetaVisitor {
         try {
             jclass = Class.forName(jclassName);
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            internalLog.error("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+			throw	new KermetaVisitorError("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName  ,e);
         }
         Method jmethod = null;
         try {
             jmethod = jclass.getMethod(jmethodName, paramtypes);
         } catch (SecurityException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            internalLog.error("SecurityException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+			throw	new KermetaVisitorError("SecurityException invoking "+ jmethodName + " on Class " +jclassName  ,e1);
         } catch (NoSuchMethodException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+            internalLog.error("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+			throw	new KermetaVisitorError("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName  ,e1);
         }
         Object result = null;
         try {
             result = jmethod.invoke(jclass.newInstance(), paramsArray);
-        } catch (IllegalArgumentException e2) {
-            // TODO Auto-generated catch block
-            e2.printStackTrace();
+        } catch (IllegalArgumentException e2) {        
+			internalLog.error("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+			throw	new KermetaVisitorError("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName  ,e2); 		
         } catch (IllegalAccessException e2) {
-            // TODO Auto-generated catch block
-            e2.printStackTrace();
+            internalLog.error("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+			throw	new KermetaVisitorError("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
         } catch (InvocationTargetException e2) {
-            // TODO Auto-generated catch block
-            e2.printStackTrace();
+            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+			throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
         } catch (InstantiationException e2) {
-            // TODO Auto-generated catch block
-            e2.printStackTrace();
+            internalLog.error("InstantiationException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+			throw	new KermetaVisitorError("InstantiationException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
         }
         return result;
 	}
