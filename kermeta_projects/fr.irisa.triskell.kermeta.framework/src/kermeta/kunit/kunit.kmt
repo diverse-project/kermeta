@@ -1,6 +1,7 @@
-package kermeta::unittest;
-require "../../../src/kermeta/Standard.kmt"
-require "../../../src/kermeta/standard/exceptions.kmt"
+package kermeta::kunit;
+
+require "../Standard.kmt"
+//require "../../../src/kermeta/standard/exceptions.kmt"
 /***************************************************
  * Franck FLEUREY - 14/02/2005
  * Triskell Research Group
@@ -21,7 +22,7 @@ abstract class Test
 		if (bool == false) then
 			// when exceptions work, we can replace instruction by this one :
 //			raise kermeta::exceptions::AssertionError.new
-//			stdio.writeln("AssertionError")
+			stdio.writeln("AssertionError")
 		end
 	end
 

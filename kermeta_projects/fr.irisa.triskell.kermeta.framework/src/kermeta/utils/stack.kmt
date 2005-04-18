@@ -1,6 +1,6 @@
 package kermeta::utils;
 
-require "../standard/collections.kmt"
+require "../Standard.kmt"
 
 using kermeta::standard
 

@@ -1,7 +1,6 @@
-package kermeta::utils;
+package kermeta::io;
 
 require "../Standard.kmt"
-require "../language/structure.kmt"
 
 using kermeta::standard
 using kermeta::language::structure

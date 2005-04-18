@@ -1,6 +1,17 @@
 package kermeta;
 
+/*
+ This unit loads kermeta standard library
+*/
 
-require "standard/collections.kmt"
-//require "reflection/kermeta_structure.kmt"
-//require "base/ReflectiveCollections.kmt"
+// this imports the standard types and
+// the definition of the language
+require "language/reflective_collections.kmt"
+
+require "kunit/kunit.kmt"
+
+require "utils/hashtable.kmt"
+
+require "utils/stack.kmt"
+
+require "io/std_io.kmt"
