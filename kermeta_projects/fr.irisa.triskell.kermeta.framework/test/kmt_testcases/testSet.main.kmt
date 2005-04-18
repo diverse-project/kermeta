@@ -1,0 +1,239 @@
+@testOperation "yes"
+@mainClass "testPackage::TestIterator"
+@mainOperation "main_operation"
+
+package testPackage;
+require "../../src/kermeta/Standard.kmt"
+require "../../src/kermeta/test/unittest.kmt"
+alias Integer : kermeta::standard::Integer;
+/*****************************************************************************
+ * $Id: testSet.main.kmt,v 1.1 2005-04-18 10:43:50 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : testIterator.kmt
+ * 		
+ * License : GPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * Creation date : Mar 14, 2005
+ * Author : zdrey
+ * Description : 
+ *		test for Set
+ *		each <operation> of Set is tested in a test<Operation>
+ * Note : Done for a test/operation
+ * TODO : more than one test for some methods of Set?
+ ***************************************************************************
+ */
+
+class TestIterator inherits kermeta::unittest::TestCase
+{    
+	attribut aset : kermeta::standard::Set<Integer>
+	attribut init_set : kermeta::standard::Set<Integer>
+	attribut add_set : kermeta::standard::Set<Integer>
+
+
+	/**
+	 * Add an element in the collection
+	 */
+	operation testAdd() : Void is do
+		aset := kermeta::standard::Set<Integer>.new
+		aset.add(31)
+		assert(aset.one == 31)
+	end
+	
+	/**
+	 * returns the number of elements in the collection
+	 */
+	operation testSize() : Integer is do
+		init_set := kermeta::standard::Set<Integer>.new
+		init_set.add(5)
+		init_set.add(6)
+		init_set.add(32)
+		init_set.add(23)
+		assert(init_set.size == 4)
+	end
+	
+	
+	/**
+	 * Remove an element from the collection
+	 * Works if size operation works
+	 */
+	operation testRemove() : Void is do
+		aset := kermeta::standard::Set<Integer>.new
+		aset.add(31)
+		aset.add(13)
+		aset.remove(1)
+		assert(aset.size == 1)
+		assert(aset.one == 31)
+	end
+	
+	/**
+	 * Remove all elements from the collection
+	 */
+	operation testClear() : Void is do
+		aset := kermeta::standard::Set<Integer>.new
+		aset.add(31)
+		aset.add(13)
+		aset.clear()
+		assert(aset.size == 0)
+	end
+	
+	/**
+	 * Add all elements from the collection elements in the collection
+	 * We should test lambda expression and each() operation first!
+	 */
+	operation testAddAll() : Void is do
+		init_set := kermeta::standard::Set<Integer>.new
+		add_set := kermeta::standard::Set<Integer>.new
+		init_set.add(5)
+		
+		add_set.add(7)
+		add_set.add(3)
+		add_set.add(13)
+		
+		// check the elements one by one
+		init_set.addAll(add_set)
+		assert(init_set.one == 5)
+		assert(init_set.size == 4)
+	end
+	
+	/**
+	 * returns true if the collection contains element
+	 */
+	operation testContains() : Void is do
+		init_set := kermeta::standard::Set<Integer>.new
+		init_set.add(5)
+		init_set.add(6)
+		init_set.add(32)
+		init_set.add(23)
+		assert(init_set.contains(32) == true)
+		init_set.remove(2)
+		assert(init_set.contains(32) == false)
+		
+	end
+	
+	
+	/**
+	 * returns true if the collection is empty
+	 */
+	operation testEmpty() : Void is do
+		init_set := kermeta::standard::Set<Integer>.new
+		assert(init_set.empty == true)
+		init_set.add(23)
+		assert(init_set.empty == false)
+	end
+	
+	/**
+	 * returns an iterator on the collection
+	 */
+	operation testIterator() : Void is do
+		init_set := kermeta::standard::Set<Integer>.new
+		init_set.add(32)
+		assert(init_set.iterator.isOff == false)
+		assert(init_set.iterator.hasNext == true)
+		assert(init_set.iterator.next == 32)
+	end
+	
+	/**
+	 * returns an element from the collection or void
+	 * if the collection is empty
+	 * Assumed to be used for a one element collection
+	 */
+	operation testOne() : Void is do
+		init_set := kermeta::standard::Set<Integer>.new
+		init_set.add(32)
+		assert(init_set.one == 32)
+	end
+	
+	/**
+	 * runs a lambda func on each element of the collection
+	 */
+	operation testEach() : Void is do
+		init_set := kermeta::standard::Set<Integer>.new
+		
+		init_set.add(32)
+		init_set.add(23)
+		init_set.add(41)
+		init_set.each { element | init_set.remove(element) }
+		assert(init_set.empty == true)
+	end
+	
+	/**
+	 * returns a new Collection with the results of running collector 
+	 * once for every element in self.
+	 * Need to test OrderedCollections-[>Sequence and Iterator first!
+	 */
+	operation testCollect() : Void is do
+		var sequence : kermeta::standard::Sequence<Integer>
+		init_set := kermeta::standard::Set<Integer>.new
+		init_set.add(32)
+		init_set.add(23)
+		init_set.add(41)
+		
+		sequence := init_set.collect { element | element.plus(100) } 
+		// Has result the same elements as init_set?
+		assert(result.elementAt(0)==132)
+		assert(result.elementAt(0)==123)
+		assert(result.elementAt(0)==141)
+		
+	end
+	
+	/**
+	 * Passes each element of the collection to detector (which always returns a Bool). 
+	 * Returns the first element for which detector is not false. 
+	 * Returns void if no object matches.
+	 * TODO : a test for an unsuccessful detect?
+	 */
+	 operation testDetect() : Void is do
+	 	init_set := kermeta::standard::Set<Integer>.new
+	 	init_set.add(23)
+	 	init_set.add(-22)
+	 	init_set.add(-2)
+	 	assert( init_set.detect { e | e < 0 } == -22)
+	 end
+	 	
+	/**
+	 * Passes each element of the collection to selector. 
+	 * returns a Collection for all elements for which selector is true
+	 */
+	 operation testSelect() : Void is do
+		var sequence : kermeta::standard::Sequence<Integer> 	 	
+
+		init_set := fillSet
+	 	sequence := init_set.~select { e | e > 0}
+	 	assert(sequence.size == 3)
+	 	assert(sequence.elementAt(0) == 23)
+	 	assert(sequence.elementAt(1) == 212)
+	 	assert(sequence.elementAt(2) == 97)
+	 end
+	 
+	/**
+	 * Passes each element of the collection to rejector. 
+	 * returns a Collection for all elements for which rejector is false
+	 * (follows select test!)
+	 */
+	operation testReject() : Void is do
+		var sequence : kermeta::standard::Sequence<Integer>
+		
+		init_set := fillSet
+		sequence := init_set.reject { e | e < 0}
+		
+	 	assert(sequence.size == 3)
+	 	assert(sequence.elementAt(0) == 23)
+	 	assert(sequence.elementAt(1) == 212)
+	 	assert(sequence.elementAt(2) == 97)
+	end
+
+	operation fillSet() : kermeta::standard::Set<Integer> is do
+	 	init_set := kermeta::standard::Set<Integer>.new
+
+	 	init_set.add(23)
+	 	init_set.add(-22)
+	 	init_set.add(212)
+	 	init_set.add(-2)
+	 	init_set.add(97)
+	 	// eer
+	 	result := init_set
+	end
+        
+
+}
