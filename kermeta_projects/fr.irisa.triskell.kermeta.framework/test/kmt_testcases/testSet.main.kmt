@@ -7,7 +7,7 @@ require "../../src/kermeta/Standard.kmt"
 require "../../src/kermeta/test/unittest.kmt"
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: testSet.main.kmt,v 1.1 2005-04-18 10:43:50 zdrey Exp $
+ * $Id: testSet.main.kmt,v 1.2 2005-04-18 11:48:28 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -61,7 +61,7 @@ class TestIterator inherits kermeta::unittest::TestCase
 		aset := kermeta::standard::Set<Integer>.new
 		aset.add(31)
 		aset.add(13)
-		aset.remove(1)
+		aset.remove(13)
 		assert(aset.size == 1)
 		assert(aset.one == 31)
 	end
@@ -106,7 +106,7 @@ class TestIterator inherits kermeta::unittest::TestCase
 		init_set.add(32)
 		init_set.add(23)
 		assert(init_set.contains(32) == true)
-		init_set.remove(2)
+		init_set.remove(32)
 		assert(init_set.contains(32) == false)
 		
 	end
@@ -234,6 +234,43 @@ class TestIterator inherits kermeta::unittest::TestCase
 	 	// eer
 	 	result := init_set
 	end
-        
+	
+	/**
+	 * Test that Set does not contain duplicate elements
+	*/
+	operation testUnicityOfSet() : Void is do
+	
+	 	init_set := kermeta::standard::Set<Integer>.new
 
+	 	init_set.add(23)
+	 	init_set.add(-22)
+	 	init_set.add(23)
+	 	init_set.add(23)
+	 	
+	 	assert(init_set.size == 2)
+	 	assert(init_set.one == 23)
+	 	init_set.remove(23)
+	 	assert(init_set.one == -22)
+	end
+	
+	/**
+	 * Test that Bag can contain duplicate elements
+	*/
+	
+	operation testNotUnicityOfBag() : Void is do
+		var init_bag : kermeta::standard::Bag<Integer>
+	 	init_bag := kermeta::standard::Bag<Integer>.new
+
+	 	init_bag.add(23)
+	 	init_bag.add(-22)
+	 	init_bag.add(23)
+	 	init_bag.add(23)
+	 	// are 23 added 3 times?
+	 	assert(init_bag.size == 4)
+	 	init_bag.remove(23)
+	 	// is 23 still there? TODO : separate this test in two tests??
+	 	assert(init_set.contains(23) == true)
+	 	
+	end
+	
 }
