@@ -3239,4 +3239,77 @@
       </fOwnedOperation>
     </fOwnedTypeDefinition>
   </fNestedPackage>
+  <fNestedPackage fName="exceptions">
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Exception" fIsAbstract="true">
+      <fOwnedAttributes fName="name" fType="//@fNestedPackage.6/@fOwnedTypeDefinition.0/@fOwnedAttributes.0/@fContainedType.0" fIsOrdered="true" fUpper="1" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="message" fType="//@fNestedPackage.6/@fOwnedTypeDefinition.0/@fOwnedAttributes.1/@fContainedType.0" fIsOrdered="true" fUpper="1" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+      </fOwnedAttributes>
+      <fOwnedOperation fName="print_trace" fType="//@fNestedPackage.6/@fOwnedTypeDefinition.0/@fOwnedOperation.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.4/@fOwnedTypeDefinition.1">
+          <fTypeParamBinding fVariable="//@fNestedPackage.4/@fOwnedTypeDefinition.1/@fTypeParameter.0" fType="//@fNestedPackage.6/@fOwnedTypeDefinition.0/@fOwnedOperation.0/@fContainedType.0/@fTypeParamBinding.0/@fContainedType.0">
+            <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.0"/>
+          </fTypeParamBinding>
+        </fContainedType>
+        <fBody xsi:type="kermeta_behavior:FBlock"/>
+      </fOwnedOperation>
+      <fOwnedOperation fName="print_message" fType="//@fNestedPackage.6/@fOwnedTypeDefinition.0/@fOwnedOperation.1/@fContainedType.0" fIsOrdered="true" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+        <fBody xsi:type="kermeta_behavior:FBlock"/>
+      </fOwnedOperation>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Error" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.1/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.0"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Warning" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.2/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.0"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="SystemExit" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.3/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.0"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="SyntaxError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.4/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.1"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="AttributeError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.5/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.1"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="EnumError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.6/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.1"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="VariableError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.7/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.1"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="AssertionError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.8/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.1"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="NotImplementedError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.9/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.1"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="TypeError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.10/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.1"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="ArithmeticError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.11/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.1"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="InfiniteRecursionError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.12/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.1"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="StackOverflowError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.13/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.1"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="DeprecateWarning" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.14/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.2"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="UnusedVariableWarning" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.15/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.2"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="ZeroDivisionError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.16/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.11"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="OverflowError" fSuperType="//@fNestedPackage.6/@fOwnedTypeDefinition.17/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.6/@fOwnedTypeDefinition.11"/>
+    </fOwnedTypeDefinition>
+  </fNestedPackage>
 </kermeta_structure:FPackage>

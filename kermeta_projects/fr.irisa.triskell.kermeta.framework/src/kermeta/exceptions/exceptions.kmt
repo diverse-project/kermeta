@@ -1,5 +1,5 @@
 package kermeta::exceptions;
-require "../kermeta.kmt"
+require "../Standard.kmt"
 using kermeta::standard
 using kermeta::utils
 /*****************************************************************************

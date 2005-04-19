@@ -15,3 +15,5 @@ require "utils/hashtable.kmt"
 require "utils/stack.kmt"
 
 require "io/std_io.kmt"
+
+require "exceptions/exceptions.kmt"
