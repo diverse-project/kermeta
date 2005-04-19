@@ -1,0 +1,140 @@
+/* $Id: JunitTestSuite.java,v 1.1 2005-04-19 08:55:26 ffleurey Exp $
+ * Project    : fr.irisa.triskell.kermeta.io
+ * File       : JunitTestSuite.java
+ * License    : GPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 janv. 2005
+ * Authors : 
+ *        	Franck FLEUREY (ffleurey@irisa.fr)
+ * Description : 
+ *        	Kermeta TestSuite for io project
+ * 			this file is partially generated using GenerateJUnitTestSuite. 
+ * 			Do not manually modify the generated part. 
+ */
+
+package kermeta_io.typechecker_test;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Iterator;
+
+import org.eclipse.emf.common.util.URI;
+
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
+import fr.irisa.triskell.kermeta.utils.UserDirURI;
+
+import junit.framework.TestCase;
+
+
+/**
+ * @author Franck Fleurey
+ * Kermeta TestSuite for io project
+ */
+public class JunitTestSuite extends TestCase {
+
+
+	public JunitTestSuite(String arg0) {
+		super(arg0);
+		
+		 // SET THE STD LIB
+	    KermetaUnit.STD_LIB_URI = "lib/framework.km";
+	    // INIT TYPE CHECKER
+	    TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
+		
+	}
+	
+	protected void setUp() throws Exception {
+		super.setUp();
+	}
+
+
+	protected void tearDown() throws Exception {
+		super.tearDown();
+	}
+	
+	// do not modify this comment
+
+
+/*** BEGIN GENERATED TESTS ***/
+public void testvalid_1_ClassSubTyping_1() throws Exception {
+testvalidFile("test/typechecher_tests/valid","1_ClassSubTyping_1.kmt" );
+}
+
+public void testvalid_2_ClassSubTypingWithGenerics() throws Exception {
+testvalidFile("test/typechecher_tests/valid","2_ClassSubTypingWithGenerics.kmt" );
+}
+
+public void testvalid_ClassSubTypingWithGenericOperations() throws Exception {
+testvalidFile("test/typechecher_tests/valid","ClassSubTypingWithGenericOperations.kmt" );
+}
+
+public void testinvalid_1_ClassSubTyping_1() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","1_ClassSubTyping_1.kmt" );
+}
+
+public void testinvalid_2_ClassSubTypingWithGenerics() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","2_ClassSubTypingWithGenerics.kmt" );
+}
+
+/*** END GENERATED TESTS ***/
+	// do not modify this comment
+	
+	
+	public void testvalidFile(String dir, String file) throws Exception {
+	    
+	    KermetaUnitFactory.getDefaultLoader().unloadAll();
+
+	    // LOAD THE UNIT
+	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
+		try {
+		builder.load();
+		} catch(Exception e ) {if (builder.getError().size() == 0) throw e;};
+		
+		if (builder.getAllErrors().size() > 0) {
+			assertTrue(builder.getAllMessagesAsString(), false);
+		}
+		
+		KermetaTypeChecker tc = new KermetaTypeChecker(builder);
+	    
+		tc.checkUnit();
+		
+		if (builder.getAllErrors().size() > 0) {
+			assertTrue(builder.getAllMessagesAsString(), false);
+		}
+	}
+	
+	public void testinvalidFile(String dir, String file) throws Exception {
+	    
+	    KermetaUnitFactory.getDefaultLoader().unloadAll();
+
+	    // LOAD THE UNIT
+	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
+		try {
+		builder.load();
+		} catch(Exception e ) {if (builder.getError().size() == 0) throw e;};
+		
+		if (builder.getAllErrors().size() > 0) {
+			assertTrue(builder.getAllMessagesAsString(), false);
+		}
+		
+		KermetaTypeChecker tc = new KermetaTypeChecker(builder);
+	    
+		tc.checkUnit();
+		
+		if (tc.correctOperation.size() != 0) {
+		    String message = "Type error not found in operations :";
+		    for (int i=0; i<tc.correctOperation.size(); i++) {
+		        message += " " + tc.correctOperation.get(i);
+		    }
+		    assertTrue(message, false);
+		}
+	}
+}
