@@ -1,3 +1,4 @@
+// $Id: primitive_types.kmt,v 1.6 2005-04-19 17:16:44 zdrey Exp $
 package kermeta::standard;
 
 //require "../Standard.kmt"
@@ -112,7 +113,7 @@ abstract class Numeric inherits Comparable, ValueType
 	 * Comparaison between two numerics
 	 */
 	method compareTo(other : Self) : Integer is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Numeric.compareTo(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Numeric.compareTo(self, other)
 	end
 	
 	/**
@@ -236,7 +237,7 @@ class Character inherits ValueType, Comparable
 	 * Comparaison
 	 */
 	method compareTo(other : Self) : Integer is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.compareTo(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.compareTo(self,other)
 	end
 }
 
@@ -250,28 +251,28 @@ class String inherits ValueType, Comparable
 	 * Comparaison
 	 */
 	method compareTo(other : Self) : Integer is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self,other)
 	end
 	
 	/**
 	 * returns a new string self + other
 	 */
 	operation plus(other : String) : String is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.plus(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.plus(self,other)
 	end
 	
 	/**
 	 * Appends other at the end of self
 	 */
 	operation append(other : String) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(other)
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self,other)
 	end
 	
 	/**
 	 * returns the character at index in the String
 	 */
 	operation elementAt(index : Integer) : Character is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.elementAt(index)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.elementAt(self,index)
 	end
 	
 	/**
@@ -279,18 +280,19 @@ class String inherits ValueType, Comparable
 	 * occurrence of the specified substring
 	 */
 	operation indexOf(str : String) : Integer is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.indexOf(str)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.indexOf(self,str)
 	end
+	
 	
 	/**
 	 * returns a new string that is a substring of this string
 	 */
 	operation subString(index : Integer, length : Integer) : String is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.subString(index, length)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.subString(self,index, length)
 	end
 	
 	operation size() : Integer is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.size()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.size(self)
 	end
 }
 
