@@ -19,14 +19,16 @@ abstract class Test
 	
 	@assert "assert raise an AssertError"
 	operation assert(bool : kermeta::standard::Boolean) : Void is do
-		if (bool == false) then
+		if bool then
 			// when exceptions work, we can replace instruction by this one :
 //			raise kermeta::exceptions::AssertionError.new
 			stdio.writeln("AssertionError")
+		else
+			stdio.writeln("Tout va bien!")
 		end
+
 	end
 
-	
 }
  
 @TestSuite "A test suite is meant as executing automatically a suite of test cases"
