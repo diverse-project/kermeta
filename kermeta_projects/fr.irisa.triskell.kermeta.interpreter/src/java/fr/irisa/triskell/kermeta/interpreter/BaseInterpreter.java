@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.17 2005-04-18 09:09:38 dvojtise Exp $
+/* $Id: BaseInterpreter.java,v 1.18 2005-04-19 15:58:48 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -88,18 +88,6 @@ public class BaseInterpreter extends KermetaVisitor {
     {
         interpreterContext = pContext;
         unit = pUnit;
-    }
-    
-    /**
-     * The main method that is called on a RuntimeObject to evaluate it.
-     * It uses : 
-     * - createCommand : to create the command that is dedicated to the execution of this object
-     * - executeCommand : execute the command (method delegator)
-     * @param kObject the RuntimeObject/EObject? to evaluate
-     */
-    public RuntimeObject evaluate(EObject object)
-    {
-        return null;
     }
 
     /**
@@ -286,7 +274,7 @@ public class BaseInterpreter extends KermetaVisitor {
         FExpression cond = node.getFCondition();
 
         // Object should be a Boolean
-        RuntimeObject cond_result = this.evaluate(cond);
+        RuntimeObject cond_result = (RuntimeObject)this.accept(cond);
         String value = null;
         // Get boolean value
         if (cond_result.getProperties().containsKey("singleton instance"))
@@ -327,33 +315,7 @@ public class BaseInterpreter extends KermetaVisitor {
         
 	    do
 	    {
-/*	    	//	    	TO DEBUG STACK
-	        ExpressionContext context = null;
-	        int stackSize = this.interpreterContext.getFrameStack().size();
-	        int i=stackSize;
-	        CallFrame frame;
-	        while (i>0) {
-	        	System.out.println("CallFrame "+i);
-	            frame = (CallFrame)interpreterContext.getFrameStack().get(i-1);
-	            int blockStackSize = frame.getBlockStack().size();
-	            int j = blockStackSize;
-	            while (j>0) 
-	            {
-	            	System.out.println("ExpressionFrame "+j);
-	                context = (ExpressionContext)frame.getBlockStack().get(j-1);
-	                Iterator it=context.getVariables().keySet().iterator();
-	                while (it.hasNext())
-	                {
-	                	String key=(String)it.next();
-	                    System.out.println(key+" : "+context.getVariables().get(key));
-	                }
-	                j--;
-	            }
-	            i--;
-	        }
-	        //TO DEBUG STACK */
-	    	
-		    RuntimeObject cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
+	        RuntimeObject cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
 	        // Get boolean value
 	        if (cond_result.getProperties().containsKey("singleton instance"))
 	            value = (String)cond_result.getProperties().get("singleton instance");
