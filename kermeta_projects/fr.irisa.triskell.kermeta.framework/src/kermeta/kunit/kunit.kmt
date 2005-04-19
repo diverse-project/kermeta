@@ -3,7 +3,7 @@ package kermeta::kunit;
 require "../Standard.kmt"
 //require "../../../src/kermeta/standard/exceptions.kmt"
 /***************************************************
- * Franck FLEUREY - 14/02/2005
+ * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
  * Distributed under the terms of the GPL licence
@@ -36,7 +36,9 @@ class TestSuite inherits Test
 
 	//@addTest "add a test case in the suite of tests to run"
 	operation addTest(test : Test) is do
-		// TODO : implement it
+		if (self.tests == Void) then
+			self.tests := kermeta::standard::Set<Test>.new
+		end
 		self.tests.add(test)
 	end
 
