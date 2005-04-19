@@ -6,6 +6,8 @@
 package fr.irisa.triskell.kermeta.loader.km;
 
 
+import java.util.Hashtable;
+
 import fr.irisa.triskell.kermeta.loader.KermetaLoaderModule;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
@@ -27,7 +29,8 @@ public class KMLoaderModuleMCore extends KermetaLoaderModule {
 
    
 
-	public KermetaUnit createKermetaUnit(String uri) {
-		return new KMUnit(uri);
+	public KermetaUnit createKermetaUnit(String uri, Hashtable packages) {
+	    KermetaUnit.internalLog.debug("KMLoaderModuleMCore.createKermetaUnit " + uri);
+		return new KMUnit(uri, packages);
 	}
 }

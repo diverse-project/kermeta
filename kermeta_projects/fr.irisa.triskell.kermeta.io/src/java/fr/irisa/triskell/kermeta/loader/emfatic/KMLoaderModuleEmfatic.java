@@ -5,6 +5,8 @@
  */
 package fr.irisa.triskell.kermeta.loader.emfatic;
 
+import java.util.Hashtable;
+
 import fr.irisa.triskell.kermeta.loader.KermetaLoaderModule;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
@@ -18,7 +20,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  */
 public class KMLoaderModuleEmfatic extends KermetaLoaderModule {
 
-	public KermetaUnit createKermetaUnit(String uri) {
-		return new EmfaticUnit(uri);
+	public KermetaUnit createKermetaUnit(String uri, Hashtable packages) {
+		return new EmfaticUnit(uri, packages);
 	}
 }

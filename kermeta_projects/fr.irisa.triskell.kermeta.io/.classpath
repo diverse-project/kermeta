@@ -6,10 +6,11 @@
 	<classpathentry exported="true" kind="lib" path="lib/thirdparty/emfatic-core.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/thirdparty/junit.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/thirdparty/ldt-core.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/model_kermeta.jar"/>
+	<classpathentry exported="true" sourcepath="/fr.irisa.triskell.kermeta.model/src/java" kind="lib" path="lib/model_kermeta.jar"/>
 	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="src" path="test/junit"/>
 	<classpathentry kind="src" path="/fr.irisa.triskell.kermeta.model"/>
 	<classpathentry kind="src" path="/fr.irisa.triskell.kermeta.framework"/>
+	<classpathentry kind="lib" path="lib/thirdparty/log4j.jar"/>
 	<classpathentry kind="output" path="build/class"/>
 </classpath>

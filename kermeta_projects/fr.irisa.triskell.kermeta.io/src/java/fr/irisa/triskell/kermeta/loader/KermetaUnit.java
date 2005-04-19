@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.14 2005-04-14 14:15:31 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.15 2005-04-19 08:46:39 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -28,6 +28,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -35,12 +36,12 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import com.ibm.eclipse.emfatic.core.ast.ClassMemberDecl;
 
 import fr.irisa.triskell.kermeta.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.structure.FClass;
@@ -69,29 +70,31 @@ import fr.irisa.triskell.kermeta.utils.UserDirURI;
 public abstract class KermetaUnit {
 	
     final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaUnit");
-	public static String STD_LIB_URI = null;
+	
+    public static String STD_LIB_URI = null;
 	public static String ROOT_CLASS_QNAME = "kermeta::structure::Object";
 	
-	private static StandardKermetaUnit std_lib = null;
+	private static KermetaUnit std_lib = null;
 	
-	public static StandardKermetaUnit getStdLib() {
+	public static KermetaUnit getStdLib() {
 		if (std_lib == null) {
-			std_lib = new StandardKermetaUnit();
+			std_lib = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(STD_LIB_URI);
+			
 			try {
-				std_lib = new StandardKermetaUnit();
 				std_lib.load();
 			}
 			catch(Throwable e) {
 				std_lib.error.add(new KMUnitError("Exception while importing the standartd library : " + e, null));
-				e.printStackTrace();
+				internalLog.error("Exception while importing the standartd library", e);
 			}
 		}
 		return std_lib;
 	}
 	
 	
-	public KermetaUnit(String uri) {
+	public KermetaUnit(String uri, Hashtable packages) {
 		this.uri = uri;
+		this.packages = packages;
 		struct_factory = StructurePackageImpl.init().getStructureFactory();
 		behav_factory = BehaviorPackageImpl.init().getBehaviorFactory();
 		
@@ -99,11 +102,12 @@ public abstract class KermetaUnit {
 		
 		interpreter_symbols.put("stdio", new KMSymbolInterpreterVariable("stdio"));
 		
-		importStdlib();
+		
 	}
 	
 	protected void importStdlib() {
-		if (STD_LIB_URI != null) importedUnits.add(getStdLib());
+		if (STD_LIB_URI != null && this != std_lib) importedUnits.add(getStdLib());
+		System.out.println("importStdlib " + this + " != " + std_lib);
 	}
 
 	
@@ -218,7 +222,16 @@ public abstract class KermetaUnit {
 	
 	public String getMessagesAsString() {
 		String result = "";
-		Iterator it = error.iterator();
+		Iterator it = getError().iterator();
+		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
+		it = warning.iterator();
+		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
+		return result;
+	}
+	
+	public String getAllMessagesAsString() {
+		String result = "";
+		Iterator it = getAllErrors().iterator();
 		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
 		it = warning.iterator();
 		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
@@ -253,7 +266,7 @@ public abstract class KermetaUnit {
 	 * returns null if type not found
 	 */
 	public FTypeDefinition typeDefinitionLookup(String fully_qualified_name) {
-	//	System.out.println("typeDefinitionLookup " + uri + " " +fully_qualified_name);
+		//System.out.println("typeDefinitionLookup " + uri + " " +fully_qualified_name);
 		FTypeDefinition result = (FTypeDefinition)typeDefs.get(fully_qualified_name);
 		if (result == null) {
 			visited = true;
@@ -264,6 +277,7 @@ public abstract class KermetaUnit {
 		    }
 		    visited = false;
 		}
+		//System.out.println("typeDefinitionLookup " + uri + " " +fully_qualified_name + " -> " + result);
 		return result;
 	}
 	
@@ -275,12 +289,14 @@ public abstract class KermetaUnit {
 	 * returns null if type not found
 	 */
 	public FTypeDefinition getTypeDefinitionByName(String name) {
+	    //System.out.println("\nXXXXXX   getTypeDefinitionByName " + name + "" );
 		FTypeDefinition result = typeDefinitionLookup(name);
 		if (result == null && current_package != null) result = typeDefinitionLookup(getQualifiedName(current_package) + "::" + name);
 		if (result == null) result = typeDefinitionLookup(getQualifiedName(rootPackage) + "::" + name);
 		for(int i=0; i<usings.size() && result == null; i++) {
 			result = typeDefinitionLookup(usings.get(i) + "::" + name);
 		}
+		//System.out.println("XXXXXX   getTypeDefinitionByName " + name + " -> " +result);
 		return result;
 	}
 	
@@ -333,7 +349,7 @@ public abstract class KermetaUnit {
 		else {
 			KermetaUnit unit;
 			// This is a normal behavior
-			unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri);
+			unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri, packages);
 			if (unit.error.size() > 0) {
 				error.add(new KMUnitError("Errors in imported model " + str_uri + " : \n" +  ((KMUnitMessage)unit.error.get(0)).getMessage(), null));
 			}
@@ -543,6 +559,27 @@ public abstract class KermetaUnit {
 		pp.ppPackage(rootPackage, new File(file_name));
 	}
 	
+	
+	public void saveAllAsKM(String file_path) {
+	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());
+	    ResourceSet resource_set = new ResourceSetImpl();
+	    Resource resource = resource_set.createResource(URI.createFileURI(file_path));
+	    Iterator it = packages.values().iterator();
+	    while(it.hasNext()) {
+	        FPackage p = (FPackage)it.next();
+	        if (p.eResource() == null) {
+	            fixTypeContainement(p);
+	            resource.getContents().add(p);
+	        }
+	    }
+	    try {
+			resource.save(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			throw new Error(e);
+		}
+	}
+	
 	/**
 	 * Save Kermeta model
 	 * @param directory
@@ -563,7 +600,7 @@ public abstract class KermetaUnit {
 			ResourceSet resource_set = new ResourceSetImpl();
 			URI _uri=UserDirURI.createURI(file_name,null,true);
 			Resource resource = resource_set.createResource(_uri);
-			fixTypeContainement();
+			fixTypeContainement(rootPackage);
 			
 			if (rootPackage.eContainer() != null) {
 				
@@ -633,8 +670,8 @@ public abstract class KermetaUnit {
 	/**
 	 * Define a container for each element of the root package
 	 */
-	public void fixTypeContainement() {
-		TreeIterator it = rootPackage.eAllContents();
+	public void fixTypeContainement(FPackage p) {
+		TreeIterator it = p.eAllContents();
 		TypeContainementFixer fixer = new TypeContainementFixer();
 		while(it.hasNext()) {
 			FObject o = (FObject)it.next();
@@ -649,6 +686,7 @@ public abstract class KermetaUnit {
 	
 	public void load() {
 		//System.out.println("\nLOAD " + uri);
+	    importStdlib();
 		// load imported units
 		loadAllImportedUnits();
 		loadAllTypeDefinitions();
@@ -662,7 +700,7 @@ public abstract class KermetaUnit {
 	
 	
 	private void loadAllImportedUnits() {
-//		System.out.println("loadAllImportedUnits " + uri);
+		//System.out.println("loadAllImportedUnits " + uri);
 		if (doneLoadImportedUnits) return;
 		loading = true;
 		// load imported units
@@ -784,8 +822,34 @@ public abstract class KermetaUnit {
 	 * @return Returns the error.
 	 */
 	public ArrayList getError() {
-		return error;
+	    visited = true;
+	    ArrayList result = new ArrayList();
+	    result.addAll(error);
+	    for (int i=0; i<importedUnits.size(); i++) {
+	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+	        if (iu.visited) continue;
+	        if (iu.getError().size() != 0) {
+	            result.add(new KMUnitError("Error in imported unit " + iu.getUri(), null));
+	        }
+	    }
+	    visited = false;
+		return result;
 	}
+	
+	public ArrayList getAllErrors() {
+	    visited = true;
+	    ArrayList result = new ArrayList();
+	    result.addAll(error);
+	    for (int i=0; i<importedUnits.size(); i++) {
+	        
+	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+	        if (iu.visited) continue;
+	        result.addAll(iu.getAllErrors());
+	    }
+	    visited = false;
+		return result;
+	}
+	
 	/**
 	 * @return Returns the warning.
 	 */

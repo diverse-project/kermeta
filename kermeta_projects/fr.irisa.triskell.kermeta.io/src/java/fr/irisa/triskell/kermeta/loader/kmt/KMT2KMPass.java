@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.3 2005-04-05 15:07:22 zdrey Exp $
+/* $Id: KMT2KMPass.java,v 1.4 2005-04-19 08:46:42 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : GPL
@@ -87,7 +87,11 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 */
 	protected FPackage getOrCreatePackage(String qualified_name, KermetaASTNode node) {
 		FPackage result = builder.packageLookup(qualified_name);
-		if (result != null) return result;
+		
+		if (result != null) {
+		    if (builder.getModelElementByNode(node) == null) builder.storeTrace(result, node);
+		    return result;
+		}
 		if (qualified_name.indexOf("::")>=0) {
 			String name = qualified_name.substring(qualified_name.lastIndexOf("::") + 2);
 			String parent_name = qualified_name.substring(0, qualified_name.lastIndexOf("::"));

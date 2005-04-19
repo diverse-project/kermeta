@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.12 2005-04-14 14:15:32 dvojtise Exp $
+/* $Id: KMTUnit.java,v 1.13 2005-04-19 08:46:42 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.Hashtable;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -44,8 +45,8 @@ public class KMTUnit extends KermetaUnit {
 	/**
 	 * 
 	 */
-	public KMTUnit(String uri) {
-		super(uri);
+	public KMTUnit(String uri, Hashtable packages) {
+		super(uri, packages);
 	}
 	
 	

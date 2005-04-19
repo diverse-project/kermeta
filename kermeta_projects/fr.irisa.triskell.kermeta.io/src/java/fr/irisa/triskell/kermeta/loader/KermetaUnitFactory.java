@@ -69,14 +69,18 @@ public class KermetaUnitFactory {
         kmPath = new Hashtable();
     }
     
+    public KermetaUnit createKermetaUnit(String uri) {
+        return createKermetaUnit(uri, new Hashtable());
+    }
+    
     /**
      * Create a kermeta unit (without loading it?)
      * @param uri
      * @return
      */
-    public KermetaUnit createKermetaUnit(String uri) {
+    public KermetaUnit createKermetaUnit(String uri, Hashtable packages) {
     	
-        KermetaUnit.internalLog.info("ASK UNIT " + uri);
+        KermetaUnit.internalLog.debug("ASK UNIT " + uri);
     	
     	// TODO : reslove URI if it is not
     	KermetaUnit result = null;
@@ -95,7 +99,7 @@ public class KermetaUnitFactory {
     	// return the unit if it already exists
     	if (loadedUnits.containsKey(u.toString())) return (KermetaUnit)loadedUnits.get(u.toString());
     	
-    	KermetaUnit.internalLog.info("CREATE UNIT " + u.toString());
+    	KermetaUnit.internalLog.debug("CREATE UNIT " + u.toString());
     	
     	// Create the appropriate Unit using the loader registerered for the file extension
     	
@@ -108,7 +112,7 @@ public class KermetaUnitFactory {
         	//result.error.add(new KMUnitError("Unable to load resource " + uri + " : no loader registered.", null));
         	//return result;
         }
-        result = loader.createKermetaUnit(u.toString());
+        result = loader.createKermetaUnit(u.toString(), packages);
         loadedUnits.put(u.toString(), result);
     	return result;
     }

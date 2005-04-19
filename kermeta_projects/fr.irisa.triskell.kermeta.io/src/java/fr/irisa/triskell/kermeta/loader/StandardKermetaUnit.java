@@ -5,9 +5,13 @@
 package fr.irisa.triskell.kermeta.loader;
 
 
+import java.util.Hashtable;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+
+import com.sun.rsasign.p;
 
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
@@ -23,13 +27,13 @@ public class StandardKermetaUnit extends KMTUnit {
 	/**
 	 * @param importStdLib
 	 */
-	public StandardKermetaUnit() {
-		super(KermetaUnit.STD_LIB_URI);
+	public StandardKermetaUnit(Hashtable packages) {
+		super(KermetaUnit.STD_LIB_URI, packages);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public StandardKermetaUnit(String uri) {
-		super(uri);
+	public StandardKermetaUnit(String uri, Hashtable packages) {
+		super(uri, packages);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -58,7 +62,7 @@ public class StandardKermetaUnit extends KMTUnit {
 		else {
 			KermetaUnit unit;
 			//unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri, new StandardKermetaUnit());
-			unit =  new StandardKermetaUnit(str_uri);
+			unit =  new StandardKermetaUnit(str_uri, packages);
 			if (unit.error.size() > 0) {
 				error.add(new KMUnitError("Errors in imported model " + str_uri + " : \n" +  ((KMUnitMessage)unit.error.get(0)).getMessage(), null));
 			}

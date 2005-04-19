@@ -1,4 +1,4 @@
-/* $Id: EmfaticUnit.java,v 1.2 2005-03-02 17:31:31 zdrey Exp $
+/* $Id: EmfaticUnit.java,v 1.3 2005-04-19 08:46:43 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : EmfaticUnit.java
  * License : GPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kermeta.loader.emfatic;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Hashtable;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -36,8 +37,8 @@ public class EmfaticUnit extends KermetaUnit {
 	/**
 	 * @param uri
 	 */
-	public EmfaticUnit(String uri) {
-		super(uri);
+	public EmfaticUnit(String uri, Hashtable packages) {
+		super(uri, packages);
 		// TODO Auto-generated constructor stub
 	}
 	

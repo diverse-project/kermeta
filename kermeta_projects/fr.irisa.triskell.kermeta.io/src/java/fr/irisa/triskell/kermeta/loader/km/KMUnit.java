@@ -4,6 +4,7 @@
  */
 package fr.irisa.triskell.kermeta.loader.km;
 
+import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.URI;
@@ -26,8 +27,8 @@ public class KMUnit extends KermetaUnit {
 	/**
 	 * @param uri
 	 */
-	public KMUnit(String uri) {
-		super(uri);
+	public KMUnit(String uri, Hashtable packages) {
+		super(uri, packages);
 		// TODO Auto-generated constructor stub
 	}
 

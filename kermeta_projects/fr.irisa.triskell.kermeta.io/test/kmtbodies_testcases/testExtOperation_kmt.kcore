@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kermeta_structure:FPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_behavior="http://kermeta_behavior/kermeta.ecore" xmlns:kermeta_structure="http://kermeta_structure/kermeta.ecore" fName="testExtOperation">
+  <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="String"/>
+  <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Integer"/>
+  <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Boolean"/>
+  <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Class1">
+    <fOwnedOperation fName="operation1" fType="//@fOwnedTypeDefinition.3/@fOwnedOperation.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fOwnedTypeDefinition.0"/>
+      <fBody xsi:type="kermeta_behavior:FAssignement">
+        <fTarget xsi:type="kermeta_behavior:FCallResult" fName="result"/>
+        <fValue xsi:type="kermeta_behavior:FIntegerLiteral" fValue="1"/>
+      </fBody>
+    </fOwnedOperation>
+    <fOwnedOperation fName="operation2" fType="//@fOwnedTypeDefinition.3/@fOwnedOperation.1/@fContainedType.0" fIsOrdered="true" fUpper="1">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fOwnedTypeDefinition.0"/>
+      <fBody xsi:type="kermeta_behavior:FBlock"/>
+    </fOwnedOperation>
+  </fOwnedTypeDefinition>
+  <fNestedPackage fName="toto"/>
+</kermeta_structure:FPackage>

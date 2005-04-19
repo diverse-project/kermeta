@@ -5,6 +5,8 @@
  */
 package fr.irisa.triskell.kermeta.loader;
 
+import java.util.Hashtable;
+
 /**
  * @author Franck Fleurey
  * IRISA / University of Rennes 1 (France)
@@ -28,6 +30,6 @@ public abstract class KermetaLoaderModule {
      * @param uri
      * @return
      */
-    public abstract KermetaUnit createKermetaUnit(String uri);
+    public abstract KermetaUnit createKermetaUnit(String uri, Hashtable packages);
 
 }

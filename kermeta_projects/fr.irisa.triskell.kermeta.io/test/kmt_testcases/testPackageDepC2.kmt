@@ -5,7 +5,7 @@ require "testPackageDepD2.kmt"
 package toto {
 
 	class C {
-		attribut c : C
+		attribut c : D
 	}
 
 }
