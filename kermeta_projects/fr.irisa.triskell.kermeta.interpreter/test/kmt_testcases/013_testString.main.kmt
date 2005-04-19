@@ -1,0 +1,110 @@
+@testOperation ""
+@mainClass "testString::TestString"
+@mainOperation "main_operation"
+
+package testString;
+
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+// Testing the operations on a String : 
+//
+class TestString inherits kermeta::kunit::Test {
+ 
+    // Main operation that calls all the below ones
+    operation main_operation() : kermeta::standard::String is do
+		stdio.write("toto")
+    end
+    
+    // throws an exception : == does not seem to work
+    // error! more than failure
+/*    operation testfailCompareTo() : Void is do
+    	var comp : kermeta::standard::Integer
+    	comp := "String".compareTo("String")
+    	assert(comp==0)
+    	comp := "String".compareTo("Strong")
+    	assert(comp==1) // FIXME au pif
+    	comp := "String".compareTo("Strin")
+    	assert(comp==1) // FIXME au pif
+    end
+*/    
+    operation testCompareTo() : Void is do
+    	var comp : kermeta::standard::Integer
+    	comp := "String".compareTo("String")
+    	stdio.write(comp)
+/*    	assert(comp.equals(0))
+    	comp := "String".compareTo("Strong")
+    	assert(comp.equals(1)) // FIXME au pif
+    	comp := "String".compareTo("Strin")
+    	assert(comp.equals(1)) // FIXME au pif*/
+    end
+
+    // Plus : "string1"+"string2"
+    operation testplus() : kermeta::standard::String is do 
+    	var v1 : kermeta::standard::String init "Prepend"
+//    	result := v1 + "_Append" // "+" does not work
+    	stdio.write(result)
+    	assert(result.compareTo("Prepend_Append")==0)
+    end
+    
+    // Plus again : 
+    operation testplus_literal() : kermeta::standard::String is do
+        var v1 : kermeta::standard::String init "Prependwithplus"
+    	result := v1.plus("_Append")
+    	stdio.write(result)
+    	assert(result.compareTo("Prependwithplus_Append")==0)
+    end
+
+	// test the not-identity 
+/*	operation  testfailop_equals() : kermeta::standard::Boolean is do 
+        result := "toto".equals("titi")
+       	assert(not(result))
+    end
+    
+    // test the identity 
+	operation  testop_equals() : kermeta::standard::Boolean is do 
+        result := "titi".equals("titi")
+        assert(result)
+	end
+	*/
+	
+	/**
+	 * Appends other at the end of self
+	 */
+	operation testappend() : Void is do
+		var str : kermeta::standard::String init "titi"
+		str.append("toto")
+		stdio.write(str)
+		assert("titi".append("toto").compareTo("tititoto")==0)
+	end
+	
+	/**
+	 * returns the character at index in the String
+	 */
+	operation testelementAt() : Void is do
+		assert("abcd".elementAt(3).compareTo("c")==0)
+	end
+	
+	/**
+	 * returns the index within this string of the first 
+	 * occurrence of the specified substring
+	 */
+	operation testindexOf() : Void is do
+		assert("bonjour".indexOf("jou")==3)
+	end
+	
+	
+	/**
+	 * returns a new string that is a substring of this string
+	 */
+	operation testsubString() : Void is do
+		stdio.write("bonjour".substring(1, 4))
+		assert("bonjour".substring(1, 4)=="onjo")
+	end
+	
+	operation testsize() : kermeta::standard::Integer is do
+		assert("BlaBleBli".size == 9)
+	end
+	
+
+
+}
