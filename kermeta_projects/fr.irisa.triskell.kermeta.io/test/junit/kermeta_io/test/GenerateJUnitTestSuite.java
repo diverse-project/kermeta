@@ -53,6 +53,7 @@ public class GenerateJUnitTestSuite {
 			FileWriter w = new FileWriter(junitfile);
 			w.write(result);
 			w.close();
+			System.out.println("successfully generated " + junitfile + "\n");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
