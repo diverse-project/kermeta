@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.18 2005-04-19 15:58:48 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.19 2005-04-20 09:36:40 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -23,12 +23,15 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 
+import junit.framework.AssertionFailedError;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 
 import fr.irisa.triskell.kermeta.ast.FSelfCall;
 import fr.irisa.triskell.kermeta.behavior.*;
+import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.structure.*;
 
@@ -465,8 +468,9 @@ public class BaseInterpreter extends KermetaVisitor {
 		        t_target = var.getType();
 		    }
 		    else
-		    {
-		    	// TODO : raise an interpretation exception 
+		    { 
+		        internalLog.error("Cannot call variable "+var_name+"; Cause: Context is null for the variable  => Throwing KermetaInterpreterError !!!");
+				throw	new KermetaInterpreterError("Cannot call variable; Context is null for variable "+var_name   );
 		    }
 		    
 		}
@@ -608,8 +612,20 @@ public class BaseInterpreter extends KermetaVisitor {
             internalLog.error("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
 			throw	new KermetaVisitorError("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
         } catch (InvocationTargetException e2) {
-            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
-			throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
+            Throwable cause = e2.getCause();
+		    if (cause != null)				       
+		        if (cause.getClass().getName().compareTo("junit.framework.AssertionFailedError")==0)
+			    {
+		            internalLog.error(e2.getClass().getName() + " invoking "+ jmethodName + " on Class " +jclassName + " was due to AssertionFailedError: Shrinking the Exception Stack ");					       
+		            // this Exception was due to a KermetaVisitorError create a new one with the precedent content
+		            throw new KermetaVisitorError("InvocationTargetException caused by AssertionError: "+cause.getMessage(), cause);
+		        }
+		        else
+		        {
+		            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+					throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
+		        }
+            
         } catch (InstantiationException e2) {
             internalLog.error("InstantiationException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
 			throw	new KermetaVisitorError("InstantiationException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
