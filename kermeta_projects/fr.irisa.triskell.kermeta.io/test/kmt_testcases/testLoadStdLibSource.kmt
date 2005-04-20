@@ -1,0 +1,19 @@
+package testBlocksSequence;
+
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+class String {}
+class Integer {}
+class Boolean {}
+
+/**
+ * Test : a sequence of blocks
+*/
+class Class1 {
+	
+	operation operation1() is do
+		// call an op on object
+		getMetaClass()
+	end
+	
+}

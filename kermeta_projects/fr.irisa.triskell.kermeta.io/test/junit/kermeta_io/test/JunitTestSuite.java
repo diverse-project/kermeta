@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.12 2005-04-20 15:21:07 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.13 2005-04-20 16:03:33 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -56,11 +56,6 @@ public class JunitTestSuite extends TestCase {
 	}
 	
 	// do not modify this comment
-
-
-
-
-
 
 /*** BEGIN GENERATED TESTS ***/
 public void testmetacore() throws Exception {
@@ -317,6 +312,10 @@ testWithFile("test/kmt_testcases","testPackageDepB2.kmt" );
 
 public void testtestPackageDepC2() throws Exception {
 testWithFile("test/kmt_testcases","testPackageDepC2.kmt" );
+}
+
+public void testtestLoadStdLibSource() throws Exception {
+testWithFile("test/kmt_testcases","testLoadStdLibSource.kmt" );
 }
 
 public void testtestOperationOnObject() throws Exception {

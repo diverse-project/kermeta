@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.16 2005-04-20 15:21:08 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.17 2005-04-20 16:03:43 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -509,10 +509,14 @@ public abstract class KermetaUnit {
 			result.add( ((FClass)scs.get(i)).getFClassDefinition() );
 		}
 		
+		// THIS LOOKS USELESS
+		/*
 		// Add the type Object which is implicilty a direct supertype of everything
 		FClassDefinition ObjectTypeDef = (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
-		if (ObjectTypeDef != null && cls != ObjectTypeDef && !result.contains(ObjectTypeDef))
-			result.add(ObjectTypeDef);
+		if (ObjectTypeDef != null && cls != ObjectTypeDef && !result.contains(ObjectTypeDef)) {
+			//result.add(ObjectTypeDef);
+		}
+		*/
 			
 		return (FClassDefinition[])result.toArray(new FClassDefinition[result.size()]);
 	}
