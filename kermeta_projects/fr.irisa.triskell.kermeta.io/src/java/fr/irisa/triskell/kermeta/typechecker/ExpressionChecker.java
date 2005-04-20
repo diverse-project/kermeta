@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.2 2005-04-20 15:21:04 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.3 2005-04-20 23:58:21 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -195,7 +195,7 @@ public class ExpressionChecker extends KermetaVisitor {
 					    provided.inferTypeVariableBinding(((SimpleType)required_params[i]).type, binding);
 					}
 					catch(TypeDoesNotMatchError e) {
-					    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+required_params[i]+", found "+provided+".", (KermetaASTNode)unit.getNodeByModelElement((FExpression)exp.getFParameters().get(i))));
+					    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+required_params[i]+", found "+provided+" (TypeDoesNotMatch).", (KermetaASTNode)unit.getNodeByModelElement((FExpression)exp.getFParameters().get(i))));
 					    error = true;
 					}
 			    }

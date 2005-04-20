@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.2 2005-04-20 15:21:05 ffleurey Exp $
+/* $Id: SimpleType.java,v 1.3 2005-04-20 23:58:21 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -143,7 +143,11 @@ public class SimpleType extends Type {
 	public Hashtable inferTypeVariableBinding(Type generic) {
 	    if (generic instanceof SimpleType) {
 	        FType g = ((SimpleType)generic).type;
-	        return TypeVariableInferer.inferTypeVariableTypes(g, type);
+	        try {
+                return TypeVariableInferer.inferTypeVariableTypes(g, type);
+            } catch (TypeDoesNotMatchError e) {
+                return null;
+            }
 	    }
 	    else {
 	        return null;

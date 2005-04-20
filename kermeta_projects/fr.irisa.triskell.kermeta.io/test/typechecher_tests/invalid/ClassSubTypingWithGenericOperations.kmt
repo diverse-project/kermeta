@@ -1,6 +1,6 @@
-/* $Id: ClassSubTypingWithGenericOperations.kmt,v 1.2 2005-04-20 23:58:24 ffleurey Exp $ */
+/* $Id: ClassSubTypingWithGenericOperations.kmt,v 1.1 2005-04-20 23:58:29 ffleurey Exp $ */
 
-// Simple subtyping test for simple 
+// Simple erros subtyping test for simple 
 // inheritance between two generic classes
 // and generic operations
 
@@ -15,18 +15,19 @@ class B<G> inherits A<G> {}
 class Test {
 
 	operation test1<T>(t : T) : T is do
-		var x : X
-		x := test1(X.new)
+		var y : Y
+		y := test1(X.new)
 	end
 	
 	operation test2<T>(t : T) : T is do
 		var a : A<Y> 
 		var b : B<Y> init B<Y>.new
-		a := test1(b)
+		b := test1(a)
 	end
 	
 	operation test3<T>(t : B<T>) : T is do
-		var a : A<T> init t
+		var a : B<X>
+		var y : Y init test3(a)
 	end
 
 }

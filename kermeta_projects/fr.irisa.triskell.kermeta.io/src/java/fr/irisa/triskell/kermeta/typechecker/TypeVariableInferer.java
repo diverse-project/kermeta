@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.2 2005-04-20 15:21:05 ffleurey Exp $
+/* $Id: TypeVariableInferer.java,v 1.3 2005-04-20 23:58:21 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableInferer.java
 * License : GPL
@@ -47,7 +47,7 @@ public class TypeVariableInferer extends KermetaVisitor {
 		
 		try {
 			TypeVariableInferer visitor = new TypeVariableInferer(provided, result);
-			result = (Hashtable)visitor.accept(generic);
+			visitor.accept(generic);
 		}
 		catch(TypeDoesNotMatchError e) {
 			result = null;
@@ -142,6 +142,9 @@ public class TypeVariableInferer extends KermetaVisitor {
 		    else {
 		        throw new TypeDoesNotMatchError();
 		    }
+		}
+		else {
+		    result.put(arg0, provided);
 		}
 		return null;
 	}

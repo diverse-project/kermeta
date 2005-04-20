@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.1 2005-04-19 08:55:16 ffleurey Exp $
+/* $Id: InheritanceSearch.java,v 1.2 2005-04-20 23:58:21 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : InheritanceSearchUtilities.java
 * License : GPL
@@ -45,6 +45,11 @@ public class InheritanceSearch {
 			for(int i=0; i<sts.size(); i++) {
 				if (!result.contains(sts.get(i))) result.add(sts.get(i));
 			}
+		}
+		// Add the type object which is implicitly a super type of every type
+		FClass object = (FClass)((SimpleType)TypeCheckerContext.ObjectType).type;
+		if (! TypeEqualityChecker.equals(c, object) && !result.contains(object)) {
+		    result.add(object);
 		}
 		return result;
 	}

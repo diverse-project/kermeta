@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.2 2005-04-20 15:21:03 ffleurey Exp $
+/* $Id: TypeConformanceChecker.java,v 1.3 2005-04-20 23:58:21 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -11,6 +11,8 @@
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
+
+import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
@@ -39,7 +41,15 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 		
 		if (provided instanceof FVoidType || provided == ((SimpleType)TypeCheckerContext.VoidType).type) return true;
 		
-		// TODO: ajouter "if required == Object return true"
+		
+		// RETURN TRUE IF THE REQUIRED TYPE IS OBJECT OR ANY OF IT SUPERTYPE
+		 FClass cobject = (FClass)((SimpleType)TypeCheckerContext.ObjectType).getType();
+		 if (TypeEqualityChecker.equals(cobject, required)) return true;
+		 Iterator it = cobject.getFClassDefinition().getFSuperType().iterator();
+		 while (it.hasNext()) {
+		     FClass c = (FClass)it.next();
+		     if (TypeEqualityChecker.equals(c, required)) return true;
+		 }
 		
 		// Transformation if provided is a type variable to the least derived type admissible
 		// for the variable.

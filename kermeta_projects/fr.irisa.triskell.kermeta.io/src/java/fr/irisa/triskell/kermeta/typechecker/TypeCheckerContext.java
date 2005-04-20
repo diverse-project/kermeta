@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.2 2005-04-20 15:21:03 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.3 2005-04-20 23:58:22 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : GPL
@@ -84,6 +84,7 @@ public class TypeCheckerContext {
 	
 	// The base types
 	protected static Type ObjectType;
+	//protected static Type ReflectionObject;
 	protected static Type ClassType;
 	protected static Type VoidType;
 	protected static Type IntegerType;
