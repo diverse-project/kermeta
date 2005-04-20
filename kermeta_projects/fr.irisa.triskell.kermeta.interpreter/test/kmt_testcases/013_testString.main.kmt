@@ -30,9 +30,9 @@ class TestString inherits kermeta::kunit::Test {
     operation testCompareTo() : Void is do
     	var comp : kermeta::standard::Integer
     	comp := "String".compareTo("String")
-    	stdio.write(comp)
-/*    	assert(comp.equals(0))
-    	comp := "String".compareTo("Strong")
+//    	stdio.write(comp)
+//    	assert(comp == 0)
+/*    	comp := "String".compareTo("Strong")
     	assert(comp.equals(1)) // FIXME au pif
     	comp := "String".compareTo("Strin")
     	assert(comp.equals(1)) // FIXME au pif*/
