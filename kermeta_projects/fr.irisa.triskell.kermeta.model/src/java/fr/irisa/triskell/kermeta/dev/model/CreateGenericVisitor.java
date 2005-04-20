@@ -1,4 +1,4 @@
-/* $Id: CreateGenericVisitor.java,v 1.4 2005-04-20 13:58:13 ffleurey Exp $
+/* $Id: CreateGenericVisitor.java,v 1.5 2005-04-20 19:54:42 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -17,6 +17,7 @@ package fr.irisa.triskell.kermeta.dev.model;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -160,6 +161,7 @@ public class CreateGenericVisitor {
 			classTemplate +="					result = m.invoke(this, params);\n";
 			classTemplate +="				}\n";
 			classTemplate +="				catch (Exception e) {\n";
+			classTemplate +="					if (e instanceof InvocationTargetException && ((InvocationTargetException)e).getTargetException() instanceof Error) throw (Error)((InvocationTargetException)e).getTargetException();\n";
 			classTemplate +="					Throwable cause = e.getCause();\n";
 			classTemplate +="					String message = \"Kermeta visitor \" + this.getClass().getName() +  \", error accepting a \" + cname + \" : \" + e.getMessage();\n";
 			classTemplate +="		    		if (cause != null)				   \n";    
