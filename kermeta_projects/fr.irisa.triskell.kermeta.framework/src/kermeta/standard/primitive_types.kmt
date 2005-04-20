@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.6 2005-04-19 17:16:44 zdrey Exp $
+// $Id: primitive_types.kmt,v 1.7 2005-04-20 14:42:36 zdrey Exp $
 package kermeta::standard;
 
 //require "../Standard.kmt"
@@ -83,14 +83,14 @@ class Boolean
 	 * return self and other
 	 */ 
 	operation ~and(other : Boolean) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~and(other)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~and(self, other)
 	end
 	
 	/**
 	 * return not self
 	 */ 
 	operation ~not() : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~not()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~not(self)
 	end
 	
 	/**
