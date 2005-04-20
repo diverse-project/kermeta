@@ -1,4 +1,4 @@
-/* $Id: CreateGenericVisitor.java,v 1.3 2005-04-20 12:35:05 dvojtise Exp $
+/* $Id: CreateGenericVisitor.java,v 1.4 2005-04-20 13:58:13 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -161,21 +161,22 @@ public class CreateGenericVisitor {
 			classTemplate +="				}\n";
 			classTemplate +="				catch (Exception e) {\n";
 			classTemplate +="					Throwable cause = e.getCause();\n";
+			classTemplate +="					String message = \"Kermeta visitor \" + this.getClass().getName() +  \", error accepting a \" + cname + \" : \" + e.getMessage();\n";
 			classTemplate +="		    		if (cause != null)				   \n";    
 			classTemplate +="		        		if (cause.getClass().getName().compareTo(\"fr.irisa.triskell.kermeta.error.KermetaVisitorError\")==0)\n";
 			classTemplate +="			    		{\n";
-			classTemplate +="		            		internalLog.error(e.getClass().getName() + \" invoking \"+ methodName + \" on Class \" +cname + \" was due to KermetaVisitorError: Shrinking the Exception Stack \");\n";					       
+			classTemplate +="		            		internalLog.error(message, e);\n";					       
 			classTemplate +="		            		// this Exception was due to a KermetaVisitorError create a new one with the precedent content\n";
-			classTemplate +="		            		throw new KermetaVisitorError(cause.getMessage(), cause.getCause());\n";
+			classTemplate +="		            		throw new KermetaVisitorError(message, cause.getCause());\n";
 			classTemplate +="		        		}\n";
 			classTemplate +="		        		else\n";
 			classTemplate +="		        		{\n";
-			classTemplate +="							internalLog.error(e.getClass().getName() + \" invoking \"+ methodName + \" on Class \" +cname + \" => Throwing KermetaVisitorError !!!\");\n";
+			classTemplate +="							internalLog.error(message, e);\n";
 			classTemplate +="							throw	new KermetaVisitorError(e.getClass().getName() + \" invoking \"+ methodName + \" on Class \" +cname  ,e);\n";
 			classTemplate +="						}\n";
 			classTemplate +="		        	else\n";
 			classTemplate +="		        	{\n";
-			classTemplate +="						internalLog.error(e.getClass().getName() + \" invoking \"+ methodName + \" on Class \" +cname + \" => Throwing KermetaVisitorError !!!\");\n";
+			classTemplate +="						internalLog.error(message, e);\n";
 			classTemplate +="						throw	new KermetaVisitorError(e.getClass().getName() + \" invoking \"+ methodName + \" on Class \" +cname  ,e);\n";
 			classTemplate +="					}\n";
 			classTemplate +="				}\n";
