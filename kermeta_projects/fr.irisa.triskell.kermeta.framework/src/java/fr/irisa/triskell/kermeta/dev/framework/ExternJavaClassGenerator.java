@@ -1,4 +1,4 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.6 2005-03-21 10:41:22 jpthibau Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.7 2005-04-20 13:33:32 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
  * License : GPL
@@ -55,7 +55,7 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 	}
 	
 	public void loadmodel() {
-		loadmodelfromfile("src/kermeta/kermeta.kmt");
+		loadmodelfromfile("src/kermeta/Standard.kmt");
 	}
 	
 	public void loadmodelfromfile(String kmt_filename) {
