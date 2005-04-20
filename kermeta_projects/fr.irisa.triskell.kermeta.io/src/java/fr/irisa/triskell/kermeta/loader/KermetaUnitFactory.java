@@ -5,6 +5,7 @@
  */
 package fr.irisa.triskell.kermeta.loader;
 
+import java.io.File;
 import java.util.Hashtable;
 
 
@@ -12,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
+import fr.irisa.triskell.kermeta.error.KermetaLoaderError;
 import fr.irisa.triskell.kermeta.loader.emfatic.KMLoaderModuleEmfatic;
 import fr.irisa.triskell.kermeta.loader.km.KMLoaderModuleMCore;
 import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
@@ -94,12 +96,25 @@ public class KermetaUnitFactory {
     		URIConverter c = new URIConverterImpl();
     		u = u.resolve(c.normalize(URI.createURI(".")));    			
     	}
-    	
+    	    	
     
     	// return the unit if it already exists
     	if (loadedUnits.containsKey(u.toString())) return (KermetaUnit)loadedUnits.get(u.toString());
     	
-    	KermetaUnit.internalLog.debug("CREATE UNIT " + u.toString());
+    	
+    	// check that the unit exist
+    	if (u.isFile()) // this is a local file URI
+    	{
+    	    File unitFile;
+    	    unitFile= new File(u.toFileString());
+	    	if (!unitFile.exists())
+	    	{
+	    	    KermetaLoaderError klerr = new KermetaLoaderError("Cannot create UNIT "+u + " (file not found)");
+	    	    KermetaUnit.internalLog.error("Cannot create UNIT "+u + " (file not found)", klerr);
+	    	    throw klerr;
+	    	}	
+	    }
+    	KermetaUnit.internalLog.info("CREATE UNIT " + u.toString());
     	
     	// Create the appropriate Unit using the loader registerered for the file extension
     	
@@ -108,7 +123,7 @@ public class KermetaUnitFactory {
         	loader = (KermetaLoaderModule)loadModules.get(u.fileExtension());
         if (loader == null) {
         	// TODO : generate an error
-            KermetaUnit.internalLog.error("TODO: manage this error : loader is null !");
+            KermetaUnit.internalLog.error("TODO: manage this error : loader is null for UNIT "+u);
         	//result.error.add(new KMUnitError("Unable to load resource " + uri + " : no loader registered.", null));
         	//return result;
         }
