@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.15 2005-04-19 08:46:39 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.16 2005-04-20 15:21:08 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -72,7 +72,7 @@ public abstract class KermetaUnit {
     final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaUnit");
 	
     public static String STD_LIB_URI = null;
-	public static String ROOT_CLASS_QNAME = "kermeta::structure::Object";
+	public static String ROOT_CLASS_QNAME = "kermeta::language::structure::Object";
 	
 	private static KermetaUnit std_lib = null;
 	
@@ -461,19 +461,15 @@ public abstract class KermetaUnit {
 	 * Get an operation by its name. search in the inheritance tree
 	 */
 	public FOperation findOperationByName(FClassDefinition c, String name) {
-		FOperation result = getOperationByName(c, name);
-		if (result != null) return result;
-		EList superclasses = c.getFSuperType();
-		for(int i=0; i<superclasses.size();i++) {
-			FClassDefinition sc = ((FClass)superclasses.get(i)).getFClassDefinition();
-			result = findOperationByName(sc, name);
-			if (result != null) return result;
-		}
-		if (result != null) {
-			if (typeDefinitionLookup(ROOT_CLASS_QNAME) != null && !getQualifiedName(c).equals(ROOT_CLASS_QNAME))
-				result = findOperationByName((FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME), name);
-		}
-		return result;
+		
+	    Iterator it = getAllOperations(c).iterator();
+	    while(it.hasNext()) {
+	        FOperation op = (FOperation)it.next();
+	        if (op.getFName().equals(name)) return op;
+	    }
+	    
+	    return null;
+	    
 	}
 	
 	/**
@@ -512,16 +508,40 @@ public abstract class KermetaUnit {
 		for(int i=0; i<scs.size(); i++) {
 			result.add( ((FClass)scs.get(i)).getFClassDefinition() );
 		}
-		// Add the type Object which is implicilty a direct supertype of everything
-		if (typeDefinitionLookup(ROOT_CLASS_QNAME) != null && !getQualifiedName(cls).equals(ROOT_CLASS_QNAME))
-			result.add(typeDefinitionLookup(ROOT_CLASS_QNAME));
-			
-			
 		
+		// Add the type Object which is implicilty a direct supertype of everything
+		FClassDefinition ObjectTypeDef = (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
+		if (ObjectTypeDef != null && cls != ObjectTypeDef && !result.contains(ObjectTypeDef))
+			result.add(ObjectTypeDef);
+			
 		return (FClassDefinition[])result.toArray(new FClassDefinition[result.size()]);
 	}
 	
 	public ArrayList getAllOperations(FClassDefinition cls) {
+		ArrayList result = new ArrayList();
+		
+		// Get the operations on object type :
+		FClassDefinition ObjectTypeDef = (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
+		if (ObjectTypeDef != null) {
+		    result.addAll(getAllOperationsOnRootType(ObjectTypeDef));
+		}
+		
+		Iterator it = cls.getFOwnedOperation().iterator();
+		while(it.hasNext()) {
+			FOperation op = (FOperation)it.next();
+			// only take operation. no methods
+			if (op.getFSuperOperation() == null && !result.contains(op)) result.add(op);
+		}
+		// search recursively in super classes
+		it = cls.getFSuperType().iterator();
+		while(it.hasNext()) {
+			result.addAll(getAllOperations(((FClass)it.next()).getFClassDefinition()));
+		}
+		return result;
+	}
+	
+	
+	private ArrayList getAllOperationsOnRootType(FClassDefinition cls) {
 		ArrayList result = new ArrayList();
 		Iterator it = cls.getFOwnedOperation().iterator();
 		while(it.hasNext()) {
@@ -532,9 +552,13 @@ public abstract class KermetaUnit {
 		// search recursively in super classes
 		it = cls.getFSuperType().iterator();
 		while(it.hasNext()) {
-			result.addAll(getAllOperations(((FClass)it.next()).getFClassDefinition()));
+			result.addAll(getAllOperationsOnRootType(((FClass)it.next()).getFClassDefinition()));
 		}
+		
+		
 		return result;
+	}{
+	    
 	}
 	
 	public ArrayList getAllProperties(FClassDefinition cls) {

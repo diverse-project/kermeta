@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.1 2005-04-19 08:55:16 ffleurey Exp $
+/* $Id: SimpleType.java,v 1.2 2005-04-20 15:21:05 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -155,8 +155,7 @@ public class SimpleType extends Type {
     }
     
 	public String toString() {
-		// TODO: implement
-		return "[not implemented]";
+		return (String)FTypePrettyPrinter.getInstance().accept(type);
 	}
 	
 	public FType getType() {

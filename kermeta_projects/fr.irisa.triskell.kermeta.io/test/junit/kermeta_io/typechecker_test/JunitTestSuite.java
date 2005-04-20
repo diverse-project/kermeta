@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.1 2005-04-19 08:55:26 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.2 2005-04-20 15:21:02 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -63,6 +63,10 @@ public class JunitTestSuite extends TestCase {
 	// do not modify this comment
 
 
+
+
+
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_1_ClassSubTyping_1() throws Exception {
 testvalidFile("test/typechecher_tests/valid","1_ClassSubTyping_1.kmt" );
@@ -76,12 +80,28 @@ public void testvalid_ClassSubTypingWithGenericOperations() throws Exception {
 testvalidFile("test/typechecher_tests/valid","ClassSubTypingWithGenericOperations.kmt" );
 }
 
+public void testvalid_Class_new() throws Exception {
+testvalidFile("test/typechecher_tests/valid","Class_new.kmt" );
+}
+
+public void testvalid_SimpleOperationCall() throws Exception {
+testvalidFile("test/typechecher_tests/valid","SimpleOperationCall.kmt" );
+}
+
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","1_ClassSubTyping_1.kmt" );
 }
 
 public void testinvalid_2_ClassSubTypingWithGenerics() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","2_ClassSubTypingWithGenerics.kmt" );
+}
+
+public void testinvalid_Class_new() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","Class_new.kmt" );
+}
+
+public void testinvalid_SimpleOperationCall() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","SimpleOperationCall.kmt" );
 }
 
 /*** END GENERATED TESTS ***/
@@ -130,11 +150,15 @@ testinvalidFile("test/typechecher_tests/invalid","2_ClassSubTypingWithGenerics.k
 		tc.checkUnit();
 		
 		if (tc.correctOperation.size() != 0) {
+		    boolean res = true;
 		    String message = "Type error not found in operations :";
 		    for (int i=0; i<tc.correctOperation.size(); i++) {
-		        message += " " + tc.correctOperation.get(i);
+		        if (tc.correctOperation.get(i).toString().startsWith("test")) {
+		            message += " " + tc.correctOperation.get(i);
+		            res = false;
+		        }
 		    }
-		    assertTrue(message, false);
+		    assertTrue(message, res);
 		}
 	}
 }

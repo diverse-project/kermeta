@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.1 2005-04-19 08:55:14 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.2 2005-04-20 15:21:04 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -52,8 +52,10 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
+import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
+import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -161,61 +163,76 @@ public class ExpressionChecker extends KermetaVisitor {
 	    // It can contain type variables that needs to be bound
 		Type result = operation_type.getFunctionTypeRight();
 		
+		// Check number of provided arguments
+	    if (op.getOperation().getFOwnedParameter().size() != exp.getFParameters().size()) {
+	        unit.error.add(new KMUnitError("TYPE-CHECKER : Wrong number of arguments, expecting "+op.getOperation().getFOwnedParameter().size()+" arguments.", (KermetaASTNode)unit.getNodeByModelElement(exp)));
+	        return result;
+	    }
+		
 		// if there is no paramerts the operation type is the return type of the operation.
 		// The operation cannot be a generic operation and there are no unbound type variables
 	    if (exp.getFParameters().size() == 0) {
-		    return operation_type;
+		    result = operation_type;
 		}
+	    else {
 	    
-	    boolean error = false;
-
-	    // It can be a generic operation : Type parameters
-	    // actual values has to be infered from parameter types
-	    Type[] required_params = operation_type.getFunctionTypeLeft().getProductType();
-	    
-	    // Check number of provided arguments
-	    if (required_params.length != exp.getFParameters().size()) {
-	        unit.error.add(new KMUnitError("TYPE-CHECKER : Wrong number of arguments, expecting "+required_params.length+" arguments.", (KermetaASTNode)unit.getNodeByModelElement(exp)));
-	        error = true;
-	    }
-	    
-	    // Try to infer actual types of type variables
-	    Hashtable binding = new Hashtable();
-	    if (!error) {
-		    // get Type of actual parameters
-		    for(int i=0; i<exp.getFParameters().size(); i++) {
-		        expected_type = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)required_params[i]).type));
-				Type provided = (Type)this.accept((FExpression)exp.getFParameters().get(i));
-				try {
-				    provided.inferTypeVariableBinding(((SimpleType)required_params[i]).type, binding);
-				}
-				catch(TypeDoesNotMatchError e) {
-				    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+required_params[i]+", found "+provided+".", (KermetaASTNode)unit.getNodeByModelElement((FExpression)exp.getFParameters().get(i))));
-				    error = true;
-				}
+		    boolean error = false;
+	
+		    // It can be a generic operation : Type parameters
+		    // actual values has to be infered from parameter types
+		    Type[] required_params = operation_type.getFunctionTypeLeft().getProductType();
+		    
+		   
+		    
+		    // Try to infer actual types of type variables
+		    Hashtable binding = new Hashtable();
+		    if (!error) {
+			    // get Type of actual parameters
+			    for(int i=0; i<exp.getFParameters().size(); i++) {
+			        expected_type = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)required_params[i]).type));
+					Type provided = (Type)this.accept((FExpression)exp.getFParameters().get(i));
+					try {
+					    provided.inferTypeVariableBinding(((SimpleType)required_params[i]).type, binding);
+					}
+					catch(TypeDoesNotMatchError e) {
+					    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+required_params[i]+", found "+provided+".", (KermetaASTNode)unit.getNodeByModelElement((FExpression)exp.getFParameters().get(i))));
+					    error = true;
+					}
+			    }
 		    }
-	    }
-	    
-	    // Check that the type of the actual parameter match the types of the formal paramenters
-	    if (!error) {
-		    // REPLACE AND CHECK
-		    for(int i=0; i<exp.getFParameters().size(); i++) {
-				Type provided = getTypeOfExpression((FExpression)exp.getFParameters().get(i));
-				Type expected = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)required_params[i]).type, binding));
-				
-				if (!provided.isSubTypeOf(provided)) {
-				    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+expected+", found "+provided+".", (KermetaASTNode)unit.getNodeByModelElement((FExpression)exp.getFParameters().get(i))));
-				    error = true;
-				}
+		    
+		    // Check that the type of the actual parameter match the types of the formal paramenters
+		    if (!error) {
+			    // REPLACE AND CHECK
+			    for(int i=0; i<exp.getFParameters().size(); i++) {
+					Type provided = getTypeOfExpression((FExpression)exp.getFParameters().get(i));
+					Type expected = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)required_params[i]).type, binding));
+					
+					if (!provided.isSubTypeOf(expected)) {
+					    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+expected+", found "+provided+".", (KermetaASTNode)unit.getNodeByModelElement((FExpression)exp.getFParameters().get(i))));
+					    error = true;
+					}
+			    }
 		    }
+		    
+		    // Replace type variables in the treturn type of the operation
+		    if (!error)
+		        result = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)result).type, binding));
+		    else
+		        result = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)result).type));
+		   
+	    }
+	    // THE METHOD NEW ON CLASS
+	    if (op.getOperation() == TypeCheckerContext.getClassNewOperation()) {
+	        if (((FCallFeature)exp).getFTarget() instanceof FTypeLiteral) {
+	            result = getTypeFromTypeLiteral((FTypeLiteral)((FCallFeature)exp).getFTarget());
+	            // check that it is a concrete class
+	            if (((FClass)((SimpleType)result).getType()).getFClassDefinition().isFIsAbstract()) {
+	                unit.error.add(new KMUnitError("TYPE-CHECKER : Abstract class "+ result +" should not be instanciated.", (KermetaASTNode)unit.getNodeByModelElement((FExpression)exp)));
+	            }
+	        }
 	    }
 	    
-	    // Replace type variables in the treturn type of the operation
-	    if (!error)
-	        result = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)result).type, binding));
-	    else
-	        result = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)result).type));
-	   
 	    // Return result
 	    return result;
 	}
@@ -252,7 +269,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	 **********************************/
 
 	public Object visit(FAssignement expression) {
-	    expected_type = null;
+	    preVisit();
 	    
 	    // Visit contained expressions
 	    this.accept(expression.getFTarget());
@@ -290,7 +307,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	    
 	    if (expression.isFIsCast()) {
 	        if (provided_type.isSubTypeOf(targetType)) {
-	            unit.warning.add(new KMUnitWarning("TYPE-CHECKER : Unecessary cast, it shmoud be a regular assignment", (KermetaASTNode)unit.getNodeByModelElement(expression)));
+	            unit.error.add(new KMUnitWarning("TYPE-CHECKER : Unecessary cast, it shmoud be a regular assignment", (KermetaASTNode)unit.getNodeByModelElement(expression)));
 	            return provided_type;
 	        }
 	        else if (!targetType.isSubTypeOf(provided_type)) {
@@ -310,7 +327,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FBlock expression) {
-	    expected_type = null;
+	    preVisit();
 		Type result = TypeCheckerContext.VoidType;
 		// Process contained expressions
 		context.pushContext();
@@ -338,13 +355,13 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FBooleanLiteral expression) {
-	    expected_type = null;
+	    preVisit();
 		expressionTypes.put(expression, TypeCheckerContext.BooleanType);
 		return TypeCheckerContext.BooleanType;
 	}
 	
 	public Object visit(FCallFeature expression) {
-	    expected_type = null;
+	    preVisit();
 		// visit contained expressions
 		if (expression.getFTarget() != null) this.accept(expression.getFTarget());
 		visitExpressionList(expression.getFParameters());
@@ -374,7 +391,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FCallResult expression) {
-	    expected_type = null;
+	    preVisit();
 		
 	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentOperation());
 	    // if there are parameters
@@ -386,14 +403,14 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FCallSuperOperation expression) {
-	    expected_type = null;
+	    preVisit();
 	    Type result =  checkOperationCall(context.getSuperOperation(), expression);
 	    expressionTypes.put(expression, result);
 	    return result;
 	}
 	
 	public Object visit(FCallVariable expression) {
-	    expected_type = null;
+	    preVisit();
 		// if there is no parameter
 		Type result = context.symbolTypeLookup(expression.getFName());
 		// Error if symbol not found
@@ -412,7 +429,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FConditionnal expression) {
-	    expected_type = null;
+	    preVisit();
 		Type result;
 		context.pushContext();
 		// Process contained expressions
@@ -436,20 +453,20 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FEmptyExpression expression) {
-	    expected_type = null;
+	    preVisit();
 		// Return type
 		expressionTypes.put(expression, TypeCheckerContext.VoidType);
 		return TypeCheckerContext.VoidType;
 	}
 	
 	public Object visit(FIntegerLiteral expression) {
-	    expected_type = null;
+	    preVisit();
 		expressionTypes.put(expression, TypeCheckerContext.IntegerType);
 		return TypeCheckerContext.IntegerType;
 	}
 	
 	public Object visit(FJavaStaticCall expression) {
-	    expected_type = null;
+	    preVisit();
 		// visit contained expression
 		visitExpressionList(expression.getFParameters());
 		// The returned type is Objects
@@ -465,14 +482,14 @@ public class ExpressionChecker extends KermetaVisitor {
 	    Type[] expected_params = null;
 	    if (expected_type != null) {
 	        expected_params = expected_type.getFunctionTypeLeft().getProductType();
-	        expected_type = null;
 	   }
+	    preVisit();
 		context.pushContext();
 	    // Find type of lambda parameters and add them to the context
 	    for(int i=0;i<expression.getFParameters().size(); i++) {
 	        FLambdaParameter param = (FLambdaParameter)expression.getFParameters().get(i);
 	        if (param.getFType() == null) {
-	            if (expected_params.length > i) {
+	            if (expected_params != null && expected_params.length > i) {
 	                context.addSymbol(new KMSymbolLambdaParameter(param), expected_params[i]);
 	                result_param.getFType().add(((SimpleType)expected_params[i]).type);
 	            }
@@ -509,7 +526,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FLoop expression) {
-	    expected_type = null;
+	    preVisit();
 		context.pushContext();
 		// Process contained expressions
 		this.accept(expression.getFStopCondition());
@@ -527,7 +544,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FRaise expression) {
-	    expected_type = null;
+	    preVisit();
 		// process contained expression
 	    this.accept(expression.getFExpression());
 	    // return void
@@ -536,7 +553,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FSelfExpression expression) {
-	    expected_type = null;
+	    preVisit();
 		Type result = context.getSelfType();
 		// Return type
 		expressionTypes.put(expression, result);
@@ -544,26 +561,28 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FStringLiteral expression) {
-	    expected_type = null;
+	    preVisit();
 		expressionTypes.put(expression, TypeCheckerContext.StringType);
 		return TypeCheckerContext.StringType;
 	}
 	
 	public Object visit(FTypeLiteral expression) {
-	    expected_type = null;
+	    preVisit();
 		Type result;
-		if (expression.getFTyperef().getFUpper() == 1) {
-			result = new SimpleType(expression.getFTyperef().getFType());
+	    FType type = getTypeFromTypeLiteral(expression).type;
+		
+		if (!(type instanceof FClass)) {
+		    unit.error.add(new KMUnitError("TYPE-CHECKER : Type literal should only refer to classes", (KermetaASTNode)unit.getNodeByModelElement(expression)));
+		    result = TypeCheckerContext.VoidType;
 		}
-		else {
-			result = TypeCheckerContext.getTypeFromMultiplicityElement(expression.getFTyperef());
-		}
+		else result = TypeCheckerContext.ClassType;
+		
 		expressionTypes.put(expression, result);
 		return result;
 	}
 	
 	public Object visit(FVariableDecl expression) {
-	    expected_type = null;
+	    preVisit();
 		Type result = TypeCheckerContext.getTypeFromMultiplicityElement(expression.getFType());
 		// process contained expressions
 		if (expression.getFInitialization() != null) 
@@ -579,14 +598,32 @@ public class ExpressionChecker extends KermetaVisitor {
 		context.addSymbol(new KMSymbolVariable(expression), result);
 		
 		// Return type
-		expressionTypes.put(expression, TypeCheckerContext.VoidType);
+		expressionTypes.put(expression, result);
 		return result;
 	}
 	
 	public Object visit(FVoidLiteral expression) {
-	    expected_type = null;
+	    preVisit();
 		expressionTypes.put(expression, TypeCheckerContext.VoidType);
 		return TypeCheckerContext.VoidType;
 	}
+	
+	
+	protected SimpleType getTypeFromTypeLiteral(FTypeLiteral expression) {
+	    Type result;
+		
+		//FIXME: check that it is realy a class and generate an error othewise
+		
+		if (expression.getFTyperef().getFUpper() == 1) {
+			result = new SimpleType(expression.getFTyperef().getFType());
+		}
+		else {
+			result = TypeCheckerContext.getTypeFromMultiplicityElement(expression.getFTyperef());
+		}
+		return (SimpleType)result;
+	}
 
+	private void preVisit() {
+	    expected_type = null;
+	}
 }

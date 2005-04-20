@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.1 2005-04-19 08:55:13 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.2 2005-04-20 15:21:03 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : GPL
@@ -42,6 +42,7 @@ public class TypeCheckerContext {
 		// TODO : Assign Basic types and classdefinition here
 		
 	    ObjectType = createTypeForClassDefinition("kermeta::language::structure::Object", std_lib);
+	    ClassType = createTypeForClassDefinition("kermeta::language::structure::Class", std_lib);
 	    VoidType = createTypeForClassDefinition("kermeta::standard::Void", std_lib);
 	    IntegerType = createTypeForClassDefinition("kermeta::standard::Integer", std_lib);
 	    StringType = createTypeForClassDefinition("kermeta::standard::String", std_lib);
@@ -59,6 +60,19 @@ public class TypeCheckerContext {
 		oset_type_cache = new Hashtable();
 	}
 	
+	protected static FOperation getClassNewOperation() {
+	    if (classNew == null) {
+	       Iterator it = ((FClass)((SimpleType)ClassType).type).getFClassDefinition().getFOwnedOperation().iterator();
+	       while(it.hasNext()) {
+	           FOperation op = (FOperation)it.next();
+	           if (op.getFName().equals("new")) {
+	               classNew = op;
+	               break;
+	           }
+	       }
+	    }
+	    return classNew;
+	}
 	
 	
 	protected static Type createTypeForClassDefinition(String qualified_name, KermetaUnit unit) {
@@ -70,11 +84,14 @@ public class TypeCheckerContext {
 	
 	// The base types
 	protected static Type ObjectType;
+	protected static Type ClassType;
 	protected static Type VoidType;
 	protected static Type IntegerType;
 	protected static Type StringType;
 	protected static Type BooleanType;
 	protected static Type StdIOType;
+	
+	protected static FOperation classNew;
 	
 	// The collection classes
 	protected static FClassDefinition SetClassDef;

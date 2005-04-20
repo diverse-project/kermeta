@@ -1,6 +1,6 @@
 package testArithm;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require "../../lib/framework.km"
 
 // assignment of the return variable
 class Test_arithm {

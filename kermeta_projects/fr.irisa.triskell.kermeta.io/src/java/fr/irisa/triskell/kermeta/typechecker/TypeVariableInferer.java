@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.1 2005-04-19 08:55:18 ffleurey Exp $
+/* $Id: TypeVariableInferer.java,v 1.2 2005-04-20 15:21:05 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableInferer.java
 * License : GPL
@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.structure.FSelfType;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+import fr.irisa.triskell.kermeta.structure.FVoidType;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -41,6 +42,9 @@ public class TypeVariableInferer extends KermetaVisitor {
 	 */
 	public static Hashtable inferTypeVariableTypes(FType generic, FType provided) {
 		Hashtable result = new Hashtable();
+		
+		if (provided instanceof FVoidType || provided == ((SimpleType)TypeCheckerContext.VoidType).type) return result;
+		
 		try {
 			TypeVariableInferer visitor = new TypeVariableInferer(provided, result);
 			result = (Hashtable)visitor.accept(generic);

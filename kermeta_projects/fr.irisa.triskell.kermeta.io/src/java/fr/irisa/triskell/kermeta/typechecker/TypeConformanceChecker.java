@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.1 2005-04-19 08:55:12 ffleurey Exp $
+/* $Id: TypeConformanceChecker.java,v 1.2 2005-04-20 15:21:03 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -36,7 +36,9 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 		required = PrimitiveTypeResolver.getResolvedType(required);
 		provided = PrimitiveTypeResolver.getResolvedType(provided);
 		// The type void is a sub-type of everything
-		if (provided instanceof FVoidType) return true;
+		
+		if (provided instanceof FVoidType || provided == ((SimpleType)TypeCheckerContext.VoidType).type) return true;
+		
 		// TODO: ajouter "if required == Object return true"
 		
 		// Transformation if provided is a type variable to the least derived type admissible

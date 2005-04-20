@@ -1,4 +1,4 @@
-/* $Id: ContextFrame.java,v 1.1 2005-04-19 08:55:13 ffleurey Exp $
+/* $Id: ContextFrame.java,v 1.2 2005-04-20 15:21:04 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ContextFrame.java
 * License : GPL
@@ -39,7 +39,7 @@ public class ContextFrame {
 	
 	public void addSymbol(KMSymbol symbol, Type type) {
 		symbols.put(symbol.getIdentifier(), symbol);
-		types.put(symbol, type);
+		types.put(symbol.getIdentifier(), type);
 	}
 	
 	public KMSymbol getSymbol(String id) {
