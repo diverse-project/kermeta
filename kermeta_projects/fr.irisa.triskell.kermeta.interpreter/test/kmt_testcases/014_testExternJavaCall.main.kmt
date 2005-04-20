@@ -1,4 +1,4 @@
-/* $Id: 014_testExternJavaCall.main.kmt,v 1.1 2005-04-20 13:19:53 dvojtise Exp $
+/* $Id: 014_testExternJavaCall.main.kmt,v 1.2 2005-04-20 13:20:30 dvojtise Exp $
  * Project : Kermeta.interpreter. test
  * License : GPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -36,6 +36,7 @@ class Test_ExternJavaCall  inherits kermeta::kunit::Assert {
 		//extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.assertMethodWasCalled()
         boolvalue ?= extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.callBooleanReturn()
         assertTrue(true)
+        assert(boolvalue)
         extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.assertMethodWasCalled()
         
         // TODO add a test on the returned value
