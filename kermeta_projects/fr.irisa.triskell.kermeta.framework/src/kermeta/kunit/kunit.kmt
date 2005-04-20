@@ -1,34 +1,57 @@
-package kermeta::kunit;
-
-require "../Standard.kmt"
-//require "../../../src/kermeta/standard/exceptions.kmt"
 /***************************************************
+ * $Id: kunit.kmt,v 1.4 2005-04-20 09:06:41 dvojtise Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
- * IRISA / University of Rennes 1 (France)
+ * IRISA / INRIA / University of Rennes 1 (France)
  * Distributed under the terms of the GPL licence
  *
  * Implementation of a unit test tool. This is a clone of
  * JUnit architecture.
  *************************************************** */
+package kermeta::kunit;
+
+require "../Standard.kmt"
+//require "../../../src/kermeta/standard/exceptions.kmt"
+
 
 @Test "This is the clone of the JUnit Test abstract class" 
-abstract class Test
+abstract class Test inherits Assert
 {
 	operation run() : Void is abstract
-	
-	@assert "assert raise an AssertError"
+}
+
+abstract class Assert
+{	
+	@assert "assert raise an AssertError if the condition is not true"
 	operation assert(bool : kermeta::standard::Boolean) : Void is do
-		if bool then
+		if (bool == false) then
+			// when exceptions work, we can replace instruction by this one :
+//			raise kermeta::exceptions::AssertionError.new
+			stdio.writeln("AssertionError")			
+
+		else
+			stdio.writeln("Tout va bien!")
+		end		
+		extern fr::irisa::triskell::kermeta::runtime::testing::kunit.assertTrue("AssertionError",bool)
+	end
+	
+	@assert "assertTrue raise an AssertError if the condition is not true"
+	operation assertTrue(bool : kermeta::standard::Boolean) : Void is do
+		if (bool == false) then
 			// when exceptions work, we can replace instruction by this one :
 //			raise kermeta::exceptions::AssertionError.new
 			stdio.writeln("AssertionError")
-		else
-			stdio.writeln("Tout va bien!")
+
 		end
-
+		extern fr::irisa::triskell::kermeta::runtime::testing::kunit.assertTrue("AssertionError",bool)
 	end
-
+	operation fail(msg : kermeta::standard::String) : Void is do
+		// when exceptions work, we can replace instruction by this one :
+//			raise kermeta::exceptions::AssertionError.new
+			stdio.writeln("AssertionError: "+msg)
+		extern fr::irisa::triskell::kermeta::runtime::testing::kunit.fail(msg)
+	end
+	
 }
  
 @TestSuite "A test suite is meant as executing automatically a suite of test cases"
