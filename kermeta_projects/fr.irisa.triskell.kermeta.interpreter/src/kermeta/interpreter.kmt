@@ -1,3 +1,13 @@
+/***************************************************
+ * $Id: interpreter.kmt,v 1.5 2005-04-20 12:55:24 dvojtise Exp $
+ * Franck FLEUREY - 23/02/2005
+ * Triskell Research Group
+ * IRISA / University of Rennes 1 (France)
+ * Distributed under the terms of the GPL licence
+ *
+ * Implementation of the Kermeta Interpreter.
+ *************************************************** */
+ 
 package kermeta::interpreter;
 
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
@@ -7,18 +17,11 @@ using kermeta::language::structure
 using kermeta::standard
 using kermeta::utils
 
-/***************************************************
- * Franck FLEUREY - 23/02/2005
- * Triskell Research Group
- * IRISA / University of Rennes 1 (France)
- * Distributed under the terms of the GPL licence
- *
- * Implementation of the Kermeta Interpreter.
- *************************************************** */
+
 
 
 /**
- * The interpreter
+ * The kermeta interpreter
  */
 class Interpreter inherits KMExpressionVisitor<InterpreterContext, Object>
 {
