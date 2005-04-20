@@ -1,4 +1,4 @@
-/* $Id: Boolean.java,v 1.6 2005-03-22 10:58:16 zdrey Exp $ 
+/* $Id: Boolean.java,v 1.7 2005-04-20 14:36:18 zdrey Exp $ 
  * Implementation of Kermeta base type Boolean 
  */
 
@@ -15,7 +15,9 @@ public class Boolean {
 	// Implementation of method and called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean::and(other)
 	public static RuntimeObject and(RuntimeObject self, RuntimeObject param0) {
-		if (getValue(self) && getValue(param0)) return TRUE;
+	    
+		if (getValue(self) && getValue(param0))
+		    return TRUE;
 		else return FALSE;
 	}
 
@@ -27,20 +29,21 @@ public class Boolean {
 	}
 
 	public static boolean getValue(RuntimeObject bool) {
-		return ((java.lang.Boolean)bool.getData().get("BooleanValue")).booleanValue();
+	    if (bool.equals(TRUE))
+	        return true;
+	    else return false;
+//		return ((java.lang.Boolean)bool.getData().get("BooleanValue")).booleanValue();
 	}
 	
 	public static void setValue(RuntimeObject bool, boolean value) {
-	    
+	   bool.getData().put("BooleanValue", new java.lang.Boolean(value)); 
 	}
 	
 	public static RuntimeObject create(boolean value) {
 	    //RuntimeObject result = factory.createObjectFromClassName("kermeta::standard::Boolean");
-	    if (value==true) return TRUE;
+	    if (value==true)
+	        return TRUE;
 	    else return FALSE;
 	}
-	
-	
-
 }
 /* END OF FILE */
