@@ -1,4 +1,4 @@
-/* $Id: CreateGenericVisitor.java,v 1.2 2005-04-14 13:35:21 dvojtise Exp $
+/* $Id: CreateGenericVisitor.java,v 1.3 2005-04-20 12:35:05 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -28,6 +28,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 
 
 /**
@@ -130,7 +132,7 @@ public class CreateGenericVisitor {
 			classTemplate += " */\n";
 			classTemplate += "public class XclassNameX {\n";
 			classTemplate += "\n";
-			classTemplate += "	final static Logger internalLog = LogConfigurationHelper.getLogger(\"KMT.model\");\n";
+			classTemplate += "	final static public Logger internalLog = LogConfigurationHelper.getLogger(\"KMT.model\");\n";
 			classTemplate +="			// This is a generic visit method.\n";
 			classTemplate +="			public Object genericVisitChildren(EObject node) {\n";
 			classTemplate +="				Object result = null;\n";
@@ -158,8 +160,24 @@ public class CreateGenericVisitor {
 			classTemplate +="					result = m.invoke(this, params);\n";
 			classTemplate +="				}\n";
 			classTemplate +="				catch (Exception e) {\n";
-			classTemplate +="					internalLog.error(\"invoking \"+ methodName + \" on Class \" +cname + \" => Throwing KermetaVisitorError !!!\");\n";
-			classTemplate +="					throw	new KermetaVisitorError(e.toString() + \" invoking \"+ methodName + \" on Class \" +cname  ,e); \n";
+			classTemplate +="					Throwable cause = e.getCause();\n";
+			classTemplate +="		    		if (cause != null)				   \n";    
+			classTemplate +="		        		if (cause.getClass().getName().compareTo(\"fr.irisa.triskell.kermeta.error.KermetaVisitorError\")==0)\n";
+			classTemplate +="			    		{\n";
+			classTemplate +="		            		internalLog.error(e.getClass().getName() + \" invoking \"+ methodName + \" on Class \" +cname + \" was due to KermetaVisitorError: Shrinking the Exception Stack \");\n";					       
+			classTemplate +="		            		// this Exception was due to a KermetaVisitorError create a new one with the precedent content\n";
+			classTemplate +="		            		throw new KermetaVisitorError(cause.getMessage(), cause.getCause());\n";
+			classTemplate +="		        		}\n";
+			classTemplate +="		        		else\n";
+			classTemplate +="		        		{\n";
+			classTemplate +="							internalLog.error(e.getClass().getName() + \" invoking \"+ methodName + \" on Class \" +cname + \" => Throwing KermetaVisitorError !!!\");\n";
+			classTemplate +="							throw	new KermetaVisitorError(e.getClass().getName() + \" invoking \"+ methodName + \" on Class \" +cname  ,e);\n";
+			classTemplate +="						}\n";
+			classTemplate +="		        	else\n";
+			classTemplate +="		        	{\n";
+			classTemplate +="						internalLog.error(e.getClass().getName() + \" invoking \"+ methodName + \" on Class \" +cname + \" => Throwing KermetaVisitorError !!!\");\n";
+			classTemplate +="						throw	new KermetaVisitorError(e.getClass().getName() + \" invoking \"+ methodName + \" on Class \" +cname  ,e);\n";
+			classTemplate +="					}\n";
 			classTemplate +="				}\n";
 			classTemplate +="				return result;\n";
 			classTemplate +="			}\n";
