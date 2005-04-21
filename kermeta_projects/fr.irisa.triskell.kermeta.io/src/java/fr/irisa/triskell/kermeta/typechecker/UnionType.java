@@ -1,4 +1,4 @@
-/* $Id: UnionType.java,v 1.1 2005-04-19 08:55:23 ffleurey Exp $
+/* $Id: UnionType.java,v 1.2 2005-04-21 11:39:36 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : UnionType.java
 * License : GPL
@@ -16,6 +16,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.structure.FType;
 
@@ -194,6 +195,38 @@ public class UnionType extends Type {
 			t.inferTypeVariableBinding(generic, binding);
         }
 
+	}
+	
+	public SimpleType transformAsSimpleType() {
+	    SimpleType result = (SimpleType)TypeCheckerContext.ObjectType;
+	    
+	    Iterator it = types.iterator();
+	    while(it.hasNext()) {
+	        Type t = (Type)it.next();
+	        if (t instanceof SimpleType) {
+	            if (isSuperTypeOfOthers((SimpleType)t)) return (SimpleType)t;
+	        }
+	        else {
+	            if (isSuperTypeOfOthers(((UnionType)t).transformAsSimpleType())) return ((UnionType)t).transformAsSimpleType();
+	        }
+	    }
+	    return result;
+	}
+	
+	private boolean isSuperTypeOfOthers(SimpleType sup) {
+	    boolean result = true;
+	    Iterator it = types.iterator();
+	    while(it.hasNext()) {
+	        Type t = (Type)it.next();
+	        if (t instanceof SimpleType) {
+	            result = TypeConformanceChecker.conforms(sup.type, ((SimpleType)t).type);
+	        }
+	        else {
+	            result = TypeConformanceChecker.conforms(sup.type, ((UnionType)t).transformAsSimpleType().type);
+	        }
+	        if (!result) break;
+	    }
+	    return result;
 	}
 	
 	public String toString() {

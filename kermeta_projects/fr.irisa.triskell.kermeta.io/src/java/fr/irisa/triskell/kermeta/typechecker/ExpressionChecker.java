@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.3 2005-04-20 23:58:21 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.4 2005-04-21 11:39:36 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -489,14 +489,20 @@ public class ExpressionChecker extends KermetaVisitor {
 	    for(int i=0;i<expression.getFParameters().size(); i++) {
 	        FLambdaParameter param = (FLambdaParameter)expression.getFParameters().get(i);
 	        if (param.getFType() == null) {
+	            
 	            if (expected_params != null && expected_params.length > i) {
+	                
 	                context.addSymbol(new KMSymbolLambdaParameter(param), expected_params[i]);
+	                
 	                result_param.getFType().add(((SimpleType)expected_params[i]).type);
 	            }
+	            
 	            else {
-	                context.addSymbol(new KMSymbolLambdaParameter(param), TypeCheckerContext.ObjectType);
-	                result_param.getFType().add(TypeCheckerContext.ObjectType);
+	                //context.addSymbol(new KMSymbolLambdaParameter(param), TypeCheckerContext.ObjectType);
+	                //result_param.getFType().add(TypeCheckerContext.ObjectType);
+	                unit.error.add(new KMUnitError("TYPE-CHECKER : Incompatible parameters", (KermetaASTNode)unit.getNodeByModelElement(expression)));
 	            }
+	            
 	        }
 	        else {
 	            Type t = TypeCheckerContext.getTypeFromMultiplicityElement(param.getFType());
@@ -507,6 +513,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	    
 	    // check expression
 	    Type result_return = (Type)this.accept(expression.getFBody());
+	    
 	    context.popContext();
 	    
 	    // Compute return type
@@ -520,8 +527,11 @@ public class ExpressionChecker extends KermetaVisitor {
 	    else {
 	        // TODO : Complete this method
 	        // FIXME : Compute the appropriate union type
-	        expressionTypes.put(expression, TypeCheckerContext.ObjectType);
-	        return TypeCheckerContext.ObjectType;
+	        FFunctionType result = unit.struct_factory.createFFunctionType();
+	        result.setFLeft(result_param);
+	        result.setFRight((((UnionType)result_return).transformAsSimpleType()).type);
+	        expressionTypes.put(expression, result);
+	        return result;
 	    }
 	}
 	
@@ -529,8 +539,8 @@ public class ExpressionChecker extends KermetaVisitor {
 	    preVisit();
 		context.pushContext();
 		// Process contained expressions
-		this.accept(expression.getFStopCondition());
 		this.accept(expression.getFInitiatization());
+		this.accept(expression.getFStopCondition());
 		this.accept(expression.getFBody());
 		context.popContext();
 		// Check constraints

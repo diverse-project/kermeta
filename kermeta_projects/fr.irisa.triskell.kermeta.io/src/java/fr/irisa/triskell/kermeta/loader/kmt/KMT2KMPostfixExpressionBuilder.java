@@ -108,6 +108,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		builder.storeTrace(lp,lambdaPostfixParam);
 		lp.setFName(getTextForID(lambdaPostfixParam.getName()));
 		builder.addSymbol(new KMSymbolLambdaParameter(lp));
+		current_le.getFParameters().add(lp);
 		//TODO: The type of the parameter cannot be set here. Do it in the type chacker !!
 		return false;
 	}

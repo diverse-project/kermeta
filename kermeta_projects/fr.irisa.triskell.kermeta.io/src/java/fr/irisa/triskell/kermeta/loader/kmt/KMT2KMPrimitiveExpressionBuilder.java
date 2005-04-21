@@ -305,6 +305,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		lp.setFName(getTextForID(fLambdaparam.getName()));
 		lp.setFType(KMT2KMTypeReferenceBuilder.process(fLambdaparam.getTypeRef(), builder));
 		builder.addSymbol(new KMSymbolLambdaParameter(lp));
+		current_le.getFParameters().add(lp);
 		return false;
 	}
 	protected fr.irisa.triskell.kermeta.behavior.FBlock createBlock(FExpressionLst explst) {

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2005-04-20 23:58:25 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2005-04-21 11:39:40 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -72,6 +72,7 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_1_ClassSubTyping_1() throws Exception {
 testvalidFile("test/typechecher_tests/valid","1_ClassSubTyping_1.kmt" );
@@ -101,6 +102,10 @@ public void testvalid_SimpleCtrlStructs() throws Exception {
 testvalidFile("test/typechecher_tests/valid","SimpleCtrlStructs.kmt" );
 }
 
+public void testvalid_SimpleFunctions() throws Exception {
+testvalidFile("test/typechecher_tests/valid","SimpleFunctions.kmt" );
+}
+
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","1_ClassSubTyping_1.kmt" );
 }
@@ -127,6 +132,10 @@ testinvalidFile("test/typechecher_tests/invalid","GenericOperationCall.kmt" );
 
 public void testinvalid_SimpleCtrlStructs() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","SimpleCtrlStructs.kmt" );
+}
+
+public void testinvalid_SimpleFunctions() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","SimpleFunctions.kmt" );
 }
 
 /*** END GENERATED TESTS ***/
