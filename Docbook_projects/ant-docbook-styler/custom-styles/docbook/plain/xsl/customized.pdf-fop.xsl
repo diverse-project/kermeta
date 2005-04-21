@@ -5,7 +5,7 @@
 
 
 <xsl:import href="@ant.docbook.styler.fileuri@/docbook/xsl/fo/docbook.xsl" />
-<xsl:import href="@docbook.style.fileuri@/xsl/customized.fo-base.xsl" />
+<xsl:import href="@docbook.style.fileuri@/xsl/triskell-style/fo/customized.triskell-fo-base.xsl" />
 
 <xsl:param name="fop.extensions" select="1" />
 <!-- should be 200a, but fop does not support it. -->
