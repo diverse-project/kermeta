@@ -8,7 +8,7 @@ abstract class Object
 	reference tag : set Tag[0..*]#object
 	operation getMetaClass() : Class is abstract
 	operation container() : Object is abstract
-	operation equals(element : Object) : Boolean is abstract
+	operation equals(self_object : Object, element : Object) : Boolean is abstract
 	operation get(~property : Property) : Object is abstract
 	operation ~set(~property : Property, element : Object) : Void is abstract
 	operation isSet(~property : Property) : Boolean is abstract
