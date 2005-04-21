@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.10 2005-04-15 15:43:03 zdrey Exp $
+/* $Id: KMBuilderPass1.java,v 1.11 2005-04-21 09:48:54 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -246,9 +246,12 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral)
 	 */
 	public Object visit(FBooleanLiteral node) {
-		if (node.isFValue())
-			return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.TRUE;
-		else return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.FALSE;
+	    RuntimeObject ronode;
+	    if (node.isFValue())
+			ronode = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.TRUE;
+			
+		else ronode = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.FALSE;
+		return ronode;
 	}
 	
 	/**
@@ -557,7 +560,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 		}
 		properties.put("name",node.getFName());
 		if (node.getFTypeParameter().size() > 0)
-			properties.put("typeParamBinding",ppTypeVariableDeclaration(node.getFTypeParameter()));
+			properties.put("typeParameter",ppTypeVariableDeclaration(node.getFTypeParameter()));
 		RuntimeObject parametersNode=ReflectiveCollection.createReflectiveCollection(knode,createPropertyNode(ownedParameter));
 		properties.put("ownedParameter",parametersNode);	
 		this.currentParamList=parametersNode;
@@ -692,7 +695,9 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FStringLiteral)
 	 */
 	public Object visit(FStringLiteral node) {
-		return fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue(),Run.koFactory);
+	    RuntimeObject rnode = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue(),Run.koFactory);
+		Run.correspondanceTable.put(node,rnode);
+		return rnode;
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeLiteral)
