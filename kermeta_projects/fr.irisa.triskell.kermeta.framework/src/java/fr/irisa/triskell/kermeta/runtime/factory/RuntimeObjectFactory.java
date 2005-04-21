@@ -1,6 +1,13 @@
-/*
- * Created on 17 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: RuntimeObjectFactory.java,v 1.6 2005-04-21 09:37:43 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : RuntimeObject.java
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mars 14, 2005
+ * Authors : 
+ * 		Franck Fleurey <ffleurey@irisa.fr>
+ * 		Jean-Philippe Thibault <jpthibau@irisa.fr>
  */
 package fr.irisa.triskell.kermeta.runtime.factory;
 
@@ -59,17 +66,31 @@ public class RuntimeObjectFactory {
 	 * The meta-class Class (bootstrap)
 	 */
 	private RuntimeObject class_class;
+	
+	/**
+	 * Set the metaclass Class : it creates a new runtime object specific
+	 * to the class Class
+	 * @param classdef the FClassDefinition corresponding to this class
+	 */
 	public void setClassClass(FClassDefinition classdef) {
 		class_class = new RuntimeObject(this, null);
 		class_class.setMetaclass(class_class);
 		class_class.setData(new Hashtable());
 		class_class.getData().put("kcoreObject",classdef);
 	}
+	
+	
 	public RuntimeObject getClassClass() {
 		return class_class;
 	}
 	
 	
+	/**
+	 * create the Runtime Object of class Class which is the meta class of all 
+	 * the classDefinitions
+	 * @param class_def the class definition from which we create the class Class RO
+	 * @return the RuntimeObject of class Class linked to the given classDefinition
+	 */
 	public RuntimeObject createClassFromClassDefinition(RuntimeObject class_def) {
 		RuntimeObject metaclass = new RuntimeObject(this, class_class);
 		metaclass.getProperties().put("classDefinition", class_def);
@@ -80,7 +101,11 @@ public class RuntimeObjectFactory {
 		return metaclass;
 	}
 	 
-	
+	/**
+	 * Create a new RuntimeObject given its meta_class.
+	 * @param meta_class the RuntimeObject repr. of the meta class to instanciate
+	 * @return a RuntimeObject which is an "instance" of meta_class.
+	 */
 	public RuntimeObject createRuntimeObject(RuntimeObject meta_class) {
 		RuntimeObject result = new RuntimeObject(this, meta_class);
 //		TODO : take care of default values here ?
@@ -88,10 +113,15 @@ public class RuntimeObjectFactory {
 		return result;
 	}
 	
+	/**
+	 * Mainly used by KMMetaBuilder
+	 * @param typevar the type variable that of the type parameters of a parametric class
+	 * @return a runt
+	 */
 	public RuntimeObject createTypeVariable(FTypeVariable typevar) {
 		RuntimeObject result=new RuntimeObject(this,(RuntimeObject)this.getClassDefTable().get("kermeta::reflection::TypeVariable"));
-		result.setData(new Hashtable());
-		result.getData().put("primitiveType",typevar);
+		result.setData(new Hashtable()); 
+		result.getData().put("kcoreObject",typevar);
 		return result;
 	}
 	/**
