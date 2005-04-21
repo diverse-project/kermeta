@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.20 2005-04-20 17:39:44 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.21 2005-04-21 14:32:37 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -114,7 +114,6 @@ public class BaseInterpreter extends KermetaVisitor {
 				*/
 	    //RuntimeObject ko = factory.createRuntimeObject(node);
 	    // TODO : node.getFInit can be null -
-	    System.out.println("NODE TYPE = "+ node.getFType());
 		RuntimeObject ro_init=null;
 		if (node.getFInitialization()!=null)
 			ro_init = (RuntimeObject)this.accept(node.getFInitialization());
@@ -422,7 +421,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		
 		// handle the case of calls like "toto.titi.tutu" -> recursive
 		// target.node -> target1.toto.node 
-		if (FCallFeature.class.isInstance(target))
+		else if (FCallFeature.class.isInstance(target))
 		{
 		    isFeatured = true;
 		    ro_target = (RuntimeObject)this.accept(target);
@@ -433,14 +432,21 @@ public class BaseInterpreter extends KermetaVisitor {
 		    	System.err.println("The runtimeObjet ro_target has to be typed with a wel initialized metaclass");
 		}
 		
-		if (FIntegerLiteral.class.isInstance(target)) {
+		else if (FIntegerLiteral.class.isInstance(target)) {
 		    isFeatured = true;
 			ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
 			RuntimeObject integerClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::Integer");
 			t_target=(FType)integerClassRO.getData().get("kcoreObject");
 		}
 		
-		if (FBooleanLiteral.class.isInstance(target)) {
+		else if (FStringLiteral.class.isInstance(target)) {
+		    isFeatured = true;
+		    ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
+		    RuntimeObject stringClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::Integer");
+		    t_target=(FType)stringClassRO.getData().get("kcoreObject");
+		}
+		
+		else if (FBooleanLiteral.class.isInstance(target)) {
 		    isFeatured = true;
 		    if (((FBooleanLiteral)target).isFValue() == true)
 		        ro_target = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.TRUE;
@@ -457,7 +463,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		//		process the operation (by calling accept on it) in order to get
 		//		the value of its evaluation, (in order to return it)
 		//		
-		if (FCallVariable.class.isInstance(target))
+		else if (FCallVariable.class.isInstance(target))
 		{
 		   isFeatured = true;
 		    String var_name = ((FCallVariable)target).getFName();
@@ -482,7 +488,6 @@ public class BaseInterpreter extends KermetaVisitor {
 		// Now we can process either Self (target==null) or FCallVariable (the 2nd test)
 		if (isFeatured == true)
 		{
-		    
 			// RuntimeObject feature = factory.getTypeDefinitionByName(qname);
 			Object feature = getFeatureType(t_target, node);
 			// Is the callfeature an operation call? So that we create a new call
@@ -502,7 +507,6 @@ public class BaseInterpreter extends KermetaVisitor {
 				
 				// Resolve this operation call
 				result = (RuntimeObject)this.accept(foperation);
-				
 				// After operation has been evaluated, pop its context
 				interpreterContext.getFrameStack().pop();
 			}
@@ -568,7 +572,6 @@ public class BaseInterpreter extends KermetaVisitor {
 	 */
 	public Object visit(FJavaStaticCall node) {
 	    
-	    System.out.println("NODE = "+node);
 		String jclassName  = node.getFJclass().replaceAll("::","."); 
 		String jmethodName = node.getFJmethod();
 		
@@ -583,7 +586,9 @@ public class BaseInterpreter extends KermetaVisitor {
 		while (it.hasNext())
 		{
 		    paramtypes[i] = RuntimeObject.class;
+		    
 		    paramsArray[i++] = it.next();
+		    System.err.println(paramsArray[i-1]);
 		}
 		// Invoke the java method
 		Class jclass = null;
@@ -846,33 +851,6 @@ public class BaseInterpreter extends KermetaVisitor {
         return null;
     }
     
-    /** 
-     */
-    /*public Object getFeatureType(FType type, FCallFeature node)
-    {
-        Object feature_type = null;
-        System.err.println("NODE : "+node + ", Type : "+type);
-        // If type is a FClass
-        FClassDefinition class_def = ((FClass)type).getFClassDefinition();
-        feature_type = unit.findPropertyByName(class_def, node.getFName());
-        if (feature_type==null)
-        {
-            feature_type = unit.findOperationByName(class_def, node.getFName());
-        }
-        System.out.println("FEATURE TYPE:"+feature_type+"->"
-                +((FOperation)feature_type));
-        // TODO : test for other kinds of types or Exception? -- is feature valuable
-        // in a source code for another target type than FClass?
-        if (feature_type==null)
-        {
-            throw new KermetaInterpreterError(
-                    "Feature '"+node.getFName()+"' not found for class "+class_def.getFName());
-        }
-        
-        return feature_type;
-    }*/
-    
-    
     /**
      * This is a helper (TODO : move it in a specific class) that returns the precise
      * type of the <code>feature</code> that is "applied" to the given <code>target</code>.
@@ -898,9 +876,9 @@ public class BaseInterpreter extends KermetaVisitor {
         // If it is still still null, find operation in Object!
         if (result == null)
         {
+        //    class_def = (FClassDefinition)unit.typeDefinitionLookup(KermetaUnit.ROOT_CLASS_QNAME);
             class_def = (FClassDefinition)unit.typeDefinitionLookup(KermetaUnit.ROOT_CLASS_QNAME);
             result = getFlatFeatureType(class_def, feature);
-            System.out.println("From Object+"+result);
         }
         if (result == null)
         {
