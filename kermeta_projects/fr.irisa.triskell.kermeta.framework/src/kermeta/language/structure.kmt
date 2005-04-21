@@ -15,7 +15,7 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	end
 	
 	method equals(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(element)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)
 	end
 	
 	method get(~property : kermeta::reflection::Property) : kermeta::reflection::Object from kermeta::reflection::Object is do
