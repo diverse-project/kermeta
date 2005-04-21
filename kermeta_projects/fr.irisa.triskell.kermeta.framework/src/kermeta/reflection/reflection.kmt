@@ -8,7 +8,7 @@ abstract class Object
 	reference tag : set Tag[0..*]#object
 	operation getMetaClass() : Class is abstract
 	operation container() : Object is abstract
-	operation equals(self_object : Object, element : Object) : Boolean is abstract
+	operation equals(element : Object) : Boolean is abstract
 	operation get(~property : Property) : Object is abstract
 	operation ~set(~property : Property, element : Object) : Void is abstract
 	operation isSet(~property : Property) : Boolean is abstract
@@ -19,7 +19,7 @@ alias Integer : kermeta::standard::Integer;
 abstract class Class inherits Type
 {
 	reference classDefinition : ClassDefinition[1..1]
-	attribut typeParamBinding : set TypeVariableBinding[0..*]
+	attribute typeParamBinding : set TypeVariableBinding[0..*]
 	property readonly ownedAttribute : set Property[0..*]
 		getter is do
 			result := classDefinition.ownedAttribute
@@ -44,48 +44,48 @@ abstract class Class inherits Type
 }
 abstract class MultiplicityElement inherits TypedElement
 {
-	attribut isOrdered : Boolean
-	attribut isUnique : Boolean
-	attribut lower : Integer
-	attribut upper : UnlimitedNatural
+	attribute isOrdered : Boolean
+	attribute isUnique : Boolean
+	attribute lower : Integer
+	attribute upper : UnlimitedNatural
 }
 abstract class Operation inherits MultiplicityElement
 {
-	attribut isAbstract : Boolean
+	attribute isAbstract : Boolean
 
 	reference superOperation : Operation
 	reference owningClass : ClassDefinition#ownedOperation
 	reference typeParameter : set TypeVariable[0..*]
 	reference raisedException : set Type[0..*]
-	attribut ownedParameter : set Parameter[0..*]#~operation
+	attribute ownedParameter : set Parameter[0..*]#~operation
 }
 abstract class Tag inherits Object
 {
 	reference object : set Object[1..*]#tag
-	attribut name : String
-	attribut value : String
+	attribute name : String
+	attribute value : String
 }
 abstract class Property inherits MultiplicityElement
 {
 	reference owningClass : ClassDefinition#ownedAttributes
 	reference opposite : Property
-	attribut isReadOnly : Boolean
-	attribut default : String
-	attribut isComposite : Boolean
-	attribut isDerived : Boolean
-	attribut isID : Boolean
+	attribute isReadOnly : Boolean
+	attribute default : String
+	attribute isComposite : Boolean
+	attribute isDerived : Boolean
+	attribute isID : Boolean
 }
 abstract class TypeContainer inherits Object
 {
-	attribut containedType : set Type[0..*]
+	attribute containedType : set Type[0..*]
 }
 abstract class ClassDefinition inherits TypeContainer, TypeDefinition
 {
-	attribut isAbstract : Boolean
-	attribut ownedAttributes : set Property[0..*]#owningClass
-	attribut ownedOperation : set Operation[0..*]#owningClass
+	attribute isAbstract : Boolean
+	attribute ownedAttributes : set Property[0..*]#owningClass
+	attribute ownedOperation : set Operation[0..*]#owningClass
 	reference superType : set Type[0..*]
-	attribut typeParameter : set TypeVariable[0..*]
+	attribute typeParameter : set TypeVariable[0..*]
 }
 abstract class TypedElement inherits TypeContainer, NamedElement
 {
@@ -119,17 +119,17 @@ abstract class PrimitiveType inherits TypeContainer, DataType
 }
 abstract class NamedElement inherits Object
 {
-	attribut name : String
+	attribute name : String
 }
 abstract class SelfType inherits Type
 {
 }
 abstract class Package inherits NamedElement
 {
-	attribut ownedTypeDefinition : set TypeDefinition[0..*]
-	attribut nestedPackage : set Package[0..*]#nestingPackage
+	attribute ownedTypeDefinition : set TypeDefinition[0..*]
+	attribute nestedPackage : set Package[0..*]#nestingPackage
 	reference nestingPackage : Package#nestedPackage
-	attribut uri : String
+	attribute uri : String
 }
 abstract class TypeDefinition inherits NamedElement
 {
@@ -142,7 +142,7 @@ abstract class DataType inherits TypeDefinition, Type
 }
 abstract class Enumeration inherits DataType
 {
-	attribut ownedLiteral : set EnumerationLiteral[0..*]#~enumeration
+	attribute ownedLiteral : set EnumerationLiteral[0..*]#~enumeration
 }
 abstract class EnumerationLiteral inherits NamedElement
 {
