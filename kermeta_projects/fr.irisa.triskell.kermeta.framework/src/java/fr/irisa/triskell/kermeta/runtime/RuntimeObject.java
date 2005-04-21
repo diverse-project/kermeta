@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.3 2005-03-21 17:48:06 jpthibau Exp $
+/* $Id: RuntimeObject.java,v 1.4 2005-04-21 09:33:59 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -97,6 +97,8 @@ public class RuntimeObject {
 		this.container = container;
 	}
 	/**
+	 * Get data contains only a "kcoreObject" entry in 1st iteration
+	 * and NumericValue, StringValue for primitive types
 	 * @return Returns the data.
 	 */
 	public Hashtable getData() {
@@ -127,6 +129,9 @@ public class RuntimeObject {
 		return metaclass;
 	}
 	/**
+	 * Each property corresponds exactly to an FProperty : 
+	 * ownedAttribute -> FOwnedAttribute()
+	 * name -> FName()
 	 * @return Returns the properties.
 	 */
 	public Hashtable getProperties() {
