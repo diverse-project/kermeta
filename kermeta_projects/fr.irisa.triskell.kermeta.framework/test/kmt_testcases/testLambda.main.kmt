@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: testLambda.main.kmt,v 1.1 2005-04-18 16:34:50 zdrey Exp $
+ * $Id: testLambda.main.kmt,v 1.2 2005-04-21 12:49:25 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -20,14 +20,13 @@
 
 package testLambda;
 
-require "../../src/kermeta/Standard.kmt"
-require "../../src/kermeta/test/unittest.kmt"
-require "../../src/kermeta/language/structure.kmt"
+require "../../dist/framework.km"
 alias Integer : kermeta::standard::Integer;
 alias String : kermeta::standard::String;
+alias FunctionType : kermeta::language::structure::FunctionType;
 
 
-class TestLambda inherits kermeta::unittest::TestCase
+class TestLambda inherits kermeta::kunit::TestCase
 {
 
 	/** test a simple lambda expression call with one argument */
@@ -82,25 +81,17 @@ class TestLambda inherits kermeta::unittest::TestCase
 		assert(3.times(lf1(2, 5))==30)
 	end
 	
+	operation testOpWithLambdaAsParam() : Void is do
+		var lf1 : FunctionType
+		lf1 := function { i : Integer | i.plus(54) }
+		assert(opWithLambdaAsParam(lf1, 3)==57)
+	end
 	// TODO : lambda exp. as a parameter binding of a parametric class? 
 	
 
-	// lambda exp. to get elements in a collection TODO : finish
-	operation testPrettyGet() : Void is do
-		var coll : kermeta::standard::Set<String>
-		var a : Integer
-		a := 0
-		coll.add(44)
-		coll.add(32)
-		coll.add(20)
-		var it : kermeta::standard::Iterator<String> init coll.iterator()
-		
-	end
-	
-	// Create a collection of elements on which we will working.
-	// We choose String as the type of elements for the first revision of this 
-	// test.
-	operation createTestSet() : Void is do
-	end
 
+	/** an operation that takes a lambda exp. as param and simply executes it*/
+	operation opWithLambdaAsParam(lambda : FunctionType, a : kermeta::standard::Integer) : Void is do
+		lambda(a)
+	end
 }
