@@ -1,4 +1,4 @@
-/* $Id: SimpleFunctions.kmt,v 1.1 2005-04-21 11:39:37 ffleurey Exp $ */
+/* $Id: SimpleFunctions.kmt,v 1.2 2005-04-21 15:19:12 ffleurey Exp $ */
 
 // Some wrong simple lambda expressions
 
@@ -46,9 +46,9 @@ class Test {
 		it := IntegerIterator.new
 		it.max := 10
 		var res : Integer
-		it.times ( function{ i  : A | i })
+		it.times ( function { i  : A | i } )
 	end
-	
+
 	operation test2() : Void is do
 		var fact : < Integer -> Integer >
 		fact := function { k: Integer | if k == 1 then k * fact(k-1)	else "toto" end }
@@ -71,12 +71,6 @@ class Test {
 		var fact : < Integer -> Integer >
 		fact := function { k: Integer | if k == 1 then k * fact(k-1)	else 1 end }
 		fact(12, 14)
-	end
-	
-	operation test24() : Void is do
-		var fact : < Integer -> Integer >
-		fact := function { k: Integer | if k == 1 then k * fact(k-1)	else 1 end }
-		fact()
 	end
 	
 	operation test3() : Void is do
@@ -113,7 +107,7 @@ class Test {
 	
 	operation test4() : Void is do
 		var la : seq A[*] init Sequence<A>.new 
-		la := la.collect{ ma | a}
+		la := la.collect{ ma | a == ma }
 	end
 	
 	operation test5() : Void is do

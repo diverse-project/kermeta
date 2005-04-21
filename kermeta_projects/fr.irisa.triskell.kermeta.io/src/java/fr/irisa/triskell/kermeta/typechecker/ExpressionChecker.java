@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.4 2005-04-21 11:39:36 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.5 2005-04-21 15:19:03 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -192,6 +192,7 @@ public class ExpressionChecker extends KermetaVisitor {
 			        expected_type = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)required_params[i]).type));
 					Type provided = (Type)this.accept((FExpression)exp.getFParameters().get(i));
 					try {
+					    //provided = PrimitiveTypeResolver.getResolvedType(provided);
 					    provided.inferTypeVariableBinding(((SimpleType)required_params[i]).type, binding);
 					}
 					catch(TypeDoesNotMatchError e) {
@@ -361,11 +362,11 @@ public class ExpressionChecker extends KermetaVisitor {
 	}
 	
 	public Object visit(FCallFeature expression) {
-	    preVisit();
-		// visit contained expressions
+	    
+		// visit target expression
 		if (expression.getFTarget() != null) this.accept(expression.getFTarget());
-		visitExpressionList(expression.getFParameters());
 		
+		preVisit();
 		// Determine the type of the target
 		Type target;
 		if (expression.getFTarget() != null) target = getTypeOfExpression(expression.getFTarget());
@@ -500,7 +501,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	            else {
 	                //context.addSymbol(new KMSymbolLambdaParameter(param), TypeCheckerContext.ObjectType);
 	                //result_param.getFType().add(TypeCheckerContext.ObjectType);
-	                unit.error.add(new KMUnitError("TYPE-CHECKER : Incompatible parameters", (KermetaASTNode)unit.getNodeByModelElement(expression)));
+	                unit.error.add(new KMUnitError("TYPE-CHECKER : Types of the function does not match required types", (KermetaASTNode)unit.getNodeByModelElement(expression)));
 	            }
 	            
 	        }
@@ -516,23 +517,25 @@ public class ExpressionChecker extends KermetaVisitor {
 	    
 	    context.popContext();
 	    
+	    FFunctionType result = unit.struct_factory.createFFunctionType();
 	    // Compute return type
 	    if (result_return instanceof SimpleType) {
-	        FFunctionType result = unit.struct_factory.createFFunctionType();
+	        
 	        result.setFLeft(result_param);
 	        result.setFRight(((SimpleType)result_return).type);
-	        expressionTypes.put(expression, result);
-	        return result;
+	       
 	    }
 	    else {
 	        // TODO : Complete this method
 	        // FIXME : Compute the appropriate union type
-	        FFunctionType result = unit.struct_factory.createFFunctionType();
+	        
 	        result.setFLeft(result_param);
 	        result.setFRight((((UnionType)result_return).transformAsSimpleType()).type);
-	        expressionTypes.put(expression, result);
-	        return result;
+	        
 	    }
+	    Type true_result = new SimpleType(result);
+	    expressionTypes.put(expression, true_result);
+        return true_result;
 	}
 	
 	public Object visit(FLoop expression) {

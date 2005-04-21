@@ -1,4 +1,4 @@
-/* $Id: SimpleFunctions.kmt,v 1.1 2005-04-21 11:39:33 ffleurey Exp $ */
+/* $Id: SimpleFunctions.kmt,v 1.2 2005-04-21 15:19:02 ffleurey Exp $ */
 
 // Some simple lambda expressions
 
@@ -36,7 +36,7 @@ class Test {
 		var res : Integer
 		it.times { i | res * i }
 	end
-	
+
 	operation test2() : Void is do
 		var fact : < Integer -> Integer >
 		fact := function { k : Integer | if k == 1 then k * fact(k-1) 3 else 1 end }
@@ -63,7 +63,7 @@ class Test {
 	
 	operation test4() : Void is do
 		var la : seq A[*] init Sequence<A>.new 
-		la := la.collect{ ma | ma == a}
+		la := la.~select{ ma | ma == a}
 	end
 	
 	operation test5() : Void is do
@@ -83,7 +83,7 @@ class Test {
 					.~select{ op | op.name.indexOf("test") == 0}
 					.collect{ op | op.name }
 	end
-	/**/
+
 	reference a : A
 	reference b : B
 	

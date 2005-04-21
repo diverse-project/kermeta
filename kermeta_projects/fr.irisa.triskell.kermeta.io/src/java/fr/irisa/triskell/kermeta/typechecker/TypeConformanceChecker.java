@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.3 2005-04-20 23:58:21 ffleurey Exp $
+/* $Id: TypeConformanceChecker.java,v 1.4 2005-04-21 15:19:03 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -35,8 +35,8 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 	
 	public static boolean conforms(FType required, FType provided) {
 		// resolve primitive types
-		required = PrimitiveTypeResolver.getResolvedType(required);
-		provided = PrimitiveTypeResolver.getResolvedType(provided);
+	    provided = TypeCheckerContext.getCanonicalType(provided);
+	    required = TypeCheckerContext.getCanonicalType(required);
 		// The type void is a sub-type of everything
 		
 		if (provided instanceof FVoidType || provided == ((SimpleType)TypeCheckerContext.VoidType).type) return true;

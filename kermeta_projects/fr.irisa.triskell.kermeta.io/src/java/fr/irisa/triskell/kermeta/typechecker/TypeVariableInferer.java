@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.3 2005-04-20 23:58:21 ffleurey Exp $
+/* $Id: TypeVariableInferer.java,v 1.4 2005-04-21 15:19:03 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableInferer.java
 * License : GPL
@@ -33,6 +33,9 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  */
 public class TypeVariableInferer extends KermetaVisitor {
 
+    
+
+    
     /**
 	 * Tries to bind type variable of generic type according to a provided type
 	 * @param generic A type that contains type variable
@@ -42,6 +45,10 @@ public class TypeVariableInferer extends KermetaVisitor {
 	 */
 	public static Hashtable inferTypeVariableTypes(FType generic, FType provided) {
 		Hashtable result = new Hashtable();
+		
+		// Get rid of primitive types
+		provided = TypeCheckerContext.getCanonicalType(provided);
+		generic = TypeCheckerContext.getCanonicalType(generic);
 		
 		if (provided instanceof FVoidType || provided == ((SimpleType)TypeCheckerContext.VoidType).type) return result;
 		
@@ -56,6 +63,8 @@ public class TypeVariableInferer extends KermetaVisitor {
 	}
 	
 	public static void inferTypeVariableTypes(FType generic, FType provided, Hashtable result) {
+	    provided = TypeCheckerContext.getCanonicalType(provided);
+		generic = TypeCheckerContext.getCanonicalType(generic);
 		TypeVariableInferer visitor = new TypeVariableInferer(provided, result);
 		result = (Hashtable)visitor.accept(generic);
 	}
@@ -90,6 +99,10 @@ public class TypeVariableInferer extends KermetaVisitor {
 	public Object visit(FClass arg0) {
 		if (! (provided instanceof FClass) ) throw new TypeDoesNotMatchError();
 		// the provided type is suposed to be a conformant class  
+		
+		if (arg0.getFTypeParamBinding().size() != ((FClass)provided).getFTypeParamBinding().size())
+		    throw new TypeDoesNotMatchError();
+		
 		for(int i=0; i<arg0.getFTypeParamBinding().size(); i++) {
 			FType g = ((FTypeVariableBinding)arg0.getFTypeParamBinding().get(i)).getFType();
 			FType p = ((FTypeVariableBinding)((FClass)provided).getFTypeParamBinding().get(i)).getFType();

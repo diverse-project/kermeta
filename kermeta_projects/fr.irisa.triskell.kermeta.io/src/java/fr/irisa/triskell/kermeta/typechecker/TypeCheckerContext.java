@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.3 2005-04-20 23:58:22 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.4 2005-04-21 15:19:02 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : GPL
@@ -25,6 +25,7 @@ import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FMultiplicityElement;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FParameter;
+import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
@@ -81,6 +82,17 @@ public class TypeCheckerContext {
 	    cls.setFClassDefinition(cdef);
 	    return new SimpleType(cls);
 	}
+	
+    public static FType getCanonicalType(FType t) {
+        FType result = PrimitiveTypeResolver.getResolvedType(t);
+        if (result instanceof FProductType) {
+            FProductType r  = (FProductType)result;
+            if (r.getFType().size() == 1) {
+                result = (FType)r.getFType().get(0);
+            }
+        }
+        return result;
+    }
 	
 	// The base types
 	protected static Type ObjectType;

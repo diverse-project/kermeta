@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.4 2005-04-21 11:39:40 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.5 2005-04-21 15:19:15 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -61,6 +61,7 @@ public class JunitTestSuite extends TestCase {
 	}
 	
 	// do not modify this comment
+
 
 
 

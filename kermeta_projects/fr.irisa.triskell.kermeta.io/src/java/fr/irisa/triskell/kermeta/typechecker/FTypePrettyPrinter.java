@@ -1,4 +1,4 @@
-/* $Id: FTypePrettyPrinter.java,v 1.1 2005-04-20 15:21:04 ffleurey Exp $
+/* $Id: FTypePrettyPrinter.java,v 1.2 2005-04-21 15:19:03 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : FTypePrettyPrinter.java
 * License : GPL
@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
+import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FSelfType;
@@ -87,5 +88,10 @@ public class FTypePrettyPrinter extends KermetaVisitor {
 	public Object visit(FVoidType arg0) {
 	    return "Void";
 	}
+	
+	
 
+    public Object visit(FFunctionType node) {
+        return "< " + this.accept(node.getFLeft()) + " -> " + this.accept(node.getFRight()) + " >";
+    }
 }
