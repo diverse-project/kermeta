@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.21 2005-04-21 14:32:37 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.22 2005-04-22 17:13:28 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -26,6 +26,8 @@ import java.util.Vector;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+import com.sun.rsasign.r;
+
 
 import fr.irisa.triskell.kermeta.ast.FSelfCall;
 import fr.irisa.triskell.kermeta.behavior.*;
@@ -51,10 +53,16 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  */
 public class BaseInterpreter extends KermetaVisitor {
 
-    /**
-     * The global context
-     */
+    /** The global context */
     protected InterpreterContext interpreterContext;
+    /** The lambda expression that is currently called */
+    protected FLambdaExpression calledLambdaExpression;
+    /** We visit a lambda expr in 2 cases :
+     *   - when it is defined
+     * 	 - when we call it
+     * Not the same as FOperation, which is visited only when called are invoked
+     * */
+    protected boolean isLambdaExpressionCall = false;
     
     public InterpreterContext getInterpreterContext() {
     	return this.interpreterContext;
@@ -100,6 +108,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	protected String current_pname;
 	
 	protected boolean typedef = false;
+    private RuntimeObject current_runtimeLambdaObject;
 	
 	/***
 	 * A variable declaration : when we encounter it, we add it to the expression context
@@ -113,11 +122,19 @@ public class BaseInterpreter extends KermetaVisitor {
 				);
 				*/
 	    //RuntimeObject ko = factory.createRuntimeObject(node);
-	    // TODO : node.getFInit can be null -
 		RuntimeObject ro_init=null;
+		// is it a classic case?
+		// TODO : compare qualified names otherwise this test could be sometimes false
+		if (FFunctionType.class.isInstance(node.getFType().getFType()))
+		{
+		    System.out.println("type : "+node.getFType().getFName());
+		    internalLog.debug("Type of variable declaration : "+node.getFType().getFName());
+		
+		}
 		if (node.getFInitialization()!=null)
-			ro_init = (RuntimeObject)this.accept(node.getFInitialization());
-	    interpreterContext.getCurrentFrame().getCurrentExpressionContext().defineVariable(
+		   ro_init = (RuntimeObject)this.accept(node.getFInitialization());
+		
+		interpreterContext.getCurrentFrame().getCurrentExpressionContext().defineVariable(
 	            node.getFType().getFType(), node.getFIdentifier(), ro_init);
 	    return null;
 	}
@@ -195,11 +212,50 @@ public class BaseInterpreter extends KermetaVisitor {
 	}
 	
 	/**
-	 * 
+	 * Visit a lambda expression. We visit a lambda expression in two cases :
+	 * - when we defined one and assigned it to a variable
+	 * - when we call one  
 	 */
 	public Object visit(FLambdaExpression node)
+	{   
+	    RuntimeObject result = null;
+	    	    
+	    // Special visit for the body of a lambdaexp, only when we execute it!
+	    // see CallFeature, principle is equivalent
+	    if (isLambdaExpressionCall == true)
+	    {
+	        RuntimeObject ro = current_runtimeLambdaObject;
+	        CallFrame current_frame =interpreterContext.getCurrentFrame(); 
+	        //interpreterContext.pushNewCallFrame(ro_target);
+	        // "push and fill" the internal context
+	        current_frame.pushNewExpressionContext(node);
+	        
+	        current_frame.getCurrentExpressionContext().setVariables(
+	                ((RuntimeLambdaObject)ro).getLambdaParameters());
+	        
+	        result = (RuntimeObject) this.visit(node.getFBody());
+
+	        current_frame.popExpressionContext();
+	    }
+	    // We only visit the definition of a lambda expression
+	    else
+	    {
+	        result = new RuntimeLambdaObject(Run.koFactory, node);
+		    // Special handling for a lambda'exp parameters : 
+		    // We don't need a runtimeObject for each of them
+		    //ArrayList params = visitList(node.getFParameters());
+		    ((RuntimeLambdaObject)result).defineLambdaParameters(node.getFParameters());
+		    
+	    }
+	    
+	    return result;
+	}
+	
+	public Object visitLambdaBody(FExpression body)
 	{
-	    return null;
+	    RuntimeObject result = null;
+	    
+	    return result;
 	}
 	
 	/**
@@ -217,20 +273,48 @@ public class BaseInterpreter extends KermetaVisitor {
 	}
 	
 	/**
-	 * If the visited element is a Variable, then we search its value in the InterpreterContext
+	 * If the visited element is a Variable, then we search its value in the 
+	 * InterpreterContext
 	 * */
 	public Object visit(FCallVariable node)
 	{
+	    RuntimeObject result = null;
+	    RuntimeObject variable_value = null;
 	    ExpressionContext found_context = findVariableInContext(node.getFName());
-	    RuntimeObject value = null;
+	    
 	    if (found_context!=null)
-	        value = found_context.getVariable(node.getFName()).getRuntimeObject();
+	        variable_value = found_context.getVariable(node.getFName()).getRuntimeObject();
 	    else
 	    	// TODO
 	    	System.err.println("Var not declared");
-	    return value;
+	    
+	    // If the variable contains parameters, i.e, if it is a LambdaExpression call
+	    // then we have to assign the lambda params to the values defined in FParameters
+	    // (bind parameters to the used values)
+	    // FIXME : redundant condition
+	    if (	RuntimeLambdaObject.class.isInstance(variable_value) ||
+	            node.getFParameters().size() != 0)
+	    {
+	        ArrayList paramAList = visitList(node.getFParameters());
+	        // TODO : typeChecking -> variable value and param must have the same type
+	        
+	        ((RuntimeLambdaObject)variable_value).setLambdaParameters(paramAList);
+	        
+	        // find in context the lambdaRuntimeObject corresponding .
+	        calledLambdaExpression = ((RuntimeLambdaObject)variable_value).getLambdaExpression();
+	        isLambdaExpressionCall = true; 
+	        current_runtimeLambdaObject = variable_value;
+	        result = (RuntimeObject) this.visit(calledLambdaExpression); // affect the RuntimeObject
+	        isLambdaExpressionCall = false;
+	        
+	    }
+	    else // not a lambda? so we don't need to evaluate it, we have the result already
+	    {
+	        result = variable_value;
+	    }
+	    
+	    return result;
 	}
-
 	
 	public Object visit(FSelfExpression node)
 	{
@@ -357,6 +441,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	    // add them to the context
 	    EList params = node.getFOwnedParameter();
 	    int i = 0;
+	    
 	    while (it.hasNext())
 	    {
 	        RuntimeObject called_param = (RuntimeObject)it.next();
@@ -586,9 +671,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		while (it.hasNext())
 		{
 		    paramtypes[i] = RuntimeObject.class;
-		    
 		    paramsArray[i++] = it.next();
-		    System.err.println(paramsArray[i-1]);
 		}
 		// Invoke the java method
 		Class jclass = null;
@@ -876,7 +959,6 @@ public class BaseInterpreter extends KermetaVisitor {
         // If it is still still null, find operation in Object!
         if (result == null)
         {
-        //    class_def = (FClassDefinition)unit.typeDefinitionLookup(KermetaUnit.ROOT_CLASS_QNAME);
             class_def = (FClassDefinition)unit.typeDefinitionLookup(KermetaUnit.ROOT_CLASS_QNAME);
             result = getFlatFeatureType(class_def, feature);
         }
