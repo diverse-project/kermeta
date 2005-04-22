@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.5 2005-04-04 14:34:18 zdrey Exp $
+/* $Id: ExpressionContext.java,v 1.6 2005-04-22 17:16:59 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -100,6 +100,16 @@ public class ExpressionContext {
 		variables.put(name, var);
 		return var;
 	    
+	}
+	
+	/**
+	 * Setter for the hashtable <code>variables</code>. Do not clear the current
+	 * content of variables, but overwrites the entries if there is conflict keys.
+	 * @param variables
+	 */
+	public void setVariables(Hashtable p_variables)
+	{	    
+	    variables.putAll(p_variables);
 	}
 	
 	/**
