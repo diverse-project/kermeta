@@ -1,4 +1,4 @@
-/* $Id: Run.java,v 1.19 2005-04-19 15:57:12 zdrey Exp $
+/* $Id: Run.java,v 1.20 2005-04-22 16:38:35 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -41,6 +41,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FTag;
@@ -136,8 +137,7 @@ public class Run extends TestCase {
 			    FClassDefinition classdef=(FClassDefinition)interpreterbuilder.getTypeDefinitionByName("kermeta::reflection::Class");
 			    koFactory.setClassClass(classdef);
 			    metametaClass=koFactory.getClassClass();
-			    selfINSTANCE=new RuntimeObject("The self instance");
-			    voidINSTANCE=new RuntimeObject("The void instance");
+			    
 			    
 			    // Define the RuntimeObject of the interpreter itself
 			    // And initialize all the static attributes of this class
@@ -147,11 +147,18 @@ public class Run extends TestCase {
 			    //						metaClassesBuilder.ppPackage(interpreterbuilder);
 			    //						KMMetaBuilder.processParametricTypes();
 			    
+			    // Create the void Instance (should be a singleton)
+			    RuntimeObject roVoidType = (RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::reflection::VoidType");
+			    voidINSTANCE=Run.koFactory.createRuntimeObject(roVoidType);
+			    
+			    // Create the self Instance (should be a singleton)
+			    RuntimeObject roSelfType = (RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::reflection::SelfType");
+			    selfINSTANCE=Run.koFactory.createRuntimeObject(roSelfType);
+			    
 			    KMBuilderPass1 builderPass1 = new KMBuilderPass1();
 			    builderPass1.ppPackage(interpreterbuilder);
-			    /* create the stdio default variable and push it in the interpreter context
-			     * to ensure any program may use stdio.print(...) and stdio.read("prompt>")
-			     */
+			    // Create the stdio default variable and push it in the interpreter context
+			    // to ensure any program may use stdio.print(...) and stdio.read("prompt>")
 			    RuntimeObject interpretermetaClass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::interpreter::Interpreter");
 			    interpreterInstance=Run.koFactory.createRuntimeObject(interpretermetaClass);
 			    stdIOmetaClass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::io::StdIO");
@@ -175,7 +182,7 @@ public class Run extends TestCase {
 			}
 			else
 			{
-			    System.out.println("model "+modelName+" loaded successfully !");
+			    internalLog.info("model "+modelName+" loaded successfully !");
 			    
 			    KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1();			
 			    classesBuilderPass1.ppPackage(builder);
@@ -189,9 +196,9 @@ public class Run extends TestCase {
 			                isTestOperation=true;
 			            if (tag.getFName().equals("mainClass"))
 			                mainClassValue=tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
-			            if (tag.getFName().equals("mainOperation"))
+			            if (!isTestOperation && tag.getFName().equals("mainOperation"))
 			                mainOperationValue=tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
-			            if (tag.getFName().equals("mainArgs"))
+			            if (!isTestOperation && tag.getFName().equals("mainArgs"))
 			                mainArgsValue=tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
 			        }
 			    }
@@ -199,10 +206,14 @@ public class Run extends TestCase {
 			        if (args.length>1)
 			            mainClassValue=args[1];
 			        else internalLog.error("You should provide a mainClass argument to launch this program !");
-			    if (mainOperationValue==null)
+			    if (mainOperationValue==null && !isTestOperation)
 			        if (args.length>2)
 			            mainOperationValue=args[2];
-			        else internalLog.error("You should provide a mainOperation argument to launch this program !");
+			        else internalLog.error(
+			             "You should provide a mainOperation " +
+			             "argument to launch this program, or add the tag 'testOperation'" +
+			             "in your test !"
+			        );
 			    /*				KMBuilderPass2 classesBuilderPass2 = new KMBuilderPass2();			
 			     classesBuilderPass2.ppPackage(builder);*/
 			}
@@ -227,9 +238,8 @@ public class Run extends TestCase {
 
 	
 	/**
-	 * TODO : as in Kermeta, we also can specify the packages containing the tests 
-	 * to run, as well as their classes, we can easily find them without using 
-	 * the explicit tag mainClassValue
+	 * Run a test suite : all operations that begin by "test" inside the class
+	 * specified by mainClassValue are executed
 	 * TODO (bis but important) : create a test suite handler, but in Kermeta!! 
 	 * @param mainClassValue
 	 * @param builder
@@ -333,7 +343,7 @@ public class Run extends TestCase {
 	{
 	    try
 	    {
-	        System.err.println("\nSTARTING INTERPRETATION OF MAIN OPERATION...");
+	        System.err.println("\nSTARTING INTERPRETATION OF OPERATION <"+mainOp.getFName()+">");
 	        
 	        long elapsedTime=System.currentTimeMillis();
 	        BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder);
