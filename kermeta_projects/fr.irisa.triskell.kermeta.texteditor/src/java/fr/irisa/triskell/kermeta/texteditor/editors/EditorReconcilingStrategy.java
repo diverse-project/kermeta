@@ -8,6 +8,7 @@ package fr.irisa.triskell.kermeta.texteditor.editors;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.eclipse.core.internal.resources.File;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
@@ -27,6 +28,9 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 /**
  * @author Franck Fleurey
@@ -90,6 +94,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 
     private KermetaUnit parse()
     {
+        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.texteditor_0.0.2/lib/framework.km";
     	
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();
@@ -103,8 +108,36 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
 	        result.parseString(_document.get().replace('\t', ' '));
 	        result.load();
+	        
+	        try {
+	            
+	           // System.getProperties().list(System.out);
+	            
+		        // SET THE STD LIB
+	            //TexteditorPlugin.getDefault().
+	            TexteditorPlugin.pluginLog.info("Setting std lib uri");
+			    KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.texteditor_0.0.2/lib/framework.km";
+			    // INIT TYPE CHECKER
+			    TexteditorPlugin.pluginLog.info("Initializing type checker");
+			    
+			    TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
+			    
+			    
+			        
+		        if (result.error.size() == 0) {
+		            KermetaTypeChecker tc = new KermetaTypeChecker(result);
+		            tc.checkUnit();
+		        }
+	        } catch (Throwable e) {
+	            TexteditorPlugin.pluginLog.error("Type-checker error", e);
+	            if (result != null) {
+	                result.error.add(new KMUnitError("Type checker internal error : " + e, null)); 
+	            }
+	        }
+	        
         }
         catch(Exception e) {
+            TexteditorPlugin.pluginLog.error("load error", e);
         	if (result == null) {
         		e.printStackTrace();
         		return null;

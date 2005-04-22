@@ -17,7 +17,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
 	
-	final static public Logger pluginLog = LogConfigurationHelper.getLogger("PutainDeLog4J2Merde");
+	final static public Logger pluginLog = LogConfigurationHelper.getLogger("KermetaEditor");
 	
 	/**
 	 * The constructor.
@@ -30,6 +30,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 		} catch (MissingResourceException x) {
 			resourceBundle = null;
 		}
+		
 	}
 
 	/**

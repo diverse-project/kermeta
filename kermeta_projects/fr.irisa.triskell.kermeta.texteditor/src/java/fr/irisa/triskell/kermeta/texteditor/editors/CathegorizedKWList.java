@@ -56,9 +56,9 @@ public class CathegorizedKWList {
 		addKeyword("inherits", structKW);
 		addKeyword("class", structKW);
 		addKeyword("abstract", structKW);
-		addKeyword("Self", typeKW);
+		//addKeyword("Self", typeKW);
 		addKeyword("Void", typeKW);
-		addKeyword("attribut", structKW);
+		addKeyword("attribute", structKW);
 		addKeyword("reference", structKW);
 		addKeyword("property", structKW);
 		addKeyword("readonly", structKW);
@@ -66,7 +66,7 @@ public class CathegorizedKWList {
 		addKeyword("is", structKW);
 		addKeyword("setter", structKW);
 		addKeyword("raises", controlKW);
-		addKeyword("select", structKW);
+		//addKeyword("select", structKW);
 		addKeyword("operation", structKW);
 		addKeyword("method", structKW);
 		addKeyword("bag", typeKW);

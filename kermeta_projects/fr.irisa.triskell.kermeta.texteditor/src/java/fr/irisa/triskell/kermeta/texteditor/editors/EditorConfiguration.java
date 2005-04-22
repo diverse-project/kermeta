@@ -51,15 +51,15 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		return reconciler;
 	}
 	
-//	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
-//		ContentAssistant assistant = new ContentAssistant();
-//		assistant.setContentAssistProcessor(new EditorCompletion(), IDocument.DEFAULT_CONTENT_TYPE);
-//		assistant.enableAutoActivation(true);
-//		assistant.setAutoActivationDelay(500);
-//		assistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
-//		return assistant;
-//	}
-//	
+	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
+		ContentAssistant assistant = new ContentAssistant();
+		assistant.setContentAssistProcessor(new EditorCompletion(), IDocument.DEFAULT_CONTENT_TYPE);
+		assistant.enableAutoActivation(true);
+		assistant.setAutoActivationDelay(500);
+		assistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
+		return assistant;
+	}
+	
 
 	/**
 	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getReconciler(org.eclipse.jface.text.source.ISourceViewer)
