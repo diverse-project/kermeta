@@ -60,7 +60,7 @@ class MultiplicityElement inherits TypedElement, kermeta::reflection::Multiplici
 }
 class Operation inherits MultiplicityElement, kermeta::reflection::Operation, KMStructureVisitable
 {
-	attribut body : kermeta::language::behavior::Expression
+	attribute body : kermeta::language::behavior::Expression
 
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
@@ -77,8 +77,8 @@ class Tag inherits Object, kermeta::reflection::Tag, KMStructureVisitable
 class Property inherits MultiplicityElement, kermeta::reflection::Property, KMStructureVisitable
 {
 
-	attribut getterbody : kermeta::language::behavior::Expression
-	attribut setterbody : kermeta::language::behavior::Expression
+	attribute getterbody : kermeta::language::behavior::Expression
+	attribute setterbody : kermeta::language::behavior::Expression
 	
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do

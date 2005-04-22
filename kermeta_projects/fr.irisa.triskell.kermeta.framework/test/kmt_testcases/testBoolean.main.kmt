@@ -4,11 +4,11 @@
 
 package testBoolean;
 require "../../src/kermeta/Standard.kmt"
-require "../../src/kermeta/test/unittest.kmt"
+//require "../../src/kermeta/test/unittest.kmt"
 
 // This class tests the logical operators on Booleans
 // "and" is prioritary to "or"
-class TestBoolean inherits kermeta::unittest::TestCase 
+class TestBoolean inherits kermeta::kunit::TestCase 
 {
 	// test true and true = true
 	operation testoptat() : Void is do

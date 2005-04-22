@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.1 2005-04-18 21:37:36 ffleurey Exp $
+/* $Id: CompileFramework.java,v 1.2 2005-04-22 01:34:37 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : CompileFramework.java
 * License : GPL
@@ -30,7 +30,7 @@ public class CompileFramework {
         
         u.load();
         
-        u.saveAllAsKM("dist/framework.km");
+        u.saveAsXMIModel("dist/framework.km");
         
     }
 }

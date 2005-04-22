@@ -1,5 +1,5 @@
 /***************************************************
- * $Id: interpreter.kmt,v 1.5 2005-04-20 12:55:24 dvojtise Exp $
+ * $Id: interpreter.kmt,v 1.6 2005-04-22 01:39:09 ffleurey Exp $
  * Franck FLEUREY - 23/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -136,7 +136,7 @@ class Interpreter inherits KMExpressionVisitor<InterpreterContext, Object>
 class InterpreterContext {
 	
 	// The call stack 
-	attribut call_stack : Stack<CallFrame>
+	attribute call_stack : Stack<CallFrame>
 	
 	// The current frame
 	property readonly current_frame : CallFrame
@@ -188,7 +188,7 @@ class CallFrame {
 	reference operation_result : Object
 	
 	// The current context
-	attribut context_stack : Stack<ExpressionContext>
+	attribute context_stack : Stack<ExpressionContext>
 	
 	property readonly current_context : ExpressionContext 
 		getter is do
@@ -219,7 +219,7 @@ class ExpressionContext {
 	reference root : Expression
 
 	// The set of variable defines in this block
-	attribut variables : Hashtable<String, Variable>
+	attribute variables : Hashtable<String, Variable>
 	
 	// Add a new variable in the context
 	operation defineVariable(declaration : VariableDecl) : Variable is do

@@ -4,10 +4,10 @@
 
 package testPackage;
 require "../../src/kermeta/Standard.kmt"
-require "../../src/kermeta/test/unittest.kmt"
+//require "../../src/kermeta/test/unittest.kmt"
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: testIterator.main.kmt,v 1.2 2005-04-18 08:21:26 zdrey Exp $
+ * $Id: testIterator.main.kmt,v 1.3 2005-04-22 01:34:41 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -22,9 +22,9 @@ alias Integer : kermeta::standard::Integer;
  ***************************************************************************
  */
 
-class TestIterator inherits kermeta::unittest::TestCase
+class TestIterator inherits kermeta::kunit::TestCase
 {    
-	attribut aset : kermeta::standard::Set<Integer>
+	attribute aset : kermeta::standard::Set<Integer>
 
     // Main operation that embeds all the tests 
      operation main_operation() is do

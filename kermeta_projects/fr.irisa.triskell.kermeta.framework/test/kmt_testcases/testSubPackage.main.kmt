@@ -5,13 +5,13 @@
 
 package root;
 require "../../src/kermeta/Standard.kmt"
-require "../../src/kermeta/test/unittest.kmt"
+//require "../../src/kermeta/test/unittest.kmt"
 
 // Main package containing the operation to be executed
 package testPackage 
 {
 
-	class TestClass inherits kermeta::unittest::TestCase 
+	class TestClass inherits kermeta::kunit::TestCase 
 	{
 		@testopsub "test operation for a 1 level 'sub'"
 		operation testopsub() : Void is do

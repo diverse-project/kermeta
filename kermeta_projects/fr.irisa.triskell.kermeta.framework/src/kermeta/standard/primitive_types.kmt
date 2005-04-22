@@ -1,7 +1,9 @@
-// $Id: primitive_types.kmt,v 1.7 2005-04-20 14:42:36 zdrey Exp $
+// $Id: primitive_types.kmt,v 1.8 2005-04-22 01:34:43 ffleurey Exp $
 package kermeta::standard;
 
-//require "../Standard.kmt"
+require "../Standard.kmt"
+
+using kermeta::language::structure
 
 /***************************************************
  * Franck FLEUREY - 11/02/2005
@@ -41,33 +43,33 @@ abstract class Comparable {
 	 * returns > 0 if  self > other
 	 * returns < 0 if  self < other
 	 */
-	operation compareTo(other : Self) : Integer is abstract
+	operation compareTo(other : Object) : Integer is abstract
 	
 	/**
 	 * return true if self > other
 	 */
-	operation isGreater(other : Self) : Boolean is do
+	operation isGreater(other : Object) : Boolean is do
 		self.compareTo(other) > 0
 	end
 	
 	/**
 	 * return true if self < other
 	 */
-	operation isLower(other : Self) : Boolean is do
+	operation isLower(other : Object) : Boolean is do
 		self.compareTo(other) < 0
 	end
 	
 	/**
 	 * return true if self <= other
 	 */
-	operation isLowerOrEqual(other : Self) : Boolean is do
+	operation isLowerOrEqual(other : Object) : Boolean is do
 		self.compareTo(other) <= 0
 	end
 	
 	/**
 	 * return true if self >= other
 	 */
-	operation isGreaterOrEqual(other : Self) : Boolean is do
+	operation isGreaterOrEqual(other : Object) : Boolean is do
 		self.compareTo(other) >= 0
 	end
 } // Comparable
@@ -112,14 +114,14 @@ abstract class Numeric inherits Comparable, ValueType
 	/**
 	 * Comparaison between two numerics
 	 */
-	method compareTo(other : Self) : Integer is do
+	method compareTo(other : Object) : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Numeric.compareTo(self, other)
 	end
 	
 	/**
 	 * test whether self and other have an identical numeric value
 	 */
-	operation equals(other : Numeric) : Boolean is do
+	method equals(other : Object) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Numeric.equals(self,other)
 	end
 }
@@ -236,7 +238,7 @@ class Character inherits ValueType, Comparable
 	/**
 	 * Comparaison
 	 */
-	method compareTo(other : Self) : Integer is do
+	method compareTo(other : Object) : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.compareTo(self,other)
 	end
 }
@@ -250,7 +252,7 @@ class String inherits ValueType, Comparable
 	/**
 	 * Comparaison
 	 */
-	method compareTo(other : Self) : Integer is do
+	method compareTo(other : Object) : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self,other)
 	end
 	

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kermeta_structure:FPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_behavior="http://kermeta_behavior/kermeta.ecore" xmlns:kermeta_structure="http://kermeta_structure/kermeta.ecore" fName="kermeta">
+  <fNestedPackage fName="reflection">
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FPrimitiveType" fName="String" fInstanceType="//@fNestedPackage.0/@fOwnedTypeDefinition.0/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass">
+        <fClassDefinition href="../../standard/output/collections_kmt.kcore#//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+      </fContainedType>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Object" fIsAbstract="true">
+      <fOwnedAttributes fName="tag" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedAttributes.0/@fContainedType.0" fUpper="-1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedAttributes.0">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.7"/>
+      </fOwnedAttributes>
+      <fOwnedOperation fName="getMetaClass" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.0/@fContainedType.0" fIsOrdered="true" fUpper="1" fIsAbstract="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.4"/>
+      </fOwnedOperation>
+      <fOwnedOperation fName="container" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.1/@fContainedType.0" fIsOrdered="true" fUpper="1" fIsAbstract="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+      </fOwnedOperation>
+      <fOwnedOperation fName="equals" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsAbstract="true">
+        <fOwnedParameter fName="element" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.2/@fOwnedParameter.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+          <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+        </fOwnedParameter>
+      </fOwnedOperation>
+      <fOwnedOperation fName="get" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.3/@fContainedType.0" fIsOrdered="true" fUpper="1" fIsAbstract="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+        <fOwnedParameter fName="property" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.3/@fOwnedParameter.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+          <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+        </fOwnedParameter>
+      </fOwnedOperation>
+      <fOwnedOperation fName="set" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.4/@fContainedType.0" fIsOrdered="true" fUpper="1" fIsAbstract="true">
+        <fContainedType xsi:type="kermeta_structure:FVoidType"/>
+        <fOwnedParameter fName="property" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.4/@fOwnedParameter.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+          <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+        </fOwnedParameter>
+        <fOwnedParameter fName="element" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.4/@fOwnedParameter.1/@fContainedType.0" fIsOrdered="true" fUpper="1">
+          <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+        </fOwnedParameter>
+      </fOwnedOperation>
+      <fOwnedOperation fName="isSet" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsAbstract="true">
+        <fOwnedParameter fName="property" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.5/@fOwnedParameter.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+          <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+        </fOwnedParameter>
+      </fOwnedOperation>
+      <fOwnedOperation fName="unset" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.6/@fContainedType.0" fIsOrdered="true" fUpper="1" fIsAbstract="true">
+        <fContainedType xsi:type="kermeta_structure:FVoidType"/>
+        <fOwnedParameter fName="property" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.6/@fOwnedParameter.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+          <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+        </fOwnedParameter>
+      </fOwnedOperation>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FPrimitiveType" fName="Boolean" fInstanceType="//@fNestedPackage.0/@fOwnedTypeDefinition.2/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass">
+        <fClassDefinition href="../../standard/output/collections_kmt.kcore#//@fNestedPackage.0/@fOwnedTypeDefinition.3"/>
+      </fContainedType>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FPrimitiveType" fName="Integer" fInstanceType="//@fNestedPackage.0/@fOwnedTypeDefinition.3/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass">
+        <fClassDefinition href="../../standard/output/collections_kmt.kcore#//@fNestedPackage.0/@fOwnedTypeDefinition.5"/>
+      </fContainedType>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Class" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.4/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      <fOwnedAttributes fName="classDefinition" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedAttributes.0/@fContainedType.0" fIsOrdered="true" fLower="1" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.10"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="typeParamBinding" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedAttributes.1/@fContainedType.0" fUpper="-1" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.16"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="ownedAttribute" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedAttributes.2/@fContainedType.0" fUpper="-1" fIsReadOnly="true" fIsDerived="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+        <fGetterbody xsi:type="kermeta_behavior:FBlock">
+          <fStatement xsi:type="kermeta_behavior:FAssignement">
+            <fTarget xsi:type="kermeta_behavior:FCallResult" fName="result"/>
+            <fValue xsi:type="kermeta_behavior:FCallFeature" fName="ownedAttribute">
+              <fTarget xsi:type="kermeta_behavior:FCallFeature" fName="classDefinition"/>
+            </fValue>
+          </fStatement>
+        </fGetterbody>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="ownedOperation" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedAttributes.3/@fContainedType.0" fUpper="-1" fIsReadOnly="true" fIsDerived="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.6"/>
+        <fGetterbody xsi:type="kermeta_behavior:FBlock">
+          <fStatement xsi:type="kermeta_behavior:FAssignement">
+            <fTarget xsi:type="kermeta_behavior:FCallResult" fName="result"/>
+            <fValue xsi:type="kermeta_behavior:FCallFeature" fName="ownedOperation">
+              <fTarget xsi:type="kermeta_behavior:FCallFeature" fName="classDefinition"/>
+            </fValue>
+          </fStatement>
+        </fGetterbody>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="superClass" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedAttributes.4/@fContainedType.0" fUpper="-1" fIsReadOnly="true" fIsDerived="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.4"/>
+        <fGetterbody xsi:type="kermeta_behavior:FBlock">
+          <fStatement xsi:type="kermeta_behavior:FAssignement">
+            <fTarget xsi:type="kermeta_behavior:FCallResult" fName="result"/>
+            <fValue xsi:type="kermeta_behavior:FCallFeature" fName="superType">
+              <fTarget xsi:type="kermeta_behavior:FCallFeature" fName="classDefinition"/>
+            </fValue>
+          </fStatement>
+        </fGetterbody>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="isAbstract" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsReadOnly="true" fIsDerived="true">
+        <fGetterbody xsi:type="kermeta_behavior:FBlock">
+          <fStatement xsi:type="kermeta_behavior:FAssignement">
+            <fTarget xsi:type="kermeta_behavior:FCallResult" fName="result"/>
+            <fValue xsi:type="kermeta_behavior:FCallFeature" fName="isAbstract">
+              <fTarget xsi:type="kermeta_behavior:FCallFeature" fName="classDefinition"/>
+            </fValue>
+          </fStatement>
+        </fGetterbody>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="name" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.0" fIsOrdered="true" fUpper="1" fIsReadOnly="true" fIsDerived="true">
+        <fGetterbody xsi:type="kermeta_behavior:FBlock">
+          <fStatement xsi:type="kermeta_behavior:FAssignement">
+            <fTarget xsi:type="kermeta_behavior:FCallResult" fName="result"/>
+            <fValue xsi:type="kermeta_behavior:FCallFeature" fName="name">
+              <fTarget xsi:type="kermeta_behavior:FCallFeature" fName="classDefinition"/>
+            </fValue>
+          </fStatement>
+        </fGetterbody>
+      </fOwnedAttributes>
+      <fOwnedOperation fName="new" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.0/@fContainedType.0" fIsOrdered="true" fUpper="1" fIsAbstract="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+      </fOwnedOperation>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="MultiplicityElement" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.5/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.11"/>
+      <fOwnedAttributes fName="isOrdered" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+      <fOwnedAttributes fName="isUnique" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+      <fOwnedAttributes fName="lower" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.3" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+      <fOwnedAttributes fName="upper" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.27" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Operation" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.6/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.5"/>
+      <fOwnedAttributes fName="isAbstract" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+      <fOwnedAttributes fName="superOperation" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedAttributes.1/@fContainedType.0" fIsOrdered="true" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.6"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="owningClass" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedAttributes.2/@fContainedType.0" fIsOrdered="true" fUpper="1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.10/@fOwnedAttributes.2">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.10"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="typeParameter" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedAttributes.3/@fContainedType.0" fUpper="-1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.12"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="raisedException" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedAttributes.4/@fContainedType.0" fUpper="-1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="ownedParameter" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedAttributes.5/@fContainedType.0" fUpper="-1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.26/@fOwnedAttributes.0" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.26"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Tag" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.7/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+      <fOwnedAttributes fName="object" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedAttributes.0/@fContainedType.0" fLower="1" fUpper="-1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedAttributes.0">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="name" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.0" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+      <fOwnedAttributes fName="value" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.0" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Property" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.8/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.5"/>
+      <fOwnedAttributes fName="owningClass" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.8/@fOwnedAttributes.0/@fContainedType.0" fIsOrdered="true" fUpper="1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.10/@fOwnedAttributes.1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.10"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="opposite" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.8/@fOwnedAttributes.1/@fContainedType.0" fIsOrdered="true" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="isReadOnly" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+      <fOwnedAttributes fName="default" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.0" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+      <fOwnedAttributes fName="isComposite" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+      <fOwnedAttributes fName="isDerived" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+      <fOwnedAttributes fName="isID" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="TypeContainer" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.9/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+      <fOwnedAttributes fName="containedType" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.9/@fOwnedAttributes.0/@fContainedType.0" fUpper="-1" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="ClassDefinition" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.10/@fContainedType.0 //@fNestedPackage.0/@fOwnedTypeDefinition.10/@fContainedType.1">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.9"/>
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.21"/>
+      <fOwnedAttributes fName="isAbstract" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+      <fOwnedAttributes fName="ownedAttributes" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.10/@fOwnedAttributes.1/@fContainedType.0" fUpper="-1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.8/@fOwnedAttributes.0" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.8"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="ownedOperation" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.10/@fOwnedAttributes.2/@fContainedType.0" fUpper="-1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedAttributes.2" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.6"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="superType" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.10/@fOwnedAttributes.3/@fContainedType.0" fUpper="-1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="typeParameter" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.10/@fOwnedAttributes.4/@fContainedType.0" fUpper="-1" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.12"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="TypedElement" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.11/@fContainedType.0 //@fNestedPackage.0/@fOwnedTypeDefinition.11/@fContainedType.1">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.9"/>
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.18"/>
+      <fOwnedAttributes fName="type" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.11/@fOwnedAttributes.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="TypeVariable" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.12/@fContainedType.0 //@fNestedPackage.0/@fOwnedTypeDefinition.12/@fContainedType.1 //@fNestedPackage.0/@fOwnedTypeDefinition.12/@fContainedType.2">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.9"/>
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.18"/>
+      <fOwnedAttributes fName="supertype" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.12/@fOwnedAttributes.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="ProductType" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.13/@fContainedType.0 //@fNestedPackage.0/@fOwnedTypeDefinition.13/@fContainedType.1">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.9"/>
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      <fOwnedAttributes fName="type" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.13/@fOwnedAttributes.0/@fContainedType.0" fLower="1" fUpper="-1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="FunctionType" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.14/@fContainedType.0 //@fNestedPackage.0/@fOwnedTypeDefinition.14/@fContainedType.1">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.9"/>
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      <fOwnedAttributes fName="left" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.14/@fOwnedAttributes.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="right" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.14/@fOwnedAttributes.1/@fContainedType.0" fIsOrdered="true" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Type" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.15/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+      <fOwnedOperation fName="isInstance" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.2" fIsOrdered="true" fUpper="1" fIsAbstract="true">
+        <fOwnedParameter fName="element" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.15/@fOwnedOperation.0/@fOwnedParameter.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+          <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+        </fOwnedParameter>
+      </fOwnedOperation>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="TypeVariableBinding" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.16/@fContainedType.0 //@fNestedPackage.0/@fOwnedTypeDefinition.16/@fContainedType.1">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.9"/>
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+      <fOwnedAttributes fName="variable" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.16/@fOwnedAttributes.0/@fContainedType.0" fIsOrdered="true" fLower="1" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.12"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="type" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.16/@fOwnedAttributes.1/@fContainedType.0" fIsOrdered="true" fLower="1" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="PrimitiveType" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.17/@fContainedType.0 //@fNestedPackage.0/@fOwnedTypeDefinition.17/@fContainedType.1">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.9"/>
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.23"/>
+      <fOwnedAttributes fName="instanceType" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.17/@fOwnedAttributes.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="NamedElement" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.18/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
+      <fOwnedAttributes fName="name" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.0" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="SelfType" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.19/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Package" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.20/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.18"/>
+      <fOwnedAttributes fName="ownedTypeDefinition" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.20/@fOwnedAttributes.0/@fContainedType.0" fUpper="-1" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.21"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="nestedPackage" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.20/@fOwnedAttributes.1/@fContainedType.0" fUpper="-1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.20/@fOwnedAttributes.2" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.20"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="nestingPackage" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.20/@fOwnedAttributes.2/@fContainedType.0" fIsOrdered="true" fUpper="1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.20/@fOwnedAttributes.1">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.20"/>
+      </fOwnedAttributes>
+      <fOwnedAttributes fName="uri" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.0" fIsOrdered="true" fUpper="1" fIsComposite="true"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="TypeDefinition" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.21/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.18"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="VoidType" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.22/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="DataType" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.23/@fContainedType.0 //@fNestedPackage.0/@fOwnedTypeDefinition.23/@fContainedType.1">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.21"/>
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.15"/>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Enumeration" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.24/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.23"/>
+      <fOwnedAttributes fName="ownedLiteral" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.24/@fOwnedAttributes.0/@fContainedType.0" fUpper="-1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.25/@fOwnedAttributes.0" fIsComposite="true">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.25"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="EnumerationLiteral" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.25/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.18"/>
+      <fOwnedAttributes fName="enumeration" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.25/@fOwnedAttributes.0/@fContainedType.0" fIsOrdered="true" fUpper="1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.24/@fOwnedAttributes.0">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.24"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fName="Parameter" fIsAbstract="true" fSuperType="//@fNestedPackage.0/@fOwnedTypeDefinition.26/@fContainedType.0">
+      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.5"/>
+      <fOwnedAttributes fName="operation" fType="//@fNestedPackage.0/@fOwnedTypeDefinition.26/@fOwnedAttributes.0/@fContainedType.0" fIsOrdered="true" fUpper="1" fOpposite="//@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedAttributes.5">
+        <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.0/@fOwnedTypeDefinition.6"/>
+      </fOwnedAttributes>
+    </fOwnedTypeDefinition>
+    <fOwnedTypeDefinition xsi:type="kermeta_structure:FPrimitiveType" fName="UnlimitedNatural">
+      <fInstanceType href="../../standard/output/collections_kmt.kcore#//@fNestedPackage.0/@fOwnedTypeDefinition.9"/>
+    </fOwnedTypeDefinition>
+  </fNestedPackage>
+</kermeta_structure:FPackage>

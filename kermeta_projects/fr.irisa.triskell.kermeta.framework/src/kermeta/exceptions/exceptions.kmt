@@ -22,9 +22,9 @@ using kermeta::utils
 abstract class Exception
 {
     // The name of the exception (find it with reflexion? -> property?)
-    attribut name : String
+    attribute name : String
     //
-    attribut message : String
+    attribute message : String
 
     // print the trace of the errors thrown by this exception
     // stack is given by the nested exceptions through the op. calls

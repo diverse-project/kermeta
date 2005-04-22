@@ -1,5 +1,5 @@
 /***************************************************
- * $Id: kunit.kmt,v 1.4 2005-04-20 09:06:41 dvojtise Exp $
+ * $Id: kunit.kmt,v 1.5 2005-04-22 01:34:50 ffleurey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -57,7 +57,7 @@ abstract class Assert
 @TestSuite "A test suite is meant as executing automatically a suite of test cases"
 class TestSuite inherits Test
 {
-	attribut tests : kermeta::standard::Set<Test>
+	attribute tests : kermeta::standard::Set<Test>
 
 	//@addTest "add a test case in the suite of tests to run"
 	operation addTest(test : Test) is do

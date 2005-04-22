@@ -4,10 +4,10 @@
 
 package root;
 require "../../src/kermeta/Standard.kmt"
-require "../../src/kermeta/test/unittest.kmt"
+//require "../../src/kermeta/test/unittest.kmt"
 
 /*****************************************************************************
- * $Id: testBooleanResults.main.kmt,v 1.1 2005-04-15 11:53:27 zdrey Exp $
+ * $Id: testBooleanResults.main.kmt,v 1.2 2005-04-22 01:34:40 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testBooleanResults.kmt
@@ -20,7 +20,7 @@ require "../../src/kermeta/test/unittest.kmt"
  ***************************************************************************
  */
 
-class TestBooleanResults inherits kermeta::unittest::TestCase
+class TestBooleanResults inherits kermeta::kunit::TestCase
 {    
     // Main operation that embeds all the tests 
      operation main_operation() is do

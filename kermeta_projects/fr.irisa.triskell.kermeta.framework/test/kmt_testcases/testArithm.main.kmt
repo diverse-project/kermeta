@@ -4,11 +4,12 @@
 
 package testArithm;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/test/unittest.kmt"
+require "../../src/kermeta/Standard.kmt"
+
+//require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/test/unittest.kmt"
 alias Integer : kermeta::standard::Integer;
 // arithmetic operations - clone of 2_testArithm.main.kmt
-class TestArithm inherits kermeta::unittest::TestCase {
+class TestArithm inherits kermeta::kunit::TestCase {
 
 	// test plus
 	operation testop1() : Void is do
