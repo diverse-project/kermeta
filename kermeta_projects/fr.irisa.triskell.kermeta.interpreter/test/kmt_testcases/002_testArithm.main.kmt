@@ -78,7 +78,6 @@ class Test_arithm inherits kermeta::kunit::Test {
 
 	operation testCompareToNumeric() : Void is do
 		assert(8.compareTo(8) == 0)
-		stdio.write("errror")
 	end
 
     // plus times minus
