@@ -4,7 +4,7 @@ package testPackDep;
 package toto {
 
 	class C {
-		attribut c : C
+		attribute c : C
 	}
 
 }

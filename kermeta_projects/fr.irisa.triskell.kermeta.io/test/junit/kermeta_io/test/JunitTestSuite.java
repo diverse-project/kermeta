@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.13 2005-04-20 16:03:33 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.14 2005-04-22 01:46:25 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -348,7 +348,7 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		else {	
 			
 		// the xmi :
-		builder.saveMetaCoreModel(dir + "/" + "output");
+		builder.saveAsXMIModel(dir + "/" + "output/" + file.replace('.', '_') + ".km");
 		// try to pretty-print the result in another file
 		URI userLocatedPpfile=UserDirURI.createURI(dir + "/output/"  + file.replace('.', '_') + ".kmt",null,true);
 		String ppfile =userLocatedPpfile.toString();

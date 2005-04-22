@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.4 2005-04-21 15:19:02 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.5 2005-04-22 01:46:24 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : GPL
@@ -41,7 +41,7 @@ public class TypeCheckerContext {
 
 	public static void initializeTypeChecker(KermetaUnit std_lib) {
 		// TODO : Assign Basic types and classdefinition here
-		
+	    KermetaUnit.internalLog.info("Initializing type checker with standard lib...");
 	    ObjectType = createTypeForClassDefinition("kermeta::language::structure::Object", std_lib);
 	    ClassType = createTypeForClassDefinition("kermeta::language::structure::Class", std_lib);
 	    VoidType = createTypeForClassDefinition("kermeta::standard::Void", std_lib);
@@ -59,6 +59,13 @@ public class TypeCheckerContext {
 		set_type_cache = new Hashtable();
 		seq_type_cache = new Hashtable();
 		oset_type_cache = new Hashtable();
+		
+		if (ObjectType == null || SetClassDef == null) {
+		    KermetaUnit.internalLog.error("Error initializing type checker. The standard library may not be loaded corectly.");
+		} else {
+		    KermetaUnit.internalLog.info("Type checker initialized.");
+		}
+		
 	}
 	
 	protected static FOperation getClassNewOperation() {

@@ -8,7 +8,7 @@ alias PClass1 : Coucou ;
 
 class Coucou {
 
- attribut toto : PClass1
+ attribute toto : PClass1
 
 }
 

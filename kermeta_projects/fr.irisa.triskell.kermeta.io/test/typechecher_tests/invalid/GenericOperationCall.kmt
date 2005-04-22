@@ -1,4 +1,4 @@
-/* $Id: GenericOperationCall.kmt,v 1.1 2005-04-20 23:58:28 ffleurey Exp $ */
+/* $Id: GenericOperationCall.kmt,v 1.2 2005-04-22 01:46:17 ffleurey Exp $ */
 
 // Some wrong operation calls involving generics
 
@@ -57,15 +57,15 @@ class Test {
 		la := u.first(u.asList(lla))
 	end
 	
-	attribut a : A
-	attribut b : B
+	attribute a : A
+	attribute b : B
 	
-	attribut la : List<A>
-	attribut lb : List<B>
+	attribute la : List<A>
+	attribute lb : List<B>
 	
-	attribut lla : List<List<A>>
+	attribute lla : List<List<A>>
 	
-	attribut u : Util
+	attribute u : Util
 
 }
 

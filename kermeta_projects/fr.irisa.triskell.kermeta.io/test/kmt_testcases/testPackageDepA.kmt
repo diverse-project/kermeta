@@ -6,6 +6,6 @@ require "testPackageDepC.kmt"
 
 class A {
 
-	attribut e : toto::C
+	attribute e : toto::C
  
 }

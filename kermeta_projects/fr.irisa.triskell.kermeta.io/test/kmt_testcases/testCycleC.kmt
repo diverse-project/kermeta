@@ -4,7 +4,7 @@ require "testCycleA.kmt"
 
 class C {
 
-	attribut a : A
-	attribut e : E
+	attribute a : A
+	attribute e : E
  
 }

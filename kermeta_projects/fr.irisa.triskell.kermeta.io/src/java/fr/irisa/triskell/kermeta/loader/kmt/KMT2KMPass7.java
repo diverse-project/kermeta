@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.10 2005-04-05 12:37:24 jpthibau Exp $
+/* $Id: KMT2KMPass7.java,v 1.11 2005-04-22 01:46:18 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -133,11 +133,19 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    
 	    try {
 	      //  BufferedReader r = new BufferedReader(new FileReader(uri));
-			URI _uri = UserDirURI.createURI(str_uri,null,false);
-	         BufferedReader r = new BufferedReader(
-	   	         new InputStreamReader(new FileInputStream(new File(_uri.toFileString()))));
+			//URI _uri = UserDirURI.createURI(str_uri,null,false);
+	         //BufferedReader r = new BufferedReader(
+	   	     //    new InputStreamReader(new FileInputStream(new File(_uri.toFileString()))));
 	        
-	        while (r.ready()) {
+	       
+	         URI _uri = URI.createURI(str_uri);
+	 		 URIConverter converter = new URIConverterImpl();
+	         
+	 		 BufferedReader r = new BufferedReader(
+	 		        new InputStreamReader(converter.createInputStream(_uri)));
+	 		 
+	         
+	         while (r.ready()) {
 	            char[] c = {(char)r.read()};
 	            String sc = (c[0]=='\t')?" ":new String(c);
 	            result += sc;

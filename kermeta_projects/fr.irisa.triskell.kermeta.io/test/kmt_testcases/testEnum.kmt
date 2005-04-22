@@ -8,7 +8,7 @@ enumeration Enum1 {
 
 class TestEnum {
 
-	attribut prop : Enum1
+	attribute prop : Enum1
 	
 	operation swap() is do
 		if prop == Enum1.toto then

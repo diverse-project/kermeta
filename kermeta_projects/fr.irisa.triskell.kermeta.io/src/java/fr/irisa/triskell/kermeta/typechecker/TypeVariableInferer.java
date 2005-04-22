@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.4 2005-04-21 15:19:03 ffleurey Exp $
+/* $Id: TypeVariableInferer.java,v 1.5 2005-04-22 01:46:24 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableInferer.java
 * License : GPL
@@ -13,6 +13,7 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
@@ -100,14 +101,23 @@ public class TypeVariableInferer extends KermetaVisitor {
 		if (! (provided instanceof FClass) ) throw new TypeDoesNotMatchError();
 		// the provided type is suposed to be a conformant class  
 		
-		if (arg0.getFTypeParamBinding().size() != ((FClass)provided).getFTypeParamBinding().size())
-		    throw new TypeDoesNotMatchError();
+		//if (arg0.getFTypeParamBinding().size() != ((FClass)provided).getFTypeParamBinding().size())
+		    //throw new TypeDoesNotMatchError();
 		
-		for(int i=0; i<arg0.getFTypeParamBinding().size(); i++) {
-			FType g = ((FTypeVariableBinding)arg0.getFTypeParamBinding().get(i)).getFType();
-			FType p = ((FTypeVariableBinding)((FClass)provided).getFTypeParamBinding().get(i)).getFType();
-			TypeVariableInferer.inferTypeVariableTypes(g, p, result);
+		Iterator it = InheritanceSearch.allSuperTypes((FClass)provided).iterator();
+		
+		while(it.hasNext()) {
+		    FClass sp = (FClass)it.next();
+		    if (arg0.getFClassDefinition() == sp.getFClassDefinition()) {
+		        for(int i=0; i<arg0.getFTypeParamBinding().size(); i++) {
+					FType g = ((FTypeVariableBinding)arg0.getFTypeParamBinding().get(i)).getFType();
+					FType p = ((FTypeVariableBinding)sp.getFTypeParamBinding().get(i)).getFType();
+					TypeVariableInferer.inferTypeVariableTypes(g, p, result);
+				}
+		        return null;
+		    }
 		}
+		//throw new TypeDoesNotMatchError();
 		return null;
 	}
 	

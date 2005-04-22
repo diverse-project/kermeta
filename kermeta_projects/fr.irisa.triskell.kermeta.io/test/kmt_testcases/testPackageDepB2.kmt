@@ -5,8 +5,8 @@ require "testPackageDepD2.kmt"
 
 class B {
 
-	attribut d : toto::D
-	attribut c : toto::C
-	attribut b : B
+	attribute d : toto::D
+	attribute c : toto::C
+	attribute b : B
  
 }

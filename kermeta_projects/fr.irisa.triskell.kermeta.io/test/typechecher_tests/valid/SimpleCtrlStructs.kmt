@@ -1,4 +1,4 @@
-/* $Id: SimpleCtrlStructs.kmt,v 1.1 2005-04-20 23:58:24 ffleurey Exp $ */
+/* $Id: SimpleCtrlStructs.kmt,v 1.2 2005-04-22 01:46:20 ffleurey Exp $ */
 
 // Type checking on simple control stucts
 
@@ -43,15 +43,22 @@ class Test {
 	end
 	
 	operation test7() : Void is do
+	
+		not a.equals(b)
+		
+		a.getMetaClass == B
+		
+	
 		if not a.equals(b) and a.getMetaClass == B then
 			var x : A init a
 			a := b
 			b ?= x
+		
 		end
 	end
 	
-	attribut a : A
-	attribut b : B
+	attribute a : A
+	attribute b : B
 
 }
 

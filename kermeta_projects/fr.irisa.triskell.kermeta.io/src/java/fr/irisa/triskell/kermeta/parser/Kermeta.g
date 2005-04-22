@@ -219,8 +219,7 @@ typeVarDecl returns [ TypeVarDecl retVal = null ]
 
 type returns [ Type retVal = null ]
 :
-  ( retVal=selftype
-  | retVal=basictype
+  ( retVal=basictype
   | retVal=functype
   | retVal=prodtype
   | retVal=voidType
@@ -246,12 +245,6 @@ functype returns [ Functype retVal = null ]
 { Type left = null; Type right = null; }
   lt:LT left=type minus_gt:MINUS_GT right=type gt:GT 
 { retVal = new Functype(lt, left, minus_gt, right, gt); }
-;
-
-selftype returns [ Selftype retVal = null ]
-:
-  Self_KW:"Self" 
-{ retVal = new Selftype(Self_KW); }
 ;
 
 voidType returns [ VoidType retVal = null ]
@@ -283,7 +276,7 @@ property returns [ Property retVal = null ]
 
 propertyKind returns [ PropertyKind retVal = null ]
 { Token tok = LT(1); }
-: ( "attribut"
+: ( "attribute"
   | "reference"
   | "property"
   )

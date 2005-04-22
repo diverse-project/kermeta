@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.5 2005-04-21 15:19:15 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.6 2005-04-22 01:46:26 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -59,20 +59,22 @@ public class JunitTestSuite extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
-	
+	/*
+	public void testTypeCheckStdLib() {
+	    if (KermetaUnit.getStdLib().getAllErrors().size() > 0) {
+			assertTrue(KermetaUnit.getStdLib().getAllMessagesAsString(), false);
+		}
+		
+		KermetaTypeChecker tc = new KermetaTypeChecker(KermetaUnit.getStdLib());
+	    
+		tc.checkUnit();
+		
+		if (KermetaUnit.getStdLib().getAllErrors().size() > 0) {
+			assertTrue(KermetaUnit.getStdLib().getAllMessagesAsString(), false);
+		}
+	}
+	*/
 	// do not modify this comment
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_1_ClassSubTyping_1() throws Exception {
@@ -105,6 +107,10 @@ testvalidFile("test/typechecher_tests/valid","SimpleCtrlStructs.kmt" );
 
 public void testvalid_SimpleFunctions() throws Exception {
 testvalidFile("test/typechecher_tests/valid","SimpleFunctions.kmt" );
+}
+
+public void testvalid_GenericVisitor() throws Exception {
+testvalidFile("test/typechecher_tests/valid","GenericVisitor.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
@@ -141,8 +147,10 @@ testinvalidFile("test/typechecher_tests/invalid","SimpleFunctions.kmt" );
 
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
-	
-	
+
+
+
+
 	public void testvalidFile(String dir, String file) throws Exception {
 	    
 	    KermetaUnitFactory.getDefaultLoader().unloadAll();

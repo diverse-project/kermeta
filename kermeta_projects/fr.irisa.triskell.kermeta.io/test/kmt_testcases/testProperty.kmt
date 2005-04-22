@@ -5,13 +5,13 @@ class Integer {}
 class Boolean {}
 
 class Class1 inherits Class5 {
-	attribut readonly property11 : String
+	attribute readonly property11 : String
 	reference property12 : String[1]
 	reference property13 : String[1..*]
 	reference property14 : String[1..4]
 	reference property15 : oset String[*]
 	
-	attribut property16 : Integer[5]
+	attribute property16 : Integer[5]
 }
 
 
@@ -31,7 +31,7 @@ class Class2<G> {}
 
 class Class3 {
 
-	attribut ownedClass4 : Class4[0..*]#owner
+	attribute ownedClass4 : Class4[0..*]#owner
 	reference someClass4 : set Class4[*]#someClass3
 }
 
@@ -41,6 +41,6 @@ class Class4 {
 }
 
 class Class5 {
-	attribut readonly subClass5 : set Class5[*]#superClass5
+	attribute readonly subClass5 : set Class5[*]#superClass5
 	reference superClass5 : Class5#subClass5
 }

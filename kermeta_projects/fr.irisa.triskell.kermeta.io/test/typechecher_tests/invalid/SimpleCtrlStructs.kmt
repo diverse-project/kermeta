@@ -1,4 +1,4 @@
-/* $Id: SimpleCtrlStructs.kmt,v 1.1 2005-04-20 23:58:29 ffleurey Exp $ */
+/* $Id: SimpleCtrlStructs.kmt,v 1.2 2005-04-22 01:46:17 ffleurey Exp $ */
 
 // Type checking on wrong simple control stucts
 
@@ -46,8 +46,8 @@ class Test {
 		end
 	end
 	
-	attribut a : A
-	attribut b : B
+	attribute a : A
+	attribute b : B
 
 }
 

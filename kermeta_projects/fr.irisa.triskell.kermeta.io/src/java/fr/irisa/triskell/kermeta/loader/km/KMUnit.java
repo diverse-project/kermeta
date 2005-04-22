@@ -50,6 +50,7 @@ public class KMUnit extends KermetaUnit {
     	}
     	catch(Exception e) {
     		this.error.add(new KMUnitError("Unable to load program '" + uri +" :" + e, null));
+    		KermetaUnit.internalLog.error("Unable to load unit " + uri, e);
     	}
 	}
 

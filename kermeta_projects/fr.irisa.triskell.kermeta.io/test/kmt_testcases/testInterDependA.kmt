@@ -4,6 +4,6 @@ require "testInterDependB.kmt"
 
 class A {
 
-	attribut b : B
+	attribute b : B
  
 }

@@ -5,8 +5,8 @@ require "testCycleD.kmt"
 
 class E {
 
-	attribut d : D
-	attribut c : C
-	attribut a : A
+	attribute d : D
+	attribute c : C
+	attribute a : A
  
 }

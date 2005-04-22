@@ -1,12 +1,22 @@
-/* $Id: GenericOperationCall.kmt,v 1.1 2005-04-20 23:58:24 ffleurey Exp $ */
+/* $Id: GenericOperationCall.kmt,v 1.2 2005-04-22 01:46:20 ffleurey Exp $ */
 
 // Some operation calls involving generics
 
 package tctest;
 
+require "../../../lib/framework.km"
+
+using kermeta::standard
+using kermeta::language::structure
+
+
 class List<T> {
 	operation one() : T is do end
 	operation add(element : T) is do end
+	
+	operation op() is do
+		var o : Object init one
+	end
 }
 
 class Util {
@@ -57,15 +67,15 @@ class Test {
 		lla := u.first(u.asList(lla))
 	end
 	
-	attribut a : A
-	attribut b : B
+	attribute a : A
+	attribute b : B
 	
-	attribut la : List<A>
-	attribut lb : List<B>
+	attribute la : List<A>
+	attribute lb : List<B>
 	
-	attribut lla : List<List<A>>
+	attribute lla : List<List<A>>
 	
-	attribut u : Util
+	attribute u : Util
 
 }
 

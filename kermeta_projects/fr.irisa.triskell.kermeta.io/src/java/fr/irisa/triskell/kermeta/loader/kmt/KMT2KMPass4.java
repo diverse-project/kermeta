@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.4 2005-04-05 15:07:22 zdrey Exp $
+/* $Id: KMT2KMPass4.java,v 1.5 2005-04-22 01:46:19 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -220,8 +220,34 @@ public class KMT2KMPass4 extends KMT2KMPass {
 				result.putAll(getSupersForMethod(supers[i], methname));
 			}
 		}
+		
+		FClassDefinition objectClass = builder.get_ROOT_TYPE_ClassDefinition();
+		
+		if ( objectClass != null) {
+		    result.putAll(getSupersForMethodOnObject(objectClass, methname));
+		}
+		
 		return result;
 	}
+	
+	private Hashtable getSupersForMethodOnObject(FClassDefinition cls, String methname) {
+		Hashtable result = new Hashtable();
+		FClassDefinition[] supers = builder.getDirectSuperClasses(cls);
+		
+		for(int i=0; i<supers.length; i++) {
+			FOperation superop = builder.getOperationByName(supers[i], methname);
+			if (superop != null)
+			{
+				result.put(builder.getQualifiedName(supers[i]), superop);
+			}
+			else 
+			{ // search in supertypes of supers[i]
+				result.putAll(getSupersForMethodOnObject(supers[i], methname));
+			}
+		}
+		return result;
+	}
+	
 	
 }
 

@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.4 2005-04-21 15:19:03 ffleurey Exp $
+/* $Id: TypeConformanceChecker.java,v 1.5 2005-04-22 01:46:25 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -53,7 +53,8 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 		
 		// Transformation if provided is a type variable to the least derived type admissible
 		// for the variable.
-		provided = TypeVariableUtility.getLeastDerivedAdmissibleType(provided);
+		
+		 //provided = TypeVariableUtility.getLeastDerivedAdmissibleType(provided);
 		
 		TypeConformanceChecker visitor = new TypeConformanceChecker(provided);
 		return ((Boolean)visitor.accept(required)).booleanValue();

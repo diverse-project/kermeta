@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.17 2005-04-20 16:03:43 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.18 2005-04-22 01:46:21 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -514,11 +514,15 @@ public abstract class KermetaUnit {
 		// Add the type Object which is implicilty a direct supertype of everything
 		FClassDefinition ObjectTypeDef = (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
 		if (ObjectTypeDef != null && cls != ObjectTypeDef && !result.contains(ObjectTypeDef)) {
-			//result.add(ObjectTypeDef);
+			result.add(ObjectTypeDef);
 		}
 		*/
 			
 		return (FClassDefinition[])result.toArray(new FClassDefinition[result.size()]);
+	}
+	
+	public FClassDefinition get_ROOT_TYPE_ClassDefinition() {
+	    return (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
 	}
 	
 	public ArrayList getAllOperations(FClassDefinition cls) {
@@ -587,15 +591,18 @@ public abstract class KermetaUnit {
 		pp.ppPackage(rootPackage, new File(file_name));
 	}
 	
-	
-	public void saveAllAsKM(String file_path) {
+	/**
+	 * Save Kermeta model
+	 * @param file_path the xmi file. the extension of the file should be .km
+	 */
+	public void saveAsXMIModel(String file_path) {
 	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
 	    Resource resource = resource_set.createResource(URI.createFileURI(file_path));
 	    Iterator it = packages.values().iterator();
 	    while(it.hasNext()) {
 	        FPackage p = (FPackage)it.next();
-	        if (p.eResource() == null) {
+	        if (p.eResource() == null && p.eContainer() == null) {
 	            fixTypeContainement(p);
 	            resource.getContents().add(p);
 	        }
@@ -611,7 +618,7 @@ public abstract class KermetaUnit {
 	/**
 	 * Save Kermeta model
 	 * @param directory
-	 */
+	 *//*
 	public void saveMetaCoreModel(String directory) {
 		if (rootPackage.eResource() == null) {
 			visited = true;
@@ -650,7 +657,7 @@ public abstract class KermetaUnit {
 		//resource.getContents().addAll(rootPackage.eAllContents());
 		
 	}
-	
+	*/
 	/**
 	 * Add the given tag to resource. Used in the KMT2KMPass7.java, to add tag in resource without
 	 * adding it to a container (since a tag can be linked to one or more elements, and unlinked as well).

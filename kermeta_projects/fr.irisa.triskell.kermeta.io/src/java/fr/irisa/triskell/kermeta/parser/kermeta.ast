@@ -55,12 +55,12 @@ list typelst : t1=type (COMMA tn=type)* ;
 list typeVarDecllst : tv1=typeVarDecl (COMMA tvn=typeVarDecl)*;
 
 sequence typeVarDecl : name=ID (COLON supertype=type)? ;
-abstract type : selftype | basictype | functype | prodtype | voidType;
+abstract type : basictype | functype | prodtype | voidType; // | selftype
 
 sequence basictype :  name=qualifiedID (LT params=typelst GT)? ;
 sequence prodtype : LSQUARE typelst RSQUARE ;
 sequence functype : LT left=type MINUS_GT right=type GT;
-sequence selftype : "Self" ;
+//sequence selftype : "Self" ;
 sequence voidType : "Void" ;
 
 list classMemberDecls : classMemberDecl * ;
@@ -70,7 +70,7 @@ abstract classMemberDecl : annotation | operation | property; //attribute | refe
 
 sequence property : propertyKind  (readOnlyModifier)? name=ID COLON typeRef (HASH oppositeName=ID)? (propertyBody)?;
 //token referenceKind : MINUS_GT | LT_GT | GT_LT ;
-token propertyKind : "attribut" | "reference" | "property" ;
+token propertyKind : "attribute" | "reference" | "property" ;
 token readOnlyModifier : "readonly" ;
 
 sequence propertyBody : getterBody (setterBody)? ;

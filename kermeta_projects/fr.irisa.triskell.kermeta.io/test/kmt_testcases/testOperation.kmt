@@ -37,5 +37,5 @@ class Class3 {
 
 	operation myIterator<T>(action : < T -> Boolean >) : testOperation::Class2<T> is abstract
 	operation myIterator2(action : <[String, String] -> Boolean >) : Void is do end
-	operation mySelfOp() : Self is do void end
+	operation mySelfOp() : Class3 is do void end
 }

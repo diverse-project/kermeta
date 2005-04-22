@@ -1,4 +1,4 @@
-/* $Id: SimpleFunctions.kmt,v 1.2 2005-04-21 15:19:02 ffleurey Exp $ */
+/* $Id: SimpleFunctions.kmt,v 1.3 2005-04-22 01:46:20 ffleurey Exp $ */
 
 // Some simple lambda expressions
 
@@ -11,7 +11,7 @@ using kermeta::language::structure
 
 class IntegerIterator {
 	
-	attribut max : Integer
+	attribute max : Integer
 	
 	operation times( body : <Integer -> Object> ) is do
 	
@@ -89,7 +89,7 @@ class Test {
 	
 	reference la : A[1..*]
 	
-	attribut it : IntegerIterator
+	attribute it : IntegerIterator
 
 }
 
