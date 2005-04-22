@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.11 2005-04-21 09:48:54 zdrey Exp $
+/* $Id: KMBuilderPass1.java,v 1.12 2005-04-22 16:48:03 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -8,10 +8,6 @@
  * Authors : 
  * 	Franck Fleurey	ffleurey@irisa.fr
  *  Zoe Drey 		zdrey@irisa.fr
- * Description :
- * 	Prints a kermeta model into a human-readable form (which is KMT)
- * 
- * 
 */
 package fr.irisa.triskell.kermeta.builder;
 import java.util.ArrayList;
@@ -41,7 +37,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
 
 
 /**
- *
+ * Builds the RuntimeObject representation of the program that must be executed
  */
 public class KMBuilderPass1 extends KermetaVisitor {
 
@@ -100,6 +96,14 @@ public class KMBuilderPass1 extends KermetaVisitor {
 //	protected Hashtable allMetaClasses;
 //	protected Hashtable allClasses;
 	protected Stack packagesStack,blocksStack;
+	
+	/**
+	 * - currentClassNode : the RO corresponding to the currently visited FClassDefinition
+	 * - currentOperationNode : the RO corresponding to the currently visited FOperation
+	 * - currentFClassNode : the RO corresponding to the current FClass visited (i.e when visiting
+	 * a return type, getting the metaclass that it defines)
+	 * - etc.
+	 * */
 	protected RuntimeObject currentClassNode,currentOperationNode,currentFClassNode,currentParamList,currentEnumeration,currentTypesList;
 	protected RuntimeObject reflectivecollectionMetaclass;
 	protected KermetaUnit currentUnit;
@@ -566,8 +570,13 @@ public class KMBuilderPass1 extends KermetaVisitor {
 		this.currentParamList=parametersNode;
 		ppCRSeparatedNode(node.getFOwnedParameter());
 		if(node.getFType() != null)
-			properties.put("type",ppTypeFromMultiplicityElement(node));
-	
+		{    
+		    properties.put("type",ppTypeFromMultiplicityElement(node));
+		}
+		else
+		{
+		    //properties.put("type", );
+		}
 		if (node.getFSuperOperation() != null) {
 			properties.put("SuperOperation",getQualifiedName(node.getFSuperOperation().getFOwningClass())+"::"+node.getFSuperOperation().getFName());
 		}
@@ -602,8 +611,8 @@ public class KMBuilderPass1 extends KermetaVisitor {
 		knode.getProperties().put("upper",fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(elem.getFUpper(),Run.koFactory));
 		knode.getProperties().put("isOrdered",fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(elem.isFIsOrdered()));
 		knode.getProperties().put("isUnique",fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(elem.isFIsUnique()));
-		this.accept(elem.getFType());
-		knode.getProperties().put("type",this.currentFClassNode);
+		RuntimeObject result = (RuntimeObject)this.accept(elem.getFType());
+		knode.getProperties().put("type",result);
 		return knode;
 	}
 	
@@ -742,6 +751,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FVoidLiteral)
 	 */
 	public Object visit(FVoidLiteral node) {
+	    
 		return Run.voidINSTANCE;
 	}
 	/**
