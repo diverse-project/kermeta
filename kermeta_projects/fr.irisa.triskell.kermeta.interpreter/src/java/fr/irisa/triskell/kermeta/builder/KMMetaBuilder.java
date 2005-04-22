@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.10 2005-04-15 15:43:58 zdrey Exp $
+/* $Id: KMMetaBuilder.java,v 1.11 2005-04-22 17:00:08 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -8,9 +8,6 @@
  * Authors : 
  * 	Franck Fleurey	ffleurey@irisa.fr
  *  Zoe Drey 		zdrey@irisa.fr
- * Description :
- * 	Prints a kermeta model into a human-readable form (which is KMT)
- * 
  * 
 */
 package fr.irisa.triskell.kermeta.builder;
@@ -43,14 +40,15 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
 
 /**
- *
+ * Create the runtime object representation of the language itself.
  */
 public class KMMetaBuilder {
 
 	//memorize processed units to avoid loop in exploration
 	protected List processedUnits;
 
-	/** build all metaclases RuntimeObjects from the given unit and
+	/** 
+	 * Build all metaclasses RuntimeObjects from the given unit and
 	 * units required from it.
 	 * 
 	 */
@@ -76,6 +74,13 @@ public class KMMetaBuilder {
 		processParametricTypes();
 	}
 	
+	/**
+	 * Get the class definitions from the given unit, and create RuntimeObjects
+	 * corresponding to them. This method feeds the hashtable <code>classdef_table</code>
+	 * from the RuntimeObjectFactory
+	 * @param unit The unit from where we get the classdefinitions and primitive types
+	 *  
+	 */
 	public void unitsExplorer(KermetaUnit unit) {
 		this.processedUnits.add(unit);
 		Iterator it=unit.importedUnits.iterator();
