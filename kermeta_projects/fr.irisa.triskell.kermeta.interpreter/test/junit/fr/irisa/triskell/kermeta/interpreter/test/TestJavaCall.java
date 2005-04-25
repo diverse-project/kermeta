@@ -1,4 +1,4 @@
-/* $Id: TestJavaCall.java,v 1.1 2005-04-20 12:46:49 dvojtise Exp $
+/* $Id: TestJavaCall.java,v 1.2 2005-04-25 12:47:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
  * License    : GPL
@@ -18,6 +18,8 @@ import junit.framework.TestCase;
 import fr.irisa.triskell.kermeta.launcher.Run;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
+import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
@@ -65,9 +67,62 @@ public class TestJavaCall extends TestCase{
         callCounter++;
         return fr.irisa.triskell.kermeta.runtime.basetypes.String.create("Hello world",Run.koFactory);
 	}
+
+    public static RuntimeObject callOneIntegerParam(RuntimeObject param0) {
+        internalLog.info("callOneIntegerParam was called");
+        Integer.setValue(param0, Integer.getValue(param0)+1);
+        callCounter++;
+        return param0;
+	}
+    
+    public static RuntimeObject call2IntegersParams(
+            RuntimeObject intparam1,
+            RuntimeObject intparam2)
+    {
+        Integer.setValue(intparam1, Integer.getValue(intparam1)+1);
+        Integer.setValue(intparam2, Integer.getValue(intparam2)+1);
+
+        callCounter++;
+        return intparam1;
+    }
+
+    public static RuntimeObject call3IntegersParams(
+            RuntimeObject intparam1,
+            RuntimeObject intparam2,
+            RuntimeObject intparam3)
+    {
+        Integer.setValue(intparam1, Integer.getValue(intparam1)+1);
+        Integer.setValue(intparam2, Integer.getValue(intparam2)+1);
+        Integer.setValue(intparam3, Integer.getValue(intparam3)+1);
+
+        callCounter++;
+        return intparam1;
+    }
+    
+    public static RuntimeObject call3Integers2Strings1BooleanParams(
+            RuntimeObject intparam1,
+            RuntimeObject intparam2,
+            RuntimeObject intparam3,
+            RuntimeObject stringparam1,
+            RuntimeObject stringparam2,
+            RuntimeObject boolparam1)
+    {
+        
+        Integer.setValue(intparam1, Integer.getValue(intparam1)+1);
+        Integer.setValue(intparam2, Integer.getValue(intparam2)+1);
+        Integer.setValue(intparam3, Integer.getValue(intparam3)+1);
+     
+        String.setValue(stringparam1, String.getValue(stringparam1).concat("1"));
+        String.setValue(stringparam2, String.getValue(stringparam2).concat("1"));
+      
+        Boolean.setValue(boolparam1, true);
+        callCounter++;
+        return boolparam1;
+    }
     
     public static RuntimeObject callCollectionReturn() {
         internalLog.info("simpleCallReturn was called");
+        callCounter++;
         return Void.VOID;
 	}
     
@@ -76,9 +131,6 @@ public class TestJavaCall extends TestCase{
         return Void.VOID;
 	}
 
-    public static void callOneParam() {
-        internalLog.info("simpleCall was called");
-	}
     
     public static void callOneCollectionParam() {
         internalLog.info("simpleCall was called");
