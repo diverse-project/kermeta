@@ -7,7 +7,7 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 
 
 // call an operation from another package 
-class TestLoop {
+class TestLoop inherits kermeta::kunit::Assert {
 
     operation operation1() : kermeta::standard::Integer is do
 		var v1 : kermeta::standard::Integer init 2
@@ -19,6 +19,7 @@ class TestLoop {
 			v1 := v1*v1 + v2
 			i := i + 1
 		end
+		assert(v1==38)
         stdio.writeln(v1)
 		result := v1
     end
