@@ -61,6 +61,9 @@ public class KermetaUnitFactory {
     protected Hashtable kmPath;
     
     
+    protected static KermetaUnit standard_lib;
+    
+    
     /**
      * The cnstroctor
      */
@@ -90,13 +93,26 @@ public class KermetaUnitFactory {
     	// resolve the URI if it is in the KMPath
     	if (kmPath.containsKey(uri)) uri = (String)kmPath.get(uri);
     	
+    	boolean std = false;
+    	
+    	// check if it is the stdlib
+    	if (uri.equals("kermeta")) {
+    	    if (KermetaUnit.STD_LIB_URI == null) {
+    	        KermetaUnit.internalLog.error("  **** CRITICAL : Cannot find kermeta standard library");
+    	        KermetaUnit.internalLog.error("  **** CRITICAL : Please update KermetaUnit.STD_LIB_URI variable");
+    	    }
+    	    std = true;
+    	    uri = KermetaUnit.STD_LIB_URI;
+    	    if (standard_lib != null) return standard_lib;
+    	}
+    	
     	// resolve uri
     	URI u = URI.createURI(uri);
     	if (u.isRelative()) {
     		URIConverter c = new URIConverterImpl();
     		u = u.resolve(c.normalize(URI.createURI(".")));    			
     	}
-    	    	
+    	 
     
     	// return the unit if it already exists
     	if (loadedUnits.containsKey(u.toString())) return (KermetaUnit)loadedUnits.get(u.toString());
@@ -129,6 +145,7 @@ public class KermetaUnitFactory {
         }
         result = loader.createKermetaUnit(u.toString(), packages);
         loadedUnits.put(u.toString(), result);
+        //if (std) standard_lib = result;
     	return result;
     }
     

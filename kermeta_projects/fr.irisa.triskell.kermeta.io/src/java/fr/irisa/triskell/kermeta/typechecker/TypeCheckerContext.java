@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.5 2005-04-22 01:46:24 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.6 2005-04-26 07:16:23 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : GPL
@@ -40,9 +40,11 @@ import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 public class TypeCheckerContext {
 
 	public static void initializeTypeChecker(KermetaUnit std_lib) {
+	    classNew = null;
 		// TODO : Assign Basic types and classdefinition here
 	    KermetaUnit.internalLog.info("Initializing type checker with standard lib...");
 	    ObjectType = createTypeForClassDefinition("kermeta::language::structure::Object", std_lib);
+	    
 	    ClassType = createTypeForClassDefinition("kermeta::language::structure::Class", std_lib);
 	    VoidType = createTypeForClassDefinition("kermeta::standard::Void", std_lib);
 	    IntegerType = createTypeForClassDefinition("kermeta::standard::Integer", std_lib);
@@ -91,13 +93,14 @@ public class TypeCheckerContext {
 	}
 	
     public static FType getCanonicalType(FType t) {
-        FType result = PrimitiveTypeResolver.getResolvedType(t);
+        FType result = t;
         if (result instanceof FProductType) {
             FProductType r  = (FProductType)result;
             if (r.getFType().size() == 1) {
                 result = (FType)r.getFType().get(0);
             }
         }
+        result = PrimitiveTypeResolver.getResolvedType(result);
         return result;
     }
 	

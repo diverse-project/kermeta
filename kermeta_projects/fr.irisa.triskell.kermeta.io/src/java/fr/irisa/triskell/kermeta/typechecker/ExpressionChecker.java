@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.5 2005-04-21 15:19:03 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.6 2005-04-26 07:16:22 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -604,7 +604,7 @@ public class ExpressionChecker extends KermetaVisitor {
 		// Check constraints
 		if (expression.getFInitialization() != null) {
 			if (!getTypeOfExpression(expression.getFInitialization()).isSubTypeOf(result)) {
-				unit.error.add(new KMUnitError("TYPE-CHECKER : The initialization expression should be compatible with the type of the variable", (KermetaASTNode)unit.getNodeByModelElement(expression.getFInitialization())));
+				unit.error.add(new KMUnitError("TYPE-CHECKER : The initialization expression should be compatible with the type of the variable : expected "+result+", found "+getTypeOfExpression(expression.getFInitialization())+".", (KermetaASTNode)unit.getNodeByModelElement(expression.getFInitialization())));
 			}
 		}
 		// Add the variable in the context

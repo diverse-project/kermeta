@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.3 2005-04-05 15:07:22 zdrey Exp $
+/* $Id: KMT2KMPass3.java,v 1.4 2005-04-26 07:16:24 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : GPL
@@ -323,7 +323,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.PropertyKind)
 	 */
 	public boolean beginVisit(PropertyKind propertyKind) {
-		if (propertyKind.getText().equals("attribut")) {
+		if (propertyKind.getText().equals("attribute")) {
 			builder.current_property.setFIsDerived(false);
 			builder.current_property.setFIsComposite(true);
 		}

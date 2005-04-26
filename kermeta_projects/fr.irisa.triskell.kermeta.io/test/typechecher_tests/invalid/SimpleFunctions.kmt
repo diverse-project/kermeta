@@ -1,10 +1,10 @@
-/* $Id: SimpleFunctions.kmt,v 1.3 2005-04-22 01:46:18 ffleurey Exp $ */
+/* $Id: SimpleFunctions.kmt,v 1.4 2005-04-26 07:16:25 ffleurey Exp $ */
 
 // Some wrong simple lambda expressions
 
 package kermeta;
 
-require "../../../lib/framework.km"
+require kermeta
 
 using kermeta::standard
 using kermeta::language::structure

@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.18 2005-04-22 01:46:21 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.19 2005-04-26 07:16:28 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -71,14 +71,14 @@ public abstract class KermetaUnit {
 	
     final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaUnit");
 	
-    public static String STD_LIB_URI = null;
+    public static String STD_LIB_URI = null;//"platform:/resource/fr.irisa.triskell.kermeta.io/lib/framework.km";
 	public static String ROOT_CLASS_QNAME = "kermeta::language::structure::Object";
 	
-	private static KermetaUnit std_lib = null;
+	protected static KermetaUnit std_lib = null;
 	
 	public static KermetaUnit getStdLib() {
 		if (std_lib == null) {
-			std_lib = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(STD_LIB_URI);
+			std_lib = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("kermeta");
 			
 			try {
 				std_lib.load();
@@ -106,8 +106,8 @@ public abstract class KermetaUnit {
 	}
 	
 	protected void importStdlib() {
-		if (STD_LIB_URI != null && this != std_lib) importedUnits.add(getStdLib());
-		System.out.println("importStdlib " + this + " != " + std_lib);
+		//if (STD_LIB_URI != null && this != std_lib) importedUnits.add(getStdLib());
+		//System.out.println("importStdlib " + this + " != " + std_lib);
 	}
 
 	
@@ -337,13 +337,13 @@ public abstract class KermetaUnit {
 	public void importModelFromURI(String str_uri) {
 		URI uri = URI.createURI(str_uri);
 		URIConverter c = new URIConverterImpl();
-		if (uri.isRelative() && this.uri != null) {
+		if (uri.fileExtension() != null && uri.isRelative() && this.uri != null) {
 			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
 			
 		}
 
 		// To import method bodies from another file
-		if (uri.fileExtension().equals("mctbodies")) {
+		if (uri.fileExtension() != null && uri.fileExtension().equals("mctbodies")) {
 			new OperationBodyLoader().load(this, str_uri);
 		}
 		else {
@@ -522,14 +522,19 @@ public abstract class KermetaUnit {
 	}
 	
 	public FClassDefinition get_ROOT_TYPE_ClassDefinition() {
-	    return (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
+	    FClassDefinition result = (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
+	    if (result == null && getStdLib() != null) {
+	        result = (FClassDefinition)getStdLib().typeDefinitionLookup(ROOT_CLASS_QNAME);
+	    }
+	    
+	    return result;
 	}
 	
 	public ArrayList getAllOperations(FClassDefinition cls) {
 		ArrayList result = new ArrayList();
 		
 		// Get the operations on object type :
-		FClassDefinition ObjectTypeDef = (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
+		FClassDefinition ObjectTypeDef = get_ROOT_TYPE_ClassDefinition();
 		if (ObjectTypeDef != null) {
 		    result.addAll(getAllOperationsOnRootType(ObjectTypeDef));
 		}
@@ -721,7 +726,7 @@ public abstract class KermetaUnit {
 	
 	public void load() {
 		//System.out.println("\nLOAD " + uri);
-	    importStdlib();
+	    //importStdlib();
 		// load imported units
 		loadAllImportedUnits();
 		loadAllTypeDefinitions();

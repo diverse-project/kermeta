@@ -1,4 +1,4 @@
-/* $Id: GenericVisitor.kmt,v 1.1 2005-04-22 01:46:20 ffleurey Exp $ */
+/* $Id: GenericVisitor.kmt,v 1.2 2005-04-26 07:16:21 ffleurey Exp $ */
 
 // A generic implementation of the Visitor DP
 // Test genericity features
@@ -6,10 +6,12 @@
 package toto;
 
 
-require "../../../lib/framework.km"
+require kermeta
+
+//require "../../../lib/framework.km"
 
 using kermeta::standard
-using kermeta::language::structure
+//using kermeta::language::structure
 
 
 abstract class Visitor <ContextType, ResultType> {

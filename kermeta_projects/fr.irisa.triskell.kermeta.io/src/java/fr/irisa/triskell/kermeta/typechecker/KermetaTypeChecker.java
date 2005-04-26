@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.1 2005-04-19 08:55:20 ffleurey Exp $
+/* $Id: KermetaTypeChecker.java,v 1.2 2005-04-26 07:16:23 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -51,6 +51,14 @@ public class KermetaTypeChecker {
      * of a kermeta unit
      */
     public void checkUnit() {
+        
+        // initialize the type checker if this is the std lib
+        if (unit.typeDefinitionLookup("kermeta::language::structure::Object") != null)
+            TypeCheckerContext.initializeTypeChecker(unit);
+        else
+            TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
+        
+        
         Iterator it = unit.typeDefs.values().iterator();
         while(it.hasNext()) {
             FTypeDefinition td = (FTypeDefinition)it.next();
