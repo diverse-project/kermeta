@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.22 2005-04-22 17:13:28 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.23 2005-04-26 09:45:24 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -26,7 +26,6 @@ import java.util.Vector;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import com.sun.rsasign.r;
 
 
 import fr.irisa.triskell.kermeta.ast.FSelfCall;
@@ -527,7 +526,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		else if (FStringLiteral.class.isInstance(target)) {
 		    isFeatured = true;
 		    ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
-		    RuntimeObject stringClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::Integer");
+		    RuntimeObject stringClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::String");
 		    t_target=(FType)stringClassRO.getData().get("kcoreObject");
 		}
 		

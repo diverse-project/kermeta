@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.12 2005-04-22 16:48:03 zdrey Exp $
+/* $Id: KMBuilderPass1.java,v 1.13 2005-04-26 09:45:25 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -255,6 +255,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 			ronode = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.TRUE;
 			
 		else ronode = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.FALSE;
+		Run.correspondanceTable.put(node,ronode);
 		return ronode;
 	}
 	
