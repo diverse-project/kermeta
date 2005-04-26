@@ -18,6 +18,10 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(self, element)
 	end
 	
+	method isNotEqual(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isNotEqual(self, element)
+	end
+	
 	method get(~property : kermeta::reflection::Property) : kermeta::reflection::Object from kermeta::reflection::Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property)
 	end

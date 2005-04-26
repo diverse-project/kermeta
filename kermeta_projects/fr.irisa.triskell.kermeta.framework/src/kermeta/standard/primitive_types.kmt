@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.8 2005-04-22 01:34:43 ffleurey Exp $
+// $Id: primitive_types.kmt,v 1.9 2005-04-26 09:36:44 jpthibau Exp $
 package kermeta::standard;
 
 require "../Standard.kmt"
@@ -289,8 +289,8 @@ class String inherits ValueType, Comparable
 	/**
 	 * returns a new string that is a substring of this string
 	 */
-	operation subString(index : Integer, length : Integer) : String is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.subString(self,index, length)
+	operation substring(index : Integer, length : Integer) : String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.substring(self,index, length)
 	end
 	
 	operation size() : Integer is do

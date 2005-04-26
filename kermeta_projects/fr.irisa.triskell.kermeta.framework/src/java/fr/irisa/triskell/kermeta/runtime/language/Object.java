@@ -30,6 +30,13 @@ public class Object {
 		else return Boolean.FALSE;
 	}
 
+	// Implementation of method isNotEqual called as :
+	// extern fr::irisa::triskell::kermeta::runtime::language::Object.isNotEqual(element)
+	public static RuntimeObject isNotEqual(RuntimeObject self, RuntimeObject param0) {
+		if(self == param0) return Boolean.FALSE;
+		else return Boolean.TRUE;
+	}
+
 	// Implementation of method get called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property)
 	public static RuntimeObject get(RuntimeObject self, RuntimeObject param0) {

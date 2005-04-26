@@ -9,6 +9,14 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
 public class String {
     
+	// Implementation of method equals called as :
+	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::equals(other)
+	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Boolean");
+		Boolean.setValue(result, getValue(self).equals(getValue(param0)));
+		return result;
+	}
+
 	// Implementation of method compareTo called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::compareTo(other)
 	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
@@ -50,7 +58,7 @@ public class String {
 
 	// Implementation of method subString called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::subString(index, length)
-	public static RuntimeObject subString(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
+	public static RuntimeObject substring(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
 		setValue(result, getValue(self).substring(Integer.getValue(param0), Integer.getValue(param1)));
 		return result;
