@@ -5,6 +5,7 @@
 package fr.irisa.triskell.kermeta.loader;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.structure.FObject;
 
 /**
  * @author Franck Fleurey
@@ -14,9 +15,9 @@ import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 public class KMUnitMessage {
 
 	protected String message;
-	protected KermetaASTNode node;
+	protected FObject node;
 	
-	public KMUnitMessage(String message, KermetaASTNode node) {
+	public KMUnitMessage(String message, FObject node) {
 		this.message = message;
 		this.node = node;
 	}
@@ -30,7 +31,7 @@ public class KMUnitMessage {
 	/**
 	 * @return Returns the node.
 	 */
-	public KermetaASTNode getNode() {
+	public FObject getNode() {
 		return node;
 	}
 }

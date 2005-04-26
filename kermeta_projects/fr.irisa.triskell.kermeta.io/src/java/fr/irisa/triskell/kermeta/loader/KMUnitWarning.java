@@ -4,7 +4,7 @@
  */
 package fr.irisa.triskell.kermeta.loader;
 
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.structure.FObject;
 
 /**
  * @author Franck Fleurey
@@ -17,7 +17,7 @@ public class KMUnitWarning extends KMUnitMessage {
 	 * @param message
 	 * @param node
 	 */
-	public KMUnitWarning(String message, KermetaASTNode node) {
+	public KMUnitWarning(String message, FObject node) {
 		super("WARNING - " + message, node);
 	}
 }

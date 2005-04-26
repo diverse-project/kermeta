@@ -65,7 +65,7 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 				result = assign;
 			}
 			else {
-				builder.getError().add(new KMUnitError("Assignement : Only variables and properties can be assigned", fAssignement));
+				builder.getError().add(new KMTUnitLoadError("Assignement : Only variables and properties can be assigned", fAssignement));
 				result = left;
 				return false;
 			}

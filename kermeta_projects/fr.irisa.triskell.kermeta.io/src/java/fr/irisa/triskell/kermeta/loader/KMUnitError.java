@@ -5,6 +5,7 @@
 package fr.irisa.triskell.kermeta.loader;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.structure.FObject;
 ;
 
 /**
@@ -18,7 +19,7 @@ public class KMUnitError extends KMUnitMessage {
 	 * @param message
 	 * @param node
 	 */
-	public KMUnitError(String message, KermetaASTNode node) {
+	public KMUnitError(String message, FObject node) {
 		super("ERROR - " + message, node);
 	}
 }

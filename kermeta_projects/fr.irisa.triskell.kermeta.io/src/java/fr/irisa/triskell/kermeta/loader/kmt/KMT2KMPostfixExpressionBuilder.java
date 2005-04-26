@@ -93,7 +93,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 			builder.popContext();
 		}
 		else {
-			builder.error.add(new KMUnitError("A lambda postfix can only be applied as the unique parameter of a call expression.", lambdaPostfix));
+			builder.error.add(new KMTUnitLoadError("A lambda postfix can only be applied as the unique parameter of a call expression.", lambdaPostfix));
 			return false;
 		}
 		
@@ -122,7 +122,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 			// The parameters are binded by beginVisit(ActualParameter actualParameter)
 		}
 		else {
-			builder.error.add(new KMUnitError("Parameters can only be associated to a call expression.", paramPostfix));
+			builder.error.add(new KMTUnitLoadError("Parameters can only be associated to a call expression.", paramPostfix));
 			return false;
 		}
 		return super.beginVisit(paramPostfix);

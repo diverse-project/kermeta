@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.3 2005-03-02 17:31:20 zdrey Exp $
+/* $Id: KMT2KMPass6.java,v 1.4 2005-04-26 08:28:07 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -129,7 +129,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 			builder.current_property.setFGetterbody(KMT2KMExperessionBuilder.process(getterBody.getGetterbody(), builder));
 		}
 		else {
-			builder.error.add(new KMUnitError("PASS 6 : getters should only be defined for derived attributes (property).", getterBody));
+			builder.error.add(new KMTUnitLoadError("PASS 6 : getters should only be defined for derived attributes (property).", getterBody));
 		}
 		return false;
 	}
@@ -142,7 +142,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 			builder.current_property.setFSetterbody(KMT2KMExperessionBuilder.process(setterBody.getSetterbody(), builder));
 		}
 		else {
-			builder.error.add(new KMUnitError("PASS 6 : setters should only be defined for non readonly derived attributes (property).", setterBody));
+			builder.error.add(new KMTUnitLoadError("PASS 6 : setters should only be defined for non readonly derived attributes (property).", setterBody));
 		}
 		return false;
 	}

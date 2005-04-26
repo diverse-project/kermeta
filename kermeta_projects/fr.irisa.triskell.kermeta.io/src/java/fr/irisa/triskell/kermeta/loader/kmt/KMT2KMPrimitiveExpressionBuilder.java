@@ -261,7 +261,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 				else {
 					// it is a type. we check here if it exists to give an appropriate error if it does not...
 					if (builder.getTypeDefinitionByName(name) == null) {
-						builder.error.add(new KMUnitError("Cannot resolve symbol : '"+name+"'.", btype));
+						builder.error.add(new KMTUnitLoadError("Cannot resolve symbol : '"+name+"'.", btype));
 						return false;
 					}
 				}

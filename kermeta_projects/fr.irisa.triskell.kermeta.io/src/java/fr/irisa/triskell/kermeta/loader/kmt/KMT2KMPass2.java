@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.2 2005-04-05 15:07:22 zdrey Exp $
+/* $Id: KMT2KMPass2.java,v 1.3 2005-04-26 08:28:09 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : GPL
@@ -73,7 +73,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		String qname = builder.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.typeDefinitionLookup(qname) != null) {
 			// This is an error : the type already exists
-			builder.error.add(new KMUnitError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
+			builder.error.add(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
 			return false;
 		}
 		else {
@@ -101,7 +101,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		EList other_params = builder.current_class.getFTypeParameter();
 		for (int i=0; i<other_params.size(); i++) {
 			if (((FTypeVariable)other_params.get(i)).getFName().equals(name)) {
-				builder.error.add(new KMUnitError("PASS 2 : Parametric class '" + builder.current_class.getFName() + "' already contains a parameter named '"+name+"'.",typeVarDecl));
+				builder.error.add(new KMTUnitLoadError("PASS 2 : Parametric class '" + builder.current_class.getFName() + "' already contains a parameter named '"+name+"'.",typeVarDecl));
 				return false;
 			}
 		}
@@ -122,7 +122,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		String qname = builder.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.typeDefinitionLookup(qname) != null) {
 			// This is an error : the type already exists
-			builder.error.add(new KMUnitError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
+			builder.error.add(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
 		}
 		else {
 			FEnumeration c = builder.struct_factory.createFEnumeration();
@@ -142,7 +142,7 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		String qname = builder.getQualifiedName(current_package()) + "::" + getTextForID(node.getName());
 		if (builder.typeDefinitionLookup(qname) != null) {
 			// This is an error : the type already exists
-			builder.error.add(new KMUnitError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
+			builder.error.add(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
 		}
 		else {
 			FPrimitiveType c = builder.struct_factory.createFPrimitiveType();

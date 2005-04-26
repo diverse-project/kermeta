@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.13 2005-04-19 08:46:42 ffleurey Exp $
+/* $Id: KMTUnit.java,v 1.14 2005-04-26 08:28:08 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -13,8 +13,6 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
@@ -27,11 +25,14 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 //import org.eclipse.emf.common.util.URI;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 
@@ -49,6 +50,9 @@ public class KMTUnit extends KermetaUnit {
 		super(uri, packages);
 	}
 	
+	public KermetaASTNode getKMTAstNodeForModelElement(FObject element) {
+	    return (KermetaASTNode)getNodeByModelElement(element);
+	}
 	
 	public void parse() {
 		

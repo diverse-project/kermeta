@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.14 2005-04-22 01:46:25 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.15 2005-04-26 08:28:09 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -43,7 +43,7 @@ public class JunitTestSuite extends TestCase {
 		super(arg0);
 		System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
 		        "../fr.irisa.triskell.kermeta.texteditor/kermeta_log4j_configuration.xml");
-		
+		KermetaUnit.STD_LIB_URI = "./lib/framework.km";
 	}
 	
 	protected void setUp() throws Exception {
