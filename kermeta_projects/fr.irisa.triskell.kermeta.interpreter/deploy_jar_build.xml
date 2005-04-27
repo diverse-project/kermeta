@@ -1,5 +1,5 @@
-<!-- $Id: deploy_jar_build.xml,v 1.1 2005-04-27 07:27:06 dvojtise Exp $ -->
-<project name="kermeta_interpreter.jar" default="deploy" basedir=".">
+<!-- $Id: deploy_jar_build.xml,v 1.2 2005-04-27 07:28:13 dvojtise Exp $ -->
+<project name="kermeta_interpreter.jar" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
