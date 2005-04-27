@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.9 2005-04-26 09:36:44 jpthibau Exp $
+// $Id: primitive_types.kmt,v 1.10 2005-04-27 08:38:13 jpthibau Exp $
 package kermeta::standard;
 
 require "../Standard.kmt"
@@ -81,6 +81,15 @@ abstract class Comparable {
  */
 class Boolean
 {
+
+	method equals(other : Object) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.equals(self, other)
+	end
+	
+	method isNotEqual(other : Object) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.isNotEqual(self, other)
+	end
+
 	/**
 	 * return self and other
 	 */ 
@@ -99,8 +108,7 @@ class Boolean
 	 * return self or other
 	 */ 
 	operation ~or(other : Boolean) : Boolean is do
-		// using the 'and' and 'not' operators
-		result := not (self.~not() and other.~not()) 
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~or(self, other)
 	end
 	
 } // Boolean
@@ -241,8 +249,15 @@ class Character inherits ValueType, Comparable
 	method compareTo(other : Object) : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.compareTo(self,other)
 	end
-}
 
+	method equals(other : Object) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.equals(self, other)
+	end
+	
+	method isNotEqual(other : Object) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.isNotEqual(self, other)
+	end
+	}
 /**
  * The class String
  */
@@ -256,6 +271,13 @@ class String inherits ValueType, Comparable
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self,other)
 	end
 	
+	method equals(other : Object) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.equals(self, other)
+	end
+	
+	method isNotEqual(other : Object) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.isNotEqual(self, other)
+	end
 	/**
 	 * returns a new string self + other
 	 */

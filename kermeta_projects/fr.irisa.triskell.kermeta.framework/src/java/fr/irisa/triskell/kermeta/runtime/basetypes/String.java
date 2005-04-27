@@ -9,20 +9,26 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
 public class String {
     
-	// Implementation of method equals called as :
-	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::equals(other)
-	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
-		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Boolean");
-		Boolean.setValue(result, getValue(self).equals(getValue(param0)));
-		return result;
-	}
-
 	// Implementation of method compareTo called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::compareTo(other)
 	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, getValue(self).compareTo(getValue(param0)));
 		return result;
+	}
+
+	// Implementation of method equals called as :
+	// extern fr::irisa::triskell::kermeta::runtime::basetypes::String::equals(element)
+	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
+		if(getValue(self).equals(getValue(param0))) return Boolean.TRUE;
+		else return Boolean.FALSE;
+	}
+
+	// Implementation of method isNotEqual called as :
+	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Character::isNotEqual(element)
+	public static RuntimeObject isNotEqual(RuntimeObject self, RuntimeObject param0) {
+		if(getValue(self).equals(getValue(param0))) return Boolean.FALSE;
+		else return Boolean.TRUE;
 	}
 
 	// Implementation of method plus called as :

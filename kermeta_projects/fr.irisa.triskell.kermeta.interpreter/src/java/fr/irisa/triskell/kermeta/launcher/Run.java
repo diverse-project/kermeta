@@ -1,4 +1,4 @@
-/* $Id: Run.java,v 1.20 2005-04-22 16:38:35 zdrey Exp $
+/* $Id: Run.java,v 1.21 2005-04-27 08:40:52 jpthibau Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -127,7 +127,7 @@ public class Run extends TestCase {
 			// Get and check the errors of loading
 			if (interpreterbuilder.getError().size() > 0)
 			{
-			    assertTrue(interpreterbuilder.getMessagesAsString(), false);
+			    assertTrue(interpreterbuilder.getAllMessagesAsString(), false);
 			}
 			else
 			{
@@ -147,6 +147,8 @@ public class Run extends TestCase {
 			    //						metaClassesBuilder.ppPackage(interpreterbuilder);
 			    //						KMMetaBuilder.processParametricTypes();
 			    
+			    //initialize TRUE and FALSE
+				fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.initInstances(koFactory);
 			    // Create the void Instance (should be a singleton)
 			    RuntimeObject roVoidType = (RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::reflection::VoidType");
 			    voidINSTANCE=Run.koFactory.createRuntimeObject(roVoidType);

@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.13 2005-04-26 09:45:25 jpthibau Exp $
+/* $Id: KMBuilderPass1.java,v 1.14 2005-04-27 08:40:55 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -250,11 +250,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral)
 	 */
 	public Object visit(FBooleanLiteral node) {
-	    RuntimeObject ronode;
-	    if (node.isFValue())
-			ronode = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.TRUE;
-			
-		else ronode = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.FALSE;
+		RuntimeObject ronode= fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(node.isFValue(),Run.koFactory);
 		Run.correspondanceTable.put(node,ronode);
 		return ronode;
 	}
@@ -610,8 +606,8 @@ public class KMBuilderPass1 extends KermetaVisitor {
 		RuntimeObject knode=KMMetaBuilder.createROFromClassDef(elem,nodeMetaclass);
 		knode.getProperties().put("lower",fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(elem.getFLower(),Run.koFactory));
 		knode.getProperties().put("upper",fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(elem.getFUpper(),Run.koFactory));
-		knode.getProperties().put("isOrdered",fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(elem.isFIsOrdered()));
-		knode.getProperties().put("isUnique",fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(elem.isFIsUnique()));
+		knode.getProperties().put("isOrdered",fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(elem.isFIsOrdered(),Run.koFactory));
+		knode.getProperties().put("isUnique",fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(elem.isFIsUnique(),Run.koFactory));
 		RuntimeObject result = (RuntimeObject)this.accept(elem.getFType());
 		knode.getProperties().put("type",result);
 		return knode;

@@ -15,6 +15,20 @@ public class Character {
 	}
 	
 	
+	// Implementation of method equals called as :
+	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Character::equals(element)
+	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
+		if(getCharacterValue(self).equals(getCharacterValue(param0))) return Boolean.TRUE;
+		else return Boolean.FALSE;
+	}
+
+	// Implementation of method isNotEqual called as :
+	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Character::isNotEqual(element)
+	public static RuntimeObject isNotEqual(RuntimeObject self, RuntimeObject param0) {
+		if(getCharacterValue(self) == getCharacterValue(param0)) return Boolean.FALSE;
+		else return Boolean.TRUE;
+	}
+
 	protected static void setValue(RuntimeObject ch, char value) {
 		ch.getData().put("CharacterValue", new java.lang.Character(value));
 	}

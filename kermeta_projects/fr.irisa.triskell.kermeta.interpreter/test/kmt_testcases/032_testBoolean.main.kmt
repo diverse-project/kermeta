@@ -1,0 +1,83 @@
+@testOperation "yes"
+@mainClass "testBoolean::TestBoolean"
+@mainOperation "testoptat"
+
+package testBoolean;
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+// This class tests the logical operators on Booleans
+// "and" is prioritary to "or"
+class TestBoolean inherits kermeta::kunit::Assert 
+{
+	// test true and true = true
+	operation testoptat() : Void is do
+		assert((true and true)==true)
+	end
+	
+	operation testnott() : Void is do
+		assert((not true)==false)
+		assert((not false)==true)
+	end
+	
+
+	
+	// test true or true  = true
+	operation testoptot() : Void is do
+		assert((true or true)==true)
+	end
+	
+	// true or false = true
+	operation testoptof() : Void is do
+		assert((true or false)==true)
+	end
+	
+	// true and false = false
+	operation testoptaf() : Void is do
+		assert((true and false)==false)
+	end
+	
+	// false or false
+	operation testopfof() : Void is do
+		assert ((false or false)==false)
+	end
+	
+	// false or true
+	operation testopfot() : Void is do 
+		assert ((false or true)==true)
+	end
+
+	// test true or true and false == true or (true and false) == true
+	operation testoportotaf() : Void is do
+		assert((true or true and false)==false)
+	end
+	
+	// test true or true and false == true or (true and false) == true
+	operation testoptatof() : Void is do
+		assert((true and true or false)==true)
+	end
+	
+	// true and false and false
+	operation testoptafaf() : Void is do
+		assert((true and false and false)==false)
+	end
+	
+	// true or false and false
+	operation testoptofaf() : Void is do
+		assert((true or false and false)==false)
+	end
+	
+	// true or false and false or true or true == true
+	operation testoptofafotot() : Void is do
+		assert((true or false and false or true or true)==true)
+	end
+	
+	// fiouf
+	operation testoptofafototaf() : Void is do
+		assert((true or false and false or true or true and false)==false)
+	end
+	
+	// fiouf 2
+	operation testoptofanf() : Void is do
+		assert((true or false and not false)==true)
+	end
+}

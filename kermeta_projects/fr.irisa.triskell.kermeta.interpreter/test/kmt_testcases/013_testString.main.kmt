@@ -56,7 +56,7 @@ class TestString inherits kermeta::kunit::Assert {
         var v1 : kermeta::standard::String init "Prependwithplus"
     	result := v1.plus("_Append")
     	stdio.writeln(result)
-//    	assert(result.compareTo("Prependwithplus_Append")==0)
+    	assert(result.compareTo("Prependwithplus_Append")==0)
     end
 
 	// test the not-identity 
@@ -86,7 +86,7 @@ class TestString inherits kermeta::kunit::Assert {
 	 * returns the character at index in the String
 	 */
 	operation testelementAt() : Void is do
-//		assert("abcd".elementAt(3).compareTo("c")==0)
+		assert("abcd".elementAt(2)=="car".elementAt(0))
 	end
 	
 	/**
@@ -103,7 +103,7 @@ class TestString inherits kermeta::kunit::Assert {
 	 */
 	operation testsubString() : Void is do
 		stdio.write("bonjour".substring(1, 4))
-//		assert("bonjour".substring(1, 4)=="onj")
+		assert("bonjour".substring(1, 4)=="onj")
 	end
 	
 	operation testsize() : kermeta::standard::Integer is do

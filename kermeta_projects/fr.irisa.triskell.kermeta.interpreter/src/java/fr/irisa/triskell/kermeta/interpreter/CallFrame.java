@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.3 2005-04-05 14:59:53 zdrey Exp $
+/* $Id: CallFrame.java,v 1.4 2005-04-27 08:40:53 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -117,6 +117,8 @@ public class CallFrame {
     public void setOperationResult(RuntimeObject pResult)
     {
         operation_result = pResult;
+        ExpressionContext frameBottomContext=(ExpressionContext)block_stack.get(0);
+        frameBottomContext.defineVariable(null,"result",pResult);
     }
 
     /**

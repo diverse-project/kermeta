@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.23 2005-04-26 09:45:24 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.24 2005-04-27 08:40:53 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -398,23 +398,23 @@ public class BaseInterpreter extends KermetaVisitor {
         interpreterContext.getCurrentFrame().pushNewExpressionContext(node);
         // Accept initialization (a FVariableDecl) : add a new variable in the ExpressionContext
         this.accept(node.getFInitiatization());
-        String value = null;
+        boolean cond_value=true;
         
 	    do
 	    {
 	        RuntimeObject cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
 	        // Get boolean value
-	        if (cond_result.getProperties().containsKey("singleton instance"))
-	            value = (String)cond_result.getProperties().get("singleton instance");
+	        if (cond_result.getData().containsKey("BooleanValue"))
+	            cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
 	        else
 	        {
 	            // TODO : throw an InterpreterException 
 	        	System.err.println("Loop : evaluation of the condition ^part does not result in a boolean value.");
 	        }
 	        
-	        if (value.equals("FALSE INSTANCE"))
+	        if (! cond_value)
 	        	this.accept(node.getFBody());
-	    } while (value.equals("FALSE INSTANCE"));
+	    } while (! cond_value);
 	    
 	    // Pop the expression context
 	    interpreterContext.getCurrentFrame().popExpressionContext();
@@ -532,11 +532,14 @@ public class BaseInterpreter extends KermetaVisitor {
 		
 		else if (FBooleanLiteral.class.isInstance(target)) {
 		    isFeatured = true;
-		    if (((FBooleanLiteral)target).isFValue() == true)
+		    ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
+		    RuntimeObject booleanClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::Boolean");
+		    t_target=(FType)booleanClassRO.getData().get("kcoreObject");
+/*		    if (((FBooleanLiteral)target).isFValue() == true)
 		        ro_target = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.TRUE;
 		    else
 		        ro_target = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.FALSE;
-		    t_target=(FType)ro_target.getMetaclass().getData().get("kcoreObject");
+		    t_target=(FType)ro_target.getMetaclass().getData().get("kcoreObject");*/
 		}
 		// If target is a CallVariable :
 		// Get the precise type of the CallFeature node.
@@ -559,7 +562,8 @@ public class BaseInterpreter extends KermetaVisitor {
 		    	Variable var=(Variable)e_context.getVariables().get(var_name);
 		        //ro_target = (ro_target!=null)?ro_target:var.getRuntimeObject();
 		    	ro_target = var.getRuntimeObject();
-		        t_target = var.getType();
+//OLD => WRONG		        t_target = var.getType();
+		    	t_target =(FType)ro_target.getMetaclass().getData().get("kcoreObject"); 
 		        
 		    }
 		    else
@@ -741,7 +745,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral) 
 	 */
 	public Object visit(FBooleanLiteral node) {
-	    return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(node.isFValue());
+	    return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(node.isFValue(),Run.koFactory);
 	}
 	
 	public Object visit(FEnumerationLiteral node)
@@ -910,10 +914,11 @@ public class BaseInterpreter extends KermetaVisitor {
             // Search from last to beginning
             while (!found && j>0) 
             {
-                context = (ExpressionContext)frame.getBlockStack().get(j-1);
-                if (context.getVariables().containsKey(varName))
+            	ExpressionContext currentcontext = (ExpressionContext)frame.getBlockStack().get(j-1);
+                if (currentcontext.getVariables().containsKey(varName))
                 {
                     found=true;
+                    context=currentcontext;
                 }
                 j--;
             }
