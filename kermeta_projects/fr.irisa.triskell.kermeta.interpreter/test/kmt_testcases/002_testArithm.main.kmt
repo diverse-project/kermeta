@@ -4,10 +4,10 @@
 
 package testArithm;
 
-require "../../lib/framework.km"
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 
 // arithmetic operations
-class Test_arithm inherits kermeta::kunit::Test {
+class Test_arithm inherits kermeta::kunit::Assert {
 
     operation main_operation() : kermeta::standard::Integer is do
         var r1 : kermeta::standard::Integer
