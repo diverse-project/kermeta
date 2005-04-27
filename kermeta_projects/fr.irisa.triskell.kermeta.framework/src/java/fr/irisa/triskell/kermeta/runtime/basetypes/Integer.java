@@ -1,4 +1,4 @@
-/* $Id: Integer.java,v 1.8 2005-04-27 13:35:33 jpthibau Exp $ 
+/* $Id: Integer.java,v 1.9 2005-04-27 14:38:03 jpthibau Exp $ 
  * Implementation of Kermeta base type Integer 
  */
 
@@ -14,6 +14,14 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
  */
 public class Integer {
     
+	// Implementation of method compareTo called as :
+	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::compareTo(other)
+	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
+		Integer.setValue(result, ((java.lang.Integer)self.getData().get("NumericValue")).compareTo((java.lang.Integer)param0.getData().get("NumericValue")));
+		return result;
+	}
+
 	// Implementation of method equals called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::equals(element)
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {

@@ -22,7 +22,7 @@ class MyObject {
 
 }
 
-class MyObjectCreation {
+class MyObjectCreation inherits kermeta::kunit::Assert {
 
 	operation createMyObject() : MyObject is do
 		var object : MyObject
@@ -35,5 +35,6 @@ class MyObjectCreation {
 		object.set_attr2(bool)
 		result := object.attr1
         stdio.writeln(result)
+        assert(result==4)
 	end
 }
