@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.10 2005-04-27 08:38:13 jpthibau Exp $
+// $Id: primitive_types.kmt,v 1.11 2005-04-27 13:35:34 jpthibau Exp $
 package kermeta::standard;
 
 require "../Standard.kmt"
@@ -119,19 +119,8 @@ class Boolean
  */
 abstract class Numeric inherits Comparable, ValueType
 { 
-	/**
-	 * Comparaison between two numerics
-	 */
-	method compareTo(other : Object) : Integer is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Numeric.compareTo(self, other)
-	end
 	
-	/**
-	 * test whether self and other have an identical numeric value
-	 */
-	method equals(other : Object) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Numeric.equals(self,other)
-	end
+	
 }
 
 /**
@@ -139,6 +128,14 @@ abstract class Numeric inherits Comparable, ValueType
  */
 class Integer inherits Numeric
 {
+	method equals(other : Object) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.equals(self, other)
+	end
+	
+	method isNotEqual(other : Object) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isNotEqual(self, other)
+	end
+
 	/**
 	 * returns self + other
 	 */

@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.24 2005-04-27 08:40:53 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.25 2005-04-27 13:37:07 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -601,24 +601,12 @@ public class BaseInterpreter extends KermetaVisitor {
 			// Is it a property? If yes, update the RuntimeObject repr.g the target node !
 			else if (feature!=null && FProperty.class.isInstance(feature))
 			{
-				// The property 
-				FProperty fproperty = (FProperty)feature;
-				// The Runtime representation of this property. 
-				RuntimeObject ro_property = null;
-				RuntimeObject attributes = (RuntimeObject)ro_target.getMetaclass().getProperties().get("ownedAttributes");
+				String propertyName = ((FProperty)feature).getFName();
+				if (ro_target.getProperties().containsKey(propertyName))
+					result=(RuntimeObject)ro_target.getProperties().get(propertyName);
+				else
+					System.err.println("Feature unreachable when attempting to access feature "+propertyName+"on "+ro_target);
 				
-				Iterator it = ((ArrayList)attributes.getData().get("CollectionArrayList")).iterator();
-				while (it.hasNext() && ro_property == null)
-				{
-					RuntimeObject attr = (RuntimeObject)it.next();
-					if (attr.getProperties().get("name").equals(fproperty.getFName()))
-					{
-						ro_property = attr;
-						// Get the value of the property
-						result = fr.irisa.triskell.kermeta.runtime.language.Object.get(
-								ro_target, ro_property);
-					}
-				}
 			}
 		}
 		// else it is a class (kermeta_behavior::TypeLiteral).
@@ -1020,10 +1008,11 @@ public class BaseInterpreter extends KermetaVisitor {
         if (result == null)
         {
             EList attributes = type.getFOwnedAttributes();
+            i=0;
             while (i < attributes.size() && result == null)
             {
-                elt = attributes.get(i++);
-                if (((FProperty)operations.get(i++)).getFName().equals(feature.getFName()))
+                elt = attributes.get(i);
+                if (((FProperty)attributes.get(i++)).getFName().equals(feature.getFName()))
                     result = elt;
             }   
         }

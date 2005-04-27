@@ -51,7 +51,7 @@ public class Real {
 	}
 	
 	public static double getValue(RuntimeObject real) {
-		return Numeric.getNumericValue(real).doubleValue();
+		return ((Double)real.getData().get("NumericValue")).doubleValue();
 	}
 	
 	
