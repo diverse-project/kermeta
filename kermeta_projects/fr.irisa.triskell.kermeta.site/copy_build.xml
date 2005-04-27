@@ -1,0 +1,19 @@
+<!-- $Id: copy_build.xml,v 1.1 2005-04-27 07:52:22 dvojtise Exp $ -->
+<project name="Copy_site_2_modelware" default="copy_2_modelware_site" basedir=".">
+	<description>
+       
+	</description>
+	<property name="dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\update"/>
+
+  	<target name="copy_2_modelware_site" description="copy web site files to http://www.irisa.fr/triskell/softwares/kermeta/update">
+  		<delete dir="${dest}\\features"/>
+  		<delete dir="${dest}\\plugins"/>
+  		<delete dir="${dest}\\web"/>
+  		<copy todir="${dest}">
+  			<fileset dir=".">
+  				<exclude name="copy_build.xml"/>
+  				<exclude name=".project"/>
+  			</fileset>  			
+  		</copy>
+  	</target> 
+</project>

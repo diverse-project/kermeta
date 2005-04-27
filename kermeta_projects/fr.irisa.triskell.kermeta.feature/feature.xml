@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="fr.irisa.triskell.kermeta.feature"
+      label="fr.irisa.triskell.kermeta.feature"
+      version="0.0.1"
+      provider-name="IRISA/Triskell">
+
+   <install-handler/>
+
+   <description url="[Enter Feature URL here.]">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="[Enter Copyright URL here.]">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="[Enter License URL here.]">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.ui.intro"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+   </requires>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.texteditor"
+         download-size="0"
+         install-size="0"
+         version="0.0.2"/>
+
+</feature>
