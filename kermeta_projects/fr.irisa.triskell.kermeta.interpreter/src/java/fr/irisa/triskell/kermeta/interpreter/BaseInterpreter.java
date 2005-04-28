@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.25 2005-04-27 13:37:07 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.26 2005-04-28 06:54:40 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -519,6 +519,12 @@ public class BaseInterpreter extends KermetaVisitor {
 		else if (FIntegerLiteral.class.isInstance(target)) {
 		    isFeatured = true;
 			ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
+			if (ro_target==null) {
+				//this integer literal comes from kermeta language definition (see uminus)
+				//as languages definitions are not processed as programs, we have to create a ro for the literal
+				ro_target= fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(((FIntegerLiteral)target).getFValue(),Run.koFactory);
+				Run.correspondanceTable.put(target,ro_target);
+			}
 			RuntimeObject integerClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::Integer");
 			t_target=(FType)integerClassRO.getData().get("kcoreObject");
 		}

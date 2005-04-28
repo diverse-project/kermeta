@@ -6,7 +6,7 @@ package root;
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 
 /*****************************************************************************
- * $Id: 033_testBooleanResults.main.kmt,v 1.1 2005-04-28 06:54:39 jpthibau Exp $
+ * $Id: 033_testBooleanResults.main.kmt,v 1.2 2005-04-28 06:59:06 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testBooleanResults.kmt
@@ -19,7 +19,7 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
  ***************************************************************************
  */
 
-class TestBooleanResults inherits inherits kermeta::kunit::Assert
+class TestBooleanResults inherits kermeta::kunit::Assert
 {    
     // Main operation that embeds all the tests 
      operation main_operation() is do

@@ -1,0 +1,102 @@
+/*****************************************************************************
+ * $Id: 035_testHashtable.main.kmt,v 1.1 2005-04-28 06:54:39 jpthibau Exp $
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : testHashtable.kmt
+ * 		
+ * License : GPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * Creation date : Apr 18 11:13:24 2005
+ * Author : zdrey
+ * Description : 
+ *		test for Hashtable
+ ***************************************************************************
+ */
+
+@testOperation "yes"
+@mainClass "testHashtable::TestHashtable"
+@mainOperation " "
+
+package testHashtable;
+
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+alias Integer : kermeta::standard::Integer;
+alias String : kermeta::standard::String;
+
+
+class TestHashtable inherits kermeta::kunit::Assert
+{
+	
+	attribut hashtable : kermeta::utils::Hashtable<Integer, String>
+	
+	// initialize things
+	operation setUp() : Void is do
+		hashtable := kermeta::utils::Hashtable<Integer, String>.new
+		hashtable.put(1,"une")
+		hashtable.put(2,"deux")
+	end
+	
+	/**
+	 * returns an iterator on the keys of the map
+	 */
+	operation testKeyIterator() : Void is do
+		var it : kermeta::standard::Iterator<Integer>
+		setUp()
+		it := hashtable.keyIterator()
+		assert(it.next == 1)
+		assert(it.next == 2)
+	end
+
+	
+	/**
+	 * returns an iterator on the keys of the map
+	 */
+	operation testValueIterator() : Void is do
+		var it : kermeta::standard::Iterator<String>.new
+		setUp()
+		it := hashtable.valueIterator()
+		assert(it.next == "une")
+		assert(it.next == "deux")
+	end
+	
+	/**
+	 * returns the value for key 'key'
+	 */
+	operation testGet() : Void is do
+		setUp()
+		assert(hashtable.get(1) == "une")
+		assert(hashtable.get(2) == "deux")
+	end
+	
+	/**
+	 * Adds a entry in the Hashtable
+	 */
+	operation testPut() : Void is do
+		setUp()
+		hashtable.put(1, "UN")
+		assert(hashtable.get(1) == "UN")
+		assert(hashtable.get(2) == "deux")
+		assert(hashtable.size == 2)
+	end
+	
+	/**
+	 * Removes the entry which key equals 'key'
+	 */
+	operation testRemove() : Void is do
+		setUp()
+		hashtable.remove(2)
+		assert(hashtable.size == 1)
+		fail(hashtable.keyIterator.next == 1)
+	end
+	
+	/**
+	 * Remove all elements from the Hashtable
+	 */
+	operation testClear() : Void is do
+		setUp()
+		assert(hashtable.size == 0)
+	end
+	
+
+}
