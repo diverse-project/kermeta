@@ -18,6 +18,7 @@ import org.eclipse.jface.text.reconciler.DirtyRegion;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
@@ -27,6 +28,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
@@ -109,35 +111,11 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 	        result.parseString(_document.get().replace('\t', ' '));
 	        result.load();
 	        
-	        try {
-	            
-	           // System.getProperties().list(System.out);
-	            
-		        // SET THE STD LIB
-	            //TexteditorPlugin.getDefault().
-	            TexteditorPlugin.pluginLog.info("Setting std lib uri");
-			    KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.texteditor_0.0.2/lib/framework.km";
-			    // INIT TYPE CHECKER
-			    TexteditorPlugin.pluginLog.info("Initializing type checker");
-			    
-			    TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
-			    
-			    
-			        
-		        if (result.error.size() == 0) {
-		            KermetaTypeChecker tc = new KermetaTypeChecker(result);
-		            tc.checkUnit();
-		        }
-	        } catch (Throwable e) {
-	            TexteditorPlugin.pluginLog.error("Type-checker error", e);
-	            if (result != null) {
-	                result.error.add(new KMUnitError("Type checker internal error : " + e, null)); 
-	            }
-	        }
+	        result.typeCheck();
 	        
         }
-        catch(Exception e) {
-            TexteditorPlugin.pluginLog.error("load error", e);
+        catch(Throwable e) {
+            KermetaUnit.internalLog.error("load error ", e);
         	if (result == null) {
         		e.printStackTrace();
         		return null;
@@ -161,12 +139,12 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     private static void createMarker(IFile file, KermetaUnit unit)
     {
     	Iterator it = unit.error.iterator();
-    	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next());
+    	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next(), (KMTUnit)unit);
     	it = unit.warning.iterator();
-    	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next());
+    	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next(), (KMTUnit)unit);
     }
 
-    private static void createMarker(IFile file, KMUnitMessage message)
+    private static void createMarker(IFile file, KMUnitMessage message, KMTUnit unit)
     {
         HashMap map = new HashMap();
         
@@ -178,11 +156,17 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         	offset = pe.getOffset();
         	length = pe.getLength();
         }
-        if (message.getNode() != null) {
-        	offset = message.getNode().getRangeStart();
-        	length = message.getNode().getRangeLength();
-        	
+        else if (message instanceof KMTUnitLoadError) {
+        	offset = ((KMTUnitLoadError)message).getAstNode().getRangeStart();
+        	length = ((KMTUnitLoadError)message).getAstNode().getRangeLength();	
         }
+        else if(message.getNode() != null) {
+            KermetaASTNode astn = unit.getKMTAstNodeForModelElement(message.getNode());
+            offset = astn.getRangeStart();
+        	length = astn.getRangeLength();	
+        }
+        
+        
         if (offset > 0) offset--;
         
         map.put("message", message.getMessage());

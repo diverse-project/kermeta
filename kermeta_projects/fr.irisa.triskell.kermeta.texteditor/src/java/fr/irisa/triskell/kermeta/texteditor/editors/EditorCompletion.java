@@ -5,6 +5,8 @@
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Iterator;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
@@ -13,7 +15,14 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
+
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
+import fr.irisa.triskell.kermeta.texteditor.outline.GetImageVisitor;
 
 /**
  * @author Franck Fleurey
@@ -26,11 +35,15 @@ public class EditorCompletion implements IContentAssistProcessor {
 	protected final static String[] types = { "Object", "Class","Collection" };
 	protected final static String[] kws = { "from", "if","local" };
 	
+	
+	protected Editor editor;
+	
 	/**
 	 * 
 	 */
-	public EditorCompletion() {
+	public EditorCompletion(Editor editor) {
 		super();
+		this.editor = editor;
 	}
 
 	/**
@@ -161,15 +174,20 @@ public class EditorCompletion implements IContentAssistProcessor {
     }
     
     private void addPrposalsForTypes(IDocument doc, int offset, ArrayList props, String begining) {
-    	// find possible methods :
-    	String[] propositions = types;
-    	// selet those which match
-    	for(int i=0; i<propositions.length; i++) {
-    		if(propositions[i].startsWith(begining)) {
-    			CompletionProposal p = new CompletionProposal(propositions[i], offset, 0, propositions[i].length(),null, propositions[i], null, null);
-    			props.add(p);
-    		}
-    	}
+        
+        Iterator it = editor.getMcunit().packages.values().iterator();
+        while(it.hasNext()) {
+            FPackage p = (FPackage)it.next();
+            Iterator typeit = p.getFOwnedTypeDefinition().iterator();
+            while(typeit.hasNext()) {
+                FTypeDefinition td = (FTypeDefinition)typeit.next();
+                String type_id = td.getFName();
+                if (type_id.startsWith(type_id)) {
+                    CompletionProposal cp = new CompletionProposal(type_id, offset, 0, type_id.length(),KermetaSpecialIcons.KERMETA_LOGO, td.getFName(), null, editor.getMcunit().getQualifiedName(td));
+                    props.add(cp);
+                }
+            }
+            
+        }
     }
-
 }

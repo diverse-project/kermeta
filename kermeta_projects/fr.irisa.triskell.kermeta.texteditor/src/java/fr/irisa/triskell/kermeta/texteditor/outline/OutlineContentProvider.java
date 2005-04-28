@@ -1,0 +1,95 @@
+/*
+ * Created on 13 févr. 2005
+ * By Franck FLEUREY (ffleurey@irisa.fr)
+ */
+package fr.irisa.triskell.kermeta.texteditor.outline;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+
+import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.Viewer;
+
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.structure.FObject;
+import fr.irisa.triskell.kermeta.structure.FPackage;
+
+/**
+ * @author Franck Fleurey
+ * IRISA / University of rennes 1
+ * Distributed under the terms of the GPL license
+ */
+public class OutlineContentProvider implements ITreeContentProvider {
+
+	protected KermetaOutline outline;
+	
+	/**
+	 * 
+	 */
+	public OutlineContentProvider(KermetaOutline outline) {
+		super();
+		this.outline = outline;
+	}
+
+	/**
+	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
+	 */
+	public Object[] getChildren(Object parentElement) {
+		if (parentElement instanceof OutlineItem) return ((OutlineItem)parentElement).getChildren();
+		else if (parentElement instanceof KermetaUnit) return getElements(parentElement);
+		else return new Object[0];
+	}
+	
+	/**
+	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getParent(java.lang.Object)
+	 */
+	public Object getParent(Object element) {
+		return ((OutlineItem)element).parent;
+	}
+	/**
+	 * @see org.eclipse.jface.viewers.ITreeContentProvider#hasChildren(java.lang.Object)
+	 */
+	public boolean hasChildren(Object element) {
+		return ((OutlineItem)element).getChildren().length != 0;
+	}
+	/**
+	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
+	 */
+	public Object[] getElements(Object inputElement) {
+		KermetaUnit unit = (KermetaUnit)inputElement;
+		ArrayList result = new ArrayList();
+		
+	    Iterator it = unit.packages.values().iterator();
+	    while(it.hasNext()) {
+	        FPackage pack = (FPackage)it.next();
+	       
+            OutlineItem item = new OutlineItem(pack, null, outline);
+            
+            
+            if (!outline.prefPackageTree() || pack.getFNestingPackage() == null) {
+                if(outline.prefShowImported() || !item.isPackageFullyImported()) {
+	                result.add(item);
+	            }
+            }
+	    }
+	    
+		if (outline.prefSortedOutline())
+		    Collections.sort(result);
+		
+		return result.toArray();
+	}
+	/**
+	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
+	 */
+	public void dispose() {
+
+	}
+	/**
+	 * @see org.eclipse.jface.viewers.IContentProvider#inputChanged(org.eclipse.jface.viewers.Viewer, java.lang.Object, java.lang.Object)
+	 */
+	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		
+	}
+}
+

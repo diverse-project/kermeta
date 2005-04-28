@@ -53,7 +53,7 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 	
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 		ContentAssistant assistant = new ContentAssistant();
-		assistant.setContentAssistProcessor(new EditorCompletion(), IDocument.DEFAULT_CONTENT_TYPE);
+		assistant.setContentAssistProcessor(new EditorCompletion(editor), IDocument.DEFAULT_CONTENT_TYPE);
 		assistant.enableAutoActivation(true);
 		assistant.setAutoActivationDelay(500);
 		assistant.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
@@ -79,4 +79,6 @@ public class EditorConfiguration extends SourceViewerConfiguration {
      {
         return texthover;
      }
+	 
+	 
 }
