@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.1 2005-04-28 10:01:38 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.2 2005-04-28 13:36:15 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : GPL
@@ -43,6 +43,7 @@ public class RunCommandLine extends Run{
 	public static void main(String[] args) {
 	    RunCommandLine theLauncherRun;
 	    theLauncherRun = new RunCommandLine(args);
+	    theLauncherRun.initializeInterpreter(args);
 	    theLauncherRun.run();
 		
 	}
