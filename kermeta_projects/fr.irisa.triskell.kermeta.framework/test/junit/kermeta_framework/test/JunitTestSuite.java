@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2005-04-28 10:01:40 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.1 2005-04-28 10:01:28 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -6,18 +6,18 @@
  * ----------------------------------------------------------------------------
  * Creation date : 27 janv. 2005
  * Authors : 
- * 		Franck FLEUREY (ffleurey@irisa.fr)
+ * 		Franck FLEUREY  (ffleurey@irisa.fr)
+ * 		Didier VOJTISEK (dvojtise@irisa.fr)
  * Description :  	
  * 	see class javadoc.	 
  */
-package kermeta_interpreter.test;
+package kermeta_framework.test;
 
 import junit.framework.TestSuite;
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
 
 /**
- * Interpreter test suite.
- * @author Franck Fleurey
+ * Framework test suite.
  */
 public class JunitTestSuite extends TestSuite {
 
@@ -36,34 +36,24 @@ public class JunitTestSuite extends TestSuite {
 
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-		testWithFile("test/kmt_testcases","10_testLoop.main.kmt" );
-
-		testWithFile("test/kmt_testcases","11_testBenchmark.main.kmt" );
-
-/*		testWithFile("test/kmt_testcases","13_testString.main.kmt" );
-
-		testWithFile("test/kmt_testcases","14_testExternJavaCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","1_testAssignment.main.kmt" );
-*/
-		testWithFile("test/kmt_testcases","2_testArithm.main.kmt" );
-/*
-		testWithFile("test/kmt_testcases","3_testOpCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","4_testOpOpCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","5_testOpPkgCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","6_testOpPkgCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","7_testOpPkgCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","8_testOpInternPkgCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","9_testOpCallObject.main.kmt" );
+		testWithFile("test/kmt_testcases","testArithm.main.kmt" );
 
 		testWithFile("test/kmt_testcases","testBoolean.main.kmt" );
-*/
+
+		testWithFile("test/kmt_testcases","testBooleanResults.main.kmt" );
+
+		testWithFile("test/kmt_testcases","testHashtable.main.kmt" );
+
+		testWithFile("test/kmt_testcases","testIterator.main.kmt" );
+
+		testWithFile("test/kmt_testcases","testLambda.main.kmt" );
+
+		testWithFile("test/kmt_testcases","testSet.main.kmt" );
+
+		testWithFile("test/kmt_testcases","testSubPackage.main.kmt" );
+
+		testWithFile("test/kmt_testcases","testVariable.main.kmt" );
+
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
 		
@@ -74,8 +64,9 @@ public class JunitTestSuite extends TestSuite {
 	 * It considers all tests as test cases 
 	 * even if this is already a testSuite
 	 * */
-	public void test_kermeta_interpreter() throws Exception {
+	public void test_kermeta_framework() throws Exception {
 	   // testWithFile("test/kmt_testcases","14_testExternJavaCall.main.kmt" );
+
 	}
 	
 	public void testWithFile(String dir, String file)  {

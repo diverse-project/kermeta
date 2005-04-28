@@ -1,4 +1,4 @@
-/* $Id: GenerateJUnitTestSuite.java,v 1.4 2005-04-28 10:01:39 dvojtise Exp $
+/* $Id: GenerateJUnitTestSuite.java,v 1.1 2005-04-28 10:01:28 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : GenerateJUnitTestSuite.java
  * License : GPL
@@ -10,7 +10,7 @@
  * Description :  	
  * 	see class javadoc.	 
  */
-package kermeta_interpreter.test;
+package kermeta_framework.test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,11 +34,12 @@ public class GenerateJUnitTestSuite {
 	protected static String getTemplate() {
 		if (template == null) {
 			template = "\t\ttestWithFile(\"DIR\",\"FILE\" );\n";
+			
 		}
 		return template;
 	}
 
-	protected static String junitfile = "test/junit/kermeta_interpreter/test/JunitTestSuite.java";
+	protected static String junitfile = "test/junit/kermeta_framework/test/JunitTestSuite.java";
 
 	public static void main(String[] args) {
 		String tcs = "";
