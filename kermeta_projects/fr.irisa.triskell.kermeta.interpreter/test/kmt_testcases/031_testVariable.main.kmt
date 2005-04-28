@@ -1,0 +1,59 @@
+@testOperation "yes"
+@mainClass "root::TestBooleanResults"
+@mainOperation "main_operation"
+
+package root;
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+
+/*****************************************************************************
+ * $Id: 031_testVariable.main.kmt,v 1.1 2005-04-28 06:54:38 jpthibau Exp $
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : testBooleanResults.kmt
+ * 		
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * Creation date : Mar 14, 2005
+ * Author : zdrey
+ * Description : test comparing operations, for string, integer(, real)
+ * Note : compareTo returns an Integer not a boolean.
+ ***************************************************************************
+ */
+
+class TestVariable inherits kermeta::kunit::Assert
+{    
+    // Main operation that embeds all the tests 
+     operation main_operation() is do
+     end
+     
+    /** Test the init of a String var */
+     operation testop1() : kermeta::standard::String is do
+     	var v : kermeta::standard::String init "hello"
+     	if (v != "hello") then 
+     		raise "error"
+     	end
+     	result := v
+     end
+
+     /** Test the init of a  */
+    operation testop2() : kermeta::standard::Integer is do
+    	var v : kermeta::standard::Integer init 1
+    	if (v != 1) then 
+    		raise "error"
+    	end
+     	result := v
+     end
+     
+     /** A combined test.. assignment, init */
+     operation testop3() : kermeta::standard::Integer is do
+     	var v1 : kermeta::standard::Integer
+     	v1 := 1
+     	var v2 : kermeta::standard::Integer init v1
+     	if (v2 != 1) then 
+     		raise "error"
+   		end
+     	result := v2
+     end
+
+}
