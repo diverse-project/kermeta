@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.1 2005-04-28 10:01:38 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.2 2005-04-28 15:29:30 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : GPL
@@ -30,33 +30,41 @@ import junit.framework.TestSuite;
  * It may return either a TestCase or a TestSuite
  *
  */
-public class RunJunitFactory extends Run implements Test{
+public class RunJunitFactory  implements Test{
 
     private TestSuite theTestSuite = null;
     private TestCase theTestCase=null;
+    
+    public Run interpreterRun=null;
     
     /**
      * @param args
      */
     public RunJunitFactory(String[] args) {
-        super(args);
+        interpreterRun = new Run(args);
 		// Is there a "testOperation" tag?
         try{
-            this.initializeInterpreter(args);               
-			if (isTestOperation==true)
+            interpreterRun.initializeInterpreter(args);               
+			if (interpreterRun.isTestOperation==true)
 			{
 			    theTestSuite= new TestSuite();
-			    theTestSuite.setName(mainClassValue);
+			    theTestSuite.setName(interpreterRun.mainClassValue);
 			    includeTestSuite(
-			            mainClassValue,
-			            builder,
+			            interpreterRun.mainClassValue,
+			            interpreterRun.builder,
 			            args
 			    );
+			    interpreterRun=null;
 			}
 			else
 			{
 			    // Otherwise : let's add the single testcase
-			    theTestCase = new RunTestCase(mainClassValue, mainOperationValue,mainArgsValue,  builder, args, this);
+			    theTestCase = new RunTestCase(interpreterRun.mainClassValue,
+			            interpreterRun.mainOperationValue,
+			            interpreterRun.mainArgsValue,  
+			            interpreterRun.builder, 
+			            args, this);
+			    interpreterRun=null;
 			}
         }
         catch (fr.irisa.triskell.kermeta.error.KermetaError e)
@@ -118,7 +126,8 @@ public class RunJunitFactory extends Run implements Test{
 	        FOperation mainOp = (FOperation)it.next();
 	        if (mainOp.getFName().startsWith("test"))
 	        {
-	            theTestSuite.addTest(new RunTestCase(mainClassValue, mainOp.getFName(),mainArgsValue,  builder, args, this));
+	            theTestSuite.addTest(new RunTestCase(mainClassValue, mainOp.getFName(),
+	                    interpreterRun.mainArgsValue,  builder, args, this));
 	        }   
 	    }
 	}
