@@ -47,11 +47,11 @@ public class Real {
 	}
 	
 	public static void setValue(RuntimeObject real, double value) {
-		real.getData().put("NumericValue", new Double(value));
+		real.getData().put("Value", new Double(value));
 	}
 	
 	public static double getValue(RuntimeObject real) {
-		return ((Double)real.getData().get("NumericValue")).doubleValue();
+		return ((Double)real.getData().get("Value")).doubleValue();
 	}
 	
 	

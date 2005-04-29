@@ -258,13 +258,13 @@ class Iterator<G>
 	 * returns true if the iterator has a next element
 	 */
 	operation hasNext() : Boolean is do
-	 	result := extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext()
+	 	result := extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext(self)
 	end
 	
 	/**
 	 * returns the next element of the iterator
 	 */
 	operation next() : G is do
-		result := extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next()
+		result := extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next(self)
 	end
 }

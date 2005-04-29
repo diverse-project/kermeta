@@ -1,4 +1,4 @@
-/* $Id: StdIO.java,v 1.4 2005-04-19 15:52:51 zdrey Exp $
+/* $Id: StdIO.java,v 1.5 2005-04-29 09:20:28 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : GPL
@@ -31,9 +31,9 @@ public class StdIO {
 	public static RuntimeObject write(RuntimeObject output) {
 		FClassDefinition classDef=((FClass)output.getMetaclass().getData().get("kcoreObject")).getFClassDefinition();
 		if (classDef.getFName().equals("Integer"))
-			System.out.print(output.getData().get("NumericValue"));
+			System.out.print(output.getData().get("Value"));
 		else if (classDef.getFName().equals("String"))
-		    System.out.print(output.getData().get("StringValue"));
+		    System.out.print(output.getData().get("Value"));
 		else System.out.print(output);
 		return Void.VOID;
 	}

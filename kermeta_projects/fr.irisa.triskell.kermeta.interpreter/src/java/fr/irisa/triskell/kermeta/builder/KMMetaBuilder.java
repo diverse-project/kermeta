@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.11 2005-04-22 17:00:08 zdrey Exp $
+/* $Id: KMMetaBuilder.java,v 1.12 2005-04-29 09:26:05 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -59,10 +59,13 @@ public class KMMetaBuilder {
 			FClass fClass=Run.interpreterbuilder.struct_factory.createFClass();
 			fClass.setFClassDefinition((FClassDefinition)node);
 			data.put("kcoreObject",fClass);
+			Run.correspondanceTable.put(fClass,knode);
 		}
-		else data.put("kcoreObject",node);
+		else {
+			data.put("kcoreObject",node);
+			Run.correspondanceTable.put(node,knode);
+		}
 		knode.setData(data);
-		Run.correspondanceTable.put(node,knode);
 		return knode;
 	}
 	

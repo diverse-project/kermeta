@@ -22,7 +22,7 @@ class Hashtable<K, V>
 	 * returns an iterator on the keys of the map
 	 */
 	operation keyIterator() : Iterator<K> is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keyIterator()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keysIterator(self)
 	end
 	
 	/**
@@ -36,14 +36,14 @@ class Hashtable<K, V>
 	 * returns the value for key 'key'
 	 */
 	operation get(key : K) : V is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(key)
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self,key)
 	end
 	
 	/**
 	 * Adds a entry in the Hashtable
 	 */
 	operation put(key : K, ~value : V) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.put(key, ~value)
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.put(self,key, ~value)
 	end
 	
 	/**
