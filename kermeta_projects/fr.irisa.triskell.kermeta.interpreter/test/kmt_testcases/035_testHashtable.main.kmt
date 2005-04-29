@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 035_testHashtable.main.kmt,v 1.2 2005-04-29 09:27:18 jpthibau Exp $
+ * $Id: 035_testHashtable.main.kmt,v 1.3 2005-04-29 13:34:25 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testHashtable.kmt
@@ -54,6 +54,17 @@ class TestHashtable inherits kermeta::kunit::Assert
 	/**
 	 * returns an iterator on the keys of the map
 	 */
+	operation testValueIterator() : Void is do
+		var it : kermeta::standard::Iterator<String>
+		it := hashtable.valueIterator()
+		stdio.writeln(it.next)
+		stdio.writeln(it.next)
+		stdio.writeln(it.next)
+	end
+	
+	/**
+	 * returns an iterator on the keys of the map
+	 */
 	operation testGet() : Void is do
 		assert(hashtable.get(1) == "one")
 		assert(hashtable.get(2) == "two")
@@ -74,17 +85,16 @@ class TestHashtable inherits kermeta::kunit::Assert
 	 * Removes the entry which key equals 'key'
 	 */
 	operation testRemove() : Void is do
-		setUp()
 		hashtable.remove(2)
-		assert(hashtable.size == 1)
-		fail(hashtable.keyIterator.next == 1)
+		assert(hashtable.size == 2)
+//		fail(hashtable.keyIterator.next == 1)
 	end
 	
 	/**
 	 * Remove all elements from the Hashtable
 	 */
 	operation testClear() : Void is do
-		setUp()
+		hashtable.clear()
 		assert(hashtable.size == 0)
 	end
 	

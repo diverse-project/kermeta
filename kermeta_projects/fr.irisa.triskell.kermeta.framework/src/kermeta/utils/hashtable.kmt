@@ -19,6 +19,13 @@ using kermeta::standard
 class Hashtable<K, V>
 {
 	/**
+	 * returns size of the map
+	 */
+	operation size() : Integer is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.size(self)
+	end
+
+	/**
 	 * returns an iterator on the keys of the map
 	 */
 	operation keyIterator() : Iterator<K> is do
@@ -29,14 +36,14 @@ class Hashtable<K, V>
 	 * returns an iterator on the keys of the map
 	 */
 	operation valueIterator() : Iterator<V> is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.valueIterator()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.valueIterator(self)
 	end
 	
 	/**
 	 * returns the value for key 'key'
 	 */
 	operation get(key : K) : V is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self,key)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self,key)
 	end
 	
 	/**
@@ -50,14 +57,14 @@ class Hashtable<K, V>
 	 * Removes the entry which key equals 'key'
 	 */
 	operation remove(key : K) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.remove(key)
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.remove(self,key)
 	end
 	
 	/**
 	 * Remove all elements from the Hashtable
 	 */
 	operation clear() : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.clear()
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.clear(self)
 	end
 	
 	// TODO: complete this class

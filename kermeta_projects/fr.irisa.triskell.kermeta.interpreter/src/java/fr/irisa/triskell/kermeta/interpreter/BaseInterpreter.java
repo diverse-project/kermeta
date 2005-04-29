@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.27 2005-04-29 09:26:04 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.28 2005-04-29 13:33:39 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -568,7 +568,6 @@ public class BaseInterpreter extends KermetaVisitor {
 		    	Variable var=(Variable)e_context.getVariables().get(var_name);
 		        //ro_target = (ro_target!=null)?ro_target:var.getRuntimeObject();
 		    	ro_target = var.getRuntimeObject();
-//OLD => WRONG		        t_target = var.getType();
 		    	t_target =(FType)ro_target.getMetaclass().getData().get("kcoreObject"); 
 		        
 		    }
