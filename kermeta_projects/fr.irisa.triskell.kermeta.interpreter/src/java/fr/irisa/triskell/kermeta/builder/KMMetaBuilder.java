@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.12 2005-04-29 09:26:05 jpthibau Exp $
+/* $Id: KMMetaBuilder.java,v 1.13 2005-04-29 12:59:17 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -88,7 +88,7 @@ public class KMMetaBuilder {
 		this.processedUnits.add(unit);
 		Iterator it=unit.importedUnits.iterator();
 		while(it.hasNext()) {
-			KMTUnit importedUnit=(KMTUnit)it.next();
+			KermetaUnit importedUnit=(KermetaUnit)it.next();
 			if (!this.processedUnits.contains(importedUnit))
 			this.unitsExplorer(importedUnit);
 		}
