@@ -28,7 +28,7 @@ class Stack<G> inherits Sequence<G>
 	/**
 	 * Get the element at the top of the stack
 	 */
-	operation peek(element : G) : G is do
+	operation peek() : G is do
 		result := self.first
 	end
 	
