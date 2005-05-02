@@ -41,7 +41,9 @@ class MyObjectTwo {
 class MyObjectsCreation inherits kermeta::kunit::Assert {
 
 	operation createMyObjects() : Void is do
-		var o2_1,o2_2,o2_3 : MyObjectTwo
+		var o2_1 : MyObjectTwo
+		var o2_2 : MyObjectTwo
+		var o2_3 : MyObjectTwo
 		var o1   : MyObjectOne
 
 		o2_1 := MyObjectTwo.new
