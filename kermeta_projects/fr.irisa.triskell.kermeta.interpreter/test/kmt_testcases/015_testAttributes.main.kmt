@@ -1,5 +1,5 @@
-@mainClass "testOpCallObject::MyObjectCreation"
-@mainOperation "createMyObject"
+@mainClass "testOpCallObject::MyObjectsCreation"
+@mainOperation "createMyObjects"
 package testOpCallObject;
 
 require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
