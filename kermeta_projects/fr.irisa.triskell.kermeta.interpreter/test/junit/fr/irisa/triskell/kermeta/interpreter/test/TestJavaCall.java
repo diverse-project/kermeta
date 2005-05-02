@@ -1,4 +1,4 @@
-/* $Id: TestJavaCall.java,v 1.2 2005-04-25 12:47:12 dvojtise Exp $
+/* $Id: TestJavaCall.java,v 1.3 2005-05-02 09:00:23 jpthibau Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
  * License    : GPL
@@ -48,7 +48,7 @@ public class TestJavaCall extends TestCase{
         internalLog.info("callBooleanReturn was called");
 
         callCounter++;
-        return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(true);
+        return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(true,Run.koFactory);
 	}
     public static RuntimeObject callIntegerReturn() {
         internalLog.info("callIntegerReturn was called");
