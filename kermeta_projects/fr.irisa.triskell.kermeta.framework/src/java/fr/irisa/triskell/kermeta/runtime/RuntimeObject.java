@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.4 2005-04-21 09:33:59 zdrey Exp $
+/* $Id: RuntimeObject.java,v 1.5 2005-05-02 10:21:27 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -45,12 +45,6 @@ public class RuntimeObject {
 	 * Indexed by the name of the property
 	 */
 	protected Hashtable properties = new Hashtable();
-	
-	/**
-	 * The values of propertiesGenerators. 
-	 * Indexed by the name of the property
-	 */
-	protected Hashtable propertiesGenerators = new Hashtable();
 	
 	/**
 	 * Data contained in the object
@@ -137,12 +131,7 @@ public class RuntimeObject {
 	public Hashtable getProperties() {
 		return properties;
 	}
-	/**
-	 * @return Returns the propertiesGenerators.
-	 */
-	public Hashtable getPropertiesGenerators() {
-		return propertiesGenerators;
-	}
+
 	/**
 	 * @param metaclass The metaclass to set.
 	 */
