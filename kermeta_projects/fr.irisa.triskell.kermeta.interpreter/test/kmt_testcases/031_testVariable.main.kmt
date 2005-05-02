@@ -1,5 +1,5 @@
 @testOperation "yes"
-@mainClass "root::TestBooleanResults"
+@mainClass "root::TestVariable"
 @mainOperation "main_operation"
 
 package root;
@@ -7,7 +7,7 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 
 
 /*****************************************************************************
- * $Id: 031_testVariable.main.kmt,v 1.1 2005-04-28 06:54:38 jpthibau Exp $
+ * $Id: 031_testVariable.main.kmt,v 1.2 2005-05-02 14:33:23 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testBooleanResults.kmt
