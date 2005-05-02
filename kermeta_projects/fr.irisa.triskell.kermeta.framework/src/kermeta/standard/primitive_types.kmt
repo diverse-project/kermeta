@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.12 2005-04-27 14:38:04 jpthibau Exp $
+// $Id: primitive_types.kmt,v 1.13 2005-05-02 14:55:08 jpthibau Exp $
 package kermeta::standard;
 
 require "../Standard.kmt"
@@ -271,15 +271,15 @@ class String inherits ValueType, Comparable
 	/**
 	 * Comparaison
 	 */
-	method compareTo(other : Object) : Integer is do
+	method compareTo(other : String) : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self,other)
 	end
 	
-	method equals(other : Object) : Boolean is do
+	method equals(other : String) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.equals(self, other)
 	end
 	
-	method isNotEqual(other : Object) : Boolean is do
+	method isNotEqual(other : String) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.isNotEqual(self, other)
 	end
 	/**
