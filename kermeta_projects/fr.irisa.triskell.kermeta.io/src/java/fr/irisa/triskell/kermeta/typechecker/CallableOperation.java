@@ -1,4 +1,4 @@
-/* $Id: CallableOperation.java,v 1.1 2005-04-19 08:55:11 ffleurey Exp $
+/* $Id: CallableOperation.java,v 1.2 2005-05-02 23:50:51 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : CallableOperation.java
  * License : GPL
@@ -22,6 +22,7 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FParameter;
 import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 
@@ -92,6 +93,57 @@ public class CallableOperation extends CallableElement {
             result = new SimpleType(TypeVariableEnforcer.getBoundType(ft, bindings));
         }
 
+        return result;
+    }
+    
+    public FOperation getTypeBoundedOperation() {
+        StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
+        FOperation result = struct_factory.createFOperation();
+        Hashtable bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
+        
+        result.setFName(operation.getFName());
+        
+        result.setFLower(operation.getFLower());
+        result.setFUpper(operation.getFUpper());
+        result.setFIsAbstract(operation.isFIsAbstract());
+        result.setFIsOrdered(operation.isFIsOrdered());
+        result.setFIsUnique(operation.isFIsUnique());
+        
+       
+        result.setFSuperOperation(operation.getFSuperOperation());
+        
+        Iterator it = operation.getFTypeParameter().iterator();
+        while(it.hasNext()) {
+            FTypeVariable otv = (FTypeVariable)it.next();
+            FTypeVariable ntv = struct_factory.createFTypeVariable();
+            ntv.setFName(otv.getFName());
+            if (otv.getFSupertype() != null)
+                ntv.setFSupertype(TypeVariableEnforcer.getBoundType(otv.getFSupertype(), bindings));
+            bindings.put(otv, ntv);
+            result.getFTypeParameter().add(ntv);
+        }
+        
+        if (operation.getFType() != null)
+            result.setFType(TypeVariableEnforcer.getBoundType(operation.getFType(), bindings));
+        
+        it = operation.getFRaisedException().iterator();
+        while(it.hasNext()) {
+            FType extype = (FType)it.next();
+            result.getFRaisedException().add(TypeVariableEnforcer.getBoundType(extype, bindings));
+        }
+        
+        it = operation.getFOwnedParameter().iterator();
+        while(it.hasNext()) {
+            FParameter op = (FParameter)it.next();
+            FParameter np = struct_factory.createFParameter();
+            np.setFLower(op.getFLower());
+            np.setFUpper(op.getFUpper());
+            np.setFIsOrdered(op.isFIsOrdered());
+            np.setFIsUnique(op.isFIsUnique());
+            np.setFName(op.getFName());
+            np.setFOperation(result);
+            np.setFType(TypeVariableEnforcer.getBoundType(op.getFType(), bindings));
+        }
         return result;
     }
 

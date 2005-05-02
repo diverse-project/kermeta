@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.3 2005-04-20 23:58:21 ffleurey Exp $
+/* $Id: SimpleType.java,v 1.4 2005-05-02 23:50:51 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -19,6 +19,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FType;
@@ -42,7 +43,7 @@ public class SimpleType extends Type {
 		super();
 		this.type = type;
 	}
-
+	
 	/**
 	 * @see fr.irisa.triskell.kermeta.typechecker.Type#isSubTypeOf(fr.irisa.triskell.kermeta.structure.FType)
 	 */

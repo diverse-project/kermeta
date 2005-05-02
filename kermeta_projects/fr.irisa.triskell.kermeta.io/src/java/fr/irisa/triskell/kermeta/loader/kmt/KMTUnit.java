@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.14 2005-04-26 08:28:08 ffleurey Exp $
+/* $Id: KMTUnit.java,v 1.15 2005-05-02 23:50:52 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -42,6 +42,7 @@ import fr.irisa.triskell.kermeta.utils.UserDirURI;
 public class KMTUnit extends KermetaUnit {
 
 	CompUnit mctAST = null;
+	
 	
 	/**
 	 * 
@@ -144,4 +145,8 @@ public class KMTUnit extends KermetaUnit {
 		mctAST.accept(pass);
 
 	}
+	
+    public CompUnit getMctAST() {
+        return mctAST;
+    }
 }

@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.2 2005-04-20 23:58:21 ffleurey Exp $
+/* $Id: InheritanceSearch.java,v 1.3 2005-05-02 23:50:50 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : InheritanceSearchUtilities.java
 * License : GPL
@@ -12,11 +12,17 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+import fr.irisa.triskell.kermeta.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 
 /**
  * @author Franck Fleurey
@@ -62,6 +68,7 @@ public class InheritanceSearch {
 	public static ArrayList callableOperations(FClass c) {
 		ArrayList allTypes = allSuperTypes(c);
 		ArrayList result = new ArrayList();
+		Hashtable found_ops = new Hashtable();
 		
 		Iterator it = allTypes.iterator();
 		while (it.hasNext()) {
@@ -70,7 +77,10 @@ public class InheritanceSearch {
 			// Add all operations
 			while (ops.hasNext()) {
 				FOperation op = (FOperation)ops.next();
-				result.add(new CallableOperation(op,fclass));
+				if (!found_ops.containsKey(op)) {
+				    found_ops.put(op,op);
+				    result.add(new CallableOperation(op,fclass));
+				}
 			}
 			// Remove hiden definition.
 			// It should keep only one method per operation
@@ -83,6 +93,21 @@ public class InheritanceSearch {
 		return result;
 	}
 	
+	public static FClass getFClassForClassDefinition(FClassDefinition cdef) {
+	    StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
+	    FClass fclass = struct_factory.createFClass();
+	    fclass.setFClassDefinition(cdef);
+	    Iterator it = cdef.getFTypeParameter().iterator();
+	    while(it.hasNext()) {
+	        FTypeVariable tv = (FTypeVariable)it.next();
+	        FTypeVariableBinding binding = struct_factory.createFTypeVariableBinding();
+	        binding.setFType(tv);
+	        binding.setFVariable(tv);
+	        fclass.getFTypeParamBinding().add(binding);
+	    }
+	    return fclass;
+	}
+	
 	
 	/**
 	 * Get the callable Properties on class c
@@ -92,6 +117,7 @@ public class InheritanceSearch {
 	public static ArrayList callableProperties(FClass c) {
 	    ArrayList allTypes = allSuperTypes(c);
 		ArrayList result = new ArrayList();
+		Hashtable found_properties = new Hashtable();
 		
 		Iterator it = allTypes.iterator();
 		while (it.hasNext()) {
@@ -100,7 +126,10 @@ public class InheritanceSearch {
 			// Add all operations
 			while (ops.hasNext()) {
 				FProperty prop = (FProperty)ops.next();
-				result.add(new CallableProperty(prop,fclass));
+				if (!found_properties.containsKey(prop)) {
+					found_properties.put(prop, prop);
+					result.add(new CallableProperty(prop,fclass));
+				}
 			}
 		}
 		return result;
@@ -109,6 +138,7 @@ public class InheritanceSearch {
 	private static ArrayList allSuperOperations(FOperation op) {
 		ArrayList result = new ArrayList();
 		if (op.getFSuperOperation() != null) {
+		    result.add(op.getFSuperOperation());
 			result.addAll(allSuperOperations(op.getFSuperOperation()));
 		}
 		return result;

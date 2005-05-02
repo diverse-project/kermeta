@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.19 2005-04-26 07:16:28 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.20 2005-05-02 23:50:48 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -58,6 +58,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
@@ -72,7 +73,8 @@ public abstract class KermetaUnit {
     final static public Logger internalLog = LogConfigurationHelper.getLogger("KermetaUnit");
 	
     public static String STD_LIB_URI = null;//"platform:/resource/fr.irisa.triskell.kermeta.io/lib/framework.km";
-	public static String ROOT_CLASS_QNAME = "kermeta::language::structure::Object";
+	
+    public static String ROOT_CLASS_QNAME = "kermeta::language::structure::Object";
 	
 	protected static KermetaUnit std_lib = null;
 	
@@ -103,6 +105,25 @@ public abstract class KermetaUnit {
 		interpreter_symbols.put("stdio", new KMSymbolInterpreterVariable("stdio"));
 		
 		
+	}
+	
+	protected KermetaTypeChecker typeChecker = null;
+	
+	public void typeCheck() {
+	    if (this.error.size() == 0) {
+	        try {
+	            typeChecker = new KermetaTypeChecker(this);
+	            typeChecker.checkUnit();
+	        }
+	        catch(Throwable t) {
+	            this.error.add(new KMUnitError("Type checker internal error " + t.getMessage(), null));
+	            KermetaUnit.internalLog.error("Type checker error", t);
+	        }
+	    }
+	}
+	
+	public KermetaTypeChecker getTypeChecker() {
+	    return typeChecker;
 	}
 	
 	protected void importStdlib() {
@@ -728,12 +749,20 @@ public abstract class KermetaUnit {
 		//System.out.println("\nLOAD " + uri);
 	    //importStdlib();
 		// load imported units
-		loadAllImportedUnits();
-		loadAllTypeDefinitions();
-		loadAllStructuralFeatures();
-		loadAllOppositeProperties();
-		loadAllBodies();
-		loadAllAnnotations();
+	    try {
+	        loadAllImportedUnits();
+	        loadAllTypeDefinitions();
+	        loadAllStructuralFeatures();
+	        loadAllOppositeProperties();
+	        loadAllBodies();
+	        loadAllAnnotations();
+	    }
+	    catch(Throwable t) {
+	        if (getAllErrors().size() == 0) {
+	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            error.add(new KMUnitError("INTERNAL ERROR : " + t.getMessage(), null));
+	        }
+	    }
 	}
 	
 	boolean loading = false;

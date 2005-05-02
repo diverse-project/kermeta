@@ -1,4 +1,4 @@
-/* $Id: CallableProperty.java,v 1.1 2005-04-19 08:55:22 ffleurey Exp $
+/* $Id: CallableProperty.java,v 1.2 2005-05-02 23:50:50 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : CallableProperty.java
 * License : GPL
@@ -11,10 +11,16 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.structure.FParameter;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 
 /**
  * @author Franck Fleurey
@@ -54,6 +60,27 @@ public class CallableProperty extends CallableElement {
         // subtitute varables :
         Hashtable bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
         return new SimpleType(TypeVariableEnforcer.getBoundType(t, bindings));
+    }
+    
+    public FProperty getTypeBoundedProperty() {
+        StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
+        FProperty result = struct_factory.createFProperty();
+        Hashtable bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
+        
+        result.setFName(property.getFName());
+        
+        result.setFLower(property.getFLower());
+        result.setFUpper(property.getFUpper());
+        result.setFIsOrdered(property.isFIsOrdered());
+        result.setFIsUnique(property.isFIsUnique());
+        
+        result.setFIsComposite(property.isFIsComposite());
+        result.setFIsDerived(property.isFIsDerived());
+        result.setFIsID(property.isFIsID());
+
+        result.setFType(TypeVariableEnforcer.getBoundType(property.getFType(), bindings));
+        
+        return result;
     }
 
     /**

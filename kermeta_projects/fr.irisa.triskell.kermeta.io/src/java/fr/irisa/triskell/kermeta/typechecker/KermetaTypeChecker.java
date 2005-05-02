@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.2 2005-04-26 07:16:23 ffleurey Exp $
+/* $Id: KermetaTypeChecker.java,v 1.3 2005-05-02 23:50:49 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -11,8 +11,10 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
 
+import fr.irisa.triskell.kermeta.ast.FExpression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
@@ -31,7 +33,14 @@ public class KermetaTypeChecker {
     
     protected KermetaUnit unit;
     protected TypeCheckerContext context;
+    
+    protected Hashtable expression_type;
 
+    
+    public Type getTypeOfExpression(fr.irisa.triskell.kermeta.behavior.FExpression expression) {
+        return (Type)expression_type.get(expression);
+    }
+    
     
     // Some information used by testing
     public ArrayList correctOperation = new ArrayList();
@@ -43,7 +52,13 @@ public class KermetaTypeChecker {
     public KermetaTypeChecker(KermetaUnit unit) {
         super();
         this.unit = unit;
+//      initialize the type checker if this is the std lib
+        if (unit.typeDefinitionLookup("kermeta::language::structure::Object") != null)
+            TypeCheckerContext.initializeTypeChecker(unit);
+        else
+            TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
         context = new TypeCheckerContext(unit);
+        expression_type = new Hashtable();
     }
     
     /**
@@ -51,12 +66,6 @@ public class KermetaTypeChecker {
      * of a kermeta unit
      */
     public void checkUnit() {
-        
-        // initialize the type checker if this is the std lib
-        if (unit.typeDefinitionLookup("kermeta::language::structure::Object") != null)
-            TypeCheckerContext.initializeTypeChecker(unit);
-        else
-            TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
         
         
         Iterator it = unit.typeDefs.values().iterator();
@@ -102,7 +111,7 @@ public class KermetaTypeChecker {
         context.init(op.getFOwningClass(), op);
         // check the body of the operation if it is not abstract
         if (op.getFBody() != null)
-            ExpressionChecker.typeCheckExpression(op.getFBody(), unit, context);
+            expression_type.putAll(ExpressionChecker.typeCheckExpression(op.getFBody(), unit, context));
         
         // THIS IS JUST FOR TESTING PURPOSES
         if (error_count != unit.error.size()) wrongOperations.add(op.getFName());
