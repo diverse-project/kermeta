@@ -1,6 +1,6 @@
-package kermeta::language::structure;
+package kermeta::language::structure; 
 
-require "../reflection/reflection.kmt"
+require "../Standard.kmt"
 require "behavior.kmt"
 
 alias String : kermeta::standard::String;

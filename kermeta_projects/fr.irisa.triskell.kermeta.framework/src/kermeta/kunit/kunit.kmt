@@ -1,5 +1,5 @@
 /***************************************************
- * $Id: kunit.kmt,v 1.6 2005-04-25 12:43:44 dvojtise Exp $
+ * $Id: kunit.kmt,v 1.7 2005-05-02 22:47:00 ffleurey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -11,7 +11,6 @@
 package kermeta::kunit;
 
 require "../Standard.kmt"
-//require "../../../src/kermeta/standard/exceptions.kmt"
 
 
 @Test "This is the clone of the JUnit Test abstract class" 
@@ -67,7 +66,7 @@ class TestSuite inherits Test
 
 	//@addTest "add a test case in the suite of tests to run"
 	operation addTest(test : Test) is do
-		if (self.tests == Void) then
+		if (self.tests == void) then
 			self.tests := kermeta::standard::Set<Test>.new
 		end
 		self.tests.add(test)

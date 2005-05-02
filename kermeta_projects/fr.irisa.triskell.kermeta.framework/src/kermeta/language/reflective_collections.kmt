@@ -1,6 +1,6 @@
 package kermeta::language;
 
-require "../standard/collections.kmt"
+require "../Standard.kmt"
 require "structure.kmt"
 
 using kermeta::standard
@@ -38,11 +38,11 @@ abstract class ReflectiveCollection<G> inherits Set<G>
 abstract class ReflectiveSequence<G> inherits OrderedSet<G>, ReflectiveCollection<G> {
 	
 	method add(element : G) : Void from ReflectiveCollection is do
-		super()
+		super(element)
 	end
 	
 	method remove(element : G) : Void from ReflectiveCollection is do
-		super()
+		super(element)
 	end
 	
 	method clear() : Void from ReflectiveCollection is do

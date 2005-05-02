@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.13 2005-05-02 14:55:08 jpthibau Exp $
+// $Id: primitive_types.kmt,v 1.14 2005-05-02 22:46:59 ffleurey Exp $
 package kermeta::standard;
 
 require "../Standard.kmt"
@@ -238,7 +238,7 @@ class Real inherits Numeric
 	 * returns -self
 	 */
 	operation uminus() : Numeric is do
-		result := 0 - self
+		result := 0.toReal - self
 	end
 }
 

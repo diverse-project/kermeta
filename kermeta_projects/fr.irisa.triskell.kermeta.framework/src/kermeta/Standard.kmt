@@ -6,6 +6,12 @@ package kermeta;
 
 // this imports the standard types and
 // the definition of the language
+require "standard/collections.kmt"
+
+require "language/behavior.kmt"
+
+require "reflection/reflection.kmt"
+
 require "language/reflective_collections.kmt"
 
 require "kunit/kunit.kmt"

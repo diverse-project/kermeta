@@ -3,7 +3,7 @@ package kermeta::standard;
 require "primitive_types.kmt"
 
 /***************************************************
- * Franck FLEUREY - 14/02/2005
+ * Franck FLEUREY - 14/02/2005 
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
  * Distributed under the terms of the GPL licence
@@ -52,7 +52,7 @@ abstract class Collection<G>
 		from var it : Iterator<G> init iterator
 		until it.isOff or result
 		loop
-			result := element == it.next
+			result := it.next == element 
 		end
 	end
 	
@@ -119,7 +119,7 @@ abstract class Collection<G>
 	 * Returns the first element for which detector is not false. 
 	 * Returns void if no object matches.
 	 */
-	operation detect(detector : <G -> Boolean>) : Void is do
+	operation detect(detector : <G -> Boolean>) : G is do
 		var elem : G
 		result := void
 		from var it : Iterator<G> init iterator
@@ -150,7 +150,7 @@ abstract class Collection<G>
 	 * returns a Collection for all elements for which rejector is false
 	 */
 	operation reject(rejector : <G -> Boolean>) : Sequence<G>  is do
-		result := self.~select { elem | not rejector(elem) }
+		result := self.~select { elem | not rejector(elem) } 
 	end
 	
 }
