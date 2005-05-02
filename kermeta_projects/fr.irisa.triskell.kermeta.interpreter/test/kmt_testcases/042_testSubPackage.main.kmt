@@ -1,5 +1,5 @@
 @testOperation "yes"
-@mainClass "testPackage::TestClass"
+@mainClass "root::testPackage::TestClass"
 @mainOperation "testmain_operation"
 
 
