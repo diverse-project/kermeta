@@ -1,4 +1,4 @@
-/* $Id: ButtonIcons.java,v 1.1 2005-04-28 16:32:24 ffleurey Exp $
+/* $Id: ButtonIcons.java,v 1.2 2005-05-02 23:57:43 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ButtonIcons.java
 * License : GPL
@@ -19,10 +19,10 @@ import org.eclipse.jface.resource.ImageDescriptor;
  */
 public class ButtonIcons {
 
-    public static ImageDescriptor SORT = ImageDescriptor.createFromFile(ButtonIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/tree_sort.png");
-    public static ImageDescriptor PACKAGE_TREE = ImageDescriptor.createFromFile(ButtonIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/tree_package.png");
+    public static ImageDescriptor SORT = ImageDescriptor.createFromFile(ButtonIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/tree_sort.gif");
+    public static ImageDescriptor PACKAGE_TREE = ImageDescriptor.createFromFile(ButtonIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/tree_package.gif");
     
-    public static ImageDescriptor INHERITANCE_FLAT = ImageDescriptor.createFromFile(ButtonIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/inheritance_flat.png");
-    public static ImageDescriptor SHOW_IMPORTED = ImageDescriptor.createFromFile(ButtonIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_blue_red.png");
+    public static ImageDescriptor INHERITANCE_FLAT = ImageDescriptor.createFromFile(ButtonIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/inheritance_flat.gif");
+    public static ImageDescriptor SHOW_IMPORTED = ImageDescriptor.createFromFile(ButtonIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_blue_red.gif");
 
 }

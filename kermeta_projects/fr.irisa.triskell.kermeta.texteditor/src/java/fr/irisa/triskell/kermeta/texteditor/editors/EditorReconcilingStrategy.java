@@ -138,7 +138,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     
     private static void createMarker(IFile file, KermetaUnit unit)
     {
-    	Iterator it = unit.error.iterator();
+    	Iterator it = unit.getError().iterator();
     	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next(), (KMTUnit)unit);
     	it = unit.warning.iterator();
     	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next(), (KMTUnit)unit);
@@ -162,8 +162,10 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         }
         else if(message.getNode() != null) {
             KermetaASTNode astn = unit.getKMTAstNodeForModelElement(message.getNode());
-            offset = astn.getRangeStart();
-        	length = astn.getRangeLength();	
+            if (astn != null) {
+                offset = astn.getRangeStart();
+                length = astn.getRangeLength();	
+            }
         }
         
         

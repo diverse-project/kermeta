@@ -1,4 +1,4 @@
-/* $Id: KermetaSpecialIcons.java,v 1.1 2005-04-28 16:32:20 ffleurey Exp $
+/* $Id: KermetaSpecialIcons.java,v 1.2 2005-05-02 23:57:40 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ButtonIcons.java
 * License : GPL
@@ -21,12 +21,12 @@ import org.eclipse.swt.graphics.Image;
  */
 public class KermetaSpecialIcons {
 
-    public static Image PACKAGE_GRAY = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_gray.png").createImage();
+    public static Image PACKAGE_GRAY = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_gray.gif").createImage();
   
-    public static Image PACKAGE_BLUE_RED = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_blue_red.png").createImage();
+    public static Image PACKAGE_BLUE_RED = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_blue_red.gif").createImage();
 
-    public static Image PACKAGE_BLUE_GREEN = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_blue_green.png").createImage();
+    public static Image PACKAGE_BLUE_GREEN = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/package_blue_green.gif").createImage();
 
-    public static Image KERMETA_LOGO = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/kermeta_logo.png").createImage();
+    public static Image KERMETA_LOGO = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/kermeta_logo.gif").createImage();
 
 }

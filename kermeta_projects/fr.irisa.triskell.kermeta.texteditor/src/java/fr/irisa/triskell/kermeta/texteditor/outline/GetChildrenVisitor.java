@@ -22,6 +22,9 @@ import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
+import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -62,23 +65,36 @@ public class GetChildrenVisitor extends KermetaVisitor {
 		ArrayList result = new ArrayList();
 		
 		if (outline.prefInheritanceFlattening()) {
-		    // TODO : fix this
-		}
-		else {
-		    Iterator it = arg0.getFOwnedAttributes().iterator();
+		    Iterator it = InheritanceSearch.callableProperties(InheritanceSearch.getFClassForClassDefinition(arg0)).iterator();
 		    while(it.hasNext()) {
-		        FProperty p = (FProperty)it.next();
-		        result.add(new OutlineItem(p, item, outline));
+		        CallableProperty cp = (CallableProperty)it.next();
+		        if (cp.getFclass().getFClassDefinition() != arg0)
+		            result.add(new OutlineItem(cp.getTypeBoundedProperty(), item, outline));
 		    }
 		    
-		    it = arg0.getFOwnedOperation().iterator();
+		    it = InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition(arg0)).iterator();
 		    while(it.hasNext()) {
-		        FOperation op = (FOperation)it.next();
-		        result.add(new OutlineItem(op, item, outline));
+		        CallableOperation cop = (CallableOperation)it.next();
+		        if (cop.getFclass().getFClassDefinition() != arg0)
+		            result.add(new OutlineItem(cop.getTypeBoundedOperation(), item, outline));
 		    }
-		    
-		    
+		
 		}
+
+	    Iterator it = arg0.getFOwnedAttributes().iterator();
+	    while(it.hasNext()) {
+	        FProperty p = (FProperty)it.next();
+	        result.add(new OutlineItem(p, item, outline));
+	    }
+	    
+	    it = arg0.getFOwnedOperation().iterator();
+	    while(it.hasNext()) {
+	        FOperation op = (FOperation)it.next();
+	        result.add(new OutlineItem(op, item, outline));
+	    }
+		    
+		    
+		
 		
 		if (outline.prefSortedOutline())
 		    Collections.sort(result);

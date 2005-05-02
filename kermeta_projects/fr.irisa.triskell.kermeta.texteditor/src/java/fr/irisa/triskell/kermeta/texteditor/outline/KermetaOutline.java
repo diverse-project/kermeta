@@ -145,7 +145,7 @@ public class KermetaOutline extends ContentOutlinePage {
             try
             {
                 IStructuredSelection ssel = (IStructuredSelection)selection;
-                KermetaASTNode node = (KermetaASTNode)editor.getMcunit().getNodeByModelElement((FObject)ssel.getFirstElement());
+                KermetaASTNode node = (KermetaASTNode)editor.getMcunit().getNodeByModelElement(((OutlineItem)ssel.getFirstElement()).modelElement);
                 editor.setHighlightRange(node.getRangeStart()-1,0 ,true);
             }
             catch(Exception _ex)

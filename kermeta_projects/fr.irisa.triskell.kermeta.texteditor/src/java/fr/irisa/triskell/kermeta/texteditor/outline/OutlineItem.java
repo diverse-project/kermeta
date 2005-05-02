@@ -1,4 +1,4 @@
-/* $Id: OutlineItem.java,v 1.1 2005-04-28 16:32:51 ffleurey Exp $
+/* $Id: OutlineItem.java,v 1.2 2005-05-02 23:57:45 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : OutlineItem.java
 * License : GPL
@@ -45,6 +45,7 @@ public class OutlineItem implements Comparable {
      */
     public OutlineItem(FObject modelElement, OutlineItem parent, KermetaOutline outline) {
         super();
+        if (modelElement == null) throw new Error("Assertion failed : instanciate OutlineItem with null model element");
         this.modelElement = modelElement;
         this.parent = parent;
         this.outline = outline;

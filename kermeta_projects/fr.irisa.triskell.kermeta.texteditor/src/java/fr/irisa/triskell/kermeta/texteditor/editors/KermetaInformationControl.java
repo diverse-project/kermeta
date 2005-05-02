@@ -1,4 +1,4 @@
-/* $Id: KermetaInformationControl.java,v 1.1 2005-04-28 16:32:49 ffleurey Exp $
+/* $Id: KermetaInformationControl.java,v 1.2 2005-05-02 23:57:51 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaInformationControl.java
 * License : GPL
@@ -38,6 +38,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 
+import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.texteditor.outline.GetImageVisitor;
 
 /**
@@ -46,10 +47,6 @@ import fr.irisa.triskell.kermeta.texteditor.outline.GetImageVisitor;
  * Distributed under the terms of the GPL license
  */
 public class KermetaInformationControl implements IInformationControl, IInformationControlExtension, IInformationControlExtension2,IInformationControlExtension3,  DisposeListener {
-
-    
-	public static Image KERMETA_LOGO = ImageDescriptor.createFromFile(GetImageVisitor.class, "/fr/irisa/triskell/kermeta/texteditor/icons/kermeta_logo.png").createImage();
-
     
 	/** Border thickness in pixels. */
 	private static final int BORDER= 1;
@@ -126,7 +123,7 @@ public class KermetaInformationControl implements IInformationControl, IInformat
 		Label icon = new Label(panel, SWT.CENTER);
 		gd= new GridData(GridData.BEGINNING);
 		icon.setLayoutData(gd);
-		icon.setImage(KERMETA_LOGO);
+		icon.setImage(KermetaSpecialIcons.KERMETA_LOGO);
 		
 		// Text field
 		fText= new StyledText(panel, SWT.MULTI | SWT.READ_ONLY);
