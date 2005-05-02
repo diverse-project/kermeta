@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.28 2005-04-29 13:33:39 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.29 2005-05-02 13:10:15 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -359,21 +359,20 @@ public class BaseInterpreter extends KermetaVisitor {
         FExpression cond = node.getFCondition();
 
         // Object should be a Boolean
-        
         RuntimeObject cond_result = (RuntimeObject)this.accept(cond);
-        String value = null;
+        boolean cond_value=true;
+        
         // Get boolean value
-        if (cond_result.getProperties().containsKey("singleton instance"))
-        {
-            value = (String)cond_result.getProperties().get("singleton instance");
-        }
+        if (cond_result.getData().containsKey("BooleanValue"))
+            cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
         else
         {
             // TODO : throw an InterpreterException 
+        	System.err.println("Conditional : evaluation of the condition does not match Boolean type.");
         }
         
         // if cond is true
-        if (value.equals("TRUE INSTANCE"))
+        if (cond_value == true)
         {   
     		if (node.getFThenBody() != null) 
     		    result = (RuntimeObject)this.accept(node.getFThenBody());
