@@ -45,16 +45,30 @@ public class ReflectiveSequence {
 		
 		RuntimeObject rc_class = (RuntimeObject)reflective_sequence_classes.get(property.getProperties().get("type"));
 		
-		if (rc_class == null) {
+		if (rc_class == null)
+		{
 			RuntimeObject reflective_class_def = object.getFactory().getTypeDefinitionByName("kermeta::language::ReflectiveSequence");
 			rc_class = object.getFactory().createClassFromClassDefinition(reflective_class_def);
 			RuntimeObject binding = object.getFactory().createObjectFromClassName("kermeta::language::structure::TypeVariableBinding");
 			binding.getProperties().put("type", property.getProperties().get("type"));
 			binding.getProperties().put("variable", Collection.getArrayList((RuntimeObject)reflective_class_def.getProperties().get("typeParameter")).get(0));
-			ReflectiveCollection.add(Object.get(rc_class, object.getFactory().getClass_typeParamBinding_properety()), binding);
+			/** FIXME :  NullPointerException here! try and launch it, than follow
+			 * the stack trace... : "RProperty" seems to be not properly set*/
+			// Set to the first position the property "typeParameterBinding"
+			// We want 
+	/*		RuntimeObject ro_position = 
+			    fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(
+			            0,
+			            object.getFactory());
+			ReflectiveSequence.addAt(
+			        (RuntimeObject)rc_class.getProperties().get("typeParameterBinding"),
+			        ro_position,
+			        binding
+			        );*/
+			Collection.add((RuntimeObject)rc_class.getProperties().get("typeParameterBinding"), binding);
 			reflective_sequence_classes.put(property.getProperties().get("type"), rc_class);
 		}
-		
+		// set the kcoreObject for rc_class?
 		result = object.getFactory().createRuntimeObject(rc_class);
 		result.getData().put("RObject", object);
 		result.getData().put("RProperty", property);
