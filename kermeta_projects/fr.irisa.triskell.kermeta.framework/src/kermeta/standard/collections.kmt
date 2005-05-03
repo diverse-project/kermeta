@@ -20,21 +20,21 @@ abstract class Collection<G>
 	 * Add an element in the collection
 	 */
 	operation add(element : G) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(element)
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.add(self, element)
 	end
 	
 	/**
 	 * Remove an element from the collection
 	 */
 	operation remove(element : G) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(element)
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, element)
 	end
 	
 	/**
 	 * Remove all elements from the collection
 	 */
 	operation clear() : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.clear()
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.clear(self)
 	end
 	
 	/**
@@ -60,7 +60,7 @@ abstract class Collection<G>
 	 * returns the number of elements in the collection
 	 */
 	operation size() : Integer is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.size()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.size(self)
 	end
 	
 	/**
@@ -74,7 +74,7 @@ abstract class Collection<G>
 	 * returns an iterator on the collection
 	 */
 	operation iterator() : Iterator<G> is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator(self)
 	end
 	
 	/**
