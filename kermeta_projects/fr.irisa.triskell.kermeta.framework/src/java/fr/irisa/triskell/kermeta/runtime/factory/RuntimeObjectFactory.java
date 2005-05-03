@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.6 2005-04-21 09:37:43 zdrey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.7 2005-05-03 18:30:28 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -90,9 +90,13 @@ public class RuntimeObjectFactory {
 	 * the classDefinitions
 	 * @param class_def the class definition from which we create the class Class RO
 	 * @return the RuntimeObject of class Class linked to the given classDefinition
+	 * History :
+	 * (3/5/2005) feed the RuntimeObject "getData" representing the class Class
 	 */
 	public RuntimeObject createClassFromClassDefinition(RuntimeObject class_def) {
 		RuntimeObject metaclass = new RuntimeObject(this, class_class);
+		metaclass.setData(new Hashtable());
+		metaclass.getData().put("kcoreObject", class_def.getData().get("kcoreObject"));
 		metaclass.getProperties().put("classDefinition", class_def);
 		if (class_def.getProperties().containsKey("typeParameter")) {
 			//parametric class creation : add a typeParameterBinding collection to recoed parametric type bindings.
@@ -140,21 +144,28 @@ public class RuntimeObjectFactory {
 		return result;
 	}
 	
-	protected  RuntimeObject class_typeParamBinding_properety = null;
-	public  RuntimeObject getClass_typeParamBinding_properety() {
-		if (class_typeParamBinding_properety == null) {
-			RuntimeObject class_def = (RuntimeObject)this.getClassClass().getData().get("kcoreObject");
+	protected  RuntimeObject class_typeParamBinding_property = null;
+	
+	/**
+	 * 
+	 * @return the RuntimeObject corresponding to the property "typeParamBinding"
+	 */
+	public  RuntimeObject getClass_typeParamBinding_property()
+	{
+		if (class_typeParamBinding_property == null) {
+			RuntimeObject class_def = this.getClassClass();
+			System.err.println("getClass_typeParamBinding_property:"+class_def.getProperties());
 			Iterator it = Collection.getArrayList((RuntimeObject)class_def.getProperties().get("ownedAttributes")).iterator();
 			while (it.hasNext()) {
 				RuntimeObject prop = (RuntimeObject)it.next();
 				if (prop.getProperties().get("name").equals("typeParamBinding")) {
-					class_typeParamBinding_properety = prop;
+					class_typeParamBinding_property = prop;
 					break;
 				}
 			}
 		
 		}
-		return class_typeParamBinding_properety;
+		return class_typeParamBinding_property;
 	}
 
 }
