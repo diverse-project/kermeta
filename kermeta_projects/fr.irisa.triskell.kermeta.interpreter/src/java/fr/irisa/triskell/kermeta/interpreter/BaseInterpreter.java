@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.29 2005-05-02 13:10:15 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.30 2005-05-03 18:23:54 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -21,6 +21,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.Vector;
 
 import org.eclipse.emf.common.util.EList;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.ast.FSelfCall;
 import fr.irisa.triskell.kermeta.behavior.*;
+import fr.irisa.triskell.kermeta.builder.KMBuilderPass1;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.structure.*;
@@ -138,6 +140,33 @@ public class BaseInterpreter extends KermetaVisitor {
 	    return null;
 	}
 	
+	protected RuntimeObject getROProperty(RuntimeObject ro_target, FType t_target, String propertyName)
+	{
+	    RuntimeObject ro_property = null;
+	    // Find the RuntimeObject corresponding to this fproperty in the Class of ro_target instance
+	    RuntimeObject metaclass = ro_target.getMetaclass();
+	    //Iterator it = (()metaclass.getData().get("CollectionArrayList"));
+	    // Get the classdefinition in the table
+	    RuntimeObject classdef = (RuntimeObject)Run.koFactory.getClassDefTable().get(
+	            getQualifiedName(((FClass)t_target).getFClassDefinition()));
+	    
+	    RuntimeObject ro_attributes = (RuntimeObject)classdef.getProperties(
+	    ).get("ownedAttribute");
+	    // Get the RuntimeObject repr. of THE attribute which name is "propertyName"
+	    ArrayList al_attributes = (ArrayList)ro_attributes.getData().get("CollectionArrayList");
+	    Iterator it = al_attributes.iterator();
+	    
+	    while (it.hasNext() && ro_property == null)
+	    {   
+	        RuntimeObject attr = (RuntimeObject)it.next();
+	        String attr_name = ((FProperty)attr.getData().get("kcoreObject")).getFName();
+	        if (attr_name.equals(propertyName))
+	        {
+	            ro_property = attr;
+	        }
+	    }
+	    return ro_property;
+	}
 	/**
 	 * Assigns the targeted variable the value given by this node
 	 * FValue. 
@@ -154,9 +183,10 @@ public class BaseInterpreter extends KermetaVisitor {
 		 //result = this.accept(node.getFTarget());
 	    // if FTarget is a property we should process differently
 	    // if it is a variable only
-		 String lhs_name = node.getFTarget().getFName();
 		 FExpression lhs = node.getFTarget();
-		
+		 String lhs_name = node.getFTarget().getFName();
+		RuntimeObject ro_property = null; 
+		 // TODO : lhs can also self
 		RuntimeObject rhs_value = (RuntimeObject)this.accept(node.getFValue());
 		
 		// TODO : test if the variable is an "implicit" property : toto -> self.toto
@@ -189,21 +219,88 @@ public class BaseInterpreter extends KermetaVisitor {
 		    }
 		}
 		// is it a callfeature? toto.
+		// FIXME : attributes are not get properly
 		else if (FCallFeature.class.isInstance(node.getFTarget()))
 		{
-		    // Get the RuntimeObject
-		    FCallFeature feature = (FCallFeature)node.getFTarget();
+		    // Visiting the callFeature should return the RuntimeObject
+		    // From the runtimeObject, get its target
+		    
+		    RuntimeObject ro_target = null;
+		    FType t_target = null;
+		    // Get the RuntimeObject of FCallFeature
+		    FCallFeature callfeature = (FCallFeature)node.getFTarget();
 		    // Get the object on which this feature is applied
-		    FExpression target = feature.getFTarget();
-		    if (target==null) {
-		    	//self reference
-		    	RuntimeObject selfObject=interpreterContext.getCurrentFrame().getSelf();
-		    	fr.irisa.triskell.kermeta.runtime.language.Object.set(selfObject,(RuntimeObject)Run.correspondanceTable.get(feature),rhs_value);
+		    FExpression target = callfeature.getFTarget();
+	    	String propertyName = callfeature.getFName();
+	    	 
+		    if (target==null)
+		    {  	//self reference
+		    	ro_target=interpreterContext.getCurrentFrame().getSelf();
 		    }
-		    else System.err.println("TODO : ");
-		    // Retrieve the object in the RuntimeObject tree? // in the context.
+		    // If target is not null, we need to get the corresponding runtime object
+		    else
 		    // can be a parameter of the current called operation
-		    // can be an object already stored as a variable in the blockstacks 
+		    // can be an object already stored as a variable in the blockstacks
+		    {
+		        // the runtime object corresponding to this target
+		       
+		        ro_target = (RuntimeObject)this.accept(target);
+		    }
+		    // If the target object is not null, we can find its ro_attribute
+		    // named "propertyName"
+	        if (ro_target!=null) // && ro_target.getProperties().containsKey(propertyName))
+	        {
+	            
+	            t_target=(FType)ro_target.getMetaclass().getData().get("kcoreObject");
+
+	            // FIXME : FProperty is assumed to be the type of the feature
+	            
+	            // Find the RuntimeObject corresponding to this fproperty in the Class of ro_target instance
+	            RuntimeObject metaclass = ro_target.getMetaclass();
+	            //Iterator it = (()metaclass.getData().get("CollectionArrayList"));
+	            // Get the classdefinition in the table
+	            RuntimeObject classdef = (RuntimeObject)Run.koFactory.getClassDefTable().get(
+	                    getQualifiedName(((FClass)t_target).getFClassDefinition()));
+	            
+	            RuntimeObject ro_attributes = (RuntimeObject)classdef.getProperties(
+	                    ).get("ownedAttribute");
+	            // Get the RuntimeObject repr. of THE attribute which name is "propertyName"
+	            ArrayList al_attributes = (ArrayList)ro_attributes.getData().get("CollectionArrayList");
+	            Iterator it = al_attributes.iterator();
+	            
+	            while (it.hasNext() && ro_property == null)
+	            {   
+	                RuntimeObject attr = (RuntimeObject)it.next();
+	                String attr_name = ((FProperty)attr.getData().get("kcoreObject")).getFName();
+	                if (attr_name.equals(propertyName))
+	                {
+	                    ro_property = attr;
+	                }
+	            }
+	            
+	            
+	            // FIXME : ro_property must not be null
+				// Set the value of the property
+	            if (ro_property == null)
+	            {
+	                System.err.println("could not set property '"+propertyName+"' for object '"+lhs_name+"'");
+	            }
+	            else
+	            fr.irisa.triskell.kermeta.runtime.language.Object.set(ro_target,ro_property,rhs_value);    
+	        }
+	        else
+	        {
+	            System.out.println("properties size :"+ro_target.getProperties().size());
+	            Set keys = ro_target.getProperties().keySet();
+	            Iterator it = keys.iterator();
+	            while (it.hasNext())
+	            {
+	                System.out.print(it.next()+" ");
+	            }
+	            System.err.println("Could not assign attribute : target object not found :( : "+ro_target+
+	                    "property not found is : "+propertyName);
+	        }
+	        
 		    
 		}
 		
@@ -460,6 +557,17 @@ public class BaseInterpreter extends KermetaVisitor {
 		return result;
 	}
 	
+	
+	
+    /**
+     * Visit a FProperty and return the runtime object corresponding to it
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FProperty)
+     */
+    public Object visit(FProperty node)
+    {
+     //   return super.visit(arg0);
+        return null;
+    }
 	/**
 	 * Invoke the foperation argument on the ro_target Runtime Object;
 	 *  arguments to this call are given as an ArrayList
@@ -500,8 +608,13 @@ public class BaseInterpreter extends KermetaVisitor {
 		    isFeatured = true;
 		    ro_target = interpreterContext.getCurrentFrame().getSelf();
 		    t_target =(FType)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
+		} 
+		else if (FCallResult.class.isInstance(node.getFTarget()))
+		{
+		    isFeatured = true;
+		    ro_target = interpreterContext.getCurrentFrame().getOperationResult();
+		    t_target =(FType)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
 		}
-		
 		// handle the case of calls like "toto.titi.tutu" -> recursive
 		// target.node -> target1.toto.node 
 		else if (FCallFeature.class.isInstance(target))
@@ -512,7 +625,8 @@ public class BaseInterpreter extends KermetaVisitor {
 		    if (metaClass.getData()!=null)
 		    	t_target=(FType)metaClass.getData().get("kcoreObject");
 		    if (t_target==null)
-		    	System.err.println("The runtimeObjet ro_target has to be typed with a wel initialized metaclass");
+		    	System.err.println("The RuntimeObjet has to be typed with a well initialized" +
+		    			ro_target+"for '"+((FCallFeature)target).getFName()+"'"+" metaclass");
 		}
 		
 		else if (FIntegerLiteral.class.isInstance(target)) {
@@ -540,11 +654,6 @@ public class BaseInterpreter extends KermetaVisitor {
 		    ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
 		    RuntimeObject booleanClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::Boolean");
 		    t_target=(FType)booleanClassRO.getData().get("kcoreObject");
-/*		    if (((FBooleanLiteral)target).isFValue() == true)
-		        ro_target = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.TRUE;
-		    else
-		        ro_target = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.FALSE;
-		    t_target=(FType)ro_target.getMetaclass().getData().get("kcoreObject");*/
 		}
 		// If target is a CallVariable :
 		// Get the precise type of the CallFeature node.
@@ -607,9 +716,19 @@ public class BaseInterpreter extends KermetaVisitor {
 			{
 				String propertyName = ((FProperty)feature).getFName();
 				if (ro_target.getProperties().containsKey(propertyName))
-					result=(RuntimeObject)ro_target.getProperties().get(propertyName);
-				else
-					System.err.println("Feature unreachable when attempting to access feature "+propertyName+"on "+ro_target);
+				{
+				    result=(RuntimeObject)ro_target.getProperties().get(propertyName);
+				}
+				else // the ro_property does not exist yet, we create it (call of Object.get)
+				{
+				    RuntimeObject ro_property = getROProperty(ro_target, t_target, propertyName);
+				    // the attribute is not set yet for ro_target instance?
+				    result=fr.irisa.triskell.kermeta.runtime.language.Object.get(
+				            ro_target, ro_property);
+				/*	System.err.println(
+					        "Feature '"+propertyName+"'unreachable " +
+					        "when attempting to access it on "+ro_target.getProperties());*/
+				}
 				
 			}
 		}
@@ -636,7 +755,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		    // Is it something else?
 		    else
 		    {
-		        
+		        System.err.println("I could not return something when visiting call feature");
 		    }
 		    
 		}
@@ -941,7 +1060,7 @@ public class BaseInterpreter extends KermetaVisitor {
      * are parameters, but in the other case (no parameters) we have no way to find it.
      * @param type the type reference of the "callee" element on which feature is "called"
      * @param feature the feature of which we want the type (FOperation, FAttribute)
-     * @return an object :P 
+     * @return the ecore object representing this feature. Its real type is either FProperty or FOperation
      */
     public Object getFeatureType(FType type, FCallFeature feature)
     {
@@ -1026,7 +1145,19 @@ public class BaseInterpreter extends KermetaVisitor {
         return result;
     }
 
-    
+
+    protected void displayHashtable(Hashtable hash)
+    {
+        Set keys = hash.keySet();
+        Iterator it = keys.iterator();
+        System.out.print("[ ");
+        while (it.hasNext())
+        {
+            Object key = it.next();
+            System.out.print(key+": "+hash.get(key));
+        }
+        System.out.print(" ]");
+    }
     
 }
 
