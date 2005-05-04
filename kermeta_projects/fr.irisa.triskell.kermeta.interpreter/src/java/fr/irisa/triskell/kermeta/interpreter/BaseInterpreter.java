@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.31 2005-05-04 13:43:57 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.32 2005-05-04 17:19:58 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -360,7 +360,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	        current_frame.getCurrentExpressionContext().setVariables(
 	                ((RuntimeLambdaObject)ro).getLambdaParameters());
 	        
-	        result = (RuntimeObject) this.visit(node.getFBody());
+	        result = (RuntimeObject) this.accept(node.getFBody());
 
 	        current_frame.popExpressionContext();
 	    }
@@ -578,6 +578,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	                p.getFType(), p.getFName(), called_param);
 	        i+=1;
 	    }
+	    System.err.println("Visiting operation '"+node.getFName()+"';"+"node :"+node.getFBody());
 	    this.accept(node.getFBody());
 	    // Visit raised Exception if any
 //	    visitList(node.getFRaisedException());
@@ -713,12 +714,12 @@ public class BaseInterpreter extends KermetaVisitor {
 		    if (e_context != null)
 		    {
 		    	Variable var=(Variable)e_context.getVariables().get(var_name);
-		        //ro_target = (ro_target!=null)?ro_target:var.getRuntimeObject();
-		    	ro_target = var.getRuntimeObject();
+		        ro_target = var.getRuntimeObject();
+		    	System.err.println("this target: '"+target+"' has for data :"+ro_target);
 		    	t_target =(FType)ro_target.getMetaclass().getData().get("kcoreObject"); 
 		        
 		    }
-		    else
+		    else // FIXME : rather test the validity of t_target?
 		    {
 		    	// TODO : raise an interpretation exception
 		        System.err.println("I could not find the context");
