@@ -86,19 +86,42 @@ public class ReflectiveCollection {
 	 */
 	protected static Hashtable reflective_collection_classes = new Hashtable();
 
-	public static RuntimeObject createReflectiveCollection(RuntimeObject object, RuntimeObject property) {
+	/**
+	 * Please see the comments in ReflectiveSequence java class, in the method 
+	 * <code>createReflectiveSequence</code>.
+	 * @param object
+	 * @param property
+	 * @return
+	 */
+	public static RuntimeObject createReflectiveCollection(RuntimeObject object, RuntimeObject property)
+	{
 		RuntimeObject result;
 		
 		RuntimeObject rc_class = (RuntimeObject)reflective_collection_classes.get(property.getProperties().get("type"));
 		
 		if (rc_class == null) {
+		    
+		    // Create the RO for the type "ReflectiveCOllection"
 			RuntimeObject reflective_class_def = object.getFactory().getTypeDefinitionByName("kermeta::language::ReflectiveCollection");
-			rc_class = object.getFactory().createClassFromClassDefinition(reflective_class_def);
+			// depr. // rc_class = object.getFactory().createObjectFromClassName("kermeta::language::ReflectiveCollection");
+			rc_class = object.getFactory().createObjectFromClassName("kermeta::language::structure::Class");
+			rc_class.getData().put("kcoreObject", reflective_class_def.getData().get("kcoreObject"));
+			
+			// Set the param bindings
+			// FIXME : we do the same stuff in createObjectFromClassName : redundancy
+			rc_class.getProperties().put(
+				     "typeParamBinding",
+				     Collection.createCollection(
+				             (RuntimeObject)object.getFactory().getClassDefTable().get(
+				                     "kermeta::language::structure::TypeVariableBinding")));
+			
+			// Set the bindings
 			RuntimeObject binding = object.getFactory().createObjectFromClassName("kermeta::language::structure::TypeVariableBinding");
 			binding.getProperties().put("type", property.getProperties().get("type"));
 			binding.getProperties().put("variable", Collection.getArrayList((RuntimeObject)reflective_class_def.getProperties().get("typeParameter")).get(0));
 //			ReflectiveCollection.add(Object.get(rc_class, object.getFactory().getClass_typeParamBinding_properety()), binding);
-			Collection.add((RuntimeObject)rc_class.getProperties().get("typeParameterBinding"), binding);
+			
+			Collection.add((RuntimeObject)rc_class.getProperties().get("typeParamBinding"), binding);
 			reflective_collection_classes.put(property.getProperties().get("type"), rc_class);
 		}
 		
@@ -125,6 +148,8 @@ public class ReflectiveCollection {
 	}
 	
 	public static boolean isaContainer(RuntimeObject reflective_collection) {
+	    // FIXME Bug d'outre tombe
+	    // reflective_collection.getData().get("RProperty") --> null;
 		return ((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("isComposite") == Boolean.TRUE;
 	}
 	
