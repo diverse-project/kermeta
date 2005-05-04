@@ -20,15 +20,15 @@ using kermeta::standard
 abstract class ReflectiveCollection<G> inherits Set<G>
 {
 	method add(element : G) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(element)
+		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(self, element)
 	end
 	
 	method remove(element : G) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(element)
+		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(self, element)
 	end
 	
 	method clear() : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear()
+		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear(self)
 	end
 }
 
@@ -50,11 +50,11 @@ abstract class ReflectiveSequence<G> inherits OrderedSet<G>, ReflectiveCollectio
 	end
 	
 	method addAt(index : Integer, element : G) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.addAt(index, element)
+		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.addAt(self, index, element)
 	end
 	
 	method removeAt(index : Integer) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(index)
+		extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveSequence.removeAt(self, index)
 	end
 
 }
