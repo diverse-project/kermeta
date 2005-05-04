@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.15 2005-05-03 12:27:54 zdrey Exp $
+/* $Id: KMBuilderPass1.java,v 1.16 2005-05-04 14:17:19 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -108,7 +108,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 		result.getProperties().put("upper",fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(property.getFUpper(),Run.koFactory));
 		result.getProperties().put("lower",fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(property.getFLower(),Run.koFactory));
 		
-		// Set the slight more complex properties :P
+		// Set the slight more complex properties ???
 //		TODO manage opposites in a second pass of KMBuilder ?
 	/*	if (property.getFOpposite() != null)
 			result.getProperties().put("opposite",property.getFOpposite().getFName());
@@ -291,6 +291,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FCallSuperOperation)
+	 * 
 	 */
 	public Object visit(FCallSuperOperation node) {
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::behavior::CallSuperOperation");
@@ -314,9 +315,9 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
 	public Object visit(FClass node)
-	{
+	{   
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::reflection::Class");
-		// Create the runtimeObject corresponding to this class
+		// Create the runtimeObject corresponding to the class Class
 		RuntimeObject knode=KMMetaBuilder.createROFromClassDef(node,nodeMetaclass);
 		knode.getProperties().put("name",getQualifiedName(node.getFClassDefinition()));
 		this.currentFClassNode=knode;
@@ -331,6 +332,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 			// Get the property "typeParamBinding" of class Class ...
 			while(it.hasNext())
 			{
+			    
 				FProperty property=(FProperty)it.next();
 				if (property.getFName().equals("typeParamBinding"))
 					typeParamBinding=property;
@@ -387,6 +389,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 
 		// Set the RuntimeObject representation of the classDef properties
 		Hashtable properties=knode.getProperties();
+		
 		FProperty tag=null;
 		Iterator it=objectClassDef.getFOwnedAttributes().iterator();
 		while(it.hasNext()) {
@@ -400,6 +403,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 		it=nodeClassDef.getFOwnedAttributes().iterator();
 		while(it.hasNext())
 		{
+		    
 			FProperty property=(FProperty)it.next();
 			if (property.getFName().equals("ownedAttribute"))
 				ownedAttribute=property;
@@ -427,7 +431,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 		properties.put("name",node.getFName());
 		
 		if (node.getFTypeParameter().size() > 0)
-			properties.put("typeParamBinding",ppTypeVariableDeclaration(node.getFTypeParameter()));
+			properties.put("typeParameter",ppTypeVariableDeclaration(node.getFTypeParameter()));
 
 		// Add ownedAttribute property : create a RuntimeObject repr. the (Reflective) 
 		// collection of attributes for this classDef
@@ -762,6 +766,8 @@ public class KMBuilderPass1 extends KermetaVisitor {
 					knode.getProperties().put("setterBody",this.accept(node.getFSetterbody()));
 			}
 		}
+		
+		// TODO : test if the property
 		
 		// Add the RuntimeObject of the visited Property to the list of runtime-properties of
 		// the currently visited classDefinition
