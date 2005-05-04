@@ -1,0 +1,91 @@
+@mainClass "testPackage::TestReflection"
+@mainOperation "main_operation"
+
+package testPackage;
+
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+alias Integer : kermeta::standard::Integer;
+alias String : kermeta::standard::String;
+ 
+ class A
+ {
+ 	attribute ai : Integer
+ 	attribute as : String
+ 	
+ 	operation setAttribute(elt : Integer) is do
+ 		ai := elt
+ 	end
+
+ 	operation getAttribute() : Integer is do
+ 		result := ai
+ 	end
+ }
+ 
+class B inherits A
+{
+ 	attribute bi : Integer
+ 	
+ 	method setAttribute(elt : Integer) is do
+ 		bi := elt
+ 	end
+
+ 	method getAttribute() : Integer is do
+ 		result := bi
+ 	end
+}
+
+class C inherits A
+{
+ 	attribute ci : Integer	
+}
+
+class D inherits B,C
+{
+ 	method setAttribute(elt : Integer) from B is do
+ 		ai := elt
+ 	end
+}
+
+class TestReflection inherits kermeta::kunit::Assert
+{    
+     operation main_operation() is do
+     	var d : D
+     	var superTypes : set Class[0..*]
+     	var it : Iterator <Class>
+     	
+     	d := D.new
+     	superTypes := d.superClass
+     	it := superTypes.iterator
+     	while it.hasNext() do
+     	 Class c := it.next()
+     	 var attributes : set <Attribute>[0..*]
+     	 var it2 : Iterator<Attribute>
+     	 it2 := attributes.iterator()
+     	 while it2.hasNext() do
+     	 	Attribute a := it2.next()
+     	 	stdio.writeln(a.name)
+     	end
+     	
+     	 var operations : set <Operation>[0..*]
+     	 var it3 : Iterator<Operation>
+     	 it3 := operations.iterator()
+     	 while it3.hasNext() do
+     	 	Operation op := it3.next()
+     	 	stdio.write(op.name)
+     	 	stdio.write("(")
+     	 	var it4 : Iterator<Parameter>
+     	 	it4 := op.parameters.getIterator
+     	 	while it4.hasNext() do
+     	 		stdio.write(it4.next.name)
+     	 		if (it4.hasMore()) stdio.write(",")
+     	 	end
+     	 	stdio.writeln(")")
+     	end
+     	 	
+     	end
+     	
+
+     end
+     
+}    

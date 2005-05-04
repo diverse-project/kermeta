@@ -1,0 +1,83 @@
+@mainClass "testPackage::TestSuperFeatures"
+@mainOperation "main_operation"
+
+package testPackage;
+
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+alias Integer : kermeta::standard::Integer;
+alias String : kermeta::standard::String;
+ 
+ class A
+ {
+ 	attribute ai : Integer
+ 	attribute as : String
+ 	
+ 	operation setAttribute(elt : Integer) is do
+ 		ai := elt
+ 	end
+
+ 	operation getAttribute() : Integer is do
+ 		result := ai
+ 	end
+ }
+ 
+class B inherits A
+{
+ 	attribute bi : Integer
+ 	
+ 	method setAttribute(elt : Integer) is do
+ 		bi := elt
+ 	end
+
+ 	method getAttribute() : Integer is do
+ 		result := bi
+ 	end
+}
+
+class C inherits A
+{
+ 	attribute ci : Integer	
+}
+
+class D inherits B,C
+{
+ 	method setAttribute(elt : Integer) from B is do
+ 		ai := elt
+ 	end
+}
+
+class TestSuperFeatures inherits kermeta::kunit::Assert
+{    
+     operation main_operation() is do
+     	var a : A
+     	var b : B
+     	var c : C
+     	var d : D
+     	
+     	d := D.new
+     	
+     	d.setAttribute(3)
+     	assert(d.ai==3)
+     	d.bi := 2
+     	assert(d.getAttribute()==2)
+     	d.ci := 1
+     	assert(d.ci==1)
+     	c ?= d
+     	assert (c.ci==1)
+     	assert (c.ai==3)
+     	assert(c.getAttribute()==3)
+     	c.setAttribute(7)
+     	assert(c.getAttribute()==7)
+     	assert (d.ai==7)
+     	b ?= d
+     	assert(b.getAttribute()==2)
+     	b.setAttribute(9)
+     	assert(d.bi==9)
+     	b.ai := 11
+     	a ?= d
+     	assert(a.getAttribute()==11) 
+
+     end
+     
+}    
