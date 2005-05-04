@@ -1,4 +1,4 @@
-/* $Id: Run.java,v 1.22 2005-04-28 10:01:37 dvojtise Exp $
+/* $Id: Run.java,v 1.23 2005-05-04 14:20:54 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -129,7 +129,7 @@ public class Run {
 	        
 	        long elapsedTime=System.currentTimeMillis();
 	        BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder);
-	        baseInterpreter.getInterpreterContext().pushNewCallFrame(interpreterInstance);
+	        baseInterpreter.getInterpreterContext().pushNewCallFrame(interpreterInstance, mainOp);
 	        baseInterpreter.getInterpreterContext().getCurrentFrame().pushNewExpressionContext(null);
 	        baseInterpreter.getInterpreterContext().getCurrentFrame().getCurrentExpressionContext().defineVariable(
 	                (FType)stdioFClass, "stdio", stdioINSTANCE);
@@ -178,9 +178,15 @@ public class Run {
 		interpreterbuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(
 		        "../fr.irisa.triskell.kermeta.interpreter/src/kermeta/interpreter.kmt");
 		
-		try {
+		try
+		{
 		    interpreterbuilder.load();
-		} catch(Exception e ) {if (interpreterbuilder.getError().size() == 0) e.printStackTrace();};
+		}
+		catch(Exception e )
+		{
+		    System.err.println("Je n'ai pas réussi à charger l'interprete");
+		    if (interpreterbuilder.getError().size() == 0) e.printStackTrace();
+		}
 		
 		
 		// Get and check the errors of loading
@@ -193,8 +199,10 @@ public class Run {
 		    internalLog.info("model for the interpreter loaded successfully !");
 		    
 		    // Set the class Class
-		    FClassDefinition classdef=(FClassDefinition)interpreterbuilder.getTypeDefinitionByName("kermeta::reflection::Class");
-		    koFactory.setClassClass(classdef);
+		    FClass fclass=Run.interpreterbuilder.struct_factory.createFClass();
+			fclass.setFClassDefinition(
+			  (FClassDefinition)interpreterbuilder.getTypeDefinitionByName("kermeta::language::structure::Class"));
+		    koFactory.setClassClass(fclass);
 		    metametaClass=koFactory.getClassClass();
 		    
 		    
@@ -202,6 +210,7 @@ public class Run {
 		    // And initialize all the static attributes of this class
 		    theInterpreter=new Interpreter(koFactory,metametaClass);
 		    
+		    // Create the KMMetaBuilder
 		    KMMetaBuilder metaClassesBuilder = new KMMetaBuilder(interpreterbuilder);
 		    //						metaClassesBuilder.ppPackage(interpreterbuilder);
 		    //						KMMetaBuilder.processParametricTypes();
@@ -216,6 +225,7 @@ public class Run {
 		    RuntimeObject roSelfType = (RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::reflection::SelfType");
 		    selfINSTANCE=Run.koFactory.createRuntimeObject(roSelfType);
 		    
+		    // Construct the RuntimeObject representation of the source code 
 		    KMBuilderPass1 builderPass1 = new KMBuilderPass1();
 		    builderPass1.ppPackage(interpreterbuilder);
 		    // Create the stdio default variable and push it in the interpreter context
@@ -234,9 +244,15 @@ public class Run {
 		
 		// Do not write again the package declaration..
 		builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(modelName);
-		try {
+		try
+		{
 		    builder.load();
-		} catch(Exception e ) {if (builder.getError().size() == 0) e.printStackTrace();};
+		}
+		catch(Exception e ) 
+		{
+		    System.err.println("Echec du chargement du programme");
+		    if (builder.getError().size() == 0) e.printStackTrace();
+		}
 		
 		if (builder.getError().size() > 0) {
 		    throw new KermetaInterpreterError(builder.getAllMessagesAsString());
@@ -245,7 +261,8 @@ public class Run {
 		{
 		    internalLog.info("model "+modelName+" loaded successfully !");
 		    
-		    KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1();			
+		    KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1();
+		    
 		    classesBuilderPass1.ppPackage(builder);
 		    FPackage rootPackage=builder.rootPackage;
 		    if (rootPackage.getFTag() !=null) {
