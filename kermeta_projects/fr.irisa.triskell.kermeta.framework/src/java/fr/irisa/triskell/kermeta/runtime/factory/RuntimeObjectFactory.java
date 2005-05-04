@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.7 2005-05-03 18:30:28 zdrey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.8 2005-05-04 14:31:53 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -14,9 +14,11 @@ package fr.irisa.triskell.kermeta.runtime.factory;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
+import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
@@ -72,11 +74,11 @@ public class RuntimeObjectFactory {
 	 * to the class Class
 	 * @param classdef the FClassDefinition corresponding to this class
 	 */
-	public void setClassClass(FClassDefinition classdef) {
+	public void setClassClass(FClass fclass) {
 		class_class = new RuntimeObject(this, null);
 		class_class.setMetaclass(class_class);
 		class_class.setData(new Hashtable());
-		class_class.getData().put("kcoreObject",classdef);
+		class_class.getData().put("kcoreObject",fclass);
 	}
 	
 	
@@ -84,27 +86,6 @@ public class RuntimeObjectFactory {
 		return class_class;
 	}
 	
-	
-	/**
-	 * create the Runtime Object of class Class which is the meta class of all 
-	 * the classDefinitions
-	 * @param class_def the class definition from which we create the class Class RO
-	 * @return the RuntimeObject of class Class linked to the given classDefinition
-	 * History :
-	 * (3/5/2005) feed the RuntimeObject "getData" representing the class Class
-	 */
-	public RuntimeObject createClassFromClassDefinition(RuntimeObject class_def) {
-		RuntimeObject metaclass = new RuntimeObject(this, class_class);
-		metaclass.setData(new Hashtable());
-		metaclass.getData().put("kcoreObject", class_def.getData().get("kcoreObject"));
-		metaclass.getProperties().put("classDefinition", class_def);
-		if (class_def.getProperties().containsKey("typeParameter")) {
-			//parametric class creation : add a typeParameterBinding collection to recoed parametric type bindings.
-			metaclass.getProperties().put("typeParameterBinding",Collection.createCollection((RuntimeObject)this.getClassDefTable().get("kermeta::language::structure::TypeVariableBinding")));
-		}
-		return metaclass;
-	}
-	 
 	/**
 	 * Create a new RuntimeObject given its meta_class.
 	 * @param meta_class the RuntimeObject repr. of the meta class to instanciate
@@ -134,13 +115,25 @@ public class RuntimeObjectFactory {
 	 * @return a new instance of the class
 	 */
 	public RuntimeObject createObjectFromClassName(String class_name) {
-		RuntimeObject metaclass = (RuntimeObject)this.getClassDefTable().get(class_name);
-		if (metaclass == null) {
+	    
+	    // Create the metaclass
+		RuntimeObject roclassdef = (RuntimeObject)this.getClassDefTable().get(class_name);
+		if (roclassdef == null)
+		{
 			System.err.println("SHOULD NEVER OCCUR...");
-/*			metaclass = createClassFromClassDefinition((RuntimeObject)classdef_table.get(class_name));
-			class_table.put(class_name, metaclass);*/
 		}
-		RuntimeObject result = createRuntimeObject(metaclass);
+
+		RuntimeObject result = createRuntimeObject(roclassdef);
+		
+		if (roclassdef.getProperties().containsKey("typeParameter")) 
+		{
+			//parametric class creation : add a typeParameterBinding collection to recoed parametric type bindings.
+			result.getProperties().put(
+			     "typeParamBinding",
+			     Collection.createCollection(
+			             (RuntimeObject)this.getClassDefTable().get(
+			                     "kermeta::language::structure::TypeVariableBinding")));
+		}
 		return result;
 	}
 	
