@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.4 2005-04-04 14:22:44 zdrey Exp $
+/* $Id: InterpreterContext.java,v 1.5 2005-05-04 14:18:13 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : GPL
@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FOperation;
 
 /**
  * The context of the interpreter. It contains a stack of contexts that are called <code>CallFrame</code>.
@@ -93,9 +94,9 @@ public class InterpreterContext {
 	 * @param self_object : the object on which an operation was applied. This operation is
 	 * the one that led to the creation of this new CallFrame
 	 */
-	public void pushNewCallFrame(RuntimeObject self_object)
+	public void pushNewCallFrame(RuntimeObject self_object, FOperation operation)
 	{
-	    CallFrame new_frame = new CallFrame(self_object, this);
+	    CallFrame new_frame = new CallFrame(self_object, this, operation);
 	    frame_stack.push(new_frame);
 	}
 	
