@@ -58,14 +58,18 @@ public class Object {
 
 	// Implementation of method set called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(~property, element)
+	// param0 : this RuntimeObject corresponds to a FProperty : 
+	// param1 : this RuntimeObject corresponds to the value of the property for self instance (self.getProperties().get(name_of_param0))
 	public static RuntimeObject set(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
 		set(self, param0, param1, true);
 		return Void.VOID;
 	}
 	
 	public static void set(RuntimeObject self, RuntimeObject param0, RuntimeObject param1, boolean handle_opposite) {
+	    
 		// Unset first if there is an object
 		if (isSet(self, param0) == Boolean.TRUE)  unSet(self, param0);
+
 		// set the new object
 		self.getProperties().put(getPropertyName(param0), param1);
 		// set containement
@@ -77,6 +81,7 @@ public class Object {
 				handleOppositeProperySet(param1, oproperty, self);
 			}
 		}
+		
 	}
 
 	/**
@@ -96,6 +101,7 @@ public class Object {
 	// Implementation of method isSet called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(~property)
 	public static RuntimeObject isSet(RuntimeObject self, RuntimeObject param0) {
+	    
 		if (self.getProperties().get(getPropertyName(param0)) != null) return Boolean.TRUE;
 		else return Boolean.FALSE;
 	}
@@ -110,6 +116,7 @@ public class Object {
 	public static void unSet(RuntimeObject self, RuntimeObject param0, boolean handle_opposite) {
 		if (isSet(self, param0) == Boolean.FALSE) return;
 		RuntimeObject value = (RuntimeObject)self.getProperties().get(getPropertyName(param0));
+		
 		if (getPropertyUpper(param0) == 1) {
 			if (isPropertyContainment(param0)) value.setContainer(null);
 			self.getProperties().remove(getPropertyName(param0));
