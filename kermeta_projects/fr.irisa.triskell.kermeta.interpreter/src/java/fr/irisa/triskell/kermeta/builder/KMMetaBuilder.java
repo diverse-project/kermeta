@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.13 2005-04-29 12:59:17 dvojtise Exp $
+/* $Id: KMMetaBuilder.java,v 1.14 2005-05-04 14:19:19 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -52,10 +52,12 @@ public class KMMetaBuilder {
 	 * units required from it.
 	 * 
 	 */
-	public static RuntimeObject createROFromClassDef(FObject node,RuntimeObject nodeMetaclass) {
+	public static RuntimeObject createROFromClassDef(FObject node,RuntimeObject nodeMetaclass)
+	{
 		RuntimeObject knode=nodeMetaclass.getFactory().createRuntimeObject(nodeMetaclass);
 		Hashtable data=new Hashtable();
 		if (node instanceof FClassDefinition) {
+		    // Create an 
 			FClass fClass=Run.interpreterbuilder.struct_factory.createFClass();
 			fClass.setFClassDefinition((FClassDefinition)node);
 			data.put("kcoreObject",fClass);
@@ -69,9 +71,8 @@ public class KMMetaBuilder {
 		return knode;
 	}
 	
-	public KMMetaBuilder(KermetaUnit unit) {
-		//update the metametaclass definition
-		Run.koFactory.setClassClass((FClassDefinition)unit.getTypeDefinitionByName("kermeta::reflection::Class"));
+	public KMMetaBuilder(KermetaUnit unit)
+	{
 		this.processedUnits=new ArrayList();
 		unitsExplorer(unit);
 		processParametricTypes();
