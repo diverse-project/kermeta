@@ -43,18 +43,35 @@ public class ReflectiveSequence {
 	public static RuntimeObject createReflectiveSequence(RuntimeObject object, RuntimeObject property) {
 		RuntimeObject result;
 		
-		RuntimeObject rc_class = (RuntimeObject)reflective_sequence_classes.get(property.getProperties().get("type"));
 		
+		RuntimeObject rc_class = (RuntimeObject)reflective_sequence_classes.get(property.getProperties().get("type"));
+		// If the rc_class does not exist yet in the stored RS classes
 		if (rc_class == null)
 		{
+		    // Create the RuntimeObject for the type "ReflectiveSequence" (and later
+		    // set specific bindings)
 			RuntimeObject reflective_class_def = object.getFactory().getTypeDefinitionByName("kermeta::language::ReflectiveSequence");
-			rc_class = object.getFactory().createClassFromClassDefinition(reflective_class_def);
+			rc_class = object.getFactory().createObjectFromClassName("kermeta::language::structure::Class");
+			rc_class.getData().put("kcoreObject", reflective_class_def.getData().get("kcoreObject"));
+			
+			//
+			rc_class.getProperties().put(
+				     "typeParamBinding",
+				     Collection.createCollection(
+				             (RuntimeObject)object.getFactory().getClassDefTable().get(
+				                     "kermeta::language::structure::TypeVariableBinding")));
+			
+			
+			// Create the RuntimeObject for the type "TypeVariableBinding"
 			RuntimeObject binding = object.getFactory().createObjectFromClassName("kermeta::language::structure::TypeVariableBinding");
 			binding.getProperties().put("type", property.getProperties().get("type"));
 			binding.getProperties().put("variable", Collection.getArrayList((RuntimeObject)reflective_class_def.getProperties().get("typeParameter")).get(0));
+			
+			
+			
 			/** FIXME :  NullPointerException here! try and launch it, than follow
 			 * the stack trace... : "RProperty" seems to be not properly set*/
-			// Set to the first position the property "typeParameterBinding"
+			// Set to the first position the property "typeParamBinding"
 			// We want 
 	/*		RuntimeObject ro_position = 
 			    fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(
@@ -65,10 +82,13 @@ public class ReflectiveSequence {
 			        ro_position,
 			        binding
 			        );*/
-			Collection.add((RuntimeObject)rc_class.getProperties().get("typeParameterBinding"), binding);
+			// Add a "binding" in the collection of "typeParamBindings" for the type "ReflectiveSequence"
+			Collection.add((RuntimeObject)rc_class.getProperties().get("typeParamBinding"), binding);
 			reflective_sequence_classes.put(property.getProperties().get("type"), rc_class);
 		}
-		// set the kcoreObject for rc_class?
+		
+		// If the class parametrized does already exist, do not "recreate" it : only "reuse" it to
+		// create a new RuntimeObject instance of it
 		result = object.getFactory().createRuntimeObject(rc_class);
 		result.getData().put("RObject", object);
 		result.getData().put("RProperty", property);
