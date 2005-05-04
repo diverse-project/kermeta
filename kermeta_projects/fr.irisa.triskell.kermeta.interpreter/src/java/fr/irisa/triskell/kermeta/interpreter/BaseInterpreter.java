@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.30 2005-05-03 18:23:54 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.31 2005-05-04 13:43:57 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -110,6 +110,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	
 	protected boolean typedef = false;
     private RuntimeObject current_runtimeLambdaObject;
+    private FOperation current_operation = null;
 	
 	/***
 	 * A variable declaration : when we encounter it, we add it to the expression context
@@ -307,6 +308,36 @@ public class BaseInterpreter extends KermetaVisitor {
 		return null;
 	}
 	
+	
+    /**
+     * FCallSuperOperation corresponds to the kermeta instruction "super"
+     * Usually, its properties are : 
+     * name = super 
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FCallSuperOperation)
+     */
+    public Object visit(FCallSuperOperation node)
+    {
+        RuntimeObject result = null;
+        FOperation current_op = this.interpreterContext.getCurrentFrame().getOperation();
+        RuntimeObject ro_target = this.interpreterContext.getCurrentFrame().getSelf();
+        FClassDefinition foclass = current_op.getFOwningClass();
+        internalLog.info("Visiting a super operation of : "+current_op.getFName());
+        
+        // Get the parameters of this operation
+		ArrayList parameters = visitList(node.getFParameters());
+		// Create a context for this operation call, setting self object to ro_target
+		interpreterContext.pushNewCallFrame(ro_target, current_op.getFSuperOperation());
+		interpreterContext.getCurrentFrame().setParameters(parameters);
+		// Memorize self object
+		interpreterContext.getCurrentFrame().setSelf(ro_target);
+		
+        result = (RuntimeObject)this.accept(current_op.getFSuperOperation());
+        
+        // Pop the context!
+        interpreterContext.getFrameStack().pop();
+        // TODO : raise exception if super operation not found // TypeChecker
+        return result;
+    }
 	/**
 	 * Visit a lambda expression. We visit a lambda expression in two cases :
 	 * - when we defined one and assigned it to a variable
@@ -579,7 +610,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	public Object invoke(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
 		RuntimeObject result=null;
         // Create a context for this operation call, setting self object to ro_target
-        interpreterContext.pushNewCallFrame(ro_target);
+        interpreterContext.pushNewCallFrame(ro_target, foperation);
         interpreterContext.getCurrentFrame().setParameters(arguments);
     	    
         //memorize self object
@@ -625,8 +656,16 @@ public class BaseInterpreter extends KermetaVisitor {
 		    if (metaClass.getData()!=null)
 		    	t_target=(FType)metaClass.getData().get("kcoreObject");
 		    if (t_target==null)
-		    	System.err.println("The RuntimeObjet has to be typed with a well initialized" +
-		    			ro_target+"for '"+((FCallFeature)target).getFName()+"'"+" metaclass");
+		    {
+		    	System.err.println("" +
+		    			"The RuntimeObjet named '"
+		    	        +((FCallFeature)target).getFName()+"'"+" must be typed");
+		    	if (metaClass.getData()==null)
+		    	System.err.println("Moreover, its meta class has no hashtable");
+		    	else System.err.println(metaClass.getData());
+		    	
+		    }
+		    	
 		}
 		
 		else if (FIntegerLiteral.class.isInstance(target)) {
@@ -697,10 +736,11 @@ public class BaseInterpreter extends KermetaVisitor {
 			{
 				// Get the parameters of this operation
 				ArrayList parameters = visitList(node.getFParameters());
-				// Create a context for this operation call, setting self object to ro_target
-				interpreterContext.pushNewCallFrame(ro_target);
 				// Get the FOperation corresponding to this operation call
 				FOperation foperation = (FOperation)feature;
+//				 Create a context for this operation call, setting self object to ro_target
+				interpreterContext.pushNewCallFrame(ro_target, foperation);
+				
 				interpreterContext.getCurrentFrame().setParameters(parameters);
 				
 				//memorize self object
@@ -708,6 +748,7 @@ public class BaseInterpreter extends KermetaVisitor {
 				
 				// Resolve this operation call
 				result = (RuntimeObject)this.accept(foperation);
+				
 				// After operation has been evaluated, pop its context
 				interpreterContext.getFrameStack().pop();
 			}
