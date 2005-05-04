@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.4 2005-04-27 08:40:53 jpthibau Exp $
+/* $Id: CallFrame.java,v 1.5 2005-05-04 14:15:59 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -19,6 +19,7 @@ import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FOperation;
 
 /**
  * CallFrame is the context for an operation call
@@ -28,38 +29,42 @@ public class CallFrame {
     /**
      * the interpreter global context
      */
-    InterpreterContext context;
+    protected InterpreterContext context;
 
     /**
      * self object (inside which the operation call is done)
      */
-    RuntimeObject self;
+    protected RuntimeObject self;
 
     /**
      * the operation result of the operation linked to this CallFrame
      */
-    RuntimeObject operation_result;
+    protected RuntimeObject operation_result;
 
 
     /**
      * the list of variables for the operation associated with this CallFrame (RuntimeObjects)
      */
-    ArrayList parameters;
+    protected ArrayList parameters;
 
     /**
      * the list of expression contexts that are linked to this frame (@see ExpressionContext class javadoc)
      */
-    Stack block_stack = new Stack();
+    protected Stack block_stack = new Stack();
 
+    /** the FOPeration related to this call frame*/
+    protected FOperation operation = null;
     
     /**
      * Constructor
      * Initially, we only have the global context and self object
      */
-    public CallFrame( RuntimeObject pSelf, InterpreterContext pContext)
+    public CallFrame( RuntimeObject pSelf, InterpreterContext pContext, FOperation pOperation)
     {
         self = pSelf;
         context = pContext;
+        operation = pOperation;
+        
     }
     
     /**
@@ -157,4 +162,17 @@ public class CallFrame {
         this.parameters = parameters;
     }
 
+    
+    /**
+     * @return Returns the operation.
+     */
+    public FOperation getOperation() {
+        return operation;
+    }
+    /**
+     * @param operation The operation to set.
+     */
+    public void setOperation(FOperation operation) {
+        this.operation = operation;
+    }
 }
