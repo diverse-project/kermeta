@@ -12,7 +12,7 @@ public class Collection {
 	// Implementation of method add called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection::add(element)
 	public static RuntimeObject add(RuntimeObject self, RuntimeObject param0) {
-		getArrayList(self).add(param0);
+	    getArrayList(self).add(param0);
 		return Void.VOID;
 	}
 
@@ -47,7 +47,10 @@ public class Collection {
 	}
 
 	public static ArrayList getArrayList(RuntimeObject collection) {
-		if (!collection.getData().containsKey("CollectionArrayList")) collection.getData().put("CollectionArrayList", new ArrayList());
+		if (!collection.getData().containsKey("CollectionArrayList"))
+		{
+		    collection.getData().put("CollectionArrayList", new ArrayList());
+		}
 		return (ArrayList)collection.getData().get("CollectionArrayList");
 	}
 
@@ -57,7 +60,7 @@ public class Collection {
 		result=new RuntimeObject(collectionMetaclass.getFactory(),collectionMetaclass);
 		result.setData(new Hashtable());
 		result.getData().put("CollectionArrayList",new ArrayList());
-		result.getProperties().put("typeParameterBinding",collectionType);
+		result.getProperties().put("typeParamBinding",collectionType);
 		return result;
 	}
 }
