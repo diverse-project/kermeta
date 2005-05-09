@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass1.java,v 1.16 2005-05-04 14:17:19 zdrey Exp $
+/* $Id: KMBuilderPass1.java,v 1.17 2005-05-09 13:40:15 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -50,9 +50,16 @@ public class KMBuilderPass1 extends KermetaVisitor {
 		return result;
 	}*/
 	
-/*	public KMBuilderPass1() {
+    // The KermetaUnit for which this builder will construct a Runtime representation
+    protected KermetaUnit unit = null;
+    
+	public KMBuilderPass1(KermetaUnit pUnit) {
 		super();
-	}*/
+		this.unit = pUnit;
+	}
+    
+    
+    
 	public static FProperty findProperty(FClassDefinition classDef,String propertyName) {
 		Iterator it=classDef.getFOwnedAttributes().iterator();
 		while(it.hasNext()) {
@@ -75,7 +82,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 		RuntimeObject propertyMetaclass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::reflection::Property");
 		result=new RuntimeObject(propertyMetaclass.getFactory(),propertyMetaclass);
 		result.setData(new Hashtable());
-		result.getData().put("propertyDefinition",property);
+		result.getData().put("kcoreObject",property);
 		
 		// Set the properties of the type FProperty
 		if (property.isFIsComposite())
@@ -91,7 +98,7 @@ public class KMBuilderPass1 extends KermetaVisitor {
 			FProperty opposite=property.getFOpposite();
 			RuntimeObject oppositeNode=new RuntimeObject(propertyMetaclass.getFactory(),propertyMetaclass);
 			oppositeNode.setData(new Hashtable());
-			oppositeNode.getData().put("propertyDefinition",opposite);
+			oppositeNode.getData().put("kcoreObject",opposite);
 			result.getProperties().put("opposite",oppositeNode);
 			oppositeNode.getProperties().put("opposite",result);
 			oppositeNode.getProperties().put("name",fr.irisa.triskell.kermeta.runtime.basetypes.String.create(opposite.getFName(),Run.koFactory));
@@ -895,14 +902,21 @@ public class KMBuilderPass1 extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FCallVariable)
 	 */
-	public Object visit(FCallVariable node) {
+	public Object visit(FCallVariable node)
+	{
 		RuntimeObject nodeMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::behavior::CallVariable");
 		RuntimeObject knode=KMMetaBuilder.createROFromClassDef(node,nodeMetaclass);
 		knode.getProperties().put("name",fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFName(),Run.koFactory));
-		if (node.getFParameters().size()> 0) {
+		
+		// If variable has parameters
+		if (node.getFParameters().size()> 0)
+		{
 			RuntimeObject exprCallMetaclass=(RuntimeObject)Run.koFactory.getTypeDefinitionByName("kermeta::language::behavior::CallExpression");
 			FClassDefinition callExprClassDef=((FClass)nodeMetaclass.getData().get("kcoreObject")).getFClassDefinition();
-			FProperty parameters=findProperty(callExprClassDef,"parameters");
+			System.err.println(callExprClassDef.getFName());
+			// parameters is a property of any CallExpression
+			FProperty parameters=unit.findPropertyByName(callExprClassDef,"parameters");
+			// parameters is null?
 			RuntimeObject parametersNode=ReflectiveCollection.createReflectiveCollection(knode,createPropertyNode(parameters));
 			knode.getProperties().put("parameters",parametersNode);
 			this.currentParamList=parametersNode;
