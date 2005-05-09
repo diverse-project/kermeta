@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.32 2005-05-04 17:19:58 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.33 2005-05-09 13:44:50 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -61,7 +61,7 @@ public class BaseInterpreter extends KermetaVisitor {
     /** We visit a lambda expr in 2 cases :
      *   - when it is defined
      * 	 - when we call it
-     * Not the same as FOperation, which is visited only when called are invoked
+     * Not the same as FOperation, which is visited only when it is invoked
      * */
     protected boolean isLambdaExpressionCall = false;
     
@@ -129,8 +129,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		// TODO : compare qualified names otherwise this test could be sometimes false
 		if (FFunctionType.class.isInstance(node.getFType().getFType()))
 		{
-		    System.out.println("type : "+node.getFType().getFName());
-		    internalLog.debug("Type of variable declaration : "+node.getFType().getFName());
+		    internalLog.info("Type of variable declaration : "+node.getFType().getFName());
 		
 		}
 		if (node.getFInitialization()!=null)
@@ -578,7 +577,9 @@ public class BaseInterpreter extends KermetaVisitor {
 	                p.getFType(), p.getFName(), called_param);
 	        i+=1;
 	    }
-	    System.err.println("Visiting operation '"+node.getFName()+"';"+"node :"+node.getFBody());
+	    internalLog.info("Visiting operation '"+node.getFName()+"'"
+	            +"\n- with body : " + node.getFBody()
+	            +"\n- with target : "+ node.getFOwningClass().getFName());
 	    this.accept(node.getFBody());
 	    // Visit raised Exception if any
 //	    visitList(node.getFRaisedException());
@@ -715,7 +716,6 @@ public class BaseInterpreter extends KermetaVisitor {
 		    {
 		    	Variable var=(Variable)e_context.getVariables().get(var_name);
 		        ro_target = var.getRuntimeObject();
-		    	System.err.println("this target: '"+target+"' has for data :"+ro_target);
 		    	t_target =(FType)ro_target.getMetaclass().getData().get("kcoreObject"); 
 		        
 		    }
@@ -1119,6 +1119,7 @@ public class BaseInterpreter extends KermetaVisitor {
         // If it is still still null, find operation in Object!
         if (result == null)
         {
+            
             class_def = (FClassDefinition)unit.typeDefinitionLookup(KermetaUnit.ROOT_CLASS_QNAME);
             result = getFlatFeatureType(class_def, feature);
         }
@@ -1127,6 +1128,7 @@ public class BaseInterpreter extends KermetaVisitor {
             //throw new KermetaInterpreterError("feature '"+feature.getFName()+"' not found in class '"+class_def.getFName()+"'");
             System.err.println("feature '"+feature.getFName()+"' not found in class '"+class_def.getFName()+"'");
         }
+        internalLog.info("the type of the callfeature is : "+class_def.getFName()+"; result:"+result);
         // TODO : test for other kinds of types or Exception? -- is feature valuable
         // in a source code for another target type than FClass?
         return result;
