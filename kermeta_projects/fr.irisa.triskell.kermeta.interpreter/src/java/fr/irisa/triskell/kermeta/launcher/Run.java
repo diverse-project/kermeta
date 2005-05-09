@@ -1,4 +1,4 @@
-/* $Id: Run.java,v 1.23 2005-05-04 14:20:54 zdrey Exp $
+/* $Id: Run.java,v 1.24 2005-05-09 14:31:02 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -184,7 +184,6 @@ public class Run {
 		}
 		catch(Exception e )
 		{
-		    System.err.println("Je n'ai pas réussi à charger l'interprete");
 		    if (interpreterbuilder.getError().size() == 0) e.printStackTrace();
 		}
 		
@@ -210,7 +209,9 @@ public class Run {
 		    // And initialize all the static attributes of this class
 		    theInterpreter=new Interpreter(koFactory,metametaClass);
 		    
-		    // Create the KMMetaBuilder
+		    // Create the KMMetaBuilder. "Implicitly" builds the memory of the 
+		    // interpreter execution by filling the classDefTable hashtable of the
+		    // (for now static) RuntimeObjectFactory
 		    KMMetaBuilder metaClassesBuilder = new KMMetaBuilder(interpreterbuilder);
 		    //						metaClassesBuilder.ppPackage(interpreterbuilder);
 		    //						KMMetaBuilder.processParametricTypes();
@@ -226,7 +227,7 @@ public class Run {
 		    selfINSTANCE=Run.koFactory.createRuntimeObject(roSelfType);
 		    
 		    // Construct the RuntimeObject representation of the source code 
-		    KMBuilderPass1 builderPass1 = new KMBuilderPass1();
+		    KMBuilderPass1 builderPass1 = new KMBuilderPass1(interpreterbuilder);
 		    builderPass1.ppPackage(interpreterbuilder);
 		    // Create the stdio default variable and push it in the interpreter context
 		    // to ensure any program may use stdio.print(...) and stdio.read("prompt>")
@@ -250,7 +251,6 @@ public class Run {
 		}
 		catch(Exception e ) 
 		{
-		    System.err.println("Echec du chargement du programme");
 		    if (builder.getError().size() == 0) e.printStackTrace();
 		}
 		
@@ -261,7 +261,7 @@ public class Run {
 		{
 		    internalLog.info("model "+modelName+" loaded successfully !");
 		    
-		    KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1();
+		    KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1(builder);
 		    
 		    classesBuilderPass1.ppPackage(builder);
 		    FPackage rootPackage=builder.rootPackage;
