@@ -1,0 +1,58 @@
+@mainClass "testOpCallObject::MyCarCreation"
+@mainOperation "createMyCar"
+package testOpCallObject;
+
+require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+
+// Creation of an object
+class Car {
+
+	//composition association of wheels
+	attribute wheels : set Wheel [0..4]
+}
+
+class Wheel {
+
+	attribute name : kermeta::standard::String
+}
+
+class MyCarCreation inherits kermeta::kunit::Assert {
+
+	operation createMyCar() : Void is do
+		var FLw : Wheel
+		var FRw : Wheel
+		var BLw : Wheel
+		var BRw : Wheel
+		var Rw : Wheel
+		var car : Car
+
+		FLw := Wheel.new
+		FRw := Wheel.new
+		BLw := Wheel.new
+		BRw := Wheel.new
+		Rw := Wheel.new
+		FLw.name :="FrontLeft"
+		FRw.name :="FrontRight"
+		BLw.name :="BackLeft"
+		BRw.name :="BackRight"
+		Rw.name :="Rescue"
+
+		car.wheels.add(FRw)
+		car.wheels.add(FLw)
+		car.wheels.add(BRw)
+		car.wheels.add(BLw)
+		do //check the overflow of multiplicity upper bound
+			car.wheels.add(Rw)
+			assert(FALSE)
+			rescue (e : Exception)
+       			assert(TRUE)
+       	end
+		car.remove
+		do //check destruction of contained parts
+			stdio.writeln(BFw.name)
+			assert(FALSE)
+			rescue (e : Exception)
+       			assert(TRUE)
+       	end
+	end
+}
