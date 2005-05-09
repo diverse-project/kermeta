@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.14 2005-05-04 14:19:19 zdrey Exp $
+/* $Id: KMMetaBuilder.java,v 1.15 2005-05-09 13:41:24 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -50,25 +50,26 @@ public class KMMetaBuilder {
 	/** 
 	 * Build all metaclasses RuntimeObjects from the given unit and
 	 * units required from it.
-	 * 
+	 * @param node a FClassDefinition, or a FClass?
+	 * @param nodeMetaClass
 	 */
 	public static RuntimeObject createROFromClassDef(FObject node,RuntimeObject nodeMetaclass)
 	{
-		RuntimeObject knode=nodeMetaclass.getFactory().createRuntimeObject(nodeMetaclass);
+		RuntimeObject ro_node=nodeMetaclass.getFactory().createRuntimeObject(nodeMetaclass);
 		Hashtable data=new Hashtable();
 		if (node instanceof FClassDefinition) {
 		    // Create an 
 			FClass fClass=Run.interpreterbuilder.struct_factory.createFClass();
 			fClass.setFClassDefinition((FClassDefinition)node);
 			data.put("kcoreObject",fClass);
-			Run.correspondanceTable.put(fClass,knode);
+			Run.correspondanceTable.put(fClass,ro_node);
 		}
 		else {
 			data.put("kcoreObject",node);
-			Run.correspondanceTable.put(node,knode);
+			Run.correspondanceTable.put(node,ro_node);
 		}
-		knode.setData(data);
-		return knode;
+		ro_node.setData(data);
+		return ro_node;
 	}
 	
 	public KMMetaBuilder(KermetaUnit unit)
