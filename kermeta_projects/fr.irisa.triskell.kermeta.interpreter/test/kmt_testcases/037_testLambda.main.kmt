@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.1 2005-04-28 06:54:38 jpthibau Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.2 2005-05-09 16:10:56 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -39,18 +39,20 @@ class TestLambda inherits kermeta::kunit::Assert
           </fParameters>
 	*/
 	operation testLambda1() : Void is do
-		var lf1 : kermeta::language::structure::FunctionType
+		var lf1 : <Integer->Integer>
+		var res : Integer
 		lf1 := function { i : Integer | i.plus(1) }
-		assert(lf1(3))
+		res := lf1(3)
+		assert(res == 4)
 	end
 	
 	/** test an operation call with a lambda expression */
-/*	operation testLambdaWithDef() : Void is do
-		var lf1 : kermeta::language::structure::FunctionType
+	operation testLambdaWithDef() : Void is do
+		var lf1 : <Integer->Integer>
 		lf1 := function { i : Integer | i.plus(1) }
-		assert(lf1(3))
+		assert(lf1(3) == 4)
 	end
-*/	
+
 	/** test a lambda exp. with 2 parameters */
 /*	operation testLambdaWithTwoParams() : Void is do
 		var lf1 : kermeta::language::structure::FunctionType
