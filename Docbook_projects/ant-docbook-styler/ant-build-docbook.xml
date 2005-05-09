@@ -32,6 +32,9 @@
 
   <!-- website rendering -->
   <property name="website.xml.dir"         value="${undefined}" />
+	
+	<!-- eclipse htmlhtml rendering -->
+  	<property name="eclipse.html.base.dir"         value="${undefined}" />
 
   <!-- ## override these properties, if needed -->
   <property name="temp:docbook.ready.file" location="${build.dir}/docbook-ready-file.tmp"/>
@@ -491,7 +494,7 @@ set up XEP's installation directory in the module's configuration property file.
         <filterset refid="filterset.fileuris" />
     </copy>
 
-	<mkdir dir="${distribution.dir}/help/html" />
+	<mkdir dir="${distribution.dir}/${eclipse.html.base.dir}" />
     <style
         in      = "${temp:docbook.ready.file}"
         style   = "${build.dir}/customized.eclipse-help.xsl.tmp"
@@ -502,8 +505,14 @@ set up XEP's installation directory in the module's configuration property file.
         <param name="eclipse.plugin.name"  expression="${docbook.eclipse.plugin.name}" />
         <param name="eclipse.plugin.id"  expression="${docbook.eclipse.plugin.id}" />
         <param name="eclipse.plugin.provider"  expression="${docbook.eclipse.plugin.provider}" />
+		<param name="base.dir" expression="${eclipse.html.base.dir}"/>
     </style>
-    
+  	<move todir="${distribution.dir}/${eclipse.html.base.dir}/css">
+  	    <fileset dir="${build.dir}/css"/>
+  	</move>
+  	<move todir="${distribution.dir}/${eclipse.html.base.dir}/gfx">
+  	    <fileset dir="${build.dir}/gfx"/>
+  	</move>
     <delete file="${build.dir}/customized.eclipse-help.xsl.tmp" />
 
   </target>

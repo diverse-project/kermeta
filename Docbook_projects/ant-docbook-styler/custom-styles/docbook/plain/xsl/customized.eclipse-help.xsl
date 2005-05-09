@@ -5,10 +5,33 @@
 
 <xsl:import href="@ant.docbook.styler.fileuri@/docbook/xsl/eclipse/eclipse.xsl" />
 
-
+<!-- specific to eclips help -->
 <xsl:param name="manifest.in.base.dir" select="0"></xsl:param>
 <xsl:param name="base.dir">help/html/</xsl:param>
 
+<!-- html presentation -->
+<xsl:param name="table.borders.with.css" select="1"/>
+<xsl:param name="html.stylesheet">css/docbook.css</xsl:param>
+<xsl:param name="html.stylesheet.type">text/css</xsl:param>        
+<xsl:param name="section.label.includes.component.label" select="1" />         
+<xsl:param name="section.autolabel" select="1" />
+<xsl:param name="generate.toc"></xsl:param> 
+<xsl:param name="callout.graphics" select="1" />
+<xsl:param name="callout.graphics.path">gfx/admonitions/callouts/</xsl:param>
+<xsl:param name="callout.graphics.extension">.gif</xsl:param>
+<xsl:param name="admon.graphics" select="1"/>
+<xsl:param name="admon.graphics.path">gfx/admonitions/</xsl:param>
+<xsl:param name="admon.graphics.extension">.gif</xsl:param>
+<xsl:param name="admonition.title.properties">text-align: left</xsl:param>
+
+<xsl:param name="formal.title.placement">
+figure after
+example after
+equation after
+table after
+procedure after
+task after
+</xsl:param>
 
 </xsl:stylesheet>
 
