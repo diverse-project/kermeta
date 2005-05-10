@@ -7,7 +7,7 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: 040_testSet.main.kmt,v 1.1 2005-04-28 06:54:38 jpthibau Exp $
+ * $Id: 040_testSet.main.kmt,v 1.2 2005-05-10 13:08:00 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -43,39 +43,53 @@ class TestIterator inherits kermeta::kunit::Assert
 	/**
 	 * returns the number of elements in the collection
 	 */
-	operation testSize() : Integer is do
+/*	operation testSize() : Integer is do
 		init_set := kermeta::standard::Set<Integer>.new
 		init_set.add(5)
 		init_set.add(6)
 		init_set.add(32)
 		init_set.add(23)
 		assert(init_set.size == 4)
-	end
+	end*/
 	
 	
 	/**
 	 * Remove an element from the collection
 	 * Works if size operation works
 	 */
-	operation testRemove() : Void is do
+/*	operation testRemove() : Void is do
 		aset := kermeta::standard::Set<Integer>.new
 		aset.add(31)
 		aset.add(13)
 		aset.remove(13)
-		assert(aset.size == 1)
+		assert(aset.size == 2)
 		assert(aset.one == 31)
-	end
+	end*/
+	
+	/**
+	 * Remove an element from the collection
+	 * Works if size operation works
+	 */
+/*	operation testRemovebis() : Void is do
+		aset := kermeta::standard::Set<Integer>.new
+		var int : Integer init 31
+		aset.add(int)
+		aset.add(13)
+		aset.remove(int)
+		assert(aset.size == 1)
+		assert(aset.one == 13)
+	end*/
 	
 	/**
 	 * Remove all elements from the collection
 	 */
-	operation testClear() : Void is do
+/*	operation testClear() : Void is do
 		aset := kermeta::standard::Set<Integer>.new
 		aset.add(31)
 		aset.add(13)
 		aset.clear()
 		assert(aset.size == 0)
-	end
+	end*/
 	
 	/**
 	 * Add all elements from the collection elements in the collection
