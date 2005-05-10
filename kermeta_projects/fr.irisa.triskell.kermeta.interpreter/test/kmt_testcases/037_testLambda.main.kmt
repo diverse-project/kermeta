@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.2 2005-05-09 16:10:56 zdrey Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.3 2005-05-10 11:29:24 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -24,6 +24,7 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 
 alias Integer : kermeta::standard::Integer;
 alias String : kermeta::standard::String;
+alias Character : kermeta::standard::Character;
 //alias FunctionType : kermeta::language::structure::FunctionType;
 
 class TestLambda inherits kermeta::kunit::Assert
@@ -38,63 +39,83 @@ class TestLambda inherits kermeta::kunit::Assert
             <fParameters xsi:type="kermeta_behavior:FIntegerLiteral" fValue="3"/>
           </fParameters>
 	*/
-	operation testLambda1() : Void is do
+/*	operation testLambda1() : Void is do
 		var lf1 : <Integer->Integer>
 		var res : Integer
 		lf1 := function { i : Integer | i.plus(1) }
 		res := lf1(3)
 		assert(res == 4)
 	end
-	
+*/	
 	/** test an operation call with a lambda expression */
-	operation testLambdaWithDef() : Void is do
+/*	operation testLambdaWithDef() : Void is do
 		var lf1 : <Integer->Integer>
 		lf1 := function { i : Integer | i.plus(1) }
-		assert(lf1(3) == 4)
+		assert(lf1(3).equals(4))
 	end
-
+*/
 	/** test a lambda exp. with 2 parameters */
 /*	operation testLambdaWithTwoParams() : Void is do
-		var lf1 : kermeta::language::structure::FunctionType
+		var lf1 : <[Integer, Integer]->Integer>
 		lf1 := function { i : Integer, j : Integer | i.plus(j) }
 		assert(lf1(3, 4) == 7)
 	end
-	*/
+*/
 	/** Test with a lambda exp. with 2 parameters, and a wrong call of it */
 /*	operation testFailLambdaWithTwoParams() : Void is do
-		var lf1 : kermeta::language::structure::FunctionType
-		lf1 := function { i : Integer, j : Integer | i.plus(j) }
-		assert(lf1(3, 4, 5) == 6)
+		var lfa1 : <[Integer, Integer]->Integer>
+		lfa1 := function { i : Integer, j : Integer | i.plus(j) }
+		assert(lfa1(3, 4, 5) == 6)
+	end*/
+
+	/** test a lambda exp. with a String */
+	operation testLambdaWithString() : Void is do
+		var lfs : <String->String>
+		lfs := function { str : String | str.substring(0,1) }
+		assert(lfs("pof")=="p")
+		
 	end
-	
+
 	/** test a lambda exp. with 3 parameters */
-/*	operation testLambdaWithThreeParams() : Void is do
-		var lf1 : kermeta::language::structure::FunctionType
-		lf1 := function { i : Integer, j : Integer, k : String | k.index(i.plus(j)) }
-		assert(lf1(3, 4, "stringOfMoreThanSevenChars")=="f")
+	operation testLambdaWithThreeParams() : Void is do
+		var lft1 : <[Integer, Integer, String]->Integer>
+		lft1 := function { i : Integer, j : Integer, k : String | k.indexOf("f") }
+
+		assert(lft1(3, 4, "stringOfMoreThanSevenChars")==7)
 	end
-	*/
+
+/*
+	operation testLambdaWithThreeParams() : Void is do
+		var lft1 : <[Integer, Integer, String]->String>
+		lft1 := function { i : Integer, j : Integer, k : String | k.substring(i.plus(j), i.plus(j)+1) }
+
+		assert(lft1(3, 4, "stringOfMoreThanSevenChars")=="f")
+	end
+*/
+
+	// todo : { i : Integer | i }?
+
 	// test a nested lambda exp. 
 /*	operation testNestedLambda() : Void is do
-		var lf1 : kermeta::language::structure::FunctionType
-		var lf2 : kermeta::language::structure::FunctionType
-		lf1 := function { i : Integer, j : Integer, k : String | k.index(i.plus(j)) }
+		var lf1 : <[Integer, Integer, String]->Character>
+		var lf2 : <[String, String]->Character>
+		lf1 := function { i : Integer, j : Integer, k : String | k.elementAt(i.plus(j)) }
 		lf2 := function { s1 : String, s2 : String | lf1(1, 2, s1+s2) }
 		assert(lf2("abcde", "fghi")=="d")
 	end
-	
+*/	
 	// test a lambda expression using an extern variable
-	operation testLambdaWithExtVar() : Void is do
-		var lf1 : FunctionType
+/*	operation testLambdaWithExtVar() : Void is do
+		var lf1 : <Integer->Integer>
 		var extern_var : kermeta::standard::Integer
-		lf1 := function ( i : kermeta::standard::Integer |  i.plus(extern_var))
+		lf1 := function { i : kermeta::standard::Integer |  i.plus(extern_var)}
 	end
 	
 	// test a lambda expression using a variable of same name as an extern variable
 	operation testLambdaVarPriority() : Void is do
 		var lf1 : FunctionType
 		var a_var : kermeta::standard::Integer
-		lf1 := function ( a_var : kermeta::standard::Integer |  i.plus(a_var))
+		lf1 := function { a_var : kermeta::standard::Integer |  i.plus(a_var)}
 	end
 	
 	// lambda exp. as parameter of an operation?
@@ -111,8 +132,7 @@ class TestLambda inherits kermeta::kunit::Assert
 		assert(opWithLambdaAsParam(lf1, 3)==57)
 	end
 	// TODO : lambda exp. as a parameter binding of a parametric class? 
-	
-*/
+
 
 	/** an operation that takes a lambda exp. as param and simply executes it*/
 /*	operation opWithLambdaAsParam(lambda : FunctionType, a : kermeta::standard::Integer) : Void is do
