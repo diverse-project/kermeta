@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.15 2005-05-09 13:41:24 zdrey Exp $
+/* $Id: KMMetaBuilder.java,v 1.16 2005-05-10 17:50:39 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -46,7 +46,9 @@ public class KMMetaBuilder {
 
 	//memorize processed units to avoid loop in exploration
 	protected List processedUnits;
+	protected static RuntimeObjectFactory roFactory;
 
+	
 	/** 
 	 * Build all metaclasses RuntimeObjects from the given unit and
 	 * units required from it.
@@ -72,9 +74,10 @@ public class KMMetaBuilder {
 		return ro_node;
 	}
 	
-	public KMMetaBuilder(KermetaUnit unit)
+	public KMMetaBuilder(KermetaUnit unit, RuntimeObjectFactory pFactory)
 	{
 		this.processedUnits=new ArrayList();
+	    this.roFactory = pFactory;
 		unitsExplorer(unit);
 		processParametricTypes();
 	}
@@ -94,16 +97,15 @@ public class KMMetaBuilder {
 			if (!this.processedUnits.contains(importedUnit))
 			this.unitsExplorer(importedUnit);
 		}
-		RuntimeObjectFactory runtimeFactory=Run.koFactory;
 		it=unit.typeDefs.keySet().iterator();
 		while (it.hasNext()) {
 			String typeName=(String)it.next();
-			if (runtimeFactory.getClassDefTable().containsKey(typeName))
+			if (roFactory.getClassDefTable().containsKey(typeName))
 				System.err.println("KMMetaBuilder : Interpreter owns twice same typenames :"+typeName);
 			else {
 				FTypeDefinition typedef=unit.getTypeDefinitionByName(typeName);
 				if (typedef instanceof FClassDefinition || typedef instanceof FPrimitiveType) {
-					runtimeFactory.getClassDefTable().put(typeName,createROFromClassDef(typedef,Run.koFactory.getClassClass()));
+					roFactory.getClassDefTable().put(typeName,createROFromClassDef(typedef,roFactory.getClassClass()));
 					//System.out.println(typeName);
 				}
 				else System.err.println("KMMetaBuilder: not a good typedef kind =>"+typedef);
@@ -112,9 +114,9 @@ public class KMMetaBuilder {
 	}
 	
 	public void processParametricTypes() {
-		Iterator it=Run.koFactory.getClassDefTable().keySet().iterator();
+		Iterator it=roFactory.getClassDefTable().keySet().iterator();
 		while (it.hasNext()) {
-			RuntimeObject type=(RuntimeObject)Run.koFactory.getClassDefTable().get(it.next());
+			RuntimeObject type=(RuntimeObject)roFactory.getClassDefTable().get(it.next());
 			if (type.getData().containsKey("kcoreObject")) {
 				FObject kcoreObject=(FObject)type.getData().get("kcoreObject");
 				if (kcoreObject instanceof FClass) {
@@ -126,12 +128,12 @@ public class KMMetaBuilder {
 		}
 	}
 	public static void addTypeParameters(RuntimeObject classNode,EList FTypeParameters) {
-		RuntimeObject typeParams=Collection.createCollection((RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::language::structure::Parameter"));
-//		RuntimeObject typeVarMC=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::reflection::TypeVariable");
+		RuntimeObject typeParams=Collection.createCollection((RuntimeObject)roFactory.getClassDefTable().get("kermeta::language::structure::Parameter"));
+//		RuntimeObject typeVarMC=(RuntimeObject)roFactory.getClassDefTable().get("kermeta::reflection::TypeVariable");
 		Iterator it=FTypeParameters.iterator();
 		while (it.hasNext()) {
 			FTypeVariable tv=(FTypeVariable)it.next();
-			RuntimeObject typeParamNode=Run.koFactory.createTypeVariable(tv);
+			RuntimeObject typeParamNode=roFactory.createTypeVariable(tv);
 			Collection.add(typeParams,typeParamNode);
 		}
 		classNode.getProperties().put("typeParameter",typeParams);
