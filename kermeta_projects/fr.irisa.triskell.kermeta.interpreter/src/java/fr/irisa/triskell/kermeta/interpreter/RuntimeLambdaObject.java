@@ -1,4 +1,4 @@
-/* $Id: RuntimeLambdaObject.java,v 1.2 2005-05-10 16:05:40 jpthibau Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.3 2005-05-10 17:29:48 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
  * License: GPL
@@ -34,7 +34,6 @@ public class RuntimeLambdaObject extends RuntimeObject {
      * value -> the variable representation of this parameter
      * */
     protected Hashtable lambdaParameters;
-    protected ArrayList parameterNames;
     protected FLambdaExpression lambdaExpression;
 
     /**
@@ -50,7 +49,6 @@ public class RuntimeLambdaObject extends RuntimeObject {
         this.lambdaExpression = node;
         this.factory = factory;
         this.lambdaParameters = new Hashtable();
-        this.parameterNames=new ArrayList();
     }
     
     /**
@@ -59,10 +57,14 @@ public class RuntimeLambdaObject extends RuntimeObject {
      * (This operation is called when encountering a lambda expression call)
      * @param params
      */
-    public void setLambdaParameters(ArrayList params)
+    public void setLambdaParameters(ArrayList rparams)
     {
-        for (int i = 0;i<this.parameterNames.size();i++)
-            this.bindLambdaParameter((String)this.parameterNames.get(i),(RuntimeObject)params.get(i));
+        EList fparams = lambdaExpression.getFParameters();
+        for (int i=0; i<fparams.size(); i++)
+        {   
+            String key = ((FLambdaParameter)fparams.get(i)).getFName();
+            this.bindLambdaParameter(key, (RuntimeObject)rparams.get(i));
+        }
     }
     
     /**
@@ -104,7 +106,6 @@ public class RuntimeLambdaObject extends RuntimeObject {
 	    if (init!=null)
 	        var.setRuntimeObject(init);
 		lambdaParameters.put(name, var);
-		this.parameterNames.add(name);
 		return var;
 	}
 	
