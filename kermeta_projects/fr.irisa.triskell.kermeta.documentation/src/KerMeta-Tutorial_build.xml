@@ -50,14 +50,22 @@
 	</target>
 
 	<target name="prepare_index.xml">
+		<tstamp>
+			<format property="TODAY_UK" pattern="d-MMMM-yyyy" locale="en"/>
+		</tstamp>
 		<!-- ant-docbook-styler needs an entry point named index.xml-->
 		<!-- only one doc at this time -->
 		<!-- note : voir comment on peut améliorer le script avec une config, 
 					en particulier la possibilité d'ajouter un docbook file ? == merge ??-->
+		<filter token="BUILD.DATE" value="${TODAY_UK}"/>
+				
 		<copy todir="${build.docbook.dir}/${project.name}">
 						<fileset file="${OOo.source.dir}/ooo2dbk.xml"/>
 		</copy>
-		<copy file="${build.docbook.dir}/${project.name}/${project.name}.docb.xml" tofile="${build.docbook.dir}/${project.name}/index.xml"/>
+		<copy file="${build.docbook.dir}/${project.name}/${project.name}.docb.xml" 
+			tofile="${build.docbook.dir}/${project.name}/index.xml"
+			filtering="true"
+			overwrite="true"/>
 	</target>
 	
 	<target name="html.single" depends="prepare_index.xml">
@@ -131,14 +139,18 @@
             <property name="docbook.resources.dir" location="${build.dir}/figures" />
             <property name="distribution.dir" location="${build.dir}/eclipse.help/${project.name}" />
             <property name="build.dir" location="${build.docbook.dir}/${project.name}" />
-            <property name="docbook.eclipse.plugin.name" value="MTL help" />
-            <property name="docbook.eclipse.plugin.id" value="fr.inria.mtl.help" />
+            <property name="docbook.eclipse.plugin.name" value="KerMeta documentation" />
+            <property name="docbook.eclipse.plugin.id" value="fr.irisa.triskell.kermeta.documentation" />
             <property name="docbook.eclipse.plugin.provider" value="INRIA/Irisa" />
+			<property name="eclipse.html.base.dir" value="build/eclipse.help/${project.name}/"/>
         </ant>
 
+	  	<move todir="${build.dir}">
+	  	    <fileset dir="${build.dir}/eclipse.help/${project.name}/build"/>
+	  	</move>
 		<condition property="tmp:Eclipsehelp.ok" value="true">
 	        <and>
-	        	<available file="${build.dir}/eclipse.help/${project.name}/help/html/index.html" />	        	
+	        	<available file="${build.dir}/eclipse.help/${project.name}/index.html" />	        	
 	        	<available file="${build.dir}/eclipse.help/${project.name}/toc.xml" />	        	        
 	        </and>
 	    </condition>

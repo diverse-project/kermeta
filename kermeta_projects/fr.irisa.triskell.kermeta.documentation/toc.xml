@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<toc label="KerMeta documentation">
+	<topic label="KerMeta Tutorial" href="build/eclipse.help/KerMeta-Tutorial/index.html"> 
+		<link toc="build/eclipse.help/KerMeta-Tutorial/toc.xml" />
+	</topic>
+</toc>
