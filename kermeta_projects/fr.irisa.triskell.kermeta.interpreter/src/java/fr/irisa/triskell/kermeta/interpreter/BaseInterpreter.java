@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.33 2005-05-09 13:44:50 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.34 2005-05-10 07:32:34 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -636,12 +636,12 @@ public class BaseInterpreter extends KermetaVisitor {
 	    RuntimeObject ro_target = null; // Runtime repr. of target
 	    // if target is null, means that it is an attribute of self object. We find self
 	    // object in current callFrame  self.node
-		if (target == null)
+		if (target == null || FSelfExpression.class.isInstance(node.getFTarget()))
 		{
 		    isFeatured = true;
 		    ro_target = interpreterContext.getCurrentFrame().getSelf();
 		    t_target =(FType)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
-		} 
+		}
 		else if (FCallResult.class.isInstance(node.getFTarget()))
 		{
 		    isFeatured = true;
