@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.6 2005-05-10 09:02:51 ffleurey Exp $
+/* $Id: TypeVariableInferer.java,v 1.7 2005-05-10 22:51:33 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableInferer.java
 * License : GPL
@@ -51,7 +51,7 @@ public class TypeVariableInferer extends KermetaVisitor {
 		provided = TypeCheckerContext.getCanonicalType(provided);
 		generic = TypeCheckerContext.getCanonicalType(generic);
 		
-		if (provided instanceof FVoidType || provided == ((SimpleType)TypeCheckerContext.VoidType).type) return result;
+		if (provided instanceof FVoidType || TypeEqualityChecker.equals(provided, ((SimpleType)TypeCheckerContext.VoidType).type)) return result;
 		
 		try {
 			TypeVariableInferer visitor = new TypeVariableInferer(provided, result);
@@ -103,6 +103,8 @@ public class TypeVariableInferer extends KermetaVisitor {
 	    if (provided instanceof FTypeVariable) {
 	        provided = TypeVariableUtility.getLeastDerivedAdmissibleType(provided);
 	    }
+	    
+	    if (provided instanceof FVoidType) return null;
 	    
 		if (! (provided instanceof FClass) ) throw new TypeDoesNotMatchError();
 		// the provided type is suposed to be a conformant class  

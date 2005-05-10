@@ -591,8 +591,8 @@ actualParameter returns [ ActualParameter retVal = null ]
 
 lambdaPostfix returns [ LambdaPostfix retVal = null ]
 :
-{ LambdaPostfixParamLst params = null; FExpression expression = null; }
-  lcurly:LCURLY params=lambdaPostfixParamLst pipe:PIPE expression=fExpression rcurly:RCURLY 
+{ LambdaPostfixParamLst params = null; FExpressionLst expression = null; }
+  lcurly:LCURLY params=lambdaPostfixParamLst pipe:PIPE expression=fExpressionLst rcurly:RCURLY 
 { retVal = new LambdaPostfix(lcurly, params, pipe, expression, rcurly); }
 ;
 
@@ -660,8 +660,8 @@ fBlock returns [ FBlock retVal = null ]
 
 fLambdaExpression returns [ FLambdaExpression retVal = null ]
 :
-{ FLambdaparamlst params = null; FExpression expression = null; }
-  function_KW:"function" lcurly:LCURLY params=fLambdaparamlst pipe:PIPE expression=fExpression rcurly:RCURLY 
+{ FLambdaparamlst params = null; FExpressionLst expression = null; }
+  function_KW:"function" lcurly:LCURLY params=fLambdaparamlst pipe:PIPE expression=fExpressionLst rcurly:RCURLY 
 { retVal = new FLambdaExpression(function_KW, lcurly, params, pipe, expression, rcurly); }
 ;
 

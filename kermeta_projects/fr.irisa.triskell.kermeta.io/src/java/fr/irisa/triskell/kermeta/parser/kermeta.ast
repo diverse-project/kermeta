@@ -142,7 +142,7 @@ sequence callPostfix : DOT name=ID ;
 sequence paramPostfix : LPAREN (parameters=actualParameterList)? RPAREN ;
 list actualParameterList : p1=actualParameter (COMMA pn=actualParameter)* ;
 sequence actualParameter : expression=fExpression ;
-sequence lambdaPostfix : LCURLY params=lambdaPostfixParamLst PIPE expression=fExpression RCURLY ;
+sequence lambdaPostfix : LCURLY params=lambdaPostfixParamLst PIPE expression=fExpressionLst RCURLY ;
 list lambdaPostfixParamLst : p1=lambdaPostfixParam (COMMA pn=lambdaPostfixParam)* ;
 sequence lambdaPostfixParam : name=ID;
 
@@ -162,7 +162,7 @@ sequence resultCall : "result" ;
 
 sequence fBlock : "do" annotations fExpressionLst fRescueLst "end" ;
 
-sequence fLambdaExpression : "function" LCURLY params=fLambdaparamlst PIPE expression=fExpression RCURLY ;
+sequence fLambdaExpression : "function" LCURLY params=fLambdaparamlst PIPE expression=fExpressionLst RCURLY ;
 list fLambdaparamlst : p1=fLambdaparam (COMMA pn=fLambdaparam)* ;
 sequence fLambdaparam : name=ID COLON typeRef ;
 

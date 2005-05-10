@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.6 2005-04-26 07:16:23 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.7 2005-05-10 22:51:32 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : GPL
@@ -345,8 +345,10 @@ public class TypeCheckerContext {
 		Type result;
 		
 		FType element_simple_type = element.getFType();
-		if (element_simple_type == null) 
+		if (element_simple_type == null) {
 		    element_simple_type = ((SimpleType)TypeCheckerContext.VoidType).type;
+		    return new SimpleType(element_simple_type);
+		}
 		
 		if (element.getFUpper() == 1) result = new SimpleType(element_simple_type);
 		else {

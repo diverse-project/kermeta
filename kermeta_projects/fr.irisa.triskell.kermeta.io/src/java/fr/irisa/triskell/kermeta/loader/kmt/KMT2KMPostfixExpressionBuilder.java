@@ -6,6 +6,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import fr.irisa.triskell.kermeta.ast.ActualParameter;
 import fr.irisa.triskell.kermeta.ast.CallPostfix;
+import fr.irisa.triskell.kermeta.ast.FExpressionLst;
 import fr.irisa.triskell.kermeta.ast.LambdaPostfix;
 import fr.irisa.triskell.kermeta.ast.LambdaPostfixParam;
 import fr.irisa.triskell.kermeta.ast.ParamPostfix;
@@ -88,7 +89,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 			builder.storeTrace(current_le,lambdaPostfix);
 			builder.pushContext();
 			lambdaPostfix.getParams().accept(this);
-			current_le.setFBody(KMT2KMExperessionBuilder.process(lambdaPostfix.getExpression(), builder));
+			current_le.setFBody(createBlock(lambdaPostfix.getExpression()));
 			((FCallExpression)result).getFParameters().add(current_le);
 			builder.popContext();
 		}
@@ -98,6 +99,15 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		}
 		
 		return false;
+	}
+	
+	protected fr.irisa.triskell.kermeta.behavior.FBlock createBlock(FExpressionLst explst) {
+		fr.irisa.triskell.kermeta.behavior.FBlock block =  builder.behav_factory.createFBlock();
+		if (explst != null) {
+			builder.storeTrace(block,explst);
+			block.getFStatement().addAll(KMT2KMExperessionListBuilder.process(explst, builder));
+		}
+		return block;
 	}
 	
 	/**

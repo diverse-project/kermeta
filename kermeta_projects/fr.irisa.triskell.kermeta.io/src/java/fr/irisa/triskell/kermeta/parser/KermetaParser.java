@@ -2077,13 +2077,13 @@ public KermetaParser(ParserSharedInputState state) {
 		Token  pipe = null;
 		Token  rcurly = null;
 		
-		LambdaPostfixParamLst params = null; FExpression expression = null;
+		LambdaPostfixParamLst params = null; FExpressionLst expression = null;
 		lcurly = LT(1);
 		match(LCURLY);
 		params=lambdaPostfixParamLst();
 		pipe = LT(1);
 		match(PIPE);
-		expression=fExpression();
+		expression=fExpressionLst();
 		rcurly = LT(1);
 		match(RCURLY);
 		retVal = new LambdaPostfix(lcurly, params, pipe, expression, rcurly);
@@ -2550,7 +2550,7 @@ public KermetaParser(ParserSharedInputState state) {
 		Token  pipe = null;
 		Token  rcurly = null;
 		
-		FLambdaparamlst params = null; FExpression expression = null;
+		FLambdaparamlst params = null; FExpressionLst expression = null;
 		function_KW = LT(1);
 		match(LITERAL_function);
 		lcurly = LT(1);
@@ -2558,7 +2558,7 @@ public KermetaParser(ParserSharedInputState state) {
 		params=fLambdaparamlst();
 		pipe = LT(1);
 		match(PIPE);
-		expression=fExpression();
+		expression=fExpressionLst();
 		rcurly = LT(1);
 		match(RCURLY);
 		retVal = new FLambdaExpression(function_KW, lcurly, params, pipe, expression, rcurly);

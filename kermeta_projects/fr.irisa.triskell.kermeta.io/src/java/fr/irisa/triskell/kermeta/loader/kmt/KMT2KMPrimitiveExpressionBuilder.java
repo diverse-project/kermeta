@@ -290,7 +290,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		builder.storeTrace(current_le,fLambdaExpression);
 		builder.pushContext();
 		fLambdaExpression.getParams().accept(this);
-		current_le.setFBody(KMT2KMExperessionBuilder.process(fLambdaExpression.getExpression(), builder));
+		current_le.setFBody(createBlock(fLambdaExpression.getExpression()));
 		result = current_le;
 		builder.popContext();
 		return false;
