@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.6 2005-04-22 01:46:26 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.7 2005-05-10 09:03:01 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -47,7 +47,7 @@ public class JunitTestSuite extends TestCase {
 		 // SET THE STD LIB
 	    KermetaUnit.STD_LIB_URI = "lib/framework.km";
 	    // INIT TYPE CHECKER
-	    TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
+	  //  TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
 		
 	}
 	
@@ -75,6 +75,7 @@ public class JunitTestSuite extends TestCase {
 	}
 	*/
 	// do not modify this comment
+
 
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_1_ClassSubTyping_1() throws Exception {
@@ -113,6 +114,10 @@ public void testvalid_GenericVisitor() throws Exception {
 testvalidFile("test/typechecher_tests/valid","GenericVisitor.kmt" );
 }
 
+public void testvalid_GenericsAndFunctions() throws Exception {
+testvalidFile("test/typechecher_tests/valid","GenericsAndFunctions.kmt" );
+}
+
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","1_ClassSubTyping_1.kmt" );
 }
@@ -145,6 +150,10 @@ public void testinvalid_SimpleFunctions() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","SimpleFunctions.kmt" );
 }
 
+public void testinvalid_GenericsAndFunctions() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","GenericsAndFunctions.kmt" );
+}
+
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 
@@ -165,9 +174,9 @@ testinvalidFile("test/typechecher_tests/invalid","SimpleFunctions.kmt" );
 			assertTrue(builder.getAllMessagesAsString(), false);
 		}
 		
-		KermetaTypeChecker tc = new KermetaTypeChecker(builder);
-	    
-		tc.checkUnit();
+		builder.typeCheck();
+		
+		KermetaTypeChecker tc = builder.getTypeChecker();
 		
 		if (builder.getAllErrors().size() > 0) {
 			assertTrue(builder.getAllMessagesAsString(), false);
@@ -188,9 +197,9 @@ testinvalidFile("test/typechecher_tests/invalid","SimpleFunctions.kmt" );
 			assertTrue(builder.getAllMessagesAsString(), false);
 		}
 		
-		KermetaTypeChecker tc = new KermetaTypeChecker(builder);
-	    
-		tc.checkUnit();
+		builder.typeCheck();
+		
+		KermetaTypeChecker tc = builder.getTypeChecker();
 		
 		if (tc.correctOperation.size() != 0) {
 		    boolean res = true;

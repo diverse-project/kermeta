@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.7 2005-04-26 08:28:06 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.8 2005-05-10 09:02:50 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -189,8 +189,9 @@ public class ExpressionChecker extends KermetaVisitor {
 		    if (!error) {
 			    // get Type of actual parameters
 			    for(int i=0; i<exp.getFParameters().size(); i++) {
-			        expected_type = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)required_params[i]).type));
-					Type provided = (Type)this.accept((FExpression)exp.getFParameters().get(i));
+			        //expected_type = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)required_params[i]).type));
+			        expected_type = (SimpleType)required_params[i];
+			        Type provided = (Type)this.accept((FExpression)exp.getFParameters().get(i));
 					try {
 					    //provided = PrimitiveTypeResolver.getResolvedType(provided);
 					    provided.inferTypeVariableBinding(((SimpleType)required_params[i]).type, binding);

@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.3 2005-05-02 23:50:50 ffleurey Exp $
+/* $Id: InheritanceSearch.java,v 1.4 2005-05-10 09:02:51 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : InheritanceSearchUtilities.java
 * License : GPL
@@ -61,38 +61,79 @@ public class InheritanceSearch {
 	}
 	
 	/**
-	 * Get the Callable operations on class c
+	 * Returns the direct super types of a class.
+	 * Including the Object type which is implicitly a direct supertype of every class.
 	 * @param c
 	 * @return
 	 */
+	public static ArrayList getDirectSuperTypes(FClass c) {
+	    
+	    FClass object = (FClass)((SimpleType)TypeCheckerContext.ObjectType).type;
+	    ArrayList result = new ArrayList();
+	    // The class Object is the Root Class
+	    if (TypeEqualityChecker.equals(c, object)) return result;
+	    
+	    Iterator it = c.getFClassDefinition().getFSuperType().iterator();
+	    while(it.hasNext()) {
+			// get the super type
+			FClass direct_st = (FClass)it.next();
+			// propagate type variables
+			direct_st = (FClass)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
+			result.add(direct_st);
+	    }
+	    
+	    // Add the type object which is implicitly a super type of every type
+		if (!result.contains(object)) {
+		    result.add(object);
+		}
+	    return result;
+	}
+	
+	
+	/**
+	 * Get the Callable operations on class c
+	 * @param c
+	 * @return
+	 */	
 	public static ArrayList callableOperations(FClass c) {
 		ArrayList allTypes = allSuperTypes(c);
 		ArrayList result = new ArrayList();
 		Hashtable found_ops = new Hashtable();
 		
-		Iterator it = allTypes.iterator();
-		while (it.hasNext()) {
-			FClass fclass = (FClass)it.next();
-			Iterator ops = fclass.getFClassDefinition().getFOwnedOperation().iterator();
+		ArrayList toVisit = new ArrayList();
+		toVisit.add(c);
+		
+		
+		while(!toVisit.isEmpty()) {
+		    FClass current = (FClass)toVisit.get(0);
+		    toVisit.remove(0);
+		    Iterator it = getDirectSuperTypes(current).iterator();
+		    while(it.hasNext()) {
+		        FClass stype = (FClass)it.next();
+		        if (!toVisit.contains(stype)) toVisit.add(stype);
+		    }
+		    
+		    Iterator ops = current.getFClassDefinition().getFOwnedOperation().iterator();
 			// Add all operations
 			while (ops.hasNext()) {
 				FOperation op = (FOperation)ops.next();
 				if (!found_ops.containsKey(op)) {
 				    found_ops.put(op,op);
-				    result.add(new CallableOperation(op,fclass));
+				    result.add(new CallableOperation(op,current));
 				}
 			}
-			// Remove hiden definition.
-			// It should keep only one method per operation
-			ops = ((ArrayList)result.clone()).iterator();
-			while (ops.hasNext()) {
-				CallableOperation op = (CallableOperation)ops.next();
-				result = removeAllCallableSuperOperation(result, allSuperOperations(op.getOperation()));
-			}
+		    
 		}
+		
 		return result;
 	}
 	
+	/**
+	 * Get a Parametized class from a class definition. 
+	 * Type parameter are bound with type variables.
+	 * @param cdef
+	 * @return
+	 */
 	public static FClass getFClassForClassDefinition(FClassDefinition cdef) {
 	    StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
 	    FClass fclass = struct_factory.createFClass();
@@ -130,27 +171,6 @@ public class InheritanceSearch {
 					found_properties.put(prop, prop);
 					result.add(new CallableProperty(prop,fclass));
 				}
-			}
-		}
-		return result;
-	}
-	
-	private static ArrayList allSuperOperations(FOperation op) {
-		ArrayList result = new ArrayList();
-		if (op.getFSuperOperation() != null) {
-		    result.add(op.getFSuperOperation());
-			result.addAll(allSuperOperations(op.getFSuperOperation()));
-		}
-		return result;
-	}
-	
-	private static ArrayList removeAllCallableSuperOperation(ArrayList ops, ArrayList supers) {
-		ArrayList result = new ArrayList();
-		Iterator it = ops.iterator();
-		while(it.hasNext()) {
-			CallableOperation co = (CallableOperation)it.next();
-			if (!supers.contains(co.getOperation())) {
-				result.add(co);
 			}
 		}
 		return result;

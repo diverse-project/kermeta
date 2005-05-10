@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.5 2005-04-22 01:46:24 ffleurey Exp $
+/* $Id: TypeVariableInferer.java,v 1.6 2005-05-10 09:02:51 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableInferer.java
 * License : GPL
@@ -98,6 +98,12 @@ public class TypeVariableInferer extends KermetaVisitor {
 	}
 	
 	public Object visit(FClass arg0) {
+	    
+	    // Handle type variables
+	    if (provided instanceof FTypeVariable) {
+	        provided = TypeVariableUtility.getLeastDerivedAdmissibleType(provided);
+	    }
+	    
 		if (! (provided instanceof FClass) ) throw new TypeDoesNotMatchError();
 		// the provided type is suposed to be a conformant class  
 		
@@ -141,15 +147,9 @@ public class TypeVariableInferer extends KermetaVisitor {
 		return null;
 	}
 	
-	public Object visit(FSelfType arg0) {
-		// FIXME: Not sure...
-		return null;
-	}
-	
 	public Object visit(FTypeVariable arg0) {
 		// check that this binding is OK
-		FType req = TypeVariableUtility.getLeastDerivedAdmissibleType(arg0);
-		if (!TypeConformanceChecker.conforms(req, provided)) {
+	    if (!TypeConformanceChecker.conforms(TypeVariableUtility.getLeastDerivedAdmissibleType(arg0), TypeVariableUtility.getLeastDerivedAdmissibleType(provided))) {
 			throw new TypeDoesNotMatchError();
 		}
 		// If there is already a binding :

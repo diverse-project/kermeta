@@ -58,6 +58,7 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 			// left should be a call expr without params
 			if (left instanceof FCallExpression && ((FCallExpression)left).getFParameters().size() == 0)  {
 				fr.irisa.triskell.kermeta.behavior.FAssignement assign = builder.behav_factory.createFAssignement();
+				builder.storeTrace(assign, fAssignement);
 				assign.setFTarget((FCallExpression)left);
 				assign.setFValue(right);
 				if (fAssignement.getAssignementOp().getText().equals("?")) assign.setFIsCast(true);

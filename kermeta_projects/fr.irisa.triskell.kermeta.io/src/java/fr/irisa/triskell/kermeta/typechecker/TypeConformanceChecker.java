@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.5 2005-04-22 01:46:25 ffleurey Exp $
+/* $Id: TypeConformanceChecker.java,v 1.6 2005-05-10 09:02:51 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -128,7 +128,7 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 	
 	public Object visit(FProductType arg0) {
 		// all types must be sub-types
-		Boolean result = new Boolean(false);
+		Boolean result = new Boolean(true);
 		if (provided instanceof FProductType) {
 			FProductType p = (FProductType)provided;
 			if(arg0.getFType().size() == p.getFType().size()) {
@@ -145,14 +145,21 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FSelfType arg0) {
-		// FIXME: I'm not sure of this. Maybe it should look at the typechecker context....
-		return new Boolean(provided instanceof FSelfType);
-	}
-	
 	public Object visit(FTypeVariable arg0) {
 		// FIXME: This is probably too restrictive
-		return new Boolean(provided == arg0);
+	    FType r = TypeVariableUtility.getLeastDerivedAdmissibleType(arg0);
+	    if (provided instanceof FTypeVariable) {
+	        FType p = TypeVariableUtility.getLeastDerivedAdmissibleType(provided);
+	        return new Boolean(TypeConformanceChecker.conforms(r, p));
+	    }
+	    /*
+	    else if (provided instanceof FClass) {
+	        return new Boolean(TypeConformanceChecker.conforms(r, provided));
+	    }
+	    */
+	    else {
+	        return new Boolean(false);
+	    }
 	}
 
 	public Object visit(FVoidType arg0) {
