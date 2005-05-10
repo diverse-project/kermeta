@@ -8,8 +8,9 @@ require "primitive_types.kmt"
  * IRISA / University of Rennes 1 (France)
  * Distributed under the terms of the GPL licence
  *
- * Implementation of Metacore collection types.
+ * Implementation of Kermeta collection types.
  *************************************************** */
+ alias Object : kermeta::language::structure::Object ;
  
 /**
  * Collection is the root class for all metacore collections
@@ -93,7 +94,7 @@ abstract class Collection<G>
 	/**
 	 * runs func on each element of the collection
 	 */
-	operation each(func : <G -> Void>) : Void is do
+	operation each(func : <G -> Object>) : Void is do
 		from var it : Iterator<G> init iterator
 		until it.isOff
 		loop
@@ -134,7 +135,7 @@ abstract class Collection<G>
 	 * Passes each element of the collection to selector. 
 	 * returns a Collection for all elements for which selector is true
 	 */
-	operation ~select(selector : <G -> Boolean>) : Sequence<G>  is do
+	operation select(selector : <G -> Boolean>) : Sequence<G>  is do
 		var elem : G
 		result := Sequence<G>.new
 		from var it : Iterator<G> init iterator
@@ -150,7 +151,7 @@ abstract class Collection<G>
 	 * returns a Collection for all elements for which rejector is false
 	 */
 	operation reject(rejector : <G -> Boolean>) : Sequence<G>  is do
-		result := self.~select { elem | not rejector(elem) } 
+		result := self.select { elem | not rejector(elem) } 
 	end
 	
 }
@@ -258,13 +259,13 @@ class Iterator<G>
 	 * returns true if the iterator has a next element
 	 */
 	operation hasNext() : Boolean is do
-	 	result := extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext(self)
+	 	result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext(self)
 	end
 	
 	/**
 	 * returns the next element of the iterator
 	 */
 	operation next() : G is do
-		result := extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next(self)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.next(self)
 	end
 }
