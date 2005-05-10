@@ -1,4 +1,4 @@
-/* $Id: OutlineItem.java,v 1.2 2005-05-02 23:57:45 ffleurey Exp $
+/* $Id: OutlineItem.java,v 1.3 2005-05-10 09:08:37 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : OutlineItem.java
 * License : GPL
@@ -53,8 +53,13 @@ public class OutlineItem implements Comparable {
     
     public String getLabel() {
         if (label == null) {
-            GetTextVisitor v = new GetTextVisitor(outline);
-            label = (String)v.accept(modelElement);
+            try {
+                GetTextVisitor v = new GetTextVisitor(outline);
+                label = (String)v.accept(modelElement);
+            }
+            catch(Throwable t) {
+                return "* error *";
+            }
         }
         return label;
     }
