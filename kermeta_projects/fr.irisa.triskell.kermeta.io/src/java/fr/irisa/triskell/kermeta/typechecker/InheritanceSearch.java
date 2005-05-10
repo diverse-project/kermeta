@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.4 2005-05-10 09:02:51 ffleurey Exp $
+/* $Id: InheritanceSearch.java,v 1.5 2005-05-10 20:33:09 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : InheritanceSearchUtilities.java
 * License : GPL
@@ -117,8 +117,8 @@ public class InheritanceSearch {
 			// Add all operations
 			while (ops.hasNext()) {
 				FOperation op = (FOperation)ops.next();
-				if (!found_ops.containsKey(op)) {
-				    found_ops.put(op,op);
+				if (!found_ops.containsKey(op.getFName())) {
+				    found_ops.put(op.getFName(),op);
 				    result.add(new CallableOperation(op,current));
 				}
 			}

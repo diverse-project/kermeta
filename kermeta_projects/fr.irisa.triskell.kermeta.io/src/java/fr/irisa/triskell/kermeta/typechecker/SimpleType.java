@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.4 2005-05-02 23:50:51 ffleurey Exp $
+/* $Id: SimpleType.java,v 1.5 2005-05-10 20:33:12 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 
 /**
  * @author Franck Fleurey
@@ -161,6 +162,18 @@ public class SimpleType extends Type {
     
 	public String toString() {
 		return (String)FTypePrettyPrinter.getInstance().accept(type);
+	}
+	
+	/**
+	 * Return the type definition of the type if it has one, null otherwise
+	 * @return
+	 */
+	public FTypeDefinition getTypeDefinition() {
+	    if (type instanceof FTypeDefinition) return (FTypeDefinition)type;
+	    else if (type instanceof FClass) {
+	        return ((FClass)type).getFClassDefinition();
+	    }
+	    return null;
 	}
 	
 	public FType getType() {
