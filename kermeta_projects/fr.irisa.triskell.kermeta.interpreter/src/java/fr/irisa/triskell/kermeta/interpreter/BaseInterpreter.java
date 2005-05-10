@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.35 2005-05-10 09:14:30 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.36 2005-05-10 11:29:49 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -357,6 +357,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		    //ArrayList params = visitList(node.getFParameters());
 		    ((RuntimeLambdaObject)result).defineLambdaParameters(node.getFParameters());
 		    
+		    
 	    }
 	    
 	    return result;
@@ -633,6 +634,17 @@ public class BaseInterpreter extends KermetaVisitor {
 		    ro_target = interpreterContext.getCurrentFrame().getOperationResult();
 		    t_target =(FType)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
 		}
+		// Is it a lambda expression?
+		else if (FCallVariable.class.isInstance(node.getFTarget()))
+		{
+		    isFeatured = true;
+		    ro_target = (RuntimeObject)this.accept(node.getFTarget()); /*interpreterContext.getCurrentFrame(
+		            ).getCurrentExpressionContext(
+		            ).getVariable(((FCallVariable)node.getFTarget()).getFName()).getRuntimeObject();
+		            */
+		    // get the type of the result
+		    t_target =(FType)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
+		}
 		// handle the case of calls like "toto.titi.tutu" -> recursive
 		// target.node -> target1.toto.node 
 		else if (FCallFeature.class.isInstance(target))
@@ -649,8 +661,6 @@ public class BaseInterpreter extends KermetaVisitor {
 		    	        +((FCallFeature)target).getFName()+"'"+" must be typed");
 		    	if (metaClass.getData()==null)
 		    	System.err.println("Moreover, its meta class has no hashtable");
-		    	else System.err.println(metaClass.getData());
-		    	
 		    }
 		    	
 		}
@@ -1099,7 +1109,7 @@ public class BaseInterpreter extends KermetaVisitor {
         // If it is still null, we have to find it in the Super classes, recursively
         if (result == null)
         {
-            result = getSuperFeatureType(class_def, feature);;
+            result = getSuperFeatureType(class_def, feature);
         }
         // If it is still still null, find operation in Object!
         if (result == null)
