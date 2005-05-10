@@ -1,4 +1,4 @@
-/* $Id: RuntimeLambdaObject.java,v 1.1 2005-04-22 17:16:39 zdrey Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.2 2005-05-10 16:05:40 jpthibau Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
  * License: GPL
@@ -34,6 +34,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
      * value -> the variable representation of this parameter
      * */
     protected Hashtable lambdaParameters;
+    protected ArrayList parameterNames;
     protected FLambdaExpression lambdaExpression;
 
     /**
@@ -49,6 +50,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
         this.lambdaExpression = node;
         this.factory = factory;
         this.lambdaParameters = new Hashtable();
+        this.parameterNames=new ArrayList();
     }
     
     /**
@@ -59,14 +61,8 @@ public class RuntimeLambdaObject extends RuntimeObject {
      */
     public void setLambdaParameters(ArrayList params)
     {
-        int i = 0;
-        Iterator it = lambdaParameters.keySet().iterator();
-        while (it.hasNext())
-        {   
-            String key = (String)it.next();
-            this.bindLambdaParameter(key, (RuntimeObject)params.get(i));
-            i++;
-        }
+        for (int i = 0;i<this.parameterNames.size();i++)
+            this.bindLambdaParameter((String)this.parameterNames.get(i),(RuntimeObject)params.get(i));
     }
     
     /**
@@ -77,8 +73,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
      */
     public void defineLambdaParameters(EList params)
     {
-        int i = 0;
-        for (i = 0; i< params.size(); i++)
+        for (int i = 0; i< params.size(); i++)
         {
             // Get the type of param, its identifier
             // ->RuntimeObject called_param = (RuntimeObject)it.next();
@@ -109,6 +104,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
 	    if (init!=null)
 	        var.setRuntimeObject(init);
 		lambdaParameters.put(name, var);
+		this.parameterNames.add(name);
 		return var;
 	}
 	
