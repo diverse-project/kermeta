@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.4 2005-05-10 16:05:40 jpthibau Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.5 2005-05-10 16:28:29 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -25,7 +25,7 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 alias Integer : kermeta::standard::Integer;
 alias String : kermeta::standard::String;
 alias Character : kermeta::standard::Character;
-//alias FunctionType : kermeta::language::structure::FunctionType;
+alias FunctionType : kermeta::language::structure::FunctionType;
 
 class TestLambda inherits kermeta::kunit::Assert
 {
@@ -115,7 +115,7 @@ class TestLambda inherits kermeta::kunit::Assert
 	operation testLambdaVarPriority() : Void is do
 		var lf1 : FunctionType
 		var a_var : kermeta::standard::Integer
-		lf1 := function { a_var : kermeta::standard::Integer |  i.plus(a_var)}
+		lf1 := function { i : Integer, a_var : kermeta::standard::Integer |  i.plus(a_var)}
 	end
 	
 	// lambda exp. as parameter of an operation?
@@ -126,16 +126,16 @@ class TestLambda inherits kermeta::kunit::Assert
 		assert(3.times(lf1(2, 5))==30)
 	end
 	
-	operation testOpWithLambdaAsParam() : Void is do
+/*	operation testOpWithLambdaAsParam() : Void is do
 		var lf1 : FunctionType
 		lf1 := function { i : Integer | i.plus(54) }
 		assert(opWithLambdaAsParam(lf1, 3)==57)
 	end
 	// TODO : lambda exp. as a parameter binding of a parametric class? 
-
+*/
 
 	/** an operation that takes a lambda exp. as param and simply executes it*/
 /*	operation opWithLambdaAsParam(lambda : FunctionType, a : kermeta::standard::Integer) : Void is do
 		lambda(a)
-	end
+	end*/
 }
