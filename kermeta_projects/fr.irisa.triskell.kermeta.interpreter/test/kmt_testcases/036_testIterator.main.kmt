@@ -8,7 +8,7 @@ require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
 
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: 036_testIterator.main.kmt,v 1.1 2005-04-28 06:54:39 jpthibau Exp $
+ * $Id: 036_testIterator.main.kmt,v 1.2 2005-05-10 08:18:12 jpthibau Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -45,38 +45,39 @@ class TestIterator inherits kermeta::kunit::Assert
     // test "next" operation with a void Set
     operation testnext() : Void is do
        	aset := kermeta::standard::Set<Integer>.new
-    	assert(aset.next==void)
+       	var it : kermeta::standard::Iterator<Integer> init aset.iterator
+//    	assert(it.next==void)
     end
     
     // test "next" operation
     operation testnextbis() : Void is do
        	aset := kermeta::standard::Set<Integer>.new
        	aset.add(23)
-    	assert(aset.next==23)
+       	var it : kermeta::standard::Iterator<Integer> init aset.iterator
+    	assert(it.next==23)
     end
     
      // test "isOff" operation with a void Set
     operation testisOff() : Void is do
        	aset := kermeta::standard::Set<Integer>.new
-    	assert(aset.isOff==true)
+       	var it : kermeta::standard::Iterator<Integer> init aset.iterator
+    	assert(it.isOff==true)
     end
     
     // test "isOff" operation when it is true
     operation testisOffbis() : Void is do
-//        var it : kermeta::standard::Iterator<Integer> init kermeta::standard::Iterator<Integer>.new
        	aset := kermeta::standard::Set<Integer>.new
-     	var it : kermeta::standard::Iterator<Integer> init aset.iterator()
        	aset.add(23)
+     	var it : kermeta::standard::Iterator<Integer> init aset.iterator()
         it.next()
     	assert(it.isOff == true)
     end
     
     // test "isOff" operation when it is false
     operation testisOffter() : Void is do
-//        var it : kermeta::standard::Iterator<Integer> init kermeta::standard::Iterator<Integer>.new
        	aset := kermeta::standard::Set<Integer>.new
-     	var it : kermeta::standard::Iterator<Integer> init aset.iterator()
        	aset.add(23)
+     	var it : kermeta::standard::Iterator<Integer> init aset.iterator()
     	assert(it.isOff == false)
     end
     
