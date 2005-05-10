@@ -19,8 +19,11 @@ import org.eclipse.swt.graphics.Point;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.behavior.FCallFeature;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
@@ -29,6 +32,7 @@ import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
 
 /**
@@ -80,10 +84,24 @@ public class EditorCompletion implements IContentAssistProcessor {
 		            FObject obj = getFObjectForNode(astnode);
 		            TexteditorPlugin.pluginLog.info(" * Completion FObject -> " + obj);
 		            
+		            
+		            if (obj != null && obj instanceof FLambdaExpression) {
+		                FLambdaExpression lexp = (FLambdaExpression)obj;
+		                if (lexp.eContainer() instanceof FCallFeature) obj = (FCallFeature)lexp.eContainer();
+		                TexteditorPlugin.pluginLog.info(" * -> Completion FObject -> " + obj);
+		            }
+		            
+		            
 		            if (obj != null && obj instanceof FExpression && editor.getMcunit().getTypeChecker() != null) {
 		                Type t = editor.getMcunit().getTypeChecker().getTypeOfExpression((FExpression)obj);
 		                TexteditorPlugin.pluginLog.info(" * Completion for type -> " + t);
 		                if (t != null) {
+	//		                if (((SimpleType)t).getType() instanceof FFunctionType) {
+	//		                    t = t.getFunctionTypeRight();
+	//		                    TexteditorPlugin.pluginLog.info(" * Completion for type -> " + t);
+	//		                }
+		                
+		                
 		                    addPrposalsForFeatureCalls(doc, offset, propList, qualifier.substring(1), t);
 		                }
 		            }
