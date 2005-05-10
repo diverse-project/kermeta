@@ -1,4 +1,4 @@
-/* $Id: OutlineItem.java,v 1.3 2005-05-10 09:08:37 ffleurey Exp $
+/* $Id: OutlineItem.java,v 1.4 2005-05-10 20:38:29 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : OutlineItem.java
 * License : GPL
@@ -10,7 +10,6 @@
 
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
-import java.util.ArrayList;
 
 import org.eclipse.swt.graphics.Image;
 
@@ -54,7 +53,7 @@ public class OutlineItem implements Comparable {
     public String getLabel() {
         if (label == null) {
             try {
-                GetTextVisitor v = new GetTextVisitor(outline);
+                GetTextVisitor v = new GetTextVisitor();
                 label = (String)v.accept(modelElement);
             }
             catch(Throwable t) {

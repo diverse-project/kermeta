@@ -21,6 +21,8 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 
+import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
+
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1

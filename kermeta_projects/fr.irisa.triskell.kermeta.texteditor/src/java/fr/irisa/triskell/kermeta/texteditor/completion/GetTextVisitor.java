@@ -2,14 +2,13 @@
  * Created on 13 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  */
-package fr.irisa.triskell.kermeta.texteditor.outline;
+package fr.irisa.triskell.kermeta.texteditor.completion;
 
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
@@ -60,10 +59,12 @@ class GetTextVisitor extends KermetaVisitor {
 			result += ppTypeVariableDeclaration(node.getFTypeParameter());
 			result += ">";
 		}
+		/*
 		if (node.getFSuperType().size() > 0) {
 			result += " -> ";
 			result += ppComaSeparatedNodes(node.getFSuperType());
 		}
+		*/
 		return result;
 	}
 	

@@ -83,23 +83,23 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 			TexteditorPlugin.pluginLog.warn("error computing hover info", e);
 		}
 		
-		TexteditorPlugin.pluginLog.info("\n *** START HOVER *** offset=" + hoverRegion.getOffset()  + " length=" + hoverRegion.getLength());
+		//TexteditorPlugin.pluginLog.info("\n *** START HOVER *** offset=" + hoverRegion.getOffset()  + " length=" + hoverRegion.getLength());
 		
 		if (editor.mcunit != null && ((KMTUnit)editor.mcunit).getMctAST() != null) {
 		    CompUnit unit = ((KMTUnit)editor.mcunit).getMctAST();
 		    KermetaASTNode astnode = (KermetaASTNode)unit.getNodeAt(hoverRegion.getOffset(), hoverRegion.getLength());
-		    TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
+		   // TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
 		    if (astnode != null) {
 		        
-		        TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
+		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
 		        FObject fobj = getFObjectForNode(astnode);
 		        
 		        if (fobj != null && editor.mcunit.getTypeChecker() != null) {
-		            TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
+		            //TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
 		            if (fobj instanceof FExpression) {
 		                Type t = editor.mcunit.getTypeChecker().getTypeOfExpression((FExpression)fobj);
-		                TexteditorPlugin.pluginLog.info(" * Type -> " + t);
-		                return pp.accept(fobj).toString() + " : " + t.toString();
+		                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
+		                return pp.accept(fobj) + " : " + t;
 		            }
 		            
 		        }
