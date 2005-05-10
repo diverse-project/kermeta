@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.34 2005-05-10 07:32:34 jpthibau Exp $
+/* $Id: BaseInterpreter.java,v 1.35 2005-05-10 09:14:30 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -140,6 +140,14 @@ public class BaseInterpreter extends KermetaVisitor {
 	    return null;
 	}
 	
+	/**
+	 * Returns the RuntimeObject representation of the property specified by 
+	 * <code>propertyName</code>, for the instance specified by <code>ro_target</code>
+	 * @param ro_target The runtime object of which we want the property <code>propertyName</code> 
+	 * @param t_target the type of the object represented by <code>ro_target</code>
+	 * @param propertyName The name of the properties of which we want the value
+	 * @return the RuntimeObject that repr. the value of the property for the given ro_target
+	 */
 	protected RuntimeObject getROProperty(RuntimeObject ro_target, FType t_target, String propertyName)
 	{
 	    RuntimeObject ro_property = null;
@@ -254,30 +262,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	            t_target=(FType)ro_target.getMetaclass().getData().get("kcoreObject");
 
 	            // FIXME : FProperty is assumed to be the type of the feature
-	            
-	            // Find the RuntimeObject corresponding to this fproperty in the Class of ro_target instance
-	            RuntimeObject metaclass = ro_target.getMetaclass();
-	            //Iterator it = (()metaclass.getData().get("CollectionArrayList"));
-	            // Get the classdefinition in the table
-	            RuntimeObject classdef = (RuntimeObject)Run.koFactory.getClassDefTable().get(
-	                    getQualifiedName(((FClass)t_target).getFClassDefinition()));
-	            
-	            RuntimeObject ro_attributes = (RuntimeObject)classdef.getProperties(
-	                    ).get("ownedAttribute");
-	            // Get the RuntimeObject repr. of THE attribute which name is "propertyName"
-	            ArrayList al_attributes = (ArrayList)ro_attributes.getData().get("CollectionArrayList");
-	            Iterator it = al_attributes.iterator();
-	            
-	            while (it.hasNext() && ro_property == null)
-	            {   
-	                RuntimeObject attr = (RuntimeObject)it.next();
-	                String attr_name = ((FProperty)attr.getData().get("kcoreObject")).getFName();
-	                if (attr_name.equals(propertyName))
-	                {
-	                    ro_property = attr;
-	                }
-	            }
-	            
+	            ro_property = this.getROProperty(ro_target, t_target, propertyName);
 	            
 	            // FIXME : ro_property must not be null
 				// Set the value of the property
@@ -761,7 +746,7 @@ public class BaseInterpreter extends KermetaVisitor {
 				{
 				    result=(RuntimeObject)ro_target.getProperties().get(propertyName);
 				}
-				else // the ro_property does not exist yet, we create it (call of Object.get)
+				else // if the ro_property does not exist yet, we create it (call of Object.get)
 				{
 				    RuntimeObject ro_property = getROProperty(ro_target, t_target, propertyName);
 				    // the attribute is not set yet for ro_target instance?
