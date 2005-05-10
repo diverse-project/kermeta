@@ -1,4 +1,4 @@
-/* $Id: Run.java,v 1.24 2005-05-09 14:31:02 zdrey Exp $
+/* $Id: Run.java,v 1.25 2005-05-10 17:50:02 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -14,6 +14,7 @@
  * History :
  * 		- interpreterInstance has become a static attribute of Run 
  * 		- splitted main method in smaller ones
+ * TODO : remove the static attributes
  */
 package fr.irisa.triskell.kermeta.launcher;
 
@@ -128,7 +129,7 @@ public class Run {
 	        System.err.println("\nSTARTING INTERPRETATION OF OPERATION <"+mainOp.getFName()+">");
 	        
 	        long elapsedTime=System.currentTimeMillis();
-	        BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder);
+	        BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder, koFactory);
 	        baseInterpreter.getInterpreterContext().pushNewCallFrame(interpreterInstance, mainOp);
 	        baseInterpreter.getInterpreterContext().getCurrentFrame().pushNewExpressionContext(null);
 	        baseInterpreter.getInterpreterContext().getCurrentFrame().getCurrentExpressionContext().defineVariable(
@@ -212,7 +213,7 @@ public class Run {
 		    // Create the KMMetaBuilder. "Implicitly" builds the memory of the 
 		    // interpreter execution by filling the classDefTable hashtable of the
 		    // (for now static) RuntimeObjectFactory
-		    KMMetaBuilder metaClassesBuilder = new KMMetaBuilder(interpreterbuilder);
+		    KMMetaBuilder metaClassesBuilder = new KMMetaBuilder(interpreterbuilder, koFactory);
 		    //						metaClassesBuilder.ppPackage(interpreterbuilder);
 		    //						KMMetaBuilder.processParametricTypes();
 		    
@@ -227,7 +228,7 @@ public class Run {
 		    selfINSTANCE=Run.koFactory.createRuntimeObject(roSelfType);
 		    
 		    // Construct the RuntimeObject representation of the source code 
-		    KMBuilderPass1 builderPass1 = new KMBuilderPass1(interpreterbuilder);
+		    KMBuilderPass1 builderPass1 = new KMBuilderPass1(interpreterbuilder, koFactory);
 		    builderPass1.ppPackage(interpreterbuilder);
 		    // Create the stdio default variable and push it in the interpreter context
 		    // to ensure any program may use stdio.print(...) and stdio.read("prompt>")
@@ -261,7 +262,7 @@ public class Run {
 		{
 		    internalLog.info("model "+modelName+" loaded successfully !");
 		    
-		    KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1(builder);
+		    KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1(builder, koFactory);
 		    
 		    classesBuilderPass1.ppPackage(builder);
 		    FPackage rootPackage=builder.rootPackage;
