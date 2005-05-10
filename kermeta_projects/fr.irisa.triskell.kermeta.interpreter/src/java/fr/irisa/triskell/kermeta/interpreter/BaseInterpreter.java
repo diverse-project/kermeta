@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.36 2005-05-10 11:29:49 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.37 2005-05-10 17:48:39 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -80,32 +80,21 @@ public class BaseInterpreter extends KermetaVisitor {
      * The main unit
      */
     protected KermetaUnit unit;
-
+    protected RuntimeObjectFactory roFactory;
     
     /**
      * Constructor
      * @param pContext
      * @param unit the main kermetaUnit ..
      */
-    public BaseInterpreter(InterpreterContext pContext, KermetaUnit pUnit)
+    public BaseInterpreter(InterpreterContext pContext, KermetaUnit pUnit, RuntimeObjectFactory pFactory)
     {
         interpreterContext = pContext;
         unit = pUnit;
+        roFactory = pFactory; 
     }
 
-    /**
-     * 
-     * @uml.property name="usings" multiplicity="(0 1)"
-     */
-    protected ArrayList usings = new ArrayList();
-
-    /**
-     * 
-     * @uml.property name="imports" multiplicity="(0 1)"
-     */
-    protected ArrayList imports = new ArrayList();
-
-	protected String root_pname;
+    protected String root_pname;
 	protected String current_pname;
 	
 	protected boolean typedef = false;
@@ -155,7 +144,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	    RuntimeObject metaclass = ro_target.getMetaclass();
 	    //Iterator it = (()metaclass.getData().get("CollectionArrayList"));
 	    // Get the classdefinition in the table
-	    RuntimeObject classdef = (RuntimeObject)Run.koFactory.getClassDefTable().get(
+	    RuntimeObject classdef = (RuntimeObject)roFactory.getClassDefTable().get(
 	            getQualifiedName(((FClass)t_target).getFClassDefinition()));
 	    
 	    RuntimeObject ro_attributes = (RuntimeObject)classdef.getProperties(
@@ -351,7 +340,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	    // We only visit the definition of a lambda expression
 	    else
 	    {
-	        result = new RuntimeLambdaObject(Run.koFactory, node);
+	        result = new RuntimeLambdaObject(roFactory, node);
 		    // Special handling for a lambda'exp parameters : 
 		    // We don't need a runtimeObject for each of them
 		    //ArrayList params = visitList(node.getFParameters());
@@ -398,7 +387,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	        variable_value = found_context.getVariable(node.getFName()).getRuntimeObject();
 	    else
 	    	// TODO
-	    	System.err.println("Var not declared");
+	    	System.err.println("Var not declared : " + node.getFName());
 	    
 	    // If the variable contains parameters, i.e, if it is a LambdaExpression call
 	    // then we have to assign the lambda params to the values defined in FParameters
@@ -671,24 +660,24 @@ public class BaseInterpreter extends KermetaVisitor {
 			if (ro_target==null) {
 				//this integer literal comes from kermeta language definition (see uminus)
 				//as languages definitions are not processed as programs, we have to create a ro for the literal
-				ro_target= fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(((FIntegerLiteral)target).getFValue(),Run.koFactory);
+				ro_target= fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(((FIntegerLiteral)target).getFValue(),roFactory);
 				Run.correspondanceTable.put(target,ro_target);
 			}
-			RuntimeObject integerClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::Integer");
+			RuntimeObject integerClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::Integer");
 			t_target=(FType)integerClassRO.getData().get("kcoreObject");
 		}
 		
 		else if (FStringLiteral.class.isInstance(target)) {
 		    isFeatured = true;
 		    ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
-		    RuntimeObject stringClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::String");
+		    RuntimeObject stringClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::String");
 		    t_target=(FType)stringClassRO.getData().get("kcoreObject");
 		}
 		
 		else if (FBooleanLiteral.class.isInstance(target)) {
 		    isFeatured = true;
 		    ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
-		    RuntimeObject booleanClassRO=Run.koFactory.getTypeDefinitionByName("kermeta::standard::Boolean");
+		    RuntimeObject booleanClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::Boolean");
 		    t_target=(FType)booleanClassRO.getData().get("kcoreObject");
 		}
 		// If target is a CallVariable :
@@ -778,11 +767,11 @@ public class BaseInterpreter extends KermetaVisitor {
 		    if (FClass.class.isInstance(type))
 		    {
 /*		        FClassDefinition class_def = ((FClass)type).getFClassDefinition();
-		        RuntimeObject runtimeClass=(RuntimeObject)Run.koFactory.getClassDefTable().get(KMReflect.getQualifiedName(class_def));*/
+		        RuntimeObject runtimeClass=(RuntimeObject)roFactory.getClassDefTable().get(KMReflect.getQualifiedName(class_def));*/
 		    	RuntimeObject runtimeClass=(RuntimeObject)Run.correspondanceTable.get(type);
 		    	if (runtimeClass==null)
 		    		System.err.println("ERROR => no runtime class to instanciate.");
-		        result = Run.koFactory.createRuntimeObject(runtimeClass);
+		        result = roFactory.createRuntimeObject(runtimeClass);
 		    }
 		    // Is it an enum literal? result -> a RO which type is an enumliteral
 		    else if (FEnumeration.class.isInstance(target))
@@ -888,7 +877,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FIntegerLiteral) 
 	 */
 	public Object visit(FIntegerLiteral node) {
-	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue(), Run.koFactory);
+	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue(), roFactory);
 	}
 	
 	/**
@@ -896,7 +885,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral) 
 	 */
 	public Object visit(FBooleanLiteral node) {
-	    return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(node.isFValue(),Run.koFactory);
+	    return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(node.isFValue(),roFactory);
 	}
 	
 	public Object visit(FEnumerationLiteral node)
@@ -909,7 +898,7 @@ public class BaseInterpreter extends KermetaVisitor {
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FStringLiteral)
      */
     public Object visit(FStringLiteral node) {
-        return fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue(), Run.koFactory);
+        return fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue(), roFactory);
     }
 	/**
 	 * Visit a classDefinition node has the following consequences :
@@ -919,7 +908,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	{
 	    // Get the qualified name of this class
 	    String qname = KMReflect.getQualifiedName(node);
-	    RuntimeObject result = Run.koFactory.getTypeDefinitionByName(qname);
+	    RuntimeObject result = roFactory.getTypeDefinitionByName(qname);
 	    //node.getFOwnedOperation().
 	    // Set the attribute self_object of current frame, so that we can manipulate it
 	    return result;
@@ -989,24 +978,6 @@ public class BaseInterpreter extends KermetaVisitor {
 		}
 		return result_list;
 	}
-
-    /**
-     * @return Returns the imports.
-     * 
-     * @uml.property name="imports"
-     */
-    public ArrayList getImports() {
-        return imports;
-    }
-
-    /**
-     * @return Returns the usings.
-     * 
-     * @uml.property name="usings"
-     */
-    public ArrayList getUsings() {
-        return usings;
-    }
 
 	/**
 	 * Get the fully qualified name of an FNamedElemenet
