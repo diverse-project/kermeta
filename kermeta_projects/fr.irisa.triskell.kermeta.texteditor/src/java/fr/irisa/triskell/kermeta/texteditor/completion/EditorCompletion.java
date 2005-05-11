@@ -19,6 +19,8 @@ import org.eclipse.swt.graphics.Point;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.ast.KermetaTokenNode;
+import fr.irisa.triskell.kermeta.ast.ParamPostfix;
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
@@ -77,7 +79,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 			TexteditorPlugin.pluginLog.info(" * Completion unit -> " + unit);
 			
 		    if (unit != null) {
-		        KermetaASTNode astnode = (KermetaASTNode)unit.getNodeAt(offset - qualifier.length(), 0);
+		        KermetaASTNode astnode = getNodeForOffset(doc, offset, qualifier);
 		        TexteditorPlugin.pluginLog.info(" * Completion astnode -> " + astnode);
 		        
 		        if (astnode != null) {
@@ -112,9 +114,6 @@ public class EditorCompletion implements IContentAssistProcessor {
 		    
 		}
 		
-		
-		
-		
 		/*
 		if (qualifier.equals("")) {
 			addPrposalsForKW(doc, offset, propList, qualifier);
@@ -132,6 +131,18 @@ public class EditorCompletion implements IContentAssistProcessor {
 		propList.toArray(proposals);
 		// Return the proposals
 		return proposals;
+	}
+	
+	private KermetaASTNode getNodeForOffset(IDocument doc, int offset, String qualifier) {
+	    CompUnit unit = ((KMTUnit)editor.getMcunit()).getMctAST();
+	    if (unit == null) return null;
+	    KermetaASTNode result = (KermetaASTNode)unit.getNodeAt(offset - qualifier.length(), 0);
+	    if (result == null) return null;
+	    // FIX CALL WITH PARAMS
+	    if (result.isTokenNode() && result.getText().equals(")") && result.getParent() instanceof ParamPostfix) {
+	        result = (KermetaASTNode)unit.getNodeAt(result.getParent().getRangeStart()-1, 0);
+	    }
+	    return result;
 	}
 	
 	 private FObject getFObjectForNode(KermetaASTNode node) {
