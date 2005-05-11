@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass2.java,v 1.2 2005-03-25 16:37:43 jpthibau Exp $
+/* $Id: KMBuilderPass2.java,v 1.3 2005-05-11 09:31:58 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -28,6 +28,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 
+import fr.irisa.triskell.kermeta.ast.Property;
 import fr.irisa.triskell.kermeta.behavior.*;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.reflect.KMReflect;
@@ -43,21 +44,93 @@ import fr.irisa.triskell.kermeta.interpreter.Interpreter;
 import fr.irisa.triskell.kermeta.launcher.Run;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 
 
 
 /**
- *
+ * Pass that sets the opposite properties
  */
 public class KMBuilderPass2 extends KermetaVisitor {
 
-	//TODO ?
+    
+    protected KermetaUnit unit;
+    protected RuntimeObjectFactory roFactory;
+    protected RuntimeObject currentClassDef;
 	
+    public KMBuilderPass2(KermetaUnit pUnit, RuntimeObjectFactory pFactory)
+    {
+        this.unit = pUnit;
+        this.roFactory = pFactory;
+    }
+    
+    
+    
+    /**
+     * Get the Runtime Object representation of the property specified by its name.
+     *   
+     * @return
+     */
+    public RuntimeObject findROPropertyByName(String pname, RuntimeObject classdef)
+	{
+        // Get the class Definition that contains it
+        RuntimeObject result = null; 
+        RuntimeObject propROList=(RuntimeObject)classdef.getProperties().get("ownedAttribute");
+        ArrayList propAList = (ArrayList)propROList.getData().get("CollectionArrayList");
+        // Get the property named "pname" in the list of ownedAttributes of this class
+        int i = 0;
+        while (i<propAList.size() && result == null)
+        { 
+            if (((RuntimeObject)propAList.get(i)).getProperties().get("name").equals(pname))
+                result = (RuntimeObject)propAList.get(i); 
+            i++;
+        }
+	    return result;
+	}
+	
+    
+    public Object visit(FClassDefinition node)
+    {
+        this.currentClassDef = roFactory.getTypeDefinitionByName(node.getFName());
+        return null;
+    }
+
+    
+    
 	/*
 	 * manage property <-> ooposite property link for runtimeObjects
 	 * 
 	 * similar to KMBuilderPass1, where link is done at TODO in KMBuilderPasss1
 	 * Build only the link opposite, All other buildings are already done in Pass1 !
 	 */
+	/**
+	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Property)
+	 */
+	public Object visit(FProperty node)
+	{
+	    if (node.getFOpposite() != null) {
+		    
+		    // Get the RO representation of this property
+	        RuntimeObject roproperty = findROPropertyByName(node.getFName(), this.currentClassDef); 
+		    
+		    // Get the name of this property's opposite
+	        // The opposite property already exists as a String in the properties of the Runtime Object
+	        // property. We convert here this String into the corresponding
+	        // Runtime Object.
+	        String opname = (String)roproperty.getProperties().get("opposite");
+		    
+		    // Get the class definition of the current property 
+	        FClassDefinition classdef = ((FClass)node.getFType()).getFClassDefinition();
+	        // ClassDefinition as a RO
+		    RuntimeObject roclassdef = roFactory.getTypeDefinitionByName(unit.getQualifiedName(classdef));
+		    // Get the Runtime representation of this property, from its name
+		    RuntimeObject oppositeproperty = findROPropertyByName(opname, roclassdef);
+		    // Set the "opposite" property in the Hashtable to this ROproperty
+		    roproperty.getProperties().put("opposite", oppositeproperty);
+		}
+		return null;
+	}
+    
+    
 }
 
