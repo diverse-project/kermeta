@@ -1,4 +1,4 @@
-/* $Id: TestJavaCall.java,v 1.3 2005-05-02 09:00:23 jpthibau Exp $
+/* $Id: TestJavaCall.java,v 1.4 2005-05-12 08:22:54 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
  * License    : GPL
@@ -21,6 +21,7 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -31,10 +32,19 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  *
  */
 public class TestJavaCall extends TestCase{
+    
     final static public Logger internalLog = LogConfigurationHelper.getLogger("test.JavaCall");
 	
     static private int callCounter = 0;
     static private int lastCallCounter = 0;
+    
+    // FIXME : should not be static!
+    public static RuntimeObjectFactory roFactory;
+    
+    public TestJavaCall(RuntimeObjectFactory pFactory)
+    {
+        roFactory = pFactory;
+    }
     
     /**  Implementation of method simple called as : <br>
 	 * extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.simpleCall();
@@ -48,24 +58,24 @@ public class TestJavaCall extends TestCase{
         internalLog.info("callBooleanReturn was called");
 
         callCounter++;
-        return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(true,Run.koFactory);
+        return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(true,roFactory);
 	}
     public static RuntimeObject callIntegerReturn() {
         internalLog.info("callIntegerReturn was called");
         //  Long way
-        // RuntimeObject result = Run.koFactory.createObjectFromClassName("kermeta::standard::Integer");
+        // RuntimeObject result = roFactory.createObjectFromClassName("kermeta::standard::Integer");
         // fr.irisa.triskell.kermeta.runtime.basetypes.Integer.setValue(result, 777);
         // return result;
         
         // short way
         callCounter++;
-        return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(777,Run.koFactory);
+        return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(777,roFactory);
 	}
 
     public static RuntimeObject callStringReturn() {
         internalLog.info("callStringReturn was called");
         callCounter++;
-        return fr.irisa.triskell.kermeta.runtime.basetypes.String.create("Hello world",Run.koFactory);
+        return fr.irisa.triskell.kermeta.runtime.basetypes.String.create("Hello world",roFactory);
 	}
 
     public static RuntimeObject callOneIntegerParam(RuntimeObject param0) {
