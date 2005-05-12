@@ -1,4 +1,4 @@
-/* $Id: KMBuilderPass2.java,v 1.3 2005-05-11 09:31:58 zdrey Exp $
+/* $Id: KMBuilderPass2.java,v 1.4 2005-05-12 08:19:45 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -55,15 +55,14 @@ public class KMBuilderPass2 extends KermetaVisitor {
 
     
     protected KermetaUnit unit;
-    protected RuntimeObjectFactory roFactory;
+    protected RuntimeMemory memory;
     protected RuntimeObject currentClassDef;
 	
-    public KMBuilderPass2(KermetaUnit pUnit, RuntimeObjectFactory pFactory)
+    public KMBuilderPass2(KermetaUnit pUnit, RuntimeMemory pMem)
     {
         this.unit = pUnit;
-        this.roFactory = pFactory;
+        this.memory = pMem;
     }
-    
     
     
     /**
@@ -91,7 +90,7 @@ public class KMBuilderPass2 extends KermetaVisitor {
     
     public Object visit(FClassDefinition node)
     {
-        this.currentClassDef = roFactory.getTypeDefinitionByName(node.getFName());
+        this.currentClassDef = memory.getROFactory().getTypeDefinitionByName(node.getFName());
         return null;
     }
 
@@ -122,7 +121,7 @@ public class KMBuilderPass2 extends KermetaVisitor {
 		    // Get the class definition of the current property 
 	        FClassDefinition classdef = ((FClass)node.getFType()).getFClassDefinition();
 	        // ClassDefinition as a RO
-		    RuntimeObject roclassdef = roFactory.getTypeDefinitionByName(unit.getQualifiedName(classdef));
+		    RuntimeObject roclassdef = memory.getROFactory().getTypeDefinitionByName(unit.getQualifiedName(classdef));
 		    // Get the Runtime representation of this property, from its name
 		    RuntimeObject oppositeproperty = findROPropertyByName(opname, roclassdef);
 		    // Set the "opposite" property in the Hashtable to this ROproperty

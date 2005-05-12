@@ -1,4 +1,4 @@
-/* $Id: KMMetaBuilder.java,v 1.16 2005-05-10 17:50:39 zdrey Exp $
+/* $Id: KMMetaBuilder.java,v 1.17 2005-05-12 08:19:46 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -46,40 +46,30 @@ public class KMMetaBuilder {
 
 	//memorize processed units to avoid loop in exploration
 	protected List processedUnits;
-	protected static RuntimeObjectFactory roFactory;
+	protected RuntimeLoader runtimeLoader;
+	// The KermetaUnit to load
+	private KermetaUnit unit;
+	// The runtime memory
+	private RuntimeMemory memory;
+	
 
-	
-	/** 
-	 * Build all metaclasses RuntimeObjects from the given unit and
-	 * units required from it.
-	 * @param node a FClassDefinition, or a FClass?
-	 * @param nodeMetaClass
-	 */
-	public static RuntimeObject createROFromClassDef(FObject node,RuntimeObject nodeMetaclass)
-	{
-		RuntimeObject ro_node=nodeMetaclass.getFactory().createRuntimeObject(nodeMetaclass);
-		Hashtable data=new Hashtable();
-		if (node instanceof FClassDefinition) {
-		    // Create an 
-			FClass fClass=Run.interpreterbuilder.struct_factory.createFClass();
-			fClass.setFClassDefinition((FClassDefinition)node);
-			data.put("kcoreObject",fClass);
-			Run.correspondanceTable.put(fClass,ro_node);
-		}
-		else {
-			data.put("kcoreObject",node);
-			Run.correspondanceTable.put(node,ro_node);
-		}
-		ro_node.setData(data);
-		return ro_node;
-	}
-	
-	public KMMetaBuilder(KermetaUnit unit, RuntimeObjectFactory pFactory)
+
+	public KMMetaBuilder(KermetaUnit pUnit, RuntimeLoader pLoader)
 	{
 		this.processedUnits=new ArrayList();
-	    this.roFactory = pFactory;
+		this.runtimeLoader = pLoader;
+		this.unit = pUnit;
+	    this.memory = runtimeLoader.runtimeMemory;
+	
+	}
+	
+	/**
+	 * Load all the class definitions and process the parametric types O:)
+	 */
+	public void load()
+	{
 		unitsExplorer(unit);
-		processParametricTypes();
+		processParametricTypes();    
 	}
 	
 	/**
@@ -92,6 +82,7 @@ public class KMMetaBuilder {
 	public void unitsExplorer(KermetaUnit unit) {
 		this.processedUnits.add(unit);
 		Iterator it=unit.importedUnits.iterator();
+		RuntimeObjectFactory roFactory = memory.getROFactory();
 		while(it.hasNext()) {
 			KermetaUnit importedUnit=(KermetaUnit)it.next();
 			if (!this.processedUnits.contains(importedUnit))
@@ -105,15 +96,18 @@ public class KMMetaBuilder {
 			else {
 				FTypeDefinition typedef=unit.getTypeDefinitionByName(typeName);
 				if (typedef instanceof FClassDefinition || typedef instanceof FPrimitiveType) {
-					roFactory.getClassDefTable().put(typeName,createROFromClassDef(typedef,roFactory.getClassClass()));
-					//System.out.println(typeName);
+					roFactory.getClassDefTable().put(typeName,runtimeLoader.createROFromClassDef(typedef,roFactory.getClassClass()));
 				}
 				else System.err.println("KMMetaBuilder: not a good typedef kind =>"+typedef);
 			}
 		}
 	}
 	
+	/**
+	 * Add the type parameters to all the parametric classes
+	 */
 	public void processParametricTypes() {
+		RuntimeObjectFactory roFactory = memory.getROFactory();
 		Iterator it=roFactory.getClassDefTable().keySet().iterator();
 		while (it.hasNext()) {
 			RuntimeObject type=(RuntimeObject)roFactory.getClassDefTable().get(it.next());
@@ -127,10 +121,15 @@ public class KMMetaBuilder {
 			}
 		}
 	}
-	public static void addTypeParameters(RuntimeObject classNode,EList FTypeParameters) {
+	
+	/**
+	 * Add the type parameters in the list of ftypeParameters to the given <code>classNode</code>
+	 */
+	public void addTypeParameters(RuntimeObject classNode,EList fTypeParameters) {
+		RuntimeObjectFactory roFactory = memory.getROFactory();
 		RuntimeObject typeParams=Collection.createCollection((RuntimeObject)roFactory.getClassDefTable().get("kermeta::language::structure::Parameter"));
 //		RuntimeObject typeVarMC=(RuntimeObject)roFactory.getClassDefTable().get("kermeta::reflection::TypeVariable");
-		Iterator it=FTypeParameters.iterator();
+		Iterator it=fTypeParameters.iterator();
 		while (it.hasNext()) {
 			FTypeVariable tv=(FTypeVariable)it.next();
 			RuntimeObject typeParamNode=roFactory.createTypeVariable(tv);
