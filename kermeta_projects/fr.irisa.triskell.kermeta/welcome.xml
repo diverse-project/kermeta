@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<welcomePage 
+	title="KerMeta">
+
+<intro>Kermeta
+</intro>
+
+<item><b>What is Kermeta?</b>
+
+NOTE:  I don't for sure where this page appears in the deployed application..
+Maybe if we construct a rich client ?
+
+following is a sample of welcome page ...
+EclipseUML is a plugin for UML modeling in Eclipse 3.0 
+It can be used both for creating new models and for reverse engineering existing models. 
+This is a release of version 1.0.0 including :  
+- Class diagram (live synchronization between the class diagram and the java code).
+- Sequence diagram.
+- Use-case diagram.
+- Statechart diagram.
+- Collaboration diagram.
+- Activity diagram.
+- Object diagram.
+- Component diagram.
+- Deployment diagram.
+This version also includes a full <topic href="http://www.eclipse.org/emf">EMF</topic> graphical editor.
+</item>
+
+<item><b>Learn More</b>
+This is the official site of EclipseUML: <topic href="http://www.eclipseuml.com/">http://www.eclipseuml.com/</topic>
+</item>
+
+<item><b>Reporting bugs, comments</b>
+If you experience any bug, please let us know.
+Please feel free to send us your comment : support@omondo.com
+For enhancements and other requests, please contact us at eclipseuml@omondo.com. 
+</item>
+
+</welcomePage>

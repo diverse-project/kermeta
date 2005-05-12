@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="fr.irisa.triskell.kermeta"
+   name="Kermeta Workbench"
+   version="0.0.3"
+   provider-name="IRISA/INRIA">
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+   </requires>
+
+</plugin>
