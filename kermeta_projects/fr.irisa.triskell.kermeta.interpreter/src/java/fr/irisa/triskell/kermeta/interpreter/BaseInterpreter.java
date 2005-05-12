@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.39 2005-05-12 08:46:22 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.40 2005-05-12 08:54:14 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -685,7 +685,11 @@ public class BaseInterpreter extends KermetaVisitor {
 		else if (FBooleanLiteral.class.isInstance(target)) {
 		    isFeatured = true;
 		    ro_target=(RuntimeObject)correspondanceTable.get(target);
-		    
+		    if (ro_target==null)
+		    {
+		        ro_target= fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(((FBooleanLiteral)target).isFValue(),roFactory);
+		        correspondanceTable.put(target,ro_target);
+		    }
 		    RuntimeObject booleanClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::Boolean");
 		    t_target=(FType)booleanClassRO.getData().get("kcoreObject");
 		}
