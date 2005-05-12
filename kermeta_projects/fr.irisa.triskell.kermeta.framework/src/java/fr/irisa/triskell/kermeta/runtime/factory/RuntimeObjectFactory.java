@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.8 2005-05-04 14:31:53 zdrey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.9 2005-05-12 08:32:26 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -74,7 +74,7 @@ public class RuntimeObjectFactory {
 	 * to the class Class
 	 * @param classdef the FClassDefinition corresponding to this class
 	 */
-	public void setClassClass(FClass fclass) {
+	public void setClassClassFromFClass(FClass fclass) {
 		class_class = new RuntimeObject(this, null);
 		class_class.setMetaclass(class_class);
 		class_class.setData(new Hashtable());
