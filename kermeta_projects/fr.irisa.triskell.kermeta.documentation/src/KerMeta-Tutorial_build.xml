@@ -233,7 +233,7 @@
 	        <mkdir dir="${project.base.dir}/build/html.help" />
 	</target>
 	<target name="clean.eclipse.help">
-	        <delete dir="${project.base.dir}/build/eclipse.help" failonerror="false" quiet="true" />
+	        <delete dir="${project.base.dir}/build/eclipse.help/${project.name}" failonerror="false" quiet="true" />
 	        <mkdir dir="${project.base.dir}/build/eclipse.help" />
 	</target>
 	
