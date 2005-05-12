@@ -1,0 +1,35 @@
+<project name="KerMeta-Tutorial" default="all">
+	<!-- configuration properties -->
+	
+	<!-- project configuration -->
+	<property name="project.base.dir" location=".."/>
+	<property name="project.name" value="KerMeta-Tutorial"/>
+	<property name="build.dir" location="${project.base.dir}/build"/>
+	<property name="build.docbook.dir" location="${build.dir}/docbook42"/>
+	<property name="OOo.source.dir" location="${project.base.dir}/src/OOo"/>
+	<property name="OOo.source.file" location="${OOo.source.dir}/${project.name}.sxw"/>
+	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>
+	
+	<target name="all" depends="javadoc">
+	</target>
+	
+	<target name="javadoc">
+        <javadoc destdir="${build.dir}\javadoc\KermetaFramework" 
+        	access="private" 
+        	use="true" 
+        	notree="false" 
+        	nonavbar="false" 
+        	noindex="false" 
+        	splitindex="true" 
+        	author="true" 
+        	version="false" 
+        	nodeprecatedlist="false" 
+        	nodeprecated="false" 
+        	packagenames="fr.irisa.triskell.kermeta.runtime.factory,fr.irisa.triskell.kermeta.runtime,fr.irisa.triskell.kermeta.runtime.language,kermeta_framework.test,fr.irisa.triskell.kermeta.dev.framework,fr.irisa.triskell.kermeta.runtime.basetypes,fr.irisa.triskell.kermeta.runtime.testing,fr.irisa.triskell.kermeta.reflect" sourcefiles="../../fr.irisa.triskell.kermeta.framework/src/junit/TestLoadReflection.java" 
+        	sourcepath="../../fr.irisa.triskell.kermeta.framework/src/java;../../fr.irisa.triskell.kermeta.framework/test/junit;../../fr.irisa.triskell.kermeta.framework/src/junit" 
+        	classpath="../../fr.irisa.triskell.kermeta.framework/lib/thirdparty/antlr.jar;C:\eclipse3.0\eclipse\plugins\org.eclipse.emf.common_2.0.1\runtime\common.jar;../../fr.irisa.triskell.kermeta.model/build/class;../../fr.irisa.triskell.kermeta.framework/lib/thirdparty/ldt-core.jar;../../fr.irisa.triskell.kermeta.model/lib/thirdparty/log4j.jar;../../fr.irisa.triskell.kermeta.framework/lib/kermeta_interpreter.jar;../../fr.irisa.triskell.kermeta.framework/lib/io_kermeta.jar;../../fr.irisa.triskell.kermeta.framework/build/class;../../fr.irisa.triskell.kermeta.framework/lib/thirdparty/emfatic-core.jar;C:\eclipse3.0\eclipse\plugins\org.eclipse.emf.ecore.xmi_2.0.1\runtime\ecore.xmi.jar;../../fr.irisa.triskell.kermeta.framework/lib/thirdparty/junit.jar;C:\eclipse3.0\eclipse\plugins\org.eclipse.emf.ecore_2.0.1\runtime\ecore.jar" 
+        	doctitle="Kermeta Java Framework"/>
+    </target>
+
+	
+</project>
