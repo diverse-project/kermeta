@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="fr.irisa.triskell.kermeta.feature"
-      label="fr.irisa.triskell.kermeta.feature"
-      version="0.0.1"
-      provider-name="IRISA/Triskell">
+      id="fr.irisa.triskell.kermeta"
+      label="Kermeta Workbench"
+      version="0.0.4"
+      provider-name="IRISA/Triskell"
+      image="images/kmt_32.gif">
 
    <install-handler/>
 
-   <description url="[Enter Feature URL here.]">
-      [Enter Feature Description here.]
+   <description url="http://www.irisa.fr/triskell/softwares/kermeta/">
+      Kermeta is a meta-modeling language developped by the Triskell
+team at IRISA.
    </description>
 
-   <copyright url="[Enter Copyright URL here.]">
-      [Enter Copyright Description here.]
+   <copyright url="http://www.irisa.fr/triskell/softwares/kermeta/">
+      KerMeta is distributed under the terms of the GPL licence.
    </copyright>
 
-   <license url="[Enter License URL here.]">
-      [Enter License Description here.]
+   <license url="http://www.irisa.fr/triskell/softwares/kermeta/">
+      KerMeta is distributed under the terms of the GPL licence.
    </license>
+
+   <url>
+      <update label="Kermeta update site on Triskell" url="http://www.irisa.fr/triskell/softwares/kermeta/update"/>
+      <discovery label="KerMeta discovery site on Triskell site" url="http://www.irisa.fr/triskell/softwares/kermeta"/>
+   </url>
 
    <requires>
       <import plugin="org.eclipse.ui"/>
@@ -34,15 +41,21 @@
    </requires>
 
    <plugin
-         id="fr.irisa.triskell.kermeta.texteditor"
-         download-size="0"
-         install-size="0"
-         version="0.0.2"/>
-
-   <plugin
          id="fr.irisa.triskell.kermeta.documentation"
          download-size="0"
          install-size="0"
          version="0.0.1"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.texteditor"
+         download-size="0"
+         install-size="0"
+         version="0.0.4"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta"
+         download-size="0"
+         install-size="0"
+         version="0.0.3"/>
 
 </feature>
