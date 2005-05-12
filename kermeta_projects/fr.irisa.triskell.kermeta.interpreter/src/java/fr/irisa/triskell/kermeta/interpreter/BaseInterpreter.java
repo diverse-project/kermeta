@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.38 2005-05-12 08:20:41 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.39 2005-05-12 08:46:22 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -551,9 +551,9 @@ public class BaseInterpreter extends KermetaVisitor {
 	                p.getFType(), p.getFName(), called_param);
 	        i+=1;
 	    }
-	    internalLog.info("Visiting operation '"+node.getFName()+"'"
+	   /* internalLog.info("Visiting operation '"+node.getFName()+"'"
 	            +"\n- with body : " + node.getFBody()
-	            +"\n- with target : "+ node.getFOwningClass().getFName());
+	            +"\n- with target : "+ node.getFOwningClass().getFName());*/
 	    this.accept(node.getFBody());
 	    // Visit raised Exception if any
 //	    visitList(node.getFRaisedException());
@@ -641,7 +641,6 @@ public class BaseInterpreter extends KermetaVisitor {
 		else if (FCallFeature.class.isInstance(target))
 		{
 		    isFeatured = true;
-		    System.err.println("ro_target = "+((FCallFeature)target).getFName());
 		    ro_target = (RuntimeObject)this.accept(target);
 		    RuntimeObject metaClass=ro_target.getMetaclass();
 		    if (metaClass.getData()!=null)
@@ -686,6 +685,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		else if (FBooleanLiteral.class.isInstance(target)) {
 		    isFeatured = true;
 		    ro_target=(RuntimeObject)correspondanceTable.get(target);
+		    
 		    RuntimeObject booleanClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::Boolean");
 		    t_target=(FType)booleanClassRO.getData().get("kcoreObject");
 		}
@@ -775,9 +775,9 @@ public class BaseInterpreter extends KermetaVisitor {
 		    FType type = ((FTypeLiteral)target).getFTyperef().getFType();
 		    if (FClass.class.isInstance(type))
 		    {
-/*		        FClassDefinition class_def = ((FClass)type).getFClassDefinition();
-		        RuntimeObject runtimeClass=(RuntimeObject)roFactory.getClassDefTable().get(KMReflect.getQualifiedName(class_def));*/
-		    	RuntimeObject runtimeClass=(RuntimeObject)correspondanceTable.get(type);
+		        FClassDefinition class_def = ((FClass)type).getFClassDefinition();
+		        RuntimeObject runtimeClass=(RuntimeObject)roFactory.getClassDefTable().get(KMReflect.getQualifiedName(class_def));
+		        
 		    	if (runtimeClass==null)
 		    		System.err.println("ERROR => no runtime class to instanciate.");
 		        result = roFactory.createRuntimeObject(runtimeClass);
