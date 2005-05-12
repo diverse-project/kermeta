@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.37 2005-05-10 17:48:39 zdrey Exp $
+/* $Id: BaseInterpreter.java,v 1.38 2005-05-12 08:20:41 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EObject;
 import fr.irisa.triskell.kermeta.ast.FSelfCall;
 import fr.irisa.triskell.kermeta.behavior.*;
 import fr.irisa.triskell.kermeta.builder.KMBuilderPass1;
+import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.structure.*;
@@ -64,10 +65,6 @@ public class BaseInterpreter extends KermetaVisitor {
      * Not the same as FOperation, which is visited only when it is invoked
      * */
     protected boolean isLambdaExpressionCall = false;
-    
-    public InterpreterContext getInterpreterContext() {
-    	return this.interpreterContext;
-    }
 
     /**
      * The current ExpressionContext (entity in the CallFrame stack of contexts)
@@ -80,19 +77,8 @@ public class BaseInterpreter extends KermetaVisitor {
      * The main unit
      */
     protected KermetaUnit unit;
-    protected RuntimeObjectFactory roFactory;
-    
-    /**
-     * Constructor
-     * @param pContext
-     * @param unit the main kermetaUnit ..
-     */
-    public BaseInterpreter(InterpreterContext pContext, KermetaUnit pUnit, RuntimeObjectFactory pFactory)
-    {
-        interpreterContext = pContext;
-        unit = pUnit;
-        roFactory = pFactory; 
-    }
+    protected RuntimeMemory memory;
+   
 
     protected String root_pname;
 	protected String current_pname;
@@ -100,6 +86,19 @@ public class BaseInterpreter extends KermetaVisitor {
 	protected boolean typedef = false;
     private RuntimeObject current_runtimeLambdaObject;
     private FOperation current_operation = null;
+
+    
+    /**
+     * Constructor
+     * @param pContext
+     * @param unit the main kermetaUnit ..
+     */
+    public BaseInterpreter(InterpreterContext pContext, KermetaUnit pUnit, RuntimeMemory pMemory)
+    {
+        interpreterContext = pContext;
+        unit = pUnit;
+        memory = pMemory; 
+    }
 	
 	/***
 	 * A variable declaration : when we encounter it, we add it to the expression context
@@ -144,7 +143,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	    RuntimeObject metaclass = ro_target.getMetaclass();
 	    //Iterator it = (()metaclass.getData().get("CollectionArrayList"));
 	    // Get the classdefinition in the table
-	    RuntimeObject classdef = (RuntimeObject)roFactory.getClassDefTable().get(
+	    RuntimeObject classdef = (RuntimeObject)memory.getROFactory().getClassDefTable().get(
 	            getQualifiedName(((FClass)t_target).getFClassDefinition()));
 	    
 	    RuntimeObject ro_attributes = (RuntimeObject)classdef.getProperties(
@@ -340,7 +339,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	    // We only visit the definition of a lambda expression
 	    else
 	    {
-	        result = new RuntimeLambdaObject(roFactory, node);
+	        result = new RuntimeLambdaObject(memory.getROFactory(), node);
 		    // Special handling for a lambda'exp parameters : 
 		    // We don't need a runtimeObject for each of them
 		    //ArrayList params = visitList(node.getFParameters());
@@ -586,6 +585,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 */
 	public Object invoke(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
 		RuntimeObject result=null;
+		RuntimeObjectFactory roFactory = memory.getROFactory(); 
         // Create a context for this operation call, setting self object to ro_target
         interpreterContext.pushNewCallFrame(ro_target, foperation);
         interpreterContext.getCurrentFrame().setParameters(arguments);
@@ -606,6 +606,8 @@ public class BaseInterpreter extends KermetaVisitor {
 	public Object visit(FCallFeature node) {
 	    boolean isFeatured = false;
 	    FExpression target = node.getFTarget();
+		RuntimeObjectFactory roFactory = memory.getROFactory(); 
+		Hashtable correspondanceTable = memory.getCorrespondanceTable();
 	    FType t_target = null; // Type of the "callee"
 	    RuntimeObject result = null; // The result to be returned by this visit
 	    RuntimeObject ro_target = null; // Runtime repr. of target
@@ -639,6 +641,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		else if (FCallFeature.class.isInstance(target))
 		{
 		    isFeatured = true;
+		    System.err.println("ro_target = "+((FCallFeature)target).getFName());
 		    ro_target = (RuntimeObject)this.accept(target);
 		    RuntimeObject metaClass=ro_target.getMetaclass();
 		    if (metaClass.getData()!=null)
@@ -656,12 +659,12 @@ public class BaseInterpreter extends KermetaVisitor {
 		
 		else if (FIntegerLiteral.class.isInstance(target)) {
 		    isFeatured = true;
-			ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
+			ro_target=(RuntimeObject)correspondanceTable.get(target);
 			if (ro_target==null) {
 				//this integer literal comes from kermeta language definition (see uminus)
 				//as languages definitions are not processed as programs, we have to create a ro for the literal
 				ro_target= fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(((FIntegerLiteral)target).getFValue(),roFactory);
-				Run.correspondanceTable.put(target,ro_target);
+				correspondanceTable.put(target,ro_target);
 			}
 			RuntimeObject integerClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::Integer");
 			t_target=(FType)integerClassRO.getData().get("kcoreObject");
@@ -669,14 +672,20 @@ public class BaseInterpreter extends KermetaVisitor {
 		
 		else if (FStringLiteral.class.isInstance(target)) {
 		    isFeatured = true;
-		    ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
-		    RuntimeObject stringClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::String");
-		    t_target=(FType)stringClassRO.getData().get("kcoreObject");
+		    ro_target=(RuntimeObject)correspondanceTable.get(target);
+		    if (ro_target==null) {
+				//this integer literal comes from kermeta language definition (see uminus)
+				//as languages definitions are not processed as programs, we have to create a ro for the literal
+				ro_target= fr.irisa.triskell.kermeta.runtime.basetypes.String.create(((FStringLiteral)target).getFValue(),roFactory);
+				correspondanceTable.put(target,ro_target);
+			}
+			RuntimeObject stringClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::String");
+			t_target=(FType)stringClassRO.getData().get("kcoreObject");
 		}
 		
 		else if (FBooleanLiteral.class.isInstance(target)) {
 		    isFeatured = true;
-		    ro_target=(RuntimeObject)Run.correspondanceTable.get(target);
+		    ro_target=(RuntimeObject)correspondanceTable.get(target);
 		    RuntimeObject booleanClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::Boolean");
 		    t_target=(FType)booleanClassRO.getData().get("kcoreObject");
 		}
@@ -768,7 +777,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		    {
 /*		        FClassDefinition class_def = ((FClass)type).getFClassDefinition();
 		        RuntimeObject runtimeClass=(RuntimeObject)roFactory.getClassDefTable().get(KMReflect.getQualifiedName(class_def));*/
-		    	RuntimeObject runtimeClass=(RuntimeObject)Run.correspondanceTable.get(type);
+		    	RuntimeObject runtimeClass=(RuntimeObject)correspondanceTable.get(type);
 		    	if (runtimeClass==null)
 		    		System.err.println("ERROR => no runtime class to instanciate.");
 		        result = roFactory.createRuntimeObject(runtimeClass);
@@ -855,6 +864,7 @@ public class BaseInterpreter extends KermetaVisitor {
 		        else
 		        {
 		            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+		            
 					throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
 		        }
             
@@ -877,7 +887,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FIntegerLiteral) 
 	 */
 	public Object visit(FIntegerLiteral node) {
-	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue(), roFactory);
+	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue(), memory.getROFactory());
 	}
 	
 	/**
@@ -885,7 +895,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral) 
 	 */
 	public Object visit(FBooleanLiteral node) {
-	    return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(node.isFValue(),roFactory);
+	    return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(node.isFValue(),memory.getROFactory());
 	}
 	
 	public Object visit(FEnumerationLiteral node)
@@ -898,7 +908,8 @@ public class BaseInterpreter extends KermetaVisitor {
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FStringLiteral)
      */
     public Object visit(FStringLiteral node) {
-        return fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue(), roFactory);
+        RuntimeObject result = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue(), memory.getROFactory());
+        return result;
     }
 	/**
 	 * Visit a classDefinition node has the following consequences :
@@ -908,7 +919,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	{
 	    // Get the qualified name of this class
 	    String qname = KMReflect.getQualifiedName(node);
-	    RuntimeObject result = roFactory.getTypeDefinitionByName(qname);
+	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
 	    //node.getFOwnedOperation().
 	    // Set the attribute self_object of current frame, so that we can manipulate it
 	    return result;
@@ -1168,6 +1179,12 @@ public class BaseInterpreter extends KermetaVisitor {
         }
         System.out.print(" ]");
     }
+    
+    
+    public InterpreterContext getInterpreterContext() {
+    	return this.interpreterContext;
+    }
+
     
 }
 
