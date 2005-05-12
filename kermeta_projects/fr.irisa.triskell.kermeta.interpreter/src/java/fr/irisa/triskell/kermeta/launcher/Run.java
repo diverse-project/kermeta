@@ -1,4 +1,4 @@
-/* $Id: Run.java,v 1.25 2005-05-10 17:50:02 zdrey Exp $
+/* $Id: Run.java,v 1.26 2005-05-12 08:21:36 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -26,6 +26,8 @@ import org.apache.log4j.Logger;
 
 import fr.irisa.triskell.kermeta.builder.KMBuilderPass1;
 import fr.irisa.triskell.kermeta.builder.KMMetaBuilder;
+import fr.irisa.triskell.kermeta.builder.RuntimeLoader;
+import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaError;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.BaseInterpreter;
@@ -51,34 +53,14 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  */
 public class Run {
 	
-    /**
-     * The runtime object factory used to create RuntimeObjects
-     * */
-	public static RuntimeObjectFactory koFactory=null;
-	/**
-	 * The correspondance table from where we get IntegerLiterals, 
-	 * StringLiterals, and RealLiterals.
-	 * - key type is FObject
-	 * - value type is corresponding RuntimeObject
-	 */
-	public static Hashtable correspondanceTable=null;
+
 	/** metametaClass : is the class  "Class"*/
 	public static RuntimeObject metametaClass=null;
-	/** self, void, in, out are singletons */
-	public static RuntimeObject selfINSTANCE=null;
-	public static RuntimeObject voidINSTANCE=null;
-	public static RuntimeObject stdioINSTANCE=null;
-	/** the RuntimeObject of the Interpreter */
-	public static Interpreter theInterpreter=null;
-	/** The kermeta unit of the interpreter.kmt file */
-	public static KermetaUnit interpreterbuilder=null;
+	
 	/** The runtime object corresponding to the instance of the Interpreter */
-	public static RuntimeObject interpreterInstance=null;
+	public RuntimeObject interpreterInstance;
 	/** Logger to get the error of this launcher */
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
-
-	/** The FClass of stdio singleton - TODO : move it somewhere else? */
-	public static FClass stdioFClass = null;
 
 
 	protected String mainClassValue=null;
@@ -88,6 +70,7 @@ public class Run {
 	
 	
 	public KermetaUnit builder;
+	public RuntimeLoader runtimeLoader;
 	
 	protected boolean isInterpreterInitialized=false;
 	protected String[] args;
@@ -95,10 +78,9 @@ public class Run {
 	public Run(String[] theargs)
 	{
 	    super();
-	    // Init						
-		
+	    // Init the loader. It also *initializes* the runtime memory of the execution process.
+		runtimeLoader = new RuntimeLoader();
 	    args = theargs;
-		
 	}
 	
 	
@@ -126,14 +108,18 @@ public class Run {
 	    }
 	    try
 	    {
-	        System.err.println("\nSTARTING INTERPRETATION OF OPERATION <"+mainOp.getFName()+">");
+	        System.err.println("\nSTARTING INTERPRETATION OF OPERATION <"+mainOp.getFName()+">"+roMainClassInstance);
+	        
 	        
 	        long elapsedTime=System.currentTimeMillis();
-	        BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder, koFactory);
+	        RuntimeMemory runtimeMemory = runtimeLoader.getRuntimeMemory();
+	        BaseInterpreter baseInterpreter=new BaseInterpreter(new InterpreterContext(),builder, runtimeMemory);
 	        baseInterpreter.getInterpreterContext().pushNewCallFrame(interpreterInstance, mainOp);
 	        baseInterpreter.getInterpreterContext().getCurrentFrame().pushNewExpressionContext(null);
+	        // FIXME : here, stdioFClass is null
 	        baseInterpreter.getInterpreterContext().getCurrentFrame().getCurrentExpressionContext().defineVariable(
-	                (FType)stdioFClass, "stdio", stdioINSTANCE);
+	                (FType)runtimeMemory.stdioFClass, "stdio", runtimeMemory.stdioINSTANCE);
+	                //(FType)stdioFClass, "stdio", runtimeMemory.stdioINSTANCE);
 	        Object result=baseInterpreter.invoke(roMainClassInstance,mainOp,arguments);
 	        elapsedTime=System.currentTimeMillis()-elapsedTime;
 	        long minutes=elapsedTime/60000;
@@ -160,8 +146,7 @@ public class Run {
 	
 	public void initializeInterpreter(String[] args)
 	{
-	    RuntimeObject stdIOmetaClass=null;
-	    
+	   
 	    if (args.length < 1){
 		    internalLog.error("Usage : run <modelName> <typeName> <operationName> <args...>");
 		    
@@ -170,81 +155,14 @@ public class Run {
 	    
 		// Prepare the kermetaObject factory and the metametaclass to allow 
 	    // kermeta metamodel traversing
-		koFactory = new RuntimeObjectFactory();
-		correspondanceTable = new Hashtable();
+
+		RuntimeObjectFactory roFactory = runtimeLoader.getRuntimeMemory().getROFactory(); 
 		String modelName = args[0];
 		KermetaUnitFactory.getDefaultLoader().unloadAll();
 		
-		// Load the KermetaUnit for interpreter.kmt
-		interpreterbuilder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(
-		        "../fr.irisa.triskell.kermeta.interpreter/src/kermeta/interpreter.kmt");
-		
-		try
-		{
-		    interpreterbuilder.load();
-		}
-		catch(Exception e )
-		{
-		    if (interpreterbuilder.getError().size() == 0) e.printStackTrace();
-		}
-		
-		
-		// Get and check the errors of loading
-		if (interpreterbuilder.getError().size() > 0)
-		{
-		    throw new KermetaInterpreterError(interpreterbuilder.getAllMessagesAsString());
-		}
-		else
-		{
-		    internalLog.info("model for the interpreter loaded successfully !");
-		    
-		    // Set the class Class
-		    FClass fclass=Run.interpreterbuilder.struct_factory.createFClass();
-			fclass.setFClassDefinition(
-			  (FClassDefinition)interpreterbuilder.getTypeDefinitionByName("kermeta::language::structure::Class"));
-		    koFactory.setClassClass(fclass);
-		    metametaClass=koFactory.getClassClass();
-		    
-		    
-		    // Define the RuntimeObject of the interpreter itself
-		    // And initialize all the static attributes of this class
-		    theInterpreter=new Interpreter(koFactory,metametaClass);
-		    
-		    // Create the KMMetaBuilder. "Implicitly" builds the memory of the 
-		    // interpreter execution by filling the classDefTable hashtable of the
-		    // (for now static) RuntimeObjectFactory
-		    KMMetaBuilder metaClassesBuilder = new KMMetaBuilder(interpreterbuilder, koFactory);
-		    //						metaClassesBuilder.ppPackage(interpreterbuilder);
-		    //						KMMetaBuilder.processParametricTypes();
-		    
-		    //initialize TRUE and FALSE
-			fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.initInstances(koFactory);
-		    // Create the void Instance (should be a singleton)
-		    RuntimeObject roVoidType = (RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::reflection::VoidType");
-		    voidINSTANCE=Run.koFactory.createRuntimeObject(roVoidType);
-		    
-		    // Create the self Instance (should be a singleton)
-		    RuntimeObject roSelfType = (RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::reflection::SelfType");
-		    selfINSTANCE=Run.koFactory.createRuntimeObject(roSelfType);
-		    
-		    // Construct the RuntimeObject representation of the source code 
-		    KMBuilderPass1 builderPass1 = new KMBuilderPass1(interpreterbuilder, koFactory);
-		    builderPass1.ppPackage(interpreterbuilder);
-		    // Create the stdio default variable and push it in the interpreter context
-		    // to ensure any program may use stdio.print(...) and stdio.read("prompt>")
-		    RuntimeObject interpretermetaClass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::interpreter::Interpreter");
-		    interpreterInstance=Run.koFactory.createRuntimeObject(interpretermetaClass);
-		    stdIOmetaClass=(RuntimeObject)Run.koFactory.getClassDefTable().get("kermeta::io::StdIO");
-		    
-		    stdioINSTANCE=Run.koFactory.createRuntimeObject(stdIOmetaClass);
-		    stdioFClass=interpreterbuilder.struct_factory.createFClass();
-		    stdioFClass.setFClassDefinition(((FClass)stdIOmetaClass.getData().get("kcoreObject")).getFClassDefinition());
-		    
-		    /*						KMBuilderPass2 builderPass2 = new KMBuilderPass2();
-		     builderPass2.ppPackage(interpreterbuilder);*/
-		}
-		
 		// Do not write again the package declaration..
+		// We now load the Kermeta program itself (Kermeta program is the source code
+		// that contains the classes that we want to execute)
 		builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(modelName);
 		try
 		{
@@ -260,12 +178,17 @@ public class Run {
 		}
 		else
 		{
-		    internalLog.info("model "+modelName+" loaded successfully !");
+		    internalLog.info("Model of '"+modelName+"' loaded successfully !");
+
+		    // Initialize the runtime memory
+		    this.initializeRuntimeLoader(builder, runtimeLoader.getRuntimeMemory());
 		    
-		    KMBuilderPass1 classesBuilderPass1 = new KMBuilderPass1(builder, koFactory);
-		    
-		    classesBuilderPass1.ppPackage(builder);
+		    // Load the runtime representation of the source file to execut
+		    runtimeLoader.loadKermetaUnit(builder);
+
 		    FPackage rootPackage=builder.rootPackage;
+		    
+		    // Get the tags used to execute an operation
 		    if (rootPackage.getFTag() !=null) {
 		        isTestOperation=false;
 		        Iterator tagsIt=rootPackage.getFTag().iterator();
@@ -282,6 +205,7 @@ public class Run {
 		                mainArgsValue=tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
 		        }
 		    }
+		    
 		    if (mainClassValue==null)
 		        if (args.length>1)
 		            mainClassValue=args[1];
@@ -301,4 +225,34 @@ public class Run {
 
 	}
 
+	/**
+	 * - Construct the runtimeLoader
+	 * - Check the 
+	 */
+	public void initializeRuntimeLoader(KermetaUnit unit, RuntimeMemory memory)
+	{
+	    
+	    // Set the class Class
+	    FClass fclass=unit.struct_factory.createFClass();
+		fclass.setFClassDefinition(
+		  (FClassDefinition)unit.getTypeDefinitionByName("kermeta::language::structure::Class"));
+	    memory.getROFactory().setClassClassFromFClass(fclass);
+	    
+	    // Create the KMMetaBuilder. "Implicitly" builds the memory of the 
+	    // interpreter execution by filling the classDefTable hashtable of the
+	    // (for now static) RuntimeObjectFactory
+	    runtimeLoader.loadClassDefinitions(unit);
+	    
+	    // Create the singletons Void, Self, Boolean, Stdio
+        runtimeLoader.loadSingletonInstances(unit);
+	    
+	    // Construct the RuntimeObject representation of the source code
+	    runtimeLoader.loadKermetaUnit(unit);
+	    
+	    // Create the stdio default variable and push it in the interpreter context
+	    // to ensure any program may use stdio.print(...) and stdio.read("prompt>")
+	    RuntimeObject interpretermetaClass=(RuntimeObject)memory.getROFactory().getClassDefTable().get("kermeta::interpreter::Interpreter");
+	    interpreterInstance=memory.getROFactory().createRuntimeObject(interpretermetaClass);
+	}
+	
 }

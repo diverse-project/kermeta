@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.2 2005-04-28 13:36:15 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.3 2005-05-12 08:21:37 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : GPL
@@ -18,6 +18,7 @@ import java.util.Iterator;
 import fr.irisa.triskell.kermeta.error.KermetaLoaderError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
@@ -77,15 +78,16 @@ public class RunCommandLine extends Run{
 	        String mainClassValue, 
 	        KermetaUnit builder)
 	{
+	    RuntimeObjectFactory roFactory = this.runtimeLoader.getRuntimeMemory().getROFactory();
 	    // Create the RuntimeObject of main class, of its instance, and 
 	    // its FClassDefinition so that we can get its operations in order to run them
-	    RuntimeObject roMainClass=(RuntimeObject)Run.koFactory.getClassDefTable().get(mainClassValue);
+	    RuntimeObject roMainClass=(RuntimeObject)roFactory.getClassDefTable().get(mainClassValue);
 	    if (roMainClass == null)
 	    {
 	        // the indicated mainclass doesn't exist in the given context
 	        throw new KermetaLoaderError(mainClassValue + " doesn't exist in "+args[0]);
 	    }	    
-	    RuntimeObject roMainClassInstance=Run.koFactory.createRuntimeObject(roMainClass);
+	    RuntimeObject roMainClassInstance=roFactory.createRuntimeObject(roMainClass);
 	    FClassDefinition mainClassDef=((FClass)roMainClass.getData().get("kcoreObject")).getFClassDefinition();
 	    Iterator it=mainClassDef.getFOwnedOperation().iterator();
 	    
@@ -122,8 +124,10 @@ public class RunCommandLine extends Run{
 	        KermetaUnit builder,
 	        String[] args)
 	{
-	    RuntimeObject roMainClass=(RuntimeObject)Run.koFactory.getClassDefTable().get(mainClassValue);
-	    RuntimeObject roMainClassInstance=Run.koFactory.createRuntimeObject(roMainClass);
+
+	    RuntimeObjectFactory roFactory = this.runtimeLoader.getRuntimeMemory().getROFactory();
+	    RuntimeObject roMainClass=(RuntimeObject)roFactory.getClassDefTable().get(mainClassValue);
+	    RuntimeObject roMainClassInstance=roFactory.createRuntimeObject(roMainClass);
 	    FClassDefinition mainClassDef=((FClass)roMainClass.getData().get("kcoreObject")).getFClassDefinition();
 	    Iterator it=mainClassDef.getFOwnedOperation().iterator();
 	    boolean found=false;
@@ -143,7 +147,7 @@ public class RunCommandLine extends Run{
 	                //TODO manage the arguments conversion to kermeta types of parameters
 	                //assume the first parameter of mainOp is a ref(0,*) StringLiteral
 	                for (int i=3;i<args.length;i++) {
-	                    RuntimeObject arg=fr.irisa.triskell.kermeta.runtime.basetypes.String.create(args[i],koFactory);
+	                    RuntimeObject arg=fr.irisa.triskell.kermeta.runtime.basetypes.String.create(args[i],roFactory);
 	                    arguments.add(arg);
 	                }
 	            }

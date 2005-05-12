@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.2 2005-04-28 15:29:30 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.3 2005-05-12 08:21:37 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : GPL
@@ -17,6 +17,7 @@ import java.util.Iterator;
 import fr.irisa.triskell.kermeta.error.KermetaLoaderError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
@@ -36,12 +37,18 @@ public class RunJunitFactory  implements Test{
     private TestCase theTestCase=null;
     
     public Run interpreterRun=null;
+    /** Reference to the factory contained in the runtime memory*/
+    public RuntimeObjectFactory roFactory = null;
     
     /**
      * @param args
      */
     public RunJunitFactory(String[] args) {
+        
         interpreterRun = new Run(args);
+        
+        roFactory = interpreterRun.runtimeLoader.getRuntimeMemory().getROFactory();
+        
 		// Is there a "testOperation" tag?
         try{
             interpreterRun.initializeInterpreter(args);               
@@ -108,13 +115,13 @@ public class RunJunitFactory  implements Test{
 		// specified by mainClassValue are added as concrete testcases
 	    // Create the RuntimeObject of main class, of its instance, and 
 	    // its FClassDefinition so that we can get its operations in order to run them
-	    RuntimeObject roMainClass=(RuntimeObject)Run.koFactory.getClassDefTable().get(mainClassValue);
+	    RuntimeObject roMainClass=(RuntimeObject)roFactory.getClassDefTable().get(mainClassValue);
 	    if (roMainClass == null)
 	    {
 	        // the indicated mainclass doesn't exist in the given context
 	        throw new KermetaLoaderError(mainClassValue + " doesn't exist in "+args[0]);
 	    }
-	    RuntimeObject roMainClassInstance=Run.koFactory.createRuntimeObject(roMainClass);
+	    RuntimeObject roMainClassInstance=roFactory.createRuntimeObject(roMainClass);
 	    FClassDefinition mainClassDef=((FClass)roMainClass.getData().get("kcoreObject")).getFClassDefinition();
 	    Iterator it=mainClassDef.getFOwnedOperation().iterator();
 	    

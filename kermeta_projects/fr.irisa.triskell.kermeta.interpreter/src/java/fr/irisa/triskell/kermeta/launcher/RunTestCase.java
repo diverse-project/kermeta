@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.2 2005-04-28 15:29:29 dvojtise Exp $
+/* $Id: RunTestCase.java,v 1.3 2005-05-12 08:21:36 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : GPL
@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
@@ -101,9 +102,9 @@ public class RunTestCase extends TestCase {
 	 * Otherwise, there should be a "mainOperation" to launch (which name is defined in the <code>mainOperation</code> tag
 	 */
 	public void runTest()
-	{	        	    
-	    RuntimeObject roMainClass=(RuntimeObject)containerTestSuite.interpreterRun.koFactory.getClassDefTable().get(mainClassValue);
-	    RuntimeObject roMainClassInstance=containerTestSuite.interpreterRun.koFactory.createRuntimeObject(roMainClass);
+	{
+	    RuntimeObject roMainClass=(RuntimeObject)containerTestSuite.roFactory.getClassDefTable().get(mainClassValue);
+	    RuntimeObject roMainClassInstance=containerTestSuite.roFactory.createRuntimeObject(roMainClass);
 	    FClassDefinition mainClassDef=((FClass)roMainClass.getData().get("kcoreObject")).getFClassDefinition();
 	    Iterator it=mainClassDef.getFOwnedOperation().iterator();
 	    boolean found=false;
@@ -123,7 +124,7 @@ public class RunTestCase extends TestCase {
 	                //TODO manage the arguments conversion to kermeta types of parameters
 	                //assume the first parameter of mainOp is a ref(0,*) StringLiteral
 	                for (int i=3;i<args.length;i++) {
-	                    RuntimeObject arg=fr.irisa.triskell.kermeta.runtime.basetypes.String.create(args[i],Run.koFactory);
+	                    RuntimeObject arg=fr.irisa.triskell.kermeta.runtime.basetypes.String.create(args[i],containerTestSuite.roFactory);
 	                    arguments.add(arg);
 	                }
 	            }
