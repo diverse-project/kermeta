@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <toc label="KerMeta documentation">
-	<topic label="KerMeta Tutorial" href="build/eclipse.help/KerMeta-Tutorial/index.html"> 
-		<link toc="build/eclipse.help/KerMeta-Tutorial/toc.xml" />
+	<topic label="User documentation">
+		<topic label="KerMeta Tutorial" href="build/eclipse.help/KerMeta-Tutorial/index.html"> 
+			<link toc="build/eclipse.help/KerMeta-Tutorial/toc.xml" />
+		</topic>	
+		<topic label="KerMeta user interface" href="build/eclipse.help/KerMeta-UI-UserGuide/index.html"> 
+			<link toc="build/eclipse.help/KerMeta-UI-UserGuide/toc.xml" />
+		</topic>
+		<topic label="KerMeta references">
+			<topic label="KerMeta Java Framework reference" href="build/javadoc/KermetaFramework/index.html"> 		
+			</topic>	
+		</topic>
+	</topic>
+	<topic label="Developper documentation">
+		<topic label="KerMeta Architecture guide"> 
+		<!--	<link toc="build/eclipse.help/KerMeta-Tutorial/toc.xml" />-->
+		</topic>			
 	</topic>
 </toc>

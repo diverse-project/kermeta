@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<plugin name="KerMeta documentation" id="fr.irisa.triskell.kermeta.documentation" version="0.0.1" provider-name="INRIA/Irisa">
+<plugin name="KerMeta documentation" id="fr.irisa.triskell.kermeta.documentation" version="0.0.1" provider-name="IRISA/INRIA">
   <extension point="org.eclipse.help.toc">
 	<toc file="toc.xml" primary="true"/>
     <toc file="build/eclipse.help/KerMeta-Tutorial/toc.xml" />
