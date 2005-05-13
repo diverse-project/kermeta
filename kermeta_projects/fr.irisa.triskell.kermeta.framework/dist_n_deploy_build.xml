@@ -1,11 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.2 2005-04-29 09:46:19 dvojtise Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.3 2005-05-13 07:41:47 dvojtise Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="kermeta.framework.jar" location="dist/${ant.project.name}.jar"/>
+	<property name="kermeta.framework.jar" location="dist/framework.jar"/>
 	<property name="kermeta.framework.km" location="dist/framework.km"/>
   	<path id="project.class.path">
 		<pathelement location="build/class"/>
@@ -47,7 +47,7 @@
 	<target name="create_jar" 
 		description="create the jar file">
 		<tstamp/>
-		<jar destfile="${kermeta.interpreter.jar}">
+		<jar destfile="${kermeta.framework.jar}">
 			<!-- files to include in the jar -->
 			<fileset dir="build/class"/>
 			<fileset dir="src/java"/>
