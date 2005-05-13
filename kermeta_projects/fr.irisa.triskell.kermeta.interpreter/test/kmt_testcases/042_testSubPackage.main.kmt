@@ -1,25 +1,25 @@
 @testOperation "yes"
 @mainClass "root::testPackage::TestClass"
-@mainOperation "testmain_operation"
+@mainOperation "testopsub"
 
 
 package root;
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 // Main package containing the operation to be executed
 package testPackage 
 {
 
-	class TestClass inherits kermeta::kunit::Assert 
+	class TestClass inherits kermeta::kunit::Test 
 	{
 		@testopsub "test operation for a 1 level 'sub'"
-		operation testopsub() : Void is do
+		operation testopsub() : kermeta::standard::Integer is do
 			result := subPackage::Class2.new.testop2()
 			assert(result==13)
 		end
 		
 		@testopsub "test operation for a 2 level 'sub'"
-		operation testopsubsub() : Void is do
+		operation testopsubsub() : kermeta::standard::Integer is do
 			result := subSubPackage::Class3.new.testop3()
 			assert(result==13)
 		end

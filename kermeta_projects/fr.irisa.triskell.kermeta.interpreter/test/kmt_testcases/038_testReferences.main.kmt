@@ -3,7 +3,7 @@
 @mainOperation "testCreateMyObjects"
 package testReferences;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 //require "../../lib/framework.km"
 // Creation of an object
 // TODO : test in a real unit test attribute, and reference...
@@ -19,7 +19,7 @@ class RefObject {
 	operation set_entier() is do
 		entier := 4245
 	end
-	operation get_entier() is do
+	operation get_entier() : kermeta::standard::Integer is do
 		result := entier
 	end
 }

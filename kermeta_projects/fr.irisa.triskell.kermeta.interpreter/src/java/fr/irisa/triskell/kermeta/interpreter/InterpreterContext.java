@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.5 2005-05-04 14:18:13 zdrey Exp $
+/* $Id: InterpreterContext.java,v 1.6 2005-05-13 15:05:32 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : GPL
@@ -12,9 +12,12 @@
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
 
+import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 
@@ -83,31 +86,42 @@ public class InterpreterContext {
      */
     protected Stack frame_stack;
 
+    // Contains interpreter variables (global variables such as stdio)
+    protected Hashtable interpreterVariables;
+    
     /**
      * Constructor
      */
-    public InterpreterContext() {
+    public InterpreterContext(RuntimeMemory memory) {
     	frame_stack = new Stack();
+    	interpreterVariables = new Hashtable();
+    	initializeInterpreterVariables(memory);
+    }
+    
+    protected void initializeInterpreterVariables(RuntimeMemory memory) {
+        interpreterVariables.put("stdio", new Variable("stdio", memory.stdioINSTANCE));
     }
 	
 	/**
 	 * @param self_object : the object on which an operation was applied. This operation is
 	 * the one that led to the creation of this new CallFrame
 	 */
-	public void pushNewCallFrame(RuntimeObject self_object, FOperation operation)
+	public void pushCallFrame(RuntimeObject self_object, FOperation operation, ArrayList parameters)
 	{
-	    CallFrame new_frame = new CallFrame(self_object, this, operation);
+	    CallFrame new_frame = new CallFrame(self_object, this, operation, parameters);
 	    frame_stack.push(new_frame);
 	}
 	
-	
-	public Stack getFrameStack()
-	{
-	    return frame_stack;
+	public void popCallFrame() {
+	    frame_stack.pop();
 	}
 	
-	public CallFrame getCurrentFrame()
+	public CallFrame peekCallFrame()
 	{
 	    return (CallFrame)frame_stack.peek();
+	}
+	
+	public Variable getInterpreterVariableByName(String name) {
+	    return (Variable)interpreterVariables.get(name);
 	}
 }

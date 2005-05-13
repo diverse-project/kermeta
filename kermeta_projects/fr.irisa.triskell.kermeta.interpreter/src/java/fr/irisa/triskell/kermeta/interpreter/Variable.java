@@ -1,4 +1,4 @@
-/* $Id: Variable.java,v 1.5 2005-04-04 14:37:28 zdrey Exp $
+/* $Id: Variable.java,v 1.6 2005-05-13 15:05:32 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : Variable.java
  * License : GPL
@@ -28,12 +28,6 @@ public class Variable {
     protected FVariableDecl declaration;
 
     /**
-     * The type of the variable
-     * 
-     */
-    protected FType type;
-
-    /**
      * The value of the variable
      */
     protected RuntimeObject runtimeObject;
@@ -46,8 +40,9 @@ public class Variable {
     /**
      * 
      */
-    public Variable() {
-        // TODO Auto-generated constructor stub
+    public Variable(String name, RuntimeObject value) {
+        this.name = name;
+        this.runtimeObject = value;
     }
 
     /**
@@ -98,20 +93,6 @@ public class Variable {
      */
     public void setRuntimeObject(RuntimeObject kObject) {
         this.runtimeObject = kObject;
-    }
-
-    /**
-     * @return type of this variable
-     */
-    public FType getType() {
-        return type;
-    }
-
-    /**
-     * @param type type to set for this variable. 
-     */
-    public void setType(FType pType) {
-        type = pType;
     }
 
 }

@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.1 2005-05-12 08:19:45 zdrey Exp $
+/* $Id: RuntimeMemory.java,v 1.2 2005-05-13 15:05:38 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeMemory.java
  * License: GPL
@@ -11,12 +11,13 @@ package fr.irisa.triskell.kermeta.builder;
 
 import java.util.Hashtable;
 
-import fr.irisa.triskell.kermeta.interpreter.Interpreter;
-import fr.irisa.triskell.kermeta.launcher.Run;
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 
 /**
  * The runtime memory of a program that is currently executed
@@ -30,18 +31,17 @@ public class RuntimeMemory {
     /** The RO factory for the entities of a Kermeta program */
     protected RuntimeObjectFactory roFactory;
 	/** metametaClass : is the class  "Class"*/
-	public RuntimeObject metametaClass=null;
+	//public RuntimeObject metametaClass=null;
 	/** self, void, in, out are singletons */
-	public RuntimeObject selfINSTANCE=null;
-	public RuntimeObject voidINSTANCE=null;
-	public RuntimeObject stdioINSTANCE=null;
+	
+	public RuntimeObject trueINSTANCE;
+	public RuntimeObject falseINSTANCE;
+	
+	public RuntimeObject voidINSTANCE;
+	public RuntimeObject stdioINSTANCE;
 	/** To be deprecated..*/
 	public FClass stdioFClass=null;
-	/** the RuntimeObject of the Interpreter */
-	public Interpreter theInterpreter=null;
-	/** The runtime object corresponding to the instance of the Interpreter */
-	public RuntimeObject interpreterInstance=null;
-
+	
 	/**
 	 * The correspondance table from where we get IntegerLiterals, 
 	 * StringLiterals, and RealLiterals.
@@ -52,7 +52,7 @@ public class RuntimeMemory {
 	
 	
     public RuntimeMemory() {
-        roFactory = new RuntimeObjectFactory();
+        roFactory = new RuntimeObjectFactory(this);
         correspondanceTable = new Hashtable();
     }
     
@@ -64,23 +64,25 @@ public class RuntimeMemory {
      * 
 	 * @param interpreterbuilder The kermeta unit of the interpreter.kmt file
      */
-    public void createSingletons(KermetaUnit interpreterbuilder)
+    protected void createSingletons(KermetaUnit interpreterbuilder)
     {
 	    //initialize TRUE and FALSE
-		fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.initInstances(roFactory);
+		trueINSTANCE = Boolean.createTrue(roFactory);
+		falseINSTANCE = Boolean.createFalse(roFactory);
 	    // Create the void Instance (should be a singleton)
 	    RuntimeObject roVoidType = (RuntimeObject)roFactory.getClassDefTable().get("kermeta::reflection::VoidType");
-	    voidINSTANCE=roFactory.createRuntimeObject(roVoidType);
+	    voidINSTANCE=roFactory.createObjectFromClassDefinition(roVoidType);
 	    
-	    // Create the self Instance (should be a singleton)
-	    RuntimeObject roSelfType = (RuntimeObject)roFactory.getClassDefTable().get("kermeta::reflection::SelfType");
-	    selfINSTANCE=roFactory.createRuntimeObject(roSelfType);
+	   
 	    
 	    RuntimeObject stdIOmetaClass=(RuntimeObject)roFactory.getClassDefTable().get("kermeta::io::StdIO");
-	    stdioINSTANCE=roFactory.createRuntimeObject(stdIOmetaClass);
-	    stdioFClass=interpreterbuilder.struct_factory.createFClass();
-	    stdioFClass.setFClassDefinition(((FClass)stdIOmetaClass.getData().get("kcoreObject")).getFClassDefinition());
+	    stdioINSTANCE=roFactory.createObjectFromClassDefinition(stdIOmetaClass);
 	    
+    }
+    
+    public RuntimeObject getRuntimeObjectForBoolean(boolean value) {
+        if (value) return trueINSTANCE;
+        else return falseINSTANCE;
     }
     
     /**

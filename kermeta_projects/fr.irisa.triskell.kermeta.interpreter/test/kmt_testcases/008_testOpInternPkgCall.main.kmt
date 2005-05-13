@@ -2,7 +2,7 @@
 @mainOperation "operation_pkg1"
 package testOpInternPkgCall;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 package test_package1 
 {

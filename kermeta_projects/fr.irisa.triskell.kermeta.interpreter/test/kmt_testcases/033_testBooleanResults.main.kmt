@@ -3,10 +3,10 @@
 @mainOperation "main_operation"
 
 package root;
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 /*****************************************************************************
- * $Id: 033_testBooleanResults.main.kmt,v 1.2 2005-04-28 06:59:06 jpthibau Exp $
+ * $Id: 033_testBooleanResults.main.kmt,v 1.3 2005-05-13 15:05:26 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testBooleanResults.kmt

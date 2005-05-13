@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.7 2005-05-10 17:17:57 zdrey Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.8 2005-05-13 15:05:26 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -20,7 +20,7 @@
 
 package testLambda;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 alias Integer : kermeta::standard::Integer;
 alias String : kermeta::standard::String;
@@ -96,8 +96,8 @@ class TestLambda inherits kermeta::kunit::TestSuite
 
 	// test a nested lambda exp. 
 	operation testNestedLambda() : Void is do
-		var lf1 : <[Integer, Integer, String]->Character>
-		var lf2 : <[String, String]->Character>
+		var lf1 : <[Integer, Integer, String]->String>
+		var lf2 : <[String, String]->String>
 		lf1 := function { i : Integer, j : Integer, k : String | k.substring(i.plus(j), 7) }
 		lf2 := function { s1 : String, s2 : String | lf1(1, 2, s1+s2) }
 		assert(lf2("abcde", "fghi")=="defg")

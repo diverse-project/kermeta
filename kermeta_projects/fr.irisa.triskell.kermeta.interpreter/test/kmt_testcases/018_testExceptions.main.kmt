@@ -3,7 +3,7 @@
 
 package testPackage;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
@@ -57,9 +57,9 @@ class B
  			 stdio.write(s)
  			 stdio.writeln(" rescued")
  	end
-}*/
+}
 
-class TestSuperFeatures inherits kermeta::kunit::Assert
+class TestExceptions inherits kermeta::kunit::Test
 {    
      operation main_operation() is do
      	var a : A

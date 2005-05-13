@@ -3,7 +3,7 @@
 
 package testOpCall;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 class Test_opcall {
 

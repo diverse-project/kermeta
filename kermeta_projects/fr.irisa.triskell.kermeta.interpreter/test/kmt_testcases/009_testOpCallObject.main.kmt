@@ -2,7 +2,7 @@
 @mainOperation "createMyObject"
 package testOpCallObject;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 // Creation of an object
 class MyObject {
@@ -33,8 +33,9 @@ class MyObjectCreation inherits kermeta::kunit::Assert {
 		object := MyObject.new
 		object.set_attr1(int)
 		object.set_attr2(bool)
-		result := object.attr1
+		result := object
         stdio.writeln(result)
-        assert(result==4)
+        assert(result.attr1==4)
+        assert(result.attr2==true)
 	end
 }

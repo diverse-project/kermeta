@@ -4,7 +4,7 @@
 
 package testString;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 // Testing the operations on a String : 
 //

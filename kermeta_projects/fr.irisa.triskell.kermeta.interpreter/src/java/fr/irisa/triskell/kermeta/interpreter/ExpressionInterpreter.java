@@ -1,4 +1,4 @@
-/* $Id: BaseInterpreter.java,v 1.40 2005-05-12 08:54:14 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.1 2005-05-13 15:05:30 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -13,47 +13,64 @@
  * 	see class javadoc.	 
  */
 package fr.irisa.triskell.kermeta.interpreter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.Vector;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-
-
-import fr.irisa.triskell.kermeta.ast.FSelfCall;
-import fr.irisa.triskell.kermeta.behavior.*;
-import fr.irisa.triskell.kermeta.builder.KMBuilderPass1;
+import fr.irisa.triskell.kermeta.behavior.FAssignement;
+import fr.irisa.triskell.kermeta.behavior.FBlock;
+import fr.irisa.triskell.kermeta.behavior.FBooleanLiteral;
+import fr.irisa.triskell.kermeta.behavior.FCallExpression;
+import fr.irisa.triskell.kermeta.behavior.FCallFeature;
+import fr.irisa.triskell.kermeta.behavior.FCallResult;
+import fr.irisa.triskell.kermeta.behavior.FCallSuperOperation;
+import fr.irisa.triskell.kermeta.behavior.FCallVariable;
+import fr.irisa.triskell.kermeta.behavior.FConditionnal;
+import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.behavior.FIntegerLiteral;
+import fr.irisa.triskell.kermeta.behavior.FJavaStaticCall;
+import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
+import fr.irisa.triskell.kermeta.behavior.FLoop;
+import fr.irisa.triskell.kermeta.behavior.FRaise;
+import fr.irisa.triskell.kermeta.behavior.FRescue;
+import fr.irisa.triskell.kermeta.behavior.FSelfExpression;
+import fr.irisa.triskell.kermeta.behavior.FStringLiteral;
+import fr.irisa.triskell.kermeta.behavior.FTypeLiteral;
+import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
+import fr.irisa.triskell.kermeta.behavior.FVoidLiteral;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
-import fr.irisa.triskell.kermeta.structure.*;
-
-import fr.irisa.triskell.kermeta.launcher.Run;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
-import fr.irisa.triskell.kermeta.reflect.KMReflect;
+import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.structure.FClass;
-
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
+import fr.irisa.triskell.kermeta.structure.FFunctionType;
+import fr.irisa.triskell.kermeta.structure.FNamedElement;
+import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
+import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * This is the Java version of kermeta interpreter. It extends the KermetaVisitor, and each
  * visit returns a result of type <code>RuntimeObject</code>.
  */
-public class BaseInterpreter extends KermetaVisitor {
+public class ExpressionInterpreter extends KermetaVisitor {
 
     /** The global context */
     protected InterpreterContext interpreterContext;
@@ -93,12 +110,34 @@ public class BaseInterpreter extends KermetaVisitor {
      * @param pContext
      * @param unit the main kermetaUnit ..
      */
-    public BaseInterpreter(InterpreterContext pContext, KermetaUnit pUnit, RuntimeMemory pMemory)
+    public ExpressionInterpreter(KermetaUnit pUnit, RuntimeMemory pMemory)
     {
-        interpreterContext = pContext;
+        interpreterContext = new InterpreterContext(pMemory);
         unit = pUnit;
         memory = pMemory; 
     }
+    
+    /**
+	 * Invoke the foperation argument on the ro_target Runtime Object;
+	 *  arguments to this call are given as an ArrayList
+	 * @param ro_target
+	 * @param foperation
+	 * @param arguments
+	 * @return
+	 */
+	public Object invoke(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
+		RuntimeObject result=null;
+		RuntimeObjectFactory roFactory = memory.getROFactory(); 
+        // Create a context for this operation call, setting self object to ro_target
+        interpreterContext.pushCallFrame(ro_target, foperation, arguments);
+       
+        // Resolve this operation call
+        result = (RuntimeObject)this.accept(foperation);
+        
+        // After operation has been evaluated, pop its context
+        interpreterContext.popCallFrame();
+		return result;
+	}
 	
 	/***
 	 * A variable declaration : when we encounter it, we add it to the expression context
@@ -107,12 +146,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 */
 	public Object visit(FVariableDecl node)
 	{
-		/*RuntimeObject variable_decl = node.getFactory().getTypeDefinitionByName(
-			    ((FVariableDecl)declaration).getFType().getFName()
-				);
-				*/
-	    //RuntimeObject ko = factory.createRuntimeObject(node);
-		RuntimeObject ro_init=null;
+		RuntimeObject ro_init = memory.voidINSTANCE;
 		// is it a classic case?
 		// TODO : compare qualified names otherwise this test could be sometimes false
 		if (FFunctionType.class.isInstance(node.getFType().getFType()))
@@ -123,45 +157,62 @@ public class BaseInterpreter extends KermetaVisitor {
 		if (node.getFInitialization()!=null)
 		   ro_init = (RuntimeObject)this.accept(node.getFInitialization());
 		
-		interpreterContext.getCurrentFrame().getCurrentExpressionContext().defineVariable(
-	            node.getFType().getFType(), node.getFIdentifier(), ro_init);
-	    return null;
+		interpreterContext.peekCallFrame().peekExpressionContext().defineVariable(
+	             node.getFIdentifier(), ro_init);
+	    return ro_init;
 	}
 	
+	
+	
+    public Object visit(FTypeLiteral arg0) {
+        // FIXME : Type variables should be handled here
+        FClass c = (FClass)((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(arg0.getFTyperef())).getType();
+        
+        RuntimeObject cdef = (RuntimeObject)memory.getCorrespondanceTable().get(c.getFClassDefinition());
+        
+        if (cdef == null) {
+            internalLog.error("INTERPRETER INTERNAL ERROR : Type definition not found");
+	        throw new Error("INTERPRETER INTERNAL ERROR : Type definition not found");
+        }
+        
+        RuntimeObject result = memory.getROFactory().getClassForClassDefinition(cdef);
+        return result;
+    }
+    
+    
+    public Object visit(FVoidLiteral arg0) {
+        return memory.voidINSTANCE;
+    }
 	/**
 	 * Returns the RuntimeObject representation of the property specified by 
 	 * <code>propertyName</code>, for the instance specified by <code>ro_target</code>
-	 * @param ro_target The runtime object of which we want the property <code>propertyName</code> 
-	 * @param t_target the type of the object represented by <code>ro_target</code>
+	 * @param fclass the type of the object represented by <code>ro_target</code>
 	 * @param propertyName The name of the properties of which we want the value
 	 * @return the RuntimeObject that repr. the value of the property for the given ro_target
 	 */
-	protected RuntimeObject getROProperty(RuntimeObject ro_target, FType t_target, String propertyName)
+	protected RuntimeObject getRuntimeObjectForFProperty(FClass fclass, String propertyName)
 	{
-	    RuntimeObject ro_property = null;
-	    // Find the RuntimeObject corresponding to this fproperty in the Class of ro_target instance
-	    RuntimeObject metaclass = ro_target.getMetaclass();
-	    //Iterator it = (()metaclass.getData().get("CollectionArrayList"));
-	    // Get the classdefinition in the table
-	    RuntimeObject classdef = (RuntimeObject)memory.getROFactory().getClassDefTable().get(
-	            getQualifiedName(((FClass)t_target).getFClassDefinition()));
+	    // Create the corresponding type
+	    SimpleType target = new SimpleType(fclass);
+	    // find the property
+	    CallableProperty cproperty = target.getPropertyByName(propertyName);
 	    
-	    RuntimeObject ro_attributes = (RuntimeObject)classdef.getProperties(
-	    ).get("ownedAttribute");
-	    // Get the RuntimeObject repr. of THE attribute which name is "propertyName"
-	    ArrayList al_attributes = (ArrayList)ro_attributes.getData().get("CollectionArrayList");
-	    Iterator it = al_attributes.iterator();
-	    
-	    while (it.hasNext() && ro_property == null)
-	    {   
-	        RuntimeObject attr = (RuntimeObject)it.next();
-	        String attr_name = ((FProperty)attr.getData().get("kcoreObject")).getFName();
-	        if (attr_name.equals(propertyName))
-	        {
-	            ro_property = attr;
-	        }
+	    // DEBUG : This should never happend
+	    if (cproperty == null) {
+	        internalLog.error("INTERPRETER INTERNAL ERROR : unable to find property " + propertyName + " in type " + target);
+	        throw new Error("INTERPRETER INTERNAL ERROR : unable to find property " + propertyName + " in type " + target);
 	    }
-	    return ro_property;
+	    
+	    // Get the runtime object in the memory correspondance table
+	    RuntimeObject result = (RuntimeObject)memory.getCorrespondanceTable().get(cproperty.getProperty());
+	    
+	    // DEBUG : This should never happend
+	    if (result == null) {
+	        internalLog.error("INTERPRETER INTERNAL ERROR : unable to find runtime object for property " + propertyName + " in type " + target);
+	        throw new Error("INTERPRETER INTERNAL ERROR : unable to find runtime object for property " + propertyName + " in type " + target);
+	    }
+	    
+	    return result;
 	}
 	/**
 	 * Assigns the targeted variable the value given by this node
@@ -176,62 +227,46 @@ public class BaseInterpreter extends KermetaVisitor {
 	 */
 	public Object visit(FAssignement node) {
 	    
-		 //result = this.accept(node.getFTarget());
-	    // if FTarget is a property we should process differently
-	    // if it is a variable only
-		 FExpression lhs = node.getFTarget();
-		 String lhs_name = node.getFTarget().getFName();
-		RuntimeObject ro_property = null; 
-		 // TODO : lhs can also self
+		// The name of the call
+		String lhs_name = node.getFTarget().getFName();
+		
+		 // The new value 
 		RuntimeObject rhs_value = (RuntimeObject)this.accept(node.getFValue());
 		
-		// TODO : test if the variable is an "implicit" property : toto -> self.toto
 		
-		// create the variable that will be stored in the context
-		// result_value can be of any kermeta type
-		Hashtable variables = interpreterContext.getCurrentFrame().getCurrentExpressionContext().getVariables();
-		
-		//if (result_name.equals("result")) // if left side is the result
-		if (FCallResult.class.isInstance(node.getFTarget()))
+		if (node.getFTarget() instanceof FCallResult)
 		{
-		    interpreterContext.getCurrentFrame().setOperationResult(rhs_value);
+		    // Assign the result of the current operation
+		    interpreterContext.peekCallFrame().setOperationResult(rhs_value);
 		}
-		// is it an object?
-		// var toto : AnObject
-		// toto previously declared
-		// toto := 4, and toto in variables hashtables
-		else if (FCallVariable.class.isInstance(node.getFTarget()))
+		else if (node.getFTarget() instanceof FCallVariable)
 		{
-		    // update the variable value in the variable hashtable
-		    ExpressionContext found_context = findVariableInContext(lhs_name);
-		    if (found_context!=null)
-		    {
-		        found_context.setVariable(lhs_name, (RuntimeObject)rhs_value);
+		    Variable var = interpreterContext.peekCallFrame().getVariableByName(node.getFTarget().getFName());
+		    
+		    // This is for debugg purposes it should never happend
+		    if (var == null) {
+		        internalLog.error("INTERPRETER INTERNAL ERROR : unable to find variable " + node.getFTarget().getFName());
+		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find variable " + node.getFTarget().getFName());
 		    }
-		    else
-		    {
-		        // TODO Throw properly an exception
-		        System.err.println("Variable '"+lhs_name+"' seems to be undeclared");
-		    }
+		    
+		    var.setRuntimeObject(rhs_value);
 		}
-		// is it a callfeature? toto.
-		// FIXME : attributes are not get properly
-		else if (FCallFeature.class.isInstance(node.getFTarget()))
+		else if (node.getFTarget() instanceof FCallFeature)
 		{
 		    // Visiting the callFeature should return the RuntimeObject
 		    // From the runtimeObject, get its target
 		    
-		    RuntimeObject ro_target = null;
-		    FType t_target = null;
-		    // Get the RuntimeObject of FCallFeature
 		    FCallFeature callfeature = (FCallFeature)node.getFTarget();
+		    
 		    // Get the object on which this feature is applied
 		    FExpression target = callfeature.getFTarget();
 	    	String propertyName = callfeature.getFName();
-	    	 
+	    	
+	    	RuntimeObject ro_target;
+	    	
 		    if (target==null)
 		    {  	//self reference
-		    	ro_target=interpreterContext.getCurrentFrame().getSelf();
+		    	ro_target=interpreterContext.peekCallFrame().getSelf();
 		    }
 		    // If target is not null, we need to get the corresponding runtime object
 		    else
@@ -242,42 +277,35 @@ public class BaseInterpreter extends KermetaVisitor {
 		       
 		        ro_target = (RuntimeObject)this.accept(target);
 		    }
-		    // If the target object is not null, we can find its ro_attribute
-		    // named "propertyName"
-	        if (ro_target!=null) // && ro_target.getProperties().containsKey(propertyName))
-	        {
-	            
-	            t_target=(FType)ro_target.getMetaclass().getData().get("kcoreObject");
-
-	            // FIXME : FProperty is assumed to be the type of the feature
-	            ro_property = this.getROProperty(ro_target, t_target, propertyName);
-	            
-	            // FIXME : ro_property must not be null
-				// Set the value of the property
-	            if (ro_property == null)
-	            {
-	                System.err.println("could not set property '"+propertyName+"' for object '"+lhs_name+"'");
-	            }
-	            else
-	            fr.irisa.triskell.kermeta.runtime.language.Object.set(ro_target,ro_property,rhs_value);    
-	        }
-	        else
-	        {
-	            System.out.println("properties size :"+ro_target.getProperties().size());
-	            Set keys = ro_target.getProperties().keySet();
-	            Iterator it = keys.iterator();
-	            while (it.hasNext())
-	            {
-	                System.out.print(it.next()+" ");
-	            }
-	            System.err.println("Could not assign attribute : target object not found :( : "+ro_target+
-	                    "property not found is : "+propertyName);
-	        }
-	        
 		    
+		    // This is for debugg purposes it should never happend
+		    if (ro_target == null) {
+		        internalLog.error("INTERPRETER INTERNAL ERROR : null runtime object for target in feature assignement ");
+		        throw new Error("INTERPRETER INTERNAL ERROR : null runtime object for target in feature assignement ");
+		    }
+		    
+		    // Check for void target
+		    if (ro_target == memory.voidINSTANCE) {
+		        internalLog.debug(" >> INTERPRETER REPORTS Call on a void target (property assignement). TODO: raise an exception");
+		        // TODO : raise a CallOnAVoidTarget exception
+		    }
+		    
+		    FClass t_target=(FClass)ro_target.getMetaclass().getData().get("kcoreObject");
+
+            // FIXME : FProperty is assumed to be the type of the feature
+            RuntimeObject ro_property = this.getRuntimeObjectForFProperty(t_target, propertyName);
+            
+            // FIXME : ro_property must not be null
+			// Set the value of the property
+            if (ro_property == null)
+            {
+                System.err.println("could not set property '"+propertyName+"' for object '"+lhs_name+"'");
+            }
+            else
+            fr.irisa.triskell.kermeta.runtime.language.Object.set(ro_target,ro_property,rhs_value);      
 		}
 		
-		return null;
+		return rhs_value;
 	}
 	
 	
@@ -290,23 +318,21 @@ public class BaseInterpreter extends KermetaVisitor {
     public Object visit(FCallSuperOperation node)
     {
         RuntimeObject result = null;
-        FOperation current_op = this.interpreterContext.getCurrentFrame().getOperation();
-        RuntimeObject ro_target = this.interpreterContext.getCurrentFrame().getSelf();
+        FOperation current_op = this.interpreterContext.peekCallFrame().getOperation();
+        RuntimeObject ro_target = this.interpreterContext.peekCallFrame().getSelf();
         FClassDefinition foclass = current_op.getFOwningClass();
         internalLog.info("Visiting a super operation of : "+current_op.getFName());
         
         // Get the parameters of this operation
 		ArrayList parameters = visitList(node.getFParameters());
 		// Create a context for this operation call, setting self object to ro_target
-		interpreterContext.pushNewCallFrame(ro_target, current_op.getFSuperOperation());
-		interpreterContext.getCurrentFrame().setParameters(parameters);
-		// Memorize self object
-		interpreterContext.getCurrentFrame().setSelf(ro_target);
+		interpreterContext.pushCallFrame(ro_target, current_op.getFSuperOperation(), parameters);
+		
 		
         result = (RuntimeObject)this.accept(current_op.getFSuperOperation());
         
         // Pop the context!
-        interpreterContext.getFrameStack().pop();
+        interpreterContext.popCallFrame();
         // TODO : raise exception if super operation not found // TypeChecker
         return result;
     }
@@ -324,12 +350,12 @@ public class BaseInterpreter extends KermetaVisitor {
 	    if (isLambdaExpressionCall == true)
 	    {
 	        RuntimeObject ro = current_runtimeLambdaObject;
-	        CallFrame current_frame =interpreterContext.getCurrentFrame(); 
+	        CallFrame current_frame =interpreterContext.peekCallFrame(); 
 	        //interpreterContext.pushNewCallFrame(ro_target);
 	        // "push and fill" the internal context
-	        current_frame.pushNewExpressionContext(node);
+	        current_frame.pushExpressionContext();
 	        
-	        current_frame.getCurrentExpressionContext().setVariables(
+	        current_frame.peekExpressionContext().addVariables(
 	                ((RuntimeLambdaObject)ro).getLambdaParameters());
 	        
 	        result = (RuntimeObject) this.accept(node.getFBody());
@@ -365,7 +391,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 */
 	public Object visit(FCallResult node)
 	{
-	    RuntimeObject value = interpreterContext.getCurrentFrame().getOperationResult();
+	    RuntimeObject value = interpreterContext.peekCallFrame().getOperationResult();
 	    if (value==null)
 	    	// TODO
 	    	System.err.println("result not found in context");
@@ -378,39 +404,32 @@ public class BaseInterpreter extends KermetaVisitor {
 	 * */
 	public Object visit(FCallVariable node)
 	{
-	    RuntimeObject result = null;
-	    RuntimeObject variable_value = null;
-	    ExpressionContext found_context = findVariableInContext(node.getFName());
+	    RuntimeObject result;
+	    Variable var = interpreterContext.peekCallFrame().getVariableByName(node.getFName());
 	    
-	    if (found_context!=null)
-	        variable_value = found_context.getVariable(node.getFName()).getRuntimeObject();
-	    else
-	    	// TODO
-	    	System.err.println("Var not declared : " + node.getFName());
+	    // This is for debugg purposes it should never happend
+	    if (var == null) {
+	        internalLog.error("INTERPRETER INTERNAL ERROR : unable tofind variable in context " + node.getFName());
+	        throw new Error("INTERPRETER INTERNAL ERROR : unable tofind variable in context " + node.getFName());
+	    }
 	    
-	    // If the variable contains parameters, i.e, if it is a LambdaExpression call
-	    // then we have to assign the lambda params to the values defined in FParameters
-	    // (bind parameters to the used values)
-	    // FIXME : redundant condition
-	    if (	RuntimeLambdaObject.class.isInstance(variable_value) ||
-	            node.getFParameters().size() != 0)
-	    {
+	    // It is a simple variable call
+	    if (node.getFParameters().size() == 0) {
+	        result = var.getRuntimeObject();
+	    }
+	    // it is a call to a lambda expression
+	    else {
+	        // Compute actual parameters
 	        ArrayList paramAList = visitList(node.getFParameters());
-	        // TODO : typeChecking -> variable value and param must have the same type
+	        // Bind the paprameters of the expression
+	        ((RuntimeLambdaObject)var.getRuntimeObject()).setLambdaParameters(paramAList);
 	        
-	        ((RuntimeLambdaObject)variable_value).setLambdaParameters(paramAList);
-	        
-	        // find in context the lambdaRuntimeObject corresponding .
-	        calledLambdaExpression = ((RuntimeLambdaObject)variable_value).getLambdaExpression();
+	        // FIXME: This might be refactored to handle potential context problems
+	        calledLambdaExpression = ((RuntimeLambdaObject)var.getRuntimeObject()).getLambdaExpression();
 	        isLambdaExpressionCall = true; 
-	        current_runtimeLambdaObject = variable_value;
+	        current_runtimeLambdaObject = var.getRuntimeObject();
 	        result = (RuntimeObject) this.visit(calledLambdaExpression); // affect the RuntimeObject
 	        isLambdaExpressionCall = false;
-	        
-	    }
-	    else // not a lambda? so we don't need to evaluate it, we have the result already
-	    {
-	        result = variable_value;
 	    }
 	    
 	    return result;
@@ -418,7 +437,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	
 	public Object visit(FSelfExpression node)
 	{
-	    return interpreterContext.getCurrentFrame().getSelf();
+	    return interpreterContext.peekCallFrame().getSelf();
 	}
 
 	/**
@@ -495,7 +514,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	public Object visit(FLoop node)
 	{
         // Push a new expressionContext in the current CallFrame. 
-        interpreterContext.getCurrentFrame().pushNewExpressionContext(node);
+        interpreterContext.peekCallFrame().pushExpressionContext();
         // Accept initialization (a FVariableDecl) : add a new variable in the ExpressionContext
         this.accept(node.getFInitiatization());
         boolean cond_value=true;
@@ -517,7 +536,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	    } while (! cond_value);
 	    
 	    // Pop the expression context
-	    interpreterContext.getCurrentFrame().popExpressionContext();
+	    interpreterContext.peekCallFrame().popExpressionContext();
 	    return null;
 	}
 	
@@ -530,275 +549,105 @@ public class BaseInterpreter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
-	    // Push a new ExpressionContext. The root expression associated with this context : 
-	    // a FCallFeature? ... -> accessible attribute of BaseInterpreter?
-	    interpreterContext.getCurrentFrame().pushNewExpressionContext(null);
-	    CallFrame current_frame = interpreterContext.getCurrentFrame();
-	    Iterator it = current_frame.getParameters().iterator();
 	    
-	    // Resolve parameters with the values given in the call of this operation
-	    // add them to the context
-	    EList params = node.getFOwnedParameter();
-	    int i = 0;
+	    // push expression context
+	    interpreterContext.peekCallFrame().pushExpressionContext();
 	    
-	    while (it.hasNext())
-	    {
-	        RuntimeObject called_param = (RuntimeObject)it.next();
-	        FParameter p = (FParameter)params.get(i);
-	        // Define a context variable
-	        // PATCH? FParameter to VariableDeclaration
-	        current_frame.getCurrentExpressionContext().defineVariable(
-	                p.getFType(), p.getFName(), called_param);
-	        i+=1;
-	    }
-	   /* internalLog.info("Visiting operation '"+node.getFName()+"'"
-	            +"\n- with body : " + node.getFBody()
-	            +"\n- with target : "+ node.getFOwningClass().getFName());*/
+	    // Interpret body
 	    this.accept(node.getFBody());
-	    // Visit raised Exception if any
-//	    visitList(node.getFRaisedException());
-	    // If operation returns something that is not VOID, return it?
-	    RuntimeObject result = interpreterContext.getCurrentFrame().getOperationResult();
+	    
+	    // Set the result
+	    RuntimeObject result = interpreterContext.peekCallFrame().getOperationResult();
+	    
 	    // Pop the expressionContext
-	    interpreterContext.getCurrentFrame().popExpressionContext();
+	    interpreterContext.peekCallFrame().popExpressionContext();
 		return result;
 	}
 	
 	
-	
-    /**
-     * Visit a FProperty and return the runtime object corresponding to it
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FProperty)
-     */
-    public Object visit(FProperty node)
-    {
-     //   return super.visit(arg0);
-        return null;
-    }
-	/**
-	 * Invoke the foperation argument on the ro_target Runtime Object;
-	 *  arguments to this call are given as an ArrayList
-	 * @param ro_target
-	 * @param foperation
-	 * @param arguments
-	 * @return
-	 */
-	public Object invoke(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
-		RuntimeObject result=null;
-		RuntimeObjectFactory roFactory = memory.getROFactory(); 
-        // Create a context for this operation call, setting self object to ro_target
-        interpreterContext.pushNewCallFrame(ro_target, foperation);
-        interpreterContext.getCurrentFrame().setParameters(arguments);
-    	    
-        //memorize self object
-        interpreterContext.getCurrentFrame().setSelf(ro_target);
-
-        // Resolve this operation call
-        result = (RuntimeObject)this.accept(foperation);
-        
-        // After operation has been evaluated, pop its context
-        interpreterContext.getFrameStack().pop();
-		return result;
-	}
 
 	
 	
 	public Object visit(FCallFeature node) {
 	    boolean isFeatured = false;
-	    FExpression target = node.getFTarget();
-		RuntimeObjectFactory roFactory = memory.getROFactory(); 
-		Hashtable correspondanceTable = memory.getCorrespondanceTable();
-	    FType t_target = null; // Type of the "callee"
+	   
+	    FClass t_target = null; // Type of the "callee"
 	    RuntimeObject result = null; // The result to be returned by this visit
 	    RuntimeObject ro_target = null; // Runtime repr. of target
-	    // if target is null, means that it is an attribute of self object. We find self
-	    // object in current callFrame  self.node
-		if (target == null || FSelfExpression.class.isInstance(node.getFTarget()))
-		{
-		    isFeatured = true;
-		    ro_target = interpreterContext.getCurrentFrame().getSelf();
-		    t_target =(FType)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
-		}
-		else if (FCallResult.class.isInstance(node.getFTarget()))
-		{
-		    isFeatured = true;
-		    ro_target = interpreterContext.getCurrentFrame().getOperationResult();
-		    t_target =(FType)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
-		}
-		// Is it a lambda expression?
-		else if (FCallVariable.class.isInstance(node.getFTarget()))
-		{
-		    isFeatured = true;
-		    ro_target = (RuntimeObject)this.accept(node.getFTarget()); /*interpreterContext.getCurrentFrame(
-		            ).getCurrentExpressionContext(
-		            ).getVariable(((FCallVariable)node.getFTarget()).getFName()).getRuntimeObject();
-		            */
-		    // get the type of the result
-		    t_target =(FType)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
-		}
-		// handle the case of calls like "toto.titi.tutu" -> recursive
-		// target.node -> target1.toto.node 
-		else if (FCallFeature.class.isInstance(target))
-		{
-		    isFeatured = true;
-		    ro_target = (RuntimeObject)this.accept(target);
-		    RuntimeObject metaClass=ro_target.getMetaclass();
-		    if (metaClass.getData()!=null)
-		    	t_target=(FType)metaClass.getData().get("kcoreObject");
-		    if (t_target==null)
-		    {
-		    	System.err.println("" +
-		    			"The RuntimeObjet named '"
-		    	        +((FCallFeature)target).getFName()+"'"+" must be typed");
-		    	if (metaClass.getData()==null)
-		    	System.err.println("Moreover, its meta class has no hashtable");
-		    }
-		    	
+	    
+	    // Get the target of the call
+	    if (node.getFTarget() == null) {
+	        // Self if nothing is specified
+	        ro_target = interpreterContext.peekCallFrame().getSelf();
+	    }
+	    else {
+	        ro_target = (RuntimeObject)this.accept(node.getFTarget());
+	    }
+	    // Check that target is not void
+	    if (ro_target == memory.voidINSTANCE) {
+	        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
+	        throw new Error(" >> CALL ON A VOID TARGET <<");
+	    }
+	    
+	    if (ro_target == null) {
+	        internalLog.error("INTERPRETER INTERNAL ERROR : Call on a null target");
+	        throw new Error("INTERPRETER INTERNAL ERROR : Call on a null target");
+	    }
+	    
+	    // Get The type of the Object
+	    t_target =(FClass)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
+	    
+	    // This is just a test for debbuging the interpreter. It should never occur
+	    if (t_target == null) {
+	        internalLog.error("INTERPRETER INTERNAL ERROR : unable to get the type of the target");
+	        throw new Error("INTERPRETER INTERNAL ERROR : unable to get the type of the target");
+	    }
+
+		// Get the feature
+		Object feature = getFeatureFromFeatureCall(t_target, node);
+		
+		// This should never happend is the type checker has checked the program
+		if (feature == null) {
+		    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature");
+	        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature");
 		}
 		
-		else if (FIntegerLiteral.class.isInstance(target)) {
-		    isFeatured = true;
-			ro_target=(RuntimeObject)correspondanceTable.get(target);
-			if (ro_target==null) {
-				//this integer literal comes from kermeta language definition (see uminus)
-				//as languages definitions are not processed as programs, we have to create a ro for the literal
-				ro_target= fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(((FIntegerLiteral)target).getFValue(),roFactory);
-				correspondanceTable.put(target,ro_target);
-			}
-			RuntimeObject integerClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::Integer");
-			t_target=(FType)integerClassRO.getData().get("kcoreObject");
-		}
+		// The feature can be either an operation or a property
 		
-		else if (FStringLiteral.class.isInstance(target)) {
-		    isFeatured = true;
-		    ro_target=(RuntimeObject)correspondanceTable.get(target);
-		    if (ro_target==null) {
-				//this integer literal comes from kermeta language definition (see uminus)
-				//as languages definitions are not processed as programs, we have to create a ro for the literal
-				ro_target= fr.irisa.triskell.kermeta.runtime.basetypes.String.create(((FStringLiteral)target).getFValue(),roFactory);
-				correspondanceTable.put(target,ro_target);
-			}
-			RuntimeObject stringClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::String");
-			t_target=(FType)stringClassRO.getData().get("kcoreObject");
-		}
-		
-		else if (FBooleanLiteral.class.isInstance(target)) {
-		    isFeatured = true;
-		    ro_target=(RuntimeObject)correspondanceTable.get(target);
-		    if (ro_target==null)
-		    {
-		        ro_target= fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(((FBooleanLiteral)target).isFValue(),roFactory);
-		        correspondanceTable.put(target,ro_target);
-		    }
-		    RuntimeObject booleanClassRO=roFactory.getTypeDefinitionByName("kermeta::standard::Boolean");
-		    t_target=(FType)booleanClassRO.getData().get("kcoreObject");
-		}
-		// If target is a CallVariable :
-		// Get the precise type of the CallFeature node.
-		// If the type of CallFeature is a property :
-		// 		get its value (and return it)
-		// Else if the type of CallFeature is an operation
-		//		create a new CallFrame
-		//		process the operation (by calling accept on it) in order to get
-		//		the value of its evaluation, (in order to return it)
-		//		
-		else if (FCallVariable.class.isInstance(target))
+		// Is the callfeature an operation call? So that we create a new call
+		// frame and accept this operation in order to process it.
+		if (feature instanceof FOperation)
 		{
-		   isFeatured = true;
-		    String var_name = ((FCallVariable)target).getFName();
-		    ExpressionContext e_context = findVariableInContext(var_name);
-		    // Get the RuntimeObject (ro_target) corresponding to this target (ko) 
-		    // (in ko.mycallfeature)
-		    if (e_context != null)
-		    {
-		    	Variable var=(Variable)e_context.getVariables().get(var_name);
-		        ro_target = var.getRuntimeObject();
-		    	t_target =(FType)ro_target.getMetaclass().getData().get("kcoreObject"); 
-		        
-		    }
-		    else // FIXME : rather test the validity of t_target?
-		    {
-		    	// TODO : raise an interpretation exception
-		        System.err.println("I could not find the context");
-		    }
+			// Get the parameters of this operation
+			ArrayList parameters = visitList(node.getFParameters());
+			// Get the FOperation corresponding to this operation call
+			FOperation foperation = (FOperation)feature;
+			// Create a context for this operation call, setting self object to ro_target
+			interpreterContext.pushCallFrame(ro_target, foperation, parameters);
+			
+			// Resolve this operation call
+			result = (RuntimeObject)this.accept(foperation);
+			
+			// After operation has been evaluated, pop its context
+			interpreterContext.popCallFrame();
+		}
+		// Is it a property? If yes, update the RuntimeObject repr.g the target node !
+		else if (feature instanceof FProperty)
+		{
+		    FProperty fproperty = (FProperty)feature;
+		    // Get the runtime object corresponding to the property
+		    RuntimeObject ro_property = getRuntimeObjectForFProperty(t_target, fproperty.getFName());
 		    
-		}
-		// Now we can process either Self (target==null) or FCallVariable (the 2nd test)
-		if (isFeatured == true)
-		{
-			// RuntimeObject feature = factory.getTypeDefinitionByName(qname);
-			Object feature = getFeatureType(t_target, node);
-			// Is the callfeature an operation call? So that we create a new call
-			// frame and accept this operation in order to process it.
-			if (feature!=null && FOperation.class.isInstance(feature))
-			{
-				// Get the parameters of this operation
-				ArrayList parameters = visitList(node.getFParameters());
-				// Get the FOperation corresponding to this operation call
-				FOperation foperation = (FOperation)feature;
-//				 Create a context for this operation call, setting self object to ro_target
-				interpreterContext.pushNewCallFrame(ro_target, foperation);
-				
-				interpreterContext.getCurrentFrame().setParameters(parameters);
-				
-				//memorize self object
-				interpreterContext.getCurrentFrame().setSelf(ro_target);
-				
-				// Resolve this operation call
-				result = (RuntimeObject)this.accept(foperation);
-				
-				// After operation has been evaluated, pop its context
-				interpreterContext.getFrameStack().pop();
+		    // This is just a debbuging check. It should never occur
+		    if (feature == null) {
+			    internalLog.error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + fproperty.getFName());
+		        throw new Error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + fproperty.getFName());
 			}
-			// Is it a property? If yes, update the RuntimeObject repr.g the target node !
-			else if (feature!=null && FProperty.class.isInstance(feature))
-			{
-				String propertyName = ((FProperty)feature).getFName();
-				if (ro_target.getProperties().containsKey(propertyName))
-				{
-				    result=(RuntimeObject)ro_target.getProperties().get(propertyName);
-				}
-				else // if the ro_property does not exist yet, we create it (call of Object.get)
-				{
-				    RuntimeObject ro_property = getROProperty(ro_target, t_target, propertyName);
-				    // the attribute is not set yet for ro_target instance?
-				    result=fr.irisa.triskell.kermeta.runtime.language.Object.get(
-				            ro_target, ro_property);
-				/*	System.err.println(
-					        "Feature '"+propertyName+"'unreachable " +
-					        "when attempting to access it on "+ro_target.getProperties());*/
-				}
-				
-			}
-		}
-		// else it is a class (kermeta_behavior::TypeLiteral).
-		// TypeLiteral : a class (we can have .new, .a_reflective_property, an enumeration
-		if (FTypeLiteral.class.isInstance(target))
-		{
-		    // Is it a class creation? result -> a new RO which type is this class
-		    FType type = ((FTypeLiteral)target).getFTyperef().getFType();
-		    if (FClass.class.isInstance(type))
-		    {
-		        FClassDefinition class_def = ((FClass)type).getFClassDefinition();
-		        RuntimeObject runtimeClass=(RuntimeObject)roFactory.getClassDefTable().get(KMReflect.getQualifiedName(class_def));
-		        
-		    	if (runtimeClass==null)
-		    		System.err.println("ERROR => no runtime class to instanciate.");
-		        result = roFactory.createRuntimeObject(runtimeClass);
-		    }
-		    // Is it an enum literal? result -> a RO which type is an enumliteral
-		    else if (FEnumeration.class.isInstance(target))
-		    {
-		        result = null; // TODO : get the enumliteral in the registered RuntimeObjects//From KMBuilder
-		    }
-		    // Is it something else?
-		    else
-		    {
-		        System.err.println("I could not return something when visiting call feature");
-		    }
 		    
+		    // Get the value of the property
+		    result = fr.irisa.triskell.kermeta.runtime.language.Object.get(ro_target, ro_property);
 		}
-		// else : it is assumed that it is self object
+		
 		return result;
 	}
 		
@@ -844,12 +693,12 @@ public class BaseInterpreter extends KermetaVisitor {
             internalLog.error("SecurityException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
 			throw	new KermetaVisitorError("SecurityException invoking "+ jmethodName + " on Class " +jclassName  ,e1);
         } catch (NoSuchMethodException e1) {
-            internalLog.error("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+            internalLog.error("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!", e1);
 			throw	new KermetaVisitorError("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName  ,e1);
         }
         Object result = null;
         try {
-            result = jmethod.invoke(jclass.newInstance(), paramsArray);
+            result = jmethod.invoke(null, paramsArray);
         } catch (IllegalArgumentException e2) {        
 			internalLog.error("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
 			throw	new KermetaVisitorError("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName  ,e2); 		
@@ -872,8 +721,8 @@ public class BaseInterpreter extends KermetaVisitor {
 					throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
 		        }
             
-        } catch (InstantiationException e2) {
-            internalLog.error("InstantiationException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+        } catch (Throwable e2) {
+            internalLog.error("InstantiationException invoking "+ jmethodName + " on Class " +jclassName, e2);
 			throw	new KermetaVisitorError("InstantiationException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
         }
         return result;
@@ -899,7 +748,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral) 
 	 */
 	public Object visit(FBooleanLiteral node) {
-	    return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(node.isFValue(),memory.getROFactory());
+	    return memory.getRuntimeObjectForBoolean(node.isFValue());
 	}
 	
 	public Object visit(FEnumerationLiteral node)
@@ -922,7 +771,7 @@ public class BaseInterpreter extends KermetaVisitor {
 	public Object visit(FClassDefinition node)
 	{
 	    // Get the qualified name of this class
-	    String qname = KMReflect.getQualifiedName(node);
+	    String qname = unit.getQualifiedName(node);
 	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
 	    //node.getFOwnedOperation().
 	    // Set the attribute self_object of current frame, so that we can manipulate it
@@ -1033,7 +882,7 @@ public class BaseInterpreter extends KermetaVisitor {
      * InterpreterContext and returns the corresponding Variable
      * @param var_name
      * @return the expression context where we found it
-     */
+    
     public ExpressionContext findVariableInContext(String varName)
     {
         boolean found=false;
@@ -1063,18 +912,7 @@ public class BaseInterpreter extends KermetaVisitor {
         }
         return context;
     }
- 
-    
-    public static void updateContextVariable()
-    {
-        
-    }
-    
-    public static FCallExpression getPropertyValueFromContext()
-    {
-        return null;
-    }
-    
+  */
     /**
      * This is a helper (TODO : move it in a specific class) that returns the precise
      * type of the <code>feature</code> that is "applied" to the given <code>target</code>.
@@ -1082,36 +920,33 @@ public class BaseInterpreter extends KermetaVisitor {
      * if feature is an operation or an attribute. We can find that it is an operation if there
      * are parameters, but in the other case (no parameters) we have no way to find it.
      * @param type the type reference of the "callee" element on which feature is "called"
-     * @param feature the feature of which we want the type (FOperation, FAttribute)
+     * @param feature_call the feature of which we want the type (FOperation, FAttribute)
      * @return the ecore object representing this feature. Its real type is either FProperty or FOperation
      */
-    public Object getFeatureType(FType type, FCallFeature feature)
+    public Object getFeatureFromFeatureCall(FClass target_class, FCallFeature feature_call)
     {
         Object result = null;
-        // If type is a FClass
-        FClassDefinition class_def = ((FClass)type).getFClassDefinition();
-        // Is the feature in the class definition of *type*?
-        result = getFlatFeatureType(class_def, feature);
-        // If it is still null, we have to find it in the Super classes, recursively
+        
+        // Crete the type corresponding to the target
+        SimpleType target = new SimpleType(target_class);
+        
+        // Check if it is a property call
+        CallableProperty cp = target.getPropertyByName(feature_call.getFName());
+        if (cp != null) result = cp.getProperty();
+        
+        // Check if it is an operation call
+        if (result == null) {
+            CallableOperation co = target.getOperationByName(feature_call.getFName());
+            if (co != null) result = co.getOperation();
+        }
+        
+        // This should not happend if the program has been type-checked
         if (result == null)
         {
-            result = getSuperFeatureType(class_def, feature);
+           System.err.println("feature '"+feature_call.getFName()+"' not found in class '"+target_class.getFClassDefinition().getFName()+"'");
+           throw new KermetaInterpreterError("feature '"+feature_call.getFName()+"' not found in class '"+target_class.getFClassDefinition().getFName()+"'");
         }
-        // If it is still still null, find operation in Object!
-        if (result == null)
-        {
-            
-            class_def = (FClassDefinition)unit.typeDefinitionLookup(KermetaUnit.ROOT_CLASS_QNAME);
-            result = getFlatFeatureType(class_def, feature);
-        }
-        if (result == null)
-        {
-            //throw new KermetaInterpreterError("feature '"+feature.getFName()+"' not found in class '"+class_def.getFName()+"'");
-            System.err.println("feature '"+feature.getFName()+"' not found in class '"+class_def.getFName()+"'");
-        }
-        internalLog.info("the type of the callfeature is : "+class_def.getFName()+"; result:"+result);
-        // TODO : test for other kinds of types or Exception? -- is feature valuable
-        // in a source code for another target type than FClass?
+        
         return result;
     }
      
@@ -1187,11 +1022,5 @@ public class BaseInterpreter extends KermetaVisitor {
     
     public InterpreterContext getInterpreterContext() {
     	return this.interpreterContext;
-    }
-
-    
+    }    
 }
-
-
-
-

@@ -4,11 +4,11 @@
 
 package testPackage;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: 036_testIterator.main.kmt,v 1.2 2005-05-10 08:18:12 jpthibau Exp $
+ * $Id: 036_testIterator.main.kmt,v 1.3 2005-05-13 15:05:28 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -23,7 +23,7 @@ alias Integer : kermeta::standard::Integer;
  ***************************************************************************
  */
 
-class TestIterator inherits kermeta::kunit::Assert
+class TestIterator inherits kermeta::kunit::Test
 {    
 	attribute aset : kermeta::standard::Set<Integer>
 

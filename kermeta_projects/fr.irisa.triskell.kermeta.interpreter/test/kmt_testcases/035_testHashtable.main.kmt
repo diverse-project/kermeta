@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 035_testHashtable.main.kmt,v 1.4 2005-05-02 07:34:29 jpthibau Exp $
+ * $Id: 035_testHashtable.main.kmt,v 1.5 2005-05-13 15:05:26 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testHashtable.kmt
@@ -15,17 +15,17 @@
 
 @testOperation "yes"
 @mainClass "testHashtable::TestHashtable"
-@mainOperation " "
+@mainOperation "setUp"
 
 package testHashtable;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 alias Integer : kermeta::standard::Integer;
 alias String : kermeta::standard::String;
 
 
-class TestHashtable inherits kermeta::kunit::Assert
+class TestHashtable inherits kermeta::kunit::Test
 {
 	
 	attribute hashtable : kermeta::utils::Hashtable<Integer, String>

@@ -1,4 +1,4 @@
-/* $Id: 014_testExternJavaCall.main.kmt,v 1.4 2005-04-26 08:18:06 dvojtise Exp $
+/* $Id: 014_testExternJavaCall.main.kmt,v 1.5 2005-05-13 15:05:25 ffleurey Exp $
  * Project : Kermeta.interpreter. test
  * License : GPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -14,7 +14,7 @@
 
 package testExternJavaCall;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 class Test_ExternJavaCall  inherits kermeta::kunit::Assert {
 
@@ -115,7 +115,7 @@ class Test_ExternJavaCall  inherits kermeta::kunit::Assert {
         stringValue2 := "s2"  
         boolValue1 := false      
         
-        returnedboolvalue ?= extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.call3Integers2Strings1BooleanParams(intValue1,intValue2,intValue3,stringValue1,stringValue2,boolValue1)
+        returnedboolvalue ?= extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.call3Integers2Strings1BooleanParams(self, intValue1,intValue2,intValue3,stringValue1,stringValue2,boolValue1)
         
         assertTrueWithMsg(returnedboolvalue, "test3Integers2Strings1BooleanParams failed (1)")
         assertTrueWithMsg((intValue1 == 178), "test3Integers2Strings1BooleanParams failed (2)")

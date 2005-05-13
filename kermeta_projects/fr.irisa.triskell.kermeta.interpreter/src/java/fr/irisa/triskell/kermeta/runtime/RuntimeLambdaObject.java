@@ -1,4 +1,4 @@
-/* $Id: RuntimeLambdaObject.java,v 1.3 2005-05-10 17:29:48 zdrey Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.1 2005-05-13 15:05:41 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
  * License: GPL
@@ -7,7 +7,7 @@
  * Creation date: Apr 21, 2005
  * Authors: zdrey
  */
-package fr.irisa.triskell.kermeta.interpreter;
+package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -17,7 +17,8 @@ import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
 import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.interpreter.Variable;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FParameter;
 import fr.irisa.triskell.kermeta.structure.FType;
@@ -80,7 +81,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
             // Get the type of param, its identifier
             // ->RuntimeObject called_param = (RuntimeObject)it.next();
 	        FLambdaParameter p = (FLambdaParameter)params.get(i);
-	        this.defineLambdaParameter(p.getFType().getFType(), p.getFName(), null);
+	        this.defineLambdaParameter(p.getFName(), getFactory().getMemory().voidINSTANCE);
         }
     }
     
@@ -99,10 +100,9 @@ public class RuntimeLambdaObject extends RuntimeObject {
 	 * @param init the initial value of this variable
 	 * @return the RuntimeObject that was added as the value of this variable
 	 */
-	public Variable defineLambdaParameter(FType type, String name, RuntimeObject init)
+	public Variable defineLambdaParameter(String name, RuntimeObject init)
 	{
-	    Variable var = new Variable();
-	    var.setType(type);
+	    Variable var = new Variable(name, init);
 	    if (init!=null)
 	        var.setRuntimeObject(init);
 		lambdaParameters.put(name, var);

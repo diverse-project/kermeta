@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.5 2005-05-04 14:15:59 zdrey Exp $
+/* $Id: CallFrame.java,v 1.6 2005-05-13 15:05:29 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -15,11 +15,14 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.structure.FParameter;
 
 /**
  * CallFrame is the context for an operation call
@@ -29,56 +32,76 @@ public class CallFrame {
     /**
      * the interpreter global context
      */
-    protected InterpreterContext context;
+    private InterpreterContext context;
 
     /**
      * self object (inside which the operation call is done)
      */
-    protected RuntimeObject self;
+    private RuntimeObject self;
 
     /**
      * the operation result of the operation linked to this CallFrame
      */
-    protected RuntimeObject operation_result;
-
-
-    /**
-     * the list of variables for the operation associated with this CallFrame (RuntimeObjects)
-     */
-    protected ArrayList parameters;
+    private RuntimeObject operation_result;
 
     /**
      * the list of expression contexts that are linked to this frame (@see ExpressionContext class javadoc)
      */
-    protected Stack block_stack = new Stack();
+    private Stack block_stack;
 
     /** the FOPeration related to this call frame*/
-    protected FOperation operation = null;
+    private FOperation operation;
     
     /**
      * Constructor
      * Initially, we only have the global context and self object
+     * pParameters should be a list of RuntimeObject corresponding to the
+     * actual parameters.
      */
-    public CallFrame( RuntimeObject pSelf, InterpreterContext pContext, FOperation pOperation)
+    public CallFrame( RuntimeObject pSelf, InterpreterContext pContext, FOperation pOperation, ArrayList pParameters )
     {
         self = pSelf;
         context = pContext;
         operation = pOperation;
+        operation_result = pSelf.getFactory().getMemory().voidINSTANCE ;
+        block_stack = new Stack();
         
+        initialize(pParameters);
+    }
+    
+    protected void initialize(ArrayList pParameters) {
+        pushExpressionContext();
+        Iterator it = operation.getFOwnedParameter().iterator();
+        int i=0;
+        while (it.hasNext()) {
+            FParameter fparam = (FParameter)it.next();
+            peekExpressionContext().defineVariable(fparam.getFName(), (RuntimeObject)pParameters.get(i));
+            i++;
+        }
+    }
+    
+    public Variable getVariableByName(String name) {
+        Variable result = null;
+        for (int i=block_stack.size()-1; i>=0; i--) {
+            result = ((ExpressionContext)block_stack.get(i)).getVariableByName(name);
+            if (result != null) return result;
+        }
+        result = context.getInterpreterVariableByName(name);
+        return result;
     }
     
     /**
      * Push a new expression Context. We do it whenever we encounter a new block (do..end)
      * @param root the first element that is "at the origin" of the creation of the block stack
      */
-    public void pushNewExpressionContext(FExpression root)
+    public void pushExpressionContext()
     {   
-        // Create a new block stack and set its attributes (root, variable stack)
-        // Add the root expression to it
-        ExpressionContext expression_context = new ExpressionContext(root, new Hashtable());
-        block_stack.push(expression_context);
-        
-        
+        block_stack.push(new ExpressionContext());
+    }
+    
+    public ExpressionContext peekExpressionContext()
+    {
+        return (ExpressionContext)block_stack.peek();
     }
     
     /**
@@ -103,16 +126,8 @@ public class CallFrame {
         return context;
     }
 
-    
-    public Stack getBlockStack()
-    {
-        return block_stack;
-    }
-    
-    public ExpressionContext getCurrentExpressionContext()
-    {
-        return (ExpressionContext)block_stack.peek();
-    }
+
+   
     
     public RuntimeObject getOperationResult()
     {
@@ -122,8 +137,6 @@ public class CallFrame {
     public void setOperationResult(RuntimeObject pResult)
     {
         operation_result = pResult;
-        ExpressionContext frameBottomContext=(ExpressionContext)block_stack.get(0);
-        frameBottomContext.defineVariable(null,"result",pResult);
     }
 
     /**
@@ -136,43 +149,10 @@ public class CallFrame {
     }
 
     /**
-     * @param self The self to set.
-     * 
-     * @uml.property name="self"
-     */
-    public void setSelf(RuntimeObject self) {
-        this.self = self;
-    }
-
-    /**
-     * @return Returns the parameters.
-     * 
-     * @uml.property name="parameters"
-     */
-    public ArrayList getParameters() {
-        return parameters;
-    }
-
-    /**
-     * @param parameters The parameters to set.
-     * 
-     * @uml.property name="parameters"
-     */
-    public void setParameters(ArrayList parameters) {
-        this.parameters = parameters;
-    }
-
-    
-    /**
      * @return Returns the operation.
      */
     public FOperation getOperation() {
         return operation;
     }
-    /**
-     * @param operation The operation to set.
-     */
-    public void setOperation(FOperation operation) {
-        this.operation = operation;
-    }
+
 }

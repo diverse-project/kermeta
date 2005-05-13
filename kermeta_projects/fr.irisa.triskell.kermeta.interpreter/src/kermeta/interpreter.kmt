@@ -1,5 +1,5 @@
 /***************************************************
- * $Id: interpreter.kmt,v 1.6 2005-04-22 01:39:09 ffleurey Exp $
+ * $Id: interpreter.kmt,v 1.7 2005-05-13 15:05:53 ffleurey Exp $
  * Franck FLEUREY - 23/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -10,7 +10,7 @@
  
 package kermeta::interpreter;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 using kermeta::language::behavior
 using kermeta::language::structure

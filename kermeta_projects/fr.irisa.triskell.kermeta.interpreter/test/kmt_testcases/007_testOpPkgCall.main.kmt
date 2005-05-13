@@ -2,7 +2,7 @@
 @mainOperation "operation1"
 package testOpPackage;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 require "7_testInterPackageCall.kmt"
 
 // This test calls an operation of another package, which itself calls an operation

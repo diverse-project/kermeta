@@ -2,7 +2,7 @@
 @mainOperation "createMyCar"
 package testOpCallObject;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 // Creation of an object
 class Car {
@@ -43,16 +43,16 @@ class MyCarCreation inherits kermeta::kunit::Assert {
 		car.wheels.add(BLw)
 		do //check the overflow of multiplicity upper bound
 			car.wheels.add(Rw)
-			assert(FALSE)
-			rescue (e : Exception)
-       			assert(TRUE)
+			assert(false)
+			rescue (e : kermeta::exceptions::Exception)
+       			assert(true)
        	end
-		car.remove
+		//car.
 		do //check destruction of contained parts
-			stdio.writeln(BFw.name)
-			assert(FALSE)
-			rescue (e : Exception)
-       			assert(TRUE)
+			stdio.writeln(BLw.name)
+			assert(false)
+			rescue (e : kermeta::exceptions::Exception)
+       			assert(true)
        	end
 	end
 }

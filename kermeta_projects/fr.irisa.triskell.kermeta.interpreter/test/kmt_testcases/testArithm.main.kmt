@@ -4,7 +4,7 @@
 
 package testArithm;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 alias Integer : kermeta::standard::Integer;
 // arithmetic operations - clone of 2_testArithm.main.kmt

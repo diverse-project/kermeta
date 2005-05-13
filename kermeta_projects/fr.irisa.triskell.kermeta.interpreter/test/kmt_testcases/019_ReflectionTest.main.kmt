@@ -3,7 +3,7 @@
 
 package testPackage;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 alias Integer : kermeta::standard::Integer;
 alias String : kermeta::standard::String;
@@ -47,7 +47,7 @@ class D inherits B,C
  	end
 }
 
-class TestReflection inherits kermeta::kunit::Assert
+class TestReflection inherits kermeta::kunit::Test
 {    
      operation main_operation() is do
      	var d : D

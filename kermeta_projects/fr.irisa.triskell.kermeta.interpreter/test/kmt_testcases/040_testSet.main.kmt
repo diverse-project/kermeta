@@ -1,13 +1,13 @@
 @testOperation "yes"
 @mainClass "testPackage::TestIterator"
-@mainOperation "main_operation"
+@mainOperation "testAdd"
 
 package testPackage;
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: 040_testSet.main.kmt,v 1.2 2005-05-10 13:08:00 jpthibau Exp $
+ * $Id: 040_testSet.main.kmt,v 1.3 2005-05-13 15:05:28 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -24,7 +24,7 @@ alias Integer : kermeta::standard::Integer;
  ***************************************************************************
  */
 
-class TestIterator inherits kermeta::kunit::Assert
+class TestIterator inherits kermeta::kunit::Test
 {    
 	attribute aset : kermeta::standard::Set<Integer>
 	attribute init_set : kermeta::standard::Set<Integer>
@@ -185,9 +185,9 @@ class TestIterator inherits kermeta::kunit::Assert
 		
 		sequence := init_set.collect { element | element.plus(100) } 
 		// Has result the same elements as init_set?
-		assert(result.elementAt(0)==132)
-		assert(result.elementAt(0)==123)
-		assert(result.elementAt(0)==141)
+		assert(sequence.elementAt(0)==132)
+		assert(sequence.elementAt(1)==123)
+		assert(sequence.elementAt(2)==141)
 		
 	end
 	

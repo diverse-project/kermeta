@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.6 2005-04-22 17:16:59 zdrey Exp $
+/* $Id: ExpressionContext.java,v 1.7 2005-05-13 15:05:30 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -34,51 +34,23 @@ public class ExpressionContext {
      * The expression associated to this context
      * Typically : a FLoop, FConditional, and one for the FOperationBody if any var.
      * is declared inside it and at the top level. */ 
-    FExpression root;
+    //FExpression root;
 
     /**
      * The set of variables defined in this block
      * key : the name of the variable (String)
      * value : the variable itself (Variable) */
     Hashtable variables;
-
-	
-	/**
-	 * Constructor 
-	 * @param pRoot
-	 */
-	public ExpressionContext()
-	{
-	    variables = new Hashtable();
-	//    this.defineVariable(root);
-	}
 	
 	/**
 	 * Constructor 
 	 * @param root
 	 * @param variables
 	 */
-	public ExpressionContext(FExpression pRoot, Hashtable pVariables)
+	public ExpressionContext(/*FExpression pRoot*/)
 	{
-	    root = pRoot;
-	    variables = pVariables;
-	}
-	
-	
-	/**
-	 * @deprecated 
-	 * Add a new variable, from its declaration, in the context
-	 * Copy-try from ff.
-	 * FVariableDecl is "var toto" in kermeta 
-	 * @param declaration the variable declaration of the variable, to add in the context
-	 * @return the RuntimeObject that was added as the value of this variable
-	 */
-	public Variable defineVariable(FVariableDecl declaration)
-	{
-		Variable var = new Variable();
-		
-		variables.put(((FVariableDecl)declaration).getFIdentifier(), var);
-		return var;
+	 //   root = pRoot;
+	    variables = new Hashtable();
 	}
 	
 	/** 
@@ -91,43 +63,16 @@ public class ExpressionContext {
 	 * @param init the initial value of this variable
 	 * @return the RuntimeObject that was added as the value of this variable
 	 */
-	public Variable defineVariable(FType type, String name, RuntimeObject init)
+	public Variable defineVariable(String name, RuntimeObject init)
 	{
-	    Variable var = new Variable();
-	    var.setType(type);
-	    if (init!=null)
-	        var.setRuntimeObject(init);
+	    Variable var = new Variable(name, init);
 		variables.put(name, var);
 		return var;
 	    
 	}
 	
-	/**
-	 * Setter for the hashtable <code>variables</code>. Do not clear the current
-	 * content of variables, but overwrites the entries if there is conflict keys.
-	 * @param variables
-	 */
-	public void setVariables(Hashtable p_variables)
-	{	    
-	    variables.putAll(p_variables);
-	}
-	
-	/**
-	 * 
-	 * @param name
-	 * @param value
-	 */
-	public void setVariable(String name, RuntimeObject object)
-	{
-		if (variables.containsKey(name))
-		{
-			Variable var = (Variable)variables.get(name);
-			var.setRuntimeObject(object);
-		}
-		else
-		{
-		    System.err.println("Interpreter Error : could not set the undeclared variable "+name);
-		}
+	public void addVariables(Hashtable vars) {
+	    variables.putAll(vars);
 	}
 	
 	/***
@@ -135,12 +80,19 @@ public class ExpressionContext {
 	 * @param name
 	 * @return the Variable corresponding to name
 	 */
-	public Variable getVariable(String name)
+	public Variable getVariableByName(String name)
 	{
-	    Variable result = null;
-	    if (variables.containsKey(name))
-	        result = (Variable)variables.get(name);
-	    return result;
+	        return (Variable)variables.get(name);
+	}
+	/**
+	 * Return true if the expression context has a variable
+	 * named name.
+	 * @param name
+	 * @return
+	 */
+	public boolean hasVariableByName(String name)
+	{
+	        return variables.containsKey(name);
 	}
 
     /*
@@ -149,9 +101,6 @@ public class ExpressionContext {
      * 
      *
      */
-    public void setRoot(FExpression pRoot) {
-        root = pRoot;
-    }
     
     public Hashtable getVariables() {
         return variables;

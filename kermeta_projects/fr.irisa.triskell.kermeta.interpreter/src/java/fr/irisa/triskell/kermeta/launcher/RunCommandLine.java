@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.3 2005-05-12 08:21:37 zdrey Exp $
+/* $Id: RunCommandLine.java,v 1.4 2005-05-13 15:05:45 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : GPL
@@ -27,7 +27,7 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
  * Start a Kermeta program from the command line
  *
  */
-public class RunCommandLine extends Run{
+public class RunCommandLine extends KermetaInterpreter{
     protected String[] theArgs;
     public RunCommandLine(String[] args)
 	{
@@ -55,12 +55,12 @@ public class RunCommandLine extends Run{
 		{
 		    runTestSuite(
 		            mainClassValue,
-		            builder  );
+		            unit  );
 		}
 		else
 		    // Otherwise : let's execute the mainClass.mainOperation
 		    runMainOperation(
-		       mainClassValue, mainOperationValue, mainArgsValue, builder,
+		       mainClassValue, mainOperationValue, mainArgsValue, unit,
 		       theArgs);
 	
 	}  
@@ -78,7 +78,7 @@ public class RunCommandLine extends Run{
 	        String mainClassValue, 
 	        KermetaUnit builder)
 	{
-	    RuntimeObjectFactory roFactory = this.runtimeLoader.getRuntimeMemory().getROFactory();
+	    //RuntimeObjectFactory roFactory = this.runtimeLoader.getRuntimeMemory().getROFactory();
 	    // Create the RuntimeObject of main class, of its instance, and 
 	    // its FClassDefinition so that we can get its operations in order to run them
 	    RuntimeObject roMainClass=(RuntimeObject)roFactory.getClassDefTable().get(mainClassValue);
@@ -87,7 +87,7 @@ public class RunCommandLine extends Run{
 	        // the indicated mainclass doesn't exist in the given context
 	        throw new KermetaLoaderError(mainClassValue + " doesn't exist in "+args[0]);
 	    }	    
-	    RuntimeObject roMainClassInstance=roFactory.createRuntimeObject(roMainClass);
+	    RuntimeObject roMainClassInstance=roFactory.createObjectFromClassDefinition(roMainClass);
 	    FClassDefinition mainClassDef=((FClass)roMainClass.getData().get("kcoreObject")).getFClassDefinition();
 	    Iterator it=mainClassDef.getFOwnedOperation().iterator();
 	    
@@ -127,7 +127,7 @@ public class RunCommandLine extends Run{
 
 	    RuntimeObjectFactory roFactory = this.runtimeLoader.getRuntimeMemory().getROFactory();
 	    RuntimeObject roMainClass=(RuntimeObject)roFactory.getClassDefTable().get(mainClassValue);
-	    RuntimeObject roMainClassInstance=roFactory.createRuntimeObject(roMainClass);
+	    RuntimeObject roMainClassInstance=roFactory.createObjectFromClassDefinition(roMainClass);
 	    FClassDefinition mainClassDef=((FClass)roMainClass.getData().get("kcoreObject")).getFClassDefinition();
 	    Iterator it=mainClassDef.getFOwnedOperation().iterator();
 	    boolean found=false;

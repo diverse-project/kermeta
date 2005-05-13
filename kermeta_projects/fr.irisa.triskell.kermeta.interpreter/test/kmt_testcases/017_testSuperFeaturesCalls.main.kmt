@@ -3,7 +3,7 @@
 
 package testPackage;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 alias Integer : kermeta::standard::Integer;
 alias String : kermeta::standard::String;

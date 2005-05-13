@@ -3,7 +3,7 @@
 @mainOperation "testoptat"
 
 package testBoolean;
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 // This class tests the logical operators on Booleans
 // "and" is prioritary to "or"

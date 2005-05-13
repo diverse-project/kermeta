@@ -1,4 +1,4 @@
-/* $Id: TestJavaCall.java,v 1.4 2005-05-12 08:22:54 zdrey Exp $
+/* $Id: TestJavaCall.java,v 1.5 2005-05-13 15:05:33 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
  * License    : GPL
@@ -15,7 +15,7 @@ package fr.irisa.triskell.kermeta.interpreter.test;
 import org.apache.log4j.Logger;
 
 import junit.framework.TestCase;
-import fr.irisa.triskell.kermeta.launcher.Run;
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
@@ -53,13 +53,14 @@ public class TestJavaCall extends TestCase{
         internalLog.info("simpleCall was called");
         callCounter++;
 	}
-    
+    /*
     public static RuntimeObject callBooleanReturn() {
         internalLog.info("callBooleanReturn was called");
 
         callCounter++;
         return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(true,roFactory);
 	}
+	*/
     public static RuntimeObject callIntegerReturn() {
         internalLog.info("callIntegerReturn was called");
         //  Long way
@@ -110,6 +111,7 @@ public class TestJavaCall extends TestCase{
     }
     
     public static RuntimeObject call3Integers2Strings1BooleanParams(
+            RuntimeObject self,
             RuntimeObject intparam1,
             RuntimeObject intparam2,
             RuntimeObject intparam3,
@@ -133,12 +135,12 @@ public class TestJavaCall extends TestCase{
     public static RuntimeObject callCollectionReturn() {
         internalLog.info("simpleCallReturn was called");
         callCounter++;
-        return Void.VOID;
+        return null; // shoud be Void
 	}
     
     public static RuntimeObject callSetReturn() {
         internalLog.info("simpleCallReturn was called");
-        return Void.VOID;
+        return null; // shoud be Void
 	}
 
     

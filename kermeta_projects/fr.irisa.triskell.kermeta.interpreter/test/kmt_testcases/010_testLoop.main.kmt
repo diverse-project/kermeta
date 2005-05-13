@@ -3,7 +3,7 @@
 
 package testLoop;
 
-require "../../../fr.irisa.triskell.kermeta.framework/src/kermeta/Standard.kmt"
+require kermeta
 
 
 // call an operation from another package 
