@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.20 2005-05-02 23:50:48 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.21 2005-05-13 16:44:03 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -80,7 +80,7 @@ public abstract class KermetaUnit {
 	
 	public static KermetaUnit getStdLib() {
 		if (std_lib == null) {
-			std_lib = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("kermeta");
+			std_lib = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("kermeta", new Hashtable());
 			
 			try {
 				std_lib.load();
@@ -287,7 +287,8 @@ public abstract class KermetaUnit {
 	 * returns null if type not found
 	 */
 	public FTypeDefinition typeDefinitionLookup(String fully_qualified_name) {
-		//System.out.println("typeDefinitionLookup " + uri + " " +fully_qualified_name);
+	/*
+//	  System.out.println("typeDefinitionLookup " + uri + " " +fully_qualified_name);
 		FTypeDefinition result = (FTypeDefinition)typeDefs.get(fully_qualified_name);
 		if (result == null) {
 			visited = true;
@@ -300,6 +301,25 @@ public abstract class KermetaUnit {
 		}
 		//System.out.println("typeDefinitionLookup " + uri + " " +fully_qualified_name + " -> " + result);
 		return result;
+	    */
+	    // Get the package:
+	    
+	    if (fully_qualified_name.lastIndexOf("::") < 0) return null;
+	    
+	    String pkg_name = fully_qualified_name.substring(0, fully_qualified_name.lastIndexOf("::"));
+	    
+	    String tname = fully_qualified_name.substring(fully_qualified_name.lastIndexOf("::") + 2);
+	    
+	    FPackage pack = packageLookup(pkg_name);
+	    if (pack == null) return null;
+	    
+	    Iterator it = pack.getFOwnedTypeDefinition().iterator();
+	    while(it.hasNext()) {
+	        FTypeDefinition td = (FTypeDefinition)it.next();
+	        if (td.getFName().equals(tname)) return td;
+	    }
+	    return null;
+		
 	}
 	
 	/**
@@ -937,5 +957,13 @@ public abstract class KermetaUnit {
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
+
+
+    /**
+     * 
+     */
+    public static void unloadStdLib() {
+       std_lib = null;
+    }
 }
 

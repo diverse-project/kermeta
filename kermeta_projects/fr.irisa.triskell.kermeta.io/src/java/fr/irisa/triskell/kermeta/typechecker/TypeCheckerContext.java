@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.7 2005-05-10 22:51:32 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.8 2005-05-13 16:43:51 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : GPL
@@ -341,7 +341,7 @@ public class TypeCheckerContext {
 	 * @param element
 	 * @return
 	 */
-	protected static Type getTypeFromMultiplicityElement(FMultiplicityElement element) {
+	public static Type getTypeFromMultiplicityElement(FMultiplicityElement element) {
 		Type result;
 		
 		FType element_simple_type = element.getFType();

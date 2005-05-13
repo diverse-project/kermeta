@@ -61,7 +61,7 @@ public class KermetaUnitFactory {
     protected Hashtable kmPath;
     
     
-    protected static KermetaUnit standard_lib;
+    //protected static KermetaUnit standard_lib;
     
     
     /**
@@ -75,7 +75,14 @@ public class KermetaUnitFactory {
     }
     
     public KermetaUnit createKermetaUnit(String uri) {
-        return createKermetaUnit(uri, new Hashtable());
+        Hashtable packages;
+        if (KermetaUnit.getStdLib() != null) {
+            packages = KermetaUnit.getStdLib().packages;
+        }
+        else {
+            packages = new Hashtable();
+        }
+        return createKermetaUnit(uri, packages);
     }
     
     /**
@@ -103,7 +110,7 @@ public class KermetaUnitFactory {
     	    }
     	    std = true;
     	    uri = KermetaUnit.STD_LIB_URI;
-    	    if (standard_lib != null) return standard_lib;
+    	    //if (standard_lib != null) return standard_lib;
     	}
     	
     	// resolve uri
@@ -211,6 +218,7 @@ public class KermetaUnitFactory {
     
     
     public void unloadAll() {
+        KermetaUnit.unloadStdLib();
     	loadedUnits.clear();
     }
     

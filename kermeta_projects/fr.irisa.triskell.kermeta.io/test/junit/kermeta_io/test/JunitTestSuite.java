@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.15 2005-04-26 08:28:09 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.16 2005-05-13 16:43:39 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -373,6 +373,8 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		// Do not write again the package declaration..
 		w.write(str_kmt.substring(pkg_name.length()));
 		w.close();
+		
+		KermetaUnitFactory.getDefaultLoader().unloadAll();
 		
 		// try to re-parse the pretty-printed version
 		KermetaUnit builder2 = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ppfile);
