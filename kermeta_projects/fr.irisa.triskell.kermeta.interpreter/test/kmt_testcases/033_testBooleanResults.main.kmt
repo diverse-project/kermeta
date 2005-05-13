@@ -6,7 +6,7 @@ package root;
 require kermeta
 
 /*****************************************************************************
- * $Id: 033_testBooleanResults.main.kmt,v 1.3 2005-05-13 15:05:26 ffleurey Exp $
+ * $Id: 033_testBooleanResults.main.kmt,v 1.4 2005-05-13 16:41:14 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testBooleanResults.kmt
@@ -19,7 +19,7 @@ require kermeta
  ***************************************************************************
  */
 
-class TestBooleanResults inherits kermeta::kunit::Assert
+class TestBooleanResults inherits kermeta::kunit::Test
 {    
     // Main operation that embeds all the tests 
      operation main_operation() is do

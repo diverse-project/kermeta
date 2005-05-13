@@ -1,4 +1,4 @@
-/* $Id: 014_testExternJavaCall.main.kmt,v 1.5 2005-05-13 15:05:25 ffleurey Exp $
+/* $Id: 014_testExternJavaCall.main.kmt,v 1.6 2005-05-13 16:41:16 ffleurey Exp $
  * Project : Kermeta.interpreter. test
  * License : GPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -16,7 +16,7 @@ package testExternJavaCall;
 
 require kermeta
 
-class Test_ExternJavaCall  inherits kermeta::kunit::Assert {
+class Test_ExternJavaCall  inherits kermeta::kunit::Test { 
 
 
     operation run() : kermeta::standard::Integer is do

@@ -7,7 +7,7 @@ require kermeta
 
 // This class tests the logical operators on Booleans
 // "and" is prioritary to "or"
-class TestBoolean inherits kermeta::kunit::Assert 
+class TestBoolean inherits kermeta::kunit::Test 
 {
 	// test true and true = true
 	operation testoptat() : Void is do

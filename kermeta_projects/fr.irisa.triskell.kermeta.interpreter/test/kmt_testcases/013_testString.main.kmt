@@ -8,7 +8,7 @@ require kermeta
 
 // Testing the operations on a String : 
 //
-class TestString inherits kermeta::kunit::Assert {
+class TestString inherits kermeta::kunit::Test {
  
     // Main operation that calls all the below ones
     operation main_operation() : kermeta::standard::String is do

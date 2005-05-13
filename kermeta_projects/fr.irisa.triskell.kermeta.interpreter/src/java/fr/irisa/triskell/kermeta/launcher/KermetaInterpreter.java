@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.1 2005-05-13 15:05:45 ffleurey Exp $
+/* $Id: KermetaInterpreter.java,v 1.2 2005-05-13 16:41:11 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -38,6 +38,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 
@@ -84,7 +85,7 @@ public class KermetaInterpreter {
 	{
 	    super();
 	    KermetaUnitFactory.getDefaultLoader().unloadAll();
-	    this.unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri_unit);
+	    unit.typeCheck();
 	    try {
 	        unit.load();
 	    } catch(Throwable t) {
@@ -101,7 +102,8 @@ public class KermetaInterpreter {
 	 * and create initialize the runtime
 	 */
 	private void initializeMemory() {
-	    unit.typeCheck();
+	    //unit.typeCheck();
+	    TypeCheckerContext.initializeTypeChecker(unit);
 	    if (unit.getAllErrors().size() > 0) {
 	        String message = "INTERPRETER INITIALIZATION ERROR : The program contains errors:\n" + unit.getAllMessagesAsString();
 	        internalLog.error(message);

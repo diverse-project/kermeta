@@ -16,15 +16,16 @@ class Wheel {
 	attribute name : kermeta::standard::String
 }
 
-class MyCarCreation inherits kermeta::kunit::Assert {
+class MyCarCreation inherits kermeta::kunit::Test {
 
 	operation createMyCar() : Void is do
+		
 		var FLw : Wheel
 		var FRw : Wheel
 		var BLw : Wheel
 		var BRw : Wheel
 		var Rw : Wheel
-		var car : Car
+		var car : Car init Car.new
 
 		FLw := Wheel.new
 		FRw := Wheel.new

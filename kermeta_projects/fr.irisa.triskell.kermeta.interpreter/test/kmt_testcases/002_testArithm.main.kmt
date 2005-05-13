@@ -7,7 +7,7 @@ package testArithm;
 require kermeta
 
 // arithmetic operations
-class Test_arithm inherits kermeta::kunit::Assert {
+class Test_arithm inherits kermeta::kunit::Test {
 
     operation main_operation() : kermeta::standard::Integer is do
         var r1 : kermeta::standard::Integer

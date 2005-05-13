@@ -30,7 +30,7 @@ alias String : kermeta::standard::String;
  	end
  }
 
-class TestParametricClass inherits kermeta::kunit::Assert
+class TestParametricClass inherits kermeta::kunit::Test
 {    
      operation main_operation() is do
      	var P1 : ParamClass<Integer,String> 

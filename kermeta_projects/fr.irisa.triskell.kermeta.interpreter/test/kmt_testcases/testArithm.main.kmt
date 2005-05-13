@@ -8,7 +8,7 @@ require kermeta
 
 alias Integer : kermeta::standard::Integer;
 // arithmetic operations - clone of 2_testArithm.main.kmt
-class TestArithm inherits kermeta::kunit::Assert {
+class TestArithm inherits kermeta::kunit::Test {
 
 	// test plus
 	operation testop1() : Void is do

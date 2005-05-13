@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.4 2005-05-13 15:05:46 ffleurey Exp $
+/* $Id: RunJunitFactory.java,v 1.5 2005-05-13 16:41:11 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : GPL
@@ -16,6 +16,7 @@ import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.error.KermetaLoaderError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
@@ -24,6 +25,7 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
@@ -37,35 +39,57 @@ import junit.framework.TestSuite;
 public class RunJunitFactory implements Test {
 
     private TestSuite theTestSuite = null;
-
     private TestCase theTestCase = null;
-
-    private String unit_uri;
-
-    public KermetaInterpreter kminterpreter = null;
+    
+    
+    
+   // private String unit_uri;
+    
+    public KermetaUnit root_unit;
+    
+    /**
+     * 
+     */
+    public RunJunitFactory() {
+        
+    }
+   // public KermetaInterpreter kminterpreter = null;
+    
+    
     
     /**
      * @param args
      */
-    public RunJunitFactory(String unit_uri) {
-        this.unit_uri = unit_uri;
-        try {
+    public Test addTestsForUnit(String unit_uri) {
 
-            // Create the interpreter
-            kminterpreter = new KermetaInterpreter(unit_uri);
+        
+        if(root_unit == null) {
+            root_unit = KermetaUnit.getStdLib();
+            TypeCheckerContext.initializeTypeChecker(root_unit);
+        }
+        
+        KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(unit_uri);
+        
+        
+        try {
+            
+            unit.load();
             
             // get the main class to see if it inherits from class kermeta::kunit::Test
             boolean isTestSuite = false;
             String main_class = null;
-            Iterator it = kminterpreter.getUnit().rootPackage.getFTag().iterator();
+            String main_operation = null;
+            Iterator it = unit.rootPackage.getFTag().iterator();
             while(it.hasNext()) {
                 FTag tag = (FTag)it.next();
                 if (tag.getFName().equals("mainClass")) 
     	            main_class = tag.getFValue().substring(1,tag.getFValue().length()-1); 
+                if (tag.getFName().equals("mainOperation"))
+    	            main_operation = tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
             }
             if (main_class != null) {
-                FClassDefinition cd = (FClassDefinition)kminterpreter.getUnit().typeDefinitionLookup(main_class);
-                FClassDefinition class_test = (FClassDefinition)kminterpreter.getUnit().typeDefinitionLookup("kermeta::kunit::Test");
+                FClassDefinition cd = (FClassDefinition)unit.typeDefinitionLookup(main_class);
+                FClassDefinition class_test = (FClassDefinition)unit.typeDefinitionLookup("kermeta::kunit::Test");
             
                 SimpleType kunit_test_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(class_test));
                 SimpleType main_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(cd));
@@ -78,14 +102,15 @@ public class RunJunitFactory implements Test {
                 theTestSuite = new TestSuite();
                 theTestSuite.setName(unit_uri);
                 
-                includeTestSuite(main_class);
+                includeTestSuite(main_class, unit);
+                return theTestSuite;
                 
             }
             else // it is not a test suite
             {
-                theTestCase = new RunTestCase(unit_uri, main_class, kminterpreter.getEntryOperation().getFName(), this);
+                theTestCase = new RunTestCase(main_class, main_operation, this);
+                return theTestCase;
             }
-            kminterpreter = null;
 
         } catch (fr.irisa.triskell.kermeta.error.KermetaError e) {
             // we cannot determine if this is a test suite or a simple test
@@ -93,7 +118,7 @@ public class RunJunitFactory implements Test {
             // construct a "fake" test that simply fails and return this
             // exception
             theTestCase = new FailedTestCase(unit_uri, e);
-            theTestSuite = null;
+            return theTestCase;
         }
     }
 
@@ -121,14 +146,17 @@ public class RunJunitFactory implements Test {
         }
     }
 
-    public void includeTestSuite(String main_class) {
+    public void includeTestSuite(String main_class, KermetaUnit unit) {
 
         // all operations that begin by "test" inside the class
         // specified by mainClassValue are added as concrete testcases
         // Create the RuntimeObject of main class, of its instance, and
         // its FClassDefinition so that we can get its operations in order to
         // run them
-       Iterator it = kminterpreter.getEntryClass().getFClassDefinition().getFOwnedOperation().iterator();
+        
+        
+        
+       Iterator it = ((FClassDefinition)unit.typeDefinitionLookup(main_class)).getFOwnedOperation().iterator();
 
         // Get each operation which name begins by "test",
         // and run it.
@@ -137,7 +165,7 @@ public class RunJunitFactory implements Test {
             // the BaseInterpreter
             FOperation mainOp = (FOperation) it.next();
             if (mainOp.getFName().startsWith("test")) {
-                theTestSuite.addTest(new RunTestCase(unit_uri, main_class, mainOp.getFName(), this));
+                theTestSuite.addTest(new RunTestCase(main_class, mainOp.getFName(), this));
             }
         }
     }

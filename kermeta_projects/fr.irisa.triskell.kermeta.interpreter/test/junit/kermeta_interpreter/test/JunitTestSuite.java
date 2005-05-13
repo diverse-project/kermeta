@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.4 2005-05-13 15:05:54 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.5 2005-05-13 16:41:18 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -22,6 +22,8 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  */
 public class JunitTestSuite extends TestSuite {
 
+    RunJunitFactory runfactory = new RunJunitFactory();
+    
     public JunitTestSuite(java.lang.Class theClass)
     {
         super();
@@ -100,7 +102,7 @@ public class JunitTestSuite extends TestSuite {
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
-		
+		//addTest(runfactory.getTest());
 	}
 	
 	/* the stupid Eclipse UI creates a testsuite from this class 
@@ -113,9 +115,7 @@ public class JunitTestSuite extends TestSuite {
 	}
 	
 	public void testWithFile(String dir, String file)  {
-		//Run.main(new String[] {dir+"/"+file} );
-	    addTest((new RunJunitFactory(dir+"/"+file)).getTest() );
-	    
+	    addTest(runfactory.addTestsForUnit(dir+"/"+file));
 	}
 	
 

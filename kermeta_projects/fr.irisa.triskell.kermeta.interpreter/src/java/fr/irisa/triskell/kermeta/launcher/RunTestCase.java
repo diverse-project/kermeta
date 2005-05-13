@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.4 2005-05-13 15:05:44 ffleurey Exp $
+/* $Id: RunTestCase.java,v 1.5 2005-05-13 16:41:11 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : GPL
@@ -39,40 +39,30 @@ public class RunTestCase extends TestCase {
     /** Logger to get the error of this launcher */
     final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
 
-    private String unit_uri;
-    // these values from the Run object are saved so they can be restored
-    //when a testcase run
     private String mainClassValue;
     private String mainOperationValue;
 
     private RunJunitFactory containerTestSuite;
+    
+    private static KermetaInterpreter interpreter = null;
 
     // workaround about static fileds in Run.java
     private static RunJunitFactory containerTestSuitePreviouslyRun = null;
 
-    public RunTestCase(String unit_uri, String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite)
+    public RunTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite)
 
     {
         super(themainClassValue + "." + themainOperationValue);
-        this.unit_uri = unit_uri;
         mainClassValue = themainClassValue;
         mainOperationValue = themainOperationValue;
         containerTestSuite = thecontainerTestSuite;
     }
 
     protected void setUp() throws java.lang.Exception {
-        // if this test does not belong to the same test suite as the preceding
-        // then reinitialize the interpreter
-        //  This is due to the use of public static value of "Run"
-        // this workaround will not be neede when we will remove those static in
-        // Run
-        if (containerTestSuite != containerTestSuitePreviouslyRun || containerTestSuite.kminterpreter == null) {
-            containerTestSuite.kminterpreter = new KermetaInterpreter(unit_uri);
-            containerTestSuite.kminterpreter.setEntryPoint(mainClassValue, mainOperationValue);
-            internalLog.info("interpreterReinitialized for running " + mainClassValue + "." + mainOperationValue);
-
-        }
-        containerTestSuitePreviouslyRun = containerTestSuite;
+        
+        if (interpreter == null) interpreter = new KermetaInterpreter(containerTestSuite.root_unit);
+        
+        interpreter.setEntryPoint(mainClassValue, mainOperationValue);
 
     }
 
@@ -89,7 +79,7 @@ public class RunTestCase extends TestCase {
      * launch (which name is defined in the <code>mainOperation</code> tag
      */
     public void runTest() {
-        containerTestSuite.kminterpreter.launch();
+        interpreter.launch();
     }
 
 }
