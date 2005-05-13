@@ -48,7 +48,7 @@ alias Integer : kermeta::standard::Integer;
 class Class inherits Type, kermeta::reflection::Class, KMStructureVisitable
 {
 	method new() : kermeta::reflection::Object from kermeta::reflection::Class is do
-		extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject()
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)
 	end
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do

@@ -1328,7 +1328,12 @@
         <fOwnedOperation fName="new" fType="//@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.0/@fContainedType.0" fIsOrdered="true" fUpper="1" fSuperOperation="//@fNestedPackage.2/@fOwnedTypeDefinition.4/@fOwnedOperation.0">
           <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="//@fNestedPackage.2/@fOwnedTypeDefinition.1"/>
           <fBody xsi:type="kermeta_behavior:FBlock">
-            <fStatement xsi:type="kermeta_behavior:FJavaStaticCall" fJclass="fr::irisa::triskell::kermeta::runtime::language::Class" fJmethod="newObject"/>
+            <fStatement xsi:type="kermeta_behavior:FAssignement" fIsCast="true">
+              <fTarget xsi:type="kermeta_behavior:FCallResult" fName="result"/>
+              <fValue xsi:type="kermeta_behavior:FJavaStaticCall" fJclass="fr::irisa::triskell::kermeta::runtime::language::Class" fJmethod="newObject">
+                <fParameters xsi:type="kermeta_behavior:FSelfExpression"/>
+              </fValue>
+            </fStatement>
           </fBody>
         </fOwnedOperation>
         <fOwnedOperation fName="acceptKMStructureVisitor" fType="//@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.1/@fContainedType.0" fIsOrdered="true" fUpper="1" fSuperOperation="//@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.29/@fOwnedOperation.0" fTypeParameter="//@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.1/@fContainedType.1 //@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.1/@fContainedType.0">
