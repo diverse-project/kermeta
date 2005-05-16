@@ -19,22 +19,41 @@ using kermeta::utils
 /**
  * The main class from which all the exception inherit
  */
-abstract class Exception
+class Exception
 {
-    // The name of the exception (find it with reflexion? -> property?)
-    attribute name : String
-    //
-    attribute message : String
 
-    // print the trace of the errors thrown by this exception
-    // stack is given by the nested exceptions through the op. calls
-    operation print_trace() : Stack<Exception> is do
-    end
-	
-	operation print_message() : String is do
-//		stdio.writeln(message)
-	end
+    /**
+     * The message attached to the exception
+     */
+    attribute message : String
+    
+    /**
+     * Any nested exception
+     */
+    attribute nestedException : Exception
+    
+    /**
+     * The stack trace as a String
+     * Filled by the interpreted when the exception is raised
+     */
+    attribute stack_trace : String
 }
+
+/**
+ * Abstract exception for interpreter exceptions
+ */
+abstract class InterpreterException inherits Exception {
+	
+	/**
+	 * The code line that raised the exception
+	 */
+	attribute code_line : String
+}
+
+class CallOnVoidTarget inherits InterpreterException {
+	reference call_expression : kermeta::language::behavior::CallExpression
+}
+
 
 
 /**

@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.14 2005-05-02 22:46:59 ffleurey Exp $
+// $Id: primitive_types.kmt,v 1.15 2005-05-16 17:45:29 ffleurey Exp $
 package kermeta::standard;
 
 require "../Standard.kmt"
@@ -85,10 +85,6 @@ class Boolean
 	method equals(other : Object) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.equals(self, other)
 	end
-	
-	method isNotEqual(other : Object) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.isNotEqual(self, other)
-	end
 
 	/**
 	 * return self and other
@@ -137,10 +133,6 @@ class Integer inherits Numeric
 	
 	method equals(other : Object) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.equals(self, other)
-	end
-	
-	method isNotEqual(other : Object) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isNotEqual(self, other)
 	end
 
 	/**
@@ -258,9 +250,6 @@ class Character inherits ValueType, Comparable
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.equals(self, other)
 	end
 	
-	method isNotEqual(other : Object) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.isNotEqual(self, other)
-	end
 	}
 /**
  * The class String
@@ -271,17 +260,14 @@ class String inherits ValueType, Comparable
 	/**
 	 * Comparaison
 	 */
-	method compareTo(other : String) : Integer is do
+	method compareTo(other : Object) : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self,other)
 	end
 	
-	method equals(other : String) : Boolean is do
+	method equals(other : Object) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.equals(self, other)
 	end
 	
-	method isNotEqual(other : String) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.isNotEqual(self, other)
-	end
 	/**
 	 * returns a new string self + other
 	 */

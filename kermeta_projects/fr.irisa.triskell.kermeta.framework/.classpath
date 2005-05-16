@@ -9,6 +9,5 @@
 	<classpathentry kind="lib" path="lib/thirdparty/ldt-core.jar"/>
 	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.io/src/java" kind="lib" path="lib/io_kermeta.jar"/>
 	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.model/src/java" kind="lib" path="lib/model_kermeta.jar"/>
-	<classpathentry kind="src" path="/fr.irisa.triskell.kermeta.model"/>
 	<classpathentry kind="output" path="build/class"/>
 </classpath>

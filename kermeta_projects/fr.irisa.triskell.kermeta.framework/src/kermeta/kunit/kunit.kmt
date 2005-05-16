@@ -1,5 +1,5 @@
 /***************************************************
- * $Id: kunit.kmt,v 1.7 2005-05-02 22:47:00 ffleurey Exp $
+ * $Id: kunit.kmt,v 1.8 2005-05-16 17:45:33 ffleurey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -12,72 +12,96 @@ package kermeta::kunit;
 
 require "../Standard.kmt"
 
+using kermeta::standard
 
-@Test "This is the clone of the JUnit Test abstract class" 
+/**
+ * AssertionViolatedException are raised when assertions are violated
+ */
+class AssertionViolatedException inherits kermeta::exceptions::Exception 
+{
+	
+}
+
+/**
+ * The abstract class assert defines a set of convinient operations
+ * to assert expected behavior
+ */
+abstract class Assert
+{	
+	/**
+	 * raises an exception if bool is false
+	 */
+	operation assert(bool : Boolean) : Void is do
+		if not bool then fail("assert failed") end
+	end
+	
+	/**
+	 * raises an exception if bool is false
+	 */
+	operation assertTrue(bool : Boolean) : Void is do
+		if not bool then fail("assertTrue failed") end
+	end
+	
+	/**
+	 * raises an exception if bool is false
+	 */
+	operation assertTrueWithMsg(bool : Boolean, msg : String) : Void is do
+		if not bool then fail(msg) end
+	end
+	
+	/**
+	 * raise a AssertionViolatedException with the provided message
+	 */
+	operation fail(msg : kermeta::standard::String) : Void is do
+		var exception : AssertionViolatedException init AssertionViolatedException.new
+		exception.message := msg
+		raise exception
+	end
+	
+}
+
+/**
+ * Abstract class Test
+ */
 abstract class Test inherits Assert
 {
+	/**
+	 * Run the test
+	 */
 	operation run() : Void is abstract
 }
 
-abstract class Assert
-{	
-	@assert "assert raise an AssertError if the condition is not true"
-	operation assert(bool : kermeta::standard::Boolean) : Void is do
-		//if (bool == false) then
-			// when exceptions work, we can replace instruction by this one :
-//			raise kermeta::exceptions::AssertionError.new
-		//	stdio.writeln("AssertionError")			
-
-		//else
-		//	stdio.writeln("Tout va bien!")
-		//end		
-		extern fr::irisa::triskell::kermeta::runtime::testing::kunit.assertTrue("AssertionError",bool)
-	end
-	
-	@assert "assertTrue raise an AssertError if the condition is not true"
-	operation assertTrue(bool : kermeta::standard::Boolean) : Void is do
-		//if (bool == false) then
-			// when exceptions work, we can replace instruction by this one :
-//			raise kermeta::exceptions::AssertionError.new
-		//	stdio.writeln("AssertionError")
-
-		//end
-		extern fr::irisa::triskell::kermeta::runtime::testing::kunit.assertTrue("AssertionError",bool)
-	end
-	
-	@assert "assertTrue raise an AssertError if the condition is not true"
-	operation assertTrueWithMsg(bool : kermeta::standard::Boolean, msg : kermeta::standard::String) : Void is do
-		extern fr::irisa::triskell::kermeta::runtime::testing::kunit.assertTrue(msg, bool)
-	end
-	
-	operation fail(msg : kermeta::standard::String) : Void is do
-		// when exceptions work, we can replace instruction by this one :
-//			raise kermeta::exceptions::AssertionError.new
-			stdio.writeln("AssertionError: "+msg)
-		extern fr::irisa::triskell::kermeta::runtime::testing::kunit.fail(msg)
-	end
-	
-}
- 
-@TestSuite "A test suite is meant as executing automatically a suite of test cases"
-class TestSuite inherits Test
-{
-	attribute tests : kermeta::standard::Set<Test>
-
-	//@addTest "add a test case in the suite of tests to run"
-	operation addTest(test : Test) is do
-		if (self.tests == void) then
-			self.tests := kermeta::standard::Set<Test>.new
-		end
-		self.tests.add(test)
-	end
-
-}
-
-@TestCase "A test case is meant to definit a set of tests for a precise purpose"
+/**
+ * A test cases
+ */
 class TestCase inherits Test
 {
-	@run "Run this test case"
+	/**
+	 * Execute the test case
+	 */
 	method run() : Void is do
+		// TODO : implement this
 	end
 }
+
+
+/** 
+ * A test suite is composed of a set of tests
+ * (pattern composite)
+ */
+class TestSuite inherits Test
+{
+	/**
+	 * The set of contained tests
+	 */
+	attribute tests : Test[0..*]
+
+	/**
+	 * Execute all tests of the suite
+	 */
+	method run() : Void is do
+		tests.each{ t | t.run }
+	end
+
+}
+
