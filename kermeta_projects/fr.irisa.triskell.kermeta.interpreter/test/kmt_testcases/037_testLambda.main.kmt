@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.10 2005-05-16 13:42:24 zdrey Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.11 2005-05-16 14:25:10 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -42,7 +42,7 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	operation testLambda1() : Void is do
 		var lf1 : <Integer->Integer>
 		var res : Integer
-		lf1 := function { i : Integer | result:=i.plus(1) }
+		lf1 := function { i : Integer | i.plus(1) }
 		res := lf1(3)
 		assert(res == 4)
 	end
@@ -50,14 +50,14 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	/** test an operation call with a lambda expression */
 	operation testLambdaWithDef() : Void is do
 		var lf1 : <Integer->Integer>
-		lf1 := function { i : Integer | result:=i.plus(1) }
+		lf1 := function { i : Integer | i.plus(1) }
 		assert(lf1(3).equals(4))
 	end
 	
 	/** test a lambda exp. with 2 parameters */
 	operation testLambdaWithTwoParams() : Void is do
 		var lf1 : <[Integer, Integer]->Integer>
-		lf1 := function { i : Integer, j : Integer | result:=i.plus(j) }
+		lf1 := function { i : Integer, j : Integer | i.plus(j) }
 		assert(lf1(3, 4) == 7)
 		stdio.writeln(lf1(3,4))
 	end
@@ -65,7 +65,7 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	/** Test with a lambda exp. with 2 parameters, and a wrong call of it */
 	operation testFailLambdaWithTwoParams() : Void is do
 		var lfa1 : <[Integer, Integer]->Integer>
-		lfa1 := function { i : Integer, j : Integer | result:= i.plus(j) }
+		lfa1 := function { i : Integer, j : Integer |  i.plus(j) }
 		assert(lfa1(3, 4, 5) == 6)
 	end
 
@@ -73,7 +73,7 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	operation testLambdaWithString() : Void is do
 		var lfs : <String->String>
 //		lfs := function { str : String | str.substring(0,1) }
-		lfs := function { str : String | result:=str.indexOf("o") }
+		lfs := function { str : String | str.indexOf("o") }
 		assert(lfs("pof")==1)
 		
 	end
@@ -81,7 +81,7 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	/** test a lambda exp. with 3 parameters */
 	operation testLambdaWithThreeParams() : Void is do
 		var lfs : <[Integer, Integer, String]->Integer>
-		lfs := function { i : Integer, j : Integer, k : String | result:=k.indexOf("f") }
+		lfs := function { i : Integer, j : Integer, k : String | k.indexOf("f") }
 		stdio.writeln("stringOfMoreThanSevenChars".indexOf("f"))
 		assert(lfs(3, 4, "stringOfMoreThanSevenChars")==7)
 	end
@@ -89,7 +89,7 @@ class TestLambda inherits kermeta::kunit::TestSuite
 
 	operation testLambdaWithThreeParams2() : Void is do
 		var lft2 : <[Integer, Integer, String]->String>
-		lft2 := function { i : Integer, j : Integer, k : String | result:=k.substring(i.plus(j), i.plus(j)+2) }
+		lft2 := function { i : Integer, j : Integer, k : String | k.substring(i.plus(j), i.plus(j)+2) }
 		assert(lft2(3, 4, "stringOfMoreThanSevenChars")=="fM")
 	end
 
@@ -100,7 +100,7 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	operation testNestedLambda() : Void is do
 		var lf1 : <[Integer, Integer, String]->String>
 		var lf2 : <[String, String]->String>
-		lf1 := function { i : Integer, j : Integer, k : String | result:=k.substring(i.plus(j), 7) }
+		lf1 := function { i : Integer, j : Integer, k : String | k.substring(i.plus(j), 7) }
 		lf2 := function { s1 : String, s2 : String | lf1(1, 2, s1+s2) }
 		assert(lf2("abcde", "fghi")=="defg")
 	end
@@ -109,7 +109,7 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	operation testLambdaWithExtVar() : Void is do
 		var lf1 : <Integer->Integer>
 		var extern_var : kermeta::standard::Integer
-		lf1 := function { i : kermeta::standard::Integer | result:=i.plus(extern_var)}
+		lf1 := function { i : kermeta::standard::Integer | i.plus(extern_var)}
 		extern_var := 5
 		assert(lf1(4)==9)
 	end
@@ -119,7 +119,7 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	operation testLambdaVarPriority() : Void is do
 		var lf1 : <[Integer, Integer]->Integer>
 		var a_var : kermeta::standard::Integer
-		lf1 := function { i : Integer, a_var : Integer |  result:=i.plus(a_var)}
+		lf1 := function { i : Integer, a_var : Integer |  i.plus(a_var)}
 		a_var := 4
 		assert(lf1(1,2)==3)
 		assert(a_var == 4)
@@ -128,14 +128,14 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	// lambda exp. as parameter of an operation?
 	operation testLambdaInOperation() : Void is do
 		var lf1 : <[Integer, Integer]->Integer>
-		lf1 := function { i : Integer, j : Integer | result:=i.plus(j) }
+		lf1 := function { i : Integer, j : Integer | i.plus(j) }
 		// 3 * 2 * 5
 		assert(3.times(lf1(2, 5))==21)
 	end
 	
 	operation testOpWithLambdaAsParam() : Void is do
 		var lf1 : <Integer->Integer>
-		lf1 := function { i : Integer | result:=i.plus(54) }
+		lf1 := function { i : Integer | i.plus(54) }
 		assert(opWithLambdaAsParam(lf1, 3)==57)
 	end
 	// TODO : lambda exp. as a parameter binding of a parametric class? 
