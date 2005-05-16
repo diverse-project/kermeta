@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.9 2005-05-16 13:37:04 zdrey Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.10 2005-05-16 13:42:24 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -39,34 +39,35 @@ class TestLambda inherits kermeta::kunit::TestSuite
             <fParameters xsi:type="kermeta_behavior:FIntegerLiteral" fValue="3"/>
           </fParameters>
 	*/
-/*	operation testLambda1() : Void is do
+	operation testLambda1() : Void is do
 		var lf1 : <Integer->Integer>
 		var res : Integer
-		lf1 := function { i : Integer | i.plus(1) }
+		lf1 := function { i : Integer | result:=i.plus(1) }
 		res := lf1(3)
 		assert(res == 4)
 	end
-*/	
+
 	/** test an operation call with a lambda expression */
-/*	operation testLambdaWithDef() : Void is do
+	operation testLambdaWithDef() : Void is do
 		var lf1 : <Integer->Integer>
-		lf1 := function { i : Integer | i.plus(1) }
+		lf1 := function { i : Integer | result:=i.plus(1) }
 		assert(lf1(3).equals(4))
 	end
-*/
+	
 	/** test a lambda exp. with 2 parameters */
-/*	operation testLambdaWithTwoParams() : Void is do
+	operation testLambdaWithTwoParams() : Void is do
 		var lf1 : <[Integer, Integer]->Integer>
-		lf1 := function { i : Integer, j : Integer | i.plus(j) }
+		lf1 := function { i : Integer, j : Integer | result:=i.plus(j) }
 		assert(lf1(3, 4) == 7)
+		stdio.writeln(lf1(3,4))
 	end
-*/
+
 	/** Test with a lambda exp. with 2 parameters, and a wrong call of it */
-/*	operation testFailLambdaWithTwoParams() : Void is do
+	operation testFailLambdaWithTwoParams() : Void is do
 		var lfa1 : <[Integer, Integer]->Integer>
-		lfa1 := function { i : Integer, j : Integer | i.plus(j) }
+		lfa1 := function { i : Integer, j : Integer | result:= i.plus(j) }
 		assert(lfa1(3, 4, 5) == 6)
-	end*/
+	end
 
 	/** test a lambda exp. with a String */
 	operation testLambdaWithString() : Void is do
