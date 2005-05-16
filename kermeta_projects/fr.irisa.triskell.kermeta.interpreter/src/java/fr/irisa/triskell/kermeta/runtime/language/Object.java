@@ -30,17 +30,11 @@ public class Object {
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 
-	// Implementation of method isNotEqual called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.isNotEqual(element)
-	public static RuntimeObject isNotEqual(RuntimeObject self, RuntimeObject param0) {
-		if(self == param0) return self.getFactory().getMemory().falseINSTANCE;
-		else return self.getFactory().getMemory().trueINSTANCE;
-	}
 
 	// Implementation of method get called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property)
 	public static RuntimeObject get(RuntimeObject self, RuntimeObject param0) {
-		RuntimeObject result = null;
+		RuntimeObject result;
 		result = (RuntimeObject)self.getProperties().get(getPropertyName(param0));
 		if (getPropertyUpper(param0) == 1) {
 			if (result == null) result = self.getFactory().getMemory().voidINSTANCE;
@@ -82,6 +76,25 @@ public class Object {
 			}
 		}
 		
+	}
+	
+	// Implementation of method container called as :
+	// extern fr::irisa::triskell::kermeta::runtime::language::Object.oid()
+	public static RuntimeObject oid(RuntimeObject self) {
+		return Integer.create((int)self.getOId(), self.getFactory());
+	}
+//	 Implementation of method container called as :
+	// extern fr::irisa::triskell::kermeta::runtime::language::Object.oid()
+	public static RuntimeObject freeze(RuntimeObject self) {
+		self.setFrozen(true);
+		return self.getFactory().getMemory().voidINSTANCE;
+	}
+	
+//	 Implementation of method container called as :
+	// extern fr::irisa::triskell::kermeta::runtime::language::Object.oid()
+	public static RuntimeObject isFrozen(RuntimeObject self) {
+		if (self.isFrozen()) return self.getFactory().getMemory().trueINSTANCE;
+		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 
 	/**

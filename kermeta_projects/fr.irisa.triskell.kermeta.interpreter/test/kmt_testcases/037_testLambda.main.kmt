@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.12 2005-05-16 17:38:44 ffleurey Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.13 2005-05-16 23:57:26 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -39,34 +39,28 @@ class TestLambda inherits kermeta::kunit::TestSuite
             <fParameters xsi:type="kermeta_behavior:FIntegerLiteral" fValue="3"/>
           </fParameters>
 	*/
-/*	operation testLambda1() : Void is do
+	operation testLambda1() : Void is do
 		var lf1 : <Integer->Integer>
 		var res : Integer
 		lf1 := function { i : Integer | i.plus(1) }
 		res := lf1(3)
 		assert(res == 4)
 	end
-*/	
+	
 	/** test an operation call with a lambda expression */
-/*	operation testLambdaWithDef() : Void is do
+	operation testLambdaWithDef() : Void is do
 		var lf1 : <Integer->Integer>
 		lf1 := function { i : Integer | i.plus(1) }
 		assert(lf1(3).equals(4))
 	end
-*/
+
 	/** test a lambda exp. with 2 parameters */
-/*	operation testLambdaWithTwoParams() : Void is do
+	operation testLambdaWithTwoParams() : Void is do
 		var lf1 : <[Integer, Integer]->Integer>
 		lf1 := function { i : Integer, j : Integer | i.plus(j) }
 		assert(lf1(3, 4) == 7)
 	end
-*/
-	/** Test with a lambda exp. with 2 parameters, and a wrong call of it */
-/*	operation testFailLambdaWithTwoParams() : Void is do
-		var lfa1 : <[Integer, Integer]->Integer>
-		lfa1 := function { i : Integer, j : Integer | i.plus(j) }
-		assert(lfa1(3, 4, 5) == 6)
-	end*/
+
 
 	
 	operation testLambdaSimpleWithString() : Void is do
@@ -139,7 +133,7 @@ class TestLambda inherits kermeta::kunit::TestSuite
 		var lf1 : <[Integer, Integer]->Integer>
 		lf1 := function { i : Integer, j : Integer | i.plus(j) }
 		// 3 * 2 * 5
-		assert(3.times(lf1(2, 5))==21)
+		assert(3.mult(lf1(2, 5))==21)
 	end
 	
 	operation testOpWithLambdaAsParam() : Void is do
@@ -153,6 +147,14 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	/** an operation that takes a lambda exp. as param and simply executes it */
 	operation opWithLambdaAsParam(lambda : <Integer->Integer>, a : kermeta::standard::Integer) : Integer is do
 		result := lambda(a)
+	end
+	
+	operation testintegerTimes() is do
+		var total : Integer init 0
+		3.times{ i |
+			total := total + i
+		}
+		assert(total == 3)
 	end
 	
 }

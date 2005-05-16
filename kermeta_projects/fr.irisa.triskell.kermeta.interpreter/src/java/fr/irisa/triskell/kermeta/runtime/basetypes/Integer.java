@@ -1,4 +1,4 @@
-/* $Id: Integer.java,v 1.1 2005-05-13 15:05:36 ffleurey Exp $ 
+/* $Id: Integer.java,v 1.2 2005-05-16 23:57:29 ffleurey Exp $ 
  * Implementation of Kermeta base type Integer 
  */
 
@@ -27,13 +27,6 @@ public class Integer {
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
 		if(getValue(self)==getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
-	}
-
-	// Implementation of method isNotEqual called as :
-	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::isNotEqual(element)
-	public static RuntimeObject isNotEqual(RuntimeObject self, RuntimeObject param0) {
-		if(getValue(self) == getValue(param0)) return self.getFactory().getMemory().falseINSTANCE;
-		else return self.getFactory().getMemory().trueINSTANCE;
 	}
 
 	/** Implementation of method plus called as :
@@ -79,6 +72,38 @@ public class Integer {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		setValue(result, getValue(self) % getValue(param0));
 		return result;
+	}
+	
+	/** Implementation of method mod called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
+	 */
+	public static RuntimeObject isGreater(RuntimeObject self, RuntimeObject param0) {
+		if(getValue(self) > getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
+		else return self.getFactory().getMemory().falseINSTANCE;
+	}
+	
+	/** Implementation of method mod called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
+	 */
+	public static RuntimeObject isLower(RuntimeObject self, RuntimeObject param0) {
+		if(getValue(self) < getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
+		else return self.getFactory().getMemory().falseINSTANCE;
+	}
+	
+	/** Implementation of method mod called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
+	 */
+	public static RuntimeObject isGreaterOrEqual(RuntimeObject self, RuntimeObject param0) {
+		if(getValue(self) >= getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
+		else return self.getFactory().getMemory().falseINSTANCE;
+	}
+	
+	/** Implementation of method mod called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::mod(other)
+	 */
+	public static RuntimeObject isLowerOrEqual(RuntimeObject self, RuntimeObject param0) {
+		if(getValue(self) <= getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
+		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 
 	/** Implementation of method toReal called as :

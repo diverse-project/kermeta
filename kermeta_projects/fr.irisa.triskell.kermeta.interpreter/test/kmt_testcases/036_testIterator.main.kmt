@@ -8,7 +8,7 @@ require kermeta
 
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: 036_testIterator.main.kmt,v 1.4 2005-05-16 17:39:16 ffleurey Exp $
+ * $Id: 036_testIterator.main.kmt,v 1.5 2005-05-16 23:57:26 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -81,7 +81,22 @@ class TestIterator inherits kermeta::kunit::Test
     	assert(it.isOff == false)
     end
     
-    
+     // test "isOff" operation when it is false
+    operation testLoop() : Void is do
+       	aset := kermeta::standard::Set<Integer>.new
+       	aset.add(23)
+       	aset.add(22)
+       	aset.add(2)
+     	
+    	var i : Integer init 0
+    	from var it : kermeta::standard::Iterator<Integer> init aset.iterator
+    	until it.isOff
+    	loop
+    		i := i + it.next
+    	end
+    	
+    	assert(i == 47)
+    end
     
     
     

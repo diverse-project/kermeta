@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.3 2005-05-16 17:38:26 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.4 2005-05-16 23:57:25 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -295,7 +295,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
         FOperation current_op = this.interpreterContext.peekCallFrame().getOperation();
         RuntimeObject ro_target = this.interpreterContext.peekCallFrame().getSelf();
         FClassDefinition foclass = current_op.getFOwningClass();
-        internalLog.info("Visiting a super operation of : "+current_op.getFName());
+        //internalLog.info("Visiting a super operation of : "+current_op.getFName());
         
         // Get the parameters of this operation
 		ArrayList parameters = visitList(node.getFParameters());
@@ -369,8 +369,12 @@ public class ExpressionInterpreter extends KermetaVisitor {
 
             // Compute actual parameters
             ArrayList paramAList = visitList(node.getFParameters());
+            
+            
             // Call the function
             result = func.call(this, paramAList);
+            
+            
             }
 
         return result;
@@ -468,8 +472,8 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	            cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
 	        else
 	        {
-	            // TODO : throw an InterpreterException 
-	        	System.err.println("Loop : evaluation of the condition ^part does not result in a boolean value.");
+	        	System.err.println("Loop : evaluation of the condition part does not result in a boolean value.");
+	        	throw new Error("INTERPRETER INTERNAL ERROR : Loop : evaluation of the condition part does not result in a boolean value.");
 	        }
 	        
 	        if (! cond_value)
@@ -570,7 +574,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
 			
 			// Resolve this operation call
 			result = (RuntimeObject)this.accept(foperation);
-			
 			// After operation has been evaluated, pop its context
 			interpreterContext.popCallFrame();
 		}
@@ -593,7 +596,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		
 		return result;
 	}
-		
     /**
      * Visit a FJavaStaticCall : 
      * 		extern a::b::c.d()
@@ -876,13 +878,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
         if (result == null) {
             CallableOperation co = target.getOperationByName(feature_call.getFName());
             if (co != null) result = co.getOperation();
-        }
-        
-        // This should not happend if the program has been type-checked
-        if (result == null)
-        {
-           System.err.println("feature '"+feature_call.getFName()+"' not found in class '"+target_class.getFClassDefinition().getFName()+"'");
-           throw new KermetaInterpreterError("feature '"+feature_call.getFName()+"' not found in class '"+target_class.getFClassDefinition().getFName()+"'");
         }
         
         return result;

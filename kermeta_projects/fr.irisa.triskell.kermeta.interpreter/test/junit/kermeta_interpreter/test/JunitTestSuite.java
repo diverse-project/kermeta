@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.6 2005-05-16 17:39:17 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.7 2005-05-16 23:57:28 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -41,7 +41,7 @@ public class JunitTestSuite extends TestSuite {
 
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-		 /*
+		 
 		testWithFile("test/kmt_testcases","2_testArithm.main.kmt" );
 
 		testWithFile("test/kmt_testcases","1_testAssignment.main.kmt" );
@@ -77,9 +77,9 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/kmt_testcases","testBooleanResults.main.kmt" );
 
 		testWithFile("test/kmt_testcases","testLambda.main.kmt" );
-*/
+
 		testWithFile("test/kmt_testcases","testSet.main.kmt" );
-/*
+
 		testWithFile("test/kmt_testcases","testSubPackage.main.kmt" );
 
 		testWithFile("test/kmt_testcases","testVariable.main.kmt" );
