@@ -1,7 +1,9 @@
-// $Id: primitive_types.kmt,v 1.15 2005-05-16 17:45:29 ffleurey Exp $
-package kermeta::standard;
-
+// $Id: primitive_types.kmt,v 1.16 2005-05-16 23:53:26 ffleurey Exp $
+package kermeta::standard; 
 require "../Standard.kmt"
+
+
+
 
 using kermeta::language::structure
 
@@ -18,7 +20,13 @@ using kermeta::language::structure
  * The class Void 
  * By convention it is a sub-type of everything
  */
-class ~Void {}
+class ~Void {
+
+	method isVoid() : Boolean is do
+		result := true
+	end
+
+}
 
 
 /**
@@ -74,7 +82,9 @@ abstract class Comparable {
 	end
 } // Comparable
 
-
+class NotComparableException inherits kermeta::exceptions::Exception {
+	// raized when two objects are not comparable  
+}
 
 /**
  * The Boolean type
@@ -83,7 +93,11 @@ class Boolean
 {
 
 	method equals(other : Object) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.equals(self, other)
+		if other.getMetaClass != Boolean then  
+			result := false 
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.equals(self, other)
+		end
 	end
 
 	/**
@@ -124,15 +138,36 @@ abstract class Numeric inherits Comparable, ValueType
  */
 class Integer inherits Numeric
 {
+
+	/**
+	 * Iteration
+	 */ 
+	 operation times(body : <Integer->Object>) : Void is do
+	 	from var i : Integer init 0
+	 	until i == self
+	 	loop
+	 		body(i)
+	 		i := i + 1
+	 	end
+	 end 
+
 	/**
 	 * Comparison
 	 */
 	method compareTo(other : Object) : Integer is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.compareTo(self,other)
+		if other.getMetaClass != Integer then
+			raise NotComparableException.new
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.compareTo(self,other)
+		end
 	end
 	
 	method equals(other : Object) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.equals(self, other)
+		if other.getMetaClass != Integer then
+			result := false
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.equals(self, other)
+		end
 	end
 
 	/**
@@ -152,7 +187,7 @@ class Integer inherits Numeric
 	/**
 	 * returns self * other
 	 */
-	operation times(other : Integer) : Integer is do
+	operation mult(other : Integer) : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.times(self,other)
 	end
 	
@@ -184,6 +219,50 @@ class Integer inherits Numeric
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toReal()
 	end
 	
+	/**
+	 * return true if self > other
+	 */
+	method isGreater(other : Object) : Boolean is do
+		if other.getMetaClass != Integer then
+			result := false
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isGreater(self, other)
+		end
+	end
+	
+	/**
+	 * return true if self < other
+	 */
+	method isLower(other : Object) : Boolean is do
+		if other.getMetaClass != Integer then
+			result := false
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isLower(self, other)
+		end
+	end
+	
+	/**
+	 * return true if self <= other
+	 */
+	method isLowerOrEqual(other : Object) : Boolean is do
+		if other.getMetaClass != Integer then
+			result := false
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isLowerOrEqual(self, other)
+		end
+	end
+	
+	/**
+	 * return true if self >= other
+	 */
+	method isGreaterOrEqual(other : Object) : Boolean is do
+		if other.getMetaClass != Integer then
+			result := false
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.isGreaterOrEqual(self, other)
+		end
+	end
+	
 }
 
 /**
@@ -208,7 +287,7 @@ class Real inherits Numeric
 	/**
 	 * returns self * other
 	 */
-	operation times(other : Numeric) : Integer is do
+	operation mult(other : Numeric) : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.times(other)
 	end
 	

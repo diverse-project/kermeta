@@ -141,7 +141,7 @@ abstract class Collection<G>
 		from var it : Iterator<G> init iterator
 		until it.isOff
 		loop
-			elem := iterator.next
+			elem := it.next
 			if selector(elem) then result.add(elem) end
 		end
 	end

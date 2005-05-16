@@ -23,33 +23,54 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	end
 	
 	method get(~property : kermeta::reflection::Property) : kermeta::reflection::Object from kermeta::reflection::Object is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
 	end
 	
 	method ~set(~property : kermeta::reflection::Property, element : kermeta::reflection::Object) : Void from kermeta::reflection::Object is do
-		extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(~property, element)
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(self, ~property, element)
 	end
 	
 	method isSet(~property : kermeta::reflection::Property) : Boolean from kermeta::reflection::Object is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(~property)
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(self, ~property)
 	end
 	
 	method unset(~property : kermeta::reflection::Property) : Void from kermeta::reflection::Object is do
-		extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(~property)
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(self, ~property)
 	end
 	
-	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitObject(self, context)
-		end
+	method oid() : Integer is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.oid(self)
+	end
+	
+	method toString() : String is do
+		result := "[" + self.getMetaClass.classDefinition.qualifiedName + ":" + oid.toString + "]"
+	end
+	
+	method isFrozen() : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.isFrozen(self)
+	end
+	
+	method freeze() : Void is do
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.freeze(self)
+	end
+	
 }
 alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
 class Class inherits Type, kermeta::reflection::Class, KMStructureVisitable
 {
 	method new() : kermeta::reflection::Object from kermeta::reflection::Class is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)
+		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)
 	end
+	
+	method isInstance(object : Object) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isInstance(self, object)
+	end 
+	
+	method equals(other : Object) : Boolean from Object is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)
+	end
+	
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitClass(self, context)
@@ -129,9 +150,11 @@ class FunctionType inherits TypeContainer, Type, kermeta::reflection::FunctionTy
 }
 class Type inherits Object, kermeta::reflection::Type, KMStructureVisitable
 {
+/*
 	method isInstance(element : Object) : Boolean from kermeta::reflection::Type is do
 		//TODO: implement operation isInstance
 	end
+*/
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitType(self, context)
@@ -217,7 +240,6 @@ class Parameter inherits MultiplicityElement, kermeta::reflection::Parameter, KM
 alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
 abstract class KMStructureVisitor<ContextType, ResultType>
 {
-	operation visitObject(node : Object, context : ContextType) : ResultType is abstract
 	operation visitClass(node : Class, context : ContextType) : ResultType is abstract
 	operation visitMultiplicityElement(node : MultiplicityElement, context : ContextType) : ResultType is abstract
 	operation visitOperation(node : Operation, context : ContextType) : ResultType is abstract

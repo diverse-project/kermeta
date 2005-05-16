@@ -14,6 +14,13 @@ abstract class Object
 	operation ~set(~property : Property, element : Object) : Void is abstract
 	operation isSet(~property : Property) : Boolean is abstract
 	operation unset(~property : Property) : Void is abstract
+	operation oid() : Integer is abstract
+	operation toString() : String is abstract
+	operation isFrozen() : Boolean is abstract
+	operation freeze() : Void is abstract
+	operation isVoid() : Boolean is do
+		result := false
+	end
 }
 alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
@@ -42,7 +49,11 @@ abstract class Class inherits Type
 			result := classDefinition.name
 		end
 	operation new() : Object is abstract
-}
+	
+	method toString() : String is do
+		result := self.classDefinition.name
+	end
+} 
 abstract class MultiplicityElement inherits TypedElement
 {
 	attribute isOrdered : Boolean
@@ -121,7 +132,23 @@ abstract class PrimitiveType inherits TypeContainer, DataType
 abstract class NamedElement inherits Object
 {
 	attribute name : String
+	
+	operation qualifiedName() : String is do
+		var elem : NamedElement init self
+		result := self.name
+		from elem ?= elem.container
+		until elem == void 
+		loop
+			result := elem.name + "::" + result
+			elem ?= elem.container
+		end
+	end
+	
 }
+
+/**
+ * DEPRECATED
+ */
 abstract class SelfType inherits Type
 {
 }
