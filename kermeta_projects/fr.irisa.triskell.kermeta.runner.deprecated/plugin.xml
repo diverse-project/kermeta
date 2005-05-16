@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="fr.irisa.triskell.kermeta.runner"
+   name="Runner Plug-in"
+   version="1.0.0"
+   provider-name=""
+   class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
+
+   <runtime>
+      <library name="runner_kermeta.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/io_kermeta.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/kermeta_interpreter.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/model_kermeta.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.ui.console"/>
+   </requires>
+
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Sample Action Set"
+            visible="true"
+            id="fr.irisa.triskell.kermeta.runner.actionSet">
+         <menu
+               label="Sample &amp;Menu"
+               id="sampleMenu">
+            <separator
+                  name="sampleGroup">
+            </separator>
+         </menu>
+         <action
+               label="&amp;Sample Action"
+               icon="icons/sample.gif"
+               class="fr.irisa.triskell.kermeta.runner.actions.SampleAction"
+               tooltip="Hello, Eclipse world"
+               menubarPath="sampleMenu/sampleGroup"
+               toolbarPath="sampleGroup"
+               id="fr.irisa.triskell.kermeta.runner.actions.SampleAction">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.kmt"
+            id="fr.irisa.triskell.kermeta.runner.contribution1">
+         <menu
+               label="KermetaMenu"
+               path="additions"
+               id="fr.irisa.triskell.kermeta.runner.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="KermetaTheRun"
+               class="fr.irisa.triskell.kermeta.runner.popup.actions.KermetaRun"
+               menubarPath="additions"
+               enablesFor="1"
+               id="fr.irisa.triskell.kermeta.runner.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
