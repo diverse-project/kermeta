@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jardesc>
-    <jar path="/home/franck/eclipse-3-workspace/fr.irisa.triskell.kermeta.model/dist/model_kermeta.jar"/>
+    <jar path="/home/localwork/eclipse-workspaces/kermeta/fr.irisa.triskell.kermeta.model/dist/model_kermeta.jar"/>
     <options overwrite="false" compress="true" exportErrors="true" exportWarnings="true" saveDescription="true" descriptionLocation="/fr.irisa.triskell.kermeta.model/model_kermeta.jardesc" useSourceFolders="false" buildIfNeeded="true"/>
     <manifest manifestVersion="1.0" usesManifest="true" reuseManifest="false" saveManifest="false" generateManifest="true" manifestLocation="">
         <sealing sealJar="false">
@@ -9,6 +9,7 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="false" exportOutputFolder="true" exportJavaFiles="true">
-        <folder path="/fr.irisa.triskell.kermeta.model/build/class"/>
+        <javaElement handleIdentifier="=fr.irisa.triskell.kermeta.model/src\/java"/>
+        <folder path="/fr.irisa.triskell.kermeta.model/build"/>
     </selectedElements>
 </jardesc>

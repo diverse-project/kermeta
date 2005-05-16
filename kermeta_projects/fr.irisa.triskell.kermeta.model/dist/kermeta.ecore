@@ -158,7 +158,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="//structure/Type"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ProductType" eSuperTypes="//structure/TypeContainer //structure/Type">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" upperBound="-1" eType="//structure/Type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" unique="false" upperBound="-1" eType="//structure/Type"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FunctionType" eSuperTypes="//structure/TypeContainer //structure/Type">
       <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="//structure/Type"/>
