@@ -1,4 +1,4 @@
-/* $Id: SimpleFunctions.kmt,v 1.4 2005-04-26 07:16:21 ffleurey Exp $ */
+/* $Id: SimpleFunctions.kmt,v 1.5 2005-05-16 17:35:57 ffleurey Exp $ */
 
 // Some simple lambda expressions
 
@@ -49,6 +49,12 @@ class Test {
 		fact := function { k: Integer | if k == 1 then k * fact(k-1)	else 1 end }
 		fact
 		it.times(fact)
+	end
+	
+	operation test22() : Void is do
+		var fact : < [Integer, Integer] -> Integer >
+		fact := function { j:Integer,  k : Integer | if k == 1 then j * fact(k-1, 2) 3 else 1 end }
+		fact(12, 3)
 	end
 	
 	operation test3() : Void is do

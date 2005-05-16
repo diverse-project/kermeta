@@ -152,6 +152,11 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			if (lst[i] == null) return false;
 			res.getFType().add(lst[i]);
 		}
+		
+		// BUG : The same type cannot be added twice in res.getFType().... no idea why...
+		if(lst.length != res.getFType().size()) {
+		    throw new Error("THIS IS A BUG OF THE ECORE MODEL OF KERMETA PROGRAM (see class KMT2KMTypeBuilder)");
+		}
 		result = res;
 		return false;
 	}

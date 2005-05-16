@@ -1,0 +1,38 @@
+/* $Id: AliasAndFunctions.kmt,v 1.1 2005-05-16 17:35:58 ffleurey Exp $ */
+
+// Some lambda expressions and primitive types
+
+package kermeta;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::language::structure
+
+alias Integer : kermeta::standard::Integer;
+alias String : kermeta::standard::String;
+alias Character : kermeta::standard::Character;
+
+
+class Test {
+
+	operation test1() : Void is do
+		var i : Integer
+		i := 12
+	end
+
+	operation test2() : Void is do
+		var fact : < String -> Integer >
+		// ...
+		var i : Integer init fact("toto")
+	end
+	
+	operation test3() : Void is do
+		var fact : < [Integer, Integer] -> Integer >
+		fact := function { j:Integer,  k : Integer | if k == 1 then j * fact(k-1, 2) 3 else 1 end }
+		fact(12, 3)
+	end
+
+}
+
+/* END OF FILE */

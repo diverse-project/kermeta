@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.8 2005-05-10 22:51:35 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.9 2005-05-16 17:36:04 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -78,6 +78,7 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_1_ClassSubTyping_1() throws Exception {
 testvalidFile("test/typechecher_tests/valid","1_ClassSubTyping_1.kmt" );
@@ -121,6 +122,10 @@ testvalidFile("test/typechecher_tests/valid","ObjectAndVoid.kmt" );
 
 public void testvalid_GenericsAndFunctions() throws Exception {
 testvalidFile("test/typechecher_tests/valid","GenericsAndFunctions.kmt" );
+}
+
+public void testvalid_AliasAndFunctions() throws Exception {
+testvalidFile("test/typechecher_tests/valid","AliasAndFunctions.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {

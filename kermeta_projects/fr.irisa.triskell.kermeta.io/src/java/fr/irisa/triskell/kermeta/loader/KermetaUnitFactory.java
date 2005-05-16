@@ -76,7 +76,7 @@ public class KermetaUnitFactory {
     
     public KermetaUnit createKermetaUnit(String uri) {
         Hashtable packages;
-        if (KermetaUnit.getStdLib() != null) {
+        if (KermetaUnit.STD_LIB_URI != null) {
             packages = KermetaUnit.getStdLib().packages;
         }
         else {
@@ -223,7 +223,8 @@ public class KermetaUnitFactory {
     }
     
     public void unload(String uri) {
-    	if (loadedUnits.containsKey(uri))  loadedUnits.remove(uri);
+        throw new Error("Unload units is NOT IMPLEMENTED");
+    	//if (loadedUnits.containsKey(uri))  loadedUnits.remove(uri);
     }
 
 }

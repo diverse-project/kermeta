@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.21 2005-05-13 16:44:03 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.22 2005-05-16 17:35:58 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -564,7 +564,7 @@ public abstract class KermetaUnit {
 	
 	public FClassDefinition get_ROOT_TYPE_ClassDefinition() {
 	    FClassDefinition result = (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
-	    if (result == null && getStdLib() != null) {
+	    if (result == null && STD_LIB_URI != null) {
 	        result = (FClassDefinition)getStdLib().typeDefinitionLookup(ROOT_CLASS_QNAME);
 	    }
 	    
