@@ -1,7 +1,7 @@
-@mainClass "testPackage::TestSuperFeatures"
+@mainClass "testPackageTestSuperFeatures::TestSuperFeatures"
 @mainOperation "main_operation"
 
-package testPackage;
+package testPackageTestSuperFeatures;
 
 require kermeta
 

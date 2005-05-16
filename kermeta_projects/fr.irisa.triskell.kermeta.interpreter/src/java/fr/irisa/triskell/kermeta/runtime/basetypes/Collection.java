@@ -42,7 +42,7 @@ public class Collection {
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection::iterator()
 	public static RuntimeObject iterator(RuntimeObject self) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Iterator");
-		Iterator.setValue(result, getArrayList(self).iterator());
+		Iterator.setValue(result, ((ArrayList)getArrayList(self).clone()).iterator());
 		return result;
 	}
 

@@ -1,7 +1,7 @@
-@mainClass "testPackage::TestParametricClass"
+@mainClass "testPackageTestParametricClass::TestParametricClass"
 @mainOperation "main_operation"
 
-package testPackage;
+package testPackageTestParametricClass;
 
 require kermeta
 

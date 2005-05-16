@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.1 2005-05-13 15:05:41 ffleurey Exp $
+/* $Id: RuntimeObject.java,v 1.2 2005-05-16 17:39:14 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -19,6 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 
 /**
@@ -29,7 +30,14 @@ import fr.irisa.triskell.kermeta.structure.FProperty;
  * This is the java implemetation of a Kermeta object 
  */
 public class RuntimeObject {
+    
+    /**
+     * Objec id counted for RuntimeObject
+     */
+    private static long oid_cpt = 0;
 	
+    private long oId = oid_cpt++;
+    
 	/**
 	 * The meta class
 	 */
@@ -138,6 +146,19 @@ public class RuntimeObject {
 		return factory;
 	}
 	
+	public String toString() {
+	    String class_name = "< No Metaclass ! >";
+	    try {
+	        class_name = factory.getMemory().getUnit().getQualifiedName(((FClass)metaclass.getData().get("kcoreObject")).getFClassDefinition());
+	    }
+	    catch(Exception e) { 
+	        // NOTHING
+	    }
+	    
+	    return "[" + class_name + " : "+ oId +"]";
+	}
 	
-	
+    public long getOId() {
+        return oId;
+    }
 }

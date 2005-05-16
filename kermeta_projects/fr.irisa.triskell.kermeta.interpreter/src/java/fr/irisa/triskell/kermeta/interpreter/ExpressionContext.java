@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.7 2005-05-13 15:05:30 ffleurey Exp $
+/* $Id: ExpressionContext.java,v 1.8 2005-05-16 17:39:07 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -75,6 +75,15 @@ public class ExpressionContext {
 	    variables.putAll(vars);
 	}
 	
+	/**
+	 * Clone the Hastable but copy variables
+	 */
+    public ExpressionContext copy() {
+        ExpressionContext result = new ExpressionContext();
+        result.variables.putAll(variables);
+        return result;
+    }
+    
 	/***
 	 * Get the variable by its name in the variables hashtable
 	 * @param name

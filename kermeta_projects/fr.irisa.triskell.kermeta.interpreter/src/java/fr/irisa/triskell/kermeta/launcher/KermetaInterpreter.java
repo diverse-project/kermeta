@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.2 2005-05-13 16:41:11 ffleurey Exp $
+/* $Id: KermetaInterpreter.java,v 1.3 2005-05-16 17:39:06 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -109,7 +109,7 @@ public class KermetaInterpreter {
 	        internalLog.error(message);
 	        
 	    }
-	    memory = new RuntimeMemory();
+	    memory = new RuntimeMemory(unit);
 	    RuntimeMemoryLoader.load(unit, memory);
 	}
 	
@@ -176,7 +176,7 @@ public class KermetaInterpreter {
 	 */
 	public void launch() {
 	    // Create the expression interpreter
-	    ExpressionInterpreter exp_interpreter = new ExpressionInterpreter(unit, memory);
+	    ExpressionInterpreter exp_interpreter = new ExpressionInterpreter(memory);
 	    // Instanciate the first object
 	    // FIXME : this should be corrected to allow generic types as entre type
 	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition((RuntimeObject)memory.getCorrespondanceTable().get(entryClass.getFClassDefinition()));

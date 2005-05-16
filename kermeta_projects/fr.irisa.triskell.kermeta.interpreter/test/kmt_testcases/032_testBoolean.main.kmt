@@ -9,6 +9,13 @@ require kermeta
 // "and" is prioritary to "or"
 class TestBoolean inherits kermeta::kunit::Test 
 {
+
+	operation testAssertTrue() is do
+		
+		assert(true)
+		
+	end
+
 	// test true and true = true
 	operation testoptat() : Void is do
 		assert((true and true)==true)

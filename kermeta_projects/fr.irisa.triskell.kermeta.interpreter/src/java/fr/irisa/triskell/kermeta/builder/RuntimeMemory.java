@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.2 2005-05-13 15:05:38 ffleurey Exp $
+/* $Id: RuntimeMemory.java,v 1.3 2005-05-16 17:39:13 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeMemory.java
  * License: GPL
@@ -42,6 +42,8 @@ public class RuntimeMemory {
 	/** To be deprecated..*/
 	public FClass stdioFClass=null;
 	
+	protected KermetaUnit unit;
+	
 	/**
 	 * The correspondance table from where we get IntegerLiterals, 
 	 * StringLiterals, and RealLiterals.
@@ -51,9 +53,10 @@ public class RuntimeMemory {
 	private Hashtable correspondanceTable;
 	
 	
-    public RuntimeMemory() {
+    public RuntimeMemory(KermetaUnit unit) {
         roFactory = new RuntimeObjectFactory(this);
         correspondanceTable = new Hashtable();
+        this.unit = unit;
     }
     
     /**
@@ -96,4 +99,7 @@ public class RuntimeMemory {
         return this.correspondanceTable;
     }
     
+    public KermetaUnit getUnit() {
+        return unit;
+    }
 }

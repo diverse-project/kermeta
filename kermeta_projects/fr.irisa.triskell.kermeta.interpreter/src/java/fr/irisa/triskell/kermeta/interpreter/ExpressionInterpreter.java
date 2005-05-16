@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.2 2005-05-16 13:43:01 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.3 2005-05-16 17:38:26 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -72,37 +72,12 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  */
 public class ExpressionInterpreter extends KermetaVisitor {
 
+    
+    //The only state variable of the interpreter should be the context and the memory
     /** The global context */
     protected InterpreterContext interpreterContext;
-    /** The lambda expression that is currently called */
-    protected FLambdaExpression calledLambdaExpression;
-    /** We visit a lambda expr in 2 cases :
-     *   - when it is defined
-     * 	 - when we call it
-     * Not the same as FOperation, which is visited only when it is invoked
-     * */
-    protected boolean isLambdaExpressionCall = false;
-
-    /**
-     * The current ExpressionContext (entity in the CallFrame stack of contexts)
-     */
-    protected ExpressionContext currentContext;
-
-
-    // Should we access the interpreter context defined in KMT?
-    /**
-     * The main unit
-     */
-    protected KermetaUnit unit;
+    /** The memory */
     protected RuntimeMemory memory;
-   
-
-    protected String root_pname;
-	protected String current_pname;
-	
-	protected boolean typedef = false;
-    private RuntimeObject current_runtimeLambdaObject;
-    private FOperation current_operation = null;
 
     
     /**
@@ -110,10 +85,9 @@ public class ExpressionInterpreter extends KermetaVisitor {
      * @param pContext
      * @param unit the main kermetaUnit ..
      */
-    public ExpressionInterpreter(KermetaUnit pUnit, RuntimeMemory pMemory)
+    public ExpressionInterpreter(RuntimeMemory pMemory)
     {
         interpreterContext = new InterpreterContext(pMemory);
-        unit = pUnit;
         memory = pMemory; 
     }
     
@@ -129,7 +103,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		RuntimeObject result=null;
 		RuntimeObjectFactory roFactory = memory.getROFactory(); 
         // Create a context for this operation call, setting self object to ro_target
-        interpreterContext.pushCallFrame(ro_target, foperation, arguments);
+        interpreterContext.pushOperationCallFrame(ro_target, foperation, arguments);
        
         // Resolve this operation call
         result = (RuntimeObject)this.accept(foperation);
@@ -326,7 +300,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
         // Get the parameters of this operation
 		ArrayList parameters = visitList(node.getFParameters());
 		// Create a context for this operation call, setting self object to ro_target
-		interpreterContext.pushCallFrame(ro_target, current_op.getFSuperOperation(), parameters);
+		interpreterContext.pushOperationCallFrame(ro_target, current_op.getFSuperOperation(), parameters);
 		
 		
         result = (RuntimeObject)this.accept(current_op.getFSuperOperation());
@@ -342,50 +316,12 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * - when we call one  
 	 */
 	public Object visit(FLambdaExpression node)
-	{   
-	    RuntimeObject result = null;
-	    	    
-	    // Special visit for the body of a lambdaexp, only when we execute it!
-	    // see CallFeature, principle is equivalent
-	    if (isLambdaExpressionCall == true)
-	    {
-	        RuntimeObject ro = current_runtimeLambdaObject;
-	        CallFrame current_frame =interpreterContext.peekCallFrame(); 
-	        //interpreterContext.pushNewCallFrame(ro_target);
-	        // "push and fill" the internal context
-	        current_frame.pushExpressionContext();
-	        
-	        current_frame.peekExpressionContext().addVariables(
-	                ((RuntimeLambdaObject)ro).getLambdaParameters());
-	        
-	        this.accept(node.getFBody());
-//	      
-	        // set the result
-		    result = interpreterContext.peekCallFrame().getOperationResult();
-	        
-	        current_frame.popExpressionContext();
-	    }
-	    // We only visit the definition of a lambda expression
-	    else
-	    {
-	        result = new RuntimeLambdaObject(memory.getROFactory(), node);
-		    // Special handling for a lambda'exp parameters : 
-		    // We don't need a runtimeObject for each of them
-		    //ArrayList params = visitList(node.getFParameters());
-		    ((RuntimeLambdaObject)result).defineLambdaParameters(node.getFParameters());
-		    
-		    
-	    }
-	    
+	{   	    
+	    RuntimeObject result = new RuntimeLambdaObject(node, memory.getROFactory(),this.interpreterContext.peekCallFrame(), this.interpreterContext);
 	    return result;
 	}
 	
-	public Object visitLambdaBody(FExpression body)
-	{
-	    RuntimeObject result = null;
-	    
-	    return result;
-	}
+	
 	
 	/**
 	 * The result node corresponds to the return value of the operation that is currently 
@@ -402,42 +338,43 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	}
 	
 	/**
-	 * If the visited element is a Variable, then we search its value in the 
-	 * InterpreterContext
-	 * */
-	public Object visit(FCallVariable node)
-	{
-	    RuntimeObject result;
-	    Variable var = interpreterContext.peekCallFrame().getVariableByName(node.getFName());
-	    
-	    // This is for debugg purposes it should never happend
-	    if (var == null) {
-	        internalLog.error("INTERPRETER INTERNAL ERROR : unable tofind variable in context " + node.getFName());
-	        throw new Error("INTERPRETER INTERNAL ERROR : unable tofind variable in context " + node.getFName());
-	    }
-	    
-	    // It is a simple variable call
-	    if (node.getFParameters().size() == 0) {
-	        result = var.getRuntimeObject();
-	    }
-	    // it is a call to a lambda expression
-	    else {
-	        // Compute actual parameters
-	        ArrayList paramAList = visitList(node.getFParameters());
-	        // Bind the paprameters of the expression
-	        ((RuntimeLambdaObject)var.getRuntimeObject()).setLambdaParameters(paramAList);
-	        
-	        // FIXME: This might be refactored to handle potential context problems
-	        calledLambdaExpression = ((RuntimeLambdaObject)var.getRuntimeObject()).getLambdaExpression();
-	        isLambdaExpressionCall = true; 
-	        current_runtimeLambdaObject = var.getRuntimeObject();
-	        result = (RuntimeObject) this.accept(calledLambdaExpression); // affect the RuntimeObject
-	        // result can be null
-	        isLambdaExpressionCall = false;
-	    }
-	    
-	    return result;
-	}
+     * If the visited element is a Variable, then we search its value in the
+     * InterpreterContext
+     */
+    public Object visit(FCallVariable node) {
+        RuntimeObject result;
+        Variable var = interpreterContext.peekCallFrame().getVariableByName(node.getFName());
+
+        // This is for debugg purposes it should never happend
+        if (var == null) {
+            internalLog.error("INTERPRETER INTERNAL ERROR : unable tofind variable in context " + node.getFName());
+            throw new Error("INTERPRETER INTERNAL ERROR : unable tofind variable in context " + node.getFName());
+        }
+
+        // It is a simple variable call
+        if (node.getFParameters().size() == 0) {
+            result = var.getRuntimeObject();
+        }
+        // it is a call to a lambda expression
+        else {
+
+            // This is for debugg purposes it should never happend
+            if (!(var.getRuntimeObject() instanceof RuntimeLambdaObject)) {
+                internalLog.error("INTERPRETER INTERNAL ERROR : function call on variable " + node.getFName() + " which does not contain a function");
+                throw new Error("INTERPRETER INTERNAL ERROR : function call on variable " + node.getFName() + " which does not contain a function");
+            }
+            
+            // Get the function
+            RuntimeLambdaObject func = (RuntimeLambdaObject) var.getRuntimeObject();
+
+            // Compute actual parameters
+            ArrayList paramAList = visitList(node.getFParameters());
+            // Call the function
+            result = func.call(this, paramAList);
+            }
+
+        return result;
+    }
 	
 	public Object visit(FSelfExpression node)
 	{
@@ -450,22 +387,22 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 */
 	public Object visit(FBlock node) {
 
+	    RuntimeObject result = memory.voidINSTANCE;
 	    // process the statements
-	    visitList(node.getFStatement());
-		// process the rescues
-	    Iterator it;
-		it = node.getFRescueBlock().iterator();
-		while(it.hasNext()) {
-			this.accept((FRescue)it.next());
-		}
-		return null;
+	    ArrayList res = visitList(node.getFStatement());
+	    
+	    if (res.size() > 0) 
+	        result = (RuntimeObject)res.get(res.size()-1);
+	    
+		
+		return result;
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
 	public Object visit(FClass node) {
-	    return null;
+	    throw new Error("INTERPRETER INTERNAL ERROR : visit a FClass");
 	}
 	
 	/**
@@ -541,7 +478,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    
 	    // Pop the expression context
 	    interpreterContext.peekCallFrame().popExpressionContext();
-	    return null;
+	    return memory.voidINSTANCE;
 	}
 	
 	/**
@@ -587,11 +524,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    else {
 	        ro_target = (RuntimeObject)this.accept(node.getFTarget());
 	    }
-	    // Check that target is not void
-	    if (ro_target == memory.voidINSTANCE) {
-	        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
-	        throw new Error(" >> CALL ON A VOID TARGET <<");
-	    }
+	    
 	    
 	    if (ro_target == null) {
 	        internalLog.error("INTERPRETER INTERNAL ERROR : Call on a null target");
@@ -610,6 +543,12 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		// Get the feature
 		Object feature = getFeatureFromFeatureCall(t_target, node);
 		
+//		 Check that target is not void
+	    if (feature == null && ro_target == memory.voidINSTANCE) {
+	        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
+	        throw new KermetaRaisedException(ro_target, this);
+	    }
+		
 		// This should never happend is the type checker has checked the program
 		if (feature == null) {
 		    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature");
@@ -627,7 +566,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 			// Get the FOperation corresponding to this operation call
 			FOperation foperation = (FOperation)feature;
 			// Create a context for this operation call, setting self object to ro_target
-			interpreterContext.pushCallFrame(ro_target, foperation, parameters);
+			interpreterContext.pushOperationCallFrame(ro_target, foperation, parameters);
 			
 			// Resolve this operation call
 			result = (RuntimeObject)this.accept(foperation);
@@ -720,7 +659,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		        }
 		        else
 		        {
-		            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+		            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName , e2);
 		            
 					throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
 		        }
@@ -757,7 +696,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	
 	public Object visit(FEnumerationLiteral node)
 	{
-	    return null;
+	    throw new Error("INTERPRETER ERROR : Enumeration NOT IMPLEMENTED !");
 	}
 	
     /** 
@@ -775,7 +714,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	public Object visit(FClassDefinition node)
 	{
 	    // Get the qualified name of this class
-	    String qname = unit.getQualifiedName(node);
+	    String qname = memory.getUnit().getQualifiedName(node);
 	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
 	    //node.getFOwnedOperation().
 	    // Set the attribute self_object of current frame, so that we can manipulate it
@@ -789,17 +728,15 @@ public class ExpressionInterpreter extends KermetaVisitor {
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FRaise)
      */
     public Object visit(FRaise node) {
-        return this.accept(node.getFExpression());
+        // TODO : improve this to allow exception to be rescued.
+        RuntimeObject exception = (RuntimeObject)this.accept(node.getFExpression());       
+        throw new KermetaRaisedException(exception, this);
     }
     /**
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FRescue)
      */
     public Object visit(FRescue node) {
-        
-        visitList(node.getFBody());
-        // node.getFExceptionName()
-        // node.getFExceptionType()
-        return null;
+        throw new Error("INTERPRETER ERROR : visit(FRescue node) NOT IMPLEMENTED !");
     }
 	/*
 	 * 
@@ -823,14 +760,11 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    //String qualifiedName = getQualifiedName(node);
 	    //get
 	    // get its definition
-	    FTypeDefinition typeDef = unit.getTypeDefinitionByName(name);
+	    FTypeDefinition typeDef = memory.getUnit().getTypeDefinitionByName(name);
 	    return typeDef;
 	}
 	
-	public FOperation getOperationDefinition()
-	{
-	    return null;
-	}
+
 	
 	/**
 	 * visit a list of expressions (usually come from a FBlock)

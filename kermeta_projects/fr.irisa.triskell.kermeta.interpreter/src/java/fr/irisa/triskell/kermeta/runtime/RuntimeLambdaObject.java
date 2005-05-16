@@ -1,4 +1,4 @@
-/* $Id: RuntimeLambdaObject.java,v 1.1 2005-05-13 15:05:41 ffleurey Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.2 2005-05-16 17:39:14 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
  * License: GPL
@@ -17,11 +17,17 @@ import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
 import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
+import fr.irisa.triskell.kermeta.interpreter.CallFrame;
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
+import fr.irisa.triskell.kermeta.interpreter.LambdaCallFrame;
+import fr.irisa.triskell.kermeta.interpreter.OperationCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.Variable;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FParameter;
 import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 
 /**
  * A special RuntimeObject for LambdaExpressions :
@@ -30,11 +36,9 @@ import fr.irisa.triskell.kermeta.structure.FType;
 public class RuntimeLambdaObject extends RuntimeObject {
     
     /** 
-     * The parameters of the lambda expression linked to this runtime object
-     * key -> the name of the parameter
-     * value -> the variable representation of this parameter
+     *The context in which the expression is executed
      * */
-    protected Hashtable lambdaParameters;
+    protected LambdaCallFrame frame;
     protected FLambdaExpression lambdaExpression;
 
     /**
@@ -43,13 +47,13 @@ public class RuntimeLambdaObject extends RuntimeObject {
      * @param FLambdaExpression : the lambda expression represented by this runtime
      * lambda object. We need it as the body is only evaluated "after"
      */
-    public RuntimeLambdaObject(RuntimeObjectFactory factory, FLambdaExpression node) {
+    public RuntimeLambdaObject(FLambdaExpression node, RuntimeObjectFactory factory, CallFrame nestingFrame, InterpreterContext context) {
         super(factory, null);
-        
-        this.metaclass = factory.getTypeDefinitionByName("kermeta::language::behavior::LambdaExpression");
+        /*
+         * This runtime object has no metaclass : it is a function, not a kermeta object
+         */
         this.lambdaExpression = node;
-        this.factory = factory;
-        this.lambdaParameters = new Hashtable();
+        this.frame = new LambdaCallFrame(context, node, nestingFrame);
     }
     
     /**
@@ -58,76 +62,24 @@ public class RuntimeLambdaObject extends RuntimeObject {
      * (This operation is called when encountering a lambda expression call)
      * @param params
      */
-    public void setLambdaParameters(ArrayList rparams)
+    public void setActualParameters(ArrayList rparams)
     {
-        EList fparams = lambdaExpression.getFParameters();
-        for (int i=0; i<fparams.size(); i++)
-        {   
-            String key = ((FLambdaParameter)fparams.get(i)).getFName();
-            this.bindLambdaParameter(key, (RuntimeObject)rparams.get(i));
-        }
+        frame.bindActualParameter(rparams);
     }
     
     /**
-     * Define the hashtable : each found parameter is put in the hashtable,
-     * with a null value. 
-     * This method is called when encountering a lambda expression definition.
-     * @param params
+     * Call the function with a set of actual parameter (list of RuntimeObject)
+     * @param interpreter
+     * @param actual_params
+     * @return
      */
-    public void defineLambdaParameters(EList params)
-    {
-        for (int i = 0; i< params.size(); i++)
-        {
-            // Get the type of param, its identifier
-            // ->RuntimeObject called_param = (RuntimeObject)it.next();
-	        FLambdaParameter p = (FLambdaParameter)params.get(i);
-	        this.defineLambdaParameter(p.getFName(), getFactory().getMemory().voidINSTANCE);
-        }
+    public RuntimeObject call(ExpressionInterpreter interpreter, ArrayList actual_params) {
+        frame.bindActualParameter(actual_params);
+        interpreter.getInterpreterContext().pushLambdaCallFrame(frame);
+        RuntimeObject result = (RuntimeObject)interpreter.accept(lambdaExpression.getFBody());
+        interpreter.getInterpreterContext().popCallFrame();
+        return result;
     }
-    
-    public Hashtable getLambdaParameters()
-    {
-        return lambdaParameters;
-    }
-    
-	/** 
-	 * Add a new variable, from its type, name and initial value, in the context.
-	 * This variable (called also "lambdaParameter") comes either from a VarDecl or a parameter definition of an FOperation
-	 * - lf := function { var : varType | ... }
-	 * - op { var : varType | ... }
-	 * @param type the type of the variable to define as new in the expr. context
-	 * @param name name of the variable
-	 * @param init the initial value of this variable
-	 * @return the RuntimeObject that was added as the value of this variable
-	 */
-	public Variable defineLambdaParameter(String name, RuntimeObject init)
-	{
-	    Variable var = new Variable(name, init);
-	    if (init!=null)
-	        var.setRuntimeObject(init);
-		lambdaParameters.put(name, var);
-		return var;
-	}
-	
-	/**
-	 * This operation is for a LambdaExpression internal context what the operation 
-	 * setVariable() is for an ExpressionContext.
-	 * This operation is called when calling a lambda expresssion
-	 */
-	public void bindLambdaParameter(String name, RuntimeObject object)
-	{
-		if (lambdaParameters.containsKey(name))
-		{
-			Variable var = (Variable)lambdaParameters.get(name);
-			var.setRuntimeObject(object);
-		}
-		else
-		{ // fixme : use log4j
-		    System.err.println("Interpreter Error : could not set var '"+name+"' : " +
-		    		"undeclared in lambdaExpression internal context");
-		}
-	}
-	
 	
 
     /**
@@ -136,10 +88,5 @@ public class RuntimeLambdaObject extends RuntimeObject {
     public FLambdaExpression getLambdaExpression() {
         return lambdaExpression;
     }
-    /**
-     * @param lambdaExpression The lambdaExpression to set.
-     */
-    public void setLambdaExpression(FLambdaExpression lambdaExpression) {
-        this.lambdaExpression = lambdaExpression;
-    }
+
 }

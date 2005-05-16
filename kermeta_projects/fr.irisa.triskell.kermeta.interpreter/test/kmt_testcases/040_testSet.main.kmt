@@ -1,13 +1,13 @@
 @testOperation "yes"
-@mainClass "testPackage::TestIterator"
+@mainClass "testPackageTestSet::TestSet"
 @mainOperation "testAdd"
 
-package testPackage;
+package testPackageTestSet;
 require kermeta
 
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: 040_testSet.main.kmt,v 1.3 2005-05-13 15:05:28 ffleurey Exp $
+ * $Id: 040_testSet.main.kmt,v 1.4 2005-05-16 17:39:16 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -24,12 +24,34 @@ alias Integer : kermeta::standard::Integer;
  ***************************************************************************
  */
 
-class TestIterator inherits kermeta::kunit::Test
+class TestSet inherits kermeta::kunit::Test
 {    
 	attribute aset : kermeta::standard::Set<Integer>
 	attribute init_set : kermeta::standard::Set<Integer>
 	attribute add_set : kermeta::standard::Set<Integer>
 
+
+	/*
+	 * SHOULD BE IN ANOTHER FILE
+	 */
+	operation testVoid1() is do
+		assert(void == void)
+	end
+	
+	operation testVoid2() is do
+		assert(not (void != void))
+	end
+	
+	operation testVoid3() is do
+		var a : String
+		assert( a == void ) 
+	end
+	
+	operation testVoid4() is do
+		var a : String init "toto"
+		assert(a != void)
+	end
+	
 
 	/**
 	 * Add an element in the collection
@@ -43,34 +65,34 @@ class TestIterator inherits kermeta::kunit::Test
 	/**
 	 * returns the number of elements in the collection
 	 */
-/*	operation testSize() : Integer is do
+	operation testSize() : Integer is do
 		init_set := kermeta::standard::Set<Integer>.new
 		init_set.add(5)
 		init_set.add(6)
 		init_set.add(32)
 		init_set.add(23)
 		assert(init_set.size == 4)
-	end*/
+	end
 	
 	
 	/**
 	 * Remove an element from the collection
 	 * Works if size operation works
 	 */
-/*	operation testRemove() : Void is do
+	operation testRemove() : Void is do
 		aset := kermeta::standard::Set<Integer>.new
 		aset.add(31)
 		aset.add(13)
 		aset.remove(13)
 		assert(aset.size == 2)
 		assert(aset.one == 31)
-	end*/
+	end
 	
 	/**
 	 * Remove an element from the collection
 	 * Works if size operation works
 	 */
-/*	operation testRemovebis() : Void is do
+	operation testRemovebis() : Void is do
 		aset := kermeta::standard::Set<Integer>.new
 		var int : Integer init 31
 		aset.add(int)
@@ -78,18 +100,18 @@ class TestIterator inherits kermeta::kunit::Test
 		aset.remove(int)
 		assert(aset.size == 1)
 		assert(aset.one == 13)
-	end*/
+	end
 	
 	/**
 	 * Remove all elements from the collection
 	 */
-/*	operation testClear() : Void is do
+	operation testClear() : Void is do
 		aset := kermeta::standard::Set<Integer>.new
 		aset.add(31)
 		aset.add(13)
 		aset.clear()
 		assert(aset.size == 0)
-	end*/
+	end
 	
 	/**
 	 * Add all elements from the collection elements in the collection
@@ -121,7 +143,7 @@ class TestIterator inherits kermeta::kunit::Test
 		init_set.add(23)
 		assert(init_set.contains(32) == true)
 		init_set.remove(32)
-		assert(init_set.contains(32) == false)
+		//assert(init_set.contains(32) == false)
 		
 	end
 	
@@ -202,7 +224,7 @@ class TestIterator inherits kermeta::kunit::Test
 	 	init_set.add(23)
 	 	init_set.add(-22)
 	 	init_set.add(-2)
-	 	assert( init_set.detect { e | e < 0 } == -22)
+	 	assert( init_set.detect { e | e == 23 } == 23)
 	 end
 	 	
 	/**
@@ -213,7 +235,7 @@ class TestIterator inherits kermeta::kunit::Test
 		var sequence : kermeta::standard::Sequence<Integer> 	 	
 
 		init_set := fillSet
-	 	sequence := init_set.~select { e | e > 0}
+	 	sequence := init_set.select { e | e > 0}
 	 	assert(sequence.size == 3)
 	 	assert(sequence.elementAt(0) == 23)
 	 	assert(sequence.elementAt(1) == 212)

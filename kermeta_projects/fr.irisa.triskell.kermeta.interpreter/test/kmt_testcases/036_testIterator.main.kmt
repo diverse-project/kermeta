@@ -1,14 +1,14 @@
 @testOperation "yes"
-@mainClass "testPackage::TestIterator"
+@mainClass "testPackageTestIterator::TestIterator"
 @mainOperation "main_operation"
 
-package testPackage;
+package testPackageTestIterator;
 
 require kermeta
 
 alias Integer : kermeta::standard::Integer;
 /*****************************************************************************
- * $Id: 036_testIterator.main.kmt,v 1.3 2005-05-13 15:05:28 ffleurey Exp $
+ * $Id: 036_testIterator.main.kmt,v 1.4 2005-05-16 17:39:16 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt

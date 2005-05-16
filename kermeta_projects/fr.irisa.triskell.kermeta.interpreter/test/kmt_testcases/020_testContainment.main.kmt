@@ -1,59 +1,96 @@
-@mainClass "testOpCallObject::MyCarCreation"
-@mainOperation "createMyCar"
-package testOpCallObject;
+@mainClass "testContainement::TestContainment"
+@mainOperation "testSetOnAssign"
+package testContainement;
 
 require kermeta
 
-// Creation of an object
-class Car {
+// Test that the kermeta runtime handles the container of objects
 
-	//composition association of wheels
-	attribute wheels : set Wheel [0..4]
+class A {
+	attribute lb : set B [*]
+	attribute b : B
 }
 
-class Wheel {
+class B {
 
-	attribute name : kermeta::standard::String
 }
 
-class MyCarCreation inherits kermeta::kunit::Test {
+class TestContainment inherits kermeta::kunit::Test {
 
-	operation createMyCar() : Void is do
-		
-		var FLw : Wheel
-		var FRw : Wheel
-		var BLw : Wheel
-		var BRw : Wheel
-		var Rw : Wheel
-		var car : Car init Car.new
 
-		FLw := Wheel.new
-		FRw := Wheel.new
-		BLw := Wheel.new
-		BRw := Wheel.new
-		Rw := Wheel.new
-		FLw.name :="FrontLeft"
-		FRw.name :="FrontRight"
-		BLw.name :="BackLeft"
-		BRw.name :="BackRight"
-		Rw.name :="Rescue"
-
-		car.wheels.add(FRw)
-		car.wheels.add(FLw)
-		car.wheels.add(BRw)
-		car.wheels.add(BLw)
-		do //check the overflow of multiplicity upper bound
-			car.wheels.add(Rw)
-			assert(false)
-			rescue (e : kermeta::exceptions::Exception)
-       			assert(true)
-       	end
-		//car.
-		do //check destruction of contained parts
-			stdio.writeln(BLw.name)
-			assert(false)
-			rescue (e : kermeta::exceptions::Exception)
-       			assert(true)
-       	end
+	operation testSetOnAssign() is do
+		var a : A init A.new
+		var b : B init B.new
+		a.b := b
+		assert(b.container == a)
 	end
+	
+	operation testSetOnAdd() is do
+		var a : A init A.new
+		var b : B init B.new	
+		a.lb.add(b)
+		assert(b.container == a)
+	end
+	
+	operation testUnsetSetOnAssign() is do
+		var a : A init A.new
+		var b : B init B.new
+		// container should be initialized to void
+		assert(b.container == void)
+		a.b := b
+		a.b := void
+		assert(b.container == void)
+	end
+	
+	operation testUnsetSetOnRemove() is do
+		var a : A init A.new
+		var b : B init B.new
+		// container should be initialized to void
+		assert(b.container == void)
+		a.lb.add(b)
+		a.lb.remove(b)
+		assert(b.container == void)
+	end
+	
+	operation testAssignVoidWhenNewAssign() is do
+		var a1 : A init A.new
+		var a2 : A init A.new
+		var b : B init B.new
+		a1.b := b
+		a2.b := b
+		assert(b.container == a2)
+		assert(a1.b == void)
+	end
+	
+	operation testAssignVoidWhenNewAdd() is do
+		var a1 : A init A.new
+		var a2 : A init A.new
+		var b : B init B.new
+		a1.b := b
+		a2.lb.add(b)
+		assert(b.container == a2)
+		assert(a1.b == void)
+	end
+	
+	operation testRemoveWhenNewAdd() is do
+		var a1 : A init A.new
+		var a2 : A init A.new
+		var b : B init B.new
+		a1.lb.add(b)
+		a2.lb.add(b)
+		assert(b.container == a2)
+		assert(a1.lb.size == 0)
+	end
+	
+	operation testRemoveWhenNewAssign() is do
+		var a1 : A init A.new
+		var a2 : A init A.new
+		var b : B init B.new
+		a1.lb.add(b)
+		a2.b := b
+		assert(b.container == a2)
+		assert(a1.lb.size == 0)
+	end
+	
+	
 }

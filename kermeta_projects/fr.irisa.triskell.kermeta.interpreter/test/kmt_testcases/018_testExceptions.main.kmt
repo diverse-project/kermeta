@@ -1,13 +1,11 @@
-@mainClass "testPackage::TestExceptions"
+@mainClass "testPackageTestExceptions::TestExceptions"
 @mainOperation "main_operation"
 
-package testPackage;
+package testPackageTestExceptions;
 
 require kermeta
 
-alias Boolean : kermeta::standard::Boolean;
-alias Integer : kermeta::standard::Integer;
-alias String : kermeta::standard::String;
+using kermeta::standard
  
  class A
  {
@@ -19,7 +17,7 @@ alias String : kermeta::standard::String;
  	end
 
  	operation opA2(b1 : Boolean,b2 : Boolean) is do
- 		if (b1) then do
+ 		if b1 then do
  			opA1(b2)
  			rescue (s : String)
  			 stdio.write(s)

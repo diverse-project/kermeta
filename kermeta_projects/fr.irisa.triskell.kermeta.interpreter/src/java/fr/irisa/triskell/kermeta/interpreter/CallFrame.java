@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.6 2005-05-13 15:05:29 ffleurey Exp $
+/* $Id: CallFrame.java,v 1.7 2005-05-16 17:39:07 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -27,30 +27,18 @@ import fr.irisa.triskell.kermeta.structure.FParameter;
 /**
  * CallFrame is the context for an operation call
  */
-public class CallFrame {
+public abstract class CallFrame {
 
     /**
      * the interpreter global context
      */
-    private InterpreterContext context;
-
-    /**
-     * self object (inside which the operation call is done)
-     */
-    private RuntimeObject self;
-
-    /**
-     * the operation result of the operation linked to this CallFrame
-     */
-    private RuntimeObject operation_result;
+    protected InterpreterContext context;
 
     /**
      * the list of expression contexts that are linked to this frame (@see ExpressionContext class javadoc)
      */
-    private Stack block_stack;
+    protected Stack block_stack;
 
-    /** the FOPeration related to this call frame*/
-    private FOperation operation;
     
     /**
      * Constructor
@@ -58,36 +46,11 @@ public class CallFrame {
      * pParameters should be a list of RuntimeObject corresponding to the
      * actual parameters.
      */
-    public CallFrame( RuntimeObject pSelf, InterpreterContext pContext, FOperation pOperation, ArrayList pParameters )
+    public CallFrame( InterpreterContext pContext )
     {
-        self = pSelf;
         context = pContext;
-        operation = pOperation;
-        operation_result = pSelf.getFactory().getMemory().voidINSTANCE ;
         block_stack = new Stack();
         
-        initialize(pParameters);
-    }
-    
-    protected void initialize(ArrayList pParameters) {
-        pushExpressionContext();
-        Iterator it = operation.getFOwnedParameter().iterator();
-        int i=0;
-        while (it.hasNext()) {
-            FParameter fparam = (FParameter)it.next();
-            peekExpressionContext().defineVariable(fparam.getFName(), (RuntimeObject)pParameters.get(i));
-            i++;
-        }
-    }
-    
-    public Variable getVariableByName(String name) {
-        Variable result = null;
-        for (int i=block_stack.size()-1; i>=0; i--) {
-            result = ((ExpressionContext)block_stack.get(i)).getVariableByName(name);
-            if (result != null) return result;
-        }
-        result = context.getInterpreterVariableByName(name);
-        return result;
     }
     
     /**
@@ -112,6 +75,16 @@ public class CallFrame {
     {
         block_stack.pop();
     }
+    
+    public Variable getVariableByName(String name) {
+        Variable result = null;
+        for (int i=block_stack.size()-1; i>=0; i--) {
+            result = ((ExpressionContext)block_stack.get(i)).getVariableByName(name);
+            if (result != null) return result;
+        }
+        result = context.getInterpreterVariableByName(name);
+        return result;
+    }
 
     /*
      * 
@@ -125,34 +98,13 @@ public class CallFrame {
     public InterpreterContext getContext() {
         return context;
     }
-
-
-   
     
-    public RuntimeObject getOperationResult()
-    {
-        return operation_result;
-    }
+    public abstract RuntimeObject getOperationResult();
     
-    public void setOperationResult(RuntimeObject pResult)
-    {
-        operation_result = pResult;
-    }
-
-    /**
-     * @return Returns the self.
-     * 
-     * @uml.property name="self"
-     */
-    public RuntimeObject getSelf() {
-        return self;
-    }
-
-    /**
-     * @return Returns the operation.
-     */
-    public FOperation getOperation() {
-        return operation;
-    }
-
+    public abstract void setOperationResult(RuntimeObject operationResult);
+    
+    public abstract RuntimeObject getSelf();
+    
+    public abstract FOperation getOperation();
+    
 }

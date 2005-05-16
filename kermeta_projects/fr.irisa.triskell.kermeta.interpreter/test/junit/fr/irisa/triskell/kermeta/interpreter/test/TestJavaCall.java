@@ -1,4 +1,4 @@
-/* $Id: TestJavaCall.java,v 1.5 2005-05-13 15:05:33 ffleurey Exp $
+/* $Id: TestJavaCall.java,v 1.6 2005-05-16 17:39:12 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
  * License    : GPL
@@ -127,7 +127,7 @@ public class TestJavaCall extends TestCase{
         String.setValue(stringparam1, String.getValue(stringparam1).concat("1"));
         String.setValue(stringparam2, String.getValue(stringparam2).concat("1"));
       
-        Boolean.setValue(boolparam1, true);
+        //Boolean.setValue(boolparam1, true);
         callCounter++;
         return boolparam1;
     }
