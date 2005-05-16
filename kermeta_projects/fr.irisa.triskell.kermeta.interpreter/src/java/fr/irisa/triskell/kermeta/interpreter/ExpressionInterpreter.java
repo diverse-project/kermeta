@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.1 2005-05-13 15:05:30 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.2 2005-05-16 13:43:01 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -358,8 +358,11 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	        current_frame.peekExpressionContext().addVariables(
 	                ((RuntimeLambdaObject)ro).getLambdaParameters());
 	        
-	        result = (RuntimeObject) this.accept(node.getFBody());
-
+	        this.accept(node.getFBody());
+//	      
+	        // set the result
+		    result = interpreterContext.peekCallFrame().getOperationResult();
+	        
 	        current_frame.popExpressionContext();
 	    }
 	    // We only visit the definition of a lambda expression
@@ -428,7 +431,8 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	        calledLambdaExpression = ((RuntimeLambdaObject)var.getRuntimeObject()).getLambdaExpression();
 	        isLambdaExpressionCall = true; 
 	        current_runtimeLambdaObject = var.getRuntimeObject();
-	        result = (RuntimeObject) this.visit(calledLambdaExpression); // affect the RuntimeObject
+	        result = (RuntimeObject) this.accept(calledLambdaExpression); // affect the RuntimeObject
+	        // result can be null
 	        isLambdaExpressionCall = false;
 	    }
 	    
