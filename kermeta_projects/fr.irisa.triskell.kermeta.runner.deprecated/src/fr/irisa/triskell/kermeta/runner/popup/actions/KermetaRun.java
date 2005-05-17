@@ -1,3 +1,15 @@
+/* $Id: KermetaRun.java,v 1.2 2005-05-17 07:28:08 zdrey Exp $
+ * Project : Kermeta.runner
+ * File : KermetaRun.java
+ * License : GPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 27 janv. 2005
+ * Authors : 
+ * 		Zoé Drey <zdrey@irisa.fr>
+ * Description :  	
+ * 	see class javadoc.	 
+ */
 package fr.irisa.triskell.kermeta.runner.popup.actions;
 
 import java.io.OutputStream;
@@ -26,6 +38,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.dialogs.RunPopupDialog;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 
 public class KermetaRun implements IObjectActionDelegate {
 
@@ -58,9 +71,12 @@ public class KermetaRun implements IObjectActionDelegate {
 	 */
 	public void run(IAction action)
 	{
+	    
 		Shell shell = new Shell();
 		// Get the selected file and instanciate the Popup dialog
 		anIFile = getIFileFromSelection();
+		try
+		{
 	    RunPopupDialog runPopupDialog = new RunPopupDialog(shell, anIFile);
 	    // Load the selected file
 		KermetaUnit kunit = runPopupDialog.parse(anIFile);
@@ -70,28 +86,27 @@ public class KermetaRun implements IObjectActionDelegate {
 		if (code != InputDialog.CANCEL)
 		{
 		    String errorMessage = "Pas d'erreur :-)";
-		    try
-		    {
-		        
-		        // 	Get the values given by the user in the runPopupDialog
-		        KermetaInterpreter interpreter = new KermetaInterpreter(kunit);
-		    	interpreter.setEntryPoint(
+		    
+		    // 	Get the values given by the user in the runPopupDialog
+		    KermetaInterpreter interpreter = new KermetaInterpreter(kunit);
+		    
+		    interpreter.setEntryPoint(
 		            runPopupDialog.classQualifiedNameString,
 		            runPopupDialog.defaultOperationString);
-		    	interpreter.launch();
-
-		    }
-		    catch (NullPointerException e)
-		    {
-		        errorMessage = "Erreur lors du lancement de l'interpreteur:\n"+kunit;
-		        errorMessage = "\nException : "+e;
-		        e.printStackTrace();
-		    }
+		    interpreter.launch();
+		    
+		    
+		    errorMessage = "Erreur lors du lancement de l'interpreteur:\n"+kunit;
+		    
 		    // Launch the console
 	    	KermetaConsole console = new KermetaConsole("KermetaConsole", null) ;
 	    	console.write(errorMessage);
 	    	
-		    
+		}   
+		}
+		catch (Throwable e)
+		{
+		    e.printStackTrace();
 		}
 	}
 
