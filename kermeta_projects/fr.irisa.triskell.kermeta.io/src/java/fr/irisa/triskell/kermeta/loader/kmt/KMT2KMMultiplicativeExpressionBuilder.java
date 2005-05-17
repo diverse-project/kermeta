@@ -38,7 +38,7 @@ public class KMT2KMMultiplicativeExpressionBuilder extends KMT2KMPass {
 	static {
 		// Maping operator -> method
 		operators = new Hashtable();
-		operators.put("*", "times");
+		operators.put("*", "mult");
 		operators.put("/", "div");
 		operators.put("%", "mod");
 	}
