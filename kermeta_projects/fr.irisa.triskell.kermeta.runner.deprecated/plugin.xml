@@ -20,6 +20,9 @@
       <library name="lib/model_kermeta.jar">
          <export name="*"/>
       </library>
+      <library name="lib/kermeta_framework.jar">
+         <export name="*"/>
+      </library>
    </runtime>
 
    <requires>
