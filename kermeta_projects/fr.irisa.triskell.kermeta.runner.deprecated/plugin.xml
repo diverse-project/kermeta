@@ -14,13 +14,25 @@
       <library name="lib/io_kermeta.jar">
          <export name="*"/>
       </library>
-      <library name="lib/kermeta_interpreter.jar">
-         <export name="*"/>
-      </library>
       <library name="lib/model_kermeta.jar">
          <export name="*"/>
       </library>
       <library name="lib/kermeta_framework.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/interpreter_kermeta.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/thirdparty/antlr.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/thirdparty/emfatic-core.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/thirdparty/ldt-core.jar">
+         <export name="*"/>
+      </library>
+      <library name="lib/thirdparty/log4j.jar">
          <export name="*"/>
       </library>
    </runtime>
@@ -33,6 +45,7 @@
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.junit"/>
    </requires>
 
    <extension
