@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.3 2005-05-16 17:39:06 ffleurey Exp $
+/* $Id: KermetaInterpreter.java,v 1.4 2005-05-17 07:22:14 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -26,6 +26,7 @@ import org.apache.log4j.Logger;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemoryLoader;
+import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
@@ -60,7 +61,7 @@ public class KermetaInterpreter {
 	private ArrayList entryParameters;
 	
 	// The kermeta unit
-	private KermetaUnit unit;
+	private KermetaUnit unit=null;
 	
 	// The memory of the interpreter
 	RuntimeMemory memory;
@@ -85,13 +86,24 @@ public class KermetaInterpreter {
 	{
 	    super();
 	    KermetaUnitFactory.getDefaultLoader().unloadAll();
-	    unit.typeCheck();
+	    unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri_unit);        
 	    try {
 	        unit.load();
 	    } catch(Throwable t) {
 	        String message ="INTERPRETER INITIALIZATION ERROR : The program "+uri_unit+ " could not be loaded";
 	        internalLog.error(message, t);
 	        throw new Error(message, t);
+	    }
+	    if (unit.getAllErrors().size() > 0)
+	    {
+	        throw new KermetaInterpreterError(unit.getAllMessagesAsString());
+	    
+	    }
+	    unit.typeCheck();
+	    if (unit.getAllErrors().size() > 0)
+	    {
+	        throw new KermetaInterpreterError(unit.getAllMessagesAsString());
+	    
 	    }
 	    initializeMemory();
 	    initializeEntryPoint();
