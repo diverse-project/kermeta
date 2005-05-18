@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.4 2005-05-17 07:22:14 dvojtise Exp $
+/* $Id: KermetaInterpreter.java,v 1.5 2005-05-18 16:52:53 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -31,6 +31,7 @@ import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
@@ -173,6 +174,11 @@ public class KermetaInterpreter {
 	    }
 	    // set entryOperation
 	    entryOperation = co.getOperation();
+	}
+	
+	public void setKStream(KermetaIOStream stream)
+	{
+	    memory.getROFactory().setKermetaIOStream(stream);
 	}
 	
 	/**
