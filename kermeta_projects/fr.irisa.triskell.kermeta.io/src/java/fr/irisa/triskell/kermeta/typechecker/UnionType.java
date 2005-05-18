@@ -1,4 +1,4 @@
-/* $Id: UnionType.java,v 1.2 2005-04-21 11:39:36 ffleurey Exp $
+/* $Id: UnionType.java,v 1.3 2005-05-18 23:42:27 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : UnionType.java
 * License : GPL
@@ -211,6 +211,10 @@ public class UnionType extends Type {
 	        }
 	    }
 	    return result;
+	}
+	
+	public FType getFType() {
+		return transformAsSimpleType().getFType();
 	}
 	
 	private boolean isSuperTypeOfOthers(SimpleType sup) {

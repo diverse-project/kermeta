@@ -1,4 +1,4 @@
-/* $Id: Type.java,v 1.1 2005-04-19 08:55:18 ffleurey Exp $
+/* $Id: Type.java,v 1.2 2005-05-18 23:42:26 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : Type.java
 * License : GPL
@@ -36,6 +36,13 @@ public abstract class Type {
 	 * Returns true if this type is a sub-type of type
 	 */
 	public abstract boolean isSubTypeOf(Type type);
+	
+	/**
+	 * Return an FType : the corresponding FType if this is a
+	 * simple type and the moste derived ftype as possible if it is a 
+	 * union type
+	 */
+	public abstract FType getFType();
 	
 	/**
 	 * Return the Left type of this Type if it is a function type.

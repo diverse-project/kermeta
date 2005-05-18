@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.5 2005-05-13 16:41:11 ffleurey Exp $
+/* $Id: RunJunitFactory.java,v 1.6 2005-05-18 23:49:05 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : GPL
@@ -74,6 +74,7 @@ public class RunJunitFactory implements Test {
         try {
             
             unit.load();
+            unit.typeCheck();
             
             // get the main class to see if it inherits from class kermeta::kunit::Test
             boolean isTestSuite = false;

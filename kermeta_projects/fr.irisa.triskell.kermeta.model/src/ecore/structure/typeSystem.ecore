@@ -9,7 +9,6 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypedElement"/>
-    <eClassifiers xsi:type="ecore:EClass" name="SelfType" eSuperTypes="#//structure/Type"/>
     <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//structure/TypeDefinition">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//structure/Boolean"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttributes" upperBound="-1"

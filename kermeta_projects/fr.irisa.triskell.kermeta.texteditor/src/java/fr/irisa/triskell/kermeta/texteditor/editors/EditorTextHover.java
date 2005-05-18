@@ -29,6 +29,7 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
 
 
@@ -94,15 +95,18 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
 		        FObject fobj = getFObjectForNode(astnode);
 		        
-		        if (fobj != null && editor.mcunit.getTypeChecker() != null) {
+		      
 		            //TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
 		            if (fobj instanceof FExpression) {
-		                Type t = editor.mcunit.getTypeChecker().getTypeOfExpression((FExpression)fobj);
-		                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
-		                return pp.accept(fobj) + " : " + t;
+		            	FExpression fexp = (FExpression)fobj;
+		            	if (fexp.getFStaticType() != null) {
+		            		Type t = new SimpleType(fexp.getFStaticType());
+		            		//TexteditorPlugin.pluginLog.info(" * Type -> " + t);
+		            		return pp.accept(fobj) + " : " + t;
+		            	}
 		            }
 		            
-		        }
+		        
 		    }
 		}
 		

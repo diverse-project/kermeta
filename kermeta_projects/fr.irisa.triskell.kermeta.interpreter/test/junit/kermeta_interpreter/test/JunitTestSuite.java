@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.8 2005-05-18 09:13:40 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.9 2005-05-18 23:49:04 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -13,6 +13,7 @@
 package kermeta_interpreter.test;
 
 import junit.framework.TestSuite;
+import junit.textui.TestRunner;
 import fr.irisa.triskell.kermeta.launcher.RunJunitFactory;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
@@ -119,5 +120,7 @@ public class JunitTestSuite extends TestSuite {
 	    addTest(runfactory.addTestsForUnit(dir+"/"+file));
 	}
 	
-
+	public static void main(String[] args) {
+		TestRunner.run(JunitTestSuite.class);
+	}
 }

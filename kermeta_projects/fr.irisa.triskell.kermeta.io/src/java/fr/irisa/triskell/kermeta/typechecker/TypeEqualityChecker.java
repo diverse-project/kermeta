@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.1 2005-04-19 08:55:17 ffleurey Exp $
+/* $Id: TypeEqualityChecker.java,v 1.2 2005-05-18 23:42:18 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -17,7 +17,6 @@ import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FSelfType;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
@@ -113,11 +112,7 @@ public class TypeEqualityChecker  extends KermetaVisitor {
 		}
 		return result;
 	}
-	
-	public Object visit(FSelfType arg0) {
-		//FIXME: I'm not sure of this. Maybe it should look at the typechecker context....
-		return new Boolean(provided instanceof FSelfType);
-	}
+
 	
 	public Object visit(FTypeVariable arg0) {
 		return new Boolean(provided == arg0);

@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.10 2005-04-22 01:46:23 ffleurey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.11 2005-05-18 23:42:34 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -564,12 +564,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	public Object visit(FSelfExpression node) {
 		return "self";
 	}
-	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FSelfType)
-	 */
-	public Object visit(FSelfType node) {
-		return "Self";
-	}
+
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FStringLiteral)
 	 */

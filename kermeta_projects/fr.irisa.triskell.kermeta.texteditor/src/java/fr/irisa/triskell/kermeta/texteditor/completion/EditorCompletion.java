@@ -94,8 +94,8 @@ public class EditorCompletion implements IContentAssistProcessor {
 		            }
 		            
 		            
-		            if (obj != null && obj instanceof FExpression && editor.getMcunit().getTypeChecker() != null) {
-		                Type t = editor.getMcunit().getTypeChecker().getTypeOfExpression((FExpression)obj);
+		            if (obj != null && obj instanceof FExpression && ((FExpression)obj).getFStaticType() != null) {
+		                Type t = new SimpleType(((FExpression)obj).getFStaticType());
 		                TexteditorPlugin.pluginLog.info(" * Completion for type -> " + t);
 		                if (t != null) {
 	//		                if (((SimpleType)t).getType() instanceof FFunctionType) {

@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="test/junit"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/thirdparty/log4j.jar"/>
-	<classpathentry kind="lib" path="lib/io_kermeta.jar"/>
+	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.io" kind="lib" path="lib/io_kermeta.jar"/>
 	<classpathentry kind="lib" path="lib/model_kermeta.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/emf_libraries"/>
 	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta.io/lib/thirdparty/junit.jar"/>

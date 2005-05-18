@@ -23,7 +23,6 @@ import fr.irisa.triskell.kermeta.structure.FParameter;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FSelfType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.FVoidType;
@@ -148,12 +147,6 @@ class GetTextVisitor extends KermetaVisitor {
 		return "< " + this.accept(node.getFLeft()) + "->" + this.accept(node.getFRight()) + " >";
 	}
 	
-	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FSelfType)
-	 */
-	public Object visit(FSelfType node) {
-		return "Self";
-	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FVoidType)

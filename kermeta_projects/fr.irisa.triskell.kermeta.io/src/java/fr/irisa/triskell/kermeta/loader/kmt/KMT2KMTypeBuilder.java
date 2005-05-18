@@ -24,7 +24,6 @@ import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FSelfType;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
@@ -171,13 +170,4 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 		return false;
 	}
 	
-	/**
-	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Selftype)
-	 */
-	public boolean beginVisit(Selftype selftype) {
-		FSelfType res = builder.struct_factory.createFSelfType();
-		builder.storeTrace(res, selftype);
-		result = res;
-		return false;
-	}
 }

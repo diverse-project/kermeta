@@ -1,4 +1,4 @@
-/* $Id: TypeVariableLeastDerivedEnforcer.java,v 1.2 2005-04-21 15:19:03 ffleurey Exp $
+/* $Id: TypeVariableLeastDerivedEnforcer.java,v 1.3 2005-05-18 23:42:28 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : GenericTypeSubstitution.java
 * License : GPL
@@ -20,7 +20,6 @@ import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FSelfType;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
@@ -93,10 +92,7 @@ public class TypeVariableLeastDerivedEnforcer extends KermetaVisitor {
 		}
 		return result;
 	}
-	
-	public Object visit(FSelfType arg0) {
-		return arg0;
-	}
+
 	
 	public Object visit(FTypeVariable arg0) {
 		return TypeVariableUtility.getLeastDerivedAdmissibleType(arg0);

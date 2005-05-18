@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
+    nsURI="http://ftm" nsPrefix="ftm">
+  <eSubpackages name="behavior" nsPrefix="">
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//structure/TypeContainer">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="staticType" eType="#//structure/Type"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CallFeature">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty" eType="#//structure/Property"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation" eType="#//structure/Operation"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="structure" nsPrefix="ftm/structure">
+    <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Property"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Type"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true"/>
+  </eSubpackages>
+</ecore:EPackage>

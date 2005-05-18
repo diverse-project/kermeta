@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.22 2005-05-16 17:35:58 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.23 2005-05-18 23:42:44 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
+import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
@@ -107,23 +108,31 @@ public abstract class KermetaUnit {
 		
 	}
 	
-	protected KermetaTypeChecker typeChecker = null;
 	
-	public void typeCheck() {
+	public KermetaTypeChecker typeCheck() {
 	    if (this.error.size() == 0) {
 	        try {
-	            typeChecker = new KermetaTypeChecker(this);
+	        	KermetaTypeChecker typeChecker = new KermetaTypeChecker(this);
 	            typeChecker.checkUnit();
+	            return typeChecker;
 	        }
 	        catch(Throwable t) {
 	            this.error.add(new KMUnitError("Type checker internal error " + t.getMessage(), null));
 	            KermetaUnit.internalLog.error("Type checker error", t);
 	        }
 	    }
+	    return null;
 	}
 	
-	public KermetaTypeChecker getTypeChecker() {
-	    return typeChecker;
+	public void typeCheckAllUnits() {
+		visited = true;
+		typeCheck();
+		Iterator it = importedUnits.iterator();
+		while(it.hasNext()) {
+			KermetaUnit u = (KermetaUnit)it.next();
+			if (!u.visited) u.typeCheckAllUnits();
+		}
+		visited = false;
 	}
 	
 	protected void importStdlib() {
@@ -756,7 +765,13 @@ public abstract class KermetaUnit {
 		TypeContainementFixer fixer = new TypeContainementFixer();
 		while(it.hasNext()) {
 			FObject o = (FObject)it.next();
-			if (o instanceof FTypeContainer) {
+			if (o instanceof FExpression) {
+				FExpression e = (FExpression)o;
+				if (e.getFStaticType() != null) {
+					fixer.addContainedTypes(e.getFStaticType(), e);
+				}
+			}
+			else if (o instanceof FTypeContainer) {
 				if (o != null) fixer.accept(o);
 			}
 		}

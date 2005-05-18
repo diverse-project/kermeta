@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.4 2005-05-16 23:57:25 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.5 2005-05-18 23:49:02 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -207,7 +207,23 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		 // The new value 
 		RuntimeObject rhs_value = (RuntimeObject)this.accept(node.getFValue());
 		
-		
+		/* DO NOT DELETE THIS CODE */
+		/* work in progress :-)
+		if (node.isFIsCast()) {
+			
+			// Just to be sure !!
+			if (node.getFTarget().getFStaticType() == null) {
+				throw new Error("THE PROGRAM CANNOT BE EXECUTED BECAUSE IT HAS NOT BEEN TYPE CHECKED");
+			}
+			
+			SimpleType expectedType = new SimpleType(node.getFTarget().getFStaticType());
+			FClass p = (FClass)rhs_value.getMetaclass().getData().get("kcoreObject");
+			SimpleType providedtype = new SimpleType(p);
+			if (!providedtype.isSubTypeOf(expectedType)) {
+				rhs_value = memory.voidINSTANCE;
+			}
+		}
+		*/
 		if (node.getFTarget() instanceof FCallResult)
 		{
 		    // Assign the result of the current operation

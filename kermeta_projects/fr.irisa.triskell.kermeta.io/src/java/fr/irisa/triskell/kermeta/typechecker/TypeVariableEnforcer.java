@@ -1,4 +1,4 @@
-/* $Id: TypeVariableEnforcer.java,v 1.1 2005-04-19 08:55:10 ffleurey Exp $
+/* $Id: TypeVariableEnforcer.java,v 1.2 2005-05-18 23:42:17 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : GenericTypeSubstitution.java
 * License : GPL
@@ -20,7 +20,6 @@ import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FSelfType;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
@@ -106,9 +105,6 @@ public class TypeVariableEnforcer extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FSelfType arg0) {
-		return arg0;
-	}
 	
 	public Object visit(FTypeVariable arg0) {
 		if (bindings.containsKey(arg0)) return (FType)bindings.get(arg0);
