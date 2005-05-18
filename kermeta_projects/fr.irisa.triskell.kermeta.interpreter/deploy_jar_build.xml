@@ -1,5 +1,5 @@
-<!-- $Id: deploy_jar_build.xml,v 1.2 2005-04-27 07:28:13 dvojtise Exp $ -->
-<project name="kermeta_interpreter.jar" default="all" basedir=".">
+<!-- $Id: deploy_jar_build.xml,v 1.3 2005-05-18 14:54:04 dvojtise Exp $ -->
+<project name="interpreter_kermeta.jar" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
@@ -17,6 +17,7 @@
 		<copy file="${kermeta.interpreter.jar}" todir="../fr.irisa.triskell.kermeta.texteditor/lib/"/>
 		<copy file="${kermeta.interpreter.jar}" todir="../fr.irisa.triskell.kermeta.io/lib/"/>
 		<copy file="${kermeta.interpreter.jar}" todir="../fr.irisa.triskell.kermeta.framework/lib/"/>
+		<copy file="${kermeta.interpreter.jar}" todir="../fr.irisa.triskell.kermeta.runner/lib/"/>
 	</target>
 	
 	<target name="create_jar" 
