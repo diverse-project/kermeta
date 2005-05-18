@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.1 2005-05-13 15:05:43 ffleurey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.2 2005-05-18 16:37:24 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -19,6 +19,8 @@ import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
+import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
+import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
@@ -50,6 +52,8 @@ public class RuntimeObjectFactory {
 	
 	protected RuntimeMemory memory;
 	
+	protected KermetaIOStream stream = null;
+	
 	StructureFactory struct_factory;
 	
 	/**
@@ -58,6 +62,8 @@ public class RuntimeObjectFactory {
 	public RuntimeObjectFactory(RuntimeMemory memory) {
 	    super();
 	    this.memory = memory;
+	    // Set by default
+	    this.stream = new SystemIOStream();
 	    struct_factory = StructurePackageImpl.init().getStructureFactory();
 	}
 	
@@ -185,6 +191,16 @@ public class RuntimeObjectFactory {
 		return class_typeParamBinding_property;
 	}
 
+	public KermetaIOStream getKermetaIOStream()
+	{
+	    return stream;
+	}
+	
+	public void setKermetaIOStream(KermetaIOStream pStream)
+	{
+	    stream = pStream;
+	}
+	
     public RuntimeMemory getMemory() {
         return memory;
     }
