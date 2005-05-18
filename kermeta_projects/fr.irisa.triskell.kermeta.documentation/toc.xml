@@ -8,8 +8,11 @@
 			<link toc="build/eclipse.help/KerMeta-UI-UserGuide/toc.xml" />
 		</topic>
 		<topic label="KerMeta references">
-			<topic label="KerMeta Java Framework reference" href="build/javadoc/KermetaFramework/index.html"> 		
+			<topic label="KerMeta Interpreter and Java Framework reference" href="build/javadoc/KermetaInterpreter/index.html"> 		
 			</topic>	
+		</topic>
+		<topic label="KerMeta history and known limitations (online)"
+			href="http://triskell.wiki.irisa.fr/tiki-index.php?page=KemertaVersionStatus">
 		</topic>
 	</topic>
 	<topic label="Developper documentation">
