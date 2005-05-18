@@ -1,12 +1,11 @@
 @mainClass "testPackageTestParametricClass::TestParametricClass"
-@mainOperation "main_operation"
+@mainOperation "test_main_operation"
 
 package testPackageTestParametricClass;
 
 require kermeta
 
-alias Integer : kermeta::standard::Integer;
-alias String : kermeta::standard::String;
+using kermeta::standard
  
  class ParamClass<T,U>
  {
@@ -32,7 +31,26 @@ alias String : kermeta::standard::String;
 
 class TestParametricClass inherits kermeta::kunit::Test
 {    
-     operation main_operation() is do
+
+	property names : String[*]
+
+	operation test1() is do
+		var l : Collection<String> init Bag<String>.new
+		// check the metaclass
+		assert(l.getMetaClass == Bag<String>)
+	end
+	
+	operation test2() is do
+		var l : Collection<String> init Bag<String>.new
+		// check sub-typing poliy
+		assert(Collection<String>.isInstance(l))
+	end
+
+	operation test3() is do
+		assert(Collection<String>.isInstance(names))
+	end
+
+     operation test_main_operation() is do
      	var P1 : ParamClass<Integer,String> 
      	var P2 : ParamClass<String,Integer>
      	

@@ -1,18 +1,57 @@
 @mainClass "testAssignment::Test_assignment"
-@mainOperation "operation1"
+@mainOperation "testoperation1"
 
 package testAssignment;
 
 require kermeta
 
-class Test_assignment {
+using kermeta::standard
 
-    operation operation1() : kermeta::standard::Integer is do
+// Test simple assignements and casts on variables.
+// assignement of propoerties is covered by other tests
+
+class Test_assignment inherits kermeta::kunit::Test {
+
+    operation testoperation1() : kermeta::standard::Integer is do
         var ~result : kermeta::standard::Integer
         ~result := 4
         stdio.writeln(~result)
         
         result := ~result
+    end
+    
+    operation test1() is do
+    	var s : String init "toto"
+    	assert(s == "toto")    	
+    end
+    
+    operation test2() is do
+    	var s : String
+    	s := "toto"
+    	assert(s == "toto")    	
+    end
+    
+    operation test3() is do
+    	var s : String
+    	s := "toto"
+    	s := void
+    	assert(s == void)    	
+    end
+    
+    
+    
+    operation testCast1() is do
+    	var s : String 
+    	var o : Object init "toto"
+    	s ?= o
+    	assert(s == "toto")    	
+    end
+    
+    operation testCast2() is do
+    	var s : String 
+    	var o : Object init 22
+    	s ?= o
+    	assert(s == void)    	
     end
 }
 
