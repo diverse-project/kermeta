@@ -23,7 +23,7 @@ team at IRISA.
 
    <url>
       <update label="Kermeta update site on Triskell" url="http://www.irisa.fr/triskell/softwares/kermeta/update"/>
-      <discovery label="KerMeta discovery site on Triskell site" url="http://www.irisa.fr/triskell/softwares/kermeta"/>
+      <discovery label="Kermeta discovery site on Triskell" url="http://www.irisa.fr/triskell/softwares/kermeta/update"/>
    </url>
 
    <requires>
@@ -57,5 +57,11 @@ team at IRISA.
          download-size="0"
          install-size="0"
          version="0.0.3"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.runner"
+         download-size="0"
+         install-size="0"
+         version="0.0.4"/>
 
 </feature>
