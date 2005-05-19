@@ -1,11 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.4 2005-05-18 23:38:34 ffleurey Exp $ -->
-<project name="kermeta_framework" default="all" basedir=".">
+<!-- $Id: dist_n_deploy_build.xml,v 1.5 2005-05-19 15:23:26 dvojtise Exp $ -->
+<project name="framework_kermeta" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="kermeta.framework.jar" location="dist/framework.jar"/>
+	<property name="kermeta.framework.jar" location="dist/framework_kermeta.jar"/>
 	<property name="kermeta.framework.km" location="dist/framework.km"/>
   	<path id="project.class.path">
 		<pathelement location="build/class"/>
@@ -30,9 +30,13 @@
 	</target>
 	<target name="deploy" 
 		description="deploy the jar file">
+	<!--	<copy file="${kermeta.framework.jar}" todir="../fr.irisa.triskell.kermeta.texteditor/lib/"/>
+		<copy file="${kermeta.framework.jar}" todir="../fr.irisa.triskell.kermeta.io/lib/"/>
+		<copy file="${kermeta.framework.jar}" todir="../fr.irisa.triskell.kermeta.interpreter/lib/"/>-->
 		<copy file="${kermeta.framework.km}" todir="../fr.irisa.triskell.kermeta.texteditor/lib/"/>
 		<copy file="${kermeta.framework.km}" todir="../fr.irisa.triskell.kermeta.io/lib/"/>
 		<copy file="${kermeta.framework.km}" todir="../fr.irisa.triskell.kermeta.interpreter/lib/"/>
+		<copy file="${kermeta.framework.km}" todir="../fr.irisa.triskell.kermeta.runner/lib/"/>
 	</target>
 	
 	<target name="create_km" 
