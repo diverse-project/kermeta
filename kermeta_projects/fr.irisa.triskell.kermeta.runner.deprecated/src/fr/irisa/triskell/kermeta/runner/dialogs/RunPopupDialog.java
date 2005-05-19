@@ -1,4 +1,4 @@
-/* $Id: RunPopupDialog.java,v 1.1 2005-05-16 17:05:26 zdrey Exp $
+/* $Id: RunPopupDialog.java,v 1.2 2005-05-19 14:28:29 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: RunPopupDialog.java
  * License: GPL
@@ -182,7 +182,7 @@ public class RunPopupDialog extends Dialog {
 	 */
     public KermetaUnit parse(IFile file)
     {
-        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.texteditor_0.0.2/lib/framework.km";
+        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.runner/lib/framework.km";
     	
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();
