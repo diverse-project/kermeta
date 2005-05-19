@@ -1,4 +1,4 @@
-/* $Id: KermetaRun.java,v 1.2 2005-05-17 07:28:08 zdrey Exp $
+/* $Id: KermetaRun.java,v 1.3 2005-05-19 14:29:16 zdrey Exp $
  * Project : Kermeta.runner
  * File : KermetaRun.java
  * License : GPL
@@ -30,6 +30,7 @@ import org.eclipse.ui.IWorkbenchPart;
 
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -77,32 +78,43 @@ public class KermetaRun implements IObjectActionDelegate {
 		anIFile = getIFileFromSelection();
 		try
 		{
-	    RunPopupDialog runPopupDialog = new RunPopupDialog(shell, anIFile);
-	    // Load the selected file
-		KermetaUnit kunit = runPopupDialog.parse(anIFile);
-		runPopupDialog.setEntryPoint(kunit);
-		int code = runPopupDialog.open();
-		// If User chooses OK, than we launch the KermetaProgram 
-		if (code != InputDialog.CANCEL)
-		{
-		    String errorMessage = "Pas d'erreur :-)";
-		    
-		    // 	Get the values given by the user in the runPopupDialog
-		    KermetaInterpreter interpreter = new KermetaInterpreter(kunit);
-		    
-		    interpreter.setEntryPoint(
-		            runPopupDialog.classQualifiedNameString,
-		            runPopupDialog.defaultOperationString);
-		    interpreter.launch();
-		    
-		    
-		    errorMessage = "Erreur lors du lancement de l'interpreteur:\n"+kunit;
-		    
-		    // Launch the console
-	    	KermetaConsole console = new KermetaConsole("KermetaConsole", null) ;
-	    	console.write(errorMessage);
-	    	
-		}   
+		    RunPopupDialog runPopupDialog = new RunPopupDialog(shell, anIFile);
+		    // Load the selected file
+		    KermetaUnit kunit = runPopupDialog.parse(anIFile);
+		    runPopupDialog.setEntryPoint(kunit);
+		    int code = runPopupDialog.open();
+		    // If User chooses OK, than we launch the KermetaProgram 
+		    if (code != InputDialog.CANCEL)
+		    {
+		        //		  	Launch the console
+		        KermetaConsole console = new KermetaConsole() ;
+		        try
+		        {
+		            // 	Get the values given by the user in the runPopupDialog
+		            KermetaInterpreter interpreter = new KermetaInterpreter(kunit);
+		            
+		            interpreter.setEntryPoint(
+		                    runPopupDialog.classQualifiedNameString,
+		                    runPopupDialog.defaultOperationString);
+		            
+		            interpreter.setKStream(console);
+		            interpreter.launch();
+		        }
+		        catch (KermetaRaisedException kerror)
+		        {
+		            console.print("Uncaught exception in Kermeta program\n");
+		            console.print(kerror.getMessage());
+		        }
+		        catch (Throwable e)
+		        {
+		            console.print(
+		                    "-------------------------------------------\n" +
+		            		"KermetaInterpreter internal error \n" +
+		            		"-------------------------------------------\n");
+		            console.print(e.getMessage());
+		            e.printStackTrace();
+		        }
+		    }   
 		}
 		catch (Throwable e)
 		{
