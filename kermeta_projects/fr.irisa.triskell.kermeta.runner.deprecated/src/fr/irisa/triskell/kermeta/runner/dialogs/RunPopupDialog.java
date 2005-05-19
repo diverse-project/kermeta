@@ -1,4 +1,4 @@
-/* $Id: RunPopupDialog.java,v 1.2 2005-05-19 14:28:29 zdrey Exp $
+/* $Id: RunPopupDialog.java,v 1.3 2005-05-19 15:14:57 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: RunPopupDialog.java
  * License: GPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.runner.dialogs;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.SWT;
@@ -20,7 +21,7 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.InputDialog;
 //import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -164,6 +165,7 @@ public class RunPopupDialog extends Dialog {
 	 */
 	public void setEntryPoint(KermetaUnit unit) 
 	{
+	    
 	    Iterator it = unit.rootPackage.getFTag().iterator();
 	    while (it.hasNext()) {
 	        FTag tag = (FTag)it.next();
@@ -183,7 +185,7 @@ public class RunPopupDialog extends Dialog {
     public KermetaUnit parse(IFile file)
     {
         KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.runner/lib/framework.km";
-    	
+
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();
     	String uri = "platform:/resource" + file.getFullPath().toString();
@@ -209,5 +211,13 @@ public class RunPopupDialog extends Dialog {
         return result;
     }
 
+    public void okPressed()
+    {
+        classQualifiedNameString = classQualifiedNameText.getText();
+        defaultOperationString = defaultOperationText.getText();
+
+        super.okPressed();
+    }
+    
 	
 }
