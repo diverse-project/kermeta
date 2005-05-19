@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.1 2005-05-16 17:05:27 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.2 2005-05-19 14:28:04 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -22,62 +22,52 @@ import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.internal.console.MessageConsolePage;
 import org.eclipse.ui.part.IPage;
 import org.eclipse.ui.part.IPageBookViewPage;
+
+import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 //import org.eclipse.ui.internal.console.IOConsolePage;
 /**
  * The console on which the results of an operation are printed (output),
  * and where the user can write data (input)
  */
-public class KermetaConsole extends MessageConsole
+public class KermetaConsole extends KermetaIOStream
 {
 
     protected MessageConsole messageConsole;
-    protected IConsoleManager consoleManager; 
+    protected IConsoleManager consoleManager;
+    protected MessageConsoleStream stream;
     
-    public KermetaConsole(String name, ImageDescriptor imageDescriptor)
+    public KermetaConsole()
     {
-        super(name, imageDescriptor);
+        messageConsole = new MessageConsole("KermetaConsole", null);
+        stream = messageConsole.newMessageStream();
         ConsolePlugin plugin = ConsolePlugin.getDefault();
 	    consoleManager = plugin.getConsoleManager();
-	    consoleManager.addConsoles(new IConsole[]{this});
-	    
-
-	    
-	    // Print a welcome message
-	    MessageConsoleStream stream = this.newMessageStream();
-	    stream.println("Welcome to the kermeta console");
-	    // Displays test message in orange
-	    stream.setColor(new Color(null, 255, 100, 20));
-	    
+	    consoleManager.addConsoles(new IConsole[]{messageConsole});
+	    	    
     }
     
-    /**
-     * Sho
-     */
-    public IConsoleView getIConsoleView()
+    public void print(Object messageString)
     {
-        consoleManager.showConsoleView(this);
+        String str = "";
+        str =(messageString!=null)?messageString.toString():"Error : object to print is null";
+	    stream.println(str);
+	    stream.setColor(new Color(null, 120, 5, 100));
+	    consoleManager.showConsoleView(messageConsole);
+    }
+    
+    public Object read()
+    {
+        System.out.println("ERROR : read() is not implemented yet for KermetaConsole");
         return null;
     }
-    
-    /**
-     *  Wrapper for the print method of MessageConsoleStream 
-     * */
-    public void write(String messageString)
-    {
-//      Print a welcome message
-	    MessageConsoleStream stream = this.newMessageStream();
-	    stream.print(messageString);
-	    stream.setColor(new Color(null, 220, 50, 100));
-    }
-    
-    
-    
     
     
     /**
      * @see org.eclipse.ui.console.IConsole#createPage(org.eclipse.ui.console.IConsoleView)
      */
     public IPageBookViewPage createPage(IConsoleView view) {
-    	return new MessageConsolePage(view, this);
+    	return new MessageConsolePage(view, messageConsole);
     }
+
+
 }
