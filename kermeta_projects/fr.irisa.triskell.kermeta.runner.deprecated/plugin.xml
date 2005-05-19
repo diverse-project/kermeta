@@ -39,12 +39,14 @@
 
    <requires>
       <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
-      <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
       <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.debug.ui"/>
       <import plugin="org.junit"/>
    </requires>
 
@@ -72,8 +74,7 @@
          </action>
       </actionSet>
    </extension>
-   <extension
-         point="org.eclipse.ui.popupMenus">
+   <extension point="org.eclipse.ui.popupMenus">
       <objectContribution
             objectClass="org.eclipse.core.resources.IFile"
             nameFilter="*.kmt"
@@ -95,5 +96,40 @@
          </action>
       </objectContribution>
    </extension>
+   <!-- Extension point for the Kermeta Run menu item in the Run properties -->
+   <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+    <launchConfigurationType
+        name="Kermeta Run"
+        delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
+        modes="run"               
+        id="KermetaLaunchConfiguration">        
+    </launchConfigurationType>
+   </extension>
+   
+   <!-- Source locator -->
+   <extension point = "org.eclipse.debug.core.sourceLocators">
+	<sourceLocator
+		id = "KermetaSourceLocator"
+	   	class="fr.irisa.triskell.kermeta.runner.launching.KermetaSourceLocator"
+	   	name="Kermeta Source Locator"/>
+	</extension>
+	<!-- Tab groups for the launch configuration manager -->
+      <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            type="TabGroups"
+            class="fr.irisa.triskell.kermeta.runner.launcher.KermetaLaunchConfigTabGroups"
+            id="TabGroups">
+      </launchConfigurationTabGroup>
+   </extension>
+      <extension
+            point="org.eclipse.debug.core.launchConfigurationTypes">
+         <launchConfigurationType
+               delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
+               public="true"
+               name="fr.irisa.triskell.kermeta.runner.launching.KermetalaunchConfigurationType"
+               modes="run"
+               id="kermetaLaunchConfigurationType"/>
+      </extension>
 
 </plugin>
