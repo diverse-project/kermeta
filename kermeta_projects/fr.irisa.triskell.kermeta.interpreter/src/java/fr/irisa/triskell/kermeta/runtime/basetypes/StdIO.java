@@ -1,4 +1,4 @@
-/* $Id: StdIO.java,v 1.1 2005-05-13 15:05:36 ffleurey Exp $
+/* $Id: StdIO.java,v 1.2 2005-05-19 07:22:57 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : GPL
@@ -31,10 +31,12 @@ public class StdIO {
 	public static RuntimeObject write(RuntimeObject output) {
 		FClassDefinition classDef=((FClass)output.getMetaclass().getData().get("kcoreObject")).getFClassDefinition();
 		if (classDef.getFName().equals("Integer"))
-			System.out.print(output.getData().get("Value"));
+			//System.out.print(output.getData().get("Value"));
+		    output.getFactory().getKermetaIOStream().print(output.getData().get("Value"));
 		else if (classDef.getFName().equals("String"))
-		    System.out.print(output.getData().get("Value"));
-		else System.out.print(output);
+		    output.getFactory().getKermetaIOStream().print(output.getData().get("Value"));
+		else 
+		    output.getFactory().getKermetaIOStream().print(output);
 		return output.getFactory().getMemory().voidINSTANCE;
 	}
 
@@ -42,7 +44,7 @@ public class StdIO {
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.writeln(output)
 	public static RuntimeObject writeln(RuntimeObject output) {
 		write(output);
-		System.out.println();
+		output.getFactory().getKermetaIOStream().print("\n");
 		return output.getFactory().getMemory().voidINSTANCE;
 	}
 
@@ -51,7 +53,7 @@ public class StdIO {
 	public static RuntimeObject read_prompt(RuntimeObject self, RuntimeObject prompt) {
 	    java.lang.String input = null;
 		if (String.getValue(prompt).length()>0)
-		    System.out.print(String.getValue(prompt));
+		    prompt.getFactory().getKermetaIOStream().print(String.getValue(prompt));
 		// open up standard input
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		// read data from standard input
