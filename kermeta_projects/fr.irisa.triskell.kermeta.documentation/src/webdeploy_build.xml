@@ -1,0 +1,13 @@
+<project name="KerMetaInterpreterJavadoc" default="deploy">
+	<!-- configuration properties -->
+	<target name="deploy">
+		<ant antfile="KerMeta-Tutorial_build.xml"
+			target="deploy"></ant>
+		<ant antfile="KerMeta-UI-UserGuide_build.xml"
+					target="deploy"></ant>
+		<ant antfile="KermetaArchitectureGuide_build.xml"
+					target="deploy"></ant>
+		<ant antfile="KermetaInterpreterJavadoc_build.xml"
+					target="deploy"></ant>
+	</target>
+</project>
