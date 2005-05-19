@@ -17,10 +17,10 @@
       <library name="lib/model_kermeta.jar">
          <export name="*"/>
       </library>
-      <library name="lib/kermeta_framework.jar">
+      <library name="lib/interpreter_kermeta.jar">
          <export name="*"/>
       </library>
-      <library name="lib/interpreter_kermeta.jar">
+      <library name="lib/thirdparty/log4j.jar">
          <export name="*"/>
       </library>
       <library name="lib/thirdparty/antlr.jar">
@@ -32,9 +32,6 @@
       <library name="lib/thirdparty/ldt-core.jar">
          <export name="*"/>
       </library>
-      <library name="lib/thirdparty/log4j.jar">
-         <export name="*"/>
-      </library>
    </runtime>
 
    <requires>
@@ -44,10 +41,11 @@
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.debug.core"/>
-      <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.debug.ui"/>
       <import plugin="org.junit"/>
+      <import plugin="org.eclipse.jdt"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
    </requires>
 
    <extension
@@ -97,7 +95,7 @@
       </objectContribution>
    </extension>
    <!-- Extension point for the Kermeta Run menu item in the Run properties -->
-   <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+ <!--  <extension point="org.eclipse.debug.core.launchConfigurationTypes">
     <launchConfigurationType
         name="Kermeta Run"
         delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
@@ -105,23 +103,23 @@
         id="KermetaLaunchConfiguration">        
     </launchConfigurationType>
    </extension>
-   
+   -->
    <!-- Source locator -->
-   <extension point = "org.eclipse.debug.core.sourceLocators">
+<!--   <extension point = "org.eclipse.debug.core.sourceLocators">
 	<sourceLocator
 		id = "KermetaSourceLocator"
 	   	class="fr.irisa.triskell.kermeta.runner.launching.KermetaSourceLocator"
 	   	name="Kermeta Source Locator"/>
-	</extension>
+	</extension> -->
 	<!-- Tab groups for the launch configuration manager -->
-      <extension
+<!--      <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
             type="TabGroups"
             class="fr.irisa.triskell.kermeta.runner.launcher.KermetaLaunchConfigTabGroups"
             id="TabGroups">
       </launchConfigurationTabGroup>
-   </extension>
+   </extension> 
       <extension
             point="org.eclipse.debug.core.launchConfigurationTypes">
          <launchConfigurationType
@@ -131,5 +129,5 @@
                modes="run"
                id="kermetaLaunchConfigurationType"/>
       </extension>
-
+-->
 </plugin>
