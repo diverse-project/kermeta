@@ -1,4 +1,4 @@
-/* $Id: KermetaIOStream.java,v 1.1 2005-05-18 16:36:26 zdrey Exp $
+/* $Id: KermetaIOStream.java,v 1.2 2005-05-20 12:04:58 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaIOStream.java
  * License: GPL
@@ -24,7 +24,7 @@ public abstract class KermetaIOStream {
     
     public abstract void print(Object outputString);
     
-    public Object read()
+    public Object read(String prompt)
     {
         System.err.println("Not implemented");
         return null;

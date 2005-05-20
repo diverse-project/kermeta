@@ -1,4 +1,4 @@
-/* $Id: SystemIOStream.java,v 1.1 2005-05-18 16:36:27 zdrey Exp $
+/* $Id: SystemIOStream.java,v 1.2 2005-05-20 12:04:58 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: SystemIOStream.java
  * License: GPL
@@ -8,6 +8,10 @@
  * Authors: zdrey
  */
 package fr.irisa.triskell.kermeta.runtime.io;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 /**
@@ -28,10 +32,23 @@ public class SystemIOStream extends KermetaIOStream {
         System.out.print(outputObject);
     }
     
-    public Object read()
+    // FIXME : Object->String
+    public Object read(String prompt)
     {
-        System.err.println("Not implemented yet");
-        return null;
+        String input = null;
+        System.out.print(prompt+" ");
+		// open up standard input
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+		        System.in
+		        ));
+		// read data from standard input
+		try {
+		    input = br.readLine();
+		} catch (IOException ioe) {
+		    System.out.println("JavaStaticCall error : IO error trying to read from input");
+		    
+		}
+        return input;
     }
 
 }
