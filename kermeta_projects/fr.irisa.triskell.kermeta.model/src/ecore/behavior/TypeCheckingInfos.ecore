@@ -11,6 +11,10 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty" eType="#//structure/Property"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation" eType="#//structure/Operation"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="CallExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="staticTypeVariableBindings"
+          upperBound="-1" eType="#//structure/Type"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="structure" nsPrefix="ftm/structure">
     <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
