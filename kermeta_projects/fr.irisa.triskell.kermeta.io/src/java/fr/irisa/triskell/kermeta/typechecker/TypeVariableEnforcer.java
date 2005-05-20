@@ -1,4 +1,4 @@
-/* $Id: TypeVariableEnforcer.java,v 1.2 2005-05-18 23:42:17 ffleurey Exp $
+/* $Id: TypeVariableEnforcer.java,v 1.3 2005-05-20 12:46:12 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : GenericTypeSubstitution.java
 * License : GPL
@@ -35,7 +35,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  */
 public class TypeVariableEnforcer extends KermetaVisitor {
 	
-	protected static FType getBoundType(FType generic, Hashtable bindings) {
+	public static FType getBoundType(FType generic, Hashtable bindings) {
 		TypeVariableEnforcer visitor = new TypeVariableEnforcer(bindings);
 		return (FType) visitor.accept(generic);
 	}

@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.5 2005-05-10 20:33:09 ffleurey Exp $
+/* $Id: InheritanceSearch.java,v 1.6 2005-05-20 12:46:12 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : InheritanceSearchUtilities.java
 * License : GPL
@@ -126,6 +126,40 @@ public class InheritanceSearch {
 		}
 		
 		return result;
+	}
+	
+	
+	public static CallableOperation getSuperOperation(FClass c, FOperation method) {
+	    
+		ArrayList allTypes = allSuperTypes(c);
+		ArrayList result = new ArrayList();
+		Hashtable found_ops = new Hashtable();
+		
+		ArrayList toVisit = new ArrayList();
+		toVisit.add(c);
+		
+		
+		while(!toVisit.isEmpty()) {
+		    FClass current = (FClass)toVisit.get(0);
+		    toVisit.remove(0);
+		    Iterator it = getDirectSuperTypes(current).iterator();
+		    while(it.hasNext()) {
+		        FClass stype = (FClass)it.next();
+		        if (!toVisit.contains(stype)) toVisit.add(stype);
+		    }
+		    
+		    Iterator ops = current.getFClassDefinition().getFOwnedOperation().iterator();
+			// Add all operations
+			while (ops.hasNext()) {
+				FOperation op = (FOperation)ops.next();
+				if (method.getFSuperOperation() == op) {
+				    return new CallableOperation(op,current);
+				}
+			}
+		    
+		}
+		
+		return null;
 	}
 	
 	/**

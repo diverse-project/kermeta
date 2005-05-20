@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.23 2005-05-18 23:42:44 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.24 2005-05-20 12:46:11 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
+import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
@@ -765,6 +766,12 @@ public abstract class KermetaUnit {
 		TypeContainementFixer fixer = new TypeContainementFixer();
 		while(it.hasNext()) {
 			FObject o = (FObject)it.next();
+			
+			if (o instanceof FCallExpression) {
+			    FCallExpression e = (FCallExpression)o;
+			    fixer.addContainedTypes(e.getFStaticTypeVariableBindings(), e);
+			}
+			
 			if (o instanceof FExpression) {
 				FExpression e = (FExpression)o;
 				if (e.getFStaticType() != null) {

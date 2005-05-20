@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.9 2005-05-18 23:42:16 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.10 2005-05-20 12:46:12 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -214,6 +214,14 @@ public class ExpressionChecker extends KermetaVisitor {
 					    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+expected+", found "+provided+".",(FExpression)exp.getFParameters().get(i)));
 					    error = true;
 					}
+			    }
+		    }
+		    
+		    if (!error) {
+			    exp.getFStaticTypeVariableBindings().clear();
+			    // store values of type variables in the call expression
+			    for(int i=0; i<op.getOperation().getFTypeParameter().size(); i++) {
+			        exp.getFStaticTypeVariableBindings().add(binding.get(op.getOperation().getFTypeParameter().get(i)));
 			    }
 		    }
 		    
