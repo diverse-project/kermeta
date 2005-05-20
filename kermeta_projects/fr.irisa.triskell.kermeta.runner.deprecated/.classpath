@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/emf_libraries"/>
+	<classpathentry kind="src" path="/fr.irisa.triskell.kermeta.interpreter"/>
+	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.model/src/java" kind="lib" path="/fr.irisa.triskell.kermeta.framework/lib/model_kermeta.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
