@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.1 2005-05-13 15:05:39 ffleurey Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.2 2005-05-20 12:54:43 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : newRuntimeLoader.java
 * License : GPL
@@ -46,36 +46,66 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class RuntimeMemoryLoader {
-
-    
-    public static void load(KermetaUnit unit, RuntimeMemory memory) {
-        RuntimeMemoryLoader loader = new RuntimeMemoryLoader(unit, memory);
-        loader._1_loadTypes();
-        loader._2_initializeMemory();
-        loader._3_createRuntimeObjects();
-    }
+ class RuntimeMemoryLoader {
     
     protected KermetaUnit unit;
     protected RuntimeMemory memory;
     
+    // properties by qualified name
     private Hashtable properties;
+    
+    // mapping kcoreObject -> RuntimeObject
+    private Hashtable objects;
+    // mapping qualified_name -> RuntimeObject (TypeDefinition)
+    private Hashtable typeDefinitions;
     
     /**
      * Constructor
      */
-    private RuntimeMemoryLoader(KermetaUnit unit, RuntimeMemory memory) {
+    protected RuntimeMemoryLoader(KermetaUnit unit, RuntimeMemory memory) {
         super();
         properties = new Hashtable();
         this.unit = unit;
         this.memory = memory;
+        objects = new Hashtable();
+        typeDefinitions = new Hashtable();
     }
+    
+    protected void init() {
+        _1_loadTypes();
+        _2_initializeMemory();
+    }
+    
+    
+    protected RuntimeObject getTypeDefinitionFromQualifiedName(String qname) {
+        RuntimeObject result = (RuntimeObject)typeDefinitions.get(qname);
+        // should never happen robustness
+        if (result == null) {
+            throw new Error("INTERNAL ERROR : unable to find type " + qname );
+        }
+        
+        // The type is not loaded yet as a runtime object
+        if (!result.isFrozen()) {
+            getOrCreateRuntimeObject((FObject)result.getData().get("kcoreObject"));
+        }
+        
+        return result;
+    }
+    
+    protected RuntimeObject getRuntimeObjectForFObject(FObject object) {
+        return getOrCreateRuntimeObject(object);
+    }
+    
+    public void clearFObjectFromCache(FObject object)
+    {
+        objects.remove(object);
+    }
+    
     
     /**
      * Pre-create runtime objects for types
      */
     private void _1_loadTypes() {
-        Hashtable types = memory.getROFactory().getClassDefTable();
         Iterator it = unit.packages.values().iterator();
         while(it.hasNext()) {
             FPackage p = (FPackage)it.next();
@@ -84,13 +114,15 @@ public class RuntimeMemoryLoader {
                 FTypeDefinition td = (FTypeDefinition)tit.next();
                 RuntimeObject ro =  new RuntimeObject(memory.getROFactory(), null);
                 ro.getData().put("kcoreObject", td);
-                types.put(unit.getQualifiedName(td), ro);
+                typeDefinitions.put(unit.getQualifiedName(td), ro);
                 
                 if (td instanceof FClassDefinition) {
                     Iterator pit = ((FClassDefinition)td).getFOwnedAttributes().iterator();
                     while (pit.hasNext()) {
                         FProperty prop = (FProperty)pit.next();
-                        properties.put(unit.getQualifiedName(prop), new RuntimeObject(memory.getROFactory(), null));
+                        RuntimeObject ro_prop = new RuntimeObject(memory.getROFactory(), null);
+                        ro_prop.getData().put("kcoreObject", prop);
+                        properties.put(unit.getQualifiedName(prop), ro_prop);
                     }
                 }
                 
@@ -121,8 +153,6 @@ public class RuntimeMemoryLoader {
 
 	
 	private RuntimeObject getOrCreateRuntimeObject(FObject kcoreObject) {
-		Hashtable objects = memory.getCorrespondanceTable();
-	    
 	    // return void if null
 		if (kcoreObject == null) return memory.voidINSTANCE;
 		// Get it if it exists
@@ -131,7 +161,7 @@ public class RuntimeMemoryLoader {
 		RuntimeObject result;
 		if (kcoreObject instanceof FTypeDefinition) {
 		    //System.err.println("Load type definition " + unit.getQualifiedName((FTypeDefinition)kcoreObject));
-		    result = (RuntimeObject)memory.getROFactory().getClassDefTable().get(unit.getQualifiedName((FTypeDefinition)kcoreObject));
+		    result = (RuntimeObject)typeDefinitions.get(unit.getQualifiedName((FTypeDefinition)kcoreObject));
 		}
 		else if (kcoreObject instanceof FProperty) result = (RuntimeObject)properties.get(unit.getQualifiedName((FProperty)kcoreObject));
 		else result = new RuntimeObject(memory.getROFactory(), null);
@@ -209,7 +239,7 @@ public class RuntimeMemoryLoader {
 				}
 			}
 		}
-		
+		result.setFrozen(true);
 		return result;
 	}
 	

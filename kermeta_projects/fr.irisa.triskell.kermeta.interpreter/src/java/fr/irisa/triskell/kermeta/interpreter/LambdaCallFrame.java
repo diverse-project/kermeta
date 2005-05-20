@@ -1,4 +1,4 @@
-/* $Id: LambdaCallFrame.java,v 1.1 2005-05-16 17:39:08 ffleurey Exp $
+/* $Id: LambdaCallFrame.java,v 1.2 2005-05-20 12:54:38 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
 * License : GPL
@@ -11,6 +11,7 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -88,6 +89,10 @@ public class LambdaCallFrame extends CallFrame {
     
     public RuntimeObject getSelf() {
         return nestingOperationCallFrame.getSelf();
+    }
+    
+    public Hashtable getTypeParameters() {
+        return nestingOperationCallFrame.getTypeParameters();
     }
     
     public String toString() {

@@ -8,6 +8,13 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.OrderedCollection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
+import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 
 public class ReflectiveSequence {
 
@@ -42,67 +49,29 @@ public class ReflectiveSequence {
 
 	public static RuntimeObject createReflectiveSequence(RuntimeObject object, RuntimeObject property) {
 		
-	    /*
-	    RuntimeObject result;
+	    FClass self_class = (FClass)object.getMetaclass().getData().get("kcoreObject");
+	    
+	    FProperty fprop = (FProperty)property.getData().get("kcoreObject");
+	    
+	    FType prop_type = TypeVariableEnforcer.getBoundType(fprop.getFType(), TypeVariableEnforcer.getTypeVariableBinding(self_class));
 		
-		// FIXME: This is not finished. The metaClass is not set correctely
+	    FClass reflect_class = object.getFactory().getMemory().getUnit().struct_factory.createFClass();
+	        
+	    reflect_class.setFClassDefinition( (FClassDefinition) object.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
+	    
+	    FTypeVariableBinding binding = object.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+	    
+	    binding.setFVariable((FTypeVariable)reflect_class.getFClassDefinition().getFTypeParameter().get(0));
+	    
+	    binding.setFType(prop_type);
 		
-		RuntimeObject rc_class = null; //(RuntimeObject)reflective_sequence_classes.get(property.getProperties().get("type"));
-		// If the rc_class does not exist yet in the stored RS classes
-		if (rc_class == null)
-		{
-		    // Create the RuntimeObject for the type "ReflectiveSequence" (and later
-		    // set specific bindings)
-			RuntimeObject reflective_class_def = object.getFactory().getTypeDefinitionByName("kermeta::language::ReflectiveSequence");
-			rc_class = object.getFactory().createObjectFromClassName("kermeta::language::structure::Class");
-			rc_class.getData().put("kcoreObject", reflective_class_def.getData().get("kcoreObject"));
-			
-			//
-			rc_class.getProperties().put(
-				     "typeParamBinding",
-				     Collection.createCollection(
-				             (RuntimeObject)object.getFactory().getClassDefTable().get(
-				                     "kermeta::language::structure::TypeVariableBinding")));
-			
-			
-			// Create the RuntimeObject for the type "TypeVariableBinding"
-			RuntimeObject binding = object.getFactory().createObjectFromClassName("kermeta::language::structure::TypeVariableBinding");
-			//binding.getProperties().put("type", property.getProperties().get("type"));
-			//binding.getProperties().put("variable", Collection.getArrayList((RuntimeObject)reflective_class_def.getProperties().get("typeParameter")).get(0));
-			
-			
-			
-			/** FIXME :  NullPointerException here! try and launch it, than follow
-			 * the stack trace... : "RProperty" seems to be not properly set*/
-			// Set to the first position the property "typeParamBinding"
-			// We want 
-	/*		RuntimeObject ro_position = 
-			    fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(
-			            0,
-			            object.getFactory());
-			ReflectiveSequence.addAt(
-			        (RuntimeObject)rc_class.getProperties().get("typeParameterBinding"),
-			        ro_position,
-			        binding
-			        );
-			// Add a "binding" in the collection of "typeParamBindings" for the type "ReflectiveSequence"
-			Collection.add((RuntimeObject)rc_class.getProperties().get("typeParamBinding"), binding);
-			//reflective_sequence_classes.put(property.getProperties().get("type"), rc_class);
-		}
+	    reflect_class.getFTypeParamBinding().add(binding);
+	    
+		RuntimeObject result = object.getFactory().createRuntimeObjectFromClass(object.getFactory().createMetaClass(reflect_class));
 		
-		// If the class parametrized does already exist, do not "recreate" it : only "reuse" it to
-		// create a new RuntimeObject instance of it
-		result = object.getFactory().createRuntimeObject(rc_class);
 		result.getData().put("RObject", object);
 		result.getData().put("RProperty", property);
-		return result;
-		*/
 		
-		RuntimeObject result;
-		RuntimeObject reflective_class_def = object.getFactory().getTypeDefinitionByName("kermeta::language::ReflectiveSequence");
-		result = object.getFactory().createObjectFromClassDefinition(reflective_class_def);
-		result.getData().put("RObject", object);
-		result.getData().put("RProperty", property);
 		return result;
 	}
 	

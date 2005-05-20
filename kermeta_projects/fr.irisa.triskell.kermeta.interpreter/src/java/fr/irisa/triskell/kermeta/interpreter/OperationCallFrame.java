@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.1 2005-05-16 17:39:08 ffleurey Exp $
+/* $Id: OperationCallFrame.java,v 1.2 2005-05-20 12:54:37 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : OperationCallFrame.java
 * License : GPL
@@ -11,11 +11,17 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
 
+import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FParameter;
+import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
+import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 
 /**
  * @author Franck Fleurey
@@ -37,18 +43,34 @@ public class OperationCallFrame extends CallFrame {
      */
     private RuntimeObject operationResult;
     
+    private Hashtable typeParameters;
+    
     /**
      * @param pSelf
      * @param pContext
      * @param pOperation
      * @param pParameters
      */
-    public OperationCallFrame(InterpreterContext pContext, FOperation pOperation, RuntimeObject pSelf,  ArrayList pParameters) {
+    public OperationCallFrame(InterpreterContext pContext, CallableOperation pOperation, RuntimeObject pSelf,  ArrayList pParameters, FCallExpression expression) {
         super(pContext);
-        this.operation = pOperation;
+        this.operation = pOperation.getOperation();
         this.self = pSelf;
         
+        typeParameters = TypeVariableEnforcer.getTypeVariableBinding(pOperation.getFclass());
+        
+        if (operation.getFTypeParameter().size() > 0) {
+	        //just for robustness
+	        if (expression == null || operation.getFTypeParameter().size() != expression.getFStaticTypeVariableBindings().size()) {
+	            throw new Error("INTERNAL ERROR : the type parameters of the operation should have been bound by the type checker.");
+	        }
+	        
+	         for(int i=0; i<operation.getFTypeParameter().size(); i++) {
+	            typeParameters.put(operation.getFTypeParameter().get(i), TypeVariableEnforcer.getBoundType((FType)expression.getFStaticTypeVariableBindings().get(i), pContext.peekCallFrame().getTypeParameters()));
+	        }
+        }
+        
         initialize(pParameters);
+       
     }
     
     protected void initialize(ArrayList pParameters) {
@@ -80,5 +102,9 @@ public class OperationCallFrame extends CallFrame {
     
     public RuntimeObject getSelf() {
         return self;
+    }
+    
+    public Hashtable getTypeParameters() {
+        return typeParameters;
     }
 }

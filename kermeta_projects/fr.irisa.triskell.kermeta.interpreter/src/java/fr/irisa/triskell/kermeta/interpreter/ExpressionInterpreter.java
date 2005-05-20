@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.5 2005-05-18 23:49:02 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.6 2005-05-20 12:54:38 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -62,8 +62,10 @@ import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
+import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -102,8 +104,14 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	public Object invoke(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
 		RuntimeObject result=null;
 		RuntimeObjectFactory roFactory = memory.getROFactory(); 
+		
+		 FClass self_type = (FClass)ro_target.getMetaclass().getData().get("kcoreObject");
+	      
+		
+		CallableOperation op = new CallableOperation(foperation, self_type);
+		
         // Create a context for this operation call, setting self object to ro_target
-        interpreterContext.pushOperationCallFrame(ro_target, foperation, arguments);
+        interpreterContext.pushOperationCallFrame(ro_target, op, arguments, null);
        
         // Resolve this operation call
         result = (RuntimeObject)this.accept(foperation);
@@ -139,17 +147,21 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	
 	
     public Object visit(FTypeLiteral arg0) {
-        // FIXME : Type variables should be handled here
+        
         FClass c = (FClass)((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(arg0.getFTyperef())).getType();
         
-        RuntimeObject cdef = (RuntimeObject)memory.getCorrespondanceTable().get(c.getFClassDefinition());
+        // FIXME : Type variables should be handled here (substitutions of variables)
+        if (c.getFTypeParamBinding().size() != 0) {
         
-        if (cdef == null) {
-            internalLog.error("INTERPRETER INTERNAL ERROR : Type definition not found");
-	        throw new Error("INTERPRETER INTERNAL ERROR : Type definition not found");
+            FClass self_class = (FClass)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
+            
+            c = (FClass)TypeVariableEnforcer.getBoundType(c, interpreterContext.peekCallFrame().getTypeParameters());
+            
         }
         
-        RuntimeObject result = memory.getROFactory().getClassForClassDefinition(cdef);
+
+        
+        RuntimeObject result = memory.getROFactory().createMetaClass(c);
         return result;
     }
     
@@ -178,7 +190,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    }
 	    
 	    // Get the runtime object in the memory correspondance table
-	    RuntimeObject result = (RuntimeObject)memory.getCorrespondanceTable().get(cproperty.getProperty());
+	    RuntimeObject result = memory.getRuntimeObjectForFObject(cproperty.getProperty());
 	    
 	    // DEBUG : This should never happend
 	    if (result == null) {
@@ -313,10 +325,12 @@ public class ExpressionInterpreter extends KermetaVisitor {
         FClassDefinition foclass = current_op.getFOwningClass();
         //internalLog.info("Visiting a super operation of : "+current_op.getFName());
         
+        FClass self_type = (FClass)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
+        
         // Get the parameters of this operation
 		ArrayList parameters = visitList(node.getFParameters());
 		// Create a context for this operation call, setting self object to ro_target
-		interpreterContext.pushOperationCallFrame(ro_target, current_op.getFSuperOperation(), parameters);
+		interpreterContext.pushOperationCallFrame(ro_target, InheritanceSearch.getSuperOperation(self_type, current_op), parameters, node);
 		
 		
         result = (RuntimeObject)this.accept(current_op.getFSuperOperation());
@@ -561,54 +575,65 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    }
 
 		// Get the feature
-		Object feature = getFeatureFromFeatureCall(t_target, node);
-		
-//		 Check that target is not void
-	    if (feature == null && ro_target == memory.voidINSTANCE) {
-	        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
-	        throw new KermetaRaisedException(ro_target, this);
-	    }
-		
-		// This should never happend is the type checker has checked the program
-		if (feature == null) {
-		    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature");
-	        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature");
-		}
-		
-		// The feature can be either an operation or a property
-		
-		// Is the callfeature an operation call? So that we create a new call
-		// frame and accept this operation in order to process it.
-		if (feature instanceof FOperation)
-		{
-			// Get the parameters of this operation
+	    
+	    SimpleType target_type = new SimpleType(t_target);
+	    
+	    if (node.getFStaticOperation() != null) {
+	        // It is an operation call
+	        CallableOperation operation = target_type.getOperationByName(node.getFName());
+	        
+//			 Check that target is not void
+		    if (operation == null && ro_target == memory.voidINSTANCE) {
+		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
+		        throw new KermetaRaisedException(ro_target, this);
+		    }
+		    
+//		  This should never happend is the type checker has checked the program
+			if (operation == null) {
+			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature");
+		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature");
+			}
+	        
+//			 Get the parameters of this operation
 			ArrayList parameters = visitList(node.getFParameters());
-			// Get the FOperation corresponding to this operation call
-			FOperation foperation = (FOperation)feature;
 			// Create a context for this operation call, setting self object to ro_target
-			interpreterContext.pushOperationCallFrame(ro_target, foperation, parameters);
+			interpreterContext.pushOperationCallFrame(ro_target, operation, parameters, node);
 			
 			// Resolve this operation call
-			result = (RuntimeObject)this.accept(foperation);
+			result = (RuntimeObject)this.accept(operation.getOperation());
 			// After operation has been evaluated, pop its context
 			interpreterContext.popCallFrame();
-		}
-		// Is it a property? If yes, update the RuntimeObject repr.g the target node !
-		else if (feature instanceof FProperty)
-		{
-		    FProperty fproperty = (FProperty)feature;
-		    // Get the runtime object corresponding to the property
-		    RuntimeObject ro_property = getRuntimeObjectForFProperty(t_target, fproperty.getFName());
+			
+	    }
+	    else {
+	        // It is a property call
+	        CallableProperty property =  target_type.getPropertyByName(node.getFName());
+	        
+//			 Check that target is not void
+		    if (property == null && ro_target == memory.voidINSTANCE) {
+		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
+		        throw new KermetaRaisedException(ro_target, this);
+		    }
+		    
+//		  This should never happend is the type checker has checked the program
+			if (property == null) {
+			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature");
+		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature");
+			}
+			
+//			 Get the runtime object corresponding to the property
+		    RuntimeObject ro_property = getRuntimeObjectForFProperty(t_target, property.getProperty().getFName());
 		    
 		    // This is just a debbuging check. It should never occur
-		    if (feature == null) {
-			    internalLog.error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + fproperty.getFName());
-		        throw new Error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + fproperty.getFName());
+		    if (ro_property == null) {
+			    internalLog.error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
+		        throw new Error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
 			}
 		    
 		    // Get the value of the property
 		    result = fr.irisa.triskell.kermeta.runtime.language.Object.get(ro_target, ro_property);
-		}
+	        
+	    }
 		
 		return result;
 	}
@@ -869,35 +894,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
         return context;
     }
   */
-    /**
-     * This is a helper (TODO : move it in a specific class) that returns the precise
-     * type of the <code>feature</code> that is "applied" to the given <code>target</code>.
-     * If the type of the type reference of the target is a "FClass", then we have to find out
-     * if feature is an operation or an attribute. We can find that it is an operation if there
-     * are parameters, but in the other case (no parameters) we have no way to find it.
-     * @param type the type reference of the "callee" element on which feature is "called"
-     * @param feature_call the feature of which we want the type (FOperation, FAttribute)
-     * @return the ecore object representing this feature. Its real type is either FProperty or FOperation
-     */
-    public Object getFeatureFromFeatureCall(FClass target_class, FCallFeature feature_call)
-    {
-        Object result = null;
-        
-        // Crete the type corresponding to the target
-        SimpleType target = new SimpleType(target_class);
-        
-        // Check if it is a property call
-        CallableProperty cp = target.getPropertyByName(feature_call.getFName());
-        if (cp != null) result = cp.getProperty();
-        
-        // Check if it is an operation call
-        if (result == null) {
-            CallableOperation co = target.getOperationByName(feature_call.getFName());
-            if (co != null) result = co.getOperation();
-        }
-        
-        return result;
-    }
      
     /**
      * Get the super operation or the super attribute in super classes of classDef 

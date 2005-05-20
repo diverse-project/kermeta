@@ -1,4 +1,4 @@
-/* $Id: Boolean.java,v 1.1 2005-05-13 15:05:35 ffleurey Exp $ 
+/* $Id: Boolean.java,v 1.2 2005-05-20 12:54:41 ffleurey Exp $ 
  * Implementation of Kermeta base type Boolean 
  */
 
@@ -6,6 +6,8 @@ package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 
 
 public class Boolean {
@@ -65,12 +67,22 @@ public class Boolean {
 	/* initialize TRUE and FALse singletons
 	 * 
 	 */
-	public static RuntimeObject createTrue(RuntimeObjectFactory factory) {
-	    return create(true, factory);
+	public static void createTrue(RuntimeObjectFactory factory, RuntimeObject result) {
+	    
+	    FClass bool_class = factory.getMemory().getUnit().struct_factory.createFClass();
+	    bool_class.setFClassDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
+	    
+	    result.setMetaclass(factory.createMetaClass(bool_class));
+	    setValue(result, true);
 	}
 	
-	public static RuntimeObject createFalse(RuntimeObjectFactory factory) {
-	    return create(false, factory);
+	public static void createFalse(RuntimeObjectFactory factory, RuntimeObject result) {
+	    
+	    FClass bool_class = factory.getMemory().getUnit().struct_factory.createFClass();
+	    bool_class.setFClassDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
+	    
+	    result.setMetaclass(factory.createMetaClass(bool_class));
+	    setValue(result, false);
 	}
 	
 	private static RuntimeObject create(boolean value, RuntimeObjectFactory factory) {

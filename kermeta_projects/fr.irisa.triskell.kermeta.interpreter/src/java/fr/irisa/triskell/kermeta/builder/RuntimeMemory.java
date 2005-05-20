@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.3 2005-05-16 17:39:13 ffleurey Exp $
+/* $Id: RuntimeMemory.java,v 1.4 2005-05-20 12:54:43 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeMemory.java
  * License: GPL
@@ -18,6 +18,7 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FObject;
 
 /**
  * The runtime memory of a program that is currently executed
@@ -43,20 +44,30 @@ public class RuntimeMemory {
 	public FClass stdioFClass=null;
 	
 	protected KermetaUnit unit;
-	
-	/**
-	 * The correspondance table from where we get IntegerLiterals, 
-	 * StringLiterals, and RealLiterals.
-	 * - key type is FObject
-	 * - value type is the corresponding RuntimeObject
-	 */
-	private Hashtable correspondanceTable;
+
+	private RuntimeMemoryLoader memoryLoader;
 	
 	
     public RuntimeMemory(KermetaUnit unit) {
         roFactory = new RuntimeObjectFactory(this);
-        correspondanceTable = new Hashtable();
         this.unit = unit;
+        memoryLoader = new RuntimeMemoryLoader(unit,this);
+        memoryLoader.init();
+    }
+    
+    public RuntimeObject getRuntimeObjectForFObject(FObject object)
+    {
+        return memoryLoader.getRuntimeObjectForFObject(object);
+    }
+    
+    public void clearFObjectFromCache(FObject object)
+    {
+        memoryLoader.clearFObjectFromCache(object);
+    }
+    
+    public RuntimeObject getTypeDefinitionAsRuntimeObject(String qname) 
+    {
+        return memoryLoader.getTypeDefinitionFromQualifiedName(qname);
     }
     
     /**
@@ -70,15 +81,20 @@ public class RuntimeMemory {
     protected void createSingletons(KermetaUnit interpreterbuilder)
     {
 	    //initialize TRUE and FALSE
-		trueINSTANCE = Boolean.createTrue(roFactory);
-		falseINSTANCE = Boolean.createFalse(roFactory);
-	    // Create the void Instance (should be a singleton)
-	    RuntimeObject roVoidType = (RuntimeObject)roFactory.getClassDefTable().get("kermeta::reflection::VoidType");
+        trueINSTANCE = new RuntimeObject(roFactory, null);
+        falseINSTANCE =  new RuntimeObject(roFactory, null);
+        
+        
+		Boolean.createTrue(roFactory, trueINSTANCE);
+		Boolean.createFalse(roFactory, falseINSTANCE);
+	    
+		// Create the void Instance (should be a singleton)
+	    RuntimeObject roVoidType = getTypeDefinitionAsRuntimeObject("kermeta::reflection::VoidType");
 	    voidINSTANCE=roFactory.createObjectFromClassDefinition(roVoidType);
 	    
 	   
 	    
-	    RuntimeObject stdIOmetaClass=(RuntimeObject)roFactory.getClassDefTable().get("kermeta::io::StdIO");
+	    RuntimeObject stdIOmetaClass= getTypeDefinitionAsRuntimeObject("kermeta::io::StdIO");
 	    stdioINSTANCE=roFactory.createObjectFromClassDefinition(stdIOmetaClass);
 	    
     }
@@ -95,9 +111,6 @@ public class RuntimeMemory {
     public RuntimeObjectFactory getROFactory() {
         return this.roFactory;    }
 
-    public Hashtable getCorrespondanceTable() {
-        return this.correspondanceTable;
-    }
     
     public KermetaUnit getUnit() {
         return unit;

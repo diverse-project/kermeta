@@ -13,6 +13,13 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 
 public class ReflectiveCollection {
 
@@ -95,42 +102,29 @@ public class ReflectiveCollection {
 	 */
 	public static RuntimeObject createReflectiveCollection(RuntimeObject object, RuntimeObject property)
 	{
-		
-		/*
-		RuntimeObject rc_class = null;// (RuntimeObject)reflective_collection_classes.get(property.getProperties().get("type"));
-		
-		if (rc_class == null) {
-		    
-		    // Create the RO for the type "ReflectiveCOllection"
-			RuntimeObject reflective_class_def = object.getFactory().getTypeDefinitionByName("kermeta::language::ReflectiveCollection");
-			// depr. // rc_class = object.getFactory().createObjectFromClassName("kermeta::language::ReflectiveCollection");
-			rc_class = object.getFactory().createObjectFromClassName("kermeta::language::structure::Class");
-			rc_class.getData().put("kcoreObject", reflective_class_def.getData().get("kcoreObject"));
-			
-			// Set the param bindings
-			// FIXME : we do the same stuff in createObjectFromClassName : redundancy
-			rc_class.getProperties().put(
-				     "typeParamBinding",
-				     Collection.createCollection(
-				             (RuntimeObject)object.getFactory().getClassDefTable().get(
-				                     "kermeta::language::structure::TypeVariableBinding")));
-			
-			// Set the bindings
-			RuntimeObject binding = object.getFactory().createObjectFromClassName("kermeta::language::structure::TypeVariableBinding");
-			binding.getProperties().put("type", property.getProperties().get("type"));
-			binding.getProperties().put("variable", Collection.getArrayList((RuntimeObject)reflective_class_def.getProperties().get("typeParameter")).get(0));
-//			ReflectiveCollection.add(Object.get(rc_class, object.getFactory().getClass_typeParamBinding_properety()), binding);
-			
-			Collection.add((RuntimeObject)rc_class.getProperties().get("typeParamBinding"), binding);
-			//reflective_collection_classes.put(property.getProperties().get("type"), rc_class);
-		}
-		*/
+	    FClass self_class = (FClass)object.getMetaclass().getData().get("kcoreObject");
 	    
-	    RuntimeObject result;
-		RuntimeObject reflective_class_def = object.getFactory().getTypeDefinitionByName("kermeta::language::ReflectiveCollection");
-		result = object.getFactory().createObjectFromClassDefinition(reflective_class_def);
+	    FProperty fprop = (FProperty)property.getData().get("kcoreObject");
+	    
+	    FType prop_type = TypeVariableEnforcer.getBoundType(fprop.getFType(), TypeVariableEnforcer.getTypeVariableBinding(self_class));
+		
+	    FClass reflect_class = object.getFactory().getMemory().getUnit().struct_factory.createFClass();
+	        
+	    reflect_class.setFClassDefinition( (FClassDefinition) object.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::ReflectiveCollection"));
+	    
+	    FTypeVariableBinding binding = object.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+	    
+	    binding.setFVariable((FTypeVariable)reflect_class.getFClassDefinition().getFTypeParameter().get(0));
+	    
+	    binding.setFType(prop_type);
+		
+	    reflect_class.getFTypeParamBinding().add(binding);
+	    
+		RuntimeObject result = object.getFactory().createRuntimeObjectFromClass(object.getFactory().createMetaClass(reflect_class));
+		
 		result.getData().put("RObject", object);
 		result.getData().put("RProperty", property);
+		
 		return result;
 	}
 	

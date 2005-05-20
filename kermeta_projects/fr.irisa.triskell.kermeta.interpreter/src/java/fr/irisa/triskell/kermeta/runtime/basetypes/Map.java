@@ -2,9 +2,14 @@
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 
 public class Map {
 	
@@ -39,17 +44,51 @@ public class Map {
 	// Implementation of method keyIterator called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keysIterator()
 	public static RuntimeObject keysIterator(RuntimeObject self) {
-	    RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Iterator");
+	
+		FClass it_class = self.getFactory().getMemory().getUnit().struct_factory.createFClass();
+	    
+	    it_class.setFClassDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    
+	    FTypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+	    
+	    binding.setFVariable((FTypeVariable)it_class.getFClassDefinition().getFTypeParameter().get(0));
+	    
+	    FClass self_class = (FClass)self.getMetaclass().getData().get("kcoreObject");
+	    
+	    binding.setFType(((FTypeVariableBinding)self_class.getFTypeParamBinding().get(0)).getFType());
+	    
+	    it_class.getFTypeParamBinding().add(binding);
+	    
+	    RuntimeObject result = self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass(it_class));
+		
 		Iterator.setValue(result, getKeyHashtable(self).values().iterator());
 		return result;
+		
 	}
 
 	// Implementation of method valueIterator called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.valueIterator()
 	public static RuntimeObject valueIterator(RuntimeObject self) {
-	    RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Iterator");
-	    Iterator.setValue(result, getKeyContentHashtable(self).values().iterator());
-	    return result;
+	    
+
+		FClass it_class = self.getFactory().getMemory().getUnit().struct_factory.createFClass();
+	    
+	    it_class.setFClassDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    
+	    FTypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+	    
+	    binding.setFVariable((FTypeVariable)it_class.getFClassDefinition().getFTypeParameter().get(0));
+	    
+	    FClass self_class = (FClass)self.getMetaclass().getData().get("kcoreObject");
+	    
+	    binding.setFType(((FTypeVariableBinding)self_class.getFTypeParamBinding().get(0)).getFType());
+	    
+	    it_class.getFTypeParamBinding().add(binding);
+	    
+	    RuntimeObject result = self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass(it_class));
+		
+		Iterator.setValue(result, getKeyContentHashtable(self).values().iterator());
+		return result;
 	}
 
 	// Implementation of method get called as :

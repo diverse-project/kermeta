@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 
 public class Collection {
 
@@ -41,7 +46,23 @@ public class Collection {
 	// Implementation of method iterator called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection::iterator()
 	public static RuntimeObject iterator(RuntimeObject self) {
-		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Iterator");
+		
+	    FClass it_class = self.getFactory().getMemory().getUnit().struct_factory.createFClass();
+	    
+	    it_class.setFClassDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    
+	    FTypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+	    
+	    binding.setFVariable((FTypeVariable)it_class.getFClassDefinition().getFTypeParameter().get(0));
+	    
+	    FClass self_class = (FClass)self.getMetaclass().getData().get("kcoreObject");
+	    
+	    binding.setFType(((FTypeVariableBinding)self_class.getFTypeParamBinding().get(0)).getFType());
+	    
+	    it_class.getFTypeParamBinding().add(binding);
+	    
+	    RuntimeObject result = self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass(it_class));
+		
 		Iterator.setValue(result, ((ArrayList)getArrayList(self).clone()).iterator());
 		return result;
 	}
@@ -54,14 +75,6 @@ public class Collection {
 		return (ArrayList)collection.getData().get("CollectionArrayList");
 	}
 
-	public static RuntimeObject createCollection(RuntimeObject collectionType) {
-		RuntimeObject result;
-		RuntimeObject collectionMetaclass=(RuntimeObject)collectionType.getFactory().getClassDefTable().get("kermeta::standard::Collection");
-		result=new RuntimeObject(collectionMetaclass.getFactory(),collectionMetaclass);
-		result.setData(new Hashtable());
-		result.getData().put("CollectionArrayList",new ArrayList());
-		result.getProperties().put("typeParamBinding",collectionType);
-		return result;
-	}
+	
 }
 /* END OF FILE */
