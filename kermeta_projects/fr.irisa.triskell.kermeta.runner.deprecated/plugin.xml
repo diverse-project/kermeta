@@ -46,32 +46,9 @@
       <import plugin="org.junit"/>
       <import plugin="org.eclipse.jdt"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.jdt.launching"/>
    </requires>
 
-   <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            label="Sample Action Set"
-            visible="true"
-            id="fr.irisa.triskell.kermeta.runner.actionSet">
-         <menu
-               label="Sample &amp;Menu"
-               id="sampleMenu">
-            <separator
-                  name="sampleGroup">
-            </separator>
-         </menu>
-         <action
-               label="&amp;Sample Action"
-               icon="icons/sample.gif"
-               class="fr.irisa.triskell.kermeta.runner.actions.SampleAction"
-               tooltip="Hello, Eclipse world"
-               menubarPath="sampleMenu/sampleGroup"
-               toolbarPath="sampleGroup"
-               id="fr.irisa.triskell.kermeta.runner.actions.SampleAction">
-         </action>
-      </actionSet>
-   </extension>
    <extension point="org.eclipse.ui.popupMenus">
       <objectContribution
             objectClass="org.eclipse.core.resources.IFile"
@@ -95,31 +72,35 @@
       </objectContribution>
    </extension>
    <!-- Extension point for the Kermeta Run menu item in the Run properties -->
- <!--  <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+   <extension point="org.eclipse.debug.core.launchConfigurationTypes">
     <launchConfigurationType
-        name="Kermeta Run"
+        name="Kermeta Run Configuration"
         delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
-        modes="run"               
+        modes="run, debug"               
         id="KermetaLaunchConfiguration">        
     </launchConfigurationType>
    </extension>
-   -->
+  
    <!-- Source locator -->
-<!--   <extension point = "org.eclipse.debug.core.sourceLocators">
+   <extension point = "org.eclipse.debug.core.sourceLocators">
 	<sourceLocator
 		id = "KermetaSourceLocator"
 	   	class="fr.irisa.triskell.kermeta.runner.launching.KermetaSourceLocator"
 	   	name="Kermeta Source Locator"/>
-	</extension> -->
+	</extension>
 	<!-- Tab groups for the launch configuration manager -->
-<!--      <extension
+      <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
-            type="TabGroups"
-            class="fr.irisa.triskell.kermeta.runner.launcher.KermetaLaunchConfigTabGroups"
-            id="TabGroups">
+            type="KermetaLaunchConfiguration"
+            class="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfigTabGroup"
+            id="KermetaTabGroup">
+         <launchMode
+               description="blabla"
+               mode="run"/>
       </launchConfigurationTabGroup>
    </extension> 
+   <!-- Launch is contained in this class 
       <extension
             point="org.eclipse.debug.core.launchConfigurationTypes">
          <launchConfigurationType
@@ -128,6 +109,51 @@
                name="fr.irisa.triskell.kermeta.runner.launching.KermetalaunchConfigurationType"
                modes="run"
                id="kermetaLaunchConfigurationType"/>
+      </extension> -->
+   <!-- Perspective -->
+      <extension
+            point="org.eclipse.ui.perspectiveExtensions">
+         <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+            <newWizardShortcut id="org.eclipse.jdt.ui.wizards.NewProjectCreationWizard"/>
+            <viewShortcut id="org.eclipse.jdt.ui.TypeHierarchy"/>
+            <perspectiveShortcut id="org.eclipse.debug.ui.DebugPerspective"/>
+            <actionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
+            <view
+                  ratio="0.5"
+                  relationship="left"
+                  relative="org.eclipse.ui.views.ResourceNavigator"
+                  id="org.eclipse.jdt.ui.PackageExplorer"/>
+         </perspectiveExtension>
       </extension>
--->
+      <extension
+            point="org.eclipse.core.resources.builders">
+      </extension>
+      <extension
+            id="KermetaPerspective"
+            name="kermetaPerspective"
+            point="org.eclipse.ui.perspectives">
+         <perspective
+               icon="icons/sample.gif"
+               class="fr.irisa.triskell.kermeta.runner.perspective.KermetaPerspectiveFactory"
+               name="kermetaPerspective"
+               id="kermetaPerspective"/>
+      </extension>
+      <extension
+            point="org.eclipse.debug.core.launchDelegates">
+         <launchDelegate
+               delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
+               type="fr.irisa.triskell.kermeta.runner.launchDelegate1"
+               modes="run"
+               id="fr.irisa.triskell.kermeta.runner.launchDelegate1"/>
+      </extension>
+      <extension
+            point="org.eclipse.debug.ui.launchGroups">
+         <launchGroup
+               bannerImage="icons/sample.gif"
+               label="fr.irisa.triskell.kermeta.runner.launchGroup1"
+               mode="run"
+               image="icons/sample.gif"
+               id="fr.irisa.triskell.kermeta.runners.launchGroup1"/>
+      </extension>
+
 </plugin>
