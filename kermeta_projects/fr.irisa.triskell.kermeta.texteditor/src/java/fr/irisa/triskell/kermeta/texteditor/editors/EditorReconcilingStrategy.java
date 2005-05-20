@@ -96,7 +96,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 
     private KermetaUnit parse()
     {
-        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.texteditor_0.0.2/lib/framework.km";
+        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.texteditor_0.0.4/lib/framework.km";
     	
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();
