@@ -36,6 +36,7 @@ public class OutlineContentProvider implements ITreeContentProvider {
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#getChildren(java.lang.Object)
 	 */
 	public Object[] getChildren(Object parentElement) {
+	    if (parentElement == null) return new Object[0];
 		if (parentElement instanceof OutlineItem) return ((OutlineItem)parentElement).getChildren();
 		else if (parentElement instanceof KermetaUnit) return getElements(parentElement);
 		else return new Object[0];
@@ -51,12 +52,20 @@ public class OutlineContentProvider implements ITreeContentProvider {
 	 * @see org.eclipse.jface.viewers.ITreeContentProvider#hasChildren(java.lang.Object)
 	 */
 	public boolean hasChildren(Object element) {
+	    if (element == null) return false;
 		return ((OutlineItem)element).getChildren().length != 0;
 	}
 	/**
 	 * @see org.eclipse.jface.viewers.IStructuredContentProvider#getElements(java.lang.Object)
 	 */
 	public Object[] getElements(Object inputElement) {
+	    
+	    try {
+	    
+	    if (!(inputElement instanceof KermetaUnit) || inputElement == null) {
+	        Object[] o = new Object[1];
+	        o[0] = "error creating outline";
+	    }
 		KermetaUnit unit = (KermetaUnit)inputElement;
 		ArrayList result = new ArrayList();
 		
@@ -78,6 +87,12 @@ public class OutlineContentProvider implements ITreeContentProvider {
 		    Collections.sort(result);
 		
 		return result.toArray();
+		
+	    }
+	    catch(Throwable t) {
+	        t.printStackTrace();
+	    }
+	    return new Object[0];
 	}
 	/**
 	 * @see org.eclipse.jface.viewers.IContentProvider#dispose()
