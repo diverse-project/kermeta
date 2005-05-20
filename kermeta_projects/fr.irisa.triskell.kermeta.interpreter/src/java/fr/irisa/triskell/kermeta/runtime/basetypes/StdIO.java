@@ -1,4 +1,4 @@
-/* $Id: StdIO.java,v 1.3 2005-05-19 13:43:26 zdrey Exp $
+/* $Id: StdIO.java,v 1.4 2005-05-20 12:04:03 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : GPL
@@ -50,24 +50,20 @@ public class StdIO {
 		output.getFactory().getKermetaIOStream().print("\n");
 		return output.getFactory().getMemory().voidINSTANCE;
 	}
-
-	// Implementation of method read_prompt called as :
-	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.read_prompt(prompt)
-	public static RuntimeObject read_prompt(RuntimeObject self, RuntimeObject prompt) {
+	
+	// Implementation of method writeln called as :
+	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.read(output)
+	public static RuntimeObject read(RuntimeObject prompt)
+	{
 	    java.lang.String input = null;
 		if (String.getValue(prompt).length()>0)
 		    prompt.getFactory().getKermetaIOStream().print(String.getValue(prompt));
-		// open up standard input
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		// read data from standard input
-		try {
-		    input = br.readLine();
-		} catch (IOException ioe) {
-		    System.out.println("JavaStaticCall error : IO error trying to read from input");
-		    
-		}
-		RuntimeObject result = String.create(input, self.getFactory());
+		// FIXME : dirty cast.. read returns a String or could return smthg else?
+		input = (java.lang.String)prompt.getFactory().getKermetaIOStream().read(
+		        String.getValue(prompt));
+		
+		RuntimeObject result = String.create(input, prompt.getFactory());
 		return result;
 	}
-
+	
 }
