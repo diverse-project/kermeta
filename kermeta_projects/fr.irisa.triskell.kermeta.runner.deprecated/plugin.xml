@@ -3,33 +3,12 @@
 <plugin
    id="fr.irisa.triskell.kermeta.runner"
    name="Runner Plug-in"
-   version="0.0.4"
+   version="0.0.5"
    provider-name="INRIA/IRISA"
    class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
 
    <runtime>
       <library name="runner_kermeta.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/io_kermeta.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/model_kermeta.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/interpreter_kermeta.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/thirdparty/log4j.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/thirdparty/antlr.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/thirdparty/emfatic-core.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/thirdparty/ldt-core.jar">
          <export name="*"/>
       </library>
    </runtime>
@@ -47,6 +26,7 @@
       <import plugin="org.eclipse.jdt"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="fr.irisa.triskell.kermeta"/>
    </requires>
 
    <extension point="org.eclipse.ui.popupMenus">

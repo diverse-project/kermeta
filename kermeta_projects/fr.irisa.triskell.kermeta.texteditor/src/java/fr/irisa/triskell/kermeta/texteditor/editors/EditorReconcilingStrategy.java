@@ -98,8 +98,9 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     {
         KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.texteditor_0.0.4/lib/framework.km";
     	
-    	StructurePackageImpl.init();
-    	BehaviorPackageImpl.init();
+    	//StructurePackageImpl.init();
+    	//BehaviorPackageImpl.init();
+    	
     	org.eclipse.core.resources.IFile file = _editor.getFile();
     	String uri = "platform:/resource" + file.getFullPath().toString();
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
