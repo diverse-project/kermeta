@@ -49,8 +49,7 @@ GT         		: '>'  ;
 GTE        		: ">=" ;
 DIV        		: '/'  ;  
 
-
-STRING_LITERAL : '"' (ESC | ~'"')* '"' ;
+STRING_LITERAL : '"' (ESC | ~('"'|'\\'))* '"' ;
 CHAR_LITERAL   : '\'' (ESC | ~'\'') '\'';
 
 // TODO: The (DIGIT DIGIT DIGIT) is cheesy it should be something like
@@ -102,5 +101,4 @@ MULTI_LINE_COMMENT :
 //
 //
 //WS : (' ' | '\t' | '\f' | '\r' | '\n' )+ //{newline();}
-//{ $setType(Token.SKIP); }
-//;
+//{ $setType(Token.SKIP); };
