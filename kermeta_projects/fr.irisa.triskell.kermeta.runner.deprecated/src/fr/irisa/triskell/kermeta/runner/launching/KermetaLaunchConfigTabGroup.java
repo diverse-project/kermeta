@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfigTabGroup.java,v 1.1 2005-05-20 17:06:48 zdrey Exp $
+/* $Id: KermetaLaunchConfigTabGroup.java,v 1.2 2005-05-23 13:14:52 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfigTabGroup.java
  * License: GPL
@@ -25,48 +25,7 @@ import org.eclipse.debug.ui.RefreshTab;
  */
 public class KermetaLaunchConfigTabGroup extends
         AbstractLaunchConfigurationTabGroup
- {
-
-
-  	//private RefreshTab refreshTab = new RefreshTab();
-    /**
-     * 
-     */
-    public KermetaLaunchConfigTabGroup() {
-        super();
-       
-        System.out.println("Tab grouuuup");
-        
-        //this.initializeFrom()
-        // TODO Auto-generated constructor stub
-    }
-
-    
-    
-    public void initializeFrom(ILaunchConfiguration configuration) {
-        // TODO Auto-generated method stub
-        System.err.println("initiliaze Group of tab");
-        
-        super.initializeFrom(configuration);
-    }
-    
-    
-    public void performApply(ILaunchConfigurationWorkingCopy configuration)
-    {
-        System.out.println("perform apply!"+configuration);
-    }
-    
-    
-    public void setDefaults(ILaunchConfigurationWorkingCopy configuration)
-    {
-        System.out.println("set defaults!"+configuration);
-        super.setDefaults(configuration);
-    }
-    public void launched(ILaunch launch)
-    {
-        System.out.println("launched!"+launch);
-    }
-    
+{
     /**
      * Create the tabs needed to configure the launch of a Kermeta program
      * @see org.eclipse.debug.ui.ILaunchConfigurationTabGroup#createTabs(org.eclipse.debug.ui.ILaunchConfigurationDialog, java.lang.String)
@@ -77,12 +36,10 @@ public class KermetaLaunchConfigTabGroup extends
         if (mode.equals(ILaunchManager.RUN_MODE))
         {
             ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
-                    new GeneralConfigurationTab(),
-                    new ArgumentConfigurationTab()
+                    new ArgumentConfigurationTab(),
+                    new GeneralConfigurationTab()
           			};
             setTabs(tabs);
-            
-            //tabs[0].setLaunchConfigurationDialog()
         }
         else
         {
@@ -90,5 +47,4 @@ public class KermetaLaunchConfigTabGroup extends
         }
 
     }
-
 }
