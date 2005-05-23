@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.1 2005-05-23 13:16:02 zdrey Exp $
+/* $Id: KermetaRunHelper.java,v 1.2 2005-05-23 14:56:38 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: GPL
@@ -22,9 +22,10 @@ import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 public class KermetaRunHelper {
 
 	/**
-	 * FIXME : move it to another class (also used in RunPopupDialog!!)
-	 * Parse the given file and return its KermetaUnit
-	 * @param file
+	 * 
+	 * Parse the given file and return its KermetaUnit.
+	 * FIXME : the uri defined is platform dependant! (platform:/resource...?) 
+	 * @param file the file to parse
 	 * @return KermetaUnit the compilation unit for the given file
 	 */
     public static KermetaUnit parse(String filename)
@@ -36,6 +37,7 @@ public class KermetaRunHelper {
     	// FIXME : adaptation...
     	//String uri = "platform:/resource/" + filename;
     	String uri = "file://" +filename;
+    	
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
     	KMTUnit result = null;
        // System.out.println("file.getFullPath().toOSString() : " + file.getFullPath().toOSString());

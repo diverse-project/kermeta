@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.2 2005-05-23 13:13:43 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.3 2005-05-23 14:56:39 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -82,7 +82,26 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		public void modifyText(ModifyEvent evt) {
 			updateLaunchConfigurationDialog();
 		}
+};
+	/** Listener for class Name modification */
+	private ModifyListener fClassModifyListener = new ModifyListener() {
+	public void modifyText(ModifyEvent evt) {
+		updateLaunchConfigurationDialog();
+		if (classNameText!=null && classNameText.getText().length()>0)
+		    setOperationEnabled(true);
+		else setOperationEnabled(false);
+	}
 };;
+
+	private ModifyListener fFileModifyListener = new ModifyListener() {
+    public void modifyText(ModifyEvent evt) {
+        updateLaunchConfigurationDialog();
+        if (sourceFileText!=null && sourceFileText.getText().length()>0)
+            setClassEnabled(true);
+        else setClassEnabled(false);
+    }
+};
+
     private Label sharedLocationLabel;
     private Text sharedLocationText;
     private Button sharedLocationButton;
@@ -155,9 +174,12 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
+        //updateConfigFromLocalShared(configuration);
+        
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, sharedLocationText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, classNameText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, operationNameText.getText());
+		
     }
     
     /***
@@ -247,7 +269,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         classNameText.setLayoutData(gd);
         //classNameText().setFont(font);
-        classNameText.addModifyListener(fBasicModifyListener);
+        classNameText.addModifyListener(fClassModifyListener);
         
         classNameButton = createPushButton(parent, "Search...", null);	 //$NON-NLS-1$
         classNameButton.addSelectionListener(
@@ -298,7 +320,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      */
     protected void handleOperationNameButtonSelected()
     {
-        System.err.println("class string is '"+selectedClassString+"'"+"; unit:"+selectedUnit);
         FClassDefinition selectedFClassDef = (FClassDefinition)selectedUnit.
         getTypeDefinitionByName(
                 selectedClassString);
@@ -386,22 +407,28 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         // If user clicked on OK
         if (code == InputDialog.OK)
         {
-            getclassNameText().setText(selectedClassString);   
+            getclassNameText().setText(selectedClassString);
         }
         
-        // selectedClassString is null?
+//      selectedClassString is null?
         if (selectedClassString != null)
-        {
-            operationNameButton.setEnabled(true);
-            operationNameText.setEnabled(true);
-        }
-        // Else, throw an error!!
-        
+            setOperationEnabled(true);
+        else setOperationEnabled(false);
+    }
+    
+    protected void setOperationEnabled(boolean isEnabled)
+    {
+        operationNameButton.setEnabled(isEnabled);
+        operationNameText.setEnabled(isEnabled);
     }
 
-    /**
-     * @param button
-     */
+
+    protected void setClassEnabled(boolean isEnabled)
+    {
+        classNameButton.setEnabled(isEnabled);
+        classNameText.setEnabled(isEnabled);
+    }
+ 
     private void setSharedLocationButton(Button button) {
         sharedLocationButton = button;
     }
@@ -466,26 +493,4 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		Path containerPath = new Path(path);
 		return (IContainer) getWorkspaceRoot().findMember(containerPath);
 	}
-    
-	public List createClassList(Composite parent, KermetaUnit unit)
-    {
-        EList typedefs = unit.rootPackage.getFOwnedTypeDefinition();
-        
-        final List list = new List(parent, SWT.V_SCROLL);
-        for (int i = 0; i < typedefs.size(); i++) 
-        {
-            list.add(i+". "+unit.getQualifiedName((FClassDefinition)typedefs.get(i)));
-        }
-        list.addSelectionListener(
-                new SelectionAdapter()
-                {
-                    public void widgetSelected(SelectionEvent e)
-                    {
-                        List list = (List) e.getSource();
-                        String[] str = list.getSelection();
-                    }
-                }
-    );
-        return list;
-    }
 }
