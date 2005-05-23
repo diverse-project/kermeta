@@ -1,4 +1,4 @@
-/* $Id: KermetaRun.java,v 1.3 2005-05-19 14:29:16 zdrey Exp $
+/* $Id: KermetaRun.java,v 1.4 2005-05-23 14:56:51 zdrey Exp $
  * Project : Kermeta.runner
  * File : KermetaRun.java
  * License : GPL
@@ -83,6 +83,7 @@ public class KermetaRun implements IObjectActionDelegate {
 		    KermetaUnit kunit = runPopupDialog.parse(anIFile);
 		    runPopupDialog.setEntryPoint(kunit);
 		    int code = runPopupDialog.open();
+		    
 		    // If User chooses OK, than we launch the KermetaProgram 
 		    if (code != InputDialog.CANCEL)
 		    {
