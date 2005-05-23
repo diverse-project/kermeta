@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.1 2005-05-20 17:06:49 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.2 2005-05-23 13:13:43 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -6,20 +6,27 @@
  * ----------------------------------------------------------------------------
  * Creation date: May 20, 2005
  * Authors: zdrey
+ * 
+ * ----------------------------------------------------------------------------
+ * Note :
+ *   - Always call "layout()" method on widgets to display them
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
+
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationsMessages;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.debug.ui.CommonTab;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -30,21 +37,22 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.ContainerSelectionDialog;
-import org.eclipse.ui.dialogs.FileSelectionDialog;
 
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.runner.dialogs.SelectionListDialog;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FNamedElement;
+import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 /**
  * 
@@ -82,6 +90,10 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     private Label classNameLabel;
     private Text classNameText;
     private String selectedPath;
+    /** The class qualified name chosen by the user */
+    private String selectedClassString = null;
+    private Text operationNameText;
+    private Button operationNameButton;
     
     /**
      * 
@@ -113,7 +125,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		createClassNameLayout(area, null);
 		
 		// Set the field for the operation choice
-		
+		createOperationNameLayout(area, null);
 
 
     }
@@ -134,13 +146,29 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
-     */
+    
+	/**
+	 * When the button "Apply" is pushed, this method is launched
+	 * The configuration is saved.
+	 * INPUT, OUTPUT and PATH
+	 * 
+	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
+	 */
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-        // TODO Auto-generated method stub
-
+		configuration.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, sharedLocationText.getText());
+		configuration.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, classNameText.getText());
+		configuration.setAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, operationNameText.getText());
     }
+    
+    /***
+     * Update configuration
+     * @param config
+     */
+	private void updateConfigFromLocalShared(ILaunchConfigurationWorkingCopy config) {
+		String containerPathString = getSharedLocationText().getText();
+		IContainer container = getContainer(containerPathString);
+		config.setContainer(container);
+	}
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getName()
@@ -151,74 +179,150 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     }
 
     
-    public Composite createFileLayout(Composite locationComp, Font font)
+    public Composite createFileLayout(Composite parent, Font font)
     {
         GridLayout locationLayout = new GridLayout();
         locationLayout.numColumns = 2;
         locationLayout.marginHeight = 0;
         locationLayout.marginWidth = 0;
-        locationComp.setLayout(locationLayout);
+        parent.setLayout(locationLayout);
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-        locationComp.setLayoutData(gd);
-        locationComp.setFont(font);
+        parent.setLayoutData(gd);
+        parent.setFont(font);
         
-        setSharedLocationLabel(new Label(locationComp, SWT.NONE));
+        setSharedLocationLabel(new Label(parent, SWT.NONE));
         getSharedLocationLabel().setText("Location of Kermeta"); //$NON-NLS-1$
         gd = new GridData();
         gd.horizontalSpan = 2;
         getSharedLocationLabel().setLayoutData(gd);
         getSharedLocationLabel().setFont(font);
         
-        setSharedLocationText(new Text(locationComp, SWT.SINGLE | SWT.BORDER));
+        setSharedLocationText(new Text(parent, SWT.SINGLE | SWT.BORDER));
         gd = new GridData(GridData.FILL_HORIZONTAL);
         getSharedLocationText().setLayoutData(gd);
         getSharedLocationText().setFont(font);
         getSharedLocationText().addModifyListener(fBasicModifyListener);
         
-        setSharedLocationButton(createPushButton(locationComp, "Browse", null));	 //$NON-NLS-1$
+        setSharedLocationButton(createPushButton(parent, "Browse", null));	 //$NON-NLS-1$
         getSharedLocationButton().addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent evt) {
                 handleSharedLocationButtonSelected();
             }
         });	
-        return locationComp;
+        return parent;
     }
  
-    
-    
-
-    public void createClassNameLayout(Composite locationComp, Font font)
+    /**
+     * 
+     * @param parent the Parent of this argument tab
+     * @param labelString the label of the input text to create
+     * @param adapter the event that is "provoked" when clicking on OK button
+     */
+    public void createInputTextLayout(Composite parent,
+            String labelString)
     {
         GridLayout locationLayout = new GridLayout();
         locationLayout.numColumns = 2;
         locationLayout.marginHeight = 0;
         locationLayout.marginWidth = 0;
-        locationComp.setLayout(locationLayout);
+        parent.setLayout(locationLayout);
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-        locationComp.setLayoutData(gd);
-        locationComp.setFont(font);
+        parent.setLayoutData(gd);
+        //parent.setFont(null);
         
-        setclassNameLabel(new Label(locationComp, SWT.NONE));
-        getclassNameLabel().setText("Class qualified name"); //$NON-NLS-1$
+        Label inputLabel = new Label(parent, SWT.NONE);
+        inputLabel.setText(labelString); //$NON-NLS-1$
         gd = new GridData();
         gd.horizontalSpan = 2;
-        getclassNameLabel().setLayoutData(gd);
-        getclassNameLabel().setFont(font);
+        inputLabel.setLayoutData(gd);
+    }
+
+
+    public void createClassNameLayout(Composite parent, Font font)
+    {
+        // Create common layout basis
+        createInputTextLayout(parent, "Class qualified name");
         
-        setclassNameText(new Text(locationComp, SWT.SINGLE | SWT.BORDER));
-        gd = new GridData(GridData.FILL_HORIZONTAL);
-        getclassNameText().setLayoutData(gd);
-        getclassNameText().setFont(font);
-        getclassNameText().addModifyListener(fBasicModifyListener);
+        classNameText = new Text(parent, SWT.SINGLE | SWT.BORDER);
+        GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+        classNameText.setLayoutData(gd);
+        //classNameText().setFont(font);
+        classNameText.addModifyListener(fBasicModifyListener);
         
-        setclassNameButton(createPushButton(locationComp, "Search...", null));	 //$NON-NLS-1$
-        getclassNameButton().addSelectionListener(new SelectionAdapter() {
-            public void widgetSelected(SelectionEvent evt) {
-                handleclassNameButtonSelected();
-            }
-        });	
+        classNameButton = createPushButton(parent, "Search...", null);	 //$NON-NLS-1$
+        classNameButton.addSelectionListener(
+                new SelectionAdapter() {
+        			public void widgetSelected(SelectionEvent evt) {
+        		    	handleClassNameButtonSelected();
+        				}
+        }
+        );
     }
     
+    /**
+     * Create the operation input zone
+     * @param parent composite inside which this input zone is created
+     * @param font
+     */
+    public void createOperationNameLayout(Composite parent, Font font)
+    {
+        // Create common layout basis
+        createInputTextLayout(parent, "Operation name");
+        
+        operationNameText = new Text(parent, SWT.SINGLE | SWT.BORDER);
+        GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+        operationNameText.setLayoutData(gd);
+        //operationNameText().setFont(font);
+        operationNameText.addModifyListener(fBasicModifyListener);
+        
+        operationNameButton = createPushButton(parent, "Search...", null);	 //$NON-NLS-1$
+        operationNameButton.addSelectionListener(
+                new SelectionAdapter() {
+        			public void widgetSelected(SelectionEvent evt) {
+        		    	handleOperationNameButtonSelected();
+        				}
+        }
+        );
+        if (selectedClassString==null || selectedClassString.length()==0)
+        {
+            operationNameButton.setEnabled(false);
+            operationNameText.setEnabled(false);
+        }
+        
+    }
+    
+    /**
+     * Action that is done when user clicked on the selection button of 
+     * Operation name input Text.
+     * TODO : (to check) enable it if, and only if, selectedClassString is assigned
+     */
+    protected void handleOperationNameButtonSelected()
+    {
+        System.err.println("class string is '"+selectedClassString+"'"+"; unit:"+selectedUnit);
+        FClassDefinition selectedFClassDef = (FClassDefinition)selectedUnit.
+        getTypeDefinitionByName(
+                selectedClassString);
+        
+        // Get the operations of this class (super operation also?)
+        EList foperations = selectedFClassDef.getFOwnedOperation();
+        ArrayList opnamelist = new ArrayList(foperations.size());
+        for (int i = 0; i< foperations.size(); i++)
+        {
+            opnamelist.add(((FOperation)foperations.get(i)).getFName());
+        }
+        
+        SelectionListDialog opDialog = new SelectionListDialog(getShell());
+        
+        opDialog.setList(opnamelist);
+        int code = opDialog.open();
+        // If user clicked on OK
+        if (code == InputDialog.OK)
+        {
+            getOperationNameText().setText(opDialog.getSelectedItem());
+        }
+        
+    }
+
 
     /**
      * Browse the current workspace so that user can select the source file that
@@ -233,24 +337,28 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		String currentContainerString = getSharedLocationText().getText();
 		IContainer currentContainer = getContainer(currentContainerString);
 		if (currentContainer != null) {
-			path = currentContainer.getFullPath();
+		    path = currentContainer.getFullPath();
 		}
-		
+		//dialog.setFilterPath(path.toOSString());
 		dialog.open();
 		String[] results = dialog.getFileNames();
 		
 		if ((results != null)
 		        && (results.length > 0)) {
-			selectedPath = results[0];
-			System.out.println("Path : "+dialog.getFilterPath()+":"+selectedPath);
+		    // FIXME : Path should be adapted to the platform
+			selectedPath = dialog.getFilterPath()+"/"+results[0];
 			getSharedLocationText().setText(selectedPath);
 		}		
         
 		// Parse the selected file
 		if (selectedPath!=null)
 		{
-		    selectedUnit = parse(dialog.getFilterPath()+selectedPath);
-		    //System.out.println("toto:"+selectedUnit.get_ROOT_TYPE_ClassDefinition());
+		    selectedUnit = KermetaRunHelper.parse(selectedPath);
+		    //selectedUnit.saveAsXMIModel(selectedPath);
+		}
+		else
+		{
+		    System.err.println("Could not find the file");
 		}
 		
     }
@@ -259,8 +367,35 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      * Clicking on this button gets the list of available classes in the
      * given source file
      */
-    private void handleclassNameButtonSelected() {
-        // 
+    private void handleClassNameButtonSelected()
+    {
+        // Parse selectedUnit
+        // TODO Handle null pointer exception
+//        List classDefinitionList = createClassList(getShell(), selectedUnit);
+        EList typedefs = selectedUnit.rootPackage.getFOwnedTypeDefinition();
+        ArrayList qnameList = new ArrayList(typedefs.size());
+        for (int i=0; i<typedefs.size(); i++)
+        {
+            qnameList.add(selectedUnit.getQualifiedName((FNamedElement)typedefs.get(i)));
+        }
+        
+        SelectionListDialog classDialog = new SelectionListDialog(getShell());
+        classDialog.setList(qnameList);
+        int code = classDialog.open();
+        selectedClassString = classDialog.getSelectedItem();
+        // If user clicked on OK
+        if (code == InputDialog.OK)
+        {
+            getclassNameText().setText(selectedClassString);   
+        }
+        
+        // selectedClassString is null?
+        if (selectedClassString != null)
+        {
+            operationNameButton.setEnabled(true);
+            operationNameText.setEnabled(true);
+        }
+        // Else, throw an error!!
         
     }
 
@@ -293,33 +428,28 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     
 
     /**
-     * @param button
+     * Simple accessors 
      */
     private void setclassNameButton(Button button) {
         classNameButton = button;
     }
-    
-
     private Button getclassNameButton() {
         return classNameButton;
     }
-
     public void setclassNameLabel(Label label) {
         classNameLabel = label;
     }
-    
     public Label getclassNameLabel() {
         return classNameLabel ;
     }
-    
     public void setclassNameText(Text text) {
         classNameText = text;
     }
-    
-    public Text getclassNameText() {
+    public Text getclassNameText() { 
         return classNameText;
     }
-    
+    private Text getOperationNameText() {   return operationNameText;
+    }
 
 	/**
 	 * (CommontTab) Convenience method for getting the workspace root.
@@ -337,40 +467,25 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		return (IContainer) getWorkspaceRoot().findMember(containerPath);
 	}
     
-	
-	/**
-	 * FIXME : move it to another class (also used in RunPopupDialog!!)
-	 * Parse the given file and return its KermetaUnit
-	 * @param file
-	 * @return KermetaUnit the compilation unit for the given file
-	 */
-    public KermetaUnit parse(String filename)
+	public List createClassList(Composite parent, KermetaUnit unit)
     {
-        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.runner/lib/framework.km";
-
-    	StructurePackageImpl.init();
-    	BehaviorPackageImpl.init();
-    	String uri = "platform:/resource/" + filename;
-    	KermetaUnitFactory.getDefaultLoader().unloadAll();
-    	KMTUnit result = null;
-       // System.out.println("file.getFullPath().toOSString() : " + file.getFullPath().toOSString());
-        try {
-        	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
-	        result.load();
-	        
-	        result.typeCheck();
-	        
+        EList typedefs = unit.rootPackage.getFOwnedTypeDefinition();
+        
+        final List list = new List(parent, SWT.V_SCROLL);
+        for (int i = 0; i < typedefs.size(); i++) 
+        {
+            list.add(i+". "+unit.getQualifiedName((FClassDefinition)typedefs.get(i)));
         }
-        catch(Throwable e) {
-            KermetaUnit.internalLog.error("load error ", e);
-        	if (result == null) {
-        		e.printStackTrace();
-        		return null;
-        	}
-        	else if (result.error.size() == 0)
-        		result.error.add(new KMUnitError("INTERNAL ERROR : " + e, null));
-        }
-        return result;
+        list.addSelectionListener(
+                new SelectionAdapter()
+                {
+                    public void widgetSelected(SelectionEvent e)
+                    {
+                        List list = (List) e.getSource();
+                        String[] str = list.getSelection();
+                    }
+                }
+    );
+        return list;
     }
-	
 }
