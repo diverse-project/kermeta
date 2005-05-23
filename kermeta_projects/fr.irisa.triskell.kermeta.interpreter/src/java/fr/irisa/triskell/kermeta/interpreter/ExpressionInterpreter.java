@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.6 2005-05-20 12:54:38 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.7 2005-05-23 23:35:51 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -59,6 +59,7 @@ import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
@@ -219,8 +220,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		 // The new value 
 		RuntimeObject rhs_value = (RuntimeObject)this.accept(node.getFValue());
 		
-		/* DO NOT DELETE THIS CODE */
-		/* work in progress :-)
+		
 		if (node.isFIsCast()) {
 			
 			// Just to be sure !!
@@ -228,14 +228,16 @@ public class ExpressionInterpreter extends KermetaVisitor {
 				throw new Error("THE PROGRAM CANNOT BE EXECUTED BECAUSE IT HAS NOT BEEN TYPE CHECKED");
 			}
 			
-			SimpleType expectedType = new SimpleType(node.getFTarget().getFStaticType());
+			FType r = (FType)TypeVariableEnforcer.getBoundType(node.getFTarget().getFStaticType(), interpreterContext.peekCallFrame().getTypeParameters());
+			
+			SimpleType expectedType = new SimpleType(r);
 			FClass p = (FClass)rhs_value.getMetaclass().getData().get("kcoreObject");
 			SimpleType providedtype = new SimpleType(p);
 			if (!providedtype.isSubTypeOf(expectedType)) {
 				rhs_value = memory.voidINSTANCE;
 			}
 		}
-		*/
+		
 		if (node.getFTarget() instanceof FCallResult)
 		{
 		    // Assign the result of the current operation

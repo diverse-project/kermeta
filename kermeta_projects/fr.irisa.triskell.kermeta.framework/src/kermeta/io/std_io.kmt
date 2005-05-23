@@ -23,14 +23,14 @@ class StdIO
 	 * write the object to standard output
 	 */ 
 	operation write(object : Object) : Void is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.write(object)
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.write(object)
 	end
 	
 	/**
 	 * writeln the object to standard output
 	 */ 
 	operation writeln(object : Object) : Void is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.writeln(object)
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.writeln(object)
 	end
 	
 	/**

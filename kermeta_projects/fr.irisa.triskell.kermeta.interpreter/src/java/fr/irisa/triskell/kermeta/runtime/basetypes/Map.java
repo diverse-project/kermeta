@@ -81,7 +81,7 @@ public class Map {
 	    
 	    FClass self_class = (FClass)self.getMetaclass().getData().get("kcoreObject");
 	    
-	    binding.setFType(((FTypeVariableBinding)self_class.getFTypeParamBinding().get(0)).getFType());
+	    binding.setFType(((FTypeVariableBinding)self_class.getFTypeParamBinding().get(1)).getFType());
 	    
 	    it_class.getFTypeParamBinding().add(binding);
 	    
