@@ -1,5 +1,6 @@
 package fr.irisa.triskell.kermeta.runner;
 
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
 import java.util.*;
@@ -66,4 +67,12 @@ public class RunnerPlugin extends AbstractUIPlugin {
 	public ResourceBundle getResourceBundle() {
 		return resourceBundle;
 	}
+
+    /**
+     * @return current workspace
+     */
+    public static IWorkspace getWorkspace() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -64,21 +64,16 @@
    <!-- Extension point for the Kermeta Run menu item in the Run properties -->
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
     <launchConfigurationType
-          sourceLocatorId="KermetaSourceLocator"
+          sourceLocatorId="fr.irisa.triskell.kermeta.runner.sourceLocator1"
           delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
+          public="true"
           name="Kermeta Run Configuration"
-          id="KermetaLaunchConfiguration"
-          modes="run, debug">        
+          modes="run, debug"
+          id="KermetaLaunchConfiguration">        
     </launchConfigurationType>
    </extension>
   
    <!-- Source locator -->
-   <extension point = "org.eclipse.debug.core.sourceLocators">
-	<sourceLocator
-		id = "KermetaSourceLocator"
-	   	class="fr.irisa.triskell.kermeta.runner.launching.KermetaSourceLocator"
-	   	name="Kermeta Source Locator"/>
-	</extension>
 	<!-- Tab groups for the launch configuration manager -->
       <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
@@ -108,9 +103,6 @@
          </perspectiveExtension>
       </extension>
       <extension
-            point="org.eclipse.core.resources.builders">
-      </extension>
-      <extension
       
             id="KermetaPerspective"
             name="kermetaPerspective"
@@ -120,14 +112,6 @@
                icon="icons/kermeta_logo.gif"
                name="Kermeta Perspective"
                id="kermetaPerspective"/>
-      </extension>
-      <extension
-            point="org.eclipse.debug.core.launchDelegates">
-         <launchDelegate
-               delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
-               type="fr.irisa.triskell.kermeta.runner.launchDelegate1"
-               modes="run"
-               id="fr.irisa.triskell.kermeta.runner.launchDelegate1"/>
       </extension>
       <extension
             point="org.eclipse.debug.ui.launchGroups">
@@ -145,7 +129,7 @@
                configTypeID="KermetaLaunchConfiguration"
                id="fr.irisa.triskell.kermeta.runner.launchConfigurationTypeImage1"/>
       </extension>
-      <extension
+   <!--   <extension
             point="org.eclipse.debug.ui.launchShortcuts">
          <shortcut
                label="Kermeta Launch Shortcut"
@@ -153,7 +137,7 @@
                class="fr.irisa.triskell.kermeta.runner.KermetaLaunchShortcut"
                modes="run"
                id="KermetaLaunchShortCut"/>
-      </extension>
+      </extension>-->
       <extension
             point="org.eclipse.ui.newWizards">
          <category
@@ -176,6 +160,13 @@
                project="true"
                name="New K. project"
                id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"/>
+      </extension>
+      <extension
+            point="org.eclipse.debug.core.sourceLocators">
+         <sourceLocator
+               class="fr.irisa.triskell.kermeta.runner.PersistableSourceLocator1"
+               name="fr.irisa.triskell.kermeta.runner.sourceLocator1"
+               id="fr.irisa.triskell.kermeta.runner.sourceLocator1"/>
       </extension>
 
 

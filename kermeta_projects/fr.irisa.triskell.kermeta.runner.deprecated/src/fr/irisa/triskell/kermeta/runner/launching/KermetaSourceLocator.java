@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.1 2005-05-20 17:06:49 zdrey Exp $
+/* $Id: KermetaSourceLocator.java,v 1.2 2005-05-24 17:07:31 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaSourceLocator.java
  * License: GPL
@@ -34,9 +34,12 @@ public class KermetaSourceLocator implements ISourceLocator {
      * @see org.eclipse.debug.core.model.ISourceLocator#getSourceElement(org.eclipse.debug.core.model.IStackFrame)
      */
     public Object getSourceElement(IStackFrame stackFrame) {
-        
-        // TODO Auto-generated method stub
-        return "toto";
+/*		if (stackFrame instanceof stackFrame) {
+			StackFrame asf = stackFrame;
+			return asf;
+		}*/
+		return stackFrame;
+
     }
 
 }

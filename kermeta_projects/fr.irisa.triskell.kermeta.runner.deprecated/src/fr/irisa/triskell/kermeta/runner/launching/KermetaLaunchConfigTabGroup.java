@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfigTabGroup.java,v 1.3 2005-05-23 14:56:39 zdrey Exp $
+/* $Id: KermetaLaunchConfigTabGroup.java,v 1.4 2005-05-24 17:07:32 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfigTabGroup.java
  * License: GPL
@@ -38,6 +38,6 @@ public class KermetaLaunchConfigTabGroup extends
         {
             System.err.println("Could not create tabs : only Run mode is implemented");
         }
-
+        
     }
 }

@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.3 2005-05-23 14:56:39 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.4 2005-05-24 17:07:31 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -18,8 +18,11 @@ import java.util.HashMap;
 import java.util.Hashtable;
 
 import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -49,6 +52,7 @@ import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.dialogs.SelectionListDialog;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
@@ -119,6 +123,9 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      */
     public ArgumentConfigurationTab() {
         super();
+        //getWorkspaceRoot().
+        filenameString = getWorkspaceRoot().getLocation().toString();
+        //ifile.getLocation().toString()
         // TODO Auto-generated constructor stub
     }
 
@@ -157,11 +164,23 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 
     }
 
-    /* (non-Javadoc)
+    /**
+     * Fills the configuration that is launched if there was some values before.
      * @see org.eclipse.debug.ui.ILaunchConfigurationTab#initializeFrom(org.eclipse.debug.core.ILaunchConfiguration)
      */
     public void initializeFrom(ILaunchConfiguration configuration) {
-        // TODO Auto-generated method stub
+        System.out.println("Initialize tab");
+
+		try {
+            getSharedLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
+                    ""));
+       
+            getclassNameText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME,""));
+            getOperationNameText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,""));
+		 } catch (CoreException e) {
+	            // TODO Auto-generated catch block
+	            e.printStackTrace();
+	        }        
 
     }
 
@@ -200,7 +219,12 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         return "Argument configuration";
     }
 
-    
+    /***
+     * Create the Field where user enters file to execute
+     * @param parent
+     * @param font
+     * @return
+     */
     public Composite createFileLayout(Composite parent, Font font)
     {
         GridLayout locationLayout = new GridLayout();
@@ -220,9 +244,11 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         getSharedLocationLabel().setFont(font);
         
         setSharedLocationText(new Text(parent, SWT.SINGLE | SWT.BORDER));
+        
         gd = new GridData(GridData.FILL_HORIZONTAL);
         getSharedLocationText().setLayoutData(gd);
         getSharedLocationText().setFont(font);
+        
         getSharedLocationText().addModifyListener(fBasicModifyListener);
         
         setSharedLocationButton(createPushButton(parent, "Browse", null));	 //$NON-NLS-1$
@@ -415,6 +441,9 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
             setOperationEnabled(true);
         else setOperationEnabled(false);
     }
+    
+    
+    
     
     protected void setOperationEnabled(boolean isEnabled)
     {

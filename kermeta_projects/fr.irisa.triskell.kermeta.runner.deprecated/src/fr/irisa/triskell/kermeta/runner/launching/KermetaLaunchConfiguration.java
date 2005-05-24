@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.2 2005-05-23 13:15:27 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.3 2005-05-24 17:07:31 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -24,6 +24,7 @@ import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 
 /**
@@ -70,12 +71,15 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	        ILaunch launch, IProgressMonitor monitor) throws CoreException {
 	    try
 	    {
+	        System.err.println("FUXK");
 	        //  If the mode choosen is Run a Kermeta run target is created
 	        if (mode.equals(ILaunchManager.RUN_MODE)) 
 	        {
-
+	            
+	        //    System.out.println("launch before: "+launch.getSourceLocator());
 	            // Set the source locator to launch
-	            launch.setSourceLocator(new KermetaSourceLocator());
+	          //  launch.setSourceLocator(new KermetaSourceLocator());//new KermetaSourceLocator());
+	            System.out.println("launch : "+launch.getSourceLocator());
 	            KermetaRunTarget runtarget = new KermetaRunTarget(launch); 
 	            // Set the run target with current launch
 	            // Add it as a debug target
@@ -107,7 +111,7 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
      */
     private void runKermeta(ILaunchConfiguration configuration, String mode) {
         try {
-
+            
             
             String fileNameString = configuration.getAttribute(KM_FILENAME, "");
             String classQualifiedNameString = configuration.getAttribute(KM_CLASSQNAME, "");
@@ -150,6 +154,7 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
             // TODO Auto-generated method stub
         } catch (CoreException e) {
             // TODO Auto-generated catch block
+            System.out.println("ZUT");
             e.printStackTrace();
         }
         

@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.2 2005-05-23 14:56:38 zdrey Exp $
+/* $Id: KermetaRunTarget.java,v 1.3 2005-05-24 17:07:31 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: GPL
@@ -32,6 +32,7 @@ public class KermetaRunTarget implements IDebugTarget {
     public KermetaRunTarget(ILaunch launch) {
         System.out.println("Run targeeeeet");
         this.launch = launch;
+        
         this.isTerminated = false;
     }
 
