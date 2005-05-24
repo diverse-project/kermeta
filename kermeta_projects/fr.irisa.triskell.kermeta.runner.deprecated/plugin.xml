@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta.runner"
    name="Runner Plug-in"
-   version="0.0.5"
+   version="0.0.4"
    provider-name="INRIA/IRISA"
    class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
 
@@ -26,7 +26,17 @@
       <import plugin="org.eclipse.jdt"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
       <import plugin="org.eclipse.jdt.launching"/>
-      <import plugin="fr.irisa.triskell.kermeta"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="org.eclipse.ui.cheatsheets"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.examples.javaeditor"/>
+      <import plugin="org.eclipse.ui.externaltools"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.intro"/>
+	  <import plugin="fr.irisa.triskell.kermeta"/>
    </requires>
 
    <extension point="org.eclipse.ui.popupMenus">
@@ -43,10 +53,10 @@
             </separator>
          </menu>
          <action
-               label="KermetaTheRun"
+               enablesFor="1"
+               label="Kermeta Run"
                class="fr.irisa.triskell.kermeta.runner.popup.actions.KermetaRun"
                menubarPath="additions"
-               enablesFor="1"
                id="fr.irisa.triskell.kermeta.runner.newAction">
          </action>
       </objectContribution>
@@ -54,10 +64,11 @@
    <!-- Extension point for the Kermeta Run menu item in the Run properties -->
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
     <launchConfigurationType
-        name="Kermeta Run Configuration"
-        delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
-        modes="run, debug"               
-        id="KermetaLaunchConfiguration">        
+          sourceLocatorId="KermetaSourceLocator"
+          delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
+          name="Kermeta Run Configuration"
+          id="KermetaLaunchConfiguration"
+          modes="run, debug">        
     </launchConfigurationType>
    </extension>
   
@@ -76,20 +87,11 @@
             class="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfigTabGroup"
             id="KermetaTabGroup">
          <launchMode
-               description="blabla"
+               description="description du launch mode"
                mode="run"/>
       </launchConfigurationTabGroup>
    </extension> 
-   <!-- Launch is contained in this class 
-      <extension
-            point="org.eclipse.debug.core.launchConfigurationTypes">
-         <launchConfigurationType
-               delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
-               public="true"
-               name="fr.irisa.triskell.kermeta.runner.launching.KermetalaunchConfigurationType"
-               modes="run"
-               id="kermetaLaunchConfigurationType"/>
-      </extension> -->
+ 
    <!-- Perspective -->
       <extension
             point="org.eclipse.ui.perspectiveExtensions">
@@ -109,13 +111,14 @@
             point="org.eclipse.core.resources.builders">
       </extension>
       <extension
+      
             id="KermetaPerspective"
             name="kermetaPerspective"
             point="org.eclipse.ui.perspectives">
          <perspective
-               icon="icons/sample.gif"
                class="fr.irisa.triskell.kermeta.runner.perspective.KermetaPerspectiveFactory"
-               name="kermetaPerspective"
+               icon="icons/kermeta_logo.gif"
+               name="Kermeta Perspective"
                id="kermetaPerspective"/>
       </extension>
       <extension
@@ -129,11 +132,51 @@
       <extension
             point="org.eclipse.debug.ui.launchGroups">
          <launchGroup
-               bannerImage="icons/sample.gif"
-               label="fr.irisa.triskell.kermeta.runner.launchGroup1"
+               bannerImage="icons/kermeta_logo.gif"
+               label="Kermeta Configuration"
                mode="run"
-               image="icons/sample.gif"
-               id="fr.irisa.triskell.kermeta.runners.launchGroup1"/>
+               image="icons/kermeta_logo.gif"
+               id="KermetaLaunchGroup"/>
       </extension>
+      <extension
+            point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+         <launchConfigurationTypeImage
+               icon="icons/kermeta_logo.gif"
+               configTypeID="KermetaLaunchConfiguration"
+               id="fr.irisa.triskell.kermeta.runner.launchConfigurationTypeImage1"/>
+      </extension>
+      <extension
+            point="org.eclipse.debug.ui.launchShortcuts">
+         <shortcut
+               label="Kermeta Launch Shortcut"
+               icon="icons/kermeta_logo.gif"
+               class="fr.irisa.triskell.kermeta.runner.KermetaLaunchShortcut"
+               modes="run"
+               id="KermetaLaunchShortCut"/>
+      </extension>
+      <extension
+            point="org.eclipse.ui.newWizards">
+         <category
+               name="Kermeta"
+               id="KermetaWizard"/>
+         <wizard
+               finalPerspective="KermetaPerspective"
+               class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard"
+               icon="icons/kermeta.png"
+               descriptionImage="icons/kermeta.png"
+               category="KermetaWizard"
+               name="New K. file"
+               id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard"/>
+         <wizard
+               finalPerspective="KermetaPerspective"
+               icon="icons/tree_package.gif"
+               class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"
+               descriptionImage="icons/tree_package.gif"
+               category="KermetaWizard"
+               project="true"
+               name="New K. project"
+               id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"/>
+      </extension>
+
 
 </plugin>
