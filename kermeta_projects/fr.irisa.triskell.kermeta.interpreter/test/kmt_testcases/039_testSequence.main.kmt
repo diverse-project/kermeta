@@ -6,7 +6,7 @@ package testSequence;
 require kermeta
 
 /*****************************************************************************
- * $Id: 039_testSequence.main.kmt,v 1.1 2005-05-24 09:13:49 zdrey Exp $
+ * $Id: 039_testSequence.main.kmt,v 1.2 2005-05-24 09:16:09 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testSequence.kmt
@@ -21,7 +21,8 @@ require kermeta
  * Note : Done for a test/operation
  ***************************************************************************
  */
-using kermeta::standard
+alias String : kermeta::standard::String;
+alias Integer : kermeta::standard::Integer;
 class TestSequence inherits kermeta::kunit::TestCase
 {    
 
