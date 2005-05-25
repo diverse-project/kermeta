@@ -1,4 +1,4 @@
-/* $Id: KermetaRun.java,v 1.4 2005-05-23 14:56:51 zdrey Exp $
+/* $Id: KermetaRun.java,v 1.5 2005-05-25 09:26:02 zdrey Exp $
  * Project : Kermeta.runner
  * File : KermetaRun.java
  * License : GPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kermeta.runner.popup.actions;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -38,6 +39,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.dialogs.RunPopupDialog;
+import fr.irisa.triskell.kermeta.runner.launching.KermetaRunHelper;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 
@@ -81,7 +83,10 @@ public class KermetaRun implements IObjectActionDelegate {
 		    RunPopupDialog runPopupDialog = new RunPopupDialog(shell, anIFile);
 		    // Load the selected file
 		    KermetaUnit kunit = runPopupDialog.parse(anIFile);
-		    runPopupDialog.setEntryPoint(kunit);
+		    ArrayList point = KermetaRunHelper.setEntryPoint(kunit);
+		    // Set the default value to display in the dialog
+		    runPopupDialog.classQualifiedNameString = (String)point.get(0);
+		    runPopupDialog.defaultOperationString = (String)point.get(1);
 		    int code = runPopupDialog.open();
 		    
 		    // If User chooses OK, than we launch the KermetaProgram 

@@ -1,4 +1,4 @@
-/* $Id: RunPopupDialog.java,v 1.4 2005-05-23 13:20:26 zdrey Exp $
+/* $Id: RunPopupDialog.java,v 1.5 2005-05-25 09:26:03 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: RunPopupDialog.java
  * License: GPL
@@ -157,28 +157,6 @@ public class RunPopupDialog extends Dialog {
 	{
 	    
 	}
-	
-	
-	/**
-	 * Initialize the entypoint of the program according to
-	 * tags on the root_package.
-	 */
-	public void setEntryPoint(KermetaUnit unit) 
-	{
-	    if (unit!=null)
-	    {
-	        Iterator it = unit.rootPackage.getFTag().iterator();
-	        
-	        while (it.hasNext()) {
-	            FTag tag = (FTag)it.next();
-	            if (tag.getFName().equals("mainClass")) 
-	                classQualifiedNameString = tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
-	            if (tag.getFName().equals("mainOperation"))
-	                defaultOperationString = tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
-	        }
-	    }
-	}
-	
 	
 	/**
 	 * Parse the given file and return its KermetaUnit

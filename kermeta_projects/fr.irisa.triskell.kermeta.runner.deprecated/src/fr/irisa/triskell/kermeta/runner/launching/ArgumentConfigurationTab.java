@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.4 2005-05-24 17:07:31 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.5 2005-05-25 09:26:00 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -27,7 +27,10 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.internal.core.LaunchManager;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
+import org.eclipse.debug.ui.DebugUITools;
+import org.eclipse.debug.ui.ILaunchGroup;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.SWT;
@@ -42,6 +45,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
@@ -81,7 +85,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      *
      */
     public String SOURCEFILE="File";
-    /** Stolen from CommonTab source*/
+    /** Basic modify listener stolen from CommonTab source*/
     private ModifyListener fBasicModifyListener = new ModifyListener() {
 		public void modifyText(ModifyEvent evt) {
 			updateLaunchConfigurationDialog();
@@ -111,11 +115,15 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     private Button sharedLocationButton;
     private Button classNameButton;
     private Label classNameLabel;
+    /** The text widget for the selection of a Kermeta class from a given file */
     private Text classNameText;
+    /** The path selected by the user through the "Browse" action*/
     private String selectedPath;
     /** The class qualified name chosen by the user */
     private String selectedClassString = null;
+    /** The text widget for the selection of a Kermeta operation */
     private Text operationNameText;
+    /** The button to click on in order to select an operation*/
     private Button operationNameButton;
     
     /**
@@ -165,18 +173,41 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     }
 
     /**
-     * Fills the configuration that is launched if there was some values before.
+     * Fills the configuration that is launched with the values of the last configuration
+     * (provided user saved it!)
      * @see org.eclipse.debug.ui.ILaunchConfigurationTab#initializeFrom(org.eclipse.debug.core.ILaunchConfiguration)
      */
-    public void initializeFrom(ILaunchConfiguration configuration) {
-        System.out.println("Initialize tab");
-
+    public void initializeFrom(ILaunchConfiguration configuration)
+    {
+//        ILaunchGroup group = DebugUITools.getLaunchGroup(configuration, LaunchManager.RUN_MODE);
+        System.out.println("RESOURCE:"+DebugUITools.getSelectedResource().getLocation().toOSString());
+        String selectedOperationString = "";
+        if (DebugUITools.getSelectedResource()!=null)
+        {   
+            try
+            {   
+                selectedPath = DebugUITools.getSelectedResource().getLocation().toOSString();
+                selectedUnit = KermetaRunHelper.parse(selectedPath);
+                ArrayList point = KermetaRunHelper.setEntryPoint(selectedUnit);
+                selectedClassString = (String)point.get(0);
+                // note : not an attribute because other attr. do not depend on its value...
+                selectedOperationString = (String)point.get(1);
+            }
+            catch (Exception e)  // TODO : a kind of KermetaUnitException 
+            {
+                e.printStackTrace();
+                selectedPath = ""; selectedClassString = "";
+            }
+        }
+        
 		try {
             getSharedLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
-                    ""));
+                    selectedPath));
        
-            getclassNameText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME,""));
-            getOperationNameText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,""));
+            getclassNameText().setText(
+                    configuration.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME,selectedClassString));
+            getOperationNameText().setText(
+                    configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,selectedOperationString));
 		 } catch (CoreException e) {
 	            // TODO Auto-generated catch block
 	            e.printStackTrace();
@@ -184,7 +215,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 
     }
 
-    
 	/**
 	 * When the button "Apply" is pushed, this method is launched
 	 * The configuration is saved.
@@ -193,7 +223,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
 	 */
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-        //updateConfigFromLocalShared(configuration);
+        //updateConfigFromLocalShared(configuration); nullpointerexception->works when config stored in afile
         
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, sharedLocationText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, classNameText.getText());
@@ -416,7 +446,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      */
     private void handleClassNameButtonSelected()
     {
-        // Parse selectedUnit
+        
         // TODO Handle null pointer exception
 //        List classDefinitionList = createClassList(getShell(), selectedUnit);
         EList typedefs = selectedUnit.rootPackage.getFOwnedTypeDefinition();

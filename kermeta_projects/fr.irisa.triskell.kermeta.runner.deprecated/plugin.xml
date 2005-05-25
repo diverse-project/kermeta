@@ -64,7 +64,7 @@
    <!-- Extension point for the Kermeta Run menu item in the Run properties -->
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
     <launchConfigurationType
-          sourceLocatorId="fr.irisa.triskell.kermeta.runner.sourceLocator1"
+          sourceLocatorId="kermetaSourceLocator"
           delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
           public="true"
           name="Kermeta Run Configuration"
@@ -164,9 +164,9 @@
       <extension
             point="org.eclipse.debug.core.sourceLocators">
          <sourceLocator
-               class="fr.irisa.triskell.kermeta.runner.PersistableSourceLocator1"
-               name="fr.irisa.triskell.kermeta.runner.sourceLocator1"
-               id="fr.irisa.triskell.kermeta.runner.sourceLocator1"/>
+               class="fr.irisa.triskell.kermeta.runner.launching.KermetaSourceLocator"
+               name="fr.irisa.triskell.kermeta.runner.kermetaSourceLocator"
+               id="kermetaSourceLocator"/>
       </extension>
 
 
