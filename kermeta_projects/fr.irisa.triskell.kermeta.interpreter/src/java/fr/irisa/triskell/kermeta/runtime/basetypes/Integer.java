@@ -1,8 +1,10 @@
-/* $Id: Integer.java,v 1.2 2005-05-16 23:57:29 ffleurey Exp $ 
+/* $Id: Integer.java,v 1.3 2005-05-25 17:42:59 ffleurey Exp $ 
  * Implementation of Kermeta base type Integer 
  */
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
+
+import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
@@ -115,6 +117,12 @@ public class Integer {
 		return result;
 	}
 	
+	public static RuntimeObject toString(RuntimeObject self) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
+		String.setValue(result, "" + getValue(self));
+		return result;
+	}
+	
 	public static void setValue(RuntimeObject integer, int value) {
 		integer.getData().put("Value", new java.lang.Integer(value));
 	}
@@ -122,6 +130,7 @@ public class Integer {
 	public static int getValue(RuntimeObject integer) {
 		return ((java.lang.Integer)integer.getData().get("Value")).intValue();
 	}
+	
 
 	public static RuntimeObject create(int value, RuntimeObjectFactory factory)
 	{

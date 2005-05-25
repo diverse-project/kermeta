@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.10 2005-05-18 23:42:37 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.11 2005-05-25 17:42:22 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -188,7 +188,7 @@ testinvalidFile("test/typechecher_tests/invalid","ObjectAndVoid.kmt" );
 			assertTrue(builder.getAllMessagesAsString(), false);
 		}
 		
-		builder.typeCheck();
+		builder.typeCheck(null);
 		
 		//KermetaTypeChecker tc = builder.getTypeChecker();
 		
@@ -213,7 +213,7 @@ testinvalidFile("test/typechecher_tests/invalid","ObjectAndVoid.kmt" );
 		
 		
 		
-		KermetaTypeChecker tc = builder.typeCheck();
+		KermetaTypeChecker tc = builder.typeCheck(null);
 		
 		if (tc.correctOperation.size() != 0) {
 		    boolean res = true;

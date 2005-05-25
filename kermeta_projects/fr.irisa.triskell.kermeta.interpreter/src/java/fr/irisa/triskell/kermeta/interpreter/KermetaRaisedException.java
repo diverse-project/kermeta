@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.1 2005-05-16 17:39:07 ffleurey Exp $
+/* $Id: KermetaRaisedException.java,v 1.2 2005-05-25 17:42:50 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : GPL
@@ -13,7 +13,6 @@ package fr.irisa.triskell.kermeta.interpreter;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
 
 /**
  * @author Franck Fleurey

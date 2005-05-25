@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.6 2005-05-17 07:16:39 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.7 2005-05-25 17:42:47 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : GPL
@@ -28,7 +28,6 @@ import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_T;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_U;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FTag;
-import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.utils.argumentsreader.CheckOption;
 import fr.irisa.triskell.utils.argumentsreader.NoOption;

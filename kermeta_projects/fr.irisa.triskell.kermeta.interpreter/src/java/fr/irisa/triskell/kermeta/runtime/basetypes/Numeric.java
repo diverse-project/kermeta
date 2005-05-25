@@ -2,7 +2,6 @@
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 public class Numeric {
 

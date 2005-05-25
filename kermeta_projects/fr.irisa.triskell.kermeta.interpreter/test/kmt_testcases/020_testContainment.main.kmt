@@ -52,6 +52,14 @@ class TestContainment inherits kermeta::kunit::Test {
 		assert(b.container == void)
 	end
 	
+	operation testAssignVoidWhenNewAssign0() is do
+		var a1 : A init A.new
+		var b : B init B.new
+		a1.b := void
+		assert(b.container == void)
+		assert(a1.b == void)
+	end
+	
 	operation testAssignVoidWhenNewAssign() is do
 		var a1 : A init A.new
 		var a2 : A init A.new

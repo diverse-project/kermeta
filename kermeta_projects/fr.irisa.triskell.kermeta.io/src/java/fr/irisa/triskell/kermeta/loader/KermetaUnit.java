@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.24 2005-05-20 12:46:11 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.25 2005-05-25 17:42:10 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -109,25 +109,38 @@ public abstract class KermetaUnit {
 		
 	}
 	
+	protected boolean type_checked = false;
 	
-	public KermetaTypeChecker typeCheck() {
+	public KermetaTypeChecker typeCheck(KermetaTypeChecker checker) {
+	    
+	    if (type_checked) return checker;
+	   
+	    if (checker == null) checker = new KermetaTypeChecker(this);
+	    
 	    if (this.error.size() == 0) {
 	        try {
-	        	KermetaTypeChecker typeChecker = new KermetaTypeChecker(this);
-	            typeChecker.checkUnit();
-	            return typeChecker;
+	        	
+	            checker.checkUnit();
+	            type_checked = true;
+	            Iterator it = importedUnits.iterator();
+	    		while(it.hasNext()) {
+	    			KermetaUnit u = (KermetaUnit)it.next();
+	    			u.typeCheck(null);
+	    			
+	    		}
+	            return checker;
 	        }
 	        catch(Throwable t) {
 	            this.error.add(new KMUnitError("Type checker internal error " + t.getMessage(), null));
 	            KermetaUnit.internalLog.error("Type checker error", t);
 	        }
 	    }
-	    return null;
+	    return checker;
 	}
 	
 	public void typeCheckAllUnits() {
 		visited = true;
-		typeCheck();
+		typeCheck(null);
 		Iterator it = importedUnits.iterator();
 		while(it.hasNext()) {
 			KermetaUnit u = (KermetaUnit)it.next();
@@ -980,12 +993,14 @@ public abstract class KermetaUnit {
 		this.uri = uri;
 	}
 
-
     /**
      * 
      */
     public static void unloadStdLib() {
        std_lib = null;
     }
+    
+
+    
 }
 

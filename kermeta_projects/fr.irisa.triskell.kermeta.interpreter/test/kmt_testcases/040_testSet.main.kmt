@@ -8,7 +8,7 @@ require kermeta
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: 040_testSet.main.kmt,v 1.5 2005-05-16 23:57:26 ffleurey Exp $
+ * $Id: 040_testSet.main.kmt,v 1.6 2005-05-25 17:43:21 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -133,7 +133,7 @@ class TestSet inherits kermeta::kunit::Test
 		aset.add(31)
 		aset.add(13)
 		aset.remove(13)
-		assert(aset.size == 2)
+		assert(aset.size == 1)
 		assert(aset.one == 31)
 	end
 	
@@ -356,8 +356,9 @@ class TestSet inherits kermeta::kunit::Test
 	 	// are 23 added 3 times?
 	 	assert(init_bag.size == 4)
 	 	init_bag.remove(23)
+	 	assert(init_bag.size == 3)
 	 	// is 23 still there? TODO : separate this test in two tests??
-	 	assert(init_set.contains(23) == true)
+	 	assert(init_bag.contains(23) == true)
 	 	
 	end
 	

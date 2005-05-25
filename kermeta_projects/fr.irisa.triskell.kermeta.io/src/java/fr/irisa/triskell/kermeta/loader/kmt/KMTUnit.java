@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.15 2005-05-02 23:50:52 ffleurey Exp $
+/* $Id: KMTUnit.java,v 1.16 2005-05-25 17:42:20 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : GPL
@@ -49,6 +49,13 @@ public class KMTUnit extends KermetaUnit {
 	 */
 	public KMTUnit(String uri, Hashtable packages) {
 		super(uri, packages);
+	}
+	
+	public void discardTraceabilityInfo() {
+	    KermetaUnit.internalLog.info("Clearing traceability from text to model in order to free memory");
+	    mctAST = null;
+	    traceM2T.clear();
+	    traceT2M.clear();
 	}
 	
 	public KermetaASTNode getKMTAstNodeForModelElement(FObject element) {

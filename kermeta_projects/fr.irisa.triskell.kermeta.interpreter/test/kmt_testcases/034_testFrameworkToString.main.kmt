@@ -1,0 +1,57 @@
+@testOperation ""
+@mainClass "testFrameworkToString::TestFrameworkToString"
+@mainOperation "main_operation"
+
+package testFrameworkToString;
+
+require kermeta
+using kermeta::standard
+
+// Testing the operations toString on classes of the framework : 
+class TestFrameworkToString inherits kermeta::kunit::Test {
+ 
+   
+	operation testOnString1() is do 
+		assert("".toString == "")
+	end
+	
+	operation testOnString2() is do 
+		assert("aaa".toString == "aaa")
+	end
+	
+	operation testOnString3Void() is do 
+		var str : String
+		assert(str.toString == "<void>")
+	end
+	
+	operation testOnInteger1() is do 
+		assert(0.toString == "0")
+	end
+	
+	operation testOnInteger2() is do 
+		assert(456.toString == "456")
+	end
+	
+	operation testOnInteger3() is do 
+		assert((456 + 2).toString == "458")
+	end
+	
+	operation testOnBoolean1() is do 
+		assert(true.toString == "true")
+	end
+	
+	operation testOnBoolean2() is do 
+		assert(false.toString == "false")
+	end
+	
+	operation testOnBoolean3() is do 
+		var boo : Boolean
+		assert(boo.toString == "<void>")
+	end
+	
+	operation testOnVoid() is do 
+		assert(void.toString == "<void>")
+	end
+
+
+}

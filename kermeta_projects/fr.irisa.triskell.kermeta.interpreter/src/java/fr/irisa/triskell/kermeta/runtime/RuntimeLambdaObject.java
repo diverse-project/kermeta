@@ -1,4 +1,4 @@
-/* $Id: RuntimeLambdaObject.java,v 1.2 2005-05-16 17:39:14 ffleurey Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.3 2005-05-25 17:42:56 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
  * License: GPL
@@ -10,24 +10,13 @@
 package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
-
-import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
-import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.interpreter.LambdaCallFrame;
-import fr.irisa.triskell.kermeta.interpreter.OperationCallFrame;
-import fr.irisa.triskell.kermeta.interpreter.Variable;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 
 /**
  * A special RuntimeObject for LambdaExpressions :

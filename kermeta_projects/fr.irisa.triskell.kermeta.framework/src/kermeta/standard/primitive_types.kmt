@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.16 2005-05-16 23:53:26 ffleurey Exp $
+// $Id: primitive_types.kmt,v 1.17 2005-05-25 17:42:01 ffleurey Exp $
 package kermeta::standard; 
 require "../Standard.kmt"
 
@@ -26,6 +26,9 @@ class ~Void {
 		result := true
 	end
 
+	method toString() : String is do
+		result := "<void>"
+	end
 }
 
 
@@ -119,6 +122,10 @@ class Boolean
 	 */ 
 	operation ~or(other : Boolean) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Boolean.~or(self, other)
+	end
+	
+	method toString() : String is do
+		result := if self then "true" else "false" end
 	end
 	
 } // Boolean
@@ -263,6 +270,10 @@ class Integer inherits Numeric
 		end
 	end
 	
+	method toString() : String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toString(self)
+	end
+	
 }
 
 /**
@@ -311,6 +322,10 @@ class Real inherits Numeric
 	operation uminus() : Numeric is do
 		result := 0.toReal - self
 	end
+	
+	method toString() : String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.toString(self)
+	end
 }
 
 /**
@@ -327,6 +342,10 @@ class Character inherits ValueType, Comparable
 
 	method equals(other : Object) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.equals(self, other)
+	end
+	
+	method toString() : String is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.toString(self)
 	end
 	
 	}
@@ -386,6 +405,10 @@ class String inherits ValueType, Comparable
 	
 	operation size() : Integer is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.size(self)
+	end
+	
+	method toString() : String is do
+		result := self
 	end
 }
 

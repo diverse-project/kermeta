@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.7 2005-05-23 23:35:51 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.8 2005-05-25 17:42:49 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -45,9 +45,7 @@ import fr.irisa.triskell.kermeta.behavior.FTypeLiteral;
 import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.behavior.FVoidLiteral;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -305,8 +303,15 @@ public class ExpressionInterpreter extends KermetaVisitor {
             {
                 System.err.println("could not set property '"+propertyName+"' for object '"+lhs_name+"'");
             }
-            else
-            fr.irisa.triskell.kermeta.runtime.language.Object.set(ro_target,ro_property,rhs_value);      
+            else {
+                // Unset the property if it is void
+                if (rhs_value == memory.voidINSTANCE) {
+                    fr.irisa.triskell.kermeta.runtime.language.Object.unSet(ro_target,ro_property);
+                }
+                else {
+                    fr.irisa.triskell.kermeta.runtime.language.Object.set(ro_target,ro_property,rhs_value);
+                }
+            }
 		}
 		
 		return rhs_value;
@@ -580,6 +585,13 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    
 	    SimpleType target_type = new SimpleType(t_target);
 	    
+	    if (node.getFStaticOperation() == null && node.getFStaticProperty() == null) {
+	        internalLog.error("INTERPRETER INTERNAL ERROR : the program does not seems to be correcly types checked");
+	        throw new Error("INTERPRETER INTERNAL ERROR : the program does not seems to be correcly types checked");
+
+	    }
+	    
+	    
 	    if (node.getFStaticOperation() != null) {
 	        // It is an operation call
 	        CallableOperation operation = target_type.getOperationByName(node.getFName());
@@ -619,8 +631,8 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		    
 //		  This should never happend is the type checker has checked the program
 			if (property == null) {
-			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature");
-		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature");
+			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature" + node.getFName());
+		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature " + node.getFName());
 			}
 			
 //			 Get the runtime object corresponding to the property

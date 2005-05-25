@@ -3,12 +3,10 @@
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 

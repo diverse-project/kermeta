@@ -2,7 +2,6 @@
 
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;

@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.8 2005-05-16 17:39:07 ffleurey Exp $
+/* $Id: ExpressionContext.java,v 1.9 2005-05-25 17:42:50 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -15,11 +15,7 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.Hashtable;
 
-import fr.irisa.triskell.kermeta.behavior.FExpression;
-import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FType;
 
 /**
  * This is the context associated to a block inside the definition of an operation

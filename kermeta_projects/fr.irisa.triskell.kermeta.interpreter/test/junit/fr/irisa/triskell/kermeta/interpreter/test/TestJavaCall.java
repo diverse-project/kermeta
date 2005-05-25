@@ -1,4 +1,4 @@
-/* $Id: TestJavaCall.java,v 1.6 2005-05-16 17:39:12 ffleurey Exp $
+/* $Id: TestJavaCall.java,v 1.7 2005-05-25 17:42:54 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
  * License    : GPL
@@ -12,18 +12,14 @@
  */
 package fr.irisa.triskell.kermeta.interpreter.test;
 
+import junit.framework.TestCase;
+
 import org.apache.log4j.Logger;
 
-import junit.framework.TestCase;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**

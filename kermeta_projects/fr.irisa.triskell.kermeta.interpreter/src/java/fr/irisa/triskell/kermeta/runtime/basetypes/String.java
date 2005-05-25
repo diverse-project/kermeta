@@ -87,6 +87,9 @@ public class String {
 		return (java.lang.String)str.getData().get("Value");
 	}
 	
+	
+	public static int nb_str = 0;
+	
 	public static RuntimeObject create(java.lang.String value, RuntimeObjectFactory factory) {
 	    RuntimeObject result = factory.createObjectFromClassName("kermeta::standard::String");
 	    setValue(result, value);

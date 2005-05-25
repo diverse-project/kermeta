@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.3 2005-05-20 12:54:47 ffleurey Exp $
+/* $Id: RuntimeObject.java,v 1.4 2005-05-25 17:42:58 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -15,13 +15,10 @@
 package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
 
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FProperty;
 
 /**
  * @author Franck Fleurey
@@ -32,12 +29,16 @@ import fr.irisa.triskell.kermeta.structure.FProperty;
  */
 public class RuntimeObject {
     
+    public static int getInstanceCounter() {
+        return oid_cpt;
+    }
+    
     /**
      * Objec id counted for RuntimeObject
      */
-    private static long oid_cpt = 0;
+    private static int oid_cpt = 0;
 	
-    private long oId = oid_cpt++;
+    private int oId = oid_cpt++;
     
 	/**
 	 * The meta class
@@ -81,9 +82,10 @@ public class RuntimeObject {
 	}
 	
     protected void finalize() throws Throwable {
-        
+        //System.err.println("finalize RuntimeObject : " + oId);
         FObject fobj = (FObject)getData().get("kcoreObject");
         if (fobj != null) {
+          //  System.err.println("           -> free km object " + fobj);
             factory.getMemory().clearFObjectFromCache(fobj);
         }
         

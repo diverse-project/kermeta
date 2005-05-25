@@ -1,4 +1,4 @@
-/* $Id: kunit.java,v 1.1 2005-05-13 15:05:42 ffleurey Exp $
+/* $Id: kunit.java,v 1.2 2005-05-25 17:43:31 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.framework
  * File       : kunit.java
  * License    : GPL
@@ -10,10 +10,10 @@
  */
 package fr.irisa.triskell.kermeta.runtime.testing;
 
+import junit.framework.Assert;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
-import junit.framework.Assert;
 
 /**
  * Implementation of some low level functions needed for unitaty testing using kunit.kmt.

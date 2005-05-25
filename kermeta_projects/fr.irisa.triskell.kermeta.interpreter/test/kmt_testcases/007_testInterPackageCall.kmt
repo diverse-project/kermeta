@@ -1,11 +1,19 @@
+@mainClass "testInterPackage::Test_intercall"
+@mainOperation "operation1"
 package testInterPackage;
 
 require "7_testOpPkgCall.main.kmt"
-alias Integer : kermeta::standard::Integer;
-alias Test_opcall : testOpPackage::Test_opcall;
+
+using kermeta::standard 
+
 // operation called in another package
+
 class Test_intercall {
+
     operation operation1() : Integer is do
+
     	result := testOpPackage::Test_opcall.new.operation2()
+
     end
+
 }

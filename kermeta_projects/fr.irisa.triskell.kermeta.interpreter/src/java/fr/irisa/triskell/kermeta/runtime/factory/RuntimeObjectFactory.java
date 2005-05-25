@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.3 2005-05-20 12:54:45 ffleurey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.4 2005-05-25 17:43:32 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -12,11 +12,8 @@
 package fr.irisa.triskell.kermeta.runtime.factory;
 
 import java.util.Hashtable;
-import java.util.Iterator;
-
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
@@ -29,7 +26,6 @@ import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 
 /**
@@ -176,12 +172,15 @@ public class RuntimeObjectFactory {
 	    return meta_class;
 	}
 	
+	public static int createRuntimeObjectFromClass_count = 0;
+	
 	/**
 	 * Create a new RuntimeObject given its meta_class.
 	 * @param meta_class the RuntimeObject repr. of the meta class to instanciate
 	 * @return a RuntimeObject which is an "instance" of meta_class.
 	 */
 	public RuntimeObject createRuntimeObjectFromClass(RuntimeObject meta_class) {
+	    createRuntimeObjectFromClass_count++;
 		RuntimeObject result = new RuntimeObject(this, meta_class);
 //		TODO : take care of default values here ?
 		//result.setData(new Hashtable());

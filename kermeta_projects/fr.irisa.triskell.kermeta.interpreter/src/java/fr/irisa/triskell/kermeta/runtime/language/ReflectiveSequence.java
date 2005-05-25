@@ -5,9 +5,7 @@ package fr.irisa.triskell.kermeta.runtime.language;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.OrderedCollection;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FProperty;
@@ -42,6 +40,11 @@ public class ReflectiveSequence {
 	}
 	
 	/**
+	 * Cache : ClassDefinition cd -> RuntimeObject of kermeta::language::ReflectiveCollection<cd>
+	 */
+	private static Hashtable cache_reflec_seq_class = new Hashtable();
+	
+	/**
 	 * This is a cache of ReflectiveCollection Class object indexed by the type parameter
 	 * used
 	 */
@@ -49,25 +52,41 @@ public class ReflectiveSequence {
 
 	public static RuntimeObject createReflectiveSequence(RuntimeObject object, RuntimeObject property) {
 		
+	    
 	    FClass self_class = (FClass)object.getMetaclass().getData().get("kcoreObject");
 	    
 	    FProperty fprop = (FProperty)property.getData().get("kcoreObject");
 	    
 	    FType prop_type = TypeVariableEnforcer.getBoundType(fprop.getFType(), TypeVariableEnforcer.getTypeVariableBinding(self_class));
 		
-	    FClass reflect_class = object.getFactory().getMemory().getUnit().struct_factory.createFClass();
+	    RuntimeObject metaClass = null;
+	    
+	    if (prop_type instanceof FClass && ((FClass)prop_type).getFTypeParamBinding().size() == 0) {
+	        metaClass = (RuntimeObject)cache_reflec_seq_class.get(((FClass)prop_type).getFClassDefinition());
+	    }
+	    
+	    if (metaClass == null) {
 	        
-	    reflect_class.setFClassDefinition( (FClassDefinition) object.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
+	        FClass reflect_class = object.getFactory().getMemory().getUnit().struct_factory.createFClass();
+	        
+		    reflect_class.setFClassDefinition( (FClassDefinition) object.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
+		    
+		    FTypeVariableBinding binding = object.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+		    
+		    binding.setFVariable((FTypeVariable)reflect_class.getFClassDefinition().getFTypeParameter().get(0));
+		    
+		    binding.setFType(prop_type);
+			
+		    reflect_class.getFTypeParamBinding().add(binding);
+		    
+		    metaClass = object.getFactory().createMetaClass(reflect_class);
+		    
+		    if (prop_type instanceof FClass && ((FClass)prop_type).getFTypeParamBinding().size() == 0) {
+		        cache_reflec_seq_class.put(((FClass)prop_type).getFClassDefinition(), metaClass);
+		    }
+	    }
 	    
-	    FTypeVariableBinding binding = object.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
-	    
-	    binding.setFVariable((FTypeVariable)reflect_class.getFClassDefinition().getFTypeParameter().get(0));
-	    
-	    binding.setFType(prop_type);
-		
-	    reflect_class.getFTypeParamBinding().add(binding);
-	    
-		RuntimeObject result = object.getFactory().createRuntimeObjectFromClass(object.getFactory().createMetaClass(reflect_class));
+		RuntimeObject result = object.getFactory().createRuntimeObjectFromClass(metaClass);
 		
 		result.getData().put("RObject", object);
 		result.getData().put("RProperty", property);

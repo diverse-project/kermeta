@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.4 2005-05-20 12:54:43 ffleurey Exp $
+/* $Id: RuntimeMemory.java,v 1.5 2005-05-25 17:42:55 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeMemory.java
  * License: GPL
@@ -9,15 +9,11 @@
  */
 package fr.irisa.triskell.kermeta.builder;
 
-import java.util.Hashtable;
-
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FObject;
 
 /**
@@ -60,6 +56,10 @@ public class RuntimeMemory {
         return memoryLoader.getRuntimeObjectForFObject(object);
     }
     
+    public int getNumberOfObjectCached() {
+        return memoryLoader.getNumberOfObjectCached();
+    }
+    
     public void clearFObjectFromCache(FObject object)
     {
         memoryLoader.clearFObjectFromCache(object);
@@ -89,7 +89,7 @@ public class RuntimeMemory {
 		Boolean.createFalse(roFactory, falseINSTANCE);
 	    
 		// Create the void Instance (should be a singleton)
-	    RuntimeObject roVoidType = getTypeDefinitionAsRuntimeObject("kermeta::reflection::VoidType");
+	    RuntimeObject roVoidType = getTypeDefinitionAsRuntimeObject("kermeta::standard::Void");
 	    voidINSTANCE=roFactory.createObjectFromClassDefinition(roVoidType);
 	    
 	   

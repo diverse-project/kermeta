@@ -1,4 +1,4 @@
-/* $Id: StdIO.java,v 1.4 2005-05-20 12:04:03 zdrey Exp $
+/* $Id: StdIO.java,v 1.5 2005-05-25 17:43:01 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : GPL
@@ -12,10 +12,6 @@
  *  - ...
  */
 package fr.irisa.triskell.kermeta.runtime.basetypes;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.structure.FClass;

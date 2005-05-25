@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.9 2005-05-18 23:49:04 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.10 2005-05-25 17:43:33 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -42,57 +42,41 @@ public class JunitTestSuite extends TestSuite {
 
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
-		testWithFile("test/kmt_testcases","10_testLoop.main.kmt" );
-
-		testWithFile("test/kmt_testcases","11_testBenchmark.main.kmt" );
-
-		testWithFile("test/kmt_testcases","13_testString.main.kmt" );
-
-		testWithFile("test/kmt_testcases","14_testExternJavaCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","15_testAttributes.main.kmt" );
-
-		testWithFile("test/kmt_testcases","16_testParametricClasses.main.kmt" );
-
-		testWithFile("test/kmt_testcases","17_testSuperFeaturesCalls.main.kmt" );
-
-		testWithFile("test/kmt_testcases","18_testExceptions.main.kmt" );
-
-		testWithFile("test/kmt_testcases","19_ReflectionTest.main.kmt" );
+		testWithFile("test/kmt_testcases","2_testArithm.main.kmt" );
 
 		testWithFile("test/kmt_testcases","1_testAssignment.main.kmt" );
 
-		testWithFile("test/kmt_testcases","20_testContainment.main.kmt" );
-
-		testWithFile("test/kmt_testcases","2_testArithm.main.kmt" );
-
-		testWithFile("test/kmt_testcases","3_testOpCall.main.kmt" );
+		testWithFile("test/kmt_testcases","11_testBenchmark.main.kmt" );
 
 		testWithFile("test/kmt_testcases","4_testOpOpCall.main.kmt" );
 
-		testWithFile("test/kmt_testcases","5_testOpPkgCall.main.kmt" );
+		testWithFile("test/kmt_testcases","10_testLoop.main.kmt" );
 
-		testWithFile("test/kmt_testcases","6_testOpPkgCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","7_testOpPkgCall.main.kmt" );
+		testWithFile("test/kmt_testcases","testArithm.main.kmt" );
 
 		testWithFile("test/kmt_testcases","8_testOpInternPkgCall.main.kmt" );
 
 		testWithFile("test/kmt_testcases","9_testOpCallObject.main.kmt" );
 
-		testWithFile("test/kmt_testcases","testArithm.main.kmt" );
+		testWithFile("test/kmt_testcases","7_testOpPkgCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","6_testOpPkgCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","3_testOpCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","5_testOpPkgCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","14_testExternJavaCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","13_testString.main.kmt" );
 
 		testWithFile("test/kmt_testcases","testBoolean.main.kmt" );
 
-		testWithFile("test/kmt_testcases","testBooleanResults.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testHashtable.main.kmt" );
-
 		testWithFile("test/kmt_testcases","testIterator.main.kmt" );
 
-		testWithFile("test/kmt_testcases","testLambda.main.kmt" );
+		testWithFile("test/kmt_testcases","testBooleanResults.main.kmt" );
 
-		testWithFile("test/kmt_testcases","testReferences.main.kmt" );
+		testWithFile("test/kmt_testcases","testLambda.main.kmt" );
 
 		testWithFile("test/kmt_testcases","testSet.main.kmt" );
 
@@ -100,7 +84,27 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","testVariable.main.kmt" );
 
+		testWithFile("test/kmt_testcases","testHashtable.main.kmt" );
+
+		testWithFile("test/kmt_testcases","19_ReflectionTest.main.kmt" );
+
+		testWithFile("test/kmt_testcases","16_testParametricClasses.main.kmt" );
+
+		testWithFile("test/kmt_testcases","18_testExceptions.main.kmt" );
+
+		testWithFile("test/kmt_testcases","15_testAttributes.main.kmt" );
+
+		testWithFile("test/kmt_testcases","17_testSuperFeaturesCalls.main.kmt" );
+
+		testWithFile("test/kmt_testcases","testReferences.main.kmt" );
+
+		testWithFile("test/kmt_testcases","20_testContainment.main.kmt" );
+
 		testWithFile("test/kmt_testcases","21_testOpposites.main.kmt" );
+
+		testWithFile("test/kmt_testcases","testSequence.main.kmt" );
+
+		testWithFile("test/kmt_testcases","testFrameworkToString.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment

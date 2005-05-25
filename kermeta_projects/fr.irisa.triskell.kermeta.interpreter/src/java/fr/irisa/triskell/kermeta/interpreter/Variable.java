@@ -1,4 +1,4 @@
-/* $Id: Variable.java,v 1.6 2005-05-13 15:05:32 ffleurey Exp $
+/* $Id: Variable.java,v 1.7 2005-05-25 17:42:52 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : Variable.java
  * License : GPL
@@ -15,7 +15,6 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FType;
 
 /**
  * 

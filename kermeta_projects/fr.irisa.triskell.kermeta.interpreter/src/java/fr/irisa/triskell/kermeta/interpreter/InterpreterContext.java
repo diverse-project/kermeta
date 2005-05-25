@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.8 2005-05-20 12:54:38 ffleurey Exp $
+/* $Id: InterpreterContext.java,v 1.9 2005-05-25 17:42:53 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : GPL
@@ -14,14 +14,11 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 
 /**

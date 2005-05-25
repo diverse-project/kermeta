@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.2 2005-05-20 12:54:37 ffleurey Exp $
+/* $Id: OperationCallFrame.java,v 1.3 2005-05-25 17:42:51 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : OperationCallFrame.java
 * License : GPL
@@ -16,7 +16,6 @@ import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FParameter;
 import fr.irisa.triskell.kermeta.structure.FType;

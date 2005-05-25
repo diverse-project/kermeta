@@ -2,11 +2,16 @@
 
 package fr.irisa.triskell.kermeta.runtime.language;
 
+import java.util.Iterator;
+
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Void;
+import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 
 public class Object {
 
@@ -64,10 +69,20 @@ public class Object {
 		// Unset first if there is an object
 		if (isSet(self, param0) == self.getFactory().getMemory().trueINSTANCE)  unSet(self, param0);
 
+		if (param1 == self.getFactory().getMemory().voidINSTANCE) return;
+		
 		// set the new object
 		self.getProperties().put(getPropertyName(param0), param1);
 		// set containement
-		if (isPropertyContainment(param0)) param1.setContainer(self);
+		if (isPropertyContainment(param0)) {
+		    // if param1 is already contained by an object it should be removed
+		    
+		    if (param1.getContainer() != null) {
+		        removeObjectFromItsContainer(param1);
+		    }
+		    
+		    param1.setContainer(self);
+		}
 		// handle opposite
 		if(handle_opposite) {
 			RuntimeObject oproperty = getPropertyOpposite(param0);
@@ -78,7 +93,41 @@ public class Object {
 		
 	}
 	
-	// Implementation of method container called as :
+	/**
+     * @param param1
+     */
+    protected static void removeObjectFromItsContainer(RuntimeObject object) {
+        RuntimeObject container = object.getContainer();
+        if (container == null) return;
+        
+        // Find the property in which the object is stoted
+        FClass containerClass = (FClass)container.getMetaclass().getData().get("kcoreObject");
+        
+        Iterator it = InheritanceSearch.callableProperties(containerClass).iterator();
+        while (it.hasNext()) {
+            CallableProperty cp = (CallableProperty)it.next();
+            if (cp.getProperty().isFIsComposite()) {
+                java.lang.String pname = cp.getProperty().getFName();
+                if (cp.getProperty().getFUpper() == 1) {
+                    if (container.getProperties().get(pname) == object) {
+                        RuntimeObject prop = container.getFactory().getMemory().getRuntimeObjectForFObject(cp.getProperty());
+                        unSet(container, prop);
+                    }
+                }
+                else {
+                    RuntimeObject reflect_col = (RuntimeObject)container.getProperties().get(pname);
+                    if (reflect_col != null && Collection.getArrayList(reflect_col).contains(object)) {
+                        ReflectiveCollection.remove(reflect_col, object);
+                    }
+                }
+                
+                
+            }
+        }
+        
+    }
+
+    // Implementation of method container called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.oid()
 	public static RuntimeObject oid(RuntimeObject self) {
 		return Integer.create((int)self.getOId(), self.getFactory());
@@ -104,6 +153,7 @@ public class Object {
 	 */
 	public static void handleOppositeProperySet(RuntimeObject object, RuntimeObject property, RuntimeObject value) {
 		if (getPropertyUpper(property) == 1) {
+		    //Object.unSet(object, property);
 			Object.set(object, property, value, false);
 		}
 		else {
@@ -115,7 +165,8 @@ public class Object {
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(~property)
 	public static RuntimeObject isSet(RuntimeObject self, RuntimeObject param0) {
 	    
-		if (self.getProperties().get(getPropertyName(param0)) != null) return self.getFactory().getMemory().trueINSTANCE;
+		if (self.getProperties().get(getPropertyName(param0)) != null) 
+		    return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 
@@ -140,17 +191,19 @@ public class Object {
 		if (handle_opposite) {
 			RuntimeObject oproperty = getPropertyOpposite(param0);
 			if (oproperty != null) {
-				handleOppositeProperyUnSet(value, oproperty);
+				handleOppositeProperyUnSet(value, oproperty, self);
 			}
 		}
 	}
 	
-	public static void handleOppositeProperyUnSet(RuntimeObject object, RuntimeObject property) {
+	public static void handleOppositeProperyUnSet(RuntimeObject object, RuntimeObject property, RuntimeObject value) {
 		if (getPropertyUpper(property) == 1) {
 			Object.unSet(object, property, false);
 		}
 		else {
-			ReflectiveCollection.clear(object, false);
+		    
+		    RuntimeObject collec = (RuntimeObject)object.getProperties().get(getPropertyName(property));
+		    ReflectiveCollection.remove(collec, value, false);
 		}
 	}
 	

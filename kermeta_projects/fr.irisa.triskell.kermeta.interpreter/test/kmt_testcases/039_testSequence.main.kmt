@@ -2,11 +2,8 @@
 @mainClass "testSequence::TestSequence"
 @mainOperation "testaddAt"
 
-package testSequence;
-require kermeta
-
 /*****************************************************************************
- * $Id: 039_testSequence.main.kmt,v 1.2 2005-05-24 09:16:09 zdrey Exp $
+ * $Id: 039_testSequence.main.kmt,v 1.3 2005-05-25 17:41:39 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testSequence.kmt
@@ -21,8 +18,12 @@ require kermeta
  * Note : Done for a test/operation
  ***************************************************************************
  */
-alias String : kermeta::standard::String;
-alias Integer : kermeta::standard::Integer;
+
+package testSequence;
+require kermeta
+
+
+using kermeta::standard
 class TestSequence inherits kermeta::kunit::TestCase
 {    
 
@@ -43,8 +44,8 @@ class TestSequence inherits kermeta::kunit::TestCase
 		str_seq := kermeta::standard::Sequence<String>.new
 		str_seq.add("un")
 		str_seq.add("deux")
-		assert(str_seq.get(0).equals("un"))
-		assert(str_seq.get(0).equals("deux"))
+		assert(str_seq.elementAt(0).equals("un"))
+		assert(str_seq.elementAt(1).equals("deux"))
 	end
 	
 	/**
@@ -77,12 +78,12 @@ class TestSequence inherits kermeta::kunit::TestCase
 		pcoll := kermeta::standard::Set<String>.new
 		pcoll.add("un")
 		pcoll.add("deux")
-		pcol.add("trois")
+		pcoll.add("trois")
 		str_seq := kermeta::standard::Sequence<String>.new
 		str_seq.addAll(pcoll)
-		assert(str_seq.get(0).equals("un"))
-		assert(str_seq.get(0).equals("deux"))
-		assert(str_seq.get(0).equals("trois"))
+		assert(str_seq.elementAt(0).equals("un"))
+		assert(str_seq.elementAt(1).equals("deux"))
+		assert(str_seq.elementAt(2).equals("trois"))
 	end
 	
 
@@ -91,12 +92,12 @@ class TestSequence inherits kermeta::kunit::TestCase
 		pcoll := kermeta::standard::Sequence<String>.new
 		pcoll.add("un")
 		pcoll.add("deux")
-		pcol.add("trois")
+		pcoll.add("trois")
 		str_seq := kermeta::standard::Sequence<String>.new
 		str_seq.addAll(pcoll)
-		assert(str_seq.get(0).equals("un"))
-		assert(str_seq.get(0).equals("deux"))
-		assert(str_seq.get(0).equals("trois"))
+		assert(str_seq.elementAt(0).equals("un"))
+		assert(str_seq.elementAt(1).equals("deux"))
+		assert(str_seq.elementAt(2).equals("trois"))
 	end
 	
 	
@@ -136,14 +137,14 @@ class TestSequence inherits kermeta::kunit::TestCase
 		var it : Iterator<String>
 		it := str_seq.iterator
 		assert(it.hasNext==true)
-		assert(it.next=="deux")
+		assert(it.next=="un")
 	end
 	
 	/**
 	 * returns an element from the collection or void
 	 * if the collection is empty
 	 */
-	operation testone() : G is do
+	operation testone() : Void is do
 		str_seq := kermeta::standard::Sequence<String>.new
 		str_seq.add("one")
 		assert(str_seq.one=="one")
@@ -154,16 +155,16 @@ class TestSequence inherits kermeta::kunit::TestCase
 	 */
 	operation teststreach() : Void is do
 		setUp()
-		str_seq.each { e | e.plus("bip") }
-		assert(str_seq.get(0).equals("unbip"))
-		assert(str_seq.get(1).equals("deuxbip"))
+		str_seq.each { e | e.append("bip") }
+		assert(str_seq.elementAt(0).equals("unbip"))
+		assert(str_seq.elementAt(1).equals("deuxbip"))
 	end
 	
 	operation testinteach() : Void is do
 		setUp()
-		int_seq.each { e | e.plus(4) }
-		assert(int_seq.get(0) == 25)
-		assert(int_seq.get(1) == 16)
+		var sum : Integer init 0
+		int_seq.each { e | sum := sum + e }
+		assert(sum == 33)
 	end
 	/**
 	 * returns a new Collection with the results of running collector 
@@ -175,8 +176,8 @@ class TestSequence inherits kermeta::kunit::TestCase
 		var bool_seq : kermeta::standard::Sequence<Boolean>
 		bool_seq := kermeta::standard::Sequence<Boolean>.new
 		bool_seq := str_seq.collect { e | e.equals("un") }
-		assert(bool_seq.get(0)==true)
-		assert(bool_seq.get(1)==false)
+		assert(bool_seq.elementAt(0)==true)
+		assert(bool_seq.elementAt(1)==false)
 	end
 	
 	/**
@@ -189,7 +190,13 @@ class TestSequence inherits kermeta::kunit::TestCase
 		str_seq.add("trois")
 		str_seq.add("deux")
 		var res : kermeta::standard::String
-		res := str_seq.detect { e | e.substring(0,2).equals("deu") }
+		res := str_seq.detect { e | 
+			if e.size > 2 then
+				e.substring(0,3).equals("deu") 
+			else
+				false
+			end
+		}
 		assert(res.equals("deux"))
 	end
 	
@@ -203,8 +210,8 @@ class TestSequence inherits kermeta::kunit::TestCase
 		var res_seq : kermeta::standard::Sequence<String>
 		res_seq := str_seq.select { e | e.equals("deux") }
 		assert(res_seq.size==2)
-		assert(res_seq.get(0) == "deux")
-		assert(res_seq.get(1) == "deux")		
+		assert(res_seq.elementAt(0) == "deux")
+		assert(res_seq.elementAt(1) == "deux")		
 	end
 	
 	/**
@@ -227,8 +234,8 @@ class TestSequence inherits kermeta::kunit::TestCase
 	operation testaddAt() : Void is do
 		setUp()
 		str_seq.addAt(1, "dix")
-		assert(str_seq.get(1).equals("dix"))
-		assert(str_seq.get(2).equals("deux"))
+		assert(str_seq.elementAt(1).equals("dix"))
+		assert(str_seq.elementAt(2).equals("deux"))
 	end
 	
 	/**
@@ -240,8 +247,8 @@ class TestSequence inherits kermeta::kunit::TestCase
 		str_seq.add("trois")
 		str_seq.removeAt(1)
 		assert(str_seq.size == 2)
-		assert(str_seq.get(0).equals("un"))
-		assert(str_seq.get(1).equals("trois"))
+		assert(str_seq.elementAt(0).equals("un"))
+		assert(str_seq.elementAt(1).equals("trois"))
 	end
 	
 	/**

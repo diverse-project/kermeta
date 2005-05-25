@@ -46,6 +46,12 @@ public class Real {
 		return result;
 	}
 	
+	public static RuntimeObject toString(RuntimeObject self) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
+		String.setValue(result, "" + getValue(self));
+		return result;
+	}
+	
 	public static void setValue(RuntimeObject real, double value) {
 		real.getData().put("Value", new Double(value));
 	}

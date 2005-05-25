@@ -14,6 +14,12 @@ public class Character {
 		return result;
 	}
 	
+	public static RuntimeObject toString(RuntimeObject self) {
+		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::String");
+		String.setValue(result, getCharacterValue(self).toString());
+		return result;
+	}
+	
 	
 	// Implementation of method equals called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Character::equals(element)

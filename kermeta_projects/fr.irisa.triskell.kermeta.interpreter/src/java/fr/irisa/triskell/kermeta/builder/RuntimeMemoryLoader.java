@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.2 2005-05-20 12:54:43 ffleurey Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.3 2005-05-25 17:42:55 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : newRuntimeLoader.java
 * License : GPL
@@ -15,8 +15,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -24,9 +22,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -74,6 +69,11 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
     protected void init() {
         _1_loadTypes();
         _2_initializeMemory();
+        _3_createRuntimeObjects();
+    }
+    
+    public int getNumberOfObjectCached() {
+        return objects.size();
     }
     
     
@@ -93,6 +93,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
     }
     
     protected RuntimeObject getRuntimeObjectForFObject(FObject object) {
+        //System.err.println("getRuntimeObjectForFObject, objects size = " + objects.size());
         return getOrCreateRuntimeObject(object);
     }
     
@@ -149,7 +150,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
             getOrCreateRuntimeObject((FObject)it.next());
         }
     }
-    
+     
 
 	
 	private RuntimeObject getOrCreateRuntimeObject(FObject kcoreObject) {

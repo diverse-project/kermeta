@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.6 2005-05-18 23:49:05 ffleurey Exp $
+/* $Id: RunJunitFactory.java,v 1.7 2005-05-25 17:42:47 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : GPL
@@ -14,22 +14,18 @@ package fr.irisa.triskell.kermeta.launcher;
 
 import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.error.KermetaLoaderError;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestResult;
+import junit.framework.TestSuite;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestResult;
-import junit.framework.TestSuite;
 
 /**
  * Run a kermeta program as a Junit test It may return either a TestCase or a
@@ -74,7 +70,11 @@ public class RunJunitFactory implements Test {
         try {
             
             unit.load();
-            unit.typeCheck();
+            unit.typeCheck(null);
+            //System.err.println("Memory before : " + Runtime.getRuntime().totalMemory());
+            //unit.discardAllTraceabilityInfo();
+            //Runtime.getRuntime().gc();
+            //System.err.println("Memory after : " + Runtime.getRuntime().totalMemory());
             
             // get the main class to see if it inherits from class kermeta::kunit::Test
             boolean isTestSuite = false;

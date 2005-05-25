@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.6 2005-05-20 12:54:39 ffleurey Exp $
+/* $Id: KermetaInterpreter.java,v 1.7 2005-05-25 17:42:46 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -99,7 +99,7 @@ public class KermetaInterpreter {
 	        throw new KermetaInterpreterError(unit.getAllMessagesAsString());
 	    
 	    }
-	    unit.typeCheck();
+	    unit.typeCheck(null);
 	    if (unit.getAllErrors().size() > 0)
 	    {
 	        throw new KermetaInterpreterError(unit.getAllMessagesAsString());

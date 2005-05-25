@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.5 2005-05-13 16:41:11 ffleurey Exp $
+/* $Id: RunTestCase.java,v 1.6 2005-05-25 17:42:47 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : GPL
@@ -15,19 +15,14 @@
  */
 package fr.irisa.triskell.kermeta.launcher;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
@@ -60,15 +55,45 @@ public class RunTestCase extends TestCase {
 
     protected void setUp() throws java.lang.Exception {
         
-        if (interpreter == null) interpreter = new KermetaInterpreter(containerTestSuite.root_unit);
+        time = System.currentTimeMillis();
+        
+        nb_ro = RuntimeObject.getInstanceCounter();
+        
+        if (interpreter == null) {
+            System.err.println("Memory before interpreter : " + Runtime.getRuntime().totalMemory());
+            interpreter = new KermetaInterpreter(containerTestSuite.root_unit);
+            System.err.println("Memory after interpreter : " + Runtime.getRuntime().totalMemory());
+        }
         
         interpreter.setEntryPoint(mainClassValue, mainOperationValue);
 
     }
+    
+    protected int nb_ro;
+    protected long time;
 
     protected void tearDown() throws java.lang.Exception {
         // not needed anymore now
         containerTestSuite = null;
+       
+        //Runtime.getRuntime().gc();
+        
+        long total = Runtime.getRuntime().totalMemory();
+        long max = Runtime.getRuntime().maxMemory();
+        
+        time = System.currentTimeMillis() - time;
+        nb_ro = RuntimeObject.getInstanceCounter() - nb_ro;
+        
+        System.out.println("    ************************************************");
+        System.out.println("    * Consumed memory : " + total + "/" + max);
+        System.out.println("    * #objects cached : " +  interpreter.memory.getNumberOfObjectCached());
+        System.out.println("    * #ro created     : " + nb_ro);
+        System.out.println("    * #ro total       : " + RuntimeObject.getInstanceCounter());
+        System.out.println("    * time (ms)       : " + time);
+        System.out.println("    ************************************************");
+        
+       
+        
     }
 
     /**
