@@ -1,4 +1,4 @@
-/* $Id: KermetaNewProjectWizard.java,v 1.1 2005-05-24 17:07:35 zdrey Exp $
+/* $Id: KermetaNewProjectWizard.java,v 1.2 2005-05-25 17:28:05 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizard.java
  * License: GPL
@@ -11,21 +11,14 @@
  */
 package fr.irisa.triskell.kermeta.runner.wizards;
 
-import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
-
-import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 /**
  * The Wizard to create a new Kermeta project
@@ -52,21 +45,31 @@ public class KermetaNewProjectWizard extends Wizard implements INewWizard
 {
 	public static final String NEW_PROJECT_WIZARD_ID = ""; //$NON-NLS-1$
 
-	private KermetaNewProjectWizardPage fMainPage;
+	/** The main wizard page to create a Kermeta project */
+	protected KermetaNewProjectWizardPage newprojectPage;
 
-	/** Content and structure of the extension? */
-	private IConfigurationElement fConfigElement;
-
+	private CreateKermetaProjectWizard createWizard;
+	
 	private IWorkbench workbench;
 
 	private IStructuredSelection selection;
 
-	private String RuntimetllFolder;
+    private IProject newProject;
+
+    /** */
+    //private WizardDialog wizardDialog;
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle("New project creation wizard");
+		// This is eclipse IDE philosophy compliant...TODO : simplify?)
+		//setWizardDialog(new WizardDialog(getShell(), this));
+		newprojectPage = new KermetaNewProjectWizardPage(null); //$NON-NLS-1$
+		newprojectPage.setTitle("New K Project creation page");//$NON-NLS-1$
+		newprojectPage.setDescription("Define properties of Kermeta new project"); //$NON-NLS-1$
+		//newprojectPage.setWizardDialog(wizardDialog);
+		this.createWizard = new CreateKermetaProjectWizard(this, newprojectPage);
 	}
 
 	/**
@@ -75,18 +78,10 @@ public class KermetaNewProjectWizard extends Wizard implements INewWizard
 	 */
 	public void addPages() {
 		super.addPages();
-		fMainPage = new KermetaNewProjectWizardPage(null); //$NON-NLS-1$
-		fMainPage.setTitle("New K Project creation page");//$NON-NLS-1$
-		fMainPage.setDescription("Define properties of Kermeta new project"); //$NON-NLS-1$
-		addPage(fMainPage);
-
+		addPage(newprojectPage);
 	}
 
-	public void setInitializationData(IConfigurationElement config,
-			String propertyName, Object data) {
-		fConfigElement = config;
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -115,47 +110,17 @@ public class KermetaNewProjectWizard extends Wizard implements INewWizard
 	 * @return true created ok, false not ok
 	 */
 	public boolean finish(IProgressMonitor monitor) {
-		String RuntimeFilePath;
 
 		// create the new file resource
-		System.out.println("Click on Finish");
+		System.out.println("Click on Finish!!!!!!!!!!!!!!!!!!!!");
 
 		String sep = System.getProperty("file.separator");
-		IProject newProject = fMainPage.getProjectHandle();
+		newProject = newprojectPage.getProjectHandle();
 		if (newProject == null) {
 			return false;
 		}
-		// ie.- creation was unsuccessful
-
-		// Since the file resource was created fine, open it for editing
-		// if requested by the user
-		try
-		{
-			newProject.create(null);
-			newProject.open(null);
-			IFolder source = newProject.getFolder("src");
-			createFolder(source);
-			
-			//output folder
-			IFolder output = newProject.getFolder("bin");
-			createFolder(output);
-
-			//		model folder
-			IFolder model = newProject.getFolder("models");
-			createFolder(model);
-
-			//		metamodel folder
-			IFolder metamodel = newProject.getFolder("metamodels");
-			createFolder(metamodel);
-
-			// 		extern language folder
-			IFolder extern = newProject.getFolder("extern");
-			createFolder(extern);
-		}
-		catch (CoreException e)
-		{
-		    e.printStackTrace();
-		}
+		// FIXME : is it really the role of the Wizard page?
+		/*newprojectPage.createFolders();*/
 		return true;
 	}
 
@@ -170,6 +135,8 @@ public class KermetaNewProjectWizard extends Wizard implements INewWizard
 		folder.create(true, true, null);
 
 	}
+	
+	
 
 
 
@@ -188,10 +155,34 @@ public class KermetaNewProjectWizard extends Wizard implements INewWizard
 	 * <ul>
      * @see org.eclipse.jface.wizard.Wizard#performFinish()
      */
-    public boolean performFinish() {
-        return false;
+    public boolean performFinish()
+    {
+        return createWizard.performFinish();
     }
 
+    /**
+     * 
+     * @return the project that was created through this project wizard.
+     */
+    public IProject getProject() {    return newProject;    }
+    public IProject getNewProject() {    return newProject;    }
+    
+    public KermetaNewProjectWizardPage getNewProjectPage()  {
+        return newprojectPage;
+    }
 
+    /**
+     * Set newProject
+     * @param project
+     */
+    public void setNewProject(IProject project)
+    {
+        newProject = project;
+    }
+    
+   /* public void setWizardDialog(WizardDialog dialog) {
+        wizardDialog = dialog;
+    }*/
+    
     
 }

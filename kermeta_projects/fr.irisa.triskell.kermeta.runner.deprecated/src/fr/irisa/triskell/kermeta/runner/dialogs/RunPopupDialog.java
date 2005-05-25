@@ -1,4 +1,4 @@
-/* $Id: RunPopupDialog.java,v 1.5 2005-05-25 09:26:03 zdrey Exp $
+/* $Id: RunPopupDialog.java,v 1.6 2005-05-25 17:28:03 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: RunPopupDialog.java
  * License: GPL
@@ -9,22 +9,15 @@
  */
 package fr.irisa.triskell.kermeta.runner.dialogs;
 
-import java.util.Iterator;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.jface.dialogs.InputDialog;
 //import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
@@ -33,7 +26,6 @@ import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 
 /**

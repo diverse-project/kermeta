@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.5 2005-05-25 09:26:00 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.6 2005-05-25 17:28:07 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -50,6 +50,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
@@ -175,43 +176,55 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     /**
      * Fills the configuration that is launched with the values of the last configuration
      * (provided user saved it!)
+     * @param configuration The selected configuration
      * @see org.eclipse.debug.ui.ILaunchConfigurationTab#initializeFrom(org.eclipse.debug.core.ILaunchConfiguration)
      */
     public void initializeFrom(ILaunchConfiguration configuration)
     {
 //        ILaunchGroup group = DebugUITools.getLaunchGroup(configuration, LaunchManager.RUN_MODE);
-        System.out.println("RESOURCE:"+DebugUITools.getSelectedResource().getLocation().toOSString());
+        
         String selectedOperationString = "";
         if (DebugUITools.getSelectedResource()!=null)
-        {   
-            try
-            {   
-                selectedPath = DebugUITools.getSelectedResource().getLocation().toOSString();
-                selectedUnit = KermetaRunHelper.parse(selectedPath);
-                ArrayList point = KermetaRunHelper.setEntryPoint(selectedUnit);
-                selectedClassString = (String)point.get(0);
-                // note : not an attribute because other attr. do not depend on its value...
-                selectedOperationString = (String)point.get(1);
-            }
-            catch (Exception e)  // TODO : a kind of KermetaUnitException 
-            {
-                e.printStackTrace();
-                selectedPath = ""; selectedClassString = "";
-            }
+        {      
+           selectedPath = DebugUITools.getSelectedResource().getLocation().toOSString();
         }
         
-		try {
+		try
+		{
+		    String currentPath = configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
+            "");
+		    // If user created a new configuration ?
+		    currentPath = (currentPath.equals(""))?selectedPath:currentPath;
+		    
+		    // Create the Unit corresponding to the chosen Kermeta file
+		    // (either the SelectedResource one, or the path of current configuration)
+		    selectedUnit = KermetaRunHelper.parse(currentPath);
+		    ArrayList point = KermetaRunHelper.setEntryPoint(selectedUnit);
+		    selectedClassString = (String)point.get(0);
+		    selectedOperationString = (String)point.get(1);
+		    
+		    
             getSharedLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
-                    selectedPath));
+                    currentPath));
        
             getclassNameText().setText(
-                    configuration.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME,selectedClassString));
+                    configuration.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME,
+                            selectedClassString));
             getOperationNameText().setText(
-                    configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,selectedOperationString));
-		 } catch (CoreException e) {
-	            // TODO Auto-generated catch block
-	            e.printStackTrace();
-	        }        
+                    configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,
+                            selectedOperationString));
+		}
+		catch (CoreException e)
+		{
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+		catch (Exception e)
+		{
+		    System.err.println("Excetpion : the KermetaUnit for selected file could" +
+		    		"probably not be loaded");
+		    e.printStackTrace();
+		}
 
     }
 
@@ -257,30 +270,13 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      */
     public Composite createFileLayout(Composite parent, Font font)
     {
-        GridLayout locationLayout = new GridLayout();
-        locationLayout.numColumns = 2;
-        locationLayout.marginHeight = 0;
-        locationLayout.marginWidth = 0;
-        parent.setLayout(locationLayout);
+        createInputTextLayout(parent, "Set the location of your Kermeta file");
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-        parent.setLayoutData(gd);
-        parent.setFont(font);
-        
-        setSharedLocationLabel(new Label(parent, SWT.NONE));
-        getSharedLocationLabel().setText("Location of Kermeta"); //$NON-NLS-1$
-        gd = new GridData();
-        gd.horizontalSpan = 2;
-        getSharedLocationLabel().setLayoutData(gd);
-        getSharedLocationLabel().setFont(font);
         
         setSharedLocationText(new Text(parent, SWT.SINGLE | SWT.BORDER));
-        
-        gd = new GridData(GridData.FILL_HORIZONTAL);
         getSharedLocationText().setLayoutData(gd);
         getSharedLocationText().setFont(font);
-        
         getSharedLocationText().addModifyListener(fBasicModifyListener);
-        
         setSharedLocationButton(createPushButton(parent, "Browse", null));	 //$NON-NLS-1$
         getSharedLocationButton().addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent evt) {
@@ -449,6 +445,14 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         
         // TODO Handle null pointer exception
 //        List classDefinitionList = createClassList(getShell(), selectedUnit);
+        // The selectedUnit can be null when trying to run new configurations
+        // Try to load it again.
+/*        if (selectedUnit == null)
+        {
+            
+        }
+
+        */        
         EList typedefs = selectedUnit.rootPackage.getFOwnedTypeDefinition();
         ArrayList qnameList = new ArrayList(typedefs.size());
         for (int i=0; i<typedefs.size(); i++)

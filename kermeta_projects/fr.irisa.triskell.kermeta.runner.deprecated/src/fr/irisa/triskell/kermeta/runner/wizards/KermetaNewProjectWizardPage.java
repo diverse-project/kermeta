@@ -1,4 +1,4 @@
-/* $Id: KermetaNewProjectWizardPage.java,v 1.1 2005-05-24 17:07:35 zdrey Exp $
+/* $Id: KermetaNewProjectWizardPage.java,v 1.2 2005-05-25 17:28:04 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizardPage.java
  * License: GPL
@@ -12,22 +12,18 @@
 
 package fr.irisa.triskell.kermeta.runner.wizards;
 
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.SWT;
-import org.eclipse.core.internal.runtime.Assert;
-import org.eclipse.core.resources.*;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.events.*;
-import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
-import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.*;
+import org.eclipse.jface.wizard.WizardDialog;
 
 /**
  * The "New" wizard page allows setting the container for
@@ -37,9 +33,28 @@ import org.eclipse.jface.viewers.*;
  */
 
 public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
-{
+{ 
+    // 
+    protected WizardDialog wizardDialog;
+    
+    /** true if user uses the default metamodel/model/output folders, false otherwise */
+    public boolean useDefaultFolders = true;
+    protected Button useDefaultFoldersButton;
+    
+    // Widgets
+    protected Text modelLocationText;
+    protected Text mmodelLocationText;
+    protected Text srcLocationText;
+    protected Text binLocationText;
+    
+    // Labels
+    protected Label modelLocationLabel;
+    protected Label mmodelLocationLabel;
+    protected Label srcLocationLabel;
+    protected Label binLocationLabel;
+    
 	/**
-	 * Constructor for SampleNewWizardPage.
+	 * Constructor for KermetaNewWizardPage.
 	 * @param pageName
 	 */
 	public KermetaNewProjectWizardPage(ISelection selection) {
@@ -48,7 +63,194 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
 		setDescription("This wizard creates a new project");
 		
 	}
+	
+    /**
+     * Create the layout of this page
+     * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
+     */
+    public void createControl(Composite parent) {
+        // Super method contains the following widgets : 
+        // The text field for the project name
+        // The text field for the project location (default or user defined)
+        super.createControl(parent);
+        Composite composite = (Composite)getControl();
+        createDefaultFoldersRadioButton(composite);
+        
+    }
+    /**
+     * Create the radio button and the box fields to define the folders
+     * models/metamodels/src/bin
+     * @param parent
+     */
+    protected void createDefaultFoldersRadioButton(Composite parent)
+    {
+        
+        Font font = parent.getFont();
+        // project specification group
+        Group folderGroup = new Group(parent, SWT.NONE);
+        GridLayout layout = new GridLayout(2,false);
+        folderGroup.setLayout(layout);
+        folderGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+        folderGroup.setFont(font);
+        folderGroup.setText("Set default folders"); //$NON-NLS-1$
+        
+        final Button useDefaultFoldersButton =
+            new Button(folderGroup, SWT.CHECK | SWT.RIGHT);
+        useDefaultFoldersButton.setText(IDEWorkbenchMessages.getString("Use default folder values")); //$NON-NLS-1$
+        useDefaultFoldersButton.setSelection(useDefaultFolders);
+        useDefaultFoldersButton.setFont(font);
+        
+        GridData buttonData = new GridData();
+        buttonData.horizontalSpan = 3;
+        useDefaultFoldersButton.setLayoutData(buttonData);
+        
+        createUserSpecifiedFolderLocationGroup(folderGroup, !useDefaultFolders);
+        
+        SelectionListener listener = new SelectionAdapter() {
+            public void widgetSelected(SelectionEvent e) {
+                useDefaultFolders = useDefaultFoldersButton.getSelection();
+                setLocationFoldersEnabled(!useDefaultFolders);
+                if (useDefaultFolders) {
+                    setLocationFoldersForSelection();
+                } else {
+                    // User choice
+                }
+            }
+        };
+        useDefaultFoldersButton.addSelectionListener(listener);
+        
+    }
+    
+    /**
+     * Enable/Disable the default folder location fields
+     * */
+    protected void setLocationFoldersEnabled(boolean b)
+    {
+        modelLocationText.setEnabled(b);
+        modelLocationLabel.setEnabled(b);
+        srcLocationLabel.setEnabled(b);
+        srcLocationText.setEnabled(b);
+        mmodelLocationText.setEnabled(b);
+        mmodelLocationLabel.setEnabled(b);
+        binLocationLabel.setEnabled(b);
+        binLocationText.setEnabled(b);
+    }
 
-	
-	
+    protected void setLocationFoldersForSelection()
+    {
+		if (useDefaultFolders)
+		{
+			mmodelLocationText.setText("metamodels");
+			modelLocationText.setText("models");
+			srcLocationText.setText("src");
+			binLocationText.setText("bin");
+		}
+    }
+
+
+    /**
+     * Create the 
+     * @param folderGroup
+     * @param b
+     */
+    private void createUserSpecifiedFolderLocationGroup(Group folderGroup, boolean b) {
+        
+		Font font = folderGroup.getFont();
+
+		// metamodels location label
+		mmodelLocationLabel = createLocationLabel(folderGroup, "Metamodel location", b, font);
+		mmodelLocationText = createLocationText(folderGroup, b, font, "metamodels");
+
+		// models location label
+		modelLocationLabel = createLocationLabel(folderGroup, "Model location", b, font);
+		modelLocationText = createLocationText(folderGroup, b, font, "models");
+
+		// source location label
+		srcLocationLabel = createLocationLabel(folderGroup, "Transformation source location", b, font);
+		srcLocationText = createLocationText(folderGroup, b, font, "src");
+		
+		// source location label
+		binLocationLabel = createLocationLabel(folderGroup, "Compiled files location", b, font);
+		binLocationText = createLocationText(folderGroup, b, font, "build");
+        
+    }
+    
+    protected Label createLocationLabel(Group folderGroup, String label, boolean enabled, Font font)
+    {
+        Label _locationLabel = new Label(folderGroup, SWT.NONE);
+		_locationLabel.setText(label); //$NON-NLS-1$
+		_locationLabel.setEnabled(enabled);
+		_locationLabel.setFont(font);
+		return _locationLabel;
+    }
+
+    protected Text createLocationText(Group folderGroup, boolean enabled, Font font, String defaultValue)
+    {
+        Text _locationText = new Text(folderGroup, SWT.BORDER);
+        GridData data = new GridData(GridData.FILL_HORIZONTAL);
+        //data.widthHint = SIZING_TEXT_FIELD_WIDTH;
+        _locationText.setLayoutData(data);
+        _locationText.setEnabled(enabled);
+        _locationText.setFont(font);
+        _locationText.setText(defaultValue);
+        return _locationText;
+    }
+    
+    /**
+     * Invoked when user clicks on "Finish" button
+     *
+     */
+    protected void createFolders(IProject newProject)
+    {	
+        try
+        {   
+            //output folder
+            IFolder output = newProject.getFolder(binLocationText.getText());
+            createFolder(output);
+            //		model folder
+            IFolder model = newProject.getFolder(modelLocationText.getText());
+            createFolder(model);
+            //		metamodel folder
+            IFolder metamodel = newProject.getFolder(mmodelLocationText.getText());
+            createFolder(metamodel);
+            //	   source folder
+            IFolder src = newProject.getFolder(srcLocationText.getText());
+            createFolder(src);
+        }
+        catch (CoreException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    
+	/**
+	 * helper method that recusrively create the requested folder
+	 * 
+	 * @param folder
+	 */
+	private void createFolder(IFolder folder) throws CoreException {
+		if (!folder.getParent().exists())
+			createFolder((IFolder) folder.getParent());
+		folder.create(true, true, null);
+	}
+
+    /* (non-Javadoc)
+     * @see org.eclipse.ui.dialogs.WizardNewProjectCreationPage#setInitialProjectName(java.lang.String)
+     */
+    public void setInitialProjectName(String name) {
+        // TODO Auto-generated method stub
+        super.setInitialProjectName(name);
+    }
+    
+    /**
+     * Set the dialog to this page : the container in fact
+     * @param dialog
+     */
+/*    public void setWizardDialog(WizardDialog dialog)    {
+        wizardDialog = dialog;
+    }*/
+    
+    
 }
