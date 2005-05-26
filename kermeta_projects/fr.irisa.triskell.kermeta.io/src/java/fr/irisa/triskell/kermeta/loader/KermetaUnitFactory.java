@@ -14,8 +14,9 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.error.KermetaLoaderError;
+import fr.irisa.triskell.kermeta.loader.ecore.KMLoaderModuleECore;
 import fr.irisa.triskell.kermeta.loader.emfatic.KMLoaderModuleEmfatic;
-import fr.irisa.triskell.kermeta.loader.km.KMLoaderModuleMCore;
+import fr.irisa.triskell.kermeta.loader.km.KMLoaderModuleKM;
 import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
 
 import org.apache.log4j.Logger;
@@ -36,8 +37,9 @@ public class KermetaUnitFactory {
 		if (defaultLoader == null) {
 			defaultLoader = new KermetaUnitFactory();
 			defaultLoader.loadModules.put("emf", new KMLoaderModuleEmfatic());
-			defaultLoader.loadModules.put("km", new KMLoaderModuleMCore());
+			defaultLoader.loadModules.put("km", new KMLoaderModuleKM());
 			defaultLoader.loadModules.put("kmt", new KMLoaderModuleMCT());
+			defaultLoader.loadModules.put("ecore", new KMLoaderModuleECore());
 		}
 		return defaultLoader;
 	}

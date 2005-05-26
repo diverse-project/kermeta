@@ -1,4 +1,4 @@
-/* $Id: EcoreUnit.java,v 1.1 2005-05-26 15:40:52 ffleurey Exp $
+/* $Id: EcoreUnit.java,v 1.2 2005-05-26 22:39:09 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : EcoreUnit.java
 * License : GPL
@@ -11,6 +11,8 @@
 package fr.irisa.triskell.kermeta.loader.ecore;
 
 import java.util.Hashtable;
+
+import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
@@ -27,14 +29,21 @@ public class EcoreUnit extends KermetaUnit {
      */
     public EcoreUnit(String uri, Hashtable packages) {
         super(uri, packages);
+        ECore2Kermeta.loadunit(this);
+    }
+    
+    public EcoreUnit(Resource resource, Hashtable packages) {
+        super(resource.getURI().toString(), packages);
+        ECore2Kermeta.loadunit(this, resource);
     }
 
     /**
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#preLoad()
      */
     public void preLoad() {
-        // TODO Auto-generated method stub
-
+    	
+    	
+    	
     }
 
     /* (non-Javadoc)

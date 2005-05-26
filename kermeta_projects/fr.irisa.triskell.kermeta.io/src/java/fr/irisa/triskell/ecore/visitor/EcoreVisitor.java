@@ -10,6 +10,9 @@ import java.lang.reflect.*;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.*;
+import org.eclipse.emf.ecore.impl.EcorePackageImpl;
+
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * @author Franck Fleurey
@@ -36,6 +39,11 @@ public class EcoreVisitor {
 				try {
 					Class[] ptypes = new Class[1];
 					cname = node.getClass().getName();
+					
+					if ( cname.equals("org.eclipse.emf.ecore.impl.EcorePackageImpl") ) {
+						cname = "org.eclipse.emf.ecore.impl.EPackageImpl";
+					}
+					
 					cname = cname.substring(0, cname.length()-4).replaceAll(".impl", "");
 					ptypes[0] = Class.forName(cname);
 					Method m = this.getClass().getMethod("visit", ptypes);
@@ -44,7 +52,13 @@ public class EcoreVisitor {
 					params[0] = node;
 					result = m.invoke(this, params);
 				}
+				catch (NoSuchMethodException e) {
+					KermetaUnit.internalLog.error("NoSuchMethodException during accept");
+					KermetaUnit.internalLog.error("Class of the node : " + node.getClass().getName(), e);
+					throw new Error(e);
+				}
 				catch (Exception e) {
+					
 				    throw new Error(e);
 				}
 				return result;
