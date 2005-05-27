@@ -1,4 +1,4 @@
-/* $Id: SelectionListDialog.java,v 1.1 2005-05-23 13:18:42 zdrey Exp $
+/* $Id: SelectionListDialog.java,v 1.2 2005-05-27 15:06:25 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: SelectionListDialog.java
  * License: GPL
@@ -9,8 +9,6 @@
  */
 package fr.irisa.triskell.kermeta.runner.dialogs;
 
-//import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -21,9 +19,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 
 /**
  * 
