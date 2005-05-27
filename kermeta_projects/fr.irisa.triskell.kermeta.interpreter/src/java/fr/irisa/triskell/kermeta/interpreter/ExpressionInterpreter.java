@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.8 2005-05-25 17:42:49 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.9 2005-05-27 14:31:03 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -52,6 +52,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
@@ -146,21 +147,24 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	
 	
     public Object visit(FTypeLiteral arg0) {
-        
-        FClass c = (FClass)((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(arg0.getFTyperef())).getType();
-        
-        // FIXME : Type variables should be handled here (substitutions of variables)
-        if (c.getFTypeParamBinding().size() != 0) {
-        
-            FClass self_class = (FClass)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
-            
-            c = (FClass)TypeVariableEnforcer.getBoundType(c, interpreterContext.peekCallFrame().getTypeParameters());
-            
+        RuntimeObject result = null;
+        FType t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(arg0.getFTyperef())).getType();
+       
+        if (t instanceof FClass) {
+	        FClass c = (FClass)t;
+	        // FIXME : Type variables should be handled here (substitutions of variables) done ?
+	        if (c.getFTypeParamBinding().size() != 0) {
+	            FClass self_class = (FClass)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
+	            c = (FClass)TypeVariableEnforcer.getBoundType(c, interpreterContext.peekCallFrame().getTypeParameters());
+	            
+	        }    
+	        result = memory.getROFactory().createMetaClass(c);
+        }
+        else {
+            // It is an ennumeration
+            result = memory.getRuntimeObjectForFObject(t);
         }
         
-
-        
-        RuntimeObject result = memory.getROFactory().createMetaClass(c);
         return result;
     }
     
@@ -231,7 +235,17 @@ public class ExpressionInterpreter extends KermetaVisitor {
 			SimpleType expectedType = new SimpleType(r);
 			FClass p = (FClass)rhs_value.getMetaclass().getData().get("kcoreObject");
 			SimpleType providedtype = new SimpleType(p);
-			if (!providedtype.isSubTypeOf(expectedType)) {
+			
+			if (r instanceof FEnumeration) {
+			    FEnumeration enum = (FEnumeration)r;
+			    if (enum.getFOwnedLiteral().contains(rhs_value.getData().get("kcoreObject"))) {
+			        // It is OK
+			    }
+			    else {
+			        rhs_value = memory.voidINSTANCE;
+			    }
+			}
+			else if (!providedtype.isSubTypeOf(expectedType)) {
 				rhs_value = memory.voidINSTANCE;
 			}
 		}
@@ -551,8 +565,14 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	
 	
 	public Object visit(FCallFeature node) {
-	    boolean isFeatured = false;
-	   
+	    
+	    // Handle call to enumeration literals :
+	    if (node.getFStaticEnumLiteral() != null) {
+	        return memory.getRuntimeObjectForFObject(node.getFStaticEnumLiteral());
+	    }
+	    
+	    // It is a real operation / property call
+	    
 	    FClass t_target = null; // Type of the "callee"
 	    RuntimeObject result = null; // The result to be returned by this visit
 	    RuntimeObject ro_target = null; // Runtime repr. of target

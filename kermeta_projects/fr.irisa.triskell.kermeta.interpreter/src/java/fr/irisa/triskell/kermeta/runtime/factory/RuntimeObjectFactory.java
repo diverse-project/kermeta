@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.4 2005-05-25 17:43:32 ffleurey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.5 2005-05-27 14:31:02 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -151,12 +151,15 @@ public class RuntimeObjectFactory {
 	            binding_type = ((FPrimitiveType)binding_type).getFInstanceType();
 	        }
 	        
-	        if (!(binding_type instanceof FClass)) {
-	            throw new Error("INTERNAL ERROR : parametric classes should only be parametrized by classes.");
-	        }
-	        
 	        RuntimeObject ro_var = (RuntimeObject)memory.getRuntimeObjectForFObject((FObject)fclass.getFClassDefinition().getFTypeParameter().get(i));
-	        RuntimeObject ro_type = createMetaClass((FClass)binding_type);
+	        RuntimeObject ro_type = null;
+	        if (binding_type instanceof FClass) {
+	            ro_type = createMetaClass((FClass)binding_type);
+	        }
+	        else {
+	            // it is an enum
+	            ro_type = memory.getRuntimeObjectForFObject(binding_type);
+	        }
 	        
 	        RuntimeObject ro_binding = createObjectFromClassName("kermeta::language::structure::TypeVariableBinding");
 	        ro_binding.getData().put("kcoreObject", binding);

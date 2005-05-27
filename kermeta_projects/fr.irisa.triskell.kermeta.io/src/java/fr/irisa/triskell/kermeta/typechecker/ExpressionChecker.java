@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.11 2005-05-27 09:25:27 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.12 2005-05-27 14:30:48 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -318,6 +318,12 @@ public class ExpressionChecker extends KermetaVisitor {
 	    Type provided_type = getTypeOfExpression(expression.getFValue());
 	    
 	    if (expression.isFIsCast()) {
+	        
+	        // Allow casting ennumeration literals in Enum values
+	        if (targetType.getFType() instanceof FEnumeration && provided_type.isSubTypeOf(TypeCheckerContext.EnumLitType) ) {
+	            return targetType;
+	        }
+	        
 	        if (provided_type.isSubTypeOf(targetType)) {
 	            unit.error.add(new KMUnitWarning("TYPE-CHECKER : Unecessary cast, it shmoud be a regular assignment", expression));
 	            return provided_type;
@@ -413,16 +419,19 @@ public class ExpressionChecker extends KermetaVisitor {
 				FEnumerationLiteral l = (FEnumerationLiteral)it.next();
 				if (l.getFName().equals(expression.getFName())) lit = l;
 			}
-			if (lit == null) {
-				unit.error.add(new KMUnitError("TYPE-CHECKER : cannot resolve enumeration literal " + expression.getFName() + " in enumetation " + enum.getFName() + ".",expression));
-			    result = TypeCheckerContext.VoidType;
-			}
-			else {
-				expression.setFStaticEnumLiteral(lit);
+			if (lit != null) {
+			    expression.setFStaticEnumLiteral(lit);
 				result = new SimpleType(enum);
 			}
 		}
-		else {
+		
+		if (result == null) {
+		    
+		    // It the target type is an ennumeration, the object should be an ennumeration literal
+		    if (expression.getFTarget() != null && target.getFType() instanceof FEnumeration) {
+		        target = TypeCheckerContext.EnumLitType;
+		    }
+		    
 			// Is it an operation call
 			CallableOperation op = target.getOperationByName(expression.getFName());
 			if (op != null) {
@@ -439,7 +448,10 @@ public class ExpressionChecker extends KermetaVisitor {
 			}
 			if (result == null) {
 			    // The feature was not found
-			    unit.error.add(new KMUnitError("TYPE-CHECKER : cannot resolve feature " + expression.getFName() + " in type " + target.toString() + ".",expression));
+			    if (enum != null)
+			        unit.error.add(new KMUnitError("TYPE-CHECKER : cannot resolve enumeration literal " + expression.getFName() + " in enumetation " + enum.getFName() + ".",expression));
+			    else
+			        unit.error.add(new KMUnitError("TYPE-CHECKER : cannot resolve feature " + expression.getFName() + " in type " + target.toString() + ".",expression));
 			    result = TypeCheckerContext.VoidType;
 			}
 		}

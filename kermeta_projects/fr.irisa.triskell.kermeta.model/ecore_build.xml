@@ -66,8 +66,13 @@
 		<echo> Done. </echo>
 	</target>
 	
-	
-
+	<target name="build_ecore_visitor">
+	<echo> Generating visitor... </echo>
+			<mkdir dir="src/java/fr/irisa/triskell/ecore/visitor"/>
+			<java classname="fr.irisa.triskell.kermeta.dev.model.CreateGenericVisitor" fork="yes" classpathref="full.classpath">
+				<arg line="${src.dir}/Ecore.ecore fr.irisa.triskell.ecore.visitor ./src/java/fr/irisa/triskell/ecore/visitor Ecore"/>
+			</java> 
+	</target>
 	
 	
 </project>

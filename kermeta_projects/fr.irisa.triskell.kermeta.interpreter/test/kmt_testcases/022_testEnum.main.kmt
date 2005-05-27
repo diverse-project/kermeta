@@ -1,0 +1,158 @@
+
+@mainClass "testEnum::TestEnum"
+@mainOperation "testCompareLiteral"
+
+package testEnum;
+
+require kermeta
+
+using kermeta::standard
+
+enumeration Couleur {
+	jaune;
+	bleu;
+	vert;
+	rouge;
+}
+
+enumeration Jour {
+	lundi;
+	mardi;
+	mercredi;
+	jeudi;
+}
+
+
+class TestEnum inherits kermeta::kunit::Test {
+	
+	operation testCompareLiteral() : Couleur is
+	do
+		assert(Couleur.jaune == Couleur.jaune)
+		assert(Couleur.jaune != Couleur.bleu)
+		assert(Couleur.jaune != Jour.lundi)
+	end
+	
+	operation testAssignVar() is do
+		var c : Couleur
+		assert(c == void)
+		c := Couleur.rouge
+		assert(c == c)
+		assert(c == Couleur.rouge)
+		assert(c != Couleur.jaune)
+		c := Couleur.vert
+		assert(c == Couleur.vert)
+		c := void
+		assert(c == void)
+		assert(c != Couleur.jaune)
+	end
+	
+	operation testGeneric() is do
+		var titi : Titi<Couleur> init Titi<Couleur>.new
+		titi.titi := Couleur.rouge
+		assert(titi.titi == Couleur.rouge)
+		
+	end
+	
+	operation testGenericParameter() is do
+		var titi : Titi<Couleur> init Titi<Couleur>.new
+		assert(titi.setTiti( Couleur.rouge ) == Couleur.rouge)
+		assert(titi.titi == Couleur.rouge)
+	end
+	
+	operation testGenericOperation() is do
+		assert(identity(Couleur.rouge) == Couleur.rouge)
+		var c : Couleur init Couleur.vert
+		assert(identity(c) == Couleur.vert)
+	end
+	
+	operation testCollection() is do
+	
+		var c : Couleur[*]
+		
+		c := OrderedSet<Couleur>.new
+		assert(c.size == 0)
+		
+		c.add(Couleur.rouge)
+		c.add(Couleur.vert)
+		
+		assert(c.size == 2)
+		
+		stdio.writeln(Couleur.rouge.toString)
+		
+		c.each{ lit | stdio.writeln(lit.name)}
+		
+		assert(c.contains(Couleur.vert))
+		
+		assert(not c.contains(Couleur.bleu))
+		c.remove(Couleur.rouge)
+		assert(c.size == 1)
+		assert(not c.contains(Couleur.rouge))
+	
+	end
+	
+	operation testCast1() is do
+		var o : Object init Couleur.bleu
+		var c : Couleur
+		c ?= o
+		assert(c == Couleur.bleu)
+	end
+	
+	operation testCast2() is do
+		var o : Object init Jour.lundi
+		var c : Couleur
+		c ?= o
+		assert(c == void)
+	end
+	
+	operation testReflect() is do
+		var p : kermeta::reflection::Package   
+		var e : kermeta::reflection::Enumeration
+		var jaune : kermeta::reflection::EnumerationLiteral
+		
+		p ?= self.getMetaClass.classDefinition.container
+		e ?= p.ownedTypeDefinition.select{ t | t.name == "Couleur" }.one
+		jaune := e.ownedLiteral.select{ l | l.name == "jaune" }.one
+		
+		assert(jaune == Couleur.jaune)
+		 
+		var c : Couleur
+		
+		c ?= jaune
+		
+		assert(c == Couleur.jaune)
+		
+		var j : Jour
+		j ?= jaune
+		
+		assert(j == void)
+		
+	end
+	
+	operation testOpCall() is do
+		assert(op(Couleur.jaune) == Couleur.jaune)
+		var c : Couleur init Couleur.vert
+		assert(c == Couleur.vert)
+	end
+	
+	operation op(c : Couleur) : Couleur is do
+		result := c
+	end
+	
+	operation identity<T>(p : T) : T is do
+		result := p
+	end
+   
+}
+
+class Titi<G> {
+
+	attribute titi : G
+	
+	operation setTiti(p : G) : G is do
+		titi := p
+		result := titi
+	end
+	
+	
+}
+

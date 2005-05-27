@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.10 2005-05-25 17:43:33 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.11 2005-05-27 14:31:11 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -41,7 +41,7 @@ public class JunitTestSuite extends TestSuite {
 		KermetaUnit.STD_LIB_URI = "lib/framework.km";
 
 		// do not modify this comment
-/*** BEGIN GENERATED TESTS ***/
+/*** BEGIN GENERATED TESTS ***//*
 		testWithFile("test/kmt_testcases","2_testArithm.main.kmt" );
 
 		testWithFile("test/kmt_testcases","1_testAssignment.main.kmt" );
@@ -105,6 +105,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/kmt_testcases","testSequence.main.kmt" );
 
 		testWithFile("test/kmt_testcases","testFrameworkToString.main.kmt" );
+*/
+		testWithFile("test/kmt_testcases","22_testEnum.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment

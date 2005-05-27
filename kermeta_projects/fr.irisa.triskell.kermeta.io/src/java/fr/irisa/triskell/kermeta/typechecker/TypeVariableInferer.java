@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.9 2005-05-27 09:25:29 ffleurey Exp $
+/* $Id: TypeVariableInferer.java,v 1.10 2005-05-27 14:30:48 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableInferer.java
 * License : GPL
@@ -105,7 +105,7 @@ public class TypeVariableInferer extends KermetaVisitor {
 	    
 	    if (provided instanceof FVoidType) return null;
 	    
-	    if (TypeEqualityChecker.equals(arg0, TypeCheckerContext.ObjectType.getFType())) {
+	    if (TypeConformanceChecker.conforms(TypeCheckerContext.ObjectType.getFType(), arg0)) {
 	    	if (provided instanceof FEnumeration) return null;
 	    }
 	    

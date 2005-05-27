@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.9 2005-05-27 09:25:25 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.10 2005-05-27 14:30:48 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : GPL
@@ -46,7 +46,8 @@ public class TypeCheckerContext {
 	    ObjectType = createTypeForClassDefinition("kermeta::language::structure::Object", std_lib);
 	    
 	    ClassType = createTypeForClassDefinition("kermeta::language::structure::Class", std_lib);
-	    EnumType = createTypeForClassDefinition("kermeta::language::structure::Enumeration", std_lib);
+	    EnumType = createTypeForClassDefinition("kermeta::reflection::Enumeration", std_lib);
+	    EnumLitType = createTypeForClassDefinition("kermeta::reflection::EnumerationLiteral", std_lib);
 	    VoidType = createTypeForClassDefinition("kermeta::standard::Void", std_lib);
 	    IntegerType = createTypeForClassDefinition("kermeta::standard::Integer", std_lib);
 	    StringType = createTypeForClassDefinition("kermeta::standard::String", std_lib);
@@ -110,6 +111,7 @@ public class TypeCheckerContext {
 	//protected static Type ReflectionObject;
 	protected static Type ClassType;
 	protected static Type EnumType;
+	protected static Type EnumLitType;
 	protected static Type VoidType;
 	protected static Type IntegerType;
 	protected static Type StringType;
