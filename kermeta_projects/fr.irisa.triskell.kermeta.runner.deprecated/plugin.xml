@@ -37,7 +37,47 @@
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.intro"/>
 	  <import plugin="fr.irisa.triskell.kermeta"/>
+   <import plugin="org.eclipse.pde"/>
    </requires>
+      <extension
+      
+            id="KermetaPerspectives"
+            name="kermetaPerspectives"
+            point="org.eclipse.ui.perspectives">
+         <perspective
+               class="fr.irisa.triskell.kermeta.runner.perspective.KermetaPerspective"
+               icon="icons/kermeta_logo.gif"
+               name="Kermeta Perspective"
+               id="kermetaPerspective"/>
+      </extension>
+      <extension
+            point="org.eclipse.ui.perspectiveExtensions">
+         <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
+            <newWizardShortcut id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"/>
+            <viewShortcut id="org.eclipse.jdt.ui.TypeHierarchy"/>
+            <perspectiveShortcut id="org.eclipse.debug.ui.DebugPerspective"/>
+            <actionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
+            <view
+                  ratio="0.5"
+                  relationship="left"
+                  relative="org.eclipse.ui.views.ResourceNavigator"
+                  id="org.eclipse.jdt.ui.PackageExplorer"/>
+            <perspectiveShortcut id="kermetaPerspective"/>
+         </perspectiveExtension>
+         <perspectiveExtension targetID="kermetaPerspective">
+            <newWizardShortcut id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"/>
+            <newWizardShortcut id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"/>
+            <actionSet id="org.eclipse.debug.ui.launchActionSet"/>
+            <actionSet id="kermetaActionSet"/>
+        <showInPart
+               id="org.eclipse.ui.views.ResourceNavigator">
+         </showInPart>
+         <showInPart
+               id="org.eclipse.jdt.ui.PackageExplorer">
+         </showInPart>
+         <perspectiveShortcut id="org.eclipse.ui.resourcePerspective"/>
+         </perspectiveExtension>
+      </extension>
 
    <extension point="org.eclipse.ui.popupMenus">
       <objectContribution
@@ -49,7 +89,7 @@
                path="additions"
                id="fr.irisa.triskell.kermeta.runner.menu1">
             <separator
-                  name="group1">
+                  >
             </separator>
          </menu>
          <action
@@ -60,6 +100,9 @@
                id="fr.irisa.triskell.kermeta.runner.newAction">
          </action>
       </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IProject"
+            id="org.inria.mtl.popIproject"/>
    </extension>
    <!-- Extension point for the Kermeta Run menu item in the Run properties -->
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
@@ -88,31 +131,6 @@
    </extension> 
  
    <!-- Perspective -->
-      <extension
-            point="org.eclipse.ui.perspectiveExtensions">
-         <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
-            <newWizardShortcut id="org.eclipse.jdt.ui.wizards.NewProjectCreationWizard"/>
-            <viewShortcut id="org.eclipse.jdt.ui.TypeHierarchy"/>
-            <perspectiveShortcut id="org.eclipse.debug.ui.DebugPerspective"/>
-            <actionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
-            <view
-                  ratio="0.5"
-                  relationship="left"
-                  relative="org.eclipse.ui.views.ResourceNavigator"
-                  id="org.eclipse.jdt.ui.PackageExplorer"/>
-         </perspectiveExtension>
-      </extension>
-      <extension
-      
-            id="KermetaPerspective"
-            name="kermetaPerspective"
-            point="org.eclipse.ui.perspectives">
-         <perspective
-               class="fr.irisa.triskell.kermeta.runner.perspective.KermetaPerspectiveFactory"
-               icon="icons/kermeta_logo.gif"
-               name="Kermeta Perspective"
-               id="kermetaPerspective"/>
-      </extension>
       <extension
             point="org.eclipse.debug.ui.launchGroups">
          <launchGroup
@@ -144,22 +162,27 @@
                name="Kermeta"
                id="KermetaWizard"/>
          <wizard
-               finalPerspective="KermetaPerspective"
-               class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard"
                icon="icons/kermeta.png"
+               class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard"
+               finalPerspective="kermetaPerspective"
+               category="KermetaWizard"
                descriptionImage="icons/kermeta.png"
-               category="KermetaWizard"
-               name="New K. file"
-               id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard"/>
-         <wizard
-               finalPerspective="KermetaPerspective"
-               icon="icons/tree_package.gif"
-               class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"
-               descriptionImage="icons/tree_package.gif"
-               category="KermetaWizard"
                project="true"
+               preferredPerspectives="org.eclipse.ui.resourcePerspective"
+               name="New K. file"
+               id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"/>
+         <wizard
+               class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"
+               icon="icons/tree_package.gif"
+               finalPerspective="kermetaPerspective"
+               category="KermetaWizard"
+               descriptionImage="icons/tree_package.gif"
+               project="true"
+               preferredPerspectives="org.eclipse.jdt.ui.JavaPerspective,org.eclipse.ui.resourcePerspective"
                name="New K. project"
-               id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"/>
+               id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard">
+            <selection class="org.eclipse.core.resources.IProject"/>
+         </wizard>
       </extension>
       <extension
             point="org.eclipse.debug.core.sourceLocators">
@@ -168,6 +191,47 @@
                name="fr.irisa.triskell.kermeta.runner.kermetaSourceLocator"
                id="kermetaSourceLocator"/>
       </extension>
+      <extension
+            id="kermetaActionSets"
+            point="org.eclipse.ui.actionSets">
+         <actionSet
+               label="fr.irisa.triskell.kermeta.runner.actions.actionSet"
+               visible="false"
+               id="kermetaActionSet">
+            <action
+                  toolbarPath="Normal"
+                  label="newFileAction"
+                  icon="icons/tree_package.gif"
+                  class="fr.irisa.triskell.kermeta.runner.actions.KermetaNewFileWizardAction"
+                  tooltip="Create a new K. File"
+                  id="newFileAction">
+            </action>
+         </actionSet>
+      </extension>
+      <!-- Popup menu-->
+      <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            objectClass="org.eclipse.core.resources.IProject"
+            id="popIProject">
+         <menu
+               label="KermetaMenu"
+               path="group.new"
+               id="kermetaPopupMenu">
+            <separator
+                  name="kermetaPopupMenu/additions">
+            </separator>
+         </menu>
+         <action
+               label="New fucking file"
+               icon="icons/kermeta.png"
+               class="fr.irisa.triskell.kermeta.runner.actions.KermetaNewFileWizardAction"
+               menubarPath="kermetaPopupMenu"
+               id="PopupKermetaNewFileWizardAction"/>
+
+      </objectContribution>
+   </extension>
 
 
 </plugin>

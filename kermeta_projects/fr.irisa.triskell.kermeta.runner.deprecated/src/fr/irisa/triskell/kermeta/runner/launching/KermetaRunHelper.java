@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.3 2005-05-25 09:25:59 zdrey Exp $
+/* $Id: KermetaRunHelper.java,v 1.4 2005-05-27 15:06:12 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: GPL
@@ -28,7 +28,8 @@ public class KermetaRunHelper {
 	/**
 	 * 
 	 * Parse the given file and return its KermetaUnit.
-	 * FIXME : the uri defined is platform dependant! (platform:/resource...?) 
+	 * FIXME : the uri defined is platform dependant! (platform:/resource...?)
+	 * TODO : throw a specific exception?  
 	 * @param file the file to parse
 	 * @return KermetaUnit the compilation unit for the given file
 	 */
@@ -53,9 +54,9 @@ public class KermetaRunHelper {
 	        
         }
         catch(Throwable e) {
-            KermetaUnit.internalLog.error("load error ", e);
+            KermetaUnit.internalLog.error("load error : "+e, e);
         	if (result == null) {
-        		e.printStackTrace();
+        		//e.printStackTrace();
         		return null;
         	}
         	else if (result.error.size() == 0)

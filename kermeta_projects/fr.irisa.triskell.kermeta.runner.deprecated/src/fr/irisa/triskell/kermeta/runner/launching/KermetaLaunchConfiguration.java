@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.3 2005-05-24 17:07:31 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.4 2005-05-27 15:06:11 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -9,8 +9,6 @@
  * Description: 
  */
 package fr.irisa.triskell.kermeta.runner.launching;
-import java.util.HashMap;
-import java.util.Hashtable;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -24,7 +22,6 @@ import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 
 /**
