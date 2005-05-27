@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.12 2005-05-27 14:30:48 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.13 2005-05-27 22:29:15 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -361,13 +361,14 @@ public class ExpressionChecker extends KermetaVisitor {
 			FRescue resc = (FRescue)it.next();
 			
 			// Chech the constraint on multiplicity of exception type
-			if (resc.getFExceptionType().getFUpper() != 1) {
+			if (resc.getFExceptionType() != null && resc.getFExceptionType().getFUpper() != 1) {
 				unit.error.add(new KMUnitError("TYPE-CHECKER : The upper multiplicity of the type of object to catch must be 1", resc));
 			}
 			
 			context.pushContext();
 			// add the symbol
-			context.addSymbol(new KMSymbolRescueParameter(resc), TypeCheckerContext.getTypeFromMultiplicityElement(resc.getFExceptionType()));
+			if (resc.getFExceptionType() != null)
+			    context.addSymbol(new KMSymbolRescueParameter(resc), TypeCheckerContext.getTypeFromMultiplicityElement(resc.getFExceptionType()));
 			visitExpressionList(resc.getFBody());
 			context.popContext();
 		}

@@ -1,0 +1,95 @@
+
+@mainClass "testSimpleExceptions::TestEx"
+@mainOperation "test1"
+
+package testSimpleExceptions;
+
+require kermeta
+
+using kermeta::standard
+
+
+class TestEx inherits kermeta::kunit::Test {
+
+	operation test1() is do
+		
+		raise "toto"
+		assert(false)
+	
+	rescue(s : String)
+		
+		assert(s == "toto")
+		
+	end	
+	
+	operation test2() is do
+		var str : String init "str1"
+		
+		do
+			assert(str == "str1")
+			var str : String init "str2"
+			assert(str == "str2")
+		end
+		
+		assert(str == "str1")
+		
+		do
+			var str : String init "str2"
+			assert(str == "str2")
+			titi
+			assert(false)
+		rescue
+			assert(str == "str1")
+		end
+		assert(str == "str1")
+	end	
+	
+	operation test3() is do
+		var o : Object 
+		do
+			raise "toto"
+			assert(false)
+		rescue(str : String)
+			o := str
+		rescue(i : Integer)
+			o := i
+		end
+		assert(o == "toto")
+	end	
+	
+	operation test4() is do
+		var o : Object 
+		do
+			raise 5
+			assert(false)
+		rescue(str : String)
+			o := str
+		rescue(i : Integer)
+			o := i
+		end
+		assert(o == 5)
+	end	
+	
+	operation test5() is do
+		var o : Object 
+		do
+			raise true
+			assert(false)
+		rescue(str : String)
+			o := str
+		rescue(i : Integer)
+			o := i
+		end
+		assert(false)
+	
+	rescue(o : Object)
+		assert(o == true)
+	end	
+	
+	
+	operation titi() is do
+		raise "titi"
+	end
+	
+	
+}

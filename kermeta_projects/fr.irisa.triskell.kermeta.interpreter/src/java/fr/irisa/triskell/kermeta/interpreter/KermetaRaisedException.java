@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.2 2005-05-25 17:42:50 ffleurey Exp $
+/* $Id: KermetaRaisedException.java,v 1.3 2005-05-27 22:28:25 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : GPL
@@ -28,6 +28,7 @@ public class KermetaRaisedException extends Error {
      */
     public KermetaRaisedException(RuntimeObject raised_object, ExpressionInterpreter interpreter) {
         super("kermeta exception : " + raised_object + " not rescued.\n" + setContext(interpreter));
+        this.raised_object = raised_object;
     }
     
     private static String setContext(ExpressionInterpreter interpreter) {

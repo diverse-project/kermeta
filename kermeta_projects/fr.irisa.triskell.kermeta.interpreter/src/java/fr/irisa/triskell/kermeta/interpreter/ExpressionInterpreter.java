@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.9 2005-05-27 14:31:03 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.10 2005-05-27 22:28:25 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -112,12 +112,14 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		
         // Create a context for this operation call, setting self object to ro_target
         interpreterContext.pushOperationCallFrame(ro_target, op, arguments, null);
-       
-        // Resolve this operation call
-        result = (RuntimeObject)this.accept(foperation);
-        
-        // After operation has been evaluated, pop its context
-        interpreterContext.popCallFrame();
+        try {
+	        // Resolve this operation call
+	        result = (RuntimeObject)this.accept(foperation);
+        }
+        finally {
+	        // After operation has been evaluated, pop its context
+	        interpreterContext.popCallFrame();
+        }
 		return result;
 	}
 	
@@ -353,11 +355,12 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		// Create a context for this operation call, setting self object to ro_target
 		interpreterContext.pushOperationCallFrame(ro_target, InheritanceSearch.getSuperOperation(self_type, current_op), parameters, node);
 		
-		
-        result = (RuntimeObject)this.accept(current_op.getFSuperOperation());
-        
-        // Pop the context!
-        interpreterContext.popCallFrame();
+		try {
+		    result = (RuntimeObject)this.accept(current_op.getFSuperOperation());
+		} finally {
+		    // Pop the context!
+		    interpreterContext.popCallFrame();
+		}
         // TODO : raise exception if super operation not found // TypeChecker
         return result;
     }
@@ -444,13 +447,52 @@ public class ExpressionInterpreter extends KermetaVisitor {
 
 	    RuntimeObject result = memory.voidINSTANCE;
 	    // process the statements
-	    ArrayList res = visitList(node.getFStatement());
+	    try {
+	        // Execute the block
+	        interpreterContext.peekCallFrame().pushExpressionContext();
+	        try {
 	    
-	    if (res.size() > 0) 
-	        result = (RuntimeObject)res.get(res.size()-1);
-	    
-		
-		return result;
+			    ArrayList res = visitList(node.getFStatement());
+			    if (res.size() > 0) 
+			        result = (RuntimeObject)res.get(res.size()-1);
+	        }
+	        finally {
+	            interpreterContext.peekCallFrame().popExpressionContext();
+	        }
+	    }
+	    catch(KermetaRaisedException ex) {
+	        Iterator it = node.getFRescueBlock().iterator();
+	        FRescue resc_block = null;
+	        while (it.hasNext() && resc_block == null) {
+	            FRescue r = (FRescue)it.next();
+	            if (r.getFExceptionType() == null)
+	                resc_block = r;
+	            else {
+	                SimpleType exprected =  new SimpleType(r.getFExceptionType().getFType());
+	                SimpleType provided = new SimpleType((FClass)ex.raised_object.getMetaclass().getData().get("kcoreObject"));
+	                if (provided.isSubTypeOf(exprected)) {
+	                    resc_block = r;
+	                }
+	            }
+	        }
+	        if (resc_block == null) throw ex;
+	        
+	        // Execute the rescue block
+	        interpreterContext.peekCallFrame().pushExpressionContext();
+	        
+	        try {
+	        
+	        if (resc_block.getFExceptionType() != null)
+	            interpreterContext.peekCallFrame().peekExpressionContext().defineVariable(resc_block.getFExceptionName(), ex.raised_object);
+	        	ArrayList res = visitList(resc_block.getFBody());
+	        	if (res.size() > 0) 
+			        result = (RuntimeObject)res.get(res.size()-1);
+	        }
+	        finally {
+	            interpreterContext.peekCallFrame().popExpressionContext();
+	        }
+	    }
+	    return result;
 	}
 	
 	/**
@@ -470,8 +512,8 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    RuntimeObject result = null;
 	    
 	    // ThenBody should be specified more precisely (as a FBlock?)
-        EList then_block = ((FBlock)node.getFThenBody()).getFStatement();
-        EList else_block = ((FBlock)node.getFElseBody()).getFStatement();
+        //EList then_block = ((FBlock)node.getFThenBody()).getFStatement();
+        //EList else_block = ((FBlock)node.getFElseBody()).getFStatement();
         FExpression cond = node.getFCondition();
 
         // Object should be a Boolean
@@ -511,28 +553,34 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	{
         // Push a new expressionContext in the current CallFrame. 
         interpreterContext.peekCallFrame().pushExpressionContext();
-        // Accept initialization (a FVariableDecl) : add a new variable in the ExpressionContext
-        this.accept(node.getFInitiatization());
-        boolean cond_value=true;
         
-	    do
-	    {
-	        RuntimeObject cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
-	        // Get boolean value
-	        if (cond_result.getData().containsKey("BooleanValue"))
-	            cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
-	        else
-	        {
-	        	System.err.println("Loop : evaluation of the condition part does not result in a boolean value.");
-	        	throw new Error("INTERPRETER INTERNAL ERROR : Loop : evaluation of the condition part does not result in a boolean value.");
-	        }
+        try {
+        
+	        // Accept initialization (a FVariableDecl) : add a new variable in the ExpressionContext
+	        this.accept(node.getFInitiatization());
+	        boolean cond_value=true;
 	        
-	        if (! cond_value)
-	        	this.accept(node.getFBody());
-	    } while (! cond_value);
-	    
-	    // Pop the expression context
-	    interpreterContext.peekCallFrame().popExpressionContext();
+		    do
+		    {
+		        RuntimeObject cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
+		        // Get boolean value
+		        if (cond_result.getData().containsKey("BooleanValue"))
+		            cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
+		        else
+		        {
+		        	System.err.println("Loop : evaluation of the condition part does not result in a boolean value.");
+		        	throw new Error("INTERPRETER INTERNAL ERROR : Loop : evaluation of the condition part does not result in a boolean value.");
+		        }
+		        
+		        if (! cond_value)
+		        	this.accept(node.getFBody());
+		    } while (! cond_value);
+		    
+        }
+        finally {
+		    // Pop the expression context
+		    interpreterContext.peekCallFrame().popExpressionContext();
+        }
 	    return memory.voidINSTANCE;
 	}
 	
@@ -546,17 +594,22 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 */
 	public Object visit(FOperation node) {
 	    
+	    RuntimeObject result = memory.voidINSTANCE;
+	    
+	   
 	    // push expression context
 	    interpreterContext.peekCallFrame().pushExpressionContext();
-	    
-	    // Interpret body
-	    this.accept(node.getFBody());
-	    
-	    // Set the result
-	    RuntimeObject result = interpreterContext.peekCallFrame().getOperationResult();
-	    
-	    // Pop the expressionContext
-	    interpreterContext.peekCallFrame().popExpressionContext();
+	    try {
+		    // Interpret body
+		    this.accept(node.getFBody());
+		    
+		    // Set the result
+		    result = interpreterContext.peekCallFrame().getOperationResult();
+	    }
+	    finally {
+		    // Pop the expressionContext
+		    interpreterContext.peekCallFrame().popExpressionContext();
+	    }
 		return result;
 	}
 	
@@ -632,12 +685,13 @@ public class ExpressionInterpreter extends KermetaVisitor {
 			ArrayList parameters = visitList(node.getFParameters());
 			// Create a context for this operation call, setting self object to ro_target
 			interpreterContext.pushOperationCallFrame(ro_target, operation, parameters, node);
-			
-			// Resolve this operation call
-			result = (RuntimeObject)this.accept(operation.getOperation());
-			// After operation has been evaluated, pop its context
-			interpreterContext.popCallFrame();
-			
+			try {
+				// Resolve this operation call
+				result = (RuntimeObject)this.accept(operation.getOperation());
+				// After operation has been evaluated, pop its context
+			} finally {
+			    interpreterContext.popCallFrame();
+			}
 	    }
 	    else {
 	        // It is a property call
@@ -1002,4 +1056,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
     public InterpreterContext getInterpreterContext() {
     	return this.interpreterContext;
     }    
+    public RuntimeMemory getMemory() {
+        return memory;
+    }
 }

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.11 2005-05-27 14:31:11 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.12 2005-05-27 22:28:30 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -106,6 +106,8 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","testFrameworkToString.main.kmt" );
 */
+		testWithFile("test/kmt_testcases","23_testSimpleException.main.kmt" );
+/*
 		testWithFile("test/kmt_testcases","22_testEnum.main.kmt" );
 
 /*** END GENERATED TESTS ***/
