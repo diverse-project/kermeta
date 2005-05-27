@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.17 2005-05-26 22:39:02 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.18 2005-05-27 09:25:19 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.URI;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
@@ -57,6 +58,7 @@ public class JunitTestSuite extends TestCase {
 	}
 	
 	// do not modify this comment
+
 
 
 /*** BEGIN GENERATED TESTS ***/
@@ -336,6 +338,10 @@ public void testtestVariable() throws Exception {
 testWithFile("test/kmt_testcases","testVariable.kmt" );
 }
 
+public void test10_testEnum() throws Exception {
+testWithFile("test/kmt_testcases","10_testEnum.kmt" );
+}
+
 public void testtestExtOperation() throws Exception {
 testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 }
@@ -393,7 +399,7 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 			KermetaUnit iu = (KermetaUnit)it.next();
 			if (iu.rootPackage != builder.rootPackage) {
 				
-				if (iu instanceof KMTUnit)
+				if (iu instanceof KMTUnit || iu instanceof KMUnit)
 					w.write("require \"" + iu.getUri() + "\"\n");
 				else {
 					String f = file.replaceAll(".kmt", iu.rootPackage.getFName() + ".kmt");

@@ -10,6 +10,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="CallFeature">
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty" eType="#//structure/Property"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation" eType="#//structure/Operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="staticEnumLiteral" eType="#//structure/EnumerationLiteral"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CallExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticTypeVariableBindings"
@@ -22,5 +23,6 @@
     <eClassifiers xsi:type="ecore:EClass" name="Property"/>
     <eClassifiers xsi:type="ecore:EClass" name="Type"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral"/>
   </eSubpackages>
 </ecore:EPackage>

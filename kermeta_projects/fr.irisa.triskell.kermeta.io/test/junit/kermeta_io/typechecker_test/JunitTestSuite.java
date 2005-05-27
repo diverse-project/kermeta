@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.11 2005-05-25 17:42:22 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.12 2005-05-27 09:25:41 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -79,6 +79,7 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_1_ClassSubTyping_1() throws Exception {
 testvalidFile("test/typechecher_tests/valid","1_ClassSubTyping_1.kmt" );
@@ -86,6 +87,10 @@ testvalidFile("test/typechecher_tests/valid","1_ClassSubTyping_1.kmt" );
 
 public void testvalid_2_ClassSubTypingWithGenerics() throws Exception {
 testvalidFile("test/typechecher_tests/valid","2_ClassSubTypingWithGenerics.kmt" );
+}
+
+public void testvalid_AliasAndFunctions() throws Exception {
+testvalidFile("test/typechecher_tests/valid","AliasAndFunctions.kmt" );
 }
 
 public void testvalid_ClassSubTypingWithGenericOperations() throws Exception {
@@ -96,12 +101,20 @@ public void testvalid_Class_new() throws Exception {
 testvalidFile("test/typechecher_tests/valid","Class_new.kmt" );
 }
 
-public void testvalid_SimpleOperationCall() throws Exception {
-testvalidFile("test/typechecher_tests/valid","SimpleOperationCall.kmt" );
-}
-
 public void testvalid_GenericOperationCall() throws Exception {
 testvalidFile("test/typechecher_tests/valid","GenericOperationCall.kmt" );
+}
+
+public void testvalid_GenericVisitor() throws Exception {
+testvalidFile("test/typechecher_tests/valid","GenericVisitor.kmt" );
+}
+
+public void testvalid_GenericsAndFunctions() throws Exception {
+testvalidFile("test/typechecher_tests/valid","GenericsAndFunctions.kmt" );
+}
+
+public void testvalid_ObjectAndVoid() throws Exception {
+testvalidFile("test/typechecher_tests/valid","ObjectAndVoid.kmt" );
 }
 
 public void testvalid_SimpleCtrlStructs() throws Exception {
@@ -112,20 +125,12 @@ public void testvalid_SimpleFunctions() throws Exception {
 testvalidFile("test/typechecher_tests/valid","SimpleFunctions.kmt" );
 }
 
-public void testvalid_GenericVisitor() throws Exception {
-testvalidFile("test/typechecher_tests/valid","GenericVisitor.kmt" );
+public void testvalid_SimpleOperationCall() throws Exception {
+testvalidFile("test/typechecher_tests/valid","SimpleOperationCall.kmt" );
 }
 
-public void testvalid_ObjectAndVoid() throws Exception {
-testvalidFile("test/typechecher_tests/valid","ObjectAndVoid.kmt" );
-}
-
-public void testvalid_GenericsAndFunctions() throws Exception {
-testvalidFile("test/typechecher_tests/valid","GenericsAndFunctions.kmt" );
-}
-
-public void testvalid_AliasAndFunctions() throws Exception {
-testvalidFile("test/typechecher_tests/valid","AliasAndFunctions.kmt" );
+public void testvalid_Enum() throws Exception {
+testvalidFile("test/typechecher_tests/valid","Enum.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
@@ -136,20 +141,24 @@ public void testinvalid_2_ClassSubTypingWithGenerics() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","2_ClassSubTypingWithGenerics.kmt" );
 }
 
-public void testinvalid_Class_new() throws Exception {
-testinvalidFile("test/typechecher_tests/invalid","Class_new.kmt" );
-}
-
-public void testinvalid_SimpleOperationCall() throws Exception {
-testinvalidFile("test/typechecher_tests/invalid","SimpleOperationCall.kmt" );
-}
-
 public void testinvalid_ClassSubTypingWithGenericOperations() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","ClassSubTypingWithGenericOperations.kmt" );
 }
 
+public void testinvalid_Class_new() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","Class_new.kmt" );
+}
+
 public void testinvalid_GenericOperationCall() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","GenericOperationCall.kmt" );
+}
+
+public void testinvalid_GenericsAndFunctions() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","GenericsAndFunctions.kmt" );
+}
+
+public void testinvalid_ObjectAndVoid() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","ObjectAndVoid.kmt" );
 }
 
 public void testinvalid_SimpleCtrlStructs() throws Exception {
@@ -160,12 +169,12 @@ public void testinvalid_SimpleFunctions() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","SimpleFunctions.kmt" );
 }
 
-public void testinvalid_GenericsAndFunctions() throws Exception {
-testinvalidFile("test/typechecher_tests/invalid","GenericsAndFunctions.kmt" );
+public void testinvalid_SimpleOperationCall() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","SimpleOperationCall.kmt" );
 }
 
-public void testinvalid_ObjectAndVoid() throws Exception {
-testinvalidFile("test/typechecher_tests/invalid","ObjectAndVoid.kmt" );
+public void testinvalid_Enum() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","Enum.kmt" );
 }
 
 /*** END GENERATED TESTS ***/

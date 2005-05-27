@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.10 2005-05-20 12:46:12 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.11 2005-05-27 09:25:27 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -53,6 +53,8 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FEnumeration;
+import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FType;
@@ -382,31 +384,64 @@ public class ExpressionChecker extends KermetaVisitor {
 		if (expression.getFTarget() != null) this.accept(expression.getFTarget());
 		
 		preVisit();
+		
+		//The ennumeration if it is a enum lietral call
+		FEnumeration enum = null;
+		
 		// Determine the type of the target
 		Type target;
-		if (expression.getFTarget() != null) target = getTypeOfExpression(expression.getFTarget());
+		if (expression.getFTarget() != null) {
+			target = getTypeOfExpression(expression.getFTarget());
+			if (expression.getFTarget() instanceof FTypeLiteral) {
+				FTypeLiteral tl = (FTypeLiteral)expression.getFTarget();
+				FType tlt = getTypeFromTypeLiteral(tl).type;
+				if (tlt instanceof FEnumeration) {
+					enum = (FEnumeration)tlt;
+				}
+			}
+			
+		}
 		else target = context.getSelfType();
 		
 		Type result = null;
 		
-		// Is it an operation call
-		CallableOperation op = target.getOperationByName(expression.getFName());
-		if (op != null) {
-			result = checkOperationCall(op, expression);
-			expression.setFStaticOperation(op.getOperation());
-		}
-		else {
-			// Is it a property call
-			CallableProperty prop = target.getPropertyByName(expression.getFName());
-			if (prop != null) { 
-				result = checkPropertyCall(prop, expression);
-				expression.setFStaticProperty(prop.getProperty());
+		// It is a call to an enum literal
+		if(enum != null) {
+			FEnumerationLiteral lit = null;
+			Iterator it = enum.getFOwnedLiteral().iterator();
+			while (it.hasNext() && lit == null) {
+				FEnumerationLiteral l = (FEnumerationLiteral)it.next();
+				if (l.getFName().equals(expression.getFName())) lit = l;
+			}
+			if (lit == null) {
+				unit.error.add(new KMUnitError("TYPE-CHECKER : cannot resolve enumeration literal " + expression.getFName() + " in enumetation " + enum.getFName() + ".",expression));
+			    result = TypeCheckerContext.VoidType;
+			}
+			else {
+				expression.setFStaticEnumLiteral(lit);
+				result = new SimpleType(enum);
 			}
 		}
-		if (result == null) {
-		    // The feature was not found
-		    unit.error.add(new KMUnitError("TYPE-CHECKER : cannot resolve feature " + expression.getFName() + " in type " + target.toString() + ".",expression));
-		    result = TypeCheckerContext.VoidType;
+		else {
+			// Is it an operation call
+			CallableOperation op = target.getOperationByName(expression.getFName());
+			if (op != null) {
+				result = checkOperationCall(op, expression);
+				expression.setFStaticOperation(op.getOperation());
+			}
+			else {
+				// Is it a property call
+				CallableProperty prop = target.getPropertyByName(expression.getFName());
+				if (prop != null) { 
+					result = checkPropertyCall(prop, expression);
+					expression.setFStaticProperty(prop.getProperty());
+				}
+			}
+			if (result == null) {
+			    // The feature was not found
+			    unit.error.add(new KMUnitError("TYPE-CHECKER : cannot resolve feature " + expression.getFName() + " in type " + target.toString() + ".",expression));
+			    result = TypeCheckerContext.VoidType;
+			}
 		}
 		expressionTypes.put(expression, result);
 		expression.setFStaticType(result.getFType());
@@ -619,11 +654,16 @@ public class ExpressionChecker extends KermetaVisitor {
 		Type result;
 	    FType type = getTypeFromTypeLiteral(expression).type;
 		
-		if (!(type instanceof FClass)) {
-		    unit.error.add(new KMUnitError("TYPE-CHECKER : Type literal should only refer to classes", expression));
+	    if (type instanceof FClass) {
+	    	result = TypeCheckerContext.ClassType;
+	    }
+	    else if (type instanceof FEnumeration){
+	    	result = TypeCheckerContext.EnumType;
+	    }
+	    else {
+	    	unit.error.add(new KMUnitError("TYPE-CHECKER : Type literal should only refer to classes or ennumerations", expression));
 		    result = TypeCheckerContext.VoidType;
-		}
-		else result = TypeCheckerContext.ClassType;
+	    }
 		
 		expressionTypes.put(expression, result);
 		expression.setFStaticType(result.getFType());
