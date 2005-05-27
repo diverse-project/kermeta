@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizardPage.java,v 1.1 2005-05-24 17:07:34 zdrey Exp $
+/* $Id: KermetaNewFileWizardPage.java,v 1.2 2005-05-27 15:06:57 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: GPL
@@ -12,15 +12,24 @@
 
 package fr.irisa.triskell.kermeta.runner.wizards;
 
-import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Preferences;
 import org.eclipse.swt.events.*;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
+import org.eclipse.ui.help.WorkbenchHelp;
+import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
+import org.eclipse.ui.internal.ide.IHelpContextIds;
+import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 import org.eclipse.jface.viewers.*;
+import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.jface.wizard.WizardPage;
 
 /**
  * The "New" wizard page allows setting the container for
@@ -29,17 +38,34 @@ import org.eclipse.jface.viewers.*;
  * with the extension that matches the expected one (kmt).
  */
 
-public class KermetaNewFileWizardPage extends WizardPage {
+
+public class KermetaNewFileWizardPage extends WizardPage
+//WizardNewFileCreationPage 
+{
+    
 	private Text containerText;
 	private Text fileText;
-	private ISelection selection;
-
+	private IStructuredSelection selection;
+    private Composite linkedResourceParent;
+    private Button advancedButton;
+    public static final int GRID_DATA_WIDTH = 150;
+    public static final String defaultPackageString = "root_package";
+    public static final String defaultClassString = "Main";
+    public static final String defaultOperationString = "main";
+    private Text packageText;
+    private Text mainClassText;
+    private Text mainOperationText;
+    private Group advancedGroup;
+    // This attribute exists in WizardNewFileCreationPage, but is private :(
+    //protected ResourceAndContainerGroup resourceGroup;
+    
+	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
 	/**
 	 * Constructor for SampleNewWizardPage.
 	 * @param pageName
 	 */
-	public KermetaNewFileWizardPage(ISelection selection) {
-		super("wizardPage");
+	public KermetaNewFileWizardPage(IStructuredSelection selection) {
+		super("wizardPage");//, selection);
 		setTitle("New Kermeta File");
 		setDescription("This wizard creates a new file with *.kmt extension that can be opened by a multi-page editor.");
 		this.selection = selection;
@@ -49,16 +75,22 @@ public class KermetaNewFileWizardPage extends WizardPage {
 	 * Create the layout of the project page
 	 * @see IDialogPage#createControl(Composite)
 	 */
-	public void createControl(Composite parent) {
+	public void createSimpleControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
-		GridLayout layout = new GridLayout();
+
+	    Composite groupcontainer = new Group(container, SWT.NULL);
+	    GridLayout layout = new GridLayout();
 		container.setLayout(layout);
+		layout.numColumns = 1;
+	    
+		layout = new GridLayout();
+		groupcontainer.setLayout(layout);
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
-		Label label = new Label(container, SWT.NULL);
+		Label label = new Label(groupcontainer, SWT.NULL);
 		label.setText("&Container:");
-
-		containerText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		
+		containerText = new Text(groupcontainer, SWT.BORDER | SWT.SINGLE);
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		containerText.setLayoutData(gd);
 		containerText.addModifyListener(new ModifyListener() {
@@ -67,17 +99,17 @@ public class KermetaNewFileWizardPage extends WizardPage {
 			}
 		});
 
-		Button button = new Button(container, SWT.PUSH);
+		Button button = new Button(groupcontainer, SWT.PUSH);
 		button.setText("Browse...");
 		button.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				handleBrowse();
 			}
 		});
-		label = new Label(container, SWT.NULL);
+		label = new Label(groupcontainer, SWT.NULL);
 		label.setText("&File name:");
 
-		fileText = new Text(container, SWT.BORDER | SWT.SINGLE);
+		fileText = new Text(groupcontainer, SWT.BORDER | SWT.SINGLE);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		fileText.setLayoutData(gd);
 		fileText.addModifyListener(new ModifyListener() {
@@ -85,11 +117,35 @@ public class KermetaNewFileWizardPage extends WizardPage {
 				dialogChanged();
 			}
 		});
+
+
+		createFillTemplateFileWindow(container);
+		
 		initialize();
 		dialogChanged();
 		setControl(container);
+
+	
 	}
 	
+	
+	
+	
+    /**
+     * This is a copy of createControl of super class, extended in order to add
+     * a specific group for default folders (src/lib)
+     * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
+     */
+    public void createControl(Composite parent)
+    {
+        createSimpleControl(parent);
+   /*     super.createControl(parent);
+        Composite toplevel = (Composite) parent.getChildren()[0];
+    	createFillTemplateFileWindow(toplevel);
+    	advancedGroup.layout();
+    	*/
+        
+    }
 	/**
 	 * Tests if the current workbench selection is a suitable
 	 * container to use.
@@ -132,13 +188,16 @@ public class KermetaNewFileWizardPage extends WizardPage {
 		}
 	}
 	
+	
+	
+	
 	/**
 	 * Ensures that both text fields are set.
 	 */
 
 	private void dialogChanged() {
-		String container = getContainerName();
-		String fileName = getFileName();
+		String container = getContainerText();//get//getContainerFullPath().toString();
+		String fileName =  getFilename();//page.getFileName();
 
 		if (container.length() == 0) {
 			updateStatus("File container must be specified");
@@ -164,10 +223,109 @@ public class KermetaNewFileWizardPage extends WizardPage {
 		setPageComplete(message == null);
 	}
 
-	public String getContainerName() {
+	/*public String getContainerName() {
 		return containerText.getText();
+
 	}
 	public String getFileName() {
 		return fileText.getText();
+	}*/
+	
+
+
+	/**
+	 * 
+	 * Creates the widget for advanced options.
+	 * Overrides method from NewFileCreationWizardPage 
+	 * @param parent the parent composite
+	 */
+	protected void createAdvancedControls(Composite parent) {
+	  //  super.createAdvancedControls(parent);
 	}
+
+    /**
+     * Create a window that propose to the user the specification of a 
+     * root package, a main class, and a main method.
+     */
+    private void createFillTemplateFileWindow(Composite parent)
+    {
+        Font font = parent.getFont();
+        // Advanced group
+        advancedGroup = new Group(parent, SWT.NONE);
+        GridLayout layout = new GridLayout(2,false);
+        advancedGroup.setLayout(layout);
+        advancedGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+        advancedGroup.setFont(font);
+        advancedGroup.setText("Set default folders"); //$NON-NLS-1$
+        // Create the pacakge, class, operation fields
+        createLabel(advancedGroup, "Root package ", true, font);
+        packageText = createText(advancedGroup, true, font, defaultPackageString);
+        createLabel(advancedGroup, "Main class ", true, font);
+        mainClassText = createText(advancedGroup, true, font, defaultClassString);
+        createLabel(advancedGroup, "Main operation ", true, font);
+        mainOperationText = createText(advancedGroup, true, font, defaultOperationString);
+    }
+	
+	
+	
+  
+    /**
+     * Create the text field for the Root package.
+     * Also sets a default value for this root package.
+     * @param parent
+     */
+    protected Label createLabel(Group advancedGroup, String label, boolean enabled, Font font)
+    {
+        Label _label = new Label(advancedGroup, SWT.NONE);
+		_label.setText(label); //$NON-NLS-1$
+		_label.setEnabled(enabled);
+		_label.setFont(font);
+		return _label;
+    }
+
+    protected Text createText(Group advancedGroup, boolean enabled, Font font, String defaultValue)
+    {
+        Text _text = new Text(advancedGroup, SWT.BORDER);
+        GridData data = new GridData(GridData.FILL_HORIZONTAL);
+        data.widthHint = GRID_DATA_WIDTH;
+        _text.setLayoutData(data);
+        _text.setEnabled(enabled);
+        _text.setFont(font);
+        _text.setText(defaultValue);
+        return _text;
+    }   
+    
+    
+    
+    
+    
+	
+    /**
+     * @return Returns the mainClassText.
+     */
+    public Text getMainClassText() {  return mainClassText;}
+    public String getMainClassTextString() {  return mainClassText.getText();}
+    
+    /**
+     * @return Returns the mainOperationText.
+     */
+    public Text getMainOperationText() { return mainOperationText;}
+    public String getMainOperationTextString() { return mainOperationText.getText();}
+    
+    /**
+     * @return Returns the packageText.
+     */
+    public Text getPackageText() {        return packageText;}
+    public String getPackageTextString() { return packageText.getText();}
+    
+    public String getContainerText() { return containerText.getText();}
+    public String getFilename() {return fileText.getText();}
+
+    /* (non-Javadoc)
+     * @see org.eclipse.jface.wizard.Wizard#performFinish()
+     */
+    public boolean performFinish() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

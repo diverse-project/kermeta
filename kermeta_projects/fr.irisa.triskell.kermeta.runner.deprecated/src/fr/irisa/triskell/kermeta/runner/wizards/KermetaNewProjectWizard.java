@@ -1,4 +1,4 @@
-/* $Id: KermetaNewProjectWizard.java,v 1.2 2005-05-25 17:28:05 zdrey Exp $
+/* $Id: KermetaNewProjectWizard.java,v 1.3 2005-05-27 15:06:57 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizard.java
  * License: GPL
@@ -19,6 +19,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
 
 /**
  * The Wizard to create a new Kermeta project
@@ -51,6 +52,7 @@ public class KermetaNewProjectWizard extends Wizard implements INewWizard
 	private CreateKermetaProjectWizard createWizard;
 	
 	private IWorkbench workbench;
+	
 
 	private IStructuredSelection selection;
 
@@ -62,6 +64,9 @@ public class KermetaNewProjectWizard extends Wizard implements INewWizard
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		this.selection = selection;
+		
+		//workbench.getActiveWorkbenchWindow().getPages()
+		
 		setWindowTitle("New project creation wizard");
 		// This is eclipse IDE philosophy compliant...TODO : simplify?)
 		//setWizardDialog(new WizardDialog(getShell(), this));
@@ -108,12 +113,12 @@ public class KermetaNewProjectWizard extends Wizard implements INewWizard
 	 * @param monitor
 	 *            monitor used during project creation to see the progression speed
 	 * @return true created ok, false not ok
+	 * @deprecated
+	 * 
 	 */
 	public boolean finish(IProgressMonitor monitor) {
 
 		// create the new file resource
-		System.out.println("Click on Finish!!!!!!!!!!!!!!!!!!!!");
-
 		String sep = System.getProperty("file.separator");
 		newProject = newprojectPage.getProjectHandle();
 		if (newProject == null) {

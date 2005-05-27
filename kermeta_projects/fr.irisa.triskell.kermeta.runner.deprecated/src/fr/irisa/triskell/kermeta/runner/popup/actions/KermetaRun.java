@@ -1,4 +1,4 @@
-/* $Id: KermetaRun.java,v 1.5 2005-05-25 09:26:02 zdrey Exp $
+/* $Id: KermetaRun.java,v 1.6 2005-05-27 15:06:47 zdrey Exp $
  * Project : Kermeta.runner
  * File : KermetaRun.java
  * License : GPL
@@ -12,8 +12,6 @@
  */
 package fr.irisa.triskell.kermeta.runner.popup.actions;
 
-import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import org.eclipse.core.resources.IFile;
@@ -21,27 +19,17 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.InputDialog;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-
-import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
-import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.dialogs.RunPopupDialog;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaRunHelper;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
-import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 
 public class KermetaRun implements IObjectActionDelegate {
 

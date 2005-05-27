@@ -1,6 +1,15 @@
 package fr.irisa.triskell.kermeta.runner;
 
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.ui.IPerspectiveDescriptor;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.WorkbenchException;
+import org.eclipse.ui.internal.WorkbenchWindow;
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
 import java.util.*;
@@ -13,6 +22,8 @@ public class RunnerPlugin extends AbstractUIPlugin {
 	private static RunnerPlugin plugin;
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
+	//Resource context.
+	private BundleContext context;
 	
 	/**
 	 * The constructor.
@@ -22,6 +33,7 @@ public class RunnerPlugin extends AbstractUIPlugin {
 		plugin = this;
 		try {
 			resourceBundle = ResourceBundle.getBundle("fr.irisa.triskell.kermeta.runner.RunnerPluginResources");
+			
 		} catch (MissingResourceException x) {
 			resourceBundle = null;
 		}
@@ -29,8 +41,13 @@ public class RunnerPlugin extends AbstractUIPlugin {
 
 	/**
 	 * This method is called upon plug-in activation
+	 * 
 	 */
 	public void start(BundleContext context) throws Exception {
+	    System.out.println("Start the plugin");
+		this.context = context;
+		//this.__openPage();
+
 		super.start(context);
 	}
 
@@ -43,6 +60,7 @@ public class RunnerPlugin extends AbstractUIPlugin {
 
 	/**
 	 * Returns the shared instance.
+	 * (Useful in static methods)
 	 */
 	public static RunnerPlugin getDefault() {
 		return plugin;
@@ -72,7 +90,74 @@ public class RunnerPlugin extends AbstractUIPlugin {
      * @return current workspace
      */
     public static IWorkspace getWorkspace() {
-        // TODO Auto-generated method stub
-        return null;
+		return ResourcesPlugin.getWorkspace();
     }
+    
+    public static IWorkbenchPage getActivePage() {
+		return getDefault().internalGetActivePage();
+	  }
+
+	private IWorkbenchPage internalGetActivePage() {
+			IWorkbenchWindow window= getWorkbench().getActiveWorkbenchWindow();
+			if (window == null)
+				return null;
+			return getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		}
+	
+	
+
+	/**
+	 * This method shows the current perspective.
+	 * TODO : move it somewhere else
+	 */
+	private void __showPerspective()
+	{
+	    IWorkbenchPage page = getActivePage();
+	    try {
+	        //String pId = PlatformUI.getWorkbench().getPerspectiveRegistry().getDefaultPerspective();
+	        
+	        PlatformUI.getWorkbench().showPerspective(page.getPerspective().getId(), page.getWorkbenchWindow());
+	    } catch (WorkbenchException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	}
+
+	/** Open the page */
+	private void __openPage()
+	{   
+	    IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+	   /* try
+	    {*/   
+	        IPerspectiveDescriptor pDesc = PlatformUI.getWorkbench().getPerspectiveRegistry().findPerspectiveWithId("kermetaPerspective");
+            // FIXME : do not hardcode the strings
+	        //window.openPage("kermetaPerspective", getActivePage().getInput());
+	        window.getActivePage().setPerspective(pDesc);
+	    /*} 
+	    catch (WorkbenchException e) {
+	        MessageDialog.openError(window.getShell(),
+	                "Problem Opening Perspective",
+	                e.getMessage());
+	    }*/
+	}
+
+    /**
+     * Helper method used by OpenKermetaPerspective
+     * @return the active workbench window
+     */
+    public static IWorkbenchWindow getActiveWorkbenchWindow()
+    {
+        return getDefault().getWorkbench().getActiveWorkbenchWindow();
+    }
+
+    /**
+     * Helper method used by OpenKermetaPerspective to print the exception log
+     * @param e
+     */
+    public static void logException(WorkbenchException e) {
+        System.err.println("log Exception is not implemented, but you have this one :P : "+e);
+    }
+    
+    
+    
 }

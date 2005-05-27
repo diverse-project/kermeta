@@ -1,4 +1,4 @@
-/* $Id: CreateKermetaProjectWizard.java,v 1.1 2005-05-25 17:28:06 zdrey Exp $
+/* $Id: CreateKermetaProjectWizard.java,v 1.2 2005-05-27 15:06:58 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: CreateKermetaProjectWizard.java
  * License: GPL
@@ -10,7 +10,6 @@
 package fr.irisa.triskell.kermeta.runner.wizards;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -18,6 +17,7 @@ import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -31,6 +31,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
+import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
@@ -43,6 +44,7 @@ public class CreateKermetaProjectWizard extends Wizard {
 
     private KermetaNewProjectWizard wizard;
     private KermetaNewProjectWizardPage page;
+    private IConfigurationElement configurationElement;
     
     /**
      * Creates an empty wizard for creating a new project
@@ -192,6 +194,8 @@ public class CreateKermetaProjectWizard extends Wizard {
         if (project != null) {
             wizard.setNewProject(project);
             page.createFolders(project);
+
+			BasicNewProjectResourceWizard.updatePerspective(this.configurationElement);
             return true;
         } else {
             return false;
@@ -207,4 +211,12 @@ public class CreateKermetaProjectWizard extends Wizard {
         // TODO Auto-generated method stub
         super.setContainer(wizardContainer);
     }
+    
+	/**
+	 * @see org.eclipse.core.runtime.IExecutableExtension#setInitializationData(org.eclipse.core.runtime.IConfigurationElement, java.lang.String, java.lang.Object)
+	 */
+	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) throws CoreException {
+	    System.out.println("Call of setInitializationData");
+	    this.configurationElement = config;
+	}
 }

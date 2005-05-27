@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.1 2005-05-24 17:07:34 zdrey Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.2 2005-05-27 15:06:57 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: GPL
@@ -11,20 +11,24 @@
  */
 package fr.irisa.triskell.kermeta.runner.wizards;
 
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.core.runtime.*;
-import org.eclipse.jface.operation.*;
-import java.lang.reflect.InvocationTargetException;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.ui.*;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.internal.ide.DialogUtil;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -38,8 +42,14 @@ import org.eclipse.ui.ide.IDE;
  */
 
 public class KermetaNewFileWizard extends Wizard implements INewWizard {
+    
+    // TODO : move it in preference constants //
+    public final static String STD_TAB = "    ";
+    
 	private KermetaNewFileWizardPage page;
-	private ISelection selection;
+	private IStructuredSelection selection;
+
+    private IWorkbench workbench;
 
 	/**
 	 * Constructor for KermetaNewFileWizard.
@@ -62,9 +72,9 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 	 * This method is called when 'Finish' button is pressed in
 	 * the wizard. We will create an operation and run it
 	 * using wizard as execution context.
-	 */
-	public boolean performFinish() {
-		final String containerName = page.getContainerName();
+	 * Old version :
+	 * <code>
+	 * 		final String containerName = page.getContainerName();
 		final String fileName = page.getFileName();
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException {
@@ -87,6 +97,63 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 			return false;
 		}
 		return true;
+	 * 
+	 * </code>
+	 * 
+	 */
+	public boolean performFinish() {
+
+/*		IFile file = page.createNewFile();
+		if (file == null)
+			return false;
+
+		//selectAndReveal(file);
+
+		// Open editor on new file.
+		IWorkbenchWindow dw = getWorkbench().getActiveWorkbenchWindow();
+		try {
+			if (dw != null) {
+				IWorkbenchPage page = dw.getActivePage();
+				if (page != null) {
+					IDE.openEditor(page, file, true);
+				}
+			}
+		} catch (PartInitException e) {
+			DialogUtil.openError(
+				dw.getShell(),
+				"Error : Could not create the requested file", //$NON-NLS-1$
+				e.getMessage(),
+				e);
+		}
+				
+		return true;*/
+	    //final String containerName = page.getContainerName();
+	    final String containerName = page.getContainerText();
+	    final String fileName = page.getFilename();
+	    System.out.println("container : "+containerName+", filename : "+fileName);
+	    //final String fileName = page.getFileName();
+	    IRunnableWithProgress op = new IRunnableWithProgress() {
+	        public void run(IProgressMonitor monitor) throws InvocationTargetException {
+	            try {
+	                doFinish(containerName, fileName, monitor);
+	            } catch (CoreException e) {
+	                throw new InvocationTargetException(e);
+	            } finally {
+	                monitor.done();
+	            }
+	        }
+	    };
+	    try {
+	        getContainer().run(true, false, op);
+	    } catch (InterruptedException e) {
+	        return false;
+	    } catch (InvocationTargetException e) {
+	        e.printStackTrace();
+	        Throwable realException = e.getTargetException();
+	        MessageDialog.openError(getShell(), "Error", realException.getMessage());
+	        return false;
+	    }
+		return true;
 	}
 	
 	/**
@@ -103,6 +170,8 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 		// create a sample file
 		monitor.beginTask("Creating " + fileName, 2);
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		IPath test;
+		
 		IResource resource = root.findMember(new Path(containerName));
 		if (!resource.exists() || !(resource instanceof IContainer)) {
 			throwCoreException("Container \"" + containerName + "\" does not exist.");
@@ -133,14 +202,37 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 		});
 		monitor.worked(1);
 	}
+
+	/***
+	 * Create the template file according to the default
+	 * root package name and main class name and main operation name (all
+	 * may be optional).
+	 * @return
+	 */
+	private String createTemplate(String pkgStr, String mainClassStr, String mainOpStr)
+	{
+	    System.out.println("createTemplate :");
+	    String template_string = 
+	        "@mainClass \""+pkgStr+"::"+mainClassStr+"\"\n"+ 
+	        "@mainOperation \""+mainOpStr+"\"\n\n\n"+
+	        "require kermeta\n"+
+	        "package"+pkgStr+"\n\n\n"+
+	        "class "+mainClassStr+
+	        STD_TAB+"operation "+mainOpStr+"() : Void is do \n\n"+
+	        "end";
+	    return template_string;
+	}
 	
 	/**
 	 * We will initialize file contents with a sample text.
 	 */
 
 	private InputStream openContentStream() {
-		String contents =
-			"This is the initial file contents for *.kmt file that should be word-sorted in the Preview page of the multi-page editor";
+	    
+		String contents = createTemplate(
+		        page.getPackageTextString(),
+		        page.getMainClassTextString(),
+				page.getMainOperationTextString());
 		return new ByteArrayInputStream(contents.getBytes());
 	}
 
@@ -157,5 +249,12 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
+		this.workbench = workbench;
+	}
+	
+	public IWorkbench getWorkbench()
+	{
+	    return workbench;
 	}
 }
+

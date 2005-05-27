@@ -1,4 +1,4 @@
-/* $Id: KermetaNewProjectWizardPage.java,v 1.2 2005-05-25 17:28:04 zdrey Exp $
+/* $Id: KermetaNewProjectWizardPage.java,v 1.3 2005-05-27 15:06:57 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizardPage.java
  * License: GPL
@@ -38,20 +38,17 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
     protected WizardDialog wizardDialog;
     
     /** true if user uses the default metamodel/model/output folders, false otherwise */
-    public boolean useDefaultFolders = true;
+    public boolean useDefaultFolders = false;
     protected Button useDefaultFoldersButton;
     
     // Widgets
-    protected Text modelLocationText;
-    protected Text mmodelLocationText;
-    protected Text srcLocationText;
-    protected Text binLocationText;
-    
+    /*protected Text modelLocationText, mmodelLocationText;*/
+    protected Text srcLocationText, binLocationText;
     // Labels
-    protected Label modelLocationLabel;
-    protected Label mmodelLocationLabel;
-    protected Label srcLocationLabel;
-    protected Label binLocationLabel;
+    /*protected Label modelLocationLabel, mmodelLocationLabel;*/
+    protected Label srcLocationLabel,binLocationLabel;
+
+    private boolean useEmptyFolders;
     
 	/**
 	 * Constructor for KermetaNewWizardPage.
@@ -61,6 +58,7 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
 		super("wizardPage");
 		setTitle("New Kermeta project");
 		setDescription("This wizard creates a new project");
+		
 		
 	}
 	
@@ -94,22 +92,32 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
         folderGroup.setFont(font);
         folderGroup.setText("Set default folders"); //$NON-NLS-1$
         
-        final Button useDefaultFoldersButton =
-            new Button(folderGroup, SWT.CHECK | SWT.RIGHT);
-        useDefaultFoldersButton.setText(IDEWorkbenchMessages.getString("Use default folder values")); //$NON-NLS-1$
-        useDefaultFoldersButton.setSelection(useDefaultFolders);
-        useDefaultFoldersButton.setFont(font);
+        final Button useEmptyFoldersButton =
+            new Button(folderGroup, SWT.RADIO | SWT.RIGHT);
+        
+        useEmptyFoldersButton.setText(IDEWorkbenchMessages.getString("Create empty folder")); //$NON-NLS-1$
+        useEmptyFoldersButton.setSelection(!useDefaultFolders);
+        useEmptyFoldersButton.setFont(font);
+
         
         GridData buttonData = new GridData();
         buttonData.horizontalSpan = 3;
-        useDefaultFoldersButton.setLayoutData(buttonData);
+        useEmptyFoldersButton.setLayoutData(buttonData);
         
-        createUserSpecifiedFolderLocationGroup(folderGroup, !useDefaultFolders);
+        // Default folders
+        final Button useDefaultFoldersButton =
+            new Button(folderGroup, SWT.RADIO | SWT.RIGHT);
+        
+        useDefaultFoldersButton.setText(IDEWorkbenchMessages.getString("Create separate folders for source (src) and libraries (lib)")); //$NON-NLS-1$
+        useDefaultFoldersButton.setSelection(!useEmptyFoldersButton.getSelection());
+        useDefaultFoldersButton.setFont(font);
+        
+        createUserSpecifiedFolderLocationGroup(folderGroup, false);
         
         SelectionListener listener = new SelectionAdapter() {
             public void widgetSelected(SelectionEvent e) {
                 useDefaultFolders = useDefaultFoldersButton.getSelection();
-                setLocationFoldersEnabled(!useDefaultFolders);
+                setLocationFoldersEnabled(useDefaultFolders);
                 if (useDefaultFolders) {
                     setLocationFoldersForSelection();
                 } else {
@@ -125,13 +133,11 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
      * Enable/Disable the default folder location fields
      * */
     protected void setLocationFoldersEnabled(boolean b)
-    {
-        modelLocationText.setEnabled(b);
-        modelLocationLabel.setEnabled(b);
+    {/*
+        modelLocationText.setEnabled(b);   modelLocationLabel.setEnabled(b);
+        mmodelLocationText.setEnabled(b);  mmodelLocationLabel.setEnabled(b);*/
         srcLocationLabel.setEnabled(b);
-        srcLocationText.setEnabled(b);
-        mmodelLocationText.setEnabled(b);
-        mmodelLocationLabel.setEnabled(b);
+        srcLocationText.setEnabled(b);;
         binLocationLabel.setEnabled(b);
         binLocationText.setEnabled(b);
     }
@@ -140,16 +146,14 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
     {
 		if (useDefaultFolders)
 		{
-			mmodelLocationText.setText("metamodels");
-			modelLocationText.setText("models");
+/*			mmodelLocationText.setText("metamodels"); modelLocationText.setText("models");*/
 			srcLocationText.setText("src");
 			binLocationText.setText("bin");
 		}
     }
 
-
     /**
-     * Create the 
+     * Create the templated folder
      * @param folderGroup
      * @param b
      */
@@ -158,20 +162,19 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
 		Font font = folderGroup.getFont();
 
 		// metamodels location label
-		mmodelLocationLabel = createLocationLabel(folderGroup, "Metamodel location", b, font);
+/*		mmodelLocationLabel = createLocationLabel(folderGroup, "Metamodel location", b, font);
 		mmodelLocationText = createLocationText(folderGroup, b, font, "metamodels");
-
 		// models location label
 		modelLocationLabel = createLocationLabel(folderGroup, "Model location", b, font);
 		modelLocationText = createLocationText(folderGroup, b, font, "models");
-
+*/
 		// source location label
 		srcLocationLabel = createLocationLabel(folderGroup, "Transformation source location", b, font);
 		srcLocationText = createLocationText(folderGroup, b, font, "src");
 		
 		// source location label
 		binLocationLabel = createLocationLabel(folderGroup, "Compiled files location", b, font);
-		binLocationText = createLocationText(folderGroup, b, font, "build");
+		binLocationText = createLocationText(folderGroup, b, font, "lib");
         
     }
     
@@ -197,23 +200,19 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
     }
     
     /**
-     * Invoked when user clicks on "Finish" button
+     * Invoked when user clicks on "Finish" button.
+     * Create the empty folders
      *
      */
     protected void createFolders(IProject newProject)
     {	
         try
         {   
+            //createFolder(newProject.getFolder(modelLocationText.getText()));
+            // createFolder(newProject.getFolder(mmodelLocationText.getText()));
             //output folder
             IFolder output = newProject.getFolder(binLocationText.getText());
             createFolder(output);
-            //		model folder
-            IFolder model = newProject.getFolder(modelLocationText.getText());
-            createFolder(model);
-            //		metamodel folder
-            IFolder metamodel = newProject.getFolder(mmodelLocationText.getText());
-            createFolder(metamodel);
-            //	   source folder
             IFolder src = newProject.getFolder(srcLocationText.getText());
             createFolder(src);
         }
@@ -251,6 +250,9 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
 /*    public void setWizardDialog(WizardDialog dialog)    {
         wizardDialog = dialog;
     }*/
+    
+    
+    
     
     
 }
