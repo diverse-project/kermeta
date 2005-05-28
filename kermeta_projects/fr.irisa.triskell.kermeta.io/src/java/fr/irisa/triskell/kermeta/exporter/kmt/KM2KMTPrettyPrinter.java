@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.11 2005-05-18 23:42:34 ffleurey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.12 2005-05-28 16:14:17 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -518,8 +518,8 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 */
 	public Object visit(FProperty node) {
 		String result = "";
-		if (node.isFIsComposite()) result += "attribute ";
-		else if (node.isFIsDerived()) result += "property ";
+		if (node.isFIsDerived()) result += "property ";
+		else if (node.isFIsComposite()) result += "attribute ";
 		else result += "reference ";
 		if (node.isFIsReadOnly()) result += "readonly ";
 		result += ppIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node);

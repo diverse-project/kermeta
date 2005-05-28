@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.18 2005-05-27 09:25:19 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.19 2005-05-28 16:13:55 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -61,9 +61,14 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
 public void testSimple() throws Exception {
 testWithFile("test/ecore_testcases","Simple.ecore" );
+}
+
+public void testUML2() throws Exception {
+testWithFile("test/ecore_testcases","UML2.ecore" );
 }
 
 public void testemof() throws Exception {

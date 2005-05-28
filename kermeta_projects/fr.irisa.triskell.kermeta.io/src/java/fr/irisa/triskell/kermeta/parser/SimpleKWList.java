@@ -35,7 +35,7 @@ addKeyword("class");
 addKeyword("abstract");
 addKeyword("Self");
 addKeyword("Void");
-addKeyword("attribut");
+addKeyword("attribute");
 addKeyword("reference");
 addKeyword("property");
 addKeyword("readonly");
