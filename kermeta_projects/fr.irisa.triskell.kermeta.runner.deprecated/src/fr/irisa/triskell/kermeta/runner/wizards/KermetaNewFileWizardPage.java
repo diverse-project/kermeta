@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizardPage.java,v 1.2 2005-05-27 15:06:57 zdrey Exp $
+/* $Id: KermetaNewFileWizardPage.java,v 1.3 2005-05-30 10:08:44 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: GPL
@@ -16,6 +16,8 @@ import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.layout.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.core.resources.*;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.swt.events.*;
@@ -26,6 +28,7 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.help.WorkbenchHelp;
 import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.IHelpContextIds;
+import org.eclipse.ui.internal.ide.misc.ContainerSelectionGroup;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 import org.eclipse.jface.viewers.*;
 import org.eclipse.jface.wizard.Wizard;
@@ -39,10 +42,10 @@ import org.eclipse.jface.wizard.WizardPage;
  */
 
 
-public class KermetaNewFileWizardPage extends WizardPage
-//WizardNewFileCreationPage 
+public class KermetaNewFileWizardPage extends WizardPage implements Listener
 {
-    
+
+    // TODO : extends this class with 'WizardNewFileCreationPage'
 	private Text containerText;
 	private Text fileText;
 	private IStructuredSelection selection;
@@ -60,12 +63,18 @@ public class KermetaNewFileWizardPage extends WizardPage
     //protected ResourceAndContainerGroup resourceGroup;
     
 	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
+	
+	protected ResourceHandler resourceHandler;
+	/** The widget for path selection */
+	protected ContainerSelectionGroup containerGroup;
+	
 	/**
 	 * Constructor for SampleNewWizardPage.
 	 * @param pageName
 	 */
 	public KermetaNewFileWizardPage(IStructuredSelection selection) {
 		super("wizardPage");//, selection);
+		resourceHandler = new ResourceHandler();
 		setTitle("New Kermeta File");
 		setDescription("This wizard creates a new file with *.kmt extension that can be opened by a multi-page editor.");
 		this.selection = selection;
@@ -76,18 +85,20 @@ public class KermetaNewFileWizardPage extends WizardPage
 	 * @see IDialogPage#createControl(Composite)
 	 */
 	public void createSimpleControl(Composite parent) {
+	    
 		Composite container = new Composite(parent, SWT.NULL);
 
 	    Composite groupcontainer = new Group(container, SWT.NULL);
 	    GridLayout layout = new GridLayout();
 		container.setLayout(layout);
 		layout.numColumns = 1;
+		
 	    
 		layout = new GridLayout();
 		groupcontainer.setLayout(layout);
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
-		Label label = new Label(groupcontainer, SWT.NULL);
+/*		Label label = new Label(groupcontainer, SWT.NULL);
 		label.setText("&Container:");
 		
 		containerText = new Text(groupcontainer, SWT.BORDER | SWT.SINGLE);
@@ -106,30 +117,34 @@ public class KermetaNewFileWizardPage extends WizardPage
 				handleBrowse();
 			}
 		});
-		label = new Label(groupcontainer, SWT.NULL);
+		*/
+		Label label = new Label(groupcontainer, SWT.NULL);
 		label.setText("&File name:");
 
 		fileText = new Text(groupcontainer, SWT.BORDER | SWT.SINGLE);
-		gd = new GridData(GridData.FILL_HORIZONTAL);
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 		fileText.setLayoutData(gd);
 		fileText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				dialogChanged();
 			}
 		});
+		
+
+		/* Create the resource browser */
+		containerGroup = new ContainerSelectionGroup(container,
+		        this, true, null, true); 
 
 
 		createFillTemplateFileWindow(container);
-		
+				
 		initialize();
 		dialogChanged();
 		setControl(container);
 
 	
 	}
-	
-	
-	
+
 	
     /**
      * This is a copy of createControl of super class, extended in order to add
@@ -162,7 +177,7 @@ public class KermetaNewFileWizardPage extends WizardPage
 					container = (IContainer)obj;
 				else
 					container = ((IResource)obj).getParent();
-				containerText.setText(container.getFullPath().toString());
+				//containerGroup.setText(container.getFullPath().toString());
 			}
 		}
 		fileText.setText("new_file.kmt");
@@ -196,17 +211,26 @@ public class KermetaNewFileWizardPage extends WizardPage
 	 */
 
 	private void dialogChanged() {
-		String container = getContainerText();//get//getContainerFullPath().toString();
+		//String container = getContainerText();//get//getContainerFullPath().toString();
 		String fileName =  getFilename();//page.getFileName();
 
-		if (container.length() == 0) {
+		/*if (container.length() == 0) {
 			updateStatus("File container must be specified");
 			return;
-		}
+		}*/
 		if (fileName.length() == 0) {
 			updateStatus("File name must be specified");
 			return;
 		}
+		
+		
+		if (containerGroup!=null)
+		{
+		    boolean valid = resourceHandler.validateControls(
+		            containerGroup, fileName, containerGroup.getContainerFullPath());
+		    System.out.println("Valid : "+valid);
+		}
+		
 		int dotLoc = fileName.lastIndexOf('.');
 		if (dotLoc != -1) {
 			String ext = fileName.substring(dotLoc + 1);
@@ -215,6 +239,9 @@ public class KermetaNewFileWizardPage extends WizardPage
 				return;
 			}
 		}
+		
+		//resourceHandler.validateControls()
+		
 		updateStatus(null);
 	}
 
@@ -247,7 +274,7 @@ public class KermetaNewFileWizardPage extends WizardPage
      * Create a window that propose to the user the specification of a 
      * root package, a main class, and a main method.
      */
-    private void createFillTemplateFileWindow(Composite parent)
+    protected void createFillTemplateFileWindow(Composite parent)
     {
         Font font = parent.getFont();
         // Advanced group
@@ -328,4 +355,11 @@ public class KermetaNewFileWizardPage extends WizardPage
         // TODO Auto-generated method stub
         return false;
     }
+    
+    public void handleEvent(Event e)
+    {
+        dialogChanged();
+    }
+    
+    
 }

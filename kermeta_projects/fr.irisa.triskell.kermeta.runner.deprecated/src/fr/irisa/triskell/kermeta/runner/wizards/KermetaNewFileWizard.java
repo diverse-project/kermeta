@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.2 2005-05-27 15:06:57 zdrey Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.3 2005-05-30 10:08:43 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: GPL
@@ -18,7 +18,6 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.core.runtime.*;
 import org.eclipse.core.resources.*;
@@ -28,7 +27,6 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.ui.*;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.ui.internal.ide.DialogUtil;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -41,15 +39,23 @@ import org.eclipse.ui.internal.ide.DialogUtil;
  * be able to open it.
  */
 
-public class KermetaNewFileWizard extends Wizard implements INewWizard {
+public class KermetaNewFileWizard extends  Wizard implements INewWizard {
     
     // TODO : move it in preference constants //
     public final static String STD_TAB = "    ";
+
+    public final static String STD_NL = "\r\n";
     
 	private KermetaNewFileWizardPage page;
 	private IStructuredSelection selection;
 
     private IWorkbench workbench;
+
+    private String packageTextString;
+
+    private String classTextString;
+
+    private String operationTextString;
 
 	/**
 	 * Constructor for KermetaNewFileWizard.
@@ -128,14 +134,19 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 				
 		return true;*/
 	    //final String containerName = page.getContainerName();
-	    final String containerName = page.getContainerText();
+	    //final String containerName = page.getContainerText();
+	    final IPath containerPath = page.containerGroup.getContainerFullPath();
 	    final String fileName = page.getFilename();
-	    System.out.println("container : "+containerName+", filename : "+fileName);
-	    //final String fileName = page.getFileName();
+        packageTextString = page.getPackageTextString();
+        classTextString = page.getMainClassTextString();
+		operationTextString = page.getMainOperationTextString();
+		
+	    
+	    
 	    IRunnableWithProgress op = new IRunnableWithProgress() {
 	        public void run(IProgressMonitor monitor) throws InvocationTargetException {
 	            try {
-	                doFinish(containerName, fileName, monitor);
+	                doFinish(containerPath, fileName, monitor);
 	            } catch (CoreException e) {
 	                throw new InvocationTargetException(e);
 	            } finally {
@@ -163,7 +174,7 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 	 */
 
 	private void doFinish(
-		String containerName,
+		IPath containerPath,
 		String fileName,
 		IProgressMonitor monitor)
 		throws CoreException {
@@ -172,9 +183,9 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IPath test;
 		
-		IResource resource = root.findMember(new Path(containerName));
+		IResource resource = root.findMember(containerPath);//new Path(containerName));
 		if (!resource.exists() || !(resource instanceof IContainer)) {
-			throwCoreException("Container \"" + containerName + "\" does not exist.");
+			throwCoreException("Container \"" + containerPath + "\" does not exist.");
 		}
 		IContainer container = (IContainer) resource;
 		final IFile file = container.getFile(new Path(fileName));
@@ -190,6 +201,8 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 		}
 		monitor.worked(1);
 		monitor.setTaskName("Opening file for editing...");
+		// FIXME : If file exists it is not editable --
+		// I must display the errors
 		getShell().getDisplay().asyncExec(new Runnable() {
 			public void run() {
 				IWorkbenchPage page =
@@ -197,6 +210,8 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 				try {
 					IDE.openEditor(page, file, true);
 				} catch (PartInitException e) {
+				    System.err.println("Part init exception :"+e+"\n------------\n");
+				    e.printStackTrace();
 				}
 			}
 		});
@@ -209,17 +224,19 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 	 * may be optional).
 	 * @return
 	 */
-	private String createTemplate(String pkgStr, String mainClassStr, String mainOpStr)
+	private String createTemplate()
 	{
-	    System.out.println("createTemplate :");
 	    String template_string = 
-	        "@mainClass \""+pkgStr+"::"+mainClassStr+"\"\n"+ 
-	        "@mainOperation \""+mainOpStr+"\"\n\n\n"+
-	        "require kermeta\n"+
-	        "package"+pkgStr+"\n\n\n"+
-	        "class "+mainClassStr+
-	        STD_TAB+"operation "+mainOpStr+"() : Void is do \n\n"+
-	        "end";
+	        "@mainClass \""+packageTextString+"::"+classTextString+"\"\n"+ 
+	        "@mainOperation \""+operationTextString+"\"\n\n\n"+
+	        "package "+packageTextString+";\n\n\n"+
+	        "require kermeta;\n"+
+	        "class "+classTextString+
+	        "\n{\n"+
+	        	STD_TAB+"operation "+operationTextString+"() : Void is do \n"
+	        +	STD_TAB+STD_TAB+"// TODO: implement '"+operationTextString+ "' operation\n"
+	        +   STD_TAB+"end"+
+	        "\n}";
 	    return template_string;
 	}
 	
@@ -229,10 +246,7 @@ public class KermetaNewFileWizard extends Wizard implements INewWizard {
 
 	private InputStream openContentStream() {
 	    
-		String contents = createTemplate(
-		        page.getPackageTextString(),
-		        page.getMainClassTextString(),
-				page.getMainOperationTextString());
+		String contents = createTemplate();
 		return new ByteArrayInputStream(contents.getBytes());
 	}
 
