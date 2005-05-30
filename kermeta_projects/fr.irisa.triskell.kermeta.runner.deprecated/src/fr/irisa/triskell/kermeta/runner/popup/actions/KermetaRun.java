@@ -1,4 +1,4 @@
-/* $Id: KermetaRun.java,v 1.6 2005-05-27 15:06:47 zdrey Exp $
+/* $Id: KermetaRun.java,v 1.7 2005-05-30 17:18:18 zdrey Exp $
  * Project : Kermeta.runner
  * File : KermetaRun.java
  * License : GPL
@@ -24,6 +24,8 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+
+import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -71,7 +73,7 @@ public class KermetaRun implements IObjectActionDelegate {
 		    RunPopupDialog runPopupDialog = new RunPopupDialog(shell, anIFile);
 		    // Load the selected file
 		    KermetaUnit kunit = runPopupDialog.parse(anIFile);
-		    ArrayList point = KermetaRunHelper.setEntryPoint(kunit);
+		    ArrayList point = KermetaRunHelper.findEntryPoint(kunit);
 		    // Set the default value to display in the dialog
 		    runPopupDialog.classQualifiedNameString = (String)point.get(0);
 		    runPopupDialog.defaultOperationString = (String)point.get(1);
@@ -86,24 +88,25 @@ public class KermetaRun implements IObjectActionDelegate {
 		        {
 		            // 	Get the values given by the user in the runPopupDialog
 		            KermetaInterpreter interpreter = new KermetaInterpreter(kunit);
-		            
 		            interpreter.setEntryPoint(
 		                    runPopupDialog.classQualifiedNameString,
 		                    runPopupDialog.defaultOperationString);
-		            
 		            interpreter.setKStream(console);
 		            interpreter.launch();
 		        }
 		        catch (KermetaRaisedException kerror)
 		        {
-		            console.print("Uncaught exception in Kermeta program\n");
+		            console.print("Uncaught exception in Kermeta program:\n");
 		            console.print(kerror.getMessage());
+		        }
+		        catch (KermetaInterpreterError ierror)
+		        {
+		            console.print("Uncaught exception in Kermeta interpreter:\n");
+		            console.print(ierror.getMessage());
 		        }
 		        catch (Throwable e)
 		        {
-		            console.print(
-		                    "-------------------------------------------\n" +
-		            		"KermetaInterpreter internal error \n" +
+		            console.print("KermetaInterpreter internal error \n" +
 		            		"-------------------------------------------\n");
 		            console.print(e.getMessage());
 		            e.printStackTrace();
