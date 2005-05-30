@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.6 2005-05-25 17:42:47 ffleurey Exp $
+/* $Id: RunTestCase.java,v 1.7 2005-05-30 11:48:18 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : GPL
@@ -20,9 +20,6 @@ import junit.framework.TestCase;
 import org.apache.log4j.Logger;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
-import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
