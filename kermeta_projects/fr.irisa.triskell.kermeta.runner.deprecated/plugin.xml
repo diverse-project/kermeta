@@ -110,9 +110,9 @@
           sourceLocatorId="kermetaSourceLocator"
           delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
           public="true"
-          name="Kermeta Run Configuration"
-          modes="run, debug"
-          id="KermetaLaunchConfiguration">        
+          name="Kermeta Application"
+          id="KermetaLaunchConfiguration"
+          modes="run, debug">
     </launchConfigurationType>
    </extension>
   
@@ -134,8 +134,14 @@
       <extension
             point="org.eclipse.debug.ui.launchGroups">
          <launchGroup
+               bannerImage="icons/sample.gif"
+               label="fr.irisa.triskell.kermeta.runner.launchGroup2"
+               mode="run"
+               image="icons/sample.gif"
+               id="fr.irisa.triskell.kermeta.runner.launchGroup2"/>
+         <launchGroup
                bannerImage="icons/kermeta_logo.gif"
-               label="Kermeta Configuration"
+               label="Kermeta Configurazion"
                mode="run"
                image="icons/kermeta_logo.gif"
                id="KermetaLaunchGroup"/>
@@ -232,6 +238,22 @@
 
       </objectContribution>
    </extension>
+      <extension
+            point="org.eclipse.debug.ui.launchShortcuts">
+         <shortcut
+               label="Kermeta App"
+               icon="icons/kermeta_logo.gif"
+               class="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchShortcut"
+               path="additions"
+               modes="run"
+               id="fr.irisa.triskell.kermeta.runner.kermetashortcut">
+            <contextualLaunch>
+               <contextLabel
+                     label="Context"
+                     mode="run"/>
+            </contextualLaunch>
+         </shortcut>
+      </extension>
 
 
 </plugin>
