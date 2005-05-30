@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.7 2005-05-25 17:42:46 ffleurey Exp $
+/* $Id: KermetaInterpreter.java,v 1.8 2005-05-30 14:05:50 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -150,29 +150,44 @@ public class KermetaInterpreter {
 	 * @param class_def_qname the name of the class that contain the operation to execute
 	 * @param operation_name the operation to execute
 	 */
-	public void setEntryPoint(String class_def_qname, String operation_name) {
+	public void setEntryPoint(String class_def_qname, String operation_name) throws KermetaInterpreterError {
 	    // get the type definition
 	    FTypeDefinition td = unit.typeDefinitionLookup(class_def_qname);
+	    CallableOperation co = null;
+	    String emessage = "";
 	    // check that it exists and that it is a class
 	    if (td == null || !(td instanceof FClassDefinition)) {
-	        internalLog.error("Entry type " + class_def_qname + " not found or not a valid entry type.");
-	        return;
+	        emessage = "Entry type '" + class_def_qname + "' not found or not valid";
+	        internalLog.error(emessage);	        
 	    }
 	    // FIXME: to allow parametric types as entry types
-	    if (((FClassDefinition)td).getFTypeParameter().size() != 0) {
-	        internalLog.error("Invalid entry type" + class_def_qname + ", it has type parameters.");
-	        return;
+	    else if (((FClassDefinition)td).getFTypeParameter().size() != 0) {
+	        emessage = "Invalid entry type '" + class_def_qname + "', it has type parameters.";
+	        internalLog.error(emessage);
 	    }
-	    // set entryClass
-	    entryClass = InheritanceSearch.getFClassForClassDefinition((FClassDefinition)td);
-	    // Search the operation
-	    CallableOperation co = new SimpleType(entryClass).getOperationByName(operation_name);
-	    if (co == null) {
-	        internalLog.error("Cannot find entry operation" + operation_name + " in type " + class_def_qname);
-	        return;
+	    
+	    else if (emessage.equals(""))
+	    {	// set entryClass
+	        entryClass = InheritanceSearch.getFClassForClassDefinition((FClassDefinition)td);
+	        // Search the operation
+	        co = new SimpleType(entryClass).getOperationByName(operation_name);
+	    
+	    
+	        if (co == null) 
+	        {
+	            emessage = "Cannot find entry operation '" + 
+	        	operation_name + "' in type '" + class_def_qname+"'";
+	        internalLog.error(emessage);
+	        }
 	    }
-	    // set entryOperation
-	    entryOperation = co.getOperation();
+	    
+	    if (!emessage.equals(""))  {
+	        
+	        throw new KermetaInterpreterError(emessage);
+	    }
+	    else  {    // set entryOperation
+	        entryOperation = co.getOperation();
+	    }
 	}
 	
 	public void setKStream(KermetaIOStream stream)
