@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.4 2005-05-27 15:06:11 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.5 2005-05-30 17:17:45 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -34,7 +34,6 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
      * STATIC FIELDS
      *
      */
-    public static String KM_UNIT = "KM_UNIT";
     public static String KM_FILENAME = "KM_FILENAME";
     public static String KM_CLASSQNAME = "KM_CLASSQNAME";
     public static String KM_OPERATIONNAME = "KM_OPERATIONNAME";
@@ -44,7 +43,7 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
      */
     public KermetaLaunchConfiguration() {
         super();
-        System.out.println("Coucou Launcher!");
+        System.out.println("Coucou Launcher! : " );
     }
 	
 	/**
@@ -68,21 +67,17 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	        ILaunch launch, IProgressMonitor monitor) throws CoreException {
 	    try
 	    {
-	        System.err.println("FUXK");
 	        //  If the mode choosen is Run a Kermeta run target is created
 	        if (mode.equals(ILaunchManager.RUN_MODE)) 
-	        {
-	            
-	        //    System.out.println("launch before: "+launch.getSourceLocator());
-	            // Set the source locator to launch
-	          //  launch.setSourceLocator(new KermetaSourceLocator());//new KermetaSourceLocator());
-	            System.out.println("launch : "+launch.getSourceLocator());
+	        {    
+	            // Set the default source locator to launch FIXME : consequences???
+	            launch.setSourceLocator(new KermetaSourceLocator());
+	           
 	            KermetaRunTarget runtarget = new KermetaRunTarget(launch); 
 	            // Set the run target with current launch
 	            // Add it as a debug target
 	            launch.addDebugTarget(runtarget);
 	            
-	            //   launch.getLaunchConfiguration().
 	            // Run the launcher with configurationParam, launchParam, currentMode
 	            runKermeta(configuration, mode);
 	            // Terminate the run target
@@ -95,7 +90,7 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	    }
 	    catch (Exception e)
 	    {
-	        System.err.println("There is a plugin error");
+	        System.err.println("There is a plugin error :'(");
 	        e.printStackTrace();
 	    }
 	}
@@ -151,7 +146,6 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
             // TODO Auto-generated method stub
         } catch (CoreException e) {
             // TODO Auto-generated catch block
-            System.out.println("ZUT");
             e.printStackTrace();
         }
         

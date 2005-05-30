@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.7 2005-05-27 15:06:12 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.8 2005-05-30 17:17:46 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -181,7 +181,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		    // Create the Unit corresponding to the chosen Kermeta file
 		    // (either the SelectedResource one, or the path of current configuration)
 		    selectedUnit = KermetaRunHelper.parse(currentPath);
-		    ArrayList point = KermetaRunHelper.setEntryPoint(selectedUnit);
+		    ArrayList point = KermetaRunHelper.findEntryPoint(selectedUnit);
 		    selectedClassString = (String)point.get(0);
 		    selectedOperationString = (String)point.get(1);
 		    

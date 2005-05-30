@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.3 2005-05-25 09:26:01 zdrey Exp $
+/* $Id: KermetaSourceLocator.java,v 1.4 2005-05-30 17:17:46 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaSourceLocator.java
  * License: GPL
@@ -32,6 +32,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
      */
     public void initializeFromMemento(String memento) throws CoreException {
         // TODO Auto-generated method stub
+        System.out.println("TODO : implement initializeFromMemento("+memento+")");
 
     }
 
@@ -40,6 +41,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
      */
     public void initializeDefaults(ILaunchConfiguration configuration)
             throws CoreException {
+        System.out.println("Salut : initializeDefaults, dans KSL");
         // TODO Auto-generated method stub
 
     }
@@ -49,6 +51,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
      */
     public Object getSourceElement(IStackFrame stackFrame) {
         // TODO Auto-generated method stub
+        System.out.println("TODO : implement getSourceElement");
         return null;
     }
 
