@@ -1,4 +1,4 @@
-/* $Id: ResourceHandler.java,v 1.1 2005-05-30 10:08:43 zdrey Exp $
+/* $Id: ResourceHandler.java,v 1.2 2005-05-30 17:19:19 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ResourceHandler.java
  * License : GPL
@@ -16,16 +16,18 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 
 /**
  * This class proposes a set of methods that help the validation of the creation,
- * modification, refactoring, of a resource. It takes a set of methods initialy defined
+ * modification, refactoring, of a resource. It takes a set of already-written 
+ * methods initially defined
  * in the IBM eclipse available class called ResourceAndContainerGroup (used by the 
  * file creation wizard page WizardNewFileCreationPage)
+ * The only difference with the so-called class is that it does not "depend" on any
+ * widget.
+ * TODO : directly use ResourceAndContainerGroup!
  */
 public class ResourceHandler {
 
@@ -71,6 +73,7 @@ public class ResourceHandler {
      * a valid container resource in the workbench.  An error message is stored for
      * future reference if the name does not represent a valid container.
      *
+	 * @see org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup#validateContainer;
      * @return <code>boolean</code> indicating validity of the container name
      */
     protected boolean validateContainer(IPath containerPath) {
@@ -95,7 +98,8 @@ public class ResourceHandler {
 	 * path represents a valid new resource in the workbench.  An error message
 	 * is stored for future reference if the path  does not represent a valid
 	 * new resource path.
-	 * Note : Picked from ResourceAndContainerGroup.java
+	 * Note : Original copy of ResourceAndContainerGroup.java
+	 * @see org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup#validateFullResourcePath;
 	 * @param resourcePath the path to validate
 	 * @return <code>boolean</code> indicating validity of the resource path
 	 */
@@ -122,7 +126,8 @@ public class ResourceHandler {
 	 * Returns a <code>boolean</code> indicating whether the resource name rep-
 	 * resents a valid resource name in the workbench.  An error message is stored
 	 * for future reference if the name does not represent a valid resource name.
-	 *
+	 * Note : Original copy of ResourceAndContainerGroup.java
+	 * @see org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup#validateResourceName;
 	 * @return <code>boolean</code> indicating validity of the resource name
 	 */
 	protected boolean validateResourceName(String resourceName) {
@@ -142,4 +147,24 @@ public class ResourceHandler {
 	    return true;
 	}
 
+	
+	
+    /**
+     * @return Returns the problemMessage.
+     */
+    public String getProblemMessage() {
+        return problemMessage;
+    }
+    /**
+     * @return Returns the problemType.
+     */
+    public int getProblemType() {
+        return problemType;
+    }
+    /**
+     * @return Returns the resourceType.
+     */
+    public String getResourceType() {
+        return resourceType;
+    }
 }

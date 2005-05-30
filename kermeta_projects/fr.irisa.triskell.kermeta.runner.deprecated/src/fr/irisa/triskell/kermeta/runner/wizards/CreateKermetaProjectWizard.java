@@ -1,4 +1,4 @@
-/* $Id: CreateKermetaProjectWizard.java,v 1.2 2005-05-27 15:06:58 zdrey Exp $
+/* $Id: CreateKermetaProjectWizard.java,v 1.3 2005-05-30 17:19:20 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: CreateKermetaProjectWizard.java
  * License: GPL
@@ -89,7 +89,7 @@ public class CreateKermetaProjectWizard extends Wizard {
                 page.createFolders(newProjectHandle);
             }};
         
-        //page.createFolders(projectHandle);
+        
         
         // run the operation to create a new project
         try {

@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizardPage.java,v 1.3 2005-05-30 10:08:44 zdrey Exp $
+/* $Id: KermetaNewFileWizardPage.java,v 1.4 2005-05-30 17:19:19 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: GPL
@@ -59,7 +59,7 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
     private Text mainClassText;
     private Text mainOperationText;
     private Group advancedGroup;
-    // This attribute exists in WizardNewFileCreationPage, but is private :(
+    // This attribute exists in WizardNewFileCreationPage, but private :(
     //protected ResourceAndContainerGroup resourceGroup;
     
 	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
@@ -73,7 +73,7 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
 	 * @param pageName
 	 */
 	public KermetaNewFileWizardPage(IStructuredSelection selection) {
-		super("wizardPage");//, selection);
+		super("wizardPage");
 		resourceHandler = new ResourceHandler();
 		setTitle("New Kermeta File");
 		setDescription("This wizard creates a new file with *.kmt extension that can be opened by a multi-page editor.");
@@ -98,26 +98,7 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
 		groupcontainer.setLayout(layout);
 		layout.numColumns = 3;
 		layout.verticalSpacing = 9;
-/*		Label label = new Label(groupcontainer, SWT.NULL);
-		label.setText("&Container:");
 		
-		containerText = new Text(groupcontainer, SWT.BORDER | SWT.SINGLE);
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
-		containerText.setLayoutData(gd);
-		containerText.addModifyListener(new ModifyListener() {
-			public void modifyText(ModifyEvent e) {
-				dialogChanged();
-			}
-		});
-
-		Button button = new Button(groupcontainer, SWT.PUSH);
-		button.setText("Browse...");
-		button.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				handleBrowse();
-			}
-		});
-		*/
 		Label label = new Label(groupcontainer, SWT.NULL);
 		label.setText("&File name:");
 
@@ -211,24 +192,22 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
 	 */
 
 	private void dialogChanged() {
-		//String container = getContainerText();//get//getContainerFullPath().toString();
 		String fileName =  getFilename();//page.getFileName();
 
-		/*if (container.length() == 0) {
-			updateStatus("File container must be specified");
-			return;
-		}*/
 		if (fileName.length() == 0) {
 			updateStatus("File name must be specified");
 			return;
 		}
 		
-		
 		if (containerGroup!=null)
 		{
 		    boolean valid = resourceHandler.validateControls(
 		            containerGroup, fileName, containerGroup.getContainerFullPath());
-		    System.out.println("Valid : "+valid);
+		    if (!valid)
+		    {
+		        updateStatus(resourceHandler.getProblemMessage());
+		    	return;
+		    }
 		}
 		
 		int dotLoc = fileName.lastIndexOf('.');
@@ -240,7 +219,6 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
 			}
 		}
 		
-		//resourceHandler.validateControls()
 		
 		updateStatus(null);
 	}
@@ -250,25 +228,6 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
 		setPageComplete(message == null);
 	}
 
-	/*public String getContainerName() {
-		return containerText.getText();
-
-	}
-	public String getFileName() {
-		return fileText.getText();
-	}*/
-	
-
-
-	/**
-	 * 
-	 * Creates the widget for advanced options.
-	 * Overrides method from NewFileCreationWizardPage 
-	 * @param parent the parent composite
-	 */
-	protected void createAdvancedControls(Composite parent) {
-	  //  super.createAdvancedControls(parent);
-	}
 
     /**
      * Create a window that propose to the user the specification of a 
@@ -320,12 +279,7 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
         _text.setFont(font);
         _text.setText(defaultValue);
         return _text;
-    }   
-    
-    
-    
-    
-    
+    }
 	
     /**
      * @return Returns the mainClassText.

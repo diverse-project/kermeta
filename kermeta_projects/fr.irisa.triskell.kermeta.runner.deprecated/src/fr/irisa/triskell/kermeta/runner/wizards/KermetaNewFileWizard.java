@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.3 2005-05-30 10:08:43 zdrey Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.4 2005-05-30 17:19:19 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: GPL
@@ -192,7 +192,8 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 		try {
 			InputStream stream = openContentStream();
 			if (file.exists()) {
-				file.setContents(stream, true, true, monitor);
+			    // TODO : ask user if he wants to overwrite it or not.
+				// file.setContents(stream, true, true, monitor);
 			} else {
 				file.create(stream, true, monitor);
 			}
