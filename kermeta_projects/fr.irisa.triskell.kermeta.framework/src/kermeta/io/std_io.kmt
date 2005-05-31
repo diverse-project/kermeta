@@ -22,14 +22,16 @@ class StdIO
 	/**
 	 * write the object to standard output
 	 */ 
-	operation write(object : Object) : Void is do
+	operation write(object : String) : Void is do
+		if object == void then object := "<void>" end
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.write(object)
 	end
 	
 	/**
 	 * writeln the object to standard output
 	 */ 
-	operation writeln(object : Object) : Void is do
+	operation writeln(object : String) : Void is do
+		if object == void then object := "<void>" end
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.writeln(object)
 	end
 	
@@ -37,6 +39,7 @@ class StdIO
 	 * read an object from standard input
 	 */ 
 	operation read(prompt : String) : String is do
+		if prompt == void then prompt := "" end
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::StdIO.read(prompt)
 	end
 	

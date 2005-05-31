@@ -60,7 +60,7 @@ class TestString inherits kermeta::kunit::Test {
     end
 
 	// test the not-identity 
-/*	operation  testfailop_equals() : kermeta::standard::Boolean is do 
+	operation  testfailop_equals() : kermeta::standard::Boolean is do 
         result := "toto".equals("titi")
        	assert(not(result))
     end
@@ -70,7 +70,10 @@ class TestString inherits kermeta::kunit::Test {
         result := "titi".equals("titi")
         assert(result)
 	end
-	*/
+	
+	operation testWrite() is do
+		stdio.writeln ( "kkk".append("nnn") )
+	end
 	
 	/**
 	 * Appends other at the end of self

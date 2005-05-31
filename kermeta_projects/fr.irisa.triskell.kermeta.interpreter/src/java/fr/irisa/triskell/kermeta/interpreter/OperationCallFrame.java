@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.3 2005-05-25 17:42:51 ffleurey Exp $
+/* $Id: OperationCallFrame.java,v 1.4 2005-05-31 08:36:58 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : OperationCallFrame.java
 * License : GPL
@@ -54,7 +54,7 @@ public class OperationCallFrame extends CallFrame {
         super(pContext);
         this.operation = pOperation.getOperation();
         this.self = pSelf;
-        
+        operationResult = pSelf.getFactory().getMemory().voidINSTANCE;
         typeParameters = TypeVariableEnforcer.getTypeVariableBinding(pOperation.getFclass());
         
         if (operation.getFTypeParameter().size() > 0) {
