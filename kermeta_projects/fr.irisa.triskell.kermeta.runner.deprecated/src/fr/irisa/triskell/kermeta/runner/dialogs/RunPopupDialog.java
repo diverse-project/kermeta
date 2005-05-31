@@ -1,4 +1,4 @@
-/* $Id: RunPopupDialog.java,v 1.6 2005-05-25 17:28:03 zdrey Exp $
+/* $Id: RunPopupDialog.java,v 1.7 2005-05-31 16:59:29 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RunPopupDialog.java
  * License: GPL
@@ -169,7 +169,7 @@ public class RunPopupDialog extends Dialog {
         	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
 	        result.load();
 	        
-	        result.typeCheck();
+	        result.typeCheck(null);
 	        
         }
         catch(Throwable e) {

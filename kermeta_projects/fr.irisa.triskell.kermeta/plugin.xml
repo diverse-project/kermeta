@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta"
    name="Kermeta Workbench"
-   version="0.0.5"
+   version="0.0.6"
    provider-name="IRISA/INRIA"
    class="fr.triskell.irisa.kermetaplugin.KermetaPlugin">
    <runtime>
@@ -44,5 +44,30 @@
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
    </requires>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.ecore"
+            id="fr.irisa.triskell.kermeta.contribution1">
+         <action
+               enablesFor="1"
+               label="Generate Kermeta Source"
+               icon="images/kermeta.png"
+               class="fr.irisa.triskell.kermeta.popup.actions.Ecore2KermetaAction"
+               id="fr.irisa.triskell.kermeta.Ecore2KMT"/>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.kmt"
+            id="fr.irisa.triskell.kermeta.objectContribution1">
+         <action
+               enablesFor="1"
+               label="Compile Kermeta Source"
+               icon="images/tree_package.gif"
+               class="fr.irisa.triskell.kermeta.popup.actions.CompileKMTAction"
+               id="fr.irisa.triskell.kermeta.KMT2KM"/>
+      </objectContribution>
+   </extension>
 
 </plugin>

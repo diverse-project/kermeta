@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.25 2005-05-25 17:42:10 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.26 2005-05-31 16:59:48 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -676,12 +676,38 @@ public abstract class KermetaUnit {
 	            resource.getContents().add(p);
 	        }
 	    }
+	    addFTagToResource(resource);
 	    try {
 			resource.save(null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			throw new Error(e);
 		}
+	}
+	
+	/**
+	 * Add the given tag to resource. Used in the KMT2KMPass7.java, to add tag in resource without
+	 * adding it to a container (since a tag can be linked to one or more elements, and unlinked as well).
+	 */
+	public void addFTagToResource(Resource resource)
+	{
+	    ArrayList tags = new ArrayList();
+	    TreeIterator it = resource.getAllContents();
+	    while (it.hasNext()) {
+	        FObject o = (FObject)it.next();
+	        Iterator tgs = o.getFTag().iterator();
+	        while(tgs.hasNext()) {
+	            FTag tag = (FTag)tgs.next();
+	            if (tag.eResource() == null && !tags.contains(tag)) {
+	                tags.add(tag);
+		        }
+	        }
+	    }
+	    Iterator tit = tags.iterator();
+	    while(tit.hasNext()) {
+	        FObject o = (FObject)tit.next();
+	        resource.getContents().add(o);
+	    }
 	}
 	
 	/**
@@ -727,20 +753,7 @@ public abstract class KermetaUnit {
 		
 	}
 	*/
-	/**
-	 * Add the given tag to resource. Used in the KMT2KMPass7.java, to add tag in resource without
-	 * adding it to a container (since a tag can be linked to one or more elements, and unlinked as well).
-	 */
-	public void addFTagToResource(Resource resource)
-	{
-	    Enumeration enum = this.tags.elements();
-	    FTag tag;
-	    while (enum.hasMoreElements())
-	    {   
-	        tag = (FTag)enum.nextElement();
-	        resource.getContents().add(tag);
-	    }
-	}
+	
 	
 	/**
 	 * If containedPackage has no container, we return it unchanged, else, we return its container,

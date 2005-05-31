@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.2 2005-05-26 22:39:08 ffleurey Exp $
+/* $Id: ECore2Kermeta.java,v 1.3 2005-05-31 16:59:52 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
 * License : GPL
@@ -136,18 +136,26 @@ public class ECore2Kermeta extends EcoreVisitor {
     
     protected FType getFTypeForEType(EClassifier etype) {
     	
-    	FTypeDefinition def;
+    	FTypeDefinition def = null;
     	
-    	if (etype.eResource() != resource) {
-    		def = unit.typeDefinitionLookup(getQualifiedName(etype));
-    		if (def == null) {
-    			// import the unit
-    			unit.importedUnits.add(new EcoreUnit(etype.eResource(), unit.packages));
-    		}
-    		def = unit.typeDefinitionLookup(getQualifiedName(etype));
+    	if (etype == null) {
+    	    def = unit.typeDefinitionLookup("kermeta::standard::Void");
     	}
-    	else {
-    		def = (FTypeDefinition)types.get(etype);
+    	
+    	if (def == null) {
+    	
+	    	if (etype.eResource() != resource) {
+	    		def = unit.typeDefinitionLookup(getQualifiedName(etype));
+	    		if (def == null) {
+	    			// import the unit
+	    			unit.importedUnits.add(new EcoreUnit(etype.eResource(), unit.packages));
+	    		}
+	    		def = unit.typeDefinitionLookup(getQualifiedName(etype));
+	    	}
+	    	else {
+	    		def = (FTypeDefinition)types.get(etype);
+	    	}
+	    	
     	}
     	
     	if (def == null) return null;
@@ -209,7 +217,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         getCurrentPackage().getFOwnedTypeDefinition().add(current_classdef);
         
         // set super types
-        Iterator it = node.getEAllSuperTypes().iterator();
+        Iterator it = node.getESuperTypes().iterator();
         while (it.hasNext()) {
         	EClassifier st = (EClassifier)it.next();
             FType t = getFTypeForEType(st);
@@ -221,6 +229,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         
         // properties and operations:
         acceptList(node.getEStructuralFeatures());
+        acceptList(node.getEOperations());
         
         unit.typeDefs.put(getQualifiedName(node), current_classdef);
         
@@ -320,9 +329,23 @@ public class ECore2Kermeta extends EcoreVisitor {
         
         FType t = getFTypeForEType(node.getEType());
         if (t == null) {
-            throw new Error("Internal error of ecore2kermeta transfo : type of property " + getQualifiedName(node) + " not found");
+            throw new Error("Internal error of ecore2kermeta transfo : type of operation " + getQualifiedName(node) + " not found");
         }
         current_op.setFType(t);
+        
+        // FIXME : hack to handle operation named like properties
+        FProperty prop = unit.getPropertyByName(current_classdef, current_op.getFName());
+        if (prop != null) {
+            current_op.setFName("op_" + current_op.getFName());
+        }
+        
+        // FIXME : a simple hack to avoid two operation with the same name
+        FOperation op = unit.getOperationByName(current_classdef, current_op.getFName());
+        int i = 2;
+        while (op != null) {
+            current_op.setFName(current_op.getFName() + i);
+            op = unit.getOperationByName(current_classdef, current_op.getFName());
+        }
         
         current_op.setFOwningClass(current_classdef);
      

@@ -2,6 +2,7 @@ package kermeta::exceptions;
 require "../Standard.kmt"
 using kermeta::standard
 using kermeta::utils
+
 /*****************************************************************************
  * $Id:
  * Project : Kermeta (First iteration)
@@ -16,7 +17,12 @@ using kermeta::utils
  *
  ****************************************************************************/
 
+/*****************************************************************************
+ * 1-General errors
+ *****************************************************************************/ 
+
 /**
+ * Generic exceptions
  * The main class from which all the exception inherit
  */
 class Exception
@@ -36,100 +42,49 @@ class Exception
      * The stack trace as a String
      * Filled by the interpreted when the exception is raised
      */
-    attribute stack_trace : String
+    attribute stackTrace : String
 }
+
+/*****************************************************************************
+ * 2-Runtime errors
+ *****************************************************************************/ 
 
 /**
  * Abstract exception for interpreter exceptions
  */
-abstract class InterpreterException inherits Exception {
+abstract class RuntimeError inherits Exception {
 	
 	/**
-	 * The code line that raised the exception
+	 * The code that raised the exception
 	 */
-	attribute code_line : String
+	attribute expression : kermeta::language::behavior::Expression
 }
-
-class CallOnVoidTarget inherits InterpreterException {
-	reference call_expression : kermeta::language::behavior::CallExpression
-}
-
-
 
 /**
- * Errors that prevent the program to be executed correctly
+ * Occurs when a feature is called on void
  */
-class Error inherits Exception {
-}
-
-/**
- * Messages that do not compromise the execution of the program
- */ 
-class Warning inherits Exception {
-}
-
-/**
- * Errors that lead to the end of the program execution
- */
-class SystemExit inherits Exception {
-}
-
-/**
- * 
- * STANDARD ERRORS
- * 
- */
-
-
-/** 
- *  SyntaxError that should be thrown when a wrong keyword is used 
- *  Using the Kermeta plugin editor could help to find this 
- *  error before interpretation
-*/
-class SyntaxError inherits Error {}
-
-/** An attribute was not found for a given instance */ 
-class AttributeError  inherits Error {}
-/** An enumLiteral was not found for a given Enumeration */
-class EnumError inherits Error {}
-/** A variable was not found in local or global context */
-class VariableError inherits Error {}
-
-/** Specific class for assert Operation (for the future testSuite unit tool) */
-class AssertionError inherits Error {}
-
-/** Not implemented error : useful for abstract classes for which operations 
-    implementation by the inheriting class is necessary*/
-class NotImplementedError inherits Error {}
-/** A variable or attribute that is assigned to an element that does not correspond
-    to the expected type -- thrown by the TypeChecker? */
-class TypeError inherits Error {}
-/** An operation that fails can raise an ArithmError*/
-class ArithmeticError inherits Error {}
-/** An infinite recursion, or a loop which execution exceed a timestamp?*/
-class InfiniteRecursionError inherits Error {}
-/** A stack overflow error (like an infinite loop */
-class StackOverflowError inherits Error {}
-
-/**
- * 
- *  WARNINGS 
- *
- */
- 
-/** For an operation that is aimed to not exist anymore later */
-class DeprecateWarning inherits Warning {}
-
-class UnusedVariableWarning inherits Warning {}
+class CallOnVoidTarget inherits RuntimeError {}
 
 
 /*****************************************************************************
- * 2-level specialized errors
+ * 3-Standard library related errors
  *****************************************************************************/ 
 
 /*
- * ARITHMETIC ERRORS
- *
+ * Arithmetic errors
  */
- class ZeroDivisionError inherits ArithmeticError {}
- class OverflowError inherits ArithmeticError {}
+class DivisionByZero inherits Exception {}
+class OverflowError inherits Exception {}
+ 
+/*
+ * String errors
+ */
+class StringIndexOutOfBound inherits Exception {}
+  
+/*
+ * Collection related errors
+ */  
+class IndexOutOfBound inherits Exception {}
+class EmptyCollection inherits Exception {}
+
+class IteratorIsOff inherits Exception {}

@@ -1,11 +1,10 @@
-// $Id: primitive_types.kmt,v 1.17 2005-05-25 17:42:01 ffleurey Exp $
+// $Id: primitive_types.kmt,v 1.18 2005-05-31 16:58:59 ffleurey Exp $
 package kermeta::standard; 
+
 require "../Standard.kmt"
 
-
-
-
 using kermeta::language::structure
+using kermeta::exceptions
 
 /***************************************************
  * Franck FLEUREY - 11/02/2005
@@ -202,6 +201,7 @@ class Integer inherits Numeric
 	 * returns self / other
 	 */
 	operation div(other : Integer) : Integer is do
+		if other == 0 then raise DivisionByZero.new end
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.div(self,other)
 	end
 	
@@ -209,6 +209,7 @@ class Integer inherits Numeric
 	 * returns self modulo other
 	 */
 	operation mod(other : Integer) : Integer is do
+		if other == 0 then raise DivisionByZero.new end
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.mod(self,other)
 	end
 	
@@ -341,7 +342,11 @@ class Character inherits ValueType, Comparable
 	end
 
 	method equals(other : Object) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.equals(self, other)
+		if other.getMetaClass != Character then
+			result := false
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.equals(self, other)
+		end
 	end
 	
 	method toString() : String is do
@@ -363,7 +368,11 @@ class String inherits ValueType, Comparable
 	end
 	
 	method equals(other : Object) : Boolean is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.equals(self, other)
+		if other.getMetaClass != String then
+			result := false
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.equals(self, other)
+		end
 	end
 	
 	/**
@@ -384,7 +393,11 @@ class String inherits ValueType, Comparable
 	 * returns the character at index in the String
 	 */
 	operation elementAt(index : Integer) : Character is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.elementAt(self,index)
+		if index < 0 or index > size-1 then
+			raise StringIndexOutOfBound.new
+		else
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.elementAt(self,index)
+		end
 	end
 	
 	/**
@@ -399,8 +412,12 @@ class String inherits ValueType, Comparable
 	/**
 	 * returns a new string that is a substring of this string
 	 */
-	operation substring(index : Integer, length : Integer) : String is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.substring(self,index, length)
+	operation substring(startIndex : Integer, endIndex : Integer) : String is do
+		if startIndex >= 0 and startIndex < size and endIndex < size and endIndex >= startIndex then
+			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.substring(self,startIndex, endIndex)
+		else
+			raise StringIndexOutOfBound.new
+		end
 	end
 	
 	operation size() : Integer is do

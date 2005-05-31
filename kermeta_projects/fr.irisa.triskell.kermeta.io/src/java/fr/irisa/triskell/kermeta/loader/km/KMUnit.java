@@ -4,13 +4,16 @@
  */
 package fr.irisa.triskell.kermeta.loader.km;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
@@ -31,22 +34,51 @@ public class KMUnit extends KermetaUnit {
 		super(uri, packages);
 		// TODO Auto-generated constructor stub
 	}
+	
+	Resource resource ;
+	
+	public KMUnit(String uri, Hashtable packages, Resource res) {
+		super(uri, packages);
+		resource = res;
+	}
 
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#preLoad()
 	 */
 	public void preLoad() {
 		try {
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl()); 
-			ResourceSet resource_set = new ResourceSetImpl();
-			Resource resource = resource_set.getResource(URI.createURI(uri), true);
+		    if (resource == null) {
+				KermetaUnit.internalLog.info("Loading KM ressource " + uri);
+		        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl()); 
+				ResourceSet resource_set = new ResourceSetImpl();
+				XMIResource r;
+				
+				resource = resource_set.getResource(URI.createURI(uri), true);
+
+				resource.load(null);
+				KermetaUnit.internalLog.info("Resource set size : " + resource_set.getResources().size());
+				
+		    
+		    }
 			
+		    ArrayList loadedResources = new ArrayList();
+		    loadedResources.add(resource);
+		    
 			KMLoader visitor = new KMLoader(this);
-			Iterator it = resource.getContents().iterator();
+			TreeIterator it = resource.getAllContents();
 			while(it.hasNext()) {
 				FObject o = (FObject)it.next();
 				visitor.accept(o);
+				if (!loadedResources.contains(o.eResource())) {
+				    loadedResources.add(o.eResource());
+				    KMUnit iu = new KMUnit(resource.getURI().toString(), packages, o.eResource());
+				    iu.preLoad();
+				    importedUnits.add(iu);
+				}
 			}
+			
+			
+			
     	}
     	catch(Exception e) {
     		this.error.add(new KMUnitError("Unable to load program '" + uri +" :" + e, null));
