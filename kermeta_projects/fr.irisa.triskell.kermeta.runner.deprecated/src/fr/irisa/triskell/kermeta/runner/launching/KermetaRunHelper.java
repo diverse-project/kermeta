@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.6 2005-05-31 14:35:27 zdrey Exp $
+/* $Id: KermetaRunHelper.java,v 1.7 2005-05-31 22:25:36 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: GPL
@@ -51,7 +51,7 @@ public class KermetaRunHelper {
         	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
 	        result.load();
 	        
-	        result.typeCheck();
+	        result.typeCheck(null);
 	        
         }
         catch(Throwable e) {
@@ -85,7 +85,7 @@ public class KermetaRunHelper {
         	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
 	        result.load();
 	        
-	        result.typeCheck();
+	        result.typeCheck(null);
 	        
         }
         catch(Throwable e) {
