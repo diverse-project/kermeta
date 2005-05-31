@@ -1,4 +1,4 @@
-/* $Id: CreateKermetaProjectWizard.java,v 1.3 2005-05-30 17:19:20 zdrey Exp $
+/* $Id: CreateKermetaProjectWizard.java,v 1.4 2005-05-31 14:35:30 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: CreateKermetaProjectWizard.java
  * License: GPL
@@ -101,7 +101,6 @@ public class CreateKermetaProjectWizard extends Wizard {
             return null;
         }
         catch (InvocationTargetException e) {
-            System.err.println("Attention ça va être long.......");
             e.printStackTrace();
             
             Throwable t = e.getTargetException();
@@ -193,7 +192,8 @@ public class CreateKermetaProjectWizard extends Wizard {
         IProject project = createNewProject();
         if (project != null) {
             wizard.setNewProject(project);
-            page.createFolders(project);
+            if (page.useDefaultFolders)
+                page.createFolders(project);
 
 			BasicNewProjectResourceWizard.updatePerspective(this.configurationElement);
             return true;

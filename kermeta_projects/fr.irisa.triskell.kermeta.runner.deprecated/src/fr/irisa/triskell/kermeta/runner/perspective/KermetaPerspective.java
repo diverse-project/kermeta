@@ -1,4 +1,4 @@
-/* $Id: KermetaPerspective.java,v 1.1 2005-05-27 15:07:25 zdrey Exp $
+/* $Id: KermetaPerspective.java,v 1.2 2005-05-31 14:35:25 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaPerspective.java
  * License: GPL
@@ -26,7 +26,6 @@ public class KermetaPerspective implements IPerspectiveFactory {
      * @see org.eclipse.ui.IPerspectiveFactory#createInitialLayout(org.eclipse.ui.IPageLayout)
      */
     public void createInitialLayout(IPageLayout layout) {
-        System.out.println("Creation!!!");
         defineActions(layout);
         defineLayout(layout);
 
@@ -70,6 +69,7 @@ public class KermetaPerspective implements IPerspectiveFactory {
         
         layout.addNewWizardShortcut("fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard");
         layout.addNewWizardShortcut("fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard");
+        
         
 	}
 	

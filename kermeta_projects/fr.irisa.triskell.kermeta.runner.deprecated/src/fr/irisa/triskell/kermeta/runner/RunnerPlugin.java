@@ -3,6 +3,7 @@ package fr.irisa.triskell.kermeta.runner;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
@@ -17,8 +18,9 @@ import java.util.*;
 /**
  * The main plugin class to be used in the desktop.
  */
-public class RunnerPlugin extends AbstractUIPlugin {
-	//The shared instance.
+public class RunnerPlugin extends AbstractUIPlugin 
+{//implements ILaunchShortcut {
+	//The shared instance. 
 	private static RunnerPlugin plugin;
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
@@ -44,7 +46,6 @@ public class RunnerPlugin extends AbstractUIPlugin {
 	 * 
 	 */
 	public void start(BundleContext context) throws Exception {
-	    System.out.println("Start the plugin");
 		this.context = context;
 		//this.__openPage();
 

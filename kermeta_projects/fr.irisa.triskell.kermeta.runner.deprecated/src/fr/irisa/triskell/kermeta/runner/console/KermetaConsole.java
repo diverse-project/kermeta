@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.3 2005-05-20 12:06:26 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.4 2005-05-31 14:35:30 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -11,7 +11,6 @@ package fr.irisa.triskell.kermeta.runner.console;
 
 
 import org.eclipse.jface.dialogs.InputDialog;
-import org.eclipse.jface.resource.ImageDescriptor;
 
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Shell;
@@ -22,7 +21,6 @@ import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.internal.console.MessageConsolePage;
-import org.eclipse.ui.part.IPage;
 import org.eclipse.ui.part.IPageBookViewPage;
 
 import fr.irisa.triskell.kermeta.runner.dialogs.InputStreamDialog;
@@ -43,19 +41,20 @@ public class KermetaConsole extends KermetaIOStream
     public KermetaConsole()
     {
         messageConsole = new MessageConsole("KermetaConsole", null);
+        // TODO : messageConsole.setFont(null);
         stream = messageConsole.newMessageStream();
         ConsolePlugin plugin = ConsolePlugin.getDefault();
 	    consoleManager = plugin.getConsoleManager();
 	    consoleManager.addConsoles(new IConsole[]{messageConsole});
+	    consoleManager.showConsoleView(messageConsole);
     }
     
     public void print(Object messageString)
     {
         String str = "";
-        str =(messageString!=null)?messageString.toString():"PLUGIN ERROR : object to print is null ("+messageString+")";
+        str =(messageString!=null)?messageString.toString():"Error : the object to print is null ("+messageString+")";
 	    stream.print(str);
-	    stream.setColor(new Color(null, 120, 5, 100));
-	    consoleManager.showConsoleView(messageConsole);
+	    /*stream.setColor(new Color(null, 120, 5, 100));*/
     }
     
     public Object read(String prompt)

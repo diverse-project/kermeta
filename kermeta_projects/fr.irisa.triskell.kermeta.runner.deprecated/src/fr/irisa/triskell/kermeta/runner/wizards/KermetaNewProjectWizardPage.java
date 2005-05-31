@@ -1,4 +1,4 @@
-/* $Id: KermetaNewProjectWizardPage.java,v 1.3 2005-05-27 15:06:57 zdrey Exp $
+/* $Id: KermetaNewProjectWizardPage.java,v 1.4 2005-05-31 14:35:29 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizardPage.java
  * License: GPL
@@ -104,6 +104,7 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
         buttonData.horizontalSpan = 3;
         useEmptyFoldersButton.setLayoutData(buttonData);
         
+        
         // Default folders
         final Button useDefaultFoldersButton =
             new Button(folderGroup, SWT.RADIO | SWT.RIGHT);
@@ -111,6 +112,11 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
         useDefaultFoldersButton.setText(IDEWorkbenchMessages.getString("Create separate folders for source (src) and libraries (lib)")); //$NON-NLS-1$
         useDefaultFoldersButton.setSelection(!useEmptyFoldersButton.getSelection());
         useDefaultFoldersButton.setFont(font);
+        
+        buttonData = new GridData();
+        buttonData.horizontalSpan = 3;
+        useDefaultFoldersButton.setLayoutData(buttonData);
+        
         
         createUserSpecifiedFolderLocationGroup(folderGroup, false);
         

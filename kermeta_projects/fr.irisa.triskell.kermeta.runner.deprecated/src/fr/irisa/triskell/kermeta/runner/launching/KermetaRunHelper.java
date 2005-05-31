@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.5 2005-05-30 17:17:46 zdrey Exp $
+/* $Id: KermetaRunHelper.java,v 1.6 2005-05-31 14:35:27 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: GPL
@@ -41,9 +41,8 @@ public class KermetaRunHelper {
 
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();
-    	// FIXME : adaptation...
-    	//String uri = "platform:/resource/" + filename;
-    	String uri = "file://" +filename;
+    	String uri = "platform:/resource/" + filename;
+    	//String uri = "file://" +filename;
     	
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
     	KMTUnit result = null;

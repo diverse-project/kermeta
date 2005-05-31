@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfigTabGroup.java,v 1.4 2005-05-24 17:07:32 zdrey Exp $
+/* $Id: KermetaLaunchConfigTabGroup.java,v 1.5 2005-05-31 14:35:28 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfigTabGroup.java
  * License: GPL
@@ -29,8 +29,8 @@ public class KermetaLaunchConfigTabGroup extends
         if (mode.equals(ILaunchManager.RUN_MODE))
         {
             ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
-                    new ArgumentConfigurationTab(),
-                    new GeneralConfigurationTab()
+                    new ArgumentConfigurationTab()/*,
+                    new GeneralConfigurationTab()*/
           			};
             setTabs(tabs);
         }

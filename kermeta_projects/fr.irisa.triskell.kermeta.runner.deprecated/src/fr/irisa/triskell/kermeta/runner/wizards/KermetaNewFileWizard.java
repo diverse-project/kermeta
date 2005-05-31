@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.4 2005-05-30 17:19:19 zdrey Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.5 2005-05-31 14:35:29 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: GPL
@@ -16,9 +16,12 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
+import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.core.runtime.*;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
@@ -209,6 +212,8 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 				IWorkbenchPage page =
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				try {
+				    // Open in KermetaPerspective
+				    _openPage(page);
 					IDE.openEditor(page, file, true);
 				} catch (PartInitException e) {
 				    System.err.println("Part init exception :"+e+"\n------------\n");
@@ -218,6 +223,17 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 		});
 		monitor.worked(1);
 	}
+	
+	
+	/** Open the page */
+	private void _openPage(IWorkbenchPage page)
+	{   
+	    IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+	    IPerspectiveDescriptor pDesc = PlatformUI.getWorkbench().getPerspectiveRegistry().findPerspectiveWithId("kermetaPerspective");
+            // FIXME : do not hardcode the strings
+	    page.setPerspective(pDesc);
+	}
+
 
 	/***
 	 * Create the template file according to the default
@@ -231,7 +247,7 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 	        "@mainClass \""+packageTextString+"::"+classTextString+"\"\n"+ 
 	        "@mainOperation \""+operationTextString+"\"\n\n\n"+
 	        "package "+packageTextString+";\n\n\n"+
-	        "require kermeta;\n"+
+	        "require kermeta\n"+
 	        "class "+classTextString+
 	        "\n{\n"+
 	        	STD_TAB+"operation "+operationTextString+"() : Void is do \n"
