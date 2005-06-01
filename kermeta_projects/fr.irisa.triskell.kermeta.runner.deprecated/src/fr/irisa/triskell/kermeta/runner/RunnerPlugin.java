@@ -47,8 +47,6 @@ public class RunnerPlugin extends AbstractUIPlugin
 	 */
 	public void start(BundleContext context) throws Exception {
 		this.context = context;
-		//this.__openPage();
-
 		super.start(context);
 	}
 
@@ -124,23 +122,6 @@ public class RunnerPlugin extends AbstractUIPlugin
 	    }
 	}
 
-	/** Open the page */
-	private void __openPage()
-	{   
-	    IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-	   /* try
-	    {*/   
-	        IPerspectiveDescriptor pDesc = PlatformUI.getWorkbench().getPerspectiveRegistry().findPerspectiveWithId("kermetaPerspective");
-            // FIXME : do not hardcode the strings
-	        //window.openPage("kermetaPerspective", getActivePage().getInput());
-	        window.getActivePage().setPerspective(pDesc);
-	    /*} 
-	    catch (WorkbenchException e) {
-	        MessageDialog.openError(window.getShell(),
-	                "Problem Opening Perspective",
-	                e.getMessage());
-	    }*/
-	}
 
     /**
      * Helper method used by OpenKermetaPerspective
