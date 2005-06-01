@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.5 2005-05-31 14:35:29 zdrey Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.6 2005-06-01 11:46:31 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: GPL
@@ -22,6 +22,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.WorkbenchException;
 import org.eclipse.core.runtime.*;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
@@ -29,7 +30,11 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.ui.*;
+import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.internal.dialogs.DialogUtil;
+import org.eclipse.ui.internal.dialogs.NewWizard;
+import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 
 /**
  * This is a sample new wizard. Its role is to create a new file 
@@ -43,7 +48,6 @@ import org.eclipse.ui.ide.IDE;
  */
 
 public class KermetaNewFileWizard extends  Wizard implements INewWizard {
-    
     // TODO : move it in preference constants //
     public final static String STD_TAB = "    ";
 
@@ -143,9 +147,7 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
         packageTextString = page.getPackageTextString();
         classTextString = page.getMainClassTextString();
 		operationTextString = page.getMainOperationTextString();
-		
-	    
-	    
+		// Put the finish action in a "runnable"
 	    IRunnableWithProgress op = new IRunnableWithProgress() {
 	        public void run(IProgressMonitor monitor) throws InvocationTargetException {
 	            try {
@@ -157,6 +159,8 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 	            }
 	        }
 	    };
+	    
+	    // Run the "finish" performer
 	    try {
 	        getContainer().run(true, false, op);
 	    } catch (InterruptedException e) {
@@ -167,6 +171,9 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 	        MessageDialog.openError(getShell(), "Error", realException.getMessage());
 	        return false;
 	    }
+	    
+
+	    
 		return true;
 	}
 	
@@ -180,58 +187,116 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 		IPath containerPath,
 		String fileName,
 		IProgressMonitor monitor)
-		throws CoreException {
+		throws CoreException
+		
+	{
 		// create a sample file
 		monitor.beginTask("Creating " + fileName, 2);
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IPath test;
-		
 		IResource resource = root.findMember(containerPath);//new Path(containerName));
 		if (!resource.exists() || !(resource instanceof IContainer)) {
 			throwCoreException("Container \"" + containerPath + "\" does not exist.");
 		}
+		
+		// File the file with the template text
 		IContainer container = (IContainer) resource;
+		
+		// Put .kmt extension if it does not exist in fileName 
+		if (!fileName.endsWith(".kmt"))
+		{   fileName = fileName+".kmt";		}
+		
 		final IFile file = container.getFile(new Path(fileName));
-		try {
+		try
+		{
 			InputStream stream = openContentStream();
-			if (file.exists()) {
-			    // TODO : ask user if he wants to overwrite it or not.
-				// file.setContents(stream, true, true, monitor);
-			} else {
-				file.create(stream, true, monitor);
+			if (!file.exists()) // FIXME : test does not seem efficient
+			{
+				file.create(stream, false, monitor);
 			}
 			stream.close();
-		} catch (IOException e) {
 		}
+		catch (IOException e)
+		{
+		    System.out.println("Warning : "+e.getMessage());
+		    //e.printStackTrace();
+		}
+		
 		monitor.worked(1);
+		
 		monitor.setTaskName("Opening file for editing...");
 		// FIXME : If file exists it is not editable --
 		// I must display the errors
 		getShell().getDisplay().asyncExec(new Runnable() {
 			public void run() {
-				IWorkbenchPage page =
-					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			    //BasicNewResourceWizard.selectAndReveal(file, PlatformUI.getWorkbench().getActiveWorkbenchWindow());
+				IWorkbenchWindow dw = getWorkbench().getActiveWorkbenchWindow();
+				
 				try {
-				    // Open in KermetaPerspective
-				    _openPage(page);
-					IDE.openEditor(page, file, true);
+				    if (dw == null)
+				    {
+				        dw = getWorkbench().openWorkbenchWindow("kermetaPerspective",ResourcesPlugin.getWorkspace());
+				    }
+				    
+				    BasicNewResourceWizard.selectAndReveal(file, dw);
+					if (dw != null) {
+						IWorkbenchPage page = dw.getActivePage();
+						if (page != null) {
+						    page.setEditorAreaVisible(true);
+						    IEditorPart part = IDE.openEditor(page, file, true);
+						    part.setFocus();
+						}
+						else { System.out.println("Error : no active page was found (RunnerPlugin)");}
+					}
 				} catch (PartInitException e) {
-				    System.err.println("Part init exception :"+e+"\n------------\n");
+					DialogUtil.openError(
+						dw.getShell(),
+						"Error : Could not open the requested file", //$NON-NLS-1$
+						e.getMessage(),
+						e);
+				}
+				
+				catch (WorkbenchException e)
+				{
 				    e.printStackTrace();
 				}
 			}
+			
+	//			try {
+				    // Open in KermetaPerspective
+				    //_openPage(page);
+	//			    if (page!=null)
+	//			    {
+	//			        IEditorPart part = IDE.openEditor(page, file, true);
+	//			    }
+	//			} catch (PartInitException e) {
+	//			    System.err.println("Part init exception :"+e+"\n------------\n");
+	//			    e.printStackTrace();
+	//			}
+	//		}
 		});
+//		  Open editor on new file.
+		
+		
+		
 		monitor.worked(1);
 	}
 	
 	
+	
+	
+	
 	/** Open the page */
-	private void _openPage(IWorkbenchPage page)
-	{   
-	    IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+	private void _openPage(IWorkbench workbench)
+	{  
 	    IPerspectiveDescriptor pDesc = PlatformUI.getWorkbench().getPerspectiveRegistry().findPerspectiveWithId("kermetaPerspective");
+            try {
             // FIXME : do not hardcode the strings
-	    page.setPerspective(pDesc);
+   // page.setPerspective(pDesc);
+            workbench.openWorkbenchWindow("kermetaPerspective", ResourcesPlugin.getWorkspace());
+        } catch (WorkbenchException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 	}
 
 

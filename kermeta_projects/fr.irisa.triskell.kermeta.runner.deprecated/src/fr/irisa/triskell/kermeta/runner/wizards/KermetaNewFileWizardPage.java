@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizardPage.java,v 1.4 2005-05-30 17:19:19 zdrey Exp $
+/* $Id: KermetaNewFileWizardPage.java,v 1.5 2005-06-01 11:46:31 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: GPL
@@ -94,16 +94,18 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
 		layout.numColumns = 1;
 		
 	    
-		layout = new GridLayout();
+		layout = new GridLayout(2, false);
 		groupcontainer.setLayout(layout);
-		layout.numColumns = 3;
+		layout.makeColumnsEqualWidth = false;
 		layout.verticalSpacing = 9;
 		
 		Label label = new Label(groupcontainer, SWT.NULL);
 		label.setText("&File name:");
 
 		fileText = new Text(groupcontainer, SWT.BORDER | SWT.SINGLE);
-		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		//GridData.FILL_HORIZONTAL
+		GridData gd = new GridData();
+		gd.widthHint = 350;
 		fileText.setLayoutData(gd);
 		fileText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
@@ -135,12 +137,6 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
     public void createControl(Composite parent)
     {
         createSimpleControl(parent);
-   /*     super.createControl(parent);
-        Composite toplevel = (Composite) parent.getChildren()[0];
-    	createFillTemplateFileWindow(toplevel);
-    	advancedGroup.layout();
-    	*/
-        
     }
 	/**
 	 * Tests if the current workbench selection is a suitable
