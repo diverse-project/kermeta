@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.3 2005-05-25 17:42:55 ffleurey Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.4 2005-06-01 07:51:39 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : newRuntimeLoader.java
 * License : GPL
@@ -166,6 +166,12 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 		}
 		else if (kcoreObject instanceof FProperty) result = (RuntimeObject)properties.get(unit.getQualifiedName((FProperty)kcoreObject));
 		else result = new RuntimeObject(memory.getROFactory(), null);
+		
+		// This is an error
+		if (result == null) {
+			KermetaUnit.internalLog.error("Memory loader internal error : runtime object for " + kcoreObject + " not found");
+			throw new Error("Memory loader internal error : runtime object for " + kcoreObject + " not found");
+		}
 		
 		// Store mapping in the memory
 		objects.put(kcoreObject, result);

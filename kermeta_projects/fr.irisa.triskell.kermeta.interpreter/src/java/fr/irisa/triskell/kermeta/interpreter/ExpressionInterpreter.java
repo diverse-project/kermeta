@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.10 2005-05-27 22:28:25 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.11 2005-06-01 07:51:40 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -672,7 +672,11 @@ public class ExpressionInterpreter extends KermetaVisitor {
 //			 Check that target is not void
 		    if (operation == null && ro_target == memory.voidINSTANCE) {
 		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
-		        throw new KermetaRaisedException(ro_target, this);
+		        
+		        RuntimeObject ex = memory.getROFactory().createObjectFromClassName("kermeta::exceptions::CallOnAVoidTarget");
+		        
+		        raiseKermetaException(ex);
+		        
 		    }
 		    
 //		  This should never happend is the type checker has checked the program
@@ -860,8 +864,12 @@ public class ExpressionInterpreter extends KermetaVisitor {
      */
     public Object visit(FRaise node) {
         // TODO : improve this to allow exception to be rescued.
-        RuntimeObject exception = (RuntimeObject)this.accept(node.getFExpression());       
-        throw new KermetaRaisedException(exception, this);
+        RuntimeObject exception = (RuntimeObject)this.accept(node.getFExpression());
+        
+        raiseKermetaException(exception);
+        
+        // This is dead code
+        return null;
     }
     /**
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FRescue)
@@ -945,44 +953,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
         return kName.substring(1, kName.length())+"Command";
     }
     
-    
-    /**
-     * Gets the variable specified by <code>exp</code> in the whole interpreter context
-     * InterpreterContext and returns the corresponding Variable
-     * @param var_name
-     * @return the expression context where we found it
-    
-    public ExpressionContext findVariableInContext(String varName)
-    {
-        boolean found=false;
-        ExpressionContext context = null;
-        // Get the stack size
-        int stackSize = this.interpreterContext.getFrameStack().size();
-        int i=stackSize;
-        CallFrame frame;
-        // Search in the stack of call frames
-        while (!found && i>0) {
-            frame = (CallFrame)interpreterContext.getFrameStack().get(i-1);
-            // Search in the stack of block stacks (a block stack : an interpreter context stack) 
-            int blockStackSize = frame.getBlockStack().size();
-            int j = blockStackSize;
-            // Search from last to beginning
-            while (!found && j>0) 
-            {
-            	ExpressionContext currentcontext = (ExpressionContext)frame.getBlockStack().get(j-1);
-                if (currentcontext.getVariables().containsKey(varName))
-                {
-                    found=true;
-                    context=currentcontext;
-                }
-                j--;
-            }
-            i--;
-        }
-        return context;
-    }
-  */
-     
     /**
      * Get the super operation or the super attribute in super classes of classDef 
      * @param classDef
@@ -1038,6 +1008,14 @@ public class ExpressionInterpreter extends KermetaVisitor {
         return result;
     }
 
+    protected void raiseKermetaException(RuntimeObject obj) {
+    	
+    	// FIXME: Set the stack trace
+        
+        // FIXME: Set a default message
+        
+        throw new KermetaRaisedException(obj, this);	
+    }
 
     protected void displayHashtable(Hashtable hash)
     {

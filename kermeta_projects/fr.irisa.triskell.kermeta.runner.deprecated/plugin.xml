@@ -32,7 +32,6 @@
       <import plugin="org.eclipse.ui.forms"/>
       <import plugin="org.eclipse.ui.cheatsheets"/>
       <import plugin="org.eclipse.ui.editors"/>
-      <import plugin="org.eclipse.ui.examples.javaeditor"/>
       <import plugin="org.eclipse.ui.externaltools"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.intro"/>
