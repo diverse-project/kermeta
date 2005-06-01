@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.4 2005-05-31 14:35:30 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.5 2005-06-01 15:36:53 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -10,10 +10,13 @@
 package fr.irisa.triskell.kermeta.runner.console;
 
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.dialogs.InputDialog;
 
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
@@ -23,6 +26,7 @@ import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.internal.console.MessageConsolePage;
 import org.eclipse.ui.part.IPageBookViewPage;
 
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.dialogs.InputStreamDialog;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 //import org.eclipse.ui.internal.console.IOConsolePage;
@@ -59,22 +63,45 @@ public class KermetaConsole extends KermetaIOStream
     
     public Object read(String prompt)
     {
-        String inputStr = null;
-        inputDialog = new InputStreamDialog(new Shell(), 
-	            "Kermeta input stream", 
-	            prompt,"", null);
-        int code = inputDialog.open();
+        InputDialogThread thread = new InputDialogThread(prompt);
+        Display.getDefault().syncExec(thread);
+        return thread.inputStr;
         
-        if (code != InputDialog.CANCEL)
-	    {
-            if (code != InputDialog.CANCEL)
-		    {
-                inputStr = inputDialog.getInputString();
-		    }
-	    }
-        return inputStr;
     }
     
+    protected class InputDialogThread extends Thread 
+    {
+        String inputStr;
+        String prompt;
+        
+        public InputDialogThread(String pPrompt)
+        {
+            super();
+            prompt = pPrompt;
+        }
+        
+        public void run ()
+        {
+            
+            inputDialog = new InputStreamDialog(
+                    new Shell()
+                    , 
+    	            "Kermeta input stream", 
+    	            prompt,"", null);
+            
+    			    int code = inputDialog.open();
+    			
+    			    if (code != InputDialog.CANCEL)
+    			    {
+    			        if (code != InputDialog.CANCEL)
+    			        {
+    			            inputStr = inputDialog.getInputString();
+    			        }
+    			    }
+            
+            }
+        
+    }
     
     /**
      * @see org.eclipse.ui.console.IConsole#createPage(org.eclipse.ui.console.IConsoleView)
