@@ -1,4 +1,4 @@
-/* $Id: KermetaRun.java,v 1.7 2005-05-30 17:18:18 zdrey Exp $
+/* $Id: KermetaRun.java,v 1.8 2005-06-01 15:43:32 zdrey Exp $
  * Project : Kermeta.runner
  * File : KermetaRun.java
  * License : GPL
@@ -72,7 +72,7 @@ public class KermetaRun implements IObjectActionDelegate {
 		{
 		    RunPopupDialog runPopupDialog = new RunPopupDialog(shell, anIFile);
 		    // Load the selected file
-		    KermetaUnit kunit = runPopupDialog.parse(anIFile);
+		    KermetaUnit kunit = KermetaRunHelper.parse(anIFile);
 		    ArrayList point = KermetaRunHelper.findEntryPoint(kunit);
 		    // Set the default value to display in the dialog
 		    runPopupDialog.classQualifiedNameString = (String)point.get(0);
@@ -106,7 +106,7 @@ public class KermetaRun implements IObjectActionDelegate {
 		        }
 		        catch (Throwable e)
 		        {
-		            console.print("KermetaInterpreter internal error \n" +
+		            console.print("\nKermetaInterpreter internal error \n" +
 		            		"-------------------------------------------\n");
 		            console.print(e.getMessage());
 		            e.printStackTrace();
