@@ -1,4 +1,4 @@
-/* $Id: KermetaNewProjectWizard.java,v 1.3 2005-05-27 15:06:57 zdrey Exp $
+/* $Id: KermetaNewProjectWizard.java,v 1.4 2005-06-01 15:50:59 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizard.java
  * License: GPL
@@ -64,8 +64,6 @@ public class KermetaNewProjectWizard extends Wizard implements INewWizard
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.workbench = workbench;
 		this.selection = selection;
-		
-		//workbench.getActiveWorkbenchWindow().getPages()
 		
 		setWindowTitle("New project creation wizard");
 		// This is eclipse IDE philosophy compliant...TODO : simplify?)

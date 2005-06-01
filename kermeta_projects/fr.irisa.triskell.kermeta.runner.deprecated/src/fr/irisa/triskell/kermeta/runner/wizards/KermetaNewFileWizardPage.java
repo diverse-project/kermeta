@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizardPage.java,v 1.5 2005-06-01 11:46:31 zdrey Exp $
+/* $Id: KermetaNewFileWizardPage.java,v 1.6 2005-06-01 15:50:59 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: GPL
@@ -297,14 +297,6 @@ public class KermetaNewFileWizardPage extends WizardPage implements Listener
     
     public String getContainerText() { return containerText.getText();}
     public String getFilename() {return fileText.getText();}
-
-    /* (non-Javadoc)
-     * @see org.eclipse.jface.wizard.Wizard#performFinish()
-     */
-    public boolean performFinish() {
-        // TODO Auto-generated method stub
-        return false;
-    }
     
     public void handleEvent(Event e)
     {

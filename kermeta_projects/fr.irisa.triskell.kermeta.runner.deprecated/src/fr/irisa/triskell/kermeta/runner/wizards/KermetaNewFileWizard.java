@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.6 2005-06-01 11:46:31 zdrey Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.7 2005-06-01 15:50:58 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: GPL
@@ -148,7 +148,8 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
         classTextString = page.getMainClassTextString();
 		operationTextString = page.getMainOperationTextString();
 		// Put the finish action in a "runnable"
-	    IRunnableWithProgress op = new IRunnableWithProgress() {
+	    
+		IRunnableWithProgress op = new IRunnableWithProgress() {
 	        public void run(IProgressMonitor monitor) throws InvocationTargetException {
 	            try {
 	                doFinish(containerPath, fileName, monitor);
