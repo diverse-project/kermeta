@@ -46,6 +46,12 @@ public class CompileKMTAction implements IObjectActionDelegate {
 	    Shell shell = new Shell();
 	    try {
 	        
+	        MessageDialog.openInformation(
+					shell,
+					"Warning",
+					"This feature has not been tested, it cannot be considered as stable.\n"
+					+ "The XMI file produced might not be usable.");
+	        
 	        IFile kmfile = kmtfile.getProject().getFile(kmtfile.getProjectRelativePath().removeFileExtension().addFileExtension("km"));
 	        
 	        String kmt_uri = "platform:/resource" + kmtfile.getFullPath().toString();

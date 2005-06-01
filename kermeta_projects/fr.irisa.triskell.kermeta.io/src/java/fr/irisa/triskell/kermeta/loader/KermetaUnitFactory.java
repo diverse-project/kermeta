@@ -17,6 +17,7 @@ import fr.irisa.triskell.kermeta.error.KermetaLoaderError;
 import fr.irisa.triskell.kermeta.loader.ecore.KMLoaderModuleECore;
 import fr.irisa.triskell.kermeta.loader.emfatic.KMLoaderModuleEmfatic;
 import fr.irisa.triskell.kermeta.loader.km.KMLoaderModuleKM;
+import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
 
 import org.apache.log4j.Logger;
@@ -222,6 +223,7 @@ public class KermetaUnitFactory {
     public void unloadAll() {
         KermetaUnit.unloadStdLib();
     	loadedUnits.clear();
+    	KMUnit.clearRessourceSet();
     }
     
     public void unload(String uri) {

@@ -27,6 +27,20 @@ import fr.irisa.triskell.kermeta.structure.FObject;
  */
 public class KMUnit extends KermetaUnit {
 
+    private static ResourceSet resource_set = null;
+    
+    public static ResourceSet getRessourceSet() {
+        if (resource_set == null) {
+            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl()); 
+			resource_set = new ResourceSetImpl();
+        }
+        return resource_set;
+    }
+    
+    public static void clearRessourceSet() {
+        resource_set = null;
+    }
+    
 	/**
 	 * @param uri
 	 */
@@ -49,11 +63,8 @@ public class KMUnit extends KermetaUnit {
 		try {
 		    if (resource == null) {
 				KermetaUnit.internalLog.info("Loading KM ressource " + uri);
-		        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl()); 
-				ResourceSet resource_set = new ResourceSetImpl();
-				XMIResource r;
-				
-				resource = resource_set.getResource(URI.createURI(uri), true);
+		     
+				resource = getRessourceSet().getResource(URI.createURI(uri), true);
 
 				resource.load(null);
 				KermetaUnit.internalLog.info("Resource set size : " + resource_set.getResources().size());
@@ -76,8 +87,6 @@ public class KMUnit extends KermetaUnit {
 				    importedUnits.add(iu);
 				}
 			}
-			
-			
 			
     	}
     	catch(Exception e) {
