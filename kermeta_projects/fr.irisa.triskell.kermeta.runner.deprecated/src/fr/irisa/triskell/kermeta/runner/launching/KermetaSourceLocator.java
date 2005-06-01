@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.4 2005-05-30 17:17:46 zdrey Exp $
+/* $Id: KermetaSourceLocator.java,v 1.5 2005-06-01 15:49:08 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaSourceLocator.java
  * License: GPL
@@ -41,7 +41,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
      */
     public void initializeDefaults(ILaunchConfiguration configuration)
             throws CoreException {
-        System.out.println("Salut : initializeDefaults, dans KSL");
+        System.out.println("initializeDefaults in KermetaSourceLocator");
         // TODO Auto-generated method stub
 
     }
