@@ -1,4 +1,4 @@
-/* $Id: RunPopupDialog.java,v 1.7 2005-05-31 16:59:29 ffleurey Exp $
+/* $Id: RunPopupDialog.java,v 1.8 2005-06-01 15:37:16 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: RunPopupDialog.java
  * License: GPL
@@ -149,40 +149,6 @@ public class RunPopupDialog extends Dialog {
 	{
 	    
 	}
-	
-	/**
-	 * Parse the given file and return its KermetaUnit
-	 * @param file
-	 * @return KermetaUnit the compilation unit for the given file
-	 */
-    public KermetaUnit parse(IFile file)
-    {
-        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.runner/lib/framework.km";
-
-    	StructurePackageImpl.init();
-    	BehaviorPackageImpl.init();
-    	String uri = "platform:/resource" + file.getFullPath().toString();
-    	KermetaUnitFactory.getDefaultLoader().unloadAll();
-    	KMTUnit result = null;
-       // System.out.println("file.getFullPath().toOSString() : " + file.getFullPath().toOSString());
-        try {
-        	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
-	        result.load();
-	        
-	        result.typeCheck(null);
-	        
-        }
-        catch(Throwable e) {
-            KermetaUnit.internalLog.error("load error ", e);
-        	if (result == null) {
-        		e.printStackTrace();
-        		return null;
-        	}
-        	else if (result.error.size() == 0)
-        		result.error.add(new KMUnitError("INTERNAL ERROR : " + e, null));
-        }
-        return result;
-    }
 
     public void okPressed()
     {
