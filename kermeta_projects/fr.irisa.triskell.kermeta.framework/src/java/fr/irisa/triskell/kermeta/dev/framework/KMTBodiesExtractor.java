@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesExtractor.java,v 1.6 2005-02-21 11:45:08 zdrey Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.7 2005-06-01 13:00:39 zdrey Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
@@ -11,18 +11,15 @@ package fr.irisa.triskell.kermeta.dev.framework;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Iterator;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**

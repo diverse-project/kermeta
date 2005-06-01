@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.11 2005-03-02 16:53:50 zdrey Exp $
+/* $Id: FrameworkGen.java,v 1.12 2005-06-01 13:00:39 zdrey Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -10,18 +10,13 @@ package fr.irisa.triskell.kermeta.dev.framework;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FOperation;
+
 import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+
 import fr.irisa.triskell.kermeta.utils.KMTBodiesExtractor;
 
 

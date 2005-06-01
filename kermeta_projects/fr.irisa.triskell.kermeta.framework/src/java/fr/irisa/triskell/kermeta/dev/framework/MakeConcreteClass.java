@@ -1,4 +1,4 @@
-/* $Id: MakeConcreteClass.java,v 1.3 2005-02-21 10:09:00 zdrey Exp $
+/* $Id: MakeConcreteClass.java,v 1.4 2005-06-01 13:00:39 zdrey Exp $
  * Created on Feb 18, 2005
  * By zdrey
  * Description :
@@ -12,13 +12,13 @@
  */
 package fr.irisa.triskell.kermeta.dev.framework;
 
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FTag;
+
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
