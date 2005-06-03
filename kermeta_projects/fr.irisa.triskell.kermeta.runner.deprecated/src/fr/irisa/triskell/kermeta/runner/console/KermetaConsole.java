@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.5 2005-06-01 15:36:53 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.6 2005-06-03 15:51:34 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -19,6 +19,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleConstants;
+import org.eclipse.ui.console.IConsoleListener;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.MessageConsole;
@@ -33,8 +35,9 @@ import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 /**
  * The console on which the results of an operation are printed (output),
  * and where the user can write data (input)
+ * TODO : implement Listener
  */
-public class KermetaConsole extends KermetaIOStream
+public class KermetaConsole extends KermetaIOStream implements IConsoleListener
 {
 
     protected MessageConsole messageConsole;
@@ -44,13 +47,9 @@ public class KermetaConsole extends KermetaIOStream
     
     public KermetaConsole()
     {
-        messageConsole = new MessageConsole("KermetaConsole", null);
-        // TODO : messageConsole.setFont(null);
-        stream = messageConsole.newMessageStream();
         ConsolePlugin plugin = ConsolePlugin.getDefault();
 	    consoleManager = plugin.getConsoleManager();
-	    consoleManager.addConsoles(new IConsole[]{messageConsole});
-	    consoleManager.showConsoleView(messageConsole);
+	    consoleManager.addConsoleListener(this);
     }
     
     public void print(Object messageString)
@@ -65,13 +64,23 @@ public class KermetaConsole extends KermetaIOStream
     {
         InputDialogThread thread = new InputDialogThread(prompt);
         Display.getDefault().syncExec(thread);
+        
         return thread.inputStr;
         
+    }
+
+    /**
+     * Reset the console : remove all displayed strings.
+     * Does not work..
+     */
+    public void reset()
+    {
+        stream = messageConsole.newMessageStream();
     }
     
     protected class InputDialogThread extends Thread 
     {
-        String inputStr;
+        String inputStr = "";
         String prompt;
         
         public InputDialogThread(String pPrompt)
@@ -109,6 +118,35 @@ public class KermetaConsole extends KermetaIOStream
     public IPageBookViewPage createPage(IConsoleView view) {
     	return new MessageConsolePage(view, messageConsole);
     }
+
+    /* (non-Javadoc)
+     * @see org.eclipse.ui.console.IConsoleListener#consolesAdded(org.eclipse.ui.console.IConsole[])
+     */
+    public void consolesAdded(IConsole[] consoles)
+    {   //System.out.println("Coucols added : ");
+    }
+
+    /* (non-Javadoc)
+     * @see org.eclipse.ui.console.IConsoleListener#consolesRemoved(org.eclipse.ui.console.IConsole[])
+     */
+    public void consolesRemoved(IConsole[] consoles) {
+        //System.out.println("Coucols removed");
+        
+    }
+    
+    
+    public void removeCurrentConsole() {
+        
+        consoleManager.removeConsoles(consoleManager.getConsoles());
+    }
+    
+    public void addConsole() {
+        messageConsole = new MessageConsole("KermetaConsole", null);
+        stream = messageConsole.newMessageStream();
+        consoleManager.addConsoles( new IConsole[]{messageConsole});
+	    consoleManager.showConsoleView(messageConsole);
+    }
+    
 
 
 }
