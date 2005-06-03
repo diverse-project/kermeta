@@ -205,7 +205,7 @@
             -->
          </actionSet>
       </extension>
-      <!-- Popup menu-->
+      <!-- Popup menu
       <extension
             point="org.eclipse.debug.ui.launchShortcuts">
          <shortcut
@@ -227,11 +227,7 @@
                class="fr.irisa.triskell.kermeta.runner.KermetaLaunchShortcut"
                modes="run"
                id="PopupKermetaLaunchShortCut"/>
-         <!--<filter 
-            	name="NameMatches"
-            	value="*.kmt"
-            />-->
       </extension>
-
+-->
 
 </plugin>
