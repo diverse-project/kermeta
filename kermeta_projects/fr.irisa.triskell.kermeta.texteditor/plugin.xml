@@ -31,7 +31,7 @@
     <extension
    point="org.eclipse.ui.editors">
    <editor
-      name="MCEditor"
+      name="Kermeta Editor"
       icon="src/java/fr/irisa/triskell/kermeta/texteditor/icons/kermeta.png"
       extensions="kmt"
       contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
