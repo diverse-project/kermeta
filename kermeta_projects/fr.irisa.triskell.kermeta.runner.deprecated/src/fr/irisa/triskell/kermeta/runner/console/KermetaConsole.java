@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.6 2005-06-03 15:51:34 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.7 2005-06-03 16:23:32 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -90,26 +90,17 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
         }
         
         public void run ()
-        {
-            
+        {   
             inputDialog = new InputStreamDialog(
-                    new Shell()
-                    , 
+                    new Shell(), 
     	            "Kermeta input stream", 
     	            prompt,"", null);
-            
     			    int code = inputDialog.open();
-    			
     			    if (code != InputDialog.CANCEL)
     			    {
-    			        if (code != InputDialog.CANCEL)
-    			        {
-    			            inputStr = inputDialog.getInputString();
-    			        }
+    			       inputStr = inputDialog.getInputString();
     			    }
-            
             }
-        
     }
     
     /**
@@ -123,23 +114,25 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
      * @see org.eclipse.ui.console.IConsoleListener#consolesAdded(org.eclipse.ui.console.IConsole[])
      */
     public void consolesAdded(IConsole[] consoles)
-    {   //System.out.println("Coucols added : ");
+    {   //System.out.println("Consols added : ");
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.ui.console.IConsoleListener#consolesRemoved(org.eclipse.ui.console.IConsole[])
      */
     public void consolesRemoved(IConsole[] consoles) {
-        //System.out.println("Coucols removed");
+        //System.out.println("Consols removed");
         
     }
     
-    
+    /** Remove all the existing consoles [temporary patch]*/
     public void removeCurrentConsole() {
-        
         consoleManager.removeConsoles(consoleManager.getConsoles());
     }
     
+    /**
+     * Add a console
+     */
     public void addConsole() {
         messageConsole = new MessageConsole("KermetaConsole", null);
         stream = messageConsole.newMessageStream();
