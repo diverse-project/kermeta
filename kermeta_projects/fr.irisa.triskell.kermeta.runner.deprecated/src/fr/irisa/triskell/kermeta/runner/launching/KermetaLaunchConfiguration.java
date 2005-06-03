@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.5 2005-05-30 17:17:45 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.6 2005-06-03 15:52:17 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -10,6 +10,8 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -18,10 +20,18 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.MessageConsole;
 
+import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 
 /**
@@ -38,14 +48,7 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
     public static String KM_CLASSQNAME = "KM_CLASSQNAME";
     public static String KM_OPERATIONNAME = "KM_OPERATIONNAME";
     
-    /**
-     * 
-     */
-    public KermetaLaunchConfiguration() {
-        super();
-        System.out.println("Coucou Launcher! : " );
-    }
-	
+    
 	/**
 	 * (Eclipse doc) Launches the given configuration in the specified mode, contributing
 	 * debug targets to the given launch object. The
@@ -69,19 +72,23 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	    {
 	        //  If the mode choosen is Run a Kermeta run target is created
 	        if (mode.equals(ILaunchManager.RUN_MODE)) 
-	        {    
+	        {   
+	            System.out.println("Kermeta source : "+launch.getSourceLocator());
 	            // Set the default source locator to launch FIXME : consequences???
-	            launch.setSourceLocator(new KermetaSourceLocator());
+	            
+	            //launch.setSourceLocator(new KermetaSourceLocator());
 	           
 	            KermetaRunTarget runtarget = new KermetaRunTarget(launch); 
 	            // Set the run target with current launch
 	            // Add it as a debug target
 	            launch.addDebugTarget(runtarget);
-	            
 	            // Run the launcher with configurationParam, launchParam, currentMode
 	            runKermeta(configuration, mode);
+	            
 	            // Terminate the run target
 	            runtarget.terminate();
+	            launch.removeDebugTarget(runtarget);
+
 	        }
 	        else
 	        {
@@ -113,33 +120,42 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
             // selectedFile, because it is not serializable (get a kind of Serialize error
             // when launching performApply
             KermetaUnit kunit = KermetaRunHelper.parse(fileNameString);
-            
-	        KermetaConsole console = new KermetaConsole() ;
+            KermetaConsole console = new KermetaConsole();
 	        try
 	        {
+	            console.removeCurrentConsole();
 	            // 	Get the values given by the user in the runPopupDialog
 	            KermetaInterpreter interpreter = new KermetaInterpreter(kunit);
 	            
 	            interpreter.setEntryPoint(classQualifiedNameString, operationString);
-	            
-	            interpreter.setKStream(console);
-	            interpreter.launch();
+	           // System.out.println("Console?"+ interpreter.getKStream());
+
+	            console.addConsole();
+	            interpreter.setKStream(console);     
+    	        interpreter.launch();
+    	
 	        }
 	        catch (KermetaRaisedException kerror)
 	        {
 	            console.print("Uncaught exception in Kermeta program\n");
 	            console.print(kerror.getMessage());
 	        }
+	        catch (KermetaInterpreterError ierror)
+	        {
+	            console.print("Uncaught exception in Kermeta interpreter:\n");
+	            console.print(ierror.getMessage());
+	        }
 	        catch (Throwable e)
 	        {
-	            console.print(
-	                    "-------------------------------------------\n" +
-	            		"KermetaInterpreter internal error \n" +
+	            console.print("\nKermetaInterpreter internal error \n" +
 	            		"-------------------------------------------\n");
 	            console.print(e.getMessage());
 	            e.printStackTrace();
 	        }
-            
+	        finally
+	        {
+	            console.reset();
+	        }
             
             
             
