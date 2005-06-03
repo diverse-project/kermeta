@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.5 2005-05-27 14:31:02 ffleurey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.6 2005-06-03 15:36:42 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -38,6 +38,15 @@ public class RuntimeObjectFactory {
 	protected RuntimeMemory memory;
 	
 	protected KermetaIOStream stream = null;
+	
+	
+	/**
+	 * These are caches of classes
+	 */
+	public Hashtable cache_reflec_seq_class = new Hashtable();
+	public Hashtable cache_reflec_coll_class = new Hashtable();
+	
+	
 	
 	StructureFactory struct_factory;
 	

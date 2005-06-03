@@ -113,6 +113,14 @@ class TestString inherits kermeta::kunit::Test {
 		assert("BlaBleBli".size == 9)
 	end
 	
+	operation testIntegerToStr() : kermeta::standard::Integer is do
+		assert(334.toString.size == 3)
+	end
+	
+	operation testIntegerToStr2() : kermeta::standard::Integer is do
+		assert((334 + 2).toString == "336")
+	end
+	
 
 
 }

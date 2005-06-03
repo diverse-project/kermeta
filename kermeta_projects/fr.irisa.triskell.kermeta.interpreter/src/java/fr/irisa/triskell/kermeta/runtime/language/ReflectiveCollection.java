@@ -94,7 +94,7 @@ public class ReflectiveCollection {
 	/**
 	 * Cache : ClassDefinition cd -> RuntimeObject of kermeta::language::ReflectiveCollection<cd>
 	 */
-	private static Hashtable cache_reflec_coll_class = new Hashtable();
+	//private static Hashtable cache_reflec_coll_class = new Hashtable();
 	
 	/**
 	 * Please see the comments in ReflectiveSequence java class, in the method 
@@ -105,6 +105,8 @@ public class ReflectiveCollection {
 	 */
 	public static RuntimeObject createReflectiveCollection(RuntimeObject object, RuntimeObject property)
 	{
+	    
+	    Hashtable cache_reflec_coll_class = object.getFactory().cache_reflec_coll_class;
 	    
 	    FClass self_class = (FClass)object.getMetaclass().getData().get("kcoreObject");
 	    

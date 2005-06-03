@@ -1,4 +1,4 @@
-/* $Id: RuntimeLambdaObject.java,v 1.4 2005-05-27 22:28:31 ffleurey Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.5 2005-06-03 15:36:40 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
  * License: GPL
@@ -26,6 +26,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
     
     /** 
      *The context in which the expression is executed
+     *frame is a prototype call frame
      * */
     protected LambdaCallFrame frame;
     protected FLambdaExpression lambdaExpression;
@@ -44,17 +45,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
         this.lambdaExpression = node;
         this.frame = new LambdaCallFrame(context, node, nestingFrame);
     }
-    
-    /**
-     * The lambda parameters of this lambda expression.
-     * We assign each parameter to the value of the parameters inside a lambdaexpression' call.
-     * (This operation is called when encountering a lambda expression call)
-     * @param params
-     */
-    public void setActualParameters(ArrayList rparams)
-    {
-        frame.bindActualParameter(rparams);
-    }
+
     
     /**
      * Call the function with a set of actual parameter (list of RuntimeObject)
@@ -63,6 +54,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
      * @return
      */
     public RuntimeObject call(ExpressionInterpreter interpreter, ArrayList actual_params) {
+        LambdaCallFrame frame = this.frame.cloneLambdaCallFrame();
         frame.bindActualParameter(actual_params);
         RuntimeObject result = interpreter.getMemory().voidINSTANCE;
         

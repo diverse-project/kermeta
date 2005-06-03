@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.8 2005-05-30 14:05:50 zdrey Exp $
+/* $Id: KermetaInterpreter.java,v 1.9 2005-06-03 15:36:34 ffleurey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -109,6 +109,12 @@ public class KermetaInterpreter {
 	    initializeEntryPoint();
 	}
 	
+	
+	
+    protected void finalize() throws Throwable {
+        super.finalize();
+        System.err.println("FINALIZE INTERPRETER");
+    }
 	/**
 	 * Check that the KermetaUnit does not contain errors
 	 * and create initialize the runtime

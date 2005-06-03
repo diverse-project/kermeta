@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.5 2005-05-25 17:42:55 ffleurey Exp $
+/* $Id: RuntimeMemory.java,v 1.6 2005-06-03 15:36:39 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeMemory.java
  * License: GPL
@@ -49,6 +49,11 @@ public class RuntimeMemory {
         this.unit = unit;
         memoryLoader = new RuntimeMemoryLoader(unit,this);
         memoryLoader.init();
+    }
+    
+    protected void finalize() throws Throwable {
+        super.finalize();
+        System.err.println("FINALIZE MEMORY");
     }
     
     public RuntimeObject getRuntimeObjectForFObject(FObject object)

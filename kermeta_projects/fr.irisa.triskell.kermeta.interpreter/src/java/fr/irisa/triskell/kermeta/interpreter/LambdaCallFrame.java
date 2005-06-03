@@ -1,4 +1,4 @@
-/* $Id: LambdaCallFrame.java,v 1.2 2005-05-20 12:54:38 ffleurey Exp $
+/* $Id: LambdaCallFrame.java,v 1.3 2005-06-03 15:36:38 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
 * License : GPL
@@ -60,6 +60,17 @@ public class LambdaCallFrame extends CallFrame {
         
     }
     
+    protected LambdaCallFrame(LambdaCallFrame other) {
+        super(other.context);
+        lambdaExp = other.lambdaExp;
+        nestingOperationCallFrame = other.nestingOperationCallFrame;
+        nestingExpressionContext = (Stack)other.nestingExpressionContext.clone();
+    }
+    
+    public LambdaCallFrame cloneLambdaCallFrame() {
+        LambdaCallFrame result = new LambdaCallFrame(this);
+        return result;
+    }
     
     /**
      * Bind a set of actual parameters (RuntimeObjects) to the 

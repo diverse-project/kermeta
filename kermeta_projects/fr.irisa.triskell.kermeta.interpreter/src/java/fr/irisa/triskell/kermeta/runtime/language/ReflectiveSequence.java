@@ -42,7 +42,7 @@ public class ReflectiveSequence {
 	/**
 	 * Cache : ClassDefinition cd -> RuntimeObject of kermeta::language::ReflectiveCollection<cd>
 	 */
-	private static Hashtable cache_reflec_seq_class = new Hashtable();
+	//private static Hashtable cache_reflec_seq_class = new Hashtable();
 	
 	/**
 	 * This is a cache of ReflectiveCollection Class object indexed by the type parameter
@@ -52,6 +52,7 @@ public class ReflectiveSequence {
 
 	public static RuntimeObject createReflectiveSequence(RuntimeObject object, RuntimeObject property) {
 		
+	    Hashtable cache_reflec_seq_class = object.getFactory().cache_reflec_seq_class;
 	    
 	    FClass self_class = (FClass)object.getMetaclass().getData().get("kcoreObject");
 	    
