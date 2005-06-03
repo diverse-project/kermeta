@@ -71,21 +71,12 @@ public class KMUnit extends KermetaUnit {
 				
 		    
 		    }
-			
-		    ArrayList loadedResources = new ArrayList();
-		    loadedResources.add(resource);
 		    
 			KMLoader visitor = new KMLoader(this);
 			TreeIterator it = resource.getAllContents();
 			while(it.hasNext()) {
 				FObject o = (FObject)it.next();
 				visitor.accept(o);
-				if (!loadedResources.contains(o.eResource())) {
-				    loadedResources.add(o.eResource());
-				    KMUnit iu = new KMUnit(resource.getURI().toString(), packages, o.eResource());
-				    iu.preLoad();
-				    importedUnits.add(iu);
-				}
 			}
 			
     	}

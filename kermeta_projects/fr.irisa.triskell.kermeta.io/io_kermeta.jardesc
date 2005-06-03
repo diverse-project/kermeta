@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jardesc>
-    <jar path="/home/franck/workspace-kermeta/fr.irisa.triskell.kermeta.io/dist/io_kermeta.jar"/>
+    <jar path="/home/localwork/eclipse-workspaces/kermeta/fr.irisa.triskell.kermeta.io/dist/io_kermeta.jar"/>
     <options overwrite="false" compress="true" exportErrors="true" exportWarnings="true" saveDescription="true" descriptionLocation="/fr.irisa.triskell.kermeta.io/io_kermeta.jardesc" useSourceFolders="false" buildIfNeeded="true"/>
     <manifest manifestVersion="1.0" usesManifest="true" reuseManifest="false" saveManifest="false" generateManifest="true" manifestLocation="">
         <sealing sealJar="false">
