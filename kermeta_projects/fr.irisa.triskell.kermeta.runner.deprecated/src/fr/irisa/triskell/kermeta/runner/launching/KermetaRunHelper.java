@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.7 2005-05-31 22:25:36 ffleurey Exp $
+/* $Id: KermetaRunHelper.java,v 1.8 2005-06-03 16:16:36 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: GPL
@@ -37,7 +37,7 @@ public class KermetaRunHelper {
 	 */
     public static KermetaUnit parse(String filename)
     {
-        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta.runner/lib/framework.km";
+        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
 
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();
