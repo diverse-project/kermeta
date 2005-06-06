@@ -85,10 +85,10 @@ WS : (' ' | '\t' | '\f' | '\r' | '\n')+
 { $setType(Token.SKIP); }
 ;
 
-SINGLE_LINE_COMMENT : "//" (~('\n'|'\r'))* ('\n'|'\r'('\n')?) ;
+SINGLE_LINE_COMMENT : "//" (~('\n'|'\r'))* ('\n'|'\r'('\n')?) 		{$setType(Token.SKIP); };
 
-MULTI_LINE_COMMENT : 
-	"/*"
+CONTEXT_MULTI_LINE_COMMENT : 
+	"/**"
 	(
 		{ LA(2)!='/' }? '*'
 		|	'\r' '\n'
@@ -98,6 +98,24 @@ MULTI_LINE_COMMENT :
 		)*
 		"*/"
 ;
+
+MULTI_LINE_COMMENT : 
+	"/*" 
+	~('*')
+	(
+		{ LA(2)!='/' }? '*'
+		|	'\r' '\n'  
+		|	'\r'	   
+		|	'\n'	  
+		|	~('*'|'\n'|'\r')
+		)*
+		"*/"
+	{$setType(Token.SKIP);}
+;
+
+
+
+
 //
 //
 //WS : (' ' | '\t' | '\f' | '\r' | '\n' )+ //{newline();}

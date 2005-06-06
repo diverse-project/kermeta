@@ -7,14 +7,11 @@ k=3;
 defaultErrorHandler=false;
 }
 
-//abstract abstractCompUnit : (annotations) compUnit (annotations) ;
-
-// not ok : (annotations) added at the end of just below sequence - conflicts
 sequence scompUnit : packageDecl importStmts usingStmts topLevelDecls  ;
 
-abstract compUnit [entry] : scompUnit (postUnitAnnotations=annotations);
+abstract compUnit [entry] : scompUnit (postAnnotations=annotations);
 
-sequence packageDecl : preAnnotations=annotations "package" name=qualifiedID SEMI postAnnotations=annotations;
+sequence packageDecl : annotations "package" name=qualifiedID SEMI ;
 
 list qualifiedID : id1=ID (qidSeparator idn=ID)* ;
 token qidSeparator : COL_COL ;
@@ -23,31 +20,31 @@ abstract stringLiteralOrQualifiedID : stringLiteralContainer | qualifiedID ;
 sequence stringLiteralContainer : STRING_LITERAL ;
 
 list annotations : annotation* ;
-abstract annotation : tag | singleLineComment | multiLineComment; 
+abstract annotation : tag | contextMultiLineComment; 
 
 sequence tag : AT name=qualifiedID val=STRING_LITERAL ;
-sequence singleLineComment : SINGLE_LINE_COMMENT ;
-sequence multiLineComment : MULTI_LINE_COMMENT ;
+
+sequence contextMultiLineComment : CONTEXT_MULTI_LINE_COMMENT ;
 
 //sequence annotation : AT source=stringLiteralOrQualifiedID LPAREN keyEqualsValueList RPAREN ;
 //list keyEqualsValueList : kv1=keyEqualsValue (COMMA kvn=keyEqualsValue)* ;
 //sequence keyEqualsValue : key=stringLiteralOrQualifiedID EQUALS value=stringLiteralOrQualifiedID ;
 
 list importStmts : importStmt* ;
-sequence importStmt : "require" uri=stringLiteralOrQualifiedID ;
+sequence importStmt : annotations "require" uri=stringLiteralOrQualifiedID ;
 
 list usingStmts : usingStmt* ;
-sequence usingStmt : "using" name=qualifiedID ;
+sequence usingStmt : annotations "using" name=qualifiedID ;
 
 list topLevelDecls : topLevelDecl* ;
 
-sequence topLevelDecl : preAnnotations=annotations annotableElement ;
+sequence topLevelDecl : annotations annotableElement ;
 
-abstract annotableElement : subPackageDecl | classDecl | enumDecl | dataTypeDecl; //| enumDecl | mapEntryDecl ;
+abstract annotableElement : subPackageDecl | classDecl | enumDecl | dataTypeDecl; // mapEntryDecl ;
+
 
 sequence subPackageDecl : "package" name=ID LCURLY topLevelDecls RCURLY;
-
-sequence classDecl :  (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY postAnnotations=annotations; 
+sequence classDecl :  (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY; 
 //(COLON instClassName=stringLiteralOrQualifiedID)? LCURLY classMemberDecls RCURLY ;
 token classKind : "class" ; //| "interface" ;
 token abstractModifier : "abstract" ;
@@ -64,6 +61,7 @@ sequence functype : LT left=type MINUS_GT right=type GT;
 sequence voidType : "Void" ;
 
 list classMemberDecls : classMemberDecl * ;
+
 abstract classMemberDecl : annotation | operation | property; //attribute | reference | operation ;
 
 //sequence attribute : MINUS modifiers typeRef name=ID (EQUALS defaultValueExpr)? SEMI ;
@@ -87,7 +85,7 @@ sequence  operationEmptyBody : "abstract" ;
 
 list params : p1=param (COMMA pn=param)*;
 //sequence param : leadingAnnotations=annotations modifiers typeRef name=ID trailingAnnotations=annotations ;
-sequence param : preAnnotations=annotations  name=ID COLON typeRef  postAnnotations=annotations ;
+sequence param : annotations  name=ID COLON typeRef;
 
 sequence typeRef : (collectionType)? reftype=type (multiplicity)? ;
 token collectionType : "bag" | "set"| "seq" | "oset";
@@ -102,7 +100,7 @@ sequence dataTypeDecl : "alias" name=ID COLON instanceClass=type SEMI ;
 
 sequence enumDecl : "enumeration" name=ID LCURLY enumLiterals RCURLY ;
 list enumLiterals : enumLiteral* ;
-sequence enumLiteral : preAnnotations=annotations name=ID SEMI ; // (EQUALS val=INT_LITERAL)? postAnnotations=annotations 
+sequence enumLiteral : annotations name=ID SEMI ; // (EQUALS val=INT_LITERAL)? postAnnotations=annotations 
 
 //sequence mapEntryDecl : "mapentry" name=ID COLON key=typeRef MINUS_GT value=typeRef SEMI ;
 
@@ -112,10 +110,9 @@ sequence enumLiteral : preAnnotations=annotations name=ID SEMI ; // (EQUALS val=
 list fExpressionLst : fExpression* ;
 
 sequence asingleExpression : fExpression ;
-// an annotation is considered as an fExpression. In 
 abstract fExpression : fAssignement ;
 			
-sequence fAssignement : preAnnotations=annotations expression=logicalExpression (assignementOp EQUALS newvalue=logicalExpression)? postAnnotations=annotations;
+sequence fAssignement : annotations expression=logicalExpression (assignementOp EQUALS newvalue=logicalExpression)?;
 token assignementOp : COLON | QMARK ;
 
 list logicalExpression : exp1=relationalExpression (logicalOp expn=relationalExpression )* ;

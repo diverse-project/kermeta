@@ -39,25 +39,25 @@ options {
     }
 }
 
-scompUnit [ Annotations postUnitAnnotations ]  returns [ ScompUnit retVal = null ]
+scompUnit [ Annotations postAnnotations ]  returns [ ScompUnit retVal = null ]
 :
 { PackageDecl packageDecl = null; ImportStmts importStmts = null; UsingStmts usingStmts = null; TopLevelDecls topLevelDecls = null; }
   packageDecl=packageDecl importStmts=importStmts usingStmts=usingStmts topLevelDecls=topLevelDecls 
-{ retVal = new ScompUnit(postUnitAnnotations, packageDecl, importStmts, usingStmts, topLevelDecls); }
+{ retVal = new ScompUnit(postAnnotations, packageDecl, importStmts, usingStmts, topLevelDecls); }
 ;
 
 compUnit returns [ CompUnit retVal = null ]
 :
-{ Annotations postUnitAnnotations = null; }
-  ( retVal=scompUnit[postUnitAnnotations]
+{ Annotations postAnnotations = null; }
+  ( retVal=scompUnit[postAnnotations]
   )
-postUnitAnnotations=annotations ;
+postAnnotations=annotations ;
 
 packageDecl returns [ PackageDecl retVal = null ]
 :
-{ Annotations preAnnotations = null; QualifiedID name = null; Annotations postAnnotations = null; }
-  preAnnotations=annotations package_KW:"package" name=qualifiedID semi:SEMI postAnnotations=annotations 
-{ retVal = new PackageDecl(preAnnotations, package_KW, name, semi, postAnnotations); }
+{ Annotations annotations = null; QualifiedID name = null; }
+  annotations=annotations package_KW:"package" name=qualifiedID semi:SEMI 
+{ retVal = new PackageDecl(annotations, package_KW, name, semi); }
 ;
 
 qualifiedID returns [ QualifiedID retVal = new QualifiedID() ]
@@ -96,8 +96,7 @@ annotations returns [ Annotations retVal = new Annotations() ]
 annotation returns [ Annotation retVal = null ]
 :
   ( retVal=tag
-  | retVal=singleLineComment
-  | retVal=multiLineComment
+  | retVal=contextMultiLineComment
   )
 ;
 
@@ -108,16 +107,10 @@ tag returns [ Tag retVal = null ]
 { retVal = new Tag(at, name, val); }
 ;
 
-singleLineComment returns [ SingleLineComment retVal = null ]
+contextMultiLineComment returns [ ContextMultiLineComment retVal = null ]
 :
-  single_line_comment:SINGLE_LINE_COMMENT 
-{ retVal = new SingleLineComment(single_line_comment); }
-;
-
-multiLineComment returns [ MultiLineComment retVal = null ]
-:
-  multi_line_comment:MULTI_LINE_COMMENT 
-{ retVal = new MultiLineComment(multi_line_comment); }
+  context_multi_line_comment:CONTEXT_MULTI_LINE_COMMENT 
+{ retVal = new ContextMultiLineComment(context_multi_line_comment); }
 ;
 
 importStmts returns [ ImportStmts retVal = new ImportStmts() ]
@@ -128,9 +121,9 @@ importStmts returns [ ImportStmts retVal = new ImportStmts() ]
 
 importStmt returns [ ImportStmt retVal = null ]
 :
-{ StringLiteralOrQualifiedID uri = null; }
-  require_KW:"require" uri=stringLiteralOrQualifiedID 
-{ retVal = new ImportStmt(require_KW, uri); }
+{ Annotations annotations = null; StringLiteralOrQualifiedID uri = null; }
+  annotations=annotations require_KW:"require" uri=stringLiteralOrQualifiedID 
+{ retVal = new ImportStmt(annotations, require_KW, uri); }
 ;
 
 usingStmts returns [ UsingStmts retVal = new UsingStmts() ]
@@ -141,9 +134,9 @@ usingStmts returns [ UsingStmts retVal = new UsingStmts() ]
 
 usingStmt returns [ UsingStmt retVal = null ]
 :
-{ QualifiedID name = null; }
-  using_KW:"using" name=qualifiedID 
-{ retVal = new UsingStmt(using_KW, name); }
+{ Annotations annotations = null; QualifiedID name = null; }
+  annotations=annotations using_KW:"using" name=qualifiedID 
+{ retVal = new UsingStmt(annotations, using_KW, name); }
 ;
 
 topLevelDecls returns [ TopLevelDecls retVal = new TopLevelDecls() ]
@@ -154,9 +147,9 @@ topLevelDecls returns [ TopLevelDecls retVal = new TopLevelDecls() ]
 
 topLevelDecl returns [ TopLevelDecl retVal = null ]
 :
-{ Annotations preAnnotations = null; AnnotableElement annotableElement = null; }
-  preAnnotations=annotations annotableElement=annotableElement 
-{ retVal = new TopLevelDecl(preAnnotations, annotableElement); }
+{ Annotations annotations = null; AnnotableElement annotableElement = null; }
+  annotations=annotations annotableElement=annotableElement 
+{ retVal = new TopLevelDecl(annotations, annotableElement); }
 ;
 
 annotableElement returns [ AnnotableElement retVal = null ]
@@ -177,9 +170,9 @@ subPackageDecl returns [ SubPackageDecl retVal = null ]
 
 classDecl returns [ ClassDecl retVal = null ]
 :
-{ AbstractModifier abstractModifier = null; ClassKind classKind = null; TypeVarDecllst typeVarDecllst = null; Typelst superTypes = null; ClassMemberDecls classMemberDecls = null; Annotations postAnnotations = null; }
-  ( abstractModifier=abstractModifier )? classKind=classKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? ( inherits_KW:"inherits" superTypes=typelst )? lcurly:LCURLY classMemberDecls=classMemberDecls rcurly:RCURLY postAnnotations=annotations 
-{ retVal = new ClassDecl(abstractModifier, classKind, name, lt, typeVarDecllst, gt, inherits_KW, superTypes, lcurly, classMemberDecls, rcurly, postAnnotations); }
+{ AbstractModifier abstractModifier = null; ClassKind classKind = null; TypeVarDecllst typeVarDecllst = null; Typelst superTypes = null; ClassMemberDecls classMemberDecls = null; }
+  ( abstractModifier=abstractModifier )? classKind=classKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? ( inherits_KW:"inherits" superTypes=typelst )? lcurly:LCURLY classMemberDecls=classMemberDecls rcurly:RCURLY 
+{ retVal = new ClassDecl(abstractModifier, classKind, name, lt, typeVarDecllst, gt, inherits_KW, superTypes, lcurly, classMemberDecls, rcurly); }
 ;
 
 classKind returns [ ClassKind retVal = null ]
@@ -355,9 +348,9 @@ params returns [ Params retVal = new Params() ]
 
 param returns [ Param retVal = null ]
 :
-{ Annotations preAnnotations = null; TypeRef typeRef = null; Annotations postAnnotations = null; }
-  preAnnotations=annotations name:ID colon:COLON typeRef=typeRef postAnnotations=annotations 
-{ retVal = new Param(preAnnotations, name, colon, typeRef, postAnnotations); }
+{ Annotations annotations = null; TypeRef typeRef = null; }
+  annotations=annotations name:ID colon:COLON typeRef=typeRef 
+{ retVal = new Param(annotations, name, colon, typeRef); }
 ;
 
 typeRef returns [ TypeRef retVal = null ]
@@ -423,9 +416,9 @@ enumLiterals returns [ EnumLiterals retVal = new EnumLiterals() ]
 
 enumLiteral returns [ EnumLiteral retVal = null ]
 :
-{ Annotations preAnnotations = null; }
-  preAnnotations=annotations name:ID semi:SEMI 
-{ retVal = new EnumLiteral(preAnnotations, name, semi); }
+{ Annotations annotations = null; }
+  annotations=annotations name:ID semi:SEMI 
+{ retVal = new EnumLiteral(annotations, name, semi); }
 ;
 
 fExpressionLst returns [ FExpressionLst retVal = new FExpressionLst() ]
@@ -449,9 +442,9 @@ fExpression returns [ FExpression retVal = null ]
 
 fAssignement returns [ FAssignement retVal = null ]
 :
-{ Annotations preAnnotations = null; LogicalExpression expression = null; AssignementOp assignementOp = null; LogicalExpression newvalue = null; Annotations postAnnotations = null; }
-  preAnnotations=annotations expression=logicalExpression ( assignementOp=assignementOp equals:EQUALS newvalue=logicalExpression )? postAnnotations=annotations 
-{ retVal = new FAssignement(preAnnotations, expression, assignementOp, equals, newvalue, postAnnotations); }
+{ Annotations annotations = null; LogicalExpression expression = null; AssignementOp assignementOp = null; LogicalExpression newvalue = null; }
+  annotations=annotations expression=logicalExpression ( assignementOp=assignementOp equals:EQUALS newvalue=logicalExpression )? 
+{ retVal = new FAssignement(annotations, expression, assignementOp, equals, newvalue); }
 ;
 
 assignementOp returns [ AssignementOp retVal = null ]
@@ -829,8 +822,7 @@ GT         		: '>'  ;
 GTE        		: ">=" ;
 DIV        		: '/'  ;  
 
-
-STRING_LITERAL : '"' (ESC | ~'"')* '"' ;
+STRING_LITERAL : '"' (ESC | ~('"'|'\\'))* '"' ;
 CHAR_LITERAL   : '\'' (ESC | ~'\'') '\'';
 
 // TODO: The (DIGIT DIGIT DIGIT) is cheesy it should be something like
@@ -866,10 +858,10 @@ WS : (' ' | '\t' | '\f' | '\r' | '\n')+
 { $setType(Token.SKIP); }
 ;
 
-SINGLE_LINE_COMMENT : "//" (~('\n'|'\r'))* ('\n'|'\r'('\n')?) ;
+SINGLE_LINE_COMMENT : "//" (~('\n'|'\r'))* ('\n'|'\r'('\n')?) 		{$setType(Token.SKIP); };
 
-MULTI_LINE_COMMENT : 
-	"/*"
+CONTEXT_MULTI_LINE_COMMENT : 
+	"/**"
 	(
 		{ LA(2)!='/' }? '*'
 		|	'\r' '\n'
@@ -879,8 +871,25 @@ MULTI_LINE_COMMENT :
 		)*
 		"*/"
 ;
+
+MULTI_LINE_COMMENT : 
+	"/*" 
+	~('*')
+	(
+		{ LA(2)!='/' }? '*'
+		|	'\r' '\n'  
+		|	'\r'	   
+		|	'\n'	  
+		|	~('*'|'\n'|'\r')
+		)*
+		"*/"
+	{$setType(Token.SKIP);}
+;
+
+
+
+
 //
 //
 //WS : (' ' | '\t' | '\f' | '\r' | '\n' )+ //{newline();}
-//{ $setType(Token.SKIP); }
-//;
+//{ $setType(Token.SKIP); };
