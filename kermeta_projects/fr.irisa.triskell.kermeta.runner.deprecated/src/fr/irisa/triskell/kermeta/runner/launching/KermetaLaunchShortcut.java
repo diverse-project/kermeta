@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.3 2005-06-06 15:23:24 zdrey Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.4 2005-06-06 16:26:26 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : GPL
@@ -84,8 +84,14 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
         // Launch!
         if (launchable == true)
         {   launchSelectedFile(selectedFile, mode); }
+        else if (selectedFile == null)
+        {
+            System.err.println("It seems like you did not select any file...");
+        }
         else
-        {System.err.println("The selected file is not launchable ('"+selectedFile+"')");}
+        {
+            System.err.println("The selected file is not launchable ('"+selectedFile+"')");
+        }
 
     }
 
@@ -119,7 +125,9 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 		ILaunchConfiguration config= null;
 		try {
 			ILaunchConfigurationType configType= getKermetaLaunchConfigurationType();
-			ILaunchConfigurationWorkingCopy wc = configType.newInstance(null, getLaunchManager().generateUniqueLaunchConfigurationNameFrom(className+"::"+opName)); 
+			ILaunchConfigurationWorkingCopy wc = configType.newInstance(
+			        null, getLaunchManager().generateUniqueLaunchConfigurationNameFrom(
+			                fileName+"_"+className+"_"+opName)); 
 			
 			wc.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, fileName);
 			wc.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, className);
