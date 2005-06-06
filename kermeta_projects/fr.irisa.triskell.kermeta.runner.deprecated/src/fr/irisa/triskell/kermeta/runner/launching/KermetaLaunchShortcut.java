@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.2 2005-05-31 14:35:28 zdrey Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.3 2005-06-06 15:23:24 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : GPL
@@ -25,8 +25,10 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.ILaunchShortcut;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 
@@ -55,7 +57,6 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
      */
     public void launch(ISelection selection, String mode)
     {
-        System.out.println("Yeppppeeeee!!!!");
 		IFile selectedFile = null;
 		boolean launchable = false;
         // Get the first selection, if it is a file
@@ -64,7 +65,6 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
             IStructuredSelection ssel = (IStructuredSelection)selection;
 			if (ssel.size()>1)
 			{
-			    System.out.println("zou");
 			    launchable = false;
 			}
 			Object obj = ssel.getFirstElement();
@@ -73,13 +73,11 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 				if (obj instanceof IContainer)
 				{
 					launchable = false;
-					System.out.println("pas fichier");
 				}
 				else
 				{
 				    launchable = true;
 					selectedFile = (IFile)obj;
-					System.out.println("fichier");
 				}
 			}
 		}
@@ -87,7 +85,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
         if (launchable == true)
         {   launchSelectedFile(selectedFile, mode); }
         else
-        {System.err.println("Pas launchable");}
+        {System.err.println("The selected file is not launchable ('"+selectedFile+"')");}
 
     }
 
@@ -96,8 +94,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
      */
     public void launch(IEditorPart editor, String mode)
     {
-        System.out.println("Youpi");
-        // Get the editor input.... TODO : comment!
+        // Get the editor input.... 
         IFile ifile = null;
         IEditorInput input = editor.getEditorInput();
         
@@ -128,7 +125,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 			wc.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, className);
 			wc.setAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, opName);
 			
-			config= wc.doSave();		
+			config= wc.doSave();
 		} catch (CoreException ce) {
 		    System.err.println("TODO : catch properly this core exception");
 			ce.printStackTrace();
@@ -144,6 +141,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 	protected void launchConfiguration(String mode, ILaunchConfiguration config) {
 		if (config != null) {
 			DebugUITools.launch(config, mode);
+			
 		}
 	}
 
@@ -182,6 +180,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 		// Ignore the other case, i.e more than one config.
 		int candidateCount= candidateConfigs.size();
 		if (candidateCount < 1) {
+		    
 			return null;
 		} else if (candidateCount == 1) {
 			return (ILaunchConfiguration) candidateConfigs.get(0);
@@ -203,30 +202,37 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 	{
 		// Parse the file
 	    KermetaUnit unit = KermetaRunHelper.parse(ifile);
-	    
-	    // Get the @mainClass and @mainOperation tags (if they exist)
-	    ArrayList point  = KermetaRunHelper.findEntryPoint(unit);
-	    String mainClass = (String)point.get(0);
-	    String mainOp    = (String)point.get(1);
-	    // FIXME : wrong path (not file system path)
-	    String fileName  = ifile.getFullPath().makeAbsolute().toOSString(); 
-	    
-		ILaunchConfiguration config = findLaunchConfiguration(
-			mode, 
-			fileName,
-			mainClass,
-			mainOp
-		);
-
-		if (config == null) {
-			config= createConfiguration(
-				ifile.getProject(),
-				fileName,
-				mainClass,
-				mainOp
-			);
-		}
-		launchConfiguration(mode, config);
+	    try
+	    {
+	        // Get the @mainClass and @mainOperation tags (if they exist)
+	        ArrayList point  = KermetaRunHelper.findEntryPoint(unit);
+	        String mainClass = (String)point.get(0);
+	        String mainOp    = (String)point.get(1);
+	        // FIXME : wrong path (not file system path)
+	        String fileName  = ifile.getFullPath().makeAbsolute().toOSString(); 
+	        
+	        ILaunchConfiguration config = findLaunchConfiguration(
+	                mode, 
+	                fileName,
+	                mainClass,
+	                mainOp
+	        );
+	        
+	        if (config == null) {
+	            config= createConfiguration(
+	                    ifile.getProject(),
+	                    fileName,
+	                    mainClass,
+	                    mainOp
+	            );
+	        }
+	        launchConfiguration(mode, config);
+	    }
+	    // Thrown by findEntryPoint
+	    catch (Throwable e)
+	    {
+	        MessageDialog.openError(new Shell(), "Kermeta interpreter error",e.getMessage());
+	    }
 	}
 
 	

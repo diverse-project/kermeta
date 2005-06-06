@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.6 2005-06-03 15:52:17 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.7 2005-06-06 15:23:19 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -22,6 +22,7 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.MessageConsole;
@@ -95,6 +96,10 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	            System.out.println("ImplementationError : Debug mode not implemented yet");
 	        }
 	    }
+	    catch (KermetaInterpreterError e)
+	    {
+	        MessageDialog.openError(new Shell(), "Kermeta interpreter error", e.getMessage());
+	    }
 	    catch (Exception e)
 	    {
 	        System.err.println("There is a plugin error :'(");
@@ -121,16 +126,17 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
             // when launching performApply
             KermetaUnit kunit = KermetaRunHelper.parse(fileNameString);
             KermetaConsole console = new KermetaConsole();
+            // Remove the preceding consoles
+            console.removeCurrentConsole();
+            // Add a MessageConsole
+            console.addConsole();	
 	        try
 	        {
-	            console.removeCurrentConsole();
+	            
 	            // 	Get the values given by the user in the runPopupDialog
 	            KermetaInterpreter interpreter = new KermetaInterpreter(kunit);
 	            
 	            interpreter.setEntryPoint(classQualifiedNameString, operationString);
-	           // System.out.println("Console?"+ interpreter.getKStream());
-
-	            console.addConsole();
 	            interpreter.setKStream(console);     
     	        interpreter.launch();
     	
@@ -152,12 +158,6 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	            console.print(e.getMessage());
 	            e.printStackTrace();
 	        }
-	        finally
-	        {
-	            console.reset();
-	        }
-            
-            
             
             // TODO Auto-generated method stub
         } catch (CoreException e) {

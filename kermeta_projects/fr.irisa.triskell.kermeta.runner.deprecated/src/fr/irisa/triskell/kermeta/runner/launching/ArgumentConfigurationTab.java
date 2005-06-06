@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.9 2005-05-31 14:35:28 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.10 2005-06-06 15:23:29 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -13,7 +13,9 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import java.io.File;
 import java.util.ArrayList;
+
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -25,10 +27,12 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.internal.ui.DebugUIAdapterFactory;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
@@ -43,6 +47,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
@@ -114,6 +119,8 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     /** The button to click on in order to select an operation*/
     private Button operationNameButton;
     
+    public final String COULD_NOT_LOAD_ERROR = "Could not load the KMUnit for given file";
+    private String LOAD_ERROR = "KMUnit was not properly loaded (invalid root tags?) ";
     /**
      * 
      */
@@ -170,20 +177,32 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     {	  // just to remember how to access a launch group
 //        ILaunchGroup group = DebugUITools.getLaunchGroup(configuration, LaunchManager.RUN_MODE);
         String selectedOperationString = "";
+        String currentPath = "";
+        IFile selectedFile = null;
         if (DebugUITools.getSelectedResource()!=null)
         {      
            selectedPath = DebugUITools.getSelectedResource().getFullPath().toOSString();//.getLocation().toOSString();
+           
         }
 		try
 		{
-		    String currentPath = configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
+		    String storedPath = configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
             "");
 		    // If user created a new configuration ?
-		    currentPath = (currentPath.equals(""))?selectedPath:currentPath;
-		    
+		    currentPath = (storedPath.equals(""))?selectedPath:storedPath;
+		    System.out.println("sel:"+ selectedPath + "; current path : "+currentPath);
+		    IResource iresource = getWorkspaceRoot().findMember(currentPath);
+		    if (iresource instanceof IFile)
+		    {
+		        selectedFile = (IFile) iresource;
+		    }
+		    else
+		    {
+		        // Throw an ex.
+		    }
 		    // Create the Unit corresponding to the chosen Kermeta file
 		    // (either the SelectedResource one, or the path of current configuration)
-		    selectedUnit = KermetaRunHelper.parse(currentPath);
+		    selectedUnit = KermetaRunHelper.parse(selectedFile);
 		    ArrayList point = KermetaRunHelper.findEntryPoint(selectedUnit);
 		    selectedClassString = (String)point.get(0);
 		    selectedOperationString = (String)point.get(1);
@@ -203,11 +222,22 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		{
 		    e.printStackTrace();
 		}
-		catch (Exception e)
+		catch (Throwable e)
 		{
-		    System.err.println("Exception : the KermetaUnit for selected file could" +
-		    		"probably not be loaded");
-		    e.printStackTrace();
+		    String errorMsg;
+	        if (selectedUnit == null)
+	            errorMsg = COULD_NOT_LOAD_ERROR;
+	        else
+	            errorMsg = LOAD_ERROR = " ";
+	        
+	        setClassEnabled(false);
+	        setOperationEnabled(false);
+	        MessageDialog.openInformation(
+					new Shell(),
+					"Kermeta parse error",
+					COULD_NOT_LOAD_ERROR+"'"+ currentPath + "':\n"+e.getMessage());
+				e.printStackTrace();
+	        
 		}
 
     }
@@ -456,16 +486,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      */
     private void handleClassNameButtonSelected()
     {
-        
-        // TODO Handle null pointer exception
-//        List classDefinitionList = createClassList(getShell(), selectedUnit);
-        // The selectedUnit can be null when trying to run new configurations
-        // Try to load it again.
-/*        if (selectedUnit == null)
-        {
-            
-        }
-*/
                 
         EList typedefs = selectedUnit.rootPackage.getFOwnedTypeDefinition();
         // Get all the classes defined in this Unit

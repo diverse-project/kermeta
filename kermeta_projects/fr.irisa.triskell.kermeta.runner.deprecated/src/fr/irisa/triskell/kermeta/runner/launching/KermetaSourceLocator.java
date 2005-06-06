@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.5 2005-06-01 15:49:08 zdrey Exp $
+/* $Id: KermetaSourceLocator.java,v 1.6 2005-06-06 15:23:35 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaSourceLocator.java
  * License: GPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.runner.launching;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IPersistableSourceLocator;
+import org.eclipse.debug.core.model.ISourceLocator;
 import org.eclipse.debug.core.model.IStackFrame;
 
 /**
