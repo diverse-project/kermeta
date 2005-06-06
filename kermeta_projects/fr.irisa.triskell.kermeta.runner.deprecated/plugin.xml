@@ -205,8 +205,8 @@
             -->
          </actionSet>
       </extension>
-      <!-- Popup menu
-      <extension
+      <!-- Kermeta launch short cut -->
+     <extension
             point="org.eclipse.debug.ui.launchShortcuts">
          <shortcut
                label="Kermeta App"
@@ -221,13 +221,13 @@
 			
             </contextualLaunch>
             <perspective id="kermetaPerspective"/>
-         </shortcut>
+         </shortcut> 
          <shortcut
                label="Kermeta popup"
                class="fr.irisa.triskell.kermeta.runner.KermetaLaunchShortcut"
                modes="run"
                id="PopupKermetaLaunchShortCut"/>
+
       </extension>
--->
 
 </plugin>
