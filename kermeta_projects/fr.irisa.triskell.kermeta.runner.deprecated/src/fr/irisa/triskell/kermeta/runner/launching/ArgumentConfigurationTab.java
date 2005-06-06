@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.10 2005-06-06 15:23:29 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.11 2005-06-06 16:04:50 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -190,16 +190,8 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
             "");
 		    // If user created a new configuration ?
 		    currentPath = (storedPath.equals(""))?selectedPath:storedPath;
-		    System.out.println("sel:"+ selectedPath + "; current path : "+currentPath);
-		    IResource iresource = getWorkspaceRoot().findMember(currentPath);
-		    if (iresource instanceof IFile)
-		    {
-		        selectedFile = (IFile) iresource;
-		    }
-		    else
-		    {
-		        // Throw an ex.
-		    }
+		    
+		    selectedFile = getIFileFromString(currentPath);
 		    // Create the Unit corresponding to the chosen Kermeta file
 		    // (either the SelectedResource one, or the path of current configuration)
 		    selectedUnit = KermetaRunHelper.parse(selectedFile);
@@ -436,7 +428,8 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      */
     protected void parseFileAndUpdateFields(String currentPath)
     {
-        selectedUnit = KermetaRunHelper.parse(currentPath);
+        IFile file = getIFileFromString(currentPath);
+        selectedUnit = KermetaRunHelper.parse(file);
 	    ArrayList point = KermetaRunHelper.findEntryPoint(selectedUnit);
 	    selectedClassString = (String)point.get(0);
 	    String selectedOperationString = (String)point.get(1);
@@ -591,5 +584,16 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 	private IContainer getContainer(String path) {
 		Path containerPath = new Path(path);
 		return (IContainer) getWorkspaceRoot().findMember(containerPath);
+	}
+	
+	protected IFile getIFileFromString(String filepath)
+	{
+	    IFile selectedFile = null;
+	    IResource iresource = getWorkspaceRoot().findMember(filepath);
+	    if (iresource instanceof IFile)
+	        selectedFile = (IFile) iresource;
+	    // Any other case should not occur : TODO : forbid the compilation
+	    // of a resource that is not an IFile!!
+	    return selectedFile;
 	}
 }
