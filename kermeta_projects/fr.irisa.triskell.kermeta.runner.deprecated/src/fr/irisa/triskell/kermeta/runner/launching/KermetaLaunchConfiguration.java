@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.7 2005-06-06 15:23:19 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.8 2005-06-06 16:07:46 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -10,8 +10,8 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
-import java.lang.reflect.InvocationTargetException;
-
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -21,17 +21,11 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.ui.console.ConsolePlugin;
-import org.eclipse.ui.console.MessageConsole;
-
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 
@@ -121,10 +115,17 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
             String classQualifiedNameString = configuration.getAttribute(KM_CLASSQNAME, "");
             String operationString = configuration.getAttribute(KM_OPERATIONNAME, "");
            
+            IFile selectedFile = null;
+		    IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
+		    if (iresource instanceof IFile)
+		        selectedFile = (IFile) iresource;
+		    else
+		    {  // TODO : throw an exception!
+		    }
             // Reparse file ... This is a {temporary!!} patch to get KermetaUnit of
             // selectedFile, because it is not serializable (get a kind of Serialize error
             // when launching performApply
-            KermetaUnit kunit = KermetaRunHelper.parse(fileNameString);
+            KermetaUnit kunit = KermetaRunHelper.parse(selectedFile);
             KermetaConsole console = new KermetaConsole();
             // Remove the preceding consoles
             console.removeCurrentConsole();
