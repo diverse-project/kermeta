@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.8 2005-06-03 16:16:36 ffleurey Exp $
+/* $Id: KermetaRunHelper.java,v 1.9 2005-06-06 15:22:27 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: GPL
@@ -9,12 +9,14 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
+import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
@@ -41,8 +43,7 @@ public class KermetaRunHelper {
 
     	StructurePackageImpl.init();
     	BehaviorPackageImpl.init();
-    	String uri = "platform:/resource/" + filename;
-    	//String uri = "file://" +filename;
+    	String uri = "platform:/resource/" + filename;//file.getFullPath().toString();
     	
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
     	KMTUnit result = null;
@@ -101,6 +102,8 @@ public class KermetaRunHelper {
     }
     
     
+  
+    
 	/**
 	 * Initialize the entrypoint of the program according to
 	 * the tags on the root_package.
@@ -115,14 +118,21 @@ public class KermetaRunHelper {
 	    String mc = ""; String mo = "";
 	    if (unit!=null)
 	    {
-	        Iterator it = unit.rootPackage.getFTag().iterator();
-	        
-	        while (it.hasNext()) {
-	            FTag tag = (FTag)it.next();
-	            if (tag.getFName().equals("mainClass")) 
-	            {    mc = tag.getFValue().substring(1,tag.getFValue().length()-1);} //remove the " to memorize value
-	            if (tag.getFName().equals("mainOperation"))
-	            {    mo = tag.getFValue().substring(1,tag.getFValue().length()-1);} //remove the " to memorize value
+	        if (unit.rootPackage == null)
+	        {
+	            throw new KermetaInterpreterError("No root package was found");
+	        }
+	        else
+	        {
+	            Iterator it = unit.rootPackage.getFTag().iterator();
+	            
+	            while (it.hasNext()) {
+	                FTag tag = (FTag)it.next();
+	                if (tag.getFName().equals("mainClass")) 
+	                {    mc = tag.getFValue().substring(1,tag.getFValue().length()-1);} //remove the " to memorize value
+	                if (tag.getFName().equals("mainOperation"))
+	                {    mo = tag.getFValue().substring(1,tag.getFValue().length()-1);} //remove the " to memorize value
+	        }
 	        }
 	    }
         taglist.add(mc); taglist.add(mo);
