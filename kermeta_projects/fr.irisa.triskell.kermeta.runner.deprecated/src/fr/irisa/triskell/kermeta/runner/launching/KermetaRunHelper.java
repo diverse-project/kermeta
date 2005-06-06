@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.9 2005-06-06 15:22:27 zdrey Exp $
+/* $Id: KermetaRunHelper.java,v 1.10 2005-06-06 16:05:44 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: GPL
@@ -37,35 +37,7 @@ public class KermetaRunHelper {
 	 * @param file the file to parse
 	 * @return KermetaUnit the compilation unit for the given file
 	 */
-    public static KermetaUnit parse(String filename)
-    {
-        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
 
-    	StructurePackageImpl.init();
-    	BehaviorPackageImpl.init();
-    	String uri = "platform:/resource/" + filename;//file.getFullPath().toString();
-    	
-    	KermetaUnitFactory.getDefaultLoader().unloadAll();
-    	KMTUnit result = null;
-       // System.out.println("file.getFullPath().toOSString() : " + file.getFullPath().toOSString());
-        try {
-        	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
-	        result.load();
-	        
-	        result.typeCheck(null);
-	        
-        }
-        catch(Throwable e) {
-            KermetaUnit.internalLog.error("load error : "+e, e);
-        	if (result == null) {
-        		//e.printStackTrace();
-        		return null;
-        	}
-        	else if (result.error.size() == 0)
-        		result.error.add(new KMUnitError("INTERNAL ERROR : " + e, null));
-        }
-        return result;
-    }
     
 	/**
 	 * Parse the given file and return its KermetaUnit
@@ -81,7 +53,6 @@ public class KermetaRunHelper {
     	String uri = "platform:/resource" + file.getFullPath().toString();
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
     	KMTUnit result = null;
-       // System.out.println("file.getFullPath().toOSString() : " + file.getFullPath().toOSString());
         try {
         	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
 	        result.load();
