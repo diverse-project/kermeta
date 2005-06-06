@@ -1,4 +1,4 @@
-/* $Id: KermetaNewProjectWizardPage.java,v 1.4 2005-05-31 14:35:29 zdrey Exp $
+/* $Id: KermetaNewProjectWizardPage.java,v 1.5 2005-06-06 15:25:17 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizardPage.java
  * License: GPL
@@ -49,6 +49,10 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
     protected Label srcLocationLabel,binLocationLabel;
 
     private boolean useEmptyFolders;
+
+    private String SRC_FOLDER = "src";
+
+    private String SRC_LIB = "lib";
     
 	/**
 	 * Constructor for KermetaNewWizardPage.
@@ -153,8 +157,8 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
 		if (useDefaultFolders)
 		{
 /*			mmodelLocationText.setText("metamodels"); modelLocationText.setText("models");*/
-			srcLocationText.setText("src");
-			binLocationText.setText("bin");
+			srcLocationText.setText(SRC_FOLDER);
+			binLocationText.setText(SRC_LIB);
 		}
     }
 
@@ -176,11 +180,11 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
 */
 		// source location label
 		srcLocationLabel = createLocationLabel(folderGroup, "Transformation source location", b, font);
-		srcLocationText = createLocationText(folderGroup, b, font, "src");
+		srcLocationText = createLocationText(folderGroup, b, font, SRC_FOLDER);
 		
 		// source location label
 		binLocationLabel = createLocationLabel(folderGroup, "Compiled files location", b, font);
-		binLocationText = createLocationText(folderGroup, b, font, "lib");
+		binLocationText = createLocationText(folderGroup, b, font, SRC_LIB);
         
     }
     
