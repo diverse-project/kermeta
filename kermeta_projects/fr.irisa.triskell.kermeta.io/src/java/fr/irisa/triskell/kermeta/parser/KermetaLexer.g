@@ -99,18 +99,23 @@ CONTEXT_MULTI_LINE_COMMENT :
 		"*/"
 ;
 
+EMPTY_LINE_COMMENT : "/**/"
 MULTI_LINE_COMMENT : 
-	"/*" 
-	~('*')
+	EMPTY_LINE_COMMENT 
+	|
 	(
-		{ LA(2)!='/' }? '*'
-		|	'\r' '\n'  
-		|	'\r'	   
-		|	'\n'	  
-		|	~('*'|'\n'|'\r')
-		)*
-		"*/"
-	{$setType(Token.SKIP);}
+		"/*" 
+		~('*')
+		(
+			{ LA(2)!='/' }? '*'
+			|	'\r' '\n'  
+			|	'\r'	   
+			|	'\n'	  
+			|	~('*'|'\n'|'\r')
+			)*
+			"*/"
+		{$setType(Token.SKIP);}
+	)
 ;
 
 
