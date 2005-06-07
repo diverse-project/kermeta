@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.6 2005-06-03 15:36:39 ffleurey Exp $
+/* $Id: RuntimeMemory.java,v 1.7 2005-06-07 12:06:11 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeMemory.java
  * License: GPL
@@ -10,6 +10,7 @@
 package fr.irisa.triskell.kermeta.builder;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
@@ -55,6 +56,10 @@ public class RuntimeMemory {
         super.finalize();
         System.err.println("FINALIZE MEMORY");
     }
+    
+    public void loadKCoreRuntimeObject(KCoreRuntimeObject obj) {
+        memoryLoader.loadKCoreRuntimeObject(obj);
+	}
     
     public RuntimeObject getRuntimeObjectForFObject(FObject object)
     {

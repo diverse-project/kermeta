@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.4 2005-05-25 17:42:58 ffleurey Exp $
+/* $Id: RuntimeObject.java,v 1.5 2005-06-07 12:06:14 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -43,33 +43,33 @@ public class RuntimeObject {
 	/**
 	 * The meta class
 	 */
-	protected RuntimeObject metaclass;
+	private RuntimeObject metaclass;
 	
 	/**
 	 * The container
 	 */
-	protected RuntimeObject container = null;
+	private RuntimeObject container = null;
 	
 	/**
 	 * The values of properties. 
 	 * Indexed by the name of the property
 	 */
-	protected Hashtable properties = new Hashtable();
+	private Hashtable properties = new Hashtable();
 	
 	/**
 	 * Data contained in the object
 	 */
-	protected Hashtable data;
+	private Hashtable data;
 	
 	/**
 	 * Is the object modifiable
 	 */
-	protected boolean frozen = false;
+	private boolean frozen = false;
 	
 	/**
 	 * The kermeta object factory used to create this object 
 	 */
-	protected RuntimeObjectFactory factory;
+	private RuntimeObjectFactory factory;
 	
 	/**
 	 * The constructor

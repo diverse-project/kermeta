@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.6 2005-06-03 15:36:42 ffleurey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.7 2005-06-07 12:06:12 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kermeta.runtime.factory;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
@@ -40,6 +41,7 @@ public class RuntimeObjectFactory {
 	protected KermetaIOStream stream = null;
 	
 	
+	
 	/**
 	 * These are caches of classes
 	 */
@@ -59,6 +61,11 @@ public class RuntimeObjectFactory {
 	    // Set by default
 	    this.stream = new SystemIOStream();
 	    struct_factory = StructurePackageImpl.init().getStructureFactory();
+	}
+	
+	
+	public void loadKCoreRuntimeObject(KCoreRuntimeObject obj) {
+	    memory.loadKCoreRuntimeObject(obj);
 	}
 	
 	
