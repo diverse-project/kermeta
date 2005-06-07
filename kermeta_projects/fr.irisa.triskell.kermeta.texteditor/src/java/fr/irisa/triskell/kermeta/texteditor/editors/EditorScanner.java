@@ -87,7 +87,9 @@ public class EditorScanner extends RuleBasedScanner {
 	 */
 	private void createRuleForComments() {
 		IToken commentToken = new Token(new TextAttribute(BLUE_GREEN, null, 2));
+		IToken ccommentToken = new Token(new TextAttribute(LIGHT_BLUE, null, 2));
 		rules.add(new EndOfLineRule("//", commentToken));
+		rules.add(new MultiLineRule("/**", "*/", ccommentToken));
 		rules.add(new MultiLineRule("/*", "*/", commentToken));
 	}
 
