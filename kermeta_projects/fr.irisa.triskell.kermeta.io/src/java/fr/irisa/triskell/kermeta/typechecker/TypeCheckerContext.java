@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.10 2005-05-27 14:30:48 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.11 2005-06-07 07:50:44 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : GPL
@@ -16,10 +16,13 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
 
+import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FMultiplicityElement;
@@ -170,6 +173,21 @@ public class TypeCheckerContext {
 		while(it.hasNext()) {
 		    FParameter p = (FParameter)it.next();
 		    this.addSymbol(new KMSymbolParameter(p), getTypeFromMultiplicityElement(p));
+		}
+	}
+	
+	/**
+	 * Initialize the context with a class definition
+	 */
+	public void init(DynamicExpressionUnit deu) {
+		selfClass = deu.getContext();
+		selfType = null;
+		contexts = new Stack();
+		pushContext();
+		Iterator it = deu.getVariables().iterator();
+		while(it.hasNext()) {
+		    FVariableDecl p = (FVariableDecl)it.next();
+		    this.addSymbol(new KMSymbolVariable(p), getTypeFromMultiplicityElement(p.getFType()));
 		}
 	}
 	

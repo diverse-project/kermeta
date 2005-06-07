@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.3 2005-05-02 23:50:49 ffleurey Exp $
+/* $Id: KermetaTypeChecker.java,v 1.4 2005-06-07 07:50:44 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -33,12 +33,9 @@ public class KermetaTypeChecker {
     
     protected KermetaUnit unit;
     protected TypeCheckerContext context;
-    
-    protected Hashtable expression_type;
-
-    
+        
     public Type getTypeOfExpression(fr.irisa.triskell.kermeta.behavior.FExpression expression) {
-        return (Type)expression_type.get(expression);
+        return new SimpleType(expression.getFStaticType());
     }
     
     
@@ -58,7 +55,7 @@ public class KermetaTypeChecker {
         else
             TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
         context = new TypeCheckerContext(unit);
-        expression_type = new Hashtable();
+        
     }
     
     /**
@@ -111,11 +108,15 @@ public class KermetaTypeChecker {
         context.init(op.getFOwningClass(), op);
         // check the body of the operation if it is not abstract
         if (op.getFBody() != null)
-            expression_type.putAll(ExpressionChecker.typeCheckExpression(op.getFBody(), unit, context));
+            ExpressionChecker.typeCheckExpression(op.getFBody(), unit, context);
         
         // THIS IS JUST FOR TESTING PURPOSES
         if (error_count != unit.error.size()) wrongOperations.add(op.getFName());
         else correctOperation.add(op.getFName());
+    }
+    
+    public void checkExpression(fr.irisa.triskell.kermeta.behavior.FExpression expression) {
+        ExpressionChecker.typeCheckExpression(expression, unit, context);
     }
     
     /**
@@ -128,4 +129,7 @@ public class KermetaTypeChecker {
 
     }
 
+    public TypeCheckerContext getContext() {
+        return context;
+    }
 }

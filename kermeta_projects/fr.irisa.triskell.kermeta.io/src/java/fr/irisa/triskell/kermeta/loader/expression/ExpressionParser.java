@@ -5,15 +5,23 @@
 package fr.irisa.triskell.kermeta.loader.expression;
 
 import java.io.StringReader;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.behavior.FTypeReference;
+import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FType;
 
 /**
  * @author Franck Fleurey
@@ -23,6 +31,7 @@ import fr.irisa.triskell.kermeta.parser.KermetaParser;
 public class ExpressionParser {
 
 
+    
 	
 	public static FExpression parse(KermetaUnit unit, String str) {
 		KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(str)));
