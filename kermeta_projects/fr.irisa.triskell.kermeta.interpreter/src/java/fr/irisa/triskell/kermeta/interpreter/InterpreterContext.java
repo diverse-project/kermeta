@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.9 2005-05-25 17:42:53 ffleurey Exp $
+/* $Id: InterpreterContext.java,v 1.10 2005-06-07 08:00:50 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : GPL
@@ -85,6 +85,7 @@ public class InterpreterContext {
      * multiplicity="(0 -1)"
      */
     protected Stack frame_stack;
+    protected RuntimeMemory memory;
 
     // Contains interpreter variables (global variables such as stdio)
     protected Hashtable interpreterVariables;
@@ -94,6 +95,7 @@ public class InterpreterContext {
      */
     public InterpreterContext(RuntimeMemory memory) {
     	frame_stack = new Stack();
+    	this.memory = memory;
     	interpreterVariables = new Hashtable();
     	initializeInterpreterVariables(memory);
     }
@@ -116,6 +118,9 @@ public class InterpreterContext {
 	    frame_stack.push(frame);
 	}
 	
+	public void pushExpressionCallFrame(ExpressionCallFrame frame) {
+	    frame_stack.push(frame);
+	}
 	
 	public void popCallFrame() {
 	    frame_stack.pop();
@@ -129,4 +134,7 @@ public class InterpreterContext {
 	public Variable getInterpreterVariableByName(String name) {
 	    return (Variable)interpreterVariables.get(name);
 	}
+    public RuntimeMemory getMemory() {
+        return memory;
+    }
 }

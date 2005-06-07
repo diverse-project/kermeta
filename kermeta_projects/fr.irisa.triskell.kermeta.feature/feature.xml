@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="0.0.7"
+      version="0.0.8"
       provider-name="IRISA/Triskell"
       image="images/kmt_32.gif">
 
@@ -50,18 +50,18 @@ team at IRISA.
          id="fr.irisa.triskell.kermeta"
          download-size="0"
          install-size="0"
-         version="0.0.7"/>
+         version="0.0.8"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.runner"
          download-size="0"
          install-size="0"
-         version="0.0.7"/>
+         version="0.0.8"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.texteditor"
          download-size="0"
          install-size="0"
-         version="0.0.7"/>
+         version="0.0.8"/>
 
 </feature>

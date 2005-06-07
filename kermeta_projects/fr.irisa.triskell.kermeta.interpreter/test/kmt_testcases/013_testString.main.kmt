@@ -20,11 +20,11 @@ class TestString inherits kermeta::kunit::Test {
     operation testfailCompareTo() : Void is do
     	var comp : kermeta::standard::Integer init 0
     	comp := "String".compareTo("String")
-    	stdio.writeln(comp)
+    	stdio.writeln(comp.toString)
     	assert(comp==0)
 
     	comp := "String".compareTo("Strong")
-    	stdio.writeln(comp)
+    	stdio.writeln(comp.toString)
     	assert(comp!=0)
 
     	comp := "String".compareTo("Strin")
@@ -36,10 +36,10 @@ class TestString inherits kermeta::kunit::Test {
     operation testCompareTo() : Void is do
     	var comp : kermeta::standard::Integer
     	comp := "String".compareTo("String")
-    	stdio.write(comp)
+    	stdio.write(comp.toString)
     	assert(comp == 0)
     	comp := "String".compareTo("Strongl")
-    	stdio.write(comp)
+    	stdio.write(comp.toString)
     	assert(comp !=0)
     end
 
@@ -119,6 +119,11 @@ class TestString inherits kermeta::kunit::Test {
 	
 	operation testIntegerToStr2() : kermeta::standard::Integer is do
 		assert((334 + 2).toString == "336")
+	end
+	
+	operation testIntegerToStr3() : kermeta::standard::Integer is do
+		stdio.writeln(3.toString)
+		assert(3.toString == "3")
 	end
 	
 
