@@ -12,7 +12,6 @@ import com.ibm.eclipse.ldt.core.ast.ASTNode;
 import fr.irisa.triskell.kermeta.ast.Basictype;
 import fr.irisa.triskell.kermeta.ast.Functype;
 import fr.irisa.triskell.kermeta.ast.Prodtype;
-import fr.irisa.triskell.kermeta.ast.Selftype;
 import fr.irisa.triskell.kermeta.ast.Type;
 import fr.irisa.triskell.kermeta.ast.Typelst;
 import fr.irisa.triskell.kermeta.ast.VoidType;
