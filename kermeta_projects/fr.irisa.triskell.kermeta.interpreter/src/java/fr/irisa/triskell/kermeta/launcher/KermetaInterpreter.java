@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.9 2005-06-03 15:36:34 ffleurey Exp $
+/* $Id: KermetaInterpreter.java,v 1.10 2005-06-08 15:19:35 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -143,9 +143,9 @@ public class KermetaInterpreter {
 	    while (it.hasNext()) {
 	        FTag tag = (FTag)it.next();
 	        if (tag.getFName().equals("mainClass")) 
-	            main_class = tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
+	            main_class = tag.getFValue(); //remove the " to memorize value
 	        if (tag.getFName().equals("mainOperation"))
-	            main_operation = tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
+	            main_operation = tag.getFValue(); //remove the " to memorize value
 	    }
 	    if (main_class != null && main_operation != null)
 	        setEntryPoint(main_class, main_operation);
