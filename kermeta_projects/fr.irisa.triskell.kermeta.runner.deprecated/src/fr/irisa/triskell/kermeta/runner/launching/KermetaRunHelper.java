@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.11 2005-06-06 16:16:19 zdrey Exp $
+/* $Id: KermetaRunHelper.java,v 1.12 2005-06-08 15:11:00 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: GPL
@@ -100,9 +100,9 @@ public class KermetaRunHelper {
 	            while (it.hasNext()) {
 	                FTag tag = (FTag)it.next();
 	                if (tag.getFName().equals("mainClass")) 
-	                {    mc = tag.getFValue().substring(1,tag.getFValue().length()-1);} //remove the " to memorize value
+	                {    mc = tag.getFValue();} //remove the " to memorize value
 	                if (tag.getFName().equals("mainOperation"))
-	                {    mo = tag.getFValue().substring(1,tag.getFValue().length()-1);} //remove the " to memorize value
+	                {    mo = tag.getFValue();} //remove the " to memorize value
 	        }
 	        }
 	    }
