@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.26 2005-05-31 16:59:48 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.27 2005-06-08 15:05:45 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -18,7 +18,6 @@ package fr.irisa.triskell.kermeta.loader;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
@@ -28,7 +27,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -43,7 +41,6 @@ import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.structure.FClass;
@@ -63,7 +60,6 @@ import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
-import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 /**
  * @author Franck Fleurey
@@ -194,7 +190,7 @@ public abstract class KermetaUnit {
 	/**
 	 * The tags
 	 */
-	public Hashtable tags = new Hashtable();
+	public ArrayList tags = new ArrayList();
 	
 	/**
 	 * This tables store the mapping between Metacore model elements
@@ -385,6 +381,11 @@ public abstract class KermetaUnit {
 	public void addUsing(String name) {
 		//TODO: check that the package exists. generate a warning if not.
 		usings.add(name);
+	}
+	
+	public void addTag(FTag tag)
+	{
+	    tags.add(tag);
 	}
 	
 	protected String getResolvedURI(String base_uri) {
@@ -676,38 +677,15 @@ public abstract class KermetaUnit {
 	            resource.getContents().add(p);
 	        }
 	    }
-	    addFTagToResource(resource);
+	    // Add the tags registered in tags list to the resource
+	    this.addFTagsToResource(resource);
 	    try {
 			resource.save(null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+		    e.printStackTrace();
 			throw new Error(e);
 		}
-	}
-	
-	/**
-	 * Add the given tag to resource. Used in the KMT2KMPass7.java, to add tag in resource without
-	 * adding it to a container (since a tag can be linked to one or more elements, and unlinked as well).
-	 */
-	public void addFTagToResource(Resource resource)
-	{
-	    ArrayList tags = new ArrayList();
-	    TreeIterator it = resource.getAllContents();
-	    while (it.hasNext()) {
-	        FObject o = (FObject)it.next();
-	        Iterator tgs = o.getFTag().iterator();
-	        while(tgs.hasNext()) {
-	            FTag tag = (FTag)tgs.next();
-	            if (tag.eResource() == null && !tags.contains(tag)) {
-	                tags.add(tag);
-		        }
-	        }
-	    }
-	    Iterator tit = tags.iterator();
-	    while(tit.hasNext()) {
-	        FObject o = (FObject)tit.next();
-	        resource.getContents().add(o);
-	    }
 	}
 	
 	/**
@@ -753,7 +731,19 @@ public abstract class KermetaUnit {
 		
 	}
 	*/
-	
+	/**
+	 * Add the given tag to resource. Used in the KMT2KMPass7.java, to add tag in resource without
+	 * adding it to a container (since a tag can be linked to one or more elements, and unlinked as well).
+	 */
+	public void addFTagsToResource(Resource resource)
+	{   
+	    int tagsize = this.tags.size();
+	    for (int i=0; i<tagsize; i++)
+	    {   
+	        FTag tag = (FTag)tags.get(i);
+	        resource.getContents().add(tag);
+	    }
+	}
 	
 	/**
 	 * If containedPackage has no container, we return it unchanged, else, we return its container,
@@ -792,7 +782,6 @@ public abstract class KermetaUnit {
 		TypeContainementFixer fixer = new TypeContainementFixer();
 		while(it.hasNext()) {
 			FObject o = (FObject)it.next();
-			
 			if (o instanceof FCallExpression) {
 			    FCallExpression e = (FCallExpression)o;
 			    fixer.addContainedTypes(e.getFStaticTypeVariableBindings(), e);
@@ -802,6 +791,7 @@ public abstract class KermetaUnit {
 				FExpression e = (FExpression)o;
 				if (e.getFStaticType() != null) {
 					fixer.addContainedTypes(e.getFStaticType(), e);
+					
 				}
 			}
 			else if (o instanceof FTypeContainer) {
@@ -1006,6 +996,14 @@ public abstract class KermetaUnit {
 		this.uri = uri;
 	}
 
+	
+	/**
+	 * @return the tags in this KermetaUnit
+	 */
+    public ArrayList getTags() {
+        return tags;
+    }
+    
     /**
      * 
      */

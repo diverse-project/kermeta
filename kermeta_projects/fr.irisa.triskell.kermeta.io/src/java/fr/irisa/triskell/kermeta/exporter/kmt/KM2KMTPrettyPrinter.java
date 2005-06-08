@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.12 2005-05-28 16:14:17 ffleurey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.13 2005-06-08 15:04:15 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KM2KMTPrettyPrinter.java
  * License : GPL
@@ -32,6 +32,7 @@ import fr.irisa.triskell.kermeta.structure.*;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
+import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 
 
 
@@ -111,6 +112,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		String result = "do\n";
 		pushPrefix();
 		result += ppCRSeparatedNode(node.getFStatement());
+		
 		popPrefix();
 		Iterator it = node.getFRescueBlock().iterator();
 		while(it.hasNext()) {
@@ -139,7 +141,9 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		String result = "";
 		Iterator it = expressions.iterator();
 		while(it.hasNext()) {
+		    
 			result += getPrefix() + this.accept((EObject)it.next()) + "\n";
+			
 		}
 		return result;
 	}
@@ -227,18 +231,8 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	public Object visit(FClassDefinition node) {
 		typedef = false;
 		String result = "";
-		
 
-		// Get the pre Annotation of this class 
-		if (node.getFTag().size()>0)
-		{
-		    FTag[] pretagArray = this.getFTagsByName(node.getFTag(), KMT2KMPass.PRE_TAGNAME);
-		    for (int i=0; i< pretagArray.length && pretagArray[i]!=null; i++)
-		    {
-		        result += this.accept((EObject)pretagArray[i]);
-		    }
-		}
-		
+		result += ppTags(node.getFTag());
 		
 		if (node.isFIsAbstract()) result += "abstract ";
 		result += "class " + ppIdentifier(node.getFName());
@@ -259,18 +253,6 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		result += getPrefix() + "}";		
 		
 		typedef = true;
-		
-		// Get post annotations
-		if (node.getFTag().size()>0)
-		{
-		    // get pre annotation
-		    FTag[] posttagArray = this.getFTagsByName(node.getFTag(), KMT2KMPass.POST_TAGNAME);
-		    for (int i=0; i< posttagArray.length && posttagArray[i]!=null; i++)
-		    {
-		        result += this.accept(posttagArray[i]);
-		    }
-		}
-		
 		
 		return result;
 	}
@@ -305,6 +287,16 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		return result;
 	}
 	
+	/** Prettyprint the annotations */
+	public String ppTags(EList tagList)
+	{
+	    String result = "";
+	    for (int i=0; i< tagList.size(); i++)
+	    {
+	        result += this.accept((EObject)tagList.get(i));
+	    }
+	    return result;
+	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FConditionnal)
 	 */
@@ -421,7 +413,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visit(FOperation node) {
-		String result = "";
+		String result = ppTags(node.getFTag());
 		if (node.getFSuperOperation() != null) result += "method ";
 		else result += "operation ";
 		result += ppIdentifier(node.getFName());
@@ -491,7 +483,9 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FPackage)
 	 */
 	public Object visit(FPackage node) {
-		String result = "package " + ppIdentifier(node.getFName()) + "\n";
+	    
+		String result = ppTags(node.getFTag());
+		result += "package " + ppIdentifier(node.getFName()) + "\n";
 		result += getPrefix() + "{\n";
 		String old_cname = current_pname;
 		current_pname = getQualifiedName(node);
@@ -517,7 +511,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
 	public Object visit(FProperty node) {
-		String result = "";
+	    String result = ppTags(node.getFTag());
 		if (node.isFIsDerived()) result += "property ";
 		else if (node.isFIsComposite()) result += "attribute ";
 		else result += "reference ";
@@ -658,8 +652,14 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
      */
     public Object visit(FTag node) {
         String result = "";
-        //result = "@pre : \"" + node.getFValue() + "\"";
-        result = "/*{"+node.getFName()+"}*/\r\n"+ node.getFValue() + "\n";
+        if (node.getFName().equals(KMT2KMPass7.ANONYMOUS))
+        {
+            result = node.getFValue() + "\n";
+        }
+        else
+        {
+            result = "@"+node.getFName()+" \""+node.getFValue()+"\"\n";
+        }
         return result;
     }
     
