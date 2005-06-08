@@ -26,7 +26,7 @@ SEMI    : ';';
 STAR    : '*';
 PLUS    : '+';
 MINUS   : '-';
-EQUALS  : '=';
+//EQUALS  : '=';
 
 QMARK   : '?';
 BANG    : '!';
@@ -41,6 +41,8 @@ LT_GT    : "<>";
 COL_COL  : "::";
 PIPE	 : "|";
 
+CASTEQ : "?=";
+ASSIGNEQ : ":=";
 EQEQ            : "==";
 NEQ				: "!=" ;
 LT         		: '<'  ;

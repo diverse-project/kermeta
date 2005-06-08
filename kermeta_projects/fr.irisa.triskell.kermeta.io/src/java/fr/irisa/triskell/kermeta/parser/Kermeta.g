@@ -121,9 +121,9 @@ importStmts returns [ ImportStmts retVal = new ImportStmts() ]
 
 importStmt returns [ ImportStmt retVal = null ]
 :
-{ Annotations annotations = null; StringLiteralOrQualifiedID uri = null; }
-  annotations=annotations require_KW:"require" uri=stringLiteralOrQualifiedID 
-{ retVal = new ImportStmt(annotations, require_KW, uri); }
+{ StringLiteralOrQualifiedID uri = null; }
+  require_KW:"require" uri=stringLiteralOrQualifiedID 
+{ retVal = new ImportStmt(require_KW, uri); }
 ;
 
 usingStmts returns [ UsingStmts retVal = new UsingStmts() ]
@@ -134,9 +134,9 @@ usingStmts returns [ UsingStmts retVal = new UsingStmts() ]
 
 usingStmt returns [ UsingStmt retVal = null ]
 :
-{ Annotations annotations = null; QualifiedID name = null; }
-  annotations=annotations using_KW:"using" name=qualifiedID 
-{ retVal = new UsingStmt(annotations, using_KW, name); }
+{ QualifiedID name = null; }
+  using_KW:"using" name=qualifiedID 
+{ retVal = new UsingStmt(using_KW, name); }
 ;
 
 topLevelDecls returns [ TopLevelDecls retVal = new TopLevelDecls() ]
@@ -248,14 +248,20 @@ voidType returns [ VoidType retVal = null ]
 
 classMemberDecls returns [ ClassMemberDecls retVal = new ClassMemberDecls() ]
 :
-{ ClassMemberDecl classMemberDecl = null; }
-  ( classMemberDecl=classMemberDecl { retVal.addChild(classMemberDecl); } )*
+{ AnnotableClassMemberDecl annotableClassMemberDecl = null; }
+  ( annotableClassMemberDecl=annotableClassMemberDecl { retVal.addChild(annotableClassMemberDecl); } )*
+;
+
+annotableClassMemberDecl returns [ AnnotableClassMemberDecl retVal = null ]
+:
+{ Annotations annotations = null; ClassMemberDecl classMemberDecl = null; }
+  annotations=annotations classMemberDecl=classMemberDecl 
+{ retVal = new AnnotableClassMemberDecl(annotations, classMemberDecl); }
 ;
 
 classMemberDecl returns [ ClassMemberDecl retVal = null ]
 :
-  ( retVal=annotation
-  | retVal=operation
+  ( retVal=operation
   | retVal=property
   )
 ;
@@ -292,16 +298,16 @@ propertyBody returns [ PropertyBody retVal = null ]
 
 getterBody returns [ GetterBody retVal = null ]
 :
-{ Annotations annotations = null; FExpression getterbody = null; }
-  ( annotations=annotations )? getter_KW:"getter" is_KW:"is" getterbody=fExpression 
-{ retVal = new GetterBody(annotations, getter_KW, is_KW, getterbody); }
+{ FExpression getterbody = null; }
+  getter_KW:"getter" is_KW:"is" getterbody=fExpression 
+{ retVal = new GetterBody(getter_KW, is_KW, getterbody); }
 ;
 
 setterBody returns [ SetterBody retVal = null ]
 :
-{ Annotations annotations = null; FExpression setterbody = null; }
-  ( annotations=annotations )? setter_KW:"setter" is_KW:"is" setterbody=fExpression 
-{ retVal = new SetterBody(annotations, setter_KW, is_KW, setterbody); }
+{ FExpression setterbody = null; }
+  setter_KW:"setter" is_KW:"is" setterbody=fExpression 
+{ retVal = new SetterBody(setter_KW, is_KW, setterbody); }
 ;
 
 operation returns [ Operation retVal = null ]
@@ -328,9 +334,9 @@ operationBody returns [ OperationBody retVal = null ]
 
 operationExpressionBody returns [ OperationExpressionBody retVal = null ]
 :
-{ FExpression fExpression = null; }
-  fExpression=fExpression 
-{ retVal = new OperationExpressionBody(fExpression); }
+{ Annotations bodyAnnotations = null; FExpression fExpression = null; }
+  bodyAnnotations=annotations fExpression=fExpression 
+{ retVal = new OperationExpressionBody(bodyAnnotations, fExpression); }
 ;
 
 operationEmptyBody returns [ OperationEmptyBody retVal = null ]
@@ -443,14 +449,14 @@ fExpression returns [ FExpression retVal = null ]
 fAssignement returns [ FAssignement retVal = null ]
 :
 { Annotations annotations = null; LogicalExpression expression = null; AssignementOp assignementOp = null; LogicalExpression newvalue = null; }
-  annotations=annotations expression=logicalExpression ( assignementOp=assignementOp equals:EQUALS newvalue=logicalExpression )? 
-{ retVal = new FAssignement(annotations, expression, assignementOp, equals, newvalue); }
+  annotations=annotations expression=logicalExpression ( assignementOp=assignementOp newvalue=logicalExpression )? 
+{ retVal = new FAssignement(annotations, expression, assignementOp, newvalue); }
 ;
 
 assignementOp returns [ AssignementOp retVal = null ]
 { Token tok = LT(1); }
-: ( COLON
-  | QMARK
+: ( CASTEQ
+  | ASSIGNEQ
   )
 { retVal = new AssignementOp(tok); }
 ;
@@ -799,7 +805,7 @@ SEMI    : ';';
 STAR    : '*';
 PLUS    : '+';
 MINUS   : '-';
-EQUALS  : '=';
+//EQUALS  : '=';
 
 QMARK   : '?';
 BANG    : '!';
@@ -814,6 +820,8 @@ LT_GT    : "<>";
 COL_COL  : "::";
 PIPE	 : "|";
 
+CASTEQ : "?=";
+ASSIGNEQ : ":=";
 EQEQ            : "==";
 NEQ				: "!=" ;
 LT         		: '<'  ;
@@ -872,18 +880,23 @@ CONTEXT_MULTI_LINE_COMMENT :
 		"*/"
 ;
 
+EMPTY_LINE_COMMENT : "/**/"
 MULTI_LINE_COMMENT : 
-	"/*" 
-	~('*')
+	EMPTY_LINE_COMMENT 
+	|
 	(
-		{ LA(2)!='/' }? '*'
-		|	'\r' '\n'  
-		|	'\r'	   
-		|	'\n'	  
-		|	~('*'|'\n'|'\r')
-		)*
-		"*/"
-	{$setType(Token.SKIP);}
+		"/*" 
+		~('*')
+		(
+			{ LA(2)!='/' }? '*'
+			|	'\r' '\n'  
+			|	'\r'	   
+			|	'\n'	  
+			|	~('*'|'\n'|'\r')
+			)*
+			"*/"
+		{$setType(Token.SKIP);}
+	)
 ;
 
 

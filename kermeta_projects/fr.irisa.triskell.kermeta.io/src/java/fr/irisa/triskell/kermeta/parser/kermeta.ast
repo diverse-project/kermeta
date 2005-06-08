@@ -31,10 +31,10 @@ sequence contextMultiLineComment : CONTEXT_MULTI_LINE_COMMENT ;
 //sequence keyEqualsValue : key=stringLiteralOrQualifiedID EQUALS value=stringLiteralOrQualifiedID ;
 
 list importStmts : importStmt* ;
-sequence importStmt : annotations "require" uri=stringLiteralOrQualifiedID ;
+sequence importStmt : "require" uri=stringLiteralOrQualifiedID ;
 
 list usingStmts : usingStmt* ;
-sequence usingStmt : annotations "using" name=qualifiedID ;
+sequence usingStmt : "using" name=qualifiedID ;
 
 list topLevelDecls : topLevelDecl* ;
 
@@ -60,27 +60,31 @@ sequence functype : LT left=type MINUS_GT right=type GT;
 //sequence selftype : "Self" ;
 sequence voidType : "Void" ;
 
-list classMemberDecls : classMemberDecl * ;
+list classMemberDecls : annotableClassMemberDecl * ;
 
-abstract classMemberDecl : annotation | operation | property; //attribute | reference | operation ;
+sequence annotableClassMemberDecl : annotations classMemberDecl;
+
+abstract classMemberDecl : operation | property; //attribute | reference | operation ;
 
 //sequence attribute : MINUS modifiers typeRef name=ID (EQUALS defaultValueExpr)? SEMI ;
-
+//abstract property : normalProperty | derivedProperty;
 sequence property : propertyKind  (readOnlyModifier)? name=ID COLON typeRef (HASH oppositeName=ID)? (propertyBody)?;
+//sequence derivedProperty : derivedPropertyKind (readOnlyModifier)? name=ID COLON typeRef propertyBody;
 //token referenceKind : MINUS_GT | LT_GT | GT_LT ;
-token propertyKind : "attribute" | "reference" | "property" ;
+
+token propertyKind : "attribute" | "reference" | "property";
 token readOnlyModifier : "readonly" ;
 
 sequence propertyBody : getterBody (setterBody)? ;
 
-sequence getterBody : (annotations)? "getter" "is" getterbody = fExpression ;
-sequence setterBody : (annotations)? "setter" "is" setterbody = fExpression ;
+sequence getterBody : "getter" "is" getterbody = fExpression ;
+sequence setterBody : "setter" "is" setterbody = fExpression ;
 
 sequence operation : operationKind name=ID (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)?  ("from" superSelection=qualifiedID)? ("raises" exceptions=typelst)? "is" operationBody;
 token operationKind : "operation" | "method" ;
 
 abstract operationBody : operationEmptyBody | operationExpressionBody ;
-sequence operationExpressionBody : fExpression ;
+sequence operationExpressionBody : bodyAnnotations=annotations fExpression ;
 sequence  operationEmptyBody : "abstract" ;
 
 list params : p1=param (COMMA pn=param)*;
@@ -112,8 +116,9 @@ list fExpressionLst : fExpression* ;
 sequence asingleExpression : fExpression ;
 abstract fExpression : fAssignement ;
 			
-sequence fAssignement : annotations expression=logicalExpression (assignementOp EQUALS newvalue=logicalExpression)?;
-token assignementOp : COLON | QMARK ;
+sequence fAssignement : annotations expression=logicalExpression (assignementOp newvalue=logicalExpression)?;
+//token assignementOp : COLON | QMARK ;
+token assignementOp : CASTEQ | ASSIGNEQ ;
 
 list logicalExpression : exp1=relationalExpression (logicalOp expn=relationalExpression )* ;
 token logicalOp : "and" | "or" ;
