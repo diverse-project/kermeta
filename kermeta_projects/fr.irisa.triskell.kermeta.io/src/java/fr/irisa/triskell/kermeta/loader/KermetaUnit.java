@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.27 2005-06-08 15:05:45 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.28 2005-06-08 15:19:32 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -92,6 +92,11 @@ public abstract class KermetaUnit {
 	}
 	
 	
+	
+	
+    protected void finalize() throws Throwable {
+        System.err.println("Finalise kermeta unit " + this + " " + uri);
+    }
 	public KermetaUnit(String uri, Hashtable packages) {
 		this.uri = uri;
 		this.packages = packages;
