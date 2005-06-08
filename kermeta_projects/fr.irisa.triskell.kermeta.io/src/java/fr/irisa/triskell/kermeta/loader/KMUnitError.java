@@ -4,7 +4,6 @@
  */
 package fr.irisa.triskell.kermeta.loader;
 
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.structure.FObject;
 ;
 

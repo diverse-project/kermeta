@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.3 2005-04-26 08:28:09 ffleurey Exp $
+/* $Id: KMT2KMPass2.java,v 1.4 2005-06-08 15:07:57 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : GPL
@@ -23,7 +23,6 @@ import fr.irisa.triskell.kermeta.ast.EnumDecl;
 import fr.irisa.triskell.kermeta.ast.PackageDecl;
 import fr.irisa.triskell.kermeta.ast.SubPackageDecl;
 import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FPackage;
