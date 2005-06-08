@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.12 2005-06-06 10:29:52 zdrey Exp $
+/* $Id: KMT2KMPass7.java,v 1.13 2005-06-08 14:56:36 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -28,15 +28,36 @@ import java.util.Stack;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
+
 //import com.sun.rsasign.t;
 
-import fr.irisa.triskell.kermeta.ast.*;
+import fr.irisa.triskell.kermeta.ast.AnnotableClassMemberDecl;
+import fr.irisa.triskell.kermeta.ast.AnnotableElement;
+import fr.irisa.triskell.kermeta.ast.Annotation;
+import fr.irisa.triskell.kermeta.ast.Annotations;
+import fr.irisa.triskell.kermeta.ast.ContextMultiLineComment;
+import fr.irisa.triskell.kermeta.ast.EnumLiteral;
+import fr.irisa.triskell.kermeta.ast.FAssignement;
+import fr.irisa.triskell.kermeta.ast.FBlock;
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.ast.Operation;
+import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
+import fr.irisa.triskell.kermeta.ast.PackageDecl;
+import fr.irisa.triskell.kermeta.ast.Param;
+import fr.irisa.triskell.kermeta.ast.Property;
+import fr.irisa.triskell.kermeta.ast.Tag;
+import fr.irisa.triskell.kermeta.ast.TopLevelDecl;
+import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
+import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTag;
 
 /**
@@ -55,7 +76,10 @@ public class KMT2KMPass7 extends KMT2KMPass {
     protected ArrayList preceding_annArrayList = new ArrayList();
     protected FClassDefinition preceding_class;
     protected String fileData =  null;
-    protected static Pattern pattern = Pattern.compile("[\t\\s]*[\r\n][\r\n\t\\s]*"); 
+    protected static Pattern pattern = Pattern.compile("[\t\\s]*[\r\n][\r\n\t\\s]*");
+     
+    
+    public final static String ANONYMOUS = "anon";
 	/**
 	 * 
 	 */
@@ -73,32 +97,134 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(PackageDecl packageDecl) {
 	    Annotations annLst = packageDecl.getAnnotations();
-	    FNamedElement pkg = (FNamedElement)builder.getModelElementByNode(packageDecl);
-	    processAnnotations(annLst, pkg);
+	    processAnnotations(annLst, packageDecl);
 	    return super.beginVisit(packageDecl);
 	        
 	}
 	
-	/**
-	 * Get the before-lastchild position for the given file
-	 * TODO : extend it to any ASTNode
-	 * @param node
-	 * @return the before-lastchild position
-	 */
-	public int getBeforeLastChildPosition(ClassDecl classDecl)
-	{
-	    int count = 0;
-	    if (classDecl.getChildCount() > 1 && classDecl.getLastChild() != null)
-	        count = classDecl.getChildCount()-2;
-	    	
-	    else if ((classDecl.getChildCount() > 1 && classDecl.getLastChild()==null)||classDecl.getChildCount()==1)
-	        count = classDecl.getChildCount()-1;
-	    else 
-	        count = 0;
-	    //System.out.println("count vaut :"+ count+ classDecl.getChild(count).getText());
-	    return count;
-	}
 	
+    /**
+     * @see fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor#beginVisit(fr.irisa.triskell.kermeta.ast.Operation)
+     */
+    public boolean beginVisit(AnnotableClassMemberDecl node) {
+        
+        Annotations annLst = node.getAnnotations();
+        KermetaASTNode annNode = node.getClassMemberDecl();
+        FNamedElement e = null;
+        if (annNode instanceof Operation)
+        {   
+            String name = ((Operation)annNode).getName().getText();
+            e = builder.findOperationByName(builder.current_class, name);
+            builder.current_operation = (FOperation) e;
+        }
+        else
+        {	
+            String name = "";
+       	    name = ((Property)annNode).getName().getText();
+            e = builder.findPropertyByName(builder.current_class, name);
+            builder.current_property = (FProperty) e;
+        }
+	    processAnnotations(annLst, annNode);
+        //processAnnotationsForFExpression(annLst, null);
+        return super.beginVisit(node);
+    }
+ 
+    
+    /** 
+     * @see fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor#beginVisit(fr.irisa.triskell.kermeta.ast.FAssignement)
+     */
+    public boolean beginVisit(FAssignement fAssignment) {
+        
+        Annotations annLst = fAssignment.getAnnotations();
+        processAnnotationsForFExpression(annLst, null);
+        return super.beginVisit(fAssignment);
+    }
+    
+    public boolean beginVisit(FBlock block)
+    {
+     //   Annotations annLst = block.getBlockAnnotations();
+      //  System.err.println("a block : "+annLst.getChildCount());
+      //  processAnnotationsForFExpression(annLst, null);
+        return super.beginVisit(block);
+    }
+    
+    
+    /**
+     * To be deprecated
+     */
+    public boolean beginVisit(Param node)
+    {
+        Annotations annLst = node.getAnnotations();
+        processAnnotationsForFExpression(annLst, null);
+        return false;
+    }
+    
+    /** To be depr. */
+    public boolean beginVisit(EnumLiteral node)
+    {        Annotations annLst = node.getAnnotations();
+            processAnnotationsForFExpression(annLst, null);
+            return false;
+     
+    }
+    
+	/**
+	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.OperationExpressionBody)
+	 */
+	public boolean beginVisit(OperationExpressionBody operationExpressionBody) {
+		String qname = builder.getQualifiedName(builder.current_operation);
+		return false;
+	}
+
+	
+/* for test purpose
+    public boolean beginVisit(ContextMultiLineComment node)
+    {
+        System.err.println("comment:"+node.getLastChild().getText());
+        return false;
+    }
+	
+	public boolean beginVisit(Tag tag)
+	{
+	    System.err.println("tags : "+tag.getLastChild().getText());
+	    return false;
+	}
+*/    
+    
+  /**
+	 * 
+	 * Rules :
+	 * 
+	 * sequence topLevelDecl : annotations annotableElement ;
+	 * abstract annotableElement : subPackageDecl | classDecl | enumDecl | dataTypeDecl;
+	 *  
+	 * 	- classDecl contains classMemberDecls
+	 *  - classMemberDecls : classMemberDecl* 
+	 *  - classMemberDecl : annotation | property | operation
+	 * This last rule allows a class to contain an annotation whereas it has
+	 * no operation nor class 
+	 * */
+    public boolean beginVisit(TopLevelDecl topLevelDecl)
+    {
+        
+        Annotations annLst = topLevelDecl.getAnnotations();
+        // Get the annotable element associated
+        AnnotableElement annElt = topLevelDecl.getAnnotableElement();
+        FNamedElement e = (FNamedElement)builder.getModelElementByNode(annElt);
+	    // Add the found annotations to this element
+        // The following tests useless yet
+        if (e instanceof FClassDefinition)
+        {
+            builder.current_class = (FClassDefinition)e;
+        }
+        else if (e instanceof FPackage)
+        {
+            builder.current_package = (FPackage)e;
+        }
+	    processAnnotations(annLst, annElt);
+        return super.beginVisit(topLevelDecl);
+    }
+    
+    
 	/**
 	 * As skipped tokens are not accessible through ANTLR generated parser, we load the entire
 	 * file (this is a patchy method...) and get the chars at the given position
@@ -109,20 +235,14 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    String str_uri = builder.getUri();
 	    String result = "";
 	    
-	    try {
-	      //  BufferedReader r = new BufferedReader(new FileReader(uri));
-			//URI _uri = UserDirURI.createURI(str_uri,null,false);
-	         //BufferedReader r = new BufferedReader(
-	   	     //    new InputStreamReader(new FileInputStream(new File(_uri.toFileString()))));
-	        
-	       
+	    try 
+	    {
 	         URI _uri = URI.createURI(str_uri);
 	 		 URIConverter converter = new URIConverterImpl();
 	         
 	 		 BufferedReader r = new BufferedReader(
 	 		        new InputStreamReader(converter.createInputStream(_uri)));
 	 		 
-	         
 	         while (r.ready()) {
 	            char[] c = {(char)r.read()};
 	            String sc = (c[0]=='\t')?"    ":new String(c);
@@ -140,18 +260,20 @@ public class KMT2KMPass7 extends KMT2KMPass {
 		return result;
 	}
 	
+	/**
+	 * Create a tag from a single annotation
+	 * @param a
+	 * @return
+	 */
 	public FTag createFTagFromAnnotation(Annotation a)
 	{
 	    String tag_value = "";
-        String tag_name = "ann";
-	//    System.out.println("COMMENTAIRES :"+a.getFirstChild().getText());
-        // Is it a Tag? [tested]
+        String tag_name = ANONYMOUS;
         if (Tag.class.isInstance(a))
         {
             tag_name  = ((Tag)a).getName().getFirstChild().getText();
             tag_value = ((Tag)a).getVal().getText();
         }
-        // A multi/singleline comment? [tested]
         else
         {
             tag_value = a.getFirstChild().getText();
@@ -170,10 +292,13 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 * (in @annType annotation)
 	 * @param refnode
 	 */
-	protected void processAnnotations(Annotations annLst, FNamedElement element)
+	protected void processAnnotations(Annotations annLst, KermetaASTNode astElement)
 	{
-	    String tag_name = null;
+	    String tag_name = ANONYMOUS;
 	    String tag_value = null;
+	    
+	    FNamedElement element = (FNamedElement)builder.getModelElementByNode(astElement);
+	   // Resource resource;
 	    FTag tag = null;
 	    int i = 0;
 	    // tagStack.push(tag)? // 
@@ -182,20 +307,71 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    	for (i=0; i<annLst.getChildCount();i++)
 	    	{
 	    		Annotation a = (Annotation)annLst.getChild(i);
+	    		// Create the FTag in kcore repr.
+    			tag = builder.struct_factory.createFTag();
 	    		if (Tag.class.isInstance(a))
 	    		{
 	    			tag_name  = ((Tag)a).getName().getFirstChild().getText();
-	    			tag_value = ((Tag)a).getVal().getText();
-	    			// Create the FTag in kcore repr.
-	    			tag = builder.struct_factory.createFTag();
-	    			tag.setFName(tag_name);
-	    			tag.setFValue(tag_value);
-	    			element.getFTag().add(tag);
+	    			String str = ((Tag)a).getVal().getText();
+	    			tag_value = str.substring(1, str.length()-1);
 	    		}
+	    		else
+	    		{	// note : the concrete syntax -- /** */ -- is kept
+	    		    tag_name = ANONYMOUS;
+	    			tag_value  = ((ContextMultiLineComment)a).getFirstChild().getText();
+	    		}
+	    		
+	    		tag.setFName(tag_name);
+    			tag.setFValue(tag_value);
+	    		element.getFTag().add(tag);
+	    		// Add it to the Kermeta Unit tags
+    			builder.getTags().add(tag);
 	    	}
 	    }
 	}
 	
-
+	/**
+	 * Create a list of FTags from annLst, add it to the current_class tags and
+     * to the builder tag list.
+	 * @param annLst the list of annotations to process
+	 * @param annType the name of the tag that will be defined with annotations text 
+	 * (in @annType annotation)
+	 * @param refnode
+	 */
+	protected void processAnnotationsForFExpression(Annotations annLst, FExpression element)
+	{
+	    String tag_name = ANONYMOUS;
+	    String tag_value = null;
+	    
+	   // Resource resource;
+	    FTag tag = null;
+	    int i = 0;
+	    // tagStack.push(tag)? // 
+	    if (annLst!=null && annLst.hasChildren())
+	    {
+	    	for (i=0; i<annLst.getChildCount();i++)
+	    	{
+	    		Annotation a = (Annotation)annLst.getChild(i);
+	    		// Create the FTag in kcore repr.
+    			tag = builder.struct_factory.createFTag();
+	    		if (Tag.class.isInstance(a))
+	    		{
+	    			tag_name  = ((Tag)a).getName().getFirstChild().getText();
+	    			String str = ((Tag)a).getVal().getText();
+	    			tag_value = str.substring(1, str.length()-1);
+	    		}
+	    		else
+	    		{	// note : the concrete syntax -- /** */ -- is kept
+	    		    tag_name = ANONYMOUS;
+	    			tag_value  = ((ContextMultiLineComment)a).getFirstChild().getText();
+	    		}
+	    		tag.setFName(tag_name);
+    			tag.setFValue(tag_value);
+	    		element.getFTag().add(tag);
+	    		// Add it to the Kermeta Unit tags
+    			builder.getTags().add(tag);
+	    	}
+	    }
+	}
 
 }
