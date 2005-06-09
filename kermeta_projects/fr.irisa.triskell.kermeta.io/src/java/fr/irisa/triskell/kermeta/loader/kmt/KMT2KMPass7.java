@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.13 2005-06-08 14:56:36 zdrey Exp $
+/* $Id: KMT2KMPass7.java,v 1.14 2005-06-09 09:14:59 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -55,8 +55,10 @@ import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTag;
 
@@ -70,11 +72,6 @@ import fr.irisa.triskell.kermeta.structure.FTag;
  */
 public class KMT2KMPass7 extends KMT2KMPass {
 
-    protected Stack tagStack;
-    protected Annotations preceding_annLst = null; // we need it to "position" it as a pre-tag for preceding class or a post tag for next class (current class)
-    /* The annotationsList of precding_annLst as an array of FTags*/
-    protected ArrayList preceding_annArrayList = new ArrayList();
-    protected FClassDefinition preceding_class;
     protected String fileData =  null;
     protected static Pattern pattern = Pattern.compile("[\t\\s]*[\r\n][\r\n\t\\s]*");
      
@@ -85,7 +82,6 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 */
 	public KMT2KMPass7(KermetaUnit builder) {
 		super(builder);
-		tagStack = new Stack();
 		fileData = getFileContentFromBuilder();
 	}
 
@@ -97,7 +93,8 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(PackageDecl packageDecl) {
 	    Annotations annLst = packageDecl.getAnnotations();
-	    processAnnotations(annLst, packageDecl);
+	    FNamedElement element = (FNamedElement)builder.getModelElementByNode(packageDecl);
+	    processAnnotations(annLst, element);
 	    return super.beginVisit(packageDecl);
 	        
 	}
@@ -110,22 +107,22 @@ public class KMT2KMPass7 extends KMT2KMPass {
         
         Annotations annLst = node.getAnnotations();
         KermetaASTNode annNode = node.getClassMemberDecl();
-        FNamedElement e = null;
+        FObject e = null;
+        String name = "";
         if (annNode instanceof Operation)
         {   
-            String name = ((Operation)annNode).getName().getText();
+            name = ((Operation)annNode).getName().getText();
             e = builder.findOperationByName(builder.current_class, name);
             builder.current_operation = (FOperation) e;
         }
         else
         {	
-            String name = "";
        	    name = ((Property)annNode).getName().getText();
             e = builder.findPropertyByName(builder.current_class, name);
             builder.current_property = (FProperty) e;
         }
-	    processAnnotations(annLst, annNode);
-        //processAnnotationsForFExpression(annLst, null);
+        if (e != null) // we should have found the object however...
+            processAnnotations(annLst, e);
         return super.beginVisit(node);
     }
  
@@ -211,16 +208,22 @@ public class KMT2KMPass7 extends KMT2KMPass {
         AnnotableElement annElt = topLevelDecl.getAnnotableElement();
         FNamedElement e = (FNamedElement)builder.getModelElementByNode(annElt);
 	    // Add the found annotations to this element
-        // The following tests useless yet
         if (e instanceof FClassDefinition)
         {
             builder.current_class = (FClassDefinition)e;
+            processAnnotations(annLst, e);
         }
         else if (e instanceof FPackage)
         {
             builder.current_package = (FPackage)e;
+            processAnnotations(annLst, e);
         }
-	    processAnnotations(annLst, annElt);
+        else if (e instanceof FPrimitiveType)
+        {
+            FPrimitiveType ptype = (FPrimitiveType)builder.getModelElementByNode(annElt);
+            processAnnotations(annLst, ptype);
+        }
+	    
         return super.beginVisit(topLevelDecl);
     }
     
@@ -283,7 +286,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
         tag.setFValue(tag_value);
 	    return tag;
 	}
-
+	
 	/**
 	 * Create a list of FTags from annLst, add it to the current_class tags and
      * to the builder tag list.
@@ -292,12 +295,11 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 * (in @annType annotation)
 	 * @param refnode
 	 */
-	protected void processAnnotations(Annotations annLst, KermetaASTNode astElement)
+	protected void processAnnotations(Annotations annLst, FObject element)
 	{
 	    String tag_name = ANONYMOUS;
 	    String tag_value = null;
 	    
-	    FNamedElement element = (FNamedElement)builder.getModelElementByNode(astElement);
 	   // Resource resource;
 	    FTag tag = null;
 	    int i = 0;
@@ -329,6 +331,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    	}
 	    }
 	}
+	
 	
 	/**
 	 * Create a list of FTags from annLst, add it to the current_class tags and
@@ -367,7 +370,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    		}
 	    		tag.setFName(tag_name);
     			tag.setFValue(tag_value);
-	    		element.getFTag().add(tag);
+	    		//element.getFTag().add(tag);
 	    		// Add it to the Kermeta Unit tags
     			builder.getTags().add(tag);
 	    	}
