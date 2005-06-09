@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.28 2005-06-08 15:19:32 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.29 2005-06-09 09:02:30 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : GPL
@@ -52,6 +52,7 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTag;
+import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeContainer;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
@@ -193,9 +194,8 @@ public abstract class KermetaUnit {
 	public Hashtable operation_bodies = new Hashtable();
 	
 	/**
-	 * The tags
-	 */
-	public ArrayList tags = new ArrayList();
+	 * The tags that are aimed at be saved in a resource */
+	public ArrayList resourceTags = new ArrayList();
 	
 	/**
 	 * This tables store the mapping between Metacore model elements
@@ -386,11 +386,6 @@ public abstract class KermetaUnit {
 	public void addUsing(String name) {
 		//TODO: check that the package exists. generate a warning if not.
 		usings.add(name);
-	}
-	
-	public void addTag(FTag tag)
-	{
-	    tags.add(tag);
 	}
 	
 	protected String getResolvedURI(String base_uri) {
@@ -673,17 +668,20 @@ public abstract class KermetaUnit {
 	public void saveAsXMIModel(String file_path) {
 	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
+	    ArrayList resource_tags = new ArrayList();
 	    Resource resource = resource_set.createResource(URI.createFileURI(file_path));
 	    Iterator it = packages.values().iterator();
 	    while(it.hasNext()) {
-	        FPackage p = (FPackage)it.next();
+	        FPackage p = (FPackage)it.next();    
 	        if (p.eResource() == null && p.eContainer() == null) {
 	            fixTypeContainement(p);
 	            resource.getContents().add(p);
 	        }
+	        resource_tags = fixPackageTags(p, resource_tags);
 	    }
 	    // Add the tags registered in tags list to the resource
-	    this.addFTagsToResource(resource);
+	    
+	    this.addFTagsToResource(resource, resource_tags);
 	    try {
 			resource.save(null);
 		} catch (IOException e) {
@@ -740,15 +738,16 @@ public abstract class KermetaUnit {
 	 * Add the given tag to resource. Used in the KMT2KMPass7.java, to add tag in resource without
 	 * adding it to a container (since a tag can be linked to one or more elements, and unlinked as well).
 	 */
-	public void addFTagsToResource(Resource resource)
+	public void addFTagsToResource(Resource resource, ArrayList pTags)
 	{   
-	    int tagsize = this.tags.size();
+	    int tagsize = pTags.size();
 	    for (int i=0; i<tagsize; i++)
 	    {   
-	        FTag tag = (FTag)tags.get(i);
+	        FTag tag = (FTag)pTags.get(i);
 	        resource.getContents().add(tag);
 	    }
 	}
+	
 	
 	/**
 	 * If containedPackage has no container, we return it unchanged, else, we return its container,
@@ -779,6 +778,28 @@ public abstract class KermetaUnit {
 		return result;
 	}
 	
+	public ArrayList fixPackageTags(FPackage p, ArrayList myTags)
+	{
+	    TreeIterator it = p.eAllContents();
+		while(it.hasNext()) {
+			FObject o = (FObject)it.next();
+			// Resource update
+			if ((o instanceof FNamedElement||
+			         o instanceof FOperation || 
+			         o instanceof FProperty) && o.getFTag()!=null)
+			{
+			    myTags.addAll(o.getFTag());
+			}
+			else if (o instanceof FClass)
+			{
+			    FClassDefinition c = ((FClass)o).getFClassDefinition();
+			    myTags.addAll(fixClassMemberTags(c));
+			    
+			}
+		}
+		return myTags;
+	}
+	
 	/**
 	 * Define a container for each element of the root package
 	 */
@@ -801,12 +822,30 @@ public abstract class KermetaUnit {
 			}
 			else if (o instanceof FTypeContainer) {
 				if (o != null) fixer.accept(o);
-			}
+			}			
 		}
 	}
 	
-	
-	
+	/**
+	 * Get all the tags attached to class members, and return
+	 * them, in order to save them in a resource (when saving as
+	 * XMI) */
+	public ArrayList fixClassMemberTags(FClassDefinition o)
+	{	// for the class
+	    ArrayList oTags = new ArrayList();
+	    oTags.addAll(o.getFTag());
+	    // for its members
+	    EList opLst = o.getFOwnedOperation();
+	    EList atLst = o.getFOwnedAttributes();
+	    if (opLst.size()>0)
+	    for (int i=0; i<opLst.size();i++)
+	    {  oTags.addAll(((FOperation)opLst.get(i)).getFTag());}
+	    if (atLst.size()>0)
+	    for (int i=0; i<atLst.size();i++)
+	    {  oTags.addAll(((FProperty)atLst.get(i)).getFTag());
+	    }
+	    return oTags;
+	}
 	
 	public void load() {
 		//System.out.println("\nLOAD " + uri);
@@ -1006,7 +1045,7 @@ public abstract class KermetaUnit {
 	 * @return the tags in this KermetaUnit
 	 */
     public ArrayList getTags() {
-        return tags;
+        return resourceTags;
     }
     
     /**
