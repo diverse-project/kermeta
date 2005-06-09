@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.4 2005-06-06 16:26:26 zdrey Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.5 2005-06-09 13:34:05 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : GPL
@@ -44,6 +44,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 public class KermetaLaunchShortcut implements ILaunchShortcut {
 
     private static final String ID_KERMETA_APPLICATION = "KermetaLaunchConfiguration";
+    private String ID_GROUP = "KermetaLaunchGroup";
 
     public KermetaLaunchShortcut()
     {
@@ -226,7 +227,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 	                mainOp
 	        );
 	        
-	        if (config == null) {
+	        if (config == null ) {
 	            config= createConfiguration(
 	                    ifile.getProject(),
 	                    fileName,
@@ -234,6 +235,15 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 	                    mainOp
 	            );
 	        }
+
+	        // Open configuration handler if mainClass and mainOp are not provided
+	        
+	        if (mainClass.equals("") || mainOp.equals(""))
+	        {
+	            //FIXME : new Shell() -> 
+	            DebugUITools.openLaunchConfigurationDialog(new Shell(), config, ID_GROUP, null );
+	        }
+	        
 	        launchConfiguration(mode, config);
 	    }
 	    // Thrown by findEntryPoint

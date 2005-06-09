@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.11 2005-06-06 16:04:50 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.12 2005-06-09 13:34:06 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -25,12 +25,18 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.internal.ui.DebugPluginImages;
 import org.eclipse.debug.internal.ui.DebugUIAdapterFactory;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
+import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.DebugUITools;
+import org.eclipse.debug.ui.EnvironmentTab;
+import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
@@ -41,6 +47,7 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -96,16 +103,16 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 	private ModifyListener fFileModifyListener = new ModifyListener() {
     public void modifyText(ModifyEvent evt) {
         updateLaunchConfigurationDialog();
-        if (sharedLocationText!=null && sharedLocationText.getText().length()>0)
+        if (fileLocationText!=null && fileLocationText.getText().length()>0)
             setClassEnabled(true);
         else
         {	setClassEnabled(false); setOperationEnabled(false); }
     }
 };
 
-    private Label sharedLocationLabel;
-    private Text sharedLocationText;
-    private Button sharedLocationButton;
+    private Label fileLocationLabel;
+    private Text fileLocationText;
+    private Button fileLocationButton;
     private Button classNameButton;
     private Label classNameLabel;
     /** The text widget for the selection of a Kermeta class from a given file */
@@ -200,7 +207,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		    selectedOperationString = (String)point.get(1);
 		    
 		    
-            getSharedLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
+            getFileLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
                     currentPath));
        
             getclassNameText().setText(
@@ -209,6 +216,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
             getOperationNameText().setText(
                     configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,
                             selectedOperationString));
+            
 		}
 		catch (CoreException e)
 		{
@@ -244,20 +252,23 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     public void performApply(ILaunchConfigurationWorkingCopy configuration) {
         //updateConfigFromLocalShared(configuration); nullpointerexception->works when config stored in afile
         
-		configuration.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, sharedLocationText.getText());
+		configuration.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, fileLocationText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, classNameText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, operationNameText.getText());
 		
     }
+    
+    
     
     /***
      * Update configuration
      * @param config
      */
 	private void updateConfigFromLocalShared(ILaunchConfigurationWorkingCopy config) {
-		String containerPathString = getSharedLocationText().getText();
+		String containerPathString = getFileLocationText().getText();
 		IContainer container = getContainer(containerPathString);
 		config.setContainer(container);
+		
 	}
 
     /* (non-Javadoc)
@@ -265,9 +276,17 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      */
     public String getName() {
         
-        return "Argument configuration";
+        return "Arguments";
     }
+    
+    
 
+    /** (non-Javadoc)
+     * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getImage()
+     */
+    public Image getImage() {
+        return DebugPluginImages.getImage(IDebugUIConstants.IMG_OBJS_VARIABLE);
+    }
     /***
      * Create the Field where user enters file to execute
      * @param parent
@@ -279,14 +298,14 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         createInputTextLayout(parent, "Set the location of your Kermeta file");
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         
-        setSharedLocationText(new Text(parent, SWT.SINGLE | SWT.BORDER));
-        getSharedLocationText().setLayoutData(gd);
-        getSharedLocationText().setFont(font);
-        getSharedLocationText().addModifyListener(fFileModifyListener);
-        setSharedLocationButton(createPushButton(parent, "Browse", null));	 //$NON-NLS-1$
-        getSharedLocationButton().addSelectionListener(new SelectionAdapter() {
+        setFileLocationText(new Text(parent, SWT.SINGLE | SWT.BORDER));
+        getFileLocationText().setLayoutData(gd);
+        getFileLocationText().setFont(font);
+        getFileLocationText().addModifyListener(fFileModifyListener);
+        setFileLocationButton(createPushButton(parent, "Browse", null));	 //$NON-NLS-1$
+        getFileLocationButton().addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent evt) {
-                handleSharedLocationButtonSelected();
+                handleFileLocationButtonSelected();
             }
         });	
         return parent;
@@ -408,15 +427,16 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      * Browse the current workspace so that user can select the source file that
      * he wants to execute.
      */
-    protected void handleSharedLocationButtonSelected()
+    protected void handleFileLocationButtonSelected()
     {   
-		String selectedPath = handleBrowse(getSharedLocationText());
+		String selectedPath = handleBrowse(getFileLocationText());
 		// Parse the selected file
 		if (selectedPath!=null)
 		{   // update the className and the operationName
 		    parseFileAndUpdateFields(selectedPath);
 		    //selectedUnit.saveAsXMIModel(selectedPath);
 		}
+		updateLaunchConfigurationDialog();
     }
     
     
@@ -434,7 +454,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 	    selectedClassString = (String)point.get(0);
 	    String selectedOperationString = (String)point.get(1);
 	    
-        getSharedLocationText().setText(currentPath);
+        getFileLocationText().setText(currentPath);
         getclassNameText().setText(selectedClassString);
         getOperationNameText().setText(selectedOperationString);
     }
@@ -511,6 +531,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         if (!isEnabled) {operationNameText.setText("");}
         operationNameButton.setEnabled(isEnabled);
         operationNameText.setEnabled(isEnabled);
+        
     }
 
 
@@ -521,28 +542,28 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         classNameText.setEnabled(isEnabled);
     }
  
-    private void setSharedLocationButton(Button button) {
-        sharedLocationButton = button;
+    private void setFileLocationButton(Button button) {
+        fileLocationButton = button;
     }
 
-    public void setSharedLocationLabel(Label label) {
-        sharedLocationLabel = label;
+    public void setFileLocationLabel(Label label) {
+        fileLocationLabel = label;
     }
     
-    public Label getSharedLocationLabel() {
-        return sharedLocationLabel ;
+    public Label getFileLocationLabel() {
+        return fileLocationLabel ;
     }
 
-    private Button getSharedLocationButton() {
-        return sharedLocationButton;
+    private Button getFileLocationButton() {
+        return fileLocationButton;
     }
     
-    public void setSharedLocationText(Text text) {
-        sharedLocationText = text;
+    public void setFileLocationText(Text text) {
+        fileLocationText = text;
     }
     
-    public Text getSharedLocationText() {
-        return sharedLocationText;
+    public Text getFileLocationText() {
+        return fileLocationText;
     }
     
 
@@ -596,4 +617,16 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 	    // of a resource that is not an IFile!!
 	    return selectedFile;
 	}
+	
+	
+    /* (non-Javadoc)
+     * @see org.eclipse.debug.ui.AbstractLaunchConfigurationTab#updateLaunchConfigurationDialog()
+     */
+    protected void updateLaunchConfigurationDialog() {
+        // TODO Auto-generated method stub
+        super.updateLaunchConfigurationDialog();
+        //DebugPlugin.getDefault().getLaunchManager().
+        
+        
+    }
 }

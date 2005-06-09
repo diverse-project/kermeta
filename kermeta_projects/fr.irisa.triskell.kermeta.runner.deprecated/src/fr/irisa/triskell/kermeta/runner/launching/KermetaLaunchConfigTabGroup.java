@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfigTabGroup.java,v 1.5 2005-05-31 14:35:28 zdrey Exp $
+/* $Id: KermetaLaunchConfigTabGroup.java,v 1.6 2005-06-09 13:34:06 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfigTabGroup.java
  * License: GPL
@@ -9,6 +9,7 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
