@@ -1,0 +1,100 @@
+
+package kermeta::interpreter;
+
+require "../Standard.kmt"
+
+using kermeta::standard
+using kermeta::utils
+
+class DynamicExpression
+{
+	/**
+	 * Parse errors and type errors
+	 */
+	reference errors : KermetaError[*]
+
+	/**
+	 * the expression
+	 */
+	reference expression : kermeta::language::behavior::Expression
+
+	/**
+	 * The type of the self object
+	 * or void if the expression is not to be executed
+	 * in the context of an object
+	 */
+	reference selfClass : kermeta::reflection::ClassDefinition
+
+	/**
+	 * Formal parameters of the expression
+	 */
+	reference formalParameters : Hashtable<String, kermeta::language::structure::Type>
+
+	/**
+	 * initialise the formalParameters with an empty set of parameters
+	 * and the self type with void
+	 */
+	operation initializeDefaults() is do
+		formalParameters := Hashtable<String, kermeta::language::structure::Type>.new
+		selfClass := kermeta::reflection::Object.classDefinition
+	end
+
+	/**
+	 * Parse the expression as a string
+	 * and updates the expression field and errors
+	 * Returns true if the expression was parssed sucessfuly
+	 */
+    operation parse(expression : String) : Boolean is do
+    	errors.clear
+    	if formalParameters == void or selfClass == void then
+    		var e : DynamicExpressionException init DynamicExpressionException.new
+    		e.message := "parse precondition - formalParameters or selfType is void"
+    		raise e
+    	end
+        result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)
+    end
+    
+    /**
+     * Execute the expression in the given context
+     */
+    operation execute(selfObj : Object, actualParams : Hashtable<String, Object>) : Object is do
+    	if expression == void then
+    		var e : DynamicExpressionException init DynamicExpressionException.new
+    		e.message := "execute precondition - expression is void"
+    		raise e
+    	end
+    	if errors.size != 0 then
+    		var e : DynamicExpressionException init DynamicExpressionException.new
+    		e.message := "execute precondition - expression contains errors"
+    		raise e
+    	end
+    	result := extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.execute(self, selfObj, actualParams)
+    end
+    
+    /**
+     * Execute the expression given as a string.
+     * the self type and formal parameters are supposed to be set
+     * before calling this operation
+     */
+    operation evalString(body : String, selfObj : Object, actualParams : Hashtable<String, Object>) : Object is do
+    	if not parse(body) then
+    		var e : DynamicExpressionException init DynamicExpressionException.new
+    		e.message := "evalString - expression contains errors"
+    		raise e
+    	end
+    	result := execute(selfObj, actualParams)
+    end
+    
+}
+
+class DynamicExpressionException inherits kermeta::exceptions::Exception {
+
+}
+
+abstract class KermetaError {
+	attribute message : String
+}
+
+class ParseError inherits KermetaError {}
+
+class TypeError inherits KermetaError {}

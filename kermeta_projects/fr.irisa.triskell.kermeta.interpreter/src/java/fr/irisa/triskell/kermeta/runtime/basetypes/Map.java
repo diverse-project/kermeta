@@ -36,7 +36,7 @@ public class Map {
 	// Implementation of method size called as :
 	public static RuntimeObject size(RuntimeObject self) {
 	    RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
-		Integer.setValue(result, getKeyHashtable(self).size());
+		Integer.setValue(result, getHashtable(self).size());
 		return result;
 	}
 
@@ -60,7 +60,7 @@ public class Map {
 	    
 	    RuntimeObject result = self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass(it_class));
 		
-		Iterator.setValue(result, getKeyHashtable(self).values().iterator());
+		Iterator.setValue(result, getHashtable(self).keySet().iterator());
 		return result;
 		
 	}
@@ -86,51 +86,44 @@ public class Map {
 	    
 	    RuntimeObject result = self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass(it_class));
 		
-		Iterator.setValue(result, getKeyContentHashtable(self).values().iterator());
+		Iterator.setValue(result, getHashtable(self).values().iterator());
 		return result;
 	}
 
 	// Implementation of method get called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(key)
 	public static RuntimeObject get(RuntimeObject self, RuntimeObject param0) {
-	    RuntimeObject result = (RuntimeObject)getKeyContentHashtable(self).get(param0.getData().get("Value"));
-		return result;
+	    RuntimeObject result = (RuntimeObject)getHashtable(self).get(param0);
+		if (result == null) result = self.getFactory().getMemory().voidINSTANCE;
+	    return result;
 	}
 
 	// Implementation of method put called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.put(key, value)
 	public static RuntimeObject put(RuntimeObject self, RuntimeObject key, RuntimeObject value) {
-		getKeyHashtable(self).put(key.getData().get("Value"),key);
-		getKeyContentHashtable(self).put(key.getData().get("Value"),value);
+		getHashtable(self).put(key,value);
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 
 	// Implementation of method remove called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.remove(key)
 	public static RuntimeObject remove(RuntimeObject self, RuntimeObject param0) {
-	    getKeyHashtable(self).remove(param0.getData().get("Value"));
-	    getKeyContentHashtable(self).remove(param0.getData().get("Value"));
+	    getHashtable(self).remove(param0);
+	    
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 
 	// Implementation of method clear called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.clear(self)
 	public static RuntimeObject clear(RuntimeObject self) {
-	    getKeyHashtable(self).clear();
-	    getKeyContentHashtable(self).clear();
+	    getHashtable(self).clear();
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 
 
-	public static Hashtable getKeyHashtable(RuntimeObject map) {
+	public static Hashtable getHashtable(RuntimeObject map) {
 		if (!map.getData().containsKey("Hashtable")) map.getData().put("Hashtable", new Hashtable());
 		return (Hashtable)map.getData().get("Hashtable");
-	}
-
-
-	public static Hashtable getKeyContentHashtable(RuntimeObject map) {
-		if (!map.getData().containsKey("KeyContentHashtable")) map.getData().put("KeyContentHashtable", new Hashtable());
-		return (Hashtable)map.getData().get("KeyContentHashtable");
 	}
 
 }

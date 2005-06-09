@@ -5,7 +5,7 @@ require "../Standard.kmt"
 using kermeta::standard
 using kermeta::language::structure
 
-/***************************************************
+/* *************************************************
  * Franck FLEUREY - 23/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)

@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.7 2005-05-25 17:42:47 ffleurey Exp $
+/* $Id: RunJunitFactory.java,v 1.8 2005-06-09 17:49:16 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : GPL
@@ -84,9 +84,9 @@ public class RunJunitFactory implements Test {
             while(it.hasNext()) {
                 FTag tag = (FTag)it.next();
                 if (tag.getFName().equals("mainClass")) 
-    	            main_class = tag.getFValue().substring(1,tag.getFValue().length()-1); 
+    	            main_class = tag.getFValue(); 
                 if (tag.getFName().equals("mainOperation"))
-    	            main_operation = tag.getFValue().substring(1,tag.getFValue().length()-1); //remove the " to memorize value
+    	            main_operation = tag.getFValue(); //remove the " to memorize value
             }
             if (main_class != null) {
                 FClassDefinition cd = (FClassDefinition)unit.typeDefinitionLookup(main_class);

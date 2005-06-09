@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.11 2005-06-01 07:51:40 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.12 2005-06-09 17:49:02 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -90,6 +90,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
     public ExpressionInterpreter(RuntimeMemory pMemory)
     {
         interpreterContext = new InterpreterContext(pMemory);
+        pMemory.setCurrentInterpreter(this);
         memory = pMemory; 
     }
     
@@ -941,17 +942,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		else return id;
 	}
 	
-    /**
-     * Get the name of this object and retrieve the corresponding command class name.
-     * @param kObject the object for which we want to retrieve the corresponding command.
-     * @return the name of the command class for this RuntimeObject
-     */
-    public static String getCommandName(RuntimeObject kObject) 
-    {
-        String kName = kObject.getClass().getName();
-        // 1st letter : "F"
-        return kName.substring(1, kName.length())+"Command";
-    }
+  
     
     /**
      * Get the super operation or the super attribute in super classes of classDef 

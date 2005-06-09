@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.5 2005-06-07 12:06:14 ffleurey Exp $
+/* $Id: RuntimeObject.java,v 1.6 2005-06-09 17:49:17 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -91,7 +91,33 @@ public class RuntimeObject {
         
         super.finalize();
     }
-	
+    
+    
+	/**
+	 * This is a hack to make hastable implementation work
+	 */
+    public int hashCode() {
+        if (getData().containsKey("StringValue")) return getData().get("StringValue").hashCode();
+        if (getData().containsKey("NumericValue")) return getData().get("NumericValue").hashCode();
+        return super.hashCode();
+    }
+    
+    
+    
+    public boolean equals(Object arg0) {
+        if (arg0 instanceof RuntimeObject) {
+            RuntimeObject other = (RuntimeObject)arg0;
+            if (getData().containsKey("StringValue") && other.getData().containsKey("StringValue")) {
+                return getData().get("StringValue").equals(other.getData().get("StringValue"));
+            }
+            if (getData().containsKey("NumericValue") && other.getData().containsKey("NumericValue")) {
+                return getData().get("NumericValue").equals(other.getData().get("NumericValue"));
+            }
+        }
+        
+        return super.equals(arg0);
+    }
+    
 	/**
 	 * @return Returns the container.
 	 */

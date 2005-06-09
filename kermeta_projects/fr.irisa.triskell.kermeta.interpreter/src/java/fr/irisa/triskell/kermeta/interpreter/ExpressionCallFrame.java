@@ -1,4 +1,4 @@
-/* $Id: ExpressionCallFrame.java,v 1.1 2005-06-07 08:00:50 ffleurey Exp $
+/* $Id: ExpressionCallFrame.java,v 1.2 2005-06-09 17:49:02 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionCallFrame.java
 * License : GPL
@@ -43,7 +43,7 @@ public class ExpressionCallFrame extends CallFrame {
      * 
      * @param actualParam is supposed to be an ArrayList of RuntimeObjects
      */
-    public void bindActualParameter(ArrayList actualParam) {
+    public void bindActualParameter(Hashtable actualParam) {
         
         if (actualParam.size() != unit.getVariables().size())
             throw new Error("The number of actual parameters provided does not match the number of formal parameters");
@@ -52,7 +52,7 @@ public class ExpressionCallFrame extends CallFrame {
         
         for(int i=0; i<unit.getVariables().size(); i++) {
             FVariableDecl var = (FVariableDecl)unit.getVariables().get(i);
-            RuntimeObject obj = (RuntimeObject)actualParam.get(i);
+            RuntimeObject obj = (RuntimeObject)actualParam.get(var.getFIdentifier());
             peekExpressionContext().defineVariable(var.getFIdentifier(), obj);
         }
     }

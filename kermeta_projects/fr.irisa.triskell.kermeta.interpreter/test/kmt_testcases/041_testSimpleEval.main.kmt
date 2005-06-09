@@ -1,0 +1,53 @@
+
+@mainClass "testSimpleEval::TestEx"
+@mainOperation "test1"
+
+package testSimpleEval;
+
+require kermeta
+
+using kermeta::standard
+using kermeta::interpreter
+using kermeta::utils
+
+class TestEx inherits kermeta::kunit::Test {
+
+	operation test1() is do
+		
+		var de : DynamicExpression init DynamicExpression.new
+		
+		de.initializeDefaults
+	
+		de.formalParameters.put("a", String)
+		
+		de.parse("stdio.writeln(a)")
+			
+		
+		var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+		params.put("a", "hello world!")
+		
+		de.execute(void, params)
+		
+		
+	end	
+	
+	
+	operation test2() is do
+		
+		var de : DynamicExpression init DynamicExpression.new
+		
+		de.initializeDefaults
+	
+		
+		de.parse("2 + 2")
+			
+		
+		var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+		
+		assert(de.execute(void, params) == 4)
+		
+		stdio.writeln(de.execute(void, params).toString)
+		
+	end	
+	
+}

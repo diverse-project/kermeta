@@ -79,12 +79,12 @@ public class String {
 	}
 
 	public static void setValue(RuntimeObject str, java.lang.String value) {
-		str.getData().put("Value", value);
+		str.getData().put("StringValue", value);
 	}
 	
 	public static java.lang.String getValue(RuntimeObject str) {
-		if (!str.getData().containsKey("Value")) setValue(str, "");
-		return (java.lang.String)str.getData().get("Value");
+		if (!str.getData().containsKey("StringValue")) setValue(str, "");
+		return (java.lang.String)str.getData().get("StringValue");
 	}
 	
 	

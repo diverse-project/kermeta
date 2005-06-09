@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.18 2005-05-31 16:58:59 ffleurey Exp $
+// $Id: primitive_types.kmt,v 1.19 2005-06-09 17:48:19 ffleurey Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -6,7 +6,7 @@ require "../Standard.kmt"
 using kermeta::language::structure
 using kermeta::exceptions
 
-/***************************************************
+/* *************************************************
  * Franck FLEUREY - 11/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)

@@ -1,4 +1,4 @@
-/* $Id: LoadTest.java,v 1.1 2005-06-03 15:36:43 ffleurey Exp $
+/* $Id: LoadTest.java,v 1.2 2005-06-09 17:49:15 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : LoadTest.java
 * License : GPL
@@ -42,7 +42,7 @@ public class LoadTest extends TestCase {
     
     public void test25Hello() {
         for (int i=0; i<100; i++) {
-            KermetaInterpreter inter = new KermetaInterpreter("test/zoe.kmt");
+            KermetaInterpreter inter = new KermetaInterpreter("test/titi.kmt");
             inter.launch();
             System.err.println(" > Execution " + i + " memory used : " + Runtime.getRuntime().totalMemory());
         }

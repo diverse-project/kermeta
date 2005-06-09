@@ -1,4 +1,4 @@
-/* $Id: StdIO.java,v 1.5 2005-05-25 17:43:01 ffleurey Exp $
+/* $Id: StdIO.java,v 1.6 2005-06-09 17:49:11 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : Io.java
  * License : GPL
@@ -25,17 +25,7 @@ public class StdIO {
 	// Implementation of method write called as :
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Io.write(output)
 	public static RuntimeObject write(RuntimeObject output) {
-		FClassDefinition classDef=((FClass)output.getMetaclass().getData().get("kcoreObject")).getFClassDefinition();
-		if (classDef.getFName().equals("Integer"))
-		{
-		    output.getFactory().getKermetaIOStream().print(output.getData().get("Value"));
-		}
-		else if (classDef.getFName().equals("String"))
-		{
-		    output.getFactory().getKermetaIOStream().print(output.getData().get("Value"));
-		}
-		else 
-		    output.getFactory().getKermetaIOStream().print(output);
+		output.getFactory().getKermetaIOStream().print(output.getData().get("StringValue"));
 		return output.getFactory().getMemory().voidINSTANCE;
 	}
 

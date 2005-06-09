@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.7 2005-06-07 12:06:11 ffleurey Exp $
+/* $Id: RuntimeMemory.java,v 1.8 2005-06-09 17:49:06 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeMemory.java
  * License: GPL
@@ -9,6 +9,7 @@
  */
 package fr.irisa.triskell.kermeta.builder;
 
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -44,6 +45,7 @@ public class RuntimeMemory {
 
 	private RuntimeMemoryLoader memoryLoader;
 	
+	private ExpressionInterpreter currentInterpreter;
 	
     public RuntimeMemory(KermetaUnit unit) {
         roFactory = new RuntimeObjectFactory(this);
@@ -124,5 +126,11 @@ public class RuntimeMemory {
     
     public KermetaUnit getUnit() {
         return unit;
+    }
+    public ExpressionInterpreter getCurrentInterpreter() {
+        return currentInterpreter;
+    }
+    public void setCurrentInterpreter(ExpressionInterpreter currentInterpreter) {
+        this.currentInterpreter = currentInterpreter;
     }
 }

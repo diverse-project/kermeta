@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.8 2005-06-06 16:07:46 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.9 2005-06-09 17:48:45 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -125,7 +125,7 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
             // Reparse file ... This is a {temporary!!} patch to get KermetaUnit of
             // selectedFile, because it is not serializable (get a kind of Serialize error
             // when launching performApply
-            KermetaUnit kunit = KermetaRunHelper.parse(selectedFile);
+           // KermetaUnit kunit = KermetaRunHelper.parse(selectedFile);
             KermetaConsole console = new KermetaConsole();
             // Remove the preceding consoles
             console.removeCurrentConsole();
@@ -134,8 +134,10 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	        try
 	        {
 	            
+	            String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
+	            
 	            // 	Get the values given by the user in the runPopupDialog
-	            KermetaInterpreter interpreter = new KermetaInterpreter(kunit);
+	            KermetaInterpreter interpreter = new KermetaInterpreter(uri);
 	            
 	            interpreter.setEntryPoint(classQualifiedNameString, operationString);
 	            interpreter.setKStream(console);     

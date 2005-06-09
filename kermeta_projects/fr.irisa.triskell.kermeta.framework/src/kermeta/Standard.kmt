@@ -6,6 +6,7 @@ package kermeta;
 
 // this imports the standard types and
 // the definition of the language
+
 require "standard/collections.kmt"
 
 require "language/behavior.kmt"
@@ -23,3 +24,6 @@ require "utils/stack.kmt"
 require "io/std_io.kmt"
 
 require "exceptions/exceptions.kmt"
+
+require "language/dynamic_expression.kmt"
+

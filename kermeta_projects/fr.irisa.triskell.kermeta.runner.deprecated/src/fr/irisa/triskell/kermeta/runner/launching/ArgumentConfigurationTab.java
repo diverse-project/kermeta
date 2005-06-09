@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.12 2005-06-09 13:34:06 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.13 2005-06-09 17:48:45 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -255,7 +255,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, fileLocationText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, classNameText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, operationNameText.getText());
-		
+
     }
     
     
