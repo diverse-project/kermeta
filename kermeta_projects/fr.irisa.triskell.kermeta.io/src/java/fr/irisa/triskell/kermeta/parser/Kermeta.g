@@ -449,14 +449,14 @@ fExpression returns [ FExpression retVal = null ]
 fAssignement returns [ FAssignement retVal = null ]
 :
 { Annotations annotations = null; LogicalExpression expression = null; AssignementOp assignementOp = null; LogicalExpression newvalue = null; }
-  annotations=annotations expression=logicalExpression ( assignementOp=assignementOp newvalue=logicalExpression )? 
-{ retVal = new FAssignement(annotations, expression, assignementOp, newvalue); }
+  annotations=annotations expression=logicalExpression ( assignementOp=assignementOp equals:EQUALS newvalue=logicalExpression )? 
+{ retVal = new FAssignement(annotations, expression, assignementOp, equals, newvalue); }
 ;
 
 assignementOp returns [ AssignementOp retVal = null ]
 { Token tok = LT(1); }
-: ( CASTEQ
-  | ASSIGNEQ
+: ( COLON
+  | QMARK
   )
 { retVal = new AssignementOp(tok); }
 ;
@@ -805,7 +805,7 @@ SEMI    : ';';
 STAR    : '*';
 PLUS    : '+';
 MINUS   : '-';
-//EQUALS  : '=';
+EQUALS  : '=';
 
 QMARK   : '?';
 BANG    : '!';
@@ -820,8 +820,9 @@ LT_GT    : "<>";
 COL_COL  : "::";
 PIPE	 : "|";
 
-CASTEQ : "?=";
+/*CASTEQ : "?=";
 ASSIGNEQ : ":=";
+*/
 EQEQ            : "==";
 NEQ				: "!=" ;
 LT         		: '<'  ;

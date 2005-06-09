@@ -116,9 +116,9 @@ list fExpressionLst : fExpression* ;
 sequence asingleExpression : fExpression ;
 abstract fExpression : fAssignement ;
 			
-sequence fAssignement : annotations expression=logicalExpression (assignementOp newvalue=logicalExpression)?;
-//token assignementOp : COLON | QMARK ;
-token assignementOp : CASTEQ | ASSIGNEQ ;
+sequence fAssignement : annotations expression=logicalExpression (assignementOp EQUALS newvalue=logicalExpression)?;
+token assignementOp : COLON | QMARK ;
+//token assignementOp : CASTEQ | ASSIGNEQ ; // wrong
 
 list logicalExpression : exp1=relationalExpression (logicalOp expn=relationalExpression )* ;
 token logicalOp : "and" | "or" ;
