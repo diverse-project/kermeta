@@ -41,12 +41,6 @@ team at IRISA.
    </requires>
 
    <plugin
-         id="fr.irisa.triskell.kermeta.documentation"
-         download-size="0"
-         install-size="0"
-         version="0.0.1"/>
-
-   <plugin
          id="fr.irisa.triskell.kermeta"
          download-size="0"
          install-size="0"
@@ -63,5 +57,11 @@ team at IRISA.
          download-size="0"
          install-size="0"
          version="0.0.8"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.documentation"
+         download-size="0"
+         install-size="0"
+         version="0.0.2"/>
 
 </feature>
