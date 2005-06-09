@@ -1,4 +1,4 @@
-/* $Id: RunPopupDialog.java,v 1.8 2005-06-01 15:37:16 zdrey Exp $
+/* $Id: RunPopupDialog.java,v 1.9 2005-06-09 13:37:03 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: RunPopupDialog.java
  * License: GPL
@@ -20,13 +20,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-
-import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 
 /**
  * Dialog that appears when user clics on the popup menu of a .kmt source file
