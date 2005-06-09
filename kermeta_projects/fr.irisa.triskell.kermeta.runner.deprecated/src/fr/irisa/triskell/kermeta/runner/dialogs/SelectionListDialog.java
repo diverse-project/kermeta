@@ -1,4 +1,4 @@
-/* $Id: SelectionListDialog.java,v 1.2 2005-05-27 15:06:25 zdrey Exp $
+/* $Id: SelectionListDialog.java,v 1.3 2005-06-09 13:35:19 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: SelectionListDialog.java
  * License: GPL
@@ -8,6 +8,8 @@
  * Authors: zdrey
  */
 package fr.irisa.triskell.kermeta.runner.dialogs;
+
+import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
@@ -19,18 +21,21 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.dialogs.TwoPaneElementSelector;
 
 /**
  * 
  */
-public class SelectionListDialog extends Dialog {
-
-    
+public class SelectionListDialog extends Dialog
+//TwoPaneElementSelector
+//
+{
     /*
      * ATTRIBUTES
      */
     // The list to display in the dialog
     protected java.util.List selectionList = null;
+    protected Object[] arrayList = new Object[0];
     // The event that will be associated to the OK button of this dialog
     protected SelectionAdapter selectionAdapter = null;
     private String selectedItem;
@@ -87,7 +92,6 @@ public class SelectionListDialog extends Dialog {
                         String[] str = list.getSelection();
                         for (int i = 0; i < str.length; i++)
                         {
-                            System.out.println("Selection: "+str[i]);
                             selectedItem = str[i];
                         }
                     }
@@ -111,6 +115,14 @@ public class SelectionListDialog extends Dialog {
         selectionList = list;
     }
     
+	/**
+	 * @see org.eclipse.jface.window.Window#configureShell(Shell)
+	 */
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		//WorkbenchHelp.setHelp(newShell, new Object[] { IJavaHelpContextIds.MAINTYPE_SELECTION_DIALOG });
+	}
+    
     /**
      * @param pSelectionAdapter the event caused by Okpress
      */
@@ -120,6 +132,23 @@ public class SelectionListDialog extends Dialog {
 
     public SelectionAdapter getSelectionAdapter() { return selectionAdapter; }
     public java.util.List getList() { return selectionList; }
+    public Object[] getArrayList() {return arrayList;}
     public String getSelectedItem() { return selectedItem; }
+    
+    
+/*    public int open()
+    {
+		if (selectionList == null) {
+			arrayList = new Object[0];
+		}
+		else
+		{
+		    arrayList = selectionList.toArray();
+		}
+		
+		setElements(arrayList);
+        return super.open();
+    }
+    */
     
 }
