@@ -1,9 +1,8 @@
-<!-- $Id: KermetaArchitectureGuide_build.xml,v 1.2 2005-06-09 15:05:45 dvojtise Exp $ -->
-<project name="KermetaArchitectureGuide" default="all">
+<project name="KerMeta-TypeSystem" default="all">
 	<!-- configuration properties -->		
 	<!-- project configuration -->
 	<property name="project.base.dir" location=".."/>
-	<property name="project.name" value="KermetaArchitectureGuide"/>
+	<property name="project.name" value="KerMeta-TypeSystem"/>
 	<property name="build.dir" location="${project.base.dir}/build"/>
 	<property name="build.docbook.dir" location="${build.dir}/docbook42"/>
 	<property name="OOo.source.dir" location="${project.base.dir}/src/OOo"/>
@@ -45,7 +44,7 @@
 		     target="pdf.fop"/>
 	</target>
 
-	<target name="deploy" description="copy documentation files to http://www.irisa.fr/triskell/prive/docs" >
+	<target name="deploy" description="copy documentation files to http://www.irisa.fr/triskell/prive/docs" depends="OOo2dbk, html.single, html.chunked, html.help">
 		<ant antfile="common_build.xml"
 		     target="deploy"/>
 
@@ -76,5 +75,5 @@
 		<ant antfile="common_build.xml"
 		     target="clean.eclipse.help"/>
 	</target>
-
+	
 </project>
