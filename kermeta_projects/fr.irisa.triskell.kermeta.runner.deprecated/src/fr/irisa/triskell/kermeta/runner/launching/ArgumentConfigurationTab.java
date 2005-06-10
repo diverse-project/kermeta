@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.13 2005-06-09 17:48:45 ffleurey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.14 2005-06-10 15:38:06 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -13,34 +13,30 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
-import java.io.File;
 import java.util.ArrayList;
-
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.DebugPluginImages;
-import org.eclipse.debug.internal.ui.DebugUIAdapterFactory;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.DebugUITools;
-import org.eclipse.debug.ui.EnvironmentTab;
 import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
+import org.eclipse.jdt.ui.JavaElementLabelProvider;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -48,15 +44,17 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.ContainerSelectionDialog;
+import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -65,27 +63,32 @@ import fr.irisa.triskell.kermeta.runner.dialogs.SelectionListDialog;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
 import fr.irisa.triskell.kermeta.structure.FOperation;
+
+import fr.irisa.triskell.kermeta.runner.Messages;
 /**
  * 
  */
-public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
+public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //implements ModifyListener
+{
 
     /**
      * The elements that compose this Tab window
      */
-    protected String filenameString = "No file given";
+    protected String filenameString = "<No file given>";
     protected Text classQualifiedNameText;
-    protected String classQualifiedNameString = "No class given";
+    protected String classQualifiedNameString = "<No class given>";
     protected Text defaultOperationText;
-    protected String defaultOperationString = "No operation given";
+    protected String defaultOperationString = "<No operation given>";
     public KermetaUnit selectedUnit;
+    public IProject selectedProject;
+    public int GRID_DEFAULT_WIDTH = 200;
+    public IAdaptable selectedResource = null;
     
-    /** The labels to move in a .properties file */
-    public String SOURCEFILE="File";
     
     /** Basic modify listener stolen from CommonTab source*/
     private ModifyListener fBasicModifyListener = new ModifyListener() {
 		public void modifyText(ModifyEvent evt) {
+		    
 			updateLaunchConfigurationDialog();
 		}
 };
@@ -96,7 +99,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		if (classNameText!=null && classNameText.getText().length()>0)
 		    setOperationEnabled(true);
 		else setOperationEnabled(false);
-
 	}
 };;
 	/** Listener for file nape modification */
@@ -117,8 +119,9 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     private Label classNameLabel;
     /** The text widget for the selection of a Kermeta class from a given file */
     private Text classNameText;
+    private Text projectLocationText;
     /** The path selected by the user through the "Browse" action*/
-    private String selectedPath;
+    private String selectedPath = "";
     /** The class qualified name chosen by the user */
     private String selectedClassString = null;
     /** The text widget for the selection of a Kermeta operation */
@@ -126,17 +129,10 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     /** The button to click on in order to select an operation*/
     private Button operationNameButton;
     
-    public final String COULD_NOT_LOAD_ERROR = "Could not load the KMUnit for given file";
-    private String LOAD_ERROR = "KMUnit was not properly loaded (invalid root tags?) ";
-    /**
-     * 
-     */
+    
     public ArgumentConfigurationTab() {
         super();
-        //getWorkspaceRoot().
         filenameString = getWorkspaceRoot().getLocation().toString();
-        //ifile.getLocation().toString()
-        // TODO Auto-generated constructor stub
     }
 
     /* (non-Javadoc)
@@ -144,24 +140,31 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      */
     public void createControl(Composite parent)
     {
-        // Initialize layouts
         
-        GridLayout gClassLayout = new GridLayout();
-        GridLayout gOperationLayout = new GridLayout();
-        
-		//Composite area = (Composite) super.createDialogArea(parent);
         Composite area = new Composite(parent, SWT.NULL);
+        GridLayout gl = new GridLayout(1, false);
+        gl.marginHeight = 0;
+		area.setLayout(gl);
 		area.layout();
 		setControl(area);		
 		
+		Composite projectArea = new Composite(area, SWT.SINGLE);
+		projectArea.setLayout(new RowLayout());
+		// Create the area for the project to get
+		createProjectLayout(projectArea, null);
+		
+		Group paramArea = new Group(area, SWT.NULL);
+		paramArea.setText(Messages.getString("ArgTab.FILEPARAM"));
+		paramArea.setLayout(new FillLayout());
+		
 		// Create the area for the filename to get
-		createFileLayout(area, null);
+		createFileLayout(paramArea, null);
 		
 		// Create the area for the classQualifiedName
-		createClassNameLayout(area, null);
+		createClassNameLayout(paramArea, null);
 		
 		// Set the field for the operation choice
-		createOperationNameLayout(area, null);
+		createOperationNameLayout(paramArea, null);
 
 
     }
@@ -184,39 +187,49 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     {	  // just to remember how to access a launch group
 //        ILaunchGroup group = DebugUITools.getLaunchGroup(configuration, LaunchManager.RUN_MODE);
         String selectedOperationString = "";
-        String currentPath = "";
+        String currentProjectPath = "";
+        String storedPath = "";
         IFile selectedFile = null;
         if (DebugUITools.getSelectedResource()!=null)
         {      
-           selectedPath = DebugUITools.getSelectedResource().getFullPath().toOSString();//.getLocation().toOSString();
-           
+           IResource selr = DebugUITools.getSelectedResource();
+           if (selr instanceof IFile)
+               selectedPath = selr.getFullPath().toOSString();//.getLocation().toOSString();
+           else if (selr instanceof IProject)
+               currentProjectPath = selr.getFullPath().toOSString();;
         }
 		try
 		{
-		    String storedPath = configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
+		    storedPath = configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
             "");
-		    // If user created a new configuration ?
-		    currentPath = (storedPath.equals(""))?selectedPath:storedPath;
+		    selectedFile = getIFileFromString(storedPath);
 		    
-		    selectedFile = getIFileFromString(currentPath);
 		    // Create the Unit corresponding to the chosen Kermeta file
-		    // (either the SelectedResource one, or the path of current configuration)
-		    selectedUnit = KermetaRunHelper.parse(selectedFile);
-		    ArrayList point = KermetaRunHelper.findEntryPoint(selectedUnit);
-		    selectedClassString = (String)point.get(0);
-		    selectedOperationString = (String)point.get(1);
-		    
-		    
-            getFileLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
-                    currentPath));
-       
-            getclassNameText().setText(
-                    configuration.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME,
-                            selectedClassString));
-            getOperationNameText().setText(
-                    configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,
-                            selectedOperationString));
-            
+		    // (either the SelectedResource one, or the path of current configuration)*
+		    if (selectedFile != null)
+		    {
+		        selectedUnit = KermetaRunHelper.parse(selectedFile);
+		    }
+		    // selectedUnit can be null : if selected file is not valid
+		    if (selectedUnit != null)
+		    {
+		        ArrayList point = KermetaRunHelper.findEntryPoint(selectedUnit);
+		        selectedClassString = (String)point.get(0);
+		        selectedOperationString = (String)point.get(1);
+		        
+		        getProjectLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_PROJECTNAME,
+		                currentProjectPath));
+		        
+		        getFileLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
+		                storedPath));
+		        
+		        getclassNameText().setText(
+		                configuration.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME,
+		                        selectedClassString));
+		        getOperationNameText().setText(
+		                configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,
+		                        selectedOperationString));
+		    }
 		}
 		catch (CoreException e)
 		{
@@ -224,25 +237,24 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		}
 		catch (Throwable e)
 		{
-		    String errorMsg;
-	        if (selectedUnit == null)
-	            errorMsg = COULD_NOT_LOAD_ERROR;
-	        else
-	            errorMsg = LOAD_ERROR = " ";
+		    String errorMsg = "";
+		    if (selectedUnit != null)
+	            errorMsg = Messages.getString("ArgTab.WRONGLOADUNITERROR") ;
 	        
 	        setClassEnabled(false);
 	        setOperationEnabled(false);
-	        MessageDialog.openInformation(
+	        if (!errorMsg.equals(""))
+	            MessageDialog.openInformation(
 					new Shell(),
 					"Kermeta parse error",
-					COULD_NOT_LOAD_ERROR+"'"+ currentPath + "':\n"+e.getMessage());
+					errorMsg+":\n"+e.getMessage());
 				e.printStackTrace();
 	        
 		}
 
     }
 
-	/**
+    /**
 	 * When the button "Apply" is pushed, this method is launched
 	 * The configuration is saved.
 	 * INPUT, OUTPUT and PATH
@@ -255,7 +267,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, fileLocationText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, classNameText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, operationNameText.getText());
-
+		
     }
     
     
@@ -274,19 +286,48 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     /* (non-Javadoc)
      * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getName()
      */
-    public String getName() {
-        
-        return "Arguments";
-    }
+    public String getName() { return Messages.getString("ArgTab.NAME"); }
     
-    
-
     /** (non-Javadoc)
      * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getImage()
      */
     public Image getImage() {
         return DebugPluginImages.getImage(IDebugUIConstants.IMG_OBJS_VARIABLE);
     }
+    
+    
+    /***
+     * Create the Field where user enters file to execute
+     * @param parent
+     * @param font
+     * @return
+     */
+    public Composite createProjectLayout(Composite parent, Font font)
+    {
+        createInputTextLayout(parent, Messages.getString("ArgTab.PROJECTLOC"));
+        GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+        //gd.horizontalSpan = 1;
+        gd.widthHint = GRID_DEFAULT_WIDTH;
+        // Create the project selector button
+        
+        // Project location text
+        projectLocationText = new Text(parent, SWT.SINGLE | SWT.BORDER);
+        projectLocationText.setLayoutData(gd);
+        projectLocationText.setFont(font);
+        projectLocationText.addModifyListener(fBasicModifyListener);
+        Button projectLocationButton = createPushButton(parent, 
+                Messages.getString("KermetaPerspective.BROWSE"),
+                null);
+        projectLocationButton.addSelectionListener(new SelectionAdapter() 
+                {
+                	public void widgetSelected(SelectionEvent evt)
+                	{
+                	    handleProjectLocationButtonSelected();
+                	}
+                });
+        return parent;
+    }
+    
     /***
      * Create the Field where user enters file to execute
      * @param parent
@@ -295,14 +336,14 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
      */
     public Composite createFileLayout(Composite parent, Font font)
     {
-        createInputTextLayout(parent, "Set the location of your Kermeta file");
+        createInputTextLayout(parent, Messages.getString("ArgTab.FILELOC"));
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         
         setFileLocationText(new Text(parent, SWT.SINGLE | SWT.BORDER));
         getFileLocationText().setLayoutData(gd);
         getFileLocationText().setFont(font);
         getFileLocationText().addModifyListener(fFileModifyListener);
-        setFileLocationButton(createPushButton(parent, "Browse", null));	 //$NON-NLS-1$
+        setFileLocationButton(createPushButton(parent, Messages.getString("KermetaPerspective.BROWSE"), null));	 //$NON-NLS-1$
         getFileLocationButton().addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent evt) {
                 handleFileLocationButtonSelected();
@@ -323,8 +364,8 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
     {
         GridLayout locationLayout = new GridLayout();
         locationLayout.numColumns = 2;
-        locationLayout.marginHeight = 0;
-        locationLayout.marginWidth = 0;
+        locationLayout.marginHeight = 10;
+        locationLayout.marginWidth = 10;
         parent.setLayout(locationLayout);
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         parent.setLayoutData(gd);
@@ -439,6 +480,16 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 		updateLaunchConfigurationDialog();
     }
     
+    /**
+     * Browse the current workspace so that user can select the source file that
+     * he wants to execute.
+     */
+    protected void handleProjectLocationButtonSelected()
+    {   
+		selectedResource = handleBrowseProjects();
+		updateLaunchConfigurationDialog();
+    }
+    
     
 	/**
 	 * Parse the file specified by current path (i.e. creates its Kermeta Unit)
@@ -457,6 +508,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         getFileLocationText().setText(currentPath);
         getclassNameText().setText(selectedClassString);
         getOperationNameText().setText(selectedOperationString);
+        canSave();
     }
 
     /**
@@ -464,12 +516,56 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 	 * choose the new value for the container field.
 	 */
 
+	private IProject handleBrowseProjects() {
+	    String resultPath = null;
+	    //LabelProvider labelProvider = new KermetaLabelProvider();
+	    JavaElementLabelProvider labelProvider = new JavaElementLabelProvider(JavaElementLabelProvider.SHOW_DEFAULT);
+	    
+	    // Get the open projects (KermetaProject)
+	    IProject[] projects = getWorkspaceRoot().getProjects();
+		ElementListSelectionDialog dialog =
+			new ElementListSelectionDialog(getShell(), labelProvider);
+
+		dialog.setTitle(Messages.getString("ArgTab.PROJECTSELECT"));
+		dialog.setElements(projects);
+		// Set the default selection to currently selected resource
+		ISelection sresource = RunnerPlugin.getActiveWorkbenchWindow().getSelectionService().getSelection();
+		if (sresource instanceof IStructuredSelection)
+		{ 
+		    if (((IStructuredSelection)sresource).getFirstElement() instanceof IProject)
+			{ dialog.setInitialSelections(new Object[] {((IStructuredSelection)sresource).getFirstElement()});}
+		}
+
+		if (dialog.open() == Window.OK)
+		{		
+			IProject result = (IProject) dialog.getFirstResult();
+			projectLocationText.setText(result.getName());
+			return result;
+		}
+		else
+		{
+		    return null;
+		}
+		
+	}
+    
+    /**
+	 * Uses the standard container selection dialog to
+	 * choose the new value for the container field.
+	 */
+
 	private String handleBrowse(Text containerText) {
 	    String resultPath = null;
+	    // From which resource do we begin the selection?
+	    if (selectedResource == null)
+	    {
+	        selectedResource = ResourcesPlugin.getWorkspace().getRoot(); 
+	    }
+	    
 		ResourceSelectionDialog dialog =
 			new ResourceSelectionDialog(getShell(),
-			    ResourcesPlugin.getWorkspace().getRoot(),
-			    "Select a file"
+			    selectedResource,
+			    Messages.getString("ArgTab.FILESELECT")
 			        );
 		// Set the default selection to currently selected resource
 		ISelection sresource = RunnerPlugin.getActiveWorkbenchWindow().getSelectionService().getSelection();
@@ -523,9 +619,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         else setOperationEnabled(false);
     }
     
-    
-    
-    
     protected void setOperationEnabled(boolean isEnabled)
     {
         if (!isEnabled) {operationNameText.setText("");}
@@ -534,7 +627,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         
     }
 
-
     protected void setClassEnabled(boolean isEnabled)
     {
         if (!isEnabled) {classNameText.setText("");}
@@ -542,55 +634,30 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
         classNameText.setEnabled(isEnabled);
     }
  
-    private void setFileLocationButton(Button button) {
-        fileLocationButton = button;
-    }
-
-    public void setFileLocationLabel(Label label) {
-        fileLocationLabel = label;
-    }
     
-    public Label getFileLocationLabel() {
-        return fileLocationLabel ;
-    }
-
-    private Button getFileLocationButton() {
-        return fileLocationButton;
-    }
-    
-    public void setFileLocationText(Text text) {
-        fileLocationText = text;
-    }
-    
-    public Text getFileLocationText() {
-        return fileLocationText;
-    }
-    
-
     /**
      * Simple accessors 
      */
-    private void setclassNameButton(Button button) {
-        classNameButton = button;
-    }
-    private Button getclassNameButton() {
-        return classNameButton;
-    }
-    public void setclassNameLabel(Label label) {
-        classNameLabel = label;
-    }
-    public Label getclassNameLabel() {
-        return classNameLabel ;
-    }
-    public void setclassNameText(Text text) {
-        classNameText = text;
-    }
-    public Text getclassNameText() { 
-        return classNameText;
-    }
-    private Text getOperationNameText() {   return operationNameText;
-    }
+    
+    private void setclassNameButton(Button button) {classNameButton = button;}
+    private Button getclassNameButton() {return classNameButton;}
+    public void setclassNameLabel(Label label) {classNameLabel = label;}
+    public Label getclassNameLabel() {return classNameLabel ;}
+    private Text getProjectLocationText() {return projectLocationText;}
+    public Text  getFileLocationText() {return fileLocationText;}
+    private void setFileLocationButton(Button button) {fileLocationButton = button;}
+    
+    public void setclassNameText(Text text) {classNameText = text;}
+    public Text getclassNameText() {return classNameText;}
+    private Text getOperationNameText() {return operationNameText;}
 
+    public void setFileLocationLabel(Label label) {fileLocationLabel = label;}
+    public Label getFileLocationLabel() {return fileLocationLabel ;}
+    private Button getFileLocationButton() {return fileLocationButton;}
+    public void setFileLocationText(Text text) {fileLocationText = text;}
+    
+
+    
 	/**
 	 * (CommontTab) Convenience method for getting the workspace root.
 	 */
@@ -613,20 +680,32 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab {
 	    IResource iresource = getWorkspaceRoot().findMember(filepath);
 	    if (iresource instanceof IFile)
 	        selectedFile = (IFile) iresource;
-	    // Any other case should not occur : TODO : forbid the compilation
-	    // of a resource that is not an IFile!!
 	    return selectedFile;
 	}
-	
-	
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.ui.AbstractLaunchConfigurationTab#updateLaunchConfigurationDialog()
+
+	/**
+     * @see org.eclipse.debug.ui.ILaunchConfigurationTab#canSave()
      */
-    protected void updateLaunchConfigurationDialog() {
-        // TODO Auto-generated method stub
-        super.updateLaunchConfigurationDialog();
-        //DebugPlugin.getDefault().getLaunchManager().
-        
-        
+    public boolean canSave() {
+        return validateFileLocation();
+    }
+
+    /**
+     * @return true if the selected file is a valid kermeta file, false otherwise
+     * NOTE : do not put UI changes, otherwise, canSave() method will be called undefinitely
+     */
+    protected boolean validateFileLocation() {
+        if (selectedUnit == null)
+        {
+            setErrorMessage(Messages.getString("ArgTab.COULDNOTLOADUNITERROR"));
+        	return false;
+        }
+        if (classNameText.getText().equals("") || operationNameText.getText().equals(""))
+        {
+            setErrorMessage(Messages.getString("ArgTab.EMPTYFIELDSERROR"));
+            return false;
+        }
+        setErrorMessage(null);
+        return true;
     }
 }
