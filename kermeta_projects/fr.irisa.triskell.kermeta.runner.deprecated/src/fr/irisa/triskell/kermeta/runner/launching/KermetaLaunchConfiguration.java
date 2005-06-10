@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.9 2005-06-09 17:48:45 ffleurey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.10 2005-06-10 15:41:45 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -42,7 +42,7 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
     public static String KM_FILENAME = "KM_FILENAME";
     public static String KM_CLASSQNAME = "KM_CLASSQNAME";
     public static String KM_OPERATIONNAME = "KM_OPERATIONNAME";
-    
+    public static String KM_PROJECTNAME = "KM_PROJECTNAME";
     
 	/**
 	 * (Eclipse doc) Launches the given configuration in the specified mode, contributing
@@ -63,13 +63,17 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	        ILaunchConfiguration configuration,
 	        String mode,
 	        ILaunch launch, IProgressMonitor monitor) throws CoreException {
+	    
+	    // NOTE : "final" forces a copy of the parameters, so that we are sure
+	    // that a reference of those params are not stored by the Plugin framework
+	    final ILaunchConfiguration fconfiguration = configuration;
+	    final String fmode = mode;
+	    
 	    try
 	    {
 	        //  If the mode choosen is Run a Kermeta run target is created
 	        if (mode.equals(ILaunchManager.RUN_MODE)) 
 	        {   
-	            System.out.println("Kermeta source : "+launch.getSourceLocator());
-	            // Set the default source locator to launch FIXME : consequences???
 	            
 	            //launch.setSourceLocator(new KermetaSourceLocator());
 	           
@@ -78,7 +82,8 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	            // Add it as a debug target
 	            launch.addDebugTarget(runtarget);
 	            // Run the launcher with configurationParam, launchParam, currentMode
-	            runKermeta(configuration, mode);
+	            runKermeta(fconfiguration, fmode);
+                //runKermeta(configuration, mode);
 	            
 	            // Terminate the run target
 	            runtarget.terminate();
