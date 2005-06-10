@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.7 2005-06-01 15:50:58 zdrey Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.8 2005-06-10 16:00:16 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: GPL
@@ -115,31 +115,6 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 	 * 
 	 */
 	public boolean performFinish() {
-
-/*		IFile file = page.createNewFile();
-		if (file == null)
-			return false;
-
-		//selectAndReveal(file);
-
-		// Open editor on new file.
-		IWorkbenchWindow dw = getWorkbench().getActiveWorkbenchWindow();
-		try {
-			if (dw != null) {
-				IWorkbenchPage page = dw.getActivePage();
-				if (page != null) {
-					IDE.openEditor(page, file, true);
-				}
-			}
-		} catch (PartInitException e) {
-			DialogUtil.openError(
-				dw.getShell(),
-				"Error : Could not create the requested file", //$NON-NLS-1$
-				e.getMessage(),
-				e);
-		}
-				
-		return true;*/
 	    //final String containerName = page.getContainerName();
 	    //final String containerName = page.getContainerText();
 	    final IPath containerPath = page.containerGroup.getContainerFullPath();

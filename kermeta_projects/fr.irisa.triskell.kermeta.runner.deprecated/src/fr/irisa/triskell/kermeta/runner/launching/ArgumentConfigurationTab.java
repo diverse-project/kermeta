@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.14 2005-06-10 15:38:06 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.15 2005-06-10 16:00:14 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -95,6 +95,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	/** Listener for class Name modification */
 	private ModifyListener fClassModifyListener = new ModifyListener() {
 	public void modifyText(ModifyEvent evt) {
+        canSave();
 		updateLaunchConfigurationDialog();
 		if (classNameText!=null && classNameText.getText().length()>0)
 		    setOperationEnabled(true);
@@ -240,13 +241,12 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		    String errorMsg = "";
 		    if (selectedUnit != null)
 	            errorMsg = Messages.getString("ArgTab.WRONGLOADUNITERROR") ;
-	        
 	        setClassEnabled(false);
 	        setOperationEnabled(false);
 	        if (!errorMsg.equals(""))
 	            MessageDialog.openInformation(
 					new Shell(),
-					"Kermeta parse error",
+					"Kermeta parse error, ",
 					errorMsg+":\n"+e.getMessage());
 				e.printStackTrace();
 	        
@@ -700,6 +700,11 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
             setErrorMessage(Messages.getString("ArgTab.COULDNOTLOADUNITERROR"));
         	return false;
         }
+        if (fileLocationText.getText().equals(""))
+        {
+            setErrorMessage(Messages.getString("ArgTab.NOFILEERROR"));
+        	return false;
+        }  
         if (classNameText.getText().equals("") || operationNameText.getText().equals(""))
         {
             setErrorMessage(Messages.getString("ArgTab.EMPTYFIELDSERROR"));

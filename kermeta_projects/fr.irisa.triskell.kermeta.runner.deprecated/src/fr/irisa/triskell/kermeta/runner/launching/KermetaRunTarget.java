@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.5 2005-06-06 15:23:13 zdrey Exp $
+/* $Id: KermetaRunTarget.java,v 1.6 2005-06-10 16:00:12 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: GPL
@@ -50,16 +50,13 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.IDebugTarget#getThreads()
      */
     public IThread[] getThreads() throws DebugException {
-        System.err.println("Get the threads");
-        // TODO Auto-generated method stub
         return null;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.model.IDebugTarget#hasThreads()
      */
     public boolean hasThreads() throws DebugException {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -67,7 +64,6 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.IDebugTarget#getName()
      */
     public String getName() throws DebugException {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -75,7 +71,6 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.IDebugTarget#supportsBreakpoint(org.eclipse.debug.core.model.IBreakpoint)
      */
     public boolean supportsBreakpoint(IBreakpoint breakpoint) {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -83,15 +78,13 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier()
      */
     public String getModelIdentifier() {
-        // TODO Auto-generated method stub
         return null;
     }
 
     /**
      * @see org.eclipse.debug.core.model.IDebugElement#getDebugTarget()
      */
-    public IDebugTarget getDebugTarget()
-    {
+    public IDebugTarget getDebugTarget() {
         return this;
     }
 
@@ -113,7 +106,6 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.ITerminate#isTerminated()
      */
     public boolean isTerminated() {
-        // TODO Auto-generated method stub
         return isTerminated;
     }
 
@@ -132,7 +124,6 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.ISuspendResume#canResume()
      */
     public boolean canResume() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -140,7 +131,6 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.ISuspendResume#canSuspend()
      */
     public boolean canSuspend() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -148,7 +138,6 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.ISuspendResume#isSuspended()
      */
     public boolean isSuspended() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -156,7 +145,6 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.ISuspendResume#resume()
      */
     public void resume() throws DebugException {
-        // TODO Auto-generated method stub
 
     }
 
@@ -164,39 +152,30 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.ISuspendResume#suspend()
      */
     public void suspend() throws DebugException {
-        // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.IBreakpointListener#breakpointAdded(org.eclipse.debug.core.model.IBreakpoint)
      */
     public void breakpointAdded(IBreakpoint breakpoint) {
-        // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.IBreakpointListener#breakpointRemoved(org.eclipse.debug.core.model.IBreakpoint, org.eclipse.core.resources.IMarkerDelta)
      */
     public void breakpointRemoved(IBreakpoint breakpoint, IMarkerDelta delta) {
-        // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.IBreakpointListener#breakpointChanged(org.eclipse.debug.core.model.IBreakpoint, org.eclipse.core.resources.IMarkerDelta)
      */
     public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta) {
-        // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.model.IDisconnect#canDisconnect()
      */
     public boolean canDisconnect() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -204,15 +183,12 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.IDisconnect#disconnect()
      */
     public void disconnect() throws DebugException {
-        // TODO Auto-generated method stub
-
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.model.IDisconnect#isDisconnected()
      */
     public boolean isDisconnected() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -220,7 +196,6 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.debug.core.model.IMemoryBlockRetrieval#supportsStorageRetrieval()
      */
     public boolean supportsStorageRetrieval() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -229,7 +204,6 @@ public class KermetaRunTarget implements IDebugTarget {
      */
     public IMemoryBlock getMemoryBlock(long startAddress, long length)
             throws DebugException {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -237,7 +211,6 @@ public class KermetaRunTarget implements IDebugTarget {
      * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
      */
     public Object getAdapter(Class adapter) {
-        // TODO Auto-generated method stub
         return null;
     }
 

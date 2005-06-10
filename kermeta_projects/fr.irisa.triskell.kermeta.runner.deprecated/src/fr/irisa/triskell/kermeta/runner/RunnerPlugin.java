@@ -2,17 +2,16 @@ package fr.irisa.triskell.kermeta.runner;
 
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.debug.ui.ILaunchShortcut;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
-import org.eclipse.ui.internal.WorkbenchWindow;
+import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
+
+import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
+
 import java.util.*;
 
 /**
@@ -27,12 +26,16 @@ public class RunnerPlugin extends AbstractUIPlugin
 	//Resource context.
 	private BundleContext context;
 	
+	// The opened consoles for ConsoleManager...
+	private static IConsole[] consoles;
+	
 	/**
 	 * The constructor.
 	 */
 	public RunnerPlugin() {
 		super();
 		plugin = this;
+		consoles = new IConsole[] {};
 		try {
 			resourceBundle = ResourceBundle.getBundle("fr.irisa.triskell.kermeta.runner.RunnerPluginResources");
 			
@@ -92,6 +95,7 @@ public class RunnerPlugin extends AbstractUIPlugin
 		return ResourcesPlugin.getWorkspace();
     }
     
+    
     public static IWorkbenchPage getActivePage() {
 		return getDefault().internalGetActivePage();
 	  }
@@ -140,6 +144,11 @@ public class RunnerPlugin extends AbstractUIPlugin
         System.err.println("log Exception is not implemented, but you have this one :P : "+e);
     }
     
+    
+    public IConsole[] getConsoles()
+    {
+        return consoles;
+    }
     
     
 }

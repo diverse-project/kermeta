@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.7 2005-06-03 16:23:32 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.8 2005-06-10 16:00:18 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -10,16 +10,15 @@
 package fr.irisa.triskell.kermeta.runner.console;
 
 
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.dialogs.InputDialog;
 
-import org.eclipse.swt.graphics.Color;
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbenchWindow;
+
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
-import org.eclipse.ui.console.IConsoleConstants;
+
 import org.eclipse.ui.console.IConsoleListener;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.IConsoleView;
@@ -28,7 +27,6 @@ import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.internal.console.MessageConsolePage;
 import org.eclipse.ui.part.IPageBookViewPage;
 
-import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.dialogs.InputStreamDialog;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 //import org.eclipse.ui.internal.console.IOConsolePage;

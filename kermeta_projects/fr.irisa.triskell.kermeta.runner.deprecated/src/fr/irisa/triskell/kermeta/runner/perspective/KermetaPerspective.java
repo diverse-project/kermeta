@@ -1,4 +1,4 @@
-/* $Id: KermetaPerspective.java,v 1.2 2005-05-31 14:35:25 zdrey Exp $
+/* $Id: KermetaPerspective.java,v 1.3 2005-06-10 16:00:12 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaPerspective.java
  * License: GPL
@@ -62,6 +62,7 @@ public class KermetaPerspective implements IPerspectiveFactory {
         // outline view to right (of editor area)
         IFolderLayout right = layout.createFolder("right", IPageLayout.RIGHT, (float) 0.75, editorArea);
         right.addView(IPageLayout.ID_OUTLINE);
+       
         
         // add shortcuts
          layout.addActionSet(IDebugUIConstants.LAUNCH_ACTION_SET);
