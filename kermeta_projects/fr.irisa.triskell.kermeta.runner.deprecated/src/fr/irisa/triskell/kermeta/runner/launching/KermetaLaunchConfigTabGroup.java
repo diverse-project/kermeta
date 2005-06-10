@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfigTabGroup.java,v 1.6 2005-06-09 13:34:06 zdrey Exp $
+/* $Id: KermetaLaunchConfigTabGroup.java,v 1.7 2005-06-10 15:38:46 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfigTabGroup.java
  * License: GPL
@@ -9,11 +9,14 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
-import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import java.util.jar.JarEntry;
+
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
+import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
+import org.eclipse.jdt.launching.sourcelookup.JavaProjectSourceLocation;
 
 /**
  * 
@@ -30,7 +33,8 @@ public class KermetaLaunchConfigTabGroup extends
         if (mode.equals(ILaunchManager.RUN_MODE))
         {
             ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
-                    new ArgumentConfigurationTab()/*,
+                    new ArgumentConfigurationTab(),
+                    new CommonTab()/*,
                     new GeneralConfigurationTab()*/
           			};
             setTabs(tabs);
