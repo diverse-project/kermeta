@@ -1,3 +1,4 @@
+<!-- $Id: toc.xml,v 1.5 2005-06-10 09:32:52 dvojtise Exp $-->
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <toc label="KerMeta documentation">
 	<topic label="User documentation">
@@ -11,19 +12,21 @@
 			<topic label="KerMeta Interpreter and Java Framework reference" href="build/javadoc/KermetaInterpreter/index.html"> 		
 			</topic>	
 		</topic>
+		<topic label="KerMeta Metamodel" href="build/eclipse.help/KerMeta-MetaModel/index.html"> 
+			<link toc="build/eclipse.help/KerMeta-MetaModel/toc.xml" />
+		</topic>
 		<topic label="KerMeta history and known limitations (online)"
 			href="http://triskell.wiki.irisa.fr/tiki-index.php?page=KemertaVersionStatus">
 		</topic>
+					
+		
 	</topic>
 	<topic label="Developper documentation">			
 		<topic label="KerMeta Type System"> 
-			<link toc="build/eclipse.help/Kermeta-TypeSystem/toc.xml" />-->
+			<link toc="build/eclipse.help/KerMeta-TypeSystem/toc.xml" />
 		</topic>
 		<topic label="KerMeta Architecture guide"> 
-			<link toc="build/eclipse.help/KermetaArchitectureGuide/toc.xml" />-->
-		</topic>			
-		<topic label="KerMeta Metamodel"> 
-			<link toc="build/eclipse.help/Kermeta-MetaModel/toc.xml" />-->
+			<link toc="build/eclipse.help/KermetaArchitectureGuide/toc.xml" />
 		</topic>			
 	</topic>
 </toc>
