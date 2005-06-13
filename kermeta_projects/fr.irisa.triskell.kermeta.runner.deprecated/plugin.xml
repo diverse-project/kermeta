@@ -119,6 +119,7 @@
       <launchConfigurationTabGroup
             type="KermetaLaunchConfiguration"
             class="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfigTabGroup"
+            description="Define the launch arguments for the selected KMT file"
             id="KermetaTabGroup">
          <launchMode
                description="description du launch mode"
@@ -148,9 +149,17 @@
          <launchGroup
                bannerImage="icons/kermeta_logo.gif"
                label="Kermeta Run"
+               category="KermetaWizard"
                mode="run"
                image="icons/kermeta_logo.gif"
                id="KermetaLaunchGroup"/>
+  <!--       <launchGroup
+               bannerImage="icons/full/wizban/run_wiz.gif"
+               label="Run"
+               mode="run"
+               image="icons/full/ctool16/run_exc.gif"
+               id="org.eclipse.debug.ui.launchGroup.run"/>
+      -->         
       </extension>
       <extension
             point="org.eclipse.ui.newWizards">
