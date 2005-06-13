@@ -4,5 +4,5 @@
    <description url="http://www.irisa.fr/triskell/softwares/kermeta/update">
       
    </description>
-   <feature url="features/fr.irisa.triskell.kermeta_0.0.9.jar" id="fr.irisa.triskell.kermeta" version="0.0.9"/>
+   <feature url="features/fr.irisa.triskell.kermeta_0.0.10.jar" id="fr.irisa.triskell.kermeta" version="0.0.10"/>
 </site>
