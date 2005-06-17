@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.8 2005-06-09 17:49:16 ffleurey Exp $
+/* $Id: RunJunitFactory.java,v 1.9 2005-06-17 12:44:15 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : GPL
@@ -97,6 +97,21 @@ public class RunJunitFactory implements Test {
                 
                 if (main_type.isSubTypeOf(kunit_test_type)) isTestSuite = true;
             }
+            
+            // Display the errors stored in the unit that is checked
+            if (unit.error.size()>0)
+            {
+                System.err.println("*** There are errors in the TestSuite of <"+ unit_uri + "> :" );
+                for (int i=0; i<unit.error.size(); i++)
+                {
+                    System.out.println("Error "+i+":"+ unit.error.get(i));
+                }
+            }
+            else
+            {
+                System.out.println(" *** No internal uncaught error for <"+unit_uri+">");
+            }
+            
             
             // It is a test suite
             if (isTestSuite) {

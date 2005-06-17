@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.12 2005-06-09 17:49:02 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.13 2005-06-17 12:44:07 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -667,14 +667,14 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    
 	    
 	    if (node.getFStaticOperation() != null) {
-	        // It is an operation call
+	        // It is an operation call --> 
 	        CallableOperation operation = target_type.getOperationByName(node.getFName());
 	        
 //			 Check that target is not void
 		    if (operation == null && ro_target == memory.voidINSTANCE) {
 		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
 		        
-		        RuntimeObject ex = memory.getROFactory().createObjectFromClassName("kermeta::exceptions::CallOnAVoidTarget");
+		        RuntimeObject ex = memory.getROFactory().createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
 		        
 		        raiseKermetaException(ex);
 		        
@@ -682,8 +682,11 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		    
 //		  This should never happend is the type checker has checked the program
 			if (operation == null) {
-			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature");
-		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature");
+			    String msg = "INTERPRETER INTERNAL ERROR : unable to find a feature : "
+				    + "\noperation : '"+node.getFName()+"' not found for an object of kind : "+ target_type;       
+				    
+			    internalLog.error(msg);
+		        throw new Error(msg);
 			}
 	        
 //			 Get the parameters of this operation
@@ -710,8 +713,8 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		    
 //		  This should never happend is the type checker has checked the program
 			if (property == null) {
-			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature" + node.getFName());
-		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature " + node.getFName());
+			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getFName());
+		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getFName());
 			}
 			
 //			 Get the runtime object corresponding to the property
