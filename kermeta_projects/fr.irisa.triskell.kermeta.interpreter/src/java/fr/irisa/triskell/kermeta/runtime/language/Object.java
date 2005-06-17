@@ -47,7 +47,7 @@ public class Object {
 		else {
 			if (result == null) {
 				// TODO : Find something to manage uniqueness of properties
-				if (isPropertyOrdered(param0)) result =  ReflectiveCollection.createReflectiveCollection(self, param0);
+				if (!isPropertyOrdered(param0)) result =  ReflectiveCollection.createReflectiveCollection(self, param0);
 				else result =  ReflectiveSequence.createReflectiveSequence(self, param0);
 				self.getProperties().put(getPropertyName(param0), result);
 			}
