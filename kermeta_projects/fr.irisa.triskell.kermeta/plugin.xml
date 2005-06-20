@@ -5,7 +5,7 @@
    name="Kermeta Workbench"
    version="0.0.9"
    provider-name="IRISA/INRIA"
-   class="fr.triskell.irisa.kermetaplugin.KermetaPlugin">
+   class="fr.irisa.triskell.kermeta.plugin.KermetaPlugin">
    <runtime>
       <library name="lib/thirdparty/antlr.jar">
          <export name="*"/>
