@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta.runner"
    name="Runner Plug-in"
-   version="0.0.9"
+   version="0.0.10"
    provider-name="INRIA/IRISA"
    class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
 
@@ -37,6 +37,8 @@
       <import plugin="org.eclipse.ui.intro"/>
 	  <import plugin="fr.irisa.triskell.kermeta"/>
    <import plugin="org.eclipse.pde"/>
+   <import plugin="org.eclipse.core.variables"/>
+   <import plugin="org.eclipse.jdt.debug.ui"/>
    </requires>
       <extension
       
@@ -55,7 +57,7 @@
             <newWizardShortcut id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"/>
             <newWizardShortcut id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"/>
             <actionSet id="org.eclipse.debug.ui.launchActionSet"/>
-            <actionSet id="kermetaActionSet"/>
+    <!--        <actionSet id="kermetaActionSet"/> -->
         <showInPart
                id="org.eclipse.ui.views.ResourceNavigator">
          </showInPart>
@@ -74,18 +76,18 @@
       </extension>
 
    <extension point="org.eclipse.ui.popupMenus">
-<!--      <objectContribution
+    <objectContribution
             objectClass="org.eclipse.core.resources.IFile"
             nameFilter="*.kmt"
             id="popIFile">
-         <menu
+   <!--      <menu
                label="KermetaMenu"
                path="additions"
                id="fr.irisa.triskell.kermeta.runner.menu1">
             <separator
                   >
             </separator>
-         </menu>
+         </menu> -->
          <action
                enablesFor="1"
                label="Kermeta Run"
@@ -97,7 +99,7 @@
       <objectContribution
             objectClass="org.eclipse.core.resources.IProject"
             id="popIProject"/>
--->
+
    </extension>
 
    <!-- Extension point for the Kermeta Run menu item in the Run properties -->
@@ -107,12 +109,11 @@
           delegate="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration"
           public="true"
           name="Kermeta Application"
-          id="KermetaLaunchConfiguration"
-          modes="run, debug">
+          modes="run, debug"
+          id="KermetaLaunchConfiguration">
     </launchConfigurationType>
    </extension>
-  
-   <!-- Source locator -->
+
 	<!-- Tab groups for the launch configuration manager -->
       <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
@@ -203,7 +204,7 @@
                label="fr.irisa.triskell.kermeta.runner.actions.actionSet"
                visible="true"
                id="kermetaActionSet">
-<!--            <action
+          <action
                   toolbarPath="Normal"
                   label="newFileAction"
                   icon="icons/tree_package.gif"
@@ -211,7 +212,7 @@
                   tooltip="Create a new K. File"
                   id="newFileAction">
             </action>
-            -->
+
          </actionSet>
       </extension>
       <!-- Kermeta launch short cut -->
@@ -231,12 +232,12 @@
             </contextualLaunch>
             <perspective id="kermetaPerspective"/>
          </shortcut> 
-         <shortcut
+<!--         <shortcut
                label="Kermeta popup"
                class="fr.irisa.triskell.kermeta.runner.KermetaLaunchShortcut"
                modes="run"
                id="PopupKermetaLaunchShortCut"/>
-
+-->
       </extension>
 
 </plugin>

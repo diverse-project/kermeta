@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.6 2005-06-10 16:00:12 zdrey Exp $
+/* $Id: KermetaRunTarget.java,v 1.7 2005-06-24 17:17:50 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: GPL
@@ -9,209 +9,23 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
-import org.eclipse.core.resources.IMarkerDelta;
-import org.eclipse.debug.core.DebugEvent;
-import org.eclipse.debug.core.DebugException;
-import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
-import org.eclipse.debug.core.model.IBreakpoint;
-import org.eclipse.debug.core.model.IDebugTarget;
-import org.eclipse.debug.core.model.IMemoryBlock;
-import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.debug.core.model.IThread;
 
 /**
- * 
+ * Target that is launched in run mode
  */
-public class KermetaRunTarget implements IDebugTarget {
-
-    public boolean isTerminated;
-	private ILaunch launch;
-	
-	
-    /**
-     * 
-     */
-    public KermetaRunTarget(ILaunch launch) {
-        this.launch = launch;
-        this.isTerminated = false;
+public class KermetaRunTarget extends KermetaTarget {
+    
+    public KermetaRunTarget(ILaunch launch)
+    {
+        super(launch);
     }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugTarget#getProcess()
-     */
-    public IProcess getProcess() {
-        // TODO Auto-generated method stub
-        System.err.println("Get the process");
-        return null;
+  
+    
+    
+    public void start()
+    {
+        startKermetaProcess();
     }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugTarget#getThreads()
-     */
-    public IThread[] getThreads() throws DebugException {
-        return null;
-    }
-
-    /**
-     * @see org.eclipse.debug.core.model.IDebugTarget#hasThreads()
-     */
-    public boolean hasThreads() throws DebugException {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugTarget#getName()
-     */
-    public String getName() throws DebugException {
-        return null;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugTarget#supportsBreakpoint(org.eclipse.debug.core.model.IBreakpoint)
-     */
-    public boolean supportsBreakpoint(IBreakpoint breakpoint) {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier()
-     */
-    public String getModelIdentifier() {
-        return null;
-    }
-
-    /**
-     * @see org.eclipse.debug.core.model.IDebugElement#getDebugTarget()
-     */
-    public IDebugTarget getDebugTarget() {
-        return this;
-    }
-
-    /**
-     * @see org.eclipse.debug.core.model.IDebugElement#getLaunch()
-     */
-    public ILaunch getLaunch() {
-        return launch;
-    }
-
-    /**
-     * @see org.eclipse.debug.core.model.ITerminate#canTerminate()
-     */
-    public boolean canTerminate() {
-        return !isTerminated;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ITerminate#isTerminated()
-     */
-    public boolean isTerminated() {
-        return isTerminated;
-    }
-
-    /**
-     * @see org.eclipse.debug.core.model.ITerminate#terminate()
-     */
-    public void terminate() throws DebugException {
-		isTerminated = true;
-		DebugEvent event = new DebugEvent(getDebugTarget(), DebugEvent.TERMINATE);
-		DebugEvent debugEvents[] = new DebugEvent[1];
-		debugEvents[0] = event;
-		DebugPlugin.getDefault().fireDebugEventSet(debugEvents);
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ISuspendResume#canResume()
-     */
-    public boolean canResume() {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ISuspendResume#canSuspend()
-     */
-    public boolean canSuspend() {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ISuspendResume#isSuspended()
-     */
-    public boolean isSuspended() {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ISuspendResume#resume()
-     */
-    public void resume() throws DebugException {
-
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ISuspendResume#suspend()
-     */
-    public void suspend() throws DebugException {
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.IBreakpointListener#breakpointAdded(org.eclipse.debug.core.model.IBreakpoint)
-     */
-    public void breakpointAdded(IBreakpoint breakpoint) {
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.IBreakpointListener#breakpointRemoved(org.eclipse.debug.core.model.IBreakpoint, org.eclipse.core.resources.IMarkerDelta)
-     */
-    public void breakpointRemoved(IBreakpoint breakpoint, IMarkerDelta delta) {
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.IBreakpointListener#breakpointChanged(org.eclipse.debug.core.model.IBreakpoint, org.eclipse.core.resources.IMarkerDelta)
-     */
-    public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta) {
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDisconnect#canDisconnect()
-     */
-    public boolean canDisconnect() {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDisconnect#disconnect()
-     */
-    public void disconnect() throws DebugException {
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDisconnect#isDisconnected()
-     */
-    public boolean isDisconnected() {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IMemoryBlockRetrieval#supportsStorageRetrieval()
-     */
-    public boolean supportsStorageRetrieval() {
-        return false;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IMemoryBlockRetrieval#getMemoryBlock(long, long)
-     */
-    public IMemoryBlock getMemoryBlock(long startAddress, long length)
-            throws DebugException {
-        return null;
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
-     */
-    public Object getAdapter(Class adapter) {
-        return null;
-    }
-
+    
 }

@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.6 2005-06-06 15:23:35 zdrey Exp $
+/* $Id: KermetaSourceLocator.java,v 1.7 2005-06-24 17:17:51 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaSourceLocator.java
  * License: GPL
@@ -14,12 +14,18 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IPersistableSourceLocator;
 import org.eclipse.debug.core.model.ISourceLocator;
 import org.eclipse.debug.core.model.IStackFrame;
+import org.eclipse.debug.core.sourcelookup.IPersistableSourceLocator2;
 
 /**
  * 
  */
 public class KermetaSourceLocator implements IPersistableSourceLocator {
 
+    public KermetaSourceLocator()
+    {
+        super();
+    }
+    
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.model.IPersistableSourceLocator#getMemento()
      */
@@ -27,7 +33,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
         // TODO Auto-generated method stub
         return null;
     }
-
+    
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.model.IPersistableSourceLocator#initializeFromMemento(java.lang.String)
      */
@@ -51,9 +57,24 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
      * @see org.eclipse.debug.core.model.ISourceLocator#getSourceElement(org.eclipse.debug.core.model.IStackFrame)
      */
     public Object getSourceElement(IStackFrame stackFrame) {
+        return stackFrame;
+    }
+
+    /* (non-Javadoc)
+     * @see org.eclipse.debug.core.sourcelookup.IPersistableSourceLocator2#initializeFromMemento(java.lang.String, org.eclipse.debug.core.ILaunchConfiguration)
+     */
+    public void initializeFromMemento(String memento, ILaunchConfiguration configuration) throws CoreException {
         // TODO Auto-generated method stub
-        System.out.println("TODO : implement getSourceElement");
-        return null;
+        
+    }
+
+    /* (non-Javadoc)
+     * @see org.eclipse.debug.core.sourcelookup.IPersistableSourceLocator2#dispose()
+     */
+    public void dispose() {
+        System.err.println("Dispose kermeta source locator!");
+        // TODO Auto-generated method stub
+        
     }
 
 }

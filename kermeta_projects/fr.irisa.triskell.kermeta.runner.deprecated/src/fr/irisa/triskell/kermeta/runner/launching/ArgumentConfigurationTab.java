@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.16 2005-06-13 14:25:45 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.17 2005-06-24 17:17:51 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: GPL
@@ -28,7 +28,6 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.internal.ui.DebugPluginImages;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.ui.JavaElementLabelProvider;
@@ -79,7 +78,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     protected String classQualifiedNameString = "<No class given>";
     protected Text defaultOperationText;
     protected String defaultOperationString = "<No operation given>";
-    public KermetaUnit selectedUnit;
+   
     public IProject selectedProject;
     public int GRID_DEFAULT_WIDTH = 200;
     public IAdaptable selectedResource = null;
@@ -130,7 +129,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     /** The button to click on in order to select an operation*/
     private Button operationNameButton;
     
-    
+    // NOTE : pas mis en cause dans le OUTOFMEMORY
     public ArgumentConfigurationTab() {
         super();
         filenameString = getWorkspaceRoot().getLocation().toString();
@@ -191,7 +190,9 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
         String currentProjectPath = "";
         String storedPath = "";
         IFile selectedFile = null;
-        if (DebugUITools.getSelectedResource()!=null)
+        KermetaUnit lselectedUnit = null;
+        
+      /*  if (DebugUITools.getSelectedResource()!=null)
         {      
            IResource selr = DebugUITools.getSelectedResource();
            if (selr instanceof IFile)
@@ -199,6 +200,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
            else if (selr instanceof IProject)
                currentProjectPath = selr.getFullPath().toOSString();;
         }
+        */
 		try
 		{
 		    storedPath = configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
@@ -209,12 +211,12 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		    // (either the SelectedResource one, or the path of current configuration)*
 		    if (selectedFile != null)
 		    {
-		        selectedUnit = KermetaRunHelper.parse(selectedFile);
+		        lselectedUnit = KermetaRunHelper.parse(selectedFile);
 		    }
 		    // selectedUnit can be null : if selected file is not valid
-		    if (selectedUnit != null)
+		    if (lselectedUnit != null)
 		    {
-		        ArrayList point = KermetaRunHelper.findEntryPoint(selectedUnit);
+		        ArrayList point = KermetaRunHelper.findEntryPoint(lselectedUnit);
 		        selectedClassString = (String)point.get(0);
 		        selectedOperationString = (String)point.get(1);
 		        
@@ -240,7 +242,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		catch (Throwable e)
 		{
 		    String errorMsg = "";
-		    if (selectedUnit != null)
+		    if (lselectedUnit != null)
 	            errorMsg = Messages.getString("ArgTab.WRONGLOADUNITERROR") ;
 	        setClassEnabled(false);
 	        setOperationEnabled(false);
@@ -440,6 +442,10 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      */
     protected void handleOperationNameButtonSelected()
     {
+        IFile selectedFile = getIFileFromString(fileLocationText.getText());
+        // Recompile kermeta source code
+        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
+        
         FClassDefinition selectedFClassDef = (FClassDefinition)selectedUnit.
         getTypeDefinitionByName(
                 selectedClassString);
@@ -501,7 +507,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     protected void parseFileAndUpdateFields(String currentPath)
     {
         IFile file = getIFileFromString(currentPath);
-        selectedUnit = KermetaRunHelper.parse(file);
+        KermetaUnit selectedUnit = KermetaRunHelper.parse(file);
 	    ArrayList point = KermetaRunHelper.findEntryPoint(selectedUnit);
 	    selectedClassString = (String)point.get(0);
 	    String selectedOperationString = (String)point.get(1);
@@ -596,8 +602,17 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      */
     private void handleClassNameButtonSelected()
     {
-                
-        EList typedefs = selectedUnit.rootPackage.getFOwnedTypeDefinition();
+
+        // Reparse the selected file
+        IFile selectedFile = getIFileFromString(fileLocationText.getText());
+        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
+        
+        // Get classes of root package, and recursively of child packages
+        ArrayList typedefs = new ArrayList();
+
+        KermetaRunHelper.getRecursivePackageTypeDefs(selectedUnit.rootPackage, typedefs);
+        
+        
         // Get all the classes defined in this Unit
         ArrayList qnameList = new ArrayList(typedefs.size());
         for (int i=0; i<typedefs.size(); i++)
@@ -696,11 +711,11 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      * NOTE : do not put UI changes, otherwise, canSave() method will be called undefinitely
      */
     protected boolean validateFileLocation() {
-        if (selectedUnit == null)
+        /*if (selectedUnit == null)
         {
             setErrorMessage(Messages.getString("ArgTab.COULDNOTLOADUNITERROR"));
         	return false;
-        }
+        }*/
         if (fileLocationText.getText().equals(""))
         {
             setErrorMessage(Messages.getString("ArgTab.NOFILEERROR"));
@@ -714,4 +729,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
         setErrorMessage(null);
         return true;
     }
+    
+    
 }

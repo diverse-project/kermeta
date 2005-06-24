@@ -26,8 +26,10 @@ public class RunnerPlugin extends AbstractUIPlugin
 	//Resource context.
 	private BundleContext context;
 	
-	// The opened consoles for ConsoleManager...
+	// The opened consoles for ConsoleManager... depreceated
 	private static IConsole[] consoles;
+	
+	public static final String PLUGIN_ID="fr.irisa.triskell.kermeta.runner";
 	
 	/**
 	 * The constructor.
@@ -148,6 +150,16 @@ public class RunnerPlugin extends AbstractUIPlugin
     public IConsole[] getConsoles()
     {
         return consoles;
+    }
+
+    /**
+     * @param string
+     * @param e
+     */
+    public void logError(String string, Exception e) {
+        System.err.println(string+": "+e);
+        e.printStackTrace();
+        
     }
     
     

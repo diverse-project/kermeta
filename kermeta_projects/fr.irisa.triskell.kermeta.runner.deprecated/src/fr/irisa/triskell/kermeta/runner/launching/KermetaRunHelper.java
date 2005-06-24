@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.12 2005-06-08 15:11:00 zdrey Exp $
+/* $Id: KermetaRunHelper.java,v 1.13 2005-06-24 17:17:50 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: GPL
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
@@ -21,6 +22,7 @@ import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 
@@ -110,5 +112,17 @@ public class KermetaRunHelper {
 	    return taglist;
 	}
 	
+	/** Get and flatten recursively the classes in the given package and in the packages children */
+	public static void getRecursivePackageTypeDefs(FPackage pPackage, ArrayList pList)
+	{
+	    pList.addAll(pPackage.getFOwnedTypeDefinition());
+	    EList packages = pPackage.getFNestedPackage();
+	    for  (int i=0; i<packages.size(); i++)
+	    {
+	        pList.addAll(((FPackage)packages.get(i)).getFOwnedTypeDefinition());
+	        getRecursivePackageTypeDefs((FPackage)packages.get(i), pList);
+	    }
+	    
+	}
     
 }

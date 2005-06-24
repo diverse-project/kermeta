@@ -1,4 +1,4 @@
-/* $Id: KermetaPerspective.java,v 1.3 2005-06-10 16:00:12 zdrey Exp $
+/* $Id: KermetaPerspective.java,v 1.4 2005-06-24 17:17:53 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaPerspective.java
  * License: GPL
@@ -66,11 +66,12 @@ public class KermetaPerspective implements IPerspectiveFactory {
         
         // add shortcuts
          layout.addActionSet(IDebugUIConstants.LAUNCH_ACTION_SET);
-        layout.addActionSet("kermetaActionSet");
-        
+         
+        //layout.addActionSet("kermetaActionSet");
+       /* 
         layout.addNewWizardShortcut("fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard");
         layout.addNewWizardShortcut("fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard");
-        
+        */
         
 	}
 	
@@ -82,29 +83,5 @@ public class KermetaPerspective implements IPerspectiveFactory {
         openPerspective(IPerspectivePlugin.TEST_PERSPECTIVE_ID,
                 ResourcesPlugin.getWorkspace());
 }
-
-
-private void openPerspective(String perspId, IAdaptable input) {
-        // Get "Open Behavior" preference.
-        AbstractUIPlugin plugin = (AbstractUIPlugin)Platform.getPlugin(PlatformUI.PLUGIN_ID);
-        IPreferenceStore store = plugin.getPreferenceStore();
-        String pref = store.getString(IWorkbenchPreferenceConstants.OPEN_NEW_PERSPECTIVE);
-                        
-        // Implement open behavior.
-        try {
-                if (pref.equals(IWorkbenchPreferenceConstants.OPEN_PERSPECTIVE_WINDOW))
-                        workbench.openWorkbenchWindow(perspId, input);
-                else if (pref.equals(IWorkbenchPreferenceConstants.OPEN_PERSPECTIVE_PAGE))
-                        window.openPage(perspId, input);
-                else if (pref.equals(IWorkbenchPreferenceConstants.OPEN_PERSPECTIVE_REPLACE)) {
-                        IPerspectiveRegistry reg = workbench.getPerspectiveRegistry();
-                        window.getActivePage().setPerspective(reg.findPerspectiveWithId(perspId));
-                }
-        } catch (WorkbenchException e) {
-                e.printStackTrace();
-        }
-}
-
-	 */
-
+*/
 }

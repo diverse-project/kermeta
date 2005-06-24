@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.10 2005-06-10 15:41:45 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.11 2005-06-24 17:17:50 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -14,7 +14,9 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.PlatformObject;
 
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
@@ -32,17 +34,23 @@ import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 /**
  * 
  */
-public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate 
+public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate 
 {
     /*
      * 
      * STATIC FIELDS
      *
      */
-    public static String KM_FILENAME = "KM_FILENAME";
-    public static String KM_CLASSQNAME = "KM_CLASSQNAME";
-    public static String KM_OPERATIONNAME = "KM_OPERATIONNAME";
-    public static String KM_PROJECTNAME = "KM_PROJECTNAME";
+    public final static String KM_FILENAME = "KM_FILENAME";
+    public final static String KM_CLASSQNAME = "KM_CLASSQNAME";
+    public final static String KM_OPERATIONNAME = "KM_OPERATIONNAME";
+    public final static String KM_PROJECTNAME = "KM_PROJECTNAME";
+ 
+    public KermetaLaunchConfiguration()
+    {
+        super();
+        System.err.println("I should be created only once : KermetaLaunchConfiguration");
+    }
     
 	/**
 	 * (Eclipse doc) Launches the given configuration in the specified mode, contributing
@@ -64,31 +72,38 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	        String mode,
 	        ILaunch launch, IProgressMonitor monitor) throws CoreException {
 	    
-	    // NOTE : "final" forces a copy of the parameters, so that we are sure
-	    // that a reference of those params are not stored by the Plugin framework
+	    // NOTE : "final" forces a copy of the parameters?
 	    final ILaunchConfiguration fconfiguration = configuration;
 	    final String fmode = mode;
 	    
+	    // Get the configuration values :
+        String fileNameString = fconfiguration.getAttribute(KM_FILENAME, "");
+        String classQualifiedNameString = fconfiguration.getAttribute(KM_CLASSQNAME, "");
+        String operationString = fconfiguration.getAttribute(KM_OPERATIONNAME, "");
+        launch.setSourceLocator(new KermetaSourceLocator());
 	    try
 	    {
 	        //  If the mode choosen is Run a Kermeta run target is created
 	        if (mode.equals(ILaunchManager.RUN_MODE)) 
 	        {   
-	            
-	            //launch.setSourceLocator(new KermetaSourceLocator());
-	           
-	            KermetaRunTarget runtarget = new KermetaRunTarget(launch); 
+	            KermetaRunTarget runtarget = new KermetaRunTarget(launch);
 	            // Set the run target with current launch
 	            // Add it as a debug target
 	            launch.addDebugTarget(runtarget);
 	            // Run the launcher with configurationParam, launchParam, currentMode
-	            runKermeta(fconfiguration, fmode);
-                //runKermeta(configuration, mode);
-	            
+	            //runKermeta(fileNameString, classQualifiedNameString, operationString);
+	            /*KermetaLauncher klauncher = KermetaLauncher.getDefault();
+	            klauncher.launch(fileNameString, classQualifiedNameString, operationString);*/
+	            // Or : 
+	            //runtarget.start();
+                runKermeta(fileNameString, classQualifiedNameString, operationString);
 	            // Terminate the run target
 	            runtarget.terminate();
+	            
+	            // Try to free memory -- seems useless
 	            launch.removeDebugTarget(runtarget);
-
+	            DebugPlugin.getDefault().getLaunchManager().removeLaunch(launch);
+	    		
 	        }
 	        else
 	        {
@@ -104,6 +119,7 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
 	        System.err.println("There is a plugin error :'(");
 	        e.printStackTrace();
 	    }
+	    System.err.println("Total memory after launch terminated : "+ Runtime.getRuntime().freeMemory());
 	}
 
     /**
@@ -112,68 +128,70 @@ public class KermetaLaunchConfiguration extends LaunchConfigurationDelegate
      * @param configuration
      * @param mode
      */
-    private void runKermeta(ILaunchConfiguration configuration, String mode) {
-        try {
-            
-            
-            String fileNameString = configuration.getAttribute(KM_FILENAME, "");
-            String classQualifiedNameString = configuration.getAttribute(KM_CLASSQNAME, "");
-            String operationString = configuration.getAttribute(KM_OPERATIONNAME, "");
-           
-            IFile selectedFile = null;
-		    IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
-		    if (iresource instanceof IFile)
-		        selectedFile = (IFile) iresource;
-		    else
-		    {  // TODO : throw an exception!
-		    }
-            // Reparse file ... This is a {temporary!!} patch to get KermetaUnit of
-            // selectedFile, because it is not serializable (get a kind of Serialize error
-            // when launching performApply
-           // KermetaUnit kunit = KermetaRunHelper.parse(selectedFile);
-            KermetaConsole console = new KermetaConsole();
-            // Remove the preceding consoles
-            console.removeCurrentConsole();
-            // Add a MessageConsole
-            console.addConsole();	
-	        try
-	        {
-	            
-	            String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
-	            
-	            // 	Get the values given by the user in the runPopupDialog
-	            KermetaInterpreter interpreter = new KermetaInterpreter(uri);
-	            
-	            interpreter.setEntryPoint(classQualifiedNameString, operationString);
-	            interpreter.setKStream(console);     
-    	        interpreter.launch();
-    	
-	        }
-	        catch (KermetaRaisedException kerror)
-	        {
-	            console.print("Uncaught exception in Kermeta program\n");
-	            console.print(kerror.getMessage());
-	        }
-	        catch (KermetaInterpreterError ierror)
-	        {
-	            console.print("Uncaught exception in Kermeta interpreter:\n");
-	            console.print(ierror.getMessage());
-	        }
-	        catch (Throwable e)
-	        {
-	            console.print("\nKermetaInterpreter internal error \n" +
-	            		"-------------------------------------------\n");
-	            console.print(e.getMessage());
-	            e.printStackTrace();
-	        }
-            
-            // TODO Auto-generated method stub
-        } catch (CoreException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    private static void runKermeta(String fileNameString, String classQualifiedNameString, String operationString)
+    {
         
+        
+        IFile selectedFile = null;
+        IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
+        if (iresource instanceof IFile)
+            selectedFile = (IFile) iresource;
+        else
+        {  // TODO : throw an exception!
+        }
+        // Reparse file ... This is a {temporary!!} patch to get KermetaUnit of
+        // selectedFile, because it is not serializable (get a kind of Serialize error
+        // when launching performApply
+        // KermetaUnit kunit = KermetaRunHelper.parse(selectedFile);
+        KermetaConsole console = new KermetaConsole();
+        // Remove the preceding consoles
+        console.removeCurrentConsole();
+        // Add a MessageConsole
+        console.addConsole();
+        try
+        {
+            
+            String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
+            
+            // 	Get the values given by the user in the runPopupDialog
+    	    
+            KermetaInterpreter interpreter = new KermetaInterpreter(uri);
+            interpreter.setEntryPoint(classQualifiedNameString, operationString);
+            
+            interpreter.setKStream(console);     
+            
+            interpreter.launch();
+            
+        }
+        catch (KermetaRaisedException kerror)
+        {
+            console.print("Uncaught exception in Kermeta program\n");
+            console.print(kerror.getMessage());
+        }
+        catch (KermetaInterpreterError ierror)
+        {
+            console.print("Uncaught exception in Kermeta interpreter:\n");
+            console.print(ierror.getMessage());
+        }
+        catch (Throwable e)
+        {
+            console.print("\nKermetaInterpreter internal error \n" +
+            "-------------------------------------------\n");
+            console.print(e.getMessage());
+            e.printStackTrace();
+        }       
     }
+    
+	/**
+	 * Convenience method to get the launch manager.
+	 * 
+	 * @return the launch manager
+	 */
+	protected ILaunchManager getLaunchManager()
+	{
+		return DebugPlugin.getDefault().getLaunchManager();
+	}
+
 	
 
 }
