@@ -79,7 +79,7 @@ public class String {
 	}
 
 	public static void setValue(RuntimeObject str, java.lang.String value) {
-		str.getData().put("StringValue", value);
+	    str.getData().put("StringValue", value.replaceAll("\\\\", ""));
 	}
 	
 	public static java.lang.String getValue(RuntimeObject str) {
