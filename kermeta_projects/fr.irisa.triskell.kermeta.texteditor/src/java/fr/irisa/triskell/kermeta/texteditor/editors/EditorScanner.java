@@ -14,6 +14,7 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.IWhitespaceDetector;
 import org.eclipse.jface.text.rules.IWordDetector;
 import org.eclipse.jface.text.rules.MultiLineRule;
+import org.eclipse.jface.text.rules.PatternRule;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
@@ -79,7 +80,7 @@ public class EditorScanner extends RuleBasedScanner {
 	 */
 	private void createRuleForLiterals() {
 		IToken stringToken = new Token(new TextAttribute(LIGHT_BLUE));
-		rules.add(new SingleLineRule("\"", "\"", stringToken));
+		rules.add(new PatternRule("\"", "\"", stringToken, '\\', true));
 	}
 
 	/**
