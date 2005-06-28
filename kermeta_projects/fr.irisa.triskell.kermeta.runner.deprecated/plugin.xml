@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta.runner"
    name="Runner Plug-in"
-   version="0.0.10"
+   version="0.0.11"
    provider-name="INRIA/IRISA"
    class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
 
@@ -239,5 +239,8 @@
                id="PopupKermetaLaunchShortCut"/>
 -->
       </extension>
+     <extension
+           point="org.eclipse.ui.importWizards">
+     </extension>
 
 </plugin>

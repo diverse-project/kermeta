@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.1 2005-06-23 14:37:21 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.2 2005-06-28 09:40:39 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -176,7 +176,8 @@ public class KermetaLaunchConfiguration_JVM_200521061432 extends AbstractJavaLau
 	    String workingDirName = null;
 	    if (workingDir != null) 
 	        workingDirName = workingDir.getAbsolutePath();
-	    
+	    // TODO : get some props.
+	    // System.getProperties("java.library.path");
 	    // Program & VM args
 	    String vmArgs= getVMArguments(configuration);
 	    System.out.println("vmArgs : "+vmArgs);
