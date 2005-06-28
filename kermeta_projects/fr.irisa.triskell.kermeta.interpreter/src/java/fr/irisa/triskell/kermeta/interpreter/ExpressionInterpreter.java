@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.13 2005-06-17 12:44:07 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.14 2005-06-28 09:38:05 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -46,6 +46,7 @@ import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.behavior.FVoidLiteral;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -56,15 +57,18 @@ import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.structure.FTypedElement;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
+import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -375,7 +379,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    RuntimeObject result = new RuntimeLambdaObject(node, memory.getROFactory(),this.interpreterContext.peekCallFrame(), this.interpreterContext);
 	    return result;
 	}
-	
 	
 	
 	/**
@@ -855,6 +858,10 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    // Get the qualified name of this class
 	    String qname = memory.getUnit().getQualifiedName(node);
 	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
+	    
+	    //
+	    
+	    
 	    //node.getFOwnedOperation().
 	    // Set the attribute self_object of current frame, so that we can manipulate it
 	    return result;
