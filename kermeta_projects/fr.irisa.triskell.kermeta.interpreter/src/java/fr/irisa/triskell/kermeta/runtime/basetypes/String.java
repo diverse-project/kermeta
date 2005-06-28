@@ -79,7 +79,11 @@ public class String {
 	}
 
 	public static void setValue(RuntimeObject str, java.lang.String value) {
-	    str.getData().put("StringValue", value.replaceAll("\\\\", ""));
+	    // FIXME : patch until we know how to use regexp in java...
+	    value = value.replaceAll("\\\\n","__newline__");
+	    value = value.replaceAll("\\\\", "");
+	    value = value.replaceAll("__newline__","\n");
+	    str.getData().put("StringValue", value);
 	}
 	
 	public static java.lang.String getValue(RuntimeObject str) {
