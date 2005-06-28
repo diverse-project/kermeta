@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.8 2005-06-09 17:49:06 ffleurey Exp $
+/* $Id: RuntimeMemory.java,v 1.9 2005-06-28 09:37:04 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeMemory.java
  * License: GPL
@@ -8,6 +8,8 @@
  * Authors: zdrey
  */
 package fr.irisa.triskell.kermeta.builder;
+
+import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -70,6 +72,12 @@ public class RuntimeMemory {
     
     public int getNumberOfObjectCached() {
         return memoryLoader.getNumberOfObjectCached();
+    }
+    
+    /** Zoe temp accessor */
+    public Hashtable getRuntimeObjects()
+    {
+        return memoryLoader.getRuntimeObjects();
     }
     
     public void clearFObjectFromCache(FObject object)

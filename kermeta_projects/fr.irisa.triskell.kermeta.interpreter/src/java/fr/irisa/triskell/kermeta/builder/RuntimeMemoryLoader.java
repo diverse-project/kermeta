@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.6 2005-06-24 17:55:48 zdrey Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.7 2005-06-28 09:37:03 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : newRuntimeLoader.java
 * License : GPL
@@ -287,7 +287,9 @@ import fr.irisa.triskell.kermeta.structure.FTypedElement;
 	    // Initial "computation"
 	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(getEQualifiedName(kcoreObject.eClass()));
 	    
-	    // Test/Experimental : does node belongs to kermeta::reflection::package?
+	    // Does node belongs to kermeta::reflection, and inherited in kermeta::language::structure?
+	    // If so, we need the concrete class! -- TODO : adapt this for RuntimeObjects that "wrap"
+	    // other elements than Kermeta ones
 	    String fname = qname.substring(qname.lastIndexOf(":")+1, qname.length());
 	    fname = "kermeta::language::structure::"+fname;
 	    if (qname.startsWith("kermeta::reflection") && unit.getTypeDefinitionByName(fname)!=null)
