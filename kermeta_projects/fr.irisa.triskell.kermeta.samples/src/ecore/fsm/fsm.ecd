@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="fsm" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#/" metadata="emf-1.0" initialized="true" tag="5" key="32303034303731392066722E69726973612E747269736B656C6C2E6B65726D6574612E73616D706C6573">
+  <children xsi:type="editmodel:ClassEditModel" name="FSM" location="141,210" size="79,186" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//FSM" runTimeClassModel=" reset(), run()">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="56,36">
+      <children xsi:type="editmodel:MethodEditModel" name="run" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//FSM/run">
+        <model href="fsm.ecore#//FSM/run"/>
+      </children>
+      <children xsi:type="editmodel:MethodEditModel" name="reset" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//FSM/reset">
+        <model href="fsm.ecore#//FSM/reset"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan" autoLocated="true">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="79,100" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="initialState" location="0,65" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//FSM/initialState" multiplicityLabel="//@children.0/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="initialState" location="285,289" size="49,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="327,317" size="7,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="fsm.ecore#//FSM/initialState"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.1/@children.1" sourceEnd="//@children.0/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="owningFSM" location="78,12" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//State/owningFSM" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.1/@children.0/@children.1" roleLabel="//@children.0/@sourceConnections.1/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="owningFSM" location="227,201" size="58,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="227,229" size="7,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <model href="fsm.ecore#//State/owningFSM"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedState" location="96,0" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//FSM/ownedState" multiplicityLabel="//@children.0/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.1/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="ownedState" location="444,224" size="60,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..*" location="413,224" size="17,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="fsm.ecore#//FSM/ownedState"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.2/@children.1" sourceEnd="//@children.0/@sourceConnections.2/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="78,58" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="currentState" location="0,21" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//FSM/currentState" multiplicityLabel="//@children.0/@sourceConnections.2/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.2/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="currentState" location="273,245" size="61,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="315,273" size="19,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="fsm.ecore#//FSM/currentState"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.3/@children.1" sourceEnd="//@children.0/@sourceConnections.3/@children.0" connectionRouterKind="Manhattan" autoLocated="true">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,20" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="serializer" location="86,103" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//FSM/serializer" multiplicityLabel="//@children.0/@sourceConnections.3/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.3/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="serializer" location="64,160" size="45,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="123,160" size="19,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="fsm.ecore#//FSM/serializer"/>
+      </children>
+    </sourceConnections>
+    <model href="fsm.ecore#//FSM"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.3" name="Main" location="30,50" size="106,103" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//Main" runTimeClassModel=" printFSM(), main(), createFSM()">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="83,54">
+      <children xsi:type="editmodel:MethodEditModel" name="createFSM" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//Main/createFSM">
+        <model href="fsm.ecore#//Main/createFSM"/>
+      </children>
+      <children xsi:type="editmodel:MethodEditModel" name="main" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//Main/main">
+        <model href="fsm.ecore#//Main/main"/>
+      </children>
+      <children xsi:type="editmodel:MethodEditModel" name="printFSM" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//Main/printFSM">
+        <model href="fsm.ecore#//Main/printFSM"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <model href="fsm.ecore#//Main"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.1 //@children.0/@sourceConnections.0 //@children.0/@sourceConnections.2" name="State" location="341,245" size="109,131" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//State" runTimeClassModel=" step(c: EString),name">
+    <children xsi:type="editmodel:CompartmentEditModel" size="86,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="name" location="10,11" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//State/name">
+        <model href="fsm.ecore#//State/name"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="52,18">
+      <children xsi:type="editmodel:MethodEditModel" name="step" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//State/step">
+        <model href="fsm.ecore#//State/step"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.2" target="//@children.3" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="source" location="109,35" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//Transition/source" attachSource="true" multiplicityLabel="//@children.2/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.2/@sourceConnections.0/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="source" location="457,259" size="35,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="457,287" size="7,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <model href="fsm.ecore#//Transition/source"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="outgoingTransition" location="0,45" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//State/outgoingTransition" multiplicityLabel="//@children.2/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.2/@sourceConnections.0/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="outgoingTransition" location="560,259" size="89,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..*" location="632,287" size="17,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="fsm.ecore#//State/outgoingTransition"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.2" target="//@children.3" targetEnd="//@children.2/@sourceConnections.1/@children.1" sourceEnd="//@children.2/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="target" location="109,72" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//Transition/target" attachSource="true" multiplicityLabel="//@children.2/@sourceConnections.1/@children.0/@children.1" roleLabel="//@children.2/@sourceConnections.1/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="target" location="457,296" size="29,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="457,324" size="7,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <model href="fsm.ecore#//Transition/target"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="incomingTransition" location="0,82" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//State/incomingTransition" multiplicityLabel="//@children.2/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.2/@sourceConnections.1/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="incomingTransition" location="559,296" size="90,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="630,324" size="19,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="fsm.ecore#//State/incomingTransition"/>
+      </children>
+    </sourceConnections>
+    <model href="fsm.ecore#//State"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.0 //@children.2/@sourceConnections.1" name="Transition" location="656,235" size="113,111" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//Transition" runTimeClassModel="input, fire(): EString,output">
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="input" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//Transition/input">
+        <model href="fsm.ecore#//Transition/input"/>
+      </children>
+      <children xsi:type="editmodel:AttributeEditModel" name="output" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//Transition/output">
+        <model href="fsm.ecore#//Transition/output"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="47,18">
+      <children xsi:type="editmodel:MethodEditModel" name="fire" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//Transition/fire">
+        <model href="fsm.ecore#//Transition/fire"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <model href="fsm.ecore#//Transition"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="NonDeterminism" location="451,119" size="148,29" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//NonDeterminism" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.5/@sourceConnections.0" source="//@children.4" target="//@children.6" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="74,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="67,29" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <model href="fsm.ecore#//NonDeterminism"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="NoTransition" location="629,119" size="123,29" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//NoTransition" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.5" target="//@children.4/@sourceConnections.0" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="61,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="134,14"/>
+    </sourceConnections>
+    <model href="fsm.ecore#//NoTransition"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0" name="FSMException" location="540,40" size="134,29" id="platform:/resource/fr.irisa.triskell.kermeta.samples/src/ecore/fsm/fsm.ecore#//FSMException" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <model href="fsm.ecore#//FSMException"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <model href="fsm.ecore#/"/>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="10,10" gridOrigin="0,0" rulerUnit="pixel">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:EMFClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true"/>
+</editmodel:ClassDiagramEditModel>
