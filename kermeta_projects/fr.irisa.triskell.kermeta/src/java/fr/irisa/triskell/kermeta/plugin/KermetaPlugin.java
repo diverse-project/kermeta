@@ -1,11 +1,9 @@
 package fr.irisa.triskell.kermeta.plugin;
 
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -22,6 +20,8 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	 * The constructor.
 	 */
 	public KermetaPlugin() {
+		/*note : be careful this method must not fail ! otherwise all the plugin that depends on it will fail too with a non explicit message !
+		 */
 		super();
 		plugin = this;
 		try {
@@ -33,16 +33,20 @@ public class KermetaPlugin extends AbstractUIPlugin {
 
 	/**
 	 * This method is called upon plug-in activation
-	 */
+	 * */
+	 
 	public void start(BundleContext context) throws Exception {
+		/*note : be careful this method must not fail ! otherwise all the plugin that depends on it will fail too with a non explicit message !
+		 */
 		super.start(context);
 
 		// initialize the log4j system using the configuration file contained in this plugin
-		URL url = getBundle().getEntry("/kermeta_log4j_configuration.xml");		
 		try {
+			URL url = getBundle().getEntry("/kermeta_log4j_configuration.xml");		
 			System.setProperty(fr.irisa.triskell.kermeta.util.LogConfigurationHelper.DefaultKermetaConfigurationFilePropertyName,
 					Platform.asLocalURL(url).getFile());
-		} catch (IOException e) {
+		} catch (Exception e) {
+			System.out.print("Not able to retreive kermeta_log4j_configuration.xml in the kermeta plugin => using default log configuration");
 			// don't worry about that, the log4j will simply use its default configuration
 		}
 	}
