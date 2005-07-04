@@ -17,8 +17,11 @@ class Main
         bpp.initialize()
         
         // The class to visit
-//        var kmlogo : kmLogo::semanticDomain::Turtle init kmLogo::semanticDomain::Turtle.new
-        var kmlogo : kmLogo::actions::Main init kmLogo::actions::Main.new
+        var kmlogo : AClass init AClass.new
+    //    var kmlogo : kmLogo::semanticDomain::Turtle init kmLogo::semanticDomain::Turtle.new
+		// parameters not displayed...
+     //   var kmlogo : kmLogo::actions::Main init kmLogo::actions::Main.new
+ //       var kmlogo : kmLogo::actions::PrettyPrinter init kmLogo::actions::PrettyPrinter.new
 
         // The class do visit
         // var visitable : AClass init AClass.new
@@ -31,10 +34,11 @@ class Main
 		// Print a class definition
 		var c : kermeta::language::structure::ClassDefinition 
 	    var mc : kermeta::language::structure::Class
-	    mc ?= kmlogo.getMetaClass
+	    mc ?= kmlogo.getMetaClass  
 	    c ?= mc.classDefinition
 	    
-		p ?= c.container
+//		p ?= c.container
+		
 		stdio.write(c.acceptKMStructureVisitor(bpp, 0))
 		 
 /*		var res : kermeta::standard::String init bpp.visitClassDefinition(c,"")
@@ -51,12 +55,17 @@ class VisitableClass inherits kermeta::language::structure::KMStructureVisitable
 	end
 }*/
 
+ 
 /** Comment for 'aclass' */
 class AClass  inherits AbstractAClass
 {
 	attribute a : kermeta::standard::String
+	/** dsfsdf*/
 	operation initialize() is do
 		a :=  "initialized a"
+		if (a == "toto") then	
+			stdio.writeln("salut toto")
+		end
 	end
 	
 	operation testTypedOperation<E>() is do

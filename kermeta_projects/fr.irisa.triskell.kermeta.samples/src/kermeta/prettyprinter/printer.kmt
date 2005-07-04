@@ -1,10 +1,17 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/*
- * Date : 
+/* $Id: printer.kmt,v 1.2 2005-07-04 14:37:29 zdrey Exp $
+ * Project : Kermeta samples
+ * File : printer.kmt
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jul 04, 2005
+ * Authors : 
+ *  Zoe Drey 		zdrey@irisa.fr
  * 
- * TODO : 
- *    - separate in two files the expression visitor and the structure visitor
+ * Notes : 
+ *   This is a Kermeta transcription of the KM2KMTPrettyPrinter written in Java
  */
 
 package kermeta::utils;
@@ -53,7 +60,8 @@ class BasicPrettyPrinter inherits
     end
     
     method visitMultiplicityElement(node : MultiplicityElement, context : Integer) : String is do
-	    result := "multi" 
+	    result := "" 
+		// Visit never go there...
     end
     
     /**
@@ -62,16 +70,16 @@ class BasicPrettyPrinter inherits
 	method visitOperation(node : Operation, context : Integer) : String is do
 		result := ""
 		result.append(indent)
-		// result = ppTags(node.getFTag());
+		result.append(visitTagSet(node.tag, context))
 		if (node.superOperation != void) then result.append( "method ")
-		else result.append("operation ")
+		else result.append("operation ") 
 		end
 		// node name
 		result.append( node.name)
 		// type parameters of operation
 		if (node.typeParameter.size() > 0) then
 			result.append( "<")
-			result.append( pp.ppTypeVariableDeclaration(node.typeParameter))
+			result.append( self.visitTypeVariableSet(node.typeParameter, context))
 			result.append( ">")
 		end
 		// arguments
@@ -108,7 +116,8 @@ class BasicPrettyPrinter inherits
 	end
 	
 	method visitTag(node : Tag, context : Integer) : String is do 
-	    result := "" 
+	    result := ""
+	    result.append(indent + "@" + node.name + " \"" + node.value + "\"")
 	end
 	
 	/**
@@ -183,15 +192,12 @@ class BasicPrettyPrinter inherits
 		
 		
 		if (node.typeParameter.size > 0) then
-			//result.append("<"+pp.ppTypeVariableDeclaration(node.typeParameter)+">")
+			result.append("<"+self.visitTypeVariableSet(node.typeParameter, context)+">")
 		end
 		
 		if (node.superType.size > 0) then
 			result.append(" inherits ")
-			// need a cast...S
-			// FIXME : not sure self.works (not param types)
 			result.append(self.visitSet(node.superType, context, ", "))
-			//result.append(self.basicVisitSet(node.superType, context, ", ", ""))
 		end
 		
 		// print the attributes
@@ -210,19 +216,23 @@ class BasicPrettyPrinter inherits
 	end
 	
 	method visitTypeVariable(node : TypeVariable, context : Integer) : String is do
-		result := "[type variable]"
+		result := pp.ppIdentifier(node.name)
 	end
 	
 	method visitProductType(node : ProductType, context : Integer) : String is do
-		result := "[product type]"
+		result := "[" + visitSet(node.type, context, ", ") + "]"
 	end
 	
 	method visitFunctionType(node : FunctionType, context : Integer) : String is do
-		result := "[function type]"
+		result := "< " + self.accept(node.left, context) + "->" + self.accept(node.right, context)
 	end
 	
+	/**
+	 * Parent visit method for "Type" instances, it should be a more tidy visitor,
+	 * with no "isInstance" tests...
+	 */ 
 	method visitType(node : Type, context : Integer) : String is do
-		result := node.toString
+		result := node.toString 
 	end
 	
 	method visitTypeVariableBinding(node : TypeVariableBinding, context : Integer) : String is do
@@ -273,7 +283,7 @@ class BasicPrettyPrinter inherits
 	end
 	
 	method visitVoidType(node : VoidType, context : Integer) : String is do
-		result := "void"
+		result := "Void"
 	end
 	
 	method visitDataType(node : DataType, context : Integer) : String is do
@@ -281,17 +291,40 @@ class BasicPrettyPrinter inherits
 	end
 	
 	method visitEnumeration(node : Enumeration, context : Integer) : String is do
-		result := "[enum]"
+		result := ""
+		if (typedef == true) then
+			typedef := false
+			result.append("enumeration " + pp.ppIdentifier(node.name) + "\n")
+			result.append( indent + "{\n")
+			pushIndent()
+			result.append( self.accept(node.ownedLiteral, context)) 
+			popIndent() 
+			result.append( indent + "}")
+			typedef := true
+		
+		else 
+			var qname : String init getQualifiedName(node)
+			var name : String init pp.ppIdentifier(node.name)
+			result := qname
+		end
 	end
 	
 	method visitEnumerationLiteral(node : EnumerationLiteral, context : Integer) : String is do
-		result := "[enum literal]"
+		result := ""
+		result := pp.ppIdentifier(node.name) + ";"
 	end
 	
 	method visitParameter(node : Parameter, context : Integer) : String is do
 		result := "[param]"
     end
     
+    
+    /**
+     * Helper
+    */
+    operation getQualifiedName(node : Object) : String is do
+    	result := node.getMetaClass.classDefinition.qualifiedName
+    end
     
     /*
      *
@@ -333,25 +366,27 @@ class BasicPrettyPrinter inherits
 	end
 	
 	method visitCallFeature(node : CallFeature, context : Integer) : String is do
-		result := ""
-		if (node.target != void) then result.append( self.accept(node.target, context))
-		else result.append( "self") end
+		result := "" 
+		if (node.target != void) then 
+			result.append( self.accept(node.target, context))
+		else
+			result.append( "self")
+		end
+		
 		result.append( "." + node.name)
 		// handle the special case where there is 1 parameter, and when This
 		// parameter is a lambdaPostFix
-		//	TODO : throw an exception if type is not a LambdaExpression
-		if (node.parameters.size==1) then
-			if (LambdaExpression.isInstance(node.parameters.one )) then
-		   		result.append(self.visitExpressionSet(node.parameters, context, ", "))
-			end
+		if (node.parameters.size==1 and LambdaExpression.isInstance(node.parameters.one )) then
+	   		result.append(self.visitExpressionSet(node.parameters, context, ", "))
 		// the classic case : a list of parameters
 		else 
 			if (node.parameters.size> 0) then
 				result.append( "(" + self.visitExpressionSet(node.parameters, context, ", ")+ ")")
-			end
+			end 
 		end
-		
-//		rescue kermeta::exceptions::EmptyCollection 
+		rescue kermeta::exceptions::EmptyCollection 
+			// DO nothing : this case is protected by the above condition
+
 	end
 	
 	method visitCallSuperOperation(node : CallSuperOperation, context : Integer) : String is do
@@ -375,6 +410,8 @@ class BasicPrettyPrinter inherits
 			result.append(self.accept(node.thenBody, context) + "\n")
 		end
 		popIndent()
+		// TODO : this condition is not perfect : elseBody is in fact never void, even if
+		// there is no ;..body in elseBody....
 		if (node.elseBody != void) then
 			result.append( indent + "else\n")
 			pushIndent()
@@ -431,15 +468,25 @@ class BasicPrettyPrinter inherits
 	end 
 	
 	method visitRaise(node : Raise, context : Integer) : String is do
-		result := "raise"
+		result := "raise " + self.accept(node.expression, context)
 	end
 	
 	method visitRescue(node : Rescue, context : Integer) : String is do 
-		result := "rescue"
+		result := "rescue "
+		if (node.exceptionName != void) then
+			result.append( "(" + node.exceptionName + " : " + self.accept(node.exceptionType, context) + ")")
+		end
+		result.append("\n")
+		pushIndent()
+		result.append(self.visitExpressionSet(node.body, context, "\n"+indent))
+		popIndent()
 	end
 	
 	method visitJavaStaticCall(node : JavaStaticCall, context : Integer) : String is do 
-		result := "[extern]"
+		result := "extern "
+		result.append(node.jclass + "." + node.jmethod + "(")
+		result.append(self.visitExpressionSet( node.parameters, context, ", "))
+		result.append(")")
 	end
 	
 	method visitLambdaExpression(node : LambdaExpression, context : Integer) : String is do 
@@ -536,10 +583,11 @@ class BasicPrettyPrinter inherits
 		from var it : Iterator<kermeta::reflection::Parameter> init pset.iterator
 		until it.isOff
 		loop
-			var next : Parameter
-			next ?= it.next
+			var inext : Parameter
+			inext ?= it.next
+	    	//stdio.write("-->" + inext.toString)
 			// TODO : a real visit..
-			result.append(next.name)
+			result.append(inext.name)
 //			result.append(self.accept(cnext, context))
 			if (it.hasNext) then
 				result.append(", ")
@@ -559,46 +607,52 @@ class BasicPrettyPrinter inherits
 		from var it : Iterator<kermeta::reflection::TypeVariableBinding> init pset.iterator
 		until it.isOff
 		loop
-			var next : TypeVariableBinding
-			next ?= it.next
-			result.append(self.accept(next, context))
+			var cnext : TypeVariableBinding  
+			cnext ?= it.next
+			result.append(self.accept(cnext, context))
 			if (it.hasNext) then
 				result.append(", ")
 			end
 		end
     end
-   
-      /**
-     * Visit a set that contains visitable elements
-     * @param pset : the set to visit
-     * @param context : the context attached to self.visitor
-     * @param Indent : the indentation (can be an empty string)
-     * @param sep : the separator for the printed set
-    */
-    operation basicVisitSet<T>(
-    	pset : Set<T>, 
-    	context : Integer,
-    	sep : String,
-    	prefix : String) : String is do
-    	
+    
+    /** Prettyprints tags -- todo : define a generic parametric method!!! */
+    operation visitTagSet( tags : Set<kermeta::reflection::Tag>, context : Integer) : String is do
     	result := ""
-		from var it : Iterator<T> init pset.iterator
+		var it : Iterator<kermeta::reflection::Tag> init tags.iterator
+		from var it : Iterator<kermeta::reflection::Tag> init tags.iterator
 		until it.isOff
 		loop
-			var next : T init it.next
-			result.append(next.toString) 
-			if (it.hasNext) then
-				result.append(sep)
-			end
+			var next : Tag
+			next ?= it.next
+			result.append(self.accept(next, context))
+			result.append("\n"+indent)
 		end
     end
+    
+    
+    /** Pretty prints a set of TypeVariables, separated by a comma */
+	operation visitTypeVariableSet(tparams : Set<kermeta::reflection::TypeVariable>, context : Integer) : String is do
+		result := ""
+		var it : Iterator<kermeta::reflection::TypeVariable> init tparams.iterator
+		from var it : Iterator<kermeta::reflection::TypeVariable> init tparams.iterator
+		until it.isOff
+		loop
+			var next : TypeVariable 
+			next ?= it.next
+			result.append(next.name)
+			if (it.hasNext) then
+				result.append(", ")
+			end
+		end
+	end
+
     
     /**
      * Visit a set that contains elements that 
      * : kermeta::language::structure::KMStructureVisitable
      */
     operation visitFeatures<T : kermeta::language::structure::KMStructureVisitable>(pset : Set<T>,	context : Integer) : String is do
-   	// basicVisitSet()
     	result := ""
 		from var it : Iterator<T> init pset.iterator
 		until it.isOff
@@ -664,7 +718,9 @@ class BasicPrettyPrinter inherits
 }
 
 /**
- * Provides a set of methods that help the pretty printer
+ * Provides a set of methods that help the pretty printer.
+ * Greatly inspired from KM2KMTPrettyPrinter : 
+ * TODO : add all the equivalent methods of KM2KMTPrettyPrinter would be great!
  */
 class PrintHelper 
 {
@@ -683,28 +739,13 @@ class PrintHelper
 			 result := result + name
 		
 		else
-			result := "grezlzieuds"
+			result := name
 		end
 	end
 	
-	/** Pretty prints a set of TypeVariables, separated by a comma */
-	operation ppTypeVariableDeclaration(tparams : Set<kermeta::reflection::TypeVariable>) : String is do
-		result := ""
-		var it : Iterator<kermeta::reflection::TypeVariable> init tparams.iterator
-		from var it : Iterator<kermeta::reflection::TypeVariable> init tparams.iterator
-		until it.isOff
-		loop
-			var next : TypeVariable 
-			next ?= it.next
-			result.append(next.name)
-			if (it.hasNext) then
-				result.append(", ")
-			end
-		end
-	end
-	
+	/** FIXME : impletment this correctly */
 	operation ppIdentifier(name : String) : String is do
-		result := ""
+		result := name
 	end
 	
 	operation ppTypeFromMultiplicityElement(elem : kermeta::reflection::MultiplicityElement) : String is do
@@ -734,15 +775,5 @@ class PrintHelper
 	
 	end
 	
-	operation ppComaSeparatedNode<T>(pset : Set<T>, context : Integer) : String is do
-		result := ""
-		from var it : Iterator<T> init pset.iterator
-		until it.isOff
-		loop
-			var next : T init it.next
-			//result.append( self.accept(next, context) )
-		end
-	end
-
 }
 
