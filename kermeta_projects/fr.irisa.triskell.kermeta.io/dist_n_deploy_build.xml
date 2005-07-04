@@ -1,4 +1,4 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.5 2005-05-20 13:06:14 zdrey Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.6 2005-07-04 14:55:48 zdrey Exp $ -->
 <project name="kermeta_io" default="all" basedir=".">
 	
 	<description>
@@ -29,10 +29,8 @@
 	</target>
 	<target name="deploy" 
 		description="deploy the jar file">
-		<copy file="${kermeta.io.jar}" todir="../fr.irisa.triskell.kermeta.texteditor/lib/"/>
-		<copy file="${kermeta.io.jar}" todir="../fr.irisa.triskell.kermeta.interpreter/lib/"/>
-		<copy file="${kermeta.io.jar}" todir="../fr.irisa.triskell.kermeta.framework/lib/"/>
-		<copy file="${kermeta.io.jar}" todir="../fr.irisa.triskell.kermeta.runner/lib/"/>
+		<copy file="${kermeta.io.jar}" todir="../fr.irisa.triskell.kermeta/lib/"/>
+
 	</target>
 	
 <!--	<target name="create_km" 
