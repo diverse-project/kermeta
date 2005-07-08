@@ -1,5 +1,6 @@
 package kermeta::language::structure; 
 
+
 require "../Standard.kmt"
 require "behavior.kmt" 
 
@@ -59,8 +60,14 @@ alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
 class Class inherits Type, kermeta::reflection::Class, KMStructureVisitable
 {
-	method new() : kermeta::reflection::Object from kermeta::reflection::Class is do
+	method new() : kermeta::reflection::Object from kermeta::reflection::Class is 
+	do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)
+	end
+
+	method clone(objectToClone : Object) : Object is
+	do
+		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.cloneObject(self, objectToClone)
 	end
 	
 	method isInstance(object : Object) : Boolean is do
@@ -155,6 +162,9 @@ class Type inherits Object, kermeta::reflection::Type, KMStructureVisitable
 		//TODO: implement operation isInstance
 	end
 */
+
+	operation clone(objectToClone : Object) : Object is abstract
+
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitType(self, context)
@@ -170,10 +180,14 @@ class TypeVariableBinding inherits TypeContainer, Object, kermeta::reflection::T
 class PrimitiveType inherits TypeContainer, DataType, kermeta::reflection::PrimitiveType, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitPrimitiveType(self, context)
-		end
+	do
+		result := visitor.visitPrimitiveType(self, context)
+	end
+			
+	method clone(objectToClone : Object) : Object is abstract		
+
 }
+
 class NamedElement inherits Object, kermeta::reflection::NamedElement, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
@@ -181,6 +195,7 @@ class NamedElement inherits Object, kermeta::reflection::NamedElement, KMStructu
 			result := visitor.visitNamedElement(self, context)
 		end
 }
+
 class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
@@ -215,6 +230,9 @@ class DataType inherits TypeDefinition, Type, kermeta::reflection::DataType, KMS
 		do
 			result := visitor.visitDataType(self, context)
 		end
+	
+	method clone(objectToClone : Object) : Object is abstract
+	
 }
 class Enumeration inherits DataType, kermeta::reflection::Enumeration, KMStructureVisitable
 {
@@ -222,7 +240,13 @@ class Enumeration inherits DataType, kermeta::reflection::Enumeration, KMStructu
 		do
 			result := visitor.visitEnumeration(self, context)
 		end
+
+	method clone(objectToClone : Object) : Object is
+	do
+		result := extern fr::irisa::triskell::kermeta::runtime::language::Enumeration.cloneObject(self, objectToClone)
+	end
 }
+
 class EnumerationLiteral inherits NamedElement, kermeta::reflection::EnumerationLiteral, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
