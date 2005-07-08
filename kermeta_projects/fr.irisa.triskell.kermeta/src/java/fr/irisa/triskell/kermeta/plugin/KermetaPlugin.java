@@ -1,8 +1,11 @@
 package fr.irisa.triskell.kermeta.plugin;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
+
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 import java.net.URL;
 import java.util.*;
@@ -15,6 +18,10 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	private static KermetaPlugin plugin;
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
+	
+//	 logger for this plugin
+	static protected Logger pluginLog;
+	
 	
 	/**
 	 * The constructor.
@@ -83,5 +90,14 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	 */
 	public ResourceBundle getResourceBundle() {
 		return resourceBundle;
+	}
+	
+	/**	 
+	 * @return Logger : a log4j logger
+	 */
+	public static Logger getLogger()
+	{
+		if(pluginLog == null) pluginLog = LogConfigurationHelper.getLogger("Kermeta");
+		return pluginLog;
 	}
 }
