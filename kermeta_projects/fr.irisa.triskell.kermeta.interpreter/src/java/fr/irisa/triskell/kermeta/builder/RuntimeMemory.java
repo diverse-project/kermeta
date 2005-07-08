@@ -1,11 +1,11 @@
-/* $Id: RuntimeMemory.java,v 1.9 2005-06-28 09:37:04 zdrey Exp $
- * Project: Kermeta (First iteration)
+/* $Id: RuntimeMemory.java,v 1.10 2005-07-08 12:21:50 dvojtise Exp $
+ * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 11, 2005
- * Authors: zdrey
+ * Authors: zdrey, ffleurey, dvojtise
  */
 package fr.irisa.triskell.kermeta.builder;
 
@@ -58,7 +58,16 @@ public class RuntimeMemory {
     
     protected void finalize() throws Throwable {
         super.finalize();
-        System.err.println("FINALIZE MEMORY");
+        KermetaUnit.internalLog.debug("FINALIZE RuntimeMemory ...");
+    }
+    /**
+     * remove as much ref as possible for helping garbage collector
+     *
+     */
+    public void freeJavaMemory()
+    {
+    	roFactory = null;
+    	unit = null;
     }
     
     public void loadKCoreRuntimeObject(KCoreRuntimeObject obj) {

@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.10 2005-06-08 15:19:35 zdrey Exp $
+/* $Id: KermetaInterpreter.java,v 1.11 2005-07-08 12:21:50 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : GPL
@@ -50,7 +50,7 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  */
 public class KermetaInterpreter {
 	
-	/** Logger to get the error of this launcher */
+	/** Logger to get the error of this interpreter */
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
 	
 	// The entry class
@@ -113,7 +113,13 @@ public class KermetaInterpreter {
 	
     protected void finalize() throws Throwable {
         super.finalize();
-        System.err.println("FINALIZE INTERPRETER");
+        internalLog.debug("FINALIZE INTERPRETER ...");
+        // clear as much ref as possible
+        entryClass = null;
+        entryOperation = null;
+        entryParameters = null;
+        unit = null;
+        memory = null;
     }
 	/**
 	 * Check that the KermetaUnit does not contain errors
@@ -234,5 +240,19 @@ public class KermetaInterpreter {
     }
     public KermetaUnit getUnit() {
         return unit;
+    }
+    /**
+     * release as much references as possible for garbage collector
+     *
+     */
+    public void freeJavaMemory()
+    {
+    	KermetaUnitFactory.getDefaultLoader().unloadAll();
+	    unit = null;
+	    memory.freeJavaMemory();
+	    memory = null;
+	    entryClass = null;
+	    entryOperation = null;
+	    entryParameters = null;
     }
 }

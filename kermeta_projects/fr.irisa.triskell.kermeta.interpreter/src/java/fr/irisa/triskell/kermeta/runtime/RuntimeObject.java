@@ -1,7 +1,7 @@
-/* $Id: RuntimeObject.java,v 1.6 2005-06-09 17:49:17 ffleurey Exp $
+/* $Id: RuntimeObject.java,v 1.7 2005-07-08 12:21:50 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 14, 2005
@@ -90,6 +90,12 @@ public class RuntimeObject {
         }
         
         super.finalize();
+        // clear as much ref as possible
+        container = null;
+        metaclass = null;
+        properties = null;
+        data = null;
+        factory = null;
     }
     
     

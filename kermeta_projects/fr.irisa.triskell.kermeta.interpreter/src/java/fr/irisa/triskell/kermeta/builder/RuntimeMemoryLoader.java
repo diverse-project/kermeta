@@ -1,11 +1,11 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.7 2005-06-28 09:37:03 zdrey Exp $
-* Project : Kermeta (First iteration)
-* File : newRuntimeLoader.java
-* License : GPL
-* Copyright : IRISA / Universite de Rennes 1
+/* $Id: RuntimeMemoryLoader.java,v 1.8 2005-07-08 12:21:50 dvojtise Exp $
+* Project : kermeta.interpreter
+* File : RuntimeMemoryLoader.java
+* License : EPL
+* Copyright : IRISA / Universite de Rennes 1 / INRIA
 * ----------------------------------------------------------------------------
 * Creation date : 12 mai 2005
-* Author : Franck Fleurey
+* Authors : Franck Fleurey
 */ 
 
 package fr.irisa.triskell.kermeta.builder;
@@ -32,12 +32,10 @@ import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FTypedElement;
 
 /**
  * @author Franck Fleurey
@@ -245,10 +243,10 @@ import fr.irisa.triskell.kermeta.structure.FTypedElement;
 		// Create the object
 		RuntimeObject result;
 		if (kcoreObject instanceof FTypeDefinition) {
+		    //System.err.println("Load type definition " + unit.getQualifiedName((FTypeDefinition)kcoreObject));
 		    result = (RuntimeObject)typeDefinitions.get(unit.getQualifiedName((FTypeDefinition)kcoreObject));
 		}
 		else if (kcoreObject instanceof FProperty) result = (RuntimeObject)properties.get(unit.getQualifiedName((FProperty)kcoreObject));
-		// 
 		else result = new KCoreRuntimeObject(memory.getROFactory(), null, kcoreObject);
 		
 		// This is an error
@@ -332,5 +330,29 @@ import fr.irisa.triskell.kermeta.structure.FTypedElement;
 	    }
 	    return result;
 	}
-	
+	protected void finalize() throws Throwable {
+		super.finalize();
+        KermetaUnit.internalLog.debug("FINALIZE RuntimeMemoryLoader ...");
+        
+        // clear as much ref as possible        
+        unit = null;
+        if(memory != null) {
+        	memory.freeJavaMemory();
+        	memory = null;
+        }        
+        if(properties != null){
+	        properties.clear();
+	        properties = null;
+        }
+        if (objects != null)
+        {
+        	objects.clear();        
+        	objects = null;
+        }
+        if (typeDefinitions != null)
+        {
+        	typeDefinitions.clear();        
+        	typeDefinitions = null;
+        }
+    }
 }
