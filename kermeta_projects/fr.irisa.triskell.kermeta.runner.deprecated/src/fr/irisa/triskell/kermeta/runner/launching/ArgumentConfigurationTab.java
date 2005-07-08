@@ -1,7 +1,7 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.17 2005-06-24 17:17:51 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.18 2005-07-08 12:23:43 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 20, 2005
@@ -82,6 +82,8 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     public IProject selectedProject;
     public int GRID_DEFAULT_WIDTH = 200;
     public IAdaptable selectedResource = null;
+    
+    protected KermetaUnit kunit = null;
     
     
     /** Basic modify listener stolen from CommonTab source*/
@@ -190,7 +192,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
         String currentProjectPath = "";
         String storedPath = "";
         IFile selectedFile = null;
-        KermetaUnit lselectedUnit = null;
+       // KermetaUnit lselectedUnit = null;
         
       /*  if (DebugUITools.getSelectedResource()!=null)
         {      
@@ -209,16 +211,16 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		    
 		    // Create the Unit corresponding to the chosen Kermeta file
 		    // (either the SelectedResource one, or the path of current configuration)*
-		    if (selectedFile != null)
-		    {
-		        lselectedUnit = KermetaRunHelper.parse(selectedFile);
-		    }
+		  //  if (selectedFile != null)
+		  //  {
+		  //      lselectedUnit = KermetaRunHelper.parse(selectedFile);
+		  //  }
 		    // selectedUnit can be null : if selected file is not valid
-		    if (lselectedUnit != null)
-		    {
-		        ArrayList point = KermetaRunHelper.findEntryPoint(lselectedUnit);
-		        selectedClassString = (String)point.get(0);
-		        selectedOperationString = (String)point.get(1);
+		  //  if (lselectedUnit != null)
+		  //  {
+		  //      ArrayList point = KermetaRunHelper.findEntryPoint(lselectedUnit);
+		  //      selectedClassString = (String)point.get(0);
+		  //      selectedOperationString = (String)point.get(1);
 		        
 		        getProjectLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_PROJECTNAME,
 		                currentProjectPath));
@@ -228,11 +230,20 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		        
 		        getclassNameText().setText(
 		                configuration.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME,
-		                        selectedClassString));
+		                        ""));
+		        if (getclassNameText().getText().compareTo("")==0 )
+		        {
+		        	getclassNameText().setText(getDefaultClass(selectedFile));
+		        }
 		        getOperationNameText().setText(
 		                configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,
-		                        selectedOperationString));
-		    }
+		                        ""));
+		        if (getOperationNameText().getText().compareTo("")==0 )
+		        {
+		        	getOperationNameText().setText(getDefaultOperation(selectedFile));
+		        }
+		        
+		   // }
 		    canSave();
 		}
 		catch (CoreException e)
@@ -242,8 +253,8 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		catch (Throwable e)
 		{
 		    String errorMsg = "";
-		    if (lselectedUnit != null)
-	            errorMsg = Messages.getString("ArgTab.WRONGLOADUNITERROR") ;
+		   /* if (lselectedUnit != null)
+	            errorMsg = Messages.getString("ArgTab.WRONGLOADUNITERROR") ;*/
 	        setClassEnabled(false);
 	        setOperationEnabled(false);
 	        if (!errorMsg.equals(""))
@@ -258,6 +269,45 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     }
 
     /**
+     * retreive an eventual Default class name in the kermeta file
+     * @param selectedFile
+     * @return
+     */
+    protected String getDefaultClass(IFile selectedFile)
+    {
+    	String defaultClassName = "";
+    	if(kunit == null && selectedFile != null)
+    	{
+    		kunit = KermetaRunHelper.parse(selectedFile);
+    	}
+    	if (kunit != null)
+  		{
+    		ArrayList point = KermetaRunHelper.findEntryPoint(kunit);
+  		    defaultClassName = (String)point.get(0);
+  		}
+    	return defaultClassName;
+    }
+    
+    /**
+     * retreive an eventual Default operation name in the kermeta file
+     * @param selectedFile
+     * @return
+     */
+    protected String getDefaultOperation(IFile selectedFile)
+    {
+    	String defaultOperationName = "";
+    	if(kunit == null && selectedFile != null)
+    	{
+    		kunit = KermetaRunHelper.parse(selectedFile);
+    	}
+    	if (kunit != null)
+  		{
+    		ArrayList point = KermetaRunHelper.findEntryPoint(kunit);
+  		    defaultOperationName = (String)point.get(1);
+  		}
+    	return defaultOperationName;
+    }
+    /**
 	 * When the button "Apply" is pushed, this method is launched
 	 * The configuration is saved.
 	 * INPUT, OUTPUT and PATH
@@ -270,6 +320,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, fileLocationText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, classNameText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, operationNameText.getText());
+		configuration.setAttribute(KermetaLaunchConfiguration.KM_PROJECTNAME, projectLocationText.getText());
 		
     }
     
@@ -716,6 +767,20 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
             setErrorMessage(Messages.getString("ArgTab.COULDNOTLOADUNITERROR"));
         	return false;
         }*/
+    	/*try
+		{*/
+    		IFile selectedFile = getIFileFromString(fileLocationText.getText());		
+    		if (selectedFile == null)
+    		{
+    			setErrorMessage(Messages.getString("ArgTab.INVALIDFILEERROR"));    			
+    			return false;
+    		}/*
+		}
+    	catch (Exception e)
+		{
+    		setErrorMessage(Messages.getString("ArgTab.INVALIDFILEERROR"));
+			return false;
+		}*/
         if (fileLocationText.getText().equals(""))
         {
             setErrorMessage(Messages.getString("ArgTab.NOFILEERROR"));

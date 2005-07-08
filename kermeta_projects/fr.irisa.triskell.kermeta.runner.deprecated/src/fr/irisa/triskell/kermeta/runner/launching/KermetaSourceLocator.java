@@ -1,7 +1,7 @@
-/* $Id: KermetaSourceLocator.java,v 1.7 2005-06-24 17:17:51 zdrey Exp $
- * Project: Kermeta (First iteration)
+/* $Id: KermetaSourceLocator.java,v 1.8 2005-07-08 12:23:43 dvojtise Exp $
+ * Project: Kermeta.runner
  * File: KermetaSourceLocator.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 24, 2005
@@ -12,9 +12,9 @@ package fr.irisa.triskell.kermeta.runner.launching;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IPersistableSourceLocator;
-import org.eclipse.debug.core.model.ISourceLocator;
 import org.eclipse.debug.core.model.IStackFrame;
-import org.eclipse.debug.core.sourcelookup.IPersistableSourceLocator2;
+
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 /**
  * 
@@ -39,7 +39,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
      */
     public void initializeFromMemento(String memento) throws CoreException {
         // TODO Auto-generated method stub
-        System.out.println("TODO : implement initializeFromMemento("+memento+")");
+    	RunnerPlugin.pluginLog.error("TODO : implement initializeFromMemento("+memento+")");
 
     }
 
@@ -48,8 +48,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
      */
     public void initializeDefaults(ILaunchConfiguration configuration)
             throws CoreException {
-        System.out.println("initializeDefaults in KermetaSourceLocator");
-        // TODO Auto-generated method stub
+    	RunnerPlugin.pluginLog.debug("initializeDefaults in KermetaSourceLocator");
 
     }
 
@@ -72,7 +71,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
      * @see org.eclipse.debug.core.sourcelookup.IPersistableSourceLocator2#dispose()
      */
     public void dispose() {
-        System.err.println("Dispose kermeta source locator!");
+    	RunnerPlugin.pluginLog.debug("Dispose kermeta source locator!");
         // TODO Auto-generated method stub
         
     }

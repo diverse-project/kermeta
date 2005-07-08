@@ -1,5 +1,16 @@
+/* $Id: RunnerPlugin.java,v 1.8 2005-07-08 12:23:44 dvojtise Exp $
+ * Project: Kermeta.runner
+ * File: runner.java
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date: May 18, 2005
+ * Authors: zdrey, dvojtise
+ * Description: 
+ */
 package fr.irisa.triskell.kermeta.runner;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.ui.IWorkbenchPage;
@@ -10,7 +21,8 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
+//import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 import java.util.*;
 
@@ -25,6 +37,9 @@ public class RunnerPlugin extends AbstractUIPlugin
 	private ResourceBundle resourceBundle;
 	//Resource context.
 	private BundleContext context;
+	
+	// logger for this plugin
+	final static public Logger pluginLog = LogConfigurationHelper.getLogger("KermetaRunner");
 	
 	// The opened consoles for ConsoleManager... depreceated
 	private static IConsole[] consoles;

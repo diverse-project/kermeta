@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.8 2005-06-10 16:00:18 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.9 2005-07-08 12:23:44 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -38,16 +38,29 @@ import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 public class KermetaConsole extends KermetaIOStream implements IConsoleListener
 {
 
-    protected MessageConsole messageConsole;
-    protected IConsoleManager consoleManager;
-    protected MessageConsoleStream stream;
-    protected InputStreamDialog inputDialog;
+    protected MessageConsole messageConsole = null;
+    protected IConsoleManager consoleManager = null;
+    protected MessageConsoleStream stream = null;
+    protected InputStreamDialog inputDialog = null;
+    static protected KermetaConsole theConsole = null;
+    protected InputDialogThread theInputThread = null;
     
     public KermetaConsole()
     {
         ConsolePlugin plugin = ConsolePlugin.getDefault();
 	    consoleManager = plugin.getConsoleManager();
 	    consoleManager.addConsoleListener(this);
+    }
+    
+    static public KermetaConsole getSingletonConsole()
+    {
+    	if (theConsole == null) {theConsole = new KermetaConsole();}
+    	return theConsole;
+    }
+    
+    public boolean isInitialized()
+    {
+    	return messageConsole != null;    	
     }
     
     public void print(Object messageString)
@@ -60,10 +73,14 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     
     public Object read(String prompt)
     {
-        InputDialogThread thread = new InputDialogThread(prompt);
-        Display.getDefault().syncExec(thread);
-        
-        return thread.inputStr;
+    	InputDialogThread thread;
+    	if (theInputThread == null)	
+    		theInputThread = new InputDialogThread(prompt);
+        else 
+        	theInputThread.setPrompt(prompt);
+    	Display.getDefault().syncExec(theInputThread);
+    	
+        return theInputThread.inputStr;
         
     }
 
@@ -87,18 +104,24 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
             prompt = pPrompt;
         }
         
+        public void setPrompt(String pPrompt)
+        {
+        	prompt = pPrompt;
+        }
+        
         public void run ()
         {   
-            inputDialog = new InputStreamDialog(
-                    new Shell(), 
-    	            "Kermeta input stream", 
-    	            prompt,"", null);
-    			    int code = inputDialog.open();
-    			    if (code != InputDialog.CANCEL)
-    			    {
-    			       inputStr = inputDialog.getInputString();
-    			    }
-            }
+        	inputDialog = new InputStreamDialog(
+                    				new Shell(), 
+									"Kermeta input stream", 
+									prompt,"", null);
+		    int code = inputDialog.open();
+		    if (code != InputDialog.CANCEL)
+		    {
+		       inputStr = inputDialog.getInputString();
+		       inputDialog.close();
+		    }
+        }
     }
     
     /**
@@ -126,6 +149,7 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     /** Remove all the existing consoles [temporary patch]*/
     public void removeCurrentConsole() {
         consoleManager.removeConsoles(consoleManager.getConsoles());
+        
     }
     
     /**
@@ -136,8 +160,23 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
         stream = messageConsole.newMessageStream();
         consoleManager.addConsoles( new IConsole[]{messageConsole});
 	    consoleManager.showConsoleView(messageConsole);
+	    
     }
     
+    /**
+     * Do some cleanup on the console
+     * (unregister events, ...)
+     */
+    public void removeConsoleListener()
+    {
+	    consoleManager.removeConsoleListener(this);
+    }
+    
+    protected void finalize() throws Throwable {
+        super.finalize();
+        
+        System.err.println("FINALIZE KermetaConsole");
+    }
 
 
 }
