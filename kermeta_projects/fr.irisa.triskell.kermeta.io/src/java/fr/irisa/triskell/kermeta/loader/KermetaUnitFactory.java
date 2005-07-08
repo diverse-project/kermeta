@@ -1,8 +1,13 @@
-/* $Id : $
- * Created on 10 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- * 
+/* $Id: KermetaUnitFactory.java,v 1.13 2005-07-08 12:22:39 dvojtise Exp $
+ * Project: Kermeta.io
+ * File: KermetaUnitFactory.java
+ * License: EPL
+ * Copyright: IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date: 10 févr. 2005
+ * Authors: Franck FLEUREY (ffleurey@irisa.fr)
  */
+
 package fr.irisa.triskell.kermeta.loader;
 
 import java.io.File;
@@ -20,14 +25,9 @@ import fr.irisa.triskell.kermeta.loader.km.KMLoaderModuleKM;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
 
-import org.apache.log4j.Logger;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-
 
 /**
- * @author Franck Fleurey
- * IRISA / University of Rennes 1 (France)
- * Distributed under the terms of the GPL licence
+ * 
  * 
  */
 public class KermetaUnitFactory {
@@ -68,7 +68,7 @@ public class KermetaUnitFactory {
     
     
     /**
-     * The cnstroctor
+     * The constructor
      */
     public KermetaUnitFactory() {
         super();
@@ -220,6 +220,18 @@ public class KermetaUnitFactory {
     */
     
     
+    /**
+     * Removes the current defaultLoader so the next cal to getDefaultLoader 
+     * will create a new one
+     */
+    public static void resetDefaultLoader()
+    {
+        if (defaultLoader != null) defaultLoader.loadModules.clear();
+        defaultLoader = null;
+    }
+    /**
+     * 
+     */
     public void unloadAll() {
         KermetaUnit.unloadStdLib();
     	loadedUnits.clear();

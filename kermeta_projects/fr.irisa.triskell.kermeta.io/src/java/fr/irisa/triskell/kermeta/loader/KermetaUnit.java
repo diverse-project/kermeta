@@ -1,14 +1,13 @@
-/* $Id: KermetaUnit.java,v 1.29 2005-06-09 09:02:30 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.30 2005-07-08 12:22:39 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 23, 2005
- * Author : ffleurey
+ * Author : ffleurey, zdrey
  * Description : 
  * 		-
- * TODO : 
  * 
  * History :
  * 		- (zd) added loadAnnotations/loadAllannotations
@@ -22,7 +21,6 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
 
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -33,7 +31,6 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
 
 import fr.irisa.triskell.kermeta.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
@@ -52,7 +49,6 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTag;
-import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeContainer;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
@@ -63,9 +59,7 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * 
  */
 public abstract class KermetaUnit {
 	
@@ -96,7 +90,7 @@ public abstract class KermetaUnit {
 	
 	
     protected void finalize() throws Throwable {
-        System.err.println("Finalise kermeta unit " + this + " " + uri);
+    	internalLog.debug("Finalise kermeta unit " + this + " " + uri);
     }
 	public KermetaUnit(String uri, Hashtable packages) {
 		this.uri = uri;
