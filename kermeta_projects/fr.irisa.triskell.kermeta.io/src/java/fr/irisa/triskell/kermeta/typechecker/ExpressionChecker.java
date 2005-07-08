@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.13 2005-05-27 22:29:15 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.14 2005-07-08 12:47:36 fchauvel Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -58,6 +58,7 @@ import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.structure.impl.FFunctionTypeImpl;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -157,6 +158,12 @@ public class ExpressionChecker extends KermetaVisitor {
 		return func_type.getFunctionTypeRight();
 	}
 	
+	/**
+	 * 
+	 * @param op
+	 * @param exp
+	 * @return
+	 */
 	protected Type checkOperationCall(CallableOperation op, FCallExpression exp) {
 		// Get the type of the operation as a function type
 	    Type operation_type = op.getType();
@@ -170,21 +177,19 @@ public class ExpressionChecker extends KermetaVisitor {
 	        unit.error.add(new KMUnitError("TYPE-CHECKER : Wrong number of arguments, expecting "+op.getOperation().getFOwnedParameter().size()+" arguments.", exp));
 	        return result;
 	    }
-		
-		// if there is no paramerts the operation type is the return type of the operation.
+	    
+		// if there is no parameters the operation type is the return type of the operation.
 		// The operation cannot be a generic operation and there are no unbound type variables
 	    if (exp.getFParameters().size() == 0) {
 		    result = operation_type;
-		}
-	    else {
+		
+	    } else {
 	    
 		    boolean error = false;
 	
 		    // It can be a generic operation : Type parameters
 		    // actual values has to be infered from parameter types
 		    Type[] required_params = operation_type.getFunctionTypeLeft().getProductType();
-		    
-		   
 		    
 		    // Try to infer actual types of type variables
 		    Hashtable binding = new Hashtable();
@@ -193,13 +198,14 @@ public class ExpressionChecker extends KermetaVisitor {
 			    for(int i=0; i<exp.getFParameters().size(); i++) {
 			        //expected_type = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)required_params[i]).type));
 			        expected_type = (SimpleType)required_params[i];
+			        
 			        Type provided = (Type)this.accept((FExpression)exp.getFParameters().get(i));
 					try {
 					    //provided = PrimitiveTypeResolver.getResolvedType(provided);
 					    provided.inferTypeVariableBinding(((SimpleType)required_params[i]).type, binding);
 					}
 					catch(TypeDoesNotMatchError e) {
-					    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+required_params[i]+", found "+provided+" (TypeDoesNotMatch).", (FExpression)exp.getFParameters().get(i)));
+					    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument " + i + " mismatch, expecting "+required_params[i]+", found "+provided+" (TypeDoesNotMatch).", (FExpression)exp.getFParameters().get(i)));
 					    error = true;
 					}
 			    }
@@ -227,13 +233,14 @@ public class ExpressionChecker extends KermetaVisitor {
 			    }
 		    }
 		    
-		    // Replace type variables in the treturn type of the operation
+		    // Replace type variables in the return type of the operation
 		    if (!error)
 		        result = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)result).type, binding));
 		    else
 		        result = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)result).type));
 		   
 	    }
+	
 	    // THE METHOD NEW ON CLASS
 	    if (op.getOperation() == TypeCheckerContext.getClassNewOperation()) {
 	        if (((FCallFeature)exp).getFTarget() instanceof FTypeLiteral) {
@@ -243,6 +250,32 @@ public class ExpressionChecker extends KermetaVisitor {
 	                unit.error.add(new KMUnitError("TYPE-CHECKER : Abstract class "+ result +" should not be instanciated.", (FExpression)exp));
 	            }
 	        }
+	    }
+	    
+	    // THE METHOD CLONE ON CLASS
+	    // FIXME Why this line doesn't work !!!!
+	    //if ( op.getOperation() == TypeCheckerContext.getClassCloneOperation() ) {
+	    if ( exp.getFName().equals("clone") )
+	    {
+	    	// Check that the parameter is a instance of the type of the target ... A.clone(e:A) : A
+	    	if (exp.getFParameters().size() == 1 ) {
+	    		Type[] required_params = operation_type.getFunctionTypeLeft().getProductType();
+	    		
+	    		Type provided = getTypeOfExpression((FExpression)exp.getFParameters().get(0));
+				Type expected = getTypeFromTypeLiteral((FTypeLiteral)((FCallFeature)exp).getFTarget()) ;
+				
+				if (!provided.isSubTypeOf(expected)) {
+				    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument of operation clone must be "+ expected + ".", (FExpression)exp.getFParameters().get(0)));
+				}  		
+	    		
+	    	} else {
+	    	    unit.error.add(new KMUnitError("TYPE-CHECKER : Clone operation take only one parameter", (FExpression)exp));	    		
+	    	}
+	    	
+	    	 result = getTypeFromTypeLiteral((FTypeLiteral)((FCallFeature)exp).getFTarget());
+	    	 if (((FClass)((SimpleType)result).getType()).getFClassDefinition().isFIsAbstract()) {
+                unit.error.add(new KMUnitError("TYPE-CHECKER : Abstract class instance ("+ result +") should not be cloned.", (FExpression)exp));
+            }
 	    }
 	    
 	    // Return result
@@ -428,7 +461,7 @@ public class ExpressionChecker extends KermetaVisitor {
 		
 		if (result == null) {
 		    
-		    // It the target type is an ennumeration, the object should be an ennumeration literal
+		    // It the target type is an ennumeration, the object should be an enumeration literal
 		    if (expression.getFTarget() != null && target.getFType() instanceof FEnumeration) {
 		        target = TypeCheckerContext.EnumLitType;
 		    }
@@ -447,6 +480,7 @@ public class ExpressionChecker extends KermetaVisitor {
 					expression.setFStaticProperty(prop.getProperty());
 				}
 			}
+			
 			if (result == null) {
 			    // The feature was not found
 			    if (enum != null)

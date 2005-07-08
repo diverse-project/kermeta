@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.11 2005-06-07 07:50:44 ffleurey Exp $
+/* $Id: TypeCheckerContext.java,v 1.12 2005-07-08 12:47:50 fchauvel Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : GPL
@@ -90,6 +90,28 @@ public class TypeCheckerContext {
 	}
 	
 	
+	protected static FOperation getClassCloneOperation() {
+		
+		if (classClone == null) {
+			boolean found = false;
+			Iterator it = ((FClass)((SimpleType) ClassType).type).getFClassDefinition().getFOwnedOperation().iterator();
+			   while(it.hasNext() && !found) {
+			       FOperation op = (FOperation) it.next();
+			       if (op.getFName().equals("clone")) {
+			           classClone = op;
+			           found = true;
+			       }
+			   }
+			   if ( !found ) {
+				   System.err.println("-------------------------------------------------------");
+				   System.err.println("Error in typechecking, Unable to find the clone operation");
+				   System.err.println("-------------------------------------------------------");
+			   }
+		}
+	    return classClone;
+	}
+	
+	
 	protected static Type createTypeForClassDefinition(String qualified_name, KermetaUnit unit) {
 	    FClassDefinition cdef = (FClassDefinition)unit.typeDefinitionLookup(qualified_name);
 	    FClass cls = unit.struct_factory.createFClass();
@@ -122,6 +144,7 @@ public class TypeCheckerContext {
 	protected static Type StdIOType;
 	
 	protected static FOperation classNew;
+	protected static FOperation classClone;
 	
 	// The collection classes
 	protected static FClassDefinition SetClassDef;

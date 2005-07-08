@@ -1,4 +1,4 @@
-/* $Id: CallableOperation.java,v 1.2 2005-05-02 23:50:51 ffleurey Exp $
+/* $Id: CallableOperation.java,v 1.3 2005-07-08 12:47:23 fchauvel Exp $
  * Project : Kermeta (First iteration)
  * File : CallableOperation.java
  * License : GPL
@@ -166,4 +166,5 @@ public class CallableOperation extends CallableElement {
     public void setOperation(FOperation operation) {
         this.operation = operation;
     }
+   
 }
