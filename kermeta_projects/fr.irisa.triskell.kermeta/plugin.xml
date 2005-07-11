@@ -43,6 +43,7 @@
       <import plugin="org.eclipse.core.resources"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.team.core"/>
    </requires>
    <extension
          point="org.eclipse.ui.popupMenus">
@@ -50,10 +51,17 @@
             objectClass="org.eclipse.core.resources.IFile"
             nameFilter="*.ecore"
             id="fr.irisa.triskell.kermeta.contribution1">
-         <action
+         <menu
+	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+	         label="View Sub Menu"
+	         path="additions">
+      		<separator name="kermetagroup1"/>
+		</menu>
+        <action
                enablesFor="1"
                label="Generate Kermeta Source"
                icon="images/kermeta.png"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
                class="fr.irisa.triskell.kermeta.popup.actions.Ecore2KermetaAction"
                id="fr.irisa.triskell.kermeta.Ecore2KMT"/>
       </objectContribution>
@@ -61,13 +69,42 @@
             objectClass="org.eclipse.core.resources.IFile"
             nameFilter="*.kmt"
             id="fr.irisa.triskell.kermeta.objectContribution1">
-         <action
+        <menu
+	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+	         label="Kermeta"
+	         path="additions">
+      		<separator name="kermetagroup2"/>
+      	</menu>
+        <action
                enablesFor="1"
-               label="Compile Kermeta Source"
-               icon="images/tree_package.gif"
+               label="Compile to XMI"
+               icon="images/to_xmi_16.gif"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
+               class="fr.irisa.triskell.kermeta.popup.actions.CompileKMTAction"
+               id="fr.irisa.triskell.kermeta.KMT2KM"/>         
+        <action
+               enablesFor="1"
+               label="Generate Ecore"
+               icon="images/eclipse_ecore.gif"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
                class="fr.irisa.triskell.kermeta.popup.actions.CompileKMTAction"
                id="fr.irisa.triskell.kermeta.KMT2KM"/>
+         
       </objectContribution>
+   </extension>
+   <extension
+         id="fr.irisa.triskell.kermeta.filetypes"
+         name="kermeta.filetypes"
+         point="org.eclipse.team.core.fileTypes">
+      <fileTypes
+            extension="kmt"
+            type="text"/>
+      <fileTypes
+            extension="km"
+            type="text"/>
+      <fileTypes
+            extension="ecore"
+            type="text"/>
    </extension>
 
 </plugin>
