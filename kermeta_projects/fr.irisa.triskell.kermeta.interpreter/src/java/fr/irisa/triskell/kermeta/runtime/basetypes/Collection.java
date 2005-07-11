@@ -5,8 +5,10 @@ package fr.irisa.triskell.kermeta.runtime.basetypes;
 import java.util.ArrayList;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 
@@ -71,6 +73,33 @@ public class Collection {
 		    collection.getData().put("CollectionArrayList", new ArrayList());
 		}
 		return (ArrayList)collection.getData().get("CollectionArrayList");
+	}
+	
+	
+	/**
+	 * Creates an empty collection given a specialised type, and the type parameter
+	 * @param specColl : the qualified name of the specialised type of collection among Set, OrderedSet, ...
+	 * @param factory : the runtime object factory
+	 * @param typeParam : the type parameter value of the Collection to create
+	 */
+	public static RuntimeObject create(java.lang.String specColl, RuntimeObjectFactory factory, FType typeParam) {
+		
+	    FClass coll_class = factory.getMemory().getUnit().struct_factory.createFClass();
+	    
+	    coll_class.setFClassDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup(specColl));
+	    
+	    FTypeVariableBinding binding = factory.getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+	    
+	    binding.setFVariable((FTypeVariable)coll_class.getFClassDefinition().getFTypeParameter().get(0));
+	    
+	    // Set the param binding type
+	    binding.setFType(typeParam);
+	    // Add to type param bindings the binding
+	    coll_class.getFTypeParamBinding().add(binding);
+	    
+	    RuntimeObject result = factory.createRuntimeObjectFromClass(factory.createMetaClass(coll_class));
+		
+		return result;
 	}
 
 	
