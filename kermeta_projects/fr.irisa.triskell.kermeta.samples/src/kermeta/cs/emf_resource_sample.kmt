@@ -1,0 +1,76 @@
+@mainClass "root::EMFResourceLoader"
+@mainOperation "main"
+
+
+package root;
+require "cs.kmt"
+require kermeta
+using kermeta::standard
+using kermeta::language::structure
+using kermeta::persistence
+class EMFResourceLoader 
+{
+	operation loadFromResource() : Void is do
+	end
+
+    operation main() : Void is do 
+    	var repository    : EMFRepository init EMFRepository.new
+		var resource : EMFResource // init EMFResource.new
+		var myinstances : Set<Object>
+		var i : Integer init 0 
+		resource := void
+		resource := repository.createResource(
+			"file:///udd/zdrey/Workspaces/runtime-workbench-workspace/sanfami/src/Test_1.cs",
+			"cs.ecore")
+		resource.load() 
+		myinstances := resource.instances
+		stdio.writeln("---->"+ myinstances.size.toString +" objets!")
+		
+		from var it : Iterator<Object> init myinstances.iterator 
+		until it.isOff
+		loop   
+			
+			var o : Object
+			o := it.next 
+			if (o == void) then stdio.writeln("object vide!!!")  
+			else
+				if (o.getMetaClass == void) then stdio.writeln("pas de metaclass!")
+				else 
+					stdio.writeln("---------------------------------")
+					stdio.writeln("Objet : "+ o.getMetaClass.classDefinition.qualifiedName 
+					+  " ("+ o.getMetaClass.classDefinition.ownedAttributes.size.toString+" attr.)" )
+					var attrs : Set<Property>
+					from var it : Iterator<kermeta::reflection::Property> init o.getMetaClass.classDefinition.ownedAttributes.iterator
+					until (it.isOff)
+					loop
+						var att : Property
+						att ?= it.next
+						if (o.get(att)==void) then stdio.writeln(att.name+" EST VIDE!") end
+						stdio.writeln("    {" + att.name+" : "+ o.get(att).toString + " }")
+					end
+						
+					// FIXME : repare isInstance
+					if (o.getMetaClass.classDefinition.qualifiedName.equals("cs::Template")) then  
+						var template : cs::Template
+						template ?= o
+						stdio.writeln("casted : "+ template.toString + " original : "+ o.toString+"-->"+template.name)
+						stdio.writeln("isInstance : "+ template.getMetaClass.isInstance(o).toString) 
+						
+						if (template == void) then stdio.writeln("template is void") end 
+					else
+						if (o.getMetaClass.classDefinition.qualifiedName.equals("cs::Root")) then  
+							var root : cs::Root init cs::Root.new
+							root ?= o
+//							stdio.writeln("root : "+ root.toString + "original : "+ o.toString)
+						end
+					end
+				end 
+				//stdio.writeln("object non vide" + o.isFrozen.toString)  
+				var val : cs::Value init cs::Value.new 
+				val.name := "totovalue"
+				
+			end
+			i := i + 1
+		end
+    end
+}
