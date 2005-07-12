@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.1 2005-07-08 11:33:37 zdrey Exp $
+/* $Id: Resource.java,v 1.2 2005-07-12 16:30:34 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : GPL
@@ -10,8 +10,8 @@
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.RuntimeUnit;
-import fr.irisa.triskell.kermeta.runtime.RuntimeUnitLoader;
+import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
+import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
 
 /**
  * This class is intended to "wrap" the resource management from kermeta.
@@ -38,15 +38,29 @@ public class Resource {
     }
     
     /**
-     * See the other load method
+     * Save the resource "self" into its uri attributes, unless newUri is given
+     * (not null)
+     * @param self the runtimeObject representing the Resource to save.
+     * @param newUri the newUri : if it is null, than the default attribute uri is used,
+     * otherwise, we save the resource in it.
+     * @return void instance
+     */
+    public static RuntimeObject save(RuntimeObject self, RuntimeObject newUri)
+    {
+        // TODO : to implement
+        throw new Error("NotImplementedCustomError : this method is not implemented yet");
+        /*
+        return resource.getFactory().getMemory().voidINSTANCE;
+        */
+    }
+    /**
+     * 
      * @param uri
      * @param resourceType
      * @return
      */
     public static RuntimeObject load(RuntimeObject uri, RuntimeObject mmUri, RuntimeObject resourceType, RuntimeObject emptyInstances)
     {
-        //RuntimeObject instances = emptyInstances;
-        System.out.println("resource type : "+ resourceType);
         RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
         	getConcreteFactory(String.getValue(resourceType)).
         	createRuntimeUnit(String.getValue(uri), String.getValue(mmUri), emptyInstances);
