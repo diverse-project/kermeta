@@ -1,0 +1,116 @@
+package kermeta::persistence;
+
+using kermeta::standard
+abstract class Resource
+{
+	/** The uri of the model-instance to load */
+	attribute uri : String
+	/** The uri of the meta-model of the model-instance to load */
+	attribute metaModelURI : String
+	/** The includedResource if the model-instance "inter-depends" on other instances*/
+	attribute includedResources : set String[*] 
+	/** The entities contained in the model-instance, that are provided when user loads a resource */
+	attribute instances : set Object[*]
+	
+	/** Save a model instance, in the file specified by the initial uri 
+	 * Overrides the old version.
+	 */
+	operation save() : Void is abstract
+	operation load() : Void is abstract
+	
+/*	operation setInstances(p_instances : Set<Object>) : kermeta::standard::~Void is do
+		instances := p_instances
+	end*/
+}
+class EMFResource inherits Resource
+{
+	/**
+	 * Constructor "patch" 
+	 */
+	operation initialize(model_uri : String , mm_uri : String , incResources : Set<String> ) is do
+		uri := model_uri
+		metaModelURI := mm_uri
+	end
+
+	/** Save a resource in the uri associated to it */
+	method save() : Void is do
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
+			self, uri
+		)
+	end
+	
+	/** Load a resource */
+	method load() : Void is do
+		// Todo : extern load should return a Reflective Set?
+		var inst_set : Set<Object> init Set<Object>.new
+		inst_set ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
+			uri, metaModelURI, "EMF", instances
+		)
+		from var it : Iterator<Object> init inst_set.iterator
+		until (it.isOff)
+		loop
+			instances.add(it.next)
+		end
+/*		instances ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
+			uri, metaModelURI, "EMF", instances
+		)
+		*/
+	end
+	/*
+	method loadInstances() : Set<Object> is do
+		result := void
+	end*/
+}
+class KMResource inherits Resource
+{
+	method save() : kermeta::standard::~Void is do
+		//TODO: implement operation save
+	end
+	method load() : kermeta::standard::~Void is do
+		//TODO: implement operation load
+	end
+}
+abstract class Repository
+{
+	attribute resources : kermeta::utils::Hashtable<String, Resource>
+	operation createResource(uri : String, mm_uri : String) : Resource is abstract
+	operation getResource(uri : String) : Resource is abstract
+}
+
+/**
+ * Repository that stores and manages resources that come from EMF
+ */
+class EMFRepository inherits Repository
+{
+	/**
+	 * Create a new empty resource from the given uri, which meta-model is stored
+	 * in file given by mm_uri
+	 */
+	method createResource(uri : String, mm_uri : String) : EMFResource is do
+		var new_resource : EMFResource init EMFResource.new
+		var instances    : kermeta::standard::Set<Object> init kermeta::standard::Set<Object>.new
+		new_resource.instances := instances
+		new_resource.uri := uri
+		new_resource.metaModelURI := mm_uri
+		result := new_resource
+	end
+	
+	/** Get the resource of model that is stored in the given uri
+	 */
+	method getResource(uri : String) : EMFResource is do
+		result ?= resources.get(uri)
+	end
+}
+
+/**
+ * Repository that stores and manages XMI files representing Kermeta models
+ */
+class KMRepository inherits Repository
+{
+	method createResource(uri : String, mm_uri : String) : KMResource is do
+		//TODO: implement operation createResource
+	end
+	method getResource(uri : String) : Resource is do
+		//TODO: implement operation getResource
+	end 
+}
