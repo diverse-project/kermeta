@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnitLoader.java,v 1.1 2005-07-08 11:39:33 zdrey Exp $
+/* $Id: RuntimeUnitLoader.java,v 1.2 2005-07-12 09:27:41 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnitLoader.java
  * License   : GPL
@@ -37,7 +37,8 @@ public class RuntimeUnitLoader {
             defaultLoader = new RuntimeUnitLoader();
             
             defaultLoader.factories.put("EMF", new EMFRuntimeUnitFactory());
-            defaultLoader.factories.put("MDR", new MDRRuntimeUnitFactory());
+            // When MDRRuntimeUnitFactory is created!
+            //defaultLoader.factories.put("MDR", new MDRRuntimeUnitFactory());
         }
         return defaultLoader;
     }
