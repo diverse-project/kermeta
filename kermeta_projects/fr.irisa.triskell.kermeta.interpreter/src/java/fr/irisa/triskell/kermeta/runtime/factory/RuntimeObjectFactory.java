@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.7 2005-06-07 12:06:12 ffleurey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.8 2005-07-12 15:12:58 fchauvel Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -11,23 +11,34 @@
  */
 package fr.irisa.triskell.kermeta.runtime.factory;
 
+
 import java.util.Hashtable;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.ArrayList;
+
+import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
+import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
+import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.runtime.language.Class;
 
 /**
  * @author Franck Fleurey
@@ -39,8 +50,6 @@ public class RuntimeObjectFactory {
 	protected RuntimeMemory memory;
 	
 	protected KermetaIOStream stream = null;
-	
-	
 	
 	/**
 	 * These are caches of classes
@@ -206,6 +215,7 @@ public class RuntimeObjectFactory {
 		return result;
 	}
 	
+	
 	/**
 	 * Create a new instance of a class (the class should not have any type parameter)
 	 * @param class_name the qualified name of the class to instanciate
@@ -230,6 +240,190 @@ public class RuntimeObjectFactory {
 		RuntimeObject result = createRuntimeObjectFromClass(roclass);
 		return result;
 	}
+	
+	
+	/**
+	 * Create a new RuntimeObject from another runtime object
+	 * Implement the "clone" feature. We do a "deep clone" for attribute and a "shallow clone" for references
+
+	 * @param meta_class the class of the object to clone
+	 * @param objectToClone the object we want to clone
+	 * @return the clone of the objectToClone 
+	 */
+	public RuntimeObject cloneRuntimeObjectFromObject(RuntimeObject meta_class, RuntimeObject objectToClone)
+	{    
+	    // Build a new empty object (default constructor) 
+	    RuntimeObject result = new RuntimeObject(this, meta_class);
+	    createRuntimeObjectFromClass_count++;
+	    
+	    // Check if it is a primitive type
+	    String theMetaClassName = ((FClass) meta_class.getData().get("kcoreObject")).getFClassDefinition().getFName();
+		System.out.println("J'ai trouvé un : " + theMetaClassName);
+	 
+		if (theMetaClassName.equals("String") ){
+			result.getData().put("StringValue", objectToClone.getData().get("StringValue"));
+	    
+		} else if ( theMetaClassName.equals("Integer") ) {
+			result.getData().put("NumericValue", objectToClone.getData().get("NumericValue"));
+		
+		} else if ( theMetaClassName.equals("Boolean") ) {
+			result.getData().put("BooleanValue", objectToClone.getData().get("BooleanValue"));
+		
+		} else if ( theMetaClassName.equals("Collection") || theMetaClassName.equals("OrderedCollection") ) {				    						    		
+			ArrayList objectToCloneContents = (ArrayList) objectToClone.getData().get("CollectionArrayList");
+			ArrayList resultContents = new ArrayList();
+			
+			// we clone each value in the collection
+			Iterator elementIterator = objectToCloneContents.iterator();
+			while ( elementIterator.hasNext() ){
+				RuntimeObject element = (RuntimeObject) elementIterator.next();
+				RuntimeObject elementMetaClass = element.getMetaclass();
+				resultContents.add(Class.cloneObject(elementMetaClass, element));
+			}
+			result.getData().put("CollectionArrayList", resultContents);
+			
+		} else {				    						    		
+		
+		    // Get the list of attribute of the meta-class
+		    EList metaClassAttribute = ((FClass) meta_class.getData().get("kcoreObject")).getFClassDefinition().getFOwnedAttributes();
+		    
+		    // Foreach property of the meta-class, deep or shallow clone 
+		    Iterator metaClassAttributeIterator = metaClassAttribute.iterator();
+		    while ( metaClassAttributeIterator.hasNext() ) {
+		    	FProperty theMetaClassAttribute = (FProperty) metaClassAttributeIterator.next();
+			    	    	
+		    	String theAttributeName = theMetaClassAttribute.getFName();
+			 
+		    	RuntimeObject theAttributeValue = (RuntimeObject) objectToClone.getProperties().get(theAttributeName);
+	    		
+		    	// If the property has no yet been used, then its does not exist !
+		    	if ( theAttributeValue != null ){
+	    		
+			    	RuntimeObject theAttributeMetaClass = theAttributeValue.getMetaclass();
+			    	System.out.println("J'ai trouvé un : " + theAttributeMetaClass);
+			    	System.out.println("J'ai trouvé un : " + theMetaClassAttribute.getFType());
+			    	
+			    	String theAttributeTypeName = null;
+			    	if (theMetaClassAttribute.getFType() instanceof FClass) {
+		    			theAttributeTypeName = ((FClass) theMetaClassAttribute.getFType()).getFClassDefinition().getFName();   		
+		    		} else if (theMetaClassAttribute.getFType() instanceof FEnumeration) { 
+		    			theAttributeTypeName = ((FEnumeration) theMetaClassAttribute.getFType()).getFName();
+		    		} else {
+		    			System.err.println("-----------------------------------------------");
+		    			System.err.println("Err while cloning object : " + objectToClone);
+		    			System.err.println("Trying to clone a property on an unknown type ! ");
+		    			System.err.println("-----------------------------------------------");
+		    		}
+			    	
+			    	if ( theMetaClassAttribute.isFIsComposite() ) { 	// ************ DEEP CLONE ************
+			    	
+			    		result.getProperties().put(theAttributeName, Class.cloneObject(theAttributeMetaClass, theAttributeValue));	
+	
+			    		String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFClassDefinition().getFName();
+			    		
+			    		// For each element in the collection, we nee to add an opposite 
+			    		if ( theAttributeMetaClassName.equals("ReflectiveCollection") )
+			    		{	
+			    			// Build a new reflective Collection
+			    			RuntimeObject resultAttribute = new RuntimeObject(this, theAttributeMetaClass);
+			    			    		    			
+			    			ArrayList attributeContents = (ArrayList) theAttributeValue.getData().get("CollectionArrayList");
+			    			ArrayList resultAttributeContents = new ArrayList();
+		    				
+			    			FProperty oppositeProperty = ((FProperty) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getFOpposite(); 
+			    			String oppositeName = oppositeProperty.getFName();
+			    			
+			    			// Manage opposite for each object contained in the reflective Collections
+			    			Iterator elementIterator = attributeContents.iterator();
+			    			while ( elementIterator.hasNext() ){
+			    				RuntimeObject element = (RuntimeObject) elementIterator.next();
+			    				RuntimeObject cloneElement = Class.cloneObject(element.getMetaclass(), element);
+			    				
+			    				// Get the opposite property and add the result of our current clone operation
+			    				RuntimeObject elementProperty = (RuntimeObject) cloneElement.getProperties().get(oppositeName);
+			    				
+			    				// test if the opposite is a Collection or an simple attribute
+			    				if (oppositeProperty.getFUpper() == 1){
+									cloneElement.getProperties().put(oppositeName, result);
+								} else { 	
+									ArrayList elementPropertyCollection = ((ArrayList) elementProperty.getData().get("CollectionArrayList"));
+									elementPropertyCollection.add(result); 
+								}
+											    				
+			    				// Put the Object in the collection but cloning it before !
+			    				resultAttributeContents.add(cloneElement);
+			    			}
+			    			
+			    			resultAttribute.getData().put("CollectionArrayList", resultAttributeContents);
+	
+			    			result.getProperties().put(theAttributeName, resultAttribute);
+							
+			    		} else { 
+			    		
+			    			result.getProperties().put(theAttributeName, Class.cloneObject(theAttributeMetaClass,theAttributeValue));
+			    		}
+	
+			    		
+			    	} else { 
+			    		// ********* SHALLOW CLONE ***********
+			    		System.out.println("C'est une propriété reference");	
+	
+			    		String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFClassDefinition().getFName();
+			    		
+			    		// For each element in the collection, we nee to add an opposite 
+			    		if ( theAttributeMetaClassName.equals("ReflectiveCollection") ) 
+			    		{			    			
+			    			// Build a new refelctive Collection
+			    			RuntimeObject resultAttribute = new RuntimeObject(this, theAttributeMetaClass);
+			    			    		    			
+			    			ArrayList attributeContents = (ArrayList) theAttributeValue.getData().get("CollectionArrayList");
+			    			ArrayList resultAttributeContents = new ArrayList();
+		    				
+			    			FProperty oppositeProperty = ((FProperty) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getFOpposite(); 
+			    			String oppositeName = oppositeProperty.getFName();
+			    			
+			    			// Manage opposite for each object contains in the reflective Collections
+			    			Iterator elementIterator = attributeContents.iterator();
+			    			while ( elementIterator.hasNext() ){
+			    				RuntimeObject element = (RuntimeObject) elementIterator.next();
+			    				
+			    				// get the opposite property and add the result of our current clone operation
+			    				RuntimeObject elementProperty = (RuntimeObject) element.getProperties().get(oppositeName);
+			    				
+			    				// test if the opposite is a Collection or an simple attribute
+			    				if (oppositeProperty.getFUpper() == 1){
+									element.getProperties().put(oppositeName, result);
+								} else { 	
+									ArrayList elementPropertyCollection = ((ArrayList) elementProperty.getData().get("CollectionArrayList"));
+									elementPropertyCollection.add(result); 
+								}
+			    							    				
+			    				// Put the Object in the collection without cloning it !
+			    				resultAttributeContents.add(element);
+			    			}
+			    			
+			    			resultAttribute.getData().put("CollectionArrayList", resultAttributeContents);
+	
+			    			result.getProperties().put(theAttributeName, resultAttribute);
+							
+			    		} else { 
+			    		
+			    			result.getProperties().put(theAttributeName, theAttributeValue);
+			    		
+			    		}
+			    		
+		    		} // if isComposite
+		    	
+		    	} // if the AttributeValue is Null
+		  
+		    }  
+		
+		} 
+		
+		return result;
+	    
+	}
+	
 	
 	/**
 	 * This only work for classes that have no type parameters

@@ -15,6 +15,12 @@ public class Class {
 		return self.getFactory().createRuntimeObjectFromClass(self);
 	}
 	
+	// Implementation of method cloneObject called as :
+	// extern fr::irisa::triskell::kermeta::runtime::language::Class.cloneObject()
+	public static RuntimeObject cloneObject(RuntimeObject self, RuntimeObject objectToClone){
+		return self.getFactory().cloneRuntimeObjectFromObject(self, objectToClone);
+	}
+	
 	public static RuntimeObject isInstance(RuntimeObject self, RuntimeObject object) {
 		FClass req = (FClass)self.getData().get("kcoreObject");
 		FClass pro = (FClass)object.getMetaclass().getData().get("kcoreObject");
