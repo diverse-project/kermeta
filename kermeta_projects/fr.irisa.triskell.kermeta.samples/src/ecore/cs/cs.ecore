@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="cs"
+    nsURI="file:///udd/zdrey/Workspaces/KMWorkspace/fr.irisa.triskell.kermeta.samples/ecore/cs/cs.ecore"
+    nsPrefix="cs">
+  <eClassifiers xsi:type="ecore:EClass" name="Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="template" upperBound="-1"
+        eType="#//Template" containment="true" eOpposite="#//Template/root"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Template">
+    <eOperations name="expand" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" eType="#//Root" eOpposite="#//Root/template"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decision" upperBound="-1"
+        eType="#//Decision" containment="true" eOpposite="#//Decision/source"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="content" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referer" eType="#//Decision"
+        eOpposite="#//Decision/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Decision">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Template"
+        eOpposite="#//Template/decision"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+        eType="#//Template" eOpposite="#//Template/referer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Iteration" eSuperTypes="#//Decision"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" eSuperTypes="#//Decision"/>
+</ecore:EPackage>
