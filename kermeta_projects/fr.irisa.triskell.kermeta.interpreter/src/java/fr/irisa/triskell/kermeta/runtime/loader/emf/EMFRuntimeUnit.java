@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.1 2005-07-08 11:39:08 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.2 2005-07-12 16:36:03 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -9,26 +9,18 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
-import java.util.Iterator;
+import java.io.File;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import org.eclipse.emf.ecore.EClassifier;
+
+import org.eclipse.emf.ecore.resource.URIConverter;
+
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+
+
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.ecore.ECore2Kermeta;
 import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
@@ -75,8 +67,25 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     public void loadMetaModelAsKermeta()
     {
         KermetaUnitFactory.getDefaultLoader().unloadAll();
-        metamodel_uri = "file:///udd/zdrey/Workspaces/runtime-workbench-workspace/sanfami/src/cs.ecore";
-        ecore_unit = (EcoreUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(metamodel_uri);
+        
+        // Create the correct uri
+        File f = new File(metamodel_uri);
+    //    IFile kmtfile = ecorefile.getProject().getFile(ecorefile.getProjectRelativePath().removeFileExtension().addFileExtension("kmt"));
+		// Create absolute path from relative 
+        String unit_uri = instances.getFactory().getMemory().getUnit().getUri();
+        String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/"));
+        System.err.println("UNIT URI = "+ unit_uripath);
+        
+        String mm_uri = unit_uripath+"/"+metamodel_uri; 
+//      resolve uri
+    	URI u = URI.createURI(metamodel_uri);
+   /* 	if (u.isRelative()) {
+    		URIConverter c = new URIConverterImpl();
+    		u = u.resolve(c.normalize(URI.createURI(".")));    			
+    	}*/
+    	System.err.println("URI eclipse : "+ u.toString());
+        
+        ecore_unit = (EcoreUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(mm_uri);
     }
     
     /**
@@ -109,8 +118,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     
     public String getUri()
     {
-        return "file:///udd/zdrey/Workspaces/runtime-workbench-workspace/sanfami/src/MyFirstTest.cs";
-        //return uri;
+        return uri;
     }
     
     public EcoreUnit getMetamodelUnit()

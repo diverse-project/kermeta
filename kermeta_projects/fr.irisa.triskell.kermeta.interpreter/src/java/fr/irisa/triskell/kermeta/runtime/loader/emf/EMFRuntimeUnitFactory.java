@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnitFactory.java,v 1.1 2005-07-08 11:39:08 zdrey Exp $
+/* $Id: EMFRuntimeUnitFactory.java,v 1.2 2005-07-12 16:36:03 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnitFactory.java
  * License   : GPL
@@ -33,7 +33,6 @@ public class EMFRuntimeUnitFactory extends RuntimeUnitFactory
     public RuntimeUnit createRuntimeUnit(String uri, String mm_uri, RuntimeObject emptyInstances)
     {
         EMFRuntimeUnit emfUnit = new EMFRuntimeUnit(uri, mm_uri, emptyInstances, this);
-        System.out.println("empty instances??? : "+ emptyInstances);
         return emfUnit;
     }
 

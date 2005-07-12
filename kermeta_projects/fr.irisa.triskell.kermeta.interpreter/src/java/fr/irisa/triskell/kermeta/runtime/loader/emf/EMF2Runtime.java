@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.2 2005-07-11 16:50:33 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.3 2005-07-12 16:36:03 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -9,6 +9,7 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -25,7 +26,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import com.sun.rsasign.s;
@@ -79,7 +82,15 @@ public class EMF2Runtime {
 	//		 load ressource
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 			ResourceSet resource_set = new ResourceSetImpl();
-			Resource resource = resource_set.getResource(URI.createURI(unit.getUri()), true);
+	//		Resource resource = resource_set.getResource(URI.createURI(unit.getUri()), true);
+			
+	    	URI u = URI.createURI(unit.getUri());
+	    	internalLog.info("URI created for model to load : "+u);
+	    	if (u.isRelative()) {
+	    		URIConverter c = new URIConverterImpl();
+	    		u = u.resolve(c.normalize(URI.createURI(".")));    			
+	    	}
+			Resource resource = resource_set.getResource(u, true);
 			
 	        loadunit(unit, resource);
 		} catch (Throwable e) {
@@ -155,7 +166,11 @@ public class EMF2Runtime {
         
 	}
 	
-	
+	/**
+	 * Add the properties to the object
+	 * @param rObject
+	 * @param unit
+	 */
 	protected void populateRuntimeObject(RuntimeObject rObject, EMFRuntimeUnit unit)
 	{
 	    EObject eObject = (EObject)rObject.getData().get("ecoreObject");
@@ -169,9 +184,8 @@ public class EMF2Runtime {
 	    while (it.hasNext())
 	    {
 	        EStructuralFeature feature = (EStructuralFeature)it.next();
+	        RuntimeObjectFactory rofactory = unit.getInstances().getFactory();
 	        String  fname  = feature.getName();
-	        System.err.println("le nom de la feature : " + feature.getName() + "\n et sa valeur :"+eObject.eGet(feature));
-	        internalLog.info("Le type de la 'feature' à ajouter : " + feature.getEType());
 	        //
 	        EClassifier etype = feature.getEType(); 
 	        // Get the FObject corresponding to this etype
@@ -184,20 +198,38 @@ public class EMF2Runtime {
 	        
 	        // Eget can return an elist of features
 	        Object fvalue = eObject.eGet(feature);
+	        RuntimeObject rovalue = null;
 	        if (fvalue instanceof EList) // I have then to create a Collection of Features of the given type (etype)
-	        {
-	            RuntimeObject roset = createRuntimeObjectForCollection((EList)fvalue, etype_fclass, unit);
-	            // Create the parametred set (Set<etype>) and Fill in the set   
-	            rObject.getProperties().put(fname, roset);
-	            System.out.println("fvalue is an elist! ");
+	        {	// a feature with multiplicity
+	            rovalue = createRuntimeObjectForCollection((EList)fvalue, etype_fclass, unit);
 	        }
+			else if (fvalue instanceof EEnum) {
+			    //this.runtime_objects_map.put(fvalue, unit.getMetamodelUnit().struct_factory.createFEnumeration());
+			    
+			}
 	        else if (fvalue instanceof EObject)
 	        {   
-	            // Get the RO Instance for this feature
-	            RuntimeObject rovalue = (RuntimeObject)this.runtime_objects_map.get(fvalue);
-	            rObject.getProperties().put(fname, rovalue);
-	            
+	            // Get the RO Instance for this feature -- if it is in the existing r-o.
+	            rovalue = (RuntimeObject)this.runtime_objects_map.get(fvalue);
 	        }
+	        else if (EDataType.class.isInstance(etype))
+	        {
+	            // TODO : I would like to get automatically the mapping between a DataType and its translation in kermeta.
+	            // How can how do this? How can I get the "alias" definitions? 
+	            internalLog.info("DataType : "+ fvalue + ";\n type : "+ etype + "; name of data type : " + etype.getName() + "; instance class : "+ etype.getInstanceClassName());
+			    String str = null;
+			    str = feature.getDefaultValueLiteral();
+			    if (fvalue != null && str==null)  str = fvalue.toString();
+			    if (str == null) str = "<no value!>";
+			    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(str, rofactory);
+	        }
+	        else
+	        {
+	            System.err.println("NotImplemented custom Error : The type <"+etype+"> has not been handled yet.");
+	        }
+	        if (rovalue != null)
+	            rObject.getProperties().put(fname, rovalue);
+            
 	    }
 	    
 	    // Find the value of the structural features and populate the properties.
@@ -247,7 +279,7 @@ public class EMF2Runtime {
 	        // Create the RuntimeObject corresponding to the FClass associated to the metaclass_name class.
 	        FClass fclass = unit.getMetamodelUnit().struct_factory.createFClass();
 	        fclass.setFClassDefinition((FClassDefinition)typedef);
-	        System.out.println("Type definition : "+ typedef.getFName());
+	        
 	        result = memory.getROFactory().createMetaClass(fclass); // does not work -> RO not found
 	        // MetaclassRO of EClass is "memory.getRuntimeObjectForFObject(fc)" 
 		    // which is the type FClass itself (repr. as a RO)) 
