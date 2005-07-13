@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter.java,v 1.2 2005-07-13 10:04:40 dvojtise Exp $
+/* $Id: KM2EcoreExporter.java,v 1.3 2005-07-13 15:33:20 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -13,6 +13,7 @@
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
@@ -33,18 +34,17 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 /**
  * Exports KM or KMT to Ecore.
  */
-public class KM2EcoreExporter extends KermetaVisitor{
+public class KM2EcoreExporter {
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore");
 	protected ArrayList usings = new ArrayList();
 	protected ArrayList imports = new ArrayList();
 	protected String root_pname;
-	protected String current_pname;
-	protected TextTabs loggerTabs =  new TextTabs("   ","|");
 	
 	// the resource to populate
 	protected Resource ecoreResource = null;
 	
+	public Hashtable kmt2ecoremapping =  new Hashtable();
 	
 	
 	/**
@@ -61,108 +61,12 @@ public class KM2EcoreExporter extends KermetaVisitor{
 	 */
 	public Object exportPackage(FPackage root_package) {
 		root_pname = KMTHelper.getQualifiedName(root_package);
-		
-		return accept(root_package);
-	}
-	
-	public Object visit(FPackage p) {
-		current_pname = KMTHelper.getQualifiedName(p);
-		internalLog.debug(loggerTabs + "Visiting Package: "+ current_pname);
-		loggerTabs.increment();
-		
-		EPackage newEPackage = EcoreFactory.eINSTANCE.createEPackage();
-		newEPackage.setName(current_pname);
-		ecoreResource.getContents().add(newEPackage);
-		
-		
-
-		Iterator it = p.getFNestedPackage().iterator();
-		while(it.hasNext()) {
-			newEPackage.getESubpackages().add(accept((EObject)it.next()));
-		}
-		
-		
-		it = p.getFOwnedTypeDefinition().iterator();
-		while(it.hasNext()) {
-			Object o = accept((EObject)it.next());
-			if (o != null)
-				newEPackage.getEClassifiers().add(o);
-			else
-				internalLog.warn(loggerTabs + "accept of a OwnedTypeDefinition returned null !"); 
-				
-		}
-
-		loggerTabs.decrement();
-		return newEPackage;
-	}
-	
-	/** 
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
-	 */
-	public Object visit(FClassDefinition node) {
-		EClass newEClass=null;
-		current_pname = node.getFName();
-		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ current_pname);
-		loggerTabs.increment();
-		
-		try{
-			newEClass = EcoreFactory.eINSTANCE.createEClass();
-			newEClass.setName(current_pname);
-			ecoreResource.getContents().add(newEClass);
-		
-	/*	typedef = false;
-		String result = "";
-
-		result += ppTags(node.getFTag());
-		
-		if (node.isFIsAbstract()) result += "abstract ";
-		result += "class " + KMTHelper.getMangledIdentifier(node.getFName());
-		if (node.getFTypeParameter().size() > 0) {
-			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
-			result += ">";
-		}
-		if (node.getFSuperType().size() > 0) {
-			result += " inherits ";
-			result += ppComaSeparatedNodes(node.getFSuperType());
-		}
-		result += "\n" + getPrefix() + "{\n";
-		pushPrefix();
-		result += ppCRSeparatedNode(node.getFOwnedAttributes());
-		result += ppCRSeparatedNode(node.getFOwnedOperation());
-		popPrefix();
-		result += getPrefix() + "}";		
-		
-		typedef = true;
-		
-		return result;*/
-		}
-		catch(Exception e)
-		{
-			internalLog.error("Visiting ClassDefinition: "+ current_pname + ", Exception: " + e.getMessage() ,e);
-		}
-		loggerTabs.decrement();
-		return newEClass;
-	}
-	
-	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
-	 */
-	public Object visit(FClass node) {
-
-		//current_pname = KMTHelper.getQualifiedName(node);
-		internalLog.debug(loggerTabs + "Visiting Class: "+ current_pname);
-		loggerTabs.decrement();
-		
-		/*String qname = KMTHelper.getQualifiedName(node.getFClassDefinition());
-		String name = KMTHelper.getMangledIdentifier(node.getFClassDefinition().getFName());
-		String result = ppTypeName(qname, name);
-		if (node.getFTypeParamBinding().size() > 0) {
-			result += "<" + ppComaSeparatedNodes(node.getFTypeParamBinding()) + ">";
-		}
+		KM2EcoreExporter_pass1 pass1 =  new KM2EcoreExporter_pass1(ecoreResource, kmt2ecoremapping);
+		KM2EcoreExporter_pass2 pass2 =  new KM2EcoreExporter_pass2(ecoreResource, kmt2ecoremapping);
+		Object result =  pass1.exportPackage(root_package);
+		pass2.exportPackage(root_package);		
 		return result;
-		*/
-		return null;
-	}	
+	}
+	
 	
 }
