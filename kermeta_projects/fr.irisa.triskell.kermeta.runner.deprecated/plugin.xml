@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta.runner"
    name="Runner Plug-in"
-   version="0.0.11"
+   version="0.0.12"
    provider-name="INRIA/IRISA"
    class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
 
@@ -168,7 +168,7 @@
                name="Kermeta"
                id="KermetaWizard"/>
          <wizard
-               icon="icons/kermeta.png"
+               icon="icons/newkermetafile.png"
                class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard"
                finalPerspective="kermetaPerspective"
                category="KermetaWizard"
@@ -207,7 +207,7 @@
           <action
                   toolbarPath="Normal"
                   label="newFileAction"
-                  icon="icons/tree_package.gif"
+                  icon="icons/newkermetafile.png"
                   class="fr.irisa.triskell.kermeta.runner.actions.KermetaNewFileWizardAction"
                   tooltip="Create a new K. File"
                   id="newFileAction">

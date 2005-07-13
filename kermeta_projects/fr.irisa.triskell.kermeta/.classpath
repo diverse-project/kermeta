@@ -5,8 +5,8 @@
 	<classpathentry exported="true" kind="lib" path="lib/thirdparty/ldt-core.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/thirdparty/log4j.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/interpreter_kermeta.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/io_kermeta.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/model_kermeta.jar"/>
+	<classpathentry exported="true" sourcepath="/fr.irisa.triskell.kermeta.io/src/java" kind="lib" path="lib/io_kermeta.jar"/>
+	<classpathentry exported="true" sourcepath="/fr.irisa.triskell.kermeta.model/src/java" kind="lib" path="lib/model_kermeta.jar"/>
 	<classpathentry kind="src" path="src/java/"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>

@@ -1,7 +1,7 @@
-/* $Id: KermetaInterpreter.java,v 1.11 2005-07-08 12:21:50 dvojtise Exp $
+/* $Id: KermetaInterpreter.java,v 1.12 2005-07-13 10:05:13 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 14, 2005
@@ -15,7 +15,6 @@
  * 		- refactored and renamed KermetaInterpreter
  * 		- interpreterInstance has become a static attribute of Run 
  * 		- splitted main method in smaller ones
- * TODO : remove the static attributes
  */
 package fr.irisa.triskell.kermeta.launcher;
 
