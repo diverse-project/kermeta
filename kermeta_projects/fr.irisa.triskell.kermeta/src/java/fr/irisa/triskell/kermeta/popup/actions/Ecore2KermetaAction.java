@@ -59,7 +59,7 @@ public class Ecore2KermetaAction implements IObjectActionDelegate {
 	    }
 	    catch (Throwable t) {
 	        
-			MessageDialog.openInformation(
+			MessageDialog.openError(
 				shell,
 				"Ecore 2 Kermeta Error",
 				"error : " + t);

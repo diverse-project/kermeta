@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreAction.java,v 1.1 2005-07-11 15:34:14 dvojtise Exp $
+/* $Id: Kermeta2EcoreAction.java,v 1.2 2005-07-13 10:00:12 dvojtise Exp $
  * Project : Kermeta
  * File : Kermeta2EcoreAction.java
  * License : EPL
@@ -65,7 +65,7 @@ public class Kermeta2EcoreAction implements IObjectActionDelegate {
 		public void run(IAction action) {
 		    Shell shell = new Shell();
 		    try {
-		    	MessageDialog.openInformation(
+		    	MessageDialog.openWarning(
 						shell,
 						"Warning",
 						"This feature has not been tested, it cannot be considered as stable.\n"
@@ -100,7 +100,7 @@ public class Kermeta2EcoreAction implements IObjectActionDelegate {
 		    }
 		    catch (Throwable t) {
 		        
-				MessageDialog.openInformation(
+				MessageDialog.openError(
 					shell,
 					"Kermeta 2 Ecore Error",
 					"error : " + t);
