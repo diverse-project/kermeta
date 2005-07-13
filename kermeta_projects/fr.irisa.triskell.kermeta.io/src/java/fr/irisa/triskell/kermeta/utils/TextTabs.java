@@ -1,4 +1,4 @@
-/* $Id: TextTabs.java,v 1.1 2005-07-11 15:34:20 dvojtise Exp $
+/* $Id: TextTabs.java,v 1.2 2005-07-13 10:02:08 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : TextTabs.java
  * License    : EPL
@@ -19,6 +19,7 @@ public class TextTabs {
 	protected String tabStringIncrement = "   ";
 	protected int currentTabLevel = 0;
 	protected String currentTabString = "";
+	protected String initialString = "";
 	
 	/**
 	 * Create new TextTabs using default increment (3 blanks)
@@ -26,14 +27,23 @@ public class TextTabs {
 	public TextTabs(){
 		
 	}
-	
+
 	/**
 	 * Create new TextTabs setting the increment
 	 */
 	public TextTabs(String newTabStringIncrement){
 		tabStringIncrement = newTabStringIncrement;
 	}
-	
+
+	/**
+	 * Create new TextTabs setting the increment
+	 * the initString allows to create a tabstring prefixed with this string. This is usefull 
+	 * with log4j that strip the leading spaces
+	 */
+	public TextTabs(String newTabStringIncrement, String initString){
+		tabStringIncrement = newTabStringIncrement;
+		initialString = initString;
+	}
 	public String getTab() 
 	{
 		return currentTabString;
@@ -45,7 +55,7 @@ public class TextTabs {
 	 */
 	public String increment()
 	{
-		String newTab="";
+		String newTab=initialString;
 		currentTabLevel++;
 		for (int i = 0; i < currentTabLevel; i++) newTab = newTab + tabStringIncrement;
 		currentTabString = newTab;
