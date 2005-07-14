@@ -30,3 +30,4 @@
 # or
 #DEFAULT (echo ""; id; echo %{sVv}; date; cat) >> $CVSROOT/CVSROOT/commitlog
 DEFAULT /usr/bin/syncmail -f users.gforge.inria.fr  %S kermeta-commits@lists.gforge.inria.fr
+CVSROOT /usr/bin/syncmail -C 0 -f users.gforge.inria.fr  %S dvojtise@irisa.fr
