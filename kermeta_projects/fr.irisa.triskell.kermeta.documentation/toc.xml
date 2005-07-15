@@ -1,5 +1,5 @@
-<!-- $Id: toc.xml,v 1.5 2005-06-10 09:32:52 dvojtise Exp $-->
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- $Id: toc.xml,v 1.6 2005-07-15 19:23:10 dvojtise Exp $ -->
 <toc label="KerMeta documentation">
 	<topic label="User documentation">
 		<topic label="KerMeta Tutorial" href="build/eclipse.help/KerMeta-Tutorial/index.html"> 
