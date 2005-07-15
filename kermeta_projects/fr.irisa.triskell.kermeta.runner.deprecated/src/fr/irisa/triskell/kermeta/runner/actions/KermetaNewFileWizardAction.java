@@ -1,30 +1,39 @@
-/* $Id: KermetaNewFileWizardAction.java,v 1.1 2005-05-27 15:07:39 zdrey Exp $
+/* $Id: KermetaNewFileWizardAction.java,v 1.2 2005-07-15 20:11:15 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardAction.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 26, 2005
- * Authors: zdrey
+ * Authors: 
+ * 		zdrey
+ * 		dvojtise
  */
 package fr.irisa.triskell.kermeta.runner.actions;
 
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 
+import fr.irisa.triskell.kermeta.runner.wizards.KermetaNewFileWizard;
+
 /**
- * 
+ * This action call the KermetaNewFileWizard
  */
 public class KermetaNewFileWizardAction implements
         IWorkbenchWindowActionDelegate {
 
+	IStructuredSelection theSelection;
+	IWorkbench theWorkbench;
     /* (non-Javadoc)
      * @see org.eclipse.ui.IWorkbenchWindowActionDelegate#dispose()
      */
     public void dispose() {
-        // TODO Auto-generated method stub
 
     }
 
@@ -32,7 +41,6 @@ public class KermetaNewFileWizardAction implements
      * @see org.eclipse.ui.IWorkbenchWindowActionDelegate#init(org.eclipse.ui.IWorkbenchWindow)
      */
     public void init(IWorkbenchWindow window) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -40,8 +48,11 @@ public class KermetaNewFileWizardAction implements
      * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
      */
     public void run(IAction action) {
-        System.out.println("ooh");
-        // TODO Auto-generated method stub
+    	Shell shell = new Shell();		
+        KermetaNewFileWizard wizard = new KermetaNewFileWizard();
+        wizard.init(theWorkbench, theSelection);
+        WizardDialog dialog = new WizardDialog(shell, wizard);
+        dialog.open();
 
     }
 
@@ -49,7 +60,7 @@ public class KermetaNewFileWizardAction implements
      * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
      */
     public void selectionChanged(IAction action, ISelection selection) {
-        // TODO Auto-generated method stub
+    	theSelection = (IStructuredSelection)selection;
 
     }
 
