@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter_pass1.java,v 1.1 2005-07-13 15:33:20 dvojtise Exp $
+/* $Id: KM2EcoreExporter_pass1.java,v 1.2 2005-07-17 19:37:17 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -250,14 +250,27 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 		
 		if (node.isFIsComposite())
 		{
-			//attribute
-			EAttribute newEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
-			newEStructuralFeature = newEAttribute;
+			if (node.getFOpposite() != null)
+			{
+				// reference 
+				EReference newEReference =EcoreFactory.eINSTANCE.createEReference();
+				newEStructuralFeature = newEReference;	
+				newEReference.setContainment(true);
+			}
+			else
+			{
+				//attribute
+				EAttribute newEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+				newEStructuralFeature = newEAttribute;
+				newEAttribute.setID(node.isFIsID());
+			}
 		}
 		else { 
 			// reference 
 			EReference newEReference =EcoreFactory.eINSTANCE.createEReference();
 			newEStructuralFeature = newEReference;
+			
+			newEReference.setContainment(false);
 		}
 		
 		// common part for both Attributes and References
@@ -267,38 +280,15 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 		
 		// set as much attributes as possible
 		newEStructuralFeature.setDerived(node.isFIsDerived());
-		newEStructuralFeature.setChangeable(!node.isFIsReadOnly());
+		newEStructuralFeature.setChangeable(!node.isFIsReadOnly());				
+		newEStructuralFeature.setOrdered(node.isFIsOrdered());
+		newEStructuralFeature.setUnique(node.isFIsUnique());
+
+		newEStructuralFeature.setLowerBound(node.getFLower());
+		newEStructuralFeature.setUpperBound(node.getFUpper());
 		
-		
-		
-		/*
-	    
-		result += KMTHelper.getMangledIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node);
-		if (node.getFOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getFOpposite().getFName());
-		if (node.isFIsDerived()) {
-			pushPrefix();
-			result += "\n" + getPrefix() + "getter is " ;
-			if (node.getFGetterbody() != null) result += this.accept(node.getFGetterbody());
-			else {
-				result += "do\n";
-				pushPrefix();
-				result += getPrefix() + "//TODO: implement getter for derived property " + node.getFName() + "\n"; 
-				popPrefix();
-				result += getPrefix() + "end";
-			}
-			if (! node.isFIsReadOnly()) {
-				result += "\n" + getPrefix() + "setter is ";
-				if (node.getFGetterbody() != null) result += this.accept(node.getFSetterbody());
-				else {
-					result += "do\n";
-					pushPrefix();
-					result += getPrefix() + "//TODO: implement setter for derived property " + node.getFName() + "\n"; 
-					popPrefix();
-					result += getPrefix() + "end";
-				}
-			}
-			popPrefix();
-		}*/
+		newEStructuralFeature.setDefaultValueLiteral(node.getFDefault());
+     
 		loggerTabs.decrement();		
 		return newEStructuralFeature;
 	}

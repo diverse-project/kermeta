@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter_pass2.java,v 1.1 2005-07-13 15:33:20 dvojtise Exp $
+/* $Id: KM2EcoreExporter_pass2.java,v 1.2 2005-07-17 19:37:17 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -18,17 +18,26 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import fr.irisa.triskell.kermeta.behavior.FStringLiteral;
+import fr.irisa.triskell.kermeta.behavior.FTypeLiteral;
+import fr.irisa.triskell.kermeta.behavior.FTypeReference;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.structure.FVoidType;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
@@ -77,18 +86,19 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 	 */
 	public Object visit(FClassDefinition node) {
 		EClass newEClass=null;
-		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ current_pname);
+		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ node.getFName());
 		loggerTabs.increment();
 		
 		
 		// search the Eclass from previous pass
 		newEClass = (EClass)kmt2ecoremapping.get(node);
-					
+		
 		Iterator it = node.getFSuperType().iterator();
+		if (it.hasNext()) internalLog.debug(loggerTabs + "Supertypes: ");
 		while(it.hasNext()) {
 			Object o = accept((EObject)it.next());
 			if (o != null)
-				newEClass.getEAllSuperTypes().add(o);
+				newEClass.getESuperTypes().add(o);
 			else
 				internalLog.warn(loggerTabs + "accept of a getFSuperType returned null !"); 
 				
@@ -118,7 +128,7 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 	 */
 	public Object visit(FClass node) {
 		EClass newEClass=null;		
-		internalLog.debug(loggerTabs + "Visiting Class: "+ node.getFName());
+		internalLog.debug(loggerTabs + "Visiting Class: "+ node.getFName() + "->"+node.getFClassDefinition().getFName());
 		loggerTabs.increment();
 		
 		newEClass = (EClass)kmt2ecoremapping.get(node.getFClassDefinition());
@@ -135,4 +145,100 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 		return newEClass;
 	}
 	
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
+	 */
+	public Object visit(FProperty node) {
+		internalLog.debug(loggerTabs + "Visiting Property: "+ node.getFName());
+		loggerTabs.increment();
+		
+		EStructuralFeature newEStructuralFeature;
+		EReference newEReference = null;
+		EAttribute newEAttribute = null;
+		// search the Eclass from previous pass
+		newEStructuralFeature = (EStructuralFeature)kmt2ecoremapping.get(node);
+		
+		if (node.isFIsComposite() )
+		{
+			if (node.getFOpposite() != null)
+			{
+				newEReference = (EReference)newEStructuralFeature;
+			}
+			//attribute
+			newEAttribute = (EAttribute)newEStructuralFeature;
+			
+			
+		}
+		else { 
+			// reference 
+			newEReference = (EReference)newEStructuralFeature;
+			
+		}
+		if(newEReference != null)
+		{
+			if (node.getFOpposite() != null) 
+			{   // retreive the opposite
+				newEReference.setEOpposite((EReference)kmt2ecoremapping.get(node.getFOpposite()));
+			}
+			
+		}
+		if (node.isFIsDerived()) {
+			internalLog.warn(loggerTabs + "TODO: derived property not implemented yet ");	
+			/*	    
+			if (node.isFIsDerived()) {
+				pushPrefix();
+				result += "\n" + getPrefix() + "getter is " ;
+				if (node.getFGetterbody() != null) result += this.accept(node.getFGetterbody());
+				else {
+					result += "do\n";
+					pushPrefix();
+					result += getPrefix() + "//TODO: implement getter for derived property " + node.getFName() + "\n"; 
+					popPrefix();
+					result += getPrefix() + "end";
+				}
+				if (! node.isFIsReadOnly()) {
+					result += "\n" + getPrefix() + "setter is ";
+					if (node.getFGetterbody() != null) result += this.accept(node.getFSetterbody());
+					else {
+						result += "do\n";
+						pushPrefix();
+						result += getPrefix() + "//TODO: implement setter for derived property " + node.getFName() + "\n"; 
+						popPrefix();
+						result += getPrefix() + "end";
+					}
+				}
+				popPrefix();
+			}*/
+		}
+		
+		//newEStructuralFeature.setEType((EClassifier)kmt2ecoremapping.get(node.getFType()));
+		newEStructuralFeature.setEType((EClassifier)accept(node.getFType()));
+		
+		loggerTabs.decrement();		
+		return newEStructuralFeature;
+	}
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FStringLiteral)
+	 */
+	public Object visit(FStringLiteral node) {
+		return "\"" + node.getFValue() +"\""; //TODO : escape characters ?
+	}
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeLiteral)
+	 */
+	public Object visit(FTypeLiteral node) {
+		return this.accept(node.getFTyperef());
+	}
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeReference)
+	 */
+	public Object visit(FTypeReference node) {
+	    return accept(node.getFType());
+	}
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FVoidType)
+	 */
+	public Object visit(FVoidType node) {
+		return "Void";
+	}
 }

@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter.java,v 1.3 2005-07-13 15:33:20 dvojtise Exp $
+/* $Id: KM2EcoreExporter.java,v 1.4 2005-07-17 19:37:17 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -18,14 +18,18 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
@@ -68,5 +72,45 @@ public class KM2EcoreExporter {
 		return result;
 	}
 	
+	public EClassifier getETypeForFType(FType ftype) {
+		//if(ftype.)
+    	/*
+    	FTypeDefinition def = null;
+    	
+    	if (etype == null) {
+    	    def = unit.typeDefinitionLookup("kermeta::standard::Void");
+    	}
+    	
+    	if (def == null) {
+    	
+	    	if (etype.eResource() != resource) {
+	    		def = unit.typeDefinitionLookup(getQualifiedName(etype));
+	    		if (def == null) {
+	    			// import the unit
+	    			unit.importedUnits.add(new EcoreUnit(etype.eResource(), unit.packages));
+	    		}
+	    		def = unit.typeDefinitionLookup(getQualifiedName(etype));
+	    	}
+	    	else {
+	    		def = (FTypeDefinition)types.get(etype);
+	    	}
+	    	
+    	}
+    	
+    	if (def == null) return null;
+    	if (def instanceof FType) return (FType)def;
+    	
+    	FClassDefinition cd = (FClassDefinition)def;
+    	
+    	FClass fc = (FClass)classes.get(cd);
+    	if (fc == null) {
+    		fc = unit.struct_factory.createFClass();
+    		fc.setFClassDefinition(cd);
+    		classes.put(cd, fc);
+    	}
+    	return fc;
+    	*/
+		return null;
+    }
 	
 }
