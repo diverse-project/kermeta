@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.2 2005-07-12 16:36:03 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.3 2005-07-18 16:54:02 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -69,23 +69,19 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         KermetaUnitFactory.getDefaultLoader().unloadAll();
         
         // Create the correct uri
-        File f = new File(metamodel_uri);
     //    IFile kmtfile = ecorefile.getProject().getFile(ecorefile.getProjectRelativePath().removeFileExtension().addFileExtension("kmt"));
 		// Create absolute path from relative 
         String unit_uri = instances.getFactory().getMemory().getUnit().getUri();
-        String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/"));
-        System.err.println("UNIT URI = "+ unit_uripath);
-        
-        String mm_uri = unit_uripath+"/"+metamodel_uri; 
-//      resolve uri
+        String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
+        //      resolve uri
     	URI u = URI.createURI(metamodel_uri);
-   /* 	if (u.isRelative()) {
+    	if (u.isRelative()) {
     		URIConverter c = new URIConverterImpl();
-    		u = u.resolve(c.normalize(URI.createURI(".")));    			
-    	}*/
-    	System.err.println("URI eclipse : "+ u.toString());
-        
-        ecore_unit = (EcoreUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(mm_uri);
+    		u = u.resolve(c.normalize(URI.createURI(unit_uripath)));    			
+    	}
+    	//EMF2Runtime.internalLog.info("UNIT URI = "+ u.toString());
+    	//System.err.println("UNIT URI = "+ u.toString() + "(path : "+ unit_uripath+")");
+        ecore_unit = (EcoreUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(u.toString());
     }
     
     /**
