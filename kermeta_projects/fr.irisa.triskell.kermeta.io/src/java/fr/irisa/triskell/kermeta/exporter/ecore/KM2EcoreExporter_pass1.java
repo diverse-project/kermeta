@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter_pass1.java,v 1.2 2005-07-17 19:37:17 dvojtise Exp $
+/* $Id: KM2EcoreExporter_pass1.java,v 1.3 2005-07-18 15:47:10 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -23,16 +23,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
-import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FParameter;
+import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -49,6 +51,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 	protected ArrayList usings = new ArrayList();
 	protected ArrayList imports = new ArrayList();
 	protected String root_pname;
+	public	FPackage root_p;
 	protected String current_pname;
 	protected TextTabs loggerTabs =  new TextTabs("   ","");
 	
@@ -74,7 +77,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 	 */
 	public Object exportPackage(FPackage root_package) {
 		root_pname = KMTHelper.getQualifiedName(root_package);
-		
+		root_p = root_package;
 		return accept(root_package);
 	}
 	
@@ -107,7 +110,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 				internalLog.warn(loggerTabs + "accept of a OwnedTypeDefinition returned null !"); 
 				
 		}
-
+		
 		loggerTabs.decrement();
 		return newEPackage;
 	}
@@ -196,49 +199,91 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 		ecoreResource.getContents().add(newEOperation);
 		kmt2ecoremapping.put(node,newEOperation);
 		
+		
+		// do as much as possible right now
+		// create an annotation to hold the isAbstract boolean
+		// TODO : what is the default value abstract or not ? in which case we do not need to add the annotation
+		//		current version of ecore2kmt says : not abstract and creates an empty body
+		if (node.isFIsAbstract()) {
+			EAnnotation newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			newEAnnotation.setSource(KM2EcoreExporter.KMT2ECORE_ANNOTATION); 
+			Boolean b = new Boolean(node.isFIsAbstract());
+			newEAnnotation.getDetails().put(KM2EcoreExporter.KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS, b.toString());			
+			ecoreResource.getContents().add(newEAnnotation);
+			newEOperation.getEAnnotations().add(newEAnnotation);
+		}
+		
+		// Create an annotation to hold the operation body
+		if (node.getFBody() != null) {
+			EAnnotation newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			newEAnnotation.setSource(KM2EcoreExporter.KMT2ECORE_ANNOTATION);			
+			String bodyString = (String)new KM2KMTPrettyPrinter().accept(node.getFBody());
+			newEAnnotation.getDetails().put(KM2EcoreExporter.KMT2ECORE_ANNOTATION_BODY_DETAILS, bodyString);			
+			ecoreResource.getContents().add(newEAnnotation);
+			newEOperation.getEAnnotations().add(newEAnnotation);
+			
+		}
+		
+		// Annotations
+		Iterator it = node.getFTag().iterator();
+		while(it.hasNext()) {
+			Object o = accept((EObject)it.next());
+			if (o != null)
+				newEOperation.getEAnnotations().add(o);
+			else
+				internalLog.warn(loggerTabs + "accept of a getFTag returned null !");				
+		}
+		
+		newEOperation.setOrdered(node.isFIsOrdered());
+		newEOperation.setUnique(node.isFIsUnique());
+		newEOperation.setLowerBound(node.getFLower());
+		newEOperation.setUpperBound(node.getFUpper());
+		
+		
+		// Parameters
+		it = node.getFOwnedParameter().iterator();
+		while(it.hasNext()) {
+			Object o = accept((EObject)it.next());
+			if (o != null)
+				newEOperation.getEParameters().add(o);
+			else
+				internalLog.warn(loggerTabs + "accept of a getFOwnedParameter returned null !");				
+		}
+		
 		// TODO implement the content of this Operation
 		/*
-		String result = ppTags(node.getFTag());
-		if (node.getFSuperOperation() != null) result += "method ";
-		else result += "operation ";
-		result += KMTHelper.getMangledIdentifier(node.getFName());
 		if (node.getFTypeParameter().size() > 0) {
 			result += "<";
 			result += ppTypeVariableDeclaration(node.getFTypeParameter());
 			result += ">";
-		}
-		result += "(";
-		result += ppComaSeparatedNodes(node.getFOwnedParameter());
-		result += ")";
-		if(node.getFType() != null) {
-			result += " : " + ppTypeFromMultiplicityElement(node);
-		}
-	
-		if (node.getFSuperOperation() != null) {
-			result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getFSuperOperation().getFOwningClass()));
-		}
-		if (node.getFRaisedException().size() > 0) {
-			result += " raises " + ppComaSeparatedNodes(node.getFRaisedException());
-		}
-		if (node.getFBody() != null) {
-			result += " is\n";
-			pushPrefix();
-			result += getPrefix() + this.accept(node.getFBody());
-			popPrefix();
-		}
-		else if (node.isFIsAbstract()) result += " is abstract";
-		else {
-			result += " is do\n";
-			pushPrefix();
-			result += getPrefix() + "//TODO: implement operation " + node.getFName() + "\n"; 
-			popPrefix();
-			result += getPrefix() + "end";
-		}
+		}				
 		*/
 		loggerTabs.decrement();
 		return newEOperation;
 	}
 
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FParameter)
+	 */
+	public Object visit(FParameter node) {
+		internalLog.debug(loggerTabs + "Visiting Parameter: "+ node.getFName());
+		loggerTabs.increment();
+		
+		EParameter newEParameter = EcoreFactory.eINSTANCE.createEParameter();
+//		KMTHelper.getMangledIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node)
+		
+		newEParameter.setName(node.getFName());
+		ecoreResource.getContents().add(newEParameter);
+		kmt2ecoremapping.put(node,newEParameter);
+		newEParameter.setLowerBound(node.getFLower());
+		newEParameter.setUpperBound(node.getFUpper());
+		newEParameter.setOrdered(node.isFIsOrdered());
+		newEParameter.setUnique(node.isFIsUnique());
+		
+		loggerTabs.decrement();
+		return newEParameter;
+	}
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
@@ -251,7 +296,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 		if (node.isFIsComposite())
 		{
 			if (node.getFOpposite() != null)
-			{
+			{ 	// if it has an opposite, this cannot be an EAttribute
 				// reference 
 				EReference newEReference =EcoreFactory.eINSTANCE.createEReference();
 				newEStructuralFeature = newEReference;	
@@ -312,4 +357,11 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 		loggerTabs.decrement();
 		return newEAnnotation;
     }
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(FPrimitiveType)
+	 */
+	public Object visit(FPrimitiveType node) {
+		internalLog.debug(loggerTabs + "Visiting FPrimitiveType: "+ node.getFName());		
+		return null;
+	}
 }

@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter_pass2.java,v 1.2 2005-07-17 19:37:17 dvojtise Exp $
+/* $Id: KM2EcoreExporter_pass2.java,v 1.3 2005-07-18 15:47:10 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -21,8 +21,12 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -34,8 +38,14 @@ import fr.irisa.triskell.kermeta.behavior.FTypeReference;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FNamedElement;
+import fr.irisa.triskell.kermeta.structure.FObject;
+import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FParameter;
+import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FVoidType;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -52,6 +62,7 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 	protected ArrayList usings = new ArrayList();
 	protected ArrayList imports = new ArrayList();
 	protected String root_pname;
+	public	FPackage root_p;
 	protected String current_pname;
 	protected TextTabs loggerTabs =  new TextTabs("   ","");
 	
@@ -76,6 +87,7 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 	 */
 	public Object exportPackage(FPackage root_package) {
 		root_pname = KMTHelper.getQualifiedName(root_package);
+		root_p = root_package;
 		
 		return accept(root_package);
 	}
@@ -111,7 +123,7 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 			// one annotation per type parameter
 			FTypeVariable tv = (FTypeVariable)it.next();
 			EAnnotation newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			newEAnnotation.setSource("KerMeta"); // TODO put this string in a constant
+			newEAnnotation.setSource(KM2EcoreExporter.KMT2ECORE_ANNOTATION); 
 			String typeParameterString = tv.getFName();			
 			if (tv.getFSupertype() != null) typeParameterString += " : " + new KM2KMTPrettyPrinter().accept(tv.getFSupertype());
 			newEAnnotation.getDetails().put(current_pname, typeParameterString);			
@@ -119,19 +131,158 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 									
 		}
 		
+		//		 owned Attributes
+		it = node.getFOwnedAttributes().iterator();
+		while(it.hasNext()) {
+			accept((EObject)it.next());
+		}
+		//		 owned operations
+		it = node.getFOwnedOperation().iterator();
+		while(it.hasNext()) {
+			 accept((EObject)it.next());				
+		}
+		
 		loggerTabs.decrement();
 		return newEClass;
+	}
+	
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
+	 */
+	public Object visit(FOperation node) {
+		EOperation newEOperation=null;
+		current_pname = node.getFName();
+		internalLog.debug(loggerTabs + "Visiting Operation: "+ current_pname);
+		loggerTabs.increment();
+		
+		//		 search the EOperation from previous pass
+		newEOperation = (EOperation)kmt2ecoremapping.get(node);
+		
+		// Parameters
+		Iterator it = node.getFOwnedParameter().iterator();
+		while(it.hasNext()) {
+			accept((EObject)it.next());				
+		}
+		
+		// Return type
+		if(node.getFType() != null) {
+			newEOperation.setEType((EClassifier)accept((EObject)node.getFType()));
+		}
+		
+		// superoperation
+		if (node.getFSuperOperation() != null)
+		{
+			addLinkedAnnotation( 
+					newEOperation,
+					KM2EcoreExporter.KMT2ECORE_ANNOTATION_SUPEROPERATION,
+					KM2EcoreExporter.KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS,
+					KMTHelper.getQualifiedName(node.getFSuperOperation().getFOwningClass()),
+					node.getFSuperOperation());
+			
+		}
+
+		it = node.getFRaisedException().iterator();
+		while (it.hasNext()) {
+			FObject  anException = (FObject)it.next();
+/*			EClassifier exceptionEClassifier =  (FClassifier)accept(anException);
+			addLinkedAnnotation( 
+					newEOperation,
+					KM2EcoreExporter.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION,
+					KM2EcoreExporter.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS,
+					KMTHelper.getQualifiedName(anException),
+					exceptionClassifier);*/
+		}
+		// TODO implement the content of this Operation
+		/*
+		if (node.getFTypeParameter().size() > 0) {
+			result += "<";
+			result += ppTypeVariableDeclaration(node.getFTypeParameter());
+			result += ">";
+		}
+		
+		*/
+		loggerTabs.decrement();
+		return newEOperation;
+	}
+
+
+	/**
+	 * add the given info in the annotation, eventually create it
+	 * @param annotedModelElement
+	 * @param annotationName
+	 * @param annotationDetailKey
+	 * @param annotationDetailValue
+	 * @param referedFObject
+	 */
+	private void addLinkedAnnotation( 
+			EModelElement annotedModelElement,
+			String annotationName,
+			String annotationDetailKey,
+			String annotationDetailValue,
+			FObject referedFObject
+			) {
+		EAnnotation newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+		newEAnnotation.setSource(annotationName);			
+		newEAnnotation.getDetails().put(annotationDetailKey, 
+				annotationDetailValue);
+		ecoreResource.getContents().add(newEAnnotation);
+		annotedModelElement.getEAnnotations().add(newEAnnotation);
+		
+		// try a direct link instead of a detail map. 
+		//	faire un accept ici !!!
+		EObject referedEObject = (EObject)accept(referedFObject);
+		//EObject referedEObject = (EObject)kmt2ecoremapping.get(referedFObject);
+		if (referedEObject != null) 
+		{
+			internalLog.debug(loggerTabs + " adding direct link for " +annotationDetailKey + " = " + annotationDetailValue);
+			newEAnnotation.getReferences().add(referedEObject);
+		}
+		else internalLog.warn(loggerTabs + "not able to create direct link for " +annotationDetailKey + " = " + annotationDetailValue);
+	}
+
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FParameter)
+	 */
+	public Object visit(FParameter node) {
+		internalLog.debug(loggerTabs + "Visiting Parameter: "+ node.getFName());
+		loggerTabs.increment();
+		
+		//		 search the EOperation from previous pass
+		EParameter newEParameter = (EParameter)kmt2ecoremapping.get(node);
+		
+		newEParameter.setEType(	(EClassifier)accept(node.getFType()));
+		
+		loggerTabs.decrement();
+		return newEParameter;
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
 	public Object visit(FClass node) {
-		EClass newEClass=null;		
+		EClassifier newEClassifier=null;		
 		internalLog.debug(loggerTabs + "Visiting Class: "+ node.getFName() + "->"+node.getFClassDefinition().getFName());
 		loggerTabs.increment();
 		
-		newEClass = (EClass)kmt2ecoremapping.get(node.getFClassDefinition());
+		newEClassifier = (EClassifier)kmt2ecoremapping.get(node.getFClassDefinition());
+		if (newEClassifier ==  null)
+		{	// maybe this is new reference to a primitive type or a class defined in another file
+			// we do that here because we don't want to visit the whole FClass tree during the pass1 
+			// only to retreive some references to String or Integer  
+			String type_name = KMTHelper.getQualifiedName(node.getFClassDefinition());
+			  
+			if (KM2EcoreExporter.primitive_types_mapping.containsKey(type_name)) {
+				internalLog.debug(loggerTabs + "Creating DataType: "+ node.getFClassDefinition().getFName());
+				type_name = (String)KM2EcoreExporter.primitive_types_mapping.get(type_name);
+				// we need to create a new datatype for it and connect it to the root package
+				newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
+				newEClassifier.setName(node.getFClassDefinition().getFName());
+				newEClassifier.setInstanceClassName(type_name);
+				EPackage root_EPackage = (EPackage)kmt2ecoremapping.get(root_p);
+				root_EPackage.getEClassifiers().add(newEClassifier);
+				kmt2ecoremapping.put(node.getFClassDefinition(),newEClassifier);
+			}
+		}
 		if (node.getFTypeParamBinding().size() > 0) {
 			// we must deal with binding : 
 			// TODO find a correct ecore representation for class binding 
@@ -142,7 +293,7 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 		}
 		
 		loggerTabs.decrement();
-		return newEClass;
+		return newEClassifier;
 	}
 	
 	/**
@@ -161,13 +312,14 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 		if (node.isFIsComposite() )
 		{
 			if (node.getFOpposite() != null)
-			{
+			{	// if it has an opposite, this cannot be an EAttribute
 				newEReference = (EReference)newEStructuralFeature;
 			}
-			//attribute
-			newEAttribute = (EAttribute)newEStructuralFeature;
-			
-			
+			else
+			{
+				//attribute
+				newEAttribute = (EAttribute)newEStructuralFeature;
+			}						
 		}
 		else { 
 			// reference 
@@ -212,33 +364,58 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 		}
 		
 		//newEStructuralFeature.setEType((EClassifier)kmt2ecoremapping.get(node.getFType()));
-		newEStructuralFeature.setEType((EClassifier)accept(node.getFType()));
+		EClassifier type = (EClassifier)accept(node.getFType());
+		if(type != null)
+			newEStructuralFeature.setEType(type);
+		else
+			internalLog.debug(loggerTabs + "type of this property is null/void");
 		
 		loggerTabs.decrement();		
 		return newEStructuralFeature;
 	}
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FStringLiteral)
 	 */
 	public Object visit(FStringLiteral node) {
-		return "\"" + node.getFValue() +"\""; //TODO : escape characters ?
+		internalLog.debug(loggerTabs + "Visiting FStringLiteral: "+ node.getFValue());		
+		return node.getFValue(); 
 	}
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeLiteral)
 	 */
 	public Object visit(FTypeLiteral node) {
-		return this.accept(node.getFTyperef());
+		internalLog.debug(loggerTabs + "Visiting FTypeLiteral");
+		loggerTabs.increment();
+		Object o = this.accept(node.getFTyperef());
+		loggerTabs.decrement();		
+		return o;
 	}
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeReference)
 	 */
 	public Object visit(FTypeReference node) {
-	    return accept(node.getFType());
+		internalLog.debug(loggerTabs + "Visiting FTypeReference: "+ node.getFName());
+		loggerTabs.increment();
+		Object o = this.accept(node.getFType());
+		loggerTabs.decrement();	
+	    return o;
 	}
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FVoidType)
 	 */
 	public Object visit(FVoidType node) {
-		return "Void";
+		return null;
+	}
+	
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(FPrimitiveType)
+	 */
+	public Object visit(FPrimitiveType node) {
+		internalLog.debug(loggerTabs + "Visiting FPrimitiveType: "+ node.getFName());		
+		return null;
 	}
 }

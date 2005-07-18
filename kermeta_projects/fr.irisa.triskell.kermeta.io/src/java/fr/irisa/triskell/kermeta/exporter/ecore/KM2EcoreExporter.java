@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter.java,v 1.4 2005-07-17 19:37:17 dvojtise Exp $
+/* $Id: KM2EcoreExporter.java,v 1.5 2005-07-18 15:47:10 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -37,6 +37,13 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * Exports KM or KMT to Ecore.
+ * 
+ * Notes about the Ecore representation of Kermeta programs.
+ * Due to the lack of some features in Ecore, some data are stored in a special way inside Ecore models.
+ * - superoperation are stored in Annotations named KerMeta.SuperOperation
+ * 		both the reference and a detail map are generated. If you generate these manually be sure to have them consistent 
+ * 		(ie. that points to the same operation)
+ * - isAbstract boolean is stored in the annotation named "KerMeta" in a detail map with key="isAbstract"
  */
 public class KM2EcoreExporter {
 
@@ -48,9 +55,33 @@ public class KM2EcoreExporter {
 	// the resource to populate
 	protected Resource ecoreResource = null;
 	
+
+	/**
+	 * <code>kmt2ecoremapping</code> is a trace mapping. 
+	 * used to simplify the process in pass2
+	 */
 	public Hashtable kmt2ecoremapping =  new Hashtable();
 	
 	
+    public static Hashtable primitive_types_mapping;
+    static {
+    	primitive_types_mapping = new Hashtable();
+    	primitive_types_mapping.put("kermeta::standard::Integer", 	"int");
+    	primitive_types_mapping.put("kermeta::standard::Integer",	"java.lang.Integer");
+    	primitive_types_mapping.put("kermeta::standard::Boolean",	"boolean");
+    	primitive_types_mapping.put("kermeta::standard::Boolean",	"java.lang.Boolean");
+    	primitive_types_mapping.put("kermeta::standard::String",	"java.lang.String");
+    	primitive_types_mapping.put("kermeta::standard::Object",	"Object");
+    }
+	
+    public final static String KMT2ECORE_ANNOTATION = "KerMeta";
+    public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION = "KerMeta.SuperOperation";
+    public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS = "SuperOperation";
+    public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION = "KerMeta.RaisedException";
+    public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS = "RaisedException";
+    public final static String KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS = "isAbstract";
+    public final static String KMT2ECORE_ANNOTATION_BODY_DETAILS = "Body";
+    
 	/**
 	 * @param resource : the resource to populate
 	 */
