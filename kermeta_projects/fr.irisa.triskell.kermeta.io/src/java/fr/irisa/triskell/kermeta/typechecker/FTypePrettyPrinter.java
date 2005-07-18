@@ -1,4 +1,4 @@
-/* $Id: FTypePrettyPrinter.java,v 1.3 2005-05-18 23:42:27 ffleurey Exp $
+/* $Id: FTypePrettyPrinter.java,v 1.4 2005-07-18 16:59:53 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : FTypePrettyPrinter.java
 * License : GPL
@@ -10,8 +10,6 @@
 
 package fr.irisa.triskell.kermeta.typechecker;
 
-import java.util.Iterator;
-
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
@@ -21,6 +19,7 @@ import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.FVoidType;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -42,7 +41,8 @@ public class FTypePrettyPrinter extends KermetaVisitor {
     
 
     public Object visit(FClass arg0) {
-        String result = arg0.getFClassDefinition().getFName();
+        //String result = arg0.getFClassDefinition().getFName();
+        String result = KMTHelper.getQualifiedName(arg0.getFClassDefinition());
         if (arg0.getFTypeParamBinding().size() > 0) {
             result += "<";
 	        for(int i=0; i<arg0.getFTypeParamBinding().size(); i++) {
