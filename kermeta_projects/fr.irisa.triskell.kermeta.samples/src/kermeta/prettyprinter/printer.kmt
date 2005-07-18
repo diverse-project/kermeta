@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.2 2005-07-04 14:37:29 zdrey Exp $
+/* $Id: printer.kmt,v 1.3 2005-07-18 13:30:48 zdrey Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : GPL
@@ -61,7 +61,7 @@ class BasicPrettyPrinter inherits
     
     method visitMultiplicityElement(node : MultiplicityElement, context : Integer) : String is do
 	    result := "" 
-		// Visit never go there...
+		// Visit never go there...(handled by ppTypeFromMultiplicityElement)
     end
     
     /**
@@ -232,7 +232,14 @@ class BasicPrettyPrinter inherits
 	 * with no "isInstance" tests...
 	 */ 
 	method visitType(node : Type, context : Integer) : String is do
-		result := node.toString 
+		result := ""
+		if (PrimitiveType.isInstance(node)) then 
+			var pt : PrimitiveType
+			pt ?= node
+			result := self.accept(pt.instanceType, context)
+		else
+			result := node.toString 
+		end
 	end
 	
 	method visitTypeVariableBinding(node : TypeVariableBinding, context : Integer) : String is do
