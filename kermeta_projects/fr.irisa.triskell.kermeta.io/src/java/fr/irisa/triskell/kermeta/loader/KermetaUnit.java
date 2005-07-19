@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.30 2005-07-08 12:22:39 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.31 2005-07-19 10:35:56 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -6,11 +6,6 @@
  * ----------------------------------------------------------------------------
  * Creation date : Feb 23, 2005
  * Author : ffleurey, zdrey
- * Description : 
- * 		-
- * 
- * History :
- * 		- (zd) added loadAnnotations/loadAllannotations
  */
 package fr.irisa.triskell.kermeta.loader;
 
@@ -36,6 +31,7 @@ import fr.irisa.triskell.kermeta.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.behavior.FRaise;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
@@ -416,33 +412,7 @@ public abstract class KermetaUnit {
 		}
 	}
 	
-	
-	/*
-	 * CECI N'EST PAS UNE BONNE SOLUTION POUR REGLER LES
-	 * PROBLEMES D'URI !!
-	 * 
-	 * Ca ne marche que sous windows et que pour les file:
-	 * 
-	 * Il ne faut pas oublier que dans eclipse on peut avoir
-	 * 
-	 * platform:/... ou http:/...
-	 *  
-	 * Il faut utiliser la gestion d'eclipse qui est déja multiplatforme
-	 * et ne pas inventer des patchs qui ne sont pas des solution viables !!
-	 */
-	
-	/*
-	public void importModelFromURI(String str_uri) {
-		if (str_uri.startsWith("file:"))
-			str_uri=str_uri.substring(5,str_uri.length());
-		URI uri = URI.createFileURI(str_uri);
-		if (uri.isRelative() && this.uri != null) {
-//			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
-			str_uri = "file:"+UserDirURI.createURI(str_uri,this.uri,false).toFileString().replaceAll("\\\\","/");
-			
-		}
-		*/
-	
+
 	public void importModelFromID(String qid) {
 		importModelFromURI(qid);
 	}
@@ -772,25 +742,21 @@ public abstract class KermetaUnit {
 		return result;
 	}
 	
+	/**
+	 * 
+	 * @param p The package in which we want to fix the tags
+	 * @param myTags The tags to be added to the XMI resource
+	 * @return the list of myTags, completed
+	 */
 	public ArrayList fixPackageTags(FPackage p, ArrayList myTags)
 	{
 	    TreeIterator it = p.eAllContents();
 		while(it.hasNext()) {
 			FObject o = (FObject)it.next();
-			// Resource update
-			if ((o instanceof FNamedElement||
-			         o instanceof FOperation || 
-			         o instanceof FProperty) && o.getFTag()!=null)
-			{
-			    myTags.addAll(o.getFTag());
-			}
-			else if (o instanceof FClass)
-			{
-			    FClassDefinition c = ((FClass)o).getFClassDefinition();
-			    myTags.addAll(fixClassMemberTags(c));
-			    
-			}
+			myTags.addAll(o.getFTag());
 		}
+		// Add the tags of the package itself
+		myTags.addAll(p.getFTag());
 		return myTags;
 	}
 	
@@ -816,7 +782,11 @@ public abstract class KermetaUnit {
 			}
 			else if (o instanceof FTypeContainer) {
 				if (o != null) fixer.accept(o);
-			}			
+			}
+			else if (o instanceof FRaise)
+			{
+			    System.err.println("Je suis une FClass, et je ne suis pas dans une resource : <"+((FClass)o).getFClassDefinition().getFName()+">");
+			}
 		}
 	}
 	
