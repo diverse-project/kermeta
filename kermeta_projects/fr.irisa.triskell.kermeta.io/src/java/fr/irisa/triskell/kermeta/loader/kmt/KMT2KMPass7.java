@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.14 2005-06-09 09:14:59 zdrey Exp $
+/* $Id: KMT2KMPass7.java,v 1.15 2005-07-19 15:27:09 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -74,9 +74,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 
     protected String fileData =  null;
     protected static Pattern pattern = Pattern.compile("[\t\\s]*[\r\n][\r\n\t\\s]*");
-     
-    
-    public final static String ANONYMOUS = "anon";
+    public final static String KERMETADOC = "kdoc";
 	/**
 	 * 
 	 */
@@ -271,7 +269,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	public FTag createFTagFromAnnotation(Annotation a)
 	{
 	    String tag_value = "";
-        String tag_name = ANONYMOUS;
+        String tag_name = KERMETADOC;
         if (Tag.class.isInstance(a))
         {
             tag_name  = ((Tag)a).getName().getFirstChild().getText();
@@ -297,7 +295,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 */
 	protected void processAnnotations(Annotations annLst, FObject element)
 	{
-	    String tag_name = ANONYMOUS;
+	    String tag_name = KERMETADOC;
 	    String tag_value = null;
 	    
 	   // Resource resource;
@@ -319,15 +317,13 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    		}
 	    		else
 	    		{	// note : the concrete syntax -- /** */ -- is kept
-	    		    tag_name = ANONYMOUS;
+	    		    tag_name = KERMETADOC;
 	    			tag_value  = ((ContextMultiLineComment)a).getFirstChild().getText();
 	    		}
 	    		
 	    		tag.setFName(tag_name);
     			tag.setFValue(tag_value);
 	    		element.getFTag().add(tag);
-	    		// Add it to the Kermeta Unit tags
-    			builder.getTags().add(tag);
 	    	}
 	    }
 	}
@@ -343,7 +339,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 */
 	protected void processAnnotationsForFExpression(Annotations annLst, FExpression element)
 	{
-	    String tag_name = ANONYMOUS;
+	    String tag_name = KERMETADOC;
 	    String tag_value = null;
 	    
 	   // Resource resource;
@@ -365,14 +361,12 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    		}
 	    		else
 	    		{	// note : the concrete syntax -- /** */ -- is kept
-	    		    tag_name = ANONYMOUS;
+	    		    tag_name = KERMETADOC;
 	    			tag_value  = ((ContextMultiLineComment)a).getFirstChild().getText();
 	    		}
 	    		tag.setFName(tag_name);
     			tag.setFValue(tag_value);
 	    		//element.getFTag().add(tag);
-	    		// Add it to the Kermeta Unit tags
-    			builder.getTags().add(tag);
 	    	}
 	    }
 	}

@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.14 2005-07-11 15:35:34 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.15 2005-07-19 15:27:09 zdrey Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -677,7 +677,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
      */
     public Object visit(FTag node) {
         String result = "";
-        if (node.getFName().equals(KMT2KMPass7.ANONYMOUS))
+        if (node.getFName().equals(KMT2KMPass7.KERMETADOC))
         {
             result = node.getFValue() + "\n";
         }

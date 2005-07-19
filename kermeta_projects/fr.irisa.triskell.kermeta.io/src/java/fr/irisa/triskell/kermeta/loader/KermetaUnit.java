@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.31 2005-07-19 10:35:56 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.32 2005-07-19 15:27:09 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -182,10 +182,6 @@ public abstract class KermetaUnit {
 	 * value = body of the op as a string 
 	 */
 	public Hashtable operation_bodies = new Hashtable();
-	
-	/**
-	 * The tags that are aimed at be saved in a resource */
-	public ArrayList resourceTags = new ArrayList();
 	
 	/**
 	 * This tables store the mapping between Metacore model elements
@@ -641,7 +637,7 @@ public abstract class KermetaUnit {
 	            fixTypeContainement(p);
 	            resource.getContents().add(p);
 	        }
-	        resource_tags = fixPackageTags(p, resource_tags);
+	        resource_tags = fixPackageTags(p);
 	    }
 	    // Add the tags registered in tags list to the resource
 	    
@@ -748,8 +744,9 @@ public abstract class KermetaUnit {
 	 * @param myTags The tags to be added to the XMI resource
 	 * @return the list of myTags, completed
 	 */
-	public ArrayList fixPackageTags(FPackage p, ArrayList myTags)
+	public ArrayList fixPackageTags(FPackage p)
 	{
+	    ArrayList myTags = new ArrayList();
 	    TreeIterator it = p.eAllContents();
 		while(it.hasNext()) {
 			FObject o = (FObject)it.next();
@@ -782,10 +779,6 @@ public abstract class KermetaUnit {
 			}
 			else if (o instanceof FTypeContainer) {
 				if (o != null) fixer.accept(o);
-			}
-			else if (o instanceof FRaise)
-			{
-			    System.err.println("Je suis une FClass, et je ne suis pas dans une resource : <"+((FClass)o).getFClassDefinition().getFName()+">");
 			}
 		}
 	}
@@ -1003,14 +996,6 @@ public abstract class KermetaUnit {
 	public void setUri(String uri) {
 		this.uri = uri;
 	}
-
-	
-	/**
-	 * @return the tags in this KermetaUnit
-	 */
-    public ArrayList getTags() {
-        return resourceTags;
-    }
     
     /**
      * 
