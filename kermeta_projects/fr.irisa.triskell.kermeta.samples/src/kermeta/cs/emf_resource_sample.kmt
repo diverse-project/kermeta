@@ -3,8 +3,10 @@
 
 
 package root;
-require "cs.kmt"
-require kermeta
+require "cs.ecore"
+//require "cs.km" 
+//require "printer.kmt"
+//require kermeta
 using kermeta::standard
 using kermeta::language::structure
 using kermeta::persistence
@@ -13,7 +15,10 @@ class EMFResourceLoader
 	operation loadFromResource() : Void is do
 	end
 
-    operation main() : Void is do 
+	/** 
+	 * This operation accesses to the loaded EMF model through the reflective methods of kermeta
+	*/
+    operation main_reflexive() : Void is do 
     	var repository    : EMFRepository init EMFRepository.new
 		var resource : EMFResource // init EMFResource.new
 		var myinstances : Set<Object>
@@ -21,7 +26,7 @@ class EMFResourceLoader
 		resource := void
 		resource := repository.createResource(
 			"file:///udd/zdrey/Workspaces/runtime-workbench-workspace/sanfami/src/Test_1.cs",
-			"cs.ecore")
+			"file:///udd/zdrey/Workspaces/runtime-workbench-workspace/sanfami/src/cs.ecore") 
 		resource.load() 
 		myinstances := resource.instances
 		stdio.writeln("---->"+ myinstances.size.toString +" objets!")
@@ -45,18 +50,21 @@ class EMFResourceLoader
 					loop
 						var att : Property
 						att ?= it.next
-						if (o.get(att)==void) then stdio.writeln(att.name+" EST VIDE!") end
-						stdio.writeln("    {" + att.name+" : "+ o.get(att).toString + " }")
+						if (att==void and  o.get(att)==void) then stdio.writeln(att.name+" EST VIDE!") end
+						stdio.writeln("    { " + att.name+" : "+ o.get(att).toString + " }")
 					end
-						
+
 					// FIXME : repare isInstance
 					if (o.getMetaClass.classDefinition.qualifiedName.equals("cs::Template")) then  
-						var template : cs::Template
+						var template : cs::Template init cs::Template.new
+						var template_copy : cs::Template
+						var template_obj  : Object
 						template ?= o
-						stdio.writeln("casted : "+ template.toString + " original : "+ o.toString+"-->"+template.name)
-						stdio.writeln("isInstance : "+ template.getMetaClass.isInstance(o).toString) 
-						
+						stdio.writeln("1/ casted : "+ template.getMetaClass.toString + " original : "+ o.toString+"-->")
+						stdio.writeln("2/ isInstance : "+ template.getMetaClass.isInstance(o).toString) 
+						stdio.writeln("3/ template name : " + template.name)
 						if (template == void) then stdio.writeln("template is void") end 
+						
 					else
 						if (o.getMetaClass.classDefinition.qualifiedName.equals("cs::Root")) then  
 							var root : cs::Root init cs::Root.new
@@ -73,4 +81,74 @@ class EMFResourceLoader
 			i := i + 1
 		end
     end
+    
+    
+        operation main() : Void is do 
+    	var repository    : EMFRepository init EMFRepository.new
+		var resource : EMFResource // init EMFResource.new
+		var myinstances : Set<Object>
+		var i : Integer init 0 
+		resource := void
+		resource := repository.createResource(
+			"Test_1.cs",
+			"file:///udd/zdrey/Workspaces/runtime-workbench-workspace/sanfami/src/cs.ecore") 
+		resource.load() 
+		myinstances := resource.instances
+		stdio.writeln("---->"+ myinstances.size.toString +" objets!")
+		
+		from var it : Iterator<Object> init myinstances.iterator 
+		until it.isOff
+		loop   
+			
+			var o : Object
+			o := it.next 
+			if (o == void) then stdio.writeln("object vide!!!")  
+			else
+				stdio.writeln("---------------------------------")
+				stdio.writeln("Objet : "+ o.getMetaClass.classDefinition.qualifiedName 
+				+  " ("+ o.getMetaClass.classDefinition.ownedAttributes.size.toString+" attr.)" )
+				
+				// FIXME : repare isInstance
+				var template : cs::Template
+				if (cs::Template.isInstance(o)) then  
+					template ?= o
+					stdio.writeln("   name : " + template.name)
+					stdio.writeln("   decision : " + template.decision.toString)
+					stdio.writeln("   content : " + template.content)
+					stdio.writeln("   referer : " + template.referer.toString)
+			        
+					if (template == void) then stdio.writeln("template is void") end 
+				end
+				var decision : cs::Decision
+				if (cs::Decision.isInstance(o)) then  
+					decision ?= o
+					stdio.writeln("   name : " + decision.name)
+
+				end
+			end 
+			//stdio.writeln("object non vide" + o.isFrozen.toString)  
+			var val : cs::Value init cs::Value.new 
+			val.name := "totovalue"
+			
+		end
+		i := i + 1
+		
+    end
 }
+
+
+class UneClasseACaster
+{
+	attribute une_chaine : String
+}
+// Test for cast operation
+/*
+stdio.write("Essayons un cast tout simple : ")
+var uneinstance : UneClasseACaster init UneClasseACaster.new
+var uneautreinstance : UneClasseACaster
+uneinstance.une_chaine := "une chaine"
+var unfobjet : Object
+unfobjet := uneinstance
+uneautreinstance ?= unfobjet
+stdio.writeln(uneautreinstance.toString+"." + uneautreinstance.une_chaine)
+*/						
