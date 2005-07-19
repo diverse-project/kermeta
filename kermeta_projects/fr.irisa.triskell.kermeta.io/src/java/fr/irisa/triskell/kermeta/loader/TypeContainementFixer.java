@@ -1,6 +1,12 @@
-/*
- * Created on 8 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: TypeContainementFixer.java,v 1.2 2005-07-19 10:27:09 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * File : KermetaUnit.java
+ * License : EPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Feb 23, 2005
+ * Author : Franck Fleurey <ffleurey@irisa.fr>
+ * 
  */
 package fr.irisa.triskell.kermeta.loader;
 
@@ -11,6 +17,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.behavior.FTypeReference;
+import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FObject;
@@ -27,9 +34,8 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 
 /**
- * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Visitor that adds a FTypeContainer to all the types of the visited kermeta 
+ * model.
  */
 public class TypeContainementFixer extends KermetaVisitor {
 
@@ -66,6 +72,8 @@ public class TypeContainementFixer extends KermetaVisitor {
 	public Object visit(FOperation node) {
 		addContainedTypes(node.getFType(), node);
 		addContainedTypes(node.getFTypeParameter(), node);
+		// RaisedException is also an EList of FTypes.
+		addContainedTypes(node.getFRaisedException(), node);
 		return null;
 	}
 	/**

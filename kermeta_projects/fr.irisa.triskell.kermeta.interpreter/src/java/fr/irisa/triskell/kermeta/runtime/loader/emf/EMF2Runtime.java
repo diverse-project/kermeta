@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.4 2005-07-18 16:54:02 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.5 2005-07-19 10:27:13 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -212,7 +212,7 @@ public class EMF2Runtime {
 	        
 	        EClassifier etype = feature.getEType();
 	        
-	        FType ftype = getMetaClassByName(etype.getEPackage().getName()+"::"+etype.getName(), unit);
+	        FType ftype = getMetaClassByName(getEQualifiedName(etype), unit);
 	        // Eget can return an elist of features
 	        Object fvalue = eObject.eGet(feature);
 	        RuntimeObject rovalue = null;
