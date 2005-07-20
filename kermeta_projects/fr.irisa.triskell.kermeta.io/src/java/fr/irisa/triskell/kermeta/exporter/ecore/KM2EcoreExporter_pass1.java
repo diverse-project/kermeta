@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter_pass1.java,v 1.3 2005-07-18 15:47:10 dvojtise Exp $
+/* $Id: KM2EcoreExporter_pass1.java,v 1.4 2005-07-20 07:30:39 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -54,6 +54,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 	public	FPackage root_p;
 	protected String current_pname;
 	protected TextTabs loggerTabs =  new TextTabs("   ","");
+	protected KM2EcoreExporter ecoreExporter;
 	
 	// the resource to populate
 	protected Resource ecoreResource = null;
@@ -65,9 +66,10 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 	 * @param resource : the resource to populate
 	 * @param mapping : Hastable containing the newly created object mapping
 	 */
-	public KM2EcoreExporter_pass1(Resource resource, Hashtable mapping) {
+	public KM2EcoreExporter_pass1(Resource resource, Hashtable mapping, KM2EcoreExporter anEcoreExporter) {
 		ecoreResource = resource;
 		kmt2ecoremapping = mapping;
+		ecoreExporter = anEcoreExporter;
 	}
 	
 	/**
@@ -165,17 +167,6 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 				else
 					internalLog.warn(loggerTabs + "accept of a getFOwnedOperation returned null !");				
 			}
-		
-	/*	if (node.getFTypeParameter().size() > 0) {
-			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
-			result += ">";
-		}
-		if (node.getFSuperType().size() > 0) {
-			result += " inherits ";
-			result += ppComaSeparatedNodes(node.getFSuperType());
-		}
-		*/
 		}
 		catch(Exception e)
 		{
@@ -204,24 +195,25 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 		// create an annotation to hold the isAbstract boolean
 		// TODO : what is the default value abstract or not ? in which case we do not need to add the annotation
 		//		current version of ecore2kmt says : not abstract and creates an empty body
-		if (node.isFIsAbstract()) {
-			EAnnotation newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			newEAnnotation.setSource(KM2EcoreExporter.KMT2ECORE_ANNOTATION); 
+		if (node.isFIsAbstract()) { 
 			Boolean b = new Boolean(node.isFIsAbstract());
-			newEAnnotation.getDetails().put(KM2EcoreExporter.KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS, b.toString());			
-			ecoreResource.getContents().add(newEAnnotation);
-			newEOperation.getEAnnotations().add(newEAnnotation);
+			ecoreExporter.addAnnotation( 
+					newEOperation,
+					KM2EcoreExporter.KMT2ECORE_ANNOTATION,
+					KM2EcoreExporter.KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS,
+					b.toString(),
+					null);	
 		}
 		
 		// Create an annotation to hold the operation body
 		if (node.getFBody() != null) {
-			EAnnotation newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-			newEAnnotation.setSource(KM2EcoreExporter.KMT2ECORE_ANNOTATION);			
 			String bodyString = (String)new KM2KMTPrettyPrinter().accept(node.getFBody());
-			newEAnnotation.getDetails().put(KM2EcoreExporter.KMT2ECORE_ANNOTATION_BODY_DETAILS, bodyString);			
-			ecoreResource.getContents().add(newEAnnotation);
-			newEOperation.getEAnnotations().add(newEAnnotation);
-			
+			ecoreExporter.addAnnotation( 
+					newEOperation,
+					KM2EcoreExporter.KMT2ECORE_ANNOTATION,
+					KM2EcoreExporter.KMT2ECORE_ANNOTATION_BODY_DETAILS,
+					bodyString,
+					null);	
 		}
 		
 		// Annotations
@@ -250,14 +242,6 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 				internalLog.warn(loggerTabs + "accept of a getFOwnedParameter returned null !");				
 		}
 		
-		// TODO implement the content of this Operation
-		/*
-		if (node.getFTypeParameter().size() > 0) {
-			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
-			result += ">";
-		}				
-		*/
 		loggerTabs.decrement();
 		return newEOperation;
 	}
@@ -349,7 +333,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 		loggerTabs.increment();
 		
 		newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-		newEAnnotation.setSource("KerMeta"); // TODO put this string in a constant
+		newEAnnotation.setSource(KM2EcoreExporter.KMT2ECORE_ANNOTATION); // TODO put this string in a constant
 		newEAnnotation.getDetails().put(current_pname, node.getFValue());
 		ecoreResource.getContents().add(newEAnnotation);
 		kmt2ecoremapping.put(node,newEAnnotation);
