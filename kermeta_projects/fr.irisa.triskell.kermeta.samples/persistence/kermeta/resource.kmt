@@ -1,0 +1,46 @@
+package persistence;
+
+require "ecore.kmt"
+abstract class Resource
+{
+	attribute uri : String
+	attribute metaModelURI : String
+	attribute includedResources : URICollection
+	operation save() : kermeta::standard::~Void is do
+		//TODO: implement operation save
+	end
+	operation load() : kermeta::standard::~Void is do
+		//TODO: implement operation load
+	end
+	operation getContents() : ecore::EEList is do
+		//TODO: implement operation getContents
+	end
+	operation manageInstance(instance : kermeta::standard::~Void) : kermeta::standard::~Void is do
+		//TODO: implement operation manageInstance
+	end
+}
+class EMFResource inherits Resource
+{
+}
+class KMResource inherits Resource
+{
+}
+abstract class Repository
+{
+	attribute resources : ResourceHashtable
+	operation createResource(pUri : String) : Resource is do
+		//TODO: implement operation createResource
+	end
+	operation getResource(pUri : String) : Resource is do
+		//TODO: implement operation getResource
+	end
+}
+class EMFRepository inherits Repository
+{
+}
+class KMRepository inherits Repository
+{
+}
+alias String : kermeta::standard::String;
+alias URICollection : kermeta::language::structure::Object;
+alias ResourceHashtable : kermeta::language::structure::Object;
