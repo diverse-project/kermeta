@@ -1,0 +1,30 @@
+package cs;
+
+require "ecore.kmt"
+class Root
+{
+	attribute template : Template[0..*]#root
+}
+class Template
+{
+	reference root : Root#template
+	attribute decision : Decision[0..*]#source
+	attribute name : ecore::EString
+	attribute content : ecore::EString
+	reference referer : Decision#target
+	operation expand() : ecore::EString is do
+		//TODO: implement operation expand
+	end
+}
+class Decision
+{
+	reference source : Template#decision
+	attribute name : ecore::EString
+	reference target : Template[0..*]#referer
+}
+class Iteration inherits Decision
+{
+}
+class Value inherits Decision
+{
+}
