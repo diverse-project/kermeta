@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.32 2005-07-19 15:27:09 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.33 2005-07-20 15:58:25 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -637,10 +637,9 @@ public abstract class KermetaUnit {
 	            fixTypeContainement(p);
 	            resource.getContents().add(p);
 	        }
-	        resource_tags = fixPackageTags(p);
+	        resource_tags = fixPackageTags(p, resource_tags);
 	    }
 	    // Add the tags registered in tags list to the resource
-	    
 	    this.addFTagsToResource(resource, resource_tags);
 	    try {
 			resource.save(null);
@@ -744,9 +743,8 @@ public abstract class KermetaUnit {
 	 * @param myTags The tags to be added to the XMI resource
 	 * @return the list of myTags, completed
 	 */
-	public ArrayList fixPackageTags(FPackage p)
+	public ArrayList fixPackageTags(FPackage p, ArrayList myTags)
 	{
-	    ArrayList myTags = new ArrayList();
 	    TreeIterator it = p.eAllContents();
 		while(it.hasNext()) {
 			FObject o = (FObject)it.next();
