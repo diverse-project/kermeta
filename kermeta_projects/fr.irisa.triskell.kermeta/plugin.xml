@@ -53,7 +53,7 @@
             id="fr.irisa.triskell.kermeta.contribution1">
          <menu
 	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
-	         label="View Sub Menu"
+	         label="KerMeta"
 	         path="additions">
       		<separator name="kermetagroup1"/>
 		</menu>
@@ -90,6 +90,33 @@
                class="fr.irisa.triskell.kermeta.popup.actions.Kermeta2EcoreAction"
                id="fr.irisa.triskell.kermeta.KMT2Ecore"/>
          
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            nameFilter="*.km"
+            id="fr.irisa.triskell.kermeta.objectContribution1">
+            
+        <menu
+	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+	         label="Kermeta"
+	         path="additions">
+      		<separator name="kermetagroup2"/>
+      	</menu>
+       <!-- <action
+               enablesFor="1"
+               label="PrettyPrint to kmt"
+               icon="images/kermeta.png"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
+               class="fr.irisa.triskell.kermeta.popup.actions.CompileKMTAction"
+               id="fr.irisa.triskell.kermeta.KMT2KM"/>         -->
+        <action
+               enablesFor="1"
+               label="Generate Ecore"
+               icon="images/eclipse_ecore.gif"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
+               class="fr.irisa.triskell.kermeta.popup.actions.Kermeta2EcoreAction"
+               id="fr.irisa.triskell.kermeta.KMT2Ecore"/>
+   		
       </objectContribution>
    </extension>
    <extension
