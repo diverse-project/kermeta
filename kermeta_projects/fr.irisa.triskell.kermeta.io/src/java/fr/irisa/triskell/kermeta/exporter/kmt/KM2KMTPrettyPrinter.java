@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.15 2005-07-19 15:27:09 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.16 2005-07-20 07:29:50 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -556,7 +556,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 			}
 			if (! node.isFIsReadOnly()) {
 				result += "\n" + getPrefix() + "setter is ";
-				if (node.getFGetterbody() != null) result += this.accept(node.getFSetterbody());
+				if (node.getFSetterbody() != null) result += this.accept(node.getFSetterbody());
 				else {
 					result += "do\n";
 					pushPrefix();
