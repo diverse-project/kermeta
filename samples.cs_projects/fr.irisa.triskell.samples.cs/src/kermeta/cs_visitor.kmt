@@ -1,7 +1,7 @@
 @mainClass "sample::Main"
 @mainOperation "main"
 package sample;
-require "../ecore/cs.ecore" 
+require "../ecore/cs.ecore"
 require kermeta
 using kermeta::standard
 using kermeta::persistence
@@ -20,12 +20,11 @@ class Main
 		resource.load()
 		/* Get the loaded instances (a Set<Object>) */
 		result := resource.instances
-		
 	end
 
 	operation main() is do
 		var csvisitor : CSVisitorHandler init CSVisitorHandler.new
-		var instances : Set<Object> init self.initialize("../../instances/Test_0.cs", "../ecore/cs.ecore")
+		var instances : Set<Object> init self.initialize("Test_1.cs", "../ecore/cs.ecore")
 		csvisitor.initialize(instances)
 		csvisitor.visitInstances()
 	end
@@ -40,6 +39,7 @@ class BasicCSVisitor
 	attribute root : cs::Root
 	attribute template : cs::Template
 	attribute decision : cs::Decision
+	attribute value : cs::Value
 	
 	operation visitRoot(v : Set<Object>) : String is do
 		result := " "
@@ -70,6 +70,14 @@ class BasicCSVisitor
 		result.append("\n   { root : " + template.root.toString + " }\n")
 	end
 	
+	// FIXME : we should be able
+	operation visitValue(v : Set<Object>) : String is do
+		decision ?= v.one
+		result := "value->"
+		result.append(visitDecision(v))
+
+	end
+	
 	operation iterate<T>(pit : Iterator<T>) : String is do
 		result := ""
 		from var it : Iterator<T> init pit
@@ -80,10 +88,10 @@ class BasicCSVisitor
 		end
 	end
 	
-	/** Iteration -> Iteration */
+	/** Iteration -> Decision */
 	operation visitIteration(v : Set<Object>) : String is do
-		stdio.writeln("visit Iteration->Decision!")
-		result := "iteration"
+		result := "iteration->"
+		result.append(visitDecision(v))
 	end
 }
 
@@ -133,7 +141,7 @@ class CSVisitorHandler
 		//        manages the EMF model (using xmlns:metamodel_prefix in the EMF model)
 		//     2/ We can find all the available classes in the model by reflexive method (this method
 		// we choose)
-		
+		 
 		// Loop in the list of existing meta classes
 		
 		from var it : Iterator<String> init metaclasses.keyIterator
@@ -143,8 +151,7 @@ class CSVisitorHandler
 			var claz : kermeta::reflection::Class init metaclasses.get(claz_name)
 			// FIXME : for inherited classes, this method is really bad (we should code
 			// a kind of "isExactInstance")
-			if (claz.isInstance(instance)) then
-				//stdio.writeln(claz.classDefinition.name + " : " + instance.toString)
+			if (claz_name.equals(instance.getMetaClass.classDefinition.qualifiedName)) then
 				// Wrap instance (FIXME : patch)
 				var setinstance : Set<Object> init Set<Object>.new
 				setinstance.add(instance)
@@ -166,12 +173,11 @@ class CSVisitorHandler
 		var de : DynamicExpression init DynamicExpression.new
 		de.initializeDefaults
 		de.formalParameters.put("v", Set<Object>)
-		de.parse("sample::VisitCS.new.visit"+cname+"(v)")
-		
+		de.parse("sample::BasicCSVisitor.new.visit"+cname+"(v)")
 		var params : Hashtable<String, Object> init Hashtable<String, Object>.new
 		params.put("v", visitable)
 		result := de.execute(void, params).toString
-		
+		 
 	end
 	
 	/**
