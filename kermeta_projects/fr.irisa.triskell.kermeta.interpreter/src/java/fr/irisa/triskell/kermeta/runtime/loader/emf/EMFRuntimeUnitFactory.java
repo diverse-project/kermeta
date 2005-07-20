@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnitFactory.java,v 1.2 2005-07-12 16:36:03 zdrey Exp $
+/* $Id: EMFRuntimeUnitFactory.java,v 1.3 2005-07-20 16:42:19 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnitFactory.java
  * License   : GPL
@@ -43,4 +43,5 @@ public class EMFRuntimeUnitFactory extends RuntimeUnitFactory
         // TODO Auto-generated method stub
         return null;
     }
+   
 }

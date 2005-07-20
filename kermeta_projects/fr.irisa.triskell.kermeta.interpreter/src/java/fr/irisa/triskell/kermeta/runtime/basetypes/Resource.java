@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.2 2005-07-12 16:30:34 zdrey Exp $
+/* $Id: Resource.java,v 1.3 2005-07-20 16:40:43 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : GPL
@@ -13,11 +13,56 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
 
+
+// Get the namespace
+// ((EObject)resource.getContents().get(0)).eClass().getEPackage().getNsURI().
+// If you're looking for hooks during parsing, XMLHandler.getPackageForURI is used to map a namespace to the right package.
+
 /**
  * This class is intended to "wrap" the resource management from kermeta.
  */
 public class Resource {
 
+    
+    /**
+     * Save the resource "self" into its uri attributes, unless newUri is given
+     * (not null)
+     * @param self the runtimeObject representing the instances (of the Resource) to save.
+     * @param newUri the newUri : if it is null, than the default attribute uri is used,
+     * otherwise, we save the resource in it.
+     * @return void instance
+     */
+    public static RuntimeObject save(RuntimeObject newUri, RuntimeObject mmUri, RuntimeObject resourceType, RuntimeObject instances)
+    {
+        // runtime unit handles the transformation Kermeta2EMFInstance
+        java.lang.String str_uri = String.getValue(newUri);
+        RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
+        	getConcreteFactory(String.getValue(resourceType)).
+        	createRuntimeUnit(str_uri, String.getValue(mmUri), instances);
+	    runtime_unit.save(str_uri);
+        return instances.getFactory().getMemory().voidINSTANCE;
+    }
+    
+    
+
+    /**
+     * 
+     * @param uri the uri of the EMF model to load
+     * @param mmUri the uri of the Ecore meta-model of which EMF model is an instance
+     * @param resourceType the resource type ("EMF", "MDR")
+     * @param emptyInstances the runtimeObject representing the collection of instances
+     * of the EMF Model, once loaded
+     * @return The emptyInstances collections, filled in.
+     */
+    public static RuntimeObject load(RuntimeObject uri, RuntimeObject mmUri, RuntimeObject resourceType, RuntimeObject emptyInstances)
+    {
+        RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
+        	getConcreteFactory(String.getValue(resourceType)).
+        	createRuntimeUnit(String.getValue(uri), String.getValue(mmUri), emptyInstances);
+        runtime_unit.load();
+        return runtime_unit.getInstances();
+    }
+    
     // Implementation of method load called as :
     // extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(uri, type)
     // This creates a RuntimeUnit adapted to the given type (we are expecting from type "EMF", "MDR"),
@@ -28,44 +73,14 @@ public class Resource {
      * @return a RuntimeObject that encapsulates a collection of instances of the 
      * model given by its uri.
      */
-    public static RuntimeObject load(RuntimeObject uri, RuntimeObject resourceType)
+    public static RuntimeObject load(RuntimeObject uri, RuntimeObject resourceType, RuntimeObject emptyInstances)
     {
-        RuntimeObject instances = null;
+        RuntimeObject instances = emptyInstances;
         RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
         	getConcreteFactory(String.getValue(resourceType)).
         	createRuntimeUnit(String.getValue(uri));
+        runtime_unit.load();
         return runtime_unit.getInstances();
     }
-    
-    /**
-     * Save the resource "self" into its uri attributes, unless newUri is given
-     * (not null)
-     * @param self the runtimeObject representing the Resource to save.
-     * @param newUri the newUri : if it is null, than the default attribute uri is used,
-     * otherwise, we save the resource in it.
-     * @return void instance
-     */
-    public static RuntimeObject save(RuntimeObject self, RuntimeObject newUri)
-    {
-        // TODO : to implement
-        throw new Error("NotImplementedCustomError : this method is not implemented yet");
-        /*
-        return resource.getFactory().getMemory().voidINSTANCE;
-        */
-    }
-    /**
-     * 
-     * @param uri
-     * @param resourceType
-     * @return
-     */
-    public static RuntimeObject load(RuntimeObject uri, RuntimeObject mmUri, RuntimeObject resourceType, RuntimeObject emptyInstances)
-    {
-        RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
-        	getConcreteFactory(String.getValue(resourceType)).
-        	createRuntimeUnit(String.getValue(uri), String.getValue(mmUri), emptyInstances);
-        return runtime_unit.getInstances();
-    }
-    
     
 }

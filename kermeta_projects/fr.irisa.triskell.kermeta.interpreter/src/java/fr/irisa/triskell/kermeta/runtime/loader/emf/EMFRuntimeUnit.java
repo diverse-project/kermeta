@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.3 2005-07-18 16:54:02 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.4 2005-07-20 16:42:19 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -10,14 +10,22 @@
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClassifier;
 
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
@@ -25,6 +33,7 @@ import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.structure.FObject;
+import fr.irisa.triskell.kermeta.structure.FPackage;
 
 /**
  * 
@@ -35,28 +44,37 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     public String metamodel_uri;
     protected EcoreUnit ecore_unit;
     protected FObject kermeta_mm;
+    /** { EObject : RuntimeObject } */
+    private Hashtable runtime_objects_map;
     
 
 
     /**
-     * 
+     * NOTE : this constructor should not been called directly by client.
+     * Use EMFRuntimeFactory instead.
      * @param uri the URI of the instance-model to load
      */
     public EMFRuntimeUnit(String pUri)
     {
         this.uri = pUri;
-        // set "instances"
-        this.load();
+        //this.load();
     }
     
+    /**
+     * NOTE : this constructor should not been called directly by client.
+     * Use EMFRuntimeFactory instead.
+     * @param uri the URI of the instance-model to load
+     * @param pMMUri the URI of the meta-model FIXME : we will get it from NSURI stored un instance-model
+     * @param emptyInstances the RuntimeObject for the collection of instances of the instance-model
+     * @param pFactory the factory to create this EMFRuntimeUnit
+     */
     public EMFRuntimeUnit(String pUri, String pMMUri, RuntimeObject emptyInstances, EMFRuntimeUnitFactory pFactory)
     {
         this.metamodel_uri = pMMUri;
         this.uri = pUri;
-        
         instances = emptyInstances;
         this.factory = pFactory;
-        this.load();
+        //this.load();
     }
     
     /**
@@ -95,7 +113,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     }
     
     /**
-     * 
+     * Load this RuntimeUnit
      * @see fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit#load()
      */
     public void load() 
@@ -103,9 +121,18 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         this.loadMetaModelAsKermeta();
         // EMF2Runtime is the builder 
         EMF2Runtime.loadunit(this);
-        // TODO Auto-generated method stub
-        
     }
+    
+	/**
+	 * Save this RuntimeUnit as an XMIModel (EMFModel)
+	 * TODO : rename this method in saveAsEMFModel to be consistent with KermetaUnit?
+	 * Get the extension specified in file_path and decide to choose it as the extension of XMIResource.
+	 * @param file_path the xmi file. the extension of the file should be .km
+	 */
+	public void save(String file_path) {
+	    Runtime2EMF.saveunit(this, file_path);
+	}
+    
     
    /*
     * ACCESSORS
@@ -127,4 +154,19 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         return instances;
     }
 
+    /**
+     * @param runtime_objects_map
+     */
+    public void setRuntimeObjectsMap(Hashtable p_runtime_objects_map) {
+        runtime_objects_map = p_runtime_objects_map;
+    }
+    
+    
+
+    /**
+     * @return Returns the runtime_objects_map.
+     */
+    public Hashtable getRuntimeObjectsMap() {
+        return runtime_objects_map;
+    }
 }

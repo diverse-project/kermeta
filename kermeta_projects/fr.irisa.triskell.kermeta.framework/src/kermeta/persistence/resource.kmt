@@ -33,9 +33,9 @@ class EMFResource inherits Resource
 	end
 
 	/** Save a resource in the uri associated to it */
-	method save() : Void is do
+	method save(new_uri : String) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
-			self, uri
+			new_uri, metaModelURI, "EMF", instances
 		)
 	end
 	
@@ -46,6 +46,7 @@ class EMFResource inherits Resource
 		inst_set ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
 			uri, metaModelURI, "EMF", instances
 		)
+		// FIXME : should I directly create a ReflectiveSet instead of that ?
 		from var it : Iterator<Object> init inst_set.iterator
 		until (it.isOff)
 		loop

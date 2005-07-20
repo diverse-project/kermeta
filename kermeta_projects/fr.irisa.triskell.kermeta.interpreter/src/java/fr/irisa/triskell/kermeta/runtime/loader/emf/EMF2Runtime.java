@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.5 2005-07-19 10:27:13 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.6 2005-07-20 16:42:19 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -60,7 +60,6 @@ public class EMF2Runtime {
     public EMF2Runtime() {
         super();
         typedef_cache = new Hashtable();
-        runtime_objects = new ArrayList();
         runtime_objects_map = new Hashtable();
         
     }
@@ -74,7 +73,6 @@ public class EMF2Runtime {
     /**
      * The list of runtimeObjects that represent the EMF instances
      */
-    protected ArrayList runtime_objects;
     protected Hashtable runtime_objects_map; // { eobject : robject }
     
 	public static void loadunit(EMFRuntimeUnit unit) {
@@ -96,6 +94,7 @@ public class EMF2Runtime {
 		} catch (Throwable e) {
 			
 			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
+			// TODO : kermeta persistence should also raise an exception when load unit failed!
 		}
 	}
 	
@@ -107,19 +106,23 @@ public class EMF2Runtime {
 			while(it.hasNext()) {
 				EObject obj = (EObject)it.next();
 				RuntimeObject ro = visitor.setRuntimeObjectForEObject(unit, obj);
-				visitor.runtime_objects.add(ro);
 				visitor.runtime_objects_map.put(obj, ro);
 				//internalLog.info("RO created : "+ (ro != null));
 			}
+			// Use the runtime objects hashtable for EMFRuntimeUnit
+			// FIXME : this attribute would be more relevant in EMFRuntimeUnit
+			unit.setRuntimeObjectsMap(visitor.runtime_objects_map);
 			
 			// Fill in the properties of the runtime objects that we created
-			Iterator rit = visitor.runtime_objects.iterator();
+			Iterator rit = visitor.runtime_objects_map.values().iterator();
 			RuntimeObject ro = null;
 			while (rit.hasNext())
 			{
 			    ro = (RuntimeObject)rit.next();
 			    visitor.populateRuntimeObject(ro, unit);
+			    
 			    fr.irisa.triskell.kermeta.runtime.basetypes.Collection.add(unit.getInstances(), ro);
+			    System.err.println("Je me suis pourtant chargé:::");
 			}
 		} catch (Throwable e) {
 			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
@@ -201,7 +204,7 @@ public class EMF2Runtime {
 	    
 	    EClass c = eObject.eClass();
 	    // Get the structural features
-	    EList features = c.getEStructuralFeatures();
+	    EList features = c.getEAllStructuralFeatures(); 
 	    // For each feature, get the value and add it to the properties hashtable
 	    Iterator it = features.iterator();
 	    while (it.hasNext())
@@ -236,6 +239,7 @@ public class EMF2Runtime {
 			    String str = null;
 			    str = feature.getDefaultValueLiteral();
 			    if (fvalue != null && str==null)  str = fvalue.toString();
+			    
 			    if (str == null) str = "<no value!>";
 			    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(str, rofactory);
 	        }
@@ -245,7 +249,11 @@ public class EMF2Runtime {
 	        }
 	        // If we instanciated a RuntimeObject value, we can set the properties for the object 
 	        if (rovalue != null)
+	        {
 	            rObject.getProperties().put(fname, rovalue);
+	            // FIXME : property can be : EObject || EList
+	            rovalue.getData().put("ecoreObject", fvalue);
+	        }	
 	        else
 	            rObject.getProperties().put(fname, rObject.getFactory().getMemory().voidINSTANCE);
             
