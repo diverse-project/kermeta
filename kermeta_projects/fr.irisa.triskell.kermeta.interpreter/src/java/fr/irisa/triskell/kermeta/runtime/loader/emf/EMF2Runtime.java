@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.6 2005-07-20 16:42:19 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.7 2005-07-21 18:26:14 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -120,9 +120,7 @@ public class EMF2Runtime {
 			{
 			    ro = (RuntimeObject)rit.next();
 			    visitor.populateRuntimeObject(ro, unit);
-			    
 			    fr.irisa.triskell.kermeta.runtime.basetypes.Collection.add(unit.getInstances(), ro);
-			    System.err.println("Je me suis pourtant chargé:::");
 			}
 		} catch (Throwable e) {
 			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
@@ -200,7 +198,6 @@ public class EMF2Runtime {
 	protected void populateRuntimeObject(RuntimeObject rObject, EMFRuntimeUnit unit)
 	{
 	    EObject eObject = (EObject)rObject.getData().get("ecoreObject");
-	     
 	    
 	    EClass c = eObject.eClass();
 	    // Get the structural features
@@ -221,26 +218,29 @@ public class EMF2Runtime {
 	        RuntimeObject rovalue = null;
 	        if (fvalue instanceof EList) // I have then to create a Collection of Features of the given type (etype)
 	        {	// a feature with multiplicity
+	            System.err.println("******Feature multiple*****");
 	            rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit);
 	        }
-			else if (fvalue instanceof EEnum) {
-			    //this.runtime_objects_map.put(fvalue, unit.getMetamodelUnit().struct_factory.createFEnumeration());
-			    
-			}
 	        else if (fvalue instanceof EObject)
 	        {   
 	            // Get the RO Instance for this feature -- if it is in the existing r-o.
 	            rovalue = (RuntimeObject)this.runtime_objects_map.get(fvalue);
 	        }
+	        // equiv : fvalue instanceof EString, Eblabla
 	        else if (EDataType.class.isInstance(etype))
 	        {
+	            boolean flag = fvalue instanceof EDataType;
 	            // TODO : I would like to get automatically the mapping between a DataType and its translation in kermeta.
 	            //internalLog.info("DataType : "+ fvalue + ";\n type : "+ etype + "; name of data type : " + etype.getName() + "; instance class : "+ etype.getInstanceClassName());
 			    String str = null;
-			    str = feature.getDefaultValueLiteral();
-			    if (fvalue != null && str==null)  str = fvalue.toString();
+			    //str = feature.getDefaultValueLiteral();
+			    if (fvalue != null)
+			    {
+			        // EStrgin java.lang.String
+			        str = fvalue.toString();
+			    }
 			    
-			    if (str == null) str = "<no value!>";
+			    if (str == null) str = "no value!";
 			    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(str, rofactory);
 	        }
 	        else
@@ -251,8 +251,9 @@ public class EMF2Runtime {
 	        if (rovalue != null)
 	        {
 	            rObject.getProperties().put(fname, rovalue);
-	            // FIXME : property can be : EObject || EList
-	            rovalue.getData().put("ecoreObject", fvalue);
+	            // FIXME : property can be : EObject || EList || null
+	            if (fvalue != null)
+	                rovalue.getData().put("ecoreObject", fvalue);
 	        }	
 	        else
 	            rObject.getProperties().put(fname, rObject.getFactory().getMemory().voidINSTANCE);
@@ -285,6 +286,8 @@ public class EMF2Runtime {
 	        RuntimeObject rovalue = (RuntimeObject)this.runtime_objects_map.get(sfeature);
 	        Collection.add(result, rovalue);
 	    }
+	    // Add the "ecoreObject" property here or not? EList is not EObject, but we respect a kind of mapping...
+	    result.getData().put("ecoreObject", objects);
 	    return result;
 	}
 
