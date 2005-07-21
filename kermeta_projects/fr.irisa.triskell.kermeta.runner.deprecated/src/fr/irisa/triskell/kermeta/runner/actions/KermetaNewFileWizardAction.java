@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizardAction.java,v 1.2 2005-07-15 20:11:15 dvojtise Exp $
+/* $Id: KermetaNewFileWizardAction.java,v 1.3 2005-07-21 23:30:45 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardAction.java
  * License: EPL
@@ -60,7 +60,9 @@ public class KermetaNewFileWizardAction implements
      * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
      */
     public void selectionChanged(IAction action, ISelection selection) {
-    	theSelection = (IStructuredSelection)selection;
+    	// Quick fix because the cast causes some ClassCastException
+    	if (selection instanceof IStructuredSelection)
+    		theSelection = (IStructuredSelection)selection;
 
     }
 
