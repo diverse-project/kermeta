@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.14 2005-06-28 09:38:05 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.15 2005-07-21 23:28:47 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -62,6 +62,8 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.FTypedElement;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
@@ -252,8 +254,40 @@ public class ExpressionInterpreter extends KermetaVisitor {
 			        rhs_value = memory.voidINSTANCE;
 			    }
 			}
+			/******************************/
+			/* BEGINING OF HORRIBLE THING */
+			/******************************/
+			// Type collection of object
+			FClass coll_class = memory.getUnit().struct_factory.createFClass();    
+		    coll_class.setFClassDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::standard::Collection"));
+		    FTypeVariableBinding binding = memory.getUnit().struct_factory.createFTypeVariableBinding();
+		    binding.setFVariable((FTypeVariable)coll_class.getFClassDefinition().getFTypeParameter().get(0));
+		    
+		    FClass object_class = memory.getUnit().struct_factory.createFClass();   
+		    object_class.setFClassDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::reflection::Object"));
+
+		    
+		    // Set the param binding type
+		    binding.setFType(object_class);
+		    // Add to type param bindings the binding
+		    coll_class.getFTypeParamBinding().add(binding);
+			    
+			
+			if (expectedType.equals(new SimpleType(coll_class))) {
+				// THIS IS A TERRIBLE HACK TO ALLOW CASTING COLLECTIONS
+				// OF ANYTHING TO COLLECTION OF OBJECTS
+				// **** THIS IS NOT TYPE SAFE ****
+				// IT SHOULD BE USED WITH CAUTION
+				// AND IT SHOULD BE REMOVED AS SOON AS 
+				// BUG N°112 IS FIXED
+			}
+			
+			/******************************/
+			/*    END OF HORRIBLE THING   */
+			/******************************/
 			else if (!providedtype.isSubTypeOf(expectedType)) {
 				rhs_value = memory.voidINSTANCE;
+				
 			}
 		}
 		
@@ -750,7 +784,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		String jclassName  = node.getFJclass().replaceAll("::","."); 
 		String jmethodName = node.getFJmethod();
 		
-		Object[] paramsArray = new Object[node.getFParameters().size()];
+		RuntimeObject[] paramsArray = new RuntimeObject[node.getFParameters().size()];
 		Class[] paramtypes = new Class[node.getFParameters().size()];
 		
 		// Get the parameters of this operation
@@ -761,55 +795,69 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		while (it.hasNext())
 		{
 		    paramtypes[i] = RuntimeObject.class;
-		    paramsArray[i++] = it.next();
+		    paramsArray[i++] = (RuntimeObject)it.next();
 		}
-		// Invoke the java method
-		Class jclass = null;
-        try {
-            jclass = Class.forName(jclassName);
-        } catch (ClassNotFoundException e) {
-            internalLog.error("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
-			throw	new KermetaVisitorError("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName  ,e);
-        }
-        Method jmethod = null;
-        try {
-            jmethod = jclass.getMethod(jmethodName, paramtypes);
-        } catch (SecurityException e1) {
-            internalLog.error("SecurityException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
-			throw	new KermetaVisitorError("SecurityException invoking "+ jmethodName + " on Class " +jclassName  ,e1);
-        } catch (NoSuchMethodException e1) {
-            internalLog.error("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!", e1);
-			throw	new KermetaVisitorError("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName  ,e1);
-        }
-        Object result = null;
-        try {
-            result = jmethod.invoke(null, paramsArray);
-        } catch (IllegalArgumentException e2) {        
-			internalLog.error("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
-			throw	new KermetaVisitorError("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName  ,e2); 		
-        } catch (IllegalAccessException e2) {
-            internalLog.error("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
-			throw	new KermetaVisitorError("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
-        } catch (InvocationTargetException e2) {
-            Throwable cause = e2.getCause();
-		    if (cause != null)				       
-		        if (cause.getClass().getName().compareTo("junit.framework.AssertionFailedError")==0)
-			    {
-		            internalLog.error(e2.getClass().getName() + " invoking "+ jmethodName + " on Class " +jclassName + " was due to AssertionFailedError: Shrinking the Exception Stack ");					       
-		            // this Exception was due to a KermetaVisitorError create a new one with the precedent content
-		            throw new KermetaVisitorError("InvocationTargetException caused by AssertionError: "+cause.getMessage(), cause);
-		        }
-		        else
-		        {
-		            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName , e2);
-		            
-					throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
-		        }
-            
-        } catch (Throwable e2) {
-            internalLog.error("InstantiationException invoking "+ jmethodName + " on Class " +jclassName, e2);
-			throw	new KermetaVisitorError("InstantiationException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
-        }
+		
+		Object result = null;
+		
+		String cmd_id = node.getFJclass() +"_"+ node.getFJmethod();
+		/*
+		KCommand comm = KCommand.getCommand(cmd_id);
+		if (comm != null) {
+			//System.out.println(cmd_id);
+			result = comm.execute(paramsArray);
+		}
+		
+		else {
+		*/
+			// Invoke the java method
+			Class jclass = null;
+	        try {
+	            jclass = Class.forName(jclassName);
+	        } catch (ClassNotFoundException e) {
+	            internalLog.error("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+				throw	new KermetaVisitorError("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName  ,e);
+	        }
+	        Method jmethod = null;
+	        try {
+	            jmethod = jclass.getMethod(jmethodName, paramtypes);
+	        } catch (SecurityException e1) {
+	            internalLog.error("SecurityException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+				throw	new KermetaVisitorError("SecurityException invoking "+ jmethodName + " on Class " +jclassName  ,e1);
+	        } catch (NoSuchMethodException e1) {
+	            internalLog.error("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!", e1);
+				throw	new KermetaVisitorError("NoSuchMethodException invoking "+ jmethodName + " on Class " +jclassName  ,e1);
+	        }
+	        
+	        try {
+	            result = jmethod.invoke(null, paramsArray);
+	        } catch (IllegalArgumentException e2) {        
+				internalLog.error("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+				throw	new KermetaVisitorError("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName  ,e2); 		
+	        } catch (IllegalAccessException e2) {
+	            internalLog.error("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
+				throw	new KermetaVisitorError("IllegalAccessException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
+	        } catch (InvocationTargetException e2) {
+	            Throwable cause = e2.getCause();
+			    if (cause != null)				       
+			        if (cause.getClass().getName().compareTo("junit.framework.AssertionFailedError")==0)
+				    {
+			            internalLog.error(e2.getClass().getName() + " invoking "+ jmethodName + " on Class " +jclassName + " was due to AssertionFailedError: Shrinking the Exception Stack ");					       
+			            // this Exception was due to a KermetaVisitorError create a new one with the precedent content
+			            throw new KermetaVisitorError("InvocationTargetException caused by AssertionError: "+cause.getMessage(), cause);
+			        }
+			        else
+			        {
+			            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName , e2);
+			            
+						throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
+			        }
+	            
+	        } catch (Throwable e2) {
+	            internalLog.error("InstantiationException invoking "+ jmethodName + " on Class " +jclassName, e2);
+				throw	new KermetaVisitorError("InstantiationException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
+	        }
+		//}
         return result;
 	}
     
