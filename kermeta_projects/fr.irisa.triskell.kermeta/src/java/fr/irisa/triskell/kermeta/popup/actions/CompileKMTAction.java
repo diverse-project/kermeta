@@ -1,8 +1,11 @@
 package fr.irisa.triskell.kermeta.popup.actions;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
@@ -10,18 +13,24 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.kermeta.tools.wizards.Ecore2kmtWizard;
+import fr.irisa.triskell.kermeta.tools.wizards.UnitExporterWizard;
 
 public class CompileKMTAction implements IObjectActionDelegate {
 
+	protected StructuredSelection currentSelection;
     protected IFile kmtfile;
     
 	/**
@@ -43,7 +52,21 @@ public class CompileKMTAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#run(IAction)
 	 */
 	public void run(IAction action) {
-	    Shell shell = new Shell();
+		Shell shell = new Shell();
+	    MessageDialog.openWarning(
+				shell,
+				"Warning",
+				"This feature has not been tested, it cannot be considered as stable.\n"
+				+ "The file produced may contain errors.");
+	        
+    	UnitExporterWizard wizard =  new UnitExporterWizard();
+    	wizard.defaultOutputExtension = "km";
+    	wizard.init(PlatformUI.getWorkbench(),currentSelection);
+    	WizardDialog wizDialog =  new org.eclipse.jface.wizard.WizardDialog(shell,wizard);
+    	wizDialog.setTitle("Compile the kmt file into a typechecked xmi file");
+    	wizDialog.open();
+    	
+	/*    Shell shell = new Shell();
 	    try {
 	        
 	        MessageDialog.openInformation(
@@ -63,17 +86,27 @@ public class CompileKMTAction implements IObjectActionDelegate {
 	        unit.load();
 	        
 	        if (unit.getAllErrors().size() != 0) {
-	            throw new Error("The source file contains errors : " + unit.getAllMessagesAsString());
+	        	MessageDialog.openError(shell,"The source file contains errors: ", "The source file contains errors: "+ unit.getAllMessagesAsString());
+	        	
+	        	KermetaPlugin .getDefault().newConsole().println("The source file contains errors : " + unit.getAllMessagesAsString());
+	            //throw new Error("The source file contains errors : " + unit.getAllMessagesAsString());
 	        }
-	        
-	        unit.typeCheckAllUnits();
-	        
-	        if (unit.getAllErrors().size() != 0) {
-	            throw new Error("The source file contains type errors : " + unit.getAllMessagesAsString());
+	        else
+	        {
+		        unit.typeCheckAllUnits();
+		        
+		        if (unit.getAllErrors().size() != 0) {
+		        	MessageDialog.openError(shell,"The source file contains type errors: ", "The source file contains type errors: "+ unit.getAllMessagesAsString());
+		        	
+		        	KermetaPlugin .getDefault().newConsole().println("The source file contains type errors : \n" + unit.getAllMessagesAsString());
+		            
+		            //throw new Error("The source file contains type errors : " + unit.getAllMessagesAsString());
+		        }
+		        else
+		        {
+		        	saveAsXMI(unit, kmfile);
+		        }
 	        }
-	        
-	        saveAsXMI(unit, kmfile);
-	        
 	       
 	        
 	    }
@@ -84,7 +117,14 @@ public class CompileKMTAction implements IObjectActionDelegate {
 				"Compile Kermeta error",
 				"error : " + t);
 			t.printStackTrace();
-	    }
+			KermetaPlugin.getDefault().newConsole().println("Compile Kermeta error (kmt2xmi): \n" + t.getMessage());
+			ByteArrayOutputStream oStream = new java.io.ByteArrayOutputStream();		
+			PrintWriter pw = new PrintWriter(oStream);			
+			t.printStackTrace(pw);
+			pw.flush();
+			KermetaPlugin.getDefault().getConsoleStream().println(oStream.toString());
+            
+	    }*/
 	}
 	
 	
@@ -92,7 +132,7 @@ public class CompileKMTAction implements IObjectActionDelegate {
      * @param unit
      * @param kmfile
      */
-    private void saveAsXMI(KermetaUnit unit, IFile kmfile) throws Exception {
+  /*  private void saveAsXMI(KermetaUnit unit, IFile kmfile) throws Exception {
         Shell shell = new Shell();
 	    if (kmfile.exists()) {
             if (!MessageDialog.openQuestion(shell, "File already exists", "Do you want to overwrite exiting km file :\n" + kmfile.getFullPath().toString()))
@@ -101,7 +141,7 @@ public class CompileKMTAction implements IObjectActionDelegate {
         unit.saveAsXMIModel(kmfile.getLocation().toOSString());
         
         kmfile.refreshLocal(1, null);
-    }
+    }*/
 
 
 
@@ -109,7 +149,6 @@ public class CompileKMTAction implements IObjectActionDelegate {
 	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
-		StructuredSelection currentSelection;
 		if (selection instanceof StructuredSelection)
 		{
 			// the se=lection should be a single *.ecore file

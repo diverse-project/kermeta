@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreAction.java,v 1.2 2005-07-13 10:00:12 dvojtise Exp $
+/* $Id: Kermeta2EcoreAction.java,v 1.3 2005-07-21 15:41:45 dvojtise Exp $
  * Project : Kermeta
  * File : Kermeta2EcoreAction.java
  * License : EPL
@@ -27,13 +27,17 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.tools.wizards.Ecore2kmtWizard;
+import fr.irisa.triskell.kermeta.tools.wizards.EcoreExporterWizard;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2EcoreExporter;
 
 /**
@@ -42,7 +46,9 @@ import fr.irisa.triskell.kermeta.exporter.ecore.KM2EcoreExporter;
  * The current version ovewrite the destination
  */
 public class Kermeta2EcoreAction implements IObjectActionDelegate {
-	   protected IFile kmtfile;
+		
+	protected StructuredSelection currentSelection;
+	protected IFile kmtfile;
 	    
 		/**
 		 * Constructor for Kermeta2EcoreAction.
@@ -63,7 +69,19 @@ public class Kermeta2EcoreAction implements IObjectActionDelegate {
 		 * @see IActionDelegate#run(IAction)
 		 */
 		public void run(IAction action) {
-		    Shell shell = new Shell();
+			Shell shell = new Shell();
+		    MessageDialog.openWarning(
+					shell,
+					"Warning",
+					"This feature has not been tested, it cannot be considered as stable.\n"
+					+ "The ecore file produced may contain errors.");
+		        
+	    	EcoreExporterWizard wizard =  new EcoreExporterWizard();
+	    	wizard.init(PlatformUI.getWorkbench(),currentSelection);
+	    	WizardDialog wizDialog =  new org.eclipse.jface.wizard.WizardDialog(shell,wizard);
+	    	wizDialog.setTitle("Exports this kmt file into an ecore file");
+	    	wizDialog.open();
+		   /* Shell shell = new Shell();
 		    try {
 		    	MessageDialog.openWarning(
 						shell,
@@ -105,7 +123,7 @@ public class Kermeta2EcoreAction implements IObjectActionDelegate {
 					"Kermeta 2 Ecore Error",
 					"error : " + t);
 				t.printStackTrace();
-		    }
+		    }*/
 		}
 		
 		public boolean checkFileDate()
@@ -165,7 +183,6 @@ public class Kermeta2EcoreAction implements IObjectActionDelegate {
 		 * @see IActionDelegate#selectionChanged(IAction, ISelection)
 		 */
 		public void selectionChanged(IAction action, ISelection selection) {
-			StructuredSelection currentSelection;
 			if (selection instanceof StructuredSelection)
 			{
 				// the selection should be a single *.kmt (or a *.km ?) file

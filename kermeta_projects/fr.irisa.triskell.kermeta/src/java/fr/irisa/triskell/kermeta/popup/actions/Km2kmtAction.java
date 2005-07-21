@@ -1,15 +1,14 @@
-/* $Id: Ecore2KermetaAction.java,v 1.3 2005-07-21 15:41:45 dvojtise Exp $
+/* $Id: Km2kmtAction.java,v 1.1 2005-07-21 15:41:45 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
- * File       : Ecore2kmtAction.java
+ * File       : Km2kmtAction.java
  * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 20 juil. 2005
  * Authors : 
- * 		  ffleurey 
  *        dvojtise <dvojtise@irisa.fr>
  * Description : 
- *        action that launch a pretty print of ecore files into kmt files 
+ *        action that launch a pretty print of km files into kmt files 
  */
 package fr.irisa.triskell.kermeta.popup.actions;
 
@@ -22,35 +21,32 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
+
 import fr.irisa.triskell.kermeta.tools.wizards.Ecore2kmtWizard;
+import fr.irisa.triskell.kermeta.tools.wizards.KmtPrinterWizard;
 
-public class Ecore2KermetaAction implements IObjectActionDelegate {
-
+/**
+ * action that launch a pretty print of km files into kmt files 
+ */
+public class Km2kmtAction implements IObjectActionDelegate {
+	protected IFile kmfile;
 	protected StructuredSelection currentSelection;
-    protected IFile ecorefile;
-    
-	/**
-	 * Constructor for Ecore2KermetaAction.
-	 */
-	public Ecore2KermetaAction() {
-		super();
-	}
 	
-	
-
-	/**
-	 * @see IObjectActionDelegate#setActivePart(IAction, IWorkbenchPart)
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IObjectActionDelegate#setActivePart(org.eclipse.jface.action.IAction, org.eclipse.ui.IWorkbenchPart)
 	 */
 	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
+		// nothing special to do here
+		
+
 	}
 
-	/**
-	 * @see IActionDelegate#run(IAction)
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
 	public void run(IAction action) {
 		Shell shell = new Shell();
@@ -60,27 +56,29 @@ public class Ecore2KermetaAction implements IObjectActionDelegate {
 				"This feature has not been tested, it cannot be considered as stable.\n"
 				+ "The kermeta file produced may contain errors.");
 	        
-    	Ecore2kmtWizard wizard =  new Ecore2kmtWizard();
+    	KmtPrinterWizard wizard =  new KmtPrinterWizard();
     	wizard.init(PlatformUI.getWorkbench(),currentSelection);
     	WizardDialog wizDialog =  new org.eclipse.jface.wizard.WizardDialog(shell,wizard);
-    	wizDialog.setTitle("PrettyPrint this ecore file into kmt file");
+    	wizDialog.setTitle("PrettyPrint this km file into kmt file");
     	wizDialog.open();
+        	
+
 	}
-		
-	/**
-	 * @see IActionDelegate#selectionChanged(IAction, ISelection)
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
 		if (selection instanceof StructuredSelection)
 		{
-			// the selection should be a single *.ecore file
+			// the selection should be a single *.km file
 			currentSelection = (StructuredSelection)selection;
 			Iterator it = currentSelection.iterator();
 
 			while(it.hasNext()) {
-				ecorefile = (IFile)it.next();
+				kmfile = (IFile)it.next();
 			}
-
 		}
 	}
+
 }
