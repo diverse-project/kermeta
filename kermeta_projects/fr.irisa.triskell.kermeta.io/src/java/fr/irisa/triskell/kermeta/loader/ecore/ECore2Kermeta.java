@@ -1,7 +1,7 @@
-/* $Id: ECore2Kermeta.java,v 1.3 2005-05-31 16:59:52 ffleurey Exp $
+/* $Id: ECore2Kermeta.java,v 1.4 2005-07-21 15:43:14 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 26 mai 2005
@@ -57,6 +57,14 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
  */
 public class ECore2Kermeta extends EcoreVisitor {
 
+	// some value used to tune the transformation
+	public static boolean isQuickFixEnabled = false;  // globally enable or disable the quickfixes
+	public static boolean isMethodPropertyNameOverlapSafe = true;
+	public static String methodRenamePrefix = "op_";
+	public static String methodRenamePostfix = "";
+	public static boolean isMethodNameOverlapSafe = true;
+	
+	
 	
 	public static void loadunit(EcoreUnit unit) {
 		try {
@@ -333,20 +341,27 @@ public class ECore2Kermeta extends EcoreVisitor {
         }
         current_op.setFType(t);
         
-        // FIXME : hack to handle operation named like properties
-        FProperty prop = unit.getPropertyByName(current_classdef, current_op.getFName());
-        if (prop != null) {
-            current_op.setFName("op_" + current_op.getFName());
+        if (isQuickFixEnabled)
+        {
+        	// Quickfix to handle operation named like properties
+        	if (isMethodPropertyNameOverlapSafe)
+        	{
+        		FProperty prop = unit.getPropertyByName(current_classdef, current_op.getFName());
+        		if (prop != null) {
+        			current_op.setFName(methodRenamePrefix + current_op.getFName() +methodRenamePostfix);
+        		}
+        	}
+        	// Quickfix to avoid two operations with the same name
+        	if (this.isMethodNameOverlapSafe)
+        	{
+        		FOperation op = unit.getOperationByName(current_classdef, current_op.getFName());        	
+	        	int i = 2;
+	        	while (op != null) {
+	        		current_op.setFName(current_op.getFName() + i);
+	        		op = unit.getOperationByName(current_classdef, current_op.getFName());
+	        	}
+        	}
         }
-        
-        // FIXME : a simple hack to avoid two operation with the same name
-        FOperation op = unit.getOperationByName(current_classdef, current_op.getFName());
-        int i = 2;
-        while (op != null) {
-            current_op.setFName(current_op.getFName() + i);
-            op = unit.getOperationByName(current_classdef, current_op.getFName());
-        }
-        
         current_op.setFOwningClass(current_classdef);
      
         acceptList(node.getEParameters());
