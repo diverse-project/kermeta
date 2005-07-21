@@ -42,7 +42,7 @@ class Hashtable<K, V>
 	/**
 	 * returns the value for key 'key'
 	 */
-	operation get(key : K) : V is do
+	operation getValue(key : K) : V is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.get(self,key)
 	end
 	

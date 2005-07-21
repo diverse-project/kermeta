@@ -119,6 +119,7 @@ abstract class FunctionType inherits TypeContainer, Type
 abstract class Type inherits Object
 {
 	operation isInstance(element : Object) : Boolean is abstract
+	operation isSubType(element : Type) : Boolean is abstract
 }
 abstract class TypeVariableBinding inherits TypeContainer, Object
 {

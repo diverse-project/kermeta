@@ -99,7 +99,7 @@ class EMFRepository inherits Repository
 	/** Get the resource of model that is stored in the given uri
 	 */
 	method getResource(uri : String) : EMFResource is do
-		result ?= resources.get(uri)
+		result ?= resources.getValue(uri)
 	end
 }
 

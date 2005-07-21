@@ -74,6 +74,10 @@ class Class inherits Type, kermeta::reflection::Class, KMStructureVisitable
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isInstance(self, object)
 	end 
 	
+	method isSubType(object : kermeta::reflection::Type) : Boolean is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isSubType(self, object)
+	end
+	
 	method equals(other : Object) : Boolean from Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)
 	end
