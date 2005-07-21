@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnit.java,v 1.1 2005-07-08 11:39:33 zdrey Exp $
+/* $Id: RuntimeUnit.java,v 1.2 2005-07-21 08:26:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnit.java
  * License   : GPL
@@ -29,6 +29,8 @@ public abstract class RuntimeUnit {
      *  It construct the RuntimeObject instances.
      */
     public abstract void load();
+    
+    public abstract void save(String file_path); // as XMI
     
     /** @return the instances of the model loaded through this runtimeUnit */
     public RuntimeObject getInstances()
