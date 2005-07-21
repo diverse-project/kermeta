@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.1 2005-07-21 15:41:44 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.2 2005-07-21 20:52:21 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -69,7 +69,7 @@ public class UnitExporterWizard extends Wizard{
 		newfilepage.setDescription("This wizard exports your file into a XMI file.\nPlease specify the output file name.");
 		
 		// use the input file name with a xmi extension as default
-		IFile kmtfile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(inputFile.getProjectRelativePath().removeFileExtension().addFileExtension(defaultOutputExtension));		
+		IFile kmtfile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(inputFile.getFullPath().removeFileExtension().addFileExtension(defaultOutputExtension));		
 		newfilepage.setFileName(kmtfile.getName());
 		outputPage = newfilepage;
 		
@@ -112,15 +112,14 @@ public class UnitExporterWizard extends Wizard{
 			try {
 				WizardNewFileCreationPage outputPage = (WizardNewFileCreationPage)this.getPage(OUTPUTFILE_PAGENAME);
 				outputPage.getFileName();
-				//KermetaPlugin.getDefault().getWorkbench().
-				IFile outputFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFolder(outputPage.getContainerFullPath()).getFile(outputPage.getFileName());
 				
+				IFile outputFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(outputPage.getContainerFullPath().append(outputPage.getFileName()));
 				Shell shell = new Shell();
 			    if (outputFile.exists()) {
 		            if (!MessageDialog.openQuestion(shell, "File already exists", "Do you want to overwrite exiting file: \n" + outputFile.getFullPath().toString()))
 		                return true;
 		        }
-			    else outputFile = outputPage.createNewFile();
+			    else outputFile = outputPage.createNewFile();				
 			    
 			    KermetaPlugin.getDefault().getConsoleStream().println("Writing " + outputFile.getName()  );
 				

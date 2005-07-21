@@ -1,11 +1,5 @@
 package fr.irisa.triskell.kermeta.popup.actions;
 
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
@@ -15,17 +9,11 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IActionDelegate;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
-import fr.irisa.triskell.kermeta.tools.wizards.Ecore2kmtWizard;
 import fr.irisa.triskell.kermeta.tools.wizards.UnitExporterWizard;
 
 public class CompileKMTAction implements IObjectActionDelegate {

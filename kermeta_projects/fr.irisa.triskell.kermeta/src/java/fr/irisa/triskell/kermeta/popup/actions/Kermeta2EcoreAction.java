@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreAction.java,v 1.3 2005-07-21 15:41:45 dvojtise Exp $
+/* $Id: Kermeta2EcoreAction.java,v 1.4 2005-07-21 20:52:21 dvojtise Exp $
  * Project : Kermeta
  * File : Kermeta2EcoreAction.java
  * License : EPL
@@ -34,11 +34,9 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.tools.wizards.Ecore2kmtWizard;
-import fr.irisa.triskell.kermeta.tools.wizards.EcoreExporterWizard;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2EcoreExporter;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.tools.wizards.EcoreExporterWizard;
 
 /**
  * This action will generate an ecore file from a kermeta file

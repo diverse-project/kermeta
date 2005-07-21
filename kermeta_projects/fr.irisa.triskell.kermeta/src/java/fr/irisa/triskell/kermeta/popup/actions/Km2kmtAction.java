@@ -1,4 +1,4 @@
-/* $Id: Km2kmtAction.java,v 1.1 2005-07-21 15:41:45 dvojtise Exp $
+/* $Id: Km2kmtAction.java,v 1.2 2005-07-21 20:52:21 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Km2kmtAction.java
  * License    : EPL
@@ -25,8 +25,6 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
-
-import fr.irisa.triskell.kermeta.tools.wizards.Ecore2kmtWizard;
 import fr.irisa.triskell.kermeta.tools.wizards.KmtPrinterWizard;
 
 /**

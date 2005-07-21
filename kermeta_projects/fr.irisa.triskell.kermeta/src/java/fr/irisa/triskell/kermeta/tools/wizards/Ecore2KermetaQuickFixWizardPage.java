@@ -1,4 +1,4 @@
-/* $Id: Ecore2KermetaQuickFixWizardPage.java,v 1.1 2005-07-21 15:41:44 dvojtise Exp $
+/* $Id: Ecore2KermetaQuickFixWizardPage.java,v 1.2 2005-07-21 20:52:21 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -14,17 +14,13 @@
 
 package fr.irisa.triskell.kermeta.tools.wizards;
 
-import fr.irisa.triskell.kermeta.loader.ecore.ECore2Kermeta;
-import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.dialogs.IDialogPage;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -35,32 +31,27 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.ContainerSelectionDialog;
-import org.eclipse.ui.internal.ide.misc.ContainerSelectionGroup;
+
+import fr.irisa.triskell.kermeta.loader.ecore.ECore2Kermeta;
 
 /**
  * The Quick fix page allows to enable or disable some simple 
  * quick fixes to be run while transforming Ecore to Kermeta files.
  */
-
-
 public class Ecore2KermetaQuickFixWizardPage extends WizardPage implements Listener
 {
 
     
     public static final int GRID_DATA_WIDTH = 150;
- /*   public static final String defaultPackageString = "root_package";
-    public static final String defaultClassString = "Main";
-    public static final String defaultOperationString = "main";
-*/    
+   
     private Text methodRenamePrefixText;
     private Text methodRenamePostfixText;
     private Group operationPropertyGroup;
     private Group operationGroup;
-    
-/*    private Text mainOperationText;*/
-    // This attribute exists in WizardNewFileCreationPage, but private :(
-    //protected ResourceAndContainerGroup resourceGroup;
+    private Button isEnableCheckBox;
+    private Button isOpPropertyEnabledCheckBox;
+    private Button isOperationEnabledCheckBox;
+    private Composite container;
     
 	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
 	
@@ -85,7 +76,7 @@ public class Ecore2KermetaQuickFixWizardPage extends WizardPage implements Liste
     public void createControl(Composite parent)
     {
 
-		Composite container = new Composite(parent, SWT.NULL);
+		container = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout();
 		container.setLayout(layout);
 		layout.numColumns = 1;
@@ -97,7 +88,7 @@ public class Ecore2KermetaQuickFixWizardPage extends WizardPage implements Liste
 		layout.verticalSpacing = 9;		
 		Label label = new Label(groupcontainer, SWT.NULL);
 		label.setText("&Enable quick fixes ");
-		Button checkBox = new Button(groupcontainer, SWT.CHECK);
+		isEnableCheckBox = new Button(groupcontainer, SWT.CHECK);
 		
 		createQuickFixOperationPropertyGroup(container);
 		createQuickFixOperationGroup(container);
@@ -124,7 +115,8 @@ public class Ecore2KermetaQuickFixWizardPage extends WizardPage implements Liste
         // Create the pacakge, class, operation fields
 		Label label = new Label(operationPropertyGroup, SWT.NULL);
 		label.setText("Enable Operation/Property name conflicts quick fix ");
-		Button checkBox = new Button(operationPropertyGroup, SWT.CHECK);
+		isOpPropertyEnabledCheckBox = new Button(operationPropertyGroup, SWT.CHECK);
+		isOpPropertyEnabledCheckBox.setSelection(true);
         createLabel(operationPropertyGroup, "Operation prefix ", true, font);
         methodRenamePrefixText = createText(operationPropertyGroup, true, font, ECore2Kermeta.methodRenamePrefix);
         createLabel(operationPropertyGroup, "Operation postfix ", true, font);
@@ -147,47 +139,90 @@ public class Ecore2KermetaQuickFixWizardPage extends WizardPage implements Liste
         operationGroup.setText("Fix Operation conflicts"); //$NON-NLS-1$
         // Create the pacakge, class, operation fields
 
-        //Button checkBox = new Button(parent, SWT.CHECK);
-        createLabel(operationGroup, "Operation prefix (if conflict) ", true, font);
+		Label label = new Label(operationGroup, SWT.NULL);
+		label.setText("Enable Operation name conflicts quick fix ");
+		isOperationEnabledCheckBox = new Button(operationGroup, SWT.CHECK);
+		isOperationEnabledCheckBox.setSelection(true);
+		
+        /*createLabel(operationGroup, "Operation prefix (if conflict) ", true, font);
         methodRenamePrefixText = createText(operationGroup, true, font, ECore2Kermeta.methodRenamePrefix);
         createLabel(operationGroup, "Operation postfix (if conflict) ", true, font);
         methodRenamePostfixText = createText(operationGroup, true, font, ECore2Kermeta.methodRenamePostfix);
+        */
     }
     
 	/**
-	 * Tests if the current workbench selection is a suitable
-	 * container to use.
+	 * initialize the different listener so they can activate the dialog change
+	 * (is there a better way to do it ?)
 	 */	
 	private void initialize() {
 
+		isEnableCheckBox.addSelectionListener(new SelectionListener() {
+			public void modifyText(ModifyEvent e) {
+				dialogChanged();
+			}
+
+			public void widgetSelected(SelectionEvent e) {
+				dialogChanged();
+				
+			}
+
+			public void widgetDefaultSelected(SelectionEvent e) {
+				dialogChanged();
+				
+			}
+		});
+		
+		methodRenamePrefixText.addModifyListener(new ModifyListener(){
+
+			public void modifyText(ModifyEvent e) {
+				dialogChanged();
+			}});
+	    methodRenamePostfixText.addModifyListener(new ModifyListener(){
+
+			public void modifyText(ModifyEvent e) {
+				dialogChanged();
+			}});
+
+	    isOpPropertyEnabledCheckBox.addSelectionListener(new SelectionListener() {
+			public void modifyText(ModifyEvent e) {
+				dialogChanged();
+			}
+
+			public void widgetSelected(SelectionEvent e) {
+				dialogChanged();
+				
+			}
+
+			public void widgetDefaultSelected(SelectionEvent e) {
+				dialogChanged();
+				
+			}
+		});
 	}
 	
 
 	
 	/**
-	 * Ensures that both text fields are set.
+	 * Ensures that at least one of the prefix or postfix are set.
+	 * deals with disabled components
 	 */
-
 	private void dialogChanged() {
-	/*	String fileName =  getFilename();//page.getFileName();
+		operationPropertyGroup.setEnabled(isQuickFixEnabled());
+		operationGroup.setEnabled(isQuickFixEnabled());
 
-		if (fileName.length() == 0) {
-			updateStatus("File name must be specified");
-			return;
-		}
+	    methodRenamePrefixText.setEnabled(isQuickFixEnabled());
+	    methodRenamePostfixText.setEnabled(isQuickFixEnabled());
+	    isOpPropertyEnabledCheckBox.setEnabled(isQuickFixEnabled());
+	    isOperationEnabledCheckBox.setEnabled(isQuickFixEnabled());
 		
-		
-		int dotLoc = fileName.lastIndexOf('.');
-		if (dotLoc != -1) {
-			String ext = fileName.substring(dotLoc + 1);
-			if (ext.equalsIgnoreCase("kmt") == false) {
-				updateStatus("File extension must be \"kmt\"");
-				return;
-			}
-		}
-		*/
-		
-		updateStatus(null);
+		if (isQuickFixEnabled() && 
+				isOpPropertyFixEnabled() && 
+				(getOpPostfixString().compareTo("") == 0) &&
+				(getOpPrefixString().compareTo("") == 0))
+			updateStatus("You must set either a prefix and/or a postfix");
+		else
+			updateStatus(null);
 	}
 
 	private void updateStatus(String message) {
@@ -227,26 +262,25 @@ public class Ecore2KermetaQuickFixWizardPage extends WizardPage implements Liste
         return _text;
     }
 	
-    /**
-     * @return Returns the mainClassText.
-     */
- //   public Text getMainClassText() {  return mainClassText;}
- //   public String getMainClassTextString() {  return mainClassText.getText();}
     
-    /**
-     * @return Returns the mainOperationText.
-     */
-  //  public Text getMainOperationText() { return mainOperationText;}
-  //  public String getMainOperationTextString() { return mainOperationText.getText();}
+    public boolean isQuickFixEnabled() {
+    	return this.isEnableCheckBox.getSelection();
+    }
+    public boolean isOpPropertyFixEnabled() {
+    	return this.isOpPropertyEnabledCheckBox.getSelection();
+    }
+
+    public boolean isOperationFixEnabled() {
+    	return this.isOperationEnabledCheckBox.getSelection();
+    }
+    public String getOpPrefixString() {
+    	return this.methodRenamePrefixText.getText();
+    }
+    public String getOpPostfixString() {
+    	return this.methodRenamePostfixText.getText();
+    }
     
-    /**
-     * @return Returns the packageText.
-     */
-  //  public Text getPackageText() {        return packageText;}
- //   public String getPackageTextString() { return packageText.getText();}
     
-  //  public String getContainerText() { return containerText.getText();}
- //   public String getFilename() {return fileText.getText();}
     
     public void handleEvent(Event e)
     {
