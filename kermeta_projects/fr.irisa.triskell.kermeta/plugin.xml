@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta"
    name="Kermeta Workbench"
-   version="0.0.12"
+   version="0.0.13"
    provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.plugin.KermetaPlugin">
    <runtime>
@@ -33,7 +33,7 @@
       </library>
    </runtime>
    <requires>
-     <import plugin="org.eclipse.ui"/>
+     <import plugin="org.eclipse.ui" optional="true"/>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.jface.text"/>
       <import plugin="org.eclipse.ui.editors"/>
@@ -103,13 +103,13 @@
 	         path="additions">
       		<separator name="kermetagroup2"/>
       	</menu>
-       <!-- <action
+       <action
                enablesFor="1"
                label="PrettyPrint to kmt"
                icon="images/kermeta.png"
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
-               class="fr.irisa.triskell.kermeta.popup.actions.CompileKMTAction"
-               id="fr.irisa.triskell.kermeta.KMT2KM"/>         -->
+               class="fr.irisa.triskell.kermeta.popup.actions.Km2kmtAction"
+               id="fr.irisa.triskell.kermeta.KMT2KM"/>         
         <action
                enablesFor="1"
                label="Generate Ecore"

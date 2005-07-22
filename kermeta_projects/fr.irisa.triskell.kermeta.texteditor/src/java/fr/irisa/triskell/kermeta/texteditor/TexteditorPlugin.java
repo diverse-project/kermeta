@@ -1,12 +1,20 @@
 package fr.irisa.triskell.kermeta.texteditor;
 
+import java.net.URL;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
 import org.apache.log4j.Logger;
-import org.eclipse.ui.plugin.*;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-
-import java.util.*;
 
 /**
  * The main plugin class to be used in the desktop.
@@ -38,6 +46,7 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+			
 	}
 
 	/**
