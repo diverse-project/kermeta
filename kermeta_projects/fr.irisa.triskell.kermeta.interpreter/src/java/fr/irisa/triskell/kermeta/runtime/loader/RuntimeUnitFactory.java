@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnitFactory.java,v 1.1 2005-07-08 11:39:33 zdrey Exp $
+/* $Id: RuntimeUnitFactory.java,v 1.2 2005-07-26 16:41:46 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnitFactory.java
  * License   : GPL
@@ -18,7 +18,8 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
  */
 public abstract class RuntimeUnitFactory {
 
-    public abstract RuntimeUnit createRuntimeUnit(String uri);
+    /** This one could replace the other constructor later */
+    public abstract RuntimeUnit createRuntimeUnit(String uri, RuntimeObject emptyInstances);
 
     /**
      * @param emptyInstances

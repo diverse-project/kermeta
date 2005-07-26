@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnitFactory.java,v 1.3 2005-07-20 16:42:19 zdrey Exp $
+/* $Id: EMFRuntimeUnitFactory.java,v 1.4 2005-07-26 16:41:46 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnitFactory.java
  * License   : GPL
@@ -23,10 +23,9 @@ public class EMFRuntimeUnitFactory extends RuntimeUnitFactory
     /* (non-Javadoc)
      * @see fr.irisa.triskell.kermeta.runtime.RuntimeUnitFactory#createRuntimeUnit(java.lang.String)
      */
-    public RuntimeUnit createRuntimeUnit(String uri)
+    public RuntimeUnit createRuntimeUnit(String uri, RuntimeObject emptyInstances)
     {
-        EMFRuntimeUnit emfUnit = new EMFRuntimeUnit(uri);
-        emfUnit.setFactory(this);
+        EMFRuntimeUnit emfUnit = new EMFRuntimeUnit(uri, emptyInstances, this);
         return emfUnit;
     }
     

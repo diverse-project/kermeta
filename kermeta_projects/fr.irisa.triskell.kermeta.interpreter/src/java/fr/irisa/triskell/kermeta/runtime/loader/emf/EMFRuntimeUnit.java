@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.4 2005-07-20 16:42:19 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.5 2005-07-26 16:41:46 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -15,9 +15,13 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -36,7 +40,7 @@ import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 
 /**
- * 
+ * FIXME : Check that we work with all qualified names of Classes.
  */
 public class EMFRuntimeUnit extends RuntimeUnit {
     
@@ -47,22 +51,22 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     /** { EObject : RuntimeObject } */
     private Hashtable runtime_objects_map;
     
-
-
     /**
      * NOTE : this constructor should not been called directly by client.
-     * Use EMFRuntimeFactory instead.
+     * Use EMFRuntimeUnitFactory instead.
      * @param uri the URI of the instance-model to load
      */
-    public EMFRuntimeUnit(String pUri)
+    public EMFRuntimeUnit(String pUri, RuntimeObject emptyInstances, EMFRuntimeUnitFactory pFactory)
     {
         this.uri = pUri;
+        this.instances = emptyInstances;
+        this.factory = pFactory;
         //this.load();
     }
     
     /**
      * NOTE : this constructor should not been called directly by client.
-     * Use EMFRuntimeFactory instead.
+     * Use EMFRuntimeUnitFactory instead.
      * @param uri the URI of the instance-model to load
      * @param pMMUri the URI of the meta-model FIXME : we will get it from NSURI stored un instance-model
      * @param emptyInstances the RuntimeObject for the collection of instances of the instance-model
@@ -80,46 +84,79 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     /**
      * Loads the meta model given as argument as a Kermeta metamodel.
      * The uri extension should be .ecore.
-     *
+     * Note : as the user *must* add a "require" the metamodel in his
+     * kermeta code, this method may be useless.
      */
-    public void loadMetaModelAsKermeta()
+    public void loadMetaModelAsKermeta(String p_metamodel_uri)
     {
         KermetaUnitFactory.getDefaultLoader().unloadAll();
-        
         // Create the correct uri
     //    IFile kmtfile = ecorefile.getProject().getFile(ecorefile.getProjectRelativePath().removeFileExtension().addFileExtension("kmt"));
 		// Create absolute path from relative 
         String unit_uri = instances.getFactory().getMemory().getUnit().getUri();
         String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
         //      resolve uri
-    	URI u = URI.createURI(metamodel_uri);
-    	if (u.isRelative()) {
-    		URIConverter c = new URIConverterImpl();
-    		u = u.resolve(c.normalize(URI.createURI(unit_uripath)));    			
-    	}
+        URI u = this.resolveURI(p_metamodel_uri, unit_uripath);
     	//EMF2Runtime.internalLog.info("UNIT URI = "+ u.toString());
     	//System.err.println("UNIT URI = "+ u.toString() + "(path : "+ unit_uripath+")");
         ecore_unit = (EcoreUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(u.toString());
+        
     }
     
+    public URI resolveURI(String uri, String rel_path)
+    {
+    	URI u = URI.createURI(uri);
+    	if (u.isRelative()) {
+    		URIConverter c = new URIConverterImpl();
+    		u = u.resolve(c.normalize(URI.createURI(rel_path)));    			
+    	}
+    	return u;
+    }
     /**
-     * Create and return the kermeta meta-class equivalent to the given object
-     * @param pObject
-     * @return
+     * To be able to transform a RuntimeObject into an EObject, we need
+     * to be able to access the corresponding meta-model. Whereas we didn't
+     * need to store the meta model for the EMF2Runtime transformation, for
+     * Runtime2EMF we need to know the "E-elements" (EClass, EPackage ;)) of the
+     * meta model in order to create E-instances of those E-elements.
+     * @param robject
+     * @return the EList of elements of the meta model given by p_metamodel_uri
      */
-    protected FObject getFTypeFromEType(EClassifier type)
+    public Resource loadMetaModelAsEcore(String p_metamodel_uri)
+    {        
+        String unit_uri = instances.getFactory().getMemory().getUnit().getUri();
+        String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
+        // resolve uri
+        System.err.println("URI : " + unit_uripath +  "; meta : " + p_metamodel_uri);
+    	URI u = this.resolveURI(p_metamodel_uri, unit_uripath);
+        // load resource
+    	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
+    	ResourceSet resource_set = new ResourceSetImpl();
+    	Resource resource = resource_set.getResource(u, true);
+    	try {
+            // visit the metamodel
+            resource.load(null);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    	
+		return resource;
+    }
+    
+    /* protected FObject getFTypeFromEType(EClassifier type)
     {
         return ((EcoreUnit)ecore_unit).getTypeDefinitionByName(type.getName());
-    }
-    
+    } */
     /**
      * Load this RuntimeUnit
      * @see fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit#load()
      */
     public void load() 
     {
-        this.loadMetaModelAsKermeta();
+        if (this.metamodel_uri !=null && this.metamodel_uri.length()>0)
+            this.loadMetaModelAsKermeta(metamodel_uri);
         // EMF2Runtime is the builder 
+        // If metamodel_uri is null/empty, then loadunit will set it.
         EMF2Runtime.loadunit(this);
     }
     
@@ -138,16 +175,18 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     * ACCESSORS
     *
     */
+	public String getMetaModelUri()
+	{
+	    return metamodel_uri;
+	}
     
     public String getUri()
     {
         return uri;
     }
     
-    public EcoreUnit getMetamodelUnit()
-    {
-        return ecore_unit;
-    }
+    public EcoreUnit getMetamodelUnit()    {  return ecore_unit; }
+    public void setMetamodelUnit(EcoreUnit mmUnit)    {  this.ecore_unit = mmUnit; }
     
     public RuntimeObject getInstances()
     {
@@ -169,4 +208,36 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     public Hashtable getRuntimeObjectsMap() {
         return runtime_objects_map;
     }
+    
+    
+	
+	
+	/**
+	 * (Helper)
+	 * Get the qualified name of the given ENamedElement in a Kermeta representation.
+	 * This is a recursive method,
+	 * that parses the successive containers of an element and return their qualified names.
+	 * @param obj
+	 * @return the qualified name of the given object
+	 */
+	public String getEQualifiedName(ENamedElement obj) {
+	    String result = obj.getName();
+	    EObject cont = obj.eContainer();
+	    if (cont != null &&cont instanceof ENamedElement) {
+	        result = getEQualifiedName((ENamedElement)cont) + "::" + result;
+	    }
+	    return result;
+	}
+
+    /**
+     * @param mmUri
+     */
+    public void setMetaModelUri(String mmUri) {
+        this.metamodel_uri = mmUri;
+        
+    }
+    
+    
+    
 }
+
