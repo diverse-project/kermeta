@@ -1,6 +1,44 @@
 package kermeta::persistence;
 
 using kermeta::standard
+
+/*****************************************************************************
+ * $Id: resource.kmt,v 1.4 2005-07-26 16:46:15 zdrey Exp $
+ * Project : Kermeta (First iteration)
+ * Creation date :  
+ * File : resource.kmt
+ * License : GPL
+ * Copyright : IRISA / Universite de Rennes 1
+ * Creation date : Mar 14, 2005
+ * Author : zdrey
+ * Description :  
+ *      This file contains the classes that handle the serialization of models.
+ *
+ *
+ ****************************************************************************/
+
+/**
+ * The main class that handle a loaded/saved model.
+ * There are a few important things to note for the developper :
+ * 
+ * - load a Resource : this loads a Collection of instances corresponding to the
+ *   objects in the loaded model. If the Collection of instances is empty, than 
+ *	 a ResourceLoadException is raised
+ *
+ * - save a Resource : this saves the collection of instances in a new file. This can
+ *   be correctly done if and only if the instances saved are conform to the metamodel
+ *   linked to this resource (this link does not need to be explicit. It is normally retrieved
+ *   through the EMF model -- see Java wrapping "Resource.java").
+ * 
+ * - add/remove an instance to the Resource : this adds an element in the resource. It cannot
+ *   be "simply" added because of the following potential errors :
+ *
+ *   - The object added is not conform to the metamodel -> Error
+ *   - The object was already added in the resource -> Not a real error : we do nothing
+ *   - The object to remove does not exist -> redirect to a collection-specific error
+ *   - The object to remove is attached to an object in the collection -> "dependency-violation" exception?
+
+ */
 abstract class Resource
 {
 	/** The uri of the model-instance to load */
@@ -16,7 +54,12 @@ abstract class Resource
 	 * Overrides the old version.
 	 */
 	operation save() : Void is abstract
+	operation saveWithNewURI(new_uri : String) : Void is do end
 	operation load() : Void is abstract
+	/** add an instance, return it if success, otherwise return null */
+	operation add(instance : Object) : Void is abstract  
+	/** remove the instance, return it if success, otherwise return null */
+	operation remove(instance : Object) : Object is abstract
 	
 /*	operation setInstances(p_instances : Set<Object>) : kermeta::standard::~Void is do
 		instances := p_instances
@@ -25,27 +68,47 @@ abstract class Resource
 class EMFResource inherits Resource
 {
 	/**
-	 * Constructor "patch" 
+	 * Constructor "patch" TODO : only one should be needed
 	 */
-	operation initialize(model_uri : String , mm_uri : String , incResources : Set<String> ) is do
+	operation initialize_3(model_uri : String , mm_uri : String , inc_resources : Set<String> ) is do
 		uri := model_uri
 		metaModelURI := mm_uri
+		includedResources := inc_resources
+	end
+	operation initialize_2(model_uri : String , inc_resources : Set<String> ) is do
+		uri := model_uri
+		includedResources := inc_resources
+	end
+	operation initialize(model_uri : String) is do
+		uri := model_uri
+		metaModelURI := ""
 	end
 
 	/** Save a resource in the uri associated to it */
-	method save(new_uri : String) : Void is do
+	method saveWithNewURI(new_uri : String) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			new_uri, metaModelURI, "EMF", instances
 		)
 	end
 	
+	method save() : Void is do
+		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
+			self.uri, metaModelURI, "EMF", instances
+		)
+	end
+	
 	/** Load a resource */
 	method load() : Void is do
+		var e : ResourceLoadException init ResourceLoadException.new
 		// Todo : extern load should return a Reflective Set?
 		var inst_set : Set<Object> init Set<Object>.new
 		inst_set ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
 			uri, metaModelURI, "EMF", instances
 		)
+		// If load failed
+		if (inst_set.size == 0) then
+			raise e
+		end
 		// FIXME : should I directly create a ReflectiveSet instead of that ?
 		from var it : Iterator<Object> init inst_set.iterator
 		until (it.isOff)
@@ -57,11 +120,74 @@ class EMFResource inherits Resource
 		)
 		*/
 	end
-	/*
-	method loadInstances() : Set<Object> is do
-		result := void
-	end*/
+
+	/** Add an instance to the Resource*/
+	method add(instance : Object) : Void is do
+		// Exception
+		var e : ResourceUnconformityException init ResourceUnconformityException.new
+		// Is the object conform to the metamodel?
+		if self.isConform(instance) then
+			instances.add(instance)
+		else
+			raise e
+		end
+	end
+	
+	/** Remove an instance from the Resource */
+	method remove(instance : Object) : Object is do
+		if instances.contains(instance) then 
+			instances.remove(instance)
+			result := instance
+		else
+			result := void
+		end
+	end
+	
+	/** Return true if instance type is conform to the metamodel of the model loaded,
+	 * false otherwise 
+	 */
+	operation isConform(instance : Object) : Boolean is do
+		// Get on eof the isntances loaded (supposed to be conform!)
+		var valid_instance : Object init instances.one
+		// We use reflection to get the meta model classes .. 
+		var o : Object init valid_instance.getMetaClass.classDefinition
+		var container : Object
+		var i : Integer init 0
+		from var b : Boolean init true //(cdef.container != void or i<=10)
+		 // *very* temporary patch for unexp. infinite loop : invalid models?
+		until o.container == void or i==10
+		loop
+			o := o.container
+		end
+		// TODO : a robustness test? o instnaceof Package?
+		var p : kermeta::language::structure::Package
+		p ?= o
+		result := isInTypeDefSet(p.ownedTypeDefinition, instance)
+	end
+	
+	/**
+	 * Helper that should be moved elsewhere.
+	 * FIXME : Loop-and-cast done in order to temporarily get round the type 
+	 * system limits for reflection
+	*/
+	operation isInTypeDefSet(tparams : Set<kermeta::reflection::TypeDefinition>, new_instance : Object) : Boolean is do
+		result := false
+		var it : Iterator<kermeta::reflection::TypeDefinition> init tparams.iterator
+		from var it : Iterator<kermeta::reflection::TypeDefinition> init tparams.iterator
+		until (it.isOff or result == true)
+		loop
+			var next : kermeta::language::structure::TypeDefinition
+			next ?= it.next 
+			// Note :  test with  "qualifiedName" is easier. is it a proper way?
+			if (next.qualifiedName.equals(new_instance.getMetaClass.classDefinition.qualifiedName)) then
+				result := true
+			end
+		end
+	end
+	
+
 }
+
 class KMResource inherits Resource
 {
 	method save() : kermeta::standard::~Void is do
@@ -69,6 +195,13 @@ class KMResource inherits Resource
 	end
 	method load() : kermeta::standard::~Void is do
 		//TODO: implement operation load
+	end
+	method add(instance : Object) : Void is do
+		//TODO: implement operation load
+	end
+	method remove(instance : Object) : Object is do
+		//TODO: implement operation load
+		result := void
 	end
 }
 abstract class Repository
@@ -115,3 +248,10 @@ class KMRepository inherits Repository
 		//TODO: implement operation getResource
 	end 
 }
+
+/** Specialized exceptions */
+class ResourceLoadException inherits kermeta::exceptions::Exception { }
+class ResourceSaveException inherits kermeta::exceptions::Exception { }
+/** Raised when user tries to add an object that is not conform to the metamodel */
+class ResourceUnconformityException inherits kermeta::exceptions::Exception { }
+
