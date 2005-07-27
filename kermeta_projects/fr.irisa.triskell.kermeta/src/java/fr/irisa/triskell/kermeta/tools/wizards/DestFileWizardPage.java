@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.1 2005-07-27 09:07:22 dvojtise Exp $
+/* $Id: DestFileWizardPage.java,v 1.2 2005-07-27 14:50:33 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -99,6 +99,8 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 	 * First time the advanced group is validated.
 	 */	
 	private boolean firstLinkCheck = true;
+	
+	protected Composite topLevel;
 
 
 	/**
@@ -158,12 +160,15 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 	public void createControl(Composite parent) {
 		initializeDialogUnits(parent);
 		// top level group
-		Composite topLevel = new Composite(parent,SWT.NONE);
+		topLevel = new Composite(parent,SWT.NONE);
 		topLevel.setLayout(new GridLayout());
 		topLevel.setLayoutData(new GridData(
 			GridData.VERTICAL_ALIGN_FILL | GridData.HORIZONTAL_ALIGN_FILL));
 		topLevel.setFont(parent.getFont());
 		WorkbenchHelp.setHelp(topLevel, IHelpContextIds.NEW_FILE_WIZARD_PAGE);
+		
+		createPreControls(topLevel);
+		
 	
 		// resource and container group
 		resourceGroup = new ResourceAndContainerGroup(topLevel, this, getNewFileLabel(), IDEWorkbenchMessages.getString("WizardNewFileCreationPage.file"), false, SIZING_CONTAINER_GROUP_HEIGHT); //$NON-NLS-1$
@@ -181,10 +186,19 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		validatePage();
 		
 	}
+	
 	/**
-	 * @param topLevel
+	 * creates controls that fit before the main controls
+	 * @param parent
 	 */
-	private void createFileExistsBehaviorControls(Composite parent) {
+	protected void createPreControls(Composite parent) {
+		// nothing special here, placeholder for children classes
+	}
+	
+	/**
+	 * @param parent
+	 */
+	protected void createFileExistsBehaviorControls(Composite parent) {
 		Font font = parent.getFont();
         // Advanced group
         fileExistsGroup = new Group(parent, SWT.NONE);

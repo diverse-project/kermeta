@@ -1,4 +1,4 @@
-/* $Id: Ecore2kmtWizard.java,v 1.2 2005-07-21 20:52:21 dvojtise Exp $
+/* $Id: Ecore2kmtWizard.java,v 1.3 2005-07-27 14:50:33 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Wizard.java
  * License    : EPL
@@ -29,7 +29,8 @@ public class Ecore2kmtWizard extends KmtPrinterWizard implements INewWizard {
 	 * Constructor for Km2kmtWizard.
 	 */
 	public Ecore2kmtWizard() {
-		super();
+		super(); 
+    	isInputKM = false; 
 	}
 	
 	/**
@@ -46,21 +47,15 @@ public class Ecore2kmtWizard extends KmtPrinterWizard implements INewWizard {
 	 * overwrite the default createUnit method in order to add some special directives to the loader.
 	 * @return KermetaUnit
 	 */
-	public KermetaUnit creatUnit() {
-		String inputFile_uri = "platform:/resource" + inputFile.getFullPath().toString();
-        
-        KermetaUnitFactory.getDefaultLoader().unloadAll();
-        
-        KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(inputFile_uri);
-        
-
+	public KermetaUnit createUnit() {
+		
         ECore2Kermeta.isQuickFixEnabled = quickFixPage.isQuickFixEnabled();
         ECore2Kermeta.isMethodPropertyNameOverlapSafe = quickFixPage.isOpPropertyFixEnabled();
         ECore2Kermeta.isMethodNameOverlapSafe = quickFixPage.isOperationFixEnabled();
         ECore2Kermeta.methodRenamePrefix = quickFixPage.getOpPrefixString();
         ECore2Kermeta.methodRenamePostfix = quickFixPage.getOpPostfixString();
         
-		return unit;
+		return super.createUnit();
 	}
 
 			

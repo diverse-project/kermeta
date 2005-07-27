@@ -190,7 +190,7 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	    return consoleStream;
     }
 	
-	public void consolePrintStackTrace(Exception e)
+	public void consolePrintStackTrace(Throwable e)
 	{
 		ByteArrayOutputStream oStream = new java.io.ByteArrayOutputStream();		
 		PrintWriter pw = new PrintWriter(oStream);			

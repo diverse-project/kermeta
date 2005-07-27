@@ -1,4 +1,4 @@
-/* $Id: KmtPrinterWizard.java,v 1.1 2005-07-21 15:41:44 dvojtise Exp $
+/* $Id: KmtPrinterWizard.java,v 1.2 2005-07-27 14:50:33 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -43,7 +43,8 @@ public class KmtPrinterWizard extends UnitExporterWizard{
     {
 		super();
 
-    	defaultOutputExtension = "kmt";
+    	defaultOutputExtension = "kmt";  
+    	isOutputKM = false; 
     }
     
 	/**
@@ -53,7 +54,7 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 		super.addPages();
 		
 		// customize the already added pages
-		WizardNewFileCreationPage outputPage = (WizardNewFileCreationPage)this.getPage(OUTPUTFILE_PAGENAME);
+		outputPage = (DestFileWizardPage)this.getPage(OUTPUTFILE_PAGENAME);
 		outputPage.setTitle("PrettyPrint to kmt:");
 		outputPage.setDescription("This wizard pretty prints your file into a kmt (kermeta text) file.\nPlease specify the output file name.");
 			
@@ -104,17 +105,4 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 		ifile.refreshLocal(1, null);
 	}
 
-	/**
-	 * Default Unit creation.
-	 * @return KermetaUnit
-	 */
-	public KermetaUnit createUnit() {
-		String inputFile_uri = "platform:/resource" + inputFile.getFullPath().toString();
-        
-        KermetaUnitFactory.getDefaultLoader().unloadAll();
-        
-        KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(inputFile_uri);
-        
-		return unit;
-	}
 }
