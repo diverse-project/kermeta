@@ -65,6 +65,9 @@
                id="org.eclipse.jdt.ui.PackageExplorer">
          </showInPart>
          <perspectiveShortcut id="org.eclipse.ui.resourcePerspective"/>
+         <viewShortcut id="org.eclipse.ui.views.properties.PropertySheet"/>
+         <viewShortcut id="org.eclipse.ui.views.ProblemView"/>
+         <perspectiveShortcut id="org.eclipse.jdt.ui.JavaPerspective"/>
          </perspectiveExtension>
          <perspectiveExtension targetID="org.eclipse.ui.resourcePerspective">
             <newWizardShortcut id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"/>
@@ -88,14 +91,15 @@
                   >
             </separator>
          </menu> -->
-         <action
+
+      </objectContribution>
+     <!--      <action
                enablesFor="1"
                label="Kermeta Run"
                class="fr.irisa.triskell.kermeta.runner.popup.actions.KermetaRun"
-               menubarPath="additions"
+               menubarPath="org.eclipse.debug.ui.contextualLaunch.run.submenu"
                id="fr.irisa.triskell.kermeta.runner.newAction">
-         </action>
-      </objectContribution>
+         </action>-->
       <objectContribution
             objectClass="org.eclipse.core.resources.IProject"
             id="popIProject"/>
@@ -220,27 +224,48 @@
             point="org.eclipse.debug.ui.launchShortcuts">
          <shortcut
                label="Kermeta App"
-               icon="icons/kermeta_logo.gif"
                class="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchShortcut"
-               modes="run"
-               id="fr.irisa.triskell.kermeta.runner.kermetashortcut">
+               icon="icons/kermeta_logo.gif"
+               path="contextualLaunch.popupMenu/launchGroup"
+               id="fr.irisa.triskell.kermeta.runner.kermetashortcut"
+               modes="run">
             <contextualLaunch>
                <contextLabel
-                     label="Kermeta Appli"
+                     label="Kermeta App"
                      mode="run"/>
-			
+			   <enablement>
+	              <with
+	                    variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               		<iterate>
+                 		<or>
+                   			<test property="org.eclipse.debug.ui.matchesPattern" value="*.kmt"/>
+                   			<test property="org.eclipse.debug.ui.matchesPattern" value="*.km"/>
+                   			<instanceof value="org.eclipse.core.resources.IFile"/>
+                 		</or>
+                 		<test property="org.eclipse.jdt.junit.isTest"/>
+               		</iterate>
+               </with>
+            </enablement>
             </contextualLaunch>
-            <perspective id="kermetaPerspective"/>
          </shortcut> 
-<!--         <shortcut
-               label="Kermeta popup"
-               class="fr.irisa.triskell.kermeta.runner.KermetaLaunchShortcut"
-               modes="run"
-               id="PopupKermetaLaunchShortCut"/>
--->
       </extension>
      <extension
            point="org.eclipse.ui.importWizards">
      </extension>
+     <!-- This extension does not look useful for launchability -->
+<!--     <extension
+           point="org.eclipse.core.runtime.adapters">
+        <factory
+        	  class=""
+              adaptableType="org.eclipse.core.resources.IFile">
+           <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
+        </factory> 
+     </extension> 
+   -->
+   
+     
 
 </plugin>
