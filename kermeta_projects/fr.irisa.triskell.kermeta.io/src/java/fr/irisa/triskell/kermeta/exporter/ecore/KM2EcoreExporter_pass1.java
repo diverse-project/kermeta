@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter_pass1.java,v 1.4 2005-07-20 07:30:39 dvojtise Exp $
+/* $Id: KM2EcoreExporter_pass1.java,v 1.5 2005-07-27 14:46:29 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -80,6 +80,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 	public Object exportPackage(FPackage root_package) {
 		root_pname = KMTHelper.getQualifiedName(root_package);
 		root_p = root_package;
+		
 		return accept(root_package);
 	}
 	
@@ -95,6 +96,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 		newEPackage.setName(current_pname);
 		ecoreResource.getContents().add(newEPackage);
 		kmt2ecoremapping.put(p,newEPackage);
+		ecoreExporter.tracer.addMappingTrace(p,newEPackage,p.getFName() + " is mapped to " + newEPackage.getName());
 		
 
 		Iterator it = p.getFNestedPackage().iterator();
@@ -131,6 +133,8 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 			newEClass.setName(current_pname);
 			ecoreResource.getContents().add(newEClass);
 			kmt2ecoremapping.put(node,newEClass);
+			ecoreExporter.tracer.addMappingTrace(node,newEClass,node.getFName() + " is mapped to " + newEClass.getName());
+			
 			
 			// do as much as possible right now
 			

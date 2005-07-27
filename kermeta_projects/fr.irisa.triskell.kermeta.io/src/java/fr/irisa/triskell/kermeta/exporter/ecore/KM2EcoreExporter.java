@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter.java,v 1.6 2005-07-20 07:30:39 dvojtise Exp $
+/* $Id: KM2EcoreExporter.java,v 1.7 2005-07-27 14:46:29 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
  * Exports KM or KMT to Ecore.
@@ -51,6 +52,9 @@ public class KM2EcoreExporter {
 	
 	// the resource to populate
 	protected Resource ecoreResource = null;
+	public Resource traceResource = null;
+	
+	public Tracer tracer = null;
 	
 
 	/**
@@ -91,6 +95,14 @@ public class KM2EcoreExporter {
 	public KM2EcoreExporter(Resource resource) {
 		ecoreResource = resource;	
 	}
+	
+	public KM2EcoreExporter(Resource resource, Resource traceresource) {
+		ecoreResource = resource;	
+		traceResource = traceresource;
+		tracer = new Tracer(traceResource);
+	}
+	
+	
 	
 	/**
 	 * Exports the given package into an ecore ressource
