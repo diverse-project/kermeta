@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.33 2005-07-20 15:58:25 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.34 2005-07-27 14:46:00 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -27,11 +27,11 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
-import fr.irisa.triskell.kermeta.behavior.FRaise;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
@@ -53,6 +53,7 @@ import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
  * 
@@ -193,6 +194,19 @@ public abstract class KermetaUnit {
 	public void storeTrace(FObject model_element, Object node) {
 		traceM2T.put(model_element, node);
 		traceT2M.put(node, model_element);
+		
+		if(tracer !=  null)
+		{	// also put the info in the trace for eventual serialization
+			// TODO remove the Hashtable and generailze the use of the tracer
+			KermetaASTNode astNode = (KermetaASTNode)node;
+			astNode.getRangeStart();
+			tracer.addTextInputTrace(this.uri, 
+					0,	// TODO I don't know how to retreive line number
+					astNode.getRangeStart(),
+					astNode.getRangeEnd(), 
+					model_element, 
+					astNode.getText() + " mapping to " +model_element.toString());			
+		}
 	}
 
 	public FObject getModelElementByNode(Object node) {
@@ -201,6 +215,15 @@ public abstract class KermetaUnit {
 	
 	public Object getNodeByModelElement(FObject object) {
 		return traceM2T.get(object);
+	}
+	
+	/**
+	 * code>tracer</code> uses the traceability metamodel for storing traces info
+	 */
+	public Tracer tracer=null;
+	public void setTracer(Tracer newTracer)
+	{
+		tracer = newTracer;
 	}
 	
 	/**
