@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.3 2005-07-27 14:50:33 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.4 2005-07-27 14:52:41 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -31,7 +31,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.console.MessageConsoleStream;
-import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;

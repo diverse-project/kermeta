@@ -1,4 +1,4 @@
-/* $Id: Ecore2kmtWizard.java,v 1.3 2005-07-27 14:50:33 dvojtise Exp $
+/* $Id: Ecore2kmtWizard.java,v 1.4 2005-07-27 14:52:41 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Wizard.java
  * License    : EPL
@@ -15,7 +15,6 @@ package fr.irisa.triskell.kermeta.tools.wizards;
 import org.eclipse.ui.INewWizard;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.ecore.ECore2Kermeta;
 
 

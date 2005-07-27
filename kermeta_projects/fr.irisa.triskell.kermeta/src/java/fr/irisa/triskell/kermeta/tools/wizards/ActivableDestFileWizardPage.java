@@ -1,4 +1,4 @@
-/* $Id: ActivableDestFileWizardPage.java,v 1.1 2005-07-27 14:50:33 dvojtise Exp $
+/* $Id: ActivableDestFileWizardPage.java,v 1.2 2005-07-27 14:52:41 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : TraceFileWizardPage.java
  * License    : EPL
@@ -12,7 +12,6 @@
  */
 package fr.irisa.triskell.kermeta.tools.wizards;
 
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -23,9 +22,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 
 /**
  * Page for dealing with trace file. It adds a globale enable/disable checkbox
