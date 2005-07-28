@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.4 2005-07-26 16:41:46 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.5 2005-07-28 16:07:36 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : GPL
@@ -62,7 +62,6 @@ public class Runtime2EMF {
     public Runtime2EMF(EMFRuntimeUnit unit) {
         super();
         this.updatedRuntimeObjects = new ArrayList();
-        this.updatedEObjects = new ArrayList();
         this.unit = unit;
     }
     
@@ -103,7 +102,10 @@ public class Runtime2EMF {
 		}
         
     }
-    
+    /**
+     * Update the EMFModel from the attribute RuntimeUnit <code>unit</code>.
+     * @param resource
+     */
     public void updateEMFModel(Resource resource)
     {
         ArrayList root_containers = new ArrayList();
@@ -141,7 +143,6 @@ public class Runtime2EMF {
     
     // Put in this list all the RuntimeObject that were already updated
     protected ArrayList updatedRuntimeObjects;
-    protected ArrayList updatedEObjects;
     protected EMFRuntimeUnit unit;
     protected Resource metaModelResource;
     protected Resource resource;
@@ -211,11 +212,9 @@ public class Runtime2EMF {
         Object property_eObject = null;
         //FType ftype = getMetaClassByName(getEQualifiedName(etype), unit);
         eObject.eUnset(feature); // is it necessary? (when object modified by the user?)
-
         // If property emf representation was not found, it means that it was a newly created object, so
         // we have to create the equivalent EMF object.
         property_eObject = getOrCreatePropertyFromRuntimeObject(property, feature.getEType());
-        //property_eObject = property.getData().get("emfObject");
         if (property_eObject == null)
             property_eObject = getPrimitiveTypeValueFromRuntimeObject(property);
         // If property is a simple EObject 
@@ -276,8 +275,6 @@ public class Runtime2EMF {
     protected Object getOrCreateObjectFromRuntimeObject(RuntimeObject rObject, EClassifier classifier)
     {
         Object result = null;
-        System.out.println("RObject emf : " + rObject.getData().get("emfObject"));
-        System.out.println("RObject : " + rObject);
         if (rObject.getData().containsKey("emfObject"))
             result = rObject.getData().get("emfObject");
         else
@@ -342,7 +339,6 @@ public class Runtime2EMF {
         if (eclass != null) // If we did not find the Eclass (it means that kqname is the name of a primitive type)
         {
             result = EcoreUtil.create(eclass);
-            
         }
         return result;
     }
@@ -351,12 +347,6 @@ public class Runtime2EMF {
     {
         EClass result = null;
         TreeIterator it = null; 
-      /*  String result = obj.getName();
-	    EObject cont = obj.eContainer();
-	    if (cont != null &&cont instanceof ENamedElement) {
-	        result = getEQualifiedName((ENamedElement)cont) + "::" + result;
-	    }*/
-        //
         // If we work on an existing resource, this method is ok resource is empty!!!
         if (resource.getContents().size() > 0)
         {
@@ -366,8 +356,7 @@ public class Runtime2EMF {
         else
         {
               it = p_resource.getAllContents();
-        }
-              
+        }     
         while (it.hasNext() && result == null)
         {
             EObject obj = (EObject)it.next();
@@ -382,7 +371,8 @@ public class Runtime2EMF {
    
     
     /**
-     * Get the value linked to the given RuntimeObject. Returns a String, Boolean,
+     * Get the value linked to the given RuntimeObject, provided this object wraps
+     * a primitive type. Returns a String, Boolean,
      * or Int value according to the primitive type wrapped by this runtime object.
      * @param robject The runtime object of which we want the value
      * @return the value of the primitive type wrapped by robject
@@ -397,10 +387,11 @@ public class Runtime2EMF {
     }
     
     /**
-     * 
-     * @param eObject
-     * @param p_name
-     * @return
+     * Get the EStructuralFeature in given <code>eObject</code> from the feature <code>p_name</code>
+     * given in parameters
+     * @param eObject the eObject of which we get a feature
+     * @param p_name the name of the wanted feature
+     * @return an EStructuralFeature corresponding to eObject.p_name
      */
     protected EStructuralFeature getEStructuralFeatureByName(EObject eObject, String p_name)
     {
