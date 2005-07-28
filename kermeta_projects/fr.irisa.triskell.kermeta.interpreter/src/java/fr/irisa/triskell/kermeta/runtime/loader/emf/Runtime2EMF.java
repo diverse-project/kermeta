@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.5 2005-07-28 16:07:36 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.6 2005-07-28 18:21:02 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : GPL
@@ -41,12 +41,15 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreAdapterFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.structure.FClass;
@@ -80,14 +83,25 @@ public class Runtime2EMF {
         {	// resolve
             r2e.metaModelResource = p_unit.loadMetaModelAsEcore(p_unit.getMetaModelUri());
         }
-        else
-            // FIXME : not good!
-            throw new KermetaRaisedException(null, null);
+        else // exception should be put in another way. it is not valid in the case user
+            // saves a model that was initialy loaded. (exception should only be valid
+            // when user tries to save a model created from scratch) 
+        {
+            //throw new KermetaRaisedException(null, null);
+        }
         // Initialize the resource of the EMF model to save
-	    String ext = file_path.substring(file_path.lastIndexOf(".")+1);
+        String unit_uri = p_unit.getInstances().getFactory().getMemory().getUnit().getUri();
+        String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
+    	URI u = URI.createURI(file_path);
+    	KermetaUnit.internalLog.info("URI created for model to save : "+u);
+    	if (u.isRelative()) {
+    		URIConverter c = new URIConverterImpl();
+    		u = u.resolve(c.normalize(URI.createURI(unit_uripath)));    			
+    	}
+        String ext = file_path.substring(file_path.lastIndexOf(".")+1);
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
-	    r2e.resource = resource_set.createResource(URI.createFileURI(file_path));
+	    r2e.resource = resource_set.createResource(u);
 	    //System.err.println("URI to save : " + URI.createFileURI(file_path).toString());
 	    // Update all the instance of the EMF Model
 	    r2e.updateEMFModel(r2e.resource);
