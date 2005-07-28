@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.traceability.feature"
       label="Traceability Framework"
-      version="0.0.1"
+      version="0.0.2"
       provider-name="INRIA/IRISA">
 
    <install-handler/>
@@ -16,7 +16,7 @@ It includes:
    </description>
 
    <copyright url="[Enter Copyright URL here.]">
-      Copyright 2005 - INRIA - LGPL license
+      Copyright 2005 - INRIA - EPL license
    </copyright>
 
    <license url="[Enter License URL here.]">
@@ -40,10 +40,8 @@ BELOW, THEN YOU MAY NOT USE THE CONTENT.
 Applicable Licenses
 Unless otherwise indicated, all Content made available here
 is provided to you under the terms and conditions of the Lesser
-General Public
-License Version 1.0 (&quot;LGPL&quot;). A copy of the LGPL is provided
-with this
-Content and is also available at http://www.gnu.org/copyleft/lesser.html.
+ Eclipse Public
+License (&quot;EPL&quot;).
    </license>
 
    <url>
@@ -67,18 +65,18 @@ Content and is also available at http://www.gnu.org/copyleft/lesser.html.
          id="fr.irisa.triskell.traceability"
          download-size="0"
          install-size="0"
-         version="0.0.1"/>
+         version="0.0.2"/>
 
    <plugin
          id="fr.irisa.triskell.traceability.edit"
          download-size="0"
          install-size="0"
-         version="0.0.1"/>
+         version="0.0.2"/>
 
    <plugin
          id="fr.irisa.triskell.traceability.editor"
          download-size="0"
          install-size="0"
-         version="0.0.1"/>
+         version="0.0.2"/>
 
 </feature>
