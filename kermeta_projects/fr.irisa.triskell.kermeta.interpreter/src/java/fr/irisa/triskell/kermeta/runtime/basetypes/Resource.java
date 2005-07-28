@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.3 2005-07-20 16:40:43 zdrey Exp $
+/* $Id: Resource.java,v 1.4 2005-07-28 16:03:20 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : GPL
@@ -22,7 +22,6 @@ import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitLoader;
  * This class is intended to "wrap" the resource management from kermeta.
  */
 public class Resource {
-
     
     /**
      * Save the resource "self" into its uri attributes, unless newUri is given
@@ -43,14 +42,18 @@ public class Resource {
         return instances.getFactory().getMemory().voidINSTANCE;
     }
     
-    
-
+    // Implementation of method load called as :
+    // extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(uri, type)
+    // This creates a RuntimeUnit adapted to the given type (we are expecting from type "EMF", "MDR"),
+    // Which "handles" a Collection of instances, represented as a RuntimeObject
     /**
-     * 
      * @param uri the uri of the EMF model to load
-     * @param mmUri the uri of the Ecore meta-model of which EMF model is an instance
+     * @param mmUri the uri of the Ecore meta-model of which EMF model is an 
+     *        instance; it can be an empty string. In such a case, the meta model uri
+     * 		  is retrieved from the model.
      * @param resourceType the resource type ("EMF", "MDR")
      * @param emptyInstances the runtimeObject representing the collection of instances
+     * 
      * of the EMF Model, once loaded
      * @return The emptyInstances collections, filled in.
      */
@@ -59,28 +62,8 @@ public class Resource {
         RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
         	getConcreteFactory(String.getValue(resourceType)).
         	createRuntimeUnit(String.getValue(uri), String.getValue(mmUri), emptyInstances);
+        // 
         runtime_unit.load();
         return runtime_unit.getInstances();
     }
-    
-    // Implementation of method load called as :
-    // extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(uri, type)
-    // This creates a RuntimeUnit adapted to the given type (we are expecting from type "EMF", "MDR"),
-    // Which "handles" a Collection of instances, represented as a RuntimeObject
-    /**
-     * @param uri : a RuntimeObject that encapsulates a Kermeta string
-     * @param resourceType : the type of the resource
-     * @return a RuntimeObject that encapsulates a collection of instances of the 
-     * model given by its uri.
-     */
-    public static RuntimeObject load(RuntimeObject uri, RuntimeObject resourceType, RuntimeObject emptyInstances)
-    {
-        RuntimeObject instances = emptyInstances;
-        RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
-        	getConcreteFactory(String.getValue(resourceType)).
-        	createRuntimeUnit(String.getValue(uri));
-        runtime_unit.load();
-        return runtime_unit.getInstances();
-    }
-    
 }
