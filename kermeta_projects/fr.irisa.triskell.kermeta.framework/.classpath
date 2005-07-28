@@ -9,5 +9,6 @@
 	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.io/src/java" kind="lib" path="lib/io_kermeta.jar"/>
 	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.model/src/java" kind="lib" path="lib/model_kermeta.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/log4j.jar"/>
+	<classpathentry kind="lib" path="lib/traceability.jar"/>
 	<classpathentry kind="output" path="build/class"/>
 </classpath>
