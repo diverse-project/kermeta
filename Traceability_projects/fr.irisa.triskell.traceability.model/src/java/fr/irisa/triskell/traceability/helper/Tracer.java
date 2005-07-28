@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.1 2005-07-27 14:04:00 dvojtise Exp $
+/* $Id: Tracer.java,v 1.2 2005-07-28 09:27:39 dvojtise Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -80,7 +80,8 @@ public class Tracer {
 	
 	public void newModelTrace()
 	{
-		modelTrace = TraceabilityFactory.eINSTANCE.createModel();		
+		modelTrace = TraceabilityFactory.eINSTANCE.createModel();
+		modelTrace.setOptimizedReferencesOnly(true); // new empty model are optimized :-) 
 		traceResource.getContents().add(modelTrace);
 	}
 	
