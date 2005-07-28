@@ -1,34 +1,113 @@
 @mainClass "sample::Main"
 @mainOperation "main"
 package sample;
-require "../ecore/cs.ecore"
+require "./cs.ecore"
 require kermeta
 using kermeta::standard
-using kermeta::persistence
+using kermeta::persistence  
 using kermeta::interpreter
-using kermeta::utils
+using kermeta::utils   
 
-class Main
+class Main 
 {
+	reference resource : EMFResource
+	reference repository : EMFRepository
 	operation initialize(uri : String, mm_uri : String) : Set<Object> is do
-		
 		/* Initialize the EMF repository */
-		var repository    : EMFRepository init EMFRepository.new
+		repository    := EMFRepository.new
 		/* Create an EMF Resource */
-		var resource : EMFResource init repository.createResource(uri, mm_uri)
+		self.resource := repository.createResource(uri, mm_uri)
 		/* Load the resource : this loads all the instances contained in the EMF model */
-		resource.load()
+		self.resource.load()
 		/* Get the loaded instances (a Set<Object>) */
 		result := resource.instances
 	end
-
+ 
 	operation main() is do
-		var csvisitor : CSVisitorHandler init CSVisitorHandler.new
-		var instances : Set<Object> init self.initialize("Test_1.cs", "../ecore/cs.ecore")
-		csvisitor.initialize(instances)
+		// Visit and save a model -- visitor adds a new object inside
+		var csvisitor : CSVisitorHandler init CSVisitorHandler.new 
+		var instances : Set<Object> init self.initialize("Test_1.cs", "cs.ecore")//"cs.ecore")
+		stdio.writeln("resource!"+resource.toString)
+		csvisitor.initialize(resource, instances)
 		csvisitor.visitInstances()
+		resource.saveWithNewURI("testsauvegarde.cs")
+		
+		// New model from scratch
+		var test : TestAddToResource init TestAddToResource.new
+		test.createNewEMFModelFromScratch(repository)
+		
+		// Remove an element
+		test.removeTemplateFromRoot(repository)
+		
 	end
 }
+
+/**
+ * Contains a set of methods-use cases that add elements to the loaded EMF Model
+*/
+class TestAddToResource
+{
+ 	/** tested! */
+	operation addTemplateToRoot(root : cs::Root, resource : Resource) is do
+		// add a template?
+		var mytemplate : cs::Template init cs::Template.new
+		mytemplate.name := "mytemplate est nouveau"
+		mytemplate.content := "plorep"
+		mytemplate.decision.add(cs::Decision.new)
+ 		root.template.add(mytemplate)  
+  		stdio.writeln("resource size :"+ resource.instances.size.toString)
+
+ 	end
+ 	
+ 	/** tested!  */
+ 	operation removeTemplateFromRoot(repository : EMFRepository) is do
+ 		var resource : EMFResource 
+	 	resource := repository.createResource("./KMTest_remove.cs", "./cs.ecore")
+	 	var root : cs::Root init self.createTestModelToSave()
+	 	var t : cs::Template init root.template.one
+	 	// print t if we want to know it's the correct one that was removed
+	 	stdio.writeln("Je me prepare à jeter ce template : "+ t.name)
+	 	stdio.writeln("Je me prepare à jeter ce template : "+ root.template.size.toString)
+	 	// note : if this instruction is put after resource.add(root),
+	 	// it yet does not have any effect
+	 	resource.instances.add(root)
+	 	root.template.remove(t) 
+ 		resource.save() 
+ 	end
+ 	
+ 	/** tested! */
+ 	operation createNewEMFModelFromScratch(repository : EMFRepository) is do
+	 	var resource : EMFResource
+	 	resource := repository.createResource("./KMTest_0.cs", "./cs.ecore")
+	 	// Define a Root ...
+	 	var root : cs::Root init self.createTestModelToSave()
+	 	resource.instances.add(root)
+	 	resource.save()
+ 	end
+ 	
+ 	operation createTestModelToSave() : cs::Root is do
+ 		 	// Define a Root ...
+	 	var root : cs::Root init cs::Root.new
+
+	 	// And, for example, 2 templates, and a Decision in one of them
+	 	var t1 : cs::Template init cs::Template.new
+	 	var t2 : cs::Template init cs::Template.new
+	 	var t3 : cs::Template init cs::Template.new
+	 	var t4 : cs::Template init cs::Template.new
+	 	t1.name := "template numero 1"
+	 	t2.name := "toi tais toi"
+	 	t4.name := "quatrieme"
+	 	t3.name := "toto"
+	 	root.template := OrderedSet<cs::Template>.new
+	 	root.template.add(t2)
+	 	root.template.add(t1)
+	 	root.template.add(t3)
+	 	root.template.add(t4)
+	 	result := root
+ 	end
+}
+
+
 
 /**
  * I use here Set<Object> instead of Object because I cannot define a formal 
@@ -36,12 +115,12 @@ class Main
  */
 class BasicCSVisitor
 {
-	attribute root : cs::Root
-	attribute template : cs::Template
-	attribute decision : cs::Decision
-	attribute value : cs::Value
+	reference root : cs::Root
+	reference template : cs::Template
+//	attribute decision : cs::Decision
+	reference value : cs::Value
 	
-	operation visitRoot(v : Set<Object>) : String is do
+	operation visitRoot(v : Set<Object>, r : Resource) : String is do
 		result := " "
 		root ?= v.one 
 		
@@ -49,10 +128,15 @@ class BasicCSVisitor
 		result.append("\n    { template list : ")
 		result.append(iterate(root.template.iterator))
 		result.append(" }\n")
+		var testMethods : TestAddToResource init TestAddToResource.new
+		testMethods.addTemplateToRoot(root, r)  
+
 	end
 	
-	operation visitDecision(v : Set<Object>) : String is do
+	operation visitDecision(v : Set<Object>, r : Resource) : String is do
+		var decision : cs::Decision 
 		decision ?= v.one
+		decision.name := "Je me suis modifie tout les noms de decision!!!!"
 		result := "decision : " + decision.toString
 		result.append("\n   {  name : " + decision.name + " }" )
 		result.append("\n   {  source : " + decision.source.toString + " }" )
@@ -60,21 +144,27 @@ class BasicCSVisitor
 		
 	end
 	
-	operation visitTemplate(v : Set<Object>) : String is do
+	operation visitTemplate(v : Set<Object>, r : Resource) : String is do
 		template ?= v.one
+		template.name := "Template sans nom" 
 		result := "template : " + template.toString
+
 		result.append("\n   { content :" + template.content + " }" )
 		result.append("\n   { name :" + template.name + " }" )
 		result.append("\n   { decision :" + iterate(template.decision.iterator) + " }" ) 
 		result.append("\n   { referer : " + template.referer.toString + " }")
 		result.append("\n   { root : " + template.root.toString + " }\n")
+		// Add a decision to the list of decisions?
+		
 	end
 	
 	// FIXME : we should be able
-	operation visitValue(v : Set<Object>) : String is do
-		decision ?= v.one
+	operation visitValue(v : Set<Object>, r : Resource) : String is do
 		result := "value->"
-		result.append(visitDecision(v))
+		result.append(visitDecision(v, r))
+		var value : cs::Value
+		value ?= v.one 
+		value.name := "J'ai modifie toutes les valeureuses"
 
 	end
 	
@@ -89,9 +179,9 @@ class BasicCSVisitor
 	end
 	
 	/** Iteration -> Decision */
-	operation visitIteration(v : Set<Object>) : String is do
+	operation visitIteration(v : Set<Object>, r : Resource) : String is do
 		result := "iteration->"
-		result.append(visitDecision(v))
+		result.append(visitDecision(v, r))
 	end
 }
 
@@ -109,11 +199,15 @@ class CSVisitorHandler
 	/**
 	 *   Hashtable that contains the classes of the CS meta-model 
 	 */
-	attribute metaclasses : kermeta::utils::Hashtable<String, kermeta::reflection::Class>
-	attribute instances : Set<Object>
+	reference metaclasses : kermeta::utils::Hashtable<String, kermeta::reflection::Class>
+	reference instances : Set<Object>
+	reference resource : Resource
 
-	operation initialize(instances : Set<Object>) is do
-		self.instances := instances
+	operation initialize(resource : EMFResource, instances : Set<Object>) is do
+		//self.resource := EMFResource.clone(resource)
+		self.resource := resource
+		self.instances := resource.instances
+		//self.instances := instances
 		self.metaclasses := kermeta::utils::Hashtable<String, kermeta::reflection::Class>.new
 		self.setMetaClasses
 	end
@@ -148,18 +242,17 @@ class CSVisitorHandler
 		until it.isOff
 		loop
 			var claz_name : String init it.next
-			var claz : kermeta::reflection::Class init metaclasses.get(claz_name)
+			var claz : kermeta::reflection::Class init metaclasses.getValue(claz_name)
 			// FIXME : for inherited classes, this method is really bad (we should code
 			// a kind of "isExactInstance")
 			if (claz_name.equals(instance.getMetaClass.classDefinition.qualifiedName)) then
 				// Wrap instance (FIXME : patch)
 				var setinstance : Set<Object> init Set<Object>.new
 				setinstance.add(instance)
-				
 				var str : String 
 				// invoke "visit"+"claz.
 				// TODO : find the pmore specialised class for the given object!
-				str := self.invoke(claz.classDefinition.name, setinstance)
+				str := self.invoke(claz.classDefinition.name, setinstance, resource)
 				stdio.writeln(str)
 			end
 		end
@@ -168,14 +261,21 @@ class CSVisitorHandler
 	/**
 	 * Invoke the visit method according to the type of the visitable Object
 	*/
-	operation invoke(cname : String, visitable : Object) : String is do
+	operation invoke(cname : String, visitable : Object, resource : Resource) : String is do
 	
 		var de : DynamicExpression init DynamicExpression.new
 		de.initializeDefaults
 		de.formalParameters.put("v", Set<Object>)
-		de.parse("sample::BasicCSVisitor.new.visit"+cname+"(v)")
+		de.formalParameters.put("r", Resource) 
+		de.parse("sample::BasicCSVisitor.new.visit"+cname+"(v, r)")
 		var params : Hashtable<String, Object> init Hashtable<String, Object>.new
 		params.put("v", visitable)
+//		var ores : Object 
+//		ores := resource 
+		params.put("r", resource) 
+		// todo : "context" (of tyep Object) instead of Resource when we will create
+		// a generic visitor
+
 		result := de.execute(void, params).toString
 		 
 	end
@@ -192,7 +292,7 @@ class CSVisitorHandler
 			// Get the name of the class of o
 			var qname : String init o.getMetaClass.classDefinition.qualifiedName
 			// Is it in the hashtable?
-			if (metaclasses.get(qname) == void) then
+			if (metaclasses.getValue(qname) == void) then
 				metaclasses.put(qname, o.getMetaClass)
 			end
 		end
