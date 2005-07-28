@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.9 2005-07-26 16:41:46 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.10 2005-07-28 16:06:59 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -102,7 +102,10 @@ public class EMF2Runtime {
 	        loadunit(unit, resource);
 		} catch (Throwable e) {
 			
-			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
+		    // Create a resourceLoadException
+		    KermetaRaisedException ex = new KermetaRaisedException(unit.getInstances(), unit.getInstances().getFactory().getMemory().getCurrentInterpreter());
+		    KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
+			throw ex; 
 			// TODO : kermeta persistence should also raise an exception when load unit failed!
 		}
 	}
@@ -259,9 +262,14 @@ public class EMF2Runtime {
 			    if (str == null) str = "";
 			    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(str, rofactory);
 	        }
+	        else if (fvalue == null) // zoe, look for cases where we can have that.
+	        {
+	            rovalue = rObject.getFactory().getMemory().voidINSTANCE;
+	        }
 	        else // EEnum!
 	        {
-	            System.err.println("NotImplemented custom Error : The type <"+etype+"> has not been handled yet.");
+	            System.err.println("NotImplemented custom Error : The type <"+etype+"> has not been handled yet."+fvalue);
+	            // TODO : print this stuff in the console!!
 	            throw new KermetaRaisedException(rObject, rObject.getFactory().getMemory().getCurrentInterpreter());
 	        }
 	        // If we instanciated a RuntimeObject value, we can set the properties for the object 
