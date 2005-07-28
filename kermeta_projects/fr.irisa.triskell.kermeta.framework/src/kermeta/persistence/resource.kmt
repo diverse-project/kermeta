@@ -1,9 +1,9 @@
-package kermeta::persistences;
+package kermeta::persistence;
 
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: resource.kmt,v 1.5 2005-07-28 16:04:35 zdrey Exp $
+ * $Id: resource.kmt,v 1.6 2005-07-28 16:12:05 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
