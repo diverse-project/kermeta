@@ -1,9 +1,9 @@
-package kermeta::persistence;
+package kermeta::persistences;
 
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: resource.kmt,v 1.4 2005-07-26 16:46:15 zdrey Exp $
+ * $Id: resource.kmt,v 1.5 2005-07-28 16:04:35 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -42,13 +42,15 @@ using kermeta::standard
 abstract class Resource
 {
 	/** The uri of the model-instance to load */
-	attribute uri : String
+	reference uri : String
 	/** The uri of the meta-model of the model-instance to load */
-	attribute metaModelURI : String
+	reference metaModelURI : String
 	/** The includedResource if the model-instance "inter-depends" on other instances*/
-	attribute includedResources : set String[*] 
+	reference includedResources : set String[*] 
 	/** The entities contained in the model-instance, that are provided when user loads a resource */
-	attribute instances : set Object[*]
+	reference instances : set Object[*]
+	/** The repository used to create this resource */
+	reference repository : Repository
 	
 	/** Save a model instance, in the file specified by the initial uri 
 	 * Overrides the old version.
@@ -60,6 +62,11 @@ abstract class Resource
 	operation add(instance : Object) : Void is abstract  
 	/** remove the instance, return it if success, otherwise return null */
 	operation remove(instance : Object) : Object is abstract
+	/**
+	 * return the root elements of the resource. Root elements are elements
+	 * that have no container
+	 */
+	operation getRootElements() : Set<Object> is abstract
 	
 /*	operation setInstances(p_instances : Set<Object>) : kermeta::standard::~Void is do
 		instances := p_instances
@@ -91,13 +98,14 @@ class EMFResource inherits Resource
 		)
 	end
 	
+	/** Save a resource in the uri given by its 'uri' attribute. */
 	method save() : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self.uri, metaModelURI, "EMF", instances
 		)
 	end
 	
-	/** Load a resource */
+	/** Loads a resource */
 	method load() : Void is do
 		var e : ResourceLoadException init ResourceLoadException.new
 		// Todo : extern load should return a Reflective Set?
@@ -143,7 +151,8 @@ class EMFResource inherits Resource
 		end
 	end
 	
-	/** Return true if instance type is conform to the metamodel of the model loaded,
+	/** 
+	 * Return true if instance type is conform to the metamodel of the model loaded,
 	 * false otherwise 
 	 */
 	operation isConform(instance : Object) : Boolean is do
@@ -166,7 +175,7 @@ class EMFResource inherits Resource
 	end
 	
 	/**
-	 * Helper that should be moved elsewhere.
+	 * Helper that returns true if new_instance is in the tparam Set, false otherwise
 	 * FIXME : Loop-and-cast done in order to temporarily get round the type 
 	 * system limits for reflection
 	*/
@@ -181,6 +190,20 @@ class EMFResource inherits Resource
 			// Note :  test with  "qualifiedName" is easier. is it a proper way?
 			if (next.qualifiedName.equals(new_instance.getMetaClass.classDefinition.qualifiedName)) then
 				result := true
+			end
+		end
+	end
+	
+	/**
+	 * Get the root element(s) of the EMF model loaded in this resource
+	 */ 
+	method getRootElements() : Set<Object> is do
+		from var it : Iterator<Object> init self.instances.iterator
+		until it.isOff
+		loop
+			var o : Object init it.next
+			if (o.container == void) then
+				result.add(o)
 			end
 		end
 	end
@@ -206,9 +229,31 @@ class KMResource inherits Resource
 }
 abstract class Repository
 {
-	attribute resources : kermeta::utils::Hashtable<String, Resource>
+	/** the resources created by this repository */
+	attribute resources : set Resource [*]#repository
 	operation createResource(uri : String, mm_uri : String) : Resource is abstract
-	operation getResource(uri : String) : Resource is abstract
+	/**
+	 * Get the resource of model that is stored in the given uri. Silently create
+	 * a new one if a resource with this uri was not found.
+	 */
+	operation getResource(uri : String) : Resource is do
+		from var it : Iterator<Resource> init resources.iterator
+		until it.isOff
+		loop
+			var next : Resource init it.next
+			if (uri.equals(next.uri)) then
+				result := next
+			end
+		end
+		// If result is null then we create a new resource. With a null
+		// URI. we assume that the user calls "getResource" when he already has 
+		// a serialized model stored at the given URI 
+		// NOT TESTED YET!
+		if result == void then
+			result := self.createResource(uri, "")
+			result.load()
+		end
+	end
 }
 
 /**
@@ -226,14 +271,10 @@ class EMFRepository inherits Repository
 		new_resource.instances := instances
 		new_resource.uri := uri
 		new_resource.metaModelURI := mm_uri
+		new_resource.repository := self
 		result := new_resource
 	end
 	
-	/** Get the resource of model that is stored in the given uri
-	 */
-	method getResource(uri : String) : EMFResource is do
-		result ?= resources.getValue(uri)
-	end
 }
 
 /**
