@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.11 2005-07-29 00:00:56 ffleurey Exp $
+/* $Id: EMF2Runtime.java,v 1.12 2005-07-29 00:24:42 ffleurey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -259,14 +260,30 @@ public class EMF2Runtime {
 	        // equiv : fvalue instanceof EString, Eblabla
 	        else if (EDataType.class.isInstance(etype))
 	        {
-			    String str = null;
-			    //str = feature.getDefaultValueLiteral();
-			    if (fvalue != null)
-			    {   // EStrgin->java.lang.String EInt->java.lang.int
-			        str = fvalue.toString();
-			    }
-			    if (str == null) str = "";
-			    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(str, rofactory);
+	        	// Boolean
+	        	if (fvalue instanceof Boolean) {
+	        		if (((Boolean)fvalue).booleanValue()) {
+	        			rovalue = rObject.getFactory().getMemory().trueINSTANCE;
+	        		}
+	        		else 
+	        		{
+	        			rovalue = rObject.getFactory().getMemory().falseINSTANCE;
+	        		}
+	        	}
+	        	
+	        	// Integer
+	        	else if (fvalue instanceof Integer) {
+	        		rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(((Integer)fvalue).intValue(), rofactory);
+	        	}
+	        	
+	        	// String
+	        	else if (fvalue instanceof String) {
+	        	    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create((String)fvalue, rofactory);
+	        	}
+	        	else {
+	        		System.err.println("NotImplemented custom Error : The type <"+etype+"> has not been handled yet."+fvalue);
+	        		rovalue = rObject.getFactory().getMemory().voidINSTANCE;
+	        	}	
 	        }
 	        else if (fvalue == null) // zoe, look for cases where we can have that.
 	        {
