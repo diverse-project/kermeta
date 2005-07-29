@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.10 2005-07-28 16:06:59 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.11 2005-07-29 00:00:56 ffleurey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -222,12 +222,18 @@ public class EMF2Runtime {
 	{
 	    EObject eObject = (EObject)rObject.getData().get("emfObject");
 	    
+	    // set the container if needed
+	    if (eObject.eContainer() != null) {
+	    	rObject.setContainer((RuntimeObject)this.runtime_objects_map.get(eObject.eContainer()));
+	    }
+	    
 	    EClass c = eObject.eClass();
 	    
 	    // Get the structural features
 	    EList features = c.getEAllStructuralFeatures(); 
 	    // For each feature, get the value and add it to the properties hashtable
 	    Iterator it = features.iterator();
+	    
 	    while (it.hasNext())
 	    {
 	        EStructuralFeature feature = (EStructuralFeature)it.next();
