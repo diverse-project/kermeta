@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.4 2005-05-31 08:36:58 ffleurey Exp $
+/* $Id: OperationCallFrame.java,v 1.5 2005-08-02 15:25:27 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : OperationCallFrame.java
 * License : GPL
@@ -43,6 +43,8 @@ public class OperationCallFrame extends CallFrame {
     private RuntimeObject operationResult;
     
     private Hashtable typeParameters;
+    /** the value of the "value" variable in the setter of the derived property */
+    private RuntimeObject callValueResult;
     
     /**
      * @param pSelf
@@ -94,9 +96,16 @@ public class OperationCallFrame extends CallFrame {
     public RuntimeObject getOperationResult() {
         return operationResult;
     }
+    public RuntimeObject getCallValueResult() {
+        return callValueResult;
+    }
     
     public void setOperationResult(RuntimeObject operationResult) {
         this.operationResult = operationResult;
+    }
+    
+    public void setCallValueResult(RuntimeObject callValueResult) {
+        this.callValueResult = callValueResult;
     }
     
     public RuntimeObject getSelf() {

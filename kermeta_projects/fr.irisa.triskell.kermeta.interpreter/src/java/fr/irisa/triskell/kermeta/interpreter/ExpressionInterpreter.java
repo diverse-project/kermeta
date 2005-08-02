@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.15 2005-07-21 23:28:47 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.16 2005-08-02 15:25:27 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -23,6 +23,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+import fr.irisa.triskell.kermeta.ast.SetterBody;
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FBlock;
 import fr.irisa.triskell.kermeta.behavior.FBooleanLiteral;
@@ -30,6 +31,7 @@ import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
 import fr.irisa.triskell.kermeta.behavior.FCallResult;
 import fr.irisa.triskell.kermeta.behavior.FCallSuperOperation;
+import fr.irisa.triskell.kermeta.behavior.FCallValue;
 import fr.irisa.triskell.kermeta.behavior.FCallVariable;
 import fr.irisa.triskell.kermeta.behavior.FConditionnal;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
@@ -46,7 +48,6 @@ import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.behavior.FVoidLiteral;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -57,20 +58,17 @@ import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
-import fr.irisa.triskell.kermeta.structure.FTypedElement;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
-import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -312,7 +310,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		{
 		    // Visiting the callFeature should return the RuntimeObject
 		    // From the runtimeObject, get its target
-		    
 		    FCallFeature callfeature = (FCallFeature)node.getFTarget();
 		    
 		    // Get the object on which this feature is applied
@@ -350,21 +347,37 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		    FClass t_target=(FClass)ro_target.getMetaclass().getData().get("kcoreObject");
 
             // FIXME : FProperty is assumed to be the type of the feature
+		    
             RuntimeObject ro_property = this.getRuntimeObjectForFProperty(t_target, propertyName);
-            
+            // If the target is a FProperty and is derived, it is updated from the getterbody
             // FIXME : ro_property must not be null
 			// Set the value of the property
             if (ro_property == null)
             {
                 System.err.println("could not set property '"+propertyName+"' for object '"+lhs_name+"'");
             }
-            else {
+            else
+            {
                 // Unset the property if it is void
                 if (rhs_value == memory.voidINSTANCE) {
                     fr.irisa.triskell.kermeta.runtime.language.Object.unSet(ro_target,ro_property);
                 }
                 else {
-                    fr.irisa.triskell.kermeta.runtime.language.Object.set(ro_target,ro_property,rhs_value);
+                    // Get the FProperty -- is it the right way? 
+                    FProperty fproperty = new SimpleType(t_target).getPropertyByName(propertyName).getProperty();
+                    //FProperty fproperty = (FProperty)ro_property.getData().get("kcoreObject");
+                    if (!fproperty.isFIsDerived())
+                    // If it is not derived, assign it
+                        fr.irisa.triskell.kermeta.runtime.language.Object.set(ro_target,ro_property,rhs_value);
+                    // Else, compute it
+                    else
+                    {
+                        interpreterContext.peekCallFrame().pushExpressionContext();
+                        interpreterContext.peekCallFrame().setCallValueResult(rhs_value);
+                        // Get the setter body
+                        this.accept(fproperty.getFSetterbody());
+                        interpreterContext.peekCallFrame().popExpressionContext();
+                    }
                 }
             }
 		}
@@ -426,6 +439,16 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    if (value==null)
 	    	// TODO
 	    	System.err.println("result not found in context");
+	    return value;
+	}
+	
+	/**
+	 * CallValue is the special variable "value" in the setter method of a derived
+	 * property
+	 */
+	public Object visit(FCallValue node)
+	{
+	    RuntimeObject value = interpreterContext.peekCallFrame().getCallValueResult();
 	    return value;
 	}
 	
@@ -633,8 +656,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	public Object visit(FOperation node) {
 	    
 	    RuntimeObject result = memory.voidINSTANCE;
-	    
-	   
 	    // push expression context
 	    interpreterContext.peekCallFrame().pushExpressionContext();
 	    try {
@@ -650,11 +671,35 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    }
 		return result;
 	}
-	
-	
 
-	
-	
+	/**
+	 * Used for derived properties when processing getter and setter body
+	 */
+    public RuntimeObject getterDerivedProperty(FProperty node)
+    {
+        RuntimeObject result = memory.voidINSTANCE;
+        // Create a context for this operation call, setting self object to ro_target
+        //interpreterContext.pushExpressionCallFrame();
+        // create a pseudo?
+        //FClass self_type = (FClass)ro_target.getMetaclass().getData().get("kcoreObject");
+		//CallableOperation op = new CallableOperation(foperation, self_type);
+
+	    // push expression context
+	    interpreterContext.peekCallFrame().pushExpressionContext();
+	    try {	        // Interpret body
+	        this.accept(node.getFGetterbody());
+	        // Getter is an operation which returns an element of type FProperty.getFType
+	        // Set the result 
+	        result = interpreterContext.peekCallFrame().getOperationResult();
+	    }
+	    finally {
+		    // Pop the expressionContext
+		    interpreterContext.peekCallFrame().popExpressionContext();
+	    }
+		return result;
+    }
+    
+    
 	public Object visit(FCallFeature node) {
 	    
 	    // Handle call to enumeration literals :
@@ -693,12 +738,11 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    }
 
 		// Get the feature
-	    
 	    SimpleType target_type = new SimpleType(t_target);
 	    
 	    if (node.getFStaticOperation() == null && node.getFStaticProperty() == null) {
-	        internalLog.error("INTERPRETER INTERNAL ERROR : the program does not seems to be correcly types checked");
-	        throw new Error("INTERPRETER INTERNAL ERROR : the program does not seems to be correcly types checked");
+	        internalLog.error("INTERPRETER INTERNAL ERROR : the program does not seem to be correctly type checked : " + node.getFName());
+	        throw new Error("INTERPRETER INTERNAL ERROR : the program does not seem to be correctly type checked : " + node.getFName());
 
 	    }
 	    
@@ -763,8 +807,15 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		        throw new Error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
 			}
 		    
-		    // Get the value of the property
-		    result = fr.irisa.triskell.kermeta.runtime.language.Object.get(ro_target, ro_property);
+		    if (!property.getProperty().isFIsDerived())
+		    {
+		        // Get the value of the property
+		        result = fr.irisa.triskell.kermeta.runtime.language.Object.get(ro_target, ro_property);
+		    }
+		    else
+		    {
+		        result = this.getterDerivedProperty(property.getProperty());
+		    }
 	        
 	    }
 		

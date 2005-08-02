@@ -1,4 +1,4 @@
-/* $Id: ExpressionCallFrame.java,v 1.2 2005-06-09 17:49:02 ffleurey Exp $
+/* $Id: ExpressionCallFrame.java,v 1.3 2005-08-02 15:25:27 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionCallFrame.java
 * License : GPL
@@ -102,6 +102,21 @@ public class ExpressionCallFrame extends CallFrame {
      */
     public Hashtable getTypeParameters() {
        return new Hashtable();
+    }
+
+    /**
+     * @see fr.irisa.triskell.kermeta.interpreter.CallFrame#getCallValueResult()
+     */
+    public RuntimeObject getCallValueResult() {
+        return context.getMemory().voidINSTANCE;
+    }
+
+    /**
+     * @see fr.irisa.triskell.kermeta.interpreter.CallFrame#setCallValueResult(fr.irisa.triskell.kermeta.runtime.RuntimeObject)
+     */
+    public void setCallValueResult(RuntimeObject callValuResult) {
+        throw new Error("Illegal value use in an expression");
+        
     }
 
 }

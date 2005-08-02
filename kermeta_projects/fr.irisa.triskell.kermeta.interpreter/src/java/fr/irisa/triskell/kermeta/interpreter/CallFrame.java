@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.9 2005-05-25 17:42:48 ffleurey Exp $
+/* $Id: CallFrame.java,v 1.10 2005-08-02 15:25:27 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -95,8 +95,10 @@ public abstract class CallFrame {
     }
     
     public abstract RuntimeObject getOperationResult();
+    public abstract RuntimeObject getCallValueResult();
     
     public abstract void setOperationResult(RuntimeObject operationResult);
+    public abstract void setCallValueResult(RuntimeObject callValuResult);
     
     public abstract RuntimeObject getSelf();
     
