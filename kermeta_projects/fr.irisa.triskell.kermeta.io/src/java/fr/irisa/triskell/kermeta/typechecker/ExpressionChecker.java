@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.14 2005-07-08 12:47:36 fchauvel Exp $
+/* $Id: ExpressionChecker.java,v 1.15 2005-08-02 15:37:13 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -30,6 +30,7 @@ import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
 import fr.irisa.triskell.kermeta.behavior.FCallResult;
 import fr.irisa.triskell.kermeta.behavior.FCallSuperOperation;
+import fr.irisa.triskell.kermeta.behavior.FCallValue;
 import fr.irisa.triskell.kermeta.behavior.FCallVariable;
 import fr.irisa.triskell.kermeta.behavior.FConditionnal;
 import fr.irisa.triskell.kermeta.behavior.FEmptyExpression;
@@ -418,6 +419,15 @@ public class ExpressionChecker extends KermetaVisitor {
 		return TypeCheckerContext.BooleanType;
 	}
 	
+	public Object visit(FCallValue expression) {
+	    preVisit();
+	    // Get the type of the callValue
+	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
+	    expressionTypes.put(expression, result);
+		expression.setFStaticType(result.getFType());
+		return result;
+	}
+	
 	public Object visit(FCallFeature expression) {
 	    
 		// visit target expression
@@ -497,8 +507,8 @@ public class ExpressionChecker extends KermetaVisitor {
 	
 	public Object visit(FCallResult expression) {
 	    preVisit();
-		
-	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentOperation());
+		// ele
+	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
 	    // if there are parameters
 		if (expression.getFParameters().size() != 0) {
 			result = getReturnTypeForParametrizedCallExpression(expression, result);

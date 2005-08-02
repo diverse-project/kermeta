@@ -25,9 +25,14 @@ import fr.irisa.triskell.kermeta.ast.FVariableDecl;
 import fr.irisa.triskell.kermeta.ast.FVoidLiteral;
 import fr.irisa.triskell.kermeta.ast.ParentExp;
 import fr.irisa.triskell.kermeta.ast.PrimitiveExpression;
+import fr.irisa.triskell.kermeta.ast.Property;
 import fr.irisa.triskell.kermeta.ast.ResultCall;
+import fr.irisa.triskell.kermeta.ast.SetterBody;
+import fr.irisa.triskell.kermeta.ast.ValueCall;
 import fr.irisa.triskell.kermeta.behavior.FCallResult;
 import fr.irisa.triskell.kermeta.behavior.FCallSuperOperation;
+import fr.irisa.triskell.kermeta.behavior.FCallValue;
+import fr.irisa.triskell.kermeta.behavior.FCallVariable;
 import fr.irisa.triskell.kermeta.behavior.FConditionnal;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
@@ -327,4 +332,13 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		result = lp;
 		return false;
 	}
+	
+	public boolean beginVisit(ValueCall valueCall) {
+		FCallValue lp = builder.behav_factory.createFCallValue();
+		builder.storeTrace(lp,valueCall);
+		lp.setFName("value");
+		result = lp;
+		return false;
+	}
+	
 }

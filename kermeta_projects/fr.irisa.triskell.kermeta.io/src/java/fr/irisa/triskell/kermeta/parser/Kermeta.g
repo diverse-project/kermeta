@@ -622,6 +622,7 @@ primitiveExpression returns [ PrimitiveExpression retVal = null ]
   | retVal=fVariableDecl
   | retVal=fLambdaExpression
   | retVal=fLoop
+  | retVal=valueCall
   )
 ;
 
@@ -648,6 +649,12 @@ resultCall returns [ ResultCall retVal = null ]
 :
   result_KW:"result" 
 { retVal = new ResultCall(result_KW); }
+;
+
+valueCall returns [ ValueCall retVal = null ]
+:
+  value_KW:"value" 
+{ retVal = new ValueCall(value_KW); }
 ;
 
 fBlock returns [ FBlock retVal = null ]

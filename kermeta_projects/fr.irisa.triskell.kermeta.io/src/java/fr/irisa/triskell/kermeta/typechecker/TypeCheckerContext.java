@@ -1,7 +1,7 @@
-/* $Id: TypeCheckerContext.java,v 1.12 2005-07-08 12:47:50 fchauvel Exp $
+/* $Id: TypeCheckerContext.java,v 1.13 2005-08-02 15:37:13 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 9 avr. 2005
@@ -29,6 +29,7 @@ import fr.irisa.triskell.kermeta.structure.FMultiplicityElement;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FParameter;
 import fr.irisa.triskell.kermeta.structure.FProductType;
+import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
@@ -119,6 +120,16 @@ public class TypeCheckerContext {
 	    return new SimpleType(cls);
 	}
 	
+	/**
+	 * Returns the canonical type of the given type, i.e :  
+	 * - for a product type, the single type of the product type if there is only one type
+	 * - for a primitive type, the "instance type" corresponding to this type :
+	 * if you look at Kermeta metamodel, PrimitiveType inherits the DataType
+	 * type, that is directly attached to an existing Java type, which is called 
+	 * the "instance type".
+	 * @param t
+	 * @return the canonical type of t
+	 */
     public static FType getCanonicalType(FType t) {
         FType result = t;
         if (result instanceof FProductType) {
@@ -170,7 +181,10 @@ public class TypeCheckerContext {
 	 * The class that is being type-checked
 	 */
 	private FClassDefinition selfClass;
+	/** A derived property or an operation */
 	private FOperation currentOperation;
+	private FMultiplicityElement currentCallable;
+	
 	private Type selfType;
 	
 	/**
@@ -182,13 +196,13 @@ public class TypeCheckerContext {
 	 * The contexts stack
 	 */
 	private Stack contexts;
-	
+    
 	/**
 	 * Initialize the context with a class definition
 	 */
 	public void init(FClassDefinition cls, FOperation op) {
 		selfClass = cls;
-		currentOperation = op;
+		currentCallable = currentOperation = op;
 		selfType = null;
 		contexts = new Stack();
 		pushContext();
@@ -197,6 +211,18 @@ public class TypeCheckerContext {
 		    FParameter p = (FParameter)it.next();
 		    this.addSymbol(new KMSymbolParameter(p), getTypeFromMultiplicityElement(p));
 		}
+	}
+	
+	/**
+	 * Initialize the context with a class definition, for
+	 * derived property setter method
+	 */
+	public void init(FClassDefinition cls, FProperty op) {
+		selfClass = cls;
+		currentCallable = op; 
+		selfType = null;
+		contexts = new Stack();
+		pushContext();
 	}
 	
 	/**
@@ -408,10 +434,14 @@ public class TypeCheckerContext {
 		}
 		return result;
 	}
-
-    public FOperation getCurrentOperation() {
-        return currentOperation;
+	
+	/** Return current feature (an FOperation or an FProperty -- only derived 
+	 * property)
+	 */
+    public FMultiplicityElement getCurrentCallable() {
+        return currentCallable;
     }
+    
     public FClassDefinition getSelfClass() {
         return selfClass;
     }

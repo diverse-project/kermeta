@@ -153,14 +153,15 @@ sequence lambdaPostfixParam : name=ID;
 
 abstract primitiveExpression : fLiteral | parentExp | fSelfCall | fSuperCall | resultCall |
 			fJavaStaticCall | fBlock | fConditional | fRaiseException | 
-			fVariableDecl | fLambdaExpression | fLoop ;
+			fVariableDecl | fLambdaExpression | fLoop | valueCall ;
 
 
 sequence parentExp : LPAREN fExpression RPAREN ;
 
-sequence fSelfCall : "self" ;
+sequence fSelfCall  : "self" ;
 sequence fSuperCall : "super" ;
 sequence resultCall : "result" ;
+sequence valueCall  : "value" ;
 
 sequence fBlock : "do" annotations fExpressionLst fRescueLst "end" ;
 

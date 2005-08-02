@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.4 2005-06-07 07:50:44 ffleurey Exp $
+/* $Id: KermetaTypeChecker.java,v 1.5 2005-08-02 15:37:13 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -123,10 +123,18 @@ public class KermetaTypeChecker {
      * Type checks the getter and setter of the derived property
      * @param op
      */
-    public void checkDerivedProperty(FProperty op) {
+    public void checkDerivedProperty(FProperty op)
+    { 
+        if (op.isFIsDerived())
+        {
+            // initialize context (add "value")
+            context.init(op.getFOwningClass(), op);
+            if (op.getFSetterbody() != null)
+                ExpressionChecker.typeCheckExpression(op.getFSetterbody(), unit, context);
+            if (op.getFGetterbody() != null)
+                ExpressionChecker.typeCheckExpression(op.getFGetterbody(), unit, context);
+        }
         
-        //FIXME: NOT IMPLEMENTED
-
     }
 
     public TypeCheckerContext getContext() {
