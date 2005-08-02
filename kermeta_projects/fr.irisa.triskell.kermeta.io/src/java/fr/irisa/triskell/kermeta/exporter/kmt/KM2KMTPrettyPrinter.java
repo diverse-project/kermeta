@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.16 2005-07-20 07:29:50 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.17 2005-08-02 15:32:35 zdrey Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -672,14 +672,21 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	}
 	
     /**
-     * FTag is a special model element that we should have
+     * FTag is used to store comments in the source code.
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FTag)
      */
-    public Object visit(FTag node) {
+    public Object visit(FTag node)
+    {
         String result = "";
+        // User can choose to add a "@kdoc" tag
         if (node.getFName().equals(KMT2KMPass7.KERMETADOC))
         {
             result = node.getFValue() + "\n";
+        }
+        // Or simple comment /** */ delimitor TODO also remove pretty "*" 
+        else if (node.getFValue().startsWith("/**"))
+        {
+            result = node.getFValue().substring(3, node.getFValue().length()-2);
         }
         else
         {
