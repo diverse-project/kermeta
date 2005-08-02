@@ -98,6 +98,7 @@ public class CathegorizedKWList {
 		addKeyword("false", literalKW);
 		addKeyword("void", literalKW);
 		addKeyword("result", literalKW);
+		addKeyword("value", literalKW);
 
 	}
 
