@@ -11,7 +11,6 @@ import java.util.List;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jdt.ui.actions.IJavaEditorActionDefinitionIds;
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
@@ -67,13 +66,13 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	 * (extension org.eclipse.ui.commands) 
 	 * @see AbstractJavaTextEditor
 	 */
-	private ICommand fCommand;
+/*	private ICommand fCommand;
 	{
 		ICommandManager commandManager= PlatformUI.getWorkbench().getCommandSupport().getCommandManager();
 		fCommand= commandManager.getCommand(IKermetaEditorActionDefinitionIds.SHOW_KDOC);
 		if (!fCommand.isDefined())
 			fCommand= null;
-	}
+	}*/
 	
 
 	/**
@@ -84,7 +83,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	 * @return the array with the {@link KeySequence}s
 	 * @see AbstractJavaTextEditor
 	 */
-	private KeySequence[] getKeySequences() {
+/*	private KeySequence[] getKeySequences() {
 		if (fCommand != null) {
 			List list= fCommand.getKeySequenceBindings();
 			if (!list.isEmpty()) {
@@ -96,7 +95,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 			}		
 		}
 		return null;
-	}
+	}*/
 	
 	
 	///////////////////////////////////////////////////////////////////////
