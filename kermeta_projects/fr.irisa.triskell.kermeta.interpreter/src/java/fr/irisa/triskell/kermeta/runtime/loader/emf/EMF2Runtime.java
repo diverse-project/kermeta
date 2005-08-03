@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.12 2005-07-29 00:24:42 ffleurey Exp $
+/* $Id: EMF2Runtime.java,v 1.13 2005-08-03 08:54:38 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -280,16 +280,21 @@ public class EMF2Runtime {
 	        	else if (fvalue instanceof String) {
 	        	    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create((String)fvalue, rofactory);
 	        	}
-	        	else {
-	        		System.err.println("NotImplemented custom Error : The type <"+etype+"> has not been handled yet."+fvalue);
+	        	else if (fvalue == null) 
+	        	{
 	        		rovalue = rObject.getFactory().getMemory().voidINSTANCE;
-	        	}	
+	        	}
+	        	else // should never happen
+	        	{
+	        		System.err.println("NotImplemented custom Error : The type <"+etype+"> has not been handled yet."+fvalue);	
+	        		throw new KermetaRaisedException(rObject, rObject.getFactory().getMemory().getCurrentInterpreter());
+	        	}
 	        }
-	        else if (fvalue == null) // zoe, look for cases where we can have that.
+	        else if (fvalue == null)
 	        {
 	            rovalue = rObject.getFactory().getMemory().voidINSTANCE;
 	        }
-	        else // EEnum!
+	        else // Enum?
 	        {
 	            System.err.println("NotImplemented custom Error : The type <"+etype+"> has not been handled yet."+fvalue);
 	            // TODO : print this stuff in the console!!
@@ -299,7 +304,6 @@ public class EMF2Runtime {
 	        if (rovalue != null)
 	        {
 	            rObject.getProperties().put(fname, rovalue);
-	            // FIXME : property can be : EObject || EList || null
 	            if (fvalue != null)
 	                rovalue.getData().put("emfObject", fvalue);
 	        }	
@@ -337,6 +341,14 @@ public class EMF2Runtime {
 	    return result;
 	}
 
+	/**
+	 * Get or create (if it does not exist) the RuntimeObject for the given EClass, and put it 
+	 * in the runtime unit. The class is found in the unit typedef_cache or put in it if it was not
+	 * found in it. We use it to define instances of metaclass type.
+	 * @param metaclass The EClass to "convert" in a RuntimeObject
+	 * @param unit The runtime unit we are working with
+	 * @return the RuntimeObject embedding the Kermeta FClass equivalent to the given EClass
+	 */
 	public RuntimeObject getRuntimeObjectForMetaClass(EClass metaclass, EMFRuntimeUnit unit)
 	{
 	    RuntimeObject result = null;
@@ -348,17 +360,14 @@ public class EMF2Runtime {
 	        internalLog.info("Found a RO for FClass <"+ metaclass_name +"> in cache : "+result);
 	    }
 	    else
-	    {
-	        // Create the RuntimeObject encaspulating the FClass corresponding to the EClass given by its name :
-	        // Reconstruct from FClass -> FClassDefinition (meta meta levels) -> Our EClass 
-	        // Here, the type def should always be a FCLassDefinition
+	    {   // Create the RuntimeObject encaspulating the FClass corresponding to the EClass given by its name :
+	        // Reconstruct from FClass -> FClassDefinition (meta meta levels) -> Our EClass
 	        FType ftype = this.getMetaClassByName(metaclass_name, unit);
 	        FClass fclass = (FClass)ftype;
 	        result = memory.getROFactory().createMetaClass(fclass);
 	        this.typedef_cache.put(metaclass_name, result);
 	    }
 	    return result;
-	    
 	}
 
 
