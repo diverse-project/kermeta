@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.15 2005-08-02 15:37:13 zdrey Exp $
+/* $Id: ExpressionChecker.java,v 1.16 2005-08-03 08:02:40 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -58,6 +58,7 @@ import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
+import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.impl.FFunctionTypeImpl;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
@@ -421,11 +422,17 @@ public class ExpressionChecker extends KermetaVisitor {
 	
 	public Object visit(FCallValue expression) {
 	    preVisit();
+	    Type result = null;
 	    // Get the type of the callValue
-	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
+	    if (!(context.getCurrentCallable() instanceof FProperty) ||
+	         ((FProperty)context.getCurrentCallable()).isFIsDerived())
+	    {
+	        unit.error.add(new KMUnitError("TYPE-CHECKER : 'value' (with no ~) symbol is forbidden outside derived property", expression));
+	    }
+        result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
 	    expressionTypes.put(expression, result);
-		expression.setFStaticType(result.getFType());
-		return result;
+        expression.setFStaticType(result.getFType());
+	    return result;
 	}
 	
 	public Object visit(FCallFeature expression) {
