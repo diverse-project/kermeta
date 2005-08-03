@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.16 2005-08-03 08:02:40 zdrey Exp $
+/* $Id: ExpressionChecker.java,v 1.17 2005-08-03 09:09:43 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -425,9 +425,9 @@ public class ExpressionChecker extends KermetaVisitor {
 	    Type result = null;
 	    // Get the type of the callValue
 	    if (!(context.getCurrentCallable() instanceof FProperty) ||
-	         ((FProperty)context.getCurrentCallable()).isFIsDerived())
+	         !((FProperty)context.getCurrentCallable()).isFIsDerived())
 	    {
-	        unit.error.add(new KMUnitError("TYPE-CHECKER : 'value' (with no ~) symbol is forbidden outside derived property", expression));
+	        unit.error.add(new KMUnitError("TYPE-CHECKER : 'value' symbol is forbidden outside derived property", expression));
 	    }
         result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
 	    expressionTypes.put(expression, result);
