@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.17 2005-08-03 09:09:43 zdrey Exp $
+/* $Id: ExpressionChecker.java,v 1.18 2005-08-03 14:12:19 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -50,6 +50,7 @@ import fr.irisa.triskell.kermeta.behavior.FVoidLiteral;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KMUnitWarning;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
@@ -82,6 +83,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	protected KermetaUnit unit;
 	
 	protected TypeCheckerContext context;
+	
 	
 	/**
 	 * Used for type inference on lambda expression parameters
@@ -201,8 +203,11 @@ public class ExpressionChecker extends KermetaVisitor {
 			        //expected_type = new SimpleType(TypeVariableLeastDerivedEnforcer.getBoundType( ((SimpleType)required_params[i]).type));
 			        expected_type = (SimpleType)required_params[i];
 			        
+			        
 			        Type provided = (Type)this.accept((FExpression)exp.getFParameters().get(i));
-					try {
+			        
+			        try
+			        {
 					    //provided = PrimitiveTypeResolver.getResolvedType(provided);
 					    provided.inferTypeVariableBinding(((SimpleType)required_params[i]).type, binding);
 					}
@@ -747,8 +752,17 @@ public class ExpressionChecker extends KermetaVisitor {
 				unit.error.add(new KMUnitError("TYPE-CHECKER : The initialization expression should be compatible with the type of the variable : expected "+result+", found "+getTypeOfExpression(expression.getFInitialization())+".", expression.getFInitialization()));
 			}
 		}
-		// Add the variable in the context
-		context.addSymbol(new KMSymbolVariable(expression), result);
+		
+		KMSymbol symbol = context.symbolLookup(expression.getFIdentifier());
+		if (symbol!=null && symbol instanceof KMSymbolVariable)
+		{
+		    unit.error.add(new KMUnitError("TYPE-CHECKER : Variable '"+expression.getFIdentifier()+"' is already declared somewhere above.", expression));
+		}
+		else
+		{
+		    // Add the variable in the context
+		    context.addSymbol(new KMSymbolVariable(expression), result);
+		}
 		
 		// Return type
 		expressionTypes.put(expression, result);
