@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.34 2005-07-27 14:46:00 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.35 2005-08-04 08:58:58 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -193,19 +193,19 @@ public abstract class KermetaUnit {
 	
 	public void storeTrace(FObject model_element, Object node) {
 		traceM2T.put(model_element, node);
-		traceT2M.put(node, model_element);
+		traceT2M.put(node, model_element);		
 		
-		if(tracer !=  null)
-		{	// also put the info in the trace for eventual serialization
-			// TODO remove the Hashtable and generailze the use of the tracer
+		if(tracer !=  null)			
+		{	
 			KermetaASTNode astNode = (KermetaASTNode)node;
 			astNode.getRangeStart();
 			tracer.addTextInputTrace(this.uri, 
 					0,	// TODO I don't know how to retreive line number
 					astNode.getRangeStart(),
-					astNode.getRangeEnd(), 
+					astNode.getRangeStart()+ astNode.getRangeLength(), 
 					model_element, 
-					astNode.getText() + " mapping to " +model_element.toString());			
+					traceDefaultShortDescription + astNode.getTypeName() );
+			
 		}
 	}
 
@@ -217,13 +217,35 @@ public abstract class KermetaUnit {
 		return traceM2T.get(object);
 	}
 	
+	
+	
 	/**
 	 * code>tracer</code> uses the traceability metamodel for storing traces info
 	 */
 	public Tracer tracer=null;
+	public String traceDefaultShortDescription="Parsing of ";
 	public void setTracer(Tracer newTracer)
 	{
 		tracer = newTracer;
+	}
+	public void loadTracerWithInternalHashTable(String shortDescription)
+	{
+		if(tracer !=  null)			
+		{	
+			Iterator it = traceT2M.keySet().iterator();
+			while (it.hasNext())
+			{				
+				KermetaASTNode astNode = (KermetaASTNode)it.next();
+				FObject model_element = getModelElementByNode(astNode);
+				astNode.getRangeStart();
+				tracer.addTextInputTrace(this.uri, 
+						0,	// TODO I don't know how to retreive line number
+						astNode.getRangeStart(),
+						astNode.getRangeStart()+ astNode.getRangeLength(), 
+						model_element, 
+						shortDescription);
+			}
+		}
 	}
 	
 	/**
