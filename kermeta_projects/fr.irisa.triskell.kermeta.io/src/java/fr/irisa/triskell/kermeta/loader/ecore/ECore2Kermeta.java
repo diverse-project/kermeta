@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.4 2005-07-21 15:43:14 dvojtise Exp $
+/* $Id: ECore2Kermeta.java,v 1.5 2005-08-04 09:08:33 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
 * License : EPL
@@ -49,6 +49,7 @@ import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * @author Franck Fleurey
@@ -192,7 +193,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         FPackage pack = unit.packageLookup(getQualifiedName(node));
         if (pack == null) {
             pack = unit.struct_factory.createFPackage();
-            pack.setFName(node.getName());
+            pack.setFName(getEscapedName(node));
             pack.setFUri(node.getNsURI());
             if (getCurrentPackage() != null)
                 pack.setFNestingPackage(getCurrentPackage());
@@ -219,7 +220,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         }
         
         current_classdef = (FClassDefinition)types.get(node);
-        current_classdef.setFName(node.getName());
+        current_classdef.setFName(getEscapedName(node));
         current_classdef.setFIsAbstract(node.isAbstract() || node.isInterface());
         
         getCurrentPackage().getFOwnedTypeDefinition().add(current_classdef);
@@ -247,7 +248,7 @@ public class ECore2Kermeta extends EcoreVisitor {
     public Object visit(EAttribute node) {
        FProperty prop = unit.struct_factory.createFProperty();
        
-       prop.setFName(node.getName());
+       prop.setFName(getEscapedName(node));
        prop.setFIsComposite(true);
        
        prop.setFIsOrdered(node.isOrdered());
@@ -284,7 +285,7 @@ public class ECore2Kermeta extends EcoreVisitor {
             properties.put(getQualifiedName(node), prop);
         }
         
-        prop.setFName(node.getName());
+        prop.setFName(getEscapedName(node));
         prop.setFIsComposite(node.isContainment());
         
         prop.setFIsOrdered(node.isOrdered());
@@ -328,7 +329,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         // FIXME : handle super operations
     	// FIXME : handle raised exceptions
     	current_op = unit.struct_factory.createFOperation();
-    	current_op.setFName(node.getName());
+    	current_op.setFName(getEscapedName(node));
   
     	current_op.setFIsOrdered(node.isOrdered());
         current_op.setFIsUnique(node.isUnique());
@@ -371,7 +372,7 @@ public class ECore2Kermeta extends EcoreVisitor {
     
     public Object visit(EParameter node) {
     	FParameter param = unit.struct_factory.createFParameter();
-    	param.setFName(node.getName());
+    	param.setFName(getEscapedName(node));
        
         param.setFIsOrdered(node.isOrdered());
         param.setFIsUnique(node.isUnique());
@@ -391,7 +392,7 @@ public class ECore2Kermeta extends EcoreVisitor {
     
     public Object visit(EEnum node) {
         current_enum = (FEnumeration)types.get(node);
-        current_enum.setFName(node.getName());
+        current_enum.setFName(getEscapedName(node));
         getCurrentPackage().getFOwnedTypeDefinition().add(current_enum);
         acceptList(node.getELiterals());
         unit.typeDefs.put(getQualifiedName(node), current_enum);
@@ -400,14 +401,14 @@ public class ECore2Kermeta extends EcoreVisitor {
     public Object visit(EEnumLiteral node) {
     	FEnumerationLiteral lit = unit.struct_factory.createFEnumerationLiteral();
     	lit.setFEnumeration(current_enum);
-    	lit.setFName(node.getName());
+    	lit.setFName(getEscapedName(node));
     	return lit;
     }
     
     public Object visit(EDataType node) {
         FPrimitiveType ptype = (FPrimitiveType)types.get(node);
         
-        ptype.setFName(node.getName());
+        ptype.setFName(getEscapedName(node));
         
         String type_name = node.getInstanceClassName();
   
@@ -462,8 +463,13 @@ public class ECore2Kermeta extends EcoreVisitor {
     
     public String getQualifiedName(ENamedElement e) {
         if (e.eContainer() instanceof ENamedElement) 
-            return getQualifiedName((ENamedElement)e.eContainer()) + "::" + e.getName();
-        else return e.getName();
+            return getQualifiedName((ENamedElement)e.eContainer()) + "::" + getEscapedName(e);
+        else return getEscapedName(e);
+    }
+    
+    public String getEscapedName(ENamedElement e)
+    {
+        return KMTHelper.getMangledIdentifier(e.getName());
     }
     
 }
