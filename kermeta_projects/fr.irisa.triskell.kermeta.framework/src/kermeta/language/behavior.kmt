@@ -49,7 +49,7 @@ class CallResult inherits CallVariable, KMExpressionVisitable
 class Assignement inherits Expression, KMExpressionVisitable
 {
 	attribute target : CallExpression[1..1]
-	attribute value : Expression[1..1]
+	attribute ~value : Expression[1..1]
 	attribute isCast : kermeta::reflection::Boolean
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
@@ -87,7 +87,7 @@ class EmptyExpression inherits Expression, KMExpressionVisitable
 }
 class IntegerLiteral inherits Literal, KMExpressionVisitable
 {
-	attribute value : kermeta::reflection::Integer
+	attribute ~value : kermeta::reflection::Integer
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
 			result := visitor.visitIntegerLiteral(self, context)
@@ -95,7 +95,7 @@ class IntegerLiteral inherits Literal, KMExpressionVisitable
 }
 class StringLiteral inherits Literal, KMExpressionVisitable
 {
-	attribute value : kermeta::reflection::String
+	attribute ~value : kermeta::reflection::String
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
 			result := visitor.visitStringLiteral(self, context)
@@ -103,7 +103,7 @@ class StringLiteral inherits Literal, KMExpressionVisitable
 }
 class BooleanLiteral inherits Literal, KMExpressionVisitable
 {
-	attribute value : kermeta::reflection::Boolean
+	attribute ~value : kermeta::reflection::Boolean
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
 			result := visitor.visitBooleanLiteral(self, context)

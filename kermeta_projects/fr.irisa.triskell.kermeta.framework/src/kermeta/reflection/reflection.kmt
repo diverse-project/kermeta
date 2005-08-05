@@ -75,7 +75,7 @@ abstract class Tag inherits Object
 {
 	reference object : set Object[1..*]#tag
 	attribute name : String
-	attribute value : String
+	attribute ~value : String
 }
 abstract class Property inherits MultiplicityElement
 {
