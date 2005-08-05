@@ -4,7 +4,6 @@
  */
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
-import org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.TextAttribute;
