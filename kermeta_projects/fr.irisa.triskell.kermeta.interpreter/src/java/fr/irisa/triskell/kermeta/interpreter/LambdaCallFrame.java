@@ -1,4 +1,4 @@
-/* $Id: LambdaCallFrame.java,v 1.4 2005-08-02 15:25:27 zdrey Exp $
+/* $Id: LambdaCallFrame.java,v 1.5 2005-08-09 08:37:47 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
 * License : GPL
@@ -107,6 +107,7 @@ public class LambdaCallFrame extends CallFrame {
     public RuntimeObject getSelf() {
         return nestingOperationCallFrame.getSelf();
     }
+    public void setSelf(RuntimeObject pSelf) {  }
     
     public Hashtable getTypeParameters() {
         return nestingOperationCallFrame.getTypeParameters();

@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.10 2005-08-02 15:25:27 zdrey Exp $
+/* $Id: CallFrame.java,v 1.11 2005-08-09 08:37:47 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -6,10 +6,6 @@
  * ----------------------------------------------------------------------------
  * Creation date : Mar 16, 2005
  * Author : zdrey
- * Description : describe here file content
- * TODO : 
- * 	- write here your TODO actions
- *  - ...
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
@@ -101,7 +97,7 @@ public abstract class CallFrame {
     public abstract void setCallValueResult(RuntimeObject callValuResult);
     
     public abstract RuntimeObject getSelf();
-    
+    public abstract void setSelf(RuntimeObject self);    
     public abstract FOperation getOperation();
     
     public abstract Hashtable getTypeParameters();

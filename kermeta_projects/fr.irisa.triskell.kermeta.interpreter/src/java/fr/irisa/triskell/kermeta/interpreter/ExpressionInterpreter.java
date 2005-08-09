@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.16 2005-08-02 15:25:27 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.17 2005-08-09 08:37:47 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -48,6 +48,7 @@ import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.behavior.FVoidLiteral;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
+import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -148,7 +149,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		
 		interpreterContext.peekCallFrame().peekExpressionContext().defineVariable(
 	             node.getFIdentifier(), ro_init);
-	    return ro_init;
+		return ro_init;
 	}
 	
 	
@@ -364,19 +365,21 @@ public class ExpressionInterpreter extends KermetaVisitor {
                 }
                 else {
                     // Get the FProperty -- is it the right way? 
-                    FProperty fproperty = new SimpleType(t_target).getPropertyByName(propertyName).getProperty();
+                    SimpleType target_type = new SimpleType(t_target);
+                    CallableProperty property =  target_type.getPropertyByName(propertyName);
+                    FProperty fproperty = property.getProperty();
                     //FProperty fproperty = (FProperty)ro_property.getData().get("kcoreObject");
                     if (!fproperty.isFIsDerived())
                     // If it is not derived, assign it
                         fr.irisa.triskell.kermeta.runtime.language.Object.set(ro_target,ro_property,rhs_value);
                     // Else, compute it
                     else
-                    {
-                        interpreterContext.peekCallFrame().pushExpressionContext();
+                    {   // no parameter in a property -> "null" below
+                        interpreterContext.pushOperationCallFrame(ro_target, property, null, callfeature);
                         interpreterContext.peekCallFrame().setCallValueResult(rhs_value);
                         // Get the setter body
                         this.accept(fproperty.getFSetterbody());
-                        interpreterContext.peekCallFrame().popExpressionContext();
+                        interpreterContext.popCallFrame();
                     }
                 }
             }
@@ -395,6 +398,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
     public Object visit(FCallSuperOperation node)
     {
         RuntimeObject result = null;
+        // Current call frame is uniquely a LambdaCallFrame, or an OperationCallFrame. Other types are forbidden!
         FOperation current_op = this.interpreterContext.peekCallFrame().getOperation();
         RuntimeObject ro_target = this.interpreterContext.peekCallFrame().getSelf();
         FClassDefinition foclass = current_op.getFOwningClass();
@@ -462,8 +466,8 @@ public class ExpressionInterpreter extends KermetaVisitor {
 
         // This is for debugg purposes it should never happend
         if (var == null) {
-            internalLog.error("INTERPRETER INTERNAL ERROR : unable tofind variable in context " + node.getFName());
-            throw new Error("INTERPRETER INTERNAL ERROR : unable tofind variable in context " + node.getFName());
+            internalLog.error("INTERPRETER INTERNAL ERROR : unable to find variable in context :" + node.getFName());
+            throw new Error("INTERPRETER INTERNAL ERROR : unable to find variable in context :" + node.getFName());
         }
 
         // It is a simple variable call
@@ -675,27 +679,21 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	/**
 	 * Used for derived properties when processing getter and setter body
 	 */
-    public RuntimeObject getterDerivedProperty(FProperty node)
+    public RuntimeObject getterDerivedProperty(CallableProperty property, RuntimeObject ro_target, FCallExpression expression)
     {
         RuntimeObject result = memory.voidINSTANCE;
-        // Create a context for this operation call, setting self object to ro_target
-        //interpreterContext.pushExpressionCallFrame();
-        // create a pseudo?
-        //FClass self_type = (FClass)ro_target.getMetaclass().getData().get("kcoreObject");
-		//CallableOperation op = new CallableOperation(foperation, self_type);
-
-	    // push expression context
-	    interpreterContext.peekCallFrame().pushExpressionContext();
+        interpreterContext.pushOperationCallFrame(ro_target, property, null, expression);
+        // Would a special DerivedPropertyCallFrame be better instead of that?
 	    try {	        // Interpret body
-	        this.accept(node.getFGetterbody());
+	        this.accept(property.getProperty().getFGetterbody());
 	        // Getter is an operation which returns an element of type FProperty.getFType
 	        // Set the result 
 	        result = interpreterContext.peekCallFrame().getOperationResult();
 	    }
 	    finally {
-		    // Pop the expressionContext
-		    interpreterContext.peekCallFrame().popExpressionContext();
+		    interpreterContext.popCallFrame();
 	    }
+
 		return result;
     }
     
@@ -794,7 +792,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		    
 //		  This should never happend is the type checker has checked the program
 			if (property == null) {
-			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getFName());
+			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getFName() + "in type : " + target_type);
 		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getFName());
 			}
 			
@@ -814,7 +812,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		    }
 		    else
 		    {
-		        result = this.getterDerivedProperty(property.getProperty());
+		        result = this.getterDerivedProperty(property, ro_target, node);
 		    }
 	        
 	    }

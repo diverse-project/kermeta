@@ -1,4 +1,4 @@
-/* $Id: ExpressionCallFrame.java,v 1.3 2005-08-02 15:25:27 zdrey Exp $
+/* $Id: ExpressionCallFrame.java,v 1.4 2005-08-09 08:37:47 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionCallFrame.java
 * License : GPL
@@ -96,7 +96,8 @@ public class ExpressionCallFrame extends CallFrame {
     public FOperation getOperation() {
         return null;
     }
-
+    public void setSelf(RuntimeObject pSelf) { selfObj = pSelf; }
+    
     /* (non-Javadoc)
      * @see fr.irisa.triskell.kermeta.interpreter.CallFrame#getTypeParameters()
      */

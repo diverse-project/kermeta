@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.10 2005-06-07 08:00:50 ffleurey Exp $
+/* $Id: InterpreterContext.java,v 1.11 2005-08-09 08:37:47 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : GPL
@@ -19,7 +19,9 @@ import java.util.Stack;
 import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.typechecker.CallableElement;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
+import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 
 /**
  * The context of the interpreter. It contains a stack of contexts that are called <code>CallFrame</code>.
@@ -80,9 +82,6 @@ public class InterpreterContext {
     /**
      * This stack contains CallFrames (one for each operation call).
      * 
-     * @uml.property name="frame_stack"
-     * @uml.associationEnd inverse="context:fr.irisa.triskell.kermeta.interpreter.CallFrame"
-     * multiplicity="(0 -1)"
      */
     protected Stack frame_stack;
     protected RuntimeMemory memory;
@@ -108,12 +107,12 @@ public class InterpreterContext {
 	 * @param self_object : the object on which an operation was applied. This operation is
 	 * the one that led to the creation of this new CallFrame
 	 */
-	public void pushOperationCallFrame(RuntimeObject self_object, CallableOperation operation, ArrayList parameters, FCallExpression expression)
+	public void pushOperationCallFrame(RuntimeObject self_object, CallableElement callable, ArrayList parameters, FCallExpression expression)
 	{
-	    CallFrame new_frame = new OperationCallFrame(this, operation, self_object, parameters, expression);
+	    CallFrame new_frame = new OperationCallFrame(this, callable, self_object, parameters, expression);
 	    frame_stack.push(new_frame);
 	}
-	
+
 	public void pushLambdaCallFrame(LambdaCallFrame frame) {
 	    frame_stack.push(frame);
 	}
@@ -137,4 +136,5 @@ public class InterpreterContext {
     public RuntimeMemory getMemory() {
         return memory;
     }
+
 }
