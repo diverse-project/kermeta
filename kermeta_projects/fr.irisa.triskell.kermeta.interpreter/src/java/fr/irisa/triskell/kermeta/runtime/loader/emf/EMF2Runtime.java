@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.13 2005-08-03 08:54:38 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.14 2005-08-09 15:13:38 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -36,12 +36,14 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
+import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
@@ -86,12 +88,13 @@ public class EMF2Runtime {
     protected Hashtable runtime_objects_map; // { eobject : robject }
     
 	public static void loadunit(EMFRuntimeUnit unit) {
+	    KermetaUnit kunit =  unit.getInstances().getFactory().getMemory().getUnit();
 		try {
 	//		 load ressource
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 			ResourceSet resource_set = new ResourceSetImpl();
 	//		Resource resource = resource_set.getResource(URI.createURI(unit.getUri()), true);
-			String unit_uri = unit.getInstances().getFactory().getMemory().getUnit().getUri();
+			String unit_uri = kunit.getUri();
 	        String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
 	    	URI u = URI.createURI(unit.getUri());
 	    	internalLog.info("URI created for model to load : "+u);
@@ -106,6 +109,7 @@ public class EMF2Runtime {
 		    // Create a resourceLoadException
 		    KermetaRaisedException ex = new KermetaRaisedException(unit.getInstances(), unit.getInstances().getFactory().getMemory().getCurrentInterpreter());
 		    KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
+		    kunit.error.add(new KMUnitError("EMF persistence error : could not load the given model :\n"+ e, (FObject)unit.getInstances().getData().get("kcoreObject")));
 			throw ex; 
 			// TODO : kermeta persistence should also raise an exception when load unit failed!
 		}
@@ -199,16 +203,13 @@ public class EMF2Runtime {
 	    	    ftype = ((FPrimitiveType)etype_cdef).getFInstanceType();
 	    	}
 	    }
-	    // FIXME : We should never enter here
-	    if (etype_cdef == null)
+	    else
+	    // We should never enter here
 	    {
-	        // todo : we also have to test the type (can be FClass, or FPrimitiveType, and probably other kinds of types...)
-	        // Get the FObject corresponding to this etype
-	        //RuntimeObject roTypeParam = getRuntimeObjectForMetaClass(etype.getName(), unit);
-	        etype_cdef = unit.getMetamodelUnit().getTypeDefinitionByName(name);
-	        etype_fclass = unit.getMetamodelUnit().struct_factory.createFClass();
-	        etype_fclass.setFClassDefinition((FClassDefinition)etype_cdef);
-	        ftype = etype_fclass;
+	    	KermetaUnit.internalLog.error("Error finding a class :" + name + " in loaded libraries.");
+	    	unit.getInstances().getFactory().getMemory().getUnit().error.add("EMF Loading error : " +
+	    	        "could not find a class ("+name+") for EMF model" );
+	        ftype = null;
 	    }
         // FIXME : it would be better not to create the FClass corresponding to the type every time we need one?
         return ftype; 

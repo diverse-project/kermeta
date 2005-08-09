@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.6 2005-07-28 18:21:02 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.7 2005-08-09 15:13:38 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : GPL
@@ -180,33 +180,40 @@ public class Runtime2EMF {
         {   
             String prop_name = (String)it.next(); 
             RuntimeObject property = (RuntimeObject)rObject.getProperties().get(prop_name);
-            // Handle the property named prop_name
-            if (!updatedRuntimeObjects.contains(property))
-            {	
-                //System.err.println("La taille de mes objects mis à jour : "+ updatedRuntimeObjects.size());
-                if (result instanceof EObject)
-                {
-                    updateProperties((EObject)result, prop_name, property);
-                }
-                // Q : does an EList of ELists has a sense??? If yes, this code is meaningful..But i think that no
-                /*else if (result instanceof EList)
-                {
-                    EList rlist = (EList)result;
-                    Iterator rit = rlist.iterator();
-                    while (rit.hasNext())
+            EStructuralFeature feature = getEStructuralFeatureByName((EObject)result, prop_name);
+            // Is the property defined in the *ecore* meta model? (are only in the KMT translated meta model?)
+            if ( feature != null)
+            {
+                // Handle the property named prop_name if it was not updated yet
+                if (!updatedRuntimeObjects.contains(property))
+                {	
+                    //System.err.println("La taille de mes objects mis à jour : "+ updatedRuntimeObjects.size());
+                    // When a property is updated, the entry "emfObject" of data hashtable in the RuntimeObject is also filled.
+                    if (result instanceof EObject)
                     {
-                        EObject po = (EObject)rit.next();
-                        updateProperties(po, prop_name, property);
-                    } 
-                }*/
-                else 
-                {
-                    throw new Error("NotImplemented Error. The following emf object has unrecognized type : " + result );
+                        updateProperty((EObject)result, prop_name, property);
+                    }
+                    else 
+                    {
+                        throw new Error("NotImplemented Error. The following emf object has unrecognized type : " + result );
+                    }
+                    // If the property is not a "sharable" RuntimeObject (like the Strings are), then we add it to the objects
+                    // which the EMF instances associated are updated --> TODO : find the common type for those DataTypes?
+                    if (getPrimitiveTypeValueFromRuntimeObject(property)==null)
+                        updatedRuntimeObjects.add(property);
                 }
-                // If the property is not a "sharable" RuntimeObject (like the Strings), then we add it to the objects
-                // which the EMF instances associated are updated --> TODO : find the common type for those DataTypes?
-                if (getPrimitiveTypeValueFromRuntimeObject(property)==null)
-                    updatedRuntimeObjects.add(property);
+                // The property is already updated so we simply add it
+                else
+                {
+                    if (result instanceof EObject)
+                    {
+                        ((EObject)result).eSet(feature, property.getData().get("emfObject"));
+                    }
+                    else
+                    {
+                        throw new Error("NotImplemented Error : an updated property that is a datatype? : " + prop_name );
+                    }
+                }
             }
         }
         return result;
@@ -220,7 +227,7 @@ public class Runtime2EMF {
      * @param prop_name the name of the property to modify
      * @param property the Runtime representation of the property to update
      */
-    protected void updateProperties(EObject eObject, String prop_name, RuntimeObject property)
+    protected void updateProperty(EObject eObject, String prop_name, RuntimeObject property)
     {
         EStructuralFeature feature = getEStructuralFeatureByName(eObject, prop_name);
         Object property_eObject = null;
@@ -228,19 +235,19 @@ public class Runtime2EMF {
         eObject.eUnset(feature); // is it necessary? (when object modified by the user?)
         // If property emf representation was not found, it means that it was a newly created object, so
         // we have to create the equivalent EMF object.
+       
         property_eObject = getOrCreatePropertyFromRuntimeObject(property, feature.getEType());
-        if (property_eObject == null)
-            property_eObject = getPrimitiveTypeValueFromRuntimeObject(property);
+        
         // If property is a simple EObject 
         if ( property_eObject instanceof EObject)
         {
-            //System.err.println("   feature EObject -> " + feature.getEType() );
+            System.err.println("   feature EObject -> " + feature.getEType() );
             eObject.eSet(feature, property_eObject);
         }
         // If it is a collection of Objects
         else if (property_eObject instanceof EList)
         {
-            //System.err.println("   feature EList -> " + feature.getEType() + ((EList)property_eObject).size());
+            System.err.println("   feature EList -> " + feature.getEType() + ((EList)property_eObject).size());
             Iterator p_it = ((ArrayList)property.getData().get("CollectionArrayList")).iterator();
             // For each feature of the collection of features
             while (p_it.hasNext())

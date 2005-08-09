@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.5 2005-07-26 16:41:46 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.6 2005-08-09 15:13:38 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -9,35 +9,25 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
-
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FPackage;
 
 /**
  * FIXME : Check that we work with all qualified names of Classes.
@@ -46,6 +36,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     
     /** temporary attribute for the */
     public String metamodel_uri;
+    /** almost deprecated */
     protected EcoreUnit ecore_unit;
     protected FObject kermeta_mm;
     /** { EObject : RuntimeObject } */
@@ -209,8 +200,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         return runtime_objects_map;
     }
     
-    
-	
 	
 	/**
 	 * (Helper)
