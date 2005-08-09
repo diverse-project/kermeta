@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.7 2005-07-08 12:21:50 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.8 2005-08-09 09:33:07 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -128,6 +128,12 @@ public class RuntimeObject {
 	 * @return Returns the container.
 	 */
 	public RuntimeObject getContainer() {
+		FClass self_cls = ((FClass)metaclass.getData().get("kcoreObject"));
+		// FIXME: this is just a quick fix, we should check that self_cls inherits from ValueType
+		String name = getFactory().getMemory().getUnit().getQualifiedName(self_cls.getFClassDefinition());
+		if (name.equals("kermeta::standard::Boolean")) return null;
+		if (name.equals("kermeta::standard::Integer")) return null;
+		if (name.equals("kermeta::standard::String")) return null;
 		return container;
 	}
 	/**
