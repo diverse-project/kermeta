@@ -1,4 +1,4 @@
-/* $Id: LambdaCallFrame.java,v 1.5 2005-08-09 08:37:47 zdrey Exp $
+/* $Id: LambdaCallFrame.java,v 1.6 2005-08-09 15:15:05 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
 * License : GPL
@@ -114,7 +114,7 @@ public class LambdaCallFrame extends CallFrame {
     }
     
     public String toString() {
-        return nestingOperationCallFrame.getSelf().toString() + "." + nestingOperationCallFrame.getOperation().getFName() + "#function call";
+        return nestingOperationCallFrame.toString() + "#function call";
     }
     
     public FOperation getOperation() {

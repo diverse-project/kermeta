@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.6 2005-08-09 08:37:47 zdrey Exp $
+/* $Id: OperationCallFrame.java,v 1.7 2005-08-09 15:15:05 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : OperationCallFrame.java
 * License : GPL
@@ -100,7 +100,10 @@ public class OperationCallFrame extends CallFrame {
     }
     
     public String toString() {
-        return self.toString() + "." + operation.getFName();
+        String name = "";
+        if (operation != null) name = operation.getFName();
+        else				   name = property.getFName();
+        return self.toString() + "." + name;
     }
     
     public FOperation getOperation() {
