@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.7 2005-08-09 15:13:38 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.8 2005-08-10 12:29:27 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : GPL
@@ -148,6 +148,7 @@ public class Runtime2EMF {
             RuntimeObject ro = (RuntimeObject)it.next();
             //EObject o = updateEObjectFromRuntimeObject(ro, unit, resource);
             Object o = updateEMFObjectFromRuntimeObject(ro);
+            if (!updatedRuntimeObjects.contains(o)) updatedRuntimeObjects.add(o);
             // And now update the contained objects as well:)
             resource.getContents().add(o);
         }
@@ -241,13 +242,13 @@ public class Runtime2EMF {
         // If property is a simple EObject 
         if ( property_eObject instanceof EObject)
         {
-            System.err.println("   feature EObject -> " + feature.getEType() );
+            //System.err.println("   feature EObject -> " + feature.getEType() );
             eObject.eSet(feature, property_eObject);
         }
         // If it is a collection of Objects
         else if (property_eObject instanceof EList)
         {
-            System.err.println("   feature EList -> " + feature.getEType() + ((EList)property_eObject).size());
+            //System.err.println("   feature EList -> " + feature.getEType() + ((EList)property_eObject).size());
             Iterator p_it = ((ArrayList)property.getData().get("CollectionArrayList")).iterator();
             // For each feature of the collection of features
             while (p_it.hasNext())
@@ -349,6 +350,7 @@ public class Runtime2EMF {
         // Get the qualified name of the runtimeObject class
         String kqname = rObject.getFactory().getMemory().getUnit().getQualifiedName(
                 metaclass.getFClassDefinition());
+        
         EClass eclass = null;
         // Find in mm_resource the eClass named "kqname"?
         // FIXME : ugly unneeded cast
@@ -361,6 +363,7 @@ public class Runtime2EMF {
         {
             result = EcoreUtil.create(eclass);
         }
+        rObject.getData().put("emfObject", result);
         return result;
     }
     
