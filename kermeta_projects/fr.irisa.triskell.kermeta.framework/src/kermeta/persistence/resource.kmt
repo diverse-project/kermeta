@@ -3,7 +3,7 @@ package kermeta::persistence;
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: resource.kmt,v 1.6 2005-07-28 16:12:05 zdrey Exp $
+ * $Id: resource.kmt,v 1.7 2005-08-11 12:23:48 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -111,10 +111,11 @@ class EMFResource inherits Resource
 		// Todo : extern load should return a Reflective Set?
 		var inst_set : Set<Object> init Set<Object>.new
 		inst_set ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
-			uri, metaModelURI, "EMF", instances
+			uri, metaModelURI, "EMF", inst_set
 		)
 		// If load failed
 		if (inst_set.size == 0) then
+			stdio.writeln("Resource load failed!")
 			raise e
 		end
 		// FIXME : should I directly create a ReflectiveSet instead of that ?
@@ -175,7 +176,7 @@ class EMFResource inherits Resource
 	end
 	
 	/**
-	 * Helper that returns true if new_instance is in the tparam Set, false otherwise
+	 * Helper that returns true if new_instance type is in the tparam Set, false otherwise
 	 * FIXME : Loop-and-cast done in order to temporarily get round the type 
 	 * system limits for reflection
 	*/
@@ -229,8 +230,15 @@ class KMResource inherits Resource
 }
 abstract class Repository
 {
-	/** the resources created by this repository */
+	/** The resources created by this repository */
 	attribute resources : set Resource [*]#repository
+	/**
+	 * Create a resource with given uri. 
+	 * params : 
+	 *    - uri : the uri where to save the model handled by the resource
+	 *    - mm_uri : the uri of the metamodel of which model is an instance
+	 * User must provide the mm_uri if he creates a new model from scratch.
+	 */
 	operation createResource(uri : String, mm_uri : String) : Resource is abstract
 	/**
 	 * Get the resource of model that is stored in the given uri. Silently create
@@ -267,12 +275,16 @@ class EMFRepository inherits Repository
 	 */
 	method createResource(uri : String, mm_uri : String) : EMFResource is do
 		var new_resource : EMFResource init EMFResource.new
-		var instances    : kermeta::standard::Set<Object> init kermeta::standard::Set<Object>.new
-		new_resource.instances := instances
+//		var instances    : kermeta::standard::Set<Object> init kermeta::standard::Set<Object>.new
+//		new_resource.instances := instances
 		new_resource.uri := uri
 		new_resource.metaModelURI := mm_uri
 		new_resource.repository := self
 		result := new_resource
+	end
+	// Override so that specialized types are fixed ...hum cast is not excellent
+	method getResource(uri : String) : EMFResource is do
+		result ?= super(uri)
 	end
 	
 }
