@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.14 2005-08-09 15:13:38 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.15 2005-08-11 12:25:01 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -41,10 +41,12 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
+import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
@@ -126,7 +128,7 @@ public class EMF2Runtime {
 				EObject obj = (EObject)it.next();
 				RuntimeObject ro = visitor.setRuntimeObjectForEObject(unit, obj);
 				visitor.runtime_objects_map.put(obj, ro);
-				//internalLog.info("RO created : "+ (ro != null));
+				//internalLog.info("RO created : "+ (ro != null) + "->" + ro);
 			}
 			// If the meta-model uri was not provided in the constructor of EMFRuntimeUnit, we try
 			// to find one
@@ -215,8 +217,24 @@ public class EMF2Runtime {
         return ftype; 
 	}
 	
+	protected FProperty getPropertyByName(String name, FClass fclass, EMFRuntimeUnit unit)
+	{
+	    RuntimeMemory memory = unit.getInstances().getFactory().getMemory();
+	    FProperty p = null;
+	    FClassDefinition c = fclass.getFClassDefinition();
+	    ArrayList props = memory.getUnit().getAllProperties(c);
+		for (int i=0; i<props.size(); i++) {
+			FProperty prop = (FProperty)props.get(i);
+			if (prop.getFName().equals(name)) p = prop;
+		}
+		
+	/*    p = unit.getInstances().getFactory().getMemory().
+	    			  getUnit().getPropertyByName(fclass.getFClassDefinition(), name);*/
+	    return p;
+	}
+	
 	/**
-	 * Add the properties to the object
+	 * Add the properties as RuntimeObjects to the object rObject
 	 * @param rObject
 	 * @param unit
 	 */
@@ -229,7 +247,9 @@ public class EMF2Runtime {
 	    	rObject.setContainer((RuntimeObject)this.runtime_objects_map.get(eObject.eContainer()));
 	    }
 	    
+	    // Get the FClass of the RuntimeObject to populate
 	    EClass c = eObject.eClass();
+	    FClass fc = (FClass)getMetaClassByName(unit.getEQualifiedName(c), unit);
 	    
 	    // Get the structural features
 	    EList features = c.getEAllStructuralFeatures(); 
@@ -241,17 +261,20 @@ public class EMF2Runtime {
 	        EStructuralFeature feature = (EStructuralFeature)it.next();
 	        RuntimeObjectFactory rofactory = unit.getInstances().getFactory();
 	        String  fname  = feature.getName();
-	        
 	        EClassifier etype = feature.getEType();
-	        
 	        FType ftype = getMetaClassByName(unit.getEQualifiedName(etype), unit);
+	        FProperty fprop = getPropertyByName(fname, fc, unit);
+	        RuntimeObject roprop = rofactory.getMemory().getRuntimeObjectForFObject(fprop);
+	        
 	        // Eget can return an elist of features
 	        Object fvalue = eObject.eGet(feature);
 	        RuntimeObject rovalue = null;
 	        // A feature with multiplicity
 	        if (fvalue instanceof EList)
 	        {	
-	            rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit);
+	            // feature.eCrossReferences() <- eOpposite
+	            // rObject is the container of this property list!
+	        	rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
 	        }
 	        // Get the RO-repr of this EObject
 	        else if (fvalue instanceof EObject)
@@ -302,9 +325,11 @@ public class EMF2Runtime {
 	            throw new KermetaRaisedException(rObject, rObject.getFactory().getMemory().getCurrentInterpreter());
 	        }
 	        // If we instanciated a RuntimeObject value, we can set the properties for the object 
+	        //if (rovalue )
 	        if (rovalue != null)
 	        {
-	            rObject.getProperties().put(fname, rovalue);
+	            //rObject.getProperties().put(fname, rovalue);
+	            fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
 	            if (fvalue != null)
 	                rovalue.getData().put("emfObject", fvalue);
 	        }	
@@ -320,23 +345,23 @@ public class EMF2Runtime {
 	 * has an upperBound that is * or a number > 1
 	 * Adds the list of objects given in arguments, and create a collection which type parameter is typeParam.
 	 * 
-	 * @param objects a list of EObjects
+	 * @param objects a list of EObjects that represent a property[0..*] of elements of type typeParam
+	 * @param object
 	 * @return a Set of objects (Set<typeParam>)
 	 */
-	public RuntimeObject createRuntimeObjectForCollection(EList objects, FType typeParam, EMFRuntimeUnit unit)
+	public RuntimeObject createRuntimeObjectForCollection(EList objects, FType typeParam, EMFRuntimeUnit unit, RuntimeObject rObject, RuntimeObject roprop)
 	{
-	    //memory.getROFactory().createMetaClass(fclass)
-	    RuntimeMemory memory = unit.getInstances().getFactory().getMemory();
-	    // Get the runtimeobject that embeds the FClass "Set"
-	    RuntimeObject result = Collection.create("kermeta::standard::Set", memory.getROFactory(), typeParam);
+	    RuntimeObject result = fr.irisa.triskell.kermeta.runtime.language.Object.get(rObject, roprop);
+        RuntimeMemory memory = unit.getInstances().getFactory().getMemory();
 	    Iterator it = objects.iterator();
 	    // Transform the EObjects into RuntimeObject and add them in our collection
 	    while (it.hasNext())
 	    {
 	        EObject sfeature = (EObject)it.next();
 	        RuntimeObject rovalue = (RuntimeObject)this.runtime_objects_map.get(sfeature);
-	        Collection.add(result, rovalue);
+	        ReflectiveCollection.add(result, rovalue);
 	    }
+	    
 	    // Add the "emfObject" property here or not? EList is not EObject, but we respect a kind of mapping...
 	    result.getData().put("emfObject", objects);
 	    return result;
