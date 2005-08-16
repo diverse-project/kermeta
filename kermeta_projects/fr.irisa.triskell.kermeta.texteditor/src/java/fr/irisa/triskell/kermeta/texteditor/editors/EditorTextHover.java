@@ -4,14 +4,13 @@
  */
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Hashtable;
+import java.util.Iterator;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jface.text.DefaultInformationControl;
+
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.IRegion;
@@ -19,27 +18,23 @@ import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
-import org.eclipse.swt.graphics.Color;
+
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.commands.ICommand;
-import org.eclipse.ui.commands.ICommandManager;
-import org.eclipse.ui.commands.IKeySequenceBinding;
-import org.eclipse.ui.keys.KeySequence;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
-import fr.irisa.triskell.kermeta.ast.FAssignement;
+
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+
 import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.structure.FTag;
+
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.actions.IKermetaEditorActionDefinitionIds;
+
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
 
@@ -161,31 +156,30 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
 		        FObject fobj = getFObjectForNode(astnode);
 		        String ftags = "";
-		      
-		            //TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
-		            if (fobj instanceof FExpression)
+		        
+		        //TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
+		        if (fobj instanceof FExpression)
+		        {
+		            FExpression fexp = (FExpression)fobj;
+		            // Find the tag of the FCallFeature definition!
+		            if (fexp instanceof FCallFeature)
 		            {
-		            	FExpression fexp = (FExpression)fobj;
-		            	// Find the tag of the FCallFeature definition!
-		            	if (fexp instanceof FCallFeature)
-		            	{
-		            	    FObject fdef = this.getDefinitionForFCallFeature((FCallFeature)fexp);
-		            	    if (fdef != null)
-		            	    {
-		            	        ftags = kdocPrettyPrint(fdef.getFTag());
-		            	        
-		            	    }
-		            	}
-		            	
-		            	if (fexp.getFStaticType() != null) {
-		            		Type t = new SimpleType(fexp.getFStaticType());
-		            		//TexteditorPlugin.pluginLog.info(" * Type -> " + t);
-		            		// return the source code representation or the signature
-		            		// of the element pointed by the cursor
-		            		return pp.accept(fobj) + " : " + t + "\n" + ftags;
-		            	}
+		                FObject fdef = this.getDefinitionForFCallFeature((FCallFeature)fexp);
+		                if (fdef != null)
+		                {
+		                    ftags = kdocPrettyPrint(fdef.getFTag());
+		                }
 		            }
 		            
+		            if (fexp.getFStaticType() != null) {
+		                Type t = new SimpleType(fexp.getFStaticType());
+		                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
+		                // return the source code representation or the signature
+		                // of the element pointed by the cursor
+		                return pp.accept(fobj) + " : " + t + "\n" + ftags;
+		            }
+		        }
+		        
 		        
 		    }
 		}
@@ -200,10 +194,19 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	 */
 	private String kdocPrettyPrint(EList taglist)
 	{
-	    String pptags = pp.ppTags(taglist);
+	    // FIXME : totally ugly patch, until duplicate tags are removed from the 
+	    // KM model itself..(bad "inheritance" handling of tags?)
+	    Iterator it = taglist.iterator();
+	    Hashtable tagdict = new Hashtable();
+	    String pptags = "";
+	    while (it.hasNext())
+	    {	FTag tag = (FTag)it.next();
+	    	pptags += tagdict.containsKey(tag.getFValue())?"":pp.accept(tag);
+	        tagdict.put(tag.getFValue(), "");
+	    }
 	    if (pptags.startsWith("/**"))
-	        pptags = pptags.substring(3, pptags.length()-3);
-	    //pptags.replaceAll("[ \\t\\n\\x0B\\f\\r]*\\\\*", "");
+	        pptags = pptags.substring(3, pptags.length()-2);
+	    pptags = pptags.replaceAll("(\n)?[ \\t\\x0B\\f\\r]*\\*","$1");
 	    return pptags;
 	}
 	
