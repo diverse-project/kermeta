@@ -93,13 +93,6 @@
          </menu> -->
 
       </objectContribution>
-     <!--      <action
-               enablesFor="1"
-               label="Kermeta Run"
-               class="fr.irisa.triskell.kermeta.runner.popup.actions.KermetaRun"
-               menubarPath="org.eclipse.debug.ui.contextualLaunch.run.submenu"
-               id="fr.irisa.triskell.kermeta.runner.newAction">
-         </action>-->
       <objectContribution
             objectClass="org.eclipse.core.resources.IProject"
             id="popIProject"/>
@@ -140,15 +133,6 @@
                configTypeID="KermetaLaunchConfiguration"
                id="fr.irisa.triskell.kermeta.runner.launchConfigurationTypeImage1"/>
       </extension>
-   <!--   <extension
-            point="org.eclipse.debug.ui.launchShortcuts">
-         <shortcut
-               label="Kermeta Launch Shortcut"
-               icon="icons/kermeta_logo.gif"
-               class="fr.irisa.triskell.kermeta.runner.KermetaLaunchShortcut"
-               modes="run"
-               id="KermetaLaunchShortCut"/>
-      </extension>-->
       <extension
             point="org.eclipse.debug.ui.launchGroups">
          <launchGroup
@@ -204,9 +188,10 @@
       <extension
             id="kermetaActionSets"
             point="org.eclipse.ui.actionSets">
+          <!-- Dev. note : visible="false" lets actionSet appear only in kermetaPerspective -->
          <actionSet
                label="fr.irisa.triskell.kermeta.runner.actions.actionSet"
-               visible="true"
+               visible="false"
                id="kermetaActionSet">
           <action
                   toolbarPath="Normal"
@@ -226,7 +211,6 @@
                label="Kermeta App"
                class="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchShortcut"
                icon="icons/kermeta_logo.gif"
-               path="contextualLaunch.popupMenu/launchGroup"
                id="fr.irisa.triskell.kermeta.runner.kermetashortcut"
                modes="run">
             <contextualLaunch>
@@ -254,6 +238,20 @@
       </extension>
      <extension
            point="org.eclipse.ui.importWizards">
+     </extension>
+     <extension
+           point="org.eclipse.ui.ide.projectNatureImages">
+        <image
+              natureId="fr.irisa.triskell.kermeta.runner.kermetanature"
+              icon="icons/kermetaproject.gif"
+              id="fr.irisa.triskell.kermeta.runner.kermetaProject"/>
+     </extension>
+     <!-- When Kermeta Project will be really "functionally" interesting, we will
+          create a specific KermetaProject class -->
+     <extension
+           id="fr.irisa.triskell.kermeta.runner.kermetanature"
+           name="Kermeta Nature"
+           point="org.eclipse.core.resources.natures">
      </extension>
      <!-- This extension does not look useful for launchability -->
 <!--     <extension

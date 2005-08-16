@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.6 2005-06-10 16:00:14 zdrey Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.7 2005-08-16 11:21:16 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : GPL
@@ -48,11 +48,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
     private String ID_GROUP = "KermetaLaunchGroup";
 
     public KermetaLaunchShortcut()
-    {
-        System.out.println("Launch ShortCut!!!");
-    }
-    
-    
+    {}
     
     /* (non-Javadoc)
      * @see org.eclipse.debug.ui.ILaunchShortcut#launch(org.eclipse.jface.viewers.ISelection, java.lang.String)

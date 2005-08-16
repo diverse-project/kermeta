@@ -1,4 +1,4 @@
-/* $Id: CreateKermetaProjectWizard.java,v 1.4 2005-05-31 14:35:30 zdrey Exp $
+/* $Id: CreateKermetaProjectWizard.java,v 1.5 2005-08-16 11:21:16 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: CreateKermetaProjectWizard.java
  * License: GPL
@@ -73,7 +73,10 @@ public class CreateKermetaProjectWizard extends Wizard {
             newPath = null;
         IWorkspace workspace = ResourcesPlugin.getWorkspace();
         final IProjectDescription description = workspace.newProjectDescription(newProjectHandle.getName());
+        
         description.setLocation(newPath);
+        description.setNatureIds(new String[] {"fr.irisa.triskell.kermeta.runner.kermetanature"});
+        
         
         // define the operation to create a new project
         WorkspaceModifyOperation op = new WorkspaceModifyOperation() {

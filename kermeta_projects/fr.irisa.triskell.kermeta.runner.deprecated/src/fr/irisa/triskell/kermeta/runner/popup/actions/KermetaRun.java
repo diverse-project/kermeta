@@ -1,4 +1,4 @@
-/* $Id: KermetaRun.java,v 1.9 2005-06-09 17:48:46 ffleurey Exp $
+/* $Id: KermetaRun.java,v 1.10 2005-08-16 11:21:16 zdrey Exp $
  * Project : Kermeta.runner
  * File : KermetaRun.java
  * License : GPL
@@ -102,11 +102,13 @@ public class KermetaRun implements IObjectActionDelegate {
 		        {
 		            console.print("Uncaught exception in Kermeta program:\n");
 		            console.print(kerror.getMessage());
+		            kerror.printStackTrace();
 		        }
 		        catch (KermetaInterpreterError ierror)
 		        {
 		            console.print("Uncaught exception in Kermeta interpreter:\n");
 		            console.print(ierror.getMessage());
+		            ierror.printStackTrace();
 		        }
 		        catch (Throwable e)
 		        {
