@@ -1,5 +1,5 @@
 package kmLogo;
-
+ 
 require kermeta
 using kermeta::standard
 using kermeta::utils
@@ -151,7 +151,7 @@ package abstractSyntax
 	}
 	class Constant inherits Expression
 	{
-		attribute value : Integer
+		attribute ~value : Integer
 		method traverse(v : actions::AbstractVisitor) : kermeta::standard::~Void is do
 			//TODO: implement method traverse
 			v.visitConstant(self)
@@ -301,7 +301,7 @@ package actions
 			end
 		end
 		method visitConstant(node : abstractSyntax::Constant) is do
-			accumulator := node.value
+			accumulator := node.~value
 		end
 		method visitProcCall(node : abstractSyntax::ProcCall) is do
 			// create a new stack frame
@@ -357,7 +357,7 @@ package actions
 			end			
 		end
 		method visitVariable(node : abstractSyntax::Variable) is do
-			accumulator := stack.first.get(node.name)		
+			accumulator := stack.first.getValue(node.name)		
 		end
 	}
 	class PrettyPrinter inherits AbstractVisitor
@@ -392,7 +392,7 @@ package actions
 			stdio.write(" ")	
 		end
 		method visitConstant(node : abstractSyntax::Constant) is do
-			stdio.write(node.value.toString+" ")
+			stdio.write(node.~value.toString+" ")
 		end
 		method visitProcCall(node : abstractSyntax::ProcCall) is do
 			stdio.write(node.declaration.name+" ")
@@ -442,8 +442,8 @@ package actions
 			var block : abstractSyntax::Block init abstractSyntax::Block.new()
 			var repeat : abstractSyntax::Repeat init abstractSyntax::Repeat.new()
 			// initialize and set up links
-			cst3.value := 3
-			cst4.value := 4
+			cst3.~value := 3
+			cst4.~value := 4
 			fo1.steps := cst3
 			fo2.steps := cst4
 			block.instructions.add(pendown)
@@ -467,7 +467,7 @@ package actions
 			block.instructions.add(forward)
 			block.instructions.add(right)
 			var cst4 : abstractSyntax::Constant init abstractSyntax::Constant.new()
-			cst4.value := 4
+			cst4.~value := 4
 			var repeat : abstractSyntax::Repeat init abstractSyntax::Repeat.new()
 			repeat.condition := cst4
 			repeat.block := block
@@ -480,7 +480,7 @@ package actions
 			var pendown : abstractSyntax::PenDown init abstractSyntax::PenDown.new()
 			var squarecall : abstractSyntax::ProcCall init abstractSyntax::ProcCall.new()
 			var cst10 : abstractSyntax::Constant init abstractSyntax::Constant.new()
-			cst10.value := 10
+			cst10.~value := 10
 			var binexp : abstractSyntax::BinaryExp init abstractSyntax::BinaryExp.new()
 			binexp.operator := "*"
 			binexp.lhs := cst10
