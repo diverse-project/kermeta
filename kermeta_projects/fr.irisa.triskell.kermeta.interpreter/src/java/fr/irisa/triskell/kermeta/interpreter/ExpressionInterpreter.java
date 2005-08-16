@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.17 2005-08-09 08:37:47 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.18 2005-08-16 09:12:11 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -752,9 +752,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 //			 Check that target is not void
 		    if (operation == null && ro_target == memory.voidINSTANCE) {
 		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
-		        
 		        RuntimeObject ex = memory.getROFactory().createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
-		        
 		        raiseKermetaException(ex);
 		        
 		    }
@@ -786,7 +784,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	        
 //			 Check that target is not void
 		    if (property == null && ro_target == memory.voidINSTANCE) {
-		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
+		        internalLog.info(" >> INTERPRETER REPORTS Call of '"+ node.getFName() +"' property on a void target. TODO: raise an exception ");
 		        throw new KermetaRaisedException(ro_target, this);
 		    }
 		    
