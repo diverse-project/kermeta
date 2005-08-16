@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.17 2005-08-02 15:32:35 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.18 2005-08-16 10:54:29 zdrey Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -679,14 +679,14 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
     {
         String result = "";
         // User can choose to add a "@kdoc" tag
-        if (node.getFName().equals(KMT2KMPass7.KERMETADOC))
+        if (node.getFName().equals(KMT2KMPass7.KERMETADOC) && !node.getFValue().startsWith("/**"))
         {
             result = node.getFValue() + "\n";
         }
         // Or simple comment /** */ delimitor TODO also remove pretty "*" 
         else if (node.getFValue().startsWith("/**"))
         {
-            result = node.getFValue().substring(3, node.getFValue().length()-2);
+            result = node.getFValue();
         }
         else
         {
