@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.15 2005-08-11 12:25:01 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.16 2005-08-18 11:40:10 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -6,6 +6,10 @@
  * ----------------------------------------------------------------------------
  * Creation date : Jul 7, 2005
  * Authors       : zdrey
+ * History : 
+ * 		- 18/08/2005 - the instances attribute now only contains the root elements.
+ * 		- 18/08/2005 - populating the runtimeobject is modified since containment handling
+ * 					   seems not to be adapted to model instance load.
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
@@ -13,6 +17,7 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -20,12 +25,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -42,6 +43,7 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
+import fr.irisa.triskell.kermeta.runtime.language.ReflectiveSequence;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FObject;
@@ -112,8 +114,7 @@ public class EMF2Runtime {
 		    KermetaRaisedException ex = new KermetaRaisedException(unit.getInstances(), unit.getInstances().getFactory().getMemory().getCurrentInterpreter());
 		    KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
 		    kunit.error.add(new KMUnitError("EMF persistence error : could not load the given model :\n"+ e, (FObject)unit.getInstances().getData().get("kcoreObject")));
-			throw ex; 
-			// TODO : kermeta persistence should also raise an exception when load unit failed!
+		    throw ex;
 		}
 	}
 	
@@ -145,16 +146,41 @@ public class EMF2Runtime {
 			unit.setRuntimeObjectsMap(visitor.runtime_objects_map);
 			
 			// Fill in the properties of the runtime objects that we created
-			Iterator rit = visitor.runtime_objects_map.values().iterator();
-			RuntimeObject ro = null;
+			Iterator rit = visitor.runtime_objects_map.keySet().iterator();
+			ArrayList new_runtime_objects = new ArrayList();
+			EObject eObject = null;
 			while (rit.hasNext())
-			{
-			    ro = (RuntimeObject)rit.next();
-			    visitor.populateRuntimeObject(ro, unit);
-			    fr.irisa.triskell.kermeta.runtime.basetypes.Collection.add(unit.getInstances(), ro);
+			{	
+			    eObject = (EObject)rit.next();
+			    RuntimeObject rObject = (RuntimeObject)visitor.runtime_objects_map.get(eObject);
+			    visitor.populateRuntimeObject(rObject, unit);
+			    //visitor.runtime_objects_map.put(eObject, rObject);
+			    new_runtime_objects.add(rObject);
+			    
+			}
+			// Now that RO are populated, we can add the instances
+			Iterator nit = visitor.runtime_objects_map.keySet().iterator();
+			//Iterator nit = new_runtime_objects.iterator();
+		    // only add the roots
+			while (nit.hasNext())
+			{ 	
+			    eObject = (EObject)nit.next();
+			    RuntimeObject rObject = (RuntimeObject)visitor.runtime_objects_map.get(eObject);
+//				set the container if needed 
+			    if (eObject.eContainer() != null)
+			    {
+			    	rObject.setContainer((RuntimeObject)visitor.runtime_objects_map.get(eObject.eContainer()));
+			    	System.err.println("Object with container :" + rObject );
+			    }
+			    else
+			    {
+			        System.err.println("Object with no container : " + rObject);
+			        rObject.setContainer(null);
+			        fr.irisa.triskell.kermeta.runtime.basetypes.Collection.add(unit.getInstances(), rObject);
+			    }
 			}
 		} catch (Throwable e) {
-			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
+		    KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
 		}
 		
 	}
@@ -164,18 +190,18 @@ public class EMF2Runtime {
 	 * - get the runtimeobject of the meta class it refers to 
 	 * -
 	 */
-	public RuntimeObject setRuntimeObjectForEObject(EMFRuntimeUnit unit, EObject object)
+	public RuntimeObject setRuntimeObjectForEObject(EMFRuntimeUnit unit, EObject eObject)
 	{
 	    RuntimeObject result = null;
 	    RuntimeMemory memory = unit.getInstances().getFactory().getMemory();
 	    // Define the RO-metaclass of the given EObject
-	    RuntimeObject ro_metaclass = this.getRuntimeObjectForMetaClass(object.eClass(), unit);
+	    RuntimeObject ro_metaclass = this.getRuntimeObjectForMetaClass(eObject.eClass(), unit);
 	    
 	    // Define the RO-instance of the given EObject :
 	    // - create a RO
 	    // - fill its properties hashtable
 	    result = new RuntimeObject(memory.getROFactory(), ro_metaclass);
-        result.getData().put("emfObject", object);
+        result.getData().put("emfObject", eObject);
         return result;
         
 	}
@@ -227,7 +253,6 @@ public class EMF2Runtime {
 			FProperty prop = (FProperty)props.get(i);
 			if (prop.getFName().equals(name)) p = prop;
 		}
-		
 	/*    p = unit.getInstances().getFactory().getMemory().
 	    			  getUnit().getPropertyByName(fclass.getFClassDefinition(), name);*/
 	    return p;
@@ -242,11 +267,6 @@ public class EMF2Runtime {
 	{
 	    EObject eObject = (EObject)rObject.getData().get("emfObject");
 	    
-	    // set the container if needed
-	    if (eObject.eContainer() != null) {
-	    	rObject.setContainer((RuntimeObject)this.runtime_objects_map.get(eObject.eContainer()));
-	    }
-	    
 	    // Get the FClass of the RuntimeObject to populate
 	    EClass c = eObject.eClass();
 	    FClass fc = (FClass)getMetaClassByName(unit.getEQualifiedName(c), unit);
@@ -255,7 +275,6 @@ public class EMF2Runtime {
 	    EList features = c.getEAllStructuralFeatures(); 
 	    // For each feature, get the value and add it to the properties hashtable
 	    Iterator it = features.iterator();
-	    
 	    while (it.hasNext())
 	    {
 	        EStructuralFeature feature = (EStructuralFeature)it.next();
@@ -271,15 +290,17 @@ public class EMF2Runtime {
 	        RuntimeObject rovalue = null;
 	        // A feature with multiplicity
 	        if (fvalue instanceof EList)
-	        {	
-	            // feature.eCrossReferences() <- eOpposite
-	            // rObject is the container of this property list!
+	        {
 	        	rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
+	        	
 	        }
 	        // Get the RO-repr of this EObject
 	        else if (fvalue instanceof EObject)
 	        {   
 	            rovalue = (RuntimeObject)this.runtime_objects_map.get(fvalue);
+	            rObject.getProperties().put(fname, rovalue);
+	            // FIXME the set method needs to be reviewed (for model instances?)
+	            //fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
 	        }
 	        // equiv : fvalue instanceof EString, Eblabla
 	        else if (EDataType.class.isInstance(etype))
@@ -294,10 +315,9 @@ public class EMF2Runtime {
 	        			rovalue = rObject.getFactory().getMemory().falseINSTANCE;
 	        		}
 	        	}
-	        	
 	        	// Integer
 	        	else if (fvalue instanceof Integer) {
-	        		rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(((Integer)fvalue).intValue(), rofactory);
+	        	    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(((Integer)fvalue).intValue(), rofactory);
 	        	}
 	        	
 	        	// String
@@ -306,17 +326,19 @@ public class EMF2Runtime {
 	        	}
 	        	else if (fvalue == null) 
 	        	{
-	        		rovalue = rObject.getFactory().getMemory().voidINSTANCE;
+	        	    rovalue = rObject.getFactory().getMemory().voidINSTANCE;
 	        	}
 	        	else // should never happen
 	        	{
 	        		System.err.println("NotImplemented custom Error : The type <"+etype+"> has not been handled yet."+fvalue);	
 	        		throw new KermetaRaisedException(rObject, rObject.getFactory().getMemory().getCurrentInterpreter());
 	        	}
+	        	fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
+	        	
 	        }
 	        else if (fvalue == null)
-	        {
-	            rovalue = rObject.getFactory().getMemory().voidINSTANCE;
+	        {    
+	            fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop,rObject.getFactory().getMemory().voidINSTANCE);
 	        }
 	        else // Enum?
 	        {
@@ -325,17 +347,9 @@ public class EMF2Runtime {
 	            throw new KermetaRaisedException(rObject, rObject.getFactory().getMemory().getCurrentInterpreter());
 	        }
 	        // If we instanciated a RuntimeObject value, we can set the properties for the object 
-	        //if (rovalue )
-	        if (rovalue != null)
-	        {
-	            //rObject.getProperties().put(fname, rovalue);
-	            fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
-	            if (fvalue != null)
-	                rovalue.getData().put("emfObject", fvalue);
-	        }	
-	        else
-	            rObject.getProperties().put(fname, rObject.getFactory().getMemory().voidINSTANCE);
-	    }
+	        if (fvalue != null)
+	            rovalue.getData().put("emfObject", fvalue);
+	    } // End of while
 	    // Find the value of the structural features and populate the properties.
 	}
 	
@@ -352,18 +366,30 @@ public class EMF2Runtime {
 	public RuntimeObject createRuntimeObjectForCollection(EList objects, FType typeParam, EMFRuntimeUnit unit, RuntimeObject rObject, RuntimeObject roprop)
 	{
 	    RuntimeObject result = fr.irisa.triskell.kermeta.runtime.language.Object.get(rObject, roprop);
+	    // We create one by default 
+	    if (Collection.getArrayList(result) == null)
+	    {	        result.getData().put("CollectionArrayList", new ArrayList());	    
+	    }
         RuntimeMemory memory = unit.getInstances().getFactory().getMemory();
 	    Iterator it = objects.iterator();
+	    int i = 0;
 	    // Transform the EObjects into RuntimeObject and add them in our collection
 	    while (it.hasNext())
 	    {
 	        EObject sfeature = (EObject)it.next();
 	        RuntimeObject rovalue = (RuntimeObject)this.runtime_objects_map.get(sfeature);
-	        ReflectiveCollection.add(result, rovalue);
+	        RuntimeObject ri = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, memory.getROFactory());
+	        /*ReflectiveSequence.addAt(result, ri, rovalue); i+=1;*/
+	        // FIXME : ReflectiveSequence addAt handle differently the containment
+	        // of ReflectiveCollection one add.
+	        // ReflectiveCollection.add(result, rovalue);
+	        Collection.add(result, rovalue);
 	    }
-	    
-	    // Add the "emfObject" property here or not? EList is not EObject, but we respect a kind of mapping...
-	    result.getData().put("emfObject", objects);
+	    rObject.getProperties().put(((RuntimeObject)roprop.getProperties().get("name")).getData().get("StringValue"), result);
+	    // FIXME : the set method handles the containment, but it seems to be not appropriated for 
+	    // model instances. Containment is observed even if we simply use Collection.add to add instances
+	    // since result is still a reflective collection.
+	    //fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, result);
 	    return result;
 	}
 
