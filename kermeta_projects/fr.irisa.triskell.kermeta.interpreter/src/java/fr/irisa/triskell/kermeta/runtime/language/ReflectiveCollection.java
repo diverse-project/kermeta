@@ -28,12 +28,16 @@ public class ReflectiveCollection {
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 	
+	/**
+	 *  A review is needed for this method
+	 * 
+	 */	
 	public static void add(RuntimeObject self, RuntimeObject param0, boolean handle_opposite) {
 		// add the new object
 		Collection.add(self, param0);
 		// set the new objects container if needed
 		if (isaContainer(self)) {
-		    
+		    // FIXME : We remove from self container an object that we just precedingly added??
 		    if (param0.getContainer() != null) {
 		        Object.removeObjectFromItsContainer(param0);
 		    }
