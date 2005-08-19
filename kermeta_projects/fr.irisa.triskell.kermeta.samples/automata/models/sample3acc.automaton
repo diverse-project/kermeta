@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<automaton:FiniteAutomaton xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:automaton="platform:/resource/automata/metamodels/automata.ecore" finalStateSet="//@stateSet.4" initialState="//@stateSet.0">
+  <stateSet name="A" arriving="//@transitionSet.8">
+    <going href="#//@transitionSet.0"/>
+  </stateSet>
+  <stateSet name="B" going="//@transitionSet.1 //@transitionSet.7">
+    <arriving href="#//@transitionSet.6"/>
+  </stateSet>
+  <stateSet name="C" arriving="//@transitionSet.0" going="//@transitionSet.2 //@transitionSet.11"/>
+  <stateSet name="D" arriving="//@transitionSet.1 //@transitionSet.2 //@transitionSet.3" going="//@transitionSet.4 //@transitionSet.12"/>
+  <stateSet name="E" arriving="//@transitionSet.7 //@transitionSet.9 //@transitionSet.12" going="//@transitionSet.3 //@transitionSet.8"/>
+  <stateSet name="F" arriving="//@transitionSet.10 //@transitionSet.11" going="//@transitionSet.5 //@transitionSet.10"/>
+  <stateSet name="G" arriving="//@transitionSet.4 //@transitionSet.5" going="//@transitionSet.6 //@transitionSet.9"/>
+  <transitionSet source="//@stateSet.0" target="//@stateSet.2" letter="1"/>
+  <transitionSet source="//@stateSet.1" target="//@stateSet.3" letter="1"/>
+  <transitionSet source="//@stateSet.2" target="//@stateSet.3" letter="1"/>
+  <transitionSet source="//@stateSet.4" target="//@stateSet.3" letter="1"/>
+  <transitionSet source="//@stateSet.3" target="//@stateSet.6" letter="1"/>
+  <transitionSet source="//@stateSet.5" target="//@stateSet.6" letter="1"/>
+  <transitionSet source="//@stateSet.6" target="//@stateSet.1" letter="1"/>
+  <transitionSet source="//@stateSet.1" target="//@stateSet.4" letter="0"/>
+  <transitionSet source="//@stateSet.4" target="//@stateSet.0" letter="0"/>
+  <transitionSet source="//@stateSet.6" target="//@stateSet.4" letter="0"/>
+  <transitionSet source="//@stateSet.5" target="//@stateSet.5" letter="0"/>
+  <transitionSet source="//@stateSet.2" target="//@stateSet.5" letter="0"/>
+  <transitionSet source="//@stateSet.3" target="//@stateSet.4" letter="0"/>
+</automaton:FiniteAutomaton>

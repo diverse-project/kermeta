@@ -1,0 +1,189 @@
+@mainClass "automaton::samples::Sampler"
+@mainOperation "main"
+
+package automaton::samples;
+
+require "../metamodels/automata.kmt"
+using automaton
+using kermeta::standard
+
+
+/**
+ * A set of examples to use the algorithms of determinization and minimization
+ * for Finite State Automata, implemented in ../transfo/
+*/
+class Sampler
+{
+	
+    operation main() : Void is do 
+        // TODO: implement 'main' operation
+    end
+    
+    /**
+     * This automaton : 
+     *   0,1
+     *  / \
+     *  \ /
+     *  s0 --- 0 ----- s1
+     *
+     * This is an undeterministic one
+    */
+    operation createSample1() : FiniteAutomaton is do
+    	var a : FiniteAutomaton  init FiniteAutomaton.new
+
+    	var s0 : State init State.new
+    	var s1 : State init State.new
+    	
+    	s0.name := "s0"
+    	s1.name := "s1"
+
+    	var tSet : Set<Transition> init Set<Transition>.new
+    	
+    	a.initialize(s1, true) // so that we have empty collections initialized
+    	// t010 -> from state 1 to state 2 with transition labelled 0
+    	var t010 : Transition init Transition.new
+    	t010.letter := "0"
+    	t010.source := s0
+    	t010.target := s1
+    	
+    	var t000 : Transition init Transition.new
+    	t000.letter := "0"
+    	t000.source := s0
+    	t000.target := s0
+    	
+    	var t001 : Transition init Transition.new
+    	t001.letter := "1"
+    	t001.source := s0
+    	t001.target := s0
+    	
+		// 	Define a set of transitions
+		a.transitionSet := Set<Transition>.new
+		a.transitionSet.add(t010)
+		a.transitionSet.add(t000)
+		a.transitionSet.add(t001)
+		
+		// Define completely our automaton
+		a.stateSet := Set<State>.new
+		a.stateSet.add(s0)
+		a.stateSet.add(s1)
+		
+		a.initialState := s0
+		a.finalStateSet.add(s1)
+		
+		result := a
+		// Define the determinist automata
+		var determinist_a : FiniteAutomaton init FiniteAutomaton.new
+		determinist_a.initialize(a.initialState, true)
+    	
+    end 
+    
+    operation createSample2() : FiniteAutomaton is do
+    	var a2 : FiniteAutomaton init FiniteAutomaton.new
+    	a2 := createSample1()
+    	//
+    	var s2 : State init State.new
+    	s2.name := "s2"
+    	var t020 : Transition init Transition.new
+    	t020.source := a2.stateSet.select { a | if (a!=void) then a.name.equals("s0") end}.one
+    	t020.target := s2
+    	t020.letter := "0"
+    	
+    	var t211 : Transition init Transition.new
+    	t211.source := s2
+    	t211.target := a2.stateSet.select{ a | a.name.equals("s1") }.one
+    	t020.letter := "1"
+    	
+    	a2.transitionSet.add(t020)
+    	a2.transitionSet.add(t211)
+    	a2.stateSet.add(s2)
+    	result := a2
+    	stdio.writeln("number of states in FSM 2 :"+ a2.stateSet.size.toString)
+    end
+    
+    operation createSampleM1() : FiniteAutomaton is do
+    
+	    var a2 : FiniteAutomaton init FiniteAutomaton.new
+		var s0 : State init State.new
+		var s1 : State init State.new
+		var s2 : State init State.new
+		var s3 : State init State.new
+		var s4 : State init State.new
+		var s5 : State init State.new
+
+		s0.name := "s0"
+		s1.name := "s1"
+		s2.name := "s2"
+		s3.name := "s3"
+		s4.name := "s4"
+		s5.name := "s5"
+		a2.initialState := s0
+		a2.stateSet.add(s0)
+		a2.stateSet.add(s1)
+		a2.stateSet.add(s2)
+		a2.stateSet.add(s3)
+		a2.stateSet.add(s4)
+		a2.stateSet.add(s5)
+		a2.transitionSet.add(createTransition(a2, s0, s1, "a"))
+		a2.transitionSet.add(createTransition(a2, s0, s2, "a"))
+		a2.transitionSet.add(createTransition(a2, s1, s3, "a"))
+		a2.transitionSet.add(createTransition(a2, s1, s3, "b"))
+		a2.transitionSet.add(createTransition(a2, s2, s4, "a"))
+		a2.transitionSet.add(createTransition(a2, s2, s4, "b"))
+		a2.transitionSet.add(createTransition(a2, s0, s5, "b"))    
+		
+		a2.finalStateSet.add(s3)
+		a2.finalStateSet.add(s4)
+		a2.finalStateSet.add(s5)
+		
+		result := a2
+    end
+    
+    operation createSampleM2() : FiniteAutomaton is do
+    
+  	    var a2 : FiniteAutomaton init FiniteAutomaton.new
+		var s0 : State init State.new
+		var s1 : State init State.new
+		var s2 : State init State.new
+		var s3 : State init State.new
+		var s4 : State init State.new
+		var s5 : State init State.new
+
+		s0.name := "s0"
+		s1.name := "s1"
+		s2.name := "s2"
+		s3.name := "s3"
+		s4.name := "s4"
+		s5.name := "s5"
+		a2.initialState := s0
+		a2.stateSet.add(s0)
+		a2.stateSet.add(s1)
+		a2.stateSet.add(s2)
+		a2.stateSet.add(s3)
+		a2.stateSet.add(s4)
+		a2.stateSet.add(s5)
+		a2.transitionSet.add(createTransition(a2, s0, s1, "c"))
+		a2.transitionSet.add(createTransition(a2, s0, s2, "a"))
+		a2.transitionSet.add(createTransition(a2, s1, s3, "a"))
+		a2.transitionSet.add(createTransition(a2, s1, s3, "b"))
+		a2.transitionSet.add(createTransition(a2, s2, s4, "a"))
+		a2.transitionSet.add(createTransition(a2, s2, s4, "b"))
+		a2.transitionSet.add(createTransition(a2, s0, s5, "b"))    
+		
+		a2.finalStateSet.add(s3)
+		a2.finalStateSet.add(s4)
+		a2.finalStateSet.add(s5)
+		
+		result := a2
+	end
+    
+    
+    operation createTransition(automaton : FiniteAutomaton, s : State, t : State, l : String) : Transition is do
+    	result := Transition.new
+    	result.source := s
+    	result.target := t
+    	result.letter := l
+    end
+    
+    
+    
+}

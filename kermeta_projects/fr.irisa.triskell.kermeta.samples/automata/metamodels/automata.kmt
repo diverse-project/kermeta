@@ -1,0 +1,236 @@
+/**
+ * Automata
+ *
+ * The following code defines a simple meta model for automata (eq. FSM), and will prepare the following work :
+ *   - implementation of the algorithm of determinisation
+ *	 - implementation of the algorithm of minimisation
+ *   - how to "compose" and/or chain those two transformation 
+ *
+ 
+ 	Questions : 
+ 	
+ 	- should the determinist-property appear in the meta model? (as a derived property for example)
+ 	
+ 	- 
+  
+ *
+ *
+ */
+package automaton;
+
+require kermeta
+require "ecore.kmt" 
+using kermeta::standard
+using kermeta::persistence 
+/*********************************
+ * SIMPLE STATE MACHINE METAMODEL
+ *********************************/
+ 
+/**
+ * A Finite Automaton : 
+ *   A = ( E, S, T, s0, F ) where :
+ *    E -> The alphabet (labels of the transition
+ *    S -> A finite set of the available states
+ *    T -> A set of transitions rules ( si (t) sj )
+ *	  s0 -> The initial state
+ *    F ->  a subset of S called the set of final states
+ 
+ * Question to clarify :
+ *   - should we allow empty word as a transition label?
+*/
+class FiniteAutomaton
+{
+	attribute stateSet : set State[0..*]//Set<State> //#owningFA
+	reference initialState : State 
+	reference finalStateSet : set State[0..*]
+	attribute transitionSet : set Transition[0..*]
+
+	property readonly alphabet : Set<String>
+		getter is do
+			result := self.seqToSet( self.transitionSet.collect { e | e.letter } )
+		end
+
+	operation conformityChecker() : Boolean is do
+		result := transitionSet.detect { t | 
+			stdio.writeln("transitions : " + t.source.toString + ", " + t.target.toString)
+			not (stateSet.contains(t.source) and stateSet.contains(t.target))}==void
+		
+	end
+	
+	/** Initialize a new automaton from an existing one 
+	 *  param :
+	 *    initState : the initial state
+	 *    initComb
+	 */
+	operation initialize(p_state : State, isInitComb : Boolean) is do
+		var initState : State init p_state.copy
+		stateSet.add(initState)
+		initialState := initState 
+		if (isInitComb == true) then initialState.combination := Set<State>.new end 
+	end
+	
+	operation prettyprint() is do
+		stdio.writeln("states : " + stateSet.size.toString)
+		stateSet.each { e | stdio.writeln(">"+e.name + "(" + e.toString +")") }
+		stdio.writeln("transitions : "+ transitionSet.size.toString)
+		transitionSet.each { e | stdio.writeln(e.source.name + " ="+e.letter+ "=> " +e.target.name + " | | " + e.source.toString + ", " + e.target.toString)} 
+		stdio.writeln("final states : "+ finalStateSet.size.toString)
+		finalStateSet.each { e | stdio.writeln(e.name  + " | " + e.toString) }
+	end
+	
+	operation dotprint() is do
+       stdio.writeln("digraph finite_state_machine {")
+       stdio.writeln("  rankdir=LR;")
+       stdio.writeln("  node [shape = doublecircle];")
+       finalStateSet.each{ s | stdio.write("  " + s.name + " ")}
+       stdio.writeln(";")
+       stdio.writeln("  node [shape = circle];")
+       transitionSet.each{ t |
+           stdio.writeln(    "  " + t.source.name + " -> " + t.target.name +
+                           " [ label=\"" + t.letter + "\" ];")
+       }
+       stdio.writeln("}")
+	end
+	
+
+	
+	operation seqToSet<G>( iseq : Sequence<G> ) : Set<G> is do
+    	result := Set<G>.new
+		from var it : Iterator<G> init iseq.iterator
+		until it.isOff
+		loop
+			var n : G init it.next
+			if (n.toString != "<void>" and not result.contains(n)) then
+				result.add( n )
+			end
+		end 
+    end
+    
+}
+
+class State
+{
+//	reference combination : set State[0..*] // -> defined by a reflective collection
+	reference combination : Set<State> //
+	// how to model a "combination" of states in the determinisation algo?
+	reference name : String
+	reference arriving : Transition[0..*]#target
+	reference going : Transition[0..*]#source
+
+	// As we sometimes work with copies of states, we need a special eq.test	
+/*	method equals(s : State) : Boolean from Object is do
+		if void.equals(s) then result := false else
+		result := (s.name == self.name) end
+	end*/
+	
+	/**
+	 * Create a new state from self state.
+	 */
+	method copy() : State is do
+		result := State.new
+		result.name := String.clone(name)
+		result.combination := Set<State>.new
+	end
+	
+}
+
+class Transition
+{
+	reference source : State#going
+	reference target : State#arriving 
+	reference letter : String
+	
+	// Create a "completely" new transition (no share of states)
+	operation initialize( s : State, t : State, l : String) is do
+		source := s
+		target := t
+		letter := l
+	end
+}
+
+
+/** A pair of States, as a relation of equivalence */
+class Pair
+{
+	reference left : State
+	reference right : State	
+}
+
+/** 
+ * A set of helper methods that should ease the determinisation 
+ * We need :
+ * 
+ */
+
+class AutomatonHelper
+{	
+	operation seqToSet<G>( iseq : Sequence<G> ) : Set<G> is do
+    	result := Set<G>.new
+		from var it : Iterator<G> init iseq.iterator
+		until it.isOff
+		loop
+			var n : G init it.next
+			if (n.toString != "<void>" and not result.contains(n)) then
+				result.add( n )
+			end
+		end 
+    end
+    
+    operation join( str_seq : Collection<String>) : String is do
+    	result := ""
+		from var it : Iterator<String> init str_seq.iterator
+		until it.isOff
+		loop
+			result.append(it.next)
+		end
+    end
+    
+    operation createPair(p : State, q : State) : Pair is do
+    	result := Pair.new
+    	result.left := p.copy
+    	result.right := q.copy
+    end
+	
+	/** 
+	 * Serialization resources
+	 */
+	     
+    operation saveEMFAutomaton(repository : EMFRepository, a : FiniteAutomaton, uri : String, mmuri : String) : FiniteAutomaton is do
+		if a.conformityChecker == true then 
+	    	var resource : EMFResource init repository.createResource(uri , mmuri)
+	    	resource.instances.add(a)
+	    	resource.save()
+	    else
+	    	stdio.writeln("I'm sorry, I'm afraid that your automaton is not valid; please check the following rules : ")
+	    	stdio.writeln(" - Do the transitions source and target states belong to the set of states of the automaton?")
+	    end
+    end
+    
+     operation loadEMFAutomaton(repository : EMFRepository, uri : String, mmuri : String) : FiniteAutomaton is do
+    	var resource : EMFResource init repository.createResource(uri , mmuri)
+    	resource.instances
+    	resource.load
+    	var instances : Set<Object> init resource.instances
+    	result ?= instances.detect { e | FiniteAutomaton.isInstance(e)}
+    end
+    
+    /**
+     * Interactive commands
+     */
+    operation ask_dotprint() is do
+    	ask_emfmodel("Entrez un modele EMF de l'automate à 'dot-printer' : ").dotprint
+    end
+    
+    operation ask_emfmodel(prompt : String) : FiniteAutomaton is do
+    	var file : String init stdio.read(prompt)
+    	var r : EMFRepository init EMFRepository.new
+    	result := loadEMFAutomaton(r, file, "../metamodels/automata.ecore")
+    end
+	 
+}
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+package automaton;
+
+require "ecore.kmt"
+class FiniteAutomaton
+{
+	attribute stateSet : State[0..*]
+	attribute transitionSet : Transition[0..*]
+	property alphabet : ecore::EString[0..*]
+		getter is do
+			//TODO: implement getter for derived property alphabet
+		end
+		setter is do
+			//TODO: implement setter for derived property alphabet
+		end
+	reference finalStateSet : State[1..*]
+	reference initialState : State[1..1]
+}
+class State
+{
+	attribute name : ecore::EString
+	reference combination : State[0..*]
+	reference arriving : Transition[0..*]#target
+	reference going : Transition[0..*]#source
+}
+class Transition
+{
+	reference source : State[1..1]#going
+	reference target : State[1..1]#arriving
+	attribute letter : ecore::EString
+}
