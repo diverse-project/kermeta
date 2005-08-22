@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.16 2005-08-18 11:40:10 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.17 2005-08-22 08:28:03 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -170,11 +170,9 @@ public class EMF2Runtime {
 			    if (eObject.eContainer() != null)
 			    {
 			    	rObject.setContainer((RuntimeObject)visitor.runtime_objects_map.get(eObject.eContainer()));
-			    	System.err.println("Object with container :" + rObject );
 			    }
 			    else
 			    {
-			        System.err.println("Object with no container : " + rObject);
 			        rObject.setContainer(null);
 			        fr.irisa.triskell.kermeta.runtime.basetypes.Collection.add(unit.getInstances(), rObject);
 			    }
@@ -205,6 +203,40 @@ public class EMF2Runtime {
         return result;
         
 	}
+	
+    public RuntimeObject setRuntimeObjectForPrimitiveTypeValue(EMFRuntimeUnit unit, Object fvalue)
+    {
+        RuntimeObjectFactory rofactory = unit.getInstances().getFactory();
+        RuntimeObject rovalue = rofactory.getMemory().voidINSTANCE;
+//      Boolean
+    	if (fvalue instanceof Boolean) {
+    		if (((Boolean)fvalue).booleanValue()) {
+    			rovalue = rofactory.getMemory().trueINSTANCE;
+    		}
+    		else 
+    		{
+    			rovalue = rofactory.getMemory().falseINSTANCE;
+    		}
+    	}
+    	// Integer
+    	else if (fvalue instanceof Integer) {
+    	    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(((Integer)fvalue).intValue(), rofactory);
+    	}
+    	// String
+    	else if (fvalue instanceof String) {
+    	    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create((String)fvalue, rofactory);
+    	}
+    	else if (fvalue == null) 
+    	{
+    	    rovalue = rofactory.getMemory().voidINSTANCE;
+    	}
+    	else // should never happen
+    	{
+    		System.err.println("NotImplemented custom Error : The type of <"+fvalue+"> has not been handled yet."+fvalue);	
+    		throw new KermetaRaisedException(rovalue, rofactory.getMemory().getCurrentInterpreter());
+    	}
+    	return rovalue;
+    }
 	
 	/**
 	 * Return the FClass corresponding to the given name. Looks inside the loaded
@@ -305,34 +337,7 @@ public class EMF2Runtime {
 	        // equiv : fvalue instanceof EString, Eblabla
 	        else if (EDataType.class.isInstance(etype))
 	        {
-	        	// Boolean
-	        	if (fvalue instanceof Boolean) {
-	        		if (((Boolean)fvalue).booleanValue()) {
-	        			rovalue = rObject.getFactory().getMemory().trueINSTANCE;
-	        		}
-	        		else 
-	        		{
-	        			rovalue = rObject.getFactory().getMemory().falseINSTANCE;
-	        		}
-	        	}
-	        	// Integer
-	        	else if (fvalue instanceof Integer) {
-	        	    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(((Integer)fvalue).intValue(), rofactory);
-	        	}
-	        	
-	        	// String
-	        	else if (fvalue instanceof String) {
-	        	    rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create((String)fvalue, rofactory);
-	        	}
-	        	else if (fvalue == null) 
-	        	{
-	        	    rovalue = rObject.getFactory().getMemory().voidINSTANCE;
-	        	}
-	        	else // should never happen
-	        	{
-	        		System.err.println("NotImplemented custom Error : The type <"+etype+"> has not been handled yet."+fvalue);	
-	        		throw new KermetaRaisedException(rObject, rObject.getFactory().getMemory().getCurrentInterpreter());
-	        	}
+	        	rovalue = setRuntimeObjectForPrimitiveTypeValue(unit, fvalue);
 	        	fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
 	        	
 	        }
@@ -376,14 +381,20 @@ public class EMF2Runtime {
 	    // Transform the EObjects into RuntimeObject and add them in our collection
 	    while (it.hasNext())
 	    {
-	        EObject sfeature = (EObject)it.next();
-	        RuntimeObject rovalue = (RuntimeObject)this.runtime_objects_map.get(sfeature);
-	        RuntimeObject ri = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, memory.getROFactory());
-	        /*ReflectiveSequence.addAt(result, ri, rovalue); i+=1;*/
-	        // FIXME : ReflectiveSequence addAt handle differently the containment
-	        // of ReflectiveCollection one add.
+	        Object sfeature = it.next();
+	        RuntimeObject rovalue;
+	        if (sfeature instanceof EObject)
+	            rovalue = (RuntimeObject)this.runtime_objects_map.get(sfeature);
+	        else // it is a Datatype
+	            rovalue = setRuntimeObjectForPrimitiveTypeValue(unit, sfeature);
+	            
+	        // RuntimeObject ri = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, memory.getROFactory());
+	        // ReflectiveSequence.addAt(result, ri, rovalue); i+=1;
+	        // FIXME : ReflectiveSequence addAt and ReflectiveCollection add 
+	        // handle differently the containment of the added element.
 	        // ReflectiveCollection.add(result, rovalue);
-	        Collection.add(result, rovalue);
+	        rovalue.getData().put("emfObject", sfeature);
+	        Collection.add(result, rovalue); i+=1;
 	    }
 	    rObject.getProperties().put(((RuntimeObject)roprop.getProperties().get("name")).getData().get("StringValue"), result);
 	    // FIXME : the set method handles the containment, but it seems to be not appropriated for 

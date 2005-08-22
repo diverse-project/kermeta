@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.10 2005-08-18 11:40:10 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.11 2005-08-22 08:28:03 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : GPL
@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
@@ -41,6 +42,10 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
+import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
  * 
@@ -234,14 +239,9 @@ public class Runtime2EMF {
             if (feature != null)
             {
                 Object property_eObject = getOrCreatePropertyFromRuntimeObject(property, feature.getEType());
-                //          If property is a simple EObject 
-                if ( property_eObject instanceof EObject)
-                {
-                    //System.err.println("   feature EObject -> " + feature.getEType() );
-                    eObject.eSet(feature, property_eObject);
-                }
+                
                 // If it is a collection of Objects
-                else if (property_eObject instanceof EList)
+                if (property_eObject instanceof EList)
                 {
                     // System.err.println("   feature EList -> " + feature.getEType() + ((EList)property_eObject).size() + "> "+prop_name);
                     Iterator p_it = ((ArrayList)property.getData().get("CollectionArrayList")).iterator();
@@ -253,7 +253,7 @@ public class Runtime2EMF {
                         Object p_o = getOrCreateObjectFromRuntimeObject(r_o, feature.getEType());
                         if (p_o!=null)
                         {	
-                            // System.err.println("po : "+p_o);
+                            if (((EObject)p_o).eContainer()!=null)
                             ((EList)eObject.eGet(feature)).add((EObject)p_o);
                             //System.err.println("Feature add successfull");
                             // We need to update RuntimeObject in order to update the associated EObject : 
@@ -262,7 +262,15 @@ public class Runtime2EMF {
                             r_o.getData().put("emfObject", p_o);
                         }
                     }
-                }// FIXME : rather put a test like " property instanceof java.lang.String"
+                }
+//              If property is a simple EObject 
+                else if ( property_eObject instanceof EObject)
+                {
+                    //System.err.println("   feature type -> " + feature.getEType() +
+                    //        "\n" +     "   eobject type -> " + ((EObject)property_eObject).eClass());
+                    eObject.eSet(feature, property_eObject);
+                }
+                // FIXME : rather put a test like " property instanceof java.lang.String"
                 else if (feature.getEType() instanceof EDataType)
                 {
                     property_eObject = getPrimitiveTypeValueFromRuntimeObject(property);
@@ -287,10 +295,11 @@ public class Runtime2EMF {
     protected Object getOrCreateObjectFromRuntimeObject(RuntimeObject rObject, EClassifier classifier)
     {
         Object result = null;
+        // emfObject exists if and only if the rObject was not created by the kerdeveloper
         if (rObject.getData().containsKey("emfObject"))
-        {
+        {   
             result = rObject.getData().get("emfObject");
-        }
+        } // WrappedException if we do not test thiss
         else
             result = createEObjectFromRuntimeObject(rObject, classifier);
         return result;
@@ -304,11 +313,13 @@ public class Runtime2EMF {
     protected Object getOrCreatePropertyFromRuntimeObject(RuntimeObject rProperty, EClassifier classifier)
     {
         Object result = null;
-        if (rProperty.getData().containsKey("emfObject"))
-            result = rProperty.getData().get("emfObject");
+        // System.err.println("a property : " + rProperty + isaCollection(rProperty));
+        // emfObject is set if and only if the instance was not "manually" create by the kerdeveloper
+        //if (rProperty.getData().containsKey("emfObject")) {
+        //    result = rProperty.getData().get("emfObject");}
         // a EList?
-        else if (rProperty.getData().containsKey("CollectionArrayList"))
-            result = createEListFromRuntimeObject(rProperty);
+        if (isaCollection(rProperty)) {
+            result = createEListFromRuntimeObject(rProperty);}
         // a EDataType?
         else if (getPrimitiveTypeValueFromRuntimeObject(rProperty) !=null)
             result = getPrimitiveTypeValueFromRuntimeObject(rProperty);
@@ -324,7 +335,8 @@ public class Runtime2EMF {
      */
     private EList createEListFromRuntimeObject(RuntimeObject property) {
         
-        return new BasicEList((java.util.Collection)property.getData().get("CollectionArrayList"));
+        java.util.Collection arraylist = Collection.getArrayList(property);
+        return new BasicEList(arraylist);
     }
 
 
@@ -345,8 +357,6 @@ public class Runtime2EMF {
                 metaclass.getFClassDefinition());
         
         EClass eclass = null;
-        // Find in mm_resource the eClass named "kqname"?
-        // FIXME : ugly unneeded cast
         if (classifier == null)
         {
             eclass = this.getEClassFromFQualifiedName(kqname, this.metaModelResource, unit);
@@ -354,7 +364,7 @@ public class Runtime2EMF {
         else
         {
             eclass = (EClass)classifier;
-            System.err.println("eclass for kqname : " + eclass + "("+ kqname +")");
+            //System.err.println("eclass for kqname : " + eclass + "("+ kqname +")");
         }
         if (eclass != null) // If we did not find the Eclass (it means that kqname is the name of a primitive type)
         {
@@ -412,6 +422,28 @@ public class Runtime2EMF {
     	    if (robject.getData().containsKey(s_primitive_types[i]))
     	        return robject.getData().get(s_primitive_types[i]);
     	return null;
+    }
+    
+    /**
+     * Returns true if the given RuntimeObject is a collection (Collection, ReflectiveCollection,
+     * ReflectiveSequence), false otherwise.
+     * We use this method since Collections that are void do not have a "CollectionArrayList"
+     * entry in their associated data hashtable (see RuntimeObject doc), so we can't test with this
+     * @param robject the object to test
+     * @return true if robject type is Collection, false otherwise
+     */
+    public boolean isaCollection(RuntimeObject robject)
+    {
+        FClass c = (FClass)robject.getMetaclass().getData().get("kcoreObject");
+        ArrayList supertypes = InheritanceSearch.allSuperTypes(c);
+        Iterator it = supertypes.iterator();
+        while (it.hasNext())
+        {
+            FClass next = (FClass)it.next();
+            String name = robject.getFactory().getMemory().getUnit().getQualifiedName(next.getFClassDefinition());
+            if (name.equals("kermeta::standard::Collection")) return true;
+        }
+        return false;
     }
     
     /**
