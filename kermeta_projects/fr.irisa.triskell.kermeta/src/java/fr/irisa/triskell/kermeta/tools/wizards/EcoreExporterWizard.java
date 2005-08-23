@@ -1,4 +1,4 @@
-/* $Id: EcoreExporterWizard.java,v 1.3 2005-07-27 14:52:41 dvojtise Exp $
+/* $Id: EcoreExporterWizard.java,v 1.4 2005-08-23 12:19:30 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -19,7 +19,9 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2EcoreExporter;
@@ -87,7 +89,11 @@ public class EcoreExporterWizard extends UnitExporterWizard{
 		//		 create Ecore structure
 	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
-	    Resource resource = resource_set.createResource(URI.createFileURI(ifile.getFullPath().toString()));
+	    URI u = URI.createURI(ifile.getFullPath().toString());
+    	KermetaUnit.internalLog.info("URI created for model to save : "+u);
+    	URIConverter c = new URIConverterImpl();
+    	u = c.normalize(u);
+	    Resource resource = resource_set.createResource(u);
 	    
 	    KM2EcoreExporter exporter;
 	    if(this.tracePage.enableFileDestinationButton.getSelection())

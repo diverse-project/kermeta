@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.5 2005-08-04 08:56:59 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.6 2005-08-23 12:19:30 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -20,7 +20,9 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -236,9 +238,10 @@ public class UnitExporterWizard extends Wizard{
 		//	 create Trace structure
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("traceability",new XMIResourceFactoryImpl());
 		trace_resource_set = new ResourceSetImpl();
-		
+		URI u = URI.createURI(traceFile.getFullPath().toString());
+    	u = new URIConverterImpl().normalize(u);
 		//traceFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(traceFile.getFullPath().removeFileExtension().addFileExtension("traceability"));				
-		trace_resource = trace_resource_set.createResource(URI.createFileURI(traceFile.getFullPath().toString()));
+		trace_resource = trace_resource_set.createResource(u);
 		tracer = new Tracer(trace_resource);
 	}
 
