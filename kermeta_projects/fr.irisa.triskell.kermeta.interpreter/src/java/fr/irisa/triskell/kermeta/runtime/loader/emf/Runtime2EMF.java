@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.11 2005-08-22 08:28:03 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.12 2005-08-23 11:05:58 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : GPL
@@ -95,7 +95,6 @@ public class Runtime2EMF {
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
 	    r2e.resource = resource_set.createResource(u);
-	    //System.err.println("URI to save : " + URI.createFileURI(file_path).toString());
 	    // Update all the instance of the EMF Model
 	    r2e.updateEMFModel(r2e.resource);
 	    
@@ -104,10 +103,14 @@ public class Runtime2EMF {
 	        resource.save(out, null); */
 	        r2e.resource.save(null);
 		} catch (IOException e) {
+		    Throwable t = e.getCause();
+		    if (t instanceof Resource.IOWrappedException)
+		    {
+		        Resource.IOWrappedException we = (Resource.IOWrappedException)t;
+		        we.getMessage();
+		    }
 		    e.printStackTrace();
-			throw new Error(e);
 		}
-        
     }
     
     /** The root objects (with no container) are stored in this list */
@@ -142,7 +145,7 @@ public class Runtime2EMF {
             findEMFObjectsForRuntimeObjectsForRoot(ro, null);
         }
         
-        // now we have the complete list of runtime objects (findEMF... fills updatedRuntimeObjects)
+        // now we have the complete list of runtime objects (findEMFObj.. fills updatedRuntimeObjects)
         // We can update the properties of each of those runtime objects
         it = updatedRuntimeObjects.iterator();
         while(it.hasNext())
@@ -248,29 +251,23 @@ public class Runtime2EMF {
                     // For each feature of the collection of features
                     while (p_it.hasNext())
                     {
-                        RuntimeObject r_o =(RuntimeObject)p_it.next(); 
-                        //Object p_o = r_o.getData().get("emfObject");
+                        RuntimeObject r_o =(RuntimeObject)p_it.next();
                         Object p_o = getOrCreateObjectFromRuntimeObject(r_o, feature.getEType());
                         if (p_o!=null)
                         {	
-                            if (((EObject)p_o).eContainer()!=null)
                             ((EList)eObject.eGet(feature)).add((EObject)p_o);
-                            //System.err.println("Feature add successfull");
-                            // We need to update RuntimeObject in order to update the associated EObject : 
-                            // thus, RuntimeObject "knows" now what object to update
-                            //if (!r_o.getData().containsKey("emfObject"))
+                            // Update the property for next objects to be updated that need its value
                             r_o.getData().put("emfObject", p_o);
                         }
                     }
                 }
-//              If property is a simple EObject 
+                // If property is a simple EObject 
                 else if ( property_eObject instanceof EObject)
                 {
                     //System.err.println("   feature type -> " + feature.getEType() +
                     //        "\n" +     "   eobject type -> " + ((EObject)property_eObject).eClass());
                     eObject.eSet(feature, property_eObject);
                 }
-                // FIXME : rather put a test like " property instanceof java.lang.String"
                 else if (feature.getEType() instanceof EDataType)
                 {
                     property_eObject = getPrimitiveTypeValueFromRuntimeObject(property);
@@ -313,12 +310,11 @@ public class Runtime2EMF {
     protected Object getOrCreatePropertyFromRuntimeObject(RuntimeObject rProperty, EClassifier classifier)
     {
         Object result = null;
-        // System.err.println("a property : " + rProperty + isaCollection(rProperty));
         // emfObject is set if and only if the instance was not "manually" create by the kerdeveloper
-        //if (rProperty.getData().containsKey("emfObject")) {
-        //    result = rProperty.getData().get("emfObject");}
+        if (rProperty.getData().containsKey("emfObject")) {
+            result = rProperty.getData().get("emfObject");}
         // a EList?
-        if (isaCollection(rProperty)) {
+        else if (isaCollection(rProperty)) {
             result = createEListFromRuntimeObject(rProperty);}
         // a EDataType?
         else if (getPrimitiveTypeValueFromRuntimeObject(rProperty) !=null)
@@ -334,7 +330,6 @@ public class Runtime2EMF {
      * @return
      */
     private EList createEListFromRuntimeObject(RuntimeObject property) {
-        
         java.util.Collection arraylist = Collection.getArrayList(property);
         return new BasicEList(arraylist);
     }

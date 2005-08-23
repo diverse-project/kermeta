@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.17 2005-08-22 08:28:03 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.18 2005-08-23 11:05:58 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -95,7 +95,8 @@ public class EMF2Runtime {
 	    KermetaUnit kunit =  unit.getInstances().getFactory().getMemory().getUnit();
 		try {
 	//		 load ressource
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
+			//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
 			ResourceSet resource_set = new ResourceSetImpl();
 	//		Resource resource = resource_set.getResource(URI.createURI(unit.getUri()), true);
 			String unit_uri = kunit.getUri();
