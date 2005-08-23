@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.12 2005-07-13 10:05:13 dvojtise Exp $
+/* $Id: KermetaInterpreter.java,v 1.13 2005-08-23 18:44:20 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -6,7 +6,6 @@
  * ----------------------------------------------------------------------------
  * Creation date : Mar 14, 2005
  * Authors : 
- * 		zdrey 		<zdrey@irisa.fr>
  * 		jpthibau	<jpthibau@irisa.fr>
  * 		dvojtise	<dvojtise@irisa.fr>
  * Description :  	
@@ -168,12 +167,12 @@ public class KermetaInterpreter {
 	    String emessage = "";
 	    // check that it exists and that it is a class
 	    if (td == null || !(td instanceof FClassDefinition)) {
-	        emessage = "Entry type '" + class_def_qname + "' not found or not valid";
+	        emessage = "Entry @mainClass '" + class_def_qname + "' not found or not valid";
 	        internalLog.error(emessage);	        
 	    }
 	    // FIXME: to allow parametric types as entry types
 	    else if (((FClassDefinition)td).getFTypeParameter().size() != 0) {
-	        emessage = "Invalid entry type '" + class_def_qname + "', it has type parameters.";
+	        emessage = "Invalid entry @mainClass '" + class_def_qname + "', it has type parameters.";
 	        internalLog.error(emessage);
 	    }
 	    
@@ -186,8 +185,8 @@ public class KermetaInterpreter {
 	    
 	        if (co == null) 
 	        {
-	            emessage = "Cannot find entry operation '" + 
-	        	operation_name + "' in type '" + class_def_qname+"'";
+	            emessage = "Cannot find entry @mainOperation '" + 
+	        	operation_name + "' in @mainClass '" + class_def_qname+"'";
 	        internalLog.error(emessage);
 	        }
 	    }

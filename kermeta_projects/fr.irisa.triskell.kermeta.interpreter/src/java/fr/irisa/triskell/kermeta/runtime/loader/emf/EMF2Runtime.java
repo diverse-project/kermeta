@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.18 2005-08-23 11:05:58 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.19 2005-08-23 18:44:20 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -276,21 +276,6 @@ public class EMF2Runtime {
         return ftype; 
 	}
 	
-	protected FProperty getPropertyByName(String name, FClass fclass, EMFRuntimeUnit unit)
-	{
-	    RuntimeMemory memory = unit.getInstances().getFactory().getMemory();
-	    FProperty p = null;
-	    FClassDefinition c = fclass.getFClassDefinition();
-	    ArrayList props = memory.getUnit().getAllProperties(c);
-		for (int i=0; i<props.size(); i++) {
-			FProperty prop = (FProperty)props.get(i);
-			if (prop.getFName().equals(name)) p = prop;
-		}
-	/*    p = unit.getInstances().getFactory().getMemory().
-	    			  getUnit().getPropertyByName(fclass.getFClassDefinition(), name);*/
-	    return p;
-	}
-	
 	/**
 	 * Add the properties as RuntimeObjects to the object rObject
 	 * @param rObject
@@ -315,7 +300,7 @@ public class EMF2Runtime {
 	        String  fname  = feature.getName();
 	        EClassifier etype = feature.getEType();
 	        FType ftype = getMetaClassByName(unit.getEQualifiedName(etype), unit);
-	        FProperty fprop = getPropertyByName(fname, fc, unit);
+	        FProperty fprop = rofactory.getMemory().getUnit().findPropertyByName(fc.getFClassDefinition(), fname);
 	        RuntimeObject roprop = rofactory.getMemory().getRuntimeObjectForFObject(fprop);
 	        
 	        // Eget can return an elist of features

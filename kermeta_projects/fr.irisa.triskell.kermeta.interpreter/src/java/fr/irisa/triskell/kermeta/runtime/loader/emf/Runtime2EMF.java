@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.12 2005-08-23 11:05:58 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.13 2005-08-23 18:44:20 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : GPL
@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -428,17 +429,13 @@ public class Runtime2EMF {
      * @return true if robject type is Collection, false otherwise
      */
     public boolean isaCollection(RuntimeObject robject)
-    {
+    {	
+        boolean b = false;
+        KermetaUnit kunit = robject.getFactory().getMemory().getUnit(); 
+        FClassDefinition coll_cd = (FClassDefinition)kunit.getTypeDefinitionByName("kermeta::standard::Collection");  
         FClass c = (FClass)robject.getMetaclass().getData().get("kcoreObject");
-        ArrayList supertypes = InheritanceSearch.allSuperTypes(c);
-        Iterator it = supertypes.iterator();
-        while (it.hasNext())
-        {
-            FClass next = (FClass)it.next();
-            String name = robject.getFactory().getMemory().getUnit().getQualifiedName(next.getFClassDefinition());
-            if (name.equals("kermeta::standard::Collection")) return true;
-        }
-        return false;
+        if (kunit.isSuperClass(coll_cd, c.getFClassDefinition())) b = true;
+        return b;
     }
     
     /**
