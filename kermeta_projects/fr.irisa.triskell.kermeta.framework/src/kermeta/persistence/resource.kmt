@@ -3,7 +3,7 @@ package kermeta::persistence;
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: resource.kmt,v 1.7 2005-08-11 12:23:48 zdrey Exp $
+ * $Id: resource.kmt,v 1.8 2005-08-23 11:19:07 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -182,7 +182,6 @@ class EMFResource inherits Resource
 	*/
 	operation isInTypeDefSet(tparams : Set<kermeta::reflection::TypeDefinition>, new_instance : Object) : Boolean is do
 		result := false
-		var it : Iterator<kermeta::reflection::TypeDefinition> init tparams.iterator
 		from var it : Iterator<kermeta::reflection::TypeDefinition> init tparams.iterator
 		until (it.isOff or result == true)
 		loop
