@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.35 2005-08-04 08:58:58 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.36 2005-08-23 18:46:09 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -193,7 +193,7 @@ public abstract class KermetaUnit {
 	
 	public void storeTrace(FObject model_element, Object node) {
 		traceM2T.put(model_element, node);
-		traceT2M.put(node, model_element);		
+		traceT2M.put(node, model_element);
 		
 		if(tracer !=  null)			
 		{	
@@ -207,6 +207,36 @@ public abstract class KermetaUnit {
 					traceDefaultShortDescription + astNode.getTypeName() );
 			
 		}
+	}
+	
+	/**
+	 * Helper method that looks into all the imported unit to find the researched 
+	 * model element
+	 * @param object the model element (FObject) that we want to find
+	 * @return the KermetaUnit that contains the expected model element
+	 * FIXME : not optimized at all, since getNodeByModelElement is finally called
+	 * (duplicated hashtable access)
+	 * wherever this method is used and whenever it returns a unit. (return result, uri?)
+	 */
+	public KermetaUnit findUnitForModelElement(FObject object)
+	{
+	    Object result = getNodeByModelElement(object);
+	    KermetaUnit unit = this ;
+	    if (result != null) return unit;
+	    visited = true;
+		Iterator it = importedUnits.iterator();
+		while(it.hasNext() && result == null) {
+			KermetaUnit u = (KermetaUnit)it.next();
+			if (!u.visited)
+			{
+			    result = u.getNodeByModelElement(object);			    
+			    if (result==null) u.findUnitForModelElement(object);
+			    else unit = u;
+			}
+			
+		}
+		visited = false;
+		return unit;
 	}
 
 	public FObject getModelElementByNode(Object node) {
@@ -537,9 +567,7 @@ public abstract class KermetaUnit {
 	        FOperation op = (FOperation)it.next();
 	        if (op.getFName().equals(name)) return op;
 	    }
-	    
 	    return null;
-	    
 	}
 	
 	/**
@@ -557,6 +585,12 @@ public abstract class KermetaUnit {
 		return null;
 	}
 	
+	/**
+	 * Return true if supercls is a super class of cls
+	 * @param supercls the Super class to which we compare cls
+	 * @param cls the class to compare to the super class
+	 * @return
+	 */
 	public boolean isSuperClass(FClassDefinition supercls, FClassDefinition cls) {
 		EList stypes = cls.getFSuperType();
 		for(int i=0; i< stypes.size(); i++) {

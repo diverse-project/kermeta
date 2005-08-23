@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.18 2005-08-16 09:12:11 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.19 2005-08-23 18:43:45 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -111,8 +111,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		RuntimeObject result=null;
 		RuntimeObjectFactory roFactory = memory.getROFactory(); 
 		
-		 FClass self_type = (FClass)ro_target.getMetaclass().getData().get("kcoreObject");
-	      
+		FClass self_type = (FClass)ro_target.getMetaclass().getData().get("kcoreObject");
 		
 		CallableOperation op = new CallableOperation(foperation, self_type);
 		
@@ -194,7 +193,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    // find the property
 	    CallableProperty cproperty = target.getPropertyByName(propertyName);
 	    
-	    // DEBUG : This should never happend
+	    // DEBUG : This should never happen
 	    if (cproperty == null) {
 	        internalLog.error("INTERPRETER INTERNAL ERROR : unable to find property " + propertyName + " in type " + target);
 	        throw new Error("INTERPRETER INTERNAL ERROR : unable to find property " + propertyName + " in type " + target);
@@ -576,9 +575,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    // The result returned by the visit
 	    RuntimeObject result = null;
 	    
-	    // ThenBody should be specified more precisely (as a FBlock?)
-        //EList then_block = ((FBlock)node.getFThenBody()).getFStatement();
-        //EList else_block = ((FBlock)node.getFElseBody()).getFStatement();
         FExpression cond = node.getFCondition();
 
         // Object should be a Boolean
@@ -590,8 +586,8 @@ public class ExpressionInterpreter extends KermetaVisitor {
             cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
         else
         {
-            // TODO : throw an InterpreterException 
-        	System.err.println("Conditional : evaluation of the condition does not match Boolean type.");
+            RuntimeObject ex = memory.getROFactory().createObjectFromClassName("kermeta::exceptions::RuntimeError");
+            raiseKermetaException(ex, node);
         }
         
         // if cond is true
@@ -741,7 +737,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    if (node.getFStaticOperation() == null && node.getFStaticProperty() == null) {
 	        internalLog.error("INTERPRETER INTERNAL ERROR : the program does not seem to be correctly type checked : " + node.getFName());
 	        throw new Error("INTERPRETER INTERNAL ERROR : the program does not seem to be correctly type checked : " + node.getFName());
-
 	    }
 	    
 	    
@@ -751,17 +746,16 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	        
 //			 Check that target is not void
 		    if (operation == null && ro_target == memory.voidINSTANCE) {
-		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target. TODO: raise an exception");
+		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target.");
 		        RuntimeObject ex = memory.getROFactory().createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
-		        raiseKermetaException(ex);
-		        
+		        // From Java->Generate the Kermeta action "raise"
+		        raiseKermetaException(ex, node);
 		    }
 		    
 //		  This should never happend is the type checker has checked the program
 			if (operation == null) {
 			    String msg = "INTERPRETER INTERNAL ERROR : unable to find a feature : "
-				    + "\noperation : '"+node.getFName()+"' not found for an object of kind : "+ target_type;       
-				    
+				    + "\noperation : '"+node.getFName()+"' not found for an object of kind : "+ target_type;
 			    internalLog.error(msg);
 		        throw new Error(msg);
 			}
@@ -785,7 +779,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 //			 Check that target is not void
 		    if (property == null && ro_target == memory.voidINSTANCE) {
 		        internalLog.info(" >> INTERPRETER REPORTS Call of '"+ node.getFName() +"' property on a void target. TODO: raise an exception ");
-		        throw new KermetaRaisedException(ro_target, this);
+		        raiseKermetaException(ro_target, node);
 		    }
 		    
 //		  This should never happend is the type checker has checked the program
@@ -843,6 +837,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 		{
 		    paramtypes[i] = RuntimeObject.class;
 		    paramsArray[i++] = (RuntimeObject)it.next();
+		    // TODO : test if the RuntimeObject is null or not
 		}
 		
 		Object result = null;
@@ -893,9 +888,14 @@ public class ExpressionInterpreter extends KermetaVisitor {
 			            // this Exception was due to a KermetaVisitorError create a new one with the precedent content
 			            throw new KermetaVisitorError("InvocationTargetException caused by AssertionError: "+cause.getMessage(), cause);
 			        }
+			        else if (cause instanceof KermetaRaisedException)
+			        {
+			            throw (KermetaRaisedException)cause;
+			        }
 			        else
 			        {
 			            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName , e2);
+			            internalLog.error("The cause : "  + cause.getClass());
 			            
 						throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
 			        }
@@ -972,7 +972,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
         // TODO : improve this to allow exception to be rescued.
         RuntimeObject exception = (RuntimeObject)this.accept(node.getFExpression());
         
-        raiseKermetaException(exception);
+        raiseKermetaException(exception, node.getFExpression());
         
         // This is dead code
         return null;
@@ -1104,13 +1104,11 @@ public class ExpressionInterpreter extends KermetaVisitor {
         return result;
     }
 
-    protected void raiseKermetaException(RuntimeObject obj) {
-    	
+    public void raiseKermetaException(RuntimeObject obj, FExpression node) {
     	// FIXME: Set the stack trace
-        
         // FIXME: Set a default message
-        
-        throw new KermetaRaisedException(obj, this);	
+        RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
+        throw new KermetaRaisedException(obj, rnode, this);	
     }
 
     protected void displayHashtable(Hashtable hash)
