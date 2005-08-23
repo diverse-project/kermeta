@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter_pass1.java,v 1.5 2005-07-27 14:46:29 dvojtise Exp $
+/* $Id: KM2EcoreExporter_pass1.java,v 1.6 2005-08-23 12:18:36 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -96,7 +96,8 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 		newEPackage.setName(current_pname);
 		ecoreResource.getContents().add(newEPackage);
 		kmt2ecoremapping.put(p,newEPackage);
-		ecoreExporter.tracer.addMappingTrace(p,newEPackage,p.getFName() + " is mapped to " + newEPackage.getName());
+		if (ecoreExporter.tracer != null)
+		    ecoreExporter.tracer.addMappingTrace(p,newEPackage,p.getFName() + " is mapped to " + newEPackage.getName());
 		
 
 		Iterator it = p.getFNestedPackage().iterator();
@@ -133,7 +134,8 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 			newEClass.setName(current_pname);
 			ecoreResource.getContents().add(newEClass);
 			kmt2ecoremapping.put(node,newEClass);
-			ecoreExporter.tracer.addMappingTrace(node,newEClass,node.getFName() + " is mapped to " + newEClass.getName());
+			if (ecoreExporter.tracer != null) // null if user did not want a serializ. of trace
+			    ecoreExporter.tracer.addMappingTrace(node,newEClass,node.getFName() + " is mapped to " + newEClass.getName());
 			
 			
 			// do as much as possible right now
