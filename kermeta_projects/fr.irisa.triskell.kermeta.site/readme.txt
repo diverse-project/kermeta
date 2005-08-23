@@ -15,13 +15,25 @@ Deploying a new version of Kermeta
  generate model, edit, editor (the traceability.genmodel should be ok)
  
 - Kermeta
-	- you must change or check all the	version number in the plugin.xml, feature.xml and site.xml files
+
+	1. you must change or check all the	version number in the plugin.xml, feature.xml and site.xml files
 	 (including the documentation and the raceability)
-	-in the fr.irisa.triskell.kermeta project update the file about.properties
 	
-	- use the site.xml   pde/builder   to compiler everything
-	- deploy it locally in your current configuration using a local site update (not the remote one !)
- 	and test the version
+	2. In the fr.irisa.triskell.kermeta project update the file about.properties
+    
+    3. in fr.irisa.triskell.kermeta.feature project, go to Content tab of feature.xml, and modify the content
+      to get the last versions of the plugins linked to this feature 
+    
+	4. use the site.xml   pde/builder   to compile everything
+	
+	5. deploy it locally in your current configuration using a local site update (not the remote one !)
+ 	and test the version : 
+ 		- create a "update" directory somewhere, 
+ 		- copy, from fr.irisa.triskell.kermeta.site project : plugins directory, features directory, and site.xml
+ 	
+ 	6. Special : it seems like you need to add the directory, in Build tab of your plugin,
+ 	in the "Binary Build" , that contains the icons that are used in the plugin, otherwise
+ 	in the deployed version it wont be added.
  	
 
  if ok 

@@ -4,11 +4,12 @@
    <description url="http://www.irisa.fr/triskell/softwares/kermeta/update">
       
    </description>
-   <feature url="features/fr.irisa.triskell.kermeta_0.0.13.jar" id="fr.irisa.triskell.kermeta" version="0.0.13">
+   <feature url="features/fr.irisa.triskell.kermeta_0.0.14.jar" id="fr.irisa.triskell.kermeta" version="0.0.14">
       <category name="Triskell"/>
    </feature>
    <archive path="v0.0.9" url="v0.0.9"/>
    <archive path="v0.0.10" url="v0.0.10"/>
+   <archive path="v0.0.13" url="v0.0.13"/>
    <category-def name="Triskell" label="Triskell">
       <description>
          provided by Triskell team
