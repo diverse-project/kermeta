@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.19 2005-06-09 17:48:19 ffleurey Exp $
+// $Id: primitive_types.kmt,v 1.20 2005-08-24 17:29:37 zdrey Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -180,21 +180,27 @@ class Integer inherits Numeric
 	 * returns self + other
 	 */
 	operation plus(other : Integer) : Integer is do
+		if other == void then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.plus(self,other)
+        end
 	end
 	
 	/**
 	 * returns self - other
 	 */
 	operation minus(other : Integer) : Integer is do
+		if other == void then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.minus(self,other)
+        end
 	end
 	
 	/**
 	 * returns self * other
 	 */
 	operation mult(other : Integer) : Integer is do
+		if other == void then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.times(self,other)
+        end
 	end
 	
 	/**
@@ -202,7 +208,9 @@ class Integer inherits Numeric
 	 */
 	operation div(other : Integer) : Integer is do
 		if other == 0 then raise DivisionByZero.new end
+		if other == void then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.div(self,other)
+        end
 	end
 	
 	/**
@@ -286,28 +294,36 @@ class Real inherits Numeric
 	 * returns self + other
 	 */
 	operation plus(other : Numeric) : Integer is do
+		if other == void then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.plus(other)
+        end
 	end
 	
 	/**
 	 * returns self - other
 	 */
 	operation minus(other : Numeric) : Integer is do
+		if other == void then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.minus(other)
+        end
 	end
 	
 	/**
 	 * returns self * other
 	 */
 	operation mult(other : Numeric) : Integer is do
+		if other == void then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.times(other)
+        end
 	end
 	
 	/**
 	 * returns self / other
 	 */
 	operation div(other : Numeric) : Integer is do
+		if other == void then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.div(other)
+        end
 	end
 	
 	/**
@@ -338,7 +354,9 @@ class Character inherits ValueType, Comparable
 	 * Comparaison
 	 */
 	method compareTo(other : Object) : Integer is do
+		if other == void then raise CallOnVoidTarget.new else	
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Character.compareTo(self,other)
+        end
 	end
 
 	method equals(other : Object) : Boolean is do
@@ -364,7 +382,9 @@ class String inherits ValueType, Comparable
 	 * Comparaison
 	 */
 	method compareTo(other : Object) : Integer is do
+		if other == void then raise CallOnVoidTarget.new else		
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self,other)
+        end
 	end
 	
 	method equals(other : Object) : Boolean is do
@@ -379,14 +399,18 @@ class String inherits ValueType, Comparable
 	 * returns a new string self + other
 	 */
 	operation plus(other : String) : String is do
+		if other == void then raise CallOnVoidTarget.new else
 		result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.plus(self,other)
+        end
 	end
 	
 	/**
 	 * Appends other at the end of self
 	 */
 	operation append(other : String) : Void is do
+		if other == void then raise CallOnVoidTarget.new else
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self,other)
+		end
 	end
 	
 	/**
