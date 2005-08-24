@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.7 2005-08-09 15:15:05 zdrey Exp $
+/* $Id: OperationCallFrame.java,v 1.8 2005-08-24 17:27:52 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : OperationCallFrame.java
 * License : GPL
@@ -16,6 +16,7 @@ import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FParameter;
 import fr.irisa.triskell.kermeta.structure.FProperty;
@@ -51,6 +52,8 @@ public class OperationCallFrame extends CallFrame {
     /** the value of the "value" variable in the setter of the derived property */
     private RuntimeObject callValueResult;
     
+    private FCallExpression expression;
+    
     /**
      * @param pSelf
      * @param pContext
@@ -62,6 +65,7 @@ public class OperationCallFrame extends CallFrame {
         if (pCallable instanceof CallableOperation)
         {
             this.operation = ((CallableOperation)pCallable).getOperation();
+            this.expression = expression;
             typeParameters = TypeVariableEnforcer.getTypeVariableBinding(((CallableOperation)pCallable).getFclass());
             
             if (operation.getFTypeParameter().size() > 0) {
@@ -141,5 +145,11 @@ public class OperationCallFrame extends CallFrame {
     
     public Hashtable getTypeParameters() {
         return typeParameters;
+    }
+    
+    
+    public FObject getExpression() {
+        System.err.println("get expression");
+        return expression;
     }
 }

@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.11 2005-08-09 08:37:47 zdrey Exp $
+/* $Id: CallFrame.java,v 1.12 2005-08-24 17:27:52 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -13,6 +13,7 @@ import java.util.Hashtable;
 import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 
 /**
@@ -101,5 +102,12 @@ public abstract class CallFrame {
     public abstract FOperation getOperation();
     
     public abstract Hashtable getTypeParameters();
+
+    /**
+     * @return
+     */
+    public FObject getExpression() {
+        return null;
+    }
     
 }

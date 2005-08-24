@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.19 2005-08-23 18:43:45 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.20 2005-08-24 17:27:52 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -59,6 +59,7 @@ import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
@@ -85,7 +86,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
     protected InterpreterContext interpreterContext;
     /** The memory */
     protected RuntimeMemory memory;
-
     
     /**
      * Constructor
@@ -470,8 +470,13 @@ public class ExpressionInterpreter extends KermetaVisitor {
         }
 
         // It is a simple variable call
-        if (node.getFParameters().size() == 0) {
+        if (node.getFParameters().size() == 0)
+        {
             result = var.getRuntimeObject();
+            // We add additional information in order to have a better handle of
+            // errors --> FIXME : it perhaps pollute the memory not very smartly...
+            //result.getData().put(" ");
+            
         }
         // it is a call to a lambda expression
         else {
@@ -953,12 +958,6 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	    // Get the qualified name of this class
 	    String qname = memory.getUnit().getQualifiedName(node);
 	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
-	    
-	    //
-	    
-	    
-	    //node.getFOwnedOperation().
-	    // Set the attribute self_object of current frame, so that we can manipulate it
 	    return result;
 	}
 	
@@ -971,8 +970,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
     public Object visit(FRaise node) {
         // TODO : improve this to allow exception to be rescued.
         RuntimeObject exception = (RuntimeObject)this.accept(node.getFExpression());
-        
-        raiseKermetaException(exception, node.getFExpression());
+        raiseKermetaException(exception, interpreterContext.peekCallFrame().getExpression());
         
         // This is dead code
         return null;
@@ -1104,7 +1102,13 @@ public class ExpressionInterpreter extends KermetaVisitor {
         return result;
     }
 
-    public void raiseKermetaException(RuntimeObject obj, FExpression node) {
+    /**
+     * 
+     * @param obj the runtimeObject that is raised. Should always be an instance of
+     * a kermeta::exceptions::Exception.
+     * @param node the node that is wrong. Usually, it is an FExpression, but not mandatory
+     */
+    public void raiseKermetaException(RuntimeObject obj, FObject node) {
     	// FIXME: Set the stack trace
         // FIXME: Set a default message
         RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
