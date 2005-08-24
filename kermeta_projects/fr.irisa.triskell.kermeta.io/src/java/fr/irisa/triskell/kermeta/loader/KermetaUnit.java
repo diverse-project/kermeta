@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.36 2005-08-23 18:46:09 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.37 2005-08-24 17:33:13 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -236,7 +236,10 @@ public abstract class KermetaUnit {
 			
 		}
 		visited = false;
-		return unit;
+		if (result != null)
+		    return unit;
+		else
+		    return null;
 	}
 
 	public FObject getModelElementByNode(Object node) {
