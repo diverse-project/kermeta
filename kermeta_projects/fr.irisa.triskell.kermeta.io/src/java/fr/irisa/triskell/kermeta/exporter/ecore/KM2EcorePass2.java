@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter_pass2.java,v 1.4 2005-07-20 07:30:39 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.1 2005-08-25 12:12:27 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -50,7 +50,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 /**
  * Exports KM or KMT to Ecore.
  */
-public class KM2EcoreExporter_pass2 extends KermetaVisitor{
+public class KM2EcorePass2 extends KermetaVisitor{
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass2");
 	protected ArrayList usings = new ArrayList();
@@ -59,7 +59,7 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 	public	FPackage root_p;
 	protected String current_pname;
 	protected TextTabs loggerTabs =  new TextTabs("   ","");
-	protected KM2EcoreExporter ecoreExporter;
+	protected KM2Ecore ecoreExporter;
 	
 	// the resource to populate
 	protected Resource ecoreResource = null;
@@ -70,7 +70,7 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 	/**
 	 * @param resource : the resource to populate
 	 */
-	public KM2EcoreExporter_pass2(Resource resource, Hashtable mapping, KM2EcoreExporter anEcoreExporter) {
+	public KM2EcorePass2(Resource resource, Hashtable mapping, KM2Ecore anEcoreExporter) {
 		ecoreResource = resource;
 		kmt2ecoremapping = mapping;	
 		ecoreExporter = anEcoreExporter;
@@ -122,7 +122,7 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 			if (tv.getFSupertype() != null) typeParameterString += " : " + new KM2KMTPrettyPrinter().accept(tv.getFSupertype());
 			ecoreExporter.addAnnotation( 
 					newEClass,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_TYPEPARAMETER,
+					KM2Ecore.KMT2ECORE_ANNOTATION_TYPEPARAMETER,
 					tv.getFName(),
 					typeParameterString,
 					null);						
@@ -171,8 +171,8 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 		{
 			ecoreExporter.addAnnotation( 
 					newEOperation,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_SUPEROPERATION,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS,
+					KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION,
+					KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS,
 					KMTHelper.getQualifiedName(node.getFSuperOperation().getFOwningClass()),
 					(EObject)accept(node.getFSuperOperation()));
 			
@@ -184,8 +184,8 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 			EClassifier exceptionEClassifier =  (EClassifier)accept(anException);
 			ecoreExporter.addAnnotation( 
 					newEOperation,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS,
+					KM2Ecore.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION,
+					KM2Ecore.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS,
 					KMTHelper.getQualifiedName(anException.getFClassDefinition()),
 					exceptionEClassifier);
 		}
@@ -200,7 +200,7 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 			if (tv.getFSupertype() != null) typeParameterString += " : " + new KM2KMTPrettyPrinter().accept(tv.getFSupertype());
 			ecoreExporter.addAnnotation( 
 					newEOperation,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_TYPEPARAMETER,
+					KM2Ecore.KMT2ECORE_ANNOTATION_TYPEPARAMETER,
 					tv.getFName(),
 					typeParameterString,
 					null);						
@@ -242,9 +242,9 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 			// only to retreive some references to String or Integer  
 			String type_name = KMTHelper.getQualifiedName(node.getFClassDefinition());
 			  
-			if (KM2EcoreExporter.primitive_types_mapping.containsKey(type_name)) {
+			if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
 				internalLog.debug(loggerTabs + "Creating DataType: "+ node.getFClassDefinition().getFName());
-				type_name = (String)KM2EcoreExporter.primitive_types_mapping.get(type_name);
+				type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
 				// we need to create a new datatype for it and connect it to the root package
 				newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
 				newEClassifier.setName(node.getFClassDefinition().getFName());
@@ -310,8 +310,8 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 			//			 DerivedProperty
 			ecoreExporter.addAnnotation( 
 						newEStructuralFeature,
-						KM2EcoreExporter.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-						KM2EcoreExporter.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISDERIVED,
+						KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
+						KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISDERIVED,
 						new Boolean(true).toString(),
 						null);
 			String getterBody;
@@ -325,14 +325,14 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 			}
 			ecoreExporter.addAnnotation( 
 					newEStructuralFeature,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY,
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY,
 					getterBody,
 					null);
 			ecoreExporter.addAnnotation( 
 					newEStructuralFeature,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY,
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY,
 					new Boolean(node.isFIsReadOnly()).toString(),
 					null);
 			if (! node.isFIsReadOnly()) {
@@ -347,8 +347,8 @@ public class KM2EcoreExporter_pass2 extends KermetaVisitor{
 				}
 				ecoreExporter.addAnnotation( 
 						newEStructuralFeature,
-						KM2EcoreExporter.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-						KM2EcoreExporter.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY,
+						KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
+						KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY,
 						setterBody,
 						null);
 			}

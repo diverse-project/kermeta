@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter_pass1.java,v 1.6 2005-08-23 12:18:36 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.1 2005-08-25 12:12:27 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -45,7 +45,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 /**
  * Exports KM or KMT to Ecore.
  */
-public class KM2EcoreExporter_pass1 extends KermetaVisitor{
+public class KM2EcorePass1 extends KermetaVisitor{
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass1");
 	protected ArrayList usings = new ArrayList();
@@ -54,7 +54,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 	public	FPackage root_p;
 	protected String current_pname;
 	protected TextTabs loggerTabs =  new TextTabs("   ","");
-	protected KM2EcoreExporter ecoreExporter;
+	protected KM2Ecore ecoreExporter;
 	
 	// the resource to populate
 	protected Resource ecoreResource = null;
@@ -66,7 +66,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 	 * @param resource : the resource to populate
 	 * @param mapping : Hastable containing the newly created object mapping
 	 */
-	public KM2EcoreExporter_pass1(Resource resource, Hashtable mapping, KM2EcoreExporter anEcoreExporter) {
+	public KM2EcorePass1(Resource resource, Hashtable mapping, KM2Ecore anEcoreExporter) {
 		ecoreResource = resource;
 		kmt2ecoremapping = mapping;
 		ecoreExporter = anEcoreExporter;
@@ -205,8 +205,8 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 			Boolean b = new Boolean(node.isFIsAbstract());
 			ecoreExporter.addAnnotation( 
 					newEOperation,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS,
+					KM2Ecore.KMT2ECORE_ANNOTATION,
+					KM2Ecore.KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS,
 					b.toString(),
 					null);	
 		}
@@ -216,8 +216,8 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 			String bodyString = (String)new KM2KMTPrettyPrinter().accept(node.getFBody());
 			ecoreExporter.addAnnotation( 
 					newEOperation,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION,
-					KM2EcoreExporter.KMT2ECORE_ANNOTATION_BODY_DETAILS,
+					KM2Ecore.KMT2ECORE_ANNOTATION,
+					KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS,
 					bodyString,
 					null);	
 		}
@@ -339,7 +339,7 @@ public class KM2EcoreExporter_pass1 extends KermetaVisitor{
 		loggerTabs.increment();
 		
 		newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-		newEAnnotation.setSource(KM2EcoreExporter.KMT2ECORE_ANNOTATION); // TODO put this string in a constant
+		newEAnnotation.setSource(KM2Ecore.KMT2ECORE_ANNOTATION); // TODO put this string in a constant
 		newEAnnotation.getDetails().put(current_pname, node.getFValue());
 		ecoreResource.getContents().add(newEAnnotation);
 		kmt2ecoremapping.put(node,newEAnnotation);

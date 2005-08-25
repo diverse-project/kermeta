@@ -1,4 +1,4 @@
-/* $Id: KM2EcoreExporter.java,v 1.7 2005-07-27 14:46:29 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.1 2005-08-25 12:12:27 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -43,7 +43,7 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  * - TypeParameters: are stored in an annotation named KerMeta.TypeParameters
  * - Derived property
  */
-public class KM2EcoreExporter {
+public class KM2Ecore {
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore");
 	protected ArrayList usings = new ArrayList();
@@ -75,15 +75,15 @@ public class KM2EcoreExporter {
     	primitive_types_mapping.put("kermeta::standard::Object",	"Object");
     }
 	
-    public final static String KMT2ECORE_ANNOTATION = "KerMeta";
-    public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION = "KerMeta.SuperOperations";
+    public final static String KMT2ECORE_ANNOTATION = "kermeta";
+    public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION = "kermeta.SuperOperations";
     public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS = "SuperOperation";
-    public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION = "KerMeta.RaisedExceptions";
+    public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION = "kermeta.RaisedExceptions";
     public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS = "RaisedException";
     public final static String KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS = "isAbstract";
-    public final static String KMT2ECORE_ANNOTATION_BODY_DETAILS = "Body";
-    public final static String KMT2ECORE_ANNOTATION_TYPEPARAMETER = "KerMeta.TypeParameters";
-    public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY = "KerMeta.DerivedProperty";
+    public final static String KMT2ECORE_ANNOTATION_BODY_DETAILS = "body";
+    public final static String KMT2ECORE_ANNOTATION_TYPEPARAMETER = "kermeta.TypeParameters";
+    public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY = "kermeta.DerivedProperty";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISDERIVED = "isDerived";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY = "isReadOnly";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY = "getter.body";
@@ -92,11 +92,11 @@ public class KM2EcoreExporter {
 	/**
 	 * @param resource : the resource to populate
 	 */
-	public KM2EcoreExporter(Resource resource) {
+	public KM2Ecore(Resource resource) {
 		ecoreResource = resource;	
 	}
 	
-	public KM2EcoreExporter(Resource resource, Resource traceresource) {
+	public KM2Ecore(Resource resource, Resource traceresource) {
 		ecoreResource = resource;	
 		traceResource = traceresource;
 		tracer = new Tracer(traceResource);
@@ -111,8 +111,8 @@ public class KM2EcoreExporter {
 	 */
 	public Object exportPackage(FPackage root_package) {
 		root_pname = KMTHelper.getQualifiedName(root_package);
-		KM2EcoreExporter_pass1 pass1 =  new KM2EcoreExporter_pass1(ecoreResource, kmt2ecoremapping, this);
-		KM2EcoreExporter_pass2 pass2 =  new KM2EcoreExporter_pass2(ecoreResource, kmt2ecoremapping, this);
+		KM2EcorePass1 pass1 =  new KM2EcorePass1(ecoreResource, kmt2ecoremapping, this);
+		KM2EcorePass2 pass2 =  new KM2EcorePass2(ecoreResource, kmt2ecoremapping, this);
 		Object result =  pass1.exportPackage(root_package);
 		pass2.exportPackage(root_package);		
 		return result;
