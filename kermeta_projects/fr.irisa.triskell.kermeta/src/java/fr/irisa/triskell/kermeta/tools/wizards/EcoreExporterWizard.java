@@ -1,4 +1,4 @@
-/* $Id: EcoreExporterWizard.java,v 1.4 2005-08-23 12:19:30 zdrey Exp $
+/* $Id: EcoreExporterWizard.java,v 1.5 2005-08-25 12:04:57 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import fr.irisa.triskell.kermeta.exporter.ecore.KM2EcoreExporter;
+import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -95,15 +95,15 @@ public class EcoreExporterWizard extends UnitExporterWizard{
     	u = c.normalize(u);
 	    Resource resource = resource_set.createResource(u);
 	    
-	    KM2EcoreExporter exporter;
+	    KM2Ecore exporter;
 	    if(this.tracePage.enableFileDestinationButton.getSelection())
 	    {
 	    	if (trace_resource == null) initTraces();
-	    	exporter = new KM2EcoreExporter(resource, trace_resource);
+	    	exporter = new KM2Ecore(resource, trace_resource);
 	    }
 	    else
 	    {
-	    	exporter = new KM2EcoreExporter(resource);
+	    	exporter = new KM2Ecore(resource);
 	    }
 	
 		exporter.exportPackage(builder.rootPackage);
