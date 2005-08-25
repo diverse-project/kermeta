@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.5 2005-08-04 09:08:33 zdrey Exp $
+/* $Id: ECore2Kermeta.java,v 1.6 2005-08-25 12:14:18 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
 * License : EPL
@@ -10,13 +10,16 @@
 
 package fr.irisa.triskell.kermeta.loader.ecore;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -29,15 +32,20 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
+import fr.irisa.triskell.kermeta.ast.FExpression;
+import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KMUnitWarning;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
+import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
@@ -107,6 +115,15 @@ public class ECore2Kermeta extends EcoreVisitor {
 					visitor.accept(obj);
 				}
 			}
+			// visit the EAnnotations of the metamodel
+			Iterator ops = visitor.operations.entrySet().iterator();
+			while(ops.hasNext()) {
+			    Map.Entry op_entry = (Map.Entry)ops.next();
+			    EOperation eop = (EOperation)op_entry.getKey();
+			    visitor.current_op = (FOperation)op_entry.getValue();
+			    visitor.accept(eop.getEAnnotation(KM2Ecore.KMT2ECORE_ANNOTATION));
+			}
+			
 		} catch (Throwable e) {
 			unit.error.add(new KMUnitError("Error loading ECore model " + unit.getUri() + " : " + e, null));
 			KermetaUnit.internalLog.error("Error loading ECore model " + unit.getUri() + " : " + e, e);
@@ -322,8 +339,9 @@ public class ECore2Kermeta extends EcoreVisitor {
     /**
      * mapping between EOpretaions and FOperations
      * Used to set superOperations
+     * new : used to access faster to operations for annotation injection
      */
-    //private Hashtable operations = new Hashtable();
+    protected Hashtable operations = new Hashtable();
     
     public Object visit(EOperation node) {
         // FIXME : handle super operations
@@ -353,7 +371,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         		}
         	}
         	// Quickfix to avoid two operations with the same name
-        	if (this.isMethodNameOverlapSafe)
+        	if (isMethodNameOverlapSafe)
         	{
         		FOperation op = unit.getOperationByName(current_classdef, current_op.getFName());        	
 	        	int i = 2;
@@ -364,7 +382,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         	}
         }
         current_op.setFOwningClass(current_classdef);
-     
+        operations.put(node, current_op);
         acceptList(node.getEParameters());
     	
         return current_op;
@@ -447,6 +465,22 @@ public class ECore2Kermeta extends EcoreVisitor {
         getCurrentPackage().getFOwnedTypeDefinition().add(ptype);
         unit.typeDefs.put(getQualifiedName(node), ptype);
         return ptype;
+    }
+    
+    /**
+     * annotation.getSource() => "kermeta" if the ann. is intended to be owned by kermeta code
+     * annotation.getDetails() => hashtable, with { "body" : <body_content> } for body operations
+     */
+    public Object visit(EAnnotation node)
+    {	
+        String body = "";
+    	if (node.getDetails().containsKey(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS))
+    	{	
+    	    body = (String)node.getDetails().get(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS);
+    	    // Parse and inject
+    	    this.current_op.setFBody(ExpressionParser.parse(unit, body));
+    	}
+    	return body;
     }
     
     protected static Hashtable primitive_types_mapping;
