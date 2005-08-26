@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.2 2005-07-27 14:50:33 dvojtise Exp $
+/* $Id: DestFileWizardPage.java,v 1.3 2005-08-26 15:52:50 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -54,11 +54,12 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.ContainerGenerator;
 import org.eclipse.ui.help.WorkbenchHelp;
-import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.ide.IHelpContextIds;
 import org.eclipse.ui.internal.ide.dialogs.CreateLinkedResourceGroup;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
+
+import fr.irisa.triskell.kermeta.KermetaMessages;
 
 /**
  * Standard main page for a wizard that point to a destination file resource.
@@ -116,6 +117,18 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		setPageComplete(false);
 		this.currentSelection = selection;
 	}
+	
+	// FIXME : Temporary static strings, since we used to use 
+	// IDEWorkbenchMessages.getString which is not available anymore.
+	public static final String NEW_FILE_MSG = KermetaMessages.getString("Kermeta.NEWFILE");
+    private static final String FILE_CREATION_ERROR = KermetaMessages.getString("Kermeta.CREATION_PB");
+    private static final String HIDE_ADVANCED_MSG = KermetaMessages.getString("Kermeta.HIDE_ADVANCED");
+    private static final String SHOW_ADVANCED_MSG = KermetaMessages.getString("Kermeta.SHOW_ADVANCED");
+    private static final String INTERNAL_ERROR_MSG = KermetaMessages.getString("Kermeta.INT_ERR");
+    private static final String INTERNAL_ERROR_TITLE = KermetaMessages.getString("Kermeta.CREATION_PB");
+    protected static final String FILE_CREATION_PROGRESS_MSG = KermetaMessages.getString("Kermeta.NEWFILE_PROGRESS");
+	
+	
 	/**
 	 * Creates the widget for advanced options.
 	 *  
@@ -135,7 +148,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 	
 			advancedButton = new Button(linkedResourceParent, SWT.PUSH);
 			advancedButton.setFont(linkedResourceParent.getFont());
-			advancedButton.setText(IDEWorkbenchMessages.getString("showAdvanced")); //$NON-NLS-1$
+			advancedButton.setText(SHOW_ADVANCED_MSG);
 			GridData data = setButtonLayoutData(advancedButton);
 			data.horizontalAlignment = GridData.BEGINNING;
 			advancedButton.setLayoutData(data);
@@ -171,7 +184,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		
 	
 		// resource and container group
-		resourceGroup = new ResourceAndContainerGroup(topLevel, this, getNewFileLabel(), IDEWorkbenchMessages.getString("WizardNewFileCreationPage.file"), false, SIZING_CONTAINER_GROUP_HEIGHT); //$NON-NLS-1$
+		resourceGroup = new ResourceAndContainerGroup(topLevel, this, getNewFileLabel(), NEW_FILE_MSG, false, SIZING_CONTAINER_GROUP_HEIGHT); //$NON-NLS-1$
 		resourceGroup.setAllowExistingResources(false);
 		initialPopulateContainerNameField();
 		createFileExistsBehaviorControls(topLevel);
@@ -330,7 +343,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 				InterruptedException
 			{
 				try {
-					monitor.beginTask(IDEWorkbenchMessages.getString("WizardNewFileCreationPage.progress"), 2000); //$NON-NLS-1$
+					monitor.beginTask(FILE_CREATION_PROGRESS_MSG, 2000); //$NON-NLS-1$
 					ContainerGenerator generator = new ContainerGenerator(containerPath);
 					generator.generateContainer(new SubProgressMonitor(monitor, 1000));
 					createFile(newFileHandle,initialContents, new SubProgressMonitor(monitor, 1000));
@@ -348,14 +361,14 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 			if (e.getTargetException() instanceof CoreException) {
 				ErrorDialog.openError(
 					getContainer().getShell(), // Was Utilities.getFocusShell()
-					IDEWorkbenchMessages.getString("WizardNewFileCreationPage.errorTitle"),  //$NON-NLS-1$
+					FILE_CREATION_ERROR,  //$NON-NLS-1$
 					null,	// no special message
 					((CoreException) e.getTargetException()).getStatus());
 			}
 			else {
 				// CoreExceptions are handled above, but unexpected runtime exceptions and errors may still occur.
-				IDEWorkbenchPlugin.log(MessageFormat.format("Exception in {0}.getNewFile(): {1}", new Object[] {getClass().getName(), e.getTargetException()}));//$NON-NLS-1$
-				MessageDialog.openError(getContainer().getShell(), IDEWorkbenchMessages.getString("WizardNewFileCreationPage.internalErrorTitle"), IDEWorkbenchMessages.format("WizardNewFileCreationPage.internalErrorMessage", new Object[] {e.getTargetException().getMessage()})); //$NON-NLS-2$ //$NON-NLS-1$
+				IDEWorkbenchPlugin.log(MessageFormat.format("Exception in {0}.getNewFile(): {1}", new Object[] {getClass().getName(), e.getTargetException()}));
+				MessageDialog.openError(getContainer().getShell(), INTERNAL_ERROR_TITLE, INTERNAL_ERROR_MSG+": "+e.getTargetException().getMessage()); 
 			}
 			return null;
 		}
@@ -408,7 +421,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 	 *     component group
 	 */
 	protected String getNewFileLabel() {
-		return IDEWorkbenchMessages.getString("WizardNewFileCreationPage.fileLabel"); //$NON-NLS-1$
+		return "Fi&le name"; //$NON-NLS-1$
 	}
 	/**
 	 * Shows/hides the advanced option widgets. 
@@ -423,7 +436,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 			linkedResourceComposite = null;
 			composite.layout();
 			shell.setSize(shellSize.x, shellSize.y - linkedResourceGroupHeight);
-			advancedButton.setText(IDEWorkbenchMessages.getString("showAdvanced")); //$NON-NLS-1$
+			advancedButton.setText(SHOW_ADVANCED_MSG); //$NON-NLS-1$
 		} else {
 			linkedResourceComposite = linkedResourceGroup.createContents(linkedResourceParent);
 			if (linkedResourceGroupHeight == -1) {
@@ -432,7 +445,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 			}
 			shell.setSize(shellSize.x, shellSize.y + linkedResourceGroupHeight);
 			composite.layout();
-			advancedButton.setText(IDEWorkbenchMessages.getString("hideAdvanced")); //$NON-NLS-1$
+			advancedButton.setText(HIDE_ADVANCED_MSG); //$NON-NLS-1$
 		}
 	}
 	
