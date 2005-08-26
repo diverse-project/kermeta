@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.12 2005-07-08 12:23:43 dvojtise Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.13 2005-08-26 16:01:16 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -182,12 +182,11 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
         }
         catch (KermetaRaisedException kerror)
         {
-            console.print("Uncaught exception in Kermeta program\n");
             console.print(kerror.getMessage());
         }
         catch (KermetaInterpreterError ierror)
         {
-            console.print("Uncaught exception in Kermeta interpreter:\n");
+            console.print("Kermeta interpreter could not be launched :\n");
             console.print(ierror.getMessage());
         }
         catch (Throwable e)

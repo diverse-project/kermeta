@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.18 2005-07-08 12:23:43 dvojtise Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.19 2005-08-26 16:01:16 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -63,7 +63,7 @@ import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 
-import fr.irisa.triskell.kermeta.runner.Messages;
+import fr.irisa.triskell.kermeta.KermetaMessages;
 /**
  * 
  */
@@ -156,7 +156,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		createProjectLayout(projectArea, null);
 		
 		Group paramArea = new Group(area, SWT.NULL);
-		paramArea.setText(Messages.getString("ArgTab.FILEPARAM"));
+		paramArea.setText(KermetaMessages.getString("ArgTab.FILEPARAM"));
 		paramArea.setLayout(new FillLayout());
 		
 		// Create the area for the filename to get
@@ -254,7 +254,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		{
 		    String errorMsg = "";
 		   /* if (lselectedUnit != null)
-	            errorMsg = Messages.getString("ArgTab.WRONGLOADUNITERROR") ;*/
+	            errorMsg = KermetaMessages.getString("ArgTab.WRONGLOADUNITERROR") ;*/
 	        setClassEnabled(false);
 	        setOperationEnabled(false);
 	        if (!errorMsg.equals(""))
@@ -340,7 +340,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     /* (non-Javadoc)
      * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getName()
      */
-    public String getName() { return Messages.getString("ArgTab.NAME"); }
+    public String getName() { return KermetaMessages.getString("ArgTab.NAME"); }
     
     /** (non-Javadoc)
      * @see org.eclipse.debug.ui.ILaunchConfigurationTab#getImage()
@@ -358,7 +358,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      */
     public Composite createProjectLayout(Composite parent, Font font)
     {
-        createInputTextLayout(parent, Messages.getString("ArgTab.PROJECTLOC"));
+        createInputTextLayout(parent, KermetaMessages.getString("ArgTab.PROJECTLOC"));
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         //gd.horizontalSpan = 1;
         gd.widthHint = GRID_DEFAULT_WIDTH;
@@ -370,7 +370,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
         projectLocationText.setFont(font);
         projectLocationText.addModifyListener(fBasicModifyListener);
         Button projectLocationButton = createPushButton(parent, 
-                Messages.getString("KermetaPerspective.BROWSE"),
+                KermetaMessages.getString("KermetaPerspective.BROWSE"),
                 null);
         projectLocationButton.addSelectionListener(new SelectionAdapter() 
                 {
@@ -390,14 +390,14 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      */
     public Composite createFileLayout(Composite parent, Font font)
     {
-        createInputTextLayout(parent, Messages.getString("ArgTab.FILELOC"));
+        createInputTextLayout(parent, KermetaMessages.getString("ArgTab.FILELOC"));
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         
         setFileLocationText(new Text(parent, SWT.SINGLE | SWT.BORDER));
         getFileLocationText().setLayoutData(gd);
         getFileLocationText().setFont(font);
         getFileLocationText().addModifyListener(fFileModifyListener);
-        setFileLocationButton(createPushButton(parent, Messages.getString("KermetaPerspective.BROWSE"), null));	 //$NON-NLS-1$
+        setFileLocationButton(createPushButton(parent, KermetaMessages.getString("KermetaPerspective.BROWSE"), null));	 //$NON-NLS-1$
         getFileLocationButton().addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent evt) {
                 handleFileLocationButtonSelected();
@@ -584,7 +584,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		ElementListSelectionDialog dialog =
 			new ElementListSelectionDialog(getShell(), labelProvider);
 
-		dialog.setTitle(Messages.getString("ArgTab.PROJECTSELECT"));
+		dialog.setTitle(KermetaMessages.getString("ArgTab.PROJECTSELECT"));
 		dialog.setElements(projects);
 		// Set the default selection to currently selected resource
 		ISelection sresource = RunnerPlugin.getActiveWorkbenchWindow().getSelectionService().getSelection();
@@ -623,7 +623,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		ResourceSelectionDialog dialog =
 			new ResourceSelectionDialog(getShell(),
 			    selectedResource,
-			    Messages.getString("ArgTab.FILESELECT")
+			    KermetaMessages.getString("ArgTab.FILESELECT")
 			        );
 		// Set the default selection to currently selected resource
 		ISelection sresource = RunnerPlugin.getActiveWorkbenchWindow().getSelectionService().getSelection();
@@ -764,7 +764,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     protected boolean validateFileLocation() {
         /*if (selectedUnit == null)
         {
-            setErrorMessage(Messages.getString("ArgTab.COULDNOTLOADUNITERROR"));
+            setErrorMessage(KermetaMessages.getString("ArgTab.COULDNOTLOADUNITERROR"));
         	return false;
         }*/
     	/*try
@@ -772,23 +772,23 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     		IFile selectedFile = getIFileFromString(fileLocationText.getText());		
     		if (selectedFile == null)
     		{
-    			setErrorMessage(Messages.getString("ArgTab.INVALIDFILEERROR"));    			
+    			setErrorMessage(KermetaMessages.getString("ArgTab.INVALIDFILEERROR"));    			
     			return false;
     		}/*
 		}
     	catch (Exception e)
 		{
-    		setErrorMessage(Messages.getString("ArgTab.INVALIDFILEERROR"));
+    		setErrorMessage(KermetaMessages.getString("ArgTab.INVALIDFILEERROR"));
 			return false;
 		}*/
         if (fileLocationText.getText().equals(""))
         {
-            setErrorMessage(Messages.getString("ArgTab.NOFILEERROR"));
+            setErrorMessage(KermetaMessages.getString("ArgTab.NOFILEERROR"));
         	return false;
         }  
         if (classNameText.getText().equals("") || operationNameText.getText().equals(""))
         {
-            setErrorMessage(Messages.getString("ArgTab.EMPTYFIELDSERROR"));
+            setErrorMessage(KermetaMessages.getString("ArgTab.EMPTYFIELDSERROR"));
             return false;
         }
         setErrorMessage(null);

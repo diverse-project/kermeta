@@ -1,4 +1,4 @@
-/* $Id: KermetaNewProjectWizardPage.java,v 1.5 2005-06-06 15:25:17 zdrey Exp $
+/* $Id: KermetaNewProjectWizardPage.java,v 1.6 2005-08-26 16:01:17 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewProjectWizardPage.java
  * License: GPL
@@ -18,7 +18,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.*;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
-import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -94,12 +93,12 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
         folderGroup.setLayout(layout);
         folderGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         folderGroup.setFont(font);
-        folderGroup.setText("Set default folders"); //$NON-NLS-1$
+        folderGroup.setText("Set default folders");
         
         final Button useEmptyFoldersButton =
             new Button(folderGroup, SWT.RADIO | SWT.RIGHT);
         
-        useEmptyFoldersButton.setText(IDEWorkbenchMessages.getString("Create empty folder")); //$NON-NLS-1$
+        useEmptyFoldersButton.setText("Create empty folder");
         useEmptyFoldersButton.setSelection(!useDefaultFolders);
         useEmptyFoldersButton.setFont(font);
 
@@ -113,7 +112,7 @@ public class KermetaNewProjectWizardPage extends WizardNewProjectCreationPage
         final Button useDefaultFoldersButton =
             new Button(folderGroup, SWT.RADIO | SWT.RIGHT);
         
-        useDefaultFoldersButton.setText(IDEWorkbenchMessages.getString("Create separate folders for source (src) and libraries (lib)")); //$NON-NLS-1$
+        useDefaultFoldersButton.setText("Create separate folders for source (src) and libraries (lib)");
         useDefaultFoldersButton.setSelection(!useEmptyFoldersButton.getSelection());
         useDefaultFoldersButton.setFont(font);
         

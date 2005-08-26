@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.1 2005-06-24 17:17:50 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.2 2005-08-26 16:01:16 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -9,26 +9,14 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
-import java.net.URL;
-
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.ILaunch;
-import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.ui.DebugUITools;
-
-import com.sun.jndi.cosnaming.RemoteToCorba;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
-import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 
 /**
@@ -130,6 +118,7 @@ public class KermetaLauncher
         {
             console.print("Uncaught exception in Kermeta program\n");
             console.print(kerror.getMessage());
+            console.print("Cause : " + kerror.getCause());
         }
         catch (KermetaInterpreterError ierror)
         {

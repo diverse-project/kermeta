@@ -1,4 +1,4 @@
-/* $Id: CreateKermetaProjectWizard.java,v 1.5 2005-08-16 11:21:16 zdrey Exp $
+/* $Id: CreateKermetaProjectWizard.java,v 1.6 2005-08-26 16:01:17 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: CreateKermetaProjectWizard.java
  * License: GPL
@@ -30,9 +30,9 @@ import org.eclipse.jface.wizard.IWizardContainer;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
+import fr.irisa.triskell.kermeta.KermetaMessages;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 /**
@@ -43,8 +43,11 @@ import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 public class CreateKermetaProjectWizard extends Wizard {
 
     private KermetaNewProjectWizard wizard;
-    private KermetaNewProjectWizardPage page;
+    private KermetaNewProjectWizardPage page;    
     private IConfigurationElement configurationElement;
+    
+    public static final String ERROR_TITLE = KermetaMessages.getString("KermetaPerspective.NEWPROJECT_ERR_TITLE");
+    public static final String ERROR_MSG = KermetaMessages.getString("KermetaPerspective.NEWPROJECT_ERR_MSG");
     
     /**
      * Creates an empty wizard for creating a new project
@@ -110,14 +113,14 @@ public class CreateKermetaProjectWizard extends Wizard {
             if (t instanceof CoreException) {
                 if (((CoreException)t).getStatus().getCode() == IResourceStatus.CASE_VARIANT_EXISTS) {
                     MessageDialog.openError(
-                            getShell(), 
-                            IDEWorkbenchMessages.getString("CreateProjectWizard.errorTitle"),  //$NON-NLS-1$
-                            IDEWorkbenchMessages.getString("CreateProjectWizard.caseVariantExistsError")  //$NON-NLS-1$,
+                            getShell(),
+                            ERROR_TITLE, // TODO : create a java class where the messages are stored
+                            ERROR_MSG
                     );	
                 } else {
                     ErrorDialog.openError(
                             getShell(), 
-                            IDEWorkbenchMessages.getString("CreateProjectWizard.errorTitle"),  //$NON-NLS-1$
+                            ERROR_TITLE,
                             null, // no special message
                             ((CoreException) t).getStatus());
                 }
@@ -132,8 +135,8 @@ public class CreateKermetaProjectWizard extends Wizard {
                                 t));
                 MessageDialog.openError(
                         getShell(),
-                        IDEWorkbenchMessages.getString("CreateProjectWizard.errorTitle"),  //$NON-NLS-1$
-                        IDEWorkbenchMessages.format("CreateProjectWizard.internalError", new Object[] {t.getMessage()})); //$NON-NLS-1$
+                        ERROR_TITLE,
+                        KermetaMessages.getString("Kermeta.INT_ERR") + t.getMessage());
             }
             return null;
         }
@@ -219,7 +222,7 @@ public class CreateKermetaProjectWizard extends Wizard {
 	 * @see org.eclipse.core.runtime.IExecutableExtension#setInitializationData(org.eclipse.core.runtime.IConfigurationElement, java.lang.String, java.lang.Object)
 	 */
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) throws CoreException {
-	    System.out.println("Call of setInitializationData");
+	    System.out.println("Call of setInitializationData (CreateKermetaProjectWizard.java)");
 	    this.configurationElement = config;
 	}
 }

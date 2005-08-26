@@ -1,4 +1,4 @@
-/* $Id: ResourceHandler.java,v 1.2 2005-05-30 17:19:19 zdrey Exp $
+/* $Id: ResourceHandler.java,v 1.3 2005-08-26 16:01:17 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ResourceHandler.java
  * License : GPL
@@ -16,8 +16,11 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.internal.ide.AboutInfo;
 import org.eclipse.ui.internal.ide.IDEWorkbenchMessages;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
+
+import fr.irisa.triskell.kermeta.KermetaMessages;
 
 /**
  * This class proposes a set of methods that help the validation of the creation,
@@ -36,9 +39,8 @@ public class ResourceHandler {
 	private int problemType = ResourceAndContainerGroup.PROBLEM_NONE;
 
 	// resource type (file, folder, project)
-	private String resourceType = IDEWorkbenchMessages.getString("ResourceGroup.resource"); //$NON-NLS-1$
+	private String resourceType = KermetaMessages.getString("Kermeta.RESOURCE");
 
-    
     /**
      * Constructor
      */
@@ -79,14 +81,14 @@ public class ResourceHandler {
     protected boolean validateContainer(IPath containerPath) {
     	if (containerPath == null) {
     		problemType = ResourceAndContainerGroup.PROBLEM_CONTAINER_EMPTY;
-    		problemMessage = IDEWorkbenchMessages.getString("ResourceGroup.folderEmpty"); //$NON-NLS-1$
+    		problemMessage = "Error : the selected folder is empty";
     		return false;
     	}
     	IWorkspace workspace = ResourcesPlugin.getWorkspace();
     	String projectName = containerPath.segment(0);
     	if (projectName == null || !workspace.getRoot().getProject(projectName).exists()) {
     		problemType = ResourceAndContainerGroup.PROBLEM_PROJECT_DOES_NOT_EXIST;
-    		problemMessage = IDEWorkbenchMessages.getString("ResourceGroup.noProject"); //$NON-NLS-1$
+    		problemMessage = "Error : the project does not exist";
     		return false;
     	}
     	return true;

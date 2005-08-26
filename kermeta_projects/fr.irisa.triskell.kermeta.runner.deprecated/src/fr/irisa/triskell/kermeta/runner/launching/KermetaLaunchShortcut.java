@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.7 2005-08-16 11:21:16 zdrey Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.8 2005-08-26 16:01:16 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : GPL
@@ -33,7 +33,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.runner.Messages;
+import fr.irisa.triskell.kermeta.KermetaMessages;
 
 /**
  * Launch shortcut that appears when users selects a file > Run > Kermeta App.
@@ -87,14 +87,14 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
             MessageDialog.openInformation(
 					new Shell(),
 					"Oups!",
-					Messages.getString("KermetaPerspective.NOFILEERROR"));
+					KermetaMessages.getString("KermetaPerspective.NOFILEERROR"));
         }
         else
         {
             MessageDialog.openError(
 					new Shell(),
 					"Oups!",
-					Messages.getString("KermetaPerspective.WRONGFILEERROR")+": "+selectedFile.getName()+".");
+					KermetaMessages.getString("KermetaPerspective.WRONGFILEERROR")+": "+selectedFile.getName()+".");
         }
 
     }
