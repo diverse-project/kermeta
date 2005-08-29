@@ -6,14 +6,36 @@
 
 <body>
 
-<!-- please follow the template ... -->
+<!-- please follow the template ... -->""
 <h1>History of Kermeta development</h1>
 
 <h2 class="Heading">Version under development</h2>
 <h3>New features</h3>
 <ul>
-  <li>save of model instances  from kermeta to xmi files. </li>
+  <li>wizards added for traceability handling</li>
+</ul>
+<h3>Improvements</h3>
+<ul>
+  <li>better exception handling</li>
+</ul>
+
+<h3>Bug fixed</h3>
+<ul>
+<li>#143;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=143&group_id=32&atid=205">bug in model loading</a></li>
+<li>#98;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=98&group_id=32&atid=205">Kermeta documentation unavailable under Eclipse</a></li>
+<li>#122<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=122&group_id=32&atid=205">uncompatibility with eclipse 3.1</a></li>
+</ul>
+
+
+<h2 class="Heading">V0.0.14 (22/08/2005)</h2>
+<h3>New features</h3>
+<ul>
+  <li>save of EMF model instances  from kermeta to xmi files and load
+  EMF xmi-&gt;Kermeta. </li>
   <li>support of the traceability model for transformations kmt2ecore, kmt2km, km2ecore and ecore2kmt(partial)</li>
+  <li>ecore2kermeta transformation improved for ecore models that
+  contain operation bodies stored as annotations</li>
+
 </ul>
 <h3>Improvements</h3>
 <ul>
@@ -22,6 +44,9 @@
 <h3>Bug fixed</h3>
 <ul>
 <li>#125; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=125&amp;group_id=32&amp;atid=205">in the wizards, if the default file name already exist there no error message</a></li>
+<li>#85;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=85&group_id=32&atid=205">out of Memory when interpreting</a></li>
+<li>#109;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=109&group_id=32&atid=205">derived property not implemented</a></li>
+<li>#100;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=100&group_id=32&atid=205">problems with file creation tools under Eclipse</a></li>
 </ul>
 
 <h2 class="Heading">V0.0.13 (22/07/2005)</h2>
@@ -44,12 +69,12 @@
 
 <h3>Bug fixed</h3>
 <ul>
-  <li>#92; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=92&amp;group_id=32&amp;atid=205">Kermeta Files always created in the root directory of the project</a></li>
-  <li>#95; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=95&amp;group_id=32&amp;atid=205">Some images don't appear in the generated documentation (wmf images in metamodel doc)</a></li>
-  <li>#100;&nbsp;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=100&amp;group_id=32&amp;atid=205">The button "Create new K. File" does not do anything</a></li>
+  <li>#92; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=92&amp;group_id=32&amp;atid=205">Kermeta files always created in the root directory of the project</a></li>
+  <li>#95; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=95&amp;group_id=32&amp;atid=205">some images don't appear in the generated documentation (wmf images in metamodel doc)</a></li>
+  <li>#100;&nbsp;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=100&amp;group_id=32&amp;atid=205">the button "Create new K. File" does not do anything</a></li>
   <li>#103; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=103&amp;group_id=32&amp;atid=205">the selection is not taken into account when creating a new kermeta file with the wizard</a></li>
   <li>#105;&nbsp;<a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=105&amp;group_id=32&amp;atid=205">compile 2 XMI fails</a></li>
-  <li>#117; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=117&amp;group_id=32&amp;atid=205">Method Hashatable.get in the framework</a></li>
+  <li>#117; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&amp;aid=117&amp;group_id=32&amp;atid=205">method Hashatable.get in the framework</a></li>
 </ul>
 
 
