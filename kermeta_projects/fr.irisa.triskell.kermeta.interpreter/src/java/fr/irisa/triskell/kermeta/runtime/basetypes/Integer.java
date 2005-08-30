@@ -1,4 +1,4 @@
-/* $Id: Integer.java,v 1.6 2005-08-23 18:44:20 zdrey Exp $ 
+/* $Id: Integer.java,v 1.7 2005-08-30 14:26:13 zdrey Exp $ 
  * Implementation of Kermeta base type Integer 
  */
 
@@ -6,6 +6,7 @@ package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
@@ -128,17 +129,7 @@ public class Integer {
 	}
 	
 	public static int getValue(RuntimeObject integer) {
-	    int result=0;
-	    java.lang.Integer i = ((java.lang.Integer)integer.getData().get("NumericValue"));
-	    if (i==null) 
-	    {
-	        RuntimeObject ex = integer.getFactory().createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
-	        // As this method is invocated, it will be "catched" again by an InvocationTargetException, and then 
-	        // will become a "cause" of the exception
-	        integer.getFactory().getMemory().getCurrentInterpreter().raiseKermetaException(ex, null);
-	    }
-	    else result = i.intValue();
-	    return result;
+	    return ((java.lang.Integer)integer.getData().get("NumericValue")).intValue();
 	}
 	
 
