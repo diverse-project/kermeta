@@ -1,0 +1,333 @@
+@mainClass "ecore::Main"
+@mainOperation "main"
+
+
+package ecore;
+
+require kermeta
+require "CmodelSimple.kmt"
+
+using kermeta::standard
+
+class Main
+{
+  operation main() : Void is do 
+        var model1 : EPackage init createModel1
+        var model2 : EPackage init createModel2
+        
+        stdio.writeln("Input model 1 : ")
+        printModel(model1) 
+        
+        
+        stdio.writeln("\nInput model 2 : ")
+        printModel(model2)
+        
+        
+        var ec : EClass init EClass.new
+        
+        
+        
+        
+        var merged : EPackage
+        stdio.writeln("\nMerging... ")
+        merged ?= model1.merge(model2)
+        stdio.writeln("\nMerged model: " + merged.toString)
+        
+        //merged := EPackage.clone(model1)
+        
+        printModel(merged) 
+        // */
+      
+        
+    end
+    
+    operation printModel(p : EPackage) is do
+    	
+    	// Print the package
+    	stdio.writeln("package " + p.name)
+    	// Print the classes
+    	p.eClassifiers.each{ e | 
+    		var c : EClass		c ?= e
+    		var d : EDataType	d ?= e
+    		if c != void then
+    			stdio.writeln("  class " + c.name.toString)
+    			// Print Attributes and References
+    			c.eStructuralFeatures.each{ p | 
+    				var s : EAttribute		s ?= p
+    				var r : EReference		r ?= p
+    				if r != void then 
+    					stdio.write("    ref  " + r.name.toString)
+    					stdio.write(" : " + r.eType.name + "[" + r.lowerBound.toString + ".." + r.upperBound.toString +"]")
+    					if r.eOpposite != void then 
+    						stdio.write(" opposite of " + r.eOpposite.name)
+    					end
+    					stdio.writeln("")
+    				else
+    					stdio.write("    attr " + s.name.toString)
+    					stdio.writeln(" : " + s.eType.name)
+    				end
+    			}
+    			//Print Operations
+    			c.eOperations.each{ o | 
+    				stdio.write("    op   " + o.name + "(")
+    				o.eParameters.each{ p | 
+    					stdio.write(p.name + " : " + p.eType.name + " ")
+    				}
+    				stdio.write(")")
+    				if o.eType != void then
+    					stdio.write(" : " + o.eType.name)
+    				end
+    				stdio.writeln("")
+    			}
+    			
+    			
+    		else
+    			stdio.writeln("  datatype " + d.name)
+    		end
+    	
+    	}
+    
+    end
+    
+    
+    
+    operation createModel1() : EPackage is do
+    	
+    	var intType : EDataType init EDataType.new
+    	intType.name := "int" 
+    	
+    	var m1 : EPackage init EPackage.new
+    	m1.name := "Model 1"
+    	
+    	var c1 : EClass init EClass.new
+    	c1.name := "Client"
+    	var c2 : EClass init EClass.new
+    	c2.name := "Controller"
+    	var c3 : EClass init EClass.new
+    	c3.name := "Account"
+    	var c4 : EClass init EClass.new
+    	c4.name := "AccRepository"
+    	
+    	
+    	m1.eClassifiers.add(intType)
+    	m1.eClassifiers.add(c1)
+    	m1.eClassifiers.add(c2)
+    	m1.eClassifiers.add(c3)
+    	m1.eClassifiers.add(c4)
+    	
+    	var a1 : EAttribute init EAttribute.new
+    	a1.name := "accID"
+    	a1.eType := intType
+    	a1.eContainingClass := c3
+    	
+    	
+    	var o1 : EOperation init EOperation.new
+    	o1.name := "addAccount"
+    	o1.eContainingClass := c2
+    	
+    	var p11 : EParameter init EParameter.new
+    	p11.name := "acct"
+    	p11.eType := intType
+    	p11.eOperation := o1
+    	
+    	
+    	var o2 : EOperation init EOperation.new
+    	o2.name := "findAccount"
+    	o2.eContainingClass := c4
+    	
+    	var p21 : EParameter init EParameter.new
+    	p21.name := "acct"
+    	p21.eType := intType
+    	p21.eOperation := o2
+    	
+    	var o3 : EOperation init EOperation.new
+    	o3.name := "createAccount"
+    	o3.eContainingClass := c4
+    	
+    	var p31 : EParameter init EParameter.new
+    	p31.name := "acct"
+    	p31.eType := intType
+    	p31.eOperation := o3
+    	
+    	
+    	var r1 : EReference init EReference.new
+    	var r2 : EReference init EReference.new
+    	r1.name := "CliCon"			r2.name := "ConCli"
+    	r1.eOpposite := r2			r2.eOpposite := r1
+    	r1.eType := c2				r2.eType := c1
+    	r1.eContainingClass := c1	r2.eContainingClass := c2
+    	r1.lowerBound := 1			r2.lowerBound := 0
+    	r1.upperBound := 1			r2.upperBound := -1
+    	r1.containment := false  
+    	
+    	var r3 : EReference init EReference.new
+    	var r4 : EReference init EReference.new
+    	r3.name := "ConAcc"			r4.name := "AccCon"
+    	r3.eOpposite := r4			r4.eOpposite := r3
+    	r3.eType := c4				r4.eType := c2
+    	r3.eContainingClass := c2	r4.eContainingClass := c4
+    	r3.lowerBound := 1			r4.lowerBound := 1
+    	r3.upperBound := 1			r4.upperBound := 1
+    	r3.containment := false  
+    	
+    	var r5 : EReference init EReference.new
+    	var r6 : EReference init EReference.new
+    	r5.name := "AccRAcc"			r6.name := "AccAccR"
+    	r5.eOpposite := r6			r6.eOpposite := r5
+    	r5.eType := c3				r6.eType := c4
+    	r5.eContainingClass := c4	r6.eContainingClass := c3
+    	r5.lowerBound := 0			r6.lowerBound := 1
+    	r5.upperBound := -1			r6.upperBound := 1
+    	r5.containment := false  
+    	
+    	
+    	result := m1
+    	
+    end
+    
+     operation createModel2() : EPackage is do
+    	
+    	var intType : EDataType init EDataType.new
+    	intType.name := "int" 
+    	
+    	var m1 : EPackage init EPackage.new
+    	m1.name := "Model 1"
+    	
+    	var c1 : EClass init EClass.new
+    	c1.name := "Client"
+    	var c2 : EClass init EClass.new
+    	c2.name := "Controller"
+    	var c3 : EClass init EClass.new
+    	c3.name := "Session"
+    	var c4 : EClass init EClass.new
+    	c4.name := "AuthRepository"
+    	var c5 : EClass init EClass.new
+    	c5.name := "AuthorizationEntry"
+    	
+    	
+    	m1.eClassifiers.add(intType)
+    	m1.eClassifiers.add(c1)
+    	m1.eClassifiers.add(c2)
+    	m1.eClassifiers.add(c3)
+    	m1.eClassifiers.add(c4)
+    	m1.eClassifiers.add(c5)
+    	
+    	var a1 : EAttribute init EAttribute.new
+    	a1.name := "userID"
+    	a1.eType := intType
+    	a1.eContainingClass := c1
+    	
+    	var a2 : EAttribute init EAttribute.new
+    	a2.name := "authreqID"
+    	a2.eType := intType
+    	a2.eContainingClass := c5
+    	
+    	var a3 : EAttribute init EAttribute.new
+    	a3.name := "authoperID"
+    	a3.eType := intType
+    	a3.eContainingClass := c5
+    	
+    	
+    	var o1 : EOperation init EOperation.new
+    	o1.name := "addAccount"
+    	o1.eContainingClass := c3
+    	
+    	var p11 : EParameter init EParameter.new
+    	p11.name := "userID"
+    	p11.eType := intType
+    	p11.eOperation := o1
+    	
+    	var p12 : EParameter init EParameter.new
+    	p12.name := "acct"
+    	p12.eType := intType
+    	p12.eOperation := o1
+    	
+    	
+    	var o2 : EOperation init EOperation.new
+    	o2.name := "permformAddAccount"
+    	o2.eContainingClass := c2
+    	
+    	var p21 : EParameter init EParameter.new
+    	p21.name := "userID"
+    	p21.eType := intType
+    	p21.eOperation := o2
+    	
+    	var p22 : EParameter init EParameter.new
+    	p22.name := "acct"
+    	p22.eType := intType
+    	p22.eOperation := o2
+    	
+    	
+    	
+    	var o3 : EOperation init EOperation.new
+    	o3.name := "getAuth"
+    	o3.eContainingClass := c4
+    	
+    	var p31 : EParameter init EParameter.new
+    	p31.name := "reqID"
+    	p31.eType := intType
+    	p31.eOperation := o3
+    	
+    	var p32 : EParameter init EParameter.new
+    	p32.name := "operID"
+    	p32.eType := intType
+    	p32.eOperation := o3
+    	
+    	var r1 : EReference init EReference.new
+    	var r2 : EReference init EReference.new
+    	r1.name := "CliCon"			r2.name := "ConCli"
+    	r1.eOpposite := r2			r2.eOpposite := r1
+    	r1.eType := c2				r2.eType := c1
+    	r1.eContainingClass := c1	r2.eContainingClass := c2
+    	r1.lowerBound := 1			r2.lowerBound := 1
+    	r1.upperBound := 1			r2.upperBound := -1
+    	r1.containment := false  
+    	
+    	
+    	var r3 : EReference init EReference.new
+    	var r4 : EReference init EReference.new
+    	r3.name := "ConSes"			r4.name := "SesCon"
+    	r3.eOpposite := r4			r4.eOpposite := r3
+    	r3.eType := c3				r4.eType := c2
+    	r3.eContainingClass := c2	r4.eContainingClass := c3
+    	r3.lowerBound := 1			r4.lowerBound := 1
+    	r3.upperBound := 1			r4.upperBound := -1
+    	r3.containment := false  
+    	
+    	var r5 : EReference init EReference.new
+    	var r6 : EReference init EReference.new
+    	r5.name := "SesAut"			r6.name := "AutSes"
+    	r5.eOpposite := r6			r6.eOpposite := r5
+    	r5.eType := c4				r6.eType := c3
+    	r5.eContainingClass := c3	r6.eContainingClass := c4
+    	r5.lowerBound := 1			r6.lowerBound := 0
+    	r5.upperBound := 1			r6.upperBound := -1
+    	r5.containment := false  
+    	
+    	
+    	var r7 : EReference init EReference.new
+    	var r8 : EReference init EReference.new
+    	r7.name := "AuthAuthR"			r8.name := "AuthRAuth"
+    	r7.eOpposite := r8			r8.eOpposite := r7
+    	r7.eType := c4				r8.eType := c5
+    	r7.eContainingClass := c5	r8.eContainingClass := c4
+    	r7.lowerBound := 1		r8.lowerBound := 1
+    	r7.upperBound := 1			r8.upperBound := -1
+    	r7.containment := false  
+    	
+    	var rA : EReference init EReference.new
+    	var rB : EReference init EReference.new
+    	rA.name := "CliSes"			rB.name := "SesCli"
+    	rA.eOpposite := rB			rB.eOpposite := rA
+    	rA.eType := c3				rB.eType := c1
+    	rA.eContainingClass := c1	rB.eContainingClass := c3
+    	rA.lowerBound := 1			rB.lowerBound := 0
+    	rA.upperBound := 1			rB.upperBound := -1
+    	rA.containment := false  
+    	
+    	result := m1
+    	
+    end
+    
+    
+}

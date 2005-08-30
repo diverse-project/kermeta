@@ -1,0 +1,433 @@
+package ecore;
+
+require kermeta
+
+using kermeta::reflection
+using kermeta::standard
+
+class EAttribute inherits EStructuralFeature
+{
+	attribute iD : EBoolean
+}
+class EAnnotation inherits EModelElement
+{
+	attribute source : EString
+	//attribute details : EStringToStringMapEntry[0..*]
+	//reference eModelElement : EModelElement#eAnnotations
+	attribute contents : EObject[0..*] 
+	reference references : EObject[0..*]
+}
+class EClass inherits EClassifier
+{
+	attribute ~abstract : EBoolean
+	//attribute interface : EBoolean
+	reference eSuperTypes : EClass[0..*]
+	attribute eOperations : EOperation[0..*]#eContainingClass
+	
+	attribute eStructuralFeatures : EStructuralFeature[0..*]#eContainingClass
+	
+}
+abstract class EClassifier inherits ENamedElement, Mergeable
+{
+	//attribute instanceClassName : EString
+	//attribute instanceClass : EJavaClass
+	//attribute defaultValue : EJavaObject
+	reference ePackage : EPackage#eClassifiers
+	
+	method sigEqual(other : Mergeable) : Boolean is do
+		var t1 : Type init self.getMetaClass
+		var t2 : Type init other.getMetaClass
+		
+		if t1 == t2 then
+			if self.getSignature == other.getSignature then
+				result := true
+			else
+				result := false
+			end
+		else
+			result := false
+		end 
+	end
+	
+	method getSignature() : Signature is do
+		if signature == void then 
+			var s : StringSignature init StringSignature.new
+			s.sign := name
+			signature := s
+		end
+		result := signature
+	end
+}
+class EDataType inherits EClassifier
+{
+	//attribute serializable : EBoolean
+}
+class EEnum inherits EDataType
+{
+	attribute eLiterals : EEnumLiteral[0..*]#eEnum
+}
+class EEnumLiteral inherits ENamedElement
+{
+	attribute value : EInt
+	//attribute instance : EEnumerator
+	reference eEnum : EEnum#eLiterals
+}
+class EFactory inherits EModelElement
+{
+	reference ePackage : EPackage[1..1]#eFactoryInstance
+}
+abstract class EModelElement inherits EObject
+{
+	// attribute eAnnotations : EAnnotation[0..*]#eModelElement
+	
+	operation getmatchingElements(elements : Collection<EModelElement>) : seq EModelElement[0..*] is do
+		var e1 : Mergeable	e1 ?= self
+		if e1 == void then
+			result := Sequence<EModelElement>.new
+		else
+			result := elements.select{ e | 
+				var e2 : Mergeable	e2 ?= e
+				if e2 == void then false else e1.getSignature ==  e2.getSignature end
+			}
+		end
+		
+	end
+	
+	operation getClassFromType(t : Type) : Class is do
+		if t.getMetaClass == kermeta::language::structure::PrimitiveType then
+			var pt : PrimitiveType		pt ?= t
+			result := getClassFromType(pt.instanceType)
+		else
+			result ?= t
+		end
+	end
+	
+	operation getSAttributes() : Collection<Property> is do
+		result := getAllProps.select{ p | 
+			var c : Class init getClassFromType(p.type)
+			not Mergeable.isSubType(c)
+		}
+	end
+	operation getComponents() : Collection<Property> is do
+		result := getAllProps.select{ p | 
+			var c : Class init getClassFromType(p.type)
+			Mergeable.isSubType(c) and
+			p.isComposite 
+		}
+	end
+	
+	operation getAllProps() : Collection<Property> is do
+		var cd : ClassDefinition init self.getMetaClass.classDefinition
+		result := getAllPropertiesOfClass(cd) 
+	end
+	
+	operation isMergeableType(c : Class) : Boolean is do
+		result := Mergeable.isSubType(c)
+	end
+	
+		
+	operation getAllPropertiesOfClass(cd : ClassDefinition) : Collection<Property> is do
+			result := Set<Property>.new
+			
+			result.addAll(cd.ownedAttributes) 
+			
+			cd.superType.each{ t | 
+				var sc : Class		sc ?= t
+				getAllPropertiesOfClass(sc.classDefinition).each{ p | 
+					if not result.contains(p) then
+						result.add(p)
+					end
+				}
+			}
+			 
+			result := result.select{ k | not k.isDerived }
+
+	end
+	
+}
+abstract class ENamedElement inherits EModelElement
+{
+	reference name : EString
+}
+class EObject
+{
+	
+}
+class EOperation inherits ETypedElement, Mergeable
+{
+	reference eContainingClass : EClass#eOperations
+	attribute eParameters : EParameter[0..*]#eOperation
+	reference eExceptions : EClassifier[0..*]
+	method sigEqual(other : Mergeable) : Boolean is do
+		var t1 : Type init self.getMetaClass
+		var t2 : Type init other.getMetaClass
+		
+		if t1 == t2 then
+			if self.getSignature == other.getSignature then
+				result := true
+			else
+				result := false
+			end
+		else
+			result := false
+		end 
+	end
+	
+	method getSignature() : Signature is do
+		if signature == void then 
+			var s : StringSignature init StringSignature.new
+			s.sign := name
+			signature := s
+		end
+		result := signature
+	end
+}
+class EPackage inherits ENamedElement, Mergeable
+{
+	//attribute nsURI : EString
+	//attribute nsPrefix : EString
+	reference eFactoryInstance : EFactory[1..1]#ePackage
+	attribute eClassifiers : EClassifier[0..*]#ePackage
+	attribute eSubpackages : EPackage[0..*]#eSuperPackage
+	reference eSuperPackage : EPackage#eSubpackages
+	
+	method sigEqual(other : Mergeable) : Boolean is do
+		var t1 : Type init self.getMetaClass
+		var t2 : Type init other.getMetaClass
+		
+		if t1 == t2 then
+			if self.getSignature == other.getSignature then
+				result := true
+			else
+				result := false
+			end
+		else
+			result := false
+		end 
+	end
+	
+	
+	method getSignature() : Signature is do
+		if signature == void then 
+			var s : StringSignature init StringSignature.new
+			s.sign := name
+			signature := s
+		end
+		result := signature
+	end
+}
+class EParameter inherits ETypedElement
+{
+	reference eOperation : EOperation#eParameters
+}
+class EReference inherits EStructuralFeature
+{
+	reference containment : EBoolean
+	//attribute container : EBoolean
+	//attribute resolveProxies : EBoolean
+	reference eOpposite : EReference
+	
+}
+abstract class EStructuralFeature inherits ETypedElement, Mergeable
+{
+	reference changeable : EBoolean
+	reference volatile : EBoolean
+	reference transient : EBoolean
+	reference defaultValueLiteral : EString
+	//reference defaultValue : EJavaObject
+	//reference unsettable : EBoolean
+	reference derived : EBoolean
+	reference eContainingClass : EClass#eStructuralFeatures
+	
+	method sigEqual(other : Mergeable) : Boolean is do
+		var t1 : Type init self.getMetaClass
+		var t2 : Type init other.getMetaClass
+		
+		if t1 == t2 then
+			if self.getSignature == other.getSignature then
+				result := true
+			else
+				result := false
+			end
+		else
+			result := false
+		end 
+	end
+	
+	method getSignature() : Signature is do
+		if signature == void then 
+			var s : StringSignature init StringSignature.new
+			s.sign := name
+			signature := s
+		end
+		result := signature
+	end
+}
+abstract class ETypedElement inherits ENamedElement
+{
+	reference ordered : EBoolean
+	reference unique : EBoolean
+	reference lowerBound : EInt
+	reference upperBound : EInt
+	reference many : EBoolean
+	reference required : EBoolean
+	reference eType : EClassifier
+}
+
+alias EBoolean : kermeta::standard::Boolean;
+alias EInt : kermeta::standard::Integer;
+alias EString : kermeta::standard::String;
+
+abstract class Mergeable inherits EModelElement
+{
+	reference signature : Signature[1..1]
+	
+	operation merge(other : Mergeable) : Mergeable is do
+	
+	
+		var type : Class init self.getMetaClass 
+		result ?= type.new
+	
+		stdio.writeln("-> MERGE " + self.toString + " AND " + other.toString)
+		 
+		var sprops1 :  Collection<Property> init self.getSAttributes
+		var sprops2 :  Collection<Property> init other.getSAttributes
+		
+
+		sprops1.each{ sp1 | 
+			
+			var sp2 : Property init sprops2.detect{ p2 | sp1.name == p2.name }
+			
+			if self.get(sp1) == void then
+				result.~set(sp2, other.get(sp2))
+			else
+				if self.get(sp2) == void then
+					result.~set(sp1, self.get(sp1))
+				else
+					if self.get(sp1) == other.get(sp2) then
+						result.~set(sp1, self.get(sp1))
+					else
+						stdio.writeln("WARNING : conflicting value for property " + sp1.name + " picking the first value")
+						result.~set(sp1, self.get(sp1))
+					end
+				end
+			end
+		}
+		
+		// TODO
+		
+		var props1 : Collection<Property> init self.getComponents
+		var props2 : Collection<Property> init other.getComponents
+		
+		props1.each{ p1 | 
+			
+			var p2 : Property init props2.detect{ p | p1.name == p.name }
+			
+			if self.get(p1) == void then
+				result.~set(p2, other.get(p2))
+			else
+				if other.get(p2) == void then
+					result.~set(p1, self.get(p1))
+				else
+				
+					if p1.upper != 1 then
+						var ocol1 : Collection<kermeta::reflection::Object> 	ocol1 ?= self.get(p1) 
+						var col1 : Collection<EModelElement> init Sequence<EModelElement>.new
+						ocol1.each{ k | 
+							var m : EModelElement	m ?= k
+							col1.add(m)
+						}
+						var ocol2 : Collection<kermeta::reflection::Object> 	ocol2 ?= other.get(p2) 
+						var col2 : Collection<EModelElement> init Sequence<EModelElement>.new
+						ocol2.each{ k | 
+							var m : EModelElement	m ?= k
+							col2.add(m)
+						}
+						col1.each{ me | 
+							
+							me.getmatchingElements(col2).each{ me2 | 
+							
+								var mergable : Mergeable	mergable ?= me
+								var mergable2 : Mergeable	mergable2 ?= me2
+
+								var col : Collection<kermeta::reflection::Object>
+								col ?= result.get(p1)
+								col.add(mergable.merge(mergable2))
+							
+							}
+						}
+					
+						
+					else
+						var me1 : Mergeable		me1 ?= self.get(p1)
+						var me2 : Mergeable		me2 ?= other.get(p2)
+						
+						if me1 == void or me2 == void then
+							stdio.writeln("WARNING : Elements are not mergeable")
+						else
+							if me1.getSignature == me2.getSignature then
+								stdio.writeln("Recursive merge")
+								result.~set(p1, me1.merge(me2))
+							else
+								stdio.writeln("ERROR : Elements signature do not match")
+							end
+						end
+						
+						
+					end
+				
+				end
+			end
+		}
+	
+		 
+		
+	end
+
+	operation getSignature() : Signature is abstract
+	operation sigEqual(other : Mergeable) : EBoolean is abstract
+
+}
+class Composer
+{
+	operation main(e1 : EModelElement, e2 : EModelElement) : Void is do
+		var e3 : EModelElement
+		
+		var m1 : Mergeable
+		var m2 : Mergeable
+		
+		m1 ?= e1
+		m2 ?= e2
+		
+		if m1 == void or m2 == void then
+			raise "Model elements are not mergeable"
+		end
+		
+		if m1.sigEqual(m2) then 
+			e3 := m1.merge(m2)
+			stdio.writeln("Elements merged " + e3.toString)
+		else
+			stdio.writeln("Models not mergeable")
+		end
+		
+		
+	end
+}
+abstract class Signature
+{
+}
+class StringSignature inherits Signature
+{
+	attribute sign : String
+	
+	method equals(other : Object ) : Boolean is do
+		var othersign : StringSignature
+		othersign ?= other
+		if othersign != void then
+			result := sign == othersign.sign
+		else
+			result := false
+		end
+	end
+	
+}
