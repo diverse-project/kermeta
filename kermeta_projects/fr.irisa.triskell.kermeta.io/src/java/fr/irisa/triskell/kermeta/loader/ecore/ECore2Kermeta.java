@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.6 2005-08-25 12:14:18 zdrey Exp $
+/* $Id: ECore2Kermeta.java,v 1.7 2005-08-30 14:34:16 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
 * License : EPL
@@ -73,7 +73,8 @@ public class ECore2Kermeta extends EcoreVisitor {
 	public static String methodRenamePostfix = "";
 	public static boolean isMethodNameOverlapSafe = true;
 	
-	
+	/** mapping between EOpretaions and FOperations     */
+    protected Hashtable operations;
 	
 	public static void loadunit(EcoreUnit unit) {
 		try {
@@ -121,7 +122,8 @@ public class ECore2Kermeta extends EcoreVisitor {
 			    Map.Entry op_entry = (Map.Entry)ops.next();
 			    EOperation eop = (EOperation)op_entry.getKey();
 			    visitor.current_op = (FOperation)op_entry.getValue();
-			    visitor.accept(eop.getEAnnotation(KM2Ecore.KMT2ECORE_ANNOTATION));
+			    if (eop.getEAnnotation(KM2Ecore.KMT2ECORE_ANNOTATION)!=null)
+			        visitor.accept(eop.getEAnnotation(KM2Ecore.KMT2ECORE_ANNOTATION));
 			}
 			
 		} catch (Throwable e) {
@@ -143,6 +145,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         super();
         this.unit = unit;
         this.resource = resource;
+        this.operations = new Hashtable();
     }
     
     // table of types : EType -> FTypeDefinition
@@ -334,15 +337,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         
         return prop;
     }
-    
-    
-    /**
-     * mapping between EOpretaions and FOperations
-     * Used to set superOperations
-     * new : used to access faster to operations for annotation injection
-     */
-    protected Hashtable operations = new Hashtable();
-    
+   
     public Object visit(EOperation node) {
         // FIXME : handle super operations
     	// FIXME : handle raised exceptions
