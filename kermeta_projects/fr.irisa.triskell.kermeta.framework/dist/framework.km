@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_behavior="http://kermeta_behavior/kermeta.ecore" xmlns:kermeta_structure="http://kermeta_structure/kermeta.ecore">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_behavior="http://kermeta_behavior/kermeta.ecore" xmlns:kermeta_structure="
+	http://kermeta_behavior/kermeta.ecore">
   <kermeta_structure:FPackage fName="kermeta">
     <fNestedPackage fName="standard">
       <fOwnedTypeDefinition xsi:type="kermeta_structure:FClassDefinition" fTag="/1 /2" fName="Void">
