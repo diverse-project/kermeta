@@ -1,4 +1,4 @@
-/* $Id: arab2roman.kmt,v 1.1 2005-07-29 12:28:40 dvojtise Exp $
+/* $Id: arab2roman.kmt,v 1.2 2005-08-31 15:10:31 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.samples
  * File       : arab2roman.kmt
  * License    : EPL
@@ -25,11 +25,11 @@ class ArabicNumber
 	reference content : Digit[0..*]
 	operation toString() : String is do
 	    result := String.new()
-		content.each{digit  | result := result + digit.value.toString()}
+		content.each{digit  | result := result + digit.~value.toString()}
 	end
 	operation getValue() : Integer is do
 		result := 0
-		content.each{n  | result := result*10 + n.value}
+		content.each{n  | result := result*10 + n.~value}
 	end
 	// precondition newValue < 10000
 	operation setValue(newValue : Integer) is do
@@ -39,19 +39,19 @@ class ArabicNumber
 		from var i : Integer init 1000
 		until i == 0
 		loop
-			digit := Digit.new  digit.value := rest / i
-			rest := rest - digit.value * i
+			digit := Digit.new  digit.~value := rest / i
+			rest := rest - digit.~value * i
 			content.add(digit)
 			i := i / 10
 		end		
-		var digit : Integer
-		digit := rest / 1000
+		var i_digit : Integer 
+		i_digit := rest / 1000
 	end
 }
 
 class Digit 
 {
-	attribute value : Integer
+	attribute ~value : Integer
 }
 
 
@@ -60,7 +60,7 @@ class RomanNumber
 	reference content : Letter[0..*]
 	operation toString() : String is do
 	    result := String.new()
-		content.each{letter  | result := result + letter.value}
+		content.each{letter  | result := result + letter.~value}
 	end
 	operation getValue() : Integer is do
 		var previous : Integer init 0
@@ -81,15 +81,15 @@ class RomanNumber
 
 class Letter
 {
-	attribute value : String
+	attribute ~value : String
 	operation getValue() : Integer is do
-		if value == "I" then result := 1 
-		else if value == "V" then result := 5
-		else if value == "X" then result := 10 
-		else if value == "L" then result := 50
-		else if value == "C" then result := 100
-		else if value == "D" then result := 500
-		else if value == "M" then result := 1000 end
+		if ~value == "I" then result := 1 
+		else if ~value == "V" then result := 5
+		else if ~value == "X" then result := 10 
+		else if ~value == "L" then result := 50
+		else if ~value == "C" then result := 100
+		else if ~value == "D" then result := 500
+		else if ~value == "M" then result := 1000 end
 		end end end end end end		
 	end
 }
@@ -125,19 +125,19 @@ class Main
 	end
 	// convert a single digit to roman style, depending on its position
 	operation addDigit2roman(r: RomanNumber, d : Digit, unit : String, five : String, ten : String) is do
-		if d.value < 4 then addLetters(r,d.value, unit)
-		else if d.value == 4 then addLetters(r,1,unit) addLetters(r,1,five) 
-		else if d.value < 9 then do
+		if d.~value < 4 then addLetters(r,d.~value, unit)
+		else if d.~value == 4 then addLetters(r,1,unit) addLetters(r,1,five) 
+		else if d.~value < 9 then do
 			addLetters(r,1,five)
-			addLetters(r,d.value-5, unit)
+			addLetters(r,d.~value-5, unit)
 			end
-		else if d.value == 9 then do addLetters(r,1,unit) addLetters(r,1,ten) end
+		else if d.~value == 9 then do addLetters(r,1,unit) addLetters(r,1,ten) end
 		end end end end
 	end 
 	// add letter 'l' 'times' times
 	operation addLetters(r: RomanNumber, times : Integer, l : String) is do
 		var aLetter : Letter init Letter.new()
-		aLetter.value := l
+		aLetter.~value := l
 		from var i : Integer init 0
 		until i >= times
 		loop
