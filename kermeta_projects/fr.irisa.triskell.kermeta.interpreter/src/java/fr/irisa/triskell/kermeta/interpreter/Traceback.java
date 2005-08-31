@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.2 2005-08-31 13:40:04 zdrey Exp $
+/* $Id: Traceback.java,v 1.3 2005-08-31 14:43:22 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Traceback.java
  * License   : EPL
@@ -9,12 +9,11 @@
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
-import java.io.BufferedOutputStream;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 
-import org.apache.xpath.operations.Plus;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
