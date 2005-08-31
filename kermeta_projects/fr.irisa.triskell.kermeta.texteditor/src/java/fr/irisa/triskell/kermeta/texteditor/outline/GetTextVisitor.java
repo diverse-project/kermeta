@@ -26,6 +26,7 @@ import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.FVoidType;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -34,7 +35,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * Distributed under the terms of the GPL license
  */
 public 
-class GetTextVisitor extends KermetaVisitor {
+class GetTextVisitor extends KermetaOptimizedVisitor {
 	
     //protected KermetaOutline outline;
 	
@@ -52,7 +53,7 @@ class GetTextVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
-	public Object visit(FClassDefinition node) {
+	public Object visitFClassDefinition(FClassDefinition node) {
 		String result = node.getFName();
 		if (node.getFTypeParameter().size() > 0) {
 			result += "<";
@@ -78,26 +79,26 @@ class GetTextVisitor extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FTypeVariable arg0) {
+	public Object visitFTypeVariable(FTypeVariable arg0) {
 		return arg0.getFName();
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumeration)
 	 */
-	public Object visit(FEnumeration arg0) {
+	public Object visitFEnumeration(FEnumeration arg0) {
 		return arg0.getFName();
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumerationLiteral)
 	 */
-	public Object visit(FEnumerationLiteral arg0) {
+	public Object visitFEnumerationLiteral(FEnumerationLiteral arg0) {
 		return arg0.getFName();
 	}
 	
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visit(FOperation node) {
+	public Object visitFOperation(FOperation node) {
 		String result = node.getFName();
 		if (node.getFTypeParameter().size() > 0) {
 			result += "<";
@@ -115,19 +116,19 @@ class GetTextVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPackage)
 	 */
-	public Object visit(FPackage arg0) {
+	public Object visitFPackage(FPackage arg0) {
 		return getQualifiedName(arg0);
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
 	 */
-	public Object visit(FPrimitiveType arg0) {
+	public Object visitFPrimitiveType(FPrimitiveType arg0) {
 		return arg0.getFName();
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
-	public Object visit(FProperty node) {
+	public Object visitFProperty(FProperty node) {
 		String result = node.getFName() + " : " + ppTypeFromMultiplicityElement(node);
 		return result;
 	}
@@ -135,7 +136,7 @@ class GetTextVisitor extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProductType)
 	 */
-	public Object visit(FProductType node) {
+	public Object visitFProductType(FProductType node) {
 		String result = "[" + ppComaSeparatedNodes(node.getFType()) + "]";
 		return result;
 	}
@@ -143,7 +144,7 @@ class GetTextVisitor extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FFunctionType)
 	 */
-	public Object visit(FFunctionType node) {
+	public Object visitFFunctionType(FFunctionType node) {
 		return "< " + this.accept(node.getFLeft()) + "->" + this.accept(node.getFRight()) + " >";
 	}
 	
@@ -151,14 +152,14 @@ class GetTextVisitor extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FVoidType)
 	 */
-	public Object visit(FVoidType node) {
+	public Object visitFVoidType(FVoidType node) {
 		return "Void";
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
-	public Object visit(FClass node) {
+	public Object visitFClass(FClass node) {
 		String result = node.getFClassDefinition().getFName();
 		if (node.getFTypeParamBinding().size() > 0) {
 			result += "<" + ppComaSeparatedNodes(node.getFTypeParamBinding()) + ">";
@@ -169,7 +170,7 @@ class GetTextVisitor extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariableBinding)
 	 */
-	public Object visit(FTypeVariableBinding node) {
+	public Object visitFTypeVariableBinding(FTypeVariableBinding node) {
 	    if (node.getFType() == null) return "!NULL!";
 		return this.accept(node.getFType());
 	}
@@ -177,7 +178,7 @@ class GetTextVisitor extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FParameter)
 	 */
-	public Object visit(FParameter node) {
+	public Object visitFParameter(FParameter node) {
 		return node.getFName() + " : " + ppTypeFromMultiplicityElement(node);
 	}
 	

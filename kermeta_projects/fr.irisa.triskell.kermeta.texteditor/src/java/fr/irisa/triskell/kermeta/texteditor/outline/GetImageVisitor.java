@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
 import fr.irisa.triskell.kermeta.texteditor.icons.green.KermetaIconsGreen;
 import fr.irisa.triskell.kermeta.texteditor.icons.red.KermetaIconsRed;
 import fr.irisa.triskell.kermeta.texteditor.icons.yellow.KermetaIconsYellow;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 
@@ -33,7 +34,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class GetImageVisitor extends KermetaVisitor {
+public class GetImageVisitor extends KermetaOptimizedVisitor {
     
     protected KermetaOutline outline;
     protected OutlineItem item;
@@ -60,7 +61,7 @@ public class GetImageVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
-	public Object visit(FClassDefinition arg0) {
+	public Object visitFClassDefinition(FClassDefinition arg0) {
 	   
 	    if (item.isTypeDefinitionImported()) {
 	        if (arg0.isFIsAbstract()) return KermetaIconsBlue.CLASS_ABSTRACT;
@@ -76,7 +77,7 @@ public class GetImageVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumeration)
 	 */
-	public Object visit(FEnumeration arg0) {
+	public Object visitFEnumeration(FEnumeration arg0) {
 	    if (item.isTypeDefinitionImported()) {
 	        return KermetaIconsBlue.ENUM;
 	    }
@@ -87,7 +88,7 @@ public class GetImageVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumerationLiteral)
 	 */
-	public Object visit(FEnumerationLiteral arg0) {
+	public Object visitFEnumerationLiteral(FEnumerationLiteral arg0) {
 	    if (item.parent.isTypeDefinitionImported()) {
 	        return KermetaIconsBlue.ENUM_LIT;
 	    }
@@ -99,7 +100,7 @@ public class GetImageVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visit(FOperation arg0) {
+	public Object visitFOperation(FOperation arg0) {
 	    
 	    if (item.isOperationInherited()) {
             if (arg0.isFIsAbstract()) return KermetaIconsYellow.OPERATION_ABSTRACT;
@@ -120,7 +121,7 @@ public class GetImageVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPackage)
 	 */
-	public Object visit(FPackage arg0) {
+	public Object visitFPackage(FPackage arg0) {
 	    boolean one = false;
 	    boolean all = true;
 	    
@@ -135,7 +136,7 @@ public class GetImageVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
 	 */
-	public Object visit(FPrimitiveType arg0) {
+	public Object visitFPrimitiveType(FPrimitiveType arg0) {
 	    if (item.isTypeDefinitionImported()) {
 	        return KermetaIconsBlue.DATATYPE;
 	    }
@@ -146,7 +147,7 @@ public class GetImageVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
-	public Object visit(FProperty node) {
+	public Object visitFProperty(FProperty node) {
 
 	    if (item.isPropertyInherited()) {
 	        if (node.isFIsComposite()) return KermetaIconsYellow.PROPERTY_CONTAINED;

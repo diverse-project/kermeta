@@ -25,6 +25,7 @@ import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -32,7 +33,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class GetChildrenVisitor extends KermetaVisitor {
+public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	
     protected KermetaOutline outline;
     protected OutlineItem item;
@@ -61,7 +62,7 @@ public class GetChildrenVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
-	public Object visit(FClassDefinition arg0) {
+	public Object visitFClassDefinition(FClassDefinition arg0) {
 		ArrayList result = new ArrayList();
 		
 		if (outline.prefInheritanceFlattening()) {
@@ -103,7 +104,7 @@ public class GetChildrenVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumeration)
 	 */
-	public Object visit(FEnumeration arg0) {
+	public Object visitFEnumeration(FEnumeration arg0) {
 		ArrayList result = new ArrayList();
 		
 		Iterator it = arg0.getFOwnedLiteral().iterator();
@@ -120,20 +121,20 @@ public class GetChildrenVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumerationLiteral)
 	 */
-	public Object visit(FEnumerationLiteral arg0) {
+	public Object visitFEnumerationLiteral(FEnumerationLiteral arg0) {
 		return new Object[0];
 	}
 	
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visit(FOperation arg0) {
+	public Object visitFOperation(FOperation arg0) {
 		return new Object[0];
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPackage)
 	 */
-	public Object visit(FPackage arg0) {
+	public Object visitFPackage(FPackage arg0) {
 		ArrayList result = new ArrayList();
 		
 		if (outline.prefPackageTree()) {
@@ -168,13 +169,13 @@ public class GetChildrenVisitor extends KermetaVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
 	 */
-	public Object visit(FPrimitiveType arg0) {
+	public Object visitFPrimitiveType(FPrimitiveType arg0) {
 		return new Object[0];
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
-	public Object visit(FProperty arg0) {
+	public Object visitFProperty(FProperty arg0) {
 		return new Object[0];
 	}
 }
