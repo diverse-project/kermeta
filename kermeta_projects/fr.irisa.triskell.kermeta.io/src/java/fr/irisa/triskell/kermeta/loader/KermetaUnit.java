@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.37 2005-08-24 17:33:13 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.38 2005-08-31 13:34:18 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -222,7 +222,6 @@ public abstract class KermetaUnit {
 	{
 	    Object result = getNodeByModelElement(object);
 	    KermetaUnit unit = this ;
-	    if (result != null) return unit;
 	    visited = true;
 		Iterator it = importedUnits.iterator();
 		while(it.hasNext() && result == null) {
