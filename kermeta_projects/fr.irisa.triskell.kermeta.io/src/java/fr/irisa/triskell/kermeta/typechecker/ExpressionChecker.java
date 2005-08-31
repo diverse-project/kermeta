@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.18 2005-08-03 14:12:19 zdrey Exp $
+/* $Id: ExpressionChecker.java,v 1.19 2005-08-31 12:54:35 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -365,7 +365,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	        }
 	        
 	        if (provided_type.isSubTypeOf(targetType)) {
-	            unit.error.add(new KMUnitWarning("TYPE-CHECKER : Unecessary cast, it shmoud be a regular assignment", expression));
+	            unit.error.add(new KMUnitWarning("TYPE-CHECKER : Unecessary cast, it should be a regular assignment", expression));
 	            return provided_type;
 	        }
 	        else if (!targetType.isSubTypeOf(provided_type)) {
