@@ -1,10 +1,9 @@
-@mainClass "naze::Main"
+@mainClass "naze::Main" 
 @mainOperation "main"
 
-
 package naze;
+require "../../kmlogo/kermeta/kmLogo.kmt"
 require "printer.kmt"
-require "kmLogo.kmt"
 using kermeta::standard
 using kermeta::utils
 class Main

@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.1 2005-07-20 09:31:18 zdrey Exp $
+/* $Id: printer.kmt,v 1.2 2005-08-31 14:39:23 zdrey Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : GPL
@@ -117,7 +117,7 @@ class BasicPrettyPrinter inherits
 	
 	method visitTag(node : Tag, context : Integer) : String is do 
 	    result := ""
-	    result.append(indent + "@" + node.name + " \"" + node.value + "\"")
+	    result.append(indent + "@" + node.name + " \"" + node.~value + "\"")
 	end
 	
 	/**
@@ -181,6 +181,7 @@ class BasicPrettyPrinter inherits
 	method visitClassDefinition(node : ClassDefinition, context : Integer) : String from kermeta::language::structure::KMStructureVisitor is do
 	    var a : String
 		result := ""
+
 	    if (node.isAbstract) then 
 			result.append("abstract ")
 		end
@@ -362,7 +363,7 @@ class BasicPrettyPrinter inherits
     
 	method visitAssignement(node : Assignement, context : Integer) : String is do
 		var left : String init self.accept(node.target, context).toString
-		var right : String init self.accept(node.value, context).toString
+		var right : String init self.accept(node.~value, context).toString
 		var op : String
 		if (node.isCast) then op := "?" else op :=":" end
 		result := left + " " + op + "= " + right
@@ -432,15 +433,15 @@ class BasicPrettyPrinter inherits
 		result := " "
 	end
 	method visitIntegerLiteral(node : IntegerLiteral, context : Integer) : String is do
-		result := node.value.toString
+		result := node.~value.toString
 	end
 
 	method visitStringLiteral(node : StringLiteral, context : Integer) : String is do
-		result := "\""+node.value+"\""
+		result := "\""+node.~value+"\""
 	end
 	
 	method visitBooleanLiteral(node : BooleanLiteral, context : Integer) : String is do
-		result := node.value.toString
+		result := node.~value.toString 
 	end
 	
 	method visitTypeLiteral(node : TypeLiteral, context : Integer) : String is do
@@ -626,7 +627,6 @@ class BasicPrettyPrinter inherits
     /** Prettyprints tags -- todo : define a generic parametric method!!! */
     operation visitTagSet( tags : Set<kermeta::reflection::Tag>, context : Integer) : String is do
     	result := ""
-		var it : Iterator<kermeta::reflection::Tag> init tags.iterator
 		from var it : Iterator<kermeta::reflection::Tag> init tags.iterator
 		until it.isOff
 		loop
@@ -640,8 +640,7 @@ class BasicPrettyPrinter inherits
     
     /** Pretty prints a set of TypeVariables, separated by a comma */
 	operation visitTypeVariableSet(tparams : Set<kermeta::reflection::TypeVariable>, context : Integer) : String is do
-		result := ""
-		var it : Iterator<kermeta::reflection::TypeVariable> init tparams.iterator
+		result := "" 
 		from var it : Iterator<kermeta::reflection::TypeVariable> init tparams.iterator
 		until it.isOff
 		loop
