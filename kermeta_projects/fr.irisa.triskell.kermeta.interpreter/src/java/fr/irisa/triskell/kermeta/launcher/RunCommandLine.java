@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.7 2005-05-25 17:42:47 ffleurey Exp $
+/* $Id: RunCommandLine.java,v 1.8 2005-08-31 15:23:35 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : GPL
@@ -24,9 +24,11 @@ import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_C;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_H;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_K;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_O;
+import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_P;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_T;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_U;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.utils.argumentsreader.CheckOption;
@@ -50,6 +52,8 @@ public class RunCommandLine {
     protected ArrayList interpreterParameters;
     protected boolean initialized = false;
     
+    protected boolean logExecutionTime = false;
+    
     
     
 	/** Logger to get the error of this launcher */
@@ -68,6 +72,7 @@ public class RunCommandLine {
 				new Option_C (new Vector()),
 				new Option_H (),
 				new Option_T (),
+				new Option_P (),
 				new Option_K (new Vector()),
 				new Option_O (new Vector()),
 				new Option_U (new Vector())
@@ -117,12 +122,16 @@ public class RunCommandLine {
 	    if (checkOption.Saw ("-T"))
 		{
 	        internalLog.debug ("option -T was seen: ");
-			Iterator it = checkOption.getOption("-K").getParameters().iterator();						
+			Iterator it = checkOption.getOption("-T").getParameters().iterator();						
 			if (it.hasNext())
 			{
 			    kermetaStandardURI = it.next().toString();
 			    internalLog.debug ("\t" + kermetaStandardURI);
 			}
+		}
+	    if (checkOption.Saw ("-P"))
+		{
+	    	logExecutionTime = true;
 		}
 	    
 	}
@@ -192,10 +201,8 @@ public class RunCommandLine {
 		}
 		else
 		{
-		    if (className != null)
-		        theInterpreter.setEntryPoint(className, operationName);		    
-		    theInterpreter.setEntryParameters(interpreterParameters);
-		    theInterpreter.launch();
+			runMainOperation(className,operationName, interpreterParameters);
+		    
 		}
 	
 	}  
@@ -231,10 +238,33 @@ public class RunCommandLine {
 	        String mainClassValue, 
 	        String mainOperationValue,
 	        ArrayList parameters)
-	{	    	  
-	    theInterpreter.setEntryPoint(mainClassValue, mainOperationValue);
+	{	
+		long time = System.currentTimeMillis();
+        
+        int nb_ro = RuntimeObject.getInstanceCounter();
+        
+        if (className != null)
+	        theInterpreter.setEntryPoint(mainClassValue, mainOperationValue);
+	    //theInterpreter.setEntryPoint(mainClassValue, mainOperationValue);
 	    theInterpreter.setEntryParameters(parameters);
 	    theInterpreter.launch();
+	    
+	    if (logExecutionTime)
+	    {
+	    	long total = Runtime.getRuntime().totalMemory();
+	        long max = Runtime.getRuntime().maxMemory();
+	        
+	        time = System.currentTimeMillis() - time;
+	        nb_ro = RuntimeObject.getInstanceCounter() - nb_ro;
+	        
+	        internalLog.info("    ************************************************");
+	        internalLog.info("    * Consumed memory : " + total + "/" + max);
+	        internalLog.info("    * #objects cached : " +  theInterpreter.memory.getNumberOfObjectCached());
+	        internalLog.info("    * #ro created     : " + nb_ro);
+	        internalLog.info("    * #ro total       : " + RuntimeObject.getInstanceCounter());
+	        internalLog.info("    * time (ms)       : " + time);
+	        internalLog.info("    ************************************************");
+	    }
 	}
 
 }

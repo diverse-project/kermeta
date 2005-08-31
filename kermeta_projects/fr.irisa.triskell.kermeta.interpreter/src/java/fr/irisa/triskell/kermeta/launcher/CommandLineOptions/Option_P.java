@@ -10,16 +10,16 @@ import fr.irisa.triskell.utils.argumentsreader.Option;
 
 /**
 */
-public class Option_T extends Option 
+public class Option_P extends Option 
 {
 	/** */
-	public Option_T ()
+	public Option_P ()
 	{
-		setName ("-T");
+		setName ("-P");
 		setNbArgs (0);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("Run as a test suite ");
+		setHelp ("Display Profiling info ");
 		setMultiple (false);
 	}
 	
