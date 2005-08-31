@@ -30,11 +30,8 @@ import fr.irisa.triskell.kermeta.structure.FType;
  */
 public class ExpressionParser {
 
-
-    
-	
 	public static FExpression parse(KermetaUnit unit, String str) {
-		KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(str)));
+		KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(str.replace('\t', ' '))));
 		fr.irisa.triskell.kermeta.ast.FExpression  ast_exp = null;
 		try {
 			ast_exp = parser.asingleExpression().getFExpression();
