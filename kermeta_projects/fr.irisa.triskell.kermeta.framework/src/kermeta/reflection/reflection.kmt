@@ -30,7 +30,7 @@ abstract class Class inherits Type
 	attribute typeParamBinding : set TypeVariableBinding[0..*]
 	property readonly ownedAttribute : set Property[0..*]
 		getter is do
-			result := classDefinition.ownedAttribute
+			result := classDefinition.ownedAttributes
 		end
 	property readonly ownedOperation : set Operation[0..*]
 		getter is do
@@ -96,7 +96,7 @@ abstract class ClassDefinition inherits TypeContainer, TypeDefinition
 	attribute isAbstract : Boolean
 	attribute ownedAttributes : set Property[0..*]#owningClass
 	attribute ownedOperation : set Operation[0..*]#owningClass
-	reference superType : set Type[0..*]
+	reference superType : set Class[0..*]
 	attribute typeParameter : set TypeVariable[0..*]
 }
 abstract class TypedElement inherits TypeContainer, NamedElement
