@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<automaton:FiniteAutomaton xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:automaton="platform:/resource/automata/metamodels/automata.ecore" finalStateSet="//@stateSet.1" initialState="//@stateSet.0">
+<automaton:FiniteAutomaton xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:automaton="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore" finalStateSet="//@stateSet.1" initialState="//@stateSet.0">
   <stateSet name="s0" arriving="//@transitionSet.1 //@transitionSet.2" going="//@transitionSet.0 //@transitionSet.1 //@transitionSet.2"/>
   <stateSet name="s1" arriving="//@transitionSet.0"/>
   <transitionSet source="//@stateSet.0" target="//@stateSet.1" letter="0"/>

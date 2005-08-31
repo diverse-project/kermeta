@@ -40,10 +40,10 @@ using kermeta::persistence
 */
 class FiniteAutomaton
 {
-	attribute stateSet : set State[0..*]//Set<State> //#owningFA
+	attribute stateSet : State[0..*]
 	reference initialState : State 
-	reference finalStateSet : set State[0..*]
-	attribute transitionSet : set Transition[0..*]
+	reference finalStateSet : State[0..*]
+	attribute transitionSet : Transition[0..*]
 
 	property readonly alphabet : Set<String>
 		getter is do
@@ -54,7 +54,6 @@ class FiniteAutomaton
 		result := transitionSet.detect { t | 
 			stdio.writeln("transitions : " + t.source.toString + ", " + t.target.toString)
 			not (stateSet.contains(t.source) and stateSet.contains(t.target))}==void
-		
 	end
 	
 	/** Initialize a new automaton from an existing one 
@@ -67,15 +66,6 @@ class FiniteAutomaton
 		stateSet.add(initState)
 		initialState := initState 
 		if (isInitComb == true) then initialState.combination := Set<State>.new end 
-	end
-	
-	operation prettyprint() is do
-		stdio.writeln("states : " + stateSet.size.toString)
-		stateSet.each { e | stdio.writeln(">"+e.name + "(" + e.toString +")") }
-		stdio.writeln("transitions : "+ transitionSet.size.toString)
-		transitionSet.each { e | stdio.writeln(e.source.name + " ="+e.letter+ "=> " +e.target.name + " | | " + e.source.toString + ", " + e.target.toString)} 
-		stdio.writeln("final states : "+ finalStateSet.size.toString)
-		finalStateSet.each { e | stdio.writeln(e.name  + " | " + e.toString) }
 	end
 	
 	operation dotprint() is do
@@ -92,46 +82,27 @@ class FiniteAutomaton
        stdio.writeln("}")
 	end
 	
-
-	
+	/** Quick transformation of a Set into a Sequence */
 	operation seqToSet<G>( iseq : Sequence<G> ) : Set<G> is do
     	result := Set<G>.new
-		from var it : Iterator<G> init iseq.iterator
-		until it.isOff
-		loop
-			var n : G init it.next
-			if (n.toString != "<void>" and not result.contains(n)) then
-				result.add( n )
-			end
-		end 
+    	iseq.each { n | if n != void and not result.contains(n) then result.add(n) end	}
     end
     
 }
 
 class State
 {
-//	reference combination : set State[0..*] // -> defined by a reflective collection
-	reference combination : Set<State> //
-	// how to model a "combination" of states in the determinisation algo?
+	reference combination : Set<State>
 	reference name : String
 	reference arriving : Transition[0..*]#target
 	reference going : Transition[0..*]#source
-
-	// As we sometimes work with copies of states, we need a special eq.test	
-/*	method equals(s : State) : Boolean from Object is do
-		if void.equals(s) then result := false else
-		result := (s.name == self.name) end
-	end*/
 	
-	/**
-	 * Create a new state from self state.
-	 */
+	/** Create a new state from self state. */
 	method copy() : State is do
 		result := State.new
 		result.name := String.clone(name)
 		result.combination := Set<State>.new
 	end
-	
 }
 
 class Transition
@@ -139,17 +110,10 @@ class Transition
 	reference source : State#going
 	reference target : State#arriving 
 	reference letter : String
-	
-	// Create a "completely" new transition (no share of states)
-	operation initialize( s : State, t : State, l : String) is do
-		source := s
-		target := t
-		letter := l
-	end
 }
 
 
-/** A pair of States, as a relation of equivalence */
+/** A pair of States, as a equivalence relation */
 class Pair
 {
 	reference left : State
@@ -157,32 +121,18 @@ class Pair
 }
 
 /** 
- * A set of helper methods that should ease the determinisation 
- * We need :
- * 
+ * A set of helper methods to ease the determinisation/minimization
  */
-
 class AutomatonHelper
 {	
 	operation seqToSet<G>( iseq : Sequence<G> ) : Set<G> is do
     	result := Set<G>.new
-		from var it : Iterator<G> init iseq.iterator
-		until it.isOff
-		loop
-			var n : G init it.next
-			if (n.toString != "<void>" and not result.contains(n)) then
-				result.add( n )
-			end
-		end 
+    	iseq.each { n | if n != void and not result.contains(n) then result.add(n) end	}
     end
     
     operation join( str_seq : Collection<String>) : String is do
     	result := ""
-		from var it : Iterator<String> init str_seq.iterator
-		until it.isOff
-		loop
-			result.append(it.next)
-		end
+    	str_seq.each { str | result.append(str) }
     end
     
     operation createPair(p : State, q : State) : Pair is do
@@ -190,15 +140,22 @@ class AutomatonHelper
     	result.left := p.copy
     	result.right := q.copy
     end
+    
+    operation createTransition( s : State, t : State, l : String) : Transition is do
+    	result := Transition.new
+		result.source := s
+		result.target := t 
+		result.letter := l
+	end
 	
 	/** 
-	 * Serialization resources
-	 */
-	     
+	 * Serialization helpers
+	 */  
     operation saveEMFAutomaton(repository : EMFRepository, a : FiniteAutomaton, uri : String, mmuri : String) : FiniteAutomaton is do
 		if a.conformityChecker == true then 
 	    	var resource : EMFResource init repository.createResource(uri , mmuri)
 	    	resource.instances.add(a)
+	    	//a.stateSet.each { z | resource.instances.add(z)}
 	    	resource.save()
 	    else
 	    	stdio.writeln("I'm sorry, I'm afraid that your automaton is not valid; please check the following rules : ")
@@ -228,7 +185,7 @@ class AutomatonHelper
     end
 	 
 }
-
+ 
 
 
 

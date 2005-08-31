@@ -33,9 +33,9 @@ class Sampler
 
     	var s0 : State init State.new
     	var s1 : State init State.new
-    	
+    	  
     	s0.name := "s0"
-    	s1.name := "s1"
+    	s1.name := "s1" 
 
     	var tSet : Set<Transition> init Set<Transition>.new
     	
@@ -57,13 +57,13 @@ class Sampler
     	t001.target := s0
     	
 		// 	Define a set of transitions
-		a.transitionSet := Set<Transition>.new
+		a.transitionSet := OrderedSet<Transition>.new
 		a.transitionSet.add(t010)
 		a.transitionSet.add(t000)
 		a.transitionSet.add(t001)
 		
 		// Define completely our automaton
-		a.stateSet := Set<State>.new
+		a.stateSet := OrderedSet<State>.new
 		a.stateSet.add(s0)
 		a.stateSet.add(s1)
 		
@@ -134,7 +134,7 @@ class Sampler
 		a2.finalStateSet.add(s3)
 		a2.finalStateSet.add(s4)
 		a2.finalStateSet.add(s5)
-		
+		a2.dotprint
 		result := a2
     end
     
@@ -174,6 +174,7 @@ class Sampler
 		a2.finalStateSet.add(s5)
 		
 		result := a2
+		a2.dotprint
 	end
     
     

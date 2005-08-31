@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<automaton:FiniteAutomaton xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:automaton="platform:/resource/automata/metamodels/automata.ecore" finalStateSet="//@stateSet.4" initialState="//@stateSet.0">
+<automaton:FiniteAutomaton xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:automaton="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore" finalStateSet="//@stateSet.4" initialState="//@stateSet.0">
   <stateSet name="A" arriving="//@transitionSet.9" going="//@transitionSet.0 //@transitionSet.1"/>
   <stateSet name="B" arriving="//@transitionSet.0 //@transitionSet.7" going="//@transitionSet.2 //@transitionSet.8"/>
   <stateSet name="C" arriving="//@transitionSet.1" going="//@transitionSet.3 //@transitionSet.12"/>
@@ -14,8 +14,8 @@
     <arriving href="#//@transitionSet.5"/>
     <arriving href="#//@transitionSet.6"/>
   </stateSet>
-  <transitionSet source="//@stateSet.0" target="//@stateSet.1" letter="0"/>
-  <transitionSet source="//@stateSet.0" target="//@stateSet.2" letter="1"/>
+  <transitionSet source="//@stateSet.0" target="//@stateSet.1" letter="2"/>
+  <transitionSet source="//@stateSet.0" target="//@stateSet.2" letter="2"/>
   <transitionSet source="//@stateSet.1" target="//@stateSet.3" letter="1"/>
   <transitionSet source="//@stateSet.2" target="//@stateSet.3" letter="1"/>
   <transitionSet source="//@stateSet.4" target="//@stateSet.3" letter="1"/>

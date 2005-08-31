@@ -11,9 +11,8 @@ using automaton::samples
 using automaton
 using kermeta::standard
 
-class Minimization
+class Minimization 
 {
-	reference timeout : Integer
 	reference equivalent_pairs : set Pair[0..*]  // The initial pairSet of the equivalence relation { F \ Q }² ^ F²
 	reference all_input_pairs : set Pair[0..*]       // The QxQ set of possible pairs, where Q is the stateSet
 	reference helper : AutomatonHelper
@@ -22,15 +21,15 @@ class Minimization
     
     	// Input automaton (non-determinist)
     	var input : FiniteAutomaton
+		var output_path : String
 		var output : FiniteAutomaton init FiniteAutomaton.new
-		var output_path : String init "../models/sampleM1min.automaton"
 		
 		// Initialize attributes
 	   	helper := AutomatonHelper.new
-		//input := Sampler.new.createSampleM1()
+		//input := Sampler.new.createSampleM1() // "../models/sampleM1min.automaton"
 		
 		input := helper.ask_emfmodel("Enter the EMF model of the automaton to minimize :")
-		output_path := stdio.read("Enter the output file where to store the minimal automaton :")
+		output_path := stdio.read("Enter the output file where to store the minimal automaton :") 
 
 	   	// Initialize equivalent_pairs and possible all_input_pairs
 	   	input.stateSet.each { p | input.stateSet.each { b | 
@@ -43,12 +42,11 @@ class Minimization
 		      and
 			      find_one(equivalent_pairs, p, b) == void
 		    then 
-		    	stdio.write("{"+p.name + ","+b.name+"} ,")
+		    	stdio.writeln("{"+p.name + ","+b.name+"} ,")
 		   		equivalent_pairs.add(helper.createPair(p, b))
 	   	    end
 	   	    } } 
 		stdio.writeln("Eo = {F-Q}²^F² is initialized")	   	     
-
 	   	// Minimalize 
     	minimalize(input, output)
     	//output.prettyprint
@@ -66,8 +64,8 @@ class Minimization
      *    - output : the minimal automaton equivalent to input
      */
     operation minimalize(input : FiniteAutomaton, output : FiniteAutomaton) is do
-    	// TODO Remove not accessible states
-    
+    	// Remove not accessible states
+    	remove_unavailable_states(input)
     	// final_equivalent_pairs : the smallest equivalent pair set
 		var final_equivalent_pairs : Set<Pair> init Set<Pair>.new
 		final_equivalent_pairs.addAll(equivalent_pairs)
@@ -101,14 +99,24 @@ class Minimization
     	stdio.writeln("Transition set creation succeeded")
     	// Set the initial and the final states
     	output.initialState := input.initialState.combination.one
-    	output.finalStateSet := input.finalStateSet.one.combination 
+    	output.finalStateSet.addAll(input.finalStateSet.one.combination) 
     end     
                
-    // Find the pair in pairSet which equals (left, right) or (right, left) (xRy => yRx)
+    /** Find the pair in pairSet which equals (left, right) or (right, left) (xRy => yRx) */
     operation find_one(pairSet : Set<Pair>, left : State, right : State) : Pair is do
     	result := pairSet.detect { p | 
    		(p.left.name == left.name and p.right.name == right.name) or
    		(p.right.name == left.name and p.left.name == right.name) }
+    end
+    
+    /** Remove the states to which no transition leads */
+    operation remove_unavailable_states(a : FiniteAutomaton) is do
+		var as_seq : Sequence<State> init a.stateSet.reject { s | not a.transitionSet.collect { t | t.target}.contains(s) and s != a.initialState}
+		var at_seq : Sequence<Transition> init a.transitionSet.reject { t | not as_seq.contains(t.target) }
+		a.transitionSet.clear
+		a.transitionSet.addAll(at_seq)
+		a.stateSet.clear
+		a.stateSet.addAll(as_seq)
     end
          
     /** 
@@ -131,10 +139,10 @@ class Minimization
     		var tright : Transition init automaton.transitionSet.detect { t | t.source.name==pair.right.name and t.letter == letter }    		
     		if (tleft!=void and tright!=void) then // empty word belongs to accepted words
     			if find_one(equivalent_pairs, tleft.target, tright.target) == void then
-	    			result := true
+	    			result := true	    		
 	    		end
-	    	else if (tleft==void or tright==void) then result := true end
-    		end
+	    	else if (tleft==void and tright!=void) or (tleft!=void and tright==void) then result:=true end
+	    	end
     	end
     end
     
@@ -184,31 +192,32 @@ class Minimization
     	end
     end
     
-    // eqClassStateSet : the minimal automaton set of states
-    // stateSet : the input automaton set of states
-    // transitionSet : the intput automaton set of transitions
+    /** 
+     * Create the transitions of the minimal automaton
+     * params :
+     *     - eqClassStateSet : the minimal automaton set of states
+     *     - stateSet : the input automaton set of states
+     *     - transitionSet : the intput automaton set of transitions
+     */
     operation createEquivalentTransitions(
-    	eqClassStateSet : Set<State>, stateSet : Set<State>, transitionSet : Set<Transition>) : Set<Transition> is do
-    	result := Set<Transition>.new
+    	eqClassStateSet : OrderedSet<State>, stateSet : OrderedSet<State>, transitionSet : OrderedSet<Transition>) : OrderedSet<Transition> is do
+    	result := OrderedSet<Transition>.new
     	// for each eq-class
-    	from var it : Iterator<State> init stateSet.iterator 
-    	until it.isOff
-    	loop
-    		var nextInputState : State init it.next
+    	stateSet.each { nextInputState |
+    		
     		// Get the eq.class to which the current state belongs
     		var nextEqClassState : State init nextInputState.combination.one 
 			// For each letter, Get the transition for which the current state is a source
 			var nextTransitionSet : Sequence<Transition> init transitionSet.select { t | t.source == nextInputState }
 			// The target combination is the eq. class target of the new transition!
 			nextTransitionSet.each { t |
-			// Add this transition		
-			if result.detect {  rt | rt.source == nextEqClassState and rt.letter == t.letter } == void then
-				var newt : Transition init Transition.new
-				var nextEqClassStateTarget : State init eqClassStateSet.detect { s | s.combination.detect{ cs | cs.name==t.target.name }!=void }
-				newt.initialize(nextEqClassState, nextEqClassStateTarget, t.letter)
-				result.add(newt)
-			end
+				// Add this transition		
+				if result.detect {  rt | rt.source == nextEqClassState and rt.letter == t.letter } == void then
+					var nextEqClassStateTarget : State init eqClassStateSet.detect { s | s.combination.detect{ cs | cs.name==t.target.name }!=void }
+					var newt : Transition init helper.createTransition(nextEqClassState, nextEqClassStateTarget, t.letter)
+					result.add(newt)
+				end
 			}
-    	end
+    	}
     end
 }

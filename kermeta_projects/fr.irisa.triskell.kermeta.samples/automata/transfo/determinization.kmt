@@ -1,20 +1,20 @@
 @mainClass "automaton::Determinization"
 @mainOperation "main"
     
-
+  
 package automaton;
 
  
 require kermeta 
 
 require "../metamodels/automata.kmt"
-//require "../models/samples.kmt"
+require "../models/samples.kmt"
 using kermeta::standard
 using automaton::samples
 using kermeta::persistence
  
 class Determinization 
-{
+{ 
 	reference processed_states : Set<State>
 	reference repository : EMFRepository
 	reference helper : AutomatonHelper
@@ -22,16 +22,18 @@ class Determinization
     operation main() : Void is do 
     
     	// Input automaton (non-determinist)
-    	//var input : FiniteAutomaton init Sampler.new.createSample2()
     	var input : FiniteAutomaton
 		var output : FiniteAutomaton init FiniteAutomaton.new
-
+		var output_path : String
 		// Initialize attributes
 		processed_states := Set<State>.new
 		repository := EMFRepository.new
 		helper := AutomatonHelper.new 
 		 
-		input :=  helper.loadEMFAutomaton(repository, "../models/sample1.automaton", "../metamodels/automata.ecore")
+		// The input automaton to determinize 
+    	//input := Sampler.new.createSample2()
+		input :=  helper.ask_emfmodel("Enter the EMF automaton to determinize:")
+		output_path := stdio.read("Enter the output path for the determinized automaton :")
 
 	   	output.initialize(input.initialState, true)
 
@@ -47,10 +49,10 @@ class Determinization
 		
     	// We don't need combination to be stored
     	output.stateSet.each { e | e.combination.clear } 
-
+    	output.dotprint
     	// Save the automaton
-    	helper.saveEMFAutomaton(repository, output, "../models/sample1det.xmi", "../metamodels/automata.ecore")
-    	
+    	helper.saveEMFAutomaton(repository, output, output_path, "../metamodels/automata.ecore")
+
     end
     
     operation determinize(input : FiniteAutomaton, output : FiniteAutomaton, output_state : State) is do
@@ -58,14 +60,11 @@ class Determinization
     	if not processed_states.contains(output_state) then
    			processed_states.add(output_state)
 	    	// For each letter of the alphabet
-			from var lit : Iterator<String> init input.alphabet.iterator
-    		until lit.isOff
-    		loop
+	    	input.alphabet.each { nextl |
     			// There exists a state x of q' (where q' is a P(Q))
     			// and state-y from Q so that : x --l-->  y belongs to input.transitionSet
-    			var nextl : String init lit.next
 		    	var newq : State init State.new
-				newq.combination := input.seqToSet(
+				newq.combination := helper.seqToSet(
     				input.transitionSet.select { e | e.letter.equals(nextl) }.
     				select { a | output_state.name == a.source.name or output_state.combination.detect { i | i.name==a.source.name } != void }.
     				collect { b | b.target }  
@@ -82,13 +81,12 @@ class Determinization
 						newq := output.stateSet.detect { e | e.name == newq.name }
 					end
 					// Add the new transition
-					var newt : Transition init Transition.new
-					newt.initialize(output_state, newq, nextl) 
+					var newt : Transition init helper.createTransition(output_state, newq, nextl)  
 					output.transitionSet.add(newt)
 					self.determinize(input, output, newq)
 	    		end
-			end		// End of Loop
-    	end
+			}	// End of Loop
+    	end  
     end
    
     operation join( str_seq : Collection<String>) : String is do
