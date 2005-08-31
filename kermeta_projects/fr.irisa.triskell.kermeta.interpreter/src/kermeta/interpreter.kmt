@@ -1,5 +1,5 @@
 /***************************************************
- * $Id: interpreter.kmt,v 1.7 2005-05-13 15:05:53 ffleurey Exp $
+ * $Id: interpreter.kmt,v 1.8 2005-08-31 13:40:59 zdrey Exp $
  * Franck FLEUREY - 23/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -26,7 +26,7 @@ using kermeta::utils
 class Interpreter inherits KMExpressionVisitor<InterpreterContext, Object>
 {
 	method visitCallVariable(node : CallVariable, context : InterpreterContext) : Object is do
-		result := context.getVariable(node.name).value
+		result := context.getVariable(node.name).~value
 	end
 	
 	method visitCallFeature(node : CallFeature, context : InterpreterContext) : Object is do
@@ -58,15 +58,15 @@ class Interpreter inherits KMExpressionVisitor<InterpreterContext, Object>
 	end
 	
 	method visitIntegerLiteral(node : IntegerLiteral, context : InterpreterContext) : Object is do
-		result := node.value
+		result := node.~value
 	end
 	
 	method visitStringLiteral(node : StringLiteral, context : InterpreterContext) : Object is do
-		result := node.value
+		result := node.~value
 	end
 	
 	method visitBooleanLiteral(node : BooleanLiteral, context : InterpreterContext) : Object is do
-		result := node.value
+		result := node.~value
 	end
 	
 	method visitTypeLiteral(node : TypeLiteral, context : InterpreterContext) : Object is do
@@ -78,20 +78,7 @@ class Interpreter inherits KMExpressionVisitor<InterpreterContext, Object>
 	end
 	
 	method visitLoop(node : Loop, context : InterpreterContext) : Object is do
-		// push the context of the loop
-		context.current_frame.pushNewContext(node)
-		var stop : Boolean
-		// execute the initialization
-		node.initiatization.acceptKMExpressionVisitor(self, context)
-		// execute body until stop
-		from stop ?= node.stopCondition.acceptKMExpressionVisitor(self, context)
-		until stop
-		loop
-			result := node.body.acceptKMExpressionVisitor(self, context)
-			stop ?= node.stopCondition.acceptKMExpressionVisitor(self, context)
-		end
-		// pop the context of the loop
-		context.current_frame.popContext(node)
+		result := void
 	end
 	
 	method visitSelfExpression(node : SelfExpression, context : InterpreterContext) : Object is do
@@ -102,7 +89,7 @@ class Interpreter inherits KMExpressionVisitor<InterpreterContext, Object>
 		// compute the initial value
 		var init_value : Object
 		if node.initialization != void then
-			init_value := node.initialization.acceptKMExpressionVisitor(self, context)
+			init_value := void
 		else
 			// void by default
 			init_value := void 
@@ -110,7 +97,7 @@ class Interpreter inherits KMExpressionVisitor<InterpreterContext, Object>
 		// create the variable (and adds it in the context)
 		var variable : Variable init context.current_frame.current_context.defineVariable(node)
 		// set the initial value
-		variable.value := init_value
+		variable.~value := init_value
 	end
 	
 	method visitRaise(node : Raise, context : InterpreterContext) : Object is do
@@ -139,7 +126,7 @@ class InterpreterContext {
 	attribute call_stack : Stack<CallFrame>
 	
 	// The current frame
-	property readonly current_frame : CallFrame
+	property readonly current_frame : CallFrame 
 		getter is do
 			result := call_stack.peek
 		end
@@ -156,9 +143,7 @@ class InterpreterContext {
 		until it.isOff or result != void
 		loop
 			expr_context := it.next
-			if expr_context.variables.containsKey(variable_name) then 
-				result := expr_context.variables.get(variable_name)
-			end
+			result := expr_context.variables.getValue(variable_name)
 		end
 	end	
 	
@@ -239,7 +224,7 @@ class Variable {
 	reference declaration : VariableDecl
 	
 	// The value of the variable
-	reference value : Object
+	reference ~value : Object
 	
 	// An accessor to the name of the variable
 	property readonly name : String 

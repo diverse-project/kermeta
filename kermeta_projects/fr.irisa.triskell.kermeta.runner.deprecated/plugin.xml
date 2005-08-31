@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta.runner"
    name="Runner Plug-in"
-   version="0.0.13"
+   version="0.0.15"
    provider-name="INRIA/IRISA"
    class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
 
@@ -223,13 +223,11 @@
                   <count
                         value="1">
                   </count>
-               		<iterate>
+               		<iterate operator="or">
                  		<or>
                    			<test property="org.eclipse.debug.ui.matchesPattern" value="*.kmt"/>
                    			<test property="org.eclipse.debug.ui.matchesPattern" value="*.km"/>
-                   			<instanceof value="org.eclipse.core.resources.IFile"/>
                  		</or>
-                 		<test property="org.eclipse.jdt.junit.isTest"/>
                		</iterate>
                </with>
             </enablement>

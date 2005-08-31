@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.1 2005-08-24 17:27:52 zdrey Exp $
+/* $Id: Traceback.java,v 1.2 2005-08-31 13:40:04 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Traceback.java
  * License   : EPL
@@ -9,10 +9,12 @@
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 
+import org.apache.xpath.operations.Plus;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
@@ -79,6 +81,8 @@ public class Traceback {
     {
         String info = " ";
         KermetaUnit kunit = interpreter.getMemory().getUnit();
+        // TODO : instead of this patch unit finder, use the Tracer tools
+        // in order to get directly the URI of an elemeent
         KermetaUnit u = kunit.findUnitForModelElement(fobject);
         if (u!=null) 
         {
@@ -90,7 +94,7 @@ public class Traceback {
             else if (fo_source instanceof FObject) // does the code come from a "compiled" repr.? // and does a trace exist for the compiled representation?
                 info += "pas de trace, pas d'chocolat\n";
         }
-        else if (frame != null) // it's in a KMUnit 
+        else if (frame != null) // it's in a KMUnit (which does not store a trace)
         {
             info += "   " + frame.toString() + "\n";
         }
@@ -153,11 +157,10 @@ public class Traceback {
         try
         {
             InputStream in = converter.createInputStream(URI.createURI(unit_struri));
-            int c;
-            int charcount = 0; int linenum = 1;
-            while ((c = in.read()) != -1 && charcount<=charnum+1) {
-                if (c=='\n' || c=='\r') linenum += 1;
+            int c; int charcount = 0; int linenum = 1;
+            while ((c = in.read()) != -1 && charcount<=charnum) {
                 charcount += 1;
+                if (c=='\n') linenum += 1;
             }
             in.close();
             line = new Integer(linenum).toString();
