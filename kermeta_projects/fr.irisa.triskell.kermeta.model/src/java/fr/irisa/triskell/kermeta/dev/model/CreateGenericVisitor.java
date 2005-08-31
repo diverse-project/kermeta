@@ -1,4 +1,4 @@
-/* $Id: CreateGenericVisitor.java,v 1.5 2005-04-20 19:54:42 ffleurey Exp $
+/* $Id: CreateGenericVisitor.java,v 1.6 2005-08-31 14:12:49 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -99,6 +99,7 @@ public class CreateGenericVisitor {
 	}
 	
 	protected static String visitMethodTemplate;
+	
 	protected static String getvisitMethodTemplate() {
 		if (visitMethodTemplate == null) {
 			visitMethodTemplate = "	public Object visit(fr.irisa.triskell.XtypeNameX node) {\n";

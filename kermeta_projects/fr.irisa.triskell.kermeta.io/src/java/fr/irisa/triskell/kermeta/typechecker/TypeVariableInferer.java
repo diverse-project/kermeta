@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.10 2005-05-27 14:30:48 ffleurey Exp $
+/* $Id: TypeVariableInferer.java,v 1.11 2005-08-31 14:12:58 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableInferer.java
 * License : GPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.FVoidType;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -31,7 +32,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class TypeVariableInferer extends KermetaVisitor {
+public class TypeVariableInferer extends KermetaOptimizedVisitor {
 
     
 
@@ -89,14 +90,14 @@ public class TypeVariableInferer extends KermetaVisitor {
 	/**
 	 * IMPLEMENTATION OF THE VISITOR
 	 */
-	public Object visit(FFunctionType arg0) {
+	public Object visitFFunctionType(FFunctionType arg0) {
 		if (! (provided instanceof FFunctionType) ) throw new TypeDoesNotMatchError();
 		TypeVariableInferer.inferTypeVariableTypes(arg0.getFLeft(), ((FFunctionType)provided).getFLeft(), result);
 		TypeVariableInferer.inferTypeVariableTypes(arg0.getFRight(), ((FFunctionType)provided).getFRight(), result);
 		return null;
 	}
 	
-	public Object visit(FClass arg0) {
+	public Object visitFClass(FClass arg0) {
 	    
 	    // Handle type variables
 	    if (provided instanceof FTypeVariable) {
@@ -132,17 +133,17 @@ public class TypeVariableInferer extends KermetaVisitor {
 		return null;
 	}
 	
-	public Object visit(FEnumeration arg0) {
+	public Object visitFEnumeration(FEnumeration arg0) {
 		// FIXME: some checking might be added here...
 		return null;
 	}
 	
-	public Object visit(FPrimitiveType arg0) {
+	public Object visitFPrimitiveType(FPrimitiveType arg0) {
 		// FIXME: some checking might be added here...
 		return null;
 	}
 	
-	public Object visit(FProductType arg0) {
+	public Object visitFProductType(FProductType arg0) {
 		// the provided type is suposed to be a conformant product type 
 		for(int i=0; i<arg0.getFType().size(); i++) {
 			FType g = (FType)arg0.getFType().get(i);
@@ -152,7 +153,7 @@ public class TypeVariableInferer extends KermetaVisitor {
 		return null;
 	}
 	
-	public Object visit(FTypeVariable arg0) {
+	public Object visitFTypeVariable(FTypeVariable arg0) {
 		// check that this binding is OK
 	    if (!TypeConformanceChecker.conforms(TypeVariableUtility.getLeastDerivedAdmissibleType(arg0), TypeVariableUtility.getLeastDerivedAdmissibleType(provided))) {
 			throw new TypeDoesNotMatchError();

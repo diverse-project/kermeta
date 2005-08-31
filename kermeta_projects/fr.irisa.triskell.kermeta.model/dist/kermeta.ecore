@@ -6,7 +6,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//structure/String"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticTypeVariableBindings" upperBound="-1" eType="//structure/Type"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="//structure/Object //structure/TypeContainer">
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="//structure/TypeContainer //structure/Object">
       <eStructuralFeatures xsi:type="ecore:EReference" name="staticType" eType="//structure/Type"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="//behavior/CallExpression"/>
@@ -84,6 +84,37 @@
   </eSubpackages>
   <eSubpackages name="structure" nsURI="http://kermeta_structure/kermeta.ecore" nsPrefix="kermeta_structure">
     <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="kermeta::standard::String"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="//structure/MultiplicityElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//structure/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="raisedException" upperBound="-1" eType="//structure/Type"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1" eType="//structure/Parameter" containment="true" eOpposite="//structure/Parameter/operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//behavior/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="superOperation" eType="//structure/Operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="//structure/ClassDefinition" eOpposite="//structure/ClassDefinition/ownedOperation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1" eType="//structure/TypeVariable"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="//structure/MultiplicityElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="//structure/Property"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" eType="//structure/Boolean" defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="//structure/String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isComposite" eType="//structure/Boolean" defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDerived" eType="//structure/Boolean" defaultValueLiteral="false"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" eType="//structure/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="getterbody" eType="//behavior/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="setterbody" eType="//behavior/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="//structure/ClassDefinition" eOpposite="//structure/ClassDefinition/ownedAttributes"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="//structure/Object">
+      <eOperations name="isInstance" eType="//structure/Boolean">
+        <eParameters name="element" eType="//structure/Object"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true" eSuperTypes="//structure/Object">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" upperBound="-1" eType="//structure/Type" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" eSuperTypes="//structure/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" eType="//structure/Enumeration" transient="true" eOpposite="//structure/Enumeration/ownedLiteral"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="kermeta::standard::Boolean"/>
     <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//structure/Type">
       <eOperations name="new" eType="//structure/Object"/>
@@ -122,37 +153,6 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="//structure/Boolean" defaultValueLiteral="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="//structure/Integer"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="//structure/UnlimitedNatural"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="//structure/MultiplicityElement">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//structure/Boolean"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="raisedException" upperBound="-1" eType="//structure/Type"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1" eType="//structure/Parameter" containment="true" eOpposite="//structure/Parameter/operation"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//behavior/Expression" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="superOperation" eType="//structure/Operation"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="//structure/ClassDefinition" eOpposite="//structure/ClassDefinition/ownedOperation"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" upperBound="-1" eType="//structure/TypeVariable"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="//structure/MultiplicityElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="//structure/Property"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" eType="//structure/Boolean" defaultValueLiteral="false"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="//structure/String"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isComposite" eType="//structure/Boolean" defaultValueLiteral="false"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDerived" eType="//structure/Boolean" defaultValueLiteral="false"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isID" eType="//structure/Boolean"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="getterbody" eType="//behavior/Expression" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="setterbody" eType="//behavior/Expression" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="//structure/ClassDefinition" eOpposite="//structure/ClassDefinition/ownedAttributes"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="//structure/Object">
-      <eOperations name="isInstance" eType="//structure/Boolean">
-        <eParameters name="element" eType="//structure/Object"/>
-      </eOperations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true" eSuperTypes="//structure/Object">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" upperBound="-1" eType="//structure/Type" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" eSuperTypes="//structure/NamedElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" eType="//structure/Enumeration" transient="true" eOpposite="//structure/Enumeration/ownedLiteral"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DataType" abstract="true" eSuperTypes="//structure/Type //structure/TypeDefinition"/>
     <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="//structure/DataType">

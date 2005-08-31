@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.7 2005-05-18 23:42:25 ffleurey Exp $
+/* $Id: TypeConformanceChecker.java,v 1.8 2005-08-31 14:12:58 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -22,6 +22,7 @@ import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FVoidType;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -29,7 +30,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class TypeConformanceChecker  extends KermetaVisitor {
+public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 
 	
 	public static boolean conforms(FType required, FType provided) {
@@ -77,7 +78,7 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 	/**
 	 * IMPLEMENTATION OF THE VISITOR
 	 */
-	public Object visit(FFunctionType arg0) {
+	public Object visitFFunctionType(FFunctionType arg0) {
 		// Covariant for return type and contra-variant for parameters
 		Boolean result = new Boolean(false);
 		if (provided instanceof FFunctionType) {
@@ -91,7 +92,7 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 		
 	}
 	
-	public Object visit(FClass arg0) {
+	public Object visitFClass(FClass arg0) {
 		Boolean result = new Boolean(false);
 		if (TypeEqualityChecker.equals(arg0, provided)) {
 			result = new Boolean(true);
@@ -117,15 +118,15 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FEnumeration arg0) {
+	public Object visitFEnumeration(FEnumeration arg0) {
 		return new Boolean(provided == arg0);
 	}
 	
-	public Object visit(FPrimitiveType arg0) {
+	public Object visitFPrimitiveType(FPrimitiveType arg0) {
 		throw new Error("Type-Checker error : the required type should not be a primitive type");
 	}
 	
-	public Object visit(FProductType arg0) {
+	public Object visitFProductType(FProductType arg0) {
 		// all types must be sub-types
 		Boolean result = new Boolean(true);
 		if (provided instanceof FProductType) {
@@ -144,7 +145,7 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FTypeVariable arg0) {
+	public Object visitFTypeVariable(FTypeVariable arg0) {
 		// FIXME: This is probably too restrictive
 	    FType r = TypeVariableUtility.getLeastDerivedAdmissibleType(arg0);
 	    if (provided instanceof FTypeVariable) {
@@ -161,7 +162,7 @@ public class TypeConformanceChecker  extends KermetaVisitor {
 	    }
 	}
 
-	public Object visit(FVoidType arg0) {
+	public Object visitFVoidType(FVoidType arg0) {
 		return new Boolean(provided instanceof FVoidType);
 	}
 }

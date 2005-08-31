@@ -1,4 +1,4 @@
-/* $Id: TypeVariableEnforcer.java,v 1.3 2005-05-20 12:46:12 ffleurey Exp $
+/* $Id: TypeVariableEnforcer.java,v 1.4 2005-08-31 14:12:58 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : GenericTypeSubstitution.java
 * License : GPL
@@ -26,6 +26,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.FVoidType;
 import fr.irisa.triskell.kermeta.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -33,7 +34,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class TypeVariableEnforcer extends KermetaVisitor {
+public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	
 	public static FType getBoundType(FType generic, Hashtable bindings) {
 		TypeVariableEnforcer visitor = new TypeVariableEnforcer(bindings);
@@ -57,7 +58,7 @@ public class TypeVariableEnforcer extends KermetaVisitor {
 	/**
 	 * Create a copy of the function type by resolving types
 	 */
-	public Object visit(FFunctionType arg0) {
+	public Object visitFFunctionType(FFunctionType arg0) {
 		FFunctionType result = struct_factory.createFFunctionType();
 		result.setFLeft(getBoundType(arg0.getFLeft(), bindings));
 		result.setFRight(getBoundType(arg0.getFRight(), bindings));
@@ -67,7 +68,7 @@ public class TypeVariableEnforcer extends KermetaVisitor {
 	/**
 	 * Create a copy of the FClass with resolved type parameters
 	 */
-	public Object visit(FClass arg0) {
+	public Object visitFClass(FClass arg0) {
 		FClass result;
 		if ( arg0.getFTypeParamBinding().size() == 0) {
 			result = arg0;
@@ -87,15 +88,15 @@ public class TypeVariableEnforcer extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FEnumeration arg0) {
+	public Object visitFEnumeration(FEnumeration arg0) {
 		return arg0;
 	}
 	
-	public Object visit(FPrimitiveType arg0) {
+	public Object visitFPrimitiveType(FPrimitiveType arg0) {
 		return arg0;
 	}
 	
-	public Object visit(FProductType arg0) {
+	public Object visitFProductType(FProductType arg0) {
 		FProductType result = struct_factory.createFProductType();
 		Iterator it = arg0.getFType().iterator();
 		while(it.hasNext()) {
@@ -106,12 +107,12 @@ public class TypeVariableEnforcer extends KermetaVisitor {
 	}
 	
 	
-	public Object visit(FTypeVariable arg0) {
+	public Object visitFTypeVariable(FTypeVariable arg0) {
 		if (bindings.containsKey(arg0)) return (FType)bindings.get(arg0);
 		else return arg0;
 	}
 	
-	public Object visit(FVoidType arg0) {
+	public Object visitFVoidType(FVoidType arg0) {
 	    return arg0;
 	}
 	

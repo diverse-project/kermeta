@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.20 2005-08-24 17:27:52 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.21 2005-08-31 14:12:55 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -72,13 +72,14 @@ import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * This is the Java version of kermeta interpreter. It extends the KermetaVisitor, and each
  * visit returns a result of type <code>RuntimeObject</code>.
  */
-public class ExpressionInterpreter extends KermetaVisitor {
+public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 
     
     //The only state variable of the interpreter should be the context and the memory
@@ -133,7 +134,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * of the current frame
 	 * @return
 	 */
-	public Object visit(FVariableDecl node)
+	public Object visitFVariableDecl(FVariableDecl node)
 	{
 		RuntimeObject ro_init = memory.voidINSTANCE;
 		// is it a classic case?
@@ -153,7 +154,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	
 	
 	
-    public Object visit(FTypeLiteral arg0) {
+    public Object visitFTypeLiteral(FTypeLiteral arg0) {
         RuntimeObject result = null;
         FType t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(arg0.getFTyperef())).getType();
        
@@ -176,7 +177,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
     }
     
     
-    public Object visit(FVoidLiteral arg0) {
+    public Object visitFVoidLiteral(FVoidLiteral arg0) {
         return memory.voidINSTANCE;
     }
 	/**
@@ -221,7 +222,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * 		CallResult -> CallVariable
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FAssignement)
 	 */
-	public Object visit(FAssignement node) {
+	public Object visitFAssignement(FAssignement node) {
 	    
 		// The name of the call
 		String lhs_name = node.getFTarget().getFName();
@@ -394,7 +395,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
      * name = super 
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FCallSuperOperation)
      */
-    public Object visit(FCallSuperOperation node)
+    public Object visitFCallSuperOperation(FCallSuperOperation node)
     {
         RuntimeObject result = null;
         // Current call frame is uniquely a LambdaCallFrame, or an OperationCallFrame. Other types are forbidden!
@@ -424,7 +425,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * - when we defined one and assigned it to a variable
 	 * - when we call one  
 	 */
-	public Object visit(FLambdaExpression node)
+	public Object visitFLambdaExpression(FLambdaExpression node)
 	{   	    
 	    RuntimeObject result = new RuntimeLambdaObject(node, memory.getROFactory(),this.interpreterContext.peekCallFrame(), this.interpreterContext);
 	    return result;
@@ -436,7 +437,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * processed.
 	 * We also store it as a variable (for the moment)
 	 */
-	public Object visit(FCallResult node)
+	public Object visitFCallResult(FCallResult node)
 	{
 	    RuntimeObject value = interpreterContext.peekCallFrame().getOperationResult();
 	    if (value==null)
@@ -449,7 +450,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * CallValue is the special variable "value" in the setter method of a derived
 	 * property
 	 */
-	public Object visit(FCallValue node)
+	public Object visitFCallValue(FCallValue node)
 	{
 	    RuntimeObject value = interpreterContext.peekCallFrame().getCallValueResult();
 	    return value;
@@ -459,7 +460,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
      * If the visited element is a Variable, then we search its value in the
      * InterpreterContext
      */
-    public Object visit(FCallVariable node) {
+    public Object visitFCallVariable(FCallVariable node) {
         RuntimeObject result;
         Variable var = interpreterContext.peekCallFrame().getVariableByName(node.getFName());
 
@@ -503,7 +504,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
         return result;
     }
 	
-	public Object visit(FSelfExpression node)
+	public Object visitFSelfExpression(FSelfExpression node)
 	{
 	    return interpreterContext.peekCallFrame().getSelf();
 	}
@@ -512,7 +513,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * Evaluate the sequence of instructions in this block.
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBlock)
 	 */
-	public Object visit(FBlock node) {
+	public Object visitFBlock(FBlock node) {
 
 	    RuntimeObject result = memory.voidINSTANCE;
 	    // process the statements
@@ -567,7 +568,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
-	public Object visit(FClass node) {
+	public Object visitFClass(FClass node) {
 	    throw new Error("INTERPRETER INTERNAL ERROR : visit a FClass");
 	}
 	
@@ -575,7 +576,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * Interprete the IF instruction
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FConditionnal)
 	 */
-	public Object visit(FConditionnal node) {
+	public Object visitFConditionnal(FConditionnal node) {
 	    
 	    // The result returned by the visit
 	    RuntimeObject result = null;
@@ -615,7 +616,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FLoop)
 	 */
-	public Object visit(FLoop node)
+	public Object visitFLoop(FLoop node)
 	{
         // Push a new expressionContext in the current CallFrame. 
         interpreterContext.peekCallFrame().pushExpressionContext();
@@ -658,7 +659,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 *
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visit(FOperation node) {
+	public Object visitFOperation(FOperation node) {
 	    
 	    RuntimeObject result = memory.voidINSTANCE;
 	    // push expression context
@@ -699,7 +700,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
     }
     
     
-	public Object visit(FCallFeature node) {
+	public Object visitFCallFeature(FCallFeature node) {
 	    
 	    // Handle call to enumeration literals :
 	    if (node.getFStaticEnumLiteral() != null) {
@@ -825,7 +826,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
      * @return
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FJavaStaticCall)
 	 */
-	public Object visit(FJavaStaticCall node) {
+	public Object visitFJavaStaticCall(FJavaStaticCall node) {
 	    
 		String jclassName  = node.getFJclass().replaceAll("::","."); 
 		String jmethodName = node.getFJmethod();
@@ -924,7 +925,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * @return the value of this node as an integer
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FIntegerLiteral) 
 	 */
-	public Object visit(FIntegerLiteral node) {
+	public Object visitFIntegerLiteral(FIntegerLiteral node) {
 	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue(), memory.getROFactory());
 	}
 	
@@ -932,11 +933,11 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * @return the value of this node as a boolean
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral) 
 	 */
-	public Object visit(FBooleanLiteral node) {
+	public Object visitFBooleanLiteral(FBooleanLiteral node) {
 	    return memory.getRuntimeObjectForBoolean(node.isFValue());
 	}
 	
-	public Object visit(FEnumerationLiteral node)
+	public Object visitFEnumerationLiteral(FEnumerationLiteral node)
 	{
 	    throw new Error("INTERPRETER ERROR : Enumeration NOT IMPLEMENTED !");
 	}
@@ -945,7 +946,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
      * @return the value of this node as a runtime object
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FStringLiteral)
      */
-    public Object visit(FStringLiteral node) {
+    public Object visitFStringLiteral(FStringLiteral node) {
         RuntimeObject result = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue(), memory.getROFactory());
         return result;
     }
@@ -953,7 +954,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
 	 * Visit a classDefinition node has the following consequences :
 	 * - create the "self" RuntimeObject and link it to the current CallFrame context 
 	 */
-	public Object visit(FClassDefinition node)
+	public Object visitFClassDefinition(FClassDefinition node)
 	{
 	    // Get the qualified name of this class
 	    String qname = memory.getUnit().getQualifiedName(node);
@@ -967,7 +968,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
      * visit a raise node
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FRaise)
      */
-    public Object visit(FRaise node) {
+    public Object visitFRaise(FRaise node) {
         // TODO : improve this to allow exception to be rescued.
         RuntimeObject exception = (RuntimeObject)this.accept(node.getFExpression());
         raiseKermetaException(exception, interpreterContext.peekCallFrame().getExpression());
@@ -978,7 +979,7 @@ public class ExpressionInterpreter extends KermetaVisitor {
     /**
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FRescue)
      */
-    public Object visit(FRescue node) {
+    public Object visitFRescue(FRescue node) {
         throw new Error("INTERPRETER ERROR : visit(FRescue node) NOT IMPLEMENTED !");
     }
 	/*

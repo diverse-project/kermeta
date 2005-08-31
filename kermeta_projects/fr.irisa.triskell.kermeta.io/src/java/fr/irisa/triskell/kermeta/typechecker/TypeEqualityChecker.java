@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.2 2005-05-18 23:42:18 ffleurey Exp $
+/* $Id: TypeEqualityChecker.java,v 1.3 2005-08-31 14:12:58 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -21,6 +21,7 @@ import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.FVoidType;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -28,7 +29,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class TypeEqualityChecker  extends KermetaVisitor {
+public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 
 	
 	public static boolean equals(FType required, FType provided) {
@@ -56,7 +57,7 @@ public class TypeEqualityChecker  extends KermetaVisitor {
 	/**
 	 * IMPLEMENTATION OF THE VISITOR
 	 */
-	public Object visit(FFunctionType arg0) {
+	public Object visitFFunctionType(FFunctionType arg0) {
 		Boolean result = new Boolean(false);
 		if (provided instanceof FFunctionType) {
 			FFunctionType p = (FFunctionType)provided;
@@ -68,7 +69,7 @@ public class TypeEqualityChecker  extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FClass arg0) {
+	public Object visitFClass(FClass arg0) {
 		Boolean result = new Boolean(false);
 		if (provided instanceof FClass) {
 			FClass p = (FClass)provided;
@@ -87,15 +88,15 @@ public class TypeEqualityChecker  extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FEnumeration arg0) {
+	public Object visitFEnumeration(FEnumeration arg0) {
 		return new Boolean(provided == arg0);
 	}
 	
-	public Object visit(FPrimitiveType arg0) {
+	public Object visitFPrimitiveType(FPrimitiveType arg0) {
 		throw new Error("Type-Checker error : the required type should not be a primitive type");
 	}
 	
-	public Object visit(FProductType arg0) {
+	public Object visitFProductType(FProductType arg0) {
 		Boolean result = new Boolean(false);
 		if (provided instanceof FProductType) {
 			FProductType p = (FProductType)provided;
@@ -114,11 +115,11 @@ public class TypeEqualityChecker  extends KermetaVisitor {
 	}
 
 	
-	public Object visit(FTypeVariable arg0) {
+	public Object visitFTypeVariable(FTypeVariable arg0) {
 		return new Boolean(provided == arg0);
 	}
 	
-	public Object visit(FVoidType arg0) {
+	public Object visitFVoidType(FVoidType arg0) {
 		return new Boolean(provided instanceof FVoidType);
 	}
 

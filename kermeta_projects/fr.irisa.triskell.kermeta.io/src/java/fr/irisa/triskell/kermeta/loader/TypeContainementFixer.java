@@ -1,4 +1,4 @@
-/* $Id: TypeContainementFixer.java,v 1.2 2005-07-19 10:27:09 zdrey Exp $
+/* $Id: TypeContainementFixer.java,v 1.3 2005-08-31 14:12:59 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -30,6 +30,7 @@ import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeContainer;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 
@@ -37,7 +38,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * Visitor that adds a FTypeContainer to all the types of the visited kermeta 
  * model.
  */
-public class TypeContainementFixer extends KermetaVisitor {
+public class TypeContainementFixer extends KermetaOptimizedVisitor {
 
 	
 	
@@ -51,7 +52,7 @@ public class TypeContainementFixer extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
-	public Object visit(FClassDefinition node) {
+	public Object visitFClassDefinition(FClassDefinition node) {
 		// if super types should be contained by the clessdef
 		addContainedTypes(node.getFSuperType(), node);
 		addContainedTypes(node.getFTypeParameter(), node);
@@ -61,7 +62,7 @@ public class TypeContainementFixer extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FFunctionType)
 	 */
-	public Object visit(FFunctionType node) {
+	public Object visitFFunctionType(FFunctionType node) {
 		addContainedTypes(node.getFLeft(), node);
 		addContainedTypes(node.getFRight(), node);
 		return null;
@@ -69,7 +70,7 @@ public class TypeContainementFixer extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visit(FOperation node) {
+	public Object visitFOperation(FOperation node) {
 		addContainedTypes(node.getFType(), node);
 		addContainedTypes(node.getFTypeParameter(), node);
 		// RaisedException is also an EList of FTypes.
@@ -79,29 +80,29 @@ public class TypeContainementFixer extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FParameter)
 	 */
-	public Object visit(FParameter node) {
+	public Object visitFParameter(FParameter node) {
 		addContainedTypes(node.getFType(), node);
 		return null;
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProductType)
 	 */
-	public Object visit(FProductType node) {
+	public Object visitFProductType(FProductType node) {
 		addContainedTypes(node.getFType(), node);
 		return null;
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
-	public Object visit(FProperty node) {
+	public Object visitFProperty(FProperty node) {
 		addContainedTypes(node.getFType(), node);
-		return super.visit(node);
+		return super.visitFProperty(node);
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeReference)
 	 */
-	public Object visit(FTypeReference node) {
+	public Object visitFTypeReference(FTypeReference node) {
 		addContainedTypes(node.getFType(), node);
 		return null;
 	}
@@ -109,7 +110,7 @@ public class TypeContainementFixer extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariable)
 	 */
-	public Object visit(FTypeVariable node) {
+	public Object visitFTypeVariable(FTypeVariable node) {
 		addContainedTypes(node.getFSupertype(), node);
 		return null;
 	}
@@ -117,17 +118,17 @@ public class TypeContainementFixer extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariableBinding)
 	 */
-	public Object visit(FTypeVariableBinding node) {
+	public Object visitFTypeVariableBinding(FTypeVariableBinding node) {
 		addContainedTypes(node.getFType(), node);
-		return super.visit(node);
+		return super.visitFTypeVariableBinding(node);
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
 	 */
-	public Object visit(FPrimitiveType node) {
+	public Object visitFPrimitiveType(FPrimitiveType node) {
 		addContainedTypes(node.getFInstanceType(), node);
-		return super.visit(node);
+		return super.visitFPrimitiveType(node);
 	}
 	
 	protected void addContainedTypes(EList types, FTypeContainer container) {

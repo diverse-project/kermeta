@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.19 2005-08-31 12:54:35 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.20 2005-08-31 14:12:58 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : GPL
@@ -62,6 +62,7 @@ import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.impl.FFunctionTypeImpl;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -69,7 +70,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class ExpressionChecker extends KermetaVisitor {
+public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	
     public static Hashtable typeCheckExpression(FExpression expression, KermetaUnit unit, TypeCheckerContext context) {
@@ -320,7 +321,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	 *  IMPLEMENTATION OF THE VISITOR
 	 **********************************/
 
-	public Object visit(FAssignement expression) {
+	public Object visitFAssignement(FAssignement expression) {
 	    preVisit();
 	    
 	    // Visit contained expressions
@@ -388,7 +389,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	    }
 	}
 	
-	public Object visit(FBlock expression) {
+	public Object visitFBlock(FBlock expression) {
 	    preVisit();
 		Type result = TypeCheckerContext.VoidType;
 		// Process contained expressions
@@ -418,14 +419,14 @@ public class ExpressionChecker extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FBooleanLiteral expression) {
+	public Object visitFBooleanLiteral(FBooleanLiteral expression) {
 	    preVisit();
 		expressionTypes.put(expression, TypeCheckerContext.BooleanType);
 		expression.setFStaticType(TypeCheckerContext.BooleanType.getFType());
 		return TypeCheckerContext.BooleanType;
 	}
 	
-	public Object visit(FCallValue expression) {
+	public Object visitFCallValue(FCallValue expression) {
 	    preVisit();
 	    Type result = null;
 	    // Get the type of the callValue
@@ -440,7 +441,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	    return result;
 	}
 	
-	public Object visit(FCallFeature expression) {
+	public Object visitFCallFeature(FCallFeature expression) {
 	    
 		// visit target expression
 		if (expression.getFTarget() != null) this.accept(expression.getFTarget());
@@ -517,7 +518,7 @@ public class ExpressionChecker extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FCallResult expression) {
+	public Object visitFCallResult(FCallResult expression) {
 	    preVisit();
 		// ele
 	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
@@ -530,7 +531,7 @@ public class ExpressionChecker extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FCallSuperOperation expression) {
+	public Object visitFCallSuperOperation(FCallSuperOperation expression) {
 	    preVisit();
 	    Type result =  checkOperationCall(context.getSuperOperation(), expression);
 	    expressionTypes.put(expression, result);
@@ -538,7 +539,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	    return result;
 	}
 	
-	public Object visit(FCallVariable expression) {
+	public Object visitFCallVariable(FCallVariable expression) {
 	    preVisit();
 		// if there is no parameter
 		Type result = context.symbolTypeLookup(expression.getFName());
@@ -559,7 +560,7 @@ public class ExpressionChecker extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FConditionnal expression) {
+	public Object visitFConditionnal(FConditionnal expression) {
 	    preVisit();
 		Type result;
 		context.pushContext();
@@ -584,7 +585,7 @@ public class ExpressionChecker extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FEmptyExpression expression) {
+	public Object visitFEmptyExpression(FEmptyExpression expression) {
 	    preVisit();
 		// Return type
 		expressionTypes.put(expression, TypeCheckerContext.VoidType);
@@ -592,14 +593,14 @@ public class ExpressionChecker extends KermetaVisitor {
 		return TypeCheckerContext.VoidType;
 	}
 	
-	public Object visit(FIntegerLiteral expression) {
+	public Object visitFIntegerLiteral(FIntegerLiteral expression) {
 	    preVisit();
 		expressionTypes.put(expression, TypeCheckerContext.IntegerType);
 		expression.setFStaticType(TypeCheckerContext.IntegerType.getFType());
 		return TypeCheckerContext.IntegerType;
 	}
 	
-	public Object visit(FJavaStaticCall expression) {
+	public Object visitFJavaStaticCall(FJavaStaticCall expression) {
 	    preVisit();
 		// visit contained expression
 		visitExpressionList(expression.getFParameters());
@@ -609,7 +610,7 @@ public class ExpressionChecker extends KermetaVisitor {
 		return TypeCheckerContext.ObjectType;
 	}
 	
-	public Object visit(FLambdaExpression expression) {
+	public Object visitFLambdaExpression(FLambdaExpression expression) {
 	    
 	   
 	    FProductType result_param = unit.struct_factory.createFProductType();
@@ -673,7 +674,7 @@ public class ExpressionChecker extends KermetaVisitor {
         return true_result;
 	}
 	
-	public Object visit(FLoop expression) {
+	public Object visitFLoop(FLoop expression) {
 	    preVisit();
 		context.pushContext();
 		// Process contained expressions
@@ -692,7 +693,7 @@ public class ExpressionChecker extends KermetaVisitor {
 		return TypeCheckerContext.VoidType;
 	}
 	
-	public Object visit(FRaise expression) {
+	public Object visitFRaise(FRaise expression) {
 	    preVisit();
 		// process contained expression
 	    this.accept(expression.getFExpression());
@@ -702,7 +703,7 @@ public class ExpressionChecker extends KermetaVisitor {
 	    return TypeCheckerContext.VoidType;
 	}
 	
-	public Object visit(FSelfExpression expression) {
+	public Object visitFSelfExpression(FSelfExpression expression) {
 	    preVisit();
 		Type result = context.getSelfType();
 		// Return type
@@ -711,14 +712,14 @@ public class ExpressionChecker extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FStringLiteral expression) {
+	public Object visitFStringLiteral(FStringLiteral expression) {
 	    preVisit();
 		expressionTypes.put(expression, TypeCheckerContext.StringType);
 		expression.setFStaticType(TypeCheckerContext.StringType.getFType());
 		return TypeCheckerContext.StringType;
 	}
 	
-	public Object visit(FTypeLiteral expression) {
+	public Object visitFTypeLiteral(FTypeLiteral expression) {
 	    preVisit();
 		Type result;
 	    FType type = getTypeFromTypeLiteral(expression).type;
@@ -739,7 +740,7 @@ public class ExpressionChecker extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FVariableDecl expression) {
+	public Object visitFVariableDecl(FVariableDecl expression) {
 	    preVisit();
 		Type result = TypeCheckerContext.getTypeFromMultiplicityElement(expression.getFType());
 		// process contained expressions
@@ -770,7 +771,7 @@ public class ExpressionChecker extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FVoidLiteral expression) {
+	public Object visitFVoidLiteral(FVoidLiteral expression) {
 	    preVisit();
 		expressionTypes.put(expression, TypeCheckerContext.VoidType);
 		expression.setFStaticType(TypeCheckerContext.VoidType.getFType());

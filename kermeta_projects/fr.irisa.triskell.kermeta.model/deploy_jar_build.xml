@@ -5,7 +5,6 @@
     </description>
 
 	<target name="deploy">
-		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.texteditor/lib/"/>
 		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.io/lib/"/>
 		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.interpreter/lib/"/>
 		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.framework/lib/"/>
