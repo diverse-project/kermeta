@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.21 2005-08-31 14:12:55 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.22 2005-09-01 09:23:55 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -50,6 +50,7 @@ import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
+import fr.irisa.triskell.kermeta.runtime.FrameworkExternCommand;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
@@ -828,6 +829,25 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitFJavaStaticCall(FJavaStaticCall node) {
 	    
+		String cmdID = node.getFJclass() + "_" + node.getFJmethod() + "_" + node.getFParameters().size();
+		cmdID = cmdID.replaceAll(":", "_");
+		FrameworkExternCommand cmd = FrameworkExternCommand.getCommand(cmdID);
+		if (cmd != null) {
+			RuntimeObject[] paramsArray = new RuntimeObject[node.getFParameters().size()];
+			
+			// Get the parameters of this operation
+			ArrayList parameters = visitList(node.getFParameters());
+			// Get the param types for invokated method
+			Iterator it = parameters.iterator();
+			int i = 0;
+			while (it.hasNext()) paramsArray[i++] = (RuntimeObject)it.next();
+			
+			// Execute the command
+			return cmd.execute(paramsArray);
+		}
+		
+		/* IF THE EXTERN HAS NOT BEEN COMPILED THEN IT IS AN INVOKE */
+		
 		String jclassName  = node.getFJclass().replaceAll("::","."); 
 		String jmethodName = node.getFJmethod();
 		
@@ -849,15 +869,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		Object result = null;
 		
 		String cmd_id = node.getFJclass() +"_"+ node.getFJmethod();
-		/*
-		KCommand comm = KCommand.getCommand(cmd_id);
-		if (comm != null) {
-			//System.out.println(cmd_id);
-			result = comm.execute(paramsArray);
-		}
-		
-		else {
-		*/
+	
 			// Invoke the java method
 			Class jclass = null;
 	        try {
@@ -910,8 +922,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	            internalLog.error("InstantiationException invoking "+ jmethodName + " on Class " +jclassName, e2);
 				throw	new KermetaVisitorError("InstantiationException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
 	        }
-		//}
+
         return result;
+        
 	}
     
 	/* -----------------------------------------------------------------------------
