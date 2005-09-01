@@ -247,7 +247,7 @@ class Enumeration inherits DataType, kermeta::reflection::Enumeration, KMStructu
 
 	method clone(objectToClone : Object) : Object is
 	do
-		result := extern fr::irisa::triskell::kermeta::runtime::language::Enumeration.cloneObject(self, objectToClone)
+		raise "NOT IMPLEMENTED"
 	end
 }
 

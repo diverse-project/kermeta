@@ -532,7 +532,11 @@
           <fBody xsi:type="kermeta_behavior:FBlock" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedOperation.9/@fContainedType.0">
             <fStatement xsi:type="kermeta_behavior:FAssignement" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedOperation.9/@fContainedType.0" fIsCast="true">
               <fTarget xsi:type="kermeta_behavior:FCallResult" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedOperation.9/@fContainedType.0" fName="result"/>
-              <fValue xsi:type="kermeta_behavior:FJavaStaticCall" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.0/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fContainedType.0" fJclass="fr::irisa::triskell::kermeta::runtime::basetypes::Integer" fJmethod="toReal"/>
+              <fValue xsi:type="kermeta_behavior:FJavaStaticCall" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.0/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fContainedType.0" fJclass="fr::irisa::triskell::kermeta::runtime::basetypes::Integer" fJmethod="toReal">
+                <fParameters xsi:type="kermeta_behavior:FSelfExpression" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.6/@fOwnedOperation.9/@fBody/@fStatement.0/@fValue/@fParameters.0/@fContainedType.0">
+                  <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="/0/@fNestedPackage.0/@fOwnedTypeDefinition.6"/>
+                </fParameters>
+              </fValue>
             </fStatement>
           </fBody>
         </fOwnedOperation>
@@ -709,6 +713,9 @@
                 <fStatement xsi:type="kermeta_behavior:FAssignement" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.0/@fContainedType.0" fIsCast="true">
                   <fTarget xsi:type="kermeta_behavior:FCallResult" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.0/@fContainedType.0" fName="result"/>
                   <fValue xsi:type="kermeta_behavior:FJavaStaticCall" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.0/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fContainedType.0" fJclass="fr::irisa::triskell::kermeta::runtime::basetypes::Real" fJmethod="plus">
+                    <fParameters xsi:type="kermeta_behavior:FSelfExpression" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.0/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fParameters.0/@fContainedType.0">
+                      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7"/>
+                    </fParameters>
                     <fParameters xsi:type="kermeta_behavior:FCallVariable" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.0/@fOwnedParameter.0/@fContainedType.0" fName="other"/>
                   </fValue>
                 </fStatement>
@@ -741,6 +748,9 @@
                 <fStatement xsi:type="kermeta_behavior:FAssignement" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.1/@fContainedType.0" fIsCast="true">
                   <fTarget xsi:type="kermeta_behavior:FCallResult" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.1/@fContainedType.0" fName="result"/>
                   <fValue xsi:type="kermeta_behavior:FJavaStaticCall" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.0/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fContainedType.0" fJclass="fr::irisa::triskell::kermeta::runtime::basetypes::Real" fJmethod="minus">
+                    <fParameters xsi:type="kermeta_behavior:FSelfExpression" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.1/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fParameters.0/@fContainedType.0">
+                      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7"/>
+                    </fParameters>
                     <fParameters xsi:type="kermeta_behavior:FCallVariable" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.1/@fOwnedParameter.0/@fContainedType.0" fName="other"/>
                   </fValue>
                 </fStatement>
@@ -773,6 +783,9 @@
                 <fStatement xsi:type="kermeta_behavior:FAssignement" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.2/@fContainedType.0" fIsCast="true">
                   <fTarget xsi:type="kermeta_behavior:FCallResult" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.2/@fContainedType.0" fName="result"/>
                   <fValue xsi:type="kermeta_behavior:FJavaStaticCall" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.0/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fContainedType.0" fJclass="fr::irisa::triskell::kermeta::runtime::basetypes::Real" fJmethod="times">
+                    <fParameters xsi:type="kermeta_behavior:FSelfExpression" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.2/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fParameters.0/@fContainedType.0">
+                      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7"/>
+                    </fParameters>
                     <fParameters xsi:type="kermeta_behavior:FCallVariable" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.2/@fOwnedParameter.0/@fContainedType.0" fName="other"/>
                   </fValue>
                 </fStatement>
@@ -805,6 +818,9 @@
                 <fStatement xsi:type="kermeta_behavior:FAssignement" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.3/@fContainedType.0" fIsCast="true">
                   <fTarget xsi:type="kermeta_behavior:FCallResult" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.3/@fContainedType.0" fName="result"/>
                   <fValue xsi:type="kermeta_behavior:FJavaStaticCall" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.0/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fContainedType.0" fJclass="fr::irisa::triskell::kermeta::runtime::basetypes::Real" fJmethod="div">
+                    <fParameters xsi:type="kermeta_behavior:FSelfExpression" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.3/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fParameters.0/@fContainedType.0">
+                      <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7"/>
+                    </fParameters>
                     <fParameters xsi:type="kermeta_behavior:FCallVariable" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.3/@fOwnedParameter.0/@fContainedType.0" fName="other"/>
                   </fValue>
                 </fStatement>
@@ -821,7 +837,11 @@
           <fBody xsi:type="kermeta_behavior:FBlock" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.4/@fContainedType.0">
             <fStatement xsi:type="kermeta_behavior:FAssignement" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.4/@fContainedType.0" fIsCast="true">
               <fTarget xsi:type="kermeta_behavior:FCallResult" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.4/@fContainedType.0" fName="result"/>
-              <fValue xsi:type="kermeta_behavior:FJavaStaticCall" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.0/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fContainedType.0" fJclass="fr::irisa::triskell::kermeta::runtime::basetypes::Real" fJmethod="toInteger"/>
+              <fValue xsi:type="kermeta_behavior:FJavaStaticCall" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.4/@fOwnedOperation.0/@fBody/@fStatement.0/@fElseBody/@fStatement.0/@fValue/@fContainedType.0" fJclass="fr::irisa::triskell::kermeta::runtime::basetypes::Real" fJmethod="toInteger">
+                <fParameters xsi:type="kermeta_behavior:FSelfExpression" fStaticType="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7/@fOwnedOperation.4/@fBody/@fStatement.0/@fValue/@fParameters.0/@fContainedType.0">
+                  <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="/0/@fNestedPackage.0/@fOwnedTypeDefinition.7"/>
+                </fParameters>
+              </fValue>
             </fStatement>
           </fBody>
         </fOwnedOperation>
@@ -2889,15 +2909,10 @@
             <fOwnedParameter fName="objectToClone" fType="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.24/@fOwnedOperation.1/@fOwnedParameter.0/@fContainedType.0" fIsOrdered="true" fUpper="1">
               <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.1"/>
             </fOwnedParameter>
-            <fBody xsi:type="kermeta_behavior:FBlock" fStaticType="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.0/@fBody/@fStatement.0/@fValue/@fContainedType.0">
-              <fStatement xsi:type="kermeta_behavior:FAssignement" fStaticType="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.0/@fBody/@fStatement.0/@fValue/@fContainedType.0">
-                <fTarget xsi:type="kermeta_behavior:FCallResult" fStaticType="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.24/@fOwnedOperation.1/@fContainedType.0" fName="result"/>
-                <fValue xsi:type="kermeta_behavior:FJavaStaticCall" fStaticType="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.0/@fBody/@fStatement.0/@fValue/@fContainedType.0" fJclass="fr::irisa::triskell::kermeta::runtime::language::Enumeration" fJmethod="cloneObject">
-                  <fParameters xsi:type="kermeta_behavior:FSelfExpression" fStaticType="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.24/@fOwnedOperation.1/@fBody/@fStatement.0/@fValue/@fParameters.0/@fContainedType.0">
-                    <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.24"/>
-                  </fParameters>
-                  <fParameters xsi:type="kermeta_behavior:FCallVariable" fStaticType="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.24/@fOwnedOperation.1/@fOwnedParameter.0/@fContainedType.0" fName="objectToClone"/>
-                </fValue>
+            <fBody xsi:type="kermeta_behavior:FBlock" fStaticType="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.24/@fOwnedOperation.1/@fBody/@fContainedType.0">
+              <fContainedType xsi:type="kermeta_structure:FClass" fClassDefinition="/0/@fNestedPackage.0/@fOwnedTypeDefinition.0"/>
+              <fStatement xsi:type="kermeta_behavior:FRaise" fStaticType="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.24/@fOwnedOperation.1/@fBody/@fContainedType.0">
+                <fExpression xsi:type="kermeta_behavior:FStringLiteral" fStaticType="/0/@fNestedPackage.1/@fNestedPackage.0/@fOwnedTypeDefinition.1/@fOwnedOperation.9/@fBody/@fStatement.0/@fValue/@fParameters.0/@fContainedType.0" fValue="NOT IMPLEMENTED"/>
               </fStatement>
             </fBody>
           </fOwnedOperation>
