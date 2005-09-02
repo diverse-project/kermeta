@@ -1,4 +1,4 @@
-/* $Id: FTypePrettyPrinter.java,v 1.4 2005-07-18 16:59:53 zdrey Exp $
+/* $Id: FTypePrettyPrinter.java,v 1.5 2005-09-02 15:17:58 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : FTypePrettyPrinter.java
 * License : GPL
@@ -20,14 +20,14 @@ import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.FVoidType;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
  */
-public class FTypePrettyPrinter extends KermetaVisitor {
+public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
     
     
     protected static FTypePrettyPrinter instance = null;
@@ -40,7 +40,8 @@ public class FTypePrettyPrinter extends KermetaVisitor {
     }
     
 
-    public Object visit(FClass arg0) {
+    //public Object visit(FClass arg0) {
+    public Object visitFClass(FClass arg0) {
         //String result = arg0.getFClassDefinition().getFName();
         String result = KMTHelper.getQualifiedName(arg0.getFClassDefinition());
         if (arg0.getFTypeParamBinding().size() > 0) {
@@ -54,15 +55,18 @@ public class FTypePrettyPrinter extends KermetaVisitor {
         return result;
 	}
 	
-	public Object visit(FEnumeration arg0) {
+	//public Object visit(FEnumeration arg0) {
+    public Object visitFEnumeration(FEnumeration arg0) {
 	    return arg0.getFName();
 	}
 	
-	public Object visit(FPrimitiveType arg0) {
+	//public Object visit(FPrimitiveType arg0) {
+    public Object visitFPrimitiveType(FPrimitiveType arg0) {
 		return arg0.getFName();
 	}
 	
-	public Object visit(FProductType arg0) {
+	//public Object visit(FProductType arg0) {
+    public Object visitFProductType(FProductType arg0) {
 		String result = "[";
 	    for(int i=0; i<arg0.getFType().size(); i++) {
 	        result += this.accept((FType)arg0.getFType().get(i));
@@ -73,7 +77,8 @@ public class FTypePrettyPrinter extends KermetaVisitor {
 	}
 	
 	
-	public Object visit(FTypeVariable arg0) {
+    //public Object visit(FTypeVariable arg0) {
+    public Object visitFTypeVariable(FTypeVariable arg0) {
 		String result = arg0.getFName();
 		if (arg0.getFSupertype() != null) {
 		    result += " : " + this.accept(arg0.getFSupertype());
@@ -81,13 +86,15 @@ public class FTypePrettyPrinter extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(FVoidType arg0) {
+	//public Object visit(FVoidType arg0) {
+    public Object visitFVoidType(FVoidType arg0) {
 	    return "Void";
 	}
 	
 	
 
-    public Object visit(FFunctionType node) {
+    //public Object visit(FFunctionType node) {
+    public Object visitFFunctionType(FFunctionType node) {
         return "< " + this.accept(node.getFLeft()) + " -> " + this.accept(node.getFRight()) + " >";
     }
 }
