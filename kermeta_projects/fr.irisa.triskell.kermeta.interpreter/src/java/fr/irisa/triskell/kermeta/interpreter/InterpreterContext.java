@@ -1,14 +1,15 @@
-/* $Id: InterpreterContext.java,v 1.11 2005-08-09 08:37:47 zdrey Exp $
+/* $Id: InterpreterContext.java,v 1.12 2005-09-02 15:25:19 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
- * License : GPL
- * Copyright : IRISA / Universite de Rennes 1
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 16, 2005
- * Author : Zoé Drey <zdrey@irisa.fr>
- * Description : describe here file content
- * TODO : 
- * 
+ * Authors : 
+ * 		Zoé Drey <zdrey@irisa.fr>
+ * 		Didier Vojtisek <dvojtise@irisa.fr>
+ * Description : 
+ * 		see class javadoc
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
@@ -88,6 +89,13 @@ public class InterpreterContext {
 
     // Contains interpreter variables (global variables such as stdio)
     protected Hashtable interpreterVariables;
+    
+    
+    /**
+     * <code>typeCache</code> is a structure used to optimize some computation on types.
+     * It takes care of type binding.
+     */
+    public TypeCache typeCache = new TypeCache();
     
     /**
      * Constructor

@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.22 2005-09-01 09:23:55 ffleurey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.23 2005-09-02 15:25:19 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -194,6 +194,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    SimpleType target = new SimpleType(fclass);
 	    // find the property
 	    CallableProperty cproperty = target.getPropertyByName(propertyName);
+	    //CallableProperty cproperty = this.interpreterContext.typeCache.getPropertyByName(target, propertyName);
 	    
 	    // DEBUG : This should never happen
 	    if (cproperty == null) {
@@ -366,8 +367,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
                 }
                 else {
                     // Get the FProperty -- is it the right way? 
-                    SimpleType target_type = new SimpleType(t_target);
+                    SimpleType target_type = new SimpleType(t_target);                    
                     CallableProperty property =  target_type.getPropertyByName(propertyName);
+                    //CallableProperty property =  this.interpreterContext.typeCache.getPropertyByName(target_type,propertyName);
                     FProperty fproperty = property.getProperty();
                     //FProperty fproperty = (FProperty)ro_property.getData().get("kcoreObject");
                     if (!fproperty.isFIsDerived())
@@ -749,7 +751,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    
 	    if (node.getFStaticOperation() != null) {
 	        // It is an operation call --> 
-	        CallableOperation operation = target_type.getOperationByName(node.getFName());
+	        //CallableOperation operation = target_type.getOperationByName(node.getFName());
+	    	CallableOperation operation = this.interpreterContext.typeCache.getOperationByName(target_type, node.getFName());
 	        
 //			 Check that target is not void
 		    if (operation == null && ro_target == memory.voidINSTANCE) {
@@ -782,6 +785,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    else {
 	        // It is a property call
 	        CallableProperty property =  target_type.getPropertyByName(node.getFName());
+	    	//CallableProperty property =  this.interpreterContext.typeCache.getPropertyByName(target_type, node.getFName());
 	        
 //			 Check that target is not void
 		    if (property == null && ro_target == memory.voidINSTANCE) {
