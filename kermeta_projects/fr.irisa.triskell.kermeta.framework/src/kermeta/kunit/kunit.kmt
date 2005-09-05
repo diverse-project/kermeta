@@ -1,5 +1,5 @@
-/* *************************************************
- * $Id: kunit.kmt,v 1.9 2005-06-09 17:48:28 ffleurey Exp $
+/* *****************************************************************************
+ * $Id: kunit.kmt,v 1.10 2005-09-05 15:40:43 zdrey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -7,20 +7,23 @@
  *
  * Implementation of a unit test tool. This is a clone of
  * JUnit architecture.
- *************************************************** */
+ * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm
+ **************************************************************************** */
 package kermeta::kunit;
 
 require "../Standard.kmt"
-
+//require kermeta
 using kermeta::standard
-
+using kermeta::language::structure
+using kermeta::utils
 /**
  * AssertionViolatedException are raised when assertions are violated
  */
-class AssertionViolatedException inherits kermeta::exceptions::Exception 
+class AssertionFailedError inherits kermeta::exceptions::Exception 
 {
 	
 }
+
 
 /**
  * The abstract class assert defines a set of convinient operations
@@ -53,7 +56,7 @@ abstract class Assert
 	 * raise a AssertionViolatedException with the provided message
 	 */
 	operation fail(msg : kermeta::standard::String) : Void is do
-		var exception : AssertionViolatedException init AssertionViolatedException.new
+		var exception : AssertionFailedError init AssertionFailedError.new
 		exception.message := msg
 		raise exception
 	end
@@ -61,47 +64,220 @@ abstract class Assert
 }
 
 /**
- * Abstract class Test
+ * Abstract class Test. Interface for single and composite object (TestCase and TestSuite)
  */
 abstract class Test inherits Assert
 {
 	/**
 	 * Run the test
 	 */
-	operation run() : Void is abstract
+	operation run(r : TestResult) : Void is abstract
+	
+	/** Called before a test is run to set up the needed environment */
+	operation setUp() : Void is do
+	end
+	
+	/** Called each time a test is run so that the testing environment is always
+	 * tidy. */	
+	operation tearDown() : Void is do
+	end
+	
+	/** The main method that the testes has to implement for his specific tests */
+	operation runTest() : Void is abstract
 }
 
 /**
- * A test cases
+ * A test case
+ * pattern : Command
  */
 class TestCase inherits Test
 {
+	/** A name for the test case so that we know which one failed 
+	 *  This is a "pluggable" selector
+	*/
+	attribute name : String
+	
+	/**
+	 * Initialize the test case
+	 * params : 
+	 *   - name : the name of the test case : must? be the name of the operation
+	 */
+	operation initialize(name : String) : Void is do
+		self.name := name
+	end
+
 	/**
 	 * Execute the test case
 	 */
-	method run() : Void is do
-		// TODO : implement this
+	method run(r : TestResult) : Void is do
+		if (r == void) then r := createDefaultTestResult end
+		r.startTest(self)
+		setUp()
+		runTest()
+		rescue (e : AssertionFailedError)
+			r.addFailure(self, e)
+		tearDown()
+	end
+	
+	
+	/**
+	 * Adapter that uses the pluggable selector to know which test to run
+	*/
+	method runTest() : Void is do
+		if self.getMetaClass.classDefinition.ownedOperation.detect { o | o.name == name } == void then
+			raise kermeta::exceptions::CallOnVoidTarget.new 
+		else
+			var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new
+			de.initializeDefaults
+			// get self class name
+			var selfClassName : String init self.getMetaClass.classDefinition.qualifiedName
+			de.parse(selfClassName+".new."+name)
+			de.execute(void, Hashtable<String, kermeta::standard::Object>.new)
+		end
+	end	
+	
+	operation createDefaultTestResult() : TestResult is do
+		result := TestResult.new
+		result.initialize
 	end
 }
 
+/**
+ * pattern : Collecting parameter
+ */
+class TestResult
+{
+	/** number of test that were run */
+	reference runtests : Integer
+	/** tests which assertions failed */
+	reference failures : set TestFailure[*]
+	/** tests which errors were not assertion failures */
+	reference errors : set TestFailure[*]
+	
+	/** Set the runtests to 0 */
+	operation initialize() : Void is do
+		runtests := 0
+	end
+	
+	/** Increments the runtests counter */
+	operation startTest(test : Test) : Void is do
+		runtests := 1 + runtests
+	end
+	
+	/** Adds a failed test to the list of failed tests */
+	operation addFailure(test : Test, e : kermeta::exceptions::Exception) : Void is do
+		failures.add(createTestFailure(test, e)) 
+	end
+	
+	operation addError(test : Test, e : kermeta::exceptions::Exception) : Void is do
+		errors.add(createTestFailure(test, e))
+	end
+	
+	operation createTestFailure(test : Test, e : kermeta::exceptions::Exception) : TestFailure is do
+		result := TestFailure.new
+		result.failedTest := test
+		result.raised := e
+	end
+}
+
+/**
+ * 
+*/
+class TestFailure
+{
+	reference failedTest : Test
+	reference raised     : kermeta::exceptions::Exception
+}
 
 /** 
  * A test suite is composed of a set of tests
- * (pattern composite)
+ * pattern : Composite
  */
 class TestSuite inherits Test
 {
 	/**
 	 * The set of contained tests
 	 */
-	attribute tests : Test[0..*]
+	reference tests : Test[0..*]
+
 
 	/**
 	 * Execute all tests of the suite
 	 */
-	method run() : Void is do
-		tests.each{ t | t.run }
+	method run(test_result : TestResult) : Void is do
+		tests.each{ t | t.run(test_result) }
 	end
-
+	
+	operation addTest(test : Test) : Void is do
+		tests.add(test)
+	end
 }
 
+
+/** */
+class TestLoader
+{
+	attribute methodPrefix : String
+	reference suiteClass   : Class
+	
+	operation initialize() is do
+		methodPrefix := "test"
+		suiteClass := TestSuite
+	end
+	
+	/** 
+	 * load in the testSuiteClass all the methods prefixed by test
+	 * params :
+	 *    - testCaseClass : the TestCase class where we get the testOperations
+	 * // FIXME / I would like to do "TestType inherits TestCase"
+	 */	
+	operation loadTestMethodsFromTestCase(test_type : Class) : Set<Test> is do
+		result := Set<Test>.new
+		// par le nom de TestType
+		var test_case : TestCase // TODO : check that test_type inherits TestCase
+		//test_case := TestType.new 
+		//result := Set<Test>.new
+		// select the testMethods [indexOutOfBound?] 
+		var test_ops : Sequence<kermeta::reflection::Operation> 
+		test_ops := test_type.ownedOperation.select { o |  
+			o.name.size>=4 and // then!
+			o.name.substring(0, 4)==methodPrefix
+		}
+		// create a test for each of them
+		test_ops.each { o | 
+			test_case ?= test_type.new
+			test_case.initialize(o.name)
+			result.add(test_case)
+		}
+	end
+}
+
+/** User instanciates this class to run a test suite/case */
+class TestRunner
+{
+	reference testClass : Class
+	reference testResult : TestResult
+	
+	operation initialize() is do
+	end
+
+	operation createTestResult() : TestResult is do
+		result := TestResult.new
+		result.initialize
+	end
+	
+	operation createTestLoader() : TestLoader is do
+		result := TestLoader.new
+		result.initialize
+	end
+
+	operation run(test_class : Class) is do
+		var test_loader : TestLoader init createTestLoader
+		testResult := createTestResult
+		// Set<any kindOf TestCase> should be better
+		var test_ops : Set<Test> init test_loader.loadTestMethodsFromTestCase(test_class)
+		var test_suite : TestSuite init TestSuite.new
+		test_suite.tests.addAll(test_ops)
+		test_suite.run(testResult)
+	end
+}
