@@ -1,0 +1,174 @@
+@mainClass "root_package::Main"
+@mainOperation "main"
+/**
+ * IMPORTANT NOTES ABOUT THIS TEST FILE.
+ * => There are syntactic error detected by the interpreter type checker, but we
+ * voluntarily keep them, sincce the following tests are intended to begin a thought about
+ * the parametric Operations (and, by extension, the current parametric classes, which work
+ * well, but could be improved for extended uses -- see Java 5)
+ *
+ * TODO : forbidden usage, as for 
+ */
+
+package root_package;
+require kermeta
+using kermeta::standard
+
+class TestParametricOperations inherits kermeta::kunit::TestCase
+{
+	reference tester : ParametricOperationTester
+	reference aString : String
+	
+	operation setUp() is do
+		tester := ParametricOperationTester.new
+		aString := "I am a parameter"
+	end
+	/*
+	 * Using "basic" type parameters
+	 *
+	 */
+ 	operation test_callParametred1Param() is do
+ 		var p : String init "I am the test 1"
+ 		tester.callParametred1Param(p)
+ 	end
+    
+    operation test_callParametred2Param1() is do
+    	var s : String init "I am first param of test 2"
+    	var i : Integer init 3
+    	tester.callParametred2Param1(s, i)
+    end
+    
+    /** Should fail since return type is unbound*/
+    operation testfail_callParametred2Param2() is do
+    	var s1 : String init "I am first param of test 2"
+    	var s2 : String init "I am second param of test 2"
+    	tester.callParametred2Param2(s1, s2)
+    end
+    
+   
+	/** A parametric operation with unbound type variable : should fail*/
+	@forbidden "yes"
+	operation testfail_callParametred1UnboundParam() is do
+    	tester.callParametred1UnboundParam()
+	end
+	
+	/** A parametric operation with unbound type variable, but used in result type
+	 : should fail -- meaningless */
+	@forbidden "yes"
+	operation testfail_callParametredBoundWithReturnType() : P is do
+		aString := tester.callParametredBoundWithReturnType()
+	end
+	
+	/** Create an instance of a type variable (is it authorized?) */
+	@discuss "syntax and semantic validity"
+	operation test_callParamNewInstance() : Void is do
+		var voidString : String
+		aString := tester.callParamNewInstance(voidString)
+	end
+    
+    /*
+     *
+     * A set of proposals for an evolved syntax of type parameters,
+     * so that it gets more powerful.
+     * These tests need 
+     *
+     */
+    operation testTypeKindOf() : Void is do
+    	tester.typeKindOf(ClassOne.new)
+    end
+    
+    operation testAnyKindOf() : Void is do
+    	tester.anyKindOf(ClassOne.new, "toto")
+    end
+}
+
+abstract class AbstractVisitor<P, T>
+{
+    operation parametred<P, T>(p : P) is do
+
+	end
+	
+	operation visitSomething(node : String, context : P) : T is abstract
+}
+
+class ParametricOperationTester
+{
+	/** this operation uses 1 type variables */
+	operation callParametred1Param<P>(param : P) is do
+		stdio.writeln("param of callParametred1Param is : "+ param.toString)
+	end
+	
+	/** this operation uses two type variables */
+	operation callParametred2Param1<P, T>(p : P, t : T) is do
+		stdio.writeln("param of callParametred2param :" + p.toString + " and " + t.toString)
+	end
+
+	/** this operation uses two type variables of the same type in argument*/
+	operation callParametred2Param2<P, T>(p : P, t : P) : T is do
+		stdio.writeln("param of callParametred2param :" + p.toString + " and " + t.toString)
+		stdio.writeln("return type : "+ result.getMetaClass.toString)
+		result := T.new
+	end
+	
+	
+	/** This test should fail : the typeVariable is unused in the parameters of op.*/
+	operation callParametred1UnboundParam<P>() is do
+		stdio.write("unbound parameter")
+	end
+	
+	operation callParametredBoundWithReturnType<P>() : P is do
+		stdio.write("bound param with return type")
+		result := void
+	end
+	
+	/** Create an instance of a type variable (is it authorized?) */
+	@discuss "syntax and semantic validity"
+	operation callParamNewInstance<P>(unusedParam : P) : P is do
+		result := P.new
+	end
+	
+
+
+
+	 /*
+	 * Features proposal
+	 */
+	 
+	/** any would be the "?" equivalent of java 5 generic keyword 
+	 * Any and T must aslso appear in param types.
+	*/ 
+	operation anyKindOf<Any kindof T>(param : Any, tparam : T) is do
+		stdio.writeln(param.toString)
+		stdio.writeln(tparam.toString)
+	end
+	
+	/** */
+	operation typeKindOf<T kindof AbstractClass>(param : T) is do
+		assert(AbstractClass.isInstance(param))
+		assert(param.aString == void)
+		assert(param.anInt   == void)
+	end	
+
+}
+
+class ClassOne inherits AbstractClass
+{
+}
+
+class ClassTwo inherits AbstractClass
+{
+}
+
+class AbstractClass 
+{
+	reference aString : kermeta::standard::String
+	reference anInt   : kermeta::standard::Integer
+}
+
+
+
+
+
+
+
+
