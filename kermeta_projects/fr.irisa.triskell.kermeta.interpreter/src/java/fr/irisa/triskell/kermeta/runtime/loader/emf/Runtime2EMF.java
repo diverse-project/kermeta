@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.13 2005-08-23 18:44:20 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.14 2005-09-06 11:53:10 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : GPL
@@ -235,13 +235,13 @@ public class Runtime2EMF {
             RuntimeObject property = (RuntimeObject)rObject.getProperties().get(prop_name);
             // The feature corresponding to the name of the property
             EStructuralFeature feature = getEStructuralFeatureByName(eObject, prop_name);
-            eObject.eUnset(feature);
             // Now get the property eObject (it should not be created in fact!)
             /*System.out.println("Property : " + prop_name + "; eObject : " + eObject.eClass().getName() + "; " +
                     "feautre : " + feature);*/
             // If feature is null, it means that it is not persistent ! 
             if (feature != null)
             {
+                eObject.eUnset(feature);
                 Object property_eObject = getOrCreatePropertyFromRuntimeObject(property, feature.getEType());
                 
                 // If it is a collection of Objects
