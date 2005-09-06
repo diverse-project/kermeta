@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.3 2005-08-31 14:43:22 zdrey Exp $
+/* $Id: Traceback.java,v 1.4 2005-09-06 10:48:05 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Traceback.java
  * License   : EPL
@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FObject;
@@ -60,8 +61,11 @@ public class Traceback {
         while(it.hasNext()) {
             CallFrame frame = (CallFrame)it.next();
             // TODO : some callframes don't accept getOperation  / getExpression!! think about it
-            FObject co = frame.getOperation();
-            stack_trace = getContextForFObject(frame, co) + stack_trace;
+            FObject expr = frame.getExpression();
+            if (expr!=null) // The only case where this cond is false is on first invokation
+                stack_trace = getContextForFObject(frame, expr) + stack_trace;
+            else 
+                stack_trace = getContextForFObject(frame, frame.getOperation()) + stack_trace;
         }
         // And the first info :
         stack_trace = getContextForFObject(null, cause_object) + stack_trace;
@@ -71,6 +75,8 @@ public class Traceback {
     /**
      * Info : File <>, line X, in Method M
      * @param frame : the call frame. Note that it can be null
+     * @param fobject : the operation or property
+     * @param expr : the call expression
      * @return the info that locates the expression given in argument. Typically,
      * in a stack trace, the first element of the stack is the one given by the exception,and
      * the other ones are the elements of the callframe stack (which is, for example, 
@@ -95,7 +101,7 @@ public class Traceback {
         }
         else if (frame != null) // it's in a KMUnit (which does not store a trace)
         {
-            info += "   " + frame.toString() + "\n";
+            info += "    " + frame.toString() + "\n";
         }
         return info;
     }
@@ -114,8 +120,8 @@ public class Traceback {
         info += ", line "+ getKMTLineNumber(node, unit.getUri());
         if (frame != null)
             info += ", in '" + frame.toString() + "'";
-        else
-            info += " ( " + getCodeForFObject(fobject) + " )";
+        
+        info += " ( " + getCodeForFObject(fobject) + " )";
         return info;
     }
     

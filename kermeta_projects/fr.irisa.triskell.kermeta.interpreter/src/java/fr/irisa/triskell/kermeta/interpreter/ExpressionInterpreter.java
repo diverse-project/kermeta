@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.23 2005-09-02 15:25:19 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.24 2005-09-06 10:48:05 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -23,7 +23,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.ast.SetterBody;
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FBlock;
 import fr.irisa.triskell.kermeta.behavior.FBooleanLiteral;
@@ -88,6 +87,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     protected InterpreterContext interpreterContext;
     /** The memory */
     protected RuntimeMemory memory;
+    /** The current variable that is processed. Used for traceback when a CallOnVoidTarget occured */
+    protected Variable current_variable;
     
     /**
      * Constructor
@@ -477,6 +478,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         if (node.getFParameters().size() == 0)
         {
             result = var.getRuntimeObject();
+            current_variable = var;
             // We add additional information in order to have a better handle of
             // errors --> FIXME : it perhaps pollute the memory not very smartly...
             //result.getData().put(" ");
@@ -756,8 +758,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        
 //			 Check that target is not void
 		    if (operation == null && ro_target == memory.voidINSTANCE) {
-		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target.");
+		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target : " + node.getFName());
 		        RuntimeObject ex = memory.getROFactory().createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
+		        
 		        // From Java->Generate the Kermeta action "raise"
 		        raiseKermetaException(ex, node);
 		    }

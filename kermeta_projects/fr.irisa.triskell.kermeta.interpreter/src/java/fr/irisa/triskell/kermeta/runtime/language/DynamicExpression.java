@@ -1,4 +1,4 @@
-/* $Id: DynamicExpression.java,v 1.1 2005-06-09 17:49:07 ffleurey Exp $
+/* $Id: DynamicExpression.java,v 1.2 2005-09-06 10:48:05 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpression.java
 * License : GPL
@@ -12,8 +12,6 @@ package fr.irisa.triskell.kermeta.runtime.language;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
-
-import com.sun.rsasign.s;
 
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;

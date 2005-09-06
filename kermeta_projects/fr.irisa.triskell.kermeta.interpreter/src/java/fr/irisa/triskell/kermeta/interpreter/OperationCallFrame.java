@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.8 2005-08-24 17:27:52 zdrey Exp $
+/* $Id: OperationCallFrame.java,v 1.9 2005-09-06 10:48:05 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : OperationCallFrame.java
 * License : GPL
@@ -149,7 +149,6 @@ public class OperationCallFrame extends CallFrame {
     
     
     public FObject getExpression() {
-        System.err.println("get expression");
-        return expression;
+        return expression; 
     }
 }

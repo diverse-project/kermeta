@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.12 2005-08-24 17:27:52 zdrey Exp $
+/* $Id: CallFrame.java,v 1.13 2005-09-06 10:48:05 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -104,10 +104,8 @@ public abstract class CallFrame {
     public abstract Hashtable getTypeParameters();
 
     /**
-     * @return
+     * @return the called expression to which is associated this CallFrame 
      */
-    public FObject getExpression() {
-        return null;
-    }
+    public abstract FObject getExpression();
     
 }

@@ -1,4 +1,4 @@
-/* $Id: ExpressionCallFrame.java,v 1.4 2005-08-09 08:37:47 zdrey Exp $
+/* $Id: ExpressionCallFrame.java,v 1.5 2005-09-06 10:48:05 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionCallFrame.java
 * License : GPL
@@ -18,6 +18,7 @@ import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
 import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 
 /**
@@ -96,6 +97,12 @@ public class ExpressionCallFrame extends CallFrame {
     public FOperation getOperation() {
         return null;
     }
+    
+    /** Return the expression that is linked to this call frame */
+    public FObject getExpression() {
+        return unit.getExpression();
+    }
+    
     public void setSelf(RuntimeObject pSelf) { selfObj = pSelf; }
     
     /* (non-Javadoc)

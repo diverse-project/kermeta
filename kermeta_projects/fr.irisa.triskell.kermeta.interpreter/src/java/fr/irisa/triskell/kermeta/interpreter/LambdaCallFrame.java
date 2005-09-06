@@ -1,4 +1,4 @@
-/* $Id: LambdaCallFrame.java,v 1.6 2005-08-09 15:15:05 zdrey Exp $
+/* $Id: LambdaCallFrame.java,v 1.7 2005-09-06 10:48:05 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
 * License : GPL
@@ -18,6 +18,7 @@ import java.util.Stack;
 import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
 import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 
 /**
@@ -119,6 +120,10 @@ public class LambdaCallFrame extends CallFrame {
     
     public FOperation getOperation() {
         return nestingOperationCallFrame.getOperation();
+    }
+    
+    public FObject getExpression() {
+        return lambdaExp;
     }
 
 }
