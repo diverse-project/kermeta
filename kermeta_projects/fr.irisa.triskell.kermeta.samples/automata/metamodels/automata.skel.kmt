@@ -19,12 +19,12 @@ class State
 {
 	attribute name : ecore::EString
 	reference combination : State[0..*]
-	reference arriving : Transition[0..*]#target
-	reference going : Transition[0..*]#source
+	reference incomingTransitions : Transition[0..*]#target
+	reference outgoingTransitions : Transition[0..*]#source
 }
 class Transition
 {
-	reference source : State[1..1]#going
-	reference target : State[1..1]#arriving
+	reference source : State[1..1]#outgoingTransitions
+	reference target : State[1..1]#incomingTransitions
 	attribute letter : ecore::EString
 }

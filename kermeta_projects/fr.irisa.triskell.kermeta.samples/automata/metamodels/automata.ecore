@@ -1,35 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="automaton"
-    nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore"
-    nsPrefix="automaton">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="automaton" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore" nsPrefix="automaton">
   <eClassifiers xsi:type="ecore:EClass" name="FiniteAutomaton">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="stateSet" upperBound="-1"
-        eType="#//State" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transitionSet" upperBound="-1"
-        eType="#//Transition" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alphabet" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="finalStateSet" lowerBound="1"
-        upperBound="-1" eType="#//State"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" lowerBound="1"
-        eType="#//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stateSet" upperBound="-1" eType="//State" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transitionSet" upperBound="-1" eType="//Transition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alphabet" upperBound="-1" derived="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="finalStateSet" lowerBound="1" upperBound="-1" eType="//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" lowerBound="1" eType="//State"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="combination" upperBound="-1"
-        eType="#//State"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arriving" upperBound="-1"
-        eType="#//Transition" eOpposite="#//Transition/target"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="going" upperBound="-1"
-        eType="#//Transition" eOpposite="#//Transition/source"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransitions" upperBound="-1" eType="//Transition" eOpposite="//Transition/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransitions" upperBound="-1" eType="//Transition" eOpposite="//Transition/source"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
-        eType="#//State" eOpposite="#//State/going"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
-        eType="#//State" eOpposite="#//State/arriving"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//State" eOpposite="//State/outgoingTransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//State" eOpposite="//State/incomingTransitions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="letter">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eStructuralFeatures>
   </eClassifiers>
 </ecore:EPackage>

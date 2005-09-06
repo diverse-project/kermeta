@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="automata" size="647,448" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#/" metadata="emf-1.0" initialized="true" tag="5" key="32303035303232382066722E69726973612E747269736B656C6C2E6B65726D6574612E73616D706C6573">
+  <children xsi:type="editmodel:ClassEditModel" name="FiniteAutomaton" location="130,50" size="121,56" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//FiniteAutomaton">
+    <children xsi:type="editmodel:CompartmentEditModel" size="95,17">
+      <children xsi:type="editmodel:AttributeEditModel" name="alphabet" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//FiniteAutomaton/alphabet">
+        <model href="automata.ecore#//FiniteAutomaton/alphabet"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="transitionSet" location="0,28" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//FiniteAutomaton/transitionSet" multiplicityLabel="//@children.0/@sourceConnections.0/@children.0/@children.0" roleLabel="//@children.0/@sourceConnections.0/@children.0/@children.1" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="348,85" size="5,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="transitionSet" location="294,56" size="59,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="automata.ecore#//FiniteAutomaton/transitionSet"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="121,28" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="stateSet" location="35,56" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//FiniteAutomaton/stateSet" multiplicityLabel="//@children.0/@sourceConnections.1/@children.0/@children.0" roleLabel="//@children.0/@sourceConnections.1/@children.0/@children.1" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="303,253" size="5,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="stateSet" location="322,253" size="40,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="automata.ecore#//FiniteAutomaton/stateSet"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="17,56" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="finalStateSet" location="0,33" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//FiniteAutomaton/finalStateSet" multiplicityLabel="//@children.0/@sourceConnections.2/@children.0/@children.0" roleLabel="//@children.0/@sourceConnections.2/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1..*" location="256,201" size="17,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="finalStateSet" location="212,230" size="61,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="automata.ecore#//FiniteAutomaton/finalStateSet"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="42,56" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.3/@children.0" sourceEnd="//@children.0/@sourceConnections.3/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="initialState" location="7,0" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//FiniteAutomaton/initialState" multiplicityLabel="//@children.0/@sourceConnections.3/@children.0/@children.0" roleLabel="//@children.0/@sourceConnections.3/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="273,168" size="7,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="initialState" location="294,168" size="49,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="automata.ecore#//FiniteAutomaton/initialState"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="71,56" attachSource="true"/>
+    </sourceConnections>
+    <model href="automata.ecore#//FiniteAutomaton"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.0 //@children.2/@sourceConnections.0 //@children.2/@sourceConnections.1" name="Transition" location="360,50" size="84,56" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//Transition">
+    <children xsi:type="editmodel:CompartmentEditModel" size="64,17">
+      <children xsi:type="editmodel:AttributeEditModel" name="letter" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//Transition/letter">
+        <model href="automata.ecore#//Transition/letter"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <model href="automata.ecore#//Transition"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.1 //@children.0/@sourceConnections.2 //@children.0/@sourceConnections.3" name="State" location="280,190" size="97,56" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//State" runTimeClassModel="name">
+    <children xsi:type="editmodel:CompartmentEditModel" size="67,17">
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//State/name">
+        <model href="automata.ecore#//State/name"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="source" location="88,0" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//Transition/source" attachSource="true" multiplicityLabel="//@children.2/@sourceConnections.0/@children.0/@children.0" roleLabel="//@children.2/@sourceConnections.0/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="354,168" size="7,15" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="source" location="375,168" size="32,15" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <model href="automata.ecore#//Transition/source"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="outgoingTransitions" location="8,56" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//State/outgoingTransitions" multiplicityLabel="//@children.2/@sourceConnections.0/@children.1/@children.0" roleLabel="//@children.2/@sourceConnections.0/@children.1/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="356,113" size="5,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="outgoingTransitions" location="375,113" size="92,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="automata.ecore#//State/outgoingTransitions"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.1/@children.1" sourceEnd="//@children.2/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="target" location="97,28" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//Transition/target" attachSource="true" multiplicityLabel="//@children.2/@sourceConnections.1/@children.0/@children.0" roleLabel="//@children.2/@sourceConnections.1/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="384,196" size="7,15" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="target" location="384,225" size="28,15" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <model href="automata.ecore#//Transition/target"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="incomingTransitions" location="84,27" id="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore#//State/incomingTransitions" multiplicityLabel="//@children.2/@sourceConnections.1/@children.1/@children.0" roleLabel="//@children.2/@sourceConnections.1/@children.1/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="451,84" size="5,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="incomingTransitions" location="451,55" size="92,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="automata.ecore#//State/incomingTransitions"/>
+      </children>
+    </sourceConnections>
+    <model href="automata.ecore#//State"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <model href="automata.ecore#/"/>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=3"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="10,10" gridOrigin="0,0" rulerUnit="pixel">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:EMFClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true"/>
+</editmodel:ClassDiagramEditModel>

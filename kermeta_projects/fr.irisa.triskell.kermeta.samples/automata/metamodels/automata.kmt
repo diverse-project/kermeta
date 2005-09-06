@@ -94,8 +94,8 @@ class State
 {
 	reference combination : Set<State>
 	reference name : String
-	reference arriving : Transition[0..*]#target
-	reference going : Transition[0..*]#source
+	reference incomingTransitions : Transition[0..*]#target
+	reference outgoingTransitions : Transition[0..*]#source
 	
 	/** Create a new state from self state. */
 	method copy() : State is do
@@ -107,8 +107,8 @@ class State
 
 class Transition
 {
-	reference source : State#going
-	reference target : State#arriving 
+	reference source : State#outgoingTransitions
+	reference target : State#incomingTransitions 
 	reference letter : String
 }
 
