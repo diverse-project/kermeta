@@ -1,0 +1,102 @@
+@mainClass "root_package::MyTestCase"
+@mainOperation "main"
+
+package root_package;
+
+require kermeta
+using kermeta::standard
+class MyTestCase inherits kermeta::kunit::TestCase
+{
+	attribute cString : String
+	
+	method setUp() is do
+		cString := "String"
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this example.
+	end
+    
+    operation testUninitialized() : Void is do
+    	var aString : String
+    	stdio.writeln(aString+ "+toto")
+    end
+    
+    // throws an exception : == does not seem to work
+    // error! more than failure
+    operation testfailCompareTo() : Void is do
+    	var comp : kermeta::standard::Integer init 0
+    	comp := cString.compareTo("String")
+    	stdio.writeln(comp.toString)
+    	assert(comp==0)
+
+    	comp := cString.compareTo("Strong")
+    	stdio.writeln(comp.toString)
+    	assert(comp==0)
+
+    	comp := cString.compareTo("Strin")
+    	assert(comp!=0)
+    	comp := cString.compareTo("string")
+    	assert(comp!=0)
+    end
+    
+    operation testCompareTo() : Void is do
+    	var comp : kermeta::standard::Integer
+    	comp := cString.compareTo("String")
+    	assert(comp != 0)
+    	comp := cString.compareTo("Strongl")
+    	stdio.writeln("testCompareTo : " + comp.toString)
+    	assert(comp !=0)
+    end
+
+  
+	/**
+	 * Appends other at the end of self
+	 */
+	operation testappend() : Void is do
+		var str : kermeta::standard::String init "titi"
+		str.append("toto")
+		stdio.write(str)
+		assert(str.compareTo("tititoto")==0)
+	end
+	
+	/**
+	 * returns the character at index in the String
+	 */
+	operation testelementAt() : Void is do
+		assert("abcd".elementAt(2)=="car".elementAt(0))
+	end
+	
+	/**
+	 * returns the index within this string of the first 
+	 * occurrence of the specified substring
+	 */
+	operation testindexOf() : Void is do
+		assert("bonjour".indexOf("jou")==3)
+	end
+	
+	
+	/**
+	 * returns a new string that is a substring of this string
+	 */
+	operation testsubString() : Void is do
+		assert("bonjour".substring(1, 4)=="onj")
+	end
+	
+	operation testsize() : kermeta::standard::Integer is do
+		assert("BlaBleBli".size == 9)
+	end
+	
+	operation testIntegerToStr() : Void is do
+		assert(334.toString.size == 3)
+	end
+	
+	operation testIntegerToStr2() : Void is do
+		assert((334 + 2).toString == "336")
+	end
+	
+	operation testIntegerToStr3() : Void is do
+		stdio.writeln(3.toString)
+		assert(3.toString == "3")
+	end
+}

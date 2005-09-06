@@ -1,0 +1,19 @@
+@mainClass "test_package::MyTestClass" 
+@mainOperation "main"
+
+
+package test_package;
+
+require kermeta
+require "my_testfile.kmt"
+using root_package
+class MyTestClass
+{
+    operation main() : Void is do 
+	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		// Here, we run our test case
+		// TestString must inherit TestCase
+		testRunner.run(MyTestCase)
+		testRunner.printTestResult
+    end 
+}
