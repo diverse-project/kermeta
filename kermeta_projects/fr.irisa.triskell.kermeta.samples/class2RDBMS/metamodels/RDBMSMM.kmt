@@ -1,0 +1,50 @@
+package RDBMSMM;
+
+require kermeta
+using kermeta::standard
+
+class Table
+{
+	attribute name : String
+	attribute cols : Column[1..*]
+	reference pkey : Column[1..*]
+	attribute fkeys : FKey[0..*]
+}
+class FKey
+{
+	reference references : Table
+	reference cols : Column[1..*]
+	
+	/**
+	 * prefix for the name of the columns
+	 * used by the createFKeyColumns method
+	 */
+	attribute prefix : String
+	
+	/**
+	 * Create the FKey columns in the table 
+	 */
+	operation createFKeyColumns() is do
+		var src_table : Table
+		src_table ?= container
+		stdio.writeln("Update fk from table" + src_table.toString + " to " + self.references.toString)
+		// add columns
+		references.pkey.each{ k |  
+			var c : Column init Column.new
+			c.name := prefix + k.name
+			c.type := k.type
+			self.cols.add(c)
+			src_table.cols.add(c)
+		}
+	end 
+	
+}
+class Column
+{
+	attribute name : String
+	attribute type : String
+}
+class RDBMSModel
+{
+	attribute table : Table[1..*]
+}

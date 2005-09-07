@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ASCII"?>
+<automaton:FiniteAutomaton xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:automaton="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore" finalStateSet="//@stateSet.5 //@stateSet.11" initialState="//@stateSet.0">
+  <stateSet name="s0" outgoingTransitions="//@transitionSet.0"/>
+  <stateSet name="s1" incomingTransitions="//@transitionSet.0" outgoingTransitions="//@transitionSet.1 //@transitionSet.14 //@transitionSet.15"/>
+  <stateSet name="s2" incomingTransitions="//@transitionSet.1" outgoingTransitions="//@transitionSet.2"/>
+  <stateSet name="s3" incomingTransitions="//@transitionSet.15" outgoingTransitions="//@transitionSet.16"/>
+  <stateSet name="s4" incomingTransitions="//@transitionSet.2" outgoingTransitions="//@transitionSet.3"/>
+  <stateSet name="s5" incomingTransitions="//@transitionSet.3 //@transitionSet.7 //@transitionSet.12" outgoingTransitions="//@transitionSet.4"/>
+  <stateSet name="s6" incomingTransitions="//@transitionSet.4" outgoingTransitions="//@transitionSet.5 //@transitionSet.8"/>
+  <stateSet name="s7" incomingTransitions="//@transitionSet.5 //@transitionSet.10" outgoingTransitions="//@transitionSet.6 //@transitionSet.13"/>
+  <stateSet name="s8" incomingTransitions="//@transitionSet.8 //@transitionSet.14 //@transitionSet.16" outgoingTransitions="//@transitionSet.9 //@transitionSet.10"/>
+  <stateSet name="s9" incomingTransitions="//@transitionSet.6 //@transitionSet.9" outgoingTransitions="//@transitionSet.7 //@transitionSet.11"/>
+  <stateSet name="s10" incomingTransitions="//@transitionSet.11" outgoingTransitions="//@transitionSet.12"/>
+  <stateSet name="s11" incomingTransitions="//@transitionSet.13"/>
+  <transitionSet source="//@stateSet.0" target="//@stateSet.1" letter="m"/>
+  <transitionSet source="//@stateSet.1" target="//@stateSet.2" letter="e"/>
+  <transitionSet source="//@stateSet.2" target="//@stateSet.4" letter="t"/>
+  <transitionSet source="//@stateSet.4" target="//@stateSet.5" letter="a"/>
+  <transitionSet source="//@stateSet.5" target="//@stateSet.6" letter="m"/>
+  <transitionSet source="//@stateSet.6" target="//@stateSet.7" letter="e"/>
+  <transitionSet source="//@stateSet.7" target="//@stateSet.9" letter="t"/>
+  <transitionSet source="//@stateSet.9" target="//@stateSet.5" letter="a"/>
+  <transitionSet source="//@stateSet.6" target="//@stateSet.8" letter="o"/>
+  <transitionSet source="//@stateSet.8" target="//@stateSet.9" letter="d"/>
+  <transitionSet source="//@stateSet.8" target="//@stateSet.7" letter="e"/>
+  <transitionSet source="//@stateSet.9" target="//@stateSet.10" letter="e"/>
+  <transitionSet source="//@stateSet.10" target="//@stateSet.5" letter="l"/>
+  <transitionSet source="//@stateSet.7" target="//@stateSet.11" letter="l"/>
+  <transitionSet source="//@stateSet.1" target="//@stateSet.8" letter="o"/>
+  <transitionSet source="//@stateSet.1" target="//@stateSet.3" letter="o"/>
+  <transitionSet source="//@stateSet.3" target="//@stateSet.8" letter="d"/>
+</automaton:FiniteAutomaton>

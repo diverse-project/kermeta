@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="766,506" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#/" metadata="emf-1.0" initialized="true" scrolledY="13" tag="10" key="3230303530323238206D746970">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.3/@sourceConnections.0 //@children.2/@sourceConnections.0 //@children.5/@sourceConnections.0" name="Classifier" location="214,30" size="109,60" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Classifier" runTimeClassModel="name">
+    <children xsi:type="editmodel:CompartmentEditModel" size="86,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Classifier/name">
+        <model href="ClassMM.ecore#//Classifier/name"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <model href="ClassMM.ecore#//Classifier"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.1 //@children.3/@sourceConnections.1" name="Association" location="80,307" size="114,60" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Association" runTimeClassModel="name">
+    <children xsi:type="editmodel:CompartmentEditModel" size="86,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Association/name">
+        <model href="ClassMM.ecore#//Association/name"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.1" target="//@children.3" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="18,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="dest" location="28,59" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Association/dest" multiplicityLabel="//@children.1/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.1/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="dest" location="105,234" size="21,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="84,234" size="7,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="ClassMM.ecore#//Association/dest"/>
+      </children>
+    </sourceConnections>
+    <model href="ClassMM.ecore#//Association"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.3/@sourceConnections.3" name="Attribute" location="30,30" size="141,78" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Attribute" runTimeClassModel="is_primary,name">
+    <children xsi:type="editmodel:CompartmentEditModel" size="118,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="is_primary" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Attribute/is_primary">
+        <model href="ClassMM.ecore#//Attribute/is_primary"/>
+      </children>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Attribute/name">
+        <model href="ClassMM.ecore#//Attribute/name"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" source="//@children.2" target="//@children.0" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="141,29" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="type" location="0,29" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Attribute/type" multiplicityLabel="//@children.2/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.2/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="type" location="186,37" size="21,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="200,66" size="7,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="ClassMM.ecore#//Attribute/type"/>
+      </children>
+    </sourceConnections>
+    <model href="ClassMM.ecore#//Attribute"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0 //@children.3/@sourceConnections.2" name="Class" location="70,167" size="153,60" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Class" runTimeClassModel="is_persistent">
+    <children xsi:type="editmodel:CompartmentEditModel" size="130,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="is_persistent" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Class/is_persistent">
+        <model href="ClassMM.ecore#//Class/is_persistent"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.4/@sourceConnections.0" autoLocated="true" source="//@children.3" target="//@children.0" targetEnd="//@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.3/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="75,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="53,59" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.3" target="//@children.1" targetEnd="//@children.3/@sourceConnections.1/@children.1" sourceEnd="//@children.3/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="src" location="105,59" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Association/src" attachSource="true" multiplicityLabel="//@children.3/@sourceConnections.1/@children.0/@children.1" roleLabel="//@children.3/@sourceConnections.1/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="src" location="182,234" size="14,15" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="161,234" size="7,15" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <model href="ClassMM.ecore#//Association/src"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="95,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.3" target="//@children.3" targetEnd="//@children.3/@sourceConnections.2/@children.1" sourceEnd="//@children.3/@sourceConnections.2/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,47" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="parent" location="0,10" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//Class/parent" anchorKind="FixedAtEdge" multiplicityLabel="//@children.3/@sourceConnections.2/@children.1/@children.1" roleLabel="//@children.3/@sourceConnections.2/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="parent" location="32,155" size="31,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="44,184" size="19,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="ClassMM.ecore#//Class/parent"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" source="//@children.3" target="//@children.2" targetEnd="//@children.3/@sourceConnections.3/@children.1" sourceEnd="//@children.3/@sourceConnections.3/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="50,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="atts" location="90,78" aggregationKind="Composition">
+        <model href="ClassMM.ecore#//Class/atts"/>
+      </children>
+    </sourceConnections>
+    <model href="ClassMM.ecore#//Class"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="PrimitiveDataType" location="193,257" size="151,32" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//PrimitiveDataType" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.4" target="//@children.3/@sourceConnections.0" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="74,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="-58,-52" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <model href="ClassMM.ecore#//PrimitiveDataType"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="ClassModel" location="310,167" size="112,32" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//ClassModel" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.5" target="//@children.0" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="49,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="classifier" location="108,24" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//ClassModel/classifier" multiplicityLabel="//@children.5/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.5/@sourceConnections.0/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="classifier" location="330,32" size="40,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="330,61" size="5,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="ClassMM.ecore#//ClassModel/classifier"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.5" target="//@children.1" targetEnd="//@children.5/@sourceConnections.1/@children.1" sourceEnd="//@children.5/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="52,31" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="association" location="113,35" id="platform:/resource/mtip/class2RDBMS/metamodels/ClassMM.ecore#//ClassModel/association" multiplicityLabel="//@children.5/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.5/@sourceConnections.1/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="association" location="201,349" size="53,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="201,320" size="5,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="ClassMM.ecore#//ClassModel/association"/>
+      </children>
+    </sourceConnections>
+    <model href="ClassMM.ecore#//ClassModel"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <model href="ClassMM.ecore#/"/>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="10,10" gridOrigin="0,0" rulerUnit="pixel">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:EMFClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true"/>
+</editmodel:ClassDiagramEditModel>

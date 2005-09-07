@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<RDBMSMM:RDBMSModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:RDBMSMM="platform:/resource/mtip/class2RDBMS/metamodels/RDBMSMM.ecore">
+  <table name="Toto">
+    <fkeys references="//@table.1"/>
+  </table>
+  <table/>
+</RDBMSMM:RDBMSModel>
