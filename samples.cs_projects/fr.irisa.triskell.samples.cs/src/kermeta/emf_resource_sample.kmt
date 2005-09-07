@@ -3,7 +3,7 @@
 
 
 package root;
-require "cs.ecore"
+require "../ecore/cs.ecore"
 //require "cs.km" 
 //require "printer.kmt"
 //require kermeta
@@ -45,11 +45,11 @@ class EMFResourceLoader
 					stdio.writeln("Objet : "+ o.getMetaClass.classDefinition.qualifiedName 
 					+  " ("+ o.getMetaClass.classDefinition.ownedAttributes.size.toString+" attr.)" )
 					var attrs : Set<Property>
-					from var it : Iterator<kermeta::reflection::Property> init o.getMetaClass.classDefinition.ownedAttributes.iterator
-					until (it.isOff)
+					from var it2 : Iterator<kermeta::reflection::Property> init o.getMetaClass.classDefinition.ownedAttributes.iterator
+					until (it2.isOff)
 					loop
 						var att : Property
-						att ?= it.next
+						att ?= it2.next
 						if (att==void and  o.get(att)==void) then stdio.writeln(att.name+" EST VIDE!") end
 						stdio.writeln("    { " + att.name+" : "+ o.get(att).toString + " }")
 					end

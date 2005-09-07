@@ -1,7 +1,7 @@
 @mainClass "sample::Main"
 @mainOperation "main"
 package sample;
-require "./cs.ecore"
+require "../ecore/cs.ecore"
 require kermeta
 using kermeta::standard
 using kermeta::persistence  
@@ -118,7 +118,7 @@ class BasicCSVisitor
 	reference root : cs::Root
 	reference template : cs::Template
 //	attribute decision : cs::Decision
-	reference value : cs::Value
+	reference ~value : cs::Value
 	
 	operation visitRoot(v : Set<Object>, r : Resource) : String is do
 		result := " "
@@ -162,9 +162,9 @@ class BasicCSVisitor
 	operation visitValue(v : Set<Object>, r : Resource) : String is do
 		result := "value->"
 		result.append(visitDecision(v, r))
-		var value : cs::Value
-		value ?= v.one 
-		value.name := "J'ai modifie toutes les valeureuses"
+		var ~value : cs::Value
+		~value ?= v.one 
+		~value.name := "J'ai modifie toutes les valeureuses"
 
 	end
 	

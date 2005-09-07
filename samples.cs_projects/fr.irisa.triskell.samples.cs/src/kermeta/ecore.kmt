@@ -122,13 +122,13 @@ class EEnum inherits EDataType
 	operation getEEnumLiteral(name : EString) : EEnumLiteral is do
 		//TODO: implement operation getEEnumLiteral
 	end
-	operation getEEnumLiteral2(value : EInt) : EEnumLiteral is do
+	operation getEEnumLiteral2(~value : EInt) : EEnumLiteral is do
 		//TODO: implement operation getEEnumLiteral2
 	end
 }
 class EEnumLiteral inherits ENamedElement
 {
-	attribute value : EInt
+	attribute ~value : EInt
 	attribute instance : EEnumerator
 	reference eEnum : EEnum#eLiterals
 }
@@ -267,7 +267,7 @@ abstract class ETypedElement inherits ENamedElement
 class EStringToStringMapEntry
 {
 	attribute key : EString
-	attribute value : EString
+	attribute ~value : EString
 }
 alias EBigDecimal : kermeta::language::structure::Object;
 alias EBigInteger : kermeta::language::structure::Object;
