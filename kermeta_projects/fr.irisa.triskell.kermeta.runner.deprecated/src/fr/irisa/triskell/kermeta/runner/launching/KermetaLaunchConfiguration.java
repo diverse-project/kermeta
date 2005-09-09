@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.13 2005-08-26 16:01:16 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.14 2005-09-09 18:04:21 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -10,6 +10,9 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -18,17 +21,22 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
+import org.eclipse.jdt.launching.SocketUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
+import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
+import fr.irisa.triskell.kermeta.runner.debug.KermetaDebugTarget;
 
 
 public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate 
@@ -44,6 +52,8 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
     public final static String KM_PROJECTNAME = "KM_PROJECTNAME";
  
     protected static int instanceCount = 0;
+    protected KermetaTarget target;
+    
     
     /**
      * Constructor
@@ -75,15 +85,24 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	        String mode,
 	        ILaunch launch, IProgressMonitor monitor) throws CoreException {
 	    
-	    // NOTE : "final" forces a copy of the parameters, so that we are sure
-	    // that a reference of those params are not stored by the Plugin framework
 	    final ILaunchConfiguration fconfiguration = configuration;
 	    final String fmode = mode;
-	    // Get the configuration values :
-        String fileNameString = fconfiguration.getAttribute(KM_FILENAME, "");
-        String classQualifiedNameString = fconfiguration.getAttribute(KM_CLASSQNAME, "");
-        String operationString = fconfiguration.getAttribute(KM_OPERATIONNAME, "");
+	    // Get the configuration values : // Final so that we can pass them to thread
+        final String fileNameString = fconfiguration.getAttribute(KM_FILENAME, "");
+        final String classQualifiedNameString = fconfiguration.getAttribute(KM_CLASSQNAME, "");
+        final String operationString = fconfiguration.getAttribute(KM_OPERATIONNAME, "");
         launch.setSourceLocator(new KermetaSourceLocator());
+	    // For remote call of the debugger
+        ArrayList commandList = new ArrayList();
+        // FIXME this is a obscure method not clear at all
+	    
+	    IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
+	    IFile selectedFile = null;
+	    if (iresource instanceof IFile)
+	        selectedFile = (IFile) iresource;
+	    else { throw new Error("The selected Kermeta to execute is not recognized as to be a file.");}
+	    commandList.add(selectedFile.getLocation().toOSString());
+	    int requestPort = -1; int eventPort = -1;
 	    
 	    monitor.beginTask("Kermeta is interpreting",IProgressMonitor.UNKNOWN);
 	    try
@@ -101,7 +120,7 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	            klauncher.launch(fileNameString, classQualifiedNameString, operationString);*/
 	            // Or : 
 	            //runtarget.start();
-                runKermeta(fileNameString, classQualifiedNameString, operationString);
+                runKermeta(fileNameString, classQualifiedNameString, operationString, false);
 	            // Terminate the run target
 	            runtarget.terminate();
 	            launch.removeDebugTarget(runtarget);
@@ -110,8 +129,17 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	        }
 	        else
 	        {
-	        	RunnerPlugin.pluginLog.error("ImplementationError : Debug mode not implemented yet");
-	        }
+	            target = new KermetaDebugTarget(launch);
+	            target.start();
+	    		if (!target.isTerminated())
+	    		{
+	    			launch.addDebugTarget(target);
+	    			((KermetaDebugTarget) target)
+	    				.getDebugger()
+	    				.generateDebugInitEvent();
+	    		}
+				// FIXME Exception when trying t oaccess a frame..
+	        } 
 	    }
 	    catch (KermetaInterpreterError e)
 	    {
@@ -130,10 +158,13 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
     /**
      * This method run the Kermeta interpreter, according to the data given by
      * the user through the launch configuration window.
+     * @param isDebugMode if debug mode is set to false, then the normal 
+     * launch method is used for kermeta interpreter, other wise launch_debug method
+     * is used (see DebugInterpreter class in fr.irisa.triskell.kermeta.interpreter)
      * @param configuration
      * @param mode
      */
-    private static void runKermeta(String fileNameString, String classQualifiedNameString, String operationString)
+    public static ExpressionInterpreter runKermeta(String fileNameString, String classQualifiedNameString, String operationString, boolean isDebugMode)
     {
         
         IFile selectedFile = null;
@@ -143,14 +174,9 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	    else
 	    {  // TODO : throw an exception!
 	    }
-        // Reparse file ... This is a {temporary!!} patch to get KermetaUnit of
-        // selectedFile, because it is not serializable (get a kind of Serialize error
-        // when launching performApply
-       // KermetaUnit kunit = KermetaRunHelper.parse(selectedFile);
-	   /* KermetaConsole console = new KermetaConsole();
-	    console.removeCurrentConsole();
-	    console.addConsole();*/
+	    // Create a KermetaConsole where the interpreter will print the errors.
         KermetaConsole console = KermetaConsole.getSingletonConsole();
+        KermetaInterpreter interpreter = null;
         if ( ! console.isInitialized())
         {            
         	// Add a MessageConsole
@@ -163,21 +189,25 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
         }
         try
         {
-            
             String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
 
             //  be sure this value is correctly set        
             KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
-                       
-            // 	Get the values given by the user in the runPopupDialog
-            KermetaInterpreter interpreter = new KermetaInterpreter(uri);
+            
+            interpreter = new KermetaInterpreter(uri);
             
             interpreter.setEntryPoint(classQualifiedNameString, operationString);
             interpreter.setKStream(console);     
-	        interpreter.launch();
-	        interpreter.setKStream(null);
-	        interpreter.freeJavaMemory();
-	        KermetaUnitFactory.resetDefaultLoader();
+            if (isDebugMode == false)
+            {
+                interpreter.launch();
+    	        interpreter.setKStream(null);
+    	        interpreter.freeJavaMemory();
+    	        KermetaUnitFactory.resetDefaultLoader();
+    	        return null;
+            }
+            else interpreter.launch_debug();
+            
 		    
         }
         catch (KermetaRaisedException kerror)
@@ -193,13 +223,15 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
         {
             console.print("\nKermetaInterpreter internal error \n" +
             		"-------------------------------------------\n");
+            console.print("Reported java error : "+e);
             console.print(e.getMessage());
             e.printStackTrace();
         }
         console.print("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
         // this console is not used any more
         //console.removeConsoleListener();
-       
+        return interpreter.getMemory().getCurrentInterpreter();
+        
     }
     
 	/**

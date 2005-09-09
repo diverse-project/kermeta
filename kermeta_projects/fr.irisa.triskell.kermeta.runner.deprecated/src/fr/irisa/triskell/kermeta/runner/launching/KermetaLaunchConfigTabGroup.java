@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfigTabGroup.java,v 1.9 2005-07-08 12:23:43 dvojtise Exp $
+/* $Id: KermetaLaunchConfigTabGroup.java,v 1.10 2005-09-09 18:04:21 zdrey Exp $
  * Project: Kermeta.runner
  * File: KermetaLaunchConfigTabGroup.java
  * License: EPL
@@ -14,7 +14,7 @@ import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
-import org.eclipse.jdt.debug.ui.launchConfigurations.JavaArgumentsTab;
+//import org.eclipse.jdt.debug.ui.launchConfigurations.JavaArgumentsTab;
 
 /**
  * 
@@ -23,27 +23,30 @@ public class KermetaLaunchConfigTabGroup extends
         AbstractLaunchConfigurationTabGroup
 {
     /**
-     * Create the tabs needed to configure the launch of a Kermeta program
+     * Create the tabs needed to configure the launch of a Kermeta program.
+     * Thess tabs appear in configuration dialog open after a clikc on "Run..." or "Debug..."
      * @see org.eclipse.debug.ui.ILaunchConfigurationTabGroup#createTabs(org.eclipse.debug.ui.ILaunchConfigurationDialog, java.lang.String)
      */
     public void createTabs(ILaunchConfigurationDialog dialog, String mode)
     {
+        ILaunchConfigurationTab[] tabs;
         if (mode.equals(ILaunchManager.RUN_MODE))
         {
-            ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
+            tabs = new ILaunchConfigurationTab[] {
                     new ArgumentConfigurationTab(),
-                    new CommonTab(),
+                    new CommonTab()/*,
                     new JavaArgumentsTab()
-                    /*,
-                    
+                    ,
                     new GeneralConfigurationTab()*/
           			};
-            setTabs(tabs);
         }
         else
         {
-            System.err.println("Could not create tabs : only Run mode is implemented");
+            tabs = new ILaunchConfigurationTab[] {
+                    new ArgumentConfigurationTab(),
+                    new CommonTab()
+            };
         }
-        
+        setTabs(tabs);
     }
 }

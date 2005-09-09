@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.8 2005-07-08 12:23:44 dvojtise Exp $
+/* $Id: RunnerPlugin.java,v 1.9 2005-09-09 18:05:31 zdrey Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -13,6 +13,12 @@ package fr.irisa.triskell.kermeta.runner;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
@@ -24,6 +30,8 @@ import org.osgi.framework.BundleContext;
 //import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -177,5 +185,114 @@ public class RunnerPlugin extends AbstractUIPlugin
         
     }
     
+    public static void log(Throwable e)
+	{
+		log(new Status(IStatus.ERROR, PLUGIN_ID, 0, "Debug Error", e)); //$NON-NLS-1$
+	}
+
+	public static void errorDialog(String message)
+	{
+		errorDialog(message, null);
+	}
+
+	public static void errorDialog(String message, IStatus status)
+	{
+
+		Shell shell = getActiveWorkbenchShell();
+		if (shell != null)
+		{
+			shell.getDisplay().syncExec(new DisplayErrorThread(shell, message,status));
+		}
+	}
+	
+	private void log(int fSeverity, String fText, Exception fException)
+	{
+		
+		
+		Status status, result;
+		MultiStatus multiStatus;
+		
+			
+		if( fException != null )
+		{
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		PrintWriter swr = new PrintWriter(out);
+		fException.printStackTrace(swr);
+		String buf = (fException.getMessage()+"\n"+out.toString());
+		StringTokenizer tok = new StringTokenizer(buf, "\n");
+		multiStatus = new MultiStatus(PLUGIN_ID,fSeverity,fText, fException);
+		while(tok.hasMoreElements())
+		{
+			status =
+			new Status(fSeverity, PLUGIN_ID, 0,tok.nextToken(),null);
+			multiStatus.add(status);	
+		}
+			
+		
+		result = multiStatus;
+		}
+		 else
+		 {
+		  	result = new Status(fSeverity, PLUGIN_ID, 0,fText,fException);
+		 }
+		log(new Status(fSeverity, PLUGIN_ID, 0,fText,fException));
+		errorDialog(fText, result);
+	}
+	
+	/**
+	 * Logs the specified status with this plug-in's log.
+	 *
+	 * @param status status to log
+	 */
+	private static void log(IStatus status)
+	{
+	    getDefault().getLog().log(status);
+	    Throwable e = status.getException();
+	    if (e != null)
+	        e.printStackTrace();
+	}
+	
+	/**
+	 * Returns the active workbench shell or <code>null</code> if none
+	 *
+	 * @return the active workbench shell or <code>null</code> if none
+	 */
+	public static Shell getActiveWorkbenchShell()
+	{
+	    IWorkbenchWindow window = getActiveWorkbenchWindow();
+	    if (window == null)
+	        window = getDefault().getWorkbench().getWorkbenchWindows()[0];
+	    if (window != null)
+	    {
+	        
+	        return window.getShell();
+	    }
+	    return null;
+	}
+	
+	
+	static class DisplayErrorThread implements Runnable 
+	{
+	    Shell  mShell;
+	    String mMessage;
+	    IStatus mStatus;
+	    
+	    public DisplayErrorThread(Shell fShell, String fMessage,IStatus fStatus)
+	    {
+	        mShell = fShell;
+	        mMessage = fMessage;
+	        mStatus = fStatus;
+	    }
+	    
+	    public void run()
+	    {
+	        if (mStatus == null)
+	            MessageDialog.openError(mShell, "Kermeta Error", mMessage);
+	        else
+	            ErrorDialog.openError(mShell, "Error", null, mStatus); //$NON-NLS-1$
+	        
+	    }
+	 }
     
 }

@@ -1,4 +1,4 @@
-/* $Id: KermetaTarget.java,v 1.1 2005-06-24 17:17:52 zdrey Exp $
+/* $Id: KermetaTarget.java,v 1.2 2005-09-09 18:04:21 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaTarget.java
  * License   : GPL
@@ -9,12 +9,17 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
@@ -32,26 +37,40 @@ import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 /**
  * The base target class for Run target and Debug target
  */
-public class KermetaTarget implements IDebugTarget {
-
-
+public abstract class KermetaTarget implements IDebugTarget {
 
     public boolean isTerminated;
-	private ILaunch launch;
-    private IPath workingDir;
-    private String startFile;
-	String startfile = null;
-	private String prjName = null;
+	protected ILaunch launch;
+    protected IPath workingDir;
+    protected String startFile;
+	protected String startfile = null;
 	protected String processName = "";
-    private String projectName;
-    private ILaunch mLaunch;
-    private String mProcessName;
-    private Process mJavaProcess;
-    private IProcess mProcess;
-    private String className;
-    private String opName;
-	
-	
+    protected String projectName;
+    protected Process javaProcess;
+    protected IProcess process;
+    protected String className;
+    protected String opName;
+
+    protected IDebugTarget target;
+    // protected IProcess process; // useful only to launch an external command
+    protected IThread thread;
+    protected IThread[] threads;
+    
+    
+    public final String HOST = "localhost";
+    /** The socket for debug commands */
+    protected Socket requestSocket;
+    protected PrintWriter requestWriter;
+    protected BufferedReader requestReader;
+    protected BufferedReader eventReader;
+    /** The socket for debug events */
+    protected Socket eventSocket;
+    
+    protected int requestPort;
+    
+    // Essentially used for KermetaDebugTarget yet
+    /** true if the execution process is suspended */
+    protected boolean suspended;
 	
     /**
      *
@@ -60,11 +79,27 @@ public class KermetaTarget implements IDebugTarget {
      * 
      *  
      */
+    /** 
+     * Start the Kermeta process in a thread
+     * If you run Kermeta in a new JVM, it is this method that you have to change. 
+     * (Or inherits KermetaTarget class and overwrite it...)
+     */
 	public void startKermetaProcess()
 	{
-	    initPath();
-	    KermetaLauncher.launch(startfile, className, opName);
+	    // Use this if does not work
+	    final String p_startfile = startfile;
+	    final String p_classname = className;
+	    final String p_opname    = opName;
+	    
+	    new Thread() {
+	        public void run() {
+	    // Run in a thread
+	            initPath();
+	            KermetaLauncher.launch(startfile, className, opName, false);
+			}
+	    }.start();
 	}
+	
 	
 	/**
 	 * [EPIC inspired] Initialize the path of the Kermeta program to Launch
@@ -79,7 +114,7 @@ public class KermetaTarget implements IDebugTarget {
 				launch.getLaunchConfiguration().getAttribute(
 					KermetaLaunchConfiguration.KM_FILENAME,
 					"");
-			prjName =
+			projectName =
 				launch.getLaunchConfiguration().getAttribute(
 					KermetaLaunchConfiguration.KM_PROJECTNAME,
 					"");
@@ -137,19 +172,6 @@ public class KermetaTarget implements IDebugTarget {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugTarget#getThreads()
-     */
-    public IThread[] getThreads() throws DebugException {
-        return null;
-    }
-
-    /**
-     * @see org.eclipse.debug.core.model.IDebugTarget#hasThreads()
-     */
-    public boolean hasThreads() throws DebugException {
-        return false;
-    }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.model.IDebugTarget#getName()
@@ -275,6 +297,19 @@ public class KermetaTarget implements IDebugTarget {
      */
     public void disconnect() throws DebugException {
     }
+    
+    public void abort(String msg, Throwable e) 
+    {
+        try {
+            System.err.println(msg);
+            System.err.println(e);
+            e.printStackTrace();
+            terminate();
+        } catch (DebugException de) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } 
+    }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.model.IDisconnect#isDisconnected()
@@ -304,5 +339,37 @@ public class KermetaTarget implements IDebugTarget {
     public Object getAdapter(Class adapter) {
         return null;
     }
+    
+    /** This method is launched when starting the interpreter */
+    public void start()
+    {}
 
+    /*
+     * 
+     *  Getters and setters
+     * 
+     *
+     */
+    
+    
+    
+    
+    /**
+     * @return Returns the requestReader.
+     */
+    public BufferedReader getRequestReader() {
+        return requestReader;
+    }
+    /**
+     * @return Returns the requestWriter.
+     */
+    public PrintWriter getRequestWriter() {
+        return requestWriter;
+    }
+    /**
+     * @return Returns the target.
+     */
+    public IDebugTarget getTarget() {
+        return target;
+    }
 }
