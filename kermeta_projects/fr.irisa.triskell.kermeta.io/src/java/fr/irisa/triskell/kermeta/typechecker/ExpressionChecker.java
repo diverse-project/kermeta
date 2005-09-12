@@ -1,7 +1,7 @@
-/* $Id: ExpressionChecker.java,v 1.20 2005-08-31 14:12:58 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.21 2005-09-12 11:49:37 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 12 mars 2005
@@ -22,7 +22,6 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.ast.FSuperCall;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FBlock;
 import fr.irisa.triskell.kermeta.behavior.FBooleanLiteral;
@@ -61,9 +60,7 @@ import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.impl.FFunctionTypeImpl;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * @author Franck Fleurey
@@ -366,7 +363,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        }
 	        
 	        if (provided_type.isSubTypeOf(targetType)) {
-	            unit.error.add(new KMUnitWarning("TYPE-CHECKER : Unecessary cast, it should be a regular assignment", expression));
+	            unit.error.add(new KMUnitWarning("TYPE-CHECKER : Unnecessary cast, it should be a regular assignment", expression));
 	            return provided_type;
 	        }
 	        else if (!targetType.isSubTypeOf(provided_type)) {
