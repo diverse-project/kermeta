@@ -6,12 +6,30 @@
 		<ant antfile="Kermeta-MetaModel_build.xml" inheritAll="false"
 					target="deploy"></ant>
 		<ant antfile="KerMeta-Tutorial_build.xml" inheritAll="false"
-			target="deploy"></ant>
+					target="deploy"></ant>
 		<ant antfile="Kermeta-TypeSystem_build.xml" inheritAll="false"
 					target="deploy"></ant>
 		<ant antfile="KerMeta-UI-UserGuide_build.xml" inheritAll="false"
 					target="deploy"></ant>
 		<ant antfile="KermetaInterpreterJavadoc_build.xml" inheritAll="false"
 					target="deploy"></ant>
+		<ant antfile="KermetaEMFTutorial_build.xml" inheritAll="false"
+					target="deploy"></ant>
+	</target>
+	<target name="build">
+		<ant antfile="KermetaArchitectureGuide_build.xml" inheritAll="false"
+					target="all"></ant>
+		<ant antfile="Kermeta-MetaModel_build.xml" inheritAll="false"
+					target="all"></ant>
+		<ant antfile="KerMeta-Tutorial_build.xml" inheritAll="false"
+					target="all"></ant>
+		<ant antfile="Kermeta-TypeSystem_build.xml" inheritAll="false"
+					target="all"></ant>
+		<ant antfile="KerMeta-UI-UserGuide_build.xml" inheritAll="false"
+					target="all"></ant>
+		<ant antfile="KermetaInterpreterJavadoc_build.xml" inheritAll="false"
+					target="all"></ant>
+		<ant antfile="KermetaEMFTutorial_build.xml" inheritAll="false"
+					target="all"></ant>
 	</target>
 </project>
