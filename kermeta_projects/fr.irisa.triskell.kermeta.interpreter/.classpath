@@ -7,7 +7,7 @@
 	<classpathentry kind="lib" path="lib/thirdparty/log4j.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/emf_libraries"/>
 	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.io/src/java" kind="lib" path="lib/io_kermeta.jar"/>
-	<classpathentry kind="lib" path="lib/model_kermeta.jar"/>
+	<classpathentry sourcepath="lib/model_kermeta.jar" kind="lib" path="lib/model_kermeta.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/antlr.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/emfatic-core.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/ldt-core.jar"/>
