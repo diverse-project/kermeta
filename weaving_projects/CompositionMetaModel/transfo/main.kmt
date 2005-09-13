@@ -1,0 +1,110 @@
+@mainClass "composition::Main"
+@mainOperation "main"
+
+
+package composition;
+
+require kermeta
+require "../metamodel/ecore.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using ecore
+
+class Main
+{
+  operation main() : Void is do 
+        var model1 : EPackage init loadECoreModel("../models/Model1.ecore")
+        var model2 : EPackage init loadECoreModel("../models/Model2.ecore")
+        
+        stdio.writeln("Input model 1 : ")
+        printModel(model1) 
+        
+        
+        stdio.writeln("\nInput model 2 : ")
+        printModel(model2)
+        
+        
+        var ec : EClass init EClass.new
+        
+        
+        var merged : EPackage
+        stdio.writeln("\nMerging... ")
+        merged ?= model1.merge(model2)
+        stdio.writeln("\nMerged model: " + merged.toString)
+        
+        //merged := EPackage.clone(model1)
+        
+        printModel(merged) 
+        // */
+      
+        
+    end
+    
+    operation loadECoreModel(path : String) : EPackage is do             
+   		var repository : EMFRepository init EMFRepository.new             
+   		var resource : Resource init repository.getResource(path) 
+       	resource.load()
+      
+       // result ?= resource.instances.one
+       
+       from var it : Iterator<Object> init resource.instances.iterator
+       until it.isOff
+       loop
+           var next : Object init it.next
+           if (EPackage.isInstance(next)) then                 
+           		result ?= next
+           end
+       end
+       
+   end
+    
+    operation printModel(p : EPackage) is do
+    	
+    	// Print the package
+    	stdio.writeln("package " + p.name)
+    	// Print the classes
+    	p.eClassifiers.each{ e | 
+    		var c : EClass		c ?= e
+    		var d : EDataType	d ?= e
+    		if c != void then
+    			stdio.writeln("  class " + c.name.toString)
+    			// Print Attributes and References
+    			c.eStructuralFeatures.each{ p | 
+    				var s : EAttribute		s ?= p
+    				var r : EReference		r ?= p
+    				if r != void then 
+    					stdio.write("    ref  " + r.name.toString)
+    					stdio.write(" : " + r.eType.name + "[" + r.lowerBound.toString + ".." + r.upperBound.toString +"]")
+    					if r.eOpposite != void then 
+    						stdio.write(" opposite of " + r.eOpposite.name)
+    					end
+    					stdio.writeln("")
+    				else
+    					stdio.write("    attr " + s.name.toString)
+    					stdio.writeln(" : " + s.eType.name)
+    				end
+    			}
+    			//Print Operations
+    			c.eOperations.each{ o | 
+    				stdio.write("    op   " + o.name + "(")
+    				o.eParameters.each{ p | 
+    					stdio.write(p.name + " : " + p.eType.name + " ")
+    				}
+    				stdio.write(")")
+    				if o.eType != void then
+    					stdio.write(" : " + o.eType.name)
+    				end
+    				stdio.writeln("")
+    			}
+    			
+    			
+    		else
+    			stdio.writeln("  datatype " + d.name)
+    		end
+    	
+    	}
+    
+    end
+    
+}

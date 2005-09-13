@@ -8,14 +8,107 @@ using kermeta::standard
 class EAttribute inherits EStructuralFeature
 {
 	attribute iD : EBoolean
+	property eAttributeType : EDataType[1..1]
+		getter is do
+			//TODO: implement getter for derived property eAttributeType
+		end
+		setter is do
+			//TODO: implement setter for derived property eAttributeType
+		end
 }
-
+class EAnnotation inherits EModelElement
+{
+	attribute source : EString
+	attribute details : EStringToStringMapEntry[0..*]
+	reference eModelElement : EModelElement#eAnnotations
+	attribute contents : EObject[0..*]
+	reference references : EObject[0..*]
+}
 class EClass inherits EClassifier
 {
-	reference ~abstract : EBoolean
+	attribute ~abstract : EBoolean
+	attribute interface : EBoolean
 	reference eSuperTypes : EClass[0..*]
 	attribute eOperations : EOperation[0..*]#eContainingClass
+	property eAllAttributes : EAttribute[0..*]
+		getter is do
+			//TODO: implement getter for derived property eAllAttributes
+		end
+		setter is do
+			//TODO: implement setter for derived property eAllAttributes
+		end
+	property eAllReferences : EReference[0..*]
+		getter is do
+			//TODO: implement getter for derived property eAllReferences
+		end
+		setter is do
+			//TODO: implement setter for derived property eAllReferences
+		end
+	property eReferences : EReference[0..*]
+		getter is do
+			//TODO: implement getter for derived property eReferences
+		end
+		setter is do
+			//TODO: implement setter for derived property eReferences
+		end
+	property eAttributes : EAttribute[0..*]
+		getter is do
+			//TODO: implement getter for derived property eAttributes
+		end
+		setter is do
+			//TODO: implement setter for derived property eAttributes
+		end
+	property eAllContainments : EReference[0..*]
+		getter is do
+			//TODO: implement getter for derived property eAllContainments
+		end
+		setter is do
+			//TODO: implement setter for derived property eAllContainments
+		end
+	property eAllOperations : EOperation[0..*]
+		getter is do
+			//TODO: implement getter for derived property eAllOperations
+		end
+		setter is do
+			//TODO: implement setter for derived property eAllOperations
+		end
+	property eAllStructuralFeatures : EStructuralFeature[0..*]
+		getter is do
+			//TODO: implement getter for derived property eAllStructuralFeatures
+		end
+		setter is do
+			//TODO: implement setter for derived property eAllStructuralFeatures
+		end
+	property eAllSuperTypes : EClass[0..*]
+		getter is do
+			//TODO: implement getter for derived property eAllSuperTypes
+		end
+		setter is do
+			//TODO: implement setter for derived property eAllSuperTypes
+		end
+	property eIDAttribute : EAttribute
+		getter is do
+			//TODO: implement getter for derived property eIDAttribute
+		end
+		setter is do
+			//TODO: implement setter for derived property eIDAttribute
+		end
 	attribute eStructuralFeatures : EStructuralFeature[0..*]#eContainingClass
+	operation isSuperTypeOf(someClass : EClass) : EBoolean is do
+		//TODO: implement operation isSuperTypeOf
+	end
+	operation getFeatureCount() : EInt is do
+		//TODO: implement operation getFeatureCount
+	end
+	operation getEStructuralFeature(featureID : EInt) : EStructuralFeature is do
+		//TODO: implement operation getEStructuralFeature
+	end
+	operation getFeatureID(feature : EStructuralFeature) : EInt is do
+		//TODO: implement operation getFeatureID
+	end
+	operation getEStructuralFeatureByName(featureName : EString) : EStructuralFeature is do
+		//TODO: implement operation getEStructuralFeature
+	end
 	
 	method getSignature() : Signature is do
 		if signature == void then 
@@ -29,8 +122,16 @@ class EClass inherits EClassifier
 }
 abstract class EClassifier inherits ENamedElement, Mergeable
 {
-	
+	attribute instanceClassName : EString
+	attribute instanceClass : EJavaClass
+	attribute defaultValue : EJavaObject
 	reference ePackage : EPackage#eClassifiers
+	operation isInstance(object : EJavaObject) : EBoolean is do
+		//TODO: implement operation isInstance
+	end
+	operation getClassifierID() : EInt is do
+		//TODO: implement operation getClassifierID
+	end
 	
 	method sigEqual(other : Mergeable) : Boolean is do
 		var t1 : Type init self.getMetaClass
@@ -58,12 +159,43 @@ abstract class EClassifier inherits ENamedElement, Mergeable
 }
 class EDataType inherits EClassifier
 {
-	
+	attribute serializable : EBoolean
 }
-
-abstract class EModelElement 
+class EEnum inherits EDataType
 {
-	// attribute eAnnotations : EAnnotation[0..*]#eModelElement
+	attribute eLiterals : EEnumLiteral[0..*]#eEnum
+	operation getEEnumLiteral(name : EString) : EEnumLiteral is do
+		//TODO: implement operation getEEnumLiteral
+	end
+	operation getEEnumLiteralByID(~value : EInt) : EEnumLiteral is do
+		//TODO: implement operation getEEnumLiteral
+	end
+}
+class EEnumLiteral inherits ENamedElement
+{
+	attribute ~value : EInt
+	attribute instance : EEnumerator
+	reference eEnum : EEnum#eLiterals
+}
+class EFactory inherits EModelElement
+{
+	reference ePackage : EPackage[1..1]#eFactoryInstance
+	operation create(eClass : EClass) : EObject is do
+		//TODO: implement operation create
+	end
+	operation createFromString(eDataType : EDataType, literalValue : EString) : EJavaObject is do
+		//TODO: implement operation createFromString
+	end
+	operation convertToString(eDataType : EDataType, instanceValue : EJavaObject) : EString is do
+		//TODO: implement operation convertToString
+	end
+}
+abstract class EModelElement inherits EObject
+{
+	attribute eAnnotations : EAnnotation[0..*]#eModelElement
+	operation getEAnnotation(source : EString) : EAnnotation is do
+		//TODO: implement operation getEAnnotation
+	end
 	
 	operation getmatchingElements(elements : Collection<EModelElement>) : seq EModelElement[0..*] is do
 		var e1 : Mergeable	e1 ?= self
@@ -130,18 +262,61 @@ abstract class EModelElement
 	end
 	
 }
-
 abstract class ENamedElement inherits EModelElement
 {
-	reference name : EString
+	attribute name : EString
 }
-
-
+class EObject
+{
+	operation eClass() : EClass is do
+		//TODO: implement operation eClass
+	end
+	operation eIsProxy() : EBoolean is do
+		//TODO: implement operation eIsProxy
+	end
+	operation eResource() : EResource is do
+		//TODO: implement operation eResource
+	end
+	operation eContainer() : EObject is do
+		//TODO: implement operation eContainer
+	end
+	operation eContainingFeature() : EStructuralFeature is do
+		//TODO: implement operation eContainingFeature
+	end
+	operation eContainmentFeature() : EReference is do
+		//TODO: implement operation eContainmentFeature
+	end
+	operation eContents() : EEList is do
+		//TODO: implement operation eContents
+	end
+	operation eAllContents() : ETreeIterator is do
+		//TODO: implement operation eAllContents
+	end
+	operation eCrossReferences() : EEList is do
+		//TODO: implement operation eCrossReferences
+	end
+	operation eGet(feature : EStructuralFeature) : EJavaObject is do
+		//TODO: implement operation eGet
+	end
+	operation eGetResolved(feature : EStructuralFeature, resolve : EBoolean) : EJavaObject is do
+		//TODO: implement operation eGet
+	end
+	operation eSet(feature : EStructuralFeature, newValue : EJavaObject) : kermeta::standard::~Void is do
+		//TODO: implement operation eSet
+	end
+	operation eIsSet(feature : EStructuralFeature) : EBoolean is do
+		//TODO: implement operation eIsSet
+	end
+	operation eUnset(feature : EStructuralFeature) : kermeta::standard::~Void is do
+		//TODO: implement operation eUnset
+	end
+}
 class EOperation inherits ETypedElement, Mergeable
 {
 	reference eContainingClass : EClass#eOperations
 	attribute eParameters : EParameter[0..*]#eOperation
 	reference eExceptions : EClassifier[0..*]
+	
 	method sigEqual(other : Mergeable) : Boolean is do
 		var t1 : Type init self.getMetaClass
 		var t2 : Type init other.getMetaClass
@@ -165,12 +340,19 @@ class EOperation inherits ETypedElement, Mergeable
 		end
 		result := signature
 	end
+	
 }
 class EPackage inherits ENamedElement, Mergeable
 {
+	attribute nsURI : EString
+	attribute nsPrefix : EString
+	reference eFactoryInstance : EFactory[1..1]#ePackage
 	attribute eClassifiers : EClassifier[0..*]#ePackage
 	attribute eSubpackages : EPackage[0..*]#eSuperPackage
 	reference eSuperPackage : EPackage#eSubpackages
+	operation getEClassifier(name : EString) : EClassifier is do
+		//TODO: implement operation getEClassifier
+	end
 	
 	method sigEqual(other : Mergeable) : Boolean is do
 		var t1 : Type init self.getMetaClass
@@ -196,6 +378,7 @@ class EPackage inherits ENamedElement, Mergeable
 		end
 		result := signature
 	end
+	
 }
 class EParameter inherits ETypedElement, Mergeable
 {
@@ -224,19 +407,21 @@ class EParameter inherits ETypedElement, Mergeable
 		end
 		result := signature
 	end
+	
 }
-class EReference inherits EStructuralFeature
+class EReference inherits EStructuralFeature, Mergeable
 {
-	reference containment : EBoolean
+	attribute containment : EBoolean
+	attribute container : EBoolean
+	attribute resolveProxies : EBoolean
 	reference eOpposite : EReference
-	
-}
-abstract class EStructuralFeature inherits ETypedElement, Mergeable
-{
-	
-	reference derived : EBoolean
-	reference eContainingClass : EClass#eStructuralFeatures
-	
+	property eReferenceType : EClass[1..1]
+		getter is do
+			//TODO: implement getter for derived property eReferenceType
+		end
+		setter is do
+			//TODO: implement setter for derived property eReferenceType
+		end
 	method sigEqual(other : Mergeable) : Boolean is do
 		var t1 : Type init self.getMetaClass
 		var t2 : Type init other.getMetaClass
@@ -261,18 +446,39 @@ abstract class EStructuralFeature inherits ETypedElement, Mergeable
 		result := signature
 	end
 }
+abstract class EStructuralFeature inherits ETypedElement
+{
+	attribute changeable : EBoolean
+	attribute volatile : EBoolean
+	attribute transient : EBoolean
+	attribute defaultValueLiteral : EString
+	attribute defaultValue : EJavaObject
+	attribute unsettable : EBoolean
+	attribute derived : EBoolean
+	reference eContainingClass : EClass#eStructuralFeatures
+	operation getFeatureID() : EInt is do
+		//TODO: implement operation getFeatureID
+	end
+	operation getContainerClass() : EJavaClass is do
+		//TODO: implement operation getContainerClass
+	end
+}
 abstract class ETypedElement inherits ENamedElement
 {
-	reference ordered : EBoolean
-	reference unique : EBoolean
-	reference lowerBound : EInt
-	reference upperBound : EInt
+	attribute ordered : EBoolean
+	attribute unique : EBoolean
+	attribute lowerBound : EInt
+	attribute upperBound : EInt
+	attribute many : EBoolean
+	attribute required : EBoolean
 	reference eType : EClassifier
 }
+class EStringToStringMapEntry
+{
+	attribute key : EString
+	attribute ~value : EString
+}
 
-alias EBoolean : kermeta::standard::Boolean;
-alias EInt : kermeta::standard::Integer;
-alias EString : kermeta::standard::String;
 
 abstract class Mergeable inherits EModelElement
 {
@@ -500,3 +706,37 @@ class ParameterSignature inherits Signature
 	
 }
 
+
+
+alias EBigDecimal : kermeta::language::structure::Object;
+alias EBigInteger : kermeta::language::structure::Object;
+alias EBoolean : kermeta::standard::Boolean;
+alias EBooleanObject : kermeta::standard::Boolean;
+alias EByte : kermeta::language::structure::Object;
+alias EByteArray : kermeta::language::structure::Object;
+alias EByteObject : kermeta::language::structure::Object;
+alias EChar : kermeta::language::structure::Object;
+alias ECharacterObject : kermeta::language::structure::Object;
+alias EDate : kermeta::language::structure::Object;
+alias EDiagnosticChain : kermeta::language::structure::Object;
+alias EDouble : kermeta::language::structure::Object;
+alias EDoubleObject : kermeta::language::structure::Object;
+alias EEList : kermeta::language::structure::Object;
+alias EEnumerator : kermeta::language::structure::Object;
+alias EFeatureMap : kermeta::language::structure::Object;
+alias EFeatureMapEntry : kermeta::language::structure::Object;
+alias EFloat : kermeta::language::structure::Object;
+alias EFloatObject : kermeta::language::structure::Object;
+alias EInt : kermeta::standard::Integer;
+alias EIntegerObject : kermeta::standard::Integer;
+alias EJavaClass : kermeta::language::structure::Object;
+alias EJavaObject : kermeta::language::structure::Object;
+alias ELong : kermeta::language::structure::Object;
+alias ELongObject : kermeta::language::structure::Object;
+alias EMap : kermeta::language::structure::Object;
+alias EResource : kermeta::language::structure::Object;
+alias EResourceSet : kermeta::language::structure::Object;
+alias EShort : kermeta::language::structure::Object;
+alias EShortObject : kermeta::language::structure::Object;
+alias EString : kermeta::standard::String;
+alias ETreeIterator : kermeta::language::structure::Object;
