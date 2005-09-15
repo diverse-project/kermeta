@@ -1,4 +1,4 @@
-/* $Id: DynamicExpression.java,v 1.2 2005-09-06 10:48:05 zdrey Exp $
+/* $Id: DynamicExpression.java,v 1.3 2005-09-15 12:43:48 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpression.java
 * License : GPL
@@ -62,16 +62,16 @@ public class DynamicExpression {
 	    
 	    deu.parse(exp, cdef, ftype_params);
 	   
-	    if (deu.getError().size() == 0) deu.typeCheck(null);
+	    if (!deu.messages.hasError()) deu.typeCheck(null);
 	    
-	    if (deu.getError().size() == 0) {
+	    if (!deu.messages.hasError()) {
 	        RuntimeObject parsed_expression = self.getFactory().getMemory().getRuntimeObjectForFObject(deu.getExpression());
 	        self.getProperties().put("expression", parsed_expression);
 	        return self.getFactory().getMemory().trueINSTANCE;
 	    }
 	    // FIXME: add errors to self runtime objets
 	    System.err.println("NOT IMPLEMENTED : add errors to self runtime objets");
-	    System.err.println(deu.getAllMessagesAsString());
+	    System.err.println(deu.messages.getAllMessagesAsString());
 	    return self.getFactory().getMemory().falseINSTANCE;
 	}
 

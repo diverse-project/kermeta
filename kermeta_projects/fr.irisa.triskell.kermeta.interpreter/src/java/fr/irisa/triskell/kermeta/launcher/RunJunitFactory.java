@@ -1,7 +1,7 @@
-/* $Id: RunJunitFactory.java,v 1.9 2005-06-17 12:44:15 zdrey Exp $
+/* $Id: RunJunitFactory.java,v 1.10 2005-09-15 12:43:48 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 27 avr. 2005
@@ -99,12 +99,12 @@ public class RunJunitFactory implements Test {
             }
             
             // Display the errors stored in the unit that is checked
-            if (unit.error.size()>0)
+            if (unit.messages.unitHasError)
             {
                 System.err.println("*** There are errors in the TestSuite of <"+ unit_uri + "> :" );
-                for (int i=0; i<unit.error.size(); i++)
+                for (int i=0; i<unit.messages.getErrors().size(); i++)
                 {
-                    System.out.println("Error "+i+":"+ unit.error.get(i));
+                    System.out.println("Error "+i+":"+ unit.messages.getErrors().get(i));
                 }
             }
             else

@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.19 2005-08-23 18:44:20 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.20 2005-09-15 12:43:48 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -114,7 +114,7 @@ public class EMF2Runtime {
 		    // Create a resourceLoadException
 		    KermetaRaisedException ex = new KermetaRaisedException(unit.getInstances(), unit.getInstances().getFactory().getMemory().getCurrentInterpreter());
 		    KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
-		    kunit.error.add(new KMUnitError("EMF persistence error : could not load the given model :\n"+ e, (FObject)unit.getInstances().getData().get("kcoreObject")));
+		    kunit.messages.addError("EMF persistence error : could not load the given model :\n"+ e, (FObject)unit.getInstances().getData().get("kcoreObject"));
 		    throw ex;
 		}
 	}
@@ -268,8 +268,8 @@ public class EMF2Runtime {
 	    // We should never enter here
 	    {
 	    	KermetaUnit.internalLog.error("Error finding a class :" + name + " in loaded libraries.");
-	    	unit.getInstances().getFactory().getMemory().getUnit().error.add("EMF Loading error : " +
-	    	        "could not find a class ("+name+") for EMF model" );
+	    	unit.getInstances().getFactory().getMemory().getUnit().messages.addError("EMF Loading error : " +
+	    	        "could not find a class ("+name+") for EMF model", null );
 	        ftype = null;
 	    }
         // FIXME : it would be better not to create the FClass corresponding to the type every time we need one?

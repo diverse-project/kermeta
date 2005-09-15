@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.14 2005-09-09 17:47:00 zdrey Exp $
+/* $Id: KermetaInterpreter.java,v 1.15 2005-09-15 12:43:48 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -93,15 +93,15 @@ public class KermetaInterpreter {
 	        internalLog.error(message, t);
 	        throw new Error(message, t);
 	    }
-	    if (unit.getAllErrors().size() > 0)
+	    if (unit.messages.hasError())
 	    {
-	        throw new KermetaInterpreterError(unit.getAllMessagesAsString());
+	        throw new KermetaInterpreterError(unit.messages.getAllMessagesAsString());
 	    
 	    }
 	    unit.typeCheck(null);
-	    if (unit.getAllErrors().size() > 0)
+	    if (unit.messages.hasError())
 	    {
-	        throw new KermetaInterpreterError(unit.getAllMessagesAsString());
+	        throw new KermetaInterpreterError(unit.messages.getAllMessagesAsString());
 	    
 	    }
 	    initializeMemory();
@@ -127,8 +127,8 @@ public class KermetaInterpreter {
 	private void initializeMemory() {
 	    //unit.typeCheck();
 	    TypeCheckerContext.initializeTypeChecker(unit);
-	    if (unit.getAllErrors().size() > 0) {
-	        String message = "INTERPRETER INITIALIZATION ERROR : The program contains errors:\n" + unit.getAllMessagesAsString();
+	    if (unit.messages.hasError()) {
+	        String message = "INTERPRETER INITIALIZATION ERROR : The program contains errors:\n" + unit.messages.getAllMessagesAsString();
 	        internalLog.error(message);
 	        
 	    }
