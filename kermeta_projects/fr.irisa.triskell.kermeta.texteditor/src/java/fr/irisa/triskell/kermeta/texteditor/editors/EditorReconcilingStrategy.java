@@ -1,6 +1,11 @@
-/*
- * Created on 12 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: EditorReconcilingStrategy.java,v 1.10 2005-09-15 12:42:03 dvojtise Exp $
+ * Project : Kermeta texteditor
+ * File : EditorReconcilingStrategy.java
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 12 févr. 2005
+ * Author : ffleurey, zdrey
  */
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
@@ -8,10 +13,8 @@ package fr.irisa.triskell.kermeta.texteditor.editors;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.eclipse.core.internal.resources.File;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.reconciler.DirtyRegion;
@@ -19,25 +22,17 @@ import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.KMUnitWarning;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
-import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
-import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class EditorReconcilingStrategy implements IReconcilingStrategy {
 
@@ -121,8 +116,8 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         		e.printStackTrace();
         		return null;
         	}
-        	else if (result.error.size() == 0)
-        		result.error.add(new KMUnitError("INTERNAL ERROR : " + e, null));
+        	else if (!result.messages.unitHasError)
+        		result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null));
         }
         
         EditorReconcilingStrategy.createMarker(file, result);
@@ -139,9 +134,9 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     
     private static void createMarker(IFile file, KermetaUnit unit)
     {
-    	Iterator it = unit.getError().iterator();
+    	Iterator it = unit.messages.getErrors().iterator();
     	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next(), (KMTUnit)unit);
-    	it = unit.warning.iterator();
+    	it = unit.messages.getWarnings().iterator();
     	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next(), (KMTUnit)unit);
     }
 
