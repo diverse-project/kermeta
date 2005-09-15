@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.2 2005-08-31 14:39:23 zdrey Exp $
+/* $Id: printer.kmt,v 1.3 2005-09-15 13:23:04 dvojtise Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : GPL
@@ -94,7 +94,7 @@ class BasicPrettyPrinter inherits
 			result.append( " from " + node.superOperation.owningClass.qualifiedName )
 		end
 		if (node.raisedException.size > 0) then
-			result.append( " raises " + self.visitSet(node.raisedException, context, ", "))
+			result.append( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
 		end
 		if (node.body != void) then
 			result.append( " is\n")
@@ -198,7 +198,7 @@ class BasicPrettyPrinter inherits
 		
 		if (node.superType.size > 0) then
 			result.append(" inherits ")
-			result.append(self.visitSet(node.superType, context, ", "))
+			result.append(self.visitClassSet(node.superType, context, ", "))
 		end
 		
 		// print the attributes
@@ -221,7 +221,7 @@ class BasicPrettyPrinter inherits
 	end
 	
 	method visitProductType(node : ProductType, context : Integer) : String is do
-		result := "[" + visitSet(node.type, context, ", ") + "]"
+		result := "[" + visitTypeSet(node.type, context, ", ") + "]"
 	end
 	
 	method visitFunctionType(node : FunctionType, context : Integer) : String is do
@@ -520,11 +520,36 @@ class BasicPrettyPrinter inherits
      * @param context : the context attached to self.visitor
      * @param Indent : the indentation (can be an empty string)
     */
-    operation visitSet
+    operation visitTypeSet
     	(pset : Set<kermeta::reflection::Type>, context : Integer, sep : String) : String is do
 //    	result := basicVisitSet(pset, context, ", ", "")	
     	result := ""
 		from var it : Iterator<kermeta::reflection::Type> init pset.iterator
+		until it.isOff
+		loop
+			var next : kermeta::reflection::Type init it.next
+			var cnext : Type
+			cnext ?= next
+			// TODO : a real visit..
+			result.append(cnext.toString)
+//			result.append(self.accept(cnext, context))
+			if (it.hasNext) then
+				result.append(", ")
+			end
+		end
+    end
+ 
+     /**
+     * Visit a set that contains visitable elements
+     * @param pset : the set to visit
+     * @param context : the context attached to self.visitor
+     * @param Indent : the indentation (can be an empty string)
+    */
+    operation visitClassSet
+    	(pset : Set<kermeta::reflection::Class>, context : Integer, sep : String) : String is do
+//    	result := basicVisitSet(pset, context, ", ", "")	
+    	result := ""
+		from var it : Iterator<kermeta::reflection::Class> init pset.iterator
 		until it.isOff
 		loop
 			var next : kermeta::reflection::Type init it.next
