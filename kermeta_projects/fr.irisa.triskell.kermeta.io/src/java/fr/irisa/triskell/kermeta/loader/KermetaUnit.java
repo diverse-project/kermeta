@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.38 2005-08-31 13:34:18 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.39 2005-09-15 12:39:11 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -56,7 +56,7 @@ import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
- * 
+ * A unit is related to the physical file that has loaded a bunch of kermeta definitons
  */
 public abstract class KermetaUnit {
 	
@@ -76,7 +76,7 @@ public abstract class KermetaUnit {
 				std_lib.load();
 			}
 			catch(Throwable e) {
-				std_lib.error.add(new KMUnitError("Exception while importing the standartd library : " + e, null));
+				std_lib.messages.addError("Exception while importing the standartd library : " + e, null);
 				internalLog.error("Exception while importing the standartd library", e);
 			}
 		}
@@ -110,7 +110,7 @@ public abstract class KermetaUnit {
 	   
 	    if (checker == null) checker = new KermetaTypeChecker(this);
 	    
-	    if (this.error.size() == 0) {
+	    if (!this.messages.hasError()) {
 	        try {
 	        	
 	            checker.checkUnit();
@@ -124,7 +124,7 @@ public abstract class KermetaUnit {
 	            return checker;
 	        }
 	        catch(Throwable t) {
-	            this.error.add(new KMUnitError("Type checker internal error " + t.getMessage(), null));
+	            messages.addError("Type checker internal error " + t.getMessage(), null);
 	            KermetaUnit.internalLog.error("Type checker error", t);
 	        }
 	    }
@@ -132,14 +132,14 @@ public abstract class KermetaUnit {
 	}
 	
 	public void typeCheckAllUnits() {
-		visited = true;
+		
 		typeCheck(null);
-		Iterator it = importedUnits.iterator();
-		while(it.hasNext()) {
-			KermetaUnit u = (KermetaUnit)it.next();
-			if (!u.visited) u.typeCheckAllUnits();
-		}
-		visited = false;
+		
+		ArrayList iulist = getAllImportedUnits();
+	    for (int i=0; i<iulist.size(); i++) {	        
+	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
+	        iu.typeCheck(null);
+	    }			   
 	}
 	
 	protected void importStdlib() {
@@ -217,28 +217,22 @@ public abstract class KermetaUnit {
 	 * FIXME : not optimized at all, since getNodeByModelElement is finally called
 	 * (duplicated hashtable access)
 	 * wherever this method is used and whenever it returns a unit. (return result, uri?)
+	 * FIXME : does not deal with unit in km format since it use the parser traces and not a reliable trace
+	 * other loaders may have not filled these tables
 	 */
 	public KermetaUnit findUnitForModelElement(FObject object)
 	{
 	    Object result = getNodeByModelElement(object);
-	    KermetaUnit unit = this ;
-	    visited = true;
-		Iterator it = importedUnits.iterator();
-		while(it.hasNext() && result == null) {
-			KermetaUnit u = (KermetaUnit)it.next();
-			if (!u.visited)
-			{
-			    result = u.getNodeByModelElement(object);			    
-			    if (result==null) u.findUnitForModelElement(object);
-			    else unit = u;
-			}
-			
-		}
-		visited = false;
-		if (result != null)
-		    return unit;
-		else
-		    return null;
+	    if (result != null) return this;
+	    
+	    
+	    ArrayList iulist = getAllImportedUnits();
+	    for (int i=0; i<iulist.size(); i++) {	        
+	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
+	        result = iu.getNodeByModelElement(object);
+		    if (result != null) return iu;
+	    }
+	    return null;		
 	}
 
 	public FObject getModelElementByNode(Object node) {
@@ -249,8 +243,7 @@ public abstract class KermetaUnit {
 		return traceM2T.get(object);
 	}
 	
-	
-	
+
 	/**
 	 * code>tracer</code> uses the traceability metamodel for storing traces info
 	 */
@@ -299,19 +292,40 @@ public abstract class KermetaUnit {
 	protected Stack typeVars = new Stack();
 	
 	/**
-	 * The list of errors detected while building the model
+	 * The list of unit messages.
+	 * This contains typically errors and warnings detected while building the model
 	 */
-	public ArrayList error = new ArrayList();
+	public KMUnitMessageManager messages = new KMUnitMessageManager(this);	
 	
 	/**
-	 * The list of warning detected while building the model
-	 */
-	public ArrayList warning = new ArrayList();
-	
-	/**
-	 * The imported metacore units
+	 * The imported kermeta units
+	 * This is the list of unit directly imported by this one
+	 * @see getAllImportedUnits 
 	 */
 	public ArrayList importedUnits = new ArrayList();
+		
+	/**
+	 * retreives all the imported unit recursively
+	 * @return a list of unique units imported by this one
+	 */
+	public ArrayList getAllImportedUnits()
+	{
+		ArrayList result = new ArrayList();
+		getAllImportedUnits(result);
+		return result;
+	}
+	public void getAllImportedUnits(ArrayList currentList)
+	{
+	    for (int i=0; i<importedUnits.size(); i++) {
+	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+	       
+	        if(!currentList.contains(iu)) 
+	        {
+	        	currentList.add(iu);
+	        	iu.getAllImportedUnits(currentList);	        	
+	        }
+	    }
+	}
 	
 	/**
 	 * A table of types defined in the current Metacore model
@@ -328,25 +342,40 @@ public abstract class KermetaUnit {
 	public ArrayList usings = new ArrayList();
 	
 	
-	public String getMessagesAsString() {
+/*	public String getMessagesAsString() {
 		String result = "";
 		Iterator it = getError().iterator();
 		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
 		it = warning.iterator();
 		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
 		return result;
-	}
+	}*/
 	
-	public String getAllMessagesAsString() {
+	/**
+	 * Return all the error messages as a string
+	 * @return
+	 */
+/*	public String getAllMessagesAsString() {
 		String result = "";
+		KMUnitMessage kmumessage;
+		FObject fo;
+		KermetaUnit ku = null;
 		Iterator it = getAllErrors().iterator();
-		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
+		while(it.hasNext()) { 
+			kmumessage = (KMUnitMessage)it.next();
+			result += kmumessage.getMessage() + "\n";
+			result += "->   " + getLocationAsString(kmumessage.getNode()) + "\n";					
+		}
 		it = warning.iterator();
-		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
+		while(it.hasNext()) {
+			kmumessage = (KMUnitMessage)it.next();
+			result += kmumessage.getMessage() + "\n";
+			result += "->   " + getLocationAsString(kmumessage.getNode()) + "\n";
+		}
 		return result;
-	}
+	}*/
 	
-	protected boolean visited = false;
+	//protected boolean visited = false;
 	
 	/**
 	 * Get a package by its qualified name
@@ -356,14 +385,13 @@ public abstract class KermetaUnit {
 		
 		FPackage result = (FPackage)packages.get(qname);
 		if (result != null) return result;
-		Iterator it = importedUnits.iterator();
-		visited = true;
-		while(it.hasNext()) {
-			KermetaUnit iu = (KermetaUnit)it.next();
-			if (!iu.visited) result = iu.packageLookup(qname);
+		
+		ArrayList iulist = getAllImportedUnits();
+	    for (int i=0; i<iulist.size(); i++) {	        
+	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
+	        result = (FPackage)iu.packages.get(qname);
 			if (result != null) break;
-		}
-		visited = false;
+	    }	   
 		return result;
 	}
 	
@@ -478,8 +506,8 @@ public abstract class KermetaUnit {
 			KermetaUnit unit;
 			// This is a normal behavior
 			unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri, packages);
-			if (unit.error.size() > 0) {
-				error.add(new KMUnitError("Errors in imported model " + str_uri + " : \n" +  ((KMUnitMessage)unit.error.get(0)).getMessage(), null));
+			if (messages.unitHasError) {
+				messages.addError("Errors in imported model " + str_uri + " : \n" +  unit.messages.getAllMessagesAsString(), null);
 			}
 			importedUnits.add(unit);
 		}
@@ -896,9 +924,9 @@ public abstract class KermetaUnit {
 	        loadAllAnnotations();
 	    }
 	    catch(Throwable t) {
-	        if (getAllErrors().size() == 0) {
+	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
-	            error.add(new KMUnitError("INTERNAL ERROR : " + t.getMessage(), null));
+	            messages.addError("INTERNAL ERROR : " + t.getMessage(), null);
 	        }
 	    }
 	}
@@ -1026,9 +1054,10 @@ public abstract class KermetaUnit {
 	private boolean doneLoadBodies = false;
 	
 	/**
-	 * @return Returns the error.
+	 * @return Returns the error from this unit. If there is an error in imported unit, 
+	 * 	only report the name of the unit that contain the error
 	 */
-	public ArrayList getError() {
+/*	public ArrayList getError() {
 	    visited = true;
 	    ArrayList result = new ArrayList();
 	    result.addAll(error);
@@ -1041,9 +1070,9 @@ public abstract class KermetaUnit {
 	    }
 	    visited = false;
 		return result;
-	}
+	}*/
 	
-	public ArrayList getAllErrors() {
+/*	public ArrayList getAllErrors() {
 	    visited = true;
 	    ArrayList result = new ArrayList();
 	    result.addAll(error);
@@ -1055,14 +1084,8 @@ public abstract class KermetaUnit {
 	    }
 	    visited = false;
 		return result;
-	}
-	
-	/**
-	 * @return Returns the warning.
-	 */
-	public ArrayList getWarning() {
-		return warning;
-	}
+	}*/
+		
 	/**
 	 * @return Returns the uri.
 	 */
