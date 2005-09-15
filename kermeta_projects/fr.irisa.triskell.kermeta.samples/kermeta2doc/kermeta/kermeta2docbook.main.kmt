@@ -1,0 +1,61 @@
+@mainClass "kermeta2docbook::Main"
+@mainOperation "main"
+
+
+package kermeta2docbook;
+
+
+require kermeta
+require "./kermeta.ecore"
+require "./kermeta2docbook.kmt"
+using kermeta::language::structure
+using kermeta::language::behavior
+using kermeta::standard
+using kermeta::persistence
+
+class Main
+{
+    operation main() : Void is do 
+        var inputModel : Set<Package> init loadClassModel
+        
+        var transfo : Kermeta2DocbookVisitor init Kermeta2DocbookVisitor.new
+
+      //  transfo.initialize()
+        
+        stdio.write("Begin\n")
+       // inputModel.each{ p | transfo.accept(p,0) }
+        stdio.write("\nEnd\n")        
+        
+      /*  var tranfo : Class2RDBMS init Class2RDBMS.new
+        var outputModel : RDBMSModel init tranfo.transform(inputModel)
+        
+        var repository : EMFRepository init EMFRepository.new    
+        var resource : EMFResource init 
+        	repository.createResource("../models/out.xmi", 
+        							  "../metamodels/RDBMSMM.ecore")
+	 	// Define a Root ...
+	 	resource.instances.add(outputModel)
+	 		 	
+	 	resource.save()
+        */
+    end
+    
+    operation loadClassModel() : Set<Package> is do             
+   		var repository : EMFRepository init EMFRepository.new             
+   		var resource : Resource init repository.getResource("../../kmlogo/kermeta/kmLogo.km")
+       	resource.load()      
+       
+       from var it : Iterator<Object> init resource.instances.iterator
+       until it.isOff
+       loop
+           var next : Object init it.next
+           if (Package.isInstance(next)) then 
+           		var aPackage : Package 
+           		aPackage ?= next
+           		result.add(aPackage)
+           end
+       end
+       
+   end
+    
+}
