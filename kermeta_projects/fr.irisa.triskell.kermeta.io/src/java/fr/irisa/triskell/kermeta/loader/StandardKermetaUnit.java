@@ -1,6 +1,14 @@
-/*
- * Created on 15 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: StandardKermetaUnit.java,v 1.8 2005-09-15 12:40:33 dvojtise Exp $
+ * Project    : fr.irisa.triskell.kermeta.io
+ * File       : KMUnitMessageManager.java
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 15 févr. 2005
+ * Authors : 
+ *        Franck FLEUREY <ffleurey@irisa.fr>
+ * Description : 
+ *         
  */
 package fr.irisa.triskell.kermeta.loader;
 
@@ -16,8 +24,6 @@ import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class StandardKermetaUnit extends KMTUnit {
 
@@ -60,8 +66,8 @@ public class StandardKermetaUnit extends KMTUnit {
 			KermetaUnit unit;
 			//unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri, new StandardKermetaUnit());
 			unit =  new StandardKermetaUnit(str_uri, packages);
-			if (unit.error.size() > 0) {
-				error.add(new KMUnitError("Errors in imported model " + str_uri + " : \n" +  ((KMUnitMessage)unit.error.get(0)).getMessage(), null));
+			if (unit.messages.unitHasError) {
+				messages.addMessage(new KMUnitError("Errors in imported model " + str_uri + " : \n" +  unit.messages.getMessagesAsString(), null));
 			}
 			importedUnits.add(unit);
 		}

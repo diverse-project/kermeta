@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.21 2005-09-12 11:49:37 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.22 2005-09-15 12:40:32 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -46,8 +46,6 @@ import fr.irisa.triskell.kermeta.behavior.FStringLiteral;
 import fr.irisa.triskell.kermeta.behavior.FTypeLiteral;
 import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.behavior.FVoidLiteral;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.KMUnitWarning;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
@@ -146,14 +144,14 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		Type[] params = func_type.getFunctionTypeLeft().getProductType();
 		// check the number of parameters
 		if (expression.getFParameters().size() != params.length) {
-			unit.error.add(new KMUnitError("TYPE-CHECKER : Wrong number of arguments, expecting "+params.length+" arguments.", expression));
+			unit.messages.addError("TYPE-CHECKER : Wrong number of arguments, expecting "+params.length+" arguments.", expression);
 		}
 		else {
 			// check the types of parameters
 			for(int i=0; i<expression.getFParameters().size(); i++) {
 				Type provided = getTypeOfExpression((FExpression)expression.getFParameters().get(i));
 				if (!provided.isSubTypeOf(params[i])) {
-					unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+params[i]+", found "+provided+".", (FExpression)expression.getFParameters().get(i)));
+					unit.messages.addError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+params[i]+", found "+provided+".", (FExpression)expression.getFParameters().get(i));
 				}
 			}
 		}
@@ -176,7 +174,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		
 		// Check number of provided arguments
 	    if (op.getOperation().getFOwnedParameter().size() != exp.getFParameters().size()) {
-	        unit.error.add(new KMUnitError("TYPE-CHECKER : Wrong number of arguments, expecting "+op.getOperation().getFOwnedParameter().size()+" arguments.", exp));
+	        unit.messages.addError("TYPE-CHECKER : Wrong number of arguments, expecting "+op.getOperation().getFOwnedParameter().size()+" arguments.", exp);
 	        return result;
 	    }
 	    
@@ -210,7 +208,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 					    provided.inferTypeVariableBinding(((SimpleType)required_params[i]).type, binding);
 					}
 					catch(TypeDoesNotMatchError e) {
-					    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument " + i + " mismatch, expecting "+required_params[i]+", found "+provided+" (TypeDoesNotMatch).", (FExpression)exp.getFParameters().get(i)));
+					    unit.messages.addError("TYPE-CHECKER : Type of argument " + i + " mismatch, expecting "+required_params[i]+", found "+provided+" (TypeDoesNotMatch).", (FExpression)exp.getFParameters().get(i));
 					    error = true;
 					}
 			    }
@@ -224,7 +222,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 					Type expected = new SimpleType(TypeVariableEnforcer.getBoundType( ((SimpleType)required_params[i]).type, binding));
 					
 					if (!provided.isSubTypeOf(expected)) {
-					    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+expected+", found "+provided+".",(FExpression)exp.getFParameters().get(i)));
+					    unit.messages.addError("TYPE-CHECKER : Type of argument "+i+" mismatch, expecting "+expected+", found "+provided+".",(FExpression)exp.getFParameters().get(i));
 					    error = true;
 					}
 			    }
@@ -252,7 +250,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	            result = getTypeFromTypeLiteral((FTypeLiteral)((FCallFeature)exp).getFTarget());
 	            // check that it is a concrete class
 	            if (((FClass)((SimpleType)result).getType()).getFClassDefinition().isFIsAbstract()) {
-	                unit.error.add(new KMUnitError("TYPE-CHECKER : Abstract class "+ result +" should not be instanciated.", (FExpression)exp));
+	                unit.messages.addError("TYPE-CHECKER : Abstract class "+ result +" should not be instanciated.", (FExpression)exp);
 	            }
 	        }
 	    }
@@ -270,16 +268,16 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 				Type expected = getTypeFromTypeLiteral((FTypeLiteral)((FCallFeature)exp).getFTarget()) ;
 				
 				if (!provided.isSubTypeOf(expected)) {
-				    unit.error.add(new KMUnitError("TYPE-CHECKER : Type of argument of operation clone must be "+ expected + ".", (FExpression)exp.getFParameters().get(0)));
+				    unit.messages.addError("TYPE-CHECKER : Type of argument of operation clone must be "+ expected + ".", (FExpression)exp.getFParameters().get(0));
 				}  		
 	    		
 	    	} else {
-	    	    unit.error.add(new KMUnitError("TYPE-CHECKER : Clone operation take only one parameter", (FExpression)exp));	    		
+	    	    unit.messages.addError("TYPE-CHECKER : Clone operation take only one parameter", (FExpression)exp);	    		
 	    	}
 	    	
 	    	 result = getTypeFromTypeLiteral((FTypeLiteral)((FCallFeature)exp).getFTarget());
 	    	 if (((FClass)((SimpleType)result).getType()).getFClassDefinition().isFIsAbstract()) {
-                unit.error.add(new KMUnitError("TYPE-CHECKER : Abstract class instance ("+ result +") should not be cloned.", (FExpression)exp));
+                unit.messages.addError("TYPE-CHECKER : Abstract class instance ("+ result +") should not be cloned.", (FExpression)exp);
             }
 	    }
 	    
@@ -327,13 +325,13 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    
 	    // The target of the assignenement cannot have any parameter
 	    if (expression.getFTarget().getFParameters().size() != 0) {
-	        unit.error.add(new KMUnitError("TYPE-CHECKER : Only variables and properties can be assigned", expression));
+	        unit.messages.addError("TYPE-CHECKER : Only variables and properties can be assigned", expression);
 	        return TypeCheckerContext.VoidType;
 	    }
 	    
 	    // It should not be a superoperation call
 	    if (expression.getFTarget() instanceof FSuperCall) {
-	        unit.error.add(new KMUnitError("TYPE-CHECKER : Only variables and properties can be assigned", expression));
+	        unit.messages.addError("TYPE-CHECKER : Only variables and properties can be assigned", expression);
 	        return TypeCheckerContext.VoidType;
 	    }
 	    
@@ -347,7 +345,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			// Check if it is an operation
 			CallableOperation op = target.getOperationByName(fc.getFName());
 			if (op != null) {
-			    unit.error.add(new KMUnitError("TYPE-CHECKER : Only variables and properties can be assigned", expression));
+			    unit.messages.addError("TYPE-CHECKER : Only variables and properties can be assigned", expression);
 			    return TypeCheckerContext.VoidType;
 			}
 	    }
@@ -363,11 +361,11 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        }
 	        
 	        if (provided_type.isSubTypeOf(targetType)) {
-	            unit.error.add(new KMUnitWarning("TYPE-CHECKER : Unnecessary cast, it should be a regular assignment", expression));
+	            unit.messages.addWarning("TYPE-CHECKER : Unnecessary cast, it should be a regular assignment", expression);
 	            return provided_type;
 	        }
 	        else if (!targetType.isSubTypeOf(provided_type)) {
-	            unit.error.add(new KMUnitError("TYPE-CHECKER : Invalid cast, "+provided_type+" is not a supertype of required type : "+targetType+".", expression));
+	            unit.messages.addError("TYPE-CHECKER : Invalid cast, "+provided_type+" is not a supertype of required type : "+targetType+".", expression);
 	            return targetType;
 	        }
 	        else {
@@ -378,7 +376,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    }
 	    else {
 	        if (!provided_type.isSubTypeOf(targetType)) {
-	            unit.error.add(new KMUnitError("TYPE-CHECKER : Type mismatch, "+provided_type+" does not conforms to required type : "+targetType+".", expression));
+	            unit.messages.addError("TYPE-CHECKER : Type mismatch, "+provided_type+" does not conforms to required type : "+targetType+".", expression);
 	        }
 	        expressionTypes.put(expression, provided_type);
     		expression.setFStaticType(provided_type.getFType());
@@ -400,7 +398,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			
 			// Chech the constraint on multiplicity of exception type
 			if (resc.getFExceptionType() != null && resc.getFExceptionType().getFUpper() != 1) {
-				unit.error.add(new KMUnitError("TYPE-CHECKER : The upper multiplicity of the type of object to catch must be 1", resc));
+				unit.messages.addError("TYPE-CHECKER : The upper multiplicity of the type of object to catch must be 1", resc);
 			}
 			
 			context.pushContext();
@@ -430,7 +428,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    if (!(context.getCurrentCallable() instanceof FProperty) ||
 	         !((FProperty)context.getCurrentCallable()).isFIsDerived())
 	    {
-	        unit.error.add(new KMUnitError("TYPE-CHECKER : 'value' symbol is forbidden outside derived property", expression));
+	        unit.messages.addError("TYPE-CHECKER : 'value' symbol is forbidden outside derived property", expression);
 	    }
         result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
 	    expressionTypes.put(expression, result);
@@ -504,9 +502,9 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			if (result == null) {
 			    // The feature was not found
 			    if (enum != null)
-			        unit.error.add(new KMUnitError("TYPE-CHECKER : cannot resolve enumeration literal " + expression.getFName() + " in enumetation " + enum.getFName() + ".",expression));
+			        unit.messages.addError("TYPE-CHECKER : cannot resolve enumeration literal " + expression.getFName() + " in enumetation " + enum.getFName() + ".",expression);
 			    else
-			        unit.error.add(new KMUnitError("TYPE-CHECKER : cannot resolve feature " + expression.getFName() + " in type " + target.toString() + ".",expression));
+			        unit.messages.addError("TYPE-CHECKER : cannot resolve feature " + expression.getFName() + " in type " + target.toString() + ".",expression);
 			    result = TypeCheckerContext.VoidType;
 			}
 		}
@@ -542,7 +540,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		Type result = context.symbolTypeLookup(expression.getFName());
 		// Error if symbol not found
 		if (result == null) {
-			unit.error.add(new KMUnitError("TYPE-CHECKER : cannot resolve symbol " + expression.getFName(), expression));
+			unit.messages.addError("TYPE-CHECKER : cannot resolve symbol " + expression.getFName(), expression);
 			 expressionTypes.put(expression, TypeCheckerContext.VoidType);
 			 expression.setFStaticType(TypeCheckerContext.VoidType.getFType());
 			return TypeCheckerContext.VoidType;
@@ -568,7 +566,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		context.popContext();
 		// Check constraints
 		if(!getTypeOfExpression(expression.getFCondition()).isSubTypeOf(TypeCheckerContext.BooleanType)) {
-			unit.error.add(new KMUnitError("TYPE-CHECKER : The condition expression of a conditional statement should be a Boolean expression", expression.getFCondition()));
+			unit.messages.addError("TYPE-CHECKER : The condition expression of a conditional statement should be a Boolean expression", expression.getFCondition());
 		}
 		// compute the return type
 		if (expression.getFElseBody() != null) {
@@ -633,7 +631,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	            else {
 	                //context.addSymbol(new KMSymbolLambdaParameter(param), TypeCheckerContext.ObjectType);
 	                //result_param.getFType().add(TypeCheckerContext.ObjectType);
-	                unit.error.add(new KMUnitError("TYPE-CHECKER : Types of the function does not match required types", expression));
+	                unit.messages.addError("TYPE-CHECKER : Types of the function does not match required types", expression);
 	            }
 	            
 	        }
@@ -681,7 +679,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		context.popContext();
 		// Check constraints
 		if(!getTypeOfExpression(expression.getFStopCondition()).isSubTypeOf(TypeCheckerContext.BooleanType)) {
-			unit.error.add(new KMUnitError("TYPE-CHECKER : The until expression of a loop statement should be a Boolean expression", expression.getFStopCondition()));
+			unit.messages.addError("TYPE-CHECKER : The until expression of a loop statement should be a Boolean expression", expression.getFStopCondition());
 		}
 		
 		// Return type
@@ -728,7 +726,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    	result = TypeCheckerContext.EnumType;
 	    }
 	    else {
-	    	unit.error.add(new KMUnitError("TYPE-CHECKER : Type literal should only refer to classes or ennumerations", expression));
+	    	unit.messages.addError("TYPE-CHECKER : Type literal should only refer to classes or ennumerations", expression);
 		    result = TypeCheckerContext.VoidType;
 	    }
 		
@@ -747,14 +745,14 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		// Check constraints
 		if (expression.getFInitialization() != null) {
 			if (!getTypeOfExpression(expression.getFInitialization()).isSubTypeOf(result)) {
-				unit.error.add(new KMUnitError("TYPE-CHECKER : The initialization expression should be compatible with the type of the variable : expected "+result+", found "+getTypeOfExpression(expression.getFInitialization())+".", expression.getFInitialization()));
+				unit.messages.addError("TYPE-CHECKER : The initialization expression should be compatible with the type of the variable : expected "+result+", found "+getTypeOfExpression(expression.getFInitialization())+".", expression.getFInitialization());
 			}
 		}
 		
 		KMSymbol symbol = context.symbolLookup(expression.getFIdentifier());
 		if (symbol!=null && symbol instanceof KMSymbolVariable)
 		{
-		    unit.error.add(new KMUnitError("TYPE-CHECKER : Variable '"+expression.getFIdentifier()+"' is already declared somewhere above.", expression));
+		    unit.messages.addError("TYPE-CHECKER : Variable '"+expression.getFIdentifier()+"' is already declared somewhere above.", expression);
 		}
 		else
 		{

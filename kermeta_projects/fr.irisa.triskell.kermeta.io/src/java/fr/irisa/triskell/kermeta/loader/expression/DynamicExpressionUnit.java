@@ -1,8 +1,8 @@
-/* $Id: DynamicExpressionUnit.java,v 1.1 2005-06-07 07:50:45 ffleurey Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.2 2005-09-15 12:40:33 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
-* License : GPL
-* Copyright : IRISA / Universite de Rennes 1
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 6 juin 2005
 * Author : Franck Fleurey
@@ -33,8 +33,6 @@ import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class DynamicExpressionUnit extends KermetaUnit {
 
@@ -82,10 +80,10 @@ public class DynamicExpressionUnit extends KermetaUnit {
 			ast_exp = parser.asingleExpression().getFExpression();
 			
 		} catch (RecognitionException e1) {
-		    this.error.add(new KMUnitError("Expression Parse error : " + e1, null));
+		    this.messages.addMessage(new KMUnitError("Expression Parse error : " + e1, null));
 			 throw new Error(e1);
 		} catch (TokenStreamException e1) {
-		    this.error.add(new KMUnitError("Expression Parse error : " + e1, null));
+		    this.messages.addMessage(new KMUnitError("Expression Parse error : " + e1, null));
 			 throw new Error(e1);
 		}
 		
@@ -94,7 +92,7 @@ public class DynamicExpressionUnit extends KermetaUnit {
     }
     
     public KermetaTypeChecker typeCheck(KermetaTypeChecker checker) {
-       if (expression == null || error.size() > 0)
+       if (expression == null || messages.unitHasError)
            throw new Error("Internal error : cannot type check the expression to eval");
        if (checker == null) {
            checker = new KermetaTypeChecker(this);

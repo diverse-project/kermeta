@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.5 2005-08-02 15:37:13 zdrey Exp $
+/* $Id: KermetaTypeChecker.java,v 1.6 2005-09-15 12:40:32 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -11,10 +11,8 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.ast.FExpression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
@@ -102,7 +100,7 @@ public class KermetaTypeChecker {
     public void checkOperation(FOperation op) {
         
         // THIS IS JUST FOR TESTING PURPOSES
-        int error_count = unit.error.size();
+        int error_count = unit.messages.getErrors().size();
         
         // initialize context
         context.init(op.getFOwningClass(), op);
@@ -111,7 +109,7 @@ public class KermetaTypeChecker {
             ExpressionChecker.typeCheckExpression(op.getFBody(), unit, context);
         
         // THIS IS JUST FOR TESTING PURPOSES
-        if (error_count != unit.error.size()) wrongOperations.add(op.getFName());
+        if (error_count != unit.messages.getErrors().size()) wrongOperations.add(op.getFName());
         else correctOperation.add(op.getFName());
     }
     

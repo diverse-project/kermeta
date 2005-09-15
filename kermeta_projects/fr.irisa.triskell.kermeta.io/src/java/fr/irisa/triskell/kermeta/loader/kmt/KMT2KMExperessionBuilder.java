@@ -7,7 +7,6 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import fr.irisa.triskell.kermeta.ast.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -26,14 +25,14 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 	    
 		if (node == null) return null;
 		KMT2KMExperessionBuilder visitor = new KMT2KMExperessionBuilder(builder);
-		int old_errs = builder.getError().size();
+		int old_errs = builder.messages.getErrors().size();
 		try {
 			node.accept(visitor);
 		}
 		catch(IllegalArgumentException e) {
 			// just catch the exeption if an error has been reported
 			// otherwise trow the exception to the caller
-			if (!(builder.getError().size() > old_errs)) throw e;
+			if (!(builder.messages.getErrors().size() > old_errs)) throw e;
 		}
 		return visitor.result;
 	}
@@ -66,7 +65,7 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 				result = assign;
 			}
 			else {
-				builder.getError().add(new KMTUnitLoadError("Assignement : Only variables and properties can be assigned", fAssignement));
+				builder.messages.addMessage(new KMTUnitLoadError("Assignement : Only variables and properties can be assigned", fAssignement));
 				result = left;
 				return false;
 			}

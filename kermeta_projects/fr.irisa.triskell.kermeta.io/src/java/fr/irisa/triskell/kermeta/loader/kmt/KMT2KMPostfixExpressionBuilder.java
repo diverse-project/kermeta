@@ -16,7 +16,6 @@ import fr.irisa.triskell.kermeta.behavior.FCallFeature;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
 import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -94,7 +93,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 			builder.popContext();
 		}
 		else {
-			builder.error.add(new KMTUnitLoadError("A lambda postfix can only be applied as the unique parameter of a call expression.", lambdaPostfix));
+			builder.messages.addMessage(new KMTUnitLoadError("A lambda postfix can only be applied as the unique parameter of a call expression.", lambdaPostfix));
 			return false;
 		}
 		
@@ -132,7 +131,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 			// The parameters are binded by beginVisit(ActualParameter actualParameter)
 		}
 		else {
-			builder.error.add(new KMTUnitLoadError("Parameters can only be associated to a call expression.", paramPostfix));
+			builder.messages.addMessage(new KMTUnitLoadError("Parameters can only be associated to a call expression.", paramPostfix));
 			return false;
 		}
 		return super.beginVisit(paramPostfix);

@@ -25,14 +25,11 @@ import fr.irisa.triskell.kermeta.ast.FVariableDecl;
 import fr.irisa.triskell.kermeta.ast.FVoidLiteral;
 import fr.irisa.triskell.kermeta.ast.ParentExp;
 import fr.irisa.triskell.kermeta.ast.PrimitiveExpression;
-import fr.irisa.triskell.kermeta.ast.Property;
 import fr.irisa.triskell.kermeta.ast.ResultCall;
-import fr.irisa.triskell.kermeta.ast.SetterBody;
 import fr.irisa.triskell.kermeta.ast.ValueCall;
 import fr.irisa.triskell.kermeta.behavior.FCallResult;
 import fr.irisa.triskell.kermeta.behavior.FCallSuperOperation;
 import fr.irisa.triskell.kermeta.behavior.FCallValue;
-import fr.irisa.triskell.kermeta.behavior.FCallVariable;
 import fr.irisa.triskell.kermeta.behavior.FConditionnal;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
@@ -40,13 +37,10 @@ import fr.irisa.triskell.kermeta.behavior.FRaise;
 import fr.irisa.triskell.kermeta.behavior.FSelfExpression;
 import fr.irisa.triskell.kermeta.behavior.FTypeLiteral;
 import fr.irisa.triskell.kermeta.behavior.FTypeReference;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  * 
  * abstract primitiveExpression : fLiteral | parentExp | fSelfCall | fSuperCall |
  * 			fJavaStaticCall | fBlock | fConditional | fRaiseException | 
@@ -266,7 +260,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 				else {
 					// it is a type. we check here if it exists to give an appropriate error if it does not...
 					if (builder.getTypeDefinitionByName(name) == null) {
-						builder.error.add(new KMTUnitLoadError("Cannot resolve symbol : '"+name+"'.", btype));
+						builder.messages.addMessage(new KMTUnitLoadError("Cannot resolve symbol : '"+name+"'.", btype));
 						return false;
 					}
 				}

@@ -1,4 +1,4 @@
-/* $Id: OperationBodyLoader.java,v 1.1 2005-02-22 14:24:15 zdrey Exp $
+/* $Id: OperationBodyLoader.java,v 1.2 2005-09-15 12:40:33 dvojtise Exp $
  * Created on 15 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -14,8 +14,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.KermetaLoaderModule;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -71,7 +69,7 @@ public class OperationBodyLoader {
 			}
 			return true;
 		} catch (IOException e) {
-			 unit.error.add(new KMUnitError("Operation body load i/o error : " + e, null));
+			 unit.messages.addError("Operation body load i/o error : " + e, null);
 			 e.printStackTrace(); // print the exceptions for debug (FIXME:remove it later)
 		}
 	    

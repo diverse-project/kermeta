@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.20 2005-05-31 16:59:46 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.21 2005-09-15 12:40:33 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -15,23 +15,21 @@
 
 package kermeta_io.test;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Iterator;
+
+import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
-
-import junit.framework.TestCase;
 
 
 /**
@@ -366,10 +364,10 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
 		try {
 		builder.load();
-		} catch(Exception e ) {if (builder.getError().size() == 0) throw e;};
+		} catch(Exception e ) {if (!builder.messages.hasError()) throw e;};
 		
-		if (builder.getAllErrors().size() > 0) {
-			assertTrue(builder.getAllMessagesAsString(), false);
+		if (builder.messages.getAllErrors().size() > 0) {
+			assertTrue(builder.messages.getAllMessagesAsString(), false);
 		}
 		else {	
 			
@@ -388,9 +386,9 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		KermetaUnit builder2 = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ppfile);
 		try {
 		builder2.load();
-		} catch(Exception e ) {if (builder2.getError().size() == 0) throw e;};
-		if (builder2.getError().size() > 0) {
-				assertTrue("RE-PARSE : " + builder2.getMessagesAsString(), false);
+		} catch(Exception e ) {if (!builder2.messages.hasError()) throw e;};
+		if (builder2.messages.getErrors().size() > 0) {
+				assertTrue("RE-PARSE : " + builder2.messages.getMessagesAsString(), false);
 			}
 		}
 	}

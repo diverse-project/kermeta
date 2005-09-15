@@ -1,7 +1,11 @@
-/*
- * Created on 10 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- * 
+/* $Id: ECore2KMPass3.java,v 1.3 2005-09-15 12:40:33 dvojtise Exp $
+ * Project : Kermeta 
+ * File : ECore2KMPass3.java
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 10 févr. 2005
+ * Author : ffleurey
  */
 package fr.irisa.triskell.kermeta.loader.emfatic;
 
@@ -28,7 +32,6 @@ import com.ibm.eclipse.emfatic.core.ast.SubPackageDecl;
 import com.ibm.eclipse.emfatic.core.ast.TypeRef;
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
@@ -118,7 +121,7 @@ public class ECore2KMPass3 extends ECore2KMPass {
 			for(int i=0; i<sts.length; i++) {
 				if (sts[i] instanceof QualifiedID) {
 					FType t = getFTypeByID((QualifiedID)sts[i]);
-					if (t == null) builder.error.add(new KMUnitError("Cannot resulve type " + qualifiedIDAsString((QualifiedID)sts[i]), null));
+					if (t == null) builder.messages.addError("Cannot resulve type " + qualifiedIDAsString((QualifiedID)sts[i]), null);
 					else builder.current_class.getFSuperType().add(t);
 				}
 			}

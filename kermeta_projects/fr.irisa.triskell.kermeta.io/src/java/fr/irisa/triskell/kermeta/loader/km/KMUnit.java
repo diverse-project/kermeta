@@ -1,19 +1,21 @@
-/*
- * Created on 21 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
- */
+/* $Id: KMUnit.java,v 1.9 2005-09-15 12:40:33 dvojtise Exp $
+* Project : Kermeta (First iteration)
+* File : 	KMUnit.java
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
+* ----------------------------------------------------------------------------
+* Creation date : 21 févr. 2005
+* Author : Franck Fleurey
+*/
 package fr.irisa.triskell.kermeta.loader.km;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
@@ -22,8 +24,6 @@ import fr.irisa.triskell.kermeta.structure.FObject;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
  */
 public class KMUnit extends KermetaUnit {
 
@@ -81,7 +81,7 @@ public class KMUnit extends KermetaUnit {
 			
     	}
     	catch(Exception e) {
-    		this.error.add(new KMUnitError("Unable to load program '" + uri +" :" + e, null));
+    		this.messages.addMessage(new KMUnitError("Unable to load program '" + uri +" :" + e, null));
     		KermetaUnit.internalLog.error("Unable to load unit " + uri, e);
     	}
     	type_checked = true;

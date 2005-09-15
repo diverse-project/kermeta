@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.7 2005-05-02 23:50:52 ffleurey Exp $
+/* $Id: KMT2KMPass4.java,v 1.8 2005-09-15 12:40:32 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -25,8 +25,6 @@ import org.eclipse.emf.common.util.EList;
 import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.Property;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.KMUnitWarning;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
@@ -63,7 +61,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		builder.current_class = (FClassDefinition)builder.getModelElementByNode(classDecl);
 		// check for inheritance cycles
 		if (builder.isSuperClass(builder.current_class, builder.current_class)) {
-			builder.error.add(new KMTUnitLoadError("PASS 4 : Cycle in the inheritance tree - The type hierachy of class '"+builder.current_class.getFName()+"' is inconsistant.", classDecl));
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Cycle in the inheritance tree - The type hierachy of class '"+builder.current_class.getFName()+"' is inconsistant.", classDecl));
 			return false;
 		}
 		return super.beginVisit(classDecl);
@@ -87,7 +85,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	public boolean beginVisit(Operation operation) {
 		builder.current_operation = (FOperation)builder.getModelElementByNode(operation);
 		if (builder.findPropertyByName(builder.current_class, builder.current_operation.getFName()) != null) {
-			builder.error.add(new KMTUnitLoadError("PASS 4 :A property named '"+builder.current_operation.getFName()+"' is already inherited by class '"+builder.current_class.getFName()+"'.", operation));
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :A property named '"+builder.current_operation.getFName()+"' is already inherited by class '"+builder.current_class.getFName()+"'.", operation));
 			return false;
 		}
 		
@@ -98,7 +96,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 			for (int i=0; i<superclasses.size(); i++) {
 				FClassDefinition sc = ((FClass)superclasses.get(i)).getFClassDefinition();
 				if (builder.findOperationByName(sc, builder.current_operation.getFName()) != null) {
-					builder.error.add(new KMTUnitLoadError("PASS 4 :An operation named '"+builder.current_operation.getFName()+"' is already inherited from class '"+sc.getFName()+"'.", operation));
+					builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :An operation named '"+builder.current_operation.getFName()+"' is already inherited from class '"+sc.getFName()+"'.", operation));
 					return false;
 				}
 			}
@@ -110,7 +108,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 				// potential super ops
 				Hashtable superops = getSupersForMethod(builder.current_class, builder.current_operation.getFName());
 				if (superops.size() == 0) { // Error, no super operation
-					builder.error.add(new KMTUnitLoadError("PASS 4 :No super operation found for method '"+builder.current_operation.getFName()+"'.", operation));
+					builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :No super operation found for method '"+builder.current_operation.getFName()+"'.", operation));
 					return false;
 				}
 				else if (superops.size() == 1) { // No problem
@@ -119,7 +117,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 					if (operation.getSuperSelection() != null) {
 						String provided_name = qualifiedIDAsString(operation.getSuperSelection());
 						if (!provided_name.equals(scname)) {
-							builder.warning.add(new KMTUnitLoadError("PASS 4 : Wrong super operation selection directive '"+provided_name+"', super operation selected from class '"+scname+"'.", operation));
+							builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Wrong super operation selection directive '"+provided_name+"', super operation selected from class '"+scname+"'.", operation));
 						}
 					}
 				}
@@ -152,12 +150,12 @@ public class KMT2KMPass4 extends KMT2KMPass {
 						}
 						
 						else {
-							builder.error.add(new KMTUnitLoadError("PASS 4 :Wrong super operation selection directive '"+provided_name+"', expecting one of "+possible_selection+".", operation.getSuperSelection()));
+							builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :Wrong super operation selection directive '"+provided_name+"', expecting one of "+possible_selection+".", operation.getSuperSelection()));
 							return false;
 						}
 					}
 					else { // error
-						builder.error.add(new KMTUnitLoadError("PASS 4 :Several super operation found for method '"+builder.current_operation.getFName()+"', : "+possible_selection+".", operation));
+						builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :Several super operation found for method '"+builder.current_operation.getFName()+"', : "+possible_selection+".", operation));
 						return false;
 					}
 				}
@@ -184,13 +182,13 @@ public class KMT2KMPass4 extends KMT2KMPass {
 			// the type of such a property must a class which class definition contains a property
 			// named opname and which type is current_property.owningClass
 			if (!(builder.current_property.getFType() instanceof FClass)) {
-				builder.error.add(new KMTUnitLoadError("PASS 4 : Unexpected opposite - The type of a property that have an opposite should be a Class.", property.getOppositeName()));
+				builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Unexpected opposite - The type of a property that have an opposite should be a Class.", property.getOppositeName()));
 				return false;
 			}
 			FClassDefinition oposite_class = ((FClass)builder.current_property.getFType()).getFClassDefinition();
 			FProperty oposite_property = builder.getPropertyByName(oposite_class, opname);
 			if (oposite_property == null) {
-				builder.error.add(new KMTUnitLoadError("PASS 4 : Unable to resolve opposite of property", property.getOppositeName()));
+				builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Unable to resolve opposite of property", property.getOppositeName()));
 				return false;
 			}
 			builder.current_property.setFOpposite(oposite_property);

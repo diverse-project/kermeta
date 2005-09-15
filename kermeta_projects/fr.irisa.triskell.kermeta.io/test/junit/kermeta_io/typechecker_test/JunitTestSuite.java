@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.12 2005-05-27 09:25:41 ffleurey Exp $
+/* $Id: JunitTestSuite.java,v 1.13 2005-09-15 12:40:33 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -15,23 +15,10 @@
 
 package kermeta_io.typechecker_test;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.Iterator;
-
-import org.eclipse.emf.common.util.URI;
-
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
-import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
-import fr.irisa.triskell.kermeta.utils.UserDirURI;
-
 import junit.framework.TestCase;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 
 /**
@@ -191,18 +178,18 @@ testinvalidFile("test/typechecher_tests/invalid","Enum.kmt" );
 	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
 		try {
 		builder.load();
-		} catch(Exception e ) {if (builder.getError().size() == 0) throw e;};
+		} catch(Exception e ) {if (builder.messages.getErrors().size() == 0) throw e;};
 		
-		if (builder.getAllErrors().size() > 0) {
-			assertTrue(builder.getAllMessagesAsString(), false);
+		if (builder.messages.getAllErrors().size() > 0) {
+			assertTrue(builder.messages.getAllMessagesAsString(), false);
 		}
 		
 		builder.typeCheck(null);
 		
 		//KermetaTypeChecker tc = builder.getTypeChecker();
 		
-		if (builder.getAllErrors().size() > 0) {
-			assertTrue(builder.getAllMessagesAsString(), false);
+		if (builder.messages.getAllErrors().size() > 0) {
+			assertTrue(builder.messages.getAllMessagesAsString(), false);
 		}
 	}
 	
@@ -214,10 +201,10 @@ testinvalidFile("test/typechecher_tests/invalid","Enum.kmt" );
 	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
 		try {
 		builder.load();
-		} catch(Exception e ) {if (builder.getError().size() == 0) throw e;};
+		} catch(Exception e ) {if (builder.messages.getErrors().size() == 0) throw e;};
 		
-		if (builder.getAllErrors().size() > 0) {
-			assertTrue(builder.getAllMessagesAsString(), false);
+		if (builder.messages.getAllErrors().size() > 0) {
+			assertTrue(builder.messages.getAllMessagesAsString(), false);
 		}
 		
 		

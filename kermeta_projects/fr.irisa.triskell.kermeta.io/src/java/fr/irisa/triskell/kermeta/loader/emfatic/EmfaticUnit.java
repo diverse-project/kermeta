@@ -1,14 +1,12 @@
-/* $Id: EmfaticUnit.java,v 1.3 2005-04-19 08:46:43 ffleurey Exp $
+/* $Id: EmfaticUnit.java,v 1.4 2005-09-15 12:40:33 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : EmfaticUnit.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 23, 2005
  * Author : ffleurey
  * Description : The Emfatic unit allows to load a kermeta object from an Emfatic AST .?
- * TODO : 
- * 		- 
  */
 package fr.irisa.triskell.kermeta.loader.emfatic;
 
@@ -50,7 +48,7 @@ public class EmfaticUnit extends KermetaUnit {
 		    p = new EmfaticParser(new EmfaticLexer(new InputStreamReader(converter.createInputStream(uri))));
 		} 
 		catch (IOException e1) {
-		    error.add(new KMUnitError("i/o error loading ressource '"+this.uri+"': " + e1, null));
+		    messages.addMessage(new KMUnitError("i/o error loading ressource '"+this.uri+"': " + e1, null));
 		    return;
 		}
 			
@@ -58,7 +56,7 @@ public class EmfaticUnit extends KermetaUnit {
 			emfaticAST = p.compUnit();
 		}
 		catch(Exception e) {
-		    error.add(new KMUnitError("Parse error : " + e, null));
+			messages.addMessage(new KMUnitError("Parse error : " + e, null));
 		    return;
 		}
 	}

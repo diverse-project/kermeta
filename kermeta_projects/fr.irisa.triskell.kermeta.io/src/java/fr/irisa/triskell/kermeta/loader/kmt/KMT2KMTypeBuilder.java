@@ -40,10 +40,10 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 	public static FType process(Type node, KermetaUnit builder) {
 		if (node == null) return null;
 		KMT2KMTypeBuilder visitor = new KMT2KMTypeBuilder(builder);
-		int nb_err = builder.error.size();
+		int nb_err = builder.messages.getErrors().size();
 		node.accept(visitor);
-		if (visitor.result == null && builder.error.size() == nb_err) {
-			builder.error.add(new KMTUnitLoadError("Cannot resolve type '" + node.getText() + "'.",node));
+		if (visitor.result == null && builder.messages.getErrors().size() == nb_err) {
+			builder.messages.addMessage(new KMTUnitLoadError("Cannot resolve type '" + node.getText() + "'.",node));
 		}
 		return visitor.result;
 	}
@@ -85,14 +85,14 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			result = builder.typeVariableLookup(qname);
 			
 			if (result != null && basictype.getParams() != null) {
-				builder.error.add(new KMTUnitLoadError("Unexpected type parameters for type variable '" + qname + "'.",basictype));
+				builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for type variable '" + qname + "'.",basictype));
 				return false;
 			}
 			
 			// If result is null here, then the type is unresolved
 			
 			if(result == null) {
-				builder.error.add(new KMTUnitLoadError("Unresolved type '" + qname + "'.",basictype));
+				builder.messages.addMessage(new KMTUnitLoadError("Unresolved type '" + qname + "'.",basictype));
 				return false;
 			}
 			
@@ -100,7 +100,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 		else if (def instanceof FEnumeration || def instanceof FPrimitiveType) {
 			result = (FType)def;
 			if (basictype.getParams() != null) {
-				builder.error.add(new KMTUnitLoadError("Unexpected type parameters for enumeration or primitive type'" + qname + "'.",basictype));
+				builder.messages.addMessage(new KMTUnitLoadError("Unexpected type parameters for enumeration or primitive type'" + qname + "'.",basictype));
 				return false;
 			}
 		}
@@ -113,7 +113,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			//res.setFName(classdef.getFName());
 			FType[] actual_params = getTypeFromLst(basictype.getParams());
 			if (actual_params.length != classdef.getFTypeParameter().size()) {
-				builder.error.add(new KMTUnitLoadError("Wrong number of type parameter for class '" + qname + "'.",basictype));
+				builder.messages.addMessage(new KMTUnitLoadError("Wrong number of type parameter for class '" + qname + "'.",basictype));
 			}
 			else {
 				for(int i=0; i<actual_params.length; i++) {

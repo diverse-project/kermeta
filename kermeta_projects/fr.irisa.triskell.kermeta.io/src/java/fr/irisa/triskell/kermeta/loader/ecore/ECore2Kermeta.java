@@ -1,8 +1,8 @@
-/* $Id: ECore2Kermeta.java,v 1.7 2005-08-30 14:34:16 zdrey Exp $
+/* $Id: ECore2Kermeta.java,v 1.8 2005-09-15 12:40:34 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
 * License : EPL
-* Copyright : IRISA / Universite de Rennes 1
+* Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 26 mai 2005
 * Author : Franck Fleurey
@@ -10,7 +10,6 @@
 
 package fr.irisa.triskell.kermeta.loader.ecore;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
@@ -32,20 +31,15 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
-import fr.irisa.triskell.kermeta.ast.FExpression;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.KMUnitWarning;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
@@ -84,7 +78,7 @@ public class ECore2Kermeta extends EcoreVisitor {
 			Resource resource = resource_set.getResource(URI.createURI(unit.getUri()), true);
 			loadunit(unit, resource);
 		} catch (Throwable e) {
-			unit.error.add(new KMUnitError("Error loading ECore model " + unit.getUri() + " : " + e, null));
+			unit.messages.addError("Error loading ECore model " + unit.getUri() + " : " + e, null);
 			KermetaUnit.internalLog.error("Error loading ECore model " + unit.getUri() + " : " + e, e);
 		}
 	}
@@ -127,7 +121,7 @@ public class ECore2Kermeta extends EcoreVisitor {
 			}
 			
 		} catch (Throwable e) {
-			unit.error.add(new KMUnitError("Error loading ECore model " + unit.getUri() + " : " + e, null));
+			unit.messages.addError("Error loading ECore model " + unit.getUri() + " : " + e, null);
 			KermetaUnit.internalLog.error("Error loading ECore model " + unit.getUri() + " : " + e, e);
 		}
 		
@@ -236,7 +230,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         
         FTypeDefinition td = unit.typeDefinitionLookup(getQualifiedName(node));
         if (td != null) {
-            unit.error.add(new KMUnitError("Duplicate definition of type " + getQualifiedName(node), td));
+            unit.messages.addError("Duplicate definition of type " + getQualifiedName(node), td);
         }
         
         current_classdef = (FClassDefinition)types.get(node);
@@ -430,7 +424,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         }
         FTypeDefinition type = unit.typeDefinitionLookup(type_name);
         if (type == null) {
-        	unit.warning.add(new KMUnitWarning("cannot find instance class " + type_name + " for primitive type " + getQualifiedName(node) + " (replaced by Object)", null));
+        	unit.messages.addWarning("cannot find instance class " + type_name + " for primitive type " + getQualifiedName(node) + " (replaced by Object)", null);
         	type = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::language::structure::Object");
         }
         
@@ -441,7 +435,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         if (iType == null) {
         	
         	if (!(type instanceof FClassDefinition)) {
-        		throw new Error("INTERNAL ERROR : tyep should be a FClassDefinition, not a " + type.getClass().getName());
+        		throw new Error("INTERNAL ERROR : type should be a FClassDefinition, not a " + type.getClass().getName());
         	}
         	
         	FClassDefinition cd = (FClassDefinition)type;

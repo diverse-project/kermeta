@@ -1,7 +1,7 @@
-/* $Id: KMT2KMPass3.java,v 1.5 2005-04-26 08:28:08 ffleurey Exp $
+/* $Id: KMT2KMPass3.java,v 1.6 2005-09-15 12:40:32 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
- * License : GPL
+ * License : EPL
  * Copyright : IRISA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Feb 2, 2005
@@ -33,7 +33,6 @@ import fr.irisa.triskell.kermeta.ast.PropertyKind;
 import fr.irisa.triskell.kermeta.ast.ReadOnlyModifier;
 import fr.irisa.triskell.kermeta.ast.Type;
 import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
@@ -101,13 +100,13 @@ public class KMT2KMPass3 extends KMT2KMPass {
 					FType supertype = KMT2KMTypeBuilder.process((Type)supertypes[i], builder);
 					//System.out.println(builder.current_class.getFName() + " Found a super type : " + supertype.getFName() + " : " + supertype.getClass().getName());
 					if (!(supertype instanceof FClass)) {
-						builder.error.add(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' - A class can only inherit from classes ("+supertype+" is not a class).",(KermetaASTNode)supertypes[i]));
+						builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' - A class can only inherit from classes ("+supertype+" is not a class).",(KermetaASTNode)supertypes[i]));
 						return false;
 					}
 					EList tmpsts = builder.current_class.getFSuperType();
 					for(int a=0;a<tmpsts.size();a++) {
 						if (((FClass)tmpsts.get(a)).getFClassDefinition() == ((FClass)supertype).getFClassDefinition()) {
-							builder.error.add(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' - A class can only inherit once from another.",(KermetaASTNode)supertypes[i]));
+							builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' - A class can only inherit once from another.",(KermetaASTNode)supertypes[i]));
 							return false;
 						}
 					}
@@ -155,11 +154,11 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		}
 		// checks that the class do not have an op with the same name yet
 		if (builder.getOperationByName(builder.current_class, builder.current_operation.getFName()) != null) {
-			builder.error.add(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' duplicate definition of operation '"+builder.current_operation.getFName()+"'.",operation));
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' duplicate definition of operation '"+builder.current_operation.getFName()+"'.",operation));
 			return false;
 		}
 		if (builder.getPropertyByName(builder.current_class, builder.current_operation.getFName()) != null) {
-			builder.error.add(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' contains both an operation and a property named '"+builder.current_operation.getFName()+"'.",operation));
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' contains both an operation and a property named '"+builder.current_operation.getFName()+"'.",operation));
 			return false;
 		}
 		
@@ -212,7 +211,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 			EList other_params = builder.current_operation.getFTypeParameter();
 			for (int i=0; i<other_params.size(); i++) {
 				if (((FTypeVariable)other_params.get(i)).getFName().equals(name)) {
-					builder.error.add(new KMTUnitLoadError("PASS 3 : Parametric operation '" + builder.current_operation.getFName() + "' already contains a type parameter named '"+name+"'.",typeVarDecl));
+					builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Parametric operation '" + builder.current_operation.getFName() + "' already contains a type parameter named '"+name+"'.",typeVarDecl));
 					return false;
 				}
 			}
@@ -251,7 +250,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		EList other_params = builder.current_operation.getFOwnedParameter();
 		for (int i=0; i<other_params.size(); i++) {
 			if (((FParameter)other_params.get(i)).getFName().equals(parameter.getFName())) {
-				builder.error.add(new KMTUnitLoadError("PASS 3 : Operation '" + builder.current_operation.getFName() + "' already contains a parameter named '"+parameter.getFName()+"'.",param));
+				builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Operation '" + builder.current_operation.getFName() + "' already contains a parameter named '"+parameter.getFName()+"'.",param));
 				return false;
 			}
 		}
@@ -297,13 +296,13 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		builder.current_property.setFIsReadOnly(false);
 		
 		if (builder.getPropertyByName(builder.current_class, builder.current_property.getFName()) != null) {
-			builder.error.add(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' duplicate definition of property '"+builder.current_property.getFName()+"'.",property));
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' duplicate definition of property '"+builder.current_property.getFName()+"'.",property));
 			return false;
 		}
 		
 		// checks that the class do not have an op with the same name yet
 		if (builder.getOperationByName(builder.current_class, builder.current_property.getFName()) != null) {
-			builder.error.add(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' contains both an operation and a property named '"+builder.current_property.getFName()+"'.",property));
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' contains both an operation and a property named '"+builder.current_property.getFName()+"'.",property));
 			return false;
 		}
 		

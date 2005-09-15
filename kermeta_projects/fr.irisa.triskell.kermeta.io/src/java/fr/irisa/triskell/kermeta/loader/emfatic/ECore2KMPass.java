@@ -1,6 +1,11 @@
-/*
- * Created on 10 févr. 2005
- *
+/* $Id: ECore2KMPass.java,v 1.3 2005-09-15 12:40:33 dvojtise Exp $
+ * Project : Kermeta (First iteration)
+ * File : KermetaUnit.java
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 10 févr. 2005
+ * Author : ffleurey
  */
 package fr.irisa.triskell.kermeta.loader.emfatic;
 
@@ -12,7 +17,6 @@ import com.ibm.eclipse.emfatic.core.ast.QualifiedID;
 import com.ibm.eclipse.emfatic.core.ast.TypeRef;
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
@@ -124,7 +128,7 @@ public class ECore2KMPass extends EmfaticASTNodeVisitor {
 			
 	    FTypeDefinition typeDef = builder.getTypeDefinitionByName(name);
 	    if (typeDef == null) {
-	        builder.error.add(new KMUnitError("Cannot resolve type '"+name+"'" ,null));
+	        builder.messages.addError("Cannot resolve type '"+name+"'" ,null);
 			return null;
 	    }
 	    if (typeDef instanceof FType) return (FType)typeDef;
