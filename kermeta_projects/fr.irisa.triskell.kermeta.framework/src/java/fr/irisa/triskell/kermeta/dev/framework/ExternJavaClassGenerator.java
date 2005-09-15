@@ -1,4 +1,4 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.8 2005-05-13 14:50:53 ffleurey Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.9 2005-09-15 12:45:32 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
  * License : GPL
@@ -27,7 +27,6 @@ import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.behavior.FJavaStaticCall;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.structure.FPackage;
@@ -58,8 +57,8 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 	public void loadmodelfromfile(String kmt_filename) {
 	    unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(kmt_filename);
 		unit.load();
-		if (unit.error.size() > 0) {
-			System.out.println(unit.error.size() + " Load error : " + ((KMUnitMessage)unit.error.get(0)).getMessage());
+		if (unit.messages.unitHasError) {
+			System.out.println(unit.messages.getErrors().size() + " Load error : " + unit.messages.getMessagesAsString());
 		}
 		FPackage pkg = (FPackage)unit.packageLookup("kermeta");
 		this.accept(pkg);

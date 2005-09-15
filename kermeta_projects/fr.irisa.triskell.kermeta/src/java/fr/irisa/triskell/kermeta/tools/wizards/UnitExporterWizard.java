@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.6 2005-08-23 12:19:30 zdrey Exp $
+/* $Id: UnitExporterWizard.java,v 1.7 2005-09-15 12:44:55 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -20,7 +20,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
+//import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -165,13 +165,13 @@ public class UnitExporterWizard extends Wizard{
 		unit = createUnit();
         unit.load();
         
-        if (unit.getAllErrors().size() != 0) {
+        if (unit.messages.hasError()) {
         	Shell theShell = this.getContainer().getShell();
-        	MessageDialog.openError(getContainer().getShell(),"Error loading file", "The source file contains errors: "+ unit.getAllMessagesAsString());
+        	MessageDialog.openError(getContainer().getShell(),"Error loading file", "The source file contains errors: "+ unit.messages.getAllMessagesAsString());
         	
         	MessageConsoleStream mcs = KermetaPlugin.getDefault().getConsole().newMessageStream();
         	mcs.setColor(new Color(null, 255,0,0));
-        	mcs.println(unit.getAllMessagesAsString());
+        	mcs.println(unit.messages.getAllMessagesAsString());
         	
         }
 		else

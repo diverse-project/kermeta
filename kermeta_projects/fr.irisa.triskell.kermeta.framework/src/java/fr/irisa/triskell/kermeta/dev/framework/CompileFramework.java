@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.3 2005-05-18 23:38:33 ffleurey Exp $
+/* $Id: CompileFramework.java,v 1.4 2005-09-15 12:45:32 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : CompileFramework.java
 * License : GPL
@@ -29,23 +29,29 @@ public class CompileFramework {
         KermetaUnit u = KermetaUnitFactory.getDefaultLoader().createKermetaUnit("src/kermeta/Standard.kmt");
         System.out.println("LOADING STANDARD LIBRARY...");
         u.load();
-        if (u.getAllErrors().size() != 0) {
+        if (u.messages.getAllErrors().size() != 0) {
         	System.err.println("Standard library contains errors:");
-        	System.err.println(u.getAllMessagesAsString());
+        	System.err.println(u.messages.getAllMessagesAsString());
         	//System.exit(0);
         }
         
         System.out.println("TYPE CHECKING...");
         u.typeCheckAllUnits();
-        if (u.getAllErrors().size() != 0) {
+        if (u.messages.hasError()) {
         	System.err.println("Standard library contains type errors:");
-        	System.err.println(u.getAllMessagesAsString());
+        	System.err.println(u.messages.getAllMessagesAsString());
         	//System.exit(0);
         }
-        
-        System.out.println("SAVING...");
-        u.saveAsXMIModel("dist/framework.km");
-        System.out.println("DONE");
-        
+        else
+        {
+        	if(u.messages.getAllWarnings().size() > 0)
+        	{
+        		System.err.println("Standard library contains type warnings:");
+            	System.err.println(u.messages.getAllMessagesAsString());
+        	}
+        	System.out.println("SAVING...");
+        	u.saveAsXMIModel("dist/framework.km");
+        	System.out.println("DONE");
+        }
     }
 }

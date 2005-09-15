@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.12 2005-06-01 13:00:39 zdrey Exp $
+/* $Id: FrameworkGen.java,v 1.13 2005-09-15 12:45:32 dvojtise Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -53,8 +53,8 @@ public class FrameworkGen {
 		KermetaUnit.STD_LIB_URI = "src/kermeta/Standard.kmt";
 		
 		
-		if (KermetaUnit.getStdLib().error.size() > 0) {
-			System.err.println(KermetaUnit.getStdLib().getMessagesAsString());
+		if (KermetaUnit.getStdLib().messages.unitHasError) {
+			System.err.println(KermetaUnit.getStdLib().messages.getMessagesAsString());
 			System.exit(-1);
 		}
 		
@@ -110,8 +110,8 @@ public class FrameworkGen {
 		impl.setFNestingPackage(structure);
 		
 				
-		if (abstract_unit.error.size() > 0) {
-			System.err.println(abstract_unit.getMessagesAsString());
+		if (abstract_unit.messages.unitHasError) {
+			System.err.println(abstract_unit.messages.getMessagesAsString());
 			System.exit(-1);
 		}
 		
