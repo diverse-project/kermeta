@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.15 2005-09-15 12:46:04 dvojtise Exp $
+/* $Id: structure.kmt,v 1.16 2005-09-15 12:51:19 dvojtise Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -24,7 +24,7 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	end
 	
 	method container() : kermeta::reflection::Object from kermeta::reflection::Object is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
+		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
 	end
 	
 	method equals(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
