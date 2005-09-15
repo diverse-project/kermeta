@@ -1,3 +1,15 @@
+/* $Id: structure.kmt,v 1.15 2005-09-15 12:46:04 dvojtise Exp $
+ * Project : framework
+ * File : structure.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jul 04, 2005
+ * Authors :
+ *  Franck Fleurey  ffleurey@irisa.fr 
+ *  Zoe Drey 		zdrey@irisa.fr
+ *  Jean-Philippe Thibault 		jpthibault@irisa.fr
+ */
 package kermeta::language::structure; 
 
 
@@ -24,7 +36,7 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	end
 	
 	method get(~property : kermeta::reflection::Property) : kermeta::reflection::Object from kermeta::reflection::Object is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
+		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.get(self, ~property)
 	end
 	
 	method ~set(~property : kermeta::reflection::Property, element : kermeta::reflection::Object) : Void from kermeta::reflection::Object is do
