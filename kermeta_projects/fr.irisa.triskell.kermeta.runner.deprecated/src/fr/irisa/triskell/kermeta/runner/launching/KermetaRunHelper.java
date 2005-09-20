@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.13 2005-06-24 17:17:50 zdrey Exp $
+/* $Id: KermetaRunHelper.java,v 1.14 2005-09-20 15:19:57 ffleurey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: GPL
@@ -68,8 +68,8 @@ public class KermetaRunHelper {
         		e.printStackTrace();
         		return null;
         	}
-        	else if (result.error.size() == 0)
-        		result.error.add(new KMUnitError("INTERNAL ERROR : " + e, null));
+        	else if (!result.messages.hasError())
+        		result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null));
         }
         return result;
     }

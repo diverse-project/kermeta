@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.10 2005-09-15 12:43:48 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.11 2005-09-20 15:20:01 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -18,6 +18,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
+import fr.irisa.triskell.kermeta.error.KermetaError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
@@ -71,10 +72,21 @@ public class RunJunitFactory implements Test {
             
             unit.load();
             unit.typeCheck(null);
+            
+            if (unit.messages.hasError()) {
+            	System.err.println("Unit " + unit.getUri() + " contains errors");
+            	System.err.println(unit.messages.getAllMessagesAsString());
+            	theTestCase = new FailedTestCase("Unit " + unit.getUri() + " contains errors", null);
+                return theTestCase;
+            }
+            
+            
             //System.err.println("Memory before : " + Runtime.getRuntime().totalMemory());
             //unit.discardAllTraceabilityInfo();
             //Runtime.getRuntime().gc();
             //System.err.println("Memory after : " + Runtime.getRuntime().totalMemory());
+            
+
             
             // get the main class to see if it inherits from class kermeta::kunit::Test
             boolean isTestSuite = false;

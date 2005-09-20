@@ -12,7 +12,7 @@ class Test_opcall {
     operation operation1() : kermeta::standard::Integer is do
 
         result := testInterPackage::Test_intercall.new.operation1()
-        stdio.writeln(result)
+        stdio.writeln(result.toString)
 
     end
     
