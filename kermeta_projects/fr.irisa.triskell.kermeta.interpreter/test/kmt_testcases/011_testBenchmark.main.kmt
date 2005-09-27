@@ -9,15 +9,22 @@ class Test_benchmark inherits kermeta::kunit::Test {
 
     operation operation1() : kermeta::standard::Integer is do
  		var v1 : kermeta::standard::Integer init 0
+ 		var nbIter : kermeta::standard::Integer init 1000
+		var str : kermeta::standard::String
+		var truc : Truc
 		
+		str := stdio.read("Press enter")
+		truc := Truc.new
+		truc.machin := 0
 		from var i : kermeta::standard::Integer init 0
-		until i == 100
+		until i == nbIter
 		loop
 			v1 := operation_asg(v1)
 			i := i + 1
+			truc.machin := truc.machin + 1
 		end
-		assert(v1==100)
-        stdio.writeln(v1)
+		assert(v1==nbIter)
+        stdio.writeln(v1.toString())
 		result := v1
     end
 
@@ -28,3 +35,7 @@ class Test_benchmark inherits kermeta::kunit::Test {
 
 }
 
+class Truc
+{
+	attribute machin : kermeta::standard::Integer
+}

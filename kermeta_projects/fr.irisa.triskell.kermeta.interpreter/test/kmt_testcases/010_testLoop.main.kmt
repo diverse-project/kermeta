@@ -20,7 +20,7 @@ class TestLoop inherits kermeta::kunit::Test {
 			i := i + 1
 		end
 		assert(v1==38)
-        stdio.writeln(v1)
+        stdio.writeln(v1.toString)
 		result := v1
     end
 }

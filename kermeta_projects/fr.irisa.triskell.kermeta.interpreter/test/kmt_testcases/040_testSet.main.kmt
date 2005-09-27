@@ -8,7 +8,7 @@ require kermeta
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: 040_testSet.main.kmt,v 1.6 2005-05-25 17:43:21 ffleurey Exp $
+ * $Id: 040_testSet.main.kmt,v 1.7 2005-09-27 15:47:49 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testIterator.kmt
@@ -58,7 +58,7 @@ class TestSet inherits kermeta::kunit::Test
 	end
 	
 	operation testMetaClass() is do
-		stdio.writeln(3.getMetaClass)
+		stdio.writeln(3.getMetaClass.toString)
 		assert(3.getMetaClass == Integer )
 	end
 	

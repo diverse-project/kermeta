@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 037_testLambda.main.kmt,v 1.14 2005-06-03 15:36:36 ffleurey Exp $
+ * $Id: 037_testLambda.main.kmt,v 1.15 2005-09-27 15:47:49 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testLambda.kmt
@@ -85,7 +85,7 @@ class TestLambda inherits kermeta::kunit::TestSuite
 	operation testLambdaWithThreeParams() : Void is do
 		var lft1 : <[Integer, Integer, String]->Integer>
 		lft1 := function { i : Integer, j : Integer, k : String | k.indexOf("f") }
-		stdio.writeln("stringOfMoreThanSevenChars".indexOf("f"))
+		stdio.writeln("stringOfMoreThanSevenChars".indexOf("f").toString)
 		assert(lft1(3, 4, "stringOfMoreThanSevenChars")==7)
 	end
 

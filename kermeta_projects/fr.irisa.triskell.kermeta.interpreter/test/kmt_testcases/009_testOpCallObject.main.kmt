@@ -34,7 +34,7 @@ class MyObjectCreation inherits kermeta::kunit::Test {
 		object.set_attr1(int)
 		object.set_attr2(bool)
 		result := object
-        stdio.writeln(result)
+        stdio.writeln(result.toString)
         assert(result.attr1==4)
         assert(result.attr2==true)
 	end

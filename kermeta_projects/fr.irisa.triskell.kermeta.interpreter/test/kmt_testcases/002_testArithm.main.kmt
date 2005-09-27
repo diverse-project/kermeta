@@ -17,11 +17,9 @@ class Test_arithm inherits kermeta::kunit::Test {
         var r1_8 :  kermeta::standard::Integer
         var r2_8 :  kermeta::standard::Integer
         var r3_8 :  kermeta::standard::Integer
-        var rptm : kermeta::standard::Integer
         var r1_m8 : kermeta::standard::Integer
         var r2_m8  : kermeta::standard::Integer
         var r3_m8  : kermeta::standard::Integer
-        var rptm : kermeta::standard::Integer
         
         // melting
         rptm := operation_ptm(2)
@@ -44,7 +42,7 @@ class Test_arithm inherits kermeta::kunit::Test {
     end
     
     operation testOp10() : Void is do
-    	stdio.write(operation1(0))
+    	stdio.write(operation1(0).toString)
     	5+3
 		5.equals(5)
     	//assert(operation1(0)==5)

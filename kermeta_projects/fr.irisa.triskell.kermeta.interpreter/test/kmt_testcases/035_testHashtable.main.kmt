@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 035_testHashtable.main.kmt,v 1.6 2005-09-20 15:20:01 ffleurey Exp $
+ * $Id: 035_testHashtable.main.kmt,v 1.7 2005-09-27 15:47:49 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testHashtable.kmt
@@ -45,9 +45,9 @@ class TestHashtable inherits kermeta::kunit::Test
 		var it : kermeta::standard::Iterator<Integer>
 		setUp()
 		it := hashtable.keyIterator()
-		stdio.writeln(it.next)
-		stdio.writeln(it.next)
-		stdio.writeln(it.next)
+		stdio.writeln(it.next.toString)
+		stdio.writeln(it.next.toString)
+		stdio.writeln(it.next.toString)
 	end
 
 	

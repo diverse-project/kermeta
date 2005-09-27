@@ -26,7 +26,7 @@ using kermeta::standard
  		else do
  			opA1(b2)
  			rescue (i : Integer)
- 			 stdio.write(i)
+ 			 stdio.write(i.toString)
  			 stdio.writeln(" propagated")
  			 raise i
  			 end
@@ -46,7 +46,7 @@ class B
  		else do
  			a.opA1(b2)
  			rescue (i : Integer)
- 			 stdio.write(i)
+ 			 stdio.write(i.toString)
  			 stdio.writeln(" propagated")
  			 raise i
  			 end
