@@ -9,22 +9,22 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State">
     <eOperations name="step">
-      <eParameters name="c" eType="//String"/>
+      <eParameters name="c"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningFSM" lowerBound="1" eType="//FSM" eOpposite="//FSM/ownedState"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransition" upperBound="-1" eType="//Transition" containment="true" eOpposite="//Transition/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransition" eType="//Transition" eOpposite="//Transition/target"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
-    <eOperations name="fire" eType="//String"/>
+    <eOperations name="fire"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//State" eOpposite="//State/outgoingTransition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//State" eOpposite="//State/incomingTransition"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="//String"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FSMException"/>
   <eClassifiers xsi:type="ecore:EClass" name="NonDeterminism" eSuperTypes="//FSMException"/>
   <eClassifiers xsi:type="ecore:EClass" name="NoTransition" eSuperTypes="//FSMException"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NoInitialStateException" eSuperTypes="//FSMException"/>
 </ecore:EPackage>

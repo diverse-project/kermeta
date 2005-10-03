@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fsm:FSM xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fsm="http://modelware.inria.fr/fsm" xsi:schemaLocation="http://modelware.inria.fr/fsm fsm.ecore">
+  <ownedState name="1" incomingTransition="//@ownedState.1/@outgoingTransition.0">
+    <outgoingTransition target="//@ownedState.1" input="a" output="A"/>
+  </ownedState>
+  <ownedState name="2" incomingTransition="//@ownedState.0/@outgoingTransition.0">
+    <outgoingTransition target="//@ownedState.0" input="b" output="B"/>
+  </ownedState>
+</fsm:FSM>

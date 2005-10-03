@@ -1,11 +1,18 @@
-@mainClass "fsm::Main" 
+@mainClass "fsm2::Main" 
 @mainOperation "main"
-package fsm;
+
+
+package fsm2;
 
 require kermeta 
-using kermeta::standard
+require "fsmmodel.kmt"
 
-class Main {
+using fsm_package
+using kermeta::standard
+using kermeta::persistence
+
+class Main 
+{
 
 	/**
 	 * The entry point
@@ -15,19 +22,37 @@ class Main {
 		printFSM(theFSM)
 		theFSM.run()
 		printFSM(theFSM)
-		
+	end
+	
+	operation mainload() is do
+		var theFSM : FSM init loadfsm()
+		printFSM(theFSM)
+		theFSM.run()
+		printFSM(theFSM)
+			
+	end
+	
+	operation loadfsm() : FSM is do
+		var res : EMFRepository init EMFRepository.new
+        var resource : EMFResource init res.createResource("../ecore/fsm1.xmi", "../ecore/fsm.ecore")
+        stdio.writeln("before loading")
+        resource.load()
+       	stdio.writeln("after loading")
+        var fsm1 : FSM
+        fsm1 ?= resource.instances.one  
+        result  := fsm1
 	end
 
 	operation simpleMain() is do
 		var theFSM : FSM init createFSM()
 		printFSM(theFSM)
-		
 	end
 	/**
 	 * Print the FSM on the standard output
 	 */
 	operation printFSM(fsm : FSM) is do
-		fsm.ownedState.each { s | 
+		fsm.ownedState.each 
+		{ s | 
 			stdio.writeln("State : " + s.name)
 			s.outgoingTransition.each { t | 
 				stdio.writeln("  Transition : " + t.source.name + "-(" + t.input + "/" + t.output + ")->" + t.target.name)
@@ -41,7 +66,7 @@ class Main {
 	operation createFSM() : FSM is do
 		// The FSM
 		result := FSM.new
-		result.serializer := self	
+		//result.serializer := self	
 		
 		// Create the states of the FSM
 		var s1 : State init State.new 	s1.name := "s1"		result.ownedState.add(s1)
@@ -73,80 +98,4 @@ class Main {
 	end
 }
 
-/*********************************
- * SIMPLE STATE MACHINE METAMODEL
- *********************************/
-class FSM
-{
-	attribute ownedState : set State[0..*]#owningFSM
-	reference initialState : State[1..1] 
-	
-	reference currentState : State 
-	
-	reference serializer : Main 
-	
-	
-	operation run() : Void raises FSMException is do  
-		// reset if there is no current state
-		if currentState == void then reset end
-		self
-		from var str : String init "init"
-		until str == "quit"
-		loop
-			stdio.writeln("etat courrant : " + currentState.name)
-			str := stdio.read("entrez une chaine : ")
-			if str == "quit" then
-				stdio.writeln("")
-				stdio.writeln("quitting ...")
-			else 
-				if str == "print" then
-					stdio.writeln("")
-					serializer.printFSM(self)
-				else	
-					stdio.writeln(str)			
-					stdio.writeln("stepping...")
-					stdio.writeln("chaine produite : " + currentState.step(str))
-				end
-			end
-		end
-	end
-	
-	operation reset() : Void is do
-		currentState := initialState
-	end
-}
 
-class State {
-	attribute name : String
-	reference owningFSM : FSM#ownedState
-	attribute outgoingTransition : set Transition[0..*]#source
-	reference incomingTransition : set Transition[0..*]#target
-	
-	operation step(c : String) : String raises FSMException is do
-		// Get the valid transitions
-		var validTransitions : Collection<Transition> 
-		validTransitions :=	outgoingTransition.select { t | t.input.equals(c) }
-		// Check if there is one and only one valid transition
-		if validTransitions.empty then raise NoTransition.new end
-		if validTransitions.size > 1 then raise NonDeterminism.new end
-		// fire the transition
-		result := validTransitions.one.fire
-	end
-}
-
-class Transition {
-	reference source : State[1..1]#outgoingTransition
-	reference target : State[1..1]#incomingTransition
-	attribute output : String
-	attribute input : String
-	
-	operation fire() : String is do
-		// update FSM current state
-		source.owningFSM.currentState := target
-		result := output
-	end
-}
-
-abstract class FSMException {}
-class NonDeterminism inherits FSMException {}
-class NoTransition inherits FSMException {}

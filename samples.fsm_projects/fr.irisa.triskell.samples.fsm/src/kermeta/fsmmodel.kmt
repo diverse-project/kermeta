@@ -1,0 +1,86 @@
+@mainClass "fsm_package::FSM" 
+@mainOperation "run"
+
+
+package fsm_package;
+
+require kermeta
+
+using kermeta::standard
+
+class FSM
+{
+	attribute ownedState : set State[0..*]#owningFSM
+	reference initialState : State[1..1] 
+	
+	reference currentState : State 
+	
+	operation run() : Void raises FSMException is do  
+		// reset if there is no current state
+		if currentState == void then reset end
+		self
+		from var str : String init "init"
+		until str == "quit"
+		loop
+			stdio.writeln("etat courrant : " + currentState.name)
+			str := stdio.read("entrez une chaine : ")
+			if str == "quit" then
+				stdio.writeln("")
+				stdio.writeln("quitting ...")
+			else 
+				if str == "print" then
+					stdio.writeln("")
+					//serializer.printFSM(self)
+				else	
+					stdio.writeln(str)			
+					stdio.writeln("stepping...")
+					stdio.writeln("chaine produite : " + currentState.step(str))
+				end
+			end
+		end
+	end
+	
+	operation reset() : Void raises NoInitialStateException is do
+		if (initialState == void) then
+			raise NoInitialStateException.new
+		end
+		currentState := initialState
+	end
+}
+
+class State {
+	attribute name : String
+	reference owningFSM : FSM#ownedState
+	attribute outgoingTransition : set Transition[0..*]#source
+	reference incomingTransition : set Transition[0..*]#target
+	
+	operation step(c : String) : String raises FSMException is do
+		// Get the valid transitions
+		var validTransitions : Collection<Transition> 
+		validTransitions :=	outgoingTransition.select { t | t.input.equals(c) }
+		// Check if there is one and only one valid transition
+		if validTransitions.empty then raise NoTransition.new end
+		if validTransitions.size > 1 then raise NonDeterminism.new end
+		// fire the transition
+		result := validTransitions.one.fire
+	end
+}
+
+class Transition 
+{
+	reference source : State[1..1]#outgoingTransition
+	reference target : State[1..1]#incomingTransition
+	attribute output : String
+	attribute input : String
+	
+	operation fire() : String is do
+		// update FSM current state
+		source.owningFSM.currentState := target
+		result := output
+	end
+}
+
+abstract class FSMException {}
+class NonDeterminism inherits FSMException {}
+class NoTransition inherits FSMException {}
+class NoInitialStateException inherits FSMException{}
