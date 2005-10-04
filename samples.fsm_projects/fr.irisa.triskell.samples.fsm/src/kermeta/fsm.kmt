@@ -1,3 +1,16 @@
+/* $Id: fsm.kmt,v 1.3 2005-10-04 13:15:09 waqas Exp $
+ * Project    : fr.irisa.triskell.samples.fsm
+ * File       : fsm.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 juil. 2005
+ * Modified By : 
+ *        Waqas Ahmed Saeed <wahmedsa@irisa.fr>
+ * Description : 
+ *       Launching Kermeta File for Finite State Machine Sample
+ *		 Use mainload method as entering point for loading XMI based file  
+ */
 @mainClass "fsm2::Main" 
 @mainOperation "main"
 
@@ -7,7 +20,7 @@ package fsm2;
 require kermeta 
 require "fsmmodel.kmt"
 
-using fsm_package
+using fsm
 using kermeta::standard
 using kermeta::persistence
 

@@ -1,8 +1,17 @@
-@mainClass "fsm_package::FSM" 
-@mainOperation "run"
+/* $Id$
+ * Project    : fr.irisa.triskell.samples.fsm
+ * File       : fsmmodel.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 03 October. 2005
+ * Modified By : 
+ *        Waqas Ahmed Saeed <wahmedsa@irisa.fr>
+ * Description : 
+ *       Finite State Machine Sample with Behaviour implemented in Kermeta
+ */
 
-
-package fsm_package;
+package fsm;
 
 require kermeta
 
