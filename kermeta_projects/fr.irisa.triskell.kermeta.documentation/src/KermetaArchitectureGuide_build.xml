@@ -1,4 +1,4 @@
-<!-- $Id: KermetaArchitectureGuide_build.xml,v 1.2 2005-06-09 15:05:45 dvojtise Exp $ -->
+<!-- $Id: KermetaArchitectureGuide_build.xml,v 1.3 2005-10-10 13:26:32 dvojtise Exp $ -->
 <project name="KermetaArchitectureGuide" default="all">
 	<!-- configuration properties -->		
 	<!-- project configuration -->
@@ -8,8 +8,9 @@
 	<property name="build.docbook.dir" location="${build.dir}/docbook42"/>
 	<property name="OOo.source.dir" location="${project.base.dir}/src/OOo"/>
 	<property name="OOo.source.file" location="${OOo.source.dir}/${project.name}.sxw"/>
-	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>
-	
+	<!--<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>-->
+	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\kermeta.org\\docs"/>
+			
 	<target name="all" depends="OOo2dbk, html.single, html.chunked ,pdf.fop">
 	</target>
 	
