@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.21 2005-10-14 14:57:08 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.22 2005-10-14 15:19:53 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -308,7 +308,7 @@ public class EMF2Runtime {
 	    else
 	    // We should never enter here
 	    {
-	    	KermetaUnit.internalLog.error("Error finding a class :" + name + " in loaded libraries.");
+	    	KermetaUnit.internalLog.error("Error finding a class :" + name + " in loaded libraries. Please check your require statements");
 	    	unit.getInstances().getFactory().getMemory().getUnit().messages.addError("EMF Loading error : " +
 	    	        "could not find a class ("+name+") for EMF model", null );
 	        ftype = null;
@@ -453,9 +453,16 @@ public class EMF2Runtime {
 	    {   // Create the RuntimeObject encaspulating the FClass corresponding to the EClass given by its name :
 	        // Reconstruct from FClass -> FClassDefinition (meta meta levels) -> Our EClass
 	        FType ftype = this.getMetaClassByName(metaclass_name, unit);
-	        FClass fclass = (FClass)ftype;
-	        result = memory.getROFactory().createMetaClass(fclass);
-	        this.typedef_cache.put(metaclass_name, result);
+	        if (ftype == null)
+	        {
+	        	// raise an error
+	        	internalLog.debug("getRuntimeObjectForMetaClass error: skipping element because of : Cannot find a metaclass " + metaclass_name +" in the loaded units. Please check your require statements");
+	        }
+	        else {
+	        	FClass fclass = (FClass)ftype;
+	        	result = memory.getROFactory().createMetaClass(fclass);
+	        	this.typedef_cache.put(metaclass_name, result);
+	        }
 	    }
 	    return result;
 	}
