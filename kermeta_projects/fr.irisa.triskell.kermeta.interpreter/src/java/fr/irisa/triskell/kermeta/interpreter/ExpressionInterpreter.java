@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.24 2005-09-06 10:48:05 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.25 2005-10-14 14:57:09 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : BaseInterpreter.java
  * License : GPL
@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
@@ -746,6 +747,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    SimpleType target_type = new SimpleType(t_target);
 	    
 	    if (node.getFStaticOperation() == null && node.getFStaticProperty() == null) {
+	    	node.getFStaticOperation();
+	    	node.getFStaticProperty();
 	        internalLog.error("INTERPRETER INTERNAL ERROR : the program does not seem to be correctly type checked : " + node.getFName());
 	        throw new Error("INTERPRETER INTERNAL ERROR : the program does not seem to be correctly type checked : " + node.getFName());
 	    }
@@ -792,13 +795,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        
 //			 Check that target is not void
 		    if (property == null && ro_target == memory.voidINSTANCE) {
-		        internalLog.info(" >> INTERPRETER REPORTS Call of '"+ node.getFName() +"' property on a void target. TODO: raise an exception ");
-		        raiseKermetaException(ro_target, node);
+		        internalLog.debug(" >> INTERPRETER REPORTS Call of '"+ node.getFName() +"' property on a void target. Exception raised.");
+		        raiseCallOnVoidTargetException(node);
 		    }
 		    
 //		  This should never happend is the type checker has checked the program
 			if (property == null) {
 			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getFName() + "in type : " + target_type);
+			    internalLog.error("May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developpers");		        
 		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getFName());
 			}
 			
@@ -808,6 +812,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		    // This is just a debbuging check. It should never occur
 		    if (ro_property == null) {
 			    internalLog.error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
+			    internalLog.error("May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developpers");
 		        throw new Error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
 			}
 		    
@@ -850,7 +855,20 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			while (it.hasNext()) paramsArray[i++] = (RuntimeObject)it.next();
 			
 			// Execute the command
-			return cmd.execute(paramsArray);
+			try{
+				return cmd.execute(paramsArray);
+	        }
+	        catch(KermetaRaisedException e)
+			{
+	        	// the Kermeta raised exception created on the java side hasn't the cause object: ( context)
+	        	// because it was not passed in the parameters ...
+	        	if (!e.issetContextString())
+	        	{
+	        		RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
+	        		e.setContextString(this, rnode);
+	        	}
+	            throw e;	
+			}
 		}
 		
 		/* IF THE EXTERN HAS NOT BEEN COMPILED THEN IT IS AN INVOKE */
@@ -1134,6 +1152,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         // FIXME: Set a default message
         RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
         throw new KermetaRaisedException(obj, rnode, this);	
+    }
+    
+    public void raiseCallOnVoidTargetException(FObject node) {
+    	RuntimeObjectFactory rofactory = memory.getROFactory();
+    	RuntimeObject raised_object = rofactory.createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
+    	
+        RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
+        throw new KermetaRaisedException(raised_object, rnode, this);	
     }
 
     protected void displayHashtable(Hashtable hash)

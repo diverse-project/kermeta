@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.20 2005-09-15 12:43:48 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.21 2005-10-14 14:57:08 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : GPL
@@ -14,6 +14,7 @@
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -22,6 +23,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -36,6 +38,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -51,7 +54,9 @@ import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
@@ -92,6 +97,7 @@ public class EMF2Runtime {
     protected Hashtable runtime_objects_map; // { eobject : robject }
     
 	public static void loadunit(EMFRuntimeUnit unit) {
+		Resource resource=null;
 	    KermetaUnit kunit =  unit.getInstances().getFactory().getMemory().getUnit();
 		try {
 	//		 load ressource
@@ -107,15 +113,50 @@ public class EMF2Runtime {
 	    		URIConverter c = new URIConverterImpl();
 	    		u = u.resolve(c.normalize(URI.createURI(unit_uripath)));    			
 	    	}
-			Resource resource = resource_set.getResource(u, true);
+	    	resource = resource_set.getResource(u, true);
 	        loadunit(unit, resource);
-		} catch (Throwable e) {
-			
-		    // Create a resourceLoadException
-		    KermetaRaisedException ex = new KermetaRaisedException(unit.getInstances(), unit.getInstances().getFactory().getMemory().getCurrentInterpreter());
-		    KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
-		    kunit.messages.addError("EMF persistence error : could not load the given model :\n"+ e, (FObject)unit.getInstances().getData().get("kcoreObject"));
-		    throw ex;
+	        if(resource != null){
+				Iterator it = resource.getErrors().iterator();
+				while(it.hasNext()) {
+					// print EMF diagnostic even if it loaded, there may be some warning ?
+					Resource.Diagnostic errorDiag =  (Resource.Diagnostic) it.next();
+					KermetaUnit.internalLog.error("EMF diagnostic: "+errorDiag.getMessage());
+				}
+			}
+		}
+		catch (WrappedException e){
+
+			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e.exception().getMessage(), e);
+			kunit.messages.addError("EMF persistence error : could not load the given model :\n"+ e.exception().getMessage(), (FObject)unit.getInstances().getData().get("kcoreObject"));
+			// FIXME  is this the right place to raise a kermeta exception ? (we cannot know which instruction it is ) better in the interpreter ?
+			//KermetaRaisedException ex = new KermetaRaisedException(unit.getInstances(), unit.getInstances().getFactory().getMemory().getCurrentInterpreter());
+			// TODO put some message that might help the user    
+			if(resource != null){ // do that even if there where an exception
+				Iterator it = resource.getErrors().iterator();
+				while(it.hasNext()) {
+					Resource.Diagnostic errorDiag =  (Resource.Diagnostic) it.next();
+					KermetaUnit.internalLog.error("EMF diagnostic: "+errorDiag.getMessage());
+				}
+			}
+			RuntimeMemory memory =unit.getInstances().getFactory().getMemory();
+        	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
+        	RuntimeObjectFactory rofactory = memory.getROFactory();
+        	
+        	RuntimeObject raised_object = rofactory.createObjectFromClassName("kermeta::persistence::ResourceLoadException");
+        	
+        	// adds some info on this exception (in the message attribute of the exception)
+        	
+        	FClass t_target=(FClass)raised_object.getMetaclass().getData().get("kcoreObject");        	
+        	SimpleType target = new SimpleType(t_target);
+    	    CallableProperty cproperty = target.getPropertyByName("message");
+    	    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
+    	    RuntimeObject rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(e.exception().getMessage(), rofactory);
+             
+        	fr.irisa.triskell.kermeta.runtime.language.Object.set(raised_object, ro_property, rovalue);
+
+        	throw new KermetaRaisedException( raised_object, 
+        				interpreter,
+						e);
 		}
 	}
 	

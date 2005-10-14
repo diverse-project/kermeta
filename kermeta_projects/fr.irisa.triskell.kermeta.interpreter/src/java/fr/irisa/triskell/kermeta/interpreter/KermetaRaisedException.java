@@ -1,8 +1,8 @@
-/* $Id: KermetaRaisedException.java,v 1.5 2005-08-24 17:27:52 zdrey Exp $
+/* $Id: KermetaRaisedException.java,v 1.6 2005-10-14 14:57:09 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
-* License : GPL
-* Copyright : IRISA / Universite de Rennes 1
+* License : EPL
+* Copyright : IRISA / INRIA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 14 mai 2005
 * Author : Franck Fleurey
@@ -16,6 +16,8 @@ import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
  * @author Franck Fleurey
@@ -28,14 +30,32 @@ public class KermetaRaisedException extends Error {
     // The trace handler
     protected Traceback traceback;
     
+    protected String contextString="";
+    
+    protected ExpressionInterpreter interpreter;
+    
     /**
      * Constructor 
-     * @deprecated developer should use the other constructor
+     * Developper should then use the setContext method on this object in order to fill the readable stack trace
+     * If possible, developer should use the other constructor, othewise he should try to build the context later
      */
-    public KermetaRaisedException(RuntimeObject raised_object, ExpressionInterpreter interpreter)
+    public KermetaRaisedException(RuntimeObject raised_object, ExpressionInterpreter theInterpreter)
     {
-        super("kermeta exception : " + raised_object + " not rescued.\n "
-                	+ setContext(interpreter, null));
+        super("kermeta exception : " + raised_object );
+        interpreter = theInterpreter;
+        
+        this.raised_object = raised_object;
+    }
+  
+    /**
+     * Constructor 
+     * keeps an existing java exception as a cause
+     * Developper should then use the setContext method on this object in order to fill the readable stack trace
+     */
+    public KermetaRaisedException(RuntimeObject raised_object, ExpressionInterpreter theInterpreter, Throwable t)
+    {
+        super("kermeta exception : " + raised_object, t );
+        interpreter = theInterpreter;
         
         this.raised_object = raised_object;
     }
@@ -45,14 +65,61 @@ public class KermetaRaisedException extends Error {
      * @param raised_object
      * @param cause_object the FExpression where the error occured
      */
-    public KermetaRaisedException(RuntimeObject raised_object, RuntimeObject cause_object, ExpressionInterpreter interpreter) {
-        super("Unrescued kermeta exception : " + raised_object
-                + "\n"
-                + setContext(interpreter, cause_object));
-        setCauseExpression(interpreter, raised_object, cause_object);
+    public KermetaRaisedException(RuntimeObject raised_object, RuntimeObject cause_object, ExpressionInterpreter theInterpreter) {
+        super("kermeta exception : " + raised_object);
+        contextString = computeContextString(theInterpreter, cause_object);
+        setCauseExpression(theInterpreter, raised_object, cause_object);
         this.raised_object = raised_object;
-        
-        
+
+        interpreter = theInterpreter;        
+    }
+    
+    /**
+     * changes the way the exception is printed:
+     *  adds the message from the kermeta object
+     *  adds the stack trace (context)
+     */
+    public String toString(){
+    	String result = super.toString();
+    	// display the atributes of the raise object
+    	FClass t_target=(FClass)raised_object.getMetaclass().getData().get("kcoreObject");        	    	
+    	
+    	SimpleType target = new SimpleType(t_target);
+	    CallableProperty cproperty = target.getPropertyByName("message");
+	    
+	    RuntimeObject ro_property = interpreter.memory.getRuntimeObjectForFObject(cproperty.getProperty());
+	    if (ro_property != null) // it may be null if we throw object that doesn't inherit from kermeta::exceptions::Exception
+	    {
+	    	RuntimeObject rovalue =fr.irisa.triskell.kermeta.runtime.language.Object.get(raised_object, ro_property);    			    
+	    	String message = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(rovalue);
+	    	if(message.compareTo("") != 0)
+	    		result += "\n" + message;
+	    }
+    	if(issetContextString())
+    		result += "\n" + contextString;
+        else {
+        	result += "\n Kermeta stack context not available";
+        }
+    	return result;
+    }
+    
+    /**
+     * checks if the context string has been set
+     * @return
+     */
+    public boolean issetContextString()
+    {
+    	return contextString.compareTo("") != 0;
+    }
+    
+    /**
+     * sets the context string (the kermeta stack trace)
+     * @param interpreter
+     * @param cause_object
+     */
+    public void setContextString(ExpressionInterpreter interpreter, RuntimeObject cause_object)
+    {
+    	contextString=computeContextString(interpreter, cause_object);
     }
     
     /**
@@ -85,19 +152,25 @@ public class KermetaRaisedException extends Error {
      * Return a human-readable representation of the stack trace of the program until the
      * exception occurrence.
      */
-    protected static String setContext(ExpressionInterpreter interpreter, RuntimeObject cause_object)
+    protected static String computeContextString(ExpressionInterpreter interpreter, RuntimeObject cause_object)
     {
         String context = "";
         FObject fobject = null;
-        if (cause_object.getData().containsKey("kcoreObject"))
-        {
-            fobject = (FObject)cause_object.getData().get("kcoreObject");
+        if(cause_object != null) {
+	        if (cause_object.getData().containsKey("kcoreObject"))
+	        {
+	        	fobject = (FObject)cause_object.getData().get("kcoreObject");
+	        }
+	        else
+	        {
+	            System.err.println("RuntimeObject with no kcore object : " + cause_object);
+	            context += "RuntimeObject with no kcore object : " + cause_object;
+	        }
+	        context = new Traceback(interpreter, fobject).getStackTrace();
         }
-        else
-        {
-            System.err.println("RuntimeObject with no kcore object : " + cause_object);
+        else {
+        	context += "Context not available : cause_object is null";
         }
-        context = new Traceback(interpreter, fobject).getStackTrace();
         // kcoreObject can be null!
         return context;
     }
