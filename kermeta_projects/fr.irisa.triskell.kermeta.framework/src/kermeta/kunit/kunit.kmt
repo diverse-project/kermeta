@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * $Id: kunit.kmt,v 1.10 2005-09-05 15:40:43 zdrey Exp $
+ * $Id: kunit.kmt,v 1.11 2005-10-17 13:16:53 zdrey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -8,6 +8,9 @@
  * Implementation of a unit test tool. This is a clone of
  * JUnit architecture.
  * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm
+ *
+ * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.
+
  **************************************************************************** */
 package kermeta::kunit;
 
@@ -100,7 +103,7 @@ class TestCase inherits Test
 	/**
 	 * Initialize the test case
 	 * params : 
-	 *   - name : the name of the test case : must? be the name of the operation
+	 *   - name : the name of the test case : must be the name of the testOperation
 	 */
 	operation initialize(name : String) : Void is do
 		self.name := name
@@ -116,12 +119,15 @@ class TestCase inherits Test
 		runTest()
 		rescue (e : AssertionFailedError)
 			r.addFailure(self, e)
+		rescue (e : kermeta::exceptions::RuntimeError)
+			r.addError(self, e)
 		tearDown()
 	end
 	
 	
 	/**
-	 * Adapter that uses the pluggable selector to know which test to run
+	 * This method is an adapter that uses the pluggable selector TestCase.name to know which 
+	 * test to run
 	*/
 	method runTest() : Void is do
 		if self.getMetaClass.classDefinition.ownedOperation.detect { o | o.name == name } == void then
@@ -143,6 +149,8 @@ class TestCase inherits Test
 }
 
 /**
+ * Get the number of run tests, errors and failures that resulted from the launch of a 
+ * Test. (This is a minimal but functional class that can be improved)
  * pattern : Collecting parameter
  */
 class TestResult
@@ -181,7 +189,8 @@ class TestResult
 }
 
 /**
- * 
+ * An instance of this class is created when an assertion failed or an exception
+ * was raised.
 */
 class TestFailure
 {
@@ -190,7 +199,8 @@ class TestFailure
 }
 
 /** 
- * A test suite is composed of a set of tests
+ * A test suite is composed of a set of tests (which can inherit either of TestSuite
+ * or TestCase)
  * pattern : Composite
  */
 class TestSuite inherits Test
@@ -252,7 +262,25 @@ class TestLoader
 	end
 }
 
-/** User instanciates this class to run a test suite/case */
+/** 
+ * User instanciates this class to run a test suite/case 
+ * Usage : 
+ * Create a file, and add in the headers :
+ *    require "the_file_that_contains_the_tests.kmt"
+ * Create a class, which will be the one that you will launch :
+ * 
+ * class MyTesterClass
+ * {
+ *   operation main() is do
+ *     var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+ *     // Here, we run our test case class called "TestClass", 
+ *     // contained in the_file_that_contains_the_tests.kmt.
+ *     // TestClass must inherit TestCase
+ *	   testRunner.run(TestClass)
+ *	   testRunner.printTestResult
+ *	end
+ * }
+ */
 class TestRunner
 {
 	reference testClass : Class
@@ -271,13 +299,46 @@ class TestRunner
 		result.initialize
 	end
 
+	/** Run a test suite from the given test case (test_class should be a class
+	 * that inherits TestCase
+	 */
 	operation run(test_class : Class) is do
 		var test_loader : TestLoader init createTestLoader
 		testResult := createTestResult
 		// Set<any kindOf TestCase> should be better
-		var test_ops : Set<Test> init test_loader.loadTestMethodsFromTestCase(test_class)
-		var test_suite : TestSuite init TestSuite.new
-		test_suite.tests.addAll(test_ops)
-		test_suite.run(testResult)
+		if not test_class.superClass.contains(TestCase) then
+			var msg : String init "ERROR : the given class '"+test_class.classDefinition.name + "' should inherit TestCase" 
+			stdio.writeln(msg)
+		else
+			var test_ops : Set<Test> init test_loader.loadTestMethodsFromTestCase(test_class)
+			var test_suite : TestSuite init TestSuite.new
+			test_suite.tests.addAll(test_ops)
+			test_suite.run(testResult)
+		end
+	end
+	
+	/**
+	 * Prints in a text format the result of the tests launches 
+	 * TODO : a specific set of class that inherit TestResult and display
+	 * it according to a specific format
+	 */
+	operation printTestResult() is do
+		stdio.writeln(
+		"\n================================== TEST RESULTS ==================================\n")
+
+		stdio.writeln(" Number of launched tests : " + testResult.runtests.toString)
+		stdio.writeln(" Number of failures : " + testResult.failures.size.toString)
+		stdio.writeln(" Number of errors : " +  testResult.errors.size.toString)
+		stdio.writeln("\n Failed : ")
+		testResult.failures.each { f | 
+			var tc : kermeta::kunit::TestCase
+			tc ?= f.failedTest
+			stdio.writeln("    ->" + tc.name + "( raised : "+ f.raised.toString + ")")}
+		stdio.writeln(" Errors : ")	
+		testResult.errors.each { e | 
+			var tc : kermeta::kunit::TestCase
+			tc ?= e.failedTest
+			stdio.writeln("    -> " + tc.name + "( raised : "+e.raised.toString + ")")}
+		stdio.writeln("\n==================================================================================\n")
 	end
 }
