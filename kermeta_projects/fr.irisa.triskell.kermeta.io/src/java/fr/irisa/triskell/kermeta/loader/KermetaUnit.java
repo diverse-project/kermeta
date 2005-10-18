@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.39 2005-09-15 12:39:11 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.40 2005-10-18 13:40:08 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -744,9 +744,9 @@ public abstract class KermetaUnit {
 	        FPackage p = (FPackage)it.next();    
 	        if (p.eResource() == null && p.eContainer() == null) {
 	            fixTypeContainement(p);
-	            resource.getContents().add(p);
+	            resource.getContents().add(p);	           
+		        resource_tags = fixPackageTags(p, resource_tags);
 	        }
-	        resource_tags = fixPackageTags(p, resource_tags);
 	    }
 	    // Add the tags registered in tags list to the resource
 	    this.addFTagsToResource(resource, resource_tags);
