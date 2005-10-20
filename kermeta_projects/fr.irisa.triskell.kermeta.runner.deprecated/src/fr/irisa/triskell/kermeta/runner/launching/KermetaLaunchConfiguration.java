@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.14 2005-09-09 18:04:21 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.15 2005-10-20 09:38:01 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -213,6 +213,7 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
         catch (KermetaRaisedException kerror)
         {
             console.print(kerror.getMessage());
+            console.print(kerror.toString());
         }
         catch (KermetaInterpreterError ierror)
         {
