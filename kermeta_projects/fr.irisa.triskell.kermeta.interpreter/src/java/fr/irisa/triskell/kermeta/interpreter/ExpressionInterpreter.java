@@ -1,7 +1,7 @@
-/* $Id: ExpressionInterpreter.java,v 1.25 2005-10-14 14:57:09 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.26 2005-10-21 15:00:58 dvojtise Exp $
  * Project : Kermeta (First iteration)
- * File : BaseInterpreter.java
- * License : GPL
+ * File : ExpressionInterpreter.java
+ * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 14, 2005
@@ -21,7 +21,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
@@ -48,7 +47,6 @@ import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.behavior.FVoidLiteral;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.runtime.FrameworkExternCommand;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
@@ -74,7 +72,6 @@ import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * This is the Java version of kermeta interpreter. It extends the KermetaVisitor, and each
