@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.8 2005-08-31 15:23:35 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.9 2005-10-21 15:03:14 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : GPL
@@ -12,6 +12,7 @@
  */
 package fr.irisa.triskell.kermeta.launcher;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
@@ -23,6 +24,7 @@ import org.apache.log4j.Logger;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_C;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_H;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_K;
+import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_M;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_O;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_P;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_T;
@@ -34,6 +36,8 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.utils.argumentsreader.CheckOption;
 import fr.irisa.triskell.utils.argumentsreader.NoOption;
 import fr.irisa.triskell.utils.argumentsreader.Option;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 
 /**
  * Start a Kermeta program from the command line
@@ -75,7 +79,8 @@ public class RunCommandLine {
 				new Option_P (),
 				new Option_K (new Vector()),
 				new Option_O (new Vector()),
-				new Option_U (new Vector())
+				new Option_U (new Vector()),
+				new Option_M (new Vector())
 			} 
 		);
 	    nbOptionErrors = checkOption.Proceed(args);
@@ -132,6 +137,17 @@ public class RunCommandLine {
 	    if (checkOption.Saw ("-P"))
 		{
 	    	logExecutionTime = true;
+		}
+	    if (checkOption.Saw ("-M"))
+		{
+	        internalLog.debug ("option -M was seen with arguments: ");
+			Iterator it = checkOption.getOption("-M").getParameters().iterator();			
+			if (it.hasNext())
+			{
+				File file = new File(it.next().toString());
+				URIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
+			    internalLog.debug ("\t" + file.getName());
+			}
 		}
 	    
 	}
