@@ -1,6 +1,13 @@
-/*
- * Created on 6 févr. 2005
- * By Franck FLEUREY (ffleurey@irisa.fr)
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.8 2005-10-21 13:23:58 dvojtise Exp $
+ * Project : Kermeta io
+ * File : KMT2KMExpressionBuilder.java
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 6 févr. 2005
+ * Authors : 
+ * 		Franck Fleurey 	<ffleurey@irisa.fr>
+ * 		Didier Vojtisek <dvojtise@irisa.fr>
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
@@ -221,12 +228,22 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		return false;
 	}
 	/**
+	 * also translates the \\ and \n etc into their characters
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FStringLiteral)
 	 */
 	public boolean beginVisit(FStringLiteral fStringLiteral) {
 		fr.irisa.triskell.kermeta.behavior.FStringLiteral str =  builder.behav_factory.createFStringLiteral();
 		builder.storeTrace(str,fStringLiteral);
-		str.setFValue(fStringLiteral.getString_literal().getText().substring(1, fStringLiteral.getString_literal().getText().length()-1));
+		// removes the quotes
+		String newValue = fStringLiteral.getString_literal().getText().substring(1, fStringLiteral.getString_literal().getText().length()-1);
+		// do the \\ replacements
+		newValue = newValue.replaceAll("\\\\n","\n");
+		newValue = newValue.replaceAll("\\\\t","\t");
+		newValue = newValue.replaceAll("\\\\b","\b");
+		newValue = newValue.replaceAll("\\\\r","\r");
+		newValue = newValue.replaceAll("\\\\f","\f");
+		newValue = newValue.replaceAll("\\\\",""); // finally replace the escape char by nothing, the following char must be itself
+		str.setFValue(newValue);
 		result = str;
 		return false;
 	}
