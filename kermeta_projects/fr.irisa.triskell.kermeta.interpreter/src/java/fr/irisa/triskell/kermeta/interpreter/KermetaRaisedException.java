@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.6 2005-10-14 14:57:09 dvojtise Exp $
+/* $Id: KermetaRaisedException.java,v 1.7 2005-10-21 15:02:00 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FObject;
@@ -26,7 +27,7 @@ import fr.irisa.triskell.kermeta.typechecker.SimpleType;
  */
 public class KermetaRaisedException extends Error {
 
-    protected RuntimeObject raised_object;
+    public RuntimeObject raised_object;
     // The trace handler
     protected Traceback traceback;
     
@@ -175,5 +176,39 @@ public class KermetaRaisedException extends Error {
         return context;
     }
 
+    /**
+     * Helper method that create an exception for Kermeta 
+     * @param kermetaExceptionName name of the created exception
+     * @param exceptionMessage message associated to the exception
+     * @param interpreter
+     * @param memory
+     * @param javaCause 
+     * @return
+     */
+    public static KermetaRaisedException createKermetaException(
+    		String kermetaExceptionName,
+    		String exceptionMessage,
+    		ExpressionInterpreter interpreter, 
+			RuntimeMemory memory,
+			Throwable javaCause)
+    {
+    	RuntimeObjectFactory rofactory = memory.getROFactory();
+    	
+    	RuntimeObject raised_object = rofactory.createObjectFromClassName(kermetaExceptionName);
+    	
+    	// adds some info on this exception (in the message attribute of the exception)
+    	
+    	FClass t_target=(FClass)raised_object.getMetaclass().getData().get("kcoreObject");        	
+    	SimpleType target = new SimpleType(t_target);
+	    CallableProperty cproperty = target.getPropertyByName("message");
+	    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
+	    RuntimeObject rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(exceptionMessage, rofactory);
+         
+    	fr.irisa.triskell.kermeta.runtime.language.Object.set(raised_object, ro_property, rovalue);
+
+    	return new KermetaRaisedException( raised_object, 
+				interpreter,
+				javaCause);
+    }
     
 }
