@@ -1,7 +1,7 @@
-/* $Id: Runtime2EMF.java,v 1.14 2005-09-06 11:53:10 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.15 2005-10-24 16:17:37 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jul 20, 2005
@@ -15,13 +15,13 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -33,20 +33,17 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.util.EcoreEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
-import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
  * 
@@ -75,7 +72,19 @@ public class Runtime2EMF {
         // We must raise a correct exception in such a case!!!! 
         if (p_unit.getMetaModelUri() != null && p_unit.getMetaModelUri().length()>0)
         {	// resolve
-            r2e.metaModelResource = p_unit.loadMetaModelAsEcore(p_unit.getMetaModelUri());
+        	try {
+        		r2e.metaModelResource = p_unit.loadMetaModelAsEcore(p_unit.getMetaModelUri());
+        	}
+        	catch (WrappedException e){
+        		KermetaUnit.internalLog.error("Error loading EMF model " + p_unit.getUri() + " : " + e.exception().getMessage(), e);
+    			RuntimeMemory memory =p_unit.getInstances().getFactory().getMemory();
+	        	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
+	        	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+	        			e.exception().getMessage(),
+						interpreter,
+						memory,
+						e); 
+			}
         }
         else // exception should be put in another way. it is not valid in the case user
             // saves a model that was initialy loaded. (exception should only be valid
