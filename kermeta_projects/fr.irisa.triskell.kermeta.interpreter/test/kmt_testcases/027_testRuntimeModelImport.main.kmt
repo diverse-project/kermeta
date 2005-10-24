@@ -1,0 +1,76 @@
+@mainClass "RuntimeModelImportTests::Main"
+@mainOperation "testmain"
+
+
+package RuntimeModelImportTests;
+
+
+require kermeta
+require "../../../fr.irisa.triskell.kermeta/lib/kermeta_java.ecore"
+using kermeta::structure
+using kermeta::behavior
+using kermeta::standard
+using kermeta::persistence
+
+class Main inherits kermeta::kunit::Test
+{
+    operation testmain() : Void is do 
+     	var inputModel : Set<FPackage> init loadClassModel
+     	
+        
+
+      	// do some verification in the loaded data
+        
+        stdio.writeln("\nBegin")
+
+        //inputModel.each{ p | transfo.accept(p,0) }
+       inputModel.each{ p | stdio.writeln(p.fName ) }
+       // find a package named "kmLogo"
+       var kmlogopackage : FPackage init inputModel.detect{ p | (p.fName.compareTo("kmLogo") == 0) }
+       assert( kmlogopackage.fName.compareTo("kmLogo") == 0)
+       // find a package named "actions"       
+       var actionpackage : FPackage init kmlogopackage.fNestedPackage.detect{ p | (p.fName.compareTo("actions") == 0) }       
+       assert( actionpackage.fName.compareTo("actions") == 0)
+       // find a class named "Interpreter"
+       var classTypeDef : FTypeDefinition init actionpackage.fOwnedTypeDefinition.detect{ c | (c.fName.compareTo("Interpreter") == 0) }
+       var classClassTypeDef : FClassDefinition 
+       classClassTypeDef ?= classTypeDef
+       assert (classClassTypeDef.fName.compareTo("Interpreter") == 0  )       
+       // its parent must be "AbstractVisitor"
+       var superClassType : FClass 
+       superClassType ?= classClassTypeDef.fSuperType.one
+       assert(superClassType.fClassDefinition.fName.compareTo("AbstractVisitor") == 0)
+       
+       // one of its feature must be "accumulator" of type "Integer"
+       var accFProp : FProperty init  classClassTypeDef.fOwnedAttributes.detect{ k | k.fName.compareTo("accumulator") == 0 }
+       var propClassType : FClass
+       propClassType ?= accFProp.fType
+       assert(propClassType.fClassDefinition.fName.compareTo("Integer") == 0)
+       stdio.write(propClassType.fClassDefinition.toString)
+       stdio.write("\nEnd")       
+        
+       
+     
+    end
+    
+    operation loadClassModel() : Set<FPackage> is do             
+   		var repository : EMFRepository init EMFRepository.new 
+   		            
+   		var resource2 : Resource init repository.createResource("../test/kmt_testcases/input_test_models/kmLogo.km", "../../fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")     
+   		
+ 	   resource2.load() 
+ 	   result :=  Set<FPackage>.new
+       from var it : Iterator<Object> init resource2.instances.iterator
+       until it.isOff
+       loop
+           var next : Object init it.next
+           if (FPackage.isInstance(next)) then 
+           		var aPackage : FPackage 
+           		aPackage ?= next
+           		result.add(aPackage)
+           end
+       end
+       
+   end
+    
+}
