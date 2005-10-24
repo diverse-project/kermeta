@@ -1,7 +1,7 @@
-/* $Id: KermetaRunHelper.java,v 1.14 2005-09-20 15:19:57 ffleurey Exp $
+/* $Id: KermetaRunHelper.java,v 1.15 2005-10-24 08:46:38 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 23, 2005
@@ -9,7 +9,6 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -18,7 +17,6 @@ import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
@@ -68,8 +66,8 @@ public class KermetaRunHelper {
         		e.printStackTrace();
         		return null;
         	}
-        	else if (!result.messages.hasError())
-        		result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null));
+        	else if (!result.messages.unitHasError)
+        		result.messages.addError("INTERNAL ERROR : " + e, null);
         }
         return result;
     }
