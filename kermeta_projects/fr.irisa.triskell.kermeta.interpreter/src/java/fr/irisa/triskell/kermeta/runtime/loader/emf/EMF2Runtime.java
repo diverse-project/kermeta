@@ -1,7 +1,7 @@
-/* $Id: EMF2Runtime.java,v 1.23 2005-10-21 15:11:11 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.24 2005-10-27 10:11:46 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jul 7, 2005
@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -151,7 +152,7 @@ public class EMF2Runtime {
 	    		options.put(XMLResource.NIL, Boolean.TRUE);
 	    	
 //	    	 refer http://www.w3.org/TR/2004/PER-xmlschema-0-20040318/#ipo.xml
-	    	if(false)
+	    	if(true)
 	    	{
 	    		resource = 	(XMLResource)resourceset.createResource(u);
 	    		resource.load(options);
@@ -184,34 +185,11 @@ public class EMF2Runtime {
 						null);
 			}
 			
+			
 	    	//loadDependentResources(resource, resourceset);
 	    	//Resource resource2 = resourceset.createResource(URI.createURI("file:/C:/eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/lib/framework.km"));
 	    	//resource2.load(options);
 	    	
-	    	
-	    	if(ENABLE_EMF_DIAGNOSTIC && resource != null){
-	    		// print as much diagnostic as possible
-				Iterator errorIt = resource.getErrors().iterator();
-				resource.getWarnings();
-				while(errorIt.hasNext()) {
-					// print EMF diagnostic even if it loaded, there may be some warning ?
-					Resource.Diagnostic errorDiag =  (Resource.Diagnostic) errorIt.next();
-					internalLog.error("EMF error diagnostic: "+errorDiag.getMessage());
-				}
-				Iterator warningIt = resource.getWarnings().iterator();
-				while(warningIt.hasNext()) {
-					// print EMF diagnostic even if it loaded, there may be some warning ?
-					Resource.Diagnostic errorDiag =  (Resource.Diagnostic) warningIt.next();
-					internalLog.error("EMF warning diagnostic: "+errorDiag.getMessage());
-				}
-				Map extensionmap = resource.getEObjectToExtensionMap();
-				Iterator mapIt = extensionmap.entrySet().iterator();
-				while(mapIt.hasNext()) {
-					// print EMF diagnostic even if it loaded, there may be some warning ?
-					Object o = mapIt.next();					
-					internalLog.error("EMF reports unknown feature: "+o + "; " + extensionmap.get(o));
-				}
-			}
 	    	
 	    	EMF2Runtime emf2Runtime = new EMF2Runtime(resourceset, resource);
 	    	//emf2Runtime.loadunit(unit, resource2);
@@ -249,15 +227,57 @@ public class EMF2Runtime {
 					memory,
 					e);        	
 		}
+		finally
+		{
+			if(ENABLE_EMF_DIAGNOSTIC && resource != null){
+	    		// print as much diagnostic as possible
+				Iterator errorIt = resource.getErrors().iterator();
+				resource.getWarnings();
+				while(errorIt.hasNext()) {
+					// print EMF diagnostic even if it loaded, there may be some warning ?
+					Resource.Diagnostic errorDiag =  (Resource.Diagnostic) errorIt.next();
+					internalLog.error("EMF error diagnostic: "+errorDiag.getMessage());
+				}
+				Iterator warningIt = resource.getWarnings().iterator();
+				while(warningIt.hasNext()) {
+					// print EMF diagnostic even if it loaded, there may be some warning ?
+					Resource.Diagnostic errorDiag =  (Resource.Diagnostic) warningIt.next();
+					internalLog.error("EMF warning diagnostic: "+errorDiag.getMessage());
+				}
+				Map extensionmap = resource.getEObjectToExtensionMap();
+				Iterator mapIt = extensionmap.entrySet().iterator();
+				while(mapIt.hasNext()) {
+					// print EMF diagnostic even if it loaded, there may be some warning ?
+					Object o = mapIt.next();					
+					internalLog.error("EMF reports unknown feature: "+o + "; " + extensionmap.get(o));
+				}
+			}
+		}
 	}
 	
 	/**
-	 * Try to determine dependent resources and load them in the resource set
+	 * returns the list of resources that are linked to the elements of this resources
+	 *  it doesn't returns the metamodel resources.
+	 * (this is because the getAllContents() on a resource set alos return the metamodel ...)
+	 * result includes the input resources
+	 * @return EList of Resource
+	 */
+	public EList findDependentResources(Resource resource)
+	{
+		EList result = new BasicEList();
+		result.add(resource);
+		findDependentResources(result, resource);
+		return result;
+	}
+	/**
+	 * recursive part of the findDependentResources method
+	 * @param list
 	 * @param resource
 	 */
-/*	public static void loadDependentResources(Resource resource, ResourceSet resourceSet)
+	protected void findDependentResources(EList list, Resource resource)
 	{
 		TreeIterator treeIt;
+		ResourceSet rset = resource.getResourceSet();
 		treeIt = resource.getAllContents();
 		while(treeIt.hasNext())
 		{
@@ -265,65 +285,60 @@ public class EMF2Runtime {
 			if(obj instanceof EObject)
 			{
 				EObject eobj = (EObject)obj;
-				// for each feature of this obj
-				EClass eclass = eobj.eClass();
-				EList features = eclass.getEAllStructuralFeatures(); 
-			    // For each feature, get the value and add it to the properties hashtable
-				//  if the value is a proxy, add this to the list of resources to load
+				EClass eClass = eobj.eClass();
+			    
+			    // Get the structural features
+			    EList features = eClass.getEAllStructuralFeatures(); 
+			    // For each feature, get the value and and check if its resource is in the list
 			    Iterator it = features.iterator();
 			    while (it.hasNext())
 			    {
 			        EStructuralFeature feature = (EStructuralFeature)it.next();
-			        String  fname  = feature.getName();
-			        EClassifier etype = feature.getEType();			         
-			        // Eget can return an elist of features
 			        Object fvalue = eobj.eGet(feature);
 			        if (fvalue instanceof EList)
 			        {
-			        	EList fvalueList = (EList)fvalue;
-			        	Iterator listIt = fvalueList.iterator();
-			        	while (listIt.hasNext())
-			        	{
-			        		EObject EOfvalue = (EObject)listIt.next();
-			        		if(EOfvalue.eIsProxy())
-					        {
-			        			String objectURI = resource.getURIFragment(EOfvalue);			            									
-					           	internalLog.error("need to load resource for a proxy: "+ EOfvalue+
-					           			"\n Try to load the file copntaining this URI: "+objectURI);
-					        }
-			        	}
+			        	//rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
+			        	Iterator it2 = ((EList)fvalue).iterator();
+			    	    int i = 0;
+			    	    // Transform the EObjects into RuntimeObject and add them in our collection
+			    	    while (it2.hasNext())
+			    	    {
+			    	        Object sfeature = it2.next();
+			    	        if (sfeature instanceof EObject)
+			    	        	addObjectResourceToList(list,(EObject)sfeature);
+			    	        // ignore other cases (Datatypes)
+			    	    }
 			        }
 			        // Get the RO-repr of this EObject
 			        else if (fvalue instanceof EObject)
 			        {   
-			        	EObject EOfvalue = (EObject)fvalue;
-			           if(EOfvalue.eIsProxy())
-			           {
-			           		String objectURI = resource.getURIFragment(EOfvalue);			            									
-			           		internalLog.error("need to load resource for a proxy: "+ EOfvalue+
-			           			"\n Try to load the file copntaining this URI: "+objectURI);
-			           }
+			        	addObjectResourceToList(list,(EObject)fvalue);			        	
 			        }
+			        // ignore other cases (Datatypes)
 			    }
 			}
-			else
-			{
-				internalLog.error("don't know what to do with object : "+ obj);
-			} 
 		}
 	}
-*/	
-	
-	public void loadunit(EMFRuntimeUnit unit, Resource resource)
+	protected void addObjectResourceToList(EList list, EObject obj)
 	{
-		try {
-			// pre-create the runtime objects
-			ResourceSet rset = resource.getResourceSet();
-			TreeIterator treeIt;
-			if (rset != null)
-				treeIt = rset.getAllContents();
-			else
-				treeIt = resource.getAllContents();
+		if((obj.eResource() != null) && (!list.contains(obj.eResource())))
+    	{
+			list.add(obj.eResource());
+			internalLog.debug("Resource added : "+ obj.eResource().getURI());
+    		// recursively add the resources
+			findDependentResources(list,obj.eResource());
+			
+    	}
+	}
+	
+	protected void createRuntimeObjects(EMFRuntimeUnit unit, Resource resource)
+	{		
+		EList resList = findDependentResources(resource);
+		Iterator resIt = resList.iterator();
+		while(resIt.hasNext())
+		{
+			Resource res = (Resource)resIt.next();
+			TreeIterator treeIt = res.getAllContents();
 			while(treeIt.hasNext())
 			{
 				Object obj = treeIt.next();
@@ -333,14 +348,33 @@ public class EMF2Runtime {
 					RuntimeObject ro = this.setRuntimeObjectForEObject(unit, eobj);
 					this.runtime_objects_map.put(eobj, ro);
 					internalLog.debug("RO created : "+ (ro != null) + "->" + ro+" obj="+eobj);
+					/*java.util.Collection result = EcoreUtil.UsageCrossReferencer.find(eobj,resource.getResourceSet());
+					for (Iterator i = result.iterator(); i.hasNext(); )
+					{
+						// Show the settings that reference the objectOfInterest.
+						//
+						EStructuralFeature.Setting setting = (EStructuralFeature.Setting)i.next();
+						EObject eObject = setting.getEObject();
+						EStructuralFeature eStructuralFeature = (EStructuralFeature)setting.getEStructuralFeature();
+						internalLog.debug
+						(">   " + eStructuralFeature.getEContainingClass().getName() + "." + eStructuralFeature.getName() +
+								" <- " + EcoreUtil.getIdentification(eObject));
+				   }*/
+					
 				}
 				else
 				{
-					// typically a Resource object instead of a EObject
+					internalLog.warn("Ignore unknown object: "+ obj);
 				}
-				 
 			}
-			
+		}
+	}
+	public void loadunit(EMFRuntimeUnit unit, Resource resource)
+	{
+		try {
+			// pre-create the runtime objects
+			createRuntimeObjects(unit, resource);
+						
 			// If the meta-model uri was not provided in the constructor of EMFRuntimeUnit, we try
 			// to find one
 			if (unit.getMetaModelUri()==null || unit.getMetaModelUri().length()==0)
@@ -388,6 +422,10 @@ public class EMF2Runtime {
 			    }
 			}
 		}
+		catch (KermetaRaisedException ke)
+		{
+			throw ke;
+		}
 		catch (Throwable e) {
 		    internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
 		    
@@ -420,7 +458,7 @@ public class EMF2Runtime {
     {
         RuntimeObjectFactory rofactory = unit.getInstances().getFactory();
         RuntimeObject rovalue = rofactory.getMemory().voidINSTANCE;
-//      Boolean
+        //      Boolean
     	if (fvalue instanceof Boolean) {
     		if (((Boolean)fvalue).booleanValue()) {
     			rovalue = rofactory.getMemory().trueINSTANCE;
@@ -492,6 +530,7 @@ public class EMF2Runtime {
 	
 	/**
 	 * Add the properties as RuntimeObjects to the object rObject
+	 * All the required RuntimeObjects maus have been already created
 	 * @param rObject
 	 * @param unit
 	 */
@@ -524,94 +563,109 @@ public class EMF2Runtime {
 	        // Eget can return an elist of features
 	        Object fvalue = eObject.eGet(feature);
 	        RuntimeObject rovalue = null;
-	        // A feature with multiplicity
-	        if (fvalue instanceof EList)
-	        {
-	        	rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
-	        	
-	        }
-	        // Get the RO-repr of this EObject
-	        else if (fvalue instanceof EObject)
-	        {   
-	        	EObject EOfvalue = (EObject)fvalue;
-	            rovalue = (RuntimeObject)this.runtime_objects_map.get(EOfvalue);
-	            if(rovalue==null)
-	            {
-	            	if(EOfvalue.eIsProxy())
-	            	{
-	            		EObject obj = EcoreUtil.resolve(EOfvalue, this.resource_set);
-						if (obj.eIsProxy())
-						{   // ie. the proxy was not resolved
-							String objectURI = EOfvalue.eResource().getURIFragment(EOfvalue);			            	
-							String errmsg = "Not able to resolve proxy for value: " + EOfvalue 
-								+ " for object: "+rObject +" of type: "+etype+
-								"\nTry to load the file containing this URI: "+objectURI;
-							internalLog.error(errmsg);
-							throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-				        		errmsg,
-								interpreter,
-								memory,
-								null);
+	        
+	        try {
+		        // A feature with multiplicity
+		        if (fvalue instanceof EList)
+		        {
+		        	rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
+		        	
+		        }
+		        // Get the RO-repr of this EObject
+		        else if (fvalue instanceof EObject)
+		        {   
+		        	EObject EOfvalue = (EObject)fvalue;
+		            rovalue = (RuntimeObject)this.runtime_objects_map.get(EOfvalue);
+		            if(rovalue==null)
+		            {
+		            	// troubles in the auto resolve 
+		            	EObject obj = EcoreUtil.resolve(EOfvalue, this.resource_set);
+		            	// 
+		            	if(EOfvalue.eIsProxy() && obj.eIsProxy())
+						{   // ie. was a proxy and the proxy was not resolved
+								String objectURI = EOfvalue.eResource().getURIFragment(EOfvalue);			            	
+								String errmsg = "Not able to resolve proxy for value: " + EOfvalue 
+									+ " for object: "+rObject +" of type: "+etype+
+									"\nTry to load the file containing this URI: "+objectURI;
+								internalLog.error(errmsg);
+								throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+					        		errmsg,
+									interpreter,
+									memory,
+									null);
 						}
 						else
 						{
 							// the feature destination was not in the main resource
 			            	// force emf to load it and retreive it, 
 			            	// create a Runtime object for it
-							RuntimeObject ro = this.setRuntimeObjectForEObject(unit, obj);
-							this.runtime_objects_map.put(obj, ro);
-						}
-	            	}
-	            	else{
-	            		EObject obj = EcoreUtil.resolve(EOfvalue, this.resource_set);
-	            		RuntimeObject ro = this.setRuntimeObjectForEObject(unit, obj);
-						this.runtime_objects_map.put(obj, ro);
-						
-	            	}
-	            	rovalue = (RuntimeObject)this.runtime_objects_map.get(EOfvalue);
-	            	if(rovalue==null)
-		            {
-	            		String objectURI = EOfvalue.eResource().getURIFragment(EOfvalue);
-		            	String errmsg = "Not able to find RuntimeObject in runtime_objects_map for value on type "+etype
-							+"Trying to set "+ EOfvalue+" into "+rObject+
-							"\nTry to load the file containing this URI: "+objectURI;
-		            	internalLog.error(errmsg);
-		            	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-				        		errmsg,
-								interpreter,
-								memory,
-								null);
+							//
+		            		// this is in fact too late to create the runtime object for an EObject, !!! 
+		            			// concurrent exception !
+							String objectURI = EOfvalue.eResource().getURIFragment(EOfvalue);
+			            	String errmsg = "Not able to find RuntimeObject in runtime_objects_map for value on type "+etype
+								+"Trying to set "+ EOfvalue+" into "+rObject+
+								"\nBe sure to load the file containing this URI: "+objectURI;
+			            	internalLog.error(errmsg);
+			            	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+					        		errmsg,
+									interpreter,
+									memory,
+									null);
+	            			// RuntimeObject ro = this.setRuntimeObjectForEObject(unit, obj);
+	            			// this.runtime_objects_map.put(obj, ro);
+	            		
+							
+		            	}
 		            }
-	            }
-	            rObject.getProperties().put(fname, rovalue);
-	            // FIXME the set method needs to be reviewed (for model instances?)
-	            //fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
+		            rObject.getProperties().put(fname, rovalue);
+		            // FIXME the set method needs to be reviewed (for model instances?)
+		            //fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
+		        }
+		        // equiv : fvalue instanceof EString, Eblabla
+		        else if (EDataType.class.isInstance(etype))
+		        {
+		        	rovalue = setRuntimeObjectForPrimitiveTypeValue(unit, fvalue);
+		        	fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
+		        	
+		        }
+		        else if (fvalue == null)
+		        {    
+		            fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop,rObject.getFactory().getMemory().voidINSTANCE);
+		        }
+		        else // Enum?
+		        {
+		        	String errmsg = "NotImplemented Error : The type <"+etype+"> has not been handled yet. Trying to set "+
+										fvalue+" into "+rObject;
+		            internalLog.error(errmsg);       	
+			        throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+			        		errmsg,
+							interpreter,
+							memory,
+							null);
+		        }
+		        // If we instanciated a RuntimeObject value, we can set the properties for the object 
+		        if (fvalue != null)
+		            rovalue.getData().put("emfObject", fvalue);
 	        }
-	        // equiv : fvalue instanceof EString, Eblabla
-	        else if (EDataType.class.isInstance(etype))
-	        {
-	        	rovalue = setRuntimeObjectForPrimitiveTypeValue(unit, fvalue);
-	        	fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
-	        	
+	        catch (Throwable e){
+	        	if(e instanceof  KermetaRaisedException)
+	        	{
+	        		throw (KermetaRaisedException)e;
+	        	}
+	        	else
+	        	{
+		        	String errmsg = "Exception received. Trying to set " 
+		        		+rObject  + " property: " + fprop +" / " + fname + " with value: "+
+						fvalue;
+		        	internalLog.error(errmsg);
+		        	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+			        		errmsg,
+							interpreter,
+							memory,
+							e);
+	        	}
 	        }
-	        else if (fvalue == null)
-	        {    
-	            fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop,rObject.getFactory().getMemory().voidINSTANCE);
-	        }
-	        else // Enum?
-	        {
-	        	String errmsg = "NotImplemented Error : The type <"+etype+"> has not been handled yet. Trying to set "+
-									fvalue+" into "+rObject;
-	            internalLog.error(errmsg);       	
-		        throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-		        		errmsg,
-						interpreter,
-						memory,
-						null);
-	        }
-	        // If we instanciated a RuntimeObject value, we can set the properties for the object 
-	        if (fvalue != null)
-	            rovalue.getData().put("emfObject", fvalue);
 	    } // End of while
 	    // Find the value of the structural features and populate the properties.
 	}
