@@ -105,6 +105,19 @@ abstract class Collection<G>
 	end
 	
 	/**
+	 * check that the condition is true on all the element of the collection
+	 * returns true if the collection is empty
+	 */
+	operation forAll(func : <G -> Boolean>) : Void is do
+    	var test : Boolean init true
+        from var it : Iterator<G> init iterator
+        until it.isOff
+        loop
+        	test := test and func(it.next)
+        end
+    end
+	
+	/**
 	 * returns a new Collection with the results of running collector 
 	 * once for every element in self.
 	 */
@@ -132,7 +145,7 @@ abstract class Collection<G>
 			if detector(elem) then result := elem end
 		end
 	end
-	
+		
 	/**
 	 * Passes each element of the collection to selector. 
 	 * returns a Collection for all elements for which selector is true
