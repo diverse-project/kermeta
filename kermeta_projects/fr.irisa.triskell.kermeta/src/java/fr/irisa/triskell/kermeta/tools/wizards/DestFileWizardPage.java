@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.3 2005-08-26 15:52:50 zdrey Exp $
+/* $Id: DestFileWizardPage.java,v 1.4 2005-10-27 06:41:07 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -53,9 +53,9 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.ContainerGenerator;
-import org.eclipse.ui.help.WorkbenchHelp;
+//import org.eclipse.ui.help.WorkbenchHelp;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
-import org.eclipse.ui.internal.ide.IHelpContextIds;
+//import org.eclipse.ui.internal.ide.IHelpContextIds;
 import org.eclipse.ui.internal.ide.dialogs.CreateLinkedResourceGroup;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 
@@ -178,7 +178,7 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		topLevel.setLayoutData(new GridData(
 			GridData.VERTICAL_ALIGN_FILL | GridData.HORIZONTAL_ALIGN_FILL));
 		topLevel.setFont(parent.getFont());
-		WorkbenchHelp.setHelp(topLevel, IHelpContextIds.NEW_FILE_WIZARD_PAGE);
+		//WorkbenchHelp.setHelp(topLevel, IHelpContextIds.NEW_FILE_WIZARD_PAGE);
 		
 		createPreControls(topLevel);
 		
@@ -477,9 +477,9 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		if (initialContainerFullPath != null)
 			resourceGroup.setContainerFullPath(initialContainerFullPath);
 		else {
-			Iterator enum = currentSelection.iterator();
-			if (enum.hasNext()) {
-				Object object = enum.next();
+			Iterator enumeration = currentSelection.iterator();
+			if (enumeration.hasNext()) {
+				Object object = enumeration.next();
 				IResource selectedResource = null;
 				if (object instanceof IResource) {
 					selectedResource = (IResource)object;

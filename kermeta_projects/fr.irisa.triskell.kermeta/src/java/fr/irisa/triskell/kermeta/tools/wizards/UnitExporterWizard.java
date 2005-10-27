@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.7 2005-09-15 12:44:55 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.8 2005-10-27 06:41:07 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -167,7 +167,7 @@ public class UnitExporterWizard extends Wizard{
         
         if (unit.messages.hasError()) {
         	Shell theShell = this.getContainer().getShell();
-        	MessageDialog.openError(getContainer().getShell(),"Error loading file", "The source file contains errors: "+ unit.messages.getAllMessagesAsString());
+        	MessageDialog.openError(theShell,"Error loading file", "The source file contains errors: "+ unit.messages.getAllMessagesAsString());
         	
         	MessageConsoleStream mcs = KermetaPlugin.getDefault().getConsole().newMessageStream();
         	mcs.setColor(new Color(null, 255,0,0));
@@ -201,7 +201,7 @@ public class UnitExporterWizard extends Wizard{
 			catch (Throwable e)
 			{
 				Shell theShell = this.getContainer().getShell();
-	        	MessageDialog.openError(getContainer().getShell(),"Error writing file", "errors: "+ e.getMessage());
+	        	MessageDialog.openError(theShell,"Error writing file", "errors: "+ e.getMessage());
 	        		        	
 				e.printStackTrace();
 				
