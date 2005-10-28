@@ -105,16 +105,31 @@ abstract class Collection<G>
 	end
 	
 	/**
-	 * check that the condition is true on all the element of the collection
+	 * checks that the condition is true on all the element of the collection
 	 * returns true if the collection is empty
 	 */
-	operation forAll(func : <G -> Boolean>) : Void is do
+	operation forAll(func : <G -> Boolean>) : Boolean is do
     	var test : Boolean init true
         from var it : Iterator<G> init iterator
         until it.isOff
         loop
         	test := test and func(it.next)
         end
+        result := test
+    end
+    
+    /**
+	 * checks that the condition is true for at least one element of the collection
+	 * returns false if the collection is empty
+	 */
+	operation exists(func : <G -> Boolean>) : Boolean is do
+    	var test : Boolean init false
+        from var it : Iterator<G> init iterator
+        until it.isOff or (test != false)
+        loop
+        	test := test or func(it.next)
+        end
+        result := test
     end
 	
 	/**
