@@ -3,6 +3,7 @@
 package fr.irisa.triskell.kermeta.runtime.basetypes;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 
 public class Character {
 
@@ -35,18 +36,24 @@ public class Character {
 		else return self.getFactory().getMemory().trueINSTANCE;
 	}
 
-	protected static void setValue(RuntimeObject ch, char value) {
+	public static void setValue(RuntimeObject ch, char value) {
 		ch.getData().put("CharacterValue", new java.lang.Character(value));
 	}
 	
-	protected static char getValue(RuntimeObject ch) {
+	public static char getValue(RuntimeObject ch) {
 		return getCharacterValue(ch).charValue();
 	}
 	
-	protected static java.lang.Character getCharacterValue(RuntimeObject ch) {
+	public static java.lang.Character getCharacterValue(RuntimeObject ch) {
 		if (!ch.getData().containsKey("CharacterValue")) setValue(ch, ' ');
 		return ((java.lang.Character)ch.getData().get("CharacterValue"));
 	}
 
+	public static RuntimeObject create(char value, RuntimeObjectFactory factory)
+	{
+	    RuntimeObject result = factory.createObjectFromClassName("kermeta::standard::Character");
+	    setValue(result, value);
+	    return result;
+	}
 }
 /* END OF FILE */
