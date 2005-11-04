@@ -1,4 +1,4 @@
-/* $Id: ResourceHandler.java,v 1.3 2005-08-26 16:01:17 zdrey Exp $
+/* $Id: ResourceHandler.java,v 1.4 2005-11-04 16:59:38 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ResourceHandler.java
  * License : GPL
@@ -117,7 +117,7 @@ public class ResourceHandler {
 
 		if (workspace.getRoot().getFolder(resourcePath).exists() || workspace.getRoot().getFile(resourcePath).exists()) {
 			problemType = ResourceAndContainerGroup.PROBLEM_RESOURCE_EXIST;
-			problemMessage = IDEWorkbenchMessages.getString("ResourceGroup.nameExists"); //$NON-NLS-1$
+			problemMessage = "Problem";
 			return false;
 		} 
 		return true;
@@ -136,13 +136,13 @@ public class ResourceHandler {
 
 	    if (resourceName.equals("")) {//$NON-NLS-1$
 	        problemType = ResourceAndContainerGroup.PROBLEM_RESOURCE_EMPTY;
-	        problemMessage = IDEWorkbenchMessages.format("ResourceGroup.emptyName", new Object[] {resourceType}); //$NON-NLS-1$
+	        problemMessage = "problem with resource name";
 	        return false;
 	    }
 	    
 	    if(!(new Path("")).isValidSegment(resourceName)){ //$NON-NLS-1$
 			problemType = ResourceAndContainerGroup.PROBLEM_NAME_INVALID;
-			problemMessage = IDEWorkbenchMessages.format("ResourceGroup.invalidFilename", new String[] {resourceName}); //$NON-NLS-1$
+			problemMessage = "problem with file path";
 			return false;
 		}
 		
