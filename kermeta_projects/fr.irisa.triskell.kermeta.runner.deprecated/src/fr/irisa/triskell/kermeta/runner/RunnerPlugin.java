@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.9 2005-09-09 18:05:31 zdrey Exp $
+/* $Id: RunnerPlugin.java,v 1.10 2005-11-04 17:02:13 zdrey Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -16,6 +16,8 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -294,5 +296,15 @@ public class RunnerPlugin extends AbstractUIPlugin
 	        
 	    }
 	 }
+	
+	/** 
+	 * Accessor as created in the Eclipse usual plugins
+	 * @return
+	 */
+	public static String getUniqueIdentifier()
+	{
+		return PLUGIN_ID;
+	}
+
     
 }
