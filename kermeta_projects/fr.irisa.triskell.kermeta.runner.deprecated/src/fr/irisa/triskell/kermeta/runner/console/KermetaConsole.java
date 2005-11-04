@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.9 2005-07-08 12:23:44 dvojtise Exp $
+/* $Id: KermetaConsole.java,v 1.10 2005-11-04 17:09:28 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -24,7 +24,6 @@ import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
-import org.eclipse.ui.internal.console.MessageConsolePage;
 import org.eclipse.ui.part.IPageBookViewPage;
 
 import fr.irisa.triskell.kermeta.runner.dialogs.InputStreamDialog;
@@ -128,7 +127,7 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
      * @see org.eclipse.ui.console.IConsole#createPage(org.eclipse.ui.console.IConsoleView)
      */
     public IPageBookViewPage createPage(IConsoleView view) {
-    	return new MessageConsolePage(view, messageConsole);
+    	return null;
     }
 
     /* (non-Javadoc)
