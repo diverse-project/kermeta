@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.8 2005-09-09 18:04:21 zdrey Exp $
+/* $Id: KermetaRunTarget.java,v 1.9 2005-11-04 17:00:36 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: GPL
@@ -18,14 +18,17 @@ import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IThread;
 
+import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
+
 /**
  * Target that is launched in run mode
  */
-public class KermetaRunTarget extends KermetaTarget {
+public class KermetaRunTarget extends AbstractKermetaTarget {
     
-    public KermetaRunTarget(ILaunch launch)
+	
+    public KermetaRunTarget(ILaunch p_launch)
     {
-        super(launch);
+    	launch = p_launch;
     }
     
 
@@ -35,23 +38,8 @@ public class KermetaRunTarget extends KermetaTarget {
     }
 
 
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugTarget#getThreads()
-     */
-    public IThread[] getThreads() throws DebugException {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugTarget#hasThreads()
-     */
-    public boolean hasThreads() throws DebugException {
-        // TODO Auto-generated method stub
-        return false;
-    }
+	public IThread[] getThreads() throws DebugException {
+		return threads;
+	}
     
 }

@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.8 2005-07-08 12:23:43 dvojtise Exp $
+/* $Id: KermetaSourceLocator.java,v 1.9 2005-11-04 17:00:36 zdrey Exp $
  * Project: Kermeta.runner
  * File: KermetaSourceLocator.java
  * License: EPL
@@ -24,6 +24,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
     public KermetaSourceLocator()
     {
         super();
+        System.err.println("A new source locator was created");
     }
     
     /* (non-Javadoc)
@@ -40,7 +41,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
     public void initializeFromMemento(String memento) throws CoreException {
         // TODO Auto-generated method stub
     	RunnerPlugin.pluginLog.error("TODO : implement initializeFromMemento("+memento+")");
-
+    	System.err.println("TODO : implement initializeFromMemento("+memento+")");
     }
 
     /* (non-Javadoc)
@@ -56,6 +57,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator {
      * @see org.eclipse.debug.core.model.ISourceLocator#getSourceElement(org.eclipse.debug.core.model.IStackFrame)
      */
     public Object getSourceElement(IStackFrame stackFrame) {
+    	System.err.println("Call of getSourceElement method");
         return stackFrame;
     }
 

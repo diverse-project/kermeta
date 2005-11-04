@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.15 2005-10-20 09:38:01 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.16 2005-11-04 17:00:36 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -36,7 +36,9 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
-import fr.irisa.triskell.kermeta.runner.debug.KermetaDebugTarget;
+import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
+
+import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
 
 
 public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate 
@@ -52,7 +54,7 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
     public final static String KM_PROJECTNAME = "KM_PROJECTNAME";
  
     protected static int instanceCount = 0;
-    protected KermetaTarget target;
+    protected AbstractKermetaTarget target;
     
     
     /**
@@ -131,14 +133,9 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	        {
 	            target = new KermetaDebugTarget(launch);
 	            target.start();
-	    		if (!target.isTerminated())
-	    		{
-	    			launch.addDebugTarget(target);
-	    			((KermetaDebugTarget) target)
-	    				.getDebugger()
-	    				.generateDebugInitEvent();
-	    		}
-				// FIXME Exception when trying t oaccess a frame..
+
+	    		if (target.isTerminated())
+	    			launch.terminate();
 	        } 
 	    }
 	    catch (KermetaInterpreterError e)
@@ -189,7 +186,8 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
         }
         try
         {
-            String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
+        	String uri;
+        	uri = "platform:/resource/" + selectedFile.getFullPath().toString();
 
             //  be sure this value is correctly set        
             KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
@@ -213,7 +211,7 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
         catch (KermetaRaisedException kerror)
         {
             console.print(kerror.getMessage());
-            console.print(kerror.toString());
+            console.print("\n"+kerror.toString());
         }
         catch (KermetaInterpreterError ierror)
         {

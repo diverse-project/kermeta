@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.3 2005-09-09 18:04:21 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.4 2005-11-04 17:00:36 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -28,7 +28,7 @@ import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 public class KermetaLauncher
 {
     private static KermetaLauncher defaultLauncher = null;
-    public static String startfile = "";
+    public static String startFile = "";
     public static String className = "";
     public static String opName = "";
     
@@ -48,13 +48,13 @@ public class KermetaLauncher
         {
             // is argv a "-file", a "-class", a "-name"?  if so, get the following argv!
             if (argv[i].equals("-file") && argv[i+1]!="")
-            {   startfile = argv[i+1];i+=1; }
+            {   startFile = argv[i+1];i+=1; }
             if (argv[i].equals("-class") && argv[i+1]!="")
             {   className = argv[i+1];i+=1; }
             if (argv[i].equals("-operation") && argv[i+1]!="")
             {  opName = argv[i+1];i+=1;}
         }
-        launch(startfile, className, opName,false);
+        launch(startFile, className, opName,false);
     }
     
     /**
