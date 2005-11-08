@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessageManager.java,v 1.1 2005-09-15 12:39:11 dvojtise Exp $
+/* $Id: KMUnitMessageManager.java,v 1.2 2005-11-08 15:59:01 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -110,7 +110,7 @@ public class KMUnitMessageManager {
 	
 	/**
 	 * @return Returns the error from this unit. If there is an error in imported unit, 
-	 * 	only report the name of the unit that contain the error
+	 * 	only report the name of the unit that contain the error and the message of the first error
 	 */
 	public ArrayList getErrors() {
 	    ArrayList result = new ArrayList();
@@ -118,7 +118,9 @@ public class KMUnitMessageManager {
 	    for (int i=0; i<unit.importedUnits.size(); i++) {
 	        KermetaUnit iu = (KermetaUnit)unit.importedUnits.get(i);
 	        if (iu.messages.hasError()) {
-	            result.add(new KMUnitError("Error in imported unit " + iu.getUri(), null));
+	        	String indirectMsg = ((KMUnitMessage)iu.messages.getErrors().get(0)).getMessage();
+	            result.add(new KMUnitError("Error in imported unit " + iu.getUri() +" (" +
+	            		indirectMsg +")", null));
 	        }
 	    }
 		return result;
@@ -134,7 +136,9 @@ public class KMUnitMessageManager {
 	    for (int i=0; i<unit.importedUnits.size(); i++) {
 	        KermetaUnit iu = (KermetaUnit)unit.importedUnits.get(i);
 	        if (iu.messages.getWarnings().size() != 0) {
-	            result.add(new KMUnitWarning("Warning in imported unit " + iu.getUri(), null));
+	        	String indirectMsg = ((KMUnitMessage)iu.messages.getWarnings().get(0)).getMessage();
+	            result.add(new KMUnitError("Warning in imported unit " + iu.getUri() +" (" +
+	            		indirectMsg +")", null));
 	        }
 	    }
 		return result;
