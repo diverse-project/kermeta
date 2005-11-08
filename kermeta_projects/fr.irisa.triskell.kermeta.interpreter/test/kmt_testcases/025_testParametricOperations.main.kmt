@@ -19,7 +19,7 @@ class TestParametricOperations inherits kermeta::kunit::TestCase
 	reference tester : ParametricOperationTester
 	reference aString : String
 	
-	operation setUp() is do
+	method setUp() is do
 		tester := ParametricOperationTester.new
 		aString := "I am a parameter"
 	end
@@ -134,21 +134,21 @@ class ParametricOperationTester
 	 * Features proposal
 	 */
 	 
-	/** any would be the "?" equivalent of java 5 generic keyword 
+	/* any would be the "?" equivalent of java 5 generic keyword 
 	 * Any and T must aslso appear in param types.
 	*/ 
-	operation anyKindOf<Any kindof T>(param : Any, tparam : T) is do
+/*	operation anyKindOf<Any kindof T>(param : Any, tparam : T) is do
 		stdio.writeln(param.toString)
 		stdio.writeln(tparam.toString)
 	end
-	
-	/** */
-	operation typeKindOf<T kindof AbstractClass>(param : T) is do
+	*/
+	/* */
+/*	operation typeKindOf<T kindof AbstractClass>(param : T) is do
 		assert(AbstractClass.isInstance(param))
 		assert(param.aString == void)
 		assert(param.anInt   == void)
 	end	
-
+*/
 }
 
 class ClassOne inherits AbstractClass

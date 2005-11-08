@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsm">
+  <eClassifiers xsi:type="ecore:EClass" name="Main">
+    <eOperations name="main" ordered="false" upperBound="0">
+      <eAnnotations source="KerMeta">
+        <details key="Body" value="do&#xA;&#x9;var theFSM : fsm::FSM init self.createFSM&#xA;&#x9;self.printFSM(theFSM)&#xA;&#x9;theFSM.run&#xA;&#x9;self.printFSM(theFSM)&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KerMeta">
+        <details key="kdoc" value="/**&#xD;&#xA;&#x9; * The entry point&#xD;&#xA;&#x9; */"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="simpleMain" ordered="false" upperBound="0">
+      <eAnnotations source="KerMeta">
+        <details key="Body" value="do&#xA;&#x9;var theFSM : fsm::FSM init self.createFSM&#xA;&#x9;self.printFSM(theFSM)&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="printFSM" ordered="false" upperBound="0">
+      <eAnnotations source="KerMeta">
+        <details key="Body" value="do&#xA;&#x9;fsm.ownedState.each{s | do&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;stdio.writeln(&quot;State : &quot;.plus(s.name))&#xA;&#x9;&#x9;&#x9;&#x9;s.outgoingTransition.each{t | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stdio.writeln(&quot;  Transition : &quot;.plus(t.source.name).plus(&quot;-(&quot;).plus(t.input).plus(&quot;/&quot;).plus(t.output).plus(&quot;)->&quot;).plus(t.target.name))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KerMeta">
+        <details key="kdoc" value="/**&#xD;&#xA;&#x9; * Print the FSM on the standard output&#xD;&#xA;&#x9; */"/>
+      </eAnnotations>
+      <eParameters name="fsm" eType="//FSM"/>
+    </eOperations>
+    <eOperations name="createFSM" eType="//FSM">
+      <eAnnotations source="KerMeta">
+        <details key="Body" value="do&#xA;&#x9;result := fsm::FSM.new&#xA;&#x9;result.serializer := self&#xA;&#x9;var s1 : fsm::State init fsm::State.new&#xA;&#x9;s1.name := &quot;s1&quot;&#xA;&#x9;result.ownedState.add(s1)&#xA;&#x9;var s2 : fsm::State init fsm::State.new&#xA;&#x9;s2.name := &quot;s2&quot;&#xA;&#x9;result.ownedState.add(s2)&#xA;&#x9;var s3 : fsm::State init fsm::State.new&#xA;&#x9;s3.name := &quot;s3&quot;&#xA;&#x9;result.ownedState.add(s3)&#xA;&#x9;var t12 : fsm::Transition init fsm::Transition.new&#xA;&#x9;t12.input := &quot;a&quot;&#xA;&#x9;t12.source := s1&#xA;&#x9;t12.output := &quot;b&quot;&#xA;&#x9;t12.target := s2&#xA;&#x9;var t23x : fsm::Transition init fsm::Transition.new&#xA;&#x9;t23x.input := &quot;x&quot;&#xA;&#x9;t23x.source := s2&#xA;&#x9;t23x.output := &quot;y&quot;&#xA;&#x9;t23x.target := s3&#xA;&#x9;var t23y : fsm::Transition init fsm::Transition.new&#xA;&#x9;t23y.input := &quot;y&quot;&#xA;&#x9;t23y.source := s2&#xA;&#x9;t23y.output := &quot;x&quot;&#xA;&#x9;t23y.target := s3&#xA;&#x9;var t31 : fsm::Transition init fsm::Transition.new&#xA;&#x9;t31.input := &quot;b&quot;&#xA;&#x9;t31.source := s3&#xA;&#x9;t31.output := &quot;a&quot;&#xA;&#x9;t31.target := s1&#xA;&#x9;var tQuitS1 : fsm::Transition init fsm::Transition.new&#xA;&#x9;tQuitS1.input := &quot;b&quot;&#xA;&#x9;tQuitS1.source := s1&#xA;&#x9;tQuitS1.output := &quot;a&quot;&#xA;&#x9;tQuitS1.target := s1&#xA;&#x9;result.initialState := s1&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KerMeta">
+        <details key="kdoc" value="/**&#xD;&#xA;&#x9; * Create a sample FSM&#xD;&#xA;&#x9; */"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FSM">
+    <eAnnotations source="KerMeta">
+      <details key="kdoc" value="/*********************************&#xD;&#xA; * SIMPLE STATE MACHINE METAMODEL&#xD;&#xA; *********************************/"/>
+    </eAnnotations>
+    <eOperations name="run">
+      <eAnnotations source="KerMeta">
+        <details key="Body" value="do&#xA;&#x9;if self.currentState.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;self.reset&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;self&#xA;&#x9;from var str : kermeta::standard::String init &quot;init&quot;&#xA;&#x9;until str.equals(&quot;quit&quot;)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;stdio.writeln(&quot;etat courrant : &quot;.plus(self.currentState.name))&#xA;&#x9;&#x9;&#x9;&#x9;str := stdio.read(&quot;entrez une chaine : &quot;)&#xA;&#x9;&#x9;&#x9;&#x9;if str.equals(&quot;quit&quot;) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stdio.writeln(&quot;&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stdio.writeln(&quot;quitting ...&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if str.equals(&quot;print&quot;) then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stdio.writeln(&quot;&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;self.serializer.printFSM(self)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stdio.writeln(str)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stdio.writeln(&quot;stepping...&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;stdio.writeln(&quot;chaine produite : &quot;.plus(self.currentState.step(str)))&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KerMeta.RaisedExceptions" references="//FSMException">
+        <details key="RaisedException" value="fsm::FSMException"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="reset">
+      <eAnnotations source="KerMeta">
+        <details key="Body" value="do&#xA;&#x9;self.currentState := self.initialState&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" ordered="false" upperBound="-1" eType="//State" containment="true" eOpposite="//State/owningFSM"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialState" lowerBound="1" eType="//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" eType="//State"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serializer" eType="//Main"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eOperations name="step" eType="//String">
+      <eAnnotations source="KerMeta">
+        <details key="Body" value="do&#xA;&#x9;var validTransitions : kermeta::standard::Collection&lt;fsm::Transition>&#xA;&#x9;validTransitions := self.outgoingTransition.~select{t | do&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;t.input.equals(c)&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;&#x9;if validTransitions.empty then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;raise fsm::NoTransition.new&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if validTransitions.size.isGreater(1) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;raise fsm::NonDeterminism.new&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;result := validTransitions.one.fire&#xA;end"/>
+      </eAnnotations>
+      <eAnnotations source="KerMeta.RaisedExceptions" references="//FSMException">
+        <details key="RaisedException" value="fsm::FSMException"/>
+      </eAnnotations>
+      <eParameters name="c" eType="//String"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningFSM" eType="//FSM" eOpposite="//FSM/ownedState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransition" ordered="false" upperBound="-1" eType="//Transition" containment="true" eOpposite="//Transition/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransition" ordered="false" upperBound="-1" eType="//Transition" eOpposite="//Transition/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eOperations name="fire" eType="//String">
+      <eAnnotations source="KerMeta">
+        <details key="Body" value="do&#xA;&#x9;self.source.owningFSM.currentState := self.target&#xA;&#x9;result := self.output&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//State" eOpposite="//State/outgoingTransition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//State" eOpposite="//State/incomingTransition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FSMException"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NonDeterminism" eSuperTypes="//FSMException"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NoTransition" eSuperTypes="//FSMException"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+</ecore:EPackage>
