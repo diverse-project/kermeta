@@ -1,4 +1,16 @@
-/* Implementation of Kermeta base type Object */
+/* $Id: Object.java,v 1.5 2005-11-08 15:54:32 dvojtise Exp $
+ * Project   : Kermeta interpreter
+ * File      : Object.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jul 7, 2005
+ * Authors       : 
+ *		Zoé Drey <zdrey@irisa.fr>
+ * Description : 
+ * 		Implementation of Kermeta base type Object
+ */
+
 
 package fr.irisa.triskell.kermeta.runtime.language;
 
@@ -12,7 +24,9 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
-
+/**
+ *  Implementation of Kermeta base type Object 
+ */
 public class Object {
 
 	// Implementation of method getMetaClass called as :
@@ -229,7 +243,11 @@ public class Object {
 	}
 	
 	public static java.lang.String getPropertyName(RuntimeObject property) {
-		return String.getValue((RuntimeObject)property.getProperties().get("name"));
+		RuntimeObject ro = (RuntimeObject)property.getProperties().get("name");
+		if (ro != null)
+			return String.getValue(ro);
+		else
+			return "";
 	}
 }
 /* END OF FILE */
