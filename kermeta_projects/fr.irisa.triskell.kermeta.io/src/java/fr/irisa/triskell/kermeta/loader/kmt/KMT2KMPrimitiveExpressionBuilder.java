@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.8 2005-10-21 13:23:58 dvojtise Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.9 2005-11-08 15:31:37 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -242,7 +242,8 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		newValue = newValue.replaceAll("\\\\b","\b");
 		newValue = newValue.replaceAll("\\\\r","\r");
 		newValue = newValue.replaceAll("\\\\f","\f");
-		newValue = newValue.replaceAll("\\\\",""); // finally replace the escape char by nothing, the following char must be itself
+		//	finally replace the escape char by a slash, 
+		newValue = newValue.replaceAll("\\\\\\\\","\\\\"); 
 		str.setFValue(newValue);
 		result = str;
 		return false;
