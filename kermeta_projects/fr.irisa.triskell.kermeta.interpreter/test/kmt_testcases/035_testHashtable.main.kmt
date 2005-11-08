@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 035_testHashtable.main.kmt,v 1.7 2005-09-27 15:47:49 dvojtise Exp $
+ * $Id: 035_testHashtable.main.kmt,v 1.8 2005-11-08 15:56:36 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testHashtable.kmt
@@ -31,7 +31,7 @@ class TestHashtable inherits kermeta::kunit::Test
 	attribute hashtable : kermeta::utils::Hashtable<Integer, String>
 	
 	// initialize things
-	operation setUp() : Void is do
+	method setUp() : Void is do
 		hashtable := kermeta::utils::Hashtable<Integer, String>.new
 		hashtable.put(1,"one")
 		hashtable.put(2,"two")
