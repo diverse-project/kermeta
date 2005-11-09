@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.10 2005-11-04 17:02:13 zdrey Exp $
+/* $Id: RunnerPlugin.java,v 1.11 2005-11-09 15:28:32 zdrey Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -11,21 +11,26 @@
 package fr.irisa.triskell.kermeta.runner;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
 
@@ -33,6 +38,7 @@ import org.osgi.framework.BundleContext;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.*;
 
@@ -55,6 +61,8 @@ public class RunnerPlugin extends AbstractUIPlugin
 	private static IConsole[] consoles;
 	
 	public static final String PLUGIN_ID="fr.irisa.triskell.kermeta.runner";
+	// FIXME : change the location of this variable
+	public static final String PLUGIN_EDITOR_ID="org.eclipse.ui.editors.text.texteditor";
 	
 	/**
 	 * The constructor.
@@ -273,7 +281,6 @@ public class RunnerPlugin extends AbstractUIPlugin
 	    return null;
 	}
 	
-	
 	static class DisplayErrorThread implements Runnable 
 	{
 	    Shell  mShell;
@@ -305,6 +312,51 @@ public class RunnerPlugin extends AbstractUIPlugin
 	{
 		return PLUGIN_ID;
 	}
+	
+	/**
+	 * Picked from Pydev :P
+	 * Dirty trials.
+	 */
+	public static IEditorInput createEditorInput(IPath path)
+	{
+		IEditorInput edInput;
+		IWorkspace w = ResourcesPlugin.getWorkspace();      
+		IFile file = w.getRoot().getFileForLocation(path);
+		if (file == null  || !file.exists()){
+			//it is probably an external file
+			File file2 = path.toFile();
+			edInput = createEditorInput(file2);
+		}else{
+			edInput = new FileEditorInput(file);
+		}
+		return edInput;
+	}
+	
+	
+    private static IEditorInput createEditorInput(File file) {
+        IFile[] workspaceFile= getWorkspaceFile(file);
+        if (workspaceFile != null && workspaceFile.length > 0)
+        	// todo : study org.eclipse.ui.part
+            return new FileEditorInput(workspaceFile[0]);
+        // return new PydevFileEditorInput(file);
+        return null;
+    }
+    
+    
+
+    /**
+     * We suppose for the moment that the file is available.
+     * We have to change that for next version.
+     * @param file
+     * @return
+     */
+    public static IFile[] getWorkspaceFile(File file) {
+        IWorkspace workspace= ResourcesPlugin.getWorkspace();
+        IPath location= Path.fromOSString(file.getAbsolutePath());
+        IFile[] files= workspace.getRoot().findFilesForLocation(location);
+        return files;
+    }
+    
 
     
 }
