@@ -35,10 +35,11 @@
       <import plugin="org.eclipse.ui.externaltools"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.ui.intro"/>
-	  <import plugin="fr.irisa.triskell.kermeta"/>
    <import plugin="org.eclipse.pde"/>
    <import plugin="org.eclipse.core.variables"/>
    <import plugin="org.eclipse.jdt.debug.ui"/>
+   <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
+   <import plugin="fr.irisa.triskell.kermeta"/>
    </requires>
       <extension
       
@@ -96,6 +97,17 @@
       <objectContribution
             objectClass="org.eclipse.core.resources.IProject"
             id="popIProject"/>
+      <objectContribution
+            adaptable="false"
+            id="fr.irisa.triskell.kermeta.runner.objectContribution1"
+            objectClass="org.eclipse.debug.core.model.IDebugElement">
+         <menu
+               id="fr.irisa.triskell.kermeta.runner.menu1"
+               label="Debug mode"
+               path="additions">
+            <separator name="fr.irisa.triskell.kermeta.runner.separator1"/>
+         </menu>
+      </objectContribution>
 
    </extension>
 
@@ -250,6 +262,33 @@
            id="fr.irisa.triskell.kermeta.runner.kermetanature"
            name="Kermeta Nature"
            point="org.eclipse.core.resources.natures">
+     </extension>
+     <extension
+           point="org.eclipse.debug.core.watchExpressionDelegates">
+        <watchExpressionDelegate
+              debugModel="fr.irisa.triskell.kermeta.runner.watchExpressionDelegate2"
+              delegateClass="fr.irisa.triskell.kermeta.runner.debug.model.KermetaWatchExpressionDelegate"/>
+     </extension>
+     <extension
+           point="org.eclipse.debug.ui.debugModelPresentations">
+        <debugModelPresentation
+              class="fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugModelPresentation"
+              id="fr.irisa.triskell.kermeta.runner.debug"/>
+     </extension>
+     <extension
+           point="org.eclipse.debug.core.breakpoints">
+        <breakpoint
+              class="fr.irisa.triskell.kermeta.runner.debug.KermetaBreakpoint"
+              id="kermetaBreakpoint"
+              markerType="fr.irisa.triskell.kermeta.runner.kermetaBreakpoint"
+              name="kermeta breakpoint"/>
+     </extension>
+     <extension
+           id="fr.irisa.triskell.kermeta.runner.kermetaBreakpoint"
+           name="kermetaBreakpoint"
+           point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.debug.core.lineBreakpointMarker"/>
+        <persistent value="true"/>
      </extension>
      <!-- This extension does not look useful for launchability -->
 <!--     <extension
