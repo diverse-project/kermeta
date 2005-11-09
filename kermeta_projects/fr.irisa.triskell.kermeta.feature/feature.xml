@@ -2,28 +2,28 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="0.0.16"
+      version="0.0.17"
       provider-name="IRISA/Triskell"
       image="images/kmt_32.gif">
 
    <install-handler/>
 
-   <description url="http://www.irisa.fr/triskell/softwares/kermeta/">
-      Kermeta is a meta-modeling language developped by the Triskell
+   <description url="http://www.kermeta.org/">
+      Kermeta is an ObjectOriented meta-modeling language developped by the Triskell
 team at IRISA.
    </description>
 
-   <copyright url="http://www.irisa.fr/triskell/softwares/kermeta/">
+   <copyright url="http://www.kermeta.org/">
       KerMeta is distributed under the terms of the EPL licence.
    </copyright>
 
-   <license url="http://www.irisa.fr/triskell/softwares/kermeta/">
+   <license url="http://www.kermeta.org/">
       KerMeta is distributed under the terms of the EPL licence.
    </license>
 
    <url>
-      <update label="Kermeta update site on Triskell" url="http://www.irisa.fr/triskell/softwares/kermeta/update"/>
-      <discovery label="Kermeta discovery site on Triskell" url="http://www.irisa.fr/triskell/softwares/kermeta/update"/>
+      <update label="Kermeta update site on Triskell" url="http://www.kermeta.org//update"/>
+      <discovery label="Kermeta discovery site on Triskell" url="http://www.kermeta.org//update"/>
    </url>
 
    <requires>
@@ -44,24 +44,24 @@ team at IRISA.
          id="fr.irisa.triskell.kermeta.runner"
          download-size="0"
          install-size="0"
-         version="0.0.16"/>
+         version="0.0.17"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.texteditor"
          download-size="0"
          install-size="0"
-         version="0.0.16"/>
+         version="0.0.17"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta"
          download-size="0"
          install-size="0"
-         version="0.0.16"/>
+         version="0.0.17"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.documentation"
          download-size="0"
          install-size="0"
-         version="0.0.5"/>
+         version="0.0.6"/>
 
 </feature>
