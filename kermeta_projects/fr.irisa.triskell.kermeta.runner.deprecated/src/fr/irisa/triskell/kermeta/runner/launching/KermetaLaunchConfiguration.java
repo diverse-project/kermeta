@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.16 2005-11-04 17:00:36 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.17 2005-11-09 15:32:43 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -56,15 +56,12 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
     protected static int instanceCount = 0;
     protected AbstractKermetaTarget target;
     
-    
     /**
      * Constructor
      */
     public KermetaLaunchConfiguration()
     {
         super();
-        if (instanceCount > 0) RunnerPlugin.pluginLog.error("I should be created only once : KermetaLaunchConfiguration");
-        instanceCount = instanceCount++;
     }
     
 	/**
@@ -87,24 +84,7 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	        String mode,
 	        ILaunch launch, IProgressMonitor monitor) throws CoreException {
 	    
-	    final ILaunchConfiguration fconfiguration = configuration;
-	    final String fmode = mode;
-	    // Get the configuration values : // Final so that we can pass them to thread
-        final String fileNameString = fconfiguration.getAttribute(KM_FILENAME, "");
-        final String classQualifiedNameString = fconfiguration.getAttribute(KM_CLASSQNAME, "");
-        final String operationString = fconfiguration.getAttribute(KM_OPERATIONNAME, "");
-        launch.setSourceLocator(new KermetaSourceLocator());
-	    // For remote call of the debugger
-        ArrayList commandList = new ArrayList();
-        // FIXME this is a obscure method not clear at all
-	    
-	    IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
-	    IFile selectedFile = null;
-	    if (iresource instanceof IFile)
-	        selectedFile = (IFile) iresource;
-	    else { throw new Error("The selected Kermeta to execute is not recognized as to be a file.");}
-	    commandList.add(selectedFile.getLocation().toOSString());
-	    int requestPort = -1; int eventPort = -1;
+	    launch.setSourceLocator(new KermetaSourceLocator());
 	    
 	    monitor.beginTask("Kermeta is interpreting",IProgressMonitor.UNKNOWN);
 	    try
@@ -112,26 +92,21 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	        //  If the mode choosen is Run a Kermeta run target is created
 	        if (mode.equals(ILaunchManager.RUN_MODE)) 
 	        {   
-	            KermetaRunTarget runtarget = new KermetaRunTarget(launch);
+	            target = new KermetaRunTarget(launch);
 	            // Set the run target with current launch
-	            // Add it as a debug target
-	            launch.addDebugTarget(runtarget);
-	            // Run the launcher with configurationParam, launchParam, currentMode
-	            //runKermeta(fileNameString, classQualifiedNameString, operationString);
-	            /*KermetaLauncher klauncher = KermetaLauncher.getDefault();
-	            klauncher.launch(fileNameString, classQualifiedNameString, operationString);*/
-	            // Or : 
-	            //runtarget.start();
-                runKermeta(fileNameString, classQualifiedNameString, operationString, false);
+	            // Add it as a debug target --> not really useful?
+	            launch.addDebugTarget(target);
+	            // Start interpreter
+	            target.start();
 	            // Terminate the run target
-	            runtarget.terminate();
-	            launch.removeDebugTarget(runtarget);
+	            target.terminate();
+	            launch.removeDebugTarget(target);
 	            DebugPlugin.getDefault().getLaunchManager().removeLaunch(launch);
-	    		
 	        }
 	        else
 	        {
 	            target = new KermetaDebugTarget(launch);
+	            // start the debug (target is added to launch through this method call)
 	            target.start();
 
 	    		if (target.isTerminated())
@@ -152,93 +127,12 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	    RunnerPlugin.pluginLog.info("Total memory after launch terminated : "+ Runtime.getRuntime().freeMemory());
 	}
 
-    /**
-     * This method run the Kermeta interpreter, according to the data given by
-     * the user through the launch configuration window.
-     * @param isDebugMode if debug mode is set to false, then the normal 
-     * launch method is used for kermeta interpreter, other wise launch_debug method
-     * is used (see DebugInterpreter class in fr.irisa.triskell.kermeta.interpreter)
-     * @param configuration
-     * @param mode
-     */
-    public static ExpressionInterpreter runKermeta(String fileNameString, String classQualifiedNameString, String operationString, boolean isDebugMode)
-    {
-        
-        IFile selectedFile = null;
-	    IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
-	    if (iresource instanceof IFile)
-	        selectedFile = (IFile) iresource;
-	    else
-	    {  // TODO : throw an exception!
-	    }
-	    // Create a KermetaConsole where the interpreter will print the errors.
-        KermetaConsole console = KermetaConsole.getSingletonConsole();
-        KermetaInterpreter interpreter = null;
-        if ( ! console.isInitialized())
-        {            
-        	// Add a MessageConsole
-        	console.addConsole();
-        }
-        else
-        {
-        	System.out.println("reusing already initilized KermetaConsole");
-            console.reset();
-        }
-        try
-        {
-        	String uri;
-        	uri = "platform:/resource/" + selectedFile.getFullPath().toString();
-
-            //  be sure this value is correctly set        
-            KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
-            
-            interpreter = new KermetaInterpreter(uri);
-            
-            interpreter.setEntryPoint(classQualifiedNameString, operationString);
-            interpreter.setKStream(console);     
-            if (isDebugMode == false)
-            {
-                interpreter.launch();
-    	        interpreter.setKStream(null);
-    	        interpreter.freeJavaMemory();
-    	        KermetaUnitFactory.resetDefaultLoader();
-    	        return null;
-            }
-            else interpreter.launch_debug();
-            
-		    
-        }
-        catch (KermetaRaisedException kerror)
-        {
-            console.print(kerror.getMessage());
-            console.print("\n"+kerror.toString());
-        }
-        catch (KermetaInterpreterError ierror)
-        {
-            console.print("Kermeta interpreter could not be launched :\n");
-            console.print(ierror.getMessage());
-        }
-        catch (Throwable e)
-        {
-            console.print("\nKermetaInterpreter internal error \n" +
-            		"-------------------------------------------\n");
-            console.print("Reported java error : "+e);
-            console.print(e.getMessage());
-            e.printStackTrace();
-        }
-        console.print("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-        // this console is not used any more
-        //console.removeConsoleListener();
-        return interpreter.getMemory().getCurrentInterpreter();
-        
-    }
     
 	/**
 	 * Convenience method to get the launch manager.
-	 * 
 	 * @return the launch manager
 	 */
-	protected ILaunchManager getLaunchManager()
+	public ILaunchManager getLaunchManager()
 	{
 		return DebugPlugin.getDefault().getLaunchManager();
 	}
