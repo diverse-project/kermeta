@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.40 2005-10-18 13:40:08 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.41 2005-11-09 16:00:33 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -1105,6 +1105,9 @@ public abstract class KermetaUnit {
     public static void unloadStdLib() {
        std_lib = null;
     }
+    
+    /** @return the trace handler */
+    public Tracer getTracer() { return tracer; }
     
 
     
