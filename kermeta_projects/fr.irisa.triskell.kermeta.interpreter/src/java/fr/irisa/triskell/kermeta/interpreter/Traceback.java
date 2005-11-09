@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.4 2005-09-06 10:48:05 zdrey Exp $
+/* $Id: Traceback.java,v 1.5 2005-11-09 15:40:11 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Traceback.java
  * License   : EPL
@@ -81,6 +81,10 @@ public class Traceback {
      * in a stack trace, the first element of the stack is the one given by the exception,and
      * the other ones are the elements of the callframe stack (which is, for example, 
      * composed of the Operation linked to the call frame, in the case of an OperationCallFrame)
+     * TODO : with java 5, we could modify this to have the context into different formats according
+     * a type as a complementary argument in this method.?
+     * public <ContextType> getContextForFObject(CallFrame fram, FObject fobject, <ContextType> type)
+     * With type that could be Text/AList to parse/...
      */
     public String getContextForFObject(CallFrame frame, FObject fobject)
     {
@@ -92,12 +96,7 @@ public class Traceback {
         if (u!=null) 
         {
             Object fo_source = u.getNodeByModelElement(fobject);
-            if (fo_source instanceof KermetaASTNode)
-            {
-                info += "-> " + getTextInfoForKMTASTNode(fobject, (KermetaASTNode)fo_source, u, frame) + "\n";
-            }
-            else if (fo_source instanceof FObject) // does the code come from a "compiled" repr.? // and does a trace exist for the compiled representation?
-                info += "pas de trace, pas d'chocolat\n";
+            info += getTextInfoForNode(fobject, fo_source, u, frame);
         }
         else if (frame != null) // it's in a KMUnit (which does not store a trace)
         {
@@ -107,34 +106,50 @@ public class Traceback {
     }
     
     /**
+     * Return the informations linked to FObject in the execution frame as
+     * an array of string.
+     * Same as getContextForF0bject
+     * @param frame the current execution frame from which we make the traceback
+     * @param fobject the "location" of the traceback (indirect cause of the raised exception)
+     * @return an array with (since we call getInforForNode):
+     * 		info[0] =  the URI of the file
+     * 		info[1] = the line number in that file
+     * 		info[2] = the name of the call frame (as a String)
+     * 		info[3] = the code chunk for the object
+     */
+    public String[] getContextForFObjectAsArray(CallFrame frame, FObject fobject)
+    {
+        String[] infos = new String[4];
+        Object fo_source = null;
+        KermetaUnit kunit = interpreter.getMemory().getUnit();
+        System.out.println(" MAIN UNIT : " + kunit + "; FOBJECT : " + fobject);
+        // TODO : instead of this patch unit finder, use the Tracer tools
+        // in order to get directly the URI of an elemeent
+        KermetaUnit u = kunit.findUnitForModelElement(fobject);
+        if (u!=null)
+        	fo_source = u.getNodeByModelElement(fobject);
+        
+        infos = getInfoForNode(fobject, fo_source, u, frame);
+        return infos;
+    }
+    
+    /**
      * Get the text info for KermetaASTNode. We need the KermetaUnit that processed it, in
      * order to get the source file Uri.
      * @param node the Kermeta Node of the Object to print
      * @param unit the KemretaUnit that processed the node (in fact, a KMTUnit)
      * @return file <name of file>, line line_number, method caller
      */
-    protected String getTextInfoForKMTASTNode(FObject fobject, KermetaASTNode node, KermetaUnit unit, CallFrame frame)
+    private String getTextInfoForKMTASTNode(FObject fobject, KermetaASTNode node, KermetaUnit unit, CallFrame frame)
     {
-        String info = "";
-        info = "file '" + unit.getUri().substring(unit.getUri().lastIndexOf("/")+1) + "'";
-        info += ", line "+ getKMTLineNumber(node, unit.getUri());
+    	String[] infos = getInfoForKMTASTNodeAsArray(fobject, node, unit, frame);
+        String info = "file '" + infos[0] + "'" + ", line "+ infos[1];
         if (frame != null)
-            info += ", in '" + frame.toString() + "'";
-        
-        info += " ( " + getCodeForFObject(fobject) + " )";
+            info += ", in '" + infos[2] + "'";
+        info += " ( " + infos[3] + " )";
         return info;
     }
     
-    protected String getCodeForFObject(FObject fobject) 
-    {
-        KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-        String code = "";
-        code = (String)pp.accept(fobject);
-        // Print only the beginning of the string
-        int first_nl = code.indexOf('\n');
-        code = (first_nl>0)?(code.substring(0, first_nl) + " (...)"):code ;
-        return code;
-    }
     /**
      * !!!We need to define precisely the format of the Text printed before writing this method!!!! 
      * @param unit
@@ -142,10 +157,83 @@ public class Traceback {
      * @param frame
      * @return
      */
-    protected String getTextInfoForKMNode(KermetaUnit unit, FObject node, CallFrame frame)
+    private String getTextInfoForKMNode(KermetaUnit unit, FObject node, CallFrame frame) {
+    	return "pas de trace, pas d'chocolat\n";
+    }
+    
+    /**
+     * Return the appropriate trace textual information according to the type of
+     * the given source_object.
+     * @param fobject the object to traceback  
+     * @param source_object the source_object (text, graphic, or model element) 
+     * 		  from which the fobject (as model element) is generated
+     *        (got from trace hashtables in KermetaUnits with fobject as key)
+     * @param unit
+     * @param frame
+     * @return information according to the type of the source_object
+     */
+    public String getTextInfoForNode(FObject fobject, Object source_object, KermetaUnit unit, CallFrame frame)
     {
-        String info = "";
-        return info;
+    	String info = "";
+    	if (source_object instanceof KermetaASTNode)
+    		info += "-> " + getTextInfoForKMTASTNode(fobject, (KermetaASTNode)source_object, unit, frame) + "\n";
+    	else if (source_object instanceof FObject) // does the code come from a "compiled" repr.? // and does a trace exist for the compiled representation?
+    		info += getTextInfoForKMNode(unit, (FObject)source_object, frame);
+    	return info;
+    }
+    
+    public String[] getInfoForNode(FObject fobject, Object source_object, KermetaUnit unit, CallFrame frame)
+    {
+    	String[] infos = new String[4];
+    	if (source_object instanceof KermetaASTNode)
+    		infos = getInfoForKMTASTNodeAsArray(fobject, (KermetaASTNode)source_object, unit, frame);
+    	else if (source_object instanceof FObject)
+    		infos = getInfoForKMNodeAsArray(fobject, (FObject)source_object, unit, frame);
+    		// process it
+    		// infos = getInfoForKMNodeAsArray(fobject, (KermetaASTNode)source_object, unit, frame);
+    	return infos;
+    }
+    
+    /**
+     * @param fobject the Fobject concerned by the traceback
+     * @param node the ASTNode corresponding to this FObject
+     * @param unit the unit where this FObject was found
+     * @param frame the frame in which this FObject was "used"
+     * @return an array with :
+     * 		info[0] =  the URI of the file
+     * 		info[1] = the line number in that file
+     * 		info[2] = the name of the call frame (as a String)
+     * 		info[3] = the code chunk for the object
+     * We made this method so that we are not obliged to regexp parse the textual information
+     * when we need its such computed inforamtion chunks.
+     */
+    private String[] getInfoForKMTASTNodeAsArray(FObject fobject, KermetaASTNode node, KermetaUnit unit, CallFrame frame)
+    {
+    	String[] infos = new String[4];
+    	if (unit != null)
+    	{
+    		infos[0] = unit.getUri().substring(unit.getUri().lastIndexOf("/")+1);
+    		infos[1] = getKMTLineNumber(node, unit.getUri());
+    	}
+    	else
+    	{
+    		infos[0] = infos[1] = "unknown";
+    	}
+        infos[2] = (frame!=null)?frame.toString():":";
+        infos[3] = getCodeForFObject(fobject);
+        return infos;
+    }
+    
+    private String[] getInfoForKMNodeAsArray(FObject fobject, Object source_object, KermetaUnit unit, CallFrame frame)
+    {
+    	String[] infos = new String[4];
+    	if (unit != null)
+    		infos[0] = unit.getUri().substring(unit.getUri().lastIndexOf("/")+1);
+    	else infos[0] = "unknown";
+    	infos[1] = "unknown";
+		infos[2] = (frame!=null)?frame.toString():":";
+        infos[3] = getCodeForFObject(fobject);
+    	return null;
     }
     
     /**
@@ -176,5 +264,18 @@ public class Traceback {
         return line;
     }
     
+
+    protected String getCodeForFObject(FObject fobject) 
+    {
+        KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
+        String code = "";
+        code = (String)pp.accept(fobject);
+        // Print only the beginning of the string
+        int first_nl = code.indexOf('\n');
+        code = (first_nl>0)?(code.substring(0, first_nl) + " (...)"):code ;
+        return code;
+    }
     
+
+
 }
