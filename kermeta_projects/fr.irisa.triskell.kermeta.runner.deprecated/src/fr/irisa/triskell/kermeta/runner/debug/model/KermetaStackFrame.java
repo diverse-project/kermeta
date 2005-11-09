@@ -1,4 +1,4 @@
-/* $Id: KermetaStackFrame.java,v 1.1 2005-11-04 17:01:08 zdrey Exp $
+/* $Id: KermetaStackFrame.java,v 1.2 2005-11-09 15:31:35 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaStackFrame.java
  * License   : GPL
@@ -9,6 +9,7 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IDebugTarget;
@@ -17,37 +18,58 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
 
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.traceability.helper.Tracer;
+
 
 /**
- * This is the specific stack frame for Kermeta debugging mode.
+ * Eclipse doc : a stack frame represents an execution context in a suspended thread.
+ * A stack frame contains variables representing visible locals and arguments at
+ * the current execution location.
  * 
+ * <em>GUI<->Interpreter : KermetaStackFrame is linked to CallFrame</em>
  */
 public class KermetaStackFrame implements IStackFrame {
-
+	
+	/*
+	 * custom properties 
+	 */
+	
+	/** The path of the file where the stackframe of our debug state is located */
+	protected IPath path;
+	
+	/*
+	 * mandatory properties
+	 */
 	/** The thread being debugged */
 	public KermetaDebugThread thread;
+	/** The position of the debug in the file that we debug */
+	protected int line;
+	protected String name; // name of the stack frame 
+	protected IVariable[] variables;
+	
     /**
      * 
+     * @param p_thread the thread to which this frame belongs
+     * @param p_line the position in the file of the debug state
      */
-    public KermetaStackFrame(KermetaDebugThread pthread) {
-        thread = pthread; 
+    public KermetaStackFrame(KermetaDebugThread p_thread, int p_line) {
+        thread = p_thread;
+        line   = p_line;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.model.IStackFrame#getThread()
      */
     public IThread getThread() {
-    	System.out.println("In which thread is this frame contained?");
         return thread;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.model.IStackFrame#getVariables()
      */
     public IVariable[] getVariables() throws DebugException {
-    	System.out.println("Get variables?");
-        // TODO Auto-generated method stub
-        return null;
+        return variables;
     }
 
     /* (non-Javadoc)
@@ -58,36 +80,25 @@ public class KermetaStackFrame implements IStackFrame {
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IStackFrame#getLineNumber()
-     */
+    /** @see org.eclipse.debug.core.model.IStackFrame#getLineNumber() */
     public int getLineNumber() throws DebugException {
-        // TODO Auto-generated method stub
-        return 0;
+    	System.err.println("LINE : "+ line);
+    	return 5; //line;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IStackFrame#getCharStart()
-     */
+    /** @see org.eclipse.debug.core.model.IStackFrame#getCharStart() */
     public int getCharStart() throws DebugException {
-        // TODO Auto-generated method stub
         return -1;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IStackFrame#getCharEnd()
-     */
+    /** @see org.eclipse.debug.core.model.IStackFrame#getCharEnd() */
     public int getCharEnd() throws DebugException {
-        // TODO Auto-generated method stub
         return -1;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IStackFrame#getName()
-     */
+    /** @see org.eclipse.debug.core.model.IStackFrame#getName() */
     public String getName() throws DebugException {
-        // TODO Auto-generated method stub
-        return "titi plop toto";
+        return name;
     }
 
     /* (non-Javadoc)
@@ -128,22 +139,19 @@ public class KermetaStackFrame implements IStackFrame {
     }
 
     /** @see org.eclipse.debug.core.model.IStep#canStepInto() */
-    public boolean canStepInto() {
-    	System.out.println("step into (KermetaStackFrame)");        
+    public boolean canStepInto() {        
         return thread.canStepInto();
     }
 
     /** @see org.eclipse.debug.core.model.IStep#canStepOver() */
-    public boolean canStepOver() {
-    	System.out.println("step over (KermetaStackFrame)");        
+    public boolean canStepOver() {        
         return thread.canStepOver();
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.model.IStep#canStepReturn()
      */
-    public boolean canStepReturn() {
-    	System.out.println("step return (KermetaStackFrame)");        
+    public boolean canStepReturn() {        
         return thread.canStepReturn();
     }
 
@@ -162,7 +170,6 @@ public class KermetaStackFrame implements IStackFrame {
     public void stepInto() throws DebugException {
     	System.out.println("le step into qui est appelé ben il est dans KermetaStackFrame");
     	thread.stepInto();
-
     }
 
     /* (non-Javadoc)
@@ -219,25 +226,52 @@ public class KermetaStackFrame implements IStackFrame {
      */
     public boolean canTerminate() { return thread.canTerminate(); }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ITerminate#isTerminated()
-     */
+    /** @see org.eclipse.debug.core.model.ITerminate#isTerminated() */
     public boolean isTerminated() { return thread.isTerminated(); }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ITerminate#terminate()
-     */
+    /** @see org.eclipse.debug.core.model.ITerminate#terminate() */
     public void terminate() throws DebugException { thread.terminate(); }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
-     */
+    /** @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class) */
     public Object getAdapter(Class adapter) {
-    	System.out.println("get adapter (KermetaStackFrame)?:" + adapter);
-		if( adapter == this.getClass() )
+    	if( adapter == this.getClass() )
 			return this;
 		else
 			return null;
     }
+    
+    
+    /*
+     * 
+     *  G E T T E R S   A N D   S E T T E R S
+     * 
+     * 
+     */
+    
+    public void setPath(IPath p_path)  { path = p_path; }
+    public void setName(String p_name) {name = p_name; }
+
+    // "Custom" getter
+	public IPath getPath() { 
+		//return path;
+		return ((KermetaDebugTarget)getDebugTarget()).getIPathFromString(
+			((KermetaDebugTarget)getDebugTarget()).getStartFile()
+		);
+		
+	}
+	
+	protected int findLineNumberFromUnit()
+	{
+		KermetaInterpreter kinterpreter = ((KermetaDebugTarget)getDebugTarget()).getKermetaInterpreter();
+		Tracer tracer = kinterpreter.getUnit().getTracer();
+		if (tracer != null)
+		{
+			// I should work with the tracer.
+		}
+		
+		return -1;
+	}
+	
+	
 
 }

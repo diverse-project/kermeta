@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.1 2005-11-04 17:01:08 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.2 2005-11-09 15:31:34 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -8,6 +8,10 @@
  * Authors       : zdrey
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Stack;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Platform;
@@ -21,12 +25,17 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IStep;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.debug.internal.ui.actions.StepActionDelegate;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.tasklist.ITaskListResourceAdapter;
 
+import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
+import fr.irisa.triskell.kermeta.interpreter.Traceback;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
+import fr.irisa.triskell.kermeta.runner.debug.util.KermetaDebugWrapper;
+import fr.irisa.triskell.kermeta.structure.FObject;
 
 /**
  * A thread in the eclipse debug meaning... This class delegates all its
@@ -74,7 +83,8 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	 * @see org.eclipse.debug.core.model.IThread#hasStackFrames()
 	 */
 	public boolean hasStackFrames() throws DebugException {
-		System.out.println("------------------->  Has stack frames?");
+		if (getStackFrames() != null && isSuspended()) 
+			System.out.println("------------------->  Has stack frames :)");
 		return (getStackFrames() != null && isSuspended());
 	}
 
@@ -84,9 +94,12 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	}
 
 	/** @see org.eclipse.debug.core.model.IThread#getTopStackFrame() */
+	// This method is called when we suspend.
 	public IStackFrame getTopStackFrame() throws DebugException {
 		System.out.println("Call to getTopStackFrame! : " + getStackFrames()[0]);
-		return getStackFrames()[0];
+		// Debug framework does not want that this method return null.
+		// I have not understood yet why.
+		return stackFrames == null ? null : stackFrames[0];
 	}
 
 	/** @see org.eclipse.debug.core.model.IThread#getName() */
@@ -119,6 +132,11 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 		return target.getLaunch();
 	}
 
+	/** @see org.eclipse.debug.core.model.ISuspendResume#isSuspended() */
+	public boolean isSuspended() {
+		return isSuspended;
+	}
+
 	/** @see org.eclipse.debug.core.model.ISuspendResume#canResume() */
 	public boolean canResume() {
 		return isSuspended;
@@ -127,33 +145,6 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	/** @see org.eclipse.debug.core.model.ISuspendResume#canSuspend() */
 	public boolean canSuspend() {
 		return (!isSuspended);
-	}
-
-	/** @see org.eclipse.debug.core.model.ISuspendResume#isSuspended() */
-	public boolean isSuspended() {
-		return isSuspended;
-	}
-
-	/** @see org.eclipse.debug.core.model.ISuspendResume#resume() */
-	public void resume() throws DebugException {
-		setSuspended(false);
-		// Pydev implemented the command pattern to post commands that are
-		// then posted to the writer thread through a commandQueue that is 
-		// then listened by the server who
-		//AbstractRemoteDebugger d = target.getDebugger();
-		//d.postCommand(new ThreadRunCommand(d, id));
-		// then processes the command.
-		// target.getDebugger() <-
-		target.getKermetaRemotePort().sendKermetaDebugCommand("resume");
-	}
-
-	/** @see org.eclipse.debug.core.model.ISuspendResume#suspend() */
-	public synchronized void suspend() throws DebugException {
-		System.out.println("kermeta debugger thread : suspending\n");
-		setSuspended(true);
-		System.err.println("stack : "+ stackFrames.length);
-		target.getKermetaRemotePort().sendKermetaDebugCommand("suspend");
-		System.err.println("toto est dans l'eau");
 	}
 
 	/** @see org.eclipse.debug.core.model.IStep#canStepInto() */
@@ -182,13 +173,56 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	 * @param suspend
 	 */
 	public void setSuspended(boolean suspend)
-	{
-		KermetaStackFrame[] frames = new KermetaStackFrame[1];
-		frames[0] = new KermetaStackFrame(this);
-		stackFrames = frames;
+	{	
+		// FIXME : for now this static method create frames each time setSuspended is
+		// called! in next version, change that!!
+		// Pydev does that in the processSuspendCommand method.
+		if (((KermetaDebugTarget)getDebugTarget()).getDebugInterpreter()!=null)
+		{
+			System.out.println("Interpreter exists!");
+			stackFrames = KermetaDebugWrapper.findStackFramesFromCallFrames(
+				(KermetaDebugTarget)getDebugTarget(), this);
+			System.out.println("Stack frames : " + stackFrames.length);
+			// Debug framework does not want that stackFrames is null...
+			if (stackFrames == null || stackFrames.length == 0)
+			{
+				stackFrames = new KermetaStackFrame[1];
+				stackFrames[0] = new KermetaStackFrame(this, 1);
+			}
+		}
+		else
+		{
+			System.out.println("No interpreter yet!" );
+			stackFrames = new KermetaStackFrame[1];
+			stackFrames[0] = new KermetaStackFrame(this, 1);
+			((KermetaStackFrame)stackFrames[0]).setName("pas de nom");
+		}
 		isSuspended = suspend;
 	}
 
+
+
+	/** @see org.eclipse.debug.core.model.ISuspendResume#resume() */
+	public void resume() throws DebugException {
+		setSuspended(false);
+		// Pydev implemented the command pattern to post commands that are
+		// then posted to the writer thread through a commandQueue that is 
+		// then listened by the server who
+		//AbstractRemoteDebugger d = target.getDebugger();
+		//d.postCommand(new ThreadRunCommand(d, id));
+		// then processes the command.
+		// target.getDebugger() <-
+		target.getKermetaRemotePort().sendKermetaDebugCommand("resume");
+	}
+
+	/** @see org.eclipse.debug.core.model.ISuspendResume#suspend() */
+	public synchronized void suspend() throws DebugException {
+		System.out.println("kermeta debugger thread : suspending\n");
+		setSuspended(true);
+		System.err.println("stack : "+ stackFrames.length);
+		target.getKermetaRemotePort().sendKermetaDebugCommand("suspend");
+	}
+	
 	/** @see org.eclipse.debug.core.model.IStep#stepInto() */
 	public void stepInto() throws DebugException {
 		target.setState(KermetaDebugTarget.stateRunning);
@@ -221,4 +255,5 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	public void setBreakpoints(String something) {
 
 	}
+
 }

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugModelPresentation.java,v 1.1 2005-11-04 17:01:08 zdrey Exp $
+/* $Id: KermetaDebugModelPresentation.java,v 1.2 2005-11-09 15:31:34 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugModelPresentation.java
  * License   : EPL
@@ -9,12 +9,24 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
+import java.util.Map;
+
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
+import org.eclipse.debug.core.model.IWatchExpression;
 import org.eclipse.debug.ui.IDebugModelPresentation;
 import org.eclipse.debug.ui.IValueDetailListener;
+import org.eclipse.jface.util.ListenerList;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorInput;
+
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
+import fr.irisa.triskell.kermeta.runner.launching.KermetaSourceLocator;
+import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 /**
  * 
@@ -23,11 +35,13 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
 
 	static public String KERMETA_DEBUG_MODEL_ID = "fr.irisa.triskell.kermeta.runner.debug";
 	
+	protected ListenerList listeners= new ListenerList();		
+	
 	public KermetaDebugModelPresentation()
 	{
 		System.err.println("Kermeta Debug Model Presentation");
 	}
-    /* (non-Javadoc)
+    /** (non-Javadoc)
      * @see org.eclipse.debug.ui.IDebugModelPresentation#setAttribute(java.lang.String, java.lang.Object)
      */
     public void setAttribute(String attribute, Object value) {
@@ -44,12 +58,42 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
         return null;
     }
 
-    /* (non-Javadoc)
+    /**
+     * Return the text that will be displayed in the Eclipse debug GUI.
+     * If null by default, then the getName() method will be called instead on the
+     * given <code>element</code>.
      * @see org.eclipse.jface.viewers.ILabelProvider#getText(java.lang.Object)
      */
     public String getText(Object element) {
-        // TODO Auto-generated method stub
-        return "Les bidochons sont revenus";
+    	if (element instanceof KermetaDebugTarget 
+				|| element instanceof KermetaStackFrame 	
+				|| element instanceof KermetaDebugThread
+				|| element instanceof KermetaVariable) {
+			return null;	// defaults work 
+		} 
+    	
+    	else if (element instanceof KermetaBreakpoint) {
+			IMarker marker = ((KermetaBreakpoint)element).getMarker();
+			// Do something
+		
+		} 
+    	
+    	else if (element instanceof IWatchExpression) {
+			try {
+				IWatchExpression watch_expression = (IWatchExpression)element;
+				IValue value = watch_expression.getValue();
+				if (value != null) {
+					return "\"" + watch_expression.getExpressionText() + "\"= " + 
+						value.getValueString();
+				}else{
+					return null;
+				}
+			}catch( DebugException e ){
+				return null;
+			}
+		}
+    	// TODO : (to check) is there a debug element that is not processed here?
+		return null;
     }
 
     /* (non-Javadoc)
@@ -69,13 +113,12 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
         return null;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.ui.ISourcePresentation#getEditorId(org.eclipse.ui.IEditorInput, java.lang.Object)
      */
     public String getEditorId(IEditorInput input, Object element) {
     	System.out.println("KermetaDebugModelPresentation : Call of getEditorId method");
-        // TODO Auto-generated method stub
-        return null;
+        return RunnerPlugin.PLUGIN_EDITOR_ID;
     }
 
     /* (non-Javadoc)
@@ -84,7 +127,7 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
     public void addListener(ILabelProviderListener listener) {
         // TODO Auto-generated method stub
     	System.err.println("I added a listener in KermetaDebugModelPresentation.");
-
+    	listeners.add(listener);
     }
 
     /* (non-Javadoc)
@@ -109,6 +152,7 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
     public void removeListener(ILabelProviderListener listener) {
         // TODO Auto-generated method stub
     	System.err.println("I removed a KermetaDebugModelPresentation.");
+    	listeners.remove(listener);
     }
 
 }

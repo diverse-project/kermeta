@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.1 2005-11-04 17:01:08 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.2 2005-11-09 15:31:34 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -33,6 +33,7 @@ import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IValue;
 
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaRemotePort;
@@ -72,8 +73,8 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
         target = this;
         this.name = "Kermeta Debug Target";
         // Create a thread by default
-        this.threads = new KermetaDebugThread[1];
-        threads[0] = new KermetaDebugThread(this);
+   /*     this.threads = new KermetaDebugThread[1];
+        threads[0] = new KermetaDebugThread(this);*/
         // Do not set to stateDisconnected
         setState(stateRunning);
         getLaunch().addDebugTarget(this);
@@ -127,23 +128,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
      */
     public IValue getVariableValue(KermetaVariable variable) throws DebugException
     {
-    /*    synchronized (requestSocket)
-        {
-            requestWriter.println("var "
-            + variable.getStackFrame().getModelIdentifier()
-            + " " + variable.getName());
-            requestWriter.flush();
-            try {
-                String value = requestReader.readLine();
-                return new KermetaValue(this, value);
-            }
-            catch (IOException e)
-            {
-                System.err.println("IO exception occured in KermetaDebugTarget.getVariableValue : "+ e);
-                abort(MessageFormat.format("Unable to retrieve value for variable {0}",
-                      new String[]{variable.getName()}), e);
-            }
-        };*/
         return null;
     }
 
@@ -258,16 +242,14 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
      */
     public int connectDebugger(boolean timeout) throws IOException
     {
-        // Try to connect to the debug port
-//    	 Test this ?  if( debugPort == null ) 
+        // Try to connect to the debug port 
         debugPort = new KermetaRemotePort();
         // Start the connection
         debugPort.startConnect();
-        System.err.println("Connected to debug port!");
+        System.out.println("Connected to debug port!");
         
         // Now we can start the kermeta process on the debug port :
-
-        //      Create the client socket and the thread
+        // Create the client socket and the thread
         startKermetaProcess(debugPort);
         
         // Wait for the connection to be done
@@ -278,12 +260,11 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
         // If connection failed, return the error number
         if (  res != KermetaRemotePort.waitOK)
         {
-        	System.err.println("CONNECTION FAILED!!!!!!!");
-            return res;
+        	return res;
         }
         else
         {
-        	System.err.println("CONNECTION SUCCEEDED!!!!!!!!!!");
+        	System.err.println("  Connection succeeded ");
         }
         
         setState(stateRunning);
@@ -292,13 +273,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
         threads = new KermetaDebugThread[1];
         threads[0] = new KermetaDebugThread(this);
         fireCreationEvent(threads[0]);
-	/*	for (int i =0; i< threads.length; i++){
-			System.err.println("J'ai créé des threads");
-
-			threads[i].fireCreationEvent();
-			debugger.fireChangeEvent(this);
-			
-        }*/
         
         return (KermetaRemotePort.waitOK);
     }
@@ -340,7 +314,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
      * @see org.eclipse.debug.core.model.IDebugTarget#getThreads()
      */
     public IThread[] getThreads() throws DebugException {
-    	System.err.println("GET THREADS : " + threads);
+    	// Should not be null in fact
     	if (threads==null || threads.length==0)
     	{
     		threads = new KermetaDebugThread[1];
@@ -348,41 +322,18 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     		// Firing should be done via a command pattern which would handle this
     		// properly and homogenely
     		fireCreationEvent(threads[0]);
-    		
     	}
     	return threads;
     }
-    
-    
-    
-    /**
-     * This method is called by the graphical interface (specifically, in the
-     * "Debug" TreeView of the debug mode interface).
-     * 
-     * @return true and a small arrow in front of the debug target ui-node if 
-     * this debug target has threads, false otherwise.
-     * @note client does not have to call it.
-     * @see org.eclipse.debug.core.model.IDebugTarget#hasThreads()
-     */
-/*    public boolean hasThreads() throws DebugException {
-        System.err.println("HAS THREAD METHOD CALL");
-        if (getThreads()!=null && getThreads().length>0)
-        	System.out.println("Hourra");
-        else
-        	System.out.println("Harrou");
-        return (getThreads() != null && getThreads().length >0);
-    }*/
     
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.runner.launching.AbstractKermetaTarget#getProcess()
 	 */
 	public IProcess getProcess() {
-		System.err.println("getProcess in (KermetaDebugTarget)");
+		//System.err.println("getProcess in (KermetaDebugTarget) : " + kermeta_process.getDebugInterpreter());
 		return kermeta_process;
 	}
 
-	public ILaunch getLaunch() { return launch; }
-	
 	/**
 	 * Initialize event requests and state from the underlying VM.
 	 * This method is synchronized to ensure that we do not start
@@ -393,8 +344,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 		System.out.println("\nInitialize method creates an event!\n");
 		initializeBreakpoints();
 		setState(stateRunning);
-		fireCreationEvent(this);
-		fireCreationEvent(threads[0]);
 	}
 	
 	/**
@@ -437,7 +386,12 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	 * DebugInterpreter instance (since it is launched in a simple java thread
 	 * that we can access such). 
 	 * If DebugInterpreter was run outside -- i.e 
+	 * 
+	 * Pydev delegates the command to specific methods. It what we should also do
+	 * processThreadRun (handle the stepxxx)/processThreadSuspend
 	 * TODO : a real command implementation?
+	 * argument "String cmd" would become "AbstractDebugCommand cmd"
+	 * @note We have only one thread for our debugger.
 	 * @pattern "pseudo-command"
 	 * @param cmd
 	 */
@@ -447,11 +401,20 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 		{
 			if ( cmd.equals(KermetaDebugElement.STEP_INTO) )
 			{ 	System.err.println("step into command!");
-				getDebugInterpreter().stepInto();
+				// getDebugInterpreter().stepInto();
 			}
 			else if ( cmd.equals(KermetaDebugElement.STEP_OVER) )
-			{	System.err.println("step over command!");
-				//getDebugInterpreter().stepOver();
+			{	
+				System.err.println("step over command!");
+				KermetaDebugThread t = (KermetaDebugThread)threads[0];
+				if (t != null)
+				{
+					DebugInterpreter interpreter = getDebugInterpreter();
+					t.setSuspended(false);
+					fireEvent(new DebugEvent(t, DebugEvent.RESUME, DebugEvent.STEP_OVER));
+					/*interpreter.setDebugMessage(DebugInterpreter.DEBUG_STEPOVER);
+					interpreter.visitFOperation(interpreter.entryOperation);*/
+				}
 			}
 			else if ( cmd.equals(KermetaDebugElement.SUSPEND) )
 			{
@@ -460,6 +423,10 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 				KermetaDebugThread t = (KermetaDebugThread)threads[0];
 				t.setSuspended(true);
 				fireSuspendEvent(t);
+				// Delegate to a real command!!
+				// processSuspendCommand()
+				// getDebugInterpreter().setDebugMessage(DebugInterpreter.DEBUG_WAIT);
+				
 			}	
 			else if ( cmd.equals(KermetaDebugElement.RESUME) )
 			{

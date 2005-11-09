@@ -17,6 +17,7 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStreamsProxy;
 
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 
 /**
@@ -62,8 +63,12 @@ public class KermetaProcess implements Runnable, IProcess {
 	public synchronized void run() {
 		target.initPath();
 		// Instanciate the debug interpreter
-        interpreter = (DebugInterpreter)KermetaLauncher.launch(
+        KermetaInterpreter global_interpreter = KermetaLauncher.getDefault().runKermeta(
         		target.getStartFile(), target.getClassName(), target.getOpName(), true);
+        
+        interpreter = (DebugInterpreter)global_interpreter.getMemory().getCurrentInterpreter();
+        
+        target.setKermetaInterpreter(global_interpreter);
         // Let the interpreter be available to the server
         target.getKermetaRemotePort().setInterpreter(interpreter);
         // Initialize the DebugTarget 
@@ -79,8 +84,7 @@ public class KermetaProcess implements Runnable, IProcess {
         		target.processCommand(readCommand);
         		//Thread.sleep(5);
         	}
-        /*	System.out.println(".............................................");
-        	System.out.println("je sors de la boucle :( ");*/
+        
 		} catch (IOException e) {
 			System.out.println("IO exception while trying to read readStream");
 			// TODO Auto-generated catch block

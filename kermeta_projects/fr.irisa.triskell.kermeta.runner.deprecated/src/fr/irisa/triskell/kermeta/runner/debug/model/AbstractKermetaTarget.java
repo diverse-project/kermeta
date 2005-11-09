@@ -1,6 +1,16 @@
+/* $Id: AbstractKermetaTarget.java,v 1.2 2005-11-09 15:31:34 zdrey Exp $
+ * Project   : Kermeta (First iteration)
+ * File      : AbstractKermetaTarget.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Nov 2, 2005
+ * Authors       : zdrey
+ */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
 import org.eclipse.core.resources.IMarkerDelta;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugException;
@@ -12,10 +22,16 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 
+
+/**
+ * TODO : replace KermetaDebugElement from which this class inherits into Eclipse3.1
+ * new DebugElement helper. 
+ */
 public abstract class AbstractKermetaTarget extends KermetaDebugElement implements
 		IDebugTarget, ILaunchListener {
 	 
@@ -27,10 +43,14 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
     protected IProcess process;
     protected String className;
     protected String opName;
+    
+    protected KermetaInterpreter kermetaInterpreter;
+    
+    /** The path of the edited file that we are debugging */
+    protected IPath path;
 
     protected String name; // the name of the target
     // protected IProcess process; // useful only to launch an external command
-    // protected KermetaDebugThread thread;
     protected IThread[] threads;
     public final String HOST = "localhost";
     protected int requestPort;
@@ -42,7 +62,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      *  
      */
     /** 
-     * Start the Kermeta process in a thread
+     * Start the Kermeta process in a thread. This is the default start
      * If you run Kermeta in a new JVM, it is this method that you have to change. 
      * (Or inherits AbstractKermetaTarget class and overwrite it...)
      */
@@ -51,9 +71,9 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 	    System.out.println("Run kermeta process");
 	    new Thread() {
 	        public void run() {
-	    // Run in a thread
+	        	// Run in a thread --> is it really useful??
 	            initPath();
-	            KermetaLauncher.launch(startFile, className, opName, false);
+	            KermetaLauncher.getDefault().runKermeta(startFile, className, opName, false);
 			}
 	    }.start();
 	}
@@ -95,7 +115,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 		IPath path = mProjectDir.append(startfile);*/
 		
 		// The IPath for this file
-		IPath path = RunnerPlugin.getWorkspace().getRoot().findMember(startFile).getLocation();
+		path = getIPathFromString(startFile);
 		projectName = RunnerPlugin.getWorkspace().getRoot().findMember(startFile).getProject().getName();
 		workingDir = path.removeLastSegments(1);
 		//startFile = path.lastSegment();
@@ -129,7 +149,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
     }
 
     /** @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier() */
-    public String getModelIdentifier() { return RunnerPlugin.getUniqueIdentifier(); }
+    public String getModelIdentifier() { return KermetaDebugModelPresentation.KERMETA_DEBUG_MODEL_ID; }
 
     /**
      * @see org.eclipse.debug.core.model.IDebugElement#getLaunch()
@@ -231,11 +251,17 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      * 
      *
      */
-    /* (non-Javadoc)
+    
+    /**
+     * This method is called by the graphical interface (specifically, in the
+     * "Debug" TreeView of the debug mode interface).
+     * @return true if this debug target has threads, false otherwise. We set
+     * it to always true since a debug with no thread has no sense.
+     * @note client does not have to call it.
      * @see org.eclipse.debug.core.model.IDebugTarget#hasThreads()
      */
     public boolean hasThreads() throws DebugException {
-    	System.err.println("Has tread in abstract class?");
+
         return true;
     }
 
@@ -274,24 +300,61 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 	 */
 	public String getOpName() {
 		return opName;
-	}	/**
+	}
+	
+	/**
 	 * @return Returns the projectName.
 	 */
 	public String getProjectName() {
 		return projectName;
-	}	/**
+	}
+	
+	/**
 	 * @return Returns the startFile.
 	 */
 	public String getStartFile() {
 		return startFile;
 	}
+	
+	/**
+	 * @return Returns the path.
+	 */
+	public IPath getPath() {
+		return path;
+	}
+
+
 	/**
 	 * @return Returns the className.
 	 */
 	public String getClassName() {
 		return className;
 	}
+	
+	/** @return return the KermetaInterpreter instance linked to this target */
+	public KermetaInterpreter getKermetaInterpreter() {
+		return kermetaInterpreter;
+	}
 
+	/** @param set the KermetaInterpreter instance */
+	public void setKermetaInterpreter(KermetaInterpreter k) {
+		kermetaInterpreter = k;
+	}
+	
+	/** Custom helper method */
+	public IPath getIPathFromString(String filestring) {
+		if (filestring != null)
+		{
+			IResource r = RunnerPlugin.getWorkspace().getRoot().findMember(filestring);
+			if (r != null) return r.getLocation();
+		}
+		else
+		{
+			System.err.println("Problem when getting path");
+		}
+		return null;
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.debug.core.ILaunchListener#launchAdded(org.eclipse.debug.core.ILaunch)
@@ -321,7 +384,4 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 	{
 		return super.getAdapter(adapter);
 	}
-	
-
-	
 }
