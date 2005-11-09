@@ -1,0 +1,51 @@
+<!-- $Id: zip_build.xml,v 1.1 2005-11-09 13:55:51 dvojtise Exp $ -->
+<project name="Copy_site_2_modelware" default="create_zip" basedir=".">
+	<description>
+       
+	</description>
+	<property name="dest" location="dist"/>
+	<property name="kermeta_version" value="0.0.17"/>
+	<property name="kermeta_documentation_version" value="0.0.6"/>
+	<property name="traceability_version" value="0.0.2"/>
+	
+  	<target name="create_zip" description="create a deployable zip from the jars">
+  		<!--<delete dir="${dest}\\features"/>
+  		<delete dir="${dest}\\plugins"/>-->
+  		<unzip dest="${dest}\\features\\fr.irisa.triskell.kermeta_${kermeta_version}"
+  			src= "features\\fr.irisa.triskell.kermeta_${kermeta_version}.jar">
+  		</unzip>
+  		<unzip dest="${dest}\\features\\fr.irisa.triskell.traceability.feature_${traceability_version}"
+  		  			src= "features\\fr.irisa.triskell.traceability.feature_${traceability_version}.jar">
+  		</unzip>
+  		<unzip dest="${dest}\\plugins\\fr.irisa.triskell.kermeta_${kermeta_version}"
+  			src= "plugins\\fr.irisa.triskell.kermeta_${kermeta_version}.jar">
+  		</unzip>
+  		<unzip dest="${dest}\\plugins\\fr.irisa.triskell.kermeta.runner_${kermeta_version}"
+  			src= "plugins\\fr.irisa.triskell.kermeta.runner_${kermeta_version}.jar">
+  		</unzip>
+
+  		<unzip dest="${dest}\\plugins\\fr.irisa.triskell.kermeta.texteditor_${kermeta_version}"
+  			src= "plugins\\fr.irisa.triskell.kermeta.texteditor_${kermeta_version}.jar">
+  		</unzip>
+  		<unzip dest="${dest}\\plugins\\fr.irisa.triskell.kermeta.documentation_${kermeta_documentation_version}"
+  			src= "plugins\\fr.irisa.triskell.kermeta.documentation_${kermeta_documentation_version}.jar">
+  		</unzip>
+  		<unzip dest="${dest}\\plugins\\fr.irisa.triskell.traceability_${traceability_version}"
+  		  			src= "plugins\\fr.irisa.triskell.traceability_${traceability_version}.jar">
+  		</unzip>
+
+  		<unzip dest="${dest}\\plugins\\fr.irisa.triskell.traceability.edit_${traceability_version}"
+  		  			src= "plugins\\fr.irisa.triskell.traceability.edit_${traceability_version}.jar">
+  		</unzip>
+  		<unzip dest="${dest}\\plugins\\fr.irisa.triskell.traceability.editor_${traceability_version}"
+  		  			src= "plugins\\fr.irisa.triskell.traceability.editor_${traceability_version}.jar">
+  		</unzip>
+  		
+  		<zip destfile="${dest}\\fr.irisa.triskell.kermeta_${kermeta_version}.zip">
+  			<fileset dir="${dest}">
+  			        <include name="**"/>
+  			        <exclude name="*.zip"/>
+  			</fileset>
+  		</zip>
+  	</target> 
+</project>
