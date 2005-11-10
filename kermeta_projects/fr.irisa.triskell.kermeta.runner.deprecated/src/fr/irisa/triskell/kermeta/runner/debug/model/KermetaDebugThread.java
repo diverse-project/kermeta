@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.2 2005-11-09 15:31:34 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.3 2005-11-10 15:42:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -97,14 +97,14 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	// This method is called when we suspend.
 	public IStackFrame getTopStackFrame() throws DebugException {
 		System.out.println("Call to getTopStackFrame! : " + getStackFrames()[0]);
-		// Debug framework does not want that this method return null.
+		// Debug framework sometimes does not want that this method return null.
 		// I have not understood yet why.
 		return stackFrames == null ? null : stackFrames[0];
 	}
 
 	/** @see org.eclipse.debug.core.model.IThread#getName() */
 	public String getName() throws DebugException {
-		return "Les bidochons" ;
+		return "Kermeta thread" ;
 	}
 
 	/** @see org.eclipse.debug.core.model.IThread#getBreakpoints() */
@@ -195,7 +195,7 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 			System.out.println("No interpreter yet!" );
 			stackFrames = new KermetaStackFrame[1];
 			stackFrames[0] = new KermetaStackFrame(this, 1);
-			((KermetaStackFrame)stackFrames[0]).setName("pas de nom");
+			((KermetaStackFrame)stackFrames[0]).setName("default frame");
 		}
 		isSuspended = suspend;
 	}

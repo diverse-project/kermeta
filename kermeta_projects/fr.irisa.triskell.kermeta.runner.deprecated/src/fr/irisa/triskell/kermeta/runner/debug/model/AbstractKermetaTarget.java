@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.2 2005-11-09 15:31:34 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.3 2005-11-10 15:42:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -350,7 +350,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 		}
 		else
 		{
-			System.err.println("Problem when getting path");
+			System.err.println("Problem when getting path of the file that is currently executed");
 		}
 		return null;
 	}

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.2 2005-11-09 15:31:34 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.3 2005-11-10 15:42:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -16,7 +16,11 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
@@ -29,6 +33,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IValue;
 
@@ -37,6 +42,12 @@ import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaRemotePort;
+import fr.irisa.triskell.kermeta.runner.debug.util.KermetaStepHandler;
+import fr.irisa.triskell.kermeta.runner.debug.util.ResumeCommand;
+import fr.irisa.triskell.kermeta.runner.debug.util.StepIntoCommand;
+import fr.irisa.triskell.kermeta.runner.debug.util.StepOverCommand;
+import fr.irisa.triskell.kermeta.runner.debug.util.SuspendCommand;
+import fr.irisa.triskell.kermeta.runner.debug.util.TerminateCommand;
 /**
  * KermetaDebugTarget, for the DEBUG_MODE.
  * Many source code come from the Eclipse Howto ("How to create an Eclipse
@@ -53,6 +64,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 { 
     protected KermetaRemotePort debugPort;
     protected KermetaProcess kermeta_process;
+    protected KermetaStepHandler stepHandler;
     
 	/** current state of the debugger */
 	private int state = -1;
@@ -71,6 +83,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	
         launch = plaunch;
         target = this;
+        stepHandler = new KermetaStepHandler(this);
         this.name = "Kermeta Debug Target";
         // Create a thread by default
    /*     this.threads = new KermetaDebugThread[1];
@@ -158,8 +171,8 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	System.err.println("Call terminate on debug target");
 		// TODO Auto-generated method stub
     	setState(stateTerminated);
-		process.terminate();
-        process = null;
+		kermeta_process.terminate();
+        kermeta_process = null;
 		fireEvent(new DebugEvent(this, DebugEvent.TERMINATE));
 	}
     
@@ -350,15 +363,46 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	 * Installs all Java breakpoints that currently exist in
 	 * the breakpoint manager
 	 */
-	protected void initializeBreakpoints() {
+	protected void initializeBreakpoints()
+	{
 		IBreakpointManager manager= DebugPlugin.getDefault().getBreakpointManager();
 		manager.addBreakpointListener(this);
-		IBreakpoint[] bps = manager.getBreakpoints(RunnerPlugin.PLUGIN_ID);
+		IBreakpoint[] bps = manager.getBreakpoints(KermetaBreakpoint.KERMETA_BREAKPOINT_ID);
 		for (int i = 0; i < bps.length; i++) {
 			if (bps[i] instanceof IBreakpoint) { // FIXME : KermetaBreakPoint instead of IBreakPoint
 				breakpointAdded(bps[i]);
 			}
 		}
+		IProject projects[] = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+		System.out.println("I have a project : " + projects);
+		
+//		 now, register all the breakpoints in all projects
+        projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+        //for (IProject project : projects) {
+        for (int i=0; i<projects.length; i++)
+        {
+        	IProject project = projects[i];
+        	if(!project.isOpen()){
+        		continue;
+        	}
+            
+            try {
+                IMarker[] markers = project.findMarkers(KermetaBreakpoint.KERMETA_BREAKPOINT_ID, true, IResource.DEPTH_INFINITE);
+                IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
+                
+                for (int marker_count=0; marker_count<markers.length; marker_count++) {
+                	IMarker marker = markers[marker_count];
+                    KermetaBreakpoint brk = (KermetaBreakpoint) breakpointManager.getBreakpoint(marker);
+                    
+                    if (brk.isEnabled()) {
+                    	// send the command telling a marker is added and enabled.
+                    }
+                }
+            } catch (Throwable t) {
+                RunnerPlugin.errorDialog("Error setting breakpoints ("+ t + ")");
+            }
+        }
+		
 	}
 
 	/**
@@ -397,59 +441,50 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	 */
 	public void processCommand(String cmd)
 	{
-		try 
-		{
-			if ( cmd.equals(KermetaDebugElement.STEP_INTO) )
-			{ 	System.err.println("step into command!");
-				// getDebugInterpreter().stepInto();
-			}
-			else if ( cmd.equals(KermetaDebugElement.STEP_OVER) )
-			{	
-				System.err.println("step over command!");
-				KermetaDebugThread t = (KermetaDebugThread)threads[0];
-				if (t != null)
-				{
-					DebugInterpreter interpreter = getDebugInterpreter();
-					t.setSuspended(false);
-					fireEvent(new DebugEvent(t, DebugEvent.RESUME, DebugEvent.STEP_OVER));
-					/*interpreter.setDebugMessage(DebugInterpreter.DEBUG_STEPOVER);
-					interpreter.visitFOperation(interpreter.entryOperation);*/
-				}
-			}
-			else if ( cmd.equals(KermetaDebugElement.SUSPEND) )
-			{
-				System.err.println("suspend command!");
-				// Suspend!
-				KermetaDebugThread t = (KermetaDebugThread)threads[0];
-				t.setSuspended(true);
-				fireSuspendEvent(t);
-				// Delegate to a real command!!
-				// processSuspendCommand()
-				// getDebugInterpreter().setDebugMessage(DebugInterpreter.DEBUG_WAIT);
-				
-			}	
-			else if ( cmd.equals(KermetaDebugElement.RESUME) )
-			{
-				System.err.println("resume command!");
-				((KermetaDebugThread) threads[0]).setSuspended(false);
-				fireResumeEvent(threads[0]);
-			}
-			// else : do nothing
-			else
-			{
-				System.err.println("command not understood : " + cmd);
-			}
-			
+		KermetaDebugThread t = (KermetaDebugThread)threads[0];
+		if ( cmd.equals(KermetaDebugElement.STEP_INTO) ) {	
+			processStepIntoCommand(t);
 		}
-		catch (DebugException e)
+		else if ( cmd.equals(KermetaDebugElement.STEP_OVER) ) {	
+			processStepOverCommand(t);
+		}
+		else if ( cmd.equals(KermetaDebugElement.SUSPEND) ) {
+			processSuspendCommand(t, KermetaDebugElement.SUSPEND);
+			
+		}	
+		else if ( cmd.equals(KermetaDebugElement.RESUME) ) {
+			processResumeCommand(t, KermetaDebugElement.RESUME);
+		}
+		else if ( cmd.equals(KermetaDebugElement.TERMINATE) ) {
+			processTerminateCommand(t, KermetaDebugElement.TERMINATE);
+		}
+		// else : do nothing
+		else
 		{
-			System.err.println("DEBUG EXCEPTION");
-			e.printStackTrace();
+			System.err.println("command not understood : " + cmd);
 		}
 	}
-	
-	public DebugInterpreter getDebugInterpreter()
-	{
+	// Hem this is bavard-code.
+	public void processStepOverCommand(KermetaDebugThread t) {
+		new StepOverCommand(t).execute();
+	}
+	public void processStepIntoCommand(KermetaDebugThread t) {
+		new StepIntoCommand(t).execute();
+	}
+	public void processTerminateCommand(KermetaDebugThread t, String str_cause) {
+		new TerminateCommand(t, str_cause).execute();
+	}
+	public void processResumeCommand(KermetaDebugThread t, String str_cause) {
+		new ResumeCommand(t, str_cause).execute();
+	}
+	public void processSuspendCommand(KermetaDebugThread t, String str_cause) {
+		new SuspendCommand(t, str_cause).execute();
+	}
+	public DebugInterpreter getDebugInterpreter() {
 		return ((KermetaProcess)getProcess()).getDebugInterpreter();
 	}
+	
+	/** The class to which the step action on the DebugInterpreter instance is
+	 *  delegated. */
+	public KermetaStepHandler getStepHandler() { return stepHandler; }
 }

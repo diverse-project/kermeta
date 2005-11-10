@@ -7,6 +7,17 @@ import org.eclipse.debug.core.model.IWatchExpressionDelegate;
 import org.eclipse.debug.core.model.IWatchExpressionListener;
 import org.eclipse.debug.core.model.IWatchExpressionResult;
 
+/**
+ * 
+ * 
+ * Eclipse doc : A watch expression is an expression that is evaluated in the 
+ * context of a specific stack frame, thread, debug target, process, or launch.
+ * Generally, a watch expression is a snippet of code that is evaluated each 
+ * time a debug target suspends, or when a user provides a context for an 
+ * evaluation by selecting a debug target or thread. An expression updates its 
+ * value when it is provided with a context in which it can perform an evaluation.
+ * 
+ */
 public class KermetaWatchExpressionDelegate implements IWatchExpressionDelegate, IWatchExpressionResult
 {
 
@@ -44,6 +55,7 @@ public class KermetaWatchExpressionDelegate implements IWatchExpressionDelegate,
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	
 	
 

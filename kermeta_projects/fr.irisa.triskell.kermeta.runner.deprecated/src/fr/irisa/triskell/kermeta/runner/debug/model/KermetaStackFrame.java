@@ -1,4 +1,4 @@
-/* $Id: KermetaStackFrame.java,v 1.2 2005-11-09 15:31:35 zdrey Exp $
+/* $Id: KermetaStackFrame.java,v 1.3 2005-11-10 15:42:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaStackFrame.java
  * License   : GPL
@@ -82,8 +82,7 @@ public class KermetaStackFrame implements IStackFrame {
 
     /** @see org.eclipse.debug.core.model.IStackFrame#getLineNumber() */
     public int getLineNumber() throws DebugException {
-    	System.err.println("LINE : "+ line);
-    	return 5; //line;
+    	return line;
     }
 
     /** @see org.eclipse.debug.core.model.IStackFrame#getCharStart() */
@@ -208,7 +207,7 @@ public class KermetaStackFrame implements IStackFrame {
         return thread.isSuspended();
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.model.ISuspendResume#resume()
      */
     public void resume() throws DebugException {
@@ -216,12 +215,10 @@ public class KermetaStackFrame implements IStackFrame {
     	thread.resume();
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ISuspendResume#suspend()
-     */
+    /** @see org.eclipse.debug.core.model.ISuspendResume#suspend() */
     public void suspend() throws DebugException { thread.suspend();}
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.model.ITerminate#canTerminate()
      */
     public boolean canTerminate() { return thread.canTerminate(); }
@@ -251,13 +248,16 @@ public class KermetaStackFrame implements IStackFrame {
     public void setPath(IPath p_path)  { path = p_path; }
     public void setName(String p_name) {name = p_name; }
 
-    // "Custom" getter
+    /**
+     * This path is used by the KermetaSourceLocator.getEditorInput method, which
+     * is itself called somewhere in the DebugFramework to locate the editor to "point" 
+     * to on debug mode (like for highlighting line number )
+     */
 	public IPath getPath() { 
 		//return path;
 		return ((KermetaDebugTarget)getDebugTarget()).getIPathFromString(
 			((KermetaDebugTarget)getDebugTarget()).getStartFile()
 		);
-		
 	}
 	
 	protected int findLineNumberFromUnit()

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugElement.java,v 1.1 2005-11-04 17:01:08 zdrey Exp $
+/* $Id: KermetaDebugElement.java,v 1.2 2005-11-10 15:42:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugElement.java
  * License   : GPL
@@ -52,6 +52,7 @@ public abstract class KermetaDebugElement implements IDebugElement {//, ITermina
     
     public static final String STEP_INTO = "stepInto";
     public static final String STEP_OVER = "stepOver";
+    public static final String SET_BREAKPOINT = "setBreakpoint";
     public static final String RESUME = "resume";
     public static final String SUSPEND = "suspend";
     public static final String TERMINATE = "terminate";
