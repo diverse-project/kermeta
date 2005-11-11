@@ -71,7 +71,7 @@ import  java.util.*;
   *
   * @author   Alexander Shapiro
   * @author   Murray Altheim  (2001-11-06; 2002-01-14 cleanup)
-  * @version  1.21  $Id: TGPanel.java,v 1.1 2005-10-24 20:30:01 dvojtise Exp $
+  * @version  1.21  $Id: TGPanel.java,v 1.2 2005-11-11 07:08:42 dvojtise Exp $
   */
 public class TGPanel extends JPanel {
 
@@ -168,6 +168,13 @@ public class TGPanel extends JPanel {
     /** Return the current visible locality. */
     public ImmutableGraphEltSet getGES() {
         return visibleLocality;
+    }
+    
+    /**
+     * @return the LocalityUtils (usefull for synchronization)
+     */
+    public LocalityUtils getLocalityUtils() {
+    	return localityUtils;
     }
 
     /** Returns the current node count. */
