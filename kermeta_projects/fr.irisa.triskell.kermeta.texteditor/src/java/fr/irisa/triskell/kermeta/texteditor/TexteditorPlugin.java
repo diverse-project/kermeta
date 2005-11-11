@@ -1,19 +1,26 @@
+/* $Id: TexteditorPlugin.java,v 1.5 2005-11-11 07:18:20 dvojtise Exp $
+ * Project : fr.irisa.triskell.kermeta.texteditor
+ * File : TextzditorPlugin.java
+ * License : EPL
+ * Copyright : IRISA / INRIA/ Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 11 Fev. 2005
+ * Authors : 
+ * 		ffleurey <ffleurey@irisa.fr
+ *     	dvojtise <dvojtise@irisa.fr>
+ */
 package fr.irisa.triskell.kermeta.texteditor;
 
-import java.net.URL;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
@@ -24,6 +31,14 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	private static TexteditorPlugin plugin;
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
+	
+	// the current kermeta texteditor
+	private Editor editor;
+	
+	/**
+	 * List of KermetaEditorEventListener that must be notified
+	 */
+	public Vector kermetaEditorEventListeners = new Vector(); 
 	
 	final static public Logger pluginLog = LogConfigurationHelper.getLogger("KermetaEditor");
 	
@@ -81,5 +96,25 @@ public class TexteditorPlugin extends AbstractUIPlugin {
 	 */
 	public ResourceBundle getResourceBundle() {
 		return resourceBundle;
+	}
+	
+	public Editor getEditor()
+	{
+		return editor;
+	}
+	/**
+	 * set The kermeta texteditor
+	 * @param newEditor
+	 */
+	public void setEditor(Editor newEditor)
+	{
+		editor = newEditor;
+	}
+	
+	public void registerListener(KermetaEditorEventListener listener) {
+		kermetaEditorEventListeners.add(listener);
+	}
+	public void unregisterListener(KermetaEditorEventListener listener) {
+		kermetaEditorEventListeners.remove(listener);
 	}
 }
