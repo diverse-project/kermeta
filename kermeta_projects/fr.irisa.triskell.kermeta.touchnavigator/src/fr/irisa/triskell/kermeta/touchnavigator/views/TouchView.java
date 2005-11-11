@@ -15,6 +15,8 @@ import org.eclipse.swt.SWT;
 
 import com.touchgraph.graphlayout.GLPanel;
 
+import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.KermetaGLPanel;
+
 
 /**
  * This sample class demonstrates how to plug-in a new
@@ -73,9 +75,7 @@ public class TouchView extends ViewPart {
 					getSharedImages().getImage(ISharedImages.IMG_OBJ_ELEMENT);
 		}
 	}
-	class NameSorter extends ViewerSorter {
-	}
-
+	
 	/**
 	 * The constructor.
 	 */
@@ -96,7 +96,7 @@ public class TouchView extends ViewPart {
 		Composite composite = new Composite(parent, SWT.EMBEDDED);
 		shell = composite.getShell();
 		touchviewer = SWT_AWT.new_Frame(composite);
-		touchviewer.add(new GLPanel());
+		touchviewer.add(new KermetaGLPanel());
 		
 		makeActions();
 		hookContextMenu();
@@ -179,7 +179,7 @@ public class TouchView extends ViewPart {
 				doubleClickAction.run();
 			}
 		});*/
-		showMessage("hookDoubleClickAction: Double-click detected");
+		//showMessage("hookDoubleClickAction: Double-click detected");
 	}
 	private void showMessage(String message) {
 		MessageDialog.openInformation(
