@@ -4,18 +4,25 @@
  */
 package fr.irisa.triskell.kermeta.texteditor.editors;
 
+import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.structure.FObject;
+import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
 
 /**
@@ -29,12 +36,17 @@ public class Editor extends TextEditor {
 	protected KermetaUnit mcunit; 
 	protected KermetaOutline outline;
 	
+
+	
 	/**
 	 * Constructor
 	 */
 	public Editor() {
 		super();
 		setSourceViewerConfiguration(new EditorConfiguration(this));
+		
+		// store this editor in the plugin so other plugin may be able to retreive it
+		TexteditorPlugin.getDefault().setEditor(this);
 	}
 	
 	
@@ -106,5 +118,43 @@ public class Editor extends TextEditor {
 		this.mcunit = mcunit;
 		if (outline != null)
 			outline.update();
+		Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
+		while(it.hasNext())
+		{
+			KermetaEditorEventListener listener = (KermetaEditorEventListener)it.next();
+			listener.unitGotFocus(this);
+		}
 	}
+	
+	public void setFocus() {
+
+		super.setFocus();
+		Shell theShell = new Shell();
+    	MessageDialog.openInformation(theShell,"setFocus","setFocus");
+    	
+		Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
+		while(it.hasNext())
+		{
+			KermetaEditorEventListener listener = (KermetaEditorEventListener)it.next();
+			listener.unitGotFocus(this);
+		}
+	}
+	
+	public FObject getFObjectForNode(KermetaASTNode node) {
+        
+        KermetaASTNode currentNode = node;
+        FObject result = null;
+
+        
+        while (result == null && currentNode != null) {
+            
+            result = (FObject)this.mcunit.getModelElementByNode(currentNode);
+            
+            currentNode = (KermetaASTNode)currentNode.getParent();
+            
+        }
+        return result;
+    }
+	
+
 }

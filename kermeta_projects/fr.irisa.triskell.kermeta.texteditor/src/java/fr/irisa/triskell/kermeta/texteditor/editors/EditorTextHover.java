@@ -30,6 +30,7 @@ import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
+import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FTag;
 
@@ -37,6 +38,7 @@ import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 
 /**
@@ -154,9 +156,18 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		    if (astnode != null) {
 		        
 		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
-		        FObject fobj = getFObjectForNode(astnode);
+		        FObject fobj = editor.getFObjectForNode(astnode);
 		        String ftags = "";
 		        
+
+		        // Notify other plugin of this event
+		        Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
+				while(it.hasNext())
+				{
+					KermetaEditorEventListener listener = (KermetaEditorEventListener)it.next();
+					listener.textHoverCalled(fobj);
+				}
+				
 		        //TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
 		        if (fobj instanceof FExpression)
 		        {
@@ -179,7 +190,10 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		                return pp.accept(fobj) + " : " + t + "\n" + ftags;
 		            }
 		        }
-		        
+		        else if(fobj instanceof FClass){
+					FClass aClass = (FClass)fobj;
+					return KMTHelper.getQualifiedName(aClass.getFClassDefinition());
+		        }
 		        
 		    }
 		}
@@ -269,21 +283,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	    }
 	}
 	
-    private FObject getFObjectForNode(KermetaASTNode node) {
-        
-        KermetaASTNode currentNode = node;
-        FObject result = null;
 
-        
-        while (result == null && currentNode != null) {
-            
-            result = (FObject)editor.mcunit.getModelElementByNode(currentNode);
-            
-            currentNode = (KermetaASTNode)currentNode.getParent();
-            
-        }
-        return result;
-    }
 	
 
 	/**

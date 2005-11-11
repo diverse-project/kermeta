@@ -5,6 +5,7 @@
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.Comparator;
+import java.util.Iterator;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
@@ -30,7 +31,9 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
 import fr.irisa.triskell.kermeta.structure.FObject;
+import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.texteditor.icons.ButtonIcons;
 
 /**
@@ -141,17 +144,30 @@ public class KermetaOutline extends ContentOutlinePage {
         ISelection selection = event.getSelection();
         if(selection.isEmpty())
         	editor.resetHighlightRange();
-        else
+        else {
             try
             {
                 IStructuredSelection ssel = (IStructuredSelection)selection;
                 KermetaASTNode node = (KermetaASTNode)editor.getMcunit().getNodeByModelElement(((OutlineItem)ssel.getFirstElement()).modelElement);
                 editor.setHighlightRange(node.getRangeStart()-1,0 ,true);
+                
+                //              Now notify other plugins
+                FObject fobj = editor.getFObjectForNode(node);
+                if(fobj != null){
+	                Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
+	    			while(it.hasNext())
+	    			{
+	    				KermetaEditorEventListener listener = (KermetaEditorEventListener)it.next();
+	    				listener.outlineSelectionChanged(fobj);
+	    			}
+                }
             }
             catch(Exception _ex)
             {
             	editor.resetHighlightRange();
             }
+            
+        }
     }
 	
 	public void updateHelper() {
