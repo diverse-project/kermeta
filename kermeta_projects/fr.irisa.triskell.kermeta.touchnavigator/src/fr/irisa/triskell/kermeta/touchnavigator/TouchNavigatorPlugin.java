@@ -1,8 +1,11 @@
 package fr.irisa.triskell.kermeta.touchnavigator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.*;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.osgi.framework.BundleContext;
+
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * The main plugin class to be used in the desktop.
@@ -11,6 +14,9 @@ public class TouchNavigatorPlugin extends AbstractUIPlugin {
 
 	//The shared instance.
 	private static TouchNavigatorPlugin plugin;
+	
+	
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("TouchNavigator");
 	
 	/**
 	 * The constructor.
