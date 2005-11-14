@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.9 2005-11-08 15:31:37 dvojtise Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.10 2005-11-14 14:24:53 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -237,13 +237,18 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		// removes the quotes
 		String newValue = fStringLiteral.getString_literal().getText().substring(1, fStringLiteral.getString_literal().getText().length()-1);
 		// do the \\ replacements
+
+		// the double backslash must be done first but with a string id
+		newValue = newValue.replaceAll("\\\\\\\\","123456789oazehnfvkjsdnviuzerheanckencerncçearncerinnceriuh8798432198794235"); 
+		
 		newValue = newValue.replaceAll("\\\\n","\n");
 		newValue = newValue.replaceAll("\\\\t","\t");
 		newValue = newValue.replaceAll("\\\\b","\b");
 		newValue = newValue.replaceAll("\\\\r","\r");
 		newValue = newValue.replaceAll("\\\\f","\f");
+		newValue = newValue.replaceAll("\\\\\"","\"");
 		//	finally replace the escape char by a slash, 
-		newValue = newValue.replaceAll("\\\\\\\\","\\\\"); 
+		newValue = newValue.replaceAll("123456789oazehnfvkjsdnviuzerheanckencerncçearncerinnceriuh8798432198794235","\\\\"); 
 		str.setFValue(newValue);
 		result = str;
 		return false;
