@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessageManager.java,v 1.2 2005-11-08 15:59:01 dvojtise Exp $
+/* $Id: KMUnitMessageManager.java,v 1.3 2005-11-14 16:28:42 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -137,7 +137,7 @@ public class KMUnitMessageManager {
 	        KermetaUnit iu = (KermetaUnit)unit.importedUnits.get(i);
 	        if (iu.messages.getWarnings().size() != 0) {
 	        	String indirectMsg = ((KMUnitMessage)iu.messages.getWarnings().get(0)).getMessage();
-	            result.add(new KMUnitError("Warning in imported unit " + iu.getUri() +" (" +
+	            result.add(new KMUnitWarning("Warning in imported unit " + iu.getUri() +" (" +
 	            		indirectMsg +")", null));
 	        }
 	    }
