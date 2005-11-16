@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<automaton:FiniteAutomaton xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:automaton="platform:/resource/fr.irisa.triskell.kermeta.samples/automata/metamodels/automata.ecore" finalStateSet="//@stateSet.5" initialState="//@stateSet.0">
+  <stateSet name="s0" outgoingTransitions="//@transitionSet.0"/>
+  <stateSet name="s1" incomingTransitions="//@transitionSet.0" outgoingTransitions="//@transitionSet.1 //@transitionSet.2"/>
+  <stateSet name="s2" incomingTransitions="//@transitionSet.1 //@transitionSet.2" outgoingTransitions="//@transitionSet.3 //@transitionSet.4"/>
+  <stateSet name="s3" incomingTransitions="//@transitionSet.3 //@transitionSet.4" outgoingTransitions="//@transitionSet.5 //@transitionSet.6 //@transitionSet.8"/>
+  <stateSet name="s4" incomingTransitions="//@transitionSet.5">
+    <outgoingTransitions href="#//@transitionSet.7"/>
+  </stateSet>
+  <stateSet name="s5">
+    <incomingTransitions href="#//@transitionSet.6"/>
+    <incomingTransitions href="#//@transitionSet.7"/>
+    <incomingTransitions href="#//@transitionSet.8"/>
+  </stateSet>
+  <transitionSet source="//@stateSet.0" target="//@stateSet.1" letter="m"/>
+  <transitionSet source="//@stateSet.1" target="//@stateSet.2" letter="e"/>
+  <transitionSet source="//@stateSet.1" target="//@stateSet.2" letter="o"/>
+  <transitionSet source="//@stateSet.2" target="//@stateSet.3" letter="t"/>
+  <transitionSet source="//@stateSet.2" target="//@stateSet.3" letter="d"/>
+  <transitionSet source="//@stateSet.3" target="//@stateSet.4" letter="a"/>
+  <transitionSet source="//@stateSet.3" target="//@stateSet.5" letter="a"/>
+  <transitionSet source="//@stateSet.4" target="//@stateSet.5" letter="l"/>
+  <transitionSet source="//@stateSet.3" target="//@stateSet.5" letter="s"/>
+</automaton:FiniteAutomaton>
