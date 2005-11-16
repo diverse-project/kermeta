@@ -1,4 +1,4 @@
-/* $Id: GenericVisitor.kmt,v 1.3 2005-05-10 09:02:56 ffleurey Exp $ */
+/* $Id: GenericVisitor.kmt,v 1.4 2005-11-16 21:15:32 dvojtise Exp $ */
 
 // A generic implementation of the Visitor DP
 // Test genericity features
@@ -45,7 +45,7 @@ class B inherits A {
 class Test inherits Visitor <Integer, String> {
 
 	method visitA(node : A, ctx : Integer) : String is do
-		stdio.write(node)
+		stdio.write(node.toString)
 		result := "toto"
 	end
 	
