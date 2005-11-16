@@ -1,0 +1,14 @@
+digraph finite_state_machine {
+  rankdir=LR;
+  node [shape = doublecircle];
+  s4s5   s5 ;
+  node [shape = circle];
+  s0 -> s1 [ label="m" ];
+  s1 -> s2 [ label="e" ];
+  s2 -> s3 [ label="t" ];
+  s3 -> s4s5 [ label="a" ];
+  s4s5 -> s5 [ label="l" ];
+  s3 -> s5 [ label="s" ];
+  s2 -> s3 [ label="d" ];
+  s1 -> s2 [ label="o" ];
+}
