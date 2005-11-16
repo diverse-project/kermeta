@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.13 2005-09-15 12:40:33 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.14 2005-11-16 22:10:44 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -67,6 +67,8 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_1_ClassSubTyping_1() throws Exception {
 testvalidFile("test/typechecher_tests/valid","1_ClassSubTyping_1.kmt" );
@@ -88,16 +90,20 @@ public void testvalid_Class_new() throws Exception {
 testvalidFile("test/typechecher_tests/valid","Class_new.kmt" );
 }
 
+public void testvalid_Enum() throws Exception {
+testvalidFile("test/typechecher_tests/valid","Enum.kmt" );
+}
+
 public void testvalid_GenericOperationCall() throws Exception {
 testvalidFile("test/typechecher_tests/valid","GenericOperationCall.kmt" );
 }
 
-public void testvalid_GenericVisitor() throws Exception {
-testvalidFile("test/typechecher_tests/valid","GenericVisitor.kmt" );
-}
-
 public void testvalid_GenericsAndFunctions() throws Exception {
 testvalidFile("test/typechecher_tests/valid","GenericsAndFunctions.kmt" );
+}
+
+public void testvalid_GenericVisitor() throws Exception {
+testvalidFile("test/typechecher_tests/valid","GenericVisitor.kmt" );
 }
 
 public void testvalid_ObjectAndVoid() throws Exception {
@@ -116,8 +122,8 @@ public void testvalid_SimpleOperationCall() throws Exception {
 testvalidFile("test/typechecher_tests/valid","SimpleOperationCall.kmt" );
 }
 
-public void testvalid_Enum() throws Exception {
-testvalidFile("test/typechecher_tests/valid","Enum.kmt" );
+public void testvalid_test_clone() throws Exception {
+testvalidFile("test/typechecher_tests/valid","test_clone.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
@@ -134,6 +140,10 @@ testinvalidFile("test/typechecher_tests/invalid","ClassSubTypingWithGenericOpera
 
 public void testinvalid_Class_new() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","Class_new.kmt" );
+}
+
+public void testinvalid_Enum() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","Enum.kmt" );
 }
 
 public void testinvalid_GenericOperationCall() throws Exception {
@@ -160,8 +170,8 @@ public void testinvalid_SimpleOperationCall() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","SimpleOperationCall.kmt" );
 }
 
-public void testinvalid_Enum() throws Exception {
-testinvalidFile("test/typechecher_tests/invalid","Enum.kmt" );
+public void testinvalid_test_clone() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","test_clone.kmt" );
 }
 
 /*** END GENERATED TESTS ***/
@@ -211,7 +221,10 @@ testinvalidFile("test/typechecher_tests/invalid","Enum.kmt" );
 		
 		KermetaTypeChecker tc = builder.typeCheck(null);
 		
-		if (tc.correctOperation.size() != 0) {
+		if (builder.messages.getAllErrors().size() > 0) {
+			// Ok we have found errors
+		}
+		else if (tc.correctOperation.size() != 0) {
 		    boolean res = true;
 		    String message = "Type error not found in operations :";
 		    for (int i=0; i<tc.correctOperation.size(); i++) {
