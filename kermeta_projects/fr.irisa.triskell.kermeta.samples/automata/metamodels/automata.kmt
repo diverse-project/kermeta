@@ -5,21 +5,18 @@
  *   - implementation of the algorithm of determinisation
  *	 - implementation of the algorithm of minimisation
  *   - how to "compose" and/or chain those two transformation 
- *
- 
- 	Questions : 
- 	
- 	- should the determinist-property appear in the meta model? (as a derived property for example)
- 	
- 	- 
-  
+ * Questions : 
+ * 	- should the determinist-property appear in the meta model? (as a derived property for example)	
  *
  *
  */
+@mainClass "automaton::AutomatonHelper"
+@mainOperation "run_demo"
+
 package automaton;
 
 require kermeta
-require "ecore.kmt" 
+
 using kermeta::standard
 using kermeta::persistence 
 /*********************************
@@ -49,13 +46,11 @@ class FiniteAutomaton
 		getter is do
 			result := self.seqToSet( self.transitionSet.collect { e | e.letter } )
 		end
+		
+	/** Transient references */
+	reference currentState : State  
+	reference read_word : String // the output word after a step
 
-	operation conformityChecker() : Boolean is do
-		result := transitionSet.detect { t | 
-			stdio.writeln("transitions : " + t.source.toString + ", " + t.target.toString)
-			not (stateSet.contains(t.source) and stateSet.contains(t.target))}==void
-	end
-	
 	/** Initialize a new automaton from an existing one 
 	 *  param :
 	 *    initState : the initial state
@@ -68,26 +63,36 @@ class FiniteAutomaton
 		if (isInitComb == true) then initialState.combination := Set<State>.new end 
 	end
 	
-	operation dotprint() is do
-       stdio.writeln("digraph finite_state_machine {")
-       stdio.writeln("  rankdir=LR;")
-       stdio.writeln("  node [shape = doublecircle];")
-       finalStateSet.each{ s | stdio.write("  " + s.name + " ")}
-       stdio.writeln(";")
-       stdio.writeln("  node [shape = circle];")
-       transitionSet.each{ t |
-           stdio.writeln(    "  " + t.source.name + " -> " + t.target.name +
-                           " [ label=\"" + t.letter + "\" ];")
-       }
-       stdio.writeln("}")
-	end
-	
+
 	/** Quick transformation of a Set into a Sequence */
 	operation seqToSet<G>( iseq : Sequence<G> ) : Set<G> is do
     	result := Set<G>.new
     	iseq.each { n | if n != void and not result.contains(n) then result.add(n) end	}
     end
-    
+
+	/** Run operation that execute the FiniteAutomaton*/	
+	operation run() : Void is do  
+		// reset if there is no current state
+		if currentState == void then reset end
+		read_word := ""
+		
+		stdio.writeln("Initial state : " + currentState.name)
+		from var str : String init "init"
+		until finalStateSet.contains(currentState) and currentState.outgoingTransitions.size==0
+		loop
+			stdio.writeln("\n>> read word : " + currentState.step)
+			stdio.write(">> step to next state : " + currentState.name)
+		end
+		stdio.writeln("\nFinal state " + currentState.name + " is reached.\n")
+	end
+	
+	operation reset() : Void is do
+		if (initialState == void) then
+			raise NoInitialStateException.new
+		end
+		currentState := initialState
+	end
+
 }
 
 class State
@@ -103,6 +108,68 @@ class State
 		result.name := String.clone(name)
 		result.combination := Set<State>.new
 	end
+	
+	
+	/** Operation that define a behaviour on the FiniteAutomaton */
+	operation step() : String is do
+		var owner : FiniteAutomaton 
+		owner ?= self.container
+		// Check if there is a valid transition
+		var validLetters : Collection<String> init outgoingTransitions.collect { e | e.letter }
+		if validLetters.empty then raise NoTransition.new end
+		automated_step(validLetters)
+		var theletter : String init validLetters.one
+		// var theletter : String init interactive_step(validLetters)
+
+		// Fire the transition
+		var t : Transition init outgoingTransitions.detect { t | t.letter == theletter }
+		t.fire
+		result := owner.read_word + theletter
+		owner.read_word := result
+	end
+	
+	operation automated_step(validLetters :Collection<String>) : String is do
+		if validLetters.size > 1 then 
+			var str : String init AutomatonHelper.new.join_with(outgoingTransitions.collect { e | e.source.name+"-"+e.letter+"-"+e.target.name }, ", ")
+			stdio.writeln("\nMany transitions are available ("+ str +")." + "We choose : " + validLetters.one)
+		end
+		result := validLetters.one
+	end
+	
+	operation interactive_step(validLetters : Collection<String>) : String is do
+	
+		if validLetters.size > 1 then
+			stdio.writeln("More than one valid transition\n")
+			var ol : String init stdio.read("\nPlease choose a transition between : {" + AutomatonHelper.new.join_with(validLetters, ", ")+"}" )
+			var t_set : Sequence<Transition> init outgoingTransitions.select { t | t.letter == ol } 
+			if not validLetters.contains(ol) then 
+				stdio.writeln("No such letter in the available transitions")
+				raise NoTransition.new 
+			end
+			if (t_set.size > 1) then 
+				stdio.writeln("\n*****************************************************")
+				stdio.writeln("\nThe letter you chose lead to an undeterminable state.")
+				stdio.writeln("Please determinize your automaton first.")
+				stdio.writeln("\n*****************************************************")
+				raise NonDeterminism.new 
+			end
+			result := ol
+		else
+			result := validLetters.one
+		end
+	end
+/*	
+	operation rescue_non_det() : Boolean is do
+		// rescue?
+		rescue ( e : NonDeterminism )
+			var answer : String init stdio.read("NonDeterminismException : do you want to determinize the automaton ? (yes/no)")
+			if (answer == "yes") then
+				result := true
+				
+			end
+		result := false
+	end
+*/
 }
 
 class Transition
@@ -110,6 +177,13 @@ class Transition
 	reference source : State#outgoingTransitions
 	reference target : State#incomingTransitions 
 	reference letter : String
+	
+	/** Fired transition modifies the output word and updates the currentState*/
+	operation fire() is do
+		var owner : FiniteAutomaton
+		owner ?= source.container
+		owner.currentState := target
+	end
 }
 
 
@@ -119,6 +193,15 @@ class Pair
 	reference left : State
 	reference right : State	
 }
+
+ 
+// Exceptions
+abstract class AutomatonException {}
+class NonDeterminism inherits AutomatonException {}
+class NoTransition inherits AutomatonException {}
+class NoInitialStateException inherits AutomatonException{}
+
+
 
 /** 
  * A set of helper methods to ease the determinisation/minimization
@@ -133,6 +216,12 @@ class AutomatonHelper
     operation join( str_seq : Collection<String>) : String is do
     	result := ""
     	str_seq.each { str | result.append(str) }
+    end
+    
+    operation join_with( str_seq : Collection<String>, sep : String) : String is do
+    	result := ""
+    	str_seq.each { str | result.append(str + sep) }
+    	result :=  result.substring(0, result.size-sep.size)
     end
     
     operation createPair(p : State, q : State) : Pair is do
@@ -152,7 +241,7 @@ class AutomatonHelper
 	 * Serialization helpers
 	 */  
     operation saveEMFAutomaton(repository : EMFRepository, a : FiniteAutomaton, uri : String, mmuri : String) : FiniteAutomaton is do
-		if a.conformityChecker == true then 
+		if AutomatonHelper.new.conformityChecker(a) == true then 
 	    	var resource : EMFResource init repository.createResource(uri , mmuri)
 	    	resource.instances.add(a)
 	    	//a.stateSet.each { z | resource.instances.add(z)}
@@ -165,29 +254,60 @@ class AutomatonHelper
     
      operation loadEMFAutomaton(repository : EMFRepository, uri : String, mmuri : String) : FiniteAutomaton is do
     	var resource : EMFResource init repository.createResource(uri , mmuri)
-    	resource.instances
     	resource.load
     	var instances : Set<Object> init resource.instances
     	result ?= instances.detect { e | FiniteAutomaton.isInstance(e)}
     end
     
+    /** Print in dot format the given automaton */
+    operation dotprint(fsm : FiniteAutomaton) is do
+       stdio.writeln("\ndigraph finite_state_machine {")
+       stdio.writeln("  rankdir=LR;")
+       stdio.writeln("  node [shape = doublecircle];")
+       fsm.finalStateSet.each{ s | stdio.write("  " + s.name + " ")}
+       stdio.writeln(";")
+       stdio.writeln("  node [shape = circle];")
+       fsm.transitionSet.each{ t |
+           stdio.writeln(    "  " + t.source.name + " -> " + t.target.name +
+                           " [ label=\"" + t.letter + "\" ];")
+       }
+       stdio.writeln("}")
+	end
+	
+    
     /**
      * Interactive commands
      */
     operation ask_dotprint() is do
-    	ask_emfmodel("Entrez un modele EMF de l'automate à 'dot-printer' : ").dotprint
+    	dotprint(ask_emfmodel("Entrez un modele EMF de l'automate à 'dot-printer' : "))
     end
     
     operation ask_emfmodel(prompt : String) : FiniteAutomaton is do
     	var file : String init stdio.read(prompt)
+    	stdio.writeln("\n"+file)
     	var r : EMFRepository init EMFRepository.new
     	result := loadEMFAutomaton(r, file, "../metamodels/automata.ecore")
     end
+    
+    /** Operation that tries to check the validity of the given automaton 
+     *  (the states referenced in all the transitions must appear in the stateSet of the
+     *  given automaton)
+    */
+    operation conformityChecker(fsm : FiniteAutomaton) : Boolean is do
+		result := fsm.transitionSet.detect { t |  
+			stdio.writeln("transitions : " + t.source.toString + ", " + t.target.toString)
+			not (fsm.stateSet.contains(t.source) and fsm.stateSet.contains(t.target))}==void
+	end
+	
+	/** Operation for Workshop demo */
+	operation run_demo() : FiniteAutomaton is do
+/*    	var file : String init "../models/fsm.demo.1.xmi"*/
+		var file : String init stdio.read("Give me a model please :")
+    	stdio.writeln("Reading the following EMF Model : "+file)
+    	var r : EMFRepository init EMFRepository.new
+    	result := loadEMFAutomaton(r, file, "../metamodels/automata.ecore")
+    	result.run()
+    end
 	 
 }
- 
-
-
-
-
 
