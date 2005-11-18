@@ -1,0 +1,14 @@
+/* $Id: 003_associations_01.kmt,v 1.1 2005-11-18 15:50:21 dvojtise Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+
+/* composition multiplicity must be 0..1 or 1*/
+class A {
+    attribute b : B[1]#owner
+}
+class B {
+    reference owner : A[*]#b // should fail here
+}
