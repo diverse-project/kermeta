@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.12 2005-09-02 15:25:19 dvojtise Exp $
+/* $Id: InterpreterContext.java,v 1.13 2005-11-21 14:36:50 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : EPL
@@ -143,6 +143,9 @@ public class InterpreterContext {
 	}
     public RuntimeMemory getMemory() {
         return memory;
+    }
+    public Stack getFrameStack() {
+    	return frame_stack;
     }
 
 }
