@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.26 2005-10-21 15:00:58 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.27 2005-11-21 13:23:03 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -246,8 +246,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			SimpleType providedtype = new SimpleType(p);
 			
 			if (r instanceof FEnumeration) {
-			    FEnumeration enum = (FEnumeration)r;
-			    if (enum.getFOwnedLiteral().contains(rhs_value.getData().get("kcoreObject"))) {
+			    FEnumeration enumeration = (FEnumeration)r;
+			    if (enumeration.getFOwnedLiteral().contains(rhs_value.getData().get("kcoreObject"))) {
 			        // It is OK
 			    }
 			    else {
