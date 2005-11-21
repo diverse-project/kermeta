@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.6 2005-09-15 12:40:32 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.7 2005-11-21 09:39:51 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -100,7 +100,7 @@ public class KermetaTypeChecker {
     public void checkOperation(FOperation op) {
         
         // THIS IS JUST FOR TESTING PURPOSES
-        int error_count = unit.messages.getErrors().size();
+        int error_count = unit.messages.getMessages().size();
         
         // initialize context
         context.init(op.getFOwningClass(), op);
@@ -109,7 +109,7 @@ public class KermetaTypeChecker {
             ExpressionChecker.typeCheckExpression(op.getFBody(), unit, context);
         
         // THIS IS JUST FOR TESTING PURPOSES
-        if (error_count != unit.messages.getErrors().size()) wrongOperations.add(op.getFName());
+        if (error_count != unit.messages.getMessages().size()) wrongOperations.add(op.getFName());
         else correctOperation.add(op.getFName());
     }
     
