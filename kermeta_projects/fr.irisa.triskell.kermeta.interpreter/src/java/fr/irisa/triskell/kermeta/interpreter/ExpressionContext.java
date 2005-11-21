@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.9 2005-05-25 17:42:50 ffleurey Exp $
+/* $Id: ExpressionContext.java,v 1.10 2005-11-21 14:39:56 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -15,6 +15,9 @@ package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.Hashtable;
 
+import org.eclipse.emf.ecore.EObject;
+
+import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**
@@ -36,8 +39,12 @@ public class ExpressionContext {
      * The set of variables defined in this block
      * key : the name of the variable (String)
      * value : the variable itself (Variable) */
-    Hashtable variables;
-	
+    protected Hashtable variables;
+    
+    
+    /** For debug mode (should we create a debug expression context?) */
+    public FExpression expression;
+    protected EObject statement;
 	/**
 	 * Constructor 
 	 * @param root
@@ -111,4 +118,23 @@ public class ExpressionContext {
         return variables;
     }
 
+    /**
+     * Set the expression associated to this context
+     * Useful for the debug mode
+     * @param exp
+     */
+    public void setExpression(FExpression exp)
+    {
+    	expression = exp;
+    }
+
+	public FExpression getExpression() {
+		return expression;
+	}
+    
+    public void setStatement(EObject p_statement) {
+    	statement = p_statement;
+    }
+    
+    public EObject getStatement() { return statement; }
 }
