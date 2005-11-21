@@ -2,7 +2,7 @@
 <site>
 
    <description url="http://www.kermeta.org/update">
-      
+      Kermeta eclipse update site
    </description>
    <feature url="features/fr.irisa.triskell.kermeta_0.0.17.jar" id="fr.irisa.triskell.kermeta" version="0.0.17">
       <category name="Triskell"/>
