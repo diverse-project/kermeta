@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.20 2005-11-22 08:49:06 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.21 2005-11-22 12:28:16 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -242,7 +242,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		        getOperationNameText().setText(
 		                configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,
 		                        ""));
-		        getOperationNameText().setText(
+		        getArgumentsText().setText(
 		                configuration.getAttribute(KermetaLaunchConfiguration.KM_ARGUMENTS,
 		                        ""));
 		        if (getOperationNameText().getText().compareTo("")==0 )
@@ -747,8 +747,9 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     public void setclassNameText(Text text) {classNameText = text;}
     public Text getclassNameText() {return classNameText;}
     private Text getOperationNameText() {return operationNameText;}
+    public Text getArgumentsText() { return argumentsText;}
 
-    public void setFileLocationLabel(Label label) {fileLocationLabel = label;}
+	public void setFileLocationLabel(Label label) {fileLocationLabel = label;}
     public Label getFileLocationLabel() {return fileLocationLabel ;}
     private Button getFileLocationButton() {return fileLocationButton;}
     public void setFileLocationText(Text text) {fileLocationText = text;}
