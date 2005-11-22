@@ -1,4 +1,4 @@
-/* $Id: SuspendCommand.java,v 1.1 2005-11-10 15:44:28 zdrey Exp $
+/* $Id: SuspendCommand.java,v 1.2 2005-11-22 09:33:08 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : SuspendCommand.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Nov 10, 2005
  * Authors       : zdrey
  */
-/* $Id: SuspendCommand.java,v 1.1 2005-11-10 15:44:28 zdrey Exp $
+/* $Id: SuspendCommand.java,v 1.2 2005-11-22 09:33:08 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : SuspendCommand.java
  * License   : EPL
@@ -30,11 +30,11 @@ import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugThread;
  */
 public class SuspendCommand extends AbstractDebugCommand {
 	
-	protected String reason;
 	
-	public SuspendCommand(KermetaDebugThread t, String reason)
+	public SuspendCommand(KermetaDebugThread t, String r)
 	{
-		
+		thread = t;
+		reason = r;
 	}
 	
 	public void execute()

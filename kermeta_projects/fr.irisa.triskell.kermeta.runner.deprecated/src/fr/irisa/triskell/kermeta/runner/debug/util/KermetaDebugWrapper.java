@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.1 2005-11-09 15:33:34 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.2 2005-11-22 09:33:08 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -16,8 +16,10 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IVariable;
 
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
+import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.interpreter.Traceback;
+import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugThread;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaStackFrame;
@@ -41,11 +43,11 @@ public class KermetaDebugWrapper {
 	 * @note (not sure it has the right name)
 	 * @return
 	 */
-	public static IStackFrame[] findStackFramesFromCallFrames(KermetaDebugTarget target, KermetaDebugThread thread) {
+	public static IStackFrame[] findStackFramesFromCallFrames(DebugInterpreter interpreter, KermetaDebugThread thread) {
 
 		// Get the current execution context
-		InterpreterContext context = target.getDebugInterpreter().getInterpreterContext();
-		System.out.println("target.getDebugInterpreter" + target.getDebugInterpreter());
+		InterpreterContext context = interpreter.getInterpreterContext();
+		
 		Iterator kframe_it = context.getFrameStack().iterator();
 		int i = 0;
 		int kframe_size    = context.getFrameStack().size();
@@ -69,15 +71,20 @@ public class KermetaDebugWrapper {
 			if (source_object == null)
 				source_object = kframe.getOperation();
 			
-			traceback = new Traceback(
-					target.getDebugInterpreter(), source_object);
+			traceback = new Traceback(interpreter, source_object);
 			String[] frame_context = traceback.getContextForFObjectAsArray(kframe, source_object);
-			
+			int line;
+			if (frame_context[1].equals("") || frame_context[1] == null)
+				line = 1;
+			else
+				line = Integer.parseInt(frame_context[1]); 
 			// 
-			KermetaStackFrame iframe = new KermetaStackFrame(thread, Integer.parseInt(frame_context[1]));
+			KermetaStackFrame iframe = new KermetaStackFrame(
+					thread, 
+					frame_context[2],
+					AbstractKermetaTarget.getIPathFromString(frame_context[0]),
+					line);
 			// if stepOver, path should be always the same and equal to the KermetaDebugTarget path attribute.
-			iframe.setPath(target.getIPathFromString(frame_context[0])); //target.getPath()
-			iframe.setName(frame_context[2]);
 			iframe.setName("youhou? : " + frame_context[2] + "(" + frame_context[1] + ")");
 			frames[i++] = iframe;
 		}

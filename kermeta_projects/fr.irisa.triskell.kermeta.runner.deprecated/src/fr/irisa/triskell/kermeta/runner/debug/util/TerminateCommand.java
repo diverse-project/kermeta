@@ -1,4 +1,4 @@
-/* $Id: TerminateCommand.java,v 1.1 2005-11-10 15:44:28 zdrey Exp $
+/* $Id: TerminateCommand.java,v 1.2 2005-11-22 09:33:08 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : TerminateCommand.java
  * License   : EPL
@@ -13,8 +13,11 @@ import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugThread;
 
 public class TerminateCommand extends AbstractDebugCommand
 {
+	
+	
 	public TerminateCommand(KermetaDebugThread t, String reason)
 	{
+		thread = t;
 		
 	}
 	

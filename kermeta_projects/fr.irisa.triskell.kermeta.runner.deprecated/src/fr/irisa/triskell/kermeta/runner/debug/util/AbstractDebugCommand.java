@@ -1,4 +1,4 @@
-/* $Id: AbstractDebugCommand.java,v 1.1 2005-11-10 15:44:28 zdrey Exp $
+/* $Id: AbstractDebugCommand.java,v 1.2 2005-11-22 09:33:08 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractDebugCommand.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Nov 10, 2005
  * Authors       : zdrey
  */
-/* $Id: AbstractDebugCommand.java,v 1.1 2005-11-10 15:44:28 zdrey Exp $
+/* $Id: AbstractDebugCommand.java,v 1.2 2005-11-22 09:33:08 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractDebugCommand.java
  * License   : EPL
@@ -32,6 +32,9 @@ public abstract class AbstractDebugCommand {
 	KermetaDebugTarget target;
 	/** the thread linked to this command */
 	KermetaDebugThread thread;
+	/** the reason of the command (can be null)*/
+	protected String reason;
+
 	
 	/** You must implement this method */
 	public void execute()

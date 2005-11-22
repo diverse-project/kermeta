@@ -1,4 +1,4 @@
-/* $Id: KermetaStepHandler.java,v 1.1 2005-11-10 15:44:28 zdrey Exp $
+/* $Id: KermetaStepHandler.java,v 1.2 2005-11-22 09:33:08 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaStepHandler.java
  * License   : EPL
@@ -12,6 +12,8 @@ package fr.irisa.triskell.kermeta.runner.debug.util;
 import org.eclipse.debug.core.DebugEvent;
 
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugThread;
 
@@ -31,7 +33,6 @@ public class KermetaStepHandler {
 	public KermetaStepHandler(KermetaDebugTarget p_target)
 	{
 		target = p_target;
-		interpreter = target.getDebugInterpreter();
 	}
 	
 	/**
@@ -54,6 +55,10 @@ public class KermetaStepHandler {
 	public void doStepOver(KermetaDebugThread thread)
 	{
 		// Get the current interpreter and current statement
+		ExpressionInterpreter interpreter = ((KermetaDebugTarget)thread.getDebugTarget()).
+			getKermetaInterpreter().getMemory().getCurrentInterpreter();
+		
+		InterpreterContext current_context = interpreter.getInterpreterContext();//.peekCallFrame().peekExpressionContext();
 		
 		
 		// Evaluate the current statement
