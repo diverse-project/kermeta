@@ -1,4 +1,4 @@
-/* $Id: KermetaPerspective.java,v 1.5 2005-08-16 11:21:16 zdrey Exp $
+/* $Id: KermetaPerspective.java,v 1.6 2005-11-22 10:38:57 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaPerspective.java
  * License: GPL
@@ -17,7 +17,6 @@ import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.IPerspectiveRegistry;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.console.IConsoleConstants;
-import org.eclipse.ui.internal.IPerspectiveService;
 
 /**
  * 
