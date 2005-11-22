@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.19 2005-08-26 16:01:16 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.20 2005-11-22 08:49:06 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -92,27 +92,27 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		    
 			updateLaunchConfigurationDialog();
 		}
-};
-	/** Listener for class Name modification */
-	private ModifyListener fClassModifyListener = new ModifyListener() {
-	public void modifyText(ModifyEvent evt) {
-        canSave();
-		updateLaunchConfigurationDialog();
-		if (classNameText!=null && classNameText.getText().length()>0)
-		    setOperationEnabled(true);
-		else setOperationEnabled(false);
-	}
-};;
-	/** Listener for file nape modification */
-	private ModifyListener fFileModifyListener = new ModifyListener() {
-    public void modifyText(ModifyEvent evt) {
-        updateLaunchConfigurationDialog();
-        if (fileLocationText!=null && fileLocationText.getText().length()>0)
-            setClassEnabled(true);
-        else
-        {	setClassEnabled(false); setOperationEnabled(false); }
-    }
-};
+    };
+    /** Listener for class Name modification */
+    private ModifyListener fClassModifyListener = new ModifyListener() {
+    	public void modifyText(ModifyEvent evt) {
+    		canSave();
+    		updateLaunchConfigurationDialog();
+    		if (classNameText!=null && classNameText.getText().length()>0)
+    			setOperationEnabled(true);
+    		else setOperationEnabled(false);
+    	}
+    };
+    /** Listener for file nape modification */
+    private ModifyListener fFileModifyListener = new ModifyListener() {
+    	public void modifyText(ModifyEvent evt) {
+    		updateLaunchConfigurationDialog();
+    		if (fileLocationText!=null && fileLocationText.getText().length()>0)
+    			setClassEnabled(true);
+    		else
+    		{	setClassEnabled(false); setOperationEnabled(false); }
+    	}
+    };
 
     private Label fileLocationLabel;
     private Text fileLocationText;
@@ -130,6 +130,8 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     private Text operationNameText;
     /** The button to click on in order to select an operation*/
     private Button operationNameButton;
+    /** The text widget for the choice of arguments */
+    private Text argumentsText;
     
     // NOTE : pas mis en cause dans le OUTOFMEMORY
     public ArgumentConfigurationTab() {
@@ -167,6 +169,8 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		
 		// Set the field for the operation choice
 		createOperationNameLayout(paramArea, null);
+		
+		createArgumentsLayout(paramArea, null);
 
 
     }
@@ -238,10 +242,12 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		        getOperationNameText().setText(
 		                configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,
 		                        ""));
+		        getOperationNameText().setText(
+		                configuration.getAttribute(KermetaLaunchConfiguration.KM_ARGUMENTS,
+		                        ""));
 		        if (getOperationNameText().getText().compareTo("")==0 )
-		        {
 		        	getOperationNameText().setText(getDefaultOperation(selectedFile));
-		        }
+		        
 		        
 		   // }
 		    canSave();
@@ -320,6 +326,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, fileLocationText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, classNameText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, operationNameText.getText());
+		configuration.setAttribute(KermetaLaunchConfiguration.KM_ARGUMENTS, argumentsText.getText());
 		configuration.setAttribute(KermetaLaunchConfiguration.KM_PROJECTNAME, projectLocationText.getText());
 		
     }
@@ -483,6 +490,28 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
             operationNameButton.setEnabled(false);
             operationNameText.setEnabled(false);
         }
+        
+    }
+    
+    /**
+     * Create the operation input zone
+     * @param parent composite inside which this input zone is created
+     * @param font
+     */
+    public void createArgumentsLayout(Composite parent, Font font)
+    {
+        // Create common layout basis
+        createInputTextLayout(parent, "Operation arguments");
+        
+        argumentsText = new Text(parent, SWT.SINGLE | SWT.BORDER);
+        GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+        argumentsText.setLayoutData(gd);
+        //argumentsText().setFont(font);
+        argumentsText.addModifyListener(fBasicModifyListener);
+        
+        if (!operationNameText.isEnabled())
+            argumentsText.setEnabled(false);
+        else argumentsText.setEnabled(true);
         
     }
     
@@ -691,6 +720,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
         if (!isEnabled) {operationNameText.setText("");}
         operationNameButton.setEnabled(isEnabled);
         operationNameText.setEnabled(isEnabled);
+        argumentsText.setEnabled(isEnabled);
         
     }
 

@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.10 2005-11-09 15:32:43 zdrey Exp $
+/* $Id: KermetaSourceLocator.java,v 1.11 2005-11-22 08:49:06 zdrey Exp $
  * Project: Kermeta.runner
  * File: KermetaSourceLocator.java
  * License: EPL
@@ -26,7 +26,10 @@ import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
  * 	- ISourcePresentation : a source presentation is used to resolve an editor in 
  *    which to display a debug model element, breakpoint, or source element. It is also
  *    responsible to link the debug mode commands to the editor
- *  - ISourceLocator : 
+ *  - IPersistableSourceLocator : the main interface 
+ *  Note : I don't know why, the launchConfiguration crashes if we implement 
+ *  ISourceLocator instead of IPersistableSourceLocator whereas many other plug-ins use
+ *  it..
  */
 public class KermetaSourceLocator implements IPersistableSourceLocator, ISourcePresentation {
 

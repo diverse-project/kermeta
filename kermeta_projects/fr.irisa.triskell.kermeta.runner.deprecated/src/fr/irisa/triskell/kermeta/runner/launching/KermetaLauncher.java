@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.5 2005-11-09 15:32:43 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.6 2005-11-22 08:49:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -9,9 +9,11 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -43,6 +45,7 @@ public class KermetaLauncher
     public static String startFile = "";
     public static String className = "";
     public static String opName = "";
+    public static String args = "";
     // FIXME : the way this IFile is found is not very "sure" with the use of "findMember"?
     protected IFile selectedFile;
     public static final String defaultTraceExtension = "traceability";
@@ -68,8 +71,10 @@ public class KermetaLauncher
             {   className = argv[i+1];i+=1; }
             if (argv[i].equals("-operation") && argv[i+1]!="")
             {  opName = argv[i+1];i+=1;}
+            if (argv[i].equals("-args") && argv[i+1]!="")
+            {  args = argv[i+1];i+=1;}
         }
-        getDefault().runKermeta(startFile, className, opName,false);
+        getDefault().runKermeta(startFile, className, opName, args, false);
     }
 
     /**
@@ -80,8 +85,9 @@ public class KermetaLauncher
      * is used (see DebugInterpreter class in fr.irisa.triskell.kermeta.interpreter)
      * @param configuration
      * @param mode
+     * @param args the arguments of the given operation opName, separated by a space.
      */
-    public KermetaInterpreter runKermeta(String fileNameString, String classQualifiedNameString, String operationString, boolean isDebugMode)
+    public KermetaInterpreter runKermeta(String fileNameString, String classQualifiedNameString, String operationString, String argsString, boolean isDebugMode)
     {
         
         selectedFile = null;
@@ -115,6 +121,15 @@ public class KermetaLauncher
             interpreter = new KermetaInterpreter(uri);
                         
             interpreter.setEntryPoint(classQualifiedNameString, operationString);
+            ArrayList interpreter_params =  new ArrayList();
+            
+            String[] params_table = argsString.split(" ");
+            
+            for (int i=0; i<params_table.length; i++) { 
+            	interpreter_params.add(
+            			fr.irisa.triskell.kermeta.runtime.basetypes.String.create(params_table[i],interpreter.getMemory().getROFactory()));
+            }
+            interpreter.setEntryParameters(interpreter_params);
             interpreter.setKStream(console);     
             if (isDebugMode == false)
             {

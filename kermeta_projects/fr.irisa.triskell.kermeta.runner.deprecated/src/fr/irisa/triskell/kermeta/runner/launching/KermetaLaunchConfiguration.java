@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.17 2005-11-09 15:32:43 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.18 2005-11-22 08:49:06 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -10,32 +10,18 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchManager;
-import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
-import org.eclipse.jdt.launching.SocketUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
-import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
-import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
 
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
@@ -51,6 +37,8 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
     public final static String KM_FILENAME = "KM_FILENAME";
     public final static String KM_CLASSQNAME = "KM_CLASSQNAME";
     public final static String KM_OPERATIONNAME = "KM_OPERATIONNAME";
+    // list of value separated by a comma
+    public final static String KM_ARGUMENTS = "KM_ARGUMENTS";
     public final static String KM_PROJECTNAME = "KM_PROJECTNAME";
  
     protected static int instanceCount = 0;
