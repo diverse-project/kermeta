@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.3 2005-11-10 15:42:56 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.4 2005-11-22 09:21:45 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -43,6 +43,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
     protected IProcess process;
     protected String className;
     protected String opName;
+    protected String args;
     
     protected KermetaInterpreter kermetaInterpreter;
     
@@ -73,7 +74,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 	        public void run() {
 	        	// Run in a thread --> is it really useful??
 	            initPath();
-	            KermetaLauncher.getDefault().runKermeta(startFile, className, opName, false);
+	            KermetaLauncher.getDefault().runKermeta(startFile, className, opName, args, false);
 			}
 	    }.start();
 	}
@@ -102,6 +103,9 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 			
 			opName = 
 			    launch.getLaunchConfiguration().getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, "");
+			
+			args = 
+				launch.getLaunchConfiguration().getAttribute(KermetaLaunchConfiguration.KM_ARGUMENTS, "");
 
 		} catch (Exception ce)
 		{
@@ -331,6 +335,15 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 		return className;
 	}
 	
+	
+	/**
+	 * @return Returns the args of the operation to execute.
+	 */
+	public String getArgs() {
+		return args;
+	}
+
+
 	/** @return return the KermetaInterpreter instance linked to this target */
 	public KermetaInterpreter getKermetaInterpreter() {
 		return kermetaInterpreter;
@@ -342,7 +355,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 	}
 	
 	/** Custom helper method */
-	public IPath getIPathFromString(String filestring) {
+	public static IPath getIPathFromString(String filestring) {
 		if (filestring != null)
 		{
 			IResource r = RunnerPlugin.getWorkspace().getRoot().findMember(filestring);

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugModelPresentation.java,v 1.2 2005-11-09 15:31:34 zdrey Exp $
+/* $Id: KermetaDebugModelPresentation.java,v 1.3 2005-11-22 09:21:45 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugModelPresentation.java
  * License   : EPL
@@ -54,7 +54,6 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      */
     public Image getImage(Object element) {
         // TODO Auto-generated method stub
-        System.err.println("IMAGE");
         return null;
     }
 
