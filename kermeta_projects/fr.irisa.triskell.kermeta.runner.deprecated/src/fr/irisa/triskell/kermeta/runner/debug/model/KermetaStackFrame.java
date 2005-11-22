@@ -1,4 +1,4 @@
-/* $Id: KermetaStackFrame.java,v 1.3 2005-11-10 15:42:56 zdrey Exp $
+/* $Id: KermetaStackFrame.java,v 1.4 2005-11-22 09:28:22 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaStackFrame.java
  * License   : GPL
@@ -47,15 +47,18 @@ public class KermetaStackFrame implements IStackFrame {
 	protected int line;
 	protected String name; // name of the stack frame 
 	protected IVariable[] variables;
+	protected String filepath; // path of the file where the operation associated to the stack frame is located
 	
     /**
      * 
      * @param p_thread the thread to which this frame belongs
      * @param p_line the position in the file of the debug state
      */
-    public KermetaStackFrame(KermetaDebugThread p_thread, int p_line) {
+    public KermetaStackFrame(KermetaDebugThread p_thread, String p_name, IPath p_path, int p_line) {
         thread = p_thread;
         line   = p_line;
+        name   = p_name;
+        path = p_path;
     }
 
     /**
@@ -246,8 +249,9 @@ public class KermetaStackFrame implements IStackFrame {
      */
     
     public void setPath(IPath p_path)  { path = p_path; }
+    public void setLine(int p_line)  { line = p_line; }
     public void setName(String p_name) {name = p_name; }
-
+    public void setVariables(IVariable[] p_vars) { variables = p_vars; }
     /**
      * This path is used by the KermetaSourceLocator.getEditorInput method, which
      * is itself called somewhere in the DebugFramework to locate the editor to "point" 

@@ -1,4 +1,4 @@
-/* $Id: KermetaVariable.java,v 1.1 2005-11-04 17:01:08 zdrey Exp $
+/* $Id: KermetaVariable.java,v 1.2 2005-11-22 09:28:22 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaVariable.java
  * License   : GPL
@@ -25,7 +25,7 @@ public class KermetaVariable implements IVariable {
     /**
      * 
      */
-    public KermetaVariable() {
+    public KermetaVariable(AbstractKermetaTarget target, String name, String type, String value) {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -62,12 +62,11 @@ public class KermetaVariable implements IVariable {
         return false;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier()
      */
     public String getModelIdentifier() {
-        // TODO Auto-generated method stub
-        return RunnerPlugin.getUniqueIdentifier();
+        return KermetaDebugModelPresentation.KERMETA_DEBUG_MODEL_ID;
     }
 
     /* (non-Javadoc)

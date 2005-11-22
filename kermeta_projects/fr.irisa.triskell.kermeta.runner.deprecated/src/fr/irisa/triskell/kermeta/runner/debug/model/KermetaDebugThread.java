@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.3 2005-11-10 15:42:56 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.4 2005-11-22 09:28:22 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -9,6 +9,7 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Stack;
@@ -55,14 +56,17 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	private IStackFrame[] stackFrames;
 	protected boolean isSuspended ;
 	protected boolean isStepping ;
+	
+	//
+	public static final String GET_STACK = "stack";
 
 	/**
 	 * The constructor
 	 */
-	public KermetaDebugThread(KermetaDebugTarget ptarget) {
-		super(ptarget);
-		target = ptarget;
-		name = "keeek";
+	public KermetaDebugThread(KermetaDebugTarget p_target, String p_name) {
+		super(p_target);
+		target = p_target;
+		name = p_name!=null?p_name:"default thread";
 	}
 	
 	/** 
@@ -83,8 +87,6 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	 * @see org.eclipse.debug.core.model.IThread#hasStackFrames()
 	 */
 	public boolean hasStackFrames() throws DebugException {
-		if (getStackFrames() != null && isSuspended()) 
-			System.out.println("------------------->  Has stack frames :)");
 		return (getStackFrames() != null && isSuspended());
 	}
 
@@ -177,9 +179,36 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 		// FIXME : for now this static method create frames each time setSuspended is
 		// called! in next version, change that!!
 		// Pydev does that in the processSuspendCommand method.
-		if (((KermetaDebugTarget)getDebugTarget()).getDebugInterpreter()!=null)
+					
+/*		stackFrames = KermetaDebugWrapper.findStackFramesFromCallFrames(
+				(KermetaDebugTarget)getDebugTarget(), this);
+			System.out.println("Stack frames : " + stackFrames.length);*/
+		try {
+			target.getRemoteInterpreter().execute(GET_STACK);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			// Debug framework does not want that stackFrames is null...
+			if (stackFrames == null || stackFrames.length == 0)
+			{
+				stackFrames = new KermetaStackFrame[1];
+				stackFrames[0] = new KermetaStackFrame(this, "default", null, 1);
+			}
+/*		}
+		else
+		{
+			System.out.println("No interpreter yet!" );
+			stackFrames = new KermetaStackFrame[1];
+			stackFrames[0] = new KermetaStackFrame(this, "default", null, 1);
+		}*/
+		
+		
+/*		if (((KermetaDebugTarget)getDebugTarget()).getDebugInterpreter()!=null)
 		{
 			System.out.println("Interpreter exists!");
+			
+			
 			stackFrames = KermetaDebugWrapper.findStackFramesFromCallFrames(
 				(KermetaDebugTarget)getDebugTarget(), this);
 			System.out.println("Stack frames : " + stackFrames.length);
@@ -187,16 +216,15 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 			if (stackFrames == null || stackFrames.length == 0)
 			{
 				stackFrames = new KermetaStackFrame[1];
-				stackFrames[0] = new KermetaStackFrame(this, 1);
+				stackFrames[0] = new KermetaStackFrame(this, "default", null, 1);
 			}
 		}
 		else
 		{
 			System.out.println("No interpreter yet!" );
 			stackFrames = new KermetaStackFrame[1];
-			stackFrames[0] = new KermetaStackFrame(this, 1);
-			((KermetaStackFrame)stackFrames[0]).setName("default frame");
-		}
+			stackFrames[0] = new KermetaStackFrame(this, "default", null, 1);
+		}*/
 		isSuspended = suspend;
 	}
 
@@ -212,7 +240,12 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 		//d.postCommand(new ThreadRunCommand(d, id));
 		// then processes the command.
 		// target.getDebugger() <-
-		target.getKermetaRemotePort().sendKermetaDebugCommand("resume");
+		try {
+			target.getRemoteInterpreter().execute("resume");
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 	/** @see org.eclipse.debug.core.model.ISuspendResume#suspend() */
@@ -220,27 +253,47 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 		System.out.println("kermeta debugger thread : suspending\n");
 		setSuspended(true);
 		System.err.println("stack : "+ stackFrames.length);
-		target.getKermetaRemotePort().sendKermetaDebugCommand("suspend");
+		try {
+			target.getRemoteInterpreter().execute("suspend");
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/** @see org.eclipse.debug.core.model.IStep#stepInto() */
 	public void stepInto() throws DebugException {
 		target.setState(KermetaDebugTarget.stateRunning);
 		isStepping = true;
-		target.getKermetaRemotePort().sendKermetaDebugCommand(KermetaDebugElement.STEP_INTO);
+		try {
+			target.getRemoteInterpreter().execute(KermetaDebugElement.STEP_INTO);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/** @see org.eclipse.debug.core.model.IStep#stepOver() */
 	public void stepOver() throws DebugException {
 		isStepping = true;
 		target.setState(KermetaDebugTarget.stateRunning);
-		target.getKermetaRemotePort().sendKermetaDebugCommand(KermetaDebugElement.STEP_OVER);
+		try {
+			target.getRemoteInterpreter().execute(KermetaDebugElement.STEP_OVER);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/** @see org.eclipse.debug.core.model.IStep#stepReturn() */
 	public void stepReturn() throws DebugException {
 		target.setState(KermetaDebugTarget.stateRunning);
-		target.getKermetaRemotePort().sendKermetaDebugCommand(KermetaDebugElement.STEP_RETURN);
+		try {
+			target.getRemoteInterpreter().execute(KermetaDebugElement.STEP_RETURN);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/** @see org.eclipse.debug.core.model.ITerminate#canTerminate() */
@@ -255,5 +308,5 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	public void setBreakpoints(String something) {
 
 	}
-
+	
 }

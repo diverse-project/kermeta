@@ -3,13 +3,8 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.Socket;
-import java.net.UnknownHostException;
 
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
@@ -22,16 +17,13 @@ import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 
 /**
  * @author zdrey
- * I am not sure that implementing IProcess is meaning full.
+ * I am not sure that implementing IProcess is meaningfull.
  */
 public class KermetaProcess implements Runnable, IProcess {
 
 	protected KermetaDebugTarget target;
-	private Thread kThread;
-	private BufferedReader in;
 	// We include the interpreter in this thread.
 	private DebugInterpreter interpreter;
-	protected Socket socket;
 	
 	/** true if the debug has ended or debugger disconnected, false otherwise
 	 *  for the moment it will always false 
@@ -43,55 +35,50 @@ public class KermetaProcess implements Runnable, IProcess {
 	public KermetaProcess(KermetaDebugTarget p_target) {
 		super();
 		target = p_target;
-		 // Create the socket client that will send the request to the server (server
-	    // handles the interpreter-debugger 
-	    try {
-			socket  = new Socket("localhost", target.getKermetaRemotePort().getServerPort());
-			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		kThread = new Thread(this); // instanciation du thread
-		kThread.start(); // demarrage du thread, la fonction run() est ici lancée
+
 	}
 
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Runnable#run()
 	 */
 	public synchronized void run() {
-		target.initPath();
-		// Instanciate the debug interpreter
+		// Initialize the DebugTarget 
+        target.initialize();
+        
+        // Create the Interpreter
+        createKermetaInterpreter();
+		System.err.println("****************************************************");
+	}
+
+	/**
+	 * Creates the Kermeta interpreter and sets it to the KermetaDebugTarget.
+	 * If the interpreter is launched under a separate process, it is this method
+	 * that you need to redefine.
+	 *
+	 */
+	public void createKermetaInterpreter()
+	{
+		//Instanciate the debug interpreter
         KermetaInterpreter global_interpreter = KermetaLauncher.getDefault().runKermeta(
-        		target.getStartFile(), target.getClassName(), target.getOpName(), true);
+        		target.getStartFile(), target.getClassName(), target.getOpName(), target.getArgs(), true);
         
         interpreter = (DebugInterpreter)global_interpreter.getMemory().getCurrentInterpreter();
         
         target.setKermetaInterpreter(global_interpreter);
-        // Let the interpreter be available to the server
-        target.getKermetaRemotePort().setInterpreter(interpreter);
-        // Initialize the DebugTarget 
-        target.initialize();
-        try {
-        	String readCommand = "";
-        	System.err.println("c'est parti");
-        	while ((readCommand=in.readLine())!=null)
-        	{
-        		System.err.println("c'est reparti ");
-        		System.err.println("read : "+ readCommand);
-        		// process the command : call the interpreter methods
-        		target.processCommand(readCommand);
-        		//Thread.sleep(5);
-        	}
         
-		} catch (IOException e) {
-			System.out.println("IO exception while trying to read readStream");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} // catch (InterruptedException ie) { ie.printStackTrace();}
+        interpreter.invoke_debug();
 	}
-
+	
+	
+	
+	/*
+	 * 
+	 * (methods initially located in KermetaDebugTarget)
+	 * command that is dedicated to the 
+	 * 
+	 */
+	
 	/* ------------------------------------------------------------------------
 	 * 
 	 *  METHODS IMPLEMENTING IPROCESS INTERFACE
@@ -100,7 +87,6 @@ public class KermetaProcess implements Runnable, IProcess {
 	 */
 	
 	public String getLabel() {
-		// TODO Auto-generated method stub
 		return "Salut mon pote";
 	}
 
