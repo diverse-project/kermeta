@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.1 2005-09-09 17:46:04 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.2 2005-11-22 10:40:53 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -9,6 +9,9 @@
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -25,8 +28,11 @@ import fr.irisa.triskell.kermeta.behavior.FRescue;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
@@ -35,18 +41,87 @@ import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 public class DebugInterpreter extends ExpressionInterpreter {
 
     EObject current_eobject;
-    int current_statement_position;
     FBlock current_block;
+    
+    public static final String DEBUG_WAIT = "wait";
+    public static final String DEBUG_STEPINTO = "stepInto";
+    public static final String DEBUG_RESUME = "resume";
+    public static final String DEBUG_SUSPEND = "suspend";
+    public boolean interpreterPaused = true;
+    public String currentCommand = "";
+    public boolean VISIT_DONE ;
+    
+    public FClass entryObject ;
+    public FOperation entryOperation ;
+    public ArrayList entryArguments  ;
+     
+    // A reference to the KermetaRemoteInterpreter that drives our DebugInterpreter.
+    
     
     /**
      * @param pMemory
      */
     public DebugInterpreter(RuntimeMemory pMemory) {
         super(pMemory);
-        current_statement_position = 0;
-        // TODO Auto-generated constructor stub
+        // Debug mode. Can be modified for the stepOver/stepReturn instructions.
+        debugMode = true;
+        debugMessage = DEBUG_WAIT;
     }
     
+    /**
+	 * Initialize the foperation argument on the ro_target Runtime Object;
+	 *  arguments to this call are given as an ArrayList
+	 *  no invocation of operation is done here
+	 * @param ro_target
+	 * @param foperation
+	 * @param arguments
+	 * @return
+	 */
+	public Object initialize(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
+		
+		RuntimeObject result=null;
+		RuntimeObjectFactory roFactory = memory.getROFactory(); 
+		
+		FClass self_type = (FClass)ro_target.getMetaclass().getData().get("kcoreObject");
+		
+		entryObject = self_type;
+		entryOperation = foperation;
+		entryArguments = arguments;
+		
+		CallableOperation op = new CallableOperation(foperation, self_type);
+		// Create a context for this operation call, setting self object to ro_target
+		// We should have a FCallFeature
+        interpreterContext.pushOperationCallFrame(ro_target, op, arguments, null);
+        debugMessage = DEBUG_WAIT;
+		return result;
+	}
+	
+	/**
+	 * Special invocation method initialize and invoke are splitted so that specific
+	 * initializations can be done outside the interpreter.
+	 * @return
+	 */
+	public Object invoke_debug()
+	{
+		Object result = null;
+		try {
+			System.err.println("before invoke");
+			processDebugCommand();
+	        // Resolve this operation call
+	        result = (RuntimeObject)this.accept(entryOperation);
+	        System.err.println("after invoke");
+        }
+        finally {
+	        // After operation has been evaluated, pop its context
+	        interpreterContext.popCallFrame();
+        }
+        return result;
+	}
+	
+	public void terminate()
+	{
+		interpreterContext.popCallFrame();
+	}
     
 	/**
 	 * Visit an operation definition. 
@@ -58,24 +133,30 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visitFOperation(FOperation node) {
-	    System.err.println("VISIT OPERATION IN DEBUG MODE!");
-	    RuntimeObject result = memory.voidINSTANCE;
-	    // push expression context
-	    interpreterContext.peekCallFrame().pushExpressionContext();
-	    try {
-		    // Interpret body
-	        // Developer note : here shoudl visitFBlock called
-		    current_eobject = node.getFBody();
-		    // execCommand()-liike
+		System.err.println("VISIT OPERATION IN DEBUG MODE!");
+		Object result = memory.voidINSTANCE;
+		processDebugCommand();
+		result = super.visitFOperation(node);
+		// push expression context
+		/*interpreterContext.peekCallFrame().pushExpressionContext();
+		 try {
+		 // Interpret body
+		  // Developer note : here shoudl visitFBlock called
+		   current_eobject = node.getFBody();
+		   // execCommand()-liike
 		    this.accept(current_eobject);
 		    
 		    // Set the result
-		    result = interpreterContext.peekCallFrame().getOperationResult();
-	    }
-	    finally {
-		    // Pop the expressionContext
-		    interpreterContext.peekCallFrame().popExpressionContext();
-	    }
+		     result = interpreterContext.peekCallFrame().getOperationResult();
+		     }
+		     finally {
+		     // Pop the expressionContext
+		      interpreterContext.peekCallFrame().popExpressionContext();
+		      }*/
+		if (isStepping())
+		{
+			pauseInterpreter("stepEnd");
+		}
 		return result;
 	}
 
@@ -84,84 +165,68 @@ public class DebugInterpreter extends ExpressionInterpreter {
      * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFAssignement(fr.irisa.triskell.kermeta.behavior.FAssignement)
      */
     public Object visitFAssignement(FAssignement node) {
-        
         // TODO Auto-generated method stub
         return super.visitFAssignement(node);
     }
+    
     /* (non-Javadoc)
+     * Yet the code is not properly "shared" with the ExpressionInterpreter.
+     * As soon as it works well, we will adapt it.
      * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFBlock(fr.irisa.triskell.kermeta.behavior.FBlock)
      */
     public Object visitFBlock(FBlock node)
     {
-        System.err.println("VISIT BLOCK IN DEBUG MODE! (" + current_statement_position +")");
-	    RuntimeObject result = memory.voidINSTANCE;
-	    // process the statements
-	    try {
-	        // Execute the block -- pushExpressionContext -> peekIt
-	        // If we have pas
-	        if (current_statement_position == 0)
-	            interpreterContext.peekCallFrame().pushExpressionContext();
-	        try
-	        {
-	            // Need it
-	            current_block = node;
-	            current_eobject = (EObject)node.getFStatement().get(current_statement_position);
-	            this.accept(current_eobject);
-	            update();
-	        }
-	        finally {
-	            if (current_statement_position == node.getFStatement().size())
-	                interpreterContext.peekCallFrame().popExpressionContext();
-	        }
-	    }
-	    catch(KermetaRaisedException ex) {
-	        Iterator it = node.getFRescueBlock().iterator();
-	        FRescue resc_block = null;
-	        while (it.hasNext() && resc_block == null) {
-	            FRescue r = (FRescue)it.next();
-	            if (r.getFExceptionType() == null)
-	                resc_block = r;
-	            else {
-	                SimpleType exprected =  new SimpleType(r.getFExceptionType().getFType());
-	                SimpleType provided = new SimpleType((FClass)ex.raised_object.getMetaclass().getData().get("kcoreObject"));
-	                if (provided.isSubTypeOf(exprected)) {
-	                    resc_block = r;
-	                }
-	            }
-	        }
-	        if (resc_block == null) throw ex;
-	        
-	        // Execute the rescue block
-	        interpreterContext.peekCallFrame().pushExpressionContext();
-	        
-	        try {
-	        
-	        if (resc_block.getFExceptionType() != null)
-	            interpreterContext.peekCallFrame().peekExpressionContext().defineVariable(resc_block.getFExceptionName(), ex.raised_object);
-	        	ArrayList res = visitList(resc_block.getFBody());
-	        	if (res.size() > 0) 
-			        result = (RuntimeObject)res.get(res.size()-1);
-	        }
-	        finally {
-	            interpreterContext.peekCallFrame().popExpressionContext();
-	        }
-	    }
-	    return result;
+    	 RuntimeObject result = memory.voidINSTANCE;
+    	 
+    	 processDebugCommand();
+    	 
+    	 result = (RuntimeObject)super.visitFBlock(node);
+    	 
+    	 
+    	 System.out.println("END of visit block in debug mode");
+    	 return result;
     }
-    /* (non-Javadoc)
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFBooleanLiteral(fr.irisa.triskell.kermeta.behavior.FBooleanLiteral)
-     */
-    public Object visitFBooleanLiteral(FBooleanLiteral node) {
-        // TODO Auto-generated method stub
-        return super.visitFBooleanLiteral(node);
-    }
-    /* (non-Javadoc)
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFCallFeature(fr.irisa.triskell.kermeta.behavior.FCallFeature)
+    
+    /** 
+     * 
      */
     public Object visitFCallFeature(FCallFeature node) {
-        // TODO Auto-generated method stub
-        return super.visitFCallFeature(node);
+    	
+    	System.err.println("DebugInterpreter : visitFCallFeature");
+    	Object result = null;
+    	/*
+    	if (debugMessage.equals(DEBUG_WAIT))
+    	{
+    		VISIT_DONE = false;
+    		return null;
+    	}
+    	if (debugMessage.equals(DEBUG_STEPOVER))
+    	*/
+    	processDebugCommand();
+    	
+    	result = super.visitFCallFeature(node);
+    	
+    	// If the command was a step
+    	if (isStepping()) pauseInterpreter("stepEnd");
+    		
+    	/*VISIT_DONE = true;
+    	// Wait back for next instruction from the user or the program.
+    	debugMessage = DEBUG_WAIT;*/
+        return result;
     }
+    
+	/**
+	 * visit a list of expressions (usually come from a FBlock)
+	 * @param expressions
+	 * @return an ArratList of RuntimeObjects
+	 */
+	public ArrayList visitList(EList expressions)
+	{
+		processDebugCommand();
+		ArrayList result_list = super.visitList(expressions);
+		debugMessage = DEBUG_WAIT;
+		return result_list;
+	}
     
     /** Update the needed values for the debug */
 /*	public Object accept(EObject node) {
@@ -180,10 +245,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 		// accept the node
 		return cmd.accept(node, this);
 	}*/
-    public void update()
-    {
-        current_statement_position += 1;
-    }
+    
  
     /* 
      *
@@ -196,14 +258,82 @@ public class DebugInterpreter extends ExpressionInterpreter {
      *  - step X where X is the number of statements to execute before next step
      *  - run to next breakpoint
      */
+
     
     /**
-     * @param expression : expression to execute
+     * 
+     * @return true if we have a debug message, false otherwise
      */
-    public void stepOver()
+    public boolean hasDebugMessage()
     {
-        // Interprete the expression
-        // update current_statement
-        this.accept(current_block);
+    	return (!debugMessage.equals(""));
     }
+    
+    /** set the debugMode */
+    public void setDebugMode(boolean debug_mode)
+    {
+    	debugMode = debug_mode;
+    }
+    
+    public void setDebugMessage(String debug_message)
+    {
+    	debugMessage = debug_message;
+    }
+    
+    public String getDebugMessage(String debug_message)
+    {
+    	return debugMessage;
+    }
+    
+    /*
+     *  TODO : Put it in a special {facade} class
+     * 
+     * 
+     */
+
+    /** This method is looping until 
+     */
+    public Object processDebugCommand()
+    {
+    	
+    	return null;
+    }
+    
+	public void processCommand(String cmd) throws IOException
+	{
+		currentCommand    = cmd ;
+		if ( cmd.equals(DEBUG_STEPINTO) ) {
+			interpreterPaused = false;
+		}
+		else if ( cmd.equals(DEBUG_SUSPEND) ) {	
+			interpreterPaused = true;
+		}
+		else if ( cmd.equals(DEBUG_RESUME)) {
+			interpreterPaused = true;
+		}
+		// stepOver, stepReturn belong to the next iteration of the DebugInterpreter 
+	
+	}
+    
+	//
+	public boolean isStepping()
+	{
+		System.out.println("Step mode is on : " + currentCommand);
+		return currentCommand.equals(DEBUG_STEPINTO);
+	}
+	
+	/** 
+	 * Put the interpreter in pause mode
+	 * 
+	 * @param reason choices :
+	 * 	- stepEnd
+	 */
+	public void pauseInterpreter(String reason)
+	{
+		interpreterPaused = true;
+		// Send a DEBUG_SUSPEND event, with reason "STEP_END" e.g
+		processDebugCommand();
+	}
+	
+
 }
