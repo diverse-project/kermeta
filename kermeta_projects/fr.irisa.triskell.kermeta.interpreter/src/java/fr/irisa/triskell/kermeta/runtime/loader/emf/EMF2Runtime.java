@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.25 2005-11-08 15:55:17 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.26 2005-11-23 09:48:20 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -112,6 +112,9 @@ public class EMF2Runtime {
 		XMLResource resource=null;
 	    KermetaUnit kunit =  unit.getInstances().getFactory().getMemory().getUnit();
 		try {
+			RuntimeMemory memory =unit.getInstances().getFactory().getMemory();
+        	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
+			
 	//		 load ressource
 			//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
@@ -155,7 +158,19 @@ public class EMF2Runtime {
 	    	if(true)
 	    	{
 	    		resource = 	(XMLResource)resourceset.createResource(u);
-	    		resource.load(options);
+	    		if(resource != null) {
+	    			resource.load(options);
+	    		}
+	    		else
+	    		{
+	    			String errmsg ="Not able to create a resource for URI: "+u ;
+	    			internalLog.error(errmsg );
+	    			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+		        			errmsg,
+							interpreter,
+							memory,
+							null);
+	    		}
 	    	}
 	    	else {
 	    		resource = (XMLResource)resourceset.getResource(u, true); // on demand load ...
@@ -176,8 +191,6 @@ public class EMF2Runtime {
 					"\n  First unresolved proxy is: "+unresolvedMapIt.next()+
 					"\n  a new URI_MAP entry may solve your problem";
 				KermetaUnit.internalLog.error(errmsg);
-				RuntimeMemory memory =unit.getInstances().getFactory().getMemory();
-	        	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
 				throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
 	        			errmsg,
 						interpreter,
