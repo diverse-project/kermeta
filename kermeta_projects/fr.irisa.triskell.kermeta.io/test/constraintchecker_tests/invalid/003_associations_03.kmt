@@ -1,0 +1,16 @@
+/* $Id: 003_associations_03.kmt,v 1.1 2005-11-23 09:35:27 dvojtise Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+
+/* opposite mismatch  : the association is illformed */
+class A {
+    reference b : B#r2
+}
+class B {
+	reference r1 : A#b
+	reference r2 : A
+	
+}

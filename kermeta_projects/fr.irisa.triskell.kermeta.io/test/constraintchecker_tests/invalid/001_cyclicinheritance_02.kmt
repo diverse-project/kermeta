@@ -1,0 +1,11 @@
+/* $Id: 001_cyclicinheritance_02.kmt,v 1.1 2005-11-23 09:35:27 dvojtise Exp $ */
+
+// Test of a invalid inheritance
+
+package root_package;
+
+
+/* cycle inheritance*/
+class A inherits A{
+    
+}
