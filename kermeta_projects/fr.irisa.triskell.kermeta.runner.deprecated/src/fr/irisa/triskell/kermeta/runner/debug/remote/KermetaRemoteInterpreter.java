@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.1 2005-11-22 09:31:35 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -15,20 +15,13 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Iterator;
-import java.util.Stack;
 
-import org.eclipse.debug.core.model.IStackFrame;
-
-import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
-import fr.irisa.triskell.kermeta.interpreter.Traceback;
+
 import fr.irisa.triskell.kermeta.runner.debug.remote.RemoteCallFrame;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaDebugWrapper;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
-import fr.irisa.triskell.kermeta.structure.FObject;
 
 
 public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKermetaRemoteInterpreter {
@@ -41,6 +34,14 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	public String classname;
 	public String opname;
 	public String args;
+	public boolean invoked;
+	public boolean blocked;
+	/** The debug condition controls the freeze/block of the thread until
+	 *  a new event occurs */
+	//public RemoteDebugCondition debugCondition;
+	
+	// Ask platform if it can unblock
+	public static final String ASK_PLATFORM = "ask";
 	
 	// "degraded" Objects that represent the interpreter context
 	public RemoteCallFrame[] frames; 
@@ -52,32 +53,56 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		classname = p_classname;
 		opname    = p_opname;
 		args      = p_args;
+		invoked = false; 
+		blocked = false;
 		createKermetaInterpreter();
+
+	//	debugCondition = new RemoteDebugCondition(this);
 		
 	}
 
 	/**
 	 * Execute the command defined by the given argument
+	 * TODO : implement the pattern command
 	 */
 	public Object execute(String command) throws RemoteException {
-		// Memory access
 		
+		String reason = "";
+		// Memory access
 		if (command.equals("suspend"))
 		{
 			System.out.println("suspend");
-			// setFrames(interpreter.getContext())
-			// frames = interpreter.findStackFramesFromCallFrames();
-			Stack frame_stack = interpreter.getInterpreterContext().getFrameStack();
-			frames = findStackFramesFromCallFrames(interpreter);
+			interpreter.setSuspended(true, "");
 			
 		}
 		if (command.equals("stepInto"))
-		{
+		{			
 			System.out.println("salut toto");
-			interpreter.invoke_debug();
+			if (invoked == false)
+			{ invoked = true; interpreter.invoke_debug(); } 
+			
+			interpreter.setSuspended(false, "stepInto");
+			// After the interpreter did its work by its side, we can get what is its
+			// new state
+			// And the reason of the stop .. stepEnd, or terminated
+			if (interpreter.isSuspended())
+			{
+				reason = interpreter.getCurrentCommand();
+				// if command/reason was stepEnd -> send "stepEnd"
+			}
+			System.out.println("fin de salut toto");
+//			interpreter.invoke_debug();
 			
 		}
-		remoteDebugPlatform.notify(command);
+		
+		// Ask command :
+		if (command.equals("ask"))
+		{
+			System.out.println("ask command!");
+		}
+		
+		// The reason conditions the type of event we have to send to the GUI
+		remoteDebugPlatform.notify(command, reason);
 		return null;
 	}
 	
@@ -97,11 +122,11 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	{
 		//Instanciate the debug interpreter
 		System.err.println("START FILE : " + startfile);
-        KermetaInterpreter global_interpreter = KermetaLauncher.getDefault().runKermeta(
-        		startfile, classname, opname, args, true);
+		KermetaInterpreter global_interpreter = KermetaLauncher.getDefault().runKermeta(
+        		startfile, classname, opname, args, true) ; //, null);//debugCondition);
         
         interpreter = (DebugInterpreter)global_interpreter.getMemory().getCurrentInterpreter();
-        
+        //interpreter.setDebugCondition(new RemoteDebugCondition(this));
        // interpreter.invoke_debug();
 	}
 	
@@ -129,73 +154,28 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		return remoteDebugPlatform;
 	}
 	
-	public void setFrames(RemoteCallFrame[] frame)
+	public void setFrames(RemoteCallFrame[] p_frames)
 	{
-		
+		frames = p_frames;
 	}
 	
 	public RemoteCallFrame[] getFrames()
 	{
-		return frames;
+		return KermetaDebugWrapper.getRemoteCallFrames(interpreter);
 	}
 
-	// TODO : put those method in a single class
-	public RemoteCallFrame[] findStackFramesFromCallFrames(DebugInterpreter interpreter) {
-
-		// Get the current execution context
-		InterpreterContext context = interpreter.getInterpreterContext();
-		
-		Iterator kframe_it = context.getFrameStack().iterator();
-		int i = 0;
-		int kframe_size    = context.getFrameStack().size();
-		// For each call frame create a stack frame corresponding to its properties.
-		// - variable
-		System.out.println("Number of call frames : " + kframe_size );
-		// if kframe_size > 0 ??
-		RemoteCallFrame[] frames = new RemoteCallFrame[kframe_size];
-		while (kframe_it.hasNext())
-		{	
-			Traceback traceback = null;
-			CallFrame kframe = (CallFrame)kframe_it.next();
-			// The current expression that is attached to this call frame
-			FObject source_object = kframe.getExpression();
-			System.out.println("expression : " + kframe.getExpression() );
-			// TODO : use traceability!!!!!! gnak
-			// The case "expression == null" occurs for frame of the main operation 
-			// since it is not executed as a "CallFeature" but as an "FOperation" which is 
-			// not an FExpression.
-			// Thus, here is an "astuce" to work around this problem. Not sure it is the best one.
-			if (source_object == null)
-				source_object = kframe.getOperation();
-			
-			traceback = new Traceback(interpreter, source_object);
-			String[] frame_context = traceback.getContextForFObjectAsArray(kframe, source_object);
-			int line;
-			if (frame_context[1].equals("") || frame_context[1] == null)
-				line = 1;
-			else
-				line = Integer.parseInt(frame_context[1]); 
-			System.err.println("iframe : " + frame_context[0]);
-			// 
-			RemoteCallFrame iframe = new RemoteCallFrame(
-					line,
-					frame_context[2],
-					new RemoteVariable[1],
-					frame_context[0]
-					);
-			// if stepOver, path should be always the same and equal to the KermetaDebugTarget path attribute.
-			//iframe.setName("youhou? : " + frame_context[2] + "(" + frame_context[1] + ")");
-			frames[i++] = iframe;
-		}
-		return frames;
+	public boolean isBlocked()
+	{
+		return blocked;
 	}
-
 	
+	public void block() throws RemoteException { blocked = true; }
+	public void unblock() throws RemoteException { blocked = false; }
 	/*
 	 * 
 	 *  A C C E S S O R S
 	 * 
 	 */
-	
+
 
 }

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugElement.java,v 1.2 2005-11-10 15:42:56 zdrey Exp $
+/* $Id: KermetaDebugElement.java,v 1.3 2005-11-23 16:18:59 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugElement.java
  * License   : GPL
@@ -57,6 +57,7 @@ public abstract class KermetaDebugElement implements IDebugElement {//, ITermina
     public static final String SUSPEND = "suspend";
     public static final String TERMINATE = "terminate";
 	public static final String STEP_RETURN = "stepReturn";
+	public static final String CLIENT_REQUEST = "client";
  
     public IDebugTarget target;
     
@@ -110,7 +111,7 @@ public abstract class KermetaDebugElement implements IDebugElement {//, ITermina
      * @param eventSource the UI element that generated/caused this event.
      */
     public void fireResumeEvent(Object eventSource) 
-    {	fireEvent(new DebugEvent(eventSource, DebugEvent.RESUME)); }
+    {	fireEvent(new DebugEvent(eventSource, DebugEvent.RESUME, DebugEvent.CLIENT_REQUEST)); }
     
     public void fireSuspendEvent(Object eventSource) throws DebugException {
     	fireEvent(new DebugEvent(eventSource, DebugEvent.SUSPEND, DebugEvent.CLIENT_REQUEST));

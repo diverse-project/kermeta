@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.6 2005-11-22 08:49:06 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.7 2005-11-23 16:19:00 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.debug.internal.ui.actions.DebugContextualLaunchAction;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -25,11 +26,13 @@ import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
+//import fr.irisa.triskell.kermeta.interpreter.debug.IKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
+import fr.irisa.triskell.kermeta.runner.debug.remote.RemoteDebugCondition;
 import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
@@ -49,14 +52,19 @@ public class KermetaLauncher
     // FIXME : the way this IFile is found is not very "sure" with the use of "findMember"?
     protected IFile selectedFile;
     public static final String defaultTraceExtension = "traceability";
+    /** separator for the arguments given in the Run configuration */
+    public static final String ARG_SEP = " ";
     
     public static KermetaLauncher getDefault() {
         if (defaultLauncher == null)
+        {
             	defaultLauncher = new KermetaLauncher();
+            	defaultLauncher.selectedFile = null;
+        }
         return defaultLauncher;
     }
     
-    /** Prevent user to instanciate it himself */
+    /** Prevent user to instanciate it */
     private KermetaLauncher() {}
     
     public static void main(String[] argv)
@@ -87,34 +95,24 @@ public class KermetaLauncher
      * @param mode
      * @param args the arguments of the given operation opName, separated by a space.
      */
-    public KermetaInterpreter runKermeta(String fileNameString, String classQualifiedNameString, String operationString, String argsString, boolean isDebugMode)
+    public KermetaInterpreter runKermeta(
+    		String fileNameString, 
+    		String classQualifiedNameString, 
+    		String operationString, 
+    		String argsString, boolean isDebugMode)
     {
-        
-        selectedFile = null;
-	    IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
+        IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
 	    if (iresource instanceof IFile)
 	        selectedFile = (IFile) iresource;
 	    else
-	    {  // TODO : throw an exception!
-	    }
-	    // Create a KermetaConsole where the interpreter will print the errors.
-        KermetaConsole console = KermetaConsole.getSingletonConsole();
-        KermetaInterpreter interpreter = null;
-        if ( ! console.isInitialized())
-        {            
-        	// Add a MessageConsole
-        	console.addConsole();
-        }
-        else
-        {
-        	System.out.println("reusing already initilized KermetaConsole");
-            console.reset();
-        }
+	      throw (new Error("File not found! - "+ fileNameString));
+	    
+	    KermetaConsole console = createKermetaConsole();
+        
+	    KermetaInterpreter interpreter = null;
         try
         {
-        	String uri;
-        	uri = "platform:/resource/" + selectedFile.getFullPath().toString();
-
+        	String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
             //  be sure this value is correctly set        
             KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
             
@@ -139,12 +137,9 @@ public class KermetaLauncher
     	        KermetaUnitFactory.resetDefaultLoader();
     	        return null;
             }
-            else 
+            else  // We launch an interpreter with a special "condition"
             {
-            	// TODO : use tracer! 
-            	// But first we need more accessors on the class tracer, so that
-            	// we can get easily the [textual] informations on the location of
-            	// an element in the program in the debug process.
+            	// TODO : use tracer!
                 // interpreter.getUnit().setTracer(defineTracer());
             	System.out.println("------------------------ Coucou! Debug Mode before lunch");
             	interpreter.launch_debug();
@@ -177,6 +172,31 @@ public class KermetaLauncher
         return interpreter;
         
     }
+    
+    /** adapt the runKermeta Method for the debug mode */
+ /*   public KermetaInterpreter runKermeta(String f, String c, String o, String a, boolean debug_mode, IKermetaDebugCondition debug_condition)
+    {
+    	if (debug_mode == false) return runKermeta(f, c, o, a, false, null);
+    	else return runKermeta(f, c, o, a, true, debug_condition);
+    }*/
+    
+    protected KermetaConsole createKermetaConsole()
+    {
+    	// Create a KermetaConsole where the interpreter will print the errors
+    	// and outputs.
+        KermetaConsole console = KermetaConsole.getSingletonConsole();
+        
+        if ( ! console.isInitialized())
+        {   // Add a MessageConsole
+        	console.addConsole();
+        }
+        else
+        {	System.out.println("reusing already initilized KermetaConsole");
+            console.reset();
+        }
+        return console;
+    }
+    
     
     protected Tracer defineTracer()
     {

@@ -1,4 +1,4 @@
-/* $Id: KermetaValue.java,v 1.1 2005-11-04 17:01:08 zdrey Exp $
+/* $Id: KermetaValue.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaValue.java
  * License   : GPL
@@ -45,9 +45,7 @@ public class KermetaValue implements IValue {
         return null;
     }
 
-    /**
-     * @see org.eclipse.debug.core.model.IValue#getValueString()
-     */
+    /** @see org.eclipse.debug.core.model.IValue#getValueString() */
     public String getValueString() throws DebugException {
         return valueString;
     }
@@ -76,27 +74,19 @@ public class KermetaValue implements IValue {
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier()
-     */
+    /** @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier() */
     public String getModelIdentifier() {
-        // TODO Auto-generated method stub
-        return RunnerPlugin.getUniqueIdentifier();
+        return getDebugTarget().getModelIdentifier();
     }
 
-    /**
-     * @see org.eclipse.debug.core.model.IDebugElement#getDebugTarget()
-     */
+    /** @see org.eclipse.debug.core.model.IDebugElement#getDebugTarget() */
     public IDebugTarget getDebugTarget() {
         return debugTarget;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugElement#getLaunch()
-     */
+    /** @see org.eclipse.debug.core.model.IDebugElement#getLaunch() */
     public ILaunch getLaunch() {
-        // TODO Auto-generated method stub
-        return null;
+        return getDebugTarget().getLaunch();
     }
 
     /* (non-Javadoc)
@@ -107,4 +97,7 @@ public class KermetaValue implements IValue {
         return null;
     }
 
+    public void setValueString(String valueString) {
+    	this.valueString = valueString; 
+    }
 }

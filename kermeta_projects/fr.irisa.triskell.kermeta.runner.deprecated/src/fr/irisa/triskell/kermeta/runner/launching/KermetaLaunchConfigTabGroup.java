@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfigTabGroup.java,v 1.10 2005-09-09 18:04:21 zdrey Exp $
+/* $Id: KermetaLaunchConfigTabGroup.java,v 1.11 2005-11-23 16:19:00 zdrey Exp $
  * Project: Kermeta.runner
  * File: KermetaLaunchConfigTabGroup.java
  * License: EPL
@@ -14,6 +14,7 @@ import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
+import org.eclipse.jdt.debug.ui.launchConfigurations.JavaClasspathTab;
 //import org.eclipse.jdt.debug.ui.launchConfigurations.JavaArgumentsTab;
 
 /**
@@ -34,7 +35,8 @@ public class KermetaLaunchConfigTabGroup extends
         {
             tabs = new ILaunchConfigurationTab[] {
                     new ArgumentConfigurationTab(),
-                    new CommonTab()/*,
+                    new CommonTab(),
+                    /*new JavaClasspathTab(),
                     new JavaArgumentsTab()
                     ,
                     new GeneralConfigurationTab()*/

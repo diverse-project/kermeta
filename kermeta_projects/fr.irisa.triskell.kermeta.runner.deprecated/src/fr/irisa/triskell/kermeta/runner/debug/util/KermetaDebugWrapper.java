@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.2 2005-11-22 09:33:08 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.3 2005-11-23 16:19:00 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -23,6 +23,8 @@ import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugThread;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaStackFrame;
+import fr.irisa.triskell.kermeta.runner.debug.remote.RemoteCallFrame;
+import fr.irisa.triskell.kermeta.runner.debug.remote.RemoteVariable;
 import fr.irisa.triskell.kermeta.structure.FObject;
 
 /**
@@ -90,6 +92,54 @@ public class KermetaDebugWrapper {
 		}
 		return frames;
 	}
+	
+
+	// TODO : put those method in a single class
+	public static RemoteCallFrame[] getRemoteCallFrames(DebugInterpreter interpreter) {
+
+		// Get the current execution context
+		InterpreterContext context = interpreter.getInterpreterContext();
+		
+		Iterator kframe_it = context.getFrameStack().iterator();
+		int i = 0;
+		int kframe_size    = context.getFrameStack().size();
+		// For each call frame create a stack frame corresponding to its properties.
+		// if kframe_size > 0 ??
+		RemoteCallFrame[] frames = new RemoteCallFrame[kframe_size];
+		while (kframe_it.hasNext())
+		{	
+			Traceback traceback = null;
+			CallFrame kframe = (CallFrame)kframe_it.next();
+			// The current expression that is attached to this call frame
+			FObject source_object = kframe.getExpression();
+			System.out.println("expression : " + kframe.getExpression() );
+			// TODO : use traceability!!!!!! gnak
+			// The case "expression == null" occurs for frame of the main operation 
+			// since it is not executed as a "CallFeature" but as an "FOperation" which is 
+			// not an FExpression.
+			if (source_object == null)
+				source_object = kframe.getOperation();
+			
+			traceback = new Traceback(interpreter, source_object);
+			
+			String[] frame_context = traceback.getContextForFObjectAsArray(kframe, source_object);
+			int line = 1;
+			if (frame_context[1].length() > 0 || frame_context[1] != null)
+				line = Integer.parseInt(frame_context[1]); 
+			
+			RemoteCallFrame iframe = new RemoteCallFrame(
+					frame_context[0],
+					line,
+					frame_context[2],
+					new RemoteVariable[1]
+					);
+			// if stepOver, path should be always the same and equal to the KermetaDebugTarget path attribute.
+			//iframe.setName("youhou? : " + frame_context[2] + "(" + frame_context[1] + ")");
+			frames[i++] = iframe;
+		}
+		return frames;
+	}
+
 	
 	/**
 	 * Get all the variables available from the given call frame.

@@ -3,166 +3,65 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
-import org.eclipse.debug.core.DebugException;
-import org.eclipse.debug.core.ILaunch;
-import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.debug.core.model.IStreamsProxy;
-
-import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
+import fr.irisa.triskell.kermeta.runner.debug.remote.IKermetaRemoteDebugPlatform;
+import fr.irisa.triskell.kermeta.runner.debug.remote.IKermetaRemoteInterpreter;
+import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteInterpreter;
 
 /**
  * @author zdrey
  * I am not sure that implementing IProcess is meaningfull.
  */
-public class KermetaProcess implements Runnable, IProcess {
+public class KermetaProcess extends Thread {
 
-	protected KermetaDebugTarget target;
-	// We include the interpreter in this thread.
-	private DebugInterpreter interpreter;
+	public String f;
+	public String c;
+	public String o;
+	public String a;
+	public IKermetaRemoteDebugPlatform debugPlatform;
 	
-	/** true if the debug has ended or debugger disconnected, false otherwise
-	 *  for the moment it will always false 
-	 * */
-	private boolean done = false;
 	/**
 	 * 
 	 */
-	public KermetaProcess(KermetaDebugTarget p_target) {
+	public KermetaProcess(String f, String c, String o, String a, IKermetaRemoteDebugPlatform debug_platform) {
 		super();
-		target = p_target;
-
+		this.f = f;
+		this.c = c;
+		this.o = o;
+		this.a = a;
+		debugPlatform = debug_platform;
 	}
-
 	
-	/* (non-Javadoc)
+	
+	/**
+	 * Method called when start() is called on this thread
 	 * @see java.lang.Runnable#run()
 	 */
 	public synchronized void run() {
-		// Initialize the DebugTarget 
-        target.initialize();
-        
-        // Create the Interpreter
-        createKermetaInterpreter();
-		System.err.println("****************************************************");
-	}
-
-	/**
-	 * Creates the Kermeta interpreter and sets it to the KermetaDebugTarget.
-	 * If the interpreter is launched under a separate process, it is this method
-	 * that you need to redefine.
-	 *
-	 */
-	public void createKermetaInterpreter()
-	{
-		//Instanciate the debug interpreter
-        KermetaInterpreter global_interpreter = KermetaLauncher.getDefault().runKermeta(
-        		target.getStartFile(), target.getClassName(), target.getOpName(), target.getArgs(), true);
-        
-        interpreter = (DebugInterpreter)global_interpreter.getMemory().getCurrentInterpreter();
-        
-        target.setKermetaInterpreter(global_interpreter);
-        
-        interpreter.invoke_debug();
-	}
-	
-	
-	
-	/*
-	 * 
-	 * (methods initially located in KermetaDebugTarget)
-	 * command that is dedicated to the 
-	 * 
-	 */
-	
-	/* ------------------------------------------------------------------------
-	 * 
-	 *  METHODS IMPLEMENTING IPROCESS INTERFACE
-	 *  
-	 * ------------------------------------------------------------------------
-	 */
-	
-	public String getLabel() {
-		return "Salut mon pote";
-	}
-
-	public ILaunch getLaunch() {
-		return target.getLaunch();
-	}
-
-	public IStreamsProxy getStreamsProxy() {
-		return null;
-	}
-
-	public void setAttribute(String key, String value) {
-		System.err.println("Whoose attribute??? (KermetaProcess)");
-	}
-
-	public String getAttribute(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getExitValue() throws DebugException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public Object getAdapter(Class adapter) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean canTerminate() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean isTerminated() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void terminate() throws DebugException {
-		// TODO Auto-generated method stub
-	}
-	
-	public DebugInterpreter getDebugInterpreter() {
-		return interpreter;
-	}
-
-	public OutputStream getOutputStream() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public InputStream getInputStream() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public InputStream getErrorStream() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int waitFor() throws InterruptedException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int exitValue() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
+		try
+		{
+			System.err.println("1) remote interpreter!");
+			Registry reg = LocateRegistry.createRegistry(5002);
+			IKermetaRemoteInterpreter remote_interpreter = new KermetaRemoteInterpreter(f, c, o, a);
+			
+			reg.bind("remote_interpreter", remote_interpreter);
+			System.err.println("bound!");
+		}
+		catch (RemoteException e) {e.printStackTrace();}
+		catch (AlreadyBoundException e) {e.printStackTrace();}
+//		catch (MalformedURLException e) {e.printStackTrace();}
+		finally
+		{ 
+			try {
+				debugPlatform.remoteInterpreterCreated();
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

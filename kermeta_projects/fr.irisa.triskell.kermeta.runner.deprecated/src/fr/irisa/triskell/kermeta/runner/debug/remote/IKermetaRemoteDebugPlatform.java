@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteDebugPlatform.java,v 1.1 2005-11-22 09:31:35 zdrey Exp $
+/* $Id: IKermetaRemoteDebugPlatform.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteDebugPlatform.java
  * License   : EPL
@@ -22,6 +22,8 @@ public interface IKermetaRemoteDebugPlatform extends Remote {
 	/**
 	 * Notify method called from the Server to tell him the command has been processed
 	 */
-	public abstract Object notify(String command) throws RemoteException;
+	public abstract Object notify(String command, String reason) throws RemoteException;
+	public abstract String getCommand() throws RemoteException;
+	public abstract void remoteInterpreterCreated() throws RemoteException;
 
 }

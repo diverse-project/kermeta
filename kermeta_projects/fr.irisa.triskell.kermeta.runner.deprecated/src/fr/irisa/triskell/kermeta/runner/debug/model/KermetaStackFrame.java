@@ -1,4 +1,4 @@
-/* $Id: KermetaStackFrame.java,v 1.4 2005-11-22 09:28:22 zdrey Exp $
+/* $Id: KermetaStackFrame.java,v 1.5 2005-11-23 16:18:59 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaStackFrame.java
  * License   : GPL
@@ -111,31 +111,23 @@ public class KermetaStackFrame implements IStackFrame {
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IStackFrame#hasRegisterGroups()
-     */
+    /** @see org.eclipse.debug.core.model.IStackFrame#hasRegisterGroups() */
     public boolean hasRegisterGroups() throws DebugException {
         // TODO Auto-generated method stub
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier()
-     */
+    /** @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier() */
     public String getModelIdentifier() {
         return thread.getModelIdentifier();
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugElement#getDebugTarget()
-     */
+    /** @see org.eclipse.debug.core.model.IDebugElement#getDebugTarget() */
     public IDebugTarget getDebugTarget() {
         return thread.getDebugTarget();
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IDebugElement#getLaunch()
-     */
+    /** @see org.eclipse.debug.core.model.IDebugElement#getLaunch() */
     public ILaunch getLaunch() {
         return thread.getLaunch();
     }
@@ -150,69 +142,48 @@ public class KermetaStackFrame implements IStackFrame {
         return thread.canStepOver();
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IStep#canStepReturn()
-     */
+    /** @see org.eclipse.debug.core.model.IStep#canStepReturn() */
     public boolean canStepReturn() {        
         return thread.canStepReturn();
     }
 
-    /* (non-Javadoc)
-     *  TODO / ou FIXME : deleguer isStepping à la class KermetaDebugElement
-     * @see org.eclipse.debug.core.model.IStep#isStepping()
-     */
+    /** TODO / ou FIXME : deleguer isStepping à la class KermetaDebugElement
+     * @see org.eclipse.debug.core.model.IStep#isStepping() */
     public boolean isStepping() {
     	System.out.println("IS STEPPING IN (KermetaStackFrame)?");
         return thread.isStepping();
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IStep#stepInto()
-     */
+    /** @see org.eclipse.debug.core.model.IStep#stepInto() */
     public void stepInto() throws DebugException {
     	System.out.println("le step into qui est appelé ben il est dans KermetaStackFrame");
     	thread.stepInto();
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IStep#stepOver()
-     */
+    /** @see org.eclipse.debug.core.model.IStep#stepOver() */
     public void stepOver() throws DebugException { thread.stepOver();    }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IStep#stepReturn()
-     */
+    /** @see org.eclipse.debug.core.model.IStep#stepReturn() */
     public void stepReturn() throws DebugException { thread.stepReturn(); }
     
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ISuspendResume#canResume()
-     */
+    /** @see org.eclipse.debug.core.model.ISuspendResume#canResume() */
     public boolean canResume() {
     	System.out.println("Can resume in KermetaStackFrame");
-        // TODO Auto-generated method stub
         return thread.canResume();
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ISuspendResume#canSuspend()
-     */
+    /** @see org.eclipse.debug.core.model.ISuspendResume#canSuspend() */
     public boolean canSuspend() {
-        // TODO Auto-generated method stub
         return thread.canSuspend();
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.ISuspendResume#isSuspended()
-     */
+    /** @see org.eclipse.debug.core.model.ISuspendResume#isSuspended() */
     public boolean isSuspended() {
-        // TODO Auto-generated method stub
     	System.out.println("kermeta debugger stack frame : IS SUSPENDED?\n");
         return thread.isSuspended();
     }
 
-    /**
-     * @see org.eclipse.debug.core.model.ISuspendResume#resume()
-     */
+    /** @see org.eclipse.debug.core.model.ISuspendResume#resume() */
     public void resume() throws DebugException {
     	System.out.println("kermeta debugger stack frame : resuming\n");
     	thread.resume();
@@ -256,12 +227,15 @@ public class KermetaStackFrame implements IStackFrame {
      * This path is used by the KermetaSourceLocator.getEditorInput method, which
      * is itself called somewhere in the DebugFramework to locate the editor to "point" 
      * to on debug mode (like for highlighting line number )
+     * FIXME : the path should change according..
      */
 	public IPath getPath() { 
 		//return path;
-		return ((KermetaDebugTarget)getDebugTarget()).getIPathFromString(
+		if (path == null)
+			return AbstractKermetaTarget.getIPathFromString(
 			((KermetaDebugTarget)getDebugTarget()).getStartFile()
 		);
+		return path;
 	}
 	
 	protected int findLineNumberFromUnit()

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.4 2005-11-22 09:28:22 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.5 2005-11-23 16:18:59 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -44,7 +44,6 @@ import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.remote.IKermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugPlatform;
 import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteInterpreter;
-import fr.irisa.triskell.kermeta.runner.debug.remote.ServerProcess;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaStepHandler;
 import fr.irisa.triskell.kermeta.runner.debug.util.ResumeCommand;
 import fr.irisa.triskell.kermeta.runner.debug.util.StepIntoCommand;
@@ -67,6 +66,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 { 
     protected KermetaRemoteDebugPlatform remotePlatform;
     protected IKermetaRemoteInterpreter remoteInterpreter;
+    private Registry reg;
     
     protected KermetaProcess kermeta_process;
     protected KermetaStepHandler stepHandler;
@@ -115,47 +115,18 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     public synchronized void start()
     {
     	// Create the KermetaDebugPlatform that will be driven by the KermetaDebugTarget
-//    	try {
+    	try {
     		System.out.println("START");
-    		
     		initialize();
-    		// First, create and run the remoteInterpreter. The method automatically start
-    		// it (thread inside!)
-    		// Start the debug interpreter
-    		startRemoteInterpreterProcess();
+    		// Create the remote platform
+    		createRemotePlatform();
     		
-//    		 Dirty patch, but necessary since here we want to run the KermetaInterpreter
-    		// in a thread, not the interpreter listener -- created by "registerClient" method
-    		// call (which is linked to this target).
-    		// For this purpose we need to start 
-    		try {
-				Thread.sleep(1500);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-    		// Second, Register the remote platform
-			try {
-				registerClient();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-//		} 
-    /*	catch (RemoteException e) { e.printStackTrace(); }
-		catch (InterruptedException e) { e.printStackTrace();}*/
-    }
-    
-    /** *
-     * Get the value of the variable given in parameters
-     * @return
-     */
-    public IValue getVariableValue(KermetaVariable variable) throws DebugException
-    {
-        return null;
+    		// Start the debug interpreter in a separate process
+    		startRemoteInterpreterProcess();
+    	} 
+    	catch (RemoteException e) { e.printStackTrace(); }
     }
 
-    
     /** RESUME command */
     public void resume() throws DebugException {
         System.err.println("Resume event (KermetaDebugTarget.java)");
@@ -182,7 +153,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	System.err.println("Call terminate on debug target");
 		// TODO Auto-generated method stub
     	setState(stateTerminated);
-		kermeta_process.terminate();
+		//kermeta_process.terminate();
         kermeta_process = null;
 		fireEvent(new DebugEvent(this, DebugEvent.TERMINATE));
 	}
@@ -213,18 +184,12 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 
     /** @see org.eclipse.debug.core.model.ISuspendResume#canSuspend() */
     public boolean canSuspend()
-    {
-    	System.out.println("Can Suspend? : " );
-		return !isSuspended(); 
-    }
+    {	return !isSuspended(); }
 
-	/* (non-Javadoc)
+	/**
 	 * @see fr.irisa.triskell.kermeta.runner.launching.AbstractKermetaTarget#supportsBreakpoint(org.eclipse.debug.core.model.IBreakpoint)
 	 */
-	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
-		// TODO Auto-generated method stub
-		return true;
-	}
+	public boolean supportsBreakpoint(IBreakpoint breakpoint) { return true; }
 
 	/** @see org.eclipse.debug.core.model.IDisconnect#canDisconnect() */
     public boolean canDisconnect() { return (state != stateDisconnected); }
@@ -286,8 +251,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	 * @see fr.irisa.triskell.kermeta.runner.launching.AbstractKermetaTarget#getProcess()
 	 */
 	public IProcess getProcess() {
-		//System.err.println("getProcess in (KermetaDebugTarget) : " + kermeta_process.getDebugInterpreter());
-		return kermeta_process;
+		return null;
 	}
 
 	/**
@@ -454,22 +418,13 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	}
 	
 	
-	public void registerClient() throws RemoteException
+	public void createRemotePlatform() throws RemoteException
 	{
-/*		new Thread() { public void run() { */
 		try
 		{	
 			System.err.println("2) the client (GUI)!");
-			Registry reg = LocateRegistry.getRegistry("localhost", 5002);
-			
-			// Proper way to wait for the server side to be "bound"
-			while (reg.list().length == 0);
 			// This is where we can access the remote interpreter.
-			remoteInterpreter = (IKermetaRemoteInterpreter)reg.lookup("remote_interpreter");
-			
-			remoteInterpreter.registerKermetaRemoteDebugPlatform(new KermetaRemoteDebugPlatform(this));
-			
-			remoteInterpreter.execute("toto");
+			remotePlatform    = new KermetaRemoteDebugPlatform(this);
 			System.out.println("CLIENT REGISTERED!");
 		}
 		catch (Exception e)
@@ -477,33 +432,23 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 			System.err.println("EXCEPTION DE LOOKUP!");
 			e.printStackTrace();
 		}
-/*		} }.start(); */
 	}
+	
+	protected Object sync = "lock";
 	
 	/**
 	 * Start the Kermeta debug interpreter in another process (here, the "process"
 	 * is in fact a Thread)
+	 * TODO : move it in KermetaProcess class.
 	 */
 	public synchronized void startRemoteInterpreterProcess()
 	{
-		new Thread() {
-			public synchronized void run()
-			{
-				try
-				{
-					System.err.println("1) remote interpreter!");
-					Registry reg = LocateRegistry.createRegistry(5002);
-					IKermetaRemoteInterpreter remote_interpreter = new KermetaRemoteInterpreter(getStartFile(), getClassName(), getOpName(), getArgs());
-					
-					reg.bind("remote_interpreter", remote_interpreter);
-					System.err.println("BOUND!");
-				}
-				catch (RemoteException e) {e.printStackTrace();}
-				catch (AlreadyBoundException e) {e.printStackTrace();}
-//				catch (MalformedURLException e) {e.printStackTrace();}
-			}
-		}.start();
-		
+		kermeta_process = new KermetaProcess(getStartFile(), getClassName(), getOpName(), getArgs(), remotePlatform);
+		kermeta_process.start();
 	}
 	
+	public void setRemoteInterpreter(IKermetaRemoteInterpreter remote_i)
+	{
+		remoteInterpreter = remote_i;
+	}
 }

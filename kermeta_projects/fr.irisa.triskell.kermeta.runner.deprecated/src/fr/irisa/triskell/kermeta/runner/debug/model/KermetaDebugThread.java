@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.4 2005-11-22 09:28:22 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.5 2005-11-23 16:18:59 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -175,7 +175,8 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	 * @param suspend
 	 */
 	public void setSuspended(boolean suspend)
-	{	
+	{
+		isSuspended = suspend;
 		// FIXME : for now this static method create frames each time setSuspended is
 		// called! in next version, change that!!
 		// Pydev does that in the processSuspendCommand method.
@@ -183,6 +184,7 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 /*		stackFrames = KermetaDebugWrapper.findStackFramesFromCallFrames(
 				(KermetaDebugTarget)getDebugTarget(), this);
 			System.out.println("Stack frames : " + stackFrames.length);*/
+		
 		try {
 			target.getRemoteInterpreter().execute(GET_STACK);
 		} catch (RemoteException e) {
@@ -203,29 +205,6 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 			stackFrames[0] = new KermetaStackFrame(this, "default", null, 1);
 		}*/
 		
-		
-/*		if (((KermetaDebugTarget)getDebugTarget()).getDebugInterpreter()!=null)
-		{
-			System.out.println("Interpreter exists!");
-			
-			
-			stackFrames = KermetaDebugWrapper.findStackFramesFromCallFrames(
-				(KermetaDebugTarget)getDebugTarget(), this);
-			System.out.println("Stack frames : " + stackFrames.length);
-			// Debug framework does not want that stackFrames is null...
-			if (stackFrames == null || stackFrames.length == 0)
-			{
-				stackFrames = new KermetaStackFrame[1];
-				stackFrames[0] = new KermetaStackFrame(this, "default", null, 1);
-			}
-		}
-		else
-		{
-			System.out.println("No interpreter yet!" );
-			stackFrames = new KermetaStackFrame[1];
-			stackFrames[0] = new KermetaStackFrame(this, "default", null, 1);
-		}*/
-		isSuspended = suspend;
 	}
 
 
@@ -241,7 +220,8 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 		// then processes the command.
 		// target.getDebugger() <-
 		try {
-			target.getRemoteInterpreter().execute("resume");
+			// target.getRemoteInterpreter().execute("resume");
+			target.getRemotePlatform().notify(KermetaDebugElement.RESUME, KermetaDebugElement.CLIENT_REQUEST);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -254,6 +234,7 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 		setSuspended(true);
 		System.err.println("stack : "+ stackFrames.length);
 		try {
+			//target.getRemotePlatform().notify(KermetaDebugElement.SUSPEND, KermetaDebugElement.CLIENT_REQUEST);
 			target.getRemoteInterpreter().execute("suspend");
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
@@ -266,6 +247,10 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 		target.setState(KermetaDebugTarget.stateRunning);
 		isStepping = true;
 		try {
+			// This call unblocks the interpreter.
+			// notify is used as well by the GUI (to tell a GUI command --here, stepInto-- is run)
+			// as by the RemoteInterpreter (to tell a debugInterp. command is done)
+			target.getRemotePlatform().notify(KermetaDebugElement.RESUME, KermetaDebugElement.STEP_INTO);
 			target.getRemoteInterpreter().execute(KermetaDebugElement.STEP_INTO);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block

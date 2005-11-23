@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteInterpreter.java,v 1.1 2005-11-22 09:31:35 zdrey Exp $
+/* $Id: IKermetaRemoteInterpreter.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteInterpreter.java
  * License   : EPL
@@ -36,4 +36,7 @@ public interface IKermetaRemoteInterpreter extends Remote
 	public abstract RemoteCallFrame[] getFrames() throws RemoteException;
 	public abstract void setFrames(RemoteCallFrame[] frames) throws RemoteException;
 	
+	// Blocks itself
+	public abstract void block() throws RemoteException;
+	public abstract void unblock() throws RemoteException;
 }
