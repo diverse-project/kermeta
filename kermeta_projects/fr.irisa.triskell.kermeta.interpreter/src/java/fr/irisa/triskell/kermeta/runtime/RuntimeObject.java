@@ -1,13 +1,14 @@
-/* $Id: RuntimeObject.java,v 1.8 2005-08-09 09:33:07 ffleurey Exp $
+/* $Id: RuntimeObject.java,v 1.9 2005-11-24 09:34:48 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
- * Copyright : IRISA / Universite de Rennes 1
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Mar 14, 2005
  * Authors : 
  * 		Franck Fleurey <ffleurey@irisa.fr>
  * 		Jean-Philippe Thibault <jpthibau@irisa.fr>
+ * 		Didier Vojtisek <dvojtise@irisa.fr>
  * Description : This is the java representation of the Kermeta objects during the execution
  * of a kermeta source code. Typically, a RuntimeObject corresponds to 
  * a Kermeta object during its "life" execution. 
@@ -22,8 +23,8 @@ import fr.irisa.triskell.kermeta.structure.FObject;
 
 /**
  * @author Franck Fleurey
- * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * IRISA / INRIA / University of rennes 1
+ * Distributed under the terms of the EPL license
  * 
  * This is the java implemetation of a Kermeta object 
  */
@@ -201,11 +202,22 @@ public class RuntimeObject {
 	    String class_name = "< No Metaclass ! >";
 	    try {
 	        class_name = factory.getMemory().getUnit().getQualifiedName(((FClass)metaclass.getData().get("kcoreObject")).getFClassDefinition());
+		    String sValue = (String)getData().get("StringValue");
+		    if(sValue != null)
+		    	return "[" + class_name + " : "+ oId +" = \"" +sValue+"\"]";
+		    
+		    Boolean bValue = (Boolean)getData().get("BooleanValue");
+		    if(bValue != null)
+		    	return "[" + class_name + " : "+ oId +" = " +bValue+"]";
+		    
+		    Object nValue = getData().get("NumericValue");
+		    if(nValue != null)
+		    	return "[" + class_name + " : "+ oId +" = " +nValue+"]";
 	    }
 	    catch(Exception e) { 
 	        // NOTHING
 	    }
-	    
+	    	    
 	    return "[" + class_name + " : "+ oId +"]";
 	}
 	
