@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.4 2005-11-24 14:28:54 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.5 2005-11-24 18:36:44 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -28,7 +28,6 @@ import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.FRescue;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.interpreter.debug.IKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
