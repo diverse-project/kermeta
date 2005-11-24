@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteDebugPlatform.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: IKermetaRemoteDebugPlatform.java,v 1.3 2005-11-24 14:22:37 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteDebugPlatform.java
  * License   : EPL
@@ -25,5 +25,14 @@ public interface IKermetaRemoteDebugPlatform extends Remote {
 	public abstract Object notify(String command, String reason) throws RemoteException;
 	public abstract String getCommand() throws RemoteException;
 	public abstract void remoteInterpreterCreated() throws RemoteException;
+	
+	// stepping, running, suspended..
+	/**
+	 * Get the current state of the Debug, among :
+	 * - isStepping
+	 * - resumed
+	 * - suspended
+	 */
+	public abstract String getDebugState() throws RemoteException;
 
 }

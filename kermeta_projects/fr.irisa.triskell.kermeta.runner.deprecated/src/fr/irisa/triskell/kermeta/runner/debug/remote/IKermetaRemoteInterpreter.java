@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteInterpreter.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: IKermetaRemoteInterpreter.java,v 1.3 2005-11-24 14:22:37 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteInterpreter.java
  * License   : EPL
@@ -39,4 +39,7 @@ public interface IKermetaRemoteInterpreter extends Remote
 	// Blocks itself
 	public abstract void block() throws RemoteException;
 	public abstract void unblock() throws RemoteException;
+	
+	// Change the stop condition strategy
+	public void setDebugCondition(String cond_name) throws RemoteException;
 }

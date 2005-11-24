@@ -1,4 +1,4 @@
-/* $Id: RemoteVariable.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: RemoteVariable.java,v 1.3 2005-11-24 14:22:37 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : RemoteVariable.java
  * License   : EPL
@@ -14,6 +14,10 @@ import java.io.Serializable;
 /** A serialisable representation of the available variables */
 public class RemoteVariable implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** attributes corresponding to the type IVariable/KermetaVariable of the debug framework. */
 	public String name;
 	public String type;

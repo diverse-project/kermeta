@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.3 2005-11-24 14:22:37 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -15,9 +15,13 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.debug.IKermetaDebugCondition;
 
+
+import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.debug.remote.RemoteCallFrame;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaDebugWrapper;
@@ -28,6 +32,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 
 	
 	/** The client that ask requests to the interpreter */
+	// TODO : put in protected!
 	public IKermetaRemoteDebugPlatform remoteDebugPlatform;
 	public DebugInterpreter interpreter;
 	public String startfile;
@@ -38,7 +43,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	public boolean blocked;
 	/** The debug condition controls the freeze/block of the thread until
 	 *  a new event occurs */
-	//public RemoteDebugCondition debugCondition;
+	public Hashtable conditions;
 	
 	// Ask platform if it can unblock
 	public static final String ASK_PLATFORM = "ask";
@@ -55,12 +60,19 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		args      = p_args;
 		invoked = false; 
 		blocked = false;
-		createKermetaInterpreter();
 
-	//	debugCondition = new RemoteDebugCondition(this);
-		
+		createStopConditions();
+		createKermetaInterpreter();
 	}
 
+	/** Initialize all the stop condition that could control the interpreter */
+	public void createStopConditions()
+	{
+		conditions = new Hashtable();
+		conditions.put(RunnerConstants.RESUME, new ResumeCondition(this));
+		conditions.put(RunnerConstants.STEP_INTO, new StepIntoCondition(this));
+	}
+	
 	/**
 	 * Execute the command defined by the given argument
 	 * TODO : implement the pattern command
@@ -73,7 +85,6 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		{
 			System.out.println("suspend");
 			interpreter.setSuspended(true, "");
-			
 		}
 		if (command.equals("stepInto"))
 		{			
@@ -126,11 +137,16 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
         		startfile, classname, opname, args, true) ; //, null);//debugCondition);
         
         interpreter = (DebugInterpreter)global_interpreter.getMemory().getCurrentInterpreter();
-        //interpreter.setDebugCondition(new RemoteDebugCondition(this));
+        // Set the condition
+        interpreter.setDebugCondition((IKermetaDebugCondition)conditions.get(RunnerConstants.RESUME));
        // interpreter.invoke_debug();
 	}
 	
-
+	/** Shortcut method to change the interpreter stop condition */
+	public void setDebugCondition(String cond_name)
+	{
+		interpreter.setDebugCondition((IKermetaDebugCondition)conditions.get(cond_name));
+	}
 
 	/**
 	 * @return Returns the interpreter.
@@ -169,8 +185,22 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		return blocked;
 	}
 	
-	public void block() throws RemoteException { blocked = true; }
-	public void unblock() throws RemoteException { blocked = false; }
+	public synchronized void block() throws RemoteException
+	{
+		blocked = true;
+		try {
+			wait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public synchronized void unblock() throws RemoteException
+	{ 
+		blocked = false;
+		notify();
+	}
 	/*
 	 * 
 	 *  A C C E S S O R S

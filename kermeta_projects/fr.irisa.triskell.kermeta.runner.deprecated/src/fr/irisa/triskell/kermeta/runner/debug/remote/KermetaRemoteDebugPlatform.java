@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugPlatform.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: KermetaRemoteDebugPlatform.java,v 1.3 2005-11-24 14:22:37 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugPlatform.java
  * License   : EPL
@@ -21,6 +21,7 @@ import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 
+import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
@@ -41,6 +42,10 @@ public class KermetaRemoteDebugPlatform extends UnicastRemoteObject implements I
 	}
 
 	/** Notify the server that the command is finished
+	 * Command :
+	 * 	- can only be "resume", "suspend"
+	 *  Reason :
+	 *  - stepEnd, stepInto, stepOver 
 	 * */
 	public Object notify(String command, String reason) throws RemoteException {
 		Object result = null;
@@ -59,6 +64,7 @@ public class KermetaRemoteDebugPlatform extends UnicastRemoteObject implements I
 				IStackFrame[] iframes = defineStackFrames(frames);
 				kd_thread.setStackFrames(iframes);
 				System.err.println("notify done");
+				// 
 				target.getRemoteInterpreter().block();
 			}
 			if (command.equals("resume")) // resume is first asked by the KRDP itself
@@ -67,22 +73,24 @@ public class KermetaRemoteDebugPlatform extends UnicastRemoteObject implements I
 				target.getRemoteInterpreter().unblock();
 			}
 			
-			// This command is sent by the KRI, just to ask if it is still block or not
-			if (command.equals("ask"))
-			{
-				System.err.println("KRDP is notified : ASK ");
-				
-			}
-
 			// 2) process the "reason"
-			if (reason.equals("stepEnd"))
+			if (reason.equals(RunnerConstants.STEP_END))
 			{
 				System.err.println("step ended!!");
+				// This statement fires event to tell the GUI to suspend back.
 				target.getStepHandler().stepEnd(kd_thread);
+				// This statement tells the remoteInterpreter to block
 				target.getRemoteInterpreter().block();
 			}
-			
-			//if (reason.equals("clientRequest")) ???
+			// If it is stepInto, we must unblock the interpreter
+			if (reason.equals(RunnerConstants.STEP_INTO))
+			{
+				// the debug condition will control if the debugger can continue or not
+				// its stop the debugger as soon as its evaluation is true during the 
+				// execution
+				target.getRemoteInterpreter().setDebugCondition(RunnerConstants.STEP_INTO);
+				target.getRemoteInterpreter().unblock();
+			}
 			
 		} catch (DebugException e) {
 		e.printStackTrace();
@@ -92,11 +100,27 @@ public class KermetaRemoteDebugPlatform extends UnicastRemoteObject implements I
 		
 	}
 	
+	/**
+	 * The debug state tells the user if the debug is running, suspended, or terminated.
+	 * It blocks or unblocks accordingly the RemoteInterpreter
+	 * @see fr.irisa.triskell.kermeta.runner.debug.remote.IKermetaRemoteDebugPlatform#getDebugState()
+	 */
+	public String getDebugState() throws RemoteException {
+		return target.getStateAsString();
+	}
+
 	public String getCommand()
 	{
 		return currentCommand;
 	}
 	
+	/**
+	 * Returns the stackFrames Eclipse elements corresponding to the given array
+	 * of RemoteCallFrames.
+	 * @param frames the frames to convert in KermetaStackFrames (==IStackFrames)
+	 * @return the converted KermetaStackFrames 
+	 * @throws DebugException
+	 */
 	public IStackFrame[] defineStackFrames(RemoteCallFrame[] frames) throws DebugException
 	{
 		KermetaStackFrame[] result = new KermetaStackFrame[frames.length];
@@ -128,6 +152,7 @@ public class KermetaRemoteDebugPlatform extends UnicastRemoteObject implements I
 			IKermetaRemoteInterpreter remoteInterpreter = (IKermetaRemoteInterpreter)reg.lookup("remote_interpreter");
 			remoteInterpreter.registerKermetaRemoteDebugPlatform(this);
 			target.setRemoteInterpreter(remoteInterpreter);
+			
 		}
 		catch (NotBoundException e)
 		{
