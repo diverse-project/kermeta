@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.3 2005-11-24 14:25:49 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.4 2005-11-24 14:28:54 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -64,7 +64,8 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public IKermetaDebugCondition debugCondition;
      
     // A reference to the KermetaRemoteInterpreter that drives our DebugInterpreter.
-    
+    public boolean debugMode;
+    public String debugMessage;
     
     /**
      * @param pMemory
