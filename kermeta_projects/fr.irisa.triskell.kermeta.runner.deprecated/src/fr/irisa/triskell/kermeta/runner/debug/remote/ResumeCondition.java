@@ -1,4 +1,4 @@
-/* $Id: ResumeCondition.java,v 1.1 2005-11-24 14:22:37 zdrey Exp $
+/* $Id: ResumeCondition.java,v 1.2 2005-11-24 18:33:18 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : ResumeCondition.java
  * License   : EPL
@@ -9,8 +9,9 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.remote;
 
+
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.debug.IKermetaDebugCondition;
+import fr.irisa.triskell.kermeta.interpreter.IKermetaDebugCondition;
 
 public class ResumeCondition implements IKermetaDebugCondition {
 
@@ -20,6 +21,10 @@ public class ResumeCondition implements IKermetaDebugCondition {
 	{
 		remoteInterpreter = remote;
 	}
+
+	
+	public ResumeCondition() {}
+	
 	
 	/**
 	 * This method, that should be called "shouldBlock", is called by the DebugInterpreter
@@ -39,10 +44,15 @@ public class ResumeCondition implements IKermetaDebugCondition {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public void setRemoteInterpreter(KermetaRemoteInterpreter remote)
+	{
+		//remoteInterpreter = remote;
+	}
 
 	public boolean evaluate() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

@@ -8,10 +8,17 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import fr.irisa.triskell.kermeta.interpreter.debug.IKermetaDebugCondition;
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.kermeta.runner.RunnerConstants;
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.remote.IKermetaRemoteDebugPlatform;
 import fr.irisa.triskell.kermeta.runner.debug.remote.IKermetaRemoteInterpreter;
+import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugPlatform;
 import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.RemoteDebugCondition;
+import fr.irisa.triskell.kermeta.runner.debug.remote.ResumeCondition;
 
 /**
  * @author zdrey
@@ -35,6 +42,10 @@ public class KermetaProcess extends Thread {
 		this.opname = o;
 		this.args = a;
 		debugPlatform = debug_platform;
+/*		System.err.println(KermetaDebugTarget.class.getClassLoader());
+		System.err.println(KermetaPlugin.class.getClassLoader());
+		System.err.println(KermetaRemoteInterpreter.class.getClassLoader());
+		this.setContextClassLoader( KermetaRemoteInterpreter.class.getClassLoader() );*/
 	}
 	
 	
@@ -42,7 +53,7 @@ public class KermetaProcess extends Thread {
 	 * Method called when start() is called on this thread
 	 * @see java.lang.Runnable#run()
 	 */
-	public synchronized void run() {
+	public void run() {
 		IKermetaRemoteInterpreter remote_interpreter = null;
 		try
 		{
@@ -51,7 +62,12 @@ public class KermetaProcess extends Thread {
 			remote_interpreter = new KermetaRemoteInterpreter(file, classname, opname, args);
 			reg.bind("remote_interpreter", remote_interpreter);
 		}
-		catch (RemoteException e) {e.printStackTrace();}
+		catch (RemoteException e) 
+		{
+			System.out.println("Exception Remote! ");
+			e.printStackTrace();
+			
+		}
 		catch (AlreadyBoundException e) {e.printStackTrace();}
 //		catch (MalformedURLException e) {e.printStackTrace();}
 		finally

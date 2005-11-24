@@ -1,4 +1,4 @@
-/* $Id: RemoteValue.java,v 1.2 2005-11-24 14:22:37 zdrey Exp $
+/* $Id: RemoteValue.java,v 1.3 2005-11-24 18:33:18 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : RemoteValue.java
  * License   : EPL
@@ -14,8 +14,6 @@ import java.io.Serializable;
 /**
  * This class is quite useless yet */
 public class RemoteValue implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
 	/**
 	 * 
 	 */

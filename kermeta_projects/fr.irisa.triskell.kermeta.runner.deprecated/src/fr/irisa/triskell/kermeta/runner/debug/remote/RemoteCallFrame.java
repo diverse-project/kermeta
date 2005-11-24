@@ -1,4 +1,4 @@
-/* $Id: RemoteCallFrame.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: RemoteCallFrame.java,v 1.3 2005-11-24 18:33:18 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : RemoteCallFrame.java
  * License   : EPL
@@ -15,7 +15,6 @@ import java.io.Serializable;
 public class RemoteCallFrame implements Serializable {
 
 	/** suggested by Serializable */
-	private static final long serialVersionUID = 1L;
 	public String  thread;
 	/** The position of the debug in the file that we debug */
 	public int line;

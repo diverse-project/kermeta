@@ -1,11 +1,13 @@
-/* $Id: KermetaRemoteDebugPlatform.java,v 1.3 2005-11-24 14:22:37 zdrey Exp $
+/* $Id: KermetaRemoteDebugPlatform.java,v 1.4 2005-11-24 18:33:18 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugPlatform.java
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Nov 18, 2005
- * Authors       : zdrey
+ * Authors       : 
+ * 	zdrey <zdrey@irisa.fr>
+ * 	dpollet <dpollet@irisa.fr>
  */
 package fr.irisa.triskell.kermeta.runner.debug.remote;
 
@@ -47,7 +49,7 @@ public class KermetaRemoteDebugPlatform extends UnicastRemoteObject implements I
 	 *  Reason :
 	 *  - stepEnd, stepInto, stepOver 
 	 * */
-	public Object notify(String command, String reason) throws RemoteException {
+	public synchronized Object notify(String command, String reason) throws RemoteException {
 		Object result = null;
 		currentCommand = command;
 		// Show the stack frames
@@ -58,19 +60,18 @@ public class KermetaRemoteDebugPlatform extends UnicastRemoteObject implements I
 			KermetaDebugThread kd_thread = ((KermetaDebugThread)target.getThreads()[0]);
 			
 			// 1) process the "command"
-			if (command.equals("suspend")) // suspend is first asked by the KRI
+			if (command.equals(RunnerConstants.SUSPEND)) // suspend is first asked by the KRI
 			{	
-				RemoteCallFrame[] frames =  target.getRemoteInterpreter().getFrames(); //target.getRemoteInterpreter().getFrames();
-				IStackFrame[] iframes = defineStackFrames(frames);
-				kd_thread.setStackFrames(iframes);
+				
 				System.err.println("notify done");
-				// 
-				target.getRemoteInterpreter().block();
+				target.getRemoteInterpreter().setDebugCondition(RunnerConstants.SUSPEND);
+				IStackFrame[] iframes = defineStackFrames(target.getRemoteInterpreter().getFrames());
+				kd_thread.setStackFrames(iframes);
 			}
 			if (command.equals("resume")) // resume is first asked by the KRDP itself
 			{
 				System.err.println("KRDP : interpreter resumed!!");
-				target.getRemoteInterpreter().unblock();
+				target.getRemoteInterpreter().setDebugCondition(RunnerConstants.RESUME);
 			}
 			
 			// 2) process the "reason"
@@ -95,7 +96,9 @@ public class KermetaRemoteDebugPlatform extends UnicastRemoteObject implements I
 		} catch (DebugException e) {
 		e.printStackTrace();
 		}
-		
+		catch (Exception e) {
+				e.printStackTrace();
+				}
 		return result;
 		
 	}
@@ -152,7 +155,6 @@ public class KermetaRemoteDebugPlatform extends UnicastRemoteObject implements I
 			IKermetaRemoteInterpreter remoteInterpreter = (IKermetaRemoteInterpreter)reg.lookup("remote_interpreter");
 			remoteInterpreter.registerKermetaRemoteDebugPlatform(this);
 			target.setRemoteInterpreter(remoteInterpreter);
-			
 		}
 		catch (NotBoundException e)
 		{

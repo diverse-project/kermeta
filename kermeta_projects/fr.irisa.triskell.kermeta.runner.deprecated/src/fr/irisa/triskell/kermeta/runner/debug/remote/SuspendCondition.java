@@ -1,4 +1,4 @@
-/* $Id: StepIntoCondition.java,v 1.2 2005-11-24 18:33:18 zdrey Exp $
+/* $Id: SuspendCondition.java,v 1.1 2005-11-24 18:33:18 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepIntoCondition.java
  * License   : EPL
@@ -11,25 +11,34 @@ package fr.irisa.triskell.kermeta.runner.debug.remote;
 
 import java.rmi.RemoteException;
 
+import org.eclipse.debug.core.model.IStackFrame;
+
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.IKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 
-public class StepIntoCondition implements IKermetaDebugCondition {
+public class SuspendCondition implements IKermetaDebugCondition {
 
 	public KermetaRemoteInterpreter remoteInterpreter;
 	
-	public StepIntoCondition(KermetaRemoteInterpreter remote)
+	public SuspendCondition(KermetaRemoteInterpreter remote)
 	{
 		remoteInterpreter = remote;
 	}
 	
-	public StepIntoCondition() {}
+	public SuspendCondition() {}
 	
 	public void blockInterpreter() {
 		if (this.evaluate() == true)
 		{	
-			try { remoteInterpreter.block(); }
+			try
+			{
+				// first notify
+				remoteInterpreter.getRemoteDebugPlatform().notify(RunnerConstants.SUSPEND, "");
+				
+				// then block
+				remoteInterpreter.block();
+			}
 			catch (RemoteException e) { e.printStackTrace(); }
 		}
 		else
@@ -42,7 +51,7 @@ public class StepIntoCondition implements IKermetaDebugCondition {
 	}
 
 	public String getConditionType() {
-		return "stepInto";
+		return "suspend";
 	}
 
 	public void setDebugInterpreter(DebugInterpreter interpreter) {
@@ -67,17 +76,22 @@ public class StepIntoCondition implements IKermetaDebugCondition {
 	public boolean evaluate() {
 		// Command ... not the right word : stepInto, stepEnd......
 		String cmd = remoteInterpreter.getInterpreter().getCurrentCommand();
-		if (cmd.equals(RunnerConstants.STEP_END))
+		if (cmd.equals(RunnerConstants.SUSPEND))
 		{
 			return true;
 		}
-		// The interpreter commands must be updated as often as necessary!!!
-		// Are we still in stepping mode?
-		if (cmd.equals(RunnerConstants.STEP_INTO))
+		if (cmd.equals(RunnerConstants.STEP_INTO)||cmd.equals(RunnerConstants.RESUME))
 		{
 			return false;
 		}
+		// The other commands should be disabled!!
 		return false;
+	}
+	
+	public RemoteCallFrame[] getRemoteCallFrames()
+	{
+		RemoteCallFrame[] frames =  remoteInterpreter.getFrames(); //target.getRemoteInterpreter().getFrames();
+		return frames;
 	}
 
 }
