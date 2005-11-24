@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.15 2005-09-15 12:43:48 dvojtise Exp $
+/* $Id: KermetaInterpreter.java,v 1.16 2005-11-24 14:30:50 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -26,6 +26,7 @@ import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
+
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -234,7 +235,8 @@ public class KermetaInterpreter {
 	    // FIXME : this should be corrected to allow generic types as entre type
 	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getFClassDefinition()));
 	    // Execute the operation
-	    exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
+	    // exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
+	    exp_interpreter.initialize(entryObject, entryOperation, entryParameters);
 	}
     
 	
