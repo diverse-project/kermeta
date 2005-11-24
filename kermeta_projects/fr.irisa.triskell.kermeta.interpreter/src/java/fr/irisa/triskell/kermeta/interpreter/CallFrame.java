@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.13 2005-09-06 10:48:05 zdrey Exp $
+/* $Id: CallFrame.java,v 1.14 2005-11-24 14:25:49 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -56,7 +56,8 @@ public abstract class CallFrame {
     
     public ExpressionContext peekExpressionContext()
     {
-        return (ExpressionContext)block_stack.peek();
+    	if (block_stack.isEmpty()) return null;
+    	else return (ExpressionContext)block_stack.peek();
     }
     
     /**

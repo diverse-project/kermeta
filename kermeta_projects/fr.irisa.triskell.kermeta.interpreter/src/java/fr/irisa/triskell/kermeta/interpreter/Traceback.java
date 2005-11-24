@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.5 2005-11-09 15:40:11 zdrey Exp $
+/* $Id: Traceback.java,v 1.6 2005-11-24 14:25:49 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Traceback.java
  * License   : EPL
@@ -122,13 +122,11 @@ public class Traceback {
         String[] infos = new String[4];
         Object fo_source = null;
         KermetaUnit kunit = interpreter.getMemory().getUnit();
-        System.out.println(" MAIN UNIT : " + kunit + "; FOBJECT : " + fobject);
         // TODO : instead of this patch unit finder, use the Tracer tools
         // in order to get directly the URI of an elemeent
         KermetaUnit u = kunit.findUnitForModelElement(fobject);
         if (u!=null)
-        	fo_source = u.getNodeByModelElement(fobject);
-        
+            fo_source = u.getNodeByModelElement(fobject);
         infos = getInfoForNode(fobject, fo_source, u, frame);
         return infos;
     }
@@ -228,7 +226,7 @@ public class Traceback {
     {
     	String[] infos = new String[4];
     	if (unit != null)
-    		infos[0] = unit.getUri().substring(unit.getUri().lastIndexOf("/")+1);
+    		infos[0] = unit.getUri();
     	else infos[0] = "unknown";
     	infos[1] = "unknown";
 		infos[2] = (frame!=null)?frame.toString():":";
