@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.5 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.6 2005-11-24 14:23:41 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -251,7 +251,7 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 			// notify is used as well by the GUI (to tell a GUI command --here, stepInto-- is run)
 			// as by the RemoteInterpreter (to tell a debugInterp. command is done)
 			target.getRemotePlatform().notify(KermetaDebugElement.RESUME, KermetaDebugElement.STEP_INTO);
-			target.getRemoteInterpreter().execute(KermetaDebugElement.STEP_INTO);
+			//target.getRemoteInterpreter().execute(KermetaDebugElement.STEP_INTO);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -262,23 +262,11 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	public void stepOver() throws DebugException {
 		isStepping = true;
 		target.setState(KermetaDebugTarget.stateRunning);
-		try {
-			target.getRemoteInterpreter().execute(KermetaDebugElement.STEP_OVER);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/** @see org.eclipse.debug.core.model.IStep#stepReturn() */
 	public void stepReturn() throws DebugException {
 		target.setState(KermetaDebugTarget.stateRunning);
-		try {
-			target.getRemoteInterpreter().execute(KermetaDebugElement.STEP_RETURN);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	/** @see org.eclipse.debug.core.model.ITerminate#canTerminate() */

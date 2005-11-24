@@ -11,6 +11,7 @@ import java.rmi.registry.Registry;
 import fr.irisa.triskell.kermeta.runner.debug.remote.IKermetaRemoteDebugPlatform;
 import fr.irisa.triskell.kermeta.runner.debug.remote.IKermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteInterpreter;
+import fr.irisa.triskell.kermeta.runner.debug.remote.RemoteDebugCondition;
 
 /**
  * @author zdrey
@@ -18,21 +19,21 @@ import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteInterpreter;
  */
 public class KermetaProcess extends Thread {
 
-	public String f;
-	public String c;
-	public String o;
-	public String a;
-	public IKermetaRemoteDebugPlatform debugPlatform;
+	private String file;
+	private String classname;
+	private String opname;
+	private String args;
+	private IKermetaRemoteDebugPlatform debugPlatform;
 	
 	/**
 	 * 
 	 */
 	public KermetaProcess(String f, String c, String o, String a, IKermetaRemoteDebugPlatform debug_platform) {
 		super();
-		this.f = f;
-		this.c = c;
-		this.o = o;
-		this.a = a;
+		this.file = f;
+		this.classname = c;
+		this.opname = o;
+		this.args = a;
 		debugPlatform = debug_platform;
 	}
 	
@@ -42,14 +43,13 @@ public class KermetaProcess extends Thread {
 	 * @see java.lang.Runnable#run()
 	 */
 	public synchronized void run() {
+		IKermetaRemoteInterpreter remote_interpreter = null;
 		try
 		{
 			System.err.println("1) remote interpreter!");
 			Registry reg = LocateRegistry.createRegistry(5002);
-			IKermetaRemoteInterpreter remote_interpreter = new KermetaRemoteInterpreter(f, c, o, a);
-			
+			remote_interpreter = new KermetaRemoteInterpreter(file, classname, opname, args);
 			reg.bind("remote_interpreter", remote_interpreter);
-			System.err.println("bound!");
 		}
 		catch (RemoteException e) {e.printStackTrace();}
 		catch (AlreadyBoundException e) {e.printStackTrace();}

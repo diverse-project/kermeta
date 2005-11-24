@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.5 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.6 2005-11-24 14:23:41 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -15,6 +15,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Hashtable;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
@@ -39,6 +40,7 @@ import org.eclipse.debug.core.model.IValue;
 
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
+import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 import fr.irisa.triskell.kermeta.runner.debug.remote.IKermetaRemoteInterpreter;
@@ -79,6 +81,15 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	public static final int stateRunning 		= 2;
 	public static final int stateSuspended 		= 3;
 	public static final int stateDisconnected 	= 4;
+	
+	/** Redundance.. */
+	public static Hashtable debug_state_mapping;
+    static {
+    	debug_state_mapping = new Hashtable();
+    	debug_state_mapping.put(new Integer(1), RunnerConstants.TERMINATED);
+    	debug_state_mapping.put(new Integer(2), RunnerConstants.RESUMED);
+    	debug_state_mapping.put(new Integer(3), RunnerConstants.SUSPENDED);
+    }
 	
     /**
      * Constructor
@@ -321,6 +332,8 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 		
 	}
 	
+	// Easier since we share Strings most of the time
+	public String getStateAsString() { return (String)debug_state_mapping.get(new Integer(state)); }
 	public int getState() { return state; }
     public void setState(int pstate) { state = pstate; }
 
