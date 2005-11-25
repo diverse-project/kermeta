@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.41 2005-11-09 16:00:33 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.42 2005-11-25 16:26:57 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -33,6 +33,7 @@ import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
@@ -67,6 +68,8 @@ public abstract class KermetaUnit {
     public static String ROOT_CLASS_QNAME = "kermeta::language::structure::Object";
 	
 	protected static KermetaUnit std_lib = null;
+	
+	protected boolean constraint_checked = false;
 	
 	public static KermetaUnit getStdLib() {
 		if (std_lib == null) {
@@ -140,6 +143,37 @@ public abstract class KermetaUnit {
 	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
 	        iu.typeCheck(null);
 	    }			   
+	}
+	
+	/**
+	 * start a constrain check on the unit
+	 * @param checker
+	 * @return the KermetaConstraintChecker
+	 */
+	public KermetaConstraintChecker constraintCheck(KermetaConstraintChecker constraint_checker) {
+		if (constraint_checked) return constraint_checker;
+		   
+	    if (constraint_checker == null) constraint_checker = new KermetaConstraintChecker(this);
+	    
+	    if (!this.messages.hasError()) {
+	        try {
+	        	
+	        	constraint_checker.checkUnit();
+	            constraint_checked = true;
+	            Iterator it = importedUnits.iterator();
+	    		while(it.hasNext()) {
+	    			KermetaUnit u = (KermetaUnit)it.next();
+	    			u.constraintCheck(null);
+	    			
+	    		}
+	            return constraint_checker;
+	        }
+	        catch(Throwable t) {
+	            messages.addError("Constraint checker internal error " + t.getMessage(), null);
+	            KermetaUnit.internalLog.error("Constraint checker error", t);
+	        }
+	    }
+	    return constraint_checker;
 	}
 	
 	protected void importStdlib() {
