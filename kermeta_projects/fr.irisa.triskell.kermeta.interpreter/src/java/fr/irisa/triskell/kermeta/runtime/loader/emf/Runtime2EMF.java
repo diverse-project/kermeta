@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.15 2005-10-24 16:17:37 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.16 2005-11-25 15:14:02 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -44,12 +45,15 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * 
  */
 public class Runtime2EMF {
 
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.Runtime2EMF");
+	
     /**
      * 
      */
@@ -139,6 +143,7 @@ public class Runtime2EMF {
         ArrayList eobjects = new ArrayList();
         // instances should only contain the root elements
         Iterator it = instances.iterator();
+        internalLog.debug("Updating EMF Objects");
         // Get each instance and translate it in EMF (EObject)
         root_map = new ArrayList();
         while(it.hasNext()) {
@@ -155,6 +160,7 @@ public class Runtime2EMF {
             findEMFObjectsForRuntimeObjectsForRoot(ro, null);
         }
         
+        internalLog.debug("Updating EMF properties");
         // now we have the complete list of runtime objects (findEMFObj.. fills updatedRuntimeObjects)
         // We can update the properties of each of those runtime objects
         it = updatedRuntimeObjects.iterator();
@@ -221,16 +227,28 @@ public class Runtime2EMF {
             {   
                 RuntimeObject r_o =(RuntimeObject)p_it.next(); 
                 if (!updatedRuntimeObjects.contains(r_o))
-                {   
-                    findEMFObjectsForRuntimeObjectsForRoot(r_o, getEStructuralFeatureByName(eObject, prop_name).getEType());
+                {  
+                	findEMFObjectsForRuntimeObjectsForRoot(r_o, getEStructuralFeatureByName(eObject, prop_name).getEType());
                 }
+                else internalLog.debug("      findEMFObjectForProperty skipped RO: " + getRONameProp(r_o) + " "+ r_o  + r_o.getProperties());
+               
             }
         }
-        // We do not add primitive typed properties, since they do not need a special update.
-        else if (!updatedRuntimeObjects.contains(property) && getPrimitiveTypeValueFromRuntimeObject(property)==null)
-        {
-            updatedRuntimeObjects.add(property);
+        
+        else if (!updatedRuntimeObjects.contains(property) )
+        {	// We do not add primitive typed properties, since they do not need a special update.
+        	if(getPrimitiveTypeValueFromRuntimeObject(property)!=null){
+        		internalLog.debug("      findEMFObjectForProperty ignoring primitive property: " + prop_name + " "+ property  + eObject);
+        		//updatedRuntimeObjects.add(property);
+        	}
+        	else {
+        		internalLog.debug("      findEMFObjectForProperty : " + prop_name + " "+ property  + eObject);
+        		//findEMFObjectsForRuntimeObjectsForRoot((EObject)property.getData().get("emfObject"), 
+        			//	getEStructuralFeatureByName(eObject, prop_name).getEType());
+        	}        	
         }
+        else internalLog.debug("      findEMFObjectForProperty skipped RO: " + prop_name + " "+ property  + eObject);
+        
     }
     
     protected void simpleUpdatePropertyForObject(RuntimeObject rObject)
@@ -250,43 +268,54 @@ public class Runtime2EMF {
             // If feature is null, it means that it is not persistent ! 
             if (feature != null)
             {
-                eObject.eUnset(feature);
-                Object property_eObject = getOrCreatePropertyFromRuntimeObject(property, feature.getEType());
-                
-                // If it is a collection of Objects
-                if (property_eObject instanceof EList)
-                {
-                    // System.err.println("   feature EList -> " + feature.getEType() + ((EList)property_eObject).size() + "> "+prop_name);
-                    Iterator p_it = ((ArrayList)property.getData().get("CollectionArrayList")).iterator();
-                    // For each feature of the collection of features
-                    while (p_it.hasNext())
-                    {
-                        RuntimeObject r_o =(RuntimeObject)p_it.next();
-                        Object p_o = getOrCreateObjectFromRuntimeObject(r_o, feature.getEType());
-                        if (p_o!=null)
-                        {	
-                            ((EList)eObject.eGet(feature)).add((EObject)p_o);
-                            // Update the property for next objects to be updated that need its value
-                            r_o.getData().put("emfObject", p_o);
-                        }
-                    }
-                }
-                // If property is a simple EObject 
-                else if ( property_eObject instanceof EObject)
-                {
-                    //System.err.println("   feature type -> " + feature.getEType() +
-                    //        "\n" +     "   eobject type -> " + ((EObject)property_eObject).eClass());
-                    eObject.eSet(feature, property_eObject);
-                }
-                else if (feature.getEType() instanceof EDataType)
-                {
-                    property_eObject = getPrimitiveTypeValueFromRuntimeObject(property);
-                    eObject.eSet(feature, property_eObject);
-                }
-                else
-                {
-                    System.err.println("NotImplementedError : This type is not recognized!!!" + feature.getEType());
-                }
+            	if(!feature.isChangeable())
+            	{
+            		internalLog.warn("feature " + prop_name + " is not changeable: ignored(may be the other end has been correctly set). The feature was applied to "+ eObject  + " "+ rObject);
+            	}
+            	else {
+            		
+	                eObject.eUnset(feature);
+	                Object property_eObject = getOrCreatePropertyFromRuntimeObject(property, feature.getEType());
+	                
+	                // If it is a collection of Objects
+	                if (property_eObject instanceof EList)
+	                {
+	                    // System.err.println("   feature EList -> " + feature.getEType() + ((EList)property_eObject).size() + "> "+prop_name);
+	                    Iterator p_it = ((ArrayList)property.getData().get("CollectionArrayList")).iterator();
+	                    // For each feature of the collection of features
+	                    while (p_it.hasNext())
+	                    {
+	                        RuntimeObject r_o =(RuntimeObject)p_it.next();
+	                        Object p_o = getOrCreateObjectFromRuntimeObject(r_o, feature.getEType());
+	                        if (p_o!=null)
+	                        {	
+	                        	internalLog.debug("      feature: " + feature.getName() + " eObject: "+ eObject + " p_o: " + p_o);
+	                        	EPackage p;
+	                        	
+	                    		
+	                            ((EList)eObject.eGet(feature)).add((EObject)p_o);
+	                            // Update the property for next objects to be updated that need its value
+	                            r_o.getData().put("emfObject", p_o);
+	                        }
+	                    }
+	                }
+	                // If property is a simple EObject 
+	                else if ( property_eObject instanceof EObject)
+	                {
+	                    //System.err.println("   feature type -> " + feature.getEType() +
+	                    //        "\n" +     "   eobject type -> " + ((EObject)property_eObject).eClass());
+	                    eObject.eSet(feature, property_eObject);
+	                }
+	                else if (feature.getEType() instanceof EDataType)
+	                {
+	                    property_eObject = getPrimitiveTypeValueFromRuntimeObject(property);
+	                    eObject.eSet(feature, property_eObject);
+	                }
+	                else
+	                {
+	                    System.err.println("NotImplementedError : This type is not recognized!!!" + feature.getEType());
+	                }
+            	}
             }
         }
     }
@@ -305,6 +334,9 @@ public class Runtime2EMF {
         // emfObject exists if and only if the rObject was not created by the kerdeveloper
         if (rObject.getData().containsKey("emfObject"))
         {   
+        	
+            internalLog.debug("get (getOrCreateObjectFromRuntimeObject) for RuntimeObject: " + getRONameProp(rObject) + " "+ rObject  + rObject.getProperties());
+            
             result = rObject.getData().get("emfObject");
         } // WrappedException if we do not test thiss
         else
@@ -361,6 +393,8 @@ public class Runtime2EMF {
         String kqname = rObject.getFactory().getMemory().getUnit().getQualifiedName(
                 metaclass.getFClassDefinition());
         
+        internalLog.debug("createEObjectFromRuntimeObject for RuntimeObject: " + getRONameProp(rObject) + " "+ rObject  + rObject.getProperties());
+        
         EClass eclass = null;
         if (classifier == null)
         {
@@ -368,8 +402,16 @@ public class Runtime2EMF {
         }
         else
         {
-            eclass = (EClass)classifier;
-            //System.err.println("eclass for kqname : " + eclass + "("+ kqname +")");
+        	if(((EClass)classifier).isAbstract() || ((EClass)classifier).isInterface()){
+        		internalLog.debug("   The type for the new EObject is not concrete !");     
+        		
+        		eclass = this.getEClassFromFQualifiedName(kqname, classifier.eResource() , unit);
+        		//eclass = this.getEClassFromFQualifiedName(kqname, this.metaModelResource, unit);
+        	}
+        	else
+        	{
+        		eclass = (EClass)classifier;
+        	}
         }
         if (eclass != null) // If we did not find the Eclass (it means that kqname is the name of a primitive type)
         {
@@ -474,6 +516,15 @@ public class Runtime2EMF {
             return feature; //feature_value = (EObject)eObject.eGet(feature);
         }
         return null;
+    }
+    
+    /**
+     * tool function
+     * @return the name property of the runtime object if available
+     */
+    public static String getRONameProp(RuntimeObject rObject){
+    	RuntimeObject roName = (RuntimeObject)rObject.getProperties().get("name");
+        return  roName == null ? "" : (String)roName.getData().get("StringValue");
     }
 }
 
