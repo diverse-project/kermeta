@@ -1,4 +1,4 @@
-// $Id: primitive_types.kmt,v 1.21 2005-09-01 09:21:56 ffleurey Exp $
+// $Id: primitive_types.kmt,v 1.22 2005-11-25 10:08:11 zdrey Exp $
 package kermeta::standard; 
 
 require "../Standard.kmt"
@@ -437,7 +437,7 @@ class String inherits ValueType, Comparable
 	 * returns a new string that is a substring of this string
 	 */
 	operation substring(startIndex : Integer, endIndex : Integer) : String is do
-		if startIndex >= 0 and startIndex < size and endIndex < size and endIndex >= startIndex then
+		if startIndex >= 0 and startIndex <= size and endIndex <= size and endIndex >= startIndex then
 			result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.substring(self,startIndex, endIndex)
 		else
 			raise StringIndexOutOfBound.new
