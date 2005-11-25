@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.27 2005-11-21 13:23:03 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.28 2005-11-25 15:07:34 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -758,11 +758,21 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        
 //			 Check that target is not void
 		    if (operation == null && ro_target == memory.voidINSTANCE) {
-		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target : " + node.getFName());
-		        RuntimeObject ex = memory.getROFactory().createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
+		    	String additionalMsg = "";
+		    	if(node.getFStaticProperty() != null)
+		    		if(node.getFStaticProperty().isFIsDerived())
+		    			additionalMsg = "Warning, target was a Derived Property";
+		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target: " + node.getFName() +"; Operation: " +node.getFStaticOperation());
+		        if(!additionalMsg.equals(""))
+		        	internalLog.info(additionalMsg);
 		        
-		        // From Java->Generate the Kermeta action "raise"
-		        raiseKermetaException(ex, node);
+		         
+		        throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
+		        		additionalMsg,
+						this,
+						memory,
+						node,
+						null);		        
 		    }
 		    
 //		  This should never happend is the type checker has checked the program
@@ -1149,7 +1159,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         // FIXME: Set a default message
         RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
         throw new KermetaRaisedException(obj, rnode, this);	
-    }
+    }   
     
     public void raiseCallOnVoidTargetException(FObject node) {
     	RuntimeObjectFactory rofactory = memory.getROFactory();

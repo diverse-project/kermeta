@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.7 2005-10-21 15:02:00 dvojtise Exp $
+/* $Id: KermetaRaisedException.java,v 1.8 2005-11-25 15:07:34 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -210,5 +210,32 @@ public class KermetaRaisedException extends Error {
 				interpreter,
 				javaCause);
     }
+    /**
+     * Helper method that create an exception for Kermeta 
+     * @param kermetaExceptionName name of the created exception
+     * @param exceptionMessage message associated to the exception
+     * @param interpreter
+     * @param memory
+     * @param context  used for building the stacktrace
+     * @param javaCause 
+     * @return
+     */
+    public static KermetaRaisedException createKermetaException(
+    		String kermetaExceptionName,
+    		String exceptionMessage,
+    		ExpressionInterpreter interpreter, 
+			RuntimeMemory memory,
+			FObject context,
+			Throwable javaCause)
+    {
+    	KermetaRaisedException e = createKermetaException(kermetaExceptionName,
+    			exceptionMessage,
+    			interpreter, 
+    			memory, 
+    			javaCause);
+    	e.setContextString(interpreter, memory.getRuntimeObjectForFObject(context));
+    	return e;
+    }
+    
     
 }
