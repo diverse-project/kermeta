@@ -51,6 +51,9 @@ package com.touchgraph.graphlayout;
 
 import  com.touchgraph.graphlayout.interaction.*;
 
+import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.KermetaClassGraphBuilder;
+import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.RandomGraphBuilder;
+
 import  java.awt.*;
 import  java.awt.event.*;
 import  javax.swing.*;
@@ -61,7 +64,7 @@ import  java.util.Hashtable;
   * will probably need to be rewritten for other applications.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: GLPanel.java,v 1.1 2005-10-24 20:29:59 dvojtise Exp $
+  * @version  1.21  $Id: GLPanel.java,v 1.2 2005-11-27 19:46:04 dvojtise Exp $
   */
 public class GLPanel extends JPanel {
 
@@ -81,7 +84,7 @@ public class GLPanel extends JPanel {
     protected TGLensSet tgLensSet;
     protected TGUIManager tgUIManager;
 
-    private Color defaultColor = Color.lightGray;
+    protected Color defaultColor = Color.lightGray;
 
   // ............
 
@@ -133,6 +136,9 @@ public class GLPanel extends JPanel {
         addUIs();
       //tgPanel.addNode();  //Add a starting node.
         try {
+
+        	//new RandomGraphBuilder(tgPanel).buildGraph();
+        	//new KermetaClassGraphBuilder(tgPanel).buildGraph();
             randomGraph();
         } catch ( TGException tge ) {
             System.err.println(tge.getMessage());

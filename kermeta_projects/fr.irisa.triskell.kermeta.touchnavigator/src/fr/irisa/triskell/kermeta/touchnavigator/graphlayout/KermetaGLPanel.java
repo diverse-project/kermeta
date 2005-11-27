@@ -49,7 +49,9 @@
 
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
+import java.awt.Color;
 import java.util.Collection;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
@@ -62,6 +64,12 @@ import com.touchgraph.graphlayout.GLPanel;
 import com.touchgraph.graphlayout.LocalityUtils;
 import com.touchgraph.graphlayout.Node;
 import com.touchgraph.graphlayout.TGException;
+import com.touchgraph.graphlayout.TGLensSet;
+import com.touchgraph.graphlayout.TGPanel;
+import com.touchgraph.graphlayout.interaction.HVScroll;
+import com.touchgraph.graphlayout.interaction.LocalityScroll;
+import com.touchgraph.graphlayout.interaction.RotateScroll;
+import com.touchgraph.graphlayout.interaction.ZoomScroll;
 
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
@@ -99,9 +107,12 @@ public class KermetaGLPanel extends GLPanel
 	
 	KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 
+	
+    
 /** Initialize panel, lens, and establish a random graph as a demonstration.
      */
     public void initialize() {
+    	
         buildPanel();
         buildLens();
         tgPanel.setLensSet(tgLensSet);

@@ -59,8 +59,8 @@ import  javax.swing.event.*;
   * to editing.
   *   
   * @author   Alexander Shapiro                                        
-  * @author   Murray Altheim (abstracted GLPanel to TGScrollPane interface)
-  * @version  1.21  $Id: GLNavigateUI.java,v 1.1 2005-10-24 20:29:54 dvojtise Exp $
+  * @author   Murray Altheim (abstracted KermetaGLPanel to TGScrollPane interface)
+  * @version  1.21  $Id: GLNavigateUI.java,v 1.2 2005-11-27 19:46:04 dvojtise Exp $
   */
 public class GLNavigateUI extends TGUserInterface {
     

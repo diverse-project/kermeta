@@ -63,7 +63,7 @@ import  java.util.Iterator;
   *
   *  @author   Alexander Shapiro
   *  @author   Murray Altheim (2001-11-06; added support for round rects and alternate Node colors)
-  *  @version  1.21  $Id: Node.java,v 1.1 2005-10-24 20:29:58 dvojtise Exp $
+  *  @version  1.21  $Id: Node.java,v 1.2 2005-11-27 19:46:04 dvojtise Exp $
   */
 public class Node {
     
@@ -78,6 +78,10 @@ public class Node {
 
    /** This Node's type is a Circle. */
     public final static int TYPE_CIRCLE    = 4;
+    
+    /** This Node's type is a Class. */
+    public final static int TYPE_CLASS    = 5;
+    
 
     public static final Font SMALL_TAG_FONT = new Font("Courier",Font.PLAIN,9);
 
@@ -89,7 +93,7 @@ public class Node {
     
     public static Color BORDER_DRAG_COLOR       = Color.black;
     public static Color BORDER_MOUSE_OVER_COLOR = new Color(160,160,160);
-    public static Color BORDER_INACTIVE_COLOR   = Color.white;
+    public static Color BORDER_INACTIVE_COLOR   = new Color(200,200,200);
 
     public static Color TEXT_COLOR              = Color.white;
     
@@ -131,6 +135,8 @@ public class Node {
     protected boolean visible;
 
     private Vector edges;
+    
+    public boolean ghostNode = false;
 
 
   // ............
@@ -374,10 +380,11 @@ public class Node {
 
     /** Return the height of this Node. */
     public int getHeight() {
+    	int margin = 6;
         if ( fontMetrics != null ) {
-            return fontMetrics.getHeight() + 6;
+        	return fontMetrics.getHeight() + margin;
         } else {
-            return 6;
+            return margin;
         }
     }
 
@@ -489,5 +496,19 @@ public class Node {
         g.setFont(SMALL_TAG_FONT);
         g.drawString(""+character, tagX+2, tagY+7);
     }
+
+	/**
+	 * @return Returns the ghostNode.
+	 */
+	public boolean isGhostNode() {
+		return ghostNode;
+	}
+
+	/**
+	 * @param ghostNode The ghostNode to set.
+	 */
+	public void setGhostNode(boolean ghostNode) {
+		this.ghostNode = ghostNode;
+	}
 
 } // end com.touchgraph.graphlayout.Node

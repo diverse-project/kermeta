@@ -58,7 +58,7 @@ import  java.util.*;
 /** GESUtils is a set of functions that return information about a GraphEltSet 
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: GESUtils.java,v 1.1 2005-10-24 20:30:04 dvojtise Exp $
+  * @version  1.21  $Id: GESUtils.java,v 1.2 2005-11-27 19:46:04 dvojtise Exp $
   */
 public class GESUtils {
     
@@ -94,7 +94,12 @@ public class GESUtils {
                 Node adjNode = e.getOtherEndpt(n);
                 if(ges.contains(e) && !distHash.containsKey(adjNode) && adjNode.edgeCount()<=maxAddEdgeCount) {
                     if (adjNode.edgeCount()<=maxExpandEdgeCount) nodeQ.push(adjNode);
-                    distHash.put(adjNode,new Integer(currDist+1));
+                    if(adjNode.isGhostNode()){               
+                    	// ghost nodes doesn't increase the distance ..
+                        distHash.put(adjNode,new Integer(currDist));
+                    }
+                    else
+                    	distHash.put(adjNode,new Integer(currDist+1));
                 }
             }
         }
