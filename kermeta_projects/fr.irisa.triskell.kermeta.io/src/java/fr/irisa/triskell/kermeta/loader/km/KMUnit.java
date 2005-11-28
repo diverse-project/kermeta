@@ -1,4 +1,4 @@
-/* $Id: KMUnit.java,v 1.9 2005-09-15 12:40:33 dvojtise Exp $
+/* $Id: KMUnit.java,v 1.10 2005-11-28 12:32:50 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : 	KMUnit.java
 * License : EPL
@@ -81,7 +81,7 @@ public class KMUnit extends KermetaUnit {
 			
     	}
     	catch(Exception e) {
-    		this.messages.addMessage(new KMUnitError("Unable to load program '" + uri +" :" + e, null));
+    		this.messages.addMessage(new KMUnitError("Unable to load program '" + uri +" :" + e, null, null));
     		KermetaUnit.internalLog.error("Unable to load unit " + uri, e);
     	}
     	type_checked = true;

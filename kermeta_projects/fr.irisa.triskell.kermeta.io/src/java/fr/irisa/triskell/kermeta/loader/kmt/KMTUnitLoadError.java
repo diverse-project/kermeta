@@ -1,4 +1,4 @@
-/* $Id: KMTUnitLoadError.java,v 1.1 2005-04-26 08:28:08 ffleurey Exp $
+/* $Id: KMTUnitLoadError.java,v 1.2 2005-11-28 12:32:50 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KMTLoadError.java
 * License : GPL
@@ -20,18 +20,17 @@ import fr.irisa.triskell.kermeta.loader.KMUnitError;
  */
 public class KMTUnitLoadError extends KMUnitError {
 
-    KermetaASTNode astNode;
     
     /**
      * @param message
      * @param node
      */
     public KMTUnitLoadError(String message, KermetaASTNode node) {
-        super(message, null);
-        astNode = node;
+        super(message, null, node);
+        astn = node;
     }
 
     public KermetaASTNode getAstNode() {
-        return astNode;
+        return astn;
     }
 }

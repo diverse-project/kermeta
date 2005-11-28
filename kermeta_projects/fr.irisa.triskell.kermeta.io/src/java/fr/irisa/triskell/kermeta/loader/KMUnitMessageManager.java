@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessageManager.java,v 1.3 2005-11-14 16:28:42 dvojtise Exp $
+/* $Id: KMUnitMessageManager.java,v 1.4 2005-11-28 12:32:50 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.loader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.structure.FObject;
 
 
@@ -37,6 +38,11 @@ public class KMUnitMessageManager {
 	
 	
 	protected KermetaUnit unit;
+	
+	// Variables used to ensure to not fall in an infinite loop 
+	// in case of cycle in the require statements
+	protected boolean isCallinGetWarnings=false;
+	protected boolean isCallinGetErrors=false;
 	
 	/**
 	 * Constructor
@@ -114,15 +120,21 @@ public class KMUnitMessageManager {
 	 */
 	public ArrayList getErrors() {
 	    ArrayList result = new ArrayList();
+	    //	  we may have a cycle in the require statements ...
+	    if(isCallinGetErrors) return result;
+	    isCallinGetErrors = true;
+	    // do the job
 	    result.addAll(errors);
 	    for (int i=0; i<unit.importedUnits.size(); i++) {
 	        KermetaUnit iu = (KermetaUnit)unit.importedUnits.get(i);
 	        if (iu.messages.hasError()) {
 	        	String indirectMsg = ((KMUnitMessage)iu.messages.getErrors().get(0)).getMessage();
 	            result.add(new KMUnitError("Error in imported unit " + iu.getUri() +" (" +
-	            		indirectMsg +")", null));
+	            		indirectMsg +")", 
+	            		(KermetaASTNode) unit.traceImportedUnits.get(iu)));
 	        }
 	    }
+	    isCallinGetErrors=false;
 		return result;
 	}
 
@@ -132,15 +144,21 @@ public class KMUnitMessageManager {
 	 */
 	public ArrayList getWarnings() {
 	    ArrayList result = new ArrayList();
+	    // we may have a cycle in the require statements ...
+	    if(isCallinGetWarnings) return result;
+	    isCallinGetWarnings = true;
+	    // do the job
 	    result.addAll(warnings);
 	    for (int i=0; i<unit.importedUnits.size(); i++) {
 	        KermetaUnit iu = (KermetaUnit)unit.importedUnits.get(i);
 	        if (iu.messages.getWarnings().size() != 0) {
 	        	String indirectMsg = ((KMUnitMessage)iu.messages.getWarnings().get(0)).getMessage();
 	            result.add(new KMUnitWarning("Warning in imported unit " + iu.getUri() +" (" +
-	            		indirectMsg +")", null));
+	            		indirectMsg +")", 
+	            		(KermetaASTNode) unit.traceImportedUnits.get(iu)));
 	        }
 	    }
+	    isCallinGetWarnings = false;
 		return result;
 	}
 	

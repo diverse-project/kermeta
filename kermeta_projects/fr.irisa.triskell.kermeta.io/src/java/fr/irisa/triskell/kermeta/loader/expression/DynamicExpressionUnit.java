@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.2 2005-09-15 12:40:33 dvojtise Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.3 2005-11-28 12:32:50 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -80,10 +80,10 @@ public class DynamicExpressionUnit extends KermetaUnit {
 			ast_exp = parser.asingleExpression().getFExpression();
 			
 		} catch (RecognitionException e1) {
-		    this.messages.addMessage(new KMUnitError("Expression Parse error : " + e1, null));
+		    this.messages.addMessage(new KMUnitError("Expression Parse error : " + e1, null, ast_exp));
 			 throw new Error(e1);
 		} catch (TokenStreamException e1) {
-		    this.messages.addMessage(new KMUnitError("Expression Parse error : " + e1, null));
+		    this.messages.addMessage(new KMUnitError("Expression Parse error : " + e1, null, ast_exp));
 			 throw new Error(e1);
 		}
 		

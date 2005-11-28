@@ -31,10 +31,14 @@ public class ECore2KMPass1 extends ECore2KMPass {
     public boolean beginVisit(ImportStmt importStmt) {
 		StringLiteralOrQualifiedID node = importStmt.getUri();
 		if (node instanceof QualifiedIDContainer) {
-			builder.importModelFromID(qualifiedIDAsString(((QualifiedIDContainer)node).getQualifiedID()));
+			builder.traceImportedUnits.put(
+					builder.importModelFromID(qualifiedIDAsString(((QualifiedIDContainer)node).getQualifiedID())),
+					node);
 		}
 		else {
-			builder.importModelFromURI(node.getText());
+			builder.traceImportedUnits.put(
+					builder.importModelFromURI(node.getText()),
+					node);
 		}
 		return false;
 	}

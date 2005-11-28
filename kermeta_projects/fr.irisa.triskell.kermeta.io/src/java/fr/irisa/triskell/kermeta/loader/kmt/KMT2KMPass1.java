@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.3 2005-04-05 15:07:23 zdrey Exp $
+/* $Id: KMT2KMPass1.java,v 1.4 2005-11-28 12:32:50 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : GPL
@@ -42,12 +42,16 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	public boolean beginVisit(ImportStmt importStmt) {
 		StringLiteralOrQualifiedID node = importStmt.getUri();
 		if (node instanceof QualifiedID) {
-			builder.importModelFromID(qualifiedIDAsString((QualifiedID)node));
+			builder.traceImportedUnits.put(
+					builder.importModelFromID(qualifiedIDAsString((QualifiedID)node)),
+					node);
 		}
 		else {
 			String uri = ((StringLiteralContainer)node).getString_literal().getText();
 			uri = uri.substring(1, uri.length()-1);
-			builder.importModelFromURI(uri);
+			builder.traceImportedUnits.put(
+					builder.importModelFromURI(uri), 
+					node);
 		}
 		return false;
 	}

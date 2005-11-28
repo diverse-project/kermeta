@@ -27,7 +27,7 @@ public class KMUnitParseError extends KMUnitError {
 	 * @param node
 	 */
 	public KMUnitParseError(Exception ex) {
-		super(null, null);
+		super(null, null, null);
 		initWithException(ex);
 	}
 

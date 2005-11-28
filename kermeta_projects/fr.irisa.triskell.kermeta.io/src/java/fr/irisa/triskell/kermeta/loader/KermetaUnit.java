@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.42 2005-11-25 16:26:57 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.43 2005-11-28 12:32:50 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -337,6 +337,14 @@ public abstract class KermetaUnit {
 	 * @see getAllImportedUnits 
 	 */
 	public ArrayList importedUnits = new ArrayList();
+	
+	/**
+	 * Allows to retreive the node that has defined each of the imported units
+	 * Key: an importedUnit
+	 * Value: and ast node 
+	 * Used by the error manager for imported unit errors.
+	 */
+	public Hashtable traceImportedUnits= new Hashtable();
 		
 	/**
 	 * retreives all the imported unit recursively
@@ -524,7 +532,11 @@ public abstract class KermetaUnit {
 	}
 	
 	
-	public void importModelFromURI(String str_uri) {
+	/**
+	 * @param str_uri
+	 * @return the new imported unit
+	 */
+	public KermetaUnit importModelFromURI(String str_uri) {
 		URI uri = URI.createURI(str_uri);
 		URIConverter c = new URIConverterImpl();
 		if (uri.fileExtension() != null && uri.isRelative() && this.uri != null) {
@@ -535,6 +547,7 @@ public abstract class KermetaUnit {
 		// To import method bodies from another file
 		if (uri.fileExtension() != null && uri.fileExtension().equals("mctbodies")) {
 			new OperationBodyLoader().load(this, str_uri);
+			return null;
 		}
 		else {
 			KermetaUnit unit;
@@ -544,12 +557,13 @@ public abstract class KermetaUnit {
 				messages.addError("Errors in imported model " + str_uri + " : \n" +  unit.messages.getAllMessagesAsString(), null);
 			}
 			importedUnits.add(unit);
+			return unit;
 		}
 	}
 	
 
-	public void importModelFromID(String qid) {
-		importModelFromURI(qid);
+	public KermetaUnit importModelFromID(String qid) {
+		return importModelFromURI(qid);
 	}
 	
 	

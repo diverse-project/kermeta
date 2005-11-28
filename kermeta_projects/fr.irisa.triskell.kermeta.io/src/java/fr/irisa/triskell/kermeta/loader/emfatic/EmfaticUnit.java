@@ -1,4 +1,4 @@
-/* $Id: EmfaticUnit.java,v 1.4 2005-09-15 12:40:33 dvojtise Exp $
+/* $Id: EmfaticUnit.java,v 1.5 2005-11-28 12:32:50 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : EmfaticUnit.java
  * License : EPL
@@ -48,7 +48,7 @@ public class EmfaticUnit extends KermetaUnit {
 		    p = new EmfaticParser(new EmfaticLexer(new InputStreamReader(converter.createInputStream(uri))));
 		} 
 		catch (IOException e1) {
-		    messages.addMessage(new KMUnitError("i/o error loading ressource '"+this.uri+"': " + e1, null));
+		    messages.addMessage(new KMUnitError("i/o error loading ressource '"+this.uri+"': " + e1, null, null));
 		    return;
 		}
 			
@@ -56,7 +56,7 @@ public class EmfaticUnit extends KermetaUnit {
 			emfaticAST = p.compUnit();
 		}
 		catch(Exception e) {
-			messages.addMessage(new KMUnitError("Parse error : " + e, null));
+			messages.addMessage(new KMUnitError("Parse error : " + e, null, null));
 		    return;
 		}
 	}

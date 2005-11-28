@@ -1,4 +1,4 @@
-/* $Id: StandardKermetaUnit.java,v 1.8 2005-09-15 12:40:33 dvojtise Exp $
+/* $Id: StandardKermetaUnit.java,v 1.9 2005-11-28 12:32:50 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -49,7 +49,7 @@ public class StandardKermetaUnit extends KMTUnit {
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#importModelFromURI(java.lang.String)
 	 */
-	public void importModelFromURI(String str_uri) {
+	public KermetaUnit importModelFromURI(String str_uri) {
 		if (str_uri.startsWith("file:"))
 			str_uri=str_uri.substring(5,str_uri.length());
 		URI uri = URI.createFileURI(str_uri);
@@ -61,15 +61,17 @@ public class StandardKermetaUnit extends KMTUnit {
 		// To import method bodies from another file
 		if (uri.fileExtension().equals("mctbodies")) {
 			new OperationBodyLoader().load(this, str_uri);
+			return null;
 		}
 		else {
 			KermetaUnit unit;
 			//unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri, new StandardKermetaUnit());
 			unit =  new StandardKermetaUnit(str_uri, packages);
 			if (unit.messages.unitHasError) {
-				messages.addMessage(new KMUnitError("Errors in imported model " + str_uri + " : \n" +  unit.messages.getMessagesAsString(), null));
+				messages.addMessage(new KMUnitError("Errors in imported model " + str_uri + " : \n" +  unit.messages.getMessagesAsString(), null,null));
 			}
 			importedUnits.add(unit);
+			return unit;
 		}
 	}
 	
