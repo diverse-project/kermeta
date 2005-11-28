@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.4 2005-11-22 09:21:45 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.5 2005-11-28 18:54:35 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -9,8 +9,11 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
+import java.util.ArrayList;
+
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugException;
@@ -55,6 +58,8 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
     protected IThread[] threads;
     public final String HOST = "localhost";
     protected int requestPort;
+    
+    protected ArrayList breakpoints;
     /**
      *
      * 
@@ -69,7 +74,6 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      */
 	public void startKermetaProcess()
 	{
-	    System.out.println("Run kermeta process");
 	    new Thread() {
 	        public void run() {
 	        	// Run in a thread --> is it really useful??
@@ -196,18 +200,52 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.IBreakpointListener#breakpointAdded(org.eclipse.debug.core.model.IBreakpoint)
      */
-    public void breakpointAdded(IBreakpoint breakpoint) { }
+    public void breakpointAdded(IBreakpoint breakpoint) 
+    {
+    	System.err.println("A breakpoint is added");
+    	try {
+    		if (breakpoint instanceof KermetaBreakpoint && ((KermetaBreakpoint)breakpoint).isEnabled()) {
+    			KermetaBreakpoint b = (KermetaBreakpoint)breakpoint;
+    			breakpoints.add(b);
+    			//SetBreakpointCommand cmd = new SetBreakpointCommand(debugger, b.getFile(), b.getLine());
+    			//debugger.postCommand(cmd);
+    		}
+    	} catch (CoreException e) {
+    		e.printStackTrace();
+    	}
+    }
+    
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.IBreakpointListener#breakpointRemoved(org.eclipse.debug.core.model.IBreakpoint, org.eclipse.core.resources.IMarkerDelta)
      */
-    public void breakpointRemoved(IBreakpoint breakpoint, IMarkerDelta delta) { }
+    public void breakpointRemoved(IBreakpoint breakpoint, IMarkerDelta delta)
+    {
+    	System.err.println("Remove a breakpoint");
+		if (breakpoint instanceof KermetaBreakpoint) {
+			KermetaBreakpoint b = (KermetaBreakpoint)breakpoint;
+			breakpoints.remove(b);
+			// RemoveBreakpointCommand cmd = new RemoveBreakpointCommand(debugger, b.getFile(), b.getLine());
+			// debugger.postCommand(cmd);
+		}
+    }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.IBreakpointListener#breakpointChanged(org.eclipse.debug.core.model.IBreakpoint, org.eclipse.core.resources.IMarkerDelta)
      */
-    public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta) { }
+    public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta)
+    {
+    	if (breakpoint instanceof KermetaBreakpoint)
+    	{
+    		breakpointRemoved(breakpoint, null);
+    		breakpointAdded(breakpoint);
+    	}
+    }
 
+    /** Return the added breakpoints */
+    public ArrayList getBreakpoints() {
+    	return breakpoints;
+    }
    
     
     public void abort(String msg, Throwable e) 
@@ -264,40 +302,12 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      * @note client does not have to call it.
      * @see org.eclipse.debug.core.model.IDebugTarget#hasThreads()
      */
-    public boolean hasThreads() throws DebugException {
-
-        return true;
-    }
-
-
-	public boolean canResume() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	public boolean canSuspend() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	public boolean isSuspended() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	public boolean canDisconnect() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	public void disconnect() throws DebugException {
-		// TODO Auto-generated method stub
-		
-	}
+    public boolean hasThreads() throws DebugException { return true; }
+	public boolean canResume() { return false; }
+	public boolean canSuspend() { return false; }
+	public boolean isSuspended() { return false; }
+	public boolean canDisconnect() { return false; }
+	public void disconnect() throws DebugException { }
 
 	/**
 	 * @return Returns the opName.
@@ -369,28 +379,23 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 	}
 	
 
-	/* (non-Javadoc)
+	/**
 	 * @see org.eclipse.debug.core.ILaunchListener#launchAdded(org.eclipse.debug.core.ILaunch)
 	 */
-	public void launchAdded(ILaunch launch) {
-		// TODO Auto-generated method stub
+	public void launchAdded(ILaunch launch) { 
 		System.err.println("A new Launch is added");
-		
 	}
-	/* (non-Javadoc)
+	/**
 	 * @see org.eclipse.debug.core.ILaunchListener#launchChanged(org.eclipse.debug.core.ILaunch)
 	 */
 	public void launchChanged(ILaunch launch) {
-		// TODO Auto-generated method stub
 		System.err.println("A new Launch has changed");
 	}
-	/* (non-Javadoc)
+	/**
 	 * @see org.eclipse.debug.core.ILaunchListener#launchRemoved(org.eclipse.debug.core.ILaunch)
 	 */
 	public void launchRemoved(ILaunch launch) {
-		// TODO Auto-generated method stub
 		System.err.println("A new Launch is removed");
-		
 	}
 
 	public Object getAdapter(Class adapter)

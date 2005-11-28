@@ -1,4 +1,4 @@
-/* $Id: KermetaStackFrame.java,v 1.5 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: KermetaStackFrame.java,v 1.6 2005-11-28 18:54:35 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaStackFrame.java
  * License   : GPL
@@ -155,10 +155,7 @@ public class KermetaStackFrame implements IStackFrame {
     }
 
     /** @see org.eclipse.debug.core.model.IStep#stepInto() */
-    public void stepInto() throws DebugException {
-    	System.out.println("le step into qui est appelé ben il est dans KermetaStackFrame");
-    	thread.stepInto();
-    }
+    public void stepInto() throws DebugException { thread.stepInto(); }
 
     /** @see org.eclipse.debug.core.model.IStep#stepOver() */
     public void stepOver() throws DebugException { thread.stepOver();    }
@@ -167,27 +164,16 @@ public class KermetaStackFrame implements IStackFrame {
     public void stepReturn() throws DebugException { thread.stepReturn(); }
     
     /** @see org.eclipse.debug.core.model.ISuspendResume#canResume() */
-    public boolean canResume() {
-    	System.out.println("Can resume in KermetaStackFrame");
-        return thread.canResume();
-    }
+    public boolean canResume() { return thread.canResume(); }
 
     /** @see org.eclipse.debug.core.model.ISuspendResume#canSuspend() */
-    public boolean canSuspend() {
-        return thread.canSuspend();
-    }
+    public boolean canSuspend() { return thread.canSuspend(); }
 
     /** @see org.eclipse.debug.core.model.ISuspendResume#isSuspended() */
-    public boolean isSuspended() {
-    	System.out.println("kermeta debugger stack frame : IS SUSPENDED?\n");
-        return thread.isSuspended();
-    }
+    public boolean isSuspended() { return thread.isSuspended(); }
 
     /** @see org.eclipse.debug.core.model.ISuspendResume#resume() */
-    public void resume() throws DebugException {
-    	System.out.println("kermeta debugger stack frame : resuming\n");
-    	thread.resume();
-    }
+    public void resume() throws DebugException { thread.resume(); }
 
     /** @see org.eclipse.debug.core.model.ISuspendResume#suspend() */
     public void suspend() throws DebugException { thread.suspend();}

@@ -1,4 +1,4 @@
-/* $Id: RunnerConstants.java,v 1.2 2005-11-24 14:21:02 zdrey Exp $
+/* $Id: RunnerConstants.java,v 1.3 2005-11-28 18:54:36 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : RunnerConstants.java
  * License   : EPL
@@ -11,6 +11,10 @@ package fr.irisa.triskell.kermeta.runner;
 
 public class RunnerConstants {
 
+	/** Commands susceptible to be asked by the user */
+	public static final String GET_STACK = "stack";
+
+	
 	public static final String ARG_SEP = " ";
 	
 	public static final String STEP_INTO = "stepInto";
@@ -20,7 +24,8 @@ public class RunnerConstants {
 	public static final String RESUMED = "resumed";
 	public static final String SUSPENDED = "suspended";
 	public static final String TERMINATED = "terminated";
-	
+	public static final String BREAKPOINT = "breakpoint";
+	public static final String CLIENT_REQUEST = "request";
 	// This is more a "reason" of supsension, not a "command" 
 	public static final String STEP_END = "stepEnd";
 }

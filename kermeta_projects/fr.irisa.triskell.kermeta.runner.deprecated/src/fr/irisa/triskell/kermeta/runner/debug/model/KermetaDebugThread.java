@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.6 2005-11-24 14:23:41 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.7 2005-11-28 18:54:35 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -34,6 +34,7 @@ import org.eclipse.ui.views.tasklist.ITaskListResourceAdapter;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.interpreter.Traceback;
+import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaDebugWrapper;
 import fr.irisa.triskell.kermeta.structure.FObject;
@@ -57,9 +58,6 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	protected boolean isSuspended ;
 	protected boolean isStepping ;
 	
-	//
-	public static final String GET_STACK = "stack";
-
 	/**
 	 * The constructor
 	 */
@@ -114,6 +112,7 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 		// Pydev Comment : should return breakpoint that caused this thread to suspend
 		// not implementing this seems to cause no harm
 		System.err.println("getBreakPoints (KermetaDzebugThread)");
+		
 		KermetaBreakpoint[] breaks = new KermetaBreakpoint[0];
 		return breaks;
 	}
@@ -177,34 +176,15 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	public void setSuspended(boolean suspend)
 	{
 		isSuspended = suspend;
-		// FIXME : for now this static method create frames each time setSuspended is
-		// called! in next version, change that!!
-		// Pydev does that in the processSuspendCommand method.
-					
-/*		stackFrames = KermetaDebugWrapper.findStackFramesFromCallFrames(
-				(KermetaDebugTarget)getDebugTarget(), this);
-			System.out.println("Stack frames : " + stackFrames.length);*/
+		// The following statements "workaround" the risk of trying to access to the interpreter
+		// before it is created. --- TODO!
 		
-		try {
-			target.getRemoteInterpreter().execute(GET_STACK);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			// Debug framework does not want that stackFrames is null...
-			if (stackFrames == null || stackFrames.length == 0)
-			{
-				stackFrames = new KermetaStackFrame[1];
-				stackFrames[0] = new KermetaStackFrame(this, "default", null, 1);
-			}
-/*		}
-		else
+		// Debug framework does not want that stackFrames is null...
+		if (stackFrames == null || stackFrames.length == 0)
 		{
-			System.out.println("No interpreter yet!" );
 			stackFrames = new KermetaStackFrame[1];
 			stackFrames[0] = new KermetaStackFrame(this, "default", null, 1);
-		}*/
-		
+		}			
 	}
 
 
@@ -212,32 +192,26 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	/** @see org.eclipse.debug.core.model.ISuspendResume#resume() */
 	public void resume() throws DebugException {
 		setSuspended(false);
-		// Pydev implemented the command pattern to post commands that are
-		// then posted to the writer thread through a commandQueue that is 
-		// then listened by the server who
-		//AbstractRemoteDebugger d = target.getDebugger();
-		//d.postCommand(new ThreadRunCommand(d, id));
-		// then processes the command.
-		// target.getDebugger() <-
+		fireResumeEvent(DebugEvent.CLIENT_REQUEST);
 		try {
-			// target.getRemoteInterpreter().execute("resume");
-			target.getRemotePlatform().notify(KermetaDebugElement.RESUME, KermetaDebugElement.CLIENT_REQUEST);
+			// direct notification on the remote platform : the remoteInterpreter's thread
+			// should be blocked! 
+			target.getRemoteDebugUI().notify(RunnerConstants.RESUME, RunnerConstants.CLIENT_REQUEST);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 	}
 
 	/** @see org.eclipse.debug.core.model.ISuspendResume#suspend() */
-	public synchronized void suspend() throws DebugException {
-		System.out.println("kermeta debugger thread : suspending\n");
+	public void suspend() throws DebugException {
 		setSuspended(true);
-		System.err.println("stack : "+ stackFrames.length);
+		// Tell the interface that an event was sent.
+		fireSuspendEvent(DebugEvent.CLIENT_REQUEST);
 		try {
-			//target.getRemotePlatform().notify(KermetaDebugElement.SUSPEND, KermetaDebugElement.CLIENT_REQUEST);
-			target.getRemoteInterpreter().execute("suspend");
+			// notify the remote interface that a command has been sent
+			target.getRemoteDebugUI().notify(RunnerConstants.SUSPEND,RunnerConstants.CLIENT_REQUEST);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Remote exception error!");
 			e.printStackTrace();
 		}
 	}
@@ -245,15 +219,16 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	/** @see org.eclipse.debug.core.model.IStep#stepInto() */
 	public void stepInto() throws DebugException {
 		target.setState(KermetaDebugTarget.stateRunning);
+		// fire the resume event (no "stepInto" event! see eclipse doc. on DebugEvent class)
+		fireResumeEvent(DebugEvent.STEP_INTO);
 		isStepping = true;
 		try {
+			System.err.println("step intoooo!!!");
 			// This call unblocks the interpreter.
 			// notify is used as well by the GUI (to tell a GUI command --here, stepInto-- is run)
 			// as by the RemoteInterpreter (to tell a debugInterp. command is done)
-			target.getRemotePlatform().notify(KermetaDebugElement.RESUME, KermetaDebugElement.STEP_INTO);
-			//target.getRemoteInterpreter().execute(KermetaDebugElement.STEP_INTO);
+			target.getRemoteDebugUI().notify(RunnerConstants.RESUME, RunnerConstants.STEP_INTO);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

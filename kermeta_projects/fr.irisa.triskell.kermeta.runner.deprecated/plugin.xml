@@ -40,6 +40,8 @@
    <import plugin="org.eclipse.jdt.debug.ui"/>
    <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
    <import plugin="fr.irisa.triskell.kermeta"/>
+   <import plugin="org.eclipse.ui.workbench.texteditor"/>
+   <import plugin="org.eclipse.jface.text"/>
    </requires>
       <extension
       
@@ -280,15 +282,40 @@
         <breakpoint
               class="fr.irisa.triskell.kermeta.runner.debug.KermetaBreakpoint"
               id="kermetaBreakpoint"
-              markerType="fr.irisa.triskell.kermeta.runner.kermetaBreakpoint"
+              markerType="fr.irisa.triskell.kermeta.runner.kermetaBreakpointMarker"
               name="kermeta breakpoint"/>
      </extension>
      <extension
-           id="fr.irisa.triskell.kermeta.runner.kermetaBreakpoint"
-           name="kermetaBreakpoint"
+           id="fr.irisa.triskell.kermeta.runner.kermetaBreakpointMarker"
+           name="kermetaBreakpointMarker"
            point="org.eclipse.core.resources.markers">
         <super type="org.eclipse.debug.core.lineBreakpointMarker"/>
         <persistent value="true"/>
+     </extension>
+     <extension
+           id="fr.irisa.triskell.kermeta.runner.EditorActions"
+           point="org.eclipse.ui.editorActions">
+        <editorContribution
+              id="fr.irisa.triskell.kermeta.runner.breakpointAction"
+              targetID="org.eclipse.ui.editors.text.texteditor">
+           <action
+                 actionID="RulerDoubleClick"
+                 class="fr.irisa.triskell.kermeta.runner.actions.KermetaBreakpointActionDelegate"
+                 id="fr.irisa.triskell.kermeta.runner.breakpointAction"
+                 label="Add a breakpoint"
+                 state="true"
+                 style="push"
+                 tooltip="Kermeta breakpoint!"/>
+        </editorContribution>
+     </extension>
+     <extension
+           id="kermetaBreakpointMarkerImageProviders"
+           name="Kermeta Breakpoint Marker Image Providers"
+           point="org.eclipse.ui.ide.markerImageProviders">
+        <imageprovider
+              icon="icons/tree_sort.gif"
+              id="fr.irisa.triskell.kermeta.runner.imageprovider"
+              markertype="fr.irisa.triskell.kermeta.runner.kermetaBreakpointMarker"/>
      </extension>
      <!-- This extension does not look useful for launchability -->
 <!--     <extension
@@ -300,6 +327,25 @@
         </factory> 
      </extension> 
    -->
+   
+   <!-- popup menu, when right-clicking on the TextEditor ruler -->
+   <!-- popup menu -->
+<extension point="org.eclipse.ui.popupMenus">
+	<viewerContribution 
+    	id="org.python.pydev.debug.KermetaEditPopupActions" 
+    	targetID="#TextRulerContext">
+		<action
+        class="fr.irisa.triskell.kermeta.runner.actions.KermetaBreakpointActionDelegate"
+        icon="icons/kermeta_logo.gif"
+        id="org.eclipse.jdt.ui.actions.ManageBreakpointRulerActionDelegate"
+        label="Add Breakpoint"
+        menubarPath="debug"
+        style="push">
+		</action>
+	</viewerContribution>
+	
+</extension>
+   
    
      
 

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.6 2005-11-24 14:23:41 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.7 2005-11-28 18:54:35 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -15,6 +15,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import org.eclipse.core.resources.IMarker;
@@ -27,31 +28,20 @@ import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
-import org.eclipse.debug.core.IDebugEventSetListener;
 
 import org.eclipse.debug.core.ILaunch;
 
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
-import org.eclipse.debug.core.model.IValue;
 
-import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
-import fr.irisa.triskell.kermeta.runner.debug.remote.IKermetaRemoteInterpreter;
-import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugPlatform;
-import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteInterpreter;
+import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugUI;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaStepHandler;
-import fr.irisa.triskell.kermeta.runner.debug.util.ResumeCommand;
-import fr.irisa.triskell.kermeta.runner.debug.util.StepIntoCommand;
-import fr.irisa.triskell.kermeta.runner.debug.util.StepOverCommand;
-import fr.irisa.triskell.kermeta.runner.debug.util.SuspendCommand;
-import fr.irisa.triskell.kermeta.runner.debug.util.TerminateCommand;
 /**
  * KermetaDebugTarget, for the DEBUG_MODE.
  * Many source code come from the Eclipse Howto ("How to create an Eclipse
@@ -66,7 +56,7 @@ import fr.irisa.triskell.kermeta.runner.debug.util.TerminateCommand;
  */
 public class KermetaDebugTarget extends AbstractKermetaTarget
 { 
-    protected KermetaRemoteDebugPlatform remotePlatform;
+    protected KermetaRemoteDebugUI remotePlatform;
     protected IKermetaRemoteInterpreter remoteInterpreter;
     private Registry reg;
     
@@ -99,6 +89,8 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	
         launch = plaunch;
         target = this;
+        breakpoints = new ArrayList();
+        stepHandler = new KermetaStepHandler(this);
         this.name = "Kermeta Debug Target";
         // Create a thread by default
    /*     this.threads = new KermetaDebugThread[1];
@@ -127,7 +119,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     {
     	// Create the KermetaDebugPlatform that will be driven by the KermetaDebugTarget
     	try {
-    		System.out.println("START");
     		initialize();
     		// Create the remote platform
     		createRemotePlatform();
@@ -140,7 +131,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 
     /** RESUME command */
     public void resume() throws DebugException {
-        System.err.println("Resume event (KermetaDebugTarget.java)");
         // suspended reset to false
         setState(stateRunning);
         for (int i=0; i<threads.length; i++)
@@ -151,7 +141,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     }
     
     public void suspend() throws DebugException {
-    	System.out.println("Suspend event (KermetaDebugTarget)");
     	setState(stateSuspended);
     	for (int i=0; i<threads.length; i++)
     	{
@@ -161,11 +150,9 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     }
     
 	public void terminate() throws DebugException {
-    	System.err.println("Call terminate on debug target");
-		// TODO Auto-generated method stub
     	setState(stateTerminated);
-		//kermeta_process.terminate();
-        kermeta_process = null;
+		kermeta_process.terminate();
+    	kermeta_process = null;
 		fireEvent(new DebugEvent(this, DebugEvent.TERMINATE));
 	}
     
@@ -189,7 +176,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     
     /** @see org.eclipse.debug.core.model.ISuspendResume#canResume() */
     public boolean canResume() {
-    	if (state != stateDisconnected && state != stateRunning) System.err.println("Can Resume (KDTarget)");
     	return (state != stateDisconnected && state != stateRunning);
     }
 
@@ -211,38 +197,14 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	/** @see org.eclipse.debug.core.model.IDisconnect#disconnect() */
     public void disconnect() throws DebugException { setState(stateDisconnected); }
   
-    /* (non-Javadoc)
-	 * @see fr.irisa.triskell.kermeta.runner.launching.AbstractKermetaTarget#breakpointAdded(org.eclipse.debug.core.model.IBreakpoint)
-	 */
-	public void breakpointAdded(IBreakpoint breakpoint) {
-		System.out.println("breakpoint added");
-		super.breakpointAdded(breakpoint);
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.irisa.triskell.kermeta.runner.launching.AbstractKermetaTarget#breakpointChanged(org.eclipse.debug.core.model.IBreakpoint, org.eclipse.core.resources.IMarkerDelta)
-	 */
-	public void breakpointChanged(IBreakpoint breakpoint, IMarkerDelta delta) {
-		System.out.println("breakpoint changed");
-		super.breakpointChanged(breakpoint, delta);
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.irisa.triskell.kermeta.runner.launching.AbstractKermetaTarget#breakpointRemoved(org.eclipse.debug.core.model.IBreakpoint, org.eclipse.core.resources.IMarkerDelta)
-	 */
-	public void breakpointRemoved(IBreakpoint breakpoint, IMarkerDelta delta) {
-		System.out.println("breakpoint removed");
-		super.breakpointRemoved(breakpoint, delta);
-	}
-	
     /*
      * Implementation of IDebugTarget
      *
      */
     
     /**
-     * This method is called by the graphically interface to display the thread
-     * nodes of this debug target in the tree view 
+     * This method is implicitely called inside the Eclipse framework in order 
+     * to display the thread nodes of this debug target in the tree view 
      * @see org.eclipse.debug.core.model.IDebugTarget#getThreads()
      */
     public IThread[] getThreads() throws DebugException {
@@ -251,11 +213,20 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	{
     		threads = new KermetaDebugThread[1];
     		threads[0] = new KermetaDebugThread(this, "default thread");
-    		// Firing should be done via a command pattern which would handle this
-    		// properly and homogenely
     		fireCreationEvent(threads[0]);
     	}
     	return threads;
+    }
+    
+    /** 
+     * Helper method that gets the first IThread : 
+     * in the first Iteration of Kermeta and its debugger, we only have one 
+     * thread that is launched (no multi-thread handling in Kermeta!), so we
+     * only need to access the first thread in the array of threads!
+     */
+    public KermetaDebugThread getMainThread() throws DebugException
+    {
+    	return (KermetaDebugThread)getThreads()[0];
     }
     
 	/* (non-Javadoc)
@@ -344,73 +315,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 			return super.getAdapter(adapter);
 	}
 	
-	/**
-	 * process the command expressed as a string.
-	 * This directly calls the method associated to this command on the
-	 * DebugInterpreter instance (since it is launched in a simple java thread
-	 * that we can access such). 
-	 * If DebugInterpreter was run outside -- i.e 
-	 * 
-	 * Pydev delegates the command to specific methods. It what we should also do
-	 * processThreadRun (handle the stepxxx)/processThreadSuspend
-	 * TODO : a real command implementation?
-	 * argument "String cmd" would become "AbstractDebugCommand cmd"
-	 * @note We have only one thread for our debugger.
-	 * @pattern "pseudo-command"
-	 * @param cmd
-	 */
-	public void processCommand(String cmd)
-	{
-		KermetaDebugThread t = (KermetaDebugThread)threads[0];
-		if ( cmd.equals(KermetaDebugElement.STEP_INTO) ) {	
-			processStepIntoCommand(t);
-		}
-		else if ( cmd.equals(KermetaDebugElement.STEP_OVER) ) {	
-			processStepOverCommand(t);
-		}
-		else if ( cmd.equals(KermetaDebugElement.SUSPEND) ) {
-			processSuspendCommand(t, KermetaDebugElement.SUSPEND);
-			
-		}	
-		else if ( cmd.equals(KermetaDebugElement.RESUME) ) {
-			processResumeCommand(t, KermetaDebugElement.RESUME);
-		}
-		else if ( cmd.equals(KermetaDebugElement.TERMINATE) ) {
-			processTerminateCommand(t, KermetaDebugElement.TERMINATE);
-		}
-		// else : do nothing
-		else
-		{
-			System.err.println("command not understood : " + cmd);
-		}
-	}
-	// Hem this is bavard-code.
-	public void processStepOverCommand(KermetaDebugThread t) {
-		new StepOverCommand(t).execute();
-	}
-	public void processStepIntoCommand(KermetaDebugThread t) {
-		new StepIntoCommand(t).execute();
-	}
-	public void processTerminateCommand(KermetaDebugThread t, String str_cause) {
-		new TerminateCommand(t, str_cause).execute();
-	}
-	public void processResumeCommand(KermetaDebugThread t, String str_cause) {
-		new ResumeCommand(t, str_cause).execute();
-	}
-	public void processSuspendCommand(KermetaDebugThread t, String str_cause) {
-		new SuspendCommand(t, str_cause).execute();
-	}
-	public DebugInterpreter getDebugInterpreter() {
-		DebugInterpreter di = null;
-		try {
-			di = getRemoteInterpreter().getInterpreter();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return di;
-		
-	}
 	
 	/** The class to which the step action on the DebugInterpreter instance is
 	 *  delegated. */
@@ -419,12 +323,12 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	/**
 	 * @return Returns the remotePlatform.
 	 */
-	public KermetaRemoteDebugPlatform getRemotePlatform() {
+	public KermetaRemoteDebugUI getRemoteDebugUI() {
 		return remotePlatform;
 	}
 
 	/**
-	 * @return Returns the remoteInterpreter.
+	 * @return Returns the interpreter.
 	 */
 	public IKermetaRemoteInterpreter getRemoteInterpreter() {
 		return remoteInterpreter;
@@ -437,7 +341,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 		{	
 			System.err.println("2) the client (GUI)!");
 			// This is where we can access the remote interpreter.
-			remotePlatform    = new KermetaRemoteDebugPlatform(this);
+			remotePlatform    = new KermetaRemoteDebugUI(this);
 			System.out.println("CLIENT REGISTERED!");
 		}
 		catch (Exception e)
@@ -452,7 +356,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	/**
 	 * Start the Kermeta debug interpreter in another process (here, the "process"
 	 * is in fact a Thread)
-	 * TODO : move it in KermetaProcess class.
 	 */
 	public synchronized void startRemoteInterpreterProcess()
 	{

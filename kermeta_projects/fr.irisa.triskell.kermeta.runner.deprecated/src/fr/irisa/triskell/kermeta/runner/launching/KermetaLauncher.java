@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.7 2005-11-23 16:19:00 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.8 2005-11-28 18:54:35 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -32,7 +32,6 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
-import fr.irisa.triskell.kermeta.runner.debug.remote.RemoteDebugCondition;
 import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 import fr.irisa.triskell.traceability.helper.Tracer;
 

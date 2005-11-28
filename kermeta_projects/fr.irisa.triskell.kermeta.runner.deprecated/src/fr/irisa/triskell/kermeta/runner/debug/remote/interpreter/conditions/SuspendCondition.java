@@ -1,4 +1,4 @@
-/* $Id: SuspendCondition.java,v 1.1 2005-11-24 18:33:18 zdrey Exp $
+/* $Id: SuspendCondition.java,v 1.1 2005-11-28 18:54:36 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepIntoCondition.java
  * License   : EPL
@@ -7,17 +7,19 @@
  * Creation date : Nov 24, 2005
  * Authors       : zdrey
  */
-package fr.irisa.triskell.kermeta.runner.debug.remote;
+package fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions;
 
 import java.rmi.RemoteException;
 
 import org.eclipse.debug.core.model.IStackFrame;
 
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.IKermetaDebugCondition;
+import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableCallFrame;
 
-public class SuspendCondition implements IKermetaDebugCondition {
+public class SuspendCondition extends AbstractKermetaDebugCondition {
 
 	public KermetaRemoteInterpreter remoteInterpreter;
 	
@@ -29,17 +31,15 @@ public class SuspendCondition implements IKermetaDebugCondition {
 	public SuspendCondition() {}
 	
 	public void blockInterpreter() {
+		System.out.println("Block in suspend condition!");
 		if (this.evaluate() == true)
 		{	
-			try
-			{
-				// first notify
-				remoteInterpreter.getRemoteDebugPlatform().notify(RunnerConstants.SUSPEND, "");
-				
-				// then block
-				remoteInterpreter.block();
-			}
-			catch (RemoteException e) { e.printStackTrace(); }
+			System.err.println("SuspendCondition is always true");
+			// first notify
+			//remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, "");
+			
+			// then block
+			remoteInterpreter.block();
 		}
 		else
 		{
@@ -47,15 +47,6 @@ public class SuspendCondition implements IKermetaDebugCondition {
 			catch (RemoteException e) { e.printStackTrace(); }
 		}
 				
-
-	}
-
-	public String getConditionType() {
-		return "suspend";
-	}
-
-	public void setDebugInterpreter(DebugInterpreter interpreter) {
-		// TODO Auto-generated method stub
 
 	}
 	
@@ -82,16 +73,11 @@ public class SuspendCondition implements IKermetaDebugCondition {
 		}
 		if (cmd.equals(RunnerConstants.STEP_INTO)||cmd.equals(RunnerConstants.RESUME))
 		{
+			System.err.println("suspend condition evaluation is false");
 			return false;
 		}
 		// The other commands should be disabled!!
-		return false;
-	}
-	
-	public RemoteCallFrame[] getRemoteCallFrames()
-	{
-		RemoteCallFrame[] frames =  remoteInterpreter.getFrames(); //target.getRemoteInterpreter().getFrames();
-		return frames;
+		return true;
 	}
 
 }

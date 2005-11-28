@@ -1,4 +1,4 @@
-/* $Id: StepIntoCondition.java,v 1.2 2005-11-24 18:33:18 zdrey Exp $
+/* $Id: StepIntoCondition.java,v 1.1 2005-11-28 18:54:36 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepIntoCondition.java
  * License   : EPL
@@ -7,15 +7,16 @@
  * Creation date : Nov 24, 2005
  * Authors       : zdrey
  */
-package fr.irisa.triskell.kermeta.runner.debug.remote;
+package fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions;
 
 import java.rmi.RemoteException;
 
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.IKermetaDebugCondition;
+import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
 
-public class StepIntoCondition implements IKermetaDebugCondition {
+public class StepIntoCondition extends AbstractKermetaDebugCondition {
 
 	public KermetaRemoteInterpreter remoteInterpreter;
 	
@@ -26,30 +27,23 @@ public class StepIntoCondition implements IKermetaDebugCondition {
 	
 	public StepIntoCondition() {}
 	
+	/** 
+	 * */
 	public void blockInterpreter() {
-		if (this.evaluate() == true)
-		{	
-			try { remoteInterpreter.block(); }
-			catch (RemoteException e) { e.printStackTrace(); }
-		}
-		else
+		try
 		{
-			try { remoteInterpreter.unblock(); }
-			catch (RemoteException e) { e.printStackTrace(); }
+			if (this.evaluate() == true)
+			{
+				remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, RunnerConstants.STEP_END);
+				remoteInterpreter.block();
+			}
 		}
-				
-
+		catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
-	public String getConditionType() {
-		return "stepInto";
-	}
-
-	public void setDebugInterpreter(DebugInterpreter interpreter) {
-		// TODO Auto-generated method stub
-
-	}
-	
 	public void setRemoteInterpreter(KermetaRemoteInterpreter remote)
 	{
 		remoteInterpreter = remote;
@@ -67,17 +61,9 @@ public class StepIntoCondition implements IKermetaDebugCondition {
 	public boolean evaluate() {
 		// Command ... not the right word : stepInto, stepEnd......
 		String cmd = remoteInterpreter.getInterpreter().getCurrentCommand();
-		if (cmd.equals(RunnerConstants.STEP_END))
-		{
-			return true;
-		}
-		// The interpreter commands must be updated as often as necessary!!!
-		// Are we still in stepping mode?
-		if (cmd.equals(RunnerConstants.STEP_INTO))
-		{
-			return false;
-		}
-		return false;
+		// tell the UI that the step command is done.
+		System.out.println("STEP INTO IS FINISHEEEEED!");
+		return cmd.equals(RunnerConstants.STEP_END);
 	}
 
 }

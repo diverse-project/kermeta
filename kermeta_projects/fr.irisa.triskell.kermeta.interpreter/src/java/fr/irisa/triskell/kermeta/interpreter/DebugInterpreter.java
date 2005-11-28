@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.5 2005-11-24 18:36:44 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.6 2005-11-28 18:53:16 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -23,11 +23,14 @@ import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FBlock;
 import fr.irisa.triskell.kermeta.behavior.FBooleanLiteral;
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
+import fr.irisa.triskell.kermeta.behavior.FConditionnal;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.behavior.FLoop;
 
 import fr.irisa.triskell.kermeta.behavior.FRescue;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
@@ -51,8 +54,8 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public boolean interpreterSuspended = true;
     // The reason of a suspension, and that correspond to a end-user command
     // (step, stop...)
+    // TOODO : rename currentCommand into currentState
     public String currentCommand = "";
-    public boolean VISIT_DONE ;
     
     public FClass entryObject ;
     public FOperation entryOperation ;
@@ -60,7 +63,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
     
     public EObject currentNode; // The current node that is being interpreted.
     public ArrayList currentResultList;
-    public IKermetaDebugCondition debugCondition;
+    public AbstractKermetaDebugCondition debugCondition;
      
     // A reference to the KermetaRemoteInterpreter that drives our DebugInterpreter.
     public boolean debugMode;
@@ -142,7 +145,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visitFOperation(FOperation node) {
-		System.err.println("VISIT OPERATION IN DEBUG MODE!");
 		Object result = memory.voidINSTANCE;
 		processDebugCommand(node);
 		result = super.visitFOperation(node);
@@ -158,8 +160,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public Object visitFAssignement(FAssignement node) {
     	Object result = null;
     	processDebugCommand(node);
-    	if (!isSuspended())
-    		result = super.visitFAssignement(node);
+    	result = super.visitFAssignement(node);
         processPostCommand();
         return result;
     }
@@ -174,12 +175,9 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	 RuntimeObject result = memory.voidINSTANCE;
     	 
     	 processDebugCommand(node);
-    	 
     	 result = (RuntimeObject)super.visitFBlock(node);
-    	 
     	 processPostCommand();
     	 
-    	 System.out.println("END of visit block in debug mode");
     	 return result;
     }
     
@@ -187,20 +185,36 @@ public class DebugInterpreter extends ExpressionInterpreter {
      * 
      */
     public Object visitFCallFeature(FCallFeature node) {
-    	
-    	System.err.println("DebugInterpreter : visitFCallFeature");
     	Object result = null;
     	
     	processDebugCommand(node);
-    	//if (!isSuspended())
-    	
     	result = super.visitFCallFeature(node);
-    	
     	processPostCommand();
     	
         return result;
     }
     
+    
+    
+	/**
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFLoop(fr.irisa.triskell.kermeta.behavior.FLoop)
+	 */
+	public Object visitFLoop(FLoop node) {
+		Object result = null;
+		processDebugCommand(node);
+		result = super.visitFLoop(node);
+		processPostCommand();
+		return result;
+	}
+
+	public Object visitFConditionnal(FConditionnal node) {
+		Object result = null;
+		processDebugCommand(node);
+		result = super.visitFConditionnal(node);
+		processPostCommand();
+		return result;
+	}
+	
 	/**
 	 * visit a list of expressions (usually come from a FBlock)
 	 * @param expressions
@@ -236,25 +250,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	return super.visitList(expressions);
     }
     
-    /** Update the needed values for the debug */
-/*	public Object accept(EObject node) {
-		// Throw an error if the node is null
-		if (node == null) {
-			throw new Error("Error in visitor : the node to visit is null");
-		}
-		// Get the accept command
-		AcceptCommand cmd = KermetaOptimizedVisitor.getAcceptCmd(node);
-		// Throw an error is the command is null
-		if (cmd == null) {
-			throw new Error(
-					"Error in visitor : no strategy to handle node of type "
-							+ node.getClass().getName());
-		}
-		// accept the node
-		return cmd.accept(node, this);
-	}*/
-    
- 
     /* 
      *
      * The following methods represent the debugger commands.
@@ -299,19 +294,12 @@ public class DebugInterpreter extends ExpressionInterpreter {
      * 
      */
     
-    public void checkDebugCommand()
-    {
-    	
-    }
-    
     /** Called after an operation (a visit more precisely) is done */
     public void processPostCommand()
     {
 //    	 If the command was a step
     	System.err.println("the step is done! (postCommand message)");
     	if (isStepping()) setSuspended(true, "stepEnd");
-    		
-
     }
 
     /**
@@ -320,10 +308,13 @@ public class DebugInterpreter extends ExpressionInterpreter {
      */
     public Object processDebugCommand(EObject current_node)
     {
-    	System.err.println("SUSPENDU!");
     	if (getDebugCondition()!=null)
+    	{
+    		//System.err.println("debug condition : " + getDebugCondition());
+    		// Tell the debug condition where we are
+    		getDebugCondition().setCurrentNode(current_node);
     		getDebugCondition().blockInterpreter();
-    	
+    	}
     	// If user
     	//processCommand(getCurrentCommand());
     	return null;
@@ -407,13 +398,12 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	public void setCurrentCommand(String command)
 	{	currentCommand = command;}
     
-	public void setDebugCondition(IKermetaDebugCondition debug_cond)
+	public void setDebugCondition(AbstractKermetaDebugCondition debug_cond)
 	{
 		debugCondition = debug_cond;
-		debugCondition.setDebugInterpreter(this);
 	}
 	
-	public IKermetaDebugCondition getDebugCondition()
+	public AbstractKermetaDebugCondition getDebugCondition()
 	{
 		return debugCondition;
 	}

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugElement.java,v 1.3 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: KermetaDebugElement.java,v 1.4 2005-11-28 18:54:35 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugElement.java
  * License   : GPL
@@ -49,15 +49,8 @@ import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 public abstract class KermetaDebugElement implements IDebugElement {//, ITerminate, IStep, ISuspendResume {
 
     //protected IDebugTarget target; // Contains the useful informations for this class
-    
-    public static final String STEP_INTO = "stepInto";
-    public static final String STEP_OVER = "stepOver";
     public static final String SET_BREAKPOINT = "setBreakpoint";
-    public static final String RESUME = "resume";
-    public static final String SUSPEND = "suspend";
     public static final String TERMINATE = "terminate";
-	public static final String STEP_RETURN = "stepReturn";
-	public static final String CLIENT_REQUEST = "client";
  
     public IDebugTarget target;
     

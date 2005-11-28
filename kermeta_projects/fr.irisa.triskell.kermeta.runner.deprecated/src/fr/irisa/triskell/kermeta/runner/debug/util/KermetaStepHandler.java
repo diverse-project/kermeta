@@ -1,4 +1,4 @@
-/* $Id: KermetaStepHandler.java,v 1.2 2005-11-22 09:33:08 zdrey Exp $
+/* $Id: KermetaStepHandler.java,v 1.3 2005-11-28 18:54:35 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaStepHandler.java
  * License   : EPL
@@ -36,50 +36,6 @@ public class KermetaStepHandler {
 	}
 	
 	/**
-	 * Step into method : 
-	 * Evaluate the current expression
-	 * Fire a STEP_END event
-	 * */
-	public void doStepInto(KermetaDebugThread thread)
-	{
-		// Get the current interpreter
-		
-		// Evaluate the current expressino
-		
-		// Go to next frame if necessary?
-		
-		// Fire step end request
-		
-	}
-	
-	public void doStepOver(KermetaDebugThread thread)
-	{
-		// Get the current interpreter and current statement
-		ExpressionInterpreter interpreter = ((KermetaDebugTarget)thread.getDebugTarget()).
-			getKermetaInterpreter().getMemory().getCurrentInterpreter();
-		
-		InterpreterContext current_context = interpreter.getInterpreterContext();//.peekCallFrame().peekExpressionContext();
-		
-		
-		// Evaluate the current statement
-		
-		// Go to next frame if necessary?
-		
-		// Graphic action : go to the next statement. -> how to find next line?:
-		// "simple" : use KermetaDebugWrapper, and wrap the CallFrames of the new
-		// state of the debug interpreter Context.
-		
-
-		// Fire step end request
-		stepEnd(thread);
-	}
-	
-	public void doStepReturn(KermetaDebugThread thread)
-	{
-		
-	}
-	
-	/**
 	 * Cleans up when a step completes. 
 	 * Thread state is set to suspended. 
 	 * Stepping state is set to false 
@@ -92,7 +48,15 @@ public class KermetaStepHandler {
 		// Suspend back the execution
 		thread.setSuspended(true);
 		// Fire the step end event
-		thread.fireEvent(new DebugEvent(thread, DebugEvent.STEP_END));
+		thread.fireSuspendEvent(DebugEvent.STEP_END);
+	}
+	
+	public void breakpointFound(KermetaDebugThread thread)
+	{
+		//	 Suspend back the execution
+		thread.setSuspended(true);
+		// Fire the breakpoint found event
+		thread.fireSuspendEvent(DebugEvent.BREAKPOINT);
 	}
 
 }
