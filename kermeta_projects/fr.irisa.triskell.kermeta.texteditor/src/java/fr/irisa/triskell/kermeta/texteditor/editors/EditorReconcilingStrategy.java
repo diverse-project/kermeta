@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.10 2005-09-15 12:42:03 dvojtise Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.11 2005-11-28 12:46:43 dvojtise Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -108,6 +108,8 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 	        result.load();
 	        
 	        result.typeCheck(null);
+
+	        result.constraintCheck(null);
 	        
         }
         catch(Throwable e) {
@@ -117,7 +119,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         		return null;
         	}
         	else if (!result.messages.unitHasError)
-        		result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null));
+        		result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null, null));
         }
         
         EditorReconcilingStrategy.createMarker(file, result);
@@ -162,6 +164,11 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
                 offset = astn.getRangeStart();
                 length = astn.getRangeLength();	
             }
+        }
+        else if(message.getAstNode() != null) {
+            KermetaASTNode astn = message.getAstNode();
+            offset = astn.getRangeStart();
+            length = astn.getRangeLength();
         }
         
         
