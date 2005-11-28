@@ -15,6 +15,7 @@ import org.eclipse.swt.SWT;
 
 import com.touchgraph.graphlayout.GLPanel;
 
+import fr.irisa.triskell.kermeta.touchnavigator.actions.ConfigureAction;
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.KermetaGLPanel;
 
 
@@ -40,7 +41,7 @@ public class TouchView extends ViewPart {
 	//private TableViewer viewer;
 	private java.awt.Frame touchviewer;
 	private Shell shell;
-	private Action action1;
+	private Action actionConfigure;
 	private Action action2;
 	private Action doubleClickAction;
 
@@ -126,32 +127,28 @@ public class TouchView extends ViewPart {
 	}
 
 	private void fillLocalPullDown(IMenuManager manager) {
-		manager.add(action1);
+		manager.add(actionConfigure);
 		manager.add(new Separator());
 		manager.add(action2);
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
-		manager.add(action1);
+		manager.add(actionConfigure);
 		manager.add(action2);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 	
 	private void fillLocalToolBar(IToolBarManager manager) {
-		manager.add(action1);
+		manager.add(actionConfigure);
 		manager.add(action2);
 	}
 
 	private void makeActions() {
-		action1 = new Action() {
-			public void run() {
-				showMessage("Action 1 executed");
-			}
-		};
-		action1.setText("Action 1");
-		action1.setToolTipText("Action 1 tooltip");
-		action1.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+		actionConfigure = new ConfigureAction();
+		actionConfigure.setText("Configure TouchNavigator");
+		actionConfigure.setToolTipText("Configure the various options of Kermeta TouchNavigator");
+		actionConfigure.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 			getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 		
 		action2 = new Action() {
