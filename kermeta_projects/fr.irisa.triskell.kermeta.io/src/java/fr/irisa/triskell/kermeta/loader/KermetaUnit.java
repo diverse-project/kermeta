@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.43 2005-11-28 12:32:50 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.44 2005-11-28 12:44:56 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -146,7 +146,7 @@ public abstract class KermetaUnit {
 	}
 	
 	/**
-	 * start a constrain check on the unit
+	 * start a constraint check on the unit
 	 * @param checker
 	 * @return the KermetaConstraintChecker
 	 */
@@ -175,6 +175,16 @@ public abstract class KermetaUnit {
 	    }
 	    return constraint_checker;
 	}
+	public void constraintCheckAllUnits() {
+		
+		typeCheck(null);
+		
+		ArrayList iulist = getAllImportedUnits();
+	    for (int i=0; i<iulist.size(); i++) {	        
+	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
+	        iu.constraintCheck(null);
+	    }			   
+	}
 	
 	protected void importStdlib() {
 		//if (STD_LIB_URI != null && this != std_lib) importedUnits.add(getStdLib());
@@ -182,6 +192,9 @@ public abstract class KermetaUnit {
 	}
 
 	
+	/**
+	 * URI of the Unit
+	 */
 	protected String uri;
 	
 	/**
