@@ -3,7 +3,7 @@ package kermeta::persistence;
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: resource.kmt,v 1.8 2005-08-23 11:19:07 zdrey Exp $
+ * $Id: resource.kmt,v 1.9 2005-11-28 12:42:32 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -50,7 +50,7 @@ abstract class Resource
 	/** The entities contained in the model-instance, that are provided when user loads a resource */
 	reference instances : set Object[*]
 	/** The repository used to create this resource */
-	reference repository : Repository
+	reference repository : Repository#resources
 	
 	/** Save a model instance, in the file specified by the initial uri 
 	 * Overrides the old version.
