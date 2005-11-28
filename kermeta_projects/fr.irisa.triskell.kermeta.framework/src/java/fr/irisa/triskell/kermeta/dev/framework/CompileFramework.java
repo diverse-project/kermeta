@@ -1,4 +1,4 @@
-/* $Id: CompileFramework.java,v 1.4 2005-09-15 12:45:32 dvojtise Exp $
+/* $Id: CompileFramework.java,v 1.5 2005-11-28 12:48:02 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : CompileFramework.java
 * License : GPL
@@ -37,6 +37,8 @@ public class CompileFramework {
         
         System.out.println("TYPE CHECKING...");
         u.typeCheckAllUnits();
+        System.out.println("Constraint CHECKING...");
+        u.constraintCheckAllUnits();
         if (u.messages.hasError()) {
         	System.err.println("Standard library contains type errors:");
         	System.err.println(u.messages.getAllMessagesAsString());
