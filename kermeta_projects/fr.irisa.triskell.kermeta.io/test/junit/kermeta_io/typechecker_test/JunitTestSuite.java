@@ -1,7 +1,7 @@
-/* $Id: JunitTestSuite.java,v 1.14 2005-11-16 22:10:44 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.15 2005-11-28 13:00:45 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
- * License    : GPL
+ * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 27 janv. 2005
@@ -11,6 +11,8 @@
  *        	Kermeta TestSuite for io project
  * 			this file is partially generated using GenerateJUnitTestSuite. 
  * 			Do not manually modify the generated part. 
+ * 			checks that the valid test cases have no error
+ * 			checks that the invalid test cases have at least one error per operation
  */
 
 package kermeta_io.typechecker_test;
@@ -62,6 +64,10 @@ public class JunitTestSuite extends TestCase {
 	}
 	*/
 	// do not modify this comment
+
+
+
+
 
 
 
@@ -221,12 +227,10 @@ testinvalidFile("test/typechecher_tests/invalid","test_clone.kmt" );
 		
 		KermetaTypeChecker tc = builder.typeCheck(null);
 		
-		if (builder.messages.getAllErrors().size() > 0) {
-			// Ok we have found errors
-		}
-		else if (tc.correctOperation.size() != 0) {
+		// check that all operations have at least one error
+		if (tc.correctOperation.size() != 0) {
 		    boolean res = true;
-		    String message = "Type error not found in operations :";
+		    String message = "All operations must have at least one error or warning. Type error not found in operations :";
 		    for (int i=0; i<tc.correctOperation.size(); i++) {
 		        if (tc.correctOperation.get(i).toString().startsWith("test")) {
 		            message += " " + tc.correctOperation.get(i);
