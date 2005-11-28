@@ -129,8 +129,8 @@ public class Editor extends TextEditor {
 	public void setFocus() {
 
 		super.setFocus();
-		Shell theShell = new Shell();
-    	MessageDialog.openInformation(theShell,"setFocus","setFocus");
+		//Shell theShell = new Shell();
+    	//MessageDialog.openInformation(theShell,"setFocus","setFocus");
     	
 		Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
 		while(it.hasNext())
