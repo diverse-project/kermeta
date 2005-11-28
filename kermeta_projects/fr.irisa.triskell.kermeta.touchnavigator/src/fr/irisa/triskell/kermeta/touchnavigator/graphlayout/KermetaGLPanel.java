@@ -102,6 +102,8 @@ public class KermetaGLPanel extends GLPanel
 	private static final long serialVersionUID = 1L;
 	
 	private Editor previousEditor = null;
+
+	public Editor currentEditor = null;
 	
 	public BuildKermetaClassGraphThread buildKermetaClassGraphThread;
 	
@@ -139,10 +141,12 @@ public class KermetaGLPanel extends GLPanel
 		// do it in a thread so it will not slow down the opening of the file
 		if(editor != previousEditor){
 			previousEditor = editor;
+			currentEditor = editor;
 			System.err.println(editor.getMcunit().getUri());
 			buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
 			buildKermetaClassGraphThread.start();
 		}
+		System.err.println("editor unit: "+editor.getMcunit().getUri());
 	}
 	
 	/**
@@ -150,10 +154,13 @@ public class KermetaGLPanel extends GLPanel
 	 *
 	 */
 	class BuildKermetaClassGraphThread extends Thread {
+		
 		public void run() {   
 			yield();
 			FClassDefinition clasDef = findAClassInUnit();
-			System.err.println(clasDef.getFName());
+			if(clasDef == null) return;
+			System.err.println(clasDef.getFName());  
+			yield();
             
 			// make sure no other thread is running
             synchronized (KermetaGLPanel.this.tgPanel.getLocalityUtils()) {
@@ -164,7 +171,7 @@ public class KermetaGLPanel extends GLPanel
             		KermetaGLPanel.this.tgPanel.clearAll();
             		msg = "Nb nodes(2): "+KermetaGLPanel.this.tgPanel.getNodeCount();
             		System.err.println(msg);
-                	new KermetaClassGraphBuilder(tgPanel, clasDef).buildGraph();
+            		new KermetaClassGraphBuilder(tgPanel, clasDef).buildGraph(currentEditor.getMcunit());
                 	msg = "Nb nodes(3): "+KermetaGLPanel.this.tgPanel.getNodeCount();
             		System.err.println(msg);
                 	
@@ -196,13 +203,17 @@ public class KermetaGLPanel extends GLPanel
                 }
                 setVisible(true);
             }
+
+    		System.err.println("BuildKermetaClassGraphThread end");
 		}
 	}
 	
 	public FClassDefinition findAClassInUnit()
 	{
-		Editor editor =TexteditorPlugin.getDefault().getEditor();
-        KermetaUnit kunit = editor.getMcunit();
+		if(currentEditor == null)
+			currentEditor =TexteditorPlugin.getDefault().getEditor();
+		if(currentEditor ==null) return null;
+        KermetaUnit kunit = currentEditor.getMcunit();
 		FClassDefinition result = null;
 		
 		
@@ -236,8 +247,9 @@ public class KermetaGLPanel extends GLPanel
 	
 	public FClassDefinition findAClassInUnitPackage(FPackage aPackage)
 	{
-		Editor editor =TexteditorPlugin.getDefault().getEditor();
-        KermetaUnit kunit = editor.getMcunit();
+		if(currentEditor == null)
+			currentEditor =TexteditorPlugin.getDefault().getEditor();
+        KermetaUnit kunit = currentEditor.getMcunit();
 		FClassDefinition result = null;
 		Iterator it = aPackage.eContents().iterator();
         while(it.hasNext() && (result == null)){

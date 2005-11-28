@@ -1,4 +1,4 @@
-/* $Id: KermetaClassGraphBuilder.java,v 1.2 2005-11-27 19:46:04 dvojtise Exp $
+/* $Id: KermetaClassGraphBuilder.java,v 1.3 2005-11-28 23:11:25 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -50,15 +50,12 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 		startingClass = theStartingClass;
 	}
 
-	public void buildGraph() throws TGException
+	public void buildGraph(KermetaUnit kunit) throws TGException
 	{
-		KermetaUnit kunit= null;
-		//TexteditorPlugin tePlugin = TexteditorPlugin.getDefault();
-		//if(tePlugin == null) return;
-		Editor editor =TexteditorPlugin.getDefault().getEditor();
-		if(editor == null) return;
-		kunit = editor.getMcunit();
 		
+		if(kunit == null) return;
+		
+		System.err.println("buildGraph: "+kunit.getUri());
 		Arrow.init(20, 0.5);
 		//if(kunit == null) return;
 		
@@ -269,7 +266,11 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 	public Object visitFPrimitiveType(FPrimitiveType theType){
 		Node n1;
 		try {
-			n1 = tgpHelper.addClassNode();
+			// look for an existing one
+			if(graphUnitMapping.contains(theType))
+				n1 = (Node)graphUnitMapping.get(theType);
+			else
+				n1 = tgpHelper.addClassNode();
 			graphUnitMapping.put(theType, n1);
 			n1.setLabel(KMTHelper.getQualifiedName(theType));
 			n1.setType(Node.TYPE_RECTANGLE);
@@ -279,7 +280,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 				//tgPanel.setSelect(n1);
 			}
 		} catch (TGException e) {
-			throw new Error("TouchGraph INTERNAL ERROR : visit a FPrimitiveType", e);
+			throw new Error("TouchGraph INTERNAL ERROR : visiting a FPrimitiveType", e);
 		}
 	    return null;
 	}
@@ -289,7 +290,11 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 	public Object visitFClassDefinition(FClassDefinition theClass){
 		Node n1;
 		try {
-			n1 = tgpHelper.addClassNode();
+//			 look for an existing one
+			if(graphUnitMapping.contains(theClass))
+				n1 = (Node)graphUnitMapping.get(theClass);
+			else
+				n1 = tgpHelper.addClassNode();
 			graphUnitMapping.put(theClass, n1);
 			n1.setLabel(KMTHelper.getQualifiedName(theClass));
 			n1.setType(Node.TYPE_RECTANGLE);
