@@ -1,0 +1,22 @@
+/* $Id: 003_associations_06.kmt,v 1.1 2005-11-29 10:47:47 dvojtise Exp $ */
+
+// Test of a invalid associations
+
+package root_package;
+
+
+/* composition indeterminism :  class used into 2 strict compositions*/
+// we cannot accept this because the serialisation will not work here
+// EMF doesn't accept that
+class A {
+    reference b : B[1]#a
+    reference c : C[1]#a
+}
+class B {
+	attribute a : A#b
+	
+}
+
+class C {
+	attribute a : A#c
+}
