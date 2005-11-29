@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.18 2005-08-16 10:54:29 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.19 2005-11-29 14:16:44 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -744,6 +744,37 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	    }
 	    return result_tagArray;
 	}
+	
+	
+	/**
+	 * PrettyPrint a simplified version of the property
+	 * (no tag, no getter and setter)
+	 * with its context (ie. class)
+	 * @param node
+	 * @return
+	 */
+	public String ppSimplifiedFPropertyInContext(FProperty node){
+		String result="class "+node.getFOwningClass().getFName() + "is do /*...*/ ";
+		result +=ppSimplifiedFProperty(node);
+		result += " /*...*/ end";
+		return result;
+    }
+	/**
+	 * PrettyPrint a simplified version of the property
+	 * (no tag, no getter and setter)
+	 * @param node
+	 * @return
+	 */
+	public String ppSimplifiedFProperty(FProperty node){
+    	String result="";
+    	if (node.isFIsDerived()) result += "property ";
+		else if (node.isFIsComposite()) result += "attribute ";
+		else result += "reference ";
+		if (node.isFIsReadOnly()) result += "readonly ";
+		result += KMTHelper.getMangledIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node);
+		if (node.getFOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getFOpposite().getFName());
+		return result;
+    }
 	
 }
 
