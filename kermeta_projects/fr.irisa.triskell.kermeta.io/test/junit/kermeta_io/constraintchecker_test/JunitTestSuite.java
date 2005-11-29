@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.1 2005-11-23 09:35:49 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.2 2005-11-29 14:17:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -49,9 +49,22 @@ public class JunitTestSuite extends TestCase {
 	}
 
 
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_003_associations() throws Exception {
 testvalidFile("test/constraintchecker_tests/valid","003_associations.kmt" );
+}
+
+public void testinvalid_001_cyclicinheritance_01() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","001_cyclicinheritance_01.kmt" );
+}
+
+public void testinvalid_001_cyclicinheritance_02() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","001_cyclicinheritance_02.kmt" );
+}
+
+public void testinvalid_001_cyclicinheritance_03() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","001_cyclicinheritance_03.kmt" );
 }
 
 public void testinvalid_003_associations_01() throws Exception {
@@ -103,6 +116,9 @@ testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_0
 		}
 		
 		builder.typeCheck(null);
+		builder.constraintCheck(null);
+		builder.cycleConstraintCheck(null);
+		
 		
 		//KermetaTypeChecker tc = builder.getTypeChecker();
 		
@@ -129,6 +145,8 @@ testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_0
 		
 		
 		builder.typeCheck(null);
+		builder.constraintCheck(null);
+		builder.cycleConstraintCheck(null);
 		
 		
 		if (builder.messages.getAllErrors().size() == 0) {

@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.1 2005-11-25 16:25:44 dvojtise Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.2 2005-11-29 14:17:11 dvojtise Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * Constraint checker 
@@ -32,7 +33,7 @@ public class KermetaConstraintChecker {
     
     protected KermetaUnit unit;
         
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("ConstrainChecker");
+    final static public Logger internalLog = LogConfigurationHelper.getLogger("ConstraintChecker");
    
     /**
      * @param unit
@@ -43,7 +44,7 @@ public class KermetaConstraintChecker {
     }
     
     /**
-     * Type check all the class definitions 
+     * check all the class definitions 
      * of a kermeta unit
      */
     public void checkUnit() {
@@ -53,7 +54,9 @@ public class KermetaConstraintChecker {
         while(it.hasNext()) {
             FTypeDefinition td = (FTypeDefinition)it.next();
             if (td instanceof FClassDefinition) {
-                checkClassDefinition((FClassDefinition)td);
+                visitClassDefinition((FClassDefinition)td);
+
+                
             }
         }
     }
@@ -63,7 +66,7 @@ public class KermetaConstraintChecker {
      * of a class definition
      * @param clsdef
      */
-    public void checkClassDefinition(FClassDefinition clsdef) {
+    public void visitClassDefinition(FClassDefinition clsdef) {
         
         /*Iterator it = clsdef.getFOwnedOperation().iterator();
         while(it.hasNext()) {
@@ -77,21 +80,38 @@ public class KermetaConstraintChecker {
             checkOppositeProperties(prop);
         }
         
+        // add the classDef to the nodes for 
     }
     
     public void checkOppositeProperties(FProperty prop){
     	if(prop.getFOpposite() != null)
     	{
+    		    		
+    		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
+			// opposite mismatch
     		if(prop.getFOpposite().getFOpposite() != prop)
 	    	{
-	    		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-	    		unit.messages.addError("CONSTRAINT-CHECKER : opposite mismatch  : the association is illformed. " + pp.accept(prop), prop);
+	    		unit.messages.addError("CONSTRAINT-CHECKER : opposite mismatch  : the association is illformed. " + pp .ppSimplifiedFPropertyInContext(prop), prop);
 	    		if(prop.getFOpposite().getFOpposite() == null)
-	    			unit.messages.addError("CONSTRAINT-CHECKER : opposite mismatch  : the association is illformed. " + pp.accept(prop.getFOpposite()), prop.getFOpposite());
+	    			unit.messages.addError("CONSTRAINT-CHECKER : opposite mismatch  : the association is illformed. " + pp.ppSimplifiedFPropertyInContext(prop.getFOpposite()), prop.getFOpposite());
 	    	}
-	    	
+	    	// Composition multiplicity
+    		if(prop.getFOpposite().isFIsComposite()){
+    			if(prop.getFUpper() != 1){
+    				unit.messages.addError("CONSTRAINT-CHECKER : Composition multiplicity problem : change the multiplicity or do not use composition on the other end of the association. " + pp.ppSimplifiedFPropertyInContext(prop), prop);    	    		
+    			}
+    		}
+    		// Double Composition (association with diamond on both ends !) 
+    		if(prop.getFOpposite().isFIsComposite()){
+    			if(prop.isFIsComposite()){
+    				// message on this end only, the other end will be checked too from the other class
+    				unit.messages.addError("CONSTRAINT-CHECKER : Double composition problem (container contained by its content) : please consider splitting this association in 2 associations. " + pp.ppSimplifiedFPropertyInContext(prop), prop);    	    		
+    			}
+    		}
     	}
     	//Else: nothing to do since there are no opposite
 		//
     }
+    
+    
 }

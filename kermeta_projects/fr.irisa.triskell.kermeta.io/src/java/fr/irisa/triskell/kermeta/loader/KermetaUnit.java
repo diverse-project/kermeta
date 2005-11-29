@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.44 2005-11-28 12:44:56 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.45 2005-11-29 14:17:11 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -34,6 +34,7 @@ import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaCycleConstraintChecker;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
@@ -70,6 +71,7 @@ public abstract class KermetaUnit {
 	protected static KermetaUnit std_lib = null;
 	
 	protected boolean constraint_checked = false;
+	public boolean cycle_constraint_checked = false;
 	
 	public static KermetaUnit getStdLib() {
 		if (std_lib == null) {
@@ -175,9 +177,38 @@ public abstract class KermetaUnit {
 	    }
 	    return constraint_checker;
 	}
+	/**
+	 * start a constraint check on the unit
+	 * @param checker
+	 * @return the KermetaConstraintChecker
+	 */
+	public KermetaCycleConstraintChecker cycleConstraintCheck(KermetaCycleConstraintChecker constraint_checker) {
+		if (cycle_constraint_checked && constraint_checker != null) return constraint_checker;
+		if (cycle_constraint_checked && constraint_checker == null) {
+			// was checked by another enclosing unit
+			return new KermetaCycleConstraintChecker(this);
+		}
+		
+		   
+	    if (constraint_checker == null) constraint_checker = new KermetaCycleConstraintChecker(this);
+	    
+	    if (!this.messages.hasError()) {
+	        try {
+	        	
+	        	constraint_checker.check();
+	        	cycle_constraint_checked = true;
+	            return constraint_checker;
+	        }
+	        catch(Throwable t) {
+	            messages.addError("Constraint checker internal error " + t.getMessage(), null);
+	            KermetaUnit.internalLog.error("Constraint checker error", t);
+	        }
+	    }
+	    return constraint_checker;
+	}
 	public void constraintCheckAllUnits() {
 		
-		typeCheck(null);
+		constraintCheck(null);
 		
 		ArrayList iulist = getAllImportedUnits();
 	    for (int i=0; i<iulist.size(); i++) {	        
