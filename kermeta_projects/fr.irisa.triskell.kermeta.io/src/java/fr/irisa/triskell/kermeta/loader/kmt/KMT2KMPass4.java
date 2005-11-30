@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.8 2005-09-15 12:40:32 dvojtise Exp $
+/* $Id: KMT2KMPass4.java,v 1.9 2005-11-30 13:49:51 dpollet Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -125,9 +125,9 @@ public class KMT2KMPass4 extends KMT2KMPass {
 				else { // the super method has to be chosen
 				    
 					String possible_selection = "";
-					Enumeration enum = superops.keys();
-					while (enum.hasMoreElements()) {
-						possible_selection += enum.nextElement() + ", ";
+					Enumeration e = superops.keys();
+					while (e.hasMoreElements()) {
+						possible_selection += e.nextElement() + ", ";
 					}
 					possible_selection = possible_selection.substring(0, possible_selection.length()-2);
 					if (operation.getSuperSelection() != null) { // the user has chosen

@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.22 2005-09-15 12:40:32 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.23 2005-11-30 13:49:51 dpollet Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -444,7 +444,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		preVisit();
 		
 		//The ennumeration if it is a enum lietral call
-		FEnumeration enum = null;
+		FEnumeration e = null;
 		
 		// Determine the type of the target
 		Type target;
@@ -454,7 +454,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 				FTypeLiteral tl = (FTypeLiteral)expression.getFTarget();
 				FType tlt = getTypeFromTypeLiteral(tl).type;
 				if (tlt instanceof FEnumeration) {
-					enum = (FEnumeration)tlt;
+					e = (FEnumeration)tlt;
 				}
 			}
 			
@@ -464,16 +464,16 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		Type result = null;
 		
 		// It is a call to an enum literal
-		if(enum != null) {
+		if(e != null) {
 			FEnumerationLiteral lit = null;
-			Iterator it = enum.getFOwnedLiteral().iterator();
+			Iterator it = e.getFOwnedLiteral().iterator();
 			while (it.hasNext() && lit == null) {
 				FEnumerationLiteral l = (FEnumerationLiteral)it.next();
 				if (l.getFName().equals(expression.getFName())) lit = l;
 			}
 			if (lit != null) {
 			    expression.setFStaticEnumLiteral(lit);
-				result = new SimpleType(enum);
+				result = new SimpleType(e);
 			}
 		}
 		
@@ -501,8 +501,8 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			
 			if (result == null) {
 			    // The feature was not found
-			    if (enum != null)
-			        unit.messages.addError("TYPE-CHECKER : cannot resolve enumeration literal " + expression.getFName() + " in enumetation " + enum.getFName() + ".",expression);
+			    if (e != null)
+			        unit.messages.addError("TYPE-CHECKER : cannot resolve enumeration literal " + expression.getFName() + " in enumetation " + e.getFName() + ".",expression);
 			    else
 			        unit.messages.addError("TYPE-CHECKER : cannot resolve feature " + expression.getFName() + " in type " + target.toString() + ".",expression);
 			    result = TypeCheckerContext.VoidType;
