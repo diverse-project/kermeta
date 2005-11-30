@@ -1,16 +1,14 @@
-/* $Id: 003_associations_06.kmt,v 1.1 2005-11-29 10:47:47 dvojtise Exp $ */
+/* $Id: 003_associations_06.kmt,v 1.2 2005-11-30 14:31:40 dvojtise Exp $ */
 
 // Test of a invalid associations
 
 package root_package;
 
 
-/* composition indeterminism :  class used into 2 strict compositions*/
-// we cannot accept this because the serialisation will not work here
-// EMF doesn't accept that
+/* not usable link : the atribute a in class C cannot be 
+	used without raising a constraint exception on A.b*/
 class A {
     reference b : B[1]#a
-    reference c : C[1]#a
 }
 class B {
 	attribute a : A#b
@@ -18,5 +16,5 @@ class B {
 }
 
 class C {
-	attribute a : A#c
+	attribute a : A // a warning should occur here
 }
