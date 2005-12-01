@@ -1,4 +1,4 @@
-/* $Id: Tracer.java,v 1.2 2005-07-28 09:27:39 dvojtise Exp $
+/* $Id: Tracer.java,v 1.3 2005-12-01 18:32:01 zdrey Exp $
  * Project    : fr.irisa.triskell.traceability.model
  * File       : Tracer.java
  * License    : EPL
@@ -12,6 +12,7 @@
  */
 package fr.irisa.triskell.traceability.helper;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.traceability.ExternalReference;
+import fr.irisa.triskell.traceability.InternalReference;
 import fr.irisa.triskell.traceability.Model;
 import fr.irisa.triskell.traceability.Reference;
 import fr.irisa.triskell.traceability.TextReference;
@@ -124,6 +126,85 @@ public class Tracer {
 		addTargetTrace(target, message, sourceTextRef);
 	}
 	
+	/**
+	 * Get the text input trace for the given Object
+	 * @note : not tested yet!
+	 * @return an EList of TextReference
+	 */
+	protected ArrayList getRecursiveSourceTextReferences(Reference eref, ArrayList result)
+	{	
+		// get the list sourceTrace
+		EList sourceTraces = eref.getSourceTrace();
+		Iterator sourceIt = sourceTraces.iterator();
+		// get, for each sourceTrace, the list of sourceReferences
+		while (sourceIt.hasNext())
+		{
+			Trace t = (Trace)sourceIt.next();
+			EList refs = t.getSourceReferences();
+			Iterator refsIt = refs.iterator();
+			while (refsIt.hasNext())
+			{
+				// for each sourceReference, add it if it is a TextReference
+				Reference r = (Reference)refsIt.next();
+				if (r instanceof TextReference)
+				{
+					result.add(r);
+				}
+				// Else
+				// We assume that we have ExternalReference or TextReference (and no direct "Reference" type)
+				if (r.getSourceTrace().size()>0)
+				{
+					getRecursiveSourceTextReferences(r, result);
+				}
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Calls recursive getRecursiveSourceTextReferences
+	 * @note : not tested yet!!!
+	 * @return the list of source text references for the given target.
+	 */
+	public ArrayList getAllSourceTextReferences(EObject target)
+	{
+		ArrayList result = new ArrayList();
+		ExternalReference eref = getExternalReference(target);
+		result.addAll(getRecursiveSourceTextReferences(eref, result));
+		return result;
+	}
+	
+	/** 
+	 *  Get the first TextReference linked to the given object 
+	 *  Useful when, in a debug mode, we want to find the text informations
+	 *  of the EObject representation of an element in the text that is being debugged.
+	 * */
+	public TextReference getFirstTextReference(EObject target)
+	{
+		TextReference result = null;
+		ExternalReference eref = getExternalReference(target);
+		if (eref != null)
+		{
+			EList sourceTraces = eref.getSourceTrace();
+			Iterator sourceIt = sourceTraces.iterator();
+			// get, for each sourceTrace, the list of sourceReferences
+			while (sourceIt.hasNext())
+			{
+				Trace t = (Trace)sourceIt.next();
+				EList refs = t.getSourceReferences();
+				Iterator refsIt = refs.iterator();
+				while (refsIt.hasNext())
+				{
+					Reference r = (Reference)refsIt.next();
+					if (r instanceof TextReference)
+					{
+						result = (TextReference)r;
+					}
+				}
+			}
+		}
+		return result;
+	}
 	
 	/**
 	 * @param target
@@ -164,7 +245,8 @@ public class Tracer {
 	public ExternalReference getExternalReference(EObject referedObject)
 	{
 		if (modelTrace ==  null)
-		{ return null;
+		{
+			return null;
 		}
 		Iterator it = modelTrace.getReferences().iterator();
 		while (it.hasNext())
@@ -173,6 +255,7 @@ public class Tracer {
 			if(o instanceof ExternalReference)
 			{
 				ExternalReference eref = (ExternalReference)o;
+
 				if(eref.getRefObject() == referedObject)
 					return eref;
 			}
