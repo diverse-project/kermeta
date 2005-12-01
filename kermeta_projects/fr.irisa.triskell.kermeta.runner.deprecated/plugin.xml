@@ -178,7 +178,7 @@
                descriptionImage="icons/kermeta.png"
                project="true"
                preferredPerspectives="org.eclipse.ui.resourcePerspective"
-               name="New K. file"
+               name="New Kermeta file"
                id="fr.irisa.triskell.kermeta.runner.wizards.kermetaNewFileWizard"/>
          <wizard
                class="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard"
@@ -188,7 +188,7 @@
                descriptionImage="icons/tree_package.gif"
                project="true"
                preferredPerspectives="org.eclipse.ui.resourcePerspective"
-               name="New K. project"
+               name="New Kermeta project"
                id="fr.irisa.triskell.kermeta.runner.wizards.KermetaNewProjectWizard">
             <selection class="org.eclipse.core.resources.IProject"/>
          </wizard>
