@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.6 2005-11-24 14:25:49 zdrey Exp $
+/* $Id: Traceback.java,v 1.7 2005-12-01 18:44:03 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Traceback.java
  * License   : EPL
@@ -185,10 +185,11 @@ public class Traceback {
     	String[] infos = new String[4];
     	if (source_object instanceof KermetaASTNode)
     		infos = getInfoForKMTASTNodeAsArray(fobject, (KermetaASTNode)source_object, unit, frame);
-    	else if (source_object instanceof FObject)
+    	// if source_object is not a KermetaASTNode, than it would come from a km file
+    	// and so, it would be equals to "fobject"!
+    	// anyway, source_object could be later a object from a graphical view!
+    	else if (source_object instanceof FObject || source_object == null)
     		infos = getInfoForKMNodeAsArray(fobject, (FObject)source_object, unit, frame);
-    		// process it
-    		// infos = getInfoForKMNodeAsArray(fobject, (KermetaASTNode)source_object, unit, frame);
     	return infos;
     }
     
@@ -210,12 +211,12 @@ public class Traceback {
     	String[] infos = new String[4];
     	if (unit != null)
     	{
-    		infos[0] = unit.getUri().substring(unit.getUri().lastIndexOf("/")+1);
-    		infos[1] = getKMTLineNumber(node, unit.getUri());
+    		infos[0] = unit.getUri();
+    		infos[1] = Integer.toString(getLineNumber(node, unit.getUri()));
     	}
     	else
     	{
-    		infos[0] = infos[1] = "unknown";
+    		infos[0] = "unknown"; infos[1] = "1";
     	}
         infos[2] = (frame!=null)?frame.toString():":";
         infos[3] = getCodeForFObject(fobject);
@@ -228,10 +229,10 @@ public class Traceback {
     	if (unit != null)
     		infos[0] = unit.getUri();
     	else infos[0] = "unknown";
-    	infos[1] = "unknown";
+    	infos[1] = "1";
 		infos[2] = (frame!=null)?frame.toString():":";
         infos[3] = getCodeForFObject(fobject);
-    	return null;
+    	return infos;
     }
     
     /**
@@ -240,26 +241,19 @@ public class Traceback {
      * @param unit_struri
      * @return
      */
-    protected static String getKMTLineNumber(KermetaASTNode node, String unit_struri)
+    protected static int getLineNumber(KermetaASTNode node, String unit_struri)
     {
-        String line = "";
+        int linenum = 1; int c; int charcount = 0; 
         int charnum = node.getRangeStart();
-        URIConverter converter = new URIConverterImpl( ); 
         try
         {
-            InputStream in = converter.createInputStream(URI.createURI(unit_struri));
-            int c; int charcount = 0; int linenum = 1;
+            InputStream in = new URIConverterImpl().createInputStream(URI.createURI(unit_struri));
             while ((c = in.read()) != -1 && charcount<=charnum) {
-                charcount += 1;
-                if (c=='\n') linenum += 1;
+                charcount += 1; if (c=='\n') linenum += 1;
             }
             in.close();
-            line = new Integer(linenum).toString();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return line;
+        } catch (IOException e) { e.printStackTrace(); }
+        return linenum;
     }
     
 
