@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.12 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: KermetaSourceLocator.java,v 1.13 2005-12-01 18:20:31 zdrey Exp $
  * Project: Kermeta.runner
  * File: KermetaSourceLocator.java
  * License: EPL
@@ -114,7 +114,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator, ISourceP
 	 * Does not seem to work if the id return is our Kermeta editor's.
 	 */
 	public String getEditorId(IEditorInput input, Object element) {
-		System.out.println("Editor id? : " + TexteditorPlugin.getDefault().getBundle().getSymbolicName());
+		//(tested) Kermeta Editor id : TexteditorPlugin.getDefault().getBundle().getSymbolicName()
 		return RunnerPlugin.PLUGIN_EDITOR_ID;
 	}
 

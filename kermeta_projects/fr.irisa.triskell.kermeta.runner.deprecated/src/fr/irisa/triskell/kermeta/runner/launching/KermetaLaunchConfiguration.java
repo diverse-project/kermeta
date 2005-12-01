@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.18 2005-11-22 08:49:06 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.19 2005-12-01 18:20:31 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -93,10 +93,11 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	        }
 	        else
 	        {
-	            target = new KermetaDebugTarget(launch);
+	            target = new KermetaDebugTarget(launch);	            
 	            // start the debug (target is added to launch through this method call)
 	            target.start();
-
+	            // We don't terminate the target here, since it is controlled by the
+	            // target itself.
 	    		if (target.isTerminated())
 	    			launch.terminate();
 	        } 

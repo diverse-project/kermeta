@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.8 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.9 2005-12-01 18:20:31 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -115,7 +115,9 @@ public class KermetaLauncher
             //  be sure this value is correctly set        
             KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
             
-            interpreter = new KermetaInterpreter(uri);
+            Tracer tracer = isDebugMode?createTracer():null;
+            
+            interpreter = new KermetaInterpreter(uri, tracer);
                         
             interpreter.setEntryPoint(classQualifiedNameString, operationString);
             ArrayList interpreter_params =  new ArrayList();
@@ -138,11 +140,7 @@ public class KermetaLauncher
             }
             else  // We launch an interpreter with a special "condition"
             {
-            	// TODO : use tracer!
-                // interpreter.getUnit().setTracer(defineTracer());
-            	System.out.println("------------------------ Coucou! Debug Mode before lunch");
             	interpreter.launch_debug();
-            	System.out.println("------------------------ After lunch");
             }
             
 		    
@@ -196,8 +194,9 @@ public class KermetaLauncher
         return console;
     }
     
-    
-    protected Tracer defineTracer()
+    /** Create a tracer (from traceability module) so that we can get easier the informations
+     *  relative to the elements of the program to debug. */
+    protected Tracer createTracer()
     {
 //   	 create Trace structure
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("traceability",new XMIResourceFactoryImpl());
