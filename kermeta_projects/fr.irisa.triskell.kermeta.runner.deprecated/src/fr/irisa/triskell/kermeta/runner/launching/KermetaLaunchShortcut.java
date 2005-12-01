@@ -1,7 +1,7 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.8 2005-08-26 16:01:16 zdrey Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.9 2005-12-01 20:43:23 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
- * License   : GPL
+ * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : May 30, 2005
@@ -129,9 +129,11 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 		ILaunchConfiguration config= null;
 		try {
 			ILaunchConfigurationType configType= getKermetaLaunchConfigurationType();
+			String configIdentifier = fileName+"_"+className+"_"+opName;
+			configIdentifier = configIdentifier.replaceAll(":","__");  // replace the : that are not correctly handled by Eclipse generateUniqueLaunchConfigurationNameFrom
 			ILaunchConfigurationWorkingCopy wc = configType.newInstance(
 			        null, getLaunchManager().generateUniqueLaunchConfigurationNameFrom(
-			                fileName+"_"+className+"_"+opName)); 
+			        		configIdentifier)); 
 			
 			wc.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, fileName);
 			wc.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, className);
