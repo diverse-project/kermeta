@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.14 2005-11-24 14:25:49 zdrey Exp $
+/* $Id: CallFrame.java,v 1.15 2005-12-01 18:41:45 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -79,6 +79,16 @@ public abstract class CallFrame {
         return result;
     }
 
+    /** Return the visible variables in this CallFrame */
+    public Hashtable getVariables() {
+        Hashtable result = new Hashtable();
+        for (int i=block_stack.size()-1; i>=0; i--) {
+            result.putAll(((ExpressionContext)block_stack.get(i)).getVariables());
+        }
+        result.putAll(context.getInterpreterVariables());
+        return result;
+    }
+    
     /*
      * 
      * A C C E S S O R S 
