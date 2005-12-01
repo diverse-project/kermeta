@@ -42,6 +42,7 @@
    <import plugin="fr.irisa.triskell.kermeta"/>
    <import plugin="org.eclipse.ui.workbench.texteditor"/>
    <import plugin="org.eclipse.jface.text"/>
+   <import plugin="org.eclipse.core.expressions"/>
    </requires>
       <extension
       
@@ -268,7 +269,7 @@
      <extension
            point="org.eclipse.debug.core.watchExpressionDelegates">
         <watchExpressionDelegate
-              debugModel="fr.irisa.triskell.kermeta.runner.watchExpressionDelegate2"
+              debugModel="fr.irisa.triskell.kermeta.runner.debug"
               delegateClass="fr.irisa.triskell.kermeta.runner.debug.model.KermetaWatchExpressionDelegate"/>
      </extension>
      <extension
@@ -344,6 +345,37 @@
 		</action>
 	</viewerContribution>
 	
+</extension>
+<extension
+      point="org.eclipse.debug.ui.stringVariablePresentations">
+   <variablePresentation
+         argumentSelector="fr.irisa.triskell.kermeta.runner.debug.model.KermetaVariable"
+         variableName="fr.irisa.triskell.kermeta.runner.debug.model.KermetaVariable"/>
+</extension>
+<extension
+      point="org.eclipse.debug.ui.contextViewBindings">
+   <view
+         class="org.eclipse.debug.internal.ui.views.variables.VariablesView"
+         icon="icons/inheritance_flat.gif"
+         id="org.eclipse.debug.internal.ui.views.variables.VariablesView"
+         name="variables view"/>
+   <view
+         class="fr.irisa.triskell.kermeta.runner.MyView"
+         id="fr.irisa.triskell.kermeta.runner.view4"
+         name="fr.irisa.triskell.kermeta.runner.view4"/>
+</extension>
+<extension
+      point="org.eclipse.core.variables.valueVariables">
+   <variable
+         initializerClass="fr.irisa.triskell.kermeta.runner.debug.model.KermetaVariable"
+         name="fr.irisa.triskell.kermeta.runner.variable2"/>
+</extension>
+<extension
+      point="org.eclipse.debug.core.logicalStructureTypes">
+   <logicalStructureType
+         class="fr.irisa.triskell.kermeta.runner.KermetaLogicalStructureTypeDelegate"
+         id="fr.irisa.triskell.kermeta.runner.logicalStructureType1"
+         modelIdentifier="fr.irisa.triskell.kermeta.runner.debug"/>
 </extension>
    
    

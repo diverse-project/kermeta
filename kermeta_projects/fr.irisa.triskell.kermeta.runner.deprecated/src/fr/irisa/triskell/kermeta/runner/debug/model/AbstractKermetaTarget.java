@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.5 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.6 2005-12-01 18:29:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -272,7 +272,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      * @see org.eclipse.debug.core.model.IMemoryBlockRetrieval#supportsStorageRetrieval()
      */
     public boolean supportsStorageRetrieval() {
-        return true;
+        return false;
     }
 
     /* (non-Javadoc)
@@ -280,6 +280,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      */
     public IMemoryBlock getMemoryBlock(long startAddress, long length)
             throws DebugException {
+    	System.err.println("getMemoryBlock (AKT)");
         return null;
     }
     

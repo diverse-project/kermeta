@@ -1,4 +1,4 @@
-/* $Id: KermetaVariable.java,v 1.3 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: KermetaVariable.java,v 1.4 2005-12-01 18:29:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaVariable.java
  * License   : GPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.runner.debug.model;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
@@ -21,7 +22,7 @@ import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 /**
  * A kermeta variable so that the Variable display window can be set.
  */
-public class KermetaVariable implements IVariable {
+public class KermetaVariable extends DebugElement implements IVariable {
 
 	protected KermetaDebugTarget debugTarget;
 	protected String name;
@@ -35,30 +36,30 @@ public class KermetaVariable implements IVariable {
      * @param value the value linked to the variable (accessed by getValue)
      */
     public KermetaVariable(KermetaDebugTarget target, String name, String type, IValue value) {
-        super();
+    	super(target);
         debugTarget = target;
         this.name = name;
         this.type = type;
-        this.value = value;
-        
+        this.value = value;   
     }
 
     /** @see org.eclipse.debug.core.model.IVariable#getValue() */
-    public IValue getValue() throws DebugException { return value; }
+    public IValue getValue() throws DebugException
+    { 
+    	return value;
+    }
 
     /** @see org.eclipse.debug.core.model.IVariable#getName() */
     public String getName() throws DebugException { return name; }
 
     /** @see org.eclipse.debug.core.model.IVariable#getReferenceTypeName() */
-    public String getReferenceTypeName() throws DebugException { return type; }
+    public String getReferenceTypeName() throws DebugException { 
+    	System.err.println("ref");
+    	return type; }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.debug.core.model.IVariable#hasValueChanged()
-     */
+    /** @see org.eclipse.debug.core.model.IVariable#hasValueChanged() */
     public boolean hasValueChanged() throws DebugException {
-        // TODO Auto-generated method stub
-        return false;
-    }
+    	return false; }
 
     /** @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier() */
     public String getModelIdentifier() {
@@ -66,13 +67,14 @@ public class KermetaVariable implements IVariable {
     }
 
     /** @see org.eclipse.debug.core.model.IDebugElement#getDebugTarget() */
-    public IDebugTarget getDebugTarget() {  return debugTarget; }
+    public IDebugTarget getDebugTarget() { return debugTarget; }
 
     /** @see org.eclipse.debug.core.model.IDebugElement#getLaunch() */
     public ILaunch getLaunch() { return getDebugTarget().getLaunch(); }
 
     /** @see org.eclipse.debug.core.model.IValueModification#setValue(java.lang.String) */
     public void setValue(String expression) throws DebugException {
+    	System.err.println("set Value (IVariable) : " + expression);
     	// We should only manipulate KermetaValue instances
     	if (value instanceof KermetaValue)
     		((KermetaValue)value).setValueString(expression);
@@ -92,15 +94,14 @@ public class KermetaVariable implements IVariable {
      * @see org.eclipse.debug.core.model.IValueModification#supportsValueModification()
      */
     public boolean supportsValueModification() {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.model.IValueModification#verifyValue(java.lang.String)
      */
     public boolean verifyValue(String expression) throws DebugException {
-        // TODO Auto-generated method stub
+    	System.err.println("verify Value (IVariable)");
         return false;
     }
 
@@ -108,21 +109,12 @@ public class KermetaVariable implements IVariable {
      * @see org.eclipse.debug.core.model.IValueModification#verifyValue(org.eclipse.debug.core.model.IValue)
      */
     public boolean verifyValue(IValue value) throws DebugException {
-        // TODO Auto-generated method stub
+    	System.err.println("verify Value 2(IVariable)");
         return false;
     }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
-     */
-    public Object getAdapter(Class adapter) {
-        // TODO Auto-generated method stub
-        return null;
-    }
     
-    public KermetaStackFrame getStackFrame()
-    {
-        return null;
-    }
+	//PyDev Only create one instance of an empty array to be returned
+	private static final IVariable[] EMPTY_IVARIABLE_ARRAY = new IVariable[0]; 
 
+	
 }

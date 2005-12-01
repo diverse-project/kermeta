@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugModelPresentation.java,v 1.3 2005-11-22 09:21:45 zdrey Exp $
+/* $Id: KermetaDebugModelPresentation.java,v 1.4 2005-12-01 18:29:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugModelPresentation.java
  * License   : EPL
@@ -99,7 +99,6 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      * @see org.eclipse.debug.ui.IDebugModelPresentation#computeDetail(org.eclipse.debug.core.model.IValue, org.eclipse.debug.ui.IValueDetailListener)
      */
     public void computeDetail(IValue value, IValueDetailListener listener) {
-        // TODO Auto-generated method stub
     	System.out.println("KermetaDebugModelPresentation : Call of computeDetail method");
     }
 

@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.1 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -27,7 +27,7 @@ import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.ResumeCondition;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.StepIntoCondition;
-import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.SuspendCondition;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.StepOverCondition;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaDebugWrapper;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 
@@ -48,9 +48,6 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	 *  a new event occurs */
 	public Hashtable conditions;
 	
-	// Ask platform if it can unblock
-	public static final String ASK_PLATFORM = "ask";
-	
 	public KermetaRemoteInterpreter(String p_startfile, String p_classname, String p_opname, String p_args) throws RemoteException {
 		super(); 
 		startfile = p_startfile;
@@ -58,9 +55,16 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		opname    = p_opname;
 		args      = p_args;
 		blocked = false;
+		
 
-		createStopConditions();
 		createKermetaInterpreter();
+		
+		createStopConditions();
+		// Set the condition of running
+        setDebugCondition(RunnerConstants.RESUME);
+        
+       
+		
 	}
 
 	/** Initialize all the stop condition that could control the remoteInterpreter */
@@ -68,9 +72,10 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	{
 		conditions = new Hashtable();
 		//	IKermetaDebugCondition debugCond = null;
-		conditions.put(RunnerConstants.SUSPEND, new SuspendCondition(this));
+		// conditions.put(RunnerConstants.SUSPEND, new SuspendCondition(this));
 		conditions.put(RunnerConstants.RESUME, new ResumeCondition(this));
 		conditions.put(RunnerConstants.STEP_INTO, new StepIntoCondition(this));
+		conditions.put(RunnerConstants.STEP_OVER, new StepOverCondition(this));
 	}
 	
 	/**
@@ -110,6 +115,11 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		remoteDebugUI = p_debugplatform;
 	}
 	
+	public void terminate() throws RemoteException
+	{
+		remoteDebugUI = null;
+	}
+	
 	
 	/**
 	 * Creates the Kermeta remoteInterpreter and sets it to the KermetaDebugTarget.
@@ -124,10 +134,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
         		startfile, classname, opname, args, true) ; //, null);//debugCondition);
         
         interpreter = (DebugInterpreter)global_interpreter.getMemory().getCurrentInterpreter();
-        // Set the condition of running
-        setDebugCondition(RunnerConstants.RESUME);
         
-       
 	}
 	
 	/** Shortcut method to change the remoteInterpreter stop condition */
@@ -136,6 +143,16 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		// modify the remoteInterpreter currentCommand --> pre-state : step_into e.g
 		// note : after remoteInterpreter ahas done, it defines a post-state : step_end
 		interpreter.setCurrentCommand(cond_name);
+		if (cond_name.equals(RunnerConstants.STEP_OVER))
+		{
+			System.err.println("STEP over!!");
+			//if (this.getInterpreterContext().peekCallFrame() instanceof OperationCallFrame)
+			interpreter.setStepOverCallFrame(); 
+		}
+		else
+		{
+			interpreter.unsetStepOverCallFrame(); 
+		}
 		interpreter.setDebugCondition((AbstractKermetaDebugCondition)conditions.get(cond_name));
 	}
 
@@ -162,10 +179,11 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	public synchronized SerializableCallFrame[] getSerializableCallFrames()
 	{	return KermetaDebugWrapper.createSerializableCallFrames(interpreter); }
 	
+	/** Block the current thread until notification. This method is called by the 
+	 * KermetaRemoteInterpreter itself. */
 	public synchronized void block()
 	{
 		try {
-			System.out.println("block");
 			wait();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -178,6 +196,8 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	{ 
 		System.out.println("un-block");
 		interpreter.getDebugCondition().setSuspended(false);
+		// beek
+		interpreter.setCurrentCommand(interpreter.getDebugCondition().getConditionType());
 		notifyAll();
 	}
 	
@@ -189,6 +209,10 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	
 	public void changeSuspendedState(boolean isSuspended) throws RemoteException {
 		interpreter.getDebugCondition().setSuspended(true);
+	}
+
+	public String getDebugCondition() throws RemoteException {
+		return interpreter.getDebugCondition().getConditionType();
 	}
 
 }

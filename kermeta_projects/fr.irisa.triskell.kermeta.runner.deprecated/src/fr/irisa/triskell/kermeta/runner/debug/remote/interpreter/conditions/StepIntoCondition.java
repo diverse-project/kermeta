@@ -1,4 +1,4 @@
-/* $Id: StepIntoCondition.java,v 1.1 2005-11-28 18:54:36 zdrey Exp $
+/* $Id: StepIntoCondition.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepIntoCondition.java
  * License   : EPL
@@ -20,6 +20,7 @@ public class StepIntoCondition extends AbstractKermetaDebugCondition {
 
 	public KermetaRemoteInterpreter remoteInterpreter;
 	
+	
 	public StepIntoCondition(KermetaRemoteInterpreter remote)
 	{
 		remoteInterpreter = remote;
@@ -34,8 +35,19 @@ public class StepIntoCondition extends AbstractKermetaDebugCondition {
 		{
 			if (this.evaluate() == true)
 			{
-				remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, RunnerConstants.STEP_END);
-				remoteInterpreter.block();
+				// cmd : the current command that the interpreter is/was just executing, or
+				// the current state. (stepping : stepInto or stepOver, suspended : stepEnd or terminate)
+				String cmd = remoteInterpreter.getInterpreter().getCurrentCommand();
+				if (cmd.equals( RunnerConstants.TERMINATE ))
+				{
+					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.TERMINATE, "");
+				}
+				else
+				{
+					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, 
+						RunnerConstants.STEP_END);
+					remoteInterpreter.block();
+				}
 			}
 		}
 		catch (RemoteException e)
@@ -62,8 +74,13 @@ public class StepIntoCondition extends AbstractKermetaDebugCondition {
 		// Command ... not the right word : stepInto, stepEnd......
 		String cmd = remoteInterpreter.getInterpreter().getCurrentCommand();
 		// tell the UI that the step command is done.
-		System.out.println("STEP INTO IS FINISHEEEEED!");
-		return cmd.equals(RunnerConstants.STEP_END);
+		return (cmd.equals(RunnerConstants.TERMINATE) || cmd.equals(RunnerConstants.STEP_END));
 	}
 
+	/**
+	 * @see fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition#getConditionType()
+	 */
+	public String getConditionType() { return RunnerConstants.STEP_INTO; }
+
+	
 }

@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.1 2005-11-28 18:54:36 zdrey Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -14,6 +14,7 @@ import java.rmi.RemoteException;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.interpreter.Traceback;
+import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.structure.FObject;
 
@@ -24,19 +25,29 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 	public boolean evaluate()
 	{
 		boolean eval_stop = false;
-		try
-		{	
-//			Do we have any breakpoint?
-			Integer[] lines = remoteInterpreter.getRemoteDebugUI().getBreakpointLines();
-			Integer l = getLineForCurrentNode();
-			// no stop condition!
-			if (l.intValue() == -1) return false;
-			for (int i=0; i<lines.length && eval_stop==false; i++)
-				// if (l.equals(lines[i]))
-				if (l.compareTo(lines[i])<0)	eval_stop = true;
+		// FIXME : getInterpreter should never be null here, the only moment when it could occur
+		// is a synchronization problem!
+		if (remoteInterpreter.getInterpreter() == null)
+			eval_stop = false;
+		else if (remoteInterpreter.getInterpreter().getCurrentCommand().equals(RunnerConstants.TERMINATE))
+		{
+			eval_stop = true;
 		}
-		catch (RemoteException e) { e.printStackTrace();}
-		
+		else
+		{
+			try
+			{	
+				// Do we have any breakpoint?
+				Integer[] lines = remoteInterpreter.getRemoteDebugUI().getBreakpointLines();
+				Integer l = getLineForCurrentNode();
+				// no stop condition!
+				if (l.intValue() == -1) return false;
+				for (int i=0; i<lines.length && eval_stop==false; i++)
+					// if (l.equals(lines[i]))
+					if (l.compareTo(lines[i])<0)	eval_stop = true;
+			}
+			catch (RemoteException e) { e.printStackTrace();}
+		}
 		return eval_stop;
 	}
 	

@@ -1,4 +1,4 @@
-/* $Id: KermetaStackFrame.java,v 1.6 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: KermetaStackFrame.java,v 1.7 2005-12-01 18:29:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaStackFrame.java
  * License   : GPL
@@ -9,14 +9,18 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IRegisterGroup;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
+import org.eclipse.ui.views.properties.IPropertySource;
+import org.eclipse.ui.views.tasklist.ITaskListResourceAdapter;
 
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.traceability.helper.Tracer;
@@ -27,9 +31,16 @@ import fr.irisa.triskell.traceability.helper.Tracer;
  * A stack frame contains variables representing visible locals and arguments at
  * the current execution location.
  * 
- * <em>GUI<->Interpreter : KermetaStackFrame is linked to CallFrame</em>
+ * Important note for developers : quite all the elements extend the Eclipse 
+ * 3.1 "DebugElement". DebugElement defines a method, called "getAdapter" that
+ * must be implemented for all the elements in debug.model package, since it is 
+ * used to layout properly those elements in the debug view. In the particular 
+ * exemple of KermetaStackFrame, "getAdapter" definition is
+ * used to layout the variables contained by the stack frame, in the Variables view.
+ * 
+ * <em>GUI<->Interpreter : KermetaStackFrame<->CallFrame</em>
  */
-public class KermetaStackFrame implements IStackFrame {
+public class KermetaStackFrame extends DebugElement implements IStackFrame {
 	
 	/*
 	 * custom properties 
@@ -55,32 +66,34 @@ public class KermetaStackFrame implements IStackFrame {
      * @param p_line the position in the file of the debug state
      */
     public KermetaStackFrame(KermetaDebugThread p_thread, String p_name, IPath p_path, int p_line) {
-        thread = p_thread;
+        super(p_thread.getDebugTarget());
+    	thread = p_thread;
         line   = p_line;
         name   = p_name;
         path = p_path;
+        variables = new KermetaVariable[0];
     }
 
     /**
      * @see org.eclipse.debug.core.model.IStackFrame#getThread()
      */
     public IThread getThread() {
-        return thread;
+    	return thread;
     }
 
     /**
      * @see org.eclipse.debug.core.model.IStackFrame#getVariables()
      */
     public IVariable[] getVariables() throws DebugException {
-        return variables;
+    	return variables;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.model.IStackFrame#hasVariables()
      */
     public boolean hasVariables() throws DebugException {
-        // TODO Auto-generated method stub
-        return false;
+     System.err.println("do I have variables?");
+       return (variables != null && variables.length > 0);
     }
 
     /** @see org.eclipse.debug.core.model.IStackFrame#getLineNumber() */
@@ -100,20 +113,18 @@ public class KermetaStackFrame implements IStackFrame {
 
     /** @see org.eclipse.debug.core.model.IStackFrame#getName() */
     public String getName() throws DebugException {
-        return name;
+        return name + "   line " + line;
     }
 
-    /* (non-Javadoc)
+    /** (don't know what it is used for)
      * @see org.eclipse.debug.core.model.IStackFrame#getRegisterGroups()
      */
     public IRegisterGroup[] getRegisterGroups() throws DebugException {
-        // TODO Auto-generated method stub
         return null;
     }
 
     /** @see org.eclipse.debug.core.model.IStackFrame#hasRegisterGroups() */
     public boolean hasRegisterGroups() throws DebugException {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -178,9 +189,7 @@ public class KermetaStackFrame implements IStackFrame {
     /** @see org.eclipse.debug.core.model.ISuspendResume#suspend() */
     public void suspend() throws DebugException { thread.suspend();}
 
-    /**
-     * @see org.eclipse.debug.core.model.ITerminate#canTerminate()
-     */
+    /** @see org.eclipse.debug.core.model.ITerminate#canTerminate() */
     public boolean canTerminate() { return thread.canTerminate(); }
 
     /** @see org.eclipse.debug.core.model.ITerminate#isTerminated() */
@@ -189,22 +198,12 @@ public class KermetaStackFrame implements IStackFrame {
     /** @see org.eclipse.debug.core.model.ITerminate#terminate() */
     public void terminate() throws DebugException { thread.terminate(); }
 
-    /** @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class) */
-    public Object getAdapter(Class adapter) {
-    	if( adapter == this.getClass() )
-			return this;
-		else
-			return null;
-    }
-    
-    
     /*
      * 
      *  G E T T E R S   A N D   S E T T E R S
      * 
      * 
      */
-    
     public void setPath(IPath p_path)  { path = p_path; }
     public void setLine(int p_line)  { line = p_line; }
     public void setName(String p_name) {name = p_name; }
@@ -223,19 +222,6 @@ public class KermetaStackFrame implements IStackFrame {
 		);
 		return path;
 	}
-	
-	protected int findLineNumberFromUnit()
-	{
-		KermetaInterpreter kinterpreter = ((KermetaDebugTarget)getDebugTarget()).getKermetaInterpreter();
-		Tracer tracer = kinterpreter.getUnit().getTracer();
-		if (tracer != null)
-		{
-			// I should work with the tracer.
-		}
-		
-		return -1;
-	}
-	
 	
 
 }

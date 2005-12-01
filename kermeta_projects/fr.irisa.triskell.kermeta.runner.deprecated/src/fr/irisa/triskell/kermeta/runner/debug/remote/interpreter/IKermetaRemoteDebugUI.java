@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteDebugUI.java,v 1.1 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: IKermetaRemoteDebugUI.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteDebugUI.java
  * License   : EPL
@@ -54,5 +54,8 @@ public interface IKermetaRemoteDebugUI extends Remote {
 	 * debugged 
 	 */
 	public abstract Integer[] getBreakpointLines() throws RemoteException;
+
+	// should not be in the interface
+	public abstract void unregisterRemoteInterpreter() throws RemoteException;
 
 }

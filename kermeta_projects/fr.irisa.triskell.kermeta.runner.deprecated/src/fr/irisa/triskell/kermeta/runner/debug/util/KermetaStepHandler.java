@@ -1,4 +1,4 @@
-/* $Id: KermetaStepHandler.java,v 1.3 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: KermetaStepHandler.java,v 1.4 2005-12-01 18:29:07 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaStepHandler.java
  * License   : EPL
@@ -12,14 +12,11 @@ package fr.irisa.triskell.kermeta.runner.debug.util;
 import org.eclipse.debug.core.DebugEvent;
 
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugThread;
 
 /** 
  * This is a class that handles the step commands.(step into, step over) 
- * 
  *
  */
 public class KermetaStepHandler {

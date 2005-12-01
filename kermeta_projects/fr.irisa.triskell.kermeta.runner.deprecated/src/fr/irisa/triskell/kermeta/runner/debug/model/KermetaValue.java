@@ -1,4 +1,4 @@
-/* $Id: KermetaValue.java,v 1.2 2005-11-23 16:18:59 zdrey Exp $
+/* $Id: KermetaValue.java,v 1.3 2005-12-01 18:29:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaValue.java
  * License   : GPL
@@ -11,6 +11,7 @@ package fr.irisa.triskell.kermeta.runner.debug.model;
 
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
@@ -19,9 +20,12 @@ import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 
 /**
- * 
+ * The KermetaValue corresponds to the displayed value of a variable (repr. as
+ * KermetaVariable in the debug view). It could be merged with KermetaVariable as
+ * PyDev did, since there is a total dependency between the two classes. (indeed,
+ * the value concept as no sense without a variable)
  */
-public class KermetaValue implements IValue {
+public class KermetaValue extends DebugElement implements IValue {
 
     /** The debug target */
     KermetaDebugTarget debugTarget;
@@ -32,17 +36,18 @@ public class KermetaValue implements IValue {
      */
     public KermetaValue(KermetaDebugTarget target, String value)
     {
+    	super(target);
         debugTarget = target;
         valueString = value;
         	
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.model.IValue#getReferenceTypeName()
      */
     public String getReferenceTypeName() throws DebugException {
-        // TODO Auto-generated method stub
-        return null;
+    	
+        return "pas d'type, pas d'chocolat";
     }
 
     /** @see org.eclipse.debug.core.model.IValue#getValueString() */
@@ -58,20 +63,20 @@ public class KermetaValue implements IValue {
         return false;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.model.IValue#getVariables()
      */
     public IVariable[] getVariables() throws DebugException {
-        // TODO Auto-generated method stub
-        return null;
+        //return debugTarget.getMainThread().getTopStackFrame().getVariables();
+    	return null;
     }
 
-    /* (non-Javadoc)
+    /**
+     * @return true if the value is associated to a variable, false otherwise.
      * @see org.eclipse.debug.core.model.IValue#hasVariables()
      */
     public boolean hasVariables() throws DebugException {
-        // TODO Auto-generated method stub
-        return false;
+        return (getVariables() != null && getVariables().length > 0);
     }
 
     /** @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier() */
@@ -87,14 +92,6 @@ public class KermetaValue implements IValue {
     /** @see org.eclipse.debug.core.model.IDebugElement#getLaunch() */
     public ILaunch getLaunch() {
         return getDebugTarget().getLaunch();
-    }
-
-    /* (non-Javadoc)
-     * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
-     */
-    public Object getAdapter(Class adapter) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     public void setValueString(String valueString) {

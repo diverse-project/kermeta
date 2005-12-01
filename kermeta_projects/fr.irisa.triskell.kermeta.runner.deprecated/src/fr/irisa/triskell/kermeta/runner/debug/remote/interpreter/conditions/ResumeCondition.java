@@ -1,4 +1,4 @@
-/* $Id: ResumeCondition.java,v 1.1 2005-11-28 18:54:36 zdrey Exp $
+/* $Id: ResumeCondition.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : ResumeCondition.java
  * License   : EPL
@@ -32,7 +32,17 @@ public class ResumeCondition extends AbstractBreakpointStopCondition {
 	 */
 	public void blockInterpreter() {
 		if (evaluate() == true)
+		{
+			try
+			{
+				// blocked because the execution of the program is finished
+				if (remoteInterpreter.getInterpreter().getCurrentCommand().equals(RunnerConstants.TERMINATE))
+					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.TERMINATE, "");
+			}
+			catch (RemoteException e) { e.printStackTrace();}
+			// blocked by user choice or breakpoint
 			remoteInterpreter.block();
+		}
 	}
 	
 	/**
@@ -44,6 +54,12 @@ public class ResumeCondition extends AbstractBreakpointStopCondition {
 	public boolean evaluate() {
 		return ( super.evaluate() || isSuspended );
 	}
+
+	/**
+	 * @see fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition#getConditionType()
+	 */
+	public String getConditionType() { return RunnerConstants.RESUME; }
+	
 	
 
 

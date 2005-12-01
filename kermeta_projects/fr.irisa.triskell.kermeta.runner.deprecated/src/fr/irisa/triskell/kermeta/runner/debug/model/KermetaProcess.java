@@ -6,9 +6,12 @@ package fr.irisa.triskell.kermeta.runner.debug.model;
 import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.RemoteObject;
+import java.rmi.server.UnicastRemoteObject;
 
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
@@ -59,7 +62,7 @@ public class KermetaProcess extends Thread {
 			System.err.println("1) remote interpreter!");
 			reg = LocateRegistry.createRegistry(5002);
 			remote_interpreter = new KermetaRemoteInterpreter(file, classname, opname, args);
-			reg.bind(REMOTE_NAME, remote_interpreter);
+			reg.rebind(REMOTE_NAME, remote_interpreter);
 		}
 		catch (RemoteException e) 
 		{
@@ -67,13 +70,14 @@ public class KermetaProcess extends Thread {
 			e.printStackTrace();
 			
 		}
-		catch (AlreadyBoundException e) {e.printStackTrace();}
+		//catch (AlreadyBoundException e) {e.printStackTrace();}
 //		catch (MalformedURLException e) {e.printStackTrace();}
 		finally
 		{ 
 			try {
 				debugPlatform.remoteInterpreterCreated();
 				// Invoke the interpretation after RMI connections are done
+				System.err.println("get interpreter : " + remote_interpreter);
 				remote_interpreter.getInterpreter().invoke_debug();
 			} catch (RemoteException e) {
 				e.printStackTrace();
@@ -83,9 +87,14 @@ public class KermetaProcess extends Thread {
 
 
 	/** Terminates properly the execution of the remote interpreter */
-	public void terminate() {
+	public synchronized void terminate() {
 		try {
+			// FIXME : we should not have to do it through debugPlatform. beeeek
+			debugPlatform.unregisterRemoteInterpreter();
+			UnicastRemoteObject.unexportObject(reg.lookup(REMOTE_NAME), true);
+			UnicastRemoteObject.unexportObject(debugPlatform, true);
 			reg.unbind(REMOTE_NAME);
+			reg = null;
 			
 		} catch (AccessException e) {
 			e.printStackTrace();

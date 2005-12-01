@@ -1,4 +1,4 @@
-/* $Id: SerializableCallFrame.java,v 1.1 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: SerializableCallFrame.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : SerializableCallFrame.java
  * License   : EPL
@@ -30,5 +30,6 @@ public class SerializableCallFrame implements Serializable {
 		this.variables = variables;
 		this.filepath = filepath;
 	}
+	
 
 }

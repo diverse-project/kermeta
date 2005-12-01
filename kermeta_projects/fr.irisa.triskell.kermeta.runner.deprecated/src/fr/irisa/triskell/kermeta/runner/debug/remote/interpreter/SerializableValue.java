@@ -1,4 +1,4 @@
-/* $Id: SerializableValue.java,v 1.1 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: SerializableValue.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : SerializableValue.java
  * License   : EPL
@@ -19,5 +19,6 @@ public class SerializableValue implements Serializable {
 	 */
 	
 	public String valueString; // same attribute as in KermetaValue
+	// public String runtimeOID; // the oid of the RuntimeObject that handle this value
 	public SerializableValue(String valueString) { this.valueString = valueString; }
 }

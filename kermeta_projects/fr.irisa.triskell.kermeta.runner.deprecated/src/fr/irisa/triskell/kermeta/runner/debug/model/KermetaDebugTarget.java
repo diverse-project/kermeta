@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.7 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.8 2005-12-01 18:29:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -43,16 +43,11 @@ import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaStepHandler;
 /**
- * KermetaDebugTarget, for the DEBUG_MODE.
+ * KermetaDebugTarget, is the object of the debug framework that communicates 
+ * with the Kermeta interpreter.
  * Many source code come from the Eclipse Howto ("How to create an Eclipse
  * debugger" -- www.eclipse.org/articles/Article-Debugger/how-to.html ).
- * This is the object that communicates with the Kermeta interpreter.
- * 
- * This is the debuggable execution process/VM of a KermetaProgram
- * To create a DebugTarget using a new JVM to run the interpreter, user
- * should inherits AbstractKermetaTarget or this one.
- * 
- * A good part of code is strongly inspired from Pydev code & style. 
+ *  
  */
 public class KermetaDebugTarget extends AbstractKermetaTarget
 { 
@@ -83,7 +78,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	
     /**
      * Constructor
-     * @param launch
+     * @param launch the launch handled by this debug target.
      */
     public KermetaDebugTarget(ILaunch plaunch) { 
     	
@@ -92,9 +87,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
         breakpoints = new ArrayList();
         stepHandler = new KermetaStepHandler(this);
         this.name = "Kermeta Debug Target";
-        // Create a thread by default
-   /*     this.threads = new KermetaDebugThread[1];
-        threads[0] = new KermetaDebugThread(this);*/
         // Do not set to stateDisconnected
         setState(stateRunning);
         getLaunch().addDebugTarget(this);
@@ -106,14 +98,9 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     public IDebugTarget getDebugTarget() { return this; }
     
     /**
-     * 
-     * It is launched by the KermetaLaunchConfigurationDelegate after initialization
-     * and launch of the Kermeta interpreter itself.
-     * TODO : here should be done the following things :
-     * - the stack frame and the variables values display on UI
-     * - the interpretation of the commands sent by the user
-     * - the file being debugged
-     * 
+     * Method launched by the KermetaLaunchConfigurationDelegate instance.
+     * It initialize itself, creates the GUI side of the RMI comm.
+     * and starts the Kermeta remote interpreter.
      */
     public synchronized void start()
     {
@@ -128,8 +115,19 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	} 
     	catch (RemoteException e) { e.printStackTrace(); }
     }
+    
+	/**
+	 * Start the Kermeta debug interpreter in another process (here, the "process"
+	 * is in fact a Thread)
+	 */
+	public synchronized void startRemoteInterpreterProcess()
+	{
+		kermeta_process = new KermetaProcess(getStartFile(), getClassName(), getOpName(), getArgs(), remotePlatform);
+		kermeta_process.start();
+	}
+	
 
-    /** RESUME command */
+    /** resume command called by Eclipse when user clicks on the resume button */
     public void resume() throws DebugException {
         // suspended reset to false
         setState(stateRunning);
@@ -140,6 +138,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
         fireResumeEvent(this);
     }
     
+    /** suspend command called by Eclipse when user clicks on the suspend button */
     public void suspend() throws DebugException {
     	setState(stateSuspended);
     	for (int i=0; i<threads.length; i++)
@@ -149,11 +148,12 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	fireSuspendEvent(this);
     }
     
+    /** terminate command called by Eclipse when user clicks on the stop button */
 	public void terminate() throws DebugException {
     	setState(stateTerminated);
 		kermeta_process.terminate();
     	kermeta_process = null;
-		fireEvent(new DebugEvent(this, DebugEvent.TERMINATE));
+		fireTerminateEvent();
 	}
     
     
@@ -300,8 +300,26 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	public void handleDebugEvents(DebugEvent[] events) {
 		// TODO Auto-generated method stub
 		System.err.println("Debug! : "+events.length + " -> " + events[0]);
-		
 	}
+	
+	/**
+	 * Create the GUI side of the RMI communication
+	 * @throws RemoteException
+	 */
+	public void createRemotePlatform() throws RemoteException
+	{
+		try
+		{	
+			System.err.println("2) the client (GUI)!");
+			// This is where we can access the remote interpreter.
+			remotePlatform    = new KermetaRemoteDebugUI(this);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	
 	// Easier since we share Strings most of the time
 	public String getStateAsString() { return (String)debug_state_mapping.get(new Integer(state)); }
@@ -333,38 +351,17 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	public IKermetaRemoteInterpreter getRemoteInterpreter() {
 		return remoteInterpreter;
 	}
-	
-	
-	public void createRemotePlatform() throws RemoteException
-	{
-		try
-		{	
-			System.err.println("2) the client (GUI)!");
-			// This is where we can access the remote interpreter.
-			remotePlatform    = new KermetaRemoteDebugUI(this);
-			System.out.println("CLIENT REGISTERED!");
-		}
-		catch (Exception e)
-		{
-			System.err.println("EXCEPTION DE LOOKUP!");
-			e.printStackTrace();
-		}
-	}
-	
-	protected Object sync = "lock";
-	
-	/**
-	 * Start the Kermeta debug interpreter in another process (here, the "process"
-	 * is in fact a Thread)
-	 */
-	public synchronized void startRemoteInterpreterProcess()
-	{
-		kermeta_process = new KermetaProcess(getStartFile(), getClassName(), getOpName(), getArgs(), remotePlatform);
-		kermeta_process.start();
-	}
-	
+
 	public void setRemoteInterpreter(IKermetaRemoteInterpreter remote_i)
 	{
 		remoteInterpreter = remote_i;
 	}
+	
+	
+	public void getVariableValue()
+	{
+		System.err.println("get variable balue");
+	}
+	
+	
 }

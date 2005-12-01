@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.7 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.8 2005-12-01 18:29:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -96,7 +96,6 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	/** @see org.eclipse.debug.core.model.IThread#getTopStackFrame() */
 	// This method is called when we suspend.
 	public IStackFrame getTopStackFrame() throws DebugException {
-		System.out.println("Call to getTopStackFrame! : " + getStackFrames()[0]);
 		// Debug framework sometimes does not want that this method return null.
 		// I have not understood yet why.
 		return stackFrames == null ? null : stackFrames[0];
@@ -237,6 +236,16 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	public void stepOver() throws DebugException {
 		isStepping = true;
 		target.setState(KermetaDebugTarget.stateRunning);
+		fireResumeEvent(DebugEvent.STEP_OVER);
+		isStepping = true;
+		try {
+			// This call unblocks the interpreter.
+			// notify is used as well by the GUI (to tell a GUI command --here, stepInto-- is run)
+			// as by the RemoteInterpreter (to tell a debugInterp. command is done)
+			target.getRemoteDebugUI().notify(RunnerConstants.RESUME, RunnerConstants.STEP_OVER);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/** @see org.eclipse.debug.core.model.IStep#stepReturn() */
@@ -251,7 +260,11 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	public boolean isTerminated() { return target.isTerminated(); }
 
 	/** @see org.eclipse.debug.core.model.ITerminate#terminate() */
-	public void terminate() throws DebugException { target.terminate();}
+	public void terminate() throws DebugException 
+	{
+		fireTerminateEvent();
+		target.terminate();
+	}
 
 	public void setBreakpoints(String something) {
 

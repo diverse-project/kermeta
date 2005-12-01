@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.1 2005-11-28 18:54:35 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -21,10 +21,13 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.debug.core.model.IValue;
+import org.eclipse.debug.core.model.IVariable;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
@@ -33,9 +36,12 @@ import fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugThread;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaStackFrame;
+import fr.irisa.triskell.kermeta.runner.debug.model.KermetaValue;
+import fr.irisa.triskell.kermeta.runner.debug.model.KermetaVariable;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableCallFrame;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableVariable;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaDebugWrapper;
 
 public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermetaRemoteDebugUI {
@@ -88,6 +94,15 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 				target.getRemoteInterpreter().unblock();
 				processResumeReason(reason);
 			}
+			else if (command.equals(RunnerConstants.TERMINATE))
+			{
+				System.out.println("J'ai terminé!");
+				// Is it correct ?
+				target.terminate();
+				// "Kill" the remote interpreter
+				// target.getRemoteInterpreter().;
+				// "Kill" the remote debug platform
+			}
 
 			// Is there a reason? (usually, the reason is given only by the interpreter side, 
 			// when it finished the execution of a command (for example, step :-))
@@ -137,8 +152,25 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 				KermetaStackFrame f = new KermetaStackFrame(
 						thread, frames[i].name, 
 						path, frames[i].line); // null : IPath
+				
+				f.setVariables(createKermetaVariables(frames[i].variables));
+				
 				result[i] = f;
 			}
+		}
+		return result;
+	}
+	
+	protected IVariable[] createKermetaVariables(SerializableVariable[] vars) throws DebugException
+	{
+		KermetaVariable[] result = new KermetaVariable[vars.length]; 
+		for (int i=0; i<vars.length; i++)
+		{
+			result[i] = new KermetaVariable(
+					target, 
+					vars[i].name, 
+					vars[i].type, 
+					new KermetaValue(target, vars[i].value.valueString));
 		}
 		return result;
 	}
@@ -193,8 +225,6 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 			// This statement fires event to tell the GUI to suspend back.
 			try
 			{
-				System.err.println("maison:"+target);
-				System.err.println("reason:"+target.getMainThread());
 				target.getStepHandler().stepEnd(target.getMainThread());
 			}
 			catch (DebugException e) { e.printStackTrace(); }
@@ -210,19 +240,29 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	
 	protected void processResumeReason(String reason) throws RemoteException
 	{
-
-		// other cases : EVALUATION, EVALUATION_IMPLICIT / UNSPECIFIED and CLIENTREQUEST
+		System.err.println("cond : " + target.getRemoteInterpreter().getDebugCondition() + 
+				" == " + reason);
 		
-		// The step into reasons -> directly affect the Interpreter
-		if (reason.equals(RunnerConstants.CLIENT_REQUEST))
-		{
-			target.getRemoteInterpreter().setDebugCondition(RunnerConstants.RESUME);
-		}
-		else if (reason.equals(RunnerConstants.STEP_INTO))
-		{
-			target.getRemoteInterpreter().setDebugCondition(RunnerConstants.STEP_INTO);
-		}
- 
+		// other cases : EVALUATION, EVALUATION_IMPLICIT / UNSPECIFIED and CLIENTREQUEST
+		// if we were in the same stop condition type earlier, we do not need to change it...
+	/*	if (!target.getRemoteInterpreter().getDebugCondition().equals(reason))
+		{*/
+			// The step into reasons -> directly affect the Interpreter
+			// I know, it could be shorter
+			if (reason.equals(RunnerConstants.CLIENT_REQUEST))
+			{
+				target.getRemoteInterpreter().setDebugCondition(RunnerConstants.RESUME);
+			}
+			else 
+			{
+				target.getRemoteInterpreter().setDebugCondition(reason);
+			}
+	//	}
 		// other cases : STEP_OVER, STEP_RETURN,
+	}
+
+	public void unregisterRemoteInterpreter() throws RemoteException {
+		target.getRemoteInterpreter().terminate();
+
 	}
 }
