@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.9 2005-11-30 13:49:51 dpollet Exp $
+/* $Id: KMT2KMPass4.java,v 1.10 2005-12-01 14:30:41 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -85,7 +85,10 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	public boolean beginVisit(Operation operation) {
 		builder.current_operation = (FOperation)builder.getModelElementByNode(operation);
 		if (builder.findPropertyByName(builder.current_class, builder.current_operation.getFName()) != null) {
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :A property named '"+builder.current_operation.getFName()+"' is already inherited by class '"+builder.current_class.getFName()+"'.", operation));
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :A operation named '"+builder.current_operation.getFName()+
+					"' is already inherited by class '"+builder.current_class.getFName()+"'."+
+					" If you want redefinition, please use method keyword."
+					, operation));
 			return false;
 		}
 		
