@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.16 2005-11-24 14:30:50 zdrey Exp $
+/* $Id: KermetaInterpreter.java,v 1.17 2005-12-01 18:44:57 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -41,6 +41,7 @@ import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import fr.irisa.triskell.traceability.helper.Tracer;
 
 
 
@@ -77,16 +78,19 @@ public class KermetaInterpreter {
 	    initializeMemory();
 	    initializeEntryPoint();
 	}
-	
+
 	/**
-	 * Constructor for a kermeta unit
+	 * Constructor for a kermeta unit, for debug mode
 	 * @param unit
 	 */
-	public KermetaInterpreter(String uri_unit)
+	public KermetaInterpreter(String uri_unit, Tracer tracer)
 	{
 	    super();
+	    
 	    KermetaUnitFactory.getDefaultLoader().unloadAll();
-	    unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri_unit);        
+	    unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri_unit);
+	    //	  we need to set the tracer before loading the unit ;P
+	    if (tracer!= null) unit.setTracer(tracer);
 	    try {
 	        unit.load();
 	    } catch(Throwable t) {
@@ -105,13 +109,23 @@ public class KermetaInterpreter {
 	        throw new KermetaInterpreterError(unit.messages.getAllMessagesAsString());
 	    
 	    }
+	    
 	    initializeMemory();
 	    initializeEntryPoint();
 	}
 	
+	/**
+	 * Constructor for a kermeta unit
+	 * @param unit
+	 */
+	public KermetaInterpreter(String uri_unit)
+	{
+		this(uri_unit, null); 
+	}
 	
-	
-    protected void finalize() throws Throwable {
+
+
+	protected void finalize() throws Throwable {
         super.finalize();
         internalLog.debug("FINALIZE INTERPRETER ...");
         // clear as much ref as possible
