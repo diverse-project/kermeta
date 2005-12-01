@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.45 2005-11-29 14:17:11 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.46 2005-12-01 18:38:40 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -11,6 +11,7 @@ package fr.irisa.triskell.kermeta.loader;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -278,7 +279,7 @@ public abstract class KermetaUnit {
 			KermetaASTNode astNode = (KermetaASTNode)node;
 			astNode.getRangeStart();
 			tracer.addTextInputTrace(this.uri, 
-					0,	// TODO I don't know how to retreive line number
+					getLineNumber(astNode, this.uri), // todo : we MUST do a lazy count instead to avoid loosing performance!
 					astNode.getRangeStart(),
 					astNode.getRangeStart()+ astNode.getRangeLength(), 
 					model_element, 
@@ -286,6 +287,30 @@ public abstract class KermetaUnit {
 			
 		}
 	}
+	
+	/** *
+	 * Method copied from Traceback class in interpreter project; counts the new lines
+	 * in the given file until the given node is found. (getKMTLineNumber)
+	 * Should it be moved else where?
+	 * @param node
+	 * @param unit_struri
+	 * @return the line number as a String
+	 */
+    protected int getLineNumber(KermetaASTNode node, String unit_struri)
+    {
+    	int linenum = 1;int c; int charcount = 0;
+        int charnum = node.getRangeStart();
+        try
+        {
+            InputStream in = new URIConverterImpl( ).createInputStream(URI.createURI(unit_struri));
+            while ((c = in.read()) != -1 && charcount<=charnum) {
+                charcount += 1;
+                if (c=='\n') linenum += 1;
+            }
+            in.close();
+        } catch (IOException e) { e.printStackTrace(); }
+        return linenum;
+    }
 	
 	/**
 	 * Helper method that looks into all the imported unit to find the researched 
