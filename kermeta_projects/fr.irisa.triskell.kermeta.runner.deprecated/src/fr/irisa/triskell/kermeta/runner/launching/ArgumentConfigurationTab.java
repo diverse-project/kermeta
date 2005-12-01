@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.21 2005-11-22 12:28:16 zdrey Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.22 2005-12-01 20:35:42 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -239,6 +239,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		        {
 		        	getclassNameText().setText(getDefaultClass(selectedFile));
 		        }
+		        selectedClassString = getclassNameText().getText();
 		        getOperationNameText().setText(
 		                configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,
 		                        ""));
@@ -522,32 +523,41 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      */
     protected void handleOperationNameButtonSelected()
     {
-        IFile selectedFile = getIFileFromString(fileLocationText.getText());
-        // Recompile kermeta source code
-        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
-        
-        FClassDefinition selectedFClassDef = (FClassDefinition)selectedUnit.
-        getTypeDefinitionByName(
-                selectedClassString);
-        
-        // Get the operations of this class (super operation also?)
-        EList foperations = selectedFClassDef.getFOwnedOperation();
-        ArrayList opnamelist = new ArrayList(foperations.size());
-        for (int i = 0; i< foperations.size(); i++)
-        {
-            opnamelist.add(((FOperation)foperations.get(i)).getFName());
-        }
-        
-        SelectionListDialog opDialog = new SelectionListDialog(getShell());
-        
-        opDialog.setList(opnamelist);
-        int code = opDialog.open();
-        // If user clicked on OK
-        if (code == InputDialog.OK)
-        {
-            getOperationNameText().setText(opDialog.getSelectedItem());
-        }
-        
+    	try{
+	        IFile selectedFile = getIFileFromString(fileLocationText.getText());
+	        // Recompile kermeta source code
+	        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
+	        
+	        if (selectedClassString == null){
+	        	MessageDialog.openError(getShell(),"","Please select a class before searching for the operation ...");
+	        	
+	        	return;	        	
+	        }
+	        FClassDefinition selectedFClassDef = (FClassDefinition)selectedUnit.
+	        getTypeDefinitionByName(
+	                selectedClassString);
+	        
+	        // Get the operations of this class (super operation also?)
+	        EList foperations = selectedFClassDef.getFOwnedOperation();
+	        ArrayList opnamelist = new ArrayList(foperations.size());
+	        for (int i = 0; i< foperations.size(); i++)
+	        {
+	            opnamelist.add(((FOperation)foperations.get(i)).getFName());
+	        }
+	        
+	        SelectionListDialog opDialog = new SelectionListDialog(getShell());
+	        
+	        opDialog.setList(opnamelist);
+	        int code = opDialog.open();
+	        // If user clicked on OK
+	        if (code == InputDialog.OK)
+	        {
+	            getOperationNameText().setText(opDialog.getSelectedItem());
+	        }
+    	}
+    	catch (Exception e){
+    		e.printStackTrace();
+    	}
     }
 
 
@@ -682,37 +692,43 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      */
     private void handleClassNameButtonSelected()
     {
-
-        // Reparse the selected file
-        IFile selectedFile = getIFileFromString(fileLocationText.getText());
-        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
-        
-        // Get classes of root package, and recursively of child packages
-        ArrayList typedefs = new ArrayList();
-
-        KermetaRunHelper.getRecursivePackageTypeDefs(selectedUnit.rootPackage, typedefs);
-        
-        
-        // Get all the classes defined in this Unit
-        ArrayList qnameList = new ArrayList(typedefs.size());
-        for (int i=0; i<typedefs.size(); i++)
-        {
-            qnameList.add(selectedUnit.getQualifiedName((FNamedElement)typedefs.get(i)));
-        }
-        
-        SelectionListDialog classDialog = new SelectionListDialog(getShell());
-        classDialog.setList(qnameList);
-        int code = classDialog.open();
-        selectedClassString = classDialog.getSelectedItem();
-        // If user clicked on OK, set the field to the class he selected
-        if (code == InputDialog.OK)
-        {
-            getclassNameText().setText(selectedClassString);
-        }
-        // Disable the operation choice if needed
-        if (selectedClassString != null)
-            setOperationEnabled(true);
-        else setOperationEnabled(false);
+    	try{
+	        // Reparse the selected file
+	        IFile selectedFile = getIFileFromString(fileLocationText.getText());
+	        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
+	        
+	        // Get classes of root package, and recursively of child packages
+	        ArrayList typedefs = new ArrayList();
+	
+	        KermetaRunHelper.getRecursivePackageTypeDefs(selectedUnit.rootPackage, typedefs);
+	        
+	        
+	        // Get all the classes defined in this Unit
+	        ArrayList qnameList = new ArrayList(typedefs.size());
+	        for (int i=0; i<typedefs.size(); i++)
+	        {
+	            qnameList.add(selectedUnit.getQualifiedName((FNamedElement)typedefs.get(i)));
+	        }
+	        
+	        SelectionListDialog classDialog = new SelectionListDialog(getShell());
+	        classDialog.setList(qnameList);
+	        int code = classDialog.open();
+	        selectedClassString = classDialog.getSelectedItem();
+	        // If user clicked on OK, set the field to the class he selected
+	        if (code == InputDialog.OK)
+	        {
+	            getclassNameText().setText(selectedClassString);
+	        }
+	        // Disable the operation choice if needed
+	        if (selectedClassString != null)
+	            setOperationEnabled(true);
+	        else setOperationEnabled(false);
+	    	}
+    	catch(Exception e)
+    	{
+    		System.err.print(e);
+    		e.printStackTrace();
+    	}
     }
     
     protected void setOperationEnabled(boolean isEnabled)
