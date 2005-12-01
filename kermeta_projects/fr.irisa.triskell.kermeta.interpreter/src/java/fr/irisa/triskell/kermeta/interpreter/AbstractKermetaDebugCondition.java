@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaDebugCondition.java,v 1.1 2005-11-28 18:53:16 zdrey Exp $
+/* $Id: AbstractKermetaDebugCondition.java,v 1.2 2005-12-01 18:41:11 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.interpreter (First iteration)
  * File      : IKermetaDebugConditionWrong.java
  * License   : EPL
@@ -21,7 +21,8 @@ public abstract class AbstractKermetaDebugCondition {
 	protected EObject currentNode;
 	/** Tells if the debugging needs to be suspended or not (used by the evaluate method) */
 	protected boolean isSuspended;
-	
+	/** "stepInto", "stepOver", "stepReturn", or "resume" */
+	protected String conditionType;
 	/**
 	 * Blocks the interpreter by controlling the thread/process inside which it turns.
 	 */
@@ -50,4 +51,14 @@ public abstract class AbstractKermetaDebugCondition {
 	 * Sets the isSuspended boolean.
 	 */
 	public void setSuspended(boolean suspend) { isSuspended = suspend ; }
+	
+	/** 
+	 * Returns the type of the stop condition as a string. This method is used by the
+	 * debug interpreter to control the execution of the debug command. The debug Interpreter
+	 * sets a special variable according to the type of the condition that is then checked by
+	 * the remote side of the interpreter to suspend its thread at the appropriate time.
+	 * @return the type of the stop condition as a string. Can be stepInto, stepOver,
+	 * stepReturn, resume.
+	 */
+	public String getConditionType() { return conditionType; }
 }
