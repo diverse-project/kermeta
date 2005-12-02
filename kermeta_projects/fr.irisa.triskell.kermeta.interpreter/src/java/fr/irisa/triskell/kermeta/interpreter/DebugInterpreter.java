@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.7 2005-12-01 18:42:33 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.8 2005-12-02 09:13:50 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -10,32 +10,27 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FBlock;
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FCallVariable;
+
 import fr.irisa.triskell.kermeta.behavior.FConditionnal;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+
 import fr.irisa.triskell.kermeta.behavior.FLoop;
 import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
-
-import fr.irisa.triskell.kermeta.behavior.FRescue;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FObject;
+
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
-import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
  * This is the ExpressionInterpreter improved to handle the debugging mode
@@ -56,47 +51,39 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public static final String DEBUG_SUSPEND = "suspend";
     public static final String DEBUG_TERMINATE = "terminate";
     public boolean interpreterSuspended = true;
-    // The reason of a suspension, and that correspond to a end-user command
-    // (step, stop...)
-    // TOODO : rename currentCommand into currentState
+    // TODO : rename currentCommand into currentState
+    /** The reason/state of the debugging
+    (among stepEnd, stepInto, stepOver.) */
     public String currentCommand = "";
-    // The call frame is used 
+    /** The stop condition for the stepOver command */ 
     protected CallFrame stepOverCallFrame; 
     
     public FClass entryObject ;
     public FOperation entryOperation ;
     public ArrayList entryArguments  ;
-    
-    public EObject currentNode; // The current node that is being interpreted.
-    public ArrayList currentResultList;
+    /**  The current node that is being interpreted. Used to retrieve the position
+     * of the execution in the source code when in suspended mode. */ 
+    public EObject currentNode;
     public AbstractKermetaDebugCondition debugCondition;
-     
-    // A reference to the KermetaRemoteInterpreter that drives our DebugInterpreter.
-    public boolean debugMode;
-    public String debugMessage;
     
     /**
      * @param pMemory
      */
     public DebugInterpreter(RuntimeMemory pMemory) {
         super(pMemory);
-        // Debug mode. Can be modified for the stepOver/stepReturn instructions.
-        debugMode = true;
     }
     
     /**
 	 * Initialize the foperation argument on the ro_target Runtime Object;
-	 *  arguments to this call are given as an ArrayList
-	 *  no invocation of operation is done here
+	 *  arguments to this call are given as an ArrayList;
+	 *  no invocation of operation is done here.
+	 *  Note : invoke() method of ExpressionInterpreter is chunked into
+	 *  initialize and invoke_debug. 
 	 * @param ro_target
 	 * @param foperation
 	 * @param arguments
-	 * @return
 	 */
-	public Object initialize(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
-		
-		RuntimeObject result=null;
-		RuntimeObjectFactory roFactory = memory.getROFactory(); 
+	public void initialize(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
 		
 		FClass self_type = (FClass)ro_target.getMetaclass().getData().get("kcoreObject");
 		
@@ -108,13 +95,11 @@ public class DebugInterpreter extends ExpressionInterpreter {
 		// Create a context for this operation call, setting self object to ro_target
 		// We should have a FCallFeature
         interpreterContext.pushOperationCallFrame(ro_target, op, arguments, null);
-		return result;
+		
 	}
 	
 	/**
-	 * Special invocation method initialize and invoke are splitted so that specific
-	 * initializations can be done outside the interpreter.
-	 * @return
+	 * Run the execution of the program
 	 */
 	public Object invoke_debug()
 	{
@@ -125,8 +110,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
        }
        finally {
 	        // After operation has been evaluated, pop its context
-    	   System.out.println("  ---- pop!!!!!!!");
-	        interpreterContext.popCallFrame();
+    	    interpreterContext.popCallFrame();
 	        // Remote side of the interpreter reads this attribute and act accordingly
 	        currentCommand = DEBUG_TERMINATE;
 	        // Run a last time the debug command that tests if we can interrupt.....laborious
@@ -146,55 +130,45 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
 	public Object visitFOperation(FOperation node) {
 		Object result = memory.voidINSTANCE;
-		processDebugCommand(node);
+		//processDebugCommand(node);
 		result = super.visitFOperation(node);
-		processPostCommand();
-		
+		//processPostCommand();
 		return result;
 	}
 
-	
-
-    /* (non-Javadoc)
+    /**
      * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFAssignement(fr.irisa.triskell.kermeta.behavior.FAssignement)
      */
     public Object visitFAssignement(FAssignement node) {
-    	Object result = null;
+    	Object result = memory.voidINSTANCE;
     	processDebugCommand(node);
     	result = super.visitFAssignement(node);
         processPostCommand();
         return result;
     }
     
-    /* (non-Javadoc)
-     * Yet the code is not properly "shared" with the ExpressionInterpreter.
-     * As soon as it works well, we will adapt it.
+    /**
      * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFBlock(fr.irisa.triskell.kermeta.behavior.FBlock)
      */
     public Object visitFBlock(FBlock node)
     {
     	 RuntimeObject result = memory.voidINSTANCE;
-    	 
-    	 processDebugCommand(node);
+    	 //processDebugCommand(node);
     	 result = (RuntimeObject)super.visitFBlock(node);
-    	 processPostCommand();
-    	 
+    	 //processPostCommand();
     	 return result;
     }
     
     /** 
-     * 
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFCallFeature(fr.irisa.triskell.kermeta.behavior.FCallFeature)
      */
     public Object visitFCallFeature(FCallFeature node) {
     	Object result = null;
     	processDebugCommand(node);
     	result = super.visitFCallFeature(node);
     	processPostCommand();
-    	
         return result;
     }
-    
-    
     
 	/**
 	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFLoop(fr.irisa.triskell.kermeta.behavior.FLoop)
@@ -214,116 +188,28 @@ public class DebugInterpreter extends ExpressionInterpreter {
 		//processPostCommand();
 		return result;
 	}
-	
-
-    /* 
-     *
-     * The following methods represent the debugger commands.
-     * Later command pattern use will be useful
-     * Yet, we only have implemented step over, but we have to consider the following:
-     *  
-     *  - step over (step without going into subroutine) 
-     *  - step into
-     *  - step X where X is the number of statements to execute before next step
-     *  - run to next breakpoint
-     */
-
-    
-	/**
-     * 
-     * @return true if we have a debug message, false otherwise
-     */
-    public boolean hasDebugMessage()
-    {
-    	return (!debugMessage.equals(""));
-    }
-    
-    /** set the debugMode */
-    public void setDebugMode(boolean debug_mode)
-    {
-    	debugMode = debug_mode;
-    }
-    
-    public void setDebugMessage(String debug_message)
-    {
-    	debugMessage = debug_message;
-    }
-    
-    public String getDebugMessage(String debug_message)
-    {
-    	return debugMessage;
-    }
-    
-    /*
-     *  TODO : Put it in a special {facade} class
-     * 
-     * 
-     */
     
     /** Called after an operation (a visit more precisely) is done */
     public void processPostCommand()
     {
-    	System.err.println("* FirstCallFrame = " + interpreterContext.getFrameStack().firstElement() +
-				"\n* the peeked : " + getInterpreterContext().peekCallFrame() + "\n");
+    	/* System.err.println("* FirstCallFrame = " + interpreterContext.getFrameStack().firstElement() +
+				"\n* the peeked : " + getInterpreterContext().peekCallFrame() + "\n"); */
     	CallFrame current_frame = getInterpreterContext().peekCallFrame();
-    	
-    	// If the stepOverCallFrame that conditioned the stop of the stepOver was poped
+    	// If the command was a stepInto : suspend the debugintepreter systematically after each visit.
+    	if (isSteppingInto()) setSuspended(true, DEBUG_STEPEND);
+    	// If it was step over
+    	// If the stepOverCallframe that conditioned the stop of the stepOver was poped
     	// then we set it to the last peeked frame.
-    	// On stepInto mode, stepOverCallFrame is not set.
-    	if (!interpreterContext.getFrameStack().contains(stepOverCallFrame) && !isStepping())
-    	{
+    	else if (isSteppingOver() && !interpreterContext.getFrameStack().contains(stepOverCallFrame))
     		stepOverCallFrame = current_frame;
-    	}
-    	
-    	
-    	// If the command was a stepInto : suspend the debugintepreter
-    	
-    	if (isStepping()) setSuspended(true, DEBUG_STEPEND);
-    	if (currentCommand.equals(DEBUG_STEPOVER) 
-    			&& 
-    			!stepOverCallFrame.equals(current_frame)
-    		   //!current_frame.equals(interpreterContext.getFrameStack().firstElement())
-    			
-   			)
+    	else if (isSteppingOver() && !stepOverCallFrame.equals(current_frame))
     		setSuspended(false, DEBUG_STEPOVER);
-    	else if (currentCommand.equals(DEBUG_STEPOVER) && 
-    			current_frame.equals(interpreterContext.getFrameStack().firstElement())
-    	)
+    	else if (isSteppingOver() && current_frame.equals(stepOverCallFrame) )
     		setSuspended(true, DEBUG_STEPEND);
-    	// If the command was a stepOver : get the current call frame.
-    	// If it is not the last registered at the last stepOver execution,
-    	// do not suspend.
-   /* 	if (isStepping()) 
-    	{
-    		
-    		// Step over can stop if and only if :
-    		// - The stepOverCallFrame is null,
-    		// - The stepOverCallFrame is the one where we were before stepping
-    		// - The stepOverCallFrame is no more in the frame stack.
-    		if ( stepOverCallFrame == null ||
-    	 	// ||  stepOverCallFrame.equals(this.getInterpreterContext().peekCallFrame())
-    	 	// || !this.getInterpreterContext().getFrameStack().contains(stepOverCallFrame))
-    			getInterpreterContext().getFrameStack().size()>0 && 
-    			stepOverCallFrame.equals(this.getInterpreterContext().getFrameStack().get(0)))
-    		{
-    			
-    			setSuspended(true, DEBUG_STEPEND);
-    		}
-    		else
-    		{
-    			currentCommand = getDebugCondition().getConditionType();
-    			setSuspended(false, getDebugCondition().getConditionType());
-    		}
-    	}
-    	else
-    	{
-    		
-    	//	setSuspended(false, getDebugCondition().getConditionType());
-    	} */
     }
 
     /**
-     * 
+     * Decorating method called before the appropriate visitMethod executions.
      * @param current_node
      */
     public Object processDebugCommand(EObject current_node)
@@ -337,51 +223,26 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	}
     	return null;
     }
-    
-    /** Returns the position of the listIterator from which we have to
-     *  debug interprete.*/
-    public int processDebugCommandList(EList expressions) {
-    	
-    	Iterator exp_it = expressions.iterator();
-    	int current_position = 0;
-    	boolean node_found = false;
-    	// If currentNode is not null
-    	if (currentNode != null)
-    	{
-    		while (exp_it.hasNext() && !node_found)
-    		{
-    			EObject node = (EObject)exp_it.next();
-    			if (node == currentNode)
-    			{
-    				node_found = true;
-    			}
-    			current_position+=1;
-    		}
-    	}
-    	// If there is no more node to process
-    	else current_position = expressions.size();
-    	// If we have not found the current node position
-    	if (!node_found && current_position==expressions.size()) 
-    		current_position = 0;
-		return current_position;
-	}
 	
 	/*
 	 * Special accessors for interactive debug mode
 	 * 
 	 */
 	
-	//
-	public boolean isStepping()
-	{
-		return (currentCommand.equals(DEBUG_STEPINTO));// || currentCommand.equals(DEBUG_STEPOVER));
-	}
+	/** Accessors for booleans */
+	public boolean isSteppingInto()
+	{	return (currentCommand.equals(DEBUG_STEPINTO));}
+
+	public boolean isSteppingOver()
+	{	return (currentCommand.equals(DEBUG_STEPOVER));}
+	
 	
 	/** 
 	 * Put the interpreter in pause mode
-	 * 
 	 * @param reason choices :
 	 * 	- stepEnd
+	 *  - stepOver
+	 *  - stepInto
 	 */
 	public void setSuspended(boolean suspended, String reason)
 	{
@@ -389,24 +250,22 @@ public class DebugInterpreter extends ExpressionInterpreter {
 		currentCommand = reason;
 	}
 	public boolean isSuspended() { return interpreterSuspended == true; }
-	
-
-	public String getCurrentCommand()
-	{	return currentCommand; }
-	public void setCurrentCommand(String command)
-	{	currentCommand = command;}
+	/** @return the current command being executed by the debuginterpreter */
+	public String getCurrentCommand() {	return currentCommand; }
+	/** set the current command being executed by the debuginterpreter */
+	public void setCurrentCommand(String command) {	currentCommand = command;}
     
 	/** Returns the call frame in which the step over command has begun */
-	public CallFrame getStepOverCallFrame()
-	{	return stepOverCallFrame; }
+	public CallFrame getStepOverCallFrame() {	return stepOverCallFrame; }
+	/** Sets the call frame where the step over should "stop". Called by the
+	 *  "remote side" of the interpreter */
 	public void setStepOverCallFrame()
 	{
 		// peekCallFrame is null if this method is called before interpreter
-		// was initialized : still sync. problems
+		// was initialized : still sync. problems?
 		if (!getInterpreterContext().getFrameStack().isEmpty() && 
 			stepOverCallFrame == null
-		)
-			
+		)	
 			stepOverCallFrame = getInterpreterContext().peekCallFrame(); 
 	}
 
