@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.1 2005-08-25 12:12:27 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.2 2005-12-02 16:27:14 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -67,12 +68,15 @@ public class KM2Ecore {
     public static Hashtable primitive_types_mapping;
     static {
     	primitive_types_mapping = new Hashtable();
+    	primitive_types_mapping.put("kermeta::standard::Character", "char");
+    	primitive_types_mapping.put("kermeta::standard::Character",	"java.lang.Character");
     	primitive_types_mapping.put("kermeta::standard::Integer", 	"int");
     	primitive_types_mapping.put("kermeta::standard::Integer",	"java.lang.Integer");
     	primitive_types_mapping.put("kermeta::standard::Boolean",	"boolean");
     	primitive_types_mapping.put("kermeta::standard::Boolean",	"java.lang.Boolean");
     	primitive_types_mapping.put("kermeta::standard::String",	"java.lang.String");
     	primitive_types_mapping.put("kermeta::standard::Object",	"Object");
+    	
     }
 	
     public final static String KMT2ECORE_ANNOTATION = "kermeta";
@@ -114,7 +118,20 @@ public class KM2Ecore {
 		KM2EcorePass1 pass1 =  new KM2EcorePass1(ecoreResource, kmt2ecoremapping, this);
 		KM2EcorePass2 pass2 =  new KM2EcorePass2(ecoreResource, kmt2ecoremapping, this);
 		Object result =  pass1.exportPackage(root_package);
-		pass2.exportPackage(root_package);		
+		pass2.exportPackage(root_package);
+		// set the nsURI of the root package
+		if(result instanceof EPackage){
+			EPackage rP = (EPackage)result;
+			String uri = ecoreResource.getURI().toString();
+			rP.setNsURI(uri);
+			internalLog.debug("Package "+ root_pname +" nsURI set to: "+ ecoreResource.getURI().toString() );
+			
+		}
+		else
+		{
+			internalLog.debug("Not a EPackage ! "+ result + ", Cannot put nsURI" );
+			
+		}
 		return result;
 	}
 	
