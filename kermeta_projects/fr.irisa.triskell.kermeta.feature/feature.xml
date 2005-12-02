@@ -2,23 +2,23 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="0.0.17"
+      version="0.0.18"
       provider-name="IRISA/Triskell"
       image="images/kmt_32.gif">
-
    <install-handler/>
 
    <description url="http://www.kermeta.org/">
-      Kermeta is an ObjectOriented meta-modeling language developped by the Triskell
+      Kermeta is an ObjectOriented meta-modeling language developped
+by the Triskell
 team at IRISA.
    </description>
 
    <copyright url="http://www.kermeta.org/">
-      KerMeta is distributed under the terms of the EPL licence.
+      Kermeta is distributed under the terms of the EPL licence.
    </copyright>
 
    <license url="http://www.kermeta.org/">
-      KerMeta is distributed under the terms of the EPL licence.
+      Kermeta is distributed under the terms of the EPL licence.
    </license>
 
    <url>
@@ -41,27 +41,28 @@ team at IRISA.
    </requires>
 
    <plugin
-         id="fr.irisa.triskell.kermeta.runner"
-         download-size="0"
-         install-size="0"
-         version="0.0.17"/>
-
-   <plugin
          id="fr.irisa.triskell.kermeta.texteditor"
-         download-size="0"
-         install-size="0"
-         version="0.0.17"/>
+         download-size="200"
+         install-size="1400"
+         version="0.0.18"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta"
-         download-size="0"
-         install-size="0"
-         version="0.0.17"/>
+         download-size="2500"
+         install-size="4000"
+         version="0.0.18"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.documentation"
-         download-size="0"
-         install-size="0"
-         version="0.0.6"/>
+         download-size="2600"
+         install-size="2600"
+         version="0.0.6"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.runner"
+         download-size="360"
+         install-size="700"
+         version="0.0.18"/>
 
 </feature>

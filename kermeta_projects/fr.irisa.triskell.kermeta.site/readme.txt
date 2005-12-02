@@ -2,7 +2,7 @@ Deploying a new version of Kermeta
 
 
 - generate the documentation
-	- you need to chekout the porject Docbook_projects/ant-docbook-styler from lievre
+	- you need to chekout the project Docbook_projects/ant-docbook-styler from lievre
 	- then from fr.irisa.triskell/kermeta.documentation/src run one of the Kermeta*_build.xml
 		it will unzip and install the antdocbook styler files in your workspace. 
 		On unix/linux systyem you may have path troubles if someone has commited u
@@ -17,7 +17,7 @@ Deploying a new version of Kermeta
 - Kermeta
 
 	1. you must change or check all the	version number in the plugin.xml, feature.xml and site.xml files
-	 (including the documentation and the raceability)
+	 (including the documentation and the traceability)
 	
 	2. In the fr.irisa.triskell.kermeta project update the file about.properties
     
@@ -54,3 +54,5 @@ backup this new version on the web site
 	(do not forget the change history)
 - send a mail on the kermeta-users list
 - create a news on the forge
+- create a dummy product in the files section of the forge
+- update the donwload counter script so that it will trace the donwload of the new version and transmit them to the dummy product

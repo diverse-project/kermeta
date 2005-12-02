@@ -65,6 +65,11 @@ abstract class RuntimeError inherits Exception {
  */
 class CallOnVoidTarget inherits RuntimeError {}
 
+/**
+ * Use this exception whenyou want to forbid the access to an unimplemented operation 
+ * and invite to implement it
+ */
+class NotImplementedException inherits Exception {}
 
 /*****************************************************************************
  * 3-Standard library related errors

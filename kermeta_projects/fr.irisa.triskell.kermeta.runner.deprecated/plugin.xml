@@ -3,8 +3,8 @@
 <plugin
    id="fr.irisa.triskell.kermeta.runner"
    name="Runner Plug-in"
-   version="0.0.17"
-   provider-name="INRIA/IRISA"
+   version="0.0.18"
+   provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
 
    <runtime>
@@ -354,7 +354,7 @@
 </extension>
 <extension
       point="org.eclipse.debug.ui.contextViewBindings">
-   <view
+  <!-- <view
          class="org.eclipse.debug.internal.ui.views.variables.VariablesView"
          icon="icons/inheritance_flat.gif"
          id="org.eclipse.debug.internal.ui.views.variables.VariablesView"
@@ -363,6 +363,7 @@
          class="fr.irisa.triskell.kermeta.runner.MyView"
          id="fr.irisa.triskell.kermeta.runner.view4"
          name="fr.irisa.triskell.kermeta.runner.view4"/>
+         -->
 </extension>
 <extension
       point="org.eclipse.core.variables.valueVariables">

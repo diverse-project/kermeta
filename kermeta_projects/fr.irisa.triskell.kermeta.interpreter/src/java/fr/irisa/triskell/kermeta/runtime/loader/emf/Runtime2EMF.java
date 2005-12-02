@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.16 2005-11-25 15:14:02 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.17 2005-12-02 12:54:52 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.DanglingHREFException;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
@@ -118,12 +119,36 @@ public class Runtime2EMF {
 	        r2e.resource.save(null);
 		} catch (IOException e) {
 		    Throwable t = e.getCause();
-		    if (t instanceof Resource.IOWrappedException)
+		    KermetaUnit.internalLog.error("Error saving EMF model " + p_unit.getUri() + " : " + e.getMessage(), e);
+			RuntimeMemory memory =p_unit.getInstances().getFactory().getMemory();
+        	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
+        	if (t instanceof Resource.IOWrappedException)
 		    {
+        		
 		        Resource.IOWrappedException we = (Resource.IOWrappedException)t;
+		        //we.getMessage();
+		        throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
+				        we.getWrappedException().getMessage(),
+						interpreter,
+						memory,
+						we);
+		    }
+        	else if (t instanceof DanglingHREFException)
+		    {
+		    	DanglingHREFException we = (DanglingHREFException)t;
 		        we.getMessage();
+		        throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
+	        			we.getMessage(),
+						interpreter,
+						memory,
+						we); 
 		    }
 		    e.printStackTrace();
+		    throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
+        			e.getMessage(),
+					interpreter,
+					memory,
+					e); 
 		}
     }
     
@@ -136,11 +161,9 @@ public class Runtime2EMF {
      * @param resource
      */
     public void updateEMFModel(Resource resource)
-    {
-        ArrayList root_containers = new ArrayList();
+    {        
         //  Get the instances RuntimeObject
         ArrayList instances = Collection.getArrayList(unit.getInstances());
-        ArrayList eobjects = new ArrayList();
         // instances should only contain the root elements
         Iterator it = instances.iterator();
         internalLog.debug("Updating EMF Objects");
@@ -217,6 +240,8 @@ public class Runtime2EMF {
     
     protected void findEMFObjectForProperty(EObject eObject, String prop_name, RuntimeObject property)
     {
+    	//internalLog.debug("      findEMFObjectForProperty: " + prop_name + " "+ property  + eObject);
+		
         // If property is an EList 
         if ( property.getData().get("CollectionArrayList") != null )
         {
@@ -242,9 +267,10 @@ public class Runtime2EMF {
         		//updatedRuntimeObjects.add(property);
         	}
         	else {
-        		internalLog.debug("      findEMFObjectForProperty : " + prop_name + " "+ property  + eObject);
-        		//findEMFObjectsForRuntimeObjectsForRoot((EObject)property.getData().get("emfObject"), 
-        			//	getEStructuralFeatureByName(eObject, prop_name).getEType());
+        		internalLog.debug("      findEMFObjectForProperty: " + prop_name + " "+ property  + eObject);
+        		// the property variable is the RuntimeObject we are looking for
+        		findEMFObjectsForRuntimeObjectsForRoot(property, 
+        				getEStructuralFeatureByName(eObject, prop_name).getEType());
         	}        	
         }
         else internalLog.debug("      findEMFObjectForProperty skipped RO: " + prop_name + " "+ property  + eObject);
@@ -290,9 +316,7 @@ public class Runtime2EMF {
 	                        if (p_o!=null)
 	                        {	
 	                        	internalLog.debug("      feature: " + feature.getName() + " eObject: "+ eObject + " p_o: " + p_o);
-	                        	EPackage p;
 	                        	
-	                    		
 	                            ((EList)eObject.eGet(feature)).add((EObject)p_o);
 	                            // Update the property for next objects to be updated that need its value
 	                            r_o.getData().put("emfObject", p_o);

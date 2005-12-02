@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta"
    name="Kermeta Workbench"
-   version="0.0.17"
+   version="0.0.18"
    provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.plugin.KermetaPlugin">
    <runtime>
@@ -19,6 +19,9 @@
       <library name="lib/thirdparty/log4j.jar">
          <export name="*"/>
       </library>
+      <library name="lib/traceability.jar">
+         <export name="*"/>
+      </library>
       <library name="lib/interpreter_kermeta.jar">
          <export name="*"/>
       </library>
@@ -29,9 +32,6 @@
          <export name="*"/>
       </library>
       <library name="lib/model_kermeta.jar">
-         <export name="*"/>
-      </library>
-      <library name="lib/traceability.jar">
          <export name="*"/>
       </library>
    </runtime>
@@ -125,7 +125,6 @@
    </extension>
    <extension
          id="fr.irisa.triskell.kermeta.filetypes"
-         name="kermeta.filetypes"
          point="org.eclipse.team.core.fileTypes">
       <fileTypes
             extension="kmt"

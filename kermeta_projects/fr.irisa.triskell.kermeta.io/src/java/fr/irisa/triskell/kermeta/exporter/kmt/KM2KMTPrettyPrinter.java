@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.19 2005-11-29 14:16:44 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.20 2005-12-02 12:55:21 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -471,6 +471,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 			result += " is do\n";
 			pushPrefix();
 			result += getPrefix() + "//TODO: implement operation " + node.getFName() + "\n"; 
+			result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
 			popPrefix();
 			result += getPrefix() + "end";
 		}
@@ -551,6 +552,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 				result += "do\n";
 				pushPrefix();
 				result += getPrefix() + "//TODO: implement getter for derived property " + node.getFName() + "\n"; 
+				result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
 				popPrefix();
 				result += getPrefix() + "end";
 			}
@@ -561,6 +563,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 					result += "do\n";
 					pushPrefix();
 					result += getPrefix() + "//TODO: implement setter for derived property " + node.getFName() + "\n"; 
+					result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
 					popPrefix();
 					result += getPrefix() + "end";
 				}
