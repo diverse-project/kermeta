@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.8 2005-12-02 09:13:50 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.9 2005-12-02 10:37:14 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -71,6 +71,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
      */
     public DebugInterpreter(RuntimeMemory pMemory) {
         super(pMemory);
+        currentCommand = DEBUG_RESUME;
     }
     
     /**
@@ -103,11 +104,18 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
 	public Object invoke_debug()
 	{
+		System.out.println("Begin invoke_debug");
 		Object result = null;
 		try {
 	        // Resolve this operation call
 	        result = (RuntimeObject)this.accept(entryOperation);
+	        System.out.println("operation invoked!");
        }
+	   catch (Exception e)
+	   {
+		   System.err.println("There is an unexpected exception :( : ");
+		   e.printStackTrace();
+	   }
        finally {
 	        // After operation has been evaluated, pop its context
     	    interpreterContext.popCallFrame();
@@ -130,9 +138,9 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
 	public Object visitFOperation(FOperation node) {
 		Object result = memory.voidINSTANCE;
-		//processDebugCommand(node);
+	//	processDebugCommand(node);
 		result = super.visitFOperation(node);
-		//processPostCommand();
+	//	processPostCommand();
 		return result;
 	}
 
@@ -183,25 +191,35 @@ public class DebugInterpreter extends ExpressionInterpreter {
 
 	public Object visitFConditionnal(FConditionnal node) {
 		Object result = null;
-		//processDebugCommand(node);
+		// processDebugCommand(node);
 		result = super.visitFConditionnal(node);
-		//processPostCommand();
+		// processPostCommand();
 		return result;
 	}
     
+	
     /** Called after an operation (a visit more precisely) is done */
     public void processPostCommand()
     {
     	/* System.err.println("* FirstCallFrame = " + interpreterContext.getFrameStack().firstElement() +
 				"\n* the peeked : " + getInterpreterContext().peekCallFrame() + "\n"); */
     	CallFrame current_frame = getInterpreterContext().peekCallFrame();
+    	/* if (stepOverCallFrame != null)
+    		System.out.println("stepOver frame : " + stepOverCallFrame.toString());*/
     	// If the command was a stepInto : suspend the debugintepreter systematically after each visit.
-    	if (isSteppingInto()) setSuspended(true, DEBUG_STEPEND);
+    	if (isSteppingInto()) 
+    	{
+    		setSuspended(true, DEBUG_STEPEND);
+    	
     	// If it was step over
     	// If the stepOverCallframe that conditioned the stop of the stepOver was poped
     	// then we set it to the last peeked frame.
+    	
+    	}
     	else if (isSteppingOver() && !interpreterContext.getFrameStack().contains(stepOverCallFrame))
+    	{
     		stepOverCallFrame = current_frame;
+    	}
     	else if (isSteppingOver() && !stepOverCallFrame.equals(current_frame))
     		setSuspended(false, DEBUG_STEPOVER);
     	else if (isSteppingOver() && current_frame.equals(stepOverCallFrame) )
@@ -258,15 +276,24 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	/** Returns the call frame in which the step over command has begun */
 	public CallFrame getStepOverCallFrame() {	return stepOverCallFrame; }
 	/** Sets the call frame where the step over should "stop". Called by the
-	 *  "remote side" of the interpreter */
-	public void setStepOverCallFrame()
+	 *  "remote side" of the interpreter
+	 *  if "top" is set to true, then stepOverCallFrame will be the top call frame
+	 *  in the stack.
+	 *   */
+	public void setStepOverCallFrame(boolean top)
 	{
 		// peekCallFrame is null if this method is called before interpreter
 		// was initialized : still sync. problems?
 		if (!getInterpreterContext().getFrameStack().isEmpty() && 
 			stepOverCallFrame == null
 		)	
-			stepOverCallFrame = getInterpreterContext().peekCallFrame(); 
+			if (top == false)
+				stepOverCallFrame = getInterpreterContext().peekCallFrame();
+			else
+			{
+				System.err.println("step after resume!");
+				stepOverCallFrame = (CallFrame)getInterpreterContext().getFrameStack().firstElement();
+			}
 	}
 
 	/** 
