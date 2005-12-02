@@ -6,9 +6,11 @@ class EAttribute inherits EStructuralFeature
 	property eAttributeType : EDataType[1..1]
 		getter is do
 			//TODO: implement getter for derived property eAttributeType
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eAttributeType
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 }
 class EAnnotation inherits EModelElement
@@ -28,75 +30,104 @@ class EClass inherits EClassifier
 	property eAllAttributes : EAttribute[0..*]
 		getter is do
 			//TODO: implement getter for derived property eAllAttributes
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eAllAttributes
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eAllReferences : EReference[0..*]
 		getter is do
 			//TODO: implement getter for derived property eAllReferences
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eAllReferences
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eReferences : EReference[0..*]
 		getter is do
 			//TODO: implement getter for derived property eReferences
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eReferences
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eAttributes : EAttribute[0..*]
 		getter is do
 			//TODO: implement getter for derived property eAttributes
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eAttributes
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eAllContainments : EReference[0..*]
 		getter is do
 			//TODO: implement getter for derived property eAllContainments
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eAllContainments
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eAllOperations : EOperation[0..*]
 		getter is do
 			//TODO: implement getter for derived property eAllOperations
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eAllOperations
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eAllStructuralFeatures : EStructuralFeature[0..*]
 		getter is do
 			//TODO: implement getter for derived property eAllStructuralFeatures
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eAllStructuralFeatures
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eAllSuperTypes : EClass[0..*]
 		getter is do
 			//TODO: implement getter for derived property eAllSuperTypes
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eAllSuperTypes
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	property eIDAttribute : EAttribute
 		getter is do
 			//TODO: implement getter for derived property eIDAttribute
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eIDAttribute
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 	attribute eStructuralFeatures : EStructuralFeature[0..*]#eContainingClass
 	operation isSuperTypeOf(someClass : EClass) : EBoolean is do
 		//TODO: implement operation isSuperTypeOf
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
-	operation getEStructuralFeatureFromInt(featureID : EInt) : EStructuralFeature is do
-		//TODO: implement operation getEStructuralFeature
+	operation getFeatureCount() : EInt is do
+		//TODO: implement operation getFeatureCount
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
-	operation getEStructuralFeatureFromString(featureName : EString) : EStructuralFeature is do
+	operation getEStructuralFeature(featureID : EInt) : EStructuralFeature is do
 		//TODO: implement operation getEStructuralFeature
+		raise kermeta::exceptions::NotImplementedException.new 
+	end
+	operation getFeatureID(feature : EStructuralFeature) : EInt is do
+		//TODO: implement operation getFeatureID
+		raise kermeta::exceptions::NotImplementedException.new 
+	end
+	operation getEStructuralFeatureFromName(featureName : EString) : EStructuralFeature is do
+		//TODO: implement operation getEStructuralFeature
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 }
 abstract class EClassifier inherits ENamedElement
@@ -107,9 +138,11 @@ abstract class EClassifier inherits ENamedElement
 	reference ePackage : EPackage#eClassifiers
 	operation isInstance(object : EJavaObject) : EBoolean is do
 		//TODO: implement operation isInstance
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation getClassifierID() : EInt is do
 		//TODO: implement operation getClassifierID
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 }
 class EDataType inherits EClassifier
@@ -121,9 +154,11 @@ class EEnum inherits EDataType
 	attribute eLiterals : EEnumLiteral[0..*]#eEnum
 	operation getEEnumLiteral(name : EString) : EEnumLiteral is do
 		//TODO: implement operation getEEnumLiteral
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
-	operation getEEnumLiteralFromInt(~value : EInt) : EEnumLiteral is do
+	operation getEEnumLiteralFromValue(~value : EInt) : EEnumLiteral is do
 		//TODO: implement operation getEEnumLiteral
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 }
 class EEnumLiteral inherits ENamedElement
@@ -137,12 +172,15 @@ class EFactory inherits EModelElement
 	reference ePackage : EPackage[1..1]#eFactoryInstance
 	operation create(eClass : EClass) : EObject is do
 		//TODO: implement operation create
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation createFromString(eDataType : EDataType, literalValue : EString) : EJavaObject is do
 		//TODO: implement operation createFromString
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation convertToString(eDataType : EDataType, instanceValue : EJavaObject) : EString is do
 		//TODO: implement operation convertToString
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 }
 abstract class EModelElement inherits EObject
@@ -150,6 +188,7 @@ abstract class EModelElement inherits EObject
 	attribute eAnnotations : EAnnotation[0..*]#eModelElement
 	operation getEAnnotation(source : EString) : EAnnotation is do
 		//TODO: implement operation getEAnnotation
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 }
 abstract class ENamedElement inherits EModelElement
@@ -160,45 +199,59 @@ class EObject
 {
 	operation eClass() : EClass is do
 		//TODO: implement operation eClass
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eIsProxy() : EBoolean is do
 		//TODO: implement operation eIsProxy
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eResource() : EResource is do
 		//TODO: implement operation eResource
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eContainer() : EObject is do
 		//TODO: implement operation eContainer
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eContainingFeature() : EStructuralFeature is do
 		//TODO: implement operation eContainingFeature
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eContainmentFeature() : EReference is do
 		//TODO: implement operation eContainmentFeature
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eContents() : EEList is do
 		//TODO: implement operation eContents
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eAllContents() : ETreeIterator is do
 		//TODO: implement operation eAllContents
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eCrossReferences() : EEList is do
 		//TODO: implement operation eCrossReferences
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
-	/*operation eGet(feature : EStructuralFeature) : EJavaObject is do
+	operation eGet(feature : EStructuralFeature) : EJavaObject is do
 		//TODO: implement operation eGet
-	end*/
-	operation eGet(feature : EStructuralFeature, resolve : EBoolean) : EJavaObject is do
+		raise kermeta::exceptions::NotImplementedException.new 
+	end
+	operation eGetAndResolve(feature : EStructuralFeature, resolve : EBoolean) : EJavaObject is do
 		//TODO: implement operation eGet
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eSet(feature : EStructuralFeature, newValue : EJavaObject) : kermeta::standard::~Void is do
 		//TODO: implement operation eSet
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eIsSet(feature : EStructuralFeature) : EBoolean is do
 		//TODO: implement operation eIsSet
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eUnset(feature : EStructuralFeature) : kermeta::standard::~Void is do
 		//TODO: implement operation eUnset
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 }
 class EOperation inherits ETypedElement
@@ -217,6 +270,7 @@ class EPackage inherits ENamedElement
 	reference eSuperPackage : EPackage#eSubpackages
 	operation getEClassifier(name : EString) : EClassifier is do
 		//TODO: implement operation getEClassifier
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 }
 class EParameter inherits ETypedElement
@@ -232,9 +286,11 @@ class EReference inherits EStructuralFeature
 	property eReferenceType : EClass[1..1]
 		getter is do
 			//TODO: implement getter for derived property eReferenceType
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 		setter is do
 			//TODO: implement setter for derived property eReferenceType
+			raise kermeta::exceptions::NotImplementedException.new 
 		end
 }
 abstract class EStructuralFeature inherits ETypedElement
@@ -249,9 +305,11 @@ abstract class EStructuralFeature inherits ETypedElement
 	reference eContainingClass : EClass#eStructuralFeatures
 	operation getFeatureID() : EInt is do
 		//TODO: implement operation getFeatureID
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation getContainerClass() : EJavaClass is do
 		//TODO: implement operation getContainerClass
+		raise kermeta::exceptions::NotImplementedException.new 
 	end
 }
 abstract class ETypedElement inherits ENamedElement
