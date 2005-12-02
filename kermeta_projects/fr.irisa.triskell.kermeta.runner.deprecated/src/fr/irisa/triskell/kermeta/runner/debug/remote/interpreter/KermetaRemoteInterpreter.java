@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.3 2005-12-02 10:38:58 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -78,38 +78,6 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		conditions.put(RunnerConstants.STEP_OVER, new StepOverCondition(this));
 	}
 	
-	/**
-	 * Execute the command defined by the given argument
-	 * 
-	 */
-	public Object execute(String command) throws RemoteException {
-
-		String reason = "";
-		// Memory access
-		if (command.equals(RunnerConstants.SUSPEND))
-		{ 
-			interpreter.setSuspended(true, "");
-		}
-		
-		if (command.equals(RunnerConstants.STEP_INTO))
-		{			 
-			interpreter.setSuspended(false, "stepInto");
-			// After the remoteInterpreter did its work by its side, we can get what is its
-			// new state
-			// And the reason of the stop .. stepEnd, or terminated
-			if (interpreter.isSuspended())
-			{
-				reason = interpreter.getCurrentCommand();
-				// if command/reason was stepEnd -> send "stepEnd"
-			}
-			System.out.println("fin de salut toto");
-		}
-		
-		// The reason conditions the type of event we have to send to the GUI
-		remoteDebugUI.notify(command, reason);
-		return null;
-	}
-	
 	/** Register the client which is the KermetaDebugPlatform*/
 	public void registerKermetaRemoteDebugUI(IKermetaRemoteDebugUI p_debugplatform) throws RemoteException {
 		remoteDebugUI = p_debugplatform;
@@ -140,16 +108,16 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	/** Shortcut method to change the remoteInterpreter stop condition */
 	public void setDebugCondition(String cond_name)
 	{
+		String old_command = interpreter.getCurrentCommand();
+		// if old_command was resume, stepOverCallFrame must be the first one!
 		// modify the remoteInterpreter currentCommand --> pre-state : step_into e.g
 		// note : after remoteInterpreter ahas done, it defines a post-state : step_end
 		interpreter.setCurrentCommand(cond_name);
-		if (cond_name.equals(RunnerConstants.STEP_OVER))
+		if (cond_name.equals(RunnerConstants.STEP_OVER) && !old_command.equals(RunnerConstants.STEP_INTO))
 		{
-			System.err.println("STEP over!!");
-			//if (this.getInterpreterContext().peekCallFrame() instanceof OperationCallFrame)
-			interpreter.setStepOverCallFrame(); 
+			interpreter.setStepOverCallFrame(old_command.equals(RunnerConstants.RESUME));
 		}
-		else
+		else if (!cond_name.equals(RunnerConstants.STEP_OVER))
 		{
 			interpreter.unsetStepOverCallFrame(); 
 		}

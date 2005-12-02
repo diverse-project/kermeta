@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteInterpreter.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
+/* $Id: IKermetaRemoteInterpreter.java,v 1.3 2005-12-02 10:38:58 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteInterpreter.java
  * License   : EPL
@@ -27,7 +27,6 @@ public interface IKermetaRemoteInterpreter extends Remote
 	 * Execute the command given in arguments
 	 * @param command
 	 */
-	public abstract Object execute(String command) throws RemoteException;
 	public abstract void registerKermetaRemoteDebugUI(IKermetaRemoteDebugUI p) throws RemoteException;
 	public abstract DebugInterpreter getInterpreter() throws RemoteException;
 	public abstract void setInterpreter(DebugInterpreter interpreter) throws RemoteException;
