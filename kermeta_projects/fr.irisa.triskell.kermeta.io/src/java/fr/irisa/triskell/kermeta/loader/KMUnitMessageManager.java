@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessageManager.java,v 1.4 2005-11-28 12:32:50 dvojtise Exp $
+/* $Id: KMUnitMessageManager.java,v 1.5 2005-12-05 09:21:17 ffleurey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -104,6 +104,7 @@ public class KMUnitMessageManager {
 	 */
 	public boolean hasError()
 	{
+		unitHasError = errors.size() > 0 ;
 		if (unitHasError) return true;
 	    ArrayList iulist = unit.getAllImportedUnits();
 	    for (int i=0; i<iulist.size(); i++) {	        
