@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.46 2005-12-01 18:38:40 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.47 2005-12-05 09:22:39 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -675,6 +675,7 @@ public abstract class KermetaUnit {
 	 * Get the fully qualified name of an FNamedElemenet
 	 */
 	public String getQualifiedName(FNamedElement element) {
+		if (element == null) return "";
 		if (element.eContainer() != null && element.eContainer() instanceof FNamedElement)
 			return getQualifiedName( (FNamedElement)element.eContainer() ) + "::" + element.getFName();
 		else return element.getFName();
