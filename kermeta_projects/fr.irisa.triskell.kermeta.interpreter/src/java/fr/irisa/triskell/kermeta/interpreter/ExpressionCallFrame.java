@@ -1,4 +1,4 @@
-/* $Id: ExpressionCallFrame.java,v 1.5 2005-09-06 10:48:05 zdrey Exp $
+/* $Id: ExpressionCallFrame.java,v 1.6 2005-12-05 09:25:41 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionCallFrame.java
 * License : GPL
@@ -38,6 +38,7 @@ public class ExpressionCallFrame extends CallFrame {
         super(pContext);
         this.unit = unit;
         this.selfObj = selfObj;
+        this.pushExpressionContext();
     }
 
     /**

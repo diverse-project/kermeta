@@ -1,4 +1,4 @@
-/* $Id: LambdaCallFrame.java,v 1.7 2005-09-06 10:48:05 zdrey Exp $
+/* $Id: LambdaCallFrame.java,v 1.8 2005-12-05 09:25:41 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
 * License : GPL
@@ -50,8 +50,11 @@ public class LambdaCallFrame extends CallFrame {
         // get operation context
         if (nestingCallFrame instanceof OperationCallFrame) 
             nestingOperationCallFrame = (OperationCallFrame)nestingCallFrame;
-        else {
+        else if (nestingCallFrame instanceof LambdaCallFrame){
             nestingOperationCallFrame = ((LambdaCallFrame)nestingCallFrame).nestingOperationCallFrame;
+        }
+        else if (nestingCallFrame instanceof ExpressionCallFrame) {
+        	
         }
         // copy the context
         nestingExpressionContext = new Stack();
@@ -92,33 +95,41 @@ public class LambdaCallFrame extends CallFrame {
     } 
     
     public RuntimeObject getOperationResult() {
+    	if (nestingOperationCallFrame == null) return null;
         return nestingOperationCallFrame.getOperationResult();
     }
     public RuntimeObject getCallValueResult() {
+    	if (nestingOperationCallFrame == null) return null;
         return nestingOperationCallFrame.getCallValueResult();
     }
     
     public void setOperationResult(RuntimeObject operationResult) {
+    	if (nestingOperationCallFrame == null) return;
         nestingOperationCallFrame.setOperationResult(operationResult);
     }
     public void setCallValueResult(RuntimeObject callValueResult) {
+    	if (nestingOperationCallFrame == null) return;
         nestingOperationCallFrame.setCallValueResult(callValueResult);
     }
     
     public RuntimeObject getSelf() {
+    	if (nestingOperationCallFrame == null) return null;
         return nestingOperationCallFrame.getSelf();
     }
     public void setSelf(RuntimeObject pSelf) {  }
     
     public Hashtable getTypeParameters() {
+    	if (nestingOperationCallFrame == null) return new Hashtable();
         return nestingOperationCallFrame.getTypeParameters();
     }
     
     public String toString() {
+    	if (nestingOperationCallFrame == null) return "#function call";
         return nestingOperationCallFrame.toString() + "#function call";
     }
     
     public FOperation getOperation() {
+    	if (nestingOperationCallFrame == null) return null;
         return nestingOperationCallFrame.getOperation();
     }
     

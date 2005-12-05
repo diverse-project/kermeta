@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.9 2005-11-24 09:34:48 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.10 2005-12-05 09:25:42 ffleurey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -213,6 +213,29 @@ public class RuntimeObject {
 		    Object nValue = getData().get("NumericValue");
 		    if(nValue != null)
 		    	return "[" + class_name + " : "+ oId +" = " +nValue+"]";
+	    }
+	    catch(Exception e) { 
+	        // NOTHING
+	    }
+	    	    
+	    return "[" + class_name + " : "+ oId +"]";
+	}
+	
+	public String toUserString() {
+	    String class_name = "< No Metaclass ! >";
+	    try {
+	        class_name = factory.getMemory().getUnit().getQualifiedName(((FClass)metaclass.getData().get("kcoreObject")).getFClassDefinition());
+		    String sValue = (String)getData().get("StringValue");
+		    if(sValue != null)
+		    	return "\"" +sValue+"\"";
+		    
+		    Boolean bValue = (Boolean)getData().get("BooleanValue");
+		    if(bValue != null)
+		    	return "" + bValue;
+		    
+		    Object nValue = getData().get("NumericValue");
+		    if(nValue != null)
+		    	return "" +nValue;
 	    }
 	    catch(Exception e) { 
 	        // NOTHING
