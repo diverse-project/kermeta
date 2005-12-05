@@ -1,4 +1,4 @@
-/* $Id: SimpleEdge.java,v 1.1 2005-11-27 19:46:03 dvojtise Exp $
+/* $Id: SimpleEdge.java,v 1.2 2005-12-05 19:14:30 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : InheritanceEdge.java
  * License : EPL
@@ -40,6 +40,7 @@ public class SimpleEdge extends Edge {
         int x2=(int) to.drawx;
         int y2=(int) to.drawy;
         if (intersects(tgPanel.getSize())) paintArrow(g, x1, y1, x2, y2, c);
+        //paintSpline(g,tgPanel);
     }
 
 }

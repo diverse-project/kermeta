@@ -60,26 +60,26 @@ import  javax.swing.event.*;
   *   
   * @author   Alexander Shapiro                                        
   * @author   Murray Altheim (abstracted KermetaGLPanel to TGScrollPane interface)
-  * @version  1.21  $Id: GLNavigateUI.java,v 1.2 2005-11-27 19:46:04 dvojtise Exp $
+  * @version  1.21  $Id: GLNavigateUI.java,v 1.3 2005-12-05 19:14:30 dvojtise Exp $
   */
 public class GLNavigateUI extends TGUserInterface {
     
-    GLPanel glPanel;
-    TGPanel tgPanel;    
+	protected GLPanel glPanel;
+	protected TGPanel tgPanel;    
     
-    GLNavigateMouseListener ml;
+    protected GLNavigateMouseListener ml;
         
-    TGAbstractDragUI hvDragUI;
-    TGAbstractDragUI rotateDragUI;
+    protected TGAbstractDragUI hvDragUI;
+    protected TGAbstractDragUI rotateDragUI;
     //TGAbstractDragUI hvRotateDragUI;
     
-    TGAbstractClickUI hvScrollToCenterUI;
-    DragNodeUI dragNodeUI;
-    LocalityScroll localityScroll;
-    JPopupMenu nodePopup;    
-    JPopupMenu edgePopup;    
-    Node popupNode;
-    Edge popupEdge;
+    protected TGAbstractClickUI hvScrollToCenterUI;
+    protected DragNodeUI dragNodeUI;
+    protected LocalityScroll localityScroll;
+    protected JPopupMenu nodePopup;    
+    protected JPopupMenu edgePopup;    
+    protected Node popupNode;
+    protected Edge popupEdge;
     
     public GLNavigateUI( GLPanel glp ) {
         glPanel = glp;
@@ -164,7 +164,7 @@ public class GLNavigateUI extends TGUserInterface {
     }
 	
 
-    private void setUpNodePopup() {        
+    protected void setUpNodePopup() {        
         nodePopup = new JPopupMenu();
         JMenuItem menuItem;
         

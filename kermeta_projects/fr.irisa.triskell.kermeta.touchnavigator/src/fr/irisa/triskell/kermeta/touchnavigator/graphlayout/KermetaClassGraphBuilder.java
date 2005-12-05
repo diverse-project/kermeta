@@ -1,4 +1,4 @@
-/* $Id: KermetaClassGraphBuilder.java,v 1.3 2005-11-28 23:11:25 dvojtise Exp $
+/* $Id: KermetaClassGraphBuilder.java,v 1.4 2005-12-05 19:14:30 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -87,7 +87,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 					Node inheritanceNode = tgpHelper.addInvisibleNode();
 					inheritanceNode.setGhostNode(true);
 					//Node inheritanceNode = tgPanel.addNode();
-					//inheritanceNode.setLabel("Inherits");
+					inheritanceNode.setLabel("Inherits");
 					inheritanceNode.setType(Node.TYPE_ROUNDRECT);
 					Node n1 = (Node)graphUnitMapping.get(aClassDef);
 					Node n2 = (Node)graphUnitMapping.get(aSuperClassDef);

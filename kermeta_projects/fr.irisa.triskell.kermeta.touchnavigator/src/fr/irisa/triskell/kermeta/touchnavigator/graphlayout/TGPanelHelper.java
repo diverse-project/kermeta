@@ -1,4 +1,4 @@
-/* $Id: TGPanelHelper.java,v 1.1 2005-11-27 19:46:03 dvojtise Exp $
+/* $Id: TGPanelHelper.java,v 1.2 2005-12-05 19:14:30 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaTGPanel.java
  * License : EPL
@@ -9,6 +9,8 @@
  *     	dvojtise <dvojtise@irisa.fr>
  */
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
+
+import java.util.Iterator;
 
 import com.touchgraph.graphlayout.Edge;
 import com.touchgraph.graphlayout.Node;
@@ -26,7 +28,7 @@ public class TGPanelHelper {
      * @see com.touchgraph.graphlayout.Node
      */
     public Node addClassNode() throws TGException {
-        String id = String.valueOf(tgpanel.getNodeCount()+1);
+        String id = getNewNodeId();
         return addClassNode(id,null);
     }
 	/** Adds a Node, provided its label.  The node is assigned a unique ID.
@@ -77,7 +79,7 @@ public class TGPanelHelper {
      * @see com.touchgraph.graphlayout.Node
      */
     public Node addInvisibleNode() throws TGException {
-        String id = String.valueOf(tgpanel.getNodeCount()+1);
+        String id = getNewNodeId();
         return addInvisibleNode(id,null);
     }
     /** Adds a Node, provided its ID and label.
@@ -105,4 +107,38 @@ public class TGPanelHelper {
     	tgpanel.addEdge(e);
     	return e;
     }
+    
+    public Edge addSplineEnabledClassEdge( Node f, Node t, int tension ) {
+    	Edge e = new SplineEnabledEdge(f,t,tension);
+    	tgpanel.addEdge(e);
+    	return e;
+    }
+    
+    public String getNewNodeId(){
+    	int i = tgpanel.getNodeCount()+1;
+    	String id = String.valueOf(i);
+    	while(tgpanel.findNode(id) != null)
+    	{
+    		id = String.valueOf(i++);
+    	}
+    	return id;
+    }
+    
+    /**
+     * retreives another edge for this node
+     * @param node
+     * @param edge
+     * @return
+     */
+    public Edge findFirstOtherEdge(Node node, Edge edge){
+		Edge result= null;
+		Iterator it = node.getEdges();
+		while(it.hasNext()){
+			result = (Edge)it.next();
+			if (result != edge) return result;
+		}
+			
+		return null;	
+			
+	}
 }

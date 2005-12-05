@@ -1,50 +1,12 @@
-/*
- * TouchGraph LLC. Apache-Style Software License
- *
- *
- * Copyright (c) 2001-2002 Alexander Shapiro. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer. 
- *
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- *
- * 3. The end-user documentation included with the redistribution,
- *    if any, must include the following acknowledgment:  
- *       "This product includes software developed by 
- *        TouchGraph LLC (http://www.touchgraph.com/)."
- *    Alternately, this acknowledgment may appear in the software itself,
- *    if and wherever such third-party acknowledgments normally appear.
- *
- * 4. The names "TouchGraph" or "TouchGraph LLC" must not be used to endorse 
- *    or promote products derived from this software without prior written 
- *    permission.  For written permission, please contact 
- *    alex@touchgraph.com
- *
- * 5. Products derived from this software may not be called "TouchGraph",
- *    nor may "TouchGraph" appear in their name, without prior written
- *    permission of alex@touchgraph.com.
- *
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED.  IN NO EVENT SHALL TOUCHGRAPH OR ITS CONTRIBUTORS BE 
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR 
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF 
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR 
- * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * ====================================================================
- *
+/* $Id: KermetaGLPanel.java,v 1.4 2005-12-05 19:14:30 dvojtise Exp $
+ * Project : fr.irisa.triskell.kermeta.touchnavigator
+ * File : KermetaGLPanel.java
+ * License : GPL
+ * Copyright : IRISA / INRIA/ Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 26 nov. 2005
+ * Authors : 
+ *     	dvojtise <dvojtise@irisa.fr>
  */
 
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
@@ -66,9 +28,12 @@ import com.touchgraph.graphlayout.Node;
 import com.touchgraph.graphlayout.TGException;
 import com.touchgraph.graphlayout.TGLensSet;
 import com.touchgraph.graphlayout.TGPanel;
+import com.touchgraph.graphlayout.interaction.GLEditUI;
+import com.touchgraph.graphlayout.interaction.GLNavigateUI;
 import com.touchgraph.graphlayout.interaction.HVScroll;
 import com.touchgraph.graphlayout.interaction.LocalityScroll;
 import com.touchgraph.graphlayout.interaction.RotateScroll;
+import com.touchgraph.graphlayout.interaction.TGUIManager;
 import com.touchgraph.graphlayout.interaction.ZoomScroll;
 
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
@@ -83,6 +48,7 @@ import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
+import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.interaction.KermetaGLNavigateUI;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -107,6 +73,8 @@ public class KermetaGLPanel extends GLPanel
 	
 	public BuildKermetaClassGraphThread buildKermetaClassGraphThread;
 	
+	public TGInheritanceTransformations graphTransform = null;
+	
 	KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 
 	
@@ -122,6 +90,8 @@ public class KermetaGLPanel extends GLPanel
         TexteditorPlugin.getDefault().registerListener(this);
         buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
         buildKermetaClassGraphThread.start();
+        
+        graphTransform = new TGInheritanceTransformations (tgPanel);
         /*try {
         	TexteditorPlugin.getDefault().registerListener(this);
         	new KermetaClassGraphBuilder(tgPanel).buildGraph();
@@ -133,6 +103,15 @@ public class KermetaGLPanel extends GLPanel
         setVisible(true);*/
     }
 
+    public void addUIs() {
+        tgUIManager = new TGUIManager();
+        GLEditUI editUI = new GLEditUI(this);
+        GLNavigateUI navigateUI = new KermetaGLNavigateUI(this);
+        tgUIManager.addUI(editUI,"Edit");
+        tgUIManager.addUI(navigateUI,"Navigate");
+        tgUIManager.activate("Navigate");
+    }
+    
 	/** 
 	 * Action when a kermetaEditor unit was changed
 	 * @see fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener#unitChanged()
@@ -296,6 +275,7 @@ public class KermetaGLPanel extends GLPanel
 	private void followObject(FObject fobj)
 	{
 		String searchedLabel = null;
+		if(fobj == null)return;
 		searchedLabel = (String)(new LabelPrettyPrinter()).accept(fobj);
 		/*if(fobj instanceof FClass){
 			FClass aClass = (FClass)fobj;
@@ -383,5 +363,13 @@ public class KermetaGLPanel extends GLPanel
 	        System.err.println("the definition : " + feature.getFName() + feature);
 	        return feature;
 	    }
+	}
+
+	/**
+	 * @return Returns the graphTransform.
+	 */
+	public TGInheritanceTransformations getGraphTransform() {
+		if(graphTransform == null) graphTransform = new TGInheritanceTransformations(tgPanel);
+		return graphTransform;
 	}
 } 
