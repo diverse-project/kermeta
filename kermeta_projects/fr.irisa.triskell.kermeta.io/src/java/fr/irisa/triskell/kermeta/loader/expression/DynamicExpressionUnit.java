@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.3 2005-11-28 12:32:50 dvojtise Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.4 2005-12-05 09:23:44 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -14,6 +14,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
@@ -22,6 +23,7 @@ import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.behavior.FTypeReference;
 import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.KMUnitMessageManager;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
@@ -30,6 +32,7 @@ import fr.irisa.triskell.kermeta.parser.KermetaParser;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
  * @author Franck Fleurey
@@ -47,6 +50,11 @@ public class DynamicExpressionUnit extends KermetaUnit {
      */
     public DynamicExpressionUnit(Hashtable packages) {
         super("", packages);
+        this.pushContext();
+    }
+    
+    public void resetMessages() {
+    	messages = new KMUnitMessageManager(this);
     }
     
     
@@ -56,7 +64,7 @@ public class DynamicExpressionUnit extends KermetaUnit {
         variables = new ArrayList();
         
         this.current_class = context;
-        this.pushContext();
+        //this.pushContext();
         
         Enumeration e = formalParams.keys();
         while(e.hasMoreElements()) {
@@ -89,6 +97,9 @@ public class DynamicExpressionUnit extends KermetaUnit {
 		
 		if (ast_exp != null)
 		    expression = KMT2KMExperessionBuilder.process(ast_exp, this);
+		else {
+			this.messages.addMessage(new KMUnitError("Expression Parse error.", null, ast_exp));
+		}
     }
     
     public KermetaTypeChecker typeCheck(KermetaTypeChecker checker) {
@@ -98,7 +109,19 @@ public class DynamicExpressionUnit extends KermetaUnit {
            checker = new KermetaTypeChecker(this);
        }
        checker.getContext().init(this);
-       checker.checkExpression(expression);
+       
+       Hashtable symbs = (Hashtable)this.symbols.peek();
+       KMSymbolVariable var;
+       Iterator it = symbs.values().iterator();
+       
+       while(it.hasNext()){
+       		var = (KMSymbolVariable)it.next();
+       		if (var.getVariable().getFStaticType() == null) continue;
+       		checker.getContext().addSymbol(var, new SimpleType(var.getVariable().getFStaticType()));
+       	
+       }
+	   
+	   checker.checkExpression(expression);
        return checker;
     }
     /*
