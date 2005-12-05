@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.23 2005-11-30 13:49:51 dpollet Exp $
+/* $Id: ExpressionChecker.java,v 1.24 2005-12-05 09:24:46 ffleurey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -515,6 +515,13 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitFCallResult(FCallResult expression) {
 	    preVisit();
+	    
+	    if (context.getCurrentCallable() == null) {
+	    	// cannot call result here
+	    	unit.messages.addError("TYPE-CHECKER : invalid use of result", expression);
+	    	return TypeCheckerContext.VoidType;
+	    }
+	    
 		// ele
 	    Type result = TypeCheckerContext.getTypeFromMultiplicityElement(context.getCurrentCallable());
 	    // if there are parameters
