@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.4 2005-12-05 19:14:30 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.5 2005-12-06 12:43:31 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -88,6 +88,7 @@ public class KermetaGLPanel extends GLPanel
         tgPanel.setLensSet(tgLensSet);
         addUIs();
         TexteditorPlugin.getDefault().registerListener(this);
+        
         buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
         buildKermetaClassGraphThread.start();
         
@@ -140,6 +141,16 @@ public class KermetaGLPanel extends GLPanel
 			if(clasDef == null) return;
 			System.err.println(clasDef.getFName());  
 			yield();
+			
+			KermetaGLPanel.this.tgPanel.tgLayout.stopDamper(); // do not damp while building the model
+            //KermetaGLPanel.this.tgPanel.tgLayout.resetDamper();
+			//KermetaGLPanel.this.tgPanel.tgLayout.stop();
+			yield();yield();
+			try { 
+				this.wait(300); // gives some time to the construction of the tgPanel to finish (the relaxer in particular)
+			} catch (InterruptedException e) {
+				return;
+			}
             
 			// make sure no other thread is running
             synchronized (KermetaGLPanel.this.tgPanel.getLocalityUtils()) {
@@ -182,7 +193,15 @@ public class KermetaGLPanel extends GLPanel
                 }
                 setVisible(true);
             }
-
+            
+            /*try {
+				this.wait(500);
+			} catch (InterruptedException e) {
+			}*/
+            //KermetaGLPanel.this.tgPanel.tgLayout.start();
+            KermetaGLPanel.this.tgPanel.tgLayout.resetDamper();
+            yield();
+            
     		System.err.println("BuildKermetaClassGraphThread end");
 		}
 	}
