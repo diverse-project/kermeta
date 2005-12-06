@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.9 2005-10-21 15:03:14 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.10 2005-12-06 08:30:50 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : GPL
@@ -149,7 +149,11 @@ public class RunCommandLine {
 			    internalLog.debug ("\t" + file.getName());
 			}
 		}
-	    
+	    if(checkOption.Saw ("-H"))
+	    {
+	    	checkOption.DisplayHelp(System.out);
+	    	System.out.println("Other values on the command line will be passed as string to the operation");
+	    }
 	}
     
 	/**
