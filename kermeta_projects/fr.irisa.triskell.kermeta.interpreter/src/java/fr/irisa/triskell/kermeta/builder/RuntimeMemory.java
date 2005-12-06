@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.10 2005-07-08 12:21:50 dvojtise Exp $
+/* $Id: RuntimeMemory.java,v 1.11 2005-12-06 18:57:15 zdrey Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -10,6 +10,7 @@
 package fr.irisa.triskell.kermeta.builder;
 
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -77,6 +78,18 @@ public class RuntimeMemory {
     public RuntimeObject getRuntimeObjectForFObject(FObject object)
     {
         return memoryLoader.getRuntimeObjectForFObject(object);
+    }
+    
+    public RuntimeObject getRuntimeObjectByOID(long oid)
+    {
+    	Iterator it = getRuntimeObjects().values().iterator();
+    	RuntimeObject result = null;
+    	while (it.hasNext() && result == null)
+    	{
+    		RuntimeObject next = (RuntimeObject)it.next();
+    		if (next.getOId() == oid) result = next;
+    	}
+    	return result;
     }
     
     public int getNumberOfObjectCached() {
