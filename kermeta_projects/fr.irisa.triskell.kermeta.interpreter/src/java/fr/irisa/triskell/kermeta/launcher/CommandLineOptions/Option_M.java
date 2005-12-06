@@ -19,7 +19,7 @@ public class Option_M extends Option
 		setNbArgs (1);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("Indicate a file containing URI_MAP");
+		setHelp ("Indicate a file containing URI_MAP (This is usefull to solve some model loading troubles)");
 		setMultiple (true);
 		setParameters (args);
 	}

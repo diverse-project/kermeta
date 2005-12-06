@@ -19,7 +19,7 @@ public class Option_C extends Option
 		setNbArgs (1);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("name of the class to run ex:  \nmyPackage::MyClass");
+		setHelp ("Qualified name of the class to run \n\t\tex:  myPackage::MyClass");
 		setMultiple (true);
 		setParameters (args);
 	}

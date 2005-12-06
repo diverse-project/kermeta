@@ -19,7 +19,7 @@ public class Option_K extends Option
 		setNbArgs (1);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("set the location for kermeta standard (framerwork.km) (KermetaUnit.STD_LIB_URI variable)  ");
+		setHelp ("Location for kermeta standard unit(framerwork.km) (KermetaUnit.STD_LIB_URI variable)  ");
 		setMultiple (true);
 		setParameters (args);
 	}

@@ -19,7 +19,7 @@ public class Option_O extends Option
 		setNbArgs (1);
 		setInclude ("-U");
 		setExclude ("");
-		setHelp ("name of the operation to run");
+		setHelp ("Name of the operation to run");
 		setMultiple (true);
 		setParameters (args);
 	}

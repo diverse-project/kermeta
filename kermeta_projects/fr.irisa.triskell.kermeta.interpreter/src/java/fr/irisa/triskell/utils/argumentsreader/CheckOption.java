@@ -1,4 +1,4 @@
-/* $Id: CheckOption.java,v 1.1 2005-05-17 07:19:43 dvojtise Exp $
+/* $Id: CheckOption.java,v 1.2 2005-12-06 08:40:18 dvojtise Exp $
  * Created on 11 mai 2004
  *
  */
@@ -212,7 +212,8 @@ public class CheckOption
 			Option item = (Option)it.next();
 			if (! item.getName().equals(""))
 			{
-				fp.println (item.getName() + " : (takes " + item.getNbArgs() + " argument(s)) \t " + item.getHelp());
+				String s = (item.getNbArgs() > 1) ? "s":"";
+				fp.println (item.getName() + " : (takes " + item.getNbArgs() + " argument"+ s +") \t " + item.getHelp());
 			}
 		}
 	}

@@ -19,7 +19,7 @@ public class Option_H extends Option
 		setNbArgs (0);
 		setInclude ("");
 		setExclude ("");
-		setHelp ("call the help ");
+		setHelp ("Display the help ");
 		setMultiple (false);
 	}
 	
