@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.15 2005-11-28 13:00:45 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.16 2005-12-06 13:43:05 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -75,6 +75,9 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_1_ClassSubTyping_1() throws Exception {
 testvalidFile("test/typechecher_tests/valid","1_ClassSubTyping_1.kmt" );
@@ -130,6 +133,10 @@ testvalidFile("test/typechecher_tests/valid","SimpleOperationCall.kmt" );
 
 public void testvalid_test_clone() throws Exception {
 testvalidFile("test/typechecher_tests/valid","test_clone.kmt" );
+}
+
+public void testinvalid_013_kermetaSignature() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","013_kermetaSignature.kmt" );
 }
 
 public void testinvalid_1_ClassSubTyping_1() throws Exception {
