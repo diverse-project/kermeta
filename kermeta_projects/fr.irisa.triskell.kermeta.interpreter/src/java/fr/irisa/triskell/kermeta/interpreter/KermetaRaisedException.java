@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.8 2005-11-25 15:07:34 dvojtise Exp $
+/* $Id: KermetaRaisedException.java,v 1.9 2005-12-06 16:09:32 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -161,13 +161,14 @@ public class KermetaRaisedException extends Error {
 	        if (cause_object.getData().containsKey("kcoreObject"))
 	        {
 	        	fobject = (FObject)cause_object.getData().get("kcoreObject");
+		        context = new Traceback(interpreter, fobject).getStackTrace();
 	        }
 	        else
 	        {
 	            System.err.println("RuntimeObject with no kcore object : " + cause_object);
-	            context += "RuntimeObject with no kcore object : " + cause_object;
+	            context += "Context not available : (internal RuntimeObject with no kcore object : " + cause_object +")";
 	        }
-	        context = new Traceback(interpreter, fobject).getStackTrace();
+	        
         }
         else {
         	context += "Context not available : cause_object is null";
