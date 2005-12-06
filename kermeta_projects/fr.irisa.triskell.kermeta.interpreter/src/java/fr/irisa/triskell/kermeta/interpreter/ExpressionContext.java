@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.10 2005-11-21 14:39:56 zdrey Exp $
+/* $Id: ExpressionContext.java,v 1.11 2005-12-06 18:56:55 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -42,8 +42,11 @@ public class ExpressionContext {
     protected Hashtable variables;
     
     
-    /** For debug mode (should we create a debug expression context?) */
+    /** @deprecated */
     public FExpression expression;
+    /** The last evaluated statement in the interpretation process.
+     *  Used to interrupt the stepOver command in the debug mode after each
+     *  statement evaluation. */
     protected EObject statement;
 	/**
 	 * Constructor 

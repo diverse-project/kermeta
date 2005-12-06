@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.11 2005-11-09 15:28:32 zdrey Exp $
+/* $Id: RunnerPlugin.java,v 1.12 2005-12-06 18:53:15 zdrey Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -54,6 +54,9 @@ public class RunnerPlugin extends AbstractUIPlugin
 	//Resource context.
 	private BundleContext context;
 	
+	//
+	private RunnerIcons runnerIcons;
+	
 	// logger for this plugin
 	final static public Logger pluginLog = LogConfigurationHelper.getLogger("KermetaRunner");
 	
@@ -84,8 +87,9 @@ public class RunnerPlugin extends AbstractUIPlugin
 	 * 
 	 */
 	public void start(BundleContext context) throws Exception {
-		this.context = context;
 		super.start(context);
+		this.context = context;
+		this.runnerIcons = new RunnerIcons(RunnerPlugin.getDefault().getBundle().getEntry("/"));
 	}
 
 	/**
@@ -114,6 +118,11 @@ public class RunnerPlugin extends AbstractUIPlugin
 		} catch (MissingResourceException e) {
 			return key;
 		}
+	}
+	
+	public static RunnerIcons getRunnerIcons()
+	{
+		return plugin.runnerIcons;
 	}
 
 	/**

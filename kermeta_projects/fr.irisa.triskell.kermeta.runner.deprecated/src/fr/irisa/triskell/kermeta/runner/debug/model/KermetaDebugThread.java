@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.8 2005-12-01 18:29:06 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.9 2005-12-06 18:53:15 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -74,6 +74,7 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 		if(isSuspended && stackFrames != null){
 			return stackFrames;
 		}
+		/** The debugger does not like when there are no frame (it seems)?*/
 		return new IStackFrame[0];
 	}
 
@@ -262,6 +263,7 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	/** @see org.eclipse.debug.core.model.ITerminate#terminate() */
 	public void terminate() throws DebugException 
 	{
+		System.out.println("terminate() in Thread!");
 		fireTerminateEvent();
 		target.terminate();
 	}

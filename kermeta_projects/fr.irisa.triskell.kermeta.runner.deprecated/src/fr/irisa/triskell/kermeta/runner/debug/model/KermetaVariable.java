@@ -1,4 +1,4 @@
-/* $Id: KermetaVariable.java,v 1.4 2005-12-01 18:29:06 zdrey Exp $
+/* $Id: KermetaVariable.java,v 1.5 2005-12-06 18:53:15 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaVariable.java
  * License   : GPL
@@ -18,16 +18,35 @@ import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableVariable;
 
 /**
  * A kermeta variable so that the Variable display window can be set.
+ * TODO : for the moment kermetaVariables are re-created each time we
+ * access the callframe that contains them. Next time we should only modify the values
+ * (with setValue)
  */
 public class KermetaVariable extends DebugElement implements IVariable {
 
 	protected KermetaDebugTarget debugTarget;
+	
+	protected SerializableVariable refVariable;
+	
 	protected String name;
 	protected String type;
 	protected IValue value;
+	 
+	protected boolean hasChanged;
+	
+	public KermetaVariable(KermetaDebugTarget target, SerializableVariable v)
+	{
+		super(target);
+		this.debugTarget = target;
+		this.refVariable = v;
+		this.name = v.name;
+        this.type = v.type;
+        this.value = new KermetaValue(target, v.value);
+	}
 	
     /**
      * @param target the debug target
@@ -40,12 +59,15 @@ public class KermetaVariable extends DebugElement implements IVariable {
         debugTarget = target;
         this.name = name;
         this.type = type;
-        this.value = value;   
+        this.value = value;
+        this.hasChanged = true;
     }
-
+    
+    
     /** @see org.eclipse.debug.core.model.IVariable#getValue() */
     public IValue getValue() throws DebugException
     { 
+    	this.hasChanged = false;
     	return value;
     }
 
@@ -54,7 +76,6 @@ public class KermetaVariable extends DebugElement implements IVariable {
 
     /** @see org.eclipse.debug.core.model.IVariable#getReferenceTypeName() */
     public String getReferenceTypeName() throws DebugException { 
-    	System.err.println("ref");
     	return type; }
 
     /** @see org.eclipse.debug.core.model.IVariable#hasValueChanged() */

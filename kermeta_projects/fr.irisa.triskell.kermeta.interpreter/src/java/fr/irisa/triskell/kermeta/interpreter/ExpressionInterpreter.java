@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.28 2005-11-25 15:07:34 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.29 2005-12-06 18:56:55 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -525,7 +525,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        interpreterContext.peekCallFrame().pushExpressionContext();
 	        try {
 	    
-			    ArrayList res = visitList(node.getFStatement());
+			    ArrayList res = visitStatementList(node.getFStatement());
 			    if (res.size() > 0) 
 			        result = (RuntimeObject)res.get(res.size()-1);
 	        }
@@ -586,6 +586,10 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    
         FExpression cond = node.getFCondition();
 
+        // Set "cond" as the current statement that will be evaluated in the
+        // current expressionContext
+        getInterpreterContext().peekCallFrame().peekExpressionContext().setStatement(cond);
+        
         // Object should be a Boolean
         RuntimeObject cond_result = (RuntimeObject)this.accept(cond);
         boolean cond_value=true;
@@ -625,13 +629,19 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         interpreterContext.peekCallFrame().pushExpressionContext();
         
         try {
-        
+        	
 	        // Accept initialization (a FVariableDecl) : add a new variable in the ExpressionContext
 	        this.accept(node.getFInitiatization());
 	        boolean cond_value=true;
 	        
 		    do
 		    {
+		    	// As we pushed a specific ExpressionContext in the loop to "protect" the
+		    	// initialization of the loop condition, we set the current
+		    	// statement that will be processed inside this ExpressionContext.
+		    	// this line does not modify the behavior of the interpreter
+		    	getInterpreterContext().peekCallFrame().peekExpressionContext().setStatement(node.getFStopCondition());
+				
 		        RuntimeObject cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
 		        // Get boolean value
 		        if (cond_result.getData().containsKey("BooleanValue"))
@@ -667,6 +677,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    RuntimeObject result = memory.voidINSTANCE;
 	    // push expression context
 	    interpreterContext.peekCallFrame().pushExpressionContext();
+	    interpreterContext.peekCallFrame().peekExpressionContext().setStatement(node.getFBody());
 	    try {
 		    // Interpret body
 		    this.accept(node.getFBody());
@@ -1056,7 +1067,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 
 	
 	/**
-	 * visit a list of expressions (usually come from a FBlock)
+	 * visit a list of expressions (statements, parameters)
 	 * @param expressions
 	 * @return an ArratList of RuntimeObjects
 	 */
@@ -1066,6 +1077,27 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		ArrayList result_list = new ArrayList();
 		while(it.hasNext()) {
 			result_list.add(this.accept((EObject)it.next()));
+		}
+		return result_list;
+	}
+	
+	/**
+	 * Visit a list of statements. Used when we visit the FBlock element.
+	 * The only difference with visitList is that it updates the attribute
+	 * "statement" in the ExpressionContext of the interpreter, so that we know
+	 * which statement is currently evaluated in a debug mode. It does not
+	 * modify the original behavior of the interpreter.
+	 * @param expressions a list of statements
+	 * @return an ArrayList of RuntimeObjects
+	 */
+	public ArrayList visitStatementList(EList expressions)
+	{
+		Iterator it = expressions.iterator();
+		ArrayList result_list = new ArrayList();
+		while(it.hasNext()) {
+			EObject next = (EObject)it.next();
+			interpreterContext.peekCallFrame().peekExpressionContext().setStatement(next);
+			result_list.add(this.accept(next));
 		}
 		return result_list;
 	}

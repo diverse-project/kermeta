@@ -1,4 +1,4 @@
-/* $Id: KermetaValue.java,v 1.3 2005-12-01 18:29:06 zdrey Exp $
+/* $Id: KermetaValue.java,v 1.4 2005-12-06 18:53:15 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaValue.java
  * License   : GPL
@@ -9,6 +9,8 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
+import java.rmi.RemoteException;
+
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.DebugElement;
@@ -16,7 +18,8 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 
-import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
+import fr.irisa.triskell.kermeta.runner.RunnerConstants;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableValue;
 
 
 /**
@@ -29,25 +32,39 @@ public class KermetaValue extends DebugElement implements IValue {
 
     /** The debug target */
     KermetaDebugTarget debugTarget;
+    
+    SerializableValue refValue;
+    
     String valueString;
+    String valueType;
+    long runtimeOID;
     
     /**
      * 
      */
-    public KermetaValue(KermetaDebugTarget target, String value)
+    public KermetaValue(KermetaDebugTarget target, String value, String type, long oid)
     {
     	super(target);
         debugTarget = target;
         valueString = value;
-        	
+        valueType   = type;
+        runtimeOID = oid;
     }
 
-    /**
+    public KermetaValue(KermetaDebugTarget target, SerializableValue value) {
+    	super(target);
+        debugTarget = target;
+        refValue = value;
+        valueString = value.valueString;
+        valueType   = value.refTypeName;
+        runtimeOID = value.runtimeOID;
+	}
+
+	/**
      * @see org.eclipse.debug.core.model.IValue#getReferenceTypeName()
      */
     public String getReferenceTypeName() throws DebugException {
-    	
-        return "pas d'type, pas d'chocolat";
+        return valueType;
     }
 
     /** @see org.eclipse.debug.core.model.IValue#getValueString() */
@@ -64,11 +81,20 @@ public class KermetaValue extends DebugElement implements IValue {
     }
 
     /**
+     * @Note : this method should not return null otherwise a NullPointerException
+     * appears in the debug framework (in DeferredVariable class...)
      * @see org.eclipse.debug.core.model.IValue#getVariables()
      */
     public IVariable[] getVariables() throws DebugException {
         //return debugTarget.getMainThread().getTopStackFrame().getVariables();
-    	return null;
+    	// Find the object linked to the value
+    	IVariable[] ivars = null;
+    	if (!valueType.equals(RunnerConstants.IVALUE_PRIMITIVE))
+    	{
+    		ivars = debugTarget.getRemoteDebugUI().createKermetaVariablesForSerializableValue(this.refValue);
+    	}
+		if (ivars == null) return new IVariable[0];
+    	return ivars;
     }
 
     /**
@@ -97,4 +123,13 @@ public class KermetaValue extends DebugElement implements IValue {
     public void setValueString(String valueString) {
     	this.valueString = valueString; 
     }
+
+	/**
+	 * @return Returns the runtimeOid.
+	 */
+	public long getRuntimeOid() {
+		return runtimeOID;
+	}
+    
+    
 }

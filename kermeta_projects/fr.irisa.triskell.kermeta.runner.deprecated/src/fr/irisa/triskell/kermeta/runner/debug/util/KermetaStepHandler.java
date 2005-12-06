@@ -1,4 +1,4 @@
-/* $Id: KermetaStepHandler.java,v 1.4 2005-12-01 18:29:07 zdrey Exp $
+/* $Id: KermetaStepHandler.java,v 1.5 2005-12-06 18:53:16 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaStepHandler.java
  * License   : EPL
@@ -17,7 +17,7 @@ import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugThread;
 
 /** 
  * This is a class that handles the step commands.(step into, step over) 
- *
+ * TODO : this class seems to be useless, for only 2 methods.
  */
 public class KermetaStepHandler {
 	

@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteInterpreter.java,v 1.3 2005-12-02 10:38:58 zdrey Exp $
+/* $Id: IKermetaRemoteInterpreter.java,v 1.4 2005-12-06 18:53:16 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteInterpreter.java
  * License   : EPL
@@ -32,6 +32,7 @@ public interface IKermetaRemoteInterpreter extends Remote
 	public abstract void setInterpreter(DebugInterpreter interpreter) throws RemoteException;
 	public abstract IKermetaRemoteDebugUI getRemoteDebugUI() throws RemoteException;
 	
+	// Access to the interpreter context
 	public abstract SerializableCallFrame[] getSerializableCallFrames() throws RemoteException;
 	
 	/** @returns the debug condition that is currently attached to the DebugInterpreter */
@@ -45,4 +46,5 @@ public interface IKermetaRemoteInterpreter extends Remote
 	public void setDebugCondition(String cond_name) throws RemoteException;
 	public String getDebugCondition() throws RemoteException;
 	public abstract void terminate() throws RemoteException;
+	public abstract SerializableVariable[] getSerializableVariablesFromSerializableValue(SerializableValue s_value) throws RemoteException;
 }

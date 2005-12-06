@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.9 2005-12-02 10:37:14 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.10 2005-12-06 18:56:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -10,6 +10,7 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -17,6 +18,9 @@ import org.eclipse.emf.ecore.EObject;
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FBlock;
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
+import fr.irisa.triskell.kermeta.behavior.FCallResult;
+import fr.irisa.triskell.kermeta.behavior.FCallSuperOperation;
+import fr.irisa.triskell.kermeta.behavior.FJavaStaticCall;
 
 import fr.irisa.triskell.kermeta.behavior.FConditionnal;
 
@@ -28,6 +32,7 @@ import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FObject;
 
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
@@ -57,14 +62,17 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public String currentCommand = "";
     /** The stop condition for the stepOver command */ 
     protected CallFrame stepOverCallFrame; 
+    protected CallFrame current_frame;
     
     public FClass entryObject ;
     public FOperation entryOperation ;
     public ArrayList entryArguments  ;
-    /**  The current node that is being interpreted. Used to retrieve the position
-     * of the execution in the source code when in suspended mode. */ 
-    public EObject currentNode;
     public AbstractKermetaDebugCondition debugCondition;
+	private CallFrame before_call_frame;
+	private CallFrame after_call_frame;
+	private FOperation currentOperation;
+	/** The current statement that is being processed? */
+	private FObject currentStatement;
     
     /**
      * @param pMemory
@@ -96,7 +104,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 		// Create a context for this operation call, setting self object to ro_target
 		// We should have a FCallFeature
         interpreterContext.pushOperationCallFrame(ro_target, op, arguments, null);
-		
+        current_frame = getInterpreterContext().peekCallFrame();
 	}
 	
 	/**
@@ -138,9 +146,9 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
 	public Object visitFOperation(FOperation node) {
 		Object result = memory.voidINSTANCE;
-	//	processDebugCommand(node);
+		processDebugCommand(node);
 		result = super.visitFOperation(node);
-	//	processPostCommand();
+		processPostCommand(node);
 		return result;
 	}
 
@@ -148,23 +156,11 @@ public class DebugInterpreter extends ExpressionInterpreter {
      * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFAssignement(fr.irisa.triskell.kermeta.behavior.FAssignement)
      */
     public Object visitFAssignement(FAssignement node) {
-    	Object result = memory.voidINSTANCE;
+    	Object result = null;
     	processDebugCommand(node);
     	result = super.visitFAssignement(node);
-        processPostCommand();
+        processPostCommand(node);
         return result;
-    }
-    
-    /**
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFBlock(fr.irisa.triskell.kermeta.behavior.FBlock)
-     */
-    public Object visitFBlock(FBlock node)
-    {
-    	 RuntimeObject result = memory.voidINSTANCE;
-    	 //processDebugCommand(node);
-    	 result = (RuntimeObject)super.visitFBlock(node);
-    	 //processPostCommand();
-    	 return result;
     }
     
     /** 
@@ -174,56 +170,97 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	Object result = null;
     	processDebugCommand(node);
     	result = super.visitFCallFeature(node);
-    	processPostCommand();
+    	processPostCommand(node);
         return result;
     }
     
+
+    /**
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFBlock(fr.irisa.triskell.kermeta.behavior.FBlock)
+     * @note : we don't need to control neither the execution of a FBlock, nor 
+     * the execution of a FLoop, nor FConditional : they directly contains not executable
+     * statement : so, we control only the children of those elements ( FStopCondition, the list
+     * of statements inside the FBlock, etc.)
+     */
+    public Object visitFBlock(FBlock node)  {
+    	return (RuntimeObject)super.visitFBlock(node); 
+    }
+    
 	/**
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFLoop(fr.irisa.triskell.kermeta.behavior.FLoop)
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFCallSuperOperation(fr.irisa.triskell.kermeta.behavior.FCallSuperOperation)
 	 */
-	public Object visitFLoop(FLoop node) {
+	public Object visitFCallSuperOperation(FCallSuperOperation node) {
 		Object result = null;
 		processDebugCommand(node);
-		result = super.visitFLoop(node);
-		processPostCommand();
+		result = super.visitFCallSuperOperation(node);
+		processPostCommand(node);
+		return result;
+	}
+	
+	
+
+	/**
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFJavaStaticCall(fr.irisa.triskell.kermeta.behavior.FJavaStaticCall)
+	 */
+	public Object visitFJavaStaticCall(FJavaStaticCall node) {
+		Object result = null;
+		processDebugCommand(node);
+		result = super.visitFJavaStaticCall(node);
+		processPostCommand(node);
+		return result;
+	}
+	
+
+	
+	/**
+	 * Visit a variable declaration also deserves a stop in the step mode. 
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFVariableDecl(fr.irisa.triskell.kermeta.behavior.FVariableDecl)
+	 */
+	public Object visitFVariableDecl(FVariableDecl node) {
+		Object result = null;
+		processDebugCommand(node);
+		result = super.visitFVariableDecl(node);
+		processPostCommand(node);
 		return result;
 	}
 
-	public Object visitFConditionnal(FConditionnal node) {
-		Object result = null;
-		// processDebugCommand(node);
-		result = super.visitFConditionnal(node);
-		// processPostCommand();
-		return result;
-	}
-    
 	
-    /** Called after an operation (a visit more precisely) is done */
-    public void processPostCommand()
+
+	/** 
+	 * Called after a visit is done : this method updates the "currentCommand" attribute
+	 * of the debug interpreter according to the kind of command the user asked 
+	 * for (typically, stepInto, stepOver, or resume), so that the "KermetaRemoteInterpreter"  can block its thread
+	 * accordingly.
+	 * @param node the node of the visit that preceded the call of this postCommand */
+    public void processPostCommand(FObject node)
     {
-    	/* System.err.println("* FirstCallFrame = " + interpreterContext.getFrameStack().firstElement() +
-				"\n* the peeked : " + getInterpreterContext().peekCallFrame() + "\n"); */
-    	CallFrame current_frame = getInterpreterContext().peekCallFrame();
-    	/* if (stepOverCallFrame != null)
-    		System.out.println("stepOver frame : " + stepOverCallFrame.toString());*/
-    	// If the command was a stepInto : suspend the debugintepreter systematically after each visit.
-    	if (isSteppingInto()) 
+    	current_frame = getInterpreterContext().peekCallFrame();
+    	// If command is a step-into, then we stop systematically after a visit 
+    	if (isSteppingInto() ) 
     	{
     		setSuspended(true, DEBUG_STEPEND);
-    	
-    	// If it was step over
-    	// If the stepOverCallframe that conditioned the stop of the stepOver was poped
-    	// then we set it to the last peeked frame.
-    	
     	}
+    	// If it is step over and
+    	// if the stepOverCallframe that conditioned the stop of the stepOver was poped
+    	// (this case occurs for example when a step-over command follows a step-into),
+    	// then we set it to the last peeked frame.
     	else if (isSteppingOver() && !interpreterContext.getFrameStack().contains(stepOverCallFrame))
     	{
-    		stepOverCallFrame = current_frame;
+    		stepOverCallFrame = getInterpreterContext().peekCallFrame();
     	}
+    	// If it is a step-over and we are not yet back in the stepOverCallFrame,
+    	// then we can continue
     	else if (isSteppingOver() && !stepOverCallFrame.equals(current_frame))
     		setSuspended(false, DEBUG_STEPOVER);
-    	else if (isSteppingOver() && current_frame.equals(stepOverCallFrame) )
+    	// If it is a step-over, and we are in the stepOverCallFrame, and the last
+    	// statement that had to be evaluated correspond to the node that we just visited,
+    	// then it means the visit of the statement is completed, so, we can stop.
+    	else if (isSteppingOver() && current_frame.equals(stepOverCallFrame)
+    			 &&
+    			 node.equals(current_frame.peekExpressionContext().getStatement()))
+    	{
     		setSuspended(true, DEBUG_STEPEND);
+    	}
     }
 
     /**
@@ -234,14 +271,13 @@ public class DebugInterpreter extends ExpressionInterpreter {
     {
     	if (getDebugCondition()!=null)
     	{
-    		//System.err.println("last debug condition : " + getDebugCondition().getConditionType());
     		// Tell the debug condition where we are
     		getDebugCondition().setCurrentNode(current_node);
     		getDebugCondition().blockInterpreter();
     	}
     	return null;
     }
-	
+    
 	/*
 	 * Special accessors for interactive debug mode
 	 * 
@@ -309,18 +345,54 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	
 	public AbstractKermetaDebugCondition getDebugCondition()
 	{ return debugCondition; }
-
 	
-	/**
-	 * Visit a variable declaration also deserves a stop in the step mode. 
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFVariableDecl(fr.irisa.triskell.kermeta.behavior.FVariableDecl)
+	/** 
+	 * TODO : constrain the access to the current operation call frame?
+	 * Find and return the runtimeobject given by its OID in the context of the interpreter. return null 
+	 * if the RuntimeObject was not found.
 	 */
-	public Object visitFVariableDecl(FVariableDecl node) {
-		Object result = null;
-		processDebugCommand(node);
-		result = super.visitFVariableDecl(node);
-		processPostCommand();
-		return result;
-	}
+    public RuntimeObject getRuntimeObjectByOID(long oid)
+    {
+    	RuntimeObject result = null;
+    	if (getInterpreterContext().getFrameStack().isEmpty()==false 
+    		&& getInterpreterContext().peekCallFrame().hasVariables())
+    	{
+    		// We need to parse the current context?
+    		Iterator it = getInterpreterContext().peekCallFrame().getVariables().keySet().iterator();
+    		while (it.hasNext() && result == null)
+    		{
+    			Object nkey = it.next();
+    			RuntimeObject rvalue = ((Variable)getInterpreterContext().peekCallFrame().getVariables().get(nkey)).getRuntimeObject();
+    			if (rvalue.getOId() == oid) result = rvalue;
+    		}
+    	}
+    	return result;
+    }
+    
+    /** the runtime object stored in the variables of all the call frames */
+    public ArrayList getContextRuntimeObjects()
+    {
+    	ArrayList result = new ArrayList();
+    	if (getInterpreterContext().getFrameStack().isEmpty()==false)
+    	{	
+    		Iterator fit = getInterpreterContext().getFrameStack().iterator();
+    		while (fit.hasNext())
+    		{
+    			CallFrame frame = (CallFrame)fit.next();
+    			if (frame.hasVariables())
+    			{
+    				// We need to parse the current context?
+    				Iterator it = frame.getVariables().values().iterator();
+    				while (it.hasNext()) {
+    					result.add(((Variable)it.next()).getRuntimeObject());
+    				}
+    				// Also add "self" object?
+    				result.add(frame.getSelf());
+    			}
+    		}
+    	}
+    	//if (getInterpreterContext())
+    	return result;
+    }
 	
 }

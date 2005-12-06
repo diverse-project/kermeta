@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.3 2005-12-06 18:53:15 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -41,6 +41,7 @@ import fr.irisa.triskell.kermeta.runner.debug.model.KermetaVariable;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableCallFrame;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableValue;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableVariable;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaDebugWrapper;
 
@@ -90,7 +91,6 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 			}
 			else if (command.equals(RunnerConstants.RESUME))
 			{
-				System.err.println("RESUME IN NOTIFY!");
 				target.getRemoteInterpreter().unblock();
 				processResumeReason(reason);
 			}
@@ -139,14 +139,16 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	protected synchronized IStackFrame[] createKermetaStackFrames() throws DebugException, RemoteException
 	{
 		SerializableCallFrame[] frames = target.getRemoteInterpreter().getSerializableCallFrames();
-		KermetaStackFrame[] result = new KermetaStackFrame[0];
-		if (frames != null && frames.length > 0)
+		KermetaStackFrame[] result = null;
+		IPath path = null;
+		if (frames != null && frames.length > 0) // sometimes a nullpointerexception occures line 154...
 		{
 			result = new KermetaStackFrame[frames.length];
 			
 			for (int i=0; i<frames.length; i++)
 			{
-				IPath path = AbstractKermetaTarget.getIPathFromString(frames[i].filepath);
+				if (frames[i] != null)
+					path = AbstractKermetaTarget.getIPathFromString(frames[i].filepath);
 				KermetaDebugThread thread = target.getMainThread();
 				
 				KermetaStackFrame f = new KermetaStackFrame(
@@ -161,16 +163,34 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 		return result;
 	}
 	
-	protected IVariable[] createKermetaVariables(SerializableVariable[] vars) throws DebugException
+	/**
+	 * TODO: should we carrément define a constructor : 
+	 * KermetaVariable(SerializableVariable v) ?
+	 * @param vars
+	 * @return an array of IVariable or null if there are no variable
+	 * @throws DebugException
+	 */
+	public IVariable[] createKermetaVariables(SerializableVariable[] vars)
 	{
-		KermetaVariable[] result = new KermetaVariable[vars.length]; 
-		for (int i=0; i<vars.length; i++)
+		KermetaVariable[] result = null;
+		if (vars != null)
 		{
-			result[i] = new KermetaVariable(
-					target, 
-					vars[i].name, 
-					vars[i].type, 
-					new KermetaValue(target, vars[i].value.valueString));
+			result = new KermetaVariable[vars.length]; 
+			for (int i=0; i<vars.length; i++)
+			{
+				result[i] = new KermetaVariable(
+						target, vars[i]);
+				/*result[i] = new KermetaVariable(
+						target, 
+						vars[i].name, 
+						vars[i].type, 
+						new KermetaValue(
+								target,  
+								vars[i].getValue()
+								vars[i].value.valueString,
+								vars[i].value.refTypeName,
+								vars[i].value.runtimeOID )); */
+			}
 		}
 		return result;
 	}
@@ -239,10 +259,7 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	}
 	
 	protected void processResumeReason(String reason) throws RemoteException
-	{
-		System.err.println("cond : " + target.getRemoteInterpreter().getDebugCondition() + 
-				" == " + reason);
-		
+	{	
 		// other cases : EVALUATION, EVALUATION_IMPLICIT / UNSPECIFIED and CLIENTREQUEST
 		// if we were in the same stop condition type earlier, we do not need to change it...
 	/*	if (!target.getRemoteInterpreter().getDebugCondition().equals(reason))
@@ -265,4 +282,27 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 		target.getRemoteInterpreter().terminate();
 
 	}
+
+	/** Create the properties of the instance represented by the given KermetaValue */
+	public IVariable[] createKermetaVariablesForSerializableValue(SerializableValue s_value) {
+		IVariable[] result = null;
+		try {
+			SerializableVariable[] svars = target.getRemoteInterpreter().getSerializableVariablesFromSerializableValue(s_value);
+			result = createKermetaVariables(svars);
+		} catch (RemoteException e) { e.printStackTrace(); }
+		
+		return result;
+	}
+	
+	/** Create the properties of the instance represented by the given KermetaValue */
+	public IVariable[] createKermetaVariablesForValue(SerializableValue s_value) {
+		IVariable[] result = null;
+		try {
+			SerializableVariable[] svars = target.getRemoteInterpreter().getSerializableVariablesFromSerializableValue(s_value);
+			result = createKermetaVariables(svars);
+		} catch (RemoteException e) { e.printStackTrace(); }
+		
+		return result;
+	}
+	
 }

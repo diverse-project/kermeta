@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.15 2005-12-01 18:41:45 zdrey Exp $
+/* $Id: CallFrame.java,v 1.16 2005-12-06 18:56:55 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -85,10 +85,19 @@ public abstract class CallFrame {
         for (int i=block_stack.size()-1; i>=0; i--) {
             result.putAll(((ExpressionContext)block_stack.get(i)).getVariables());
         }
+        //result.put("self", getSelf());
         result.putAll(context.getInterpreterVariables());
         return result;
     }
     
+    /**
+     * Helper method
+     * @return true if the frame contains variables, false otherwise
+     */
+    public boolean hasVariables()
+    {
+    	return (!getVariables().isEmpty());
+    }
     /*
      * 
      * A C C E S S O R S 

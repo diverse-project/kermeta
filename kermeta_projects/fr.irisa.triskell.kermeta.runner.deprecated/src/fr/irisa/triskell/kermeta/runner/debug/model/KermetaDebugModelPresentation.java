@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugModelPresentation.java,v 1.4 2005-12-01 18:29:06 zdrey Exp $
+/* $Id: KermetaDebugModelPresentation.java,v 1.5 2005-12-06 18:53:15 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugModelPresentation.java
  * License   : EPL
@@ -24,6 +24,8 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorInput;
 
+import fr.irisa.triskell.kermeta.runner.RunnerConstants;
+import fr.irisa.triskell.kermeta.runner.RunnerIcons;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaSourceLocator;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
@@ -53,8 +55,19 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      * @see org.eclipse.jface.viewers.ILabelProvider#getImage(java.lang.Object)
      */
     public Image getImage(Object element) {
-        // TODO Auto-generated method stub
-        return null;
+    	Image image = null;
+    	if (element instanceof KermetaVariable)
+    	{
+    		KermetaVariable v = (KermetaVariable)element;
+    		// TODO : this is such a test, the icons are not the best ones...
+    		try {
+				String vtype = ((KermetaValue)v.getValue()).valueType; 
+    			return RunnerPlugin.getRunnerIcons().get(vtype);
+			}
+    		catch (DebugException e) { e.printStackTrace(); }
+			finally { image = null; }
+    	}
+        return image;
     }
 
     /**

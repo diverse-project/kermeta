@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.8 2005-12-01 18:29:06 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.9 2005-12-06 18:53:15 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -176,12 +176,12 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     
     /** @see org.eclipse.debug.core.model.ISuspendResume#canResume() */
     public boolean canResume() {
-    	return (state != stateDisconnected && state != stateRunning);
+    	return (remoteInterpreter!=null && state != stateDisconnected && state != stateRunning);
     }
 
     /** @see org.eclipse.debug.core.model.ISuspendResume#canSuspend() */
     public boolean canSuspend()
-    {	return !isSuspended(); }
+    {	return remoteInterpreter!=null && !isSuspended(); }
 
 	/**
 	 * @see fr.irisa.triskell.kermeta.runner.launching.AbstractKermetaTarget#supportsBreakpoint(org.eclipse.debug.core.model.IBreakpoint)
@@ -189,10 +189,10 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) { return true; }
 
 	/** @see org.eclipse.debug.core.model.IDisconnect#canDisconnect() */
-    public boolean canDisconnect() { return (state != stateDisconnected); }
+    public boolean canDisconnect() { return (remoteInterpreter!=null && state != stateDisconnected); }
 
     /** @see fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget#canTerminate() */
-	public boolean canTerminate() { return (state != stateTerminated); }
+	public boolean canTerminate() { return (remoteInterpreter!=null && state != stateTerminated); }
 	
 	/** @see org.eclipse.debug.core.model.IDisconnect#disconnect() */
     public void disconnect() throws DebugException { setState(stateDisconnected); }
@@ -213,7 +213,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	{
     		threads = new KermetaDebugThread[1];
     		threads[0] = new KermetaDebugThread(this, "default thread");
-    		fireCreationEvent(threads[0]);
+    		//fireCreationEvent(threads[0]);
     	}
     	return threads;
     }

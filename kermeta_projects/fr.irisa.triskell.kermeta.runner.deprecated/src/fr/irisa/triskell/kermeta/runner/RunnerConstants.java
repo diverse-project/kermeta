@@ -1,4 +1,4 @@
-/* $Id: RunnerConstants.java,v 1.4 2005-12-01 18:29:07 zdrey Exp $
+/* $Id: RunnerConstants.java,v 1.5 2005-12-06 18:53:15 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : RunnerConstants.java
  * License   : EPL
@@ -29,7 +29,10 @@ public class RunnerConstants {
 	public static final String CLIENT_REQUEST = "request";
 	// This is more a "reason" of supsension, not a "command" 
 	public static final String STEP_END = "stepEnd";
-
-
 	public static final String TERMINATE = "terminate";
+	public static final String IVALUE_NA = "<not available>";
+	public static final String IVALUE_SET = "<Set>";
+
+
+	public static final String IVALUE_PRIMITIVE = "primitive";
 }

@@ -64,7 +64,7 @@ public class KermetaProcess extends Thread {
 			remote_interpreter = new KermetaRemoteInterpreter(file, classname, opname, args);
 			reg.rebind(REMOTE_NAME, remote_interpreter);
 		}
-		catch (RemoteException e) 
+		catch (Exception e) 
 		{
 			System.out.println("Exception Remote! ");
 			e.printStackTrace();
@@ -79,6 +79,7 @@ public class KermetaProcess extends Thread {
 				// Invoke the interpretation after RMI connections are done
 				System.err.println("get interpreter : " + remote_interpreter);
 				remote_interpreter.getInterpreter().invoke_debug();
+				
 			} catch (RemoteException e) {
 				e.printStackTrace();
 			}

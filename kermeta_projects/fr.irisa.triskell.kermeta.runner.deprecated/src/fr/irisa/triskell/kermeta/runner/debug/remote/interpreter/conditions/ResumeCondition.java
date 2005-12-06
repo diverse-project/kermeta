@@ -1,4 +1,4 @@
-/* $Id: ResumeCondition.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
+/* $Id: ResumeCondition.java,v 1.3 2005-12-06 18:53:16 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : ResumeCondition.java
  * License   : EPL
@@ -52,7 +52,8 @@ public class ResumeCondition extends AbstractBreakpointStopCondition {
 	 * else, it is false.
 	 */
 	public boolean evaluate() {
-		return ( super.evaluate() || isSuspended );
+		return (isSuspended);
+	//	return ( super.evaluate() || isSuspended );
 	}
 
 	/**

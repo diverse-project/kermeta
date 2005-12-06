@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.14 2005-12-01 18:43:10 zdrey Exp $
+/* $Id: InterpreterContext.java,v 1.15 2005-12-06 18:56:55 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : EPL
@@ -144,6 +144,8 @@ public class InterpreterContext {
     public RuntimeMemory getMemory() {
         return memory;
     }
+    
+    /** Return the frame_stack. If there is no frame, the stack is empty (and not "null") */
     public Stack getFrameStack() {
     	return frame_stack;
     }
