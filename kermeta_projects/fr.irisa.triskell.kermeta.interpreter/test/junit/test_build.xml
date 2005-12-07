@@ -1,0 +1,56 @@
+<!-- $Id: test_build.xml,v 1.1 2005-12-07 16:40:36 dvojtise Exp $ -->
+<project name="run interpreter tests" default="all" basedir=".">
+	
+	<description>
+        Run interpreter tests
+    </description>
+	
+	<property name="kermeta.interpreter.class" location="..\..\build\class"/>
+	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\interpreter_kermeta.jar"/>
+	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\model_kermeta.jar"/>
+	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\io_kermeta.jar"/>
+	
+	<property name="log4j.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\log4j.jar"/>
+	<property name="antlr.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\antlr.jar"/>
+	<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar"/>
+	
+    <property name="emf.common.jar" location="../../../../plugins/org.eclipse.emf.common_2.1.0.jar"/>
+    <property name="emf.ecore.jar" location="../../../../plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
+    <property name="emf.ecore.xmi.jar" location="../../../../plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
+
+	<target name="all"
+		description="run all interpreter tests">
+		<antcall target="run_interpreter_tests"/>
+	</target>
+	
+	<target name="run_interpreter_tests" 
+		description="run interpreter tests">
+		<junit printsummary="yes" haltonfailure="no">
+		  <classpath>
+		    <pathelement location="${kermeta.interpreter.class}"/>
+		    <pathelement location="${kermeta.model.jar}"/>
+		    <pathelement location="${kermeta.io.jar}"/>
+		    <pathelement location="${emf.common.jar}"/>
+		    <pathelement location="${emf.ecore.jar}"/>
+		    <pathelement location="${emf.ecore.xmi.jar}"/>
+		    <pathelement location="${log4j.jar}"/>
+		    <pathelement location="${antlr.jar}"/>
+		    <pathelement location="${ldt-core.jar}"/>
+		    <pathelement path="${java.class.path}"/>
+		  </classpath>
+
+		  <formatter type="plain"/>
+
+		  <test name="kermeta_interpreter.test.JunitTestSuite" haltonfailure="no" outfile="reports/TEST-result">
+		    <formatter type="xml"/>
+		  </test>
+		  
+		</junit>
+		<junitreport todir="./reports">
+		  <fileset dir="./reports">
+		    <include name="TEST-*.xml"/>
+		  </fileset>
+		  <report format="frames" todir="./reports/html"/>
+		</junitreport>
+	</target>
+</project>
