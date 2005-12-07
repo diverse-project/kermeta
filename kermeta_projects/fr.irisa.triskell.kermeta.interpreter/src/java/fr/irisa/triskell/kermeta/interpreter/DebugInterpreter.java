@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.10 2005-12-06 18:56:55 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.11 2005-12-07 15:48:28 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -60,6 +60,8 @@ public class DebugInterpreter extends ExpressionInterpreter {
     /** The reason/state of the debugging
     (among stepEnd, stepInto, stepOver.) */
     public String currentCommand = "";
+    /** oldCommand */
+    public String oldCommand = "";
     /** The stop condition for the stepOver command */ 
     protected CallFrame stepOverCallFrame; 
     protected CallFrame current_frame;
@@ -146,9 +148,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
 	public Object visitFOperation(FOperation node) {
 		Object result = memory.voidINSTANCE;
-		processDebugCommand(node);
 		result = super.visitFOperation(node);
-		processPostCommand(node);
 		return result;
 	}
 
@@ -181,9 +181,10 @@ public class DebugInterpreter extends ExpressionInterpreter {
      * the execution of a FLoop, nor FConditional : they directly contains not executable
      * statement : so, we control only the children of those elements ( FStopCondition, the list
      * of statements inside the FBlock, etc.)
+     * (We don't have to stop in a block decl.)
      */
     public Object visitFBlock(FBlock node)  {
-    	return (RuntimeObject)super.visitFBlock(node); 
+    	return super.visitFBlock(node);
     }
     
 	/**
@@ -235,9 +236,11 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public void processPostCommand(FObject node)
     {
     	current_frame = getInterpreterContext().peekCallFrame();
+    	
     	// If command is a step-into, then we stop systematically after a visit 
     	if (isSteppingInto() ) 
     	{
+    		System.err.println("step into : " + node);
     		setSuspended(true, DEBUG_STEPEND);
     	}
     	// If it is step over and
@@ -257,7 +260,9 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	// then it means the visit of the statement is completed, so, we can stop.
     	else if (isSteppingOver() && current_frame.equals(stepOverCallFrame)
     			 &&
-    			 node.equals(current_frame.peekExpressionContext().getStatement()))
+    			 node.equals(current_frame.peekExpressionContext().getStatement())
+    			 && 
+    			 !(node instanceof FBlock)) 
     	{
     		setSuspended(true, DEBUG_STEPEND);
     	}
@@ -269,7 +274,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
      */
     public Object processDebugCommand(EObject current_node)
     {
-    	if (getDebugCondition()!=null)
+    	if (getDebugCondition()!=null) 
     	{
     		// Tell the debug condition where we are
     		getDebugCondition().setCurrentNode(current_node);
@@ -340,6 +345,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	
 	public void setDebugCondition(AbstractKermetaDebugCondition debug_cond)
 	{
+		currentCommand = debug_cond.getConditionType();
 		debugCondition = debug_cond;
 	}
 	
