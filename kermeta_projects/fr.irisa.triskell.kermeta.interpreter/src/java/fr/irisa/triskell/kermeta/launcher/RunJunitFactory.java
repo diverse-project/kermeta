@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.11 2005-09-20 15:20:01 ffleurey Exp $
+/* $Id: RunJunitFactory.java,v 1.12 2005-12-07 08:33:21 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -18,7 +18,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
-import fr.irisa.triskell.kermeta.error.KermetaError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
@@ -131,6 +130,12 @@ public class RunJunitFactory implements Test {
                 theTestSuite.setName(unit_uri);
                 
                 includeTestSuite(main_class, unit);
+
+                if(theTestSuite.countTestCases() == 0){
+                	// No valid test in the testsuite ! => fails
+                	Exception e = new Exception("Empty test suite ! Please check your unit (it must contain at least one operation whose name starts with 'test')");
+                	return new FailedTestCase(unit_uri, e);
+                }
                 return theTestSuite;
                 
             }
@@ -156,9 +161,9 @@ public class RunJunitFactory implements Test {
      *  
      */
     public class FailedTestCase extends TestCase {
-        public fr.irisa.triskell.kermeta.error.KermetaError cause;
+        public Throwable cause;
 
-        public FailedTestCase(String TestCaseName, fr.irisa.triskell.kermeta.error.KermetaError e) {
+        public FailedTestCase(String TestCaseName, Throwable e) {
             super(TestCaseName);
             cause = e;
         }
@@ -168,7 +173,7 @@ public class RunJunitFactory implements Test {
          * 
          * @see junit.framework.Test#runTest(junit.framework.TestResult)
          */
-        protected void runTest() {
+        protected void runTest() throws Throwable {
             //arg0.addError(this, cause);
             throw cause;
         }
