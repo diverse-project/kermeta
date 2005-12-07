@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.6 2005-12-06 18:53:16 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.7 2005-12-07 15:49:59 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -341,7 +341,7 @@ public class KermetaDebugWrapper {
 				// if result is still null, perhaps the searched object is contained
 				// in a collection (that is : "o" would be a collection)
 				ArrayList contents = (ArrayList)o.getData().get("CollectionArrayList");
-				if (result == null && contents!=null)
+				if (result == null && contents!=null && !contents.isEmpty()) 
 					result = getRuntimeObjectFromOID(contents, oid);
 			}
 		}

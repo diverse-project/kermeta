@@ -1,4 +1,4 @@
-/* $Id: StepOverCondition.java,v 1.2 2005-12-06 18:53:16 zdrey Exp $
+/* $Id: StepOverCondition.java,v 1.3 2005-12-07 15:49:58 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepOverCondition.java
  * License   : EPL
@@ -11,6 +11,7 @@ package fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions;
 
 import java.rmi.RemoteException;
 
+import fr.irisa.triskell.kermeta.ast.FBlock;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;

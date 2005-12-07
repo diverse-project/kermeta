@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.3 2005-12-06 18:53:15 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.4 2005-12-07 15:49:58 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -91,8 +91,9 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 			}
 			else if (command.equals(RunnerConstants.RESUME))
 			{
-				target.getRemoteInterpreter().unblock();
 				processResumeReason(reason);
+				// Unblock AFTER the interpreter state is set properly!
+				target.getRemoteInterpreter().unblock();
 			}
 			else if (command.equals(RunnerConstants.TERMINATE))
 			{
@@ -226,6 +227,7 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 			IKermetaRemoteInterpreter remoteInterpreter = (IKermetaRemoteInterpreter)reg.lookup("remote_interpreter");
 			remoteInterpreter.registerKermetaRemoteDebugUI(this);
 			target.setRemoteInterpreter(remoteInterpreter);
+
 		}
 		catch (NotBoundException e)
 		{

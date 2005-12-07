@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.12 2005-12-06 18:53:15 zdrey Exp $
+/* $Id: RunnerPlugin.java,v 1.13 2005-12-07 15:49:59 zdrey Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -224,7 +224,7 @@ public class RunnerPlugin extends AbstractUIPlugin
 		}
 	}
 	
-	private void log(int fSeverity, String fText, Exception fException)
+	public static void log(int fSeverity, String fText, Exception fException)
 	{
 		
 		

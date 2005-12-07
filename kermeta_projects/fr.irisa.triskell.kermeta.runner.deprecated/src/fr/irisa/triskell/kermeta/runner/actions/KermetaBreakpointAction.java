@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.1 2005-11-28 18:54:36 zdrey Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.2 2005-12-07 15:49:58 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -9,6 +9,8 @@
  */
 package fr.irisa.triskell.kermeta.runner.actions;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,6 +25,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
 import org.eclipse.debug.core.model.IBreakpoint;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -35,9 +39,25 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.IUpdate;
 
+import fr.irisa.triskell.kermeta.ast.CompUnit;
+import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.behavior.FCallFeature;
+import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugModelPresentation;
+import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FObject;
+import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
+import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
+import fr.irisa.triskell.kermeta.typechecker.SimpleType;
+import fr.irisa.triskell.kermeta.typechecker.Type;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
+import fr.irisa.triskell.traceability.helper.Tracer;
 //import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 
 /**
@@ -188,7 +208,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 	protected void addMarker() {		
 		try {
 			IDocument document= getDocument();
-			int rulerLine= getVerticalRulerInfo().getLineOfLastMouseButtonActivity();
+			int rulerLine = getVerticalRulerInfo().getLineOfLastMouseButtonActivity();
 			
 			int lineNumber = rulerLine + 1;
 			if (lineNumber < 0)
@@ -210,6 +230,9 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 			map.put(IMarker.LINE_NUMBER, new Integer(lineNumber));
 			map.put(IBreakpoint.ENABLED, new Boolean(true));
 			map.put(IBreakpoint.ID, KermetaDebugModelPresentation.KERMETA_DEBUG_MODEL_ID);
+			if (functionName != null)
+				map.put(KermetaBreakpoint.FUNCTION_NAME_PROP, functionName);
+
 			/*if (functionName != null)
 			 map.put(KermetaBreakpoint.FUNCTION_NAME_PROP, functionName);*/
 			
@@ -238,8 +261,91 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 	 * @return
 	 */
 	private String getFunctionAboveLine(IDocument document, int lineNumber) {
+		if (!(textEditor instanceof Editor))
+			return null;
+		KMTUnit mcunit = (KMTUnit)((Editor)textEditor).getMcunit();
+		// Copied from EditorTextHover class
+		if (mcunit != null && mcunit.getMctAST() != null) {
+		    CompUnit unit = mcunit.getMctAST();
+		    int [] interval = getCharAtLine(mcunit, lineNumber); 
+		    KermetaASTNode astnode = 
+		    (KermetaASTNode)unit.getNodeAt(interval[0], interval[1]);
+		    //KermetaASTNode astnode = unit.
+		    // TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
+		    if (astnode != null) {
+		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
+		        FObject fobj = ((Editor)textEditor).getFObjectForNode(astnode);
+
+		        // Notify other plugin of this event
+		        Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
+				while(it.hasNext())
+				{
+					KermetaEditorEventListener listener = (KermetaEditorEventListener)it.next();
+					listener.textHoverCalled(fobj);
+				}
+		        //TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
+		        if (fobj instanceof FExpression)
+		        {
+		            FExpression fexp = (FExpression)fobj;
+	            	FObject fdef = null;
+		            // Find the tag of the FCallFeature definition!
+		            if (fexp instanceof FCallFeature)
+		            {
+		            	FCallFeature feature = (FCallFeature)fexp;
+		        	    if (feature.getFStaticOperation() != null)
+		        	        fdef = feature.getFStaticOperation();
+		        	    if (feature.getFStaticProperty() != null)
+		        	        fdef = feature.getFStaticProperty();
+		        	    else 
+		        	        fdef = feature;
+		        	    return (String)new KM2KMTPrettyPrinter().accept(fdef);
+		            }
+		            /*
+		            if (fexp.getFStaticType() != null) {
+		                Type t = new SimpleType(fexp.getFStaticType());
+		                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
+		                // return the source code representation or the signature
+		                // of the element pointed by the cursor
+		                return (String)new KM2KMTPrettyPrinter().accept(fobj);//+ " : " + t;
+		            }*/
+		        }
+		        else if(fobj instanceof FClass){
+					FClass aClass = (FClass)fobj;
+					return KMTHelper.getQualifiedName(aClass.getFClassDefinition());
+		        }
+		        
+		    }
+		}
 		return null;
+
 	}
+
+	/** 
+	 * We suppose that "0" is not a valid character number, 
+	 * @param unit
+	 * @param line
+	 * @return an array of 2 int : begin char and end char
+	 */
+	private int[] getCharAtLine(KMTUnit unit, int line)
+	{
+		// Get start char at the given line
+		int c; int bchar = 0; int echar = 0; int iline = 1;
+        try
+        {
+            InputStream in = new URIConverterImpl( ).createInputStream(URI.createURI(unit.getUri()));
+            while ((c = in.read()) != -1 && iline<=line) {
+                bchar += 1;
+                if (c=='\n') iline += 1;
+            }
+            // now get the end char of the found line:
+            if (iline == line && c != -1)
+            	while ((c = in.read()) != '\n') echar += 1;
+            in.close();
+        } catch (IOException e) { e.printStackTrace(); }
+		return new int[] { bchar, echar };
+	}
+
+	
 	
 	protected void removeMarkers(List markers) {
 		IBreakpointManager breakpointManager= DebugPlugin.getDefault().getBreakpointManager();

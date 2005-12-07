@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.6 2005-12-01 18:29:06 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.7 2005-12-07 15:49:58 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -303,7 +303,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      * @note client does not have to call it.
      * @see org.eclipse.debug.core.model.IDebugTarget#hasThreads()
      */
-    public boolean hasThreads() throws DebugException { return true; }
+    public boolean hasThreads() throws DebugException { return false; }
 	public boolean canResume() { return false; }
 	public boolean canSuspend() { return false; }
 	public boolean isSuspended() { return false; }

@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.4 2005-12-06 18:53:16 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.5 2005-12-07 15:49:58 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -49,6 +49,9 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	/** The debug condition controls the freeze/block of the thread until
 	 *  a new event occurs */
 	public Hashtable conditions;
+	/** Store the old_command since it is a stop condition for the step into command
+	 *  if the preceding one was a step over. */
+	protected String oldConditionType;
 	
 	public KermetaRemoteInterpreter(String p_startfile, String p_classname, String p_opname, String p_args) throws RemoteException {
 		super(); 
@@ -57,7 +60,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		opname    = p_opname;
 		args      = p_args;
 		blocked = false;
-		
+		oldConditionType = "";
 
 		createKermetaInterpreter();
 		
@@ -110,22 +113,22 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	/** Shortcut method to change the remoteInterpreter stop condition */
 	public void setDebugCondition(String cond_name)
 	{
-		String old_command = RunnerConstants.RESUME;
+		oldConditionType = RunnerConstants.RESUME;
 		// it is null when we run the debugger for the first time
 		if (interpreter.getDebugCondition() != null )
-			old_command = interpreter.getDebugCondition().getConditionType();
+			oldConditionType = interpreter.getDebugCondition().getConditionType();
 		// if old_command was resume, stepOverCallFrame must be the first one!
 		// modify the remoteInterpreter currentCommand --> pre-state : step_into e.g
 		// note : after remoteInterpreter ahas done, it defines a post-state : step_end
-		interpreter.setCurrentCommand(cond_name);
-		if (cond_name.equals(RunnerConstants.STEP_OVER) && !old_command.equals(RunnerConstants.STEP_INTO))
+		if (cond_name.equals(RunnerConstants.STEP_OVER) && !oldConditionType.equals(RunnerConstants.STEP_INTO))
 		{
-			interpreter.setStepOverCallFrame(old_command.equals(RunnerConstants.RESUME));
+			interpreter.setStepOverCallFrame(oldConditionType.equals(RunnerConstants.RESUME));
 		}
 		else if (!cond_name.equals(RunnerConstants.STEP_OVER))
 		{
 			interpreter.unsetStepOverCallFrame(); 
 		}
+		System.out.println("condition : " + cond_name + "cond? " + conditions.get(cond_name));
 		interpreter.setDebugCondition((AbstractKermetaDebugCondition)conditions.get(cond_name));
 	}
 
@@ -148,6 +151,8 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	public IKermetaRemoteDebugUI getRemoteDebugUI() {
 		return remoteDebugUI;
 	}
+		
+		
 		
 	public synchronized SerializableCallFrame[] getSerializableCallFrames()
 	{	return KermetaDebugWrapper.createSerializableCallFrames(interpreter); }
@@ -181,10 +186,13 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	 * 
 	 */
 	
+	
 	public void changeSuspendedState(boolean isSuspended) throws RemoteException {
 		interpreter.getDebugCondition().setSuspended(true);
 	}
 
+	
+	
 	public String getDebugCondition() throws RemoteException {
 		return interpreter.getDebugCondition().getConditionType();
 	}
@@ -196,5 +204,12 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	public SerializableVariable[] getSerializableVariablesFromValue(SerializableValue s_value) {
 		return KermetaDebugWrapper.createSerializableVariablesOfSerializableValue(interpreter, s_value);
 	}*/
+
+	/**
+	 * @return Returns the oldConditionType.
+	 */
+	public String getOldConditionType() {
+		return oldConditionType;
+	}
 
 }

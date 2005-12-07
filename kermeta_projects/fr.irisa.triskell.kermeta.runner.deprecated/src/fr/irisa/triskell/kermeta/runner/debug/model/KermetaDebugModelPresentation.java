@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugModelPresentation.java,v 1.5 2005-12-06 18:53:15 zdrey Exp $
+/* $Id: KermetaDebugModelPresentation.java,v 1.6 2005-12-07 15:49:58 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugModelPresentation.java
  * License   : EPL
@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
@@ -37,7 +38,9 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
 
 	static public String KERMETA_DEBUG_MODEL_ID = "fr.irisa.triskell.kermeta.runner.debug";
 	
-	protected ListenerList listeners= new ListenerList();		
+	protected ListenerList listeners= new ListenerList();
+	
+	protected boolean displayVariableTypeNames = false;	// variables display attribute
 	
 	public KermetaDebugModelPresentation()
 	{
@@ -47,11 +50,14 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      * @see org.eclipse.debug.ui.IDebugModelPresentation#setAttribute(java.lang.String, java.lang.Object)
      */
     public void setAttribute(String attribute, Object value) {
-        // TODO Auto-generated method stub
-    	System.err.println("I set an attribute in KermetaDebugModelPresentation.");
+    	if (attribute.equals(IDebugModelPresentation.DISPLAY_VARIABLE_TYPE_NAMES))
+    		displayVariableTypeNames = ((Boolean)value).booleanValue();
+    	else
+    		System.err.println("setattribute?");
+
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.jface.viewers.ILabelProvider#getImage(java.lang.Object)
      */
     public Image getImage(Object element) {
@@ -59,7 +65,7 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
     	if (element instanceof KermetaVariable)
     	{
     		KermetaVariable v = (KermetaVariable)element;
-    		// TODO : this is such a test, the icons are not the best ones...
+    		// TODO : this is just a test, the icons are not the best ones...
     		try {
 				String vtype = ((KermetaValue)v.getValue()).valueType; 
     			return RunnerPlugin.getRunnerIcons().get(vtype);
@@ -85,9 +91,30 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
 		} 
     	
     	else if (element instanceof KermetaBreakpoint) {
-			IMarker marker = ((KermetaBreakpoint)element).getMarker();
-			// Do something
-		
+    		IMarker marker = ((KermetaBreakpoint)element).getMarker();
+    		try {
+    			Map attrs = marker.getAttributes();
+    			//				Set set = attrs.keySet();
+    			//				for (Iterator i = set.iterator(); i.hasNext();)
+    			//					System.out.println(i.next().toString());
+    			IResource resource = marker.getResource();
+    			String file = resource.getFullPath().lastSegment();
+    			Object lineNumber = attrs.get(IMarker.LINE_NUMBER);
+    			String functionName = (String)attrs.get(KermetaBreakpoint.FUNCTION_NAME_PROP);
+    			if (file == null)
+    				file = "unknown";
+    			if (lineNumber == null)
+    				lineNumber = "unknown";
+    			String location = file + ":" + lineNumber.toString();
+    			if (functionName == null)
+    				return location;
+    			else
+    				return functionName + " [" + location + "]";
+    		} catch (CoreException e) {
+    			RunnerPlugin.log(IStatus.ERROR, "error retreiving marker attributes", e);
+    			return "error";
+    		}
+
 		} 
     	
     	else if (element instanceof IWatchExpression) {
@@ -95,7 +122,7 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
 				IWatchExpression watch_expression = (IWatchExpression)element;
 				IValue value = watch_expression.getValue();
 				if (value != null) {
-					return "\"" + watch_expression.getExpressionText() + "\"= " + 
+					return "\"" + watch_expression.getExpressionText() + "\":= " + 
 						value.getValueString();
 				}else{
 					return null;
@@ -112,7 +139,14 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      * @see org.eclipse.debug.ui.IDebugModelPresentation#computeDetail(org.eclipse.debug.core.model.IValue, org.eclipse.debug.ui.IValueDetailListener)
      */
     public void computeDetail(IValue value, IValueDetailListener listener) {
-    	System.out.println("KermetaDebugModelPresentation : Call of computeDetail method");
+		if (value instanceof KermetaVariable) {
+			try {
+				((KermetaValue)value).getVariables();
+				listener.detailComputed(value, ((KermetaValue)value).getValueString());
+			} catch (DebugException e) {
+				RunnerPlugin.errorDialog("RunnerPlugin : Unexpected error fetching variable "+ e);
+			}
+		}
     }
 
     /* (non-Javadoc)
@@ -136,12 +170,11 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
     public void addListener(ILabelProviderListener listener) {
-        // TODO Auto-generated method stub
     	System.err.println("I added a listener in KermetaDebugModelPresentation.");
     	listeners.add(listener);
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
      */
     public void dispose() {
@@ -153,17 +186,16 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#isLabelProperty(java.lang.Object, java.lang.String)
      */
     public boolean isLabelProperty(Object element, String property) {
-        // TODO Auto-generated method stub
         return false;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#removeListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
     public void removeListener(ILabelProviderListener listener) {
-        // TODO Auto-generated method stub
-    	System.err.println("I removed a KermetaDebugModelPresentation.");
     	listeners.remove(listener);
     }
+    
+    
 
 }

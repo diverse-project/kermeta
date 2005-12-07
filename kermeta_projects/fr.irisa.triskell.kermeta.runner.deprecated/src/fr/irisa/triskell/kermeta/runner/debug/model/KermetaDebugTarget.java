@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.9 2005-12-06 18:53:15 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.10 2005-12-07 15:49:58 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -217,6 +217,9 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	}
     	return threads;
     }
+    
+    public boolean hasThreads() throws DebugException { 
+    	return (threads!=null && threads.length>0); }
     
     /** 
      * Helper method that gets the first IThread : 

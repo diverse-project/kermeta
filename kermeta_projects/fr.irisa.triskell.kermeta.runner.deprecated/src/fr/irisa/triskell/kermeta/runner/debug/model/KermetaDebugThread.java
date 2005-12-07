@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.9 2005-12-06 18:53:15 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.10 2005-12-07 15:49:58 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -223,7 +223,6 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 		fireResumeEvent(DebugEvent.STEP_INTO);
 		isStepping = true;
 		try {
-			System.err.println("step intoooo!!!");
 			// This call unblocks the interpreter.
 			// notify is used as well by the GUI (to tell a GUI command --here, stepInto-- is run)
 			// as by the RemoteInterpreter (to tell a debugInterp. command is done)

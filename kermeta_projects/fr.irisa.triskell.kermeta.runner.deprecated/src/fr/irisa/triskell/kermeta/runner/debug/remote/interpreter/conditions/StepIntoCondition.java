@@ -1,4 +1,4 @@
-/* $Id: StepIntoCondition.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
+/* $Id: StepIntoCondition.java,v 1.3 2005-12-07 15:49:58 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepIntoCondition.java
  * License   : EPL
@@ -11,10 +11,12 @@ package fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions;
 
 import java.rmi.RemoteException;
 
+import fr.irisa.triskell.kermeta.ast.FBlock;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
+import fr.irisa.triskell.kermeta.structure.FOperation;
 
 public class StepIntoCondition extends AbstractKermetaDebugCondition {
 
@@ -73,6 +75,8 @@ public class StepIntoCondition extends AbstractKermetaDebugCondition {
 	public boolean evaluate() {
 		// Command ... not the right word : stepInto, stepEnd......
 		String cmd = remoteInterpreter.getInterpreter().getCurrentCommand();
+		if (remoteInterpreter.getOldConditionType().equals(RunnerConstants.STEP_OVER))
+			return true; 
 		// tell the UI that the step command is done.
 		return (cmd.equals(RunnerConstants.TERMINATE) || cmd.equals(RunnerConstants.STEP_END));
 	}
