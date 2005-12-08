@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.16 2005-12-06 18:56:55 zdrey Exp $
+/* $Id: CallFrame.java,v 1.17 2005-12-08 17:39:03 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -104,11 +104,12 @@ public abstract class CallFrame {
      *
      */
 
-    /**
-     * @return the context of interpreter
-     */
     public InterpreterContext getContext() {
         return context;
+    }
+    
+    public Stack getExpressionContext() {
+    	return block_stack;
     }
     
     public abstract RuntimeObject getOperationResult();

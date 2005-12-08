@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.11 2005-12-07 15:48:28 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.12 2005-12-08 17:39:03 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -251,14 +251,10 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	{
     		stepOverCallFrame = getInterpreterContext().peekCallFrame();
     	}
-    	// If it is a step-over and we are not yet back in the stepOverCallFrame,
-    	// then we can continue
-    	else if (isSteppingOver() && !stepOverCallFrame.equals(current_frame))
-    		setSuspended(false, DEBUG_STEPOVER);
     	// If it is a step-over, and we are in the stepOverCallFrame, and the last
     	// statement that had to be evaluated correspond to the node that we just visited,
     	// then it means the visit of the statement is completed, so, we can stop.
-    	else if (isSteppingOver() && current_frame.equals(stepOverCallFrame)
+    	if (isSteppingOver() && current_frame.equals(stepOverCallFrame)
     			 &&
     			 node.equals(current_frame.peekExpressionContext().getStatement())
     			 && 
@@ -266,6 +262,12 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	{
     		setSuspended(true, DEBUG_STEPEND);
     	}
+    	if (isSuspended() == false) 
+    	{ System.err.println("not suspended ");}
+    	System.err.println("r1 : " + isSteppingOver() + "("+ currentCommand+ ")"); 
+    	System.err.println("r2 : " + stepOverCallFrame + "> cur : " + current_frame);
+    	System.err.println("r3 : " + node + " ==? " + current_frame.peekExpressionContext().getStatement());
+    	
     }
 
     /**
@@ -275,8 +277,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public Object processDebugCommand(EObject current_node)
     {
     	if (getDebugCondition()!=null) 
-    	{
-    		// Tell the debug condition where we are
+    	{	// Tell the debug condition where we are
     		getDebugCondition().setCurrentNode(current_node);
     		getDebugCondition().blockInterpreter();
     	}
@@ -332,7 +333,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
 				stepOverCallFrame = getInterpreterContext().peekCallFrame();
 			else
 			{
-				System.err.println("step after resume!");
 				stepOverCallFrame = (CallFrame)getInterpreterContext().getFrameStack().firstElement();
 			}
 	}

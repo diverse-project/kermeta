@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.29 2005-12-06 18:56:55 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.30 2005-12-08 17:39:03 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -551,13 +551,13 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        if (resc_block == null) throw ex;
 	        
 	        // Execute the rescue block
-	        interpreterContext.peekCallFrame().pushExpressionContext();
-	        
+	        interpreterContext.peekCallFrame().pushExpressionContext();	        
 	        try {
 	        
 	        if (resc_block.getFExceptionType() != null)
 	            interpreterContext.peekCallFrame().peekExpressionContext().defineVariable(resc_block.getFExceptionName(), ex.raised_object);
-	        	ArrayList res = visitList(resc_block.getFBody());
+ 
+	        	ArrayList res = visitStatementList(resc_block.getFBody());
 	        	if (res.size() > 0) 
 			        result = (RuntimeObject)res.get(res.size()-1);
 	        }
