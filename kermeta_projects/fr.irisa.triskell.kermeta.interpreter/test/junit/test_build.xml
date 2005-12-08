@@ -1,9 +1,15 @@
-<!-- $Id: test_build.xml,v 1.1 2005-12-07 16:40:36 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.2 2005-12-08 16:49:47 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
         Run interpreter tests
     </description>
+	
+
+	<property name="build.bin" location="../../build/class"/>
+	<property name="src" location="../../src/java"/>
+	<property name="test.src" location="../../test/junit"/>
+	
 	
 	<property name="kermeta.interpreter.class" location="..\..\build\class"/>
 	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\interpreter_kermeta.jar"/>
@@ -18,25 +24,41 @@
     <property name="emf.ecore.jar" location="../../../../plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
     <property name="emf.ecore.xmi.jar" location="../../../../plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
 
+	
+	<path id="interpreter.class.path">
+	    <pathelement location="${kermeta.model.jar}"/>
+	    <pathelement location="${kermeta.io.jar}"/>
+	    <pathelement location="${emf.common.jar}"/>
+	    <pathelement location="${emf.ecore.jar}"/>
+	    <pathelement location="${emf.ecore.xmi.jar}"/>
+	    <pathelement location="${log4j.jar}"/>
+	    <pathelement location="${antlr.jar}"/>
+	    <pathelement location="${ldt-core.jar}"/>
+	    <pathelement path="${java.class.path}"/>
+	</path>
+	
 	<target name="all"
 		description="run all interpreter tests">
 		<antcall target="run_interpreter_tests"/>
 	</target>
 	
+	<target name="compile_java">
+		<javac srcdir="${src}:${test.src}" 
+    	    destdir="${build.bin}"
+   			debug="true">
+   			<classpath >
+   				<!--<pathelement path="${MTLcompiler.path}/bin"/>-->
+   				<path refid="current.class.path"/> 
+   			</classpath>
+   		</javac>
+	</target>
+	
 	<target name="run_interpreter_tests" 
-		description="run interpreter tests">
+		description="run interpreter tests" depends="compile_java">
 		<junit printsummary="yes" haltonfailure="no">
 		  <classpath>
-		    <pathelement location="${kermeta.interpreter.class}"/>
-		    <pathelement location="${kermeta.model.jar}"/>
-		    <pathelement location="${kermeta.io.jar}"/>
-		    <pathelement location="${emf.common.jar}"/>
-		    <pathelement location="${emf.ecore.jar}"/>
-		    <pathelement location="${emf.ecore.xmi.jar}"/>
-		    <pathelement location="${log4j.jar}"/>
-		    <pathelement location="${antlr.jar}"/>
-		    <pathelement location="${ldt-core.jar}"/>
-		    <pathelement path="${java.class.path}"/>
+		    	<pathelement location="${kermeta.interpreter.class}"/>
+				<path refid="interpreter.class.path"/> 
 		  </classpath>
 
 		  <formatter type="plain"/>
