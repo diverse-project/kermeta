@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.3 2005-12-08 08:55:50 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -20,14 +20,20 @@ import fr.irisa.triskell.kermeta.structure.FObject;
 
 public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDebugCondition {
 	
-	KermetaRemoteInterpreter remoteInterpreter;
+	protected KermetaRemoteInterpreter remoteInterpreter;
+	/**
+	 * We need to know if the stop reason is a breakpoint, to send the appr. event
+	 * The developer has the responsibility to set this variable when the breakpoint
+	 * evaluate method is called.
+	 */
+	protected boolean wasBreakpoint;
 	
 	public boolean evaluate()
 	{
 		boolean eval_stop = false;
 		// FIXME : getInterpreter should never be null here, the only moment when it could occur
 		// is a synchronization problem!
-		if (remoteInterpreter.getInterpreter() == null)
+		if (remoteInterpreter == null || remoteInterpreter.getInterpreter() == null)
 			eval_stop = false;
 		else if (remoteInterpreter.getInterpreter().getCurrentCommand().equals(RunnerConstants.TERMINATE))
 		{
@@ -41,10 +47,10 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 				Integer[] lines = remoteInterpreter.getRemoteDebugUI().getBreakpointLines();
 				Integer l = getLineForCurrentNode();
 				// no stop condition!
-				if (l.intValue() == -1) return false;
-				for (int i=0; i<lines.length && eval_stop==false; i++)
-					// if (l.equals(lines[i]))
-					if (l.compareTo(lines[i])<0)	eval_stop = true;
+				if (l.intValue() == -1) eval_stop = false;
+				else
+					for (int i=0; i<lines.length && eval_stop==false; i++)
+						if (l.compareTo(lines[i])==0) { eval_stop = true; }
 			}
 			catch (RemoteException e) { e.printStackTrace();}
 		}

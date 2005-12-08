@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.7 2005-12-07 15:49:59 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.8 2005-12-08 08:55:51 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -205,18 +205,18 @@ public class KermetaDebugWrapper {
 		String qname = 
 		KMTHelper.getQualifiedName((FNamedElement)((FClass)ro.getMetaclass().getData().get("kcoreObject")).getFClassDefinition());
 		if (qname.equals("kermeta::standard::String")) {
-			result[0] = data.get("StringValue").toString();
+			result[0] = "\"" + data.get("StringValue").toString() + "\"";
 		} else if (qname.equals("kermeta::standard::Integer")) {
 			result[0] = data.get("NumericValue").toString();
 		} else if (qname.equals("kermeta::standard::Character")) {
-			result[0] = data.get("CharacterValue").toString();
+			result[0] = "'" + data.get("CharacterValue").toString() + "'";
 		} else if (qname.equals("kermeta::standard::Boolean")) {
 			result[0] = data.get("BooleanValue").toString();
 		}
 		// FIXME Is there a proper way to get the Kermeta type??
 		else if (qname.equals("Collection") || qname.endsWith("Sequence"))
 		{
-			result[0] = qname.substring(qname.lastIndexOf(":")+1, qname.length());
+			result[0] = "<"+qname.substring(qname.lastIndexOf(":")+1, qname.length())+">";
 			result[1] = RunnerConstants.IVALUE_SET;
 		}
 
@@ -225,7 +225,7 @@ public class KermetaDebugWrapper {
 		
 		else
 		{
-			result[0] = qname.substring(qname.lastIndexOf(":")+1, qname.length());
+			result[0] = "<"+qname.substring(qname.lastIndexOf(":")+1, qname.length())+">";
 			result[1] = RunnerConstants.IVALUE_NA ;//"[ " + Long.toString(var.getRuntimeObject().getOId()) + " ]";
 		}
 		

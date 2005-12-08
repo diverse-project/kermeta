@@ -1,4 +1,4 @@
-/* $Id: ResumeCondition.java,v 1.3 2005-12-06 18:53:16 zdrey Exp $
+/* $Id: ResumeCondition.java,v 1.4 2005-12-08 08:55:50 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : ResumeCondition.java
  * License   : EPL
@@ -21,9 +21,11 @@ import fr.irisa.triskell.kermeta.structure.FObject;
 
 public class ResumeCondition extends AbstractBreakpointStopCondition {
 	
+
 	public ResumeCondition(KermetaRemoteInterpreter p_interpreter)
 	{
 		remoteInterpreter = p_interpreter;
+		wasBreakpoint = false;
 	}
 	
 	/**
@@ -35,6 +37,8 @@ public class ResumeCondition extends AbstractBreakpointStopCondition {
 		{
 			try
 			{
+				if (wasBreakpoint)
+					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, RunnerConstants.BREAKPOINT);
 				// blocked because the execution of the program is finished
 				if (remoteInterpreter.getInterpreter().getCurrentCommand().equals(RunnerConstants.TERMINATE))
 					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.TERMINATE, "");
@@ -52,8 +56,10 @@ public class ResumeCondition extends AbstractBreakpointStopCondition {
 	 * else, it is false.
 	 */
 	public boolean evaluate() {
-		return (isSuspended);
-	//	return ( super.evaluate() || isSuspended );
+	//	return (isSuspended);
+		// If the stop condition is the presence of a breakpoint
+		wasBreakpoint = super.evaluate();
+		return ( wasBreakpoint || isSuspended );
 	}
 
 	/**

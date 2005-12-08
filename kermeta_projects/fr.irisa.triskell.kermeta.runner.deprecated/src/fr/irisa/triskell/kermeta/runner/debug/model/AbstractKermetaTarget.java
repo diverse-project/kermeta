@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.7 2005-12-07 15:49:58 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.8 2005-12-08 08:55:51 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -17,6 +17,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugException;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.IBreakpointManager;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchListener;
 import org.eclipse.debug.core.model.IBreakpoint;
@@ -24,6 +26,7 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.debug.internal.core.BreakpointManager;
 
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
@@ -207,8 +210,6 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
     		if (breakpoint instanceof KermetaBreakpoint && ((KermetaBreakpoint)breakpoint).isEnabled()) {
     			KermetaBreakpoint b = (KermetaBreakpoint)breakpoint;
     			breakpoints.add(b);
-    			//SetBreakpointCommand cmd = new SetBreakpointCommand(debugger, b.getFile(), b.getLine());
-    			//debugger.postCommand(cmd);
     		}
     	} catch (CoreException e) {
     		e.printStackTrace();
@@ -225,8 +226,6 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 		if (breakpoint instanceof KermetaBreakpoint) {
 			KermetaBreakpoint b = (KermetaBreakpoint)breakpoint;
 			breakpoints.remove(b);
-			// RemoveBreakpointCommand cmd = new RemoveBreakpointCommand(debugger, b.getFile(), b.getLine());
-			// debugger.postCommand(cmd);
 		}
     }
 
@@ -397,6 +396,8 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 	 */
 	public void launchRemoved(ILaunch launch) {
 		System.err.println("A new Launch is removed");
+		IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
+		breakpointManager.removeBreakpointListener(this);
 	}
 
 	public Object getAdapter(Class adapter)

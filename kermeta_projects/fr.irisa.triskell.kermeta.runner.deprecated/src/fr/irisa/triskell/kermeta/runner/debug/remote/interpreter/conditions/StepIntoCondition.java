@@ -1,4 +1,4 @@
-/* $Id: StepIntoCondition.java,v 1.3 2005-12-07 15:49:58 zdrey Exp $
+/* $Id: StepIntoCondition.java,v 1.4 2005-12-08 08:55:50 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepIntoCondition.java
  * License   : EPL
@@ -76,7 +76,7 @@ public class StepIntoCondition extends AbstractKermetaDebugCondition {
 		// Command ... not the right word : stepInto, stepEnd......
 		String cmd = remoteInterpreter.getInterpreter().getCurrentCommand();
 		if (remoteInterpreter.getOldConditionType().equals(RunnerConstants.STEP_OVER))
-			return true; 
+			return true;
 		// tell the UI that the step command is done.
 		return (cmd.equals(RunnerConstants.TERMINATE) || cmd.equals(RunnerConstants.STEP_END));
 	}

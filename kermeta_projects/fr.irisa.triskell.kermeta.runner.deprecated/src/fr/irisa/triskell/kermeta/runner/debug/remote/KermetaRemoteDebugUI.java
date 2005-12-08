@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.4 2005-12-07 15:49:58 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.5 2005-12-08 08:55:51 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -205,6 +205,7 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 		Integer[] lines = new Integer[0];
 		
 		ArrayList bps = target.getBreakpoints();
+		//System.out.println("Breakpoint (KermetaRDBUI) : " + bps.size() );
 		Iterator it   = bps.iterator();
 		lines = new Integer[bps.size()];
 		int i = 0;

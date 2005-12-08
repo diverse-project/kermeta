@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.10 2005-12-07 15:49:58 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.11 2005-12-08 08:55:51 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -89,6 +89,10 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
         this.name = "Kermeta Debug Target";
         // Do not set to stateDisconnected
         setState(stateRunning);
+        
+
+		initialize();
+        
         getLaunch().addDebugTarget(this);
         DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
         DebugPlugin.getDefault().getLaunchManager().addLaunchListener(this);
@@ -106,7 +110,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     {
     	// Create the KermetaDebugPlatform that will be driven by the KermetaDebugTarget
     	try {
-    		initialize();
     		// Create the remote platform
     		createRemotePlatform();
     		
@@ -259,6 +262,15 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	{
 		IBreakpointManager manager= DebugPlugin.getDefault().getBreakpointManager();
 		manager.addBreakpointListener(this);
+		IBreakpoint[] bps = manager.getBreakpoints(getModelIdentifier());
+		for (int i = 0; i < bps.length; i++) {
+			if (bps[i] instanceof IBreakpoint) {
+				breakpointAdded(bps[i]);
+			}
+		}
+/*
+		IBreakpointManager manager= DebugPlugin.getDefault().getBreakpointManager();
+		manager.addBreakpointListener(this);
 		IBreakpoint[] bps = manager.getBreakpoints(KermetaBreakpoint.KERMETA_BREAKPOINT_ID);
 		for (int i = 0; i < bps.length; i++) {
 			if (bps[i] instanceof IBreakpoint) { // FIXME : KermetaBreakPoint instead of IBreakPoint
@@ -294,7 +306,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
                 RunnerPlugin.errorDialog("Error setting breakpoints ("+ t + ")");
             }
         }
-		
+		*/
 	}
 
 	/**
