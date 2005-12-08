@@ -1,4 +1,4 @@
-/* $Id: StepOverCondition.java,v 1.4 2005-12-08 08:55:50 zdrey Exp $
+/* $Id: StepOverCondition.java,v 1.5 2005-12-08 17:38:13 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepOverCondition.java
  * License   : EPL
@@ -61,12 +61,9 @@ public class StepOverCondition extends AbstractBreakpointStopCondition {
 	 * @see fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition#evaluate()
 	 */
 	public boolean evaluate() {
-//		 Command ... not the right word : stepInto, stepEnd, terminate......
+		// Command ... not the right word : stepInto, stepEnd, terminate......
 		String cmd = remoteInterpreter.getInterpreter().getCurrentCommand();
-		/**if (remoteInterpreter.getOldConditionType().equals(RunnerConstants.STEP_INTO))
-			return true;*/ 
-		wasBreakpoint = super.evaluate();
-		return (wasBreakpoint || cmd.equals(RunnerConstants.STEP_END));
+		return (cmd.equals(RunnerConstants.STEP_END));
 	}
 	
 	/**

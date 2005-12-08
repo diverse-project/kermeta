@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.2 2005-12-07 15:49:58 zdrey Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.3 2005-12-08 17:38:13 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -270,6 +270,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 		    int [] interval = getCharAtLine(mcunit, lineNumber); 
 		    KermetaASTNode astnode = 
 		    (KermetaASTNode)unit.getNodeAt(interval[0], interval[1]);
+		    System.out.println("function above line : " + astnode);
 		    //KermetaASTNode astnode = unit.
 		    // TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
 		    if (astnode != null) {
@@ -286,12 +287,11 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 		        //TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
 		        if (fobj instanceof FExpression)
 		        {
-		            FExpression fexp = (FExpression)fobj;
-	            	FObject fdef = null;
+		            FObject fdef = null;
 		            // Find the tag of the FCallFeature definition!
-		            if (fexp instanceof FCallFeature)
+		            if (fobj instanceof FCallFeature)
 		            {
-		            	FCallFeature feature = (FCallFeature)fexp;
+		            	FCallFeature feature = (FCallFeature)fobj;
 		        	    if (feature.getFStaticOperation() != null)
 		        	        fdef = feature.getFStaticOperation();
 		        	    if (feature.getFStaticProperty() != null)

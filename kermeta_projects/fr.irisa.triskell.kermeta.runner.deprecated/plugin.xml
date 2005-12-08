@@ -291,7 +291,7 @@
            name="kermetaBreakpointMarker"
            point="org.eclipse.core.resources.markers">
         <super type="org.eclipse.debug.core.lineBreakpointMarker"/>
-        <persistent value="false"/>
+        <persistent value="true"/>
      </extension>
      <extension
            id="fr.irisa.triskell.kermeta.runner.EditorActions"
@@ -358,6 +358,13 @@
    <variable
          initializerClass="fr.irisa.triskell.kermeta.runner.debug.model.KermetaVariable"
          name="fr.irisa.triskell.kermeta.runner.variable2"/>
+</extension>
+<extension
+      point="org.eclipse.ui.ide.markerImageProviders">
+   <imageprovider
+         icon="icons/breakpoint.png"
+         id="kermetaBreakpointImage"
+         markertype="fr.irisa.triskell.kermeta.runner.kermetaBreakpointMarker"/>
 </extension>
    
    

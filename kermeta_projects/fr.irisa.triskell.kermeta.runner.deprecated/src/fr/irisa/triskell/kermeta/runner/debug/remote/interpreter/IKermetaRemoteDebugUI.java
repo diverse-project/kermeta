@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteDebugUI.java,v 1.2 2005-12-01 18:29:07 zdrey Exp $
+/* $Id: IKermetaRemoteDebugUI.java,v 1.3 2005-12-08 17:38:13 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteDebugUI.java
  * License   : EPL
@@ -53,7 +53,7 @@ public interface IKermetaRemoteDebugUI extends Remote {
 	 * Get the locations of the breakpoints on the main file that is being
 	 * debugged 
 	 */
-	public abstract Integer[] getBreakpointLines() throws RemoteException;
+	public abstract SerializableBreakpoint[] getSerializableBreakpoints() throws RemoteException;
 
 	// should not be in the interface
 	public abstract void unregisterRemoteInterpreter() throws RemoteException;

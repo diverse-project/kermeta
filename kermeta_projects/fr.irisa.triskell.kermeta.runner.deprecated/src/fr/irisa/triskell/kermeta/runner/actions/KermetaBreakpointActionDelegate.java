@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointActionDelegate.java,v 1.1 2005-11-28 18:54:36 zdrey Exp $
+/* $Id: KermetaBreakpointActionDelegate.java,v 1.2 2005-12-08 17:38:13 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointActionDelegate.java
  * License   : EPL
@@ -30,7 +30,6 @@ import org.eclipse.ui.texteditor.ITextEditor;
 public class KermetaBreakpointActionDelegate extends AbstractRulerActionDelegate
 {
 	protected IAction createAction(ITextEditor editor, IVerticalRulerInfo rulerInfo) {
-		System.out.println("BREAK ACTION!");
 		// return new MarkerRulerAction(RunnerPlugin.getDefault().getResourceBundle(), "fr.irisa.triskell.kermeta.runner.breakpointAction", editor, rulerInfo, KermetaBreakpoint.BREAKPOINT_MARKER, true);
 		return new KermetaBreakpointAction(editor, rulerInfo);
 	}

@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpoint.java,v 1.5 2005-12-08 08:55:51 zdrey Exp $
+/* $Id: KermetaBreakpoint.java,v 1.6 2005-12-08 17:38:13 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaBreakpoint.java
  * License   : EPL
@@ -12,6 +12,7 @@ package fr.irisa.triskell.kermeta.runner.debug.model;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.model.Breakpoint;
 
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
@@ -53,18 +54,12 @@ public class KermetaBreakpoint extends Breakpoint {
 			return new Integer(-1);
 		}
 	}
-
-	/** (non-Javadoc)
-	 * @see org.eclipse.debug.core.model.Breakpoint#setPersisted(boolean)
-	 */
-	public void setPersisted(boolean persisted) throws CoreException {
-		super.setPersisted(false);
-	}
 	
 	public String getFile()
 	{
 		IResource r = getMarker().getResource();
-		return r.getLocation().toOSString();
+		return "platform:/resource/" + r.getFullPath().toPortableString();
+		// return r.getLocation().toOSString();
 	}
 
 }

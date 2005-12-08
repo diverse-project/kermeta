@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.8 2005-12-08 08:55:51 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.9 2005-12-08 17:38:13 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -335,7 +335,7 @@ public class KermetaDebugWrapper {
 			RuntimeObject o = (RuntimeObject)ro_it.next();
 			if (oid == o.getOId()) 
 				result = o;
-			else if (o.getProperties()!=null)
+			else if (o.getProperties()!=null && !o.getProperties().isEmpty())
 			{
 				result = getRuntimeObjectFromOID(o.getProperties().values(), oid);
 				// if result is still null, perhaps the searched object is contained

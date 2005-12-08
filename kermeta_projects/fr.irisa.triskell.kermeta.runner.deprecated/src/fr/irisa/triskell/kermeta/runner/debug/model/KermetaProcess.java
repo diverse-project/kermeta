@@ -5,11 +5,14 @@ package fr.irisa.triskell.kermeta.runner.debug.model;
 
 import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.ConnectException;
 import java.rmi.NotBoundException;
+import java.rmi.RMISecurityManager;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.ExportException;
 import java.rmi.server.RemoteObject;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -60,7 +63,13 @@ public class KermetaProcess extends Thread {
 		try
 		{
 			System.err.println("1) remote interpreter!");
-			reg = LocateRegistry.createRegistry(5002);
+			try { 
+				reg = LocateRegistry.createRegistry(5002);
+			}
+			catch (ExportException e)
+			{
+				reg = LocateRegistry.getRegistry(5002);
+			}
 			remote_interpreter = new KermetaRemoteInterpreter(file, classname, opname, args);
 			reg.rebind(REMOTE_NAME, remote_interpreter);
 		}
@@ -89,13 +98,15 @@ public class KermetaProcess extends Thread {
 
 	/** Terminates properly the execution of the remote interpreter */
 	public synchronized void terminate() {
+		
+		//this.stop();
 		try {
 			// FIXME : we should not have to do it through debugPlatform. beeeek
 			debugPlatform.unregisterRemoteInterpreter();
 			UnicastRemoteObject.unexportObject(reg.lookup(REMOTE_NAME), true);
-			UnicastRemoteObject.unexportObject(debugPlatform, true);
+			//UnicastRemoteObject.unexportObject(debugPlatform, true);
 			reg.unbind(REMOTE_NAME);
-			reg = null;
+			//reg = null;
 			
 		} catch (AccessException e) {
 			e.printStackTrace();
@@ -103,6 +114,10 @@ public class KermetaProcess extends Thread {
 			e.printStackTrace();
 		} catch (NotBoundException e) {
 			e.printStackTrace();
+		}
+		finally 
+		{
+			this.interrupt();
 		}
 	}
 

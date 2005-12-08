@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.5 2005-12-08 08:55:51 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.6 2005-12-08 17:38:13 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -40,6 +40,7 @@ import fr.irisa.triskell.kermeta.runner.debug.model.KermetaValue;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaVariable;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableCallFrame;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableValue;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableVariable;
@@ -91,6 +92,7 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 			}
 			else if (command.equals(RunnerConstants.RESUME))
 			{
+				target.getRemoteInterpreter().changeSuspendedState(false);
 				processResumeReason(reason);
 				// Unblock AFTER the interpreter state is set properly!
 				target.getRemoteInterpreter().unblock();
@@ -200,20 +202,20 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	 * @return an array of integers that correspond to the lines where the breakpoints
 	 * are located
 	 */
-	public Integer[] getBreakpointLines()
-	{
-		Integer[] lines = new Integer[0];
-		
+	public SerializableBreakpoint[] getSerializableBreakpoints()
+	{	
 		ArrayList bps = target.getBreakpoints();
+		SerializableBreakpoint[] result = new SerializableBreakpoint[bps.size()];
 		//System.out.println("Breakpoint (KermetaRDBUI) : " + bps.size() );
 		Iterator it   = bps.iterator();
-		lines = new Integer[bps.size()];
 		int i = 0;
 		while (it.hasNext())
 		{
-			lines[i++] = ((KermetaBreakpoint)it.next()).getLine();
+			KermetaBreakpoint bp = (KermetaBreakpoint)it.next();
+			result[i] = new SerializableBreakpoint(bp.getLine(), bp.getFile());
+			i += 1;
 		}
-		return lines;
+		return result;
 	}
 	
 	/** 
