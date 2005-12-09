@@ -1,4 +1,4 @@
-/* $Id: StepIntoCondition.java,v 1.4 2005-12-08 08:55:50 zdrey Exp $
+/* $Id: StepIntoCondition.java,v 1.5 2005-12-09 16:25:36 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepIntoCondition.java
  * License   : EPL
@@ -39,7 +39,7 @@ public class StepIntoCondition extends AbstractKermetaDebugCondition {
 			{
 				// cmd : the current command that the interpreter is/was just executing, or
 				// the current state. (stepping : stepInto or stepOver, suspended : stepEnd or terminate)
-				String cmd = remoteInterpreter.getInterpreter().getCurrentCommand();
+				String cmd = remoteInterpreter.getInterpreter().getCurrentState();
 				if (cmd.equals( RunnerConstants.TERMINATE ))
 				{
 					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.TERMINATE, "");
@@ -65,20 +65,11 @@ public class StepIntoCondition extends AbstractKermetaDebugCondition {
 
 	/** 
 	 * Evaluate this stop condition necessary to stop or continue the debugging
-	 * StepInto condition has a very simple evaluation : we suspend after each
-	 * atomic execution
-	 * (Note for later : StepOver will be a bit more complicated : we have
-	 * to check if we are "back" to the CallFrame just before StepOver or
-	 * still in an embedded CallFrame.) 
-	 * @return true if the stop condition is verified (i.e if we have to stop!)
+	 * StepInto stop condition : we suspend after each atomic execution
+	 * @return always true 
 	 * */
 	public boolean evaluate() {
-		// Command ... not the right word : stepInto, stepEnd......
-		String cmd = remoteInterpreter.getInterpreter().getCurrentCommand();
-		if (remoteInterpreter.getOldConditionType().equals(RunnerConstants.STEP_OVER))
-			return true;
-		// tell the UI that the step command is done.
-		return (cmd.equals(RunnerConstants.TERMINATE) || cmd.equals(RunnerConstants.STEP_END));
+		return true;
 	}
 
 	/**

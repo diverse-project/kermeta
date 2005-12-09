@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.6 2005-12-08 17:38:13 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.7 2005-12-09 16:25:35 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -101,7 +101,9 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 			{
 				System.out.println("J'ai terminé!");
 				// Is it correct ?
-				target.terminate();
+				target.getRemoteInterpreter().askTerminate();
+				target.getKermetaProcess().terminate();
+				target.unsetKermetaProcess(); // just set the process to null...
 				// "Kill" the remote interpreter
 				// target.getRemoteInterpreter().;
 				// "Kill" the remote debug platform

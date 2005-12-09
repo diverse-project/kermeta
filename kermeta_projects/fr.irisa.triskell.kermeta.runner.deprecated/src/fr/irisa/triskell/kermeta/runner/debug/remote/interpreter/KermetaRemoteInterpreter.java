@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.5 2005-12-07 15:49:58 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.6 2005-12-09 16:25:35 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -175,8 +175,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	{ 
 		System.out.println("un-block");
 		interpreter.getDebugCondition().setSuspended(false);
-		// beek
-		interpreter.setCurrentCommand(interpreter.getDebugCondition().getConditionType());
+		interpreter.setCurrentState(interpreter.getDebugCondition().getConditionType());
 		notifyAll();
 	}
 	
@@ -188,7 +187,13 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	
 	
 	public void changeSuspendedState(boolean isSuspended) throws RemoteException {
-		interpreter.getDebugCondition().setSuspended(true);
+		interpreter.getDebugCondition().setSuspended(isSuspended); // true?????
+	}
+	
+	/** This method is called when user asked to Terminate the execution */
+	public void askTerminate() throws RemoteException {
+		// No stop Condition to set! stop is an order.
+		interpreter.setCurrentState(RunnerConstants.TERMINATE);
 	}
 
 	

@@ -21,14 +21,15 @@ import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugUI;
+import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaSecurityManager;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.ResumeCondition;
 
 /**
- * @author zdrey
- * I am not sure that implementing IProcess is meaningfull.
+ * The thread inside which the DebugInterpreter will be launched.
+ * 
  */
 public class KermetaProcess extends Thread {
 	
@@ -40,6 +41,8 @@ public class KermetaProcess extends Thread {
 	private String args;
 	private Registry reg; 
 	private IKermetaRemoteDebugUI debugPlatform;
+	// the flag that controls the run/stop of the thread
+	private boolean stop;
 	
 	/**
 	 * 
@@ -51,6 +54,10 @@ public class KermetaProcess extends Thread {
 		this.opname = o;
 		this.args = a;
 		debugPlatform = debug_platform;
+		stop = false;
+/*		System.setSecurityManager (new RMISecurityManager() {
+		    public void checkConnect (String host, int port) {}
+		    public void checkConnect (String host, int port, Object context) {} });*/
 	}
 	
 	
@@ -62,6 +69,13 @@ public class KermetaProcess extends Thread {
 		IKermetaRemoteInterpreter remote_interpreter = null;
 		try
 		{
+			if (System.getSecurityManager() == null)
+			{
+				System.out.println("No security manager : creating one");
+				System.setSecurityManager (new KermetaSecurityManager());
+				//System.setSecurityManager(new RMISecurityManager());
+			}
+			
 			System.err.println("1) remote interpreter!");
 			try { 
 				reg = LocateRegistry.createRegistry(5002);
@@ -71,7 +85,7 @@ public class KermetaProcess extends Thread {
 				reg = LocateRegistry.getRegistry(5002);
 			}
 			remote_interpreter = new KermetaRemoteInterpreter(file, classname, opname, args);
-			reg.rebind(REMOTE_NAME, remote_interpreter);
+			reg.bind(REMOTE_NAME, remote_interpreter);
 		}
 		catch (Exception e) 
 		{
@@ -98,12 +112,12 @@ public class KermetaProcess extends Thread {
 
 	/** Terminates properly the execution of the remote interpreter */
 	public synchronized void terminate() {
+		System.out.println("KermetaProcess terminates");
 		
-		//this.stop();
 		try {
 			// FIXME : we should not have to do it through debugPlatform. beeeek
-			debugPlatform.unregisterRemoteInterpreter();
-			UnicastRemoteObject.unexportObject(reg.lookup(REMOTE_NAME), true);
+		//	debugPlatform.unregisterRemoteInterpreter();
+			//UnicastRemoteObject.unexportObject(reg.lookup(REMOTE_NAME), true);
 			//UnicastRemoteObject.unexportObject(debugPlatform, true);
 			reg.unbind(REMOTE_NAME);
 			//reg = null;
@@ -115,10 +129,7 @@ public class KermetaProcess extends Thread {
 		} catch (NotBoundException e) {
 			e.printStackTrace();
 		}
-		finally 
-		{
-			this.interrupt();
-		}
 	}
+	
 
 }

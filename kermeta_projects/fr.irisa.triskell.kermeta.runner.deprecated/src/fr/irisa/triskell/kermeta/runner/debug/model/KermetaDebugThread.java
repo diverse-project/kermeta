@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.10 2005-12-07 15:49:58 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.11 2005-12-09 16:25:35 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -140,12 +140,12 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 
 	/** @see org.eclipse.debug.core.model.ISuspendResume#canResume() */
 	public boolean canResume() {
-		return isSuspended;
+		return isSuspended();
 	}
 
 	/** @see org.eclipse.debug.core.model.ISuspendResume#canSuspend() */
 	public boolean canSuspend() {
-		return (!isSuspended);
+		return (!isSuspended());
 	}
 
 	/** @see org.eclipse.debug.core.model.IStep#canStepInto() */
@@ -176,9 +176,9 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	public void setSuspended(boolean suspend)
 	{
 		isSuspended = suspend;
-		// The following statements "workaround" the risk of trying to access to the interpreter
-		// before it is created. --- TODO!
-		
+		// Thread control the target since there is only one thread yet!
+		target.setState(((suspend==false)?KermetaDebugTarget.stateRunning:KermetaDebugTarget.stateSuspended));
+			
 		// Debug framework does not want that stackFrames is null...
 		if (stackFrames == null || stackFrames.length == 0)
 		{
@@ -262,9 +262,8 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	/** @see org.eclipse.debug.core.model.ITerminate#terminate() */
 	public void terminate() throws DebugException 
 	{
-		System.out.println("terminate() in Thread!");
-		fireTerminateEvent();
 		target.terminate();
+		fireTerminateEvent();
 	}
 
 	public void setBreakpoints(String something) {

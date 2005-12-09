@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.11 2005-12-08 08:55:51 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.12 2005-12-09 16:25:35 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -154,8 +154,15 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     /** terminate command called by Eclipse when user clicks on the stop button */
 	public void terminate() throws DebugException {
     	setState(stateTerminated);
-		kermeta_process.terminate();
-    	kermeta_process = null;
+		threads = new IThread[0];
+		try {
+			// This call unblocks the interpreter.
+			// notify is used as well by the GUI (to tell a GUI command --here, stepInto-- is run)
+			// as by the RemoteInterpreter (to tell a debugInterp. command is done)
+			this.getRemoteDebugUI().notify(RunnerConstants.TERMINATE, RunnerConstants.CLIENT_REQUEST);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		fireTerminateEvent();
 	}
     
@@ -179,12 +186,12 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     
     /** @see org.eclipse.debug.core.model.ISuspendResume#canResume() */
     public boolean canResume() {
-    	return (remoteInterpreter!=null && state != stateDisconnected && state != stateRunning);
+    	return (kermeta_process!=null && state != stateDisconnected && state != stateRunning);
     }
 
     /** @see org.eclipse.debug.core.model.ISuspendResume#canSuspend() */
     public boolean canSuspend()
-    {	return remoteInterpreter!=null && !isSuspended(); }
+    {	return kermeta_process!=null && !isSuspended(); }
 
 	/**
 	 * @see fr.irisa.triskell.kermeta.runner.launching.AbstractKermetaTarget#supportsBreakpoint(org.eclipse.debug.core.model.IBreakpoint)
@@ -192,10 +199,10 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) { return true; }
 
 	/** @see org.eclipse.debug.core.model.IDisconnect#canDisconnect() */
-    public boolean canDisconnect() { return (remoteInterpreter!=null && state != stateDisconnected); }
+    public boolean canDisconnect() { return (kermeta_process!=null && state != stateDisconnected); }
 
     /** @see fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget#canTerminate() */
-	public boolean canTerminate() { return (remoteInterpreter!=null && state != stateTerminated); }
+	public boolean canTerminate() { return (kermeta_process!=null && !isTerminated()); }
 	
 	/** @see org.eclipse.debug.core.model.IDisconnect#disconnect() */
     public void disconnect() throws DebugException { setState(stateDisconnected); }
@@ -372,11 +379,8 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 		remoteInterpreter = remote_i;
 	}
 	
-	
-	public void getVariableValue()
-	{
-		System.err.println("get variable balue");
-	}
+	public KermetaProcess getKermetaProcess() { return kermeta_process; }
+	public void unsetKermetaProcess() { kermeta_process = null;} 
 	
 	
 }

@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.4 2005-12-08 17:38:13 zdrey Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.5 2005-12-09 16:25:36 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -44,7 +44,7 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 		// is a synchronization problem!
 		if (remoteInterpreter == null || remoteInterpreter.getInterpreter() == null)
 			eval_stop = false;
-		else if (remoteInterpreter.getInterpreter().getCurrentCommand().equals(RunnerConstants.TERMINATE))
+		else if (remoteInterpreter.getInterpreter().getCurrentState().equals(RunnerConstants.TERMINATE))
 		{
 			eval_stop = true;
 		}
