@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.4 2005-12-09 15:40:06 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.5 2005-12-09 16:18:39 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -6,6 +6,7 @@
     </description>
 	
         <property name="report.dir" location="./reports"/>
+	<property name="eclipse.home" location="c:/eclipse3.1/eclipse"/>
 
 	<property name="build.bin" location="../../build/class"/>
 	<property name="src" location="../../src/java"/>
