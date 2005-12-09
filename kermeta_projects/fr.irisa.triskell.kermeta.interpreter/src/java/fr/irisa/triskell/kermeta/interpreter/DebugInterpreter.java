@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.12 2005-12-08 17:39:03 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.13 2005-12-09 16:21:52 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -56,10 +56,10 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public static final String DEBUG_SUSPEND = "suspend";
     public static final String DEBUG_TERMINATE = "terminate";
     public boolean interpreterSuspended = true;
-    // TODO : rename currentCommand into currentState
+    // TODO : rename currentState into currentState
     /** The reason/state of the debugging
     (among stepEnd, stepInto, stepOver.) */
-    public String currentCommand = "";
+    public String currentState = "";
     /** oldCommand */
     public String oldCommand = "";
     /** The stop condition for the stepOver command */ 
@@ -70,18 +70,13 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public FOperation entryOperation ;
     public ArrayList entryArguments  ;
     public AbstractKermetaDebugCondition debugCondition;
-	private CallFrame before_call_frame;
-	private CallFrame after_call_frame;
-	private FOperation currentOperation;
-	/** The current statement that is being processed? */
-	private FObject currentStatement;
     
     /**
      * @param pMemory
      */
     public DebugInterpreter(RuntimeMemory pMemory) {
         super(pMemory);
-        currentCommand = DEBUG_RESUME;
+        currentState = DEBUG_RESUME;
     }
     
     /**
@@ -115,7 +110,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	public Object invoke_debug()
 	{
 		System.out.println("Begin invoke_debug");
-		Object result = null;
+		Object result = memory.voidINSTANCE;
 		try {
 	        // Resolve this operation call
 	        result = (RuntimeObject)this.accept(entryOperation);
@@ -123,15 +118,16 @@ public class DebugInterpreter extends ExpressionInterpreter {
        }
 	   catch (Exception e)
 	   {
-		   System.err.println("There is an unexpected exception :( : ");
+		   System.err.println("There is an unexpected exception : ");
 		   e.printStackTrace();
 	   }
        finally {
 	        // After operation has been evaluated, pop its context
     	    interpreterContext.popCallFrame();
 	        // Remote side of the interpreter reads this attribute and act accordingly
-	        currentCommand = DEBUG_TERMINATE;
+	        currentState = DEBUG_TERMINATE;
 	        // Run a last time the debug command that tests if we can interrupt.....laborious
+	        if (shouldTerminate()) return result;
 	        processDebugCommand(entryOperation);
        }
        return result;
@@ -156,7 +152,8 @@ public class DebugInterpreter extends ExpressionInterpreter {
      * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFAssignement(fr.irisa.triskell.kermeta.behavior.FAssignement)
      */
     public Object visitFAssignement(FAssignement node) {
-    	Object result = null;
+    	Object result = memory.voidINSTANCE;
+    	if (shouldTerminate()) return result;
     	processDebugCommand(node);
     	result = super.visitFAssignement(node);
         processPostCommand(node);
@@ -167,7 +164,9 @@ public class DebugInterpreter extends ExpressionInterpreter {
      * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFCallFeature(fr.irisa.triskell.kermeta.behavior.FCallFeature)
      */
     public Object visitFCallFeature(FCallFeature node) {
-    	Object result = null;
+    	Object result = memory.voidINSTANCE;
+    	// (Simple test to terminate)
+    	if (shouldTerminate()) return result;
     	processDebugCommand(node);
     	result = super.visitFCallFeature(node);
     	processPostCommand(node);
@@ -182,16 +181,34 @@ public class DebugInterpreter extends ExpressionInterpreter {
      * statement : so, we control only the children of those elements ( FStopCondition, the list
      * of statements inside the FBlock, etc.)
      * (We don't have to stop in a block decl.)
+     * We just need to stop the execution
      */
     public Object visitFBlock(FBlock node)  {
+    	if (shouldTerminate()) return memory.voidINSTANCE;
     	return super.visitFBlock(node);
     }
-    
+    /**
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFConditionnal(fr.irisa.triskell.kermeta.behavior.FConditionnal)
+	 */
+	public Object visitFConditionnal(FConditionnal node) {
+		if (shouldTerminate()) return memory.voidINSTANCE;
+		return super.visitFConditionnal(node);
+	}
+
+	/**
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFLoop(fr.irisa.triskell.kermeta.behavior.FLoop)
+	 */
+	public Object visitFLoop(FLoop node) {
+		if (shouldTerminate()) return memory.voidINSTANCE;
+		return super.visitFLoop(node);
+	}
+
 	/**
 	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFCallSuperOperation(fr.irisa.triskell.kermeta.behavior.FCallSuperOperation)
 	 */
 	public Object visitFCallSuperOperation(FCallSuperOperation node) {
-		Object result = null;
+		Object result = memory.voidINSTANCE;
+		if (shouldTerminate()) return result;
 		processDebugCommand(node);
 		result = super.visitFCallSuperOperation(node);
 		processPostCommand(node);
@@ -204,7 +221,8 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFJavaStaticCall(fr.irisa.triskell.kermeta.behavior.FJavaStaticCall)
 	 */
 	public Object visitFJavaStaticCall(FJavaStaticCall node) {
-		Object result = null;
+		Object result = memory.voidINSTANCE;
+		if (shouldTerminate()) return result;
 		processDebugCommand(node);
 		result = super.visitFJavaStaticCall(node);
 		processPostCommand(node);
@@ -218,7 +236,8 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFVariableDecl(fr.irisa.triskell.kermeta.behavior.FVariableDecl)
 	 */
 	public Object visitFVariableDecl(FVariableDecl node) {
-		Object result = null;
+		Object result = memory.voidINSTANCE;
+		if (shouldTerminate()) return result;
 		processDebugCommand(node);
 		result = super.visitFVariableDecl(node);
 		processPostCommand(node);
@@ -228,7 +247,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	
 
 	/** 
-	 * Called after a visit is done : this method updates the "currentCommand" attribute
+	 * Called after a visit is done : this method updates the "currentState" attribute
 	 * of the debug interpreter according to the kind of command the user asked 
 	 * for (typically, stepInto, stepOver, or resume), so that the "KermetaRemoteInterpreter"  can block its thread
 	 * accordingly.
@@ -240,14 +259,13 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	// If command is a step-into, then we stop systematically after a visit 
     	if (isSteppingInto() ) 
     	{
-    		System.err.println("step into : " + node);
     		setSuspended(true, DEBUG_STEPEND);
     	}
     	// If it is step over and
     	// if the stepOverCallframe that conditioned the stop of the stepOver was poped
     	// (this case occurs for example when a step-over command follows a step-into),
     	// then we set it to the last peeked frame.
-    	else if (isSteppingOver() && !interpreterContext.getFrameStack().contains(stepOverCallFrame))
+    	if (isSteppingOver() && !interpreterContext.getFrameStack().contains(stepOverCallFrame))
     	{
     		stepOverCallFrame = getInterpreterContext().peekCallFrame();
     	}
@@ -262,12 +280,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	{
     		setSuspended(true, DEBUG_STEPEND);
     	}
-    	if (isSuspended() == false) 
-    	{ System.err.println("not suspended ");}
-    	System.err.println("r1 : " + isSteppingOver() + "("+ currentCommand+ ")"); 
-    	System.err.println("r2 : " + stepOverCallFrame + "> cur : " + current_frame);
-    	System.err.println("r3 : " + node + " ==? " + current_frame.peekExpressionContext().getStatement());
-    	
     }
 
     /**
@@ -291,10 +303,10 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	
 	/** Accessors for booleans */
 	public boolean isSteppingInto()
-	{	return (currentCommand.equals(DEBUG_STEPINTO));}
+	{	return (getDebugCondition().getConditionType().equals(DEBUG_STEPINTO));}
 
 	public boolean isSteppingOver()
-	{	return (currentCommand.equals(DEBUG_STEPOVER));}
+	{	return (getDebugCondition().getConditionType().equals(DEBUG_STEPOVER));}
 	
 	
 	/** 
@@ -307,13 +319,13 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	public void setSuspended(boolean suspended, String reason)
 	{
 		interpreterSuspended = suspended;
-		currentCommand = reason;
+		currentState = reason;
 	}
 	public boolean isSuspended() { return interpreterSuspended == true; }
 	/** @return the current command being executed by the debuginterpreter */
-	public String getCurrentCommand() {	return currentCommand; }
+	public String getCurrentState() {	return currentState; }
 	/** set the current command being executed by the debuginterpreter */
-	public void setCurrentCommand(String command) {	currentCommand = command;}
+	public void setCurrentState(String command) {	currentState = command;}
     
 	/** Returns the call frame in which the step over command has begun */
 	public CallFrame getStepOverCallFrame() {	return stepOverCallFrame; }
@@ -345,7 +357,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	
 	public void setDebugCondition(AbstractKermetaDebugCondition debug_cond)
 	{
-		currentCommand = debug_cond.getConditionType();
+		currentState = debug_cond.getConditionType();
 		debugCondition = debug_cond;
 	}
 	
@@ -359,7 +371,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
     public RuntimeObject getRuntimeObjectByOID(long oid)
     {
-    	RuntimeObject result = null;
+    	RuntimeObject result = memory.voidINSTANCE;
     	if (getInterpreterContext().getFrameStack().isEmpty()==false 
     		&& getInterpreterContext().peekCallFrame().hasVariables())
     	{
@@ -399,6 +411,12 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	}
     	//if (getInterpreterContext())
     	return result;
+    }
+    
+    /** Accessor */
+    public boolean shouldTerminate()
+    {
+    	return getCurrentState().equals(DEBUG_TERMINATE);
     }
 	
 }
