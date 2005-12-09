@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.2 2005-12-08 16:49:47 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.3 2005-12-09 12:42:14 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -15,19 +15,22 @@
 	<property name="kermeta.interpreter.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\interpreter_kermeta.jar"/>
 	<property name="kermeta.model.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\model_kermeta.jar"/>
 	<property name="kermeta.io.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\io_kermeta.jar"/>
+	<property name="traceability.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\traceability.jar"/>
 	
 	<property name="log4j.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\log4j.jar"/>
 	<property name="antlr.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\antlr.jar"/>
 	<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar"/>
 	
-    <property name="emf.common.jar" location="../../../../plugins/org.eclipse.emf.common_2.1.0.jar"/>
-    <property name="emf.ecore.jar" location="../../../../plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
-    <property name="emf.ecore.xmi.jar" location="../../../../plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
+    <property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.1.0.jar"/>
+    <property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
+    <property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
 
 	
 	<path id="interpreter.class.path">
 	    <pathelement location="${kermeta.model.jar}"/>
 	    <pathelement location="${kermeta.io.jar}"/>
+	    <pathelement location="${kermeta.model.jar}"/>
+	    <pathelement location="${traceability.jar}"/>
 	    <pathelement location="${emf.common.jar}"/>
 	    <pathelement location="${emf.ecore.jar}"/>
 	    <pathelement location="${emf.ecore.xmi.jar}"/>
@@ -43,12 +46,13 @@
 	</target>
 	
 	<target name="compile_java">
+	    <mkdir dir="${build.bin}"/> 
 		<javac srcdir="${src}:${test.src}" 
     	    destdir="${build.bin}"
    			debug="true">
    			<classpath >
    				<!--<pathelement path="${MTLcompiler.path}/bin"/>-->
-   				<path refid="current.class.path"/> 
+   				<path refid="interpreter.class.path"/> 
    			</classpath>
    		</javac>
 	</target>
