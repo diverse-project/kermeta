@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.18 2005-10-24 16:14:57 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.19 2005-12-09 09:27:07 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -64,85 +64,91 @@ public class JunitTestSuite extends TestSuite {
 
 		// do not modify this comment
 /*** BEGIN GENERATED TESTS ***/
+		testWithFile("test/kmt_testcases","001_testAssignment.main.kmt" );
+
+		testWithFile("test/kmt_testcases","002_testArithm.main.kmt" );
+
+		testWithFile("test/kmt_testcases","003_testOpCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","004_testOpOpCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","005_testOpPkgCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","006_testOpPkgCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","007_testOpPkgCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","008_testOpInternPkgCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","009_testOpCallObject.main.kmt" );
+
+		testWithFile("test/kmt_testcases","010_testLoop.main.kmt" );
+
+		testWithFile("test/kmt_testcases","011_testBenchmark.main.kmt" );
+
+		testWithFile("test/kmt_testcases","013_testString.main.kmt" );
+
+		testWithFile("test/kmt_testcases","014_testExternJavaCall.main.kmt" );
+
+		testWithFile("test/kmt_testcases","015_testAttributes.main.kmt" );
+
+		testWithFile("test/kmt_testcases","016_testParametricClasses.main.kmt" );
+
+		testWithFile("test/kmt_testcases","017_testSuperFeaturesCalls.main.kmt" );
+
+		//testWithFile("test/kmt_testcases","018_testExceptions.main.kmt" );
+
+		testWithFile("test/kmt_testcases","019_ReflectionTest.main.kmt" );
+
+		testWithFile("test/kmt_testcases","020_testContainment.main.kmt" );
+
+		testWithFile("test/kmt_testcases","021_testOpposites.main.kmt" );
+
+		testWithFile("test/kmt_testcases","022_testEnum.main.kmt" );
+
+		testWithFile("test/kmt_testcases","023_testSimpleException.main.kmt" );
+
+		testWithFile("test/kmt_testcases","024_testZeroDivision.main.kmt" );
+
+		testWithFile("test/kmt_testcases","025_testParametricOperations.main.kmt" );
+
+		testWithFile("test/kmt_testcases","026_testMetaClass.main.kmt" );
+
 		testWithFile("test/kmt_testcases","027_testRuntimeModelImport.main.kmt" );
 
-		testWithFile("test/kmt_testcases","10_testLoop.main.kmt" );
+		testWithFile("test/kmt_testcases","028_testLoadEcoreFile.main.kmt" );
 
-		testWithFile("test/kmt_testcases","11_testBenchmark.main.kmt" );
+		testWithFile("test/kmt_testcases","029_testClone1.main.kmt" );
 
-		testWithFile("test/kmt_testcases","13_testString.main.kmt" );
+//	testWithFile("test/kmt_testcases","029_testClone2.main.kmt" );
 
-		testWithFile("test/kmt_testcases","14_testExternJavaCall.main.kmt" );
+		testWithFile("test/kmt_testcases","030_kermetaSignature.main.kmt" );
 
-		testWithFile("test/kmt_testcases","15_testAttributes.main.kmt" );
+		testWithFile("test/kmt_testcases","031_testVariable.main.kmt" );
 
-		testWithFile("test/kmt_testcases","16_testParametricClasses.main.kmt" );
+		testWithFile("test/kmt_testcases","032_testBoolean.main.kmt" );
 
-		testWithFile("test/kmt_testcases","17_testSuperFeaturesCalls.main.kmt" );
+		testWithFile("test/kmt_testcases","033_testBooleanResults.main.kmt" );
 
-		testWithFile("test/kmt_testcases","18_testExceptions.main.kmt" );
+		testWithFile("test/kmt_testcases","034_testFrameworkToString.main.kmt" );
 
-		testWithFile("test/kmt_testcases","19_ReflectionTest.main.kmt" );
+		testWithFile("test/kmt_testcases","035_testHashtable.main.kmt" );
 
-		testWithFile("test/kmt_testcases","1_testAssignment.main.kmt" );
+		testWithFile("test/kmt_testcases","036_testIterator.main.kmt" );
 
-		testWithFile("test/kmt_testcases","20_testContainment.main.kmt" );
+		testWithFile("test/kmt_testcases","037_testLambda.main.kmt" );
 
-		testWithFile("test/kmt_testcases","21_testOpposites.main.kmt" );
+		testWithFile("test/kmt_testcases","038_testReferences.main.kmt" );
 
-		testWithFile("test/kmt_testcases","22_testEnum.main.kmt" );
+		testWithFile("test/kmt_testcases","039_testSequence.main.kmt" );
 
-		testWithFile("test/kmt_testcases","23_testSimpleException.main.kmt" );
+		testWithFile("test/kmt_testcases","040_testSet.main.kmt" );
 
-		testWithFile("test/kmt_testcases","24_testZeroDivision.main.kmt" );
+		testWithFile("test/kmt_testcases","041_testSimpleEval.main.kmt" );
 
-		testWithFile("test/kmt_testcases","25_testParametricOperations.main.kmt" );
+		testWithFile("test/kmt_testcases","042_testSubPackage.main.kmt" );
 
-		testWithFile("test/kmt_testcases","26_testMetaClass.main.kmt" );
-
-		testWithFile("test/kmt_testcases","2_testArithm.main.kmt" );
-
-		testWithFile("test/kmt_testcases","3_testOpCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","4_testOpOpCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","5_testOpPkgCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","6_testOpPkgCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","7_testOpPkgCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","8_testOpInternPkgCall.main.kmt" );
-
-		testWithFile("test/kmt_testcases","9_testOpCallObject.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testArithm.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testBoolean.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testBooleanResults.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testFrameworkToString.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testHashtable.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testIterator.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testLambda.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testReferences.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testSequence.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testSet.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testSimpleEval.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testSubPackage.main.kmt" );
-
-		testWithFile("test/kmt_testcases","testVariable.main.kmt" );
-
-		testWithFile("test/kmt_testcases","test_clone.main.kmt" );
+		testWithFile("test/kmt_testcases","043_testUML2km.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
