@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.2 2005-12-02 16:27:14 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.3 2005-12-10 18:16:28 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -122,9 +122,10 @@ public class KM2Ecore {
 		// set the nsURI of the root package
 		if(result instanceof EPackage){
 			EPackage rP = (EPackage)result;
-			String uri = ecoreResource.getURI().toString();
+			String uri = "./"+ecoreResource.getURI().lastSegment();
+			//String uri = ecoreResource.getURI().toString();
 			rP.setNsURI(uri);
-			internalLog.debug("Package "+ root_pname +" nsURI set to: "+ ecoreResource.getURI().toString() );
+			internalLog.debug("Package "+ root_pname +" nsURI set to: "+ uri );
 			
 		}
 		else
