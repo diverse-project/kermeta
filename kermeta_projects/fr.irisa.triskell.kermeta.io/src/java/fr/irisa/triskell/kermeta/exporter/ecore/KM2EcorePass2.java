@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.1 2005-08-25 12:12:27 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.2 2005-12-12 07:32:22 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -282,6 +282,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		
 		if (node.isFIsComposite() )
 		{
+			
 			if (node.getFOpposite() != null)
 			{	// if it has an opposite, this cannot be an EAttribute
 				newEReference = (EReference)newEStructuralFeature;
@@ -431,7 +432,26 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	 * @see kermeta.visitor.MetacoreVisitor#visit(FPrimitiveType)
 	 */
 	public Object visit(FPrimitiveType node) {
-		internalLog.debug(loggerTabs + "Visiting FPrimitiveType: "+ node.getFName());		
-		return null;
+		internalLog.debug(loggerTabs + "Visiting FPrimitiveType: "+ node.getFName()+ " "+ KMTHelper.getQualifiedName(node));
+		internalLog.debug(loggerTabs + "                       : "+ node);
+		
+		String type_name = KMTHelper.getQualifiedName(node);
+		EClassifier newEClassifier=null; 
+		newEClassifier = (EClassifier)kmt2ecoremapping.get(node);
+		if (newEClassifier ==  null)
+		{
+			if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
+				internalLog.debug(loggerTabs + "Creating DataType: "+ node.getFName());
+				type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
+				// we need to create a new datatype for it and connect it to the root package
+				newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
+				newEClassifier.setName(node.getFName());
+				newEClassifier.setInstanceClassName(type_name);
+				EPackage root_EPackage = (EPackage)kmt2ecoremapping.get(root_p);
+				root_EPackage.getEClassifiers().add(newEClassifier);
+				kmt2ecoremapping.put(node,newEClassifier);
+			}
+		}
+		return newEClassifier;
 	}
 }
