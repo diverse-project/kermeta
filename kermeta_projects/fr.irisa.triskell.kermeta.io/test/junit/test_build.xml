@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.4 2005-12-12 09:57:53 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.5 2005-12-12 10:11:08 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -131,21 +131,22 @@
 	    <mkdir dir="${report.dir}"/> 
 	    <mkdir dir="${report.dir}/html"/>
 		<junit printsummary="yes" haltonfailure="no">
-		  <classpath>
+			<sysproperty key="net.sourceforge.cobertura.datafile" file="${coverage.dir}/basic_coverage.ser" />
+		  	<classpath>
 		  		<pathelement location="${instrumented.dir}"/>
 		  	<!--<pathelement location="${kermeta.io.class}"/>-->
 				<path refid="io.class.path"/> 
-		  </classpath>
-		  <classpath refid="cobertura_classpath" />
+		  	</classpath>
+		  	<classpath refid="cobertura_classpath" />
 
-		  <formatter type="plain"/>
+		  	<formatter type="plain"/>
 
-		  <test name="kermeta_io.typechecker_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-typechecker-result">
-		    <formatter type="xml"/>
-		  </test>
-		  <test name="kermeta_io.constraintchecker_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-constraintchecker-result">
-		    <formatter type="xml"/>
-		  </test>
+		  	<test name="kermeta_io.typechecker_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-typechecker-result">
+		    	<formatter type="xml"/>
+		  	</test>
+			<test name="kermeta_io.constraintchecker_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-constraintchecker-result">
+		    	<formatter type="xml"/>
+		  	</test>
   
 		</junit>
 		<junitreport todir="${report.dir}">
