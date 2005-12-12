@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.6 2005-12-12 07:26:06 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.7 2005-12-12 08:44:09 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -7,7 +7,7 @@
 	
     <property name="report.dir" location="./reports"/>		
 	<property name="eclipse.home" location="c:/eclipse3.1/eclipse"/>
-	<property name="cobertura.dir" location="C:\Documents and Settings\dvojtise.IRISA\Mes documents\download\java\cobertura\cobertura-1.7"/>
+	<property name="cobertura.dir" location="\\jersey\triskell\bin\multiplatform\cobertura-1.7"/>
 	
 
 
@@ -49,9 +49,6 @@
 	    <pathelement location="${antlr.jar}"/>
 	    <pathelement location="${ldt-core.jar}"/>
 	    <pathelement path="${java.class.path}"/>
-	</path>
-	
-	<path id="cobertura_classpath">
 		<fileset dir="${cobertura.dir}">
 			<include name="cobertura.jar" />
 		</fileset>
@@ -59,14 +56,19 @@
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
-
-	<taskdef classpathref="cobertura_classpath" resource="tasks.properties"/>
 	
-	<target name="all"
-		description="run all interpreter tests">
-		<antcall target="test"/>
-	</target>
-	<target name="coverage" depends="compile_java,instrument,test,coverage-report,alternate-coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
+	<!--<path id="cobertura_classpath">
+		<fileset dir="${cobertura.dir}">
+			<include name="cobertura.jar" />
+		</fileset>
+		<fileset dir="${cobertura.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>-->
+
+	<taskdef classpathref="interpreter.class.path" resource="tasks.properties"/>
+		
+	<target name="all" depends="compile_java,instrument,test,coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
 
 	
 	<target name="compile_java">
@@ -87,6 +89,7 @@
 		-->
 		<delete file="cobertura.ser"/>
 		<delete dir="${instrumented.dir}" />
+		<mkdir dir="${coverage.dir}"/>
 
 		<!--
 			Instrument the application classes, writing the
@@ -122,9 +125,6 @@
 		-->
 		<cobertura-report datafile="${coverage.dir}/basic_coverage.ser" 
 			srcdir="${src}" destdir="${coverage.xml.dir}" format="xml" />
-	</target>
-
-	<target name="alternate-coverage-report">
 		<!--
 			Generate a series of HTML files containing the coverage
 			data in a user-readable form using nested source filesets.
@@ -135,6 +135,7 @@
 			</fileset>
 		</cobertura-report>
 	</target>
+	
 	<target name="test" 
 		description="run interpreter tests" depends="compile_java">
 	    <mkdir dir="${report.dir}"/> 
@@ -151,7 +152,7 @@
 				Cobertura runtime, so Cobertura and its dependencies
 				must be on your classpath.
 			-->
-			<classpath refid="cobertura_classpath" />
+			<!--<classpath refid="cobertura_classpath" />-->
 
 		  <formatter type="plain"/>
 
