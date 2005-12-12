@@ -1,5 +1,5 @@
-/* $Id: Traceback.java,v 1.7 2005-12-01 18:44:03 zdrey Exp $
- * Project   : Kermeta (First iteration)
+/* $Id: Traceback.java,v 1.8 2005-12-12 13:04:44 dvojtise Exp $
+ * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -14,15 +14,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.URIConverter;
+//import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FObject;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * This class contains a set of methods that handle the stack trace created when 
@@ -34,6 +35,8 @@ import fr.irisa.triskell.kermeta.structure.FObject;
  */
 public class Traceback {
 
+	final static public Logger log = LogConfigurationHelper.getLogger("KMT.INTERPRETER");
+	
     ExpressionInterpreter interpreter;
     // The precise object that caused the error (usually, a block, but the developer
     // can give *quite* whatever he wants
@@ -60,12 +63,21 @@ public class Traceback {
         Iterator it = interpreter.interpreterContext.frame_stack.iterator();
         while(it.hasNext()) {
             CallFrame frame = (CallFrame)it.next();
-            // TODO : some callframes don't accept getOperation  / getExpression!! think about it
             FObject expr = frame.getExpression();
             if (expr!=null) // The only case where this cond is false is on first invokation
                 stack_trace = getContextForFObject(frame, expr) + stack_trace;
-            else 
-                stack_trace = getContextForFObject(frame, frame.getOperation()) + stack_trace;
+            else
+            	if (frame instanceof OperationCallFrame){
+            		OperationCallFrame opCallFrame = (OperationCallFrame)frame; 
+            		if(opCallFrame.isOperation())
+            			stack_trace = getContextForFObject(opCallFrame, opCallFrame.getOperation()) + stack_trace;
+            		else
+            			stack_trace = getContextForFObject(opCallFrame, opCallFrame.getProperty()) + stack_trace;
+            	}
+            	else {
+            		// TODO : some callframes don't accept getOperation  / getExpression!! think about it                    
+            		stack_trace = getContextForFObject(frame, frame.getOperation()) + stack_trace;    		        
+            	}
         }
         // And the first info :
         stack_trace = getContextForFObject(null, cause_object) + stack_trace;
