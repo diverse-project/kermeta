@@ -1,7 +1,7 @@
-/* $Id: OperationCallFrame.java,v 1.9 2005-09-06 10:48:05 zdrey Exp $
-* Project : Kermeta (First iteration)
+/* $Id: OperationCallFrame.java,v 1.10 2005-12-12 13:03:00 dvojtise Exp $
+* Project : Kermeta Interpreter
 * File : OperationCallFrame.java
-* License : GPL
+* License : EPL
 * Copyright : IRISA / Universite de Rennes 1
 * ----------------------------------------------------------------------------
 * Creation date : 16 mai 2005
@@ -38,6 +38,9 @@ public class OperationCallFrame extends CallFrame {
     /** OR the FProperty derived */
     private FProperty property;
     
+    /** tells wether this OperationCallFrame is for a callable operation or for a property (ie. setter or getter) */
+    private boolean bIsOperation;
+    
     /**
      * self object (inside which the operation call is done)
      */
@@ -64,6 +67,7 @@ public class OperationCallFrame extends CallFrame {
         super(pContext);
         if (pCallable instanceof CallableOperation)
         {
+        	bIsOperation = true;
             this.operation = ((CallableOperation)pCallable).getOperation();
             this.expression = expression;
             typeParameters = TypeVariableEnforcer.getTypeVariableBinding(((CallableOperation)pCallable).getFclass());
@@ -84,6 +88,7 @@ public class OperationCallFrame extends CallFrame {
         }
         else
         {
+        	bIsOperation = false;
             this.property = ((CallableProperty)pCallable).getProperty();
         }
         
@@ -151,4 +156,18 @@ public class OperationCallFrame extends CallFrame {
     public FObject getExpression() {
         return expression; 
     }
+
+	/**
+	 * @return Returns true is this is a callable operation. false if this is a setter or getter of a property
+	 */
+	public boolean isOperation() {
+		return bIsOperation;
+	}
+	
+	/**
+	 * @return Returns true is this is a setter or getter of a property. false if this is a callable operation 
+	 */
+	public boolean isPropertyAccessor() {
+		return !bIsOperation;
+	}
 }
