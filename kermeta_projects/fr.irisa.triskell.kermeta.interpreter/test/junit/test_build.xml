@@ -1,16 +1,25 @@
-<!-- $Id: test_build.xml,v 1.5 2005-12-09 16:18:39 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.6 2005-12-12 07:26:06 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
         Run interpreter tests
     </description>
 	
-        <property name="report.dir" location="./reports"/>
+    <property name="report.dir" location="./reports"/>		
 	<property name="eclipse.home" location="c:/eclipse3.1/eclipse"/>
+	<property name="cobertura.dir" location="C:\Documents and Settings\dvojtise.IRISA\Mes documents\download\java\cobertura\cobertura-1.7"/>
+	
+
 
 	<property name="build.bin" location="../../build/class"/>
 	<property name="src" location="../../src/java"/>
 	<property name="test.src" location="../../test/junit"/>
+    <property name="coverage.dir" location="${report.dir}/coverage"/>
+    <property name="coverage.xml.dir" location="${report.dir}/coverage/xml"/>
+    <property name="coverage.html.dir" location="${report.dir}/coverage/html"/>	
+
+	<property name="instrumented.dir" location="instrumented"/>
+	<property name="cobertura.lib.dir" location="${cobertura.dir}/lib"/>
 	
 	
 	<property name="kermeta.interpreter.class" location="..\..\build\class"/>
@@ -42,10 +51,23 @@
 	    <pathelement path="${java.class.path}"/>
 	</path>
 	
+	<path id="cobertura_classpath">
+		<fileset dir="${cobertura.dir}">
+			<include name="cobertura.jar" />
+		</fileset>
+		<fileset dir="${cobertura.lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef classpathref="cobertura_classpath" resource="tasks.properties"/>
+	
 	<target name="all"
 		description="run all interpreter tests">
-		<antcall target="run_interpreter_tests"/>
+		<antcall target="test"/>
 	</target>
+	<target name="coverage" depends="compile_java,instrument,test,coverage-report,alternate-coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
+
 	
 	<target name="compile_java">
 	    <mkdir dir="${build.bin}"/> 
@@ -59,22 +81,88 @@
    		</javac>
 	</target>
 	
-	<target name="run_interpreter_tests" 
+	<target name="instrument" depends="compile_java">
+		<!--
+			Remove the coverage data file and any old instrumentation.
+		-->
+		<delete file="cobertura.ser"/>
+		<delete dir="${instrumented.dir}" />
+
+		<!--
+			Instrument the application classes, writing the
+			instrumented classes into ${build.instrumented.dir}.
+		-->
+		<cobertura-instrument datafile="${coverage.dir}/basic_coverage.ser" todir="${instrumented.dir}">
+
+			<!--
+				The following line causes instrument to ignore any
+				source line containing a reference to log4j, for the
+				purposes of coverage reporting.
+			-->
+			<ignore regex="org.apache.log4j.*" />
+
+			<fileset dir="${build.bin}">
+				<!--
+					Instrument all the application classes, but
+					don't instrument the test classes.
+				-->
+				<include name="**/*.class" />
+				<exclude name="**/*Test.class" />
+			</fileset>
+		</cobertura-instrument>
+	</target>
+	<target name="coverage-check">
+		<cobertura-check branchrate="34" totallinerate="100" />
+	</target>
+
+	<target name="coverage-report">
+		<!--
+			Generate an XML file containing the coverage data using
+			the "srcdir" attribute.
+		-->
+		<cobertura-report datafile="${coverage.dir}/basic_coverage.ser" 
+			srcdir="${src}" destdir="${coverage.xml.dir}" format="xml" />
+	</target>
+
+	<target name="alternate-coverage-report">
+		<!--
+			Generate a series of HTML files containing the coverage
+			data in a user-readable form using nested source filesets.
+		-->
+		<cobertura-report datafile="${coverage.dir}/basic_coverage.ser" destdir="${coverage.html.dir}">
+			<fileset dir="${src}">
+				<include name="**/*.java"/>
+			</fileset>
+		</cobertura-report>
+	</target>
+	<target name="test" 
 		description="run interpreter tests" depends="compile_java">
 	    <mkdir dir="${report.dir}"/> 
 	    <mkdir dir="${report.dir}/html"/>
 		<junit printsummary="yes" haltonfailure="no">
+		  <!--<classpath location="${instrumented.dir}" />-->
 		  <classpath>
-		    	<pathelement location="${kermeta.interpreter.class}"/>
+			  	<pathelement location="${instrumented.dir}"/>
+		    	<!--<pathelement location="${kermeta.interpreter.class}"/>-->
 				<path refid="interpreter.class.path"/> 
 		  </classpath>
+			<!--
+				The instrumented classes reference classes used by the
+				Cobertura runtime, so Cobertura and its dependencies
+				must be on your classpath.
+			-->
+			<classpath refid="cobertura_classpath" />
 
 		  <formatter type="plain"/>
 
 		  <test name="kermeta_interpreter.test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-interpreter-result">
 		    <formatter type="xml"/>
 		  </test>
-		  
+		  <!--<batchtest todir="${reports.xml.dir}" unless="testcase">
+			<fileset dir="${src}">
+				<include name="**/*Test.java" />
+			</fileset>
+		  </batchtest>-->
 		</junit>
 		<junitreport todir="${report.dir}">
 		  <fileset dir="${report.dir}">
