@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.3 2005-12-12 07:26:10 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.4 2005-12-12 09:57:53 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -7,7 +7,7 @@
 	
     <property name="report.dir" location="./reports"/>
 	<property name="eclipse.home" location="c:/eclipse3.1/eclipse"/>
-	<property name="cobertura.dir" location="C:\Documents and Settings\dvojtise.IRISA\Mes documents\download\java\cobertura\cobertura-1.7"/>
+	<property name="cobertura.dir" location="\\jersey\triskell\bin\multiplatform\cobertura-1.7"/>
 		
 	<property name="build.bin" location="../../build/class"/>
 	<property name="src" location="../../src/java"/>
@@ -56,12 +56,8 @@
 	</path>
 
 	<taskdef classpathref="cobertura_classpath" resource="tasks.properties"/>
-	
-	<target name="all"
-		description="run all io tests">
-		<antcall target="run_io_tests"/>
-	</target>
-	<target name="coverage" depends="compile_java,instrument,test,coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
+		
+	<target name="all" depends="compile_java,instrument,test,coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
 
 	<target name="init">
 			<mkdir dir="${classes.dir}" />
