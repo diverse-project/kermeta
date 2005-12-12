@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.5 2005-12-12 10:11:08 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.6 2005-12-12 19:31:27 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -82,14 +82,14 @@
 		<!--
 			Remove the coverage data file and any old instrumentation.
 		-->
-		<delete file="${coverage.dir}/basic_coverage.ser"/>
+		<delete file="coverage.ser"/>
 		<delete dir="${instrumented.dir}" />
 
 		<!--
 			Instrument the application classes, writing the
 			instrumented classes into ${build.instrumented.dir}.
 		-->
-		<cobertura-instrument datafile="${coverage.dir}/basic_coverage.ser" todir="${instrumented.dir}">
+		<cobertura-instrument datafile="coverage.ser" todir="${instrumented.dir}">
 
 			<!--
 				The following line causes instrument to ignore any
@@ -117,9 +117,9 @@
 			Generate an XML file containing the coverage data using
 			the "srcdir" attribute.
 		-->
-		<cobertura-report datafile="${coverage.dir}/basic_coverage.ser" 
+		<cobertura-report datafile="coverage.ser" 
 			srcdir="${src}" destdir="${coverage.xml.dir}" format="xml" />
-		<cobertura-report datafile="${coverage.dir}/basic_coverage.ser" destdir="${coverage.html.dir}">
+		<cobertura-report datafile="coverage.ser" destdir="${coverage.html.dir}">
 			<fileset dir="${src}">
 				<include name="**/*.java"/>
 			</fileset>
@@ -131,10 +131,10 @@
 	    <mkdir dir="${report.dir}"/> 
 	    <mkdir dir="${report.dir}/html"/>
 		<junit printsummary="yes" haltonfailure="no">
-			<sysproperty key="net.sourceforge.cobertura.datafile" file="${coverage.dir}/basic_coverage.ser" />
+			<sysproperty key="net.sourceforge.cobertura.datafile" file="coverage.ser" />
 		  	<classpath>
 		  		<pathelement location="${instrumented.dir}"/>
-		  	<!--<pathelement location="${kermeta.io.class}"/>-->
+		  		<pathelement location="${kermeta.io.class}"/>
 				<path refid="io.class.path"/> 
 		  	</classpath>
 		  	<classpath refid="cobertura_classpath" />
