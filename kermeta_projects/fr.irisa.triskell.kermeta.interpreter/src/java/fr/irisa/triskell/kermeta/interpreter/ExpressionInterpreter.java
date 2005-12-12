@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.30 2005-12-08 17:39:03 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.31 2005-12-12 15:28:44 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -343,7 +343,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		    // Check for void target
 		    if (ro_target == memory.voidINSTANCE) {
 		        internalLog.debug(" >> INTERPRETER REPORTS Call on a void target (property assignement). TODO: raise an exception");
-		        // TODO : raise a CallOnAVoidTarget exception
+		        raiseCallOnVoidTargetException(node);
 		    }
 		    
 		    FClass t_target=(FClass)ro_target.getMetaclass().getData().get("kcoreObject");
@@ -1027,7 +1027,10 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     public Object visitFRaise(FRaise node) {
         // TODO : improve this to allow exception to be rescued.
         RuntimeObject exception = (RuntimeObject)this.accept(node.getFExpression());
-        raiseKermetaException(exception, interpreterContext.peekCallFrame().getExpression());
+        // DVK: I don't understand why we should use the CallFrame exception here: (more it is often null !
+        // the node is enough to compute a context
+        //raiseKermetaException(exception, interpreterContext.peekCallFrame().getExpression());
+        raiseKermetaException(exception, node);
         
         // This is dead code
         return null;
@@ -1182,23 +1185,36 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 
     /**
      * 
-     * @param obj the runtimeObject that is raised. Should always be an instance of
-     * a kermeta::exceptions::Exception.
+     * @param obj the runtimeObject that is raised. Should be an instance of
+     * a kermeta::exceptions::Exception. 
      * @param node the node that is wrong. Usually, it is an FExpression, but not mandatory
      */
     public void raiseKermetaException(RuntimeObject obj, FObject node) {
-    	// FIXME: Set the stack trace
-        // FIXME: Set a default message
+        // FIXME: Set a default message (I cannot set a default message since the raised object may not be a 
         RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
+        /*KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
+        		"",
+				this,
+				memory,
+				node,
+				null);*/
+        KermetaRaisedException e = new KermetaRaisedException(obj, rnode, this);
+        e.setContextString(this,rnode);
         throw new KermetaRaisedException(obj, rnode, this);	
     }   
     
     public void raiseCallOnVoidTargetException(FObject node) {
-    	RuntimeObjectFactory rofactory = memory.getROFactory();
-    	RuntimeObject raised_object = rofactory.createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
+    	//RuntimeObjectFactory rofactory = memory.getROFactory();
+    	//RuntimeObject raised_object = rofactory.createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
     	
-        RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
-        throw new KermetaRaisedException(raised_object, rnode, this);	
+        //RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
+        //throw new KermetaRaisedException(raised_object, rnode, this);	
+        throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
+        		"",
+				this,
+				memory,
+				node,
+				null);
     }
 
     protected void displayHashtable(Hashtable hash)
