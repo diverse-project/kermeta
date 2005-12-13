@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpoint.java,v 1.6 2005-12-08 17:38:13 zdrey Exp $
+/* $Id: KermetaBreakpoint.java,v 1.7 2005-12-13 18:08:40 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaBreakpoint.java
  * License   : EPL
@@ -13,7 +13,9 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.model.Breakpoint;
+import org.eclipse.debug.core.model.LineBreakpoint;
+import org.eclipse.debug.internal.core.BreakpointManager;
+import org.eclipse.ui.texteditor.MarkerUtilities;
 
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
@@ -21,11 +23,12 @@ import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
  * @author zdrey
  *
  */
-public class KermetaBreakpoint extends Breakpoint {
+public class KermetaBreakpoint extends LineBreakpoint {
 
 	// the marker ID (can we find it by calculating it? this string is 
 	// marker id in plugin.xml data.
-	public static final String KERMETA_BREAKPOINT_ID="fr.irisa.triskell.kermeta.runner.kermetaBreakpoint";
+	//public static final String KERMETA_BREAKPOINT_MARKER="fr.irisa.triskell.kermeta.runner.kermetaBreakpointMarker";
+	public static final String KERMETA_BREAKPOINT_MARKER=LineBreakpoint.BREAKPOINT_MARKER;
 	static public final String FUNCTION_NAME_PROP = "kermeta.function_name";
 
 	/**
@@ -62,4 +65,6 @@ public class KermetaBreakpoint extends Breakpoint {
 		// return r.getLocation().toOSString();
 	}
 
+	
+	
 }

@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.8 2005-12-08 08:55:51 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.9 2005-12-13 18:08:40 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.PlatformObject;
@@ -52,6 +53,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
     protected String args;
     
     protected KermetaInterpreter kermetaInterpreter;
+    protected KermetaLauncher kermetaLauncher;
     
     /** The path of the edited file that we are debugging */
     protected IPath path;
@@ -156,7 +158,8 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      * @see org.eclipse.debug.core.model.IDebugTarget#supportsBreakpoint(org.eclipse.debug.core.model.IBreakpoint)
      */
     public boolean supportsBreakpoint(IBreakpoint breakpoint) {
-        return true;
+        if (breakpoint instanceof KermetaBreakpoint) return true;
+        return false;
     }
 
     /** @see org.eclipse.debug.core.model.IDebugElement#getModelIdentifier() */
@@ -323,6 +326,11 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 		return projectName;
 	}
 	
+	public KermetaLauncher getKermetaLauncher() {
+		return kermetaLauncher;
+	}
+	
+	public void setKermetaLauncher(KermetaLauncher klaunch) { kermetaLauncher = klaunch; }
 	/**
 	 * @return Returns the startFile.
 	 */
@@ -368,7 +376,15 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 	public static IPath getIPathFromString(String filestring) {
 		if (filestring != null)
 		{
+			
 			IResource r = RunnerPlugin.getWorkspace().getRoot().findMember(filestring);
+			// It appears that : putting in findMember method call "platform:/resource/blabla/blu"
+			// returns null, but /blabla/blu returns null
+			if (r == null && filestring.startsWith("platform:/resource"))
+			{ // dirty patch : try to remove the prefix "platform:/resource/" in the filestring
+				String subfilepath = filestring.substring("platform:/resource".length(), filestring.length());
+				r = ResourcesPlugin.getWorkspace().getRoot().findMember(subfilepath);
+			}
 			if (r != null) return r.getLocation();
 		}
 		else
