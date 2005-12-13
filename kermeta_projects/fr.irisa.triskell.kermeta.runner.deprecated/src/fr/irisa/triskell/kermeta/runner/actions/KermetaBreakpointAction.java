@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.3 2005-12-08 17:38:13 zdrey Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.4 2005-12-13 18:08:13 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -20,7 +20,12 @@ import java.util.Map;
 
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
 
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
@@ -28,16 +33,21 @@ import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IVerticalRulerInfo;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractMarkerAnnotationModel;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.IUpdate;
+import org.eclipse.ui.texteditor.MarkerUtilities;
+import org.osgi.framework.Bundle;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
@@ -180,10 +190,10 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 				
 				IMarker[] markers= null;
 				if (resource instanceof IFile)
-					markers= resource.findMarkers(KermetaBreakpoint.BREAKPOINT_MARKER, true, IResource.DEPTH_INFINITE);
+					markers= resource.findMarkers(KermetaBreakpoint.KERMETA_BREAKPOINT_MARKER, true, IResource.DEPTH_INFINITE);
 				else {
 					IWorkspaceRoot root= ResourcesPlugin.getWorkspace().getRoot();
-					markers= root.findMarkers(KermetaBreakpoint.BREAKPOINT_MARKER, true, IResource.DEPTH_INFINITE);
+					markers= root.findMarkers(KermetaBreakpoint.KERMETA_BREAKPOINT_MARKER, true, IResource.DEPTH_INFINITE);
 				}
 				
 				if (markers != null) {
@@ -238,7 +248,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 			
 			IWorkspaceRunnable r= new IWorkspaceRunnable() {
 				public void run(IProgressMonitor monitor) throws CoreException {
-					IMarker marker= resource.createMarker(KermetaBreakpoint.BREAKPOINT_MARKER);
+					IMarker marker= resource.createMarker(KermetaBreakpoint.KERMETA_BREAKPOINT_MARKER);
 					marker.setAttributes(map);
 					KermetaBreakpoint br = new KermetaBreakpoint();
 					br.setMarker(marker);
@@ -247,7 +257,24 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 				}
 			};
 			
-			resource.getWorkspace().run(r, null);
+			// It seems like this stuff cannot be null
+			// IProgressMonitor monitor =
+				
+				//(IProgressMonitor) resource.getProject().getReferences().get(AntCorePlugin.ECLIPSE_PROGRESS_MONITOR);
+			
+			resource.getWorkspace().run(r, new NullProgressMonitor());
+			
+			/*
+			if (resource == null)
+				return;
+			
+			if (askForLabel) {
+				if (!askForLabel(attributes))
+					return; }*/
+			System.err.println("RESOURCE : " + resource);
+	//		MarkerUtilities.createMarker(resource, map, KermetaBreakpoint.KERMETA_BREAKPOINT_MARKER);
+			
+			
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		} catch (CoreException e) {
@@ -358,5 +385,28 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 		} catch (CoreException e) {
 			RunnerPlugin.log(e);
 		}
+	}
+	
+	
+	/**
+	 * Copied from Eclipse framework code MarkerRulerAction.java
+	 * Handles core exceptions. This implementation logs the exceptions
+	 * with the workbench plug-in and shows an error dialog.
+	 *
+	 * @param exception the exception to be handled
+	 * @param message the message to be logged with the given exception
+	 */
+	protected void handleCoreException(CoreException exception, String message) {
+		Bundle bundle = Platform.getBundle(PlatformUI.PLUGIN_ID);
+		ILog log= Platform.getLog(bundle);
+
+		if (message != null)
+			log.log(new Status(IStatus.ERROR, PlatformUI.PLUGIN_ID, 0, message, exception));
+		else
+			log.log(exception.getStatus());
+
+
+		Shell shell= getTextEditor().getSite().getShell();
+		ErrorDialog.openError(shell, "Kermeta error", "Unknown", exception.getStatus());
 	}
 }
