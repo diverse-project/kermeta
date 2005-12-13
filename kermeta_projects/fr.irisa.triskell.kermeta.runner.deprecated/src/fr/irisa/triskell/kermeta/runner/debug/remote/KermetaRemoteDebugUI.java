@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.7 2005-12-09 16:25:35 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.8 2005-12-13 18:08:58 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -76,6 +76,8 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	public synchronized Object notify(String command, String reason) throws RemoteException {
 		Object result = null;
 		currentCommand = command;
+		// Not sure it is the best way to test that, and the best place
+		if (target.getRemoteInterpreter() == null) return null;
 		// Show the stack frames
 		// CREATE/TERMINATE?
 		try
@@ -152,16 +154,21 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 			
 			for (int i=0; i<frames.length; i++)
 			{
-				if (frames[i] != null)
-					path = AbstractKermetaTarget.getIPathFromString(frames[i].filepath);
+				KermetaStackFrame f = null;
 				KermetaDebugThread thread = target.getMainThread();
-				
-				KermetaStackFrame f = new KermetaStackFrame(
-						thread, frames[i].name, 
-						path, frames[i].line); // null : IPath
-				
-				f.setVariables(createKermetaVariables(frames[i].variables));
-				
+				if (frames[i] != null)
+				{
+					path = AbstractKermetaTarget.getIPathFromString(frames[i].filepath);
+					System.out.println("frames[i].filepath:" + frames[i].filepath +"; IPATH : " +path);
+					f = new KermetaStackFrame(
+							thread, frames[i].name, 
+							path, frames[i].line); // null : IPath
+					f.setVariables(createKermetaVariables(frames[i].variables));
+				}
+				else // create an empty frame to avoid GUI errors...
+				{	System.out.println("when is the frames[i] null???");
+					f = new KermetaStackFrame( thread, "empty frame", null, 0);
+				}
 				result[i] = f;
 			}
 		}
@@ -228,8 +235,10 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	{
 		try
 		{
-			Registry reg = LocateRegistry.getRegistry("localhost", 5002);
+			Registry reg = LocateRegistry.getRegistry("localhost", 5001);
+			System.out.println("Lookup remote interpreter : " + reg);
 			IKermetaRemoteInterpreter remoteInterpreter = (IKermetaRemoteInterpreter)reg.lookup("remote_interpreter");
+			System.out.println("Lookup successful ");
 			remoteInterpreter.registerKermetaRemoteDebugUI(this);
 			target.setRemoteInterpreter(remoteInterpreter);
 
