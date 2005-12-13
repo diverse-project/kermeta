@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.9 2005-12-08 17:38:13 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.10 2005-12-13 18:09:57 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -26,6 +26,8 @@ import org.eclipse.debug.internal.ui.elements.adapters.DeferredVariable;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
+import fr.irisa.triskell.kermeta.interpreter.LambdaCallFrame;
+import fr.irisa.triskell.kermeta.interpreter.OperationCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.Traceback;
 import fr.irisa.triskell.kermeta.interpreter.Variable;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
@@ -74,6 +76,7 @@ public class KermetaDebugWrapper {
 		
 		if (framestack.size() > 0)
 		{
+			System.err.println("FRAME SIZE :  " + framestack.size());
 			frames = new SerializableCallFrame[framestack.size()];
 			
 			// "Transforming" the stack into an array avoid the risks of concurrent modification access.
@@ -82,35 +85,38 @@ public class KermetaDebugWrapper {
 			// List synch_list = Collections.synchronizedList(framestack);
 			
 			Object[] framearray = framestack.toArray();
-			
-			for (i=0; i<framestack.size(); i++)
+			int fsize = framestack.size(); 
+			for (i=fsize; i>0; i--)
 			{
 				Traceback traceback = null;
-				CallFrame kframe = (CallFrame)framearray[i];
+				CallFrame kframe = (CallFrame)framearray[i-1];
 				// The case "operation == null" occurs for frame of the main operation 
 				// since it is not executed as a "CallFeature" but as an "FOperation".
-				FObject operation = kframe.getOperation();
+				FObject origin = getFrameObject(kframe);
+				//if (operation == null)
 				Tracer tracer = interpreter.getMemory().getUnit().getTracer();
-				TextReference ref = tracer.getFirstTextReference(operation);
+				TextReference ref = tracer.getFirstTextReference(origin);
 				
 				// The current expression that is processed?
 				//FObject current_node = (FObject)interpreter.getInterpreterContext().peekCallFrame().getExpression();
 				FObject current_node = (FObject)interpreter.getDebugCondition().getCurrentNode();
-				TextReference node_ref = tracer.getFirstTextReference(current_node);
+				TextReference node_ref = null; 
+				if (tracer != null)
+					node_ref = tracer.getFirstTextReference(current_node);
 				
 				/*
 				 Tracer tracer = null;
 				 TextReference ref = null; */ 
-				// Might it be null? Might the external ref do not exist?
-				if (tracer == null || ref == null)
+				// FIXME Might it be null? Might the external ref do not exist?
+				if (tracer == null || ref == null )
 				{
-					traceback = new Traceback(interpreter, operation);
-					String[] frame_context = traceback.getContextForFObjectAsArray(kframe, operation);
+					traceback = new Traceback(interpreter, origin);
+					String[] frame_context = traceback.getContextForFObjectAsArray(kframe, current_node);
 					int line = 1;
 					if (frame_context[1] != null && frame_context[1].length() > 0 )
 						line = Integer.parseInt(frame_context[1]); 
 					
-					frames[i] = new SerializableCallFrame(
+					frames[fsize-i] = new SerializableCallFrame(
 							frame_context[0],
 							line,
 							frame_context[2],
@@ -119,11 +125,23 @@ public class KermetaDebugWrapper {
 				}
 				else
 				{
-					int current_line = node_ref!=null?node_ref.getLine():ref.getLine();
-					String frame_name = current_node!=null?kframe.toString() + current_node.toString():kframe.toString();
+					int current_line = 0;
+					String file_uri = "";
+					if ( node_ref != null ) { 
+						current_line = node_ref.getLine();
+						file_uri = node_ref.getFileURI();
+					}
+					else if ( ref != null ) { 
+						current_line = ref.getLine();
+						file_uri = ref.getFileURI();
+					}
 					
-					frames[i] = new SerializableCallFrame(
-							ref.getFileURI(),
+					String frame_name = kframe.toString();
+					
+					if (current_node != null) frame_name+= current_node.toString();
+					// current node can be null?
+					frames[fsize-i] = new SerializableCallFrame(
+							file_uri,
 							current_line, // FIXME line is not well computed!
 							frame_name,
 							createSerializableVariables(kframe)
@@ -134,8 +152,33 @@ public class KermetaDebugWrapper {
 		return frames;
 	}
 
-	
-	
+	/**
+	 * Returns the object associated to the given CallFrame
+	 * - If it is an OperationCallFrame :
+	 * 	 the object type is an FOperation, or a FProperty if the call frame is linked
+	 *   to a derived property
+	 *  
+	 * - if it is a LambdaCallFrame : TODO
+	 * - if it is ...
+	 * */
+	protected static FObject getFrameObject(CallFrame frame)
+	{
+		FObject result = null;
+		if (frame instanceof OperationCallFrame)
+		{
+			OperationCallFrame oframe = (OperationCallFrame)frame;
+			if (oframe.isOperation())
+				result = oframe.getOperation();
+			else
+				result = oframe.getProperty();
+		}
+		if (frame instanceof LambdaCallFrame)
+		{   // the operation is the one of the nesting callframe if it is an operation call frame
+			// null otherwise
+			result = frame.getOperation();
+		}	
+		return result;
+	}
 	
 	/**
 	 * Get all the variables available from the given call frame.
