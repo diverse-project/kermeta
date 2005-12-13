@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.6 2005-12-09 16:25:35 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.7 2005-12-13 18:09:15 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -26,12 +26,14 @@ import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.ResumeCondition;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.StepIntoCondition;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.StepOverCondition;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaDebugWrapper;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 
 
 public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKermetaRemoteInterpreter {
@@ -52,6 +54,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	/** Store the old_command since it is a stop condition for the step into command
 	 *  if the preceding one was a step over. */
 	protected String oldConditionType;
+	private KermetaInterpreter kermetaInterpreter;
 	
 	public KermetaRemoteInterpreter(String p_startfile, String p_classname, String p_opname, String p_args) throws RemoteException {
 		super(); 
@@ -103,10 +106,9 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	public void createKermetaInterpreter()
 	{
 		//Instanciate the debug remoteInterpreter
-		KermetaInterpreter global_interpreter = KermetaLauncher.getDefault().runKermeta(
+		kermetaInterpreter = KermetaLauncher.getDefault().runKermeta(
         		startfile, classname, opname, args, true) ; //, null);//debugCondition);
-        
-        interpreter = (DebugInterpreter)global_interpreter.getMemory().getCurrentInterpreter();
+        interpreter = (DebugInterpreter)kermetaInterpreter.getMemory().getCurrentInterpreter();
         
 	}
 	
@@ -120,13 +122,13 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		// if old_command was resume, stepOverCallFrame must be the first one!
 		// modify the remoteInterpreter currentCommand --> pre-state : step_into e.g
 		// note : after remoteInterpreter ahas done, it defines a post-state : step_end
-		if (cond_name.equals(RunnerConstants.STEP_OVER) && !oldConditionType.equals(RunnerConstants.STEP_INTO))
+		if (cond_name.equals(RunnerConstants.STEP_OVER))
 		{
 			interpreter.setStepOverCallFrame(oldConditionType.equals(RunnerConstants.RESUME));
 		}
 		else if (!cond_name.equals(RunnerConstants.STEP_OVER))
 		{
-			interpreter.unsetStepOverCallFrame(); 
+			interpreter.unsetStepOverCallFrame();
 		}
 		System.out.println("condition : " + cond_name + "cond? " + conditions.get(cond_name));
 		interpreter.setDebugCondition((AbstractKermetaDebugCondition)conditions.get(cond_name));
@@ -137,6 +139,11 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	 */
 	public DebugInterpreter getInterpreter() {
 		return interpreter;
+	}
+	
+	// Hem, the names ....
+	public KermetaIOStream getKermetaIOStream() {
+		return kermetaInterpreter.getKStream();
 	}
 
 	/**
@@ -154,7 +161,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		
 		
 		
-	public synchronized SerializableCallFrame[] getSerializableCallFrames()
+	public synchronized SerializableCallFrame[] getSerializableCallFrames() throws RemoteException
 	{	return KermetaDebugWrapper.createSerializableCallFrames(interpreter); }
 	
 	/** Block the current thread until notification. This method is called by the 
@@ -202,7 +209,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		return interpreter.getDebugCondition().getConditionType();
 	}
 
-	public SerializableVariable[] getSerializableVariablesFromSerializableValue(SerializableValue s_value) {
+	public SerializableVariable[] getSerializableVariablesFromSerializableValue(SerializableValue s_value) throws RemoteException {
 		return KermetaDebugWrapper.createSerializableVariablesOfSerializableValue(interpreter, s_value);
 	}
 	/*
@@ -210,11 +217,5 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		return KermetaDebugWrapper.createSerializableVariablesOfSerializableValue(interpreter, s_value);
 	}*/
 
-	/**
-	 * @return Returns the oldConditionType.
-	 */
-	public String getOldConditionType() {
-		return oldConditionType;
-	}
 
 }

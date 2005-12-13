@@ -1,4 +1,4 @@
-/* $Id: IKermetaRemoteInterpreter.java,v 1.5 2005-12-09 16:25:35 zdrey Exp $
+/* $Id: IKermetaRemoteInterpreter.java,v 1.6 2005-12-13 18:09:15 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : IKermetaRemoteInterpreter.java
  * License   : EPL
@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
+import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 
 /**
  * Server side (receive and process the requests)
@@ -44,8 +45,8 @@ public interface IKermetaRemoteInterpreter extends Remote
 	public abstract void unblock() throws RemoteException;
 	
 	// Change the stop condition strategy
-	public void setDebugCondition(String cond_name) throws RemoteException;
-	public String getDebugCondition() throws RemoteException;
+	public abstract void setDebugCondition(String cond_name) throws RemoteException;
+	public abstract String getDebugCondition() throws RemoteException;
 	public abstract void terminate() throws RemoteException;
 	public abstract SerializableVariable[] getSerializableVariablesFromSerializableValue(SerializableValue s_value) throws RemoteException;
 	public abstract void askTerminate() throws RemoteException;
