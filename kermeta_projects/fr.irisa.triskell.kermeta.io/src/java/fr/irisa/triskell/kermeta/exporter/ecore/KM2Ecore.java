@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.3 2005-12-10 18:16:28 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.4 2005-12-13 13:12:02 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -125,6 +125,7 @@ public class KM2Ecore {
 			String uri = "./"+ecoreResource.getURI().lastSegment();
 			//String uri = ecoreResource.getURI().toString();
 			rP.setNsURI(uri);
+			rP.setNsPrefix(rP.getName());
 			internalLog.debug("Package "+ root_pname +" nsURI set to: "+ uri );
 			
 		}
