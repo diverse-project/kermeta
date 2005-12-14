@@ -281,17 +281,18 @@
      <extension
            point="org.eclipse.debug.core.breakpoints">
         <breakpoint
-              class="fr.irisa.triskell.kermeta.runner.debug.KermetaBreakpoint"
+              class="fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint"
               id="kermetaBreakpoint"
-              markerType="fr.irisa.triskell.kermeta.runner.kermetaBreakpointMarker"
+              markerType="kermetaBreakpointMarker"
               name="kermeta breakpoint"/>
      </extension>
      <extension
-           id="fr.irisa.triskell.kermeta.runner.kermetaBreakpointMarker"
+           id="kermetaBreakpointMarker"
            name="kermetaBreakpointMarker"
            point="org.eclipse.core.resources.markers">
         <super type="org.eclipse.debug.core.lineBreakpointMarker"/>
-        <persistent value="true"/>
+<!--        <super type="org.eclipse.debug.core.breakpointMarker"/> -->
+        <persistent value="false"/>
      </extension>
      <extension
            id="fr.irisa.triskell.kermeta.runner.EditorActions"
@@ -314,9 +315,13 @@
            name="Kermeta Breakpoint Marker Image Providers"
            point="org.eclipse.ui.ide.markerImageProviders">
         <imageprovider
-              icon="icons/tree_sort.gif"
+              icon="icons/breakpoint.png"
               id="fr.irisa.triskell.kermeta.runner.imageprovider"
-              markertype="fr.irisa.triskell.kermeta.runner.kermetaBreakpointMarker"/>
+              markertype="kermetaBreakpointMarker"/>
+<!--        <imageprovider
+              icon="icons/breakpoint.png"
+              id="fr.irisa.triskell.kermeta.runner.imageprovider1"
+              markertype="org.eclipse.debug.core.breakpointMarker"/> -->
      </extension>
      <!-- This extension does not look useful for launchability -->
 <!--     <extension
