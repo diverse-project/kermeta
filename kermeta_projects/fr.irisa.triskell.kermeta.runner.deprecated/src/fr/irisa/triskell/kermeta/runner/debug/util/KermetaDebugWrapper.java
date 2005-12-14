@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.10 2005-12-13 18:09:57 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.11 2005-12-14 17:19:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -19,9 +19,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
-import org.eclipse.debug.core.model.IStackFrame;
-import org.eclipse.debug.core.model.IVariable;
-import org.eclipse.debug.internal.ui.elements.adapters.DeferredVariable;
 
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
@@ -31,12 +28,6 @@ import fr.irisa.triskell.kermeta.interpreter.OperationCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.Traceback;
 import fr.irisa.triskell.kermeta.interpreter.Variable;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
-import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
-import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;
-import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugThread;
-import fr.irisa.triskell.kermeta.runner.debug.model.KermetaStackFrame;
-import fr.irisa.triskell.kermeta.runner.debug.model.KermetaValue;
-import fr.irisa.triskell.kermeta.runner.debug.model.KermetaVariable;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableCallFrame;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableValue;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableVariable;
@@ -76,7 +67,6 @@ public class KermetaDebugWrapper {
 		
 		if (framestack.size() > 0)
 		{
-			System.err.println("FRAME SIZE :  " + framestack.size());
 			frames = new SerializableCallFrame[framestack.size()];
 			
 			// "Transforming" the stack into an array avoid the risks of concurrent modification access.
@@ -299,22 +289,20 @@ public class KermetaDebugWrapper {
 		RuntimeObject o =  getRuntimeObjectForSerializableValue(interpreter, ownervalue);
 		SerializableVariable[] variables = null;
 		// if the RO has properties (and is not a collection)
-		if (o != null && o.getProperties() != null 
-				&& (o.getData().get("CollectionArrayList")==null
-				|| ((ArrayList)o.getData().get("CollectionArrayList")).isEmpty()	)) // can getProperties be null or only emprty?
+		if (o != null && o.getProperties() != null && !o.getProperties().isEmpty()) // can getProperties be null or only emprty?
 		{
 			variables = getPropertiesForRuntimeObject(o, ownervalue);
 		}
 		// If the RuntimeObject type is in fact a Set:
 		// TODO : set a special icon for them!
-		else if (o != null && o.getData().get("CollectionArrayList") != null)
+		else if (o != null && o.getData().get("CollectionArrayList") != null 
+				&& !((ArrayList)o.getData().get("CollectionArrayList")).isEmpty())
 		{
 			variables = createPropertySetFromOID(interpreter, o, ownervalue);
 		}
 		else
 		{
-			System.out.println("unknown type : " + o  + ": "+ ownervalue.valueString + ownervalue.runtimeOID);
-			 
+			RunnerConstants.internalLog.error("Runtime Object not found : " + o  + ": "+ ownervalue.valueString + ownervalue.runtimeOID); 
 		}
 		
 		return variables;
@@ -377,10 +365,15 @@ public class KermetaDebugWrapper {
 		{
 			RuntimeObject o = (RuntimeObject)ro_it.next();
 			if (oid == o.getOId()) 
+			{
 				result = o;
-			else if (o.getProperties()!=null && !o.getProperties().isEmpty())
+			}
+			if (result == null && o.getProperties()!=null && !o.getProperties().isEmpty())
 			{
 				result = getRuntimeObjectFromOID(o.getProperties().values(), oid);
+			}
+			if (result == null)
+			{
 				// if result is still null, perhaps the searched object is contained
 				// in a collection (that is : "o" would be a collection)
 				ArrayList contents = (ArrayList)o.getData().get("CollectionArrayList");
@@ -396,17 +389,20 @@ public class KermetaDebugWrapper {
 	 * always in the interpreter context if it is a property of the RO, we have to get the main runtimeObject to which the
 	 * researched one is linked by a "property-owned" or a "collection-contained" relationship. 
 	 */
-	public static RuntimeObject getRuntimeObjectForSerializableValue(DebugInterpreter interpreter, SerializableValue value)
+	public synchronized static RuntimeObject getRuntimeObjectForSerializableValue(DebugInterpreter interpreter, SerializableValue value)
 	{
 		RuntimeObject result = null;
 		// First, get the first RuntimeObject that is indirectly linked to this value in the int. context
 		// RuntimeObject ro = getContextVariableOwnerForSerializableValue(interpreter, value);
 		Iterator context_vars_it = interpreter.getContextRuntimeObjects().iterator();
+		//Object[] context_ro_array  = context_vars.toArray();
 		// Then parse the RuntimeObject structure, until we found a property which OID is
 		// the runtimeOID referenced in the serializable value given in arguments
 		while (context_vars_it.hasNext() && result == null)
+		//for (int i=0; i< context_ro_array.length; i++)
 		{
 			RuntimeObject ro = (RuntimeObject)context_vars_it.next();
+			//RuntimeObject ro = (RuntimeObject)context_ro_array[i];
 			if (ro.getOId() !=  value.runtimeOID)
 			{
 				Collection properties = ro.getProperties().values();
@@ -424,7 +420,7 @@ public class KermetaDebugWrapper {
 				result = ro;
 			}
 		}
-		if (result == null) System.out.println("no ro found : " + value.runtimeOID + "; " + value.valueString);
+		//if (result == null) System.out.println("no ro found : " + value.runtimeOID + "; " + value.valueString);
 		return result;
 	}
 	

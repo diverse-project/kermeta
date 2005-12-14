@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.10 2005-11-04 17:09:28 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.11 2005-12-14 17:19:55 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -10,6 +10,7 @@
 package fr.irisa.triskell.kermeta.runner.console;
 
 
+import org.eclipse.debug.internal.ui.views.console.ProcessConsole;
 import org.eclipse.jface.dialogs.InputDialog;
 
 
@@ -24,6 +25,7 @@ import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
+import org.eclipse.ui.console.TextConsolePage;
 import org.eclipse.ui.part.IPageBookViewPage;
 
 import fr.irisa.triskell.kermeta.runner.dialogs.InputStreamDialog;
@@ -38,6 +40,7 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
 {
 
     protected MessageConsole messageConsole = null;
+    //protected ProcessConsole messageConsole = null;
     protected IConsoleManager consoleManager = null;
     protected MessageConsoleStream stream = null;
     protected InputStreamDialog inputDialog = null;
@@ -123,11 +126,13 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
         }
     }
     
+    
+    
     /**
      * @see org.eclipse.ui.console.IConsole#createPage(org.eclipse.ui.console.IConsoleView)
      */
     public IPageBookViewPage createPage(IConsoleView view) {
-    	return null;
+    	return new TextConsolePage(messageConsole, view);
     }
 
     /* (non-Javadoc)
@@ -155,7 +160,7 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
      * Add a console
      */
     public void addConsole() {
-        messageConsole = new MessageConsole("KermetaConsole", null);
+        messageConsole = new MessageConsole("KermetaConsole", null); //new ProcessConsole(IProcess, null)
         stream = messageConsole.newMessageStream();
         consoleManager.addConsoles( new IConsole[]{messageConsole});
 	    consoleManager.showConsoleView(messageConsole);

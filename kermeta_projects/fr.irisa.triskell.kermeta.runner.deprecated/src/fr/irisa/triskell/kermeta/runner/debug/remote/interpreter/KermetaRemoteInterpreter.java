@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.7 2005-12-13 18:09:15 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.8 2005-12-14 17:19:55 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -209,7 +209,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		return interpreter.getDebugCondition().getConditionType();
 	}
 
-	public SerializableVariable[] getSerializableVariablesFromSerializableValue(SerializableValue s_value) throws RemoteException {
+	public SerializableVariable[] getSerializableVariablesOfSerializableValue(SerializableValue s_value) throws RemoteException {
 		return KermetaDebugWrapper.createSerializableVariablesOfSerializableValue(interpreter, s_value);
 	}
 	/*

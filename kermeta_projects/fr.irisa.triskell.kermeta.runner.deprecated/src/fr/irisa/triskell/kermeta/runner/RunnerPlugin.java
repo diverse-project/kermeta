@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.13 2005-12-07 15:49:59 zdrey Exp $
+/* $Id: RunnerPlugin.java,v 1.14 2005-12-14 17:19:55 zdrey Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -331,11 +331,16 @@ public class RunnerPlugin extends AbstractUIPlugin
 		IEditorInput edInput;
 		IWorkspace w = ResourcesPlugin.getWorkspace();      
 		IFile file = w.getRoot().getFileForLocation(path);
-		if (file == null  || !file.exists()){
+		System.out.println("file (createEditorInput) : " + file);
+		if (file == null  || !file.exists())
+		{
+			System.err.println("File not found in workspace : " + file);
 			//it is probably an external file
 			File file2 = path.toFile();
 			edInput = createEditorInput(file2);
-		}else{
+		}
+		else
+		{
 			edInput = new FileEditorInput(file);
 		}
 		return edInput;
@@ -343,10 +348,13 @@ public class RunnerPlugin extends AbstractUIPlugin
 	
 	
     private static IEditorInput createEditorInput(File file) {
-        IFile[] workspaceFile= getWorkspaceFile(file);
+    	IFile[] workspaceFile= getWorkspaceFile(file);
         if (workspaceFile != null && workspaceFile.length > 0)
+        {	
         	// todo : study org.eclipse.ui.part
             return new FileEditorInput(workspaceFile[0]);
+        }
+        else { System.out.println("oups, file not found in workspace : " + file);}
         // return new PydevFileEditorInput(file);
         return null;
     }

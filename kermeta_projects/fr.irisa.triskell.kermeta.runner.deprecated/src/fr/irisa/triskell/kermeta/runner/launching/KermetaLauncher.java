@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.9 2005-12-01 18:20:31 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.10 2005-12-14 17:19:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -14,6 +14,8 @@ import java.util.Iterator;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IPluginDescriptor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.internal.ui.actions.DebugContextualLaunchAction;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,6 +32,7 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;

@@ -1,4 +1,4 @@
-/* $Id: StepIntoCondition.java,v 1.5 2005-12-09 16:25:36 zdrey Exp $
+/* $Id: StepIntoCondition.java,v 1.6 2005-12-14 17:19:55 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepIntoCondition.java
  * License   : EPL
@@ -35,20 +35,25 @@ public class StepIntoCondition extends AbstractKermetaDebugCondition {
 	public void blockInterpreter() {
 		try
 		{
-			if (this.evaluate() == true)
+			// cmd : the current command that the interpreter is/was just executing, or
+			// the current state. (stepping : stepInto or stepOver, suspended : stepEnd or terminate)
+			String cmd = remoteInterpreter.getInterpreter().getCurrentState();
+			// We need to test if the TERMINATE notification was not yet sent first by the KermetaDebugTarget..
+			// Since we can enter a last time in blockInterpreter after debug is terminated, 
+			// and since we cannot control its execution directly (interpretation thread is separated from
+			// GUI thread), we need to synchronize with the following condition.
+			if (remoteInterpreter!=null && !remoteInterpreter.getRemoteDebugUI().getDebugState().equals(RunnerConstants.TERMINATE))
 			{
-				// cmd : the current command that the interpreter is/was just executing, or
-				// the current state. (stepping : stepInto or stepOver, suspended : stepEnd or terminate)
-				String cmd = remoteInterpreter.getInterpreter().getCurrentState();
-				if (cmd.equals( RunnerConstants.TERMINATE ))
+				if (this.evaluate() == true)
 				{
-					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.TERMINATE, "");
-				}
-				else
-				{
-					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, 
-						RunnerConstants.STEP_END);
-					remoteInterpreter.block();
+					if (cmd.equals( RunnerConstants.TERMINATE ))
+						remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.TERMINATE, "");
+					else
+					{
+						remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, 
+							RunnerConstants.STEP_END);
+						remoteInterpreter.block();
+					}
 				}
 			}
 		}

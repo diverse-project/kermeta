@@ -1,4 +1,4 @@
-/* $Id: StepOverCondition.java,v 1.6 2005-12-09 16:25:36 zdrey Exp $
+/* $Id: StepOverCondition.java,v 1.7 2005-12-14 17:19:55 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepOverCondition.java
  * License   : EPL
@@ -21,12 +21,10 @@ import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteIn
 // TODO : create an abstractKermetaStepCondition : the block method is always the same!
 public class StepOverCondition extends AbstractBreakpointStopCondition {
 
-	public KermetaRemoteInterpreter remoteInterpreter;
 	
 	public StepOverCondition(KermetaRemoteInterpreter r) 
 	{
-		remoteInterpreter = r;
-		wasBreakpoint = false;
+		super(r);
 	}
 
 	/**
@@ -35,17 +33,21 @@ public class StepOverCondition extends AbstractBreakpointStopCondition {
 	public void blockInterpreter() {
 		
 		try
-		{
-			if (this.evaluate() == true)
+		{  
+			// We don't need to evaluate anything if the GUI side as stopped the Debugging before the Interpreter
+			// side.
+			if (remoteInterpreter!=null && !remoteInterpreter.getRemoteDebugUI().getDebugState().equals(RunnerConstants.TERMINATE))
 			{
-				if (remoteInterpreter.getInterpreter().getCurrentState().equals(RunnerConstants.TERMINATE))
-					// no reason is needed for terminate.
-					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.TERMINATE, "");
-				else
+				if (this.evaluate() == true)
 				{
-					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, 
+					if (remoteInterpreter.getInterpreter().getCurrentState().equals( RunnerConstants.TERMINATE ))
+						remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.TERMINATE, "");
+					else
+					{
+						remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, 
 							RunnerConstants.STEP_END);
-					remoteInterpreter.block();
+						remoteInterpreter.block();
+					}
 				}
 			}
 		}
@@ -61,8 +63,12 @@ public class StepOverCondition extends AbstractBreakpointStopCondition {
 	 */
 	public boolean evaluate() {
 		// Command ... not the right word : stepInto, stepEnd, terminate......
-		String cmd = remoteInterpreter.getInterpreter().getCurrentState(); 
-		return (cmd.equals(RunnerConstants.STEP_END));
+		if (remoteInterpreter.getInterpreter()!=null) // means : if remoteInterpreter is not yet initialized..
+		{
+			String cmd = remoteInterpreter.getInterpreter().getCurrentState(); 
+			return (cmd.equals(RunnerConstants.STEP_END)||cmd.equals(RunnerConstants.TERMINATE));
+		}
+		return false;
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.8 2005-12-13 18:08:58 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.9 2005-12-14 17:19:55 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -101,14 +101,16 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 			}
 			else if (command.equals(RunnerConstants.TERMINATE))
 			{
-				System.out.println("J'ai terminé!");
+				// If the reason was a client request we don't need to handle the GUI events.
+				if (!reason.equals(RunnerConstants.CLIENT_REQUEST))
+				{   // then we have to "force" the fire of an event
+					target.setState(RunnerConstants.TERMINATE);
+					target.fireTerminateEvent();
+				}
 				// Is it correct ?
 				target.getRemoteInterpreter().askTerminate();
 				target.getKermetaProcess().terminate();
 				target.unsetKermetaProcess(); // just set the process to null...
-				// "Kill" the remote interpreter
-				// target.getRemoteInterpreter().;
-				// "Kill" the remote debug platform
 			}
 
 			// Is there a reason? (usually, the reason is given only by the interpreter side, 
@@ -127,7 +129,7 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	 * @see fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteDebugUI#getDebugState()
 	 */
 	public String getDebugState() throws RemoteException {
-		return target.getStateAsString();
+		return target.getState();
 	}
 
 	public String getCommand()
@@ -192,16 +194,6 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 			{
 				result[i] = new KermetaVariable(
 						target, vars[i]);
-				/*result[i] = new KermetaVariable(
-						target, 
-						vars[i].name, 
-						vars[i].type, 
-						new KermetaValue(
-								target,  
-								vars[i].getValue()
-								vars[i].value.valueString,
-								vars[i].value.refTypeName,
-								vars[i].value.runtimeOID )); */
 			}
 		}
 		return result;
@@ -236,11 +228,10 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 		try
 		{
 			Registry reg = LocateRegistry.getRegistry("localhost", 5001);
-			System.out.println("Lookup remote interpreter : " + reg);
 			IKermetaRemoteInterpreter remoteInterpreter = (IKermetaRemoteInterpreter)reg.lookup("remote_interpreter");
-			System.out.println("Lookup successful ");
 			remoteInterpreter.registerKermetaRemoteDebugUI(this);
 			target.setRemoteInterpreter(remoteInterpreter);
+			target.createThread();
 
 		}
 		catch (NotBoundException e)
@@ -300,21 +291,10 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	}
 
 	/** Create the properties of the instance represented by the given KermetaValue */
-	public IVariable[] createKermetaVariablesForSerializableValue(SerializableValue s_value) {
+	public IVariable[] createKermetaVariablesOfSerializableValue(SerializableValue s_value) {
 		IVariable[] result = null;
 		try {
-			SerializableVariable[] svars = target.getRemoteInterpreter().getSerializableVariablesFromSerializableValue(s_value);
-			result = createKermetaVariables(svars);
-		} catch (RemoteException e) { e.printStackTrace(); }
-		
-		return result;
-	}
-	
-	/** Create the properties of the instance represented by the given KermetaValue */
-	public IVariable[] createKermetaVariablesForValue(SerializableValue s_value) {
-		IVariable[] result = null;
-		try {
-			SerializableVariable[] svars = target.getRemoteInterpreter().getSerializableVariablesFromSerializableValue(s_value);
+			SerializableVariable[] svars = target.getRemoteInterpreter().getSerializableVariablesOfSerializableValue(s_value);
 			result = createKermetaVariables(svars);
 		} catch (RemoteException e) { e.printStackTrace(); }
 		

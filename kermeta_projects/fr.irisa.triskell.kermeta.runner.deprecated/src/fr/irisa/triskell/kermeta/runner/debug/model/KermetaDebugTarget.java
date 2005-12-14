@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.12 2005-12-09 16:25:35 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.13 2005-12-14 17:19:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -35,6 +35,7 @@ import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.debug.internal.ui.actions.ResumeActionDelegate;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
@@ -57,25 +58,9 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     
     protected KermetaProcess kermeta_process;
     protected KermetaStepHandler stepHandler;
+    /** Can be RunnerConstants.RESUME, TERMINATE, SUSPEND */
+    protected String state;
     
-	/** current state of the debugger */
-	private int state = -1;
-
-	/** constant state possible for the debugger */
-	public static final int stateTerminated 	= 1;
-	public static final int stateRunning 		= 2;
-	public static final int stateSuspended 		= 3;
-	public static final int stateDisconnected 	= 4;
-	
-	/** Redundance.. */
-	public static Hashtable debug_state_mapping;
-    static {
-    	debug_state_mapping = new Hashtable();
-    	debug_state_mapping.put(new Integer(1), RunnerConstants.TERMINATED);
-    	debug_state_mapping.put(new Integer(2), RunnerConstants.RESUMED);
-    	debug_state_mapping.put(new Integer(3), RunnerConstants.SUSPENDED);
-    }
-	
     /**
      * Constructor
      * @param launch the launch handled by this debug target.
@@ -87,8 +72,10 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
         breakpoints = new ArrayList();
         stepHandler = new KermetaStepHandler(this);
         this.name = "Kermeta Debug Target";
+        // Create a default thread
+		this.threads = new IThread[0];
         // Do not set to stateDisconnected
-        setState(stateRunning);
+        setState(RunnerConstants.RESUME);
         
 
 		initialize();
@@ -133,7 +120,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     /** resume command called by Eclipse when user clicks on the resume button */
     public void resume() throws DebugException {
         // suspended reset to false
-        setState(stateRunning);
+        setState(RunnerConstants.RESUME);
         for (int i=0; i<threads.length; i++)
     	{
     		threads[i].resume();
@@ -143,7 +130,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     
     /** suspend command called by Eclipse when user clicks on the suspend button */
     public void suspend() throws DebugException {
-    	setState(stateSuspended);
+    	setState(RunnerConstants.SUSPEND);
     	for (int i=0; i<threads.length; i++)
     	{
     		threads[i].suspend();
@@ -153,7 +140,8 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     
     /** terminate command called by Eclipse when user clicks on the stop button */
 	public void terminate() throws DebugException {
-    	setState(stateTerminated);
+    	setState(RunnerConstants.TERMINATE);
+    	// No more thread running!
 		threads = new IThread[0];
 		try {
 			// This call unblocks the interpreter.
@@ -169,15 +157,14 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     
     /** @see org.eclipse.debug.core.model.ISuspendResume#isTerminated() */
 	public boolean isTerminated() {
-		return (state == stateTerminated);
+		return (state.equals(RunnerConstants.TERMINATE));
 	} 
     /** @see org.eclipse.debug.core.model.ISuspendResume#isSuspended() */
-    public boolean isSuspended()
-    { 
-    	return (state == stateSuspended); 
+    public boolean isSuspended() { 
+    	return (state.equals(RunnerConstants.SUSPEND)); 
     }
     /** @see fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget#isDisconnected() */
-	public boolean isDisconnected() { return (state == stateDisconnected); }
+	public boolean isDisconnected() { return (state.equals(RunnerConstants.DISCONNECT)); }
 
     
     /*
@@ -186,12 +173,14 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     
     /** @see org.eclipse.debug.core.model.ISuspendResume#canResume() */
     public boolean canResume() {
-    	return (kermeta_process!=null && state != stateDisconnected && state != stateRunning);
+    	return (kermeta_process!=null && !isDisconnected() && isSuspended());
     }
 
     /** @see org.eclipse.debug.core.model.ISuspendResume#canSuspend() */
-    public boolean canSuspend()
-    {	return kermeta_process!=null && !isSuspended(); }
+    public boolean canSuspend() 
+    {
+    	return threads.length>0 && !isSuspended(); 
+    }
 
 	/**
 	 * @see fr.irisa.triskell.kermeta.runner.launching.AbstractKermetaTarget#supportsBreakpoint(org.eclipse.debug.core.model.IBreakpoint)
@@ -199,13 +188,13 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) { return true; }
 
 	/** @see org.eclipse.debug.core.model.IDisconnect#canDisconnect() */
-    public boolean canDisconnect() { return (kermeta_process!=null && state != stateDisconnected); }
+    public boolean canDisconnect() { return (kermeta_process!=null && !isDisconnected()); }
 
     /** @see fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget#canTerminate() */
 	public boolean canTerminate() { return (kermeta_process!=null && !isTerminated()); }
 	
 	/** @see org.eclipse.debug.core.model.IDisconnect#disconnect() */
-    public void disconnect() throws DebugException { setState(stateDisconnected); }
+    public void disconnect() throws DebugException { setState(RunnerConstants.DISCONNECT); }
   
     /*
      * Implementation of IDebugTarget
@@ -215,14 +204,13 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     /**
      * This method is implicitely called inside the Eclipse framework in order 
      * to display the thread nodes of this debug target in the tree view 
+     * This method is not allowed to return null!
      * @see org.eclipse.debug.core.model.IDebugTarget#getThreads()
      */
     public IThread[] getThreads() throws DebugException {
-    	// Should not be null in fact
-    	if (threads==null || threads.length==0)
+    	if (threads==null) // testing length is important || threads.length==0)
     	{
-    		threads = new KermetaDebugThread[1];
-    		threads[0] = new KermetaDebugThread(this, "default thread");
+    		threads = new IThread[0];
     		//fireCreationEvent(threads[0]);
     	}
     	return threads;
@@ -258,7 +246,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	public synchronized void initialize() {
 		initPath();
 		initializeBreakpoints();
-		setState(stateRunning);
+		setState(RunnerConstants.RESUME);
 	}
 	
 	/**
@@ -344,9 +332,8 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	
 	
 	// Easier since we share Strings most of the time
-	public String getStateAsString() { return (String)debug_state_mapping.get(new Integer(state)); }
-	public int getState() { return state; }
-    public void setState(int pstate) { state = pstate; }
+	public String getState() { return state; }
+    public void setState(String pstate) { state = pstate; }
 
 	public Object getAdapter(Class adapter) {
 		if (adapter == AbstractKermetaTarget.class || adapter == KermetaDebugTarget.class)
@@ -380,7 +367,15 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	}
 	
 	public KermetaProcess getKermetaProcess() { return kermeta_process; }
-	public void unsetKermetaProcess() { kermeta_process = null;} 
+	public void unsetKermetaProcess() { kermeta_process = null;}
+
+	/** Create a thread once the debugger has started */
+	public void createThread() {
+		threads = new KermetaDebugThread[1];
+		threads[0] = new KermetaDebugThread(this, "default thread");
+		fireCreationEvent(threads[0]);
+		fireResumeEvent(this);
+	} 
 	
 	
 }

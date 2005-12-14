@@ -1,4 +1,4 @@
-/* $Id: ResumeCondition.java,v 1.6 2005-12-09 16:25:36 zdrey Exp $
+/* $Id: ResumeCondition.java,v 1.7 2005-12-14 17:19:55 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : ResumeCondition.java
  * License   : EPL
@@ -24,8 +24,7 @@ public class ResumeCondition extends AbstractBreakpointStopCondition {
 
 	public ResumeCondition(KermetaRemoteInterpreter p_interpreter)
 	{
-		remoteInterpreter = p_interpreter;
-		wasBreakpoint = false;
+		super(p_interpreter);
 	}
 	
 	/**
@@ -33,20 +32,25 @@ public class ResumeCondition extends AbstractBreakpointStopCondition {
 	 * and control the blocked/unblocked mode of the RemoteInterpreter thread
 	 */
 	public void blockInterpreter() {
-		if (evaluate() == true)
+		try
 		{
-			try
+			if (remoteInterpreter!=null && !remoteInterpreter.getRemoteDebugUI().getDebugState().equals(RunnerConstants.TERMINATE))
 			{
-				if (wasBreakpoint)
-					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, RunnerConstants.BREAKPOINT);
-				// blocked because the execution of the program is finished
-				else if (remoteInterpreter.getInterpreter().getCurrentState().equals(RunnerConstants.TERMINATE))
+				if (remoteInterpreter.getInterpreter().getCurrentState().equals( RunnerConstants.TERMINATE ))
 					remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.TERMINATE, "");
+				else if (evaluate() == true)
+				{	// tell the reason
+					if (wasBreakpoint)
+					{
+						remoteInterpreter.getRemoteDebugUI().notify(RunnerConstants.SUSPEND, RunnerConstants.BREAKPOINT);
+					}
+					// otherwise, if user choice, the GUI already notifyied.
+					// blocked by user choice or breakpoint
+					remoteInterpreter.block();
+				}
 			}
-			catch (RemoteException e) { e.printStackTrace();}
-			// blocked by user choice or breakpoint
-			remoteInterpreter.block();
-		}
+			
+		}catch (RemoteException e) { e.printStackTrace();}
 	}
 	
 	/**

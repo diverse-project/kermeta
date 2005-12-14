@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpoint.java,v 1.7 2005-12-13 18:08:40 zdrey Exp $
+/* $Id: KermetaBreakpoint.java,v 1.8 2005-12-14 17:19:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaBreakpoint.java
  * License   : EPL
@@ -27,7 +27,7 @@ public class KermetaBreakpoint extends LineBreakpoint {
 
 	// the marker ID (can we find it by calculating it? this string is 
 	// marker id in plugin.xml data.
-	//public static final String KERMETA_BREAKPOINT_MARKER="fr.irisa.triskell.kermeta.runner.kermetaBreakpointMarker";
+	//public static final String KERMETA_BREAKPOINT_MARKER="kermetaBreakpointMarker";
 	public static final String KERMETA_BREAKPOINT_MARKER=LineBreakpoint.BREAKPOINT_MARKER;
 	static public final String FUNCTION_NAME_PROP = "kermeta.function_name";
 
@@ -65,6 +65,6 @@ public class KermetaBreakpoint extends LineBreakpoint {
 		// return r.getLocation().toOSString();
 	}
 
-	
+	// public String
 	
 }

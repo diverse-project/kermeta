@@ -16,6 +16,8 @@ import java.rmi.server.ExportException;
 import java.rmi.server.RemoteObject;
 import java.rmi.server.UnicastRemoteObject;
 
+import org.apache.log4j.Logger;
+
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
@@ -30,6 +32,7 @@ import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteI
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.ResumeCondition;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * The thread inside which the DebugInterpreter will be launched.
@@ -38,7 +41,7 @@ import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 public class KermetaProcess extends Thread {
 	
 	public final String REMOTE_NAME = "remote_interpreter";
-
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("Kermeta");
 	private String file;
 	private String classname;
 	private String opname;
@@ -75,23 +78,20 @@ public class KermetaProcess extends Thread {
 		{
 			if (System.getSecurityManager() == null)
 			{
-				System.out.println("No security manager : creating one");
+				internalLog.info("No security manager : creating one");
 				System.setSecurityManager (new KermetaSecurityManager());
 				//System.setSecurityManager(new RMISecurityManager());
 			}
 			
-			System.err.println("1) remote interpreter!");
 			try { 
 				reg = LocateRegistry.createRegistry(5001);
 			}
-			catch (ExportException e)
-			{
-				System.err.println("Export exception : " + e);
+			catch (ExportException e) {
 				reg = LocateRegistry.getRegistry("localhost", 5001);
 			}
 			remote_interpreter = new KermetaRemoteInterpreter(file, classname, opname, args);
 			reg.bind(REMOTE_NAME, remote_interpreter);
-			System.out.println("Binded!" + reg.lookup(REMOTE_NAME));
+			internalLog.info("RemoteInterpreter is binded in the local registry");
 		}
 		catch (Exception e) 
 		{
@@ -110,9 +110,9 @@ public class KermetaProcess extends Thread {
 			
 			try {
 				debugPlatform.remoteInterpreterCreated();
-				// Invoke the interpretation after RMI connections are done
-				System.err.println("get interpreter : " + remote_interpreter);
-				remote_interpreter.getInterpreter().invoke_debug();
+				// remote_interpreter is null if a RemoteException was caught above.
+				if (remote_interpreter != null)
+					remote_interpreter.getInterpreter().invoke_debug();
 				
 			} catch (RemoteException e) {
 				e.printStackTrace();

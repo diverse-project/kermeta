@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.5 2005-12-09 16:25:36 zdrey Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.6 2005-12-14 17:19:55 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -37,6 +37,11 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 	 */
 	protected boolean wasBreakpoint;
 	
+	public AbstractBreakpointStopCondition(KermetaRemoteInterpreter p_interpreter) {
+		remoteInterpreter = p_interpreter;
+		wasBreakpoint = false;
+	}
+
 	public boolean evaluate()
 	{
 		boolean eval_stop = false;
@@ -51,7 +56,7 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 		else
 		{
 			try
-			{	
+			{
 				// Do we have any breakpoint?
 				SerializableBreakpoint[] breakpoints = remoteInterpreter.getRemoteDebugUI().getSerializableBreakpoints();
 				Integer l = getLineForCurrentNode();

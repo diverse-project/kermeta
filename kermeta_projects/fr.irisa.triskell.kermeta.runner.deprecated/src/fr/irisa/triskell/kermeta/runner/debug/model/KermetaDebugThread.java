@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.11 2005-12-09 16:25:35 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.12 2005-12-14 17:19:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -177,7 +177,7 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	{
 		isSuspended = suspend;
 		// Thread control the target since there is only one thread yet!
-		target.setState(((suspend==false)?KermetaDebugTarget.stateRunning:KermetaDebugTarget.stateSuspended));
+		target.setState(((suspend==false)?RunnerConstants.RESUME:RunnerConstants.SUSPEND));
 			
 		// Debug framework does not want that stackFrames is null...
 		if (stackFrames == null || stackFrames.length == 0)
@@ -218,41 +218,34 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	
 	/** @see org.eclipse.debug.core.model.IStep#stepInto() */
 	public void stepInto() throws DebugException {
-		target.setState(KermetaDebugTarget.stateRunning);
-		// fire the resume event (no "stepInto" event! see eclipse doc. on DebugEvent class)
-		fireResumeEvent(DebugEvent.STEP_INTO);
-		isStepping = true;
-		try {
-			// This call unblocks the interpreter.
-			// notify is used as well by the GUI (to tell a GUI command --here, stepInto-- is run)
-			// as by the RemoteInterpreter (to tell a debugInterp. command is done)
-			target.getRemoteDebugUI().notify(RunnerConstants.RESUME, RunnerConstants.STEP_INTO);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
+		step(RunnerConstants.STEP_INTO, DebugEvent.STEP_INTO);
 	}
 
 	/** @see org.eclipse.debug.core.model.IStep#stepOver() */
 	public void stepOver() throws DebugException {
-		isStepping = true;
-		target.setState(KermetaDebugTarget.stateRunning);
-		fireResumeEvent(DebugEvent.STEP_OVER);
+		step(RunnerConstants.STEP_OVER, DebugEvent.STEP_OVER);
+	}
+
+	/** @see org.eclipse.debug.core.model.IStep#stepReturn() */
+	public void stepReturn() throws DebugException {
+		step(RunnerConstants.STEP_RETURN, DebugEvent.STEP_RETURN);
+	}
+
+	protected void step(String stepType, int stepEvent) throws DebugException 
+	{ 
+		target.setState(RunnerConstants.RESUME);
+		fireResumeEvent(stepEvent);
 		isStepping = true;
 		try {
 			// This call unblocks the interpreter.
 			// notify is used as well by the GUI (to tell a GUI command --here, stepInto-- is run)
 			// as by the RemoteInterpreter (to tell a debugInterp. command is done)
-			target.getRemoteDebugUI().notify(RunnerConstants.RESUME, RunnerConstants.STEP_OVER);
+			target.getRemoteDebugUI().notify(RunnerConstants.RESUME, stepType);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
 	}
-
-	/** @see org.eclipse.debug.core.model.IStep#stepReturn() */
-	public void stepReturn() throws DebugException {
-		target.setState(KermetaDebugTarget.stateRunning);
-	}
-
+	
 	/** @see org.eclipse.debug.core.model.ITerminate#canTerminate() */
 	public boolean canTerminate() { return target.canTerminate(); }
 
@@ -267,7 +260,6 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	}
 
 	public void setBreakpoints(String something) {
-
 	}
 	
 }

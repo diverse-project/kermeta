@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugModelPresentation.java,v 1.6 2005-12-07 15:49:58 zdrey Exp $
+/* $Id: KermetaDebugModelPresentation.java,v 1.7 2005-12-14 17:19:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugModelPresentation.java
  * License   : EPL
@@ -139,7 +139,7 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      * @see org.eclipse.debug.ui.IDebugModelPresentation#computeDetail(org.eclipse.debug.core.model.IValue, org.eclipse.debug.ui.IValueDetailListener)
      */
     public void computeDetail(IValue value, IValueDetailListener listener) {
-		if (value instanceof KermetaVariable) {
+		if (value instanceof KermetaValue) {
 			try {
 				((KermetaValue)value).getVariables();
 				listener.detailComputed(value, ((KermetaValue)value).getValueString());

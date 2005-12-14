@@ -1,4 +1,4 @@
-/* $Id: KermetaValue.java,v 1.4 2005-12-06 18:53:15 zdrey Exp $
+/* $Id: KermetaValue.java,v 1.5 2005-12-14 17:19:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaValue.java
  * License   : GPL
@@ -9,6 +9,7 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 
 import org.eclipse.debug.core.DebugException;
@@ -31,10 +32,8 @@ import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableVal
 public class KermetaValue extends DebugElement implements IValue {
 
     /** The debug target */
-    KermetaDebugTarget debugTarget;
-    
+    KermetaDebugTarget debugTarget;    
     SerializableValue refValue;
-    
     String valueString;
     String valueType;
     long runtimeOID;
@@ -77,7 +76,7 @@ public class KermetaValue extends DebugElement implements IValue {
      */
     public boolean isAllocated() throws DebugException {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     /**
@@ -88,15 +87,23 @@ public class KermetaValue extends DebugElement implements IValue {
     public IVariable[] getVariables() throws DebugException {
         //return debugTarget.getMainThread().getTopStackFrame().getVariables();
     	// Find the object linked to the value
+    	/*System.err.println("Lopping in getVariable? " + this.refValue.valueString + this.refValue.runtimeOID);
+    	try {
+			System.in.read();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
     	IVariable[] ivars = null;
     	if (!valueType.equals(RunnerConstants.IVALUE_PRIMITIVE))
     	{
-    		ivars = debugTarget.getRemoteDebugUI().createKermetaVariablesForSerializableValue(this.refValue);
+    		ivars = debugTarget.getRemoteDebugUI().createKermetaVariablesOfSerializableValue(this.refValue);
     	}
 		if (ivars == null) return new IVariable[0];
     	return ivars;
     }
 
+    
     /**
      * @return true if the value is associated to a variable, false otherwise.
      * @see org.eclipse.debug.core.model.IValue#hasVariables()
