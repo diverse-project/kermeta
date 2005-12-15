@@ -1,4 +1,4 @@
-/* $Id: KermetaValue.java,v 1.5 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: KermetaValue.java,v 1.6 2005-12-15 18:41:45 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaValue.java
  * License   : GPL
@@ -21,6 +21,7 @@ import org.eclipse.debug.core.model.IVariable;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableValue;
+import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableVariable;
 
 
 /**
@@ -85,19 +86,13 @@ public class KermetaValue extends DebugElement implements IValue {
      * @see org.eclipse.debug.core.model.IValue#getVariables()
      */
     public IVariable[] getVariables() throws DebugException {
-        //return debugTarget.getMainThread().getTopStackFrame().getVariables();
-    	// Find the object linked to the value
-    	/*System.err.println("Lopping in getVariable? " + this.refValue.valueString + this.refValue.runtimeOID);
-    	try {
-			System.in.read();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
     	IVariable[] ivars = null;
     	if (!valueType.equals(RunnerConstants.IVALUE_PRIMITIVE))
     	{
-    		ivars = debugTarget.getRemoteDebugUI().createKermetaVariablesOfSerializableValue(this.refValue);
+    		try {
+    			SerializableVariable[] svars = debugTarget.getRemoteInterpreter().getSerializableVariablesOfSerializableValue(this.refValue);
+    			ivars = debugTarget.getRemoteDebugUI().createKermetaVariables(svars);
+    		} catch (RemoteException e) { e.printStackTrace(); }
     	}
 		if (ivars == null) return new IVariable[0];
     	return ivars;

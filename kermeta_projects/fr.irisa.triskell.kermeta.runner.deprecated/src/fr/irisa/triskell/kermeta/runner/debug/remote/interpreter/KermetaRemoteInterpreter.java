@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.8 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.9 2005-12-15 18:41:45 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -162,7 +162,9 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		
 		
 	public synchronized SerializableCallFrame[] getSerializableCallFrames() throws RemoteException
-	{	return KermetaDebugWrapper.createSerializableCallFrames(interpreter); }
+	{	
+		return KermetaDebugWrapper.createSerializableCallFrames(interpreter);
+	}
 	
 	/** Block the current thread until notification. This method is called by the 
 	 * KermetaRemoteInterpreter itself. */

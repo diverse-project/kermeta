@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.9 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.10 2005-12-15 18:41:45 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -89,6 +89,7 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 				// its stop the debugger as soon as its evaluation is true during the 
 				// execution
 				target.getRemoteInterpreter().changeSuspendedState(true);
+				System.err.println("SUSPEND ASKED");
 				target.getMainThread().setStackFrames(createKermetaStackFrames());
 				processSuspendReason(reason);
 			}
@@ -147,6 +148,8 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	 */
 	protected synchronized IStackFrame[] createKermetaStackFrames() throws DebugException, RemoteException
 	{
+		System.err.println("createKermetaStackFrames in (KRDU)");
+		
 		SerializableCallFrame[] frames = target.getRemoteInterpreter().getSerializableCallFrames();
 		KermetaStackFrame[] result = null;
 		IPath path = null;

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.11 2005-12-14 17:19:56 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.12 2005-12-15 18:41:45 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -9,6 +9,7 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -59,12 +60,15 @@ public class KermetaDebugWrapper {
 	 */
 	public static synchronized SerializableCallFrame[] createSerializableCallFrames(DebugInterpreter interpreter) {
 
+		// Initialize the visible runtime objects of the current frame 
+		interpreter.initVisibleRuntimeObjects();
 		// Get the current execution context
 		InterpreterContext context = interpreter.getInterpreterContext();
+
 		int i = 0;
 		SerializableCallFrame[] frames = null;
 		Stack framestack = context.getFrameStack();
-		
+		System.err.println("frame stack END: " + framestack.size());
 		if (framestack.size() > 0)
 		{
 			frames = new SerializableCallFrame[framestack.size()];
@@ -177,10 +181,10 @@ public class KermetaDebugWrapper {
 	protected static SerializableVariable[] createSerializableVariables(CallFrame kframe)
 	{
 		
-		Hashtable variables = kframe.getVariables();
+		List variables = kframe.getVariables(); 
 		SerializableVariable[] result = new SerializableVariable[variables.size()];
 		// Avoid concurrent modification conflicts
-		Object[] vars = variables.values().toArray();
+		Object[] vars = variables.toArray();
 		for (int i=0; i<vars.length; i++)
 		{
 			// It is said that it can be a "testPackage::TestClass"!!!!!
@@ -285,143 +289,30 @@ public class KermetaDebugWrapper {
 
 
 	public static SerializableVariable[] createSerializableVariablesOfSerializableValue(DebugInterpreter interpreter, SerializableValue ownervalue) {
-		// Get the RuntimeObject linked to this oid // todo : get
-		RuntimeObject o =  getRuntimeObjectForSerializableValue(interpreter, ownervalue);
-		SerializableVariable[] variables = null;
-		// if the RO has properties (and is not a collection)
-		if (o != null && o.getProperties() != null && !o.getProperties().isEmpty()) // can getProperties be null or only emprty?
-		{
-			variables = getPropertiesForRuntimeObject(o, ownervalue);
-		}
-		// If the RuntimeObject type is in fact a Set:
-		// TODO : set a special icon for them!
-		else if (o != null && o.getData().get("CollectionArrayList") != null 
-				&& !((ArrayList)o.getData().get("CollectionArrayList")).isEmpty())
-		{
-			variables = createPropertySetFromOID(interpreter, o, ownervalue);
-		}
-		else
-		{
-			RunnerConstants.internalLog.error("Runtime Object not found : " + o  + ": "+ ownervalue.valueString + ownervalue.runtimeOID); 
-		}
 		
+		Hashtable rvalues = interpreter.getVisibleRuntimeObjects(ownervalue.runtimeOID);
+		System.err.println("Find runtimeobject for value : " + ownervalue.valueString + "->" + rvalues.size());
+		interpreter.updateVisibleRuntimeObjects(rvalues);
+		// Get the RuntimeObject linked to this oid // todo : get
+		//RuntimeObject o =  getRuntimeObjectForSerializableValue(interpreter, ownervalue.runtimeOID);
+		SerializableVariable[] variables = null;
+		variables = getPropertiesForRuntimeObject(rvalues, ownervalue);
 		return variables;
 	}
 	
-	protected static SerializableVariable[] getPropertiesForRuntimeObject(RuntimeObject o, SerializableValue ownervalue)
+	protected static SerializableVariable[] getPropertiesForRuntimeObject(Hashtable runtime_objects, SerializableValue ownervalue)
 	{
 		SerializableVariable[] variables = null;
-		variables = new SerializableVariable[o.getProperties().size()];
+		variables = new SerializableVariable[runtime_objects.size()];
 		int iv = 0;
 		// Get the properties of the RuntimeObject
-		Enumeration e = o.getProperties().keys();
-		while (e.hasMoreElements()) {
+		Iterator it = runtime_objects.keySet().iterator();
+		while (it.hasNext()) {
 			// Get their name, value, create a SerializableVariable that embed them
-			String nkey = (String)e.nextElement();
-			RuntimeObject rovalue = (RuntimeObject)o.getProperties().get(nkey);
-			
-			variables[iv] = createSerializableVariable(nkey, rovalue, ownervalue);
-			iv+=1;
-			
+			String key = (String)it.next();
+			variables[iv++] = createSerializableVariable(key, (RuntimeObject)runtime_objects.get(key), ownervalue);
 		}
-		
 		return variables;
 	}
-	
-	
-	/**
-	 * Find and return the RuntimeObject that belongs to the interpreter context,
-	 * and to which is linked (as a property or a property of the property) the 
-	 * RO given by runtimeOID.
-	 * 
-	 * @return
-	 * @deprecated
-	 * Does not work since the SerializableVariable/Value always change (we recreate 
-	 * them at each access of the context)
-	 */
-	public static RuntimeObject getContextVariableOwnerForSerializableValue(DebugInterpreter interpreter, SerializableValue svalue)
-	{
-		// Get the ownerOID of given
-		System.out.println("var : " + svalue  );
-		RuntimeObject result = interpreter.getRuntimeObjectByOID(svalue.runtimeOID);
-		// If the svalue does not reference to a variable in the interpreter context,
-		// Then, try to find its owner
-		if (result == null) {
-			System.out.println("ref var : " + svalue.refVar + "- oid :"+ svalue.runtimeOID);
-			System.out.println(interpreter.getRuntimeObjectByOID(svalue.runtimeOID));
-			result = getContextVariableOwnerForSerializableValue(interpreter, svalue.refVar.ownerValue);
-			if (result != null) return result;
-		}
-		
-		return result; 
-	}
-	
-	/** Return the list of OID corresponding to the given list of RuntimeObjects */
-	public static RuntimeObject getRuntimeObjectFromOID(Collection ro_set, long oid)
-	{
-		Iterator ro_it = ro_set.iterator();
-		RuntimeObject result = null;
-		while (ro_it.hasNext() && result == null)
-		{
-			RuntimeObject o = (RuntimeObject)ro_it.next();
-			if (oid == o.getOId()) 
-			{
-				result = o;
-			}
-			if (result == null && o.getProperties()!=null && !o.getProperties().isEmpty())
-			{
-				result = getRuntimeObjectFromOID(o.getProperties().values(), oid);
-			}
-			if (result == null)
-			{
-				// if result is still null, perhaps the searched object is contained
-				// in a collection (that is : "o" would be a collection)
-				ArrayList contents = (ArrayList)o.getData().get("CollectionArrayList");
-				if (result == null && contents!=null && !contents.isEmpty()) 
-					result = getRuntimeObjectFromOID(contents, oid);
-			}
-		}
-		return result;
-	}
 
-	/** 
-	 * Get the runtime object linked to this serailizable value. Since the expected RO is not
-	 * always in the interpreter context if it is a property of the RO, we have to get the main runtimeObject to which the
-	 * researched one is linked by a "property-owned" or a "collection-contained" relationship. 
-	 */
-	public synchronized static RuntimeObject getRuntimeObjectForSerializableValue(DebugInterpreter interpreter, SerializableValue value)
-	{
-		RuntimeObject result = null;
-		// First, get the first RuntimeObject that is indirectly linked to this value in the int. context
-		// RuntimeObject ro = getContextVariableOwnerForSerializableValue(interpreter, value);
-		Iterator context_vars_it = interpreter.getContextRuntimeObjects().iterator();
-		//Object[] context_ro_array  = context_vars.toArray();
-		// Then parse the RuntimeObject structure, until we found a property which OID is
-		// the runtimeOID referenced in the serializable value given in arguments
-		while (context_vars_it.hasNext() && result == null)
-		//for (int i=0; i< context_ro_array.length; i++)
-		{
-			RuntimeObject ro = (RuntimeObject)context_vars_it.next();
-			//RuntimeObject ro = (RuntimeObject)context_ro_array[i];
-			if (ro.getOId() !=  value.runtimeOID)
-			{
-				Collection properties = ro.getProperties().values();
-				// try to find the object in the properties?
-				result = getRuntimeObjectFromOID(properties, value.runtimeOID);
-				// if result is still null, it may be found in a collection?
-				if (result==null && ro.getData().get("CollectionArrayList") !=null)
-				{
-					result = getRuntimeObjectFromOID(
-					(Collection)ro.getData().get("CollectionArrayList"), value.runtimeOID);
-				}
-			}
-			else
-			{
-				result = ro;
-			}
-		}
-		//if (result == null) System.out.println("no ro found : " + value.runtimeOID + "; " + value.valueString);
-		return result;
-	}
-	
 }
