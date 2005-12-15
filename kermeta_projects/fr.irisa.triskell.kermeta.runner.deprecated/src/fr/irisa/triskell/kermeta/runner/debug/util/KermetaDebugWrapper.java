@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.12 2005-12-15 18:41:45 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.13 2005-12-15 18:42:43 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -291,7 +291,6 @@ public class KermetaDebugWrapper {
 	public static SerializableVariable[] createSerializableVariablesOfSerializableValue(DebugInterpreter interpreter, SerializableValue ownervalue) {
 		
 		Hashtable rvalues = interpreter.getVisibleRuntimeObjects(ownervalue.runtimeOID);
-		System.err.println("Find runtimeobject for value : " + ownervalue.valueString + "->" + rvalues.size());
 		interpreter.updateVisibleRuntimeObjects(rvalues);
 		// Get the RuntimeObject linked to this oid // todo : get
 		//RuntimeObject o =  getRuntimeObjectForSerializableValue(interpreter, ownervalue.runtimeOID);
