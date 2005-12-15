@@ -1,4 +1,4 @@
-/* $Id: CallFrame.java,v 1.17 2005-12-08 17:39:03 zdrey Exp $
+/* $Id: CallFrame.java,v 1.18 2005-12-15 18:42:20 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : CallFrame.java
  * License : GPL
@@ -9,7 +9,9 @@
  */
 package fr.irisa.triskell.kermeta.interpreter;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Stack;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -80,13 +82,13 @@ public abstract class CallFrame {
     }
 
     /** Return the visible variables in this CallFrame */
-    public Hashtable getVariables() {
-        Hashtable result = new Hashtable();
+    public List getVariables() {
+        List result = new ArrayList(); 
         for (int i=block_stack.size()-1; i>=0; i--) {
-            result.putAll(((ExpressionContext)block_stack.get(i)).getVariables());
+            result.addAll(((ExpressionContext)block_stack.get(i)).getVariables().values());
         }
         //result.put("self", getSelf());
-        result.putAll(context.getInterpreterVariables());
+        result.addAll(context.getInterpreterVariables().values());
         return result;
     }
     

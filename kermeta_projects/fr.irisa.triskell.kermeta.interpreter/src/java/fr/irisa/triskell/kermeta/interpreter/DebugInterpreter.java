@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.13 2005-12-09 16:21:52 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.14 2005-12-15 18:42:20 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -10,7 +10,11 @@
 package fr.irisa.triskell.kermeta.interpreter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -28,9 +32,12 @@ import fr.irisa.triskell.kermeta.behavior.FLoop;
 import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FObject;
 
@@ -60,11 +67,14 @@ public class DebugInterpreter extends ExpressionInterpreter {
     /** The reason/state of the debugging
     (among stepEnd, stepInto, stepOver.) */
     public String currentState = "";
-    /** oldCommand */
     public String oldCommand = "";
     /** The stop condition for the stepOver command */ 
-    protected CallFrame stepOverCallFrame; 
+    protected CallFrame stepOverCallFrame;
+    /** This frame is used when we switch from stepInto to stepOver*/
+    protected CallFrame lastCallFrame;
     protected CallFrame current_frame;
+    /** A table of { oid : runtimeObject }*/
+    protected Hashtable currentVisibleRuntimeObjects;
     
     public FClass entryObject ;
     public FOperation entryOperation ;
@@ -77,6 +87,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public DebugInterpreter(RuntimeMemory pMemory) {
         super(pMemory);
         currentState = DEBUG_RESUME;
+        currentVisibleRuntimeObjects = new Hashtable();
     }
     
     /**
@@ -106,31 +117,31 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	
 	/**
 	 * Run the execution of the program
+	 * The argument is probably not well placed!! 
+	 * But we need it -- think about how to make KermetaConsole available
+	 * FIXME : put the console handling somewhere
 	 */
 	public Object invoke_debug()
 	{
 		System.out.println("Begin invoke_debug");
 		Object result = memory.voidINSTANCE;
-		try {
-	        // Resolve this operation call
-	        result = (RuntimeObject)this.accept(entryOperation);
-	        System.out.println("operation invoked!");
-       }
-	   catch (Exception e)
-	   {
-		   System.err.println("There is an unexpected exception : ");
-		   e.printStackTrace();
-	   }
-       finally {
-	        // After operation has been evaluated, pop its context
-    	    interpreterContext.popCallFrame();
-	        // Remote side of the interpreter reads this attribute and act accordingly
-	        currentState = DEBUG_TERMINATE;
-	        // Run a last time the debug command that tests if we can interrupt.....laborious
-	        if (shouldTerminate()) return result;
-	        processDebugCommand(entryOperation);
-       }
-       return result;
+		
+		// Resolve this operation call
+		result = (RuntimeObject)this.accept(entryOperation);
+		System.out.println("operation invoked!");
+		
+		// finally block removed
+		// {
+		
+		// After operation has been evaluated, pop its context
+		interpreterContext.popCallFrame();
+		// Remote side of the interpreter reads this attribute and act accordingly
+		currentState = DEBUG_TERMINATE;
+		// Run a last time the debug command that tests if we can interrupt.....laborious
+		if (shouldTerminate()) return result;
+		processDebugCommand(entryOperation);
+		// }
+		return result;
 	}
     
 	/**
@@ -166,7 +177,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public Object visitFCallFeature(FCallFeature node) {
     	Object result = memory.voidINSTANCE;
     	// (Simple test to terminate)
-    	if (shouldTerminate()) return result;
+    	//if (shouldTerminate()) return result;
     	processDebugCommand(node);
     	result = super.visitFCallFeature(node);
     	processPostCommand(node);
@@ -256,11 +267,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
     {
     	current_frame = getInterpreterContext().peekCallFrame();
     	
-    	// If command is a step-into, then we stop systematically after a visit 
-    	if (isSteppingInto() ) 
-    	{
-    		setSuspended(true, DEBUG_STEPEND);
-    	}
     	// If it is step over and
     	// if the stepOverCallframe that conditioned the stop of the stepOver was poped
     	// (this case occurs for example when a step-over command follows a step-into),
@@ -279,6 +285,11 @@ public class DebugInterpreter extends ExpressionInterpreter {
     			 !(node instanceof FBlock)) 
     	{
     		setSuspended(true, DEBUG_STEPEND);
+    	} 
+    	// If command is a step-into, then we stop systematically after a visit 
+    	else if (isSteppingInto() ) 
+    	{
+    		setSuspended(true, DEBUG_STEPEND);
     	}
     }
 
@@ -287,9 +298,10 @@ public class DebugInterpreter extends ExpressionInterpreter {
      * @param current_node
      */
     public Object processDebugCommand(EObject current_node)
-    {
+    {	
     	if (getDebugCondition()!=null) 
     	{	// Tell the debug condition where we are
+    		initVisibleRuntimeObjects();
     		getDebugCondition().setCurrentNode(current_node);
     		getDebugCondition().blockInterpreter();
     	}
@@ -355,6 +367,22 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	public void unsetStepOverCallFrame()
 	{ stepOverCallFrame = null; }
 	
+	
+	
+	/**
+	 * @return Returns the lastCallFrame.
+	 */
+	public CallFrame getLastCallFrame() {
+		return lastCallFrame;
+	}
+
+	/**
+	 * @param lastCallFrame The lastCallFrame to set.
+	 */
+	public void setLastCallFrame(CallFrame lastCallFrame) {
+		this.lastCallFrame = lastCallFrame;
+	}
+
 	public void setDebugCondition(AbstractKermetaDebugCondition debug_cond)
 	{
 		currentState = debug_cond.getConditionType();
@@ -376,21 +404,22 @@ public class DebugInterpreter extends ExpressionInterpreter {
     		&& getInterpreterContext().peekCallFrame().hasVariables())
     	{
     		// We need to parse the current context?
-    		Iterator it = getInterpreterContext().peekCallFrame().getVariables().keySet().iterator();
+    		Iterator it = getInterpreterContext().peekCallFrame().getVariables().iterator();
     		while (it.hasNext() && result == null)
     		{
-    			Object nkey = it.next();
-    			RuntimeObject rvalue = ((Variable)getInterpreterContext().peekCallFrame().getVariables().get(nkey)).getRuntimeObject();
+    			Variable variable = (Variable)it.next();
+    			RuntimeObject rvalue = variable.getRuntimeObject();
     			if (rvalue.getOId() == oid) result = rvalue;
     		}
     	}
     	return result;
     }
     
-    /** the runtime object stored in the variables of all the call frames */
-    public ArrayList getContextRuntimeObjects()
+    
+    /** Returns a hashtable of all the RuntimeObject available in the current frame*/
+    public Hashtable initVisibleRuntimeObjects()
     {
-    	ArrayList result = new ArrayList();
+    	Hashtable variables = new Hashtable();
     	if (getInterpreterContext().getFrameStack().isEmpty()==false)
     	{	
     		Iterator fit = getInterpreterContext().getFrameStack().iterator();
@@ -400,16 +429,95 @@ public class DebugInterpreter extends ExpressionInterpreter {
     			if (frame.hasVariables())
     			{
     				// We need to parse the current context?
-    				Iterator it = frame.getVariables().values().iterator();
+    				Iterator it = frame.getVariables().iterator();
     				while (it.hasNext()) {
-    					result.add(((Variable)it.next()).getRuntimeObject());
+    					Variable v =  (Variable)it.next();
+        				RuntimeObject ro = v.getRuntimeObject();
+    					variables.put(v.getName(), ro);
+    					currentVisibleRuntimeObjects.put(ro.getOId(), ro);
     				}
     				// Also add "self" object?
-    				result.add(frame.getSelf());
+    				currentVisibleRuntimeObjects.put(frame.getSelf().getOId(), frame.getSelf());
     			}
     		}
     	}
-    	//if (getInterpreterContext())
+    	//result.putAll(getInterpreterContext().getMemory().getRuntimeObjects().values());
+    	return variables;
+    }
+    
+    /** */
+    public Hashtable getVisibleRuntimeObjects(long oid)
+    {
+    	Hashtable result = new Hashtable();
+    	RuntimeObject ro = (RuntimeObject) currentVisibleRuntimeObjects.get(oid);
+    	
+    	// try to find the object in the properties?
+    	if (ro.getProperties()!=null || !ro.getProperties().isEmpty())
+    	{
+    		Hashtable properties = ro.getProperties();
+    		Hashtable pmap = getRuntimeObjectListForProperties(properties, "property");
+    		Iterator pmap_it = pmap.entrySet().iterator(); 
+    		while (pmap_it.hasNext())
+    		{
+    			Map.Entry next = (Map.Entry)pmap_it.next();
+    			Object[] next_value = (Object [])next.getValue();
+    			result.put(next_value[0], next_value[1]);
+    		}
+    	}
+    	if (ro.getData().get("CollectionArrayList") !=null)
+    	{
+    		Collection collection = (Collection)ro.getData().get("CollectionArrayList");
+    		Hashtable cmap = getRuntimeObjectList(collection, "collection");
+    		Iterator cmap_it = cmap.entrySet().iterator(); 
+    		while (cmap_it.hasNext())
+    		{
+    			Map.Entry next = (Map.Entry)cmap_it.next();
+    			Object[] next_value = (Object [])next.getValue();
+    			result.put(next_value[0], next_value[1]);
+    		}
+    	}
+    	return result;
+    }
+    
+    
+    public synchronized void updateVisibleRuntimeObjects(Hashtable vro)
+    {
+    	Iterator vro_it = vro.values().iterator();
+    	while (vro_it.hasNext())
+    	{
+    		RuntimeObject next = (RuntimeObject)vro_it.next();
+    		currentVisibleRuntimeObjects.put(next.getOId(), next);
+    	}
+    }
+    
+    protected synchronized Hashtable getRuntimeObjectList(Collection rolist, String list_type)
+    {
+    	Hashtable result = new Hashtable();
+    	Iterator it = rolist.iterator();
+    	int i = 0;
+    	while (it.hasNext())
+    	{
+    		String name = "";
+    		RuntimeObject next = (RuntimeObject)it.next();
+    		name = "["+Integer.toString(i)+"]";
+    		result.put(next.getOId(), new Object[] {name, next});
+    		i+=1;
+    	}
+    	return result;
+    }
+    
+
+    protected synchronized Hashtable getRuntimeObjectListForProperties(Hashtable romap, String list_type)
+    {
+    	Hashtable result = new Hashtable();
+    	Iterator it = romap.keySet().iterator(); int i = 0;
+    	while (it.hasNext())
+    	{
+    		String name = (String)it.next();
+    		RuntimeObject ro = (RuntimeObject)romap.get(name);
+    		result.put(ro.getOId(), new Object[] {name, ro}); 
+    		i+=1;
+    	}
     	return result;
     }
     
@@ -419,4 +527,13 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	return getCurrentState().equals(DEBUG_TERMINATE);
     }
 	
+    /**
+     * tool function
+     * @return the name property of the runtime object if available
+     */
+    public static String getRONameProp(RuntimeObject rObject){
+    	RuntimeObject roName = (RuntimeObject)rObject.getProperties().get("name");
+    	System.err.println("object : " + roName);
+        return  roName == null ? "" : (String)roName.getData().get("StringValue");
+    }
 }
