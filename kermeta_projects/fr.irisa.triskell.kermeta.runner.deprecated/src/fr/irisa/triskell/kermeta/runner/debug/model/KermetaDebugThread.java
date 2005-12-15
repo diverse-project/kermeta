@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.12 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: KermetaDebugThread.java,v 1.13 2005-12-15 11:13:33 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -111,8 +111,6 @@ public class KermetaDebugThread extends DebugElement implements IThread//, IDebu
 	public IBreakpoint[] getBreakpoints() {
 		// Pydev Comment : should return breakpoint that caused this thread to suspend
 		// not implementing this seems to cause no harm
-		System.err.println("getBreakPoints (KermetaDzebugThread)");
-		
 		KermetaBreakpoint[] breaks = new KermetaBreakpoint[0];
 		return breaks;
 	}

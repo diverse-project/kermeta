@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpoint.java,v 1.8 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: KermetaBreakpoint.java,v 1.9 2005-12-15 11:13:33 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaBreakpoint.java
  * License   : EPL
@@ -61,7 +61,7 @@ public class KermetaBreakpoint extends LineBreakpoint {
 	public String getFile()
 	{
 		IResource r = getMarker().getResource();
-		return "platform:/resource/" + r.getFullPath().toPortableString();
+		return "platform:/resource" + r.getFullPath().toPortableString();
 		// return r.getLocation().toOSString();
 	}
 
