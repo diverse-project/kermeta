@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.17 2005-12-01 18:44:57 zdrey Exp $
+/* $Id: KermetaInterpreter.java,v 1.18 2005-12-15 12:26:54 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -220,6 +220,8 @@ public class KermetaInterpreter {
 	{
 	    memory.getROFactory().setKermetaIOStream(stream);
 	}
+	
+	public KermetaIOStream getKStream() { return memory.getROFactory().getKermetaIOStream();} 
 	
 	/**
 	 * Set the actual parameter for the "main" method
