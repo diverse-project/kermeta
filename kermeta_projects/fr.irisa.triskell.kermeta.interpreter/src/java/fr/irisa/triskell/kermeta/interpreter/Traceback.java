@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.8 2005-12-12 13:04:44 dvojtise Exp $
+/* $Id: Traceback.java,v 1.9 2005-12-15 11:14:35 zdrey Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -105,7 +105,7 @@ public class Traceback {
         // TODO : instead of this patch unit finder, use the Tracer tools
         // in order to get directly the URI of an elemeent
         KermetaUnit u = kunit.findUnitForModelElement(fobject);
-        if (u!=null) 
+        if (u!=null && fobject!=null) // I have not figured out why fobject given in parameters could be null
         {
             Object fo_source = u.getNodeByModelElement(fobject);
             info += getTextInfoForNode(fobject, fo_source, u, frame);
@@ -253,7 +253,7 @@ public class Traceback {
      * @param unit_struri
      * @return
      */
-    protected static int getLineNumber(KermetaASTNode node, String unit_struri)
+    public static int getLineNumber(KermetaASTNode node, String unit_struri)
     {
         int linenum = 1; int c; int charcount = 0; 
         int charnum = node.getRangeStart();
