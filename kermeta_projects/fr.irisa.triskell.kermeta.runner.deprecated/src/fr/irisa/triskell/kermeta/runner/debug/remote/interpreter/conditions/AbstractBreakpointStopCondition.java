@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.7 2005-12-15 11:13:33 zdrey Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.8 2005-12-15 12:23:21 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -71,12 +71,12 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 					else
 					{	
 						String bfile = breakpoints[i].getFile();
-						Object[] statement_info= getStatementAtLineAndFile(l.intValue(), bfile);
+						EObject statement = getStatementAtLineAndFile(l.intValue(), bfile);
 						// The stop condition : the current node must equals the main 
 						// statement at the tested line and in the file where the breakpoints
 						// appear.
 						if (l.compareTo(breakpoints[i].getLine())==0 
-							&& getCurrentNode() == (EObject)statement_info[0])
+							&& getCurrentNode() == statement)
 						{ 
 							eval_stop = true;
 						}
@@ -101,7 +101,6 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 		
 		// current_frame.peekExpressionContext().getStatement()
 		String lstr = t.getContextForFObjectAsArray(null, (FObject)getCurrentNode())[1];
-		System.err.println("file? : " + t.getContextForFObjectAsArray(null, (FObject)getCurrentNode())[0]);
 		if (lstr == "" || lstr == null) return new Integer(-1);
 		else return new Integer(Integer.parseInt(lstr));
 	}
@@ -117,16 +116,15 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 	 * file where it was found. We indeed need it since we have to stop at a breakpoint which is
 	 * located at a given line in a given file.
 	 * */
-	protected Object[] getStatementAtLineAndFile(int l, String file)
+	protected EObject getStatementAtLineAndFile(int l, String file)
 	{
 		EObject result = null;
-		String found_file = "";
 		InterpreterContext context = remoteInterpreter.getInterpreter().getInterpreterContext();
 		// Used to get the infos about the parsed node
 		KermetaUnit unit = remoteInterpreter.getInterpreter().getMemory().getUnit();
 		KermetaUnit found_unit = null;
-		// Get the KermetaUnit defined with the current file
-		// TODO check that there is no risk of concurrent modif
+		// Get the KermetaUnit corresponding to the current file
+		// TODO check that there is no risk of concurrent modif using the iterator of importedUnits
 		Iterator it = unit.getAllImportedUnits().iterator();
 		while (it.hasNext()) { 
 			KermetaUnit u = (KermetaUnit)it.next(); 
@@ -137,20 +135,23 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 		if (!context.getFrameStack().isEmpty() && found_unit != null) {
 			int ifs = 0;
 			Object[] fs = context.getFrameStack().toArray(); // transformed into an array to avoid conflicting accesses
+			// For each frame, from the top to the bottom
 			for (ifs = fs.length-1; ifs>=0; ifs--)
 			{
 				CallFrame f = (CallFrame)fs[ifs]; 
 				if (!f.getExpressionContext().isEmpty()) {
 					int iecs = 0; 
 					Object[] ecs = f.getExpressionContext().toArray();
+					// For each expressionContext (do..end)
 					for (iecs = ecs.length-1; iecs>=0; iecs--) {
 						ExpressionContext c = (ExpressionContext)ecs[iecs];
-						if (found_unit!=null) // we can remove this test when we are sure that Tracer is definitly adopted
+						// If we found the unit linked to the given file URL
+						if (found_unit!=null)
 						{	
 							TextReference txt_ref = null;
+							int found_line = 0;
 							if (found_unit.getTracer()!=null)
 								txt_ref = found_unit.getTracer().getFirstTextReference(c.getStatement());
-							int found_line = 0;
 							// We use traceback since Tracer is only set for the main KermetaUnit
 							// Setting it to all the units makes the load too slow.
 							if (txt_ref == null && c.getStatement()!=null) // if this condition is false, things are much slower :(
@@ -158,16 +159,13 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 								KermetaASTNode node = (KermetaASTNode)found_unit.getNodeByModelElement((FObject)c.getStatement());
 								if (node != null)
 									found_line = Traceback.getLineNumber(node, file);
-								found_file = file;
 							}
 							else if (txt_ref != null)
 							{
 								found_line = txt_ref.getLine();
-								found_file = txt_ref.getFileURI();
 							}
 							
-							//if (txt_ref.getFileURI().equals())
-							if (found_line == l && found_file.equals(file)) {
+							if (found_line == l) {
 								result = c.getStatement();
 							}
 							//if (result != null ) System.out.println(new KM2KMTPrettyPrinter().accept(result));
@@ -177,6 +175,6 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 					
 			}
 		}
-		return new Object[] { result, file };
+		return result;
 	}
 }
