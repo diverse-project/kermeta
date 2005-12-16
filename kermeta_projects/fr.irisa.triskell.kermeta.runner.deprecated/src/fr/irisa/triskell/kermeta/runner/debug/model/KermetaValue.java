@@ -1,4 +1,4 @@
-/* $Id: KermetaValue.java,v 1.6 2005-12-15 18:41:45 zdrey Exp $
+/* $Id: KermetaValue.java,v 1.7 2005-12-16 09:54:19 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaValue.java
  * License   : GPL
@@ -38,6 +38,7 @@ public class KermetaValue extends DebugElement implements IValue {
     String valueString;
     String valueType;
     long runtimeOID;
+    IVariable[] variables;
     
     /**
      * 
@@ -86,16 +87,18 @@ public class KermetaValue extends DebugElement implements IValue {
      * @see org.eclipse.debug.core.model.IValue#getVariables()
      */
     public IVariable[] getVariables() throws DebugException {
-    	IVariable[] ivars = null;
-    	if (!valueType.equals(RunnerConstants.IVALUE_PRIMITIVE))
+    	if (variables==null || variables.length==0)
     	{
-    		try {
-    			SerializableVariable[] svars = debugTarget.getRemoteInterpreter().getSerializableVariablesOfSerializableValue(this.refValue);
-    			ivars = debugTarget.getRemoteDebugUI().createKermetaVariables(svars);
-    		} catch (RemoteException e) { e.printStackTrace(); }
+    		if (!valueType.equals(RunnerConstants.IVALUE_PRIMITIVE))
+    		{
+    			try {
+    				SerializableVariable[] svars = debugTarget.getRemoteInterpreter().getSerializableVariablesOfSerializableValue(this.refValue);
+    				variables = debugTarget.getRemoteDebugUI().createKermetaVariables(svars);
+    			} catch (RemoteException e) { e.printStackTrace(); }
+    		}
     	}
-		if (ivars == null) return new IVariable[0];
-    	return ivars;
+    	if (variables == null) variables = new IVariable[0];
+    	return variables;
     }
 
     

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.13 2005-12-15 18:42:43 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.14 2005-12-16 09:54:19 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -68,7 +68,6 @@ public class KermetaDebugWrapper {
 		int i = 0;
 		SerializableCallFrame[] frames = null;
 		Stack framestack = context.getFrameStack();
-		System.err.println("frame stack END: " + framestack.size());
 		if (framestack.size() > 0)
 		{
 			frames = new SerializableCallFrame[framestack.size()];

@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.9 2005-12-15 18:41:45 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.10 2005-12-16 09:54:19 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -130,7 +130,6 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 		{
 			interpreter.unsetStepOverCallFrame();
 		}
-		System.out.println("condition : " + cond_name + "cond? " + conditions.get(cond_name));
 		interpreter.setDebugCondition((AbstractKermetaDebugCondition)conditions.get(cond_name));
 	}
 
@@ -171,10 +170,8 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	public synchronized void block()
 	{
 		try {
-			System.out.println("block");
 			wait();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -182,7 +179,6 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	/** Unblocks the thread of the interpreter */
 	public synchronized void unblock() throws RemoteException
 	{ 
-		System.out.println("un-block");
 		interpreter.getDebugCondition().setSuspended(false);
 		interpreter.setCurrentState(interpreter.getDebugCondition().getConditionType());
 		notifyAll();

@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.14 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: RunnerPlugin.java,v 1.15 2005-12-16 09:54:19 zdrey Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -331,10 +331,8 @@ public class RunnerPlugin extends AbstractUIPlugin
 		IEditorInput edInput;
 		IWorkspace w = ResourcesPlugin.getWorkspace();      
 		IFile file = w.getRoot().getFileForLocation(path);
-		System.out.println("file (createEditorInput) : " + file);
 		if (file == null  || !file.exists())
 		{
-			System.err.println("File not found in workspace : " + file);
 			//it is probably an external file
 			File file2 = path.toFile();
 			edInput = createEditorInput(file2);

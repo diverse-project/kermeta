@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.10 2005-12-15 18:41:45 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.11 2005-12-16 09:54:19 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -89,7 +89,6 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 				// its stop the debugger as soon as its evaluation is true during the 
 				// execution
 				target.getRemoteInterpreter().changeSuspendedState(true);
-				System.err.println("SUSPEND ASKED");
 				target.getMainThread().setStackFrames(createKermetaStackFrames());
 				processSuspendReason(reason);
 			}
@@ -148,8 +147,6 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 	 */
 	protected synchronized IStackFrame[] createKermetaStackFrames() throws DebugException, RemoteException
 	{
-		System.err.println("createKermetaStackFrames in (KRDU)");
-		
 		SerializableCallFrame[] frames = target.getRemoteInterpreter().getSerializableCallFrames();
 		KermetaStackFrame[] result = null;
 		IPath path = null;
@@ -164,14 +161,13 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 				if (frames[i] != null)
 				{
 					path = AbstractKermetaTarget.getIPathFromString(frames[i].filepath);
-					System.out.println("frames[i].filepath:" + frames[i].filepath +"; IPATH : " +path);
 					f = new KermetaStackFrame(
 							thread, frames[i].name, 
 							path, frames[i].line); // null : IPath
 					f.setVariables(createKermetaVariables(frames[i].variables));
 				}
 				else // create an empty frame to avoid GUI errors...
-				{	System.out.println("when is the frames[i] null???");
+				{	
 					f = new KermetaStackFrame( thread, "empty frame", null, 0);
 				}
 				result[i] = f;

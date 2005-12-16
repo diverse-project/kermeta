@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.14 2005-12-13 18:10:49 zdrey Exp $
+/* $Id: KermetaSourceLocator.java,v 1.15 2005-12-16 09:54:19 zdrey Exp $
  * Project: Kermeta.runner
  * File: KermetaSourceLocator.java
  * License: EPL
@@ -97,8 +97,7 @@ public class KermetaSourceLocator implements IPersistableSourceLocator, ISourceP
 		if (element instanceof KermetaStackFrame) 
 		{
 			IPath path = ((KermetaStackFrame)element).getPath();
-			System.out.println("Get editor input!!!" + path);
-			if (path != null) // && !path.toString().startsWith("<")) 
+			if (path != null) 
 			{
 		        edInput = RunnerPlugin.createEditorInput(path);
 			}
