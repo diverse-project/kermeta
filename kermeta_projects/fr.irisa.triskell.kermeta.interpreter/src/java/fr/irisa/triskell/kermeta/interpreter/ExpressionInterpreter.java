@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.31 2005-12-12 15:28:44 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.32 2005-12-16 09:31:55 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -343,7 +343,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		    // Check for void target
 		    if (ro_target == memory.voidINSTANCE) {
 		        internalLog.debug(" >> INTERPRETER REPORTS Call on a void target (property assignement). TODO: raise an exception");
-		        raiseCallOnVoidTargetException(node);
+		        raiseCallOnVoidTargetException(node,"");
 		    }
 		    
 		    FClass t_target=(FClass)ro_target.getMetaclass().getData().get("kcoreObject");
@@ -776,14 +776,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target: " + node.getFName() +"; Operation: " +node.getFStaticOperation());
 		        if(!additionalMsg.equals(""))
 		        	internalLog.info(additionalMsg);
-		        
-		         
-		        throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
-		        		additionalMsg,
-						this,
-						memory,
-						node,
-						null);		        
+		        raiseCallOnVoidTargetException(node, additionalMsg);		        
 		    }
 		    
 //		  This should never happend is the type checker has checked the program
@@ -814,7 +807,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 //			 Check that target is not void
 		    if (property == null && ro_target == memory.voidINSTANCE) {
 		        internalLog.debug(" >> INTERPRETER REPORTS Call of '"+ node.getFName() +"' property on a void target. Exception raised.");
-		        raiseCallOnVoidTargetException(node);
+		        raiseCallOnVoidTargetException(node,"");
 		    }
 		    
 //		  This should never happend is the type checker has checked the program
@@ -1061,7 +1054,6 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    // get node name
 	    String name = node.getFName();
 	    //String qualifiedName = getQualifiedName(node);
-	    //get
 	    // get its definition
 	    FTypeDefinition typeDef = memory.getUnit().getTypeDefinitionByName(name);
 	    return typeDef;
@@ -1190,27 +1182,20 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      * @param node the node that is wrong. Usually, it is an FExpression, but not mandatory
      */
     public void raiseKermetaException(RuntimeObject obj, FObject node) {
-        // FIXME: Set a default message (I cannot set a default message since the raised object may not be a 
         RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
-        /*KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
-        		"",
-				this,
-				memory,
-				node,
-				null);*/
         KermetaRaisedException e = new KermetaRaisedException(obj, rnode, this);
         e.setContextString(this,rnode);
         throw new KermetaRaisedException(obj, rnode, this);	
     }   
     
-    public void raiseCallOnVoidTargetException(FObject node) {
+    public void raiseCallOnVoidTargetException(FObject node, String additionalmsg) {
     	//RuntimeObjectFactory rofactory = memory.getROFactory();
     	//RuntimeObject raised_object = rofactory.createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
     	
-        //RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
+    	//RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
         //throw new KermetaRaisedException(raised_object, rnode, this);	
         throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
-        		"",
+        		additionalmsg,
 				this,
 				memory,
 				node,
