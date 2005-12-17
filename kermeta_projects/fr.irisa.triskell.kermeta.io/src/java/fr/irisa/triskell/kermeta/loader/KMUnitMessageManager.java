@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessageManager.java,v 1.5 2005-12-05 09:21:17 ffleurey Exp $
+/* $Id: KMUnitMessageManager.java,v 1.6 2005-12-17 21:03:16 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -129,10 +129,14 @@ public class KMUnitMessageManager {
 	    for (int i=0; i<unit.importedUnits.size(); i++) {
 	        KermetaUnit iu = (KermetaUnit)unit.importedUnits.get(i);
 	        if (iu.messages.hasError()) {
-	        	String indirectMsg = ((KMUnitMessage)iu.messages.getErrors().get(0)).getMessage();
-	            result.add(new KMUnitError("Error in imported unit " + iu.getUri() +" (" +
+	        	ArrayList indirectErrors = iu.messages.getErrors();
+	        	if(indirectErrors.size() > 0)
+	        	{	
+	        		String indirectMsg = ((KMUnitMessage)indirectErrors.get(0)).getMessage();	        	
+	        		result.add(new KMUnitError("Error in imported unit " + iu.getUri() +" (" +
 	            		indirectMsg +")", 
 	            		(KermetaASTNode) unit.traceImportedUnits.get(iu)));
+	        	}
 	        }
 	    }
 	    isCallinGetErrors=false;
@@ -153,10 +157,14 @@ public class KMUnitMessageManager {
 	    for (int i=0; i<unit.importedUnits.size(); i++) {
 	        KermetaUnit iu = (KermetaUnit)unit.importedUnits.get(i);
 	        if (iu.messages.getWarnings().size() != 0) {
-	        	String indirectMsg = ((KMUnitMessage)iu.messages.getWarnings().get(0)).getMessage();
-	            result.add(new KMUnitWarning("Warning in imported unit " + iu.getUri() +" (" +
+	        	ArrayList indirectWarnings = iu.messages.getWarnings();
+	        	if(indirectWarnings.size() > 0)
+	        	{	
+	        		String indirectMsg = ((KMUnitMessage)indirectWarnings.get(0)).getMessage();
+	        		result.add(new KMUnitWarning("Warning in imported unit " + iu.getUri() +" (" +
 	            		indirectMsg +")", 
 	            		(KermetaASTNode) unit.traceImportedUnits.get(iu)));
+	        	}
 	        }
 	    }
 	    isCallinGetWarnings = false;
