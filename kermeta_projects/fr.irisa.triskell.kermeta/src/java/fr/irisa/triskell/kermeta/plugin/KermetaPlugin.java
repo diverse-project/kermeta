@@ -11,6 +11,7 @@ import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
 
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 import java.io.ByteArrayOutputStream;
@@ -23,7 +24,7 @@ import java.util.*;
  */
 public class KermetaPlugin extends AbstractUIPlugin {
 	//The shared instance.
-	private static KermetaPlugin plugin;
+	private static KermetaPlugin plugin = null;
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
 	
@@ -67,6 +68,9 @@ public class KermetaPlugin extends AbstractUIPlugin {
 			System.out.print("Not able to retreive kermeta_log4j_configuration.xml in the kermeta plugin => using default log configuration");
 			// don't worry about that, the log4j will simply use its default configuration
 		}
+		if(KermetaUnit.STD_LIB_URI == null)
+			KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
+		
 	}
 
 	/**
