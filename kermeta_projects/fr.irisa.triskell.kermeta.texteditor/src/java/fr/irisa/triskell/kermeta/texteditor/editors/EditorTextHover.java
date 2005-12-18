@@ -172,17 +172,18 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		        if (fobj instanceof FExpression)
 		        {
 		            FExpression fexp = (FExpression)fobj;
+		            String result = "";
 		            // Find the tag of the FCallFeature definition!
 		            if (fexp instanceof FCallFeature)
 		            {
-		                FObject fdef = this.getDefinitionForFCallFeature((FCallFeature)fexp);
+		                /*FObject fdef = this.getDefinitionForFCallFeature((FCallFeature)fexp);
 		                if (fdef != null)
 		                {
 		                    ftags = kdocPrettyPrint(fdef.getFTag());
-		                }
+		                }*/
+		                return ppDefinitionForCallFeature((FCallFeature)fexp);
 		            }
-		            
-		            if (fexp.getFStaticType() != null) {
+		            else if (fexp.getFStaticType() != null) {
 		                Type t = new SimpleType(fexp.getFStaticType());
 		                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
 		                // return the source code representation or the signature
@@ -192,7 +193,8 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		        }
 		        else if(fobj instanceof FClass){
 					FClass aClass = (FClass)fobj;
-					return KMTHelper.getQualifiedName(aClass.getFClassDefinition());
+					ftags = kdocPrettyPrint(aClass.getFClassDefinition().getFTag());
+					return KMTHelper.getQualifiedName(aClass.getFClassDefinition())+ "\n" + ftags;
 		        }
 		        
 		    }
@@ -282,6 +284,28 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	        return feature;
 	    }
 	}
+	
+	public String ppDefinitionForCallFeature(FCallFeature feature)
+	{
+	    if (feature.getFStaticOperation() != null)
+	    {
+	        //return feature.getFStaticOperation();
+	        return pp.ppSimplifiedFOperationInContext(feature.getFStaticOperation()) + 
+        	"\n" +
+        	kdocPrettyPrint(feature.getFStaticOperation().getFTag());
+	    }
+	    if (feature.getFStaticProperty() != null)
+	    {
+	        return pp.ppSimplifiedFPropertyInContext(feature.getFStaticProperty()) + 
+	        	"\n" +
+	        	kdocPrettyPrint(feature.getFStaticProperty().getFTag());
+	    }
+	    else // return the CallFeature itself
+	    {
+	        System.err.println("the definition : " + feature.getFName() + feature);
+	        return pp.accept(feature).toString();
+	    }
+	} 
 	
 
 	
