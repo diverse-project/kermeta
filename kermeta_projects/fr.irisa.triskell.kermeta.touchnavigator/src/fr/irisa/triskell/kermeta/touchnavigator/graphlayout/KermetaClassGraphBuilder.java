@@ -1,4 +1,4 @@
-/* $Id: KermetaClassGraphBuilder.java,v 1.4 2005-12-05 19:14:30 dvojtise Exp $
+/* $Id: KermetaClassGraphBuilder.java,v 1.5 2005-12-18 22:39:03 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -39,6 +39,8 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 	protected TGPanel tgPanel; 
 	protected FClassDefinition startingClass;
 	
+	public boolean mustStop = false;
+	
 	
 	protected TGPanelHelper tgpHelper;
 	
@@ -52,7 +54,9 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 
 	public void buildGraph(KermetaUnit kunit) throws TGException
 	{
+
 		
+		mustStop =  false;
 		if(kunit == null) return;
 		
 		System.err.println("buildGraph: "+kunit.getUri());
@@ -60,13 +64,23 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 		//if(kunit == null) return;
 		
 //		 needed in order to make the hide work
-		//Node dispendableNode = tgPanel.addNode();
-		//dispendableNode.setLabel("Building Graph, please wait...");
-		//tgPanel.setSelect(dispendableNode);
-		//tgPanel.setLocale(dispendableNode,2);
-		
+	/*	Node dispendableNode = tgPanel.addNode();
+		dispendableNode.setLabel("Building Graph, please wait...");
+		tgPanel.setSelect(dispendableNode);
+		tgPanel.setLocale(dispendableNode,1);
+		*/
 		acceptCollection(kunit.packages.values());
-		
+
+		//tgPanel.setSelect(tgPanel.getGES().getFirstNode());
+
+	/*	Iterator it2 = graphUnitMapping.entrySet().iterator();
+		if(it2.hasNext()){
+			//Entry entry = (Entry)it.next();
+			//FClassDefinition aClass = (FClassDefinition)((Entry)it2.next()).getKey();
+			Node n1 = (Node)graphUnitMapping.get(startingClass);
+
+			tgPanel.setLocale(n1,2);
+		}*/
 		//		Graph has now its own nodes
 		//tgPanel.deleteNode(dispendableNode);
 		//tgPanel.setSelect(tgPanel.getGES().getFirstNode());
@@ -76,6 +90,10 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 		Iterator it = graphUnitMapping.entrySet().iterator();
 		while(it.hasNext()) {
 			Entry entry = (Entry)it.next();
+			if (mustStop){ 
+    			System.err.println("buildGraph stopped");                    	
+    			return;
+    		}
 			if(entry.getKey() instanceof FClassDefinition)
 			{
 				FClassDefinition aClassDef = (FClassDefinition)entry.getKey();
@@ -187,8 +205,8 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 		}
 		
 		
-		Iterator it2 = graphUnitMapping.entrySet().iterator();
-		if(it2.hasNext()){
+		Iterator it3 = graphUnitMapping.entrySet().iterator();
+		if(it3.hasNext()){
 			//Entry entry = (Entry)it.next();
 			//FClassDefinition aClass = (FClassDefinition)((Entry)it2.next()).getKey();
 			Node n1 = (Node)graphUnitMapping.get(startingClass);

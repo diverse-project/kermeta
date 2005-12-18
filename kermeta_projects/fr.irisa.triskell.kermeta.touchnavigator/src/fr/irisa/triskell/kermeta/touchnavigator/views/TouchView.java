@@ -1,6 +1,8 @@
 package fr.irisa.triskell.kermeta.touchnavigator.views;
 
 
+import java.awt.Color;
+
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.part.*;
@@ -41,9 +43,13 @@ public class TouchView extends ViewPart {
 	//private TableViewer viewer;
 	private java.awt.Frame touchviewer;
 	private Shell shell;
+	private Action actionBack;
+	private Action actionForward;
 	private Action actionConfigure;
-	private Action action2;
+	private Action actionAbout;
 	private Action doubleClickAction;
+	
+	private KermetaGLPanel kGLPanel;
 
 	/*
 	 * The content provider class is responsible for
@@ -96,8 +102,10 @@ public class TouchView extends ViewPart {
 		*/
 		Composite composite = new Composite(parent, SWT.EMBEDDED);
 		shell = composite.getShell();
-		touchviewer = SWT_AWT.new_Frame(composite);
-		touchviewer.add(new KermetaGLPanel());
+		touchviewer = SWT_AWT.new_Frame(composite);		
+		java.awt.Color c = new Color(parent.getBackground().getRed(), parent.getBackground().getGreen(), parent.getBackground().getBlue());
+		kGLPanel = new KermetaGLPanel(c);
+		touchviewer.add(kGLPanel);
 		
 		makeActions();
 		hookContextMenu();
@@ -129,36 +137,61 @@ public class TouchView extends ViewPart {
 	private void fillLocalPullDown(IMenuManager manager) {
 		manager.add(actionConfigure);
 		manager.add(new Separator());
-		manager.add(action2);
+		manager.add(actionAbout);
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
+		manager.add(actionBack);
+		manager.add(actionForward);
 		manager.add(actionConfigure);
-		manager.add(action2);
+		manager.add(actionAbout);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 	
 	private void fillLocalToolBar(IToolBarManager manager) {
-		manager.add(actionConfigure);
-		manager.add(action2);
+		manager.add(actionBack);
+		manager.add(actionForward);
+		// manager.add(actionConfigure);
+		// manager.add(actionAbout);
 	}
 
 	private void makeActions() {
+		actionBack = new Action() {
+			public void run() {
+				kGLPanel.goBack();
+				//showMessage("Back button not implemented yet");
+			}
+		};
+		actionBack.setText("Back");
+		actionBack.setToolTipText("Go back to the previous node in history");
+		actionBack.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+			getImageDescriptor(ISharedImages.IMG_TOOL_BACK));
+		actionForward = new Action() {
+			public void run() {
+				kGLPanel.goForward();
+				showMessage("Back button not implemented yet");
+			}
+		};
+		actionForward.setText("Forward");
+		actionForward.setToolTipText("Go forward to the next node in history");
+		actionForward.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+			getImageDescriptor(ISharedImages.IMG_TOOL_FORWARD));
+		
 		actionConfigure = new ConfigureAction();
 		actionConfigure.setText("Configure TouchNavigator");
 		actionConfigure.setToolTipText("Configure the various options of Kermeta TouchNavigator");
 		actionConfigure.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 			getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 		
-		action2 = new Action() {
+		actionAbout = new Action() {
 			public void run() {
-				showMessage("Action 2 executed");
+				showMessage("Kermeta TouchNavigator.\nBased on TouchGraph.");
 			}
 		};
-		action2.setText("Action 2");
-		action2.setToolTipText("Action 2 tooltip");
-		action2.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+		actionAbout.setText("About");
+		actionAbout.setToolTipText("Aout Kermeta TouchNavigator");
+		actionAbout.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 				getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 		doubleClickAction = new Action() {
 			public void run() {

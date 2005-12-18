@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.5 2005-12-06 12:43:31 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.6 2005-12-18 22:39:03 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -78,7 +78,10 @@ public class KermetaGLPanel extends GLPanel
 	KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 
 	
-    
+    public KermetaGLPanel(Color color) {
+		super(color);
+	}
+
 /** Initialize panel, lens, and establish a random graph as a demonstration.
      */
     public void initialize() {
@@ -129,14 +132,53 @@ public class KermetaGLPanel extends GLPanel
 		System.err.println("editor unit: "+editor.getMcunit().getUri());
 	}
 	
+	/** go back in the history */
+	public void goBack(){
+		if(tgPanel.history.hasPrevious()){
+			try {
+				Node node = tgPanel.history.getPrevious();
+				tgPanel.setLocaleInHistory(node,2);
+				tgPanel.setSelect(node);
+			} catch (TGException e) {
+				//e.printStackTrace();
+			}
+			//tgPanel.setSelectInHistory(tgPanel.history.getPrevious());
+		}
+	}
+	
+	/** go forward in the history */
+	public void goForward(){
+		if(tgPanel.history.hasNext()){
+			try {
+				Node node = tgPanel.history.getNext();
+				tgPanel.setLocaleInHistory(node,2);
+				tgPanel.setSelect(node);
+			} catch (TGException e) {
+				//e.printStackTrace();
+			}
+		}
+	}
+	
 	/**
 	 * class used to run the BuildGraph in the background
 	 *
 	 */
 	class BuildKermetaClassGraphThread extends Thread {
 		
-		public void run() {   
+		private java.lang.Boolean building = Boolean.FALSE;
+		private KermetaClassGraphBuilder kcGraphBuilder; 
+		private boolean mustStop =  false;
+		
+		public void stopBuild(){
+			
+		}
+		synchronized public void run() {   
 			yield();
+			try { 
+				this.sleep(500); // gives some time to the construction of the tgPanel to finish (the relaxer in particular)
+			} catch (InterruptedException e) {
+				return;
+			}
 			FClassDefinition clasDef = findAClassInUnit();
 			if(clasDef == null) return;
 			System.err.println(clasDef.getFName());  
@@ -146,13 +188,9 @@ public class KermetaGLPanel extends GLPanel
             //KermetaGLPanel.this.tgPanel.tgLayout.resetDamper();
 			//KermetaGLPanel.this.tgPanel.tgLayout.stop();
 			yield();yield();
-			try { 
-				this.wait(300); // gives some time to the construction of the tgPanel to finish (the relaxer in particular)
-			} catch (InterruptedException e) {
-				return;
-			}
+			
             
-			// make sure no other thread is running
+			// make sure no other thread of touchgrapch is running
             synchronized (KermetaGLPanel.this.tgPanel.getLocalityUtils()) {
             	//setVisible(false);
             	try {
@@ -161,10 +199,15 @@ public class KermetaGLPanel extends GLPanel
             		KermetaGLPanel.this.tgPanel.clearAll();
             		msg = "Nb nodes(2): "+KermetaGLPanel.this.tgPanel.getNodeCount();
             		System.err.println(msg);
-            		new KermetaClassGraphBuilder(tgPanel, clasDef).buildGraph(currentEditor.getMcunit());
+            		kcGraphBuilder = new KermetaClassGraphBuilder(tgPanel, clasDef);
+            		kcGraphBuilder.buildGraph(currentEditor.getMcunit());
                 	msg = "Nb nodes(3): "+KermetaGLPanel.this.tgPanel.getNodeCount();
             		System.err.println(msg);
                 	
+            		if (mustStop){ 
+            			System.err.println("BuildKermetaClassGraphThread stopped");                    	
+            			return;
+            		}
                 
 	                // find a node
 	                
@@ -198,6 +241,11 @@ public class KermetaGLPanel extends GLPanel
 				this.wait(500);
 			} catch (InterruptedException e) {
 			}*/
+            KermetaGLPanel.this.tgPanel.tgLayout.stopDamper(); // do not damp while building the model
+            try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+			}
             //KermetaGLPanel.this.tgPanel.tgLayout.start();
             KermetaGLPanel.this.tgPanel.tgLayout.resetDamper();
             yield();
