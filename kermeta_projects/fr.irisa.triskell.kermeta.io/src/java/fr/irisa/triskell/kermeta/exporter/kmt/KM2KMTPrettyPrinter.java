@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.20 2005-12-02 12:55:21 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.21 2005-12-18 14:14:44 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -757,9 +757,10 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @return
 	 */
 	public String ppSimplifiedFPropertyInContext(FProperty node){
-		String result="class "+node.getFOwningClass().getFName() + "is do /*...*/ ";
-		result +=ppSimplifiedFProperty(node);
-		result += " /*...*/ end";
+		String result="class "+node.getFOwningClass().getFName() + "{\n";
+		result += "\t...\n";
+		result += "\t" + ppSimplifiedFProperty(node);
+		result += "\n\t...\n}";
 		return result;
     }
 	/**
@@ -776,6 +777,55 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		if (node.isFIsReadOnly()) result += "readonly ";
 		result += KMTHelper.getMangledIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node);
 		if (node.getFOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getFOpposite().getFName());
+		return result;
+    }
+	
+	/**
+	 * PrettyPrint a simplified version of the operation
+	 * (no tag, no body)
+	 * with its context (ie. class)
+	 * @param node
+	 * @return
+	 */
+	public String ppSimplifiedFOperationInContext(FOperation node){
+		String result="class "+ KMTHelper.getMangledIdentifier(node.getFOwningClass().getFName()) + "{\n\t...\n";
+		result += "\t" + ppSimplifiedFOperation(node);
+		result += "\n\t...\n}";
+		return result;
+    }
+	/**
+	 * PrettyPrint a simplified version of the operation
+	 * (no tag, no body)
+	 * @param node
+	 * @return
+	 */
+	public String ppSimplifiedFOperation(FOperation node){
+    	String result="";
+    	if (node.getFSuperOperation() != null) result += "method ";
+		else result += "operation ";
+		result += KMTHelper.getMangledIdentifier(node.getFName());
+		if (node.getFTypeParameter().size() > 0) {
+			result += "<";
+			result += ppTypeVariableDeclaration(node.getFTypeParameter());
+			result += ">";
+		}
+		result += "(";
+		result += ppComaSeparatedNodes(node.getFOwnedParameter());
+		result += ")";
+		if(node.getFType() != null) {
+			result += " : " + ppTypeFromMultiplicityElement(node);
+		}
+	
+		if (node.getFSuperOperation() != null) {
+			result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getFSuperOperation().getFOwningClass()));
+		}
+		if (node.getFRaisedException().size() > 0) {
+			result += " raises " + ppComaSeparatedNodes(node.getFRaisedException());
+		}
+		if (node.isFIsAbstract()) result += " is abstract";
+		else {
+			result += " is do ... end";
+		}
 		return result;
     }
 	
