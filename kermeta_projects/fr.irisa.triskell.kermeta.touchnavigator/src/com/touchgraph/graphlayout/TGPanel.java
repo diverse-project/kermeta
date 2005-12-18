@@ -71,7 +71,7 @@ import  java.util.*;
   *
   * @author   Alexander Shapiro
   * @author   Murray Altheim  (2001-11-06; 2002-01-14 cleanup)
-  * @version  1.21  $Id: TGPanel.java,v 1.2 2005-11-11 07:08:42 dvojtise Exp $
+  * @version  1.21  $Id: TGPanel.java,v 1.3 2005-12-18 22:38:37 dvojtise Exp $
   */
 public class TGPanel extends JPanel {
 
@@ -91,6 +91,8 @@ public class TGPanel extends JPanel {
     protected Node mouseOverN;  //mouseOverN is the node the mouse is over
     protected boolean maintainMouseOver = false; //If true, then don't change mouseOverN or mouseOverE
 
+    public HistoryManager history = new HistoryManager();
+    
     protected Node select;
 
     Node dragNode; //Node currently being dragged
@@ -467,13 +469,12 @@ public class TGPanel extends JPanel {
     public void selectFirstNode() {
         setSelect(getGES().getFirstNode());
     }
-
     public void setSelect( Node node ) {
-          if ( node != null ) {
-              select = node;
-              repaint();
-          } else if ( node == null ) clearSelect();
-    }
+        if ( node != null ) {
+            select = node;
+            repaint();
+        } else if ( node == null ) clearSelect();
+   }
 
     public void multiSelect( TGPoint2D from, TGPoint2D to ) {
         final double minX,minY,maxX,maxY;
@@ -519,8 +520,12 @@ public class TGPanel extends JPanel {
         localityUtils.fastFinishAnimation(); 
     }
 
+    public void setLocaleInHistory( Node node, int radius ) throws TGException {
+    	localityUtils.setLocale(node,radius);
+    }
     public void setLocale( Node node, int radius ) throws TGException {
         localityUtils.setLocale(node,radius);
+    	history.newSelection(node);
     }
 
     public void expandNode( Node node ) {

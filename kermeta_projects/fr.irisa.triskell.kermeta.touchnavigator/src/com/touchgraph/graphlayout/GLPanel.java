@@ -64,17 +64,18 @@ import  java.util.Hashtable;
   * will probably need to be rewritten for other applications.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: GLPanel.java,v 1.2 2005-11-27 19:46:04 dvojtise Exp $
+  * @version  1.21  $Id: GLPanel.java,v 1.3 2005-12-18 22:38:37 dvojtise Exp $
   */
 public class GLPanel extends JPanel {
 
     public String zoomLabel = "Zoom"; // label for zoom menu item
     public String rotateLabel = "Rotate"; // label for rotate menu item
     public String localityLabel = "Locality"; // label for locality menu item
+    public String hyperLabel = "Hyperbolic"; // label for locality menu item
 
     public HVScroll hvScroll;
     public ZoomScroll zoomScroll;
-    //public HyperScroll hyperScroll; // unused
+    public HyperScroll hyperScroll; // unused
     public RotateScroll rotateScroll;
     public LocalityScroll localityScroll;
     public JPopupMenu glPopup;
@@ -97,7 +98,7 @@ public class GLPanel extends JPanel {
         tgPanel = new TGPanel();
         hvScroll = new HVScroll(tgPanel, tgLensSet);
         zoomScroll = new ZoomScroll(tgPanel);
-      //hyperScroll = new HyperScroll(tgPanel);
+        hyperScroll = new HyperScroll(tgPanel);
         rotateScroll = new RotateScroll(tgPanel);
         localityScroll = new LocalityScroll(tgPanel);
         initialize();
@@ -118,7 +119,7 @@ public class GLPanel extends JPanel {
       //hvScroll.getVerticalSB().setBackground(Color.cyan);
         zoomScroll = new ZoomScroll(tgPanel);
       //zoomScroll.getZoomSB().setBackground(Color.green);
-      //hyperScroll = new HyperScroll(tgPanel);
+        hyperScroll = new HyperScroll(tgPanel);
         rotateScroll = new RotateScroll(tgPanel);
       //rotateScroll.getRotateSB().setBackground(Color.blue);
         localityScroll = new LocalityScroll(tgPanel);
@@ -161,11 +162,11 @@ public class GLPanel extends JPanel {
         return hvScroll;
     }
 
-    ///** Return the HyperScroll used with this GLPanel. */
-    //public HyperScroll getHyperScroll()
-    //{
-    //    return hyperScroll;
-    //}
+    /** Return the HyperScroll used with this GLPanel. */
+    public HyperScroll getHyperScroll()
+    {
+        return hyperScroll;
+    }
 
     /** Sets the horizontal offset to p.x, and the vertical offset to p.y
       * given a Point <tt>p<tt>. 
@@ -245,7 +246,7 @@ public class GLPanel extends JPanel {
     public void buildLens() {
         tgLensSet.addLens(hvScroll.getLens());
         tgLensSet.addLens(zoomScroll.getLens());
-      //tgLensSet.addLens(hyperScroll.getLens());
+        tgLensSet.addLens(hyperScroll.getLens());
         tgLensSet.addLens(rotateScroll.getLens());
         tgLensSet.addLens(tgPanel.getAdjustOriginLens());
     }
@@ -316,7 +317,7 @@ public class GLPanel extends JPanel {
         scrollBarHash.put(rotateLabel, rotateSB);
         scrollBarHash.put(localityLabel, localitySB);
 
-        JPanel scrollselect = scrollSelectPanel(new String[] {zoomLabel, rotateLabel, localityLabel});
+        JPanel scrollselect = scrollSelectPanel(new String[] {zoomLabel, rotateLabel, localityLabel, hyperLabel});
         scrollselect.setBackground(defaultColor);
         topPanel.add(scrollselect,c);
 
@@ -364,6 +365,11 @@ public class GLPanel extends JPanel {
                 JScrollBar selectedSB = (JScrollBar) scrollBarHash.get(
                         (String) scrollCombo.getSelectedItem());
                 if (currentSB!=null) currentSB.setVisible(false);
+                /*for (int i = 0;i<scrollBarHash;i++) {
+                    JScrollBar sb = (JScrollBar) scrollBarHash.get(scrollBarNames[i]);
+                     if(sb==null) continue;
+                     sb.setVisible(false);
+                }*/
                 if (selectedSB!=null) selectedSB.setVisible(true);
                 currentSB = selectedSB;
             }
@@ -379,10 +385,15 @@ public class GLPanel extends JPanel {
         for (int i = 0;i<scrollBarNames.length;i++) {
             JScrollBar sb = (JScrollBar) scrollBarHash.get(scrollBarNames[i]);
               if(sb==null) continue;
-              if(i!=0) sb.setVisible(false);
+             /*sb.setVisible(false);
+
+              if(i==0) {
+            	  sb.setVisible(true);
+              }*/
               //sb.setMinimumSize(new Dimension(200,17));
               sbp.add(sb,c);
         }
+        
         return sbp;
     }
 
