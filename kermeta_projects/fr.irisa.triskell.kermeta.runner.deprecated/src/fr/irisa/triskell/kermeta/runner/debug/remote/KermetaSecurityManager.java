@@ -1,4 +1,4 @@
-/* $Id: KermetaSecurityManager.java,v 1.2 2005-12-13 18:08:58 zdrey Exp $
+/* $Id: KermetaSecurityManager.java,v 1.3 2005-12-19 12:57:36 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaSecurityManager.java
  * License   : EPL
@@ -15,6 +15,7 @@ import java.io.SerializablePermission;
 import java.lang.reflect.ReflectPermission;
 import java.net.NetPermission;
 import java.net.SocketPermission;
+import java.security.AllPermission;
 import java.security.Permission;
 import java.security.SecurityPermission;
 import java.util.PropertyPermission;
@@ -42,6 +43,8 @@ public class KermetaSecurityManager extends SecurityManager {
 	 * "-Dsun.rmi.server.exceptionTrace=true" 
 	 *  */
 	public void checkPermission(Permission perm) {
+		// "AllPermission" should allow all the permissions listed below.. more tests needed to remove useless permission grants.
+		if (perm instanceof AllPermission) return; 
 		if (perm instanceof ReflectPermission)  return;
 		// This perm. is necessary to access to the plugins informations
 		if (perm instanceof AdminPermission) return;
