@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.8 2005-12-15 12:23:21 zdrey Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.9 2005-12-19 13:08:10 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -125,11 +125,19 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 		KermetaUnit found_unit = null;
 		// Get the KermetaUnit corresponding to the current file
 		// TODO check that there is no risk of concurrent modif using the iterator of importedUnits
-		Iterator it = unit.getAllImportedUnits().iterator();
-		while (it.hasNext()) { 
-			KermetaUnit u = (KermetaUnit)it.next(); 
-			if (u.getUri().equals(file))
-				found_unit = u;
+		if (unit.getUri().replaceAll("/+", "/").equals(file))
+		{
+			found_unit = unit;
+		}
+		else
+		{
+			Iterator it = unit.getAllImportedUnits().iterator();
+			while (it.hasNext()) {
+				KermetaUnit u = (KermetaUnit)it.next();
+				String unit_uri = u.getUri().replaceAll("/+", "/");
+				if (u.getUri().equals(file))
+					found_unit = u;
+			}
 		}
 		
 		if (!context.getFrameStack().isEmpty() && found_unit != null) {
