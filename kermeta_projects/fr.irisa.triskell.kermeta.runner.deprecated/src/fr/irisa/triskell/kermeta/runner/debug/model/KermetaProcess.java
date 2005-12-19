@@ -138,8 +138,10 @@ public class KermetaProcess extends Thread {
 	        }
 	        finally
 	        {
-	        	DebugInterpreter di = kermeta_interpreter.getInterpreter(); 
-	        	di.getInterpreterContext().popCallFrame();
+	        	DebugInterpreter di = kermeta_interpreter.getInterpreter();
+	        	// Last frame could have been poped properly if no exception occured.
+	        	if (!di.getInterpreterContext().getFrameStack().isEmpty())
+	        		di.getInterpreterContext().popCallFrame();
 	    		// Remote side of the interpreter reads this attribute and act accordingly
 	    		di.setCurrentState(DebugInterpreter.DEBUG_TERMINATE);
 	    		// Run a last time the debug command that tests if we can interrupt.....laborious
