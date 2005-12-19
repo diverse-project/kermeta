@@ -137,6 +137,10 @@
          <launchMode
                description="description du launch mode"
                mode="run"/>
+         <launchMode
+               description="Debug configuration"
+               mode="debug"
+               perspective="org.eclipse.debug.ui.DebugPerspective"/>
       </launchConfigurationTabGroup>
    </extension> 
  
