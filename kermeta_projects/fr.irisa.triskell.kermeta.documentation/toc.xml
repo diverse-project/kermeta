@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!-- $Id: toc.xml,v 1.8 2005-09-12 13:20:17 dvojtise Exp $ -->
+<!-- $Id: toc.xml,v 1.9 2005-12-19 09:41:19 dvojtise Exp $ -->
 <toc label="KerMeta documentation">
 	<topic label="User documentation">		
 		<topic label="KerMeta presentation and Metamodel" href="build/eclipse.help/KerMeta-MetaModel/index.html"> 
@@ -12,7 +12,7 @@
 			<link toc="build/eclipse.help/KerMeta-UI-UserGuide/toc.xml" />
 		</topic>
 		<topic label="KerMeta references">
-			<topic label="KerMeta Interpreter and Java Framework reference" href="build/javadoc/KermetaInterpreter/index.html"> 		
+			<topic label="KerMeta Interpreter and Java Framework reference" href="build/javadoc/KerMetaInterpreter/index.html"> 		
 			</topic>	
 		</topic>
 		<topic label="KerMeta load and save with EMF Tutorial" href="build/eclipse.help/KermetaEMFTutorial/index.html"> 
