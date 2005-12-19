@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.14 2005-12-16 09:54:19 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.15 2005-12-19 12:33:17 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -238,33 +238,39 @@ public class KermetaDebugWrapper {
 		String[] result = new String[2];
 		Hashtable data = ro.getData();
 		result[1] = RunnerConstants.IVALUE_PRIMITIVE ;
-		String qname = 
-		KMTHelper.getQualifiedName((FNamedElement)((FClass)ro.getMetaclass().getData().get("kcoreObject")).getFClassDefinition());
-		if (qname.equals("kermeta::standard::String")) {
-			result[0] = "\"" + data.get("StringValue").toString() + "\"";
-		} else if (qname.equals("kermeta::standard::Integer")) {
-			result[0] = data.get("NumericValue").toString();
-		} else if (qname.equals("kermeta::standard::Character")) {
-			result[0] = "'" + data.get("CharacterValue").toString() + "'";
-		} else if (qname.equals("kermeta::standard::Boolean")) {
-			result[0] = data.get("BooleanValue").toString();
-		}
-		// FIXME Is there a proper way to get the Kermeta type??
-		else if (qname.equals("Collection") || qname.endsWith("Sequence"))
+		if (ro.getMetaclass()==null)
 		{
-			result[0] = "<"+qname.substring(qname.lastIndexOf(":")+1, qname.length())+">";
-			result[1] = RunnerConstants.IVALUE_SET;
+			result[0] = ro.toString(); // this is always equal to : [< No metaclass ! > : RO_id ]   
 		}
-
-		
-		// Else : a link to the oId of the variable computed?
-		
 		else
 		{
-			result[0] = "<"+qname.substring(qname.lastIndexOf(":")+1, qname.length())+">";
-			result[1] = RunnerConstants.IVALUE_NA ;//"[ " + Long.toString(var.getRuntimeObject().getOId()) + " ]";
-		}
+			String qname = 
+				KMTHelper.getQualifiedName((FNamedElement)((FClass)ro.getMetaclass().getData().get("kcoreObject")).getFClassDefinition());
+			if (qname.equals("kermeta::standard::String")) {
+				result[0] = "\"" + data.get("StringValue").toString() + "\"";
+			} else if (qname.equals("kermeta::standard::Integer")) {
+				result[0] = data.get("NumericValue").toString();
+			} else if (qname.equals("kermeta::standard::Character")) {
+				result[0] = "'" + data.get("CharacterValue").toString() + "'";
+			} else if (qname.equals("kermeta::standard::Boolean")) {
+				result[0] = data.get("BooleanValue").toString();
+			}
+			// FIXME Is there a proper way to get the Kermeta type??
+			else if (qname.equals("Collection") || qname.endsWith("Sequence"))
+			{
+				result[0] = "<"+qname.substring(qname.lastIndexOf(":")+1, qname.length())+">";
+				result[1] = RunnerConstants.IVALUE_SET;
+			}
 		
+			
+			// Else : a link to the oId of the variable computed?
+			
+			else
+			{
+				result[0] = "<"+qname.substring(qname.lastIndexOf(":")+1, qname.length())+">";
+				result[1] = RunnerConstants.IVALUE_NA ;//"[ " + Long.toString(var.getRuntimeObject().getOId()) + " ]";
+			}
+		}
 		return result;
 	}
 	
