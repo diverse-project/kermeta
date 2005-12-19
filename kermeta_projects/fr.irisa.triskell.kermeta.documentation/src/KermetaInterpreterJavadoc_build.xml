@@ -27,14 +27,6 @@
         	version="false" 
         	nodeprecatedlist="false" 
         	nodeprecated="false" 
-        	packagenames="fr.irisa.triskell.kermeta.runtime.factory,
-        		fr.irisa.triskell.kermeta.runtime,
-	        	fr.irisa.triskell.kermeta.runtime.language,
-    	    	kermeta_framework.test,
-        		fr.irisa.triskell.kermeta.dev.framework,
-        		fr.irisa.triskell.kermeta.runtime.basetypes,
-        		fr.irisa.triskell.kermeta.runtime.testing,
-        		fr.irisa.triskell.kermeta.reflect" 
         	sourcefiles="" 
         	sourcepath="../../fr.irisa.triskell.kermeta.interpreter/src/java;
         		../../fr.irisa.triskell.kermeta.interpreter/test/junit" 
@@ -49,7 +41,14 @@
         		C:\eclipse3.0\eclipse\plugins\org.eclipse.emf.ecore.xmi_2.0.1\runtime\ecore.xmi.jar;
         		../../fr.irisa.triskell.kermeta.interpreter/lib/thirdparty/junit.jar;
         		C:\eclipse3.0\eclipse\plugins\org.eclipse.emf.ecore_2.0.1\runtime\ecore.jar" 
-        	doctitle="Kermeta Interpreter and java Framework"/>
+        	doctitle="Kermeta Interpreter and java Framework">
+        	<packageset dir="../../fr.irisa.triskell.kermeta.interpreter/src/java" defaultexcludes="yes">
+    	    	<include name="fr/irisa/triskell/**"/>
+    	    </packageset>
+        	<packageset dir="../../fr.irisa.triskell.kermeta.io/src/java" defaultexcludes="yes">
+        		<include name="fr/irisa/triskell/**"/>
+      		</packageset>
+        </javadoc>
     </target>
 
 	<target name="deploy" description="copy documentation files to http://www.irisa.fr/triskell/prive/docs" depends="javadoc">
