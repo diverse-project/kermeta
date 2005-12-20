@@ -57,6 +57,8 @@ import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.RandomGraphBuilder;
 import  java.awt.*;
 import  java.awt.event.*;
 import  javax.swing.*;
+
+import java.util.Enumeration;
 import  java.util.Hashtable;
 
 /** GLPanel contains code for adding scrollbars and interfaces to the TGPanel
@@ -64,11 +66,15 @@ import  java.util.Hashtable;
   * will probably need to be rewritten for other applications.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: GLPanel.java,v 1.3 2005-12-18 22:38:37 dvojtise Exp $
+  * @version  1.21  $Id: GLPanel.java,v 1.4 2005-12-20 23:03:29 dvojtise Exp $
   */
 public class GLPanel extends JPanel {
 
-    public String zoomLabel = "Zoom"; // label for zoom menu item
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1138926175560529484L;
+	public String zoomLabel = "Zoom"; // label for zoom menu item
     public String rotateLabel = "Rotate"; // label for rotate menu item
     public String localityLabel = "Locality"; // label for locality menu item
     public String hyperLabel = "Hyperbolic"; // label for locality menu item
@@ -257,6 +263,7 @@ public class GLPanel extends JPanel {
         final JScrollBar zoomSB = zoomScroll.getZoomSB();
         final JScrollBar rotateSB = rotateScroll.getRotateSB();
         final JScrollBar localitySB = localityScroll.getLocalitySB();
+        final JScrollBar hyperSB = hyperScroll.getHyperSB();
 
         setLayout(new BorderLayout());
 
@@ -316,6 +323,7 @@ public class GLPanel extends JPanel {
         scrollBarHash.put(zoomLabel, zoomSB);
         scrollBarHash.put(rotateLabel, rotateSB);
         scrollBarHash.put(localityLabel, localitySB);
+        scrollBarHash.put(hyperLabel, hyperSB);
 
         JPanel scrollselect = scrollSelectPanel(new String[] {zoomLabel, rotateLabel, localityLabel, hyperLabel});
         scrollselect.setBackground(defaultColor);
@@ -365,11 +373,10 @@ public class GLPanel extends JPanel {
                 JScrollBar selectedSB = (JScrollBar) scrollBarHash.get(
                         (String) scrollCombo.getSelectedItem());
                 if (currentSB!=null) currentSB.setVisible(false);
-                /*for (int i = 0;i<scrollBarHash;i++) {
-                    JScrollBar sb = (JScrollBar) scrollBarHash.get(scrollBarNames[i]);
-                     if(sb==null) continue;
-                     sb.setVisible(false);
-                }*/
+                Enumeration enumeration = scrollBarHash.elements();
+                while(enumeration.hasMoreElements()){
+                	((JScrollBar)enumeration.nextElement()).setVisible(false);
+                }
                 if (selectedSB!=null) selectedSB.setVisible(true);
                 currentSB = selectedSB;
             }

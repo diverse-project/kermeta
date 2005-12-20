@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.6 2005-12-18 22:39:03 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.7 2005-12-20 23:03:29 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -71,9 +71,12 @@ public class KermetaGLPanel extends GLPanel
 
 	public Editor currentEditor = null;
 	
-	public BuildKermetaClassGraphThread buildKermetaClassGraphThread;
+	public BuildKermetaClassGraphThread buildKermetaClassGraphThread = null;
 	
 	public TGInheritanceTransformations graphTransform = null;
+
+	private static java.lang.Boolean building = Boolean.FALSE;
+	
 	
 	KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 
@@ -91,8 +94,10 @@ public class KermetaGLPanel extends GLPanel
         tgPanel.setLensSet(tgLensSet);
         addUIs();
         TexteditorPlugin.getDefault().registerListener(this);
-        
+
+		System.err.println("initializing: " );
         buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
+        buildKermetaClassGraphThread.setName("BuildKermetaClassGraphThread");
         buildKermetaClassGraphThread.start();
         
         graphTransform = new TGInheritanceTransformations (tgPanel);
@@ -109,9 +114,9 @@ public class KermetaGLPanel extends GLPanel
 
     public void addUIs() {
         tgUIManager = new TGUIManager();
-        GLEditUI editUI = new GLEditUI(this);
+       // GLEditUI editUI = new GLEditUI(this);
         GLNavigateUI navigateUI = new KermetaGLNavigateUI(this);
-        tgUIManager.addUI(editUI,"Edit");
+       // tgUIManager.addUI(editUI,"Edit");
         tgUIManager.addUI(navigateUI,"Navigate");
         tgUIManager.activate("Navigate");
     }
@@ -124,9 +129,19 @@ public class KermetaGLPanel extends GLPanel
 		// do it in a thread so it will not slow down the opening of the file
 		if(editor != previousEditor){
 			previousEditor = editor;
+			System.err.println("unitGotFocus: " +editor);
 			currentEditor = editor;
-			System.err.println(editor.getMcunit().getUri());
-			buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
+			System.err.println("unitGotFocus: " + editor.getMcunit().getUri());
+			if(buildKermetaClassGraphThread !=  null){
+				
+				try {
+					buildKermetaClassGraphThread.stopBuild();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
+			}
 			buildKermetaClassGraphThread.start();
 		}
 		System.err.println("editor unit: "+editor.getMcunit().getUri());
@@ -165,29 +180,64 @@ public class KermetaGLPanel extends GLPanel
 	 */
 	class BuildKermetaClassGraphThread extends Thread {
 		
-		private java.lang.Boolean building = Boolean.FALSE;
+
 		private KermetaClassGraphBuilder kcGraphBuilder; 
 		private boolean mustStop =  false;
 		
-		public void stopBuild(){
-			
+		synchronized public void stopBuild() throws InterruptedException{
+			synchronized (building){
+				if(building.booleanValue()){
+					mustStop = true;
+					kcGraphBuilder.mustStop = true;
+					System.err.println("stopBuild waiting");
+        			
+					wait(2000);
+					yield();
+				}
+				System.err.println("stopBuild go");
+			}
 		}
-		synchronized public void run() {   
-			yield();
-			try { 
+		public void run() { 
+			
+			synchronized (building){
+				building = Boolean.TRUE;
+				mustStop = false;
+			}
+			yield();yield();yield();yield(); //this seems important  here
+			/*try { 
 				this.sleep(500); // gives some time to the construction of the tgPanel to finish (the relaxer in particular)
 			} catch (InterruptedException e) {
 				return;
+			}*/
+			int nbtries = 0;
+			FClassDefinition clasDef=null;
+			while(currentEditor== null && nbtries <10){
+				clasDef= findAClassInUnit();
+				if(currentEditor == null)
+					try {
+						wait(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				nbtries++;
+
+				System.err.println("  try "+nbtries);
 			}
-			FClassDefinition clasDef = findAClassInUnit();
-			if(clasDef == null) return;
+			if(clasDef == null) {
+				synchronized (building){
+					building = Boolean.FALSE;
+					notifyAll();
+				}
+				return;
+			}
 			System.err.println(clasDef.getFName());  
 			yield();
 			
 			KermetaGLPanel.this.tgPanel.tgLayout.stopDamper(); // do not damp while building the model
             //KermetaGLPanel.this.tgPanel.tgLayout.resetDamper();
 			//KermetaGLPanel.this.tgPanel.tgLayout.stop();
-			yield();yield();
+			yield();yield();yield();yield();
 			
             
 			// make sure no other thread of touchgrapch is running
@@ -200,12 +250,18 @@ public class KermetaGLPanel extends GLPanel
             		msg = "Nb nodes(2): "+KermetaGLPanel.this.tgPanel.getNodeCount();
             		System.err.println(msg);
             		kcGraphBuilder = new KermetaClassGraphBuilder(tgPanel, clasDef);
+            		System.err.println("kcGraphBuilder = "+kcGraphBuilder);
+            		System.err.println("currentEditor = "+currentEditor);
             		kcGraphBuilder.buildGraph(currentEditor.getMcunit());
                 	msg = "Nb nodes(3): "+KermetaGLPanel.this.tgPanel.getNodeCount();
             		System.err.println(msg);
                 	
             		if (mustStop){ 
-            			System.err.println("BuildKermetaClassGraphThread stopped");                    	
+            			System.err.println("BuildKermetaClassGraphThread stopped");
+            			synchronized (building){
+            				building = Boolean.FALSE;
+            				building.notifyAll();
+            			}
             			return;
             		}
                 
@@ -229,35 +285,47 @@ public class KermetaGLPanel extends GLPanel
 	                }
 	                else
 	                	tgPanel.setSelect(tgPanel.getGES().getFirstNode()); //Select first node, so hiding works
+	                
 	            	
             	} catch ( TGException tge ) {
                     System.err.println(tge.getMessage());
                     tge.printStackTrace(System.err);
                 }
                 setVisible(true);
+                // notifyAll();
             }
             
+            
+            //KermetaGLPanel.this.tgPanel.tgLayout.stopDamper(); // do not damp while building the model
+            //yield();
+           /* try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+			}*/
             /*try {
 				this.wait(500);
 			} catch (InterruptedException e) {
 			}*/
-            KermetaGLPanel.this.tgPanel.tgLayout.stopDamper(); // do not damp while building the model
-            try {
-				Thread.sleep(5000);
-			} catch (InterruptedException e) {
-			}
             //KermetaGLPanel.this.tgPanel.tgLayout.start();
             KermetaGLPanel.this.tgPanel.tgLayout.resetDamper();
             yield();
             
     		System.err.println("BuildKermetaClassGraphThread end");
+    		synchronized (building){
+				building = Boolean.FALSE;
+			}
+			//notifyAll();
+    		//System.err.println("BuildKermetaClassGraphThread has notified");
+    		
 		}
 	}
 	
 	public FClassDefinition findAClassInUnit()
 	{
-		if(currentEditor == null)
+		if(currentEditor == null){
 			currentEditor =TexteditorPlugin.getDefault().getEditor();
+			System.err.println(" findAClassInUnit setting currentEditor to "+currentEditor);
+		}
 		if(currentEditor ==null) return null;
         KermetaUnit kunit = currentEditor.getMcunit();
 		FClassDefinition result = null;
@@ -293,9 +361,11 @@ public class KermetaGLPanel extends GLPanel
 	
 	public FClassDefinition findAClassInUnitPackage(FPackage aPackage)
 	{
-		if(currentEditor == null)
+		if(currentEditor == null){
 			currentEditor =TexteditorPlugin.getDefault().getEditor();
-        KermetaUnit kunit = currentEditor.getMcunit();
+			System.err.println(" findAClassInUnitPackage setting currentEditor to "+currentEditor);
+		}
+      //  KermetaUnit kunit = currentEditor.getMcunit();
 		FClassDefinition result = null;
 		Iterator it = aPackage.eContents().iterator();
         while(it.hasNext() && (result == null)){
@@ -303,7 +373,7 @@ public class KermetaGLPanel extends GLPanel
         	if(obj instanceof FClassDefinition) {
         		// check if this Classdef is really in this Unit
         		FClassDefinition classDef = (FClassDefinition)obj;
-        		EObject o;
+        	//	EObject o;
         		//o.eResource().
         		//if(kunit == classDef.kunit) 
         		result = classDef;
