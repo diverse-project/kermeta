@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.24 2005-12-05 09:24:46 ffleurey Exp $
+/* $Id: ExpressionChecker.java,v 1.25 2005-12-20 12:14:23 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -193,6 +193,10 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 		    
 		    // Try to infer actual types of type variables
 		    Hashtable binding = new Hashtable();
+	    	if(required_params.length != exp.getFParameters().size()){
+	    		unit.messages.addError("TYPE-CHECKER : problem with the number of parameters passed to the operation; passed " + exp.getFParameters().size() + "; expecting "+required_params.length + "; maybe due to bug #108 ", exp);
+			    error = true;
+	    	}
 		    if (!error) {
 			    // get Type of actual parameters
 			    for(int i=0; i<exp.getFParameters().size(); i++) {
