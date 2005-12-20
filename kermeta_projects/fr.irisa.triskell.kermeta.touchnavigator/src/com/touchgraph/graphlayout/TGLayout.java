@@ -70,7 +70,7 @@ import  com.touchgraph.graphlayout.graphelements.*;
   * </b></p>
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGLayout.java,v 1.1 2005-10-24 20:29:58 dvojtise Exp $
+  * @version  1.21  $Id: TGLayout.java,v 1.2 2005-12-20 12:19:33 dvojtise Exp $
   */
 public class TGLayout implements Runnable {
 
@@ -346,6 +346,7 @@ public class TGLayout implements Runnable {
 
     public void start() {
         relaxer = new Thread(this);
+        relaxer.setName("TGLayout Relaxer");
         relaxer.start();
     }
 
