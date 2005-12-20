@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.14 2005-12-20 08:55:56 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.15 2005-12-20 12:16:59 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -9,20 +9,20 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
-import java.io.BufferedReader;
-import java.io.OutputStreamWriter;
-import java.rmi.AlreadyBoundException;
+//import java.io.BufferedReader;
+//import java.io.OutputStreamWriter;
+//import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+//import java.rmi.registry.LocateRegistry;
+//import java.rmi.registry.Registry;
 import java.util.ArrayList;
-import java.util.Hashtable;
+//import java.util.Hashtable;
 
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IMarkerDelta;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
+//import org.eclipse.core.resources.IMarker;
+//import org.eclipse.core.resources.IMarkerDelta;
+//import org.eclipse.core.resources.IProject;
+//import org.eclipse.core.resources.IResource;
+//import org.eclipse.core.resources.ResourcesPlugin;
 
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
@@ -35,11 +35,11 @@ import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
-import org.eclipse.debug.internal.ui.actions.ResumeActionDelegate;
-import org.eclipse.update.configurator.ConfiguratorUtils;
+//import org.eclipse.debug.internal.ui.actions.ResumeActionDelegate;
+//import org.eclipse.update.configurator.ConfiguratorUtils;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
-import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
+//import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
@@ -55,7 +55,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 { 
     protected KermetaRemoteDebugUI remotePlatform;
     protected IKermetaRemoteInterpreter remoteInterpreter;
-    private Registry reg;
+    //private Registry reg;
     
     protected KermetaProcess kermeta_process;
     protected KermetaStepHandler stepHandler;
