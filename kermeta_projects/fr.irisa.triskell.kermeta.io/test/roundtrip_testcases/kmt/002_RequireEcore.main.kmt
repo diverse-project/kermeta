@@ -1,0 +1,73 @@
+@mainClass "src::Main"
+@mainOperation "main"
+
+package src;
+
+require kermeta
+require "./002_MetaModel.ecore"
+
+using kermeta::persistence
+using kermeta::standard
+
+
+class Main
+{
+    operation main() : Void is do
+    
+        stdio.writeln("-----------------------------------------")
+        stdio.writeln("Start")
+        stdio.writeln("-----------------------------------------")
+        
+        //Configuration of different resources
+    	var statemachine : StateMachine
+    	var repository : EMFRepository init EMFRepository.new
+    	var resource : EMFResource init repository.createResource("./StateMachine.xmi", "./MetaModel.ecore")
+    	
+    	//Load
+    	stdio.writeln("Before Load")
+    	resource.load
+    	stdio.writeln("After Load")
+    	
+    	//Create an example of a possible tree
+    	statemachine ?= resource.instances.one
+    	statemachine.name := "Name1"
+    	statemachine.name := "Re-Name1"    	
+    	
+    	var s0 : State init State.new
+    	var setTrans : Set<Transition> init Set<Transition>.new
+    	var t1 : Transition init Transition.new
+    	var s1 : src::State init src::State.new //Same way to initialise; we can choose the specifique package like this
+    	
+    	s0.name := "State0"
+    	t1.name := "Transition"
+    	s1.name := "State1"
+    	
+    	t1.source := s0
+    	t1.target := s1
+    	setTrans.add(t1)
+    	s0.outgoing := setTrans
+    	s1.incoming := setTrans
+    	statemachine.top := s0
+    	
+    	// Manage the resource 
+    	resource.instances.remove(statemachine)
+    	resource.instances.add(statemachine)
+    	stdio.write("Look if the resource is correctly managed: ")
+    	resource.instances.each{ o | stdio.writeln(o.toString)}
+    	
+    	//Print
+    	//statemachine.top.outgoing.each{ s |
+    	//	stdio.writeln(s.name)
+    	//}
+    	
+    	//Save
+    	stdio.writeln("Before Save")
+    	resource.save() //Problems with saving
+    	stdio.writeln("After Save")
+	end	
+	
+	operation truc(machin : String) is do
+		var truc2 : String init "sdqf"
+		stdio.writeln(machin)
+	end
+}

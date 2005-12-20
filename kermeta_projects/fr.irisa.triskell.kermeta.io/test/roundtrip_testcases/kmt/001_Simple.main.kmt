@@ -1,0 +1,20 @@
+package src;
+
+require kermeta
+using kermeta::standard
+
+class Main
+{
+	operation main() : kermeta::standard::~Void is
+		do
+			stdio.writeln("-----------------------------------------")
+			stdio.writeln("Start")
+			stdio.writeln("-----------------------------------------")
+			
+			stdio.writeln("After Save")
+		end
+	operation truc(machin : String) : set kermeta::standard::~Void[0..0] is do
+		var truc2 : String init "dsdq"
+	end
+}
+//alias String : kermeta::standard::String;
