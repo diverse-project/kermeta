@@ -1,10 +1,10 @@
-<!-- $Id: zip_build.xml,v 1.1 2005-11-09 13:55:51 dvojtise Exp $ -->
+<!-- $Id: zip_build.xml,v 1.2 2005-12-20 12:18:33 dvojtise Exp $ -->
 <project name="Copy_site_2_modelware" default="create_zip" basedir=".">
 	<description>
        
 	</description>
 	<property name="dest" location="dist"/>
-	<property name="kermeta_version" value="0.0.17"/>
+	<property name="kermeta_version" value="0.0.18"/>
 	<property name="kermeta_documentation_version" value="0.0.6"/>
 	<property name="traceability_version" value="0.0.2"/>
 	

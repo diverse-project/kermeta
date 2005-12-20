@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2005-11-29 14:17:12 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2005-12-20 12:15:04 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -50,6 +50,7 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_003_associations() throws Exception {
 testvalidFile("test/constraintchecker_tests/valid","003_associations.kmt" );
@@ -85,6 +86,10 @@ testinvalidFile("test/constraintchecker_tests/invalid","003_associations_04.kmt"
 
 public void testinvalid_003_associations_05() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","003_associations_05.kmt" );
+}
+
+public void testinvalid_003_associations_06() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","003_associations_06.kmt" );
 }
 
 public void testinvalid_004_cyclicCompositions_01() throws Exception {

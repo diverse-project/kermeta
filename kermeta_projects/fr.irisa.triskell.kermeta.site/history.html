@@ -5,15 +5,31 @@
 
 
 <body>
-
+<!--
+$Id: history.html,v 1.6 2005-12-20 12:18:33 dvojtise Exp $
+-->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
+<h2 class="Heading">V0.1.0 (19/12/2005)</h2>
+<h3>New features</h3>
+<ul>
+  <li>Kermeta has now a debugger ! It has the usual features of debuggers : breakpoints, step in, step over, resume, stop, etc</li>    
+</ul>
+<h3>Bug fixed</h3>
+<ul>
+  <li>#226;	<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=226&group_id=32&atid=205">export to ecore fails if no kermeta editor was opened in a session</a></li>	
+  <li>#244; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=244&group_id=32&atid=205">kermeta2ecore doesn't affect a default value for NS_URI</a>. The generated default uri use a relative path.</li>  
+  <li>Some correction on exception handling</li>		
+</ul>  
+<h3>Improvements</h3>
+<ul>
+  <li>Some improvements in the content of the hovertext in the text editor</li>
+</ul>
 <h2 class="Heading">V0.0.18 (02/12/2005)</h2>
 <h3>Improvements</h3>
 <ul>
   <li>#275; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=275&group_id=32&atid=208">default implementation of the operation body should raise an exception if used</a></li>
   <li>Added some checks of static contraints on kermeta programs (see #298; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=298&group_id=32&atid=205">Static constraints on Kermeta programs</a>)</li>  
-  
 </ul>
 <h3>Bug fixed</h3>
 <ul>

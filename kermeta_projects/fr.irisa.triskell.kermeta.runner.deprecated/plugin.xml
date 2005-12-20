@@ -2,9 +2,9 @@
 <?eclipse version="3.0"?>
 <plugin
    id="fr.irisa.triskell.kermeta.runner"
-   name="Runner Plug-in"
-   version="0.0.17"
-   provider-name="INRIA/IRISA"
+   name="Kermeta Runner Plug-in"
+   version="0.1.0"
+   provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
 
    <runtime>
