@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.15 2005-12-16 09:54:19 zdrey Exp $
+/* $Id: KermetaSourceLocator.java,v 1.16 2005-12-20 08:55:56 zdrey Exp $
  * Project: Kermeta.runner
  * File: KermetaSourceLocator.java
  * License: EPL
@@ -36,7 +36,6 @@ public class KermetaSourceLocator implements IPersistableSourceLocator, ISourceP
     public KermetaSourceLocator()
     {
         super();
-        System.err.println("A new source locator was created");
     }
     
     /**

@@ -157,12 +157,13 @@ public class KermetaProcess extends Thread {
 		System.out.println("KermetaProcess terminates");
 		
 		try {
-			// FIXME : we should not have to do it through debugPlatform. beeeek
-		//	debugPlatform.unregisterRemoteInterpreter();
+    		//debugPlatform.unregisterRemoteInterpreter();
 			//UnicastRemoteObject.unexportObject(reg.lookup(REMOTE_NAME), true);
 			//UnicastRemoteObject.unexportObject(debugPlatform, true);
 			reg.unbind(REMOTE_NAME);
-			//reg = null;
+			// Unset the SecurityManager... otherwise there is an error in ConfiguratorUtils
+			// and we cannot start any runtime workbench anymore.
+			System.setSecurityManager(null);
 			
 		} catch (AccessException e) {
 			e.printStackTrace();

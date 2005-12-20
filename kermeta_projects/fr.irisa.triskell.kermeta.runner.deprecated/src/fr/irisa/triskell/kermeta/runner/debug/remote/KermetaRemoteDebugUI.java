@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.11 2005-12-16 09:54:19 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.12 2005-12-20 08:55:56 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -101,16 +101,17 @@ public class KermetaRemoteDebugUI extends UnicastRemoteObject implements IKermet
 			}
 			else if (command.equals(RunnerConstants.TERMINATE))
 			{
+				// Is it correct ?
+				target.getRemoteInterpreter().askTerminate();
+				target.getKermetaProcess().terminate();
+				target.unsetKermetaProcess(); // just set the process to null...
 				// If the reason was a client request we don't need to handle the GUI events.
 				if (!reason.equals(RunnerConstants.CLIENT_REQUEST))
 				{   // then we have to "force" the fire of an event
 					target.setState(RunnerConstants.TERMINATE);
 					target.fireTerminateEvent();
 				}
-				// Is it correct ?
-				target.getRemoteInterpreter().askTerminate();
-				target.getKermetaProcess().terminate();
-				target.unsetKermetaProcess(); // just set the process to null...
+				
 			}
 
 			// Is there a reason? (usually, the reason is given only by the interpreter side, 

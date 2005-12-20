@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.19 2005-12-01 18:20:31 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.20 2005-12-20 08:55:56 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -96,10 +96,6 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	            target = new KermetaDebugTarget(launch);	            
 	            // start the debug (target is added to launch through this method call)
 	            target.start();
-	            // We don't terminate the target here, since it is controlled by the
-	            // target itself.
-	    		if (target.isTerminated())
-	    			launch.terminate();
 	        } 
 	    }
 	    catch (KermetaInterpreterError e)

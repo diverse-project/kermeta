@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.9 2005-12-13 18:08:40 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.10 2005-12-20 08:55:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -411,9 +411,11 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 	 * @see org.eclipse.debug.core.ILaunchListener#launchRemoved(org.eclipse.debug.core.ILaunch)
 	 */
 	public void launchRemoved(ILaunch launch) {
-		System.err.println("A new Launch is removed");
-		IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
-		breakpointManager.removeBreakpointListener(this);
+		if (launch == this.launch)
+		{
+			IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
+			breakpointManager.removeBreakpointListener(this);
+		}
 	}
 
 	public Object getAdapter(Class adapter)

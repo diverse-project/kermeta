@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.13 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.14 2005-12-20 08:55:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -36,6 +36,7 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.internal.ui.actions.ResumeActionDelegate;
+import org.eclipse.update.configurator.ConfiguratorUtils;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
@@ -83,7 +84,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
         getLaunch().addDebugTarget(this);
         DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
         DebugPlugin.getDefault().getLaunchManager().addLaunchListener(this);
-        //DebugPlugin.getDefault().addDebugEventListener(this);
     }
     
     public IDebugTarget getDebugTarget() { return this; }
@@ -140,7 +140,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     
     /** terminate command called by Eclipse when user clicks on the stop button */
 	public void terminate() throws DebugException {
-    	setState(RunnerConstants.TERMINATE);
+		setState(RunnerConstants.TERMINATE);
     	// No more thread running!
 		threads = new IThread[0];
 		try {
@@ -152,6 +152,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 			e.printStackTrace();
 		}
 		fireTerminateEvent();
+        //launch.removeDebugTarget(this);
 	}
     
     
@@ -179,7 +180,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     /** @see org.eclipse.debug.core.model.ISuspendResume#canSuspend() */
     public boolean canSuspend() 
     {
-    	return threads.length>0 && !isSuspended(); 
+    	return threads.length>0 && !isSuspended() && !isTerminated(); 
     }
 
 	/**

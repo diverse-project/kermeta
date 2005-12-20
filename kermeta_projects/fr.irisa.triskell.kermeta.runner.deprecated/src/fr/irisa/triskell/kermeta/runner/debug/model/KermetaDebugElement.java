@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugElement.java,v 1.5 2005-12-06 18:53:15 zdrey Exp $
+/* $Id: KermetaDebugElement.java,v 1.6 2005-12-20 08:55:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugElement.java
  * License   : GPL
@@ -108,7 +108,6 @@ public abstract class KermetaDebugElement implements IDebugElement {//, ITermina
 	
 	/** Fires a debug event marking the termination of this element. */
 	public void fireTerminateEvent() {
-		System.err.println("Terminate event");
 		fireEvent(new DebugEvent(this, DebugEvent.TERMINATE));}
 
 	/**
