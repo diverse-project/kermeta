@@ -25,6 +25,9 @@ Deploying a new version of Kermeta
       to get the last versions of the plugins linked to this feature 
     
 	4. use the site.xml   pde/builder   to compile everything
+		note: since eclipse 3.1, I had some trouble with this tool wich says that it cannot find an old 
+		version of one of the plugins. To solve this, I had to remove my local version of kermeta (ie. removes 
+		the plugins and feature of the workbench used for the build)
 	
 	5. deploy it locally in your current configuration using a local site update (not the remote one !)
  	and test the version : 
