@@ -1,5 +1,5 @@
 @mainClass "test::Main"
-@mainOperation "main"
+@mainOperation "testmain"
 
 
 package test;
@@ -141,7 +141,7 @@ class Printer inherits Visitor
 
 class Main inherits kermeta::kunit::Test
 {
-	operation main() is 
+	operation testmain() is 
 	do 
 		var myPrinter : Printer init Printer.new
 
@@ -160,7 +160,7 @@ class Main inherits kermeta::kunit::Test
 		// Check that m1 and m2 contain the same values
 		assert(m1.oid != m2.oid)
 		assert(m1.size == m2.size)
-		assert(m1.body.equals(m2.size))
+		assert(m1.body.size.equals(m2.body.size))
 		assert(m1.isRead.equals(m2.isRead))
 		
 		stdio.writeln("-----------------------------------------------------------")

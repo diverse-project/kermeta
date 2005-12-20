@@ -24,7 +24,7 @@ class MyObject {
 
 class MyObjectCreation inherits kermeta::kunit::Test {
 
-	operation createMyObject() : MyObject is do
+	operation testcreateMyObject() : MyObject is do
 		var object : MyObject
 		var bool   : kermeta::standard::Boolean
 		var int    : kermeta::standard::Integer

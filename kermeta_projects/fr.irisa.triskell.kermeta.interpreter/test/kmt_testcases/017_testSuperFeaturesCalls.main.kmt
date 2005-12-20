@@ -1,5 +1,5 @@
 @mainClass "testPackageTestSuperFeatures::TestSuperFeatures"
-@mainOperation "main_operation"
+@mainOperation "testMain_operation"
 
 package testPackageTestSuperFeatures;
 
@@ -49,7 +49,7 @@ class D inherits B,C
 
 class TestSuperFeatures inherits kermeta::kunit::Test
 {    
-     operation main_operation() is do
+     operation testMain_operation() is do
      	var a : A
      	var b : B
      	var c : C
@@ -63,19 +63,20 @@ class TestSuperFeatures inherits kermeta::kunit::Test
      	assert(d.getAttribute()==2)
      	d.ci := 1
      	assert(d.ci==1)
-     	c ?= d
+     	c := d
      	assert (c.ci==1)
      	assert (c.ai==3)
+     	stdio.writeln("c.getAttribute()=="+c.getAttribute().toString)
      	assert(c.getAttribute()==3)
      	c.setAttribute(7)
      	assert(c.getAttribute()==7)
      	assert (d.ai==7)
-     	b ?= d
+     	b := d
      	assert(b.getAttribute()==2)
      	b.setAttribute(9)
      	assert(d.bi==9)
      	b.ai := 11
-     	a ?= d
+     	a := d
      	assert(a.getAttribute()==11) 
 
      end

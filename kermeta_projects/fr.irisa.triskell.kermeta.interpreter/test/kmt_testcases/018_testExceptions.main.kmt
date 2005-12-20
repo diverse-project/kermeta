@@ -1,5 +1,5 @@
 @mainClass "testPackageTestExceptions::TestExceptions"
-@mainOperation "main_operation"
+@mainOperation "testmain_operation"
 
 package testPackageTestExceptions;
 
@@ -59,7 +59,7 @@ class B
 
 class TestExceptions inherits kermeta::kunit::Test
 {    
-     operation main_operation() is do
+     operation testmain_operation() is do
      	var a : A
      	var b : B
      	

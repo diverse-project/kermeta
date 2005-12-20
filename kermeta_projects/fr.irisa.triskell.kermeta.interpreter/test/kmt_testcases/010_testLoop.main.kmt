@@ -1,5 +1,5 @@
 @mainClass "testLoop::TestLoop"
-@mainOperation "operation1"
+@mainOperation "testLoop1"
 
 package testLoop;
 
@@ -9,7 +9,7 @@ require kermeta
 // call an operation from another package 
 class TestLoop inherits kermeta::kunit::Test {
 
-    operation operation1() : kermeta::standard::Integer is do
+    operation testLoop1() : kermeta::standard::Integer is do
 		var v1 : kermeta::standard::Integer init 2
 		var v2 : kermeta::standard::Integer init 2
 		

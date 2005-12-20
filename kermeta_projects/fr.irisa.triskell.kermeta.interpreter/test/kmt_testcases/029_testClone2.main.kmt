@@ -1,0 +1,99 @@
+@mainClass "root_package::Main"
+@mainOperation "testMain"
+
+
+package root_package;
+
+
+require kermeta
+
+Class Person 
+{
+    attribute name : String
+}
+
+class A {
+
+	attribute b : B	
+	
+	reference b2 : B
+	
+	operation print() is
+	do
+		stdio.writeln("--------------------------------------------------")
+		stdio.writeln(" + b is ")
+		self.b.print()
+		stdio.writeln(" + b2 is")
+		self.b2.print()
+		stdio.writeln("--------------------------------------------------")
+	end
+}
+
+class B {
+
+	attribute name : String
+	attribute size : Integer
+	attribute isEmpty : Boolean
+	//attribute speed : Real
+	//attribute c : Character
+
+	operation print() is
+	do
+		stdio.writeln(" - name : " + self.name)
+		stdio.writeln(" - size : " + self.size.toString())
+		stdio.writeln(" - is empty : " + self.isEmpty.toString())
+		//stdio.writeln(" - c : " + self.c)
+	end
+
+}
+
+class Main inherits kermeta::kunit::Test
+{
+    operation testClone1() is
+    do
+        var p1 : Person init Person.new
+        p1.name := “Robert”
+
+        var P2 : Person init Person.new
+        // ERR p2.name := p1.name
+        p2.name := String.clone(p1.name)
+    end
+    
+    operation testClone2() : Void is 
+    do 
+    	stdio.writeln("starting test")
+    	
+    	
+    	stdio.writeln("Creating a first object b1 of type B")
+    	var b1 : B init B.new
+    	b1.name := "toto"
+    	b1.size := 10
+    	b1.isEmpty := true
+    	//b1.c := 'a'
+    	b1.print()
+
+    	stdio.writeln("Creating b2, a clone of object b1 of type B")    	
+    	var b2 : B init B.clone(b1)
+    	b2.print()
+
+    	stdio.writeln("Updating b2")    	
+    	b2.name := "titi"
+    	b2.size := Integer.clone(12)
+    	b2.print()
+    	
+    	var a1 : A init A.new 
+    	a1.b := b1
+    	a1.b2 := b2
+    	
+    	stdio.writeln("Object a1 is ")
+    	a1.print()
+    	
+   		var a2 : A init A.clone(a1) 
+    	a2.print()
+    	
+    	stdio.writeln("Object a2 is")
+    	stdio.writeln("That's all folks ! ")	
+    end
+    
+}
+
