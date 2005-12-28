@@ -3,7 +3,7 @@
 
 package titi;
 
-require "UML2.km"
+require "input_test_models/UML2.km"
 using uml2
 
 class Main {
