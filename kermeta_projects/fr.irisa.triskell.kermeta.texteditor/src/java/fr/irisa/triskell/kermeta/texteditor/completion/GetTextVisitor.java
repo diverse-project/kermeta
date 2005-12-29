@@ -26,7 +26,6 @@ import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
 import fr.irisa.triskell.kermeta.structure.FVoidType;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * @author Franck Fleurey
@@ -52,7 +51,7 @@ class GetTextVisitor extends KermetaOptimizedVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
 	 */
-	public Object visit(FClassDefinition node) {
+	public Object visitFClassDefinition(FClassDefinition node) {
 		String result = node.getFName();
 		if (node.getFTypeParameter().size() > 0) {
 			result += "<";
