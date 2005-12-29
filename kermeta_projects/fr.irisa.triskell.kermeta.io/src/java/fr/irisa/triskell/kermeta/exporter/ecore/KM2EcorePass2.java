@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.2 2005-12-12 07:32:22 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.3 2005-12-29 15:51:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -35,6 +35,7 @@ import fr.irisa.triskell.kermeta.behavior.FTypeReference;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FParameter;
@@ -65,12 +66,12 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	protected Resource ecoreResource = null;
 	
 	// mapping to look for ecore objects created during pass1
-	protected Hashtable kmt2ecoremapping;
+	protected Hashtable<FObject,EObject> kmt2ecoremapping;
 	
 	/**
 	 * @param resource : the resource to populate
 	 */
-	public KM2EcorePass2(Resource resource, Hashtable mapping, KM2Ecore anEcoreExporter) {
+	public KM2EcorePass2(Resource resource, Hashtable<FObject,EObject> mapping, KM2Ecore anEcoreExporter) {
 		ecoreResource = resource;
 		kmt2ecoremapping = mapping;	
 		ecoreExporter = anEcoreExporter;
@@ -280,17 +281,16 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		// search the Eclass from previous pass
 		newEStructuralFeature = (EStructuralFeature)kmt2ecoremapping.get(node);
 		
-		if (node.isFIsComposite() )
-		{
-			
-			if (node.getFOpposite() != null)
-			{	// if it has an opposite, this cannot be an EAttribute
-				newEReference = (EReference)newEStructuralFeature;
-			}
-			else
-			{
+		if (node.isFIsComposite() || node.isFIsDerived())
+		{	// if this is composite we have to check the type
+			// same for derived properties, it may have to be an attribute
+			if(ecoreExporter.isTypeValidForAttibute(node.getFType())){
 				//attribute
 				newEAttribute = (EAttribute)newEStructuralFeature;
+			}
+			else
+			{	// a reference
+				newEReference = (EReference)newEStructuralFeature;			
 			}						
 		}
 		else { 
@@ -307,7 +307,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 			
 		}
 		if (node.isFIsDerived()) {
-			internalLog.warn(loggerTabs + "TODO: derived property not implemented yet ");
+			internalLog.warn(loggerTabs + "TODO: derived property not implemented yet ");			
 			//			 DerivedProperty
 			ecoreExporter.addAnnotation( 
 						newEStructuralFeature,
@@ -321,7 +321,8 @@ public class KM2EcorePass2 extends KermetaVisitor{
 			else
 			{
 				getterBody = "do\n";
-				getterBody += "   //TODO: implement getter for derived property " + node.getFName() + "\n"; 
+				getterBody += "   //TODO: implement getter for derived property " + node.getFName() + "\n";
+				getterBody += "   raise kermeta::exceptions::NotImplementedException.new \n";
 				getterBody += "end";
 			}
 			ecoreExporter.addAnnotation( 
@@ -343,7 +344,8 @@ public class KM2EcorePass2 extends KermetaVisitor{
 					setterBody = (String)new KM2KMTPrettyPrinter().accept(node.getFSetterbody());
 				else {
 					setterBody = "do\n";
-					setterBody += "   //TODO: implement getter for derived property " + node.getFName() + "\n"; 
+					setterBody += "   //TODO: implement getter for derived property " + node.getFName() + "\n";
+					setterBody += "   raise kermeta::exceptions::NotImplementedException.new \n";
 					setterBody += "end";
 				}
 				ecoreExporter.addAnnotation( 

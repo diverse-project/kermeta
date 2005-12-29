@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.4 2005-12-13 13:12:02 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.5 2005-12-29 15:51:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -24,7 +24,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FDataType;
+import fr.irisa.triskell.kermeta.structure.FNamedElement;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -62,12 +67,12 @@ public class KM2Ecore {
 	 * <code>kmt2ecoremapping</code> is a trace mapping. 
 	 * used to simplify the process in pass2
 	 */
-	public Hashtable kmt2ecoremapping =  new Hashtable();
+	public Hashtable<FObject,EObject> km2ecoremapping =  new Hashtable<FObject,EObject>();
 	
-	
-    public static Hashtable primitive_types_mapping;
+	/** this map is used to determine the java object corresponding to a kermeta primitive type */ 
+    public static Hashtable<String,String> primitive_types_mapping;
     static {
-    	primitive_types_mapping = new Hashtable();
+    	primitive_types_mapping = new Hashtable<String,String>();
     	primitive_types_mapping.put("kermeta::standard::Character", "char");
     	primitive_types_mapping.put("kermeta::standard::Character",	"java.lang.Character");
     	primitive_types_mapping.put("kermeta::standard::Integer", 	"int");
@@ -75,23 +80,24 @@ public class KM2Ecore {
     	primitive_types_mapping.put("kermeta::standard::Boolean",	"boolean");
     	primitive_types_mapping.put("kermeta::standard::Boolean",	"java.lang.Boolean");
     	primitive_types_mapping.put("kermeta::standard::String",	"java.lang.String");
-    	primitive_types_mapping.put("kermeta::standard::Object",	"Object");
+    	primitive_types_mapping.put("kermeta::standard::Object",	"java.lang.Object");
     	
     }
 	
     public final static String KMT2ECORE_ANNOTATION = "kermeta";
-    public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION = "kermeta.SuperOperations";
+    public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION = "KermetaSuperOperations";
     public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS = "SuperOperation";
-    public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION = "kermeta.RaisedExceptions";
+    public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION = "KermetaRaisedExceptions";
     public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS = "RaisedException";
     public final static String KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS = "isAbstract";
     public final static String KMT2ECORE_ANNOTATION_BODY_DETAILS = "body";
-    public final static String KMT2ECORE_ANNOTATION_TYPEPARAMETER = "kermeta.TypeParameters";
-    public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY = "kermeta.DerivedProperty";
+    public final static String KMT2ECORE_ANNOTATION_TYPEPARAMETER = "KermetaTypeParameters";
+    public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY = "KermetaDerivedProperty";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISDERIVED = "isDerived";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY = "isReadOnly";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY = "getter.body";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY = "setter.body";
+    public final static String KMT2ECORE_ANNOTATION_PRIMITIVETYPEALIAS = "alias";
     
 	/**
 	 * @param resource : the resource to populate
@@ -115,8 +121,8 @@ public class KM2Ecore {
 	 */
 	public Object exportPackage(FPackage root_package) {
 		root_pname = KMTHelper.getQualifiedName(root_package);
-		KM2EcorePass1 pass1 =  new KM2EcorePass1(ecoreResource, kmt2ecoremapping, this);
-		KM2EcorePass2 pass2 =  new KM2EcorePass2(ecoreResource, kmt2ecoremapping, this);
+		KM2EcorePass1 pass1 =  new KM2EcorePass1(ecoreResource, km2ecoremapping, this);
+		KM2EcorePass2 pass2 =  new KM2EcorePass2(ecoreResource, km2ecoremapping, this);
 		Object result =  pass1.exportPackage(root_package);
 		pass2.exportPackage(root_package);
 		// set the nsURI of the root package
@@ -137,7 +143,7 @@ public class KM2Ecore {
 		return result;
 	}
 	
-	public EClassifier getETypeForFType(FType ftype) {
+	//public EClassifier getETypeForFType(FType ftype) {
 		//if(ftype.)
     	/*
     	FTypeDefinition def = null;
@@ -175,8 +181,8 @@ public class KM2Ecore {
     	}
     	return fc;
     	*/
-		return null;
-    }
+	//	return null;
+    //}
 	/**
 	 * add the given info in the annotation, eventually create it
 	 * @param annotedModelElement
@@ -212,4 +218,24 @@ public class KM2Ecore {
 		}	
 	}
 
+	/** tells wether this FType can be used in an ecore Attribute */
+	public boolean isTypeValidForAttibute(FType type){
+		String type_def_name="";
+		// the type maybe either a class or a datatype
+		if(type instanceof FClass){
+			// retreive the qualified name of the definition of this class
+			FClass fClass = (FClass)type;
+			type_def_name = KMTHelper.getQualifiedName(fClass.getFClassDefinition());
+			if (KM2Ecore.primitive_types_mapping.containsKey(type_def_name)) {
+				return true;
+			}
+		}
+		else if (type instanceof FPrimitiveType){
+			// primitivetype are aliases, and will be translated into EDataType and then are valid Attibute
+			return true;
+		}
+		return false;
+	}
+	
+	
 }

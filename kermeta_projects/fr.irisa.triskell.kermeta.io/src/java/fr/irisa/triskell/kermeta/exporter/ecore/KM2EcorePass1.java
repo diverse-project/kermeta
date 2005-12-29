@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.1 2005-08-25 12:12:27 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.2 2005-12-29 15:51:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -20,6 +20,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -31,6 +33,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FParameter;
@@ -59,16 +62,16 @@ public class KM2EcorePass1 extends KermetaVisitor{
 	// the resource to populate
 	protected Resource ecoreResource = null;
 	
-	protected Hashtable kmt2ecoremapping;
+	protected Hashtable<FObject,EObject> km2ecoremapping;
 	
 	
 	/**
 	 * @param resource : the resource to populate
 	 * @param mapping : Hastable containing the newly created object mapping
 	 */
-	public KM2EcorePass1(Resource resource, Hashtable mapping, KM2Ecore anEcoreExporter) {
+	public KM2EcorePass1(Resource resource, Hashtable<FObject,EObject> mapping, KM2Ecore anEcoreExporter) {
 		ecoreResource = resource;
-		kmt2ecoremapping = mapping;
+		km2ecoremapping = mapping;
 		ecoreExporter = anEcoreExporter;
 	}
 	
@@ -95,7 +98,7 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		EPackage newEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		newEPackage.setName(current_pname);
 		ecoreResource.getContents().add(newEPackage);
-		kmt2ecoremapping.put(p,newEPackage);
+		km2ecoremapping.put(p,newEPackage);
 		if (ecoreExporter.tracer != null)
 		    ecoreExporter.tracer.addMappingTrace(p,newEPackage,p.getFName() + " is mapped to " + newEPackage.getName());
 		
@@ -133,7 +136,7 @@ public class KM2EcorePass1 extends KermetaVisitor{
 			newEClass = EcoreFactory.eINSTANCE.createEClass();
 			newEClass.setName(current_pname);
 			ecoreResource.getContents().add(newEClass);
-			kmt2ecoremapping.put(node,newEClass);
+			km2ecoremapping.put(node,newEClass);
 			if (ecoreExporter.tracer != null) // null if user did not want a serializ. of trace
 			    ecoreExporter.tracer.addMappingTrace(node,newEClass,node.getFName() + " is mapped to " + newEClass.getName());
 			
@@ -194,7 +197,7 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		newEOperation = EcoreFactory.eINSTANCE.createEOperation();
 		newEOperation.setName(current_pname);
 		ecoreResource.getContents().add(newEOperation);
-		kmt2ecoremapping.put(node,newEOperation);
+		km2ecoremapping.put(node,newEOperation);
 		
 		
 		// do as much as possible right now
@@ -264,7 +267,7 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		
 		newEParameter.setName(node.getFName());
 		ecoreResource.getContents().add(newEParameter);
-		kmt2ecoremapping.put(node,newEParameter);
+		km2ecoremapping.put(node,newEParameter);
 		newEParameter.setLowerBound(node.getFLower());
 		newEParameter.setUpperBound(node.getFUpper());
 		newEParameter.setOrdered(node.isFIsOrdered());
@@ -283,38 +286,42 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		
 		EStructuralFeature newEStructuralFeature;
 		
-		if (node.isFIsComposite())
-		{
-			if (node.getFOpposite() != null)
-			{ 	// if it has an opposite, this cannot be an EAttribute
-				// reference 
+		if (node.isFIsComposite() || node.isFIsDerived())
+		{	// if this is composite we have to check the type
+			// same for derived properties, it may have to be an attribute
+			if(ecoreExporter.isTypeValidForAttibute(node.getFType())){//attribute
+				EAttribute newEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+				newEStructuralFeature = newEAttribute;
+				newEAttribute.setID(node.isFIsID());				
+			}
+			else 
+			{ 	// not an attribute => reference 
 				EReference newEReference =EcoreFactory.eINSTANCE.createEReference();
 				newEStructuralFeature = newEReference;	
 				newEReference.setContainment(true);
-			}
-			else
-			{
-				//attribute
-				EAttribute newEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
-				newEStructuralFeature = newEAttribute;
-				newEAttribute.setID(node.isFIsID());
+				
 			}
 		}
 		else { 
 			// reference 
 			EReference newEReference =EcoreFactory.eINSTANCE.createEReference();
 			newEStructuralFeature = newEReference;
-			
+				
 			newEReference.setContainment(false);
+			
 		}
 		
 		// common part for both Attributes and References
 		newEStructuralFeature.setName(node.getFName());
 		ecoreResource.getContents().add(newEStructuralFeature);
-		kmt2ecoremapping.put(node,newEStructuralFeature);
+		km2ecoremapping.put(node,newEStructuralFeature);
 		
 		// set as much attributes as possible
 		newEStructuralFeature.setDerived(node.isFIsDerived());
+		if (node.isFIsDerived()){
+			newEStructuralFeature.setTransient(true);
+			newEStructuralFeature.setVolatile(true);
+		}
 		newEStructuralFeature.setChangeable(!node.isFIsReadOnly());				
 		newEStructuralFeature.setOrdered(node.isFIsOrdered());
 		newEStructuralFeature.setUnique(node.isFIsUnique());
@@ -342,7 +349,7 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		newEAnnotation.setSource(KM2Ecore.KMT2ECORE_ANNOTATION); // TODO put this string in a constant
 		newEAnnotation.getDetails().put(current_pname, node.getFValue());
 		ecoreResource.getContents().add(newEAnnotation);
-		kmt2ecoremapping.put(node,newEAnnotation);
+		km2ecoremapping.put(node,newEAnnotation);
 
 		loggerTabs.decrement();
 		return newEAnnotation;
@@ -351,7 +358,28 @@ public class KM2EcorePass1 extends KermetaVisitor{
 	 * @see kermeta.visitor.MetacoreVisitor#visit(FPrimitiveType)
 	 */
 	public Object visit(FPrimitiveType node) {
-		internalLog.debug(loggerTabs + "Visiting FPrimitiveType: "+ node.getFName());		
-		return null;
+		internalLog.debug(loggerTabs + "Visiting FPrimitiveType: "+ node.getFName());
+		String type_name = KMTHelper.getTypeQualifiedName(node.getFInstanceType());
+		EClassifier newEClassifier=null;
+		internalLog.debug(loggerTabs + "Creating DataType: "+ node.getFName());
+		newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
+		newEClassifier.setName(node.getFName());
+		 
+		if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
+			newEClassifier.setInstanceClassName(KM2Ecore.primitive_types_mapping.get(type_name));
+		}
+		else {
+			newEClassifier.setInstanceClassName("java.lang.Object");
+			ecoreExporter.addAnnotation( 
+					newEClassifier,
+					KM2Ecore.KMT2ECORE_ANNOTATION,
+					KM2Ecore.KMT2ECORE_ANNOTATION_PRIMITIVETYPEALIAS,
+					type_name,
+					null);
+		}
+		km2ecoremapping.put(node,newEClassifier);
+		return newEClassifier;
 	}
+	
+		
 }
