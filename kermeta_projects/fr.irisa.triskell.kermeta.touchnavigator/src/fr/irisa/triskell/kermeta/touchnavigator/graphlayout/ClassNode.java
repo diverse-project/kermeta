@@ -1,4 +1,4 @@
-/* $Id: ClassNode.java,v 1.1 2005-11-27 19:46:03 dvojtise Exp $
+/* $Id: ClassNode.java,v 1.2 2005-12-31 09:58:03 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : ClassNode.java
  * License : EPL
@@ -75,4 +75,5 @@ public class ClassNode extends Node {
         g.setColor(textCol);
         g.drawString(lbl, ix - fontMetrics.stringWidth(lbl)/2, iy + fontMetrics.getDescent() +1 - 3*BORDER_WIDTH);
     }
+        
 }

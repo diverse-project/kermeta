@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.7 2005-12-20 23:03:29 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.8 2005-12-31 09:58:03 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -20,6 +20,7 @@ import java.util.Map.Entry;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Shell;
 
 import com.touchgraph.graphlayout.GLPanel;
@@ -52,6 +53,7 @@ import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.interaction.KermetaG
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
+import fr.irisa.triskell.utils.BooleanLock;
 
 /** KermetaGLPanel contains code for adding scrollbars and interfaces to the TGPanel
   * The "GL" prefix indicates that this class is GraphLayout specific, and
@@ -75,7 +77,14 @@ public class KermetaGLPanel extends GLPanel
 	
 	public TGInheritanceTransformations graphTransform = null;
 
-	private static java.lang.Boolean building = Boolean.FALSE;
+	private static BooleanLock readyLock = new BooleanLock(true);
+	
+	// some values used to configure the behavior of the panel
+	public boolean updateOnEditorChange = true;
+	public boolean updateOnTextHover = true;
+	public boolean updateOnOutlineSelection = true;
+    public RGB selectedNodeColor = new RGB(255,128,0);
+	public RGB distantNodesColor = new RGB(128,255,128);
 	
 	
 	KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
@@ -128,9 +137,11 @@ public class KermetaGLPanel extends GLPanel
 	public void unitGotFocus(Editor editor) {
 		// do it in a thread so it will not slow down the opening of the file
 		if(editor != previousEditor){
-			previousEditor = editor;
-			System.err.println("unitGotFocus: " +editor);
+			previousEditor = editor;			
 			currentEditor = editor;
+			// 
+			if (!updateOnEditorChange) // do not update ... 
+				return; 
 			System.err.println("unitGotFocus: " + editor.getMcunit().getUri());
 			if(buildKermetaClassGraphThread !=  null){
 				
@@ -142,8 +153,12 @@ public class KermetaGLPanel extends GLPanel
 				}
 				//buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
 			}
+			buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
+			System.err.println("unitGotFocus: start thread" +editor);
+			
 			buildKermetaClassGraphThread.start();
 		}
+		else System.err.println("same editor unit: "+editor.getMcunit().getUri());
 		System.err.println("editor unit: "+editor.getMcunit().getUri());
 	}
 	
@@ -185,7 +200,20 @@ public class KermetaGLPanel extends GLPanel
 		private boolean mustStop =  false;
 		
 		synchronized public void stopBuild() throws InterruptedException{
-			synchronized (building){
+			mustStop = true;
+			if(kcGraphBuilder != null)
+				kcGraphBuilder.mustStop = true;
+			//readyLock.setValue(true);
+			 try {
+				 System.err.println("about to wait for readyLock to be true");
+			      readyLock.waitUntilTrue(0); // 0 - wait forever
+			      
+			      
+			      System.err.println("readyLock is now true");
+		    } catch (InterruptedException x) {
+		    	System.err.println("interrupted while waiting for readyLock " + "to become true");
+		    }
+			/*synchronized (building){
 				if(building.booleanValue()){
 					mustStop = true;
 					kcGraphBuilder.mustStop = true;
@@ -195,23 +223,26 @@ public class KermetaGLPanel extends GLPanel
 					yield();
 				}
 				System.err.println("stopBuild go");
-			}
+			}*/
 		}
 		public void run() { 
-			
-			synchronized (building){
-				building = Boolean.TRUE;
-				mustStop = false;
-			}
+			System.err.println("BuildKermetaClassGraphThread start");
+			readyLock.setValue(false);
+			mustStop = false;
+			KermetaGLPanel.this.tgPanel.getLocalityUtils().fastFinishAnimation();
 			yield();yield();yield();yield(); //this seems important  here
+			yield();yield();yield();yield();
+			yield();yield();yield();yield();
+			yield();yield();yield();yield();
+			yield();yield();yield();yield();
 			/*try { 
-				this.sleep(500); // gives some time to the construction of the tgPanel to finish (the relaxer in particular)
+				Thread.sleep(500); // gives some time to the construction of the tgPanel to finish (the relaxer in particular)
 			} catch (InterruptedException e) {
 				return;
 			}*/
 			int nbtries = 0;
 			FClassDefinition clasDef=null;
-			while(currentEditor== null && nbtries <10){
+			while(clasDef== null && nbtries <10){
 				clasDef= findAClassInUnit();
 				if(currentEditor == null)
 					try {
@@ -224,11 +255,11 @@ public class KermetaGLPanel extends GLPanel
 
 				System.err.println("  try "+nbtries);
 			}
+
+			System.err.println("BuildKermetaClassGraphThread start2");
 			if(clasDef == null) {
-				synchronized (building){
-					building = Boolean.FALSE;
-					notifyAll();
-				}
+				readyLock.setValue(true);
+				System.err.println("BuildKermetaClassGraphThread ends because clasDef is null");
 				return;
 			}
 			System.err.println(clasDef.getFName());  
@@ -238,8 +269,12 @@ public class KermetaGLPanel extends GLPanel
             //KermetaGLPanel.this.tgPanel.tgLayout.resetDamper();
 			//KermetaGLPanel.this.tgPanel.tgLayout.stop();
 			yield();yield();yield();yield();
+			yield();yield();yield();yield();
+			yield();yield();yield();yield();
+			yield();yield();yield();yield();
 			
-            
+
+			System.err.println("BuildKermetaClassGraphThread start3");
 			// make sure no other thread of touchgrapch is running
             synchronized (KermetaGLPanel.this.tgPanel.getLocalityUtils()) {
             	//setVisible(false);
@@ -258,10 +293,11 @@ public class KermetaGLPanel extends GLPanel
                 	
             		if (mustStop){ 
             			System.err.println("BuildKermetaClassGraphThread stopped");
-            			synchronized (building){
+            			readyLock.setValue(true);
+            			/*synchronized (building){
             				building = Boolean.FALSE;
             				building.notifyAll();
-            			}
+            			}*/
             			return;
             		}
                 
@@ -311,9 +347,11 @@ public class KermetaGLPanel extends GLPanel
             yield();
             
     		System.err.println("BuildKermetaClassGraphThread end");
-    		synchronized (building){
+    		/*synchronized (building){
 				building = Boolean.FALSE;
-			}
+				building.notify();
+			}*/
+    		readyLock.setValue(true);
 			//notifyAll();
     		//System.err.println("BuildKermetaClassGraphThread has notified");
     		
@@ -399,11 +437,13 @@ public class KermetaGLPanel extends GLPanel
 	}
 
 	public void outlineSelectionChanged(FObject fobj) {
+		if(!updateOnOutlineSelection) return;
 		TouchNavigatorPlugin.internalLog.debug("outlineSelectionChanged : "+fobj);		
 		followObject(fobj);
 	}
 
 	public void textHoverCalled(FObject fobj) {
+		if(!updateOnTextHover) return;
 		TouchNavigatorPlugin.internalLog.debug("textHoverCalled : "+fobj);
 		followObject(fobj);
 	} 
@@ -502,6 +542,11 @@ public class KermetaGLPanel extends GLPanel
 	    }
 	}
 
+	
+	public void refresh(){
+		this.tgPanel.updateNodeColor();
+		this.tgPanel.repaint();		
+	}
 	/**
 	 * @return Returns the graphTransform.
 	 */

@@ -1,4 +1,4 @@
-/* $Id: ConfigurationDialog.java,v 1.1 2005-11-28 23:09:15 dvojtise Exp $
+/* $Id: ConfigurationDialog.java,v 1.2 2005-12-31 09:58:03 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: ConfigurationDialog.java
  * License: GPL
@@ -16,6 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -41,6 +42,17 @@ public class ConfigurationDialog extends Dialog {
     public String actionDescriptionString;
     /** The title for the dialog */
     public String dialogTitleString;
+    public ConfigurationDialogComposite mainContainer;
+    
+    public boolean updateOnEditorChange;
+    public boolean updateOnOutlineSelection;
+    public boolean updateOnTextHover;
+    public int primitiveTypePresentation;
+    public int associationLinesPresentation;
+    public int associationEndsPresentation;
+    public int inheritancePresentation;
+    public RGB selectedNodeColor = new RGB(0,0,0);
+	public RGB distantNodesColor = new RGB(100,10,100);
 
     
     /**
@@ -48,8 +60,8 @@ public class ConfigurationDialog extends Dialog {
      */
     public ConfigurationDialog(Shell parentShell) {
         super(parentShell);
-        actionDescriptionString = "Configuring Kermeta TouchNavigator";
-        dialogTitleString = "Kermeta TouchNavigator configuration";
+        actionDescriptionString = "Configuring Kermeta Class TouchNavigator";
+        dialogTitleString = "Kermeta Class TouchNavigator configuration";
 		 
     }    
     
@@ -57,8 +69,9 @@ public class ConfigurationDialog extends Dialog {
 	 * Create a dialog Area
 	 */
 	protected Control createDialogArea(Composite parent) {
-		Composite container =  new ConfigurationDialogComposite(parent, SWT.NULL);		
-		return container;
+		mainContainer =  new ConfigurationDialogComposite(parent, SWT.NULL, this);
+		
+		return mainContainer;
 	}
 	
 	
@@ -87,6 +100,37 @@ public class ConfigurationDialog extends Dialog {
 		newShell.setText(dialogTitleString);
 	}
     
+	public void initValues(boolean newupdateOnTextHover, 
+			boolean newupdateOnOutlineSelection,
+			boolean newupdateOnEditorChange,
+			int newprimitiveTypePresentation,
+			int newassociationLinesPresentation,
+			int newassociationEndsPresentation,
+			int newinheritancePresentation){
+		mainContainer.inheritancePresentationCombo.select(newinheritancePresentation);
+		mainContainer.associationEndPresentationCombo.select(newassociationEndsPresentation);
+		mainContainer.associationLinePresentationCombo.select(newassociationLinesPresentation);
+		mainContainer.primitiveTypesPresentationCombo.select(newprimitiveTypePresentation);
+		mainContainer.updateOnEditorChangeCheckBox.setSelection(newupdateOnEditorChange);
+		mainContainer.updateOnOutlineSelectionCheckBox.setSelection(newupdateOnOutlineSelection);
+		mainContainer.updateOnTextHoverCheckBox.setSelection(newupdateOnTextHover);
+	}
+	
+	/**
+     * overwrite this Dialog in order to be able to retreive the data befor it closes
+     */
+    protected void okPressed() {
+    	updateOnEditorChange 		= mainContainer.updateOnEditorChangeCheckBox.getSelection();
+		updateOnOutlineSelection 	= mainContainer.updateOnOutlineSelectionCheckBox.getSelection();
+		updateOnTextHover 			= mainContainer.updateOnTextHoverCheckBox.getSelection();
+
+		inheritancePresentation = mainContainer.inheritancePresentationCombo.getSelectionIndex();
+		associationEndsPresentation =mainContainer.associationEndPresentationCombo.getSelectionIndex();
+		associationLinesPresentation = mainContainer.associationLinePresentationCombo.getSelectionIndex();
+		primitiveTypePresentation=mainContainer.primitiveTypesPresentationCombo.getSelectionIndex();
+	  
+    	super.okPressed();
+    }
 
 	
 }

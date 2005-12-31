@@ -71,7 +71,7 @@ import  java.util.*;
   *
   * @author   Alexander Shapiro
   * @author   Murray Altheim  (2001-11-06; 2002-01-14 cleanup)
-  * @version  1.21  $Id: TGPanel.java,v 1.3 2005-12-18 22:38:37 dvojtise Exp $
+  * @version  1.21  $Id: TGPanel.java,v 1.4 2005-12-31 09:58:03 dvojtise Exp $
   */
 public class TGPanel extends JPanel {
 
@@ -511,6 +511,7 @@ public class TGPanel extends JPanel {
         visibleLocality.updateLocalityFromVisibility();
     }
 
+    private int currentRadius = 2; 
     public void setLocale( Node node, int radius, int maxAddEdgeCount, int maxExpandEdgeCount,
                            boolean unidirectional ) throws TGException {
         localityUtils.setLocale(node,radius, maxAddEdgeCount, maxExpandEdgeCount, unidirectional);
@@ -524,6 +525,7 @@ public class TGPanel extends JPanel {
     	localityUtils.setLocale(node,radius);
     }
     public void setLocale( Node node, int radius ) throws TGException {
+    	currentRadius = radius;
         localityUtils.setLocale(node,radius);
     	history.newSelection(node);
     }
@@ -800,13 +802,83 @@ public class TGPanel extends JPanel {
 
         return new Color(r,g,b);
     }
-
+    private Hashtable distHash;
+	private ImmutableGraphEltSet previousGES;
+	private int previousGESsize=0;
+	private Node previousSelectedNode; 
+	public int calculateDistanceToSelection(Node node){
+		boolean needcalcul = false;
+		if(distHash == null) needcalcul = true;
+		if(previousSelectedNode != this.getSelect()) needcalcul = true;
+		if(previousGES != this.getGES()) needcalcul = true;
+		if(previousGESsize != this.getGES().nodeCount()) needcalcul = true;
+		if(needcalcul){
+			if(this.getSelect() !=null){
+				previousGESsize = this.getGES().nodeCount();
+				previousGES = this.getGES();
+				previousSelectedNode = this.getSelect();
+				distHash = GESUtils.calculateDistances(
+						(GraphEltSet) previousGES,
+						previousSelectedNode,
+						LocalityUtils.INFINITE_LOCALITY_RADIUS);
+			}
+		}
+		if(this.getSelect() !=null){
+			Integer result =(Integer) distHash.get(node);
+		
+			if(result != null) return result.intValue();
+			else return 1; // should never occur ...
+		}
+		else return 1;
+	}
+    /** update all the node and set their distToSelection */
+    public void updateNodeColor(){
+    	boolean needcalcul = false;
+		
+    	if(previousSelectedNode != this.getSelect()) needcalcul = true;
+		if(previousGES != this.getGES()) needcalcul = true;
+		if(previousGESsize != this.getGES().nodeCount()) needcalcul = true;
+		
+		if(needcalcul){
+			 System.err.println("color updated");  	
+	    	 TGForEachNode fen = new TGForEachNode() {
+	    		private int moy(int v1, int v2, int r){
+	    			int i = v1  -((v1-v2)/currentRadius)*r;
+	    			if(i <0)return 0;
+	    			if(i>255) return 255;
+	    			return i;
+	    			
+	    		}
+	            public void forEachNode( Node node ) {
+	            	int dist = calculateDistanceToSelection(node);
+	            	int r1 = Node.BACK_SELECT_COLOR.getRed();
+	            	int g1 = Node.BACK_SELECT_COLOR.getGreen();
+	            	int b1 = Node.BACK_SELECT_COLOR.getBlue();
+	            	
+	            	int r2 = Node.BACK_DEFAULT_COLOR.getRed();
+	            	int g2 = Node.BACK_DEFAULT_COLOR.getGreen();
+	            	int b2 = Node.BACK_DEFAULT_COLOR.getBlue();            	
+	            	
+	            	Color newColor = new Color(moy(r1,r2, dist),
+	            			moy(g1,g2, dist),
+	            			moy(b1,b2, dist));
+	                node.setBackColor(newColor);
+	            }
+	        };
+	
+	        visibleLocality.forAllNodes(fen);
+		}
+    }
     public synchronized void paint( Graphics g ) {
         update(g);
     }
 
     public synchronized void update( Graphics g ) {
         Dimension d = getSize();
+        
+        // recalculate color depending on the distance to the selected node
+        updateNodeColor();
+        
         if ( (offscreen == null) 
                 || ( d.width != offscreensize.width ) 
                 || ( d.height != offscreensize.height )) {
@@ -900,5 +972,12 @@ public class TGPanel extends JPanel {
         frame.setSize(500,500);
         frame.setVisible(true);
     }
+
+	/**
+	 * @return Returns the currentRadius.
+	 */
+	public int getCurrentRadius() {
+		return currentRadius;
+	}
 
 } // end com.touchgraph.graphlayout.TGPanel

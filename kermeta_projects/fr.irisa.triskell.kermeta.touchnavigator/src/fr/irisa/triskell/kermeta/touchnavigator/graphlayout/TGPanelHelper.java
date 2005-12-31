@@ -1,4 +1,4 @@
-/* $Id: TGPanelHelper.java,v 1.2 2005-12-05 19:14:30 dvojtise Exp $
+/* $Id: TGPanelHelper.java,v 1.3 2005-12-31 09:58:03 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaTGPanel.java
  * License : EPL
@@ -10,16 +10,22 @@
  */
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
+import java.util.Hashtable;
 import java.util.Iterator;
 
 import com.touchgraph.graphlayout.Edge;
+import com.touchgraph.graphlayout.LocalityUtils;
 import com.touchgraph.graphlayout.Node;
 import com.touchgraph.graphlayout.TGException;
 import com.touchgraph.graphlayout.TGPanel;
+import com.touchgraph.graphlayout.graphelements.GESUtils;
+import com.touchgraph.graphlayout.graphelements.GraphEltSet;
+import com.touchgraph.graphlayout.graphelements.ImmutableGraphEltSet;
 
 public class TGPanelHelper {
 
 	public TGPanel tgpanel;
+	
 	
 	public TGPanelHelper(TGPanel tgPanel2) {
 		tgpanel = tgPanel2;
@@ -140,5 +146,27 @@ public class TGPanelHelper {
 			
 		return null;	
 			
+	}
+
+    /** structure used to cache the distance calculus */
+	private Hashtable distHash;
+	private ImmutableGraphEltSet previousGES;
+	private Node previousSelectedNode; 
+	public int calculateDistanceToSelection(Node node){
+		boolean needcalcul = false;
+		if(distHash == null) needcalcul = true;
+		if(previousSelectedNode != tgpanel.getSelect()) needcalcul = true;
+		if(previousGES != tgpanel.getGES()) needcalcul = true;
+		if(needcalcul){
+			previousGES = tgpanel.getGES();
+			previousSelectedNode = tgpanel.getSelect();
+			distHash = GESUtils.calculateDistances(
+					(GraphEltSet) previousGES,
+					previousSelectedNode,
+					LocalityUtils.INFINITE_LOCALITY_RADIUS);
+		}
+		Integer result =(Integer) distHash.get(node);
+		if(result != null) return result.intValue();
+		else return -1; // should never occur ...
 	}
 }

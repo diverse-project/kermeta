@@ -63,7 +63,7 @@ import  java.util.Iterator;
   *
   *  @author   Alexander Shapiro
   *  @author   Murray Altheim (2001-11-06; added support for round rects and alternate Node colors)
-  *  @version  1.21  $Id: Node.java,v 1.2 2005-11-27 19:46:04 dvojtise Exp $
+  *  @version  1.21  $Id: Node.java,v 1.3 2005-12-31 09:58:03 dvojtise Exp $
   */
 public class Node {
     
@@ -130,6 +130,7 @@ public class Node {
 
     public boolean justMadeLocal = false;
     public boolean markedForRemoval = false;
+    
     
     public int visibleEdgeCnt; //Should only be modified by graphelements.VisibleLocality
     protected boolean visible;
@@ -436,7 +437,7 @@ public class Node {
         } else {
             if (fixed) return BACK_FIXED_COLOR;
             if (markedForRemoval) return new Color(100,60,40);
-            if (justMadeLocal) return new Color(255,220,200);
+            if (justMadeLocal) return new Color(255,220,200);           
             return backColor;            
         }
     }        

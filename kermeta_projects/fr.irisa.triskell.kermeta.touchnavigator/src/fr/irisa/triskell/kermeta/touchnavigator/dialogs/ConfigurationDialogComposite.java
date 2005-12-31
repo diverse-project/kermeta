@@ -1,4 +1,4 @@
-/* $Id: ConfigurationDialogComposite.java,v 1.1 2005-11-28 23:09:15 dvojtise Exp $
+/* $Id: ConfigurationDialogComposite.java,v 1.2 2005-12-31 09:58:03 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : ConfigurationDialogComposite.java
  * License : EPL
@@ -10,16 +10,25 @@
  */
 package fr.irisa.triskell.kermeta.touchnavigator.dialogs;
 
-import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.PaletteData;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.ColorDialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.layout.GridData;
 
 /**
@@ -29,26 +38,31 @@ import org.eclipse.swt.layout.GridData;
  */
 public class ConfigurationDialogComposite extends Composite {
 
+	public ConfigurationDialog parentConfigurationDialog;
+	
 	private Group eventConfigurationGroup = null;
 	private Group presentationGroup = null;
-	private Label label = null;
-	private Button updateOnTextHoverCheckBox = null;
-	private Label label3 = null;
-	private Label label4 = null;
-	private Label label6 = null;
-	private Button updateOnOutlineSelectionCheckBox = null;
-	private Label label1 = null;
-	private Combo primitiveTypesPresentationCombo = null;
-	private Label label5 = null;
-	private Combo associationLinePresentationCombo = null;
-	private Label label9 = null;
-	private Combo associationEndPresentationCombo = null;
-	private Label label8 = null;
-	private Button updateOnEditorChangecheckBox = null;
-	private Combo inheritancePresentationCombo = null;
-	private Label label7 = null;
-	public ConfigurationDialogComposite(Composite parent, int style) {
+	private Label labelUpdateTextHover = null;
+	public Button updateOnTextHoverCheckBox = null;
+	private Label labelUpdateOutline = null;
+	public Button updateOnOutlineSelectionCheckBox = null;
+	private Label labelPrimitiveTypeCombo = null;
+	public Combo primitiveTypesPresentationCombo = null;
+	private Label labelAssociationLinesCombo = null;
+	public Combo associationLinePresentationCombo = null;
+	private Label labelAssociationEndsCombo = null;
+	public Combo associationEndPresentationCombo = null;
+	private Label labelUpdateEditor = null;
+	public Button updateOnEditorChangeCheckBox = null;
+	public Combo inheritancePresentationCombo = null;
+	private Label labelInheritanceCombo = null;
+	private Label labelSelectedNodeColor = null;
+	private Button buttonSelectedNodeColor = null;
+	private Label labelDistantNodeColor = null;
+	private Button buttonDistantNodeColor = null;
+	public ConfigurationDialogComposite(Composite parent, int style, ConfigurationDialog newParentConfigurationDialog) {
 		super(parent, style);
+		parentConfigurationDialog = newParentConfigurationDialog;
 		initialize();
 	}
 
@@ -56,26 +70,13 @@ public class ConfigurationDialogComposite extends Composite {
 		FillLayout fillLayout = new FillLayout();
 		fillLayout.type = org.eclipse.swt.SWT.VERTICAL;
 		this.setLayout(fillLayout);
-		this.setSize(new org.eclipse.swt.graphics.Point(277,263));
+		this.setSize(new org.eclipse.swt.graphics.Point(350,300));
 		createEventConfiguration();
 		createPresentationGroup();
+		
 	}
 
-	public void initValues(boolean updateOnTextHover, 
-			boolean updateOnOutlineSelection,
-			boolean updateOnEditorChange,
-			int primitiveTypePresentation,
-			int associationLinesPresentation,
-			int associationEndsPresentation,
-			int inheritancePresentation){
-		this.inheritancePresentationCombo.select(inheritancePresentation);
-		this.associationEndPresentationCombo.select(associationEndsPresentation);
-		this.associationLinePresentationCombo.select(associationLinesPresentation);
-		this.primitiveTypesPresentationCombo.select(primitiveTypePresentation);
-		this.updateOnEditorChangecheckBox.setSelection(updateOnEditorChange);
-		this.updateOnOutlineSelectionCheckBox.setSelection(updateOnOutlineSelection);
-		this.updateOnTextHoverCheckBox.setSelection(updateOnTextHover);
-	}
+	
 	/**
 	 * This method initializes eventConfiguration	
 	 *
@@ -86,20 +87,99 @@ public class ConfigurationDialogComposite extends Composite {
 		eventConfigurationGroup = new Group(this, SWT.NONE);
 		eventConfigurationGroup.setText("Update event rules");
 		eventConfigurationGroup.setLayout(gridLayout);
-		label = new Label(eventConfigurationGroup, SWT.NONE);
-		label.setText("update view on text hover events: ");
+		labelUpdateTextHover = new Label(eventConfigurationGroup, SWT.NONE);
+		labelUpdateTextHover.setText("update view on text hover events: ");
 		updateOnTextHoverCheckBox = new Button(eventConfigurationGroup, SWT.CHECK);
-		label3 = new Label(eventConfigurationGroup, SWT.NONE);
-		label3.setText("update view on outline selection events: ");
+		labelUpdateOutline = new Label(eventConfigurationGroup, SWT.NONE);
+		labelUpdateOutline.setText("update view on outline selection events: ");
 		updateOnOutlineSelectionCheckBox = new Button(eventConfigurationGroup, SWT.CHECK);
-		label8 = new Label(eventConfigurationGroup, SWT.NONE);
-		label8.setText("update on editor change event:");
-		label8.setToolTipText("The view will update each time a compatible editor view is selected ");
-		updateOnEditorChangecheckBox = new Button(eventConfigurationGroup, SWT.CHECK);
-		label4 = new Label(eventConfigurationGroup, SWT.NONE);
-		label6 = new Label(eventConfigurationGroup, SWT.NONE);
+		labelUpdateEditor = new Label(eventConfigurationGroup, SWT.NONE);
+		labelUpdateEditor.setText("update on editor change event:");
+		labelUpdateEditor.setToolTipText("The view will update each time a compatible editor view is selected ");
+		updateOnEditorChangeCheckBox = new Button(eventConfigurationGroup, SWT.CHECK);
+		labelSelectedNodeColor = new Label(eventConfigurationGroup, SWT.NONE);
+		labelSelectedNodeColor.setText("Color for the selected node");
+		buttonSelectedNodeColor = new Button(eventConfigurationGroup, SWT.BORDER);
+		buttonSelectedNodeColor.setToolTipText(parentConfigurationDialog.selectedNodeColor.toString());
+		buttonSelectedNodeColor.setImage(createColorImage(new Color(Display.getCurrent(), parentConfigurationDialog.selectedNodeColor)));
+		buttonSelectedNodeColor.setSize(12,12);
+		//buttonSelectedNodeColor.setText("Color");
+		buttonSelectedNodeColor.addSelectionListener(new SelectionAdapter() {
+		      public void widgetSelected(SelectionEvent e) {
+		          ColorDialog cd = new ColorDialog(new Shell());
+		          cd.setText("Selected node color");
+		          cd.setRGB(parentConfigurationDialog.selectedNodeColor);
+		          RGB newColor = cd.open();
+		          parentConfigurationDialog.selectedNodeColor = newColor;
+		          if (newColor == null) {
+		            return;
+		          }
+		          buttonSelectedNodeColor.setBackground(new Color(Display.getCurrent(), newColor));
+		          buttonSelectedNodeColor.setImage(createColorImage(new Color(getDisplay(), newColor)));
+		  		  buttonSelectedNodeColor.setToolTipText(parentConfigurationDialog.selectedNodeColor.toString());
+		        }
+		      });
+		labelDistantNodeColor = new Label(eventConfigurationGroup, SWT.NONE);
+		labelDistantNodeColor.setText("Color for the distant nodes");
+		buttonDistantNodeColor = new Button(eventConfigurationGroup, SWT.BORDER);
+		buttonDistantNodeColor.setImage(createColorImage(new Color(Display.getCurrent(), parentConfigurationDialog.distantNodesColor)));
+		buttonDistantNodeColor.setToolTipText(parentConfigurationDialog.distantNodesColor.toString());
+		buttonDistantNodeColor.setSize(12, 12);
+		buttonDistantNodeColor.addSelectionListener(new SelectionAdapter() {
+		      public void widgetSelected(SelectionEvent e) {
+		          ColorDialog cd = new ColorDialog(new Shell());
+		          cd.setText("Distant node color");
+		          cd.setRGB(parentConfigurationDialog.distantNodesColor);
+		          RGB newColor = cd.open();
+		          parentConfigurationDialog.distantNodesColor = newColor;
+		          if (newColor == null) {
+		            return;
+		          }
+		          buttonDistantNodeColor.setBackground(new Color(getDisplay(), newColor));
+		          buttonDistantNodeColor.setImage(createColorImage(new Color(getDisplay(), newColor)));
+		          buttonDistantNodeColor.setToolTipText(parentConfigurationDialog.distantNodesColor.toString());
+		        }
+		      });
+		
+		buttonDistantNodeColor.setBackground(new Color(this.getDisplay(),27,27,27));
+		//buttonDistantNodeColor.setText("Color");
+		buttonDistantNodeColor.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
 	}
 
+	public void reinitValues()
+	{
+		buttonSelectedNodeColor.setImage(createColorImage(new Color(Display.getCurrent(), parentConfigurationDialog.selectedNodeColor)));
+		buttonDistantNodeColor.setImage(createColorImage(new Color(Display.getCurrent(), parentConfigurationDialog.distantNodesColor)));
+		
+	}
+	private Image createColorImage(Color theColor)
+	{
+		Display display = Display.getCurrent();
+	   // Color red = display.getSystemColor(SWT.COLOR_RED);
+	    Color white = display.getSystemColor(SWT.COLOR_WHITE);
+	    Color black = display.getSystemColor(SWT.COLOR_BLACK);
+
+	    Image image = new Image(display, 12, 12);
+	    GC gc = new GC(image);
+	    gc.setBackground(theColor);
+	    gc.fillRectangle(0, 0, 12, 12);
+	    gc.dispose();
+	    ImageData imageData = image.getImageData();
+
+	    PaletteData palette = new PaletteData(new RGB[] { new RGB(0, 0, 0),
+	        new RGB(0xFF, 0xFF, 0xFF), });
+	    ImageData maskData = new ImageData(12, 12, 1, palette);
+	    Image mask = new Image(display, maskData);
+	    gc = new GC(mask);
+	    gc.setBackground(black);
+	    gc.fillRectangle(0, 0, 12, 12);
+	    gc.setBackground(white);
+	    gc.fillRectangle(0, 0, 12, 12);
+	    gc.dispose();
+	    maskData = mask.getImageData();
+
+	    return new Image(display, imageData, maskData);
+	}
 	/**
 	 * This method initializes presentationGroup	
 	 *
@@ -110,17 +190,17 @@ public class ConfigurationDialogComposite extends Composite {
 		presentationGroup = new Group(this, SWT.NONE);
 		presentationGroup.setText("Presentation configuration");
 		presentationGroup.setLayout(gridLayout1);
-		label1 = new Label(presentationGroup, SWT.NONE);
-		label1.setText("Primitives types");
+		labelPrimitiveTypeCombo = new Label(presentationGroup, SWT.NONE);
+		labelPrimitiveTypeCombo.setText("Primitives types");
 		createPrimitiveTypesPresentationCombo();
-		label5 = new Label(presentationGroup, SWT.NONE);
-		label5.setText("Associations lines");
+		labelAssociationLinesCombo = new Label(presentationGroup, SWT.NONE);
+		labelAssociationLinesCombo.setText("Associations lines");
 		createAssociationPresentationCombo();
-		label9 = new Label(presentationGroup, SWT.NONE);
-		label9.setText("Associations ends");
+		labelAssociationEndsCombo = new Label(presentationGroup, SWT.NONE);
+		labelAssociationEndsCombo.setText("Associations ends");
 		createAssociationEndPresentationCombo();
-		label7 = new Label(presentationGroup, SWT.NONE);
-		label7.setText("Inheritance");
+		labelInheritanceCombo = new Label(presentationGroup, SWT.NONE);
+		labelInheritanceCombo.setText("Inheritance");
 		createInheritancePresentationCombo();
 	}
 

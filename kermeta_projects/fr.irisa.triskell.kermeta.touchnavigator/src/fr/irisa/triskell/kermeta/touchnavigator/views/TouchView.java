@@ -103,6 +103,12 @@ public class TouchView extends ViewPart {
 		Composite composite = new Composite(parent, SWT.EMBEDDED);
 		shell = composite.getShell();
 		touchviewer = SWT_AWT.new_Frame(composite);		
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		java.awt.Color c = new Color(parent.getBackground().getRed(), parent.getBackground().getGreen(), parent.getBackground().getBlue());
 		kGLPanel = new KermetaGLPanel(c);
 		touchviewer.add(kGLPanel);
@@ -178,19 +184,19 @@ public class TouchView extends ViewPart {
 		actionForward.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 			getImageDescriptor(ISharedImages.IMG_TOOL_FORWARD));
 		
-		actionConfigure = new ConfigureAction();
-		actionConfigure.setText("Configure TouchNavigator");
-		actionConfigure.setToolTipText("Configure the various options of Kermeta TouchNavigator");
+		actionConfigure = new ConfigureAction(kGLPanel);
+		actionConfigure.setText("Configure Class TouchNavigator");
+		actionConfigure.setToolTipText("Configure the various options of Kermeta Class TouchNavigator");
 		actionConfigure.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 			getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 		
 		actionAbout = new Action() {
 			public void run() {
-				showMessage("Kermeta TouchNavigator.\nBased on TouchGraph.");
+				showMessage("Kermeta Class TouchNavigator.\nBased on TouchGraph.");
 			}
 		};
 		actionAbout.setText("About");
-		actionAbout.setToolTipText("Aout Kermeta TouchNavigator");
+		actionAbout.setToolTipText("About Kermeta Class TouchNavigator");
 		actionAbout.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
 				getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
 		doubleClickAction = new Action() {
