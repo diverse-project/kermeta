@@ -57,7 +57,7 @@ import  java.awt.event.*;
 /** TGAbstractMousePausedUI allows one to handle MousePaused events.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGAbstractMousePausedUI.java,v 1.1 2005-10-24 20:29:56 dvojtise Exp $
+  * @version  1.21  $Id: TGAbstractMousePausedUI.java,v 1.2 2006-01-03 22:42:43 dvojtise Exp $
   */
 public abstract class TGAbstractMousePausedUI extends TGUserInterface {
 
@@ -66,6 +66,7 @@ public abstract class TGAbstractMousePausedUI extends TGUserInterface {
      protected TGPanel tgPanel;
      Point mousePos=null;
      PauseThread pauseThread=null;
+     public int pauseTime = 250;
 
   // ............
 
@@ -98,7 +99,7 @@ public abstract class TGAbstractMousePausedUI extends TGUserInterface {
     public abstract void mouseDragged(MouseEvent e);
 
     class PauseThread extends Thread{
-        boolean resetSleep;
+		boolean resetSleep;
         boolean cancelled;
            PauseThread() { cancelled = false; start(); }
 
@@ -107,7 +108,7 @@ public abstract class TGAbstractMousePausedUI extends TGUserInterface {
 
            public void run() {
                try {
-                   do {  resetSleep=false; sleep(250); } while (resetSleep);
+                   do {  resetSleep=false; sleep(pauseTime); } while (resetSleep);
                 if (!cancelled) {
                     MouseEvent pausedEvent =
                         new MouseEvent(tgPanel,MouseEvent.MOUSE_ENTERED, 0,0, mousePos.x,mousePos.y,0,false);

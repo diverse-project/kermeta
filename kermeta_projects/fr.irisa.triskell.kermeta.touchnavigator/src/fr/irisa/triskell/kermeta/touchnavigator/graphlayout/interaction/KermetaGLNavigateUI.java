@@ -1,4 +1,4 @@
-/* $Id: KermetaGLNavigateUI.java,v 1.1 2005-12-05 19:14:30 dvojtise Exp $
+/* $Id: KermetaGLNavigateUI.java,v 1.2 2006-01-03 22:42:44 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLNavigateUI.java
  * License : GPL
@@ -24,10 +24,12 @@ import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.KermetaGLPanel;
 /** KermetaGLNavigateUI:  User Interface for editing the graph.
  *
  * @author   Didier Vojtisek
- * @version  1.21  $Id: KermetaGLNavigateUI.java,v 1.1 2005-12-05 19:14:30 dvojtise Exp $
+ * @version  1.21  $Id: KermetaGLNavigateUI.java,v 1.2 2006-01-03 22:42:44 dvojtise Exp $
  */
 public class KermetaGLNavigateUI extends GLNavigateUI {
 	
+
+	KermetaClassNodeHintUI kclassNodeHintUI;
 	
 	// ............
 	
@@ -35,6 +37,7 @@ public class KermetaGLNavigateUI extends GLNavigateUI {
 	
 	public KermetaGLNavigateUI( KermetaGLPanel glPanel ) {
 		super(glPanel);
+		kclassNodeHintUI = new KermetaClassNodeHintUI(glPanel);
 	}
 	
 	protected void setUpNodePopup() { 
@@ -90,4 +93,13 @@ public class KermetaGLNavigateUI extends GLNavigateUI {
 		
 	}
 	
+	public void activate() {		
+		super.activate();
+		kclassNodeHintUI.activate();
+	}
+	
+	public void deactivate() {		
+		super.deactivate();
+		kclassNodeHintUI.deactivate();
+	}
 } 

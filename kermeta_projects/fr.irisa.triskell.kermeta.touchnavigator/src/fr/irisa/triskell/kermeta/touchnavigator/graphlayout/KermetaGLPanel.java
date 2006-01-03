@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.8 2005-12-31 09:58:03 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.9 2006-01-03 22:42:44 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -45,11 +45,13 @@ import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.interaction.KermetaGLNavigateUI;
+import fr.irisa.triskell.kermeta.touchnavigator.textPresentation.KTNHintHTMLPrettyPrinter;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.Type;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -88,6 +90,7 @@ public class KermetaGLPanel extends GLPanel
 	
 	
 	KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
+	KTNHintHTMLPrettyPrinter hintpp = new KTNHintHTMLPrettyPrinter();
 
 	
     public KermetaGLPanel(Color color) {
@@ -553,5 +556,15 @@ public class KermetaGLPanel extends GLPanel
 	public TGInheritanceTransformations getGraphTransform() {
 		if(graphTransform == null) graphTransform = new TGInheritanceTransformations(tgPanel);
 		return graphTransform;
+	}
+
+	public String getHint(ClassNode n) {
+		String nodeName = n.getLabel();
+		// retreives the node in the unit
+		FTypeDefinition typeDef = currentEditor.getMcunit().getTypeDefinitionByName(nodeName);
+		if(typeDef != null)
+			return (String)hintpp.getHTMLDoc(typeDef);
+		else
+			return "not found";
 	}
 } 

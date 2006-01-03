@@ -104,7 +104,7 @@ public class TouchView extends ViewPart {
 		shell = composite.getShell();
 		touchviewer = SWT_AWT.new_Frame(composite);		
 		try {
-			Thread.sleep(500);
+			Thread.sleep(1500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
