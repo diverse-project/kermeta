@@ -1,0 +1,10 @@
+/**
+
+@mainpage 
+<a href="http://www.kermeta.org">[http://www.kermeta.org]</a><br>
+<div class="intro">
+Welcome to the Doxygen documentation of Kermeta projects. This documentation
+merges all the Kermeta projects docs in one. You cannot browse by projects but
+by classes and packages, which are all [hyper-]linked to each other.
+</div>
+*/

@@ -1,0 +1,23 @@
+/**
+
+@mainpage 
+
+<a href="http://www.kermeta.org"><img alt="kermeta"
+src="./kermeta_site_logo.mini.gif"/>&nbsp;</a><br>
+<div class="intro">
+Welcome to the Doxygen documentation of Kermeta projects. 
+You can browse documentation following the above links. Note that there is no
+link between the various projects yet, so, if you want to access a class in a
+project that is referenced in another one, you will have to switch to the
+corresponding project doc folder. Sorry for that!
+<ul class="projects">
+<li><a class="el" target="_top" href="../../framework/html/index.html">Framework project</a>: it contains the code used to compile Kermeta framework. </li>
+<li><a class="el" target="_top" href="../../interpreter/html/index.html">Interpreter project</a>: it contains
+the java program that interpretes Kermeta (parsing, runtime memory loading, interpretation) </li>
+<li><a class="el" target="_top" href="../../io/html/index.html">IO project</a>: it contains facilities that convert Kermeta code to another format (mainly ecore, compiled kermeta -- xmi) and vice versa</li>
+<li><a class="el" target="_top" href="../../runner/html/index.html">Runner project</a>: the Eclipse plugin to run or debug a Kermeta program</li>
+<li><a class="el" target="_top" href="../../texteditor/html/index.html">Texteditor project</a>:  the Eclipse plugin to edit a Kermeta program</li>
+</ul>
+</div>
+
+*/
