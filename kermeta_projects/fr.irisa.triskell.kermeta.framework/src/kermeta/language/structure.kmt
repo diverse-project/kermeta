@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.16 2005-09-15 12:51:19 dvojtise Exp $
+/* $Id: structure.kmt,v 1.17 2006-01-05 15:24:20 fchauvel Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -70,6 +70,8 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 }
 alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
+
+
 class Class inherits Type, kermeta::reflection::Class, KMStructureVisitable
 {
 	method new() : kermeta::reflection::Object from kermeta::reflection::Class is 
@@ -80,6 +82,11 @@ class Class inherits Type, kermeta::reflection::Class, KMStructureVisitable
 	method clone(objectToClone : Object) : Object is
 	do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.cloneObject(self, objectToClone)
+	end
+	
+	method deepClone(objectToClone : Object) : Object is
+	do
+		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.deepCloneObject(self, objectToClone)
 	end
 	
 	method isInstance(object : Object) : Boolean is do
@@ -95,10 +102,12 @@ class Class inherits Type, kermeta::reflection::Class, KMStructureVisitable
 	end
 	
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
-		do
-			result := visitor.visitClass(self, context)
-		end
+	do
+		result := visitor.visitClass(self, context)
+	end
 }
+
+
 class MultiplicityElement inherits TypedElement, kermeta::reflection::MultiplicityElement, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
@@ -164,6 +173,7 @@ class ProductType inherits TypeContainer, Type, kermeta::reflection::ProductType
 			result := visitor.visitProductType(self, context)
 		end
 }
+
 class FunctionType inherits TypeContainer, Type, kermeta::reflection::FunctionType, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
@@ -171,21 +181,28 @@ class FunctionType inherits TypeContainer, Type, kermeta::reflection::FunctionTy
 			result := visitor.visitFunctionType(self, context)
 		end
 }
+
 class Type inherits Object, kermeta::reflection::Type, KMStructureVisitable
 {
+	
+	operation clone (objectToClone : Object) : Object is abstract
+
+
+	operation deepClone (objectToClone : Object) : Object is abstract
+
 /*
 	method isInstance(element : Object) : Boolean from kermeta::reflection::Type is do
 		//TODO: implement operation isInstance
 	end
 */
 
-	operation clone(objectToClone : Object) : Object is abstract
-
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do
 			result := visitor.visitType(self, context)
 		end
 }
+
+
 class TypeVariableBinding inherits TypeContainer, Object, kermeta::reflection::TypeVariableBinding, KMStructureVisitable
 {
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is

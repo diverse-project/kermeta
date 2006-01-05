@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.25 2005-12-20 12:14:23 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.26 2006-01-05 15:22:44 fchauvel Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -259,10 +259,10 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        }
 	    }
 	    
-	    // THE METHOD CLONE ON CLASS
-	    // FIXME Why this line doesn't work !!!!
-	    //if ( op.getOperation() == TypeCheckerContext.getClassCloneOperation() ) {
-	    if ( exp.getFName().equals("clone") )
+	    // THE CLONE AND DEEPCLONE OPERATIONS ON CLASS 
+	    // FIXME Why the following line doesn't work !!!!
+	    // if ( op.getOperation() == TypeCheckerContext.getClassCloneOperation() ) {
+	    if ( exp.getFName().equals("clone") ||  exp.getFName().equals("deepClone") )
 	    {
 	    	// Check that the parameter is a instance of the type of the target ... A.clone(e:A) : A
 	    	if (exp.getFParameters().size() == 1 ) {
