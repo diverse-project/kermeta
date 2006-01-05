@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.10 2005-12-05 09:25:42 ffleurey Exp $
+/* $Id: RuntimeObject.java,v 1.11 2006-01-05 16:29:04 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -26,7 +26,12 @@ import fr.irisa.triskell.kermeta.structure.FObject;
  * IRISA / INRIA / University of rennes 1
  * Distributed under the terms of the EPL license
  * 
- * This is the java implemetation of a Kermeta object 
+ * This is the java (runtime) implementation of a Kermeta object. Important properties :
+ *  - data : contain special informations, like the model element corresponding to the runtime object
+ *  - properties : contain the RuntimeObject representations of the value of the properties of
+ *    the runtime object
+ *  - metaclass : the metaclass of the runtime object
+ *  (see detailed doc. in member functions)
  */
 public class RuntimeObject {
     
@@ -35,14 +40,14 @@ public class RuntimeObject {
     }
     
     /**
-     * Objec id counted for RuntimeObject
+     * Object id counted for RuntimeObject
      */
     private static int oid_cpt = 0;
 	
     private int oId = oid_cpt++;
     
 	/**
-	 * The meta class
+	 * The meta class 
 	 */
 	private RuntimeObject metaclass;
 	
@@ -53,7 +58,7 @@ public class RuntimeObject {
 	
 	/**
 	 * The values of properties. 
-	 * Indexed by the name of the property
+	 * Indexed by the name of the property : { a_string : a_runtime_object }
 	 */
 	private Hashtable properties = new Hashtable();
 	
@@ -82,6 +87,9 @@ public class RuntimeObject {
 		data = new Hashtable();
 	}
 	
+	/**
+	 * Properly clears this RuntimeObject on garbage collecting time. 
+	 */
     protected void finalize() throws Throwable {
         //System.err.println("finalize RuntimeObject : " + oId);
         FObject fobj = (FObject)getData().get("kcoreObject");
@@ -110,7 +118,11 @@ public class RuntimeObject {
     }
     
     
-    
+    /**
+     * Overrides the classic equals in order to evaluate properly equality between
+     * RuntimeObject representations of the primitive types.
+     * @return true if arg0 equals this RuntimeObject, false otherwise.
+     */
     public boolean equals(Object arg0) {
         if (arg0 instanceof RuntimeObject) {
             RuntimeObject other = (RuntimeObject)arg0;
@@ -126,7 +138,7 @@ public class RuntimeObject {
     }
     
 	/**
-	 * @return Returns the container.
+	 * @return Returns the container in the mof meaning (black diamond).
 	 */
 	public RuntimeObject getContainer() {
 		FClass self_cls = ((FClass)metaclass.getData().get("kcoreObject"));
@@ -144,9 +156,24 @@ public class RuntimeObject {
 		this.container = container;
 	}
 	/**
-	 * Get data contains only a "kcoreObject" entry in 1st iteration
-	 * and NumericValue, StringValue for primitive types
-	 * @return Returns the data.
+	 * Returns the data, which contains different kinds of objects according to
+	 * the Kermeta type that is represented.
+	 * Here is the currently exhaustive list of available keys in this hashtable 
+	 * (i.e : How to access the internal structure of a RuntimeObject):
+	 *  
+	 *   - <b>kcoreObject</b> : the FObject represented by this runtime object. Note that if the runtime object is an 
+	 *     <em>instance</em> (by opposition to a model) than there is no kcoreObject.<br>
+	 *     Examples of common uses :<br>
+	 *     - <code>FClass a_fclass = (FClass)a_runtimeobject.getMetaclass().getData().get("kcoreObject")</code>;
+	 *     gets the class (in its "model representation") of which the given runtimeobject is an instance.
+	 *     - <code>FProperty a_fprop = (FProperty)a_ro_property.getData().get("kcoreObject")</code>;
+	 *     gets the model representation of the given runtime property.
+	 *   - <b>[String|Numeric|Boolean|Character]Value</b> : the java primitive type corresponding to this
+	 *     RuntimeObject. Only provided for runtime object that represents primitive types!
+	 *   - <b>emfObject</b> : used during the serialization of a Kermeta model : represents the EObject 
+	 *   represented by this runtime object.  
+	 *   
+	 * @return Returns the data represented by this runtime object.
 	 */
 	public Hashtable getData() {
 		return data;
@@ -158,7 +185,7 @@ public class RuntimeObject {
 		this.data = data;
 	}
 	/**
-	 * @return Returns the frozen.
+	 * @return Returns true if the RuntimeObject is not modifiable, false otherwise.
 	 */
 	public boolean isFrozen() {
 		return frozen;
@@ -170,34 +197,49 @@ public class RuntimeObject {
 		this.frozen = frozen;
 	}
 	/**
-	 * @return Returns the metaclass.
+	 * @return Returns the metaclass of this runtime object.
 	 */
 	public RuntimeObject getMetaclass() {
 		return metaclass;
 	}
-	/**
-	 * Each property corresponds exactly to an FProperty : 
-	 * ownedAttribute -> FOwnedAttribute()
-	 * name -> FName()
-	 * @return Returns the properties.
-	 */
-	public Hashtable getProperties() {
-		return properties;
-	}
-
+	
 	/**
 	 * @param metaclass The metaclass to set.
 	 */
 	public void setMetaclass(RuntimeObject metaclass) {
 		this.metaclass = metaclass;
 	}
+	
 	/**
-	 * @return Returns the factory.
+	 * Returns the properties of this runtime object.
+	 * Indexed by the name (a String) of the property
+	 * <pre>class X
+	 * { 
+	 *    attribute y : Y 
+	 *    attribute z : Z
+	 * }
+	 * </pre>
+	 * 
+	 * The properties hashtable of the RuntimeObject representation of an instance of X : 
+	 * <pre>{ "y" : a_RuntimeObject_as_instance_of_Y, "z" : a_RuntimeObject_as_instance_of_z }</pre>
+	 * @return Returns the properties.
+	 */
+	public Hashtable getProperties() {
+		return properties;
+	}
+	
+
+	/**
+	 * @return Returns the factory used to create RuntimeObjects.
 	 */
 	public RuntimeObjectFactory getFactory() {
 		return factory;
 	}
-	
+
+	/**
+	 * @return A string representation of this runtime object : <code>[ class_name : oId ]</code>, or
+	 * <code>[ class_name : oId = &lt;a_printable_value&gt;</code> for primitive types.
+	 */
 	public String toString() {
 	    String class_name = "< No Metaclass ! >";
 	    try {
@@ -221,6 +263,10 @@ public class RuntimeObject {
 	    return "[" + class_name + " : "+ oId +"]";
 	}
 	
+	/**
+	 * @return A simplified string representation of this runtime object : <code>[ class_name : oId ]</code>,
+	 * or a printable value for primitive types..
+	 */
 	public String toUserString() {
 	    String class_name = "< No Metaclass ! >";
 	    try {
@@ -244,6 +290,7 @@ public class RuntimeObject {
 	    return "[" + class_name + " : "+ oId +"]";
 	}
 	
+	/** @return the ID of this runtime object */
     public long getOId() {
         return oId;
     }
