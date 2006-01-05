@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.8 2005-07-12 15:12:58 fchauvel Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.9 2006-01-05 15:28:32 fchauvel Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -424,6 +424,182 @@ public class RuntimeObjectFactory {
 	    
 	}
 	
+	
+	
+	
+	/**
+	 * This Hashtable is used bey the deepclone operation
+	 * It's allow to remeber which object have been already cloned. Avoid cycles in the deep cloning process
+	 * --> Key is the OID of the runtimeobject
+	 * --> Value is the runtimeObject (result of the clone operation)
+	 */
+	public Hashtable cloneObjectTable = new Hashtable();
+	
+	
+	/**
+	 * Create a new RuntimeObject from another runtime object
+	 * Implement the "deep clone" feature.
+
+	 * @param meta_class the class of the object to clone
+	 * @param objectToClone the object we want to clone
+	 * @return the clone of the objectToClone 
+	 */
+	public RuntimeObject deepCloneRuntimeObjectFromObject(RuntimeObject meta_class, RuntimeObject objectToClone)
+	{    
+	    // Build a new empty object (default constructor) 
+	    RuntimeObject result = new RuntimeObject(this, meta_class);
+	    createRuntimeObjectFromClass_count++;
+	    
+	    // Check that we have not already clone this object
+	    if ( cloneObjectTable.containsKey(objectToClone.getOId()) )
+	    {
+	    	System.out.println(" Objet déjà cloné !!!");
+	    	
+	    	// Look in the hashtable to find the result ! 
+	    	result = (RuntimeObject) cloneObjectTable.get(objectToClone.getOId());
+	
+	    } else {
+	      	System.out.println("Je clone un nouvel objet : " + objectToClone.getOId());
+		    
+	      	// Remerer that we have cloned this object
+	    	cloneObjectTable.put(objectToClone.getOId(), result);
+	    
+	    	// And we clone it ...
+	    	
+		    // Check if it is a primitive type
+		    String theMetaClassName = ((FClass) meta_class.getData().get("kcoreObject")).getFClassDefinition().getFName();
+			System.out.println("J'ai trouvé un : " + theMetaClassName);
+		 
+			if (theMetaClassName.equals("String") ){
+				result.getData().put("StringValue", objectToClone.getData().get("StringValue"));
+		    
+			} else if ( theMetaClassName.equals("Integer") ) {
+				result.getData().put("NumericValue", objectToClone.getData().get("NumericValue"));
+			
+			} else if ( theMetaClassName.equals("Boolean") ) {
+				result.getData().put("BooleanValue", objectToClone.getData().get("BooleanValue"));
+			
+			} else if ( theMetaClassName.equals("Collection") || theMetaClassName.equals("OrderedCollection") ) {				    						    		
+				ArrayList objectToCloneContents = (ArrayList) objectToClone.getData().get("CollectionArrayList");
+				ArrayList resultContents = new ArrayList();
+				
+				// we clone each value in the collection
+				Iterator elementIterator = objectToCloneContents.iterator();
+				while ( elementIterator.hasNext() ){
+					RuntimeObject element = (RuntimeObject) elementIterator.next();
+					RuntimeObject elementMetaClass = element.getMetaclass();
+					resultContents.add(deepCloneRuntimeObjectFromObject(elementMetaClass, element));
+				}
+				result.getData().put("CollectionArrayList", resultContents);
+				
+			} else {				    						    		
+				// It doesn't be a primitive type
+				
+			    // Get the list of attribute of the meta-class
+			    EList metaClassAttribute = ((FClass) meta_class.getData().get("kcoreObject")).getFClassDefinition().getFOwnedAttributes();
+			    
+			    // Foreach property of found in the meta-class, do a deep clone 
+			    // We look in the meta-class to find the name of each properties
+			    Iterator metaClassAttributeIterator = metaClassAttribute.iterator();
+			    while ( metaClassAttributeIterator.hasNext() ) {
+			    	FProperty theMetaClassAttribute = (FProperty) metaClassAttributeIterator.next();
+				    	    	
+			    	String theAttributeName = theMetaClassAttribute.getFName();
+			    	System.out.println(" ---> cloning property \"" + theAttributeName + "\"");
+				   	RuntimeObject theAttributeValue = (RuntimeObject) objectToClone.getProperties().get(theAttributeName);
+		    		
+			    	// If the property has no yet been used, then its does not exist !
+			    	if ( theAttributeValue != null ){
+		    		
+				    	RuntimeObject theAttributeMetaClass = theAttributeValue.getMetaclass();
+				    	System.out.println("J'ai trouvé un : " + theAttributeMetaClass);
+				    	System.out.println("J'ai trouvé un : " + theMetaClassAttribute.getFType());
+				    	
+				    	String theAttributeTypeName = null;
+				    	
+				    	// We get the name of the meta class of the attribute
+				    	if (theMetaClassAttribute.getFType() instanceof FClass) {
+			    			theAttributeTypeName = ((FClass) theMetaClassAttribute.getFType()).getFClassDefinition().getFName();   		
+			    		
+				    	} else if (theMetaClassAttribute.getFType() instanceof FEnumeration) { 
+			    			theAttributeTypeName = ((FEnumeration) theMetaClassAttribute.getFType()).getFName();
+			    		
+			    		} else {
+			    			System.err.println("-----------------------------------------------");
+			    			System.err.println("Err while cloning object : " + objectToClone);
+			    			System.err.println("Trying to clone a property on an unknown type ! ");
+			    			System.err.println("-----------------------------------------------");
+			    		}
+				    	
+				    	
+				       	// If the attribute we clone is a ReflectiveSequence
+				    	String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFClassDefinition().getFName();
+			    		// For each element in the collection, we need to add an opposite 
+			    		if ( theAttributeMetaClassName.equals("ReflectiveSequence") )
+			    		{	
+			    			
+			    			// Build a new reflective Collection
+			    			RuntimeObject resultAttribute = new RuntimeObject(this, theAttributeMetaClass);
+			    			    		    			
+			    			ArrayList attributeContents = (ArrayList) theAttributeValue.getData().get("CollectionArrayList");
+			    			ArrayList resultAttributeContents = new ArrayList();
+		    				
+			    			FProperty oppositeProperty = ((FProperty) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getFOpposite(); 
+			    			String oppositeName = oppositeProperty.getFName();
+			    			
+			    			
+			    			Iterator elementIterator = attributeContents.iterator();
+			    			
+			    			// Manage each object contained in the reflective Colletion
+			    			while ( elementIterator.hasNext() )
+			    			{
+			    				RuntimeObject element = (RuntimeObject) elementIterator.next();
+			    				System.out.println(" Essai de cloner l'objet : " + element.getOId());
+			    				RuntimeObject clonedElement = deepCloneRuntimeObjectFromObject(element.getMetaclass(), element);
+			    				
+			    				// Manage opposite properties
+			    				// Get the opposite property of "cloned element" and set it with the result of our current clone operation
+			    				//RuntimeObject elementProperty = (RuntimeObject) clonedElement.getProperties().get(oppositeName);
+			    				
+			    				// test if the opposite is a Collection or a simple attribute
+			    				if (oppositeProperty.getFUpper() == 1){
+									clonedElement.getProperties().put(oppositeName, result);
+									
+								} else { 	
+									ArrayList elementPropertyCollection = new ArrayList();
+									//elementProperty.getData().put("CollectionArrayList", elementPropertyCollection);
+									clonedElement.getData().put("CollectionArrayList", elementPropertyCollection);
+									elementPropertyCollection.add(result); 
+								}
+											    				
+			    				// Put the Object in the our new collection !
+			    				resultAttributeContents.add(clonedElement);
+			    			}
+			    			
+			    			resultAttribute.getData().put("CollectionArrayList", resultAttributeContents);
+			    			result.getProperties().put(theAttributeName, resultAttribute);
+						
+			    		} else {
+			    			// Here we faced a simple attribute
+			    			// Deep cloning the value of the attribute
+			    			result.getProperties().put(theAttributeName, deepCloneRuntimeObjectFromObject(theAttributeMetaClass, theAttributeValue));	
+			    		}
+			    	
+			    	} else {
+			    		
+			    		// if the AttributeValue is Null
+			    		System.out.println("\t warning : attribute has no value");
+			    	}
+			  
+			    }  
+			
+			} 
+			
+		} // HashTable contains ...
+		
+		return result;
+	    
+	}
 	
 	/**
 	 * This only work for classes that have no type parameters
