@@ -1,4 +1,4 @@
-/* $Id: KTNHintHTMLPrettyPrinter.java,v 1.1 2006-01-03 22:42:44 dvojtise Exp $
+/* $Id: KTNHintHTMLPrettyPrinter.java,v 1.2 2006-01-05 22:31:06 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -14,9 +14,15 @@
 package fr.irisa.triskell.kermeta.touchnavigator.textPresentation;
 
 import java.util.Iterator;
+import java.util.Vector;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EObjectEList;
+
+import sun.security.krb5.internal.crypto.n;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.structure.FClass;
@@ -30,8 +36,12 @@ import fr.irisa.triskell.kermeta.utils.KMTHelper;
  *
  */
 public class KTNHintHTMLPrettyPrinter extends KM2KMTPrettyPrinter {
-	
-	public int classShortLevel = 1;
+	/** if 0 do not show attributes and operations
+	 * if 1 show only attributes and operations of the current class
+	 * if >1 also shows attributes and operations of the inherited class (if classFlat == true)
+	 */
+	public int classShortLevel = 2;
+	/** shows or not the inherited classes */
 	public boolean classFlat = true;
 	
 	public String CR = "\n";
@@ -46,10 +56,107 @@ public class KTNHintHTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		String result = "<pre>";
 		currentClassShortLevel = 0;
 		mainClass =  true;
-		result += accept(node);
+		if(node instanceof FClassDefinition)
+			result += htmlSummary((FClassDefinition)node);
 		mainClass =  false;
 		result+="</pre>";
 		return  result;
+	}
+	
+	
+	public String htmlSummary(FClassDefinition node) {
+		String result="";
+		if(mainClass){
+			String tags = ppTags(node.getFTag());
+			result = getPrefix() + tags;
+			if(tags.compareTo("")!=0) result += "\n" ;
+		}
+		if(!classFlat && classShortLevel < 1) return result;
+		result += getPrefix();
+		if (node.isFIsAbstract()) result += "<b>abstract</b> ";
+		result += "<b>class</b> " + KMTHelper.getMangledIdentifier(node.getFName());
+		if (node.getFTypeParameter().size() > 0) {
+			result += "&lt;";
+			result += ppTypeVariableDeclaration(node.getFTypeParameter());
+			result += "&gt;";
+		}
+		result += "\n" ;
+		if (node.getFSuperType().size() > 0) {
+			Vector<String> knowOperationNames = new Vector<String>();
+
+			// fill the knownOperationName list with those of the current node we don't care of the resulting list 
+			EList e = getOperationsNotIn(node, knowOperationNames);
+			if(!classFlat)
+			{ // shows only the the directly inherited classes
+
+				result += " <b>inherits from</b>";
+				Iterator itSuperType = node.getFSuperType().iterator();
+				while(itSuperType.hasNext()){
+					result += CR;
+					EObject o = (EObject)itSuperType.next();
+					result += getPrefix() + "<b>class</b> " + this.accept(o);
+				}
+			}
+			else{
+
+				pushPrefix();
+				// retreive direct super classes
+				// if short level > 1
+					// show attributes 
+					// show operations not redefined in the current class
+				result += " <b>inherits from</b>";
+				Iterator itSuperType = node.getFSuperType().iterator();
+				while(itSuperType.hasNext()){
+					result += CR;
+					EObject o = (EObject)itSuperType.next();
+					result += getPrefix() + "<b>class</b> " + this.accept(o);
+					if(classShortLevel > 1 && o instanceof FClassDefinition){
+						FClassDefinition superNode = (FClassDefinition)o;
+						pushPrefix();
+						result += ppCRSeparatedNode(superNode.getFOwnedAttributes());
+						EList el =  getOperationsNotIn(superNode, knowOperationNames);
+						result += ppCRSeparatedNode(el);
+						//result += ppCRSeparatedNode(superNode.getFOwnedOperation());
+						popPrefix();
+						result += getPrefix() + "}";
+					}
+				}
+				// retreive all indirect super classes
+				// if short level > 1
+					// show attributes 
+					// show operations not redefined in the current class or in the previously processed class
+
+				popPrefix();
+			}
+		}	
+		// if short level > 0 
+		if(classShortLevel > 0){
+			result += CR + getPrefix() + "{" + CR;
+			pushPrefix();
+			// show attributes with tags
+			result += ppCRSeparatedNode(node.getFOwnedAttributes());
+			// show operations with tags
+			result += ppCRSeparatedNode(node.getFOwnedOperation());
+			popPrefix();
+			result += getPrefix() + "}";		
+		}
+		
+		return result;
+	}
+	
+	protected EList getOperationsNotIn(FClassDefinition node, Vector<String> knownOperationNames)
+	{
+			EList el =  new BasicEList();
+		Iterator it = node.getFOwnedOperation().iterator();
+		while(it.hasNext()){
+			FOperation o = (FOperation)it.next();
+			if(!(knownOperationNames.contains(o.getFName())))
+			{
+				knownOperationNames.add(o.getFName());
+				el.add(o);
+			}
+		}
+		return el;
 	}
 	
 	/* (non-Javadoc)

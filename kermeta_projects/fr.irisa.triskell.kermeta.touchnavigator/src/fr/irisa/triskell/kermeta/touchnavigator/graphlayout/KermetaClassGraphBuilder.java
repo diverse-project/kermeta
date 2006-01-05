@@ -1,4 +1,4 @@
-/* $Id: KermetaClassGraphBuilder.java,v 1.5 2005-12-18 22:39:03 dvojtise Exp $
+/* $Id: KermetaClassGraphBuilder.java,v 1.6 2006-01-05 22:31:06 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -29,9 +29,7 @@ import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
-import fr.irisa.triskell.kermeta.texteditor.outline.OutlineItem;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -44,7 +42,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 	
 	protected TGPanelHelper tgpHelper;
 	
-	protected Hashtable graphUnitMapping = new Hashtable();
+	protected Hashtable<FTypeDefinition,Node> graphUnitMapping = new Hashtable<FTypeDefinition,Node>();
 	
 	public KermetaClassGraphBuilder(TGPanel newtgPanel, FClassDefinition theStartingClass) {
 		tgPanel = newtgPanel;
@@ -61,6 +59,8 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 		
 		System.err.println("buildGraph: "+kunit.getUri());
 		Arrow.init(20, 0.5);
+		
+		tgPanel.getLocalityUtils().fastFinishAnimation();
 		//if(kunit == null) return;
 		
 //		 needed in order to make the hide work
@@ -71,7 +71,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 		*/
 		acceptCollection(kunit.packages.values());
 
-		//tgPanel.setSelect(tgPanel.getGES().getFirstNode());
+		tgPanel.setSelect(tgPanel.getGES().getFirstNode());
 
 	/*	Iterator it2 = graphUnitMapping.entrySet().iterator();
 		if(it2.hasNext()){
@@ -201,6 +201,18 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 					
 				}
 			}
+			//try {
+				
+				/*if (startingClass == entry.getKey()){
+					Node n1 = (Node)graphUnitMapping.get(startingClass);
+					tgPanel.setLocale(n1,2);
+					tgPanel.setSelect(n1);
+				}*/
+				//tgPanel.updateLocalityFromVisibility();
+				//tgPanel.getLocalityUtils().fastFinishAnimation();
+				//tgPanel.stopMotion();
+				//Thread.sleep(50);
+			//} catch (InterruptedException e) {}
 			// else not a ClassDef
 		}
 		
@@ -292,16 +304,22 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 			graphUnitMapping.put(theType, n1);
 			n1.setLabel(KMTHelper.getQualifiedName(theType));
 			n1.setType(Node.TYPE_RECTANGLE);
-			if(startingClass == theType)
+			/*if(startingClass.getFName().compareTo(theType.getFName())==0)
 			{	// select this node for the animation
-				//tgPanel.setLocale(n1,2);
-				//tgPanel.setSelect(n1);
-			}
+				tgPanel.setLocale(n1,2);
+				tgPanel.getSelect()
+				tgPanel.setSelect(n1);
+			}*/
 		} catch (TGException e) {
 			throw new Error("TouchGraph INTERNAL ERROR : visiting a FPrimitiveType", e);
 		}
 	    return null;
 	}
+	
+	/** used by visitFClassDefinition to not have to build too much node at once */
+	protected int nbNodeCreated = 0;
+	protected Node foundNode = null; 
+	
 	/**
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visit(FClass)
 	 */
@@ -316,11 +334,27 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 			graphUnitMapping.put(theClass, n1);
 			n1.setLabel(KMTHelper.getQualifiedName(theClass));
 			n1.setType(Node.TYPE_RECTANGLE);
-			if(startingClass == theClass)
-			{	// select this node for the animation
-				//tgPanel.setLocale(n1,2);
-				//tgPanel.setSelect(n1);
+			//n1.setVisible(false);
+			nbNodeCreated++;
+			// this allows to not have to load all the node at once
+			// at let some time to the animation to finish
+			if(nbNodeCreated >10){
+				nbNodeCreated = 0;
+				if(theClass == startingClass){
+					foundNode = n1;					
+				}
+				else if (foundNode != null){
+					n1 = foundNode;
+				}
+				tgPanel.setLocale(n1,2);
+				tgPanel.setSelect(n1);
+				try {
+					tgPanel.getLocalityUtils().fastFinishAnimation();
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+				}
 			}
+			
 		} catch (TGException e) {
 			throw new Error("TouchGraph INTERNAL ERROR : visit a FClass", e);
 		}

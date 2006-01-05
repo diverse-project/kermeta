@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.9 2006-01-03 22:42:44 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.10 2006-01-05 22:31:06 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -72,6 +72,7 @@ public class KermetaGLPanel extends GLPanel
 	private static final long serialVersionUID = 1L;
 	
 	private Editor previousEditor = null;
+	private KermetaUnit previousUnit = null;
 
 	public Editor currentEditor = null;
 	
@@ -139,7 +140,18 @@ public class KermetaGLPanel extends GLPanel
 	 */
 	public void unitGotFocus(Editor editor) {
 		// do it in a thread so it will not slow down the opening of the file
-		if(editor != previousEditor){
+		boolean doIt = false;
+		if(editor != null){
+			if(previousUnit != editor.getMcunit())
+			{
+				previousUnit = editor.getMcunit();
+				doIt = true;
+			}
+		}
+		if(editor != previousEditor ){
+			doIt = true;
+		}
+		if(doIt){
 			previousEditor = editor;			
 			currentEditor = editor;
 			// 
@@ -151,17 +163,17 @@ public class KermetaGLPanel extends GLPanel
 				try {
 					buildKermetaClassGraphThread.stopBuild();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				//buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
 			}
+			
 			buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
 			System.err.println("unitGotFocus: start thread" +editor);
 			
 			buildKermetaClassGraphThread.start();
 		}
-		else System.err.println("same editor unit: "+editor.getMcunit().getUri());
+		else System.err.println("same editor unit and same unit: "+editor.getMcunit().getUri());
 		System.err.println("editor unit: "+editor.getMcunit().getUri());
 	}
 	
@@ -238,6 +250,7 @@ public class KermetaGLPanel extends GLPanel
 			yield();yield();yield();yield();
 			yield();yield();yield();yield();
 			yield();yield();yield();yield();
+			
 			/*try { 
 				Thread.sleep(500); // gives some time to the construction of the tgPanel to finish (the relaxer in particular)
 			} catch (InterruptedException e) {
@@ -258,7 +271,17 @@ public class KermetaGLPanel extends GLPanel
 
 				System.err.println("  try "+nbtries);
 			}
-
+			try {
+				KermetaUnit k = currentEditor.getMcunit();
+				int nbtry = 0;
+				while(nbtry <15 && !(/*k.isConstraint_checked() &&*/ k.isType_checked()) /*&& !k.isCycle_constraint_checked()*/){
+					Thread.sleep(10);
+					nbtry++;
+				}
+				System.err.println("unit is checked : go ! nbtry=" + nbtry);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			System.err.println("BuildKermetaClassGraphThread start2");
 			if(clasDef == null) {
 				readyLock.setValue(true);
@@ -279,12 +302,14 @@ public class KermetaGLPanel extends GLPanel
 
 			System.err.println("BuildKermetaClassGraphThread start3");
 			// make sure no other thread of touchgrapch is running
-            synchronized (KermetaGLPanel.this.tgPanel.getLocalityUtils()) {
+            //synchronized (KermetaGLPanel.this.tgPanel.getLocalityUtils()) {
             	//setVisible(false);
             	try {
             		String msg = "Nb nodes(1): "+KermetaGLPanel.this.tgPanel.getNodeCount();
             		System.err.println(msg);
             		KermetaGLPanel.this.tgPanel.clearAll();
+                    KermetaGLPanel.this.tgPanel.tgLayout.resetDamper();
+        			yield();yield();yield();yield();
             		msg = "Nb nodes(2): "+KermetaGLPanel.this.tgPanel.getNodeCount();
             		System.err.println(msg);
             		kcGraphBuilder = new KermetaClassGraphBuilder(tgPanel, clasDef);
@@ -332,7 +357,7 @@ public class KermetaGLPanel extends GLPanel
                 }
                 setVisible(true);
                 // notifyAll();
-            }
+            //}
             
             
             //KermetaGLPanel.this.tgPanel.tgLayout.stopDamper(); // do not damp while building the model
@@ -561,6 +586,9 @@ public class KermetaGLPanel extends GLPanel
 	public String getHint(ClassNode n) {
 		String nodeName = n.getLabel();
 		// retreives the node in the unit
+		if(currentEditor == null){
+			currentEditor =TexteditorPlugin.getDefault().getEditor();
+		}
 		FTypeDefinition typeDef = currentEditor.getMcunit().getTypeDefinitionByName(nodeName);
 		if(typeDef != null)
 			return (String)hintpp.getHTMLDoc(typeDef);
