@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.17 2005-12-02 12:54:52 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.18 2006-01-09 13:34:54 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -16,6 +16,7 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
@@ -66,8 +67,8 @@ public class Runtime2EMF {
     
 
     /**
-     * @param unit
-     * @param file_path
+     * @param unit the unit that embeds the resource of the model to save
+     * @param file_path the output directory for the model to save
      */
     public static void saveunit(EMFRuntimeUnit p_unit, String file_path) {
 
@@ -312,6 +313,7 @@ public class Runtime2EMF {
 	                    while (p_it.hasNext())
 	                    {
 	                        RuntimeObject r_o =(RuntimeObject)p_it.next();
+	                        // Get the type of the feature
 	                        Object p_o = getOrCreateObjectFromRuntimeObject(r_o, feature.getEType());
 	                        if (p_o!=null)
 	                        {	
@@ -404,8 +406,8 @@ public class Runtime2EMF {
     /**
      * Create an eObject corresponding to the given RuntimeObject. We do this for 
      * EMF instances that were created manually in Kermeta.
-     * @param rObject
-     * @param classifier TODO
+     * @param rObject the runtimeObject that we want to serialize
+     * @param classifier The type of the feature "in" which the rObject was contained
      * @return the eObject corresponding to this rObject
      */
     protected EObject createEObjectFromRuntimeObject(RuntimeObject rObject, EClassifier classifier)
@@ -418,7 +420,6 @@ public class Runtime2EMF {
                 metaclass.getFClassDefinition());
         
         internalLog.debug("createEObjectFromRuntimeObject for RuntimeObject: " + getRONameProp(rObject) + " "+ rObject  + rObject.getProperties());
-        
         EClass eclass = null;
         if (classifier == null)
         {
@@ -434,7 +435,10 @@ public class Runtime2EMF {
         	}
         	else
         	{
-        		eclass = (EClass)classifier;
+        		//eclass = (EClass)classifier; // in fact this was wrong! the given classifier is the
+        		// static type of the feature to which given object "belongs" (instance of this type or one of
+        		// its subtypes, not the real type of the object.
+        		eclass = this.getEClassFromFQualifiedName(kqname, classifier.eResource() , unit);
         	}
         }
         if (eclass != null) // If we did not find the Eclass (it means that kqname is the name of a primitive type)
@@ -447,21 +451,23 @@ public class Runtime2EMF {
     
     /**
      * Get the EClass corresponding to the kermeta qualified name 
-     * @param kqname
-     * @param p_resource
-     * @param unit
-     * @return
+     * @param kqname the name of which we look for the corresponding in Ecore meta-model
+     * @param p_resource the resource of the meta-model
+     * @param unit the RuntimeUnit that contain the correspondance table between kermeta object names
+     * and emf serialised object names.
+     * @return the EClass in the ecore meta-model given by the user for serialization of its model
      */
     protected EClass getEClassFromFQualifiedName(String kqname, Resource p_resource, EMFRuntimeUnit unit)
     {
         EClass result = null;
         TreeIterator it = null; 
-        // If we work on an existing resource (not a new one), this method is ok resource is empty!!!
+        // If a resource uri for the meta-model was not provided ?
         if (resource.getContents().size() > 0)
         {
             EPackage mmpkg = ((EObject)resource.getContents().get(0)).eClass().getEPackage();
             it = mmpkg.eAllContents();
         }
+        // Otherwise  
         else
         {
               it = p_resource.getAllContents();
@@ -493,6 +499,30 @@ public class Runtime2EMF {
     	    if (robject.getData().containsKey(s_primitive_types[i]))
     	        return robject.getData().get(s_primitive_types[i]);
     	return null;
+    }
+    
+    /**
+     * Get all the subtypes for the type of the given feature.
+     * @param feature the feature of the meta-model of the model that we want to serialize.
+     * @param mm_resource the resource of the meta-model that we will parse to get the allowed
+     * subtypes for the given feature.
+     * @return the list of types inheriting the type of the given feature
+     * @deprecated 
+     */
+    protected List getAllSubtypesForType(Resource mm_resource, EClassifier roottype)
+    {
+    	ArrayList<EClassifier> result = new ArrayList<EClassifier>();
+    	TreeIterator it = null; 
+        // If we work on an existing resource (not a new one), this method is ok resource is empty!!!
+        it = mm_resource.getAllContents();
+        while (it.hasNext())
+        {
+            EObject obj = (EObject)it.next();
+			if (obj instanceof EClass)
+				if (((EClass)obj).getEAllSuperTypes().contains(roottype))
+				    result.add((EClass)obj);
+        }
+        return result;
     }
     
     /**
