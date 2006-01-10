@@ -71,7 +71,7 @@ import  java.util.*;
   *
   * @author   Alexander Shapiro
   * @author   Murray Altheim  (2001-11-06; 2002-01-14 cleanup)
-  * @version  1.21  $Id: TGPanel.java,v 1.4 2005-12-31 09:58:03 dvojtise Exp $
+  * @version  1.21  $Id: TGPanel.java,v 1.5 2006-01-10 22:49:47 dvojtise Exp $
   */
 public class TGPanel extends JPanel {
 
@@ -863,6 +863,7 @@ public class TGPanel extends JPanel {
 	            			moy(g1,g2, dist),
 	            			moy(b1,b2, dist));
 	                node.setBackColor(newColor);
+	                node.setDistToSelection(dist);
 	            }
 	        };
 	

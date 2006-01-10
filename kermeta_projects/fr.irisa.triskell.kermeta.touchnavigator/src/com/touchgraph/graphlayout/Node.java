@@ -63,7 +63,7 @@ import  java.util.Iterator;
   *
   *  @author   Alexander Shapiro
   *  @author   Murray Altheim (2001-11-06; added support for round rects and alternate Node colors)
-  *  @version  1.21  $Id: Node.java,v 1.3 2005-12-31 09:58:03 dvojtise Exp $
+  *  @version  1.21  $Id: Node.java,v 1.4 2006-01-10 22:49:29 dvojtise Exp $
   */
 public class Node {
     
@@ -138,6 +138,7 @@ public class Node {
     private Vector edges;
     
     public boolean ghostNode = false;
+	protected int distToSelection=0;
 
 
   // ............
@@ -372,8 +373,8 @@ public class Node {
 
     /** Return the width of this Node. */
     public int getWidth() {
-        if ( fontMetrics != null && lbl != null ) {
-            return fontMetrics.stringWidth(lbl) + 12;            
+        if ( fontMetrics != null && getLabel() != null ) {
+            return fontMetrics.stringWidth(getLabel()) + 12;            
         } else {
             return 10;
         }
@@ -510,6 +511,20 @@ public class Node {
 	 */
 	public void setGhostNode(boolean ghostNode) {
 		this.ghostNode = ghostNode;
+	}
+
+	/**
+	 * @return Returns the distToSelection.
+	 */
+	public int getDistToSelection() {
+		return distToSelection;
+	}
+
+	/**
+	 * @param distToSelection The distToSelection to set.
+	 */
+	public void setDistToSelection(int distToSelection) {
+		this.distToSelection = distToSelection;
 	}
 
 } // end com.touchgraph.graphlayout.Node
