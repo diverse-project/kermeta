@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.11 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.12 2006-01-10 12:25:00 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -10,10 +10,16 @@
 package fr.irisa.triskell.kermeta.runner.console;
 
 
-import org.eclipse.debug.internal.ui.views.console.ProcessConsole;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import org.eclipse.core.runtime.CoreException;
+//import org.eclipse.debug.internal.ui.views.console.ProcessConsole;
 import org.eclipse.jface.dialogs.InputDialog;
 
-
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -23,11 +29,15 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleListener;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.IConsoleView;
+import org.eclipse.ui.console.IOConsole;
+import org.eclipse.ui.console.IOConsoleInputStream;
+import org.eclipse.ui.console.IOConsoleOutputStream;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.console.TextConsolePage;
 import org.eclipse.ui.part.IPageBookViewPage;
 
+import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.dialogs.InputStreamDialog;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 //import org.eclipse.ui.internal.console.IOConsolePage;
@@ -38,11 +48,16 @@ import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
  */
 public class KermetaConsole extends KermetaIOStream implements IConsoleListener
 {
-
-    protected MessageConsole messageConsole = null;
+	protected final static int MAX_BYTES = 10000;
+    protected IOConsole messageConsole = null;
     //protected ProcessConsole messageConsole = null;
+	protected IOConsoleOutputStream outputStream = null;
+	protected IOConsoleInputStream inputStream = null;
+	protected BufferedInputStream bufferedStream = null;
     protected IConsoleManager consoleManager = null;
-    protected MessageConsoleStream stream = null;
+    // The console view of the messageConsole...
+    protected IConsoleView view = null;
+    
     protected InputStreamDialog inputDialog = null;
     static protected KermetaConsole theConsole = null;
     protected InputDialogThread theInputThread = null;
@@ -69,21 +84,42 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     {
         String str = "";
         str =(messageString!=null)?messageString.toString():"Error : the object to print is null ("+messageString+")";
-	    stream.print(str);
+	    // stream.print(str);
+        try {
+			outputStream.write(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	    /*stream.setColor(new Color(null, 120, 5, 100));*/
     }
     
     public Object read(String prompt)
     {
-    	InputDialogThread thread;
-    	if (theInputThread == null)	
-    		theInputThread = new InputDialogThread(prompt);
-        else 
-        	theInputThread.setPrompt(prompt);
-    	Display.getDefault().syncExec(theInputThread);
-    	
-        return theInputThread.inputStr;
-        
+		char[] read_stream = new char[0];
+		String result = "";
+		char c;
+    	try
+    	{	
+			//inputStream.reset();
+			inputStream.setColor(new Color(null, 200,30,240));
+			result = new BufferedReader(new InputStreamReader(inputStream)).readLine();
+		
+			// In comment : old version of command line with a popup dialog
+			/*    	InputDialogThread thread;
+			 if (theInputThread == null)	
+			 theInputThread = new InputDialogThread(prompt);
+			 else 
+			 theInputThread.setPrompt(prompt);
+			 Display.getDefault().syncExec(theInputThread);
+			 
+			 return theInputThread.inputStr;
+			 */   
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (result == null) result = " ";
+		return result;
     }
 
     /**
@@ -92,7 +128,9 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
      */
     public void reset()
     {
-        stream = messageConsole.newMessageStream();
+        // stream = messageConsole.newMessageStream();
+    	outputStream = messageConsole.newOutputStream();
+    	inputStream = messageConsole.getInputStream();
     }
     
     protected class InputDialogThread extends Thread 
@@ -132,6 +170,8 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
      * @see org.eclipse.ui.console.IConsole#createPage(org.eclipse.ui.console.IConsoleView)
      */
     public IPageBookViewPage createPage(IConsoleView view) {
+    	System.err.println("Create a console page!");
+    	this.view = view;
     	return new TextConsolePage(messageConsole, view);
     }
 
@@ -157,14 +197,29 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     }
     
     /**
-     * Add a console
+     * Add a console.
+     * Some experimental tests added in this code. Does not affect the classic running of this
+     * method. (Please don't remove the comment notes yet)
      */
     public void addConsole() {
-        messageConsole = new MessageConsole("KermetaConsole", null); //new ProcessConsole(IProcess, null)
-        stream = messageConsole.newMessageStream();
-        consoleManager.addConsoles( new IConsole[]{messageConsole});
-	    consoleManager.showConsoleView(messageConsole);
-	    
+    	messageConsole = new IOConsole("KermetaConsole", null);
+        outputStream = messageConsole.newOutputStream(); //messageConsole.newMessageStream();
+        inputStream = messageConsole.getInputStream();
+        IConsoleView consoleView = null;
+        //messageConsole.createPage(RunnerPlugin.getDefault().get) //console.addView("org.eclipse.ui.console.ConsoleView");
+        try {
+			consoleView = RunnerPlugin.getDefault().getConsoleView();
+			//fPage.getSite().getPage().findView(IConsoleConstants.ID_CONSOLE_VIEW);
+		} catch (CoreException e) {
+			// if a coreException was catched, than try something else...
+		}
+		finally
+		{
+			if (consoleView != null)
+				messageConsole.createPage(consoleView);
+			consoleManager.addConsoles( new IConsole[]{messageConsole});
+			consoleManager.showConsoleView(messageConsole);
+		}
     }
     
     /**
