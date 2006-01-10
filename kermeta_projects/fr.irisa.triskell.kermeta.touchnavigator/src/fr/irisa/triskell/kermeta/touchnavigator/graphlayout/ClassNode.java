@@ -1,4 +1,4 @@
-/* $Id: ClassNode.java,v 1.2 2005-12-31 09:58:03 dvojtise Exp $
+/* $Id: ClassNode.java,v 1.3 2006-01-10 22:50:42 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : ClassNode.java
  * License : EPL
@@ -18,9 +18,12 @@ import com.touchgraph.graphlayout.TGPanel;
 
 public class ClassNode extends Node {
 
+	private static final int shortLabelLevel = 1;
 	public static int BORDER_WIDTH       = 2;
 	public static int ATTRIBUTECELL_HEIGHT      = 4;
 	public static int OPERATIONCELL_HEIGHT       = 4;
+	
+	protected String shortLabel = null; 
 	
 
     protected Color borderColor = new Color(100,100,100);
@@ -73,7 +76,44 @@ public class ClassNode extends Node {
 
         Color textCol = getPaintTextColor(tgPanel);
         g.setColor(textCol);
-        g.drawString(lbl, ix - fontMetrics.stringWidth(lbl)/2, iy + fontMetrics.getDescent() +1 - 3*BORDER_WIDTH);
+        g.drawString(getDisplayLabel(), ix - fontMetrics.stringWidth(getDisplayLabel())/2, iy + fontMetrics.getDescent() +1 - 3*BORDER_WIDTH);
     }
+
+	
+
+	/**
+	 * @return Returns the shortLabel.
+	 */
+	public String getShortLabel() {
+		return shortLabel;
+	}
+
+	/**
+	 * @param shortLabel The shortLabel to set.
+	 */
+	public void setShortLabel(String shortLabel) {
+		this.shortLabel = shortLabel;
+	}
+	
+	
+	public String getDisplayLabel(){
+		if(shortLabel != null && distToSelection >= shortLabelLevel)
+			return shortLabel;
+		else
+			return super.getLabel();
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.touchgraph.graphlayout.Node#getWidth()
+	 */
+	@Override
+	public int getWidth() {
+		if ( fontMetrics != null && getDisplayLabel() != null ) {
+            return fontMetrics.stringWidth(getDisplayLabel()) + 12;            
+        } else {
+            return 10;
+        }
+	}
         
 }

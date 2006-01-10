@@ -1,4 +1,4 @@
-/* $Id: Arrow.java,v 1.1 2005-11-27 19:46:03 dvojtise Exp $
+/* $Id: Arrow.java,v 1.2 2006-01-10 22:50:42 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : Arrow.java
  * License : EPL
@@ -62,6 +62,8 @@ public class Arrow {
     
     public static final int TYPE_FILLED_TRIANGLE_ARROW = 0;
     public static final int TYPE_TRIANGLE_ARROW = 1;
+    public static final int TYPE_FILLED_DIAMOND_ARROW = 2;
+    public static final int TYPE_DIAMOND_ARROW = 3;
 
     public static void init(int newarrowLength, double newarrowAngle) {
     	arrowLength = newarrowLength;
@@ -126,8 +128,12 @@ public class Arrow {
         int arrowSize = (int) ((Math.tan(arrowAngle)*arrowLength)/2);
         int xDir;
         int yDir;
-        int[] xArrow = new int[3];
-        int[] yArrow = new int[3];
+        int nbPoints;
+        if (arrowType == TYPE_FILLED_DIAMOND_ARROW || arrowType == TYPE_DIAMOND_ARROW)
+        	nbPoints = 4;
+        else nbPoints = 3;
+        int[] xArrow = new int[nbPoints];
+        int[] yArrow = new int[nbPoints];
         int xTemp = 0;
         int yTemp = 0; 
         Polygon poly = new Polygon();
@@ -160,7 +166,7 @@ public class Arrow {
                 xTemp = toX + arrowSize;
                 xArrow[2] = xTemp;
                 yArrow[2] = yTemp;
-                poly = new Polygon(xArrow, yArrow, 3);
+                poly = new Polygon(xArrow, yArrow, nbPoints);
                 otherEnd = new Point(toX, yTemp);
                 
             } else {
@@ -174,7 +180,7 @@ public class Arrow {
                 xTemp = toX + arrowSize;
                 xArrow[2] = xTemp;
                 yArrow[2] = yTemp;
-                poly = new Polygon(xArrow, yArrow, 3);  
+                poly = new Polygon(xArrow, yArrow, nbPoints);  
                 otherEnd = new Point(toX, yTemp);              
             }
         }
@@ -225,21 +231,45 @@ public class Arrow {
             }
         }
 
-        if(arrowType == TYPE_FILLED_TRIANGLE_ARROW)
+        if(arrowType == TYPE_FILLED_TRIANGLE_ARROW){        	   
         	g.fillPolygon(poly);
-        else if (arrowType == TYPE_TRIANGLE_ARROW)
-        	g.drawPolygon(poly);
-        otherEnd = middlePoint(new Point(poly.xpoints[1],poly.ypoints[1]),new Point(poly.xpoints[2],poly.ypoints[2]));
+        	otherEnd = middlePoint(new Point(poly.xpoints[1],poly.ypoints[1]),new Point(poly.xpoints[2],poly.ypoints[2]));            
+        }
+        else if (arrowType == TYPE_TRIANGLE_ARROW){
+        	g.drawPolygon(poly);        	
+        	otherEnd = middlePoint(new Point(poly.xpoints[1],poly.ypoints[1]),new Point(poly.xpoints[2],poly.ypoints[2]));
+        }
+        else if (arrowType == TYPE_FILLED_DIAMOND_ARROW){
+        	Point middle = middlePoint(new Point(poly.xpoints[1],poly.ypoints[1]),new Point(poly.xpoints[2],poly.ypoints[2]));
+        	otherEnd = symetricPoint(new Point(poly.xpoints[0],poly.ypoints[0]), middle);
+            poly = addDiamondPoint(poly, otherEnd);
+        	g.fillPolygon(poly);        	
+        }
+        else if (arrowType == TYPE_TRIANGLE_ARROW){
+        	Point middle = middlePoint(new Point(poly.xpoints[1],poly.ypoints[1]),new Point(poly.xpoints[2],poly.ypoints[2]));
+        	otherEnd = symetricPoint(new Point(poly.xpoints[0],poly.ypoints[0]), middle);
+        	poly = addDiamondPoint(poly, otherEnd);
+        	g.drawPolygon(poly);        	
+        }
         return otherEnd;
     }
 
 
+    private static Polygon addDiamondPoint(Polygon poly, Point p){
+    	Polygon result;
+    	result = new Polygon();
+    	result.addPoint(poly.xpoints[0], poly.ypoints[0]);
+    	result.addPoint(poly.xpoints[1], poly.ypoints[1]);
+    	result.addPoint(p.x, p.y);
+    	result.addPoint(poly.xpoints[2], poly.ypoints[2]);
+    	return result;
+    }
     private static Polygon LUArrow(int fromX, int fromY,
                                     int toX, int toY) {
         int[] xArrow = new int[3];
         int[] yArrow = new int[3];
-        double xLine = 0;
-        double yLine = 0;
+        //double xLine = 0;
+        //double yLine = 0;
         double angle = 0;
         double slantLine = 0;
         double radian = 0;
@@ -335,8 +365,8 @@ public class Arrow {
                                     int toX, int toY) {
         int[] xArrow = new int[3];
         int[] yArrow = new int[3];
-        double xLine = 0;
-        double yLine = 0;
+        //double xLine = 0;
+        //double yLine = 0;
         double angle = 0;
         double slantLine = 0;
         double radian = 0;
@@ -431,8 +461,8 @@ public class Arrow {
                                     int toX, int toY) {
         int[] xArrow = new int[3];
         int[] yArrow = new int[3];
-        double xLine = 0;
-        double yLine = 0;
+        //double xLine = 0;
+        //double yLine = 0;
         double angle = 0;
         double slantLine = 0;
         double radian = 0;
@@ -528,8 +558,8 @@ public class Arrow {
                                     int toX, int toY) {
         int[] xArrow = new int[3];
         int[] yArrow = new int[3];
-        double xLine = 0;
-        double yLine = 0;
+        //double xLine = 0;
+        //double yLine = 0;
         double angle = 0;
         double slantLine = 0;
         double radian = 0;
@@ -620,10 +650,29 @@ public class Arrow {
         return new Polygon(xArrow, yArrow, 3);
     }
     
+    
+    /**
+     * calculates the point in the middle of these 2 points
+     * @param p1
+     * @param p2
+     * @return
+     */
     public static Point middlePoint(Point p1, Point p2){
     	int x,y;
     	x = p1.x > p2.x ? p2.x + (p1.x - p2.x)/2 : p1.x + (p2.x - p1.x)/2;
     	y = p1.y > p2.y ? p2.y + (p1.y - p2.y)/2 : p1.y + (p2.y - p1.y)/2;
+    	return new Point(x,y);
+    }
+    
+    /**
+     * @param p1
+     * @param gravityPoint
+     * @return the point opposite to p1 accordingly to the gravity point
+     */
+    public static Point symetricPoint(Point p1, Point gravityPoint){
+    	int x,y;
+    	x = gravityPoint.x  + gravityPoint.x - p1.x; 
+    	y = gravityPoint.y  + gravityPoint.y - p1.y;
     	return new Point(x,y);
     }
 }

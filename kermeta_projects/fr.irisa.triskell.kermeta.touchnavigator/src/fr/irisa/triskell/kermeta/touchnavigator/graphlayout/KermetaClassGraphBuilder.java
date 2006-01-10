@@ -1,4 +1,4 @@
-/* $Id: KermetaClassGraphBuilder.java,v 1.6 2006-01-05 22:31:06 dvojtise Exp $
+/* $Id: KermetaClassGraphBuilder.java,v 1.7 2006-01-10 22:50:42 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -135,12 +135,18 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 							//propertyNode2.setType(Node.TYPE_ROUNDRECT);
 							Node propertyNode2 = tgpHelper.addFeatureNode(property2.getFName());
 							propertyNode2.setGhostNode(true);
-							tgPanel.addEdge(n1, propertyNode1, Edge.DEFAULT_LENGTH/3*2);
+							if(property1.isFIsComposite())
+								tgpHelper.addDiamondEdge(propertyNode1, n1, Edge.DEFAULT_LENGTH/3*2);
+							else
+								tgPanel.addEdge(n1, propertyNode1, Edge.DEFAULT_LENGTH/3*2);
 							//tgPanel.addEdge(propertyNode1, n1, Edge.DEFAULT_LENGTH/3*2);
 							tgpHelper.addSimpleEdge(propertyNode1,propertyNode2,Edge.DEFAULT_LENGTH);
-							tgpHelper.addSimpleEdge(propertyNode2,propertyNode1,Edge.DEFAULT_LENGTH);
+							//tgpHelper.addSimpleEdge(propertyNode2,propertyNode1,Edge.DEFAULT_LENGTH);
 							//tgPanel.addEdge(propertyNode2,n2,Edge.DEFAULT_LENGTH/3*2);
-							tgPanel.addEdge(n2, propertyNode2, Edge.DEFAULT_LENGTH/3*2);
+							if(property2.isFIsComposite())
+								tgpHelper.addDiamondEdge(propertyNode2, n2, Edge.DEFAULT_LENGTH/3*2);
+							else
+								tgPanel.addEdge(n2, propertyNode2, Edge.DEFAULT_LENGTH/3*2);
 							
 						}
 						
@@ -151,7 +157,10 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 						Node propertyNode1 = tgpHelper.addFeatureNode(property1.getFName());
 						propertyNode1.setType(Node.TYPE_ROUNDRECT);
 						propertyNode1.setGhostNode(true);
-						tgPanel.addEdge(n1, propertyNode1, Edge.DEFAULT_LENGTH/3*2);
+						if(property1.isFIsComposite())
+							tgpHelper.addDiamondEdge(propertyNode1, n1, Edge.DEFAULT_LENGTH/3*2);
+						else
+							tgPanel.addEdge(n1, propertyNode1, Edge.DEFAULT_LENGTH/3*2);
 						//tgPanel.addEdge(propertyNode1, n1, Edge.DEFAULT_LENGTH/3*2);
 						
 						Object obj = property1.getFType(); // A verifier les type possibles !! ou un  accept ?
@@ -318,21 +327,24 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 	
 	/** used by visitFClassDefinition to not have to build too much node at once */
 	protected int nbNodeCreated = 0;
-	protected Node foundNode = null; 
+	protected ClassNode foundNode = null; 
 	
 	/**
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visit(FClass)
 	 */
 	public Object visitFClassDefinition(FClassDefinition theClass){
-		Node n1;
+		ClassNode n1;
 		try {
 //			 look for an existing one
-			if(graphUnitMapping.contains(theClass))
-				n1 = (Node)graphUnitMapping.get(theClass);
+			if(graphUnitMapping.contains(theClass)){
+				n1 = (ClassNode)graphUnitMapping.get(theClass);
+				return null;
+			}
 			else
-				n1 = tgpHelper.addClassNode();
+				n1 = (ClassNode) tgpHelper.addClassNode();
 			graphUnitMapping.put(theClass, n1);
 			n1.setLabel(KMTHelper.getQualifiedName(theClass));
+			n1.setShortLabel (theClass.getFName());
 			n1.setType(Node.TYPE_RECTANGLE);
 			//n1.setVisible(false);
 			nbNodeCreated++;

@@ -203,15 +203,17 @@ public class KermetaClassNodeHintUI extends TGAbstractMousePausedUI {
         tgPanel.remove(intfHint);
     }
     
-    public void mousePaused(MouseEvent e) {        
-        ClassNode mouseOverN = (ClassNode) tgPanel.getMouseOverN();
-        if(mouseOverN!=null && !mousePressed) {
-            if(hintNode!=mouseOverN) hideHint();
-            showHint(mouseOverN); 
+    public void mousePaused(MouseEvent e) {   
+    	if(tgPanel.getMouseOverN() instanceof ClassNode){
+	        ClassNode mouseOverN = (ClassNode) tgPanel.getMouseOverN();
+	        if(mouseOverN!=null && !mousePressed) {
+	            if(hintNode!=mouseOverN) hideHint();
+	            showHint(mouseOverN); 
+	        }
+	        else 
+	            hideHint();
+	        tgPanel.repaint();
         }
-        else 
-            hideHint();
-        tgPanel.repaint();
     }
     
     public void mouseMoved(MouseEvent e) {

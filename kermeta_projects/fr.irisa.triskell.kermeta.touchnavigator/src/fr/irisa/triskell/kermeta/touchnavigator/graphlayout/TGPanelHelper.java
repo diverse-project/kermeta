@@ -1,4 +1,4 @@
-/* $Id: TGPanelHelper.java,v 1.3 2005-12-31 09:58:03 dvojtise Exp $
+/* $Id: TGPanelHelper.java,v 1.4 2006-01-10 22:50:42 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaTGPanel.java
  * License : EPL
@@ -63,7 +63,8 @@ public class TGPanelHelper {
      * @see com.touchgraph.graphlayout.graphelements.GraphEltSet
      */
     public Node addFeatureNode( String label ) throws TGException {
-        return addFeatureNode(null,label);
+    	
+        return addFeatureNode(getNewNodeId(),label);
     }
     /** Adds a Node, provided its ID and label.
      * @see com.touchgraph.graphlayout.Node
@@ -105,6 +106,11 @@ public class TGPanelHelper {
     
     public Edge addInheritanceEdge( Node f, Node t, int tension ) {
     	Edge e = new InheritanceEdge(f,t,tension);
+    	tgpanel.addEdge(e);
+    	return e;
+    }
+    public Edge addDiamondEdge( Node f, Node t, int tension ) {
+    	Edge e = new DiamondEdge(f,t,tension);
     	tgpanel.addEdge(e);
     	return e;
     }

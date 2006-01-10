@@ -176,7 +176,7 @@ public class TouchView extends ViewPart {
 		actionForward = new Action() {
 			public void run() {
 				kGLPanel.goForward();
-				showMessage("Back button not implemented yet");
+				//showMessage("Forward button not implemented yet");
 			}
 		};
 		actionForward.setText("Forward");
