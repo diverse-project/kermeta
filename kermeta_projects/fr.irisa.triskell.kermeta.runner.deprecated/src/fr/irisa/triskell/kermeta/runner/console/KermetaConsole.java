@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.12 2006-01-10 12:25:00 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.13 2006-01-10 12:25:44 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.dialogs.InputDialog;
 
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 import org.eclipse.ui.console.ConsolePlugin;
@@ -32,8 +31,6 @@ import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.IOConsole;
 import org.eclipse.ui.console.IOConsoleInputStream;
 import org.eclipse.ui.console.IOConsoleOutputStream;
-import org.eclipse.ui.console.MessageConsole;
-import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.console.TextConsolePage;
 import org.eclipse.ui.part.IPageBookViewPage;
 
@@ -95,9 +92,7 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     
     public Object read(String prompt)
     {
-		char[] read_stream = new char[0];
 		String result = "";
-		char c;
     	try
     	{	
 			//inputStream.reset();
