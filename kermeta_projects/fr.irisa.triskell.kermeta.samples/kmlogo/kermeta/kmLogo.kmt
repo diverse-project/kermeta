@@ -1,3 +1,18 @@
+/* $Id: kmLogo.kmt,v 1.4 2006-01-11 15:59:11 dvojtise Exp $
+ * Project    : fr.irisa.triskell.kermeta.samples
+ * File       : kmLogo.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : juil. 2005
+ * Authors : 
+ *        Jean-Marc Jézéquel <jezequel@irisa.fr>
+ * Description : 
+ *       Sample of metamodel with behavior in Kermeta
+ */
+@mainClass "kmLogo::actions::Main"
+@mainOperation "main"
+
 package kmLogo;
  
 require kermeta
