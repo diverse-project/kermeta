@@ -18,9 +18,7 @@ abstract class Object
 	operation toString() : String is abstract
 	operation isFrozen() : Boolean is abstract
 	operation freeze() : Void is abstract
-	operation isVoid() : Boolean is do
-		result := false
-	end
+	operation isVoid() : Boolean is abstract
 }
 alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
