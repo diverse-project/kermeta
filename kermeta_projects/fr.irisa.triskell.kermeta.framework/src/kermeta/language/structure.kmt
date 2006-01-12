@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.18 2006-01-12 17:30:51 zdrey Exp $
+/* $Id: structure.kmt,v 1.19 2006-01-12 17:54:06 zdrey Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -64,7 +64,7 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	end
 	
 	method isVoid() : Boolean is do
-		result := self.equals(void)
+		result := false
 	end
 	
 	method freeze() : Void is do
