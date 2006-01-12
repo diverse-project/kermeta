@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.18 2005-12-15 12:26:54 zdrey Exp $
+/* $Id: KermetaInterpreter.java,v 1.19 2006-01-12 16:33:07 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -168,7 +168,20 @@ public class KermetaInterpreter {
 	            main_operation = tag.getFValue(); //remove the " to memorize value
 	    }
 	    if (main_class != null && main_operation != null)
-	        setEntryPoint(main_class, main_operation);
+	    {
+	    	try 
+	    	{
+	    		setEntryPoint(main_class, main_operation);
+	    	}
+	    	catch (KermetaInterpreterError e)
+	    	{
+	    		unit.messages.
+	    		addWarning(
+	    				"class \"" + "main_class\"" +  
+	    				"or operation \"" + main_operation + "\" given in @mainClass/@mainOperation tags does not seem to be valid;" +
+	    				"(default launch will fail)", null);
+	    	}
+	    }
 	}
 	
 	/**
