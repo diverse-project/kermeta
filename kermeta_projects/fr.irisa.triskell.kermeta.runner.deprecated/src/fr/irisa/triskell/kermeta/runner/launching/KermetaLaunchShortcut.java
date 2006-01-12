@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.9 2005-12-01 20:43:23 dvojtise Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.10 2006-01-12 16:46:58 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -178,9 +178,9 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 			// Is one of them corresponding to our current file?
 			for (int i= 0; i < configs.length; i++) {
 				ILaunchConfiguration config= configs[i];
-				if ((config.getAttribute(KermetaLaunchConfiguration.KM_FILENAME, "").equals(filePath)) && //$NON-NLS-1$
-					(config.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, "").equals(className)) && //$NON-NLS-1$
-					(config.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,"").equals(opName)))  //$NON-NLS-1$
+				if (!(config.getAttribute(KermetaLaunchConfiguration.KM_FILENAME, "").equals("")) && //$NON-NLS-1$
+					!(config.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, "").equals("")) && //$NON-NLS-1$
+					!(config.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,"").equals("")))  //$NON-NLS-1$
 				{  //$NON-NLS-1$
 						candidateConfigs.add(config);
 				}
@@ -199,7 +199,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 		} else if (candidateCount == 1) {
 			return (ILaunchConfiguration) candidateConfigs.get(0);
 		} else {
-		    System.err.println("It look likes there is more than one available config!!");
+		    System.err.println("It looks like there is more than one available config! We'll create a new default one.");
 		}
 		return null;
 	}
