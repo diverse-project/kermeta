@@ -67,6 +67,21 @@ class Hashtable<K, V>
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.clear(self)
 	end
 	
+	/** Return the keys of the Hashtable */
+	operation keys() : Set<K> is do
+		result := Set<K>.new
+		from var it : Iterator<K> init keyIterator until it.isOff
+		loop
+			result.add(it.next)
+		end
+	end
+	
+		/** Return the keys of the Hashtable */
+	operation values() : Collection<V> is do
+		result := Bag<V>.new
+		keys.each { k | result.add(self.getValue(k)) }
+	end
+	
 	// TODO: complete this class
 	// The rest might be writable in metacore directly
 	

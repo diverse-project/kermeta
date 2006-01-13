@@ -1,5 +1,5 @@
 /*****************************************************************************
- * $Id: 035_testHashtable.main.kmt,v 1.8 2005-11-08 15:56:36 dvojtise Exp $
+ * $Id: 035_testHashtable.main.kmt,v 1.9 2006-01-13 12:08:19 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : testHashtable.kmt
@@ -28,7 +28,7 @@ alias String : kermeta::standard::String;
 class TestHashtable inherits kermeta::kunit::Test
 {
 	
-	attribute hashtable : kermeta::utils::Hashtable<Integer, String>
+	reference hashtable : kermeta::utils::Hashtable<Integer, String>
 	
 	// initialize things
 	method setUp() : Void is do
@@ -43,7 +43,8 @@ class TestHashtable inherits kermeta::kunit::Test
 	 */
 	operation testKeyIterator() : Void is do
 		var it : kermeta::standard::Iterator<Integer>
-		setUp()
+		setUp
+		stdio.writeln("hashtable coucou")
 		it := hashtable.keyIterator()
 		stdio.writeln(it.next.toString)
 		stdio.writeln(it.next.toString)
@@ -56,7 +57,7 @@ class TestHashtable inherits kermeta::kunit::Test
 	 */
 	operation testValueIterator() : Void is do
 		var it : kermeta::standard::Iterator<String>
-		setUp()
+		setUp
 		it := hashtable.valueIterator()
 		stdio.writeln(it.next.toString)
 		stdio.writeln(it.next.toString)
@@ -67,20 +68,20 @@ class TestHashtable inherits kermeta::kunit::Test
 	 * returns an iterator on the keys of the map
 	 */
 	operation testGet() : Void is do
-		setUp()
-		assert(hashtable.get(1) == "one")
-		assert(hashtable.get(2) == "two")
-		assert(hashtable.get(3) == "three")
+  	    setUp
+		assert(hashtable.getValue(1) == "one")
+		assert(hashtable.getValue(2) == "two")
+		assert(hashtable.getValue(3) == "three")
 	end
 	
 	/**
 	 * Adds a entry in the Hashtable
 	 */
 	operation testPut() : Void is do
-		setUp()
+	    setUp
 		hashtable.put(1, "ONE")
-		assert(hashtable.get(1) == "ONE")
-		assert(hashtable.get(2) == "two")
+		assert(hashtable.getValue(1) == "ONE")
+		assert(hashtable.getValue(2) == "two")
 		assert(hashtable.size == 3)
 	end
 	
@@ -88,7 +89,7 @@ class TestHashtable inherits kermeta::kunit::Test
 	 * Removes the entry which key equals 'key'
 	 */
 	operation testRemove() : Void is do
-		setUp()
+	    setUp
 		hashtable.remove(2)
 		assert(hashtable.size == 2)
 //		fail(hashtable.keyIterator.next == 1)
@@ -98,10 +99,26 @@ class TestHashtable inherits kermeta::kunit::Test
 	 * Remove all elements from the Hashtable
 	 */
 	operation testClear() : Void is do
-		setUp()
+	    setUp
 		hashtable.clear()
 		assert(hashtable.size == 0)
 	end
 	
+//	/** test that the values() method contains the values of the hashtable */ 
+	operation testValues() : Void is do 
+	    setUp
+		assert(hashtable.values.size == hashtable.size) 
+		assert(hashtable.values.contains(hashtable.getValue(1)))
+		assert(hashtable.values.contains(hashtable.getValue(2)))
+		assert(hashtable.values.contains(hashtable.getValue(3)))
+	end
+	/** test that the keys() method contains the values of the hashtable */
+	operation testKeys() : Void is do
+	    setUp
+		assert(hashtable.keys.size == hashtable.size)
+		assert(hashtable.keys.contains(1))
+		assert(hashtable.keys.contains(2))
+		assert(hashtable.keys.contains(3))
+	end
 
 }
