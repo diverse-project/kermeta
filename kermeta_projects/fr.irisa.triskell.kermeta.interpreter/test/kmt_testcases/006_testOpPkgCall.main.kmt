@@ -2,7 +2,7 @@
 @mainOperation "operation1"
 package testOpPkgCall;
 
-require "6_testExternPackageCall.kmt"
+require "006_testExternPackageCall.kmt"
 
 // call an operation from another package 
 class Test_opcall1 {

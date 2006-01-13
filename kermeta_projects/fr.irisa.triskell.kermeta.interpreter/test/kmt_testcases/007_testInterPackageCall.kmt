@@ -2,7 +2,7 @@
 @mainOperation "operation1"
 package testInterPackage;
 
-require "7_testOpPkgCall.main.kmt"
+require "007_testOpPkgCall.main.kmt"
 
 using kermeta::standard 
 
