@@ -68,6 +68,14 @@
                menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
                class="fr.irisa.triskell.kermeta.popup.actions.Ecore2KermetaAction"
                id="fr.irisa.triskell.kermeta.Ecore2KMT"/>
+       <action
+               enablesFor="*"
+               label="Merges Ecore Ressources"
+               icon="images/kermeta.png"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1" 
+               class="fr.irisa.triskell.kermeta.popup.actions.EcoreMerge2EcoreAction"
+               id="fr.irisa.triskell.kermeta.EcoreMerge2Ecore"/>
+       
       </objectContribution>
       <objectContribution
             objectClass="org.eclipse.core.resources.IFile"
