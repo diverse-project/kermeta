@@ -96,6 +96,18 @@ abstract class ClassDefinition inherits TypeContainer, TypeDefinition
 	attribute ownedOperation : set Operation[0..*]#owningClass
 	reference superType : set Class[0..*]
 	attribute typeParameter : set TypeVariable[0..*]
+
+	property readonly allOwnedAttributes : set Property[0..*]
+		getter is do
+ 		    result := kermeta::standard::Set<Property>.new
+ 		    result.addAll(self.ownedAttributes)
+		    self.superType.each{ t | 
+			t.classDefinition.allOwnedAttributes.each{ p | 
+			if not p.isDerived then
+				result.add(p)
+			end
+			}}
+		end
 }
 abstract class TypedElement inherits TypeContainer, NamedElement
 {
