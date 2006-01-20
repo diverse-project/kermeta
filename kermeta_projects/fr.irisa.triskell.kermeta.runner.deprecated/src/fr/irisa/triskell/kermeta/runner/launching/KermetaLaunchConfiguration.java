@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.20 2005-12-20 08:55:56 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.21 2006-01-20 13:22:15 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -34,12 +34,12 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
      * STATIC FIELDS
      *
      */
-    public final static String KM_FILENAME = "KM_FILENAME";
-    public final static String KM_CLASSQNAME = "KM_CLASSQNAME";
-    public final static String KM_OPERATIONNAME = "KM_OPERATIONNAME";
+    public final static String KM_FILENAME = "fr.irisa.triskell.kermeta.launching.KM_FILENAME";
+    public final static String KM_CLASSQNAME = "fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME";
+    public final static String KM_OPERATIONNAME = "fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME";
     // list of value separated by a comma
-    public final static String KM_ARGUMENTS = "KM_ARGUMENTS";
-    public final static String KM_PROJECTNAME = "KM_PROJECTNAME";
+    public final static String KM_ARGUMENTS = "fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS";
+    public final static String KM_PROJECTNAME = "fr.irisa.triskell.kermeta.launching.KM_PROJECTNAME";
  
     protected static int instanceCount = 0;
     protected AbstractKermetaTarget target;
