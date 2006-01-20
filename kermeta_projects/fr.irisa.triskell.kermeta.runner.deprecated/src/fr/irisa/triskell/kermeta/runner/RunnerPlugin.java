@@ -1,4 +1,4 @@
-/* $Id: RunnerPlugin.java,v 1.15 2005-12-16 09:54:19 zdrey Exp $
+/* $Id: RunnerPlugin.java,v 1.16 2006-01-20 12:07:53 zdrey Exp $
  * Project: Kermeta.runner
  * File: runner.java
  * License: EPL
@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
@@ -25,13 +26,16 @@ import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.plugin.*;
+import org.eclipse.ui.views.IViewDescriptor;
 import org.osgi.framework.BundleContext;
 
 //import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
@@ -151,6 +155,16 @@ public class RunnerPlugin extends AbstractUIPlugin
 			return getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		}
 	
+	
+	public IConsoleView getConsoleView() throws CoreException {
+		//org.eclipse.ui.console.ConsoleView
+		IConsoleView consoleView = null;
+		// does not work
+/*		IViewDescriptor ref_view = getWorkbench().getViewRegistry().find(
+				"org.eclipse.ui.console.ConsoleView");
+		consoleView = (IConsoleView)ref_view.createView(); */
+		return consoleView;
+	}
 	
 
 	/**
