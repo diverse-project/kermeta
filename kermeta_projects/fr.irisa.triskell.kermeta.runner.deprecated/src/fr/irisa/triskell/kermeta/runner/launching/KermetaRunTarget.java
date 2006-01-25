@@ -1,7 +1,7 @@
-/* $Id: KermetaRunTarget.java,v 1.9 2005-11-04 17:00:36 zdrey Exp $
+/* $Id: KermetaRunTarget.java,v 1.10 2006-01-25 16:06:21 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
- * License: GPL
+ * License: EPL
  * Copyright: IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date: May 18, 2005
@@ -29,13 +29,36 @@ public class KermetaRunTarget extends AbstractKermetaTarget {
     public KermetaRunTarget(ILaunch p_launch)
     {
     	launch = p_launch;
+    	launch.getLaunchConfiguration();
     }
     
 
     public void start()
     {
-        startKermetaProcess();
+        //startKermetaProcess();
+
+        
+        initPath();
+    	kermeta_process = new KermetaRunProcess(startFile, className, opName, args, "Kermeta Run Thread");
+    	//ClassLoader previousClassLoader = kermeta_process.getContextClassLoader();
+    	kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute);
+    	kermeta_process.start();
+       /* new Thread() {
+	        public void run() {
+	            this.setName("Kermeta Run Thread");
+	        	// Run in a thread --> is it really useful??
+	            initPath();
+	            ClassLoader cl = this.getContextClassLoader();
+	           // cl.getResourceAsStream()
+	            KermetaLauncher.getDefault().runKermeta(startFile, className, opName, args, false);
+			}
+	    }.start();*/
+    	// restore classloader
+
+    	//kermeta_process.setContextClassLoader( previousClassLoader);
     }
+    
+    
 
 
 	public IThread[] getThreads() throws DebugException {

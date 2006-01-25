@@ -1,178 +1,110 @@
-/**
- * 
+/* $Id: KermetaProcess.java,v 1.16 2006-01-25 16:06:21 dvojtise Exp $
+ * Project   : Kermeta runner
+ * File      : KermetaProcess.java
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 23/01/2006
+ * Authors       : 
+ *     Didier Vojtisek <dvojtise@irisa.fr>
  */
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
-import java.rmi.AccessException;
-import java.rmi.AlreadyBoundException;
-import java.rmi.ConnectException;
-import java.rmi.NotBoundException;
-import java.rmi.RMISecurityManager;
-import java.rmi.Remote;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.ExportException;
-import java.rmi.server.RemoteObject;
-import java.rmi.server.UnicastRemoteObject;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.List;
+import java.util.Vector;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jdt.launching.IRuntimeClasspathEntry;
+import org.eclipse.jdt.launching.JavaRuntime;
 
-import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
-import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
-import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
-import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugUI;
-import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaSecurityManager;
-import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteDebugUI;
-import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
-import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
-import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions.ResumeCondition;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
-/**
- * The thread inside which the DebugInterpreter will be launched.
- * 
- */
 public class KermetaProcess extends Thread {
-	
-	public final String REMOTE_NAME = "remote_interpreter";
+
+	/** logger for the Process */
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("Kermeta");
-	private String file;
-	private String classname;
-	private String opname;
-	private String args;
-	private Registry reg; 
-	private IKermetaRemoteDebugUI debugPlatform;
-	// the flag that controls the run/stop of the thread
-	private boolean stop;
+
+	public String defaultName = "Kermeta Execution Thread";
 	
 	/**
-	 * 
+	 * Constructor, uses the default name for the Thread
 	 */
-	public KermetaProcess(String f, String c, String o, String a, IKermetaRemoteDebugUI debug_platform) {
+	public KermetaProcess() {
 		super();
-		this.file = f;
-		this.classname = c;
-		this.opname = o;
-		this.args = a;
-		debugPlatform = debug_platform;
-		stop = false;
-/*		System.setSecurityManager (new RMISecurityManager() {
-		    public void checkConnect (String host, int port) {}
-		    public void checkConnect (String host, int port, Object context) {} });*/
+		this.setName(defaultName);
 	}
-	
-	
+
+	public KermetaProcess(String threadName) {
+		super();
+		this.setName(threadName);
+	}
+
 	/**
 	 * Method called when start() is called on this thread
-	 * @see java.lang.Runnable#run()
 	 */
-	public void run() {
-		IKermetaRemoteInterpreter remote_interpreter = null;
-		try
-		{
-			if (System.getSecurityManager() == null)
-			{
-				internalLog.info("No security manager : creating one");
-				System.setSecurityManager (new KermetaSecurityManager());
-				//System.setSecurityManager(new RMISecurityManager());
-			}
-			
-			try { 
-				reg = LocateRegistry.createRegistry(5001);
-			}
-			catch (ExportException e) {
-				reg = LocateRegistry.getRegistry("localhost", 5001);
-			}
-			remote_interpreter = new KermetaRemoteInterpreter(file, classname, opname, args);
-			reg.bind(REMOTE_NAME, remote_interpreter);
-			internalLog.info("RemoteInterpreter is binded in the local registry");
-		}
-		catch (Exception e) 
-		{
-			System.out.println("Exception Remote! ");
-			e.printStackTrace();
-			
-		}
-		// FIXME : I am not sure that this is the best place to catch the Kermeta exception!!!
-		//catch (AlreadyBoundException e) {e.printStackTrace();}
-//		catch (MalformedURLException e) {e.printStackTrace();}
-		finally
-		{ 
-			KermetaRemoteInterpreter kermeta_interpreter = (KermetaRemoteInterpreter)remote_interpreter; 
-			// Get the stream where to display the exceptions caught externally..
-			KermetaIOStream console = kermeta_interpreter.getKermetaIOStream();
-			
-			try {
-				debugPlatform.remoteInterpreterCreated();
-				// remote_interpreter is null if a RemoteException was caught above.
-				if (remote_interpreter != null)
-					remote_interpreter.getInterpreter().invoke_debug();
-				
-			} catch (RemoteException e) {
-				e.printStackTrace();
-			}
-
-	        catch (KermetaRaisedException kerror)
-	        {
-	            console.print(kerror.getMessage());
-	            console.print("\n"+kerror.toString());
-	        }
-	        catch (KermetaInterpreterError ierror)
-	        {
-	            console.print("Kermeta interpreter could not be launched :\n");
-	            console.print(ierror.getMessage());
-	        }
-	        catch (Throwable e)
-	        {
-	            console.print("\nKermetaInterpreter internal error \n" +
-	            		"-------------------------------------------\n");
-	            console.print("Reported java error : "+e);
-	            console.print(e.getMessage());
-	            e.printStackTrace();
-	        }
-	        finally
-	        {
-	        	DebugInterpreter di = kermeta_interpreter.getInterpreter();
-	        	// Last frame could have been poped properly if no exception occured.
-	        	if (!di.getInterpreterContext().getFrameStack().isEmpty())
-	        		di.getInterpreterContext().popCallFrame();
-	    		// Remote side of the interpreter reads this attribute and act accordingly
-	    		di.setCurrentState(DebugInterpreter.DEBUG_TERMINATE);
-	    		// Run a last time the debug command that tests if we can interrupt.....laborious
-	    		di.processDebugCommand(null);
-	        }
-			 
-		}
-	}
-
-
-	/** Terminates properly the execution of the remote interpreter */
-	public synchronized void terminate() {
-		System.out.println("KermetaProcess terminates");
-		
-		try {
-    		//debugPlatform.unregisterRemoteInterpreter();
-			//UnicastRemoteObject.unexportObject(reg.lookup(REMOTE_NAME), true);
-			//UnicastRemoteObject.unexportObject(debugPlatform, true);
-			reg.unbind(REMOTE_NAME);
-			// Unset the SecurityManager... otherwise there is an error in ConfiguratorUtils
-			// and we cannot start any runtime workbench anymore.
-			System.setSecurityManager(null);
-			
-		} catch (AccessException e) {
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			e.printStackTrace();
-		}
+	@Override
+	public synchronized void start() {
+		super.start();
 	}
 	
-
+	public void updateThreadClassLoader(List pathAttribute)
+	{
+        Vector<URL> urlsV = new Vector<URL>();
+        
+		for (int i = 0; i < pathAttribute.size(); i++) {
+            String memento1 = (String)pathAttribute.get(i);
+            try {
+                IRuntimeClasspathEntry entry1 = 
+                   JavaRuntime.newRuntimeClasspathEntry(memento1);                
+                // resolve this classpath entry
+                //org.eclipse.jdt.launching.StandardClasspathProvider resolver;
+                try {
+                	//entry1.toString();
+                	if(entry1.getType() == IRuntimeClasspathEntry.ARCHIVE)
+                	{
+                    	urlsV.add(new URL("file:/" + entry1.getLocation()));
+                	}
+                	else
+                	{
+                    	urlsV.add(new URL("file:/" + entry1.getLocation() + "/"));
+                	}
+                	RunnerPlugin.pluginLog.debug("added " + "file:/" + entry1.getLocation() + " in Thread Class Loader");
+				} catch (MalformedURLException e) {
+					RunnerPlugin.pluginLog.warn("problem with an entry of the classpath, " + "file:/" + entry1.getLocation() + " cannot be added in classloader",e);
+				}
+                // IRuntimeClasspathEntryResolver
+              //  this.getIPathFromString()
+            } catch (CoreException e) {
+            	RunnerPlugin.pluginLog.warn("Problem reading classpath entry", e);
+                RunnerPlugin.log(e);
+            	return ;
+            }
+        }
+		URL[] urls = new URL[urlsV.size()];
+		for (int i = 0; i < urlsV.size(); i++) {
+			urls[i] = urlsV.elementAt(i);
+		}
+		//URLClassLoader cl = new URLClassLoader(urls, this.getContextClassLoader());
+		// use this object class loader as parent (instead of the default thread class loader)
+		//    because it also contains the plugin classloader rules
+		URLClassLoader cl = new URLClassLoader(urls, this.getClass().getClassLoader());
+		this.setContextClassLoader(cl);
+		/*URL res  = cl.findResource("waf/Test.class");
+		try {
+			System.err.println(cl.loadClass("waf.Test"));
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		System.err.println("After cl changed, Test is here : " +res);*/
+	}
+	
+	/** Terminates properly the interpreter */
+	public synchronized void terminate() {		
+		RunnerPlugin.pluginLog.debug("KermetaProcess terminates");
+	}	
 }

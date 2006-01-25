@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.15 2005-12-20 12:16:59 dvojtise Exp $
+/* $Id: KermetaDebugTarget.java,v 1.16 2006-01-25 16:06:21 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -57,7 +57,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     protected IKermetaRemoteInterpreter remoteInterpreter;
     //private Registry reg;
     
-    protected KermetaProcess kermeta_process;
     protected KermetaStepHandler stepHandler;
     /** Can be RunnerConstants.RESUME, TERMINATE, SUSPEND */
     protected String state;
@@ -112,7 +111,8 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	 */
 	public synchronized void startRemoteInterpreterProcess()
 	{
-		kermeta_process = new KermetaProcess(getStartFile(), getClassName(), getOpName(), getArgs(), remotePlatform);
+		kermeta_process = new KermetaDebugProcess(getStartFile(), getClassName(), getOpName(), getArgs(), remotePlatform);
+		kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute);    	
 		kermeta_process.start();
 	}
 	
@@ -367,8 +367,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 		remoteInterpreter = remote_i;
 	}
 	
-	public KermetaProcess getKermetaProcess() { return kermeta_process; }
-	public void unsetKermetaProcess() { kermeta_process = null;}
 
 	/** Create a thread once the debugger has started */
 	public void createThread() {

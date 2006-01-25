@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.10 2005-12-20 08:55:56 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.11 2006-01-25 16:06:21 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -10,13 +10,13 @@
 package fr.irisa.triskell.kermeta.runner.debug.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
@@ -27,7 +27,7 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
-import org.eclipse.debug.internal.core.BreakpointManager;
+import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
@@ -51,6 +51,10 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
     protected String className;
     protected String opName;
     protected String args;
+    protected List   javaClassPathAttribute;
+    
+    /** The Thread that run the Kermeta interpreter */
+    protected KermetaProcess kermeta_process;
     
     protected KermetaInterpreter kermetaInterpreter;
     protected KermetaLauncher kermetaLauncher;
@@ -58,14 +62,15 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
     /** The path of the edited file that we are debugging */
     protected IPath path;
 
-    protected String name; // the name of the target
+    /** the name of the target */
+    protected String name; 
     // protected IProcess process; // useful only to launch an external command
     protected IThread[] threads;
     public final String HOST = "localhost";
     protected int requestPort;
     
     protected ArrayList breakpoints;
-    /**
+    /*
      *
      * 
      *  CUSTOM METHODS
@@ -77,16 +82,19 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      * If you run Kermeta in a new JVM, it is this method that you have to change. 
      * (Or inherits AbstractKermetaTarget class and overwrite it...)
      */
-	public void startKermetaProcess()
+	/*public void startKermetaProcess()
 	{
 	    new Thread() {
 	        public void run() {
+	            this.setName("Kermeta Run Thread");
 	        	// Run in a thread --> is it really useful??
 	            initPath();
+	            ClassLoader cl = this.getContextClassLoader();
+	           // cl.getResourceAsStream()
 	            KermetaLauncher.getDefault().runKermeta(startFile, className, opName, args, false);
 			}
 	    }.start();
-	}
+	}*/
 	
 	
 	/**
@@ -115,11 +123,15 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 			
 			args = 
 				launch.getLaunchConfiguration().getAttribute(KermetaLaunchConfiguration.KM_ARGUMENTS, "");
+			
+			// retrieve java classPath
+			javaClassPathAttribute = launch.getLaunchConfiguration().getAttribute(IJavaLaunchConfigurationConstants.ATTR_CLASSPATH, //"org.eclipse.jdt.launching.CLASSPATH"
+					new java.util.ArrayList());
 
 		} catch (Exception ce)
 		{
 			ce.printStackTrace();
-		   // RunnerPlugin.logException(ce);
+		    //RunnerPlugin.logError("Problem loading LaunchConfiguration attributes.",ce);
 		}
 		
 		/*IProject prj =
@@ -135,6 +147,54 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 		startFile = RunnerPlugin.getWorkspace().getRoot().findMember(startFile).getFullPath().toString();
 	}
 
+	/*public void updateClassLoader(List pathAttribute){
+		for (int i = 0; i < pathAttribute.size(); i++) {
+            String memento1 = (String)pathAttribute.get(i);
+            try {
+                IRuntimeClasspathEntry entry1 = 
+                   JavaRuntime.newRuntimeClasspathEntry(memento1);                
+                // resolve this classpath entry
+                org.eclipse.jdt.launching.StandardClasspathProvider resolver;
+                try {
+					URL url = new URL(entry1.getLocation());
+				} catch (MalformedURLException e) {
+					RunnerPlugin.pluginLog.warn("problem with an entry of the classpath",e);
+				}
+                // IRuntimeClasspathEntryResolver
+              //  this.getIPathFromString()
+            } catch (CoreException e) {
+            	RunnerPlugin.pluginLog.warn("Problem reading classpath entry", e);
+                RunnerPlugin.log(e);
+            	return ;
+            }
+        }
+    }*/
+	/*
+	private void processClassPathAttribute(List pathAttribute){
+		for (int i = 0; i < pathAttribute.size(); i++) {
+            String memento1 = (String)pathAttribute.get(i);
+            try {
+                IRuntimeClasspathEntry entry1 = 
+                   JavaRuntime.newRuntimeClasspathEntry(memento1);
+                org.eclipse.jdt.launching.StandardClasspathProvider resolver;
+                
+                // resolve this classpath entry
+                // IRuntimeClasspathEntryResolver
+              //  this.getIPathFromString()
+            } catch (CoreException e) {
+            	RunnerPlugin.pluginLog.warn("Problem reading classpath entry", e);
+                RunnerPlugin.log(e);
+            	return ;
+            }
+        }
+	}*/
+
+	/**
+	 * @return the thread that runs the interpreter
+	 */
+	public KermetaProcess getKermetaProcess() { return kermeta_process; }
+	public void unsetKermetaProcess() { kermeta_process = null;}
+	
 	/**
      *
      * 
