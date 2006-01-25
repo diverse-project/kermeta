@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.32 2005-12-16 09:31:55 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.33 2006-01-25 15:56:54 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -13,16 +13,6 @@
  * 	see class javadoc.	 
  */
 package fr.irisa.triskell.kermeta.interpreter;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Set;
-
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FBlock;
 import fr.irisa.triskell.kermeta.behavior.FBooleanLiteral;
@@ -72,6 +62,14 @@ import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * This is the Java version of kermeta interpreter. It extends the KermetaVisitor, and each
@@ -81,11 +79,23 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 
     
     //The only state variable of the interpreter should be the context and the memory
-    /** The global context */
+    /**
+	 * The global context
+	 * @uml.property  name="interpreterContext"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
     protected InterpreterContext interpreterContext;
-    /** The memory */
+    /**
+	 * The memory
+	 * @uml.property  name="memory"
+	 * @uml.associationEnd  multiplicity="(1 1)" inverse="currentInterpreter:fr.irisa.triskell.kermeta.builder.RuntimeMemory"
+	 */
     protected RuntimeMemory memory;
-    /** The current variable that is processed. Used for traceback when a CallOnVoidTarget occured */
+    /**
+	 * The current variable that is processed. Used for traceback when a CallOnVoidTarget occured
+	 * @uml.property  name="current_variable"
+	 * @uml.associationEnd  
+	 */
     protected Variable current_variable;
     
     /**
@@ -909,8 +919,11 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			// Invoke the java method
 			Class jclass = null;
 	        try {
-	            jclass = Class.forName(jclassName);
-	        } catch (ClassNotFoundException e) {
+	        	ClassLoader cl = Thread.currentThread().getContextClassLoader();
+	        	//jclass = Class.forName(jclassName);
+	        	// The Thread ClassLoader also includes the user jars
+	        	jclass = Class.forName(jclassName,true, cl);
+	        } catch (ClassNotFoundException e) {	        	
 	            internalLog.error("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
 				throw	new KermetaVisitorError("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName  ,e);
 	        }
@@ -1216,9 +1229,17 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     }
     
     
+    /**
+	 * @return  Returns the interpreterContext.
+	 * @uml.property  name="interpreterContext"
+	 */
     public InterpreterContext getInterpreterContext() {
     	return this.interpreterContext;
     }    
+    /**
+	 * @return  Returns the memory.
+	 * @uml.property  name="memory"
+	 */
     public RuntimeMemory getMemory() {
         return memory;
     }
