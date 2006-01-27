@@ -1,4 +1,4 @@
-/* $Id: TGInheritanceTransformations.java,v 1.1 2005-12-05 19:14:30 dvojtise Exp $
+/* $Id: TGInheritanceTransformations.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TGInheritanceTransformations.java
  * License : EPL
@@ -46,7 +46,7 @@ public class TGInheritanceTransformations {
 	 * @param startNode
 	 */
 	public void mergeGeneralization(Node startNode){
-		Vector nodeToDelete = new Vector();
+		Vector<Node> nodeToDelete = new Vector<Node>();
 		Node currentGeneralizationNode = null;
 		
 		
@@ -87,7 +87,7 @@ public class TGInheritanceTransformations {
 	 * @param startNode
 	 */
 	public void mergeSpecialization(Node startNode){
-		Vector nodeToDelete = new Vector();
+		Vector<Node> nodeToDelete = new Vector<Node>();
 		Node currentSpecializationNode = null;
 		TouchNavigatorPlugin.internalLog.debug("Merging Specialization of node "+startNode.getLabel());
 		Iterator it = startNode.getEdges();
@@ -130,8 +130,8 @@ public class TGInheritanceTransformations {
 	public void expandSpecialization(Node startNode){
 		// TODO implement a command pattern so the iterator would not complain about comodification
 		// replace these vectors by the command pattern
-		Vector edgeToDelete = new Vector();
-		Vector nodeToLink = new Vector();
+		Vector<Edge> edgeToDelete = new Vector<Edge>();
+		Vector<Node> nodeToLink = new Vector<Node>();
 		Node currentSpecializationNode = null;
 		TouchNavigatorPlugin.internalLog.debug("Expanding Specialization of node "+startNode.getLabel());
 		Iterator it = startNode.getEdges();

@@ -1,4 +1,4 @@
-/* $Id: KermetaClassGraphBuilder.java,v 1.7 2006-01-10 22:50:42 dvojtise Exp $
+/* $Id: KermetaClassGraphBuilder.java,v 1.8 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -30,6 +30,7 @@ import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
@@ -57,8 +58,8 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 		mustStop =  false;
 		if(kunit == null) return;
 		
-		System.err.println("buildGraph: "+kunit.getUri());
-		Arrow.init(20, 0.5);
+		TouchNavigatorPlugin.internalLog.debug("buildGraph: "+kunit.getUri());
+		//Arrow.init(18, 0.5);
 		
 		tgPanel.getLocalityUtils().fastFinishAnimation();
 		//if(kunit == null) return;

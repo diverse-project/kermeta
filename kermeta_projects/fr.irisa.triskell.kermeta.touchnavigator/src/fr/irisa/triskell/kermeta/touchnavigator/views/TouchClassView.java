@@ -1,45 +1,51 @@
+/* $Id: TouchClassView.java,v 1.1 2006-01-27 19:41:22 dvojtise Exp $
+ * Project : fr.irisa.triskell.kermeta.touchnavigator
+ * File : TouchClassView.java
+ * License : GPL
+ * Copyright : IRISA / INRIA/ Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : 26 nov. 2005
+ * Authors : 
+ *     	dvojtise <dvojtise@irisa.fr>
+ */
 package fr.irisa.triskell.kermeta.touchnavigator.views;
 
 
 import java.awt.Color;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.part.*;
-import org.eclipse.jface.viewers.*;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.IToolBarManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.jface.action.*;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.ui.*;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.SWT;
-
-import com.touchgraph.graphlayout.GLPanel;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IActionBars;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IWorkbenchActionConstants;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.ViewPart;
 
 import fr.irisa.triskell.kermeta.touchnavigator.actions.ConfigureAction;
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.KermetaGLPanel;
+import fr.irisa.triskell.utils.BooleanLock;
 
 
 /**
- * This sample class demonstrates how to plug-in a new
- * workbench view. The view shows data obtained from the
- * model. The sample creates a dummy model on the fly,
- * but a real implementation would connect to the model
- * available either in this or another plug-in (e.g. the workspace).
- * The view is connected to the model using a content provider.
- * <p>
- * The view uses a label provider to define how model
- * objects should be presented in the view. Each
- * view can present the same model objects using
- * different labels and icons, if needed. Alternatively,
- * a single label provider can be shared between views
- * in order to ensure that objects of the same type are
- * presented in the same way everywhere.
- * <p>
+ * This is a workbench view for the  Class TouchNavigator.
+ * It uses the SWT_AWT component to make the link to the touchgraph library
  */
 
-public class TouchView extends ViewPart {
+public class TouchClassView extends ViewPart {
 	//private TableViewer viewer;
 	private java.awt.Frame touchviewer;
 	private Shell shell;
@@ -47,10 +53,15 @@ public class TouchView extends ViewPart {
 	private Action actionForward;
 	private Action actionConfigure;
 	private Action actionAbout;
+	@SuppressWarnings("unused")
 	private Action doubleClickAction;
 	
 	private KermetaGLPanel kGLPanel;
 
+
+	/** indicates that the View has been successfully initialized */
+	public static BooleanLock readyLock = new BooleanLock(true);
+	
 	/*
 	 * The content provider class is responsible for
 	 * providing objects to the view. It can wrap
@@ -86,7 +97,7 @@ public class TouchView extends ViewPart {
 	/**
 	 * The constructor.
 	 */
-	public TouchView() {
+	public TouchClassView() {
 	}
 
 	/**
@@ -100,15 +111,13 @@ public class TouchView extends ViewPart {
 		viewer.setSorter(new NameSorter());
 		viewer.setInput(getViewSite());
 		*/
+		readyLock.setValue(false);
 		Composite composite = new Composite(parent, SWT.EMBEDDED);
 		shell = composite.getShell();
 		touchviewer = SWT_AWT.new_Frame(composite);		
 		try {
 			Thread.sleep(1500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (InterruptedException e) {}
 		java.awt.Color c = new Color(parent.getBackground().getRed(), parent.getBackground().getGreen(), parent.getBackground().getBlue());
 		kGLPanel = new KermetaGLPanel(c);
 		touchviewer.add(kGLPanel);
@@ -117,6 +126,7 @@ public class TouchView extends ViewPart {
 		hookContextMenu();
 		hookDoubleClickAction();
 		contributeToActionBars();
+		readyLock.setValue(true);
 	}
 
 	private void hookContextMenu() {
@@ -124,7 +134,7 @@ public class TouchView extends ViewPart {
 		menuMgr.setRemoveAllWhenShown(true);
 		menuMgr.addMenuListener(new IMenuListener() {
 			public void menuAboutToShow(IMenuManager manager) {
-				TouchView.this.fillContextMenu(manager);
+				TouchClassView.this.fillContextMenu(manager);
 			}
 		});
 		/*

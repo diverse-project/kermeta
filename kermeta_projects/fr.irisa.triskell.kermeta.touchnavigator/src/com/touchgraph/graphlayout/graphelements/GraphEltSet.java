@@ -63,24 +63,24 @@ import  java.util.Hashtable;
   *
   * @author   Alexander Shapiro
   * @author   Murray Altheim (added support for IDs)
-  * @version  1.21  $Id: GraphEltSet.java,v 1.1 2005-10-24 20:30:03 dvojtise Exp $
+  * @version  1.21  $Id: GraphEltSet.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class GraphEltSet implements ImmutableGraphEltSet {
 
-    protected Vector nodes;
-    protected Vector edges;
+    protected Vector<Node> nodes;
+    protected Vector<Edge> edges;
 
     /** The Hashtable containing references to the Node IDs of the current graph.
       */
-    protected Hashtable nodeIDRegistry = null;
+    protected Hashtable<String,Node> nodeIDRegistry = null;
 
   // ...........
 
     /** Default constructor. */
     public GraphEltSet() {
-        nodes = new Vector();
-        edges = new Vector();
-        nodeIDRegistry = new Hashtable(); // registry of Node IDs
+        nodes = new Vector<Node>();
+        edges = new Vector<Edge>();
+        nodeIDRegistry = new Hashtable<String,Node>(); // registry of Node IDs
     }
 
   // Node manipulation ...........................
@@ -210,8 +210,8 @@ public class GraphEltSet implements ImmutableGraphEltSet {
 
    /** Return a Collection of all Nodes whose label matches the String <tt>label</tt>, 
      * null if no match is found. */
-    public Collection findNodesByLabel( String label ) {
-        Vector nodelist = new Vector();
+    public Collection<Node> findNodesByLabel( String label ) {
+        Vector<Node> nodelist = new Vector<Node>();
         for ( int i = 0 ; i < nodeCount() ; i++) {
             if (nodeAt(i)!=null && nodeAt(i).getLabel().equals(label)) {
                 nodelist.add(nodeAt(i));

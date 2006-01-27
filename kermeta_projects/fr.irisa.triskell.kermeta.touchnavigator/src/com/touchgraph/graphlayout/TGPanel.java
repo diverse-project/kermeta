@@ -71,13 +71,15 @@ import  java.util.*;
   *
   * @author   Alexander Shapiro
   * @author   Murray Altheim  (2001-11-06; 2002-01-14 cleanup)
-  * @version  1.21  $Id: TGPanel.java,v 1.5 2006-01-10 22:49:47 dvojtise Exp $
+  * @version  1.21  $Id: TGPanel.java,v 1.6 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class TGPanel extends JPanel {
 
   // static variables for use within the package
   
-    public static Color BACK_COLOR = Color.white;
+	private static final long serialVersionUID = 8659413692991028420L;
+
+	public static Color BACK_COLOR = Color.white;
 
   // ....
 
@@ -102,8 +104,8 @@ public class TGPanel extends JPanel {
     Dimension offscreensize;
     Graphics offgraphics;
 
-    private Vector graphListeners;
-    private Vector paintListeners;
+    private Vector<GraphListener> graphListeners;
+    private Vector<TGPaintListener> paintListeners;
     TGLensSet tgLensSet;  // Converts between a nodes visual position (drawx, drawy),
                           // and its absolute position (x,y).
     AdjustOriginLens adjustOriginLens;
@@ -122,8 +124,8 @@ public class TGPanel extends JPanel {
         basicMML = new BasicMouseMotionListener();
         addMouseMotionListener(basicMML);
 
-        graphListeners=new Vector();
-        paintListeners=new Vector();
+        graphListeners=new Vector<GraphListener>();
+        paintListeners=new Vector<TGPaintListener>();
 
         adjustOriginLens = new AdjustOriginLens();
         switchSelectUI = new SwitchSelectUI();
@@ -306,7 +308,7 @@ public class TGPanel extends JPanel {
     public synchronized void setMouseOverN( Node node ) {
         if ( dragNode != null || maintainMouseOver ) return;  // So you don't accidentally switch nodes while dragging
         if ( mouseOverN != node ) {
-            Node oldMouseOverN = mouseOverN;
+            //Node oldMouseOverN = mouseOverN;
             mouseOverN=node;
         }
     }
@@ -373,7 +375,7 @@ public class TGPanel extends JPanel {
     public synchronized void setMouseOverE( Edge edge ) {
         if ( dragNode != null || maintainMouseOver ) return; // No funny business while dragging
         if ( mouseOverE != edge ) {
-            Edge oldMouseOverE = mouseOverE;
+            //Edge oldMouseOverE = mouseOverE;
             mouseOverE = edge;
         }
     }
@@ -484,7 +486,7 @@ public class TGPanel extends JPanel {
         if ( from.y > to.y ) { maxY = from.y; minY = to.y; }
         else                 { minY = from.y; maxY = to.y; }
 
-        final Vector selectedNodes = new Vector();
+        final Vector<Node> selectedNodes = new Vector<Node>();
 
         TGForEachNode fen = new TGForEachNode() {
             public void forEachNode( Node node ) {
@@ -604,7 +606,7 @@ public class TGPanel extends JPanel {
             mousePos = e.getPoint();
             findMouseOver();
             try {
-                Thread.currentThread().sleep(6); //An attempt to make the cursor flicker less
+                Thread.sleep(6); //An attempt to make the cursor flicker less
             } catch (InterruptedException ex) {
                 //break;
             }
@@ -840,7 +842,7 @@ public class TGPanel extends JPanel {
 		if(previousGESsize != this.getGES().nodeCount()) needcalcul = true;
 		
 		if(needcalcul){
-			 System.err.println("color updated");  	
+			 //System.err.println("color updated");  	
 	    	 TGForEachNode fen = new TGForEachNode() {
 	    		private int moy(int v1, int v2, int r){
 	    			int i = v1  -((v1-v2)/currentRadius)*r;
@@ -896,7 +898,7 @@ public class TGPanel extends JPanel {
         offgraphics.fillRect(0, 0, d.width, d.height);
 
         synchronized(this) {
-            paintListeners = (Vector)paintListeners.clone();
+            paintListeners = (Vector<TGPaintListener>)paintListeners.clone();
         }
 
         for ( int i = 0; i < paintListeners.size(); i++ ) {

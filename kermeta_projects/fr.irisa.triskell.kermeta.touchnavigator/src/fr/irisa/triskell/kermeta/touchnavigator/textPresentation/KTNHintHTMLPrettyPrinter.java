@@ -1,4 +1,4 @@
-/* $Id: KTNHintHTMLPrettyPrinter.java,v 1.2 2006-01-05 22:31:06 dvojtise Exp $
+/* $Id: KTNHintHTMLPrettyPrinter.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -18,11 +18,7 @@ import java.util.Vector;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EObjectEList;
-
-import sun.security.krb5.internal.crypto.n;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.structure.FClass;
@@ -85,7 +81,7 @@ public class KTNHintHTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 			Vector<String> knowOperationNames = new Vector<String>();
 
 			// fill the knownOperationName list with those of the current node we don't care of the resulting list 
-			EList e = getOperationsNotIn(node, knowOperationNames);
+			// EList e = getOperationsNotIn(node, knowOperationNames);
 			if(!classFlat)
 			{ // shows only the the directly inherited classes
 

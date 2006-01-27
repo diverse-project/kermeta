@@ -66,7 +66,7 @@ import  javax.swing.*;
   * the user interacts with the drawn coordinates.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: HVScroll.java,v 1.1 2005-10-24 20:29:55 dvojtise Exp $
+  * @version  1.21  $Id: HVScroll.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class HVScroll implements GraphListener {
 
@@ -179,7 +179,9 @@ public class HVScroll implements GraphListener {
     }
 
     class DScrollbar extends JScrollBar {
-        private double doubleValue;
+        
+		private static final long serialVersionUID = -7831611860976424452L;
+		private double doubleValue;
 
         DScrollbar(int orient, int val, int vis, int min, int max){
             super(orient, val, vis, min, max);
@@ -311,7 +313,7 @@ public class HVScroll implements GraphListener {
                     scrollAtoB(new TGPoint2D(midfx,midfy), new TGPoint2D(midtx,midty));
                     tgPanel.repaintAfterMove();
                     try {
-                           Thread.currentThread().sleep(50);
+                           Thread.sleep(50);
                     } catch (InterruptedException ex) {    }
                 }
                 scrollAtoB(new TGPoint2D(n.drawx,n.drawy),getDrawCenter()); //for good measure

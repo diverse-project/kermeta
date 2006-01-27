@@ -49,14 +49,13 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import com.touchgraph.graphlayout.*;
 
 /**  TGSelfDeactivatingUI:  A UI that can deactivate itself once its
   *     task is performed.  For instance a dragUI can deactivate itself after
   *  the mouse is released.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGSelfDeactivatingUI.java,v 1.1 2005-10-24 20:29:54 dvojtise Exp $
+  * @version  1.21  $Id: TGSelfDeactivatingUI.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public abstract class TGSelfDeactivatingUI extends TGUserInterface {
 

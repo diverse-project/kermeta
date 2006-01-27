@@ -49,18 +49,23 @@
 
 package com.touchgraph.graphlayout;
 
-import  java.applet.*;
-import  java.awt.BorderLayout;
-import  javax.swing.JApplet;
+import java.awt.BorderLayout;
+
+import javax.swing.JApplet;
 
 /**  GraphLayoutApplet.  
   *
   * @author   Alexander Shapiro                                        
-  * @version  1.21  $Id: GraphLayoutApplet.java,v 1.1 2005-10-24 20:29:59 dvojtise Exp $
+  * @version  1.21  $Id: GraphLayoutApplet.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class GraphLayoutApplet extends JApplet {
 
-    public String getAppletInfo()
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 551651222050437518L;
+
+	public String getAppletInfo()
     {
         String s = "";
         s += "*******************************************************************\n";

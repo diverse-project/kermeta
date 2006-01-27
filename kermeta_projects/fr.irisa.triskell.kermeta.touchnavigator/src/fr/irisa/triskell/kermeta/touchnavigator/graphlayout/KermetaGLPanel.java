@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.10 2006-01-05 22:31:06 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.11 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -13,35 +13,21 @@ package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
 import java.awt.Color;
 import java.util.Collection;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.widgets.Shell;
 
 import com.touchgraph.graphlayout.GLPanel;
-import com.touchgraph.graphlayout.LocalityUtils;
 import com.touchgraph.graphlayout.Node;
 import com.touchgraph.graphlayout.TGException;
-import com.touchgraph.graphlayout.TGLensSet;
-import com.touchgraph.graphlayout.TGPanel;
-import com.touchgraph.graphlayout.interaction.GLEditUI;
 import com.touchgraph.graphlayout.interaction.GLNavigateUI;
-import com.touchgraph.graphlayout.interaction.HVScroll;
-import com.touchgraph.graphlayout.interaction.LocalityScroll;
-import com.touchgraph.graphlayout.interaction.RotateScroll;
 import com.touchgraph.graphlayout.interaction.TGUIManager;
-import com.touchgraph.graphlayout.interaction.ZoomScroll;
 
 import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FPackage;
@@ -52,8 +38,7 @@ import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.interaction.KermetaGLNavigateUI;
 import fr.irisa.triskell.kermeta.touchnavigator.textPresentation.KTNHintHTMLPrettyPrinter;
-import fr.irisa.triskell.kermeta.typechecker.SimpleType;
-import fr.irisa.triskell.kermeta.typechecker.Type;
+import fr.irisa.triskell.kermeta.touchnavigator.views.TouchClassView;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.utils.BooleanLock;
 
@@ -108,7 +93,7 @@ public class KermetaGLPanel extends GLPanel
         addUIs();
         TexteditorPlugin.getDefault().registerListener(this);
 
-		System.err.println("initializing: " );
+        TouchNavigatorPlugin.internalLog.debug("TouchGraph panel initializing");
         buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
         buildKermetaClassGraphThread.setName("BuildKermetaClassGraphThread");
         buildKermetaClassGraphThread.start();
@@ -123,6 +108,7 @@ public class KermetaGLPanel extends GLPanel
         }
         tgPanel.setSelect(tgPanel.getGES().getFirstNode()); //Select first node, so hiding works
         setVisible(true);*/
+        TouchNavigatorPlugin.internalLog.debug("TouchGraph panel initialized");
     }
 
     public void addUIs() {
@@ -241,7 +227,13 @@ public class KermetaGLPanel extends GLPanel
 			}*/
 		}
 		public void run() { 
-			System.err.println("BuildKermetaClassGraphThread start");
+			try {
+				TouchClassView.readyLock.waitUntilTrue(2000);
+			} catch (InterruptedException e1) {}
+			TouchNavigatorPlugin.internalLog.debug("BuildKermetaClassGraphThread start");
+			
+			
+			yield();yield();yield();yield();
 			readyLock.setValue(false);
 			mustStop = false;
 			KermetaGLPanel.this.tgPanel.getLocalityUtils().fastFinishAnimation();
@@ -269,7 +261,7 @@ public class KermetaGLPanel extends GLPanel
 					}
 				nbtries++;
 
-				System.err.println("  try "+nbtries);
+				TouchNavigatorPlugin.internalLog.debug("  try "+nbtries);
 			}
 			try {
 				KermetaUnit k = currentEditor.getMcunit();
@@ -278,17 +270,17 @@ public class KermetaGLPanel extends GLPanel
 					Thread.sleep(10);
 					nbtry++;
 				}
-				System.err.println("unit is checked : go ! nbtry=" + nbtry);
+				TouchNavigatorPlugin.internalLog.debug("unit is checked : go ! nbtry=" + nbtry);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.err.println("BuildKermetaClassGraphThread start2");
+			TouchNavigatorPlugin.internalLog.debug("BuildKermetaClassGraphThread start2");
 			if(clasDef == null) {
 				readyLock.setValue(true);
-				System.err.println("BuildKermetaClassGraphThread ends because clasDef is null");
+				TouchNavigatorPlugin.internalLog.debug("BuildKermetaClassGraphThread ends because clasDef is null");
 				return;
 			}
-			System.err.println(clasDef.getFName());  
+			TouchNavigatorPlugin.internalLog.debug(clasDef.getFName());  
 			yield();
 			
 			KermetaGLPanel.this.tgPanel.tgLayout.stopDamper(); // do not damp while building the model
@@ -300,27 +292,27 @@ public class KermetaGLPanel extends GLPanel
 			yield();yield();yield();yield();
 			
 
-			System.err.println("BuildKermetaClassGraphThread start3");
+			TouchNavigatorPlugin.internalLog.debug("BuildKermetaClassGraphThread start3");
 			// make sure no other thread of touchgrapch is running
             //synchronized (KermetaGLPanel.this.tgPanel.getLocalityUtils()) {
             	//setVisible(false);
             	try {
-            		String msg = "Nb nodes(1): "+KermetaGLPanel.this.tgPanel.getNodeCount();
-            		System.err.println(msg);
+            		//String msg = "Nb nodes(1): "+KermetaGLPanel.this.tgPanel.getNodeCount();
+            		//System.err.println(msg);
             		KermetaGLPanel.this.tgPanel.clearAll();
                     KermetaGLPanel.this.tgPanel.tgLayout.resetDamper();
         			yield();yield();yield();yield();
-            		msg = "Nb nodes(2): "+KermetaGLPanel.this.tgPanel.getNodeCount();
-            		System.err.println(msg);
+            		//msg = "Nb nodes(2): "+KermetaGLPanel.this.tgPanel.getNodeCount();
+            		//System.err.println(msg);
             		kcGraphBuilder = new KermetaClassGraphBuilder(tgPanel, clasDef);
-            		System.err.println("kcGraphBuilder = "+kcGraphBuilder);
-            		System.err.println("currentEditor = "+currentEditor);
+            		//System.err.println("kcGraphBuilder = "+kcGraphBuilder);
+            		//System.err.println("currentEditor = "+currentEditor);
             		kcGraphBuilder.buildGraph(currentEditor.getMcunit());
-                	msg = "Nb nodes(3): "+KermetaGLPanel.this.tgPanel.getNodeCount();
-            		System.err.println(msg);
+                	String msg = "Nb nodes(3): "+KermetaGLPanel.this.tgPanel.getNodeCount();
+                	TouchNavigatorPlugin.internalLog.debug(msg);
                 	
             		if (mustStop){ 
-            			System.err.println("BuildKermetaClassGraphThread stopped");
+            			System.err.println("BuildKermetaClassGraphThread stopped by muststop");
             			readyLock.setValue(true);
             			/*synchronized (building){
             				building = Boolean.FALSE;
@@ -336,7 +328,7 @@ public class KermetaGLPanel extends GLPanel
 	                
 	                //FClassDefinition clasDef = findAClassInUnit();
 	                //clasDef = kunit.get_ROOT_TYPE_ClassDefinition(); // return Object all the time
-	                System.err.println(KMTHelper.getQualifiedName(clasDef));
+	                //System.err.println(KMTHelper.getQualifiedName(clasDef));
 	                Collection nodes = tgPanel.getGES().findNodesByLabel(KMTHelper.getQualifiedName(clasDef));
 	                Node node= null;
 	                if (nodes != null)
@@ -374,7 +366,7 @@ public class KermetaGLPanel extends GLPanel
             KermetaGLPanel.this.tgPanel.tgLayout.resetDamper();
             yield();
             
-    		System.err.println("BuildKermetaClassGraphThread end");
+            TouchNavigatorPlugin.internalLog.debug("BuildKermetaClassGraphThread end");
     		/*synchronized (building){
 				building = Boolean.FALSE;
 				building.notify();
@@ -390,7 +382,7 @@ public class KermetaGLPanel extends GLPanel
 	{
 		if(currentEditor == null){
 			currentEditor =TexteditorPlugin.getDefault().getEditor();
-			System.err.println(" findAClassInUnit setting currentEditor to "+currentEditor);
+			TouchNavigatorPlugin.internalLog.debug(" findAClassInUnit setting currentEditor to "+currentEditor);
 		}
 		if(currentEditor ==null) return null;
         KermetaUnit kunit = currentEditor.getMcunit();

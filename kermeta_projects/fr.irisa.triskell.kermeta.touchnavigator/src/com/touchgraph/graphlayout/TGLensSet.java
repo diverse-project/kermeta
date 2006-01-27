@@ -55,11 +55,11 @@ import  java.util.Vector;
   *              warps 2D space.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGLensSet.java,v 1.1 2005-10-24 20:29:58 dvojtise Exp $
+  * @version  1.21  $Id: TGLensSet.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class TGLensSet {
 
-    Vector lenses=new Vector();
+    Vector<TGAbstractLens> lenses=new Vector<TGAbstractLens>();
 
     public void addLens( TGAbstractLens l ) {
         lenses.addElement(l);

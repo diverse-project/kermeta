@@ -49,11 +49,6 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import com.touchgraph.graphlayout.*;
-
-import  java.awt.*;
-import  java.awt.event.*;
-import  java.util.Vector;
 
 /** TGUserInterface.  A user interface that can be activated or deactivated,
   * much like a listener can be added or removed.
@@ -63,7 +58,7 @@ import  java.util.Vector;
   * TGUserInterface must call super.deactivate() if they override this method.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGUserInterface.java,v 1.1 2005-10-24 20:29:54 dvojtise Exp $
+  * @version  1.21  $Id: TGUserInterface.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public abstract class TGUserInterface {
 

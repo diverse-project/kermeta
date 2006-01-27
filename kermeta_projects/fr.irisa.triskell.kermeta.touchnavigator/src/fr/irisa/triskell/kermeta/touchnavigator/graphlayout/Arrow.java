@@ -1,4 +1,4 @@
-/* $Id: Arrow.java,v 1.2 2006-01-10 22:50:42 dvojtise Exp $
+/* $Id: Arrow.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : Arrow.java
  * License : EPL
@@ -68,6 +68,12 @@ public class Arrow {
     public static void init(int newarrowLength, double newarrowAngle) {
     	arrowLength = newarrowLength;
     	arrowAngle = newarrowAngle;
+    	if (arrowAngle >= 0.8) {
+            arrowAngle = 0.7;
+        }
+    	if (arrowAngle <= 0) {
+            arrowAngle = 0.1;
+        }
     }
 
     public static void swapDrawArrows() {

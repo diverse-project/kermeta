@@ -49,11 +49,9 @@
 
 package com.touchgraph.graphlayout.graphelements;
 
-import  com.touchgraph.graphlayout.Node;
-import  com.touchgraph.graphlayout.Edge;
-import  com.touchgraph.graphlayout.TGException;
-
-import  java.util.Vector;
+import com.touchgraph.graphlayout.Edge;
+import com.touchgraph.graphlayout.Node;
+import com.touchgraph.graphlayout.TGException;
 
 /**  VisibleLocality:  Extends Locality to spefically handle the 
   *  Nodes + Edges that are visible on screen.  The visible attribute
@@ -65,7 +63,7 @@ import  java.util.Vector;
   *
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: VisibleLocality.java,v 1.1 2005-10-24 20:30:04 dvojtise Exp $
+  * @version  1.21  $Id: VisibleLocality.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class VisibleLocality extends Locality {
 

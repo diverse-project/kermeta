@@ -53,11 +53,13 @@ package com.touchgraph.graphlayout;
   *
   * @author   Alexander Shapiro
   * @author   Murray Altheim
-  * @version  1.21  $Id: TGException.java,v 1.1 2005-10-24 20:30:00 dvojtise Exp $
+  * @version  1.21  $Id: TGException.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class TGException extends Exception {
 
-    /** An exception occurring when a Node already exists. */
+	private static final long serialVersionUID = -7239497946206706221L;
+
+	/** An exception occurring when a Node already exists. */
     public final static int NODE_EXISTS       = 1;
 
     /** An exception occurring when a Node doesn't exist. */

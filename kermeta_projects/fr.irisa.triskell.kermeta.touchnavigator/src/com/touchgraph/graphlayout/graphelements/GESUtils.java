@@ -49,16 +49,17 @@
 
 package com.touchgraph.graphlayout.graphelements;
 
-import  com.touchgraph.graphlayout.Node;
-import  com.touchgraph.graphlayout.Edge;
-import  com.touchgraph.graphlayout.TGException;
+import java.util.Collection;
+import java.util.Hashtable;
+import java.util.Vector;
 
-import  java.util.*;
+import com.touchgraph.graphlayout.Edge;
+import com.touchgraph.graphlayout.Node;
 
 /** GESUtils is a set of functions that return information about a GraphEltSet 
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: GESUtils.java,v 1.2 2005-11-27 19:46:04 dvojtise Exp $
+  * @version  1.21  $Id: GESUtils.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class GESUtils {
     
@@ -76,7 +77,7 @@ public class GESUtils {
     public static Hashtable calculateDistances(GraphEltSet ges, Node focusNode, int radius, 
                                                int maxAddEdgeCount, int maxExpandEdgeCount, 
                                                boolean unidirectional ) {
-        Hashtable distHash = new Hashtable();
+        Hashtable<Node,Integer> distHash = new Hashtable<Node,Integer>();
         distHash.put(focusNode,new Integer(0));
 
         TGNodeQueue nodeQ = new TGNodeQueue();
@@ -117,7 +118,7 @@ public class GESUtils {
         int nodeCount = ges.nodeCount();
         if(nodeCount==0) return null;
         
-        Vector subgraphVector = new Vector();
+        Vector<Collection> subgraphVector = new Vector<Collection>();
         for(int i=0; i<nodeCount; i++) {
             Node n = ges.nodeAt(i);
             boolean skipNode=false;

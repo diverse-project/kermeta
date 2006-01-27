@@ -49,16 +49,17 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
-import  java.awt.*;
-import  java.awt.event.*;
+import com.touchgraph.graphlayout.TGPanel;
 
 /** TGAbstractDragUI allows one to write user interfaces that handle
   * what happends when a mouse is pressed, dragged, and released.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGAbstractDragUI.java,v 1.1 2005-10-24 20:29:57 dvojtise Exp $
+  * @version  1.21  $Id: TGAbstractDragUI.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public abstract class TGAbstractDragUI extends TGSelfDeactivatingUI {
 

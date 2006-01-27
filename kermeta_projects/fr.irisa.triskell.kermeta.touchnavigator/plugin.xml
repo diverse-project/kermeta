@@ -12,7 +12,7 @@
             name="Kermeta TouchNavigator View"
             icon="icons/sample.gif"
             category="fr.irisa.triskell.kermeta.touchnavigator"
-            class="fr.irisa.triskell.kermeta.touchnavigator.views.TouchView"
+            class="fr.irisa.triskell.kermeta.touchnavigator.views.TouchClassView"
             id="fr.irisa.triskell.kermeta.touchnavigator.views.TouchView">
       </view>
    </extension>

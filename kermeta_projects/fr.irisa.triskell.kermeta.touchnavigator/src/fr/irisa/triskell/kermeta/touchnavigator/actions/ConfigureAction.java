@@ -1,4 +1,4 @@
-/* $Id: ConfigureAction.java,v 1.2 2005-12-31 09:58:03 dvojtise Exp $
+/* $Id: ConfigureAction.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : ConfigureAction.java
  * License : EPL
@@ -13,10 +13,7 @@ package fr.irisa.triskell.kermeta.touchnavigator.actions;
 import java.awt.Color;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Shell;
 

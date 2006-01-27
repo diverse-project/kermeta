@@ -60,7 +60,7 @@ import  javax.swing.*;
   * lenses above the current one need to be added to TGLensSet to solve this problem.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: RotateScroll.java,v 1.1 2005-10-24 20:29:58 dvojtise Exp $
+  * @version  1.21  $Id: RotateScroll.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class RotateScroll implements GraphListener {
 
@@ -117,7 +117,9 @@ public class RotateScroll implements GraphListener {
     }
 
     class DScrollBar extends JScrollBar {
-        private double doubleValue;
+       
+		private static final long serialVersionUID = 3487824152533709855L;
+		private double doubleValue;
 
         DScrollBar(int orient, int val, int vis, int min, int max){
             super(orient, val, vis, min, max);

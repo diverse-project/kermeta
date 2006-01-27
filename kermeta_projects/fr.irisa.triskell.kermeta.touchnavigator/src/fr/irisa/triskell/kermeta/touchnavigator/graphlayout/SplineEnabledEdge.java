@@ -1,4 +1,4 @@
-/* $Id: SplineEnabledEdge.java,v 1.1 2005-12-05 19:14:30 dvojtise Exp $
+/* $Id: SplineEnabledEdge.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : InheritanceEdge.java
  * License : EPL
@@ -14,7 +14,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.geom.*;
 import java.util.ArrayList;
 
 import com.touchgraph.graphlayout.Edge;
@@ -44,7 +43,7 @@ public class SplineEnabledEdge extends Edge {
 			g.setColor(c);
 			// draw the spline from this
 			// other edge of the spline will not paint themselves
-			ArrayList a = new ArrayList();
+			ArrayList<Point> a = new ArrayList<Point>();
 			processForwardEdge(g,tgPanel,a);
 			a.add(new Point((int)from.drawx, (int)from.drawy));	
 			
@@ -87,7 +86,7 @@ public class SplineEnabledEdge extends Edge {
 		}
     }
 
-	private void processNext(Graphics g, TGPanel tgPanel, TGPanelHelper tgpHelper, ArrayList a, Node node) {
+	private void processNext(Graphics g, TGPanel tgPanel, TGPanelHelper tgpHelper, ArrayList<Point> a, Node node) {
 		SplineEnabledEdge e2 = (SplineEnabledEdge)tgpHelper.findFirstOtherEdge(node,this);
 		Node nextNode = e2.getOtherEndpt(to);
 		if(!nextNode.isVisible()) return;
@@ -110,7 +109,7 @@ public class SplineEnabledEdge extends Edge {
 		else return false;
 	}
 	
-	public void processForwardEdge(Graphics g, TGPanel tgPanel, ArrayList pointList){
+	public void processForwardEdge(Graphics g, TGPanel tgPanel, ArrayList<Point> pointList){
 		if(hasFromConnector()){
 			Point connectorPoint = drawFromConnector(g, tgPanel);
 			pointList.add(connectorPoint);
@@ -135,7 +134,7 @@ public class SplineEnabledEdge extends Edge {
 			pointList.add(new Point((int)to.drawx, (int)to.drawy));
 		}
 	}
-	private void processBackwardEdge(Graphics g, TGPanel tgPanel, ArrayList pointList){
+	private void processBackwardEdge(Graphics g, TGPanel tgPanel, ArrayList<Point> pointList){
 
 		if(hasToConnector()){
 			Point connectorPoint = drawToConnector(g, tgPanel);
@@ -183,8 +182,8 @@ public class SplineEnabledEdge extends Edge {
 		else return false;
 	}
 	
-	public ArrayList cleanArray(ArrayList array){
-		ArrayList result = new ArrayList();
+	public ArrayList<Point> cleanArray(ArrayList<Point> array){
+		ArrayList<Point> result = new ArrayList<Point>();
 		for(int i = 0; i < array.size(); i++){
 			boolean alreadyThere = false;
 			for(int j = 0; j < result.size(); j++)

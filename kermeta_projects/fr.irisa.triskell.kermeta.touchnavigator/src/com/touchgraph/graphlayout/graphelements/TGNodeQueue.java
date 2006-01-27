@@ -57,14 +57,14 @@ import  java.util.Vector;
   * first search.  Should probably be implemented with linked lists.
   *   
   * @author   Alexander Shapiro                                        
-  * @version  1.21  $Id: TGNodeQueue.java,v 1.1 2005-10-24 20:30:03 dvojtise Exp $
+  * @version  1.21  $Id: TGNodeQueue.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class TGNodeQueue {
 
-    Vector queue;
+    Vector<Node> queue;
 
     public TGNodeQueue() {
-        queue=new Vector();
+        queue=new Vector<Node>();
     }
     
     public void push( Node n ) {

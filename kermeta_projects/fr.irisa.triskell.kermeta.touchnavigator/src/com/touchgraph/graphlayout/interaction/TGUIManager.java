@@ -49,29 +49,25 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
-
-import  java.awt.*;
-import  java.awt.event.*;
-import  java.util.Vector;
+import java.util.Vector;
 
 /** TGUIManager switches between major user interfaces, and allows
   * them to be referred to by name.  This will probably come in handy
   * when switching user interfaces from menus.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGUIManager.java,v 1.1 2005-10-24 20:29:56 dvojtise Exp $
+  * @version  1.21  $Id: TGUIManager.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class TGUIManager {
 
-    Vector userInterfaces;
+    Vector<NamedUI> userInterfaces;
 
   // ............
 
    /** Default constructor.
      */
     public TGUIManager() {
-        userInterfaces = new Vector();
+        userInterfaces = new Vector<NamedUI>();
     }
 
     class NamedUI {

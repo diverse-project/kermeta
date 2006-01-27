@@ -49,19 +49,21 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 
-import  java.io.*;
-import  java.util.*;
-import  java.awt.*;
-import  java.applet.*;
-
-import  java.awt.event.*;
+import com.touchgraph.graphlayout.Edge;
+import com.touchgraph.graphlayout.Node;
+import com.touchgraph.graphlayout.TGException;
+import com.touchgraph.graphlayout.TGPaintListener;
+import com.touchgraph.graphlayout.TGPanel;
 
 /**  DragAddUI contains code for adding nodes + edges by dragging.
   *   
   * @author   Alexander Shapiro                                        
-  * @version  1.21  $Id: DragAddUI.java,v 1.1 2005-10-24 20:29:57 dvojtise Exp $
+  * @version  1.21  $Id: DragAddUI.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class DragAddUI extends TGAbstractDragUI implements TGPaintListener {
 

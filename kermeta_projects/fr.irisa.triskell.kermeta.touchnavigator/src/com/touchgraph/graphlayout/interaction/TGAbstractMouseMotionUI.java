@@ -49,16 +49,16 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
-import  java.awt.*;
-import  java.awt.event.*;
+import com.touchgraph.graphlayout.TGPanel;
 
 /** TGAbstractMouseMotionUI allows one to write user interfaces that handle
   * what happends when a mouse is moved over the screen
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGAbstractMouseMotionUI.java,v 1.1 2005-10-24 20:29:53 dvojtise Exp $
+  * @version  1.21  $Id: TGAbstractMouseMotionUI.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public abstract class TGAbstractMouseMotionUI extends TGUserInterface{
 

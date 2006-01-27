@@ -1,4 +1,4 @@
-/* $Id: ConfigurationDialog.java,v 1.2 2005-12-31 09:58:03 dvojtise Exp $
+/* $Id: ConfigurationDialog.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: ConfigurationDialog.java
  * License: GPL
@@ -9,28 +9,13 @@
  */
 package fr.irisa.triskell.kermeta.touchnavigator.dialogs;
 
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.dialogs.InputDialog;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.jface.dialogs.Dialog;
-//import org.eclipse.swt.widgets.Dialog;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
-
-import fr.irisa.triskell.kermeta.loader.ecore.ECore2Kermeta;
 
 /**
  * Dialog that appears when user clics on the popup menu of a .kmt source file

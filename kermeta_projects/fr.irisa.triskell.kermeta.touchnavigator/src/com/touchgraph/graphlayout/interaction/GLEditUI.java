@@ -49,20 +49,33 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
-import  javax.swing.*;
-import  javax.swing.event.*;
-import  java.awt.Font;
-import  java.awt.event.*;
-import  java.applet.*;
-import  java.io.*;
-import  java.util.*;
+import javax.swing.AbstractAction;
+import javax.swing.ComponentInputMap;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.KeyStroke;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+
+import com.touchgraph.graphlayout.Edge;
+import com.touchgraph.graphlayout.GLPanel;
+import com.touchgraph.graphlayout.Node;
+import com.touchgraph.graphlayout.TGException;
+import com.touchgraph.graphlayout.TGPanel;
 
 /** GLEditUI:  User Interface for editing the graph.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: GLEditUI.java,v 1.1 2005-10-24 20:29:53 dvojtise Exp $
+  * @version  1.21  $Id: GLEditUI.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class GLEditUI extends TGUserInterface {
 
@@ -99,7 +112,9 @@ public class GLEditUI extends TGUserInterface {
         mml = new GLEditMouseMotionListener();
 
         deleteSelectAction = new AbstractAction("DeleteSelect") {
-            public void actionPerformed(ActionEvent e) {
+			private static final long serialVersionUID = 1929754737613951432L;
+
+			public void actionPerformed(ActionEvent e) {
                 Node select = tgPanel.getSelect();
                 if(select!=null) {
                     tgPanel.deleteNode(select);
@@ -241,7 +256,7 @@ public class GLEditUI extends TGUserInterface {
         menuItem = new JMenuItem("Hide Node");
         ActionListener hideAction = new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    Node select = tgPanel.getSelect();
+                    //Node select = tgPanel.getSelect();
                     if(popupNode!=null) {
                         tgPanel.hideNode(popupNode);
                     }

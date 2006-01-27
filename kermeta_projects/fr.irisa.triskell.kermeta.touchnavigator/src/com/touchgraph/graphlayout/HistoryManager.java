@@ -1,4 +1,4 @@
-/* $Id: HistoryManager.java,v 1.1 2005-12-18 22:38:37 dvojtise Exp $
+/* $Id: HistoryManager.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : HistoryManager.java
  * License : EPL
@@ -11,11 +11,13 @@
 package com.touchgraph.graphlayout;
 
 import java.util.ArrayList;
-
-public class HistoryManager extends ArrayList{
-    /**
-	 * 
-	 */
+/**
+ * 
+ * @author dvojtise
+ * Manages an history of navigated nodes to be able to go back or forward
+ */
+public class HistoryManager extends ArrayList<Node>{
+    
 	private static final long serialVersionUID = 1L;
 	
 	private int currentPosition = -1;

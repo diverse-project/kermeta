@@ -1,4 +1,4 @@
-/* $Id: InvisibleNode.java,v 1.1 2005-11-27 19:46:03 dvojtise Exp $
+/* $Id: InvisibleNode.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : ClassNode.java
  * License : EPL
@@ -10,7 +10,6 @@
  */
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import com.touchgraph.graphlayout.Node;

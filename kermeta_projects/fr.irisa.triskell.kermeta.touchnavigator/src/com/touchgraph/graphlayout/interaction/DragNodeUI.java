@@ -49,11 +49,11 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 
-import  java.awt.*;
-import  java.applet.*;
-import  java.awt.event.*;
+import com.touchgraph.graphlayout.Node;
+import com.touchgraph.graphlayout.TGPanel;
 
 /** DragNodeUI contains code for dragging nodes.
   *
@@ -63,7 +63,7 @@ import  java.awt.event.*;
   * </b></p>
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: DragNodeUI.java,v 1.1 2005-10-24 20:29:55 dvojtise Exp $
+  * @version  1.21  $Id: DragNodeUI.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class DragNodeUI extends TGAbstractDragUI{
 

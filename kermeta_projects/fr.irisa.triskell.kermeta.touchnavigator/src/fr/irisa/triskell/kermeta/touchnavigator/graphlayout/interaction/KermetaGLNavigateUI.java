@@ -1,4 +1,4 @@
-/* $Id: KermetaGLNavigateUI.java,v 1.2 2006-01-03 22:42:44 dvojtise Exp $
+/* $Id: KermetaGLNavigateUI.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLNavigateUI.java
  * License : GPL
@@ -16,7 +16,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
-import com.touchgraph.graphlayout.interaction.GLEditUI;
 import com.touchgraph.graphlayout.interaction.GLNavigateUI;
 
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.KermetaGLPanel;
@@ -24,7 +23,7 @@ import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.KermetaGLPanel;
 /** KermetaGLNavigateUI:  User Interface for editing the graph.
  *
  * @author   Didier Vojtisek
- * @version  1.21  $Id: KermetaGLNavigateUI.java,v 1.2 2006-01-03 22:42:44 dvojtise Exp $
+ * @version  1.21  $Id: KermetaGLNavigateUI.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
  */
 public class KermetaGLNavigateUI extends GLNavigateUI {
 	

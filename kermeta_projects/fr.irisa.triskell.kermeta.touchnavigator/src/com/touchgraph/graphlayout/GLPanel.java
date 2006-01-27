@@ -49,24 +49,46 @@
 
 package com.touchgraph.graphlayout;
 
-import  com.touchgraph.graphlayout.interaction.*;
-
-import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.KermetaClassGraphBuilder;
-import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.RandomGraphBuilder;
-
-import  java.awt.*;
-import  java.awt.event.*;
-import  javax.swing.*;
-
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Enumeration;
-import  java.util.Hashtable;
+import java.util.Hashtable;
+
+import javax.swing.AbstractAction;
+import javax.swing.ButtonGroup;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollBar;
+
+import com.touchgraph.graphlayout.interaction.GLEditUI;
+import com.touchgraph.graphlayout.interaction.GLNavigateUI;
+import com.touchgraph.graphlayout.interaction.HVScroll;
+import com.touchgraph.graphlayout.interaction.HyperScroll;
+import com.touchgraph.graphlayout.interaction.LocalityScroll;
+import com.touchgraph.graphlayout.interaction.RotateScroll;
+import com.touchgraph.graphlayout.interaction.TGUIManager;
+import com.touchgraph.graphlayout.interaction.ZoomScroll;
 
 /** GLPanel contains code for adding scrollbars and interfaces to the TGPanel
   * The "GL" prefix indicates that this class is GraphLayout specific, and
   * will probably need to be rewritten for other applications.
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: GLPanel.java,v 1.4 2005-12-20 23:03:29 dvojtise Exp $
+  * @version  1.21  $Id: GLPanel.java,v 1.5 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class GLPanel extends JPanel {
 
@@ -85,7 +107,7 @@ public class GLPanel extends JPanel {
     public RotateScroll rotateScroll;
     public LocalityScroll localityScroll;
     public JPopupMenu glPopup;
-    public Hashtable scrollBarHash; //= new Hashtable();
+    public Hashtable<String,JScrollBar> scrollBarHash; //= new Hashtable();
 
     protected TGPanel tgPanel;
     protected TGLensSet tgLensSet;
@@ -99,7 +121,7 @@ public class GLPanel extends JPanel {
    /** Default constructor.
      */
     public GLPanel() {
-        scrollBarHash = new Hashtable();
+        scrollBarHash = new Hashtable<String,JScrollBar>();
         tgLensSet = new TGLensSet();
         tgPanel = new TGPanel();
         hvScroll = new HVScroll(tgPanel, tgLensSet);
@@ -116,7 +138,7 @@ public class GLPanel extends JPanel {
     public GLPanel( Color color ) {
         defaultColor = color;
         this.setBackground(color);
-        scrollBarHash = new Hashtable();
+        scrollBarHash = new Hashtable<String,JScrollBar>();
         tgLensSet = new TGLensSet();
         tgPanel = new TGPanel();
         tgPanel.setBackground(color);
@@ -278,13 +300,17 @@ public class GLPanel extends JPanel {
         modeSelectPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0,0));
 
         AbstractAction navigateAction = new AbstractAction("Navigate") {
-            public void actionPerformed(ActionEvent e) {
+			private static final long serialVersionUID = 8877654792448159227L;
+
+			public void actionPerformed(ActionEvent e) {
                 tgUIManager.activate("Navigate");
             }
         };
 
-        AbstractAction editAction = new AbstractAction("Edit") {
-            public void actionPerformed(ActionEvent e) {
+        AbstractAction editAction = new AbstractAction("Edit") {            
+			private static final long serialVersionUID = 1983114094148831716L;
+
+			public void actionPerformed(ActionEvent e) {
                 tgUIManager.activate("Edit");
             }
         };

@@ -1,4 +1,4 @@
-/* $Id: InheritanceEdge.java,v 1.1 2005-11-27 19:46:03 dvojtise Exp $
+/* $Id: InheritanceEdge.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : InheritanceEdge.java
  * License : EPL
@@ -10,11 +10,10 @@
  */
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.geom.*;
 
 import com.touchgraph.graphlayout.Edge;
 import com.touchgraph.graphlayout.Node;
@@ -59,7 +58,7 @@ public class InheritanceEdge extends Edge {
 	}*/
 	
 	public void paint(Graphics g, TGPanel tgPanel) {
-        Color c = (tgPanel.getMouseOverE()==this) ? MOUSE_OVER_COLOR : col;
+        //Color c = (tgPanel.getMouseOverE()==this) ? MOUSE_OVER_COLOR : col;
 
         int x1=(int) from.drawx;
         int y1=(int) from.drawy;
@@ -67,7 +66,8 @@ public class InheritanceEdge extends Edge {
         int y2=(int) to.drawy;
         if (intersects(tgPanel.getSize())) {
         	Point intersection= Geom.getIntersectionPoint(new Point(x1,y1),
-        			new Rectangle(x2-getTo().getWidth()/2, y2-getTo().getHeight()/2, getTo().getWidth(), getTo().getHeight()));  
+        			new Rectangle(x2-getTo().getWidth()/2, y2-getTo().getHeight()/2, getTo().getWidth(), getTo().getHeight()));
+        	Arrow.init(18,0.5);
         	Point p = Arrow.drawArrow(g, x1, y1, intersection.x, intersection.y, Arrow.TYPE_TRIANGLE_ARROW);
         	if(p != null)
             	g.drawLine(x1, y1, p.x, p.y);

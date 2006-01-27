@@ -49,17 +49,19 @@
 
 package com.touchgraph.graphlayout.interaction;
 
-import  com.touchgraph.graphlayout.*;
- 
-import  java.awt.*;
-import  java.applet.*;
-import  java.awt.event.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+
+import com.touchgraph.graphlayout.TGPaintListener;
+import com.touchgraph.graphlayout.TGPanel;
+import com.touchgraph.graphlayout.TGPoint2D;
 
 /** DragMultiselectUI contains code for selecting a group on nodes
   * by enclosing them in a dotted box.
   *   
   * @author   Alexander Shapiro                                        
-  * @version  1.21  $Id: DragMultiselectUI.java,v 1.1 2005-10-24 20:29:56 dvojtise Exp $
+  * @version  1.21  $Id: DragMultiselectUI.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class DragMultiselectUI extends TGAbstractDragUI implements TGPaintListener {
         

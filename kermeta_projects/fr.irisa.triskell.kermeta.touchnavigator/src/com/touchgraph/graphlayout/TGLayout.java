@@ -70,7 +70,7 @@ import  com.touchgraph.graphlayout.graphelements.*;
   * </b></p>
   *
   * @author   Alexander Shapiro
-  * @version  1.21  $Id: TGLayout.java,v 1.2 2005-12-20 12:19:33 dvojtise Exp $
+  * @version  1.21  $Id: TGLayout.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class TGLayout implements Runnable {
 
@@ -329,7 +329,8 @@ public class TGLayout implements Runnable {
         }
     }
 
-    public void run() {
+    @SuppressWarnings("static-access")
+	public void run() {
         Thread me = Thread.currentThread();
 //      me.setPriority(1);       //Makes standard executable look better, but the applet look worse.
         while (relaxer == me) {

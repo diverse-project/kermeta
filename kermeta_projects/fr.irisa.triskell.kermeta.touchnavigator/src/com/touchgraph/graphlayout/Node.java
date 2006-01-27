@@ -49,21 +49,20 @@
 
 package com.touchgraph.graphlayout;
 
-import  java.awt.Color;
-import  java.awt.Dimension;
-import  java.awt.Point;
-import  java.awt.Font;
-import  java.awt.FontMetrics;
-import  java.awt.Graphics;
-import  java.util.Date;
-import  java.util.Vector;
-import  java.util.Iterator;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.util.Iterator;
+import java.util.Vector;
 
 /**  Node.
   *
   *  @author   Alexander Shapiro
   *  @author   Murray Altheim (2001-11-06; added support for round rects and alternate Node colors)
-  *  @version  1.21  $Id: Node.java,v 1.4 2006-01-10 22:49:29 dvojtise Exp $
+  *  @version  1.21  $Id: Node.java,v 1.5 2006-01-27 19:41:22 dvojtise Exp $
   */
 public class Node {
     
@@ -135,7 +134,7 @@ public class Node {
     public int visibleEdgeCnt; //Should only be modified by graphelements.VisibleLocality
     protected boolean visible;
 
-    private Vector edges;
+    private Vector<Edge> edges;
     
     public boolean ghostNode = false;
 	protected int distToSelection=0;
@@ -189,7 +188,7 @@ public class Node {
 
     private void initialize( String identifier ) {
         this.id = identifier;
-        edges = new Vector();
+        edges = new Vector<Edge>();
         x = Math.random()*2-1; // If multiple nodes are added without repositioning,
         y = Math.random()*2-1; // randomizing starting location causes them to spread out nicely.
         repulsion = 100;

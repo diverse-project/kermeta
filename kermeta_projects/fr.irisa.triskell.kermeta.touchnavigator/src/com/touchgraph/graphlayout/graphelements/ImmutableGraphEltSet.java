@@ -49,19 +49,17 @@
 
 package com.touchgraph.graphlayout.graphelements;
 
-import  com.touchgraph.graphlayout.Node;
-import  com.touchgraph.graphlayout.Edge;
+import java.util.Collection;
+import java.util.Iterator;
 
-import  java.io.Serializable;
-import  java.util.Collection;
-import  java.util.Iterator;
-import  java.util.Vector;
+import com.touchgraph.graphlayout.Edge;
+import com.touchgraph.graphlayout.Node;
 
 /** ImmutableGraphEltSet provides access to the elements of GraphElementSet 
   * that does not allow for addition or deletion of nodes or edges.
   *
   * @author   Alexander Shapiro                                        
-  * @version  1.21  $Id: ImmutableGraphEltSet.java,v 1.1 2005-10-24 20:30:04 dvojtise Exp $
+  * @version  1.21  $Id: ImmutableGraphEltSet.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
   */
 public interface ImmutableGraphEltSet {
 

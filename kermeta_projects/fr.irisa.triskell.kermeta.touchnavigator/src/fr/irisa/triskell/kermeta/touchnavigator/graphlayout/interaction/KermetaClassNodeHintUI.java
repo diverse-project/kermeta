@@ -64,21 +64,23 @@
   */
 
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout.interaction;
-import com.touchgraph.graphlayout.interaction.*;
-import com.touchgraph.graphlayout.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JInternalFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.WindowConstants;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+import javax.swing.text.html.HTMLEditorKit;
+
+import com.touchgraph.graphlayout.interaction.TGAbstractMousePausedUI;
 
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.ClassNode;
 import fr.irisa.triskell.kermeta.touchnavigator.graphlayout.KermetaGLPanel;
- 
-import java.io.*;
-import java.util.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.text.html.*;
-import javax.swing.text.*;
-import java.net.URL;
 
 public class KermetaClassNodeHintUI extends TGAbstractMousePausedUI { 
     
