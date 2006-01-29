@@ -20,7 +20,7 @@
 <xsl:param name="admon.graphics.path">gfx/admonitions/</xsl:param>
 <xsl:param name="admon.graphics.extension">.gif</xsl:param>
 <xsl:param name="admonition.title.properties">text-align: left</xsl:param>
-<xsl:param name="chunk.section.depth" select="2"/>
+<xsl:param name="chunk.section.depth" select="0"/>
 <xsl:param name="chunk.first.sections" select="1"/>
 
 <xsl:param name="chunker.output.encoding">utf-8</xsl:param>
