@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="0.1.0"
+      version="0.1.1"
       provider-name="IRISA/Triskell"
       image="images/kmt_32.gif">
    <install-handler/>
@@ -44,25 +44,32 @@ team at IRISA.
          id="fr.irisa.triskell.kermeta.documentation"
          download-size="4200"
          install-size="4200"
-         version="0.0.7"
+         version="0.0.8"
          unpack="false"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.runner"
          download-size="360"
          install-size="700"
-         version="0.1.0"/>
+         version="0.1.1"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta"
          download-size="2500"
          install-size="4000"
-         version="0.1.0"/>
+         version="0.1.1"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.texteditor"
          download-size="200"
          install-size="1400"
-         version="0.1.0"/>
+         version="0.1.1"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.touchnavigator"
+         download-size="200"
+         install-size="200"
+         version="0.0.1"
+         unpack="false"/>
 
 </feature>
