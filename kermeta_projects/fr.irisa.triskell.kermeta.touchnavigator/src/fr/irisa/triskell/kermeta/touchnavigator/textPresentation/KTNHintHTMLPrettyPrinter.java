@@ -1,4 +1,4 @@
-/* $Id: KTNHintHTMLPrettyPrinter.java,v 1.3 2006-01-27 19:41:22 dvojtise Exp $
+/* $Id: KTNHintHTMLPrettyPrinter.java,v 1.4 2006-01-30 12:43:11 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TNHintHTMLPrettyPrinter.java
  * License : EPL
@@ -140,6 +140,7 @@ public class KTNHintHTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected EList getOperationsNotIn(FClassDefinition node, Vector<String> knownOperationNames)
 	{
 			EList el =  new BasicEList();
@@ -164,7 +165,7 @@ public class KTNHintHTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		if(mainClass){
 			String tags = ppTags(node.getFTag());
 			result = getPrefix() + tags;
-			if(tags.compareTo("")!=0) result += "\n" ;
+			if(tags.length() != 0) result += CR ;
 		}
 		if(!classFlat && currentClassShortLevel < classShortLevel) return result;
 		result += getPrefix();
@@ -224,8 +225,11 @@ public class KTNHintHTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	public String ppSimplifiedFProperty(FProperty node) {
 		//return super.ppSimplifiedFProperty(node);
 		String result = "";
-		if(mainClass)
-			result = ppTags(node.getFTag());
+		if(mainClass){
+			String tags = ppTags(node.getFTag());
+			result = getPrefix() + tags;
+			if(tags.length() != 0) result += CR ;
+		}
 		if (node.isFIsDerived()) result += "<b>property</b> ";
 		else if (node.isFIsComposite()) result += "<b>attribute</b> ";
 		else result += "<b>reference</b> ";
@@ -241,8 +245,12 @@ public class KTNHintHTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	public Object visit(FOperation node) {
 		//return super.visit(node);
 		String result = "";
-		if(mainClass)
-			result = ppTags(node.getFTag());
+		if(mainClass){
+			//result = ppTags(node.getFTag());
+			String tags = ppTags(node.getFTag());
+			result = getPrefix() + tags;
+			if(tags.length() != 0) result += CR ;
+		}
 		if (node.isFIsAbstract()) result += "<b>abstract</b> ";
 		if (node.getFSuperOperation() != null) result += "<b>method</b> ";
 		else result += "<b>operation</b> ";
