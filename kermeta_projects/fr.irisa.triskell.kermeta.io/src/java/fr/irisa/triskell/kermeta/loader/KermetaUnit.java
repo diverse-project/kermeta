@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.47 2005-12-05 09:22:39 ffleurey Exp $
+/* $Id: KermetaUnit.java,v 1.48 2006-01-30 09:47:34 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -120,7 +120,7 @@ public abstract class KermetaUnit {
 	        try {
 	        	
 	            checker.checkUnit();
-	            type_checked = true;
+	            setType_checked(true);
 	            Iterator it = importedUnits.iterator();
 	    		while(it.hasNext()) {
 	    			KermetaUnit u = (KermetaUnit)it.next();
@@ -162,7 +162,7 @@ public abstract class KermetaUnit {
 	        try {
 	        	
 	        	constraint_checker.checkUnit();
-	            constraint_checked = true;
+	            setConstraint_checked(true);
 	            Iterator it = importedUnits.iterator();
 	    		while(it.hasNext()) {
 	    			KermetaUnit u = (KermetaUnit)it.next();
@@ -197,7 +197,7 @@ public abstract class KermetaUnit {
 	        try {
 	        	
 	        	constraint_checker.check();
-	        	cycle_constraint_checked = true;
+	        	setCycle_constraint_checked(true);
 	            return constraint_checker;
 	        }
 	        catch(Throwable t) {
@@ -1226,6 +1226,64 @@ public abstract class KermetaUnit {
     
     /** @return the trace handler */
     public Tracer getTracer() { return tracer; }
+
+
+
+
+	/**
+	 * @return Returns the type_checked.
+	 */
+	synchronized public boolean isType_checked() {
+		return type_checked;
+	}
+
+	/**
+	 * @param type_checked The type_checked to set.
+	 */
+	synchronized public void setType_checked(boolean type_checked) {
+		this.type_checked = type_checked;
+	}
+
+
+
+
+	/**
+	 * @return Returns the constraint_checked.
+	 */
+	public synchronized boolean isConstraint_checked() {
+		return constraint_checked;
+	}
+
+
+
+
+	/**
+	 * @param constraint_checked The constraint_checked to set.
+	 */
+	public synchronized void setConstraint_checked(boolean constraint_checked) {
+		this.constraint_checked = constraint_checked;
+	}
+
+
+
+
+	/**
+	 * @return Returns the cycle_constraint_checked.
+	 */
+	public synchronized boolean isCycle_constraint_checked() {
+		return cycle_constraint_checked;
+	}
+
+
+
+
+	/**
+	 * @param cycle_constraint_checked The cycle_constraint_checked to set.
+	 */
+	public synchronized void setCycle_constraint_checked(
+			boolean cycle_constraint_checked) {
+		this.cycle_constraint_checked = cycle_constraint_checked;
+	}
     
 
     
