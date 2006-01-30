@@ -1,4 +1,4 @@
-/* $Id: TouchClassView.java,v 1.1 2006-01-27 19:41:22 dvojtise Exp $
+/* $Id: TouchClassView.java,v 1.2 2006-01-30 12:44:11 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TouchClassView.java
  * License : GPL
@@ -202,7 +202,7 @@ public class TouchClassView extends ViewPart {
 		
 		actionAbout = new Action() {
 			public void run() {
-				showMessage("Kermeta Class TouchNavigator.\nBased on TouchGraph.");
+				showMessage("Kermeta Class TouchNavigator.\nBased on TouchGraph.\nThis is an alpha version, feel free to comment and suggest improvments in KerMeta bug tracker or on the mailing list.");
 			}
 		};
 		actionAbout.setText("About");
