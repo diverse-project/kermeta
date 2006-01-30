@@ -8,17 +8,22 @@
    <install-handler/>
 
    <description url="http://www.kermeta.org/">
-      Kermeta is an ObjectOriented meta-modeling language developped
-by the Triskell
-team at IRISA.
+      KerMeta is an ObjectOriented meta-modeling language developped
+by the Triskell team at IRISA.
    </description>
 
    <copyright url="http://www.kermeta.org/">
-      Kermeta is distributed under the terms of the EPL licence.
+      KerMeta workbench and most of its plugins are distributed under the terms of the EPL licence.
+Special note:
+KerMeta TouchGraph plugin is distributed under the terms of the
+GPL license.
    </copyright>
 
    <license url="http://www.kermeta.org/">
-      Kermeta is distributed under the terms of the EPL licence.
+      KerMeta workbench and most of its plugins are distributed under the terms of the EPL licence.
+Special note:
+KerMeta TouchGraph plugin is distributed under the terms of the
+GPL license.
    </license>
 
    <url>
