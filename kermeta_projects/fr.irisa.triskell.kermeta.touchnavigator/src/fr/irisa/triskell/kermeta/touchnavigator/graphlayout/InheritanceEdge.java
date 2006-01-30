@@ -1,4 +1,4 @@
-/* $Id: InheritanceEdge.java,v 1.2 2006-01-27 19:41:22 dvojtise Exp $
+/* $Id: InheritanceEdge.java,v 1.3 2006-01-30 12:44:37 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : InheritanceEdge.java
  * License : EPL
@@ -11,6 +11,7 @@
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
 //import java.awt.Color;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -58,8 +59,9 @@ public class InheritanceEdge extends Edge {
 	}*/
 	
 	public void paint(Graphics g, TGPanel tgPanel) {
-        //Color c = (tgPanel.getMouseOverE()==this) ? MOUSE_OVER_COLOR : col;
-
+		Color c = (tgPanel.getMouseOverE()==this) ? MOUSE_OVER_COLOR : col;
+        g.setColor(c);
+        
         int x1=(int) from.drawx;
         int y1=(int) from.drawy;
         int x2=(int) to.drawx;
