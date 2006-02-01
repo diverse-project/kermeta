@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * $Id: kunit.kmt,v 1.11 2005-10-17 13:16:53 zdrey Exp $
+ * $Id: kunit.kmt,v 1.12 2006-02-01 16:17:29 zdrey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -115,13 +115,13 @@ class TestCase inherits Test
 	method run(r : TestResult) : Void is do
 		if (r == void) then r := createDefaultTestResult end
 		r.startTest(self)
-		setUp()
+//		setUp() // this is now put into dynamic expression of runTest method (otherwise not included in dynamic context!)
 		runTest()
+//		tearDown()
 		rescue (e : AssertionFailedError)
 			r.addFailure(self, e)
 		rescue (e : kermeta::exceptions::RuntimeError)
 			r.addError(self, e)
-		tearDown()
 	end
 	
 	
@@ -130,14 +130,17 @@ class TestCase inherits Test
 	 * test to run
 	*/
 	method runTest() : Void is do
-		if self.getMetaClass.classDefinition.ownedOperation.detect { o | o.name == name } == void then
+		if self.getMetaClass.classDefinition.ownedOperation.detect { o | o.name == name } == void 
+		then
 			raise kermeta::exceptions::CallOnVoidTarget.new 
 		else
 			var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new
 			de.initializeDefaults
 			// get self class name
 			var selfClassName : String init self.getMetaClass.classDefinition.qualifiedName
-			de.parse(selfClassName+".new."+name)
+			de.parse(
+				"do var test : " + selfClassName + " init " + selfClassName + ".new\n"
+			+   "test.setUp " +  "\ntest."+name + "\ntest.tearDown end")
 			de.execute(void, Hashtable<String, kermeta::standard::Object>.new)
 		end
 	end	
