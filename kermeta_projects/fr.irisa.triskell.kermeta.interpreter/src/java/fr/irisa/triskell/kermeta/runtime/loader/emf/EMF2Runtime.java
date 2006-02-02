@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.26 2005-11-23 09:48:20 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.27 2006-02-02 15:07:01 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -30,6 +30,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -290,7 +291,6 @@ public class EMF2Runtime {
 	protected void findDependentResources(EList list, Resource resource)
 	{
 		TreeIterator treeIt;
-		ResourceSet rset = resource.getResourceSet();
 		treeIt = resource.getAllContents();
 		while(treeIt.hasNext())
 		{
@@ -312,7 +312,6 @@ public class EMF2Runtime {
 			        {
 			        	//rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
 			        	Iterator it2 = ((EList)fvalue).iterator();
-			    	    int i = 0;
 			    	    // Transform the EObjects into RuntimeObject and add them in our collection
 			    	    while (it2.hasNext())
 			    	    {
@@ -503,8 +502,6 @@ public class EMF2Runtime {
     	{
     		internalLog.warn("The type of <"+fvalue+"> has not been handled yet. Replaced by Void. "+fvalue.getClass());
     		rovalue = rofactory.getMemory().voidINSTANCE;
-    		/*System.err.println("NotImplemented custom Error : The type of <"+fvalue+"> has not been handled yet. "+fvalue.getClass());	
-    		throw new KermetaRaisedException(rovalue, rofactory.getMemory().getCurrentInterpreter());*/
     	}
     	return rovalue;
     }
@@ -535,8 +532,7 @@ public class EMF2Runtime {
 	    {
 	    	// pseudo object to get its type?
 	    	if (FClassDefinition.class.isInstance(etype_cdef))
-	    	{	//etype_fclass = kunit.struct_factory.createFClass();
-		        //etype_fclass.setFClassDefinition((FClassDefinition)etype_cdef);
+	    	{
 		    	ftype = InheritanceSearch.getFClassForClassDefinition((FClassDefinition)etype_cdef);
 	    	}
 	    	// Is it a primitive type?
@@ -544,8 +540,7 @@ public class EMF2Runtime {
 	    	{
 	    	    ftype = ((FPrimitiveType)etype_cdef).getFInstanceType();
 	    	}
-	    }	    
-        // FIXME : it would be better not to create the FClass corresponding to the type every time we need one?
+	    }
         return ftype; 
 	}
 	
@@ -573,130 +568,143 @@ public class EMF2Runtime {
 	    Iterator it = features.iterator();
 	    while (it.hasNext())
 	    {
-	        EStructuralFeature feature = (EStructuralFeature)it.next();
-	        if(!feature.isTransient()) // transient properties cannot be loaded from a file ...
-	        {
-		        RuntimeObjectFactory rofactory = unit.getInstances().getFactory();
-		        String  fname  = feature.getName();
-		        EClassifier etype = feature.getEType();
-		        FType ftype = getMetaClassByName(unit.getEQualifiedName(etype), unit);
-		        FProperty fprop = rofactory.getMemory().getUnit().findPropertyByName(fc.getFClassDefinition(), fname);
-		        RuntimeObject roprop = rofactory.getMemory().getRuntimeObjectForFObject(fprop);
-		        
-		        // Eget can return an elist of features
-		        Object fvalue = eObject.eGet(feature);
-		        RuntimeObject rovalue = null;
-		        
-		        try {
-			        // A feature with multiplicity
-			        if (fvalue instanceof EList)
-			        {
-			        	rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
-			        	
-			        }
-			        // Get the RO-repr of this EObject
-			        else if (fvalue instanceof EObject)
-			        {   
-			        	EObject EOfvalue = (EObject)fvalue;
-			            rovalue = (RuntimeObject)this.runtime_objects_map.get(EOfvalue);
-			            if(rovalue==null)
-			            {
-			            	// troubles in the auto resolve 
-			            	EObject obj = EcoreUtil.resolve(EOfvalue, this.resource_set);
-			            	// 
-			            	if(EOfvalue.eIsProxy() && obj.eIsProxy())
-							{   // ie. was a proxy and the proxy was not resolved
-									String objectURI = EOfvalue.eResource().getURIFragment(EOfvalue);			            	
-									String errmsg = "Not able to resolve proxy for value: " + EOfvalue 
-										+ " for object: "+rObject +" of type: "+etype+
-										"\nTry to load the file containing this URI: "+objectURI;
-									internalLog.error(errmsg);
-									throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-						        		errmsg,
-										interpreter,
-										memory,
-										null);
-							}
-							else
-							{
-								// the feature destination was not in the main resource
-				            	// force emf to load it and retreive it, 
-				            	// create a Runtime object for it
-								//
-			            		// this is in fact too late to create the runtime object for an EObject, !!! 
-			            			// concurrent exception !
-								String objectURI = EOfvalue.eResource().getURIFragment(EOfvalue);
-				            	String errmsg = "Not able to find RuntimeObject in runtime_objects_map for value on type "+etype
-									+"Trying to set "+ EOfvalue+" into "+rObject+
-									"\nBe sure to load the file containing this URI: "+objectURI;
-				            	internalLog.error(errmsg);
-				            	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-						        		errmsg,
-										interpreter,
-										memory,
-										null);
-		            			// RuntimeObject ro = this.setRuntimeObjectForEObject(unit, obj);
-		            			// this.runtime_objects_map.put(obj, ro);
-		            		
-								
-			            	}
-			            }
-			            rObject.getProperties().put(fname, rovalue);
-			            // FIXME the set method needs to be reviewed (for model instances?)
-			            //fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
-			        }
-			        // equiv : fvalue instanceof EString, Eblabla
-			        else if (EDataType.class.isInstance(etype))
-			        {
-			        	rovalue = setRuntimeObjectForPrimitiveTypeValue(unit, fvalue);
-			        	fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
-			        	
-			        }
-			        else if (fvalue == null)
-			        {    
-			            fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop,rObject.getFactory().getMemory().voidINSTANCE);
-			        }
-			        else // Enum?
-			        {
-			        	String errmsg = "NotImplemented Error : The type <"+etype+"> has not been handled yet. Trying to set "+
-											fvalue+" into "+rObject;
-			            internalLog.error(errmsg);       	
-				        throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-				        		errmsg,
-								interpreter,
-								memory,
-								null);
-			        }
-			        // If we instanciated a RuntimeObject value, we can set the properties for the object 
-			        if (fvalue != null)
-			            rovalue.getData().put("emfObject", fvalue);
-		        }
-		        catch (Throwable e){
-		        	if(e instanceof  KermetaRaisedException)
-		        	{
-		        		throw (KermetaRaisedException)e;
-		        	}
-		        	else
-		        	{
-			        	String errmsg = "Exception received. Trying to set " 
-			        		+rObject  + " property: " + fprop +" / " + fname + " with value: "+
-							fvalue;
-			        	internalLog.error(errmsg);
-			        	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-				        		errmsg,
-								interpreter,
-								memory,
-								e);
-		        	}
-		        }
-	        }
+	    	EStructuralFeature feature = (EStructuralFeature)it.next();
+	    	RuntimeObjectFactory rofactory = unit.getInstances().getFactory();
+	    	String  fname  = feature.getName();
+	    	EClassifier etype = feature.getEType();
+	    	FType ftype = getMetaClassByName(unit.getEQualifiedName(etype), unit);
+	    	FProperty fprop = rofactory.getMemory().getUnit().findPropertyByName(fc.getFClassDefinition(), fname);
+	    	RuntimeObject roprop = rofactory.getMemory().getRuntimeObjectForFObject(fprop);
+	    	
+	    	// Eget can return an elist of features
+	    	Object fvalue = eObject.eGet(feature);
+	    	RuntimeObject rovalue = null;
+	    	
+	    	try {
+	    		// A feature with multiplicity
+	    		if (fvalue instanceof EList)
+	    		{
+	    			rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
+	    		}
+	    		// Get the RO-repr of this EObject
+	    		else if (fvalue instanceof EObject)
+	    		{   
+	    			// EFactory is not saved in the model, neither does it refer to a saved element in the model (at the opposite
+	    			// of all the other transient features), so it will not be loaded
+	    			if (!(fvalue instanceof EFactory))
+	    				rovalue = createRuntimeObjectForEObject(rObject, (EObject)fvalue, feature, interpreter, memory);
+	    		}
+	    		// equiv : fvalue instanceof EString, Eblabla
+	    		else if (EDataType.class.isInstance(etype))
+	    		{
+	    			rovalue = setRuntimeObjectForPrimitiveTypeValue(unit, fvalue);
+	    			fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
+	    			
+	    		}
+	    		else if (fvalue == null)
+	    		{    
+	    			fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop,rObject.getFactory().getMemory().voidINSTANCE);
+	    		}
+	    		else // Enum?
+	    		{
+	    			String errmsg = "NotImplemented Error : The type <"+etype+"> has not been handled yet. Trying to set "+
+	    			fvalue+" into "+rObject;
+	    			internalLog.error(errmsg);       	
+	    			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+	    					errmsg,
+	    					interpreter,
+	    					memory,
+	    					null);
+	    		}
+	    		// If we instanciated a RuntimeObject value, we can set the properties for the object
+	    		// reminder : rovalue is null if fvalue was an instance of EFactory
+	    		if (fvalue != null && rovalue != null)
+	    			rovalue.getData().put("emfObject", fvalue);
+	    	}
+	    	catch (Throwable e){
+	    		if(e instanceof  KermetaRaisedException)
+	    		{
+	    			throw (KermetaRaisedException)e;
+	    		}
+	    		else
+	    		{
+	    			String errmsg = "Exception received. Trying to set on " + 
+	    			 	rObject  + " this property: " + fprop +" / " + fname + " with value: "+
+	    				fvalue;
+	    			internalLog.error(errmsg);
+	    			e.printStackTrace();
+	    			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+	    					errmsg,
+	    					interpreter,
+	    					memory,
+	    					e);
+	    		}
+	    	}
 	    } // End of while
 	    // Find the value of the structural features and populate the properties.
 	}
 	
 	/**
+	 * Create a runtime object corresponding to the given fvalue. This <code>fvalue</code> corresponds to a structural feature "extracted" from
+	 * the eObject to which the given Runtime object <code>rObject</code> correspond.
+	 * @param rObject the RuntimeObject that we want to "populate" with the given feature represented by the EObject <code>fvalue</code>
+	 * @param fvalue the [structural] feature that we want to convert in its RuntimeObject representation
+	 * @param fname the name of the fvalue feature (used to store it in the "properties" hashtable of rObject).
+	 * @param etype the type of the feature (only used here to feed a potential KermetaException)
+	 * @param interpreter the ExpressionInterpreter (only used here to report a potential KermetaException)
+	 * @param memory the RuntimeMemory (only used here to feed a potential KermetaException)
+	 * @return the runtime object representation of <code>fvalue</code>
+	 */
+	protected RuntimeObject createRuntimeObjectForEObject(RuntimeObject rObject, EObject fvalue, EStructuralFeature feature, ExpressionInterpreter interpreter, RuntimeMemory memory)
+	{
+		RuntimeObject rovalue = null;
+        rovalue = (RuntimeObject)this.runtime_objects_map.get(fvalue);
+        if(rovalue==null)
+        {
+        	// troubles in the auto resolve 
+        	EObject obj = EcoreUtil.resolve(fvalue, this.resource_set);
+        	if(fvalue.eIsProxy() && obj.eIsProxy())
+			{   	// ie. was a proxy and the proxy was not resolved
+					String objectURI = fvalue.eResource().getURIFragment(fvalue);			            	
+					String errmsg = "Not able to resolve proxy for value: " + fvalue 
+						+ " for object: "+rObject +" of type: "+feature.getEType()+
+						"\nTry to load the file containing this URI: "+objectURI;
+					internalLog.error(errmsg);
+					throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+		        		errmsg,
+						interpreter,
+						memory,
+						null);
+			}
+			else
+			{
+				// the feature destination was not in the main resource
+            	// force emf to load it and retreive it, create a Runtime object for it
+        		// this is in fact too late to create the runtime object for an EObject, !!! 
+        		// concurrent exception !
+				Resource eresource = fvalue.eResource();
+				String errmsg = "Not able to find RuntimeObject in runtime_objects_map for value on type "+feature.getEType()
+					+"Trying to set "+ fvalue+" into "+rObject; 
+				if (eresource!=null) errmsg += "\nBe sure to load the file containing this URI: "+eresource.getURIFragment(fvalue);
+            	internalLog.error(errmsg);
+            	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+		        		errmsg,
+						interpreter,
+						memory,
+						null);
+    			// RuntimeObject ro = this.setRuntimeObjectForEObject(unit, obj);
+    			// this.runtime_objects_map.put(obj, ro);	
+        	}
+        }
+        rObject.getProperties().put(feature.getName(), rovalue);
+        // FIXME the set method needs to be reviewed (for model instances?)
+        //fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
+        return rovalue;
+	}
+	
+	/**
 	 * Create a RuntimeObject that represent a collection.
-	 * We need to create in "purely" in java when we have an instance which one of its properties
+	 * We need to create in "purely" in java when we have an instance of which one of its properties
 	 * has an upperBound that is * or a number > 1
 	 * Adds the list of objects given in arguments, and create a collection which type parameter is typeParam.
 	 * 
@@ -720,10 +728,9 @@ public class EMF2Runtime {
 	        Object sfeature = it.next();
 	        RuntimeObject rovalue;
 	        if (sfeature instanceof EObject)
-	            rovalue = (RuntimeObject)this.runtime_objects_map.get(sfeature);
+	            rovalue = (RuntimeObject)this.runtime_objects_map.get(sfeature); 
 	        else // it is a Datatype
 	            rovalue = setRuntimeObjectForPrimitiveTypeValue(unit, sfeature);
-	            
 	        // RuntimeObject ri = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, memory.getROFactory());
 	        // ReflectiveSequence.addAt(result, ri, rovalue); i+=1;
 	        // FIXME : ReflectiveSequence addAt and ReflectiveCollection add 
