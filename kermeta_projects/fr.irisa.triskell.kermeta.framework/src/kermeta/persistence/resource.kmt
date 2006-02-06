@@ -3,7 +3,7 @@ package kermeta::persistence;
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: resource.kmt,v 1.9 2005-11-28 12:42:32 dvojtise Exp $
+ * $Id: resource.kmt,v 1.10 2006-02-06 15:38:57 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -241,7 +241,7 @@ abstract class Repository
 	operation createResource(uri : String, mm_uri : String) : Resource is abstract
 	/**
 	 * Get the resource of model that is stored in the given uri. Silently create
-	 * a new one if a resource with this uri was not found.
+	 * and load a new one if a resource with this uri was not found.
 	 */
 	operation getResource(uri : String) : Resource is do
 		from var it : Iterator<Resource> init resources.iterator
@@ -269,8 +269,8 @@ abstract class Repository
 class EMFRepository inherits Repository
 {
 	/**
-	 * Create a new empty resource from the given uri, which meta-model is stored
-	 * in file given by mm_uri
+	 * Create a new empty resource from the model given by its uri, 
+	 * which meta-model is stored in file given by mm_uri
 	 */
 	method createResource(uri : String, mm_uri : String) : EMFResource is do
 		var new_resource : EMFResource init EMFResource.new
@@ -282,6 +282,10 @@ class EMFRepository inherits Repository
 		result := new_resource
 	end
 	// Override so that specialized types are fixed ...hum cast is not excellent
+	/**
+	 * Get the resource of model that is stored in the given uri. Silently create
+	 * and load a new one if a resource with this uri was not found.
+	 */
 	method getResource(uri : String) : EMFResource is do
 		result ?= super(uri)
 	end
