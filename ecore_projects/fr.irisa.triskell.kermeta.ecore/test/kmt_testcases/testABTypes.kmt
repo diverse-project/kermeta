@@ -1,0 +1,122 @@
+package root_package;
+
+require "serializer.kmt"
+//require "./ecore/ABC01_inh_att_opp.ecore" 
+require kermeta
+using kermeta::standard  
+using root
+using serializer
+
+/** 
+ * This class tests the operations related to types on an ecore model :
+ * - the eAll<blah> operations
+ * - the super types
+*/
+class TestABTypes inherits kermeta::kunit::TestCase
+{
+	reference resource : kermeta::persistence::EMFResource
+	reference root : ecore::EPackage
+	reference aclaz : ecore::EClass
+	reference bclaz : ecore::EClass
+//	reference cclaz : ecore::EClass	
+	reference dclaz : ecore::EClass 
+	reference abcrootclaz : ecore::EClass
+	reference s : Serializer
+	attribute str : String
+
+/*	operation doesNotWorkInsideSetup() : ecore::EPackage is do
+		var toto : ecore::EPackage
+	    toto ?= s.loadModelWithClass("./ecore/ABC01_inh_att_opp.ecore", "./Ecore.ecore")  
+   	    abcrootclaz ?= toto.eClassifiers.detect { c | c.name == "Root" }
+   	    bclaz ?= toto.eClassifiers.detect { f | f.name == "B" } 
+        aclaz ?= toto.eClassifiers.detect { f | f.name == "A" } 
+        dclaz ?= toto.eClassifiers.detect { f | f.name == "D" }
+	end*/
+ 	
+	method setUp() is do
+		s := Serializer.new 
+		s.__init__()
+	end
+	
+	method tearDown() is do
+	end
+ 
+    
+    operation testeAllStructuralFeatures() is do 
+		var toto : ecore::EPackage init ecore::EPackage.new
+	    s.loadModelWithClass("ecore/ABC01_inh_att_opp.ecore", "ecore/Ecore.ecore")  
+/*   	    abcrootclaz ?= toto.eClassifiers.detect { c | c.name == "Root" }
+   	    bclaz ?= toto.eClassifiers.detect { f | f.name == "B" } 
+        aclaz ?= toto.eClassifiers.detect { f | f.name == "A" } 
+        dclaz ?= toto.eClassifiers.detect { f | f.name == "D" }*/
+        
+		if (bclaz.eStructuralFeatures!=void) then assert(bclaz.eStructuralFeatures.size==0) end
+		assert(bclaz.eAllStructuralFeatures.size==1)
+		
+		stdio.writeln(bclaz.eAllStructuralFeatures.one.eType.name)
+		assert(bclaz.eAllStructuralFeatures.one.eType.name=="C") 
+        
+    end
+    
+    operation testeAllReferences() is do
+   		//self.doesNotWorkInsideSetup
+        stdio.writeln("refs : " + bclaz.eReferences.size.toString) 
+        assert(bclaz.eReferences.size==0)
+		assert(bclaz.eAllReferences.size==1)
+		assert(bclaz.eAllReferences.one.eType.name=="C")
+    end
+    
+    operation testeAllContainments() is do
+        //self.doesNotWorkInsideSetup
+        stdio.writeln(bclaz.eAllContainments.size.toString + " containments.")
+        assert(bclaz.eAllContainments.size==1)
+		assert(bclaz.eAllContainments.one.eType.name=="C")
+		assert(bclaz.eAllContainments.one.name=="c") 
+    end
+    
+    operation testeAllOperations() is do 
+        //self.doesNotWorkInsideSetup
+    	assert(aclaz.eOperations.size==2)
+    	assert(bclaz.eOperations.size==1)
+    	assert(bclaz.eAllOperations.size==3)
+    	assert(bclaz.eAllOperations.contains(aclaz.eOperations.first))
+    	assert(bclaz.eAllOperations.contains(aclaz.eOperations.last))
+    end
+    
+    operation testeAllSuperTypes() is do
+        //self.doesNotWorkInsideSetup
+    	assert(dclaz.eSuperTypes.size==1)
+    	assert(dclaz.eAllSuperTypes.size==2)
+    	assert(dclaz.eAllSuperTypes.contains(bclaz))
+    	assert(dclaz.eAllSuperTypes.contains(aclaz))
+    end 
+    
+    operation testisSuperTypeOf() is do
+        //self.doesNotWorkInsideSetup
+    	assert(bclaz.isSuperTypeOf(dclaz))
+    	assert(aclaz.isSuperTypeOf(dclaz))
+    end
+    
+    /* Here we test the accessors (get<blah>) */
+    
+    operation testgetEStructuralFeature() is do
+        //self.doesNotWorkInsideSetup
+    	assert(bclaz.getEStructuralFeature(1).name=="c")
+    end
+    
+    operation testgetEStructuralFeature2() is do
+        //self.doesNotWorkInsideSetup
+	    assert(bclaz.getEStructuralFeature2("c")==aclaz.getEStructuralFeature2("c"))
+    	assert(bclaz.getEStructuralFeature2("c").eType.name=="C")
+    end
+    
+    operation testgetFeatureCount() is do
+        //self.doesNotWorkInsideSetup
+        bclaz ?= root.eClassifiers.detect { f | f.name == "B" } 
+        stdio.writeln(bclaz.getFeatureCount.toString + " features counted in B class")
+		assert(bclaz.getFeatureCount == 1)
+    end
+    
+    
+}
+

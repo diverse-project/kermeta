@@ -1,0 +1,147 @@
+package root_package;
+
+require "serializer.kmt"
+require "./ecore/AB01.ecore" 
+require kermeta
+using kermeta::standard 
+using root
+using serializer
+
+/** 
+ * This test suite tests mainly operations on EClass elements, related to the structural features
+*/
+class TestAB inherits kermeta::kunit::TestCase
+{
+	reference resource : kermeta::persistence::EMFResource
+	reference root : ecore::EPackage
+	reference aclaz : ecore::EClass
+	reference bclaz : ecore::EClass
+	reference s : Serializer
+	attribute str : String
+ 	
+	method setUp() is do
+		s := Serializer.new 
+		s.__init__()
+	end
+	
+	method tearDown() is do
+	end
+	
+	   
+    /** Test structural features*/
+    operation testeStructuralFeatures() is do
+    	var o : ecore::EPackage
+        o ?= s.loadModelWithClass("./ecore/AB01opp.ecore", "./ecore/Ecore.ecore")  
+        
+        // Check that we have the right number of classes
+        assert(o.name == "root")
+        assert(o.eClassifiers.size == 2)
+        
+		aclaz ?= o.eClassifiers.one bclaz ?= o.eClassifiers.last
+		// Check that the container is correctly set
+		assert(aclaz.eStructuralFeatures.one.eType == bclaz)
+		assert(aclaz.eStructuralFeatures.one.lowerBound == 0)
+		assert(aclaz.eStructuralFeatures.one.upperBound == 1)
+		assert(aclaz.eStructuralFeatures.one.name == "b")
+		// eContainer of Eclass is of type "ecore::EClass" in our case, so we should be able
+		// to get its name -- but a preliminary cast is required.
+		var ec : ecore::EClass	ec ?= aclaz.eStructuralFeatures.one.eContainer
+		stdio.writeln("eContainer : " + ec.toString + " ==? " + aclaz.toString) 
+		stdio.writeln("metaclass : "+ ec.eClass.toString + " == " + aclaz.eClass.toString )  
+		stdio.writeln("metaclass : "+ ec.eClass.toString + " == " + aclaz.eClass.toString )  
+		assert(aclaz.eStructuralFeatures.one.eContainer == aclaz)
+    end
+    
+    /** Test the eAttributes */
+    operation testeAttributes() is do
+	end
+	
+	/** Test the containment (the elements contained by this class) */
+	operation testeAllContainments() is do
+	end
+ 
+ 	/** Test kermeta "container" method */
+    operation testcontainerAB01opp() : Void is do 
+    	var o : ecore::EPackage
+        o ?= s.loadModelWithClass("./ecore/AB01opp.ecore", "Ecore.ecore")  
+		assert(o.eClassifiers.size == 2)
+		aclaz ?= o.eClassifiers.one bclaz ?= o.eClassifiers.last
+		// Check that the container is correctly set
+		assert(aclaz.eStructuralFeatures.one.container == aclaz)
+		assert(bclaz.eStructuralFeatures.one.container == bclaz)
+		
+    end
+    
+    /** Test eContainer ecore method on classifiers (on model AB01opp.ecore) */
+    operation testeContainerAB01opp() : Void is do 
+    	var o : ecore::EPackage
+        o ?= s.loadModelWithClass("./ecore/AB01opp.ecore", "Ecore.ecore")  
+        
+        assert(o.eClassifiers.size == 2)
+        aclaz ?= o.eClassifiers.one 
+		bclaz ?= o.eClassifiers.last
+		// Check that the container is correctly set
+		assert(aclaz.eStructuralFeatures.one.eContainingClass == aclaz)
+	//	assert(bclaz.eStructuralFeatures.one.eContainingClass == bclaz)
+		
+    end
+    
+    /** Test eContainer ecore method on classifiers (on model AB01.ecore) */
+    operation testeContainerAB01() : Void is do 
+    	var o : ecore::EPackage	var aclaz : ecore::EClass var bclaz : ecore::EClass
+        o ?= s.loadModelWithClass("./ecore/AB01.ecore", "Ecore.ecore")  
+		aclaz ?= o.eClassifiers.one 
+		bclaz ?= o.eClassifiers.last
+		// Check that the container is correctly set
+		assert(aclaz.eStructuralFeatures.one.eContainingClass == aclaz)
+		assert(bclaz.eStructuralFeatures.size == 0)
+		
+    end
+    
+    /** Test eOpposite property (on model AB01opp.ecore) */
+    operation testeOppositeAB01opp() : Void is do
+        root ?= s.loadModelWithClass("./ecore/AB01opp.ecore", "Ecore.ecore")  
+        
+        // Check that we have the right number of classes
+        assert(root.name == "root")
+        assert(root.eClassifiers.size == 2)
+        
+		aclaz ?= root.eClassifiers.one  
+		bclaz ?= root.eClassifiers.last
+		assert(aclaz.eReferences.size==1) 
+		
+		// Check that the container is correctly set
+		assert(aclaz.eReferences.one.eOpposite.eType == aclaz)
+		assert(bclaz.eReferences.one.eOpposite.eType == bclaz)
+	end
+    
+    /** Test EFactory property (this is a "dummy" property and a dummy test) */
+    operation testeFactoryAB01() is do
+        root ?= s.loadModelWithClass("./ecore/AB01.ecore", "Ecore.ecore")
+        // eFactoryInstance is not a value of Kermeta
+    	assert (root.eFactoryInstance == void)
+    end
+ 
+    
+    /* ****************************************************** *
+     *                                                        *
+     *  EObject methods
+     *                                                        *
+     * ****************************************************** */
+
+    
+     /* ****************************************************** *
+     *                                                        *
+     *  Attribute related operations?
+     *                                                        *
+     * ****************************************************** */
+    
+/*    operation testeContaining
+ */   
+    
+    
+    
+    
+    
+    
+}

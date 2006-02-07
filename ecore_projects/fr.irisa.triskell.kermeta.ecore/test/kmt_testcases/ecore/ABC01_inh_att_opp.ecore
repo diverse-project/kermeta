@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="root" nsURI="platform:/resource/supprimer/ecore/ABC01_inh_att_opp.ecore" nsPrefix="">
+  <eClassifiers xsi:type="ecore:EClass" name="A">
+    <eOperations name="opa1">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="opa2">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="c" eType="//C" containment="true" eOpposite="//C/a"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="B" eSuperTypes="//A">
+    <eOperations name="op_b">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="C">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="a" eType="//A" eOpposite="//A/c"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Root">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="theAs" upperBound="-1" eType="//A" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="D" instanceClassName="" eSuperTypes="//B"/>
+</ecore:EPackage>
