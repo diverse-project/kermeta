@@ -3,7 +3,7 @@ package kermeta::persistence;
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: resource.kmt,v 1.10 2006-02-06 15:38:57 zdrey Exp $
+ * $Id: resource.kmt,v 1.11 2006-02-09 12:00:16 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -51,6 +51,32 @@ abstract class Resource
 	reference instances : set Object[*]
 	/** The repository used to create this resource */
 	reference repository : Repository#resources
+	/** The hashtable that contains the contents loaded by the resource.
+	 *  It is composed of 4 entries : "rootContents", "allRootContents", "contents", "allContents"
+	 *  The two last ones will be kept empty since resource-heavy
+	 *  - rootContents : only the root elements of the "main model" hosted by the given resource
+	 *  - allRootContents : the root elements of the main model
+	 */
+	 reference contentMap : kermeta::utils::Hashtable<String, Set<Object>>
+	
+	/**
+	 * Description of the derived properties :
+	 *  - returns the rootContents of the model saved in/loaded from the given uri, excluding
+	 *  the models from the dependent resources
+	 ** - returns the rootContents of the model saved in/loaded from the given uri, including
+	 *  the models from the dependent resources
+ 	 ** - returns all the model elements hosted by this resource, excluding elements from the
+ 	 * dependent resources
+ 	 ** - returns all the model elements hosted by this resource, including elements from the
+ 	 * dependent resources */
+	property readonly rootContents : set Object[0..*]
+		getter is do result:=contentMap.getValue("rootContents") end
+	property readonly allRootContents : set Object[0..*] 
+		getter is do result:=contentMap.getValue("allRootContents") end
+	property readonly contents : set Object[0..*] 
+		getter is do result:=contentMap.getValue("contents") end
+	property readonly allContents : set Object[0..*] 
+		getter is do result:=contentMap.getValue("allContents") end
 	
 	/** Save a model instance, in the file specified by the initial uri 
 	 * Overrides the old version.
@@ -62,34 +88,25 @@ abstract class Resource
 	operation add(instance : Object) : Void is abstract  
 	/** remove the instance, return it if success, otherwise return null */
 	operation remove(instance : Object) : Object is abstract
-	/**
-	 * return the root elements of the resource. Root elements are elements
-	 * that have no container
-	 */
-	operation getRootElements() : Set<Object> is abstract
 	
 /*	operation setInstances(p_instances : Set<Object>) : kermeta::standard::~Void is do
 		instances := p_instances
 	end*/
 }
+
 class EMFResource inherits Resource
 {
-	/**
-	 * Constructor "patch" TODO : only one should be needed
+	/** 
+	 * Create an hashtable with appropriates keys and empty collections. This method 
+	 * should not be called by the end-user
 	 */
-	operation initialize_3(model_uri : String , mm_uri : String , inc_resources : Set<String> ) is do
-		uri := model_uri
-		metaModelURI := mm_uri
-		includedResources := inc_resources
-	end
-	operation initialize_2(model_uri : String , inc_resources : Set<String> ) is do
-		uri := model_uri
-		includedResources := inc_resources
-	end
-	operation initialize(model_uri : String) is do
-		uri := model_uri
-		metaModelURI := ""
-	end
+	 operation initializeContentMap() is do
+	 	contentMap := kermeta::utils::Hashtable<String, Set<Object>>.new
+	 	contentMap.put("rootContents", Set<Object>.new)
+	 	contentMap.put("allRootContents", Set<Object>.new)
+	 	contentMap.put("contents", Set<Object>.new)
+	 	contentMap.put("allContents", Set<Object>.new)
+	 end
 
 	/** Save a resource in the uri associated to it */
 	method saveWithNewURI(new_uri : String) : Void is do
@@ -108,27 +125,18 @@ class EMFResource inherits Resource
 	/** Loads a resource */
 	method load() : Void is do
 		var e : ResourceLoadException init ResourceLoadException.new
-		// Todo : extern load should return a Reflective Set?
-		var inst_set : Set<Object> init Set<Object>.new
-		inst_set ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
-			uri, metaModelURI, "EMF", inst_set
+		contentMap ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
+			uri, metaModelURI, "EMF", contentMap
 		)
 		// If load failed
-		if (inst_set.size == 0) then
+		if (contentMap.getValue("allRootContents").size == 0) then
 			stdio.writeln("Resource load failed!")
 			raise e
 		end
-		// FIXME : should I directly create a ReflectiveSet instead of that ?
-		from var it : Iterator<Object> init inst_set.iterator
-		until (it.isOff)
-		loop
-			instances.add(it.next)
-		end
-/*		instances ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
-			uri, metaModelURI, "EMF", instances
-		)
-		*/
+		instances.addAll(contentMap.getValue("allRootContents"))
 	end
+	
+
 
 	/** Add an instance to the Resource*/
 	method add(instance : Object) : Void is do
@@ -193,21 +201,6 @@ class EMFResource inherits Resource
 			end
 		end
 	end
-	
-	/**
-	 * Get the root element(s) of the EMF model loaded in this resource
-	 */ 
-	method getRootElements() : Set<Object> is do
-		from var it : Iterator<Object> init self.instances.iterator
-		until it.isOff
-		loop
-			var o : Object init it.next
-			if (o.container == void) then
-				result.add(o)
-			end
-		end
-	end
-	
 
 }
 
@@ -257,6 +250,7 @@ abstract class Repository
 		// a serialized model stored at the given URI 
 		// NOT TESTED YET!
 		if result == void then
+			stdio.writeln("Warning : resource + <"+uri+"> does not exist yet. Trying to create one.")
 			result := self.createResource(uri, "")
 			result.load()
 		end
@@ -279,6 +273,7 @@ class EMFRepository inherits Repository
 		new_resource.uri := uri
 		new_resource.metaModelURI := mm_uri
 		new_resource.repository := self
+		new_resource.initializeContentMap
 		result := new_resource
 	end
 	// Override so that specialized types are fixed ...hum cast is not excellent
