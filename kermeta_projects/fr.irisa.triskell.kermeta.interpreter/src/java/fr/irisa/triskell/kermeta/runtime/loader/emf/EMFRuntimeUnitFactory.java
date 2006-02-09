@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnitFactory.java,v 1.4 2005-07-26 16:41:46 zdrey Exp $
+/* $Id: EMFRuntimeUnitFactory.java,v 1.5 2006-02-09 13:03:50 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnitFactory.java
  * License   : GPL
@@ -29,6 +29,12 @@ public class EMFRuntimeUnitFactory extends RuntimeUnitFactory
         return emfUnit;
     }
     
+    /**
+     * Create an EMFRuntimeUnit
+     * @param uri : relative path of the EMF resource to load/save
+     * @param mm_uri : relative path of the URI of the resource where meta-model of uri-located model.
+     * @param emptyInstances
+     */
     public RuntimeUnit createRuntimeUnit(String uri, String mm_uri, RuntimeObject emptyInstances)
     {
         EMFRuntimeUnit emfUnit = new EMFRuntimeUnit(uri, mm_uri, emptyInstances, this);

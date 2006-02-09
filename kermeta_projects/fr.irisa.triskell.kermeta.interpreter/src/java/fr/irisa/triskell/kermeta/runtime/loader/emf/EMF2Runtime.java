@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.28 2006-02-09 12:05:06 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.29 2006-02-09 13:03:50 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -12,7 +12,6 @@
  * 					   seems not to be adapted to model instance load.
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
-
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -66,7 +65,6 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  * For this purpose, we defined a new entry in the RuntimeObject <code>data</code> hashtable : 
  * 	{ emfObject : an EMF instance in the loaded EMF model }; This entry is useful
  * when we want to update an object.
- *     
  * 
  * ((EObject)resource.getContents().get(0)).eClass().getEPackage().getNsURI().
  * 
@@ -807,28 +805,10 @@ public class EMF2Runtime {
 	protected void addContentMapEntry(EMFRuntimeUnit unit, String key, RuntimeObject rObject)
 	{
 		// Set the entry to put { RuntimeObjectString , (RuntimeObject)content_table} in contentMap
-		RuntimeObject collection_entry = getContentMapEntryFromString(unit, key);
+		RuntimeObject collection_entry = unit.getContentMapEntryFromString(key); 
 		// Fill in the contentMap that will host the loaded elements
 		fr.irisa.triskell.kermeta.runtime.basetypes.Collection.add(collection_entry, rObject);
 	}
-		
-	/**
-	 * Get the contentMapEntry which key is the RuntimeObject representing the given string.
-	 * @param str a key in contentMap
-	 * @return the runtimeObject representation of the collection associated to given key
-	 */
-	private RuntimeObject getContentMapEntryFromString(RuntimeUnit unit, String str)
-	{
-		Hashtable content_table = (Hashtable)unit.getContentMap().getData().get("Hashtable");
-		RuntimeObject entry = null;
-		Iterator it = content_table.keySet().iterator();
-		while (it.hasNext() && entry == null)
-		{
-			RuntimeObject next = (RuntimeObject)it.next();
-			if (fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(next).equals(str))
-			{	entry = (RuntimeObject)content_table.get(next); }
-		}
-		return entry;
-	}
+
 
 }

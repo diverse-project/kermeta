@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.19 2006-02-09 12:05:06 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.20 2006-02-09 13:03:50 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -102,12 +102,8 @@ public class Runtime2EMF {
         // Initialize the resource of the EMF model to save
         String unit_uri = p_unit.getContentMap().getFactory().getMemory().getUnit().getUri();
         String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
-    	URI u = URI.createURI(file_path);
+    	URI u = p_unit.resolveURI(file_path, unit_uripath);
     	KermetaUnit.internalLog.info("URI created for model to save : "+u);
-    	if (u.isRelative()) {
-    		URIConverter c = new URIConverterImpl();
-    		u = u.resolve(c.normalize(URI.createURI(unit_uripath)));    			
-    	}
         String ext = file_path.substring(file_path.lastIndexOf(".")+1);
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
@@ -164,11 +160,15 @@ public class Runtime2EMF {
      */
     public void updateEMFModel(Resource resource)
     {        
-        //  Get the instances RuntimeObject
+        // Get the instances RuntimeObject
+    	// On save process, unit.getContentMap actually contains the "instances" collection (which
+    	// equals contentMap entry "rootContents". There is an operation
+    	// naming problem, or an homogeinisation problem in the runtime objects (i.e the collection of object to save)
+    	// access!
         ArrayList instances = Collection.getArrayList(unit.getContentMap());
         // instances should only contain the root elements
         Iterator it = instances.iterator();
-        internalLog.debug("Updating EMF Objects");
+        internalLog.debug("Updating EMF Objects  (number of instances : "+ instances.size()+")");
         // Get each instance and translate it in EMF (EObject)
         root_map = new ArrayList();
         while(it.hasNext()) {
@@ -215,7 +215,7 @@ public class Runtime2EMF {
     protected void findEMFObjectsForRuntimeObjectsForRoot(RuntimeObject rObject, EClassifier classifier)
     {
         // already created normally, in the first recursive pass
-        EObject result = (EObject)this.getOrCreateObjectFromRuntimeObject(rObject, classifier);
+    	EObject result = (EObject)this.getOrCreateObjectFromRuntimeObject(rObject, classifier);
         
         // Add the runtime object parsed
         updatedRuntimeObjects.add(rObject);
@@ -245,7 +245,7 @@ public class Runtime2EMF {
     	//internalLog.debug("      findEMFObjectForProperty: " + prop_name + " "+ property  + eObject);
 		
         // If property is an EList 
-        if ( property.getData().get("CollectionArrayList") != null )
+        if (property.getData().containsKey("CollectionArrayList") && property.getData().get("CollectionArrayList") != null)
         {
             //System.err.println("   feature EList -> " + feature.getEType() + ((EList)property_eObject).size());
             Iterator p_it = ((ArrayList)property.getData().get("CollectionArrayList")).iterator();
@@ -497,7 +497,7 @@ public class Runtime2EMF {
      */
     public Object getPrimitiveTypeValueFromRuntimeObject(RuntimeObject robject)
     {
-        String[] s_primitive_types = new String[] {"StringValue", "BooleanValue", "NumericValue" };
+        String[] s_primitive_types = new String[] {"StringValue", "BooleanValue", "NumericValue", "CharacterValue" };
     	for (int i=0; i<s_primitive_types.length; i++)
     	    if (robject.getData().containsKey(s_primitive_types[i]))
     	        return robject.getData().get(s_primitive_types[i]);

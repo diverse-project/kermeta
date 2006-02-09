@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.7 2006-02-09 12:05:06 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.8 2006-02-09 13:03:50 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -11,6 +11,7 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.io.IOException;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -229,7 +230,25 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         
     }
     
-    
+	
+	/**
+	 * Get the contentMapEntry which key is the RuntimeObject representing the given string.
+	 * @param str a key in contentMap
+	 * @return the runtimeObject representation of the collection associated to given key
+	 */
+	public RuntimeObject getContentMapEntryFromString(String str)
+	{
+		Hashtable content_table = (Hashtable)this.getContentMap().getData().get("Hashtable");
+		RuntimeObject entry = null;
+		Iterator it = content_table.keySet().iterator();
+		while (it.hasNext() && entry == null)
+		{
+			RuntimeObject next = (RuntimeObject)it.next();
+			if (fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(next).equals(str))
+			{	entry = (RuntimeObject)content_table.get(next); }
+		}
+		return entry;
+	}
     
 }
 
