@@ -47,8 +47,8 @@ class TestAB inherits kermeta::kunit::TestCase
 		// to get its name -- but a preliminary cast is required.
 		var ec : ecore::EClass	ec ?= aclaz.eStructuralFeatures.one.eContainer
 		stdio.writeln("eContainer : " + ec.toString + " ==? " + aclaz.toString) 
-		stdio.writeln("metaclass : "+ ec.eClass.toString + " == " + aclaz.eClass.toString )  
-		stdio.writeln("metaclass : "+ ec.eClass.toString + " == " + aclaz.eClass.toString )  
+/*		stdio.writeln("metaclass : "+ ec.eClass.toString + " == " + aclaz.eClass.toString )  
+		stdio.writeln("metaclass : "+ ec.eClass.toString + " == " + aclaz.eClass.toString )  */
 		assert(aclaz.eStructuralFeatures.one.eContainer == aclaz)
     end
     
@@ -78,9 +78,10 @@ class TestAB inherits kermeta::kunit::TestCase
         o ?= s.loadModelWithClass("./ecore/AB01opp.ecore", "Ecore.ecore")  
         
         assert(o.eClassifiers.size == 2)
-        aclaz ?= o.eClassifiers.one 
+        aclaz ?= o.eClassifiers.first
 		bclaz ?= o.eClassifiers.last
 		// Check that the container is correctly set
+		stdio.write("aclaz = " + aclaz.name + " -- " + aclaz.eStructuralFeatures.one.eContainingClass.toString)
 		assert(aclaz.eStructuralFeatures.one.eContainingClass == aclaz)
 	//	assert(bclaz.eStructuralFeatures.one.eContainingClass == bclaz)
 		

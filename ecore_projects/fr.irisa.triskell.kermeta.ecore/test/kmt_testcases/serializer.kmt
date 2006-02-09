@@ -47,6 +47,8 @@ class GenericSerializer<RootModel> inherits Serializer
 class Serializer
 {
 	reference _repository : EMFRepository
+	reference _resource : EMFResource
+	reference _maptest : kermeta::utils::Hashtable<String, kermeta::standard::Collection<Object>>
 	
 	operation __init__() is do
 		_repository := EMFRepository.new
@@ -58,15 +60,26 @@ class Serializer
 	end
 	
 	operation loadModelWithClass(uri : String, mmuri : String) : Object is do 
-    	var resource : EMFResource
     	if (_repository.resources.detect { r | r.uri == uri }==void) then
-	    	resource := _repository.createResource(uri , mmuri)
-	    	resource.load
+	    	_resource := _repository.createResource(uri , mmuri)
+	    	_resource.load
 	    else
-	    	resource := _repository.getResource(uri)
+	    	_resource := _repository.getResource(uri)
 	    end
-    	var instances : Set<Object> init resource.instances
-    	result := instances.one
-    end
+    	var instances : Set<Object> init _resource.instances
+    	result := _resource.rootContents.one
+    end    
     
+    method saveModelWithObject(uri : String, mmuri : String, newuri : String, a : Object) : Void is do
+    	
+   		var resource : EMFResource
+    	resource := _repository.createResource(uri, mmuri)
+    	if resource != void then
+	    	resource.instances.add(a)
+	    	resource.saveWithNewURI(newuri)
+	    else
+	    	stdio.writeln("I'm sorry, I'm afraid that your automaton is not valid; please check the following rules : ")
+	    	stdio.writeln(" - Do the transitions source and target states belong to the set of states of the automaton?")
+	    end
+    end
 }
