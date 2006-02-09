@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.4 2005-07-28 16:03:20 zdrey Exp $
+/* $Id: Resource.java,v 1.5 2006-02-09 13:04:25 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : GPL
@@ -53,17 +53,20 @@ public class Resource {
      * 		  is retrieved from the model.
      * @param resourceType the resource type ("EMF", "MDR")
      * @param emptyInstances the runtimeObject representing the collection of instances
-     * 
+     * @param cmap the content map pre-initialized in kermeta source code.
      * of the EMF Model, once loaded
-     * @return The emptyInstances collections, filled in.
+     * @return The emptyMap, filled in.
      */
-    public static RuntimeObject load(RuntimeObject uri, RuntimeObject mmUri, RuntimeObject resourceType, RuntimeObject emptyInstances)
+    public static RuntimeObject load(
+    		RuntimeObject uri,
+    		RuntimeObject mmUri, 
+    		RuntimeObject resourceType, RuntimeObject emptyMap)
     {
         RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
         	getConcreteFactory(String.getValue(resourceType)).
-        	createRuntimeUnit(String.getValue(uri), String.getValue(mmUri), emptyInstances);
+        	createRuntimeUnit(String.getValue(uri), String.getValue(mmUri), emptyMap);
         // 
         runtime_unit.load();
-        return runtime_unit.getInstances();
+        return runtime_unit.getContentMap();
     }
 }
