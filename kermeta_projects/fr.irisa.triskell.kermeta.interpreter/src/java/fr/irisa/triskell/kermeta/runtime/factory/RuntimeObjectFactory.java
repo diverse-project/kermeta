@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.9 2006-01-05 15:28:32 fchauvel Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.10 2006-02-09 12:03:33 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -44,6 +44,8 @@ import fr.irisa.triskell.kermeta.runtime.language.Class;
  * @author Franck Fleurey
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
+ * 
+ * Contains a set of convenient methods to create RuntimeObjects.
  */
 public class RuntimeObjectFactory {
 
@@ -72,7 +74,11 @@ public class RuntimeObjectFactory {
 	    struct_factory = StructurePackageImpl.init().getStructureFactory();
 	}
 	
-	
+	/**
+	 * Load the specified KCoreRuntimeObject in memory (the root call in the call graph
+	 * is a method call in the RuntimeMemoryLoader)
+	 * @param obj
+	 */
 	public void loadKCoreRuntimeObject(KCoreRuntimeObject obj) {
 	    memory.loadKCoreRuntimeObject(obj);
 	}
