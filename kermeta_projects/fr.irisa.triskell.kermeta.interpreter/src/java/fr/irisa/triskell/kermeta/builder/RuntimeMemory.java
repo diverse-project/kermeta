@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.11 2005-12-06 18:57:15 zdrey Exp $
+/* $Id: RuntimeMemory.java,v 1.12 2006-02-09 13:05:16 zdrey Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -63,7 +63,6 @@ public class RuntimeMemory {
     }
     /**
      * remove as much ref as possible for helping garbage collector
-     *
      */
     public void freeJavaMemory()
     {
@@ -96,8 +95,8 @@ public class RuntimeMemory {
         return memoryLoader.getNumberOfObjectCached();
     }
     
-    /** Zoe temp accessor */
-    public Hashtable getRuntimeObjects()
+    /** @return the hashtable of runtime objects available in memory */
+    public Hashtable<FObject, RuntimeObject> getRuntimeObjects()
     {
         return memoryLoader.getRuntimeObjects();
     }

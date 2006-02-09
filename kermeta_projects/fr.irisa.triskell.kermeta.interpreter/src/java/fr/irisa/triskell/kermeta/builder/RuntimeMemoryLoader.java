@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.8 2005-07-08 12:21:50 dvojtise Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.9 2006-02-09 13:05:16 zdrey Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -51,7 +51,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
     private Hashtable properties;
     
     // mapping kcoreObject -> RuntimeObject
-    private Hashtable objects;
+    private Hashtable<FObject, RuntimeObject> objects;
     // mapping qualified_name -> RuntimeObject (TypeDefinition)
     private Hashtable typeDefinitions;
     
@@ -63,7 +63,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
         properties = new Hashtable();
         this.unit = unit;
         this.memory = memory;
-        objects = new Hashtable();
+        objects = new Hashtable<FObject, RuntimeObject>();
         typeDefinitions = new Hashtable();
     }
     
@@ -262,7 +262,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 	}
 	
 	/** Accessors */
-	public Hashtable getRuntimeObjects()
+	public Hashtable<FObject, RuntimeObject> getRuntimeObjects()
 	{
 	    return objects;
 	}
