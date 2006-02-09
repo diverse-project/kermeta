@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnitFactory.java,v 1.2 2005-07-26 16:41:46 zdrey Exp $
+/* $Id: RuntimeUnitFactory.java,v 1.3 2006-02-09 12:04:57 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnitFactory.java
  * License   : GPL
@@ -23,11 +23,14 @@ public abstract class RuntimeUnitFactory {
 
     /**
      * @param emptyInstances
+     * @param emptyMap 
      * @param value
      * @param value2
      * @return
      */
     public abstract RuntimeUnit createRuntimeUnit(String pUri, String mmUri, RuntimeObject emptyInstances);
+    /** create a runtime unit with pre-created content map. */
+    //public abstract RuntimeUnit createRuntimeUnit(String pUri, String mmUri, RuntimeObject emptyInstances, RuntimeObject emptyMap);
 
     /**
      * The RuntimeMemory necessary to store the runtime object inside it ..

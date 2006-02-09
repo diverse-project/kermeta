@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.18 2006-01-09 13:34:54 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.19 2006-02-09 12:05:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -50,40 +50,43 @@ import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
- * 
+ * This class converts models that were created by the user through the 
+ * persistence library into EMF models, saved in XMI format.
  */
 public class Runtime2EMF {
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.Runtime2EMF");
 	
-    /**
-     * 
-     */
+	/**
+	 * The constructor, that initialize <code>unit</code> and <code>updatedRuntimeObjects</code>
+	 * attributes.
+	 * @param unit the EMFRuntimeUnit that hosts the contents of the model to save 
+	 */
     public Runtime2EMF(EMFRuntimeUnit unit) {
-        super();
         this.updatedRuntimeObjects = new ArrayList();
         this.unit = unit;
     }
     
-
     /**
+     * Saves a model hosted by the given unit into the specified file_path after
+     * having created the corresponding EMF model using <code>updateEMFModel</code>
+     * method.
      * @param unit the unit that embeds the resource of the model to save
      * @param file_path the output directory for the model to save
      */
     public static void saveunit(EMFRuntimeUnit p_unit, String file_path) {
 
         Runtime2EMF r2e = new Runtime2EMF(p_unit);
+        System.err.println(" metamodel uri : " + p_unit.getMetaModelUri());
         // Get and load the resource of the ECore MetaModel wanted
-        // TODO : metamodel URI can be void if the user created a new empty resource!!!
-        // We must raise a correct exception in such a case!!!! 
         if (p_unit.getMetaModelUri() != null && p_unit.getMetaModelUri().length()>0)
         {	// resolve
         	try {
         		r2e.metaModelResource = p_unit.loadMetaModelAsEcore(p_unit.getMetaModelUri());
         	}
         	catch (WrappedException e){
-        		KermetaUnit.internalLog.error("Error loading EMF model " + p_unit.getUri() + " : " + e.exception().getMessage(), e);
-    			RuntimeMemory memory =p_unit.getInstances().getFactory().getMemory();
+        		KermetaUnit.internalLog.error("Error loading EMF model " + p_unit.getUriAsString() + " : " + e.exception().getMessage(), e);
+    			RuntimeMemory memory =p_unit.getContentMap().getFactory().getMemory();
 	        	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
 	        	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
 	        			e.exception().getMessage(),
@@ -92,14 +95,12 @@ public class Runtime2EMF {
 						e); 
 			}
         }
-        else // exception should be put in another way. it is not valid in the case user
-            // saves a model that was initialy loaded. (exception should only be valid
-            // when user tries to save a model created from scratch) 
+        else // metaModelResource is null 
         {
             //throw new KermetaRaisedException(null, null);
         }
         // Initialize the resource of the EMF model to save
-        String unit_uri = p_unit.getInstances().getFactory().getMemory().getUnit().getUri();
+        String unit_uri = p_unit.getContentMap().getFactory().getMemory().getUnit().getUri();
         String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
     	URI u = URI.createURI(file_path);
     	KermetaUnit.internalLog.info("URI created for model to save : "+u);
@@ -120,8 +121,8 @@ public class Runtime2EMF {
 	        r2e.resource.save(null);
 		} catch (IOException e) {
 		    Throwable t = e.getCause();
-		    KermetaUnit.internalLog.error("Error saving EMF model " + p_unit.getUri() + " : " + e.getMessage(), e);
-			RuntimeMemory memory =p_unit.getInstances().getFactory().getMemory();
+		    KermetaUnit.internalLog.error("Error saving EMF model " + p_unit.getUriAsString() + " : " + e.getMessage(), e);
+			RuntimeMemory memory =p_unit.getContentMap().getFactory().getMemory();
         	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
         	if (t instanceof Resource.IOWrappedException)
 		    {
@@ -164,7 +165,7 @@ public class Runtime2EMF {
     public void updateEMFModel(Resource resource)
     {        
         //  Get the instances RuntimeObject
-        ArrayList instances = Collection.getArrayList(unit.getInstances());
+        ArrayList instances = Collection.getArrayList(unit.getContentMap());
         // instances should only contain the root elements
         Iterator it = instances.iterator();
         internalLog.debug("Updating EMF Objects");
@@ -354,7 +355,7 @@ public class Runtime2EMF {
      * @param classifier
      * @return
      */
-    protected Object getOrCreateObjectFromRuntimeObject(RuntimeObject rObject, EClassifier classifier)
+    public Object getOrCreateObjectFromRuntimeObject(RuntimeObject rObject, EClassifier classifier)
     {
         Object result = null;
         // emfObject exists if and only if the rObject was not created by the kerdeveloper
@@ -407,7 +408,9 @@ public class Runtime2EMF {
      * Create an eObject corresponding to the given RuntimeObject. We do this for 
      * EMF instances that were created manually in Kermeta.
      * @param rObject the runtimeObject that we want to serialize
-     * @param classifier The type of the feature "in" which the rObject was contained
+     * @param classifier The type of the feature "in" which the rObject was 
+     * contained. It can be null. If null, then search the Eclassifier 
+     * equivalent to the rObject metaclass (through the metaclass qualified name).
      * @return the eObject corresponding to this rObject
      */
     protected EObject createEObjectFromRuntimeObject(RuntimeObject rObject, EClassifier classifier)
@@ -423,22 +426,22 @@ public class Runtime2EMF {
         EClass eclass = null;
         if (classifier == null)
         {
-            eclass = this.getEClassFromFQualifiedName(kqname, this.metaModelResource, unit);
+            eclass = this.getEClassFromFQualifiedName(kqname, this.metaModelResource);
         }
         else
         {
         	if(((EClass)classifier).isAbstract() || ((EClass)classifier).isInterface()){
         		internalLog.debug("   The type for the new EObject is not concrete !");     
         		
-        		eclass = this.getEClassFromFQualifiedName(kqname, classifier.eResource() , unit);
+        		eclass = this.getEClassFromFQualifiedName(kqname, classifier.eResource());
         		//eclass = this.getEClassFromFQualifiedName(kqname, this.metaModelResource, unit);
         	}
         	else
         	{
         		//eclass = (EClass)classifier; // in fact this was wrong! the given classifier is the
         		// static type of the feature to which given object "belongs" (instance of this type or one of
-        		// its subtypes, not the real type of the object.
-        		eclass = this.getEClassFromFQualifiedName(kqname, classifier.eResource() , unit);
+        		// its subtypes), not the real type of the object.
+        		eclass = this.getEClassFromFQualifiedName(kqname, classifier.eResource());
         	}
         }
         if (eclass != null) // If we did not find the Eclass (it means that kqname is the name of a primitive type)
@@ -457,7 +460,7 @@ public class Runtime2EMF {
      * and emf serialised object names.
      * @return the EClass in the ecore meta-model given by the user for serialization of its model
      */
-    protected EClass getEClassFromFQualifiedName(String kqname, Resource p_resource, EMFRuntimeUnit unit)
+    protected EClass getEClassFromFQualifiedName(String kqname, Resource p_resource)
     {
         EClass result = null;
         TreeIterator it = null; 

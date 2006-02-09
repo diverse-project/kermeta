@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.6 2005-08-09 15:13:38 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.7 2006-02-09 12:05:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -50,7 +50,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     public EMFRuntimeUnit(String pUri, RuntimeObject emptyInstances, EMFRuntimeUnitFactory pFactory)
     {
         this.uri = pUri;
-        this.instances = emptyInstances;
+        this.contentMap = emptyInstances;
         this.factory = pFactory;
         //this.load();
     }
@@ -67,7 +67,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     {
         this.metamodel_uri = pMMUri;
         this.uri = pUri;
-        instances = emptyInstances;
+        contentMap = emptyInstances;
         this.factory = pFactory;
         //this.load();
     }
@@ -84,7 +84,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         // Create the correct uri
     //    IFile kmtfile = ecorefile.getProject().getFile(ecorefile.getProjectRelativePath().removeFileExtension().addFileExtension("kmt"));
 		// Create absolute path from relative 
-        String unit_uri = instances.getFactory().getMemory().getUnit().getUri();
+        String unit_uri = contentMap.getFactory().getMemory().getUnit().getUri();
         String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
         //      resolve uri
         URI u = this.resolveURI(p_metamodel_uri, unit_uripath);
@@ -114,7 +114,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
      */
     public Resource loadMetaModelAsEcore(String p_metamodel_uri)
     {        
-        String unit_uri = instances.getFactory().getMemory().getUnit().getUri();
+        String unit_uri = contentMap.getFactory().getMemory().getUnit().getUri();
         String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
         // resolve uri
         System.err.println("URI : " + unit_uripath +  "; meta : " + p_metamodel_uri);
@@ -171,19 +171,22 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    return metamodel_uri;
 	}
     
-    public String getUri()
+	/** @return the string uri as user gave it in its Kermeta source code */
+    public String getUriAsString()
+    {   return uri; }
+    
+    /** @return the resolved representation (as a "platform:/[...]") of string uri given
+     *  by the user*/
+    public URI getResolvedUri()
     {
-        return uri;
+    	String unit_uri = contentMap.getFactory().getMemory().getUnit().getUri();
+    	String unit_uri_path = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1);
+        return this.resolveURI(this.getUriAsString(), unit_uri_path);
     }
     
     public EcoreUnit getMetamodelUnit()    {  return ecore_unit; }
     public void setMetamodelUnit(EcoreUnit mmUnit)    {  this.ecore_unit = mmUnit; }
     
-    public RuntimeObject getInstances()
-    {
-        return instances;
-    }
-
     /**
      * @param runtime_objects_map
      */

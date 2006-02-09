@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.27 2006-02-02 15:07:01 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.28 2006-02-09 12:05:06 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -49,6 +49,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FObject;
@@ -111,25 +112,18 @@ public class EMF2Runtime {
     
 	public static void loadunit(EMFRuntimeUnit unit) {
 		XMLResource resource=null;
-	    KermetaUnit kunit =  unit.getInstances().getFactory().getMemory().getUnit();
+	    KermetaUnit kunit =  unit.getContentMap().getFactory().getMemory().getUnit();
 		try {
-			RuntimeMemory memory =unit.getInstances().getFactory().getMemory();
+			RuntimeMemory memory =unit.getContentMap().getFactory().getMemory();
         	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
-			
 	//		 load ressource
 			//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
 			ResourceSet resourceset = new ResourceSetImpl();
 	//		Resource resource = resource_set.getResource(URI.createURI(unit.getUri()), true);
-			String unit_uri = kunit.getUri();
-	        String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
-	    	URI u = URI.createURI(unit.getUri());
-	    	internalLog.info("URI created for model to load : "+u);
-	    	if (u.isRelative()) {
-	    		URIConverter c = new URIConverterImpl();
-	    		u = u.resolve(c.normalize(URI.createURI(unit_uripath)));    			
-	    	}
-	    	
+			String kunit_uri = kunit.getUri();
+	        String kunit_uripath = kunit_uri.substring(0, kunit_uri.lastIndexOf("/")+1);
+	        URI u = unit.resolveURI(unit.getUriAsString(), kunit_uripath);
 	    	/*URIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/fr.irisa.triskell.kermeta/"),
 	    			URI.createURI("file:/C:/eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/"));
 	    	URIConverterImpl.URI_MAP.put(URI.createURI("truc/"),
@@ -212,8 +206,8 @@ public class EMF2Runtime {
 	    	
 		}
 		catch (IOException e){
-			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e.getMessage(), e);			
-			RuntimeMemory memory =unit.getInstances().getFactory().getMemory();
+			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUriAsString() + " : " + e.getMessage(), e);			
+			RuntimeMemory memory =unit.getContentMap().getFactory().getMemory();
         	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
 			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
         			e.getMessage(),
@@ -223,8 +217,8 @@ public class EMF2Runtime {
 		}
 		catch (WrappedException e){
 
-			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e.exception().getMessage(), e);
-			kunit.messages.addError("EMF persistence error : could not load the given model :\n"+ e.exception().getMessage(), (FObject)unit.getInstances().getData().get("kcoreObject"));
+			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUriAsString() + " : " + e.exception().getMessage(), e);
+			kunit.messages.addError("EMF persistence error : could not load the given model :\n"+ e.exception().getMessage(), (FObject)unit.getContentMap().getData().get("kcoreObject"));
 			
 			if(resource != null){ // do that even if there where an exception
 				Iterator it = resource.getErrors().iterator();
@@ -233,7 +227,7 @@ public class EMF2Runtime {
 					KermetaUnit.internalLog.error("EMF diagnostic: "+errorDiag.getMessage());
 				}
 			}
-			RuntimeMemory memory =unit.getInstances().getFactory().getMemory();
+			RuntimeMemory memory =unit.getContentMap().getFactory().getMemory();
         	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
         	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
         			e.exception().getMessage(),
@@ -423,17 +417,25 @@ public class EMF2Runtime {
 			while (nit.hasNext())
 			{ 	
 			    eObject = (EObject)nit.next();
+
 			    RuntimeObject rObject = (RuntimeObject)this.runtime_objects_map.get(eObject);
-//				set the container if needed 
+			    // Set the container if needed 
 			    if (eObject.eContainer() != null)
 			    {
 			    	rObject.setContainer((RuntimeObject)this.runtime_objects_map.get(eObject.eContainer()));
+			    	// Set Content map entry "contents"
+			        if (eObject.eResource().getURI().toString().equals(unit.getResolvedUri().toString())) addContentMapEntry(unit, "contents", rObject);
 			    }
 			    else
 			    {
 			        rObject.setContainer(null);
-			        fr.irisa.triskell.kermeta.runtime.basetypes.Collection.add(unit.getInstances(), rObject);
+			        // Set Content map entry "contents"
+			        if (eObject.eResource().getURI().toString().equals(unit.getResolvedUri().toString())) 
+			        	addContentMapEntry(unit, "rootContents", rObject);
+			        // Fill in the contentMap that will be returned by the extern load method call
+			        addContentMapEntry(unit, "allRootContents", rObject);
 			    }
+			    addContentMapEntry(unit, "allContents", rObject);
 			}
 		}
 		catch (KermetaRaisedException ke)
@@ -441,7 +443,7 @@ public class EMF2Runtime {
 			throw ke;
 		}
 		catch (Throwable e) {
-		    internalLog.error("Error loading EMF model " + unit.getUri() + " : " + e, e);
+		    internalLog.error("Error loading EMF model " + unit.getUriAsString() + " : " + e, e);
 		    
 		}
 		
@@ -455,7 +457,7 @@ public class EMF2Runtime {
 	public RuntimeObject setRuntimeObjectForEObject(EMFRuntimeUnit unit, EObject eObject)
 	{
 	    RuntimeObject result = null;
-	    RuntimeMemory memory = unit.getInstances().getFactory().getMemory();
+	    RuntimeMemory memory = unit.getContentMap().getFactory().getMemory();
 	    // Define the RO-metaclass of the given EObject
 	    RuntimeObject ro_metaclass = this.getRuntimeObjectForMetaClass(eObject.eClass(), unit);
 	    
@@ -470,7 +472,7 @@ public class EMF2Runtime {
 	
     public RuntimeObject setRuntimeObjectForPrimitiveTypeValue(EMFRuntimeUnit unit, Object fvalue)
     {
-        RuntimeObjectFactory rofactory = unit.getInstances().getFactory();
+        RuntimeObjectFactory rofactory = unit.getContentMap().getFactory();
         RuntimeObject rovalue = rofactory.getMemory().voidINSTANCE;
         //      Boolean
     	if (fvalue instanceof Boolean) {
@@ -516,16 +518,16 @@ public class EMF2Runtime {
 	    FTypeDefinition etype_cdef;
 	    FType ftype = null;
 	    FClass etype_fclass = null;
-	    etype_cdef = runit.getInstances().getFactory().getMemory().getUnit().getTypeDefinitionByName(name);
+	    etype_cdef = runit.getContentMap().getFactory().getMemory().getUnit().getTypeDefinitionByName(name);
 
         if (etype_cdef == null)
         {
         	// PATCH:; try in kermeta package
-        	String unit_uri = runit.getUri();
+        	String unit_uri = runit.getUriAsString();
 	        String unit_uriextension = unit_uri.substring(unit_uri.lastIndexOf(".")+1, unit_uri.length());
 	        if (unit_uriextension.compareTo("km")==0)
 	        {
-	        	etype_cdef = runit.getInstances().getFactory().getMemory().getUnit().getTypeDefinitionByName("kermeta::" +name);
+	        	etype_cdef = runit.getContentMap().getFactory().getMemory().getUnit().getTypeDefinitionByName("kermeta::" +name);
 	        }
         }
 	    if (etype_cdef!= null)
@@ -559,7 +561,7 @@ public class EMF2Runtime {
 	    FClass fc = (FClass)getMetaClassByName(unit.getEQualifiedName(c), unit);
 	    
 
-        RuntimeMemory memory =unit.getInstances().getFactory().getMemory();
+        RuntimeMemory memory =unit.getContentMap().getFactory().getMemory();
     	ExpressionInterpreter interpreter = memory.getCurrentInterpreter(); 
     	
 	    // Get the structural features
@@ -569,7 +571,7 @@ public class EMF2Runtime {
 	    while (it.hasNext())
 	    {
 	    	EStructuralFeature feature = (EStructuralFeature)it.next();
-	    	RuntimeObjectFactory rofactory = unit.getInstances().getFactory();
+	    	RuntimeObjectFactory rofactory = unit.getContentMap().getFactory();
 	    	String  fname  = feature.getName();
 	    	EClassifier etype = feature.getEType();
 	    	FType ftype = getMetaClassByName(unit.getEQualifiedName(etype), unit);
@@ -719,7 +721,7 @@ public class EMF2Runtime {
 	    if (Collection.getArrayList(result) == null)
 	    {	        result.getData().put("CollectionArrayList", new ArrayList());	    
 	    }
-        RuntimeMemory memory = unit.getInstances().getFactory().getMemory();
+        RuntimeMemory memory = unit.getContentMap().getFactory().getMemory();
 	    Iterator it = objects.iterator();
 	    int i = 0;
 	    // Transform the EObjects into RuntimeObject and add them in our collection
@@ -758,7 +760,7 @@ public class EMF2Runtime {
 	public RuntimeObject getRuntimeObjectForMetaClass(EClass metaclass, EMFRuntimeUnit unit)
 	{
 	    RuntimeObject result = null;
-	    RuntimeMemory memory = unit.getInstances().getFactory().getMemory();
+	    RuntimeMemory memory = unit.getContentMap().getFactory().getMemory();
 	    String metaclass_name = unit.getEQualifiedName(metaclass);
 	    if (this.typedef_cache.containsKey(metaclass_name)) 
 	    {
@@ -771,9 +773,9 @@ public class EMF2Runtime {
 	        FType ftype = this.getMetaClassByName(metaclass_name, unit);
 	        if (ftype == null)
 	        {
-	        	KermetaUnit kunit = unit.getInstances().getFactory().getMemory().getUnit();
-		    	String errmsg = "EMF Loading error : could not find a class (" +
-		    	metaclass_name + ") in loaded libraries. Please check your require statements";
+	        	KermetaUnit kunit = memory.getUnit();
+		    	String errmsg = "EMF Loading error : could not find a class (" + metaclass_name + ") " +
+		    			"in loaded libraries. Please check your require statements";
 		    	internalLog.error(errmsg);
 		    	kunit.messages.addError(errmsg, null );
 		        ftype = null;
@@ -793,6 +795,40 @@ public class EMF2Runtime {
 	    }
 	    return result;
 	}
-
+	
+	/**
+	 * Fill in the content map entry which key is <code>key</code> : the value of this entry is the RO
+	 * representation of a Collection, so the given <code>rObject</code> will be added to this
+	 * collection 
+	 * @param key Key in contentMap a value among "contents", "rootContents", "allRootContents", "allContents"
+	 * @param coll the value corresponding to key. It is a collection 
+	 * @param rObject the object to add the collection <code>coll</code>
+	 */
+	protected void addContentMapEntry(EMFRuntimeUnit unit, String key, RuntimeObject rObject)
+	{
+		// Set the entry to put { RuntimeObjectString , (RuntimeObject)content_table} in contentMap
+		RuntimeObject collection_entry = getContentMapEntryFromString(unit, key);
+		// Fill in the contentMap that will host the loaded elements
+		fr.irisa.triskell.kermeta.runtime.basetypes.Collection.add(collection_entry, rObject);
+	}
+		
+	/**
+	 * Get the contentMapEntry which key is the RuntimeObject representing the given string.
+	 * @param str a key in contentMap
+	 * @return the runtimeObject representation of the collection associated to given key
+	 */
+	private RuntimeObject getContentMapEntryFromString(RuntimeUnit unit, String str)
+	{
+		Hashtable content_table = (Hashtable)unit.getContentMap().getData().get("Hashtable");
+		RuntimeObject entry = null;
+		Iterator it = content_table.keySet().iterator();
+		while (it.hasNext() && entry == null)
+		{
+			RuntimeObject next = (RuntimeObject)it.next();
+			if (fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(next).equals(str))
+			{	entry = (RuntimeObject)content_table.get(next); }
+		}
+		return entry;
+	}
 
 }

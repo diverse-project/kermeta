@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnit.java,v 1.2 2005-07-21 08:26:56 zdrey Exp $
+/* $Id: RuntimeUnit.java,v 1.3 2006-02-09 12:04:57 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnit.java
  * License   : GPL
@@ -16,15 +16,17 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
  * a given instance-model
  */
 public abstract class RuntimeUnit {
-    
-    protected RuntimeObject instances;
+	/**
+	 * A runtime object representation of a Kermeta Hashtable
+	 * 4 entries available : contents, allContents, rootContents, allRootContents
+	*/
+    protected RuntimeObject contentMap;
     public String resourceType; // "EMF", "MDR"
     protected String uri;
     // The factory that created this runtime unit
     protected RuntimeUnitFactory factory;
     
 
-    
     /** This is called in the constructor of the concrete RuntimeUnit
      *  It construct the RuntimeObject instances.
      */
@@ -33,11 +35,10 @@ public abstract class RuntimeUnit {
     public abstract void save(String file_path); // as XMI
     
     /** @return the instances of the model loaded through this runtimeUnit */
-    public RuntimeObject getInstances()
+    public RuntimeObject getContentMap()
     {
-        return instances;
+        return contentMap;
     }
-    
     
 
     /**
