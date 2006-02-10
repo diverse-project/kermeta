@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.2 2005-12-29 15:51:12 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.3 2006-02-10 14:12:06 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -47,6 +47,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * Exports KM or KMT to Ecore.
+ * Pass one fills the km2ecoremapping hashtable.
  */
 public class KM2EcorePass1 extends KermetaVisitor{
 

@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.5 2005-12-29 15:51:12 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.6 2006-02-10 14:12:06 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FDataType;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
@@ -55,6 +56,9 @@ public class KM2Ecore {
 	protected ArrayList usings = new ArrayList();
 	protected ArrayList imports = new ArrayList();
 	protected String root_pname;
+	
+	// The kermeta unit corresponding to the <model> to convert in Ecore format.
+	protected KermetaUnit kermetaUnit;
 	
 	// the resource to populate
 	protected Resource ecoreResource = null;
@@ -102,14 +106,16 @@ public class KM2Ecore {
 	/**
 	 * @param resource : the resource to populate
 	 */
-	public KM2Ecore(Resource resource) {
-		ecoreResource = resource;	
+	public KM2Ecore(Resource resource, KermetaUnit kunit) {
+		ecoreResource = resource;
+		kermetaUnit   = kunit;
 	}
 	
-	public KM2Ecore(Resource resource, Resource traceresource) {
+	public KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit) {
 		ecoreResource = resource;	
 		traceResource = traceresource;
 		tracer = new Tracer(traceResource);
+		kermetaUnit   = kunit;
 	}
 	
 	
@@ -237,5 +243,9 @@ public class KM2Ecore {
 		return false;
 	}
 	
-	
+	/** Accessor for kermetaUnit attribute */
+	public KermetaUnit getKermetaUnit()
+	{
+		return kermetaUnit;
+	}
 }

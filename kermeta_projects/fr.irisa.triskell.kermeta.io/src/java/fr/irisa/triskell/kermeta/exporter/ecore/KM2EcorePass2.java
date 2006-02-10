@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.3 2005-12-29 15:51:12 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.4 2006-02-10 14:12:06 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -12,11 +12,15 @@
  */
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -28,11 +32,19 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.behavior.FStringLiteral;
 import fr.irisa.triskell.kermeta.behavior.FTypeLiteral;
 import fr.irisa.triskell.kermeta.behavior.FTypeReference;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
+import fr.irisa.triskell.kermeta.loader.km.KMUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FObject;
@@ -64,6 +76,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	
 	// the resource to populate
 	protected Resource ecoreResource = null;
+	protected ResourceSet ecoreResourceSet = null;
 	
 	// mapping to look for ecore objects created during pass1
 	protected Hashtable<FObject,EObject> kmt2ecoremapping;
@@ -73,6 +86,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	 */
 	public KM2EcorePass2(Resource resource, Hashtable<FObject,EObject> mapping, KM2Ecore anEcoreExporter) {
 		ecoreResource = resource;
+		ecoreResourceSet = resource.getResourceSet();
 		kmt2ecoremapping = mapping;	
 		ecoreExporter = anEcoreExporter;
 	}
@@ -269,6 +283,52 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	}
 	
 	/**
+	 * Try to find the EClassifier corresponding to the given class definition.
+	 * This method will probably decrease the KM2Ecore conversion process!!
+	 * @param classDefinition
+	 */
+	protected void resolveETypeForEStructuralFeature(FProperty node, EStructuralFeature enode) {
+		// Find the unit from which given class come from.
+		List allunits = ecoreExporter.getKermetaUnit().getAllImportedUnits();
+		// The resource where to find the external type -- TODO : store loaded resources.
+		Resource depResource;
+		EObject etype = null;
+		Iterator<KermetaUnit> allunits_it = allunits.iterator();
+		while (allunits_it.hasNext() && etype==null)
+		{
+			KermetaUnit ku = allunits_it.next();
+			String type = KMTHelper.getTypeQualifiedName(node.getFType());
+			String short_type = type.contains(":")?type.substring(type.indexOf(":")+2):type;
+			short_type = short_type.replaceAll("::", "/");
+			if (ku.typeDefs.containsKey(type))
+			{
+				if (ku instanceof EcoreUnit)
+				{
+					URI u = URI.createURI(ku.getUri());
+					depResource = ecoreResourceSet.getResource(u, true);
+					etype = depResource.getEObject("//" + short_type);
+					enode.setEType((EClassifier)etype); // We are sure that the type is EClassifier...
+				}
+				// If KMUnit, then we have to convert it in an .ecore file!
+				else if (ku instanceof KMUnit || ku instanceof KMTUnit)
+				{
+					System.err.println("KM-Unit dependency!!!"+ short_type);
+					// Get the directory where main resource is located (dep resources
+					// will be saved at this same place, for the moment.)
+					String path = ecoreResource.getURI().toString();
+					String kmpath = ku.getUri();
+					String savepath = path.substring(0, path.lastIndexOf("/")) + kmpath.substring(kmpath.lastIndexOf("/"), kmpath.lastIndexOf(".km")) + ".ecore";
+					// Create the ecore resource corresponding to kermeta unit on which 
+					depResource = writeEcore(ku, savepath, true); 
+					enode.setEType((EClassifier)depResource.getEObject("//"+ short_type));
+				}
+			}
+		}
+	}
+	
+	//
+
+	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
 	 */
 	public Object visit(FProperty node) {
@@ -355,39 +415,21 @@ public class KM2EcorePass2 extends KermetaVisitor{
 						setterBody,
 						null);
 			}
-			/*	    
-			if (node.isFIsDerived()) {
-				pushPrefix();
-				result += "\n" + getPrefix() + "getter is " ;
-				if (node.getFGetterbody() != null) result += this.accept(node.getFGetterbody());
-				else {
-					result += "do\n";
-					pushPrefix();
-					result += getPrefix() + "//TODO: implement getter for derived property " + node.getFName() + "\n"; 
-					popPrefix();
-					result += getPrefix() + "end";
-				}
-				if (! node.isFIsReadOnly()) {
-					result += "\n" + getPrefix() + "setter is ";
-					if (node.getFGetterbody() != null) result += this.accept(node.getFSetterbody());
-					else {
-						result += "do\n";
-						pushPrefix();
-						result += getPrefix() + "//TODO: implement setter for derived property " + node.getFName() + "\n"; 
-						popPrefix();
-						result += getPrefix() + "end";
-					}
-				}
-				popPrefix();
-			}*/
 		}
 		
 		//newEStructuralFeature.setEType((EClassifier)kmt2ecoremapping.get(node.getFType()));
 		EClassifier type = (EClassifier)accept(node.getFType());
 		if(type != null)
+		{
 			newEStructuralFeature.setEType(type);
+		}
 		else
+		{
+			// Perhaps this type is in another resource?
 			internalLog.debug(loggerTabs + "type of this property is null/void");
+			System.err.println("Houloulouuuuuu");
+			resolveETypeForEStructuralFeature(node, newEStructuralFeature);
+		}
 		
 		loggerTabs.decrement();		
 		return newEStructuralFeature;
@@ -456,4 +498,39 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		}
 		return newEClassifier;
 	}
+	
+	/**
+	 * Write ecore : launches the KM2Ecore exporter and save it in "file"
+	 * TODO Since this method is called in JunitTestSuite, in Kermeta2EcoreWizard, and many other
+	 * files, it should be shared elsewhere... 
+	 * @param builder
+	 * @param file
+	 * @param overwrite overxrite file if already exists
+	 * @return the resource that hosts the wanted ecore file
+	 */
+	public Resource writeEcore(KermetaUnit builder, String file, boolean overwrite)
+	{   
+	    // Create Ecore structure
+	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
+	    URI u = URI.createURI(file);
+    	KermetaUnit.internalLog.info("URI created for model to save : "+u);
+    	URIConverter c = new URIConverterImpl();
+    	u = c.normalize(u);
+    	Resource resource = ecoreResourceSet.createResource(u);
+	    // KMT2ECORE
+	    KM2Ecore exporter;
+	    exporter = new KM2Ecore(resource, builder);
+		exporter.exportPackage(builder.rootPackage);
+	    // Save Ecore structure	
+		try {
+			// TODO : test if file exists!! -> u.toFileString() reutrns null :(
+			if (overwrite==true)
+				resource.save(null);
+		} catch (IOException e) {
+			KermetaUnit.internalLog.error("cannot save ecore ressource, due to Exception: "+ e.getMessage(), e);
+			throw new Error("Cannot save ecore ressource (" + file + "), due to Exception: ", e);
+		}
+		return resource;
+	}
+
 }
