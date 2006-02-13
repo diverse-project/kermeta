@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreAction.java,v 1.5 2005-07-27 14:50:33 dvojtise Exp $
+/* $Id: Kermeta2EcoreAction.java,v 1.6 2006-02-13 17:19:09 zdrey Exp $
  * Project : Kermeta
  * File : Kermeta2EcoreAction.java
  * License : EPL
@@ -28,7 +28,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
-import fr.irisa.triskell.kermeta.tools.wizards.EcoreExporterWizard;
+import fr.irisa.triskell.kermeta.tools.wizards.Kermeta2EcoreWizard;
 
 /**
  * This action will generate an ecore file from a kermeta file
@@ -69,7 +69,7 @@ public class Kermeta2EcoreAction implements IObjectActionDelegate {
 	    // determine weither this is a km or another format
 	    boolean isKM =(kmtfile.getFileExtension().compareTo("km") == 0);
 	    
-    	EcoreExporterWizard wizard =  new EcoreExporterWizard(isKM);
+    	Kermeta2EcoreWizard wizard =  new Kermeta2EcoreWizard(isKM);
     	wizard.init(PlatformUI.getWorkbench(),currentSelection);
     	WizardDialog wizDialog =  new org.eclipse.jface.wizard.WizardDialog(shell,wizard);
     	wizDialog.setTitle("Exports this kmt file into an ecore file");
