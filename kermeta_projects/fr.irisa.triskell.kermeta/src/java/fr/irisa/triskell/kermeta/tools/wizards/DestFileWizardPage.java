@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.4 2005-10-27 06:41:07 dvojtise Exp $
+/* $Id: DestFileWizardPage.java,v 1.5 2006-02-13 17:22:11 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -55,7 +55,6 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.ContainerGenerator;
 //import org.eclipse.ui.help.WorkbenchHelp;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
-//import org.eclipse.ui.internal.ide.IHelpContextIds;
 import org.eclipse.ui.internal.ide.dialogs.CreateLinkedResourceGroup;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
 
@@ -230,14 +229,14 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 				handleFileExistsButtonSelect();
 			}
 		});
-		label = new Label(fileExistsGroup, SWT.NULL);
+/*		label = new Label(fileExistsGroup, SWT.NULL);
 		label.setText("Ask ");
 		askIfFileExistRadio = new Button(fileExistsGroup, SWT.RADIO);
 		askIfFileExistRadio.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				handleFileExistsButtonSelect();
 			}
-		});
+		}); */
 		label = new Label(fileExistsGroup, SWT.NULL);
 		label.setText("Overwrite existing file ");
 		overwriteIfFileExistRadio = new Button(fileExistsGroup, SWT.RADIO);

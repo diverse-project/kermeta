@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.8 2005-10-27 06:41:07 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.9 2006-02-13 17:22:11 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -59,6 +59,7 @@ public class UnitExporterWizard extends Wizard{
     
     public DestFileWizardPage outputPage;
     public ActivableDestFileWizardPage tracePage;
+    public Kermeta2EcoreResolveWizardPage resolvePage;
 	
     public String defaultOutputExtension = "xmi";
     public String defaultTraceExtension = "traceability";
@@ -101,6 +102,16 @@ public class UnitExporterWizard extends Wizard{
 		outputPage = newfilepage;
 		
 		addPage(newfilepage);
+		
+		// add the page for the ecore generation philosophy -- only for Kermeta2Ecore wizard in fact!
+		if (this instanceof Kermeta2EcoreWizard)
+		{
+			resolvePage = new Kermeta2EcoreResolveWizardPage(OUTPUTFILE_PAGENAME, selection);
+			resolvePage.setTitle("Ecore dependencies handling");
+			resolvePage.setDescription("Choose here where you want to save the ecore resource dependencies, and/or " +
+					"which Ecore files you want to be directly linked to your converted file \"" + kmtfile.getName() + "\"");
+			addPage(resolvePage);
+		}
 		
 		tracePage = new ActivableDestFileWizardPage(TRACEFILE_PAGENAME,
 				selection,

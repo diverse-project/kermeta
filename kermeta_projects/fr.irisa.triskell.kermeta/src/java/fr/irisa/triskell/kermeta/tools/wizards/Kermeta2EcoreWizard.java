@@ -1,4 +1,4 @@
-/* $Id: EcoreExporterWizard.java,v 1.5 2005-08-25 12:04:57 zdrey Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.1 2006-02-13 17:22:11 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -31,7 +31,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  * Pretty print of kmt files from a KermetaUnit.
  * It may be subclassed in order to add new pages or customize the messages.
  */
-public class EcoreExporterWizard extends UnitExporterWizard{
+public class Kermeta2EcoreWizard extends UnitExporterWizard{
 		
 
 	
@@ -44,7 +44,7 @@ public class EcoreExporterWizard extends UnitExporterWizard{
 	/**
 	 * Constructor for Km2kmtWizard.
 	 */
-    public EcoreExporterWizard()
+    public Kermeta2EcoreWizard()
     {
 		super();
     	defaultOutputExtension = "ecore";
@@ -52,7 +52,7 @@ public class EcoreExporterWizard extends UnitExporterWizard{
     /**
 	 * Constructor for Km2kmtWizard.
 	 */
-    public EcoreExporterWizard(boolean bIsInputKM)
+    public Kermeta2EcoreWizard(boolean bIsInputKM)
     {
 		super();
     	defaultOutputExtension = "ecore";
@@ -99,11 +99,11 @@ public class EcoreExporterWizard extends UnitExporterWizard{
 	    if(this.tracePage.enableFileDestinationButton.getSelection())
 	    {
 	    	if (trace_resource == null) initTraces();
-	    	exporter = new KM2Ecore(resource, trace_resource);
+	    	exporter = new KM2Ecore(resource, trace_resource, builder);
 	    }
 	    else
 	    {
-	    	exporter = new KM2Ecore(resource);
+	    	exporter = new KM2Ecore(resource, builder);
 	    }
 	
 		exporter.exportPackage(builder.rootPackage);
