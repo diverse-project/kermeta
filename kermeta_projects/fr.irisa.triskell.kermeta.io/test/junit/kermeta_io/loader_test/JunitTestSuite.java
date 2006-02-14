@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2005-09-15 12:40:34 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2006-02-14 10:15:04 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -206,7 +206,7 @@ testloader_testsFile("test/loader_tests","automata.ecore" );
 	    
 	    // KMT2ECORE
 	    KM2Ecore exporter;
-	    exporter = new KM2Ecore(resource);
+	    exporter = new KM2Ecore(resource, builder);
 		exporter.exportPackage(builder.rootPackage);
 	    // Save Ecore structure	
 		try {

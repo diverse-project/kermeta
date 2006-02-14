@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.1 2005-12-20 12:16:04 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.2 2006-02-14 10:15:04 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -209,7 +209,7 @@ testkmtFile("test/roundtrip_testcases/kmt","002_RequireEcore.main.kmt" );
 	    
 	    // KMT2ECORE
 	    KM2Ecore exporter;
-	    exporter = new KM2Ecore(resource);
+	    exporter = new KM2Ecore(resource, builder);
 		exporter.exportPackage(builder.rootPackage);
 	    // Save Ecore structure	
 		try {
