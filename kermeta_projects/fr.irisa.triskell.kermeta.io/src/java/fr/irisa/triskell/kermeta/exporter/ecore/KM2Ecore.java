@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.6 2006-02-10 14:12:06 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.7 2006-02-15 18:22:00 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -14,6 +14,7 @@ package fr.irisa.triskell.kermeta.exporter.ecore;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -66,6 +67,11 @@ public class KM2Ecore {
 	
 	public Tracer tracer = null;
 	
+	// the depending resources informations
+	/** The directory where to save the depending files */
+	protected String ecoreGenDirectory = null;
+	/** The list of available ecore resources provided by the user */
+	protected List<String> ecoreFileList;
 
 	/**
 	 * <code>kmt2ecoremapping</code> is a trace mapping. 
@@ -112,13 +118,28 @@ public class KM2Ecore {
 	}
 	
 	public KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit) {
-		ecoreResource = resource;	
+		this(resource, kunit);
 		traceResource = traceresource;
 		tracer = new Tracer(traceResource);
-		kermetaUnit   = kunit;
 	}
 	
+	/**
+	 * @param ecoregendir The directory where to generate ecore dependencies
+	 */
+	public KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit, String edir, List<String> elist) {
+		this(resource, traceresource, kunit);
+		ecoreFileList = elist;
+		ecoreGenDirectory = edir;
+	}
 	
+	/**
+	 * @param ecoregendir The directory where to generate ecore dependencies
+	 */
+	public KM2Ecore(Resource resource, KermetaUnit kunit, String edir, List<String> elist) {
+		this(resource, kunit);
+		ecoreGenDirectory = edir + "/";
+		ecoreFileList = (elist==null)?new ArrayList<String>():elist;
+	}
 	
 	/**
 	 * Exports the given package into an ecore ressource
@@ -248,4 +269,20 @@ public class KM2Ecore {
 	{
 		return kermetaUnit;
 	}
+
+	/**
+	 * @return Returns the ecoreFileList.
+	 */
+	public List<String> getEcoreFileList() {
+		return ecoreFileList;
+	}
+
+	/**
+	 * @return Returns the ecoreGenDirectory.
+	 */
+	public String getEcoreGenDirectory() {
+		return ecoreGenDirectory;
+	}
+	
+	
 }

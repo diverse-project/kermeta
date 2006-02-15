@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.9 2006-02-13 17:22:11 zdrey Exp $
+/* $Id: UnitExporterWizard.java,v 1.10 2006-02-15 18:19:18 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -107,9 +107,6 @@ public class UnitExporterWizard extends Wizard{
 		if (this instanceof Kermeta2EcoreWizard)
 		{
 			resolvePage = new Kermeta2EcoreResolveWizardPage(OUTPUTFILE_PAGENAME, selection);
-			resolvePage.setTitle("Ecore dependencies handling");
-			resolvePage.setDescription("Choose here where you want to save the ecore resource dependencies, and/or " +
-					"which Ecore files you want to be directly linked to your converted file \"" + kmtfile.getName() + "\"");
 			addPage(resolvePage);
 		}
 		
@@ -189,12 +186,7 @@ public class UnitExporterWizard extends Wizard{
 		{
 			try {
 				
-				if(outputPage.askIfFileExistRadio.getSelection() && outputFile.exists()){
-					Shell shell = new Shell();
-		            if (!MessageDialog.openQuestion(shell, "File already exists", "Do you want to overwrite exiting file: \n" + outputFile.getFullPath().toString()))
-		                return true;
-		        }
-			    else outputFile = outputPage.createNewFile();				
+				outputFile = outputPage.createNewFile();				
 			    
 			    KermetaPlugin.getDefault().getConsoleStream().println("Writing " + outputFile.getName()  );
 				

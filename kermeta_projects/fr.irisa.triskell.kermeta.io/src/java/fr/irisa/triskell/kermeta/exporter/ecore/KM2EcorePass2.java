@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.4 2006-02-10 14:12:06 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.5 2006-02-15 18:22:00 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -58,6 +58,7 @@ import fr.irisa.triskell.kermeta.structure.FVoidType;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
+import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -283,18 +284,18 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	}
 	
 	/**
-	 * Try to find the EClassifier corresponding to the given class definition.
-	 * This method will probably decrease the KM2Ecore conversion process!!
-	 * @param classDefinition
-	 */
-	protected void resolveETypeForEStructuralFeature(FProperty node, EStructuralFeature enode) {
+	 * Find the EClassifier of the specified <code>enode</code>
+	 * */
+	protected EClassifier resolveETypeForEStructuralFeature(FProperty node, EStructuralFeature enode, String ecoreDir)
+	{
+		EClassifier result = null;
 		// Find the unit from which given class come from.
 		List allunits = ecoreExporter.getKermetaUnit().getAllImportedUnits();
 		// The resource where to find the external type -- TODO : store loaded resources.
 		Resource depResource;
 		EObject etype = null;
 		Iterator<KermetaUnit> allunits_it = allunits.iterator();
-		while (allunits_it.hasNext() && etype==null)
+		while (allunits_it.hasNext() && result==null)
 		{
 			KermetaUnit ku = allunits_it.next();
 			String type = KMTHelper.getTypeQualifiedName(node.getFType());
@@ -307,25 +308,86 @@ public class KM2EcorePass2 extends KermetaVisitor{
 					URI u = URI.createURI(ku.getUri());
 					depResource = ecoreResourceSet.getResource(u, true);
 					etype = depResource.getEObject("//" + short_type);
-					enode.setEType((EClassifier)etype); // We are sure that the type is EClassifier...
+					result = (EClassifier)etype;
 				}
 				// If KMUnit, then we have to convert it in an .ecore file!
 				else if (ku instanceof KMUnit || ku instanceof KMTUnit)
 				{
-					System.err.println("KM-Unit dependency!!!"+ short_type);
+					System.err.println("KM-Unit dependency!!!"+ short_type + ecoreDir);
 					// Get the directory where main resource is located (dep resources
 					// will be saved at this same place, for the moment.)
-					String path = ecoreResource.getURI().toString();
+					String path = ecoreDir ; //ecoreResource.getURI().toString();
 					String kmpath = ku.getUri();
 					String savepath = path.substring(0, path.lastIndexOf("/")) + kmpath.substring(kmpath.lastIndexOf("/"), kmpath.lastIndexOf(".km")) + ".ecore";
 					// Create the ecore resource corresponding to kermeta unit on which 
-					depResource = writeEcore(ku, savepath, true); 
-					enode.setEType((EClassifier)depResource.getEObject("//"+ short_type));
+					depResource = writeEcore(ku, savepath, true);
+					result = (EClassifier)depResource.getEObject("//"+ short_type);
 				}
 			}
 		}
+		return result;
 	}
 	
+	/**
+	 * Try to find the EClassifier corresponding to the given structure feature.
+	 * The principle is as following : 
+	 * - if the user chose the "Generate all files" option, then all the dependencies for
+	 * the file to convert will be generated in the specified directory
+	 * - if the user unchecked the "Generate all files" options, then he will have to specify 
+	 * manually which dependencies he wants to use. However, if an element was not found in the user dependencies,
+	 * the required dependencies will be generated in the base directory that user first specified in the first wizard
+	 * dialog.
+	 * (Note : this is not a recursive operation)
+	 * @param classDefinition
+	 * @param ecoreDir the directory where to generate the ecore dependencies. If ecoreList is null,
+	 * it must be set, otherwise it must be null.
+	 * @param  ecoreList the list of ecore dependencies that user manually specified. If it is
+	 * set, then ecoreDir must be null.
+	 */
+	protected void resolveETypeForEStructuralFeature(FProperty node, EStructuralFeature enode, String ecoreDir, List<String> ecoreList) {
+		// robustness test -- may be removed later.
+		EClassifier etype = null;
+		//assert(ecoreDir!=null && ecoreList.size()>0);
+		if (ecoreDir != null) etype = resolveETypeForEStructuralFeature(node, enode, ecoreDir);
+		else etype = resolveETypeForEStructuralFeature(node, enode, ecoreList);
+		enode.setEType(etype);
+	}
+	
+	
+	/** 
+	 * Try to find the searched types in the given ecoreList. 
+	**/
+	protected EClassifier resolveETypeForEStructuralFeature(FProperty node, EStructuralFeature enode, List<String> ecoreList)
+	{
+		// Get the type and short_types
+		String type = KMTHelper.getTypeQualifiedName(node.getFType());
+		String short_type = type.contains(":")?type.substring(type.indexOf(":")+2):type;
+		short_type = short_type.replaceAll("::", "/");
+		
+		EClassifier result = null;
+		Resource depResource = null;
+		Iterator<String> it = ecoreList.iterator();
+		while (it.hasNext() && result==null)
+		{
+			String ustr = it.next();
+			// load the corresponding resource
+			URI u = URIMapUtil.resolveURI("/resource/" + ustr, "platform:/");
+			depResource = ecoreResourceSet.getResource(u, true);
+			result = (EClassifier)depResource.getEObject("//" + short_type);
+		}
+		// if we did not find the type in the user defined resources, than, try to generate
+		// the required resources. This is not a recursive call!!
+		if (result == null)
+		{ 
+			System.err.println("U est-il bien résolu? = " + ecoreResource.getURI().toString());
+			result = resolveETypeForEStructuralFeature(node, enode, ecoreResource.getURI().toString());
+		}
+		else
+		{
+			System.err.println("Caca pourri : " + ecoreResource.getURI().toString()+ "res:"+ result);
+		} 
+		return result;
+	}
 	//
 
 	/**
@@ -427,8 +489,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		{
 			// Perhaps this type is in another resource?
 			internalLog.debug(loggerTabs + "type of this property is null/void");
-			System.err.println("Houloulouuuuuu");
-			resolveETypeForEStructuralFeature(node, newEStructuralFeature);
+			resolveETypeForEStructuralFeature(node, newEStructuralFeature, ecoreExporter.getEcoreGenDirectory(), ecoreExporter.getEcoreFileList());
 		}
 		
 		loggerTabs.decrement();		
@@ -532,5 +593,4 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		}
 		return resource;
 	}
-
 }

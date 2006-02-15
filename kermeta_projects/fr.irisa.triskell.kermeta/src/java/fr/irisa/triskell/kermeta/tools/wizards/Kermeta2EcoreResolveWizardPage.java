@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreResolveWizardPage.java,v 1.1 2006-02-13 17:22:11 zdrey Exp $
+/* $Id: Kermeta2EcoreResolveWizardPage.java,v 1.2 2006-02-15 18:19:18 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -15,11 +15,12 @@
  */
 package fr.irisa.triskell.kermeta.tools.wizards;
 
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jdt.internal.ui.dialogs.TableTextCellEditor;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.DialogField;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.IDialogFieldListener;
@@ -35,31 +36,28 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
-import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
-import org.eclipse.ui.model.WorkbenchContentProvider;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
-import fr.irisa.triskell.kermeta.tools.wizards.dialogs.CustomContainerSelectionGroup;
+import fr.irisa.triskell.kermeta.tools.wizards.dialogs.BasicLabelProvider;
+import fr.irisa.triskell.kermeta.tools.wizards.dialogs.ContainerFieldAdapter;
+import fr.irisa.triskell.kermeta.tools.wizards.util.WizardHelper;
 
 /**
  * Standard main page for a wizard that point to a destination file resource.
@@ -69,25 +67,39 @@ import fr.irisa.triskell.kermeta.tools.wizards.dialogs.CustomContainerSelectionG
  * 
  */
 public class Kermeta2EcoreResolveWizardPage extends WizardPage implements Listener {
-	// The attributes default values linked to the options displayed on the page
-	public static final String DEFAULT_GEN_DIR = "build/ecore"; // "platform:/resource/project_name/" + DEFAULT_GEN_DIR
-	// TODO for this purpose, need to store the generated file names
-	public static final boolean OVERWRITE_GEN_DIR = true;
 
-	// The strings displayed in the windo
-	public static final String DEFAULT_GEN_DIR_MESSAGE = KermetaMessages.getString("Kermeta.USEDEFAULTGENDIR");
-    public static final String GEN_ALL_ECORE_FILES = KermetaMessages.getString("Kermeta.GENALLECOREFILES");
+	
+	protected static final int PROBLEM_NONE = 0;
 	
 	// the current resource selection
 	protected	IStructuredSelection currentSelection;
-	
+	protected IResource ecoreGenerationDirectory ;
+	protected String ecoreFolder ;
+	protected List<IFile> ecoreLinkedFiles;
+	protected List<String> ecoreFileList;
+	// Specific GUI elements
+	/** Basic label provider to display properly graphical elements (like navigation tree view for file selection)*/
+	protected BasicLabelProvider labelProvider;
+	/**
+	 * Dialog field to let the user choose the directory where ecore files will be generated.
+	 * Only active if user asked to overwrite the generated ecore files. 
+	 * */
 	protected StringButtonDialogField containerDialogField;
-	private Group ecoreFileListGroup;
-	private ListDialogField requiredEcoreFileDialogField;
+	protected Group ecoreFileListGroup;
+	protected ListDialogField requiredEcoreFileDialogField;
+	
+	// Wizard helper
+	protected WizardHelper wizhelper;
 	
 	// The main sub group that will contain the different widgets
-	Composite composite;
-	private CustomContainerSelectionGroup containerGroup;
+	protected Composite topLevel;
+	protected int problemType;
+	protected Button overwriteEcoreFilesButton;
+	protected String enableOverwriteEcoreFilesString="Generate file ";
+	protected Composite overwriteEcoreFilesComposite;
+	
+	public final static int INVALID_FIELD = 1;
+	public final static int NONE = 0;
 	
 	/**
 	 * selects a destination file wizard page. If the initial resource selection 
@@ -99,42 +111,57 @@ public class Kermeta2EcoreResolveWizardPage extends WizardPage implements Listen
 	 */
 	public Kermeta2EcoreResolveWizardPage(String pageName, IStructuredSelection selection) {
 		super(pageName);
+		setTitle("Ecore dependencies handling");
+		setDescription("Choose where you want to save the ecore resource\n dependencies, or " +
+				"which Ecore files you want to link to your converted file"); // + kmtfile.getName() + "\"");
+		
 		setPageComplete(false);
 		this.currentSelection = selection;
+		this.wizhelper = new WizardHelper(this);
+		this.ecoreLinkedFiles = new ArrayList<IFile>();
 	}
-		 
-	// ------ UI --------
 	
 	/**
 	 * @see WizardPage#createControl
 	 */
 	public void createControl(Composite parent) {
-		initializeDialogUnits(parent);
-		composite= new Composite(parent, SWT.NONE);
-		composite.setFont(parent.getFont());
+		// init util
+		topLevel= new Composite(parent, SWT.NONE);
+		topLevel.setFont(parent.getFont());
 		
 		int nColumns= 4;
+		GridLayout layout= new GridLayout(nColumns, false);
+		topLevel.setLayout(layout);
+		// FIXME for the moment GridData causes problems when WizardPage is updated in Eclipse source code
+		// (ClassCastException)
+/*		topLevel.setLayoutData(new GridData(
+				GridData.VERTICAL_ALIGN_FILL | GridData.HORIZONTAL_ALIGN_FILL));*/
+		topLevel.setFont(parent.getFont());
 		
-		GridLayout layout= new GridLayout();
-		layout.numColumns= nColumns;		
-		composite.setLayout(layout);
-				
-		// Create the container dialog field ( the one where user choose an output directory for resource ecore dependencies)
-		createContainerControls(composite, nColumns);	
+		// Create the dialog field where user choose an output directory for resource ecore dependencies)
+		createContainerControls(topLevel, nColumns);	
 		
 		// Create an esthetic separator
-		createSeparator(composite, nColumns);
+		createSeparator(topLevel, nColumns);
 
 		// Create the ecore list where user 
-		createRequiredEcoreFileList(composite, nColumns);
+		createRequiredEcoreFileList(topLevel, nColumns);
 		
-		setControl(composite);
-			
-		Dialog.applyDialogFont(composite);
-//		PlatformUI.getWorkbench().getHelpSystem().setHelp(composite, IJavaHelpContextIds.NEW_CLASS_WIZARD_PAGE);	
+		setControl(topLevel);
+		
+		// Initialize the WizardPage state
+		initControlState();
+	
+		Dialog.applyDialogFont(topLevel);
+		
+		validatePage();
 	}
 	
-	
+	/** Initialize the WizardPage state */
+	private void initControlState() {
+		handleOverwriteEcoreFilesButton();
+	}
+
 	/**
 	 * Creates the necessary controls (label, text field and browse button) to edit
 	 * the source folder location. The method expects that the parent composite
@@ -146,14 +173,36 @@ public class Kermeta2EcoreResolveWizardPage extends WizardPage implements Listen
 	 *  greater or equal three
 	 */
 	protected void createContainerControls(Composite parent, int nColumns) {
+
+		// create check button holder
+		overwriteEcoreFilesComposite = new Composite(parent, SWT.NONE);
+		overwriteEcoreFilesComposite.setLayout(new GridLayout(nColumns,false));
+
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalSpan=4;
+		overwriteEcoreFilesComposite.setLayoutData(gd);
+		
+		overwriteEcoreFilesButton = new Button(overwriteEcoreFilesComposite, SWT.CHECK);
+		overwriteEcoreFilesButton.setSelection(false);
+		Label label = new Label(overwriteEcoreFilesComposite, SWT.NULL);
+		label.setText(KermetaMessages.getString("Kermeta2Ecore.OVERWRITEGENDIR"));
+		
 		// Create the field where user choosed for the output directory for ecore-generated files
-		ContainerFieldAdapter adapter= new ContainerFieldAdapter();
+		ContainerFieldAdapter adapter= new ContainerFieldAdapter(this);
 		containerDialogField= new StringButtonDialogField(adapter);
 		containerDialogField.setDialogFieldListener(adapter);
 		containerDialogField.setLabelText(KermetaMessages.getString("Kermeta2Ecore.GENDIR")); 
 		containerDialogField.setButtonLabel(KermetaMessages.getString("KermetaPerspective.BROWSE"));
 		containerDialogField.doFillIntoGrid(parent, nColumns);
+		containerDialogField.setEnabled(false);
 		LayoutUtil.setWidthHint(containerDialogField.getTextControl(null), 50);
+		
+		overwriteEcoreFilesButton.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				handleOverwriteEcoreFilesButton();
+			}
+		});
+		setPageComplete(validatePage());
 	}
 
 	/**
@@ -183,15 +232,14 @@ public class Kermeta2EcoreResolveWizardPage extends WizardPage implements Listen
 	/** Create the space (table-like) where ecore files added to the ecore dependencies are specified */
 	protected void createEcoreFileField()
 	{
-		
-		EcoreFieldsAdapter adapter =new EcoreFieldsAdapter(); // don't know the usefulness yet 
+		EcoreFieldsAdapter adapter =new EcoreFieldsAdapter();
 		requiredEcoreFileDialogField = new ListDialogField(
 				adapter, 
 				createAddAndRemoveButtons(), 
-				new LabelProvider()); // FIXME : a simple LabelProvider would be better
+				new BasicLabelProvider());
 		requiredEcoreFileDialogField.setDialogFieldListener(adapter);
 		requiredEcoreFileDialogField.setTableColumns(new ListDialogField.ColumnsDescription(1, false));
-		requiredEcoreFileDialogField.setLabelText("");
+		requiredEcoreFileDialogField.setLabelText(KermetaMessages.getString("Kermeta2Ecore.ADDCHOICE"));
 		requiredEcoreFileDialogField.setRemoveButtonIndex(2);
 	}
 	/**
@@ -224,7 +272,6 @@ public class Kermeta2EcoreResolveWizardPage extends WizardPage implements Listen
 		        }
 		    }
 		};
-		
 		tableViewer.setCellEditors(new CellEditor[] { cellEditor });
 		tableViewer.setCellModifier(new ICellModifier() {
 			public void modify(Object element, String property, Object value) {
@@ -270,69 +317,6 @@ public class Kermeta2EcoreResolveWizardPage extends WizardPage implements Listen
 	}
 	
 	/**
-	 * creates controls that fit before the main controls
-	 * @param parent
-	 */
-	protected void createPreControls(Composite parent) {
-		// nothing special here, placeholder for children classes
-	}
-	
-	/**
-	 * Create the group that contains the option "(Re-)generate all required ecore files"
-	 * and the subwindow that contains required ecore files specified by the user
-	 * @param parent
-	 */
-	protected void createGeneratedEcoreFilesControl(Composite parent) {
-		Font font = parent.getFont();
-        // Advanced group
-        ecoreFileListGroup = new Group(parent, SWT.NONE);
-        GridLayout layout = new GridLayout(2,false);
-        ecoreFileListGroup.setLayout(layout);
-        ecoreFileListGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-        ecoreFileListGroup.setFont(font);
-        ecoreFileListGroup.setText("I want to reuse the following ecore files for the process generation:");         
-        
-        // ecoreFileListGroup : the gui group where to add ...
-        // 1) a radio button " overwrite last generated ecore directory content"
-		// " Generate all the ecore files required by the main one "
-        Label label = new Label(ecoreFileListGroup, SWT.NULL);
-		label.setText(KermetaMessages.getString("Kermeta2Ecore.GENALLECOREFILES"));
-
-		// 2) give, as an information, the list of files  in the gen directory (given by the user in this page)?
-
-		
-		// 2) a window, in which user will add the files that he wants to be used
-		// Only enabled if user did not deselect the preceding radio button 
-		
-	}
-
-	/**
-	 * Creates a file resource handle for the file with the given workspace path.
-	 * This method does not create the file resource; this is the responsibility
-	 * of <code>createFile</code>.
-	 *
-	 * @param filePath the path of the file resource to create a handle for
-	 * @return the new file resource handle
-	 * @see #createFile
-	 */
-	protected IFile createFileHandle(IPath filePath) {
-		return IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(filePath);
-	}
-	
-	
-
-	/**
-	 * Returns a stream containing the initial contents to be given to new file resource
-	 * instances.  <b>Subclasses</b> may wish to override.  This default implementation
-	 * provides no initial contents.
-	 *
-	 * @return initial contents to be given to new file resource instances
-	 */
-	protected InputStream getInitialContents() {
-		return null;
-	}
-
-	/**
 	 * The <code>DestFileWizardPage</code> implementation of this 
 	 * <code>Listener</code> method handles all events and enablements for controls
 	 * on this page. Subclasses may extend.
@@ -341,120 +325,180 @@ public class Kermeta2EcoreResolveWizardPage extends WizardPage implements Listen
 		setPageComplete(validatePage());
 	}
 	
-	/**
-	 * Returns whether this page's controls currently all contain valid 
-	 * values.
-	 *
-	 * @return <code>true</code> if all controls are valid, and
-	 *   <code>false</code> if at least one is invalid
-	 */
-	protected boolean validatePage() {
-		boolean valid = true;
-		return valid;
+	public void handleOverwriteEcoreFilesButton() {
+		
+		boolean selection = overwriteEcoreFilesButton.getSelection();
+		if(!selection)
+		{	// page is valid
+			setErrorMessage(null);
+			setMessage(null);
+			setPageComplete(true);
+		}
+		containerDialogField.setEnabled(selection);
+		requiredEcoreFileDialogField.setEnabled(!selection);
+		//requiredEcoreFileDialogField.enableButton(0, !selection);
+		setPageComplete(validatePage());
 	}
 
 	/**
-	 * FIXME not needed
-	 * Copied from jdt sources.
-	 * @see org.eclipse.jdt.ui.wizards.NewContainerWizardPage
+	 * Returns whether this page's controls currently all contain valid 
+	 * values. If it is the case, then it activates the Next/Finish button(s)
+	 *
+	 * @return <code>true</code> if all controls are valid, and
+	 *   <code>false</code> if at least one is invalid;
 	 */
-	private class ContainerFieldAdapter implements IStringButtonAdapter, IDialogFieldListener {
-		// -------- IStringButtonAdapter
-		public void changeControlPressed(DialogField field) {
-			// actually it cannot be another type than StringDialogField.
-			if (field instanceof StringDialogField)	handleBrowseFolders((StringDialogField)field);
+	public boolean validatePage() {
+		boolean valid = true;
+		if(!overwriteEcoreFilesButton.getSelection())
+		{
+			valid = true;
 		}
-		// -------- IDialogFieldListener
-		public void dialogFieldChanged(DialogField field) {
+		else
+		{
+			valid = false;
+			// Is the ecore gen directory provided?
+			if (ecoreFolder==null || ecoreFolder.length()==0) {
+				setMessage(KermetaMessages.getString("Kermeta2Ecore.PROBLEM_EMPTYGENDIR"));
+			}
+			else
+			{
+				valid = true;
+				ecoreGenerationDirectory=getIPathFromString(ecoreFolder);
+				if (ecoreGenerationDirectory==null)
+				{
+					setMessage(KermetaMessages.getString("Kermeta2Ecore.PROBLEM_BADGENDIR"));
+				}
+					
+			}
 		}
+		if (valid == true && this.isCurrentPage() )
+		{
+			setMessage(null);
+			setErrorMessage(null);
+		}
+
+		return valid;
 	}
 	
+	/**
+	 * @return <code>true</code> if given resource corresponds to a real resource,
+	 *   <code>false</code> if it does not exist;
+	 */
+	public boolean validatePageForResource(String resource) {
+		return (resource!=null && resource.length()>0 && getIPathFromString(resource)!=null);
+	}
 	
+	/**
+     * Returns a boolean indicating whether all controls in this group
+     * contain valid values.
+     *
+     * @return boolean
+     */
+    public boolean areAllValuesValid() {
+        return problemType == PROBLEM_NONE;
+    }
+	
+	
+    /** Adapter that handles events from the table field of this wizard page */
 	private class EcoreFieldsAdapter implements IStringButtonAdapter, IDialogFieldListener, IListAdapter, SelectionListener {
 		
 		// -------- IStringButtonAdapter
-		public void changeControlPressed(DialogField field) {
-			System.err.println("change control pressed");
-		}
+		public void changeControlPressed(DialogField field) {}
 		
-		// -------- IListAdapter
+		// -------- IListAdapter // index is always O... -> Add... button.
 		public void customButtonPressed(ListDialogField field, int index) {
-			System.err.println("custom button pressed");
-			handleBrowseEcoreFiles(field);
+			wizhelper.handleBrowseEcoreFiles(field, ecoreLinkedFiles, index);
+			ecoreFileList = field.getElements();
 		}
-		
-		public void selectionChanged(ListDialogField field) {}
+		public void selectionChanged(ListDialogField field)
+		{ecoreFileList = field.getElements();}
 		
 		// -------- IDialogFieldListener
-		public void dialogFieldChanged(DialogField field) {
-			System.err.println("dialog field changed");
-		}
-		
+		public void dialogFieldChanged(DialogField field) {}
 		public void doubleClicked(ListDialogField field) {}
-		public void widgetSelected(SelectionEvent e) { System.err.println("widget selected"); }
-		public void widgetDefaultSelected(SelectionEvent e) { System.err.println("widget default selected");}
-	}
-
-	
-    /**
-	 * Uses the standard container selection dialog to
-	 * choose the new value for the container field.
-	 * Copy from Runner --> redundant code...
-	 */
-
-	protected IResource handleBrowseResources() {
-	    IResource result = null;
-	    //LabelProvider labelProvider = new KermetaLabelProvider();
-	    org.eclipse.jface.viewers.LabelProvider labelProvider = new LabelProvider();
-	    containerGroup = new CustomContainerSelectionGroup(getShell(), this, true,
-                null, true);
-		
-		// Now, create the tree
-		//BasicTreeContentProvider contentProvider = new BasicTreeContentProvider();
-		WorkbenchContentProvider contentProvider = new WorkbenchContentProvider();
-		ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(getShell(), labelProvider, contentProvider);
-		dialog.setTitle(KermetaMessages.getString("ArgTab.PROJECTSELECT"));
-		dialog.setInput(containerGroup.getTreeViewer().getInput());
-		dialog.setAllowMultiple(false);
-		
-		
-		
-		// Set the default selection to currently selected resource
-		ISelection sresource = 
-		KermetaPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getSelectionService().getSelection();
-		if (sresource instanceof IStructuredSelection)
-		{ 
-		    if (((IStructuredSelection)sresource).getFirstElement() instanceof IResource )
-			{ dialog.setInitialSelections(new Object[] {((IStructuredSelection)sresource).getFirstElement()});}
-		}
-
-		if (dialog.open() == Window.OK)
-		{		
-			result = (IResource) dialog.getFirstResult();
-		}
-		return result;
-		
+		public void widgetSelected(SelectionEvent e) {}
+		public void widgetDefaultSelected(SelectionEvent e) {}
 	}
 	
-    /**
-	 * Open a tree hierarchy of the current workspace folder, and update content
-	 * by displaying the resource that the user selected in the given field.
-	 */
-	protected void handleBrowseFolders(StringDialogField field) {
-		// Get the first resource selected by the user
-		IResource result = handleBrowseResources();
-		if (result != null)
-			field.setText(result.getFullPath().toString() + "/" + result.getName());
+	/** Helper method that checks if file exists 
+	 *  @param filestring the string that we want to check if it corresponds to an existing file in 
+	 *  current workspace. It must not be null.
+	 *   */
+	public static IResource getIPathFromString(String filestring) {
+		return ResourcesPlugin.getWorkspace().getRoot().findMember(filestring);
 	}
-	
+
 	/**
-	 * Open a tree hierarchy of the current workspace folder, and update content
-	 * by displaying the resource that the user selected in the given field.
+	 * @return Returns the ecoreGenerationDirectory.
 	 */
-	protected void handleBrowseEcoreFiles(ListDialogField field) {
-		// Get the first resource selected by the user
-		IResource result = handleBrowseResources();
-		field.addElement(result.getFullPath().toString() + "/" + result.getName());
+	public String getEcoreFolder() {
+		return ecoreFolder;
 	}
+
+	/**
+	 * @return Returns the ecoreLinkedFiles.
+	 */
+	public List<IFile> getEcoreLinkedFiles() {
+		return ecoreLinkedFiles;
+	}
+
+	/**
+	 * @param ecoreFileList The ecoreFileList to set.
+	 */
+	public void setEcoreFileList(List<String> ecoreFileList) {
+		this.ecoreFileList = ecoreFileList;
+	}
+
+	/**
+	 * @param ecoreFolder The ecoreFolder to set.
+	 */
+	public void setEcoreFolder(String ecoreFolder) {
+		this.ecoreFolder = ecoreFolder;
+	}
+
+	/**
+	 * @return Returns the wizhelper.
+	 */
+	public WizardHelper getWizhelper() {
+		return wizhelper;
+	}
+
+	/**
+	 * @return Returns the problemType.
+	 */
+	public int getProblemType() {
+		return problemType;
+	}
+
+	/**
+	 * @param problemType The problemType to set.
+	 */
+	public void setProblemType(int problemType) {
+		this.problemType = problemType;
+	}
+
+	/**
+	 * @return Returns the topLevel.
+	 */
+	public Composite getTopLevel() {
+		return topLevel;
+	}
+	
+	/** @return true if user set an ecore directory and enabled the related check box
+	 * false otherwise */
+	public boolean overwriteGeneratedEcore()
+	{
+		return overwriteEcoreFilesButton.getSelection();
+	}
+
+	/**
+	 * @return Returns the ecoreFileList.
+	 */
+	public List<String> getEcoreFileList() {
+		return ecoreFileList;
+	}
+	
+	
+
 	
 }

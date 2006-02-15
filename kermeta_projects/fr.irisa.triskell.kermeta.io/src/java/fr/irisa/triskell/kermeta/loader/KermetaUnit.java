@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.48 2006-01-30 09:47:34 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.49 2006-02-15 18:22:00 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -102,7 +102,6 @@ public abstract class KermetaUnit {
 		behav_factory = BehaviorPackageImpl.init().getBehaviorFactory();
 		
 		interpreter_symbols = new Hashtable();
-		
 		interpreter_symbols.put("stdio", new KMSymbolInterpreterVariable("stdio"));
 		
 		
@@ -421,11 +420,11 @@ public abstract class KermetaUnit {
 	 */
 	public ArrayList getAllImportedUnits()
 	{
-		ArrayList result = new ArrayList();
+		ArrayList<KermetaUnit> result = new ArrayList<KermetaUnit>();
 		getAllImportedUnits(result);
 		return result;
 	}
-	public void getAllImportedUnits(ArrayList currentList)
+	public void getAllImportedUnits(ArrayList<KermetaUnit> currentList)
 	{
 	    for (int i=0; i<importedUnits.size(); i++) {
 	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);

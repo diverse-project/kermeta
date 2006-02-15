@@ -1,4 +1,4 @@
-/* $Id: URIMapUtil.java,v 1.1 2005-10-21 13:25:18 dvojtise Exp $
+/* $Id: URIMapUtil.java,v 1.2 2006-02-15 18:22:00 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : XMLMap.java
  * License    : EPL
@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 
 /**
@@ -109,6 +111,18 @@ public class URIMapUtil {
 	{
 		map.put(URI.createURI(key),
     			URI.createURI(value));
+	}
+	
+	/** Resolves the uri given its relative path <code>uri</code> and
+	 *  the expected base directory given by <code>rel_path</code>*/
+	public static URI resolveURI(String uri, String rel_path)
+	{
+		URI u = URI.createURI(uri);
+		if (u.isRelative()) {
+			URIConverter c = new URIConverterImpl();
+			u = u.resolve(c.normalize(URI.createURI(rel_path)));    			
+		}
+		return u;
 	}
 	
 }

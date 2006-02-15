@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.1 2006-02-13 17:22:11 zdrey Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.2 2006-02-15 18:19:18 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -14,6 +14,7 @@
 package fr.irisa.triskell.kermeta.tools.wizards;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
@@ -32,8 +33,10 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  * It may be subclassed in order to add new pages or customize the messages.
  */
 public class Kermeta2EcoreWizard extends UnitExporterWizard{
-		
-
+	
+	/** Default dir. where ecore files will be generated */
+	public static final String DEFAULT_GEN_DIR = "build/ecore"; // "platform:/resource/project_name/" + DEFAULT_GEN_DIR
+	
 	
 /*	protected ResourceSet trace_resource_set;
 	protected Resource trace_resource = null;
@@ -96,18 +99,22 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	    Resource resource = resource_set.createResource(u);
 	    
 	    KM2Ecore exporter;
+	    String gendir = null;
+	    List<String> ecorelist = null;
+	    
+    	if (this.resolvePage.overwriteGeneratedEcore())
+    		gendir = this.resolvePage.getEcoreFolder();
+    	else
+    		ecorelist = this.resolvePage.getEcoreFileList();
+	    
 	    if(this.tracePage.enableFileDestinationButton.getSelection())
 	    {
 	    	if (trace_resource == null) initTraces();
-	    	exporter = new KM2Ecore(resource, trace_resource, builder);
+	    	exporter = new KM2Ecore(resource, trace_resource, builder, gendir, ecorelist);
 	    }
-	    else
-	    {
-	    	exporter = new KM2Ecore(resource, builder);
-	    }
+	    else exporter = new KM2Ecore(resource, builder, gendir, ecorelist);
 	
 		exporter.exportPackage(builder.rootPackage);
-		
 		
 	    // Save Ecore structure	
 		try {
