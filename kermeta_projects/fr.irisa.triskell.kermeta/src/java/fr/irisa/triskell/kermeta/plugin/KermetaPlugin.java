@@ -11,6 +11,7 @@ import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.plugin.*;
 import org.osgi.framework.BundleContext;
 
+import fr.irisa.triskell.kermeta.KermetaIcons;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -27,9 +28,10 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	private static KermetaPlugin plugin = null;
 	//Resource bundle.
 	private ResourceBundle resourceBundle;
-	
-//	 logger for this plugin
-	static protected Logger pluginLog;
+	//Icons "registry"
+	protected static KermetaIcons kermetaIcons;
+	// Logger for this plugin
+	protected static Logger pluginLog;
 	
 	public static final String PLUGIN_CONSOLE_NAME = "KerMeta.Plugin.Console";
 	protected MessageConsoleStream consoleStream = null;
@@ -58,7 +60,7 @@ public class KermetaPlugin extends AbstractUIPlugin {
 		/*note : be careful this method must not fail ! otherwise all the plugin that depends on it will fail too with a non explicit message !
 		 */
 		super.start(context);
-
+		this.kermetaIcons = new KermetaIcons(KermetaPlugin.getDefault().getBundle().getEntry("/"));
 		// initialize the log4j system using the configuration file contained in this plugin
 		try {
 			URL url = getBundle().getEntry("/kermeta_log4j_configuration.xml");		
@@ -205,4 +207,8 @@ public class KermetaPlugin extends AbstractUIPlugin {
     	mcs.setColor(new Color(null, 255,0,0));
     	mcs.println(oStream.toString());
 	}
+	
+	/* ACCESSORS */
+	public static KermetaIcons getKermetaIcons() { return kermetaIcons; }
+	
 }
