@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.5 2006-02-09 13:04:25 zdrey Exp $
+/* $Id: Resource.java,v 1.6 2006-02-15 10:54:06 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : GPL
@@ -42,11 +42,11 @@ public class Resource {
         return instances.getFactory().getMemory().voidINSTANCE;
     }
     
-    // Implementation of method load called as :
-    // extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(uri, type)
-    // This creates a RuntimeUnit adapted to the given type (we are expecting from type "EMF", "MDR"),
-    // Which "handles" a Collection of instances, represented as a RuntimeObject
     /**
+     *  Implementation of method load called as :
+     * extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(uri, type)
+     * This creates a RuntimeUnit adapted to the given type (we are expecting from type "EMF", "MDR"),
+     * Which "handles" a Collection of instances, represented as a RuntimeObject    
      * @param uri the uri of the EMF model to load
      * @param mmUri the uri of the Ecore meta-model of which EMF model is an 
      *        instance; it can be an empty string. In such a case, the meta model uri
