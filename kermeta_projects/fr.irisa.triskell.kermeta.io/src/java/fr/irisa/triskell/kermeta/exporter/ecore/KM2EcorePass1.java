@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.3 2006-02-10 14:12:06 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.4 2006-02-16 13:19:08 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -57,6 +57,7 @@ public class KM2EcorePass1 extends KermetaVisitor{
 	protected String root_pname;
 	public	FPackage root_p;
 	protected String current_pname;
+	protected String current_ppath;
 	protected TextTabs loggerTabs =  new TextTabs("   ","");
 	protected KM2Ecore ecoreExporter;
 	
@@ -84,7 +85,7 @@ public class KM2EcorePass1 extends KermetaVisitor{
 	public Object exportPackage(FPackage root_package) {
 		root_pname = KMTHelper.getQualifiedName(root_package);
 		root_p = root_package;
-		
+		current_ppath = "";
 		return accept(root_package);
 	}
 	
@@ -97,6 +98,8 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		loggerTabs.increment();
 		
 		EPackage newEPackage = EcoreFactory.eINSTANCE.createEPackage();
+		newEPackage.setNsPrefix(current_pname);
+		newEPackage.setNsURI(ecoreExporter.getKermetaUnit().getUri() + (p==root_p?"":"#/") + current_ppath);
 		newEPackage.setName(current_pname);
 		ecoreResource.getContents().add(newEPackage);
 		km2ecoremapping.put(p,newEPackage);
@@ -106,7 +109,11 @@ public class KM2EcorePass1 extends KermetaVisitor{
 
 		Iterator it = p.getFNestedPackage().iterator();
 		while(it.hasNext()) {
-			newEPackage.getESubpackages().add(accept((EObject)it.next()));
+			FPackage next = (FPackage)it.next();
+			current_ppath += "/" + next.getFName();
+			newEPackage.getESubpackages().add(accept(next));
+			int cl = current_ppath.length();
+			current_ppath = current_ppath.substring(0, cl - next.getFName().length()-1);
 		}
 		
 		
@@ -121,6 +128,8 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		}
 		
 		loggerTabs.decrement();
+		System.err.println("current_ppath:" + current_ppath + "-> " + current_pname);
+		
 		return newEPackage;
 	}
 	
@@ -380,7 +389,5 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		}
 		km2ecoremapping.put(node,newEClassifier);
 		return newEClassifier;
-	}
-	
-		
+	}	
 }

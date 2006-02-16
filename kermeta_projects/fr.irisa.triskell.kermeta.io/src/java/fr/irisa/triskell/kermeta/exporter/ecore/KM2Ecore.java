@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.7 2006-02-15 18:22:00 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.8 2006-02-16 13:19:08 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -152,21 +152,6 @@ public class KM2Ecore {
 		KM2EcorePass2 pass2 =  new KM2EcorePass2(ecoreResource, km2ecoremapping, this);
 		Object result =  pass1.exportPackage(root_package);
 		pass2.exportPackage(root_package);
-		// set the nsURI of the root package
-		if(result instanceof EPackage){
-			EPackage rP = (EPackage)result;
-			String uri = "./"+ecoreResource.getURI().lastSegment();
-			//String uri = ecoreResource.getURI().toString();
-			rP.setNsURI(uri);
-			rP.setNsPrefix(rP.getName());
-			internalLog.debug("Package "+ root_pname +" nsURI set to: "+ uri );
-			
-		}
-		else
-		{
-			internalLog.debug("Not a EPackage ! "+ result + ", Cannot put nsURI" );
-			
-		}
 		return result;
 	}
 	
