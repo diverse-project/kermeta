@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.4 2006-02-16 13:19:08 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.5 2006-02-16 13:28:53 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -128,8 +128,6 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		}
 		
 		loggerTabs.decrement();
-		System.err.println("current_ppath:" + current_ppath + "-> " + current_pname);
-		
 		return newEPackage;
 	}
 	
