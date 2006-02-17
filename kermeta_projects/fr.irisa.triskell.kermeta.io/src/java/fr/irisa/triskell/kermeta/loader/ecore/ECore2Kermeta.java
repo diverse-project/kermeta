@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.9 2006-02-17 10:38:05 zdrey Exp $
+/* $Id: ECore2Kermeta.java,v 1.10 2006-02-17 10:48:01 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
 * License : EPL
@@ -123,7 +123,7 @@ public class ECore2Kermeta extends EcoreVisitor {
 			// visit the EAnnotations of the metamodel
 			Iterator ops = visitor.operations.entrySet().iterator();
 			while(ops.hasNext()) {
-			    Map.Entry op_entry = (Map.Entry)ops.next();
+				Map.Entry op_entry = (Map.Entry)ops.next();
 			    EOperation eop = (EOperation)op_entry.getKey();
 			    visitor.current_op = (FOperation)op_entry.getValue();
 			    if (eop.getEAnnotation(KM2Ecore.KMT2ECORE_ANNOTATION)!=null)
@@ -385,6 +385,9 @@ public class ECore2Kermeta extends EcoreVisitor {
         }
         current_op.setFOwningClass(current_classdef);
         operations.put(node, current_op);
+        
+        acceptList(node.getEAnnotations());
+        
         acceptList(node.getEParameters());
     	
         return current_op;
@@ -476,8 +479,6 @@ public class ECore2Kermeta extends EcoreVisitor {
     public Object visit(EAnnotation node)
     {	
         String result = "";
-        System.err.println("Source !!!" + node.getSource());
-        System.err.println("Details !!!" + node.getDetails());
     	if (node.getDetails().containsKey(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS))
     	{	
     	    result = (String)node.getDetails().get(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS);
