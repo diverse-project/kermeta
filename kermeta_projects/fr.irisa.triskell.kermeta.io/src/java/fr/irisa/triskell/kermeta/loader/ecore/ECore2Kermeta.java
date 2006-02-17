@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.8 2005-09-15 12:40:34 dvojtise Exp $
+/* $Id: ECore2Kermeta.java,v 1.9 2006-02-17 10:38:05 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
 * License : EPL
@@ -10,12 +10,15 @@
 
 package fr.irisa.triskell.kermeta.loader.ecore;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -31,6 +34,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -38,8 +42,10 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
@@ -51,6 +57,7 @@ import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
@@ -66,6 +73,9 @@ public class ECore2Kermeta extends EcoreVisitor {
 	public static String methodRenamePrefix = "op_";
 	public static String methodRenamePostfix = "";
 	public static boolean isMethodNameOverlapSafe = true;
+	// to differenciate the owner of a "KermetaTypeParameter" annotation -> either an EClass or an EOperation
+	// since the info. is not contained in this annotation
+	public boolean isClassTypeOwner = true;
 	
 	/** mapping between EOpretaions and FOperations     */
     protected Hashtable operations;
@@ -227,7 +237,7 @@ public class ECore2Kermeta extends EcoreVisitor {
     }
     
     public Object visit(EClass node) {
-        
+    	isClassTypeOwner = true;
         FTypeDefinition td = unit.typeDefinitionLookup(getQualifiedName(node));
         if (td != null) {
             unit.messages.addError("Duplicate definition of type " + getQualifiedName(node), td);
@@ -249,6 +259,8 @@ public class ECore2Kermeta extends EcoreVisitor {
             }
             current_classdef.getFSuperType().add(t);
         }
+        // Class annotations
+        acceptList(node.getEAnnotations());
         
         // properties and operations:
         acceptList(node.getEStructuralFeatures());
@@ -335,6 +347,7 @@ public class ECore2Kermeta extends EcoreVisitor {
     public Object visit(EOperation node) {
         // FIXME : handle super operations
     	// FIXME : handle raised exceptions
+    	isClassTypeOwner = false;
     	current_op = unit.struct_factory.createFOperation();
     	current_op.setFName(getEscapedName(node));
   
@@ -462,16 +475,37 @@ public class ECore2Kermeta extends EcoreVisitor {
      */
     public Object visit(EAnnotation node)
     {	
-        String body = "";
+        String result = "";
+        System.err.println("Source !!!" + node.getSource());
+        System.err.println("Details !!!" + node.getDetails());
     	if (node.getDetails().containsKey(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS))
     	{	
-    	    body = (String)node.getDetails().get(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS);
+    	    result = (String)node.getDetails().get(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS);
     	    // Parse and inject
-    	    this.current_op.setFBody(ExpressionParser.parse(unit, body));
+    	    this.current_op.setFBody(ExpressionParser.parse(unit, result));
     	}
-    	return body;
+    	
+    	else if (node.getSource().equals(KM2Ecore.KMT2ECORE_ANNOTATION_TYPEPARAMETER))
+    	{
+    		
+    		EMap map = node.getDetails();
+    		List<FTypeVariable> params = new ArrayList<FTypeVariable>();
+    		Iterator<String> it = map.keySet().iterator();
+    		while (it.hasNext())
+    		{
+    			String name = it.next();
+    			FTypeVariable tv = unit.struct_factory.createFTypeVariable();
+    			tv.setFName(name);
+    			params.add(tv);
+    		} 
+    		// for current_class - add the parameter to the class
+    		if (isClassTypeOwner==true) current_classdef.getFTypeParameter().addAll(params);
+    		// for current_op
+    		else current_op.getFTypeParameter().addAll(params);
+    	}
+    	return result;
     }
-    
+   
     protected static Hashtable primitive_types_mapping;
 
     static {
