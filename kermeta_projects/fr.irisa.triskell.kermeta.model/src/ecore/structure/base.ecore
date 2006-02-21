@@ -4,7 +4,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
     nsURI="http://ftm" nsPrefix="ftm">
   <eSubpackages name="structure">
-    <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//structure/Type">
+    <eClassifiers xsi:type="ecore:EClass" name="Class">
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
           eType="#//structure/Property" changeable="false" derived="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
