@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.8 2006-02-16 13:19:08 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.9 2006-02-21 17:51:19 jsteel Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -237,7 +237,7 @@ public class KM2Ecore {
 		if(type instanceof FClass){
 			// retreive the qualified name of the definition of this class
 			FClass fClass = (FClass)type;
-			type_def_name = KMTHelper.getQualifiedName(fClass.getFClassDefinition());
+			type_def_name = KMTHelper.getQualifiedName(fClass.getFTypeDefinition());
 			if (KM2Ecore.primitive_types_mapping.containsKey(type_def_name)) {
 				return true;
 			}

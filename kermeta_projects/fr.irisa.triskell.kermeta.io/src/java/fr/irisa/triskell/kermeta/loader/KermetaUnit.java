@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.49 2006-02-15 18:22:00 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.50 2006-02-21 17:51:19 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -42,6 +42,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
+import fr.irisa.triskell.kermeta.structure.FModelTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FNamedElement;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FOperation;
@@ -50,6 +51,7 @@ import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTag;
 import fr.irisa.triskell.kermeta.structure.FTypeContainer;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.structure.FTypeDefinitionContainer;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
 import fr.irisa.triskell.kermeta.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
@@ -238,6 +240,7 @@ public abstract class KermetaUnit {
 	public BehaviorFactory behav_factory;
 	
 	public FPackage current_package;
+	public FModelTypeDefinition current_modeltype;
 	public FClassDefinition current_class;
 	public FOperation current_operation;
 	public FProperty current_property;
@@ -531,14 +534,36 @@ public abstract class KermetaUnit {
 	    
 	    if (fully_qualified_name.lastIndexOf("::") < 0) return null;
 	    
-	    String pkg_name = fully_qualified_name.substring(0, fully_qualified_name.lastIndexOf("::"));
+	    String tdef_container_name = fully_qualified_name.substring(0, fully_qualified_name.lastIndexOf("::"));
 	    
 	    String tname = fully_qualified_name.substring(fully_qualified_name.lastIndexOf("::") + 2);
 	    
-	    FPackage pack = packageLookup(pkg_name);
-	    if (pack == null) return null;
+	    FTypeDefinitionContainer tdef_container = packageLookup(tdef_container_name);
+	    if (tdef_container == null) {
+	    	// Maybe its inside a model type definition
+    		if (tdef_container_name.lastIndexOf("::") < 0) return null;
+	    	String pkg_name = tdef_container_name.substring(0, tdef_container_name.lastIndexOf("::"));
+	    	FPackage pack = packageLookup(pkg_name);
+	    	if (pack ==  null) {
+	    		return null;
+	    	} else {
+	    		// OK, the package exists, see if it has a model type def inside it corresponding to the
+	    		// second-last piece of the qualified name
+	    		String mt_name = tdef_container_name.substring(tdef_container_name.lastIndexOf("::") + 2);
+	    		Iterator it = pack.getFOwnedTypeDefinition().iterator();
+	    		while (it.hasNext()) {
+	    			FTypeDefinition td = (FTypeDefinition)it.next();
+	    			if ((td instanceof FModelTypeDefinition) && td.getFName().equals(mt_name))
+	    				tdef_container = (FModelTypeDefinition) td;
+	    		}
+	    	}
+	    }
 	    
-	    Iterator it = pack.getFOwnedTypeDefinition().iterator();
+//	    FPackage pack = packageLookup(pkg_name);
+	    
+	    if (tdef_container == null) return null;
+   
+	    Iterator it = tdef_container.getFOwnedTypeDefinition().iterator();
 	    while(it.hasNext()) {
 	        FTypeDefinition td = (FTypeDefinition)it.next();
 	        if (td.getFName().equals(tname)) return td;
@@ -557,6 +582,7 @@ public abstract class KermetaUnit {
 	public FTypeDefinition getTypeDefinitionByName(String name) {
 	    //System.out.println("\nXXXXXX   getTypeDefinitionByName " + name + "" );
 		FTypeDefinition result = typeDefinitionLookup(name);
+		if (result == null && current_modeltype != null) result = typeDefinitionLookup(getQualifiedName(current_modeltype) + "::" + name);
 		if (result == null && current_package != null) result = typeDefinitionLookup(getQualifiedName(current_package) + "::" + name);
 		if (result == null) result = typeDefinitionLookup(getQualifiedName(rootPackage) + "::" + name);
 		for(int i=0; i<usings.size() && result == null; i++) {
@@ -725,7 +751,7 @@ public abstract class KermetaUnit {
 		if (result != null) return result;
 		EList superclasses = c.getFSuperType();
 		for(int i=0; i<superclasses.size();i++) {
-			FClassDefinition sc = ((FClass)superclasses.get(i)).getFClassDefinition();
+			FClassDefinition sc = (FClassDefinition) ((FClass)superclasses.get(i)).getFTypeDefinition();
 			result = findPropertyByName(sc, name);
 			if (result != null) return result;
 		}
@@ -741,7 +767,7 @@ public abstract class KermetaUnit {
 	public boolean isSuperClass(FClassDefinition supercls, FClassDefinition cls) {
 		EList stypes = cls.getFSuperType();
 		for(int i=0; i< stypes.size(); i++) {
-			FClassDefinition scls = ((FClass)stypes.get(i)).getFClassDefinition();
+			FClassDefinition scls = (FClassDefinition) ((FClass)stypes.get(i)).getFTypeDefinition();
 			if (supercls == scls) return true;
 			else if(isSuperClass(supercls, scls)) return true;
 		}
@@ -757,7 +783,7 @@ public abstract class KermetaUnit {
 		EList scs = cls.getFSuperType();
 		ArrayList result = new ArrayList();
 		for(int i=0; i<scs.size(); i++) {
-			result.add( ((FClass)scs.get(i)).getFClassDefinition() );
+			result.add( ((FClass)scs.get(i)).getFTypeDefinition() );
 		}
 		
 		// THIS LOOKS USELESS
@@ -799,7 +825,7 @@ public abstract class KermetaUnit {
 		// search recursively in super classes
 		it = cls.getFSuperType().iterator();
 		while(it.hasNext()) {
-			result.addAll(getAllOperations(((FClass)it.next()).getFClassDefinition()));
+			result.addAll(getAllOperations((FClassDefinition) ((FClass)it.next()).getFTypeDefinition()));
 		}
 		return result;
 	}
@@ -816,7 +842,7 @@ public abstract class KermetaUnit {
 		// search recursively in super classes
 		it = cls.getFSuperType().iterator();
 		while(it.hasNext()) {
-			result.addAll(getAllOperationsOnRootType(((FClass)it.next()).getFClassDefinition()));
+			result.addAll(getAllOperationsOnRootType((FClassDefinition) ((FClass)it.next()).getFTypeDefinition()));
 		}
 		
 		
@@ -831,7 +857,7 @@ public abstract class KermetaUnit {
 		// search recursively in super classes
 		Iterator it = cls.getFSuperType().iterator();
 		while(it.hasNext()) {
-			result.addAll(getAllProperties(((FClass)it.next()).getFClassDefinition()));
+			result.addAll(getAllProperties((FClassDefinition) ((FClass)it.next()).getFTypeDefinition()));
 		}
 		return result;
 	}

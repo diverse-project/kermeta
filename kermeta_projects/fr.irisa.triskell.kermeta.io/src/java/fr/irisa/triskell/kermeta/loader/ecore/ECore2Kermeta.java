@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.10 2006-02-17 10:48:01 zdrey Exp $
+/* $Id: ECore2Kermeta.java,v 1.11 2006-02-21 17:51:19 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
 * License : EPL
@@ -199,7 +199,7 @@ public class ECore2Kermeta extends EcoreVisitor {
     	FClass fc = (FClass)classes.get(cd);
     	if (fc == null) {
     		fc = unit.struct_factory.createFClass();
-    		fc.setFClassDefinition(cd);
+    		fc.setFTypeDefinition(cd);
     		classes.put(cd, fc);
     	}
     	return fc;
@@ -459,7 +459,7 @@ public class ECore2Kermeta extends EcoreVisitor {
         	FClass fc = (FClass)classes.get(cd);
         	if (fc == null) {
         		fc = unit.struct_factory.createFClass();
-        		fc.setFClassDefinition(cd);
+        		fc.setFTypeDefinition(cd);
         		classes.put(cd, fc);
         	}
         	iType = fc;

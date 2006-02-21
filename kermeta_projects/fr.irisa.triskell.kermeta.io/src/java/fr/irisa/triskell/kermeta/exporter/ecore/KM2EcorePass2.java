@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.5 2006-02-15 18:22:00 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.6 2006-02-21 17:51:19 jsteel Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -202,7 +202,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 					newEOperation,
 					KM2Ecore.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION,
 					KM2Ecore.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS,
-					KMTHelper.getQualifiedName(anException.getFClassDefinition()),
+					KMTHelper.getQualifiedName(anException.getFTypeDefinition()),
 					exceptionEClassifier);
 		}
 		
@@ -248,26 +248,26 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	 */
 	public Object visit(FClass node) {
 		EClassifier newEClassifier=null;		
-		internalLog.debug(loggerTabs + "Visiting Class: "+ node.getFName() + "->"+node.getFClassDefinition().getFName());
+		internalLog.debug(loggerTabs + "Visiting Class: "+ node.getFName() + "->"+node.getFTypeDefinition().getFName());
 		loggerTabs.increment();
 		
-		newEClassifier = (EClassifier)kmt2ecoremapping.get(node.getFClassDefinition());
+		newEClassifier = (EClassifier)kmt2ecoremapping.get(node.getFTypeDefinition());
 		if (newEClassifier ==  null)
 		{	// maybe this is new reference to a primitive type or a class defined in another file
 			// we do that here because we don't want to visit the whole FClass tree during the pass1 
 			// only to retreive some references to String or Integer  
-			String type_name = KMTHelper.getQualifiedName(node.getFClassDefinition());
+			String type_name = KMTHelper.getQualifiedName(node.getFTypeDefinition());
 			  
 			if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
-				internalLog.debug(loggerTabs + "Creating DataType: "+ node.getFClassDefinition().getFName());
+				internalLog.debug(loggerTabs + "Creating DataType: "+ node.getFTypeDefinition().getFName());
 				type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
 				// we need to create a new datatype for it and connect it to the root package
 				newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
-				newEClassifier.setName(node.getFClassDefinition().getFName());
+				newEClassifier.setName(node.getFTypeDefinition().getFName());
 				newEClassifier.setInstanceClassName(type_name);
 				EPackage root_EPackage = (EPackage)kmt2ecoremapping.get(root_p);
 				root_EPackage.getEClassifiers().add(newEClassifier);
-				kmt2ecoremapping.put(node.getFClassDefinition(),newEClassifier);
+				kmt2ecoremapping.put(node.getFTypeDefinition(),newEClassifier);
 			}
 		}
 		if (node.getFTypeParamBinding().size() > 0) {
