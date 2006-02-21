@@ -49,11 +49,11 @@ public class Collection {
 		
 	    FClass it_class = self.getFactory().getMemory().getUnit().struct_factory.createFClass();
 	    
-	    it_class.setFClassDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    it_class.setFTypeDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
 	    
 	    FTypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
 	    
-	    binding.setFVariable((FTypeVariable)it_class.getFClassDefinition().getFTypeParameter().get(0));
+	    binding.setFVariable((FTypeVariable)it_class.getFTypeDefinition().getFTypeParameter().get(0));
 	    
 	    FClass self_class = (FClass)self.getMetaclass().getData().get("kcoreObject");
 	    
@@ -86,11 +86,11 @@ public class Collection {
 		
 	    FClass coll_class = factory.getMemory().getUnit().struct_factory.createFClass();
 	    
-	    coll_class.setFClassDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup(specColl));
+	    coll_class.setFTypeDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup(specColl));
 	    
 	    FTypeVariableBinding binding = factory.getMemory().getUnit().struct_factory.createFTypeVariableBinding();
 	    
-	    binding.setFVariable((FTypeVariable)coll_class.getFClassDefinition().getFTypeParameter().get(0));
+	    binding.setFVariable((FTypeVariable)coll_class.getFTypeDefinition().getFTypeParameter().get(0));
 	    
 	    // Set the param binding type
 	    binding.setFType(typeParam);

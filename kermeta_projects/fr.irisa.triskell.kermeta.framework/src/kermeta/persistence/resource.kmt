@@ -3,7 +3,7 @@ package kermeta::persistence;
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: resource.kmt,v 1.12 2006-02-09 13:02:58 zdrey Exp $
+ * $Id: resource.kmt,v 1.13 2006-02-21 17:59:12 jsteel Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -171,12 +171,12 @@ class EMFResource inherits Resource
 		// Get on eof the isntances loaded (supposed to be conform!)
 		var valid_instance : Object init instances.one
 		// We use reflection to get the meta model classes .. 
-		var o : Object init valid_instance.getMetaClass.classDefinition
+		var o : Object init valid_instance.getMetaClass.typeDefinition
 		var container : Object
 		var i : Integer init 0
 		from var b : Boolean init true //(cdef.container != void or i<=10)
 		 // *very* temporary patch for unexp. infinite loop : invalid models?
-		until o.container == void or i==10
+		until o.container == void
 		loop
 			o := o.container
 		end
@@ -199,7 +199,7 @@ class EMFResource inherits Resource
 			var next : kermeta::language::structure::TypeDefinition
 			next ?= it.next 
 			// Note :  test with  "qualifiedName" is easier. is it a proper way?
-			if (next.qualifiedName.equals(new_instance.getMetaClass.classDefinition.qualifiedName)) then
+			if (next.qualifiedName.equals(new_instance.getMetaClass.typeDefinition.qualifiedName)) then
 				result := true
 			end
 		end

@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.10 2006-02-09 12:03:33 zdrey Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.11 2006-02-21 17:56:04 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -116,13 +116,13 @@ public class RuntimeObjectFactory {
 	{
 	    if (classReflectiveSequenceOtTypeParamBinding == null) {
 		    FClass fc = memory.getUnit().struct_factory.createFClass();
-		    fc.setFClassDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
+		    fc.setFTypeDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
 		    
 		    FClass tpb_class = memory.getUnit().struct_factory.createFClass();
-		    tpb_class.setFClassDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::language::structure::TypeVariableBinding"));
+		    tpb_class.setFTypeDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::language::structure::TypeVariableBinding"));
 		    
 		    FTypeVariableBinding binding = memory.getUnit().struct_factory.createFTypeVariableBinding();
-		    binding.setFVariable((FTypeVariable)fc.getFClassDefinition().getFTypeParameter().get(0));
+		    binding.setFVariable((FTypeVariable)fc.getFTypeDefinition().getFTypeParameter().get(0));
 		    binding.setFType(tpb_class);
 		    
 		    fc.getFTypeParamBinding().add(binding);
@@ -130,7 +130,7 @@ public class RuntimeObjectFactory {
 		    classReflectiveSequenceOtTypeParamBinding = new RuntimeObject(this, getClassClass());
 		    classReflectiveSequenceOtTypeParamBinding.getData().put("kcoreObject", fc);
 		    
-		    classReflectiveSequenceOtTypeParamBinding.getProperties().put("classDefinition", memory.getRuntimeObjectForFObject(fc.getFClassDefinition()));
+		    classReflectiveSequenceOtTypeParamBinding.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(fc.getFTypeDefinition()));
 		    
 		    RuntimeObject ro_bindings = new RuntimeObject(this, classReflectiveSequenceOtTypeParamBinding);
 		    
@@ -140,9 +140,9 @@ public class RuntimeObjectFactory {
 		    
 		    RuntimeObject ro_tpb_class = new RuntimeObject(this, getClassClass());
 		    ro_tpb_class.getData().put("kcoreObject", tpb_class);
-		    ro_tpb_class.getProperties().put("classDefinition", memory.getRuntimeObjectForFObject(tpb_class.getFClassDefinition()));
+		    ro_tpb_class.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(tpb_class.getFTypeDefinition()));
 		    
-		    ro_binding.getProperties().put("variable", memory.getRuntimeObjectForFObject((FObject)fc.getFClassDefinition().getFTypeParameter().get(0)));
+		    ro_binding.getProperties().put("variable", memory.getRuntimeObjectForFObject((FObject)fc.getFTypeDefinition().getFTypeParameter().get(0)));
 		    
 	        ro_binding.getProperties().put("type", ro_tpb_class);
 	        
@@ -157,18 +157,18 @@ public class RuntimeObjectFactory {
 	public RuntimeObject createMetaClass(FClass fclass) {
 	    
 	    if (fclass.getFTypeParamBinding().size() == 0) {
-	        RuntimeObject result = (RuntimeObject)non_parametric_metaclass_cache.get(fclass.getFClassDefinition());
+	        RuntimeObject result = (RuntimeObject)non_parametric_metaclass_cache.get(fclass.getFTypeDefinition());
 	        if (result != null) return result;
 	    }
 	    
 	    // precondition
-	    if (fclass.getFTypeParamBinding().size() != fclass.getFClassDefinition().getFTypeParameter().size()) {
+	    if (fclass.getFTypeParamBinding().size() != fclass.getFTypeDefinition().getFTypeParameter().size()) {
 	        throw new Error("INTERNAL ERROR : invalid FClass : all type variable should be bound.");
 	    }
 	    
 	    RuntimeObject meta_class = new RuntimeObject(this, getClassClass());
 	    meta_class.getData().put("kcoreObject", fclass);
-	    meta_class.getProperties().put("classDefinition", memory.getRuntimeObjectForFObject(fclass.getFClassDefinition()));
+	    meta_class.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(fclass.getFTypeDefinition()));
 	    
 	    RuntimeObject ro_bindings = new RuntimeObject(this, getClassReflectiveSequenceOtTypeParamBinding());
 	    meta_class.getProperties().put("typeParamBinding", ro_bindings);
@@ -182,7 +182,7 @@ public class RuntimeObjectFactory {
 	            binding_type = ((FPrimitiveType)binding_type).getFInstanceType();
 	        }
 	        
-	        RuntimeObject ro_var = (RuntimeObject)memory.getRuntimeObjectForFObject((FObject)fclass.getFClassDefinition().getFTypeParameter().get(i));
+	        RuntimeObject ro_var = (RuntimeObject)memory.getRuntimeObjectForFObject((FObject)fclass.getFTypeDefinition().getFTypeParameter().get(i));
 	        RuntimeObject ro_type = null;
 	        if (binding_type instanceof FClass) {
 	            ro_type = createMetaClass((FClass)binding_type);
@@ -200,7 +200,7 @@ public class RuntimeObjectFactory {
 	    }
 	    
 	    if (fclass.getFTypeParamBinding().size() == 0) {
-	        non_parametric_metaclass_cache.put(fclass.getFClassDefinition(), meta_class);
+	        non_parametric_metaclass_cache.put(fclass.getFTypeDefinition(), meta_class);
 	    }
 	    
 	    return meta_class;
@@ -263,7 +263,7 @@ public class RuntimeObjectFactory {
 	    createRuntimeObjectFromClass_count++;
 	    
 	    // Check if it is a primitive type
-	    String theMetaClassName = ((FClass) meta_class.getData().get("kcoreObject")).getFClassDefinition().getFName();
+	    String theMetaClassName = ((FClass) meta_class.getData().get("kcoreObject")).getFTypeDefinition().getFName();
 		System.out.println("J'ai trouvé un : " + theMetaClassName);
 	 
 		if (theMetaClassName.equals("String") ){
@@ -291,7 +291,7 @@ public class RuntimeObjectFactory {
 		} else {				    						    		
 		
 		    // Get the list of attribute of the meta-class
-		    EList metaClassAttribute = ((FClass) meta_class.getData().get("kcoreObject")).getFClassDefinition().getFOwnedAttributes();
+		    EList metaClassAttribute = ((FClassDefinition) ((FClass) meta_class.getData().get("kcoreObject")).getFTypeDefinition()).getFOwnedAttributes();
 		    
 		    // Foreach property of the meta-class, deep or shallow clone 
 		    Iterator metaClassAttributeIterator = metaClassAttribute.iterator();
@@ -311,7 +311,7 @@ public class RuntimeObjectFactory {
 			    	
 			    	String theAttributeTypeName = null;
 			    	if (theMetaClassAttribute.getFType() instanceof FClass) {
-		    			theAttributeTypeName = ((FClass) theMetaClassAttribute.getFType()).getFClassDefinition().getFName();   		
+		    			theAttributeTypeName = ((FClass) theMetaClassAttribute.getFType()).getFTypeDefinition().getFName();   		
 		    		} else if (theMetaClassAttribute.getFType() instanceof FEnumeration) { 
 		    			theAttributeTypeName = ((FEnumeration) theMetaClassAttribute.getFType()).getFName();
 		    		} else {
@@ -325,7 +325,7 @@ public class RuntimeObjectFactory {
 			    	
 			    		result.getProperties().put(theAttributeName, Class.cloneObject(theAttributeMetaClass, theAttributeValue));	
 	
-			    		String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFClassDefinition().getFName();
+			    		String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFTypeDefinition().getFName();
 			    		
 			    		// For each element in the collection, we nee to add an opposite 
 			    		if ( theAttributeMetaClassName.equals("ReflectiveCollection") )
@@ -374,7 +374,7 @@ public class RuntimeObjectFactory {
 			    		// ********* SHALLOW CLONE ***********
 			    		System.out.println("C'est une propriété reference");	
 	
-			    		String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFClassDefinition().getFName();
+			    		String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFTypeDefinition().getFName();
 			    		
 			    		// For each element in the collection, we nee to add an opposite 
 			    		if ( theAttributeMetaClassName.equals("ReflectiveCollection") ) 
@@ -473,7 +473,7 @@ public class RuntimeObjectFactory {
 	    	// And we clone it ...
 	    	
 		    // Check if it is a primitive type
-		    String theMetaClassName = ((FClass) meta_class.getData().get("kcoreObject")).getFClassDefinition().getFName();
+		    String theMetaClassName = ((FClass) meta_class.getData().get("kcoreObject")).getFTypeDefinition().getFName();
 			System.out.println("J'ai trouvé un : " + theMetaClassName);
 		 
 			if (theMetaClassName.equals("String") ){
@@ -502,7 +502,7 @@ public class RuntimeObjectFactory {
 				// It doesn't be a primitive type
 				
 			    // Get the list of attribute of the meta-class
-			    EList metaClassAttribute = ((FClass) meta_class.getData().get("kcoreObject")).getFClassDefinition().getFOwnedAttributes();
+			    EList metaClassAttribute = ((FClassDefinition) ((FClass) meta_class.getData().get("kcoreObject")).getFTypeDefinition()).getFOwnedAttributes();
 			    
 			    // Foreach property of found in the meta-class, do a deep clone 
 			    // We look in the meta-class to find the name of each properties
@@ -525,7 +525,7 @@ public class RuntimeObjectFactory {
 				    	
 				    	// We get the name of the meta class of the attribute
 				    	if (theMetaClassAttribute.getFType() instanceof FClass) {
-			    			theAttributeTypeName = ((FClass) theMetaClassAttribute.getFType()).getFClassDefinition().getFName();   		
+			    			theAttributeTypeName = ((FClass) theMetaClassAttribute.getFType()).getFTypeDefinition().getFName();   		
 			    		
 				    	} else if (theMetaClassAttribute.getFType() instanceof FEnumeration) { 
 			    			theAttributeTypeName = ((FEnumeration) theMetaClassAttribute.getFType()).getFName();
@@ -539,7 +539,7 @@ public class RuntimeObjectFactory {
 				    	
 				    	
 				       	// If the attribute we clone is a ReflectiveSequence
-				    	String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFClassDefinition().getFName();
+				    	String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFTypeDefinition().getFName();
 			    		// For each element in the collection, we need to add an opposite 
 			    		if ( theAttributeMetaClassName.equals("ReflectiveSequence") )
 			    		{	
@@ -626,9 +626,9 @@ public class RuntimeObjectFactory {
 	    if(result != null) return result;
 	    
         result = createRuntimeObjectFromClass(getClassClass());
-        result.getProperties().put("classDefinition", roclassdef);
+        result.getProperties().put("typeDefinition", roclassdef);
         FClass fclass = struct_factory.createFClass();
-        fclass.setFClassDefinition((FClassDefinition)roclassdef.getData().get("kcoreObject"));
+        fclass.setFTypeDefinition((FClassDefinition)roclassdef.getData().get("kcoreObject"));
         result.getData().put("kcoreObject", fclass);
         
         non_parametric_metaclass_cache.put(class_def, result);

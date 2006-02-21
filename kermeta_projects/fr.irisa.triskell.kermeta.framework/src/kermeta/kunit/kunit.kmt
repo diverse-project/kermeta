@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * $Id: kunit.kmt,v 1.12 2006-02-01 16:17:29 zdrey Exp $
+ * $Id: kunit.kmt,v 1.13 2006-02-21 17:59:12 jsteel Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -130,14 +130,16 @@ class TestCase inherits Test
 	 * test to run
 	*/
 	method runTest() : Void is do
-		if self.getMetaClass.classDefinition.ownedOperation.detect { o | o.name == name } == void 
+		var cDef : ClassDefinition
+		cDef ?= self.getMetaClass.typeDefinition
+		if cDef.ownedOperation.detect { o | o.name == name } == void 
 		then
 			raise kermeta::exceptions::CallOnVoidTarget.new 
 		else
 			var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new
 			de.initializeDefaults
 			// get self class name
-			var selfClassName : String init self.getMetaClass.classDefinition.qualifiedName
+			var selfClassName : String init cDef.qualifiedName
 			de.parse(
 				"do var test : " + selfClassName + " init " + selfClassName + ".new\n"
 			+   "test.setUp " +  "\ntest."+name + "\ntest.tearDown end")
@@ -310,7 +312,7 @@ class TestRunner
 		testResult := createTestResult
 		// Set<any kindOf TestCase> should be better
 		if not test_class.superClass.contains(TestCase) then
-			var msg : String init "ERROR : the given class '"+test_class.classDefinition.name + "' should inherit TestCase" 
+			var msg : String init "ERROR : the given class '"+test_class.typeDefinition.name + "' should inherit TestCase" 
 			stdio.writeln(msg)
 		else
 			var test_ops : Set<Test> init test_loader.loadTestMethodsFromTestCase(test_class)

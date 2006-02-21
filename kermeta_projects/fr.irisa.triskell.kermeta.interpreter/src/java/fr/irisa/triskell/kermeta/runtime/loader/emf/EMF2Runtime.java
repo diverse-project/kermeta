@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.29 2006-02-09 13:03:50 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.30 2006-02-21 17:56:03 jsteel Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -573,7 +573,7 @@ public class EMF2Runtime {
 	    	String  fname  = feature.getName();
 	    	EClassifier etype = feature.getEType();
 	    	FType ftype = getMetaClassByName(unit.getEQualifiedName(etype), unit);
-	    	FProperty fprop = rofactory.getMemory().getUnit().findPropertyByName(fc.getFClassDefinition(), fname);
+	    	FProperty fprop = rofactory.getMemory().getUnit().findPropertyByName((FClassDefinition) fc.getFTypeDefinition(), fname);
 	    	RuntimeObject roprop = rofactory.getMemory().getRuntimeObjectForFObject(fprop);
 	    	
 	    	// Eget can return an elist of features

@@ -63,18 +63,18 @@ public class ReflectiveSequence {
 	    RuntimeObject metaClass = null;
 	    
 	    if (prop_type instanceof FClass && ((FClass)prop_type).getFTypeParamBinding().size() == 0) {
-	        metaClass = (RuntimeObject)cache_reflec_seq_class.get(((FClass)prop_type).getFClassDefinition());
+	        metaClass = (RuntimeObject)cache_reflec_seq_class.get(((FClass)prop_type).getFTypeDefinition());
 	    }
 	    
 	    if (metaClass == null) {
 	        
 	        FClass reflect_class = object.getFactory().getMemory().getUnit().struct_factory.createFClass();
 	        
-		    reflect_class.setFClassDefinition( (FClassDefinition) object.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
+		    reflect_class.setFTypeDefinition( (FClassDefinition) object.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
 		    
 		    FTypeVariableBinding binding = object.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
 		    
-		    binding.setFVariable((FTypeVariable)reflect_class.getFClassDefinition().getFTypeParameter().get(0));
+		    binding.setFVariable((FTypeVariable)reflect_class.getFTypeDefinition().getFTypeParameter().get(0));
 		    
 		    binding.setFType(prop_type);
 			
@@ -83,7 +83,7 @@ public class ReflectiveSequence {
 		    metaClass = object.getFactory().createMetaClass(reflect_class);
 		    
 		    if (prop_type instanceof FClass && ((FClass)prop_type).getFTypeParamBinding().size() == 0) {
-		        cache_reflec_seq_class.put(((FClass)prop_type).getFClassDefinition(), metaClass);
+		        cache_reflec_seq_class.put(((FClass)prop_type).getFTypeDefinition(), metaClass);
 		    }
 	    }
 	    

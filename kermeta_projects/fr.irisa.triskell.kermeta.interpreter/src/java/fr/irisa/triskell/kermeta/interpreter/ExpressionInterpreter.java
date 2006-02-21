@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.33 2006-01-25 15:56:54 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.34 2006-02-21 17:56:03 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -269,12 +269,12 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			/******************************/
 			// Type collection of object
 			FClass coll_class = memory.getUnit().struct_factory.createFClass();    
-		    coll_class.setFClassDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::standard::Collection"));
+		    coll_class.setFTypeDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::standard::Collection"));
 		    FTypeVariableBinding binding = memory.getUnit().struct_factory.createFTypeVariableBinding();
-		    binding.setFVariable((FTypeVariable)coll_class.getFClassDefinition().getFTypeParameter().get(0));
+		    binding.setFVariable((FTypeVariable)coll_class.getFTypeDefinition().getFTypeParameter().get(0));
 		    
 		    FClass object_class = memory.getUnit().struct_factory.createFClass();   
-		    object_class.setFClassDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::reflection::Object"));
+		    object_class.setFTypeDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::reflection::Object"));
 
 		    
 		    // Set the param binding type
@@ -1144,7 +1144,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         Iterator st_it = classDef.getFSuperType().iterator();
         while (st_it.hasNext() && result == null)
         {
-            FClassDefinition next = ((FClass)st_it.next()).getFClassDefinition();
+            FClassDefinition next = (FClassDefinition) ((FClass)st_it.next()).getFTypeDefinition();
             result = getFlatFeatureType(next, feature);
             // If we still have not found them, find in super types! 
             if (result == null)

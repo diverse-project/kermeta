@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.9 2005-12-06 16:09:32 dvojtise Exp $
+/* $Id: KermetaRaisedException.java,v 1.10 2006-02-21 17:56:03 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -10,13 +10,17 @@
 
 package fr.irisa.triskell.kermeta.interpreter;
 
+import java.util.ArrayList;
+
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
+import fr.irisa.triskell.kermeta.runtime.language.Object;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FObject;
 import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
@@ -86,15 +90,25 @@ public class KermetaRaisedException extends Error {
     	FClass t_target=(FClass)raised_object.getMetaclass().getData().get("kcoreObject");        	    	
     	
     	SimpleType target = new SimpleType(t_target);
+    	// Since any object can be raised as an exception, its not reasonable to expect a property called message
+    	// toString exists on all objects!
+    	// If the target type is Exception, than there exists a property named message
 	    CallableProperty cproperty = target.getPropertyByName("message");
 	    
-	    RuntimeObject ro_property = interpreter.memory.getRuntimeObjectForFObject(cproperty.getProperty());
-	    if (ro_property != null) // it may be null if we throw object that doesn't inherit from kermeta::exceptions::Exception
+	    
+	    
+	    if (cproperty != null) // it may be null if we throw object that doesn't inherit from kermeta::exceptions::Exception
 	    {
+	    	RuntimeObject ro_property = interpreter.memory.getRuntimeObjectForFObject(cproperty.getProperty());
 	    	RuntimeObject rovalue =fr.irisa.triskell.kermeta.runtime.language.Object.get(raised_object, ro_property);    			    
 	    	String message = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(rovalue);
 	    	if(message.compareTo("") != 0)
 	    		result += "\n" + message;
+	    }
+	    else // by default, we will print the toString representation of the raised object
+	    {
+		    CallableOperation coperation = target.getOperationByName("toString");
+	    	RuntimeObject rovalue = (RuntimeObject) interpreter.invoke(raised_object, coperation.getOperation(), new ArrayList());
 	    }
     	if(issetContextString())
     		result += "\n" + contextString;
@@ -138,9 +152,9 @@ public class KermetaRaisedException extends Error {
         FClass fc = (FClass)raised_object.getMetaclass().getData().get("kcoreObject");
         FClassDefinition exception_cd = (FClassDefinition)memory.getUnit().getTypeDefinitionByName("kermeta::exceptions::RuntimeError");
         // Is the raised_object an kermeta::exceptions::RuntimeError?
-        if (cause_object!=null && memory.getUnit().isSuperClass(exception_cd, fc.getFClassDefinition()))
+        if (cause_object!=null && memory.getUnit().isSuperClass(exception_cd, (FClassDefinition) fc.getFTypeDefinition()))
         {
-            FProperty fexp_prop = memory.getUnit().findPropertyByName(fc.getFClassDefinition(), "expression");
+            FProperty fexp_prop = memory.getUnit().findPropertyByName((FClassDefinition) fc.getFTypeDefinition(), "expression");
             RuntimeObject expression_property = memory.getRuntimeObjectForFObject(fexp_prop);
             RuntimeObject expression_value = cause_object;
             // Set the "expression" property of the RuntimeError

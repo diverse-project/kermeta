@@ -95,7 +95,7 @@ public class ClassVisitor extends KermetaVisitor {
 		FParameter p1 = unit.struct_factory.createFParameter();
 		p1.setFName("visitor");
 		FClass p1Type = unit.struct_factory.createFClass();
-		p1Type.setFClassDefinition(visitor);
+		p1Type.setFTypeDefinition(visitor);
 		FTypeVariableBinding bind = unit.struct_factory.createFTypeVariableBinding();
 		bind.setFVariable((FTypeVariable)visitor.getFTypeParameter().get(0));
 		bind.setFType(typevar);
@@ -130,7 +130,7 @@ public class ClassVisitor extends KermetaVisitor {
 		
 		// Make the class inherit from visitable :
 		FClass visitable_class = unit.struct_factory.createFClass();
-		visitable_class.setFClassDefinition(visitable);
+		visitable_class.setFTypeDefinition(visitable);
 		
 		arg0.getFSuperType().add(visitable_class);
 		
@@ -164,7 +164,7 @@ public class ClassVisitor extends KermetaVisitor {
 		visitOp.setFIsAbstract(true);
 		// create params
 		FClass nodeClass = unit.struct_factory.createFClass();
-		nodeClass.setFClassDefinition(arg0);
+		nodeClass.setFTypeDefinition(arg0);
 		FParameter pv1 = unit.struct_factory.createFParameter();
 		pv1.setFName("node");
 		pv1.setFType(nodeClass);

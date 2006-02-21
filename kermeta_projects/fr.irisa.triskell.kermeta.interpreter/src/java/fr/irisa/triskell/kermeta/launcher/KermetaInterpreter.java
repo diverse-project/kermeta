@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.19 2006-01-12 16:33:07 zdrey Exp $
+/* $Id: KermetaInterpreter.java,v 1.20 2006-02-21 17:56:03 jsteel Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -252,7 +252,7 @@ public class KermetaInterpreter {
 	    ExpressionInterpreter exp_interpreter = new ExpressionInterpreter(memory);
 	    // Instanciate the first object
 	    // FIXME : this should be corrected to allow generic types as entre type
-	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getFClassDefinition()));
+	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getFTypeDefinition()));
 	    // Execute the operation
 	    exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
 	}
@@ -262,7 +262,7 @@ public class KermetaInterpreter {
 	    DebugInterpreter exp_interpreter = new DebugInterpreter(memory);
 	    // Instanciate the first object
 	    // FIXME : this should be corrected to allow generic types as entre type
-	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getFClassDefinition()));
+	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getFTypeDefinition()));
 	    // Execute the operation
 	    // exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
 	    exp_interpreter.initialize(entryObject, entryOperation, entryParameters);

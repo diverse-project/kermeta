@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.9 2006-02-09 13:05:16 zdrey Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.10 2006-02-21 17:56:04 jsteel Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -138,7 +138,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
     private void _2_initializeMemory() {
         // Intialize the class Class
         FClass fclass=unit.struct_factory.createFClass();
-		fclass.setFClassDefinition(
+		fclass.setFTypeDefinition(
 		  (FClassDefinition)unit.getTypeDefinitionByName("kermeta::language::structure::Class"));
 	    memory.getROFactory().setClassClassFromFClass(fclass);
 	    // Initialize singletons
@@ -271,7 +271,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 	 * Return the concrete representation of the given node. This method is called when
 	 * the node type is an abstract class of kermeta::reflection package. We need it when doing
 	 * some reflective calls, such as : 
-	 * 	- anInstance.getMetaclass.classDefinition (which type is of kermeta::reflection::classdefinition)
+	 * 	- anInstance.getMetaclass.typeDefinition (which type is of kermeta::reflection::classdefinition)
 	 *  - aClassDefinition.typeParameter (which is a set of kermeta::reflection::TypeVariables )
 	 * @param node the node for which we get the implementation
 	 * @return the runtimeobject representation of the concrete implementation of the given node

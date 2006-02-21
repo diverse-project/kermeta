@@ -1,4 +1,4 @@
-/* $Id: MakeConcreteClass.java,v 1.4 2005-06-01 13:00:39 zdrey Exp $
+/* $Id: MakeConcreteClass.java,v 1.5 2006-02-21 17:59:12 jsteel Exp $
  * Created on Feb 18, 2005
  * By zdrey
  * Description :
@@ -48,7 +48,7 @@ public class MakeConcreteClass extends KermetaVisitor {
         
         // create the class of classdefinition
         FClass parent_fclass = abstract_unit.struct_factory.createFClass();
-        parent_fclass.setFClassDefinition((FClassDefinition)abstract_unit.getTypeDefinitionByName(
+        parent_fclass.setFTypeDefinition((FClassDefinition)abstract_unit.getTypeDefinitionByName(
                 "kermeta::structure::"+classdef.getFName()));
         
         classdef.getFSuperType().add(parent_fclass);

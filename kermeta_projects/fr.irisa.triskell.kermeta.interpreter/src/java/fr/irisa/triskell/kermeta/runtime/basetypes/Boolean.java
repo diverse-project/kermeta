@@ -1,4 +1,4 @@
-/* $Id: Boolean.java,v 1.4 2005-08-30 14:25:58 zdrey Exp $ 
+/* $Id: Boolean.java,v 1.5 2006-02-21 17:56:03 jsteel Exp $ 
  * Implementation of Kermeta base type Boolean 
  */
 
@@ -77,7 +77,7 @@ public class Boolean {
 	public static void createTrue(RuntimeObjectFactory factory, RuntimeObject result) {
 	    
 	    FClass bool_class = factory.getMemory().getUnit().struct_factory.createFClass();
-	    bool_class.setFClassDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
+	    bool_class.setFTypeDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
 	    
 	    result.setMetaclass(factory.createMetaClass(bool_class));
 	    setValue(result, true);
@@ -86,7 +86,7 @@ public class Boolean {
 	public static void createFalse(RuntimeObjectFactory factory, RuntimeObject result) {
 	    
 	    FClass bool_class = factory.getMemory().getUnit().struct_factory.createFClass();
-	    bool_class.setFClassDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
+	    bool_class.setFTypeDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
 	    
 	    result.setMetaclass(factory.createMetaClass(bool_class));
 	    setValue(result, false);

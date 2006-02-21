@@ -36,7 +36,7 @@ class DynamicExpression
 	 */
 	operation initializeDefaults() is do
 		formalParameters := Hashtable<String, kermeta::language::structure::Type>.new
-		selfClass := kermeta::reflection::Object.classDefinition
+		selfClass ?= kermeta::reflection::Object.typeDefinition
 	end
 
 	/**

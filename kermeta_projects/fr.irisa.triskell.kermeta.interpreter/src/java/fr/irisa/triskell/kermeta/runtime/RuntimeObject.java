@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.11 2006-01-05 16:29:04 zdrey Exp $
+/* $Id: RuntimeObject.java,v 1.12 2006-02-21 17:56:04 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -143,7 +143,7 @@ public class RuntimeObject {
 	public RuntimeObject getContainer() {
 		FClass self_cls = ((FClass)metaclass.getData().get("kcoreObject"));
 		// FIXME: this is just a quick fix, we should check that self_cls inherits from ValueType
-		String name = getFactory().getMemory().getUnit().getQualifiedName(self_cls.getFClassDefinition());
+		String name = getFactory().getMemory().getUnit().getQualifiedName(self_cls.getFTypeDefinition());
 		if (name.equals("kermeta::standard::Boolean")) return null;
 		if (name.equals("kermeta::standard::Integer")) return null;
 		if (name.equals("kermeta::standard::String")) return null;
@@ -243,7 +243,7 @@ public class RuntimeObject {
 	public String toString() {
 	    String class_name = "< No Metaclass ! >";
 	    try {
-	        class_name = factory.getMemory().getUnit().getQualifiedName(((FClass)metaclass.getData().get("kcoreObject")).getFClassDefinition());
+	        class_name = factory.getMemory().getUnit().getQualifiedName(((FClass)metaclass.getData().get("kcoreObject")).getFTypeDefinition());
 		    String sValue = (String)getData().get("StringValue");
 		    if(sValue != null)
 		    	return "[" + class_name + " : "+ oId +" = \"" +sValue+"\"]";
@@ -270,7 +270,7 @@ public class RuntimeObject {
 	public String toUserString() {
 	    String class_name = "< No Metaclass ! >";
 	    try {
-	        class_name = factory.getMemory().getUnit().getQualifiedName(((FClass)metaclass.getData().get("kcoreObject")).getFClassDefinition());
+	        class_name = factory.getMemory().getUnit().getQualifiedName(((FClass)metaclass.getData().get("kcoreObject")).getFTypeDefinition());
 		    String sValue = (String)getData().get("StringValue");
 		    if(sValue != null)
 		    	return "\"" +sValue+"\"";

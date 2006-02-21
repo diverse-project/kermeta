@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.20 2006-02-09 13:03:50 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.21 2006-02-21 17:56:03 jsteel Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -420,7 +420,7 @@ public class Runtime2EMF {
         FClass metaclass = (FClass)rObject.getMetaclass().getData().get("kcoreObject");
         // Get the qualified name of the runtimeObject class
         String kqname = rObject.getFactory().getMemory().getUnit().getQualifiedName(
-                metaclass.getFClassDefinition());
+                metaclass.getFTypeDefinition());
         
         internalLog.debug("createEObjectFromRuntimeObject for RuntimeObject: " + getRONameProp(rObject) + " "+ rObject  + rObject.getProperties());
         EClass eclass = null;
@@ -542,7 +542,7 @@ public class Runtime2EMF {
         KermetaUnit kunit = robject.getFactory().getMemory().getUnit(); 
         FClassDefinition coll_cd = (FClassDefinition)kunit.getTypeDefinitionByName("kermeta::standard::Collection");  
         FClass c = (FClass)robject.getMetaclass().getData().get("kcoreObject");
-        if (kunit.isSuperClass(coll_cd, c.getFClassDefinition())) b = true;
+        if (kunit.isSuperClass(coll_cd, (FClassDefinition) c.getFTypeDefinition())) b = true;
         return b;
     }
     

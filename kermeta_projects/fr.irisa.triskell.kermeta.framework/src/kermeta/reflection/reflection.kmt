@@ -22,36 +22,56 @@ abstract class Object
 }
 alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
-abstract class Class inherits Type
+abstract class ParameterizedType inherits Type
 {
-	reference classDefinition : ClassDefinition[1..1]
+	reference typeDefinition : GenericTypeDefinition[1..1]
 	attribute typeParamBinding : set TypeVariableBinding[0..*]
+}
+abstract class Class inherits ParameterizedType
+{
 	property readonly ownedAttribute : set Property[0..*]
 		getter is do
-			result := classDefinition.ownedAttributes
+			var cDef : ClassDefinition
+			cDef ?= typeDefinition
+			result := cDef.ownedAttributes
 		end
 	property readonly ownedOperation : set Operation[0..*]
 		getter is do
-			result := classDefinition.ownedOperation
+			var cDef : ClassDefinition
+			cDef ?= typeDefinition
+			result := cDef.ownedOperation
 		end
 	property readonly superClass : set Class[0..*]
 		getter is do
-			result := classDefinition.superType
+			var cDef : ClassDefinition
+			cDef ?= typeDefinition
+			result := cDef.superType
 		end
 	property readonly isAbstract : Boolean
 		getter is do
-			result := classDefinition.isAbstract
+			var cDef : ClassDefinition
+			cDef ?= typeDefinition
+			result := cDef.isAbstract
 		end
 	property readonly name : String
 		getter is do
-			result := classDefinition.name
+			result := typeDefinition.name
 		end
 	operation new() : Object is abstract
 	
 	method toString() : String is do
-		result := self.classDefinition.name
+		result := self.typeDefinition.name
 	end
-} 
+}
+abstract class ModelType inherits ParameterizedType
+{
+	property readonly ownedTypeDefinition : set TypeDefinition[0..*]
+		getter is do
+			var mtDef : ModelTypeDefinition
+			mtDef ?= typeDefinition
+			result := mtDef.ownedTypeDefinition
+		end
+}
 abstract class MultiplicityElement inherits TypedElement
 {
 	attribute isOrdered : Boolean
@@ -89,25 +109,34 @@ abstract class TypeContainer inherits Object
 {
 	attribute containedType : set Type[0..*]
 }
-abstract class ClassDefinition inherits TypeContainer, TypeDefinition
+abstract class GenericTypeDefinition inherits TypeDefinition
+{
+	attribute typeParameter : set TypeVariable[0..*]
+}
+abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 {
 	attribute isAbstract : Boolean
 	attribute ownedAttributes : set Property[0..*]#owningClass
 	attribute ownedOperation : set Operation[0..*]#owningClass
 	reference superType : set Class[0..*]
-	attribute typeParameter : set TypeVariable[0..*]
 
 	property readonly allOwnedAttributes : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
  		    result.addAll(self.ownedAttributes)
 		    self.superType.each{ t | 
-			t.classDefinition.allOwnedAttributes.each{ p | 
-			if not p.isDerived then
-				result.add(p)
-			end
-			}}
+		    	var cDef : ClassDefinition
+		    	cDef ?= t.typeDefinition
+				cDef.allOwnedAttributes.each{ p | 
+					if not p.isDerived then
+						result.add(p)
+					end
+				}
+			}
 		end
+}
+abstract class ModelTypeDefinition inherits GenericTypeDefinition, TypeDefinitionContainer
+{
 }
 abstract class TypedElement inherits TypeContainer, NamedElement
 {
@@ -163,9 +192,12 @@ abstract class NamedElement inherits Object
 abstract class SelfType inherits Type
 {
 }
-abstract class Package inherits NamedElement
+abstract class TypeDefinitionContainer inherits NamedElement
 {
 	attribute ownedTypeDefinition : set TypeDefinition[0..*]
+}
+abstract class Package inherits TypeDefinitionContainer
+{
 	attribute nestedPackage : set Package[0..*]#nestingPackage
 	reference nestingPackage : Package#nestedPackage
 	attribute uri : String

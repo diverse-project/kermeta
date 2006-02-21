@@ -46,11 +46,11 @@ public class Map {
 	
 		FClass it_class = self.getFactory().getMemory().getUnit().struct_factory.createFClass();
 	    
-	    it_class.setFClassDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    it_class.setFTypeDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
 	    
 	    FTypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
 	    
-	    binding.setFVariable((FTypeVariable)it_class.getFClassDefinition().getFTypeParameter().get(0));
+	    binding.setFVariable((FTypeVariable)it_class.getFTypeDefinition().getFTypeParameter().get(0));
 	    
 	    FClass self_class = (FClass)self.getMetaclass().getData().get("kcoreObject");
 	    
@@ -72,11 +72,11 @@ public class Map {
 
 		FClass it_class = self.getFactory().getMemory().getUnit().struct_factory.createFClass();
 	    
-	    it_class.setFClassDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    it_class.setFTypeDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
 	    
 	    FTypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
 	    
-	    binding.setFVariable((FTypeVariable)it_class.getFClassDefinition().getFTypeParameter().get(0));
+	    binding.setFVariable((FTypeVariable)it_class.getFTypeDefinition().getFTypeParameter().get(0));
 	    
 	    FClass self_class = (FClass)self.getMetaclass().getData().get("kcoreObject");
 	    
