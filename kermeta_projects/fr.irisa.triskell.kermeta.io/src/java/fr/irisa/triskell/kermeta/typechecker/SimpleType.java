@@ -1,4 +1,4 @@
-/* $Id: SimpleType.java,v 1.6 2005-05-18 23:42:19 ffleurey Exp $
+/* $Id: SimpleType.java,v 1.7 2006-02-21 17:34:19 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : SimpleType.java
 * License : GPL
@@ -171,7 +171,7 @@ public class SimpleType extends Type {
 	public FTypeDefinition getTypeDefinition() {
 	    if (type instanceof FTypeDefinition) return (FTypeDefinition)type;
 	    else if (type instanceof FClass) {
-	        return ((FClass)type).getFClassDefinition();
+	        return ((FClass)type).getFTypeDefinition();
 	    }
 	    return null;
 	}

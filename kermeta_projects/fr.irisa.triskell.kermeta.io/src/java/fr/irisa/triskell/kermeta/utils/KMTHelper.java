@@ -1,4 +1,4 @@
-/* $Id: KMTHelper.java,v 1.2 2005-12-29 15:52:14 dvojtise Exp $
+/* $Id: KMTHelper.java,v 1.3 2006-02-21 17:34:19 jsteel Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMTHelper.java
  * License    : EPL
@@ -44,7 +44,7 @@ public class KMTHelper {
 		}
 		else if (type instanceof FClass){
 			FClass fClass = (FClass)type;
-			return getQualifiedName(fClass.getFClassDefinition());
+			return getQualifiedName(fClass.getFTypeDefinition());
 		}
 		return "";
 	}

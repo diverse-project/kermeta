@@ -109,7 +109,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			FClass res = builder.struct_factory.createFClass();
 			builder.storeTrace(res, basictype);
 			result = res;
-			res.setFClassDefinition(classdef);
+			res.setFTypeDefinition(classdef);
 			//res.setFName(classdef.getFName());
 			FType[] actual_params = getTypeFromLst(basictype.getParams());
 			if (actual_params.length != classdef.getFTypeParameter().size()) {

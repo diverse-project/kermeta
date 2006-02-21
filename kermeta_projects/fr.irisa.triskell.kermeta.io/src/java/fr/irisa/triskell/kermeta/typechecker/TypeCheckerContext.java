@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.13 2005-08-02 15:37:13 zdrey Exp $
+/* $Id: TypeCheckerContext.java,v 1.14 2006-02-21 17:34:19 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -78,7 +78,7 @@ public class TypeCheckerContext {
 	
 	protected static FOperation getClassNewOperation() {
 	    if (classNew == null) {
-	       Iterator it = ((FClass)((SimpleType)ClassType).type).getFClassDefinition().getFOwnedOperation().iterator();
+	       Iterator it = ((FClassDefinition) ((FClass)((SimpleType)ClassType).type).getFTypeDefinition()).getFOwnedOperation().iterator();
 	       while(it.hasNext()) {
 	           FOperation op = (FOperation)it.next();
 	           if (op.getFName().equals("new")) {
@@ -95,7 +95,7 @@ public class TypeCheckerContext {
 		
 		if (classClone == null) {
 			boolean found = false;
-			Iterator it = ((FClass)((SimpleType) ClassType).type).getFClassDefinition().getFOwnedOperation().iterator();
+			Iterator it = ((FClassDefinition) ((FClass)((SimpleType) ClassType).type).getFTypeDefinition()).getFOwnedOperation().iterator();
 			   while(it.hasNext() && !found) {
 			       FOperation op = (FOperation) it.next();
 			       if (op.getFName().equals("clone")) {
@@ -116,7 +116,7 @@ public class TypeCheckerContext {
 	protected static Type createTypeForClassDefinition(String qualified_name, KermetaUnit unit) {
 	    FClassDefinition cdef = (FClassDefinition)unit.typeDefinitionLookup(qualified_name);
 	    FClass cls = unit.struct_factory.createFClass();
-	    cls.setFClassDefinition(cdef);
+	    cls.setFTypeDefinition(cdef);
 	    return new SimpleType(cls);
 	}
 	
@@ -286,7 +286,7 @@ public class TypeCheckerContext {
 		if (selfType == null) 
 		{
 			FClass c = unit.struct_factory.createFClass();
-			c.setFClassDefinition(selfClass);
+			c.setFTypeDefinition(selfClass);
 			Iterator it = selfClass.getFTypeParameter().iterator();
 			while(it.hasNext()) {
 				FTypeVariable tv = (FTypeVariable)it.next();
@@ -398,7 +398,7 @@ public class TypeCheckerContext {
 		StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
 		// create the class
 		FClass result = struct_factory.createFClass();
-		result.setFClassDefinition(collection);
+		result.setFTypeDefinition(collection);
 		// Bind the type variable
 		FTypeVariableBinding bind = struct_factory.createFTypeVariableBinding();
 		bind.setFType(contentsType);

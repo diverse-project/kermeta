@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass.java,v 1.3 2005-09-15 12:40:33 dvojtise Exp $
+/* $Id: ECore2KMPass.java,v 1.4 2006-02-21 17:34:18 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -136,7 +136,7 @@ public class ECore2KMPass extends EmfaticASTNodeVisitor {
 	        FClassDefinition cd = (FClassDefinition)typeDef;
 	        FClass result = builder.struct_factory.createFClass();
 	        //result.setFName(cd.getFName());
-	        result.setFClassDefinition(cd);
+	        result.setFTypeDefinition(cd);
 	        return result;
 	    }
 	}

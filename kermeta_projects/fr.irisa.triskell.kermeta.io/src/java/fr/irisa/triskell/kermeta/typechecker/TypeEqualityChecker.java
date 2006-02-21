@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.3 2005-08-31 14:12:58 ffleurey Exp $
+/* $Id: TypeEqualityChecker.java,v 1.4 2006-02-21 17:34:19 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -73,7 +73,7 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 		Boolean result = new Boolean(false);
 		if (provided instanceof FClass) {
 			FClass p = (FClass)provided;
-			if (p.getFClassDefinition() == arg0.getFClassDefinition()) {
+			if (p.getFTypeDefinition() == arg0.getFTypeDefinition()) {
 				result = new Boolean(true);
 				for(int i=0; i<arg0.getFTypeParamBinding().size(); i++) {
 					FType t1 = ((FTypeVariableBinding)arg0.getFTypeParamBinding().get(0)).getFType();

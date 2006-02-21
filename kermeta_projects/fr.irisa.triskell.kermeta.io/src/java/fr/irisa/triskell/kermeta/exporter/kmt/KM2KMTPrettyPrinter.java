@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.22 2006-01-04 07:22:47 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.23 2006-02-21 17:34:19 jsteel Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -52,6 +52,8 @@ import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
+import fr.irisa.triskell.kermeta.structure.FModelType;
+import fr.irisa.triskell.kermeta.structure.FModelTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FMultiplicityElement;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
@@ -206,8 +208,18 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
 	public Object visit(FClass node) {
-		String qname = KMTHelper.getQualifiedName(node.getFClassDefinition());
-		String name = KMTHelper.getMangledIdentifier(node.getFClassDefinition().getFName());
+		String qname = KMTHelper.getQualifiedName(node.getFTypeDefinition());
+		String name = KMTHelper.getMangledIdentifier(node.getFTypeDefinition().getFName());
+		String result = ppTypeName(qname, name);
+		if (node.getFTypeParamBinding().size() > 0) {
+			result += "<" + ppComaSeparatedNodes(node.getFTypeParamBinding()) + ">";
+		}
+		return result;
+	}
+	
+	public Object visit(FModelType node) {
+		String qname = KMTHelper.getQualifiedName(node.getFTypeDefinition());
+		String name = KMTHelper.getMangledIdentifier(node.getFTypeDefinition().getFName());
 		String result = ppTypeName(qname, name);
 		if (node.getFTypeParamBinding().size() > 0) {
 			result += "<" + ppComaSeparatedNodes(node.getFTypeParamBinding()) + ">";
@@ -431,6 +443,27 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		result += this.accept(node.getFBody());
 		popPrefix();
 		result += getPrefix() +"end";
+		return result;
+	}
+	
+	public Object visit(FModelTypeDefinition node) {
+		String result = ppTags(node.getFTag());
+		result += "modeltype " + KMTHelper.getMangledIdentifier(node.getFName());
+		if (node.getFTypeParameter().size() > 0) {
+			result += "<";
+			result += ppTypeVariableDeclaration(node.getFTypeParameter());
+			result += ">";
+		}
+		result += "\n" + getPrefix() + "{\n";
+		String old_cname = current_pname;
+		current_pname = KMTHelper.getQualifiedName(node);
+		pushPrefix();
+		typedef = true;
+		result += ppCRSeparatedNode(node.getFOwnedTypeDefinition());
+		typedef = false;
+		popPrefix();
+		current_pname = old_cname;
+		result += getPrefix() + "}\n";
 		return result;
 	}
 	

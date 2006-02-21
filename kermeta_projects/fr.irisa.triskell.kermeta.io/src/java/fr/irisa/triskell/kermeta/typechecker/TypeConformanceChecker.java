@@ -1,4 +1,4 @@
-/* $Id: TypeConformanceChecker.java,v 1.8 2005-08-31 14:12:58 ffleurey Exp $
+/* $Id: TypeConformanceChecker.java,v 1.9 2006-02-21 17:34:19 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
@@ -45,7 +46,7 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 		// RETURN TRUE IF THE REQUIRED TYPE IS OBJECT OR ANY OF IT SUPERTYPE
 		 FClass cobject = (FClass)((SimpleType)TypeCheckerContext.ObjectType).getType();
 		 if (TypeEqualityChecker.equals(cobject, required)) return true;
-		 Iterator it = cobject.getFClassDefinition().getFSuperType().iterator();
+		 Iterator it = ((FClassDefinition) cobject.getFTypeDefinition()).getFSuperType().iterator();
 		 while (it.hasNext()) {
 		     FClass c = (FClass)it.next();
 		     if (TypeEqualityChecker.equals(c, required)) return true;
@@ -100,7 +101,7 @@ public class TypeConformanceChecker  extends KermetaOptimizedVisitor {
 		else {
 			if (provided instanceof FClass) {
 				FClass p = (FClass)provided;
-				java.util.Iterator it = p.getFClassDefinition().getFSuperType().iterator();
+				java.util.Iterator it = ((FClassDefinition) p.getFTypeDefinition()).getFSuperType().iterator();
 				while(it.hasNext()) {
 					// get the super type
 					FClass t_provided = (FClass)it.next();

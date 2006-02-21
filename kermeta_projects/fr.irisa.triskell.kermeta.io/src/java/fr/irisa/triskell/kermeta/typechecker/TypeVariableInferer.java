@@ -1,4 +1,4 @@
-/* $Id: TypeVariableInferer.java,v 1.11 2005-08-31 14:12:58 ffleurey Exp $
+/* $Id: TypeVariableInferer.java,v 1.12 2006-02-21 17:34:19 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : TypeVariableInferer.java
 * License : GPL
@@ -120,7 +120,7 @@ public class TypeVariableInferer extends KermetaOptimizedVisitor {
 		
 		while(it.hasNext()) {
 		    FClass sp = (FClass)it.next();
-		    if (arg0.getFClassDefinition() == sp.getFClassDefinition()) {
+		    if (arg0.getFTypeDefinition() == sp.getFTypeDefinition()) {
 		        for(int i=0; i<arg0.getFTypeParamBinding().size(); i++) {
 					FType g = ((FTypeVariableBinding)arg0.getFTypeParamBinding().get(i)).getFType();
 					FType p = ((FTypeVariableBinding)sp.getFTypeParamBinding().get(i)).getFType();

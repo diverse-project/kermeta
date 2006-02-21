@@ -1,0 +1,31 @@
+package testPackage;
+
+modeltype mtype1 { }
+
+class c2 { }
+
+modeltype mtype2<G> {
+}
+
+modeltype mtype3 {
+  class mt3c1 { }
+}
+
+modeltype mtype4 {
+  alias PClass1 : testPackage::c2;
+  class mt4c1 {
+    attribute mt4c1p1 : PClass1
+  }
+}
+
+modeltype mtype5 {
+  class mt3c1 { }
+  class mt5c2 { }
+}
+
+modeltype mtype6<H> {
+  class mt6c1<H> {
+    operation getMe() : H is abstract
+    operation setMe(newMe : H) : Void is abstract
+  }
+}

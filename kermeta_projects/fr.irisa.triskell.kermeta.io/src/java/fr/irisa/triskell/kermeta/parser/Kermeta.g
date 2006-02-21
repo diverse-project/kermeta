@@ -155,6 +155,7 @@ topLevelDecl returns [ TopLevelDecl retVal = null ]
 annotableElement returns [ AnnotableElement retVal = null ]
 :
   ( retVal=subPackageDecl
+  | retVal=modelTypeDecl
   | retVal=classDecl
   | retVal=enumDecl
   | retVal=dataTypeDecl
@@ -166,6 +167,13 @@ subPackageDecl returns [ SubPackageDecl retVal = null ]
 { TopLevelDecls topLevelDecls = null; }
   package_KW:"package" name:ID lcurly:LCURLY topLevelDecls=topLevelDecls rcurly:RCURLY 
 { retVal = new SubPackageDecl(package_KW, name, lcurly, topLevelDecls, rcurly); }
+;
+
+modelTypeDecl returns [ ModelTypeDecl retVal = null ]
+:
+{ TypeVarDecllst typeVarDecllst = null; TopLevelDecls topLevelDecls = null; }
+  modeltype_KW:"modeltype" name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lcurly:LCURLY topLevelDecls=topLevelDecls rcurly:RCURLY 
+{ retVal = new ModelTypeDecl(modeltype_KW, name, lt, typeVarDecllst, gt, lcurly, topLevelDecls, rcurly); }
 ;
 
 classDecl returns [ ClassDecl retVal = null ]
@@ -853,7 +861,7 @@ ID options { testLiterals=true; }
 
 // INT_LITERAL completed on 08/04/2005
 // INT_LITERAL : (DIGIT)+ ;
-INT_LITERAL	:	('-')?(DIGIT)+	;
+INT_LITERAL	:	('-')? (DIGIT)+	;
 
 protected
 REAL_LITERAL  : INT_LITERAL '.' INT_LITERAL (EXPONENT)? ;
@@ -884,11 +892,12 @@ CONTEXT_MULTI_LINE_COMMENT :
 		|	'\r'	
 		|	'\n'	
 		|	~('*'|'\n'|'\r')
-		)*
-		"*/"
+	)*
+	"*/"
 ;
 
-EMPTY_LINE_COMMENT : "/**/"
+EMPTY_LINE_COMMENT : "/**/";
+
 MULTI_LINE_COMMENT : 
 	EMPTY_LINE_COMMENT 
 	|
@@ -901,14 +910,11 @@ MULTI_LINE_COMMENT :
 			|	'\r'	   
 			|	'\n'	  
 			|	~('*'|'\n'|'\r')
-			)*
-			"*/"
+		)*
+		"*/"
 		{$setType(Token.SKIP);}
 	)
 ;
-
-
-
 
 //
 //

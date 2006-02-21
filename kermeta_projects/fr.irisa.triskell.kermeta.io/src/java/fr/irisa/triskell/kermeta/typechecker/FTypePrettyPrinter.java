@@ -1,4 +1,4 @@
-/* $Id: FTypePrettyPrinter.java,v 1.5 2005-09-02 15:17:58 dvojtise Exp $
+/* $Id: FTypePrettyPrinter.java,v 1.6 2006-02-21 17:34:19 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : FTypePrettyPrinter.java
 * License : GPL
@@ -43,7 +43,7 @@ public class FTypePrettyPrinter extends KermetaOptimizedVisitor {
     //public Object visit(FClass arg0) {
     public Object visitFClass(FClass arg0) {
         //String result = arg0.getFClassDefinition().getFName();
-        String result = KMTHelper.getQualifiedName(arg0.getFClassDefinition());
+        String result = KMTHelper.getQualifiedName(arg0.getFTypeDefinition());
         if (arg0.getFTypeParamBinding().size() > 0) {
             result += "<";
 	        for(int i=0; i<arg0.getFTypeParamBinding().size(); i++) {

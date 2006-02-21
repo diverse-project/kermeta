@@ -40,10 +40,11 @@ list topLevelDecls : topLevelDecl* ;
 
 sequence topLevelDecl : annotations annotableElement ;
 
-abstract annotableElement : subPackageDecl | classDecl | enumDecl | dataTypeDecl; // mapEntryDecl ;
+abstract annotableElement : subPackageDecl | modelTypeDecl | classDecl | enumDecl | dataTypeDecl; // mapEntryDecl ;
 
 
 sequence subPackageDecl : "package" name=ID LCURLY topLevelDecls RCURLY;
+sequence modelTypeDecl : "modeltype" name=ID (LT typeVarDecllst GT)? LCURLY topLevelDecls RCURLY;
 sequence classDecl :  (abstractModifier)? classKind name=ID (LT typeVarDecllst GT)? ("inherits" superTypes=typelst)? LCURLY classMemberDecls RCURLY; 
 //(COLON instClassName=stringLiteralOrQualifiedID)? LCURLY classMemberDecls RCURLY ;
 token classKind : "class" ; //| "interface" ;

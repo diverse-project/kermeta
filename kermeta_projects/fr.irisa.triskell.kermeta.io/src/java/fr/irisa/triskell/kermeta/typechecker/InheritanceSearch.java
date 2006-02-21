@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.6 2005-05-20 12:46:12 ffleurey Exp $
+/* $Id: InheritanceSearch.java,v 1.7 2006-02-21 17:34:19 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : InheritanceSearchUtilities.java
 * License : GPL
@@ -41,7 +41,7 @@ public class InheritanceSearch {
 		ArrayList result = new ArrayList();
 		result.add(c);
 		// get all super types of direct supertypes
-		Iterator it = c.getFClassDefinition().getFSuperType().iterator();
+		Iterator it = ((FClassDefinition) c.getFTypeDefinition()).getFSuperType().iterator();
 		while(it.hasNext()) {
 			// get the super type
 			FClass direct_st = (FClass)it.next();
@@ -73,7 +73,7 @@ public class InheritanceSearch {
 	    // The class Object is the Root Class
 	    if (TypeEqualityChecker.equals(c, object)) return result;
 	    
-	    Iterator it = c.getFClassDefinition().getFSuperType().iterator();
+	    Iterator it = ((FClassDefinition) c.getFTypeDefinition()).getFSuperType().iterator();
 	    while(it.hasNext()) {
 			// get the super type
 			FClass direct_st = (FClass)it.next();
@@ -113,7 +113,7 @@ public class InheritanceSearch {
 		        if (!toVisit.contains(stype)) toVisit.add(stype);
 		    }
 		    
-		    Iterator ops = current.getFClassDefinition().getFOwnedOperation().iterator();
+		    Iterator ops = ((FClassDefinition) current.getFTypeDefinition()).getFOwnedOperation().iterator();
 			// Add all operations
 			while (ops.hasNext()) {
 				FOperation op = (FOperation)ops.next();
@@ -148,7 +148,7 @@ public class InheritanceSearch {
 		        if (!toVisit.contains(stype)) toVisit.add(stype);
 		    }
 		    
-		    Iterator ops = current.getFClassDefinition().getFOwnedOperation().iterator();
+		    Iterator ops = ((FClassDefinition) current.getFTypeDefinition()).getFOwnedOperation().iterator();
 			// Add all operations
 			while (ops.hasNext()) {
 				FOperation op = (FOperation)ops.next();
@@ -171,7 +171,7 @@ public class InheritanceSearch {
 	public static FClass getFClassForClassDefinition(FClassDefinition cdef) {
 	    StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
 	    FClass fclass = struct_factory.createFClass();
-	    fclass.setFClassDefinition(cdef);
+	    fclass.setFTypeDefinition(cdef);
 	    Iterator it = cdef.getFTypeParameter().iterator();
 	    while(it.hasNext()) {
 	        FTypeVariable tv = (FTypeVariable)it.next();
@@ -197,7 +197,7 @@ public class InheritanceSearch {
 		Iterator it = allTypes.iterator();
 		while (it.hasNext()) {
 			FClass fclass = (FClass)it.next();
-			Iterator ops = fclass.getFClassDefinition().getFOwnedAttributes().iterator();
+			Iterator ops = ((FClassDefinition) fclass.getFTypeDefinition()).getFOwnedAttributes().iterator();
 			// Add all operations
 			while (ops.hasNext()) {
 				FProperty prop = (FProperty)ops.next();

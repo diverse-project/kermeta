@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.26 2006-01-05 15:22:44 fchauvel Exp $
+/* $Id: ExpressionChecker.java,v 1.27 2006-02-21 17:34:19 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -52,6 +52,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolLambdaParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolRescueParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
@@ -253,7 +254,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	        if (((FCallFeature)exp).getFTarget() instanceof FTypeLiteral) {
 	            result = getTypeFromTypeLiteral((FTypeLiteral)((FCallFeature)exp).getFTarget());
 	            // check that it is a concrete class
-	            if (((FClass)((SimpleType)result).getType()).getFClassDefinition().isFIsAbstract()) {
+	            if (((FClassDefinition) ((FClass)((SimpleType)result).getType()).getFTypeDefinition()).isFIsAbstract()) {
 	                unit.messages.addError("TYPE-CHECKER : Abstract class "+ result +" should not be instanciated.", (FExpression)exp);
 	            }
 	        }
@@ -280,7 +281,7 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	    	}
 	    	
 	    	 result = getTypeFromTypeLiteral((FTypeLiteral)((FCallFeature)exp).getFTarget());
-	    	 if (((FClass)((SimpleType)result).getType()).getFClassDefinition().isFIsAbstract()) {
+	    	 if (((FClassDefinition) ((FClass)((SimpleType)result).getType()).getFTypeDefinition()).isFIsAbstract()) {
                 unit.messages.addError("TYPE-CHECKER : Abstract class instance ("+ result +") should not be cloned.", (FExpression)exp);
             }
 	    }

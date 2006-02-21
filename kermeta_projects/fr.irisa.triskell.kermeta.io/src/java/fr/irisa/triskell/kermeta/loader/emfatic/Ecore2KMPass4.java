@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.2 2005-09-15 12:40:33 dvojtise Exp $
+/* $Id: Ecore2KMPass4.java,v 1.3 2006-02-21 17:34:18 jsteel Exp $
  * Project : Kermeta 
  * File : ECore2KMPass4.java
  * License : EPL
@@ -14,6 +14,7 @@ import com.ibm.eclipse.emfatic.core.ast.Reference;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClass;
+import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 
 
@@ -41,7 +42,7 @@ public class Ecore2KMPass4 extends ECore2KMPass {
 		// opposite :
 		
 		if (node.getOppositeName() != null) { // there is an opposite
-		    FProperty oposite = builder.getPropertyByName(((FClass)res.getFType()).getFClassDefinition(), getTextForID(node.getOppositeName()));
+		    FProperty oposite = builder.getPropertyByName((FClassDefinition) ((FClass)res.getFType()).getFTypeDefinition(), getTextForID(node.getOppositeName()));
 		    if (oposite == null) {
 		    	builder.messages.addError("Unable to resolve opposite property '" + getTextForID(node.getOppositeName()) + "'.", null);
 		    	return false;

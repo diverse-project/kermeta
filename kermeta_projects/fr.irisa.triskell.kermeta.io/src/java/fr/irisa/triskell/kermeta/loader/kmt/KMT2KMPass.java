@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.4 2005-04-19 08:46:42 ffleurey Exp $
+/* $Id: KMT2KMPass.java,v 1.5 2006-02-21 17:34:18 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : GPL
@@ -21,6 +21,7 @@ import fr.irisa.triskell.kermeta.ast.EnumDecl;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor;
 import fr.irisa.triskell.kermeta.ast.KermetaTokenNode;
+import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
 import fr.irisa.triskell.kermeta.ast.Multiplicity;
 import fr.irisa.triskell.kermeta.ast.MultiplicityExpr;
 import fr.irisa.triskell.kermeta.ast.Operation;
@@ -32,6 +33,7 @@ import fr.irisa.triskell.kermeta.ast.TypeRef;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
+import fr.irisa.triskell.kermeta.structure.FModelTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FProperty;
@@ -235,6 +237,15 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		builder.current_package = (FPackage)builder.getModelElementByNode(subPackageDecl);
 		return super.beginVisit(subPackageDecl);
 	}
+	
+	/**
+	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ModelTypeDecl)
+	 */
+	public boolean beginVisit(ModelTypeDecl modelTypeDecl) {
+		builder.current_modeltype = (FModelTypeDefinition)builder.getModelElementByNode(modelTypeDecl);
+		return super.beginVisit(modelTypeDecl);
+	}
+	
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#endVisit(metacore.ast.ClassDecl)
 	 */
@@ -270,6 +281,11 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		if (builder.current_package != null)
 			builder.current_package = builder.current_package.getFNestingPackage();
 		super.endVisit(subPackageDecl);
+	}
+	
+	public void endVisit(ModelTypeDecl modelTypeDecl) {
+		builder.current_modeltype = null;
+		super.endVisit(modelTypeDecl);
 	}
 	
 	public String getTextForID(KermetaTokenNode node) {

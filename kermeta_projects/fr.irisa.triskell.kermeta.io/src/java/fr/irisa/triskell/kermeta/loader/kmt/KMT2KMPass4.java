@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.10 2005-12-01 14:30:41 dvojtise Exp $
+/* $Id: KMT2KMPass4.java,v 1.11 2006-02-21 17:34:18 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -97,7 +97,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		if (operation.getOperationKind().getText().equals("operation")) {
 			 // the operation should not have been defined in any super class
 			for (int i=0; i<superclasses.size(); i++) {
-				FClassDefinition sc = ((FClass)superclasses.get(i)).getFClassDefinition();
+				FClassDefinition sc = (FClassDefinition) ((FClass)superclasses.get(i)).getFTypeDefinition();
 				if (builder.findOperationByName(sc, builder.current_operation.getFName()) != null) {
 					builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :An operation named '"+builder.current_operation.getFName()+"' is already inherited from class '"+sc.getFName()+"'.", operation));
 					return false;
@@ -107,7 +107,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		else if (operation.getOperationKind().getText().equals("method")) {
 			// the op should be defined in a superclass
 			for (int i=0; i<superclasses.size(); i++) {
-				FClassDefinition sc = ((FClass)superclasses.get(i)).getFClassDefinition();
+				FClassDefinition sc = (FClassDefinition) ((FClass)superclasses.get(i)).getFTypeDefinition();
 				// potential super ops
 				Hashtable superops = getSupersForMethod(builder.current_class, builder.current_operation.getFName());
 				if (superops.size() == 0) { // Error, no super operation
@@ -188,8 +188,8 @@ public class KMT2KMPass4 extends KMT2KMPass {
 				builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Unexpected opposite - The type of a property that have an opposite should be a Class.", property.getOppositeName()));
 				return false;
 			}
-			FClassDefinition oposite_class = ((FClass)builder.current_property.getFType()).getFClassDefinition();
-			FProperty oposite_property = builder.getPropertyByName(oposite_class, opname);
+			FClassDefinition opposite_class = (FClassDefinition) ((FClass)builder.current_property.getFType()).getFTypeDefinition();
+			FProperty oposite_property = builder.getPropertyByName(opposite_class, opname);
 			if (oposite_property == null) {
 				builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Unable to resolve opposite of property", property.getOppositeName()));
 				return false;

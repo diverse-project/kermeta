@@ -1,4 +1,4 @@
-/* $Id: TypeVariableLeastDerivedEnforcer.java,v 1.4 2005-08-31 14:12:58 ffleurey Exp $
+/* $Id: TypeVariableLeastDerivedEnforcer.java,v 1.5 2006-02-21 17:34:19 jsteel Exp $
 * Project : Kermeta (First iteration)
 * File : GenericTypeSubstitution.java
 * License : GPL
@@ -63,7 +63,7 @@ public class TypeVariableLeastDerivedEnforcer extends KermetaOptimizedVisitor {
 		}
 		else {
 			result = struct_factory.createFClass();
-			result.setFClassDefinition(arg0.getFClassDefinition());
+			result.setFTypeDefinition(arg0.getFTypeDefinition());
 			Iterator it = arg0.getFTypeParamBinding().iterator();
 			while(it.hasNext()) {
 				FTypeVariableBinding provided = (FTypeVariableBinding)it.next();

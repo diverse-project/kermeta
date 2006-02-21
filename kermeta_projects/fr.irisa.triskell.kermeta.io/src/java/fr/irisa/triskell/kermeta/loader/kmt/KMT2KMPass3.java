@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.6 2005-09-15 12:40:32 dvojtise Exp $
+/* $Id: KMT2KMPass3.java,v 1.7 2006-02-21 17:34:18 jsteel Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.ast.DataTypeDecl;
 import fr.irisa.triskell.kermeta.ast.EnumDecl;
 import fr.irisa.triskell.kermeta.ast.EnumLiteral;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
 import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.OperationBody;
 import fr.irisa.triskell.kermeta.ast.Param;
@@ -38,6 +39,7 @@ import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
+import fr.irisa.triskell.kermeta.structure.FModelTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FParameter;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FType;
@@ -54,7 +56,7 @@ import fr.irisa.triskell.kermeta.structure.FTypeVariable;
  * 
  * Except :
  * For ops : body / abstract / superOp
- * For props : oposites / accessors
+ * For props : opposites / accessors
  * 
  */
 public class KMT2KMPass3 extends KMT2KMPass {
@@ -105,7 +107,7 @@ public class KMT2KMPass3 extends KMT2KMPass {
 					}
 					EList tmpsts = builder.current_class.getFSuperType();
 					for(int a=0;a<tmpsts.size();a++) {
-						if (((FClass)tmpsts.get(a)).getFClassDefinition() == ((FClass)supertype).getFClassDefinition()) {
+						if (((FClass)tmpsts.get(a)).getFTypeDefinition() == ((FClass)supertype).getFTypeDefinition()) {
 							builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Class '"+builder.current_class.getFName()+"' - A class can only inherit once from another.",(KermetaASTNode)supertypes[i]));
 							return false;
 						}
@@ -124,6 +126,27 @@ public class KMT2KMPass3 extends KMT2KMPass {
 	public void endVisit(ClassDecl classDecl) {
 		builder.popContext();
 		super.endVisit(classDecl);
+	}
+	
+	
+	/*
+	 * *******************************************************
+	 *                  BUILD MODEL TYPE
+	 * *******************************************************
+	 */
+	public boolean beginVisit(ModelTypeDecl modelTypeDecl) {
+		builder.pushContext();
+		builder.current_modeltype = (FModelTypeDefinition)builder.getModelElementByNode(modelTypeDecl);
+//		 add type variables to the context
+		Iterator tvs = builder.current_modeltype.getFTypeParameter().iterator();
+		while(tvs.hasNext()) builder.addTypeVar((FTypeVariable)tvs.next());
+		
+		return super.beginVisit(modelTypeDecl);
+	}
+	
+	public void endVisit(ModelTypeDecl modelTypeDecl) {
+		builder.popContext();
+		super.endVisit(modelTypeDecl);
 	}
 	
 	/*
