@@ -34,6 +34,10 @@ class MyObjectCreation inherits kermeta::kunit::Test {
 		object.set_attr1(int)
 		object.set_attr2(bool)
 		result := object
+		stdio.writeln("testifvoid is " + (result == void).toString) 
+		stdio.writeln("testif metaclass void is " + (result.getMetaClass == void).toString) 
+//		stdio.writeln("test ;eta class " + result.getMetaClass.toString)
+		stdio.writeln("test  class " + result.getMetaClass.typeDefinition.toString) 
         stdio.writeln(result.toString)
         assert(result.attr1==4)
         assert(result.attr2==true)

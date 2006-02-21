@@ -40,7 +40,7 @@ class MyObjectTwo {
 
 class MyObjectsCreation inherits kermeta::kunit::Test {
 
-	operation createMyObjects() : Void is do
+	operation testcreateMyObjects() : Void is do
 		/*
 		var o2_1 : MyObjectTwo
 		var o2_2 : MyObjectTwo

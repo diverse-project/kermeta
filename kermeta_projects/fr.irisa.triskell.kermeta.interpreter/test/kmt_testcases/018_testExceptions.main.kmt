@@ -91,11 +91,26 @@ class TestExceptions inherits kermeta::kunit::Test
      		rescue (s:String)
      			assert(true)
      	end
-      	a.opA2(false,false)
+     	do
+      		a.opA2(false,false)
+      		assert(false)
+      		rescue(i:Integer)
+      			assert(true)
+      	end
       	b.opB(a,true,true)
       	b.opB(a,false,true)
-      	b.opB(a,true,false)
-      	b.opB(a,false,false)
+      	do
+	      	b.opB(a,true,false)
+	      	assert(false)
+	      	rescue(i:Integer)
+	      		assert(true)
+	    end
+     	do
+	      	b.opB(a,false,false)
+	      	assert(false)
+	      	rescue(i:Integer)
+	      		assert(true)
+	    end
      end
      
 }    

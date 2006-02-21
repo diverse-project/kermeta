@@ -10,7 +10,6 @@ require "../../../fr.irisa.triskell.kermeta/lib/kermeta_java.ecore"
 using kermeta::structure
 using kermeta::behavior
 using kermeta::standard
-using kermeta::persistence
 
 class Main inherits kermeta::kunit::Test
 {
@@ -54,9 +53,9 @@ class Main inherits kermeta::kunit::Test
     end
     
     operation loadClassModel() : Set<FPackage> is do             
-   		var repository : EMFRepository init EMFRepository.new 
+   		var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new 
    		            
-   		var resource2 : Resource init repository.createResource("../test/kmt_testcases/input_test_models/kmLogo.km", "../../fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")     
+   		var resource2 : kermeta::persistence::Resource init repository.createResource("../test/kmt_testcases/input_test_models/kmLogo.km", "../../fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")     
    		
  	   resource2.load() 
  	   result :=  Set<FPackage>.new

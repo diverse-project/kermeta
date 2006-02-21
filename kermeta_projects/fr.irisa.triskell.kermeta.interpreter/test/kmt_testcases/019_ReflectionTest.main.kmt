@@ -11,11 +11,11 @@ using kermeta::standard
 class TestReflection inherits kermeta::kunit::Test
 {    
      operation testGetMetaClass1() is do
-     	assert(self.getMetaClass.classDefinition.name == "TestReflection")
+     	assert(self.getMetaClass.typeDefinition.name == "TestReflection")
      end
      
      operation testGetMetaClassNew() is do
-     	//assert(self.getMetaClass.new.getMetaClass.classDefinition.name == "TestReflection")
+     	//assert(self.getMetaClass.new.getMetaClass.typeDefinition.name == "TestReflection")
      end
      
 }    

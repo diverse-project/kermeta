@@ -109,7 +109,7 @@ class TestEnum inherits kermeta::kunit::Test {
 		var e : kermeta::reflection::Enumeration
 		var jaune : kermeta::reflection::EnumerationLiteral
 		
-		p ?= self.getMetaClass.classDefinition.container
+		p ?= self.getMetaClass.typeDefinition.container
 		e ?= p.ownedTypeDefinition.select{ t | t.name == "Couleur" }.one
 		jaune := e.ownedLiteral.select{ l | l.name == "jaune" }.one
 		

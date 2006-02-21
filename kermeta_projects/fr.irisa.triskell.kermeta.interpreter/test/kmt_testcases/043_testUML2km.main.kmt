@@ -15,7 +15,7 @@ class Main {
 		stdio.write("getting UML2 package...")
 		
 		var p : kermeta::reflection::Package
-		p ?= Class.classDefinition.container
+		p ?= Class.typeDefinition.container
 		
 		stdio.writeln("done")
 		

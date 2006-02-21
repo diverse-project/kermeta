@@ -23,22 +23,23 @@ class Main inherits kermeta::kunit::Test
         	stdio.writeln("Division par zero")
     end
     
-    operation testUnrescuedZeroDivision() : Void is do
-     	var i : Integer
-        i := 5/0
-    end
-    
     operation testUndeclared() : Void is do
        	stdio.writeln("Integer undeclared test")
      	var i : Integer
         var divid : Integer
         5/divid
+        assert(false)
+        rescue (c : kermeta::exceptions::CallOnVoidTarget)
+        	assert(true)
     end
     
     operation testBoolUndeclared() : Void is do
     	stdio.writeln("Bool undeclared test")
     	var bool : Boolean
         bool and true
+        assert(false)
+        rescue (c : kermeta::exceptions::CallOnVoidTarget)
+        	assert(true)
     end
     
     operation testIllegalConditionalType() : Void is do
@@ -47,6 +48,9 @@ class Main inherits kermeta::kunit::Test
     	if (bool) then 
     		stdio.writeln("hello")
     	end
+        assert(false)
+        rescue (c : kermeta::exceptions::RuntimeError)
+        	assert(true)
     end
     
 }
