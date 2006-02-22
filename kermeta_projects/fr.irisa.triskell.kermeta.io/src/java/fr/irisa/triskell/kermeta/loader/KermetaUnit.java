@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.50 2006-02-21 17:51:19 jsteel Exp $
+/* $Id: KermetaUnit.java,v 1.51 2006-02-22 09:33:18 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -830,6 +830,31 @@ public abstract class KermetaUnit {
 		return result;
 	}
 	
+	/** @return all the type definitions available in this kermeta unit, in
+	 * all packages */
+	public ArrayList getAllTypeDefinitions() {
+		ArrayList<FTypeDefinition> result = new ArrayList<FTypeDefinition>();
+		for (Iterator<FPackage> it = getAllPackages().iterator(); it.hasNext();)
+			result.addAll(it.next().getFOwnedTypeDefinition());
+		System.err.println("Number of type defs : " + result.size());
+		return result;
+	}
+	
+	public ArrayList<FPackage> getAllPackages() {
+		ArrayList<FPackage> result = new ArrayList<FPackage>();
+		result.addAll(packages.values());
+		
+		ArrayList iulist = getAllImportedUnits();
+	    for (int i=0; i<iulist.size(); i++) {	        
+	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
+	        for (Iterator it = iu.packages.values().iterator(); it.hasNext();)
+	        {
+	        	FPackage n = (FPackage)it.next();
+	        	if (!iu.packages.contains(n)) result.add(n);
+	        }
+	    }  
+		return result;
+	}
 	
 	private ArrayList getAllOperationsOnRootType(FClassDefinition cls) {
 		ArrayList result = new ArrayList();
@@ -902,49 +927,6 @@ public abstract class KermetaUnit {
 		}
 	}
 	
-	/**
-	 * Save Kermeta model
-	 * @param directory
-	 *//*
-	public void saveMetaCoreModel(String directory) {
-		if (rootPackage.eResource() == null) {
-			visited = true;
-			for (int i=0; i<importedUnits.size(); i++) {
-		        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-		        if (!iu.visited) iu.saveMetaCoreModel(directory);
-		    }
-			visited = false;
-//			String file_name = URI.createURI(uri).lastSegment().replace('.', '_') + ".kcore";
-			int lastSlash=uri.lastIndexOf('/');
-			String file_name = uri.substring(0,lastSlash+1)+"output/"+uri.substring(lastSlash+1,uri.length()).replace('.', '_') + ".kcore";
-			
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("kcore",new XMIResourceFactoryImpl()); 
-			ResourceSet resource_set = new ResourceSetImpl();
-			URI _uri=UserDirURI.createURI(file_name,null,true);
-			Resource resource = resource_set.createResource(_uri);
-			fixTypeContainement(rootPackage);
-			
-			if (rootPackage.eContainer() != null) {
-				
-				
-			}
-			
-			// add root package
-			resource.getContents().add(getRootPackageForSerialization(rootPackage));
-			
-			// add tags to the resource
-			addFTagToResource(resource);
-			try {
-				resource.save(null);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				throw new Error(e);
-			}
-		}
-		//resource.getContents().addAll(rootPackage.eAllContents());
-		
-	}
-	*/
 	/**
 	 * Add the given tag to resource. Used in the KMT2KMPass7.java, to add tag in resource without
 	 * adding it to a container (since a tag can be linked to one or more elements, and unlinked as well).
@@ -1252,7 +1234,8 @@ public abstract class KermetaUnit {
     /** @return the trace handler */
     public Tracer getTracer() { return tracer; }
 
-
+    /** @return the packages available in this KermetaUnit */
+    public Hashtable getPackages() { return packages; }
 
 
 	/**
