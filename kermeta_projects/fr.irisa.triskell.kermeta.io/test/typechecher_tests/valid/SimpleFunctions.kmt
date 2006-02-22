@@ -1,4 +1,4 @@
-/* $Id: SimpleFunctions.kmt,v 1.5 2005-05-16 17:35:57 ffleurey Exp $ */
+/* $Id: SimpleFunctions.kmt,v 1.6 2006-02-22 16:20:59 jsteel Exp $ */
 
 // Some simple lambda expressions
 
@@ -83,9 +83,11 @@ class Test {
 	end
 	
 	operation test6() : Void is do
+		var myclassdef : ClassDefinition
 		var names : Collection<String>
 		
-		names := self.getMetaClass.classDefinition.ownedOperation
+		myclassdef ?= self.getMetaClass.typeDefinition
+		names := myclassdef.ownedOperation
 					.~select{ op | op.name.indexOf("test") == 0}
 					.collect{ op | op.name }
 	end

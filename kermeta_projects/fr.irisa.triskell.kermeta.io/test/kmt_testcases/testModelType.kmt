@@ -29,3 +29,16 @@ modeltype mtype6<H> {
     operation setMe(newMe : H) : Void is abstract
   }
 }
+
+class User {
+  // model-typed property
+  property myModelprop : mtype3
+  // model-typed parameter
+  operation transform(myModel : mtype3) :Void is
+  do
+    // model-typed variable
+  	var x : mtype3
+  	// parameterised model type
+  	var y : mtype6<User>
+  end
+}

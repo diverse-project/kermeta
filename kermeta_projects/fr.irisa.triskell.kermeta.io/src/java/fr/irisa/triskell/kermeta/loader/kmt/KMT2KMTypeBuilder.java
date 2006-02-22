@@ -21,6 +21,8 @@ import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
 import fr.irisa.triskell.kermeta.structure.FFunctionType;
+import fr.irisa.triskell.kermeta.structure.FModelType;
+import fr.irisa.triskell.kermeta.structure.FModelTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FType;
@@ -104,7 +106,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 				return false;
 			}
 		}
-		else { // it is a class
+		else if (def instanceof FClassDefinition) { // it is a class
 			FClassDefinition classdef = (FClassDefinition)def;
 			FClass res = builder.struct_factory.createFClass();
 			builder.storeTrace(res, basictype);
@@ -113,7 +115,7 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 			//res.setFName(classdef.getFName());
 			FType[] actual_params = getTypeFromLst(basictype.getParams());
 			if (actual_params.length != classdef.getFTypeParameter().size()) {
-				builder.messages.addMessage(new KMTUnitLoadError("Wrong number of type parameter for class '" + qname + "'.",basictype));
+				builder.messages.addMessage(new KMTUnitLoadError("Wrong number of type parameters for class '" + qname + "'.",basictype));
 			}
 			else {
 				for(int i=0; i<actual_params.length; i++) {
@@ -124,6 +126,27 @@ public class KMT2KMTypeBuilder extends KMT2KMPass {
 					res.getFTypeParamBinding().add(bind);
 				}
 			}
+		} else if (def instanceof FModelTypeDefinition){ //it is a model type
+			// For the moment, this is identical to the code for class
+			FModelTypeDefinition mtypedef = (FModelTypeDefinition) def;
+			FModelType res = builder.struct_factory.createFModelType();
+			builder.storeTrace(res, basictype);
+			result  = res;
+			res.setFTypeDefinition(mtypedef);
+			FType[] actual_params = getTypeFromLst(basictype.getParams());
+			if (actual_params.length != mtypedef.getFTypeParameter().size()) {
+				builder.messages.addMessage(new KMTUnitLoadError("Wrong number of type parameters for model type '" + qname + "'.",basictype));
+			} else {
+				for(int i=0; i<actual_params.length; i++) {
+					FTypeVariableBinding bind = builder.struct_factory.createFTypeVariableBinding();
+					bind.setFVariable((FTypeVariable) mtypedef.getFTypeParameter().get(i));
+					bind.setFType(actual_params[i]);
+					res.getFTypeParamBinding().add(bind);
+				}
+			}
+		} else {
+			//Its something unknown
+			builder.messages.addMessage(new KMTUnitLoadError("Unrecognized type definition: '" + qname + "'",basictype));
 		}
 		return false;
 	}
