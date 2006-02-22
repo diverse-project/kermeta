@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.14 2005-12-15 18:42:20 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.15 2006-02-22 09:21:08 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -59,19 +59,13 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public static final String DEBUG_STEPEND = "stepEnd";
     public static final String DEBUG_STEPINTO = "stepInto";
     public static final String DEBUG_STEPOVER = "stepOver";
-    public static final String DEBUG_RESUME = "resume";
-    public static final String DEBUG_SUSPEND = "suspend";
-    public static final String DEBUG_TERMINATE = "terminate";
+    
     public boolean interpreterSuspended = true;
-    // TODO : rename currentState into currentState
-    /** The reason/state of the debugging
-    (among stepEnd, stepInto, stepOver.) */
-    public String currentState = "";
+
     public String oldCommand = "";
     /** The stop condition for the stepOver command */ 
     protected CallFrame stepOverCallFrame;
     /** This frame is used when we switch from stepInto to stepOver*/
-    protected CallFrame lastCallFrame;
     protected CallFrame current_frame;
     /** A table of { oid : runtimeObject }*/
     protected Hashtable currentVisibleRuntimeObjects;
@@ -123,7 +117,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
 	public Object invoke_debug()
 	{
-		System.out.println("Begin invoke_debug");
 		Object result = memory.voidINSTANCE;
 		
 		// Resolve this operation call
@@ -334,11 +327,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 		currentState = reason;
 	}
 	public boolean isSuspended() { return interpreterSuspended == true; }
-	/** @return the current command being executed by the debuginterpreter */
-	public String getCurrentState() {	return currentState; }
-	/** set the current command being executed by the debuginterpreter */
-	public void setCurrentState(String command) {	currentState = command;}
-    
+	    
 	/** Returns the call frame in which the step over command has begun */
 	public CallFrame getStepOverCallFrame() {	return stepOverCallFrame; }
 	/** Sets the call frame where the step over should "stop". Called by the
@@ -367,22 +356,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	public void unsetStepOverCallFrame()
 	{ stepOverCallFrame = null; }
 	
-	
-	
-	/**
-	 * @return Returns the lastCallFrame.
-	 */
-	public CallFrame getLastCallFrame() {
-		return lastCallFrame;
-	}
-
-	/**
-	 * @param lastCallFrame The lastCallFrame to set.
-	 */
-	public void setLastCallFrame(CallFrame lastCallFrame) {
-		this.lastCallFrame = lastCallFrame;
-	}
-
 	public void setDebugCondition(AbstractKermetaDebugCondition debug_cond)
 	{
 		currentState = debug_cond.getConditionType();
@@ -521,19 +494,14 @@ public class DebugInterpreter extends ExpressionInterpreter {
     	return result;
     }
     
-    /** Accessor */
-    public boolean shouldTerminate()
-    {
-    	return getCurrentState().equals(DEBUG_TERMINATE);
-    }
-	
+
     /**
      * tool function
      * @return the name property of the runtime object if available
      */
     public static String getRONameProp(RuntimeObject rObject){
     	RuntimeObject roName = (RuntimeObject)rObject.getProperties().get("name");
-    	System.err.println("object : " + roName);
+    	//System.err.println("object : " + roName);
         return  roName == null ? "" : (String)roName.getData().get("StringValue");
     }
 }
