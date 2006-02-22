@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.30 2006-02-21 17:56:03 jsteel Exp $
+/* $Id: EMF2Runtime.java,v 1.31 2006-02-22 09:27:26 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -65,9 +65,8 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  * For this purpose, we defined a new entry in the RuntimeObject <code>data</code> hashtable : 
  * 	{ emfObject : an EMF instance in the loaded EMF model }; This entry is useful
  * when we want to update an object.
- * 
+ * [developer note] access to the meta-model uri of an object:
  * ((EObject)resource.getContents().get(0)).eClass().getEPackage().getNsURI().
- * 
  */
 public class EMF2Runtime {
 
@@ -85,7 +84,6 @@ public class EMF2Runtime {
      */
     protected Hashtable runtime_objects_map; // { eobject : robject }
     
-    
     public ResourceSet resource_set=null;
     public Resource root_resource=null;
     
@@ -96,7 +94,10 @@ public class EMF2Runtime {
     public static boolean ENABLE_EMF_DIAGNOSTIC =true;
     
     /**
-     * 
+     * Constructor
+     * @param newresource_set contains the resource to save, plus the ones on which 
+     * it depends
+     * @param newroot_resource contains the main resource to save.
      */
     public EMF2Runtime(ResourceSet newresource_set, Resource newroot_resource) {
         super();
@@ -106,15 +107,17 @@ public class EMF2Runtime {
         root_resource = newroot_resource;
     }
     
-
-    
+    /** 
+     * Load the model saved in the resource located at the URI provided by the 
+     * given EMFRuntimeUnit
+     */
 	public static void loadunit(EMFRuntimeUnit unit) {
 		XMLResource resource=null;
 	    KermetaUnit kunit =  unit.getContentMap().getFactory().getMemory().getUnit();
 		try {
 			RuntimeMemory memory =unit.getContentMap().getFactory().getMemory();
         	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
-	//		 load ressource
+        	// Load resource
 			//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
 			ResourceSet resourceset = new ResourceSetImpl();
@@ -147,7 +150,7 @@ public class EMF2Runtime {
 	    	else
 	    		options.put(XMLResource.NIL, Boolean.TRUE);
 	    	
-//	    	 refer http://www.w3.org/TR/2004/PER-xmlschema-0-20040318/#ipo.xml
+	    	// Refer to http://www.w3.org/TR/2004/PER-xmlschema-0-20040318/#ipo.xml
 	    	if(true)
 	    	{
 	    		resource = 	(XMLResource)resourceset.createResource(u);
@@ -159,10 +162,7 @@ public class EMF2Runtime {
 	    			String errmsg ="Not able to create a resource for URI: "+u ;
 	    			internalLog.error(errmsg );
 	    			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-		        			errmsg,
-							interpreter,
-							memory,
-							null);
+		        			errmsg,	interpreter, memory, null);
 	    		}
 	    	}
 	    	else {
@@ -190,18 +190,12 @@ public class EMF2Runtime {
 						memory,
 						null);
 			}
-			
-			
-	    	//loadDependentResources(resource, resourceset);
+			//loadDependentResources(resource, resourceset);
 	    	//Resource resource2 = resourceset.createResource(URI.createURI("file:/C:/eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/lib/framework.km"));
 	    	//resource2.load(options);
-	    	
-	    	
 	    	EMF2Runtime emf2Runtime = new EMF2Runtime(resourceset, resource);
 	    	//emf2Runtime.loadunit(unit, resource2);
 	    	emf2Runtime.loadunit(unit, resource);
-	        	    	
-	    	
 		}
 		catch (IOException e){
 			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUriAsString() + " : " + e.getMessage(), e);			
@@ -331,7 +325,6 @@ public class EMF2Runtime {
 			internalLog.debug("Resource added : "+ obj.eResource().getURI());
     		// recursively add the resources
 			findDependentResources(list,obj.eResource());
-			
     	}
 	}
 	
