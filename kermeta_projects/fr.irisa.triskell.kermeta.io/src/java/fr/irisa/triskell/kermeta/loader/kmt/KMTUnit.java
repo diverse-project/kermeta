@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.18 2005-09-15 12:40:32 dvojtise Exp $
+/* $Id: KMTUnit.java,v 1.19 2006-02-22 09:35:04 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : EPL
@@ -73,19 +73,7 @@ public class KMTUnit extends KermetaUnit {
 		    KermetaUnit.internalLog.debug("i/o error loading ressource '"+this.uri+"': " + e1, null);
 		    return;
 		}
-
-		/* GESTION DES URI A REVOIR
 		
-		URI _uri = UserDirURI.createURI(this.uri,null,false);
-		KermetaParser p;
-		try {
-		    p = new KermetaParser(new KermetaLexer(new FileInputStream(new File(_uri.toFileString()))));
-		} 
-		catch (IOException e1) {
-		    error.add(new KMUnitError("i/o error loading ressource '"+this.uri+"': " + e1, null));
-		    return;
-		}
-		*/	
 		try {
 			mctAST = p.compUnit();
 		}
