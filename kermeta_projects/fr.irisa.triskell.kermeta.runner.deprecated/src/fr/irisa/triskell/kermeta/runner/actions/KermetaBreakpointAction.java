@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.4 2005-12-13 18:08:13 zdrey Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.5 2006-02-22 12:55:34 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -338,7 +338,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 		        }
 		        else if(fobj instanceof FClass){
 					FClass aClass = (FClass)fobj;
-					return KMTHelper.getQualifiedName(aClass.getFClassDefinition());
+					return KMTHelper.getQualifiedName(aClass.getFTypeDefinition());
 		        }
 		        
 		    }

@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.15 2005-12-19 12:33:17 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.16 2006-02-22 12:55:34 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -245,7 +245,7 @@ public class KermetaDebugWrapper {
 		else
 		{
 			String qname = 
-				KMTHelper.getQualifiedName((FNamedElement)((FClass)ro.getMetaclass().getData().get("kcoreObject")).getFClassDefinition());
+				KMTHelper.getQualifiedName((FNamedElement)((FClass)ro.getMetaclass().getData().get("kcoreObject")).getFTypeDefinition());
 			if (qname.equals("kermeta::standard::String")) {
 				result[0] = "\"" + data.get("StringValue").toString() + "\"";
 			} else if (qname.equals("kermeta::standard::Integer")) {

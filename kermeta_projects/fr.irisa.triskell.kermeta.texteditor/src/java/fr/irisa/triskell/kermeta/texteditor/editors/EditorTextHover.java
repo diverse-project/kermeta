@@ -193,8 +193,8 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		        }
 		        else if(fobj instanceof FClass){
 					FClass aClass = (FClass)fobj;
-					ftags = kdocPrettyPrint(aClass.getFClassDefinition().getFTag());
-					return KMTHelper.getQualifiedName(aClass.getFClassDefinition())+ "\n" + ftags;
+					ftags = kdocPrettyPrint(aClass.getFTypeDefinition().getFTag());
+					return KMTHelper.getQualifiedName(aClass.getFTypeDefinition())+ "\n" + ftags;
 		        }
 		        
 		    }

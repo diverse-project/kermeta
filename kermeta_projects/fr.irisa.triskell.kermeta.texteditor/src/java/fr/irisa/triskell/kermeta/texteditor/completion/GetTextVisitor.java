@@ -73,7 +73,7 @@ class GetTextVisitor extends KermetaOptimizedVisitor {
 		while (it.hasNext()) {
 			FTypeVariable node = (FTypeVariable)it.next();
 			result += node.getFName();
-			if (node.getFSupertype() != null) result += " : " + ((FClass)node.getFSupertype()).getFClassDefinition().getFName();
+			if (node.getFSupertype() != null) result += " : " + ((FClass)node.getFSupertype()).getFTypeDefinition().getFName();
 			if (it.hasNext()) result +=  ", ";
 		}
 		return result;
@@ -160,7 +160,7 @@ class GetTextVisitor extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
 	public Object visitFClass(FClass node) {
-		String result = node.getFClassDefinition().getFName();
+		String result = node.getFTypeDefinition().getFName();
 		if (node.getFTypeParamBinding().size() > 0) {
 			result += "<" + ppComaSeparatedNodes(node.getFTypeParamBinding()) + ">";
 		}

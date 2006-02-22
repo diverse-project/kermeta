@@ -69,14 +69,14 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		    Iterator it = InheritanceSearch.callableProperties(InheritanceSearch.getFClassForClassDefinition(arg0)).iterator();
 		    while(it.hasNext()) {
 		        CallableProperty cp = (CallableProperty)it.next();
-		        if (cp.getFclass().getFClassDefinition() != arg0)
+		        if (cp.getFclass().getFTypeDefinition() != arg0)
 		            result.add(new OutlineItem(cp.getTypeBoundedProperty(), item, outline));
 		    }
 		    
 		    it = InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition(arg0)).iterator();
 		    while(it.hasNext()) {
 		        CallableOperation cop = (CallableOperation)it.next();
-		        if (cop.getFclass().getFClassDefinition() != arg0)
+		        if (cop.getFclass().getFTypeDefinition() != arg0)
 		            result.add(new OutlineItem(cop.getTypeBoundedOperation(), item, outline));
 		    }
 		
