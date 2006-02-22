@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.21 2006-02-21 17:56:03 jsteel Exp $
+/* $Id: Runtime2EMF.java,v 1.22 2006-02-22 09:29:29 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -208,13 +208,14 @@ public class Runtime2EMF {
     }
     
     /**
-     * Get or create the EMFObjects recursively, from the root element.
+     * Get or create the EMFObjects recursively, from the root element ("root element" is
+     * by opposition to property element).
      * We don't yet update completely each object. A second pass is done for this
      * purpose in the method simpleUpdateProperty
      */
     protected void findEMFObjectsForRuntimeObjectsForRoot(RuntimeObject rObject, EClassifier classifier)
     {
-        // already created normally, in the first recursive pass
+        // Already created normally, in the first recursive pass
     	EObject result = (EObject)this.getOrCreateObjectFromRuntimeObject(rObject, classifier);
         
         // Add the runtime object parsed
