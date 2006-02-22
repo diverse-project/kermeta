@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.34 2006-02-21 17:56:03 jsteel Exp $
+/* $Id: ExpressionInterpreter.java,v 1.35 2006-02-22 09:25:37 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -13,6 +13,16 @@
  * 	see class javadoc.	 
  */
 package fr.irisa.triskell.kermeta.interpreter;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+
 import fr.irisa.triskell.kermeta.behavior.FAssignement;
 import fr.irisa.triskell.kermeta.behavior.FBlock;
 import fr.irisa.triskell.kermeta.behavior.FBooleanLiteral;
@@ -62,14 +72,6 @@ import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Set;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * This is the Java version of kermeta interpreter. It extends the KermetaVisitor, and each
@@ -79,24 +81,20 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 
     
     //The only state variable of the interpreter should be the context and the memory
-    /**
-	 * The global context
-	 * @uml.property  name="interpreterContext"
-	 * @uml.associationEnd  multiplicity="(1 1)"
-	 */
+    /** The global context */
     protected InterpreterContext interpreterContext;
-    /**
-	 * The memory
-	 * @uml.property  name="memory"
-	 * @uml.associationEnd  multiplicity="(1 1)" inverse="currentInterpreter:fr.irisa.triskell.kermeta.builder.RuntimeMemory"
-	 */
+    /** The memory */
     protected RuntimeMemory memory;
-    /**
-	 * The current variable that is processed. Used for traceback when a CallOnVoidTarget occured
-	 * @uml.property  name="current_variable"
-	 * @uml.associationEnd  
-	 */
+    /** The current variable that is processed. Used for traceback when a CallOnVoidTarget occured */
     protected Variable current_variable;
+    /** The reason/state of the debugging
+    (among stepEnd, stepInto, stepOver.) */
+    public String currentState = "";
+    
+    // Constants telling the state of the interpration
+    public static final String DEBUG_RESUME = "resume";
+    public static final String DEBUG_SUSPEND = "suspend";
+    public static final String DEBUG_TERMINATE = "terminate";
     
     /**
      * Constructor
@@ -281,8 +279,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		    binding.setFType(object_class);
 		    // Add to type param bindings the binding
 		    coll_class.getFTypeParamBinding().add(binding);
-			    
-			
+
 			if (expectedType.equals(new SimpleType(coll_class))) {
 				// THIS IS A TERRIBLE HACK TO ALLOW CASTING COLLECTIONS
 				// OF ANYTHING TO COLLECTION OF OBJECTS
@@ -453,7 +450,6 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	{
 	    RuntimeObject value = interpreterContext.peekCallFrame().getOperationResult();
 	    if (value==null)
-	    	// TODO
 	    	System.err.println("result not found in context");
 	    return value;
 	}
@@ -529,6 +525,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	public Object visitFBlock(FBlock node) {
 
 	    RuntimeObject result = memory.voidINSTANCE;
+		// Stops the interpretation.
+	    if (shouldTerminate()) return result;
+		
 	    // process the statements
 	    try {
 	        // Execute the block
@@ -593,6 +592,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    
 	    // The result returned by the visit
 	    RuntimeObject result = null;
+		// Stops the interpretation.
+	    if (shouldTerminate()) return result;
 	    
         FExpression cond = node.getFCondition();
 
@@ -635,9 +636,12 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitFLoop(FLoop node)
 	{
+		RuntimeObject result = memory.voidINSTANCE;
         // Push a new expressionContext in the current CallFrame. 
         interpreterContext.peekCallFrame().pushExpressionContext();
-        
+        // Stops the interpretation.
+	    if (shouldTerminate()) return result;
+	    // Else
         try {
         	
 	        // Accept initialization (a FVariableDecl) : add a new variable in the ExpressionContext
@@ -820,7 +824,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		        raiseCallOnVoidTargetException(node,"");
 		    }
 		    
-//		  This should never happend is the type checker has checked the program
+//		  This should never happen is the type checker has checked the program
 			if (property == null) {
 			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getFName() + "in type : " + target_type);
 			    internalLog.error("May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developpers");		        
@@ -1229,18 +1233,25 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     }
     
     
-    /**
-	 * @return  Returns the interpreterContext.
-	 * @uml.property  name="interpreterContext"
-	 */
     public InterpreterContext getInterpreterContext() {
     	return this.interpreterContext;
     }    
-    /**
-	 * @return  Returns the memory.
-	 * @uml.property  name="memory"
-	 */
     public RuntimeMemory getMemory() {
         return memory;
     }
+    
+    // Helpers to terminate the interpretation process properly, either in debug or run mode.
+    /** @return the current command being executed by the debuginterpreter */
+	public String getCurrentState() {	return currentState; }
+	/** set the current command being executed by the debuginterpreter */
+	public void setCurrentState(String command) {	currentState = command;}
+
+    /** @return true if the interpretation should terminate. */
+    public boolean shouldTerminate()
+    {
+    	return getCurrentState().equals(DEBUG_TERMINATE);
+    }
+	
+    
+    
 }
