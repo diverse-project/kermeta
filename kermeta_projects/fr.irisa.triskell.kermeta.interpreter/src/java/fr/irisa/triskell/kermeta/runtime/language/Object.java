@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.5 2005-11-08 15:54:32 dvojtise Exp $
+/* $Id: Object.java,v 1.6 2006-02-24 13:55:40 zdrey Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -25,7 +25,9 @@ import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 /**
- *  Implementation of Kermeta base type Object 
+ *  Implementation of Kermeta base type Object.
+ *  Each methods takes as its first parameter the runtime object corresponding to self object
+ *  in kermeta call
  */
 public class Object {
 
