@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<org.topcased.modeler.configurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.topcased.modeler.configurator="http://org.topcased.modeler.configurator" name="kmEditor" projectName="fr.irisa.triskell.kermeta.graphicaleditor" prefix="Structure" extension="km" extensionDiagram="kmdi" pluginVersion="0.0.1">
+  <genModel href="kermeta_structure.genmodel#/"/>
+  <diagrams id="kmClassDiagram" name="kmClassDiagram" package="diagram" prefix="Structure">
+    <palette name="Palette">
+      <paletteCategories name="Basic">
+        <items name="Package" part="//@diagrams.0/@parts.0"/>
+        <items name="Class" part="//@diagrams.0/@parts.2"/>
+        <items name="Operation" part="//@diagrams.0/@parts.3"/>
+        <items name="DataType Property" part="//@diagrams.0/@parts.4"/>
+      </paletteCategories>
+      <paletteCategories name="Edges">
+        <items name="Property" part="//@diagrams.0/@parts.5"/>
+      </paletteCategories>
+    </palette>
+    <parts xsi:type="org.topcased.modeler.configurator:NodePartConfiguration" object="//@objects.0" type="Package" childElements="//@diagrams.0/@parts.2" superType="//@diagrams.0/@parts.1" container="true" defaultWidth="12" defaultHeight="10" minimumWidth="10" minimumHeight="10" maximumHeight="200"/>
+    <parts xsi:type="org.topcased.modeler.configurator:NodePartConfiguration" object="//@objects.1"/>
+    <parts xsi:type="org.topcased.modeler.configurator:NodePartConfiguration" object="//@objects.3" type="Class" childElements="//@diagrams.0/@parts.3 //@diagrams.0/@parts.4" superType="//@diagrams.0/@parts.1" resizing="WIDTH" container="true" layout="ClassLayout" defaultWidth="70" defaultHeight="10" minimumWidth="10" minimumHeight="7"/>
+    <parts xsi:type="org.topcased.modeler.configurator:NodePartConfiguration" object="//@objects.4" type="Label" defaultBackgroundColor="241,235,235" backgroundColorChangeable="false" defaultWidth="-1" defaultHeight="-1"/>
+    <parts xsi:type="org.topcased.modeler.configurator:NodePartConfiguration" object="//@objects.8" type="Label" backgroundColorChangeable="false"/>
+    <parts xsi:type="org.topcased.modeler.configurator:EdgePartConfiguration" object="//@objects.5" sourceDecoration="DIAMOND" targetDecoration="ARROW" directEditable="//@diagrams.0/@parts.5/@edgeObjects.0">
+      <sourceTargetCouple containerType="SOURCE" autoRef="true" sourceNode="//@diagrams.0/@parts.2" targetNode="//@diagrams.0/@parts.2">
+        <containerObject href="kermeta_structure.genmodel#//structure/FClassDefinition"/>
+        <containerRef xsi:type="ecore:EReference" href="kermeta_structure.ecore#//FClassDefinition/fOwnedAttributes"/>
+        <refSourceToEdge xsi:type="ecore:EReference" href="kermeta_structure.ecore#//FClassDefinition/fOwnedAttributes"/>
+        <refEdgeToTarget xsi:type="ecore:EReference" href="kermeta_structure.ecore#//FProperty/fOwningClass"/>
+      </sourceTargetCouple>
+      <edgeObjects type="Target" id="fName">
+        <eStructuralFeature xsi:type="ecore:EAttribute" href="kermeta_structure.ecore#//FNamedElement/fName"/>
+      </edgeObjects>
+    </parts>
+  </diagrams>
+  <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/FPackage"/>
+  </objects>
+  <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/FNamedElement"/>
+  </objects>
+  <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/FClass"/>
+  </objects>
+  <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/FClassDefinition"/>
+  </objects>
+  <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/FOperation"/>
+  </objects>
+  <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/FProperty"/>
+  </objects>
+  <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/FMultiplicityElement"/>
+  </objects>
+  <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/FPrimitiveType"/>
+  </objects>
+  <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/FTag"/>
+  </objects>
+</org.topcased.modeler.configurator:EditorConfiguration>
