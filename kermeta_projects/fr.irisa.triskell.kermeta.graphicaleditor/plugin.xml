@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="fr.irisa.triskell.kermeta.graphicaleditor"
+   name="kmEditor"
+   version="0.0.1"
+   provider-name="Topcased"
+   class="fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin">
+
+   <runtime>
+      <library name="fr.irisa.triskell.kermeta.graphicaleditor.jar">
+         <export name="*"/>
+      </library>
+   </runtime>
+
+   <requires>
+   
+      <import plugin="org.eclipse.emf.edit.ui" export="true"/>
+      <import plugin="org.eclipse.ui.ide" export="true"/>
+      <import plugin="fr.irisa.triskell.kermeta.model.edit" export="true"/>
+      <import plugin="org.eclipse.emf.edit" export="true"/>
+      <import plugin="org.eclipse.core.resources" export="true"/>
+      <import plugin="org.eclipse.core.runtime" />
+      <import plugin="org.eclipse.emf.ecore.xmi" export="true"/>
+      <import plugin="org.eclipse.emf.ecore" export="true"/>
+      <import plugin="org.topcased.modeler"/>
+      <import plugin="org.topcased.modeler.di"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="fr.irisa.triskell.kermeta"/>
+      <import plugin="org.eclipse.gmf.runtime"/>
+      <import plugin="org.eclipse.gmf.runtime.notation"/>
+      <import plugin="org.eclipse.gmf.runtime.notation.edit"/>
+      <import plugin="org.eclipse.gmf.runtime.notation.providers"/>
+      <import plugin="org.eclipse.gmf.runtime.draw2d.ui"/>
+      <import plugin="org.eclipse.gmf.runtime.draw2d.ui.render"/>
+      <import plugin="org.topcased.toolkit"/>
+   </requires>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
+            icon="icons/Structure.gif"
+            default="true"
+            name="kmEditor"
+            id="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
+            contributorClass="fr.irisa.triskell.kermeta.graphicaleditor.actions.StructureEditorActionBarContributor"
+            extensions="kmdi">
+      </editor>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            icon="icons/Structure.gif"
+            class="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
+            category="org.topcased.facilities.newWizards/org.topcased.modeler.newdiagram"
+            name="Structure Diagram"
+            id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams">
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+   
+   <extension point="org.topcased.modeler.templates">
+      <template
+            di="templates/template1/%name%.kmdi"
+            model="templates/template1/%name%.km"
+            name="Structure - kmClassDiagram"
+            id="kmClassDiagram"
+            type="Structure"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.topcased.modeler.perspective">
+         <newWizardShortcut id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"/>
+      </perspectiveExtension>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.topcased.modeler.preferences.ModelerPreferencePage"
+            class="fr.irisa.triskell.kermeta.graphicaleditor.preferences.StructurePreferencePage"
+            id="fr.irisa.triskell.kermeta.graphicaleditor.preferences.StructurePreferencePage"
+            name="Structure"/>
+   </extension>
+   
+</plugin>
