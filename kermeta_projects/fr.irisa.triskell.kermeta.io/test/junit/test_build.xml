@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.6 2005-12-12 19:31:27 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.7 2006-03-02 21:40:13 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -55,9 +55,10 @@
 		</fileset>
 	</path>
 
-	<taskdef classpathref="cobertura_classpath" resource="tasks.properties"/>
+	<!--<taskdef classpathref="cobertura_classpath" resource="tasks.properties"/>-->
 		
-	<target name="all" depends="compile_java,instrument,test,coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>
+<!--	<target name="all" depends="compile_java,instrument,test,coverage-report" description="Compile, instrument ourself, run the tests and generate JUnit and coverage reports."/>-->
+	<target name="all" depends="compile_java,test" description="Compile and run the tests."/>
 
 	<target name="init">
 			<mkdir dir="${classes.dir}" />
@@ -78,32 +79,32 @@
    		</javac>
 	</target>
 	
-	<target name="instrument" depends="init, compile_java">
+	<!--<target name="instrument" depends="init, compile_java">-->
 		<!--
 			Remove the coverage data file and any old instrumentation.
 		-->
-		<delete file="coverage.ser"/>
+<!--		<delete file="coverage.ser"/>
 		<delete dir="${instrumented.dir}" />
-
+-->
 		<!--
 			Instrument the application classes, writing the
 			instrumented classes into ${build.instrumented.dir}.
 		-->
-		<cobertura-instrument datafile="coverage.ser" todir="${instrumented.dir}">
-
+	<!--	<cobertura-instrument datafile="coverage.ser" todir="${instrumented.dir}">
+-->
 			<!--
 				The following line causes instrument to ignore any
 				source line containing a reference to log4j, for the
 				purposes of coverage reporting.
 			-->
-			<ignore regex="org.apache.log4j.*" />
+	<!--		<ignore regex="org.apache.log4j.*" />
 
 			<fileset dir="${build.bin}">
-				<!--
+		-->		<!--
 					Instrument all the application classes, but
 					don't instrument the test classes.
 				-->
-				<include name="**/*.class" />
+		<!--		<include name="**/*.class" />
 				<exclude name="**/*Test.class" />
 			</fileset>
 		</cobertura-instrument>
@@ -113,11 +114,11 @@
 	</target>
 
 	<target name="coverage-report">
-		<!--
+-->		<!--
 			Generate an XML file containing the coverage data using
 			the "srcdir" attribute.
 		-->
-		<cobertura-report datafile="coverage.ser" 
+<!--		<cobertura-report datafile="coverage.ser" 
 			srcdir="${src}" destdir="${coverage.xml.dir}" format="xml" />
 		<cobertura-report datafile="coverage.ser" destdir="${coverage.html.dir}">
 			<fileset dir="${src}">
@@ -125,7 +126,7 @@
 			</fileset>
 		</cobertura-report>
 	</target>
-
+-->
 	<target name="test" 
 		description="run io tests" depends="init, compile_java">
 	    <mkdir dir="${report.dir}"/> 
@@ -145,6 +146,12 @@
 		    	<formatter type="xml"/>
 		  	</test>
 			<test name="kermeta_io.constraintchecker_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-constraintchecker-result">
+		    	<formatter type="xml"/>
+		  	</test>
+			<test name="kermeta_io.roundtrip_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-roundtrip-result">
+			   	<formatter type="xml"/>
+			</test>
+			<test name="kermeta_io.test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-io-result">
 		    	<formatter type="xml"/>
 		  	</test>
   
