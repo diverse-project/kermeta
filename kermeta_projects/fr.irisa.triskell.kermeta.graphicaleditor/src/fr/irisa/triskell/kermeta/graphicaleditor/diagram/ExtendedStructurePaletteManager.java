@@ -45,7 +45,7 @@ public class ExtendedStructurePaletteManager extends StructurePaletteManager {
 		ModelerCreationToolEntry objectTool;
 		CreationFactory factory;
 		String newObjTxt;
-		newObjTxt = "DataType Property";
+		newObjTxt = "Standard Type Property";
 		factory = new ExtendedGraphElementCreationFactory(getCreationUtils(),
 				StructurePackage.eINSTANCE.getFProperty());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,

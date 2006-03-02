@@ -10,12 +10,14 @@ import org.topcased.modeler.editor.AbstractCreationUtils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureEdgeObjectConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.FPropertyFigureNode;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
+import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FOperation;
 import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProperty;
 import fr.irisa.triskell.kermeta.structure.FTag;
+import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.structure.util.StructureSwitch;
 
@@ -61,7 +63,9 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 				// Contract!!
 				// The constraint according to which property is a node 
 				// (if its type is a PrimitiveType) or an edge (otherwise).
-				if (object.getFType() instanceof FPrimitiveType)
+				// TODO : check that object type's type is always FClass
+				if (KermetaUtils.getDefault().isStandardType(object.getFType())
+				||  KermetaUtils.getDefault().isPrimitiveType(object.getFType()))
 				{
 					return createGraphElementFPropertyNode((FProperty) object);
 				}

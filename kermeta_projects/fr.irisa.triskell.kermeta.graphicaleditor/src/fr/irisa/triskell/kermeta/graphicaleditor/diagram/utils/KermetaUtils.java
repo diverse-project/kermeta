@@ -25,13 +25,16 @@ import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 import fr.irisa.triskell.kermeta.structure.FDataType;
 import fr.irisa.triskell.kermeta.structure.FEnumeration;
+import fr.irisa.triskell.kermeta.structure.FGenericTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FPackage;
 import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
 import fr.irisa.triskell.kermeta.structure.FProductType;
 import fr.irisa.triskell.kermeta.structure.FType;
 import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.structure.FVoidType;
 import fr.irisa.triskell.kermeta.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 /*
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
@@ -48,12 +51,20 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
  *    Setting a "type" to an operation is not naturally done through the ecore reflexive editor:
  *    we have to define a child (Operation inherits FTypeContainer, which is composed of a set
  *    of children which type is FType)
+ *    
+ * IMPORTANT NOTE : 
+ * Using types of framework.km is sometimes unsafe(?). Indeed, since we load here
+ * the kermeta unit of the kermeta framework, we load in memory all the related type definitions.
+ * But when we use an element of the kermeta framework in the model that we are constructing, there
+ * seem to be another framework present in memory. So all the tests that compare types
+ * of the framework need to be done using the names of the types. (what a pity...but I don't 
+ * know yet how to get rid of that)
  * @generated NOT 
  */
 public class KermetaUtils {
 
 	/** Standard unit */
-	protected KermetaUnit unit;
+	protected KermetaUnit standardUnit;
 	/** 
 	 * Type containment fixer :
 	 *  Since many Typed elements (FOperation, FProperty) inherits FTypeContainer,
@@ -70,7 +81,7 @@ public class KermetaUtils {
 	private KermetaUtils()
 	{
 		super();
-		unit = loadStdLib();
+		standardUnit = loadStdLib();
 		typeFixer = new TypeContainementFixer();
 		prettyPrinter = new KM2KMTPrettyPrinter();
 	}
@@ -165,7 +176,7 @@ public class KermetaUtils {
 	 */
 	public List<FTypeDefinition> getStdLibTypeDefinitions()
 	{
-		return unit.getAllTypeDefinitions();
+		return standardUnit.getAllTypeDefinitions();
 	}
 	
 	/** *
@@ -192,17 +203,20 @@ public class KermetaUtils {
 			type_name = type.toString();
 		else if (type instanceof FDataType)
 			type_name = ((FDataType)type).getFName();
-        else 
+		else if (type instanceof FVoidType)
+			type_name = "Void";
+        else
         {
-        	type_name = type.toString();
+        	type_name = type==null?"<Null>":type.toString();
         	//throw new Error("FTYPE : Not implemented error : createFTypeForFTypeDefinition -- Enumeration type is not handled yet. (" + type + ")");
         }
         return type_name;
 	}
 	
 	public String getLabelForFTypeVariable(FTypeVariable var)
-	{
-		return var.getFName() + var.getFSupertype()!=null?getLabelForFType(var.getFSupertype()):""; 
+	{ 
+		String supertype = var.getFSupertype()!=null?(":"+getLabelForFType(var.getFSupertype())):"";
+		return var.getFName() + supertype; 
 	}
 	
 	public FType createFTypeForFTypeDefinition(FTypeDefinition typedef)
@@ -210,9 +224,8 @@ public class KermetaUtils {
 		FType type = null;
         if (typedef instanceof FClassDefinition)
         {
-        	System.err.println("-> " + typedef);
         	//type = StructureFactory.eINSTANCE.createFClass();
-        	type = unit.struct_factory.createFClass();
+        	type = standardUnit.struct_factory.createFClass();
         	((FClass)type).setFTypeDefinition((FClassDefinition)typedef);
         	//type = ((FClassDefinition)_returnType).()
         }
@@ -264,8 +277,8 @@ public class KermetaUtils {
 	/**
 	 * @return Returns the unit.
 	 */
-	public KermetaUnit getUnit() {
-		return unit;
+	public KermetaUnit getStandardUnit() {
+		return standardUnit;
 	}
 
 	/**
@@ -275,8 +288,92 @@ public class KermetaUtils {
 		return prettyPrinter;
 	}
 
+	/**
+	 * Return true if the given type is a base type, false otherwise
+	 * Basetypes are the one as defined in fr.irisa.triskell.kermeta.interpreter project,
+	 * that are linked to real java types, that is :
+	 * 
+	 * - Boolean 
+	 * - Character
+	 * - Collection
+	 * - Integer
+	 * - Iterator
+	 * - Map
+	 * - Numeric (Real?)
+	 * - String
+	 */
+	public boolean isBaseType(FType type)
+	{
+		boolean isbasetype = false;
+		if (type instanceof FClass)
+		{
+			FClass fclass = (FClass)type; 
+			
+			String classdef = fclass.getFTypeDefinition().getFName();
+			// Having the below types in another way then manual 
+			String[] basetypes = new String[]
+            {"Boolean", "Character", "Integer", "Iterator", "Map", "Numeric", "String" };
+			String[] colltypes = new String[]
+            {"Collection", "Set", "OrderedSet", "Sequence", "OrderedSequence", "Bag"};
+			if (convertArrayToList(basetypes).contains(classdef)
+				|| convertArrayToList(colltypes).contains(classdef)	)
+				isbasetype = true;
+		}
+		return isbasetype;
+	}
 	
+	/** 
+	 * Return true if given type is a primitive type (in kermeta meaning, an alias),
+	 * false otherwise
+	 * @param type
+	 * @return
+	 */
+	public boolean isPrimitiveType(FType type)
+	{
+		return type instanceof FPrimitiveType;
+	}
 	
+	/**
+	 * Return true if the given type is linked to a type definition in the 
+	 * standard framework (framework.km), false otherwise.
+	 * This method also calls isPrimitiveType method.
+	 * @param type
+	 * @return
+	 */
+	public boolean isStandardType(FType type)
+	{
+		boolean isstandardtype = false;
+		FTypeDefinition typedef = null;
+		String typedef_qname = "";
+		
+		if (type instanceof FClass)
+		{
+			typedef = ((FClass)type).getFTypeDefinition();
+			typedef_qname = KMTHelper.getQualifiedName(typedef);
+		}
+		else if (type instanceof FTypeDefinition) // case of FPrimitiveTypes!
+		{
+			typedef = (FTypeDefinition) type;
+			typedef_qname = KMTHelper.getQualifiedName(typedef);
+		}
+		// FIXME : this does not seem to work!! seems to be 2 frameworks loaded in memory, but
+		// where???
+		if (getStdLibTypeDefinitions().contains(typedef)) System.err.println("Kikou");
+		// Typedef is null when type is note FClass or not FTypeDefinition....
+		if (typedef_qname!=null)
+		{
+			isstandardtype = standardUnit.getTypeDefinitionByName(typedef_qname)!=null;
+		}
+		return isstandardtype;
+	}
+	
+	public List convertArrayToList(Object[] array)
+	{
+		List result = new ArrayList();
+		for (int i=0; i<array.length; i++)
+			result.add(array[i]);
+		return result;
+	}
 
 
 }

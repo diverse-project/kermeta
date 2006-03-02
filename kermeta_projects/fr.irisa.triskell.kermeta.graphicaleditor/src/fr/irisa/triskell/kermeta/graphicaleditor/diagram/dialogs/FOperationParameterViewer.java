@@ -58,7 +58,6 @@ public class FOperationParameterViewer
     private String[] _typeNames;
     private Collection<ParameterObject> _paramObjects;
     private ArrayList<FType> _types;
-    private ArrayList<FTypeDefinition> _typedefs; // prefer this attribute?
     
     public Collection getType() {
         return _types;
@@ -69,7 +68,7 @@ public class FOperationParameterViewer
     }
     
     public FOperationParameterViewer(Composite parent, FOperationDataStructure dataStructure, Collection<ParameterObject> paramObjects, Collection<FType> types, String [] typeNames) {
-        _types = (ArrayList)types;
+        _types = (ArrayList) types;
         _typeNames = typeNames;
 		_dataStructure = dataStructure;
         _paramObjects = paramObjects;//_dataStructure.getDataOwnedParameters();

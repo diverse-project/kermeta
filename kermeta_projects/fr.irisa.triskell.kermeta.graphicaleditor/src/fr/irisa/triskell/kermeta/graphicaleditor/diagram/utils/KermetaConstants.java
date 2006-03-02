@@ -9,10 +9,14 @@
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils;
 
+import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.structure.StructureFactory;
+
 public interface KermetaConstants {
 	
-	
+	/** default name of a package */
 	public static final String FPACKAGE_DEFAULT_NAME = "default";
-	
+	/** Model element for the void type */
+	public static final FType FVoidType = StructureFactory.eINSTANCE.createFVoidType();
 
 }

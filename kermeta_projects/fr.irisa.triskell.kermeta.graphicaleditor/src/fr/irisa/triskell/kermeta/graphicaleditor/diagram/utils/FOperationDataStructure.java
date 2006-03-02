@@ -44,7 +44,6 @@ public class FOperationDataStructure
 	public static final String FOPERATION_owned_parameter = "ownedParameter";
 	public static final String FOPERATION_type_parameter = "typeParameter";
 	
-
     /**
      * The constructor
      * 
@@ -89,7 +88,6 @@ public class FOperationDataStructure
     public void addTypeParameter(String name, FType supertype)
     {
         _dataTypeParameters.add(new ParameterObject(name, supertype));
-        System.err.println("pouete");
     }
 
     /**
@@ -177,12 +175,7 @@ public class FOperationDataStructure
     {
         return ((ParameterObject) object).getType();
     }
- /*   
-    public FTypeDefinition getTypeDefinition(Object object)
-    {
-        return KermetaUtils.getDefault().((ParameterObject) object).getType();
-    }
-*/
+    
     /**
      * 
      * @param object

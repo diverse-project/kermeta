@@ -35,6 +35,8 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import com.sun.org.apache.bcel.internal.generic.GETSTATIC;
+
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.FPropertyDataStructure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.structure.FProperty;
@@ -55,29 +57,29 @@ public class FPropertyEditDialog extends Dialog
 	
 	// SWT Objects
 	private Composite _dialogComposite;
-	
-	/** For the moment we only handle "Single types" (types that are not ProductTypes
-	 * or FunctionTypes) */
 	private Combo _typeComboBox;
 	private Text _propertyNameText;
 	
-	// UML2 types data
+	// types data
 	private List<String> _typeNames;
+	public FPropertyDataStructure dataStructure;
 	
+	/**
+	 * The available types for a property represented as a node.
+	 * Available types are the standard types only. 
+	 * TODO : For all the other types, either inside the edited model
+	 * or in "additional resources", the user will have to create an edge if
+	 * he wants too. [To discuss]
+	 * 
+	 * Note : for the moment we only handle "Single types" (types that are not ProductTypes
+	 * or FunctionTypes)
+	 */
 	private List<FType> _types;
-	// Initialize available type definitions
-	/** */
-	private List<FTypeDefinition> _typedefs;
-	
 	private Map<String, Object> _data;
 	
 	// Constants
 	public static final String FProperty_NAME = "FProperty name";
-	public static final String FProperty_RETURN_TYPE = "FProperty return type";
-	
-	// extracted from a func.
-	public FPropertyDataStructure dataStructure;
-
+	public static final String FProperty_TYPE = "FProperty type";
 	private static final String VOID_TYPE = "Void";
 	
 	/**
@@ -102,20 +104,23 @@ public class FPropertyEditDialog extends Dialog
 	 */
 	protected void configureShell(Shell newShell)
 	{
-		newShell.setText("Operation " + _property.getFName());
+		newShell.setText("Property " + _property.getFName());
 		super.configureShell(newShell);
 	}
 	
 	/**
-	 * Initialize attributes about types that model currently contains
+	 * Initialize attributes about *primitive types* (and only primitive types!)
+	 * that model currently contains
 	 * 
 	 */
 	private void initializeTypes()
 	{
 		int index = 0;
 		// get the types available in the package owning the class of the given operation.
-		_typedefs = KermetaUtils.getDefault().getOwnedTypeDefinitions(_property.getFOwningClass());
-		_types = KermetaUtils.getDefault().getOwnedTypes(_property.getFOwningClass());
+		// _types = KermetaUtils.getDefault().getOwnedTypes(_property.getFOwningClass());
+		
+		// Another option : get only types available in the standard stuff
+		_types = KermetaUtils.getDefault().getStdLibTypes();
 		_typeNames = new ArrayList<String>(_types.size());
 		
 		for (Iterator<FType> iterator = _types.iterator(); iterator.hasNext();)
@@ -123,9 +128,10 @@ public class FPropertyEditDialog extends Dialog
 			FType next = iterator.next();
 			// Display a proper name
 			String name = KermetaUtils.getDefault().getLabelForFType(next);
-			name = (name==null)?"<unset type>":name;
+			name = (name==null)?"":name;
 			//_typeNames[index] = name;
-			_typeNames.add(name);
+			if (name.length()>0) // Do not give user the possibility to set an unanmed type
+				_typeNames.add(name);
 			//index++;
 		}
 	}
@@ -225,7 +231,7 @@ public class FPropertyEditDialog extends Dialog
 		_data.put(FProperty_NAME, _propertyNameText.getText());
 		if (_typeComboBox.getSelectionIndex() != 0)
 		{
-			_data.put(FProperty_RETURN_TYPE, _types.get(_typeComboBox.getSelectionIndex() - 1));
+			_data.put(FProperty_TYPE, _types.get(_typeComboBox.getSelectionIndex() - 1));
 		}
 		super.okPressed();
 	}
