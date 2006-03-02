@@ -1,0 +1,146 @@
+@mainClass "kdoc::Main"
+@mainOperation "main"
+
+
+package kdoc;
+
+
+require kermeta
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore"
+
+using kermeta::structure
+using kermeta::behavior
+
+using kermeta::standard
+using kermeta::persistence
+using kermeta::utils
+
+class Main
+{
+    operation main() : Void is do 
+        
+
+        var path : String init "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km"
+        stdio.write("loading model...")
+        var model : Collection<FPackage> init loadModel(path)
+        stdio.writeln("OK")
+        
+        var g : DotGenerator init DotGenerator.new
+        
+        var res : String init
+        g.diagramForPackage(model.one.fNestedPackage.select{ p | p.fName == "kunit" }.one)
+    
+    	stdio.writeln(res)
+    	
+    end
+    
+    
+    operation loadModel(path : String) : Collection<FPackage> is do
+    	var repository : EMFRepository init EMFRepository.new             
+   		var resource : Resource init repository.createResource(path, "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")     
+   		
+ 	   resource.load() 
+ 	   result :=  Set<FPackage>.new
+       from var it : Iterator<Object> init resource.instances.iterator
+       until it.isOff
+       loop
+           var next : Object init it.next
+           if (FPackage.isInstance(next)) then 
+           		var aPackage : FPackage 
+           		aPackage ?= next
+           		result.add(aPackage)
+           end
+       end
+    end
+}
+
+class DotGenerator {
+	
+	/**
+	 * The operation returns the class diagram of the
+	 * given package in dot textual format
+	 */
+	operation diagramForPackage(pack : FPackage) : String is do
+		result := ""
+		var classes : Hashtable<FClassDefinition, String> init Hashtable<FClassDefinition, String>.new
+		// Get all the classes of the package an give them 
+		// an ID (c0, c1, ..., cn)
+		var i : Integer init 0
+		var cls : FClassDefinition
+		pack.fOwnedTypeDefinition.each{ c | 
+			if FClassDefinition.isInstance(c) then
+				cls ?= c
+				classes.put(cls, "c" + i.toString)
+				i := i+1
+			end
+		}
+		
+		// generate for each class
+		from var it : Iterator<FClassDefinition> init classes.keyIterator
+		until it.isOff
+		loop
+			result := result + dotForClass(it.next, classes)
+		end
+	end
+
+	operation multAsStr(m : FMultiplicityElement) : String is do
+		var u : Integer init m.fUpper
+		var l : Integer init m.fLower
+		
+		
+		result :=
+					if u == 1 and l == 0 then "1"
+					else if u == -1 and l == 0 then "*"
+					else l.toString + ".." + u.toString	end end
+		
+	end
+
+	/** 
+	 * Generate the dot fragment for a classe
+	 */
+	operation dotForClass(c : FClassDefinition, classes : Hashtable<FClassDefinition, String>) : String is do
+		var assos : String init ""
+		var q : String init "\"x".substring(1,2)
+		result := classes.getValue(c) + " [label="+q+"{" + c.fName + "\\" + "n" + "|"
+		// attributes and associations
+		c.fOwnedAttributes.each{ p |
+			if FClass.isInstance(p.fType) then
+				var cls : FClass cls ?= p.fType
+				if classes.getValue(cls.fClassDefinition) != void then
+					// an association
+					assos := assos + classes.getValue(c) + " -> " + classes.getValue(cls.fClassDefinition) + "[taillabel="+q+""+q+", label="+q+""+
+					p.fName+""+q+", headlabel="+q+""+q+", fontname="+q+"Helvetica"+q+", fontcolor="+q+"black"+
+					q+", fontsize=10.0, color="+q+"black"+q+", arrowhead=vee, arrowtail=" + if p.fIsComposite then "diamond" else "none" end + "];\n"
+					//c3 -> c4 [taillabel="1..*", label="Member", headlabel="*", fontname="Helvetica", fontcolor="black", fontsize=10.0, color="black", arrowhead=none, arrowtail=ediamond];
+				else
+					// an attribute
+					result := result + p.fName + " : " + cls.fClassDefinition.fName + "\\l"
+					
+				end
+			else
+				// an attribute
+				var t : FPrimitiveType t ?= p.fType
+				if t != void then
+					result := result + p.fName + " : " + t.fName + "\\l"
+				end
+			end
+		}
+		result := result + "| "
+		// operations
+		c.fOwnedOperation.each{ o | 
+			result := result + o.fName + "()\\l"
+		}
+		result := result + "}"+q+", fontname="+q+"Helvetica"+q+", fontcolor="+q+"black"+q+", fontsize=10.0];\n"
+		//c3 [label="{School\n|name : Name\laddress : String\lphone : Number\l|addStudent()\lremoveStudent()\lgetStudent()\lgetAllStudents()\laddDepartment()\lremoveDepartment()\lgetDepartment()\lgetAllDepartments()\l}", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+		result := result + assos
+		// super classes :
+		c.fSuperType.each{ st | 
+			var sc : FClass sc ?= st
+			if classes.getValue(sc.fClassDefinition) != void then
+				result := result + classes.getValue(sc.fClassDefinition) + " -> " + classes.getValue(c) + "[dir=back,arrowtail=empty];\n"
+			end
+		}
+	end
+
+}
+
