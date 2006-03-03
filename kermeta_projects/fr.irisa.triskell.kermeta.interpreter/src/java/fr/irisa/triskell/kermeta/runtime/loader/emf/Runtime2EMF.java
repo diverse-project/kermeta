@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.22 2006-02-22 09:29:29 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.23 2006-03-03 15:21:47 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -45,8 +45,8 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
@@ -418,10 +418,10 @@ public class Runtime2EMF {
     {
         EObject result =  null;
         // TypeDefinition -> ClassDefinition, PrimitiveType??
-        FClass metaclass = (FClass)rObject.getMetaclass().getData().get("kcoreObject");
+        fr.irisa.triskell.kermeta.language.structure.Class metaclass = (fr.irisa.triskell.kermeta.language.structure.Class)rObject.getMetaclass().getData().get("kcoreObject");
         // Get the qualified name of the runtimeObject class
         String kqname = rObject.getFactory().getMemory().getUnit().getQualifiedName(
-                metaclass.getFTypeDefinition());
+                metaclass.getTypeDefinition());
         
         internalLog.debug("createEObjectFromRuntimeObject for RuntimeObject: " + getRONameProp(rObject) + " "+ rObject  + rObject.getProperties());
         EClass eclass = null;
@@ -541,9 +541,9 @@ public class Runtime2EMF {
     {	
         boolean b = false;
         KermetaUnit kunit = robject.getFactory().getMemory().getUnit(); 
-        FClassDefinition coll_cd = (FClassDefinition)kunit.getTypeDefinitionByName("kermeta::standard::Collection");  
-        FClass c = (FClass)robject.getMetaclass().getData().get("kcoreObject");
-        if (kunit.isSuperClass(coll_cd, (FClassDefinition) c.getFTypeDefinition())) b = true;
+        ClassDefinition coll_cd = (ClassDefinition)kunit.getTypeDefinitionByName("kermeta::standard::Collection");  
+        fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)robject.getMetaclass().getData().get("kcoreObject");
+        if (kunit.isSuperClass(coll_cd, (ClassDefinition) c.getTypeDefinition())) b = true;
         return b;
     }
     

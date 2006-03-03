@@ -33,7 +33,7 @@ abstract class Class inherits ParameterizedType
 		getter is do
 			var cDef : ClassDefinition
 			cDef ?= typeDefinition
-			result := cDef.ownedAttributes
+			result := cDef.ownedAttribute
 		end
 	property readonly ownedOperation : set Operation[0..*]
 		getter is do
@@ -97,7 +97,7 @@ abstract class Tag inherits Object
 }
 abstract class Property inherits MultiplicityElement
 {
-	reference owningClass : ClassDefinition#ownedAttributes
+	reference owningClass : ClassDefinition#ownedAttribute
 	reference opposite : Property
 	attribute isReadOnly : Boolean
 	attribute default : String
@@ -116,18 +116,18 @@ abstract class GenericTypeDefinition inherits TypeDefinition
 abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 {
 	attribute isAbstract : Boolean
-	attribute ownedAttributes : set Property[0..*]#owningClass
+	attribute ownedAttribute : set Property[0..*]#owningClass
 	attribute ownedOperation : set Operation[0..*]#owningClass
 	reference superType : set Class[0..*]
 
-	property readonly allOwnedAttributes : set Property[0..*]
+	property readonly allOwnedAttribute : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
- 		    result.addAll(self.ownedAttributes)
+ 		    result.addAll(self.ownedAttribute)
 		    self.superType.each{ t | 
 		    	var cDef : ClassDefinition
 		    	cDef ?= t.typeDefinition
-				cDef.allOwnedAttributes.each{ p | 
+				cDef.allOwnedAttribute.each{ p | 
 					if not p.isDerived then
 						result.add(p)
 					end

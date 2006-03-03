@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.6 2005-04-18 09:03:23 dvojtise Exp $
+$Id: README.txt,v 1.7 2006-03-03 15:22:58 dvojtise Exp $
 
 
 Leaders :
@@ -33,7 +33,7 @@ How to build this project :
 2) Generate java code using emf
 	a) create kermeta.genmodel in build/ecore using eclipse wizard by loading kermeta_java.ecore 
 		(the wizard name is EMF modeling framework/EMF models)
-	b) set the 'Model Directory' of  kermeta.genmodel to '/fr.irisa.triskell.kermeta.model/src/java' (in Properties tab)
+	b) set the 'Model Directory' of  kermeta.genmodel to '/fr.irisa.triskell.kermeta.model/build/java' (in Properties tab)
 	c) set the Kermeta package 'Base Package' to 'fr.irisa.triskell' (in Properties tab)
 	d) 'Generate model code' from  kermeta.genmodel
 
@@ -45,6 +45,9 @@ How to build this project :
 History :
 ---------
 $Log: not supported by cvs2svn $
+Revision 1.6  2005/04/18 09:03:23  dvojtise
+small clarification in the procedure
+
 Revision 1.5  2005/04/04 15:19:48  zdrey
 was not perfectly clear
 

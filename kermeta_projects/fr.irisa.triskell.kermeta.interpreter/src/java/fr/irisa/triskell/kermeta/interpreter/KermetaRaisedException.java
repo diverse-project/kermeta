@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.10 2006-02-21 17:56:03 jsteel Exp $
+/* $Id: KermetaRaisedException.java,v 1.11 2006-03-03 15:21:47 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -15,13 +15,12 @@ import java.util.ArrayList;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.runtime.language.Object;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
+import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
 /**
@@ -87,7 +86,7 @@ public class KermetaRaisedException extends Error {
     public String toString(){
     	String result = super.toString();
     	// display the atributes of the raise object
-    	FClass t_target=(FClass)raised_object.getMetaclass().getData().get("kcoreObject");        	    	
+    	fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)raised_object.getMetaclass().getData().get("kcoreObject");        	    	
     	
     	SimpleType target = new SimpleType(t_target);
     	// Since any object can be raised as an exception, its not reasonable to expect a property called message
@@ -149,12 +148,12 @@ public class KermetaRaisedException extends Error {
     {   
         RuntimeMemory memory = raised_object.getFactory().getMemory();
         // Class of the raised_object
-        FClass fc = (FClass)raised_object.getMetaclass().getData().get("kcoreObject");
-        FClassDefinition exception_cd = (FClassDefinition)memory.getUnit().getTypeDefinitionByName("kermeta::exceptions::RuntimeError");
+        fr.irisa.triskell.kermeta.language.structure.Class fc = (fr.irisa.triskell.kermeta.language.structure.Class)raised_object.getMetaclass().getData().get("kcoreObject");
+        ClassDefinition exception_cd = (ClassDefinition)memory.getUnit().getTypeDefinitionByName("kermeta::exceptions::RuntimeError");
         // Is the raised_object an kermeta::exceptions::RuntimeError?
-        if (cause_object!=null && memory.getUnit().isSuperClass(exception_cd, (FClassDefinition) fc.getFTypeDefinition()))
+        if (cause_object!=null && memory.getUnit().isSuperClass(exception_cd, (ClassDefinition) fc.getTypeDefinition()))
         {
-            FProperty fexp_prop = memory.getUnit().findPropertyByName((FClassDefinition) fc.getFTypeDefinition(), "expression");
+            Property fexp_prop = memory.getUnit().findPropertyByName((ClassDefinition) fc.getTypeDefinition(), "expression");
             RuntimeObject expression_property = memory.getRuntimeObjectForFObject(fexp_prop);
             RuntimeObject expression_value = cause_object;
             // Set the "expression" property of the RuntimeError
@@ -170,11 +169,11 @@ public class KermetaRaisedException extends Error {
     protected static String computeContextString(ExpressionInterpreter interpreter, RuntimeObject cause_object)
     {
         String context = "";
-        FObject fobject = null;
+        fr.irisa.triskell.kermeta.language.structure.Object fobject = null;
         if(cause_object != null) {
 	        if (cause_object.getData().containsKey("kcoreObject"))
 	        {
-	        	fobject = (FObject)cause_object.getData().get("kcoreObject");
+	        	fobject = (fr.irisa.triskell.kermeta.language.structure.Object)cause_object.getData().get("kcoreObject");
 		        context = new Traceback(interpreter, fobject).getStackTrace();
 	        }
 	        else
@@ -213,7 +212,7 @@ public class KermetaRaisedException extends Error {
     	
     	// adds some info on this exception (in the message attribute of the exception)
     	
-    	FClass t_target=(FClass)raised_object.getMetaclass().getData().get("kcoreObject");        	
+    	fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)raised_object.getMetaclass().getData().get("kcoreObject");        	
     	SimpleType target = new SimpleType(t_target);
 	    CallableProperty cproperty = target.getPropertyByName("message");
 	    RuntimeObject ro_property = memory.getRuntimeObjectForFObject(cproperty.getProperty());
@@ -240,7 +239,7 @@ public class KermetaRaisedException extends Error {
     		String exceptionMessage,
     		ExpressionInterpreter interpreter, 
 			RuntimeMemory memory,
-			FObject context,
+			fr.irisa.triskell.kermeta.language.structure.Object context,
 			Throwable javaCause)
     {
     	KermetaRaisedException e = createKermetaException(kermetaExceptionName,

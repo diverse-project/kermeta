@@ -1,34 +1,33 @@
-/*
- * Created on 21 déc. 2004
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+/* $Id: FixPackageNSUri.java,v 1.2 2006-03-03 15:22:58 dvojtise Exp $
+ * Project    : fr.irisa.triskell.kermeta.model
+ * File       : FixPackageNSUri.java
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 121 déc. 2004
+ * Authors : 
+ * 		  ffleurey
+ *        dvojtise <dvojtise@irisa.fr> 
  */
 package fr.irisa.triskell.kermeta.dev.model;
 
 import java.io.IOException;
 import java.util.Iterator;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 /**
- * @author franck
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * Fix the nsuri of the ecore package
+ * also add the intermediate language package (for a better match with kermeta vision of it own metamodel)
  */
 public class FixPackageNSUri {
 	
@@ -70,11 +69,45 @@ public class FixPackageNSUri {
 		return p.getName();
 	}
 	
+	// TODO switch nsuri to xpath syntax and platform uri like in KM2ecorepass1
+	//	newEPackage.setNsURI(ecoreExporter.getKermetaUnit().getUri() + (p==root_p?"":"#/") + current_ppath);
 	public static void processPackage(EPackage p) {
 		String prefix = getPrefix(p);
 		System.out.println("Package " + p.getName() + " nsURI = " + getPrefix(p));
 		p.setNsURI("http://" + prefix + "/kermeta.ecore");
 		p.setNsPrefix(prefix);
+		
+	}
+	
+	/**
+	 * Insert a package in this package, it moves all the existing packages into this new one
+	 * in order to match the view in kermeta
+	 * @param package
+	 * @param paname
+	 */
+	public static void insertPackage(EPackage p, String pname){
+		EPackage newEPackage = EcoreFactory.eINSTANCE.createEPackage();
+		newEPackage.setNsPrefix(pname);
+		newEPackage.setName(pname);
+
+		// move all packages to this new one 
+		// must be done in two pass because I cannot change le list while iterating on it
+		Iterator it = p.getESubpackages().iterator();
+		System.out.println(p.getESubpackages().size() + " subpackages in " + p.getName());
+		BasicEList toMove = new BasicEList();
+		while(it.hasNext()) {
+			EPackage next = (EPackage)it.next();
+			toMove.add(next);
+		}
+		it = toMove.iterator();
+		while(it.hasNext()) {
+			EPackage next = (EPackage)it.next();
+			System.out.println("moving package "+next.getName());
+			newEPackage.getESubpackages().add(next);
+		}
+		
+		
+		p.getESubpackages().add(newEPackage);
 	}
 
 	public static void main(String[] args) {
@@ -87,11 +120,13 @@ public class FixPackageNSUri {
 		TreeIterator it = ((EPackage)model1.getContents().get(0)).eAllContents();
 		EPackage root = (EPackage)model1.getContents().get(0);
 		root.setName("kermeta");
+		insertPackage(root, "language");
 		processPackage(root);
 		while(it.hasNext()) {
 			EObject o = (EObject)it.next();
-			if (o instanceof EPackage) {
+			if (o instanceof EPackage) {				
 				EPackage p = (EPackage)o;
+				if(p.getName().compareTo("kermeta")==0) insertPackage(p, "language");
 				processPackage(p);
 			}
 		}

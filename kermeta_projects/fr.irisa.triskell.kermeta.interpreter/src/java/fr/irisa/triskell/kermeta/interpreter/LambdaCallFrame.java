@@ -1,4 +1,4 @@
-/* $Id: LambdaCallFrame.java,v 1.8 2005-12-05 09:25:41 ffleurey Exp $
+/* $Id: LambdaCallFrame.java,v 1.9 2006-03-03 15:21:47 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
 * License : GPL
@@ -15,11 +15,11 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
 
-import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
-import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 
 /**
  * @author Franck Fleurey
@@ -31,7 +31,7 @@ public class LambdaCallFrame extends CallFrame {
     /**
      * The lambda expression
      */
-    private FLambdaExpression lambdaExp;
+    private LambdaExpression lambdaExp;
     
     /**
      * The call frame in which the lambda expression has been defined
@@ -43,7 +43,7 @@ public class LambdaCallFrame extends CallFrame {
     /**
      * Constructor
      */
-    public LambdaCallFrame(InterpreterContext pContext, FLambdaExpression lambdaExp, CallFrame nestingCallFrame) {
+    public LambdaCallFrame(InterpreterContext pContext, LambdaExpression lambdaExp, CallFrame nestingCallFrame) {
         super(pContext);
         this.lambdaExp = lambdaExp;
         
@@ -85,11 +85,11 @@ public class LambdaCallFrame extends CallFrame {
         block_stack.clear();
         block_stack.addAll(nestingExpressionContext);
         pushExpressionContext();
-        Iterator it = lambdaExp.getFParameters().iterator();
+        Iterator it = lambdaExp.getParameters().iterator();
         int i=0;
         while (it.hasNext()) {
-            FLambdaParameter fparam = (FLambdaParameter)it.next();
-            peekExpressionContext().defineVariable(fparam.getFName(), (RuntimeObject)pParameters.get(i));
+            LambdaParameter fparam = (LambdaParameter)it.next();
+            peekExpressionContext().defineVariable(fparam.getName(), (RuntimeObject)pParameters.get(i));
             i++;
         }
     } 
@@ -128,12 +128,12 @@ public class LambdaCallFrame extends CallFrame {
         return nestingOperationCallFrame.toString() + "#function call";
     }
     
-    public FOperation getOperation() {
+    public Operation getOperation() {
     	if (nestingOperationCallFrame == null) return null;
         return nestingOperationCallFrame.getOperation();
     }
     
-    public FObject getExpression() {
+    public fr.irisa.triskell.kermeta.language.structure.Object getExpression() {
         return lambdaExp;
     }
 

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.11 2006-02-21 17:34:18 jsteel Exp $
+/* $Id: KMT2KMPass4.java,v 1.12 2006-03-03 15:22:18 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -26,10 +26,10 @@ import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.Property;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FProperty;
+//import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.Operation;
+//import fr.irisa.triskell.kermeta.language.structure.Property;
 
 
 /**
@@ -58,10 +58,10 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ClassDecl)
 	 */
 	public boolean beginVisit(ClassDecl classDecl) {
-		builder.current_class = (FClassDefinition)builder.getModelElementByNode(classDecl);
+		builder.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
 		// check for inheritance cycles
 		if (builder.isSuperClass(builder.current_class, builder.current_class)) {
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Cycle in the inheritance tree - The type hierachy of class '"+builder.current_class.getFName()+"' is inconsistant.", classDecl));
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Cycle in the inheritance tree - The type hierachy of class '"+builder.current_class.getName()+"' is inconsistant.", classDecl));
 			return false;
 		}
 		return super.beginVisit(classDecl);
@@ -83,23 +83,23 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Operation)
 	 */
 	public boolean beginVisit(Operation operation) {
-		builder.current_operation = (FOperation)builder.getModelElementByNode(operation);
-		if (builder.findPropertyByName(builder.current_class, builder.current_operation.getFName()) != null) {
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :A operation named '"+builder.current_operation.getFName()+
-					"' is already inherited by class '"+builder.current_class.getFName()+"'."+
+		builder.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation)builder.getModelElementByNode(operation);
+		if (builder.findPropertyByName(builder.current_class, builder.current_operation.getName()) != null) {
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :A operation named '"+builder.current_operation.getName()+
+					"' is already inherited by class '"+builder.current_class.getName()+"'."+
 					" If you want redefinition, please use method keyword."
 					, operation));
 			return false;
 		}
 		
-		EList superclasses = builder.current_class.getFSuperType();
+		EList superclasses = builder.current_class.getSuperType();
 		
 		if (operation.getOperationKind().getText().equals("operation")) {
 			 // the operation should not have been defined in any super class
 			for (int i=0; i<superclasses.size(); i++) {
-				FClassDefinition sc = (FClassDefinition) ((FClass)superclasses.get(i)).getFTypeDefinition();
-				if (builder.findOperationByName(sc, builder.current_operation.getFName()) != null) {
-					builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :An operation named '"+builder.current_operation.getFName()+"' is already inherited from class '"+sc.getFName()+"'.", operation));
+				ClassDefinition sc = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)superclasses.get(i)).getTypeDefinition();
+				if (builder.findOperationByName(sc, builder.current_operation.getName()) != null) {
+					builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :An operation named '"+builder.current_operation.getName()+"' is already inherited from class '"+sc.getName()+"'.", operation));
 					return false;
 				}
 			}
@@ -107,16 +107,16 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		else if (operation.getOperationKind().getText().equals("method")) {
 			// the op should be defined in a superclass
 			for (int i=0; i<superclasses.size(); i++) {
-				FClassDefinition sc = (FClassDefinition) ((FClass)superclasses.get(i)).getFTypeDefinition();
+				ClassDefinition sc = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)superclasses.get(i)).getTypeDefinition();
 				// potential super ops
-				Hashtable superops = getSupersForMethod(builder.current_class, builder.current_operation.getFName());
+				Hashtable superops = getSupersForMethod(builder.current_class, builder.current_operation.getName());
 				if (superops.size() == 0) { // Error, no super operation
-					builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :No super operation found for method '"+builder.current_operation.getFName()+"'.", operation));
+					builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :No super operation found for method '"+builder.current_operation.getName()+"'.", operation));
 					return false;
 				}
 				else if (superops.size() == 1) { // No problem
 					String scname = (String)superops.keys().nextElement();
-					builder.current_operation.setFSuperOperation((FOperation)superops.get(scname));
+					builder.current_operation.setSuperOperation((fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(scname));
 					if (operation.getSuperSelection() != null) {
 						String provided_name = qualifiedIDAsString(operation.getSuperSelection());
 						if (!provided_name.equals(scname)) {
@@ -135,21 +135,21 @@ public class KMT2KMPass4 extends KMT2KMPass {
 					possible_selection = possible_selection.substring(0, possible_selection.length()-2);
 					if (operation.getSuperSelection() != null) { // the user has chosen
 						String provided_name = qualifiedIDAsString(operation.getSuperSelection());
-						FOperation superop = null;
-						superop = (FOperation)superops.get(provided_name);
+						fr.irisa.triskell.kermeta.language.structure.Operation superop = null;
+						superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(provided_name);
 						
-						if (superop == null) superop = (FOperation)superops.get(builder.getQualifiedName(builder.rootPackage) + "::" + provided_name);
+						if (superop == null) superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(builder.getQualifiedName(builder.rootPackage) + "::" + provided_name);
 						
 						if (superop == null) {
 							Iterator uit = builder.usings.iterator();
 							while(uit.hasNext()) {
-								superop = (FOperation)superops.get(uit.next() + "::" + provided_name);
+								superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(uit.next() + "::" + provided_name);
 								if (superop != null) break;
 							}
 						}
 						
 						if (superop != null) { 
-							builder.current_operation.setFSuperOperation(superop);
+							builder.current_operation.setSuperOperation(superop);
 						}
 						
 						else {
@@ -158,7 +158,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 						}
 					}
 					else { // error
-						builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :Several super operation found for method '"+builder.current_operation.getFName()+"', : "+possible_selection+".", operation));
+						builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :Several super operation found for method '"+builder.current_operation.getName()+"', : "+possible_selection+".", operation));
 						return false;
 					}
 				}
@@ -179,22 +179,22 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Property)
 	 */
 	public boolean beginVisit(Property property) {
-		builder.current_property = (FProperty)builder.getModelElementByNode(property);
+		builder.current_property = (fr.irisa.triskell.kermeta.language.structure.Property)builder.getModelElementByNode(property);
 		if (property.getOppositeName() != null) {
 			String opname = getTextForID(property.getOppositeName());
 			// the type of such a property must a class which class definition contains a property
 			// named opname and which type is current_property.owningClass
-			if (!(builder.current_property.getFType() instanceof FClass)) {
+			if (!(builder.current_property.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 				builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Unexpected opposite - The type of a property that have an opposite should be a Class.", property.getOppositeName()));
 				return false;
 			}
-			FClassDefinition opposite_class = (FClassDefinition) ((FClass)builder.current_property.getFType()).getFTypeDefinition();
-			FProperty oposite_property = builder.getPropertyByName(opposite_class, opname);
+			ClassDefinition opposite_class = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)builder.current_property.getType()).getTypeDefinition();
+			fr.irisa.triskell.kermeta.language.structure.Property oposite_property = builder.getPropertyByName(opposite_class, opname);
 			if (oposite_property == null) {
 				builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Unable to resolve opposite of property", property.getOppositeName()));
 				return false;
 			}
-			builder.current_property.setFOpposite(oposite_property);
+			builder.current_property.setOpposite(oposite_property);
 		}
 		return super.beginVisit(property);
 	}
@@ -206,12 +206,12 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	 * @param methname
 	 * @return
 	 */
-	public Hashtable getSupersForMethod(FClassDefinition cls, String methname) {
+	public Hashtable getSupersForMethod(ClassDefinition cls, String methname) {
 		Hashtable result = new Hashtable();
-		FClassDefinition[] supers = builder.getDirectSuperClasses(cls);
+		ClassDefinition[] supers = builder.getDirectSuperClasses(cls);
 		
 		for(int i=0; i<supers.length; i++) {
-			FOperation superop = builder.getOperationByName(supers[i], methname);
+			fr.irisa.triskell.kermeta.language.structure.Operation superop = builder.getOperationByName(supers[i], methname);
 			if (superop != null)
 			{
 				result.put(builder.getQualifiedName(supers[i]), superop);
@@ -222,7 +222,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 			}
 		}
 		
-		FClassDefinition objectClass = builder.get_ROOT_TYPE_ClassDefinition();
+		ClassDefinition objectClass = builder.get_ROOT_TYPE_ClassDefinition();
 		
 		if ( objectClass != null) {
 		    result.putAll(getSupersForMethodOnObject(objectClass, methname));
@@ -231,12 +231,12 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		return result;
 	}
 	
-	private Hashtable getSupersForMethodOnObject(FClassDefinition cls, String methname) {
+	private Hashtable getSupersForMethodOnObject(ClassDefinition cls, String methname) {
 		Hashtable result = new Hashtable();
-		FClassDefinition[] supers = builder.getDirectSuperClasses(cls);
+		ClassDefinition[] supers = builder.getDirectSuperClasses(cls);
 		
 		for(int i=0; i<supers.length; i++) {
-			FOperation superop = builder.getOperationByName(supers[i], methname);
+			fr.irisa.triskell.kermeta.language.structure.Operation superop = builder.getOperationByName(supers[i], methname);
 			if (superop != null)
 			{
 				result.put(builder.getQualifiedName(supers[i]), superop);

@@ -25,14 +25,14 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FTag;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
@@ -156,7 +156,7 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 		    if (astnode != null) {
 		        
 		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
-		        FObject fobj = editor.getFObjectForNode(astnode);
+		        fr.irisa.triskell.kermeta.language.structure.Object fobj = editor.getFObjectForNode(astnode);
 		        String ftags = "";
 		        
 
@@ -169,32 +169,32 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 				}
 				
 		        //TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
-		        if (fobj instanceof FExpression)
+		        if (fobj instanceof Expression)
 		        {
-		            FExpression fexp = (FExpression)fobj;
+		            Expression fexp = (Expression)fobj;
 		            String result = "";
-		            // Find the tag of the FCallFeature definition!
-		            if (fexp instanceof FCallFeature)
+		            // Find the tag of the CallFeature definition!
+		            if (fexp instanceof CallFeature)
 		            {
-		                /*FObject fdef = this.getDefinitionForFCallFeature((FCallFeature)fexp);
+		                /*FObject fdef = this.getDefinitionForCallFeature((CallFeature)fexp);
 		                if (fdef != null)
 		                {
-		                    ftags = kdocPrettyPrint(fdef.getFTag());
+		                    ftags = kdocPrettyPrint(fdef.getTag());
 		                }*/
-		                return ppDefinitionForCallFeature((FCallFeature)fexp);
+		                return ppDefinitionForCallFeature((CallFeature)fexp);
 		            }
-		            else if (fexp.getFStaticType() != null) {
-		                Type t = new SimpleType(fexp.getFStaticType());
+		            else if (fexp.getStaticType() != null) {
+		                Type t = new SimpleType(fexp.getStaticType());
 		                //TexteditorPlugin.pluginLog.info(" * Type -> " + t);
 		                // return the source code representation or the signature
 		                // of the element pointed by the cursor
 		                return pp.accept(fobj) + " : " + t + "\n" + ftags;
 		            }
 		        }
-		        else if(fobj instanceof FClass){
-					FClass aClass = (FClass)fobj;
-					ftags = kdocPrettyPrint(aClass.getFTypeDefinition().getFTag());
-					return KMTHelper.getQualifiedName(aClass.getFTypeDefinition())+ "\n" + ftags;
+		        else if(fobj instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+		        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)fobj;
+					ftags = kdocPrettyPrint(aClass.getTypeDefinition().getTag());
+					return KMTHelper.getQualifiedName(aClass.getTypeDefinition())+ "\n" + ftags;
 		        }
 		        
 		    }
@@ -216,9 +216,9 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	    Hashtable tagdict = new Hashtable();
 	    String pptags = "";
 	    while (it.hasNext())
-	    {	FTag tag = (FTag)it.next();
-	    	pptags += tagdict.containsKey(tag.getFValue())?"":pp.accept(tag);
-	        tagdict.put(tag.getFValue(), "");
+	    {	Tag tag = (Tag)it.next();
+	    	pptags += tagdict.containsKey(tag.getValue())?"":pp.accept(tag);
+	        tagdict.put(tag.getValue(), "");
 	    }
 	    if (pptags.startsWith("/**"))
 	        pptags = pptags.substring(3, pptags.length()-2);
@@ -237,8 +237,8 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
         return (FAssignement)result;
     }
     
-    private FExpression getFObjectForExpression(FAssignement node) {
-        return (FExpression)getFObjectForNode(node);
+    private Expression getFObjectForExpression(FAssignement node) {
+        return (Expression)getFObjectForNode(node);
     }
     
     private FObject getFObjectForNode(KermetaASTNode node) {
@@ -266,43 +266,43 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 	 * - FEnumeration
 	 * - FClass <- FTypeLiteral ?
 	 * - FOperation
-	 * - FProperty
+	 * - Property
 	 */
-	private FObject getDefinitionForFCallFeature(FCallFeature feature)
+	private fr.irisa.triskell.kermeta.language.structure.Object getDefinitionForCallFeature(CallFeature feature)
 	{
-	    if (feature.getFStaticOperation() != null)
+	    if (feature.getStaticOperation() != null)
 	    {
-	        return feature.getFStaticOperation();
+	        return feature.getStaticOperation();
 	    }
-	    if (feature.getFStaticProperty() != null)
+	    if (feature.getStaticProperty() != null)
 	    {
-	        return feature.getFStaticProperty();
+	        return feature.getStaticProperty();
 	    }
 	    else // return the CallFeature itself
 	    {
-	        System.err.println("the definition : " + feature.getFName() + feature);
+	        System.err.println("the definition : " + feature.getName() + feature);
 	        return feature;
 	    }
 	}
 	
-	public String ppDefinitionForCallFeature(FCallFeature feature)
+	public String ppDefinitionForCallFeature(CallFeature feature)
 	{
-	    if (feature.getFStaticOperation() != null)
+	    if (feature.getStaticOperation() != null)
 	    {
 	        //return feature.getFStaticOperation();
-	        return pp.ppSimplifiedFOperationInContext(feature.getFStaticOperation()) + 
+	        return pp.ppSimplifiedFOperationInContext(feature.getStaticOperation()) + 
         	"\n" +
-        	kdocPrettyPrint(feature.getFStaticOperation().getFTag());
+        	kdocPrettyPrint(feature.getStaticOperation().getTag());
 	    }
-	    if (feature.getFStaticProperty() != null)
+	    if (feature.getStaticProperty() != null)
 	    {
-	        return pp.ppSimplifiedFPropertyInContext(feature.getFStaticProperty()) + 
+	        return pp.ppSimplifiedPropertyInContext(feature.getStaticProperty()) + 
 	        	"\n" +
-	        	kdocPrettyPrint(feature.getFStaticProperty().getFTag());
+	        	kdocPrettyPrint(feature.getStaticProperty().getTag());
 	    }
 	    else // return the CallFeature itself
 	    {
-	        System.err.println("the definition : " + feature.getFName() + feature);
+	        System.err.println("the definition : " + feature.getName() + feature);
 	        return pp.accept(feature).toString();
 	    }
 	} 

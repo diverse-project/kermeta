@@ -14,7 +14,7 @@ using kermeta::standard
 class Main inherits kermeta::kunit::Test
 {
     operation testmain() : Void is do 
-     	var inputModel : Set<FPackage> init loadClassModel
+     	var inputModel : Set<Package> init loadClassModel
      	
         
 
@@ -23,48 +23,48 @@ class Main inherits kermeta::kunit::Test
         stdio.writeln("\nBegin")
 
         //inputModel.each{ p | transfo.accept(p,0) }
-       inputModel.each{ p | stdio.writeln(p.fName ) }
+       inputModel.each{ p | stdio.writeln(p.name ) }
        // find a package named "kmLogo"
-       var kmlogopackage : FPackage init inputModel.detect{ p | (p.fName.compareTo("kmLogo") == 0) }
-       assert( kmlogopackage.fName.compareTo("kmLogo") == 0)
+       var kmlogopackage : Package init inputModel.detect{ p | (p.name.compareTo("kmLogo") == 0) }
+       assert( kmlogopackage.name.compareTo("kmLogo") == 0)
        // find a package named "actions"       
-       var actionpackage : FPackage init kmlogopackage.fNestedPackage.detect{ p | (p.fName.compareTo("actions") == 0) }       
-       assert( actionpackage.fName.compareTo("actions") == 0)
+       var actionpackage : Package init kmlogopackage.nestedPackage.detect{ p | (p.name.compareTo("actions") == 0) }       
+       assert( actionpackage.name.compareTo("actions") == 0)
        // find a class named "Interpreter"
-       var classTypeDef : FTypeDefinition init actionpackage.fOwnedTypeDefinition.detect{ c | (c.fName.compareTo("Interpreter") == 0) }
-       var classClassTypeDef : FClassDefinition 
+       var classTypeDef : TypeDefinition init actionpackage.ownedTypeDefinition.detect{ c | (c.name.compareTo("Interpreter") == 0) }
+       var classClassTypeDef : ClassDefinition 
        classClassTypeDef ?= classTypeDef
-       assert (classClassTypeDef.fName.compareTo("Interpreter") == 0  )       
+       assert (classClassTypeDef.name.compareTo("Interpreter") == 0  )       
        // its parent must be "AbstractVisitor"
-       var superClassType : FClass 
-       superClassType ?= classClassTypeDef.fSuperType.one
-       assert(superClassType.fClassDefinition.fName.compareTo("AbstractVisitor") == 0)
+       var superClassType : Class 
+       superClassType ?= classClassTypeDef.superType.one
+       assert(superClassType.typeDefinition.name.compareTo("AbstractVisitor") == 0)
        
        // one of its feature must be "accumulator" of type "Integer"
-       var accFProp : FProperty init  classClassTypeDef.fOwnedAttributes.detect{ k | k.fName.compareTo("accumulator") == 0 }
-       var propClassType : FClass
-       propClassType ?= accFProp.fType
-       assert(propClassType.fClassDefinition.fName.compareTo("Integer") == 0)
-       stdio.write(propClassType.fClassDefinition.toString)
+       var accFProp : Property init  classClassTypeDef.ownedAttribute.detect{ k | k.name.compareTo("accumulator") == 0 }
+       var propClassType : Class
+       propClassType ?= accFProp.type
+       assert(propClassType.typeDefinition.name.compareTo("Integer") == 0)
+       stdio.write(propClassType.typeDefinition.toString)
        stdio.write("\nEnd")       
         
        
      
     end
     
-    operation loadClassModel() : Set<FPackage> is do             
+    operation loadClassModel() : Set<Package> is do             
    		var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new 
    		            
    		var resource2 : kermeta::persistence::Resource init repository.createResource("../test/kmt_testcases/input_test_models/kmLogo.km", "../../fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")     
    		
  	   resource2.load() 
- 	   result :=  Set<FPackage>.new
-       from var it : Iterator<Object> init resource2.instances.iterator
+ 	   result :=  Set<Package>.new
+       from var it : Iterator<kermeta::standard::Object> init resource2.instances.iterator
        until it.isOff
        loop
-           var next : Object init it.next
-           if (FPackage.isInstance(next)) then 
-           		var aPackage : FPackage 
+           var next : kermeta::standard::Object init it.next
+           if (Package.isInstance(next)) then 
+           		var aPackage : Package 
            		aPackage ?= next
            		result.add(aPackage)
            end

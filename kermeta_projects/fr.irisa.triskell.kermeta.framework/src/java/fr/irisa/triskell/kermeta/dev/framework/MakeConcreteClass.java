@@ -1,4 +1,4 @@
-/* $Id: MakeConcreteClass.java,v 1.5 2006-02-21 17:59:12 jsteel Exp $
+/* $Id: MakeConcreteClass.java,v 1.6 2006-03-03 15:21:25 dvojtise Exp $
  * Created on Feb 18, 2005
  * By zdrey
  * Description :
@@ -14,10 +14,10 @@ package fr.irisa.triskell.kermeta.dev.framework;
 
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -29,7 +29,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 public class MakeConcreteClass extends KermetaVisitor {
 
     protected KermetaUnit abstract_unit;
-    protected FPackage impl_pkg;
+    protected Package impl_pkg;
     /**
      * Constructor
      */
@@ -42,23 +42,23 @@ public class MakeConcreteClass extends KermetaVisitor {
     /**
      * Concretize the classes : add extend <class> from abstract unit. (
      * remove all the initial inherited packs)
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FClassDefinition)
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.language.structure.ClassDefinition)
      */
-    public Object visit(FClassDefinition classdef) {
+    public Object visit(ClassDefinition classdef) {
         
         // create the class of classdefinition
-        FClass parent_fclass = abstract_unit.struct_factory.createFClass();
-        parent_fclass.setFTypeDefinition((FClassDefinition)abstract_unit.getTypeDefinitionByName(
-                "kermeta::structure::"+classdef.getFName()));
+    	fr.irisa.triskell.kermeta.language.structure.Class parent_fclass = abstract_unit.struct_factory.createClass();
+        parent_fclass.setTypeDefinition((ClassDefinition)abstract_unit.getTypeDefinitionByName(
+                "kermeta::structure::"+classdef.getName()));
         
-        classdef.getFSuperType().add(parent_fclass);
+        classdef.getSuperType().add(parent_fclass);
         return super.visit(classdef);
     }
     
     /**
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FOperation)
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.language.structure.FOperation)
      */
-    public Object visit(FOperation operation) {
+    public Object visit(Operation operation) {
         
         return super.visit(operation);
     }

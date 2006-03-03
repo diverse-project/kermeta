@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.6 2005-09-15 12:40:32 dvojtise Exp $
+/* $Id: KMT2KMPass6.java,v 1.7 2006-03-03 15:22:18 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -23,11 +23,11 @@ import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
 import fr.irisa.triskell.kermeta.ast.SetterBody;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FOperation;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+//import fr.irisa.triskell.kermeta.language.structure.FProperty;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 
 /**
@@ -49,16 +49,16 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ClassDecl)
 	 */
 	public boolean beginVisit(ClassDecl classDecl) {
-		builder.current_class = (FClassDefinition)builder.getModelElementByNode(classDecl);
+		builder.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
 		builder.pushContext();
 		// add type variable
-		Iterator tvs = builder.current_class.getFTypeParameter().iterator();
-		while(tvs.hasNext()) builder.addTypeVar((FTypeVariable)tvs.next());
+		Iterator tvs = builder.current_class.getTypeParameter().iterator();
+		while(tvs.hasNext()) builder.addTypeVar((TypeVariable)tvs.next());
 		// add attributes and operations
 		Iterator it = builder.getAllOperations(builder.current_class).iterator();
-		while (it.hasNext()) builder.addSymbol(new KMSymbolOperation((FOperation)it.next()));
+		while (it.hasNext()) builder.addSymbol(new KMSymbolOperation((fr.irisa.triskell.kermeta.language.structure.Operation)it.next()));
 		it = builder.getAllProperties(builder.current_class).iterator();
-		while (it.hasNext()) builder.addSymbol(new KMSymbolProperty((FProperty)it.next()));
+		while (it.hasNext()) builder.addSymbol(new KMSymbolProperty((fr.irisa.triskell.kermeta.language.structure.Property)it.next()));
 		return super.beginVisit(classDecl);
 	}
 
@@ -66,16 +66,16 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Operation)
 	 */
 	public boolean beginVisit(Operation operation) {
-		builder.current_operation = (FOperation)builder.getModelElementByNode(operation);
+		builder.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation)builder.getModelElementByNode(operation);
 		builder.pushContext();
 		// add type variable
-		Iterator tvs = builder.current_operation.getFTypeParameter().iterator();
-		while(tvs.hasNext()) builder.addTypeVar((FTypeVariable)tvs.next());
+		Iterator tvs = builder.current_operation.getTypeParameter().iterator();
+		while(tvs.hasNext()) builder.addTypeVar((TypeVariable)tvs.next());
 		// add parameters
-		Iterator params = builder.current_operation.getFOwnedParameter().iterator();
-		while(params.hasNext()) builder.addSymbol(new KMSymbolParameter((FParameter)params.next()));
+		Iterator params = builder.current_operation.getOwnedParameter().iterator();
+		while(params.hasNext()) builder.addSymbol(new KMSymbolParameter((Parameter)params.next()));
 		//if (builder.current_operation.getFType() != null && !(builder.current_operation.getFType() instanceof FVoidType)) {
-		//	builder.addSymbol(new MCSymbolParameter((FParameter)params.next()));
+		//	builder.addSymbol(new MCSymbolParameter((Parameter)params.next()));
 		//}
 		return super.beginVisit(operation);
 	}
@@ -102,7 +102,7 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.OperationEmptyBody)
 	 */
 	public boolean beginVisit(OperationEmptyBody operationEmptyBody) {
-		builder.current_operation.setFIsAbstract(true);
+		builder.current_operation.setIsAbstract(true);
 		return false;
 	}
 	
@@ -112,10 +112,10 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	public boolean beginVisit(OperationExpressionBody operationExpressionBody) {
 		String qname = builder.getQualifiedName(builder.current_operation);
 		if (builder.operation_bodies.containsKey(qname)) {
-			builder.current_operation.setFBody(ExpressionParser.parse(builder, (String)builder.operation_bodies.get(qname)));
+			builder.current_operation.setBody(ExpressionParser.parse(builder, (String)builder.operation_bodies.get(qname)));
 		}
 		else {
-			builder.current_operation.setFBody(KMT2KMExperessionBuilder.process(operationExpressionBody.getFExpression(), builder));
+			builder.current_operation.setBody(KMT2KMExperessionBuilder.process(operationExpressionBody.getFExpression(), builder));
 		}
 		return false;
 	}
@@ -124,8 +124,8 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.GetterBody)
 	 */
 	public boolean beginVisit(GetterBody getterBody) {
-		if (builder.current_property.isFIsDerived()) {
-			builder.current_property.setFGetterbody(KMT2KMExperessionBuilder.process(getterBody.getGetterbody(), builder));
+		if (builder.current_property.isIsDerived()) {
+			builder.current_property.setGetterBody(KMT2KMExperessionBuilder.process(getterBody.getGetterbody(), builder));
 		}
 		else {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 6 : getters should only be defined for derived attributes (property).", getterBody));
@@ -137,9 +137,9 @@ public class KMT2KMPass6 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.SetterBody)
 	 */
 	public boolean beginVisit(SetterBody setterBody) {
-		if (builder.current_property.isFIsDerived() && !builder.current_property.isFIsReadOnly()) {
+		if (builder.current_property.isIsDerived() && !builder.current_property.isIsReadOnly()) {
 		    builder.pushContext();
-			builder.current_property.setFSetterbody(KMT2KMExperessionBuilder.process(setterBody.getSetterbody(), builder));
+			builder.current_property.setSetterBody(KMT2KMExperessionBuilder.process(setterBody.getSetterbody(), builder));
 			builder.popContext();
 		}
 		else {

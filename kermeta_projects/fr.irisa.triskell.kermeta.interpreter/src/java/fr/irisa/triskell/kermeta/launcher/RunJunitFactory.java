@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.12 2005-12-07 08:33:21 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.13 2006-03-03 15:21:47 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -20,9 +20,9 @@ import junit.framework.TestResult;
 import junit.framework.TestSuite;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FTag;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
@@ -91,17 +91,17 @@ public class RunJunitFactory implements Test {
             boolean isTestSuite = false;
             String main_class = null;
             String main_operation = null;
-            Iterator it = unit.rootPackage.getFTag().iterator();
+            Iterator it = unit.rootPackage.getTag().iterator();
             while(it.hasNext()) {
-                FTag tag = (FTag)it.next();
-                if (tag.getFName().equals("mainClass")) 
-    	            main_class = tag.getFValue(); 
-                if (tag.getFName().equals("mainOperation"))
-    	            main_operation = tag.getFValue(); //remove the " to memorize value
+                Tag tag = (Tag)it.next();
+                if (tag.getName().equals("mainClass")) 
+    	            main_class = tag.getValue(); 
+                if (tag.getName().equals("mainOperation"))
+    	            main_operation = tag.getValue(); //remove the " to memorize value
             }
             if (main_class != null) {
-                FClassDefinition cd = (FClassDefinition)unit.typeDefinitionLookup(main_class);
-                FClassDefinition class_test = (FClassDefinition)unit.typeDefinitionLookup("kermeta::kunit::Test");
+                ClassDefinition cd = (ClassDefinition)unit.typeDefinitionLookup(main_class);
+                ClassDefinition class_test = (ClassDefinition)unit.typeDefinitionLookup("kermeta::kunit::Test");
             
                 SimpleType kunit_test_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(class_test));
                 SimpleType main_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(cd));
@@ -184,21 +184,21 @@ public class RunJunitFactory implements Test {
         // all operations that begin by "test" inside the class
         // specified by mainClassValue are added as concrete testcases
         // Create the RuntimeObject of main class, of its instance, and
-        // its FClassDefinition so that we can get its operations in order to
+        // its ClassDefinition so that we can get its operations in order to
         // run them
         
         
         
-       Iterator it = ((FClassDefinition)unit.typeDefinitionLookup(main_class)).getFOwnedOperation().iterator();
+       Iterator it = ((ClassDefinition)unit.typeDefinitionLookup(main_class)).getOwnedOperation().iterator();
 
         // Get each operation which name begins by "test",
         // and run it.
         while (it.hasNext()) {
             //	      We can now launch the operation found in mainOperation through
             // the BaseInterpreter
-            FOperation mainOp = (FOperation) it.next();
-            if (mainOp.getFName().startsWith("test")) {
-                theTestSuite.addTest(new RunTestCase(main_class, mainOp.getFName(), this));
+            Operation mainOp = (Operation) it.next();
+            if (mainOp.getName().startsWith("test")) {
+                theTestSuite.addTest(new RunTestCase(main_class, mainOp.getName(), this));
             }
         }
     }

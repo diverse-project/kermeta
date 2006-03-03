@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.9 2005-12-15 11:14:35 zdrey Exp $
+/* $Id: Traceback.java,v 1.10 2006-03-03 15:21:47 dvojtise Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
@@ -40,13 +40,13 @@ public class Traceback {
     ExpressionInterpreter interpreter;
     // The precise object that caused the error (usually, a block, but the developer
     // can give *quite* whatever he wants
-    FObject cause_object;
+    fr.irisa.triskell.kermeta.language.structure.Object cause_object;
     /**
      * @param cause_object the Object at the origin of the exception; can be null.
      * NOTE : Usually it is a FExpression
      * @param interpreter the interpreter
      */
-    public Traceback(ExpressionInterpreter interpreter, FObject cause_object) {
+    public Traceback(ExpressionInterpreter interpreter, fr.irisa.triskell.kermeta.language.structure.Object cause_object) {
         this.cause_object = cause_object;
         this.interpreter  = interpreter;
     }
@@ -63,7 +63,7 @@ public class Traceback {
         Iterator it = interpreter.interpreterContext.frame_stack.iterator();
         while(it.hasNext()) {
             CallFrame frame = (CallFrame)it.next();
-            FObject expr = frame.getExpression();
+            fr.irisa.triskell.kermeta.language.structure.Object expr = frame.getExpression();
             if (expr!=null) // The only case where this cond is false is on first invokation
                 stack_trace = getContextForFObject(frame, expr) + stack_trace;
             else
@@ -98,7 +98,7 @@ public class Traceback {
      * public <ContextType> getContextForFObject(CallFrame fram, FObject fobject, <ContextType> type)
      * With type that could be Text/AList to parse/...
      */
-    public String getContextForFObject(CallFrame frame, FObject fobject)
+    public String getContextForFObject(CallFrame frame, fr.irisa.triskell.kermeta.language.structure.Object fobject)
     {
         String info = " ";
         KermetaUnit kunit = interpreter.getMemory().getUnit();
@@ -129,7 +129,7 @@ public class Traceback {
      * 		info[2] = the name of the call frame (as a String)
      * 		info[3] = the code chunk for the object
      */
-    public String[] getContextForFObjectAsArray(CallFrame frame, FObject fobject)
+    public String[] getContextForFObjectAsArray(CallFrame frame, fr.irisa.triskell.kermeta.language.structure.Object fobject)
     {
         String[] infos = new String[4];
         Object fo_source = null;
@@ -150,7 +150,7 @@ public class Traceback {
      * @param unit the KemretaUnit that processed the node (in fact, a KMTUnit)
      * @return file <name of file>, line line_number, method caller
      */
-    private String getTextInfoForKMTASTNode(FObject fobject, KermetaASTNode node, KermetaUnit unit, CallFrame frame)
+    private String getTextInfoForKMTASTNode(fr.irisa.triskell.kermeta.language.structure.Object fobject, KermetaASTNode node, KermetaUnit unit, CallFrame frame)
     {
     	String[] infos = getInfoForKMTASTNodeAsArray(fobject, node, unit, frame);
         String info = "file '" + infos[0] + "'" + ", line "+ infos[1];
@@ -167,7 +167,7 @@ public class Traceback {
      * @param frame
      * @return
      */
-    private String getTextInfoForKMNode(KermetaUnit unit, FObject node, CallFrame frame) {
+    private String getTextInfoForKMNode(KermetaUnit unit, fr.irisa.triskell.kermeta.language.structure.Object node, CallFrame frame) {
     	return "pas de trace, pas d'chocolat\n";
     }
     
@@ -182,17 +182,17 @@ public class Traceback {
      * @param frame
      * @return information according to the type of the source_object
      */
-    public String getTextInfoForNode(FObject fobject, Object source_object, KermetaUnit unit, CallFrame frame)
+    public String getTextInfoForNode(fr.irisa.triskell.kermeta.language.structure.Object fobject, Object source_object, KermetaUnit unit, CallFrame frame)
     {
     	String info = "";
     	if (source_object instanceof KermetaASTNode)
     		info += "-> " + getTextInfoForKMTASTNode(fobject, (KermetaASTNode)source_object, unit, frame) + "\n";
-    	else if (source_object instanceof FObject) // does the code come from a "compiled" repr.? // and does a trace exist for the compiled representation?
-    		info += getTextInfoForKMNode(unit, (FObject)source_object, frame);
+    	else if (source_object instanceof fr.irisa.triskell.kermeta.language.structure.Object) // does the code come from a "compiled" repr.? // and does a trace exist for the compiled representation?
+    		info += getTextInfoForKMNode(unit, (fr.irisa.triskell.kermeta.language.structure.Object)source_object, frame);
     	return info;
     }
     
-    public String[] getInfoForNode(FObject fobject, Object source_object, KermetaUnit unit, CallFrame frame)
+    public String[] getInfoForNode(fr.irisa.triskell.kermeta.language.structure.Object fobject, Object source_object, KermetaUnit unit, CallFrame frame)
     {
     	String[] infos = new String[4];
     	if (source_object instanceof KermetaASTNode)
@@ -200,16 +200,16 @@ public class Traceback {
     	// if source_object is not a KermetaASTNode, than it would come from a km file
     	// and so, it would be equals to "fobject"!
     	// anyway, source_object could be later a object from a graphical view!
-    	else if (source_object instanceof FObject || source_object == null)
-    		infos = getInfoForKMNodeAsArray(fobject, (FObject)source_object, unit, frame);
+    	else if (source_object instanceof fr.irisa.triskell.kermeta.language.structure.Object || source_object == null)
+    		infos = getInfoForKMNodeAsArray(fobject, (fr.irisa.triskell.kermeta.language.structure.Object)source_object, unit, frame);
     	return infos;
     }
     
     /**
      * @param fobject the Fobject concerned by the traceback
-     * @param node the ASTNode corresponding to this FObject
-     * @param unit the unit where this FObject was found
-     * @param frame the frame in which this FObject was "used"
+     * @param node the ASTNode corresponding to this fr.irisa.triskell.kermeta.language.structure.Object
+     * @param unit the unit where this fr.irisa.triskell.kermeta.language.structure.Object was found
+     * @param frame the frame in which this fr.irisa.triskell.kermeta.language.structure.Object was "used"
      * @return an array with :
      * 		info[0] =  the URI of the file
      * 		info[1] = the line number in that file
@@ -218,7 +218,7 @@ public class Traceback {
      * We made this method so that we are not obliged to regexp parse the textual information
      * when we need its such computed inforamtion chunks.
      */
-    private String[] getInfoForKMTASTNodeAsArray(FObject fobject, KermetaASTNode node, KermetaUnit unit, CallFrame frame)
+    private String[] getInfoForKMTASTNodeAsArray(fr.irisa.triskell.kermeta.language.structure.Object fobject, KermetaASTNode node, KermetaUnit unit, CallFrame frame)
     {
     	String[] infos = new String[4];
     	if (unit != null)
@@ -235,7 +235,7 @@ public class Traceback {
         return infos;
     }
     
-    private String[] getInfoForKMNodeAsArray(FObject fobject, Object source_object, KermetaUnit unit, CallFrame frame)
+    private String[] getInfoForKMNodeAsArray(fr.irisa.triskell.kermeta.language.structure.Object fobject, Object source_object, KermetaUnit unit, CallFrame frame)
     {
     	String[] infos = new String[4];
     	if (unit != null)
@@ -269,7 +269,7 @@ public class Traceback {
     }
     
 
-    protected String getCodeForFObject(FObject fobject) 
+    protected String getCodeForFObject(fr.irisa.triskell.kermeta.language.structure.Object fobject) 
     {
         KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
         String code = "";

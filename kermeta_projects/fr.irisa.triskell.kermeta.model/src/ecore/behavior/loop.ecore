@@ -5,7 +5,7 @@
   <eSubpackages name="behavior">
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
     <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="#//behavior/Expression">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="initiatization" eType="#//behavior/Expression"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" eType="#//behavior/Expression"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//behavior/Expression"
           containment="true"/>

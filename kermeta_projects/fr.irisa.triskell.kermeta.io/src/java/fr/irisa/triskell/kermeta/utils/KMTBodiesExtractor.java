@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesExtractor.java,v 1.4 2005-02-22 17:20:15 zdrey Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.5 2006-03-03 15:22:19 dvojtise Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
@@ -11,23 +11,16 @@
 package fr.irisa.triskell.kermeta.utils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Iterator;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -65,7 +58,7 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	 * rootDir attribute, and static KMTBODIES_DIR : which is a mandatory directory
 	 * inside which users must store its kmtbodies) 
 	 */
-	public void extractFromPackage(FPackage pkg, String basename)
+	public void extractFromPackage(Package pkg, String basename)
 	{
 	    super.visit(pkg);
 	    writeKMTBodies(basename);
@@ -74,22 +67,22 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	/**
 	 * visit a property : get its "qualified name" and its body
 	 */
-	public Object visit(FProperty property)
+	public Object visit(Property property)
 	{
 		String opHeader = "$"; // $package::class::
-		opHeader += unit.getQualifiedName(property.getFOwningClass());
-		opHeader += "::"+property.getFName();
+		opHeader += unit.getQualifiedName(property.getOwningClass());
+		opHeader += "::"+property.getName();
 		
 		String setter = opHeader + "::setter";
 		// prettyprint setter content
-		FExpression sbody = property.getFSetterbody();
-		if (property.getFSetterbody()!=null)
-			setter += "\n"+(String)pprinter.accept(property.getFSetterbody());
+		Expression sbody = property.getSetterBody();
+		if (property.getSetterBody()!=null)
+			setter += "\n"+(String)pprinter.accept(property.getSetterBody());
 		
 		String getter = opHeader + "::getter";
 		// prettyprint getter content
-		if (property.getFGetterbody()!=null)
-			getter += "\n"+(String)pprinter.accept(property.getFGetterbody());
+		if (property.getGetterBody()!=null)
+			getter += "\n"+(String)pprinter.accept(property.getGetterBody());
 		
 		System.out.println(setter+"\n"+getter);
 		
@@ -102,17 +95,17 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	/**
 	 * visit an operation : get its "qualified name" and its body
 	 */
-	public Object visit(FOperation operation)
+	public Object visit(Operation operation)
 	{
 		String op = "";
 		
-		if (!operation.isFIsAbstract())
+		if (!operation.isIsAbstract())
 		{
-		    op += "$"+unit.getQualifiedName(operation.getFOwningClass());
-		    op += "::"+operation.getFName();
+		    op += "$"+unit.getQualifiedName(operation.getOwningClass());
+		    op += "::"+operation.getName();
 		    System.out.println(op);
-		    if (operation.getFBody()!=null)
-		        op += "\n"+(String)pprinter.accept(operation.getFBody());
+		    if (operation.getBody()!=null)
+		        op += "\n"+(String)pprinter.accept(operation.getBody());
 		}
 		kmtbodies += op+"\n";
 		return op;
@@ -133,9 +126,9 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	 * @return
 	 * to remove
 	 */
-	public String getPropertyBody(FProperty property)
+	public String getPropertyBody(Property property)
 	{
-	    FExpression gbody = property.getFGetterbody();
+	    Expression gbody = property.getGetterBody();
 		// pprinter gbody;
 
 		

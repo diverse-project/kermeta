@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.5 2006-02-22 12:55:34 zdrey Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.6 2006-03-03 15:23:35 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -51,16 +51,16 @@ import org.osgi.framework.Bundle;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugModelPresentation;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
@@ -302,7 +302,7 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 		    // TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
 		    if (astnode != null) {
 		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
-		        FObject fobj = ((Editor)textEditor).getFObjectForNode(astnode);
+		        fr.irisa.triskell.kermeta.language.structure.Object fobj = ((Editor)textEditor).getFObjectForNode(astnode);
 
 		        // Notify other plugin of this event
 		        Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
@@ -312,17 +312,17 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 					listener.textHoverCalled(fobj);
 				}
 		        //TexteditorPlugin.pluginLog.info(" * fobj -> " + fobj);
-		        if (fobj instanceof FExpression)
+		        if (fobj instanceof Expression)
 		        {
-		            FObject fdef = null;
-		            // Find the tag of the FCallFeature definition!
-		            if (fobj instanceof FCallFeature)
+		            fr.irisa.triskell.kermeta.language.structure.Object fdef = null;
+		            // Find the tag of the CallFeature definition!
+		            if (fobj instanceof CallFeature)
 		            {
-		            	FCallFeature feature = (FCallFeature)fobj;
-		        	    if (feature.getFStaticOperation() != null)
-		        	        fdef = feature.getFStaticOperation();
-		        	    if (feature.getFStaticProperty() != null)
-		        	        fdef = feature.getFStaticProperty();
+		            	CallFeature feature = (CallFeature)fobj;
+		        	    if (feature.getStaticOperation() != null)
+		        	        fdef = feature.getStaticOperation();
+		        	    if (feature.getStaticProperty() != null)
+		        	        fdef = feature.getStaticProperty();
 		        	    else 
 		        	        fdef = feature;
 		        	    return (String)new KM2KMTPrettyPrinter().accept(fdef);
@@ -336,9 +336,9 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 		                return (String)new KM2KMTPrettyPrinter().accept(fobj);//+ " : " + t;
 		            }*/
 		        }
-		        else if(fobj instanceof FClass){
-					FClass aClass = (FClass)fobj;
-					return KMTHelper.getQualifiedName(aClass.getFTypeDefinition());
+		        else if(fobj instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+		        	fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)fobj;
+					return KMTHelper.getQualifiedName(aClass.getTypeDefinition());
 		        }
 		        
 		    }

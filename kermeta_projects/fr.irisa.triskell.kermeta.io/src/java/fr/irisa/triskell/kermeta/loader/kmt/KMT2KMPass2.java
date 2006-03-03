@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass2.java,v 1.6 2006-02-21 17:34:18 jsteel Exp $
+/* $Id: KMT2KMPass2.java,v 1.7 2006-03-03 15:22:18 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass2.java
  * License : EPL
@@ -25,13 +25,13 @@ import fr.irisa.triskell.kermeta.ast.PackageDecl;
 import fr.irisa.triskell.kermeta.ast.SubPackageDecl;
 import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FGenericTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FModelTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinitionContainer;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 
 /**
@@ -52,8 +52,8 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		pkgs = new Stack();
 	}
 	
-	public FTypeDefinitionContainer current_package() {
-		return (FTypeDefinitionContainer)pkgs.peek();
+	public TypeDefinitionContainer current_package() {
+		return (TypeDefinitionContainer)pkgs.peek();
 	}
 	
 	public boolean beginVisit(PackageDecl node) {
@@ -80,9 +80,9 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			return false;
 		}
 		else {
-			builder.current_class = builder.struct_factory.createFClassDefinition();
-			builder.current_class.setFName(getTextForID(node.getName()));
-			current_package().getFOwnedTypeDefinition().add(builder.current_class);
+			builder.current_class = builder.struct_factory.createClassDefinition();
+			builder.current_class.setName(getTextForID(node.getName()));
+			current_package().getOwnedTypeDefinition().add(builder.current_class);
 			builder.typeDefs.put(qname, builder.current_class);
 			builder.storeTrace(builder.current_class, node);
 		}
@@ -98,24 +98,24 @@ public class KMT2KMPass2 extends KMT2KMPass {
 		//if (builder.current_class == null) return false;
 		// create the parameter
 		String name = getTextForID(typeVarDecl.getName());
-		FTypeVariable tv = builder.struct_factory.createFTypeVariable();
-		tv.setFName(name);
+		TypeVariable tv = builder.struct_factory.createTypeVariable();
+		tv.setName(name);
 		// check that another param with the same name does not exist yet
-		FGenericTypeDefinition context;
+		GenericTypeDefinition context;
 		if (builder.current_class != null) { // if we're inside a generic class def
 			context = builder.current_class;
 		} else { // otherwise we're inside a generic model type def
-			context = (FModelTypeDefinition) current_package();
+			context = (ModelTypeDefinition) current_package();
 		}
-		EList other_params = context.getFTypeParameter();
+		EList other_params = context.getTypeParameter();
 		for (int i=0; i<other_params.size(); i++) {
-			if (((FTypeVariable)other_params.get(i)).getFName().equals(name)) {
-				builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : Parametric type definition '" + context.getFName() + "' already contains a parameter named '"+name+"'.",typeVarDecl));
+			if (((TypeVariable)other_params.get(i)).getName().equals(name)) {
+				builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : Parametric type definition '" + context.getName() + "' already contains a parameter named '"+name+"'.",typeVarDecl));
 				return false;
 			}
 		}
 		// add the parameter to the class
-		context.getFTypeParameter().add(tv);
+		context.getTypeParameter().add(tv);
 		builder.storeTrace(tv, typeVarDecl);
 		return false;
 	}
@@ -134,9 +134,9 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
 		}
 		else {
-			FEnumeration c = builder.struct_factory.createFEnumeration();
-			c.setFName(getTextForID(node.getName()));
-			current_package().getFOwnedTypeDefinition().add(c);
+			Enumeration c = builder.struct_factory.createEnumeration();
+			c.setName(getTextForID(node.getName()));
+			current_package().getOwnedTypeDefinition().add(c);
 			builder.typeDefs.put(builder.getQualifiedName(c), c);
 			builder.storeTrace(c, node);
 		}
@@ -154,9 +154,9 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			builder.messages.addMessage(new KMTUnitLoadError("PASS 2 : A type definition for '" + qname + "' already exists.",node));
 		}
 		else {
-			FPrimitiveType c = builder.struct_factory.createFPrimitiveType();
-			c.setFName(getTextForID(node.getName()));
-			current_package().getFOwnedTypeDefinition().add(c);
+			PrimitiveType c = builder.struct_factory.createPrimitiveType();
+			c.setName(getTextForID(node.getName()));
+			current_package().getOwnedTypeDefinition().add(c);
 			builder.typeDefs.put(builder.getQualifiedName(c), c);
 			builder.storeTrace(c, node);
 		}
@@ -172,9 +172,9 @@ public class KMT2KMPass2 extends KMT2KMPass {
 			return false;
 		}
 		else {
-			FModelTypeDefinition newMTypeDef = builder.struct_factory.createFModelTypeDefinition();
-			newMTypeDef.setFName(getTextForID(node.getName()));
-			current_package().getFOwnedTypeDefinition().add(newMTypeDef);
+			ModelTypeDefinition newMTypeDef = builder.struct_factory.createModelTypeDefinition();
+			newMTypeDef.setName(getTextForID(node.getName()));
+			current_package().getOwnedTypeDefinition().add(newMTypeDef);
 			builder.typeDefs.put(qname, newMTypeDef);
 			builder.storeTrace(newMTypeDef, node);
 			pkgs.push(newMTypeDef);

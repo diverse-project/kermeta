@@ -1,4 +1,4 @@
-/* $Id: TypeCompletionItem.java,v 1.1 2005-05-10 20:38:28 ffleurey Exp $
+/* $Id: TypeCompletionItem.java,v 1.2 2006-03-03 15:23:52 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCompletionItem.java
 * License : GPL
@@ -12,7 +12,7 @@ package fr.irisa.triskell.kermeta.texteditor.completion;
 
 import org.eclipse.swt.graphics.Image;
 
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
  * @author Franck Fleurey
@@ -21,12 +21,12 @@ import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
  */
 public class TypeCompletionItem extends CompletionItem {
 
-    protected FTypeDefinition type;
+    protected TypeDefinition type;
     
     protected static GetTextVisitor getTextVisitor =  new GetTextVisitor();
     protected static GetImageVisitor getImageVisitor =  new GetImageVisitor();
     
-    public TypeCompletionItem(FTypeDefinition t) {
+    public TypeCompletionItem(TypeDefinition t) {
         type = t;
     }
     
@@ -53,7 +53,7 @@ public class TypeCompletionItem extends CompletionItem {
 
     
     public String getCompletionText() {
-        return type.getFName();
+        return type.getName();
     }
     public int getCursorLocation() {
         return getCompletionText().length();

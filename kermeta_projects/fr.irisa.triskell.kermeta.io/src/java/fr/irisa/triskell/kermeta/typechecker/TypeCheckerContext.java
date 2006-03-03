@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.14 2006-02-21 17:34:19 jsteel Exp $
+/* $Id: TypeCheckerContext.java,v 1.15 2006-03-03 15:22:18 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -16,25 +16,25 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
 
-import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FMultiplicityElement;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
-import fr.irisa.triskell.kermeta.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+//import fr.irisa.triskell.kermeta.language.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 
 /**
  * @author Franck Fleurey
@@ -58,10 +58,10 @@ public class TypeCheckerContext {
 	    BooleanType = createTypeForClassDefinition("kermeta::standard::Boolean", std_lib);
 	    StdIOType = createTypeForClassDefinition("kermeta::io::StdIO", std_lib);
 	    
-	    SetClassDef = (FClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::Set");
-	    OSetClassDef = (FClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::OrderedSet");
-	    SeqClassDef = (FClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::Sequence");
-	    BagClassDef = (FClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::Bag");
+	    SetClassDef = (ClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::Set");
+	    OSetClassDef = (ClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::OrderedSet");
+	    SeqClassDef = (ClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::Sequence");
+	    BagClassDef = (ClassDefinition)std_lib.typeDefinitionLookup("kermeta::standard::Bag");
 	    
 		bag_type_cache = new Hashtable();
 		set_type_cache = new Hashtable();
@@ -76,12 +76,12 @@ public class TypeCheckerContext {
 		
 	}
 	
-	protected static FOperation getClassNewOperation() {
+	protected static Operation getClassNewOperation() {
 	    if (classNew == null) {
-	       Iterator it = ((FClassDefinition) ((FClass)((SimpleType)ClassType).type).getFTypeDefinition()).getFOwnedOperation().iterator();
+	       Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)ClassType).type).getTypeDefinition()).getOwnedOperation().iterator();
 	       while(it.hasNext()) {
-	           FOperation op = (FOperation)it.next();
-	           if (op.getFName().equals("new")) {
+	           Operation op = (Operation)it.next();
+	           if (op.getName().equals("new")) {
 	               classNew = op;
 	               break;
 	           }
@@ -91,14 +91,14 @@ public class TypeCheckerContext {
 	}
 	
 	
-	protected static FOperation getClassCloneOperation() {
+	protected static Operation getClassCloneOperation() {
 		
 		if (classClone == null) {
 			boolean found = false;
-			Iterator it = ((FClassDefinition) ((FClass)((SimpleType) ClassType).type).getFTypeDefinition()).getFOwnedOperation().iterator();
+			Iterator it = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType) ClassType).type).getTypeDefinition()).getOwnedOperation().iterator();
 			   while(it.hasNext() && !found) {
-			       FOperation op = (FOperation) it.next();
-			       if (op.getFName().equals("clone")) {
+			       Operation op = (Operation) it.next();
+			       if (op.getName().equals("clone")) {
 			           classClone = op;
 			           found = true;
 			       }
@@ -114,9 +114,9 @@ public class TypeCheckerContext {
 	
 	
 	protected static Type createTypeForClassDefinition(String qualified_name, KermetaUnit unit) {
-	    FClassDefinition cdef = (FClassDefinition)unit.typeDefinitionLookup(qualified_name);
-	    FClass cls = unit.struct_factory.createFClass();
-	    cls.setFTypeDefinition(cdef);
+	    ClassDefinition cdef = (ClassDefinition)unit.typeDefinitionLookup(qualified_name);
+	    fr.irisa.triskell.kermeta.language.structure.Class cls = unit.struct_factory.createClass();
+	    cls.setTypeDefinition(cdef);
 	    return new SimpleType(cls);
 	}
 	
@@ -130,12 +130,12 @@ public class TypeCheckerContext {
 	 * @param t
 	 * @return the canonical type of t
 	 */
-    public static FType getCanonicalType(FType t) {
-        FType result = t;
-        if (result instanceof FProductType) {
-            FProductType r  = (FProductType)result;
-            if (r.getFType().size() == 1) {
-                result = (FType)r.getFType().get(0);
+    public static fr.irisa.triskell.kermeta.language.structure.Type getCanonicalType(fr.irisa.triskell.kermeta.language.structure.Type t) {
+        fr.irisa.triskell.kermeta.language.structure.Type result = t;
+        if (result instanceof ProductType) {
+            ProductType r  = (ProductType)result;
+            if (r.getType().size() == 1) {
+                result = (fr.irisa.triskell.kermeta.language.structure.Type)r.getType().get(0);
             }
         }
         result = PrimitiveTypeResolver.getResolvedType(result);
@@ -154,14 +154,14 @@ public class TypeCheckerContext {
 	protected static Type BooleanType;
 	protected static Type StdIOType;
 	
-	protected static FOperation classNew;
-	protected static FOperation classClone;
+	protected static Operation classNew;
+	protected static Operation classClone;
 	
 	// The collection classes
-	protected static FClassDefinition SetClassDef;
-	protected static FClassDefinition OSetClassDef;
-	protected static FClassDefinition SeqClassDef;
-	protected static FClassDefinition BagClassDef;
+	protected static ClassDefinition SetClassDef;
+	protected static ClassDefinition OSetClassDef;
+	protected static ClassDefinition SeqClassDef;
+	protected static ClassDefinition BagClassDef;
 	
 	// The unit to type-check
 	protected KermetaUnit unit;
@@ -180,10 +180,10 @@ public class TypeCheckerContext {
 	/**
 	 * The class that is being type-checked
 	 */
-	private FClassDefinition selfClass;
+	private ClassDefinition selfClass;
 	/** A derived property or an operation */
-	private FOperation currentOperation;
-	private FMultiplicityElement currentCallable;
+	private Operation currentOperation;
+	private MultiplicityElement currentCallable;
 	
 	private Type selfType;
 	
@@ -200,15 +200,15 @@ public class TypeCheckerContext {
 	/**
 	 * Initialize the context with a class definition
 	 */
-	public void init(FClassDefinition cls, FOperation op) {
+	public void init(ClassDefinition cls, Operation op) {
 		selfClass = cls;
 		currentCallable = currentOperation = op;
 		selfType = null;
 		contexts = new Stack();
 		pushContext();
-		Iterator it = op.getFOwnedParameter().iterator();
+		Iterator it = op.getOwnedParameter().iterator();
 		while(it.hasNext()) {
-		    FParameter p = (FParameter)it.next();
+		    Parameter p = (Parameter)it.next();
 		    this.addSymbol(new KMSymbolParameter(p), getTypeFromMultiplicityElement(p));
 		}
 	}
@@ -217,7 +217,7 @@ public class TypeCheckerContext {
 	 * Initialize the context with a class definition, for
 	 * derived property setter method
 	 */
-	public void init(FClassDefinition cls, FProperty op) {
+	public void init(ClassDefinition cls, Property op) {
 		selfClass = cls;
 		currentCallable = op; 
 		selfType = null;
@@ -235,17 +235,17 @@ public class TypeCheckerContext {
 		pushContext();
 		Iterator it = deu.getVariables().iterator();
 		while(it.hasNext()) {
-		    FVariableDecl p = (FVariableDecl)it.next();
-		    this.addSymbol(new KMSymbolVariable(p), getTypeFromMultiplicityElement(p.getFType()));
+		    VariableDecl p = (VariableDecl)it.next();
+		    this.addSymbol(new KMSymbolVariable(p), getTypeFromMultiplicityElement(p.getType()));
 		}
 	}
 	
 	public CallableOperation getSuperOperation() {
-	    FOperation superOp = currentOperation.getFSuperOperation();
+	    Operation superOp = currentOperation.getSuperOperation();
 	    if (superOp == null) return null;
-	    ArrayList stypes = InheritanceSearch.allSuperTypes((FClass)((SimpleType)getSelfType()).type);
+	    ArrayList stypes = InheritanceSearch.allSuperTypes((fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)getSelfType()).type);
 	    for(int i=0; i<stypes.size(); i++) {
-	        FClass c = (FClass)stypes.get(i);
+	    	fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)stypes.get(i);
 	        ArrayList ops = InheritanceSearch.callableOperations(c);
 	        Iterator it = ops.iterator();
 	        while(it.hasNext()) {
@@ -285,15 +285,15 @@ public class TypeCheckerContext {
 	public Type getSelfType() {
 		if (selfType == null) 
 		{
-			FClass c = unit.struct_factory.createFClass();
-			c.setFTypeDefinition(selfClass);
-			Iterator it = selfClass.getFTypeParameter().iterator();
+			fr.irisa.triskell.kermeta.language.structure.Class c = unit.struct_factory.createClass();
+			c.setTypeDefinition(selfClass);
+			Iterator it = selfClass.getTypeParameter().iterator();
 			while(it.hasNext()) {
-				FTypeVariable tv = (FTypeVariable)it.next();
-				FTypeVariableBinding bind = unit.struct_factory.createFTypeVariableBinding();
-				bind.setFVariable(tv);
-				if (tv.getFSupertype() != null) bind.setFType(tv.getFSupertype());
-				else bind.setFType(((SimpleType)TypeCheckerContext.ObjectType).getType());
+				TypeVariable tv = (TypeVariable)it.next();
+				TypeVariableBinding bind = unit.struct_factory.createTypeVariableBinding();
+				bind.setVariable(tv);
+				if (tv.getSupertype() != null) bind.setType(tv.getSupertype());
+				else bind.setType(((SimpleType)TypeCheckerContext.ObjectType).getType());
 			}
 			selfType = new SimpleType(c);
 		}
@@ -338,7 +338,7 @@ public class TypeCheckerContext {
 	
 //	 Create a type "Set of something"
 	protected static Hashtable set_type_cache = new Hashtable();
-	protected static Type getSetType(FType typeParam) {
+	protected static Type getSetType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
 		
 		Type result = (Type)set_type_cache.get(typeParam);
 		// not in the cache ?
@@ -353,7 +353,7 @@ public class TypeCheckerContext {
 	
 //	 Create a type "OrderedSet of something"
 	protected static Hashtable oset_type_cache = new Hashtable();
-	protected static Type getOrderedSetType(FType typeParam) {
+	protected static Type getOrderedSetType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
 		Type result = (Type)oset_type_cache.get(typeParam);
 		// not in the cache ?
 		if (result == null) {
@@ -367,7 +367,7 @@ public class TypeCheckerContext {
 	
 	//	 Create a type "Sequence of something"
 	protected static Hashtable seq_type_cache = new Hashtable();
-	protected static Type getSequenceType(FType typeParam) {
+	protected static Type getSequenceType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
 		Type result = (Type)seq_type_cache.get(typeParam);
 		// not in the cache ?
 		if (result == null) {
@@ -381,7 +381,7 @@ public class TypeCheckerContext {
 	
 	//	 Create a type "bag of something"
 	protected static Hashtable bag_type_cache = new Hashtable();
-	protected static Type getBagType(FType typeParam) {
+	protected static Type getBagType(fr.irisa.triskell.kermeta.language.structure.Type typeParam) {
 		Type result = (Type)bag_type_cache.get(typeParam);
 		// not in the cache ?
 		if (result == null) {
@@ -394,16 +394,16 @@ public class TypeCheckerContext {
 	}
 	
 	// Create a Collection of something
-	protected static FClass createClass(FClassDefinition collection, FType contentsType) {
+	protected static fr.irisa.triskell.kermeta.language.structure.Class createClass(ClassDefinition collection, fr.irisa.triskell.kermeta.language.structure.Type contentsType) {
 		StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
 		// create the class
-		FClass result = struct_factory.createFClass();
-		result.setFTypeDefinition(collection);
+		fr.irisa.triskell.kermeta.language.structure.Class result = struct_factory.createClass();
+		result.setTypeDefinition(collection);
 		// Bind the type variable
-		FTypeVariableBinding bind = struct_factory.createFTypeVariableBinding();
-		bind.setFType(contentsType);
-		bind.setFVariable((FTypeVariable)collection.getFTypeParameter().get(0));
-		result.getFTypeParamBinding().add(bind);
+		TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
+		bind.setType(contentsType);
+		bind.setVariable((TypeVariable)collection.getTypeParameter().get(0));
+		result.getTypeParamBinding().add(bind);
 		return result;
 	}
 	
@@ -412,22 +412,22 @@ public class TypeCheckerContext {
 	 * @param element
 	 * @return
 	 */
-	public static Type getTypeFromMultiplicityElement(FMultiplicityElement element) {
+	public static Type getTypeFromMultiplicityElement(MultiplicityElement element) {
 		Type result;
 		
-		FType element_simple_type = element.getFType();
+		fr.irisa.triskell.kermeta.language.structure.Type element_simple_type = element.getType();
 		if (element_simple_type == null) {
 		    element_simple_type = ((SimpleType)TypeCheckerContext.VoidType).type;
 		    return new SimpleType(element_simple_type);
 		}
 		
-		if (element.getFUpper() == 1) result = new SimpleType(element_simple_type);
+		if (element.getUpper() == 1) result = new SimpleType(element_simple_type);
 		else {
-			if (element.isFIsUnique() && element.isFIsOrdered()) 
+			if (element.isIsUnique() && element.isIsOrdered()) 
 				result = getOrderedSetType(element_simple_type);
-			else if (element.isFIsUnique() && !element.isFIsOrdered()) 
+			else if (element.isIsUnique() && !element.isIsOrdered()) 
 				result = getSetType(element_simple_type);
-			else if (!element.isFIsUnique() && element.isFIsOrdered()) 
+			else if (!element.isIsUnique() && element.isIsOrdered()) 
 				result = getSequenceType(element_simple_type);
 			else
 				result = getBagType(element_simple_type);
@@ -435,14 +435,14 @@ public class TypeCheckerContext {
 		return result;
 	}
 	
-	/** Return current feature (an FOperation or an FProperty -- only derived 
+	/** Return current feature (an FOperation or a Property -- only derived 
 	 * property)
 	 */
-    public FMultiplicityElement getCurrentCallable() {
+    public MultiplicityElement getCurrentCallable() {
         return currentCallable;
     }
     
-    public FClassDefinition getSelfClass() {
+    public ClassDefinition getSelfClass() {
         return selfClass;
     }
 }

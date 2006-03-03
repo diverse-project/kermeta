@@ -1,4 +1,4 @@
-/* $Id: CacheTypeData.java,v 1.1 2005-09-02 15:25:19 dvojtise Exp $
+/* $Id: CacheTypeData.java,v 1.2 2006-03-03 15:21:47 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : CacheTypeData.java
  * License    : EPL
@@ -42,7 +42,7 @@ public class CacheTypeData {
 			Iterator it = ops.iterator();
 			while(it.hasNext()) {
 			    CallableOperation op = (CallableOperation)it.next();
-			    callableOperationsCached.put(op.getOperation().getFName(), op);
+			    callableOperationsCached.put(op.getOperation().getName(), op);
 			}
 		}
 		//		 build callableProperties table
@@ -52,7 +52,7 @@ public class CacheTypeData {
 			Iterator it = props.iterator();
 			while(it.hasNext()) {
 			    CallableProperty prop = (CallableProperty)it.next();
-			    callablePropertiesCached.put(prop.getProperty().getFName(), prop);
+			    callablePropertiesCached.put(prop.getProperty().getName(), prop);
 			}
 		}
 		

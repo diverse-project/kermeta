@@ -12,8 +12,8 @@ import fr.irisa.triskell.kermeta.ast.AdditiveExpression;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.RelationalExpression;
 import fr.irisa.triskell.kermeta.ast.RelationalOp;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 
@@ -29,7 +29,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 
 	
-	public static FExpression process(RelationalExpression node, KermetaUnit builder) {
+	public static Expression process(RelationalExpression node, KermetaUnit builder) {
 		if (node == null) return null;
 		KMT2KMRelationalExpressionBuilder visitor = new KMT2KMRelationalExpressionBuilder(builder);
 		node.accept(visitor);
@@ -48,7 +48,7 @@ public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 		operators.put("!=", "isNotEqual");
 	}
 	
-	protected FExpression result;
+	protected Expression result;
 	protected RelationalOp operator;
 	
 	/**
@@ -67,11 +67,11 @@ public class KMT2KMRelationalExpressionBuilder extends KMT2KMPass {
 					result = KMT2KMAdditiveExpressionBuilder.process((AdditiveExpression)children[i], builder);
 				}
 				else {
-					FCallFeature call = builder.behav_factory.createFCallFeature();
+					CallFeature call = builder.behav_factory.createCallFeature();
 					builder.storeTrace(call,operator);
-					call.setFName((String)operators.get(operator.getText()));
-					call.setFTarget(result);
-					call.getFParameters().add(KMT2KMAdditiveExpressionBuilder.process((AdditiveExpression)children[i], builder));
+					call.setName((String)operators.get(operator.getText()));
+					call.setTarget(result);
+					call.getParameters().add(KMT2KMAdditiveExpressionBuilder.process((AdditiveExpression)children[i], builder));
 					result = call;
 				}
 			}

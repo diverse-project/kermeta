@@ -1,4 +1,4 @@
-/* $Id: KermetaClassGraphBuilder.java,v 1.8 2006-01-27 19:41:22 dvojtise Exp $
+/* $Id: KermetaClassGraphBuilder.java,v 1.9 2006-03-03 15:24:04 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -24,28 +24,28 @@ import com.touchgraph.graphlayout.TGException;
 import com.touchgraph.graphlayout.TGPanel;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 	protected TGPanel tgPanel; 
-	protected FClassDefinition startingClass;
+	protected ClassDefinition startingClass;
 	
 	public boolean mustStop = false;
 	
 	
 	protected TGPanelHelper tgpHelper;
 	
-	protected Hashtable<FTypeDefinition,Node> graphUnitMapping = new Hashtable<FTypeDefinition,Node>();
+	protected Hashtable<TypeDefinition,Node> graphUnitMapping = new Hashtable<TypeDefinition,Node>();
 	
-	public KermetaClassGraphBuilder(TGPanel newtgPanel, FClassDefinition theStartingClass) {
+	public KermetaClassGraphBuilder(TGPanel newtgPanel, ClassDefinition theStartingClass) {
 		tgPanel = newtgPanel;
 		tgpHelper = new TGPanelHelper(tgPanel);
 		startingClass = theStartingClass;
@@ -77,7 +77,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 	/*	Iterator it2 = graphUnitMapping.entrySet().iterator();
 		if(it2.hasNext()){
 			//Entry entry = (Entry)it.next();
-			//FClassDefinition aClass = (FClassDefinition)((Entry)it2.next()).getKey();
+			//ClassDefinition aClass = (ClassDefinition)((Entry)it2.next()).getKey();
 			Node n1 = (Node)graphUnitMapping.get(startingClass);
 
 			tgPanel.setLocale(n1,2);
@@ -95,14 +95,14 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
     			System.err.println("buildGraph stopped");                    	
     			return;
     		}
-			if(entry.getKey() instanceof FClassDefinition)
+			if(entry.getKey() instanceof ClassDefinition)
 			{
-				FClassDefinition aClassDef = (FClassDefinition)entry.getKey();
+				ClassDefinition aClassDef = (ClassDefinition)entry.getKey();
 		        
-				Iterator superTypeIt = aClassDef.getFSuperType().iterator();
+				Iterator superTypeIt = aClassDef.getSuperType().iterator();
 				while (superTypeIt.hasNext()){
-					FClass aClass = (FClass)(superTypeIt.next());
-					FClassDefinition aSuperClassDef = aClass.getFClassDefinition();
+					fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)(superTypeIt.next());
+					ClassDefinition aSuperClassDef = (ClassDefinition)aClass.getTypeDefinition();
 					Node inheritanceNode = tgpHelper.addInvisibleNode();
 					inheritanceNode.setGhostNode(true);
 					//Node inheritanceNode = tgPanel.addNode();
@@ -114,29 +114,29 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 					tgpHelper.addInheritanceEdge(inheritanceNode,n2,Edge.DEFAULT_LENGTH);
 					
 				}
-				Iterator ownedAttributesIt = aClassDef.getFOwnedAttributes().iterator();
+				Iterator ownedAttributesIt = aClassDef.getOwnedAttribute().iterator();
 				while (ownedAttributesIt.hasNext()){
-					FProperty property1 = (FProperty)ownedAttributesIt.next();
-					FProperty property2 = (FProperty)property1.getFOpposite();
+					Property property1 = (Property)ownedAttributesIt.next();
+					Property property2 = (Property)property1.getOpposite();
 					// if we have an opposite
 					if(property2!= null){
 						Node n1 = (Node)graphUnitMapping.get(aClassDef);
 						Node n2 = (Node)graphUnitMapping.get(property2.eContainer());
 						
 						// does this node already has this property ?
-						if(findConnectedNodeByName(n1,property1.getFName()) == null)
+						if(findConnectedNodeByName(n1,property1.getName()) == null)
 						{
 							//Node propertyNode1 = tgPanel.addNode();
 							//propertyNode1.setLabel(property1.getFName());
 							//propertyNode1.setType(Node.TYPE_ROUNDRECT);
-							Node propertyNode1 = tgpHelper.addFeatureNode(property1.getFName());
+							Node propertyNode1 = tgpHelper.addFeatureNode(property1.getName());
 							propertyNode1.setGhostNode(true);
 							//Node propertyNode2 = tgPanel.addNode();
 							//propertyNode2.setLabel(property2.getFName());
 							//propertyNode2.setType(Node.TYPE_ROUNDRECT);
-							Node propertyNode2 = tgpHelper.addFeatureNode(property2.getFName());
+							Node propertyNode2 = tgpHelper.addFeatureNode(property2.getName());
 							propertyNode2.setGhostNode(true);
-							if(property1.isFIsComposite())
+							if(property1.isIsComposite())
 								tgpHelper.addDiamondEdge(propertyNode1, n1, Edge.DEFAULT_LENGTH/3*2);
 							else
 								tgPanel.addEdge(n1, propertyNode1, Edge.DEFAULT_LENGTH/3*2);
@@ -144,7 +144,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 							tgpHelper.addSimpleEdge(propertyNode1,propertyNode2,Edge.DEFAULT_LENGTH);
 							//tgpHelper.addSimpleEdge(propertyNode2,propertyNode1,Edge.DEFAULT_LENGTH);
 							//tgPanel.addEdge(propertyNode2,n2,Edge.DEFAULT_LENGTH/3*2);
-							if(property2.isFIsComposite())
+							if(property2.isIsComposite())
 								tgpHelper.addDiamondEdge(propertyNode2, n2, Edge.DEFAULT_LENGTH/3*2);
 							else
 								tgPanel.addEdge(n2, propertyNode2, Edge.DEFAULT_LENGTH/3*2);
@@ -155,20 +155,20 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 					else {
 					// we don't have an opposite, deal with property type
 						Node n1 = (Node)graphUnitMapping.get(aClassDef);
-						Node propertyNode1 = tgpHelper.addFeatureNode(property1.getFName());
+						Node propertyNode1 = tgpHelper.addFeatureNode(property1.getName());
 						propertyNode1.setType(Node.TYPE_ROUNDRECT);
 						propertyNode1.setGhostNode(true);
-						if(property1.isFIsComposite())
+						if(property1.isIsComposite())
 							tgpHelper.addDiamondEdge(propertyNode1, n1, Edge.DEFAULT_LENGTH/3*2);
 						else
 							tgPanel.addEdge(n1, propertyNode1, Edge.DEFAULT_LENGTH/3*2);
 						//tgPanel.addEdge(propertyNode1, n1, Edge.DEFAULT_LENGTH/3*2);
 						
-						Object obj = property1.getFType(); // A verifier les type possibles !! ou un  accept ?
-						if(obj instanceof FClass)
+						Object obj = property1.getType(); // A verifier les type possibles !! ou un  accept ?
+						if(obj instanceof fr.irisa.triskell.kermeta.language.structure.Class)
 						{
-							FClass aClass = (FClass)obj;
-							Node n2 = (Node)graphUnitMapping.get(aClass.getFClassDefinition());
+							fr.irisa.triskell.kermeta.language.structure.Class aClass = (fr.irisa.triskell.kermeta.language.structure.Class)obj;
+							Node n2 = (Node)graphUnitMapping.get(aClass.getTypeDefinition());
 							Node propertyNode2 = tgpHelper.addInvisibleNode();
 							propertyNode2.setLabel("ghost"); // ghost node because it is not navigable this way
 							propertyNode2.setType(Node.TYPE_ROUNDRECT);
@@ -180,9 +180,9 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 							
 							
 						}
-						else if(obj instanceof FPrimitiveType)
+						else if(obj instanceof PrimitiveType)
 						{
-							FPrimitiveType primType = (FPrimitiveType)obj;
+							PrimitiveType primType = (PrimitiveType)obj;
 							Collection col = tgPanel.findNodesByLabel(KMTHelper.getQualifiedName(primType));
 							if(col != null){
 	
@@ -238,7 +238,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 		
 		/*Iterator it = kunit.packages.values().iterator();
 	    while(it.hasNext()) {
-	        FPackage pack = (FPackage)it.next();
+	        Package pack = (Package)it.next();
 	       
             OutlineItem item = new OutlineItem(pack, null, outline);
             
@@ -292,18 +292,18 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 	}
 	
 	/**
-	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visit(FPackage)
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visit(Package)
 	 */
-	public Object visitFPackage(FPackage thePackage){
+	public Object visitPackage(Package thePackage){
 		
-		acceptList(thePackage.getFOwnedTypeDefinition());
-		acceptList(thePackage.getFNestedPackage());		
+		acceptList(thePackage.getOwnedTypeDefinition());
+		acceptList(thePackage.getNestedPackage());		
 	    return null;
 	}
 	/**
-	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFPrimitiveType(FPrimitiveType)
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitPrimitiveType(PrimitiveType)
 	 */
-	public Object visitFPrimitiveType(FPrimitiveType theType){
+	public Object visitPrimitiveType(PrimitiveType theType){
 		Node n1;
 		try {
 			// look for an existing one
@@ -326,14 +326,14 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 	    return null;
 	}
 	
-	/** used by visitFClassDefinition to not have to build too much node at once */
+	/** used by visitClassDefinition to not have to build too much node at once */
 	protected int nbNodeCreated = 0;
 	protected ClassNode foundNode = null; 
 	
 	/**
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visit(FClass)
 	 */
-	public Object visitFClassDefinition(FClassDefinition theClass){
+	public Object visitClassDefinition(ClassDefinition theClass){
 		ClassNode n1;
 		try {
 //			 look for an existing one
@@ -345,7 +345,7 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 				n1 = (ClassNode) tgpHelper.addClassNode();
 			graphUnitMapping.put(theClass, n1);
 			n1.setLabel(KMTHelper.getQualifiedName(theClass));
-			n1.setShortLabel (theClass.getFName());
+			n1.setShortLabel (theClass.getName());
 			n1.setType(Node.TYPE_RECTANGLE);
 			//n1.setVisible(false);
 			nbNodeCreated++;
@@ -374,12 +374,12 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 	    return null;
 	}
 	
-	public Object visitFProperty(FProperty node) {
+	public Object visitProperty(Property node) {
 	    String result = "";//ppTags(node.getFTag());
-		if (node.isFIsDerived()) result += "property ";
-		else if (node.isFIsComposite()) result += "attribute ";
+		if (node.isIsDerived()) result += "property ";
+		else if (node.isIsComposite()) result += "attribute ";
 		else result += "reference ";
-		if (node.isFIsReadOnly()) result += "readonly ";
+		if (node.isIsReadOnly()) result += "readonly ";
 		
 		return result;
 	}

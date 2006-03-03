@@ -4,11 +4,11 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 
 /**
  * @author Franck Fleurey
@@ -17,33 +17,33 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
  */
 public class KMSymbolOperation extends KMSymbol {
 
-	public FOperation operation;
+	public Operation operation;
 	
 	/**
 	 * @param id
 	 */
-	public KMSymbolOperation(FOperation op) {
-		super(op.getFName());
+	public KMSymbolOperation(Operation op) {
+		super(op.getName());
 		operation = op;
 	}
 
 	/* (non-Javadoc)
 	 * @see metacore.builder.MCSymbol#getFObject()
 	 */
-	public FObject getFObject() {
+	public fr.irisa.triskell.kermeta.language.structure.Object getFObject() {
 		return operation;
 	}
 
 	/**
 	 * @return Returns the operation.
 	 */
-	public FOperation getOperation() {
+	public Operation getOperation() {
 		return operation;
 	}
 	/**
 	 * @param operation The operation to set.
 	 */
-	public void setOperation(FOperation operation) {
+	public void setOperation(Operation operation) {
 		this.operation = operation;
 	}
 	
@@ -54,9 +54,9 @@ public class KMSymbolOperation extends KMSymbol {
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#generateCallExpression()
 	 */
-	public FCallExpression generateCallExpression(KermetaUnit builder) {
-		FCallFeature call = builder.behav_factory.createFCallFeature();
-		call.setFName(operation.getFName());
+	public CallExpression generateCallExpression(KermetaUnit builder) {
+		CallFeature call = builder.behav_factory.createCallFeature();
+		call.setName(operation.getName());
 		return call;
 	}
 	

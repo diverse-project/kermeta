@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.23 2006-02-21 17:34:19 jsteel Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.24 2006-03-03 15:22:19 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -25,46 +25,46 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.behavior.FAssignement;
-import fr.irisa.triskell.kermeta.behavior.FBlock;
-import fr.irisa.triskell.kermeta.behavior.FBooleanLiteral;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FCallResult;
-import fr.irisa.triskell.kermeta.behavior.FCallSuperOperation;
-import fr.irisa.triskell.kermeta.behavior.FCallVariable;
-import fr.irisa.triskell.kermeta.behavior.FConditionnal;
-import fr.irisa.triskell.kermeta.behavior.FIntegerLiteral;
-import fr.irisa.triskell.kermeta.behavior.FJavaStaticCall;
-import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
-import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
-import fr.irisa.triskell.kermeta.behavior.FLoop;
-import fr.irisa.triskell.kermeta.behavior.FRaise;
-import fr.irisa.triskell.kermeta.behavior.FRescue;
-import fr.irisa.triskell.kermeta.behavior.FSelfExpression;
-import fr.irisa.triskell.kermeta.behavior.FStringLiteral;
-import fr.irisa.triskell.kermeta.behavior.FTypeLiteral;
-import fr.irisa.triskell.kermeta.behavior.FTypeReference;
-import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
-import fr.irisa.triskell.kermeta.behavior.FVoidLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.Assignment;
+import fr.irisa.triskell.kermeta.language.behavior.Block;
+import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallResult;
+import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+import fr.irisa.triskell.kermeta.language.behavior.Conditional;
+import fr.irisa.triskell.kermeta.language.behavior.IntegerLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
+import fr.irisa.triskell.kermeta.language.behavior.Loop;
+import fr.irisa.triskell.kermeta.language.behavior.Raise;
+import fr.irisa.triskell.kermeta.language.behavior.Rescue;
+import fr.irisa.triskell.kermeta.language.behavior.SelfExpression;
+import fr.irisa.triskell.kermeta.language.behavior.StringLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
+import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
-import fr.irisa.triskell.kermeta.structure.FFunctionType;
-import fr.irisa.triskell.kermeta.structure.FModelType;
-import fr.irisa.triskell.kermeta.structure.FModelTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FMultiplicityElement;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTag;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
-import fr.irisa.triskell.kermeta.structure.FVoidType;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.ModelType;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -82,7 +82,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	
 	protected boolean typedef = true;
 	
-	public void ppPackage(FPackage p, File file) {
+	public void ppPackage(Package p, File file) {
 		try {
 			FileWriter w = new FileWriter(file);
 			w.write(ppPackage(p));
@@ -93,7 +93,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		}
 	}
 
-	public String ppPackage(FPackage p) {
+	public String ppPackage(Package p) {
 		root_pname = KMTHelper.getQualifiedName(p);
 		String result = "package " + root_pname + ";\n\n";
 		for(int i=0; i<imports.size();i++) result += "require \"" + imports.get(i) + "\"\n";
@@ -102,64 +102,64 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		if (usings.size()>0) result += "\n";
 		current_pname = root_pname;
 		typedef = true;
-		result += ppCRSeparatedNode(p.getFOwnedTypeDefinition());
+		result += ppCRSeparatedNode(p.getOwnedTypeDefinition());
 		typedef = false;
-		result += ppCRSeparatedNode(p.getFNestedPackage());
+		result += ppCRSeparatedNode(p.getNestedPackage());
 		
 		// temporary handle of orphan tags
 		//result +=
 		return result;
 	}
 	
-	public String ppPackageContents(FPackage p) {
+	public String ppPackageContents(Package p) {
 		root_pname = KMTHelper.getQualifiedName(p);
 		String result = "";
 		current_pname = root_pname;
 		typedef = true;
-		result += ppCRSeparatedNode(p.getFOwnedTypeDefinition());
+		result += ppCRSeparatedNode(p.getOwnedTypeDefinition());
 		typedef = false;
-		result += ppCRSeparatedNode(p.getFNestedPackage());
+		result += ppCRSeparatedNode(p.getNestedPackage());
 		return result;
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FAssignement)
 	 */
-	public Object visit(FAssignement node) {
-		String left = this.accept(node.getFTarget()).toString();
-		String right = this.accept(node.getFValue()).toString();
-		String op = (node.isFIsCast())?"?":":";
+	public Object visit(Assignment node) {
+		String left = this.accept(node.getTarget()).toString();
+		String right = this.accept(node.getValue()).toString();
+		String op = (node.isIsCast())?"?":":";
 		return left + " " + op + "= " + right;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBlock)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Block)
 	 */
-	public Object visit(FBlock node) {
+	public Object visit(Block node) {
 		String result = "do\n";
 		pushPrefix();
-		result += ppCRSeparatedNode(node.getFStatement());
+		result += ppCRSeparatedNode(node.getStatement());
 		
 		popPrefix();
-		Iterator it = node.getFRescueBlock().iterator();
+		Iterator it = node.getRescueBlock().iterator();
 		while(it.hasNext()) {
-			result += getPrefix() + this.accept((FRescue)it.next()) + "\n";
+			result += getPrefix() + this.accept((Rescue)it.next()) + "\n";
 		}
 		result += getPrefix() + "end";
 		return result;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FRescue)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Rescue)
 	 */
-	public Object visit(FRescue node) {
+	public Object visit(Rescue node) {
 		String result = "rescue";
-		if (node.getFExceptionName() != null) {
-			result += "(" + node.getFExceptionName() + " : " + this.accept(node.getFExceptionType()) + ")";
+		if (node.getExceptionName() != null) {
+			result += "(" + node.getExceptionName() + " : " + this.accept(node.getExceptionType()) + ")";
 		}
 		result += "\n";
 		pushPrefix();
-		result += ppCRSeparatedNode(node.getFBody());
+		result += ppCRSeparatedNode(node.getBody());
 		popPrefix();
 		return result;
 	}
@@ -176,18 +176,18 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.BooleanLiteral)
 	 */
-	public Object visit(FBooleanLiteral node) {
-		return ""+node.isFValue();
+	public Object visit(BooleanLiteral node) {
+		return ""+node.isValue();
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FCallSuperOperation)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.CallSuperOperation)
 	 */
-	public Object visit(FCallSuperOperation node) {
+	public Object visit(CallSuperOperation node) {
 		String result = "super(";
-		result += ppComaSeparatedNodes(node.getFParameters());
+		result += ppComaSeparatedNodes(node.getParameters());
 		result += ")";
 		return result;
 	}
@@ -207,22 +207,22 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
-	public Object visit(FClass node) {
-		String qname = KMTHelper.getQualifiedName(node.getFTypeDefinition());
-		String name = KMTHelper.getMangledIdentifier(node.getFTypeDefinition().getFName());
+	public Object visit(fr.irisa.triskell.kermeta.language.structure.Class node) {
+		String qname = KMTHelper.getQualifiedName(node.getTypeDefinition());
+		String name = KMTHelper.getMangledIdentifier(node.getTypeDefinition().getName());
 		String result = ppTypeName(qname, name);
-		if (node.getFTypeParamBinding().size() > 0) {
-			result += "<" + ppComaSeparatedNodes(node.getFTypeParamBinding()) + ">";
+		if (node.getTypeParamBinding().size() > 0) {
+			result += "<" + ppComaSeparatedNodes(node.getTypeParamBinding()) + ">";
 		}
 		return result;
 	}
 	
-	public Object visit(FModelType node) {
-		String qname = KMTHelper.getQualifiedName(node.getFTypeDefinition());
-		String name = KMTHelper.getMangledIdentifier(node.getFTypeDefinition().getFName());
+	public Object visit(ModelType node) {
+		String qname = KMTHelper.getQualifiedName(node.getTypeDefinition());
+		String name = KMTHelper.getMangledIdentifier(node.getTypeDefinition().getName());
 		String result = ppTypeName(qname, name);
-		if (node.getFTypeParamBinding().size() > 0) {
-			result += "<" + ppComaSeparatedNodes(node.getFTypeParamBinding()) + ">";
+		if (node.getTypeParamBinding().size() > 0) {
+			result += "<" + ppComaSeparatedNodes(node.getTypeParamBinding()) + ">";
 		}
 		return result;
 	}
@@ -256,36 +256,36 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariableBinding)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.TypeVariableBinding)
 	 */
-	public Object visit(FTypeVariableBinding node) {
-		return this.accept(node.getFType());
+	public Object visit(TypeVariableBinding node) {
+		return this.accept(node.getType());
 	}
 	
 	/** 
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
-	public Object visit(FClassDefinition node) {
+	public Object visit(ClassDefinition node) {
 		typedef = false;
 		String result = "";
 
-		result += ppTags(node.getFTag());
+		result += ppTags(node.getTag());
 		
-		if (node.isFIsAbstract()) result += "abstract ";
-		result += "class " + KMTHelper.getMangledIdentifier(node.getFName());
-		if (node.getFTypeParameter().size() > 0) {
+		if (node.isIsAbstract()) result += "abstract ";
+		result += "class " + KMTHelper.getMangledIdentifier(node.getName());
+		if (node.getTypeParameter().size() > 0) {
 			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
+			result += ppTypeVariableDeclaration(node.getTypeParameter());
 			result += ">";
 		}
-		if (node.getFSuperType().size() > 0) {
+		if (node.getSuperType().size() > 0) {
 			result += " inherits ";
-			result += ppComaSeparatedNodes(node.getFSuperType());
+			result += ppComaSeparatedNodes(node.getSuperType());
 		}
 		result += "\n" + getPrefix() + "{\n";
 		pushPrefix();
-		result += ppCRSeparatedNode(node.getFOwnedAttributes());
-		result += ppCRSeparatedNode(node.getFOwnedOperation());
+		result += ppCRSeparatedNode(node.getOwnedAttribute());
+		result += ppCRSeparatedNode(node.getOwnedOperation());
 		popPrefix();
 		result += getPrefix() + "}";		
 		
@@ -295,18 +295,18 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
-	public Object visit(FPrimitiveType node) {
+	public Object visit(PrimitiveType node) {
 		if (typedef == true) {
 			typedef = false;
-			String result = "alias " + node.getFName() + " : " + this.accept(node.getFInstanceType()) + ";";
+			String result = "alias " + node.getName() + " : " + this.accept(node.getInstanceType()) + ";";
 			typedef = true;
 			return result;
 		}
 		else {
 			String qname = KMTHelper.getQualifiedName(node);
-			String name = KMTHelper.getMangledIdentifier(node.getFName());
+			String name = KMTHelper.getMangledIdentifier(node.getName());
 			String result = ppTypeName(qname, name);
 			return result;
 		}
@@ -316,9 +316,9 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		String result = "";
 		Iterator it = tparams.iterator();
 		while (it.hasNext()) {
-			FTypeVariable node = (FTypeVariable)it.next();
-			result += KMTHelper.getMangledIdentifier(node.getFName());
-			if (node.getFSupertype() != null) result += " : " + this.accept(node.getFSupertype());
+			TypeVariable node = (TypeVariable)it.next();
+			result += KMTHelper.getMangledIdentifier(node.getName());
+			if (node.getSupertype() != null) result += " : " + this.accept(node.getSupertype());
 			if (it.hasNext()) result +=  ", ";
 		}
 		return result;
@@ -337,15 +337,15 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FConditionnal)
 	 */
-	public Object visit(FConditionnal node) {
-		String result = "if " + this.accept(node.getFCondition()) + " then\n";
+	public Object visit(Conditional node) {
+		String result = "if " + this.accept(node.getCondition()) + " then\n";
 		pushPrefix();
-		if (node.getFThenBody() != null) result += getPrefix() + this.accept(node.getFThenBody()) + "\n";
+		if (node.getThenBody() != null) result += getPrefix() + this.accept(node.getThenBody()) + "\n";
 		popPrefix();
-		if (node.getFElseBody() != null) {
+		if (node.getElseBody() != null) {
 			result += getPrefix() + "else\n";
 			pushPrefix();
-			result +=  getPrefix() + this.accept(node.getFElseBody()) + "\n";
+			result +=  getPrefix() + this.accept(node.getElseBody()) + "\n";
 			popPrefix();
 		}
 		result += getPrefix() + "end";
@@ -353,15 +353,15 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FEnumeration)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)
 	 */
-	public Object visit(FEnumeration node) {
+	public Object visit(Enumeration node) {
 		if (typedef == true) {
 			typedef = false;
-			String result = "enumeration " + KMTHelper.getMangledIdentifier(node.getFName()) + "\n";
+			String result = "enumeration " + KMTHelper.getMangledIdentifier(node.getName()) + "\n";
 			result += getPrefix() + "{\n";
 			pushPrefix();
-			result += ppCRSeparatedNode(node.getFOwnedLiteral());
+			result += ppCRSeparatedNode(node.getOwnedLiteral());
 			popPrefix();
 			result += getPrefix() + "}";
 			typedef = true;
@@ -369,39 +369,39 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		}
 		else {
 			String qname = KMTHelper.getQualifiedName(node);
-			String name = KMTHelper.getMangledIdentifier(node.getFName());
+			String name = KMTHelper.getMangledIdentifier(node.getName());
 			String result = ppTypeName(qname, name);
 			return result;
 		}
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FEnumerationLiteral)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.EnumerationLiteral)
 	 */
-	public Object visit(FEnumerationLiteral node) {
-		return KMTHelper.getMangledIdentifier(node.getFName()) + ";";
+	public Object visit(EnumerationLiteral node) {
+		return KMTHelper.getMangledIdentifier(node.getName()) + ";";
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FFunctionType)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FunctionType)
 	 */
-	public Object visit(FFunctionType node) {
-		return "< " + this.accept(node.getFLeft()) + "->" + this.accept(node.getFRight()) + " >";
+	public Object visit(FunctionType node) {
+		return "< " + this.accept(node.getLeft()) + "->" + this.accept(node.getRight()) + " >";
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FIntegerLiteral)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.IntegerLiteral)
 	 */
-	public Object visit(FIntegerLiteral node) {
-		return "" + node.getFValue();
+	public Object visit(IntegerLiteral node) {
+		return "" + node.getValue();
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FJavaStaticCall)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.JavaStaticCall)
 	 */
-	public Object visit(FJavaStaticCall node) {
-		String result = "extern " + node.getFJclass() + "." + KMTHelper.getMangledIdentifier(node.getFJmethod()) + "(";
-		result += ppComaSeparatedNodes(node.getFParameters());
+	public Object visit(JavaStaticCall node) {
+		String result = "extern " + node.getJclass() + "." + KMTHelper.getMangledIdentifier(node.getJmethod()) + "(";
+		result += ppComaSeparatedNodes(node.getParameters());
 		result += ")";
 		return result;
 	}
@@ -409,49 +409,49 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * A lambda expression is printed differently according to its use.
 	 * But for now we will only authorize it to be :
 	 * - a CallFeature (a parameter)
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FLambdaExpression)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.LambdaExpression)
 	 */
-	public Object visit(FLambdaExpression node) {
+	public Object visit(LambdaExpression node) {
 		String result = "{";
-		result += ppComaSeparatedNodes(node.getFParameters());
+		result += ppComaSeparatedNodes(node.getParameters());
 		result += " | ";
 		pushPrefix();
-		result += this.accept(node.getFBody());
+		result += this.accept(node.getBody());
 		popPrefix();
 		result += "}";
 		return result;
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FLambdaParameter)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.LambdaParameter)
 	 */
-	public Object visit(FLambdaParameter node) {
-		String result = KMTHelper.getMangledIdentifier(node.getFName());
-		if (node.getFType() != null) {
-			result += " : " + this.accept(node.getFType());
+	public Object visit(LambdaParameter node) {
+		String result = KMTHelper.getMangledIdentifier(node.getName());
+		if (node.getType() != null) {
+			result += " : " + this.accept(node.getType());
 		}
 		return result;
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FLoop)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Loop)
 	 */
-	public Object visit(FLoop node) {
+	public Object visit(Loop node) {
 		String result = "from " ; 
-		result += this.accept(node.getFInitiatization()) + "\n";
-		result += getPrefix() + "until " + this.accept(node.getFStopCondition()) + "\n";
+		result += this.accept(node.getInitialization()) + "\n";
+		result += getPrefix() + "until " + this.accept(node.getStopCondition()) + "\n";
 		result += getPrefix() +"loop\n";
 		pushPrefix();
-		result += this.accept(node.getFBody());
+		result += this.accept(node.getBody());
 		popPrefix();
 		result += getPrefix() +"end";
 		return result;
 	}
 	
-	public Object visit(FModelTypeDefinition node) {
-		String result = ppTags(node.getFTag());
-		result += "modeltype " + KMTHelper.getMangledIdentifier(node.getFName());
-		if (node.getFTypeParameter().size() > 0) {
+	public Object visit(ModelTypeDefinition node) {
+		String result = ppTags(node.getTag());
+		result += "modeltype " + KMTHelper.getMangledIdentifier(node.getName());
+		if (node.getTypeParameter().size() > 0) {
 			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
+			result += ppTypeVariableDeclaration(node.getTypeParameter());
 			result += ">";
 		}
 		result += "\n" + getPrefix() + "{\n";
@@ -459,7 +459,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		current_pname = KMTHelper.getQualifiedName(node);
 		pushPrefix();
 		typedef = true;
-		result += ppCRSeparatedNode(node.getFOwnedTypeDefinition());
+		result += ppCRSeparatedNode(node.getOwnedTypeDefinition());
 		typedef = false;
 		popPrefix();
 		current_pname = old_cname;
@@ -470,40 +470,40 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visit(FOperation node) {
-		String result = ppTags(node.getFTag());
-		if (node.getFSuperOperation() != null) result += "method ";
+	public Object visit(Operation node) {
+		String result = ppTags(node.getTag());
+		if (node.getSuperOperation() != null) result += "method ";
 		else result += "operation ";
-		result += KMTHelper.getMangledIdentifier(node.getFName());
-		if (node.getFTypeParameter().size() > 0) {
+		result += KMTHelper.getMangledIdentifier(node.getName());
+		if (node.getTypeParameter().size() > 0) {
 			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
+			result += ppTypeVariableDeclaration(node.getTypeParameter());
 			result += ">";
 		}
 		result += "(";
-		result += ppComaSeparatedNodes(node.getFOwnedParameter());
+		result += ppComaSeparatedNodes(node.getOwnedParameter());
 		result += ")";
-		if(node.getFType() != null) {
+		if(node.getType() != null) {
 			result += " : " + ppTypeFromMultiplicityElement(node);
 		}
 	
-		if (node.getFSuperOperation() != null) {
-			result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getFSuperOperation().getFOwningClass()));
+		if (node.getSuperOperation() != null) {
+			result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()));
 		}
-		if (node.getFRaisedException().size() > 0) {
-			result += " raises " + ppComaSeparatedNodes(node.getFRaisedException());
+		if (node.getRaisedException().size() > 0) {
+			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());
 		}
-		if (node.getFBody() != null) {
+		if (node.getBody() != null) {
 			result += " is\n";
 			pushPrefix();
-			result += getPrefix() + this.accept(node.getFBody());
+			result += getPrefix() + this.accept(node.getBody());
 			popPrefix();
 		}
-		else if (node.isFIsAbstract()) result += " is abstract";
+		else if (node.isIsAbstract()) result += " is abstract";
 		else {
 			result += " is do\n";
 			pushPrefix();
-			result += getPrefix() + "//TODO: implement operation " + node.getFName() + "\n"; 
+			result += getPrefix() + "//TODO: implement operation " + node.getName() + "\n"; 
 			result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
 			popPrefix();
 			result += getPrefix() + "end";
@@ -512,46 +512,46 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FParameter)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Parameter)
 	 */
-	public Object visit(FParameter node) {
-		return KMTHelper.getMangledIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node);
+	public Object visit(Parameter node) {
+		return KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
 	}
 	
-	public String ppTypeFromMultiplicityElement(FMultiplicityElement elem) {
+	public String ppTypeFromMultiplicityElement(MultiplicityElement elem) {
 		String result = "";
-		if (elem.getFUpper() != 1) {
-			if (elem.isFIsOrdered()) {
-				if (!elem.isFIsUnique()) result +="seq ";
+		if (elem.getUpper() != 1) {
+			if (elem.isIsOrdered()) {
+				if (!elem.isIsUnique()) result +="seq ";
 			}
 			else {
-				if (elem.isFIsUnique()) result +="set ";
+				if (elem.isIsUnique()) result +="set ";
 				else result +="bag ";
 			}
 		}
-		result += this.accept(elem.getFType());
-		if (elem.getFLower() != 0 || elem.getFUpper() != 1) {
-			result += "[" + elem.getFLower() + "..";
-			result += (elem.getFUpper()<0)?"*":""+elem.getFUpper();
+		result += this.accept(elem.getType());
+		if (elem.getLower() != 0 || elem.getUpper() != 1) {
+			result += "[" + elem.getLower() + "..";
+			result += (elem.getUpper()<0)?"*":""+elem.getUpper();
 			result += "]";
 		}
 		return result;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FPackage)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
-	public Object visit(FPackage node) {
+	public Object visit(Package node) {
 	    
-		String result = ppTags(node.getFTag());
-		result += "package " + KMTHelper.getMangledIdentifier(node.getFName()) + "\n";
+		String result = ppTags(node.getTag());
+		result += "package " + KMTHelper.getMangledIdentifier(node.getName()) + "\n";
 		result += getPrefix() + "{\n";
 		String old_cname = current_pname;
 		current_pname = KMTHelper.getQualifiedName(node);
 		pushPrefix();
 		typedef = true;
-		result += ppCRSeparatedNode(node.getFOwnedTypeDefinition());
-		result += ppCRSeparatedNode(node.getFNestedPackage());
+		result += ppCRSeparatedNode(node.getOwnedTypeDefinition());
+		result += ppCRSeparatedNode(node.getNestedPackage());
 		popPrefix();
 		current_pname = old_cname;
 		result += getPrefix() + "}\n";
@@ -559,43 +559,43 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProductType)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ProductType)
 	 */
-	public Object visit(FProductType node) {
-		String result = "[" + ppComaSeparatedNodes(node.getFType()) + "]";
+	public Object visit(ProductType node) {
+		String result = "[" + ppComaSeparatedNodes(node.getType()) + "]";
 		return result;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
-	public Object visit(FProperty node) {
-	    String result = ppTags(node.getFTag());
-		if (node.isFIsDerived()) result += "property ";
-		else if (node.isFIsComposite()) result += "attribute ";
+	public Object visit(Property node) {
+	    String result = ppTags(node.getTag());
+		if (node.isIsDerived()) result += "property ";
+		else if (node.isIsComposite()) result += "attribute ";
 		else result += "reference ";
-		if (node.isFIsReadOnly()) result += "readonly ";
-		result += KMTHelper.getMangledIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node);
-		if (node.getFOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getFOpposite().getFName());
-		if (node.isFIsDerived()) {
+		if (node.isIsReadOnly()) result += "readonly ";
+		result += KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
+		if (node.getOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName());
+		if (node.isIsDerived()) {
 			pushPrefix();
 			result += "\n" + getPrefix() + "getter is " ;
-			if (node.getFGetterbody() != null) result += this.accept(node.getFGetterbody());
+			if (node.getGetterBody() != null) result += this.accept(node.getGetterBody());
 			else {
 				result += "do\n";
 				pushPrefix();
-				result += getPrefix() + "//TODO: implement getter for derived property " + node.getFName() + "\n"; 
+				result += getPrefix() + "//TODO: implement getter for derived property " + node.getName() + "\n"; 
 				result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
 				popPrefix();
 				result += getPrefix() + "end";
 			}
-			if (! node.isFIsReadOnly()) {
+			if (! node.isIsReadOnly()) {
 				result += "\n" + getPrefix() + "setter is ";
-				if (node.getFSetterbody() != null) result += this.accept(node.getFSetterbody());
+				if (node.getSetterBody() != null) result += this.accept(node.getSetterBody());
 				else {
 					result += "do\n";
 					pushPrefix();
-					result += getPrefix() + "//TODO: implement setter for derived property " + node.getFName() + "\n"; 
+					result += getPrefix() + "//TODO: implement setter for derived property " + node.getName() + "\n"; 
 					result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
 					popPrefix();
 					result += getPrefix() + "end";
@@ -607,83 +607,83 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FRaise)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Raise)
 	 */
-	public Object visit(FRaise node) {
-		return "raise " + this.accept(node.getFExpression());
+	public Object visit(Raise node) {
+		return "raise " + this.accept(node.getExpression());
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FSelfExpression)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.SelfExpression)
 	 */
-	public Object visit(FSelfExpression node) {
+	public Object visit(SelfExpression node) {
 		return "self";
 	}
 
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FStringLiteral)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.StringLiteral)
 	 */
-	public Object visit(FStringLiteral node) {
-		return "\"" + node.getFValue() +"\""; //TODO : escape characters ?
+	public Object visit(StringLiteral node) {
+		return "\"" + node.getValue() +"\""; //TODO : escape characters ?
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeLiteral)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeLiteral)
 	 */
-	public Object visit(FTypeLiteral node) {
-		return this.accept(node.getFTyperef());
+	public Object visit(TypeLiteral node) {
+		return this.accept(node.getTyperef());
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeReference)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeReference)
 	 */
-	public Object visit(FTypeReference node) {
+	public Object visit(TypeReference node) {
 	    return ppTypeFromMultiplicityElement(node);
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariable)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.TypeVariable)
 	 */
-	public Object visit(FTypeVariable node) {
-		return KMTHelper.getMangledIdentifier(node.getFName());
+	public Object visit(TypeVariable node) {
+		return KMTHelper.getMangledIdentifier(node.getName());
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FVariableDecl)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.VariableDecl)
 	 */
-	public Object visit(FVariableDecl node) {
-		String result = "var " + KMTHelper.getMangledIdentifier(node.getFIdentifier()) + " : " + this.accept(node.getFType());
-		if (node.getFInitialization() != null)
-			result += " init " + this.accept(node.getFInitialization());
+	public Object visit(VariableDecl node) {
+		String result = "var " + KMTHelper.getMangledIdentifier(node.getIdentifier()) + " : " + this.accept(node.getType());
+		if (node.getInitialization() != null)
+			result += " init " + this.accept(node.getInitialization());
 		return result;
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FVoidLiteral)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.VoidLiteral)
 	 */
-	public Object visit(FVoidLiteral node) {
+	public Object visit(VoidLiteral node) {
 		return "void";
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FVoidType)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.VoidType)
 	 */
-	public Object visit(FVoidType node) {
+	public Object visit(VoidType node) {
 		return "Void";
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FCallFeature)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.CallFeature)
 	 */
-	public Object visit(FCallFeature node) {
+	public Object visit(CallFeature node) {
 		String result = "";
-		if (node.getFTarget() != null) result += this.accept(node.getFTarget());
+		if (node.getTarget() != null) result += this.accept(node.getTarget());
 		else result += "self";
-		result += "." + KMTHelper.getMangledIdentifier(node.getFName());
+		result += "." + KMTHelper.getMangledIdentifier(node.getName());
 		// handle the special case where there is 1 parameter, and when This
 		// parameter is a lambdaPostFix
 		//	TODO : throw an exception if type is not a LambdaExpression
-		if (node.getFParameters().size()==1 && FLambdaExpression.class.isInstance(node.getFParameters().get(0)))
+		if (node.getParameters().size()==1 && LambdaExpression.class.isInstance(node.getParameters().get(0)))
 		{
-		   result+= ppComaSeparatedNodes(node.getFParameters());
+		   result+= ppComaSeparatedNodes(node.getParameters());
 		}
 		// the classic case : a list of parameters
-		else if (node.getFParameters().size()> 0) {
-			result += "(" + ppComaSeparatedNodes(node.getFParameters()) + ")";
+		else if (node.getParameters().size()> 0) {
+			result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
 		}
 		
 		return result;
@@ -691,42 +691,42 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	
 	
 	/**
-	 * @see kermeta.visitor.KermetaVisitor#visit(kermeta.behavior.FCallResult)
+	 * @see kermeta.visitor.KermetaVisitor#visit(kermeta.behavior.CallResult)
 	 */
-	public Object visit(FCallResult node) {
+	public Object visit(CallResult node) {
 		return "result";
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FCallVariable)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.CallVariable)
 	 */
-	public Object visit(FCallVariable node) {
-		String result = KMTHelper.getMangledIdentifier(node.getFName());
-		if (node.getFParameters().size()> 0) {
-			result += "(" + ppComaSeparatedNodes(node.getFParameters()) + ")";
+	public Object visit(CallVariable node) {
+		String result = KMTHelper.getMangledIdentifier(node.getName());
+		if (node.getParameters().size()> 0) {
+			result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
 		}
 		return result;
 	}
 	
     /**
-     * FTag is used to store comments in the source code.
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FTag)
+     * Tag is used to store comments in the source code.
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.language.structure.Tag)
      */
-    public Object visit(FTag node)
+    public Object visit(Tag node)
     {
         String result = "";
         // User can choose to add a "@kdoc" tag
-        if (node.getFName().equals(KMT2KMPass7.KERMETADOC) && !node.getFValue().startsWith("/**"))
+        if (node.getName().equals(KMT2KMPass7.KERMETADOC) && !node.getValue().startsWith("/**"))
         {
-            result = node.getFValue() + "\n";
+            result = node.getValue() + "\n";
         }
         // Or simple comment /** */ delimitor TODO also remove pretty "*" 
-        else if (node.getFValue().startsWith("/**"))
+        else if (node.getValue().startsWith("/**"))
         {
-            result = node.getFValue();
+            result = node.getValue();
         }
         else
         {
-            result = "@"+node.getFName()+" \""+node.getFValue()+"\"\n";
+            result = "@"+node.getName()+" \""+node.getValue()+"\"\n";
         }
         return result;
     }
@@ -765,16 +765,16 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * Later, we will think about the relevance of having not unique tags (depends on how we handle
 	 * code documentation => extern system, or integrated?)
 	 */
-	public FTag[] getFTagsByName(EList ftagList, String name)
+	public Tag[] getFTagsByName(EList ftagList, String name)
 	{
 	    
 	    Iterator it = ftagList.iterator();
-	    FTag[] result_tagArray = new FTag[10];
+	    Tag[] result_tagArray = new Tag[10];
 	    int i = 0;
 	    while (it.hasNext())
 	    {
-	        FTag tag = (FTag)it.next();
-	        if (tag.getFName().equals(name))
+	        Tag tag = (Tag)it.next();
+	        if (tag.getName().equals(name))
 	        {
 	            result_tagArray[i] = tag;
 	            i++;
@@ -791,10 +791,10 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @param node
 	 * @return
 	 */
-	public String ppSimplifiedFPropertyInContext(FProperty node){
-		String result="class "+node.getFOwningClass().getFName() + "{\n";
+	public String ppSimplifiedPropertyInContext(Property node){
+		String result="class "+node.getOwningClass().getName() + "{\n";
 		result += "\t...\n";
-		result += "\t" + ppSimplifiedFProperty(node);
+		result += "\t" + ppSimplifiedProperty(node);
 		result += "\n\t...\n}";
 		return result;
     }
@@ -804,14 +804,14 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @param node
 	 * @return
 	 */
-	public String ppSimplifiedFProperty(FProperty node){
+	public String ppSimplifiedProperty(Property node){
     	String result="";
-    	if (node.isFIsDerived()) result += "property ";
-		else if (node.isFIsComposite()) result += "attribute ";
+    	if (node.isIsDerived()) result += "property ";
+		else if (node.isIsComposite()) result += "attribute ";
 		else result += "reference ";
-		if (node.isFIsReadOnly()) result += "readonly ";
-		result += KMTHelper.getMangledIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node);
-		if (node.getFOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getFOpposite().getFName());
+		if (node.isIsReadOnly()) result += "readonly ";
+		result += KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
+		if (node.getOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName());
 		return result;
     }
 	
@@ -822,8 +822,8 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @param node
 	 * @return
 	 */
-	public String ppSimplifiedFOperationInContext(FOperation node){
-		String result="class "+ KMTHelper.getMangledIdentifier(node.getFOwningClass().getFName()) + "{\n\t...\n";
+	public String ppSimplifiedFOperationInContext(Operation node){
+		String result="class "+ KMTHelper.getMangledIdentifier(node.getOwningClass().getName()) + "{\n\t...\n";
 		result += "\t" + ppSimplifiedFOperation(node);
 		result += "\n\t...\n}";
 		return result;
@@ -834,30 +834,30 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * @param node
 	 * @return
 	 */
-	public String ppSimplifiedFOperation(FOperation node){
+	public String ppSimplifiedFOperation(Operation node){
     	String result="";
-    	if (node.getFSuperOperation() != null) result += "method ";
+    	if (node.getSuperOperation() != null) result += "method ";
 		else result += "operation ";
-		result += KMTHelper.getMangledIdentifier(node.getFName());
-		if (node.getFTypeParameter().size() > 0) {
+		result += KMTHelper.getMangledIdentifier(node.getName());
+		if (node.getTypeParameter().size() > 0) {
 			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
+			result += ppTypeVariableDeclaration(node.getTypeParameter());
 			result += ">";
 		}
 		result += "(";
-		result += ppComaSeparatedNodes(node.getFOwnedParameter());
+		result += ppComaSeparatedNodes(node.getOwnedParameter());
 		result += ")";
-		if(node.getFType() != null) {
+		if(node.getType() != null) {
 			result += " : " + ppTypeFromMultiplicityElement(node);
 		}
 	
-		if (node.getFSuperOperation() != null) {
-			result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getFSuperOperation().getFOwningClass()));
+		if (node.getSuperOperation() != null) {
+			result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()));
 		}
-		if (node.getFRaisedException().size() > 0) {
-			result += " raises " + ppComaSeparatedNodes(node.getFRaisedException());
+		if (node.getRaisedException().size() > 0) {
+			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());
 		}
-		if (node.isFIsAbstract()) result += " is abstract";
+		if (node.isIsAbstract()) result += " is abstract";
 		else {
 			result += " is do ... end";
 		}

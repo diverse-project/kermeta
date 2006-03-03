@@ -1,4 +1,4 @@
-/* $Id: KmtPrinterWizard.java,v 1.3 2005-07-27 14:52:41 dvojtise Exp $
+/* $Id: KmtPrinterWizard.java,v 1.4 2006-03-03 15:20:24 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -87,11 +87,11 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 					w.write("require \"" + iu.getUri() + "\"\n");
 				else {
 								
-					IFile importedfile = ifile.getProject().getFile(ifile.getProjectRelativePath().removeFileExtension().removeLastSegments(1).append(iu.rootPackage.getFName()).addFileExtension("kmt"));
+					IFile importedfile = ifile.getProject().getFile(ifile.getProjectRelativePath().removeFileExtension().removeLastSegments(1).append(iu.rootPackage.getName()).addFileExtension("kmt"));
 					
 					
 					writeUnit(iu, importedfile);
-					w.write("require \"" + iu.rootPackage.getFName() + ".kmt\"\n");
+					w.write("require \"" + iu.rootPackage.getName() + ".kmt\"\n");
 				}
 			}
 		}

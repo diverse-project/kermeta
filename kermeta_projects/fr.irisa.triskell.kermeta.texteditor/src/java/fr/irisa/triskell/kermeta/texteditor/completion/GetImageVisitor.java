@@ -6,13 +6,13 @@ package fr.irisa.triskell.kermeta.texteditor.completion;
 
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
 import fr.irisa.triskell.kermeta.texteditor.icons.green.KermetaIconsGreen;
 import fr.irisa.triskell.kermeta.texteditor.icons.red.KermetaIconsRed;
@@ -37,51 +37,51 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 		return null;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
-	public Object visitFClassDefinition(FClassDefinition arg0) {
+	public Object visitClassDefinition(ClassDefinition arg0) {
 		return KermetaIconsRed.CLASS;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumeration)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)
 	 */
-	public Object visitFEnumeration(FEnumeration arg0) {
+	public Object visitEnumeration(Enumeration arg0) {
 	    return KermetaIconsRed.ENUM;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumerationLiteral)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.EnumerationLiteral)
 	 */
-	public Object visitFEnumerationLiteral(FEnumerationLiteral arg0) {
+	public Object visitEnumerationLiteral(EnumerationLiteral arg0) {
 	        return KermetaIconsRed.ENUM_LIT;
 	}
 	
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visitFOperation(FOperation arg0) {
+	public Object visitOperation(Operation arg0) {
 	    
-	    if (arg0.isFIsAbstract()) return KermetaIconsBlue.OPERATION_ABSTRACT;
-		if (arg0.getFSuperOperation() != null) return KermetaIconsBlue.METHOD;
+	    if (arg0.isIsAbstract()) return KermetaIconsBlue.OPERATION_ABSTRACT;
+		if (arg0.getSuperOperation() != null) return KermetaIconsBlue.METHOD;
 		return KermetaIconsBlue.OPERATION;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPackage)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
-	public Object visitFPackage(FPackage arg0) {
+	public Object visitPackage(Package arg0) {
 	    return KermetaIconsRed.PACKAGE;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
-	public Object visitFPrimitiveType(FPrimitiveType arg0) {
+	public Object visitPrimitiveType(PrimitiveType arg0) {
 	    return KermetaIconsRed.DATATYPE;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
-	public Object visitFProperty(FProperty node) {
-	    if (node.isFIsComposite()) return KermetaIconsGreen.PROPERTY_CONTAINED;
-		if (node.isFIsDerived()) return KermetaIconsGreen.PROPERTY_DERIVED;
+	public Object visitProperty(Property node) {
+	    if (node.isIsComposite()) return KermetaIconsGreen.PROPERTY_CONTAINED;
+		if (node.isIsDerived()) return KermetaIconsGreen.PROPERTY_DERIVED;
 		return KermetaIconsGreen.PROPERTY;
 	}
 	

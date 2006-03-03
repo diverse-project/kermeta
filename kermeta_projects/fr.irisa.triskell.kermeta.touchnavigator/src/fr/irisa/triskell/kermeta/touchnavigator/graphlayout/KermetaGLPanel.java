@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.11 2006-01-27 19:41:22 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.12 2006-03-03 15:24:04 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -25,13 +25,13 @@ import com.touchgraph.graphlayout.TGException;
 import com.touchgraph.graphlayout.interaction.GLNavigateUI;
 import com.touchgraph.graphlayout.interaction.TGUIManager;
 
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
@@ -249,7 +249,7 @@ public class KermetaGLPanel extends GLPanel
 				return;
 			}*/
 			int nbtries = 0;
-			FClassDefinition clasDef=null;
+			ClassDefinition clasDef=null;
 			while(clasDef== null && nbtries <10){
 				clasDef= findAClassInUnit();
 				if(currentEditor == null)
@@ -280,7 +280,7 @@ public class KermetaGLPanel extends GLPanel
 				TouchNavigatorPlugin.internalLog.debug("BuildKermetaClassGraphThread ends because clasDef is null");
 				return;
 			}
-			TouchNavigatorPlugin.internalLog.debug(clasDef.getFName());  
+			TouchNavigatorPlugin.internalLog.debug(clasDef.getName());  
 			yield();
 			
 			KermetaGLPanel.this.tgPanel.tgLayout.stopDamper(); // do not damp while building the model
@@ -326,7 +326,7 @@ public class KermetaGLPanel extends GLPanel
 	                
 	                
 	                
-	                //FClassDefinition clasDef = findAClassInUnit();
+	                //ClassDefinition clasDef = findAClassInUnit();
 	                //clasDef = kunit.get_ROOT_TYPE_ClassDefinition(); // return Object all the time
 	                //System.err.println(KMTHelper.getQualifiedName(clasDef));
 	                Collection nodes = tgPanel.getGES().findNodesByLabel(KMTHelper.getQualifiedName(clasDef));
@@ -378,7 +378,7 @@ public class KermetaGLPanel extends GLPanel
 		}
 	}
 	
-	public FClassDefinition findAClassInUnit()
+	public ClassDefinition findAClassInUnit()
 	{
 		if(currentEditor == null){
 			currentEditor =TexteditorPlugin.getDefault().getEditor();
@@ -386,15 +386,15 @@ public class KermetaGLPanel extends GLPanel
 		}
 		if(currentEditor ==null) return null;
         KermetaUnit kunit = currentEditor.getMcunit();
-		FClassDefinition result = null;
+		ClassDefinition result = null;
 		
 		
 		Iterator it = kunit.typeDefs.entrySet().iterator();
 		while(it.hasNext() && result == null){
 			Entry entry = (Entry)it.next();
-			if(entry.getValue() instanceof FClassDefinition)
+			if(entry.getValue() instanceof ClassDefinition)
 			{
-				result = (FClassDefinition)entry.getValue();
+				result = (ClassDefinition)entry.getValue();
 			}
 		}
         //result = findAClassInUnitPackage(kunit.rootPackage);
@@ -403,34 +403,34 @@ public class KermetaGLPanel extends GLPanel
 		return result;
 	}
 	
-	public FClassDefinition findAClassInResource(Resource theResource)
+	public ClassDefinition findAClassInResource(Resource theResource)
 	{
-		FClassDefinition result = null;
+		ClassDefinition result = null;
 		Iterator it =theResource.getContents().iterator();
         while(it.hasNext() && (result == null)){
         	Object obj = it.next();
-        	if(obj instanceof FClassDefinition) {
-        		result = (FClassDefinition)obj;
+        	if(obj instanceof ClassDefinition) {
+        		result = (ClassDefinition)obj;
         	}
         }
         if (result == null) result = TexteditorPlugin.getDefault().getEditor().getMcunit().get_ROOT_TYPE_ClassDefinition();		
         return result;
 	}
 	
-	public FClassDefinition findAClassInUnitPackage(FPackage aPackage)
+	public ClassDefinition findAClassInUnitPackage(Package aPackage)
 	{
 		if(currentEditor == null){
 			currentEditor =TexteditorPlugin.getDefault().getEditor();
 			System.err.println(" findAClassInUnitPackage setting currentEditor to "+currentEditor);
 		}
       //  KermetaUnit kunit = currentEditor.getMcunit();
-		FClassDefinition result = null;
+		ClassDefinition result = null;
 		Iterator it = aPackage.eContents().iterator();
         while(it.hasNext() && (result == null)){
         	Object obj = it.next();
-        	if(obj instanceof FClassDefinition) {
+        	if(obj instanceof ClassDefinition) {
         		// check if this Classdef is really in this Unit
-        		FClassDefinition classDef = (FClassDefinition)obj;
+        		ClassDefinition classDef = (ClassDefinition)obj;
         	//	EObject o;
         		//o.eResource().
         		//if(kunit == classDef.kunit) 
@@ -439,9 +439,9 @@ public class KermetaGLPanel extends GLPanel
         }
         if (result == null) 
         { // look into subPackages
-        	Iterator itPackage = aPackage.getFNestedPackage().iterator();
+        	Iterator itPackage = aPackage.getNestedPackage().iterator();
         	while(itPackage.hasNext() && (result==null)){
-        		result = findAClassInUnitPackage((FPackage)itPackage.next());
+        		result = findAClassInUnitPackage((Package)itPackage.next());
         	}
         }
         //if (result == null) result = kunit.get_ROOT_TYPE_ClassDefinition();
@@ -456,20 +456,20 @@ public class KermetaGLPanel extends GLPanel
 		
 	}
 
-	public void outlineSelectionChanged(FObject fobj) {
+	public void outlineSelectionChanged(fr.irisa.triskell.kermeta.language.structure.Object fobj) {
 		if(!updateOnOutlineSelection) return;
 		TouchNavigatorPlugin.internalLog.debug("outlineSelectionChanged : "+fobj);		
 		followObject(fobj);
 	}
 
-	public void textHoverCalled(FObject fobj) {
+	public void textHoverCalled(fr.irisa.triskell.kermeta.language.structure.Object fobj) {
 		if(!updateOnTextHover) return;
 		TouchNavigatorPlugin.internalLog.debug("textHoverCalled : "+fobj);
 		followObject(fobj);
 	} 
 	
 	
-	private void followObject(FObject fobj)
+	private void followObject(fr.irisa.triskell.kermeta.language.structure.Object fobj)
 	{
 		String searchedLabel = null;
 		if(fobj == null)return;
@@ -479,11 +479,11 @@ public class KermetaGLPanel extends GLPanel
 			searchedLabel = KMTHelper.getQualifiedName(aClass.getFClassDefinition());
 			
 		}
-		else if(fobj instanceof FClassDefinition){
-			searchedLabel = KMTHelper.getQualifiedName((FClassDefinition)fobj);
+		else if(fobj instanceof ClassDefinition){
+			searchedLabel = KMTHelper.getQualifiedName((ClassDefinition)fobj);
 		}
-		else if(fobj instanceof FCallFeature){
-			FCallFeature callFeature = (FCallFeature)fobj;
+		else if(fobj instanceof CallFeature){
+			CallFeature callFeature = (CallFeature)fobj;
 			if (callFeature.getFStaticOperation() != null)
 		    {
 				TouchNavigatorPlugin.internalLog.debug("callFeature.getFStaticOperation() : "+callFeature.getFStaticOperation());
@@ -493,17 +493,17 @@ public class KermetaGLPanel extends GLPanel
 				TouchNavigatorPlugin.internalLog.debug("callFeature.getFStaticProperty().getFType() : "+callFeature.getFStaticProperty().getFType());
 		    }
 			//callFeature.getFStaticType().
-			//searchedLabel = KMTHelper.getQualifiedName((FCallFeature)fobj);
+			//searchedLabel = KMTHelper.getQualifiedName((CallFeature)fobj);
 		}
 		else if (fobj instanceof FExpression)
         {
             FExpression fexp = (FExpression)fobj;
-            // Find the tag of the FCallFeature definition!
-            if (fexp instanceof FCallFeature)
+            // Find the tag of the CallFeature definition!
+            if (fexp instanceof CallFeature)
             {
-            	FCallFeature callFeature = (FCallFeature)fexp;
+            	CallFeature callFeature = (CallFeature)fexp;
             	
-                FObject fdef = this.getDefinitionForFCallFeature((FCallFeature)fexp);
+                fr.irisa.triskell.kermeta.language.structure.Object fdef = this.getDefinitionForCallFeature((CallFeature)fexp);
                 if (fdef != null)
                 {
                   //  ftags = kdocPrettyPrint(fdef.getFTag());
@@ -542,22 +542,22 @@ public class KermetaGLPanel extends GLPanel
 	 * Get the definition of the CallFEature :
 	 * - FEnumeration
 	 * - FClass <- FTypeLiteral ?
-	 * - FOperation
+	 * - Operation
 	 * - FProperty
 	 */
-	private FObject getDefinitionForFCallFeature(FCallFeature feature)
+	private fr.irisa.triskell.kermeta.language.structure.Object getDefinitionForCallFeature(CallFeature feature)
 	{
-	    if (feature.getFStaticOperation() != null)
+	    if (feature.getStaticOperation() != null)
 	    {
-	        return feature.getFStaticOperation();
+	        return feature.getStaticOperation();
 	    }
-	    if (feature.getFStaticProperty() != null)
+	    if (feature.getStaticProperty() != null)
 	    {
-	        return feature.getFStaticProperty();
+	        return feature.getStaticProperty();
 	    }
 	    else // return the CallFeature itself
 	    {
-	        System.err.println("the definition : " + feature.getFName() + feature);
+	        System.err.println("the definition : " + feature.getName() + feature);
 	        return feature;
 	    }
 	}
@@ -581,7 +581,7 @@ public class KermetaGLPanel extends GLPanel
 		if(currentEditor == null){
 			currentEditor =TexteditorPlugin.getDefault().getEditor();
 		}
-		FTypeDefinition typeDef = currentEditor.getMcunit().getTypeDefinitionByName(nodeName);
+		TypeDefinition typeDef = currentEditor.getMcunit().getTypeDefinitionByName(nodeName);
 		if(typeDef != null)
 			return (String)hintpp.getHTMLDoc(typeDef);
 		else

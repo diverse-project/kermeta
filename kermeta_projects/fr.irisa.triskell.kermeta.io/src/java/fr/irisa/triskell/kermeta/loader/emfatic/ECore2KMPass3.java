@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass3.java,v 1.3 2005-09-15 12:40:33 dvojtise Exp $
+/* $Id: ECore2KMPass3.java,v 1.4 2006-03-03 15:22:18 dvojtise Exp $
  * Project : Kermeta 
  * File : ECore2KMPass3.java
  * License : EPL
@@ -33,14 +33,14 @@ import com.ibm.eclipse.emfatic.core.ast.TypeRef;
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 
 
 /**
@@ -61,7 +61,7 @@ public class ECore2KMPass3 extends ECore2KMPass {
     
     
 	public boolean beginVisit(AbstractModifier node) {
-	    builder.current_class.setFIsAbstract(true);
+	    builder.current_class.setIsAbstract(true);
 		return super.beginVisit(node);
 	}
 	public boolean beginVisit(Annotation node) {
@@ -75,54 +75,54 @@ public class ECore2KMPass3 extends ECore2KMPass {
 	public boolean beginVisit(Attribute node) {
 		//System.out.println("  Attribute : " + node.getName().getText());
 		// Create the corresponding property
-		FProperty res = builder.struct_factory.createFProperty();
+		Property res = builder.struct_factory.createProperty();
 		builder.storeTrace(res, node);
 		// name :
-		res.setFName(node.getName().getText());
+		res.setName(node.getName().getText());
 		// default :
 		if (node.getDefaultValueExpr() != null)
-			res.setFDefault(node.getDefaultValueExpr().getText());
+			res.setDefault(node.getDefaultValueExpr().getText());
 		// isComposite : 
-		res.setFIsComposite(!isModifierTrue(node.getModifiers(), "derived")); // An attribute is always contained
+		res.setIsComposite(!isModifierTrue(node.getModifiers(), "derived")); // An attribute is always contained
 		// isDerived :
-		res.setFIsDerived(isModifierTrue(node.getModifiers(), "derived"));
+		res.setIsDerived(isModifierTrue(node.getModifiers(), "derived"));
 		// isID :
-		res.setFIsID(isModifierTrue(node.getModifiers(), "id"));
+		res.setIsID(isModifierTrue(node.getModifiers(), "id"));
 		// isReadOnly :
-		res.setFIsReadOnly(isModifierTrue(node.getModifiers(), "readonly"));
+		res.setIsReadOnly(isModifierTrue(node.getModifiers(), "readonly"));
 		// isOrdered :
-		res.setFIsOrdered(isModifierTrue(node.getModifiers(), "ordered"));
+		res.setIsOrdered(isModifierTrue(node.getModifiers(), "ordered"));
 		// isUnique :
-		res.setFIsUnique(isModifierTrue(node.getModifiers(), "unique"));
+		res.setIsUnique(isModifierTrue(node.getModifiers(), "unique"));
 		// upper :
-		res.setFUpper(getUpper(node.getTypeRef()));
+		res.setUpper(getUpper(node.getTypeRef()));
 		// lower :
-		res.setFLower(getLower(node.getTypeRef()));
+		res.setLower(getLower(node.getTypeRef()));
 		// type : (A datatype)
-		res.setFType(getFTypeByRef(node.getTypeRef()));
+		res.setType(getFTypeByRef(node.getTypeRef()));
 		// opposite :
-		res.setFOpposite(null); // An attribute has no opposite
+		res.setOpposite(null); // An attribute has no opposite
 		// owningClass :
-		builder.current_class.getFOwnedAttributes().add(res);
+		builder.current_class.getOwnedAttribute().add(res);
 		
 		return super.beginVisit(node);
 	}
 
 	public boolean beginVisit(ClassDecl node) {
 		// create
-		builder.current_class = (FClassDefinition)builder.getModelElementByNode(node);
+		builder.current_class = (ClassDefinition)builder.getModelElementByNode(node);
 		// name
-		builder.current_class.setFName(node.getName().getText());
+		builder.current_class.setName(node.getName().getText());
 		// isAbstract
-		builder.current_class.setFIsAbstract(false); // By default it is false and it is changed in visitAbstractModifier if needed
+		builder.current_class.setIsAbstract(false); // By default it is false and it is changed in visitAbstractModifier if needed
 		// superClass
 		if (node.getSuperTypes() != null) {
 			ASTNode[] sts = node.getSuperTypes().getChildren();
 			for(int i=0; i<sts.length; i++) {
 				if (sts[i] instanceof QualifiedID) {
-					FType t = getFTypeByID((QualifiedID)sts[i]);
+					Type t = getFTypeByID((QualifiedID)sts[i]);
 					if (t == null) builder.messages.addError("Cannot resulve type " + qualifiedIDAsString((QualifiedID)sts[i]), null);
-					else builder.current_class.getFSuperType().add(t);
+					else builder.current_class.getSuperType().add(t);
 				}
 			}
 		}
@@ -132,9 +132,9 @@ public class ECore2KMPass3 extends ECore2KMPass {
 	}
 	
 	public boolean beginVisit(DataTypeDecl node) {
-		FPrimitiveType res = (FPrimitiveType)builder.getModelElementByNode(node);
+		PrimitiveType res = (PrimitiveType)builder.getModelElementByNode(node);
 		// Name
-		res.setFName(node.getName().getText());
+		res.setName(node.getName().getText());
 		// real type
 		StringLiteralOrQualifiedID id = node.getInstClassName();
 		String type_name = null;
@@ -145,54 +145,54 @@ public class ECore2KMPass3 extends ECore2KMPass {
 		else {
 			type_name = qualifiedIDAsString(((QualifiedIDContainer)id).getQualifiedID());
 		}
-		res.setFInstanceType(getFTypeByID(type_name));
+		res.setInstanceType(getFTypeByID(type_name));
 		return super.beginVisit(node);
 	}
 	
 	public boolean beginVisit(EnumDecl node) {
-		builder.current_enum = (FEnumeration)builder.getModelElementByNode(node);
+		builder.current_enum = (Enumeration)builder.getModelElementByNode(node);
 		// Name
-		builder.current_enum.setFName(node.getName().getText());
+		builder.current_enum.setName(node.getName().getText());
 		// ownedLitteral set by containement
 		return super.beginVisit(node);
 	}
 	public boolean beginVisit(EnumLiteral node) {
-		FEnumerationLiteral res = builder.struct_factory.createFEnumerationLiteral();
+		EnumerationLiteral res = builder.struct_factory.createEnumerationLiteral();
 		builder.storeTrace(res, node);
 		// Name
-		res.setFName(node.getName().getText());
+		res.setName(node.getName().getText());
 		// TODO : The value as an Annotation ?
-		builder.current_enum.getFOwnedLiteral().add(res);
+		builder.current_enum.getOwnedLiteral().add(res);
 		return super.beginVisit(node);
 	}
 
 	public boolean beginVisit(Operation node) {
 		// Create the operation:
-		builder.current_operation = builder.struct_factory.createFOperation();
+		builder.current_operation = builder.struct_factory.createOperation();
 		builder.storeTrace(builder.current_operation, node);
 		// Name
-		builder.current_operation.setFName(node.getName().getText());
+		builder.current_operation.setName(node.getName().getText());
 		// isOrdered :
-		builder.current_operation.setFIsOrdered(isModifierTrue(node.getModifiers(), "ordered"));
+		builder.current_operation.setIsOrdered(isModifierTrue(node.getModifiers(), "ordered"));
 		// isUnique :
-		builder.current_operation.setFIsUnique(isModifierTrue(node.getModifiers(), "unique"));
+		builder.current_operation.setIsUnique(isModifierTrue(node.getModifiers(), "unique"));
 		// upper :
-		builder.current_operation.setFUpper(getUpper(node.getTypeRef()));
+		builder.current_operation.setUpper(getUpper(node.getTypeRef()));
 		// lower :
-		builder.current_operation.setFLower(getLower(node.getTypeRef()));
+		builder.current_operation.setLower(getLower(node.getTypeRef()));
 		// type :
-		builder.current_operation.setFType(getFTypeByRef(node.getTypeRef()));
+		builder.current_operation.setType(getFTypeByRef(node.getTypeRef()));
 		// Exceptions
 		if (node.getExceptions() != null) {
 			ASTNode[] exceptions = node.getExceptions().getChildren();
 			for(int i=0; i<exceptions.length; i++) {
 				if (exceptions[i] instanceof QualifiedID) {
-					builder.current_operation.getFRaisedException().add(getFTypeByID((QualifiedID)exceptions[i]));
+					builder.current_operation.getRaisedException().add(getFTypeByID((QualifiedID)exceptions[i]));
 				}
 			}
 		}
 		// owningClass :
-		builder.current_class.getFOwnedOperation().add(builder.current_operation);
+		builder.current_class.getOwnedOperation().add(builder.current_operation);
 		// ownedParameter added while visiting  containement
 		//System.out.println("  Operation : " + node.getName().getText());
 		return super.beginVisit(node);
@@ -211,7 +211,7 @@ public class ECore2KMPass3 extends ECore2KMPass {
 	 * @see com.ibm.eclipse.emfatic.core.ast.EmfaticASTNodeVisitor#beginVisit(com.ibm.eclipse.emfatic.core.ast.SubPackageDecl)
 	 */
 	public boolean beginVisit(SubPackageDecl node) {
-		 builder.current_package = (FPackage)builder.getModelElementByNode(node);
+		 builder.current_package = (Package)builder.getModelElementByNode(node);
 		return super.beginVisit(node);
 	}
 	
@@ -219,27 +219,27 @@ public class ECore2KMPass3 extends ECore2KMPass {
 	 * @see com.ibm.eclipse.emfatic.core.ast.EmfaticASTNodeVisitor#endVisit(com.ibm.eclipse.emfatic.core.ast.SubPackageDecl)
 	 */
 	public void endVisit(SubPackageDecl arg0) {
-		builder.current_package = builder.current_package.getFNestingPackage();
+		builder.current_package = builder.current_package.getNestingPackage();
 		super.endVisit(arg0);
 	}
 	public boolean beginVisit(Param node) {
 		// Create the parameter :
-		FParameter res = builder.struct_factory.createFParameter();
+		Parameter res = builder.struct_factory.createParameter();
 		builder.storeTrace(res, node);
 		// Name
-		res.setFName(node.getName().getText());
+		res.setName(node.getName().getText());
 		// isOrdered :
-		res.setFIsOrdered(isModifierTrue(node.getModifiers(), "ordered"));
+		res.setIsOrdered(isModifierTrue(node.getModifiers(), "ordered"));
 		// isUnique :
-		res.setFIsUnique(isModifierTrue(node.getModifiers(), "unique"));
+		res.setIsUnique(isModifierTrue(node.getModifiers(), "unique"));
 		// upper :
-		res.setFUpper(getUpper(node.getTypeRef()));
+		res.setUpper(getUpper(node.getTypeRef()));
 		// lower :
-		res.setFLower(getLower(node.getTypeRef()));
+		res.setLower(getLower(node.getTypeRef()));
 		// type :
-		res.setFType(getFTypeByRef(node.getTypeRef()));
+		res.setType(getFTypeByRef(node.getTypeRef()));
 		// Operation:
-		builder.current_operation.getFOwnedParameter().add(res);
+		builder.current_operation.getOwnedParameter().add(res);
 		
 		return super.beginVisit(node);
 	}
@@ -247,35 +247,35 @@ public class ECore2KMPass3 extends ECore2KMPass {
 	public boolean beginVisit(Reference node) {
 		//System.out.println("  Reference : " + node.getName().getText() );
 		// Create the corresponding property
-		FProperty res = builder.struct_factory.createFProperty();
+		Property res = builder.struct_factory.createProperty();
 		builder.storeTrace(res, node);
 		// name :
-		res.setFName(node.getName().getText());
+		res.setName(node.getName().getText());
 		// default : (no default for a reference)
-		res.setFDefault(null);
+		res.setDefault(null);
 		// isComposite : 
 		if (node.getReferenceKind().getText().equals("val")) { // containement = true
-			res.setFIsComposite(true);
+			res.setIsComposite(true);
 		}
 		else { // containement = false
-			res.setFIsComposite(false);
+			res.setIsComposite(false);
 		}
 		// isDerived :
-		res.setFIsDerived(isModifierTrue(node.getModifiers(), "derived"));
+		res.setIsDerived(isModifierTrue(node.getModifiers(), "derived"));
 		// isID :
-		res.setFIsID(isModifierTrue(node.getModifiers(), "id"));
+		res.setIsID(isModifierTrue(node.getModifiers(), "id"));
 		// isReadOnly :
-		res.setFIsReadOnly(isModifierTrue(node.getModifiers(), "readonly"));
+		res.setIsReadOnly(isModifierTrue(node.getModifiers(), "readonly"));
 		// isOrdered :
-		res.setFIsOrdered(isModifierTrue(node.getModifiers(), "ordered"));
+		res.setIsOrdered(isModifierTrue(node.getModifiers(), "ordered"));
 		// isUnique :
-		res.setFIsUnique(isModifierTrue(node.getModifiers(), "unique"));
+		res.setIsUnique(isModifierTrue(node.getModifiers(), "unique"));
 		// upper :
-		res.setFUpper(getUpper(node.getTypeRef()));
+		res.setUpper(getUpper(node.getTypeRef()));
 		// lower :
-		res.setFLower(getLower(node.getTypeRef()));
+		res.setLower(getLower(node.getTypeRef()));
 		// type : (A datatype)
-		res.setFType(getFTypeByRef(node.getTypeRef()));
+		res.setType(getFTypeByRef(node.getTypeRef()));
 		// opposite :
 		//if (node.getOppositeName() != null) { // there is an opposite
 			// It can't be done here because the opposite property might not have been created yet
@@ -289,7 +289,7 @@ public class ECore2KMPass3 extends ECore2KMPass {
 //			res.setFOpposite(null);
 		
 		// owningClass :
-		builder.current_class.getFOwnedAttributes().add(res);
+		builder.current_class.getOwnedAttribute().add(res);
 		
 		return super.beginVisit(node);
 	}
@@ -305,7 +305,7 @@ public class ECore2KMPass3 extends ECore2KMPass {
 		return false;
 	}
 	
-	protected FType getFTypeByRef(TypeRef ref) {
+	protected Type getFTypeByRef(TypeRef ref) {
 		QualifiedID qid = ref.getName();
 		return getFTypeByID(qid);
 	}

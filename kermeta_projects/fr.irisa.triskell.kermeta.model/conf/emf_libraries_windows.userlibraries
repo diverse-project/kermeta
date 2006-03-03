@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eclipse-userlibraries version="1">
     <library name="emf_libraries" systemlibrary="false">
-        <archive path="C:/eclipse3.1/eclipse/plugins/org.eclipse.emf.common_2.1.0.jar"/>
-        <archive path="C:/eclipse3.1/eclipse/plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
-        <archive path="C:/eclipse3.1/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
+        <archive path="C:/eclipse3.1.1/eclipse/plugins/org.eclipse.emf.common_2.1.0.jar"/>
+        <archive path="C:/eclipse3.1.1/eclipse/plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
+        <archive path="C:/eclipse3.1.1/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
     </library>
 </eclipse-userlibraries>

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.15 2005-07-19 15:27:09 zdrey Exp $
+/* $Id: KMT2KMPass7.java,v 1.16 2006-03-03 15:22:18 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -23,12 +23,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Stack;
+//import java.util.ArrayList;
+//import java.util.Stack;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
+//import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
@@ -51,23 +51,23 @@ import fr.irisa.triskell.kermeta.ast.Param;
 import fr.irisa.triskell.kermeta.ast.Property;
 import fr.irisa.triskell.kermeta.ast.Tag;
 import fr.irisa.triskell.kermeta.ast.TopLevelDecl;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTag;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FOperation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+//import fr.irisa.triskell.kermeta.language.structure.FProperty;
+//import fr.irisa.triskell.kermeta.language.structure.Tag;
 
 /**
  * Pass that adds the comments (annotations) as tags of a model element (class, assignment,
  * operation).
  * How does it work :
  * 	- each grammar rule (see kermeta.ast) that is a sequence containing a annotationLst list 
- * corresponds to a model element that is "allowed" to contain Tags (FTag kermeta elements). So, for 
+ * corresponds to a model element that is "allowed" to contain Tags (Tag kermeta elements). So, for 
  * such model elements, we implement a specific visit() method. 
  */
 public class KMT2KMPass7 extends KMT2KMPass {
@@ -91,7 +91,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(PackageDecl packageDecl) {
 	    Annotations annLst = packageDecl.getAnnotations();
-	    FNamedElement element = (FNamedElement)builder.getModelElementByNode(packageDecl);
+	    NamedElement element = (NamedElement)builder.getModelElementByNode(packageDecl);
 	    processAnnotations(annLst, element);
 	    return super.beginVisit(packageDecl);
 	        
@@ -105,19 +105,19 @@ public class KMT2KMPass7 extends KMT2KMPass {
         
         Annotations annLst = node.getAnnotations();
         KermetaASTNode annNode = node.getClassMemberDecl();
-        FObject e = null;
+        fr.irisa.triskell.kermeta.language.structure.Object e = null;
         String name = "";
         if (annNode instanceof Operation)
         {   
             name = ((Operation)annNode).getName().getText();
             e = builder.findOperationByName(builder.current_class, name);
-            builder.current_operation = (FOperation) e;
+            builder.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation) e;
         }
         else
         {	
        	    name = ((Property)annNode).getName().getText();
             e = builder.findPropertyByName(builder.current_class, name);
-            builder.current_property = (FProperty) e;
+            builder.current_property = (fr.irisa.triskell.kermeta.language.structure.Property) e;
         }
         if (e != null) // we should have found the object however...
             processAnnotations(annLst, e);
@@ -131,7 +131,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
     public boolean beginVisit(FAssignement fAssignment) {
         
         Annotations annLst = fAssignment.getAnnotations();
-        processAnnotationsForFExpression(annLst, null);
+        processAnnotationsForExpression(annLst, null);
         return super.beginVisit(fAssignment);
     }
     
@@ -139,7 +139,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
     {
      //   Annotations annLst = block.getBlockAnnotations();
       //  System.err.println("a block : "+annLst.getChildCount());
-      //  processAnnotationsForFExpression(annLst, null);
+      //  processAnnotationsForExpression(annLst, null);
         return super.beginVisit(block);
     }
     
@@ -150,14 +150,14 @@ public class KMT2KMPass7 extends KMT2KMPass {
     public boolean beginVisit(Param node)
     {
         Annotations annLst = node.getAnnotations();
-        processAnnotationsForFExpression(annLst, null);
+        processAnnotationsForExpression(annLst, null);
         return false;
     }
     
     /** To be depr. */
     public boolean beginVisit(EnumLiteral node)
     {        Annotations annLst = node.getAnnotations();
-            processAnnotationsForFExpression(annLst, null);
+            processAnnotationsForExpression(annLst, null);
             return false;
      
     }
@@ -166,7 +166,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.OperationExpressionBody)
 	 */
 	public boolean beginVisit(OperationExpressionBody operationExpressionBody) {
-		String qname = builder.getQualifiedName(builder.current_operation);
+		//String qname = builder.getQualifiedName(builder.current_operation);
 		return false;
 	}
 
@@ -204,21 +204,21 @@ public class KMT2KMPass7 extends KMT2KMPass {
         Annotations annLst = topLevelDecl.getAnnotations();
         // Get the annotable element associated
         AnnotableElement annElt = topLevelDecl.getAnnotableElement();
-        FNamedElement e = (FNamedElement)builder.getModelElementByNode(annElt);
+        NamedElement e = (NamedElement)builder.getModelElementByNode(annElt);
 	    // Add the found annotations to this element
-        if (e instanceof FClassDefinition)
+        if (e instanceof ClassDefinition)
         {
-            builder.current_class = (FClassDefinition)e;
+            builder.current_class = (ClassDefinition)e;
             processAnnotations(annLst, e);
         }
-        else if (e instanceof FPackage)
+        else if (e instanceof Package)
         {
-            builder.current_package = (FPackage)e;
+            builder.current_package = (Package)e;
             processAnnotations(annLst, e);
         }
-        else if (e instanceof FPrimitiveType)
+        else if (e instanceof PrimitiveType)
         {
-            FPrimitiveType ptype = (FPrimitiveType)builder.getModelElementByNode(annElt);
+            PrimitiveType ptype = (PrimitiveType)builder.getModelElementByNode(annElt);
             processAnnotations(annLst, ptype);
         }
 	    
@@ -266,7 +266,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	 * @param a
 	 * @return
 	 */
-	public FTag createFTagFromAnnotation(Annotation a)
+	public fr.irisa.triskell.kermeta.language.structure.Tag createFTagFromAnnotation(Annotation a)
 	{
 	    String tag_value = "";
         String tag_name = KERMETADOC;
@@ -279,27 +279,27 @@ public class KMT2KMPass7 extends KMT2KMPass {
         {
             tag_value = a.getFirstChild().getText();
         }
-	    FTag tag = builder.struct_factory.createFTag();
-	    tag.setFName(tag_name);
-        tag.setFValue(tag_value);
+        fr.irisa.triskell.kermeta.language.structure.Tag tag = builder.struct_factory.createTag();
+	    tag.setName(tag_name);
+        tag.setValue(tag_value);
 	    return tag;
 	}
 	
 	/**
-	 * Create a list of FTags from annLst, add it to the current_class tags and
+	 * Create a list of Tags from annLst, add it to the current_class tags and
      * to the builder tag list.
 	 * @param annLst the list of annotations to process
 	 * @param annType the name of the tag that will be defined with annotations text 
 	 * (in @annType annotation)
 	 * @param refnode
 	 */
-	protected void processAnnotations(Annotations annLst, FObject element)
+	protected void processAnnotations(Annotations annLst, fr.irisa.triskell.kermeta.language.structure.Object element)
 	{
 	    String tag_name = KERMETADOC;
 	    String tag_value = null;
 	    
 	   // Resource resource;
-	    FTag tag = null;
+	    fr.irisa.triskell.kermeta.language.structure.Tag tag = null;
 	    int i = 0;
 	    // tagStack.push(tag)? // 
 	    if (annLst!=null && annLst.hasChildren())
@@ -307,8 +307,8 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    	for (i=0; i<annLst.getChildCount();i++)
 	    	{
 	    		Annotation a = (Annotation)annLst.getChild(i);
-	    		// Create the FTag in kcore repr.
-    			tag = builder.struct_factory.createFTag();
+	    		// Create the Tag in kcore repr.
+    			tag = builder.struct_factory.createTag();
 	    		if (Tag.class.isInstance(a))
 	    		{
 	    			tag_name  = ((Tag)a).getName().getFirstChild().getText();
@@ -321,29 +321,29 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    			tag_value  = ((ContextMultiLineComment)a).getFirstChild().getText();
 	    		}
 	    		
-	    		tag.setFName(tag_name);
-    			tag.setFValue(tag_value);
-	    		element.getFTag().add(tag);
+	    		tag.setName(tag_name);
+    			tag.setValue(tag_value);
+	    		element.getTag().add(tag);
 	    	}
 	    }
 	}
 	
 	
 	/**
-	 * Create a list of FTags from annLst, add it to the current_class tags and
+	 * Create a list of Tags from annLst, add it to the current_class tags and
      * to the builder tag list.
 	 * @param annLst the list of annotations to process
 	 * @param annType the name of the tag that will be defined with annotations text 
 	 * (in @annType annotation)
 	 * @param refnode
 	 */
-	protected void processAnnotationsForFExpression(Annotations annLst, FExpression element)
+	protected void processAnnotationsForExpression(Annotations annLst, Expression element)
 	{
 	    String tag_name = KERMETADOC;
 	    String tag_value = null;
 	    
 	   // Resource resource;
-	    FTag tag = null;
+	    fr.irisa.triskell.kermeta.language.structure.Tag tag = null;
 	    int i = 0;
 	    // tagStack.push(tag)? // 
 	    if (annLst!=null && annLst.hasChildren())
@@ -351,8 +351,8 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    	for (i=0; i<annLst.getChildCount();i++)
 	    	{
 	    		Annotation a = (Annotation)annLst.getChild(i);
-	    		// Create the FTag in kcore repr.
-    			tag = builder.struct_factory.createFTag();
+	    		// Create the Tag in kcore repr.
+    			tag = builder.struct_factory.createTag();
 	    		if (Tag.class.isInstance(a))
 	    		{
 	    			tag_name  = ((Tag)a).getName().getFirstChild().getText();
@@ -364,9 +364,9 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	    		    tag_name = KERMETADOC;
 	    			tag_value  = ((ContextMultiLineComment)a).getFirstChild().getText();
 	    		}
-	    		tag.setFName(tag_name);
-    			tag.setFValue(tag_value);
-	    		//element.getFTag().add(tag);
+	    		tag.setName(tag_name);
+    			tag.setValue(tag_value);
+	    		//element.getTag().add(tag);
 	    	}
 	    }
 	}

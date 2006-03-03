@@ -6,10 +6,10 @@
 package fr.irisa.triskell.kermeta.loader.km;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -30,22 +30,22 @@ public class KMLoader extends KermetaVisitor {
         this.unit = unit;
     }
     
-    public Object visit(FClassDefinition node) {
+    public Object visit(ClassDefinition node) {
         unit.typeDefs.put(unit.getQualifiedName(node), node);
         return null;
     }
-    public Object visit(FEnumeration node) {
+    public Object visit(Enumeration node) {
         unit.typeDefs.put(unit.getQualifiedName(node), node);
         return null;
     }
-    public Object visit(FPackage node) {
+    public Object visit(Package node) {
         if (unit.rootPackage == null) {
             unit.rootPackage = node;
         }
         unit.packages.put(unit.getQualifiedName(node), node);
         return super.visit(node);
     }
-    public Object visit(FPrimitiveType node) {
+    public Object visit(PrimitiveType node) {
         unit.typeDefs.put(unit.getQualifiedName(node), node);
         return null;
     }

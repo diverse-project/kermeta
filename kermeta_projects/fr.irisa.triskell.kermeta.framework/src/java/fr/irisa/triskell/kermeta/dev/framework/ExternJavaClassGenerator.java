@@ -1,4 +1,4 @@
-/* $Id: ExternJavaClassGenerator.java,v 1.9 2005-09-15 12:45:32 dvojtise Exp $
+/* $Id: ExternJavaClassGenerator.java,v 1.10 2006-03-03 15:21:25 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExternJavaClassGenerator.java
  * License : GPL
@@ -25,11 +25,11 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 
-import fr.irisa.triskell.kermeta.behavior.FJavaStaticCall;
+import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -60,7 +60,7 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 		if (unit.messages.unitHasError) {
 			System.out.println(unit.messages.getErrors().size() + " Load error : " + unit.messages.getMessagesAsString());
 		}
-		FPackage pkg = (FPackage)unit.packageLookup("kermeta");
+		Package pkg = (Package)unit.packageLookup("kermeta");
 		this.accept(pkg);
 		Enumeration e = classes.keys();
 		while(e.hasMoreElements()) {
@@ -81,11 +81,11 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 		String methods = "";
 		ArrayList mths = (ArrayList)classes.get(qname);
 		for(int i=0; i<mths.size(); i++) {
-			FJavaStaticCall node = (FJavaStaticCall)mths.get(i);
+			JavaStaticCall node = (JavaStaticCall)mths.get(i);
 			String method = getMTemplate();
-			method = method.replaceAll("METHODNAME", node.getFJmethod());
+			method = method.replaceAll("METHODNAME", node.getJmethod());
 			String params = "";
-			for(int k=0; k<node.getFParameters().size(); k++) {
+			for(int k=0; k<node.getParameters().size(); k++) {
 				params += ", KermetaObject param"+k;
 			}
 			method = method.replaceAll("MPARAMS", params);
@@ -137,11 +137,11 @@ public class ExternJavaClassGenerator extends KermetaVisitor {
 	
 
 	/**
-	 * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FJavaStaticCall)
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall)
 	 */
-	public Object visit(FJavaStaticCall node) {
+	public Object visit(JavaStaticCall node) {
 		//System.out.println("node : " + node);
-		String cname = node.getFJclass();
+		String cname = node.getJclass();
 		cname = cname.replaceAll("::", ".");
 		ArrayList listmeth = (ArrayList)classes.get(cname);
 		if (listmeth == null) {

@@ -1,4 +1,4 @@
-/* $Id: KMUnit.java,v 1.10 2005-11-28 12:32:50 dvojtise Exp $
+/* $Id: KMUnit.java,v 1.11 2006-03-03 15:22:19 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : 	KMUnit.java
 * License : EPL
@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * @author Franck Fleurey
@@ -75,7 +75,7 @@ public class KMUnit extends KermetaUnit {
 			KMLoader visitor = new KMLoader(this);
 			TreeIterator it = resource.getAllContents();
 			while(it.hasNext()) {
-				FObject o = (FObject)it.next();
+				fr.irisa.triskell.kermeta.language.structure.Object o = (fr.irisa.triskell.kermeta.language.structure.Object)it.next();
 				visitor.accept(o);
 			}
 			

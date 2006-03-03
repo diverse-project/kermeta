@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessage.java,v 1.4 2005-11-28 12:32:50 dvojtise Exp $
+/* $Id: KMUnitMessage.java,v 1.5 2006-03-03 15:22:19 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMUnitMessage.java
  * License : EPL
@@ -13,25 +13,25 @@ package fr.irisa.triskell.kermeta.loader;
 
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * Represents a message in a Kermeta Unit
- * The message can be related to a FObject node and/or to an AST node 
+ * The message can be related to a fr.irisa.triskell.kermeta.language.structure.Object node and/or to an AST node 
  */
 public class KMUnitMessage {
 
 	
 	protected String message;
-	protected FObject node;
+	protected fr.irisa.triskell.kermeta.language.structure.Object node;
 	protected KermetaASTNode astn;
 	
-	public KMUnitMessage(String message, FObject node, KermetaASTNode astnode) {
+	public KMUnitMessage(String message, fr.irisa.triskell.kermeta.language.structure.Object node, KermetaASTNode astnode) {
 		this.message = message;
 		this.node = node;
 		this.astn = astnode;
 	}
-	public KMUnitMessage(String message, FObject node) {
+	public KMUnitMessage(String message, fr.irisa.triskell.kermeta.language.structure.Object node) {
 		this.message = message;
 		this.node = node;
 	}
@@ -50,7 +50,7 @@ public class KMUnitMessage {
 	/**
 	 * @return Returns the node.
 	 */
-	public FObject getNode() {
+	public fr.irisa.triskell.kermeta.language.structure.Object getNode() {
 		return node;
 	}
 	

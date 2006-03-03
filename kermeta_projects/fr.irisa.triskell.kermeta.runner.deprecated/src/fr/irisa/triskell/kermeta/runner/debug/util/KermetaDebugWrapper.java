@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugWrapper.java,v 1.16 2006-02-22 12:55:34 zdrey Exp $
+/* $Id: KermetaDebugWrapper.java,v 1.17 2006-03-03 15:23:35 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugWrapper.java
  * License   : EPL
@@ -9,15 +9,10 @@
  */
 package fr.irisa.triskell.kermeta.runner.debug.util;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.Stack;
 
 
@@ -33,9 +28,9 @@ import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableCal
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableValue;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableVariable;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.traceability.TextReference;
 import fr.irisa.triskell.traceability.helper.Tracer;
@@ -85,14 +80,14 @@ public class KermetaDebugWrapper {
 				CallFrame kframe = (CallFrame)framearray[i-1];
 				// The case "operation == null" occurs for frame of the main operation 
 				// since it is not executed as a "CallFeature" but as an "FOperation".
-				FObject origin = getFrameObject(kframe);
+				fr.irisa.triskell.kermeta.language.structure.Object origin = getFrameObject(kframe);
 				//if (operation == null)
 				Tracer tracer = interpreter.getMemory().getUnit().getTracer();
 				TextReference ref = tracer.getFirstTextReference(origin);
 				
 				// The current expression that is processed?
-				//FObject current_node = (FObject)interpreter.getInterpreterContext().peekCallFrame().getExpression();
-				FObject current_node = (FObject)interpreter.getDebugCondition().getCurrentNode();
+				//fr.irisa.triskell.kermeta.language.structure.Object current_node = (fr.irisa.triskell.kermeta.language.structure.Object)interpreter.getInterpreterContext().peekCallFrame().getExpression();
+				fr.irisa.triskell.kermeta.language.structure.Object current_node = (fr.irisa.triskell.kermeta.language.structure.Object)interpreter.getDebugCondition().getCurrentNode();
 				TextReference node_ref = null; 
 				if (tracer != null)
 					node_ref = tracer.getFirstTextReference(current_node);
@@ -154,9 +149,9 @@ public class KermetaDebugWrapper {
 	 * - if it is a LambdaCallFrame : TODO
 	 * - if it is ...
 	 * */
-	protected static FObject getFrameObject(CallFrame frame)
+	protected static fr.irisa.triskell.kermeta.language.structure.Object getFrameObject(CallFrame frame)
 	{
-		FObject result = null;
+		fr.irisa.triskell.kermeta.language.structure.Object result = null;
 		if (frame instanceof OperationCallFrame)
 		{
 			OperationCallFrame oframe = (OperationCallFrame)frame;
@@ -245,7 +240,7 @@ public class KermetaDebugWrapper {
 		else
 		{
 			String qname = 
-				KMTHelper.getQualifiedName((FNamedElement)((FClass)ro.getMetaclass().getData().get("kcoreObject")).getFTypeDefinition());
+				KMTHelper.getQualifiedName((NamedElement)((fr.irisa.triskell.kermeta.language.structure.Class)ro.getMetaclass().getData().get("kcoreObject")).getTypeDefinition());
 			if (qname.equals("kermeta::standard::String")) {
 				result[0] = "\"" + data.get("StringValue").toString() + "\"";
 			} else if (qname.equals("kermeta::standard::Integer")) {

@@ -1,4 +1,4 @@
-/* $Id: CallOperationCompletionItem.java,v 1.1 2005-05-10 20:38:27 ffleurey Exp $
+/* $Id: CallOperationCompletionItem.java,v 1.2 2006-03-03 15:23:52 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : CallPropertyCompletionItem.java
 * License : GPL
@@ -14,10 +14,10 @@ import java.util.Iterator;
 
 import org.eclipse.swt.graphics.Image;
 
-import fr.irisa.triskell.kermeta.structure.FFunctionType;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.FTypePrettyPrinter;
 
@@ -39,19 +39,19 @@ public class CallOperationCompletionItem extends CompletionItem {
     public CallOperationCompletionItem(CallableOperation operation) {
         this.operation = operation;
         
-        if (operation.getOperation().getFOwnedParameter().size() == 0) {
+        if (operation.getOperation().getOwnedParameter().size() == 0) {
             completionText = operation.getName();
             cursorLocation = completionText.length();
         }
         else {
-            FParameter p1 = (FParameter)operation.getTypeBoundedOperation().getFOwnedParameter().get(0);
-            if (operation.getOperation().getFOwnedParameter().size() == 1 && p1.getFType() instanceof FFunctionType) {
-                FType left = ((FFunctionType)p1.getFType()).getFLeft();
+            Parameter p1 = (Parameter)operation.getTypeBoundedOperation().getOwnedParameter().get(0);
+            if (operation.getOperation().getOwnedParameter().size() == 1 && p1.getType() instanceof FunctionType) {
+                Type left = ((FunctionType)p1.getType()).getLeft();
                 String params = "";
-                if (left instanceof FProductType) {
-                    Iterator it = ((FProductType)left).getFType().iterator();
+                if (left instanceof ProductType) {
+                    Iterator it = ((ProductType)left).getType().iterator();
                     while(it.hasNext()) {
-                        String s = (String)FTypePrettyPrinter.getInstance().accept((FType)it.next());
+                        String s = (String)FTypePrettyPrinter.getInstance().accept((Type)it.next());
                         params += s.substring(0, 1).toLowerCase();
                         if (it.hasNext()) params += ", ";
                     }

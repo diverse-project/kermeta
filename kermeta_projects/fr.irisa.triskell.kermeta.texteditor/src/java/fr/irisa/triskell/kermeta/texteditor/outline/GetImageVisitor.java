@@ -5,26 +5,21 @@
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
-import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
 import fr.irisa.triskell.kermeta.texteditor.icons.green.KermetaIconsGreen;
 import fr.irisa.triskell.kermeta.texteditor.icons.red.KermetaIconsRed;
 import fr.irisa.triskell.kermeta.texteditor.icons.yellow.KermetaIconsYellow;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 
 
@@ -59,25 +54,25 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 		return null;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
-	public Object visitFClassDefinition(FClassDefinition arg0) {
+	public Object visitClassDefinition(ClassDefinition arg0) {
 	   
 	    if (item.isTypeDefinitionImported()) {
-	        if (arg0.isFIsAbstract()) return KermetaIconsBlue.CLASS_ABSTRACT;
+	        if (arg0.isIsAbstract()) return KermetaIconsBlue.CLASS_ABSTRACT;
 			return KermetaIconsBlue.CLASS;
 	    }
 	    else {
-	        if (arg0.isFIsAbstract()) return KermetaIconsRed.CLASS_ABSTRACT;
+	        if (arg0.isIsAbstract()) return KermetaIconsRed.CLASS_ABSTRACT;
 			return KermetaIconsRed.CLASS;
 	    }
 	    
 		
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumeration)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)
 	 */
-	public Object visitFEnumeration(FEnumeration arg0) {
+	public Object visitEnumeration(Enumeration arg0) {
 	    if (item.isTypeDefinitionImported()) {
 	        return KermetaIconsBlue.ENUM;
 	    }
@@ -86,9 +81,9 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	    }
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumerationLiteral)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.EnumerationLiteral)
 	 */
-	public Object visitFEnumerationLiteral(FEnumerationLiteral arg0) {
+	public Object visitEnumerationLiteral(EnumerationLiteral arg0) {
 	    if (item.parent.isTypeDefinitionImported()) {
 	        return KermetaIconsBlue.ENUM_LIT;
 	    }
@@ -100,11 +95,11 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visitFOperation(FOperation arg0) {
+	public Object visitOperation(Operation arg0) {
 	    
 	    if (item.isOperationInherited()) {
-            if (arg0.isFIsAbstract()) return KermetaIconsYellow.OPERATION_ABSTRACT;
-    		if (arg0.getFSuperOperation() != null) return KermetaIconsYellow.METHOD;
+            if (arg0.isIsAbstract()) return KermetaIconsYellow.OPERATION_ABSTRACT;
+    		if (arg0.getSuperOperation() != null) return KermetaIconsYellow.METHOD;
     		return KermetaIconsYellow.OPERATION;
 	    }
 	    /*
@@ -114,18 +109,18 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
     		return KermetaIconsBlue.OPERATION;
 	    }
 	    */
-	    if (arg0.isFIsAbstract()) return KermetaIconsGreen.OPERATION_ABSTRACT;
-		if (arg0.getFSuperOperation() != null) return KermetaIconsGreen.METHOD;
+	    if (arg0.isIsAbstract()) return KermetaIconsGreen.OPERATION_ABSTRACT;
+		if (arg0.getSuperOperation() != null) return KermetaIconsGreen.METHOD;
 		return KermetaIconsGreen.OPERATION;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPackage)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
-	public Object visitFPackage(FPackage arg0) {
+	public Object visitPackage(Package arg0) {
 	    boolean one = false;
 	    boolean all = true;
 	    
-	    if (arg0.getFOwnedTypeDefinition().size() == 0) {
+	    if (arg0.getOwnedTypeDefinition().size() == 0) {
 	        return KermetaSpecialIcons.PACKAGE_GRAY;
 	    }
 	    
@@ -134,9 +129,9 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	    else return KermetaSpecialIcons.PACKAGE_BLUE_RED;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
-	public Object visitFPrimitiveType(FPrimitiveType arg0) {
+	public Object visitPrimitiveType(PrimitiveType arg0) {
 	    if (item.isTypeDefinitionImported()) {
 	        return KermetaIconsBlue.DATATYPE;
 	    }
@@ -145,19 +140,19 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	    }
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
-	public Object visitFProperty(FProperty node) {
+	public Object visitProperty(Property node) {
 
 	    if (item.isPropertyInherited()) {
-	        if (node.isFIsComposite()) return KermetaIconsYellow.PROPERTY_CONTAINED;
-    		if (node.isFIsDerived()) return KermetaIconsYellow.PROPERTY_DERIVED;
+	        if (node.isIsComposite()) return KermetaIconsYellow.PROPERTY_CONTAINED;
+    		if (node.isIsDerived()) return KermetaIconsYellow.PROPERTY_DERIVED;
     		return KermetaIconsYellow.PROPERTY;
     	
 	    }
 	    
-	    if (node.isFIsComposite()) return KermetaIconsGreen.PROPERTY_CONTAINED;
-		if (node.isFIsDerived()) return KermetaIconsGreen.PROPERTY_DERIVED;
+	    if (node.isIsComposite()) return KermetaIconsGreen.PROPERTY_CONTAINED;
+		if (node.isIsDerived()) return KermetaIconsGreen.PROPERTY_DERIVED;
 		return KermetaIconsGreen.PROPERTY;
 	}
 	

@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.6 2006-02-24 13:55:40 zdrey Exp $
+/* $Id: Object.java,v 1.7 2006-03-03 15:21:47 dvojtise Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -21,11 +21,12 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
-import fr.irisa.triskell.kermeta.structure.FClass;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 /**
- *  Implementation of Kermeta base type Object.
+ *  Implementation of Kermeta base type Object
+ *  This act as a wrapper to the concrete java runtime object in memory 
  *  Each methods takes as its first parameter the runtime object corresponding to self object
  *  in kermeta call
  */
@@ -117,14 +118,14 @@ public class Object {
         if (container == null) return;
         
         // Find the property in which the object is stoted
-        FClass containerClass = (FClass)container.getMetaclass().getData().get("kcoreObject");
+        fr.irisa.triskell.kermeta.language.structure.Class containerClass = (fr.irisa.triskell.kermeta.language.structure.Class)container.getMetaclass().getData().get("kcoreObject");
         
         Iterator it = InheritanceSearch.callableProperties(containerClass).iterator();
         while (it.hasNext()) {
             CallableProperty cp = (CallableProperty)it.next();
-            if (cp.getProperty().isFIsComposite()) {
-                java.lang.String pname = cp.getProperty().getFName();
-                if (cp.getProperty().getFUpper() == 1) {
+            if (cp.getProperty().isIsComposite()) {
+                java.lang.String pname = cp.getProperty().getName();
+                if (cp.getProperty().getUpper() == 1) {
                     if (container.getProperties().get(pname) == object) {
                         RuntimeObject prop = container.getFactory().getMemory().getRuntimeObjectForFObject(cp.getProperty());
                         unSet(container, prop);

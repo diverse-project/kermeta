@@ -5,12 +5,12 @@
 package fr.irisa.triskell.kermeta.texteditor.completion;
 
 import java.util.ArrayList;
-import java.util.Collections;
+//import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.contentassist.CompletionProposal;
+//import org.eclipse.jface.text.contentassist.CompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
@@ -19,19 +19,18 @@ import org.eclipse.swt.graphics.Point;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.ast.KermetaTokenNode;
+//import fr.irisa.triskell.kermeta.ast.KermetaTokenNode;
 import fr.irisa.triskell.kermeta.ast.ParamPostfix;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
-import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-import fr.irisa.triskell.kermeta.structure.FFunctionType;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
-import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
+//import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
@@ -83,22 +82,22 @@ public class EditorCompletion implements IContentAssistProcessor {
 		        TexteditorPlugin.pluginLog.info(" * Completion astnode -> " + astnode);
 		        
 		        if (astnode != null) {
-		            FObject obj = getFObjectForNode(astnode);
+		            fr.irisa.triskell.kermeta.language.structure.Object obj = getFObjectForNode(astnode);
 		            TexteditorPlugin.pluginLog.info(" * Completion FObject -> " + obj);
 		            
 		            
-		            if (obj != null && obj instanceof FLambdaExpression) {
-		                FLambdaExpression lexp = (FLambdaExpression)obj;
-		                if (lexp.eContainer() instanceof FCallFeature) obj = (FCallFeature)lexp.eContainer();
+		            if (obj != null && obj instanceof LambdaExpression) {
+		                LambdaExpression lexp = (LambdaExpression)obj;
+		                if (lexp.eContainer() instanceof CallFeature) obj = (CallFeature)lexp.eContainer();
 		                TexteditorPlugin.pluginLog.info(" * -> Completion FObject -> " + obj);
 		            }
 		            
 		            
-		            if (obj != null && obj instanceof FExpression && ((FExpression)obj).getFStaticType() != null) {
-		                Type t = new SimpleType(((FExpression)obj).getFStaticType());
+		            if (obj != null && obj instanceof Expression && ((Expression)obj).getStaticType() != null) {
+		                Type t = new SimpleType(((Expression)obj).getStaticType());
 		                TexteditorPlugin.pluginLog.info(" * Completion for type -> " + t);
 		                if (t != null) {
-	//		                if (((SimpleType)t).getType() instanceof FFunctionType) {
+	//		                if (((SimpleType)t).getType() instanceof FunctionType) {
 	//		                    t = t.getFunctionTypeRight();
 	//		                    TexteditorPlugin.pluginLog.info(" * Completion for type -> " + t);
 	//		                }
@@ -145,11 +144,11 @@ public class EditorCompletion implements IContentAssistProcessor {
 	    return result;
 	}
 	
-	 private FObject getFObjectForNode(KermetaASTNode node) {
+	 private fr.irisa.triskell.kermeta.language.structure.Object getFObjectForNode(KermetaASTNode node) {
 	        KermetaASTNode currentNode = node;
-	        FObject result = null;
+	        fr.irisa.triskell.kermeta.language.structure.Object result = null;
 	        while (result == null && currentNode != null) { 
-	            result = (FObject)editor.getMcunit().getModelElementByNode(currentNode);
+	            result = (fr.irisa.triskell.kermeta.language.structure.Object)editor.getMcunit().getModelElementByNode(currentNode);
 	            currentNode = (KermetaASTNode)currentNode.getParent();
 	        }
 	        return result;
@@ -276,10 +275,10 @@ public class EditorCompletion implements IContentAssistProcessor {
     private void addPrposalsForTypes(IDocument doc, int offset, ArrayList props, String begining) {
         Iterator it = editor.getMcunit().packages.values().iterator();
         while(it.hasNext()) {
-            FPackage p = (FPackage)it.next();
-            Iterator typeit = p.getFOwnedTypeDefinition().iterator();
+            Package p = (Package)it.next();
+            Iterator typeit = p.getOwnedTypeDefinition().iterator();
             while(typeit.hasNext()) {
-                FTypeDefinition td = (FTypeDefinition)typeit.next();
+                TypeDefinition td = (TypeDefinition)typeit.next();
                 
                 CompletionItem ci = new TypeCompletionItem(td);
                 

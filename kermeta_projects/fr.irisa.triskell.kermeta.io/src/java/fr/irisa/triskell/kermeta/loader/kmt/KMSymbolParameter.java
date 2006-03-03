@@ -4,11 +4,11 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
-import fr.irisa.triskell.kermeta.behavior.FCallVariable;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FParameter;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
 
 /**
  * @author Franck Fleurey
@@ -17,33 +17,33 @@ import fr.irisa.triskell.kermeta.structure.FParameter;
  */
 public class KMSymbolParameter extends KMSymbol {
 
-	protected FParameter parameter;
+	protected Parameter parameter;
 	
 	/**
 	 * @param id
 	 */
-	public KMSymbolParameter(FParameter param) {
-		super(param.getFName());
+	public KMSymbolParameter(Parameter param) {
+		super(param.getName());
 		parameter = param;
 	}
 
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#getFObject()
 	 */
-	public FObject getFObject() {
+	public fr.irisa.triskell.kermeta.language.structure.Object getFObject() {
 		return parameter;
 	}
 
 	/**
 	 * @return Returns the parameter.
 	 */
-	public FParameter getParameter() {
+	public Parameter getParameter() {
 		return parameter;
 	}
 	/**
 	 * @param parameter The parameter to set.
 	 */
-	public void setParameter(FParameter parameter) {
+	public void setParameter(Parameter parameter) {
 		this.parameter = parameter;
 	}
 	
@@ -54,9 +54,9 @@ public class KMSymbolParameter extends KMSymbol {
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#generateCallExpression()
 	 */
-	public FCallExpression generateCallExpression(KermetaUnit builder) {
-		FCallVariable call = builder.behav_factory.createFCallVariable();
-		call.setFName(parameter.getFName());
+	public CallExpression generateCallExpression(KermetaUnit builder) {
+		CallVariable call = builder.behav_factory.createCallVariable();
+		call.setName(parameter.getName());
 		return call;
 	}
 }

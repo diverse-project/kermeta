@@ -9,25 +9,24 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
-import fr.irisa.triskell.kermeta.structure.FFunctionType;
-import fr.irisa.triskell.kermeta.structure.FMultiplicityElement;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
-import fr.irisa.triskell.kermeta.structure.FVoidType;
+//import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * @author Franck Fleurey
@@ -51,18 +50,18 @@ class GetTextVisitor extends KermetaOptimizedVisitor {
 		return null;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
-	public Object visitFClassDefinition(FClassDefinition node) {
-		String result = node.getFName();
-		if (node.getFTypeParameter().size() > 0) {
+	public Object visitClassDefinition(ClassDefinition node) {
+		String result = node.getName();
+		if (node.getTypeParameter().size() > 0) {
 			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
+			result += ppTypeVariableDeclaration(node.getTypeParameter());
 			result += ">";
 		}
-		if (node.getFSuperType().size() > 0) {
+		if (node.getSuperType().size() > 0) {
 			result += " -> ";
-			result += ppComaSeparatedNodes(node.getFSuperType());
+			result += ppComaSeparatedNodes(node.getSuperType());
 		}
 		return result;
 	}
@@ -71,121 +70,121 @@ class GetTextVisitor extends KermetaOptimizedVisitor {
 		String result = "";
 		Iterator it = tparams.iterator();
 		while (it.hasNext()) {
-			FTypeVariable node = (FTypeVariable)it.next();
-			result += node.getFName();
-			if (node.getFSupertype() != null) result += " : " + ((FClass)node.getFSupertype()).getFTypeDefinition().getFName();
+			TypeVariable node = (TypeVariable)it.next();
+			result += node.getName();
+			if (node.getSupertype() != null) result += " : " + ((fr.irisa.triskell.kermeta.language.structure.Class)node.getSupertype()).getTypeDefinition().getName();
 			if (it.hasNext()) result +=  ", ";
 		}
 		return result;
 	}
 	
-	public Object visitFTypeVariable(FTypeVariable arg0) {
-		return arg0.getFName();
+	public Object visitTypeVariable(TypeVariable arg0) {
+		return arg0.getName();
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumeration)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)
 	 */
-	public Object visitFEnumeration(FEnumeration arg0) {
-		return arg0.getFName();
+	public Object visitEnumeration(Enumeration arg0) {
+		return arg0.getName();
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumerationLiteral)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.EnumerationLiteral)
 	 */
-	public Object visitFEnumerationLiteral(FEnumerationLiteral arg0) {
-		return arg0.getFName();
+	public Object visitEnumerationLiteral(EnumerationLiteral arg0) {
+		return arg0.getName();
 	}
 	
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visitFOperation(FOperation node) {
-		String result = node.getFName();
-		if (node.getFTypeParameter().size() > 0) {
+	public Object visitOperation(Operation node) {
+		String result = node.getName();
+		if (node.getTypeParameter().size() > 0) {
 			result += "<";
-			result += ppTypeVariableDeclaration(node.getFTypeParameter());
+			result += ppTypeVariableDeclaration(node.getTypeParameter());
 			result += ">";
 		}
 		result += "(";
-		result += ppComaSeparatedNodes(node.getFOwnedParameter());
+		result += ppComaSeparatedNodes(node.getOwnedParameter());
 		result += ")";
-		if(node.getFType() != null) {
+		if(node.getType() != null) {
 			result += " : " + ppTypeFromMultiplicityElement(node);
 		}
 		return result;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPackage)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
-	public Object visitFPackage(FPackage arg0) {
+	public Object visitPackage(Package arg0) {
 		return getQualifiedName(arg0);
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
-	public Object visitFPrimitiveType(FPrimitiveType arg0) {
-		return arg0.getFName();
+	public Object visitPrimitiveType(PrimitiveType arg0) {
+		return arg0.getName();
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
-	public Object visitFProperty(FProperty node) {
-		String result = node.getFName() + " : " + ppTypeFromMultiplicityElement(node);
+	public Object visitProperty(Property node) {
+		String result = node.getName() + " : " + ppTypeFromMultiplicityElement(node);
 		return result;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProductType)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ProductType)
 	 */
-	public Object visitFProductType(FProductType node) {
-		String result = "[" + ppComaSeparatedNodes(node.getFType()) + "]";
+	public Object visitProductType(ProductType node) {
+		String result = "[" + ppComaSeparatedNodes(node.getType()) + "]";
 		return result;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FFunctionType)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FunctionType)
 	 */
-	public Object visitFFunctionType(FFunctionType node) {
-		return "< " + this.accept(node.getFLeft()) + "->" + this.accept(node.getFRight()) + " >";
+	public Object visitFunctionType(FunctionType node) {
+		return "< " + this.accept(node.getLeft()) + "->" + this.accept(node.getRight()) + " >";
 	}
 	
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FVoidType)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.VoidType)
 	 */
-	public Object visitFVoidType(FVoidType node) {
+	public Object visitVoidType(VoidType node) {
 		return "Void";
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
+	 * @see kermeta.visitor.KermetaVisitor#visit(kermeta.structure.Class)
 	 */
-	public Object visitFClass(FClass node) {
-		String result = node.getFTypeDefinition().getFName();
-		if (node.getFTypeParamBinding().size() > 0) {
-			result += "<" + ppComaSeparatedNodes(node.getFTypeParamBinding()) + ">";
+	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
+		String result = node.getTypeDefinition().getName();
+		if (node.getTypeParamBinding().size() > 0) {
+			result += "<" + ppComaSeparatedNodes(node.getTypeParamBinding()) + ">";
 		}
 		return result;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariableBinding)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.TypeVariableBinding)
 	 */
-	public Object visitFTypeVariableBinding(FTypeVariableBinding node) {
-	    if (node.getFType() == null) return "!NULL!";
-		return this.accept(node.getFType());
+	public Object visitTypeVariableBinding(TypeVariableBinding node) {
+	    if (node.getType() == null) return "!NULL!";
+		return this.accept(node.getType());
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FParameter)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Parameter)
 	 */
-	public Object visitFParameter(FParameter node) {
-		return node.getFName() + " : " + ppTypeFromMultiplicityElement(node);
+	public Object visitParameter(Parameter node) {
+		return node.getName() + " : " + ppTypeFromMultiplicityElement(node);
 	}
 	
-	public String getQualifiedName(FNamedElement element) {
-		if (element.eContainer() != null && element.eContainer() instanceof FNamedElement)
-			return getQualifiedName( (FNamedElement)element.eContainer() ) + "::" + element.getFName();
-		else return element.getFName();
+	public String getQualifiedName(NamedElement element) {
+		if (element.eContainer() != null && element.eContainer() instanceof NamedElement)
+			return getQualifiedName( (NamedElement)element.eContainer() ) + "::" + element.getName();
+		else return element.getName();
 	}
 	
 	public String ppComaSeparatedNodes(EList expressions) {
@@ -199,21 +198,21 @@ class GetTextVisitor extends KermetaOptimizedVisitor {
 		return result;
 	}
 	
-	public String ppTypeFromMultiplicityElement(FMultiplicityElement elem) {
+	public String ppTypeFromMultiplicityElement(MultiplicityElement elem) {
 		String result = "";
-		if (elem.getFUpper() != 1) {
-			if (elem.isFIsOrdered()) {
-				if (!elem.isFIsUnique()) result +="seq ";
+		if (elem.getUpper() != 1) {
+			if (elem.isIsOrdered()) {
+				if (!elem.isIsUnique()) result +="seq ";
 			}
 			else {
-				if (elem.isFIsUnique()) result +="set ";
+				if (elem.isIsUnique()) result +="set ";
 				else result +="bag ";
 			}
 		}
-		result += this.accept(elem.getFType());
-			if (elem.getFLower() != 0 || elem.getFUpper() != 1) {
-			result += "[" + elem.getFLower() + "..";
-			result += (elem.getFUpper()<0)?"*":""+elem.getFUpper();
+		result += this.accept(elem.getType());
+			if (elem.getLower() != 0 || elem.getUpper() != 1) {
+			result += "[" + elem.getLower() + "..";
+			result += (elem.getUpper()<0)?"*":""+elem.getUpper();
 			result += "]";
 		}
 		return result;

@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.20 2006-02-21 17:59:11 jsteel Exp $
+/* $Id: structure.kmt,v 1.21 2006-03-03 15:21:25 dvojtise Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -153,8 +153,8 @@ class Tag inherits Object, kermeta::reflection::Tag, KMStructureVisitable
 class Property inherits MultiplicityElement, kermeta::reflection::Property, KMStructureVisitable
 {
 
-	attribute getterbody : kermeta::language::behavior::Expression
-	attribute setterbody : kermeta::language::behavior::Expression
+	attribute getterBody : kermeta::language::behavior::Expression
+	attribute setterBody : kermeta::language::behavior::Expression
 	
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do

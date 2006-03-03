@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.35 2006-02-22 09:25:37 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.36 2006-03-03 15:21:47 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -22,29 +22,28 @@ import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-
-import fr.irisa.triskell.kermeta.behavior.FAssignement;
-import fr.irisa.triskell.kermeta.behavior.FBlock;
-import fr.irisa.triskell.kermeta.behavior.FBooleanLiteral;
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FCallResult;
-import fr.irisa.triskell.kermeta.behavior.FCallSuperOperation;
-import fr.irisa.triskell.kermeta.behavior.FCallValue;
-import fr.irisa.triskell.kermeta.behavior.FCallVariable;
-import fr.irisa.triskell.kermeta.behavior.FConditionnal;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
-import fr.irisa.triskell.kermeta.behavior.FIntegerLiteral;
-import fr.irisa.triskell.kermeta.behavior.FJavaStaticCall;
-import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
-import fr.irisa.triskell.kermeta.behavior.FLoop;
-import fr.irisa.triskell.kermeta.behavior.FRaise;
-import fr.irisa.triskell.kermeta.behavior.FRescue;
-import fr.irisa.triskell.kermeta.behavior.FSelfExpression;
-import fr.irisa.triskell.kermeta.behavior.FStringLiteral;
-import fr.irisa.triskell.kermeta.behavior.FTypeLiteral;
-import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
-import fr.irisa.triskell.kermeta.behavior.FVoidLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.Assignment;
+import fr.irisa.triskell.kermeta.language.behavior.Block;
+import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallResult;
+import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
+import fr.irisa.triskell.kermeta.language.behavior.CallValue;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+import fr.irisa.triskell.kermeta.language.behavior.Conditional;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.IntegerLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Loop;
+import fr.irisa.triskell.kermeta.language.behavior.Raise;
+import fr.irisa.triskell.kermeta.language.behavior.Rescue;
+import fr.irisa.triskell.kermeta.language.behavior.SelfExpression;
+import fr.irisa.triskell.kermeta.language.behavior.StringLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
+import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
@@ -52,19 +51,19 @@ import fr.irisa.triskell.kermeta.runtime.FrameworkExternCommand;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
-import fr.irisa.triskell.kermeta.structure.FFunctionType;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
@@ -116,11 +115,11 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * @param arguments
 	 * @return
 	 */
-	public Object invoke(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
+	public Object invoke(RuntimeObject ro_target,Operation foperation,ArrayList arguments) {
 		RuntimeObject result=null;
 		RuntimeObjectFactory roFactory = memory.getROFactory(); 
 		
-		FClass self_type = (FClass)ro_target.getMetaclass().getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getData().get("kcoreObject");
 		
 		CallableOperation op = new CallableOperation(foperation, self_type);
 		
@@ -142,36 +141,36 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * of the current frame
 	 * @return
 	 */
-	public Object visitFVariableDecl(FVariableDecl node)
+	public Object visitVariableDecl(VariableDecl node)
 	{
 		RuntimeObject ro_init = memory.voidINSTANCE;
 		// is it a classic case?
 		// TODO : compare qualified names otherwise this test could be sometimes false
-		if (FFunctionType.class.isInstance(node.getFType().getFType()))
+		if (FunctionType.class.isInstance(node.getType().getType()))
 		{
-		    internalLog.info("Type of variable declaration : "+node.getFType().getFName());
+		    internalLog.info("Type of variable declaration : "+node.getType().getName());
 		
 		}
-		if (node.getFInitialization()!=null)
-		   ro_init = (RuntimeObject)this.accept(node.getFInitialization());
+		if (node.getInitialization()!=null)
+		   ro_init = (RuntimeObject)this.accept(node.getInitialization());
 		
 		interpreterContext.peekCallFrame().peekExpressionContext().defineVariable(
-	             node.getFIdentifier(), ro_init);
+	             node.getIdentifier(), ro_init);
 		return ro_init;
 	}
 	
 	
 	
-    public Object visitFTypeLiteral(FTypeLiteral arg0) {
+    public Object visitTypeLiteral(TypeLiteral arg0) {
         RuntimeObject result = null;
-        FType t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(arg0.getFTyperef())).getType();
+        Type t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(arg0.getTyperef())).getType();
        
-        if (t instanceof FClass) {
-	        FClass c = (FClass)t;
+        if (t instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
+        	fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)t;
 	        // FIXME : Type variables should be handled here (substitutions of variables) done ?
-	        if (c.getFTypeParamBinding().size() != 0) {
-	            FClass self_class = (FClass)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
-	            c = (FClass)TypeVariableEnforcer.getBoundType(c, interpreterContext.peekCallFrame().getTypeParameters());
+	        if (c.getTypeParamBinding().size() != 0) {
+	        	fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
+	            c = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(c, interpreterContext.peekCallFrame().getTypeParameters());
 	            
 	        }    
 	        result = memory.getROFactory().createMetaClass(c);
@@ -185,7 +184,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     }
     
     
-    public Object visitFVoidLiteral(FVoidLiteral arg0) {
+    public Object visitVoidLiteral(VoidLiteral arg0) {
         return memory.voidINSTANCE;
     }
 	/**
@@ -195,7 +194,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * @param propertyName The name of the properties of which we want the value
 	 * @return the RuntimeObject that repr. the value of the property for the given ro_target
 	 */
-	protected RuntimeObject getRuntimeObjectForFProperty(FClass fclass, String propertyName)
+	protected RuntimeObject getRuntimeObjectForProperty(fr.irisa.triskell.kermeta.language.structure.Class fclass, String propertyName)
 	{
 	    // Create the corresponding type
 	    SimpleType target = new SimpleType(fclass);
@@ -229,33 +228,33 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * 		CallFeature ( object.property )
 	 * 		CallSuperOperation (super?)
 	 * 		CallResult -> CallVariable
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FAssignement)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Assignment)
 	 */
-	public Object visitFAssignement(FAssignement node) {
+	public Object visitAssignment(Assignment node) {
 	    
 		// The name of the call
-		String lhs_name = node.getFTarget().getFName();
+		String lhs_name = node.getTarget().getName();
 		
 		 // The new value 
-		RuntimeObject rhs_value = (RuntimeObject)this.accept(node.getFValue());
+		RuntimeObject rhs_value = (RuntimeObject)this.accept(node.getValue());
 		
 		
-		if (node.isFIsCast()) {
+		if (node.isIsCast()) {
 			
 			// Just to be sure !!
-			if (node.getFTarget().getFStaticType() == null) {
+			if (node.getTarget().getStaticType() == null) {
 				throw new Error("THE PROGRAM CANNOT BE EXECUTED BECAUSE IT HAS NOT BEEN TYPE CHECKED");
 			}
 			
-			FType r = (FType)TypeVariableEnforcer.getBoundType(node.getFTarget().getFStaticType(), interpreterContext.peekCallFrame().getTypeParameters());
+			Type r = (Type)TypeVariableEnforcer.getBoundType(node.getTarget().getStaticType(), interpreterContext.peekCallFrame().getTypeParameters());
 			
 			SimpleType expectedType = new SimpleType(r);
-			FClass p = (FClass)rhs_value.getMetaclass().getData().get("kcoreObject");
+			fr.irisa.triskell.kermeta.language.structure.Class p = (fr.irisa.triskell.kermeta.language.structure.Class)rhs_value.getMetaclass().getData().get("kcoreObject");
 			SimpleType providedtype = new SimpleType(p);
 			
-			if (r instanceof FEnumeration) {
-			    FEnumeration enumeration = (FEnumeration)r;
-			    if (enumeration.getFOwnedLiteral().contains(rhs_value.getData().get("kcoreObject"))) {
+			if (r instanceof Enumeration) {
+			    Enumeration enumeration = (Enumeration)r;
+			    if (enumeration.getOwnedLiteral().contains(rhs_value.getData().get("kcoreObject"))) {
 			        // It is OK
 			    }
 			    else {
@@ -266,19 +265,19 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			/* BEGINING OF HORRIBLE THING */
 			/******************************/
 			// Type collection of object
-			FClass coll_class = memory.getUnit().struct_factory.createFClass();    
-		    coll_class.setFTypeDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::standard::Collection"));
-		    FTypeVariableBinding binding = memory.getUnit().struct_factory.createFTypeVariableBinding();
-		    binding.setFVariable((FTypeVariable)coll_class.getFTypeDefinition().getFTypeParameter().get(0));
+			fr.irisa.triskell.kermeta.language.structure.Class coll_class = memory.getUnit().struct_factory.createClass();    
+		    coll_class.setTypeDefinition((ClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::standard::Collection"));
+		    TypeVariableBinding binding = memory.getUnit().struct_factory.createTypeVariableBinding();
+		    binding.setVariable((TypeVariable)coll_class.getTypeDefinition().getTypeParameter().get(0));
 		    
-		    FClass object_class = memory.getUnit().struct_factory.createFClass();   
-		    object_class.setFTypeDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::reflection::Object"));
+		    fr.irisa.triskell.kermeta.language.structure.Class object_class = memory.getUnit().struct_factory.createClass();   
+		    object_class.setTypeDefinition((ClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::reflection::Object"));
 
 		    
 		    // Set the param binding type
-		    binding.setFType(object_class);
+		    binding.setType(object_class);
 		    // Add to type param bindings the binding
-		    coll_class.getFTypeParamBinding().add(binding);
+		    coll_class.getTypeParamBinding().add(binding);
 
 			if (expectedType.equals(new SimpleType(coll_class))) {
 				// THIS IS A TERRIBLE HACK TO ALLOW CASTING COLLECTIONS
@@ -298,32 +297,32 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			}
 		}
 		
-		if (node.getFTarget() instanceof FCallResult)
+		if (node.getTarget() instanceof CallResult)
 		{
 		    // Assign the result of the current operation
 		    interpreterContext.peekCallFrame().setOperationResult(rhs_value);
 		}
-		else if (node.getFTarget() instanceof FCallVariable)
+		else if (node.getTarget() instanceof CallVariable)
 		{
-		    Variable var = interpreterContext.peekCallFrame().getVariableByName(node.getFTarget().getFName());
+		    Variable var = interpreterContext.peekCallFrame().getVariableByName(node.getTarget().getName());
 		    
 		    // This is for debugg purposes it should never happend
 		    if (var == null) {
-		        internalLog.error("INTERPRETER INTERNAL ERROR : unable to find variable " + node.getFTarget().getFName());
-		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find variable " + node.getFTarget().getFName());
+		        internalLog.error("INTERPRETER INTERNAL ERROR : unable to find variable " + node.getTarget().getName());
+		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find variable " + node.getTarget().getName());
 		    }
 		    
 		    var.setRuntimeObject(rhs_value);
 		}
-		else if (node.getFTarget() instanceof FCallFeature)
+		else if (node.getTarget() instanceof CallFeature)
 		{
 		    // Visiting the callFeature should return the RuntimeObject
 		    // From the runtimeObject, get its target
-		    FCallFeature callfeature = (FCallFeature)node.getFTarget();
+		    CallFeature callfeature = (CallFeature)node.getTarget();
 		    
 		    // Get the object on which this feature is applied
-		    FExpression target = callfeature.getFTarget();
-	    	String propertyName = callfeature.getFName();
+		    Expression target = callfeature.getTarget();
+	    	String propertyName = callfeature.getName();
 	    	
 	    	RuntimeObject ro_target;
 	    	
@@ -353,12 +352,12 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		        raiseCallOnVoidTargetException(node,"");
 		    }
 		    
-		    FClass t_target=(FClass)ro_target.getMetaclass().getData().get("kcoreObject");
+		    fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getData().get("kcoreObject");
 
-            // FIXME : FProperty is assumed to be the type of the feature
+            // FIXME : Property is assumed to be the type of the feature
 		    
-            RuntimeObject ro_property = this.getRuntimeObjectForFProperty(t_target, propertyName);
-            // If the target is a FProperty and is derived, it is updated from the getterbody
+            RuntimeObject ro_property = this.getRuntimeObjectForProperty(t_target, propertyName);
+            // If the target is a Property and is derived, it is updated from the getterbody
             // FIXME : ro_property must not be null
 			// Set the value of the property
             if (ro_property == null)
@@ -372,13 +371,13 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
                     fr.irisa.triskell.kermeta.runtime.language.Object.unSet(ro_target,ro_property);
                 }
                 else {
-                    // Get the FProperty -- is it the right way? 
+                    // Get the Property -- is it the right way? 
                     SimpleType target_type = new SimpleType(t_target);                    
                     CallableProperty property =  target_type.getPropertyByName(propertyName);
                     //CallableProperty property =  this.interpreterContext.typeCache.getPropertyByName(target_type,propertyName);
-                    FProperty fproperty = property.getProperty();
-                    //FProperty fproperty = (FProperty)ro_property.getData().get("kcoreObject");
-                    if (!fproperty.isFIsDerived())
+                    Property fproperty = property.getProperty();
+                    //Property fproperty = (Property)ro_property.getData().get("kcoreObject");
+                    if (!fproperty.isIsDerived())
                     // If it is not derived, assign it
                         fr.irisa.triskell.kermeta.runtime.language.Object.set(ro_target,ro_property,rhs_value);
                     // Else, compute it
@@ -387,7 +386,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
                         interpreterContext.pushOperationCallFrame(ro_target, property, null, callfeature);
                         interpreterContext.peekCallFrame().setCallValueResult(rhs_value);
                         // Get the setter body
-                        this.accept(fproperty.getFSetterbody());
+                        this.accept(fproperty.getSetterBody());
                         interpreterContext.popCallFrame();
                     }
                 }
@@ -399,29 +398,29 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	
 	
     /**
-     * FCallSuperOperation corresponds to the kermeta instruction "super"
+     * CallSuperOperation corresponds to the kermeta instruction "super"
      * Usually, its properties are : 
      * name = super 
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FCallSuperOperation)
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.CallSuperOperation)
      */
-    public Object visitFCallSuperOperation(FCallSuperOperation node)
+    public Object visitCallSuperOperation(CallSuperOperation node)
     {
         RuntimeObject result = null;
         // Current call frame is uniquely a LambdaCallFrame, or an OperationCallFrame. Other types are forbidden!
-        FOperation current_op = this.interpreterContext.peekCallFrame().getOperation();
+        Operation current_op = this.interpreterContext.peekCallFrame().getOperation();
         RuntimeObject ro_target = this.interpreterContext.peekCallFrame().getSelf();
-        FClassDefinition foclass = current_op.getFOwningClass();
+        ClassDefinition foclass = current_op.getOwningClass();
         //internalLog.info("Visiting a super operation of : "+current_op.getFName());
         
-        FClass self_type = (FClass)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
+        fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)interpreterContext.peekCallFrame().getSelf().getMetaclass().getData().get("kcoreObject");
         
         // Get the parameters of this operation
-		ArrayList parameters = visitList(node.getFParameters());
+		ArrayList parameters = visitList(node.getParameters());
 		// Create a context for this operation call, setting self object to ro_target
 		interpreterContext.pushOperationCallFrame(ro_target, InheritanceSearch.getSuperOperation(self_type, current_op), parameters, node);
 		
 		try {
-		    result = (RuntimeObject)this.accept(current_op.getFSuperOperation());
+		    result = (RuntimeObject)this.accept(current_op.getSuperOperation());
 		} finally {
 		    // Pop the context!
 		    interpreterContext.popCallFrame();
@@ -434,7 +433,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * - when we defined one and assigned it to a variable
 	 * - when we call one  
 	 */
-	public Object visitFLambdaExpression(FLambdaExpression node)
+	public Object visitLambdaExpression(LambdaExpression node)
 	{   	    
 	    RuntimeObject result = new RuntimeLambdaObject(node, memory.getROFactory(),this.interpreterContext.peekCallFrame(), this.interpreterContext);
 	    return result;
@@ -446,7 +445,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * processed.
 	 * We also store it as a variable (for the moment)
 	 */
-	public Object visitFCallResult(FCallResult node)
+	public Object visitCallResult(CallResult node)
 	{
 	    RuntimeObject value = interpreterContext.peekCallFrame().getOperationResult();
 	    if (value==null)
@@ -458,7 +457,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * CallValue is the special variable "value" in the setter method of a derived
 	 * property
 	 */
-	public Object visitFCallValue(FCallValue node)
+	public Object visitCallValue(CallValue node)
 	{
 	    RuntimeObject value = interpreterContext.peekCallFrame().getCallValueResult();
 	    return value;
@@ -468,18 +467,18 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      * If the visited element is a Variable, then we search its value in the
      * InterpreterContext
      */
-    public Object visitFCallVariable(FCallVariable node) {
+    public Object visitCallVariable(CallVariable node) {
         RuntimeObject result;
-        Variable var = interpreterContext.peekCallFrame().getVariableByName(node.getFName());
+        Variable var = interpreterContext.peekCallFrame().getVariableByName(node.getName());
 
         // This is for debugg purposes it should never happend
         if (var == null) {
-            internalLog.error("INTERPRETER INTERNAL ERROR : unable to find variable in context :" + node.getFName());
-            throw new Error("INTERPRETER INTERNAL ERROR : unable to find variable in context :" + node.getFName());
+            internalLog.error("INTERPRETER INTERNAL ERROR : unable to find variable in context :" + node.getName());
+            throw new Error("INTERPRETER INTERNAL ERROR : unable to find variable in context :" + node.getName());
         }
 
         // It is a simple variable call
-        if (node.getFParameters().size() == 0)
+        if (node.getParameters().size() == 0)
         {
             result = var.getRuntimeObject();
             current_variable = var;
@@ -493,15 +492,15 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 
             // This is for debugg purposes it should never happend
             if (!(var.getRuntimeObject() instanceof RuntimeLambdaObject)) {
-                internalLog.error("INTERPRETER INTERNAL ERROR : function call on variable " + node.getFName() + " which does not contain a function");
-                throw new Error("INTERPRETER INTERNAL ERROR : function call on variable " + node.getFName() + " which does not contain a function");
+                internalLog.error("INTERPRETER INTERNAL ERROR : function call on variable " + node.getName() + " which does not contain a function");
+                throw new Error("INTERPRETER INTERNAL ERROR : function call on variable " + node.getName() + " which does not contain a function");
             }
             
             // Get the function
             RuntimeLambdaObject func = (RuntimeLambdaObject) var.getRuntimeObject();
 
             // Compute actual parameters
-            ArrayList paramAList = visitList(node.getFParameters());
+            ArrayList paramAList = visitList(node.getParameters());
             
             
             // Call the function
@@ -513,16 +512,16 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         return result;
     }
 	
-	public Object visitFSelfExpression(FSelfExpression node)
+	public Object visitSelfExpression(SelfExpression node)
 	{
 	    return interpreterContext.peekCallFrame().getSelf();
 	}
 
 	/**
 	 * Evaluate the sequence of instructions in this block.
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBlock)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Block)
 	 */
-	public Object visitFBlock(FBlock node) {
+	public Object visitBlock(Block node) {
 
 	    RuntimeObject result = memory.voidINSTANCE;
 		// Stops the interpretation.
@@ -534,7 +533,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        interpreterContext.peekCallFrame().pushExpressionContext();
 	        try {
 	    
-			    ArrayList res = visitStatementList(node.getFStatement());
+			    ArrayList res = visitStatementList(node.getStatement());
 			    if (res.size() > 0) 
 			        result = (RuntimeObject)res.get(res.size()-1);
 	        }
@@ -543,15 +542,15 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        }
 	    }
 	    catch(KermetaRaisedException ex) {
-	        Iterator it = node.getFRescueBlock().iterator();
-	        FRescue resc_block = null;
+	        Iterator it = node.getRescueBlock().iterator();
+	        Rescue resc_block = null;
 	        while (it.hasNext() && resc_block == null) {
-	            FRescue r = (FRescue)it.next();
-	            if (r.getFExceptionType() == null)
+	            Rescue r = (Rescue)it.next();
+	            if (r.getExceptionType() == null)
 	                resc_block = r;
 	            else {
-	                SimpleType exprected =  new SimpleType(r.getFExceptionType().getFType());
-	                SimpleType provided = new SimpleType((FClass)ex.raised_object.getMetaclass().getData().get("kcoreObject"));
+	                SimpleType exprected =  new SimpleType(r.getExceptionType().getType());
+	                SimpleType provided = new SimpleType((fr.irisa.triskell.kermeta.language.structure.Class)ex.raised_object.getMetaclass().getData().get("kcoreObject"));
 	                if (provided.isSubTypeOf(exprected)) {
 	                    resc_block = r;
 	                }
@@ -563,10 +562,10 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        interpreterContext.peekCallFrame().pushExpressionContext();	        
 	        try {
 	        
-	        if (resc_block.getFExceptionType() != null)
-	            interpreterContext.peekCallFrame().peekExpressionContext().defineVariable(resc_block.getFExceptionName(), ex.raised_object);
+	        if (resc_block.getExceptionType() != null)
+	            interpreterContext.peekCallFrame().peekExpressionContext().defineVariable(resc_block.getExceptionName(), ex.raised_object);
  
-	        	ArrayList res = visitStatementList(resc_block.getFBody());
+	        	ArrayList res = visitStatementList(resc_block.getBody());
 	        	if (res.size() > 0) 
 			        result = (RuntimeObject)res.get(res.size()-1);
 	        }
@@ -580,22 +579,22 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
-	public Object visitFClass(FClass node) {
+	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
 	    throw new Error("INTERPRETER INTERNAL ERROR : visit a FClass");
 	}
 	
 	/**
 	 * Interprete the IF instruction
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FConditionnal)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Conditional)
 	 */
-	public Object visitFConditionnal(FConditionnal node) {
+	public Object visitConditional(Conditional node) {
 	    
 	    // The result returned by the visit
 	    RuntimeObject result = null;
 		// Stops the interpretation.
 	    if (shouldTerminate()) return result;
 	    
-        FExpression cond = node.getFCondition();
+        Expression cond = node.getCondition();
 
         // Set "cond" as the current statement that will be evaluated in the
         // current expressionContext
@@ -610,21 +609,25 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
             cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
         else
         {
-            RuntimeObject ex = memory.getROFactory().createObjectFromClassName("kermeta::exceptions::RuntimeError");
-            raiseKermetaException(ex, node);
+        	throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+            		"cannot evaluate the condition",
+    				this,
+    				memory,
+    				cond,
+    				null);
         }
         
         // if cond is true
         if (cond_value == true)
         {   
-    		if (node.getFThenBody() != null) 
-    		    result = (RuntimeObject)this.accept(node.getFThenBody());
+    		if (node.getThenBody() != null) 
+    		    result = (RuntimeObject)this.accept(node.getThenBody());
     		
         }
         else
         {   
-            if (node.getFElseBody() != null) {
-                result = (RuntimeObject)this.accept(node.getFElseBody());
+            if (node.getElseBody() != null) {
+                result = (RuntimeObject)this.accept(node.getElseBody());
             }
         }
 		return result;
@@ -632,9 +635,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FLoop)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Loop)
 	 */
-	public Object visitFLoop(FLoop node)
+	public Object visitLoop(Loop node)
 	{
 		RuntimeObject result = memory.voidINSTANCE;
         // Push a new expressionContext in the current CallFrame. 
@@ -644,8 +647,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    // Else
         try {
         	
-	        // Accept initialization (a FVariableDecl) : add a new variable in the ExpressionContext
-	        this.accept(node.getFInitiatization());
+	        // Accept initialization (a VariableDecl) : add a new variable in the ExpressionContext
+	        this.accept(node.getInitialization());
 	        boolean cond_value=true;
 	        
 		    do
@@ -654,9 +657,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		    	// initialization of the loop condition, we set the current
 		    	// statement that will be processed inside this ExpressionContext.
 		    	// this line does not modify the behavior of the interpreter
-		    	getInterpreterContext().peekCallFrame().peekExpressionContext().setStatement(node.getFStopCondition());
+		    	getInterpreterContext().peekCallFrame().peekExpressionContext().setStatement(node.getStopCondition());
 				
-		        RuntimeObject cond_result = (RuntimeObject)this.accept(node.getFStopCondition());
+		        RuntimeObject cond_result = (RuntimeObject)this.accept(node.getStopCondition());
 		        // Get boolean value
 		        if (cond_result.getData().containsKey("BooleanValue"))
 		            cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
@@ -667,7 +670,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		        }
 		        
 		        if (! cond_value)
-		        	this.accept(node.getFBody());
+		        	this.accept(node.getBody());
 		    } while (! cond_value);
 		    
         }
@@ -680,21 +683,21 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	
 	/**
 	 * Visit an operation definition. 
-	 * This visit usually follows the visit of a FCallFeature that is an operation call 
+	 * This visit usually follows the visit of a CallFeature that is an operation call 
 	 * This has the following steps :
 	 * 	- Create an expression context for the variables defined at "top level" in this operation
 	 *
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visitFOperation(FOperation node) {
+	public Object visitOperation(Operation node) {
 	    
 	    RuntimeObject result = memory.voidINSTANCE;
 	    // push expression context
 	    interpreterContext.peekCallFrame().pushExpressionContext();
-	    interpreterContext.peekCallFrame().peekExpressionContext().setStatement(node.getFBody());
+	    interpreterContext.peekCallFrame().peekExpressionContext().setStatement(node.getBody());
 	    try {
 		    // Interpret body
-		    this.accept(node.getFBody());
+		    this.accept(node.getBody());
 		    
 		    // Set the result
 		    result = interpreterContext.peekCallFrame().getOperationResult();
@@ -709,14 +712,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	/**
 	 * Used for derived properties when processing getter and setter body
 	 */
-    public RuntimeObject getterDerivedProperty(CallableProperty property, RuntimeObject ro_target, FCallExpression expression)
+    public RuntimeObject getterDerivedProperty(CallableProperty property, RuntimeObject ro_target, CallExpression expression)
     {
         RuntimeObject result = memory.voidINSTANCE;
         interpreterContext.pushOperationCallFrame(ro_target, property, null, expression);
         // Would a special DerivedPropertyCallFrame be better instead of that?
 	    try {	        // Interpret body
-	        this.accept(property.getProperty().getFGetterbody());
-	        // Getter is an operation which returns an element of type FProperty.getFType
+	        this.accept(property.getProperty().getGetterBody());
+	        // Getter is an operation which returns an element of type Property.getFType
 	        // Set the result 
 	        result = interpreterContext.peekCallFrame().getOperationResult();
 	    }
@@ -728,26 +731,26 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     }
     
     
-	public Object visitFCallFeature(FCallFeature node) {
+	public Object visitCallFeature(CallFeature node) {
 	    
 	    // Handle call to enumeration literals :
-	    if (node.getFStaticEnumLiteral() != null) {
-	        return memory.getRuntimeObjectForFObject(node.getFStaticEnumLiteral());
+	    if (node.getStaticEnumLiteral() != null) {
+	        return memory.getRuntimeObjectForFObject(node.getStaticEnumLiteral());
 	    }
 	    
 	    // It is a real operation / property call
 	    
-	    FClass t_target = null; // Type of the "callee"
+	    fr.irisa.triskell.kermeta.language.structure.Class t_target = null; // Type of the "callee"
 	    RuntimeObject result = null; // The result to be returned by this visit
 	    RuntimeObject ro_target = null; // Runtime repr. of target
 	    
 	    // Get the target of the call
-	    if (node.getFTarget() == null) {
+	    if (node.getTarget() == null) {
 	        // Self if nothing is specified
 	        ro_target = interpreterContext.peekCallFrame().getSelf();
 	    }
 	    else {
-	        ro_target = (RuntimeObject)this.accept(node.getFTarget());
+	        ro_target = (RuntimeObject)this.accept(node.getTarget());
 	    }
 	    
 	    
@@ -757,7 +760,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    }
 	    
 	    // Get The type of the Object
-	    t_target =(FClass)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
+	    t_target =(fr.irisa.triskell.kermeta.language.structure.Class)((RuntimeObject)ro_target.getMetaclass()).getData().get("kcoreObject");
 	    
 	    // This is just a test for debbuging the interpreter. It should never occur
 	    if (t_target == null) {
@@ -768,26 +771,26 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		// Get the feature
 	    SimpleType target_type = new SimpleType(t_target);
 	    
-	    if (node.getFStaticOperation() == null && node.getFStaticProperty() == null) {
-	    	node.getFStaticOperation();
-	    	node.getFStaticProperty();
-	        internalLog.error("INTERPRETER INTERNAL ERROR : the program does not seem to be correctly type checked : " + node.getFName());
-	        throw new Error("INTERPRETER INTERNAL ERROR : the program does not seem to be correctly type checked : " + node.getFName());
+	    if (node.getStaticOperation() == null && node.getStaticProperty() == null) {
+	    	node.getStaticOperation();
+	    	node.getStaticProperty();
+	        internalLog.error("INTERPRETER INTERNAL ERROR : the program does not seem to be correctly type checked : " + node.getName());
+	        throw new Error("INTERPRETER INTERNAL ERROR : the program does not seem to be correctly type checked : " + node.getName());
 	    }
 	    
 	    
-	    if (node.getFStaticOperation() != null) {
+	    if (node.getStaticOperation() != null) {
 	        // It is an operation call --> 
 	        //CallableOperation operation = target_type.getOperationByName(node.getFName());
-	    	CallableOperation operation = this.interpreterContext.typeCache.getOperationByName(target_type, node.getFName());
+	    	CallableOperation operation = this.interpreterContext.typeCache.getOperationByName(target_type, node.getName());
 	        
 //			 Check that target is not void
 		    if (operation == null && ro_target == memory.voidINSTANCE) {
 		    	String additionalMsg = "";
-		    	if(node.getFStaticProperty() != null)
-		    		if(node.getFStaticProperty().isFIsDerived())
+		    	if(node.getStaticProperty() != null)
+		    		if(node.getStaticProperty().isIsDerived())
 		    			additionalMsg = "Warning, target was a Derived Property";
-		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target: " + node.getFName() +"; Operation: " +node.getFStaticOperation());
+		        internalLog.info(" >> INTERPRETER REPORTS Call on a void target: " + node.getName() +"; Operation: " +node.getStaticOperation());
 		        if(!additionalMsg.equals(""))
 		        	internalLog.info(additionalMsg);
 		        raiseCallOnVoidTargetException(node, additionalMsg);		        
@@ -796,13 +799,13 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 //		  This should never happend is the type checker has checked the program
 			if (operation == null) {
 			    String msg = "INTERPRETER INTERNAL ERROR : unable to find a feature : "
-				    + "\noperation : '"+node.getFName()+"' not found for an object of kind : "+ target_type;
+				    + "\noperation : '"+node.getName()+"' not found for an object of kind : "+ target_type;
 			    internalLog.error(msg);
 		        throw new Error(msg);
 			}
 	        
 //			 Get the parameters of this operation
-			ArrayList parameters = visitList(node.getFParameters());
+			ArrayList parameters = visitList(node.getParameters());
 			// Create a context for this operation call, setting self object to ro_target
 			interpreterContext.pushOperationCallFrame(ro_target, operation, parameters, node);
 			try {
@@ -815,24 +818,24 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    }
 	    else {
 	        // It is a property call
-	        CallableProperty property =  target_type.getPropertyByName(node.getFName());
+	        CallableProperty property =  target_type.getPropertyByName(node.getName());
 	    	//CallableProperty property =  this.interpreterContext.typeCache.getPropertyByName(target_type, node.getFName());
 	        
 //			 Check that target is not void
 		    if (property == null && ro_target == memory.voidINSTANCE) {
-		        internalLog.debug(" >> INTERPRETER REPORTS Call of '"+ node.getFName() +"' property on a void target. Exception raised.");
+		        internalLog.debug(" >> INTERPRETER REPORTS Call of '"+ node.getName() +"' property on a void target. Exception raised.");
 		        raiseCallOnVoidTargetException(node,"");
 		    }
 		    
 //		  This should never happen is the type checker has checked the program
 			if (property == null) {
-			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getFName() + "in type : " + target_type);
+			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getName() + "in type : " + target_type);
 			    internalLog.error("May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developpers");		        
-		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getFName());
+		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getName());
 			}
 			
 //			 Get the runtime object corresponding to the property
-		    RuntimeObject ro_property = getRuntimeObjectForFProperty(t_target, property.getProperty().getFName());
+		    RuntimeObject ro_property = getRuntimeObjectForProperty(t_target, property.getProperty().getName());
 		    
 		    // This is just a debbuging check. It should never occur
 		    if (ro_property == null) {
@@ -841,7 +844,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		        throw new Error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
 			}
 		    
-		    if (!property.getProperty().isFIsDerived())
+		    if (!property.getProperty().isIsDerived())
 		    {
 		        // Get the value of the property
 		        result = fr.irisa.triskell.kermeta.runtime.language.Object.get(ro_target, ro_property);
@@ -856,24 +859,24 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		return result;
 	}
     /**
-     * Visit a FJavaStaticCall : 
+     * Visit a JavaStaticCall : 
      * 		extern a::b::c.d()
-     * We use java reflection to visit a FJavaStaticCall.
+     * We use java reflection to visit a JavaStaticCall.
      * For this case, by definition every linked Java methods have one type
      * of parameters, which is always a RuntimeObject.
      * @return
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FJavaStaticCall)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.JavaStaticCall)
 	 */
-	public Object visitFJavaStaticCall(FJavaStaticCall node) {
+	public Object visitJavaStaticCall(JavaStaticCall node) {
 	    
-		String cmdID = node.getFJclass() + "_" + node.getFJmethod() + "_" + node.getFParameters().size();
+		String cmdID = node.getJclass() + "_" + node.getJmethod() + "_" + node.getParameters().size();
 		cmdID = cmdID.replaceAll(":", "_");
 		FrameworkExternCommand cmd = FrameworkExternCommand.getCommand(cmdID);
 		if (cmd != null) {
-			RuntimeObject[] paramsArray = new RuntimeObject[node.getFParameters().size()];
+			RuntimeObject[] paramsArray = new RuntimeObject[node.getParameters().size()];
 			
 			// Get the parameters of this operation
-			ArrayList parameters = visitList(node.getFParameters());
+			ArrayList parameters = visitList(node.getParameters());
 			// Get the param types for invokated method
 			Iterator it = parameters.iterator();
 			int i = 0;
@@ -898,14 +901,14 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		
 		/* IF THE EXTERN HAS NOT BEEN COMPILED THEN IT IS AN INVOKE */
 		
-		String jclassName  = node.getFJclass().replaceAll("::","."); 
-		String jmethodName = node.getFJmethod();
+		String jclassName  = node.getJclass().replaceAll("::","."); 
+		String jmethodName = node.getJmethod();
 		
-		RuntimeObject[] paramsArray = new RuntimeObject[node.getFParameters().size()];
-		Class[] paramtypes = new Class[node.getFParameters().size()];
+		RuntimeObject[] paramsArray = new RuntimeObject[node.getParameters().size()];
+		Class[] paramtypes = new Class[node.getParameters().size()];
 		
 		// Get the parameters of this operation
-		ArrayList parameters = visitList(node.getFParameters());
+		ArrayList parameters = visitList(node.getParameters());
 		// Get the param types for invokated method
 		Iterator it = parameters.iterator();
 		int i = 0;
@@ -918,7 +921,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		
 		Object result = null;
 		
-		String cmd_id = node.getFJclass() +"_"+ node.getFJmethod();
+		String cmd_id = node.getJclass() +"_"+ node.getJmethod();
 	
 			// Invoke the java method
 			Class jclass = null;
@@ -989,38 +992,38 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	
 	/**
 	 * @return the value of this node as an integer
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FIntegerLiteral) 
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.IntegerLiteral) 
 	 */
-	public Object visitFIntegerLiteral(FIntegerLiteral node) {
-	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getFValue(), memory.getROFactory());
+	public Object visitIntegerLiteral(IntegerLiteral node) {
+	    return fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(node.getValue(), memory.getROFactory());
 	}
 	
 	/**
 	 * @return the value of this node as a boolean
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FBooleanLiteral) 
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.BooleanLiteral) 
 	 */
-	public Object visitFBooleanLiteral(FBooleanLiteral node) {
-	    return memory.getRuntimeObjectForBoolean(node.isFValue());
+	public Object visitBooleanLiteral(BooleanLiteral node) {
+	    return memory.getRuntimeObjectForBoolean(node.isValue());
 	}
 	
-	public Object visitFEnumerationLiteral(FEnumerationLiteral node)
+	public Object visitEnumerationLiteral(EnumerationLiteral node)
 	{
 	    throw new Error("INTERPRETER ERROR : Enumeration NOT IMPLEMENTED !");
 	}
 	
     /** 
      * @return the value of this node as a runtime object
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FStringLiteral)
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.StringLiteral)
      */
-    public Object visitFStringLiteral(FStringLiteral node) {
-        RuntimeObject result = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getFValue(), memory.getROFactory());
+    public Object visitStringLiteral(StringLiteral node) {
+        RuntimeObject result = fr.irisa.triskell.kermeta.runtime.basetypes.String.create(node.getValue(), memory.getROFactory());
         return result;
     }
 	/**
 	 * Visit a classDefinition node has the following consequences :
 	 * - create the "self" RuntimeObject and link it to the current CallFrame context 
 	 */
-	public Object visitFClassDefinition(FClassDefinition node)
+	public Object visitClassDefinition(ClassDefinition node)
 	{
 	    // Get the qualified name of this class
 	    String qname = memory.getUnit().getQualifiedName(node);
@@ -1032,11 +1035,11 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	
     /**
      * visit a raise node
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FRaise)
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.Raise)
      */
-    public Object visitFRaise(FRaise node) {
+    public Object visitRaise(Raise node) {
         // TODO : improve this to allow exception to be rescued.
-        RuntimeObject exception = (RuntimeObject)this.accept(node.getFExpression());
+        RuntimeObject exception = (RuntimeObject)this.accept(node.getExpression());
         // DVK: I don't understand why we should use the CallFrame exception here: (more it is often null !
         // the node is enough to compute a context
         //raiseKermetaException(exception, interpreterContext.peekCallFrame().getExpression());
@@ -1046,10 +1049,10 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         return null;
     }
     /**
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.FRescue)
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.behavior.Rescue)
      */
-    public Object visitFRescue(FRescue node) {
-        throw new Error("INTERPRETER ERROR : visit(FRescue node) NOT IMPLEMENTED !");
+    public Object visitRescue(Rescue node) {
+        throw new Error("INTERPRETER ERROR : visit(Rescue node) NOT IMPLEMENTED !");
     }
 	/*
 	 * 
@@ -1062,17 +1065,17 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	/**
 	 * Get the return type of the <code>node</code>, which is a method
 	 * or an operation.
-	 * This node is a FCallExpression
+	 * This node is a CallExpression
 	 * @param node
 	 * @return
 	 */
-	public Object getReturnType(FCallExpression node)
+	public Object getReturnType(CallExpression node)
 	{
 	    // get node name
-	    String name = node.getFName();
+	    String name = node.getName();
 	    //String qualifiedName = getQualifiedName(node);
 	    // get its definition
-	    FTypeDefinition typeDef = memory.getUnit().getTypeDefinitionByName(name);
+	    TypeDefinition typeDef = memory.getUnit().getTypeDefinitionByName(name);
 	    return typeDef;
 	}
 	
@@ -1094,7 +1097,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	}
 	
 	/**
-	 * Visit a list of statements. Used when we visit the FBlock element.
+	 * Visit a list of statements. Used when we visit the Block element.
 	 * The only difference with visitList is that it updates the attribute
 	 * "statement" in the ExpressionContext of the interpreter, so that we know
 	 * which statement is currently evaluated in a debug mode. It does not
@@ -1117,10 +1120,10 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	/**
 	 * Get the fully qualified name of an FNamedElemenet
 	 */
-	public String getQualifiedName(FNamedElement element) {
-		if (element.eContainer() != null && element.eContainer() instanceof FNamedElement)
-			return getQualifiedName( (FNamedElement)element.eContainer() ) + "::" + ppIdentifier(element.getFName());
-		else return element.getFName();
+	public String getQualifiedName(NamedElement element) {
+		if (element.eContainer() != null && element.eContainer() instanceof NamedElement)
+			return getQualifiedName( (NamedElement)element.eContainer() ) + "::" + ppIdentifier(element.getName());
+		else return element.getName();
 	}
 	
 	/**
@@ -1142,13 +1145,13 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      * @param classDef
      * @return the ecore object representing this super op or super attr.
      */
-    public Object getSuperFeatureType(FClassDefinition classDef, FCallFeature feature)
+    public Object getSuperFeatureType(ClassDefinition classDef, CallFeature feature)
     {
         Object result = null;
-        Iterator st_it = classDef.getFSuperType().iterator();
+        Iterator st_it = classDef.getSuperType().iterator();
         while (st_it.hasNext() && result == null)
         {
-            FClassDefinition next = (FClassDefinition) ((FClass)st_it.next()).getFTypeDefinition();
+            ClassDefinition next = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)st_it.next()).getTypeDefinition();
             result = getFlatFeatureType(next, feature);
             // If we still have not found them, find in super types! 
             if (result == null)
@@ -1166,26 +1169,26 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      * @param feature
      * @return
      */
-    protected Object getFlatFeatureType(FClassDefinition type, FCallFeature feature)
+    protected Object getFlatFeatureType(ClassDefinition type, CallFeature feature)
     {
         Object result = null; Object elt = null; 
-        EList operations = type.getFOwnedOperation();
+        EList operations = type.getOwnedOperation();
         int i = 0;
         while (i < operations.size() && result == null)
         {	
             elt = operations.get(i);
-            if (((FOperation)operations.get(i)).getFName().equals(feature.getFName()))
+            if (((Operation)operations.get(i)).getName().equals(feature.getName()))
                 result = elt;
             i++;
         }
         if (result == null)
         {
-            EList attributes = type.getFOwnedAttributes();
+            EList attributes = type.getOwnedAttribute();
             i=0;
             while (i < attributes.size() && result == null)
             {
                 elt = attributes.get(i);
-                if (((FProperty)attributes.get(i++)).getFName().equals(feature.getFName()))
+                if (((Property)attributes.get(i++)).getName().equals(feature.getName()))
                     result = elt;
             }   
         }
@@ -1196,16 +1199,16 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      * 
      * @param obj the runtimeObject that is raised. Should be an instance of
      * a kermeta::exceptions::Exception. 
-     * @param node the node that is wrong. Usually, it is an FExpression, but not mandatory
+     * @param node the node that is wrong. Usually, it is an Expression, but not mandatory
      */
-    public void raiseKermetaException(RuntimeObject obj, FObject node) {
+    public void raiseKermetaException(RuntimeObject obj, fr.irisa.triskell.kermeta.language.structure.Object node) {
         RuntimeObject rnode = this.getMemory().getRuntimeObjectForFObject(node);
         KermetaRaisedException e = new KermetaRaisedException(obj, rnode, this);
         e.setContextString(this,rnode);
         throw new KermetaRaisedException(obj, rnode, this);	
     }   
     
-    public void raiseCallOnVoidTargetException(FObject node, String additionalmsg) {
+    public void raiseCallOnVoidTargetException(fr.irisa.triskell.kermeta.language.structure.Object node, String additionalmsg) {
     	//RuntimeObjectFactory rofactory = memory.getROFactory();
     	//RuntimeObject raised_object = rofactory.createObjectFromClassName("kermeta::exceptions::CallOnVoidTarget");
     	

@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesHandler.java,v 1.5 2005-04-19 08:46:44 ffleurey Exp $
+/* $Id: KMTBodiesHandler.java,v 1.6 2006-03-03 15:22:19 dvojtise Exp $
  * Created on Feb 21, 2005
  * Author : zdrey
  * Description : describe here your class role
@@ -69,7 +69,7 @@ public class KMTBodiesHandler {
         target_unit.load();
         
         // archivate the target_kmt before modifying it
-        String rootpkgstr = target_unit.rootPackage.getFName();
+        String rootpkgstr = target_unit.rootPackage.getName();
         
         // save new injected-file, and archive former ones
         File dir = new File(ARCH_DIR);

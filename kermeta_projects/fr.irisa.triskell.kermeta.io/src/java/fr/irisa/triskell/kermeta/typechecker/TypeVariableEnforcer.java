@@ -1,4 +1,4 @@
-/* $Id: TypeVariableEnforcer.java,v 1.5 2006-02-21 17:34:19 jsteel Exp $
+/* $Id: TypeVariableEnforcer.java,v 1.6 2006-03-03 15:22:18 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : GenericTypeSubstitution.java
 * License : GPL
@@ -7,25 +7,25 @@
 * Creation date : 12 avr. 2005
 * Author : Franck Fleurey
 * Description :
-* Transforms a FType that contains type variables into an 
-* actual Ftype by replacing variables by their values.
+* Transforms a fr.irisa.triskell.kermeta.language.structure.Type that contains type variables into an 
+* actual fr.irisa.triskell.kermeta.language.structure.Type by replacing variables by their values.
 */ 
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FFunctionType;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
-import fr.irisa.triskell.kermeta.structure.FVoidType;
-import fr.irisa.triskell.kermeta.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
+//import fr.irisa.triskell.kermeta.language.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -36,17 +36,17 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
  */
 public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	
-	public static FType getBoundType(FType generic, Hashtable bindings) {
+	public static fr.irisa.triskell.kermeta.language.structure.Type getBoundType(fr.irisa.triskell.kermeta.language.structure.Type generic, Hashtable bindings) {
 		TypeVariableEnforcer visitor = new TypeVariableEnforcer(bindings);
-		return (FType) visitor.accept(generic);
+		return (fr.irisa.triskell.kermeta.language.structure.Type) visitor.accept(generic);
 	}
 	
-	public static Hashtable getTypeVariableBinding(FClass c) {
+	public static Hashtable getTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Class c) {
 		Hashtable result = new Hashtable();
-		Iterator it = c.getFTypeParamBinding().iterator();
+		Iterator it = c.getTypeParamBinding().iterator();
 		while(it.hasNext()) {
-			FTypeVariableBinding bind = (FTypeVariableBinding)it.next();
-			result.put(bind.getFVariable(), bind.getFType());
+			TypeVariableBinding bind = (TypeVariableBinding)it.next();
+			result.put(bind.getVariable(), bind.getType());
 		}
 		return result;
 	}
@@ -58,61 +58,61 @@ public class TypeVariableEnforcer extends KermetaOptimizedVisitor {
 	/**
 	 * Create a copy of the function type by resolving types
 	 */
-	public Object visitFFunctionType(FFunctionType arg0) {
-		FFunctionType result = struct_factory.createFFunctionType();
-		result.setFLeft(getBoundType(arg0.getFLeft(), bindings));
-		result.setFRight(getBoundType(arg0.getFRight(), bindings));
+	public Object visitFunctionType(FunctionType arg0) {
+		FunctionType result = struct_factory.createFunctionType();
+		result.setLeft(getBoundType(arg0.getLeft(), bindings));
+		result.setRight(getBoundType(arg0.getRight(), bindings));
 		return result;
 	}
 	
 	/**
 	 * Create a copy of the FClass with resolved type parameters
 	 */
-	public Object visitFClass(FClass arg0) {
-		FClass result;
-		if ( arg0.getFTypeParamBinding().size() == 0) {
+	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class arg0) {
+		fr.irisa.triskell.kermeta.language.structure.Class result;
+		if ( arg0.getTypeParamBinding().size() == 0) {
 			result = arg0;
 		}
 		else {
-			result = struct_factory.createFClass();
-			result.setFTypeDefinition(arg0.getFTypeDefinition());
-			Iterator it = arg0.getFTypeParamBinding().iterator();
+			result = struct_factory.createClass();
+			result.setTypeDefinition(arg0.getTypeDefinition());
+			Iterator it = arg0.getTypeParamBinding().iterator();
 			while(it.hasNext()) {
-				FTypeVariableBinding provided = (FTypeVariableBinding)it.next();
-				FTypeVariableBinding bind = struct_factory.createFTypeVariableBinding();
-				bind.setFVariable(provided.getFVariable());
-				bind.setFType(getBoundType(provided.getFType(), bindings));
-				result.getFTypeParamBinding().add(bind);
+				TypeVariableBinding provided = (TypeVariableBinding)it.next();
+				TypeVariableBinding bind = struct_factory.createTypeVariableBinding();
+				bind.setVariable(provided.getVariable());
+				bind.setType(getBoundType(provided.getType(), bindings));
+				result.getTypeParamBinding().add(bind);
 			}
 		}
 		return result;
 	}
 	
-	public Object visitFEnumeration(FEnumeration arg0) {
+	public Object visitEnumeration(Enumeration arg0) {
 		return arg0;
 	}
 	
-	public Object visitFPrimitiveType(FPrimitiveType arg0) {
+	public Object visitPrimitiveType(PrimitiveType arg0) {
 		return arg0;
 	}
 	
-	public Object visitFProductType(FProductType arg0) {
-		FProductType result = struct_factory.createFProductType();
-		Iterator it = arg0.getFType().iterator();
+	public Object visitProductType(ProductType arg0) {
+		ProductType result = struct_factory.createProductType();
+		Iterator it = arg0.getType().iterator();
 		while(it.hasNext()) {
-			FType t = (FType)it.next();
-			result.getFType().add(getBoundType(t, bindings));
+			fr.irisa.triskell.kermeta.language.structure.Type t = (fr.irisa.triskell.kermeta.language.structure.Type)it.next();
+			result.getType().add(getBoundType(t, bindings));
 		}
 		return result;
 	}
 	
 	
-	public Object visitFTypeVariable(FTypeVariable arg0) {
-		if (bindings.containsKey(arg0)) return (FType)bindings.get(arg0);
+	public Object visitTypeVariable(TypeVariable arg0) {
+		if (bindings.containsKey(arg0)) return (fr.irisa.triskell.kermeta.language.structure.Type)bindings.get(arg0);
 		else return arg0;
 	}
 	
-	public Object visitFVoidType(FVoidType arg0) {
+	public Object visitVoidType(VoidType arg0) {
 	    return arg0;
 	}
 	

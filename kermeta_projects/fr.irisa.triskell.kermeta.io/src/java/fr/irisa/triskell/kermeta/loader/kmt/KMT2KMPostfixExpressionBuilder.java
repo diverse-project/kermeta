@@ -11,11 +11,11 @@ import fr.irisa.triskell.kermeta.ast.LambdaPostfix;
 import fr.irisa.triskell.kermeta.ast.LambdaPostfixParam;
 import fr.irisa.triskell.kermeta.ast.ParamPostfix;
 import fr.irisa.triskell.kermeta.ast.PostfixExp;
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
-import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
-import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -39,14 +39,14 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  */
 public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 
-	public static FExpression process(PostfixExp node, KermetaUnit builder) {
+	public static Expression process(PostfixExp node, KermetaUnit builder) {
 		if (node == null) return null;
 		KMT2KMPostfixExpressionBuilder visitor = new KMT2KMPostfixExpressionBuilder(builder);
 		node.accept(visitor);
 		return visitor.result;
 	}
 	
-	protected FExpression result;
+	protected Expression result;
 	
 	/**
 	 * @param builder
@@ -69,27 +69,27 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.CallPostfix)
 	 */
 	public boolean beginVisit(CallPostfix callPostfix) {
-		FCallFeature call = builder.behav_factory.createFCallFeature();
+		CallFeature call = builder.behav_factory.createCallFeature();
 		builder.storeTrace(call,callPostfix);
-		call.setFName(getTextForID(callPostfix.getName()));
-		call.setFTarget(result);
+		call.setName(getTextForID(callPostfix.getName()));
+		call.setTarget(result);
 		result = call;
 		return false;
 	}
 	
 	
-	FLambdaExpression current_le;
+	LambdaExpression current_le;
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.LambdaPostfix)
 	 */
 	public boolean beginVisit(LambdaPostfix lambdaPostfix) {
-		if (result instanceof FCallExpression &&((FCallExpression)result).getFParameters().size() == 0) {
-			current_le = builder.behav_factory.createFLambdaExpression();
+		if (result instanceof CallExpression &&((CallExpression)result).getParameters().size() == 0) {
+			current_le = builder.behav_factory.createLambdaExpression();
 			builder.storeTrace(current_le,lambdaPostfix);
 			builder.pushContext();
 			lambdaPostfix.getParams().accept(this);
-			current_le.setFBody(createBlock(lambdaPostfix.getExpression()));
-			((FCallExpression)result).getFParameters().add(current_le);
+			current_le.setBody(createBlock(lambdaPostfix.getExpression()));
+			((CallExpression)result).getParameters().add(current_le);
 			builder.popContext();
 		}
 		else {
@@ -100,11 +100,11 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 		return false;
 	}
 	
-	protected fr.irisa.triskell.kermeta.behavior.FBlock createBlock(FExpressionLst explst) {
-		fr.irisa.triskell.kermeta.behavior.FBlock block =  builder.behav_factory.createFBlock();
+	protected fr.irisa.triskell.kermeta.language.behavior.Block createBlock(FExpressionLst explst) {
+		fr.irisa.triskell.kermeta.language.behavior.Block block =  builder.behav_factory.createBlock();
 		if (explst != null) {
 			builder.storeTrace(block,explst);
-			block.getFStatement().addAll(KMT2KMExperessionListBuilder.process(explst, builder));
+			block.getStatement().addAll(KMT2KMExperessionListBuilder.process(explst, builder));
 		}
 		return block;
 	}
@@ -113,11 +113,11 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.LambdaPostfixParam)
 	 */
 	public boolean beginVisit(LambdaPostfixParam lambdaPostfixParam) {
-		FLambdaParameter lp = builder.behav_factory.createFLambdaParameter();
+		LambdaParameter lp = builder.behav_factory.createLambdaParameter();
 		builder.storeTrace(lp,lambdaPostfixParam);
-		lp.setFName(getTextForID(lambdaPostfixParam.getName()));
+		lp.setName(getTextForID(lambdaPostfixParam.getName()));
 		builder.addSymbol(new KMSymbolLambdaParameter(lp));
-		current_le.getFParameters().add(lp);
+		current_le.getParameters().add(lp);
 		//TODO: The type of the parameter cannot be set here. Do it in the type chacker !!
 		return false;
 	}
@@ -127,7 +127,7 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 	 */
 	public boolean beginVisit(ParamPostfix paramPostfix) {
 		// It should be a call expression and it must not have actual parameters yet
-		if (result instanceof FCallExpression &&((FCallExpression)result).getFParameters().size() == 0) {
+		if (result instanceof CallExpression &&((CallExpression)result).getParameters().size() == 0) {
 			// The parameters are binded by beginVisit(ActualParameter actualParameter)
 		}
 		else {
@@ -141,9 +141,9 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ActualParameter)
 	 */
 	public boolean beginVisit(ActualParameter actualParameter) {
-		FCallExpression res = (FCallExpression)result;
-		FExpression param = KMT2KMExperessionBuilder.process(actualParameter.getExpression(), builder);
-		res.getFParameters().add(param);
+		CallExpression res = (CallExpression)result;
+		Expression param = KMT2KMExperessionBuilder.process(actualParameter.getExpression(), builder);
+		res.getParameters().add(param);
 		return false;
 	}
 }

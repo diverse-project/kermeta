@@ -133,7 +133,7 @@ class VoidLiteral inherits Literal, KMExpressionVisitable
 }
 class Loop inherits Expression, KMExpressionVisitable
 {
-	attribute initiatization : Expression
+	attribute initialization : Expression
 	attribute body : Expression
 	attribute stopCondition : Expression
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is

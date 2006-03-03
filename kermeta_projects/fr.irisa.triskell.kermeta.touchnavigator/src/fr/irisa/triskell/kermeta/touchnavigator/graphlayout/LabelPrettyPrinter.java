@@ -1,4 +1,4 @@
-/* $Id: LabelPrettyPrinter.java,v 1.1 2005-11-11 07:10:04 dvojtise Exp $
+/* $Id: LabelPrettyPrinter.java,v 1.2 2006-03-03 15:24:04 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : LabelPrettyPrinter.java
  * License : EPL
@@ -10,38 +10,38 @@
  */
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
-import fr.irisa.triskell.kermeta.behavior.*;
-import fr.irisa.triskell.kermeta.structure.*;
+import fr.irisa.triskell.kermeta.language.behavior.*;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 public class LabelPrettyPrinter extends KermetaOptimizedVisitor{
 
-	public Object visitFClass(FClass node) {
-		String qname = KMTHelper.getQualifiedName(node.getFClassDefinition());
+	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
+		String qname = KMTHelper.getQualifiedName(node.getTypeDefinition());
 		/*String name = KMTHelper.getMangledIdentifier(node.getFClassDefinition().getFName());
 		String result = ppTypeName(qname, name);
 		if (node.getFTypeParamBinding().size() > 0) {
 			result += "<" + ppComaSeparatedNodes(node.getFTypeParamBinding()) + ">";
 		}*/
-		TouchNavigatorPlugin.internalLog.debug("visitFClass : "+qname);
+		TouchNavigatorPlugin.internalLog.debug("visitClass : "+qname);
 		return qname;
 	}
-	public Object visitFClassDefinition(FClassDefinition node) {
+	public Object visitClassDefinition(ClassDefinition node) {
 		String qname = KMTHelper.getQualifiedName(node);
 		return qname;
 	}
-	public Object visitFCallFeature(FCallFeature node) {
-		if (node.getFStaticOperation() != null)
+	public Object visitCallFeature(CallFeature node) {
+		if (node.getStaticOperation() != null)
 	    {
-			TouchNavigatorPlugin.internalLog.debug("node.getFStaticOperation() : "+node.getFStaticOperation());
-			return accept(node.getFStaticOperation().getFType());
+			TouchNavigatorPlugin.internalLog.debug("node.getFStaticOperation() : "+node.getStaticOperation());
+			return accept(node.getStaticOperation().getType());
 	    }
-		else if (node.getFStaticProperty() != null)
+		else if (node.getStaticProperty() != null)
 	    {
-			TouchNavigatorPlugin.internalLog.debug("node.getFStaticProperty().getFType() : "+node.getFStaticProperty().getFType());
-			return this.accept(node.getFStaticProperty().getFType());
+			TouchNavigatorPlugin.internalLog.debug("node.getFStaticProperty().getFType() : "+node.getStaticProperty().getType());
+			return this.accept(node.getStaticProperty().getType());
 	    }
 		return null;
 	}

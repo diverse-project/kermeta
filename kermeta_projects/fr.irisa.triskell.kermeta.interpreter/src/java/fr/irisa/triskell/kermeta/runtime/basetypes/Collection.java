@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 
 public class Collection {
 
@@ -47,19 +47,19 @@ public class Collection {
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection::iterator()
 	public static RuntimeObject iterator(RuntimeObject self) {
 		
-	    FClass it_class = self.getFactory().getMemory().getUnit().struct_factory.createFClass();
+		fr.irisa.triskell.kermeta.language.structure.Class it_class = self.getFactory().getMemory().getUnit().struct_factory.createClass();
 	    
-	    it_class.setFTypeDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    it_class.setTypeDefinition((ClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
 	    
-	    FTypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+	    TypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
 	    
-	    binding.setFVariable((FTypeVariable)it_class.getFTypeDefinition().getFTypeParameter().get(0));
+	    binding.setVariable((TypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
 	    
-	    FClass self_class = (FClass)self.getMetaclass().getData().get("kcoreObject");
+	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
 	    
-	    binding.setFType(((FTypeVariableBinding)self_class.getFTypeParamBinding().get(0)).getFType());
+	    binding.setType(((TypeVariableBinding)self_class.getTypeParamBinding().get(0)).getType());
 	    
-	    it_class.getFTypeParamBinding().add(binding);
+	    it_class.getTypeParamBinding().add(binding);
 	    
 	    RuntimeObject result = self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass(it_class));
 		
@@ -82,20 +82,20 @@ public class Collection {
 	 * @param factory : the runtime object factory
 	 * @param typeParam : the type parameter value of the Collection to create
 	 */
-	public static RuntimeObject create(java.lang.String specColl, RuntimeObjectFactory factory, FType typeParam) {
+	public static RuntimeObject create(java.lang.String specColl, RuntimeObjectFactory factory, Type typeParam) {
 		
-	    FClass coll_class = factory.getMemory().getUnit().struct_factory.createFClass();
+		fr.irisa.triskell.kermeta.language.structure.Class coll_class = factory.getMemory().getUnit().struct_factory.createClass();
 	    
-	    coll_class.setFTypeDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup(specColl));
+	    coll_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup(specColl));
 	    
-	    FTypeVariableBinding binding = factory.getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+	    TypeVariableBinding binding = factory.getMemory().getUnit().struct_factory.createTypeVariableBinding();
 	    
-	    binding.setFVariable((FTypeVariable)coll_class.getFTypeDefinition().getFTypeParameter().get(0));
+	    binding.setVariable((TypeVariable)coll_class.getTypeDefinition().getTypeParameter().get(0));
 	    
 	    // Set the param binding type
-	    binding.setFType(typeParam);
+	    binding.setType(typeParam);
 	    // Add to type param bindings the binding
-	    coll_class.getFTypeParamBinding().add(binding);
+	    coll_class.getTypeParamBinding().add(binding);
 	    
 	    RuntimeObject result = factory.createRuntimeObjectFromClass(factory.createMetaClass(coll_class));
 		

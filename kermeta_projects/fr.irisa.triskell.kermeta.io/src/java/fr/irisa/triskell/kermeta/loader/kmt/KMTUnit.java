@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.19 2006-02-22 09:35:04 zdrey Exp $
+/* $Id: KMTUnit.java,v 1.20 2006-03-03 15:22:18 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : EPL
@@ -27,7 +27,7 @@ import fr.irisa.triskell.kermeta.loader.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 
 /**
@@ -52,7 +52,7 @@ public class KMTUnit extends KermetaUnit {
 	    traceT2M.clear();
 	}
 	
-	public KermetaASTNode getKMTAstNodeForModelElement(FObject element) {
+	public KermetaASTNode getKMTAstNodeForModelElement(fr.irisa.triskell.kermeta.language.structure.Object element) {
 	    return (KermetaASTNode)getNodeByModelElement(element);
 	}
 	
@@ -104,7 +104,8 @@ public class KMTUnit extends KermetaUnit {
 	    String output = new String();
 	    try
 	    {
-	        int c; int charcount = 0; int linenum = 1; int c_old = -1;
+	        int c; 
+	       // int charcount = 0; int linenum = 1; int c_old = -1;
 	        while ((c = in.read()) != -1) {
 	            output += (char)c;
 	        }

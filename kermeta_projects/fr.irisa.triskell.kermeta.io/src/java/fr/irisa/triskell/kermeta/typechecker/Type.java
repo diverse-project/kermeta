@@ -1,4 +1,4 @@
-/* $Id: Type.java,v 1.2 2005-05-18 23:42:26 ffleurey Exp $
+/* $Id: Type.java,v 1.3 2006-03-03 15:22:18 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : Type.java
 * License : GPL
@@ -15,7 +15,7 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-import fr.irisa.triskell.kermeta.structure.FType;
+//import fr.irisa.triskell.kermeta.language.structure.FType;
 
 /**
  * @author Franck Fleurey
@@ -38,11 +38,11 @@ public abstract class Type {
 	public abstract boolean isSubTypeOf(Type type);
 	
 	/**
-	 * Return an FType : the corresponding FType if this is a
+	 * Return an fr.irisa.triskell.kermeta.language.structure.Type : the corresponding FType if this is a
 	 * simple type and the moste derived ftype as possible if it is a 
 	 * union type
 	 */
-	public abstract FType getFType();
+	public abstract fr.irisa.triskell.kermeta.language.structure.Type getFType();
 	
 	/**
 	 * Return the Left type of this Type if it is a function type.
@@ -92,7 +92,7 @@ public abstract class Type {
 	 * @param generic
 	 * @param binding
 	 */
-	protected abstract void inferTypeVariableBinding(FType generic, Hashtable binding);
+	protected abstract void inferTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Type generic, Hashtable binding);
 	
 	/**
 	 * Get a callable operation by its name.
@@ -107,7 +107,7 @@ public abstract class Type {
 		java.util.Iterator it = ops.iterator();
 		while(it.hasNext()) {
 		    CallableOperation op = (CallableOperation)it.next();
-			if (op.operation.getFName().equals(name)) return op;
+			if (op.operation.getName().equals(name)) return op;
 		}
 		return null;
 	}
@@ -125,7 +125,7 @@ public abstract class Type {
 		java.util.Iterator it = props.iterator();
 		while(it.hasNext()) {
 		    CallableProperty prop = (CallableProperty)it.next();
-			if (prop.property.getFName().equals(name)) return prop;
+			if (prop.property.getName().equals(name)) return prop;
 		}
 		return null;
 	}

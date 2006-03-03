@@ -1,4 +1,4 @@
-/* $Id: StepIntoCondition.java,v 1.6 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: StepIntoCondition.java,v 1.7 2006-03-03 15:23:35 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : StepIntoCondition.java
  * License   : EPL
@@ -11,12 +11,10 @@ package fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.conditions;
 
 import java.rmi.RemoteException;
 
-import fr.irisa.triskell.kermeta.ast.FBlock;
-import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
+//import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
-import fr.irisa.triskell.kermeta.structure.FOperation;
 
 public class StepIntoCondition extends AbstractKermetaDebugCondition {
 

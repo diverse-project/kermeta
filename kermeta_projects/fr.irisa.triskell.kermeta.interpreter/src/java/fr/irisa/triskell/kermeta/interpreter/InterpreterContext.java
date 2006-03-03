@@ -1,4 +1,4 @@
-/* $Id: InterpreterContext.java,v 1.15 2005-12-06 18:56:55 zdrey Exp $
+/* $Id: InterpreterContext.java,v 1.16 2006-03-03 15:21:47 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : InterpreterContext.java
  * License : EPL
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Stack;
 
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.typechecker.CallableElement;
@@ -115,7 +115,7 @@ public class InterpreterContext {
 	 * @param self_object : the object on which an operation was applied. This operation is
 	 * the one that led to the creation of this new CallFrame
 	 */
-	public void pushOperationCallFrame(RuntimeObject self_object, CallableElement callable, ArrayList parameters, FCallExpression expression)
+	public void pushOperationCallFrame(RuntimeObject self_object, CallableElement callable, ArrayList parameters, CallExpression expression)
 	{
 	    CallFrame new_frame = new OperationCallFrame(this, callable, self_object, parameters, expression);
 	    frame_stack.push(new_frame);

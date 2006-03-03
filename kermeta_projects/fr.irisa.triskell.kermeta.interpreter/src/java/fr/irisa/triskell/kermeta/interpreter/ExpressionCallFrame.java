@@ -1,4 +1,4 @@
-/* $Id: ExpressionCallFrame.java,v 1.6 2005-12-05 09:25:41 ffleurey Exp $
+/* $Id: ExpressionCallFrame.java,v 1.7 2006-03-03 15:21:47 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionCallFrame.java
 * License : GPL
@@ -10,16 +10,16 @@
 
 package fr.irisa.triskell.kermeta.interpreter;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
+//import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
-import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
+//import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 
 /**
  * @author Franck Fleurey
@@ -53,9 +53,9 @@ public class ExpressionCallFrame extends CallFrame {
         pushExpressionContext();
         
         for(int i=0; i<unit.getVariables().size(); i++) {
-            FVariableDecl var = (FVariableDecl)unit.getVariables().get(i);
-            RuntimeObject obj = (RuntimeObject)actualParam.get(var.getFIdentifier());
-            peekExpressionContext().defineVariable(var.getFIdentifier(), obj);
+            VariableDecl var = (VariableDecl)unit.getVariables().get(i);
+            RuntimeObject obj = (RuntimeObject)actualParam.get(var.getIdentifier());
+            peekExpressionContext().defineVariable(var.getIdentifier(), obj);
         }
     }
     
@@ -95,12 +95,12 @@ public class ExpressionCallFrame extends CallFrame {
     /* (non-Javadoc)
      * @see fr.irisa.triskell.kermeta.interpreter.CallFrame#getOperation()
      */
-    public FOperation getOperation() {
+    public Operation getOperation() {
         return null;
     }
     
     /** Return the expression that is linked to this call frame */
-    public FObject getExpression() {
+    public fr.irisa.triskell.kermeta.language.structure.Object getExpression() {
         return unit.getExpression();
     }
     

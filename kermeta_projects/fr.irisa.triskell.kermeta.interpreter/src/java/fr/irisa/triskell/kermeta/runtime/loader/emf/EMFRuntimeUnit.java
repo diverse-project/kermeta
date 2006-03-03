@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.8 2006-02-09 13:03:50 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.9 2006-03-03 15:21:47 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -28,7 +28,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * FIXME : Check that we work with all qualified names of Classes.
@@ -39,7 +39,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     public String metamodel_uri;
     /** almost deprecated */
     protected EcoreUnit ecore_unit;
-    protected FObject kermeta_mm;
+    protected fr.irisa.triskell.kermeta.language.structure.Object kermeta_mm;
     /** { EObject : RuntimeObject } */
     private Hashtable runtime_objects_map;
     

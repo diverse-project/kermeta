@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.15 2006-02-22 09:21:08 zdrey Exp $
+/* $Id: DebugInterpreter.java,v 1.16 2006-03-03 15:21:47 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -13,35 +13,29 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 
 
-import fr.irisa.triskell.kermeta.behavior.FAssignement;
-import fr.irisa.triskell.kermeta.behavior.FBlock;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FCallResult;
-import fr.irisa.triskell.kermeta.behavior.FCallSuperOperation;
-import fr.irisa.triskell.kermeta.behavior.FJavaStaticCall;
+import fr.irisa.triskell.kermeta.language.behavior.Assignment;
+import fr.irisa.triskell.kermeta.language.behavior.Block;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
+import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
 
-import fr.irisa.triskell.kermeta.behavior.FConditionnal;
+import fr.irisa.triskell.kermeta.language.behavior.Conditional;
 
-import fr.irisa.triskell.kermeta.behavior.FLoop;
-import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
+import fr.irisa.triskell.kermeta.language.behavior.Loop;
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.interpreter.AbstractKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
-import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 
 /**
@@ -54,7 +48,7 @@ import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 public class DebugInterpreter extends ExpressionInterpreter {
 
     EObject current_eobject;
-    FBlock current_block;
+    Block current_block;
     
     public static final String DEBUG_STEPEND = "stepEnd";
     public static final String DEBUG_STEPINTO = "stepInto";
@@ -70,8 +64,8 @@ public class DebugInterpreter extends ExpressionInterpreter {
     /** A table of { oid : runtimeObject }*/
     protected Hashtable currentVisibleRuntimeObjects;
     
-    public FClass entryObject ;
-    public FOperation entryOperation ;
+    public fr.irisa.triskell.kermeta.language.structure.Class entryObject ;
+    public Operation entryOperation ;
     public ArrayList entryArguments  ;
     public AbstractKermetaDebugCondition debugCondition;
     
@@ -94,9 +88,9 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 * @param foperation
 	 * @param arguments
 	 */
-	public void initialize(RuntimeObject ro_target,FOperation foperation,ArrayList arguments) {
+	public void initialize(RuntimeObject ro_target,Operation foperation,ArrayList arguments) {
 		
-		FClass self_type = (FClass)ro_target.getMetaclass().getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getData().get("kcoreObject");
 		
 		entryObject = self_type;
 		entryOperation = foperation;
@@ -104,7 +98,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 		
 		CallableOperation op = new CallableOperation(foperation, self_type);
 		// Create a context for this operation call, setting self object to ro_target
-		// We should have a FCallFeature
+		// We should have a CallFeature
         interpreterContext.pushOperationCallFrame(ro_target, op, arguments, null);
         current_frame = getInterpreterContext().peekCallFrame();
 	}
@@ -139,82 +133,82 @@ public class DebugInterpreter extends ExpressionInterpreter {
     
 	/**
 	 * Visit an operation definition. 
-	 * This visit usually follows the visit of a FCallFeature that is an operation call 
+	 * This visit usually follows the visit of a CallFeature that is an operation call 
 	 * This has the following steps :
 	 * 	- Create an expression context for the variables defined at "top level" in this operation
 	 *
 	 * "Here" begins the debugging/execution of a Kermeta program
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visitFOperation(FOperation node) {
+	public Object visitOperation(Operation node) {
 		Object result = memory.voidINSTANCE;
-		result = super.visitFOperation(node);
+		result = super.visitOperation(node);
 		return result;
 	}
 
     /**
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFAssignement(fr.irisa.triskell.kermeta.behavior.FAssignement)
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitAssignment(fr.irisa.triskell.kermeta.behavior.Assignment)
      */
-    public Object visitFAssignement(FAssignement node) {
+    public Object visitAssignment(Assignment node) {
     	Object result = memory.voidINSTANCE;
     	if (shouldTerminate()) return result;
     	processDebugCommand(node);
-    	result = super.visitFAssignement(node);
+    	result = super.visitAssignment(node);
         processPostCommand(node);
         return result;
     }
     
     /** 
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFCallFeature(fr.irisa.triskell.kermeta.behavior.FCallFeature)
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitCallFeature(fr.irisa.triskell.kermeta.behavior.CallFeature)
      */
-    public Object visitFCallFeature(FCallFeature node) {
+    public Object visitCallFeature(CallFeature node) {
     	Object result = memory.voidINSTANCE;
     	// (Simple test to terminate)
     	//if (shouldTerminate()) return result;
     	processDebugCommand(node);
-    	result = super.visitFCallFeature(node);
+    	result = super.visitCallFeature(node);
     	processPostCommand(node);
         return result;
     }
     
 
     /**
-     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFBlock(fr.irisa.triskell.kermeta.behavior.FBlock)
-     * @note : we don't need to control neither the execution of a FBlock, nor 
-     * the execution of a FLoop, nor FConditional : they directly contains not executable
+     * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitBlock(fr.irisa.triskell.kermeta.behavior.Block)
+     * @note : we don't need to control neither the execution of a Block, nor 
+     * the execution of a Loop, nor FConditional : they directly contains not executable
      * statement : so, we control only the children of those elements ( FStopCondition, the list
-     * of statements inside the FBlock, etc.)
+     * of statements inside the Block, etc.)
      * (We don't have to stop in a block decl.)
      * We just need to stop the execution
      */
-    public Object visitFBlock(FBlock node)  {
+    public Object visitBlock(Block node)  {
     	if (shouldTerminate()) return memory.voidINSTANCE;
-    	return super.visitFBlock(node);
+    	return super.visitBlock(node);
     }
     /**
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFConditionnal(fr.irisa.triskell.kermeta.behavior.FConditionnal)
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitConditional(fr.irisa.triskell.kermeta.behavior.Conditional)
 	 */
-	public Object visitFConditionnal(FConditionnal node) {
+	public Object visitConditional(Conditional node) {
 		if (shouldTerminate()) return memory.voidINSTANCE;
-		return super.visitFConditionnal(node);
+		return super.visitConditional(node);
 	}
 
 	/**
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFLoop(fr.irisa.triskell.kermeta.behavior.FLoop)
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitLoop(fr.irisa.triskell.kermeta.behavior.Loop)
 	 */
-	public Object visitFLoop(FLoop node) {
+	public Object visitLoop(Loop node) {
 		if (shouldTerminate()) return memory.voidINSTANCE;
-		return super.visitFLoop(node);
+		return super.visitLoop(node);
 	}
 
 	/**
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFCallSuperOperation(fr.irisa.triskell.kermeta.behavior.FCallSuperOperation)
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitCallSuperOperation(fr.irisa.triskell.kermeta.behavior.CallSuperOperation)
 	 */
-	public Object visitFCallSuperOperation(FCallSuperOperation node) {
+	public Object visitCallSuperOperation(CallSuperOperation node) {
 		Object result = memory.voidINSTANCE;
 		if (shouldTerminate()) return result;
 		processDebugCommand(node);
-		result = super.visitFCallSuperOperation(node);
+		result = super.visitCallSuperOperation(node);
 		processPostCommand(node);
 		return result;
 	}
@@ -222,13 +216,13 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	
 
 	/**
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFJavaStaticCall(fr.irisa.triskell.kermeta.behavior.FJavaStaticCall)
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitJavaStaticCall(fr.irisa.triskell.kermeta.behavior.JavaStaticCall)
 	 */
-	public Object visitFJavaStaticCall(FJavaStaticCall node) {
+	public Object visitJavaStaticCall(JavaStaticCall node) {
 		Object result = memory.voidINSTANCE;
 		if (shouldTerminate()) return result;
 		processDebugCommand(node);
-		result = super.visitFJavaStaticCall(node);
+		result = super.visitJavaStaticCall(node);
 		processPostCommand(node);
 		return result;
 	}
@@ -237,13 +231,13 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	
 	/**
 	 * Visit a variable declaration also deserves a stop in the step mode. 
-	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitFVariableDecl(fr.irisa.triskell.kermeta.behavior.FVariableDecl)
+	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitVariableDecl(fr.irisa.triskell.kermeta.behavior.VariableDecl)
 	 */
-	public Object visitFVariableDecl(FVariableDecl node) {
+	public Object visitVariableDecl(VariableDecl node) {
 		Object result = memory.voidINSTANCE;
 		if (shouldTerminate()) return result;
 		processDebugCommand(node);
-		result = super.visitFVariableDecl(node);
+		result = super.visitVariableDecl(node);
 		processPostCommand(node);
 		return result;
 	}
@@ -256,7 +250,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 * for (typically, stepInto, stepOver, or resume), so that the "KermetaRemoteInterpreter"  can block its thread
 	 * accordingly.
 	 * @param node the node of the visit that preceded the call of this postCommand */
-    public void processPostCommand(FObject node)
+    public void processPostCommand(fr.irisa.triskell.kermeta.language.structure.Object node)
     {
     	current_frame = getInterpreterContext().peekCallFrame();
     	
@@ -275,7 +269,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
     			 &&
     			 node.equals(current_frame.peekExpressionContext().getStatement())
     			 && 
-    			 !(node instanceof FBlock)) 
+    			 !(node instanceof Block)) 
     	{
     		setSuspended(true, DEBUG_STEPEND);
     	} 

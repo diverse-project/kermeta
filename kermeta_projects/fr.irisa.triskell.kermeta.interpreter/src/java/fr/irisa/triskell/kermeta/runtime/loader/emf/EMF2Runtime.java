@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.31 2006-02-22 09:27:26 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.32 2006-03-03 15:21:47 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -48,14 +48,13 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -210,7 +209,7 @@ public class EMF2Runtime {
 		catch (WrappedException e){
 
 			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUriAsString() + " : " + e.exception().getMessage(), e);
-			kunit.messages.addError("EMF persistence error : could not load the given model :\n"+ e.exception().getMessage(), (FObject)unit.getContentMap().getData().get("kcoreObject"));
+			kunit.messages.addError("EMF persistence error : could not load the given model :\n"+ e.exception().getMessage(), (fr.irisa.triskell.kermeta.language.structure.Object)unit.getContentMap().getData().get("kcoreObject"));
 			
 			if(resource != null){ // do that even if there where an exception
 				Iterator it = resource.getErrors().iterator();
@@ -504,11 +503,11 @@ public class EMF2Runtime {
 	 * ecore metamodel if it was not found in the main kermeta unit. 
 	 * @param name
 	 */
-	protected FType getMetaClassByName(String name, EMFRuntimeUnit runit)
+	protected Type getMetaClassByName(String name, EMFRuntimeUnit runit)
 	{
-	    FTypeDefinition etype_cdef;
-	    FType ftype = null;
-	    FClass etype_fclass = null;
+	    TypeDefinition etype_cdef;
+	    Type ftype = null;
+	    fr.irisa.triskell.kermeta.language.structure.Class etype_fclass = null;
 	    etype_cdef = runit.getContentMap().getFactory().getMemory().getUnit().getTypeDefinitionByName(name);
 
         if (etype_cdef == null)
@@ -524,14 +523,14 @@ public class EMF2Runtime {
 	    if (etype_cdef!= null)
 	    {
 	    	// pseudo object to get its type?
-	    	if (FClassDefinition.class.isInstance(etype_cdef))
+	    	if (ClassDefinition.class.isInstance(etype_cdef))
 	    	{
-		    	ftype = InheritanceSearch.getFClassForClassDefinition((FClassDefinition)etype_cdef);
+		    	ftype = InheritanceSearch.getFClassForClassDefinition((ClassDefinition)etype_cdef);
 	    	}
 	    	// Is it a primitive type?
-	    	else if (FPrimitiveType.class.isInstance(etype_cdef))
+	    	else if (PrimitiveType.class.isInstance(etype_cdef))
 	    	{
-	    	    ftype = ((FPrimitiveType)etype_cdef).getFInstanceType();
+	    	    ftype = ((PrimitiveType)etype_cdef).getInstanceType();
 	    	}
 	    }
         return ftype; 
@@ -549,7 +548,7 @@ public class EMF2Runtime {
 	    
 	    // Get the FClass of the RuntimeObject to populate
 	    EClass c = eObject.eClass();
-	    FClass fc = (FClass)getMetaClassByName(unit.getEQualifiedName(c), unit);
+	    fr.irisa.triskell.kermeta.language.structure.Class fc = (fr.irisa.triskell.kermeta.language.structure.Class)getMetaClassByName(unit.getEQualifiedName(c), unit);
 	    
 
         RuntimeMemory memory =unit.getContentMap().getFactory().getMemory();
@@ -565,8 +564,23 @@ public class EMF2Runtime {
 	    	RuntimeObjectFactory rofactory = unit.getContentMap().getFactory();
 	    	String  fname  = feature.getName();
 	    	EClassifier etype = feature.getEType();
-	    	FType ftype = getMetaClassByName(unit.getEQualifiedName(etype), unit);
-	    	FProperty fprop = rofactory.getMemory().getUnit().findPropertyByName((FClassDefinition) fc.getFTypeDefinition(), fname);
+	    	Type ftype = getMetaClassByName(unit.getEQualifiedName(etype), unit);
+	    	Property fprop = rofactory.getMemory().getUnit().findPropertyByName((ClassDefinition) fc.getTypeDefinition(), fname);
+	    	if( fprop == null){
+	    		String errmsg = "property set failed ! Not able to find "+fname+" property on class " + fc.getTypeDefinition().getName() +
+	    			" ; known properties are : ";
+	    		EList props = ((ClassDefinition)fc.getTypeDefinition()).getOwnedAttribute();
+	    		for (int i=0; i<props.size(); i++) {
+	    			Property prop = (Property)props.get(i);
+	    			errmsg += prop.getName() + ", ";
+	    		} 
+    			internalLog.error(errmsg);       	
+    			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+    					errmsg,
+    					interpreter,
+    					memory,
+    					null);
+	    	}
 	    	RuntimeObject roprop = rofactory.getMemory().getRuntimeObjectForFObject(fprop);
 	    	
 	    	// Eget can return an elist of features
@@ -705,7 +719,7 @@ public class EMF2Runtime {
 	 * @param object
 	 * @return a Set of objects (Set<typeParam>)
 	 */
-	public RuntimeObject createRuntimeObjectForCollection(EList objects, FType typeParam, EMFRuntimeUnit unit, RuntimeObject rObject, RuntimeObject roprop)
+	public RuntimeObject createRuntimeObjectForCollection(EList objects, Type typeParam, EMFRuntimeUnit unit, RuntimeObject rObject, RuntimeObject roprop)
 	{
 	    RuntimeObject result = fr.irisa.triskell.kermeta.runtime.language.Object.get(rObject, roprop);
 	    // We create one by default 
@@ -761,7 +775,7 @@ public class EMF2Runtime {
 	    else
 	    {   // Create the RuntimeObject encaspulating the FClass corresponding to the EClass given by its name :
 	        // Reconstruct from FClass -> FClassDefinition (meta meta levels) -> Our EClass
-	        FType ftype = this.getMetaClassByName(metaclass_name, unit);
+	        Type ftype = this.getMetaClassByName(metaclass_name, unit);
 	        if (ftype == null)
 	        {
 	        	KermetaUnit kunit = memory.getUnit();
@@ -779,7 +793,7 @@ public class EMF2Runtime {
 						null);
 	        }
 	        else {
-	        	FClass fclass = (FClass)ftype;
+	        	fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
 	        	result = memory.getROFactory().createMetaClass(fclass);
 	        	this.typedef_cache.put(metaclass_name, result);
 	        }

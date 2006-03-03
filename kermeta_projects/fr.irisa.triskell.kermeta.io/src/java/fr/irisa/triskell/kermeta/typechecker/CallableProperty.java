@@ -1,4 +1,4 @@
-/* $Id: CallableProperty.java,v 1.2 2005-05-02 23:50:50 ffleurey Exp $
+/* $Id: CallableProperty.java,v 1.3 2006-03-03 15:22:18 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : CallableProperty.java
 * License : GPL
@@ -11,16 +11,12 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 import java.util.Hashtable;
-import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+//import fr.irisa.triskell.kermeta.language.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 
 /**
  * @author Franck Fleurey
@@ -29,15 +25,15 @@ import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
  */
 public class CallableProperty extends CallableElement {
 
-    protected FProperty property;
+    protected Property property;
     
-    protected FClass fclass;
+    protected fr.irisa.triskell.kermeta.language.structure.Class fclass;
     
     /**
      * @param property
      * @param fclass
      */
-    public CallableProperty(FProperty property, FClass fclass) {
+    public CallableProperty(Property property, fr.irisa.triskell.kermeta.language.structure.Class fclass) {
         super();
         this.property = property;
         this.fclass = fclass;
@@ -56,29 +52,29 @@ public class CallableProperty extends CallableElement {
      */
     public Type getType() {
         // The type of the property
-        FType t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(property)).type;
+    	fr.irisa.triskell.kermeta.language.structure.Type t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(property)).type;
         // subtitute varables :
         Hashtable bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
         return new SimpleType(TypeVariableEnforcer.getBoundType(t, bindings));
     }
     
-    public FProperty getTypeBoundedProperty() {
+    public Property getTypeBoundedProperty() {
         StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
-        FProperty result = struct_factory.createFProperty();
+        Property result = struct_factory.createProperty();
         Hashtable bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
         
-        result.setFName(property.getFName());
+        result.setName(property.getName());
         
-        result.setFLower(property.getFLower());
-        result.setFUpper(property.getFUpper());
-        result.setFIsOrdered(property.isFIsOrdered());
-        result.setFIsUnique(property.isFIsUnique());
+        result.setLower(property.getLower());
+        result.setUpper(property.getUpper());
+        result.setIsOrdered(property.isIsOrdered());
+        result.setIsUnique(property.isIsUnique());
         
-        result.setFIsComposite(property.isFIsComposite());
-        result.setFIsDerived(property.isFIsDerived());
-        result.setFIsID(property.isFIsID());
+        result.setIsComposite(property.isIsComposite());
+        result.setIsDerived(property.isIsDerived());
+        result.setIsID(property.isIsID());
 
-        result.setFType(TypeVariableEnforcer.getBoundType(property.getFType(), bindings));
+        result.setType(TypeVariableEnforcer.getBoundType(property.getType(), bindings));
         
         return result;
     }
@@ -87,19 +83,19 @@ public class CallableProperty extends CallableElement {
      * @see fr.irisa.triskell.kermeta.typechecker.CallableElement#getName()
      */
     public String getName() {
-        return property.getFName();
+        return property.getName();
     }
 
-    public FClass getFclass() {
+    public fr.irisa.triskell.kermeta.language.structure.Class getFclass() {
         return fclass;
     }
-    public void setFclass(FClass fclass) {
+    public void setFclass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
         this.fclass = fclass;
     }
-    public FProperty getProperty() {
+    public Property getProperty() {
         return property;
     }
-    public void setProperty(FProperty property) {
+    public void setProperty(Property property) {
         this.property = property;
     }
 }

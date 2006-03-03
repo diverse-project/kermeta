@@ -6,27 +6,22 @@ package fr.irisa.triskell.kermeta.texteditor.outline;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FEnumerationLiteral;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
-import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
  * @author Franck Fleurey
@@ -60,37 +55,37 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		return null;
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
-	public Object visitFClassDefinition(FClassDefinition arg0) {
+	public Object visitClassDefinition(ClassDefinition arg0) {
 		ArrayList result = new ArrayList();
 		
 		if (outline.prefInheritanceFlattening()) {
 		    Iterator it = InheritanceSearch.callableProperties(InheritanceSearch.getFClassForClassDefinition(arg0)).iterator();
 		    while(it.hasNext()) {
 		        CallableProperty cp = (CallableProperty)it.next();
-		        if (cp.getFclass().getFTypeDefinition() != arg0)
+		        if (cp.getFclass().getTypeDefinition() != arg0)
 		            result.add(new OutlineItem(cp.getTypeBoundedProperty(), item, outline));
 		    }
 		    
 		    it = InheritanceSearch.callableOperations(InheritanceSearch.getFClassForClassDefinition(arg0)).iterator();
 		    while(it.hasNext()) {
 		        CallableOperation cop = (CallableOperation)it.next();
-		        if (cop.getFclass().getFTypeDefinition() != arg0)
+		        if (cop.getFclass().getTypeDefinition() != arg0)
 		            result.add(new OutlineItem(cop.getTypeBoundedOperation(), item, outline));
 		    }
 		
 		}
 
-	    Iterator it = arg0.getFOwnedAttributes().iterator();
+	    Iterator it = arg0.getOwnedAttribute().iterator();
 	    while(it.hasNext()) {
-	        FProperty p = (FProperty)it.next();
+	        Property p = (Property)it.next();
 	        result.add(new OutlineItem(p, item, outline));
 	    }
 	    
-	    it = arg0.getFOwnedOperation().iterator();
+	    it = arg0.getOwnedOperation().iterator();
 	    while(it.hasNext()) {
-	        FOperation op = (FOperation)it.next();
+	        Operation op = (Operation)it.next();
 	        result.add(new OutlineItem(op, item, outline));
 	    }
 		    
@@ -102,14 +97,14 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		return result.toArray();
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumeration)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)
 	 */
-	public Object visitFEnumeration(FEnumeration arg0) {
+	public Object visitEnumeration(Enumeration arg0) {
 		ArrayList result = new ArrayList();
 		
-		Iterator it = arg0.getFOwnedLiteral().iterator();
+		Iterator it = arg0.getOwnedLiteral().iterator();
 	    while(it.hasNext()) {
-	        FEnumerationLiteral lit = (FEnumerationLiteral)it.next();
+	        EnumerationLiteral lit = (EnumerationLiteral)it.next();
 	        result.add(new OutlineItem(lit, item, outline));
 	    }
 		
@@ -119,28 +114,28 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		return result.toArray();
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FEnumerationLiteral)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.EnumerationLiteral)
 	 */
-	public Object visitFEnumerationLiteral(FEnumerationLiteral arg0) {
+	public Object visitEnumerationLiteral(EnumerationLiteral arg0) {
 		return new Object[0];
 	}
 	
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visitFOperation(FOperation arg0) {
+	public Object visitOperation(Operation arg0) {
 		return new Object[0];
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPackage)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
-	public Object visitFPackage(FPackage arg0) {
+	public Object visitPackage(Package arg0) {
 		ArrayList result = new ArrayList();
 		
 		if (outline.prefPackageTree()) {
-		    Iterator it = arg0.getFNestedPackage().iterator();
+		    Iterator it = arg0.getNestedPackage().iterator();
 		    while(it.hasNext()) {
-		        FPackage spack = (FPackage)it.next();
+		        Package spack = (Package)it.next();
 		        
 		        OutlineItem spack_item = new OutlineItem(spack, item, outline);
 		        
@@ -153,9 +148,9 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		    }
 		}
 		
-		Iterator it = arg0.getFOwnedTypeDefinition().iterator();
+		Iterator it = arg0.getOwnedTypeDefinition().iterator();
 		while(it.hasNext()) {
-			FTypeDefinition td = (FTypeDefinition)it.next();
+			TypeDefinition td = (TypeDefinition)it.next();
 			OutlineItem td_item = new OutlineItem(td, item, outline);
 			if (outline.prefShowImported() || !td_item.isTypeDefinitionImported()) {
 			    result.add(td_item);
@@ -167,15 +162,15 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		return result.toArray();
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
-	public Object visitFPrimitiveType(FPrimitiveType arg0) {
+	public Object visitPrimitiveType(PrimitiveType arg0) {
 		return new Object[0];
 	}
 	/**
-	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
-	public Object visitFProperty(FProperty arg0) {
+	public Object visitProperty(Property arg0) {
 		return new Object[0];
 	}
 }

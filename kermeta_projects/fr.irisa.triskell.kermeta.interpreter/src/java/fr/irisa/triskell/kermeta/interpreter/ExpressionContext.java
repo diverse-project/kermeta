@@ -1,4 +1,4 @@
-/* $Id: ExpressionContext.java,v 1.11 2005-12-06 18:56:55 zdrey Exp $
+/* $Id: ExpressionContext.java,v 1.12 2006-03-03 15:21:47 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionContext.java
  * License : GPL
@@ -17,7 +17,7 @@ import java.util.Hashtable;
 
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**
@@ -33,7 +33,7 @@ public class ExpressionContext {
      * The expression associated to this context
      * Typically : a FLoop, FConditional, and one for the FOperationBody if any var.
      * is declared inside it and at the top level. */ 
-    //FExpression root;
+    //Expression root;
 
     /**
      * The set of variables defined in this block
@@ -43,7 +43,7 @@ public class ExpressionContext {
     
     
     /** @deprecated */
-    public FExpression expression;
+    public Expression expression;
     /** The last evaluated statement in the interpretation process.
      *  Used to interrupt the stepOver command in the debug mode after each
      *  statement evaluation. */
@@ -53,7 +53,7 @@ public class ExpressionContext {
 	 * @param root
 	 * @param variables
 	 */
-	public ExpressionContext(/*FExpression pRoot*/)
+	public ExpressionContext(/*Expression pRoot*/)
 	{
 	 //   root = pRoot;
 	    variables = new Hashtable();
@@ -126,12 +126,12 @@ public class ExpressionContext {
      * Useful for the debug mode
      * @param exp
      */
-    public void setExpression(FExpression exp)
+    public void setExpression(Expression exp)
     {
     	expression = exp;
     }
 
-	public FExpression getExpression() {
+	public Expression getExpression() {
 		return expression;
 	}
     

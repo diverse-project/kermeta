@@ -1,4 +1,4 @@
-/* $Id: Boolean.java,v 1.5 2006-02-21 17:56:03 jsteel Exp $ 
+/* $Id: Boolean.java,v 1.6 2006-03-03 15:21:47 dvojtise Exp $ 
  * Implementation of Kermeta base type Boolean 
  */
 
@@ -7,8 +7,8 @@ package fr.irisa.triskell.kermeta.runtime.basetypes;
 //import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 
 
 public class Boolean {
@@ -76,8 +76,8 @@ public class Boolean {
 	 */
 	public static void createTrue(RuntimeObjectFactory factory, RuntimeObject result) {
 	    
-	    FClass bool_class = factory.getMemory().getUnit().struct_factory.createFClass();
-	    bool_class.setFTypeDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
+		fr.irisa.triskell.kermeta.language.structure.Class bool_class = factory.getMemory().getUnit().struct_factory.createClass();
+	    bool_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
 	    
 	    result.setMetaclass(factory.createMetaClass(bool_class));
 	    setValue(result, true);
@@ -85,8 +85,8 @@ public class Boolean {
 	
 	public static void createFalse(RuntimeObjectFactory factory, RuntimeObject result) {
 	    
-	    FClass bool_class = factory.getMemory().getUnit().struct_factory.createFClass();
-	    bool_class.setFTypeDefinition((FClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
+		fr.irisa.triskell.kermeta.language.structure.Class bool_class = factory.getMemory().getUnit().struct_factory.createClass();
+	    bool_class.setTypeDefinition((ClassDefinition)factory.getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Boolean"));
 	    
 	    result.setMetaclass(factory.createMetaClass(bool_class));
 	    setValue(result, false);

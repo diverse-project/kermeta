@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass.java,v 1.4 2006-02-21 17:34:18 jsteel Exp $
+/* $Id: ECore2KMPass.java,v 1.5 2006-03-03 15:22:18 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -18,11 +18,11 @@ import com.ibm.eclipse.emfatic.core.ast.TypeRef;
 import com.ibm.eclipse.ldt.core.ast.ASTNode;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
  * @author Franck Fleurey
@@ -56,22 +56,22 @@ public class ECore2KMPass extends EmfaticASTNodeVisitor {
 		return result;
 	}
 	
-	protected fr.irisa.triskell.kermeta.structure.FPackage getOrCreatePackage(String qualified_name, Object node) {
-		fr.irisa.triskell.kermeta.structure.FPackage result = builder.packageLookup(qualified_name);
+	protected fr.irisa.triskell.kermeta.language.structure.Package getOrCreatePackage(String qualified_name, Object node) {
+		fr.irisa.triskell.kermeta.language.structure.Package result = builder.packageLookup(qualified_name);
 		if (result != null) return result;
 		if (qualified_name.indexOf("::")>=0) {
 			String name = qualified_name.substring(qualified_name.lastIndexOf("::") + 2);
 			String parent_name = qualified_name.substring(0, qualified_name.lastIndexOf("::"));
-			FPackage parent = getOrCreatePackage(parent_name, node);
-			result = builder.struct_factory.createFPackage();
+			Package parent = getOrCreatePackage(parent_name, node);
+			result = builder.struct_factory.createPackage();
 			builder.storeTrace(result, node);
-			result.setFName(name);
-			parent.getFNestedPackage().add(result);
+			result.setName(name);
+			parent.getNestedPackage().add(result);
 		}
 		else {
 			// this is a new root package
-			result = builder.struct_factory.createFPackage();
-			result.setFName(qualified_name);
+			result = builder.struct_factory.createPackage();
+			result.setName(qualified_name);
 			//TODO: result.setFUri(). What to put here ?
 		}
 		builder.packages.put(builder.getQualifiedName(result), result);
@@ -114,29 +114,29 @@ public class ECore2KMPass extends EmfaticASTNodeVisitor {
 		return lower;
 	}
 	
-	protected FType getFTypeByID(QualifiedID qid) {
+	protected Type getFTypeByID(QualifiedID qid) {
 	    String name = qualifiedIDAsString(qid);
 	    return getFTypeByID(name);
 	}
 	
 	
-	protected FType getFTypeByID(String name) {
+	protected Type getFTypeByID(String name) {
 	    
 		if (name.equals("void")) {
-			return builder.struct_factory.createFVoidType();
+			return builder.struct_factory.createVoidType();
 		}
 			
-	    FTypeDefinition typeDef = builder.getTypeDefinitionByName(name);
+	    TypeDefinition typeDef = builder.getTypeDefinitionByName(name);
 	    if (typeDef == null) {
 	        builder.messages.addError("Cannot resolve type '"+name+"'" ,null);
 			return null;
 	    }
-	    if (typeDef instanceof FType) return (FType)typeDef;
+	    if (typeDef instanceof Type) return (Type)typeDef;
 	    else {
-	        FClassDefinition cd = (FClassDefinition)typeDef;
-	        FClass result = builder.struct_factory.createFClass();
+	        ClassDefinition cd = (ClassDefinition)typeDef;
+	        fr.irisa.triskell.kermeta.language.structure.Class result = builder.struct_factory.createClass();
 	        //result.setFName(cd.getFName());
-	        result.setFTypeDefinition(cd);
+	        result.setTypeDefinition(cd);
 	        return result;
 	    }
 	}

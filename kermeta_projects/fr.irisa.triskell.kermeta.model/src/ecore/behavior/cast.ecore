@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm">
   <eSubpackages name="behavior">
-    <eClassifiers xsi:type="ecore:EClass" name="Assignement">
+    <eClassifiers xsi:type="ecore:EClass" name="Assignment">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCast" eType="#//structure/Boolean"/>
     </eClassifiers>
   </eSubpackages>

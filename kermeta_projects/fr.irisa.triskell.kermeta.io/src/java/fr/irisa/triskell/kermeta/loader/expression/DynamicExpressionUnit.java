@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.4 2005-12-05 09:23:44 ffleurey Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.5 2006-03-03 15:22:18 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -19,9 +19,9 @@ import java.util.Iterator;
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 
-import fr.irisa.triskell.kermeta.behavior.FExpression;
-import fr.irisa.triskell.kermeta.behavior.FTypeReference;
-import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KMUnitMessageManager;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -29,8 +29,8 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 
@@ -40,8 +40,8 @@ import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 public class DynamicExpressionUnit extends KermetaUnit {
 
     
-    FExpression expression;
-    FClassDefinition context;
+    Expression expression;
+    ClassDefinition context;
     ArrayList variables;
     
     /**
@@ -58,7 +58,7 @@ public class DynamicExpressionUnit extends KermetaUnit {
     }
     
     
-    public void parse(String body, FClassDefinition context, Hashtable formalParams) {
+    public void parse(String body, ClassDefinition context, Hashtable formalParams) {
         
         this.context = context;
         variables = new ArrayList();
@@ -69,15 +69,15 @@ public class DynamicExpressionUnit extends KermetaUnit {
         Enumeration e = formalParams.keys();
         while(e.hasMoreElements()) {
             String var_name = (String)e.nextElement();
-            FType var_type = (FType)formalParams.get(var_name);
-            FVariableDecl var = this.behav_factory.createFVariableDecl();
-            var.setFIdentifier(var_name);
+            Type var_type = (Type)formalParams.get(var_name);
+            VariableDecl var = this.behav_factory.createVariableDecl();
+            var.setIdentifier(var_name);
             
-            FTypeReference tref = this.behav_factory.createFTypeReference();
-            tref.setFType(var_type);
-            tref.setFUpper(1);
+            TypeReference tref = this.behav_factory.createTypeReference();
+            tref.setType(var_type);
+            tref.setUpper(1);
             
-            var.setFType(tref);
+            var.setType(tref);
             variables.add(var);
             this.addSymbol(new KMSymbolVariable(var));
         }
@@ -116,8 +116,8 @@ public class DynamicExpressionUnit extends KermetaUnit {
        
        while(it.hasNext()){
        		var = (KMSymbolVariable)it.next();
-       		if (var.getVariable().getFStaticType() == null) continue;
-       		checker.getContext().addSymbol(var, new SimpleType(var.getVariable().getFStaticType()));
+       		if (var.getVariable().getStaticType() == null) continue;
+       		checker.getContext().addSymbol(var, new SimpleType(var.getVariable().getStaticType()));
        	
        }
 	   
@@ -180,10 +180,10 @@ public class DynamicExpressionUnit extends KermetaUnit {
 
     }
 
-    public FClassDefinition getContext() {
+    public ClassDefinition getContext() {
         return context;
     }
-    public FExpression getExpression() {
+    public Expression getExpression() {
         return expression;
     }
  

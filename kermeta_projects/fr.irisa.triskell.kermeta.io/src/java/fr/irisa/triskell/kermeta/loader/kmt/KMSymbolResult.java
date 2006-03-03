@@ -4,11 +4,11 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
-import fr.irisa.triskell.kermeta.behavior.FCallVariable;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 
 /**
  * @author Franck Fleurey
@@ -17,12 +17,12 @@ import fr.irisa.triskell.kermeta.structure.FOperation;
  */
 public class KMSymbolResult extends KMSymbol {
 
-	FOperation operation;
+	Operation operation;
 	
 	/**
 	 * @param id
 	 */
-	public KMSymbolResult(FOperation op) {
+	public KMSymbolResult(Operation op) {
 		super("result");
 		operation = op;
 	}
@@ -30,16 +30,16 @@ public class KMSymbolResult extends KMSymbol {
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#getFObject()
 	 */
-	public FObject getFObject() {
+	public fr.irisa.triskell.kermeta.language.structure.Object getFObject() {
 		return operation;
 	}
 
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#generateCallExpression(metacore.loader.MetaCoreUnit)
 	 */
-	public FCallExpression generateCallExpression(KermetaUnit builder) {
-		FCallVariable call = builder.behav_factory.createFCallVariable();
-		call.setFName("result");
+	public CallExpression generateCallExpression(KermetaUnit builder) {
+		CallVariable call = builder.behav_factory.createCallVariable();
+		call.setName("result");
 		return call;
 	}
 	

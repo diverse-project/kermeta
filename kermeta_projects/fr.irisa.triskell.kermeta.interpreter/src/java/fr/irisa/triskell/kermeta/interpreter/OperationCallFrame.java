@@ -1,4 +1,4 @@
-/* $Id: OperationCallFrame.java,v 1.10 2005-12-12 13:03:00 dvojtise Exp $
+/* $Id: OperationCallFrame.java,v 1.11 2006-03-03 15:21:47 dvojtise Exp $
 * Project : Kermeta Interpreter
 * File : OperationCallFrame.java
 * License : EPL
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FType;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.typechecker.CallableElement;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
@@ -34,9 +34,9 @@ import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 public class OperationCallFrame extends CallFrame {
 
     /** the FOPeration related to this call frame*/
-    private FOperation operation;
-    /** OR the FProperty derived */
-    private FProperty property;
+    private Operation operation;
+    /** OR the Property derived */
+    private Property property;
     
     /** tells wether this OperationCallFrame is for a callable operation or for a property (ie. setter or getter) */
     private boolean bIsOperation;
@@ -55,7 +55,7 @@ public class OperationCallFrame extends CallFrame {
     /** the value of the "value" variable in the setter of the derived property */
     private RuntimeObject callValueResult;
     
-    private FCallExpression expression;
+    private CallExpression expression;
     
     /**
      * @param pSelf
@@ -63,7 +63,7 @@ public class OperationCallFrame extends CallFrame {
      * @param pOperation
      * @param pParameters
      */
-    public OperationCallFrame(InterpreterContext pContext, CallableElement pCallable, RuntimeObject pSelf,  ArrayList pParameters, FCallExpression expression) {
+    public OperationCallFrame(InterpreterContext pContext, CallableElement pCallable, RuntimeObject pSelf,  ArrayList pParameters, CallExpression expression) {
         super(pContext);
         if (pCallable instanceof CallableOperation)
         {
@@ -72,14 +72,14 @@ public class OperationCallFrame extends CallFrame {
             this.expression = expression;
             typeParameters = TypeVariableEnforcer.getTypeVariableBinding(((CallableOperation)pCallable).getFclass());
             
-            if (operation.getFTypeParameter().size() > 0) {
+            if (operation.getTypeParameter().size() > 0) {
     	        //just for robustness
-    	        if (expression == null || operation.getFTypeParameter().size() != expression.getFStaticTypeVariableBindings().size()) {
+    	        if (expression == null || operation.getTypeParameter().size() != expression.getStaticTypeVariableBindings().size()) {
     	            throw new Error("INTERNAL ERROR : the type parameters of the operation should have been bound by the type checker.");
     	        }
     	        
-    	         for(int i=0; i<operation.getFTypeParameter().size(); i++) {
-    	            typeParameters.put(operation.getFTypeParameter().get(i), TypeVariableEnforcer.getBoundType((FType)expression.getFStaticTypeVariableBindings().get(i), pContext.peekCallFrame().getTypeParameters()));
+    	         for(int i=0; i<operation.getTypeParameter().size(); i++) {
+    	            typeParameters.put(operation.getTypeParameter().get(i), TypeVariableEnforcer.getBoundType((Type)expression.getStaticTypeVariableBindings().get(i), pContext.peekCallFrame().getTypeParameters()));
     	        }
             }
             
@@ -99,27 +99,27 @@ public class OperationCallFrame extends CallFrame {
     
     protected void initialize(ArrayList pParameters) {
         pushExpressionContext();
-        Iterator it = operation.getFOwnedParameter().iterator();
+        Iterator it = operation.getOwnedParameter().iterator();
         int i=0;
         while (it.hasNext()) {
-            FParameter fparam = (FParameter)it.next();
-            peekExpressionContext().defineVariable(fparam.getFName(), (RuntimeObject)pParameters.get(i));
+            Parameter fparam = (Parameter)it.next();
+            peekExpressionContext().defineVariable(fparam.getName(), (RuntimeObject)pParameters.get(i));
             i++;
         }
     }
     
     public String toString() {
         String name = "";
-        if (operation != null) name = operation.getFName();
-        else				   name = property.getFName();
+        if (operation != null) name = operation.getName();
+        else				   name = property.getName();
         return self.toString() + "." + name;
     }
     
-    public FOperation getOperation() {
+    public Operation getOperation() {
         if (operation == null) throw new Error("Illegal call of operation");
         return operation;
     }
-    public FProperty getProperty() {
+    public Property getProperty() {
         if (property == null) throw new Error("INTERNAL INTERPRETER ERROR : Illegal call of property accessor in OperationCallFrame");
         return property;
     }
@@ -153,7 +153,7 @@ public class OperationCallFrame extends CallFrame {
     }
     
     
-    public FObject getExpression() {
+    public fr.irisa.triskell.kermeta.language.structure.Object getExpression() {
         return expression; 
     }
 

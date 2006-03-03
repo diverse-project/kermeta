@@ -4,9 +4,9 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * @author Franck Fleurey
@@ -28,9 +28,9 @@ public abstract class KMSymbol {
 		return identifier;
 	}
 	
-	public abstract FObject getFObject();
+	public abstract fr.irisa.triskell.kermeta.language.structure.Object getFObject();
 	
-	public abstract FCallExpression generateCallExpression(KermetaUnit builder);
+	public abstract CallExpression generateCallExpression(KermetaUnit builder);
 	
 	public abstract String getDesciption();
 }

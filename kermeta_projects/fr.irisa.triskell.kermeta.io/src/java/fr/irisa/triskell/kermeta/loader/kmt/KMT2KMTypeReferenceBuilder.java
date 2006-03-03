@@ -5,7 +5,7 @@
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 import fr.irisa.triskell.kermeta.ast.TypeRef;
-import fr.irisa.triskell.kermeta.behavior.FTypeReference;
+import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -15,14 +15,14 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  */
 public class KMT2KMTypeReferenceBuilder extends KMT2KMPass {
 
-	public static FTypeReference process(TypeRef node, KermetaUnit builder) {
+	public static TypeReference process(TypeRef node, KermetaUnit builder) {
 		if (node == null) return null;
 		KMT2KMTypeReferenceBuilder visitor = new KMT2KMTypeReferenceBuilder(builder);
 		node.accept(visitor);
 		return visitor.result;
 	}
 	
-	protected FTypeReference result;
+	protected TypeReference result;
 	
 	/**
 	 * @param builder
@@ -35,13 +35,13 @@ public class KMT2KMTypeReferenceBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.TypeRef)
 	 */
 	public boolean beginVisit(TypeRef typeRef) {
-		result = builder.behav_factory.createFTypeReference();
+		result = builder.behav_factory.createTypeReference();
 		builder.storeTrace(result, typeRef);
-		result.setFIsOrdered(isOrdered(typeRef));
-		result.setFIsUnique(isUnique(typeRef));
-		result.setFLower(getLower(typeRef));
-		result.setFUpper(getUpper(typeRef));
-		result.setFType(KMT2KMTypeBuilder.process(typeRef.getReftype(), builder));
+		result.setIsOrdered(isOrdered(typeRef));
+		result.setIsUnique(isUnique(typeRef));
+		result.setLower(getLower(typeRef));
+		result.setUpper(getUpper(typeRef));
+		result.setType(KMT2KMTypeBuilder.process(typeRef.getReftype(), builder));
 		return false;
 	}
 }

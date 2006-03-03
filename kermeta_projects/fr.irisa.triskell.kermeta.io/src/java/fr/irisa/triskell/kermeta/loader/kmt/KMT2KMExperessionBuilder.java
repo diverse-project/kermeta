@@ -5,8 +5,8 @@
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 import fr.irisa.triskell.kermeta.ast.FAssignement;
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -21,7 +21,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  */
 public class KMT2KMExperessionBuilder extends KMT2KMPass {
 
-	public static FExpression process(fr.irisa.triskell.kermeta.ast.FExpression node, KermetaUnit builder) {
+	public static Expression process(fr.irisa.triskell.kermeta.ast.FExpression node, KermetaUnit builder) {
 	    
 		if (node == null) return null;
 		KMT2KMExperessionBuilder visitor = new KMT2KMExperessionBuilder(builder);
@@ -37,7 +37,7 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 		return visitor.result;
 	}
 	
-	protected FExpression result;
+	protected Expression result;
 	
 	/**
 	 * 
@@ -52,16 +52,16 @@ public class KMT2KMExperessionBuilder extends KMT2KMPass {
 	 */
 	public boolean beginVisit(FAssignement fAssignement) {
 		if (fAssignement.getAssignementOp() != null) {
-			FExpression left = KMT2KMLogicalExperessionBuilder.process(fAssignement.getExpression(), builder);
-			FExpression right = KMT2KMLogicalExperessionBuilder.process(fAssignement.getNewvalue(), builder);
+			Expression left = KMT2KMLogicalExperessionBuilder.process(fAssignement.getExpression(), builder);
+			Expression right = KMT2KMLogicalExperessionBuilder.process(fAssignement.getNewvalue(), builder);
 			// left should be a call expr without params
-			if (left instanceof FCallExpression && ((FCallExpression)left).getFParameters().size() == 0)  {
-				fr.irisa.triskell.kermeta.behavior.FAssignement assign = builder.behav_factory.createFAssignement();
+			if (left instanceof CallExpression && ((CallExpression)left).getParameters().size() == 0)  {
+				fr.irisa.triskell.kermeta.language.behavior.Assignment assign = builder.behav_factory.createAssignment();
 				builder.storeTrace(assign, fAssignement);
-				assign.setFTarget((FCallExpression)left);
-				assign.setFValue(right);
-				if (fAssignement.getAssignementOp().getText().equals("?")) assign.setFIsCast(true);
-				else assign.setFIsCast(false);
+				assign.setTarget((CallExpression)left);
+				assign.setValue(right);
+				if (fAssignement.getAssignementOp().getText().equals("?")) assign.setIsCast(true);
+				else assign.setIsCast(false);
 				result = assign;
 			}
 			else {

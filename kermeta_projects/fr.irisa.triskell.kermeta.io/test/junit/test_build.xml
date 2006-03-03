@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.7 2006-03-02 21:40:13 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.8 2006-03-03 15:22:19 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -61,7 +61,6 @@
 	<target name="all" depends="compile_java,test" description="Compile and run the tests."/>
 
 	<target name="init">
-			<mkdir dir="${classes.dir}" />
 			<mkdir dir="${instrumented.dir}" />
 			<mkdir dir="${coverage.xml.dir}" />
 			<mkdir dir="${coverage.html.dir}" />
@@ -156,11 +155,15 @@
 		  	</test>
   
 		</junit>
+		<antcall target="genreport"/>
+	</target>
+	<target name="genreport" >
 		<junitreport todir="${report.dir}">
 		  <fileset dir="${report.dir}">
 		    <include name="TEST-*.xml"/>
 		  </fileset>
-		  <report format="frames" todir="${report.dir}/html"/>
+		  <!--<report format="frames" todir="${report.dir}/html" styledir="./report_stylesheet"/>-->
+		  <report format="frames" todir="${report.dir}/html" />
 		</junitreport>
 	</target>
 </project>

@@ -1,4 +1,4 @@
-/* $Id: UnionType.java,v 1.3 2005-05-18 23:42:27 ffleurey Exp $
+/* $Id: UnionType.java,v 1.4 2006-03-03 15:22:18 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : UnionType.java
 * License : GPL
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.structure.FType;
+//import fr.irisa.triskell.kermeta.language.structure.FType;
 
 /**
  * @author Franck Fleurey
@@ -59,7 +59,7 @@ public class UnionType extends Type {
 	}
 
 	/**
-	 * @see fr.irisa.triskell.kermeta.typechecker.Type#isSubTypeOf(fr.irisa.triskell.kermeta.structure.FType)
+	 * @see fr.irisa.triskell.kermeta.typechecker.Type#isSubTypeOf(fr.irisa.triskell.kermeta.language.structure.FType)
 	 */
 	public boolean isSubTypeOf(Type type) {
 		boolean result = true;
@@ -189,7 +189,7 @@ public class UnionType extends Type {
 	    return result;
 	}
 	
-	protected void inferTypeVariableBinding(FType generic, Hashtable binding) {
+	protected void inferTypeVariableBinding(fr.irisa.triskell.kermeta.language.structure.Type generic, Hashtable binding) {
         for(int i=0; i<types.size();i++) {
 			Type t = (Type)types.get(i);
 			t.inferTypeVariableBinding(generic, binding);
@@ -213,7 +213,7 @@ public class UnionType extends Type {
 	    return result;
 	}
 	
-	public FType getFType() {
+	public fr.irisa.triskell.kermeta.language.structure.Type getFType() {
 		return transformAsSimpleType().getFType();
 	}
 	

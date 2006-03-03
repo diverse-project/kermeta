@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.12 2006-02-21 17:56:04 jsteel Exp $
+/* $Id: RuntimeObject.java,v 1.13 2006-03-03 15:21:47 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -18,8 +18,8 @@ package fr.irisa.triskell.kermeta.runtime;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * @author Franck Fleurey
@@ -92,7 +92,7 @@ public class RuntimeObject {
 	 */
     protected void finalize() throws Throwable {
         //System.err.println("finalize RuntimeObject : " + oId);
-        FObject fobj = (FObject)getData().get("kcoreObject");
+        fr.irisa.triskell.kermeta.language.structure.Object fobj = (fr.irisa.triskell.kermeta.language.structure.Object)getData().get("kcoreObject");
         if (fobj != null) {
           //  System.err.println("           -> free km object " + fobj);
             factory.getMemory().clearFObjectFromCache(fobj);
@@ -141,9 +141,9 @@ public class RuntimeObject {
 	 * @return Returns the container in the mof meaning (black diamond).
 	 */
 	public RuntimeObject getContainer() {
-		FClass self_cls = ((FClass)metaclass.getData().get("kcoreObject"));
+		fr.irisa.triskell.kermeta.language.structure.Class self_cls = ((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getData().get("kcoreObject"));
 		// FIXME: this is just a quick fix, we should check that self_cls inherits from ValueType
-		String name = getFactory().getMemory().getUnit().getQualifiedName(self_cls.getFTypeDefinition());
+		String name = getFactory().getMemory().getUnit().getQualifiedName(self_cls.getTypeDefinition());
 		if (name.equals("kermeta::standard::Boolean")) return null;
 		if (name.equals("kermeta::standard::Integer")) return null;
 		if (name.equals("kermeta::standard::String")) return null;
@@ -243,7 +243,7 @@ public class RuntimeObject {
 	public String toString() {
 	    String class_name = "< No Metaclass ! >";
 	    try {
-	        class_name = factory.getMemory().getUnit().getQualifiedName(((FClass)metaclass.getData().get("kcoreObject")).getFTypeDefinition());
+	        class_name = factory.getMemory().getUnit().getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getData().get("kcoreObject")).getTypeDefinition());
 		    String sValue = (String)getData().get("StringValue");
 		    if(sValue != null)
 		    	return "[" + class_name + " : "+ oId +" = \"" +sValue+"\"]";
@@ -270,7 +270,7 @@ public class RuntimeObject {
 	public String toUserString() {
 	    String class_name = "< No Metaclass ! >";
 	    try {
-	        class_name = factory.getMemory().getUnit().getQualifiedName(((FClass)metaclass.getData().get("kcoreObject")).getFTypeDefinition());
+	        class_name = factory.getMemory().getUnit().getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)metaclass.getData().get("kcoreObject")).getTypeDefinition());
 		    String sValue = (String)getData().get("StringValue");
 		    if(sValue != null)
 		    	return "\"" +sValue+"\"";

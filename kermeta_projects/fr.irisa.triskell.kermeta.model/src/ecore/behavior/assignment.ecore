@@ -4,7 +4,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
     nsURI="http://ftm/" nsPrefix="/ftm">
   <eSubpackages name="behavior" nsPrefix="">
-    <eClassifiers xsi:type="ecore:EClass" name="Assignement" eSuperTypes="#//behavior/Expression">
+    <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//behavior/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
           eType="#//behavior/CallExpression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"

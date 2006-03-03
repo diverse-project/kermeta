@@ -1,12 +1,12 @@
-@mainClass "titi::Main"
+@mainClass "testUML2km::Main"
 @mainOperation "main"
 
-package titi;
+package testUML2km;
 
 require "input_test_models/UML2.km"
 using uml2
 
-class Main {
+class Main inherits kermeta::kunit::Test {
 
 
 	operation main () is do
@@ -17,7 +17,7 @@ class Main {
 		var p : kermeta::reflection::Package
 		p ?= Class.typeDefinition.container
 		
-		stdio.writeln("done")
+		stdio.writeln("got "+ p.name + " package")
 		
 		var i : kermeta::standard::Integer init 0
 		stdio.write("counting...")
@@ -28,6 +28,11 @@ class Main {
 		stdio.writeln("done")
 		
 		stdio.writeln("There are " + i.toString + " types in UML2")
+		assert(i==246)
+	end
+	
+	operation test () is do
+		main
 	end
 	
 	operation printDoc() is do

@@ -1,4 +1,4 @@
-/* $Id: CallableOperation.java,v 1.3 2005-07-08 12:47:23 fchauvel Exp $
+/* $Id: CallableOperation.java,v 1.4 2006-03-03 15:22:18 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : CallableOperation.java
  * License : GPL
@@ -16,15 +16,15 @@ package fr.irisa.triskell.kermeta.typechecker;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FFunctionType;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
+//import fr.irisa.triskell.kermeta.language.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 
 /**
  * @author Franck Fleurey IRISA / University of rennes 1 Distributed under the
@@ -35,17 +35,17 @@ public class CallableOperation extends CallableElement {
     /**
      * The type on wich the operation can be called
      */
-    protected FClass fclass;
+    protected fr.irisa.triskell.kermeta.language.structure.Class fclass;
 
     /**
      * The operation
      */
-    protected FOperation operation;
+    protected Operation operation;
 
     /**
      * Constructor
      */
-    public CallableOperation(FOperation op, FClass type) {
+    public CallableOperation(Operation op, fr.irisa.triskell.kermeta.language.structure.Class type) {
         super();
         operation = op;
         fclass = type;
@@ -74,96 +74,96 @@ public class CallableOperation extends CallableElement {
 
         Hashtable bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
 
-        FType rt = ((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(operation)).getType();
+        fr.irisa.triskell.kermeta.language.structure.Type rt = ((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(operation)).getType();
 
-        if (operation.getFOwnedParameter().size() == 0) {
+        if (operation.getOwnedParameter().size() == 0) {
             // it cannot be a generic method
             // The type parameter of the target class should be bound
             result = new SimpleType(TypeVariableEnforcer.getBoundType(rt, bindings));
         } else {
-            FFunctionType ft = struct_factory.createFFunctionType();
-            FProductType pt = struct_factory.createFProductType();
-            Iterator ps = operation.getFOwnedParameter().iterator();
+            FunctionType ft = struct_factory.createFunctionType();
+            ProductType pt = struct_factory.createProductType();
+            Iterator ps = operation.getOwnedParameter().iterator();
             while (ps.hasNext()) {
-                FParameter param = (FParameter) ps.next();
-                pt.getFType().add(((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(param)).getType());
+                Parameter param = (Parameter) ps.next();
+                pt.getType().add(((SimpleType) TypeCheckerContext.getTypeFromMultiplicityElement(param)).getType());
             }
-            ft.setFRight(rt);
-            ft.setFLeft(pt);
+            ft.setRight(rt);
+            ft.setLeft(pt);
             result = new SimpleType(TypeVariableEnforcer.getBoundType(ft, bindings));
         }
 
         return result;
     }
     
-    public FOperation getTypeBoundedOperation() {
+    public Operation getTypeBoundedOperation() {
         StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
-        FOperation result = struct_factory.createFOperation();
+        Operation result = struct_factory.createOperation();
         Hashtable bindings = TypeVariableEnforcer.getTypeVariableBinding(fclass);
         
-        result.setFName(operation.getFName());
+        result.setName(operation.getName());
         
-        result.setFLower(operation.getFLower());
-        result.setFUpper(operation.getFUpper());
-        result.setFIsAbstract(operation.isFIsAbstract());
-        result.setFIsOrdered(operation.isFIsOrdered());
-        result.setFIsUnique(operation.isFIsUnique());
+        result.setLower(operation.getLower());
+        result.setUpper(operation.getUpper());
+        result.setIsAbstract(operation.isIsAbstract());
+        result.setIsOrdered(operation.isIsOrdered());
+        result.setIsUnique(operation.isIsUnique());
         
        
-        result.setFSuperOperation(operation.getFSuperOperation());
+        result.setSuperOperation(operation.getSuperOperation());
         
-        Iterator it = operation.getFTypeParameter().iterator();
+        Iterator it = operation.getTypeParameter().iterator();
         while(it.hasNext()) {
-            FTypeVariable otv = (FTypeVariable)it.next();
-            FTypeVariable ntv = struct_factory.createFTypeVariable();
-            ntv.setFName(otv.getFName());
-            if (otv.getFSupertype() != null)
-                ntv.setFSupertype(TypeVariableEnforcer.getBoundType(otv.getFSupertype(), bindings));
+            TypeVariable otv = (TypeVariable)it.next();
+            TypeVariable ntv = struct_factory.createTypeVariable();
+            ntv.setName(otv.getName());
+            if (otv.getSupertype() != null)
+                ntv.setSupertype(TypeVariableEnforcer.getBoundType(otv.getSupertype(), bindings));
             bindings.put(otv, ntv);
-            result.getFTypeParameter().add(ntv);
+            result.getTypeParameter().add(ntv);
         }
         
-        if (operation.getFType() != null)
-            result.setFType(TypeVariableEnforcer.getBoundType(operation.getFType(), bindings));
+        if (operation.getType() != null)
+            result.setType(TypeVariableEnforcer.getBoundType(operation.getType(), bindings));
         
-        it = operation.getFRaisedException().iterator();
+        it = operation.getRaisedException().iterator();
         while(it.hasNext()) {
-            FType extype = (FType)it.next();
-            result.getFRaisedException().add(TypeVariableEnforcer.getBoundType(extype, bindings));
+        	fr.irisa.triskell.kermeta.language.structure.Type extype = (fr.irisa.triskell.kermeta.language.structure.Type)it.next();
+            result.getRaisedException().add(TypeVariableEnforcer.getBoundType(extype, bindings));
         }
         
-        it = operation.getFOwnedParameter().iterator();
+        it = operation.getOwnedParameter().iterator();
         while(it.hasNext()) {
-            FParameter op = (FParameter)it.next();
-            FParameter np = struct_factory.createFParameter();
-            np.setFLower(op.getFLower());
-            np.setFUpper(op.getFUpper());
-            np.setFIsOrdered(op.isFIsOrdered());
-            np.setFIsUnique(op.isFIsUnique());
-            np.setFName(op.getFName());
-            np.setFOperation(result);
-            np.setFType(TypeVariableEnforcer.getBoundType(op.getFType(), bindings));
+            Parameter op = (Parameter)it.next();
+            Parameter np = struct_factory.createParameter();
+            np.setLower(op.getLower());
+            np.setUpper(op.getUpper());
+            np.setIsOrdered(op.isIsOrdered());
+            np.setIsUnique(op.isIsUnique());
+            np.setName(op.getName());
+            np.setOperation(result);
+            np.setType(TypeVariableEnforcer.getBoundType(op.getType(), bindings));
         }
         return result;
     }
 
     public String getName() {
-        return operation.getFName();
+        return operation.getName();
     }
 
-    public FClass getFclass() {
+    public fr.irisa.triskell.kermeta.language.structure.Class getFclass() {
         return fclass;
     }
 
-    public void setFclass(FClass fclass) {
+    public void setFclass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
         this.fclass = fclass;
     }
 
-    public FOperation getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
-    public void setOperation(FOperation operation) {
+    public void setOperation(Operation operation) {
         this.operation = operation;
     }
    

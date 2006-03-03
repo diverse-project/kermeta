@@ -21,7 +21,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.outline.KermetaOutline;
 
@@ -140,15 +140,15 @@ public class Editor extends TextEditor {
 		}
 	}
 	
-	public FObject getFObjectForNode(KermetaASTNode node) {
+	public fr.irisa.triskell.kermeta.language.structure.Object getFObjectForNode(KermetaASTNode node) {
         
         KermetaASTNode currentNode = node;
-        FObject result = null;
+        fr.irisa.triskell.kermeta.language.structure.Object result = null;
 
         
         while (result == null && currentNode != null) {
             
-            result = (FObject)this.mcunit.getModelElementByNode(currentNode);
+            result = (fr.irisa.triskell.kermeta.language.structure.Object)this.mcunit.getModelElementByNode(currentNode);
             
             currentNode = (KermetaASTNode)currentNode.getParent();
             

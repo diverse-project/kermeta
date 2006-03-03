@@ -1,4 +1,4 @@
-/* $Id: FrameworkGen.java,v 1.13 2005-09-15 12:45:32 dvojtise Exp $
+/* $Id: FrameworkGen.java,v 1.14 2006-03-03 15:21:25 dvojtise Exp $
  * Created on 14 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
  * Description :
@@ -15,7 +15,7 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 
-import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 
 import fr.irisa.triskell.kermeta.utils.KMTBodiesExtractor;
 
@@ -78,36 +78,36 @@ public class FrameworkGen {
 	
 		
 		// Define impl package
-		FPackage impl = concrete_unit.packageLookup("kermeta::structure");
-		impl.setFName("structure");
-		concrete_unit.packageLookup("kermeta").getFNestedPackage().remove(impl);
+		Package impl = concrete_unit.packageLookup("kermeta::structure");
+		impl.setName("structure");
+		concrete_unit.packageLookup("kermeta").getNestedPackage().remove(impl);
 		
 		//FClassDefinition visitorClass = createVisitor(abstract_unit.packageLookup("kermeta::structure"));
 		//visitorClass.setFName("KMStructureVisitor");
 		//abstract_unit.packageLookup("kermeta::structure").getFOwnedTypeDefinition().add(visitorClass);
 		
-		FPackage behavior = abstract_unit.packageLookup("kermeta::behavior");
+		Package behavior = abstract_unit.packageLookup("kermeta::behavior");
 		
 		
 		
 		
-		abstract_unit.packageLookup("kermeta").getFNestedPackage().remove(behavior);
+		abstract_unit.packageLookup("kermeta").getNestedPackage().remove(behavior);
 		
-		FPackage langpack = abstract_unit.struct_factory.createFPackage();
-		langpack.setFName("language");
-		langpack.setFNestingPackage(abstract_unit.packageLookup("kermeta"));
+		Package langpack = abstract_unit.struct_factory.createPackage();
+		langpack.setName("language");
+		langpack.setNestingPackage(abstract_unit.packageLookup("kermeta"));
 		
-		langpack.getFNestedPackage().add(behavior);
+		langpack.getNestedPackage().add(behavior);
 		
 		createVisitor(behavior, "KMExpression");
 		
 		//visitorClass.setFName("KMExpressionVisitor");
 		//abstract_unit.packageLookup("kermeta::behavior").getFOwnedTypeDefinition().add(visitorClass);
 		
-		FPackage structure = concrete_unit.struct_factory.createFPackage();
-		structure.setFName("language");
-		structure.setFNestingPackage(concrete_unit.packageLookup("kermeta"));
-		impl.setFNestingPackage(structure);
+		Package structure = concrete_unit.struct_factory.createPackage();
+		structure.setName("language");
+		structure.setNestingPackage(concrete_unit.packageLookup("kermeta"));
+		impl.setNestingPackage(structure);
 		
 				
 		if (abstract_unit.messages.unitHasError) {
@@ -124,7 +124,7 @@ public class FrameworkGen {
 		
 		createVisitor(impl, "KMStructure");
 		
-		abstract_unit.packageLookup("kermeta::structure").setFName("reflection");
+		abstract_unit.packageLookup("kermeta::structure").setName("reflection");
 		
 		
 		try {
@@ -140,7 +140,7 @@ public class FrameworkGen {
 	}
 	
 	
-	public void writeAbstractStructure(FPackage abstract_structure) throws Exception {
+	public void writeAbstractStructure(Package abstract_structure) throws Exception {
 		BufferedWriter w = new BufferedWriter(new FileWriter(new File("src/kermeta/reflection/reflection.kmt")));
 		w.write("package " + abstract_unit.getQualifiedName(abstract_structure) + ";\n\n");
 		w.write("require \"../standard/Collections.kmt\"\n\n");
@@ -148,7 +148,7 @@ public class FrameworkGen {
 		w.close();
 	}
 	
-	public void writeKermetaStructure(FPackage kermeta_structure) throws Exception {
+	public void writeKermetaStructure(Package kermeta_structure) throws Exception {
 		BufferedWriter w = new BufferedWriter(new FileWriter(new File("src/kermeta/language/structure.kmt")));
 		w.write("package " + abstract_unit.getQualifiedName(kermeta_structure) + ";\n\n");
 		w.write("require \"../reflection/reflection.kmt\"\n\n");
@@ -157,7 +157,7 @@ public class FrameworkGen {
 	}
 	
 	
-	public void writeBehavior(FPackage behavior_pack) throws Exception {
+	public void writeBehavior(Package behavior_pack) throws Exception {
 		BufferedWriter w = new BufferedWriter(new FileWriter(new File("src/kermeta/language/behavior.kmt")));
 		w.write("package " + abstract_unit.getQualifiedName(behavior_pack) + ";\n\n");
 		w.write("require \"structure.kmt\"\n\n");
@@ -170,7 +170,7 @@ public class FrameworkGen {
 	
 	ClassVisitor cvisitor;
 	
-	public void createVisitor(FPackage pkg, String name) {
+	public void createVisitor(Package pkg, String name) {
 		cvisitor =  new ClassVisitor(abstract_unit);
 		cvisitor.createVisitorForPackage(pkg, name);
 	}
@@ -179,7 +179,7 @@ public class FrameworkGen {
 	 * All classes of the packages are made abstract.
 	 * @param pkg
 	 */
-	public void makeAbstractClasses(FPackage pkg) {
+	public void makeAbstractClasses(Package pkg) {
 		MakeAbstractClass visitor = new MakeAbstractClass();
 		visitor.accept(pkg);
 	}
@@ -189,7 +189,7 @@ public class FrameworkGen {
 	 * (eg ContainerType).
 	 * @param pkg
 	 */
-	public void makeConcreteClasses(FPackage pkg) {
+	public void makeConcreteClasses(Package pkg) {
 		MakeConcreteClass visitor = new MakeConcreteClass(abstract_unit);
 		visitor.accept(pkg);
 	}

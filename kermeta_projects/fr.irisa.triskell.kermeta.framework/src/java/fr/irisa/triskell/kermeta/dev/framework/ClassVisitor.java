@@ -4,21 +4,21 @@
  */
 package fr.irisa.triskell.kermeta.dev.framework;
 
-import fr.irisa.triskell.kermeta.behavior.FAssignement;
-import fr.irisa.triskell.kermeta.behavior.FBlock;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FCallResult;
-import fr.irisa.triskell.kermeta.behavior.FCallVariable;
-import fr.irisa.triskell.kermeta.behavior.FSelfExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Assignment;
+import fr.irisa.triskell.kermeta.language.behavior.Block;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallResult;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+import fr.irisa.triskell.kermeta.language.behavior.SelfExpression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -29,9 +29,9 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 public class ClassVisitor extends KermetaVisitor {
 	
 	protected KermetaUnit unit;
-	protected FClassDefinition visitor;
-	protected FClassDefinition visitable;
-	protected FOperation acceptOp;
+	protected ClassDefinition visitor;
+	protected ClassDefinition visitable;
+	protected Operation acceptOp;
 
 	
 	/**
@@ -45,37 +45,37 @@ public class ClassVisitor extends KermetaVisitor {
 	}
 	
 	
-	public void createVisitorForPackage(FPackage pkg, String visitor_name) {
+	public void createVisitorForPackage(Package pkg, String visitor_name) {
 		// Create visitor
-		visitor = unit.struct_factory.createFClassDefinition();
-		visitor.setFName(visitor_name + "Visitor");
-		visitor.setFIsAbstract(true);
-		FTypeVariable typevar = unit.struct_factory.createFTypeVariable();
-		typevar.setFName("ContextType");
-		visitor.getFTypeParameter().add(typevar);
+		visitor = unit.struct_factory.createClassDefinition();
+		visitor.setName(visitor_name + "Visitor");
+		visitor.setIsAbstract(true);
+		TypeVariable typevar = unit.struct_factory.createTypeVariable();
+		typevar.setName("ContextType");
+		visitor.getTypeParameter().add(typevar);
 		
 		// Create visitable
-		visitable = unit.struct_factory.createFClassDefinition();
-		visitable.setFName(visitor_name + "Visitable");
-		visitable.setFIsAbstract(true);
+		visitable = unit.struct_factory.createClassDefinition();
+		visitable.setName(visitor_name + "Visitable");
+		visitable.setIsAbstract(true);
 		
 		acceptOp = buildAcceptOp();
-		acceptOp.setFIsAbstract(true);
+		acceptOp.setIsAbstract(true);
 		
-		visitable.getFOwnedOperation().add(acceptOp);
+		visitable.getOwnedOperation().add(acceptOp);
 		
 		// ClassVisitor
 		this.accept(pkg);
-		pkg.getFOwnedTypeDefinition().add(visitor);
-		pkg.getFOwnedTypeDefinition().add(visitable);
+		pkg.getOwnedTypeDefinition().add(visitor);
+		pkg.getOwnedTypeDefinition().add(visitable);
 	}
 
 	/**
-	 * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FClassDefinition)
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.language.structure.ClassDefinition)
 	 */
-	public Object visit(FClassDefinition arg0) {
-		if (!arg0.isFIsAbstract()) {
-			arg0.getFOwnedOperation().add(createAcceptMethod(arg0));
+	public Object visit(ClassDefinition arg0) {
+		if (!arg0.isIsAbstract()) {
+			arg0.getOwnedOperation().add(createAcceptMethod(arg0));
 		}
 		return super.visit(arg0);
 	}
@@ -83,34 +83,34 @@ public class ClassVisitor extends KermetaVisitor {
 	
 	
 	
-	protected FOperation buildAcceptOp() {
-		FOperation result;
-		result = unit.struct_factory.createFOperation();
-		result.setFSuperOperation(acceptOp);
-		result.setFName("accept" + visitor.getFName());
-		FTypeVariable typevar = unit.struct_factory.createFTypeVariable();
-		typevar.setFName("ContextType");
-		result.getFTypeParameter().add(typevar);
+	protected Operation buildAcceptOp() {
+		Operation result;
+		result = unit.struct_factory.createOperation();
+		result.setSuperOperation(acceptOp);
+		result.setName("accept" + visitor.getName());
+		TypeVariable typevar = unit.struct_factory.createTypeVariable();
+		typevar.setName("ContextType");
+		result.getTypeParameter().add(typevar);
 		// visitor : Visitor<ContextType>
-		FParameter p1 = unit.struct_factory.createFParameter();
-		p1.setFName("visitor");
-		FClass p1Type = unit.struct_factory.createFClass();
-		p1Type.setFTypeDefinition(visitor);
-		FTypeVariableBinding bind = unit.struct_factory.createFTypeVariableBinding();
-		bind.setFVariable((FTypeVariable)visitor.getFTypeParameter().get(0));
-		bind.setFType(typevar);
-		p1Type.getFTypeParamBinding().add(bind);
-		p1.setFType(p1Type);
-		p1.setFUpper(1);
-		result.getFOwnedParameter().add(p1);
+		Parameter p1 = unit.struct_factory.createParameter();
+		p1.setName("visitor");
+		fr.irisa.triskell.kermeta.language.structure.Class p1Type = unit.struct_factory.createClass();
+		p1Type.setTypeDefinition(visitor);
+		TypeVariableBinding bind = unit.struct_factory.createTypeVariableBinding();
+		bind.setVariable((TypeVariable)visitor.getTypeParameter().get(0));
+		bind.setType(typevar);
+		p1Type.getTypeParamBinding().add(bind);
+		p1.setType(p1Type);
+		p1.setUpper(1);
+		result.getOwnedParameter().add(p1);
 		// context : ContextType
-		FParameter p2 = unit.struct_factory.createFParameter();
-		p2.setFName("context");
-		p2.setFType(typevar);
-		p2.setFUpper(1);
-		result.getFOwnedParameter().add(p2);
+		Parameter p2 = unit.struct_factory.createParameter();
+		p2.setName("context");
+		p2.setType(typevar);
+		p2.setUpper(1);
+		result.getOwnedParameter().add(p2);
 		// : ContextType
-		result.setFType(typevar);
+		result.setType(typevar);
 		return result;
 	}
 	
@@ -125,58 +125,58 @@ public class ClassVisitor extends KermetaVisitor {
 	 * @return
 	 */
 	
-	public FOperation createAcceptMethod(FClassDefinition arg0) {
+	public Operation createAcceptMethod(ClassDefinition arg0) {
 		
 		
 		// Make the class inherit from visitable :
-		FClass visitable_class = unit.struct_factory.createFClass();
-		visitable_class.setFTypeDefinition(visitable);
+		fr.irisa.triskell.kermeta.language.structure.Class visitable_class = unit.struct_factory.createClass();
+		visitable_class.setTypeDefinition(visitable);
 		
-		arg0.getFSuperType().add(visitable_class);
+		arg0.getSuperType().add(visitable_class);
 		
-		FOperation result = buildAcceptOp();
+		Operation result = buildAcceptOp();
 		// Body :
-		FAssignement ass = unit.behav_factory.createFAssignement();
-		FCallResult res = unit.behav_factory.createFCallResult();
-		ass.setFTarget(res);
-		FCallFeature fc = unit.behav_factory.createFCallFeature();
-		FCallVariable cvisit = unit.behav_factory.createFCallVariable();
-		cvisit.setFName("visitor");
-		fc.setFTarget(cvisit);
-		fc.setFName("visit" + arg0.getFName());
-		FSelfExpression self = unit.behav_factory.createFSelfExpression();
-		FCallVariable varcontext = unit.behav_factory.createFCallVariable();
-		varcontext.setFName("context");
-		fc.getFParameters().add(self);
-		fc.getFParameters().add(varcontext);
-		ass.setFIsCast(false);
-		ass.setFValue(fc);
-		FBlock block = unit.behav_factory.createFBlock();
-		block.getFStatement().add(ass);
-		result.setFBody(block);
-		result.setFUpper(1);
+		Assignment ass = unit.behav_factory.createAssignment();
+		CallResult res = unit.behav_factory.createCallResult();
+		ass.setTarget(res);
+		CallFeature fc = unit.behav_factory.createCallFeature();
+		CallVariable cvisit = unit.behav_factory.createCallVariable();
+		cvisit.setName("visitor");
+		fc.setTarget(cvisit);
+		fc.setName("visit" + arg0.getName());
+		SelfExpression self = unit.behav_factory.createSelfExpression();
+		CallVariable varcontext = unit.behav_factory.createCallVariable();
+		varcontext.setName("context");
+		fc.getParameters().add(self);
+		fc.getParameters().add(varcontext);
+		ass.setIsCast(false);
+		ass.setValue(fc);
+		Block block = unit.behav_factory.createBlock();
+		block.getStatement().add(ass);
+		result.setBody(block);
+		result.setUpper(1);
 		
 		// And then add visit<> to visitor
 		// operation visitObject(node : Object, context : ContextType) : ContextType is abstract
-		FOperation visitOp;
-		visitOp = unit.struct_factory.createFOperation();
-		visitOp.setFName("visit"+arg0.getFName());
-		visitOp.setFIsAbstract(true);
+		Operation visitOp;
+		visitOp = unit.struct_factory.createOperation();
+		visitOp.setName("visit"+arg0.getName());
+		visitOp.setIsAbstract(true);
 		// create params
-		FClass nodeClass = unit.struct_factory.createFClass();
-		nodeClass.setFTypeDefinition(arg0);
-		FParameter pv1 = unit.struct_factory.createFParameter();
-		pv1.setFName("node");
-		pv1.setFType(nodeClass);
-		pv1.setFUpper(1);
-		visitOp.getFOwnedParameter().add(pv1);
-		FParameter pv2 = unit.struct_factory.createFParameter();
-		pv2.setFName("context");
-		pv2.setFType((FType)visitor.getFTypeParameter().get(0));
-		pv2.setFUpper(1);
-		visitOp.setFType((FType)visitor.getFTypeParameter().get(0));
-		visitOp.setFUpper(1);
-		visitor.getFOwnedOperation().add(visitOp);
+		fr.irisa.triskell.kermeta.language.structure.Class nodeClass = unit.struct_factory.createClass();
+		nodeClass.setTypeDefinition(arg0);
+		Parameter pv1 = unit.struct_factory.createParameter();
+		pv1.setName("node");
+		pv1.setType(nodeClass);
+		pv1.setUpper(1);
+		visitOp.getOwnedParameter().add(pv1);
+		Parameter pv2 = unit.struct_factory.createParameter();
+		pv2.setName("context");
+		pv2.setType((Type)visitor.getTypeParameter().get(0));
+		pv2.setUpper(1);
+		visitOp.setType((Type)visitor.getTypeParameter().get(0));
+		visitOp.setUpper(1);
+		visitor.getOwnedOperation().add(visitOp);
 		
 		return result;
 	}

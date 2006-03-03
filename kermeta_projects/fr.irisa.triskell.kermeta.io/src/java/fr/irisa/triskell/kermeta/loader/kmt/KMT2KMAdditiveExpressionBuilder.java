@@ -12,8 +12,8 @@ import fr.irisa.triskell.kermeta.ast.AdditiveExpression;
 import fr.irisa.triskell.kermeta.ast.AdditiveOp;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.MultiplicativeExpression;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+//import fr.irisa.triskell.kermeta.language.behavior.FExpression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 
@@ -28,7 +28,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 public class KMT2KMAdditiveExpressionBuilder extends KMT2KMPass {
 
 	
-	public static FExpression process(AdditiveExpression node, KermetaUnit builder) {
+	public static fr.irisa.triskell.kermeta.language.behavior.Expression process(AdditiveExpression node, KermetaUnit builder) {
 		if (node == null) return null;
 		KMT2KMAdditiveExpressionBuilder visitor = new KMT2KMAdditiveExpressionBuilder(builder);
 		node.accept(visitor);
@@ -43,7 +43,7 @@ public class KMT2KMAdditiveExpressionBuilder extends KMT2KMPass {
 		operators.put("-", "minus");
 	}
 	
-	protected FExpression result;
+	protected fr.irisa.triskell.kermeta.language.behavior.Expression result;
 	protected AdditiveOp operator;
 	
 	/**
@@ -65,11 +65,11 @@ public class KMT2KMAdditiveExpressionBuilder extends KMT2KMPass {
 					result = KMT2KMMultiplicativeExpressionBuilder.process((MultiplicativeExpression)children[i], builder);
 				}
 				else {
-					FCallFeature call = builder.behav_factory.createFCallFeature();
+					CallFeature call = builder.behav_factory.createCallFeature();
 					builder.storeTrace(call,operator);
-					call.setFName((String)operators.get(operator.getText()));
-					call.setFTarget(result);
-					call.getFParameters().add(KMT2KMMultiplicativeExpressionBuilder.process((MultiplicativeExpression)children[i], builder));
+					call.setName((String)operators.get(operator.getText()));
+					call.setTarget(result);
+					call.getParameters().add(KMT2KMMultiplicativeExpressionBuilder.process((MultiplicativeExpression)children[i], builder));
 					result = call;
 				}
 			}

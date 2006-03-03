@@ -4,11 +4,11 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
-import fr.irisa.triskell.kermeta.behavior.FCallVariable;
-import fr.irisa.triskell.kermeta.behavior.FVariableDecl;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+//import fr.irisa.triskell.kermeta.language.behavior.FVariableDecl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * @author Franck Fleurey
@@ -30,16 +30,16 @@ public class KMSymbolInterpreterVariable extends KMSymbol {
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#getFObject()
 	 */
-	public FObject getFObject() {
+	public fr.irisa.triskell.kermeta.language.structure.Object getFObject() {
 		return null;
 	}
 	
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#generateCallExpression()
 	 */
-	public FCallExpression generateCallExpression(KermetaUnit builder) {
-		FCallVariable call = builder.behav_factory.createFCallVariable();
-		call.setFName(identifier);
+	public CallExpression generateCallExpression(KermetaUnit builder) {
+		CallVariable call = builder.behav_factory.createCallVariable();
+		call.setName(identifier);
 		return call;
 	}
 	

@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemory.java,v 1.12 2006-02-09 13:05:16 zdrey Exp $
+/* $Id: RuntimeMemory.java,v 1.13 2006-03-03 15:21:47 dvojtise Exp $
  * Project: Kermeta.interpreter
  * File: RuntimeMemory.java
  * License: EPL
@@ -18,8 +18,8 @@ import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * The runtime memory of a program that is currently executed
@@ -42,7 +42,7 @@ public class RuntimeMemory {
 	public RuntimeObject voidINSTANCE;
 	public RuntimeObject stdioINSTANCE;
 	/** To be deprecated..*/
-	public FClass stdioFClass=null;
+	public fr.irisa.triskell.kermeta.language.structure.Class stdioFClass=null;
 	
 	protected KermetaUnit unit;
 
@@ -74,7 +74,7 @@ public class RuntimeMemory {
         memoryLoader.loadKCoreRuntimeObject(obj);
 	}
     
-    public RuntimeObject getRuntimeObjectForFObject(FObject object)
+    public RuntimeObject getRuntimeObjectForFObject(fr.irisa.triskell.kermeta.language.structure.Object object)
     {
         return memoryLoader.getRuntimeObjectForFObject(object);
     }
@@ -96,12 +96,12 @@ public class RuntimeMemory {
     }
     
     /** @return the hashtable of runtime objects available in memory */
-    public Hashtable<FObject, RuntimeObject> getRuntimeObjects()
+    public Hashtable<fr.irisa.triskell.kermeta.language.structure.Object, RuntimeObject> getRuntimeObjects()
     {
         return memoryLoader.getRuntimeObjects();
     }
     
-    public void clearFObjectFromCache(FObject object)
+    public void clearFObjectFromCache(fr.irisa.triskell.kermeta.language.structure.Object object)
     {
         memoryLoader.clearFObjectFromCache(object);
     }

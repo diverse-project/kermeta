@@ -1,4 +1,4 @@
-/* $Id: KMTBodiesExtractor.java,v 1.7 2005-06-01 13:00:39 zdrey Exp $
+/* $Id: KMTBodiesExtractor.java,v 1.8 2006-03-03 15:21:25 dvojtise Exp $
  * Created on Feb 17, 2005
  * Author : zdrey@irisa.fr
  * License : GPL
@@ -13,12 +13,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FProperty;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -57,22 +57,22 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	/**
 	 * visit a property : get its "qualified name" and its body
 	 */
-	public Object visit(FProperty property)
+	public Object visit(Property property)
 	{
 		String opHeader = "$"; // $package::class::
-		opHeader += unit.getQualifiedName(property.getFOwningClass());
-		opHeader += "::"+property.getFName();
+		opHeader += unit.getQualifiedName(property.getOwningClass());
+		opHeader += "::"+property.getName();
 		
 		String setter = opHeader + "::setter";
 		// prettyprint setter content
-		FExpression sbody = property.getFSetterbody();
-		if (property.getFSetterbody()!=null)
-			setter += "\n"+(String)pprinter.accept(property.getFSetterbody());
+		Expression sbody = property.getSetterBody();
+		if (property.getSetterBody()!=null)
+			setter += "\n"+(String)pprinter.accept(property.getSetterBody());
 		
 		String getter = opHeader + "::getter";
 		// prettyprint getter content
-		if (property.getFGetterbody()!=null)
-			getter += "\n"+(String)pprinter.accept(property.getFGetterbody());
+		if (property.getGetterBody()!=null)
+			getter += "\n"+(String)pprinter.accept(property.getGetterBody());
 		
 		System.out.println(setter+"\n"+getter);
 		
@@ -95,17 +95,17 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	/**
 	 * visit an operation : get its "qualified name" and its body
 	 */
-	public Object visit(FOperation operation)
+	public Object visit(Operation operation)
 	{
 		String op = "";
 		
-		if (!operation.isFIsAbstract())
+		if (!operation.isIsAbstract())
 		{
-		    op += "$"+unit.getQualifiedName(operation.getFOwningClass());
-		    op += "::"+operation.getFName();
+		    op += "$"+unit.getQualifiedName(operation.getOwningClass());
+		    op += "::"+operation.getName();
 		    System.out.println(op);
-		    if (operation.getFBody()!=null)
-		        op += "\n"+(String)pprinter.accept(operation.getFBody());
+		    if (operation.getBody()!=null)
+		        op += "\n"+(String)pprinter.accept(operation.getBody());
 		    
 		    // Write in file
 		    try
@@ -127,21 +127,7 @@ public class KMTBodiesExtractor extends KermetaVisitor {
 	{
 		return w;
 	}
-	
-	/**
-	 * Get the getter body of the specified property
-	 * @param property
-	 * @return
-	 * to remove
-	 */
-	public String getPropertyBody(FProperty property)
-	{
-	    FExpression gbody = property.getFGetterbody();
-		// pprinter gbody;
-
 		
-		return null;
-	}
 	
 	/**
 	 * Create the kmtbodies file from specified filename

@@ -4,24 +4,24 @@
  */
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
-import java.util.Comparator;
+//import java.util.Comparator;
 import java.util.Iterator;
 
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.IStatusLineManager;
-import org.eclipse.jface.action.IToolBarManager;
+//import org.eclipse.jface.action.Action;
+//import org.eclipse.jface.action.IAction;
+//import org.eclipse.jface.action.IMenuManager;
+//import org.eclipse.jface.action.IStatusLineManager;
+//import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.preference.BooleanPropertyAction;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceStore;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.viewers.IElementComparer;
+//import org.eclipse.jface.resource.ImageDescriptor;
+//import org.eclipse.jface.viewers.IElementComparer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.swt.graphics.Image;
+//import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -29,8 +29,7 @@ import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
@@ -152,7 +151,7 @@ public class KermetaOutline extends ContentOutlinePage {
                 editor.setHighlightRange(node.getRangeStart()-1,0 ,true);
                 
                 //              Now notify other plugins
-                FObject fobj = editor.getFObjectForNode(node);
+                fr.irisa.triskell.kermeta.language.structure.Object fobj = editor.getFObjectForNode(node);
                 if(fobj != null){
 	                Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
 	    			while(it.hasNext())

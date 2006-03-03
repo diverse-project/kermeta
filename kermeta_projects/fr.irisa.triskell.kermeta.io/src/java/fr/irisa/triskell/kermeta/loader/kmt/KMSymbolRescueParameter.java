@@ -4,12 +4,12 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
-import fr.irisa.triskell.kermeta.behavior.FCallVariable;
-import fr.irisa.triskell.kermeta.behavior.FRescue;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
+import fr.irisa.triskell.kermeta.language.behavior.Rescue;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FParameter;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FParameter;
 
 /**
  * @author Franck Fleurey
@@ -18,35 +18,35 @@ import fr.irisa.triskell.kermeta.structure.FParameter;
  */
 public class KMSymbolRescueParameter extends KMSymbol {
 
-	protected FRescue rescue;
+	protected Rescue rescue;
 	
 	/**
 	 * @param id
 	 */
-	public KMSymbolRescueParameter(FRescue rescue) {
-		super(rescue.getFExceptionName());
+	public KMSymbolRescueParameter(Rescue rescue) {
+		super(rescue.getExceptionName());
 		this.rescue = rescue;
 	}
 
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#getFObject()
 	 */
-	public FObject getFObject() {
+	public fr.irisa.triskell.kermeta.language.structure.Object getFObject() {
 		return rescue;
 	}
 	
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#generateCallExpression()
 	 */
-	public FCallExpression generateCallExpression(KermetaUnit builder) {
-		FCallVariable call = builder.behav_factory.createFCallVariable();
-		call.setFName(rescue.getFExceptionName());
+	public CallExpression generateCallExpression(KermetaUnit builder) {
+		CallVariable call = builder.behav_factory.createCallVariable();
+		call.setName(rescue.getExceptionName());
 		return call;
 	}
-	public FRescue getRescue() {
+	public Rescue getRescue() {
 		return rescue;
 	}
-	public void setRescue(FRescue rescue) {
+	public void setRescue(Rescue rescue) {
 		this.rescue = rescue;
 	}
 	

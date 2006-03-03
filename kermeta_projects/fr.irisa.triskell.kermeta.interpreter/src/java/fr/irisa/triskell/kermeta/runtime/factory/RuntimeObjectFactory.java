@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.11 2006-02-21 17:56:04 jsteel Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.12 2006-03-03 15:21:47 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -27,17 +27,17 @@ import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
-import fr.irisa.triskell.kermeta.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.Enumeration; // conflict here ...
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.runtime.language.Class;
 
 /**
@@ -96,9 +96,9 @@ public class RuntimeObjectFactory {
 	/**
 	 * Set the metaclass Class : it creates a new runtime object specific
 	 * to the class Class
-	 * @param classdef the FClassDefinition corresponding to this class
+	 * @param classdef the ClassDefinition corresponding to this class
 	 */
-	public void setClassClassFromFClass(FClass fclass) {
+	public void setClassClassFromFClass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
 		class_class = new RuntimeObject(this, null);
 		class_class.setMetaclass(class_class);
 		class_class.setData(new Hashtable());
@@ -115,22 +115,22 @@ public class RuntimeObjectFactory {
 	private RuntimeObject getClassReflectiveSequenceOtTypeParamBinding() 
 	{
 	    if (classReflectiveSequenceOtTypeParamBinding == null) {
-		    FClass fc = memory.getUnit().struct_factory.createFClass();
-		    fc.setFTypeDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
+	    	fr.irisa.triskell.kermeta.language.structure.Class fc = memory.getUnit().struct_factory.createClass();
+		    fc.setTypeDefinition((ClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::language::ReflectiveSequence"));
 		    
-		    FClass tpb_class = memory.getUnit().struct_factory.createFClass();
-		    tpb_class.setFTypeDefinition((FClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::language::structure::TypeVariableBinding"));
+		    fr.irisa.triskell.kermeta.language.structure.Class tpb_class = memory.getUnit().struct_factory.createClass();
+		    tpb_class.setTypeDefinition((ClassDefinition)memory.getUnit().typeDefinitionLookup("kermeta::language::structure::TypeVariableBinding"));
 		    
-		    FTypeVariableBinding binding = memory.getUnit().struct_factory.createFTypeVariableBinding();
-		    binding.setFVariable((FTypeVariable)fc.getFTypeDefinition().getFTypeParameter().get(0));
-		    binding.setFType(tpb_class);
+		    TypeVariableBinding binding = memory.getUnit().struct_factory.createTypeVariableBinding();
+		    binding.setVariable((TypeVariable)fc.getTypeDefinition().getTypeParameter().get(0));
+		    binding.setType(tpb_class);
 		    
-		    fc.getFTypeParamBinding().add(binding);
+		    fc.getTypeParamBinding().add(binding);
 		    
 		    classReflectiveSequenceOtTypeParamBinding = new RuntimeObject(this, getClassClass());
 		    classReflectiveSequenceOtTypeParamBinding.getData().put("kcoreObject", fc);
 		    
-		    classReflectiveSequenceOtTypeParamBinding.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(fc.getFTypeDefinition()));
+		    classReflectiveSequenceOtTypeParamBinding.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(fc.getTypeDefinition()));
 		    
 		    RuntimeObject ro_bindings = new RuntimeObject(this, classReflectiveSequenceOtTypeParamBinding);
 		    
@@ -140,9 +140,9 @@ public class RuntimeObjectFactory {
 		    
 		    RuntimeObject ro_tpb_class = new RuntimeObject(this, getClassClass());
 		    ro_tpb_class.getData().put("kcoreObject", tpb_class);
-		    ro_tpb_class.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(tpb_class.getFTypeDefinition()));
+		    ro_tpb_class.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(tpb_class.getTypeDefinition()));
 		    
-		    ro_binding.getProperties().put("variable", memory.getRuntimeObjectForFObject((FObject)fc.getFTypeDefinition().getFTypeParameter().get(0)));
+		    ro_binding.getProperties().put("variable", memory.getRuntimeObjectForFObject((fr.irisa.triskell.kermeta.language.structure.Object)fc.getTypeDefinition().getTypeParameter().get(0)));
 		    
 	        ro_binding.getProperties().put("type", ro_tpb_class);
 	        
@@ -154,38 +154,38 @@ public class RuntimeObjectFactory {
 	
 	private Hashtable non_parametric_metaclass_cache = new Hashtable();
 	
-	public RuntimeObject createMetaClass(FClass fclass) {
+	public RuntimeObject createMetaClass(fr.irisa.triskell.kermeta.language.structure.Class fclass) {
 	    
-	    if (fclass.getFTypeParamBinding().size() == 0) {
-	        RuntimeObject result = (RuntimeObject)non_parametric_metaclass_cache.get(fclass.getFTypeDefinition());
+	    if (fclass.getTypeParamBinding().size() == 0) {
+	        RuntimeObject result = (RuntimeObject)non_parametric_metaclass_cache.get(fclass.getTypeDefinition());
 	        if (result != null) return result;
 	    }
 	    
 	    // precondition
-	    if (fclass.getFTypeParamBinding().size() != fclass.getFTypeDefinition().getFTypeParameter().size()) {
+	    if (fclass.getTypeParamBinding().size() != fclass.getTypeDefinition().getTypeParameter().size()) {
 	        throw new Error("INTERNAL ERROR : invalid FClass : all type variable should be bound.");
 	    }
 	    
 	    RuntimeObject meta_class = new RuntimeObject(this, getClassClass());
 	    meta_class.getData().put("kcoreObject", fclass);
-	    meta_class.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(fclass.getFTypeDefinition()));
+	    meta_class.getProperties().put("typeDefinition", memory.getRuntimeObjectForFObject(fclass.getTypeDefinition()));
 	    
 	    RuntimeObject ro_bindings = new RuntimeObject(this, getClassReflectiveSequenceOtTypeParamBinding());
 	    meta_class.getProperties().put("typeParamBinding", ro_bindings);
 	    
-	    for(int i=0; i<fclass.getFTypeParamBinding().size(); i++ ) {
-	        FTypeVariableBinding binding = (FTypeVariableBinding)fclass.getFTypeParamBinding().get(i);
+	    for(int i=0; i<fclass.getTypeParamBinding().size(); i++ ) {
+	        TypeVariableBinding binding = (TypeVariableBinding)fclass.getTypeParamBinding().get(i);
 
-	        FType binding_type = binding.getFType();
+	        Type binding_type = binding.getType();
 	        
-	        while (binding_type instanceof FPrimitiveType) {
-	            binding_type = ((FPrimitiveType)binding_type).getFInstanceType();
+	        while (binding_type instanceof PrimitiveType) {
+	            binding_type = ((PrimitiveType)binding_type).getInstanceType();
 	        }
 	        
-	        RuntimeObject ro_var = (RuntimeObject)memory.getRuntimeObjectForFObject((FObject)fclass.getFTypeDefinition().getFTypeParameter().get(i));
+	        RuntimeObject ro_var = (RuntimeObject)memory.getRuntimeObjectForFObject((fr.irisa.triskell.kermeta.language.structure.Object)fclass.getTypeDefinition().getTypeParameter().get(i));
 	        RuntimeObject ro_type = null;
-	        if (binding_type instanceof FClass) {
-	            ro_type = createMetaClass((FClass)binding_type);
+	        if (binding_type instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
+	            ro_type = createMetaClass((fr.irisa.triskell.kermeta.language.structure.Class)binding_type);
 	        }
 	        else {
 	            // it is an enum
@@ -199,8 +199,8 @@ public class RuntimeObjectFactory {
 	        Collection.getArrayList(ro_bindings).add(ro_binding);
 	    }
 	    
-	    if (fclass.getFTypeParamBinding().size() == 0) {
-	        non_parametric_metaclass_cache.put(fclass.getFTypeDefinition(), meta_class);
+	    if (fclass.getTypeParamBinding().size() == 0) {
+	        non_parametric_metaclass_cache.put(fclass.getTypeDefinition(), meta_class);
 	    }
 	    
 	    return meta_class;
@@ -263,7 +263,7 @@ public class RuntimeObjectFactory {
 	    createRuntimeObjectFromClass_count++;
 	    
 	    // Check if it is a primitive type
-	    String theMetaClassName = ((FClass) meta_class.getData().get("kcoreObject")).getFTypeDefinition().getFName();
+	    String theMetaClassName = ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition().getName();
 		System.out.println("J'ai trouvé un : " + theMetaClassName);
 	 
 		if (theMetaClassName.equals("String") ){
@@ -291,14 +291,14 @@ public class RuntimeObjectFactory {
 		} else {				    						    		
 		
 		    // Get the list of attribute of the meta-class
-		    EList metaClassAttribute = ((FClassDefinition) ((FClass) meta_class.getData().get("kcoreObject")).getFTypeDefinition()).getFOwnedAttributes();
+		    EList metaClassAttribute = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition()).getOwnedAttribute();
 		    
 		    // Foreach property of the meta-class, deep or shallow clone 
 		    Iterator metaClassAttributeIterator = metaClassAttribute.iterator();
 		    while ( metaClassAttributeIterator.hasNext() ) {
-		    	FProperty theMetaClassAttribute = (FProperty) metaClassAttributeIterator.next();
+		    	Property theMetaClassAttribute = (Property) metaClassAttributeIterator.next();
 			    	    	
-		    	String theAttributeName = theMetaClassAttribute.getFName();
+		    	String theAttributeName = theMetaClassAttribute.getName();
 			 
 		    	RuntimeObject theAttributeValue = (RuntimeObject) objectToClone.getProperties().get(theAttributeName);
 	    		
@@ -307,13 +307,13 @@ public class RuntimeObjectFactory {
 	    		
 			    	RuntimeObject theAttributeMetaClass = theAttributeValue.getMetaclass();
 			    	System.out.println("J'ai trouvé un : " + theAttributeMetaClass);
-			    	System.out.println("J'ai trouvé un : " + theMetaClassAttribute.getFType());
+			    	System.out.println("J'ai trouvé un : " + theMetaClassAttribute.getType());
 			    	
 			    	String theAttributeTypeName = null;
-			    	if (theMetaClassAttribute.getFType() instanceof FClass) {
-		    			theAttributeTypeName = ((FClass) theMetaClassAttribute.getFType()).getFTypeDefinition().getFName();   		
-		    		} else if (theMetaClassAttribute.getFType() instanceof FEnumeration) { 
-		    			theAttributeTypeName = ((FEnumeration) theMetaClassAttribute.getFType()).getFName();
+			    	if (theMetaClassAttribute.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
+		    			theAttributeTypeName = ((fr.irisa.triskell.kermeta.language.structure.Class) theMetaClassAttribute.getType()).getTypeDefinition().getName();   		
+		    		} else if (theMetaClassAttribute.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Enumeration) { 
+		    			theAttributeTypeName = ((fr.irisa.triskell.kermeta.language.structure.Enumeration) theMetaClassAttribute.getType()).getName();
 		    		} else {
 		    			System.err.println("-----------------------------------------------");
 		    			System.err.println("Err while cloning object : " + objectToClone);
@@ -321,11 +321,11 @@ public class RuntimeObjectFactory {
 		    			System.err.println("-----------------------------------------------");
 		    		}
 			    	
-			    	if ( theMetaClassAttribute.isFIsComposite() ) { 	// ************ DEEP CLONE ************
+			    	if ( theMetaClassAttribute.isIsComposite() ) { 	// ************ DEEP CLONE ************
 			    	
 			    		result.getProperties().put(theAttributeName, Class.cloneObject(theAttributeMetaClass, theAttributeValue));	
 	
-			    		String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFTypeDefinition().getFName();
+			    		String theAttributeMetaClassName = ((fr.irisa.triskell.kermeta.language.structure.Class) theAttributeMetaClass.getData().get("kcoreObject")).getTypeDefinition().getName();
 			    		
 			    		// For each element in the collection, we nee to add an opposite 
 			    		if ( theAttributeMetaClassName.equals("ReflectiveCollection") )
@@ -336,8 +336,8 @@ public class RuntimeObjectFactory {
 			    			ArrayList attributeContents = (ArrayList) theAttributeValue.getData().get("CollectionArrayList");
 			    			ArrayList resultAttributeContents = new ArrayList();
 		    				
-			    			FProperty oppositeProperty = ((FProperty) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getFOpposite(); 
-			    			String oppositeName = oppositeProperty.getFName();
+			    			Property oppositeProperty = ((Property) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getOpposite(); 
+			    			String oppositeName = oppositeProperty.getName();
 			    			
 			    			// Manage opposite for each object contained in the reflective Collections
 			    			Iterator elementIterator = attributeContents.iterator();
@@ -349,7 +349,7 @@ public class RuntimeObjectFactory {
 			    				RuntimeObject elementProperty = (RuntimeObject) cloneElement.getProperties().get(oppositeName);
 			    				
 			    				// test if the opposite is a Collection or an simple attribute
-			    				if (oppositeProperty.getFUpper() == 1){
+			    				if (oppositeProperty.getUpper() == 1){
 									cloneElement.getProperties().put(oppositeName, result);
 								} else { 	
 									ArrayList elementPropertyCollection = ((ArrayList) elementProperty.getData().get("CollectionArrayList"));
@@ -374,7 +374,7 @@ public class RuntimeObjectFactory {
 			    		// ********* SHALLOW CLONE ***********
 			    		System.out.println("C'est une propriété reference");	
 	
-			    		String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFTypeDefinition().getFName();
+			    		String theAttributeMetaClassName = ((fr.irisa.triskell.kermeta.language.structure.Class) theAttributeMetaClass.getData().get("kcoreObject")).getTypeDefinition().getName();
 			    		
 			    		// For each element in the collection, we nee to add an opposite 
 			    		if ( theAttributeMetaClassName.equals("ReflectiveCollection") ) 
@@ -385,8 +385,8 @@ public class RuntimeObjectFactory {
 			    			ArrayList attributeContents = (ArrayList) theAttributeValue.getData().get("CollectionArrayList");
 			    			ArrayList resultAttributeContents = new ArrayList();
 		    				
-			    			FProperty oppositeProperty = ((FProperty) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getFOpposite(); 
-			    			String oppositeName = oppositeProperty.getFName();
+			    			Property oppositeProperty = ((Property) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getOpposite(); 
+			    			String oppositeName = oppositeProperty.getName();
 			    			
 			    			// Manage opposite for each object contains in the reflective Collections
 			    			Iterator elementIterator = attributeContents.iterator();
@@ -397,7 +397,7 @@ public class RuntimeObjectFactory {
 			    				RuntimeObject elementProperty = (RuntimeObject) element.getProperties().get(oppositeName);
 			    				
 			    				// test if the opposite is a Collection or an simple attribute
-			    				if (oppositeProperty.getFUpper() == 1){
+			    				if (oppositeProperty.getUpper() == 1){
 									element.getProperties().put(oppositeName, result);
 								} else { 	
 									ArrayList elementPropertyCollection = ((ArrayList) elementProperty.getData().get("CollectionArrayList"));
@@ -473,7 +473,7 @@ public class RuntimeObjectFactory {
 	    	// And we clone it ...
 	    	
 		    // Check if it is a primitive type
-		    String theMetaClassName = ((FClass) meta_class.getData().get("kcoreObject")).getFTypeDefinition().getFName();
+		    String theMetaClassName = ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition().getName();
 			System.out.println("J'ai trouvé un : " + theMetaClassName);
 		 
 			if (theMetaClassName.equals("String") ){
@@ -502,15 +502,15 @@ public class RuntimeObjectFactory {
 				// It doesn't be a primitive type
 				
 			    // Get the list of attribute of the meta-class
-			    EList metaClassAttribute = ((FClassDefinition) ((FClass) meta_class.getData().get("kcoreObject")).getFTypeDefinition()).getFOwnedAttributes();
+			    EList metaClassAttribute = ((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class) meta_class.getData().get("kcoreObject")).getTypeDefinition()).getOwnedAttribute();
 			    
 			    // Foreach property of found in the meta-class, do a deep clone 
 			    // We look in the meta-class to find the name of each properties
 			    Iterator metaClassAttributeIterator = metaClassAttribute.iterator();
 			    while ( metaClassAttributeIterator.hasNext() ) {
-			    	FProperty theMetaClassAttribute = (FProperty) metaClassAttributeIterator.next();
+			    	Property theMetaClassAttribute = (Property) metaClassAttributeIterator.next();
 				    	    	
-			    	String theAttributeName = theMetaClassAttribute.getFName();
+			    	String theAttributeName = theMetaClassAttribute.getName();
 			    	System.out.println(" ---> cloning property \"" + theAttributeName + "\"");
 				   	RuntimeObject theAttributeValue = (RuntimeObject) objectToClone.getProperties().get(theAttributeName);
 		    		
@@ -519,16 +519,16 @@ public class RuntimeObjectFactory {
 		    		
 				    	RuntimeObject theAttributeMetaClass = theAttributeValue.getMetaclass();
 				    	System.out.println("J'ai trouvé un : " + theAttributeMetaClass);
-				    	System.out.println("J'ai trouvé un : " + theMetaClassAttribute.getFType());
+				    	System.out.println("J'ai trouvé un : " + theMetaClassAttribute.getType());
 				    	
 				    	String theAttributeTypeName = null;
 				    	
 				    	// We get the name of the meta class of the attribute
-				    	if (theMetaClassAttribute.getFType() instanceof FClass) {
-			    			theAttributeTypeName = ((FClass) theMetaClassAttribute.getFType()).getFTypeDefinition().getFName();   		
+				    	if (theMetaClassAttribute.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
+			    			theAttributeTypeName = ((fr.irisa.triskell.kermeta.language.structure.Class) theMetaClassAttribute.getType()).getTypeDefinition().getName();   		
 			    		
-				    	} else if (theMetaClassAttribute.getFType() instanceof FEnumeration) { 
-			    			theAttributeTypeName = ((FEnumeration) theMetaClassAttribute.getFType()).getFName();
+				    	} else if (theMetaClassAttribute.getType() instanceof fr.irisa.triskell.kermeta.language.structure.Enumeration) { 
+			    			theAttributeTypeName = ((fr.irisa.triskell.kermeta.language.structure.Enumeration) theMetaClassAttribute.getType()).getName();
 			    		
 			    		} else {
 			    			System.err.println("-----------------------------------------------");
@@ -539,7 +539,7 @@ public class RuntimeObjectFactory {
 				    	
 				    	
 				       	// If the attribute we clone is a ReflectiveSequence
-				    	String theAttributeMetaClassName = ((FClass) theAttributeMetaClass.getData().get("kcoreObject")).getFTypeDefinition().getFName();
+				    	String theAttributeMetaClassName = ((fr.irisa.triskell.kermeta.language.structure.Class) theAttributeMetaClass.getData().get("kcoreObject")).getTypeDefinition().getName();
 			    		// For each element in the collection, we need to add an opposite 
 			    		if ( theAttributeMetaClassName.equals("ReflectiveSequence") )
 			    		{	
@@ -550,8 +550,8 @@ public class RuntimeObjectFactory {
 			    			ArrayList attributeContents = (ArrayList) theAttributeValue.getData().get("CollectionArrayList");
 			    			ArrayList resultAttributeContents = new ArrayList();
 		    				
-			    			FProperty oppositeProperty = ((FProperty) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getFOpposite(); 
-			    			String oppositeName = oppositeProperty.getFName();
+			    			Property oppositeProperty = ((Property) ((RuntimeObject) theAttributeValue.getData().get("RProperty")).getData().get("kcoreObject")).getOpposite(); 
+			    			String oppositeName = oppositeProperty.getName();
 			    			
 			    			
 			    			Iterator elementIterator = attributeContents.iterator();
@@ -568,7 +568,7 @@ public class RuntimeObjectFactory {
 			    				//RuntimeObject elementProperty = (RuntimeObject) clonedElement.getProperties().get(oppositeName);
 			    				
 			    				// test if the opposite is a Collection or a simple attribute
-			    				if (oppositeProperty.getFUpper() == 1){
+			    				if (oppositeProperty.getUpper() == 1){
 									clonedElement.getProperties().put(oppositeName, result);
 									
 								} else { 	
@@ -614,10 +614,10 @@ public class RuntimeObjectFactory {
 	 */
 	public RuntimeObject getClassForClassDefinition(RuntimeObject roclassdef) {
 	    
-	    FClassDefinition class_def = (FClassDefinition)roclassdef.getData().get("kcoreObject");
+	    ClassDefinition class_def = (ClassDefinition)roclassdef.getData().get("kcoreObject");
 	    
 	    // The precondition
-	    if (class_def == null || class_def.getFTypeParameter().size() > 0) {
+	    if (class_def == null || class_def.getTypeParameter().size() > 0) {
 	        throw new Error("INTERNAL ERROR : method getClassForClassDefinition can only create classes for non parametric class definitions");
 	    }
 	    
@@ -627,8 +627,8 @@ public class RuntimeObjectFactory {
 	    
         result = createRuntimeObjectFromClass(getClassClass());
         result.getProperties().put("typeDefinition", roclassdef);
-        FClass fclass = struct_factory.createFClass();
-        fclass.setFTypeDefinition((FClassDefinition)roclassdef.getData().get("kcoreObject"));
+        fr.irisa.triskell.kermeta.language.structure.Class fclass = struct_factory.createClass();
+        fclass.setTypeDefinition((ClassDefinition)roclassdef.getData().get("kcoreObject"));
         result.getData().put("kcoreObject", fclass);
         
         non_parametric_metaclass_cache.put(class_def, result);

@@ -1,4 +1,4 @@
-/* $Id: RunCommandLine.java,v 1.10 2005-12-06 08:30:50 dvojtise Exp $
+/* $Id: RunCommandLine.java,v 1.11 2006-03-03 15:21:47 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunCommandLine.java
  * License    : GPL
@@ -31,7 +31,7 @@ import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_T;
 import fr.irisa.triskell.kermeta.launcher.CommandLineOptions.Option_U;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FTag;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.utils.argumentsreader.CheckOption;
 import fr.irisa.triskell.utils.argumentsreader.NoOption;
@@ -197,11 +197,11 @@ public class RunCommandLine {
 		            fr.irisa.triskell.kermeta.runtime.basetypes.String.create(arg,theInterpreter.getMemory().getROFactory()));
 		}
 	    //		  Is there a "testOperation" tag?
-	    Iterator it2 = theInterpreter.getUnit().rootPackage.getFTag().iterator();
+	    Iterator it2 = theInterpreter.getUnit().rootPackage.getTag().iterator();
         while(it2.hasNext()) {
-            FTag tag = (FTag)it2.next();
+            Tag tag = (Tag)it2.next();
             //          is there a tag "testOperation" -- we don't care about its value!!
-            if (tag.getFName().equals("testOperation"))
+            if (tag.getName().equals("testOperation"))
                 isTestSuite=true; 
         }
         initialized = true;

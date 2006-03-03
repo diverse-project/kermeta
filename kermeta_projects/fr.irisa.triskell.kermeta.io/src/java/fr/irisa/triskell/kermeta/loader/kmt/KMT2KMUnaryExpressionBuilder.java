@@ -7,8 +7,8 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.ast.UnaryExpression;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 
@@ -23,7 +23,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 public class KMT2KMUnaryExpressionBuilder extends KMT2KMPass {
 
 	
-	public static FExpression process(UnaryExpression node, KermetaUnit builder) {
+	public static Expression process(UnaryExpression node, KermetaUnit builder) {
 		if (node == null) return null;
 		KMT2KMUnaryExpressionBuilder visitor = new KMT2KMUnaryExpressionBuilder(builder);
 		node.accept(visitor);
@@ -38,7 +38,7 @@ public class KMT2KMUnaryExpressionBuilder extends KMT2KMPass {
 		operators.put("not", "not");
 	}
 	
-	protected FExpression result;
+	protected Expression result;
 	
 	/**
 	 * @param builder
@@ -54,10 +54,10 @@ public class KMT2KMUnaryExpressionBuilder extends KMT2KMPass {
 	public boolean beginVisit(UnaryExpression unaryExpression) {
 		result = KMT2KMPostfixExpressionBuilder.process(unaryExpression.getPostfixExp(), builder);
 		if (unaryExpression.getUnaryOp() != null) {
-			FCallFeature call = builder.behav_factory.createFCallFeature();
+			CallFeature call = builder.behav_factory.createCallFeature();
 			builder.storeTrace(call,unaryExpression.getUnaryOp());
-			call.setFName((String)operators.get(unaryExpression.getUnaryOp().getText()));
-			call.setFTarget(result);
+			call.setName((String)operators.get(unaryExpression.getUnaryOp().getText()));
+			call.setTarget(result);
 			result = call;
 		}
 		return false;

@@ -1,4 +1,4 @@
-/* $Id: KCoreRuntimeObject.java,v 1.1 2005-06-07 12:06:14 ffleurey Exp $
+/* $Id: KCoreRuntimeObject.java,v 1.2 2006-03-03 15:21:47 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KCoreRuntimeObject.java
 * License : GPL
@@ -13,7 +13,7 @@ package fr.irisa.triskell.kermeta.runtime;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * @author Franck Fleurey
@@ -24,13 +24,13 @@ public class KCoreRuntimeObject extends RuntimeObject {
 
     private boolean loaded = false;
     
-    private FObject kcoreObject;
+    private fr.irisa.triskell.kermeta.language.structure.Object kcoreObject;
     
     /**
      * @param factory
      * @param metaclass
      */
-    public KCoreRuntimeObject(RuntimeObjectFactory factory, RuntimeObject metaclass, FObject kcoreObject) {
+    public KCoreRuntimeObject(RuntimeObjectFactory factory, RuntimeObject metaclass, fr.irisa.triskell.kermeta.language.structure.Object kcoreObject) {
         super(factory, metaclass);
         this.kcoreObject = kcoreObject;
         super.getData().put("kcoreObject", kcoreObject);
@@ -62,7 +62,7 @@ public class KCoreRuntimeObject extends RuntimeObject {
         if (!loaded) load();
         return super.isFrozen();
     }
-    public FObject getKcoreObject() {
+    public fr.irisa.triskell.kermeta.language.structure.Object getKcoreObject() {
         return kcoreObject;
     }
     public boolean isLoaded() {

@@ -14,10 +14,10 @@ import com.ibm.eclipse.emfatic.core.ast.PackageDecl;
 import com.ibm.eclipse.emfatic.core.ast.SubPackageDecl;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FDataType;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.DataType;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 
 
 
@@ -38,8 +38,8 @@ public class ECore2KMPass2 extends ECore2KMPass {
 		pkgs = new Stack();
 	}
 	
-	public FPackage current_package() {
-		return (FPackage)pkgs.peek();
+	public Package current_package() {
+		return (Package)pkgs.peek();
 	}
 	
 	public boolean beginVisit(PackageDecl node) {
@@ -63,31 +63,31 @@ public class ECore2KMPass2 extends ECore2KMPass {
 	
 	public boolean beginVisit(ClassDecl node) {
 		//System.out.println("(Pre-)Create FClass " + getQualifiedName(node.getName().getText()));
-		FClassDefinition c = builder.struct_factory.createFClassDefinition();
+		ClassDefinition c = builder.struct_factory.createClassDefinition();
 		builder.storeTrace(c, node);
-		c.setFName(getTextForID(node.getName()));
+		c.setName(getTextForID(node.getName()));
 		//TODO : check if the type already exists
-		current_package().getFOwnedTypeDefinition().add(c);
+		current_package().getOwnedTypeDefinition().add(c);
 		builder.typeDefs.put(getQualifiedName(node.getName().getText()), c);
 		return super.beginVisit(node);
 	}
 	public boolean beginVisit(DataTypeDecl node) {
-		//System.out.println("(Pre-)Create FPrimitiveType " + getQualifiedName(node.getName().getText()));
-		FDataType c = builder.struct_factory.createFPrimitiveType();
+		//System.out.println("(Pre-)Create PrimitiveType " + getQualifiedName(node.getName().getText()));
+		DataType c = builder.struct_factory.createPrimitiveType();
 		builder.storeTrace(c, node);
-		c.setFName(getTextForID(node.getName()));
+		c.setName(getTextForID(node.getName()));
 //		TODO : check if the type already exists
-		current_package().getFOwnedTypeDefinition().add(c);
+		current_package().getOwnedTypeDefinition().add(c);
 		builder.typeDefs.put(getQualifiedName(node.getName().getText()), c);
 		return super.beginVisit(node);
 	}
 	public boolean beginVisit(EnumDecl node) {
-		//System.out.println("(Pre-)Create FEnumeration " + getQualifiedName(node.getName().getText()));
-		FEnumeration c = builder.struct_factory.createFEnumeration();
+		//System.out.println("(Pre-)Create Enumeration " + getQualifiedName(node.getName().getText()));
+		Enumeration c = builder.struct_factory.createEnumeration();
 		builder.storeTrace(c, node);
-		c.setFName(getTextForID(node.getName()));
+		c.setName(getTextForID(node.getName()));
 //		TODO : check if the type already exists
-		current_package().getFOwnedTypeDefinition().add(c);
+		current_package().getOwnedTypeDefinition().add(c);
 		builder.typeDefs.put(getQualifiedName(node.getName().getText()), c);
 		return super.beginVisit(node);
 	}
@@ -95,7 +95,7 @@ public class ECore2KMPass2 extends ECore2KMPass {
 	protected String getQualifiedName(String name) {
 		String result = "";
 		for(int i=0; i<pkgs.size(); i++)
-			result += ((FPackage)pkgs.get(i)).getFName() + "::";
+			result += ((Package)pkgs.get(i)).getName() + "::";
 		return result + name;
 	}
 }

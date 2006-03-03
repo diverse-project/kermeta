@@ -5,10 +5,10 @@ package fr.irisa.triskell.kermeta.runtime.basetypes;
 import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 
 public class Map {
 	
@@ -44,19 +44,19 @@ public class Map {
 	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Map.keysIterator()
 	public static RuntimeObject keysIterator(RuntimeObject self) {
 	
-		FClass it_class = self.getFactory().getMemory().getUnit().struct_factory.createFClass();
+		fr.irisa.triskell.kermeta.language.structure.Class it_class = self.getFactory().getMemory().getUnit().struct_factory.createClass();
 	    
-	    it_class.setFTypeDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    it_class.setTypeDefinition((ClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
 	    
-	    FTypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+	    TypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
 	    
-	    binding.setFVariable((FTypeVariable)it_class.getFTypeDefinition().getFTypeParameter().get(0));
+	    binding.setVariable((TypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
 	    
-	    FClass self_class = (FClass)self.getMetaclass().getData().get("kcoreObject");
+	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
 	    
-	    binding.setFType(((FTypeVariableBinding)self_class.getFTypeParamBinding().get(0)).getFType());
+	    binding.setType(((TypeVariableBinding)self_class.getTypeParamBinding().get(0)).getType());
 	    
-	    it_class.getFTypeParamBinding().add(binding);
+	    it_class.getTypeParamBinding().add(binding);
 	    
 	    RuntimeObject result = self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass(it_class));
 		
@@ -70,19 +70,19 @@ public class Map {
 	public static RuntimeObject valueIterator(RuntimeObject self) {
 	    
 
-		FClass it_class = self.getFactory().getMemory().getUnit().struct_factory.createFClass();
+		fr.irisa.triskell.kermeta.language.structure.Class it_class = self.getFactory().getMemory().getUnit().struct_factory.createClass();
 	    
-	    it_class.setFTypeDefinition((FClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
+	    it_class.setTypeDefinition((ClassDefinition)self.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::standard::Iterator"));
 	    
-	    FTypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+	    TypeVariableBinding binding = self.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
 	    
-	    binding.setFVariable((FTypeVariable)it_class.getFTypeDefinition().getFTypeParameter().get(0));
+	    binding.setVariable((TypeVariable)it_class.getTypeDefinition().getTypeParameter().get(0));
 	    
-	    FClass self_class = (FClass)self.getMetaclass().getData().get("kcoreObject");
+	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
 	    
-	    binding.setFType(((FTypeVariableBinding)self_class.getFTypeParamBinding().get(1)).getFType());
+	    binding.setType(((TypeVariableBinding)self_class.getTypeParamBinding().get(1)).getType());
 	    
-	    it_class.getFTypeParamBinding().add(binding);
+	    it_class.getTypeParamBinding().add(binding);
 	    
 	    RuntimeObject result = self.getFactory().createRuntimeObjectFromClass(self.getFactory().createMetaClass(it_class));
 		

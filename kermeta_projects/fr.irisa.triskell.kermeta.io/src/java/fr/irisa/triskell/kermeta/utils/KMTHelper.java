@@ -1,4 +1,4 @@
-/* $Id: KMTHelper.java,v 1.3 2006-02-21 17:34:19 jsteel Exp $
+/* $Id: KMTHelper.java,v 1.4 2006-03-03 15:22:19 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMTHelper.java
  * License    : EPL
@@ -13,9 +13,9 @@
 package fr.irisa.triskell.kermeta.utils;
 
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FType;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 
 /**
  * Some helper methods usefull when dealing with kermeta text syntax
@@ -23,28 +23,28 @@ import fr.irisa.triskell.kermeta.structure.FType;
 public class KMTHelper {
 
 	/**
-	 * Get the fully qualified name of an FNamedElement
+	 * Get the fully qualified name of an NamedElement
 	 */
-	public static String getQualifiedName(FNamedElement element) {
-		if (element.eContainer() != null && element.eContainer() instanceof FNamedElement)
-			return getQualifiedName( (FNamedElement)element.eContainer() ) + "::" + getMangledIdentifier(element.getFName());
-		else return element.getFName();
+	public static String getQualifiedName(NamedElement element) {
+		if (element.eContainer() != null && element.eContainer() instanceof NamedElement)
+			return getQualifiedName( (NamedElement)element.eContainer() ) + "::" + getMangledIdentifier(element.getName());
+		else return element.getName();
 	}
 	/**
 	 * Get the fully qualified name of FType 
-	 * as the concrete types usually inherit from FNamedElement
+	 * as the concrete types usually inherit from NamedElement
 	 * or is a FClass. In the later case, returns the class definition qualified name
 	 */
-	public static String getTypeQualifiedName(FType type)
+	public static String getTypeQualifiedName(Type type)
 	{
-		if(type instanceof FNamedElement){
-			FNamedElement fNamedElement = (FNamedElement)type;
+		if(type instanceof NamedElement){
+			NamedElement fNamedElement = (NamedElement)type;
 
 			return KMTHelper.getQualifiedName(fNamedElement); 	
 		}
-		else if (type instanceof FClass){
-			FClass fClass = (FClass)type;
-			return getQualifiedName(fClass.getFTypeDefinition());
+		else if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+			fr.irisa.triskell.kermeta.language.structure.Class fClass = (fr.irisa.triskell.kermeta.language.structure.Class)type;
+			return getQualifiedName(fClass.getTypeDefinition());
 		}
 		return "";
 	}

@@ -1,4 +1,4 @@
-/* $Id: InheritanceSearch.java,v 1.7 2006-02-21 17:34:19 jsteel Exp $
+/* $Id: InheritanceSearch.java,v 1.8 2006-03-03 15:22:18 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : InheritanceSearchUtilities.java
 * License : GPL
@@ -15,14 +15,14 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
-import fr.irisa.triskell.kermeta.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 
 /**
  * @author Franck Fleurey
@@ -37,23 +37,23 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */
-	public static ArrayList allSuperTypes(FClass c) {
+	public static ArrayList allSuperTypes(fr.irisa.triskell.kermeta.language.structure.Class c) {
 		ArrayList result = new ArrayList();
 		result.add(c);
 		// get all super types of direct supertypes
-		Iterator it = ((FClassDefinition) c.getFTypeDefinition()).getFSuperType().iterator();
+		Iterator it = ((ClassDefinition) c.getTypeDefinition()).getSuperType().iterator();
 		while(it.hasNext()) {
 			// get the super type
-			FClass direct_st = (FClass)it.next();
+			fr.irisa.triskell.kermeta.language.structure.Class direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
 			// propagate type variables
-			direct_st = (FClass)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
+			direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
 			ArrayList sts = allSuperTypes(direct_st);
 			for(int i=0; i<sts.size(); i++) {
 				if (!result.contains(sts.get(i))) result.add(sts.get(i));
 			}
 		}
 		// Add the type object which is implicitly a super type of every type
-		FClass object = (FClass)((SimpleType)TypeCheckerContext.ObjectType).type;
+		fr.irisa.triskell.kermeta.language.structure.Class object = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).type;
 		if (! TypeEqualityChecker.equals(c, object) && !result.contains(object)) {
 		    result.add(object);
 		}
@@ -66,19 +66,19 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */
-	public static ArrayList getDirectSuperTypes(FClass c) {
+	public static ArrayList getDirectSuperTypes(fr.irisa.triskell.kermeta.language.structure.Class c) {
 	    
-	    FClass object = (FClass)((SimpleType)TypeCheckerContext.ObjectType).type;
+		fr.irisa.triskell.kermeta.language.structure.Class object = (fr.irisa.triskell.kermeta.language.structure.Class)((SimpleType)TypeCheckerContext.ObjectType).type;
 	    ArrayList result = new ArrayList();
 	    // The class Object is the Root Class
 	    if (TypeEqualityChecker.equals(c, object)) return result;
 	    
-	    Iterator it = ((FClassDefinition) c.getFTypeDefinition()).getFSuperType().iterator();
+	    Iterator it = ((ClassDefinition) c.getTypeDefinition()).getSuperType().iterator();
 	    while(it.hasNext()) {
 			// get the super type
-			FClass direct_st = (FClass)it.next();
+	    	fr.irisa.triskell.kermeta.language.structure.Class direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
 			// propagate type variables
-			direct_st = (FClass)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
+			direct_st = (fr.irisa.triskell.kermeta.language.structure.Class)TypeVariableEnforcer.getBoundType(direct_st, TypeVariableEnforcer.getTypeVariableBinding(c));
 			result.add(direct_st);
 	    }
 	    
@@ -95,7 +95,7 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */	
-	public static ArrayList callableOperations(FClass c) {
+	public static ArrayList callableOperations(fr.irisa.triskell.kermeta.language.structure.Class c) {
 		ArrayList allTypes = allSuperTypes(c);
 		ArrayList result = new ArrayList();
 		Hashtable found_ops = new Hashtable();
@@ -105,20 +105,20 @@ public class InheritanceSearch {
 		
 		
 		while(!toVisit.isEmpty()) {
-		    FClass current = (FClass)toVisit.get(0);
+			fr.irisa.triskell.kermeta.language.structure.Class current = (fr.irisa.triskell.kermeta.language.structure.Class)toVisit.get(0);
 		    toVisit.remove(0);
 		    Iterator it = getDirectSuperTypes(current).iterator();
 		    while(it.hasNext()) {
-		        FClass stype = (FClass)it.next();
+		    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
 		        if (!toVisit.contains(stype)) toVisit.add(stype);
 		    }
 		    
-		    Iterator ops = ((FClassDefinition) current.getFTypeDefinition()).getFOwnedOperation().iterator();
+		    Iterator ops = ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation().iterator();
 			// Add all operations
 			while (ops.hasNext()) {
-				FOperation op = (FOperation)ops.next();
-				if (!found_ops.containsKey(op.getFName())) {
-				    found_ops.put(op.getFName(),op);
+				Operation op = (Operation)ops.next();
+				if (!found_ops.containsKey(op.getName())) {
+				    found_ops.put(op.getName(),op);
 				    result.add(new CallableOperation(op,current));
 				}
 			}
@@ -129,7 +129,7 @@ public class InheritanceSearch {
 	}
 	
 	
-	public static CallableOperation getSuperOperation(FClass c, FOperation method) {
+	public static CallableOperation getSuperOperation(fr.irisa.triskell.kermeta.language.structure.Class c, Operation method) {
 	    
 		ArrayList allTypes = allSuperTypes(c);
 		ArrayList result = new ArrayList();
@@ -140,19 +140,19 @@ public class InheritanceSearch {
 		
 		
 		while(!toVisit.isEmpty()) {
-		    FClass current = (FClass)toVisit.get(0);
+			fr.irisa.triskell.kermeta.language.structure.Class current = (fr.irisa.triskell.kermeta.language.structure.Class)toVisit.get(0);
 		    toVisit.remove(0);
 		    Iterator it = getDirectSuperTypes(current).iterator();
 		    while(it.hasNext()) {
-		        FClass stype = (FClass)it.next();
+		    	fr.irisa.triskell.kermeta.language.structure.Class stype = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
 		        if (!toVisit.contains(stype)) toVisit.add(stype);
 		    }
 		    
-		    Iterator ops = ((FClassDefinition) current.getFTypeDefinition()).getFOwnedOperation().iterator();
+		    Iterator ops = ((ClassDefinition) current.getTypeDefinition()).getOwnedOperation().iterator();
 			// Add all operations
 			while (ops.hasNext()) {
-				FOperation op = (FOperation)ops.next();
-				if (method.getFSuperOperation() == op) {
+				Operation op = (Operation)ops.next();
+				if (method.getSuperOperation() == op) {
 				    return new CallableOperation(op,current);
 				}
 			}
@@ -168,17 +168,17 @@ public class InheritanceSearch {
 	 * @param cdef
 	 * @return
 	 */
-	public static FClass getFClassForClassDefinition(FClassDefinition cdef) {
+	public static fr.irisa.triskell.kermeta.language.structure.Class getFClassForClassDefinition(ClassDefinition cdef) {
 	    StructureFactory struct_factory = StructurePackageImpl.init().getStructureFactory();
-	    FClass fclass = struct_factory.createFClass();
-	    fclass.setFTypeDefinition(cdef);
-	    Iterator it = cdef.getFTypeParameter().iterator();
+	    fr.irisa.triskell.kermeta.language.structure.Class fclass = struct_factory.createClass();
+	    fclass.setTypeDefinition(cdef);
+	    Iterator it = cdef.getTypeParameter().iterator();
 	    while(it.hasNext()) {
-	        FTypeVariable tv = (FTypeVariable)it.next();
-	        FTypeVariableBinding binding = struct_factory.createFTypeVariableBinding();
-	        binding.setFType(tv);
-	        binding.setFVariable(tv);
-	        fclass.getFTypeParamBinding().add(binding);
+	        TypeVariable tv = (TypeVariable)it.next();
+	        TypeVariableBinding binding = struct_factory.createTypeVariableBinding();
+	        binding.setType(tv);
+	        binding.setVariable(tv);
+	        fclass.getTypeParamBinding().add(binding);
 	    }
 	    return fclass;
 	}
@@ -189,18 +189,18 @@ public class InheritanceSearch {
 	 * @param c
 	 * @return
 	 */
-	public static ArrayList callableProperties(FClass c) {
+	public static ArrayList callableProperties(fr.irisa.triskell.kermeta.language.structure.Class c) {
 	    ArrayList allTypes = allSuperTypes(c);
 		ArrayList result = new ArrayList();
 		Hashtable found_properties = new Hashtable();
 		
 		Iterator it = allTypes.iterator();
 		while (it.hasNext()) {
-			FClass fclass = (FClass)it.next();
-			Iterator ops = ((FClassDefinition) fclass.getFTypeDefinition()).getFOwnedAttributes().iterator();
+			fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
+			Iterator ops = ((ClassDefinition) fclass.getTypeDefinition()).getOwnedAttribute().iterator();
 			// Add all operations
 			while (ops.hasNext()) {
-				FProperty prop = (FProperty)ops.next();
+				Property prop = (Property)ops.next();
 				if (!found_properties.containsKey(prop)) {
 					found_properties.put(prop, prop);
 					result.add(new CallableProperty(prop,fclass));

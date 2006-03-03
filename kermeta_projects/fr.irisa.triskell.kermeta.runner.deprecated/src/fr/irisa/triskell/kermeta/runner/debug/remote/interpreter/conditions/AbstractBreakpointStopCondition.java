@@ -1,4 +1,4 @@
-/* $Id: AbstractBreakpointStopCondition.java,v 1.9 2005-12-19 13:08:10 zdrey Exp $
+/* $Id: AbstractBreakpointStopCondition.java,v 1.10 2006-03-03 15:23:35 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : AbstractBreakpointStopCondition.java
  * License   : EPL
@@ -27,7 +27,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.KermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.SerializableBreakpoint;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.traceability.TextReference;
 
 public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDebugCondition {
@@ -95,12 +95,12 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 	 */
 	protected Integer getLineForCurrentNode()
 	{	
-		Traceback t = new Traceback((ExpressionInterpreter)remoteInterpreter.getInterpreter(), (FObject)getCurrentNode());
+		Traceback t = new Traceback((ExpressionInterpreter)remoteInterpreter.getInterpreter(), (fr.irisa.triskell.kermeta.language.structure.Object)getCurrentNode());
 		// first param of the called method is allowed to be null!
 		InterpreterContext context = remoteInterpreter.getInterpreter().getInterpreterContext();
 		
 		// current_frame.peekExpressionContext().getStatement()
-		String lstr = t.getContextForFObjectAsArray(null, (FObject)getCurrentNode())[1];
+		String lstr = t.getContextForFObjectAsArray(null, (fr.irisa.triskell.kermeta.language.structure.Object)getCurrentNode())[1];
 		if (lstr == "" || lstr == null) return new Integer(-1);
 		else return new Integer(Integer.parseInt(lstr));
 	}
@@ -164,7 +164,7 @@ public abstract class AbstractBreakpointStopCondition extends AbstractKermetaDeb
 							// Setting it to all the units makes the load too slow.
 							if (txt_ref == null && c.getStatement()!=null) // if this condition is false, things are much slower :(
 							{
-								KermetaASTNode node = (KermetaASTNode)found_unit.getNodeByModelElement((FObject)c.getStatement());
+								KermetaASTNode node = (KermetaASTNode)found_unit.getNodeByModelElement((fr.irisa.triskell.kermeta.language.structure.Object)c.getStatement());
 								if (node != null)
 									found_line = Traceback.getLineNumber(node, file);
 							}

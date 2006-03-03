@@ -1,4 +1,4 @@
-/* $Id: ExpressionParser.java,v 1.5 2005-11-28 12:32:50 dvojtise Exp $
+/* $Id: ExpressionParser.java,v 1.6 2006-03-03 15:22:18 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -13,7 +13,7 @@ import java.io.StringReader;
 
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
@@ -25,7 +25,7 @@ import fr.irisa.triskell.kermeta.parser.KermetaParser;
  */
 public class ExpressionParser {
 
-	public static FExpression parse(KermetaUnit unit, String str) {
+	public static Expression parse(KermetaUnit unit, String str) {
 		KermetaParser parser = new KermetaParser(new KermetaLexer(new StringReader(str.replace('\t', ' '))));
 		fr.irisa.triskell.kermeta.ast.FExpression  ast_exp = null;
 		try {
@@ -38,7 +38,7 @@ public class ExpressionParser {
 			 unit.messages.addMessage(new KMUnitError("Expression Parse error : " + e, null, ast_exp));
 			 throw new Error(e);
 		}
-		FExpression result;
+		Expression result;
 		if (ast_exp != null)
 			result = KMT2KMExperessionBuilder.process(ast_exp, unit);
 		else 

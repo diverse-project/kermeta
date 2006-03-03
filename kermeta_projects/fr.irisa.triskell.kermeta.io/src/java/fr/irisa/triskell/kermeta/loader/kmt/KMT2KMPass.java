@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass.java,v 1.5 2006-02-21 17:34:18 jsteel Exp $
+/* $Id: KMT2KMPass.java,v 1.6 2006-03-03 15:22:18 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass.java
  * License : GPL
@@ -31,13 +31,13 @@ import fr.irisa.triskell.kermeta.ast.QualifiedID;
 import fr.irisa.triskell.kermeta.ast.SubPackageDecl;
 import fr.irisa.triskell.kermeta.ast.TypeRef;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FModelTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FOperation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+//import fr.irisa.triskell.kermeta.language.structure.FProperty;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 
 
 /**
@@ -79,16 +79,16 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	
 	/**
 	 * If qualified_name qualifies an existing package, we return the corresponding
-	 * FPackage. Otherwise, we recursively get or create the package, and set at
+	 * Package. Otherwise, we recursively get or create the package, and set at
 	 * the same time its parents packages. At the same time, we store the relationship
 	 * between the AST node and its kcore object in the tracers of KermetaUnit (see 
 	 * KermetaUnit documentation) 
 	 * @param qualified_name the complete name of a package
-	 * @param node the AST node to link to a FPackage
-	 * @return the FPackage corresponding to <code>node</code>
+	 * @param node the AST node to link to a Package
+	 * @return the Package corresponding to <code>node</code>
 	 */
-	protected FPackage getOrCreatePackage(String qualified_name, KermetaASTNode node) {
-		FPackage result = builder.packageLookup(qualified_name);
+	protected Package getOrCreatePackage(String qualified_name, KermetaASTNode node) {
+		Package result = builder.packageLookup(qualified_name);
 		
 		if (result != null) {
 		    if (builder.getModelElementByNode(node) == null) builder.storeTrace(result, node);
@@ -97,15 +97,15 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 		if (qualified_name.indexOf("::")>=0) {
 			String name = qualified_name.substring(qualified_name.lastIndexOf("::") + 2);
 			String parent_name = qualified_name.substring(0, qualified_name.lastIndexOf("::"));
-			FPackage parent = getOrCreatePackage(parent_name, node);
-			result = builder.struct_factory.createFPackage();
-			result.setFName(name);
-			parent.getFNestedPackage().add(result);
+			Package parent = getOrCreatePackage(parent_name, node);
+			result = builder.struct_factory.createPackage();
+			result.setName(name);
+			parent.getNestedPackage().add(result);
 		}
 		else {
 			// this is a new root package
-			result = builder.struct_factory.createFPackage();
-			result.setFName(qualified_name);
+			result = builder.struct_factory.createPackage();
+			result.setName(qualified_name);
 			//TODO: result.setFUri(). What to put here ?
 		}
 		builder.packages.put(builder.getQualifiedName(result), result);
@@ -188,8 +188,8 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 * @param ref
 	 * @return the kcore type (FType) corresponding to the type reference <code>ref</code>.
 	 */
-	protected FType getFType(TypeRef ref) {
-		FType result = KMT2KMTypeBuilder.process(ref.getReftype(), builder);
+	protected Type getFType(TypeRef ref) {
+		Type result = KMT2KMTypeBuilder.process(ref.getReftype(), builder);
 		return result;
 	}
 	
@@ -199,21 +199,21 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ClassDecl)
 	 */
 	public boolean beginVisit(ClassDecl classDecl) {
-		builder.current_class = (FClassDefinition)builder.getModelElementByNode(classDecl);
+		builder.current_class = (ClassDefinition)builder.getModelElementByNode(classDecl);
 		return super.beginVisit(classDecl);
 	}
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.EnumDecl)
 	 */
 	public boolean beginVisit(EnumDecl enumDecl) {
-		builder.current_enum = (FEnumeration)builder.getModelElementByNode(enumDecl);
+		builder.current_enum = (Enumeration)builder.getModelElementByNode(enumDecl);
 		return super.beginVisit(enumDecl);
 	}
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Operation)
 	 */
 	public boolean beginVisit(Operation operation) {
-		builder.current_operation = (FOperation)builder.getModelElementByNode(operation);
+		builder.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation)builder.getModelElementByNode(operation);
 		return super.beginVisit(operation);
 	}
 	/**
@@ -227,14 +227,14 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Property)
 	 */
 	public boolean beginVisit(Property property) {
-		builder.current_property = (FProperty)builder.getModelElementByNode(property);
+		builder.current_property = (fr.irisa.triskell.kermeta.language.structure.Property)builder.getModelElementByNode(property);
 		return super.beginVisit(property);
 	}
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.SubPackageDecl)
 	 */
 	public boolean beginVisit(SubPackageDecl subPackageDecl) {
-		builder.current_package = (FPackage)builder.getModelElementByNode(subPackageDecl);
+		builder.current_package = (Package)builder.getModelElementByNode(subPackageDecl);
 		return super.beginVisit(subPackageDecl);
 	}
 	
@@ -242,7 +242,7 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ModelTypeDecl)
 	 */
 	public boolean beginVisit(ModelTypeDecl modelTypeDecl) {
-		builder.current_modeltype = (FModelTypeDefinition)builder.getModelElementByNode(modelTypeDecl);
+		builder.current_modeltype = (ModelTypeDefinition)builder.getModelElementByNode(modelTypeDecl);
 		return super.beginVisit(modelTypeDecl);
 	}
 	
@@ -279,7 +279,7 @@ public abstract class KMT2KMPass extends KermetaASTNodeVisitor {
 	 */
 	public void endVisit(SubPackageDecl subPackageDecl) {
 		if (builder.current_package != null)
-			builder.current_package = builder.current_package.getFNestingPackage();
+			builder.current_package = builder.current_package.getNestingPackage();
 		super.endVisit(subPackageDecl);
 	}
 	

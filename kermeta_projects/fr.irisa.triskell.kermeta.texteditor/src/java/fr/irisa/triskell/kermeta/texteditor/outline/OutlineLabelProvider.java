@@ -4,13 +4,10 @@
  */
 package fr.irisa.triskell.kermeta.texteditor.outline;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
 
 /**
  * @author Franck Fleurey

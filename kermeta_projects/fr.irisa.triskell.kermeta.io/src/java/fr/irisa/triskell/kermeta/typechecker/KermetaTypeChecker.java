@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.7 2005-11-21 09:39:51 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.8 2006-03-03 15:22:18 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
  * @author Franck Fleurey
@@ -32,8 +32,8 @@ public class KermetaTypeChecker {
     protected KermetaUnit unit;
     protected TypeCheckerContext context;
         
-    public Type getTypeOfExpression(fr.irisa.triskell.kermeta.behavior.FExpression expression) {
-        return new SimpleType(expression.getFStaticType());
+    public Type getTypeOfExpression(fr.irisa.triskell.kermeta.language.behavior.Expression expression) {
+        return new SimpleType(expression.getStaticType());
     }
     
     
@@ -65,9 +65,9 @@ public class KermetaTypeChecker {
         
         Iterator it = unit.typeDefs.values().iterator();
         while(it.hasNext()) {
-            FTypeDefinition td = (FTypeDefinition)it.next();
-            if (td instanceof FClassDefinition) {
-                checkClassDefinition((FClassDefinition)td);
+            TypeDefinition td = (TypeDefinition)it.next();
+            if (td instanceof ClassDefinition) {
+                checkClassDefinition((ClassDefinition)td);
             }
         }
     }
@@ -77,17 +77,17 @@ public class KermetaTypeChecker {
      * of a class definition
      * @param clsdef
      */
-    public void checkClassDefinition(FClassDefinition clsdef) {
+    public void checkClassDefinition(ClassDefinition clsdef) {
         
-        Iterator it = clsdef.getFOwnedOperation().iterator();
+        Iterator it = clsdef.getOwnedOperation().iterator();
         while(it.hasNext()) {
-            FOperation op = (FOperation)it.next();
+            Operation op = (Operation)it.next();
             checkOperation(op);
         }
         
-        it = clsdef.getFOwnedAttributes().iterator();
+        it = clsdef.getOwnedAttribute().iterator();
         while(it.hasNext()) {
-            FProperty prop = (FProperty)it.next();
+            Property prop = (Property)it.next();
             checkDerivedProperty(prop);
         }
         
@@ -97,23 +97,23 @@ public class KermetaTypeChecker {
      * Type check the operation given as parameter
      * @param op
      */
-    public void checkOperation(FOperation op) {
+    public void checkOperation(Operation op) {
         
         // THIS IS JUST FOR TESTING PURPOSES
         int error_count = unit.messages.getMessages().size();
         
         // initialize context
-        context.init(op.getFOwningClass(), op);
+        context.init(op.getOwningClass(), op);
         // check the body of the operation if it is not abstract
-        if (op.getFBody() != null)
-            ExpressionChecker.typeCheckExpression(op.getFBody(), unit, context);
+        if (op.getBody() != null)
+            ExpressionChecker.typeCheckExpression(op.getBody(), unit, context);
         
         // THIS IS JUST FOR TESTING PURPOSES
-        if (error_count != unit.messages.getMessages().size()) wrongOperations.add(op.getFName());
-        else correctOperation.add(op.getFName());
+        if (error_count != unit.messages.getMessages().size()) wrongOperations.add(op.getName());
+        else correctOperation.add(op.getName());
     }
     
-    public void checkExpression(fr.irisa.triskell.kermeta.behavior.FExpression expression) {
+    public void checkExpression(fr.irisa.triskell.kermeta.language.behavior.Expression expression) {
         ExpressionChecker.typeCheckExpression(expression, unit, context);
     }
     
@@ -121,16 +121,16 @@ public class KermetaTypeChecker {
      * Type checks the getter and setter of the derived property
      * @param op
      */
-    public void checkDerivedProperty(FProperty op)
+    public void checkDerivedProperty(Property op)
     { 
-        if (op.isFIsDerived())
+        if (op.isIsDerived())
         {
             // initialize context (add "value")
-            context.init(op.getFOwningClass(), op);
-            if (op.getFSetterbody() != null)
-                ExpressionChecker.typeCheckExpression(op.getFSetterbody(), unit, context);
-            if (op.getFGetterbody() != null)
-                ExpressionChecker.typeCheckExpression(op.getFGetterbody(), unit, context);
+            context.init(op.getOwningClass(), op);
+            if (op.getSetterBody() != null)
+                ExpressionChecker.typeCheckExpression(op.getSetterBody(), unit, context);
+            if (op.getGetterBody() != null)
+                ExpressionChecker.typeCheckExpression(op.getGetterBody(), unit, context);
         }
         
     }

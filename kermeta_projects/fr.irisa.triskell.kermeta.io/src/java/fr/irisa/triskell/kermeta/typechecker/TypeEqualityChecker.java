@@ -1,4 +1,4 @@
-/* $Id: TypeEqualityChecker.java,v 1.4 2006-02-21 17:34:19 jsteel Exp $
+/* $Id: TypeEqualityChecker.java,v 1.5 2006-03-03 15:22:18 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : TypeConformanceChecker.java
 * License : GPL
@@ -12,15 +12,15 @@
 package fr.irisa.triskell.kermeta.typechecker;
 
 
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FFunctionType;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
-import fr.irisa.triskell.kermeta.structure.FVoidType;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
+//import fr.irisa.triskell.kermeta.language.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -32,7 +32,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 
 	
-	public static boolean equals(FType required, FType provided) {
+	public static boolean equals(fr.irisa.triskell.kermeta.language.structure.Type required, fr.irisa.triskell.kermeta.language.structure.Type provided) {
 		// resolve primitive types
 		required = PrimitiveTypeResolver.getResolvedType(required);
 		provided = PrimitiveTypeResolver.getResolvedType(provided);
@@ -43,12 +43,12 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 	/**
 	 * The type provided
 	 */
-	protected FType provided;
+	protected fr.irisa.triskell.kermeta.language.structure.Type provided;
 	
 	/**
 	 * 
 	 */
-	public TypeEqualityChecker(FType provided) {
+	public TypeEqualityChecker(fr.irisa.triskell.kermeta.language.structure.Type provided) {
 		super();
 		this.provided = provided;
 	}
@@ -57,27 +57,27 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 	/**
 	 * IMPLEMENTATION OF THE VISITOR
 	 */
-	public Object visitFFunctionType(FFunctionType arg0) {
+	public Object visitFunctionType(FunctionType arg0) {
 		Boolean result = new Boolean(false);
-		if (provided instanceof FFunctionType) {
-			FFunctionType p = (FFunctionType)provided;
-			if (TypeEqualityChecker.equals(arg0.getFLeft(), p.getFLeft()) &&
-					TypeEqualityChecker.equals(arg0.getFRight(), p.getFRight()) ) {
+		if (provided instanceof FunctionType) {
+			FunctionType p = (FunctionType)provided;
+			if (TypeEqualityChecker.equals(arg0.getLeft(), p.getLeft()) &&
+					TypeEqualityChecker.equals(arg0.getRight(), p.getRight()) ) {
 				result = new Boolean(true);
 			}
 		}
 		return result;
 	}
 	
-	public Object visitFClass(FClass arg0) {
+	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class arg0) {
 		Boolean result = new Boolean(false);
-		if (provided instanceof FClass) {
-			FClass p = (FClass)provided;
-			if (p.getFTypeDefinition() == arg0.getFTypeDefinition()) {
+		if (provided instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
+			fr.irisa.triskell.kermeta.language.structure.Class p = (fr.irisa.triskell.kermeta.language.structure.Class)provided;
+			if (p.getTypeDefinition() == arg0.getTypeDefinition()) {
 				result = new Boolean(true);
-				for(int i=0; i<arg0.getFTypeParamBinding().size(); i++) {
-					FType t1 = ((FTypeVariableBinding)arg0.getFTypeParamBinding().get(0)).getFType();
-					FType t2 = ((FTypeVariableBinding)p.getFTypeParamBinding().get(0)).getFType();
+				for(int i=0; i<arg0.getTypeParamBinding().size(); i++) {
+					fr.irisa.triskell.kermeta.language.structure.Type t1 = ((TypeVariableBinding)arg0.getTypeParamBinding().get(0)).getType();
+					fr.irisa.triskell.kermeta.language.structure.Type t2 = ((TypeVariableBinding)p.getTypeParamBinding().get(0)).getType();
 					if (!TypeEqualityChecker.equals(t1, t2)) {
 						result = new Boolean(false);
 						break;
@@ -88,22 +88,22 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 		return result;
 	}
 	
-	public Object visitFEnumeration(FEnumeration arg0) {
+	public Object visitEnumeration(Enumeration arg0) {
 		return new Boolean(provided == arg0);
 	}
 	
-	public Object visitFPrimitiveType(FPrimitiveType arg0) {
+	public Object visitPrimitiveType(PrimitiveType arg0) {
 		throw new Error("Type-Checker error : the required type should not be a primitive type");
 	}
 	
-	public Object visitFProductType(FProductType arg0) {
+	public Object visitProductType(ProductType arg0) {
 		Boolean result = new Boolean(false);
-		if (provided instanceof FProductType) {
-			FProductType p = (FProductType)provided;
-			if(arg0.getFType().size() == p.getFType().size()) {
-				for(int i=0; i< p.getFType().size(); i++) {
-					FType t1 = (FType)p.getFType().get(0);
-					FType t2 = (FType)arg0.getFType().get(0);
+		if (provided instanceof ProductType) {
+			ProductType p = (ProductType)provided;
+			if(arg0.getType().size() == p.getType().size()) {
+				for(int i=0; i< p.getType().size(); i++) {
+					fr.irisa.triskell.kermeta.language.structure.Type t1 = (fr.irisa.triskell.kermeta.language.structure.Type)p.getType().get(0);
+					fr.irisa.triskell.kermeta.language.structure.Type t2 = (fr.irisa.triskell.kermeta.language.structure.Type)arg0.getType().get(0);
 					if (!TypeEqualityChecker.equals(t1, t2)) {
 						result = new Boolean(false);
 						break;
@@ -115,12 +115,12 @@ public class TypeEqualityChecker  extends KermetaOptimizedVisitor {
 	}
 
 	
-	public Object visitFTypeVariable(FTypeVariable arg0) {
+	public Object visitTypeVariable(TypeVariable arg0) {
 		return new Boolean(provided == arg0);
 	}
 	
-	public Object visitFVoidType(FVoidType arg0) {
-		return new Boolean(provided instanceof FVoidType);
+	public Object visitVoidType(VoidType arg0) {
+		return new Boolean(provided instanceof VoidType);
 	}
 
 }

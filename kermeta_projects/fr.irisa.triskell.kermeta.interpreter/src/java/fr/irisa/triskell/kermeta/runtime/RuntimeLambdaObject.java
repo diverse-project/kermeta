@@ -1,4 +1,4 @@
-/* $Id: RuntimeLambdaObject.java,v 1.5 2005-06-03 15:36:40 ffleurey Exp $
+/* $Id: RuntimeLambdaObject.java,v 1.6 2006-03-03 15:21:47 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: RuntimeLambdaObject.java
  * License: GPL
@@ -11,7 +11,7 @@ package fr.irisa.triskell.kermeta.runtime;
 
 import java.util.ArrayList;
 
-import fr.irisa.triskell.kermeta.behavior.FLambdaExpression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
 import fr.irisa.triskell.kermeta.interpreter.CallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.InterpreterContext;
@@ -29,15 +29,15 @@ public class RuntimeLambdaObject extends RuntimeObject {
      *frame is a prototype call frame
      * */
     protected LambdaCallFrame frame;
-    protected FLambdaExpression lambdaExpression;
+    protected LambdaExpression lambdaExpression;
 
     /**
      * Constructor
      * @param factory
-     * @param FLambdaExpression : the lambda expression represented by this runtime
+     * @param LambdaExpression : the lambda expression represented by this runtime
      * lambda object. We need it as the body is only evaluated "after"
      */
-    public RuntimeLambdaObject(FLambdaExpression node, RuntimeObjectFactory factory, CallFrame nestingFrame, InterpreterContext context) {
+    public RuntimeLambdaObject(LambdaExpression node, RuntimeObjectFactory factory, CallFrame nestingFrame, InterpreterContext context) {
         super(factory, null);
         /*
          * This runtime object has no metaclass : it is a function, not a kermeta object
@@ -60,7 +60,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
         
         interpreter.getInterpreterContext().pushLambdaCallFrame(frame);
         try {
-            result = (RuntimeObject)interpreter.accept(lambdaExpression.getFBody());
+            result = (RuntimeObject)interpreter.accept(lambdaExpression.getBody());
         }
         finally {
             interpreter.getInterpreterContext().popCallFrame();
@@ -73,7 +73,7 @@ public class RuntimeLambdaObject extends RuntimeObject {
     /**
      * @return Returns the lambdaExpression.
      */
-    public FLambdaExpression getLambdaExpression() {
+    public LambdaExpression getLambdaExpression() {
         return lambdaExpression;
     }
 

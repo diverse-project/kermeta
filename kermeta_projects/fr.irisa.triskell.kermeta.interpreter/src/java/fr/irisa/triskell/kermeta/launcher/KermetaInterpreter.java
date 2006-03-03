@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.20 2006-02-21 17:56:03 jsteel Exp $
+/* $Id: KermetaInterpreter.java,v 1.21 2006-03-03 15:21:47 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -31,11 +31,11 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FTag;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
@@ -55,9 +55,9 @@ public class KermetaInterpreter {
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.launcher");
 	
 	// The entry class
-	private FClass entryClass;
+	private fr.irisa.triskell.kermeta.language.structure.Class entryClass;
 	// The entry Operation
-	private FOperation entryOperation;
+	private Operation entryOperation;
 	// The parameters as a list of RuntimeObjects
 	private ArrayList entryParameters;
 	
@@ -159,13 +159,13 @@ public class KermetaInterpreter {
 	{
 	    String main_class = null;
 	    String main_operation = null;
-	    Iterator it = unit.rootPackage.getFTag().iterator();
+	    Iterator it = unit.rootPackage.getTag().iterator();
 	    while (it.hasNext()) {
-	        FTag tag = (FTag)it.next();
-	        if (tag.getFName().equals("mainClass")) 
-	            main_class = tag.getFValue(); //remove the " to memorize value
-	        if (tag.getFName().equals("mainOperation"))
-	            main_operation = tag.getFValue(); //remove the " to memorize value
+	        Tag tag = (Tag)it.next();
+	        if (tag.getName().equals("mainClass")) 
+	            main_class = tag.getValue(); //remove the " to memorize value
+	        if (tag.getName().equals("mainOperation"))
+	            main_operation = tag.getValue(); //remove the " to memorize value
 	    }
 	    if (main_class != null && main_operation != null)
 	    {
@@ -191,23 +191,23 @@ public class KermetaInterpreter {
 	 */
 	public void setEntryPoint(String class_def_qname, String operation_name) throws KermetaInterpreterError {
 	    // get the type definition
-	    FTypeDefinition td = unit.typeDefinitionLookup(class_def_qname);
+	    TypeDefinition td = unit.typeDefinitionLookup(class_def_qname);
 	    CallableOperation co = null;
 	    String emessage = "";
 	    // check that it exists and that it is a class
-	    if (td == null || !(td instanceof FClassDefinition)) {
+	    if (td == null || !(td instanceof ClassDefinition)) {
 	        emessage = "Entry @mainClass '" + class_def_qname + "' not found or not valid";
 	        internalLog.error(emessage);	        
 	    }
 	    // FIXME: to allow parametric types as entry types
-	    else if (((FClassDefinition)td).getFTypeParameter().size() != 0) {
+	    else if (((ClassDefinition)td).getTypeParameter().size() != 0) {
 	        emessage = "Invalid entry @mainClass '" + class_def_qname + "', it has type parameters.";
 	        internalLog.error(emessage);
 	    }
 	    
 	    else if (emessage.equals(""))
 	    {	// set entryClass
-	        entryClass = InheritanceSearch.getFClassForClassDefinition((FClassDefinition)td);
+	        entryClass = InheritanceSearch.getFClassForClassDefinition((ClassDefinition)td);
 	        // Search the operation
 	        co = new SimpleType(entryClass).getOperationByName(operation_name);
 	    
@@ -252,7 +252,7 @@ public class KermetaInterpreter {
 	    ExpressionInterpreter exp_interpreter = new ExpressionInterpreter(memory);
 	    // Instanciate the first object
 	    // FIXME : this should be corrected to allow generic types as entre type
-	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getFTypeDefinition()));
+	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getTypeDefinition()));
 	    // Execute the operation
 	    exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
 	}
@@ -262,17 +262,17 @@ public class KermetaInterpreter {
 	    DebugInterpreter exp_interpreter = new DebugInterpreter(memory);
 	    // Instanciate the first object
 	    // FIXME : this should be corrected to allow generic types as entre type
-	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getFTypeDefinition()));
+	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getTypeDefinition()));
 	    // Execute the operation
 	    // exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
 	    exp_interpreter.initialize(entryObject, entryOperation, entryParameters);
 	}
     
 	
-	public FClass getEntryClass() {
+	public fr.irisa.triskell.kermeta.language.structure.Class getEntryClass() {
         return entryClass;
     }
-    public FOperation getEntryOperation() {
+    public Operation getEntryOperation() {
         return entryOperation;
     }
     public RuntimeMemory getMemory() {

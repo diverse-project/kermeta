@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.51 2006-02-22 09:33:18 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.52 2006-03-03 15:22:19 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -29,32 +29,32 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.behavior.BehaviorFactory;
-import fr.irisa.triskell.kermeta.behavior.FAssignement;
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
-import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
+import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
+import fr.irisa.triskell.kermeta.language.behavior.Assignment;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaCycleConstraintChecker;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FModelTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTag;
-import fr.irisa.triskell.kermeta.structure.FTypeContainer;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinitionContainer;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.StructureFactory;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+// import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinitionContainer;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
@@ -239,22 +239,22 @@ public abstract class KermetaUnit {
 	 */
 	public BehaviorFactory behav_factory;
 	
-	public FPackage current_package;
-	public FModelTypeDefinition current_modeltype;
-	public FClassDefinition current_class;
-	public FOperation current_operation;
-	public FProperty current_property;
-	public FEnumeration current_enum;
-	public FAssignement current_assignment;
+	public Package current_package;
+	public ModelTypeDefinition current_modeltype;
+	public ClassDefinition current_class;
+	public Operation current_operation;
+	public Property current_property;
+	public Enumeration current_enum;
+	public Assignment current_assignment;
 	
 	
 	/**
 	 * The root package of the model being built
 	 */
-	public FPackage rootPackage = null;
+	public Package rootPackage = null;
 	
 	/**
-	 * The FPackage objects by qualified names
+	 * The Package objects by qualified names
 	 */
 	public Hashtable packages = new Hashtable();
 	
@@ -272,7 +272,7 @@ public abstract class KermetaUnit {
 	protected Hashtable traceT2M = new Hashtable();
 	protected Hashtable traceM2T = new Hashtable();
 	
-	public void storeTrace(FObject model_element, Object node) {
+	public void storeTrace(fr.irisa.triskell.kermeta.language.structure.Object model_element, Object node) {
 		traceM2T.put(model_element, node);
 		traceT2M.put(node, model_element);
 		
@@ -317,7 +317,7 @@ public abstract class KermetaUnit {
 	/**
 	 * Helper method that looks into all the imported unit to find the researched 
 	 * model element
-	 * @param object the model element (FObject) that we want to find
+	 * @param object the model element (fr.irisa.triskell.kermeta.language.structure.FObject) that we want to find
 	 * @return the KermetaUnit that contains the expected model element
 	 * FIXME : not optimized at all, since getNodeByModelElement is finally called
 	 * (duplicated hashtable access)
@@ -325,7 +325,7 @@ public abstract class KermetaUnit {
 	 * FIXME : does not deal with unit in km format since it use the parser traces and not a reliable trace
 	 * other loaders may have not filled these tables
 	 */
-	public KermetaUnit findUnitForModelElement(FObject object)
+	public KermetaUnit findUnitForModelElement(fr.irisa.triskell.kermeta.language.structure.Object object)
 	{
 	    Object result = getNodeByModelElement(object);
 	    if (result != null) return this;
@@ -340,11 +340,11 @@ public abstract class KermetaUnit {
 	    return null;		
 	}
 
-	public FObject getModelElementByNode(Object node) {
-		return (FObject)traceT2M.get(node);
+	public fr.irisa.triskell.kermeta.language.structure.Object getModelElementByNode(Object node) {
+		return (fr.irisa.triskell.kermeta.language.structure.Object)traceT2M.get(node);
 	}
 	
-	public Object getNodeByModelElement(FObject object) {
+	public Object getNodeByModelElement(fr.irisa.triskell.kermeta.language.structure.Object object) {
 		return traceM2T.get(object);
 	}
 	
@@ -366,7 +366,7 @@ public abstract class KermetaUnit {
 			while (it.hasNext())
 			{				
 				KermetaASTNode astNode = (KermetaASTNode)it.next();
-				FObject model_element = getModelElementByNode(astNode);
+				fr.irisa.triskell.kermeta.language.structure.Object model_element = getModelElementByNode(astNode);
 				astNode.getRangeStart();
 				tracer.addTextInputTrace(this.uri, 
 						0,	// TODO I don't know how to retreive line number
@@ -471,7 +471,7 @@ public abstract class KermetaUnit {
 /*	public String getAllMessagesAsString() {
 		String result = "";
 		KMUnitMessage kmumessage;
-		FObject fo;
+		fr.irisa.triskell.kermeta.language.structure.FObject fo;
 		KermetaUnit ku = null;
 		Iterator it = getAllErrors().iterator();
 		while(it.hasNext()) { 
@@ -494,15 +494,15 @@ public abstract class KermetaUnit {
 	 * Get a package by its qualified name
 	 * Returns null is not found
 	 */
-	public FPackage packageLookup(String qname) {
+	public Package packageLookup(String qname) {
 		
-		FPackage result = (FPackage)packages.get(qname);
+		Package result = (Package)packages.get(qname);
 		if (result != null) return result;
 		
 		ArrayList iulist = getAllImportedUnits();
 	    for (int i=0; i<iulist.size(); i++) {	        
 	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
-	        result = (FPackage)iu.packages.get(qname);
+	        result = (Package)iu.packages.get(qname);
 			if (result != null) break;
 	    }	   
 		return result;
@@ -514,7 +514,7 @@ public abstract class KermetaUnit {
 	 * then in the imported Metacore models
 	 * returns null if type not found
 	 */
-	public FTypeDefinition typeDefinitionLookup(String fully_qualified_name) {
+	public TypeDefinition typeDefinitionLookup(String fully_qualified_name) {
 	/*
 //	  System.out.println("typeDefinitionLookup " + uri + " " +fully_qualified_name);
 		FTypeDefinition result = (FTypeDefinition)typeDefs.get(fully_qualified_name);
@@ -538,23 +538,23 @@ public abstract class KermetaUnit {
 	    
 	    String tname = fully_qualified_name.substring(fully_qualified_name.lastIndexOf("::") + 2);
 	    
-	    FTypeDefinitionContainer tdef_container = packageLookup(tdef_container_name);
+	    TypeDefinitionContainer tdef_container = packageLookup(tdef_container_name);
 	    if (tdef_container == null) {
 	    	// Maybe its inside a model type definition
     		if (tdef_container_name.lastIndexOf("::") < 0) return null;
 	    	String pkg_name = tdef_container_name.substring(0, tdef_container_name.lastIndexOf("::"));
-	    	FPackage pack = packageLookup(pkg_name);
+	    	Package pack = packageLookup(pkg_name);
 	    	if (pack ==  null) {
 	    		return null;
 	    	} else {
 	    		// OK, the package exists, see if it has a model type def inside it corresponding to the
 	    		// second-last piece of the qualified name
 	    		String mt_name = tdef_container_name.substring(tdef_container_name.lastIndexOf("::") + 2);
-	    		Iterator it = pack.getFOwnedTypeDefinition().iterator();
+	    		Iterator it = pack.getOwnedTypeDefinition().iterator();
 	    		while (it.hasNext()) {
-	    			FTypeDefinition td = (FTypeDefinition)it.next();
-	    			if ((td instanceof FModelTypeDefinition) && td.getFName().equals(mt_name))
-	    				tdef_container = (FModelTypeDefinition) td;
+	    			TypeDefinition td = (TypeDefinition)it.next();
+	    			if ((td instanceof ModelTypeDefinition) && td.getName().equals(mt_name))
+	    				tdef_container = (ModelTypeDefinition) td;
 	    		}
 	    	}
 	    }
@@ -563,10 +563,10 @@ public abstract class KermetaUnit {
 	    
 	    if (tdef_container == null) return null;
    
-	    Iterator it = tdef_container.getFOwnedTypeDefinition().iterator();
+	    Iterator it = tdef_container.getOwnedTypeDefinition().iterator();
 	    while(it.hasNext()) {
-	        FTypeDefinition td = (FTypeDefinition)it.next();
-	        if (td.getFName().equals(tname)) return td;
+	        TypeDefinition td = (TypeDefinition)it.next();
+	        if (td.getName().equals(tname)) return td;
 	    }
 	    return null;
 		
@@ -579,9 +579,9 @@ public abstract class KermetaUnit {
 	 * the usings directives.
 	 * returns null if type not found
 	 */
-	public FTypeDefinition getTypeDefinitionByName(String name) {
+	public TypeDefinition getTypeDefinitionByName(String name) {
 	    //System.out.println("\nXXXXXX   getTypeDefinitionByName " + name + "" );
-		FTypeDefinition result = typeDefinitionLookup(name);
+		TypeDefinition result = typeDefinitionLookup(name);
 		if (result == null && current_modeltype != null) result = typeDefinitionLookup(getQualifiedName(current_modeltype) + "::" + name);
 		if (result == null && current_package != null) result = typeDefinitionLookup(getQualifiedName(current_package) + "::" + name);
 		if (result == null) result = typeDefinitionLookup(getQualifiedName(rootPackage) + "::" + name);
@@ -606,8 +606,8 @@ public abstract class KermetaUnit {
 		((Hashtable)symbols.peek()).put(s.getIdentifier(), s);
 	}
 	
-	public void addTypeVar(FTypeVariable var){
-		((Hashtable)typeVars.peek()).put(var.getFName(), var);
+	public void addTypeVar(TypeVariable var){
+		((Hashtable)typeVars.peek()).put(var.getName(), var);
 	}
 	
 	public void addUsing(String name) {
@@ -686,11 +686,11 @@ public abstract class KermetaUnit {
 	 * Find a type variable in the context.
 	 * returns null if the variable was not found
 	 */
-	public FTypeVariable typeVariableLookup(String name) {
-		FTypeVariable result = null;
+	public TypeVariable typeVariableLookup(String name) {
+		TypeVariable result = null;
 		for (int i=typeVars.size()-1; i >-1; i--) {
 			Hashtable table = (Hashtable)typeVars.get(i);
-			result = (FTypeVariable)table.get(name);
+			result = (TypeVariable)table.get(name);
 			if (result != null) break;
 		}
 		return result;
@@ -699,21 +699,21 @@ public abstract class KermetaUnit {
 	/**
 	 * Get the fully qualified name of an FNamedElemenet
 	 */
-	public String getQualifiedName(FNamedElement element) {
+	public String getQualifiedName(NamedElement element) {
 		if (element == null) return "";
-		if (element.eContainer() != null && element.eContainer() instanceof FNamedElement)
-			return getQualifiedName( (FNamedElement)element.eContainer() ) + "::" + element.getFName();
-		else return element.getFName();
+		if (element.eContainer() != null && element.eContainer() instanceof NamedElement)
+			return getQualifiedName( (NamedElement)element.eContainer() ) + "::" + element.getName();
+		else return element.getName();
 	}
 	
 	/**
 	 * Get an operation by its name
 	 */
-	public FOperation getOperationByName(FClassDefinition c, String name) {
-		EList ops = c.getFOwnedOperation();
+	public Operation getOperationByName(ClassDefinition c, String name) {
+		EList ops = c.getOwnedOperation();
 		for (int i=0; i<ops.size(); i++) {
-			FOperation op = (FOperation)ops.get(i);
-			if (op.getFName().equals(name)) return op;
+			Operation op = (Operation)ops.get(i);
+			if (op.getName().equals(name)) return op;
 		}
 		return null;
 	}
@@ -721,11 +721,11 @@ public abstract class KermetaUnit {
 	/**
 	 * Get a property by its name
 	 */
-	public FProperty getPropertyByName(FClassDefinition c, String name) {
-		EList props = c.getFOwnedAttributes();
+	public Property getPropertyByName(ClassDefinition c, String name) {
+		EList props = c.getOwnedAttribute();
 		for (int i=0; i<props.size(); i++) {
-			FProperty prop = (FProperty)props.get(i);
-			if (prop.getFName().equals(name)) return prop;
+			Property prop = (Property)props.get(i);
+			if (prop.getName().equals(name)) return prop;
 		}
 		return null;
 	}
@@ -733,12 +733,12 @@ public abstract class KermetaUnit {
 	/**
 	 * Get an operation by its name. search in the inheritance tree
 	 */
-	public FOperation findOperationByName(FClassDefinition c, String name) {
+	public Operation findOperationByName(ClassDefinition c, String name) {
 		
 	    Iterator it = getAllOperations(c).iterator();
 	    while(it.hasNext()) {
-	        FOperation op = (FOperation)it.next();
-	        if (op.getFName().equals(name)) return op;
+	        Operation op = (Operation)it.next();
+	        if (op.getName().equals(name)) return op;
 	    }
 	    return null;
 	}
@@ -746,12 +746,12 @@ public abstract class KermetaUnit {
 	/**
 	 * Get an property by its name. search in the inheritance tree
 	 */
-	public FProperty findPropertyByName(FClassDefinition c, String name) {
-		FProperty result = getPropertyByName(c, name);
+	public Property findPropertyByName(ClassDefinition c, String name) {
+		Property result = getPropertyByName(c, name);
 		if (result != null) return result;
-		EList superclasses = c.getFSuperType();
+		EList superclasses = c.getSuperType();
 		for(int i=0; i<superclasses.size();i++) {
-			FClassDefinition sc = (FClassDefinition) ((FClass)superclasses.get(i)).getFTypeDefinition();
+			ClassDefinition sc = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)superclasses.get(i)).getTypeDefinition();
 			result = findPropertyByName(sc, name);
 			if (result != null) return result;
 		}
@@ -764,10 +764,10 @@ public abstract class KermetaUnit {
 	 * @param cls the class to compare to the super class
 	 * @return
 	 */
-	public boolean isSuperClass(FClassDefinition supercls, FClassDefinition cls) {
-		EList stypes = cls.getFSuperType();
+	public boolean isSuperClass(ClassDefinition supercls, ClassDefinition cls) {
+		EList stypes = cls.getSuperType();
 		for(int i=0; i< stypes.size(); i++) {
-			FClassDefinition scls = (FClassDefinition) ((FClass)stypes.get(i)).getFTypeDefinition();
+			ClassDefinition scls = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)stypes.get(i)).getTypeDefinition();
 			if (supercls == scls) return true;
 			else if(isSuperClass(supercls, scls)) return true;
 		}
@@ -779,53 +779,53 @@ public abstract class KermetaUnit {
 	 * @param cls Class for which we get the first-level parents
 	 * @return a Array of the <b>cls</b>'s first-level parents
 	 */
-	public FClassDefinition[] getDirectSuperClasses(FClassDefinition cls) {
-		EList scs = cls.getFSuperType();
+	public ClassDefinition[] getDirectSuperClasses(ClassDefinition cls) {
+		EList scs = cls.getSuperType();
 		ArrayList result = new ArrayList();
 		for(int i=0; i<scs.size(); i++) {
-			result.add( ((FClass)scs.get(i)).getFTypeDefinition() );
+			result.add( ((fr.irisa.triskell.kermeta.language.structure.Class)scs.get(i)).getTypeDefinition() );
 		}
 		
 		// THIS LOOKS USELESS
 		/*
 		// Add the type Object which is implicilty a direct supertype of everything
-		FClassDefinition ObjectTypeDef = (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
+		ClassDefinition ObjectTypeDef = (ClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
 		if (ObjectTypeDef != null && cls != ObjectTypeDef && !result.contains(ObjectTypeDef)) {
 			result.add(ObjectTypeDef);
 		}
 		*/
 			
-		return (FClassDefinition[])result.toArray(new FClassDefinition[result.size()]);
+		return (ClassDefinition[])result.toArray(new ClassDefinition[result.size()]);
 	}
 	
-	public FClassDefinition get_ROOT_TYPE_ClassDefinition() {
-	    FClassDefinition result = (FClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
+	public ClassDefinition get_ROOT_TYPE_ClassDefinition() {
+	    ClassDefinition result = (ClassDefinition)typeDefinitionLookup(ROOT_CLASS_QNAME);
 	    if (result == null && STD_LIB_URI != null) {
-	        result = (FClassDefinition)getStdLib().typeDefinitionLookup(ROOT_CLASS_QNAME);
+	        result = (ClassDefinition)getStdLib().typeDefinitionLookup(ROOT_CLASS_QNAME);
 	    }
 	    
 	    return result;
 	}
 	
-	public ArrayList getAllOperations(FClassDefinition cls) {
+	public ArrayList getAllOperations(ClassDefinition cls) {
 		ArrayList result = new ArrayList();
 		
 		// Get the operations on object type :
-		FClassDefinition ObjectTypeDef = get_ROOT_TYPE_ClassDefinition();
+		ClassDefinition ObjectTypeDef = get_ROOT_TYPE_ClassDefinition();
 		if (ObjectTypeDef != null) {
 		    result.addAll(getAllOperationsOnRootType(ObjectTypeDef));
 		}
 		
-		Iterator it = cls.getFOwnedOperation().iterator();
+		Iterator it = cls.getOwnedOperation().iterator();
 		while(it.hasNext()) {
-			FOperation op = (FOperation)it.next();
+			Operation op = (Operation)it.next();
 			// only take operation. no methods
-			if (op.getFSuperOperation() == null && !result.contains(op)) result.add(op);
+			if (op.getSuperOperation() == null && !result.contains(op)) result.add(op);
 		}
 		// search recursively in super classes
-		it = cls.getFSuperType().iterator();
+		it = cls.getSuperType().iterator();
 		while(it.hasNext()) {
-			result.addAll(getAllOperations((FClassDefinition) ((FClass)it.next()).getFTypeDefinition()));
+			result.addAll(getAllOperations((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition()));
 		}
 		return result;
 	}
@@ -833,15 +833,15 @@ public abstract class KermetaUnit {
 	/** @return all the type definitions available in this kermeta unit, in
 	 * all packages */
 	public ArrayList getAllTypeDefinitions() {
-		ArrayList<FTypeDefinition> result = new ArrayList<FTypeDefinition>();
-		for (Iterator<FPackage> it = getAllPackages().iterator(); it.hasNext();)
-			result.addAll(it.next().getFOwnedTypeDefinition());
+		ArrayList<TypeDefinition> result = new ArrayList<TypeDefinition>();
+		for (Iterator<Package> it = getAllPackages().iterator(); it.hasNext();)
+			result.addAll(it.next().getOwnedTypeDefinition());
 		System.err.println("Number of type defs : " + result.size());
 		return result;
 	}
-	
-	public ArrayList<FPackage> getAllPackages() {
-		ArrayList<FPackage> result = new ArrayList<FPackage>();
+
+	public ArrayList<Package> getAllPackages() {
+		ArrayList<Package> result = new ArrayList<Package>();
 		result.addAll(packages.values());
 		
 		ArrayList iulist = getAllImportedUnits();
@@ -849,25 +849,25 @@ public abstract class KermetaUnit {
 	        KermetaUnit iu = (KermetaUnit)iulist.get(i);
 	        for (Iterator it = iu.packages.values().iterator(); it.hasNext();)
 	        {
-	        	FPackage n = (FPackage)it.next();
+	        	Package n = (Package)it.next();
 	        	if (!iu.packages.contains(n)) result.add(n);
 	        }
 	    }  
 		return result;
 	}
-	
-	private ArrayList getAllOperationsOnRootType(FClassDefinition cls) {
+		
+	private ArrayList getAllOperationsOnRootType(ClassDefinition cls) {
 		ArrayList result = new ArrayList();
-		Iterator it = cls.getFOwnedOperation().iterator();
+		Iterator it = cls.getOwnedOperation().iterator();
 		while(it.hasNext()) {
-			FOperation op = (FOperation)it.next();
+			Operation op = (Operation)it.next();
 			// only take operation. no methods
-			if (op.getFSuperOperation() == null) result.add(op);
+			if (op.getSuperOperation() == null) result.add(op);
 		}
 		// search recursively in super classes
-		it = cls.getFSuperType().iterator();
+		it = cls.getSuperType().iterator();
 		while(it.hasNext()) {
-			result.addAll(getAllOperationsOnRootType((FClassDefinition) ((FClass)it.next()).getFTypeDefinition()));
+			result.addAll(getAllOperationsOnRootType((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition()));
 		}
 		
 		
@@ -876,13 +876,13 @@ public abstract class KermetaUnit {
 	    
 	}
 	
-	public ArrayList getAllProperties(FClassDefinition cls) {
+	public ArrayList getAllProperties(ClassDefinition cls) {
 		ArrayList result = new ArrayList();
-		result.addAll(cls.getFOwnedAttributes());
+		result.addAll(cls.getOwnedAttribute());
 		// search recursively in super classes
-		Iterator it = cls.getFSuperType().iterator();
+		Iterator it = cls.getSuperType().iterator();
 		while(it.hasNext()) {
-			result.addAll(getAllProperties((FClassDefinition) ((FClass)it.next()).getFTypeDefinition()));
+			result.addAll(getAllProperties((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition()));
 		}
 		return result;
 	}
@@ -909,7 +909,7 @@ public abstract class KermetaUnit {
 	    Resource resource = resource_set.createResource(URI.createFileURI(file_path));
 	    Iterator it = packages.values().iterator();
 	    while(it.hasNext()) {
-	        FPackage p = (FPackage)it.next();    
+	        Package p = (Package)it.next();    
 	        if (p.eResource() == null && p.eContainer() == null) {
 	            fixTypeContainement(p);
 	            resource.getContents().add(p);	           
@@ -936,7 +936,7 @@ public abstract class KermetaUnit {
 	    int tagsize = pTags.size();
 	    for (int i=0; i<tagsize; i++)
 	    {   
-	        FTag tag = (FTag)pTags.get(i);
+	        Tag tag = (Tag)pTags.get(i);
 	        resource.getContents().add(tag);
 	    }
 	}
@@ -948,25 +948,25 @@ public abstract class KermetaUnit {
 	 * @param containedPackage
 	 * @return
 	 */
-	public FPackage getRootPackageForSerialization(FPackage containedPackage) {
+	public Package getRootPackageForSerialization(Package containedPackage) {
 		
-		FPackage container = containedPackage.getFNestingPackage();
+		Package container = containedPackage.getNestingPackage();
 		if (container == null) return containedPackage;
-		FPackage newContainer = copyPackageStructure(container);
-		newContainer.getFNestedPackage().add(containedPackage);
-		FPackage result = newContainer;
-		while(result.getFNestingPackage() != null) result = result.getFNestingPackage();
+		Package newContainer = copyPackageStructure(container);
+		newContainer.getNestedPackage().add(containedPackage);
+		Package result = newContainer;
+		while(result.getNestingPackage() != null) result = result.getNestingPackage();
 		return result;
 	}
 	
 	/**
 	 * Create and return a copy of the given package
 	 */
-	private FPackage copyPackageStructure(FPackage toCopy) {
-		FPackage result = struct_factory.createFPackage();
-		result.setFName(toCopy.getFName());
+	private Package copyPackageStructure(Package toCopy) {
+		Package result = struct_factory.createPackage();
+		result.setName(toCopy.getName());
 		if (toCopy.eContainer() != null) {
-			result.setFNestingPackage(copyPackageStructure(toCopy.getFNestingPackage()));
+			result.setNestingPackage(copyPackageStructure(toCopy.getNestingPackage()));
 		}
 		return result;
 	}
@@ -977,39 +977,39 @@ public abstract class KermetaUnit {
 	 * @param myTags The tags to be added to the XMI resource
 	 * @return the list of myTags, completed
 	 */
-	public ArrayList fixPackageTags(FPackage p, ArrayList myTags)
+	public ArrayList fixPackageTags(Package p, ArrayList myTags)
 	{
 	    TreeIterator it = p.eAllContents();
 		while(it.hasNext()) {
-			FObject o = (FObject)it.next();
-			myTags.addAll(o.getFTag());
+			fr.irisa.triskell.kermeta.language.structure.Object o = (fr.irisa.triskell.kermeta.language.structure.Object)it.next();
+			myTags.addAll(o.getTag());
 		}
 		// Add the tags of the package itself
-		myTags.addAll(p.getFTag());
+		myTags.addAll(p.getTag());
 		return myTags;
 	}
 	
 	/**
 	 * Define a container for each element of the root package
 	 */
-	public void fixTypeContainement(FPackage p) {
+	public void fixTypeContainement(Package p) {
 		TreeIterator it = p.eAllContents();
 		TypeContainementFixer fixer = new TypeContainementFixer();
 		while(it.hasNext()) {
-			FObject o = (FObject)it.next();
-			if (o instanceof FCallExpression) {
-			    FCallExpression e = (FCallExpression)o;
-			    fixer.addContainedTypes(e.getFStaticTypeVariableBindings(), e);
+			fr.irisa.triskell.kermeta.language.structure.Object o = (fr.irisa.triskell.kermeta.language.structure.Object)it.next();
+			if (o instanceof CallExpression) {
+			    CallExpression e = (CallExpression)o;
+			    fixer.addContainedTypes(e.getStaticTypeVariableBindings(), e);
 			}
 			
-			if (o instanceof FExpression) {
-				FExpression e = (FExpression)o;
-				if (e.getFStaticType() != null) {
-					fixer.addContainedTypes(e.getFStaticType(), e);
+			if (o instanceof Expression) {
+				Expression e = (Expression)o;
+				if (e.getStaticType() != null) {
+					fixer.addContainedTypes(e.getStaticType(), e);
 					
 				}
 			}
-			else if (o instanceof FTypeContainer) {
+			else if (o instanceof TypeContainer) {
 				if (o != null) fixer.accept(o);
 			}
 		}
@@ -1019,19 +1019,19 @@ public abstract class KermetaUnit {
 	 * Get all the tags attached to class members, and return
 	 * them, in order to save them in a resource (when saving as
 	 * XMI) */
-	public ArrayList fixClassMemberTags(FClassDefinition o)
+	public ArrayList fixClassMemberTags(ClassDefinition o)
 	{	// for the class
 	    ArrayList oTags = new ArrayList();
-	    oTags.addAll(o.getFTag());
+	    oTags.addAll(o.getTag());
 	    // for its members
-	    EList opLst = o.getFOwnedOperation();
-	    EList atLst = o.getFOwnedAttributes();
+	    EList opLst = o.getOwnedOperation();
+	    EList atLst = o.getOwnedAttribute();
 	    if (opLst.size()>0)
 	    for (int i=0; i<opLst.size();i++)
-	    {  oTags.addAll(((FOperation)opLst.get(i)).getFTag());}
+	    {  oTags.addAll(((Operation)opLst.get(i)).getTag());}
 	    if (atLst.size()>0)
 	    for (int i=0; i<atLst.size();i++)
-	    {  oTags.addAll(((FProperty)atLst.get(i)).getFTag());
+	    {  oTags.addAll(((Property)atLst.get(i)).getTag());
 	    }
 	    return oTags;
 	}

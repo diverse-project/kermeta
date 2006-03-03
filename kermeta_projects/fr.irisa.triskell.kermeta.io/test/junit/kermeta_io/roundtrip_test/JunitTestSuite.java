@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2006-02-14 10:15:04 zdrey Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2006-03-03 15:22:19 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -169,7 +169,7 @@ testkmtFile("test/roundtrip_testcases/kmt","002_RequireEcore.main.kmt" );
 				if (iu instanceof KMTUnit || iu instanceof KMUnit)
 					w.write("require \"" + iu.getUri() + "\"\n");
 				else {
-					String f = file.replaceAll(".kmt", iu.rootPackage.getFName() + ".kmt");
+					String f = file.replaceAll(".kmt", iu.rootPackage.getName() + ".kmt");
 					writeUnit(iu, f);
 					w.write("require \"" + f + "\"\n");
 				}

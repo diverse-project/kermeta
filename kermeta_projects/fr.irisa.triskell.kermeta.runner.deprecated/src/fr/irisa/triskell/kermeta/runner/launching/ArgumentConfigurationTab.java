@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.22 2005-12-01 20:35:42 dvojtise Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.23 2006-03-03 15:23:35 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -59,9 +59,9 @@ import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.dialogs.SelectionListDialog;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;
 /**
@@ -533,16 +533,16 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	        	
 	        	return;	        	
 	        }
-	        FClassDefinition selectedFClassDef = (FClassDefinition)selectedUnit.
+	        ClassDefinition selectedFClassDef = (ClassDefinition)selectedUnit.
 	        getTypeDefinitionByName(
 	                selectedClassString);
 	        
 	        // Get the operations of this class (super operation also?)
-	        EList foperations = selectedFClassDef.getFOwnedOperation();
+	        EList foperations = selectedFClassDef.getOwnedOperation();
 	        ArrayList opnamelist = new ArrayList(foperations.size());
 	        for (int i = 0; i< foperations.size(); i++)
 	        {
-	            opnamelist.add(((FOperation)foperations.get(i)).getFName());
+	            opnamelist.add(((Operation)foperations.get(i)).getName());
 	        }
 	        
 	        SelectionListDialog opDialog = new SelectionListDialog(getShell());
@@ -707,7 +707,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	        ArrayList qnameList = new ArrayList(typedefs.size());
 	        for (int i=0; i<typedefs.size(); i++)
 	        {
-	            qnameList.add(selectedUnit.getQualifiedName((FNamedElement)typedefs.get(i)));
+	            qnameList.add(selectedUnit.getQualifiedName((NamedElement)typedefs.get(i)));
 	        }
 	        
 	        SelectionListDialog classDialog = new SelectionListDialog(getShell());

@@ -41,7 +41,7 @@ public class KMT2KMExperessionListBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FExpression)
 	 */
 	public boolean beginVisit(FExpression fExpression) {
-		fr.irisa.triskell.kermeta.behavior.FExpression exp = KMT2KMExperessionBuilder.process(fExpression, builder);
+		fr.irisa.triskell.kermeta.language.behavior.Expression exp = KMT2KMExperessionBuilder.process(fExpression, builder);
 		if (exp != null) result.add(exp);
 		return false;
 	}

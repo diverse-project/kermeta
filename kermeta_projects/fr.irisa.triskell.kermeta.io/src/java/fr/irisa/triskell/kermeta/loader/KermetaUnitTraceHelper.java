@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitTraceHelper.java,v 1.1 2005-09-15 12:39:11 dvojtise Exp $
+/* $Id: KermetaUnitTraceHelper.java,v 1.2 2006-03-03 15:22:19 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KermetaUnitTraceHelper.java
  * License    : EPL
@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * @author dvojtise
@@ -31,7 +31,7 @@ public class KermetaUnitTraceHelper {
 	 * @param root_unit
 	 * @return
 	 */
-	static public String getLocationAsString(FObject fo, KermetaUnit root_unit)
+	static public String getLocationAsString(fr.irisa.triskell.kermeta.language.structure.Object fo, KermetaUnit root_unit)
 	{	
 		KermetaUnit ku = null;
 		String result = "";

@@ -1,4 +1,4 @@
-/* $Id: TypeContainementFixer.java,v 1.3 2005-08-31 14:12:59 ffleurey Exp $
+/* $Id: TypeContainementFixer.java,v 1.4 2006-03-03 15:22:19 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -16,26 +16,26 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 
-import fr.irisa.triskell.kermeta.behavior.FTypeReference;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FFunctionType;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FParameter;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeContainer;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
+//import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 
 /**
- * Visitor that adds a FTypeContainer to all the types of the visited kermeta 
+ * Visitor that adds a TypeContainer to all the types of the visited kermeta 
  * model.
  */
 public class TypeContainementFixer extends KermetaOptimizedVisitor {
@@ -50,106 +50,106 @@ public class TypeContainementFixer extends KermetaOptimizedVisitor {
 		return null;
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClassDefinition)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
-	public Object visitFClassDefinition(FClassDefinition node) {
+	public Object visitClassDefinition(ClassDefinition node) {
 		// if super types should be contained by the clessdef
-		addContainedTypes(node.getFSuperType(), node);
-		addContainedTypes(node.getFTypeParameter(), node);
+		addContainedTypes(node.getSuperType(), node);
+		addContainedTypes(node.getTypeParameter(), node);
 		return null;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FFunctionType)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FunctionType)
 	 */
-	public Object visitFFunctionType(FFunctionType node) {
-		addContainedTypes(node.getFLeft(), node);
-		addContainedTypes(node.getFRight(), node);
+	public Object visitFunctionType(FunctionType node) {
+		addContainedTypes(node.getLeft(), node);
+		addContainedTypes(node.getRight(), node);
 		return null;
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visitFOperation(FOperation node) {
-		addContainedTypes(node.getFType(), node);
-		addContainedTypes(node.getFTypeParameter(), node);
+	public Object visitOperation(Operation node) {
+		addContainedTypes(node.getType(), node);
+		addContainedTypes(node.getTypeParameter(), node);
 		// RaisedException is also an EList of FTypes.
-		addContainedTypes(node.getFRaisedException(), node);
+		addContainedTypes(node.getRaisedException(), node);
 		return null;
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FParameter)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Parameter)
 	 */
-	public Object visitFParameter(FParameter node) {
-		addContainedTypes(node.getFType(), node);
+	public Object visitParameter(Parameter node) {
+		addContainedTypes(node.getType(), node);
 		return null;
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProductType)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ProductType)
 	 */
-	public Object visitFProductType(FProductType node) {
-		addContainedTypes(node.getFType(), node);
+	public Object visitProductType(ProductType node) {
+		addContainedTypes(node.getType(), node);
 		return null;
 	}
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FProperty)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
-	public Object visitFProperty(FProperty node) {
-		addContainedTypes(node.getFType(), node);
-		return super.visitFProperty(node);
+	public Object visitProperty(Property node) {
+		addContainedTypes(node.getType(), node);
+		return super.visitProperty(node);
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FTypeReference)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeReference)
 	 */
-	public Object visitFTypeReference(FTypeReference node) {
-		addContainedTypes(node.getFType(), node);
-		return null;
-	}
-	
-	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariable)
-	 */
-	public Object visitFTypeVariable(FTypeVariable node) {
-		addContainedTypes(node.getFSupertype(), node);
+	public Object visitTypeReference(TypeReference node) {
+		addContainedTypes(node.getType(), node);
 		return null;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FTypeVariableBinding)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.TypeVariable)
 	 */
-	public Object visitFTypeVariableBinding(FTypeVariableBinding node) {
-		addContainedTypes(node.getFType(), node);
-		return super.visitFTypeVariableBinding(node);
+	public Object visitTypeVariable(TypeVariable node) {
+		addContainedTypes(node.getSupertype(), node);
+		return null;
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FPrimitiveType)
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.TypeVariableBinding)
 	 */
-	public Object visitFPrimitiveType(FPrimitiveType node) {
-		addContainedTypes(node.getFInstanceType(), node);
-		return super.visitFPrimitiveType(node);
+	public Object visitTypeVariableBinding(TypeVariableBinding node) {
+		addContainedTypes(node.getType(), node);
+		return super.visitTypeVariableBinding(node);
 	}
 	
-	protected void addContainedTypes(EList types, FTypeContainer container) {
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
+	 */
+	public Object visitPrimitiveType(PrimitiveType node) {
+		addContainedTypes(node.getInstanceType(), node);
+		return super.visitPrimitiveType(node);
+	}
+	
+	protected void addContainedTypes(EList types, TypeContainer container) {
 		Iterator it = types.iterator();
 		while(it.hasNext()) {
-			addContainedTypes((FType)it.next(), container);
+			addContainedTypes((Type)it.next(), container);
 		}
 	}
 	
 	
 	
 	
-	protected void addContainedTypes(FType t, FTypeContainer container) {
+	protected void addContainedTypes(Type t, TypeContainer container) {
 		if (t != null && t.eContainer() == null) {
-			container.getFContainedType().add(t);
+			container.getContainedType().add(t);
 			// apply recussivly...
-			if (t instanceof FTypeContainer) this.accept(t);
+			if (t instanceof TypeContainer) this.accept(t);
 			TreeIterator it = t.eAllContents();
 			while(it.hasNext()) {
-				FObject o = (FObject)it.next();
-				if (o instanceof FTypeContainer) {
+				fr.irisa.triskell.kermeta.language.structure.Object o = (fr.irisa.triskell.kermeta.language.structure.Object)it.next();
+				if (o instanceof TypeContainer) {
 					if (o != null) this.accept(o);
 				}
 			}

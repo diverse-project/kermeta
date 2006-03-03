@@ -1,4 +1,4 @@
-/* $Id: DynamicExpression.java,v 1.3 2005-09-15 12:43:48 dvojtise Exp $
+/* $Id: DynamicExpression.java,v 1.4 2006-03-03 15:21:47 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpression.java
 * License : GPL
@@ -19,8 +19,8 @@ import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Map;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FType;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 
 /*
  * Implementation  of kermeta::language::DynamicExpression 
@@ -45,12 +45,12 @@ public class DynamicExpression {
 	        RuntimeObject ro_type =  (RuntimeObject)params.get(ro_name);
 	        
 	        java.lang.String name = String.getValue(ro_name);
-	        FType type = (FType)ro_type.getData().get("kcoreObject");
+	        Type type = (Type)ro_type.getData().get("kcoreObject");
 	        
 	        ftype_params.put(name , type);
 	    }
 	    
-	    FClassDefinition cdef = (FClassDefinition)((RuntimeObject)self.getProperties().get("selfClass")).getData().get("kcoreObject");
+	    ClassDefinition cdef = (ClassDefinition)((RuntimeObject)self.getProperties().get("selfClass")).getData().get("kcoreObject");
 	    
 	    // the provided object should have an associated ecore object
 	    // otherwise the ecore object should be created.

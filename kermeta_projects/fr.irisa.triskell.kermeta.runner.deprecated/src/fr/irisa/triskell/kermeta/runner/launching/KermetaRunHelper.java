@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.15 2005-10-24 08:46:38 dvojtise Exp $
+/* $Id: KermetaRunHelper.java,v 1.16 2006-03-03 15:23:35 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: EPL
@@ -15,14 +15,14 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.EList;
 
-import fr.irisa.triskell.kermeta.behavior.impl.BehaviorPackageImpl;
+import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FTag;
-import fr.irisa.triskell.kermeta.structure.impl.StructurePackageImpl;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 
 /**
  * 
@@ -95,14 +95,14 @@ public class KermetaRunHelper {
 	        }
 	        else
 	        {
-	            Iterator it = unit.rootPackage.getFTag().iterator();
+	            Iterator it = unit.rootPackage.getTag().iterator();
 	            
 	            while (it.hasNext()) {
-	                FTag tag = (FTag)it.next();
-	                if (tag.getFName().equals("mainClass")) 
-	                {    mc = tag.getFValue();} //remove the " to memorize value
-	                if (tag.getFName().equals("mainOperation"))
-	                {    mo = tag.getFValue();} //remove the " to memorize value
+	                Tag tag = (Tag)it.next();
+	                if (tag.getName().equals("mainClass")) 
+	                {    mc = tag.getValue();} //remove the " to memorize value
+	                if (tag.getName().equals("mainOperation"))
+	                {    mo = tag.getValue();} //remove the " to memorize value
 	        }
 	        }
 	    }
@@ -111,14 +111,14 @@ public class KermetaRunHelper {
 	}
 	
 	/** Get and flatten recursively the classes in the given package and in the packages children */
-	public static void getRecursivePackageTypeDefs(FPackage pPackage, ArrayList pList)
+	public static void getRecursivePackageTypeDefs(Package pPackage, ArrayList pList)
 	{
-	    pList.addAll(pPackage.getFOwnedTypeDefinition());
-	    EList packages = pPackage.getFNestedPackage();
+	    pList.addAll(pPackage.getOwnedTypeDefinition());
+	    EList packages = pPackage.getNestedPackage();
 	    for  (int i=0; i<packages.size(); i++)
 	    {
-	        pList.addAll(((FPackage)packages.get(i)).getFOwnedTypeDefinition());
-	        getRecursivePackageTypeDefs((FPackage)packages.get(i), pList);
+	        pList.addAll(((Package)packages.get(i)).getOwnedTypeDefinition());
+	        getRecursivePackageTypeDefs((Package)packages.get(i), pList);
 	    }
 	    
 	}

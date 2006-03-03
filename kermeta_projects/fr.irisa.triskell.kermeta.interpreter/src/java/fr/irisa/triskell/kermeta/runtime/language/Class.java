@@ -3,8 +3,8 @@
 package fr.irisa.triskell.kermeta.runtime.language;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FType;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
@@ -30,8 +30,8 @@ public class Class {
 	}
 	
 	public static RuntimeObject isInstance(RuntimeObject self, RuntimeObject object) {
-		FClass req = (FClass)self.getData().get("kcoreObject");
-		FClass pro = (FClass)object.getMetaclass().getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class pro = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getData().get("kcoreObject");
 		
 		SimpleType required = new SimpleType(req);
 		SimpleType provided = new SimpleType(pro);
@@ -41,8 +41,8 @@ public class Class {
 	}
 	
 	public static RuntimeObject isSubType(RuntimeObject self, RuntimeObject object) {
-		FClass req = (FClass)self.getData().get("kcoreObject");
-		FType pro = (FType)object.getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getData().get("kcoreObject");
+		Type pro = (Type)object.getData().get("kcoreObject");
 		
 		SimpleType required = new SimpleType(req);
 		SimpleType provided = new SimpleType(pro);
@@ -52,8 +52,8 @@ public class Class {
 	}
 	
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject other) {
-		FClass req = (FClass)self.getData().get("kcoreObject");
-		FClass pro = (FClass)other.getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getData().get("kcoreObject");
+		fr.irisa.triskell.kermeta.language.structure.Class pro = (fr.irisa.triskell.kermeta.language.structure.Class)other.getData().get("kcoreObject");
 		
 		if (pro == null) return self.getFactory().getMemory().falseINSTANCE;
 		

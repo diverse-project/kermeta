@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.10 2005-11-14 14:24:53 dvojtise Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.11 2006-03-03 15:22:18 dvojtise Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -34,16 +34,16 @@ import fr.irisa.triskell.kermeta.ast.ParentExp;
 import fr.irisa.triskell.kermeta.ast.PrimitiveExpression;
 import fr.irisa.triskell.kermeta.ast.ResultCall;
 import fr.irisa.triskell.kermeta.ast.ValueCall;
-import fr.irisa.triskell.kermeta.behavior.FCallResult;
-import fr.irisa.triskell.kermeta.behavior.FCallSuperOperation;
-import fr.irisa.triskell.kermeta.behavior.FCallValue;
-import fr.irisa.triskell.kermeta.behavior.FConditionnal;
-import fr.irisa.triskell.kermeta.behavior.FExpression;
-import fr.irisa.triskell.kermeta.behavior.FLambdaParameter;
-import fr.irisa.triskell.kermeta.behavior.FRaise;
-import fr.irisa.triskell.kermeta.behavior.FSelfExpression;
-import fr.irisa.triskell.kermeta.behavior.FTypeLiteral;
-import fr.irisa.triskell.kermeta.behavior.FTypeReference;
+import fr.irisa.triskell.kermeta.language.behavior.CallResult;
+import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
+import fr.irisa.triskell.kermeta.language.behavior.CallValue;
+import fr.irisa.triskell.kermeta.language.behavior.Conditional;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.behavior.LambdaParameter;
+import fr.irisa.triskell.kermeta.language.behavior.Raise;
+import fr.irisa.triskell.kermeta.language.behavior.SelfExpression;
+import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
+import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -56,14 +56,14 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  */
 public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 
-	public static FExpression process(PrimitiveExpression node, KermetaUnit builder) {
+	public static Expression process(PrimitiveExpression node, KermetaUnit builder) {
 		if (node == null) return null;
 		KMT2KMPrimitiveExpressionBuilder visitor = new KMT2KMPrimitiveExpressionBuilder(builder);
 		node.accept(visitor);
 		return visitor.result;
 	}
 	
-	protected FExpression result;
+	protected Expression result;
 	
 	/**
 	 * @param builder
@@ -78,9 +78,9 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FBlock)
 	 */
 	public boolean beginVisit(FBlock fBlock) {
-		fr.irisa.triskell.kermeta.behavior.FBlock block =  builder.behav_factory.createFBlock();
+		fr.irisa.triskell.kermeta.language.behavior.Block block =  builder.behav_factory.createBlock();
 		builder.storeTrace(block,fBlock);
-		block.getFStatement().addAll(KMT2KMExperessionListBuilder.process(fBlock.getFExpressionLst(), builder));
+		block.getStatement().addAll(KMT2KMExperessionListBuilder.process(fBlock.getFExpressionLst(), builder));
 		result = block;
 		fBlock.getFRescueLst().accept(this);
 		return false;
@@ -90,16 +90,16 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FRescue)
 	 */
 	public boolean beginVisit(FRescue fRescue) {
-		fr.irisa.triskell.kermeta.behavior.FRescue resc = builder.behav_factory.createFRescue();
+		fr.irisa.triskell.kermeta.language.behavior.Rescue resc = builder.behav_factory.createRescue();
 		builder.storeTrace(resc,fRescue);
 		builder.pushContext();
 		if (fRescue.getVarName() != null) {
-			resc.setFExceptionName(getTextForID(fRescue.getVarName()));
-			resc.setFExceptionType(KMT2KMTypeReferenceBuilder.process(fRescue.getExTypeRef(), builder));
+			resc.setExceptionName(getTextForID(fRescue.getVarName()));
+			resc.setExceptionType(KMT2KMTypeReferenceBuilder.process(fRescue.getExTypeRef(), builder));
 			builder.addSymbol(new KMSymbolRescueParameter(resc));
 		}
-		resc.getFBody().addAll(KMT2KMExperessionListBuilder.process(fRescue.getRescstmts(), builder));
-		((fr.irisa.triskell.kermeta.behavior.FBlock)result).getFRescueBlock().add(resc);
+		resc.getBody().addAll(KMT2KMExperessionListBuilder.process(fRescue.getRescstmts(), builder));
+		((fr.irisa.triskell.kermeta.language.behavior.Block)result).getRescueBlock().add(resc);
 		builder.popContext();
 		return false;
 	}
@@ -108,11 +108,11 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FConditional)
 	 */
 	public boolean beginVisit(FConditional fConditional) {
-		FConditionnal cond = builder.behav_factory.createFConditionnal();
+		Conditional cond = builder.behav_factory.createConditional();
 		builder.storeTrace(cond,fConditional);
-		cond.setFCondition(KMT2KMExperessionBuilder.process(fConditional.getCondition(), builder));
-		cond.setFThenBody(createBlock(fConditional.getIfblock()));
-		cond.setFElseBody(createBlock(fConditional.getElseblock()));
+		cond.setCondition(KMT2KMExperessionBuilder.process(fConditional.getCondition(), builder));
+		cond.setThenBody(createBlock(fConditional.getIfblock()));
+		cond.setElseBody(createBlock(fConditional.getElseblock()));
 		result = cond;
 		return false;
 	}
@@ -121,10 +121,10 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FJavaStaticCall)
 	 */
 	public boolean beginVisit(FJavaStaticCall fJavaStaticCall) {
-		fr.irisa.triskell.kermeta.behavior.FJavaStaticCall call = builder.behav_factory.createFJavaStaticCall();
+		fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall call = builder.behav_factory.createJavaStaticCall();
 		builder.storeTrace(call,fJavaStaticCall);
-		call.setFJmethod(getTextForID(fJavaStaticCall.getMname()));
-		call.setFJclass(qualifiedIDAsString(fJavaStaticCall.getCname()));
+		call.setJmethod(getTextForID(fJavaStaticCall.getMname()));
+		call.setJclass(qualifiedIDAsString(fJavaStaticCall.getCname()));
 		result = call;
 		return super.beginVisit(fJavaStaticCall);
 	}
@@ -133,8 +133,8 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ActualParameter)
 	 */
 	public boolean beginVisit(ActualParameter actualParameter) {
-		FExpression param = KMT2KMExperessionBuilder.process(actualParameter.getExpression(), builder);
-		((fr.irisa.triskell.kermeta.behavior.FJavaStaticCall)result).getFParameters().add(param);
+		Expression param = KMT2KMExperessionBuilder.process(actualParameter.getExpression(), builder);
+		((fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall)result).getParameters().add(param);
 		return false;
 	}
 	
@@ -145,11 +145,11 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FLoop)
 	 */
 	public boolean beginVisit(FLoop fLoop) {
-		fr.irisa.triskell.kermeta.behavior.FLoop loop = builder.behav_factory.createFLoop();
+		fr.irisa.triskell.kermeta.language.behavior.Loop loop = builder.behav_factory.createLoop();
 		builder.storeTrace(loop,fLoop);
-		loop.setFInitiatization(KMT2KMExperessionBuilder.process(fLoop.getInit(), builder));
-		loop.setFStopCondition(KMT2KMExperessionBuilder.process(fLoop.getCondition(), builder));
-		loop.setFBody(createBlock(fLoop.getBody()));
+		loop.setInitialization(KMT2KMExperessionBuilder.process(fLoop.getInit(), builder));
+		loop.setStopCondition(KMT2KMExperessionBuilder.process(fLoop.getCondition(), builder));
+		loop.setBody(createBlock(fLoop.getBody()));
 		result = loop;
 		return false;
 	}
@@ -158,9 +158,9 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FRaiseException)
 	 */
 	public boolean beginVisit(FRaiseException fRaiseException) {
-		FRaise raise = builder.behav_factory.createFRaise();
+		Raise raise = builder.behav_factory.createRaise();
 		builder.storeTrace(raise,fRaiseException);
-		raise.setFExpression(KMT2KMExperessionBuilder.process(fRaiseException.getFExpression(), builder));
+		raise.setExpression(KMT2KMExperessionBuilder.process(fRaiseException.getFExpression(), builder));
 		result = raise;
 		return false;
 	}
@@ -169,7 +169,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FSelfCall)
 	 */
 	public boolean beginVisit(FSelfCall fSelfCall) {
-		FSelfExpression self = builder.behav_factory.createFSelfExpression();
+		SelfExpression self = builder.behav_factory.createSelfExpression();
 		builder.storeTrace(self,fSelfCall);
 		result = self;
 		return false;
@@ -179,9 +179,9 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FSuperCall)
 	 */
 	public boolean beginVisit(FSuperCall fSuperCall) {
-		FCallSuperOperation call = builder.behav_factory.createFCallSuperOperation();
+		CallSuperOperation call = builder.behav_factory.createCallSuperOperation();
 		builder.storeTrace(call,fSuperCall);
-		call.setFName("super");
+		call.setName("super");
 		result = call;
 		return false;
 	}
@@ -189,11 +189,11 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FVariableDecl)
 	 */
 	public boolean beginVisit(FVariableDecl fVariableDecl) {
-		fr.irisa.triskell.kermeta.behavior.FVariableDecl var = builder.behav_factory.createFVariableDecl();
+		fr.irisa.triskell.kermeta.language.behavior.VariableDecl var = builder.behav_factory.createVariableDecl();
 		builder.storeTrace(var,fVariableDecl);
-		var.setFIdentifier(getTextForID(fVariableDecl.getName()));
-		var.setFType(KMT2KMTypeReferenceBuilder.process(fVariableDecl.getTypeRef(), builder));
-		var.setFInitialization(KMT2KMExperessionBuilder.process(fVariableDecl.getInit(), builder));
+		var.setIdentifier(getTextForID(fVariableDecl.getName()));
+		var.setType(KMT2KMTypeReferenceBuilder.process(fVariableDecl.getTypeRef(), builder));
+		var.setInitialization(KMT2KMExperessionBuilder.process(fVariableDecl.getInit(), builder));
 		builder.addSymbol(new KMSymbolVariable(var));
 		result = var;
 		return false;
@@ -211,9 +211,9 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FBooleanLiteral)
 	 */
 	public boolean beginVisit(FBooleanLiteral fBooleanLiteral) {
-		fr.irisa.triskell.kermeta.behavior.FBooleanLiteral bool =  builder.behav_factory.createFBooleanLiteral();
+		fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral bool =  builder.behav_factory.createBooleanLiteral();
 		builder.storeTrace(bool,fBooleanLiteral);
-		bool.setFValue(fBooleanLiteral.getTrueOrFalse().getText().equals("true"));
+		bool.setValue(fBooleanLiteral.getTrueOrFalse().getText().equals("true"));
 		result = bool;
 		return false;
 	}
@@ -221,9 +221,9 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FIntegerLiteral)
 	 */
 	public boolean beginVisit(FIntegerLiteral fIntegerLiteral) {
-		fr.irisa.triskell.kermeta.behavior.FIntegerLiteral integer =  builder.behav_factory.createFIntegerLiteral();
+		fr.irisa.triskell.kermeta.language.behavior.IntegerLiteral integer =  builder.behav_factory.createIntegerLiteral();
 		builder.storeTrace(integer,fIntegerLiteral);
-		integer.setFValue(Integer.parseInt(fIntegerLiteral.getInt_literal().getText()));
+		integer.setValue(Integer.parseInt(fIntegerLiteral.getInt_literal().getText()));
 		result = integer;
 		return false;
 	}
@@ -232,7 +232,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FStringLiteral)
 	 */
 	public boolean beginVisit(FStringLiteral fStringLiteral) {
-		fr.irisa.triskell.kermeta.behavior.FStringLiteral str =  builder.behav_factory.createFStringLiteral();
+		fr.irisa.triskell.kermeta.language.behavior.StringLiteral str =  builder.behav_factory.createStringLiteral();
 		builder.storeTrace(str,fStringLiteral);
 		// removes the quotes
 		String newValue = fStringLiteral.getString_literal().getText().substring(1, fStringLiteral.getString_literal().getText().length()-1);
@@ -249,7 +249,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		newValue = newValue.replaceAll("\\\\\"","\"");
 		//	finally replace the escape char by a slash, 
 		newValue = newValue.replaceAll("123456789oazehnfvkjsdnviuzerheanckencerncçearncerinnceriuh8798432198794235","\\\\"); 
-		str.setFValue(newValue);
+		str.setValue(newValue);
 		result = str;
 		return false;
 	}
@@ -258,7 +258,7 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FVoidLiteral)
 	 */
 	public boolean beginVisit(FVoidLiteral fVoidLiteral) {
-		fr.irisa.triskell.kermeta.behavior.FVoidLiteral nil = builder.behav_factory.createFVoidLiteral();
+		fr.irisa.triskell.kermeta.language.behavior.VoidLiteral nil = builder.behav_factory.createVoidLiteral();
 		builder.storeTrace(nil,fVoidLiteral);
 		result = nil;
 		return false;
@@ -290,29 +290,29 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 			}
 		}
 		// it is a type
-		FTypeLiteral tl = builder.behav_factory.createFTypeLiteral();
+		TypeLiteral tl = builder.behav_factory.createTypeLiteral();
 		builder.storeTrace(tl,fTypeOrVarLiteral);
-		FTypeReference tref = builder.behav_factory.createFTypeReference();
+		TypeReference tref = builder.behav_factory.createTypeReference();
 		//builder.storeTrace(tref,fTypeOrVarLiteral); //TODO : This object should be stored in the trace
-		tref.setFType(KMT2KMTypeBuilder.process(fTypeOrVarLiteral.getLiteral(), builder));
-		tref.setFLower(0);
-		tref.setFUpper(1);
-		tl.setFTyperef(tref);
+		tref.setType(KMT2KMTypeBuilder.process(fTypeOrVarLiteral.getLiteral(), builder));
+		tref.setLower(0);
+		tref.setUpper(1);
+		tl.setTyperef(tref);
 		result = tl;
 		return false;
 	}
 	
-	fr.irisa.triskell.kermeta.behavior.FLambdaExpression current_le;
+	fr.irisa.triskell.kermeta.language.behavior.LambdaExpression current_le;
 	
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FLambdaExpression)
 	 */
 	public boolean beginVisit(FLambdaExpression fLambdaExpression) {
-		current_le = builder.behav_factory.createFLambdaExpression();
+		current_le = builder.behav_factory.createLambdaExpression();
 		builder.storeTrace(current_le,fLambdaExpression);
 		builder.pushContext();
 		fLambdaExpression.getParams().accept(this);
-		current_le.setFBody(createBlock(fLambdaExpression.getExpression()));
+		current_le.setBody(createBlock(fLambdaExpression.getExpression()));
 		result = current_le;
 		builder.popContext();
 		return false;
@@ -322,19 +322,19 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.FLambdaparam)
 	 */
 	public boolean beginVisit(FLambdaparam fLambdaparam) {
-		FLambdaParameter lp = builder.behav_factory.createFLambdaParameter();
+		LambdaParameter lp = builder.behav_factory.createLambdaParameter();
 		builder.storeTrace(lp,fLambdaparam);
-		lp.setFName(getTextForID(fLambdaparam.getName()));
-		lp.setFType(KMT2KMTypeReferenceBuilder.process(fLambdaparam.getTypeRef(), builder));
+		lp.setName(getTextForID(fLambdaparam.getName()));
+		lp.setType(KMT2KMTypeReferenceBuilder.process(fLambdaparam.getTypeRef(), builder));
 		builder.addSymbol(new KMSymbolLambdaParameter(lp));
-		current_le.getFParameters().add(lp);
+		current_le.getParameters().add(lp);
 		return false;
 	}
-	protected fr.irisa.triskell.kermeta.behavior.FBlock createBlock(FExpressionLst explst) {
-		fr.irisa.triskell.kermeta.behavior.FBlock block =  builder.behav_factory.createFBlock();
+	protected fr.irisa.triskell.kermeta.language.behavior.Block createBlock(FExpressionLst explst) {
+		fr.irisa.triskell.kermeta.language.behavior.Block block =  builder.behav_factory.createBlock();
 		if (explst != null) {
 			builder.storeTrace(block,explst);
-			block.getFStatement().addAll(KMT2KMExperessionListBuilder.process(explst, builder));
+			block.getStatement().addAll(KMT2KMExperessionListBuilder.process(explst, builder));
 		}
 		return block;
 	}
@@ -343,17 +343,17 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.ResultCall)
 	 */
 	public boolean beginVisit(ResultCall resultCall) {
-		FCallResult lp = builder.behav_factory.createFCallResult();
+		CallResult lp = builder.behav_factory.createCallResult();
 		builder.storeTrace(lp,resultCall);
-		lp.setFName("result");
+		lp.setName("result");
 		result = lp;
 		return false;
 	}
 	
 	public boolean beginVisit(ValueCall valueCall) {
-		FCallValue lp = builder.behav_factory.createFCallValue();
+		CallValue lp = builder.behav_factory.createCallValue();
 		builder.storeTrace(lp,valueCall);
-		lp.setFName("value");
+		lp.setName("value");
 		result = lp;
 		return false;
 	}

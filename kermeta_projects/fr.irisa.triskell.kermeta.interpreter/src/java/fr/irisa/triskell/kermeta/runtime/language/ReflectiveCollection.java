@@ -11,12 +11,12 @@ import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FTypeVariableBinding;
+//import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 
 public class ReflectiveCollection {
@@ -112,36 +112,36 @@ public class ReflectiveCollection {
 	    
 	    Hashtable cache_reflec_coll_class = object.getFactory().cache_reflec_coll_class;
 	    
-	    FClass self_class = (FClass)object.getMetaclass().getData().get("kcoreObject");
+	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getData().get("kcoreObject");
 	    
-	    FProperty fprop = (FProperty)property.getData().get("kcoreObject");
+	    Property fprop = (Property)property.getData().get("kcoreObject");
 	    
-	    FType prop_type = TypeVariableEnforcer.getBoundType(fprop.getFType(), TypeVariableEnforcer.getTypeVariableBinding(self_class));
+	    Type prop_type = TypeVariableEnforcer.getBoundType(fprop.getType(), TypeVariableEnforcer.getTypeVariableBinding(self_class));
 		
 	    RuntimeObject metaClass = null;
 	    
-	    if (prop_type instanceof FClass && ((FClass)prop_type).getFTypeParamBinding().size() == 0) {
-	        metaClass = (RuntimeObject)cache_reflec_coll_class.get(((FClass)prop_type).getFTypeDefinition());
+	    if (prop_type instanceof fr.irisa.triskell.kermeta.language.structure.Class && ((fr.irisa.triskell.kermeta.language.structure.Class)prop_type).getTypeParamBinding().size() == 0) {
+	        metaClass = (RuntimeObject)cache_reflec_coll_class.get(((fr.irisa.triskell.kermeta.language.structure.Class)prop_type).getTypeDefinition());
 	    }
 	    
 	    if (metaClass == null) {
 	        
-	        FClass reflect_class = object.getFactory().getMemory().getUnit().struct_factory.createFClass();
+	    	fr.irisa.triskell.kermeta.language.structure.Class reflect_class = object.getFactory().getMemory().getUnit().struct_factory.createClass();
 	        
-		    reflect_class.setFTypeDefinition( (FClassDefinition) object.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::ReflectiveCollection"));
+		    reflect_class.setTypeDefinition( (ClassDefinition) object.getFactory().getMemory().getUnit().typeDefinitionLookup("kermeta::language::ReflectiveCollection"));
 		    
-		    FTypeVariableBinding binding = object.getFactory().getMemory().getUnit().struct_factory.createFTypeVariableBinding();
+		    TypeVariableBinding binding = object.getFactory().getMemory().getUnit().struct_factory.createTypeVariableBinding();
 		    
-		    binding.setFVariable((FTypeVariable)reflect_class.getFTypeDefinition().getFTypeParameter().get(0));
+		    binding.setVariable((TypeVariable)reflect_class.getTypeDefinition().getTypeParameter().get(0));
 		    
-		    binding.setFType(prop_type);
+		    binding.setType(prop_type);
 			
-		    reflect_class.getFTypeParamBinding().add(binding);
+		    reflect_class.getTypeParamBinding().add(binding);
 		    
 		    metaClass = object.getFactory().createMetaClass(reflect_class);
 		    
-		    if (prop_type instanceof FClass && ((FClass)prop_type).getFTypeParamBinding().size() == 0) {
-		        cache_reflec_coll_class.put(((FClass)prop_type).getFTypeDefinition(), metaClass);
+		    if (prop_type instanceof fr.irisa.triskell.kermeta.language.structure.Class && ((fr.irisa.triskell.kermeta.language.structure.Class)prop_type).getTypeParamBinding().size() == 0) {
+		        cache_reflec_coll_class.put(((fr.irisa.triskell.kermeta.language.structure.Class)prop_type).getTypeDefinition(), metaClass);
 		    }
 	    }
 	    

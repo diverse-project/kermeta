@@ -8,5 +8,6 @@
 		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.io/lib/"/>
 		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.interpreter/lib/"/>
 		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.framework/lib/"/>
+		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta/lib/"/>
 	</target>
 </project>

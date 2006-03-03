@@ -6,8 +6,8 @@
  */
 package fr.irisa.triskell.kermeta.dev.framework;
 
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -26,17 +26,17 @@ public class MakeAbstractClass extends KermetaVisitor {
 	}
 
 	/**
-	 * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FClassDefinition)
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.ClassDefinition)
 	 */
-	public Object visit(FClassDefinition arg0) {
-		arg0.setFIsAbstract(true);
+	public Object visit(ClassDefinition arg0) {
+		arg0.setIsAbstract(true);
 		return super.visit(arg0);
 	}
 	/**
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.structure.FOperation)
 	 */
-	public Object visit(FOperation arg0) {
-		if (arg0.getFBody() == null) arg0.setFIsAbstract(true);
+	public Object visit(Operation arg0) {
+		if (arg0.getBody() == null) arg0.setIsAbstract(true);
 		return null ;
 	}
 }

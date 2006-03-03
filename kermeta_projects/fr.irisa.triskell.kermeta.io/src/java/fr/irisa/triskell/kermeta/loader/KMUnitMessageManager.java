@@ -1,4 +1,4 @@
-/* $Id: KMUnitMessageManager.java,v 1.6 2005-12-17 21:03:16 dvojtise Exp $
+/* $Id: KMUnitMessageManager.java,v 1.7 2006-03-03 15:22:19 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.structure.FObject;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 
 
@@ -77,7 +77,7 @@ public class KMUnitMessageManager {
 	 * @param message
 	 * @param node
 	 */
-	public void addError(String message, FObject node)
+	public void addError(String message, fr.irisa.triskell.kermeta.language.structure.Object node)
 	{
 		errors.add(new KMUnitError(message, node));
 		unitHasError = true;
@@ -88,7 +88,7 @@ public class KMUnitMessageManager {
 	 * @param message
 	 * @param node
 	 */
-	public void addWarning(String message, FObject node)
+	public void addWarning(String message, fr.irisa.triskell.kermeta.language.structure.Object node)
 	{
 		warnings.add(new KMUnitWarning(message, node));
 	}

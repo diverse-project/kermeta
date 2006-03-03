@@ -4,11 +4,11 @@
  */
 package fr.irisa.triskell.kermeta.loader.kmt;
 
-import fr.irisa.triskell.kermeta.behavior.FCallExpression;
-import fr.irisa.triskell.kermeta.behavior.FCallFeature;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FProperty;
+//import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 
 /**
  * @author Franck Fleurey
@@ -17,32 +17,32 @@ import fr.irisa.triskell.kermeta.structure.FProperty;
  */
 public class KMSymbolProperty extends KMSymbol {
 
-	public FProperty property;
+	public Property property;
 	
 	/**
 	 * @param id
 	 */
-	public KMSymbolProperty(FProperty prop) {
-		super(prop.getFName());
+	public KMSymbolProperty(Property prop) {
+		super(prop.getName());
 		property = prop;
 	}
 	
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#getFObject()
 	 */
-	public FObject getFObject() {
+	public fr.irisa.triskell.kermeta.language.structure.Object getFObject() {
 		return property;
 	}
 	/**
 	 * @return Returns the property.
 	 */
-	public FProperty getProperty() {
+	public Property getProperty() {
 		return property;
 	}
 	/**
 	 * @param property The property to set.
 	 */
-	public void setProperty(FProperty property) {
+	public void setProperty(Property property) {
 		this.property = property;
 	}
 	
@@ -53,9 +53,9 @@ public class KMSymbolProperty extends KMSymbol {
 	/**
 	 * @see fr.irisa.triskell.kermeta.loader.kmt.KMSymbol#generateCallExpression()
 	 */
-	public FCallExpression generateCallExpression(KermetaUnit builder) {
-		FCallFeature call = builder.behav_factory.createFCallFeature();
-		call.setFName(property.getFName());
+	public CallExpression generateCallExpression(KermetaUnit builder) {
+		CallFeature call = builder.behav_factory.createCallFeature();
+		call.setName(property.getName());
 		return call;
 	}
 }

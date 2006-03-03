@@ -12,8 +12,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FPackage;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 
 /**
  * @author Franck Fleurey
@@ -71,12 +70,12 @@ public class OutlineContentProvider implements ITreeContentProvider {
 		
 	    Iterator it = unit.packages.values().iterator();
 	    while(it.hasNext()) {
-	        FPackage pack = (FPackage)it.next();
+	        Package pack = (Package)it.next();
 	       
             OutlineItem item = new OutlineItem(pack, null, outline);
             
             
-            if (!outline.prefPackageTree() || pack.getFNestingPackage() == null) {
+            if (!outline.prefPackageTree() || pack.getNestingPackage() == null) {
                 if(outline.prefShowImported() || !item.isPackageFullyImported()) {
 	                result.add(item);
 	            }
