@@ -14,6 +14,8 @@ import org.topcased.modeler.di.model.util.DIUtils;
 import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.utils.Utils;
 
+import fr.irisa.triskell.kermeta.behavior.provider.KermetaEditPlugin;
+import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.structure.FClass;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
@@ -80,12 +82,23 @@ public class FClassDefinitionRestoreConnectionCommand extends
 						}
 					}
 
+					if (nodeObject2 instanceof FClassDefinition) {
+						if (autoRef) {
+							// autoRef not allowed
+						} else {
+							// if the node is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
+							createInheritanceFromFClassDefinitionToFClassDefinition(
+									node, node2);
+							// if node is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
+							createInheritanceFromFClassDefinitionToFClassDefinition(
+									node2, node);
+						}
+					}
 				}
 			}
 		}
 	}
-	
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -94,45 +107,57 @@ public class FClassDefinitionRestoreConnectionCommand extends
 	private void createFPropertyFromFClassDefinitionToFClassDefinition(
 			GraphNode srcNode, GraphNode targetNode) {
 		extendedCreateFPropertyFromFClassDefinitionToFClassDefinition(srcNode, targetNode);
-/*		FClassDefinition sourceObject = (FClassDefinition) Utils
-				.getElement(srcNode);
-		FClassDefinition targetObject = (FClassDefinition) Utils
-				.getElement(targetNode);
+	}
 
-		EList edgeObjectList = sourceObject.getFOwnedAttributes();
-		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
-			Object obj = it.next();
-			if (obj instanceof FProperty) {
-				FProperty edgeObject = (FProperty) obj;
-				if (targetObject.equals(edgeObject.getFOwningClass())
-						&& sourceObject.getFOwnedAttributes().contains(
-								edgeObject)) {
-					// check if the relation does not exists yet
-					List existing = getExistingEdges(srcNode, targetNode,
-							FProperty.class);
-					if (!isAlreadyPresent(existing, edgeObject)) {
-						ICreationUtils factory = getModeler()
-								.getActiveConfiguration().getCreationUtils();
-						GraphElement edge = factory
-								.createGraphElement(edgeObject);
-						if (edge instanceof GraphEdge) {
-							FPropertyEdgeCreationCommand cmd = new FPropertyEdgeCreationCommand(
-									getEditDomain(), (GraphEdge) edge, srcNode,
-									false);
-							cmd.setTarget(targetNode);
-							add(cmd);
-						}
-					}
-				}
-			}
-		}*/
-		
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private void createInheritanceFromFClassDefinitionToFClassDefinition(
+			GraphNode srcNode, GraphNode targetNode) {
+		System.err.println("TOTO --- : we do not enter here ");
+		extendedCreateInheritanceFromFClassDefinitionToFClassDefinition(srcNode, targetNode);
 	}
 	
+    public void extendedCreateInheritanceFromFClassDefinitionToFClassDefinition(GraphNode srcNode, GraphNode targetNode)
+    {
+        FClassDefinition srcFClassDefinition = (FClassDefinition) Utils.getElement(srcNode);
+        FClassDefinition targetFClassDefinition = (FClassDefinition) Utils.getElement(targetNode);
+        System.err.println("create inheritance edge");
+        // Is there is an inheritance relation between src class and target class, than, create it!
+        if (KermetaUtils.getDefault().isContainedFSuperTypeInFClassDefinition(srcFClassDefinition, targetFClassDefinition)
+        		
+        	)
+        {
+        	System.err.println("If we are here, it means that an inheritance relation does not exist yet");
+            // check if the relation does not exists yet
+            if (getExistingEdges(srcNode, targetNode, StructureEditPolicyConstants.INHERITANCE_EDITPOLICY).size() == 0)
+            {
+            	System.err.println("If here, so, no existing edge were found");
+                GraphEdge edge = Utils.createGraphEdge(StructureEditPolicyConstants.INHERITANCE_EDITPOLICY);
+                InheritanceEdgeCreationCommand cmd = new InheritanceEdgeCreationCommand(
+						null, edge, srcNode, false);
+                cmd.setTarget(targetNode);
+                add(cmd);
+            }
+            System.err.println("End of cond n°1 on graphical representation!");
+        }
+        System.err.println("End of cond on model");
+    }
+
+
 	/** Non generated method 
 	 * 
 	 * Create a GraphNode representing the FProperty of a class definition, when
 	 * this FProperty type is a DataType 
+	 * What you have to do after the generation process is done :
+	 * - adapt this code, so, if necessary, take generated code of createFPropertyFromFClassDefinitionToFClassDefinition
+	 * and change things that you need to change, then, add this method 
+	 * (extendedCreateFPropertyFromFClassDefinitionToFClassDefinition) call in the generated method
+	 * (createFPropertyFromFClassDefinitionToFClassDefinition) instead of the big code.
+	 * Usefullness of this stuff is that if you need some parts of the generated code, without
+	 * overwriting your adaptation, it will be a little bit easier...
 	 * @param srcNode The graph node representing the concerned class definition.
 	 */
 	private void extendedCreateFPropertyFromFClassDefinitionToFClassDefinition(
@@ -149,12 +174,16 @@ public class FClassDefinitionRestoreConnectionCommand extends
 			// TODO Think about how to make this conditional be generated later.
 			// FIXME obj can be null!!! check why
 			System.err.println("The type of the property is : " + obj);
-			System.err.println("The type of the property is : " + obj.getFType());
-			if (obj.getFType()!=null && !KermetaUtils.getDefault().isStandardType(obj.getFType())
-				&& !KermetaUtils.getDefault().isPrimitiveType(obj.getFType()))
-			{
+			System.err.println("The type of the property is : "
+					+ obj.getFType());
+			if (obj.getFType() != null
+					&& !KermetaUtils.getDefault()
+							.isStandardType(obj.getFType())
+					&& !KermetaUtils.getDefault().isPrimitiveType(
+							obj.getFType())) {
 
-				System.err.println("Splotch :" + ((FClass)obj.getFType()).getFTypeDefinition());
+				System.err.println("Splotch :"
+						+ ((FClass) obj.getFType()).getFTypeDefinition());
 				FProperty edgeObject = (FProperty) obj;
 				if (targetObject.equals(edgeObject.getFOwningClass())
 						&& sourceObject.getFOwnedAttributes().contains(

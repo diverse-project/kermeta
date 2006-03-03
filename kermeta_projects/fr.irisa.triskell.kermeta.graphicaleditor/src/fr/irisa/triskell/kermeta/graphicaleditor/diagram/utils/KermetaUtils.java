@@ -374,7 +374,70 @@ public class KermetaUtils {
 			result.add(array[i]);
 		return result;
 	}
-
-
+	
+	/*
+	 * Special methods used to handle some mappings between the FType concept and the FTypeDefinitions
+	 * concept.
+	 * We have to think about which place would be most relevant?
+	 * 
+	 */
+	public void addFSuperTypeToFClassDefinition(FClassDefinition classdef, FTypeDefinition supertypedef )
+	{
+		FType toadd = findFSuperTypeInFClassDefinition(classdef, supertypedef);
+		// FIXME : this test should be done in a more appropriate place 
+		if (toadd == null)
+			classdef.getFSuperType().add(createFTypeForFTypeDefinition(supertypedef));
+	}
+	
+	/**
+	 * 
+	 * @param supertypedef
+	 * @param classdef
+	 * @return a FType element if type related to supertypedef is in the supertypes of classdef, null otherwise
+	 */
+	public FType findFSuperTypeInFClassDefinition(FClassDefinition classdef, FTypeDefinition supertypedef)
+	{
+		FType result = null; 
+		String supertypedefname = standardUnit.getQualifiedName(supertypedef);
+		Iterator<FType> it = classdef.getFSuperType().iterator();
+		System.err.println("SuperType? : " + classdef.getFSuperType().size());
+		while (it.hasNext() && result==null)
+		{
+			FType type = it.next();
+			// FClass is the only type linked to a FClassDefinition, and we are looking for a type corresponding
+			// to a FClassDefinition!
+			if (type instanceof FClass) 
+			{
+				System.err.println("Find super type : " + supertypedefname + " of " + standardUnit.getQualifiedName(((FClass)type).getFTypeDefinition()) );
+				if (standardUnit.getQualifiedName(((FClass)type).getFTypeDefinition()).equals(supertypedefname))
+					result = type;
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * We have to manage this operation using qualified names, there is no way to retrieve
+	 * types to remove..
+	 * @param supertype
+	 * @param typedef
+	 */
+	public void removeFSuperTypeFromFClassDefinition(FClassDefinition classdef, FTypeDefinition supertypedef)
+	{
+		FType toremove = findFSuperTypeInFClassDefinition(classdef, supertypedef);
+		classdef.getFSuperType().remove(toremove);
+	}
+	
+	
+	
+	/**
+	 * Equivalent to : classdef.contains(the_type_related_to_supertypedef)
+	 * Used because graphical elements between which we
+	 * are testing the inheritance relation are directly linked to FClassDefinition model elements.
+	 */
+	public boolean isContainedFSuperTypeInFClassDefinition(FClassDefinition classdef, FTypeDefinition supertypedef)
+	{
+		return findFSuperTypeInFClassDefinition(classdef, supertypedef)!=null;
+	}
 }
 
