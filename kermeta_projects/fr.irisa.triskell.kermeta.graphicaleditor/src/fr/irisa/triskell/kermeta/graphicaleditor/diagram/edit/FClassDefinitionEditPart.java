@@ -24,6 +24,8 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.EditPartUtil
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.FClassDefinitionFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.FClassDefinitionLayoutEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.FPropertyEdgeCreationEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.InheritanceEdgeCreationEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.extension.ExtendedInheritanceEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.structure.FClassDefinition;
 
 /**
@@ -44,6 +46,13 @@ public class FClassDefinitionEditPart extends FNamedElementEditPart {
 		super(obj);
 	}
 
+	// NOTE :  
+	// createEditPolicies is kept generated, until this code is stable.
+	// But there are a few of modifications to do : 
+	// if they exist, the *EdgeCreationEditPolicy should be replaced by
+	// Extended*EdgeCreationEditPolicy, which handle some immediate constraint
+	// that are not generated/generable.
+	
 	/**
 	 * Creates edit policies and associates these with roles
 	 * <!-- begin-user-doc -->
@@ -56,6 +65,9 @@ public class FClassDefinitionEditPart extends FNamedElementEditPart {
 		installEditPolicy(StructureEditPolicyConstants.FPROPERTY_EDITPOLICY,
 				new FPropertyEdgeCreationEditPolicy());
 
+		installEditPolicy(StructureEditPolicyConstants.INHERITANCE_EDITPOLICY,
+				new ExtendedInheritanceEdgeCreationEditPolicy());
+
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
 					protected Command getRestoreConnectionsCommand(
@@ -65,10 +77,8 @@ public class FClassDefinitionEditPart extends FNamedElementEditPart {
 					}
 				});
 
-		ResizableEditPolicy resizableEditPolicy = new ResizableEditPolicy();
-		resizableEditPolicy.setResizeDirections(PositionConstants.EAST_WEST);
 		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
-				resizableEditPolicy);
+				new ResizableEditPolicy());
 
 		installEditPolicy(EditPolicy.LAYOUT_ROLE,
 				new FClassDefinitionLayoutEditPolicy());
@@ -124,7 +134,7 @@ public class FClassDefinitionEditPart extends FNamedElementEditPart {
 	 * @generated
 	 */
 	public int getMinimumHeight() {
-		return 20;
+		return 7;
 	}
 
 	// 
@@ -141,20 +151,12 @@ public class FClassDefinitionEditPart extends FNamedElementEditPart {
 	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultFont()
 	 */
 	protected Font getDefaultFont() {
-        return EditPartUtils.changeFont(getModelFClassDefinition().isFIsAbstract());
+		return EditPartUtils.changeFont(getModelFClassDefinition()
+				.isFIsAbstract());
 	}
 
-	
-    /**
-     * <!-- begin-user-doc -->
-     * (It was not generated actually...)
-     * <!-- end-user-doc -->
-     * 
-     * @return the model object
-     * @generated 
-     */
-    protected FClassDefinition getModelFClassDefinition()
-    {
-        return (FClassDefinition) getEObject();
-    }
+	public FClassDefinition getModelFClassDefinition() {
+		return (FClassDefinition) getEObject();
+	}
+
 }
