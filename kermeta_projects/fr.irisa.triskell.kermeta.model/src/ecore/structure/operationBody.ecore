@@ -9,9 +9,9 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="superOperation" eType="#//structure/Operation"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Property">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="getterbody" eType="#//behavior/Expression"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="getterBody" eType="#//behavior/Expression"
           containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="setterbody" eType="#//behavior/Expression"
+      <eStructuralFeatures xsi:type="ecore:EReference" name="setterBody" eType="#//behavior/Expression"
           containment="true"/>
     </eClassifiers>
   </eSubpackages>
