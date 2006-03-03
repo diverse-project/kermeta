@@ -74,7 +74,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="Object">
       <eOperations name="getMetaClass" eType="#//structure/Class"/>
       <eOperations name="container" eType="#//structure/Object"/>
-      <eOperations name="equals" eType="#//structure/Boolean">
+      <eOperations name="_equals" eType="#//structure/Boolean">
         <eParameters name="element" eType="#//structure/Object"/>
       </eOperations>
       <eOperations name="get" eType="#//structure/Object">
