@@ -1,4 +1,4 @@
-/* $Id: BasicLabelProvider.java,v 1.1 2006-02-15 18:20:23 zdrey Exp $
+/* $Id: BasicLabelProvider.java,v 1.2 2006-03-07 22:06:29 barais Exp $
  * Project   : fr.irisa.triskell.kermeta (First iteration)
  * File      : EcoreFileLabelProvider.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Feb 13, 2006
  * Authors       : zdrey
  */
-/* $Id: BasicLabelProvider.java,v 1.1 2006-02-15 18:20:23 zdrey Exp $
+/* $Id: BasicLabelProvider.java,v 1.2 2006-03-07 22:06:29 barais Exp $
  * Project   : Kermeta (First iteration)
  * File      : EcoreFileLabelProvider.java
  * License   : EPL
@@ -22,7 +22,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.jdt.internal.ui.wizards.StringWrapper;
+
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
