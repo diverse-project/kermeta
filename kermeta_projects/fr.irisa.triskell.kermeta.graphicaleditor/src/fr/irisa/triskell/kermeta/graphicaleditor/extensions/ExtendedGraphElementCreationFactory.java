@@ -29,8 +29,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.topcased.modeler.editor.GraphElementCreationFactory;
 import org.topcased.modeler.editor.ICreationUtils;
 
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 
 /**
  * @author zdrey
@@ -65,23 +65,23 @@ public class ExtendedGraphElementCreationFactory extends
 	 * @param isNode
 	 */
 	public ExtendedGraphElementCreationFactory(ICreationUtils creation,
-			String type, boolean isNode) {
+			String type, Boolean isNode) {
 		super(creation, type, isNode);
 	}
 
 	/**
 	 * We overrided this method because we need to set default values in the model objects that were created instead of 
 	 * having totally empty ones.
-	 * Only specialized for FProperty yet
+	 * Only specialized for Property yet
 	 * @see org.topcased.modeler.editor.GraphElementCreationFactory#getNewModelObject()
 	 */
 	public EObject getNewModelObject() {
 		EObject result = super.getNewModelObject();
 		//result.
 		// We would like to express initializations like :
-		// "((FProperty)%object%).setFType(%stringrepresentingaprimitivetype%)
+		// "((Property)%object%).setType(%stringrepresentingaprimitivetype%)
 		// FIXME : dirty temporary test.
-		((FProperty)result).setFType(StructureFactory.eINSTANCE.createFPrimitiveType());
+		((Property)result).setType(StructureFactory.eINSTANCE.createPrimitiveType());
 		return result;
 	}
 
@@ -151,7 +151,7 @@ public class ExtendedGraphElementCreationFactory extends
 		}
 		
 		// Set the value of the filter to the object
-		// FType (e.g fType) -> an EClass isntance
+		// Type (e.g fType) -> an EClass isntance
 		// FBoolean (e.g : isComposed) -> true/false
 		// FStringLiteral -> a string....
 	}

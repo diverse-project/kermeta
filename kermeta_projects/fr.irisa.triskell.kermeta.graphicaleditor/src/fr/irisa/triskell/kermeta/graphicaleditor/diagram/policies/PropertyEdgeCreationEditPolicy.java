@@ -6,21 +6,20 @@ import org.eclipse.gef.commands.Command;
 import org.topcased.modeler.commands.CreateTypedEdgeCommand;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphNode;
-import org.topcased.modeler.di.model.SimpleSemanticModelElement;
 import org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy;
 import org.topcased.modeler.utils.SourceTargetData;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.InheritanceEdgeCreationCommand;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.PropertyEdgeCreationCommand;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 
 /**
- * Inheritance edge creation <br>
+ * Property edge creation <br>
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class InheritanceEdgeCreationEditPolicy extends
+public class PropertyEdgeCreationEditPolicy extends
 		AbstractEdgeCreationEditPolicy {
 	/**
 	 * <!-- begin-user-doc -->
@@ -29,7 +28,7 @@ public class InheritanceEdgeCreationEditPolicy extends
 	 */
 	protected CreateTypedEdgeCommand createCommand(EditDomain domain,
 			GraphEdge edge, GraphNode source) {
-		return new InheritanceEdgeCreationCommand(domain, edge, source);
+		return new PropertyEdgeCreationCommand(domain, edge, source);
 	}
 
 	/**
@@ -38,12 +37,7 @@ public class InheritanceEdgeCreationEditPolicy extends
 	 * @generated
 	 */
 	protected boolean checkEdge(GraphEdge edge) {
-		if (edge.getSemanticModel() instanceof SimpleSemanticModelElement) {
-			return (StructureEditPolicyConstants.INHERITANCE_EDITPOLICY
-					.equals(((SimpleSemanticModelElement) edge
-							.getSemanticModel()).getTypeInfo()));
-		}
-		return false;
+		return Utils.getElement(edge) instanceof Property;
 	}
 
 	/**
@@ -70,20 +64,18 @@ public class InheritanceEdgeCreationEditPolicy extends
 
 		if (sourceObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition
 				&& targetObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition) {
-			if (!sourceObject.equals(targetObject)) {
-				return true;
-			}
+			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected boolean checkCommand(Command command) {
-		return command instanceof InheritanceEdgeCreationCommand;
+		return command instanceof PropertyEdgeCreationCommand;
 	}
 
 	/**
@@ -98,8 +90,10 @@ public class InheritanceEdgeCreationEditPolicy extends
 
 		if (sourceObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition
 				&& targetObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition) {
-			return new SourceTargetData(false, false, 0, null, null, null,
-					null, null, null, null, null);
+			return new SourceTargetData(false, true, 1,
+					"fr.irisa.triskell.kermeta.language.structure.ClassDefinition",
+					"fOwnedAttributes", null, "fOwningClass",
+					"fOwnedAttributes", null, null, null);
 		}
 		return null;
 	}

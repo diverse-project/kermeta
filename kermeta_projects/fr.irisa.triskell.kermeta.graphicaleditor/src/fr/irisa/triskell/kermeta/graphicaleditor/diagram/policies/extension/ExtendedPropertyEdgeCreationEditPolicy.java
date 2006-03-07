@@ -1,4 +1,4 @@
-/* $Id$
+/* $Id: ExtendedPropertyEdgeCreationEditPolicy.java,v 1.1 2006-03-07 17:30:33 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : extendedInheritanceEdgeCreationEditPolicy.java
  * License   : EPL
@@ -21,16 +21,17 @@ import fr.irisa.triskell.kermeta.language.structure.*;
 /**
  * What to do with this class :
  * Instead of instanciating InheritanceEdgeCreationEditPolicy in ClassDefinitionEditPart, 
- * instanciate this one.
+ * instanciate this one, in ClassDefinitionEditPart class, in createEditPolicies
  * @author zdrey
  *
  */
-public class ExtendedInheritanceEdgeCreationEditPolicy extends
+public class ExtendedPropertyEdgeCreationEditPolicy extends
 		InheritanceEdgeCreationEditPolicy {
 
-	public ExtendedInheritanceEdgeCreationEditPolicy() {
+	public ExtendedPropertyEdgeCreationEditPolicy() {
 		super();
 	}
+	
 	
 	protected boolean checkTargetForSource(GraphNode source, GraphNode target) {
 		EObject sourceObject = Utils.getElement(source);
@@ -38,7 +39,7 @@ public class ExtendedInheritanceEdgeCreationEditPolicy extends
 
 		if (sourceObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition
 				&& targetObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition) {
-			if (checkSuperTypeConstraints(sourceObject, targetObject)==false)
+			if (checkFOwnedAttributesConstraints(sourceObject, targetObject)==false)
 				return false;
 			if (!sourceObject.equals(targetObject)
 			) {
@@ -49,28 +50,26 @@ public class ExtendedInheritanceEdgeCreationEditPolicy extends
 	}
 
 	/**
-	 * Constraint : Inheritance relation between two classes must be Unique :
-	 * a class can only inherit once from another.
-	 * This constraint is defined in "fSuperType" property, as "isUnique=true" on it
-	 * (in textual checking : see KMT2KMPass3 in fr.irisa.triskell.kermeta.io project.)
 	 * 
+	 * Check the constraints related to the SuperType property of a class definition.
 	 * TODO This constraint should be generalizable to other properties. But yet it is very
-	 * specific to SuperType
+	 * specific to FOwnedAttributes (but very similar to checkSuperTypeConstraints, in
+	 * ExtendedInheritanceEdgeCreationEditPolicy ).
 	 * @param sourceObject the inheriting classdefinition
 	 * @param targetObject the inherited classdefinition
 	 * @return true if the constraints are verified, false otherwise. In particular, a "attribute"(reference,
-	 * or property...) must be uniquely represented in the ownedAttributes properties of a class.
+	 * or property...) must be uniquely represented in the ownedAttributes properties of a class. 
 	 */
-	protected boolean checkSuperTypeConstraints(EObject sourceObject, EObject targetObject)
+	protected boolean checkFOwnedAttributesConstraints(EObject sourceObject, EObject targetObject)
 	{
 		Boolean isvalid = true;
 		// we know here that we handle ClassDefinitions, so hard cast
 		ClassDefinition src_cdef = (ClassDefinition)sourceObject;
 		ClassDefinition tgt_cdef = (ClassDefinition)targetObject;
 		// is the inheritance relation unique? 
-		if (StructurePackage.eINSTANCE.getClassDefinition_SuperType().isUnique())
+		if (StructurePackage.eINSTANCE.getClassDefinition_OwnedAttribute().isUnique())
 		{
-			if (KermetaUtils.getDefault().isContainedSuperTypeInClassDefinition(src_cdef, tgt_cdef))
+			if (KermetaUtils.getDefault().existsPropertyBetweenClassDefinitions(src_cdef, tgt_cdef))
 				isvalid = false;
 		}
 		return isvalid;

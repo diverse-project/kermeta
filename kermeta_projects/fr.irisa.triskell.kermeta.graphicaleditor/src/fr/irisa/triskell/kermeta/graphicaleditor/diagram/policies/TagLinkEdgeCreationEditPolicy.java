@@ -53,7 +53,7 @@ public class TagLinkEdgeCreationEditPolicy extends
 	 */
 	protected boolean checkSource(GraphNode source) {
 		EObject object = Utils.getElement(source);
-		if (object instanceof fr.irisa.triskell.kermeta.structure.FTag) {
+		if (object instanceof fr.irisa.triskell.kermeta.language.structure.Tag) {
 			return true;
 		}
 		return false;
@@ -68,8 +68,8 @@ public class TagLinkEdgeCreationEditPolicy extends
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof fr.irisa.triskell.kermeta.structure.FTag
-				&& targetObject instanceof fr.irisa.triskell.kermeta.structure.FNamedElement) {
+		if (sourceObject instanceof fr.irisa.triskell.kermeta.language.structure.Tag
+				&& targetObject instanceof fr.irisa.triskell.kermeta.language.structure.NamedElement) {
 			if (!sourceObject.equals(targetObject)) {
 				return true;
 			}
@@ -96,8 +96,8 @@ public class TagLinkEdgeCreationEditPolicy extends
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
-		if (sourceObject instanceof fr.irisa.triskell.kermeta.structure.FTag
-				&& targetObject instanceof fr.irisa.triskell.kermeta.structure.FNamedElement) {
+		if (sourceObject instanceof fr.irisa.triskell.kermeta.language.structure.Tag
+				&& targetObject instanceof fr.irisa.triskell.kermeta.language.structure.NamedElement) {
 			return new SourceTargetData(false, false, 0, null, null, null,
 					null, null, null, null, null);
 		}

@@ -21,19 +21,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FDataType;
-import fr.irisa.triskell.kermeta.structure.FEnumeration;
-import fr.irisa.triskell.kermeta.structure.FGenericTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FProductType;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
-import fr.irisa.triskell.kermeta.structure.FTypeVariable;
-import fr.irisa.triskell.kermeta.structure.FVoidType;
-import fr.irisa.triskell.kermeta.structure.StructureFactory;
+
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.DataType;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 /*
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -49,8 +49,8 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
  * - some visitors that are applied on the model edited by the user to make
  * it valid. Mainly, the TypeContainementFixer visitor. 
  *    Setting a "type" to an operation is not naturally done through the ecore reflexive editor:
- *    we have to define a child (Operation inherits FTypeContainer, which is composed of a set
- *    of children which type is FType)
+ *    we have to define a child (Operation inherits TypeContainer, which is composed of a set
+ *    of children which type is Type)
  *    
  * IMPORTANT NOTE : 
  * Using types of framework.km is sometimes unsafe(?). Indeed, since we load here
@@ -67,7 +67,7 @@ public class KermetaUtils {
 	protected KermetaUnit standardUnit;
 	/** 
 	 * Type containment fixer :
-	 *  Since many Typed elements (FOperation, FProperty) inherits FTypeContainer,
+	 *  Since many Typed elements (Operation, Property) inherits TypeContainer,
 	 *  when setting a type to an operation, we have to set the contained type for
 	 *  those elements as well.
 	 */
@@ -97,14 +97,14 @@ public class KermetaUtils {
 	
 	/** Get all the type definitions that belong to the same package as the one to which
 	 *  the given type believes. */
-	public List<FTypeDefinition> getOwnedTypeDefinitions(FTypeDefinition typedef)
+	public List<TypeDefinition> getOwnedTypeDefinitions(TypeDefinition typedef)
 	{
-		List<FTypeDefinition> result = new ArrayList<FTypeDefinition>();
-		// By definition, a FTypeDefinition container is always of type FPackage
-		FPackage pkg = getRootPackage((FPackage)typedef.eContainer());
-		for (Iterator it = pkg.getFNestedPackage().iterator(); it.hasNext(); )
-			result.addAll(((FPackage)it.next()).getFOwnedTypeDefinition());
-		result.addAll(pkg.getFOwnedTypeDefinition());
+		List<TypeDefinition> result = new ArrayList<TypeDefinition>();
+		// By definition, a TypeDefinition container is always of type Package
+		Package pkg = getRootPackage((Package)typedef.eContainer());
+		for (Iterator it = pkg.getNestedPackage().iterator(); it.hasNext(); )
+			result.addAll(((Package)it.next()).getOwnedTypeDefinition());
+		result.addAll(pkg.getOwnedTypeDefinition());
 		// Now add the Kermeta standard library classifiers
 		result.addAll(getStdLibTypeDefinitions());
 		return result;
@@ -115,18 +115,18 @@ public class KermetaUtils {
 	 * and subpackages as the one to which the given type definition believes.
 	 * @param typedef the typedef from the package which we search the available types.
 	 */
-	public List<FType> getOwnedTypesForTypeDefinitions(FTypeDefinition typedef)
+	public List<Type> getOwnedTypesForTypeDefinitions(TypeDefinition typedef)
 	{
-		List<FType> result = new ArrayList<FType>();
-		// By definition, a FTypeDefinition container is always of type FPackage
-		FPackage pkg = getRootPackage((FPackage)typedef.eContainer());
-		for (Iterator<FPackage> it = pkg.getFNestedPackage().iterator(); it.hasNext(); )
+		List<Type> result = new ArrayList<Type>();
+		// By definition, a TypeDefinition container is always of type Package
+		Package pkg = getRootPackage((Package)typedef.eContainer());
+		for (Iterator<Package> it = pkg.getNestedPackage().iterator(); it.hasNext(); )
 		{
-			for (Iterator<FTypeDefinition> sit = it.next().getFOwnedTypeDefinition().iterator(); sit.hasNext(); )
-				result.add(createFTypeForFTypeDefinition(sit.next()));
+			for (Iterator<TypeDefinition> sit = it.next().getOwnedTypeDefinition().iterator(); sit.hasNext(); )
+				result.add(createTypeForTypeDefinition(sit.next()));
 		}
-		for (Iterator<FTypeDefinition> it = pkg.getFOwnedTypeDefinition().iterator(); it.hasNext();)
-			result.add(createFTypeForFTypeDefinition(it.next()));
+		for (Iterator<TypeDefinition> it = pkg.getOwnedTypeDefinition().iterator(); it.hasNext();)
+			result.add(createTypeForTypeDefinition(it.next()));
 		// Now add the Kermeta standard library classifiers
 		result.addAll(getStdLibTypes());
 		return result;
@@ -139,11 +139,11 @@ public class KermetaUtils {
 	 * @param typedef
 	 * @return the list of typeVariables
 	 */
-	public List<FType> getOwnedTypesVariables(FTypeDefinition typedef)
+	public List<Type> getOwnedTypesVariables(TypeDefinition typedef)
 	{
-		List<FType> result = new ArrayList<FType>();
-		if (typedef instanceof FClassDefinition)
-			result.addAll(((FClassDefinition)typedef).getFTypeParameter());
+		List<Type> result = new ArrayList<Type>();
+		if (typedef instanceof ClassDefinition)
+			result.addAll(((ClassDefinition)typedef).getTypeParameter());
 		return result;
 	}
 	
@@ -153,18 +153,18 @@ public class KermetaUtils {
 	 *  to avoid useless loops.
 	 *  Would be great if lambda expressions existed...
 	 *  The available types include :
-	 *   - Types that have TypeDefinitions (lowermost-inheriteds classes : FClassDefinition, FEnumeration, FPrimitiveType)
-	 *   - FTypeVariable s
-	 *   - FFunctionType s
-	 *   - FProductType s
+	 *   - Types that have TypeDefinitions (lowermost-inheriteds classes : ClassDefinition, Enumeration, PrimitiveType)
+	 *   - TypeVariable s
+	 *   - FunctionType s
+	 *   - ProductType s
 	 *   @param typedef the typedefinition from which we access the available context, i.e the list of
 	 *   useable types.
 	 *   TODO : when Additionnal resources will be available, we won't use this typedef param anymore,
 	 *   but 
 	 *  */
-	public List<FType> getOwnedTypes(FTypeDefinition typedef)
+	public List<Type> getOwnedTypes(TypeDefinition typedef)
 	{
-		List<FType> result = getOwnedTypesForTypeDefinitions(typedef);
+		List<Type> result = getOwnedTypesForTypeDefinitions(typedef);
 		result.addAll(getOwnedTypesVariables(typedef));
 		return result;
 	}
@@ -174,70 +174,70 @@ public class KermetaUtils {
 	 * We need framework.ecore/
 	 * @return
 	 */
-	public List<FTypeDefinition> getStdLibTypeDefinitions()
+	public List<TypeDefinition> getStdLibTypeDefinitions()
 	{
 		return standardUnit.getAllTypeDefinitions();
 	}
 	
 	/** *
 	 * Get the standard lib types corresponding to the standard lib type definitions.
-	 * @return the FType version of FTypeDefinitions :-p
+	 * @return the Type version of TypeDefinitions :-p
 	 */
-	public List<FType> getStdLibTypes()
+	public List<Type> getStdLibTypes()
 	{
-		List<FType> result = new ArrayList<FType>();
-		for (Iterator<FTypeDefinition> it = getStdLibTypeDefinitions().iterator(); it.hasNext();)
-			result.add(createFTypeForFTypeDefinition(it.next()));
+		List<Type> result = new ArrayList<Type>();
+		for (Iterator<TypeDefinition> it = getStdLibTypeDefinitions().iterator(); it.hasNext();)
+			result.add(createTypeForTypeDefinition(it.next()));
 		return result;
 	}
 
 
 	/** Returns a "printable name" for the given type */ 
-	public String getLabelForFType(FType type)
+	public String getLabelForType(Type type)
 	{
 		String type_name = "";
-		if (type instanceof FClass)
-			type_name = ((FClass)type).getFTypeDefinition().getFName();
-        	//type_name = KMTHelper.getQualifiedName(((FClass)type).getFTypeDefinition());
-		else if (type instanceof FProductType) // TODO : map!
+		if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class)
+			type_name = ((fr.irisa.triskell.kermeta.language.structure.Class)type).getTypeDefinition().getName();
+        	//type_name = KMTHelper.getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)type).getTypeDefinition());
+		else if (type instanceof ProductType) // TODO : map!
 			type_name = type.toString();
-		else if (type instanceof FDataType)
-			type_name = ((FDataType)type).getFName();
-		else if (type instanceof FVoidType)
+		else if (type instanceof DataType)
+			type_name = ((DataType)type).getName();
+		else if (type instanceof VoidType)
 			type_name = "Void";
         else
         {
         	type_name = type==null?"<Null>":type.toString();
-        	//throw new Error("FTYPE : Not implemented error : createFTypeForFTypeDefinition -- Enumeration type is not handled yet. (" + type + ")");
+        	//throw new Error("FTYPE : Not implemented error : createTypeForTypeDefinition -- Enumeration type is not handled yet. (" + type + ")");
         }
         return type_name;
 	}
 	
-	public String getLabelForFTypeVariable(FTypeVariable var)
+	public String getLabelForTypeVariable(TypeVariable var)
 	{ 
-		String supertype = var.getFSupertype()!=null?(":"+getLabelForFType(var.getFSupertype())):"";
-		return var.getFName() + supertype; 
+		String supertype = var.getSupertype()!=null?(":"+getLabelForType(var.getSupertype())):"";
+		return var.getName() + supertype; 
 	}
 	
-	public FType createFTypeForFTypeDefinition(FTypeDefinition typedef)
+	public Type createTypeForTypeDefinition(TypeDefinition typedef)
 	{
-		FType type = null;
-        if (typedef instanceof FClassDefinition)
+		Type type = null;
+        if (typedef instanceof ClassDefinition)
         {
-        	//type = StructureFactory.eINSTANCE.createFClass();
-        	type = standardUnit.struct_factory.createFClass();
-        	((FClass)type).setFTypeDefinition((FClassDefinition)typedef);
-        	//type = ((FClassDefinition)_returnType).()
+        	//type = StructureFactory.eINSTANCE.createfr.irisa.triskell.kermeta.language.structure.Class();
+        	type = standardUnit.struct_factory.createClass();
+        	((fr.irisa.triskell.kermeta.language.structure.Class)type).setTypeDefinition((ClassDefinition)typedef);
+        	//type = ((ClassDefinition)_returnType).()
         }
-        else if (typedef instanceof FPrimitiveType)
+        else if (typedef instanceof PrimitiveType)
         {
-        	type = StructureFactory.eINSTANCE.createFPrimitiveType();
-        	((FPrimitiveType)type).setFInstanceType(null); // TODO
+        	type = StructureFactory.eINSTANCE.createPrimitiveType();
+        	((PrimitiveType)type).setInstanceType(null); // TODO
         	
         }
-        else if (typedef instanceof FEnumeration)
+        else if (typedef instanceof Enumeration)
         {
-        	throw new Error("Not implemented error : createFTypeForFTypeDefinition -- Enumeration type is not handled yet. (" + typedef + ")");
+        	throw new Error("Not implemented error : createTypeForTypeDefinition -- Enumeration type is not handled yet. (" + typedef + ")");
         }
         return type;
 	}
@@ -245,9 +245,9 @@ public class KermetaUtils {
 	/**
 	 * RootPackage stands for the uppermost containing package of the given package. 
 	 */
-	private static FPackage getRootPackage(FPackage fpackage) {
-		if (fpackage.getFNestingPackage()!=null) {
-			return getRootPackage(fpackage.getFNestingPackage());
+	private static Package getRootPackage(Package fpackage) {
+		if (fpackage.getNestingPackage()!=null) {
+			return getRootPackage(fpackage.getNestingPackage());
 		}
 		else return fpackage;
 	}
@@ -302,14 +302,14 @@ public class KermetaUtils {
 	 * - Numeric (Real?)
 	 * - String
 	 */
-	public boolean isBaseType(FType type)
+	public boolean isBaseType(Type type)
 	{
-		boolean isbasetype = false;
-		if (type instanceof FClass)
+		Boolean isbasetype = false;
+		if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class)
 		{
-			FClass fclass = (FClass)type; 
+			fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)type; 
 			
-			String classdef = fclass.getFTypeDefinition().getFName();
+			String classdef = fclass.getTypeDefinition().getName();
 			// Having the below types in another way then manual 
 			String[] basetypes = new String[]
             {"Boolean", "Character", "Integer", "Iterator", "Map", "Numeric", "String" };
@@ -328,9 +328,9 @@ public class KermetaUtils {
 	 * @param type
 	 * @return
 	 */
-	public boolean isPrimitiveType(FType type)
+	public boolean isPrimitiveType(Type type)
 	{
-		return type instanceof FPrimitiveType;
+		return type instanceof PrimitiveType;
 	}
 	
 	/**
@@ -340,26 +340,26 @@ public class KermetaUtils {
 	 * @param type
 	 * @return
 	 */
-	public boolean isStandardType(FType type)
+	public boolean isStandardType(Type type)
 	{
-		boolean isstandardtype = false;
-		FTypeDefinition typedef = null;
+		Boolean isstandardtype = false;
+		TypeDefinition typedef = null;
 		String typedef_qname = "";
 		
-		if (type instanceof FClass)
+		if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class)
 		{
-			typedef = ((FClass)type).getFTypeDefinition();
+			typedef = ((fr.irisa.triskell.kermeta.language.structure.Class)type).getTypeDefinition();
 			typedef_qname = KMTHelper.getQualifiedName(typedef);
 		}
-		else if (type instanceof FTypeDefinition) // case of FPrimitiveTypes!
+		else if (type instanceof TypeDefinition) // case of PrimitiveTypes!
 		{
-			typedef = (FTypeDefinition) type;
+			typedef = (TypeDefinition) type;
 			typedef_qname = KMTHelper.getQualifiedName(typedef);
 		}
 		// FIXME : this does not seem to work!! seems to be 2 frameworks loaded in memory, but
 		// where???
 		if (getStdLibTypeDefinitions().contains(typedef)) System.err.println("Kikou");
-		// Typedef is null when type is note FClass or not FTypeDefinition....
+		// Typedef is null when type is note fr.irisa.triskell.kermeta.language.structure.Class or not TypeDefinition....
 		if (typedef_qname!=null)
 		{
 			isstandardtype = standardUnit.getTypeDefinitionByName(typedef_qname)!=null;
@@ -376,43 +376,49 @@ public class KermetaUtils {
 	}
 	
 	/*
-	 * Special methods used to handle some mappings between the FType concept and the FTypeDefinitions
+	 * Special methods used to handle some mappings between the Type concept and the TypeDefinitions
 	 * concept.
 	 * We have to think about which place would be most relevant?
 	 * 
 	 */
-	public void addFSuperTypeToFClassDefinition(FClassDefinition classdef, FTypeDefinition supertypedef )
+	public void addSuperTypeToClassDefinition(ClassDefinition classdef, TypeDefinition supertypedef )
 	{
-		FType toadd = findFSuperTypeInFClassDefinition(classdef, supertypedef);
+		Type toadd = findSuperTypeInClassDefinition(classdef, supertypedef);
 		// FIXME : this test should be done in a more appropriate place 
-		if (toadd == null)
-			classdef.getFSuperType().add(createFTypeForFTypeDefinition(supertypedef));
+		if (toadd == null) // Already controlled by the check methods in the policies
+		{
+			classdef.getContainedType().clear();
+			classdef.getSuperType().add(createTypeForTypeDefinition(supertypedef));
+			typeFixer.accept(classdef);
+		}
 	}
 	
 	/**
 	 * 
 	 * @param supertypedef
 	 * @param classdef
-	 * @return a FType element if type related to supertypedef is in the supertypes of classdef, null otherwise
+	 * @return a Type element if type related to supertypedef is in the supertypes of classdef, null otherwise
 	 */
-	public FType findFSuperTypeInFClassDefinition(FClassDefinition classdef, FTypeDefinition supertypedef)
+	public Type findSuperTypeInClassDefinition(ClassDefinition classdef, TypeDefinition supertypedef)
 	{
-		FType result = null; 
+		Type result = null; 
 		String supertypedefname = standardUnit.getQualifiedName(supertypedef);
-		Iterator<FType> it = classdef.getFSuperType().iterator();
-		System.err.println("SuperType? : " + classdef.getFSuperType().size());
+		// reinit the typeFixing
+		classdef.getContainedType().clear();
+		
+		Iterator<Type> it = classdef.getSuperType().iterator();
 		while (it.hasNext() && result==null)
 		{
-			FType type = it.next();
-			// FClass is the only type linked to a FClassDefinition, and we are looking for a type corresponding
-			// to a FClassDefinition!
-			if (type instanceof FClass) 
+			Type type = it.next();
+			// fr.irisa.triskell.kermeta.language.structure.Class is the only type linked to a ClassDefinition, and we are looking for a type corresponding
+			// to a ClassDefinition!
+			if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class) 
 			{
-				System.err.println("Find super type : " + supertypedefname + " of " + standardUnit.getQualifiedName(((FClass)type).getFTypeDefinition()) );
-				if (standardUnit.getQualifiedName(((FClass)type).getFTypeDefinition()).equals(supertypedefname))
+				if (standardUnit.getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)type).getTypeDefinition()).equals(supertypedefname))
 					result = type;
 			}
 		}
+		typeFixer.accept(classdef);
 		return result;
 	}
 	
@@ -422,10 +428,10 @@ public class KermetaUtils {
 	 * @param supertype
 	 * @param typedef
 	 */
-	public void removeFSuperTypeFromFClassDefinition(FClassDefinition classdef, FTypeDefinition supertypedef)
+	public void removeSuperTypeFromClassDefinition(ClassDefinition classdef, TypeDefinition supertypedef)
 	{
-		FType toremove = findFSuperTypeInFClassDefinition(classdef, supertypedef);
-		classdef.getFSuperType().remove(toremove);
+		Type toremove = findSuperTypeInClassDefinition(classdef, supertypedef);
+		classdef.getSuperType().remove(toremove);
 	}
 	
 	
@@ -433,11 +439,24 @@ public class KermetaUtils {
 	/**
 	 * Equivalent to : classdef.contains(the_type_related_to_supertypedef)
 	 * Used because graphical elements between which we
-	 * are testing the inheritance relation are directly linked to FClassDefinition model elements.
+	 * are testing the inheritance relation are directly linked to ClassDefinition model elements.
 	 */
-	public boolean isContainedFSuperTypeInFClassDefinition(FClassDefinition classdef, FTypeDefinition supertypedef)
+	public boolean isContainedSuperTypeInClassDefinition(ClassDefinition classdef, TypeDefinition supertypedef)
 	{
-		return findFSuperTypeInFClassDefinition(classdef, supertypedef)!=null;
+		return findSuperTypeInClassDefinition(classdef, supertypedef)!=null;
+	}
+	
+	/**
+	 * If a property of type targetdef already exists in the given srcdef, return true,
+	 * otherwise false
+	 * @param srcdef
+	 * @param targetdef
+	 * @return
+	 * TODO : not implemented yet.
+	 */
+	public boolean existsPropertyBetweenClassDefinitions(ClassDefinition srcdef, ClassDefinition targetdef)
+	{
+		return false;
 	}
 }
 

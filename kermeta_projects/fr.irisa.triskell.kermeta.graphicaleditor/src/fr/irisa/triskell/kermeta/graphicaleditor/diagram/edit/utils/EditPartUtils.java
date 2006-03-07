@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Display;
  */
 public class EditPartUtils {
 	
-	public static boolean ITALIC_FONT_OK = false;
+	public static Boolean ITALIC_FONT_OK = false;
 
 	public EditPartUtils() {
 		super();
@@ -37,7 +37,7 @@ public class EditPartUtils {
 	 * @return the font to set on wanted label
 	 * TODO : we could add a parameter to set another kind than the ItalicFont
 	 */
-	public static Font changeFont(boolean setItalic)
+	public static Font changeFont(Boolean setItalic)
 	{
 		if (setItalic)
         {

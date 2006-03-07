@@ -11,8 +11,9 @@ import org.topcased.modeler.editor.palette.ModelerConnectionCreationToolEntry;
 import org.topcased.modeler.editor.palette.ModelerCreationToolEntry;
 import org.topcased.modeler.editor.palette.ModelerPaletteManager;
 
+import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
-import fr.irisa.triskell.kermeta.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 /**
  * Generated Palette Manager
@@ -86,14 +87,14 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 
 		newObjTxt = "Package";
 		factory = new GraphElementCreationFactory(creationUtils,
-				StructurePackage.eINSTANCE.getFPackage());
+				StructurePackage.eINSTANCE.getPackage());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
 				factory, StructureImageRegistry.getImageDescriptor("FPACKAGE"),
 				null, 12, 10, 10, 10);
 		entries.add(objectTool);
 		newObjTxt = "Class";
 		factory = new GraphElementCreationFactory(creationUtils,
-				StructurePackage.eINSTANCE.getFClassDefinition());
+				StructurePackage.eINSTANCE.getClassDefinition());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
 				factory, StructureImageRegistry
 						.getImageDescriptor("FCLASSDEFINITION"), null, 70, 10,
@@ -101,14 +102,14 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 		entries.add(objectTool);
 		newObjTxt = "Operation";
 		factory = new GraphElementCreationFactory(creationUtils,
-				StructurePackage.eINSTANCE.getFOperation());
+				StructurePackage.eINSTANCE.getOperation());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
 				factory, StructureImageRegistry
 						.getImageDescriptor("FOPERATION"), null, -1, -1, 0, 0);
 		entries.add(objectTool);
 		newObjTxt = "Tag";
 		factory = new GraphElementCreationFactory(creationUtils,
-				StructurePackage.eINSTANCE.getFTag());
+				StructurePackage.eINSTANCE.getTag());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
 				factory, StructureImageRegistry.getImageDescriptor("FTAG"),
 				null, 0, 0, 0, 0);
@@ -136,33 +137,47 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 
 		newObjTxt = "Property";
 		factory = new GraphElementCreationFactory(creationUtils,
-				StructurePackage.eINSTANCE.getFProperty());
+				StructurePackage.eINSTANCE.getProperty());
 		connectionTool = new ModelerConnectionCreationToolEntry(newObjTxt,
 				newObjTxt, factory, StructureImageRegistry
 						.getImageDescriptor("FPROPERTY"), null);
 		entries.add(connectionTool);
 
+		newObjTxt = "Inheritance";
+		factory = new GraphElementCreationFactory(creationUtils,
+				StructureEditPolicyConstants.INHERITANCE_EDITPOLICY, false);
+		connectionTool = new ModelerConnectionCreationToolEntry(newObjTxt,
+				newObjTxt, factory, StructureImageRegistry
+						.getImageDescriptor("INHERITANCE"), null);
+		entries.add(connectionTool);
+
+		newObjTxt = "TagLink";
+		factory = new GraphElementCreationFactory(creationUtils,
+				StructureEditPolicyConstants.TAGLINK_EDITPOLICY, false);
+		connectionTool = new ModelerConnectionCreationToolEntry(newObjTxt,
+				newObjTxt, factory, StructureImageRegistry
+						.getImageDescriptor("TAGLINK"), null);
+		entries.add(connectionTool);
+
 		edgesDrawer.addAll(entries);
 		getRoot().add(edgesDrawer);
 	}
-	
+
 	/*
 	 * 
 	 * Please do not remove the following code. They are accessors
 	 * used by inherited class ExtendedStructurePaletteManager.
 	 */
-	
+
 	/**
 	 * Dirty change of visibility for createBasicDrawer.
 	 * The aim is to let createBasicDrawer be regenerated correctly.
 	 * */
-	public void createBasicDrawer_public()
-	{
+	public void createBasicDrawer_public() {
 		createBasicDrawer();
 	}
-	
-	public void createEdgesDrawer_public()
-	{
+
+	public void createEdgesDrawer_public() {
 		createEdgesDrawer();
 	}
 
@@ -186,7 +201,5 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 	public PaletteDrawer getEdgesDrawer() {
 		return edgesDrawer;
 	}
-	
-	
 
 }

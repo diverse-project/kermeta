@@ -64,7 +64,8 @@ public class StructureConfiguration implements IConfiguration {
 	 */
 	public IPaletteManager getPaletteManager() {
 		if (paletteManager == null)
-			paletteManager = new ExtendedStructurePaletteManager(getCreationUtils());
+			paletteManager = new ExtendedStructurePaletteManager(
+					getCreationUtils());
 
 		return paletteManager;
 	}

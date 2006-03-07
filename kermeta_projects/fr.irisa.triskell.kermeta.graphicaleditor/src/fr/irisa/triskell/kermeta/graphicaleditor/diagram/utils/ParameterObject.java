@@ -6,12 +6,12 @@
  * ----------------------------------------------------------------------------
  * Creation date : Feb 21, 2006
  * Authors       : zdrey
- * Class that was encapsulated in FOperationDataStructure 
+ * Class that was encapsulated in OperationDataStructure 
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils;
 
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 
 /**
  * The structure that encapsulate data related to an operation parameter
@@ -23,17 +23,17 @@ public class ParameterObject {
     private String _name;
 
     /** Parameter type */
-    private FType _type;
+    private Type _type;
     
     /** Parameter typedef associated? */
-    private FTypeDefinition _typedef;
+    private TypeDefinition _typedef;
 	/**
      * The constructor
      * 
      * @param name parameter name
      * @param type parameter type
      */
-    public ParameterObject(String name, FType type)
+    public ParameterObject(String name, Type type)
     {
         _name = name;
         _type = type;
@@ -49,12 +49,12 @@ public class ParameterObject {
      * Get property type
      * @return type of the property
      */
-    public FType getType() { return _type; }
+    public Type getType() { return _type; }
     
     /**
      * Get property typedef
      */
-    public FTypeDefinition getTypeDefinition() { return _typedef; }
+    public TypeDefinition getTypeDefinition() { return _typedef; }
 
     /**
      * Set new name for the parameter
@@ -66,8 +66,8 @@ public class ParameterObject {
      * Set new type for the parameter
      * @param type
      */
-    public void setType(FType type) { _type = type; }
+    public void setType(Type type) { _type = type; }
 
-	public void setTypeDefinition(FTypeDefinition typedef) { _typedef = typedef; }
+	public void setTypeDefinition(TypeDefinition typedef) { _typedef = typedef; }
 
 } // End internal class

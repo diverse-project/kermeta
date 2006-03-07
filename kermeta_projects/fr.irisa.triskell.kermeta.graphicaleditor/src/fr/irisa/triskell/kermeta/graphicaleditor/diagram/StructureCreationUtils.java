@@ -9,17 +9,17 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.editor.AbstractCreationUtils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureEdgeObjectConstants;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.FPropertyFigureNode;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.PropertyFigureNode;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTag;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.StructurePackage;
-import fr.irisa.triskell.kermeta.structure.util.StructureSwitch;
+
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.language.structure.util.StructureSwitch;
 
 /**
  * This utility class allows to create a GraphElement associated with a Model Object
@@ -43,38 +43,38 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 */
 	public GraphElement createGraphElement(EObject obj) {
 		Object graphElt = new StructureSwitch() {
-			public Object caseFPackage(FPackage object) {
-				return createGraphElementFPackage((FPackage) object);
+			public Object casePackage(Package object) {
+				return createGraphElementPackage((Package) object);
 			}
 
-			public Object caseFClassDefinition(FClassDefinition object) {
-				return createGraphElementFClassDefinition((FClassDefinition) object);
+			public Object caseClassDefinition(ClassDefinition object) {
+				return createGraphElementClassDefinition((ClassDefinition) object);
 			}
 
-			public Object caseFOperation(FOperation object) {
-				return createGraphElementFOperation((FOperation) object);
+			public Object caseOperation(Operation object) {
+				return createGraphElementOperation((Operation) object);
 			}
 
 			/* modified to handle properties that are represented as nodes 
-			 * (properties whose type is FPrimitiveType) labels in 
+			 * (properties whose type is PrimitiveType) labels in 
 			 * a class figure) as well as properties represented as edges.
 			 */
-			public Object caseFProperty(FProperty object) {
+			public Object caseProperty(Property object) {
 				// Contract!!
 				// The constraint according to which property is a node 
 				// (if its type is a PrimitiveType) or an edge (otherwise).
-				// TODO : check that object type's type is always FClass
-				if (KermetaUtils.getDefault().isStandardType(object.getFType())
-				||  KermetaUtils.getDefault().isPrimitiveType(object.getFType()))
+				// TODO : check that object type's type is always fr.irisa.triskell.kermeta.language.structure.Class
+				if (KermetaUtils.getDefault().isStandardType(object.getType())
+				||  KermetaUtils.getDefault().isPrimitiveType(object.getType()))
 				{
-					return createGraphElementFPropertyNode((FProperty) object);
+					return createGraphElementPropertyNode((Property) object);
 				}
 				else
-					return createGraphElementFPropertyEdge((FProperty) object);
+					return createGraphElementPropertyEdge((Property) object);
 			}
 			
-			public Object caseFTag(FTag object) {
-				return createGraphElementFTag((FTag) object);
+			public Object caseTag(Tag object) {
+				return createGraphElementTag((Tag) object);
 			}
 
 			public Object defaultCase(EObject object) {
@@ -92,7 +92,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	private GraphElement createGraphElementFPackage(FPackage element) {
+	private GraphElement createGraphElementPackage(Package element) {
 		return createGraphNode(element);
 	}
 
@@ -105,21 +105,21 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * @generated NOT
 	 * It could have been generated 
 	 */
-	private GraphElement createGraphElementFClassDefinition(
-			FClassDefinition element) {
+	private GraphElement createGraphElementClassDefinition(
+			ClassDefinition element) {
 		// TODO this snippet of code should be customized if it is not well generated
 		GraphNode nodeParent = createGraphNode(element);
 
 		GraphNode foperation = createGraphNode(element,
-				StructurePackage.FCLASS_DEFINITION__FOWNED_OPERATION);
+				StructurePackage.CLASS_DEFINITION__OWNED_OPERATION);
 		foperation.setContainer(nodeParent);
 		
 		GraphNode fproperty = createGraphNode(element,
-				StructurePackage.FCLASS_DEFINITION__FOWNED_ATTRIBUTES);
+				StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE);
 		fproperty.setContainer(nodeParent);
 		
 		GraphNode ftag = createGraphNode(element,
-				StructurePackage.FCLASS_DEFINITION__FTAG);
+				StructurePackage.CLASS_DEFINITION__TAG);
 		ftag.setContainer(nodeParent);
 
 
@@ -134,7 +134,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	private GraphElement createGraphElementFOperation(FOperation element) {
+	private GraphElement createGraphElementOperation(Operation element) {
 		return createGraphNode(element);
 	}
 
@@ -146,7 +146,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * @return the complete GraphElement
 	 * @generated
 	 */
-	private GraphElement createGraphElementFTag(FTag element) {
+	private GraphElement createGraphElementTag(Tag element) {
 		return createGraphNode(element);
 	}
 
@@ -155,7 +155,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private GraphElement createGraphElementFProperty(FProperty element) {
+	private GraphElement createGraphElementProperty(Property element) {
 		GraphEdge graphEdge = createGraphEdge(element);
 		EdgeObjectUV fnameEdgeObjectUV = DiagramInterchangeFactory.eINSTANCE
 				.createEdgeObjectUV();
@@ -173,13 +173,13 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * 
 	 * @param element
 	 * @return the complete GraphElement
-	 * @was createGraphElementFProperty : duplicate method, since
+	 * @was createGraphElementProperty : duplicate method, since
 	 * we create 2 graph elemenst (one is a node, the other is an edge) for
 	 * the same model element.
 	 * @generated NOT
 	 */
-	private GraphElement createGraphElementFPropertyNode(FProperty element) {
-		GraphElement result = createGraphNode(element, StructurePackage.FCLASS_DEFINITION__FOWNED_ATTRIBUTES);
+	private GraphElement createGraphElementPropertyNode(Property element) {
+		GraphElement result = createGraphNode(element, StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE);
 		return result;
 	}
 
@@ -189,15 +189,15 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * 
 	 * @param element
 	 * @return the complete GraphElement
-	 * @was createGraphElementFProperty : duplicate method, since
+	 * @was createGraphElementProperty : duplicate method, since
 	 * we create 2 graph elemenst (one is a node, the other is an edge) for
 	 * the same model element.
 	 * What you have to do after generation process :
-	 * cut/paste createGraphElementFProperty body here and make the modifications
-	 * you want, or directly return createGraphElementFProperty.
+	 * cut/paste createGraphElementProperty body here and make the modifications
+	 * you want, or directly return createGraphElementProperty.
 	 * @generated NOT 
 	 */
-	private GraphElement createGraphElementFPropertyEdge(FProperty element) {
+	private GraphElement createGraphElementPropertyEdge(Property element) {
 		GraphEdge graphEdge = createGraphEdge(element);
 		EdgeObjectUV fnameEdgeObjectUV = DiagramInterchangeFactory.eINSTANCE
 				.createEdgeObjectUV();
@@ -207,7 +207,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 		fnameEdgeObjectUV.setVDistance(0);
 		graphEdge.getContained().add(fnameEdgeObjectUV);
 		return graphEdge;
-		//return createGraphElementFProperty(element);
+		//return createGraphElementProperty(element);
 /*		GraphEdge graphEdge = createGraphEdge(element);
 		EdgeObjectUV flowerEdgeObjectUV = DiagramInterchangeFactory.eINSTANCE
 				.createEdgeObjectUV();
@@ -243,24 +243,24 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 */
 	public EObject createModelObject(EObject obj) {
 		Object eObject = new StructureSwitch() {
-			public Object caseFPackage(FPackage object) {
-				return createModelObjectFPackage((FPackage) object);
+			public Object casePackage(Package object) {
+				return createModelObjectPackage((Package) object);
 			}
 
-			public Object caseFClassDefinition(FClassDefinition object) {
-				return createModelObjectFClassDefinition((FClassDefinition) object);
+			public Object caseClassDefinition(ClassDefinition object) {
+				return createModelObjectClassDefinition((ClassDefinition) object);
 			}
 
-			public Object caseFOperation(FOperation object) {
-				return createModelObjectFOperation((FOperation) object);
+			public Object caseOperation(Operation object) {
+				return createModelObjectOperation((Operation) object);
 			}
 
-			public Object caseFTag(FTag object) {
-				return createModelObjectFTag((FTag) object);
+			public Object caseTag(Tag object) {
+				return createModelObjectTag((Tag) object);
 			}
 
-			public Object caseFProperty(FProperty object) {
-				return createModelObjectFProperty((FProperty) object);
+			public Object caseProperty(Property object) {
+				return createModelObjectProperty((Property) object);
 			}
 
 			public Object defaultCase(EObject object) {
@@ -278,7 +278,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * @return the complete Model Object
 	 * @generated
 	 */
-	private FPackage createModelObjectFPackage(FPackage element) {
+	private Package createModelObjectPackage(Package element) {
 		return element;
 	}
 
@@ -290,8 +290,8 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * @return the complete Model Object
 	 * @generated
 	 */
-	private FClassDefinition createModelObjectFClassDefinition(
-			FClassDefinition element) {
+	private ClassDefinition createModelObjectClassDefinition(
+			ClassDefinition element) {
 		return element;
 	}
 
@@ -303,7 +303,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * @return the complete Model Object
 	 * @generated
 	 */
-	private FOperation createModelObjectFOperation(FOperation element) {
+	private Operation createModelObjectOperation(Operation element) {
 		return element;
 	}
 
@@ -315,7 +315,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * @return the complete Model Object
 	 * @generated
 	 */
-	private FTag createModelObjectFTag(FTag element) {
+	private Tag createModelObjectTag(Tag element) {
 		return element;
 	}
 
@@ -327,7 +327,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	 * @return the complete Model Object
 	 * @generated
 	 */
-	private FProperty createModelObjectFProperty(FProperty element) {
+	private Property createModelObjectProperty(Property element) {
 		return element;
 	}
 

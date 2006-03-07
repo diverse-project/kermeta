@@ -29,7 +29,7 @@ public class TagLinkEdgeCreationCommand extends CreateTypedEdgeCommand {
 	 * @generated
 	 */
 	public TagLinkEdgeCreationCommand(EditDomain domain, GraphEdge newObj,
-			GraphNode src, boolean needModelUpdate) {
+			GraphNode src, Boolean needModelUpdate) {
 		super(domain, newObj, src, needModelUpdate);
 	}
 

@@ -22,7 +22,7 @@ import org.topcased.modeler.editor.palette.ModelerCreationToolEntry;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
 import fr.irisa.triskell.kermeta.graphicaleditor.extensions.ExtendedGraphElementCreationFactory;
-import fr.irisa.triskell.kermeta.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 /**
  * This class extends StructurePaletteManager, so this latter class remains a totally generated
@@ -45,9 +45,9 @@ public class ExtendedStructurePaletteManager extends StructurePaletteManager {
 		ModelerCreationToolEntry objectTool;
 		CreationFactory factory;
 		String newObjTxt;
-		newObjTxt = "Standard Type Property";
+		newObjTxt = "Standard Property";
 		factory = new ExtendedGraphElementCreationFactory(getCreationUtils(),
-				StructurePackage.eINSTANCE.getFProperty());
+				StructurePackage.eINSTANCE.getProperty());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
 				factory, StructureImageRegistry.getImageDescriptor("FPROPERTY"),
 				null, 0, 0, 0, 0);

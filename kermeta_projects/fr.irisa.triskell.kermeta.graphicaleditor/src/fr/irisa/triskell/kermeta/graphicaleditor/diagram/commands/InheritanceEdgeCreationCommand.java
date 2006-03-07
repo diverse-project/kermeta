@@ -7,7 +7,7 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 
 /**
  * Inheritance edge creation command<br>
@@ -33,7 +33,7 @@ public class InheritanceEdgeCreationCommand extends CreateTypedEdgeCommand {
 	 * @generated
 	 */
 	public InheritanceEdgeCreationCommand(EditDomain domain, GraphEdge newObj,
-			GraphNode src, boolean needModelUpdate) {
+			GraphNode src, Boolean needModelUpdate) {
 		super(domain, newObj, src, needModelUpdate);
 	}
 
@@ -44,9 +44,9 @@ public class InheritanceEdgeCreationCommand extends CreateTypedEdgeCommand {
 	 * @generated NOT
 	 */
 	protected void redoModel() { 
-		FClassDefinition sourceFClassDefinition = (FClassDefinition) Utils.getElement(source);
-		FClassDefinition targetFClassDefinition = (FClassDefinition) Utils.getElement(target);
-		KermetaUtils.getDefault().addFSuperTypeToFClassDefinition(sourceFClassDefinition, targetFClassDefinition);
+		ClassDefinition sourceClassDefinition = (ClassDefinition) Utils.getElement(source);
+		ClassDefinition targetClassDefinition = (ClassDefinition) Utils.getElement(target);
+		KermetaUtils.getDefault().addSuperTypeToClassDefinition(sourceClassDefinition, targetClassDefinition);
 	}
 
 	/**
@@ -55,9 +55,9 @@ public class InheritanceEdgeCreationCommand extends CreateTypedEdgeCommand {
 	 * @generated NOT
 	 */
 	protected void undoModel() {
-        FClassDefinition sourceFClassDefinition = (FClassDefinition) Utils.getElement(source);
-        FClassDefinition targetFClassDefinition = (FClassDefinition) Utils.getElement(target);
-        KermetaUtils.getDefault().removeFSuperTypeFromFClassDefinition(sourceFClassDefinition, targetFClassDefinition);
+        ClassDefinition sourceClassDefinition = (ClassDefinition) Utils.getElement(source);
+        ClassDefinition targetClassDefinition = (ClassDefinition) Utils.getElement(target);
+        KermetaUtils.getDefault().removeSuperTypeFromClassDefinition(sourceClassDefinition, targetClassDefinition);
 	}
 
 }

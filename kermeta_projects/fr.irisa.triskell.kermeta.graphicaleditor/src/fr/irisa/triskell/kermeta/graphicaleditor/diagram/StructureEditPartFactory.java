@@ -1,14 +1,18 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
 import org.topcased.modeler.ModelerPropertyConstants;
 import org.topcased.modeler.di.model.Diagram;
+import org.topcased.modeler.di.model.EMFSemanticModelBridge;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.di.model.SimpleSemanticModelElement;
 import org.topcased.modeler.di.model.util.DIUtils;
+import org.topcased.modeler.edit.DiagramEditPart;
 import org.topcased.modeler.edit.EListEditPart;
 import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
@@ -16,21 +20,25 @@ import org.topcased.modeler.edit.GraphEdgeEditPart;
 import org.topcased.modeler.edit.GraphNodeEditPart;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.FClassDefinitionEditPart;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.FNamedElementEditPart;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.FOperationEditPart;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.FPackageEditPart;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.FPropertyEditPart;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.FPropertyEditPartNode;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.FTagEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.ClassDefinitionEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.NamedElementEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.OperationEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PackageEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PropertyEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PropertyEditPartNode;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.TagEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.StructureDiagramEditPart;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FNamedElement;
-import fr.irisa.triskell.kermeta.structure.FOperation;
-import fr.irisa.triskell.kermeta.structure.FPackage;
-import fr.irisa.triskell.kermeta.structure.FProperty;
-import fr.irisa.triskell.kermeta.structure.FTag;
-import fr.irisa.triskell.kermeta.structure.util.StructureSwitch;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.util.StructureSwitch;
+
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.*;
+import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 
 /**
  * Part Factory : associates a model object to its controller. <br>
@@ -48,17 +56,73 @@ public class StructureEditPartFactory implements EditPartFactory {
 	public EditPart createEditPart(EditPart context, Object model) {
 		if (model instanceof Diagram) {
 			return new StructureDiagramEditPart((Diagram) model);
-		}  
-		else if (model instanceof GraphNode) {
-			return createEditPartForNode(context, (GraphNode)model);
-		}
-		else if (model instanceof GraphEdge) {
+		} else if (model instanceof GraphNode) {
+			final GraphNode node = (GraphNode) model;
+			EObject element = Utils.getElement(node);
+			if (element != null) {
+				Object editPart = new StructureSwitch() {
+					public Object caseClassDefinition(ClassDefinition object) {
+						String feature = DIUtils
+								.getPropertyValue(
+										node,
+										ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
+						if (!"".equals(feature)) {
+							int featureID = Integer.parseInt(feature);
+							return new EListEditPart(node, object.eClass()
+									.getEStructuralFeature(featureID));
+						} else {
+							return new ClassDefinitionEditPart(node);
+						}
+					}
+					
+
+					public Object caseProperty(Property object) {
+						return new PropertyEditPartNode(node);
+					}
+
+					public Object casePrimitiveType(PrimitiveType object) {
+						return new PrimitiveTypeEditPart(node);
+					}
+
+					public Object caseNamedElement(NamedElement object) {
+						return new NamedElementEditPart(node);
+					}
+
+					public Object caseOperation(Operation object) {
+						return new OperationEditPart(node);
+					}
+
+					public Object casePackage(Package object) {
+						return new PackageEditPart(node);
+					}
+
+					public Object caseTag(Tag object) {
+						return new TagEditPart(node);
+					}
+
+					public Object defaultCase(EObject object) {
+						return new EMFGraphNodeEditPart(node);
+					}
+				}.doSwitch(element);
+
+				return (EditPart) editPart;
+			}
+
+			if (node.getSemanticModel() instanceof SimpleSemanticModelElement) {
+				if (((SimpleSemanticModelElement) node.getSemanticModel())
+						.getTypeInfo()
+						.equals(
+								StructureEditPolicyConstants.FPROPERTYASNODE_EDITPOLICY))
+					return new PropertyAsNodeEditPart(node);
+			}
+			return new GraphNodeEditPart(node);
+		} else if (model instanceof GraphEdge) {
 			final GraphEdge edge = (GraphEdge) model;
 			EObject element = Utils.getElement(edge);
 			if (element != null) {
 				Object editPart = new StructureSwitch() {
-					public Object caseFProperty(FProperty object) {
-						return new FPropertyEditPart(edge);
+					public Object caseProperty(Property object) {
+						return new PropertyEditPart(edge);
 					}
 
 					public Object defaultCase(EObject object) {
@@ -70,6 +134,15 @@ public class StructureEditPartFactory implements EditPartFactory {
 			}
 
 			if (edge.getSemanticModel() instanceof SimpleSemanticModelElement) {
+				if (((SimpleSemanticModelElement) edge.getSemanticModel())
+						.getTypeInfo()
+						.equals(
+								StructureEditPolicyConstants.INHERITANCE_EDITPOLICY))
+					return new InheritanceEditPart(edge);
+				if (((SimpleSemanticModelElement) edge.getSemanticModel())
+						.getTypeInfo()
+						.equals(StructureEditPolicyConstants.TAGLINK_EDITPOLICY))
+					return new TagLinkEditPart(edge);
 			}
 
 			return new GraphEdgeEditPart((GraphEdge) model);
@@ -80,7 +153,7 @@ public class StructureEditPartFactory implements EditPartFactory {
 						+ model.getClass().getName()
 						+ "' model element. Check StructureEditPartFactory#createEditPart(EditPart,Object) class");
 	}
-	
+
 	/** 
 	 * This method is called by createEditPart but since
 	 * we want createEditPart to be re-generated if necessary, developper has to follow
@@ -92,58 +165,55 @@ public class StructureEditPartFactory implements EditPartFactory {
 	 * - replace it by createEditPartForNode method, adapted if needed by the generated
 	 * code in createEditPart :} except for the code that is commented (read it!), mainly:
 	 * 
-	 *   - handling of FProperty (here, it is handled as a node -- in the generated part 
+	 *   - handling of Property (here, it is handled as a node -- in the generated part 
 	 *   that you don't have to modify it is handled  as an edge.) 
 	 * 
 	 */
-	public EditPart createEditPartForNode(EditPart context, GraphNode model) 
-	{
+	public EditPart createEditPartForNode(EditPart context, GraphNode model) {
 		EObject element = Utils.getElement(model);
 		final GraphNode node = model; // anonymous class requirement
 		if (element != null) {
 			Object editPart = new StructureSwitch() {
-				public Object caseFPackage(FPackage object) {
-					return new FPackageEditPart(node);
+				public Object casePackage(Package object) {
+					return new PackageEditPart(node);
 				}
-				
-				public Object caseFNamedElement(FNamedElement object) {
-					return new FNamedElementEditPart(node);
+
+				public Object caseNamedElement(NamedElement object) {
+					return new NamedElementEditPart(node);
 				}
-				
-				public Object caseFClassDefinition(FClassDefinition object) {
-					String feature = DIUtils
-					.getPropertyValue(
-							node,
+
+				public Object caseClassDefinition(ClassDefinition object) {
+					String feature = DIUtils.getPropertyValue(node,
 							ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
 					if (!"".equals(feature)) {
 						int featureID = Integer.parseInt(feature);
 						return new EListEditPart(node, object.eClass()
 								.getEStructuralFeature(featureID));
 					} else {
-						return new FClassDefinitionEditPart(node);
+						return new ClassDefinitionEditPart(node);
 					}
 				}
-				
-				public Object caseFProperty(FProperty object) {
-					return new FPropertyEditPartNode(node);
+
+				public Object caseProperty(Property object) {
+					return new PropertyEditPartNode(node);
 				}
-				
-				public Object caseFOperation(FOperation object) {
-					return new FOperationEditPart(node);
+
+				public Object caseOperation(Operation object) {
+					return new OperationEditPart(node);
 				}
-				
-				public Object caseFTag(FTag object) {
-					return new FTagEditPart(node);
+
+				public Object caseTag(Tag object) {
+					return new TagEditPart(node);
 				}
-				
+
 				public Object defaultCase(EObject object) {
 					return new EMFGraphNodeEditPart(node);
 				}
 			}.doSwitch(element);
-			
+
 			return (EditPart) editPart;
 		}
-		
+
 		if (node.getSemanticModel() instanceof SimpleSemanticModelElement) {
 		}
 		return new GraphNodeEditPart(node);
