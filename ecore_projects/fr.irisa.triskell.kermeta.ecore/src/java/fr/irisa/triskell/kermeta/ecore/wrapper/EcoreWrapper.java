@@ -1,4 +1,4 @@
-/* $Id: EcoreWrapper.java,v 1.1 2006-02-07 16:11:10 zdrey Exp $
+/* $Id: EcoreWrapper.java,v 1.2 2006-03-07 22:07:31 barais Exp $
  * Project   : fr.irisa.triskell.kermeta.ecore (First iteration)
  * File      : EcoreWrapper.java
  * License   : EPL
@@ -9,27 +9,20 @@
  */
 package fr.irisa.triskell.kermeta.ecore.wrapper;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 
+import com.sun.org.apache.bcel.internal.generic.Type;
+
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
-import fr.irisa.triskell.kermeta.structure.FClass;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
-import fr.irisa.triskell.kermeta.structure.FObject;
-import fr.irisa.triskell.kermeta.structure.FPrimitiveType;
-import fr.irisa.triskell.kermeta.structure.FType;
-import fr.irisa.triskell.kermeta.structure.FTypeDefinition;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 
 /**
@@ -57,7 +50,7 @@ public class EcoreWrapper {
 	    String metaclass_name = getEQualifiedName(metaclass);
 	    // Create the RuntimeObject encaspulating the FClass corresponding to the EClass given by its name :
 	    // Reconstruct from FClass -> FClassDefinition (meta meta levels) -> Our EClass
-	    FType ftype = getMetaClassByName(metaclass_name, memory);
+	    Type ftype = getMetaClassByName(metaclass_name, memory);
 	    if (ftype == null)
 	    {
 	    	KermetaUnit kunit = memory.getUnit();
@@ -75,7 +68,7 @@ public class EcoreWrapper {
 	    			null);
 	    }
 	    else {
-	    	FClass fclass = (FClass)ftype;
+	    	fr.irisa.triskell.kermeta.language.structure.Class fclass = (	fr.irisa.triskell.kermeta.language.structure.Class)ftype;
 	    	result = memory.getROFactory().createMetaClass(fclass);
 	    }
 	    return result;
@@ -104,10 +97,10 @@ public class EcoreWrapper {
 	 * ecore metamodel if it was not found in the main kermeta unit. 
 	 * @param name
 	 */
-	protected static FType getMetaClassByName(String name, RuntimeMemory memory)
+	protected static Type getMetaClassByName(String name, RuntimeMemory memory)
 	{
-	    FTypeDefinition etype_cdef;
-	    FType ftype = null;
+	    TypeDefinition etype_cdef;
+	    Type ftype = null;
 	    etype_cdef = memory.getUnit().getTypeDefinitionByName(name);
 /*        if (etype_cdef == null) {
         	// Try to find in kermeta package...
@@ -116,14 +109,14 @@ public class EcoreWrapper {
 	    if (etype_cdef!= null)
 	    {
 	    	// pseudo object to get its type?
-	    	if (FClassDefinition.class.isInstance(etype_cdef))
+	    	if (ClassDefinition.class.isInstance(etype_cdef))
 	    	{
-		    	ftype = InheritanceSearch.getFClassForClassDefinition((FClassDefinition)etype_cdef);
+		    	ftype = (Type) InheritanceSearch.getFClassForClassDefinition((ClassDefinition)etype_cdef);
 	    	}
 	    	// Is it a primitive type?
-	    	else if (FPrimitiveType.class.isInstance(etype_cdef))
+	    	else if (PrimitiveType.class.isInstance(etype_cdef))
 	    	{
-	    	    ftype = ((FPrimitiveType)etype_cdef).getFInstanceType();
+	    	    ftype = (Type) ((PrimitiveType)etype_cdef).getInstanceType();
 	    	}
 	    }
 	    else
