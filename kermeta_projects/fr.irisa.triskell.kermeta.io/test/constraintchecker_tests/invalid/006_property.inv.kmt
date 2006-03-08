@@ -1,0 +1,31 @@
+/* $Id: 006_property.inv.kmt,v 1.1 2006-03-08 16:47:18 zdrey Exp $ */
+
+// Test of constraints on operations
+// When constraints are checked, errors
+
+package root_package;
+using kermeta::standard
+
+
+
+class C1
+{
+	reference p1 : String
+}
+
+
+class C1bis 
+{
+
+}
+
+
+class C2 inherits C1
+{
+	reference p1 : Integer
+}
+
+class C3 inherits C1
+{
+	property p1 : Integer
+}
