@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.11 2005-11-28 12:46:43 dvojtise Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.12 2006-03-08 12:23:25 zdrey Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -38,6 +38,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 
     private Editor _editor;
     private IDocument _document;
+    private final static int LINE_MAX_SIZE = 80;
 	
     public EditorReconcilingStrategy(Editor editor)
     {
@@ -174,7 +175,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         
         if (offset > 0) offset--;
         
-        map.put("message", message.getMessage());
+        map.put("message", formatMessage(message.getMessage()));
         if(message instanceof KMUnitError)
             map.put("severity", new Integer(2));
         else
@@ -200,5 +201,23 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         return "org.eclipse.core.resources.problemmarker";
     }
 	
+    /** split message so that it is displayed in many lines instead of only one */
+    public static String formatMessage(String message)
+    {
+    	String result = "";
+    	int line_start=0; int line_end=0; String ret_char = "\n";
+    	if (message.length() >  LINE_MAX_SIZE)
+    	{
+    		int linenumber = message.length()/LINE_MAX_SIZE;
+    		for (int i=0; i<=linenumber; i++)
+    		{
+    			line_start = LINE_MAX_SIZE*i;
+    			line_end   = LINE_MAX_SIZE*(i+1);
+    			if (message.length()<line_end) {line_end = message.length();ret_char="";}
+    			result += message.substring(line_start, line_end) + ret_char ;
+    		}
+    	}
+    	return result;
+    }
 
 }
