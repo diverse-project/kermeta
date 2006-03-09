@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.52 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.53 2006-03-09 08:08:20 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -876,13 +876,26 @@ public abstract class KermetaUnit {
 	    
 	}
 	
-	public ArrayList getAllProperties(ClassDefinition cls) {
-		ArrayList result = new ArrayList();
-		result.addAll(cls.getOwnedAttribute());
-		// search recursively in super classes
+	/**
+	 * @param classDefinition
+	 * @return the list of all properties defined for the given class definition. This includes the inherited properties
+	 */
+	public ArrayList<Property> getAllProperties(ClassDefinition cls) {
+		ArrayList<Property> result = new ArrayList<Property>();
+		// ensures that each property is added only once.
+		Iterator itAtt = cls.getOwnedAttribute().iterator();
+		while(itAtt.hasNext()){
+			Property prop = (Property) itAtt.next();
+			if(!result.contains(prop)) result.add(prop);
+		}
 		Iterator it = cls.getSuperType().iterator();
 		while(it.hasNext()) {
-			result.addAll(getAllProperties((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition()));
+			//ensures that each property is added only once.
+			Iterator itAtt2 = getAllProperties((ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)it.next()).getTypeDefinition()).iterator();
+			while(itAtt2.hasNext()){
+				Property prop = (Property) itAtt2.next();
+				if(!result.contains(prop)) result.add(prop);
+			}
 		}
 		return result;
 	}
