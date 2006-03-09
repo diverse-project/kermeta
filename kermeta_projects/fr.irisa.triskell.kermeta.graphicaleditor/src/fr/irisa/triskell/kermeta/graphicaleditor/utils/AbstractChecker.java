@@ -1,4 +1,4 @@
-/* $Id: AbstractChecker.java,v 1.1 2006-03-08 17:17:25 zdrey Exp $
+/* $Id: AbstractChecker.java,v 1.2 2006-03-09 18:31:48 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : AbstractChecker.java
  * License    : EPL
@@ -19,7 +19,7 @@ import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
  * Pattern command for constraint checking on the model elements of a model
- *
+ * (Not useful yet?)
  */
 public abstract class AbstractChecker {
 	
@@ -28,6 +28,10 @@ public abstract class AbstractChecker {
 	protected fr.irisa.triskell.kermeta.language.structure.Object element;
 	protected fr.irisa.triskell.kermeta.language.structure.Object context;
 	
+
+	public static final String ERROR_TYPE = "CONSTRAINT-CHECKER";
+	
+	/** KermetaUnit is in fact not very useful yet either ...*/
 	public AbstractChecker(KermetaUnit unit, 
 			fr.irisa.triskell.kermeta.language.structure.Object elt,
 			fr.irisa.triskell.kermeta.language.structure.Object context)
@@ -39,4 +43,10 @@ public abstract class AbstractChecker {
 	}
 	
 	public abstract boolean check();
+	
+	/** A shortcut to add messages on the builder kermeta unit */
+	public void addError(String msg, fr.irisa.triskell.kermeta.language.structure.Object node)
+	{
+		builder.messages.addError(ERROR_TYPE + ": " + msg, node);	
+	}
 }

@@ -1,4 +1,4 @@
-/* $Id: ConstraintChecker.java,v 1.1 2006-03-08 17:17:25 zdrey Exp $
+/* $Id: ConstraintChecker.java,v 1.2 2006-03-09 18:31:48 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -41,6 +41,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
  */
 public class ConstraintChecker extends KermetaOptimizedVisitor {
 
+	public static final String NAME_ERROR = "An element is unnamed";
 	/*
 	 * Initialization methods
 	 */
@@ -66,8 +67,14 @@ public class ConstraintChecker extends KermetaOptimizedVisitor {
 		builder = createUnit();
 	}
 	
+	public ConstraintChecker(KermetaUnit kunit)
+	{
+		builder = kunit;
+	}
+	
 	/**
-	 * Default Unit creation. Create the kermetaUnit linked to the .km saved model
+	 * Default Unit creation. Create the kermetaUnit linked to the saved model.km
+	 * Called in the constructor.
 	 * @return KermetaUnit
 	 */
 	protected KermetaUnit createUnit() {
@@ -103,7 +110,13 @@ public class ConstraintChecker extends KermetaOptimizedVisitor {
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitOperation(fr.irisa.triskell.kermeta.language.structure.Operation)
 	 */
 	public Object visitOperation(Operation operation) {
-		return new OperationChecker(builder, operation, builder.current_class).check();
+		builder.current_operation = operation;
+		boolean result = false;
+		result = new OperationChecker(builder, operation, builder.current_class).check();
+		// This condition will be useful if we check the body of operations...
+		// If we detected an inconsistency, we don't need to visit further..
+		if (result==false) return Boolean.FALSE;
+		else return super.visitOperation(operation);
 	}
 
 	/**
@@ -114,10 +127,12 @@ public class ConstraintChecker extends KermetaOptimizedVisitor {
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitPackage(fr.irisa.triskell.kermeta.language.structure.Package)
 	 */
 	public Object visitPackage(Package node) {
+		builder.current_package = node;
 		// A package must have a not empty name
 		if (node.getName()==null || node.getName().length()==0)
 		{
-			builder.messages.addMessage(new KMUnitMessage("Constraint : There is an unnamed package; " + node, node));
+			addError(NAME_ERROR, node);
+			return new Boolean(false);
 		}
 		return super.visitPackage(node);
 	}
@@ -128,11 +143,21 @@ public class ConstraintChecker extends KermetaOptimizedVisitor {
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitProperty(fr.irisa.triskell.kermeta.language.structure.Property)
 	 */
 	public Object visitProperty(Property node) {
-		return new OperationChecker(builder, node, builder.current_class).check();
+		Boolean result = null;
+		System.out.println("VisitProp!!");
+		builder.current_property = node;
+		result = new Boolean(new PropertyChecker(builder, node, builder.current_class).check());
+		if (result == Boolean.TRUE) 
+			return super.visitProperty(node);
+		
+		return result;
 	}
 
-
-	
+	/** A shortcut to add messages on the builder kermeta unit */
+	public void addError(String msg, fr.irisa.triskell.kermeta.language.structure.Object node)
+	{
+		builder.messages.addError(AbstractChecker.ERROR_TYPE + ": " + msg, node);	
+	}
 	
 	
 }

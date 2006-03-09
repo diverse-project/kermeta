@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.1 2006-03-08 17:17:25 zdrey Exp $
+/* $Id: PropertyChecker.java,v 1.2 2006-03-09 18:31:48 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -18,6 +18,7 @@ package fr.irisa.triskell.kermeta.graphicaleditor.utils;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -40,6 +41,16 @@ public class PropertyChecker extends AbstractChecker {
 	protected ClassDefinition classDefinition;
 	protected Property property;
  
+	// String messages
+	/** The opposite prop. of the opposite prop. *b* of a property *a* must be equals to the property *a* */
+	public static final String OPP_ERROR = "Opposite mismatch  : the association is illformed. ";
+	/** A composite property cannot have at its opposite property a multiplicity different than [1..1] */
+	public static final String MULT_ERROR = 
+		"Composition multiplicity problem : change the multiplicity or do not use composition"+
+		" on the other end of the association. ";
+	public static final String COMP_ERROR = "Double composition problem (container contained by its content)";
+	
+	
 	
 	public PropertyChecker(KermetaUnit unit, 
 			fr.irisa.triskell.kermeta.language.structure.Object property, 
@@ -47,6 +58,7 @@ public class PropertyChecker extends AbstractChecker {
 	{
 		super(unit, property, context);
 		classDefinition = (ClassDefinition)context;
+		this.property = (Property)property; 
 		
 	}
 	
@@ -59,10 +71,18 @@ public class PropertyChecker extends AbstractChecker {
 	{
 		boolean result = false;
 		// if '&&' is ordered, it's good
+		// checking methods are ordered according to their increasing complexity
 		result =
 			checkPropertyMultiplicity() &&
 			checkPropertyIsUnique() &&
-			checkPropertyIsDerived();
+			checkPropertyIsDerived() &&
+			checkPropertyOpposite()
+			;
+		if (result==false) 
+		{
+			System.out.println("Property is null??? : " + property);
+			System.err.println("Property:" + property.getName());
+		}
 		return result;
 	}
 
@@ -93,7 +113,7 @@ public class PropertyChecker extends AbstractChecker {
 	}
 	
 	/**
-	 * Constraint: a *not* derived property cannot have getter and setter body
+	 * Constraint: a *not* derived property cannot have getter nor a setter body
 	 * An error is raised if this constraint is not verified, but only syntactically...
 	 * */
 	protected boolean checkPropertyIsDerived()
@@ -112,8 +132,58 @@ public class PropertyChecker extends AbstractChecker {
 	 */
 	protected boolean checkPropertyMultiplicity()
 	{
-		return property.getUpper()!=0;
+		return (property.getUpper()!=0 && property.getUpper()>property.getLower());
 	}
 	
+	/**
+	 * In the graphical editor, user can let the type as null.
+	 * TODO We do not impose yet a null type to be the Void type. Should we?? 
+	 */
+	protected boolean checkPropertyType()
+	{
+		return (property.getType()!=null);
+	}
+	
+	/** 
+	 * didier's
+	 * @param prop
+	 */
+	 public boolean checkPropertyOpposite()
+	 {
+		 boolean result = true;
+		 if(property.getOpposite() != null)
+		 {
+			 KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
+			 // Opposite mismatch
+			 if(property.getOpposite().getOpposite() != property)
+			 {
+				 builder.messages.addError(OPP_ERROR
+					 + pp .ppSimplifiedPropertyInContext(property), property);
+				 if(property.getOpposite().getOpposite() == null)
+					 builder.messages.addError(OPP_ERROR
+					+ pp.ppSimplifiedPropertyInContext(property.getOpposite()), property.getOpposite());
+				 result = false;
+			 }
+			 // Composition multiplicity
+			 if(property.getOpposite().isIsComposite()){
+				 if(property.getUpper() != 1){
+					 builder.messages.addError(MULT_ERROR
+					 + pp.ppSimplifiedPropertyInContext(property), property);
+					 result = false;
+				 }
+			 }
+			 // Double Composition (association with diamond on both ends) 
+			 if(property.getOpposite().isIsComposite()){
+				 if(property.isIsComposite()){
+					 // message on this end only, the other end will be checked too from the other class
+					 builder.messages.addError(COMP_ERROR 
+							 + pp.ppSimplifiedPropertyInContext(property), property);
+					 result = false;
+				 }
+			 }
+		 }
+		 return result;
+	 }
+	 
 	
 }

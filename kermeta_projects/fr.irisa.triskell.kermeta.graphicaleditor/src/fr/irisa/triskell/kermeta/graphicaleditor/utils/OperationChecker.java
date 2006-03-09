@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.1 2006-03-08 17:17:25 zdrey Exp $
+/* $Id: OperationChecker.java,v 1.2 2006-03-09 18:31:48 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -18,6 +18,8 @@ package fr.irisa.triskell.kermeta.graphicaleditor.utils;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.sound.midi.SysexMessage;
+
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -27,11 +29,11 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**
- *
  * Defaults : some comparison tests need to be done using KM2KMTPrettyPrinter..
  * This is not the most efficient way but there is no other.
  * (but simpler to test the types conformity)
  * We also have to discuss if some constraints are more type-checking related or not
+ * Principle : the check stops as soon as a constraint is violated.
  */
 public class OperationChecker extends AbstractChecker {
 
@@ -45,7 +47,8 @@ public class OperationChecker extends AbstractChecker {
 			fr.irisa.triskell.kermeta.language.structure.Object context)
 	{
 		super(unit, operation, context);
-		classDefinition = (ClassDefinition)context;
+		this.classDefinition = (ClassDefinition)context;
+		this.operation = (Operation)operation;
 		
 	}
 	
@@ -66,25 +69,29 @@ public class OperationChecker extends AbstractChecker {
 
 	/** 
 	 * Constraint: redefinition must be invariant
+	 * 
 	 * @return true if operation signature is conform to 
 	 * super operations if they exist.
 	 */
 	public boolean checkOperationSignature()
 	{
 		boolean result = false;
+		Object found = null;
 		List ops = builder.getAllOperations(classDefinition);
 		Iterator<Operation> it = ops.iterator();
-		while (it.hasNext())
+		while (it.hasNext() && found==null )
 		{
 			Operation next = it.next();
 			// If there is a super operation of the given operation
 			if (next.getName().equals(operation.getName()))
 			{
+				found = next;
 				result = checkParameters(operation, next) &&
 						 checkTypeParameters(operation, next) &&
 						 checkReturnType(operation, next);
 			}
 		}
+		System.err.println("Bad Signature : " + pprinter.accept(operation));
 		return result;
 	}
 	
@@ -105,7 +112,8 @@ public class OperationChecker extends AbstractChecker {
 		boolean result = true;
 		// An operation cannot be defined twice in the same class
 		if (builder.getOperationByName(classDefinition, operation.getName()) != null) {
-			builder.messages.addMessage(new KMUnitMessage("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of operation '"+builder.current_operation.getName()+"'.",operation));
+			addError("PASS 3 : Class '"+builder.current_class.getName()+"' " +
+					"duplicate definition of operation '"+builder.current_operation.getName()+"'.",operation);
 			result = false;
 		}
 		return result;
@@ -134,6 +142,10 @@ public class OperationChecker extends AbstractChecker {
 				ind2 += 1;
 			}
 		}
+		// Message to print!
+		System.err.println("Parameters of operation :" + op1.getName() + "are not conform "
+		+ pprinter.ppComaSeparatedNodes(op1.getOwnedParameter())
+		);
 		return isConform;
 	}
 	
@@ -170,12 +182,11 @@ public class OperationChecker extends AbstractChecker {
 		fr.irisa.triskell.kermeta.language.structure.Type t2 = tv2.getSupertype();
 		// (null value is not included in equals() operation cases.)
 		if (t1!=null && t2!=null) isConform = TypeEqualityChecker.equals(t1, t2);
-		else if (t1==null && t2==null) isConform = true;
-		else isConform = false;
+		else isConform = (t1==null && t2==null);
 		return isConform;
 	}
 	
-	/** Just to have a pretty check<blah>*/
+	/** Just to have a pretty check&lt;blah&gt;*/
 	protected boolean checkReturnType(Operation op1, Operation op2)
 	{
 		return TypeEqualityChecker.equals(op1.getType(),op2.getType());

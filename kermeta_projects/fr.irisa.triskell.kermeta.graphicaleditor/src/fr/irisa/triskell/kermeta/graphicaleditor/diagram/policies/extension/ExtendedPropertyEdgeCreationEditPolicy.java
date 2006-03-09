@@ -1,4 +1,4 @@
-/* $Id: ExtendedPropertyEdgeCreationEditPolicy.java,v 1.1 2006-03-07 17:30:33 zdrey Exp $
+/* $Id: ExtendedPropertyEdgeCreationEditPolicy.java,v 1.2 2006-03-09 18:31:48 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : extendedInheritanceEdgeCreationEditPolicy.java
  * License   : EPL
@@ -10,11 +10,12 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.extension;
 
 import org.eclipse.emf.ecore.EObject;
+import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphNode;
-import org.topcased.modeler.edit.policies.InheritanceCreationEditPolicy;
 import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.InheritanceEdgeCreationEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PropertyEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.*;
 
@@ -26,7 +27,7 @@ import fr.irisa.triskell.kermeta.language.structure.*;
  *
  */
 public class ExtendedPropertyEdgeCreationEditPolicy extends
-		InheritanceEdgeCreationEditPolicy {
+		PropertyEdgeCreationEditPolicy {
 
 	public ExtendedPropertyEdgeCreationEditPolicy() {
 		super();
@@ -45,6 +46,10 @@ public class ExtendedPropertyEdgeCreationEditPolicy extends
 			) {
 				return true;
 			}
+		}
+		else
+		{
+			System.err.println("Y a un problem");
 		}
 		return false;
 	}
@@ -73,6 +78,26 @@ public class ExtendedPropertyEdgeCreationEditPolicy extends
 				isvalid = false;
 		}
 		return isvalid;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.InheritanceEdgeCreationEditPolicy#checkEdge(org.topcased.modeler.di.model.GraphEdge)
+	 */
+	@Override
+	protected boolean checkEdge(GraphEdge edge) {
+		// TODO Auto-generated method stub
+		return super.checkEdge(edge);
+	}
+
+
+	/* (non-Javadoc)
+	 * @see fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.InheritanceEdgeCreationEditPolicy#checkSource(org.topcased.modeler.di.model.GraphNode)
+	 */
+	@Override
+	protected boolean checkSource(GraphNode source) {
+		// TODO Auto-generated method stub
+		return super.checkSource(source);
 	}
 	
 	
