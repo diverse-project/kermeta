@@ -1,4 +1,4 @@
-/* $Id: KermetaClassGraphBuilder.java,v 1.9 2006-03-03 15:24:04 dvojtise Exp $
+/* $Id: KermetaClassGraphBuilder.java,v 1.10 2006-03-09 23:02:22 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaClassGraphBuilder.java
  * License : EPL
@@ -341,8 +341,16 @@ public class KermetaClassGraphBuilder extends KermetaOptimizedVisitor{
 				n1 = (ClassNode)graphUnitMapping.get(theClass);
 				return null;
 			}
-			else
-				n1 = (ClassNode) tgpHelper.addClassNode();
+			else {
+				// check name doublon
+				Collection c = this.tgPanel.findNodesByLabel(KMTHelper.getQualifiedName(theClass));
+				if(c != null) {
+					//TouchNavigatorPlugin.internalLog.debug("There is already a node named "+KMTHelper.getQualifiedName(theClass));
+					n1 = (ClassNode)c.iterator().next();
+				}
+				else
+					n1 = (ClassNode) tgpHelper.addClassNode();
+			}
 			graphUnitMapping.put(theClass, n1);
 			n1.setLabel(KMTHelper.getQualifiedName(theClass));
 			n1.setShortLabel (theClass.getName());
