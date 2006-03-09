@@ -10,7 +10,7 @@
       </category>
       <view
             name="Kermeta TouchNavigator View"
-            icon="icons/sample.gif"
+            icon="icons/touchgraph.gif"
             category="fr.irisa.triskell.kermeta.touchnavigator"
             class="fr.irisa.triskell.kermeta.touchnavigator.views.TouchClassView"
             id="fr.irisa.triskell.kermeta.touchnavigator.views.TouchView">
