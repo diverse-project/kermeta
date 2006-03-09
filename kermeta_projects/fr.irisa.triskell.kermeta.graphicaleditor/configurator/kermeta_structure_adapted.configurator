@@ -24,13 +24,13 @@
     <parts xsi:type="org.topcased.modeler.configurator:NodePartConfiguration" object="//@objects.10" type="Label"/>
     <parts xsi:type="org.topcased.modeler.configurator:EdgePartConfiguration" object="//@objects.4" sourceDecoration="DIAMOND" targetDecoration="ARROW" directEditable="//@diagrams.0/@parts.7/@edgeObjects.0">
       <sourceTargetCouple containerType="SOURCE" autoRef="true" sourceNode="//@diagrams.0/@parts.0" targetNode="//@diagrams.0/@parts.0">
-        <containerObject href="kermeta_structure.genmodel#//structure/FClassDefinition"/>
-        <containerRef xsi:type="ecore:EReference" href="kermeta_structure.ecore#//FClassDefinition/fOwnedAttributes"/>
-        <refSourceToEdge xsi:type="ecore:EReference" href="kermeta_structure.ecore#//FClassDefinition/fOwnedAttributes"/>
-        <refEdgeToTarget xsi:type="ecore:EReference" href="kermeta_structure.ecore#//FProperty/fOwningClass"/>
+        <containerObject href="kermeta_structure.genmodel#//structure/ClassDefinition"/>
+        <containerRef xsi:type="ecore:EReference" href="kermeta_structure.ecore#//ClassDefinition/ownedAttribute"/>
+        <refSourceToEdge xsi:type="ecore:EReference" href="kermeta_structure.ecore#//ClassDefinition/ownedAttribute"/>
+        <refEdgeToTarget xsi:type="ecore:EReference" href="kermeta_structure.ecore#//Property/owningClass"/>
       </sourceTargetCouple>
-      <edgeObjects type="Target" id="fName">
-        <eStructuralFeature xsi:type="ecore:EAttribute" href="kermeta_structure.ecore#//FNamedElement/fName"/>
+      <edgeObjects type="Middle" id="name">
+        <eStructuralFeature xsi:type="ecore:EAttribute" href="kermeta_structure.ecore#//NamedElement/name"/>
       </edgeObjects>
     </parts>
     <parts xsi:type="org.topcased.modeler.configurator:EdgePartConfiguration" object="//@objects.8" targetDecoration="TRIANGLE" defaultRouter="TreeRouter">
@@ -41,30 +41,30 @@
     </parts>
   </diagrams>
   <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
-    <genClass href="kermeta_structure.genmodel#//structure/FClassDefinition"/>
+    <genClass href="kermeta_structure.genmodel#//structure/ClassDefinition"/>
   </objects>
   <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
-    <genClass href="kermeta_structure.genmodel#//structure/FNamedElement"/>
+    <genClass href="kermeta_structure.genmodel#//structure/NamedElement"/>
   </objects>
   <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
-    <genClass href="kermeta_structure.genmodel#//structure/FOperation"/>
+    <genClass href="kermeta_structure.genmodel#//structure/Operation"/>
   </objects>
   <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
-    <genClass href="kermeta_structure.genmodel#//structure/FPackage"/>
+    <genClass href="kermeta_structure.genmodel#//structure/Package"/>
   </objects>
   <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
-    <genClass href="kermeta_structure.genmodel#//structure/FProperty"/>
+    <genClass href="kermeta_structure.genmodel#//structure/Property"/>
   </objects>
   <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
-    <genClass href="kermeta_structure.genmodel#//structure/FMultiplicityElement"/>
+    <genClass href="kermeta_structure.genmodel#//structure/MultiplicityElement"/>
   </objects>
   <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
-    <genClass href="kermeta_structure.genmodel#//structure/FPrimitiveType"/>
+    <genClass href="kermeta_structure.genmodel#//structure/PrimitiveType"/>
   </objects>
   <objects xsi:type="org.topcased.modeler.configurator:ModelObjectConfiguration">
-    <genClass href="kermeta_structure.genmodel#//structure/FTag"/>
+    <genClass href="kermeta_structure.genmodel#//structure/Tag"/>
   </objects>
   <objects xsi:type="org.topcased.modeler.configurator:SimpleObjectConfiguration" name="Inheritance"/>
   <objects xsi:type="org.topcased.modeler.configurator:SimpleObjectConfiguration" name="TagLink"/>
-  <objects xsi:type="org.topcased.modeler.configurator:SimpleObjectConfiguration" name="FPropertyAsNode"/>
+  <objects xsi:type="org.topcased.modeler.configurator:SimpleObjectConfiguration" name="PropertyAsNode"/>
 </org.topcased.modeler.configurator:EditorConfiguration>
