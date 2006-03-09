@@ -1,4 +1,4 @@
-/* $Id: EcoreWrapper.java,v 1.2 2006-03-07 22:07:31 barais Exp $
+/* $Id: EcoreWrapper.java,v 1.3 2006-03-09 12:26:50 jsteel Exp $
  * Project   : fr.irisa.triskell.kermeta.ecore (First iteration)
  * File      : EcoreWrapper.java
  * License   : EPL
@@ -13,8 +13,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 
-import com.sun.org.apache.bcel.internal.generic.Type;
-
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
@@ -23,6 +21,7 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 
 /**
@@ -111,12 +110,12 @@ public class EcoreWrapper {
 	    	// pseudo object to get its type?
 	    	if (ClassDefinition.class.isInstance(etype_cdef))
 	    	{
-		    	ftype = (Type) InheritanceSearch.getFClassForClassDefinition((ClassDefinition)etype_cdef);
+		    	ftype = InheritanceSearch.getFClassForClassDefinition((ClassDefinition)etype_cdef);
 	    	}
 	    	// Is it a primitive type?
 	    	else if (PrimitiveType.class.isInstance(etype_cdef))
 	    	{
-	    	    ftype = (Type) ((PrimitiveType)etype_cdef).getInstanceType();
+	    	    ftype = ((PrimitiveType)etype_cdef).getInstanceType();
 	    	}
 	    }
 	    else
