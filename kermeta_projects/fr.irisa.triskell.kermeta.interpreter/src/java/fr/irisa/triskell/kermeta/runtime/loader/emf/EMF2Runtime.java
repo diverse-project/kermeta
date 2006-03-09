@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.32 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.33 2006-03-09 16:06:27 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
+//import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -565,21 +565,39 @@ public class EMF2Runtime {
 	    	String  fname  = feature.getName();
 	    	EClassifier etype = feature.getEType();
 	    	Type ftype = getMetaClassByName(unit.getEQualifiedName(etype), unit);
-	    	Property fprop = rofactory.getMemory().getUnit().findPropertyByName((ClassDefinition) fc.getTypeDefinition(), fname);
-	    	if( fprop == null){
-	    		String errmsg = "property set failed ! Not able to find "+fname+" property on class " + fc.getTypeDefinition().getName() +
-	    			" ; known properties are : ";
-	    		EList props = ((ClassDefinition)fc.getTypeDefinition()).getOwnedAttribute();
-	    		for (int i=0; i<props.size(); i++) {
-	    			Property prop = (Property)props.get(i);
-	    			errmsg += prop.getName() + ", ";
-	    		} 
-    			internalLog.error(errmsg);       	
+	    	Property fprop = findProperty(rofactory, (ClassDefinition) fc.getTypeDefinition(), fname);
+	    	//Property fprop = rofactory.getMemory().getUnit().findPropertyByName((ClassDefinition) fc.getTypeDefinition(), fname);
+	    	if( fprop == null){	    		
+    			// patch for bug #595
+    			if(fname.compareTo("eAnnotations")==0)
+        		{
+    				// warn the user only in case of data, don't bother him if this has no influence on his work
+    				Object fvalue = eObject.eGet(feature);
+    				if (fvalue instanceof EList)
+    	    		{
+    					if(((EList)fvalue).size()!=0){
+    	    				internalLog.error("Bug #595 : eAnnotation cannot be loaded !");		
+    					}
+    	    		} 
+    				break;
+        		}
+    			String errmsg = "property set failed ! Not able to find "+fname+" property on class " + fc.getTypeDefinition().getName() +
+    			" ; known properties are : ";
+    			//	EList props = ((ClassDefinition)fc.getTypeDefinition()).getOwnedAttribute();
+    			Iterator itProps = rofactory.getMemory().getUnit().getAllProperties((ClassDefinition)fc.getTypeDefinition()).iterator();
+    			while(itProps.hasNext()) {
+    				Property prop = (Property)itProps.next();
+    				errmsg += prop.getName() + ", ";
+    			}
+    			errmsg += "\n with value \"" + eObject.eGet(feature)+"\"";
+    			errmsg += "\nfeature == " + feature;
+    			internalLog.error(errmsg); 
     			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
     					errmsg,
     					interpreter,
     					memory,
     					null);
+	    		
 	    	}
 	    	RuntimeObject roprop = rofactory.getMemory().getRuntimeObjectForFObject(fprop);
 	    	
@@ -651,6 +669,27 @@ public class EMF2Runtime {
 	    // Find the value of the structural features and populate the properties.
 	}
 	
+	/**
+	 * retreives the property from its names.
+	 * Also deal with "non natural" properties like the one inherited from the ecore EModelElement that is inherited by all model element  
+	 * @param roFactory
+	 * @param classDef
+	 * @param propName
+	 * @return
+	 */
+	private Property findProperty(RuntimeObjectFactory roFactory, ClassDefinition classDef, String propName)
+	{
+		Property result = roFactory.getMemory().getUnit().findPropertyByName(classDef, propName);
+    	if( result == null){
+    		// deal with special properties cases
+    		if(propName.compareTo("eAnnotations")==0)
+    		{
+    			// in kermeta, annotation are stored into tag
+    			result = roFactory.getMemory().getUnit().findPropertyByName(classDef, "tag");
+    		}
+    	}
+    	return result;
+	}
 	/**
 	 * Create a runtime object corresponding to the given fvalue. This <code>fvalue</code> corresponds to a structural feature "extracted" from
 	 * the eObject to which the given Runtime object <code>rObject</code> correspond.
