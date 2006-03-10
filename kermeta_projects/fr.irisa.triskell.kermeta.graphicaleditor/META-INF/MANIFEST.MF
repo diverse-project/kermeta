@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: kmEditor
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.graphicaleditor; singleton:=true
+Bundle-Version: 0.0.1
+Bundle-Activator: fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin
+Bundle-Vendor: Topcased
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore.edit,
+ org.eclipse.emf.edit.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.emf.edit,
+ org.eclipse.core.resources,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.emf.ecore,
+ org.topcased.modeler,
+ fr.irisa.triskell.kermeta,
+ fr.irisa.triskell.kermeta.model.edit
+Eclipse-AutoStart: true
