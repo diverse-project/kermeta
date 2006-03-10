@@ -16,5 +16,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.topcased.modeler,
  fr.irisa.triskell.kermeta,
- fr.irisa.triskell.kermeta.model.edit
+ fr.irisa.triskell.kermeta.model.edit,
+ org.eclipse.emf.validation
 Eclipse-AutoStart: true
