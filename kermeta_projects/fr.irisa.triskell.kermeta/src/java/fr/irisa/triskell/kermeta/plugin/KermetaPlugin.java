@@ -1,6 +1,12 @@
 package fr.irisa.triskell.kermeta.plugin;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.ui.console.ConsolePlugin;
@@ -60,7 +66,7 @@ public class KermetaPlugin extends AbstractUIPlugin {
 		/*note : be careful this method must not fail ! otherwise all the plugin that depends on it will fail too with a non explicit message !
 		 */
 		super.start(context);
-		this.kermetaIcons = new KermetaIcons(KermetaPlugin.getDefault().getBundle().getEntry("/"));
+		kermetaIcons = new KermetaIcons(KermetaPlugin.getDefault().getBundle().getEntry("/"));
 		// initialize the log4j system using the configuration file contained in this plugin
 		try {
 			URL url = getBundle().getEntry("/kermeta_log4j_configuration.xml");		
@@ -210,5 +216,45 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	
 	/* ACCESSORS */
 	public static KermetaIcons getKermetaIcons() { return kermetaIcons; }
+	
+	/*
+	 * -------------------------------------------------------------------------
+	 * 
+	 * A set of helper methods to access the Eclipse workbench/workspace easily
+	 * 
+	 * -------------------------------------------------------------------------
+	 */
+	
+	/**
+	 * (CommontTab) Convenience method for getting the workspace root.
+	 */
+	public static IWorkspaceRoot getWorkspaceRoot() {
+		return ResourcesPlugin.getWorkspace().getRoot();
+	}
+	
+	/**
+	 * (CommontTab) Convenience method for getting the member resource 
+	 * of the workspace root
+	 */
+	public static IContainer getContainer(String path) {
+		Path containerPath = new Path(path);
+		return (IContainer) getWorkspaceRoot().findMember(containerPath);
+	}
+	
+	/**
+	 * Convenience method that finds the IFile element corresponding to the uri 
+	 * given by <code>filepath</code>
+	 * @param filepath The file path, ideally represented 
+	 * as <code>platform:/resource/path_relative_to_the_current_workspace</code>
+	 * @return the corresponding IFile in the current workspace. 
+	 */
+	public static IFile getIFileFromString(String filepath)
+	{
+	    IFile selectedFile = null;
+	    IResource iresource = getWorkspaceRoot().findMember(filepath);
+	    if (iresource instanceof IFile)
+	        selectedFile = (IFile) iresource;
+	    return selectedFile;
+	}
 	
 }

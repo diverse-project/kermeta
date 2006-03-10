@@ -1,4 +1,4 @@
-/* $Id: ArgumentConfigurationTab.java,v 1.23 2006-03-03 15:23:35 dvojtise Exp $
+/* $Id: ArgumentConfigurationTab.java,v 1.24 2006-03-10 13:25:45 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: ArgumentConfigurationTab.java
  * License: EPL
@@ -57,6 +57,7 @@ import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.dialogs.ResourceSelectionDialog;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.dialogs.SelectionListDialog;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -122,8 +123,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     /** The text widget for the selection of a Kermeta class from a given file */
     private Text classNameText;
     private Text projectLocationText;
-    /** The path selected by the user through the "Browse" action*/
-    private String selectedPath = "";
+
     /** The class qualified name chosen by the user */
     private String selectedClassString = null;
     /** The text widget for the selection of a Kermeta operation */
@@ -136,7 +136,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     // NOTE : pas mis en cause dans le OUTOFMEMORY
     public ArgumentConfigurationTab() {
         super();
-        filenameString = getWorkspaceRoot().getLocation().toString();
+        filenameString = KermetaPlugin.getWorkspaceRoot().getLocation().toString();
     }
 
     /* (non-Javadoc)
@@ -192,12 +192,9 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     public void initializeFrom(ILaunchConfiguration configuration)
     {	  // just to remember how to access a launch group
 //        ILaunchGroup group = DebugUITools.getLaunchGroup(configuration, LaunchManager.RUN_MODE);
-        String selectedOperationString = "";
         String currentProjectPath = "";
         String storedPath = "";
         IFile selectedFile = null;
-       // KermetaUnit lselectedUnit = null;
-        
       /*  if (DebugUITools.getSelectedResource()!=null)
         {      
            IResource selr = DebugUITools.getSelectedResource();
@@ -211,46 +208,31 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 		{
 		    storedPath = configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
             "");
-		    selectedFile = getIFileFromString(storedPath);
+		    selectedFile = KermetaPlugin.getIFileFromString(storedPath);
 		    
-		    // Create the Unit corresponding to the chosen Kermeta file
-		    // (either the SelectedResource one, or the path of current configuration)*
-		  //  if (selectedFile != null)
-		  //  {
-		  //      lselectedUnit = KermetaRunHelper.parse(selectedFile);
-		  //  }
-		    // selectedUnit can be null : if selected file is not valid
-		  //  if (lselectedUnit != null)
-		  //  {
-		  //      ArrayList point = KermetaRunHelper.findEntryPoint(lselectedUnit);
-		  //      selectedClassString = (String)point.get(0);
-		  //      selectedOperationString = (String)point.get(1);
-		        
-		        getProjectLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_PROJECTNAME,
-		                currentProjectPath));
-		        
-		        getFileLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
-		                storedPath));
-		        
-		        getclassNameText().setText(
-		                configuration.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME,
-		                        ""));
-		        if (getclassNameText().getText().compareTo("")==0 )
-		        {
-		        	getclassNameText().setText(getDefaultClass(selectedFile));
-		        }
-		        selectedClassString = getclassNameText().getText();
-		        getOperationNameText().setText(
-		                configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,
-		                        ""));
-		        getArgumentsText().setText(
-		                configuration.getAttribute(KermetaLaunchConfiguration.KM_ARGUMENTS,
-		                        ""));
-		        if (getOperationNameText().getText().compareTo("")==0 )
-		        	getOperationNameText().setText(getDefaultOperation(selectedFile));
-		        
-		        
-		   // }
+		    getProjectLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_PROJECTNAME,
+		    		currentProjectPath));
+		    
+		    getFileLocationText().setText(configuration.getAttribute(KermetaLaunchConfiguration.KM_FILENAME,
+		    		storedPath));
+		    
+		    getclassNameText().setText(
+		    		configuration.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME,
+		    		""));
+		    if (getclassNameText().getText().compareTo("")==0 )
+		    {
+		    	getclassNameText().setText(getDefaultClass(selectedFile));
+		    }
+		    selectedClassString = getclassNameText().getText();
+		    getOperationNameText().setText(
+		    		configuration.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,
+		    		""));
+		    getArgumentsText().setText(
+		    		configuration.getAttribute(KermetaLaunchConfiguration.KM_ARGUMENTS,
+		    		""));
+		    if (getOperationNameText().getText().compareTo("")==0 )
+		    	getOperationNameText().setText(getDefaultOperation(selectedFile));
+
 		    canSave();
 		}
 		catch (CoreException e)
@@ -340,7 +322,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      */
 	private void updateConfigFromLocalShared(ILaunchConfigurationWorkingCopy config) {
 		String containerPathString = getFileLocationText().getText();
-		IContainer container = getContainer(containerPathString);
+		IContainer container = KermetaPlugin.getContainer(containerPathString);
 		config.setContainer(container);
 		
 	}
@@ -524,7 +506,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     protected void handleOperationNameButtonSelected()
     {
     	try{
-	        IFile selectedFile = getIFileFromString(fileLocationText.getText());
+	        IFile selectedFile = KermetaPlugin.getIFileFromString(fileLocationText.getText());
 	        // Recompile kermeta source code
 	        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
 	        
@@ -539,7 +521,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	        
 	        // Get the operations of this class (super operation also?)
 	        EList foperations = selectedFClassDef.getOwnedOperation();
-	        ArrayList opnamelist = new ArrayList(foperations.size());
+	        ArrayList<String> opnamelist = new ArrayList<String>(foperations.size());
 	        for (int i = 0; i< foperations.size(); i++)
 	        {
 	            opnamelist.add(((Operation)foperations.get(i)).getName());
@@ -596,7 +578,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      */
     protected void parseFileAndUpdateFields(String currentPath)
     {
-        IFile file = getIFileFromString(currentPath);
+        IFile file = KermetaPlugin.getIFileFromString(currentPath);
         KermetaUnit selectedUnit = KermetaRunHelper.parse(file);
 	    ArrayList point = KermetaRunHelper.findEntryPoint(selectedUnit);
 	    selectedClassString = (String)point.get(0);
@@ -614,12 +596,11 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	 */
 
 	private IProject handleBrowseProjects() {
-	    String resultPath = null;
 	    //LabelProvider labelProvider = new KermetaLabelProvider();
 	    JavaElementLabelProvider labelProvider = new JavaElementLabelProvider(JavaElementLabelProvider.SHOW_DEFAULT);
 	    
 	    // Get the open projects (KermetaProject)
-	    IProject[] projects = getWorkspaceRoot().getProjects();
+	    IProject[] projects = KermetaPlugin.getWorkspaceRoot().getProjects();
 		ElementListSelectionDialog dialog =
 			new ElementListSelectionDialog(getShell(), labelProvider);
 
@@ -694,7 +675,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     {
     	try{
 	        // Reparse the selected file
-	        IFile selectedFile = getIFileFromString(fileLocationText.getText());
+	        IFile selectedFile = KermetaPlugin.getIFileFromString(fileLocationText.getText());
 	        KermetaUnit selectedUnit = KermetaRunHelper.parse(selectedFile);
 	        
 	        // Get classes of root package, and recursively of child packages
@@ -704,7 +685,7 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
 	        
 	        
 	        // Get all the classes defined in this Unit
-	        ArrayList qnameList = new ArrayList(typedefs.size());
+	        ArrayList<String> qnameList = new ArrayList<String>(typedefs.size());
 	        for (int i=0; i<typedefs.size(); i++)
 	        {
 	            qnameList.add(selectedUnit.getQualifiedName((NamedElement)typedefs.get(i)));
@@ -770,33 +751,6 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
     private Button getFileLocationButton() {return fileLocationButton;}
     public void setFileLocationText(Text text) {fileLocationText = text;}
     
-
-    
-	/**
-	 * (CommontTab) Convenience method for getting the workspace root.
-	 */
-	private IWorkspaceRoot getWorkspaceRoot() {
-		return ResourcesPlugin.getWorkspace().getRoot();
-	}
-	
-	/**
-	 * (CommontTab) Convenience method for getting the member resource 
-	 * of the workspace root
-	 */
-	private IContainer getContainer(String path) {
-		Path containerPath = new Path(path);
-		return (IContainer) getWorkspaceRoot().findMember(containerPath);
-	}
-	
-	protected IFile getIFileFromString(String filepath)
-	{
-	    IFile selectedFile = null;
-	    IResource iresource = getWorkspaceRoot().findMember(filepath);
-	    if (iresource instanceof IFile)
-	        selectedFile = (IFile) iresource;
-	    return selectedFile;
-	}
-
 	/**
      * @see org.eclipse.debug.ui.ILaunchConfigurationTab#canSave()
      */
@@ -809,25 +763,12 @@ public class ArgumentConfigurationTab extends AbstractLaunchConfigurationTab //i
      * NOTE : do not put UI changes, otherwise, canSave() method will be called undefinitely
      */
     protected boolean validateFileLocation() {
-        /*if (selectedUnit == null)
-        {
-            setErrorMessage(KermetaMessages.getString("ArgTab.COULDNOTLOADUNITERROR"));
-        	return false;
-        }*/
-    	/*try
-		{*/
-    		IFile selectedFile = getIFileFromString(fileLocationText.getText());		
-    		if (selectedFile == null)
-    		{
-    			setErrorMessage(KermetaMessages.getString("ArgTab.INVALIDFILEERROR"));    			
-    			return false;
-    		}/*
-		}
-    	catch (Exception e)
-		{
-    		setErrorMessage(KermetaMessages.getString("ArgTab.INVALIDFILEERROR"));
-			return false;
-		}*/
+    	IFile selectedFile = KermetaPlugin.getIFileFromString(fileLocationText.getText());		
+    	if (selectedFile == null)
+    	{
+    		setErrorMessage(KermetaMessages.getString("ArgTab.INVALIDFILEERROR"));    			
+    		return false;
+    	}
         if (fileLocationText.getText().equals(""))
         {
             setErrorMessage(KermetaMessages.getString("ArgTab.NOFILEERROR"));
