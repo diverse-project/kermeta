@@ -3,6 +3,13 @@
  * Creation date: Thu May 26 16:29:12 CEST 2005
  * Template Created on 7 févr. 2005
  * By Franck FLEUREY (ffleurey@irisa.fr)
+ * 
+ * Important : DVK : I've manually modified this class in order to take into account some 
+ *   node for special purpose:
+ *   for example when the ecore comes from a xsd2ecore, it needs to take into account 
+ *   org.eclipse.emf.ecore.xml.type.impl.XMLTypePackageImpl
+ *   I still dont know how to automatically generate the visitor for both ecore and xml
+ *   be carefull need to update the visitor that inherit from this one ..
  */
 package fr.irisa.triskell.ecore.visitor;
 
@@ -40,7 +47,10 @@ public class EcoreVisitor {
 					Class[] ptypes = new Class[1];
 					cname = node.getClass().getName();
 					
-					if ( cname.equals("org.eclipse.emf.ecore.impl.EcorePackageImpl") ) {
+					
+					// consider EcorePackageImpl and XMLTypePackageImpl as EPackageImpl
+					if ( cname.equals("org.eclipse.emf.ecore.impl.EcorePackageImpl") ||
+						 cname.equals("org.eclipse.emf.ecore.xml.type.impl.XMLTypePackageImpl")	) {
 						cname = "org.eclipse.emf.ecore.impl.EPackageImpl";
 					}
 					
