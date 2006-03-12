@@ -1,0 +1,16 @@
+@mainClass "docbooktest::Main"
+@mainOperation "main"
+
+
+package docbooktest;
+
+
+require kermeta
+require "../model/Docbook.ecore"
+
+class Main
+{
+    operation main() : Void is do 
+        // TODO: implement 'main' operation
+    end
+}

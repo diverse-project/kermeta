@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="book">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="bookinfo"/>
+        <xs:element ref="preface"/>
+        <xs:element maxOccurs="unbounded" ref="chapter"/>
+      </xs:sequence>
+      <xs:attribute name="lang" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="bookinfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="pubdate"/>
+        <xs:element ref="author"/>
+        <xs:element ref="title"/>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element ref="bibliomisc"/>
+          <xs:element ref="date"/>
+          <xs:element ref="keywordset"/>
+          <xs:element ref="subtitle"/>
+        </xs:choice>
+        <xs:element ref="abstract"/>
+        <xs:element ref="publisher"/>
+        <xs:element ref="confgroup"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pubdate" type="xs:string"/>
+  <xs:element name="author">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="firstname"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="firstname" type="xs:string"/>
+  <xs:element name="bibliomisc" type="xs:string"/>
+  <xs:element name="date" type="xs:string"/>
+  <xs:element name="keywordset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="keyword"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="keyword" type="xs:NCName"/>
+  <xs:element name="subtitle" type="xs:string"/>
+  <xs:element name="abstract">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="para"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="publisher">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="publishername"/>
+        <xs:element ref="address"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="publishername" type="xs:NCName"/>
+  <xs:element name="address">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="state"/>
+        <xs:element ref="otheraddr"/>
+      </xs:sequence>
+      <xs:attribute name="format" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="state" type="xs:NCName"/>
+  <xs:element name="otheraddr">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ulink"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="confgroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="conftitle"/>
+        <xs:element ref="confnum"/>
+        <xs:element ref="confsponsor"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="conftitle" type="xs:NCName"/>
+  <xs:element name="confnum" type="xs:NCName"/>
+  <xs:element name="confsponsor" type="xs:NCName"/>
+  <xs:element name="preface">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:element maxOccurs="unbounded" ref="para"/>
+        <xs:element ref="important"/>
+        <xs:element ref="tip"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="important">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="emphasis"/>
+        <xs:element ref="ulink"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="chapter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="para"/>
+        <xs:element minOccurs="0" ref="note"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="section"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="title">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="emphasis"/>
+        <xs:element ref="phrase"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="para">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="emphasis"/>
+        <xs:element ref="literal"/>
+        <xs:element ref="ulink"/>
+        <xs:element ref="footnote"/>
+        <xs:element ref="link"/>
+      </xs:choice>
+      <xs:attribute name="role" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="footnote">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="para"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="link">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:NMTOKEN">
+          <xs:attribute name="linkend" use="required" type="xs:NMTOKEN"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ulink">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="emphasis"/>
+      </xs:sequence>
+      <xs:attribute name="type"/>
+      <xs:attribute name="url" use="required" type="xs:anyURI"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="emphasis">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="emphasis"/>
+      </xs:sequence>
+      <xs:attribute name="role" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tip">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ulink"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="note">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="literal"/>
+        <xs:element ref="ulink"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="section">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="itemizedlist"/>
+          <xs:element ref="mediaobject"/>
+          <xs:element ref="note"/>
+          <xs:element ref="para"/>
+          <xs:element ref="programlisting"/>
+          <xs:element ref="section"/>
+          <xs:element ref="title"/>
+          <xs:element ref="figure"/>
+          <xs:element ref="informaltable"/>
+          <xs:element ref="orderedlist"/>
+          <xs:element ref="table"/>
+          <xs:element ref="warning"/>
+        </xs:choice>
+        <xs:choice minOccurs="0">
+          <xs:element ref="tip"/>
+          <xs:element ref="caution"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="figure">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:element ref="mediaobject"/>
+      </xs:sequence>
+      <xs:attribute name="float" use="required" type="xs:integer"/>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="informaltable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="tgroup"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="orderedlist">
+    <xs:complexType>
+      <xs:attribute name="continuation" use="required" type="xs:NCName"/>
+      <xs:attribute name="inheritnum" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="table">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="title"/>
+        <xs:element ref="tgroup"/>
+      </xs:sequence>
+      <xs:attribute name="id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="warning" type="xs:string"/>
+  <xs:element name="caution" type="xs:string"/>
+  <xs:element name="phrase">
+    <xs:complexType>
+      <xs:attribute name="id" use="required" type="xs:NMTOKEN"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="literal">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:anyURI">
+          <xs:attribute name="moreinfo" use="required" type="xs:NCName"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="itemizedlist">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="listitem"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listitem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="itemizedlist"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="para"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="programlisting">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="emphasis"/>
+        <xs:element ref="phrase"/>
+        <xs:element ref="superscript"/>
+      </xs:choice>
+      <xs:attribute name="format" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="superscript" type="xs:NCName"/>
+  <xs:element name="tgroup">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="colspec"/>
+        <xs:element minOccurs="0" ref="thead"/>
+        <xs:element ref="tbody"/>
+      </xs:sequence>
+      <xs:attribute name="cols" use="required" type="xs:integer"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="colspec">
+    <xs:complexType>
+      <xs:attribute name="colname" use="required" type="xs:NCName"/>
+      <xs:attribute name="colwidth" use="required" type="xs:NMTOKEN"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="thead">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="row"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tbody">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="row"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mediaobject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="imageobject"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="imageobject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="imagedata"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="imagedata">
+    <xs:complexType>
+      <xs:attribute name="depth" use="required" type="xs:NMTOKEN"/>
+      <xs:attribute name="fileref" use="required"/>
+      <xs:attribute name="width" use="required" type="xs:NMTOKEN"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="row">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="entry"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="entry">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="programlisting"/>
+        <xs:element minOccurs="0" ref="mediaobject"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="para"/>
+      </xs:sequence>
+      <xs:attribute name="align" type="xs:NCName"/>
+      <xs:attribute name="morerows" type="xs:integer"/>
+      <xs:attribute name="nameend" type="xs:NCName"/>
+      <xs:attribute name="namest" type="xs:NCName"/>
+      <xs:attribute name="valign" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
