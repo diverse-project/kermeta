@@ -1,0 +1,100 @@
+@mainClass "pattern_macros::Main"
+@mainOperation "main"
+
+package pattern_macros;
+
+
+require kermeta
+require "../../src/kermeta/ecore.kmt"
+require "../../src/kermeta/transformations/Patterns4Ecore.kmt"
+require "../../src/kermeta/helpers/EcoreDocHelper.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using ecore
+
+class Main inherits kermeta::kunit::Assert
+{
+    reference helper : EcoreHelpers::EcoreHelper
+    reference docHelper : EcoreHelpers::EcoreDocHelper
+    reference patternHelper : EcoreTransformations::Patterns4Ecore
+    reference repository : EMFRepository
+    
+    operation main() : Void is do
+    	helper := EcoreHelpers::EcoreHelper.new 
+    	docHelper := EcoreHelpers::EcoreDocHelper.new
+    	patternHelper := EcoreTransformations::Patterns4Ecore.new
+    	helper.initialize
+    	patternHelper.initialize
+    	repository := EMFRepository.new
+    	
+    	// ask for stuff to play with (../models/needs_observer.ecore)
+    	var inputModelName : String init "../inputmodels/spreadsheet.ecore"
+        var patternPackageName : String init "spreadsheet"
+        var outputModelName : String init "../outputmodels/spreadsheet_with_patterns.ecore"
+        
+        stdio.writeln("inputModel: " + inputModelName)
+        
+        // load the model and find classes
+        var inputModel : Sequence<EPackage> init helper.loadEcoreModel(repository, inputModelName)
+        var patternPackage : EPackage init helper.findPackageByName(inputModel, patternPackageName)
+        //printFlat(patternPackage)
+         
+        
+        // do the real work
+        
+        patternHelper.addVisitor(patternPackage)
+		stdio.writeln("------> Visitor added")      
+        patternHelper.addBuilder(patternPackage)
+		stdio.writeln("------> Builder added")
+        patternHelper.addObserver(patternPackage, 
+			helper.findClassByName(patternPackage, "Cell"), 
+			helper.findClassByName(patternPackage, "CellRef"))
+		stdio.writeln("------> Observers added")
+		
+        /*stdio.writeln("------> Flat")
+        printFlat(patternPackage)
+        stdio.writeln("------> Short")
+        printShort(patternPackage)    
+        stdio.writeln("------> FlatShort")    
+        printFlatShort(patternPackage)
+        */
+        // save it and call it done
+        stdio.writeln("outputModelName: " + outputModelName)
+        helper.saveEcoreModel(repository, patternPackage, outputModelName)
+    end
+    
+    operation printFlat(pack : EPackage) is do
+    	pack.eClassifiers.each{ eClassifier | 
+            var eClass : EClass
+            eClass ?= eClassifier
+            if eClass != void then
+        		stdio.writeln(docHelper.flat(eClass,""))
+        	end
+        }
+    end
+    operation printShort(pack : EPackage) is do
+    	pack.eClassifiers.each{ eClassifier | 
+            var eClass : EClass
+            eClass ?= eClassifier
+            if eClass != void then
+        		stdio.writeln(docHelper.short(eClass,""))
+        	end
+        }
+    end
+    
+    operation printFlatShort(pack : EPackage) is do
+    	pack.eClassifiers.each{ eClassifier | 
+            var eClass : EClass
+            eClass ?= eClassifier
+            if eClass != void then
+        		stdio.writeln(docHelper.flatShort(eClass,""))
+        	end
+        }
+    end
+    
+    
+}
+
+
+

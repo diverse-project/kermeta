@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="spreadsheet" size="759,178" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#/" metadata="emf-1.0" initialized="true" tag="5" key="32303035303932372066722E69726973612E747269736B656C6C2E6B65726D6574612E65636F7265">
+  <children xsi:type="editmodel:ClassEditModel" name="Sheet" location="180,10" size="79,29" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//Sheet" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="sheet" location="79,14" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//Cell/sheet" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.0/@sourceConnections.0/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="sheet" location="266,3" size="27,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="266,31" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <model href="spreadsheet.ecore#//Cell/sheet"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="cell" location="0,14" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//Sheet/cell" multiplicityLabel="//@children.0/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.0/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="cell" location="371,3" size="16,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="383,31" size="4,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="spreadsheet.ecore#//Sheet/cell"/>
+      </children>
+    </sourceConnections>
+    <model href="spreadsheet.ecore#//Sheet"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.1 //@children.0/@sourceConnections.0" name="Cell" location="394,10" size="67,29" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//Cell" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" source="//@children.1" target="//@children.3" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="cell" location="18,29" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//Expression/cell" attachSource="true" multiplicityLabel="//@children.1/@sourceConnections.0/@children.0/@children.0" roleLabel="//@children.1/@sourceConnections.0/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="399,46" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="cell" location="419,46" size="16,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <model href="spreadsheet.ecore#//Expression/cell"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="expression" location="92,0" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//Cell/expression" multiplicityLabel="//@children.1/@sourceConnections.0/@children.1/@children.0" roleLabel="//@children.1/@sourceConnections.0/@children.1/@children.1" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="387,79" size="18,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="expression" location="419,79" size="54,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="spreadsheet.ecore#//Cell/expression"/>
+      </children>
+    </sourceConnections>
+    <model href="spreadsheet.ecore#//Cell"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="CellRef" location="460,220" size="88,29" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//CellRef">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.2" target="//@children.4/@sourceConnections.0" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="44,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="referencedCell" location="67,21" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//CellRef/referencedCell" multiplicityLabel="//@children.2/@sourceConnections.1/@children.0/@children.0" roleLabel="//@children.2/@sourceConnections.1/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="468,38" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="referencedCell" location="468,10" size="71,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="spreadsheet.ecore#//CellRef/referencedCell"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="62,0" attachSource="true"/>
+    </sourceConnections>
+    <model href="spreadsheet.ecore#//CellRef"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.1 //@children.4/@sourceConnections.0 //@children.5/@sourceConnections.0 //@children.1/@sourceConnections.0" name="Expression" location="320,100" size="111,29" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//Expression">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <model href="spreadsheet.ecore#//Expression"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Value" location="336,220" size="79,29" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//Value">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.2/@sourceConnections.0" autoLocated="true" source="//@children.4" target="//@children.3" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="39,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="55,29" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <model href="spreadsheet.ecore#//Value"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="BinExpression" location="160,220" size="132,29" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//BinExpression">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.5" target="//@children.3" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="112,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="55,29" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.5" target="//@children.3" targetEnd="//@children.5/@sourceConnections.1/@children.0" sourceEnd="//@children.5/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="subExpression" location="0,19" id="platform:/resource/fr.irisa.triskell.kermeta.ecore/demos/inputmodels/spreadsheet.ecore#//BinExpression/subExpression" multiplicityLabel="//@children.5/@sourceConnections.1/@children.0/@children.0" roleLabel="//@children.5/@sourceConnections.1/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="295,126" size="18,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="subExpression" location="241,98" size="72,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="spreadsheet.ecore#//BinExpression/subExpression"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="57,0" attachSource="true"/>
+    </sourceConnections>
+    <model href="spreadsheet.ecore#//BinExpression"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <model href="spreadsheet.ecore#/"/>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=3"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="10,10" gridOrigin="0,0" rulerUnit="pixel">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:EMFClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true"/>
+</editmodel:ClassDiagramEditModel>

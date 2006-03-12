@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pattern_macros" nsURI="./add_patterns.ecore" nsPrefix="pattern_macros">
+  <eClassifiers xsi:type="ecore:EClass" name="Main">
+    <eOperations name="main">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;self.helper := EcoreHelpers::EcoreHelper.new&#xA;&#x9;self.docHelper := EcoreHelpers::EcoreDocHelper.new&#xA;&#x9;self.patternHelper := EcoreTransformations::Patterns4Ecore.new&#xA;&#x9;self.helper.initialize&#xA;&#x9;self.patternHelper.initialize&#xA;&#x9;self.repository := kermeta::persistence::EMFRepository.new&#xA;&#x9;var inputModelName : kermeta::standard::String init self.helper.askIfNecessary(&quot;Select model to load:&quot;, im)&#xA;&#x9;var concreteSubjectName : kermeta::standard::String init self.helper.askIfNecessary(&quot;Which class plays the ConcreteSubject role?&quot;, cs)&#xA;&#x9;var concreteObserverName : kermeta::standard::String init self.helper.askIfNecessary(&quot;Which class plays the ConcreteObserver role?&quot;, co)&#xA;&#x9;var patternPackageName : kermeta::standard::String init self.helper.askIfNecessary(&quot;Which Package will contain the pattern classes?&quot;, pa)&#xA;&#x9;var outputModelName : kermeta::standard::String init self.helper.askIfNecessary(&quot;Save modified model in file:&quot;, om)&#xA;&#x9;stdio.writeln(&quot;inputModel: &quot;.plus(inputModelName))&#xA;&#x9;stdio.writeln(&quot;concreteSubjectName: &quot;.plus(concreteSubjectName))&#xA;&#x9;stdio.writeln(&quot;concreteObserverName: &quot;.plus(concreteObserverName))&#xA;&#x9;stdio.writeln(&quot;outputModelName: &quot;.plus(outputModelName))&#xA;&#x9;var inputModel : kermeta::standard::Sequence&lt;ecore::EPackage> init self.helper.loadEcoreModel(self.repository, inputModelName)&#xA;&#x9;var patternPackage : ecore::EPackage init self.helper.findPackageByName(inputModel, patternPackageName)&#xA;&#x9;self.printFlat(patternPackage)&#xA;&#x9;var concreteSubject : ecore::EClass init self.helper.findClassByName(patternPackage, concreteSubjectName)&#xA;&#x9;var concreteObserver : ecore::EClass init self.helper.findClassByName(patternPackage, concreteObserverName)&#xA;&#x9;self.patternHelper.addVisitor(patternPackage)&#xA;&#x9;stdio.writeln(&quot;------> Visitor added&quot;)&#xA;&#x9;self.patternHelper.addBuilder(patternPackage)&#xA;&#x9;stdio.writeln(&quot;------> Builder added&quot;)&#xA;&#x9;self.patternHelper.addObserver(patternPackage, concreteSubject, concreteObserver)&#xA;&#x9;stdio.writeln(&quot;------> Observers added&quot;)&#xA;&#x9;stdio.writeln(&quot;------> Flat&quot;)&#xA;&#x9;self.printFlat(patternPackage)&#xA;&#x9;stdio.writeln(&quot;------> Short&quot;)&#xA;&#x9;self.printShort(patternPackage)&#xA;&#x9;stdio.writeln(&quot;------> FlatShort&quot;)&#xA;&#x9;self.printFlatShort(patternPackage)&#xA;&#x9;self.helper.saveEcoreModel(self.repository, patternPackage, outputModelName)&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="im" eType="//String"/>
+      <eParameters name="cs" eType="//String"/>
+      <eParameters name="co" eType="//String"/>
+      <eParameters name="pa" eType="//String"/>
+      <eParameters name="om" eType="//String"/>
+    </eOperations>
+    <eOperations name="printFlat" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;pack.eClassifiers.each{eClassifier | do&#xA;&#x9;&#x9;&#x9;var eClass : ecore::EClass&#xA;&#x9;&#x9;&#x9;eClass ?= eClassifier&#xA;&#x9;&#x9;&#x9;if eClass.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;stdio.writeln(self.docHelper.flat(eClass, &quot;&quot;))&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="pack"/>
+    </eOperations>
+    <eOperations name="printShort" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;pack.eClassifiers.each{eClassifier | do&#xA;&#x9;&#x9;&#x9;var eClass : ecore::EClass&#xA;&#x9;&#x9;&#x9;eClass ?= eClassifier&#xA;&#x9;&#x9;&#x9;if eClass.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;stdio.writeln(self.docHelper.short(eClass, &quot;&quot;))&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="pack"/>
+    </eOperations>
+    <eOperations name="printFlatShort" ordered="false" upperBound="0">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;pack.eClassifiers.each{eClassifier | do&#xA;&#x9;&#x9;&#x9;var eClass : ecore::EClass&#xA;&#x9;&#x9;&#x9;eClass ?= eClassifier&#xA;&#x9;&#x9;&#x9;if eClass.isNotEqual(void) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;stdio.writeln(self.docHelper.flatShort(eClass, &quot;&quot;))&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end}&#xA;end"/>
+      </eAnnotations>
+      <eParameters name="pack"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="helper"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="docHelper"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patternHelper"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="repository"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+</ecore:EPackage>

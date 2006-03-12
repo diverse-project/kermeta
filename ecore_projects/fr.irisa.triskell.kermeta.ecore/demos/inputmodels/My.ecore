@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="testinheritance"
+    nsURI="testinheritance" nsPrefix="testinheritance">
+  <eClassifiers xsi:type="ecore:EClass" name="A" abstract="true" interface="true">
+    <eOperations name="op" eType="#//A">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="system.out.println(&quot;hello A&quot;);"/>
+        <details key="documentation" value="This A.op documentation ..."/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="B" eSuperTypes="#//A">
+    <eOperations name="op" eType="#//A">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="system.out.println(&quot;hello B&quot;);"/>
+        <details key="documentation" value="This B.op documentation ..."/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+</ecore:EPackage>

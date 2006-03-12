@@ -1,0 +1,108 @@
+@mainClass "pattern_macros::Main"
+@mainOperation "main"
+
+package pattern_macros;
+
+
+require kermeta
+require "../../src/kermeta/ecore.kmt"
+require "../../src/kermeta/transformations/Patterns4Ecore.kmt"
+require "../../src/kermeta/helpers/EcoreDocHelper.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using ecore
+
+class Main inherits kermeta::kunit::Assert
+{
+    reference helper : EcoreHelpers::EcoreHelper
+    reference docHelper : EcoreHelpers::EcoreDocHelper
+    reference patternHelper : EcoreTransformations::Patterns4Ecore
+    reference repository : EMFRepository
+    
+    operation main(im : String, cs : String, co : String, pa : String, om : String) : Void is do
+    	helper := EcoreHelpers::EcoreHelper.new 
+    	docHelper := EcoreHelpers::EcoreDocHelper.new
+    	patternHelper := EcoreTransformations::Patterns4Ecore.new
+    	helper.initialize
+    	patternHelper.initialize
+    	repository := EMFRepository.new
+    	
+    	// ask for stuff to play with (../models/needs_observer.ecore)
+    	var inputModelName : String init helper.askIfNecessary("Select model to load:", im)
+        var concreteSubjectName : String init helper.askIfNecessary("Which class plays the ConcreteSubject role?", cs)
+        var concreteObserverName : String init helper.askIfNecessary("Which class plays the ConcreteObserver role?", co)        
+        var patternPackageName : String init helper.askIfNecessary("Which Package will contain the pattern classes?", pa)                
+        var outputModelName : String init helper.askIfNecessary("Save modified model in file:", om)
+        
+        stdio.writeln("inputModel: " + inputModelName)
+        stdio.writeln("concreteSubjectName: " + concreteSubjectName)
+        stdio.writeln("concreteObserverName: " + concreteObserverName)
+        stdio.writeln("outputModelName: " + outputModelName)
+        
+        // load the model and find classes
+        var inputModel : Sequence<EPackage> init helper.loadEcoreModel(repository, inputModelName)
+        var patternPackage : EPackage init helper.findPackageByName(inputModel, patternPackageName)
+        printFlat(patternPackage)
+         
+        
+        var concreteSubject : EClass init helper.findClassByName(patternPackage, concreteSubjectName)
+        var concreteObserver : EClass init helper.findClassByName(patternPackage, concreteObserverName)
+        
+        /*stdio.writeln(inputModel.toString)
+        stdio.writeln(inputModel.name)
+        stdio.writeln(concreteSubject.toString)
+        */
+        // do the real work
+        
+        patternHelper.addVisitor(patternPackage)
+		stdio.writeln("------> Visitor added")      
+        patternHelper.addBuilder(patternPackage)
+		stdio.writeln("------> Builder added")
+        patternHelper.addObserver(patternPackage, concreteSubject, concreteObserver)
+		stdio.writeln("------> Observers added")
+		
+        stdio.writeln("------> Flat")
+        printFlat(patternPackage)
+        stdio.writeln("------> Short")
+        printShort(patternPackage)    
+        stdio.writeln("------> FlatShort")    
+        printFlatShort(patternPackage)
+        // save it and call it done
+        helper.saveEcoreModel(repository, patternPackage, outputModelName)
+    end
+    
+    operation printFlat(pack : EPackage) is do
+    	pack.eClassifiers.each{ eClassifier | 
+            var eClass : EClass
+            eClass ?= eClassifier
+            if eClass != void then
+        		stdio.writeln(docHelper.flat(eClass,""))
+        	end
+        }
+    end
+    operation printShort(pack : EPackage) is do
+    	pack.eClassifiers.each{ eClassifier | 
+            var eClass : EClass
+            eClass ?= eClassifier
+            if eClass != void then
+        		stdio.writeln(docHelper.short(eClass,""))
+        	end
+        }
+    end
+    
+    operation printFlatShort(pack : EPackage) is do
+    	pack.eClassifiers.each{ eClassifier | 
+            var eClass : EClass
+            eClass ?= eClassifier
+            if eClass != void then
+        		stdio.writeln(docHelper.flatShort(eClass,""))
+        	end
+        }
+    end
+    
+    
+}
+
+
+

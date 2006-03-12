@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ObserverDemo" nsURI="platform:/resource/ModelEngineeringCourse/models/needs_observer.ecore" nsPrefix="ObserverDemo">
+  <eClassifiers xsi:type="ecore:EClass" name="Compteur">
+    <eOperations name="incrementer">
+      <eParameters name="delta">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getValeur">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valeur" unsettable="true">
+      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Afficheur">
+    <eOperations name="afficher">
+      <eParameters name="valeur">
+        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+      </eParameters>
+    </eOperations>
+  </eClassifiers>
+</ecore:EPackage>

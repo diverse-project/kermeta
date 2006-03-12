@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ProgrammableCalculator" nsURI="./ProgrammableCalculator.ecore" nsPrefix="ProgrammableCalculator">
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NumericValue" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="//Integer"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BinaryOperator" abstract="true" eSuperTypes="//Operator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftOperand" lowerBound="1" eType="//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator" abstract="true" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightOperand" lowerBound="1" eType="//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="//BinaryOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="//Operator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="//BinaryOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Division" eSuperTypes="//BinaryOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Multiplication" eSuperTypes="//BinaryOperator"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="//FunctionDecl"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operands" upperBound="-1" eType="//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionDecl">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1" eType="//VariableDecl" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDecl" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Calculator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1" eType="//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1" eType="//FunctionDecl" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ProxyValue" eSuperTypes="//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueExpression" lowerBound="1" eType="//Expression"/>
+  </eClassifiers>
+</ecore:EPackage>
