@@ -6,11 +6,37 @@ package docbooktest;
 
 
 require kermeta
-require "../model/Docbook.ecore"
+require "../model/Docbook.kmt"
+
+using kermeta::standard
+using kermeta::persistence
+using Docbook
 
 class Main
 {
+	reference repository : EMFRepository
+	reference docbookMetamodel : String
+	
     operation main() : Void is do 
-        // TODO: implement 'main' operation
+    	repository := EMFRepository.new
+    	docbookMetamodel := "../model/Docbook.ecore"
+    	stdio.writeln("begin")
+        var inputModel : Sequence<DocumentRoot> init loadDocbookModel(repository, 
+        							"../docbook/KerMeta-Manual.docbook")
+        inputModel.each{ dRoot | 
+            stdio.writeln(dRoot.toString)
+        }
+        stdio.writeln("end")
+    end
+    
+    /** load a Docbook model */
+    operation loadDocbookModel(repository : EMFRepository, modelUri : String) : Sequence<DocumentRoot> is do
+    	var resource : Resource init repository.createResource(modelUri , docbookMetamodel)
+    	resource.load
+    	var instances : Set<Object> init resource.instances
+    	// retreives only the packages
+    	var pack : DocumentRoot
+    	result := instances.select { e | DocumentRoot.isInstance(e) }.collect{p | pack ?= p}
+    	
     end
 }

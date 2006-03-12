@@ -1,0 +1,131 @@
+package type;
+
+require "platform:/plugin/fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+
+class AnyType
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	property any : seq ecore::EFeatureMapEntry[0..*]
+		getter is do
+			//TODO: implement getter for derived property any
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property any
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	attribute anyAttribute : seq ecore::EFeatureMapEntry[0..*]
+}
+class SimpleAnyType inherits AnyType
+{
+	property rawValue : String
+		getter is do
+			//TODO: implement getter for derived property rawValue
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property rawValue
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property ~value : AnySimpleType
+		getter is do
+			//TODO: implement getter for derived property value
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property value
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	reference instanceType : ecore::EDataType[1..1]
+}
+class XMLTypeDocumentRoot
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	attribute xMLNSPrefixMap : ecore::EStringToStringMapEntry[0..*]
+	attribute xSISchemaLocation : ecore::EStringToStringMapEntry[0..*]
+	property cDATA : seq String[0..*]
+		getter is do
+			//TODO: implement getter for derived property cDATA
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property cDATA
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property comment : seq String[0..*]
+		getter is do
+			//TODO: implement getter for derived property comment
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property comment
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property text : seq String[0..*]
+		getter is do
+			//TODO: implement getter for derived property text
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property text
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+}
+alias AnySimpleType : kermeta::language::structure::Object;
+alias AnyURI : kermeta::standard::String;
+alias Base64Binary : kermeta::language::structure::Object;
+alias Boolean : kermeta::standard::Boolean;
+alias BooleanObject : kermeta::standard::Boolean;
+alias Byte : kermeta::language::structure::Object;
+alias ByteObject : kermeta::language::structure::Object;
+alias Date : kermeta::language::structure::Object;
+alias DateTime : kermeta::language::structure::Object;
+alias Decimal : kermeta::language::structure::Object;
+alias Double : kermeta::language::structure::Object;
+alias DoubleObject : kermeta::language::structure::Object;
+alias Duration : kermeta::language::structure::Object;
+alias ENTITIES : kermeta::language::structure::Object;
+alias ENTITIESBase : kermeta::language::structure::Object;
+alias ENTITY : kermeta::standard::String;
+alias Float : kermeta::language::structure::Object;
+alias FloatObject : kermeta::language::structure::Object;
+alias GDay : kermeta::language::structure::Object;
+alias GMonth : kermeta::language::structure::Object;
+alias GMonthDay : kermeta::language::structure::Object;
+alias GYear : kermeta::language::structure::Object;
+alias GYearMonth : kermeta::language::structure::Object;
+alias HexBinary : kermeta::language::structure::Object;
+alias ID : kermeta::standard::String;
+alias IDREF : kermeta::standard::String;
+alias IDREFS : kermeta::language::structure::Object;
+alias IDREFSBase : kermeta::language::structure::Object;
+alias Int : kermeta::standard::Integer;
+alias Integer : kermeta::language::structure::Object;
+alias IntObject : kermeta::standard::Integer;
+alias Language : kermeta::standard::String;
+alias Long : kermeta::language::structure::Object;
+alias LongObject : kermeta::language::structure::Object;
+alias Name : kermeta::standard::String;
+alias NCName : kermeta::standard::String;
+alias NegativeInteger : kermeta::language::structure::Object;
+alias NMTOKEN : kermeta::standard::String;
+alias NMTOKENS : kermeta::language::structure::Object;
+alias NMTOKENSBase : kermeta::language::structure::Object;
+alias NonNegativeInteger : kermeta::language::structure::Object;
+alias NonPositiveInteger : kermeta::language::structure::Object;
+alias NormalizedString : kermeta::standard::String;
+alias NOTATION : kermeta::language::structure::Object;
+alias PositiveInteger : kermeta::language::structure::Object;
+alias QName : kermeta::language::structure::Object;
+alias Short : kermeta::language::structure::Object;
+alias ShortObject : kermeta::language::structure::Object;
+alias String : kermeta::standard::String;
+alias Time : kermeta::language::structure::Object;
+alias Token : kermeta::standard::String;
+alias UnsignedByte : kermeta::language::structure::Object;
+alias UnsignedByteObject : kermeta::language::structure::Object;
+alias UnsignedInt : kermeta::language::structure::Object;
+alias UnsignedIntObject : kermeta::language::structure::Object;
+alias UnsignedLong : kermeta::language::structure::Object;
+alias UnsignedShort : kermeta::standard::Integer;
+alias UnsignedShortObject : kermeta::standard::Integer;

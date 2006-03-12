@@ -1,0 +1,1034 @@
+package Docbook;
+
+require "type.kmt"
+class AbstractType
+{
+	attribute para : ParaType[1..1]
+}
+class AddressType
+{
+	attribute state : type::NCName[1..1]
+	attribute otheraddr : OtheraddrType[1..1]
+	attribute format : type::NCName[1..1]
+}
+class AuthorType
+{
+	attribute firstname : seq type::String[1..*]
+}
+class BookinfoType
+{
+	attribute pubdate : type::String[1..1]
+	attribute author : AuthorType[1..1]
+	attribute title : TitleType[1..1]
+	attribute group : seq ecore::EFeatureMapEntry[0..*]
+	property bibliomisc : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property bibliomisc
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property bibliomisc
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property date : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property date
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property date
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property keywordset : KeywordsetType[0..*]
+		getter is do
+			//TODO: implement getter for derived property keywordset
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property keywordset
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property subtitle : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property subtitle
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property subtitle
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	attribute ~abstract : AbstractType[1..1]
+	attribute publisher : PublisherType[1..1]
+	attribute confgroup : ConfgroupType[1..1]
+}
+class BookType
+{
+	attribute bookinfo : BookinfoType[1..1]
+	attribute preface : PrefaceType[1..1]
+	attribute chapter : ChapterType[1..*]
+	attribute lang : type::NCName[1..1]
+}
+class ChapterType
+{
+	attribute title : TitleType[1..1]
+	attribute para : ParaType[0..*]
+	attribute note : NoteType
+	attribute section : SectionType[0..*]
+}
+class ColspecType
+{
+	attribute colname : type::NCName[1..1]
+	attribute colwidth : type::NMTOKEN[1..1]
+}
+class ConfgroupType
+{
+	attribute conftitle : type::NCName[1..1]
+	attribute confnum : type::NCName[1..1]
+	attribute confsponsor : type::NCName[1..1]
+}
+class DocumentRoot
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	attribute xMLNSPrefixMap : ecore::EStringToStringMapEntry[0..*]
+	attribute xSISchemaLocation : ecore::EStringToStringMapEntry[0..*]
+	property ~abstract : AbstractType[0..*]
+		getter is do
+			//TODO: implement getter for derived property abstract
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property abstract
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property address : AddressType[0..*]
+		getter is do
+			//TODO: implement getter for derived property address
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property address
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property author : AuthorType[0..*]
+		getter is do
+			//TODO: implement getter for derived property author
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property author
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property bibliomisc : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property bibliomisc
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property bibliomisc
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property book : BookType[0..*]
+		getter is do
+			//TODO: implement getter for derived property book
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property book
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property bookinfo : BookinfoType[0..*]
+		getter is do
+			//TODO: implement getter for derived property bookinfo
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property bookinfo
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property caution : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property caution
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property caution
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property chapter : ChapterType[0..*]
+		getter is do
+			//TODO: implement getter for derived property chapter
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property chapter
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property colspec : ColspecType[0..*]
+		getter is do
+			//TODO: implement getter for derived property colspec
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property colspec
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property confgroup : ConfgroupType[0..*]
+		getter is do
+			//TODO: implement getter for derived property confgroup
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property confgroup
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property confnum : seq type::NCName[0..*]
+		getter is do
+			//TODO: implement getter for derived property confnum
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property confnum
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property confsponsor : seq type::NCName[0..*]
+		getter is do
+			//TODO: implement getter for derived property confsponsor
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property confsponsor
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property conftitle : seq type::NCName[0..*]
+		getter is do
+			//TODO: implement getter for derived property conftitle
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property conftitle
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property date : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property date
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property date
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property emphasis : EmphasisType[0..*]
+		getter is do
+			//TODO: implement getter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property entry : EntryType[0..*]
+		getter is do
+			//TODO: implement getter for derived property entry
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property entry
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property figure : FigureType[0..*]
+		getter is do
+			//TODO: implement getter for derived property figure
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property figure
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property firstname : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property firstname
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property firstname
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property footnote : FootnoteType[0..*]
+		getter is do
+			//TODO: implement getter for derived property footnote
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property footnote
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property imagedata : ImagedataType[0..*]
+		getter is do
+			//TODO: implement getter for derived property imagedata
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property imagedata
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property imageobject : ImageobjectType[0..*]
+		getter is do
+			//TODO: implement getter for derived property imageobject
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property imageobject
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property important : ImportantType[0..*]
+		getter is do
+			//TODO: implement getter for derived property important
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property important
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property informaltable : InformaltableType[0..*]
+		getter is do
+			//TODO: implement getter for derived property informaltable
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property informaltable
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property itemizedlist : ItemizedlistType[0..*]
+		getter is do
+			//TODO: implement getter for derived property itemizedlist
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property itemizedlist
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property keyword : seq type::NCName[0..*]
+		getter is do
+			//TODO: implement getter for derived property keyword
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property keyword
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property keywordset : KeywordsetType[0..*]
+		getter is do
+			//TODO: implement getter for derived property keywordset
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property keywordset
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property link : LinkType[0..*]
+		getter is do
+			//TODO: implement getter for derived property link
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property link
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property listitem : ListitemType[0..*]
+		getter is do
+			//TODO: implement getter for derived property listitem
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property listitem
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property literal : LiteralType[0..*]
+		getter is do
+			//TODO: implement getter for derived property literal
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property literal
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property mediaobject : MediaobjectType[0..*]
+		getter is do
+			//TODO: implement getter for derived property mediaobject
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property mediaobject
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property note : NoteType[0..*]
+		getter is do
+			//TODO: implement getter for derived property note
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property note
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property orderedlist : OrderedlistType[0..*]
+		getter is do
+			//TODO: implement getter for derived property orderedlist
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property orderedlist
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property otheraddr : OtheraddrType[0..*]
+		getter is do
+			//TODO: implement getter for derived property otheraddr
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property otheraddr
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property para : ParaType[0..*]
+		getter is do
+			//TODO: implement getter for derived property para
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property para
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property phrase : PhraseType[0..*]
+		getter is do
+			//TODO: implement getter for derived property phrase
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property phrase
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property preface : PrefaceType[0..*]
+		getter is do
+			//TODO: implement getter for derived property preface
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property preface
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property programlisting : ProgramlistingType[0..*]
+		getter is do
+			//TODO: implement getter for derived property programlisting
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property programlisting
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property pubdate : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property pubdate
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property pubdate
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property publisher : PublisherType[0..*]
+		getter is do
+			//TODO: implement getter for derived property publisher
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property publisher
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property publishername : seq type::NCName[0..*]
+		getter is do
+			//TODO: implement getter for derived property publishername
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property publishername
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property row : RowType[0..*]
+		getter is do
+			//TODO: implement getter for derived property row
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property row
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property section : SectionType[0..*]
+		getter is do
+			//TODO: implement getter for derived property section
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property section
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property state : seq type::NCName[0..*]
+		getter is do
+			//TODO: implement getter for derived property state
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property state
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property subtitle : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property subtitle
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property subtitle
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property superscript : seq type::NCName[0..*]
+		getter is do
+			//TODO: implement getter for derived property superscript
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property superscript
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property table : TableType[0..*]
+		getter is do
+			//TODO: implement getter for derived property table
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property table
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property tbody : TbodyType[0..*]
+		getter is do
+			//TODO: implement getter for derived property tbody
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property tbody
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property tgroup : TgroupType[0..*]
+		getter is do
+			//TODO: implement getter for derived property tgroup
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property tgroup
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property thead : TheadType[0..*]
+		getter is do
+			//TODO: implement getter for derived property thead
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property thead
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property tip : TipType[0..*]
+		getter is do
+			//TODO: implement getter for derived property tip
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property tip
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property title : TitleType[0..*]
+		getter is do
+			//TODO: implement getter for derived property title
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property title
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property ulink : UlinkType[0..*]
+		getter is do
+			//TODO: implement getter for derived property ulink
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property ulink
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property warning : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property warning
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property warning
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+}
+class EmphasisType
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	property emphasis : EmphasisType[0..*]
+		getter is do
+			//TODO: implement getter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	attribute role : type::NCName
+}
+class EntryType
+{
+	attribute programlisting : ProgramlistingType[0..*]
+	attribute mediaobject : MediaobjectType
+	attribute para : ParaType[0..*]
+	attribute align : type::NCName
+	attribute morerows : type::Integer
+	attribute nameend : type::NCName
+	attribute namest : type::NCName
+	attribute valign : type::NCName
+}
+class FigureType
+{
+	attribute title : TitleType[1..1]
+	attribute mediaobject : MediaobjectType[1..1]
+	attribute float : type::Integer[1..1]
+	attribute id : type::NCName[1..1]
+}
+class FootnoteType
+{
+	attribute para : ParaType[1..1]
+	attribute id : type::NCName[1..1]
+}
+class ImagedataType
+{
+	attribute depth : type::NMTOKEN[1..1]
+	attribute fileref : type::AnySimpleType[1..1]
+	attribute width : type::NMTOKEN[1..1]
+}
+class ImageobjectType
+{
+	attribute imagedata : ImagedataType[1..1]
+}
+class ImportantType
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	property group : seq ecore::EFeatureMapEntry[0..*]
+		getter is do
+			//TODO: implement getter for derived property group
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property group
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property emphasis : EmphasisType[0..*]
+		getter is do
+			//TODO: implement getter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property ulink : UlinkType[0..*]
+		getter is do
+			//TODO: implement getter for derived property ulink
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property ulink
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+}
+class InformaltableType
+{
+	attribute tgroup : TgroupType[1..1]
+}
+class ItemizedlistType
+{
+	attribute listitem : ListitemType[0..*]
+}
+class KeywordsetType
+{
+	attribute keyword : seq type::NCName[1..*]
+}
+class LinkType
+{
+	attribute ~value : type::NMTOKEN
+	attribute linkend : type::NMTOKEN[1..1]
+}
+class ListitemType
+{
+	attribute itemizedlist : ItemizedlistType
+	attribute para : ParaType[0..*]
+}
+class LiteralType
+{
+	attribute ~value : type::AnyURI
+	attribute moreinfo : type::NCName[1..1]
+}
+class MediaobjectType
+{
+	attribute imageobject : ImageobjectType
+}
+class NoteType
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	property group : seq ecore::EFeatureMapEntry[0..*]
+		getter is do
+			//TODO: implement getter for derived property group
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property group
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property literal : LiteralType[0..*]
+		getter is do
+			//TODO: implement getter for derived property literal
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property literal
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property ulink : UlinkType[0..*]
+		getter is do
+			//TODO: implement getter for derived property ulink
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property ulink
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+}
+class OrderedlistType
+{
+	attribute continuation : type::NCName[1..1]
+	attribute inheritnum : type::NCName[1..1]
+}
+class OtheraddrType
+{
+	attribute ulink : UlinkType[1..1]
+}
+class ParaType
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	property group : seq ecore::EFeatureMapEntry[0..*]
+		getter is do
+			//TODO: implement getter for derived property group
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property group
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property emphasis : EmphasisType[0..*]
+		getter is do
+			//TODO: implement getter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property literal : LiteralType[0..*]
+		getter is do
+			//TODO: implement getter for derived property literal
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property literal
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property ulink : UlinkType[0..*]
+		getter is do
+			//TODO: implement getter for derived property ulink
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property ulink
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property footnote : FootnoteType[0..*]
+		getter is do
+			//TODO: implement getter for derived property footnote
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property footnote
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property link : LinkType[0..*]
+		getter is do
+			//TODO: implement getter for derived property link
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property link
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	attribute role : type::NCName
+}
+class PhraseType
+{
+	attribute id : type::NMTOKEN[1..1]
+}
+class PrefaceType
+{
+	attribute title : TitleType[1..1]
+	attribute para : ParaType[1..*]
+	attribute important : ImportantType[1..1]
+	attribute tip : TipType[1..1]
+}
+class ProgramlistingType
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	property group : seq ecore::EFeatureMapEntry[0..*]
+		getter is do
+			//TODO: implement getter for derived property group
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property group
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property emphasis : EmphasisType[0..*]
+		getter is do
+			//TODO: implement getter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property phrase : PhraseType[0..*]
+		getter is do
+			//TODO: implement getter for derived property phrase
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property phrase
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property superscript : seq type::NCName[0..*]
+		getter is do
+			//TODO: implement getter for derived property superscript
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property superscript
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	attribute format : type::NCName[1..1]
+}
+class PublisherType
+{
+	attribute publishername : type::NCName[1..1]
+	attribute address : AddressType[1..1]
+}
+class RowType
+{
+	attribute entry : EntryType[1..*]
+}
+class SectionType
+{
+	attribute group : seq ecore::EFeatureMapEntry[0..*]
+	property itemizedlist : ItemizedlistType[0..*]
+		getter is do
+			//TODO: implement getter for derived property itemizedlist
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property itemizedlist
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property mediaobject : MediaobjectType[0..*]
+		getter is do
+			//TODO: implement getter for derived property mediaobject
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property mediaobject
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property note : NoteType[0..*]
+		getter is do
+			//TODO: implement getter for derived property note
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property note
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property para : ParaType[0..*]
+		getter is do
+			//TODO: implement getter for derived property para
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property para
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property programlisting : ProgramlistingType[0..*]
+		getter is do
+			//TODO: implement getter for derived property programlisting
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property programlisting
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property section : SectionType[0..*]
+		getter is do
+			//TODO: implement getter for derived property section
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property section
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property title : TitleType[0..*]
+		getter is do
+			//TODO: implement getter for derived property title
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property title
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property figure : FigureType[0..*]
+		getter is do
+			//TODO: implement getter for derived property figure
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property figure
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property informaltable : InformaltableType[0..*]
+		getter is do
+			//TODO: implement getter for derived property informaltable
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property informaltable
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property orderedlist : OrderedlistType[0..*]
+		getter is do
+			//TODO: implement getter for derived property orderedlist
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property orderedlist
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property table : TableType[0..*]
+		getter is do
+			//TODO: implement getter for derived property table
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property table
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property warning : seq type::String[0..*]
+		getter is do
+			//TODO: implement getter for derived property warning
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property warning
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	attribute tip : TipType
+	attribute caution : type::String
+}
+class TableType
+{
+	attribute title : TitleType[1..1]
+	attribute tgroup : TgroupType[1..1]
+	attribute id : type::NCName[1..1]
+}
+class TbodyType
+{
+	attribute row : RowType[1..*]
+}
+class TgroupType
+{
+	attribute colspec : ColspecType[1..*]
+	attribute thead : TheadType
+	attribute tbody : TbodyType[1..1]
+	attribute cols : type::Integer[1..1]
+}
+class TheadType
+{
+	attribute row : RowType[1..*]
+}
+class TipType
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	property ulink : UlinkType[0..*]
+		getter is do
+			//TODO: implement getter for derived property ulink
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property ulink
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+}
+class TitleType
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	property group : seq ecore::EFeatureMapEntry[0..*]
+		getter is do
+			//TODO: implement getter for derived property group
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property group
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property emphasis : EmphasisType[0..*]
+		getter is do
+			//TODO: implement getter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property phrase : PhraseType[0..*]
+		getter is do
+			//TODO: implement getter for derived property phrase
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property phrase
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+}
+class UlinkType
+{
+	attribute mixed : seq ecore::EFeatureMapEntry[0..*]
+	property emphasis : EmphasisType[0..*]
+		getter is do
+			//TODO: implement getter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement setter for derived property emphasis
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	attribute type : type::AnySimpleType
+	attribute url : type::AnyURI[1..1]
+}
