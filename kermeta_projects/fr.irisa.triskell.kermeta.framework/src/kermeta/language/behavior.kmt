@@ -46,14 +46,14 @@ class CallResult inherits CallVariable, KMExpressionVisitable
 			result := visitor.visitCallResult(self, context)
 		end
 }
-class Assignement inherits Expression, KMExpressionVisitable
+class Assignment inherits Expression, KMExpressionVisitable
 {
 	attribute target : CallExpression[1..1]
 	attribute ~value : Expression[1..1]
 	attribute isCast : kermeta::reflection::Boolean
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
-			result := visitor.visitAssignement(self, context)
+			result := visitor.visitAssignment(self, context)
 		end
 }
 class Block inherits Expression, KMExpressionVisitable
@@ -210,7 +210,7 @@ abstract class KMExpressionVisitor<ContextType, ResultType>
 	operation visitCallFeature(node : CallFeature, context : ContextType) : ResultType is abstract
 	operation visitCallSuperOperation(node : CallSuperOperation, context : ContextType) : ResultType is abstract
 	operation visitCallResult(node : CallResult, context : ContextType) : ResultType is abstract
-	operation visitAssignement(node : Assignement, context : ContextType) : ResultType is abstract
+	operation visitAssignment(node : Assignment, context : ContextType) : ResultType is abstract
 	operation visitBlock(node : Block, context : ContextType) : ResultType is abstract
 	operation visitConditionnal(node : Conditionnal, context : ContextType) : ResultType is abstract
 	operation visitEmptyExpression(node : EmptyExpression, context : ContextType) : ResultType is abstract

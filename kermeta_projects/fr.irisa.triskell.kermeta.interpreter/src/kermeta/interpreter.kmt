@@ -1,5 +1,5 @@
 /***************************************************
- * $Id: interpreter.kmt,v 1.8 2005-08-31 13:40:59 zdrey Exp $
+ * $Id: interpreter.kmt,v 1.9 2006-03-15 08:16:08 dvojtise Exp $
  * Franck FLEUREY - 23/02/2005
  * Triskell Research Group
  * IRISA / University of Rennes 1 (France)
@@ -41,7 +41,7 @@ class Interpreter inherits KMExpressionVisitor<InterpreterContext, Object>
 		result := context.current_frame.operation_result
 	end
 	
-	method visitAssignement(node : Assignement, context : InterpreterContext) : Object is do
+	method visitAssignment(node : Assignment, context : InterpreterContext) : Object is do
 	
 	end
 	
