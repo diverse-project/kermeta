@@ -6,9 +6,9 @@ package RuntimeModelImportTests;
 
 
 require kermeta
-require "../../../fr.irisa.triskell.kermeta/lib/kermeta_java.ecore"
-using kermeta::structure
-using kermeta::behavior
+//require "../../../fr.irisa.triskell.kermeta/lib/kermeta_java.ecore"
+using kermeta::language::structure
+using kermeta::language::behavior
 using kermeta::standard
 
 class Main inherits kermeta::kunit::Test
@@ -28,10 +28,12 @@ class Main inherits kermeta::kunit::Test
        var kmlogopackage : Package init inputModel.detect{ p | (p.name.compareTo("kmLogo") == 0) }
        assert( kmlogopackage.name.compareTo("kmLogo") == 0)
        // find a package named "actions"       
-       var actionpackage : Package init kmlogopackage.nestedPackage.detect{ p | (p.name.compareTo("actions") == 0) }       
+       var actionpackage : Package 
+       actionpackage ?= kmlogopackage.nestedPackage.detect{ p | (p.name.compareTo("actions") == 0) }       
        assert( actionpackage.name.compareTo("actions") == 0)
        // find a class named "Interpreter"
-       var classTypeDef : TypeDefinition init actionpackage.ownedTypeDefinition.detect{ c | (c.name.compareTo("Interpreter") == 0) }
+       var classTypeDef : TypeDefinition 
+	   classTypeDef ?= actionpackage.ownedTypeDefinition.detect{ c | (c.name.compareTo("Interpreter") == 0) }
        var classClassTypeDef : ClassDefinition 
        classClassTypeDef ?= classTypeDef
        assert (classClassTypeDef.name.compareTo("Interpreter") == 0  )       
@@ -41,7 +43,8 @@ class Main inherits kermeta::kunit::Test
        assert(superClassType.typeDefinition.name.compareTo("AbstractVisitor") == 0)
        
        // one of its feature must be "accumulator" of type "Integer"
-       var accFProp : Property init  classClassTypeDef.ownedAttribute.detect{ k | k.name.compareTo("accumulator") == 0 }
+       var accFProp : Property 
+       accFProp ?= classClassTypeDef.ownedAttribute.detect{ k | k.name.compareTo("accumulator") == 0 }
        var propClassType : Class
        propClassType ?= accFProp.type
        assert(propClassType.typeDefinition.name.compareTo("Integer") == 0)
