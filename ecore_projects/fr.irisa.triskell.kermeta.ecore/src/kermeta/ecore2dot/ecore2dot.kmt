@@ -1,0 +1,196 @@
+/* $Id: ecore2dot.kmt,v 1.1 2006-03-15 10:52:17 dvojtise Exp $
+ * File : Ecore2dot.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Jan, 2006
+ * Authors : 
+ *  	Martin Monperrus <martin.monperrus@ensieta.fr>
+ * Description :
+ * I've written this because I was not satisfied of Omondo views and because
+ * "Computer power and automatic graph drawing algorithms [1] have now
+ * sufficiently advanced so as to allow the automatic placement of graph
+ * nodes on the canvas and the near optimal routing of the respective
+ * edges." (http://www.spinellis.gr/pubs/jrnl/2003-IEEESW-umlgraph/html/article.html)
+ * 
+ * With a lot of modeling tools, inheritance and associations are manhattan
+ * or straight shaped. With dot, it could seem weird to have inheritance
+ * and associations curved. Personnaly, I like it, and models don't lose
+ * brightness.
+ */
+@mainClass "ecore2dot::Main"
+@mainOperation "main"
+
+/*
+* Print to stdio classical view with all inheritance and associations
+* what is displayed "class-inline" is parametrized in exclude_patterns
+* inheritance in green 
+* associations in red, dashed (for printing)
+* 
+* creating image file :
+* dot -Tpng -o examples/kermeta_structure.png dot/kermeta_structure.dot
+*  type in ps , svg , svgz , fig (XFIG graphics) , png , jpg,  gif 
+* 
+* Warning : Highly dependant of the ecore.ecore and ecore.kmt used
+* md5sum ecore.ecore 9e94a53080fca2c2f1499db9727d36cc
+* md5sum ecore.kmt 959eb9455053cd90278135208c880dd7
+* 
+* TODO :
+* - print to file , Howto ?
+* - multiplicity 
+* - containment 
+* - use only a **good** ecore.ecore (in the ecore AND Kermeta sense)
+* 
+*/
+package ecore2dot;
+
+require kermeta
+
+require "../ecore.kmt"
+
+using kermeta::standard
+
+class Main
+{
+	reference exclude_patterns : Sequence<String>
+
+    operation main() : Void is do 
+		
+		var model : String init "examples/kermeta_java_structure.ecore"
+		var metamodel : String init "ecore.ecore"
+		
+		exclude_patterns := Sequence<String>.new
+		exclude_patterns.add("Boolean")
+		exclude_patterns.add("String")
+		exclude_patterns.add("Integer")
+		exclude_patterns.add("Real")
+		exclude_patterns.add("FString")
+		exclude_patterns.add("FBoolean")
+		exclude_patterns.add("FInteger")
+		exclude_patterns.add("EString")
+		exclude_patterns.add("EBoolean")
+		exclude_patterns.add("EInt")
+		
+		
+		var resource : kermeta::persistence::EMFResource
+        var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+        resource := repository.createResource(model,metamodel)
+        resource.load
+	
+		// dot header
+        stdio.writeln("digraph G { node[shape=record];")
+		stdio.writeln("#size : "+resource.instances.size.toString)
+
+		// print nodes structure i.e. all patterns inline
+		resource.instances.each{t | printStruct(t)}
+
+		// print edges
+		printForAllInstances(resource.instances)
+		
+		// dot end
+        stdio.writeln("}")
+        
+    end
+	operation print(s : String) : Boolean is do
+		result := not exclude_patterns.forAll{ pat | not s.equals(pat)}
+	end
+	
+	operation printForAClass(c : ecore::EClass) : Void is do
+		
+		    if c!=void then
+		    	//if not s.contains(c.name) then 
+		    	//s.add(c.name)
+		    	stdio.writeln("#examining "+c.name)
+				c.eSuperTypes.each { c2 | stdio.writeln(c.name +"->" + c2.name+"[label=inherits,color=green];") }
+				
+				c.eStructuralFeatures.each { 
+					ref | 
+					//stdio.writeln(ref.toString)
+					if not print(ref.eType.name)
+					then
+						stdio.writeln(c.name +"->" + ref.eType.name+"[style=dashed,color=red,label=\""+ref.name+"\"];") 
+					end
+				} 
+			end // c!=void
+		
+		
+	end
+
+
+	operation printForAllInstances(set_o : Set<Object>) : Void is do
+		
+		stdio.writeln("#"+set_o.toString+" size : "+ set_o.size.toString)
+		if set_o != void then
+		set_o.each { o2 | 
+		
+		    if o2.getMetaClass == ecore::EPackage
+	    	then
+		    	var p : ecore::EPackage
+		    	p?=o2
+		    	if p != void
+		    	then 
+			    	p.eClassifiers.each {c | 
+
+			    		// at least we get classes
+			    		if c.getMetaClass == ecore::EClass then
+			    			var cc : ecore::EClass
+			    			cc ?= c
+			    			printForAClass(cc)
+			    		end
+			    	}   		 
+		
+					//  Sequence<EPackage> to Set<Object>
+					// in order to reuse printForAllInstances
+			    	var set2 : Set<Object> init Set<Object>.new 
+			    	p.eSubpackages.each{ pp | set2.add(pp)}
+			    	printForAllInstances(set2)
+		    	
+		    	end // == EPackage
+	    	end // ==ePackage
+		}
+		end
+		
+	end // end operation
+	
+	/* Print class structure with possibly "inlined" references 
+	*
+	*/
+	operation printStruct(o : Object) : Void is do
+
+		var p : ecore::EPackage
+		p?=o
+		if p!= void
+		then
+		stdio.writeln("#Number of classes in "+p.name+": "+p.eClassifiers.size.toString)
+		p.eClassifiers.each { o2 | 
+			//stdio.writeln(o2.toString)
+		    var c : ecore::EClass 
+		    c ?= o2
+		    if c!=void then
+				var r : Sequence<ecore::EStructuralFeature>
+				r := c.eStructuralFeatures.select { ref | print(ref.eType.name) }
+				if r.size != 0
+				then
+					stdio.write(c.name +"[label=\"{"+c.name+"|")
+					r.each { 
+					ref | 
+						stdio.write(ref.eType.name+" "+ref.name+"\\l") 
+					}
+					stdio.writeln("}\"];")
+				else
+					stdio.write(c.name +"[label=\""+c.name+"\"];\n")
+				end
+			end // enc c!= void
+			
+		}
+		if p.eSubpackages != void
+		then
+			p.eSubpackages.each { p2 | printStruct(p2) }
+		end
+		end // p!=void
+		
+	end
+	
+
+}
+
