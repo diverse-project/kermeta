@@ -46,6 +46,13 @@ class CallResult inherits CallVariable, KMExpressionVisitable
 			result := visitor.visitCallResult(self, context)
 		end
 }
+class CallValue inherits CallExpression, KMExpressionVisitable
+{
+	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
+		do
+			result := visitor.visitCallValue(self, context)
+		end
+}
 class Assignment inherits Expression, KMExpressionVisitable
 {
 	attribute target : CallExpression[1..1]
@@ -65,14 +72,14 @@ class Block inherits Expression, KMExpressionVisitable
 			result := visitor.visitBlock(self, context)
 		end
 }
-class Conditionnal inherits Expression, KMExpressionVisitable
+class Conditional inherits Expression, KMExpressionVisitable
 {
 	attribute thenBody : Expression
 	attribute elseBody : Expression
 	attribute condition : Expression
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
 		do
-			result := visitor.visitConditionnal(self, context)
+			result := visitor.visitConditional(self, context)
 		end
 }
 abstract class Literal inherits Expression
@@ -210,9 +217,10 @@ abstract class KMExpressionVisitor<ContextType, ResultType>
 	operation visitCallFeature(node : CallFeature, context : ContextType) : ResultType is abstract
 	operation visitCallSuperOperation(node : CallSuperOperation, context : ContextType) : ResultType is abstract
 	operation visitCallResult(node : CallResult, context : ContextType) : ResultType is abstract
+	operation visitCallValue(node : CallValue, context : ContextType) : ResultType is abstract
 	operation visitAssignment(node : Assignment, context : ContextType) : ResultType is abstract
 	operation visitBlock(node : Block, context : ContextType) : ResultType is abstract
-	operation visitConditionnal(node : Conditionnal, context : ContextType) : ResultType is abstract
+	operation visitConditional(node : Conditional, context : ContextType) : ResultType is abstract
 	operation visitEmptyExpression(node : EmptyExpression, context : ContextType) : ResultType is abstract
 	operation visitIntegerLiteral(node : IntegerLiteral, context : ContextType) : ResultType is abstract
 	operation visitStringLiteral(node : StringLiteral, context : ContextType) : ResultType is abstract
