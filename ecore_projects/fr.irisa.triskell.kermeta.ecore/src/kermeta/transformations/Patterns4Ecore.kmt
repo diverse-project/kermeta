@@ -1,4 +1,4 @@
-/* $Id: Patterns4Ecore.kmt,v 1.2 2006-03-15 20:18:18 dvojtise Exp $
+/* $Id: Patterns4Ecore.kmt,v 1.3 2006-03-16 07:21:16 dvojtise Exp $
  * File : Patterns4Ecore.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -44,7 +44,7 @@ class Patterns4Ecore inherits kermeta::kunit::Assert
 
 	/* --------------- Visitor -------------------------------*/
 	/** create a Visitor for each of the class of the package */    
-    operation addVisitor(pack : EPackage) is do
+    operation addVisitor(pack : EPackage, visitReturnType : EClassifier) is do
     	assertTrue(pack != void)
     	
     	// create the visitable interface and the abstract class visitor
@@ -61,7 +61,7 @@ class Patterns4Ecore inherits kermeta::kunit::Assert
         pack.eClassifiers.add(abstractVisitor)
           
         addAcceptOperation( visitableInterface,  abstractVisitor)   		
-		addVisitOperation(abstractVisitor, visitableInterface)
+		addVisitOperation(abstractVisitor, visitableInterface, visitReturnType)
         
         // add the inheritance to all the classes of this package except for except for the abstractVisitor and the visitableInterface
         // only add it for classes without parent in the same package
@@ -95,7 +95,8 @@ class Patterns4Ecore inherits kermeta::kunit::Assert
 							"visitor.visit" + eClass.name + "(self);")
 					end
 					// the visitFoo methods in the visitor
-            		addVisitFooOperation(abstractVisitor, eClass, eClass.name)
+            		var visitFoo : EOperation init addVisitFooOperation(abstractVisitor, eClass, eClass.name, visitReturnType)
+            		helper.addAnnotation(visitFoo,"kermeta","isAbstract","true")
             	end
         	end
         }
@@ -112,18 +113,21 @@ class Patterns4Ecore inherits kermeta::kunit::Assert
 		result := acceptOp
     end
     
-    operation addVisitFooOperation(visitingClass : EClass, visitableInterface : EClass, name : String) : EOperation is do
+    operation addVisitFooOperation(visitingClass : EClass, visitableInterface : EClass,
+     		name : String, visitReturnType : EClassifier) : EOperation is do
     	var visitOp : EOperation init EOperation.new
         var vParam : EParameter init EParameter.new
 		visitOp.name := "visit" + name
 		vParam.name := "visitable"
 		vParam.eType := visitableInterface
 		visitOp.eParameters.add(vParam)
+		visitOp.eType := visitReturnType
 		visitingClass.eOperations.add(visitOp)
 		result := visitOp
     end
-    operation addVisitOperation(visitingClass : EClass, visitableInterface : EClass) : EOperation is do
-		result := addVisitFooOperation(visitingClass, visitableInterface, "")
+    operation addVisitOperation(visitingClass : EClass, 
+    		visitableInterface : EClass, visitReturnType : EClassifier) : EOperation is do
+		result := addVisitFooOperation(visitingClass, visitableInterface, "", visitReturnType)
     end
     
 	/* --------------- Builder -------------------------------*/    
