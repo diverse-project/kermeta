@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.7 2006-03-03 15:22:58 dvojtise Exp $
+$Id: README.txt,v 1.8 2006-03-16 10:38:58 jmottu Exp $
 
 
 Leaders :
@@ -39,12 +39,17 @@ How to build this project :
 
 3) Check that java source code generated in src/java compiles correctly
 
-4) Generate the model_kermeta.jar in the dist directory that include build/class compiled classes
+4) Generate the model_kermeta.jar in the dist directory that include build/class compiled classes from model_kermeta.jardesc
+
+5) Deploy it into all the projects with deploy_jar_build.xml
 
 
 History :
 ---------
 $Log: not supported by cvs2svn $
+Revision 1.7  2006/03/03 15:22:58  dvojtise
+Refactoring of Kermeta metamodel (removed the F prefix) (merge of the refactoring branch)
+
 Revision 1.6  2005/04/18 09:03:23  dvojtise
 small clarification in the procedure
 
