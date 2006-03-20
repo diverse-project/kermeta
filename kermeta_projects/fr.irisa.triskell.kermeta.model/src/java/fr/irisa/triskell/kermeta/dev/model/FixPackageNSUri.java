@@ -1,4 +1,4 @@
-/* $Id: FixPackageNSUri.java,v 1.2 2006-03-03 15:22:58 dvojtise Exp $
+/* $Id: FixPackageNSUri.java,v 1.3 2006-03-20 17:54:40 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : FixPackageNSUri.java
  * License    : EPL
@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
  */
 public class FixPackageNSUri {
 	
-	
+	public static final String BaseNsURI = "http://kermeta/kermeta.ecore";
 	/**
 	 * Loads the ecore model from a xmi 2.0 (*.ecore) file
 	 * @param xmifile Path to the file to load
@@ -69,14 +69,26 @@ public class FixPackageNSUri {
 		return p.getName();
 	}
 	
-	// TODO switch nsuri to xpath syntax and platform uri like in KM2ecorepass1
-	//	newEPackage.setNsURI(ecoreExporter.getKermetaUnit().getUri() + (p==root_p?"":"#/") + current_ppath);
+	/** Set a xpath-like syntax for the NsURI of the given package*/
+	public static String getPackageNsPath(EPackage p) {
+		if (p.eContainer() != null && p.eContainer() instanceof EPackage) {
+			 if (!((EPackage)p.eContainer()).getName().equals("kermeta"))
+				 return getPackageNsPath((EPackage)p.eContainer()) + "/" + p.getName();
+		}
+		return p.getName();
+	}
+	
+	/**
+	 * Sets the nsUri and nsPrefix attributes of the given EPackage, regarding the emf usings, 
+	 * eg : "http://kermeta/kermeta.ecore#//language/structure" for subpackage named structure.
+	 * @param the package of which nsURI and nsPrefix have to be set
+	 */
 	public static void processPackage(EPackage p) {
 		String prefix = getPrefix(p);
-		System.out.println("Package " + p.getName() + " nsURI = " + getPrefix(p));
-		p.setNsURI("http://" + prefix + "/kermeta.ecore");
+		String suffix = p.getName().equals("kermeta")?"":"#//"+getPackageNsPath(p);
+		System.out.println("Package " + p.getName() + "; nsPrefix = "+ prefix + "; nsURI = " + BaseNsURI+suffix);
+		p.setNsURI(BaseNsURI + suffix);
 		p.setNsPrefix(prefix);
-		
 	}
 	
 	/**

@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kermeta" nsURI="http://kermeta/kermeta.ecore" nsPrefix="kermeta">
-  <eSubpackages name="language" nsURI="http://kermeta_language/kermeta.ecore" nsPrefix="kermeta_language">
-    <eSubpackages name="behavior" nsURI="http://kermeta_language_behavior/kermeta.ecore" nsPrefix="kermeta_language_behavior">
-      <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="//language/behavior/Expression">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//language/behavior/CallExpression" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCast" eType="//language/structure/Boolean"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="//language/structure/Object //language/structure/TypeContainer">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="staticType" eType="//language/structure/Type"/>
-      </eClassifiers>
+  <eSubpackages name="language" nsURI="http://kermeta/kermeta.ecore#//language" nsPrefix="kermeta_language">
+    <eSubpackages name="behavior" nsURI="http://kermeta/kermeta.ecore#//language/behavior" nsPrefix="kermeta_language_behavior">
       <eClassifiers xsi:type="ecore:EClass" name="CallExpression" abstract="true" eSuperTypes="//language/behavior/Expression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//language/structure/String"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticTypeVariableBindings" upperBound="-1" eType="//language/structure/Type"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="//language/behavior/Expression">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="statement" lowerBound="1" upperBound="-1" eType="//language/behavior/Expression" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" upperBound="-1" eType="//language/behavior/Rescue" containment="true"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="//language/structure/TypeContainer //language/structure/Object">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="staticType" eType="//language/structure/Type"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="//language/behavior/CallExpression"/>
       <eClassifiers xsi:type="ecore:EClass" name="CallFeature" eSuperTypes="//language/behavior/CallExpression">
@@ -29,6 +20,15 @@
       <eClassifiers xsi:type="ecore:EClass" name="CallSuperOperation" eSuperTypes="//language/behavior/CallExpression"/>
       <eClassifiers xsi:type="ecore:EClass" name="CallResult" eSuperTypes="//language/behavior/CallVariable"/>
       <eClassifiers xsi:type="ecore:EClass" name="CallValue" eSuperTypes="//language/behavior/CallExpression"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="//language/behavior/Expression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//language/behavior/CallExpression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCast" eType="//language/structure/Boolean"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="//language/behavior/Expression">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="statement" lowerBound="1" upperBound="-1" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" upperBound="-1" eType="//language/behavior/Rescue" containment="true"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Conditional" eSuperTypes="//language/behavior/Expression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="thenBody" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="elseBody" eType="//language/behavior/Expression" containment="true"/>
@@ -83,39 +83,8 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//language/behavior/TypeReference" containment="true"/>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="structure" nsURI="http://kermeta_language_structure/kermeta.ecore" nsPrefix="kermeta_language_structure">
+    <eSubpackages name="structure" nsURI="http://kermeta/kermeta.ecore#//language/structure" nsPrefix="kermeta_language_structure">
       <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="kermeta::standard::String"/>
-      <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="kermeta::standard::Boolean"/>
-      <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//language/structure/ParameterizedType">
-        <eOperations name="_new" eType="//language/structure/Object"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="//language/structure/Property" changeable="false" derived="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1" eType="//language/structure/Operation" changeable="false" derived="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1" eType="//language/structure/Class" changeable="false" derived="true"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//language/structure/Boolean" changeable="false" defaultValueLiteral="false" derived="true"/>
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//language/structure/String" changeable="false" derived="true"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Object">
-        <eOperations name="getMetaClass" eType="//language/structure/Class"/>
-        <eOperations name="container" eType="//language/structure/Object"/>
-        <eOperations name="_equals" eType="//language/structure/Boolean">
-          <eParameters name="element" eType="//language/structure/Object"/>
-        </eOperations>
-        <eOperations name="get" eType="//language/structure/Object">
-          <eParameters name="property" eType="//language/structure/Property"/>
-        </eOperations>
-        <eOperations name="set">
-          <eParameters name="property" eType="//language/structure/Property"/>
-          <eParameters name="element" eType="//language/structure/Object"/>
-        </eOperations>
-        <eOperations name="isSet" eType="//language/structure/Boolean">
-          <eParameters name="property" eType="//language/structure/Property"/>
-        </eOperations>
-        <eOperations name="unset">
-          <eParameters name="property" eType="//language/structure/Property"/>
-        </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="tag" upperBound="-1" eType="//language/structure/Tag" eOpposite="//language/structure/Tag/object"/>
-      </eClassifiers>
-      <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="kermeta::standard::Integer"/>
       <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="//language/structure/MultiplicityElement">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//language/structure/Boolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="raisedException" upperBound="-1" eType="//language/structure/Type"/>
@@ -147,6 +116,37 @@
       <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" eSuperTypes="//language/structure/NamedElement">
         <eStructuralFeatures xsi:type="ecore:EReference" name="enumeration" eType="//language/structure/Enumeration" transient="true" eOpposite="//language/structure/Enumeration/ownedLiteral"/>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="kermeta::standard::Boolean"/>
+      <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//language/structure/ParameterizedType">
+        <eOperations name="_new" eType="//language/structure/Object"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="//language/structure/Property" changeable="false" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1" eType="//language/structure/Operation" changeable="false" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" upperBound="-1" eType="//language/structure/Class" changeable="false" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//language/structure/Boolean" changeable="false" defaultValueLiteral="false" derived="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//language/structure/String" changeable="false" derived="true"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Object">
+        <eOperations name="getMetaClass" eType="//language/structure/Class"/>
+        <eOperations name="container" eType="//language/structure/Object"/>
+        <eOperations name="_equals" eType="//language/structure/Boolean">
+          <eParameters name="element" eType="//language/structure/Object"/>
+        </eOperations>
+        <eOperations name="get" eType="//language/structure/Object">
+          <eParameters name="property" eType="//language/structure/Property"/>
+        </eOperations>
+        <eOperations name="set">
+          <eParameters name="property" eType="//language/structure/Property"/>
+          <eParameters name="element" eType="//language/structure/Object"/>
+        </eOperations>
+        <eOperations name="isSet" eType="//language/structure/Boolean">
+          <eParameters name="property" eType="//language/structure/Property"/>
+        </eOperations>
+        <eOperations name="unset">
+          <eParameters name="property" eType="//language/structure/Property"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="tag" upperBound="-1" eType="//language/structure/Tag" eOpposite="//language/structure/Tag/object"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="kermeta::standard::Integer"/>
       <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" eSuperTypes="//language/structure/TypedElement">
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isOrdered" eType="//language/structure/Boolean" defaultValueLiteral="false"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isUnique" eType="//language/structure/Boolean" defaultValueLiteral="true"/>
