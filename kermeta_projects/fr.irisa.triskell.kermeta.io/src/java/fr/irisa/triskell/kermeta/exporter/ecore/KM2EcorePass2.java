@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.7 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.8 2006-03-20 15:32:12 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -48,11 +48,14 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -79,6 +82,9 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	protected Resource ecoreResource = null;
 	protected ResourceSet ecoreResourceSet = null;
 	
+	/** Contains the string uris of the resources already saved during this pass */
+	protected Hashtable<String, Resource> savedFiles = null;
+	
 	// mapping to look for ecore objects created during pass1
 	protected Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> kmt2ecoremapping;
 	
@@ -90,6 +96,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		ecoreResourceSet = resource.getResourceSet();
 		kmt2ecoremapping = mapping;	
 		ecoreExporter = anEcoreExporter;
+		savedFiles = new Hashtable<String, Resource>();
 	}
 	
 	/**
@@ -168,9 +175,9 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		internalLog.debug(loggerTabs + "Visiting Operation: "+ current_pname);
 		loggerTabs.increment();
 		
-		//		 search the EOperation from previous pass
-		newEOperation = (EOperation)kmt2ecoremapping.get(node);
-		
+		// search the EOperation from previous pass // FIXME : sometimes newEOperation is not found!!!
+		//newEOperation = (EOperation)kmt2ecoremapping.get(node);
+		newEOperation = (EOperation)getEObjectForKMObject(node);
 		// Parameters
 		Iterator it = node.getOwnedParameter().iterator();
 		while(it.hasNext()) {
@@ -190,6 +197,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 					KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION,
 					KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS,
 					KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()),
+					
 					(EObject)accept(node.getSuperOperation()));
 			
 		}
@@ -234,8 +242,9 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		internalLog.debug(loggerTabs + "Visiting Parameter: "+ node.getName());
 		loggerTabs.increment();
 		
-		//		 search the EOperation from previous pass
-		EParameter newEParameter = (EParameter)kmt2ecoremapping.get(node);
+		//		 search the EParameter from previous pass
+		EParameter newEParameter = (EParameter)getEObjectForKMObject(node);
+		// If it is not found in kmt2ecoremapping?
 		
 		newEParameter.setEType(	(EClassifier)accept(node.getType()));
 		
@@ -284,6 +293,113 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	}
 	
 	/**
+	 * Find the EObject in the km2ecore mapping hashtable. If not found, than try to calculate it.
+	 * 
+	 * @param obj
+	 * @return
+	 */
+	protected EObject getEObjectForKMObject(fr.irisa.triskell.kermeta.language.structure.Object obj)
+	{
+		EObject result = null;
+		result = kmt2ecoremapping.get(obj);
+		// If we did not find the mapped EObject, than find it in depending resources.
+		if (result==null)
+		{
+			if (obj instanceof Operation)
+				result = getEObjectForOperation((Operation)obj);
+			if (obj instanceof Property)
+				result = getEObjectForProperty((Property)obj);
+			if (obj instanceof Parameter)
+				result = getEObjectForParameter((Parameter)obj);
+		}
+		return result;
+	}
+
+	/**
+	 * @param node the node from Kermeta for which we want the corresponding Ecore mapping (usually,
+	 * we look for a Type or an Operation -- NamedElement) 
+	 * @return
+	 */
+	protected EObject getEObjectForOperation(Operation node)
+	{
+		return getEObjectForQualifiedName(
+				KMTHelper.getQualifiedName(node),
+				KMTHelper.getQualifiedName(node.getOwningClass()));
+	}
+	
+	protected EObject getEObjectForProperty(Property node)
+	{
+		return getEObjectForQualifiedName(
+				KMTHelper.getQualifiedName(node),
+				KMTHelper.getQualifiedName(node.getOwningClass()));
+	}
+	
+	protected EObject getEObjectForParameter(Parameter node)
+	{
+		return getEObjectForQualifiedName(
+				KMTHelper.getQualifiedName(node),
+				KMTHelper.getQualifiedName(node.getOperation().getOwningClass()));
+	}
+	
+	/**
+	 * @param object_qname the qualified name (in kermeta::format) of the object we are looking for 
+	 * @param ecore_path the path of the object in "emf" representation <code>//Bla/foo/eobject_name</code>
+	 * @param owning_classdef the owning classdefinition to which the object belongs or is related to
+	 * 
+	 * @return
+	 */
+	protected EObject getEObjectForQualifiedName(String object_qname, String owning_typedef_qname)
+	{
+
+		String ecoreDir = ecoreExporter.ecoreGenDirectory;
+		if (ecoreDir == null)
+			ecoreDir = ecoreExporter.getKermetaUnit().getUri().substring(0, ecoreExporter.getKermetaUnit().getUri().lastIndexOf("/"));
+		EObject result = null;
+		Resource depResource = null;
+		Iterator<KermetaUnit> allunits_it = ecoreExporter.getKermetaUnit().getAllImportedUnits().iterator();
+		while (allunits_it.hasNext() && result==null)
+		{
+			KermetaUnit ku = allunits_it.next();
+			String ecore_path = object_qname.contains(":")?object_qname.substring(object_qname.indexOf(":")+2):object_qname;
+			ecore_path = ecore_path.replaceAll("::", "/");
+			// We are looking from an object given its key, (it is redundant but avoids
+			// conflicts if "duplicate" loads in memory)
+			if (ku.typeDefs.containsKey(owning_typedef_qname))
+			{	// KermetaUnit type is EcoreUnit, if the underlying loaded resource was an .ecore file  
+				if (ku instanceof EcoreUnit)
+				{
+					URI u = URI.createURI(ku.getUri());
+					depResource = ecoreResourceSet.getResource(u, true);
+					result = depResource.getEObject("//" + ecore_path);
+				}
+				// If KMUnit, it means that the underlying resource if a .km file,
+				// then we have to convert it in an .ecore file!
+				else if (ku instanceof KMUnit || ku instanceof KMTUnit)
+				{
+					// Get the directory where main resource is located
+					String path = ecoreDir; //ecoreResource.getURI().toString();
+					String kmpath = ku.getUri();
+					String savepath = path.substring(0, path.lastIndexOf("/")) + kmpath.substring(kmpath.lastIndexOf("/"), kmpath.lastIndexOf(".km")) + ".ecore";
+					// Create the ecore resource corresponding to kermeta unit on which 
+					if (!savedFiles.containsKey(savepath))
+						// Create the ecore resource corresponding to kermeta unit on which 
+						depResource = writeEcore(ku, savepath, true);
+					else
+					{
+						depResource = savedFiles.get(savepath);
+						try { depResource.load(null); }
+						catch (IOException e) { e.printStackTrace(); }
+					}
+					
+					result = depResource.getEObject("//"+ ecore_path);
+				}
+			}
+		}
+		return result;
+	}
+	
+	
+	/**
 	 * Find the EClassifier of the specified <code>enode</code>
 	 * */
 	protected EClassifier resolveETypeForEStructuralFeature(Property node, EStructuralFeature enode, String ecoreDir)
@@ -293,38 +409,14 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		List allunits = ecoreExporter.getKermetaUnit().getAllImportedUnits();
 		// The resource where to find the external type -- TODO : store loaded resources.
 		Resource depResource;
+		String type = KMTHelper.getTypeQualifiedName(node.getType());
+		String short_type = type.contains(":")?type.substring(type.indexOf(":")+2):type;
 		EObject etype = null;
-		Iterator<KermetaUnit> allunits_it = allunits.iterator();
-		while (allunits_it.hasNext() && result==null)
-		{
-			KermetaUnit ku = allunits_it.next();
-			String type = KMTHelper.getTypeQualifiedName(node.getType());
-			String short_type = type.contains(":")?type.substring(type.indexOf(":")+2):type;
-			short_type = short_type.replaceAll("::", "/");
-			if (ku.typeDefs.containsKey(type))
-			{
-				if (ku instanceof EcoreUnit)
-				{
-					URI u = URI.createURI(ku.getUri());
-					depResource = ecoreResourceSet.getResource(u, true);
-					etype = depResource.getEObject("//" + short_type);
-					result = (EClassifier)etype;
-				}
-				// If KMUnit, then we have to convert it in an .ecore file!
-				else if (ku instanceof KMUnit || ku instanceof KMTUnit)
-				{
-					System.err.println("KM-Unit dependency!!!"+ short_type + ecoreDir);
-					// Get the directory where main resource is located (dep resources
-					// will be saved at this same place, for the moment.)
-					String path = ecoreDir ; //ecoreResource.getURI().toString();
-					String kmpath = ku.getUri();
-					String savepath = path.substring(0, path.lastIndexOf("/")) + kmpath.substring(kmpath.lastIndexOf("/"), kmpath.lastIndexOf(".km")) + ".ecore";
-					// Create the ecore resource corresponding to kermeta unit on which 
-					depResource = writeEcore(ku, savepath, true);
-					result = (EClassifier)depResource.getEObject("//"+ short_type);
-				}
-			}
-		}
+		// We are looking for the type given its qualified name "type", which corresponding
+		// TypeDefinition exists and which qualified would be "type" (since TypeQualifiedName is the
+		// TypeDefinition qualified name provided the type has got a type definition (not the case 
+		// of function types for example...)
+		result = (EClassifier)getEObjectForQualifiedName(type,type);
 		return result;
 	}
 	
@@ -349,7 +441,16 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		EClassifier etype = null;
 		//assert(ecoreDir!=null && ecoreList.size()>0);
 		if (ecoreDir != null) etype = resolveETypeForEStructuralFeature(node, enode, ecoreDir);
-		else etype = resolveETypeForEStructuralFeature(node, enode, ecoreList);
+		// If ecoreDir is null, and ecoreList as well, generate by default in currentDir!
+		else if (ecoreList==null)
+		{
+			String ecoreDefaultDir = ecoreExporter.getKermetaUnit().getUri().substring(0, ecoreExporter.getKermetaUnit().getUri().lastIndexOf("/"));
+			etype = resolveETypeForEStructuralFeature(node, enode, ecoreDefaultDir);
+		}
+		else if (ecoreList!=null) etype = resolveETypeForEStructuralFeature(node, enode, ecoreList);
+		// If user did not provide neither an dir for generated ecore or a list of existing ecore, 
+		// set an ecore gen dir by default.
+		
 		enode.setEType(etype);
 	}
 	
@@ -379,13 +480,8 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		// the required resources. This is not a recursive call!!
 		if (result == null)
 		{ 
-			System.err.println("U est-il bien résolu? = " + ecoreResource.getURI().toString());
 			result = resolveETypeForEStructuralFeature(node, enode, ecoreResource.getURI().toString());
 		}
-		else
-		{
-			System.err.println("Caca pourri : " + ecoreResource.getURI().toString()+ "res:"+ result);
-		} 
 		return result;
 	}
 	//
@@ -587,10 +683,12 @@ public class KM2EcorePass2 extends KermetaVisitor{
 			// TODO : test if file exists!! -> u.toFileString() reutrns null :(
 			if (overwrite==true)
 				resource.save(null);
+			savedFiles.put(file, resource); // add the file so that we avoid re-save of resources
 		} catch (IOException e) {
 			KermetaUnit.internalLog.error("cannot save ecore ressource, due to Exception: "+ e.getMessage(), e);
 			throw new Error("Cannot save ecore ressource (" + file + "), due to Exception: ", e);
 		}
+
 		return resource;
 	}
 }

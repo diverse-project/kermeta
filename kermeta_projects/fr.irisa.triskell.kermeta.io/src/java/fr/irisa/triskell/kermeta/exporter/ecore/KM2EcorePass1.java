@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.6 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.7 2006-03-20 15:32:12 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -273,7 +273,8 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		EParameter newEParameter = EcoreFactory.eINSTANCE.createEParameter();
 //		KMTHelper.getMangledIdentifier(node.getFName()) + " : " + ppTypeFromMultiplicityElement(node)
 		
-		newEParameter.setName(node.getName());
+		// Was node.getName(), but this removes the necessary "~" for protecting keywords
+		newEParameter.setName(KMTHelper.getMangledIdentifier(node.getName()));
 		ecoreResource.getContents().add(newEParameter);
 		km2ecoremapping.put(node,newEParameter);
 		newEParameter.setLowerBound(node.getLower());
