@@ -8,7 +8,7 @@ package automaton;
 require kermeta 
 
 require "../metamodels/automata.kmt"
-require "../models/samples.kmt"
+//require "../models/samples.kmt"
 using kermeta::standard
 using automaton::samples
 using kermeta::persistence
@@ -49,7 +49,7 @@ class Determinization
 		
     	// We don't need combination to be stored
     	output.stateSet.each { e | e.combination.clear } 
-    	output.dotprint
+    	helper.dotprint(output)
     	// Save the automaton
     	helper.saveEMFAutomaton(repository, output, output_path, "../metamodels/automata.ecore")
 

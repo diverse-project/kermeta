@@ -6,7 +6,7 @@ package automaton;
 
 require kermeta
 require "../metamodels/automata.kmt"
-require "../models/samples.kmt"
+//require "../models/samples.kmt"
 using automaton::samples
 using automaton
 using kermeta::standard
@@ -51,8 +51,8 @@ class Minimization
     	minimalize(input, output)
     	//output.prettyprint
     	// We do not want to store combination
-    	output.stateSet.each { s | s.combination.clear }
-		output.dotprint 
+    	output.stateSet.each { s | s.combination.clear } 
+		helper.dotprint(output)
 		helper.saveEMFAutomaton(kermeta::persistence::EMFRepository.new, output, output_path, "../metamodels/automata.ecore" )
     end
 
