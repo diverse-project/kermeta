@@ -1,4 +1,4 @@
-/* $Id: EcoreValidatorAdapter.java,v 1.1 2006-03-10 16:07:21 zdrey Exp $
+/* $Id: EcoreValidatorAdapter.java,v 1.2 2006-03-22 16:24:59 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : KermetaValidatorAdapter.java
  * License    : EPL
@@ -20,8 +20,8 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.model.IConstraintStatus;
@@ -46,12 +46,15 @@ public class EcoreValidatorAdapter
     
     public EcoreValidatorAdapter() {
         super();
-        System.err.println("Kermeta Validator Adapter : la tata de ma tata");
+        //ValidationDelegateClientSelector.running = true;
+        System.err.println("Kermeta Validator Adapter");
         batchValidator =
             (IBatchValidator) ModelValidationService.getInstance().newValidator(
                 EvaluationMode.BATCH);
         batchValidator.setIncludeLiveConstraints(true);
         batchValidator.setReportSuccesses(false);
+        
+        //ValidationDelegateClientSelector.running = false;
     }
 
     public boolean validate(EObject eObject, DiagnosticChain diagnostics,
@@ -72,23 +75,46 @@ public class EcoreValidatorAdapter
                     new NullProgressMonitor());
                 
                 processed(eObject, context, status);
-                System.err.println("J'ajout un diagnos ting");
+                
+                System.err.println("J'ajoute un diagnostic : " + status + "- " + eObject.eClass().getEPackage().getNsURI() );
+                System.err.println("Diag: " + diagnostics.toString());
+               /* if (eObject instanceof Package)
+                {}//	QueryFactory.eINSTANCE.createQuery("Package.name!=''", eObject.eClass() );
+                else
+                	System.err.println("Crub");*/
+                for (Object c : context.keySet())
+                {
+                	System.err.println(c);	
+                }
+                
                 appendDiagnostics(status, diagnostics);
+                System.out.println("Voilu");
             }
         }
         
         return status.isOK();
     }
     
-    private void processed(EObject eObject, Map context, IStatus status) {
+    /**
+     * "post-processing method" that adds the processed <code>{ eObject :  statuc }</code> 
+     * in the context dictionary
+     */
+    protected void processed(EObject eObject, Map context, IStatus status) {
         if (context != null) {
             context.put(eObject, status);
         }
     }
     
-    private boolean hasProcessed(EObject eObject, Map context) {
+    /**
+     * If the given <code>eObject</code> was already processed, so, it means
+     * that it is stored in the context dictionary, then return true. Otherwise, 
+     * return false.
+     * @param eObject
+     * @param context
+     * @return
+     */
+    protected boolean hasProcessed(EObject eObject, Map context) {
         boolean result = false;
-        
         if (context != null) {
             while (eObject != null) {
                 if (context.containsKey(eObject)) {
@@ -97,13 +123,18 @@ public class EcoreValidatorAdapter
                 } else {
                     eObject = eObject.eContainer();
                 }
+                
             }
         }
         
         return result;
     }
     
-    private void appendDiagnostics(IStatus status, DiagnosticChain diagnostics) {
+    /**
+     * Create a new diagnostic from the given <code>status</code> and append it in the
+     * list of <code>diagnostics</code>
+     */
+    protected void appendDiagnostics(IStatus status, DiagnosticChain diagnostics) {
         if (status.isMultiStatus()) {
             IStatus[] children = status.getChildren();
             

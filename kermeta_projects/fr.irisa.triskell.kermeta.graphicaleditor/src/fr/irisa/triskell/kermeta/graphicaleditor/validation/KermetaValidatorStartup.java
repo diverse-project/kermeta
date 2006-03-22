@@ -1,4 +1,4 @@
-/* $Id: KermetaValidatorStartup.java,v 1.1 2006-03-10 16:07:21 zdrey Exp $
+/* $Id: KermetaValidatorStartup.java,v 1.2 2006-03-22 16:24:59 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : KermetaConstraintValidator.java
  * License    : EPL
@@ -18,10 +18,15 @@ import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 public class KermetaValidatorStartup implements IStartup {
 
+	public KermetaValidatorStartup()
+	{
+		System.out.println("Construction of KemretaValidatorStartup");
+	}
+	
 	public void earlyStartup() {
-		System.err.println("Ton tonton ton mon tonton");
+		System.err.println("Start up!");
 		EValidator.Registry.INSTANCE.put(
 				StructurePackage.eINSTANCE,
-				new EcoreValidatorAdapter());
+				new KermetaValidatorAdapter());
 	}
 }

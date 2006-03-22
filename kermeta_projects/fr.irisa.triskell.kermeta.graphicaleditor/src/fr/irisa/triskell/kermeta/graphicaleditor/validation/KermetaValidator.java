@@ -1,4 +1,4 @@
-/* $Id: KermetaValidator.java,v 1.1 2006-03-10 16:07:21 zdrey Exp $
+/* $Id: KermetaValidator.java,v 1.2 2006-03-22 16:24:59 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : KermetaValidator.java
  * License    : EPL
@@ -43,5 +43,7 @@ public class KermetaValidator implements EValidator {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	
 
 }
