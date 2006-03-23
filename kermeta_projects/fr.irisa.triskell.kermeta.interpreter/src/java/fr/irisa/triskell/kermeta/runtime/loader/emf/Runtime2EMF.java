@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.23 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.24 2006-03-23 13:25:12 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -55,8 +55,9 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  */
 public class Runtime2EMF {
 
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.Runtime2EMF");
-	
+
+    final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.Runtime2EMF");
+
 	/**
 	 * The constructor, that initialize <code>unit</code> and <code>updatedRuntimeObjects</code>
 	 * attributes.
@@ -67,88 +68,6 @@ public class Runtime2EMF {
         this.unit = unit;
     }
     
-    /**
-     * Saves a model hosted by the given unit into the specified file_path after
-     * having created the corresponding EMF model using <code>updateEMFModel</code>
-     * method.
-     * @param unit the unit that embeds the resource of the model to save
-     * @param file_path the output directory for the model to save
-     */
-    public static void saveunit(EMFRuntimeUnit p_unit, String file_path) {
-
-        Runtime2EMF r2e = new Runtime2EMF(p_unit);
-        System.err.println(" metamodel uri : " + p_unit.getMetaModelUri());
-        // Get and load the resource of the ECore MetaModel wanted
-        if (p_unit.getMetaModelUri() != null && p_unit.getMetaModelUri().length()>0)
-        {	// resolve
-        	try {
-        		r2e.metaModelResource = p_unit.loadMetaModelAsEcore(p_unit.getMetaModelUri());
-        	}
-        	catch (WrappedException e){
-        		KermetaUnit.internalLog.error("Error loading EMF model " + p_unit.getUriAsString() + " : " + e.exception().getMessage(), e);
-    			RuntimeMemory memory =p_unit.getContentMap().getFactory().getMemory();
-	        	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
-	        	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-	        			e.exception().getMessage(),
-						interpreter,
-						memory,
-						e); 
-			}
-        }
-        else // metaModelResource is null 
-        {
-            //throw new KermetaRaisedException(null, null);
-        }
-        // Initialize the resource of the EMF model to save
-        String unit_uri = p_unit.getContentMap().getFactory().getMemory().getUnit().getUri();
-        String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
-    	URI u = p_unit.resolveURI(file_path, unit_uripath);
-    	KermetaUnit.internalLog.info("URI created for model to save : "+u);
-        String ext = file_path.substring(file_path.lastIndexOf(".")+1);
-        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
-	    ResourceSet resource_set = new ResourceSetImpl();
-	    r2e.resource = resource_set.createResource(u);
-	    // Update all the instance of the EMF Model
-	    r2e.updateEMFModel(r2e.resource);
-	    
-	    try {
-	        /* For tests purpose : java.io.OutputStream out = new BufferedOutputStream(System.out);
-	        resource.save(out, null); */
-	        r2e.resource.save(null);
-		} catch (IOException e) {
-		    Throwable t = e.getCause();
-		    KermetaUnit.internalLog.error("Error saving EMF model " + p_unit.getUriAsString() + " : " + e.getMessage(), e);
-			RuntimeMemory memory =p_unit.getContentMap().getFactory().getMemory();
-        	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
-        	if (t instanceof Resource.IOWrappedException)
-		    {
-        		
-		        Resource.IOWrappedException we = (Resource.IOWrappedException)t;
-		        //we.getMessage();
-		        throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
-				        we.getWrappedException().getMessage(),
-						interpreter,
-						memory,
-						we);
-		    }
-        	else if (t instanceof DanglingHREFException)
-		    {
-		    	DanglingHREFException we = (DanglingHREFException)t;
-		        we.getMessage();
-		        throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
-	        			we.getMessage(),
-						interpreter,
-						memory,
-						we); 
-		    }
-		    e.printStackTrace();
-		    throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
-        			e.getMessage(),
-					interpreter,
-					memory,
-					e); 
-		}
-    }
     
     /** The root objects (with no container) are stored in this list */
     protected ArrayList root_map;
@@ -202,7 +121,6 @@ public class Runtime2EMF {
             RuntimeObject ro = (RuntimeObject)it.next();
             // Object o = updateEMFObjectFromRuntimeObject(ro);
             // And now update the contained objects as well:)
-            //System.err.println("ROOOTS : " + ro.getData().get("emfObject"));
             resource.getContents().add(ro.getData().get("emfObject"));
         }
     }
