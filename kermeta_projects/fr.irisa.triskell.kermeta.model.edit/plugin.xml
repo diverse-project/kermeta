@@ -11,21 +11,16 @@
 <plugin>
     
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
-    <factory 
-       uri = "http://kermeta_behavior/kermeta.ecore" 
-       class = "fr.irisa.triskell.kermeta.behavior.provider.BehaviorItemProviderAdapterFactory" 
-       supportedTypes = 
-         "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
-          org.eclipse.emf.edit.provider.IStructuredItemContentProvider
-          org.eclipse.emf.edit.provider.ITreeItemContentProvider
-          org.eclipse.emf.edit.provider.IItemLabelProvider
-          org.eclipse.emf.edit.provider.IItemPropertySource" />
+    <factory
+          class="fr.irisa.triskell.kermeta.language.behavior.provider.BehaviorItemProviderAdapterFactory"
+          supportedTypes="org.eclipse.emf.edit.provider.IEditingDomainItemProvider           org.eclipse.emf.edit.provider.IStructuredItemContentProvider           org.eclipse.emf.edit.provider.ITreeItemContentProvider           org.eclipse.emf.edit.provider.IItemLabelProvider           org.eclipse.emf.edit.provider.IItemPropertySource"
+          uri="http://kermeta_language_behavior/kermeta.ecore"/>
   </extension>
     
   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
     <factory 
-       uri = "http://kermeta_structure/kermeta.ecore" 
-       class = "fr.irisa.triskell.kermeta.structure.provider.StructureItemProviderAdapterFactory" 
+       uri = "http://kermeta_language_structure/kermeta.ecore" 
+       class = "fr.irisa.triskell.kermeta.language.structure.provider.StructureItemProviderAdapterFactory" 
        supportedTypes = 
          "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
           org.eclipse.emf.edit.provider.IStructuredItemContentProvider
