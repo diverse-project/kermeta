@@ -13,11 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.gef.palette.CreationToolEntry;
-import org.eclipse.gef.palette.PaletteDrawer;
 import org.eclipse.gef.requests.CreationFactory;
-import org.topcased.modeler.editor.GraphElementCreationFactory;
 import org.topcased.modeler.editor.ICreationUtils;
-import org.topcased.modeler.editor.palette.ModelerConnectionCreationToolEntry;
 import org.topcased.modeler.editor.palette.ModelerCreationToolEntry;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
@@ -49,7 +46,7 @@ public class ExtendedStructurePaletteManager extends StructurePaletteManager {
 		factory = new ExtendedGraphElementCreationFactory(getCreationUtils(),
 				StructurePackage.eINSTANCE.getProperty());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
-				factory, StructureImageRegistry.getImageDescriptor("FPROPERTY"),
+				factory, StructureImageRegistry.getImageDescriptor("PROPERTY"),
 				null, 0, 0, 0, 0);
 		entries.add(objectTool);
 		getBasicDrawer().add(objectTool);

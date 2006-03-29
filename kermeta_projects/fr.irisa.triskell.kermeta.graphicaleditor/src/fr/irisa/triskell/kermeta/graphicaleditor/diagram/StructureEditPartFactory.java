@@ -1,18 +1,14 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPartFactory;
 import org.topcased.modeler.ModelerPropertyConstants;
 import org.topcased.modeler.di.model.Diagram;
-import org.topcased.modeler.di.model.EMFSemanticModelBridge;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.di.model.SimpleSemanticModelElement;
 import org.topcased.modeler.di.model.util.DIUtils;
-import org.topcased.modeler.edit.DiagramEditPart;
 import org.topcased.modeler.edit.EListEditPart;
 import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
@@ -20,25 +16,27 @@ import org.topcased.modeler.edit.GraphEdgeEditPart;
 import org.topcased.modeler.edit.GraphNodeEditPart;
 import org.topcased.modeler.utils.Utils;
 
+import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.ClassDefinitionEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.InheritanceEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.NamedElementEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.OperationEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PackageEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PrimitiveTypeEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PropertyAsNodeEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PropertyEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PropertyEditPartNode;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.TagEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.StructureDiagramEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.TagEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.TagLinkEditPart;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.util.StructureSwitch;
-
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.*;
-import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 
 /**
  * Part Factory : associates a model object to its controller. <br>
@@ -74,11 +72,6 @@ public class StructureEditPartFactory implements EditPartFactory {
 							return new ClassDefinitionEditPart(node);
 						}
 					}
-					
-
-					public Object caseProperty(Property object) {
-						return new PropertyEditPartNode(node);
-					}
 
 					public Object casePrimitiveType(PrimitiveType object) {
 						return new PrimitiveTypeEditPart(node);
@@ -112,7 +105,7 @@ public class StructureEditPartFactory implements EditPartFactory {
 				if (((SimpleSemanticModelElement) node.getSemanticModel())
 						.getTypeInfo()
 						.equals(
-								StructureEditPolicyConstants.FPROPERTYASNODE_EDITPOLICY))
+								StructureEditPolicyConstants.PROPERTYASNODE_EDITPOLICY))
 					return new PropertyAsNodeEditPart(node);
 			}
 			return new GraphNodeEditPart(node);
@@ -155,14 +148,15 @@ public class StructureEditPartFactory implements EditPartFactory {
 	}
 
 	/** 
-	 * This method is called by createEditPart but since
+	 * This method is a small adaptation of createEditPart, dedicated to the GraphNode edition.
+	 * Important Developer note : this method is called by createEditPart but since
 	 * we want createEditPart to be re-generated if necessary, developper has to follow
 	 * these instructions : 
 	 * - let the "generated" tag on createEditPart method comment
-	 * - after having checked (and cut) the part of the new code that you may need 
-	 * remove in createEditPart the whole block under the conditional :
+	 * - after having checked (and cut) the part of the new code that you may need inside
+	 * createEditPart method, remove in createEditPart the whole block under the conditional :
 	 * 			<code>else if (model instanceof GraphNode)</code>
-	 * - replace it by createEditPartForNode method, adapted if needed by the generated
+	 * - replace it by <code>return createEditPartForNode(..)</code> method, adapted if needed by the generated
 	 * code in createEditPart :} except for the code that is commented (read it!), mainly:
 	 * 
 	 *   - handling of Property (here, it is handled as a node -- in the generated part 
@@ -172,6 +166,7 @@ public class StructureEditPartFactory implements EditPartFactory {
 	public EditPart createEditPartForNode(EditPart context, GraphNode model) {
 		EObject element = Utils.getElement(model);
 		final GraphNode node = model; // anonymous class requirement
+		
 		if (element != null) {
 			Object editPart = new StructureSwitch() {
 				public Object casePackage(Package object) {
@@ -215,6 +210,12 @@ public class StructureEditPartFactory implements EditPartFactory {
 		}
 
 		if (node.getSemanticModel() instanceof SimpleSemanticModelElement) {
+			System.err.println("Get semantic model");
+			if (((SimpleSemanticModelElement) node.getSemanticModel())
+					.getTypeInfo()
+					.equals(
+							StructureEditPolicyConstants.PROPERTYASNODE_EDITPOLICY))
+				return new PropertyAsNodeEditPart(node);
 		}
 		return new GraphNodeEditPart(node);
 	}
