@@ -14,10 +14,11 @@
    </runtime>
 
    <requires>
+      <import plugin="fr.irisa.triskell.kermeta"/>
+      <import plugin="fr.irisa.triskell.kermeta.model.edit" export="true"/>
    
       <import plugin="org.eclipse.emf.edit.ui" export="true"/>
       <import plugin="org.eclipse.ui.ide" export="true"/>
-      <import plugin="fr.irisa.triskell.kermeta.model.edit" export="true"/>
       <import plugin="org.eclipse.emf.edit" export="true"/>
       <import plugin="org.eclipse.core.resources" export="true"/>
       <import plugin="org.eclipse.core.runtime" />
@@ -25,8 +26,9 @@
       <import plugin="org.eclipse.emf.ecore" export="true"/>
       <import plugin="org.topcased.modeler"/>
       <import plugin="org.topcased.modeler.di"/>
+      <import plugin="org.topcased.checkresultmodel"/>
+      <import plugin="org.topcased.checkresultmodel.util"/>
       <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="fr.irisa.triskell.kermeta"/>
       <import plugin="org.eclipse.gmf.runtime"/>
       <import plugin="org.eclipse.gmf.runtime.notation"/>
       <import plugin="org.eclipse.gmf.runtime.notation.edit"/>
@@ -34,13 +36,19 @@
       <import plugin="org.eclipse.gmf.runtime.draw2d.ui"/>
       <import plugin="org.eclipse.gmf.runtime.draw2d.ui.render"/>
       <import plugin="org.topcased.toolkit"/>
+      <import plugin="org.topcased.modeler.generator"/>
+      <import plugin="org.eclipse.gmf.runtime.common.ui"/>
+      <import plugin="antlr"/>
+      <import plugin="org.eclipse.emf.validation"/>
+      <import plugin="org.eclipse.emf.validation.ui"/>
    </requires>
 
    <extension
+         id="TopcasedKermetaEditor"
          point="org.eclipse.ui.editors">
       <editor
             class="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
-            icon="icons/Structure.gif"
+            icon="icons/Structure.png"
             default="true"
             name="kmEditor"
             id="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
@@ -52,22 +60,24 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <wizard
-            icon="icons/Structure.gif"
-            class="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
             category="org.topcased.facilities.newWizards/org.topcased.modeler.newdiagram"
-            name="Structure Diagram"
-            id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams">
+            class="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
+            icon="icons/ClassDiagram.png"
+            id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
+            name="Structure Diagram">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
    </extension>
    
-   <extension point="org.topcased.modeler.templates">
+   <extension
+         id="fr.irisa.triskell.kermeta.graphicaleditor.templates"
+         point="org.topcased.modeler.templates">
       <template
             di="templates/template1/%name%.kmdi"
-            model="templates/template1/%name%.km"
-            name="Structure - kmClassDiagram"
+            editorId="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
             id="kmClassDiagram"
-            type="Structure"/>
+            model="templates/template1/%name%.km"
+            name="kmClassDiagram"/>
    </extension>
    
    <extension point="org.eclipse.ui.perspectiveExtensions">
@@ -84,5 +94,128 @@
             id="fr.irisa.triskell.kermeta.graphicaleditor.preferences.StructurePreferencePage"
             name="Structure"/>
    </extension>
-   
+   <extension
+         id="fr.irisa.triskell.kermeta.graphicaleditor.validation"
+         name="KermetaValidatorAdapter"
+         point="org.eclipse.ui.startup">
+      <startup class="fr.irisa.triskell.kermeta.graphicaleditor.validation.KermetaValidatorStartup"/>
+   </extension>
+   <extension
+         point="org.topcased.modeler.diagrams">
+      <diagram
+            configuration="fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructureConfiguration"
+            id="kmClassDiagram"
+            name="kmClassDiagram">
+         <enableFor class="fr.irisa.triskell.kermeta.language.structure.Package"/>
+      </diagram>
+   </extension>
+   <extension
+         point="org.topcased.modeler.outline">
+      <createChildMenu
+            class="fr.irisa.triskell.kermeta.graphicaleditor.outline.MenuManager"
+            editorId="fr.irisa.triskell.kermeta.graphicaleditor.StructureEditor"
+            id="fr.irisa.triskell.kermeta.graphicaleditor.createChildMenu"
+            name="createChildMenu"/>
+   </extension>
+<!--   <extension
+         name="ConstraintProvider"
+         point="org.eclipse.emf.validation.constraintProviders">
+   <category
+         id="fr.irisa.triskell.kermeta.language.structure"
+         mandatory="false"
+         name="Structure category">
+   </category>
+   <constraintProvider
+         cache="true"
+         mode="Batch">
+      <package namespaceUri="http://kermeta_language_structure/kermeta.ecore"/>
+      <constraints categories="fr.irisa.triskell.kermeta.language.structure">
+        <constraint
+              class="fr.irisa.triskell.kermeta.graphicaleditor.validation.constraints.PackageConstraints"
+              id="fr.irisa.triskell.kermeta.graphicaleditor.validation.package_name"
+              lang="Java"
+              mode="Batch"
+              name="package_name"
+              severity="WARNING"
+              statusCode="101">
+	  <description>%example1.desc</description>
+	  <message>%example1.msg</message>
+	  <target class="fr.irisa.triskell.kermeta.language.structure.Package"/>
+   <target class="fr.irisa.triskell.kermeta.language.structure.ClassDefinition"/>
+	  
+	  <![CDATA[
+	     self.name->size() > 0
+	  ]]>
+   </constraint>
+      </constraints>
+   </constraintProvider>
+   </extension>
+   <extension
+         point="org.eclipse.emf.validation.constraintBindings">
+      <clientContext
+            default="false"
+            id="org.eclipse.emf.validation.pde.example.general.ui.libraryContext">
+         <selector class="fr.irisa.triskell.kermeta.graphicaleditor.validation.ValidationDelegateClientSelector"/>
+      </clientContext>
+      <binding
+            context="org.eclipse.emf.validation.pde.example.general.ui.libraryContext"
+            category="org.eclipse.emf.validation.pde.example.general.ui.library"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.validation.validationListeners">
+      <listener class="fr.irisa.triskell.kermeta.graphicaleditor.validation.ValidationListener">
+         <clientContext id="org.eclipse.emf.validation.pde.example.general.ui.libraryContext"/>
+      </listener>
+   </extension>
+-->
+<!-- Another test -->
+
+   <extension point="org.eclipse.emf.validation.constraintBindings">
+      <clientContext id="com.ibm.xtools.emf.validation.example.pde.adapter">
+         <selector class="fr.irisa.triskell.kermeta.graphicaleditor.ClientSelector1"/>
+      </clientContext>
+      
+      <binding
+            category="Toto"
+            constraint="example1"
+            context="com.ibm.xtools.emf.validation.example.pde.adapter"/>
+   </extension>
+
+   <!-- Define a constraint that we can use to demonstrate this adapter. -->
+   <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <constraintProvider
+            cache="true"
+            mode="Batch">
+		<package namespaceUri="http://kermeta_language_structure/kermeta.ecore"/>
+         <constraints categories="Toto, Titi">
+            <constraint
+                  lang="Java"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%example1.name"
+                  id="example1"
+                  statusCode="201"
+				 class="fr.irisa.triskell.kermeta.graphicaleditor.validation.constraints.PackageConstraints">
+               <description>%example1.desc</description>
+               <message>%example1.msg</message>
+
+               <!-- This constraint applies to any library element. -->
+               <target class="Package"/>
+               <target class="ClassDefinition"/>
+               <target class="Operation"/>
+            </constraint>
+         </constraints>
+      </constraintProvider>
+      <category
+            id="Titi"
+            name="Titi"/>
+      <category
+            id="Toto"
+            name="Toto"/>
+   </extension>
+
+<!--                  class="org.eclipse.emf.validation.examples.adapter.constraints.ExampleConstraint">-->
+
+
 </plugin>
