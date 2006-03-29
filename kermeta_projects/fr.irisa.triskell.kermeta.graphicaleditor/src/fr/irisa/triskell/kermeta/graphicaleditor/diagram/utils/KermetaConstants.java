@@ -9,8 +9,8 @@
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils;
 
-import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 
 public interface KermetaConstants {
 	

@@ -1,4 +1,4 @@
-/* $Id: KermetaValidatorAdapter.java,v 1.2 2006-03-22 16:24:59 zdrey Exp $
+/* $Id: KermetaValidatorAdapter.java,v 1.3 2006-03-29 08:55:38 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ExtendedKermetaValidatorAdapter.java
  * License    : EPL
@@ -15,8 +15,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
@@ -26,7 +26,6 @@ import org.eclipse.emf.ocl.query.QueryFactory;
 import org.eclipse.emf.validation.internal.EMFModelValidationPlugin;
 import org.eclipse.emf.validation.internal.EMFModelValidationStatusCodes;
 import org.eclipse.emf.validation.internal.emfadapter.EMFValidationContextAdapter;
-import org.eclipse.emf.validation.internal.service.BatchValidator;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin;
 import fr.irisa.triskell.kermeta.graphicaleditor.validation.constraints.KermetaConstraintChecker;
@@ -49,6 +48,7 @@ public class KermetaValidatorAdapter extends EcoreValidatorAdapter {
 		super();
 		// Get the epackage URI to create a kermeta unit
 		String u = getEPackage().eResource().getURI().toString();
+		//kBatchValidator = new KermetaBatchValidator()
 //		System.err.println("URI : " + u + getEPackage());
 		//kermetaUnit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(u);
 	}
@@ -79,9 +79,9 @@ public class KermetaValidatorAdapter extends EcoreValidatorAdapter {
 		
 		if (diagnostics != null) {
 			if (!hasProcessed(eObject, context)) {
-				status = kBatchValidator.validate(
+				/*status = batchValidator.validate(
 	                    eObject,
-	                    new NullProgressMonitor());
+	                    new NullProgressMonitor());*/
 				// Create a simple status
 				Boolean result = (Boolean)getKermetaConstraintChecker(eObject).accept(eObject);
 				int status_int = -1;
@@ -108,6 +108,7 @@ public class KermetaValidatorAdapter extends EcoreValidatorAdapter {
 					}
 					
 					super.appendDiagnostics(status, diagnostics);
+					ResourcesPlugin.getPlugin().getLog().log(status);
 			/*	}*/
 					System.out.println("Voilu");
 			}

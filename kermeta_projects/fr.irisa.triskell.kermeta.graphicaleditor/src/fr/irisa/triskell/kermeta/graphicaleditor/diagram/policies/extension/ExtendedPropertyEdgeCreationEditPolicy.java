@@ -1,4 +1,4 @@
-/* $Id: ExtendedPropertyEdgeCreationEditPolicy.java,v 1.2 2006-03-09 18:31:48 zdrey Exp $
+/* $Id: ExtendedPropertyEdgeCreationEditPolicy.java,v 1.3 2006-03-29 08:55:38 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : extendedInheritanceEdgeCreationEditPolicy.java
  * License   : EPL
@@ -11,13 +11,14 @@ package fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.extension;
 
 import org.eclipse.emf.ecore.EObject;
 import org.topcased.modeler.di.model.GraphEdge;
+import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.InheritanceEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PropertyEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
-import fr.irisa.triskell.kermeta.language.structure.*;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 /**
  * What to do with this class :
@@ -40,7 +41,7 @@ public class ExtendedPropertyEdgeCreationEditPolicy extends
 
 		if (sourceObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition
 				&& targetObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition) {
-			if (checkFOwnedAttributesConstraints(sourceObject, targetObject)==false)
+			if (checkOwnedAttributesConstraints(sourceObject, targetObject)==false)
 				return false;
 			if (!sourceObject.equals(targetObject)
 			) {
@@ -65,7 +66,7 @@ public class ExtendedPropertyEdgeCreationEditPolicy extends
 	 * @return true if the constraints are verified, false otherwise. In particular, a "attribute"(reference,
 	 * or property...) must be uniquely represented in the ownedAttributes properties of a class. 
 	 */
-	protected boolean checkFOwnedAttributesConstraints(EObject sourceObject, EObject targetObject)
+	protected boolean checkOwnedAttributesConstraints(EObject sourceObject, EObject targetObject)
 	{
 		Boolean isvalid = true;
 		// we know here that we handle ClassDefinitions, so hard cast
@@ -95,7 +96,7 @@ public class ExtendedPropertyEdgeCreationEditPolicy extends
 	 * @see fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.InheritanceEdgeCreationEditPolicy#checkSource(org.topcased.modeler.di.model.GraphNode)
 	 */
 	@Override
-	protected boolean checkSource(GraphNode source) {
+	protected boolean checkSource(GraphElement source) {
 		// TODO Auto-generated method stub
 		return super.checkSource(source);
 	}

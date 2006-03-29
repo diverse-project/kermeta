@@ -5,7 +5,7 @@ import org.eclipse.gef.EditDomain;
 import org.eclipse.gef.commands.Command;
 import org.topcased.modeler.commands.CreateTypedEdgeCommand;
 import org.topcased.modeler.di.model.GraphEdge;
-import org.topcased.modeler.di.model.GraphNode;
+import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.SimpleSemanticModelElement;
 import org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy;
 import org.topcased.modeler.utils.SourceTargetData;
@@ -25,16 +25,18 @@ public class InheritanceEdgeCreationEditPolicy extends
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#createCommand(org.eclipse.gef.EditDomain, org.topcased.modeler.di.model.GraphEdge, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
 	protected CreateTypedEdgeCommand createCommand(EditDomain domain,
-			GraphEdge edge, GraphNode source) {
+			GraphEdge edge, GraphElement source) {
 		return new InheritanceEdgeCreationCommand(domain, edge, source);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkEdge(org.topcased.modeler.di.model.GraphEdge)
 	 * @generated
 	 */
 	protected boolean checkEdge(GraphEdge edge) {
@@ -49,9 +51,10 @@ public class InheritanceEdgeCreationEditPolicy extends
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkSource(org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected boolean checkSource(GraphNode source) {
+	protected boolean checkSource(GraphElement source) {
 		EObject object = Utils.getElement(source);
 		if (object instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition) {
 			return true;
@@ -62,9 +65,11 @@ public class InheritanceEdgeCreationEditPolicy extends
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkTargetForSource(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected boolean checkTargetForSource(GraphNode source, GraphNode target) {
+	protected boolean checkTargetForSource(GraphElement source,
+			GraphElement target) {
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 
@@ -76,10 +81,11 @@ public class InheritanceEdgeCreationEditPolicy extends
 		}
 		return false;
 	}
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#checkCommand(org.eclipse.gef.commands.Command)
 	 * @generated
 	 */
 	protected boolean checkCommand(Command command) {
@@ -89,10 +95,11 @@ public class InheritanceEdgeCreationEditPolicy extends
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.policies.AbstractEdgeCreationEditPolicy#getSourceTargetData(org.topcased.modeler.di.model.GraphElement, org.topcased.modeler.di.model.GraphElement)
 	 * @generated
 	 */
-	protected SourceTargetData getSourceTargetData(GraphNode source,
-			GraphNode target) {
+	protected SourceTargetData getSourceTargetData(GraphElement source,
+			GraphElement target) {
 		EObject sourceObject = Utils.getElement(source);
 		EObject targetObject = Utils.getElement(target);
 

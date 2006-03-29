@@ -1,4 +1,4 @@
-/* $Id: PackageConstraints.java,v 1.1 2006-03-22 16:24:30 zdrey Exp $
+/* $Id: PackageConstraints.java,v 1.2 2006-03-29 08:55:38 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : PackageConstraints.java
  * License    : EPL
@@ -39,7 +39,6 @@ public class PackageConstraints extends AbstractModelConstraint {
 	 */
 	public IStatus validate(IValidationContext ctx)
 	{
-		System.err.println("Yahou!");
 		EObject eObj = ctx.getTarget();
 		EMFEventType eType = ctx.getEventType();
 		

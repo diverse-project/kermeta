@@ -4,8 +4,11 @@ import org.eclipse.draw2d.ConnectionEndpointLocator;
 import org.eclipse.draw2d.Locator;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.topcased.modeler.figures.EdgeObjectEditableLabel;
+import org.topcased.modeler.figures.EdgeObjectLabel;
 import org.topcased.modeler.figures.IEdgeObjectFigure;
 import org.topcased.modeler.figures.IGraphEdgeFigure;
+
+import fr.irisa.triskell.kermeta.language.structure.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,45 +18,71 @@ import org.topcased.modeler.figures.IGraphEdgeFigure;
 public class PropertyFigure extends PolylineConnectionEx implements
 		IGraphEdgeFigure {
 
-	private IEdgeObjectFigure fNameEdgeObject;
+	private IEdgeObjectFigure nameEdgeObject;
 
-	private Locator fNameLocator;
+	private EdgeObjectEditableLabel nameLabel;
+
+	private EdgeObjectLabel multiplicityLabel;
+
+	private ConnectionEndpointLocator nameLocator;
+
+	private ConnectionEndpointLocator multiplicityLocator;
+
+	protected Property opposite;
 
 	/**
 	 * The constructor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT 
 	 */
 	public PropertyFigure() {
 		super();
-
-		fNameEdgeObject = new EdgeObjectEditableLabel(this);
-		fNameLocator = new ConnectionEndpointLocator(this, true);
-		add(fNameEdgeObject, fNameLocator);
+		// the .
+		multiplicityLabel = new EdgeObjectLabel(this);
+		multiplicityLocator = new ConnectionEndpointLocator(this, true);
+		add(multiplicityLabel, multiplicityLocator);
+		// the name of the property // role
+		nameLabel = new EdgeObjectEditableLabel(this);
+		nameLocator = new ConnectionEndpointLocator(this, true);
+		add(nameLabel, nameLocator);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @return the object figure
 	 * @generated
 	 */
-	public IEdgeObjectFigure getfNameEdgeObjectFigure() {
-		return fNameEdgeObject;
+	public IEdgeObjectFigure getNameEdgeObjectFigure() {
+		return nameEdgeObject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the object figure
+	 * @generated NOT
+	 */
+	public EdgeObjectEditableLabel getNameLabel() {
+		return nameLabel;
+	}
+
+	public EdgeObjectLabel getMultiplicityLabel() {
+		return multiplicityLabel;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.figures.IGraphEdgeFigure#getLocator(org.topcased.modeler.figures.IEdgeObjectFigure)
-	 * @generated
+	 * @generated NOT
 	 */
 	public Locator getLocator(IEdgeObjectFigure edgeObjectfigure) {
-
-		if (edgeObjectfigure == fNameEdgeObject) {
-			return fNameLocator;
-		}
-
+		if (edgeObjectfigure == nameLabel)
+			return nameLocator;
+		else if (edgeObjectfigure == multiplicityLabel)
+			return multiplicityLocator;
 		return null;
 	}
 

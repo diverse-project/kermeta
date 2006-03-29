@@ -1,4 +1,4 @@
-/* $Id: KermetaBatchValidator.java,v 1.1 2006-03-22 16:24:59 zdrey Exp $
+/* $Id: KermetaBatchValidator.java,v 1.2 2006-03-29 08:55:38 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : KermetaBatchValidator.java
  * License    : EPL
@@ -12,17 +12,13 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.validation;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.validation.internal.EMFModelValidationDebugOptions;
 import org.eclipse.emf.validation.internal.service.AbstractValidationContext;
@@ -30,10 +26,7 @@ import org.eclipse.emf.validation.internal.service.BatchValidator;
 import org.eclipse.emf.validation.internal.service.ClientContextManager;
 import org.eclipse.emf.validation.internal.service.GetBatchConstraintsOperation;
 import org.eclipse.emf.validation.internal.service.IProviderOperationExecutor;
-/*import org.eclipse.emf.validation.internal.service.TraversalStrategyManager;
-import org.eclipse.emf.validation.internal.service.BatchValidator.DefaultRecursiveTraversalStrategy;*/
 import org.eclipse.emf.validation.internal.util.Trace;
-import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.service.ITraversalStrategy;
 
 public class KermetaBatchValidator extends BatchValidator {

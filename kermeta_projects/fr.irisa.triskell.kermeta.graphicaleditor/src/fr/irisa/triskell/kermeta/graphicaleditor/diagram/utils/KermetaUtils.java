@@ -13,27 +13,25 @@
  * ----------------------------------------------------------------------------
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
-import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 /*
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -405,7 +403,7 @@ public class KermetaUtils {
 		String supertypedefname = standardUnit.getQualifiedName(supertypedef);
 		// reinit the typeFixing
 		classdef.getContainedType().clear();
-		
+		System.err.println("source:" + standardUnit.getQualifiedName(classdef) + supertypedefname);
 		Iterator<Type> it = classdef.getSuperType().iterator();
 		while (it.hasNext() && result==null)
 		{
@@ -414,6 +412,7 @@ public class KermetaUtils {
 			// to a ClassDefinition!
 			if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class) 
 			{
+				System.err.println("source:" + classdef.getName() + supertypedefname);
 				if (standardUnit.getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)type).getTypeDefinition()).equals(supertypedefname))
 					result = type;
 			}

@@ -1,4 +1,4 @@
-/* $Id: ValidationDelegateClientSelector.java,v 1.1 2006-03-22 16:24:59 zdrey Exp $
+/* $Id: ValidationDelegateClientSelector.java,v 1.2 2006-03-29 08:55:38 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ValidationDelegateClientSelector.java
  * License    : EPL
@@ -37,7 +37,7 @@ public class ValidationDelegateClientSelector implements IClientSelector {
 
 	public ValidationDelegateClientSelector()
 	{
-		System.err.println("POlop");
+		
 	}
 	
 	/**

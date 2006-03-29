@@ -33,8 +33,5 @@ public class ClassDefinitionLayoutEditPolicy extends ClassLayoutEditPolicy {
 		// TODO Auto-generated method stub
 		return super.getMoveChildrenCommand(request);
 	}
-	
-	
-	
 
 }
