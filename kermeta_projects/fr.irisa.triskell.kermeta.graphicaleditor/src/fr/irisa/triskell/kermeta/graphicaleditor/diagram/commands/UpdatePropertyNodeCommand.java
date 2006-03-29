@@ -1,4 +1,4 @@
-/* $Id: UpdatePropertyNodeCommand.java,v 1.1 2006-03-07 17:30:33 zdrey Exp $
+/* $Id: UpdatePropertyNodeCommand.java,v 1.2 2006-03-29 09:06:13 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -18,7 +18,6 @@ import java.util.Map;
 
 import org.eclipse.gef.commands.Command;
 
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.dialogs.OperationEditDialog;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.dialogs.PropertyEditDialog;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.Property;

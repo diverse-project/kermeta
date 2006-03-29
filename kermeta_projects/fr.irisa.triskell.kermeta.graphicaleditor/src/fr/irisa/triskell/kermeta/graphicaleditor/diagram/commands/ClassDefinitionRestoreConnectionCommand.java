@@ -6,18 +6,16 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
+import org.topcased.modeler.commands.AbstractRestoreConnectionCommand;
 import org.topcased.modeler.ModelerPropertyConstants;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
-import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.di.model.util.DIUtils;
 import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
-
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 
@@ -50,7 +48,7 @@ public class ClassDefinitionRestoreConnectionCommand extends
 
 		super.initializeCommands();
 
-		GraphNode node = (GraphNode) getGraphElement();
+		GraphElement node = getGraphElement();
 		EObject nodeObject = Utils.getElement(node);
 
 		if (nodeObject instanceof ClassDefinition) {
@@ -59,19 +57,18 @@ public class ClassDefinitionRestoreConnectionCommand extends
 			while (itDiagContents.hasNext()) {
 				Object obj = itDiagContents.next();
 				// FIXME Change the way to handle EList GraphNodes
-				if (obj instanceof GraphNode
+				if (obj instanceof GraphElement
 						&& DIUtils
 								.getProperty(
 										(GraphElement) obj,
 										ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID) == null) {
-					Boolean autoRef = obj.equals(node);
-					GraphNode node2 = (GraphNode) obj;
+					boolean autoRef = obj.equals(node);
+					GraphElement node2 = (GraphElement) obj;
 					EObject nodeObject2 = Utils.getElement(node2);
 
 					if (nodeObject2 instanceof ClassDefinition) {
 						if (autoRef) {
-							createPropertyFromClassDefinitionToClassDefinition(
-									node, node);
+							// autoRef not allowed
 						} else {
 							// if the node is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
 							createPropertyFromClassDefinitionToClassDefinition(
@@ -102,50 +99,97 @@ public class ClassDefinitionRestoreConnectionCommand extends
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param srcNode the source node
+	 * @param targetNode the target node
 	 * @generated
 	 */
 	private void createPropertyFromClassDefinitionToClassDefinition(
-			GraphNode srcNode, GraphNode targetNode) {
-		extendedCreatePropertyFromClassDefinitionToClassDefinition(srcNode, targetNode);
+			GraphElement srcNode, GraphElement targetNode) {
+		ClassDefinition sourceObject = (ClassDefinition) Utils
+				.getElement(srcNode);
+		ClassDefinition targetObject = (ClassDefinition) Utils
+				.getElement(targetNode);
+
+		EList edgeObjectList = sourceObject.getOwnedAttribute();
+		for (Iterator it = edgeObjectList.iterator(); it.hasNext();) {
+			Object obj = it.next();
+			if (obj instanceof Property) {
+				Property edgeObject = (Property) obj;
+				if (targetObject.equals(edgeObject.getOwningClass())
+						&& sourceObject.getOwnedAttribute()
+								.contains(edgeObject)) {
+					// check if the relation does not exists yet
+					List existing = getExistingEdges(srcNode, targetNode,
+							Property.class);
+					if (!isAlreadyPresent(existing, edgeObject)) {
+						ICreationUtils factory = getModeler()
+								.getActiveConfiguration().getCreationUtils();
+						GraphElement edge = factory
+								.createGraphElement(edgeObject);
+						if (edge instanceof GraphEdge) {
+							PropertyEdgeCreationCommand cmd = new PropertyEdgeCreationCommand(
+									getEditDomain(), (GraphEdge) edge, srcNode,
+									false);
+							cmd.setTarget(targetNode);
+							add(cmd);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param srcNode the source node
+	 * @param targetNode the target node
 	 * @generated
 	 */
 	private void createInheritanceFromClassDefinitionToClassDefinition(
-			GraphNode srcNode, GraphNode targetNode) {
-		System.err.println("TOTO --- : we do not enter here ");
-		extendedCreateInheritanceFromClassDefinitionToClassDefinition(srcNode, targetNode);
-	}
-	
-    public void extendedCreateInheritanceFromClassDefinitionToClassDefinition(GraphNode srcNode, GraphNode targetNode)
-    {
-        ClassDefinition srcClassDefinition = (ClassDefinition) Utils.getElement(srcNode);
-        ClassDefinition targetClassDefinition = (ClassDefinition) Utils.getElement(targetNode);
-        System.err.println("create inheritance edge");
-        // Is there is an inheritance relation between src class and target class, than, create it!
-        if (KermetaUtils.getDefault().isContainedSuperTypeInClassDefinition(srcClassDefinition, targetClassDefinition)
-        		
-        	)
-        {
-        	System.err.println("If we are here, it means that an inheritance relation does not exist yet");
-            // check if the relation does not exists yet
-            if (getExistingEdges(srcNode, targetNode, StructureEditPolicyConstants.INHERITANCE_EDITPOLICY).size() == 0)
-            {
-            	System.err.println("If here, so, no existing edge were found");
-                GraphEdge edge = Utils.createGraphEdge(StructureEditPolicyConstants.INHERITANCE_EDITPOLICY);
-                InheritanceEdgeCreationCommand cmd = new InheritanceEdgeCreationCommand(
-						null, edge, srcNode, false);
-                cmd.setTarget(targetNode);
-                add(cmd);
-            }
-            System.err.println("End of cond n°1 on graphical representation!");
-        }
-        System.err.println("End of cond on model");
-    }
+			GraphElement srcNode, GraphElement targetNode) {
+		ClassDefinition sourceObject = (ClassDefinition) Utils
+				.getElement(srcNode);
+		ClassDefinition targetObject = (ClassDefinition) Utils
+				.getElement(targetNode);
 
+		if (false) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcNode, targetNode,
+					StructureEditPolicyConstants.INHERITANCE_EDITPOLICY).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(StructureEditPolicyConstants.INHERITANCE_EDITPOLICY);
+				InheritanceEdgeCreationCommand cmd = new InheritanceEdgeCreationCommand(
+						null, edge, srcNode, false);
+				cmd.setTarget(targetNode);
+				add(cmd);
+			}
+		}
+	}
+
+	public void extendedCreateInheritanceFromClassDefinitionToClassDefinition(
+			GraphElement srcNode, GraphElement targetNode) {
+		ClassDefinition srcClassDefinition = (ClassDefinition) Utils
+				.getElement(srcNode);
+		ClassDefinition targetClassDefinition = (ClassDefinition) Utils
+				.getElement(targetNode);
+		// Is there is an inheritance relation between src class and target class, than, create it!
+		if (KermetaUtils.getDefault().isContainedSuperTypeInClassDefinition(
+				srcClassDefinition, targetClassDefinition)
+
+		) {
+			// check if the relation does not exists yet
+			if (getExistingEdges(srcNode, targetNode,
+					StructureEditPolicyConstants.INHERITANCE_EDITPOLICY).size() == 0) {
+				GraphEdge edge = Utils
+						.createGraphEdge(StructureEditPolicyConstants.INHERITANCE_EDITPOLICY);
+				InheritanceEdgeCreationCommand cmd = new InheritanceEdgeCreationCommand(
+						null, edge, srcNode, false);
+				cmd.setTarget(targetNode);
+				add(cmd);
+			}
+		}
+	}
 
 	/** Non generated method 
 	 * 
@@ -161,7 +205,7 @@ public class ClassDefinitionRestoreConnectionCommand extends
 	 * @param srcNode The graph node representing the concerned class definition.
 	 */
 	private void extendedCreatePropertyFromClassDefinitionToClassDefinition(
-			GraphNode srcNode, GraphNode targetNode) {
+			GraphElement srcNode, GraphElement targetNode) {
 		ClassDefinition sourceObject = (ClassDefinition) Utils
 				.getElement(srcNode);
 		ClassDefinition targetObject = (ClassDefinition) Utils
@@ -173,21 +217,15 @@ public class ClassDefinitionRestoreConnectionCommand extends
 			// 2nd condition -> a constraint 
 			// TODO Think about how to make this conditional be generated later.
 			// FIXME obj can be null!!! check why
-			System.err.println("The type of the property is : " + obj);
-			System.err.println("The type of the property is : "
-					+ obj.getType());
+			
 			if (obj.getType() != null
+					&& !KermetaUtils.getDefault().isStandardType(obj.getType())
 					&& !KermetaUtils.getDefault()
-							.isStandardType(obj.getType())
-					&& !KermetaUtils.getDefault().isPrimitiveType(
-							obj.getType())) {
-
-				System.err.println("Splotch :"
-						+ ((fr.irisa.triskell.kermeta.language.structure.Class) obj.getType()).getTypeDefinition());
+							.isPrimitiveType(obj.getType())) {
 				Property edgeObject = (Property) obj;
 				if (targetObject.equals(edgeObject.getOwningClass())
-						&& sourceObject.getOwnedAttribute().contains(
-								edgeObject)) {
+						&& sourceObject.getOwnedAttribute()
+								.contains(edgeObject)) {
 					// check if the relation does not exists yet
 					List existing = getExistingEdges(srcNode, targetNode,
 							Property.class);

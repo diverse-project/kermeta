@@ -3,6 +3,7 @@ package fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands;
 import org.eclipse.gef.EditDomain;
 import org.topcased.modeler.commands.CreateTypedEdgeCommand;
 import org.topcased.modeler.di.model.GraphEdge;
+import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.utils.Utils;
 
@@ -20,20 +21,27 @@ public class InheritanceEdgeCreationCommand extends CreateTypedEdgeCommand {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param domain the edit domain
+	 * @param newObj the graph edge of the new connection
+	 * @param src the graph element of the source
 	 * @generated
 	 */
 	public InheritanceEdgeCreationCommand(EditDomain domain, GraphEdge newObj,
-			GraphNode src) {
+			GraphElement src) {
 		this(domain, newObj, src, true);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param domain the edit domain
+	 * @param newObj the graph edge of the new connection
+	 * @param src the graph element of the source
+	 * @param needModelUpdate set it to true if the model need to be updated
 	 * @generated
 	 */
 	public InheritanceEdgeCreationCommand(EditDomain domain, GraphEdge newObj,
-			GraphNode src, Boolean needModelUpdate) {
+			GraphElement src, boolean needModelUpdate) {
 		super(domain, newObj, src, needModelUpdate);
 	}
 
@@ -43,10 +51,13 @@ public class InheritanceEdgeCreationCommand extends CreateTypedEdgeCommand {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	protected void redoModel() { 
-		ClassDefinition sourceClassDefinition = (ClassDefinition) Utils.getElement(source);
-		ClassDefinition targetClassDefinition = (ClassDefinition) Utils.getElement(target);
-		KermetaUtils.getDefault().addSuperTypeToClassDefinition(sourceClassDefinition, targetClassDefinition);
+	protected void redoModel() {
+		ClassDefinition sourceClassDefinition = (ClassDefinition) Utils
+				.getElement(source);
+		ClassDefinition targetClassDefinition = (ClassDefinition) Utils
+				.getElement(target);
+		KermetaUtils.getDefault().addSuperTypeToClassDefinition(
+				sourceClassDefinition, targetClassDefinition);
 	}
 
 	/**
@@ -55,9 +66,17 @@ public class InheritanceEdgeCreationCommand extends CreateTypedEdgeCommand {
 	 * @generated NOT
 	 */
 	protected void undoModel() {
-        ClassDefinition sourceClassDefinition = (ClassDefinition) Utils.getElement(source);
-        ClassDefinition targetClassDefinition = (ClassDefinition) Utils.getElement(target);
-        KermetaUtils.getDefault().removeSuperTypeFromClassDefinition(sourceClassDefinition, targetClassDefinition);
+		ClassDefinition sourceClassDefinition = (ClassDefinition) Utils
+				.getElement(source);
+		ClassDefinition targetClassDefinition = (ClassDefinition) Utils
+				.getElement(target);
+		KermetaUtils.getDefault().removeSuperTypeFromClassDefinition(
+				sourceClassDefinition, targetClassDefinition);
 	}
+	
+	public GraphElement getSource()
+	{	return source; }
+	public GraphElement getTarget()
+	{	return target; }
 
 }

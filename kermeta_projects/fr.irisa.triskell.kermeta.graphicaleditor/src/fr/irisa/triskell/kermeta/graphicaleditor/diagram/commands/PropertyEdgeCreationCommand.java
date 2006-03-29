@@ -1,12 +1,9 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands;
 
-import org.eclipse.draw2d.PolygonDecoration;
-import org.eclipse.draw2d.PolylineDecoration;
-import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.gef.EditDomain;
-import org.topcased.modeler.commands.CreateTypedEdgeCommand;
+import org.topcased.modeler.commands.CreateGraphEdgeCommand;
 import org.topcased.modeler.di.model.GraphEdge;
-import org.topcased.modeler.di.model.GraphNode;
+import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
@@ -20,7 +17,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
  * @generated NOT
  * CreateTypedEdgeCommand
  */
-public class PropertyEdgeCreationCommand extends CreateTypedEdgeCommand //CreateGraphEdgeCommand
+public class PropertyEdgeCreationCommand extends CreateGraphEdgeCommand //CreateTypedEdgeCommand
 {
 
 	// TODO : CreateTypedEdgeCommand
@@ -30,7 +27,7 @@ public class PropertyEdgeCreationCommand extends CreateTypedEdgeCommand //Create
 	 * @generated
 	 */
 	public PropertyEdgeCreationCommand(EditDomain domain, GraphEdge newObj,
-			GraphNode src) {
+			GraphElement src) {
 		this(domain, newObj, src, true);
 	}
 
@@ -40,9 +37,10 @@ public class PropertyEdgeCreationCommand extends CreateTypedEdgeCommand //Create
 	 * @generated
 	 */
 	public PropertyEdgeCreationCommand(EditDomain domain, GraphEdge newObj,
-			GraphNode src, Boolean needModelUpdate) {
+			GraphElement src, Boolean needModelUpdate) {
+		super(domain, newObj, src, Utils.getDiagram(src), null, needModelUpdate);
 		//super(domain, newObj, src, Utils.getDiagram(src), null, needModelUpdate);
-		super(domain, newObj, src, needModelUpdate);
+		//super(domain, newObj, src, needModelUpdate);
 	}
 
 	/**

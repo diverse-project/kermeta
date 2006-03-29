@@ -2,13 +2,16 @@ package fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands;
 
 import java.util.Iterator;
 
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPart;
 import org.topcased.modeler.ModelerPropertyConstants;
 import org.topcased.modeler.commands.AbstractRestoreConnectionCommand;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
-import org.topcased.modeler.di.model.GraphNode;
+import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.di.model.util.DIUtils;
 import org.topcased.modeler.utils.Utils;
 
@@ -43,7 +46,7 @@ public class TagRestoreConnectionCommand extends
 	 */
 	protected void initializeCommands() {
 
-		GraphNode node = (GraphNode) getGraphElement();
+		GraphElement node = getGraphElement();
 		EObject nodeObject = Utils.getElement(node);
 
 		if (nodeObject instanceof Tag) {
@@ -52,13 +55,13 @@ public class TagRestoreConnectionCommand extends
 			while (itDiagContents.hasNext()) {
 				Object obj = itDiagContents.next();
 				// FIXME Change the way to handle EList GraphNodes
-				if (obj instanceof GraphNode
+				if (obj instanceof GraphElement
 						&& DIUtils
 								.getProperty(
 										(GraphElement) obj,
 										ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID) == null) {
-					Boolean autoRef = obj.equals(node);
-					GraphNode node2 = (GraphNode) obj;
+					boolean autoRef = obj.equals(node);
+					GraphElement node2 = (GraphElement) obj;
 					EObject nodeObject2 = Utils.getElement(node2);
 					if (nodeObject2 instanceof NamedElement) {
 						if (autoRef) {
@@ -76,15 +79,17 @@ public class TagRestoreConnectionCommand extends
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param srcNode the source node
+	 * @param targetNode the target node
 	 * @generated
 	 */
-	private void createTagLinkFromTagToNamedElement(GraphNode srcNode,
-			GraphNode targetNode) {
+	private void createTagLinkFromTagToNamedElement(GraphElement srcNode,
+			GraphElement targetNode) {
 		Tag sourceObject = (Tag) Utils.getElement(srcNode);
-		NamedElement targetObject = (NamedElement) Utils
-				.getElement(targetNode);
+		NamedElement targetObject = (NamedElement) Utils.getElement(targetNode);
 
-		if (false) {
+		if (sourceObject.getObject().contains(targetObject)
+				&& targetObject.getTag().contains(sourceObject)) {
 			// check if the relation does not exists yet
 			if (getExistingEdges(srcNode, targetNode,
 					StructureEditPolicyConstants.TAGLINK_EDITPOLICY).size() == 0) {

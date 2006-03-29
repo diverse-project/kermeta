@@ -1,4 +1,4 @@
-/* $Id: UpdateOperationCommand.java,v 1.1 2006-03-07 17:30:33 zdrey Exp $
+/* $Id: UpdateOperationCommand.java,v 1.2 2006-03-29 09:06:13 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -20,14 +20,14 @@ import java.util.Map;
 import org.eclipse.gef.commands.Command;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.dialogs.OperationEditDialog;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.OperationDataStructure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.OperationDataStructure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.ParameterObject;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 
 /**
  * Class that create a command in order to update the "Operation" elements.
