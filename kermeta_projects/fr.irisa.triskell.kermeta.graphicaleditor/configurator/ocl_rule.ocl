@@ -1,0 +1,11 @@
+Model : http://kermeta/kermeta.ecore#//language/structure
+
+context NamedElement inv:
+NamedElement.name!=""
+
+context Package inv:
+Package.name!=""
+
+context Operation inv:
+Operation.name!=""
+Operation.
