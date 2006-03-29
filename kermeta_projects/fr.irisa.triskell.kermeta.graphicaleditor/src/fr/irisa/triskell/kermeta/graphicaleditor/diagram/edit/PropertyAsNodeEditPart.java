@@ -21,7 +21,7 @@ public class PropertyAsNodeEditPart extends EMFGraphNodeEditPart {
 	 * Constructor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param obj
+	 * @param obj the graph node
 	 * @generated
 	 */
 	public PropertyAsNodeEditPart(GraphNode obj) {

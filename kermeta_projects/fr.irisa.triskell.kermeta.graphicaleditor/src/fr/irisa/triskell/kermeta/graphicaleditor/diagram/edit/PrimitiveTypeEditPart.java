@@ -24,7 +24,7 @@ public class PrimitiveTypeEditPart extends NamedElementEditPart {
 	 * Constructor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param obj
+	 * @param obj the graph node
 	 * @generated
 	 */
 	public PrimitiveTypeEditPart(GraphNode obj) {

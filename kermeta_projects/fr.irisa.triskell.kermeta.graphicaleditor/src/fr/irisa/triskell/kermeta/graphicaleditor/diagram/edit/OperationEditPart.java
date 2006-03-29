@@ -12,6 +12,7 @@ import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.topcased.draw2d.figures.EditableLabel.TextProvider;
 import org.topcased.modeler.ColorRegistry;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.ModelerPlugin;
@@ -43,7 +44,7 @@ public class OperationEditPart extends EMFGraphNodeEditPart {
 	 * Constructor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param obj
+	 * @param obj the graph node
 	 * @generated
 	 */
 	public OperationEditPart(GraphNode obj) {
@@ -79,13 +80,21 @@ public class OperationEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * This figure create a label that only contains the name, so that the user
+	 * can modify only the name and not the return type of the operation.
+	 * Inspired by EOperationEditPart.java
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
-	 * @generated
+	 * @generated NOT
 	 */
 	protected IFigure createFigure() {
 
-		return new OperationFigure();
+		OperationFigure lbl = new OperationFigure(new TextProvider() {
+			public String getText() {
+				return ((Operation) getEObject()).getName();
+			}
+		});
+		return lbl;
 	}
 
 	/**
@@ -187,8 +196,7 @@ public class OperationEditPart extends EMFGraphNodeEditPart {
 				first = false;
 			else
 				text += ",";
-			text += KermetaUtils.getDefault()
-					.getLabelForType(param.getType());
+			text += KermetaUtils.getDefault().getLabelForType(param.getType());
 		}
 		text += ")";
 		// The return type

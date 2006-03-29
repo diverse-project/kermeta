@@ -27,7 +27,7 @@ public class NamedElementEditPart extends EMFGraphNodeEditPart {
 	 * Constructor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param obj
+	 * @param obj the graph node
 	 * @generated
 	 */
 	public NamedElementEditPart(GraphNode obj) {

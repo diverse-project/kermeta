@@ -19,7 +19,7 @@ public class StructureDiagramEditPart extends DiagramEditPart {
 	 * The Constructor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param model
+	 * @param model the root model element
 	 * @generated
 	 */
 	public StructureDiagramEditPart(Diagram model) {

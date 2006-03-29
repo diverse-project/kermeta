@@ -4,6 +4,8 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
+import org.eclipse.swt.graphics.Color;
+import org.topcased.modeler.ColorRegistry;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
@@ -25,7 +27,7 @@ public class PackageEditPart extends NamedElementEditPart {
 	 * Constructor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param obj
+	 * @param obj the graph node
 	 * @generated
 	 */
 	public PackageEditPart(GraphNode obj) {
@@ -52,8 +54,7 @@ public class PackageEditPart extends NamedElementEditPart {
 		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
 				new ResizableEditPolicy());
 
-		installEditPolicy(EditPolicy.LAYOUT_ROLE,
-				new PackageLayoutEditPolicy());
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new PackageLayoutEditPolicy());
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				new LabelDirectEditPolicy());
 	}
@@ -108,4 +109,12 @@ public class PackageEditPart extends NamedElementEditPart {
 	public int getMinimumHeight() {
 		return 10;
 	}
+
+	/**
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultBackgroundColor()
+	 */
+	protected Color getDefaultBackgroundColor() {
+		return ColorRegistry.getInstance().get("241,241,241");
+	}
+
 }

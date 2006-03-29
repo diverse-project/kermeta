@@ -1,4 +1,4 @@
-/* $Id: PropertyEditPartGeneric.java,v 1.1 2006-03-07 17:30:32 zdrey Exp $
+/* $Id: PropertyEditPartGeneric.java,v 1.2 2006-03-29 08:54:19 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : PropertyEditPart.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Feb 24, 2006
  * Authors       : zdrey
  */
-/* $Id: PropertyEditPartGeneric.java,v 1.1 2006-03-07 17:30:32 zdrey Exp $
+/* $Id: PropertyEditPartGeneric.java,v 1.2 2006-03-29 08:54:19 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : PropertyEditPart.java
  * License   : EPL
@@ -44,7 +44,8 @@ public class PropertyEditPartGeneric extends AbstractGraphicalEditPart {
 		super();
 		setModel(element);
 		if (element instanceof GraphNode) adaptee = new PropertyEditPartNode((GraphNode)element);
-		else if (element instanceof GraphEdge) adaptee = new PropertyEditPartEdge((GraphEdge)element);
+		else if (element instanceof GraphEdge) adaptee = new PropertyEditPart((GraphEdge)element);
+		//else if (element instanceof GraphEdge) adaptee = new PropertyEditPartEdge((GraphEdge)element);
 		else throw new Error("PropertyEditPart class is instanciated with an element which is not a" +
 				"GraphNode or a GraphEdge");
 	}

@@ -106,11 +106,11 @@ public class TagLinkEditPart extends GraphEdgeEditPart {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#refreshEdgeObjects()
 	 * @generated
 	 */
-	protected void refreshVisuals() {
-		super.refreshVisuals();
-
+	protected void refreshEdgeObjects() {
+		super.refreshEdgeObjects();
 	}
 
 }

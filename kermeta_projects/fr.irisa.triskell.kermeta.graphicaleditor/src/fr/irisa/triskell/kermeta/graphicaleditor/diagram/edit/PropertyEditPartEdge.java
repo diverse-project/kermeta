@@ -14,7 +14,6 @@ import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
 import org.topcased.modeler.figures.IEdgeObjectFigure;
 
-import fr.irisa.triskell.kermeta.graphicaleditor.StructureEdgeObjectConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.PropertyEditPartCommonInterface;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.PropertyFigureEdge;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PropertyEdgeObjectUVEditPolicy;
@@ -49,7 +48,7 @@ public class PropertyEditPartEdge extends EMFGraphEdgeEditPart implements Proper
 	 */
 	public void activate() {
 		super.activate();
-		getEObject().eAdapters().add(modelListener);
+		getEObject().eAdapters().add(getModelListener());
 	}
 
 	/**
@@ -60,7 +59,7 @@ public class PropertyEditPartEdge extends EMFGraphEdgeEditPart implements Proper
 	 * @generated
 	 */
 	public void deactivate() {
-		getEObject().eAdapters().remove(modelListener);
+		getEObject().eAdapters().remove(getModelListener());
 		super.deactivate();
 	}
 
@@ -134,18 +133,6 @@ public class PropertyEditPartEdge extends EMFGraphEdgeEditPart implements Proper
 	 * @generated
 	 */
 	public IEdgeObjectFigure getEdgeObjectFigure(EdgeObject edgeObject) {
-		if (StructureEdgeObjectConstants.FLOWER_EDGE_OBJECT_ID
-				.equals(edgeObject.getId())) {
-			return ((PropertyFigureEdge) getFigure()).getfLowerEdgeObjectFigure();
-		}
-		if (StructureEdgeObjectConstants.FUPPER_EDGE_OBJECT_ID
-				.equals(edgeObject.getId())) {
-			return ((PropertyFigureEdge) getFigure()).getfUpperEdgeObjectFigure();
-		}
-		if (StructureEdgeObjectConstants.FNAME_EDGE_OBJECT_ID.equals(edgeObject
-				.getId())) {
-			return ((PropertyFigureEdge) getFigure()).getfNameEdgeObjectFigure();
-		}
 		return null;
 	}
 

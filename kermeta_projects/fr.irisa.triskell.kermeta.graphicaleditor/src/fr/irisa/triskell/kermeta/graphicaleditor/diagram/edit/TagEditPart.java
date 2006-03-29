@@ -4,6 +4,8 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
+import org.eclipse.swt.graphics.Color;
+import org.topcased.modeler.ColorRegistry;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
@@ -27,7 +29,7 @@ public class TagEditPart extends EMFGraphNodeEditPart {
 	 * Constructor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param obj
+	 * @param obj the graph node
 	 * @generated
 	 */
 	public TagEditPart(GraphNode obj) {
@@ -73,6 +75,36 @@ public class TagEditPart extends EMFGraphNodeEditPart {
 	protected IFigure createFigure() {
 
 		return new TagFigure();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultBackgroundColor()
+	 * @generated
+	 */
+	protected Color getDefaultBackgroundColor() {
+		return ColorRegistry.getInstance().get("248,248,235");
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultWidth()
+	 * @generated
+	 */
+	protected int getDefaultWidth() {
+		return 20;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultHeight()
+	 * @generated
+	 */
+	protected int getDefaultHeight() {
+		return 10;
 	}
 
 }

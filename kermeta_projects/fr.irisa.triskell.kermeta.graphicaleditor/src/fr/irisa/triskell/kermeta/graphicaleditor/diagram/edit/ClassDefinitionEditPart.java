@@ -1,16 +1,11 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.widgets.Display;
 import org.topcased.modeler.ColorRegistry;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.GraphNode;
@@ -23,10 +18,8 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.ClassDefinitio
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.EditPartUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.ClassDefinitionFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.ClassDefinitionLayoutEditPolicy;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PropertyEdgeCreationEditPolicy;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.InheritanceEdgeCreationEditPolicy;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.extension.ExtendedPropertyEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.extension.ExtendedInheritanceEdgeCreationEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.extension.ExtendedPropertyEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 
 /**
@@ -40,30 +33,28 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 	 * Constructor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param obj
+	 * @param obj the graph node
 	 * @generated
 	 */
 	public ClassDefinitionEditPart(GraphNode obj) {
 		super(obj);
 	}
 
-	// NOTE :  
-	// createEditPolicies is kept generated, until this code is stable.
-	// But there are a few of modifications to do : 
-	// if they exist, the *EdgeCreationEditPolicy should be replaced by
-	// Extended*EdgeCreationEditPolicy, which handle some immediate constraint
-	// that are not generated/generable.
-	
 	/**
 	 * Creates edit policies and associates these with roles
 	 * <!-- begin-user-doc -->
+	 * Create the policies for editing a ClassDefinition
+	 * Note : this class is not intended to evolve. Since we put small modifications
+	 * (to adapt the edit policies on InheritanceEdge and PropertyEdge so that it
+	 * can be only created once between a given source and a given target --> see
+	 * isUnique property on the related ecore model elements "superTypes" and "ownedAttributes")
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(StructureEditPolicyConstants.FPROPERTY_EDITPOLICY,
+		installEditPolicy(StructureEditPolicyConstants.PROPERTY_EDITPOLICY,
 				new ExtendedPropertyEdgeCreationEditPolicy());
 
 		installEditPolicy(StructureEditPolicyConstants.INHERITANCE_EDITPOLICY,
@@ -85,6 +76,20 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 				new ClassDefinitionLayoutEditPolicy());
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				new LabelDirectEditPolicy());
+	}
+
+	/** 
+	 * Extensions 
+	 * Developer note : put this method call at the end of the generated createEditPolicy,
+	 * if it was not already modified
+	 * */
+	protected void extendedCreateEditPolicies() {
+
+		installEditPolicy(StructureEditPolicyConstants.PROPERTY_EDITPOLICY,
+				new ExtendedPropertyEdgeCreationEditPolicy());
+
+		installEditPolicy(StructureEditPolicyConstants.INHERITANCE_EDITPOLICY,
+				new ExtendedInheritanceEdgeCreationEditPolicy());
 	}
 
 	/**

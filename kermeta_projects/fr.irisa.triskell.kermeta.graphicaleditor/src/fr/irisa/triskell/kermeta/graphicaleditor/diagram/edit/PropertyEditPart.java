@@ -1,10 +1,14 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.ConnectionRouter;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PolylineDecoration;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RotatableDecoration;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
@@ -17,7 +21,6 @@ import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.ConnectionLayerEx;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.graphics.Font;
-import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.draw2d.figures.Label;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.di.model.EdgeObject;
@@ -26,13 +29,17 @@ import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
 import org.topcased.modeler.edit.LabelCellEditorLocator;
 import org.topcased.modeler.edit.ModelerLabelDirectEditManager;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
+import org.topcased.modeler.exceptions.BoundsFormatException;
 import org.topcased.modeler.figures.IEdgeObjectFigure;
-import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureEdgeObjectConstants;
+import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
+import fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.EditPartUtils;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.PropertyEditPartCommonInterface;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.PropertyFigure;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PropertyEdgeObjectUVEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PropertyLabelEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.TagLinkEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
@@ -42,11 +49,11 @@ import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class PropertyEditPart extends EMFGraphEdgeEditPart {
+public class PropertyEditPart extends EMFGraphEdgeEditPart implements
+		PropertyEditPartCommonInterface {
 
 	/**
 	 * Decoration of the edges (diamong, arrow, or nothing) -- topcased
-	 * @generated NOT
 	 */
 	private RotatableDecoration srcDecor, targetDecor;
 
@@ -71,41 +78,21 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * Upon activation, attach to the model element as a property change
-	 * listener.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void activate() {
-		super.activate();
-		getEObject().eAdapters().add(modelListener);
-	}
-
-	/**
-	 * Upon deactivation, detach from the model element as a property change
-	 * listener.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void deactivate() {
-		getEObject().eAdapters().remove(modelListener);
-		super.deactivate();
-	}
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
-	 * @generated
+	 * @generated NOT
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
+		// Provide the Policy to associate the EAnnotation to an Ecore object
+		installEditPolicy(StructureEditPolicyConstants.TAGLINK_EDITPOLICY,
+				new TagLinkEdgeCreationEditPolicy());
+
 		installEditPolicy(
 				ModelerEditPolicyConstants.EDGE_OBJECTS_UV_EDITPOLICY,
-				new PropertyEdgeObjectUVEditPolicy());
+				new PropertyLabelEditPolicy());
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				new LabelDirectEditPolicy());
 
@@ -115,14 +102,10 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the Figure
-	 * @generated
+	 * @generated NOT
 	 */
 	protected IFigure createFigure() {
-		PropertyFigure connection = new PropertyFigure();
-		createSourceDecoration(connection);
-		createTargetDecoration(connection);
-
-		return connection;
+		return new PropertyFigure();
 	}
 
 	/**
@@ -160,68 +143,54 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getEdgeObjectFigure(org.topcased.modeler.di.model.EdgeObject)
-	 * @generated
+	 * Handle selection
+	 * 
+	 * @param value The value of the selection
 	 */
-	public IEdgeObjectFigure getEdgeObjectFigure(EdgeObject edgeObject) {
-		if (StructureEdgeObjectConstants.FNAME_EDGE_OBJECT_ID.equals(edgeObject
-				.getId())) {
-			return ((PropertyFigure) getFigure()).getfNameEdgeObjectFigure();
-		}
-		return null;
+	public void setSelected(int value) {
+		super.setSelected(value);
+		getPropertyFigure().getNameLabel().setSelected(
+				value == 0 ? false : true);
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getDefaultRouter(org.eclipse.gmf.runtime.draw2d.ui.internal.figures.ConnectionLayerEx)
-	 * @generated
+	 * @generated NOT
 	 */
 	protected ConnectionRouter getDefaultRouter(ConnectionLayerEx cLayer) {
+		if (getSource() == getTarget()) {
+			return cLayer.getRectilinearRouter();
+		}
+
 		return cLayer.getObliqueRouter();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * Initially generated (called generated updatefNameLabel)
 	 * <!-- end-user-doc -->
+	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#refreshEdgeObjects()
 	 * @generated NOT
 	 */
-	protected void refreshVisuals() {
-		super.refreshVisuals();
+	protected void refreshEdgeObjects() {
+		super.refreshEdgeObjects();
 		updateSourceDecoration();
-		updatefNameLabel();
+		updateTargetDecoration();
+		updateNameLabel();
+		updateTargetCount();
+		updateTargetName();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * Update the fName Label
-	 * @generated
+	 * Update the name Label
+	 * @generated NOT
 	 */
-	private void updatefNameLabel() {
-		((Label) ((PropertyFigure) getFigure()).getfNameEdgeObjectFigure())
+	private void updateNameLabel() {
+		((Label) ((PropertyFigure) getFigure()).getNameLabel())
 				.setText(((Property) getEObject()).getName());
-	}
-
-	//---------------------------------------
-	// Ajout des fonctions pour le DirectEdit
-	//---------------------------------------
-
-	/**
-	 * Handle selection
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value The value of the selection
-	 * @generated
-	 */
-	public void setSelected(int value) {
-		super.setSelected(value);
-		((EditableLabel) ((PropertyFigure) getFigure())
-				.getfNameEdgeObjectFigure()).setSelected(value == 0 ? false
-				: true);
 	}
 
 	/**
@@ -247,12 +216,12 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	 * @return true if the cursor is over the EditableLabel
 	 * @generated
 	 */
-	private Boolean directEditHitTest(Point requestLoc) {
-		Label fnameName = (Label) ((PropertyFigure) getFigure())
-				.getfNameEdgeObjectFigure();
-		if (fnameName != null) {
-			fnameName.translateToRelative(requestLoc);
-			if (fnameName.containsPoint(requestLoc))
+	private boolean directEditHitTest(Point requestLoc) {
+		Label nameName = (Label) ((PropertyFigure) getFigure())
+				.getNameEdgeObjectFigure();
+		if (nameName != null) {
+			nameName.translateToRelative(requestLoc);
+			if (nameName.containsPoint(requestLoc))
 				return true;
 		}
 		return false;
@@ -261,17 +230,75 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	private void performDirectEdit() {
 		if (manager == null) {
-			Label fnameName = (Label) ((PropertyFigure) getFigure())
-					.getfNameEdgeObjectFigure();
+			Label targetName = (Label) ((PropertyFigure) getFigure())
+					.getNameLabel();
 			manager = new ModelerLabelDirectEditManager(this,
 					TextCellEditor.class,
-					new LabelCellEditorLocator(fnameName), fnameName);
+					new LabelCellEditorLocator(targetName), targetName);
 		}
 		manager.show();
+	}
+
+	/*
+	 *  HANDLE OF [ LOWER .. UPPER ]
+	 */
+
+	/**
+	 * Check basic rules on multiplicity of a property 
+	 * */
+	private String createCountString(Property prop)
+			throws BoundsFormatException {
+		int lower = prop.getLower();
+		int upper = prop.getUpper();
+
+		if (lower < 0)
+			throw new BoundsFormatException("LowerBound must be [0..n]");
+		if (upper < -1)
+			throw new BoundsFormatException("UpperBound must be [-1..n]");
+		if (upper < lower)
+			throw new BoundsFormatException("Upper must be > Lower");
+		return lower + ".." + (upper == -1 ? "*" : "" + upper);
+
+	}
+
+	/**
+	 * Update the multiplicity view 
+	 */
+	protected void updateTargetCount() {
+		Label targetCount = getPropertyFigure().getMultiplicityLabel();
+		try {
+			targetCount.setText(createCountString(getProperty()));
+			targetCount.setLabelAlignment(PositionConstants.CENTER);
+		} catch (BoundsFormatException e) {
+			targetCount.setText("error");
+			IStatus status = new Status(IStatus.ERROR, StructurePlugin
+					.getDefault().getBundle().getSymbolicName(), IStatus.ERROR,
+					e.getMessage(), null);
+			ResourcesPlugin.getPlugin().getLog().log(status);
+		}
+	}
+
+	/*
+	 *  HANDLE OPPOSITE
+	 * 
+	 */
+	protected void updateOpposite(Property opp) {
+		if (opposite == opp)
+			return;
+		if (opposite != null)
+			opposite.eAdapters().remove(getModelListener());
+	}
+
+	/**
+	 * Update the name of the property 
+	 * property.name
+	 */
+	protected void updateTargetName() {
+		getPropertyFigure().getNameLabel().setText(getProperty().getName());
 	}
 
 	/* -------------------------------------------------------------------------
@@ -364,12 +391,32 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 		}
 	}
 
-	protected Property getProperty() {
+	public PropertyFigure getPropertyFigure() {
+		return (PropertyFigure) getFigure();
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @generated NOT
+	 */
+	public Property getProperty() {
 		return (Property) getEObject();
 	}
 
-	public PropertyFigure getPropertyFigure() {
-		return (PropertyFigure) getFigure();
+	/**
+	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getEdgeObjectFigure(org.topcased.modeler.di.model.EdgeObject)
+	 */
+	public IEdgeObjectFigure getEdgeObjectFigure(EdgeObject edgeObject) {
+		if (StructureEdgeObjectConstants.MULTIPLICITY_LABEL_ID
+				.equals(edgeObject.getId())) {
+			return getPropertyFigure().getMultiplicityLabel();
+		} else if (StructureEdgeObjectConstants.NAME_LABEL_ID.equals(edgeObject
+				.getId())) {
+			return getPropertyFigure().getNameLabel();
+		}
+
+		return null;
 	}
 
 	/*
@@ -385,7 +432,7 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	/**
 	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#handlePropertyChanged(org.eclipse.emf.common.notify.Notification)
 	 */
-	protected void handlePropertyChanged(Notification msg) {
+	protected void handleModelChanged(Notification msg) {
 
 		switch (msg.getFeatureID(Property.class)) {
 		case StructurePackage.PROPERTY__IS_COMPOSITE:
@@ -399,18 +446,17 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 		case StructurePackage.PROPERTY__IS_UNIQUE:
 			break;
 		case StructurePackage.PROPERTY__LOWER:
-			break;
 		case StructurePackage.PROPERTY__UPPER:
-			break;
+			updateTargetCount();
 		case StructurePackage.PROPERTY__NAME:
-			break;
+		//updateTargetDecoration();
 		case StructurePackage.PROPERTY__OPPOSITE:
-			break;
+			updateOpposite(opposite);
 		case StructurePackage.PROPERTY__TYPE:
 			break;
 
 		}
-		super.handlePropertyChanged(msg);
+		super.handleModelChanged(msg);
 	}
 
 	/**
@@ -418,6 +464,17 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart {
 	 */
 	protected Font getDefaultFont() {
 		return EditPartUtils.changeFont(getProperty().isIsDerived());
+	}
+
+	/**
+	 * cheating to call a protected method (can't change the visibility of the 
+	 * methods of the upper-inherited class */
+	public IFigure adaptedCreateFigure() {
+		return createFigure();
+	}
+
+	public void adaptedCreateEditPolicies() {
+		createEditPolicies();
 	}
 
 }
