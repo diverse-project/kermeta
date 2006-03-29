@@ -1,4 +1,4 @@
-/* $Id: StructureValidateAction.java,v 1.2 2006-03-29 08:51:52 zdrey Exp $
+/* $Id: StructureKm2KmtAction.java,v 1.1 2006-03-29 08:51:52 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ValidateAction.java
  * License    : EPL
@@ -16,27 +16,33 @@
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.actions;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.ui.actions.WorkbenchPartAction;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 import org.topcased.modeler.di.model.Diagram;
 import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureActionConstants;
-import fr.irisa.triskell.kermeta.graphicaleditor.validation.constraints.KermetaConstraintChecker;
-import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.kermeta.tools.wizards.KmtPrinterWizard;
 
 /**
  * Action that validates the constraints using ConstraintChecker
  * @see fr.irisa.triskell.kermeta.utils.KermetaConstraintChecker
  */
-public class StructureValidateAction extends WorkbenchPartAction {
+public class StructureKm2KmtAction extends WorkbenchPartAction {
 
-	public StructureValidateAction(IWorkbenchPart part) {
+	public StructureKm2KmtAction(IWorkbenchPart part) {
 		super(part);
 	}
 
@@ -57,8 +63,8 @@ public class StructureValidateAction extends WorkbenchPartAction {
      */
     protected void init()
     {
-        setId(StructureActionConstants.VALIDATE);
-        setText(StructureActionConstants.VALIDATE_TEXT);
+        setId(StructureActionConstants.KM2KMT);
+        setText(StructureActionConstants.KM2KMT_TEXT);
     }
 
     /**
@@ -73,19 +79,20 @@ public class StructureValidateAction extends WorkbenchPartAction {
         Diagram currentDiagram = modeler.getActiveDiagram();
         // Get the root package in the current diagram.
         EObject modelObject = Utils.getElement(currentDiagram.getSemanticModel().getGraphElement());
-//        System.err.println("Active model ob : " + modelObject);
+        System.err.println("Active model ob : " + modelObject);
         // Get the model container
-//        System.err.println("Active model ob : " + modeler.getDiagrams().getModel().eResource().getURI());
+        System.err.println("Active model ob : " + modeler.getDiagrams().getModel().eResource().getURI());
         
         // Please do not remove this comment -- it is a pense-bete
         // Display a warning/error dialog
         //    ModelerPlugin.displayDialog("No parent Diagram", "There is no parent diagram", IStatus.INFO);
-        checkModel();
+        performAction();
     }
     
     /** 
      * 
-     * @return The URI (from emf) of the model that the diagram is linked to 
+     * @return The URI (from emf) of the model that the diagram is linked to. Returns an URI of the form
+     * "platform:/resource/[projectpath/filename]"
      */
     protected URI getModelURI()
     {
@@ -94,30 +101,47 @@ public class StructureValidateAction extends WorkbenchPartAction {
     
     
     /**
-     * Check the model
-     *
+     * Perform the action!
+     * TODO : handle the case where underlying model is not stored yet (popup dialog with error)
      */
-    public void checkModel()
+    public void performAction()
     {
-    	//new KermetaValidatorStartup().earlyStartup();
-    	// Load the KermetaUnit
-//      resolve uri
-        //URI u = URIMapUtil.resolveURI(p_metamodel_uri, unit_uripath);
-    	//EMF2Runtime.internalLog.info("UNIT URI = "+ u.toString());
-    	//System.err.println("UNIT URI = "+ u.toString() + "(path : "+ unit_uripath+")");
+    	Shell shell = new Shell();
         KMUnit kermeta_unit = (KMUnit)
         	KermetaUnitFactory.getDefaultLoader().createKermetaUnit(getModelURI().toString());
         
         Diagram currentDiagram = ((Modeler) getWorkbenchPart()).getActiveDiagram();
         EObject modelObject = Utils.getElement(currentDiagram.getSemanticModel().getGraphElement());
     	// Call the check constraint visitor on it!
-        KermetaConstraintChecker constraint_checker = new KermetaConstraintChecker(kermeta_unit);
-        System.err.println("Model URI : " + kermeta_unit.getUri());
-        System.err.println("Package URI : " + kermeta_unit.packageLookup("root"));
-        constraint_checker.accept((Package)modelObject);
+        KmtPrinterWizard km2kmtWizard = new KmtPrinterWizard();
+        
+        IStructuredSelection currentSelection = createDummySelection(getModelURI().toString());
+        km2kmtWizard.init(PlatformUI.getWorkbench(), currentSelection);
+    	WizardDialog wizDialog =  new org.eclipse.jface.wizard.WizardDialog(shell,km2kmtWizard);
+    	wizDialog.setTitle("PrettyPrint this km file into kmt file");
+    	wizDialog.open();
         
     }
     
+    /**
+     * Create a dummy selection so that we can call easily the km2kmtWizard
+     * @param unit_uri
+     * @return
+     */
+    public IStructuredSelection createDummySelection(String unit_uri)
+    {
+    	IStructuredSelection selection = null;
+    	String rel_uri = "";
+    	// remove the platform:/resource chunk
+    	if (getModelURI()!=null && getModelURI().toString().startsWith("platform:/resource/"))
+    		rel_uri = getModelURI().toString().substring(19); 
+    	IFile file = KermetaPlugin.getIFileFromString(rel_uri);
+    	System.err.println("file : " + file + "fomr : " + getModelURI().toString() + rel_uri);
+    	if (file!=null)
+    		selection = new StructuredSelection(file);
+    	
+    	return selection;
+    }
 
 
 }

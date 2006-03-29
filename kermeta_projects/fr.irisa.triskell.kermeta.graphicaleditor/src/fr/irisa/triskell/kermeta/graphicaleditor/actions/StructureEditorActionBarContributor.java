@@ -1,20 +1,8 @@
-/* $Id: StructureEditorActionBarContributor.java,v 1.1 2006-03-09 18:24:50 zdrey Exp $
- * Project    : fr.irisa.triskell.kermeta.graphicaleditor
- * File       : ValidateAction.java
- * License    : EPL
- * Copyright  : IRISA / INRIA / Universite de Rennes 1
- * -------------------------------------------------------------------
- * Creation date : Mar 9, 2006
- * Authors : 
- *    zdrey <zdrey@irisa.fr>
- */
 package fr.irisa.triskell.kermeta.graphicaleditor.actions;
 
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.ui.actions.RetargetAction;
-import org.topcased.modeler.ModelerActionConstants;
-import org.topcased.modeler.ModelerImageRegistry;
 import org.topcased.modeler.actions.ModelerActionBarContributor;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureActionConstants;
@@ -32,7 +20,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
  */
 public class StructureEditorActionBarContributor extends
 		ModelerActionBarContributor {
-	
+
 	/**
 	 * This method builds the graphical elements and associate the corresponding actions 
 	 * in the toolbar related to the [Kermeta] diagram editor
@@ -41,25 +29,38 @@ public class StructureEditorActionBarContributor extends
 	protected void buildActions() {
 		super.buildActions();
 		// Add an action for validation --> see super.buildAction
-        RetargetAction action = new RetargetAction(StructureActionConstants.VALIDATE, "VALIDATE");
-        action.setImageDescriptor(StructureImageRegistry.getImageDescriptor("VALIDATE"));
-        action.setToolTipText("Validate the model");
-        addRetargetAction(action);
-        
-        // Now initialize this action
+		RetargetAction action = new RetargetAction(
+				StructureActionConstants.VALIDATE, "VALIDATE");
+		action.setImageDescriptor(StructureImageRegistry
+				.getImageDescriptor("VALIDATE"));
+		action.setToolTipText(StructureActionConstants.VALIDATE_TEXT);
+		addRetargetAction(action);
+
+		// Now initialize this action
+		action.setEnabled(true);
+
+		// Add an action for conversion
+		action = new RetargetAction(StructureActionConstants.KM2KMT, "KM2KMT");
+		action.setImageDescriptor(StructureImageRegistry
+				.getImageDescriptor("KM2KMT"));
+		action.setToolTipText(StructureActionConstants.KM2KMT_TEXT);
+		addRetargetAction(action);
+
 		action.setEnabled(true);
 	}
-	
+
 	/**
 	 * @see org.topcased.modeler.actions.ModelerActionBarContributor#contributeToToolBar(org.eclipse.jface.action.IToolBarManager)
 	 */
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
 		super.contributeToToolBar(toolBarManager);
 		// Validation actions
-        toolBarManager.add(new Separator());
-        toolBarManager.add(getAction(StructureActionConstants.VALIDATE));
+		toolBarManager.add(new Separator());
+		toolBarManager.add(getAction(StructureActionConstants.VALIDATE));
+		// Convert KM2KMT action
+		toolBarManager.add(getAction(StructureActionConstants.KM2KMT));
 	}
-	
+
 	/**
 	 * Nothing added in this method
 	 * @see org.topcased.modeler.actions.ModelerActionBarContributor#declareGlobalActionKeys()
@@ -67,5 +68,5 @@ public class StructureEditorActionBarContributor extends
 	protected void declareGlobalActionKeys() {
 		super.declareGlobalActionKeys();
 	}
-	
+
 }
