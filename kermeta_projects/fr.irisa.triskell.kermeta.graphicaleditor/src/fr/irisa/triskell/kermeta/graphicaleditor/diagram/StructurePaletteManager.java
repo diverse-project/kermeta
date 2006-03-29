@@ -33,13 +33,12 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 	 * The Constructor
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param creationUtils 
+	 * @param utils the creation utils for the tools of the palette 
 	 * @generated
-	 * 
 	 */
-	public StructurePaletteManager(ICreationUtils creationUtils) {
+	public StructurePaletteManager(ICreationUtils utils) {
 		super();
-		this.creationUtils = creationUtils;
+		this.creationUtils = utils;
 	}
 
 	/**
@@ -89,7 +88,7 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 		factory = new GraphElementCreationFactory(creationUtils,
 				StructurePackage.eINSTANCE.getPackage());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
-				factory, StructureImageRegistry.getImageDescriptor("FPACKAGE"),
+				factory, StructureImageRegistry.getImageDescriptor("PACKAGE"),
 				null, 12, 10, 10, 10);
 		entries.add(objectTool);
 		newObjTxt = "Class";
@@ -97,22 +96,23 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 				StructurePackage.eINSTANCE.getClassDefinition());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
 				factory, StructureImageRegistry
-						.getImageDescriptor("FCLASSDEFINITION"), null, 70, 10,
+						.getImageDescriptor("CLASSDEFINITION"), null, 70, 10,
 				10, 7);
 		entries.add(objectTool);
 		newObjTxt = "Operation";
 		factory = new GraphElementCreationFactory(creationUtils,
 				StructurePackage.eINSTANCE.getOperation());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
-				factory, StructureImageRegistry
-						.getImageDescriptor("FOPERATION"), null, -1, -1, 0, 0);
+				factory,
+				StructureImageRegistry.getImageDescriptor("OPERATION"), null,
+				-1, -1, 0, 0);
 		entries.add(objectTool);
 		newObjTxt = "Tag";
 		factory = new GraphElementCreationFactory(creationUtils,
 				StructurePackage.eINSTANCE.getTag());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
-				factory, StructureImageRegistry.getImageDescriptor("FTAG"),
-				null, 0, 0, 0, 0);
+				factory, StructureImageRegistry.getImageDescriptor("TAG"),
+				null, 20, 10, 0, 0);
 		entries.add(objectTool);
 
 		basicDrawer.addAll(entries);
@@ -140,7 +140,7 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 				StructurePackage.eINSTANCE.getProperty());
 		connectionTool = new ModelerConnectionCreationToolEntry(newObjTxt,
 				newObjTxt, factory, StructureImageRegistry
-						.getImageDescriptor("FPROPERTY"), null);
+						.getImageDescriptor("PROPERTY"), null);
 		entries.add(connectionTool);
 
 		newObjTxt = "Inheritance";
@@ -158,6 +158,13 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 				newObjTxt, factory, StructureImageRegistry
 						.getImageDescriptor("TAGLINK"), null);
 		entries.add(connectionTool);
+		newObjTxt = "PropertyAsNode";
+		factory = new GraphElementCreationFactory(creationUtils,
+				StructureEditPolicyConstants.PROPERTYASNODE_EDITPOLICY, true);
+		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
+				factory, StructureImageRegistry
+						.getImageDescriptor("PROPERTYASNODE"), null, 0, 0, 0, 0);
+		entries.add(objectTool);
 
 		edgesDrawer.addAll(entries);
 		getRoot().add(edgesDrawer);
