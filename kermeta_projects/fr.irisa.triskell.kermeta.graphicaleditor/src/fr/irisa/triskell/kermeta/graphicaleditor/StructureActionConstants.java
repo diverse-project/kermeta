@@ -8,5 +8,9 @@ public interface StructureActionConstants {
 	public static final String VALIDATE = "fr.irisa.triskell.kermeta.graphicaleditor.validate";
 	/** Public constant defining the Validate action text. */
 	public static final String VALIDATE_TEXT = "Check constraints";
+	
+	public static final String KM2KMT = "fr.irisa.triskell.kermeta.graphicaleditor.convertKM2KMT";
+	/** Public constant defining the Validate action text. */
+	public static final String KM2KMT_TEXT = "Generate Kermeta text";
 
 }
