@@ -1,4 +1,4 @@
-/* $Id: 003_associations.kmt,v 1.1 2005-11-23 09:35:27 dvojtise Exp $ */
+/* $Id: 003_associations.kmt,v 1.2 2006-03-30 12:37:33 ssaudrai Exp $ */
 
 // Test of a valid associations
 
@@ -35,11 +35,11 @@ class F {
 
 /* -------------------------------*/
 class G {
-    attribute r1 : H[1]#r2
+    attribute r1 : H#r2
     reference r2 : H[1]#r1
 }
 class H {
-    attribute r1 : G[1]#r2
+    attribute r1 : G#r2
     reference r2 : G[1]#r1
 }
 
