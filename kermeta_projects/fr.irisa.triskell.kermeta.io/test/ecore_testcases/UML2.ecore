@@ -250,7 +250,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//VisibilityKind">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Determines the visibility of the NamedElement within different Namespaces within the overall model. Package Dependencies (“Dependencies” on page 94)"/>
+        <details key="documentation" value="Determines the visibility of the NamedElement within different Namespaces within the overall model. Package Dependencies ('Dependencies' on page 94)"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="clientDependency" ordered="false"
@@ -586,7 +586,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//StructuralFeature #//ConnectableElement #//DeploymentTarget">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Property represents a declared state of one or more instances in terms of a named relationship to a value or values. When a property is an attribute of a classifier, the value or values are related to the instance of the classifier by being held in slots of the instance. When a property is an association end, the value or values are related to the instance or instances at the other end(s) of the association (see semantics of Association). Property is indirectly a subclass of Constructs::TypedElement. The range of valid values represented by the property can be controlled by setting the property’s type. Package AssociationClasses (“AssociationClasses” on page 107) A property may have other properties (attributes) that serve as qualifiers. "/>
+      <details key="documentation" value="Property represents a declared state of one or more instances in terms of a named relationship to a value or values. When a property is an attribute of a classifier, the value or values are related to the instance of the classifier by being held in slots of the instance. When a property is an association end, the value or values are related to the instance or instances at the other end(s) of the association (see semantics of Association). Property is indirectly a subclass of Constructs::TypedElement. The range of valid values represented by the property can be controlled by setting the property's type. Package AssociationClasses ('AssociationClasses' on page 107) A property may have other properties (attributes) that serve as qualifiers. "/>
     </eAnnotations>
     <eAnnotations source="duplicates">
       <contents xsi:type="ecore:EOperation" name="isConsistentWith" eType="#//Boolean">
@@ -1011,7 +1011,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//Classifier">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="DataType defines a kind of classifier in which operations are all pure functions (i.e., they can return data values but they cannot change data values, because they have no identity). For example, an “add” operation on a number with another number as an argument yields a third number as a result; the target and argument are unchanged. A DataType may also contain attributes to support the modeling of structured data types. "/>
+      <details key="documentation" value="DataType defines a kind of classifier in which operations are all pure functions (i.e., they can return data values but they cannot change data values, because they have no identity). For example, an 'add' operation on a number with another number as an argument yields a third number as a result; the target and argument are unchanged. A DataType may also contain attributes to support the modeling of structured data types. "/>
     </eAnnotations>
     <eAnnotations source="duplicates">
       <contents xsi:type="ecore:EOperation" name="inherit" eType="#//Set">
@@ -1222,7 +1222,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//PackageableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Constraint contains a ValueSpecification that specifies additional semantics for one or more elements. Certain kinds of constraints (such as an association “xor” constraint) are predefined in UML, others may be user-defined. A user-defined Constraint is described using a specified language, whose syntax and interpretation is a tool responsibility. One predefined language for writing constraints is OCL. In some situations, a programming language such as Java may be appropriate for expressing a constraint. In other situations natural language may be used. Constraint is a condition (a Boolean expression) that restricts the extension of the associated element beyond what is imposed by the other language constructs applied to that element. Constraint contains an optional name, although they are commonly unnamed. "/>
+      <details key="documentation" value="Constraint contains a ValueSpecification that specifies additional semantics for one or more elements. Certain kinds of constraints (such as an association 'xor' constraint) are predefined in UML, others may be user-defined. A user-defined Constraint is described using a specified language, whose syntax and interpretation is a tool responsibility. One predefined language for writing constraints is OCL. In some situations, a programming language such as Java may be appropriate for expressing a constraint. In other situations natural language may be used. Constraint is a condition (a Boolean expression) that restricts the extension of the associated element beyond what is imposed by the other language constructs applied to that element. Constraint contains an optional name, although they are commonly unnamed. "/>
     </eAnnotations>
     <eOperations name="not_apply_to_self" eType="#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1259,7 +1259,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="VisibilityKind">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="VisibilityKind is an enumeration of the following literal values: • public • private • protected • package "/>
+      <details key="documentation" value="VisibilityKind is an enumeration of the following literal values: - public - private - protected - package "/>
     </eAnnotations>
     <eLiterals name="public"/>
     <eLiterals name="private" value="1"/>
@@ -1450,7 +1450,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" eType="#//Boolean"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="States whether the feature’s value may be modified by a client. Default is false."/>
+        <details key="documentation" value="States whether the feature's value may be modified by a client. Default is false."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -1583,13 +1583,13 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Generalization" eSuperTypes="#//DirectedRelationship">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A generalization relates a specific classifier to a more general classifier, and is owned by the specific classifier. Package PowerTypes (“PowerTypes” on page 109) A generalization can be designated as being a member of a particular generalization set. "/>
+      <details key="documentation" value="A generalization relates a specific classifier to a more general classifier, and is owned by the specific classifier. Package PowerTypes ('PowerTypes' on page 109) A generalization can be designated as being a member of a particular generalization set. "/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="specific" lowerBound="1"
         eType="#//Classifier" transient="true" eOpposite="#//Classifier/generalization">
       <eAnnotations source="subsets" references="#//DirectedRelationship/source #//Element/owner"/>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="References the specializing classifier in the Generalization relationship. Subsets DirectedRelationship::source and Element::owner. Package PowerTypes (“PowerTypes” on page 109) • generalizationSet Designates a set in which instances of Generalization is considered members."/>
+        <details key="documentation" value="References the specializing classifier in the Generalization relationship. Subsets DirectedRelationship::source and Element::owner. Package PowerTypes ('PowerTypes' on page 109) - generalizationSet Designates a set in which instances of Generalization is considered members."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="general" lowerBound="1"
@@ -1796,7 +1796,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ParameterDirectionKind">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="ParameterDirectionKind is an enumeration of the following literal values: • in Indicates that parameter values are passed into the behavioral element by the caller. • inout Indicates that parameter values are passed into a behavioral element by the caller and then back out to the caller from the behavioral element. • out Indicates that parameter values are passed from a behavioral element out to the caller. • return Indicates that parameter values are passed as return values from a behavioral element back to the caller. "/>
+      <details key="documentation" value="ParameterDirectionKind is an enumeration of the following literal values: - in Indicates that parameter values are passed into the behavioral element by the caller. - inout Indicates that parameter values are passed into a behavioral element by the caller and then back out to the caller from the behavioral element. - out Indicates that parameter values are passed from a behavioral element out to the caller. - return Indicates that parameter values are passed as return values from a behavioral element back to the caller. "/>
     </eAnnotations>
     <eLiterals name="in"/>
     <eLiterals name="inout" value="1"/>
@@ -1805,7 +1805,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AggregationKind">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="AggregationKind is an enumeration of the following literal values: • none Indicates that the property has no aggregation. • shared Indicates that the property has a shared aggregation. • composite Indicates that the property is aggregated compositely, i.e., the composite object has responsibility for the existence and storage of the composed objects (parts). "/>
+      <details key="documentation" value="AggregationKind is an enumeration of the following literal values: - none Indicates that the property has no aggregation. - shared Indicates that the property has a shared aggregation. - composite Indicates that the property is aggregated compositely, i.e., the composite object has responsibility for the existence and storage of the composed objects (parts). "/>
     </eAnnotations>
     <eLiterals name="none"/>
     <eLiterals name="shared" value="1"/>
@@ -1813,7 +1813,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Behavior" abstract="true" eSuperTypes="#//Class">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Behavior is a specification of how its context classifier changes state over time. This specification may be either a definition of possible behavior execution or emergent behavior, or a selective illustration of an interesting subset of possible executions. The latter form is typically used for capturing examples, such as a trace of a particular execution. A classifier behavior is always a definition of behavior and not an illustration. It describes the sequence of state changes an instance of a classifier may undergo in the course of its lifetime. Its precise semantics depends on the kind of classifier. For example, the classifier behavior of a collaboration represents emergent behavior of all the parts, whereas the classifier behavior of a class is just the behavior of instances of the class separated from the behaviors of any of its parts. When a behavior is associated as the method of a behavioral feature, it defines the implementation of that feature; i.e., the computation that generates the effects of the behavioral feature. As a classifier, a behavior can be specialized. Instantiating a behavior is referred to as “invocating” the behavior, an instantiated behavior is also called a behavior “execution.” A behavior may be invoked directly or its invocation may be the result of invoking the behavioral feature that specifies this behavior. A behavior can also be instantiated as an object in virtue of it being a class. The specification of a behavior can take a number of forms, as described in the subclasses of Behavior. Behavior is an abstract metaclass factoring out the commonalities of these different specification mechanisms. When a behavior is invoked, its execution receives a set of input values that are used to affect the course of execution and as a result of its execution it produces a set of output values which are returned, as specified by its parameters. The observable effects of a behavior execution may include changes of values of various objects involved in the execution, the creation and destruction of objects, generation of communications between objects, as well as an explicit set of output values. "/>
+      <details key="documentation" value="Behavior is a specification of how its context classifier changes state over time. This specification may be either a definition of possible behavior execution or emergent behavior, or a selective illustration of an interesting subset of possible executions. The latter form is typically used for capturing examples, such as a trace of a particular execution. A classifier behavior is always a definition of behavior and not an illustration. It describes the sequence of state changes an instance of a classifier may undergo in the course of its lifetime. Its precise semantics depends on the kind of classifier. For example, the classifier behavior of a collaboration represents emergent behavior of all the parts, whereas the classifier behavior of a class is just the behavior of instances of the class separated from the behaviors of any of its parts. When a behavior is associated as the method of a behavioral feature, it defines the implementation of that feature; i.e., the computation that generates the effects of the behavioral feature. As a classifier, a behavior can be specialized. Instantiating a behavior is referred to as 'invocating' the behavior, an instantiated behavior is also called a behavior 'execution.' A behavior may be invoked directly or its invocation may be the result of invoking the behavioral feature that specifies this behavior. A behavior can also be instantiated as an object in virtue of it being a class. The specification of a behavior can take a number of forms, as described in the subclasses of Behavior. Behavior is an abstract metaclass factoring out the commonalities of these different specification mechanisms. When a behavior is invoked, its execution receives a set of input values that are used to affect the course of execution and as a result of its execution it produces a set of output values which are returned, as specified by its parameters. The observable effects of a behavior execution may include changes of values of various objects involved in the execution, the creation and destruction of objects, generation of communications between objects, as well as an explicit set of output values. "/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReentrant" eType="#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -2013,7 +2013,7 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCovering" eType="#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet. For example, Person could have two Generalization relationships each with a different specific Classifier: Male Person and Female Person. This GeneralizationSet would be covering because every instance of Person would be an instance of Male Person or Female Person. In contrast, Person could have a three Generalization relationships involving three specific Classifiers: North AmericanPerson, Asian Person, and European Person. This GeneralizationSet would not be covering because there are instances of Person for which these three specific Classifiers do not apply. The first example, then, could be read: any Person would be specialized as either being a Male Person or a Female Person—and nothing else; the second could be read: any Person would be specialized as being North American Person, Asian Person, European Person, or something else."/>
+        <details key="documentation" value="Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet. For example, Person could have two Generalization relationships each with a different specific Classifier: Male Person and Female Person. This GeneralizationSet would be covering because every instance of Person would be an instance of Male Person or Female Person. In contrast, Person could have a three Generalization relationships involving three specific Classifiers: North AmericanPerson, Asian Person, and European Person. This GeneralizationSet would not be covering because there are instances of Person for which these three specific Classifiers do not apply. The first example, then, could be read: any Person would be specialized as either being a Male Person or a Female Person and nothing else; the second could be read: any Person would be specialized as being North American Person, Asian Person, European Person, or something else."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDisjoint" eType="#//Boolean">
@@ -2044,7 +2044,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InformationFlow" eSuperTypes="#//PackageableElement #//DirectedRelationship">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An Information Flow specifies that one or more information items circulate from its sources to its targets. Information flows require some kind of “information channel” for transmitting information items from the source to the destination. An information channel is repersented in various ways depending on the nature of its sources and targets. It may be represented by connectors, links, associations, or even dependencies. For example, if the source and destination are parts in some composite structure such as a collaboration, then the information channel is likely to be represented by a connector between them. Or, if the source and target are objects (which are a kind of InstanceSpecification), they may be represented by a link that joins the two, and so on. "/>
+      <details key="documentation" value="An Information Flow specifies that one or more information items circulate from its sources to its targets. Information flows require some kind of 'information channel' for transmitting information items from the source to the destination. An information channel is repersented in various ways depending on the nature of its sources and targets. It may be represented by connectors, links, associations, or even dependencies. For example, if the source and destination are parts in some composite structure such as a collaboration, then the information channel is likely to be represented by a connector between them. Or, if the source and target are objects (which are a kind of InstanceSpecification), they may be represented by a link that joins the two, and so on. "/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="realization" ordered="false"
         upperBound="-1" eType="#//Relationship">
@@ -2507,7 +2507,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Actor" eSuperTypes="#//Classifier">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An Actor models a type of role played by an entity that interacts with the subject (e.g., by exchanging signals and data), but which is external to the subject (i.e., in the sense that an instance of an actor is not a part of the instance of its corresponding subject). Actors may represent roles played by human users, external hardware, or other subjects. Note that an actor does not necessarily represent a specific physical entity but merely a particular facet (i.e., “role”) of some entity that is relevant to the specification of its associated use cases. Thus, a single physical instance may play the role of several different actors and, conversely, a given actor may be played by multiple different instances. Since an actor is external to the subject, it is typically defined in the same classifier or package that incorporates the subject classifier. "/>
+      <details key="documentation" value="An Actor models a type of role played by an entity that interacts with the subject (e.g., by exchanging signals and data), but which is external to the subject (i.e., in the sense that an instance of an actor is not a part of the instance of its corresponding subject). Actors may represent roles played by human users, external hardware, or other subjects. Note that an actor does not necessarily represent a specific physical entity but merely a particular facet (i.e., 'role') of some entity that is relevant to the specification of its associated use cases. Thus, a single physical instance may play the role of several different actors and, conversely, a given actor may be played by multiple different instances. Since an actor is external to the subject, it is typically defined in the same classifier or package that incorporates the subject classifier. "/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Extend" eSuperTypes="#//NamedElement #//DirectedRelationship">
@@ -2607,7 +2607,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBehavior" eType="#//Boolean"
         defaultValueLiteral="false">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Specifies whether requests arriving at this port are sent to the classifier behavior of this classifier (see “BehavioredClassifier (from BasicBehaviors)” on page 387). Such ports are referred to as behavior port. Any invocation of a behavioral feature targeted at a behavior port will be handled by the instance of the owning classifier itself, rather than by any instances that this classifier may contain. The default value is false."/>
+        <details key="documentation" value="Specifies whether requests arriving at this port are sent to the classifier behavior of this classifier (see 'BehavioredClassifier (from BasicBehaviors)' on page 387). Such ports are referred to as behavior port. Any invocation of a behavioral feature targeted at a behavior port will be handled by the instance of the owning classifier itself, rather than by any instances that this classifier may contain. The default value is false."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isService" eType="#//Boolean"
@@ -2658,7 +2658,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="CallConcurrencyKind">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="CallConcurrencyKind is an enumeration with the following literals: • sequential No concurrency management mechanism is associated with the operation and, therefore, concurrency conflicts may occur. Instances that invoke a behavioral feature need to coordinate so that only one invocation to a target on any behavioral feature occurs at once. • guarded Multiple invocations of a behavioral feature may occur simultaneously to one instance, but only one is allowed to commence. The others are blocked until the performance of the first behavioral feature is complete. It is the responsibility of the system designer to ensure that deadlocks do not occur due to simultaneous blocks. • concurrent Multiple invocations of a behavioral feature may occur simultaneously to one instance and all of them may proceed concurrently. "/>
+      <details key="documentation" value="CallConcurrencyKind is an enumeration with the following literals: - sequential No concurrency management mechanism is associated with the operation and, therefore, concurrency conflicts may occur. Instances that invoke a behavioral feature need to coordinate so that only one invocation to a target on any behavioral feature occurs at once. - guarded Multiple invocations of a behavioral feature may occur simultaneously to one instance, but only one is allowed to commence. The others are blocked until the performance of the first behavioral feature is complete. It is the responsibility of the system designer to ensure that deadlocks do not occur due to simultaneous blocks. - concurrent Multiple invocations of a behavioral feature may occur simultaneously to one instance and all of them may proceed concurrently. "/>
     </eAnnotations>
     <eLiterals name="sequential"/>
     <eLiterals name="guarded" value="1"/>
@@ -2897,7 +2897,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Lifeline" eSuperTypes="#//NamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A lifeline represents an individual participant in the Interaction. While Parts and StructuralFeatures may have multiplicity greater than 1, Lifelines represent only one interacting entity. Lifeline is a specialization of NamedElement. If the referenced ConnectableElement is multivalued (i.e. has a multiplicity > 1), then the Lifeline may have an expression (the ‘selector’) that specifies which particular part is represented by this Lifeline. If the selector is omitted this means that an arbitrary representative of the multivalued ConnectableElement is chosen. "/>
+      <details key="documentation" value="A lifeline represents an individual participant in the Interaction. While Parts and StructuralFeatures may have multiplicity greater than 1, Lifelines represent only one interacting entity. Lifeline is a specialization of NamedElement. If the referenced ConnectableElement is multivalued (i.e. has a multiplicity > 1), then the Lifeline may have an expression (the 'selector') that specifies which particular part is represented by this Lifeline. If the selector is omitted this means that an arbitrary representative of the multivalued ConnectableElement is chosen. "/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="coveredBy" ordered="false"
         upperBound="-1" eType="#//InteractionFragment" eOpposite="#//InteractionFragment/covered"/>
@@ -3272,7 +3272,7 @@
         eType="#//ValueSpecification" containment="true">
       <eAnnotations source="subsets" references="#//Element/ownedElement"/>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A specification giving the conditions under which the join will emit a token. Default is “and”."/>
+        <details key="documentation" value="A specification giving the conditions under which the join will emit a token. Default is and."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -3344,11 +3344,11 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpansionRegion" eSuperTypes="#//StructuredActivityNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An expansion region is a strictly nested region of an activity with explicit input and outputs (modeled as ExpansionNodes). Each input is a collection of values. If there are multiple input pins, each of them must hold the same kind of collection, although the types of the elements in the different collections may vary. The expansion region is executed once for each element (or position) in the input collection. If an expansion region has outputs, they must be collections of the same kind and must contain elements of the same type as the corresponding inputs. The number of output collections at runtime can differ from the number of input collections. On each execution of the region, an output value from the region is inserted into an output collection at the same position as the input elements. If the region execution ends with no output, then nothing is added to the output collection. If all the executions provide an output to the collection, then the output collections will have the same number of elements as the input collections. The inputs and outputs to an expansion region are modeled as ExpansionNodes. From “outside” of the region, the values on these nodes appear as collections. From “inside” the region the values appear as elements of the collections. Object flow edges connect pins outside the region to input and output expansion nodes as collections. Object flow edges connect pins inside the region to input and output expansion nodes as individual elements. From the inside of the region, these nodes are visible as individual values. If an expansion node has a name, it is the name of the individual element within the region. Any object flow edges that cross the boundary of the region, without passing through expansion nodes, provide values that are fixed within the different executions of the region. "/>
+      <details key="documentation" value="An expansion region is a strictly nested region of an activity with explicit input and outputs (modeled as ExpansionNodes). Each input is a collection of values. If there are multiple input pins, each of them must hold the same kind of collection, although the types of the elements in the different collections may vary. The expansion region is executed once for each element (or position) in the input collection. If an expansion region has outputs, they must be collections of the same kind and must contain elements of the same type as the corresponding inputs. The number of output collections at runtime can differ from the number of input collections. On each execution of the region, an output value from the region is inserted into an output collection at the same position as the input elements. If the region execution ends with no output, then nothing is added to the output collection. If all the executions provide an output to the collection, then the output collections will have the same number of elements as the input collections. The inputs and outputs to an expansion region are modeled as ExpansionNodes. From outside of the region, the values on these nodes appear as collections. From inside the region the values appear as elements of the collections. Object flow edges connect pins outside the region to input and output expansion nodes as collections. Object flow edges connect pins inside the region to input and output expansion nodes as individual elements. From the inside of the region, these nodes are visible as individual values. If an expansion node has a name, it is the name of the individual element within the region. Any object flow edges that cross the boundary of the region, without passing through expansion nodes, provide values that are fixed within the different executions of the region. "/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//ExpansionKind">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The way in which the executions interact: parallel — all interactions are independent iterative — the interactions occur in order of the elements stream — a stream of values flows into a single execution"/>
+        <details key="documentation" value="The way in which the executions interact: parallel   all interactions are independent iterative   the interactions occur in order of the elements stream   a stream of values flows into a single execution"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outputElement" ordered="false"
@@ -3708,7 +3708,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TransitionKind">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="TransitionKind is an enumeration of the following literal values: • external • internal • local "/>
+      <details key="documentation" value="TransitionKind is an enumeration of the following literal values: - external - internal - local "/>
     </eAnnotations>
     <eLiterals name="internal"/>
     <eLiterals name="local" value="1"/>
@@ -3789,7 +3789,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReadSelfAction" eSuperTypes="#//Action">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Every action is ultimately a part of some activity, which is in turn optionally attached in some way to the specification of a classifier—for example as the body of a method or as part of a state machine. When the activity executes, it does so in the context of some specific host instance of that classifier. This action produces this host instance, if any, on its output pin. The type of the output pin is the classifier to which the activity is associated in the user model. "/>
+      <details key="documentation" value="Every action is ultimately a part of some activity, which is in turn optionally attached in some way to the specification of a classifier for example as the body of a method or as part of a state machine. When the activity executes, it does so in the context of some specific host instance of that classifier. This action produces this host instance, if any, on its output pin. The type of the output pin is the classifier to which the activity is associated in the user model. "/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" lowerBound="1"
         eType="#//OutputPin" containment="true">
@@ -3802,7 +3802,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="StructuralFeatureAction" abstract="true"
       eSuperTypes="#//Action">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="This abstract action class statically specifies the structural feature being accessed. The object to access is specified dynamically, by referring to an input pin on which the object will be placed at runtime. The type of the value of this pin is the classifier that owns the specified structural feature, and the value’s multiplicity is 1..1. "/>
+      <details key="documentation" value="This abstract action class statically specifies the structural feature being accessed. The object to access is specified dynamically, by referring to an input pin on which the object will be placed at runtime. The type of the value of this pin is the classifier that owns the specified structural feature, and the values multiplicity is 1..1. "/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="structuralFeature" lowerBound="1"
         eType="#//StructuralFeature">
@@ -3851,12 +3851,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="RemoveStructuralFeatureValueAction"
       eSuperTypes="#//WriteStructuralFeatureAction">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="The object to access is specified dynamically, by referring to an input pin on which the object will be placed at runtime. The type of the value of this pin is the classifier that owns the specified structural feature, and the value’s multiplicity is 1..1. "/>
+      <details key="documentation" value="The object to access is specified dynamically, by referring to an input pin on which the object will be placed at runtime. The type of the value of this pin is the classifier that owns the specified structural feature, and the values multiplicity is 1..1. "/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AddStructuralFeatureValueAction" eSuperTypes="#//WriteStructuralFeatureAction">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Structural Features are potentially multi-valued and ordered, so the action supports specification of insertion points for new values. It also supports the removal of existing values of the structural feature before the new value is added. The object to access is specified dynamically, by referring to an input pin on which the object will be placed at runtime. The type of the value of this pin is the classifier that owns the specified structural feature, and the value’s multiplicity is 1..1. "/>
+      <details key="documentation" value="Structural Features are potentially multi-valued and ordered, so the action supports specification of insertion points for new values. It also supports the removal of existing values of the structural feature before the new value is added. The object to access is specified dynamically, by referring to an input pin on which the object will be placed at runtime. The type of the value of this pin is the classifier that owns the specified structural feature, and the values multiplicity is 1..1. "/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReplaceAll" eType="#//Boolean"
         defaultValueLiteral="false">
@@ -3886,7 +3886,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="LinkEndData" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//InputPin">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Input pin that provides the specified object for the given end. This pin is omitted if the link-end data specifies an “open” end for reading."/>
+        <details key="documentation" value="Input pin that provides the specified object for the given end. This pin is omitted if the link-end data specifies an open end for reading."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="end" lowerBound="1" eType="#//Property">
@@ -3903,7 +3903,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReadLinkAction" eSuperTypes="#//LinkAction">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="This action navigates an association towards one end, which is the end that does not have an input pin to take its object (the “open” end). The objects put on the result output pin are the ones participating in the association at the open end, conforming to the specified qualifiers, in order if the end is ordered. The semantics is undefined for reading a link that violates the navigability or visibility of the open end. "/>
+      <details key="documentation" value="This action navigates an association towards one end, which is the end that does not have an input pin to take its object (the open end). The objects put on the result output pin are the ones participating in the association at the open end, conforming to the specified qualifiers, in order if the end is ordered. The semantics is undefined for reading a link that violates the navigability or visibility of the open end. "/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" lowerBound="1"
         eType="#//OutputPin" containment="true">
@@ -4325,7 +4325,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ParameterEffectKind">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="The datatype ParameterEffectKind is an enumeration that indicates the effect of a behavior on values passed in or out of its parameters (see “Parameter (as specialized)” on page 354). "/>
+      <details key="documentation" value="The datatype ParameterEffectKind is an enumeration that indicates the effect of a behavior on values passed in or out of its parameters (see Parameter (as specialized) on page 354). "/>
     </eAnnotations>
     <eLiterals name="create"/>
     <eLiterals name="read" value="1"/>
@@ -4371,7 +4371,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isIndirectlyInstantiated"
         eType="#//Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="{default = true} The kind of instantiation that applies to a Component. If false, the component is instantiated as an addressable object. If true, the Component is defined at design-time, but at runtime (or execution-time) an object specified by the Component does not exist, that is, the component is instantiated indirectly, through the instantiation of its realizing classifiers or parts. Several standard stereotypes use this meta attribute, e.g. «specification, «focus», «subsystem »."/>
+        <details key="documentation" value="{default = true} The kind of instantiation that applies to a Component. If false, the component is instantiated as an addressable object. If true, the Component is defined at design-time, but at runtime (or execution-time) an object specified by the Component does not exist, that is, the component is instantiated indirectly, through the instantiation of its realizing classifiers or parts. Several standard stereotypes use this meta attribute, e.g. ''specification, ''focus'', ''subsystem ''."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="required" ordered="false"
