@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.3 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.4 2006-03-30 09:30:14 zdrey Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -11,105 +11,156 @@
 
 package fr.irisa.triskell.kermeta.constraintchecker;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
  * Constraint checker 
  * Verifies various contraints on Kermeta models
  */
-public class KermetaConstraintChecker {
+public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
     
-    protected KermetaUnit unit;
         
     final static public Logger internalLog = LogConfigurationHelper.getLogger("ConstraintChecker");
    
-    /**
-     * @param unit
-     */
-    public KermetaConstraintChecker(KermetaUnit unit) {
-        super();
-        this.unit = unit;
-    }
-    
+    public static final String NAME_ERROR = "An element is unnamed";
+	
+	/**
+	 * The KermetaUnit that will be build so that we can constraint check more easily the model
+	 * hosted by the resource stored in <code>inputFile</code>.
+	 */
+	protected KermetaUnit builder;
+	protected Operation current_operation;
+	protected ClassDefinition current_class;
+	protected Property current_property;
+	protected Package current_package;
+	
+	protected List messages; 
+
+	public KermetaConstraintChecker()
+	{
+		messages = new ArrayList();
+	}
+	
+	public KermetaConstraintChecker(KermetaUnit kunit)
+	{
+		builder = kunit;
+	}
+	
+
     /**
      * check all the class definitions 
      * of a kermeta unit
      */
     public void checkUnit() {
-        
-        
-        Iterator it = unit.typeDefs.values().iterator();
+        Iterator it = builder.typeDefs.values().iterator();
+        // Call the check constraint visitor on it!
         while(it.hasNext()) {
             TypeDefinition td = (TypeDefinition)it.next();
-            if (td instanceof ClassDefinition) {
-                visitClassDefinition((ClassDefinition)td);
+            this.accept(td);
+        }
+    }
+	
+	/**
+	 * The following constraints on the classDefinition are checked :
+	 *   - a class definition cannot have twice the same operation name 
+	 *   
+	 *  A wizard that create special *aliases* for redefined operations (aliases 
+	 *  in the kermeta language meaning)
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitClassDefinition(fr.irisa.triskell.kermeta.language.structure.ClassDefinition)
+	 */
+	public Object visitClassDefinition(ClassDefinition class_definition) {
+		//current_class = class_definition;
+		builder.current_class = class_definition;
+		return super.visitClassDefinition(class_definition);
+	}
 
-                
-            }
-        }
-    }
-    
-    /**
-     * Type check all the operations and derived properties
-     * of a class definition
-     * @param clsdef
-     */
-    public void visitClassDefinition(ClassDefinition clsdef) {
-        
-        /*Iterator it = clsdef.getFOwnedOperation().iterator();
-        while(it.hasNext()) {
-            FOperation op = (FOperation)it.next();
-            checkOperation(op);
-        }*/
-        
-    	Iterator it = clsdef.getOwnedAttribute().iterator();
-        while(it.hasNext()) {
-            Property prop = (Property)it.next();
-            checkOppositeProperties(prop);
-        }
-        
-        // add the classDef to the nodes for 
-    }
-    
-    public void checkOppositeProperties(Property prop){
-    	if(prop.getOpposite() != null)
-    	{
-    		    		
-    		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
-			// opposite mismatch
-    		if(prop.getOpposite().getOpposite() != prop)
-	    	{
-	    		unit.messages.addError("CONSTRAINT-CHECKER : opposite mismatch  : the association is illformed. " + pp .ppSimplifiedPropertyInContext(prop), prop);
-	    		if(prop.getOpposite().getOpposite() == null)
-	    			unit.messages.addError("CONSTRAINT-CHECKER : opposite mismatch  : the association is illformed. " + pp.ppSimplifiedPropertyInContext(prop.getOpposite()), prop.getOpposite());
-	    	}
-	    	// Composition multiplicity
-    		if(prop.getOpposite().isIsComposite()){
-    			if(prop.getUpper() != 1){
-    				unit.messages.addError("CONSTRAINT-CHECKER : Composition multiplicity problem : change the multiplicity or do not use composition on the other end of the association. " + pp.ppSimplifiedPropertyInContext(prop), prop);    	    		
-    			}
-    		}
-    		// Double Composition (association with diamond on both ends !) 
-    		if(prop.getOpposite().isIsComposite()){
-    			if(prop.isIsComposite()){
-    				// message on this end only, the other end will be checked too from the other class
-    				unit.messages.addError("CONSTRAINT-CHECKER : Double composition problem (container contained by its content) : please consider splitting this association in 2 associations. " + pp.ppSimplifiedPropertyInContext(prop), prop);    	    		
-    			}
-    		}
-    	}
-    	//Else: nothing to do since there are no opposite
-		//
-    }
-    
+	/**
+	 * Constraints:
+	 *   - an operation cannot be defined twice in the same class 
+	 *   - redefinition of operation should be invariant (the signature must not change)
+	 *   - 
+	 *   
+	 * Origin: fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass3
+	 *  no overloading in sub-classes
+	 *	super operation shoukd be specified if several are possible (multiple inheritance)
+	 *
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitOperation(fr.irisa.triskell.kermeta.language.structure.Operation)
+	 */
+	public Object visitOperation(Operation operation) {
+		//current_operation = operation;
+		builder.current_operation = operation;
+		Boolean result = new OperationChecker(builder, operation, builder.current_class).check();
+		return result;
+		//return super.visitOperation(operation);
+	}
+
+	/**
+	 * Checked constraints :
+	 *   - A package must have a not empty name.
+	 * Package checking does not need a special class yet...
+	 * Too small and using of pattern command *Checker is only potential yet...
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitPackage(fr.irisa.triskell.kermeta.language.structure.Package)
+	 */
+	public Object visitPackage(Package node) {
+		builder.current_package = node;
+		Boolean result = true;
+		System.err.println("Visit a package" + node);
+		// A package must have a not empty name
+		if (node.getName()==null || node.getName().length()==0)
+		{
+			System.err.println("->");
+			addProblem(NAME_ERROR, node);
+			result = false;
+		}
+		//return result;
+		return super.visitPackage(node);
+	}
+
+	/**
+	 * Constraints:
+	 *   - A property must not have a same name as an operation in the class.
+	 *   - A property that is derived cannot
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitProperty(fr.irisa.triskell.kermeta.language.structure.Property)
+	 */
+	public Object visitProperty(Property node) {
+		builder.current_property = node;
+		Boolean result = new PropertyChecker(builder, node, builder.current_class).check();
+		return result;
+		//return super.visitProperty(node);
+	}
+
+	/** A shortcut to add messages on the builder kermeta unit */
+	public void addProblem(String msg, fr.irisa.triskell.kermeta.language.structure.Object node)
+	{// have to make a choice
+		if (builder!=null)	builder.messages.addError(AbstractChecker.ERROR_TYPE + ": " + msg, node);
+		else messages.add(AbstractChecker.ERROR_TYPE + ": " + msg);
+	}
+	
+	/** A shortcut to get the registered problems in the kermeta unit */
+	public List getProblems()
+	{
+		if (builder == null) return messages;
+		else return builder.messages.getAllMessages();
+	}
+	
+	
     
 }
