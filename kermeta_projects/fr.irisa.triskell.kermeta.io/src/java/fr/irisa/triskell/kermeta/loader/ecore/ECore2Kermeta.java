@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.12 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: ECore2Kermeta.java,v 1.13 2006-03-30 16:07:25 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
 * License : EPL
@@ -45,6 +45,7 @@ import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -120,16 +121,6 @@ public class ECore2Kermeta extends EcoreVisitor {
 					visitor.accept(obj);
 				}
 			}
-			// visit the EAnnotations of the metamodel
-			Iterator ops = visitor.operations.entrySet().iterator();
-			while(ops.hasNext()) {
-				Map.Entry op_entry = (Map.Entry)ops.next();
-			    EOperation eop = (EOperation)op_entry.getKey();
-			    visitor.current_op = (Operation)op_entry.getValue();
-			    if (eop.getEAnnotation(KM2Ecore.KMT2ECORE_ANNOTATION)!=null)
-			        visitor.accept(eop.getEAnnotation(KM2Ecore.KMT2ECORE_ANNOTATION));
-			}
-			
 		} catch (Throwable e) {
 			unit.messages.addError("Error loading ECore model " + unit.getUri() + " : " + e, null);
 			KermetaUnit.internalLog.error("Error loading ECore model " + unit.getUri() + " : " + e, e);
@@ -386,9 +377,20 @@ public class ECore2Kermeta extends EcoreVisitor {
         current_op.setOwningClass(current_classdef);
         operations.put(node, current_op);
         
-        acceptList(node.getEAnnotations());
-        
         acceptList(node.getEParameters());
+        
+        // put the parameters and the parameters types in the current context so the operation body that is
+        // hosted in the operation annotation can be parsed and type checked correctly.
+        unit.pushContext();
+		// add type variable
+		Iterator tvs = current_op.getTypeParameter().iterator();
+		while(tvs.hasNext()) unit.addTypeVar((TypeVariable)tvs.next());
+		// add parameters
+		Iterator params = current_op.getOwnedParameter().iterator();
+		while(params.hasNext()) unit.addSymbol(new KMSymbolParameter((Parameter)params.next()));
+        
+        acceptList(node.getEAnnotations());
+		unit.popContext();
     	
         return current_op;
     }
@@ -409,6 +411,7 @@ public class ECore2Kermeta extends EcoreVisitor {
             throw new Error("Internal error of ecore2kermeta transfo : type of property " + getQualifiedName(node) + " not found");
         }
         param.setType(t);
+        current_op.getOwnedParameter().add(param);
         return param;
     }
     
@@ -482,6 +485,9 @@ public class ECore2Kermeta extends EcoreVisitor {
     	if (node.getDetails().containsKey(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS))
     	{	
     	    result = (String)node.getDetails().get(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS);
+    	    // Set the context necessary for the operation to be parsed properly (at least, put the parameters
+    	    // in the symbol list.
+    	    
     	    // Parse and inject
     	    this.current_op.setBody(ExpressionParser.parse(unit, result));
     	}
@@ -528,6 +534,18 @@ public class ECore2Kermeta extends EcoreVisitor {
     public String getEscapedName(ENamedElement e)
     {
         return KMTHelper.getMangledIdentifier(e.getName());
+    }
+    
+    public void getSymbols(KermetaUnit builder)
+    {
+		builder.pushContext();
+		// add type variable
+		Iterator tvs = builder.current_operation.getTypeParameter().iterator();
+		while(tvs.hasNext()) builder.addTypeVar((TypeVariable)tvs.next());
+		// add parameters
+		Iterator params = builder.current_operation.getOwnedParameter().iterator();
+		while(params.hasNext()) builder.addSymbol(new KMSymbolParameter((Parameter)params.next()));
+		builder.popContext();
     }
     
 }
