@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.12 2006-03-08 12:23:25 zdrey Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.13 2006-03-30 09:28:35 zdrey Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -206,7 +206,7 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     {
     	String result = "";
     	int line_start=0; int line_end=0; String ret_char = "\n";
-    	if (message.length() >  LINE_MAX_SIZE)
+    	if (message.length() >  LINE_MAX_SIZE )
     	{
     		int linenumber = message.length()/LINE_MAX_SIZE;
     		for (int i=0; i<=linenumber; i++)
@@ -217,6 +217,8 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     			result += message.substring(line_start, line_end) + ret_char ;
     		}
     	}
+    	else
+    		result = message;
     	return result;
     }
 
