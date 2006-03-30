@@ -1,4 +1,4 @@
-/* $Id: 004_cyclicCompositions_01.kmt,v 1.1 2005-11-23 09:35:27 dvojtise Exp $ */
+/* $Id: 004_cyclicCompositions_01.kmt,v 1.2 2006-03-30 12:37:49 ssaudrai Exp $ */
 
 // Test of a invalid associations
 
@@ -7,9 +7,9 @@ package root_package;
 
 /* cyclic composition */
 class A {
-    attribute b : B
+    attribute b : B[1]
 }
 class B {
-	attribute a : A
+	attribute a : A[1]
 }
 
