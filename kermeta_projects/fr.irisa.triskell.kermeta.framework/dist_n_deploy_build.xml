@@ -1,4 +1,4 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.9 2005-12-02 12:54:14 dvojtise Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.10 2006-03-31 15:34:16 vmahe Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
@@ -16,9 +16,9 @@
 	  	<pathelement location="lib/thirdparty/antlr.jar"/>
 	  	<pathelement location="lib/thirdparty/ldt-core.jar"/>
 	  	<pathelement location="lib/thirdparty/emfatic-core.jar"/>
-        <pathelement location="../../plugins/org.eclipse.emf.common_2.1.0.jar"/>
-        <pathelement location="../../plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
-        <pathelement location="../../plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
+        <pathelement location="/local/eclipse/plugins/org.eclipse.emf.common_2.1.0.jar"/>
+        <pathelement location="/local/eclipse/plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
+        <pathelement location="/local/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
 
 	</path>
 

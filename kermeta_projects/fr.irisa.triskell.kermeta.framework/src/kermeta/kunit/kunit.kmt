@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * $Id: kunit.kmt,v 1.13 2006-02-21 17:59:12 jsteel Exp $
+ * $Id: kunit.kmt,v 1.14 2006-03-31 15:34:16 vmahe Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -338,12 +338,14 @@ class TestRunner
 		testResult.failures.each { f | 
 			var tc : kermeta::kunit::TestCase
 			tc ?= f.failedTest
-			stdio.writeln("    ->" + tc.name + "( raised : "+ f.raised.toString + ")")}
+//			stdio.writeln("    ->" + tc.name + "( raised : "+ f.raised.toString + ")")}
+			stdio.writeln("    ->" + tc.name + "( raised : "+ f.raised.message + ")")}
 		stdio.writeln(" Errors : ")	
 		testResult.errors.each { e | 
 			var tc : kermeta::kunit::TestCase
 			tc ?= e.failedTest
-			stdio.writeln("    -> " + tc.name + "( raised : "+e.raised.toString + ")")}
+//			stdio.writeln("    -> " + tc.name + "( raised : "+e.raised.toString + ")")}
+			stdio.writeln("    -> " + tc.name + "( raised : "+e.raised.message + ")")}
 		stdio.writeln("\n==================================================================================\n")
 	end
 }
