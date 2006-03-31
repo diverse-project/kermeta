@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.1 2006-03-30 09:30:14 zdrey Exp $
+/* $Id: OperationChecker.java,v 1.2 2006-03-31 17:12:52 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -18,13 +18,21 @@ package fr.irisa.triskell.kermeta.constraintchecker;
 import java.util.Iterator;
 import java.util.List;
 
+import sun.management.counter.Units;
+
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
+import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * Defaults : some comparison tests need to be done using KM2KMTPrettyPrinter..
@@ -58,7 +66,6 @@ public class OperationChecker extends AbstractChecker {
 	 */
 	public Boolean check()
 	{
-		System.err.println("Check " + operation.getName());
 		boolean result = false;
 		if (operation.getName()!=null)
 			result =
@@ -119,13 +126,16 @@ public class OperationChecker extends AbstractChecker {
 		for (Operation op : ops) {
 			if (op.getName().equals(operation.getName()) && operation.getSuperOperation()==null)
 			{
-				number_of_duplicate += 1;
+				// if superOperation is null, perhaps it however exists in the implicit inherited Object?
+				// ex: Boolean does not inherit explicitely Object.
+				if (!KMTHelper.getQualifiedName(op.getOwningClass()).equals("kermeta::reflection::Object"))
+					number_of_duplicate += 1;
 			}
 		}
 		// An operation cannot be defined twice in the same class
 		if (number_of_duplicate > 1) {
 			addProblem(ERROR, "Class '"+classDefinition.getName()+"' " +
-					"duplicate definition of operation '"+builder.current_operation.getName()+"'.",operation);
+					"duplicate definition of operation '"+operation.getName()+"'.",operation);
 			result = false;
 		}
 		return result;
@@ -150,18 +160,30 @@ public class OperationChecker extends AbstractChecker {
 			while (it1.hasNext() && isConform==true)
 			{
 				Parameter next = it1.next();
-				isConform = TypeEqualityChecker.equals(next.getType(), params2.get(ind2).getType());
+				fr.irisa.triskell.kermeta.language.structure.Type typeA = next.getType(); 
+				fr.irisa.triskell.kermeta.language.structure.Type typeB = params2.get(ind2).getType();
+				if (typeA instanceof TypeVariable && typeB instanceof TypeVariable) // TypeVariable?
+				{
+					isConform = checkTypeVariables((TypeVariable)typeA, (TypeVariable)typeB);
+				}
+				else if (typeA instanceof ClassImpl &&  typeB instanceof ClassImpl)
+				{
+					// TypeEqualityChecker.equals is not correct, since typeA and typeB are != in memory
+					//isConform = (((ClassImpl)typeA).getTypeDefinition().equals(((ClassImpl)typeB).getTypeDefinition()));
+					isConform = isConformType((ClassImpl)typeA, (ClassImpl)typeB);
+				}
+				else
+				{
+					// Until we know the type politics, conformity will be true.
+					isConform = true;
+				}
 				ind2 += 1;
 			}
 		}
-		// Message to print!
-		System.err.println("Parameters of operation :" + op1.getName() + "are not conform "
-		+ pprinter.ppComaSeparatedNodes(op1.getOwnedParameter())
-		);
 		
 		String message = op1.getName() + " is not well redefined : " + pprinter.ppComaSeparatedNodes(op1.getOwnedParameter())
-		+ "(expected " + pprinter.ppComaSeparatedNodes(op2.getOwnedParameter());
-		if (!isConform) addProblem(ERROR, message, op1);
+		+ "(expected [" + pprinter.ppComaSeparatedNodes(op2.getOwnedParameter()) + "]";
+		if (isConform==false) addProblem(ERROR, message, op1);
 		return isConform;
 	}
 	
@@ -204,24 +226,66 @@ public class OperationChecker extends AbstractChecker {
 		return isConform;
 	}
 	
-	/** Just to have a pretty check&lt;blah&gt;*/
+	/**
+	 * There are some "defaults" in the metamodel :
+	 * Concrete Syntax and Semantic do not exactly map. This is ok, but 
+	 * we have to study the particular case of a typed element which type is Void :
+	 * is it also "implicitely" Void if, in the model[serialization] it is not set?
+	 * */
 	protected boolean checkReturnType(Operation op1, Operation op2)
 	{
 		boolean isConform = true;
-		String message = op1.getName() + " return type : ";
-		if (op1.getType()==null || op2==null || op2.getType()==null) 
+		String message = op1.getOwningClass().getName()+"." + op1.getName() + ": ReturnType ";
+		Type t1 = op1.getType(); Type t2 = op2.getType();
+		if (isVoidType(t1) && isVoidType(t2)) isConform = true;
+		// else if (op1.getType()==null && op2.getType()==null)  isConform = true; 
+		else if (op1.getType()==null || op2==null || op2.getType()==null) 
 		{
-			message += "Operation : Return type is null";
+			message += " is null";
 			isConform = false;
 		}
-		else
-		{	
-			message += pprinter.accept(op1.getType()) + "!=" + pprinter.accept(op2.getType());
-			isConform = TypeEqualityChecker.equals(op1.getType(),op2.getType());
+		else if (t1 instanceof TypeVariable && t2 instanceof TypeVariable) // TypeVariable?
+			isConform = checkTypeVariables((TypeVariable)op1.getType(), (TypeVariable)op2.getType());
+		else if (t1 instanceof ClassImpl && t2 instanceof ClassImpl)
+		{
+			isConform = isConformType((ClassImpl)t1, (ClassImpl)t2);
 		}
+		else // FIXME!!! we have to decide which philosophy has to be used for return types !!
+		{	// kermeta::standard::~Void != Void ???
+			// isConform = TypeEqualityChecker.equals(op1.getType(),op2.getType());
+			// isConform = TypeConformanceChecker.conforms(op1.getType(),op2.getType());
+			// TypeEqualityChecker.equals is not correct, since typeA and typeB are != in memory
+			//isConform = (((ClassImpl)t1).getTypeDefinition().equals(((ClassImpl)t2).getTypeDefinition()));
+		}
+		if (op1.getType()!=null && op1.getType()!=null)
+			message += "<"+pprinter.accept(op1.getType()) + "> != <" + pprinter.accept(op2.getType())+">"
+			+ op1.getType() + "!=" + op2.getType() + "op1:" + op1.getName();
 		if (!isConform) addProblem(ERROR, message, op1);
 		return isConform;
 	}
 	
+	
+	/**
+	 * This is a dirty patch because "null"/unexisting type is VoidType by default
+	 */
+	public boolean isVoidType(Type type)
+	{
+		if (type == null) return true;
+		if (type instanceof ClassImpl) 
+			 return ((ClassImpl)type).getTypeDefinition().getName().equals("Void");
+		if (type instanceof VoidType) return true;
+		return false;
+	}
+	
+	public boolean isConformType(ClassImpl superclass, ClassImpl thisclass)
+	{
+		boolean isConform = thisclass.getTypeDefinition().equals(superclass.getTypeDefinition());
+		String classname = KMTHelper.getQualifiedName(thisclass.getTypeDefinition());
+		String superclassname = KMTHelper.getQualifiedName(superclass.getTypeDefinition());
+		//if (((ClassDefinition)builder.typeDefinitionLookup(classname)).getSuperType() instanceof ClassImpl)
+			
+		// -> FIXME : I am tired now -- writing constraints in java is not that practical.
+		return true;
+	}
 	
 }

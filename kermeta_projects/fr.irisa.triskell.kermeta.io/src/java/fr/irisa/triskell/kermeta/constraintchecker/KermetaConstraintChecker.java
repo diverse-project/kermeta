@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.4 2006-03-30 09:30:14 zdrey Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.5 2006-03-31 17:12:52 zdrey Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -122,11 +122,9 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 	public Object visitPackage(Package node) {
 		builder.current_package = node;
 		Boolean result = true;
-		System.err.println("Visit a package" + node);
 		// A package must have a not empty name
 		if (node.getName()==null || node.getName().length()==0)
 		{
-			System.err.println("->");
 			addProblem(NAME_ERROR, node);
 			result = false;
 		}

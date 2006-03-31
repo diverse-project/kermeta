@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.1 2006-03-30 09:30:14 zdrey Exp $
+/* $Id: PropertyChecker.java,v 1.2 2006-03-31 17:12:52 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -20,6 +20,7 @@ import java.util.List;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -75,11 +76,6 @@ public class PropertyChecker extends AbstractChecker {
 			checkPropertyIsDerived() &&
 			checkPropertyOpposite()
 			;
-		if (result==false) 
-		{
-			System.out.println("Property is null??? : " + property);
-			System.err.println("Property:" + property.getName());
-		}
 		return new Boolean(result);
 	}
 
@@ -95,18 +91,22 @@ public class PropertyChecker extends AbstractChecker {
 	 */
 	public boolean checkPropertyIsUnique()
 	{
-		boolean result = true;
 		// An property cannot be defined twice in the same class
-		if (builder.getPropertyByName(classDefinition, property.getName()) != null) {
-			builder.messages.addMessage(new KMUnitMessage("PASS 3 : Class '"+builder.current_class.getName()+"' duplicate definition of property '"+builder.current_property.getName()+"'.",property));
+		boolean result = true;
+		int number_of_duplicate = 0;
+		List<Property> props = builder.getAllProperties(classDefinition);
+		for (Property p : props) {
+			if (p.getName().equals(property.getName()))
+			{
+				number_of_duplicate += 1;
+			}
+		}
+		// An operation cannot be defined twice in the same class
+		if (number_of_duplicate > 1) {
+			addProblem(ERROR, "Class '"+classDefinition.getName()+"' " +
+					"duplicate definition of property '"+property.getName()+"'.",property);
 			result = false;
 		}
-		// A property that exist in a super type must not be redeclared in the sub types in either
-		// way.
-		List<Property> ops = builder.getAllProperties(classDefinition);
-		Iterator<Property> it = ops.iterator();
-		while (it.hasNext() && result == true)
-			if (it.next().getName().equals(property.getName())) result = false;
 		return result;
 	}
 	
