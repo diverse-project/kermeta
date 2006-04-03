@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * $Id: kunit.kmt,v 1.15 2006-03-31 15:48:34 vmahe Exp $
+ * $Id: kunit.kmt,v 1.16 2006-04-03 09:14:26 vmahe Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -30,29 +30,51 @@ class AssertionFailedError inherits kermeta::exceptions::Exception
 
 /**
  * The abstract class assert defines a set of convinient operations
- * to assert expected behavior
+ * to assert expected behavior and give the rank of failed assert
  */
 abstract class Assert
-{	
+{
+	attribute rank : Integer
+	
 	/**
-	 * raises an exception if bool is false
+	 * will fail if bool is false
+	 * DEPRECATED : correct use is "assertTrue(bool : Boolean)" or "assertFalse(bool : Boolean)"
 	 */
 	operation assert(bool : Boolean) : Void is do
-		if not bool then fail("assert failed") end
+		var number : Integer init order()
+		if not bool then fail("assert number " + number.toString + " failed") end
 	end
 	
 	/**
-	 * raises an exception if bool is false
+	 * will fail if bool is false
 	 */
 	operation assertTrue(bool : Boolean) : Void is do
-		if not bool then fail("assertTrue failed") end
+		var number : Integer init order()
+		if not bool then fail("assertTrue number " + number.toString + " failed") end
 	end
 	
 	/**
-	 * raises an exception if bool is false
+	 * will fail if bool is false
 	 */
 	operation assertTrueWithMsg(bool : Boolean, msg : String) : Void is do
-		if not bool then fail(msg) end
+		var number : Integer init order()
+		if not bool then fail("assertTrueWithMsg number " + number.toString + " failed : " + msg) end 
+	end
+	
+	/**
+	 * will fail if bool is true
+	 */
+	operation assertFalse(bool : Boolean) : Void is do
+		var number : Integer init order()
+		if bool then fail("assertTrue number " + number.toString + " failed") end
+	end
+	
+	/**
+	 * will fail if bool is true
+	 */
+	operation assertFalseWithMsg(bool : Boolean, msg : String) : Void is do
+		var number : Integer init order()
+		if bool then fail("assertTrueWithMsg number " + number.toString + " failed : " + msg) end 
 	end
 	
 	/**
@@ -64,6 +86,14 @@ abstract class Assert
 		raise exception
 	end
 	
+	/**
+	 * give the order number of the failed assert
+	 */
+	 operation order () : Integer is do
+	 	if rank.isVoid then rank := 0 end
+	 	rank := rank + 1
+	 	result := rank
+	 end
 }
 
 /**
@@ -178,7 +208,7 @@ class TestResult
 	end
 	
 	/** Adds a failed test to the list of failed tests */
-	operation addFailure(test : Test, e : kermeta::exceptions::Exception) : Void is do
+	operation addFailure(test : Test, e : AssertionFailedError) : Void is do
 		failures.add(createTestFailure(test, e)) 
 	end
 	
