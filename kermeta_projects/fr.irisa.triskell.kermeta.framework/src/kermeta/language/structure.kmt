@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.21 2006-03-03 15:21:25 dvojtise Exp $
+/* $Id: structure.kmt,v 1.22 2006-04-03 09:51:27 zdrey Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -108,7 +108,7 @@ class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureV
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Class.deepCloneObject(self, objectToClone)
 	end
 	
-	method isInstance(object : Object) : Boolean is do
+	method isInstance(object : kermeta::reflection::Object) : Boolean is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isInstance(self, object)
 	end 
 	
@@ -116,7 +116,7 @@ class Class inherits ParameterizedType, kermeta::reflection::Class, KMStructureV
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.isSubType(self, object)
 	end
 	
-	method equals(other : Object) : Boolean from Object is do
+	method equals(other : kermeta::reflection::Object) : Boolean from Object is do
 		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Class.equals(self, other)
 	end
 	

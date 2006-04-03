@@ -3,7 +3,7 @@ package kermeta::persistence;
 using kermeta::standard
 
 /*****************************************************************************
- * $Id: resource.kmt,v 1.13 2006-02-21 17:59:12 jsteel Exp $
+ * $Id: resource.kmt,v 1.14 2006-04-03 09:51:27 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -209,10 +209,10 @@ class EMFResource inherits Resource
 
 class KMResource inherits Resource
 {
-	method save() : kermeta::standard::~Void is do
+	method save() : Void is do
 		//TODO: implement operation save
 	end
-	method load() : kermeta::standard::~Void is do
+	method load() : Void is do
 		//TODO: implement operation load
 	end
 	method add(instance : Object) : Void is do
@@ -269,7 +269,7 @@ class EMFRepository inherits Repository
 	 * Create a new empty resource from the model given by its uri, 
 	 * which meta-model is stored in file given by mm_uri
 	 */
-	method createResource(uri : String, mm_uri : String) : EMFResource is do
+	method createResource(uri : String, mm_uri : String) : Resource is do
 		var new_resource : EMFResource init EMFResource.new
 //		var instances    : kermeta::standard::Set<Object> init kermeta::standard::Set<Object>.new
 //		new_resource.instances := instances
@@ -284,8 +284,8 @@ class EMFRepository inherits Repository
 	 * Get the resource of model that is stored in the given uri. Silently create
 	 * and load a new one if a resource with this uri was not found.
 	 */
-	method getResource(uri : String) : EMFResource is do
-		result ?= super(uri)
+	method getResource(uri : String) : Resource is do
+		result := super(uri)
 	end
 	
 }
@@ -295,7 +295,7 @@ class EMFRepository inherits Repository
  */
 class KMRepository inherits Repository
 {
-	method createResource(uri : String, mm_uri : String) : KMResource is do
+	method createResource(uri : String, mm_uri : String) : Resource is do
 		//TODO: implement operation createResource
 	end
 	method getResource(uri : String) : Resource is do
