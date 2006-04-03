@@ -1,9 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.10 2006-03-31 15:34:16 vmahe Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.11 2006-04-03 14:47:18 dtouzet Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
+	
+	<property name="eclipse_dir" location="C:\David\eclipse"/>
 	
 	<property name="kermeta.framework.jar" location="dist/framework.jar"/>
 	<property name="kermeta.framework.km" location="dist/framework.km"/>
@@ -16,9 +18,9 @@
 	  	<pathelement location="lib/thirdparty/antlr.jar"/>
 	  	<pathelement location="lib/thirdparty/ldt-core.jar"/>
 	  	<pathelement location="lib/thirdparty/emfatic-core.jar"/>
-        <pathelement location="/local/eclipse/plugins/org.eclipse.emf.common_2.1.0.jar"/>
-        <pathelement location="/local/eclipse/plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
-        <pathelement location="/local/eclipse/plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
+		<pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.common_2.1.0.jar"/>
+	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
+	    <pathelement location="${eclipse_dir}/plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
 
 	</path>
 
