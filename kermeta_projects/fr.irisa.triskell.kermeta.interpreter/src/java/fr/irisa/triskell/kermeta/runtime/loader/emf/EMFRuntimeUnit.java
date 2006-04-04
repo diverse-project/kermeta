@@ -1,11 +1,13 @@
-/* $Id: EMFRuntimeUnit.java,v 1.10 2006-03-23 13:25:12 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.11 2006-04-04 12:21:19 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jul 6, 2005
- * Authors       : zdrey
+ * Authors       : 
+ * 					zdrey
+ * 					dvojtise
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
@@ -16,7 +18,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -39,14 +40,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMLMapImpl;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
-import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-import fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -56,10 +50,7 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  * FIXME : Check that we work with all qualified names of Classes.
  */
 public class EMFRuntimeUnit extends RuntimeUnit {
-	
-	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.Runtime2EMF");
-	
-    
+		    
 	 /**
      * Set this to true if you want to have more diagnostic info from EMF
      * Comment for <code>ENABLE_EMF_DIAGNOSTIC</code>
@@ -71,6 +62,25 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     protected fr.irisa.triskell.kermeta.language.structure.Object kermeta_mm;
     /** { EObject : RuntimeObject } */
     private Hashtable runtime_objects_map;
+    
+    /** this hashtable is used to store the qualified name of the element with the given nsuri.
+     * used only on the metamodel via getEQualifiedName()
+     * a user may improve the performances if he directly set these values for his metamodel. 
+     * This will allow to not load the metamodel in case of generated java class and bug#632
+     */
+    public Hashtable<String,String> nsUri_QualifiedName_map = new Hashtable<String,String>();
+    
+
+    /** used to store the metamodel
+     * in the case of the load , it is used when there is generated classes. This is because in this case, the container chain doesn't contains
+     * the full package tree of the metamodel
+     * we need to be able to recontitute it from the metamodel the user has given
+     * Not used, if the model plugin is not deployed (fully reflective)
+     */
+    protected Resource metaModelResource;
+
+    /** Logger to get the error of this launcher */
+    final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.EMFRuntime");
     
     /**
      * NOTE : this constructor should not been called directly by client.
@@ -101,7 +111,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         this.factory = pFactory;
         //this.load();
     }
-    
+      
     public URI resolveURI(String uri, String rel_path)
     {
     	URI u = URI.createURI(uri);
@@ -125,9 +135,14 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         String unit_uri = contentMap.getFactory().getMemory().getUnit().getUri();
         String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
         // resolve uri
-        internalLog.warn("URI : " + unit_uripath +  "; meta : " + p_metamodel_uri);
+        internalLog.debug("URI : " + unit_uripath +  "; meta : " + p_metamodel_uri);
     	URI u = this.resolveURI(p_metamodel_uri, unit_uripath);
         // load resource
+    	internalLog.debug("will register *.ecore to Factory.Registry, known extensions are :");
+    	Iterator it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
+    	while(it.hasNext()) {
+    		internalLog.debug("  "+it.next().toString());
+    	}
     	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
     	ResourceSet resource_set = new ResourceSetImpl();
     	Resource resource = resource_set.getResource(u, true);
@@ -135,6 +150,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
             // visit the metamodel
             resource.load(null);
         } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     	
@@ -299,7 +315,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         if (this.getMetaModelUri() != null && this.getMetaModelUri().length()>0)
         {	// resolve
         	try {
-        		r2e.metaModelResource = this.loadMetaModelAsEcore(this.getMetaModelUri());
+        		this.metaModelResource = this.loadMetaModelAsEcore(this.getMetaModelUri());
         	}
         	catch (WrappedException e){
         		KermetaUnit.internalLog.error("Error loading EMF model " + this.getUriAsString() + " : " + e.exception().getMessage(), e);
@@ -408,6 +424,14 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	{
 	    return metamodel_uri;
 	}
+	
+    /**
+     * @param mmUri
+     */
+    public void setMetaModelUri(String mmUri) {
+        this.metamodel_uri = mmUri;
+        
+    }
     
 	/** @return the string uri as user gave it in its Kermeta source code */
     public String getUriAsString()
@@ -454,16 +478,29 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    if (cont != null &&cont instanceof ENamedElement) {
 	        result = getEQualifiedName((ENamedElement)cont) + "::" + result;
 	    }
+	    else if(!(obj.getClass().getName().compareTo("org.eclipse.emf.ecore.impl.EPackageImpl")==0)){
+	    	//internalLog.debug("Root container is an EPackageImpl, verifying that it is really toplevel" + obj.getClass().getName() + " || "+ obj.toString() );
+	    	// optimization : use of an hashtable
+	    	String nsuri = ((EPackage)obj).getNsURI();
+	    	String packageQualifiedName = this.nsUri_QualifiedName_map.get(nsuri);
+	    	if( packageQualifiedName == null)
+	    	{   // optimization failed, need to load the metamodel and retreive the qualified name
+	    		internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() + " || "+ obj.toString() );
+		    	// lazy load of the metamodel 	
+		    	loadMetaModelResource(metamodel_uri);
+		    	// look into the mm if the given object can be retreived, then get its real qualified name
+		    	EPackage mmPackage = getEPackageFromNsUri(nsuri);
+		    	
+		    	result = getEQualifiedName(mmPackage);
+		    	this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization
+	    	}
+	    	else
+	    		result = packageQualifiedName;
+	    }
 	    return result;
 	}
 
-    /**
-     * @param mmUri
-     */
-    public void setMetaModelUri(String mmUri) {
-        this.metamodel_uri = mmUri;
-        
-    }
+
     
 	
 	/**
@@ -484,6 +521,41 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		}
 		return entry;
 	}
+
+	public void loadMetaModelResource(String mm_uri){
+		if(metaModelResource == null)
+			metaModelResource = this.loadMetaModelAsEcore(this.metamodel_uri);
+	}
+	public Resource getMetaModelResource() {
+		return metaModelResource;
+	}
+
+	public void setMetaModelResource(Resource metaModelResource) {
+		this.metaModelResource = metaModelResource;
+	}
+	
+	/**
+     * Get the EPackge corresponding to the given nsuri 
+     * @param nsuri the nsuri of which we look for the corresponding in Ecore meta-model
+     * @return the EPackage in the ecore meta-model given by the user for serialization of its model
+     */
+    protected EPackage getEPackageFromNsUri(String nsuri)
+    {
+    	EPackage result = null;
+        TreeIterator it = null; 
+       
+        it = metaModelResource.getAllContents();            
+        while (it.hasNext() && result == null)
+        {
+            EObject obj = (EObject)it.next();
+			if (obj instanceof EPackage)
+			{
+				if (((EPackage)obj).getNsURI().equals(nsuri))
+				    result = (EPackage)obj;
+			}
+        }
+        return result;
+    }
     
 }
 

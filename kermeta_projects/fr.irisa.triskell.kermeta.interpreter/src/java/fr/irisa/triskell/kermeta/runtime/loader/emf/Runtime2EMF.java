@@ -1,19 +1,16 @@
-/* $Id: Runtime2EMF.java,v 1.24 2006-03-23 13:25:12 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.25 2006-04-04 12:21:19 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
  * ----------------------------------------------------------------------------
  * Creation date : Jul 20, 2005
- * Authors       : zdrey
+ * Authors       : zdrey, dvojtise
  * NOTE : how to use resources :
  * 		The objects that you serialize must be added to the resource in a specific order
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
-//import java.io.BufferedOutputStream;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,8 +19,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -31,17 +26,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.DanglingHREFException;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
@@ -55,9 +41,8 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
  */
 public class Runtime2EMF {
 
-
-    final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.Runtime2EMF");
-
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.Runtime2EMF");
+	
 	/**
 	 * The constructor, that initialize <code>unit</code> and <code>updatedRuntimeObjects</code>
 	 * attributes.
@@ -156,7 +141,6 @@ public class Runtime2EMF {
     // Put in this list all the RuntimeObject that were already updated
     protected ArrayList updatedRuntimeObjects;
     protected EMFRuntimeUnit unit;
-    protected Resource metaModelResource;
     protected Resource resource;
     
     protected void findEMFObjectForProperty(EObject eObject, String prop_name, RuntimeObject property)
@@ -345,7 +329,7 @@ public class Runtime2EMF {
         EClass eclass = null;
         if (classifier == null)
         {
-            eclass = this.getEClassFromFQualifiedName(kqname, this.metaModelResource);
+            eclass = this.getEClassFromFQualifiedName(kqname, this.unit.getMetaModelResource());
         }
         else
         {
