@@ -59,19 +59,19 @@ class Main inherits kermeta::kunit::Assert
 			helper.findClassByName(patternPackage, "Cell"))
         helper.saveEcoreModel(repository, patternPackage, "../outputmodels/spreadsheet_with_observer2.ecore")
 		stdio.writeln("------> Observers between Cells added")
-	/*	stdio.read("Press enter:")     
+		stdio.read("Press enter:")     
         patternHelper.addBuilder(patternPackage)
         helper.saveEcoreModel(repository, patternPackage, "../outputmodels/spreadsheet_with_all_patterns.ecore")
 		stdio.writeln("------> Builder added")
 		stdio.read("Press enter:")    
-	*/	
-        /*stdio.writeln("------> Flat")
+		
+        stdio.writeln("------> Flat")
         printFlat(patternPackage)
         stdio.writeln("------> Short")
         printShort(patternPackage)    
         stdio.writeln("------> FlatShort")    
         printFlatShort(patternPackage)
-        */
+        
         // save it and call it done
         //stdio.writeln("outputModelName: " + outputModelName)
         //helper.saveEcoreModel(repository, patternPackage, outputModelName)

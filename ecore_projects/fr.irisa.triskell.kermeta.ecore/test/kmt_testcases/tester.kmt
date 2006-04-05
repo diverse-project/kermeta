@@ -7,6 +7,7 @@ require kermeta
 
 require "testAB.kmt"  
 require "testABTypes.kmt"
+require "testPatterns.kmt"
  
 using root_package
 
@@ -16,12 +17,16 @@ class Tester
 	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new 
 		// Here, we run our test case
 		// TestString must inherit TestCase
-		testRunner.run(TestAB)
+/*		testRunner.run(TestAB)
+		testRunner.printTestResult
+	*/	
+		// Test the operations related to Design Patterns tools
+		testRunner.run(TestPatterns)
 		testRunner.printTestResult
 
 		// Test the operations related to super type
-		testRunner.run(TestABTypes)
+/*		testRunner.run(TestABTypes)
 		testRunner.printTestResult
-		
+	*/	
     end 
 }

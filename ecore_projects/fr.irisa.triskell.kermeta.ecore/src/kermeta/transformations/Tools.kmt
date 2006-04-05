@@ -1,0 +1,48 @@
+/* $Id: Tools.kmt,v 1.1 2006-04-05 12:15:10 vmahe Exp $
+ * File : Tools.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Sep 08, 2005
+ * Authors : 
+ *  Didier Vojtisek <dvojtise@irisa.fr>
+ *  Damien Pollet   <dpollet@irisa.fr>
+ *	Vincent Mahé	<vmahe@irisa.fr>
+ * 
+ */
+//@mainClass "EcorePattern::Patterns"
+//@mainOperation "main"
+
+
+package EcoreTools;
+
+    /* ------------- Generic tools for patterns --------------- */
+
+require kermeta
+require "../ecore.kmt"
+//require "../helpers/EcoreHelper.kmt"
+
+using kermeta::standard
+using ecore
+
+class Tools inherits kermeta::kunit::Assert
+{
+    
+//    reference helper : EcoreHelpers::EcoreHelper
+    
+    operation initialize() is do
+//		helper := EcoreHelpers::EcoreHelper.new
+//    	helper.initialize
+    	
+	end
+
+	/** create a EPackage for storage of new classes of a pattern, to avoid pollution of the treated package */
+	operation getSpecializedPackage(name : String, packUnderPattern : EPackage) : EPackage is do
+		var specPack : EPackage init EPackage.new
+		specPack.name := name
+		
+		// for saving in model, the specialized package must be nested in the treated package
+		packUnderPattern.eSubpackages.add(specPack)
+		result := specPack
+	end
+}
