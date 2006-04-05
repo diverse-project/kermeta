@@ -1,3 +1,18 @@
+/* $Id: behavior.kmt,v 1.11 2006-04-05 11:52:06 dvojtise Exp $
+ * Project   : fr.irisa.triskell.kermeta.framework
+ * File      : behavior.kmt
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mar 14, 2006
+ * Authors   : 
+ *		Franck Fleurey <ffleurey@irisa.fr>
+ *		Zoé Drey <zdrey@irisa.fr>
+ * 		Didier Vojtisek <dvojtise@irisa.fr>
+ * Description :
+ * 		Contains all the classes used for the behavior of Kermeta
+ */
+ 
 package kermeta::language::behavior;
 
 require "structure.kmt"
@@ -24,6 +39,7 @@ class CallFeature inherits CallExpression, KMExpressionVisitable
 {
 	
 	reference staticOperation : kermeta::language::structure::Operation
+	reference staticEnumLiteral : kermeta::language::structure::EnumerationLiteral
 	reference staticProperty : kermeta::language::structure::Property
 
 	attribute target : Expression
