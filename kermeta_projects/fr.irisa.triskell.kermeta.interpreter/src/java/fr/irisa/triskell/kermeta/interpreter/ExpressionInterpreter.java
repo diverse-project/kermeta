@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.36 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.37 2006-04-05 17:00:46 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -946,7 +946,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        }
 	        
 	        try {
-	            result = jmethod.invoke(null, paramsArray);
+	            result = jmethod.invoke(null, (Object[])paramsArray);
 	        } catch (IllegalArgumentException e2) {        
 				internalLog.error("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
 				throw	new KermetaVisitorError("IllegalArgumentException invoking "+ jmethodName + " on Class " +jclassName  ,e2); 		
