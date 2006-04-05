@@ -62,7 +62,7 @@ import java.util.Vector;
   *
   *  @author   Alexander Shapiro
   *  @author   Murray Altheim (2001-11-06; added support for round rects and alternate Node colors)
-  *  @version  1.21  $Id: Node.java,v 1.5 2006-01-27 19:41:22 dvojtise Exp $
+  *  @version  1.21  $Id: Node.java,v 1.6 2006-04-05 21:33:16 dvojtise Exp $
   */
 public class Node {
     
@@ -86,8 +86,8 @@ public class Node {
 
    // Variables that store default values for colors + fonts + node type
     public static Color BACK_FIXED_COLOR        = Color.red;
-    public static Color BACK_SELECT_COLOR       = new Color(255, 224, 0);
-    public static Color BACK_DEFAULT_COLOR      = new Color(208, 96, 0);
+    public static Color BACK_SELECT_COLOR       = new Color(65, 65, 254);
+    public static Color BACK_DEFAULT_COLOR      = Color.white;
     public static Color BACK_HILIGHT_COLOR      = Color.decode("#ffb200"); // altheim: new
     
     public static Color BORDER_DRAG_COLOR       = Color.black;
