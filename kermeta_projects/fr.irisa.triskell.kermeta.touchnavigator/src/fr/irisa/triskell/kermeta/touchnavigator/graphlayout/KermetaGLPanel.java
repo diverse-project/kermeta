@@ -1,4 +1,4 @@
-/* $Id: KermetaGLPanel.java,v 1.12 2006-03-03 15:24:04 dvojtise Exp $
+/* $Id: KermetaGLPanel.java,v 1.13 2006-04-05 19:51:48 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : KermetaGLPanel.java
  * License : GPL
@@ -61,6 +61,8 @@ public class KermetaGLPanel extends GLPanel
 
 	public Editor currentEditor = null;
 	
+	/** used to know if we must build the graph when receiving events */
+	private boolean isGraphBuiltOnce = false; 
 	public BuildKermetaClassGraphThread buildKermetaClassGraphThread = null;
 	
 	public TGInheritanceTransformations graphTransform = null;
@@ -94,10 +96,10 @@ public class KermetaGLPanel extends GLPanel
         TexteditorPlugin.getDefault().registerListener(this);
 
         TouchNavigatorPlugin.internalLog.debug("TouchGraph panel initializing");
-        buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
+     /*   buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();
         buildKermetaClassGraphThread.setName("BuildKermetaClassGraphThread");
         buildKermetaClassGraphThread.start();
-        
+       */ 
         graphTransform = new TGInheritanceTransformations (tgPanel);
         /*try {
         	TexteditorPlugin.getDefault().registerListener(this);
@@ -231,7 +233,7 @@ public class KermetaGLPanel extends GLPanel
 				TouchClassView.readyLock.waitUntilTrue(2000);
 			} catch (InterruptedException e1) {}
 			TouchNavigatorPlugin.internalLog.debug("BuildKermetaClassGraphThread start");
-			
+			isGraphBuiltOnce = true;
 			
 			yield();yield();yield();yield();
 			readyLock.setValue(false);
@@ -457,12 +459,22 @@ public class KermetaGLPanel extends GLPanel
 	}
 
 	public void outlineSelectionChanged(fr.irisa.triskell.kermeta.language.structure.Object fobj) {
+		if (!isGraphBuiltOnce && buildKermetaClassGraphThread == null){
+			//  build it 
+			buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();			
+			buildKermetaClassGraphThread.start();
+		}
 		if(!updateOnOutlineSelection) return;
 		TouchNavigatorPlugin.internalLog.debug("outlineSelectionChanged : "+fobj);		
 		followObject(fobj);
 	}
 
 	public void textHoverCalled(fr.irisa.triskell.kermeta.language.structure.Object fobj) {
+		if (!isGraphBuiltOnce && buildKermetaClassGraphThread == null){
+			//  build it 
+			buildKermetaClassGraphThread = new BuildKermetaClassGraphThread();			
+			buildKermetaClassGraphThread.start();
+		}
 		if(!updateOnTextHover) return;
 		TouchNavigatorPlugin.internalLog.debug("textHoverCalled : "+fobj);
 		followObject(fobj);

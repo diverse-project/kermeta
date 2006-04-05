@@ -1,4 +1,4 @@
-/* $Id: TouchClassView.java,v 1.2 2006-01-30 12:44:11 dvojtise Exp $
+/* $Id: TouchClassView.java,v 1.3 2006-04-05 19:51:48 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : TouchClassView.java
  * License : GPL
@@ -47,12 +47,14 @@ import fr.irisa.triskell.utils.BooleanLock;
 
 public class TouchClassView extends ViewPart {
 	//private TableViewer viewer;
+	private Composite composite;
 	private java.awt.Frame touchviewer;
 	private Shell shell;
 	private Action actionBack;
 	private Action actionForward;
 	private Action actionConfigure;
 	private Action actionAbout;
+	private Action actionRestartSWTAWT;
 	@SuppressWarnings("unused")
 	private Action doubleClickAction;
 	
@@ -112,15 +114,10 @@ public class TouchClassView extends ViewPart {
 		viewer.setInput(getViewSite());
 		*/
 		readyLock.setValue(false);
-		Composite composite = new Composite(parent, SWT.EMBEDDED);
+		composite = new Composite(parent, SWT.EMBEDDED);
 		shell = composite.getShell();
-		touchviewer = SWT_AWT.new_Frame(composite);		
-		try {
-			Thread.sleep(1500);
-		} catch (InterruptedException e) {}
-		java.awt.Color c = new Color(parent.getBackground().getRed(), parent.getBackground().getGreen(), parent.getBackground().getBlue());
-		kGLPanel = new KermetaGLPanel(c);
-		touchviewer.add(kGLPanel);
+		
+		startSWTAWT(5000);
 		
 		makeActions();
 		hookContextMenu();
@@ -152,6 +149,7 @@ public class TouchClassView extends ViewPart {
 
 	private void fillLocalPullDown(IMenuManager manager) {
 		manager.add(actionConfigure);
+		manager.add(actionRestartSWTAWT);
 		manager.add(new Separator());
 		manager.add(actionAbout);
 	}
@@ -217,6 +215,17 @@ public class TouchClassView extends ViewPart {
 				showMessage("Double-click detected");
 			}
 		};
+		actionRestartSWTAWT = new Action(){
+			public void run(){
+				startSWTAWT(500);
+			}
+		};
+
+		actionRestartSWTAWT.setText("Restart SWT AWT");
+		actionRestartSWTAWT.setToolTipText("refresh the Eclipse SWT AWT container");
+		actionRestartSWTAWT.setImageDescriptor(PlatformUI.getWorkbench().getSharedImages().
+				getImageDescriptor(ISharedImages.IMG_OBJS_INFO_TSK));
+		
 	}
 
 	private void hookDoubleClickAction() {
@@ -234,6 +243,21 @@ public class TouchClassView extends ViewPart {
 			message);
 	}
 
+	
+	public void startSWTAWT(int delay){
+		touchviewer = SWT_AWT.new_Frame(composite);	
+
+		try {
+			Thread.sleep(delay);
+		} catch (InterruptedException e) {}
+		readyLock.setValue(false);
+		
+		java.awt.Color c = new Color(composite.getBackground().getRed(), composite.getBackground().getGreen(), composite.getBackground().getBlue());
+		kGLPanel = new KermetaGLPanel(c);
+		touchviewer.add(kGLPanel);
+		readyLock.setValue(true);
+		
+	}
 	/**
 	 * Passing the focus request to the viewer's control.
 	 */
