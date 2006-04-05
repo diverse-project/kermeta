@@ -1,3 +1,17 @@
+/* $Id: reflection.kmt,v 1.16 2006-04-05 11:49:10 dvojtise Exp $
+ * Project   : fr.irisa.triskell.kermeta.framework
+ * File      : reflection.kmt
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mar 14, 2006
+ * Authors   : 
+ *		Franck Fleurey <ffleurey@irisa.fr>
+ *		Zoé Drey <zdrey@irisa.fr>
+ * 		Didier Vojtisek <dvojtise@irisa.fr>
+ * Description :
+ * 		Contains all the classes used in the reflection mecanism. It is used by kermeta.language.structure
+ */
 package kermeta::reflection;
 
 require "../standard/collections.kmt"
@@ -120,6 +134,7 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	attribute ownedOperation : set Operation[0..*]#owningClass
 	reference superType : set Class[0..*]
 
+	/** returns all the attributes of this classDefinition including the inherited ones and the derived ones */
 	property readonly allOwnedAttribute : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
@@ -128,9 +143,7 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 		    	var cDef : ClassDefinition
 		    	cDef ?= t.typeDefinition
 				cDef.allOwnedAttribute.each{ p | 
-					if not p.isDerived then
-						result.add(p)
-					end
+					result.add(p)
 				}
 			}
 		end
