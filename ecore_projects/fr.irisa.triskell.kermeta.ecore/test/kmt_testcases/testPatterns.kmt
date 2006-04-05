@@ -133,9 +133,6 @@ class TestPatterns inherits kermeta::kunit::TestCase
     	var visitorsPack : ecore::EPackage
     	// run the Visitor Pattern on the input model
     	visitorsPack := tool.addTopDownVisitor(packUml, void)
-        
-		// save the model for examination
-		helper.saveEcoreModel(repository, packUml, "./ecore/TDVPattern.ecore")
 		
         // Check that we have the visitor and the visitable classes
         assertTrueWithMsg(visitorsPack.name == "visitors", 
