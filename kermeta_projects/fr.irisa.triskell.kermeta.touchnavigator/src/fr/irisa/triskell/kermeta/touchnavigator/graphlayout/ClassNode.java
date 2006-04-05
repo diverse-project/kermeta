@@ -1,4 +1,4 @@
-/* $Id: ClassNode.java,v 1.4 2006-04-05 19:52:24 dvojtise Exp $
+/* $Id: ClassNode.java,v 1.5 2006-04-05 21:36:35 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : ClassNode.java
  * License : EPL
@@ -11,6 +11,7 @@
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import com.touchgraph.graphlayout.Node;
@@ -50,6 +51,9 @@ public class ClassNode extends Node {
     
 	/** Paints the background of the node, along with its label */
     public void paintNodeBody( Graphics g, TGPanel tgPanel) {
+    	
+    	// update fontMetric depending on distance to selection
+    	font = new Font("Courier",Font.PLAIN,12-distToSelection);
         g.setFont(font);
         fontMetrics = g.getFontMetrics();
         
@@ -81,7 +85,7 @@ public class ClassNode extends Node {
         
         Color.RGBtoHSB(backCol.getRed(), backCol.getGreen(), backCol.getBlue(), hsb);
         //TouchNavigatorPlugin.internalLog.debug("hsb:"+ hsb[0] + ", " + hsb[1] + ", " + hsb[2]);
-        if (hsb[2] < 0.6)
+        if (hsb[2] < 0.7 || hsb[1] > 0.5)
         	textCol = Color.white;        
         else textCol = Color.black;
         g.setColor(textCol);

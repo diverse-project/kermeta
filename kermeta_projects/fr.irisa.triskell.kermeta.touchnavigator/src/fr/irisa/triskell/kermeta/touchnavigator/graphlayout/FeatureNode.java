@@ -1,4 +1,4 @@
-/* $Id: FeatureNode.java,v 1.1 2005-11-27 19:46:03 dvojtise Exp $
+/* $Id: FeatureNode.java,v 1.2 2006-04-05 21:36:35 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : ClassNode.java
  * License : EPL
@@ -11,6 +11,7 @@
 package fr.irisa.triskell.kermeta.touchnavigator.graphlayout;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import com.touchgraph.graphlayout.Node;
@@ -43,6 +44,8 @@ public class FeatureNode extends Node {
     
 	/** Paints the background of the node, along with its label */
     public void paintNodeBody( Graphics g, TGPanel tgPanel) {
+//    	 update fontMetric depending on distance to selection
+    	font = new Font("Courier",Font.PLAIN,12-distToSelection);
         g.setFont(font);
         fontMetrics = g.getFontMetrics();
         
