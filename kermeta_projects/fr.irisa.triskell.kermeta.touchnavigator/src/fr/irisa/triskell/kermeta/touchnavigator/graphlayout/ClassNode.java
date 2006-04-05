@@ -1,4 +1,4 @@
-/* $Id: ClassNode.java,v 1.3 2006-01-10 22:50:42 dvojtise Exp $
+/* $Id: ClassNode.java,v 1.4 2006-04-05 19:52:24 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.touchnavigator
  * File : ClassNode.java
  * License : EPL
@@ -15,6 +15,8 @@ import java.awt.Graphics;
 
 import com.touchgraph.graphlayout.Node;
 import com.touchgraph.graphlayout.TGPanel;
+
+import fr.irisa.triskell.kermeta.touchnavigator.TouchNavigatorPlugin;
 
 public class ClassNode extends Node {
 
@@ -74,7 +76,14 @@ public class ClassNode extends Node {
         g.fillRect(ix - w/2+BORDER_WIDTH, iy - h / 2 + 3*BORDER_WIDTH + ATTRIBUTECELL_HEIGHT + fontMetrics.getHeight(), 
         		w-2*BORDER_WIDTH, OPERATIONCELL_HEIGHT);
 
-        Color textCol = getPaintTextColor(tgPanel);
+        Color textCol;
+        float[] hsb = new float[3]; 
+        
+        Color.RGBtoHSB(backCol.getRed(), backCol.getGreen(), backCol.getBlue(), hsb);
+        //TouchNavigatorPlugin.internalLog.debug("hsb:"+ hsb[0] + ", " + hsb[1] + ", " + hsb[2]);
+        if (hsb[2] < 0.6)
+        	textCol = Color.white;        
+        else textCol = Color.black;
         g.setColor(textCol);
         g.drawString(getDisplayLabel(), ix - fontMetrics.stringWidth(getDisplayLabel())/2, iy + fontMetrics.getDescent() +1 - 3*BORDER_WIDTH);
     }
