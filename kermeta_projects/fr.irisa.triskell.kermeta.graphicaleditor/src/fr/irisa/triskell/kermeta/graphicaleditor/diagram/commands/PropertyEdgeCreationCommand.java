@@ -79,6 +79,7 @@ public class PropertyEdgeCreationCommand extends CreateGraphEdgeCommand //Create
 		ClassDefinition sourceFClass = (ClassDefinition) Utils
 				.getElement(source);
 		Property fProperty = (Property) Utils.getElement(edge);
+		
 		sourceFClass.getOwnedAttribute().remove(fProperty);
 	}
 
@@ -92,5 +93,8 @@ public class PropertyEdgeCreationCommand extends CreateGraphEdgeCommand //Create
 	 * 
 	 * -------------------------------------------------------------------------
 	 */
-
+	public GraphElement getSource()
+	{	return source; }
+	public GraphElement getTarget()
+	{	return target; }
 }

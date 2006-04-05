@@ -31,7 +31,6 @@ public class TagLinkFigure extends PolylineConnectionEx implements
 	 * @generated
 	 */
 	public Locator getLocator(IEdgeObjectFigure edgeObjectfigure) {
-
 		return null;
 	}
 

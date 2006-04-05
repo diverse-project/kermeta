@@ -1,6 +1,7 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
@@ -16,7 +17,10 @@ import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.TagRestoreConnectionCommand;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.TagFigure;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.ExtendedDeleteModelObjectEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.RemovableUncontainedElementEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.TagLinkEdgeCreationEditPolicy;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 
 /**
  * The Tag object controller
@@ -47,7 +51,7 @@ public class TagEditPart extends EMFGraphNodeEditPart {
 
 		installEditPolicy(StructureEditPolicyConstants.TAGLINK_EDITPOLICY,
 				new TagLinkEdgeCreationEditPolicy());
-
+		
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
 					protected Command getRestoreConnectionsCommand(
@@ -64,7 +68,13 @@ public class TagEditPart extends EMFGraphNodeEditPart {
 				null);
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				new LabelDirectEditPolicy());
+
+		// Special policy to remove elements with no container, namely, the Tags.
+		//installEditPolicy(EditPolicy.COMPONENT_ROLE, new RemovableUncontainedElementEditPolicy());
+        installEditPolicy(ModelerEditPolicyConstants.DELETE_MODEL_OBJECT_EDITPOLICY, new ExtendedDeleteModelObjectEditPolicy());
+
 	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,9 +83,9 @@ public class TagEditPart extends EMFGraphNodeEditPart {
 	 * @generated
 	 */
 	protected IFigure createFigure() {
-
 		return new TagFigure();
 	}
+	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,5 +116,12 @@ public class TagEditPart extends EMFGraphNodeEditPart {
 	protected int getDefaultHeight() {
 		return 10;
 	}
+	
+	public Tag getTag() 
+	{
+		return (Tag) getEObject();
+	}
+	
+	
 
 }

@@ -1,4 +1,4 @@
-/* $Id: StructureValidateAction.java,v 1.2 2006-03-29 08:51:52 zdrey Exp $
+/* $Id: StructureValidateAction.java,v 1.3 2006-04-05 18:58:55 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ValidateAction.java
  * License    : EPL
@@ -16,16 +16,24 @@
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.actions;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.ui.actions.WorkbenchPartAction;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
+import org.topcased.modeler.actions.ModelerValidateAction;
 import org.topcased.modeler.di.model.Diagram;
 import org.topcased.modeler.editor.Modeler;
 import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureActionConstants;
-import fr.irisa.triskell.kermeta.graphicaleditor.validation.constraints.KermetaConstraintChecker;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
@@ -34,7 +42,9 @@ import fr.irisa.triskell.kermeta.loader.km.KMUnit;
  * Action that validates the constraints using ConstraintChecker
  * @see fr.irisa.triskell.kermeta.utils.KermetaConstraintChecker
  */
-public class StructureValidateAction extends WorkbenchPartAction {
+public class StructureValidateAction extends ModelerValidateAction {
+	
+	protected IFile inputFile;
 
 	public StructureValidateAction(IWorkbenchPart part) {
 		super(part);
@@ -59,6 +69,10 @@ public class StructureValidateAction extends WorkbenchPartAction {
     {
         setId(StructureActionConstants.VALIDATE);
         setText(StructureActionConstants.VALIDATE_TEXT);
+        
+        IEditorInput editorInput = ((Modeler)getWorkbenchPart()).getEditorInput();
+        System.err.println("Editor input : " + editorInput);
+        inputFile = ((IFileEditorInput)editorInput).getFile();
     }
 
     /**
@@ -94,18 +108,19 @@ public class StructureValidateAction extends WorkbenchPartAction {
     
     
     /**
+	 * @return Returns the inputFile.
+	 */
+	public IFile getInputFile() {
+		return inputFile;
+	}
+
+	/**
      * Check the model
      *
      */
     public void checkModel()
     {
-    	//new KermetaValidatorStartup().earlyStartup();
-    	// Load the KermetaUnit
-//      resolve uri
-        //URI u = URIMapUtil.resolveURI(p_metamodel_uri, unit_uripath);
-    	//EMF2Runtime.internalLog.info("UNIT URI = "+ u.toString());
-    	//System.err.println("UNIT URI = "+ u.toString() + "(path : "+ unit_uripath+")");
-        KMUnit kermeta_unit = (KMUnit)
+    	KMUnit kermeta_unit = (KMUnit)
         	KermetaUnitFactory.getDefaultLoader().createKermetaUnit(getModelURI().toString());
         
         Diagram currentDiagram = ((Modeler) getWorkbenchPart()).getActiveDiagram();
@@ -113,9 +128,8 @@ public class StructureValidateAction extends WorkbenchPartAction {
     	// Call the check constraint visitor on it!
         KermetaConstraintChecker constraint_checker = new KermetaConstraintChecker(kermeta_unit);
         System.err.println("Model URI : " + kermeta_unit.getUri());
-        System.err.println("Package URI : " + kermeta_unit.packageLookup("root"));
+        System.err.println("Package URI : " + ((Package)modelObject).getName());
         constraint_checker.accept((Package)modelObject);
-        
     }
     
 

@@ -16,6 +16,8 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
 import org.topcased.modeler.utils.Utils;
 
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+
 /**
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
@@ -52,13 +54,14 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 	 */
 	protected Command getCreateCommand(GraphNode parent, GraphNode child,
 			Point loc, Dimension dim, int pos, boolean needModelUpdate) {
-
+		
 		if (parent != null && child != null) {
 			EditDomain domain = getHost().getViewer().getEditDomain();
 
 			// get the EObjects of the model
 			EObject parentEObject = Utils.getElement(parent);
 			EObject childEObject = Utils.getElement(child);
+			System.out.println("Get CREATE COMMAND : test DND : " + Utils.getElement(child) + "; parant: " + parent);
 			// ----------------------------------
 			// 1- Parent and Child cannot be null and must the child should be
 			// contained by the parent (isValid checks that the two params are not null
@@ -82,6 +85,8 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 				// is not modified)
 				if (!needModelUpdate) {
 					EObject existingContainer = childEObject.eContainer();
+					//EObject existingContainer = childEObject.eContainingFeature();
+					System.out.println("Is this object a correct parent? :" + existingContainer);
 					if (!getParentContainerEObject(parent, child).equals(
 							existingContainer)
 							&& !isExternalObjectAllowed(parent, child)) {
@@ -109,6 +114,14 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 					// Check if the Reference is of the expected type
 					if (eRef.getEReferenceType().isInstance(childEObject)) {
 						referencesList.add(eRef);
+						Tag mytag = null;
+						// Tag is the only object that has no container...
+						// Special handling : add it to the resource
+						if (childEObject instanceof Tag)
+						{
+							mytag = (Tag)childEObject;
+							parentEObject.eResource().getContents().add(mytag);
+						}
 					}
 
 				}
@@ -124,5 +137,8 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 
 		return UnexecutableCommand.INSTANCE;
 	}
+	
+	
+	
 
 }

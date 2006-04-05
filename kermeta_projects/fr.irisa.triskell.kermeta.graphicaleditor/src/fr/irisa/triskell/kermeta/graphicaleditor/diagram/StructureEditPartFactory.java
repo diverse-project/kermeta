@@ -55,60 +55,7 @@ public class StructureEditPartFactory implements EditPartFactory {
 		if (model instanceof Diagram) {
 			return new StructureDiagramEditPart((Diagram) model);
 		} else if (model instanceof GraphNode) {
-			final GraphNode node = (GraphNode) model;
-			EObject element = Utils.getElement(node);
-			if (element != null) {
-				Object editPart = new StructureSwitch() {
-					public Object caseClassDefinition(ClassDefinition object) {
-						String feature = DIUtils
-								.getPropertyValue(
-										node,
-										ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
-						if (!"".equals(feature)) {
-							int featureID = Integer.parseInt(feature);
-							return new EListEditPart(node, object.eClass()
-									.getEStructuralFeature(featureID));
-						} else {
-							return new ClassDefinitionEditPart(node);
-						}
-					}
-
-					public Object casePrimitiveType(PrimitiveType object) {
-						return new PrimitiveTypeEditPart(node);
-					}
-
-					public Object caseNamedElement(NamedElement object) {
-						return new NamedElementEditPart(node);
-					}
-
-					public Object caseOperation(Operation object) {
-						return new OperationEditPart(node);
-					}
-
-					public Object casePackage(Package object) {
-						return new PackageEditPart(node);
-					}
-
-					public Object caseTag(Tag object) {
-						return new TagEditPart(node);
-					}
-
-					public Object defaultCase(EObject object) {
-						return new EMFGraphNodeEditPart(node);
-					}
-				}.doSwitch(element);
-
-				return (EditPart) editPart;
-			}
-
-			if (node.getSemanticModel() instanceof SimpleSemanticModelElement) {
-				if (((SimpleSemanticModelElement) node.getSemanticModel())
-						.getTypeInfo()
-						.equals(
-								StructureEditPolicyConstants.PROPERTYASNODE_EDITPOLICY))
-					return new PropertyAsNodeEditPart(node);
-			}
-			return new GraphNodeEditPart(node);
+			return createEditPartForNode(context, (GraphNode)model);
 		} else if (model instanceof GraphEdge) {
 			final GraphEdge edge = (GraphEdge) model;
 			EObject element = Utils.getElement(edge);

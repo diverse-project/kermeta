@@ -138,8 +138,9 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 		newObjTxt = "Property";
 		factory = new GraphElementCreationFactory(creationUtils,
 				StructurePackage.eINSTANCE.getProperty());
+		// below : arg0->the palette item label, arg1->the default name 
 		connectionTool = new ModelerConnectionCreationToolEntry(newObjTxt,
-				newObjTxt, factory, StructureImageRegistry
+				newObjTxt.toLowerCase(), factory, StructureImageRegistry
 						.getImageDescriptor("PROPERTY"), null);
 		entries.add(connectionTool);
 
@@ -158,13 +159,14 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 				newObjTxt, factory, StructureImageRegistry
 						.getImageDescriptor("TAGLINK"), null);
 		entries.add(connectionTool);
-		newObjTxt = "PropertyAsNode";
+		// below : only generated for test purposes
+	/*	newObjTxt = "PropertyAsNode";
 		factory = new GraphElementCreationFactory(creationUtils,
 				StructureEditPolicyConstants.PROPERTYASNODE_EDITPOLICY, true);
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
 				factory, StructureImageRegistry
 						.getImageDescriptor("PROPERTYASNODE"), null, 0, 0, 0, 0);
-		entries.add(objectTool);
+		entries.add(objectTool);*/
 
 		edgesDrawer.addAll(entries);
 		getRoot().add(edgesDrawer);

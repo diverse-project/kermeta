@@ -46,7 +46,7 @@ public class PropertyEdgeCreationEditPolicy extends NodeEditPolicy {
 	protected boolean checkEdge(GraphEdge edge) {
 		return Utils.getElement(edge) instanceof Property;
 	}
-
+ 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,6 +74,7 @@ public class PropertyEdgeCreationEditPolicy extends NodeEditPolicy {
 
 		if (sourceObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition
 				&& targetObject instanceof fr.irisa.triskell.kermeta.language.structure.ClassDefinition) {
+			if (sourceObject.equals(targetObject)) return false;
 			return true;
 		}
 		return false;

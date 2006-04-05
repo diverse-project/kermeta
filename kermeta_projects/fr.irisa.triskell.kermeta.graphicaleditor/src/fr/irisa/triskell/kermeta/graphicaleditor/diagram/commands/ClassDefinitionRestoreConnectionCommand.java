@@ -42,7 +42,8 @@ public class ClassDefinitionRestoreConnectionCommand extends
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.commands.AbstractRestoreConnectionCommand#initializeCommands()
-	 * @generated
+	 * @generated NOT
+	 * (We modified the method call createInheritanceFromClassDefinitionToClassDefinition)
 	 */
 	protected void initializeCommands() {
 
@@ -71,10 +72,10 @@ public class ClassDefinitionRestoreConnectionCommand extends
 							// autoRef not allowed
 						} else {
 							// if the node is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-							createPropertyFromClassDefinitionToClassDefinition(
+							extendedCreatePropertyFromClassDefinitionToClassDefinition(
 									node, node2);
 							// if node is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-							createPropertyFromClassDefinitionToClassDefinition(
+							extendedCreatePropertyFromClassDefinitionToClassDefinition(
 									node2, node);
 						}
 					}
@@ -84,10 +85,10 @@ public class ClassDefinitionRestoreConnectionCommand extends
 							// autoRef not allowed
 						} else {
 							// if the node is the source of the edge or if it is the target and that the SourceTargetCouple is reversible
-							createInheritanceFromClassDefinitionToClassDefinition(
+							extendedCreateInheritanceFromClassDefinitionToClassDefinition(
 									node, node2);
 							// if node is the target of the edge or if it is the source and that the SourceTargetCouple is reversible
-							createInheritanceFromClassDefinitionToClassDefinition(
+							extendedCreateInheritanceFromClassDefinitionToClassDefinition(
 									node2, node);
 						}
 					}
@@ -215,15 +216,13 @@ public class ClassDefinitionRestoreConnectionCommand extends
 		for (Iterator<Property> it = edgeObjectList.iterator(); it.hasNext();) {
 			Property obj = it.next();
 			// 2nd condition -> a constraint 
-			// TODO Think about how to make this conditional be generated later.
-			// FIXME obj can be null!!! check why
-			
 			if (obj.getType() != null
 					&& !KermetaUtils.getDefault().isStandardType(obj.getType())
 					&& !KermetaUtils.getDefault()
 							.isPrimitiveType(obj.getType())) {
 				Property edgeObject = (Property) obj;
-				if (targetObject.equals(edgeObject.getOwningClass())
+				// The opposite of the OwningClass is OwnedAttribute.
+				if (sourceObject.equals(edgeObject.getOwningClass())
 						&& sourceObject.getOwnedAttribute()
 								.contains(edgeObject)) {
 					// check if the relation does not exists yet

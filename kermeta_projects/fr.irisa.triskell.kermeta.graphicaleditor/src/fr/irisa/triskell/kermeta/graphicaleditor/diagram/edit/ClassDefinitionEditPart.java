@@ -110,7 +110,7 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 	 * @generated
 	 */
 	protected int getDefaultWidth() {
-		return 70;
+		return 50;
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 	 * @generated
 	 */
 	protected int getDefaultHeight() {
-		return 10;
+		return 40;
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 	 * @generated
 	 */
 	public int getMinimumWidth() {
-		return 10;
+		return 40;
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 	 * @generated
 	 */
 	public int getMinimumHeight() {
-		return 7;
+		return 40;
 	}
 
 	// 

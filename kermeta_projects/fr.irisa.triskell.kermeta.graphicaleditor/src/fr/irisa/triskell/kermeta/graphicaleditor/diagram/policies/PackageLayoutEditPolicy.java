@@ -16,6 +16,8 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
 import org.topcased.modeler.utils.Utils;
 
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+
 /**
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
@@ -49,7 +51,7 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 	 */
 	protected Command getCreateCommand(GraphNode parent, GraphNode child,
 			Point loc, Dimension dim, int pos, boolean needModelUpdate) {
-
+		
 		if (parent != null && child != null) {
 			EditDomain domain = getHost().getViewer().getEditDomain();
 
@@ -61,7 +63,7 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 			// 1- Parent and Child cannot be null and must the child should be
 			// contained by the parent (isValid checks that the two params are not null
 			if (isValid(childEObject, parentEObject)) {
-
+				if (childEObject instanceof Tag) System.err.println("create a tag? " + childEObject);
 				// ----------------------------------
 				// 2- Check if this object does not already belong to this
 				// container
@@ -78,7 +80,8 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 				// 3- Check if this object is external (only done if the model
 				// is not modified)
 				if (!needModelUpdate) {
-					EObject existingContainer = childEObject.eContainer();
+					//EObject existingContainer = childEObject.eContainer();
+					EObject existingContainer = childEObject.eContainingFeature();
 					if (!getParentContainerEObject(parent, child).equals(
 							existingContainer)
 							&& !isExternalObjectAllowed(parent, child)) {
@@ -106,6 +109,16 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 					// Check if the Reference is of the expected type
 					if (eRef.getEReferenceType().isInstance(childEObject)) {
 						referencesList.add(eRef);
+						Tag mytag = null;
+						if (childEObject instanceof Tag)
+						{
+							mytag = (Tag)childEObject;
+							
+							System.err.println("Get EObject : " + mytag);
+							System.out.println("Tag container:"+ parentEObject.eResource()
+							);
+							parentEObject.eResource().getContents().add(mytag);
+						}
 					}
 				}
 				if (!referencesList.isEmpty()) {

@@ -35,11 +35,13 @@ import org.topcased.modeler.figures.IEdgeObjectFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureEdgeObjectConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructureConfiguration;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.EditPartUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.PropertyEditPartCommonInterface;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.PropertyFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PropertyLabelEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.TagLinkEdgeCreationEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaConstants;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
@@ -63,9 +65,15 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 	 */
 	private Property opposite;
 
-	/** The DirectEditManager */
-	protected DirectEditManager manager;
+	/** The DirectEditManager for the name label (seems to require 1 editmanager per Label object */
+	protected DirectEditManager nameManager;
+	protected DirectEditManager multiplicityManager;
 
+	/**
+	 * Contains the String related to the label to edit
+	 */
+	protected String labelToEdit;
+	
 	/**
 	 * Constructor
 	 * <!-- begin-user-doc -->
@@ -160,11 +168,7 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 	 * @generated NOT
 	 */
 	protected ConnectionRouter getDefaultRouter(ConnectionLayerEx cLayer) {
-		if (getSource() == getTarget()) {
-			return cLayer.getRectilinearRouter();
-		}
-
-		return cLayer.getObliqueRouter();
+		return cLayer.getRectilinearRouter();
 	}
 
 	/**
@@ -218,29 +222,62 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 	 */
 	private boolean directEditHitTest(Point requestLoc) {
 		Label nameName = (Label) ((PropertyFigure) getFigure())
-				.getNameEdgeObjectFigure();
+				.getNameLabel();
 		if (nameName != null) {
+			labelToEdit = StructureEdgeObjectConstants.NAME_LABEL_ID;
+			nameName.translateToRelative(requestLoc);
+			if (nameName.containsPoint(requestLoc))
+				
+				return true;
+			labelToEdit = null;
+		}
+		// below : Not tested!
+		nameName = (Label) ((PropertyFigure) getFigure())
+		.getMultiplicityLabel();
+		if (nameName != null) {
+			labelToEdit = StructureEdgeObjectConstants.MULTIPLICITY_LABEL_ID;
 			nameName.translateToRelative(requestLoc);
 			if (nameName.containsPoint(requestLoc))
 				return true;
+			labelToEdit = null;
 		}
+		
 		return false;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * Only launched if directeEditHitTest returned true (see performRequest)
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	private void performDirectEdit() {
-		if (manager == null) {
-			Label targetName = (Label) ((PropertyFigure) getFigure())
-					.getNameLabel();
-			manager = new ModelerLabelDirectEditManager(this,
-					TextCellEditor.class,
-					new LabelCellEditorLocator(targetName), targetName);
+		Label targetName = null;
+		if (labelToEdit.equals(StructureEdgeObjectConstants.NAME_LABEL_ID))
+		{
+			if (nameManager == null)
+			{
+				targetName = (Label) ((PropertyFigure) getFigure())
+				.getNameLabel();
+				nameManager = new ModelerLabelDirectEditManager(this,
+						TextCellEditor.class,
+						new LabelCellEditorLocator(targetName), targetName);
+			}
+			nameManager.show();
 		}
-		manager.show();
+		else
+		{
+			if (multiplicityManager == null)
+			{
+				targetName = (Label) ((PropertyFigure) getFigure())
+				.getMultiplicityLabel();
+				multiplicityManager = new ModelerLabelDirectEditManager(this,
+						TextCellEditor.class,
+						new LabelCellEditorLocator(targetName), targetName);
+			}
+			multiplicityManager.show();
+		}
+		
 	}
 
 	/*
@@ -298,6 +335,7 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 	 * property.name
 	 */
 	protected void updateTargetName() {
+
 		getPropertyFigure().getNameLabel().setText(getProperty().getName());
 	}
 

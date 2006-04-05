@@ -1,4 +1,4 @@
-/* $Id: OperationParameterViewer.java,v 1.1 2006-03-07 17:30:32 zdrey Exp $
+/* $Id: OperationParameterViewer.java,v 1.2 2006-04-05 18:58:52 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : OperationParameterViewer.java
  * License   : EPL
@@ -75,9 +75,11 @@ public class OperationParameterViewer
         createTableViewer(parent);
     }
     
-    /***/
-    public void addParameter() {
-   		_paramObjects.add(new ParameterObject("new", _types.get(0)));
+    /**
+     * @param paramType TODO*/
+    public void addParameter(String paramType) {
+    	String paramname = (paramType==OperationDataStructure.FOPERATION_type_parameter)?"T":"arg";
+   		_paramObjects.add(new ParameterObject(paramname + _paramObjects.size(), _types.get(0)));
    		_tableViewer.refresh();
     }
     

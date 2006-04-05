@@ -17,15 +17,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
+
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
@@ -105,6 +111,29 @@ public class KermetaUtils {
 		result.addAll(pkg.getOwnedTypeDefinition());
 		// Now add the Kermeta standard library classifiers
 		result.addAll(getStdLibTypeDefinitions());
+		return result;
+	}
+	
+	/** Get all the type definitions that belong to the same package as the one to which
+	 *  the given type believes. */
+	public List<Type> getAllSuperTypes(ClassDefinition classdef)
+	{
+		List<Type> result = new ArrayList<Type>();
+		if (classdef.getSuperType()!=null || !classdef.getSuperType().isEmpty())
+		{	
+			Iterator it = classdef.getSuperType().iterator();
+			while (it.hasNext())
+			{
+				Type next = (Type)it.next();
+				if (next instanceof fr.irisa.triskell.kermeta.language.structure.Class)
+				{
+					// Strong cast..
+					ClassDefinition nexttypedef = (ClassDefinition)((fr.irisa.triskell.kermeta.language.structure.Class)next).getTypeDefinition();
+					result.add(next);
+					result.addAll(getAllSuperTypes(nexttypedef));
+				}
+			}
+		}
 		return result;
 	}
 	
@@ -403,7 +432,6 @@ public class KermetaUtils {
 		String supertypedefname = standardUnit.getQualifiedName(supertypedef);
 		// reinit the typeFixing
 		classdef.getContainedType().clear();
-		System.err.println("source:" + standardUnit.getQualifiedName(classdef) + supertypedefname);
 		Iterator<Type> it = classdef.getSuperType().iterator();
 		while (it.hasNext() && result==null)
 		{
@@ -456,6 +484,41 @@ public class KermetaUtils {
 	public boolean existsPropertyBetweenClassDefinitions(ClassDefinition srcdef, ClassDefinition targetdef)
 	{
 		return false;
+	}
+
+	public Operation getOperationByName(String name, fr.irisa.triskell.kermeta.language.structure.Class claz) {
+		List<Operation> ops = ((ClassDefinition)claz.getTypeDefinition()).getOwnedOperation();
+		for (Operation op : ops) {
+			if (op.getName().equals(name)) return op; 
+		}
+		return null;
+	}
+	
+	/**
+	 * This is a duplicate method stolen from KermetaUnit. 
+	 * Define a container for each element of the root package
+	 */
+	public static void fixTypeContainement(Package p) {
+		TreeIterator it = p.eAllContents();
+		TypeContainementFixer fixer = new TypeContainementFixer();
+		while(it.hasNext()) {
+			fr.irisa.triskell.kermeta.language.structure.Object o = (fr.irisa.triskell.kermeta.language.structure.Object)it.next();
+			if (o instanceof CallExpression) {
+			    CallExpression e = (CallExpression)o;
+			    fixer.addContainedTypes(e.getStaticTypeVariableBindings(), e);
+			}
+			
+			if (o instanceof Expression) {
+				Expression e = (Expression)o;
+				if (e.getStaticType() != null) {
+					fixer.addContainedTypes(e.getStaticType(), e);
+					
+				}
+			}
+			else if (o instanceof TypeContainer) {
+				if (o != null) fixer.accept(o);
+			}
+		}
 	}
 }
 

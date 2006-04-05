@@ -1,4 +1,4 @@
-/* $Id: StructureKm2KmtAction.java,v 1.1 2006-03-29 08:51:52 zdrey Exp $
+/* $Id: StructureKm2KmtAction.java,v 1.2 2006-04-05 18:58:55 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ValidateAction.java
  * License    : EPL
@@ -133,10 +133,8 @@ public class StructureKm2KmtAction extends WorkbenchPartAction {
     	IStructuredSelection selection = null;
     	String rel_uri = "";
     	// remove the platform:/resource chunk
-    	if (getModelURI()!=null && getModelURI().toString().startsWith("platform:/resource/"))
-    		rel_uri = getModelURI().toString().substring(19); 
-    	IFile file = KermetaPlugin.getIFileFromString(rel_uri);
-    	System.err.println("file : " + file + "fomr : " + getModelURI().toString() + rel_uri);
+    	IFile file = KermetaPlugin.getIFileFromString(getModelURI().toString() + rel_uri);
+    	System.err.println("file : " + file + " fomr : " + getModelURI().toString() + rel_uri);
     	if (file!=null)
     		selection = new StructuredSelection(file);
     	

@@ -1,4 +1,4 @@
-/* $Id: ParameterGenericTabItem.java,v 1.1 2006-03-07 17:30:32 zdrey Exp $
+/* $Id: ParameterGenericTabItem.java,v 1.2 2006-04-05 18:58:52 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ParameterGenericTabItem.java
  * License   : EPL
@@ -94,7 +94,7 @@ public class ParameterGenericTabItem {
 				{
 			public void widgetSelected(SelectionEvent e)
 			{
-				viewer.addParameter();
+				viewer.addParameter("");
 			}
 				});
 		

@@ -1,4 +1,4 @@
-/* $Id: KermetaValidator.java,v 1.2 2006-03-22 16:24:59 zdrey Exp $
+/* $Id: KermetaValidator.java,v 1.3 2006-04-05 18:58:54 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : KermetaValidator.java
  * License    : EPL
@@ -11,13 +11,17 @@
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.validation;
 
+import java.util.Collection;
 import java.util.Map;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.validation.model.EvaluationMode;
+import org.eclipse.emf.validation.service.IValidator;
 
 /**
  * To understand this class, user will browse appropriate documentation here :
@@ -25,25 +29,45 @@ import org.eclipse.emf.ecore.EValidator;
  * @author zdrey
  *
  */
-public class KermetaValidator implements EValidator {
+public class KermetaValidator implements IValidator {
 
-	public boolean validate(EObject arg0, DiagnosticChain arg1, Map arg2) {
+	public EvaluationMode getEvaluationMode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isReportSuccesses() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean validate(EClass arg0, EObject arg1, DiagnosticChain arg2,
-			Map arg3) {
+	public void setReportSuccesses(boolean reportSuccesses) {
 		// TODO Auto-generated method stub
-		return false;
+		System.out.println("Report Successes (KermetaValidator)");
 	}
 
-	public boolean validate(EDataType arg0, Object arg1, DiagnosticChain arg2,
-			Map arg3) {
+	public void putClientData(String key, Object data) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
-	
+
+	public Object getClientData(String key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IStatus validate(Object object) {
+		System.out.println("Validate, in KermetaValidator class");
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public IStatus validate(Collection objects) {
+		System.out.println("Validate a collections, in KermetaValidator class");
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

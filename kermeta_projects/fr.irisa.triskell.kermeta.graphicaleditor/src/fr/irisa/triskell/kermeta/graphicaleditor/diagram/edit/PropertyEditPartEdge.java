@@ -15,7 +15,7 @@ import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
 import org.topcased.modeler.figures.IEdgeObjectFigure;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.PropertyEditPartCommonInterface;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.PropertyFigureEdge;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.PropertyFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PropertyEdgeObjectUVEditPolicy;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 
@@ -85,7 +85,7 @@ public class PropertyEditPartEdge extends EMFGraphEdgeEditPart implements Proper
 	 * @generated
 	 */
 	protected IFigure createFigure() {
-		PropertyFigureEdge connection = new PropertyFigureEdge();
+		PropertyFigure connection = new PropertyFigure();
 		createSourceDecoration(connection);
 		createTargetDecoration(connection);
 
@@ -143,7 +143,7 @@ public class PropertyEditPartEdge extends EMFGraphEdgeEditPart implements Proper
 	 * @generated NOT
 	 */
 	protected ConnectionRouter getDefaultRouter(ConnectionLayerEx cLayer) {
-		return cLayer.getObliqueRouter();
+		return cLayer.getRectilinearRouter();
 	}
 
 	/**
@@ -154,9 +154,8 @@ public class PropertyEditPartEdge extends EMFGraphEdgeEditPart implements Proper
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 
-		updatefLowerLabel();
-		updatefUpperLabel();
-		updatefNameLabel();
+		updateMultiplicityLabel();
+		updateNameLabel();
 	}
 
 	/**
@@ -165,20 +164,9 @@ public class PropertyEditPartEdge extends EMFGraphEdgeEditPart implements Proper
 	 * Update the fLower Label
 	 * @generated NOT -> adaptation were necessary
 	 */ 
-	private void updatefLowerLabel() {
-		((Label) ((PropertyFigureEdge) getFigure()).getfLowerEdgeObjectFigure())
+	private void updateMultiplicityLabel() {
+		((Label) ((PropertyFigure) getFigure()).getMultiplicityLabel())
 				.setText(String.valueOf(((Property) getEObject()).getLower()));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * Update the fUpper Label
-	 * @generated NOT
-	 */
-	private void updatefUpperLabel() {
-		((Label) ((PropertyFigureEdge) getFigure()).getfUpperEdgeObjectFigure())
-				.setText(String.valueOf(((Property) getEObject()).getUpper()));
 	}
 
 	/**
@@ -187,8 +175,8 @@ public class PropertyEditPartEdge extends EMFGraphEdgeEditPart implements Proper
 	 * Update the fName Label
 	 * @generated
 	 */
-	private void updatefNameLabel() {
-		((Label) ((PropertyFigureEdge) getFigure()).getfNameEdgeObjectFigure())
+	private void updateNameLabel() {
+		((Label) ((PropertyFigure) getFigure()).getNameLabel())
 				.setText(((Property) getEObject()).getName());
 	}
 

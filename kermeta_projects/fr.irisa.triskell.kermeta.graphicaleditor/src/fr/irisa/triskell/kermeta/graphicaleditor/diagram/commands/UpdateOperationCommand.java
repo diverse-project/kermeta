@@ -1,4 +1,4 @@
-/* $Id: UpdateOperationCommand.java,v 1.2 2006-03-29 09:06:13 zdrey Exp $
+/* $Id: UpdateOperationCommand.java,v 1.3 2006-04-05 18:58:52 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -23,11 +23,13 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.dialogs.OperationEditDi
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.OperationDataStructure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.ParameterObject;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * Class that create a command in order to update the "Operation" elements.
@@ -44,6 +46,8 @@ public class UpdateOperationCommand extends Command
     private String _oldName;
 
     private Type _oldReturnType;
+    
+    private fr.irisa.triskell.kermeta.language.structure.Class _oldSuperOperation;
 
     private OperationDataStructure _oldInputTypes;
 
@@ -52,7 +56,9 @@ public class UpdateOperationCommand extends Command
 
     /** Returned type TypeDefinition */
     private Type _returnType;
+    private fr.irisa.triskell.kermeta.language.structure.Class _superTypeOperation;
     private Type _voidType;
+    private boolean _isAbstract;
 
     private OperationDataStructure _dataStructure;
 
@@ -67,14 +73,16 @@ public class UpdateOperationCommand extends Command
     	// Store old data
         _oldName = operation.getName();
         _oldReturnType = _returnType;
+        _oldSuperOperation = _superTypeOperation;
         _oldInputTypes = new OperationDataStructure(operation);
         
         _operation = operation;
         // Store new data
         _name = (String) data.get(OperationEditDialog.Operation_NAME);
         _returnType = (Type) data.get(OperationEditDialog.Operation_RETURN_TYPE);
+        _superTypeOperation = (fr.irisa.triskell.kermeta.language.structure.Class) data.get(OperationEditDialog.Operation_SUPER_OPERATION);
         _dataStructure = (OperationDataStructure) data.get(OperationEditDialog.Operation_INPUTS);
-        
+
         _voidType = StructureFactory.eINSTANCE.createVoidType();
     }
 
@@ -92,34 +100,27 @@ public class UpdateOperationCommand extends Command
      */
     public void execute()
     {
+    	// TODO : If user clicked on ok and actually did nothing...
+    	
+    	
     	// The operation name
         _operation.setName(_name);
         //Type ftype = KermetaUtils.getDefault().createTypeForTypeDefinition(_returnType);
         // TypeDefinition is ClassDefinition or DataType
         // The return type
-        _operation.setType(_returnType);
+        _operation.setType(_returnType==null?(Type)KermetaUtils.getDefault().getStandardUnit().getTypeDefinitionByName("Void"):_returnType);
         
-        _operation.setIsAbstract(true);
+        if (_superTypeOperation!=null)
+        	_operation.setSuperOperation(KermetaUtils.getDefault().getOperationByName(
+        			_operation.getName(), 
+        			_superTypeOperation));
+        
+        //_operation.setIsAbstract(true);
         
         // Perform update for input parameters
 
         _operation.getContainedType().clear();
-        _operation.getOwnedParameter().clear();
-
-        for (Iterator<ParameterObject> iterator = _dataStructure.getDataOwnedParameters().iterator(); iterator.hasNext();)
-        {
-            ParameterObject object = iterator.next();
-            String name = _dataStructure.getDisplayName(object);
-            //TypeDefinition type = _inputTypes.getTypeDefinition(object);
-            Parameter parameter = StructureFactory.eINSTANCE.createParameter();
-            parameter.setName(name); 
-            if (object.getType() != null)
-            	parameter.setType(object.getType());
-            else // temp patch if user did not set a type. TODO : by default, impose the VoidType in the graphical editor
-            	parameter.setType(_voidType);
-            KermetaUtils.getDefault().getTypeFixer().accept(parameter);
-            _operation.getOwnedParameter().add(parameter);
-        }
+       
         _operation.getTypeParameter().clear();
         // Perform update for type parameters
         for (Iterator<ParameterObject> iterator = _dataStructure.getDataTypeParameters().iterator(); iterator.hasNext();)
@@ -133,9 +134,34 @@ public class UpdateOperationCommand extends Command
             	tvar.setSupertype(object.getType());
             _operation.getTypeParameter().add(tvar);
         }
+        
+        // FIXME! Dangerous
+        _operation.getOwnedParameter().clear();
+
+        for (Iterator<ParameterObject> iterator = _dataStructure.getDataOwnedParameters().iterator(); iterator.hasNext();)
+        {
+            ParameterObject object = iterator.next();
+            String name = _dataStructure.getDisplayName(object);
+            //TypeDefinition type = _inputTypes.getTypeDefinition(object);
+            Parameter parameter = StructureFactory.eINSTANCE.createParameter();
+            parameter.setName(name); 
+            if (object.getType() != null)
+            	parameter.setType(object.getType());
+            else // temp patch if user did not set a type. TODO : by default, impose the VoidType in the graphical editor
+            {
+            	System.err.println("Type is null :(");
+            	parameter.setType(_voidType);
+            }
+            
+
+            KermetaUtils.getDefault().getTypeFixer().accept(parameter);
+            _operation.getOwnedParameter().add(parameter);
+            
+        }
          
         // Fix the type containments once the Operation element is complete -> not optimal
         KermetaUtils.getDefault().getTypeFixer().accept(_operation);
+        
         
     }
 

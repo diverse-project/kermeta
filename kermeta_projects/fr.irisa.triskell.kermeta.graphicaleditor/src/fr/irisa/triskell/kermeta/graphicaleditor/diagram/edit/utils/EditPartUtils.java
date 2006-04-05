@@ -15,6 +15,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
+import org.topcased.draw2d.figures.EditableLabel;
+
+import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.OperationFigure;
 
 /**
  * This class gathers some useful methods related to graphical presentation. 
@@ -53,6 +57,28 @@ public class EditPartUtils {
         else
         {
         	return Display.getDefault().getSystemFont();
+        }
+	}
+	
+	
+	public static void changeIcon(Boolean setItalic, OperationFigure op)
+	{
+		if (setItalic)
+        {
+            if (!ITALIC_FONT_OK)
+            {
+                FontData[] fData = Display.getDefault().getSystemFont().getFontData();
+                fData[0].setStyle(SWT.ITALIC);
+                JFaceResources.getFontRegistry().put("ItalicFont", fData);
+                ITALIC_FONT_OK = true;
+            }
+            ((EditableLabel) op.getLabel()).setIcon(StructureImageRegistry
+    				.getImage("OPERATION_ABSTRACT"));
+        }
+        else
+        {
+        	((EditableLabel) op.getLabel()).setIcon(StructureImageRegistry
+    				.getImage("OPERATION"));
         }
 	}
 

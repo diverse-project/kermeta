@@ -18,11 +18,9 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 public class PropertyFigure extends PolylineConnectionEx implements
 		IGraphEdgeFigure {
 
-	private IEdgeObjectFigure nameEdgeObject;
-
 	private EdgeObjectEditableLabel nameLabel;
 
-	private EdgeObjectLabel multiplicityLabel;
+	private EdgeObjectEditableLabel multiplicityLabel;
 
 	private ConnectionEndpointLocator nameLocator;
 
@@ -39,24 +37,16 @@ public class PropertyFigure extends PolylineConnectionEx implements
 	public PropertyFigure() {
 		super();
 		// the .
-		multiplicityLabel = new EdgeObjectLabel(this);
+		multiplicityLabel = new EdgeObjectEditableLabel(this);
 		multiplicityLocator = new ConnectionEndpointLocator(this, true);
 		add(multiplicityLabel, multiplicityLocator);
 		// the name of the property // role
 		nameLabel = new EdgeObjectEditableLabel(this);
 		nameLocator = new ConnectionEndpointLocator(this, true);
+
 		add(nameLabel, nameLocator);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the object figure
-	 * @generated
-	 */
-	public IEdgeObjectFigure getNameEdgeObjectFigure() {
-		return nameEdgeObject;
-	}
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -68,7 +58,7 @@ public class PropertyFigure extends PolylineConnectionEx implements
 		return nameLabel;
 	}
 
-	public EdgeObjectLabel getMultiplicityLabel() {
+	public EdgeObjectEditableLabel getMultiplicityLabel() {
 		return multiplicityLabel;
 	}
 

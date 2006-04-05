@@ -1,4 +1,4 @@
-/* $Id: KermetaValidatorAdapter.java,v 1.3 2006-03-29 08:55:38 zdrey Exp $
+/* $Id: KermetaValidatorAdapter.java,v 1.4 2006-04-05 18:58:54 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ExtendedKermetaValidatorAdapter.java
  * License    : EPL
@@ -13,9 +13,13 @@ package fr.irisa.triskell.kermeta.graphicaleditor.validation;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -26,11 +30,22 @@ import org.eclipse.emf.ocl.query.QueryFactory;
 import org.eclipse.emf.validation.internal.EMFModelValidationPlugin;
 import org.eclipse.emf.validation.internal.EMFModelValidationStatusCodes;
 import org.eclipse.emf.validation.internal.emfadapter.EMFValidationContextAdapter;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IPageLayout;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.views.markers.internal.ProblemView;
+import org.topcased.modeler.editor.Modeler;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin;
-import fr.irisa.triskell.kermeta.graphicaleditor.validation.constraints.KermetaConstraintChecker;
+import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
+import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
 /** 
  * We extend our initial class to clearly distinguish what is validated
@@ -50,7 +65,6 @@ public class KermetaValidatorAdapter extends EcoreValidatorAdapter {
 		String u = getEPackage().eResource().getURI().toString();
 		//kBatchValidator = new KermetaBatchValidator()
 //		System.err.println("URI : " + u + getEPackage());
-		//kermetaUnit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(u);
 	}
 	
 	public KermetaConstraintChecker getKermetaConstraintChecker(EObject eObject) {
@@ -72,48 +86,39 @@ public class KermetaValidatorAdapter extends EcoreValidatorAdapter {
 	@Override
 	public boolean validate(EClass eClass, EObject eObject, DiagnosticChain diagnostics, Map context) {
 	//	boolean result = super.validate(eClass, eObject, diagnostics, context);
-		System.out.println("Validate an EClass : " + eClass + eObject);
 		
 		// Content of EcoreValidatorAdapter.validate
 		IStatus status = Status.OK_STATUS;
 		
 		if (diagnostics != null) {
 			if (!hasProcessed(eObject, context)) {
-				/*status = batchValidator.validate(
-	                    eObject,
-	                    new NullProgressMonitor());*/
+				/*status = batchValidator.validate( eObject, new NullProgressMonitor());*/
+				
 				// Create a simple status
 				Boolean result = (Boolean)getKermetaConstraintChecker(eObject).accept(eObject);
 				int status_int = -1;
-				//batchValidator...
-				// BatchValidator
-			/*	if (result != null)
-				{*/
-					System.err.println("Boolean : " + result);
-					//status_int = result.booleanValue()==true?IStatus.OK:IStatus.ERROR;
-					status_int = IStatus.ERROR;
-					status = createStatus(status_int, "Quelque chose ne va pas?", EMFValidationContextAdapter.ERROR);
-					/* status = kermetaValidator.validate(
-					 eObject,
-					 new NullProgressMonitor());*/
-					// see org.eclipse.emf.validation.examples.adapter
-					//new PackageConstraints().validate(this.)
-					super.processed(eObject, context, status);
-					System.err.println("(2) J'ajoute un diagnostic : " + status );
-					System.err.println("(2) Diag: " + diagnostics.toString() + QueryFactory.eINSTANCE);
-					//System.err.println("(2) Diag: " + diagnostics.toString() + QueryFactory.eINSTANCE.createQuery());
-					for (Object c : context.keySet())
-					{
-						System.err.println(c);	
-					}
-					
+				List problems = getKermetaConstraintChecker(eObject).getProblems();
+				// Reset the problems view
+				IFile inputModelFile = KermetaPlugin.getIFileFromString(kermetaUnit.getUri());
+				
+				// Clear the problem view, and recreate it
+				System.err.println("-> inputModelFile : " + inputModelFile);
+				EditorReconcilingStrategy.parse(kermetaUnit.getUri());
+				/*
+				EditorReconcilingStrategy.clearMarkers(inputModelFile);
+				EditorReconcilingStrategy.createMarkers(inputModelFile, kermetaUnit);*/
+				
+				// Another method..
+/*				for (Object problem : problems) {	
+					KMUnitMessage msg = (KMUnitMessage)problem;
+					status = createStatus(IStatus.ERROR, msg.getMessage(), EMFValidationContextAdapter.ERROR);
 					super.appendDiagnostics(status, diagnostics);
-					ResourcesPlugin.getPlugin().getLog().log(status);
-			/*	}*/
-					System.out.println("Voilu");
+				}*/
+				// see org.eclipse.emf.validation.examples.adapter
+				//new PackageConstraints().validate(this.)
+				super.processed(eObject, context, status);
 			}
 		}
-        
         return status.isOK();
 	}
 	
@@ -122,9 +127,7 @@ public class KermetaValidatorAdapter extends EcoreValidatorAdapter {
 	 */
 	@Override
 	public boolean validate(EObject eObject, DiagnosticChain diagnostics, Map context) {
-		boolean result = super.validate(eObject, diagnostics, context);
-		System.out.println("Validate an EObject : " + eObject);
-		return result;
+		return super.validate(eObject, diagnostics, context);
 	}
 
 	/* (non-Javadoc)
@@ -132,7 +135,6 @@ public class KermetaValidatorAdapter extends EcoreValidatorAdapter {
 	 */
 	@Override
 	public boolean validate(EDataType arg0, Object arg1, DiagnosticChain arg2, Map arg3) {
-		// TODO Auto-generated method stub
 		return super.validate(arg0, arg1, arg2, arg3);
 	}
 
@@ -141,7 +143,6 @@ public class KermetaValidatorAdapter extends EcoreValidatorAdapter {
 	 */
 	@Override
 	protected boolean validate(int arg0, Object arg1, DiagnosticChain arg2, Map arg3) {
-		// TODO Auto-generated method stub
 		return super.validate(arg0, arg1, arg2, arg3);
 	}
 	
@@ -204,6 +205,21 @@ public class KermetaValidatorAdapter extends EcoreValidatorAdapter {
 				null);
 	}
 
+	 private static ProblemView getProblemView() {
+		    return (ProblemView) StructurePlugin.getDefault().getWorkbench()
+							.getActiveWorkbenchWindow().getActivePage()
+							.findView(IPageLayout.ID_PROBLEM_VIEW);
+		  }
+
+	
+	/**
+	 * Create a list of Status
+	 *
+	 */
+	public void createStatusFromKermetaConstraintChecker()
+	{
+	}
+	
 	/**
 	 * A custom status type that aggregates multiple {@link IStatus}es and whose
 	 * severity is the worst severity among them.
