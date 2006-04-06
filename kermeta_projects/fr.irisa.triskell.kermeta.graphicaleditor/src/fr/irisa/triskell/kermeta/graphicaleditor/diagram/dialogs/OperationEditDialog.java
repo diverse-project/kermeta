@@ -1,4 +1,4 @@
-/* $Id: OperationEditDialog.java,v 1.2 2006-04-05 18:58:52 zdrey Exp $
+/* $Id: OperationEditDialog.java,v 1.3 2006-04-06 11:12:20 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -96,7 +96,6 @@ public class OperationEditDialog extends Dialog
 	
 	
 	private Text _operationNameText;
-	private Text _operationTypeParamsText;
 	private Combo _operationSuperOperationComboBox;
 	// The widget for the body operation edition
 	private StyledText styledText;
@@ -121,6 +120,8 @@ public class OperationEditDialog extends Dialog
 	public static final String Operation_TYPE_PARAMS = "Operation type params";
 	
 	public static final String Operation_SUPER_OPERATION = "Super operation";
+	
+	public static final String Operation_OPERATION_BODY = "Operation body";
 	
 	// extracted from a func.
 	public OperationDataStructure dataStructure;
@@ -301,22 +302,6 @@ public class OperationEditDialog extends Dialog
 		_inputTypeParameters = tab.getViewer();
 	}
 	
-	/** Create the text component where user will write its code */
-	private Text createEditorText(Composite composite) {
-        int style = SWT.SINGLE | SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | 
-        SWT.FULL_SELECTION | SWT.HIDE_SELECTION;
-        
-        Text textcode = new Text(composite,style);
-        textcode.setText("Ecris ton code là");
-        
-        GridData gridData = new GridData(GridData.FILL_BOTH);
-        gridData.grabExcessVerticalSpace = true;
-        gridData.horizontalSpan = 2;
-        textcode.setLayoutData(gridData);   
-		gridData.minimumHeight = 100;
-        return textcode;
-    }
-	
 	/**
 	 * Create the fourth tab item, dedicated to the edition of the operation body.
 	 */
@@ -329,7 +314,6 @@ public class OperationEditDialog extends Dialog
 		fourthItem.setControl(composite);
 		
 		// Add layout on composite
-		//
 		composite.setLayout(new GridLayout(1, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
@@ -338,7 +322,10 @@ public class OperationEditDialog extends Dialog
 		bodyComposite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		// Create the mini-editor
 		createBodyEditor(bodyComposite);
-		createInjectButton(composite);
+		
+		// FIXME : ultra-buggy!!!! -> the checker does not check the correct version of the model (the correct one is
+		// the one in memory, not the serialized one.
+		//createInjectButton(composite);
 	}
 	
 	/**
@@ -425,7 +412,10 @@ public class OperationEditDialog extends Dialog
 	    styledText.setText((String)KermetaUtils.getDefault().getPrettyPrinter().accept(_operation));
 	    styledText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				System.err.println("Be carefull!! a text has been modified!!" + styledText.getText());
+				//System.err.println("Be carefull!! a text has been modified!!" + styledText.getText());
+				dataStructure.setOperationBody(styledText.getText());
+				//((OperationDataStructure)_data.get(Operation_INPUTS)).
+				//setOperationBody((String)KermetaUtils.getDefault().getPrettyPrinter().accept(ExpressionParser.parse_operation2body(unit, styledText.getText())));
 			}	    	
 	    });
 	    // To add a special modif : do it through the commented method, below
@@ -456,6 +446,7 @@ public class OperationEditDialog extends Dialog
 				// translate and inject
 				String textError = "";
 				System.err.println("Parsing now the operation : " + _operation.eResource().getURI().toString());
+				
 				KermetaUnit unit = EditorReconcilingStrategy.parse(_operation.eResource().getURI().toString());
 				
 				// TODO : add a try/catch exception so that the user cannot save an invalid body?
@@ -464,7 +455,9 @@ public class OperationEditDialog extends Dialog
 				{	// reset the errorView
 					errorItem.setImage(StructureImageRegistry.getImage("NOERROR"));
 					errorView.setText("");
-					_operation.setBody(ExpressionParser.parse_operation2body(unit, styledText.getText()));
+					// get OPERATION_INPUTS that contains body, owned parameters and onwed type params
+					dataStructure.
+						setOperationBody((String)KermetaUtils.getDefault().getPrettyPrinter().accept(ExpressionParser.parse_operation2body(unit, styledText.getText())));
 				}
 				catch (Error error)
 				{
@@ -477,11 +470,10 @@ public class OperationEditDialog extends Dialog
 					//System.err.println("Take a look at the tab Error Parse error in the body : " + error + "\n\n" + error.getMessage());
 				}
 				// Reparse (not very optimal..) the whole unit to check the operation consistency according to its context
-				unit = EditorReconcilingStrategy.parse(_operation.eResource().getURI().toString());
 				unit.messages.getAllErrors().clear();
+				unit = KermetaUtils.getDefault().resetKermetaUnit(_operation.eResource().getURI().toString());
 				if (unit.messages.getAllErrors()!=null && unit.messages.getAllErrors().size()>0)
 				{
-					System.err.println("Ertrorrs!");
 					errorItem.setImage(StructureImageRegistry.getImage("ERROR"));
 					textError += "\n" + unit.messages.getAllMessagesAsString();
 					errorView.setText(textError);
@@ -524,6 +516,7 @@ public class OperationEditDialog extends Dialog
 	
 	/**
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
+	 * Update the intermediate operation data structure (OperationDataStructure)
 	 */
 	protected void okPressed()
 	{
@@ -533,11 +526,13 @@ public class OperationEditDialog extends Dialog
 		{
 			_data.put(Operation_RETURN_TYPE, _types.get(_returnTypeComboBox.getSelectionIndex() - 1));
 		}
+		// Input
 		_data.put(Operation_INPUTS, _inputParameters.getData());
 		if (_operationSuperOperationComboBox.getSelectionIndex() != 0)
 		{
 			_data.put(Operation_SUPER_OPERATION, _supertypes.get(_operationSuperOperationComboBox.getSelectionIndex() -1));
 		}
+		
 		super.okPressed();
 	}
 	

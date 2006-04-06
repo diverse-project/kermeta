@@ -17,9 +17,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -35,9 +37,12 @@ import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 /*
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -67,6 +72,9 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
  */
 public class KermetaUtils {
 
+	/** Logger to get the error of this launcher */
+    final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.GraphicalEditor"); 
+    
 	/** Standard unit */
 	protected KermetaUnit standardUnit;
 	/** 
@@ -97,6 +105,33 @@ public class KermetaUtils {
 			kermetaUtils = new KermetaUtils();
 		}
 		return kermetaUtils;
+	}
+	
+	/**
+	 * Reset the KermetaUnit related to the kermeta program being edited
+	 */
+	public KermetaUnit resetKermetaUnit(String platformPath)
+	{
+		KermetaUnit result = null;
+		org.eclipse.core.resources.IFile file = KermetaPlugin.getIFileFromString(platformPath);
+		String uri = "platform:/resource" + file.getFullPath().toString();
+		KermetaUnitFactory.getDefaultLoader().unloadAll();
+		try {
+			result = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
+			result.load();
+			result.typeCheck(null);
+			result.constraintCheck(null);
+		}
+		catch(Throwable e) {
+			KermetaUnit.internalLog.error("load error ", e);
+			if (result == null) {
+				e.printStackTrace();
+				return null;
+			}
+			else if (!result.messages.unitHasError)
+				result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null, null));
+		}
+		return result;
 	}
 	
 	/** Get all the type definitions that belong to the same package as the one to which
@@ -284,10 +319,9 @@ public class KermetaUtils {
 	 * A method that loads the Kermeta standard library. This should be called only once, 
 	 * when the editor is launched. Standard Lib is not intended to
 	 * dynamically change, so we did not consider this eventuality.
-	 *  */
+	 */
 	public KermetaUnit loadStdLib()
-	{
-	    
+	{   //KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
 	    KermetaUnitFactory.getDefaultLoader().unloadAll();
 	    KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(KermetaUnit.STD_LIB_URI);
 	    unit.load();
@@ -385,7 +419,7 @@ public class KermetaUtils {
 		}
 		// FIXME : this does not seem to work!! seems to be 2 frameworks loaded in memory, but
 		// where???
-		if (getStdLibTypeDefinitions().contains(typedef)) System.err.println("Kikou");
+		//if (getStdLibTypeDefinitions().contains(typedef)) System.err.println("Found a typedef :"+ typedef.getName());
 		// Typedef is null when type is note fr.irisa.triskell.kermeta.language.structure.Class or not TypeDefinition....
 		if (typedef_qname!=null)
 		{
@@ -440,7 +474,7 @@ public class KermetaUtils {
 			// to a ClassDefinition!
 			if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class) 
 			{
-				System.err.println("source:" + classdef.getName() + supertypedefname);
+				//System.err.println("source:" + classdef.getName() + supertypedefname);
 				if (standardUnit.getQualifiedName(((fr.irisa.triskell.kermeta.language.structure.Class)type).getTypeDefinition()).equals(supertypedefname))
 					result = type;
 			}

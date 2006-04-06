@@ -1,4 +1,4 @@
-/* $Id: UpdateOperationCommand.java,v 1.3 2006-04-05 18:58:52 zdrey Exp $
+/* $Id: UpdateOperationCommand.java,v 1.4 2006-04-06 11:12:20 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -30,6 +30,7 @@ import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 
 /**
  * Class that create a command in order to update the "Operation" elements.
@@ -82,7 +83,6 @@ public class UpdateOperationCommand extends Command
         _returnType = (Type) data.get(OperationEditDialog.Operation_RETURN_TYPE);
         _superTypeOperation = (fr.irisa.triskell.kermeta.language.structure.Class) data.get(OperationEditDialog.Operation_SUPER_OPERATION);
         _dataStructure = (OperationDataStructure) data.get(OperationEditDialog.Operation_INPUTS);
-
         _voidType = StructureFactory.eINSTANCE.createVoidType();
     }
 
@@ -95,20 +95,25 @@ public class UpdateOperationCommand extends Command
     }
 
     /**
-     * Perform update for operation
+     * Perform update for operation.
+     * - sets the name, parameters, type parameters, return type, and body stored in the intermediate OperationDataStructure
+     * into the operation 
+     * The injection of the body requires a checking : inside this method, a kermeta unit is reset so that we can check if the
+     * operation is well-formed or not.
      * @see org.eclipse.gef.commands.Command#execute()
      */
     public void execute()
     {
     	// TODO : If user clicked on ok and actually did nothing...
-    	
+
+        _operation.getContainedType().clear();
     	
     	// The operation name
         _operation.setName(_name);
         //Type ftype = KermetaUtils.getDefault().createTypeForTypeDefinition(_returnType);
         // TypeDefinition is ClassDefinition or DataType
         // The return type
-        _operation.setType(_returnType==null?(Type)KermetaUtils.getDefault().getStandardUnit().getTypeDefinitionByName("Void"):_returnType);
+        _operation.setType(_returnType==null?_voidType:_returnType);
         
         if (_superTypeOperation!=null)
         	_operation.setSuperOperation(KermetaUtils.getDefault().getOperationByName(
@@ -118,8 +123,6 @@ public class UpdateOperationCommand extends Command
         //_operation.setIsAbstract(true);
         
         // Perform update for input parameters
-
-        _operation.getContainedType().clear();
        
         _operation.getTypeParameter().clear();
         // Perform update for type parameters
@@ -158,7 +161,15 @@ public class UpdateOperationCommand extends Command
             _operation.getOwnedParameter().add(parameter);
             
         }
-         
+        //_operation.setBody(ExpressionParser.parse_operation2body(unit, styledText.getText()));
+        // We reset the KermetaUnit that contains the current operation!
+        /*System.err.println("---> " + 
+        		_dataStructure.getOperationBody()
+        );*/
+        _operation.setBody(ExpressionParser.parse_operation2body(
+        		KermetaUtils.getDefault().resetKermetaUnit(_operation.eResource().getURI().toString()), 
+        		_dataStructure.getOperationBody()));
+        
         // Fix the type containments once the Operation element is complete -> not optimal
         KermetaUtils.getDefault().getTypeFixer().accept(_operation);
         

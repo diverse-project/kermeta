@@ -1,4 +1,4 @@
-/* $Id: OperationDataStructure.java,v 1.1 2006-03-07 17:30:32 zdrey Exp $
+/* $Id: OperationDataStructure.java,v 1.2 2006-04-06 11:12:20 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Feb 20, 2006
  * Authors       : zdrey
  */
-/* $Id: OperationDataStructure.java,v 1.1 2006-03-07 17:30:32 zdrey Exp $
+/* $Id: OperationDataStructure.java,v 1.2 2006-04-06 11:12:20 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Type;
@@ -40,6 +41,7 @@ public class OperationDataStructure
     /** A collection for ParameterObject objects */
     private ArrayList<ParameterObject> _dataOwnedParameters;
     private ArrayList<ParameterObject> _dataTypeParameters;
+    private String _operationBody;
 //  Constant to add the corrects elements to the operation data structure 
 	public static final String FOPERATION_owned_parameter = "ownedParameter";
 	public static final String FOPERATION_type_parameter = "typeParameter";
@@ -57,6 +59,17 @@ public class OperationDataStructure
         {
             addAll(operation.getOwnedParameter());
             addAllTypeParameters(operation.getTypeParameter());
+            if (operation.getBody()!=null)
+            {	
+            	try
+            	{
+            		setOperationBody((String)KermetaUtils.getDefault().getPrettyPrinter().accept(operation));
+            	}
+            	catch (Error e)
+            	{
+            		KermetaUtils.internalLog.error("The body of the operation could not be set :");
+            	}
+            }
         }
     }
 
@@ -195,13 +208,21 @@ public class OperationDataStructure
     {
         ((ParameterObject) object).setType(type);
     }
-    /**
-     * 
-     * @param object
-     * @param type
-     */
-    public void setTypeDefinition(Object object, Type type)
-    {
-        //((ParameterObject) object).setTypeDefinition();
-    }
+
+	/**
+	 * @return Returns the _operationBody.
+	 */
+	public String getOperationBody() {
+		return _operationBody;
+	}
+
+	/**
+	 * @param body The _operationBody to set.
+	 */
+	public void setOperationBody(String body) {
+		_operationBody = body;
+	}
+    
+    
+    
 }
