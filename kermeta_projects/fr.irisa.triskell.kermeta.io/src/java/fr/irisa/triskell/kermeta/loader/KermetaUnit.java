@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.53 2006-03-09 08:08:20 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.54 2006-04-06 09:50:44 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Stack;
@@ -21,12 +22,17 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMLMapImpl;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
@@ -48,6 +54,7 @@ import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
@@ -836,7 +843,6 @@ public abstract class KermetaUnit {
 		ArrayList<TypeDefinition> result = new ArrayList<TypeDefinition>();
 		for (Iterator<Package> it = getAllPackages().iterator(); it.hasNext();)
 			result.addAll(it.next().getOwnedTypeDefinition());
-		System.err.println("Number of type defs : " + result.size());
 		return result;
 	}
 
@@ -929,6 +935,7 @@ public abstract class KermetaUnit {
 		        resource_tags = fixPackageTags(p, resource_tags);
 	        }
 	    }
+	        	
 	    // Add the tags registered in tags list to the resource
 	    this.addFTagsToResource(resource, resource_tags);
 	    try {

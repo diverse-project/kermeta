@@ -1,4 +1,4 @@
-/* $Id: TypeContainementFixer.java,v 1.4 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: TypeContainementFixer.java,v 1.5 2006-04-06 09:50:44 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -131,7 +131,7 @@ public class TypeContainementFixer extends KermetaOptimizedVisitor {
 		return super.visitPrimitiveType(node);
 	}
 	
-	protected void addContainedTypes(EList types, TypeContainer container) {
+	public void addContainedTypes(EList types, TypeContainer container) {
 		Iterator it = types.iterator();
 		while(it.hasNext()) {
 			addContainedTypes((Type)it.next(), container);
@@ -141,7 +141,7 @@ public class TypeContainementFixer extends KermetaOptimizedVisitor {
 	
 	
 	
-	protected void addContainedTypes(Type t, TypeContainer container) {
+	public void addContainedTypes(Type t, TypeContainer container) {
 		if (t != null && t.eContainer() == null) {
 			container.getContainedType().add(t);
 			// apply recussivly...
