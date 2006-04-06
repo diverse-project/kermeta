@@ -1,4 +1,4 @@
-/* $Id: Visitors.kmt,v 1.1 2006-04-05 12:15:10 vmahe Exp $
+/* $Id: Visitors.kmt,v 1.2 2006-04-06 09:04:44 vmahe Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -63,8 +63,12 @@ class VisitorPattern
         specPack.eClassifiers.add(abstractVisitor)
         
         // basic method for each of the 2 abstract classes
-        addAcceptOperation( visitableInterface,  abstractVisitor, visitReturnType)   		
-		addVisitOperation(abstractVisitor, visitableInterface, visitReturnType)
+        var acceptOp : ecore::EOperation
+        acceptOp := addAcceptOperation( visitableInterface,  abstractVisitor, visitReturnType)
+        helper.addAnnotation(acceptOp, "kermeta","isAbstract","true")
+		var visitOp : ecore::EOperation
+        visitOp := addVisitOperation(abstractVisitor, visitableInterface, visitReturnType)
+        helper.addAnnotation(visitOp, "kermeta","isAbstract","true")
         
         // execute the pattern on the given package
         applyPattern(pack, visitableInterface, abstractVisitor, visitReturnType)
@@ -171,7 +175,7 @@ class VisitorPattern
 					end
 					// the visitFoo methods in the visitor
 	        		var visitFoo : EOperation init addVisitFooOperation(abstractVisitor, eClass, eClass.name, visitReturnType)
-	        		helper.addAnnotation(visitFoo,"kermeta","isAbstract","true")
+    				helper.addAnnotation(visitFoo,"kermeta","isAbstract","true")
 	        	end
 	    	end
 	    }
