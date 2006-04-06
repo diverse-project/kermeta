@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="0.1.1"
+      version="0.2.0"
       provider-name="IRISA/Triskell"
       image="images/kmt_32.gif">
    <install-handler/>
@@ -32,49 +32,88 @@ GPL license.
    </url>
 
    <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.jface.text"/>
-      <import plugin="org.eclipse.ui.editors"/>
-      <import plugin="org.eclipse.ui.workbench.texteditor"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.ui.views"/>
-      <import plugin="org.eclipse.ui.intro"/>
       <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.emf.common"/>
       <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.jdt"/>
       <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="org.eclipse.ui.cheatsheets"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.externaltools"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.intro"/>
+      <import plugin="org.eclipse.pde"/>
+      <import plugin="org.eclipse.core.variables"/>
+      <import plugin="org.eclipse.jdt.debug.ui"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.core.expressions"/>
+      <import plugin="org.eclipse.team.core"/>
+      <import plugin="org.eclipse.emf.ecore.editor"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.emf.ecore.edit"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.topcased.modeler"/>
+      <import plugin="org.eclipse.emf.validation"/>
+      <import plugin="org.topcased.ocl"/>
+      <import plugin="org.eclipse.core.runtime.compatibility"/>
+      <import plugin="org.eclipse.help"/>
    </requires>
-
-   <plugin
-         id="fr.irisa.triskell.kermeta.documentation"
-         download-size="4200"
-         install-size="4200"
-         version="0.0.8"
-         unpack="false"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.runner"
          download-size="360"
          install-size="700"
-         version="0.1.1"/>
+         version="0.2.0"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta"
          download-size="2500"
-         install-size="4000"
-         version="0.1.1"/>
+         install-size="4570"
+         version="0.2.0"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.texteditor"
          download-size="200"
          install-size="1400"
-         version="0.1.1"/>
+         version="0.2.0"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.touchnavigator"
          download-size="200"
          install-size="200"
+         version="0.0.2"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.graphicaleditor"
+         download-size="186"
+         install-size="186"
          version="0.0.1"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.model.edit"
+         download-size="430"
+         install-size="430"
+         version="0.2.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.documentation"
+         download-size="2837"
+         install-size="2837"
+         version="0.0.0"
          unpack="false"/>
 
 </feature>

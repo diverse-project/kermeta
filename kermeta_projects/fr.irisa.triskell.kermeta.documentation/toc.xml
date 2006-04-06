@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!-- $Id: toc.xml,v 1.10 2006-02-05 21:18:39 dvojtise Exp $ -->
+<!-- $Id: toc.xml,v 1.11 2006-04-06 16:02:16 dvojtise Exp $ -->
 <toc label="KerMeta documentation">
 	<topic label="User documentation">		
 		<topic label="Kermeta manual" href="build/eclipse.help/KerMeta-Manual/index.html"> 
 			<link toc="build/eclipse.help/KerMeta-Manual/toc.xml" />
 		</topic>
-		<topic label="KerMeta Tutorial" href="build/eclipse.help/KerMeta-Tutorial/index.html"> 
+		<!--<topic label="KerMeta Tutorial" href="build/eclipse.help/KerMeta-Tutorial/index.html"> 
 			<link toc="build/eclipse.help/KerMeta-Tutorial/toc.xml" />
-		</topic>	
+		</topic>	-->
 		<topic label="KerMeta user interface" href="build/eclipse.help/KerMeta-UI-UserGuide/index.html"> 
 			<link toc="build/eclipse.help/KerMeta-UI-UserGuide/toc.xml" />
 		</topic>

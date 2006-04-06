@@ -1,4 +1,5 @@
 # $Id:$
 #
-"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/"
-"platform:/resource/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.0.2/eclipse/workspace/fr.irisa.triskell.kermeta/"
+#"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.1.1/eclipse/plugins/fr.irisa.triskell.kermeta_0.1.1/"
+"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.1.1/eclipse/workspace_integration/fr.irisa.triskell.kermeta/"
+"platform:/resource/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.1.1/eclipse/workspace_integration/fr.irisa.triskell.kermeta/"

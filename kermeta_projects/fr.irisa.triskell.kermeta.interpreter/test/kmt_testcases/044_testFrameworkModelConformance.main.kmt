@@ -1,4 +1,4 @@
-/* $Id: 044_testFrameworkModelConformance.main.kmt,v 1.1 2006-03-15 09:39:34 dvojtise Exp $
+/* $Id: 044_testFrameworkModelConformance.main.kmt,v 1.2 2006-04-06 16:04:31 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.interpreter
  * File      : 044_testFrameworkModelConformance.kmt
  * License   : EPL
@@ -74,7 +74,7 @@ class Main inherits kermeta::kunit::Test
     end
     
     /**
-     * Verify that we have all the classes form the model into the frmaework
+     * Verify that we have all the classes form the model into the framework
      */
     operation checkClassifier(eClassifier : EClassifier, kTypeDefinition : TypeDefinition) is do
     	var eClass : EClass
@@ -98,11 +98,31 @@ class Main inherits kermeta::kunit::Test
     
     operation checkClass(eClass : EClass, kClass : ClassDefinition) is do
     	assertTrueWithMsg( not kClass.isVoid, 
-    		"assert failed: the EClass " + eClass.name + "has no equivalent in the framework")	// the given 
+    		"assert failed: the EClass " + eClass.name + " has no equivalent in the framework")	// the given 
   		assertTrueWithMsg(eClass.name.equals(kClass.name), 
-    		"assert failed: the EClass " + eClass.name + "has no equivalent in the framework")
+    		"assert failed: the EClass " + eClass.name + " has no equivalent in the framework")
   		stdio.writeln("  EClass " + eClass.name + " retreived")
+  		
+  		// print known type in the framework
+  		stdio.writeln("  Known properies:")
+  		kClass.allOwnedAttribute.each{ c | stdio.writeln("     " + kClass.name+ "." + c.name) }
+  		eClass.eStructuralFeatures.each{ eFeature | 
+  			var thekProperty : Property
+  			thekProperty ?= kClass.allOwnedAttribute.detect{kProperty | kProperty.name.equals(eFeature.name)}
+			checkProperty(eFeature, thekProperty)			
+  		}
     end
+    
+    
+    operation checkProperty(eStructuralFeature : EStructuralFeature, kProperty : Property) is do
+    	assertTrueWithMsg( not kProperty.isVoid, 
+    		"assert failed: the EStructuralFeature " + eStructuralFeature.eContainingClass.name + "." + eStructuralFeature.name + " has no equivalent in the framework")	// the given 
+  		assertTrueWithMsg(eStructuralFeature.name.equals(kProperty.name), 
+    		"assert failed: the EStructuralFeature " + eStructuralFeature.name + " has no equivalent in the framework")
+  		
+    end
+    
+ 
     
     /** 
      * Retreives the Kermeta root package by reflexivity

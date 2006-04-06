@@ -4,7 +4,7 @@ Bundle-Name: kmEditor
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.graphicaleditor; singleton:=true
 Bundle-Version: 0.0.1
 Bundle-Activator: fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin
-Bundle-Vendor: Topcased
+Bundle-Vendor: Topcased / INRIA
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.edit,
@@ -17,5 +17,9 @@ Require-Bundle: org.eclipse.core.runtime,
  org.topcased.modeler,
  fr.irisa.triskell.kermeta,
  fr.irisa.triskell.kermeta.model.edit,
- org.eclipse.emf.validation
+ org.eclipse.emf.validation,
+ org.eclipse.jface.text,
+ org.eclipse.ui.editors,
+ fr.irisa.triskell.kermeta.texteditor,
+ org.topcased.ocl
 Eclipse-AutoStart: true

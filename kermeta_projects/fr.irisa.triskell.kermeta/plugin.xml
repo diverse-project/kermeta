@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta"
    name="Kermeta Workbench"
-   version="0.1.1"
+   version="0.2.0"
    provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.plugin.KermetaPlugin">
    <runtime>
@@ -144,6 +144,18 @@
       <fileTypes
             extension="ecore"
             type="text"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage"
+            uri="http://kermeta_language_behavior/kermeta.ecore"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="fr.irisa.triskell.kermeta.language.structure.StructurePackage"
+            uri="http://kermeta_language_structure/kermeta.ecore"/>
    </extension>
 
 </plugin>

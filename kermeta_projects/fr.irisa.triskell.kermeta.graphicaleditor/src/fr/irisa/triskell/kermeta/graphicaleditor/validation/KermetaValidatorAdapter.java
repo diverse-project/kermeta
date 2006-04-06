@@ -1,4 +1,4 @@
-/* $Id: KermetaValidatorAdapter.java,v 1.4 2006-04-05 18:58:54 zdrey Exp $
+/* $Id: KermetaValidatorAdapter.java,v 1.5 2006-04-06 16:03:42 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ExtendedKermetaValidatorAdapter.java
  * License    : EPL
@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ocl.query.QueryFactory;
+//import org.eclipse.emf.ocl.query.QueryFactory;
 import org.eclipse.emf.validation.internal.EMFModelValidationPlugin;
 import org.eclipse.emf.validation.internal.EMFModelValidationStatusCodes;
 import org.eclipse.emf.validation.internal.emfadapter.EMFValidationContextAdapter;

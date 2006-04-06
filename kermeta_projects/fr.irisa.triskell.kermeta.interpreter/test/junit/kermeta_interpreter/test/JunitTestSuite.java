@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.19 2005-12-09 09:27:07 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.20 2006-04-06 16:04:30 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -96,7 +96,7 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","017_testSuperFeaturesCalls.main.kmt" );
 
-		//testWithFile("test/kmt_testcases","018_testExceptions.main.kmt" );
+		testWithFile("test/kmt_testcases","018_testExceptions.main.kmt" );
 
 		testWithFile("test/kmt_testcases","019_ReflectionTest.main.kmt" );
 
@@ -120,7 +120,7 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","029_testClone1.main.kmt" );
 
-//	testWithFile("test/kmt_testcases","029_testClone2.main.kmt" );
+		testWithFile("test/kmt_testcases","029_testClone2.main.kmt" );
 
 		testWithFile("test/kmt_testcases","030_kermetaSignature.main.kmt" );
 
@@ -149,6 +149,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/kmt_testcases","042_testSubPackage.main.kmt" );
 
 		testWithFile("test/kmt_testcases","043_testUML2km.main.kmt" );
+
+		testWithFile("test/kmt_testcases","044_testFrameworkModelConformance.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment

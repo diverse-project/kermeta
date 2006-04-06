@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.11 2006-04-04 12:21:19 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.12 2006-04-06 16:04:31 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -138,11 +138,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         internalLog.debug("URI : " + unit_uripath +  "; meta : " + p_metamodel_uri);
     	URI u = this.resolveURI(p_metamodel_uri, unit_uripath);
         // load resource
-    	internalLog.debug("will register *.ecore to Factory.Registry, known extensions are :");
-    	Iterator it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
-    	while(it.hasNext()) {
-    		internalLog.debug("  "+it.next().toString());
-    	}
+    	logEMFRegistryContent();
     	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
     	ResourceSet resource_set = new ResourceSetImpl();
     	Resource resource = resource_set.getResource(u, true);
@@ -156,6 +152,15 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	
 		return resource;
     }
+
+    /** print the content of the EMF Registry */
+	public void logEMFRegistryContent() {
+		internalLog.debug("Factory.Registry known extensions are :");
+    	Iterator it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
+    	while(it.hasNext()) {
+    		internalLog.debug("  "+it.next().toString());
+    	}
+	}
     
     /**
      * Load this RuntimeUnit
@@ -170,9 +175,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    KermetaUnit kunit =  unit.getContentMap().getFactory().getMemory().getUnit();
 		try {
         	// Load resource
-			
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
-			ResourceSet resourceset = new ResourceSetImpl();
+
 			
 			// Get URI of the unit correpsonding to the model to be loaded
 			String kunit_uri = kunit.getUri();
@@ -183,7 +186,13 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	URIConverterImpl.URI_MAP.put(URI.createURI("truc/"),
 	    			URI.createURI("machin/"));
 	    	String s = URIConverterImpl.URI_MAP.toString();*/
-	    	
+
+			// register the extension of this uri into EMF
+			registerEMFextensionToFactoryMap(kunit_uri);
+			//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
+			ResourceSet resourceset = new ResourceSetImpl();
+
+	        
 	    	if(ENABLE_EMF_DIAGNOSTIC) {
 		    	Map map = URIConverterImpl.URI_MAP;
 		    	Iterator mapIt = map.entrySet().iterator();
@@ -215,6 +224,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    		{
 	    			String errmsg ="Not able to create a resource for URI: "+u ;
 	    			internalLog.error(errmsg );
+	    	    	logEMFRegistryContent();
 	    			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
 		        			errmsg,	interpreter, memory, null);
 	    		}
@@ -299,6 +309,22 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			}
 		}
     }
+
+	private void registerEMFextensionToFactoryMap(String kunit_uri) {
+		String ext = kunit_uri.substring(kunit_uri.lastIndexOf(".")+1);
+		internalLog.debug("registering extension:" + ext);
+		logEMFRegistryContent();
+		
+		//
+		if (! Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().contains(ext)){
+			internalLog.debug("registering extension: " + ext);		
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
+		}
+		if (! Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().contains("ecore")){
+			internalLog.debug("registering extension: ecore");
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
+		}
+	}
     
 	/**
 	 * Save this RuntimeUnit as an XMIModel (EMFModel)
@@ -490,9 +516,13 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		    	loadMetaModelResource(metamodel_uri);
 		    	// look into the mm if the given object can be retreived, then get its real qualified name
 		    	EPackage mmPackage = getEPackageFromNsUri(nsuri);
-		    	
-		    	result = getEQualifiedName(mmPackage);
-		    	this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization
+		    	if (mmPackage == null) {
+		    		internalLog.warn("Not able to retreive nsuri: " + nsuri + " into metamodel "+ metamodel_uri);		    		
+		    	}
+		    	else {
+		    		result = getEQualifiedName(mmPackage);
+		    		this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization
+		    	}
 	    	}
 	    	else
 	    		result = packageQualifiedName;

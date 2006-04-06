@@ -6,10 +6,39 @@
 
 <body>
 <!--
-$Id: history.html,v 1.9 2006-01-30 13:50:49 dvojtise Exp $
+$Id: history.html,v 1.10 2006-04-06 16:06:13 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
+<h2 class="Heading">V0.2.0 (07/04/2006)</h2>
+<h3>New features</h3>
+<ul>
+  <li>#147;	<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=147&group_id=32&atid=208">Dedicated Graphical editor for Kermeta</a> This is the first version of a graphical editor for Kermeta (generated with TopcaseD) feel free to report any missing feature and bugs ...</li>
+  <li>#255;	<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=255&group_id=32&atid=208">Metamodel of kermeta km file is not the same as internal kermeta view</A> We have done a big refactoring to the internal EMF structure so it will store kermeta models (ie. *.km files) with exactly the same representation as the one viewed from the reflexivity within Kermeta. 
+   Please note that older km file are no longer compatible, you have to regenerate them
+  </li>
+</ul>
+<h3>Bug fixed</h3>
+<ul>
+	<li>#328; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=328&group_id=32&atid=205">Round trip kmt2ecore2kmt fails if there are parameters in the operations</a></li>	
+	<li>#419; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=419&group_id=32&atid=205">problem with the instances when loading an ecore model</a></li>	
+	<li>#454; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=454&group_id=32&atid=205">nsURI/nsPrefix problems when generating ecore from kermeta</a></li>	
+	<li>#476; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=476&group_id=32&atid=205">loaded ecore models and instances are uncomplete</a></li>	
+	<li>#484; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=484&group_id=32&atid=205">kmt2ecore: pb when a reference, attribute or operation type is not in the generated ecore file</a></li>	
+	<li>#485; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=485&group_id=32&atid=205">kmt2ecore should generate only the elements of the current kmt file</a></li>	
+	<li>#489; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=489&group_id=32&atid=205">No Ns-Uri for subpackages in generated ecore files</a></li>	
+	<li>#495; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=495&group_id=32&atid=205">ecore properties are not implemented in ecore.kmt</a></li>	
+	<li>#500; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=500&group_id=32&atid=205">ecore2kmt doesn't use the generic type annotations to generate the kermeta code</a></li>		
+	<li>#532; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=532&group_id=32&atid=205">Spelling errors in the kermeta metamodel</a></li>	
+	<li>#539; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=539&group_id=32&atid=205">Bug when raising an object that is not an exception</a></li>	
+	<li>#562; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=562&group_id=32&atid=205">	require "bla.ecore" containing properties using keywords adds incorrect ~ on the property name.</a></li>
+	<li>#577; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=577&group_id=32&atid=205">problems when trying to generate ecore file</a></li>		
+</ul>
+<h3>Improvements</h3>
+<ul>
+  <li>Some improvements in the TouchNavigator (graphical improvement and no more hang up on start of the view)</li>
+</ul>
+
 <h2 class="Heading">V0.1.1 (30/01/2006)</h2>
 <h3>New features</h3>
 <ul>
