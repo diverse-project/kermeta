@@ -18,6 +18,8 @@ import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * ClassDefinition restore connection command<br>
@@ -219,10 +221,20 @@ public class ClassDefinitionRestoreConnectionCommand extends
 			if (obj.getType() != null
 					&& !KermetaUtils.getDefault().isStandardType(obj.getType())
 					&& !KermetaUtils.getDefault()
-							.isPrimitiveType(obj.getType())) {
+							.isPrimitiveType(obj.getType())
+						) {
 				Property edgeObject = (Property) obj;
+				ClassDefinition edgecdef = null;
+				Boolean typeequals = false;
+				if (edgeObject.getType() instanceof ClassImpl)
+				{
+					edgecdef = (ClassDefinition)((ClassImpl)edgeObject.getType()).getTypeDefinition();
+					String edgeclassname = KMTHelper.getQualifiedName(edgecdef);
+					String targetname = KMTHelper.getQualifiedName(targetObject);
+					typeequals = targetname.equals(edgeclassname);
+				}
 				// The opposite of the OwningClass is OwnedAttribute.
-				if (sourceObject.equals(edgeObject.getOwningClass())
+				if (typeequals==true
 						&& sourceObject.getOwnedAttribute()
 								.contains(edgeObject)) {
 					// check if the relation does not exists yet
