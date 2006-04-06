@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.13 2006-03-30 16:07:25 zdrey Exp $
+/* $Id: ECore2Kermeta.java,v 1.14 2006-04-06 09:51:30 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ECore2Kermeta.java
 * License : EPL
@@ -59,6 +59,8 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
+import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
@@ -379,6 +381,11 @@ public class ECore2Kermeta extends EcoreVisitor {
         
         acceptList(node.getEParameters());
         
+        // has the operation an "implicit" super operation (not defined in the KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS...)?
+        // FIXME This slows the conversion...
+        EOperation superop = findSuperOperation(node);
+        if (superop != null) current_op.setSuperOperation((Operation)accept(superop));
+        
         // put the parameters and the parameters types in the current context so the operation body that is
         // hosted in the operation annotation can be parsed and type checked correctly.
         unit.pushContext();
@@ -393,6 +400,52 @@ public class ECore2Kermeta extends EcoreVisitor {
 		unit.popContext();
     	
         return current_op;
+    }
+    
+    /**
+     * Search if a super operation of the given operation exists in the super classes of the operation owning  class
+     * @param node
+     * @return false if a super operation was not found, true otherwise 
+     */
+    protected EOperation findSuperOperation(EOperation node)
+    {
+    	boolean isFound = false;
+    	EOperation result = null; 
+    	EClass owningclass = node.getEContainingClass();
+    	Iterator it = owningclass.getEAllSuperTypes().iterator();
+    	while (it.hasNext() && isFound == false)
+    	{
+    		EClass next = (EClass)it.next();
+    		// Get all the operations, find the one that has the same signature as the given operation
+    		EList operations = next.getEOperations();
+    		Iterator<EOperation> itop = operations.iterator(); 
+    		while (itop.hasNext() && isFound == false)
+    		{
+    			EOperation op = itop.next();
+    			if (op.getName().equals(node.getName()))
+    			{
+    				List<EParameter> params1 = op.getEParameters();
+					List<EParameter> params2 = node.getEParameters();
+    				if (params1.size() == params2.size())
+    				{
+    						Iterator<EParameter> it1 = params1.iterator();
+    						int ind2 = 0;
+    						isFound = true;
+    						// The parameters are assumed to be put in the right order
+    						// We stop as soon as we find a non conform parameter.
+    						while (it1.hasNext() && isFound==true)
+    						{
+    							EParameter p1 = it1.next();	EClassifier typeA = p1.getEType(); 
+    							EParameter p2 = it1.next();	EClassifier typeB = params2.get(ind2).getEType();
+    							if (typeA!=typeB) isFound = false;
+    							ind2 += 1;
+    						}
+    						if (isFound == true) result = op;
+    				}
+    			}
+    		}
+    	}
+    	return result;
     }
     
     public Object visit(EParameter node) {
@@ -493,8 +546,7 @@ public class ECore2Kermeta extends EcoreVisitor {
     	}
     	
     	else if (node.getSource().equals(KM2Ecore.KMT2ECORE_ANNOTATION_TYPEPARAMETER))
-    	{
-    		
+    	{	
     		EMap map = node.getDetails();
     		List<TypeVariable> params = new ArrayList<TypeVariable>();
     		Iterator<String> it = map.keySet().iterator();
@@ -509,6 +561,15 @@ public class ECore2Kermeta extends EcoreVisitor {
     		if (isClassTypeOwner==true) current_classdef.getTypeParameter().addAll(params);
     		// for current_op
     		else current_op.getTypeParameter().addAll(params);
+    	}
+    	else if (node.getSource().equals(KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS))
+    	{
+    		result = (String)node.getDetails().get(KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS);
+    	    // Set the context necessary for the operation to be parsed properly (at least, put the parameters
+    	    // in the symbol list.
+    	    
+    	    // Parse and inject
+    	    this.current_op.setSuperOperation((Operation)ExpressionParser.parse(unit, result));
     	}
     	return result;
     }
