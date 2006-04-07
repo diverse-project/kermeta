@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.2 2006-03-31 17:12:52 zdrey Exp $
+/* $Id: OperationChecker.java,v 1.3 2006-04-07 14:38:12 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -18,8 +18,6 @@ package fr.irisa.triskell.kermeta.constraintchecker;
 import java.util.Iterator;
 import java.util.List;
 
-import sun.management.counter.Units;
-
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -27,10 +25,7 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
-import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
@@ -257,10 +252,12 @@ public class OperationChecker extends AbstractChecker {
 			// TypeEqualityChecker.equals is not correct, since typeA and typeB are != in memory
 			//isConform = (((ClassImpl)t1).getTypeDefinition().equals(((ClassImpl)t2).getTypeDefinition()));
 		}
-		if (op1.getType()!=null && op1.getType()!=null)
-			message += "<"+pprinter.accept(op1.getType()) + "> != <" + pprinter.accept(op2.getType())+">"
-			+ op1.getType() + "!=" + op2.getType() + "op1:" + op1.getName();
-		if (!isConform) addProblem(ERROR, message, op1);
+		if (!isConform){
+			if (op1.getType()!=null && op1.getType()!=null)
+				message += "<"+pprinter.accept(op1.getType()) + "> != <" + pprinter.accept(op2.getType())+">"
+				+ op1.getType() + "!=" + op2.getType() + "op1:" + op1.getName();			
+			addProblem(ERROR, message, op1);
+		}
 		return isConform;
 	}
 	
