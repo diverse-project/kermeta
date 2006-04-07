@@ -34,7 +34,7 @@ class Main
 		var c : kermeta::language::structure::ClassDefinition 
 	    var mc : kermeta::language::structure::Class
 	    mc ?= kmlogo.getMetaClass  
-	    c ?= mc.classDefinition
+	    c ?= mc.typeDefinition
 	    
 //		p ?= c.container
 		
