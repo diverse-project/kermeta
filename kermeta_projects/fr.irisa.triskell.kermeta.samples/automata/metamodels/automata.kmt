@@ -242,7 +242,8 @@ class AutomatonHelper
 	 */  
     operation saveEMFAutomaton(repository : EMFRepository, a : FiniteAutomaton, uri : String, mmuri : String) : FiniteAutomaton is do
 		if AutomatonHelper.new.conformityChecker(a) == true then 
-	    	var resource : EMFResource init repository.createResource(uri , mmuri)
+	    	var resource : EMFResource 
+		    resource ?= repository.createResource(uri , mmuri)
 	    	resource.instances.add(a)
 	    	//a.stateSet.each { z | resource.instances.add(z)}
 	    	resource.save()
@@ -253,7 +254,8 @@ class AutomatonHelper
     end
     
      operation loadEMFAutomaton(repository : EMFRepository, uri : String, mmuri : String) : FiniteAutomaton is do
-    	var resource : EMFResource init repository.createResource(uri , mmuri)
+    	var resource : EMFResource 
+		resource ?= repository.createResource(uri , mmuri)
     	resource.load
     	var instances : Set<Object> init resource.instances
     	result ?= instances.detect { e | FiniteAutomaton.isInstance(e)}
