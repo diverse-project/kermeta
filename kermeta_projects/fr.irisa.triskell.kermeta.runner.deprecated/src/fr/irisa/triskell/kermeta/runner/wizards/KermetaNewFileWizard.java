@@ -1,4 +1,4 @@
-/* $Id: KermetaNewFileWizard.java,v 1.8 2005-06-10 16:00:16 zdrey Exp $
+/* $Id: KermetaNewFileWizard.java,v 1.9 2006-04-08 13:32:03 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizard.java
  * License: GPL
@@ -28,12 +28,15 @@ import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.CoreException;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import org.eclipse.ui.*;
-import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
+//import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.internal.dialogs.DialogUtil;
-import org.eclipse.ui.internal.dialogs.NewWizard;
+//import org.eclipse.ui.internal.dialogs.NewWizard;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 
 /**
@@ -284,7 +287,15 @@ public class KermetaNewFileWizard extends  Wizard implements INewWizard {
 	 */
 	private String createTemplate()
 	{
+		Date d = new Date(System.currentTimeMillis());
+		
 	    String template_string = 
+	    	"/* $Id: KermetaNewFileWizard.java,v 1.9 2006-04-08 13:32:03 dvojtise Exp $\n"+ 
+	    	" * Creation date: " + DateFormat.getDateInstance(DateFormat.LONG, Locale.US).format(d)+ "\n"+
+	    	" * License:\n"+
+	    	" * Copyright:\n"+
+	    	" * Authors:\n"+
+	    	" */\n"+
 	        "@mainClass \""+packageTextString+"::"+classTextString+"\"\n"+ 
 	        "@mainOperation \""+operationTextString+"\"\n\n\n"+
 	        "package "+packageTextString+";\n\n\n"+
