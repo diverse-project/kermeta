@@ -14,33 +14,25 @@
    </runtime>
 
    <requires>
-      <import plugin="fr.irisa.triskell.kermeta"/>
-      <import plugin="fr.irisa.triskell.kermeta.model.edit" export="true"/>
-   
-      <import plugin="org.eclipse.emf.edit.ui" export="true"/>
-      <import plugin="org.eclipse.ui.ide" export="true"/>
-      <import plugin="org.eclipse.emf.edit" export="true"/>
+      <import plugin="fr.irisa.triskell.kermeta"/>      
+      <import plugin="fr.irisa.triskell.kermeta.model.edit" export="true"/>   
+      <import plugin="org.eclipse.emf.edit.ui" export="true"/>      
+      <import plugin="org.eclipse.ui.ide" export="true"/>      
+      <import plugin="org.eclipse.emf.edit" export="true"/>      
       <import plugin="org.eclipse.core.resources" export="true"/>
       <import plugin="org.eclipse.core.runtime" />
       <import plugin="org.eclipse.emf.ecore.xmi" export="true"/>
-      <import plugin="org.eclipse.emf.ecore" export="true"/>
+      <import plugin="org.eclipse.emf.ecore" export="true"/>      
       <import plugin="org.topcased.modeler"/>
-      <import plugin="org.topcased.modeler.di"/>
+     <!-- <import plugin="org.topcased.modeler.di"/>
       <import plugin="org.topcased.checkresultmodel"/>
-      <import plugin="org.topcased.checkresultmodel.util"/>
+      <import plugin="org.topcased.checkresultmodel.util"/>-->
       <import plugin="org.eclipse.emf.ecore.edit"/>
-      <import plugin="org.eclipse.gmf.runtime"/>
-      <import plugin="org.eclipse.gmf.runtime.notation"/>
-      <import plugin="org.eclipse.gmf.runtime.notation.edit"/>
-      <import plugin="org.eclipse.gmf.runtime.notation.providers"/>
-      <import plugin="org.eclipse.gmf.runtime.draw2d.ui"/>
-      <import plugin="org.eclipse.gmf.runtime.draw2d.ui.render"/>
-      <import plugin="org.topcased.toolkit"/>
-      <import plugin="org.topcased.modeler.generator"/>
-      <import plugin="org.eclipse.gmf.runtime.common.ui"/>
-      <import plugin="antlr"/>
+      <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.topcased.ocl"/>
       <import plugin="org.eclipse.emf.validation"/>
-      <import plugin="org.eclipse.emf.validation.ui"/>
    </requires>
 
    <extension
