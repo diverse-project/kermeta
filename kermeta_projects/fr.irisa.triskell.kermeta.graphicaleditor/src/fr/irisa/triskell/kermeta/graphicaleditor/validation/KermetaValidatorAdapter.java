@@ -1,4 +1,4 @@
-/* $Id: KermetaValidatorAdapter.java,v 1.5 2006-04-06 16:03:42 dvojtise Exp $
+/* $Id: KermetaValidatorAdapter.java,v 1.6 2006-04-10 17:41:36 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ExtendedKermetaValidatorAdapter.java
  * License    : EPL
@@ -102,8 +102,8 @@ public class KermetaValidatorAdapter extends EcoreValidatorAdapter {
 				IFile inputModelFile = KermetaPlugin.getIFileFromString(kermetaUnit.getUri());
 				
 				// Clear the problem view, and recreate it
-				System.err.println("-> inputModelFile : " + inputModelFile);
-				EditorReconcilingStrategy.parse(kermetaUnit.getUri());
+				// System.err.println("-> inputModelFile : " + inputModelFile);
+				EditorReconcilingStrategy.parse(eObject.eResource());
 				/*
 				EditorReconcilingStrategy.clearMarkers(inputModelFile);
 				EditorReconcilingStrategy.createMarkers(inputModelFile, kermetaUnit);*/
