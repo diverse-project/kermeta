@@ -1,0 +1,31 @@
+@mainClass "root_package::OperationReturnTestCase"
+@mainOperation "main"
+
+package root_package;
+
+require kermeta
+require "ClassDiagram.kmt"
+
+using kermeta::standard
+using ClassDiagram
+
+class OperationReturnTestCase inherits kermeta::kunit::TestCase
+{
+	attribute bClass : BClass
+	attribute gClass : ExternClassDiagram::GClass
+	
+	method setUp() is do
+    	bClass := BClass.new
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    // test if the bOperation of the BClass returns a GClass
+    operation testOperationReturn() is do
+    	gClass := bClass.bOperation()
+    	assertTrueWithMsg(gClass.getMetaClass == ExternClassDiagram::GClass,
+    		"The bOperation of the BClass must return a GClass")
+    end
+}

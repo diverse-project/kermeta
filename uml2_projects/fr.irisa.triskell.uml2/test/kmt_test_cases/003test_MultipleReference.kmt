@@ -1,0 +1,49 @@
+@mainClass "root_package::ReferenceTestCase"
+@mainOperation "main"
+
+package root_package;
+
+require kermeta
+require "ClassDiagram.kmt"
+
+using kermeta::standard
+using ClassDiagram
+
+class ReferenceTestCase inherits kermeta::kunit::TestCase
+{
+	attribute bClass : BClass
+	attribute hClass : HClass
+	
+	method setUp() is do
+    	bClass := BClass.new
+    	hClass := HClass.new
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    // the BClass can have a collection of HClasses
+    operation testBSideOfAssociation() is do
+    	var h1 : HClass init HClass.new
+    	bClass.h.add(h1)
+    	assertTrueWithMsg(bClass.h.size == 1,
+    		"The BClass can manage a collection of HClasses")
+    	var h2 : HClass init HClass.new
+    	bClass.h.add(h2)
+    	assertTrueWithMsg(bClass.h.size == 2,
+    		"The BClass can manage a collection of numerous HClasses")
+    end
+    
+    // the HClass can have a collection of BClasses
+    operation testHSideOfAssociation() is do
+    	var b1 : BClass init BClass.new
+    	hClass.b.add(b1)
+    	assertTrueWithMsg(hClass.b.size == 1,
+    		"The HClass can manage a collection of BClasses")
+    	var b2 : BClass init BClass.new
+    	hClass.b.add(b2)
+    	assertTrueWithMsg(hClass.b.size == 2,
+    		"The HClass can manage a collection of numerous BClasses")
+    end
+}

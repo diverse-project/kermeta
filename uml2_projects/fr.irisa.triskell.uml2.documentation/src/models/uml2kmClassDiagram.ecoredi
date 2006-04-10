@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.1">
+  <model href="uml2kmClassDiagram.ecore#/"/>
+  <diagrams position="0,0" size="100,100" name="VisitorDiagram" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="landscape"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="uml2kmClassDiagram.ecore#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="509,174" size="183,69">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.4"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//visitors/UmlElement"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//visitors/UmlElement"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//visitors/UmlElement"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//visitors/UmlElement/accept"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="621,289" size="119,69">
+      <anchorage graphEdge="//@diagrams.0/@contained.2"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//elements/UmlClass"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//elements/UmlClass"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//elements/UmlClass"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//elements/UmlClass/accept"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="Inheritance EditPolicy"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="622,384" size="119,69">
+      <anchorage graphEdge="//@diagrams.0/@contained.4"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//elements/UmlAssociation"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//elements/UmlAssociation"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//elements/UmlAssociation"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//elements/UmlAssociation/accept"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="Inheritance EditPolicy"/>
+      <waypoints>[0, -34, 81, 176]</waypoints>
+      <waypoints>[0, -49, 81, 161]</waypoints>
+      <waypoints>[-81, -49, 0, 161]</waypoints>
+      <waypoints>[-81, -175, 0, 35]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="118,227" size="242,107">
+      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.11"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//visitors/Visitor"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//visitors/Visitor"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//visitors/Visitor"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//visitors/Visitor/visitUmlClass"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//visitors/Visitor/visitUmlAssociation"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//visitors/Visitor/visit[..]"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="206,421" size="242,107">
+      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.9"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//visitors/Uml2KmTranslator"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//visitors/Uml2KmTranslator"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//visitors/Uml2KmTranslator"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//visitors/Uml2KmTranslator/visitUmlClass"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//visitors/Uml2KmTranslator/visitUmlAssociation"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//visitors/Uml2KmTranslator/visit[..]"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.5/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="Inheritance EditPolicy"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="455,583" size="78,41">
+      <anchorage graphEdge="//@diagrams.0/@contained.9"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//KmModel"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//KmModel"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//KmModel"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.8/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//visitors/Uml2KmTranslator/outputModel"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="33"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="25" vDistance="-18"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="329,141" size="82,41">
+      <anchorage graphEdge="//@diagrams.0/@contained.11"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//UmlModel"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//UmlModel"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//UmlModel"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.10/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//visitors/Visitor/inputModel"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="20" vDistance="-20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="23" vDistance="1"/>
+    </contained>
+  </diagrams>
+  <diagrams position="0,0" size="100,100" name="BuilderDiagram" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="landscape"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.ecore.ediagram">
+      <element href="uml2kmClassDiagram.ecore#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="275,121" size="155,107">
+      <anchorage graphEdge="//@diagrams.1/@contained.2 //@diagrams.1/@contained.4 //@diagrams.1/@contained.8"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//builders/Builder"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//builders/Builder"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//builders/Builder"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//builders/Builder/buildClass"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//builders/Builder/buildAssociation"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//builders/Builder/build[..]"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="390,277" size="129,107">
+      <anchorage graphEdge="//@diagrams.1/@contained.2 //@diagrams.1/@contained.6"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//builders/KmBuilder"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//builders/KmBuilder"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//builders/KmBuilder"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//builders/KmBuilder/buildClass"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//builders/KmBuilder/buildAssociation"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//builders/KmBuilder/build[..]"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.1/@anchorage.0 //@diagrams.1/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="Inheritance EditPolicy"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="69,140" size="111,69">
+      <anchorage graphEdge="//@diagrams.1/@contained.4"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//builders/Director"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//builders/Director"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//builders/Director"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//builders/Director/construct"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.3/@anchorage.0 //@diagrams.1/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//builders/Director/builder"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="14" vDistance="8"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="23" vDistance="-1"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="603,310" size="78,41">
+      <anchorage graphEdge="//@diagrams.1/@contained.6"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//KmModel"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//KmModel"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//KmModel"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.1/@anchorage.0 //@diagrams.1/@contained.5/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//builders/KmBuilder/product"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="18" vDistance="-7"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="14" vDistance="8"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="392,425" size="129,107">
+      <anchorage graphEdge="//@diagrams.1/@contained.8 //@diagrams.1/@contained.10 //@diagrams.1/@contained.12"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//builders/UmlBuilder"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//builders/UmlBuilder"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//builders/UmlBuilder"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//builders/UmlBuilder/buildClass"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//builders/UmlBuilder/buildAssociation"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="uml2kmClassDiagram.ecore#//builders/UmlBuilder/build[..]"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.7/@anchorage.0 //@diagrams.1/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="Inheritance EditPolicy"/>
+      <waypoints>[0, -53, 104, 251]</waypoints>
+      <waypoints>[0, -73, 104, 231]</waypoints>
+      <waypoints>[-104, -73, 0, 231]</waypoints>
+      <waypoints>[-104, -250, 0, 54]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="605,458" size="82,41">
+      <anchorage graphEdge="//@diagrams.1/@contained.10"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//UmlModel"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="19"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//UmlModel"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="9"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//UmlModel"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.7/@anchorage.0 //@diagrams.1/@contained.9/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//builders/UmlBuilder/product"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="cardinalityLabel" uDistance="14" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="nameLabel" uDistance="9" vDistance="6"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="471,547" size="277,33">
+      <anchorage graphEdge="//@diagrams.1/@contained.12"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="uml2kmClassDiagram.ecore#//builders/UmlBuilder/%for%20reverse%20engineering%20(not%20yet%20implemented)%"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="2"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="uml2kmClassDiagram.ecore#//builders/UmlBuilder/%for%20reverse%20engineering%20(not%20yet%20implemented)%"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.11/@anchorage.0 //@diagrams.1/@contained.7/@anchorage.0">
+      <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="EAnnotation Link EditPolicy"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

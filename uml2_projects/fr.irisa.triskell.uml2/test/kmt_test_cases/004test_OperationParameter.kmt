@@ -1,0 +1,36 @@
+@mainClass "root_package::OperationParameterTestCase"
+@mainOperation "main"
+
+package root_package;
+
+require kermeta
+require "ClassDiagram.kmt"
+
+using kermeta::standard
+using ClassDiagram
+
+class OperationParameterTestCase inherits kermeta::kunit::TestCase
+{
+	attribute cClass : CClass
+	
+	method setUp() is do
+    	cClass := CClass.new
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    // test if the cOperation of the CClass accept a String
+    operation testOperationParameter() is do
+    	var str : String init "test"
+    	cClass.cOperation(str)
+    	// if passed
+    	assertTrueWithMsg(true,
+    		"The cOperation of the CClass must accept a String")
+    rescue
+    	// if failed
+    	assertTrueWithMsg(false,
+    		"The cOperation of the CClass must accept a String")
+    end
+}

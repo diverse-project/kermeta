@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:uml="http://www.eclipse.org/uml2/1.0.0/UML" xmi:id="_esVloLm_EdqQk--7WnNTbg">
+  <ownedMember xmi:type="uml:StateMachine" xmi:id="_l7JVsLm_EdqQk--7WnNTbg" name="MeetingStateMachine">
+    <region xmi:id="_qlu1gLm_EdqQk--7WnNTbg">
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_r38rULm_EdqQk--7WnNTbg" name="Initial" outgoing="__nfioLnAEdqQk--7WnNTbg"/>
+      <subvertex xmi:type="uml:Pseudostate" xmi:id="_wvV4ELm_EdqQk--7WnNTbg" name="Final" incoming="_TvN7ULnAEdqQk--7WnNTbg" kind="terminate"/>
+      <subvertex xmi:type="uml:State" xmi:id="_z910YLm_EdqQk--7WnNTbg" name="NonCreated" outgoing="_LkA_ALnBEdqQk--7WnNTbg" incoming="__nfioLnAEdqQk--7WnNTbg"/>
+      <subvertex xmi:type="uml:State" xmi:id="__HMHYLm_EdqQk--7WnNTbg" name="Created" incoming="_LkA_ALnBEdqQk--7WnNTbg"/>
+      <subvertex xmi:type="uml:State" xmi:id="_A7NpwLnAEdqQk--7WnNTbg" name="searchingUser"/>
+      <subvertex xmi:type="uml:State" xmi:id="_DedCkLnAEdqQk--7WnNTbg" name="searchingParticipant"/>
+      <subvertex xmi:type="uml:State" xmi:id="_IJbj8LnAEdqQk--7WnNTbg" name="informingNewSpeaker"/>
+      <subvertex xmi:type="uml:State" xmi:id="_P0ZEgLnAEdqQk--7WnNTbg" name="Closing" outgoing="_TvN7ULnAEdqQk--7WnNTbg"/>
+      <transition xmi:id="_TvN7ULnAEdqQk--7WnNTbg" name="Closing to Final" source="_P0ZEgLnAEdqQk--7WnNTbg" target="_wvV4ELm_EdqQk--7WnNTbg">
+        <guard xmi:id="_kptGgLnAEdqQk--7WnNTbg">
+          <specification xmi:type="uml:Expression" xmi:id="_w-3FULnAEdqQk--7WnNTbg">
+            <body>true</body>
+          </specification>
+        </guard>
+      </transition>
+      <transition xmi:id="__nfioLnAEdqQk--7WnNTbg" name="Initial to NonCreated" source="_r38rULm_EdqQk--7WnNTbg" target="_z910YLm_EdqQk--7WnNTbg">
+        <guard xmi:id="_EwYIALnBEdqQk--7WnNTbg">
+          <specification xmi:type="uml:Expression" xmi:id="_FX8eULnBEdqQk--7WnNTbg">
+            <body>true</body>
+          </specification>
+        </guard>
+      </transition>
+      <transition xmi:id="_LkA_ALnBEdqQk--7WnNTbg" name="init" source="_z910YLm_EdqQk--7WnNTbg" target="__HMHYLm_EdqQk--7WnNTbg"/>
+    </region>
+  </ownedMember>
+</uml:Model>

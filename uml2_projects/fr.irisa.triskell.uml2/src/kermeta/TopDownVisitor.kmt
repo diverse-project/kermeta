@@ -1,0 +1,4640 @@
+package topdown_visitor;
+
+require "Uml2.kmt"
+
+using uml2
+using visitors
+
+abstract class TopDownVisitor inherits visitors::Visitor
+{
+	method visitElement(visitable : Element) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitMultiplicityElement(visitable : MultiplicityElement) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+		end
+	method visitNamedElement(visitable : NamedElement) : kermeta::standard::~Void is
+		do
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+		end
+	method visitNamespace(visitable : Namespace) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitOpaqueExpression(visitable : OpaqueExpression) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitValueSpecification(visitable : ValueSpecification) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExpression(visitable : Expression) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.operand.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitComment(visitable : Comment) : kermeta::standard::~Void is
+		do
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.bodyExpression.accept(self)
+		end
+	method visitDirectedRelationship(visitable : DirectedRelationship) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitRelationship(visitable : Relationship) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitClass(visitable : Class) : kermeta::standard::~Void is
+		do
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitType(visitable : Type) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitProperty(visitable : Property) : kermeta::standard::~Void is
+		do
+			visitable.deployment.each{e | do
+					e.accept(self)
+				end}
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.defaultValue.accept(self)
+			visitable.qualifier.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitOperation(visitable : Operation) : kermeta::standard::~Void is
+		do
+			visitable.formalParameter.each{e | do
+					e.accept(self)
+				end}
+			visitable.returnResult.each{e | do
+					e.accept(self)
+				end}
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedParameter.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTypedElement(visitable : TypedElement) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitParameter(visitable : Parameter) : kermeta::standard::~Void is
+		do
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.defaultValue.accept(self)
+		end
+	method visitPackage(visitable : Package) : kermeta::standard::~Void is
+		do
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedMember.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageMerge.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageExtension.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitEnumeration(visitable : Enumeration) : kermeta::standard::~Void is
+		do
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedLiteral.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDataType(visitable : DataType) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitEnumerationLiteral(visitable : EnumerationLiteral) : kermeta::standard::~Void is
+		do
+			visitable.slot.each{e | do
+					e.accept(self)
+				end}
+			visitable.specification.accept(self)
+			visitable.deployment.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitPrimitiveType(visitable : PrimitiveType) : kermeta::standard::~Void is
+		do
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitClassifier(visitable : Classifier) : kermeta::standard::~Void is
+		do
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitFeature(visitable : Feature) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitConstraint(visitable : Constraint) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.specification.accept(self)
+		end
+	method visitLiteralBoolean(visitable : LiteralBoolean) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitLiteralSpecification(visitable : LiteralSpecification) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitLiteralString(visitable : LiteralString) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitLiteralNull(visitable : LiteralNull) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitLiteralInteger(visitable : LiteralInteger) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitLiteralUnlimitedNatural(visitable : LiteralUnlimitedNatural) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitBehavioralFeature(visitable : BehavioralFeature) : kermeta::standard::~Void is
+		do
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.formalParameter.each{e | do
+					e.accept(self)
+				end}
+			visitable.returnResult.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitStructuralFeature(visitable : StructuralFeature) : kermeta::standard::~Void is
+		do
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInstanceSpecification(visitable : InstanceSpecification) : kermeta::standard::~Void is
+		do
+			visitable.deployment.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.slot.each{e | do
+					e.accept(self)
+				end}
+			visitable.specification.accept(self)
+		end
+	method visitSlot(visitable : Slot) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~value.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInstanceValue(visitable : InstanceValue) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitRedefinableElement(visitable : RedefinableElement) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitGeneralization(visitable : Generalization) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitPackageableElement(visitable : PackageableElement) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitElementImport(visitable : ElementImport) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitPackageImport(visitable : PackageImport) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitAssociation(visitable : Association) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedEnd.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitPackageMerge(visitable : PackageMerge) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitStereotype(visitable : Stereotype) : kermeta::standard::~Void is
+		do
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitProfile(visitable : Profile) : kermeta::standard::~Void is
+		do
+			visitable.ownedMember.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageMerge.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageExtension.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitProfileApplication(visitable : ProfileApplication) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExtension(visitable : Extension) : kermeta::standard::~Void is
+		do
+			visitable.ownedEnd.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExtensionEnd(visitable : ExtensionEnd) : kermeta::standard::~Void is
+		do
+			visitable.defaultValue.accept(self)
+			visitable.qualifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.deployment.each{e | do
+					e.accept(self)
+				end}
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitBehavior(visitable : Behavior) : kermeta::standard::~Void is
+		do
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+			visitable.parameter.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedParameterSet.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitBehavioredClassifier(visitable : BehavioredClassifier) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitActivity(visitable : Activity) : kermeta::standard::~Void is
+		do
+			visitable.parameter.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedParameterSet.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+			visitable.edge.each{e | do
+					e.accept(self)
+				end}
+			visitable.group.each{e | do
+					e.accept(self)
+				end}
+			visitable.node.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitPermission(visitable : Permission) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDependency(visitable : Dependency) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitUsage(visitable : Usage) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitAbstraction(visitable : Abstraction) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.mapping.accept(self)
+		end
+	method visitRealization(visitable : Realization) : kermeta::standard::~Void is
+		do
+			visitable.mapping.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitSubstitution(visitable : Substitution) : kermeta::standard::~Void is
+		do
+			visitable.mapping.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitGeneralizationSet(visitable : GeneralizationSet) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitAssociationClass(visitable : AssociationClass) : kermeta::standard::~Void is
+		do
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedEnd.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInformationItem(visitable : InformationItem) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInformationFlow(visitable : InformationFlow) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitModel(visitable : Model) : kermeta::standard::~Void is
+		do
+			visitable.ownedMember.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageMerge.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageExtension.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitConnectorEnd(visitable : ConnectorEnd) : kermeta::standard::~Void is
+		do
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitConnectableElement(visitable : ConnectableElement) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitConnector(visitable : Connector) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~end.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitStructuredClassifier(visitable : StructuredClassifier) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitActivityEdge(visitable : ActivityEdge) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.guard.accept(self)
+			visitable.weight.accept(self)
+		end
+	method visitActivityGroup(visitable : ActivityGroup) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitActivityNode(visitable : ActivityNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitAction(visitable : Action) : kermeta::standard::~Void is
+		do
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitObjectNode(visitable : ObjectNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.upperBound.accept(self)
+		end
+	method visitControlNode(visitable : ControlNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitControlFlow(visitable : ControlFlow) : kermeta::standard::~Void is
+		do
+			visitable.guard.accept(self)
+			visitable.weight.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitObjectFlow(visitable : ObjectFlow) : kermeta::standard::~Void is
+		do
+			visitable.guard.accept(self)
+			visitable.weight.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInitialNode(visitable : InitialNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitFinalNode(visitable : FinalNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitActivityFinalNode(visitable : ActivityFinalNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDecisionNode(visitable : DecisionNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitMergeNode(visitable : MergeNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExecutableNode(visitable : ExecutableNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitOutputPin(visitable : OutputPin) : kermeta::standard::~Void is
+		do
+//			visitable.upperBound.accept(self)
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInputPin(visitable : InputPin) : kermeta::standard::~Void is
+		do
+//			visitable.upperBound.accept(self)
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitPin(visitable : Pin) : kermeta::standard::~Void is
+		do
+//			visitable.upperBound.accept(self)
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitActivityParameterNode(visitable : ActivityParameterNode) : kermeta::standard::~Void is
+		do
+			visitable.upperBound.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitValuePin(visitable : ValuePin) : kermeta::standard::~Void is
+		do
+//			visitable.upperBound.accept(self)
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~value.accept(self)
+		end
+	method visitInterface(visitable : Interface) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.protocol.accept(self)
+		end
+	method visitImplementation(visitable : Implementation) : kermeta::standard::~Void is
+		do
+			visitable.mapping.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitArtifact(visitable : Artifact) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedArtifact.each{e | do
+					e.accept(self)
+				end}
+			visitable.manifestation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitManifestation(visitable : Manifestation) : kermeta::standard::~Void is
+		do
+			visitable.mapping.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitActor(visitable : Actor) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExtend(visitable : Extend) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.condition.accept(self)
+		end
+	method visitUseCase(visitable : UseCase) : kermeta::standard::~Void is
+		do
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.include.each{e | do
+					e.accept(self)
+				end}
+			visitable.extend.each{e | do
+					e.accept(self)
+				end}
+			visitable.extensionPoint.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExtensionPoint(visitable : ExtensionPoint) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInclude(visitable : Include) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitCollaborationOccurrence(visitable : CollaborationOccurrence) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.roleBinding.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitCollaboration(visitable : Collaboration) : kermeta::standard::~Void is
+		do
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitPort(visitable : Port) : kermeta::standard::~Void is
+		do
+			visitable.defaultValue.accept(self)
+			visitable.qualifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.deployment.each{e | do
+					e.accept(self)
+				end}
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitEncapsulatedClassifier(visitable : EncapsulatedClassifier) : kermeta::standard::~Void is
+		do
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitCallTrigger(visitable : CallTrigger) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitMessageTrigger(visitable : MessageTrigger) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitChangeTrigger(visitable : ChangeTrigger) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.changeExpression.accept(self)
+		end
+	method visitTrigger(visitable : Trigger) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitReception(visitable : Reception) : kermeta::standard::~Void is
+		do
+			visitable.formalParameter.each{e | do
+					e.accept(self)
+				end}
+			visitable.returnResult.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitSignal(visitable : Signal) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitSignalTrigger(visitable : SignalTrigger) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTimeTrigger(visitable : TimeTrigger) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.when.accept(self)
+		end
+	method visitAnyTrigger(visitable : AnyTrigger) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitVariable(visitable : Variable) : kermeta::standard::~Void is
+		do
+			visitable.upperValue.accept(self)
+			visitable.lowerValue.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitStructuredActivityNode(visitable : StructuredActivityNode) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.variable.each{e | do
+					e.accept(self)
+				end}
+			visitable.containedNode.each{e | do
+					e.accept(self)
+				end}
+			visitable.containedEdge.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitConditionalNode(visitable : ConditionalNode) : kermeta::standard::~Void is
+		do
+			visitable.variable.each{e | do
+					e.accept(self)
+				end}
+			visitable.containedNode.each{e | do
+					e.accept(self)
+				end}
+			visitable.containedEdge.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.clause.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitClause(visitable : Clause) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitLoopNode(visitable : LoopNode) : kermeta::standard::~Void is
+		do
+			visitable.variable.each{e | do
+					e.accept(self)
+				end}
+			visitable.containedNode.each{e | do
+					e.accept(self)
+				end}
+			visitable.containedEdge.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.each{e | do
+					e.accept(self)
+				end}
+			visitable.loopVariable.each{e | do
+					e.accept(self)
+				end}
+			visitable.loopVariableInput.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInteraction(visitable : Interaction) : kermeta::standard::~Void is
+		do
+			visitable.parameter.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedParameterSet.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+			visitable.lifeline.each{e | do
+					e.accept(self)
+				end}
+			visitable.message.each{e | do
+					e.accept(self)
+				end}
+			visitable.fragment.each{e | do
+					e.accept(self)
+				end}
+			visitable.formalGate.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInteractionFragment(visitable : InteractionFragment) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitLifeline(visitable : Lifeline) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.selector.accept(self)
+		end
+	method visitMessage(visitable : Message) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitGeneralOrdering(visitable : GeneralOrdering) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitMessageEnd(visitable : MessageEnd) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitEventOccurrence(visitable : EventOccurrence) : kermeta::standard::~Void is
+		do
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExecutionOccurrence(visitable : ExecutionOccurrence) : kermeta::standard::~Void is
+		do
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitStateInvariant(visitable : StateInvariant) : kermeta::standard::~Void is
+		do
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.invariant.accept(self)
+		end
+	method visitStop(visitable : Stop) : kermeta::standard::~Void is
+		do
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTemplateSignature(visitable : TemplateSignature) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedParameter.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTemplateParameter(visitable : TemplateParameter) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedParameteredElement.accept(self)
+			visitable.ownedDefault.accept(self)
+		end
+	method visitTemplateableElement(visitable : TemplateableElement) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+		end
+	method visitStringExpression(visitable : StringExpression) : kermeta::standard::~Void is
+		do
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.subExpression.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitParameterableElement(visitable : ParameterableElement) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTemplateBinding(visitable : TemplateBinding) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.parameterSubstitution.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTemplateParameterSubstitution(visitable : TemplateParameterSubstitution) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedActual.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitOperationTemplateParameter(visitable : OperationTemplateParameter) : kermeta::standard::~Void is
+		do
+			visitable.ownedParameteredElement.accept(self)
+			visitable.ownedDefault.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitClassifierTemplateParameter(visitable : ClassifierTemplateParameter) : kermeta::standard::~Void is
+		do
+			visitable.ownedParameteredElement.accept(self)
+			visitable.ownedDefault.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitParameterableClassifier(visitable : ParameterableClassifier) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitRedefinableTemplateSignature(visitable : RedefinableTemplateSignature) : kermeta::standard::~Void is
+		do
+			visitable.ownedParameter.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTemplateableClassifier(visitable : TemplateableClassifier) : kermeta::standard::~Void is
+		do
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitConnectableElementTemplateParameter(visitable : ConnectableElementTemplateParameter) : kermeta::standard::~Void is
+		do
+			visitable.ownedParameteredElement.accept(self)
+			visitable.ownedDefault.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitForkNode(visitable : ForkNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitJoinNode(visitable : JoinNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.joinSpec.accept(self)
+		end
+	method visitFlowFinalNode(visitable : FlowFinalNode) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitCentralBufferNode(visitable : CentralBufferNode) : kermeta::standard::~Void is
+		do
+			visitable.upperBound.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitActivityPartition(visitable : ActivityPartition) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.subgroup.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExpansionNode(visitable : ExpansionNode) : kermeta::standard::~Void is
+		do
+			visitable.upperBound.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExpansionRegion(visitable : ExpansionRegion) : kermeta::standard::~Void is
+		do
+			visitable.variable.each{e | do
+					e.accept(self)
+				end}
+			visitable.containedNode.each{e | do
+					e.accept(self)
+				end}
+			visitable.containedEdge.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExceptionHandler(visitable : ExceptionHandler) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInteractionOccurrence(visitable : InteractionOccurrence) : kermeta::standard::~Void is
+		do
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.actualGate.each{e | do
+					e.accept(self)
+				end}
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitGate(visitable : Gate) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitPartDecomposition(visitable : PartDecomposition) : kermeta::standard::~Void is
+		do
+			visitable.actualGate.each{e | do
+					e.accept(self)
+				end}
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInteractionOperand(visitable : InteractionOperand) : kermeta::standard::~Void is
+		do
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.guard.accept(self)
+			visitable.fragment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInteractionConstraint(visitable : InteractionConstraint) : kermeta::standard::~Void is
+		do
+			visitable.specification.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.minint.accept(self)
+			visitable.maxint.accept(self)
+		end
+	method visitCombinedFragment(visitable : CombinedFragment) : kermeta::standard::~Void is
+		do
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.operand.each{e | do
+					e.accept(self)
+				end}
+			visitable.cfragmentGate.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitContinuation(visitable : Continuation) : kermeta::standard::~Void is
+		do
+			visitable.generalOrdering.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitStateMachine(visitable : StateMachine) : kermeta::standard::~Void is
+		do
+			visitable.parameter.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedParameterSet.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+			visitable.region.each{e | do
+					e.accept(self)
+				end}
+			visitable.connectionPoint.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitRegion(visitable : Region) : kermeta::standard::~Void is
+		do
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.subvertex.each{e | do
+					e.accept(self)
+				end}
+			visitable.transition.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitPseudostate(visitable : Pseudostate) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitState(visitable : State) : kermeta::standard::~Void is
+		do
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.connection.each{e | do
+					e.accept(self)
+				end}
+			visitable.region.each{e | do
+					e.accept(self)
+				end}
+			visitable.entry.accept(self)
+			visitable.exit.accept(self)
+			visitable.doActivity.accept(self)
+			visitable.stateInvariant.accept(self)
+		end
+	method visitVertex(visitable : Vertex) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitConnectionPointReference(visitable : ConnectionPointReference) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTransition(visitable : Transition) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.guard.accept(self)
+			visitable.effect.accept(self)
+		end
+	method visitFinalState(visitable : FinalState) : kermeta::standard::~Void is
+		do
+			visitable.connection.each{e | do
+					e.accept(self)
+				end}
+			visitable.region.each{e | do
+					e.accept(self)
+				end}
+			visitable.entry.accept(self)
+			visitable.exit.accept(self)
+			visitable.doActivity.accept(self)
+			visitable.stateInvariant.accept(self)
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitCreateObjectAction(visitable : CreateObjectAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.accept(self)
+		end
+	method visitDestroyObjectAction(visitable : DestroyObjectAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.target.accept(self)
+		end
+	method visitTestIdentityAction(visitable : TestIdentityAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.first.accept(self)
+			visitable.second.accept(self)
+			visitable.~result.accept(self)
+		end
+	method visitReadSelfAction(visitable : ReadSelfAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.accept(self)
+		end
+	method visitStructuralFeatureAction(visitable : StructuralFeatureAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.object.accept(self)
+		end
+	method visitReadStructuralFeatureAction(visitable : ReadStructuralFeatureAction) : kermeta::standard::~Void is
+		do
+			visitable.object.accept(self)
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.accept(self)
+		end
+	method visitWriteStructuralFeatureAction(visitable : WriteStructuralFeatureAction) : kermeta::standard::~Void is
+		do
+			visitable.object.accept(self)
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~value.accept(self)
+		end
+	method visitClearStructuralFeatureAction(visitable : ClearStructuralFeatureAction) : kermeta::standard::~Void is
+		do
+			visitable.object.accept(self)
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitRemoveStructuralFeatureValueAction(visitable : RemoveStructuralFeatureValueAction) : kermeta::standard::~Void is
+		do
+			visitable.~value.accept(self)
+			visitable.object.accept(self)
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitAddStructuralFeatureValueAction(visitable : AddStructuralFeatureValueAction) : kermeta::standard::~Void is
+		do
+			visitable.~value.accept(self)
+			visitable.object.accept(self)
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.insertAt.accept(self)
+		end
+	method visitLinkAction(visitable : LinkAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.endData.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitLinkEndData(visitable : LinkEndData) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.qualifier.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitReadLinkAction(visitable : ReadLinkAction) : kermeta::standard::~Void is
+		do
+			visitable.endData.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.accept(self)
+		end
+	method visitLinkEndCreationData(visitable : LinkEndCreationData) : kermeta::standard::~Void is
+		do
+			visitable.qualifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitCreateLinkAction(visitable : CreateLinkAction) : kermeta::standard::~Void is
+		do
+			visitable.endData.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitWriteLinkAction(visitable : WriteLinkAction) : kermeta::standard::~Void is
+		do
+			visitable.endData.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDestroyLinkAction(visitable : DestroyLinkAction) : kermeta::standard::~Void is
+		do
+			visitable.endData.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitClearAssociationAction(visitable : ClearAssociationAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.object.accept(self)
+		end
+	method visitVariableAction(visitable : VariableAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitReadVariableAction(visitable : ReadVariableAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.accept(self)
+		end
+	method visitWriteVariableAction(visitable : WriteVariableAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~value.accept(self)
+		end
+	method visitClearVariableAction(visitable : ClearVariableAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitAddVariableValueAction(visitable : AddVariableValueAction) : kermeta::standard::~Void is
+		do
+			visitable.~value.accept(self)
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.insertAt.accept(self)
+		end
+	method visitRemoveVariableValueAction(visitable : RemoveVariableValueAction) : kermeta::standard::~Void is
+		do
+			visitable.~value.accept(self)
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitApplyFunctionAction(visitable : ApplyFunctionAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitPrimitiveFunction(visitable : PrimitiveFunction) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitCallAction(visitable : CallAction) : kermeta::standard::~Void is
+		do
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInvocationAction(visitable : InvocationAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitSendSignalAction(visitable : SendSignalAction) : kermeta::standard::~Void is
+		do
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.target.accept(self)
+		end
+	method visitBroadcastSignalAction(visitable : BroadcastSignalAction) : kermeta::standard::~Void is
+		do
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitSendObjectAction(visitable : SendObjectAction) : kermeta::standard::~Void is
+		do
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.target.accept(self)
+			visitable.request.accept(self)
+		end
+	method visitCallOperationAction(visitable : CallOperationAction) : kermeta::standard::~Void is
+		do
+			visitable.~result.each{e | do
+					e.accept(self)
+				end}
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.target.accept(self)
+		end
+	method visitCallBehaviorAction(visitable : CallBehaviorAction) : kermeta::standard::~Void is
+		do
+			visitable.~result.each{e | do
+					e.accept(self)
+				end}
+			visitable.argument.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTimeExpression(visitable : TimeExpression) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDuration(visitable : Duration) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTimeObservationAction(visitable : TimeObservationAction) : kermeta::standard::~Void is
+		do
+			visitable.~value.accept(self)
+			visitable.object.accept(self)
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.now.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDurationInterval(visitable : DurationInterval) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInterval(visitable : Interval) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTimeConstraint(visitable : TimeConstraint) : kermeta::standard::~Void is
+		do
+			visitable.specification.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitIntervalConstraint(visitable : IntervalConstraint) : kermeta::standard::~Void is
+		do
+			visitable.specification.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitTimeInterval(visitable : TimeInterval) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDurationObservationAction(visitable : DurationObservationAction) : kermeta::standard::~Void is
+		do
+			visitable.~value.accept(self)
+			visitable.object.accept(self)
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.duration.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDurationConstraint(visitable : DurationConstraint) : kermeta::standard::~Void is
+		do
+			visitable.specification.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDataStoreNode(visitable : DataStoreNode) : kermeta::standard::~Void is
+		do
+			visitable.upperBound.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitInterruptibleActivityRegion(visitable : InterruptibleActivityRegion) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitParameterSet(visitable : ParameterSet) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.condition.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitComponent(visitable : Component) : kermeta::standard::~Void is
+		do
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+			visitable.realization.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedMember.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDeployment(visitable : Deployment) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.configuration.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDeployedArtifact(visitable : DeployedArtifact) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDeploymentTarget(visitable : DeploymentTarget) : kermeta::standard::~Void is
+		do
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.deployment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitNode(visitable : Node) : kermeta::standard::~Void is
+		do
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.deployment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedNode.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDevice(visitable : Device) : kermeta::standard::~Void is
+		do
+			visitable.nestedNode.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.deployment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitExecutionEnvironment(visitable : ExecutionEnvironment) : kermeta::standard::~Void is
+		do
+			visitable.nestedNode.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.deployment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitCommunicationPath(visitable : CommunicationPath) : kermeta::standard::~Void is
+		do
+			visitable.ownedEnd.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitProtocolConformance(visitable : ProtocolConformance) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitProtocolStateMachine(visitable : ProtocolStateMachine) : kermeta::standard::~Void is
+		do
+			visitable.region.each{e | do
+					e.accept(self)
+				end}
+			visitable.connectionPoint.each{e | do
+					e.accept(self)
+				end}
+			visitable.parameter.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedParameterSet.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.nestedClassifier.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedReception.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedBehavior.each{e | do
+					e.accept(self)
+				end}
+			visitable.implementation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTrigger.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedStateMachine.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedPort.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedConnector.each{e | do
+					e.accept(self)
+				end}
+			visitable.conformance.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitProtocolTransition(visitable : ProtocolTransition) : kermeta::standard::~Void is
+		do
+			visitable.guard.accept(self)
+			visitable.effect.accept(self)
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.postCondition.accept(self)
+		end
+	method visitReadExtentAction(visitable : ReadExtentAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.accept(self)
+		end
+	method visitReclassifyObjectAction(visitable : ReclassifyObjectAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.object.accept(self)
+		end
+	method visitReadIsClassifiedObjectAction(visitable : ReadIsClassifiedObjectAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.accept(self)
+			visitable.object.accept(self)
+		end
+	method visitStartOwnedBehaviorAction(visitable : StartOwnedBehaviorAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.object.accept(self)
+		end
+	method visitQualifierValue(visitable : QualifierValue) : kermeta::standard::~Void is
+		do
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitReadLinkObjectEndAction(visitable : ReadLinkObjectEndAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.object.accept(self)
+			visitable.~result.accept(self)
+		end
+	method visitReadLinkObjectEndQualifierAction(visitable : ReadLinkObjectEndQualifierAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.object.accept(self)
+			visitable.~result.accept(self)
+		end
+	method visitCreateLinkObjectAction(visitable : CreateLinkObjectAction) : kermeta::standard::~Void is
+		do
+			visitable.endData.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+			visitable.~result.accept(self)
+		end
+	method visitAcceptEventAction(visitable : AcceptEventAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitAcceptCallAction(visitable : AcceptCallAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitReplyAction(visitable : ReplyAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitRaiseExceptionAction(visitable : RaiseExceptionAction) : kermeta::standard::~Void is
+		do
+			visitable.localPrecondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.localPostcondition.each{e | do
+					e.accept(self)
+				end}
+			visitable.handler.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+	method visitDeploymentSpecification(visitable : DeploymentSpecification) : kermeta::standard::~Void is
+		do
+			visitable.nestedArtifact.each{e | do
+					e.accept(self)
+				end}
+			visitable.manifestation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedOperation.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedAttribute.each{e | do
+					e.accept(self)
+				end}
+			visitable.generalization.each{e | do
+					e.accept(self)
+				end}
+			visitable.substitution.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedUseCase.each{e | do
+					e.accept(self)
+				end}
+			visitable.occurrence.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedRule.each{e | do
+					e.accept(self)
+				end}
+			visitable.elementImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.packageImport.each{e | do
+					e.accept(self)
+				end}
+			visitable.nameExpression.accept(self)
+			visitable.templateBinding.each{e | do
+					e.accept(self)
+				end}
+			visitable.ownedTemplateSignature.accept(self)
+			visitable.ownedComment.each{e | do
+					e.accept(self)
+				end}
+		end
+}

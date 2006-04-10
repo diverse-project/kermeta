@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- $Id: toc.xml,v 1.1 2006-04-10 11:44:41 vmahe Exp $ -->
+<toc label="KerMeta UML 2 documentation">
+	<topic label="User documentation">		
+		<topic label="Umlaut Demos" href="build/eclipse.help/Umlaut-Demos/index.html"> 
+			<link toc="build/eclipse.help/Umlaut-Demos/toc.xml" />
+		</topic>
+		
+	</topic>
+	<topic label="Developper documentation">			
+		<topic label="Umlaut Architecture guide"> 
+			<link toc="build/eclipse.help/UmlautArchitectureGuide/toc.xml" />
+		</topic>			
+	</topic>
+</toc>

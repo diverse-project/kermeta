@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="ExternClassDiagram.uml2#_tPOCIaLHEdqkGMDvm75SlQ"/>
+  <diagrams position="0,0" size="100,100" name="ExternClassDiagram" viewport="0,0">
+    <property key="org.topcased.modeler.di.typeName" value="Class Diagram"/>
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="landscape"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.uml2.classdiagram">
+      <element href="ExternClassDiagram.uml2#_tPOCIqLHEdqkGMDvm75SlQ"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="181,42" size="373,64">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="ExternClassDiagram.uml2#_YE1YQMYXEdqnU4rvBMdn4Q"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="219,178" size="139,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.3"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="ExternClassDiagram.uml2#_vYfsAMYXEdqnU4rvBMdn4Q"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="ExternClassDiagram.uml2#_vYfsAMYXEdqnU4rvBMdn4Q"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="ExternClassDiagram.uml2#_Qb4igMYaEdqnU4rvBMdn4Q"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="ExternClassDiagram.uml2#_vYfsAMYXEdqnU4rvBMdn4Q"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="ExternClassDiagram.uml2#_Sf3McMYaEdqnU4rvBMdn4Q"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="219,304" size="140,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.3"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="ExternClassDiagram.uml2#_xqgK4MYXEdqnU4rvBMdn4Q"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="ExternClassDiagram.uml2#_xqgK4MYXEdqnU4rvBMdn4Q"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="ExternClassDiagram.uml2#_xqgK4MYXEdqnU4rvBMdn4Q"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="ExternClassDiagram.uml2#_zwNTIMYXEdqnU4rvBMdn4Q"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="8" vDistance="9"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="488,172" size="152,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="ExternClassDiagram.uml2#_qUTHcMYZEdqnU4rvBMdn4Q"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="ExternClassDiagram.uml2#_qUTHcMYZEdqnU4rvBMdn4Q"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="ExternClassDiagram.uml2#_UANk4MYaEdqnU4rvBMdn4Q"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="ExternClassDiagram.uml2#_qUTHcMYZEdqnU4rvBMdn4Q"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="ExternClassDiagram.uml2#_VKSLUMYaEdqnU4rvBMdn4Q"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="525,357" size="100,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="ExternClassDiagram.uml2#_mSHSIMYeEdqnU4rvBMdn4Q"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="35"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="ExternClassDiagram.uml2#_mSHSIMYeEdqnU4rvBMdn4Q"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="36"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="ExternClassDiagram.uml2#_mSHSIMYeEdqnU4rvBMdn4Q"/>
+        </semanticModel>
+      </contained>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>
