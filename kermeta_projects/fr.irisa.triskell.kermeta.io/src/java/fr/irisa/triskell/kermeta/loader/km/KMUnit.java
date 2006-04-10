@@ -1,4 +1,4 @@
-/* $Id: KMUnit.java,v 1.11 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: KMUnit.java,v 1.12 2006-04-10 17:35:50 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : 	KMUnit.java
 * License : EPL
@@ -9,6 +9,7 @@
 */
 package fr.irisa.triskell.kermeta.loader.km;
 
+import java.io.StringReader;
 import java.util.Hashtable;
 
 import org.eclipse.emf.common.util.TreeIterator;
@@ -19,7 +20,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.loader.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.parser.KermetaLexer;
+import fr.irisa.triskell.kermeta.parser.KermetaParser;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
@@ -49,14 +53,22 @@ public class KMUnit extends KermetaUnit {
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * The resource that contains a kermeta program in its EMF representation
+	 */
 	Resource resource ;
+	
 	
 	public KMUnit(String uri, Hashtable packages, Resource res) {
 		super(uri, packages);
 		resource = res;
 	}
-
-	/* (non-Javadoc)
+	
+	/** 
+	 * This preLoad method loads the packages, class definitions, and enumerations in a hashtable (one for each kind)
+	 * so that we can retrieve them more easily 
+	 * The preLoad condition for KMUnit is the packages
+	 * @see fr.irisa.triskell.kermeta.loader.KMLoader#KMLoader(KermetaUnit).
 	 * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#preLoad()
 	 */
 	public void preLoad() {
@@ -86,6 +98,21 @@ public class KMUnit extends KermetaUnit {
     	}
     	type_checked = true;
 	}
+	
+	
+	/**
+	 * This method is for KMUnit what <code>parseString</code> for KMTUnit :
+	 * Whereas parseString method is used in KMTUnit when one wants to load a KermetaUnit
+	 * from a "cached" document (that is, a String!) instead of the data contained 
+	 * in the serialized model (i.e the file whose path is the KermetaUnit.URI),
+	 * one can call "setResource" to set a specific resource to load instead of 
+	 * a resource that is directly loaded from the serialized model.
+	 * @param r the resource from which the KMUnit is loaded.
+	 */
+	public void setResource(Resource r) {
+		resource = r;
+	}
+
 
 	/* (non-Javadoc)
 	 * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadImportedUnits()
