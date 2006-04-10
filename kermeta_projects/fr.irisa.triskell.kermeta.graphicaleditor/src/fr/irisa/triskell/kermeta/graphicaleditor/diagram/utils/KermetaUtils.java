@@ -13,12 +13,19 @@
  * ----------------------------------------------------------------------------
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
@@ -105,33 +112,6 @@ public class KermetaUtils {
 			kermetaUtils = new KermetaUtils();
 		}
 		return kermetaUtils;
-	}
-	
-	/**
-	 * Reset the KermetaUnit related to the kermeta program being edited
-	 */
-	public KermetaUnit resetKermetaUnit(String platformPath)
-	{
-		KermetaUnit result = null;
-		org.eclipse.core.resources.IFile file = KermetaPlugin.getIFileFromString(platformPath);
-		String uri = "platform:/resource" + file.getFullPath().toString();
-		KermetaUnitFactory.getDefaultLoader().unloadAll();
-		try {
-			result = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
-			result.load();
-			result.typeCheck(null);
-			result.constraintCheck(null);
-		}
-		catch(Throwable e) {
-			KermetaUnit.internalLog.error("load error ", e);
-			if (result == null) {
-				e.printStackTrace();
-				return null;
-			}
-			else if (!result.messages.unitHasError)
-				result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null, null));
-		}
-		return result;
 	}
 	
 	/** Get all the type definitions that belong to the same package as the one to which
@@ -526,33 +506,6 @@ public class KermetaUtils {
 			if (op.getName().equals(name)) return op; 
 		}
 		return null;
-	}
-	
-	/**
-	 * This is a duplicate method stolen from KermetaUnit. 
-	 * Define a container for each element of the root package
-	 */
-	public static void fixTypeContainement(Package p) {
-		TreeIterator it = p.eAllContents();
-		TypeContainementFixer fixer = new TypeContainementFixer();
-		while(it.hasNext()) {
-			fr.irisa.triskell.kermeta.language.structure.Object o = (fr.irisa.triskell.kermeta.language.structure.Object)it.next();
-			if (o instanceof CallExpression) {
-			    CallExpression e = (CallExpression)o;
-			    fixer.addContainedTypes(e.getStaticTypeVariableBindings(), e);
-			}
-			
-			if (o instanceof Expression) {
-				Expression e = (Expression)o;
-				if (e.getStaticType() != null) {
-					fixer.addContainedTypes(e.getStaticType(), e);
-					
-				}
-			}
-			else if (o instanceof TypeContainer) {
-				if (o != null) fixer.accept(o);
-			}
-		}
 	}
 }
 
