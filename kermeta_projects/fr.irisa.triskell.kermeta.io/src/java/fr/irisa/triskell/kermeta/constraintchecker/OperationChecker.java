@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.3 2006-04-07 14:38:12 dvojtise Exp $
+/* $Id: OperationChecker.java,v 1.4 2006-04-10 17:31:15 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -15,9 +15,11 @@
  */
 package fr.irisa.triskell.kermeta.constraintchecker;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -25,7 +27,10 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
+import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
+import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
@@ -35,6 +40,8 @@ import fr.irisa.triskell.kermeta.utils.KMTHelper;
  * (but simpler to test the types conformity)
  * We also have to discuss if some constraints are more type-checking related or not
  * Principle : the check stops as soon as a constraint is violated.
+ * TODO : the operation checking does not handle yet the verification of producttypes. (isn't it the
+ * role of the TypeEqualityChecker?)
  */
 public class OperationChecker extends AbstractChecker {
 
@@ -143,10 +150,15 @@ public class OperationChecker extends AbstractChecker {
 	protected boolean checkParameters(Operation op1, Operation op2)
 	{
 		boolean isConform = true; int ind2 = 0;
+		String message = "";
 		List<Parameter> params1 = op1.getOwnedParameter();
 		List<Parameter> params2 = op2.getOwnedParameter();
 		// first : do we have the same number of params?
-		if (params1.size() != params2.size()) return false;
+		if (params1.size() != params2.size()) 
+		{
+			message = "'"+op1.getName()+"' and '" + op2.getName() + "' do not have the same number of parameters.";  
+			isConform = false;
+		}
 		else
 		{
 			Iterator<Parameter> it1 = params1.iterator();
@@ -174,10 +186,9 @@ public class OperationChecker extends AbstractChecker {
 				}
 				ind2 += 1;
 			}
+			message = "'" + op1.getName() + "' is not well redefined : parameters " + pprinter.ppComaSeparatedNodes(op1.getOwnedParameter())
+			+ " (expected [" + pprinter.ppComaSeparatedNodes(op2.getOwnedParameter()) + "]";
 		}
-		
-		String message = op1.getName() + " is not well redefined : " + pprinter.ppComaSeparatedNodes(op1.getOwnedParameter())
-		+ "(expected [" + pprinter.ppComaSeparatedNodes(op2.getOwnedParameter()) + "]";
 		if (isConform==false) addProblem(ERROR, message, op1);
 		return isConform;
 	}
@@ -201,7 +212,7 @@ public class OperationChecker extends AbstractChecker {
 				ind2 += 1;
 			}
 		}
-		String message = op1.getName() + " has wrong type parameters : " + pprinter.ppComaSeparatedNodes(op1.getTypeParameter());
+		String message = op1.getName() + " is not well redefined : type parameters : " + pprinter.ppComaSeparatedNodes(op1.getTypeParameter());
 		if (!isConform) addProblem(ERROR, message, op1);
 		return isConform;
 	}
@@ -216,16 +227,23 @@ public class OperationChecker extends AbstractChecker {
 		fr.irisa.triskell.kermeta.language.structure.Type t1 = tv1.getSupertype();
 		fr.irisa.triskell.kermeta.language.structure.Type t2 = tv2.getSupertype();
 		// (null value is not included in equals() operation cases.)
-		if (t1!=null && t2!=null) isConform = TypeEqualityChecker.equals(t1, t2);
+		if (t1!=null && t2!=null)
+			isConform = isConformType(t1, t2);
 		else isConform = (t1==null && t2==null);
 		return isConform;
 	}
 	
 	/**
 	 * There are some "defaults" in the metamodel :
-	 * Concrete Syntax and Semantic do not exactly map. This is ok, but 
-	 * we have to study the particular case of a typed element which type is Void :
-	 * is it also "implicitely" Void if, in the model[serialization] it is not set?
+	 * Concrete Syntax and Semantic do not exactly map : the implicit type is Void
+	 * if the user omits it syntactically, but in the serialized model, when not explicit, in
+	 * the text (kmt), this type is not provided either.
+	 * 
+	 * -> a Rule : the return type of a redefined operation can be 
+	 * 
+	 *      A <|-- B and op() : X is contained in A, and B redefined op(), so that
+	 *      op() : Y  
+	 * 
 	 * */
 	protected boolean checkReturnType(Operation op1, Operation op2)
 	{
@@ -236,28 +254,21 @@ public class OperationChecker extends AbstractChecker {
 		// else if (op1.getType()==null && op2.getType()==null)  isConform = true; 
 		else if (op1.getType()==null || op2==null || op2.getType()==null) 
 		{
-			message += " is null";
+			if (op1.getType()==null) message+="of " + KMTHelper.getQualifiedName(op1);
+			else message+="of " + KMTHelper.getQualifiedName(op2);
+			message += " is null : " + new KM2KMTPrettyPrinter().accept(op1.getType()==null?op2:op1);
 			isConform = false;
 		}
 		else if (t1 instanceof TypeVariable && t2 instanceof TypeVariable) // TypeVariable?
 			isConform = checkTypeVariables((TypeVariable)op1.getType(), (TypeVariable)op2.getType());
 		else if (t1 instanceof ClassImpl && t2 instanceof ClassImpl)
 		{
-			isConform = isConformType((ClassImpl)t1, (ClassImpl)t2);
+			isConform = isConformType(t1, t2);
 		}
-		else // FIXME!!! we have to decide which philosophy has to be used for return types !!
-		{	// kermeta::standard::~Void != Void ???
-			// isConform = TypeEqualityChecker.equals(op1.getType(),op2.getType());
-			// isConform = TypeConformanceChecker.conforms(op1.getType(),op2.getType());
-			// TypeEqualityChecker.equals is not correct, since typeA and typeB are != in memory
-			//isConform = (((ClassImpl)t1).getTypeDefinition().equals(((ClassImpl)t2).getTypeDefinition()));
-		}
-		if (!isConform){
-			if (op1.getType()!=null && op1.getType()!=null)
-				message += "<"+pprinter.accept(op1.getType()) + "> != <" + pprinter.accept(op2.getType())+">"
-				+ op1.getType() + "!=" + op2.getType() + "op1:" + op1.getName();			
-			addProblem(ERROR, message, op1);
-		}
+		if (op1.getType()!=null && op1.getType()!=null)
+			message += "<"+pprinter.accept(op1.getType()) + "> != <" + pprinter.accept(op2.getType())+">"
+			+ op1.getType() + " != " + op2.getType() + "op1:" + op1.getName();
+		if (!isConform) addProblem(ERROR, message, op1);
 		return isConform;
 	}
 	
@@ -274,15 +285,17 @@ public class OperationChecker extends AbstractChecker {
 		return false;
 	}
 	
-	public boolean isConformType(ClassImpl superclass, ClassImpl thisclass)
+	public boolean isConformType(Type supertype, Type thistype)
 	{
-		boolean isConform = thisclass.getTypeDefinition().equals(superclass.getTypeDefinition());
-		String classname = KMTHelper.getQualifiedName(thisclass.getTypeDefinition());
-		String superclassname = KMTHelper.getQualifiedName(superclass.getTypeDefinition());
-		//if (((ClassDefinition)builder.typeDefinitionLookup(classname)).getSuperType() instanceof ClassImpl)
-			
-		// -> FIXME : I am tired now -- writing constraints in java is not that practical.
-		return true;
+		// commented call does not work since the typedefs may be not registered in the same place in memory........hem
+		// boolean isConform = thisclass.getTypeDefinition().equals(superclass.getTypeDefinition());
+		if (supertype instanceof ClassImpl && thistype instanceof ClassImpl)
+		{
+			ClassImpl superclass = (ClassImpl)supertype; ClassImpl thisclass = (ClassImpl)thistype;
+			String classname = KMTHelper.getQualifiedName(thisclass.getTypeDefinition());
+			String superclassname = KMTHelper.getQualifiedName(superclass.getTypeDefinition());
+			return superclassname.equals(classname);
+		}
+		return TypeEqualityChecker.equals(supertype, thistype);
 	}
-	
 }
