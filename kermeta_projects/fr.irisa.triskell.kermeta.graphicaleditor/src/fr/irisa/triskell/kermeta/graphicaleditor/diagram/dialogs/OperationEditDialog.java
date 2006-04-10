@@ -1,4 +1,4 @@
-/* $Id: OperationEditDialog.java,v 1.3 2006-04-06 11:12:20 zdrey Exp $
+/* $Id: OperationEditDialog.java,v 1.4 2006-04-10 17:38:08 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -23,25 +23,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.jface.text.Document;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.source.SourceViewer;
-import org.eclipse.jface.viewers.ICellModifier;
-import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ExtendedModifyEvent;
-import org.eclipse.swt.custom.ExtendedModifyListener;
-import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -54,14 +42,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.editors.text.TextEditor;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.OperationDataStructure;
-import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorConfiguration;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorStyleListener;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.SyntaxManager;
@@ -69,8 +54,6 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
-import fr.irisa.triskell.kermeta.standalone.editor.EditorPanel;
-import fr.irisa.triskell.kermeta.standalone.editor.jedit.SyntaxDocument;
 
 /**
  * Popup dialog associated to the Operation graphical object, used for the 
@@ -325,7 +308,7 @@ public class OperationEditDialog extends Dialog
 		
 		// FIXME : ultra-buggy!!!! -> the checker does not check the correct version of the model (the correct one is
 		// the one in memory, not the serialized one.
-		//createInjectButton(composite);
+		createInjectButton(composite);
 	}
 	
 	/**
@@ -412,10 +395,8 @@ public class OperationEditDialog extends Dialog
 	    styledText.setText((String)KermetaUtils.getDefault().getPrettyPrinter().accept(_operation));
 	    styledText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				//System.err.println("Be carefull!! a text has been modified!!" + styledText.getText());
-				dataStructure.setOperationBody(styledText.getText());
-				//((OperationDataStructure)_data.get(Operation_INPUTS)).
-				//setOperationBody((String)KermetaUtils.getDefault().getPrettyPrinter().accept(ExpressionParser.parse_operation2body(unit, styledText.getText())));
+				// Is it useful to do something when text is modified?
+				//dataStructure.setOperationBody(styledText.getText());
 			}	    	
 	    });
 	    // To add a special modif : do it through the commented method, below
@@ -447,7 +428,7 @@ public class OperationEditDialog extends Dialog
 				String textError = "";
 				System.err.println("Parsing now the operation : " + _operation.eResource().getURI().toString());
 				
-				KermetaUnit unit = EditorReconcilingStrategy.parse(_operation.eResource().getURI().toString());
+				KermetaUnit unit = EditorReconcilingStrategy.parse(_operation.eResource());
 				
 				// TODO : add a try/catch exception so that the user cannot save an invalid body?
 				
@@ -456,8 +437,7 @@ public class OperationEditDialog extends Dialog
 					errorItem.setImage(StructureImageRegistry.getImage("NOERROR"));
 					errorView.setText("");
 					// get OPERATION_INPUTS that contains body, owned parameters and onwed type params
-					dataStructure.
-						setOperationBody((String)KermetaUtils.getDefault().getPrettyPrinter().accept(ExpressionParser.parse_operation2body(unit, styledText.getText())));
+					dataStructure.setOperationBody(styledText.getText());
 				}
 				catch (Error error)
 				{
@@ -471,7 +451,8 @@ public class OperationEditDialog extends Dialog
 				}
 				// Reparse (not very optimal..) the whole unit to check the operation consistency according to its context
 				unit.messages.getAllErrors().clear();
-				unit = KermetaUtils.getDefault().resetKermetaUnit(_operation.eResource().getURI().toString());
+				// If file was not saved before, this instruction is stupid...
+				//unit = KermetaUtils.getDefault().resetKermetaUnit(_operation.eResource().getURI().toString());
 				if (unit.messages.getAllErrors()!=null && unit.messages.getAllErrors().size()>0)
 				{
 					errorItem.setImage(StructureImageRegistry.getImage("ERROR"));
@@ -528,6 +509,7 @@ public class OperationEditDialog extends Dialog
 		}
 		// Input
 		_data.put(Operation_INPUTS, _inputParameters.getData());
+		_data.put(Operation_TYPE_PARAMS, _inputTypeParameters.getData());
 		if (_operationSuperOperationComboBox.getSelectionIndex() != 0)
 		{
 			_data.put(Operation_SUPER_OPERATION, _supertypes.get(_operationSuperOperationComboBox.getSelectionIndex() -1));

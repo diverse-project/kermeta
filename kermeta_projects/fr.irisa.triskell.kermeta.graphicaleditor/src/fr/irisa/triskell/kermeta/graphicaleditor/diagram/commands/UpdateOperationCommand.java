@@ -1,4 +1,4 @@
-/* $Id: UpdateOperationCommand.java,v 1.4 2006-04-06 11:12:20 zdrey Exp $
+/* $Id: UpdateOperationCommand.java,v 1.5 2006-04-10 17:38:08 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -23,6 +23,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.dialogs.OperationEditDi
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.OperationDataStructure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.ParameterObject;
+import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -106,7 +107,8 @@ public class UpdateOperationCommand extends Command
     {
     	// TODO : If user clicked on ok and actually did nothing...
 
-        _operation.getContainedType().clear();
+        
+    	_operation.getContainedType().clear();
     	
     	// The operation name
         _operation.setName(_name);
@@ -149,29 +151,31 @@ public class UpdateOperationCommand extends Command
             Parameter parameter = StructureFactory.eINSTANCE.createParameter();
             parameter.setName(name); 
             if (object.getType() != null)
+            {
             	parameter.setType(object.getType());
+            	// We have to update the container (typeFixer is not appropriated for that:
+            	// since we remove all the parameters -> fixme! -- to update them more easily)
+            	parameter.getContainedType().add(object.getType());
+            }
             else // temp patch if user did not set a type. TODO : by default, impose the VoidType in the graphical editor
             {
             	System.err.println("Type is null :(");
             	parameter.setType(_voidType);
             }
             
-
-            KermetaUtils.getDefault().getTypeFixer().accept(parameter);
             _operation.getOwnedParameter().add(parameter);
+           // KermetaUtils.getDefault().getTypeFixer().accept(parameter);
             
         }
-        //_operation.setBody(ExpressionParser.parse_operation2body(unit, styledText.getText()));
-        // We reset the KermetaUnit that contains the current operation!
-        /*System.err.println("---> " + 
-        		_dataStructure.getOperationBody()
-        );*/
         _operation.setBody(ExpressionParser.parse_operation2body(
-        		KermetaUtils.getDefault().resetKermetaUnit(_operation.eResource().getURI().toString()), 
+        		EditorReconcilingStrategy.parse(_operation.eResource()), 
         		_dataStructure.getOperationBody()));
-        
+        //KermetaUtils.fixTypeContainments(_operation.eResource());
         // Fix the type containments once the Operation element is complete -> not optimal
         KermetaUtils.getDefault().getTypeFixer().accept(_operation);
+/*        for (Object o : _operation.getOwnedParameter()) {
+        	KermetaUtils.getDefault().getTypeFixer().accept((Parameter)o);
+		}*/
         
         
     }
