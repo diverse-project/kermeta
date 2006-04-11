@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.15 2006-04-11 13:20:57 zdrey Exp $
+/* $Id: ECore2Kermeta.java,v 1.16 2006-04-11 13:26:34 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -132,10 +132,13 @@ public class ECore2Kermeta extends EcoreVisitor {
 				EOperation node = ops.next(); 
 //				has the operation an "implicit" super operation (not defined in the KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS...)?
 				// FIXME This slows the conversion...
-				EOperation superop = visitor.findSuperOperation(node);
 				visitor.current_op = visitor.operations.get(node);
-				if (superop != null) visitor.current_op.setSuperOperation(visitor.operations.get(superop));
-				
+				// it could have been resolved from the EAnnotation visit
+				if (visitor.current_op.getSuperOperation()==null)
+				{
+					EOperation superop = visitor.findSuperOperation(node);
+					if (superop != null) visitor.current_op.setSuperOperation(visitor.operations.get(superop));
+				}
 			}
 			
 		} catch (Throwable e) {
