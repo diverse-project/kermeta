@@ -1,6 +1,9 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit;
 
+import java.util.Iterator;
+
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;

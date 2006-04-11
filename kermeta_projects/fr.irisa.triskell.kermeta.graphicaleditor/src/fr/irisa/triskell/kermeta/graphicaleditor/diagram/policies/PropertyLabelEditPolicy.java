@@ -1,4 +1,4 @@
-/* $Id: PropertyLabelEditPolicy.java,v 1.1 2006-03-29 08:55:38 zdrey Exp $
+/* $Id: PropertyLabelEditPolicy.java,v 1.2 2006-04-11 17:29:35 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : PropertyLabelEditPolicy.java
  * License    : EPL
@@ -30,4 +30,6 @@ public class PropertyLabelEditPolicy extends EdgeObjectUVEditPolicy {
     {
         return true;
     }
+    
+    
 }

@@ -1,4 +1,4 @@
-/* $Id: UpdatePropertyNodeCommand.java,v 1.2 2006-03-29 09:06:13 zdrey Exp $
+/* $Id: UpdatePropertyNodeCommand.java,v 1.3 2006-04-11 17:29:35 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -15,6 +15,7 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.eclipse.gef.commands.Command;
 
@@ -37,12 +38,16 @@ public class UpdatePropertyNodeCommand extends Command
     /** Old values */
     private String _oldName;
     private Type _oldType;
+    private String _oldMultiplicity;
 
     /** New values */
     private String _name;
 
     /** Type of the property */
     private Type _type;
+    
+    /** Multiplicity, (textual, i.e "[x..y]") of the property */
+    private String _multiplicity;
 
     /**
      * Create a command for updating parameters on a given property
@@ -55,10 +60,26 @@ public class UpdatePropertyNodeCommand extends Command
     	// Store old data
         _oldName = property.getName();
         _oldType = _type;
+        _oldMultiplicity = getMultiplicityText(property); // ?
         _property = property;
         // Store new data
         _name = (String) data.get(PropertyEditDialog.Property_NAME);
         _type = (Type) data.get(PropertyEditDialog.Property_TYPE);
+       
+        // We handle the case user didnot provide a correct format
+        _multiplicity = (String) data.get(PropertyEditDialog.Property_MULTIPLICITY);
+        if (_multiplicity == null || !Pattern.matches("\\[(\\d)+..[(\\d|)+|\\*]\\]", _multiplicity))
+        {
+        	_multiplicity = "[0..1]";
+        }
+    }
+    
+    /**
+     * A method helper to get the textual representation of the multiplicity
+     */
+    public String getMultiplicityText(Property property)
+    {
+    	return "[" + String.valueOf(property.getUpper()) + ".." + String.valueOf(property.getLower()) + "]";
     }
 
     /**
@@ -83,7 +104,18 @@ public class UpdatePropertyNodeCommand extends Command
         _property.setType(_type);
         // Perform update for property type
         _property.getContainedType().clear();
+        
+        // Update the property multiplicity
+        System.out.println("MULT: " + _multiplicity + " ");
+        String lower_str = _multiplicity.substring(1, _multiplicity.indexOf("."));
+        String upper_str = _multiplicity.substring(_multiplicity.lastIndexOf(".")+1, _multiplicity.indexOf("]"));
          
+        System.out.println("lower:"+lower_str+"upper:"+upper_str);
+        int lower = Integer.valueOf(lower_str);
+        int upper = upper_str.equals("*")?-1:Integer.valueOf(upper_str);
+        _property.setUpper(upper);
+        _property.setLower(lower);
+        
         // Fix the type containments once the Operation element is complete -> not optimal
         KermetaUtils.getDefault().getTypeFixer().accept(_property);
         

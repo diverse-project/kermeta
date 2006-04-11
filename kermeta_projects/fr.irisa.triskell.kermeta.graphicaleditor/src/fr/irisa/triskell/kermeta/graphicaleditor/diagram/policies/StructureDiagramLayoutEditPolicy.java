@@ -16,6 +16,8 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
 import org.topcased.modeler.utils.Utils;
 
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 
 /**
@@ -61,7 +63,6 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 			// get the EObjects of the model
 			EObject parentEObject = Utils.getElement(parent);
 			EObject childEObject = Utils.getElement(child);
-			System.out.println("Get CREATE COMMAND : test DND : " + Utils.getElement(child) + "; parant: " + parent);
 			// ----------------------------------
 			// 1- Parent and Child cannot be null and must the child should be
 			// contained by the parent (isValid checks that the two params are not null
@@ -72,7 +73,7 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 				// 2- Check if this object does not already belong to this
 				// container
 				GraphElement existingElement = Utils.getGraphElement(parent,
-						childEObject);
+						childEObject, true);
 				if (existingElement != null
 						&& !isSeveralDisplayAllowed(parent, child,
 								needModelUpdate)) {
@@ -84,12 +85,13 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 				// 3- Check if this object is external (only done if the model
 				// is not modified)
 				if (!needModelUpdate) {
+					// The eContainer of a ClassDefinition?
 					EObject existingContainer = childEObject.eContainer();
 					//EObject existingContainer = childEObject.eContainingFeature();
-					System.out.println("Is this object a correct parent? :" + existingContainer);
-					if (!getParentContainerEObject(parent, child).equals(
-							existingContainer)
-							&& !isExternalObjectAllowed(parent, child)) {
+					// TODO : we should allow to put classes of subpackages in parent packages
+					if (!getParentContainerEObject(parent, child).equals(existingContainer)
+							&& !isExternalObjectAllowed(parent, child))
+					{
 						return UnexecutableCommand.INSTANCE;
 					}
 				}
@@ -136,6 +138,16 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 		}
 
 		return UnexecutableCommand.INSTANCE;
+	}
+
+	/** (non-Javadoc)
+	 * @see org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy#isSeveralDisplayAllowed(org.topcased.modeler.di.model.GraphNode, org.topcased.modeler.di.model.GraphNode, boolean)
+	 */
+	@Override
+	protected boolean isSeveralDisplayAllowed(GraphNode parent, GraphNode child, boolean needModelUpdate) {
+		/*EObject parentEObject = Utils.getElement(parent);
+		EObject childEObject = Utils.getElement(child);*/
+		return false;
 	}
 	
 	

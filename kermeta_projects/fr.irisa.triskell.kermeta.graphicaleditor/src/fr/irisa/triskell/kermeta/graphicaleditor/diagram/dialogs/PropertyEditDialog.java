@@ -1,4 +1,4 @@
-/* $Id: PropertyEditDialog.java,v 1.1 2006-03-07 17:30:32 zdrey Exp $
+/* $Id: PropertyEditDialog.java,v 1.2 2006-04-11 17:29:35 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -59,10 +59,12 @@ public class PropertyEditDialog extends Dialog
 	private Composite _dialogComposite;
 	private Combo _typeComboBox;
 	private Text _propertyNameText;
+	private Text _multiplicityText;
+
 	
 	// types data
 	private List<String> _typeNames;
-	public PropertyDataStructure dataStructure;
+	//public PropertyDataStructure dataStructure;
 	
 	/**
 	 * The available types for a property represented as a node.
@@ -80,6 +82,7 @@ public class PropertyEditDialog extends Dialog
 	// Constants
 	public static final String Property_NAME = "Property name";
 	public static final String Property_TYPE = "Property type";
+	public static final String Property_MULTIPLICITY = "Property multiplicity";
 	private static final String VOID_TYPE = "Void";
 	
 	/**
@@ -93,8 +96,7 @@ public class PropertyEditDialog extends Dialog
 		super(parentShell);
 		setBlockOnOpen(true);
 		_property = operation;
-		dataStructure = new PropertyDataStructure(_property);
-		//operation.getOwningClass().;
+		// dataStructure = new PropertyDataStructure(_property);
 		initializeTypes();
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 	}
@@ -163,6 +165,10 @@ public class PropertyEditDialog extends Dialog
 		_typeComboBox.setItems(_typeNames.toArray(new String[] {}));
 		_typeComboBox.add(VOID_TYPE, 0);
 		_typeComboBox.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		
+		new Label(composite, SWT.NONE).setText("Multiplicity ([x..y])");
+		_multiplicityText = new Text(composite, SWT.BORDER);
+		_multiplicityText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		/*
 		new Label(composite, SWT.NONE).setText("Type Parameters");
 		_operationTypeParamsText = new Text(composite, SWT.BORDER);
@@ -191,6 +197,11 @@ public class PropertyEditDialog extends Dialog
 		else
 		{
 			_typeComboBox.select(0);
+		}
+		
+		if (_multiplicityText.getText() == null || _multiplicityText.getText().length() == 0)
+		{
+			_multiplicityText.setText("[" + String.valueOf(_property.getLower()) + ".." + String.valueOf(_property.getUpper()) + "]");
 		}
 		
 	}
@@ -233,6 +244,7 @@ public class PropertyEditDialog extends Dialog
 		{
 			_data.put(Property_TYPE, _types.get(_typeComboBox.getSelectionIndex() - 1));
 		}
+		_data.put(Property_MULTIPLICITY, _multiplicityText.getText());
 		super.okPressed();
 	}
 	

@@ -29,6 +29,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PropertyEditPartNo
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.StructureDiagramEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.TagEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.TagLinkEditPart;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.UniqueEListEditPart;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -129,7 +130,8 @@ public class StructureEditPartFactory implements EditPartFactory {
 							ModelerPropertyConstants.ESTRUCTURAL_FEATURE_ID);
 					if (!"".equals(feature)) {
 						int featureID = Integer.parseInt(feature);
-						return new EListEditPart(node, object.eClass()
+						// special editpart to have unique "graph-lists"
+						return new UniqueEListEditPart(node, object.eClass()
 								.getEStructuralFeature(featureID));
 					} else {
 						return new ClassDefinitionEditPart(node);

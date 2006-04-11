@@ -1,4 +1,4 @@
-/* $Id: OperationDataStructure.java,v 1.2 2006-04-06 11:12:20 zdrey Exp $
+/* $Id: OperationDataStructure.java,v 1.3 2006-04-11 17:29:35 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Feb 20, 2006
  * Authors       : zdrey
  */
-/* $Id: OperationDataStructure.java,v 1.2 2006-04-06 11:12:20 zdrey Exp $
+/* $Id: OperationDataStructure.java,v 1.3 2006-04-11 17:29:35 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -24,6 +24,8 @@ package fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -55,6 +57,7 @@ public class OperationDataStructure
     {
         _dataOwnedParameters = new ArrayList<ParameterObject>();
         _dataTypeParameters = new ArrayList<ParameterObject>();
+        
         if (operation != null)
         {
             addAll(operation.getOwnedParameter());

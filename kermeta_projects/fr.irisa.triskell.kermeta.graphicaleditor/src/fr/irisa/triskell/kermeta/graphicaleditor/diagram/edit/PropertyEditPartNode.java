@@ -9,6 +9,7 @@ import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.graphics.Color;
+import org.topcased.draw2d.figures.EditableLabel.TextProvider;
 import org.topcased.modeler.ColorRegistry;
 import org.topcased.modeler.ModelerEditPolicyConstants;
 import org.topcased.modeler.ModelerPlugin;
@@ -22,12 +23,15 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.PropertyRestor
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.UpdatePropertyNodeCommand;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.dialogs.PropertyEditDialog;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.PropertyEditPartCommonInterface;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.OperationFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.PropertyFigureNode;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.ClassDefinitionLayoutEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 
 /**
- * The Property object controller
+ * The Property object controller for properties displayed into the classdefinition boxes
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * This is the brother of PropertyEditPart
@@ -62,6 +66,13 @@ public class PropertyEditPartNode extends MultiplicityElementEditPart implements
 						return new PropertyRestoreConnectionCommand(getHost());
 					}
 				});
+		
+		// This policy is used to disallow property node to be a potentiel parent of
+		// have children graph nodes. (If not set here, than we can strangely add a property graph node
+		// on one other 
+		// -> IMPORTANT QUESTION : Could we ask a policy to be recursively applied on its children?
+		installEditPolicy(EditPolicy.LAYOUT_ROLE,
+				new ClassDefinitionLayoutEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESIZABLE_EDITPOLICY,
 				new ResizableEditPolicy());
@@ -80,8 +91,12 @@ public class PropertyEditPartNode extends MultiplicityElementEditPart implements
 	 * @generated NOT
 	 */
 	protected IFigure createFigure() {
-
-		return new PropertyFigureNode();
+		PropertyFigureNode lbl = new PropertyFigureNode(new TextProvider() {
+			public String getText() {
+				return ((Property) getEObject()).getName();
+			}
+		});
+		return lbl;
 	}
 
 	/**
@@ -163,8 +178,11 @@ public class PropertyEditPartNode extends MultiplicityElementEditPart implements
 					+ KermetaUtils.getDefault().getLabelForType(
 							getModelProperty().getType());
 		}
+		// The multiplicity
+		text += "[" + String.valueOf(getModelProperty().getLower()) + ".." + String.valueOf(getModelProperty().getUpper()) + "]"; 
 		label.setText(text);
 	}
+	
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

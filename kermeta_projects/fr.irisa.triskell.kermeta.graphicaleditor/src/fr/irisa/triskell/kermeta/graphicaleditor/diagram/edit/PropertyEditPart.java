@@ -309,7 +309,7 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 		Label targetCount = getPropertyFigure().getMultiplicityLabel();
 		try {
 			targetCount.setText(createCountString(getProperty()));
-			targetCount.setLabelAlignment(PositionConstants.CENTER);
+			targetCount.setLabelAlignment(PositionConstants.LEFT);
 		} catch (BoundsFormatException e) {
 			targetCount.setText("error");
 			IStatus status = new Status(IStatus.ERROR, StructurePlugin

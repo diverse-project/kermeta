@@ -60,7 +60,7 @@ public class EditPartUtils {
         }
 	}
 	
-	
+	/** Not used yet and not very interesting anyway */
 	public static void changeIcon(Boolean setItalic, OperationFigure op)
 	{
 		if (setItalic)

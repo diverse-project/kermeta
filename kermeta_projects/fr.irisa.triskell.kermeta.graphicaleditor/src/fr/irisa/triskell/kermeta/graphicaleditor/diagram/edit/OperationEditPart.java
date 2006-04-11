@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.UpdateOperatio
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.dialogs.OperationEditDialog;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.EditPartUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.OperationFigure;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.ClassDefinitionLayoutEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;

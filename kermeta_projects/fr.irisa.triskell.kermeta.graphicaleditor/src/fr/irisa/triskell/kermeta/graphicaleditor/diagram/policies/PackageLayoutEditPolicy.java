@@ -16,6 +16,7 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
 import org.topcased.modeler.utils.Utils;
 
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 
 /**
@@ -80,8 +81,8 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 				// 3- Check if this object is external (only done if the model
 				// is not modified)
 				if (!needModelUpdate) {
-					//EObject existingContainer = childEObject.eContainer();
-					EObject existingContainer = childEObject.eContainingFeature();
+					EObject existingContainer = childEObject.eContainer();
+					//EObject existingContainer = childEObject.eContainingFeature();
 					if (!getParentContainerEObject(parent, child).equals(
 							existingContainer)
 							&& !isExternalObjectAllowed(parent, child)) {
@@ -114,9 +115,9 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 						{
 							mytag = (Tag)childEObject;
 							
-							System.err.println("Get EObject : " + mytag);
+							/*System.err.println("Get EObject : " + mytag);
 							System.out.println("Tag container:"+ parentEObject.eResource()
-							);
+							);*/
 							parentEObject.eResource().getContents().add(mytag);
 						}
 					}
@@ -130,6 +131,13 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 			}
 		}
 		return UnexecutableCommand.INSTANCE;
+	}
+	
+	/** (non-Javadoc)
+	 * @see org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy#isSeveralDisplayAllowed(org.topcased.modeler.di.model.GraphNode, org.topcased.modeler.di.model.GraphNode, boolean)
+	 */
+	protected boolean isSeveralDisplayAllowed(GraphNode parent, GraphNode child, boolean needModelUpdate) {
+		return false; 
 	}
 
 }
