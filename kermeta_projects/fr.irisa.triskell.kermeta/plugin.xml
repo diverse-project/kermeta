@@ -131,6 +131,24 @@
                id="fr.irisa.triskell.kermeta.KMT2Ecore"/>
    		
       </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="fr.irisa.triskell.kermeta.contribution1"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <menu
+	         id="org.eclipse.ui.articles.action.contribution.navigator.subMenu"
+	         label="Kermeta"
+	         path="additions">
+      		<separator name="kermetagroup2"/>
+      	 </menu>
+         <action
+               class="fr.irisa.triskell.kermeta.builders.ToggleNatureAction"
+               enablesFor="+"
+               id="fr.irisa.triskell.kermeta.addRemoveNatureAction"
+               label="Add/Remove Kermeta Nature"
+               menubarPath="org.eclipse.ui.articles.action.contribution.navigator.subMenu/kermetagroup1"/>
+      </objectContribution>
    </extension>
    <extension
          id="fr.irisa.triskell.kermeta.filetypes"
@@ -156,6 +174,30 @@
       <package
             class="fr.irisa.triskell.kermeta.language.structure.StructurePackage"
             uri="http://kermeta_language_structure/kermeta.ecore"/>
+   </extension>
+   <extension
+         id="kermetaProjectBuilder"
+         name="Kermeta Project Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder hasNature="true">
+         <run class="fr.irisa.triskell.kermeta.builders.KermetaProjectBuilder"/>
+      </builder>
+   </extension>
+   <extension
+         id="runner.kermetanature"
+         name="Kermeta Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run class="fr.irisa.triskell.kermeta.builders.KermetaNature"/>
+      </runtime>
+      <builder id="fr.irisa.triskell.kermeta.kermetaCheckerBuilder"/>
+   </extension>
+   <extension
+         id="kermetaProblem"
+         name="KermetaL Problem"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <persistent value="true"/>
    </extension>
 
 </plugin>
