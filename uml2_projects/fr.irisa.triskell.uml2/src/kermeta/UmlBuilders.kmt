@@ -4,7 +4,7 @@ require "Uml2.kmt"
 
 using uml2
 
-	abstract class AbstractFactory
+	abstract class AbstractUmlFactory
 	{
 		operation createOpaqueExpression() : kermeta::standard::~Void is do
 			//TODO: implement operation createOpaqueExpression

@@ -20,7 +20,7 @@
         <element href="ClassDiagram.uml2#_D_9KIMYWEdqnU4rvBMdn4Q"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="49,130" size="170,-1">
+    <contained xsi:type="di:GraphNode" position="49,124" size="170,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.3 //@diagrams.0/@contained.5"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ClassDiagram.uml2#_CNU5cMYXEdqnU4rvBMdn4Q"/>
@@ -41,6 +41,11 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge">
           <element href="ClassDiagram.uml2#_CNU5cMYXEdqnU4rvBMdn4Q"/>
         </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="ClassDiagram.uml2#_IQMScciWEdq6BfZN5KFyjA"/>
+          </semanticModel>
+        </contained>
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="50,233" size="169,-1">

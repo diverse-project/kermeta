@@ -38,6 +38,11 @@
         </eAnnotations>
         <type xmi:type="uml:DataType" href="file:/udd/vmahe/Projets/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ExternClassDiagram.uml2#_mSHSIMYeEdqnU4rvBMdn4Q"/>
       </ownedAttribute>
+      <ownedOperation xmi:id="_IQMScciWEdq6BfZN5KFyjA" name="aOperation" isAbstract="true">
+        <eAnnotations xmi:id="_SG544MiWEdq6BfZN5KFyjA" source="http://www.topcased.org/uuid">
+          <details xmi:id="_SG544ciWEdq6BfZN5KFyjA" key="uuid" value="114467587466924"/>
+        </eAnnotations>
+      </ownedOperation>
     </ownedMember>
     <ownedMember xmi:type="uml:Class" xmi:id="_GDAxkMYXEdqnU4rvBMdn4Q" name="BClass">
       <eAnnotations xmi:id="_RPSnUMYYEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
@@ -67,7 +72,7 @@
         <eAnnotations xmi:id="_bvR0QMYYEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
           <details xmi:id="_bvR0QcYYEdqnU4rvBMdn4Q" key="uuid" value="114440192038837"/>
         </eAnnotations>
-        <returnResult xmi:id="_77Gz0MYeEdqnU4rvBMdn4Q">
+        <returnResult xmi:id="_77Gz0MYeEdqnU4rvBMdn4Q" direction="return">
           <eAnnotations xmi:id="_-pAkgMYeEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
             <details xmi:id="_-pAkgcYeEdqnU4rvBMdn4Q" key="uuid" value="114440473159242"/>
           </eAnnotations>

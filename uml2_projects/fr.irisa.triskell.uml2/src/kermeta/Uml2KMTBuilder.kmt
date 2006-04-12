@@ -1,0 +1,68 @@
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "UmlBuilders.kmt"
+
+using builders
+
+class UmlFactory inherits AbstractUmlFactory
+{
+		method createComment() is do
+			//TODO: implement operation createComment
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		
+		method createClass() is do
+			//TODO: implement operation createClass
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		
+		method createOperation() is do
+			//TODO: implement operation createOperation
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		
+		method createParameter() is do
+			//TODO: implement operation createParameter
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		method createPackage() is do
+			//TODO: implement operation createPackage
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		
+		method createDataType() is do
+			//TODO: implement operation createDataType
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		
+		method createLiteralUnlimitedNatural() is do
+			//TODO: implement operation createLiteralUnlimitedNatural
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		
+		method createGeneralization() is do
+			//TODO: implement operation createGeneralization
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+/*
+		method createElementImport() is do
+			//TODO: implement operation createElementImport
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		
+		method createPackageImport() is do
+			//TODO: implement operation createPackageImport
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+*/
+		method createAssociation() is do
+			//TODO: implement operation createAssociation
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+}

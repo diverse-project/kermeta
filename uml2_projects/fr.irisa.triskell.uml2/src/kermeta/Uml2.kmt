@@ -1,10 +1,13 @@
 package uml2;
 
 require "ecore.kmt"
+require kermeta
 
-alias Integer : kermeta::standard::Integer;
-alias Boolean : kermeta::standard::Boolean;
-alias String : kermeta::standard::String;
+using kermeta::standard
+
+//alias Integer : kermeta::standard::Integer;
+//alias Boolean : kermeta::standard::Boolean;
+//alias String : kermeta::standard::String;
 alias UnlimitedNatural : kermeta::standard::Integer;
 alias Sequence : kermeta::language::structure::Object;
 alias Set : kermeta::language::structure::Object;
@@ -3072,7 +3075,7 @@ package visitors
 			//TODO: implement operation visitParameterableElement
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
-		operation visitTemplateBinding(visitable : TemplateBinding) : kermeta::standard::~Void is do
+		operation visitTemplateBinding(visitable : TemplateBinding) : kermeta::standard::~Void is do 
 			//TODO: implement operation visitTemplateBinding
 			raise kermeta::exceptions::NotImplementedException.new 
 		end

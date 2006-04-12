@@ -15,6 +15,7 @@ abstract class AClass
 {
 	attribute aProperty : String
 	attribute cCollection : CClass[0..*]
+	operation aOperation() is abstract
 }
 
 class BClass inherits AClass
