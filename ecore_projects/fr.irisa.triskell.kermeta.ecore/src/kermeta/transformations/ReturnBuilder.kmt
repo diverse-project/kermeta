@@ -1,0 +1,41 @@
+/* $Id: ReturnBuilder.kmt,v 1.1 2006-04-12 07:28:40 vmahe Exp $
+ * File : ReturnBuilder.kmt
+ * License : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Apr 11, 2006
+ * Authors : 
+ *  Vincent Mahé	<vmahe@irisa.fr>
+ * 
+ */
+
+/* This package contains operations code for Builder Pattern which return the created object.
+ You should use it through Patterns4Ecore.kmt 'addReturnBuilder' operation */
+package ReturnBuilder;
+
+require "Builders.kmt"
+require kermeta
+require "../ecore.kmt"
+require "../helpers/EcoreHelper.kmt"
+require "Tools.kmt"
+
+using kermeta::standard
+using ecore
+
+using EcoreBuilders
+
+class ReturnBuilderPattern inherits BuilderPattern
+{
+	/**
+	 * the only change in the generic BuilderPattern is the return type of each "create" method
+	 */
+	 
+	 method addCreateOperation (eClass : EClass, abstractfactory : EClass) is do
+		var builOp : EOperation init EOperation.new
+		builOp.name := "create" + eClass.name
+		builOp.eType := eClass
+		helper.addAnnotation(builOp,"kermeta","isAbstract","true")
+		abstractfactory.eOperations.add(builOp)
+    end
+	 
+}

@@ -1,4 +1,4 @@
-/* $Id: Patterns4Ecore.kmt,v 1.4 2006-04-05 12:15:10 vmahe Exp $
+/* $Id: Patterns4Ecore.kmt,v 1.5 2006-04-12 07:28:40 vmahe Exp $
  * File : Patterns4Ecore.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -22,6 +22,7 @@ require "../helpers/EcoreHelper.kmt"
 require "TopDownVisitor.kmt"
 require "Visitors.kmt"
 require "Builders.kmt"
+require "ReturnBuilder.kmt"
 require "Observers.kmt"
 
 using kermeta::standard
@@ -30,6 +31,7 @@ using EcoreVisitors
 using EcoreBuilders
 using EcoreObservers
 using TopDownVisitor
+using ReturnBuilder
 
 class Patterns4Ecore
 {
@@ -84,6 +86,19 @@ class Patterns4Ecore
     operation addBuilder(pack : EPackage) : EPackage is do
     	var specPack : EPackage
     	var builder : BuilderPattern init BuilderPattern.new
+    	builder.initialize
+    	builder.generateJavaCode := generateJavaCode
+    	builder.generateKermetaCode := generateKermetaCode
+    	specPack := builder.addBuilder(pack)
+		
+		result := specPack
+    end
+ 	/* --------------- another Builder -------------------------------*/    
+    /** create a "create" for each of the concrete class of the package
+     which return the created object. The Builder return a "builders" package */
+    operation addReturnBuilder(pack : EPackage) : EPackage is do
+    	var specPack : EPackage
+    	var builder : ReturnBuilderPattern init ReturnBuilderPattern.new
     	builder.initialize
     	builder.generateJavaCode := generateJavaCode
     	builder.generateKermetaCode := generateKermetaCode

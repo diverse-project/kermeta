@@ -1,4 +1,4 @@
-/* $Id: Builders.kmt,v 1.1 2006-04-05 12:15:10 vmahe Exp $
+/* $Id: Builders.kmt,v 1.2 2006-04-12 07:28:40 vmahe Exp $
  * File : Builders.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -60,6 +60,12 @@ class BuilderPattern
         abstractfactory.~abstract := true
         specPack.eClassifiers.add(abstractfactory)
         
+        applyPattern(pack, abstractfactory)
+        
+		result := specPack
+    end
+    
+    operation applyPattern (pack : EPackage, abstractfactory : EClass) is do
         // for each of the concrete classes of this package except for the Factory
         pack.eClassifiers.each{ eClassifier | 
             var eClass : EClass
@@ -67,18 +73,18 @@ class BuilderPattern
             if eClass != void then
             	if eClass != abstractfactory then
             		if (eClass.interface == false) and (eClass.~abstract == false) then
-            			
-            			var builOp : EOperation init EOperation.new
-						builOp.name := "create" + eClass.name
-						builOp.eType := eClass
-						builOp.eType := helper.getEcoreClassifierByName("ecore::EObject")
-	            		helper.addAnnotation(builOp,"kermeta","isAbstract","true")
-						abstractfactory.eOperations.add(builOp)
+            			addCreateOperation(eClass, abstractfactory)
             		end
         		end
         	end
         }
-        
-		result := specPack
+    end
+    operation addCreateOperation (eClass : EClass, abstractfactory : EClass) is do
+		var builOp : EOperation init EOperation.new
+		builOp.name := "create" + eClass.name
+//		builOp.eType := eClass		// overided by the next line
+		builOp.eType := helper.getEcoreClassifierByName("ecore::EObject")
+		helper.addAnnotation(builOp,"kermeta","isAbstract","true")
+		abstractfactory.eOperations.add(builOp)
     end
 }
