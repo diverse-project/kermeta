@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.16 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: KMT2KMPass7.java,v 1.17 2006-04-13 15:20:13 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -234,7 +234,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	public String getFileContentFromBuilder() {
 	    
 	    String str_uri = builder.getUri();
-	    String result = "";
+	    StringBuffer result = new StringBuffer();
 	    
 	    try 
 	    {
@@ -247,7 +247,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	         while (r.ready()) {
 	            char[] c = {(char)r.read()};
 	            String sc = (c[0]=='\t')?"    ":new String(c);
-	            result += sc;
+	            result.append(sc);
 	            //result += r.readLine() + "\r\n"; // FIXME : new line character is OS dependant.
 	        }
 	        r.close();
@@ -258,7 +258,7 @@ public class KMT2KMPass7 extends KMT2KMPass {
 	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
-		return result;
+		return result.toString();
 	}
 	
 	/**

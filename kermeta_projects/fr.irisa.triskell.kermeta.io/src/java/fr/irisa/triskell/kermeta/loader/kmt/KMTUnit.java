@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.20 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: KMTUnit.java,v 1.21 2006-04-13 15:20:13 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : EPL
@@ -69,7 +69,8 @@ public class KMTUnit extends KermetaUnit {
 		    p = new KermetaParser(new KermetaLexer(new StringReader(readAll(stream).replace('\t', ' '))));
 		} 
 		catch (IOException e1) {
-		    messages.addError("i/o error loading ressource '"+this.uri+"': " + e1, null);
+		    //messages.addError("i/o error loading ressource '"+this.uri+"': " + e1, null);
+		    messages.addError("i/o error : " + e1.getMessage(), null);
 		    KermetaUnit.internalLog.debug("i/o error loading ressource '"+this.uri+"': " + e1, null);
 		    return;
 		}
@@ -101,13 +102,13 @@ public class KMTUnit extends KermetaUnit {
 	
 	protected static String readAll(InputStream in)
 	{ 
-	    String output = new String();
+	    StringBuffer output = new StringBuffer();
 	    try
 	    {
 	        int c; 
 	       // int charcount = 0; int linenum = 1; int c_old = -1;
 	        while ((c = in.read()) != -1) {
-	            output += (char)c;
+	            output.append((char)c);
 	        }
 	        in.close();
 	    }
@@ -115,7 +116,7 @@ public class KMTUnit extends KermetaUnit {
 	    {
 	        e.printStackTrace();
 	    }
-	    return output;
+	    return output.toString();
 	}
 	
     /**
