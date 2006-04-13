@@ -5,8 +5,7 @@ package uml2kmt_visitor;
 
 
 require kermeta
-//require "Uml2.kmt"
-require "../ecore/UML2.ecore"
+require "Uml2.kmt"
 require "TopDownVisitor.kmt"
 
 using kermeta::standard

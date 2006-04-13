@@ -3,7 +3,7 @@ package topdown_visitor;
 require "Uml2.kmt"
 
 using uml2
-using visitors
+using uml2::visitors
 
 abstract class TopDownVisitor inherits visitors::Visitor
 {

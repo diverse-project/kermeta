@@ -1,5 +1,6 @@
 package builders;
 
+/* this package is not use for Uml2KMT transformation */
 require "Uml2.kmt"
 
 using uml2
