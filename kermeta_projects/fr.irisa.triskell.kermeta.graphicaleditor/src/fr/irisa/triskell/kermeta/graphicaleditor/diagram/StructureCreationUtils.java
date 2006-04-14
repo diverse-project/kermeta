@@ -95,7 +95,10 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 	/**
 	 * <!-- begin-user-doc -->
 	 * Create the appearance of a class definition, with the accepted composite elements
-	 * (namely, owned properties and operations)
+	 * (namely, owned properties and operations).
+	 * Developer note : the order where you add the contained elements (in the body of this method)
+	 * condition their position in the 
+	 * figure.  
 	 * <!-- end-user-doc -->
 	 * 
 	 * @param element
@@ -108,13 +111,14 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 		// TODO this snippet of code should be customized if it is not well generated
 		GraphNode nodeParent = createGraphNode(element);
 
+		GraphNode fproperty = createGraphNode(element,
+				StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE);
+		fproperty.setContainer(nodeParent);
+		
 		GraphNode foperation = createGraphNode(element,
 				StructurePackage.CLASS_DEFINITION__OWNED_OPERATION);
 		foperation.setContainer(nodeParent);
 
-		GraphNode fproperty = createGraphNode(element,
-				StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE);
-		fproperty.setContainer(nodeParent);
 		return nodeParent;
 	}
 
