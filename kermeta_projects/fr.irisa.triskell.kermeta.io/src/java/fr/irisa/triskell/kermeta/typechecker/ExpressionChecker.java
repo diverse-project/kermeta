@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.28 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: ExpressionChecker.java,v 1.29 2006-04-14 09:02:54 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -540,9 +540,18 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 	
 	public Object visitCallSuperOperation(CallSuperOperation expression) {
 	    preVisit();
-	    Type result =  checkOperationCall(context.getSuperOperation(), expression);
-	    expressionTypes.put(expression, result);
-		expression.setStaticType(result.getFType());
+	    // If user called "super" in an operation that has no super operation
+	    Type result = TypeCheckerContext.VoidType;
+	    if (context.getSuperOperation() == null)
+	    {
+	    	unit.messages.addError("TYPE-CHECKER : the call of super is illegal in operation '" + context.getCurrentCallable().getName() + "' which is not a redefined one", expression);
+	    }
+	    else
+	    {
+	    	result =  checkOperationCall(context.getSuperOperation(), expression);
+	    	expressionTypes.put(expression, result);
+	    	expression.setStaticType(result.getFType());
+	    }
 	    return result;
 	}
 	
