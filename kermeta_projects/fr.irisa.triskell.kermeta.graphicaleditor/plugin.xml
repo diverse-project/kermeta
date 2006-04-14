@@ -2,17 +2,16 @@
 <?eclipse version="3.0"?>
 <plugin
    id="fr.irisa.triskell.kermeta.graphicaleditor"
-   name="kmEditor"
+   name="kmEditor : Kermeta Graphical editor"
    version="0.0.1"
-   provider-name="Topcased"
+   provider-name="Topcased / INRIA"
    class="fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin">
-
    <runtime>
       <library name="fr.irisa.triskell.kermeta.graphicaleditor.jar">
          <export name="*"/>
       </library>
    </runtime>
-
+  <!-- eclipse says it is ignored if there is a manifest but this still cause trouble when deploying it -->
    <requires>
       <import plugin="fr.irisa.triskell.kermeta"/>      
       <import plugin="fr.irisa.triskell.kermeta.model.edit" export="true"/>   
@@ -108,106 +107,6 @@
             editorId="fr.irisa.triskell.kermeta.graphicaleditor.StructureEditor"
             id="fr.irisa.triskell.kermeta.graphicaleditor.createChildMenu"
             name="createChildMenu"/>
-   </extension>
-<!--   <extension
-         name="ConstraintProvider"
-         point="org.eclipse.emf.validation.constraintProviders">
-   <category
-         id="fr.irisa.triskell.kermeta.language.structure"
-         mandatory="false"
-         name="Structure category">
-   </category>
-   <constraintProvider
-         cache="true"
-         mode="Batch">
-      <package namespaceUri="http://kermeta_language_structure/kermeta.ecore"/>
-      <constraints categories="fr.irisa.triskell.kermeta.language.structure">
-        <constraint
-              class="fr.irisa.triskell.kermeta.graphicaleditor.validation.constraints.PackageConstraints"
-              id="fr.irisa.triskell.kermeta.graphicaleditor.validation.package_name"
-              lang="Java"
-              mode="Batch"
-              name="package_name"
-              severity="WARNING"
-              statusCode="101">
-	  <description>%example1.desc</description>
-	  <message>%example1.msg</message>
-	  <target class="fr.irisa.triskell.kermeta.language.structure.Package"/>
-   <target class="fr.irisa.triskell.kermeta.language.structure.ClassDefinition"/>
-	  
-	  <![CDATA[
-	     self.name->size() > 0
-	  ]]>
-   </constraint>
-      </constraints>
-   </constraintProvider>
-   </extension>
-   <extension
-         point="org.eclipse.emf.validation.constraintBindings">
-      <clientContext
-            default="false"
-            id="org.eclipse.emf.validation.pde.example.general.ui.libraryContext">
-         <selector class="fr.irisa.triskell.kermeta.graphicaleditor.validation.ValidationDelegateClientSelector"/>
-      </clientContext>
-      <binding
-            context="org.eclipse.emf.validation.pde.example.general.ui.libraryContext"
-            category="org.eclipse.emf.validation.pde.example.general.ui.library"/>
-   </extension>
-   <extension
-         point="org.eclipse.emf.validation.validationListeners">
-      <listener class="fr.irisa.triskell.kermeta.graphicaleditor.validation.ValidationListener">
-         <clientContext id="org.eclipse.emf.validation.pde.example.general.ui.libraryContext"/>
-      </listener>
-   </extension>
--->
-<!-- Another test -->
-
-   <extension point="org.eclipse.emf.validation.constraintBindings">
-      <clientContext id="com.ibm.xtools.emf.validation.example.pde.adapter">
-         <selector class="fr.irisa.triskell.kermeta.graphicaleditor.ClientSelector1"/>
-      </clientContext>
-      
-      <binding
-            category="Toto"
-            constraint="example1"
-            context="com.ibm.xtools.emf.validation.example.pde.adapter"/>
-   </extension>
-
-   <!-- Define a constraint that we can use to demonstrate this adapter. -->
-   <extension
-         point="org.eclipse.emf.validation.constraintProviders">
-      <constraintProvider
-            cache="true"
-            mode="Batch">
-		<package namespaceUri="http://kermeta_language_structure/kermeta.ecore"/>
-         <constraints categories="Toto, Titi">
-            <constraint
-                  lang="Java"
-                  severity="ERROR"
-                  mode="Batch"
-                  name="%example1.name"
-                  id="example1"
-                  statusCode="201"
-				 class="fr.irisa.triskell.kermeta.graphicaleditor.validation.constraints.PackageConstraints">
-               <description>%example1.desc</description>
-               <message>%example1.msg</message>
-
-               <!-- This constraint applies to any library element. -->
-               <target class="Package"/>
-               <target class="ClassDefinition"/>
-               <target class="Operation"/>
-            </constraint>
-         </constraints>
-      </constraintProvider>
-      <category
-            id="Titi"
-            name="Titi"/>
-      <category
-            id="Toto"
-            name="Toto"/>
-   </extension>
-
-<!--                  class="org.eclipse.emf.validation.examples.adapter.constraints.ExampleConstraint">-->
-
+   </extension> 
 
 </plugin>
