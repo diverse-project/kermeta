@@ -1,4 +1,4 @@
-/* $Id: UpdatePropertyNodeCommand.java,v 1.3 2006-04-11 17:29:35 zdrey Exp $
+/* $Id: UpdatePropertyNodeCommand.java,v 1.4 2006-04-14 15:06:26 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -106,11 +106,9 @@ public class UpdatePropertyNodeCommand extends Command
         _property.getContainedType().clear();
         
         // Update the property multiplicity
-        System.out.println("MULT: " + _multiplicity + " ");
         String lower_str = _multiplicity.substring(1, _multiplicity.indexOf("."));
         String upper_str = _multiplicity.substring(_multiplicity.lastIndexOf(".")+1, _multiplicity.indexOf("]"));
-         
-        System.out.println("lower:"+lower_str+"upper:"+upper_str);
+        
         int lower = Integer.valueOf(lower_str);
         int upper = upper_str.equals("*")?-1:Integer.valueOf(upper_str);
         _property.setUpper(upper);
