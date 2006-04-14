@@ -1,29 +1,34 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit;
 
-import java.util.Iterator;
-
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.topcased.draw2d.figures.ComposedLabel;
+import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.modeler.ColorRegistry;
 import org.topcased.modeler.ModelerEditPolicyConstants;
+import org.topcased.modeler.di.model.Diagram;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
+import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.ClassDefinitionRestoreConnectionCommand;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.EditPartUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.ClassDefinitionFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.ClassDefinitionLayoutEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.InheritanceEdgeCreationEditPolicy;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PropertyEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.extension.ExtendedInheritanceEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.extension.ExtendedPropertyEdgeCreationEditPolicy;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * The ClassDefinition object controller
@@ -52,17 +57,12 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 	 * can be only created once between a given source and a given target --> see
 	 * isUnique property on the related ecore model elements "superTypes" and "ownedAttributes")
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(StructureEditPolicyConstants.PROPERTY_EDITPOLICY,
-				new ExtendedPropertyEdgeCreationEditPolicy());
-
-		installEditPolicy(StructureEditPolicyConstants.INHERITANCE_EDITPOLICY,
-				new ExtendedInheritanceEdgeCreationEditPolicy());
-
+		extendedCreateEditPolicies();
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
 				new RestoreEditPolicy() {
 					protected Command getRestoreConnectionsCommand(
@@ -113,7 +113,7 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 	 * @generated
 	 */
 	protected int getDefaultWidth() {
-		return 50;
+		return 70;
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 	 * @generated
 	 */
 	protected int getDefaultHeight() {
-		return 40;
+		return 20;
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 	 * @generated
 	 */
 	public int getMinimumWidth() {
-		return 40;
+		return 50;
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 	 * @generated
 	 */
 	public int getMinimumHeight() {
-		return 40;
+		return 20;
 	}
 
 	// 
@@ -166,6 +166,43 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 
 	public ClassDefinition getModelClassDefinition() {
 		return (ClassDefinition) getEObject();
+	}
+
+	/**
+	 * Update the ComposedLabel with the correct Suffix label (if necessary) and
+	 * the right icon and font for the Main EditableLabel
+	 * 
+	 * @see org.topcased.modeler.edit.EMFGraphNodeEditPart#refreshHeaderLabel()
+	 */
+	protected void refreshHeaderLabel() {
+		super.refreshHeaderLabel();
+		ClassDefinitionFigure fig = (ClassDefinitionFigure) getFigure();
+		ComposedLabel lbl = (ComposedLabel) fig.getLabel();
+//		EditableLabel lbl = (EditableLabel) fig.getLabel();
+		if (getModelClassDefinition().getName() != null)
+			lbl.setMain(getModelClassDefinition().getName());
+
+		//    ((Label) lbl.getMain()).setIcon(EcoreImageRegistry.getImage("ECLASS"));
+		// Get the class container (it is always a Package -- until we have the Model notion :p)
+		Package owningPackage = (Package) getModelClassDefinition()
+				.eContainer();
+
+		// check if the class is not included in the EPackage of the current diagram
+		if (getModelClassDefinition().eContainer() != null
+				&& getModelClassDefinition().eContainer() != Utils
+						.getElement(((Diagram) getParent().getModel())
+								.getSemanticModel().getGraphElement())) {
+			if (owningPackage.getName() != null) {
+				//lbl.setSuffix("<<from "+getModelEClass().getEPackage().getName()+">>");
+				String qname = KMTHelper
+						.getQualifiedName(getModelClassDefinition());
+				if (getModelClassDefinition().getName() != null)
+					qname = qname.substring(0, qname.lastIndexOf(getModelClassDefinition().getName()));
+				lbl.setSuffix(qname);
+			}
+		} else {
+			lbl.setSuffix("");
+		}
 	}
 
 }

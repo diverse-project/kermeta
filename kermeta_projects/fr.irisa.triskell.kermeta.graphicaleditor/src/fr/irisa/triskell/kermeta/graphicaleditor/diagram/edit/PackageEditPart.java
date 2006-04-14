@@ -5,16 +5,22 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.editpolicies.ResizableEditPolicy;
 import org.eclipse.swt.graphics.Color;
+import org.topcased.draw2d.figures.ComposedLabel;
 import org.topcased.modeler.ColorRegistry;
 import org.topcased.modeler.ModelerEditPolicyConstants;
+import org.topcased.modeler.di.model.Diagram;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
+import org.topcased.modeler.utils.Utils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.PackageRestoreConnectionCommand;
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.ClassDefinitionFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.PackageFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PackageLayoutEditPolicy;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * The Package object controller
@@ -115,6 +121,41 @@ public class PackageEditPart extends NamedElementEditPart {
 	 */
 	protected Color getDefaultBackgroundColor() {
 		return ColorRegistry.getInstance().get("241,241,241");
+	}
+	
+	protected Package getPackage() { return (Package) getEObject();}
+	/**
+	 * @see org.topcased.modeler.edit.EMFGraphNodeEditPart#refreshHeaderLabel()
+	 */
+	protected void refreshHeaderLabel() {
+		super.refreshHeaderLabel();
+		PackageFigure fig = (PackageFigure) getFigure();
+		ComposedLabel lbl = (ComposedLabel) fig.getLabel();
+//		EditableLabel lbl = (EditableLabel) fig.getLabel();
+		if (getPackage().getName() != null)
+			lbl.setMain(getPackage().getName());
+
+		//    ((Label) lbl.getMain()).setIcon(EcoreImageRegistry.getImage("ECLASS"));
+		// Get the class container (it is always a Package -- until we have the Model notion :p)
+		Package owningPackage = (Package) getPackage()
+				.eContainer();
+
+		// check if the class is not included in the EPackage of the current diagram
+		if (getPackage().eContainer() != null
+				&& getPackage().eContainer() != Utils
+						.getElement(((Diagram) getParent().getModel())
+								.getSemanticModel().getGraphElement())) {
+			if (owningPackage.getName() != null) {
+				//lbl.setSuffix("<<from "+getModelEClass().getEPackage().getName()+">>");
+				String qname = KMTHelper
+						.getQualifiedName(getPackage());
+				if (getPackage().getName() != null)
+					qname.lastIndexOf(getPackage().getName());
+				lbl.setSuffix(qname);
+			}
+		} else {
+			lbl.setSuffix("");
+		}
 	}
 
 }
