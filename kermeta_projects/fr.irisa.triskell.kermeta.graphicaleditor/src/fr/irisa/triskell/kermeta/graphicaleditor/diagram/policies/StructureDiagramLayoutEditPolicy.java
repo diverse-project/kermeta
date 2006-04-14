@@ -16,8 +16,6 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 
 /**
@@ -56,7 +54,7 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 	 */
 	protected Command getCreateCommand(GraphNode parent, GraphNode child,
 			Point loc, Dimension dim, int pos, boolean needModelUpdate) {
-		
+
 		if (parent != null && child != null) {
 			EditDomain domain = getHost().getViewer().getEditDomain();
 
@@ -88,10 +86,10 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 					// The eContainer of a ClassDefinition?
 					EObject existingContainer = childEObject.eContainer();
 					//EObject existingContainer = childEObject.eContainingFeature();
-					// TODO : we should allow to put classes of subpackages in parent packages
-					if (!getParentContainerEObject(parent, child).equals(existingContainer)
-							&& !isExternalObjectAllowed(parent, child))
-					{
+					// this allow to put classes of subpackages in the diagram itself
+					if (!getParentContainerEObject(parent, child).equals(
+							existingContainer)
+							&& !isExternalObjectAllowed(parent, child)) {
 						return UnexecutableCommand.INSTANCE;
 					}
 				}
@@ -119,9 +117,8 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 						Tag mytag = null;
 						// Tag is the only object that has no container...
 						// Special handling : add it to the resource
-						if (childEObject instanceof Tag)
-						{
-							mytag = (Tag)childEObject;
+						if (childEObject instanceof Tag) {
+							mytag = (Tag) childEObject;
 							parentEObject.eResource().getContents().add(mytag);
 						}
 					}
@@ -144,13 +141,21 @@ public class StructureDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 	 * @see org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy#isSeveralDisplayAllowed(org.topcased.modeler.di.model.GraphNode, org.topcased.modeler.di.model.GraphNode, boolean)
 	 */
 	@Override
-	protected boolean isSeveralDisplayAllowed(GraphNode parent, GraphNode child, boolean needModelUpdate) {
+	protected boolean isSeveralDisplayAllowed(GraphNode parent,
+			GraphNode child, boolean needModelUpdate) {
 		/*EObject parentEObject = Utils.getElement(parent);
-		EObject childEObject = Utils.getElement(child);*/
+		 EObject childEObject = Utils.getElement(child);*/
 		return false;
 	}
 	
-	
-	
+    /**
+     * Put the return value of this method to true if you want to allow external object to be added.
+     * @see org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy#isExternalObjectAllowed(org.topcased.modeler.di.model.GraphNode, org.topcased.modeler.di.model.GraphNode)
+     */
+    protected boolean isExternalObjectAllowed(GraphNode parent, GraphNode child)
+    {
+        return true;
+    }
+
 
 }
