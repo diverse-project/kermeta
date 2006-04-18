@@ -89,15 +89,15 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 				StructurePackage.eINSTANCE.getPackage());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
 				factory, StructureImageRegistry.getImageDescriptor("PACKAGE"),
-				null, 12, 10, 10, 10);
+				null, 70, 50, 70, 50);
 		entries.add(objectTool);
 		newObjTxt = "Class";
 		factory = new GraphElementCreationFactory(creationUtils,
 				StructurePackage.eINSTANCE.getClassDefinition());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
 				factory, StructureImageRegistry
-						.getImageDescriptor("CLASSDEFINITION"), null, 70, 10,
-				10, 7);
+						.getImageDescriptor("CLASSDEFINITION"), null, 70, 40,
+				70, 70);
 		entries.add(objectTool);
 		newObjTxt = "Operation";
 		factory = new GraphElementCreationFactory(creationUtils,
@@ -112,7 +112,7 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 				StructurePackage.eINSTANCE.getTag());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
 				factory, StructureImageRegistry.getImageDescriptor("TAG"),
-				null, 20, 10, 0, 0);
+				null, 70, 50, 70, 50);
 		entries.add(objectTool);
 
 		basicDrawer.addAll(entries);
@@ -138,9 +138,8 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 		newObjTxt = "Property";
 		factory = new GraphElementCreationFactory(creationUtils,
 				StructurePackage.eINSTANCE.getProperty());
-		// below : arg0->the palette item label, arg1->the default name 
 		connectionTool = new ModelerConnectionCreationToolEntry(newObjTxt,
-				newObjTxt.toLowerCase(), factory, StructureImageRegistry
+				newObjTxt, factory, StructureImageRegistry
 						.getImageDescriptor("PROPERTY"), null);
 		entries.add(connectionTool);
 
