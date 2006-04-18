@@ -1,4 +1,4 @@
-/* $Id: ExpressionChecker.java,v 1.29 2006-04-14 09:02:54 zdrey Exp $
+/* $Id: ExpressionChecker.java,v 1.30 2006-04-18 16:23:22 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionChecker.java
 * License : EPL
@@ -352,6 +352,14 @@ public class ExpressionChecker extends KermetaOptimizedVisitor {
 			if (op != null) {
 			    unit.messages.addError("TYPE-CHECKER : Only variables and properties can be assigned", expression);
 			    return TypeCheckerContext.VoidType;
+			}
+			// Check if it is a property and if this property is derived AND readonly
+			CallableProperty prop = target.getPropertyByName(fc.getName());
+			if (prop!=null && prop.getProperty().isIsReadOnly())
+			{
+				unit.messages.addError("TYPE-CHECKER : '"+ fc.getName() + "' property is readonly. You can't assign it.", expression);
+				return TypeCheckerContext.VoidType;
+				
 			}
 	    }
 	    
