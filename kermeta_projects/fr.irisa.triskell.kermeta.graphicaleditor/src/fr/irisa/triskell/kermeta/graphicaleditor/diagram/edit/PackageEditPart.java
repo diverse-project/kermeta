@@ -1,5 +1,6 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
@@ -139,7 +140,8 @@ public class PackageEditPart extends NamedElementEditPart {
 		// Get the class container (it is always a Package -- until we have the Model notion :p)
 		Package owningPackage = (Package) getPackage()
 				.eContainer();
-
+		//System.out.println("Parent? : " +((Diagram) getParent()));
+				//.getSemanticModel());
 		// check if the class is not included in the EPackage of the current diagram
 		if (getPackage().eContainer() != null
 				&& getPackage().eContainer() != Utils
@@ -150,12 +152,13 @@ public class PackageEditPart extends NamedElementEditPart {
 				String qname = KMTHelper
 						.getQualifiedName(getPackage());
 				if (getPackage().getName() != null)
-					qname.lastIndexOf(getPackage().getName());
+					qname = qname.substring(0, qname.lastIndexOf(getPackage().getName())-2);
 				lbl.setSuffix(qname);
 			}
 		} else {
 			lbl.setSuffix("");
 		}
+		lbl.getSuffix().setForegroundColor(ColorConstants.gray);
 	}
 
 }

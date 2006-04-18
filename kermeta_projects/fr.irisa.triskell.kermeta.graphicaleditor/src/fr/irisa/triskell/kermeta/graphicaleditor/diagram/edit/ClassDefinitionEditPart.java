@@ -1,5 +1,6 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit;
 
+import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.commands.Command;
@@ -197,12 +198,13 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 				String qname = KMTHelper
 						.getQualifiedName(getModelClassDefinition());
 				if (getModelClassDefinition().getName() != null)
-					qname = qname.substring(0, qname.lastIndexOf(getModelClassDefinition().getName()));
+					qname = qname.substring(0, qname.lastIndexOf(getModelClassDefinition().getName())-2);
 				lbl.setSuffix(qname);
 			}
 		} else {
 			lbl.setSuffix("");
 		}
+		lbl.getSuffix().setForegroundColor(ColorConstants.gray);
 	}
 
 }
