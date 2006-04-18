@@ -1,11 +1,13 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditDomain;
 import org.topcased.modeler.commands.CreateGraphEdgeCommand;
 import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphElement;
 import org.topcased.modeler.utils.Utils;
 
+import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaLabelHelper;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -97,4 +99,24 @@ public class PropertyEdgeCreationCommand extends CreateGraphEdgeCommand //Create
 	{	return source; }
 	public GraphElement getTarget()
 	{	return target; }
+
+	/**
+	 * Returns the initial name to give to the edge to be created.
+	 * @see org.topcased.modeler.commands.CreateGraphEdgeCommand#initName(org.eclipse.emf.ecore.EObject)
+	 */
+	protected void initName(EObject cont) {
+		// init the name of the model object
+        KermetaLabelHelper labelHelper = new KermetaLabelHelper();
+        String curName = labelHelper.getName(editDomain, Utils.getElement(edge));
+        if (curName == null || "".equals(curName))
+        {
+            labelHelper.initName(editDomain, cont, Utils.getElement(edge));
+        }
+
+	}
+	
+	
+	
+	
+	
 }
