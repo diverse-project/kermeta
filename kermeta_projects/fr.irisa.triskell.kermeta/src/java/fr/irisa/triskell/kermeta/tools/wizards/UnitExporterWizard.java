@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.10 2006-02-15 18:19:18 zdrey Exp $
+/* $Id: UnitExporterWizard.java,v 1.11 2006-04-19 15:24:25 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -165,6 +165,7 @@ public class UnitExporterWizard extends Wizard{
 	public boolean performFinish() {
 		KermetaPlugin.getDefault().newConsole();
 		KermetaPlugin.getDefault().getConsoleStream().println("Loading " + inputFile.getName()  );
+		
 		//DestFileWizardPage outputPage = (DestFileWizardPage)this.getPage(OUTPUTFILE_PAGENAME);
 		outputPage.getFileName();
 		
@@ -188,6 +189,13 @@ public class UnitExporterWizard extends Wizard{
 				
 				outputFile = outputPage.createNewFile();				
 			    
+				// display eventual warnings
+				if(unit.messages.getAllWarnings().size() > 0){
+					MessageConsoleStream mcs = KermetaPlugin.getDefault().getConsole().newMessageStream();
+		        	mcs.setColor(new Color(null, 255,170,0));
+		        	mcs.println(unit.messages.getAllMessagesAsString());        	
+				}
+				
 			    KermetaPlugin.getDefault().getConsoleStream().println("Writing " + outputFile.getName()  );
 				
 				writeUnit(unit, outputFile );
@@ -211,7 +219,7 @@ public class UnitExporterWizard extends Wizard{
 				KermetaPlugin.getDefault().consolePrintStackTrace(e);
 			}
 		}
-		
+
 		return true;
 	}
 
