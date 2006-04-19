@@ -1,4 +1,4 @@
-/* $Id: ecore2dot.kmt,v 1.1 2006-03-15 10:52:17 dvojtise Exp $
+/* $Id: ecore2dot.kmt,v 1.2 2006-04-19 14:15:46 vmahe Exp $
  * File : Ecore2dot.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -57,16 +57,13 @@ class Main
     operation main() : Void is do 
 		
 		var model : String init "examples/kermeta_java_structure.ecore"
-		var metamodel : String init "ecore.ecore"
+		var metamodel : String init "../../ecore/Ecore.ecore"
 		
 		exclude_patterns := Sequence<String>.new
 		exclude_patterns.add("Boolean")
 		exclude_patterns.add("String")
 		exclude_patterns.add("Integer")
 		exclude_patterns.add("Real")
-		exclude_patterns.add("FString")
-		exclude_patterns.add("FBoolean")
-		exclude_patterns.add("FInteger")
 		exclude_patterns.add("EString")
 		exclude_patterns.add("EBoolean")
 		exclude_patterns.add("EInt")
@@ -74,7 +71,7 @@ class Main
 		
 		var resource : kermeta::persistence::EMFResource
         var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
-        resource := repository.createResource(model,metamodel)
+        resource ?= repository.createResource(model,metamodel)
         resource.load
 	
 		// dot header
