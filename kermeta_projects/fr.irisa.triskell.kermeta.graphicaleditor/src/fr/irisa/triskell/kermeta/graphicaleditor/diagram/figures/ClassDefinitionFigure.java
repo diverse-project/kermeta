@@ -9,7 +9,7 @@ import org.eclipse.draw2d.ToolbarLayout;
 import org.topcased.draw2d.figures.ComposedLabel;
 import org.topcased.draw2d.figures.EditableLabel;
 import org.topcased.draw2d.figures.Label;
-import org.topcased.modeler.ecore.EcoreImageRegistry;
+//import org.topcased.modeler.ecore.EcoreImageRegistry;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
 
