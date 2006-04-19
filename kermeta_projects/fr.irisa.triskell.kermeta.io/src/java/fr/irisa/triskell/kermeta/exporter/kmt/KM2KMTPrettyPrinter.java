@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.24 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.25 2006-04-19 12:23:54 dvojtise Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
@@ -65,6 +66,7 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -81,6 +83,9 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	protected String current_pname;
 	
 	protected boolean typedef = true;
+	
+	final static public Logger internalLog = LogConfigurationHelper.getLogger("KM2KMT");
+	
 	
 	public void ppPackage(Package p, File file) {
 		try {
@@ -210,6 +215,10 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	public Object visit(fr.irisa.triskell.kermeta.language.structure.Class node) {
 		String qname = KMTHelper.getQualifiedName(node.getTypeDefinition());
 		String name = KMTHelper.getMangledIdentifier(node.getTypeDefinition().getName());
+		if(qname == null || name == null){
+			internalLog.error("Problem visiting a Class node with TypeDefinition name == null" );
+			return "";
+		}
 		String result = ppTypeName(qname, name);
 		if (node.getTypeParamBinding().size() > 0) {
 			result += "<" + ppComaSeparatedNodes(node.getTypeParamBinding()) + ">";

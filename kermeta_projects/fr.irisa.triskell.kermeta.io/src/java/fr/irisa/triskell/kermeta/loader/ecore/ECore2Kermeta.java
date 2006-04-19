@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.16 2006-04-11 13:26:34 zdrey Exp $
+/* $Id: ECore2Kermeta.java,v 1.17 2006-04-19 12:23:54 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -249,16 +249,31 @@ public class ECore2Kermeta extends EcoreVisitor {
 	
 	public Object visit(EClass node) {
 		isClassTypeOwner = true;
-		TypeDefinition td = unit.typeDefinitionLookup(getQualifiedName(node));
-		if (td != null) {
-			unit.messages.addError("Duplicate definition of type " + getQualifiedName(node), td);
-		}
-		
+
+		// but still set its values ...
 		current_classdef = (ClassDefinition)types.get(node);
 		current_classdef.setName(node.getName());
 		current_classdef.setIsAbstract(node.isAbstract() || node.isInterface());
 		
-		getCurrentPackage().getOwnedTypeDefinition().add(current_classdef);
+		TypeDefinition td = unit.typeDefinitionLookup(getQualifiedName(node));
+		if (td != null) {			
+			if(((ENamedElement)node.eContainer()).getName().equals("ecore")){
+				// ignore duplicate definition due to the ecore reflexivity
+				KermetaUnit.internalLog.warn("Ignore duplicate definition of ecore type "+ getQualifiedName(node));			
+				unit.messages.addWarning("Ignore duplicate definition of ecore Type " + getQualifiedName(node), null);
+				
+			}
+			else{
+				KermetaUnit.internalLog.error("Duplicate definition of type "+ getQualifiedName(node));			
+				unit.messages.addError("Duplicate definition of type " + getQualifiedName(node), td);
+				// however add it, but this will never be allowed to run ...
+				getCurrentPackage().getOwnedTypeDefinition().add(current_classdef);
+			}
+		}
+		else{
+				
+			getCurrentPackage().getOwnedTypeDefinition().add(current_classdef);
+		}
 		
 		// set super types
 		Iterator it = node.getESuperTypes().iterator();
@@ -380,7 +395,10 @@ public class ECore2Kermeta extends EcoreVisitor {
 			{
 				Property prop = unit.getPropertyByName(current_classdef, current_op.getName());
 				if (prop != null) {
-					current_op.setName(methodRenamePrefix + current_op.getName() +methodRenamePostfix);
+					String newName = methodRenamePrefix + current_op.getName() +methodRenamePostfix;
+					unit.messages.addWarning("Quickfix used to rename duplicate operation due to a the property with the same name: " + current_op.getName() + " renamed into " + newName, null);		        	
+				
+					current_op.setName(newName);
 				}
 			}
 			// Quickfix to avoid two operations with the same name
@@ -388,8 +406,11 @@ public class ECore2Kermeta extends EcoreVisitor {
 			{
 				Operation op = unit.getOperationByName(current_classdef, current_op.getName());        	
 				int i = 2;
+				String newName;
 				while (op != null) {
-					current_op.setName(current_op.getName() + i);
+					newName = current_op.getName() + i;
+					unit.messages.addWarning("Quickfix used to rename duplicate operation: " + current_op.getName() + " renamed into " + newName, null);		        	
+					current_op.setName(newName);
 					op = unit.getOperationByName(current_classdef, current_op.getName());
 				}
 			}
@@ -426,7 +447,7 @@ public class ECore2Kermeta extends EcoreVisitor {
 		EOperation result = null; 
 		EClass owningclass = node.getEContainingClass();
 		
-		Iterator it = owningclass.getESuperTypes().iterator();
+		//Iterator it = owningclass.getESuperTypes().iterator();
 		result = findOperationInSuperTypes(owningclass.getESuperTypes(), node);
 		return result;
 	}
@@ -509,6 +530,17 @@ public class ECore2Kermeta extends EcoreVisitor {
         
         ptype.setName(node.getName());
         
+        
+        TypeDefinition td = unit.typeDefinitionLookup(getQualifiedName(node));
+		if (td != null) {
+			// duplicate, this DataType was already defined
+			if(((ENamedElement)node.eContainer()).getName().equals("ecore")){
+				// ignore duplicate definition due to the ecore reflexivity
+				KermetaUnit.internalLog.warn("Ignore duplicate definition of DataType "+ getQualifiedName(node));
+				unit.messages.addWarning("Ignore duplicate definition of ecore DataType " + getQualifiedName(node), null);
+				return ptype;
+			}
+		}
         String type_name = node.getInstanceClassName();
   
         if (primitive_types_mapping.containsKey(type_name)) {
@@ -612,6 +644,13 @@ public class ECore2Kermeta extends EcoreVisitor {
 		else return e.getName();
 	}
 	
+	
+	public String getURI(ENamedElement e){
+		if (e.eResource() != null) return e.eResource().getURI().toFileString();		
+		if (e.eContainer() instanceof ENamedElement) 
+			return getURI((ENamedElement)e.eContainer()) + "/" + e.getName();
+		else return "";
+	}
 	public String getEscapedName(ENamedElement e)
 	{
 		return KMTHelper.getMangledIdentifier(e.getName());

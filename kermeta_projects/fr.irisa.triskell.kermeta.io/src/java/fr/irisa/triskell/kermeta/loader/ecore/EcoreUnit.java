@@ -1,4 +1,4 @@
-/* $Id: EcoreUnit.java,v 1.2 2005-05-26 22:39:09 ffleurey Exp $
+/* $Id: EcoreUnit.java,v 1.3 2006-04-19 12:23:54 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : EcoreUnit.java
 * License : GPL
@@ -29,11 +29,13 @@ public class EcoreUnit extends KermetaUnit {
      */
     public EcoreUnit(String uri, Hashtable packages) {
         super(uri, packages);
+        ECore2Kermeta.isQuickFixEnabled = true;
         ECore2Kermeta.loadunit(this);
     }
     
     public EcoreUnit(Resource resource, Hashtable packages) {
         super(resource.getURI().toString(), packages);
+        ECore2Kermeta.isQuickFixEnabled = true;
         ECore2Kermeta.loadunit(this, resource);
     }
 
