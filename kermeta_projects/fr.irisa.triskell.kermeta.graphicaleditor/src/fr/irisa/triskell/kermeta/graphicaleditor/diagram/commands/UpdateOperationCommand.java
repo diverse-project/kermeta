@@ -1,4 +1,4 @@
-/* $Id: UpdateOperationCommand.java,v 1.5 2006-04-10 17:38:08 zdrey Exp $
+/* $Id: UpdateOperationCommand.java,v 1.6 2006-04-20 15:06:37 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -24,8 +24,10 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.OperationDataStructure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.ParameterObject;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
@@ -61,7 +63,7 @@ public class UpdateOperationCommand extends Command
     private fr.irisa.triskell.kermeta.language.structure.Class _superTypeOperation;
     private Type _voidType;
     private boolean _isAbstract;
-
+    
     private OperationDataStructure _dataStructure;
 
     /**
@@ -104,10 +106,7 @@ public class UpdateOperationCommand extends Command
      * @see org.eclipse.gef.commands.Command#execute()
      */
     public void execute()
-    {
-    	// TODO : If user clicked on ok and actually did nothing...
-
-        
+    {        
     	_operation.getContainedType().clear();
     	
     	// The operation name
@@ -140,7 +139,6 @@ public class UpdateOperationCommand extends Command
             _operation.getTypeParameter().add(tvar);
         }
         
-        // FIXME! Dangerous
         _operation.getOwnedParameter().clear();
 
         for (Iterator<ParameterObject> iterator = _dataStructure.getDataOwnedParameters().iterator(); iterator.hasNext();)
@@ -159,24 +157,19 @@ public class UpdateOperationCommand extends Command
             }
             else // temp patch if user did not set a type. TODO : by default, impose the VoidType in the graphical editor
             {
-            	System.err.println("Type is null :(");
             	parameter.setType(_voidType);
             }
-            
             _operation.getOwnedParameter().add(parameter);
-           // KermetaUtils.getDefault().getTypeFixer().accept(parameter);
             
         }
         _operation.setBody(ExpressionParser.parse_operation2body(
         		EditorReconcilingStrategy.parse(_operation.eResource()), 
         		_dataStructure.getOperationBody()));
-        //KermetaUtils.fixTypeContainments(_operation.eResource());
-        // Fix the type containments once the Operation element is complete -> not optimal
-        KermetaUtils.getDefault().getTypeFixer().accept(_operation);
-/*        for (Object o : _operation.getOwnedParameter()) {
-        	KermetaUtils.getDefault().getTypeFixer().accept((Parameter)o);
-		}*/
         
+        // Ugly
+        KermetaUnit.fixTypeContainement((Package)_operation.getOwningClass().eContainer());
+        // Fix the type containments once the Operation element is complete -> not optimal
+        //KermetaUtils.getDefault().getTypeFixer().accept(_operation);
         
     }
 
