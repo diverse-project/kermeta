@@ -1,4 +1,4 @@
-/* $Id: OperationEditDialog.java,v 1.4 2006-04-10 17:38:08 zdrey Exp $
+/* $Id: OperationEditDialog.java,v 1.5 2006-04-20 15:07:35 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -44,6 +44,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureImageRegistry;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.OperationDataStructure;
@@ -52,6 +53,7 @@ import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorStyleListener;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.SyntaxManager;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 
@@ -209,11 +211,7 @@ public class OperationEditDialog extends Dialog
 		_operationSuperOperationComboBox.setItems(_superTypeNames.toArray(new String[] {}));
 		_operationSuperOperationComboBox.add("", 0);
 		_operationSuperOperationComboBox.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		/*
-		new Label(composite, SWT.NONE).setText("Type Parameters");
-		_operationTypeParamsText = new Text(composite, SWT.BORDER);
-		_operationTypeParamsText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		*/
+		
 		fillFields();
 	}
 	
@@ -404,9 +402,6 @@ public class OperationEditDialog extends Dialog
 	    styledText.addExtendedModifyListener(new ExtendedModifyListener() {
 	    	public void modifyText(ExtendedModifyEvent event) {} }
 	    });*/
-	    
-	    
-	    
 	}
 
 	/**
@@ -426,31 +421,42 @@ public class OperationEditDialog extends Dialog
 			{
 				// translate and inject
 				String textError = "";
-				System.err.println("Parsing now the operation : " + _operation.eResource().getURI().toString());
+				try
+				{
+					dataStructure.setOperationBody(styledText.getText());
+					_operation.setBody(ExpressionParser.parse_operation2body(
+		        		EditorReconcilingStrategy.parse(_operation.eResource()), 
+		        		dataStructure.getOperationBody()));
+				//System.out.println("parse body : " + new KM2KMTPrettyPrinter().accept(_operation.getBody()));
+				//System.err.println("Parsing now the operation : " + _operation.eResource().getURI().toString() + styledText.getText());
+				}
+				// Try to catch a parse error
+				catch (Error error)
+				{
+					errorItem.setImage(StructureImageRegistry.getImage("ERROR"));
+					textError += "Error when parsing '" +  
+					_operation.getName() +" ': \n " + 
+					error.getMessage() + 
+					"\n" + error.getCause();
+				}
 				
 				KermetaUnit unit = EditorReconcilingStrategy.parse(_operation.eResource());
 				
-				// TODO : add a try/catch exception so that the user cannot save an invalid body?
-				
-				try
-				{	// reset the errorView
+				errorView.setText("");
+				System.err.println("errors?:" + unit.messages.getAllMessages().size() + " messages.");
+				if (unit.messages.getAllErrors().size() == 0)
+				{
+					// reset the errorView
 					errorItem.setImage(StructureImageRegistry.getImage("NOERROR"));
-					errorView.setText("");
 					// get OPERATION_INPUTS that contains body, owned parameters and onwed type params
 					dataStructure.setOperationBody(styledText.getText());
 				}
-				catch (Error error)
+				else
 				{
 					// Display the errors to the user!! in a popup dialog? below the operation text field? in a fifth Tab
 					errorItem.setImage(StructureImageRegistry.getImage("ERROR"));
-					textError += "Error when parsing '" +  
-							_operation.getName() +" ': \n " + 
-							error.getMessage() + 
-							"\n" + error.getCause();
-					//System.err.println("Take a look at the tab Error Parse error in the body : " + error + "\n\n" + error.getMessage());
 				}
-				// Reparse (not very optimal..) the whole unit to check the operation consistency according to its context
-				unit.messages.getAllErrors().clear();
+				
 				// If file was not saved before, this instruction is stupid...
 				//unit = KermetaUtils.getDefault().resetKermetaUnit(_operation.eResource().getURI().toString());
 				if (unit.messages.getAllErrors()!=null && unit.messages.getAllErrors().size()>0)
@@ -505,14 +511,17 @@ public class OperationEditDialog extends Dialog
 		_data.put(Operation_NAME, _operationNameText.getText());
 		if (_returnTypeComboBox.getSelectionIndex() != 0)
 		{
-			_data.put(Operation_RETURN_TYPE, _types.get(_returnTypeComboBox.getSelectionIndex() - 1));
+			_data.put(Operation_RETURN_TYPE, _types.size()==0?null:_types.get(_returnTypeComboBox.getSelectionIndex() - 1));
 		}
+		// update the body of the operation
+		dataStructure.setOperationBody(styledText.getText());
 		// Input
-		_data.put(Operation_INPUTS, _inputParameters.getData());
-		_data.put(Operation_TYPE_PARAMS, _inputTypeParameters.getData());
+		_data.put(Operation_INPUTS, dataStructure);
+		_data.put(Operation_TYPE_PARAMS, dataStructure);
 		if (_operationSuperOperationComboBox.getSelectionIndex() != 0)
 		{
-			_data.put(Operation_SUPER_OPERATION, _supertypes.get(_operationSuperOperationComboBox.getSelectionIndex() -1));
+			// if the owning class has no super type :
+			_data.put(Operation_SUPER_OPERATION, _supertypes.size()==0?null:_supertypes.get(_operationSuperOperationComboBox.getSelectionIndex() -1));
 		}
 		
 		super.okPressed();
