@@ -1,0 +1,74 @@
+@mainClass "uml2km::Main"
+@mainOperation "main"
+
+
+package uml2km;
+
+
+require kermeta
+require "Uml2.kmt"
+require "Pass1_Uml2KMTVisitor.kmt"
+require "Pass2_Uml2KMTVisitor.kmt"
+require "Uml2KMTPrinter.kmt"
+
+using kermeta::standard
+using uml2kmt_visitors
+
+/**
+ * Root of the UML2 to KM transformation tool.
+ */
+class Main
+{
+    reference inputModel : uml2::Package
+    reference rootPackage : uml2::Package
+    reference objectsModel : kermeta::utils::Hashtable<uml2::Element, Object>
+    
+    operation initialize(input_uri : String, input_mm_uri : String) is do
+    	// load the given model
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createResource(input_uri, input_mm_uri)
+    	inputResource.load()
+    	inputModel ?= inputResource.instances.one
+    	// creates the objects storage
+	    objectsModel := kermeta::utils::Hashtable<uml2::Element, Object>.new
+	    rootPackage ?= inputModel.ownedMember.one
+    end
+    
+    operation main() : Void is do 
+    	stdio.writeln(">>>>-------------> initializing the model !\n")
+        // the UML2 model to be transformed
+        initialize("../../test/kmt_test_cases/uml2/ClassDiagram.uml2", "../ecore/UML2.ecore")
+        
+    	stdio.writeln(">>>>-------------> running Pass 1 !\n")
+        // the first Pass creates the KM objects
+        var pass1 : Pass1_Uml2KMTVisitor init Pass1_Uml2KMTVisitor.new
+        pass1.initialize(objectsModel)
+        pass1.visitPackage(rootPackage)
+        
+    	stdio.writeln(">>>>-------------> running Pass 2 !\n")
+        // the second Pass links the KM objects
+        var pass2 : Pass2_Uml2KMTVisitor init Pass2_Uml2KMTVisitor.new
+        pass2.initialize(objectsModel)
+        pass2.visitPackage(rootPackage)
+        
+        // DEBUG
+        var tree : kermeta::language::structure::Package
+		tree ?= objectsModel.getValue(rootPackage)
+/*    	var resRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var resResource : kermeta::persistence::EMFResource
+    	resResource ?= resRepository.createResource("../../test/kmt_test_cases/uml2/ClassDiagramOutput.km", "../ecore/kermeta.ecore")
+    	resResource.instances.add(tree)
+    	resResource.save()
+*/
+        
+        // the Kermeta PrettyPrinter transform the KM tree to code
+    	stdio.writeln(">>>>-------------> running Km2Kmt pretty printer !\n")
+        var upp : uml2::Uml2KMTPrinter init uml2::Uml2KMTPrinter.new
+        upp.initialize()
+        // the second pass knows the package which represents the root of the kermeta code
+	    stdio.writeln(pass2.codeRoot().acceptKMStructureVisitor(upp,0))
+	    
+	   	stdio.writeln("\n<-------------<<<< end of the programm.")
+     end
+}

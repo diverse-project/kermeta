@@ -1,12 +1,14 @@
 package ecore;
+ 
+//require kermeta
 
+/** This class refers to any EDataType feature*/
 class EAttribute inherits EStructuralFeature
 {
 	attribute iD : EBoolean
 	property eAttributeType : EDataType[1..1]
 		getter is do
-			//TODO: implement getter for derived property eAttributeType
-			raise kermeta::exceptions::NotImplementedException.new 
+			result ?= eType
 		end
 		setter is do
 			//TODO: implement setter for derived property eAttributeType
@@ -25,80 +27,70 @@ class EClass inherits EClassifier
 {
 	attribute ~abstract : EBoolean
 	attribute interface : EBoolean
+	attribute eStructuralFeatures : EStructuralFeature[0..*]#eContainingClass
 	reference eSuperTypes : EClass[0..*]
 	attribute eOperations : EOperation[0..*]#eContainingClass
-	property eAllAttributes : EAttribute[0..*]
+	
+	property readonly eAllAttributes : EAttribute[0..*]
+		getter is do 
+	 		result := kermeta::standard::OrderedSet<EAttribute>.new
+			self.eAllSuperTypes.each{ t | result.addAll(t.eAttributes) }
+		end
+		
+	property readonly eAllReferences : EReference[0..*]
+		getter is do	 		
+	 		result := kermeta::standard::OrderedSet<EReference>.new 
+			self.eAllSuperTypes.each{ t | result.addAll(t.eReferences) }
+		end
+		
+	property readonly eReferences : EReference[0..*]
 		getter is do
-			//TODO: implement getter for derived property eAllAttributes
-			raise kermeta::exceptions::NotImplementedException.new 
+			result := kermeta::standard::OrderedSet<EReference>.new
+			self.eStructuralFeatures.each { f | if EReference.isInstance(f) then var a : EReference a ?= f result.add(a) end }
 		end
-		setter is do
-			//TODO: implement setter for derived property eAllAttributes
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
-	property eAllReferences : EReference[0..*]
+
+	property readonly eAttributes : EAttribute[0..*]
 		getter is do
-			//TODO: implement getter for derived property eAllReferences
-			raise kermeta::exceptions::NotImplementedException.new 
+			result := kermeta::standard::OrderedSet<EAttribute>.new
+			self.eStructuralFeatures.each { f | if EAttribute.isInstance(f) then var a : EAttribute a ?= f result.add(a) end }
 		end
-		setter is do
-			//TODO: implement setter for derived property eAllReferences
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
-	property eReferences : EReference[0..*]
-		getter is do
-			//TODO: implement getter for derived property eReferences
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
-		setter is do
-			//TODO: implement setter for derived property eReferences
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
-	property eAttributes : EAttribute[0..*]
-		getter is do
-			//TODO: implement getter for derived property eAttributes
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
-		setter is do
-			//TODO: implement setter for derived property eAttributes
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
+		
 	property eAllContainments : EReference[0..*]
 		getter is do
-			//TODO: implement getter for derived property eAllContainments
-			raise kermeta::exceptions::NotImplementedException.new 
+	 		result := kermeta::standard::OrderedSet<EReference>.new 
+	 		stdio.writeln("contaimnet : " + self.eAllReferences.one.containment.toString)
+	 		result.addAll(self.eAllReferences.select { r | r.containment == true } )
 		end
-		setter is do
+		setter is do		
 			//TODO: implement setter for derived property eAllContainments
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
-	property eAllOperations : EOperation[0..*]
+		
+	property readonly eAllOperations : EOperation[0..*]
 		getter is do
-			//TODO: implement getter for derived property eAllOperations
-			raise kermeta::exceptions::NotImplementedException.new 
+	 		result := kermeta::standard::OrderedSet<EOperation>.new 
+	 		result.addAll(eOperations)
+			self.eAllSuperTypes.each{ t | result.addAll(t.eOperations) }
 		end
-		setter is do
-			//TODO: implement setter for derived property eAllOperations
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
-	property eAllStructuralFeatures : EStructuralFeature[0..*]
+
+	property readonly eAllStructuralFeatures : EStructuralFeature[0..*]
 		getter is do
-			//TODO: implement getter for derived property eAllStructuralFeatures
-			raise kermeta::exceptions::NotImplementedException.new 
+	 		result := kermeta::standard::OrderedSet<EStructuralFeature>.new
+	 		if (eStructuralFeatures != void) then result.addAll(eStructuralFeatures) end
+			self.eAllSuperTypes.each{ t | result.addAll(t.eStructuralFeatures) }
 		end
-		setter is do
-			//TODO: implement setter for derived property eAllStructuralFeatures
-			raise kermeta::exceptions::NotImplementedException.new 
-		end
+		
 	property eAllSuperTypes : EClass[0..*]
 		getter is do
-			//TODO: implement getter for derived property eAllSuperTypes
-			raise kermeta::exceptions::NotImplementedException.new 
+			result := kermeta::standard::OrderedSet<EClass>.new 
+			result.addAll(self.eSuperTypes)
+			self.eSuperTypes.each { t | result.addAll(t.eAllSuperTypes) }
 		end
 		setter is do
 			//TODO: implement setter for derived property eAllSuperTypes
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
+
 	property eIDAttribute : EAttribute
 		getter is do
 			//TODO: implement getter for derived property eIDAttribute
@@ -108,26 +100,32 @@ class EClass inherits EClassifier
 			//TODO: implement setter for derived property eIDAttribute
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
-	attribute eStructuralFeatures : EStructuralFeature[0..*]#eContainingClass
+
 	operation isSuperTypeOf(someClass : EClass) : EBoolean is do
-		//TODO: implement operation isSuperTypeOf
-		raise kermeta::exceptions::NotImplementedException.new 
+		result := someClass.eAllSuperTypes.detect { t | t == self } != void
 	end
+	
 	operation getFeatureCount() : EInt is do
-		//TODO: implement operation getFeatureCount
-		raise kermeta::exceptions::NotImplementedException.new 
+		result := self.eAllStructuralFeatures.size
 	end
+	
+	/** Get a structural feature among AllStructuralFeatures */
 	operation getEStructuralFeature(featureID : EInt) : EStructuralFeature is do
-		//TODO: implement operation getEStructuralFeature
-		raise kermeta::exceptions::NotImplementedException.new 
+		result := self.eAllStructuralFeatures.detect{ e | e.getFeatureID() == featureID }
 	end
+	
+	/** Return the position of the feature in the list of AllStructuralFeatures */
 	operation getFeatureID(feature : EStructuralFeature) : EInt is do
-		//TODO: implement operation getFeatureID
-		raise kermeta::exceptions::NotImplementedException.new 
+		result := -1
+		from var i : EInt init 0 until i == eAllStructuralFeatures.size or result != -1
+		loop
+			if (feature == eAllStructuralFeatures.elementAt(i) ) then result == i end
+			i := i + 1
+		end
 	end
-	operation getEStructuralFeatureByName(featureName : EString) : EStructuralFeature is do
-		//TODO: implement operation getEStructuralFeature
-		raise kermeta::exceptions::NotImplementedException.new 
+	
+	operation getEStructuralFeature2(featureName : EString) : EStructuralFeature is do
+		result := self.eAllStructuralFeatures.detect{ e | e.name == featureName }
 	end
 }
 abstract class EClassifier inherits ENamedElement
@@ -152,13 +150,13 @@ class EDataType inherits EClassifier
 class EEnum inherits EDataType
 {
 	attribute eLiterals : EEnumLiteral[0..*]#eEnum
+	/** returns the enum literal which name is name */
 	operation getEEnumLiteral(name : EString) : EEnumLiteral is do
-		//TODO: implement operation getEEnumLiteral
-		raise kermeta::exceptions::NotImplementedException.new 
+		result := eLiterals.detect { e | e.name == name }
 	end
-	operation getEEnumLiteralByValue(~value : EInt) : EEnumLiteral is do
-		//TODO: implement operation getEEnumLiteral
-		raise kermeta::exceptions::NotImplementedException.new 
+	/** returns the enum literal which value is value */
+	operation getEEnumLiteral2(~value : EInt) : EEnumLiteral is do
+		result := eLiterals.detect { e | e.~value == ~value } 
 	end
 }
 class EEnumLiteral inherits ENamedElement
@@ -167,10 +165,12 @@ class EEnumLiteral inherits ENamedElement
 	attribute instance : EEnumerator
 	reference eEnum : EEnum#eLiterals
 }
+
 class EFactory inherits EModelElement
 {
 	reference ePackage : EPackage[1..1]#eFactoryInstance
 	operation create(eClass : EClass) : EObject is do
+		// result := eClass.new result.setMetaClass...
 		//TODO: implement operation create
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
@@ -187,10 +187,10 @@ abstract class EModelElement inherits EObject
 {
 	attribute eAnnotations : EAnnotation[0..*]#eModelElement
 	operation getEAnnotation(source : EString) : EAnnotation is do
-		//TODO: implement operation getEAnnotation
-		raise kermeta::exceptions::NotImplementedException.new 
+		result := eAnnotations.detect { a | a.source == source }
 	end
 }
+
 abstract class ENamedElement inherits EModelElement
 {
 	attribute name : EString
@@ -198,59 +198,55 @@ abstract class ENamedElement inherits EModelElement
 class EObject
 {
 	operation eClass() : EClass is do
-		//TODO: implement operation eClass
-		raise kermeta::exceptions::NotImplementedException.new 
+		result ?= extern fr::irisa::triskell::kermeta::ecore::wrapper::EObjectWrapper.eClass(self)
 	end
 	operation eIsProxy() : EBoolean is do
-		//TODO: implement operation eIsProxy
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eResource() : EResource is do
-		//TODO: implement operation eResource
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eContainer() : EObject is do
-		//TODO: implement operation eContainer
-		raise kermeta::exceptions::NotImplementedException.new 
+		result ?= self.container
 	end
 	operation eContainingFeature() : EStructuralFeature is do
-		//TODO: implement operation eContainingFeature
+		// result ?= extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eContainingFeature(self)
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eContainmentFeature() : EReference is do
-		//TODO: implement operation eContainmentFeature
+		// result ?= extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eContainmentFeature(self)
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eContents() : EEList is do
-		//TODO: implement operation eContents
+		// result := extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eContents(self)
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eAllContents() : ETreeIterator is do
-		//TODO: implement operation eAllContents
+		// result := extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eContents(self) 
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eCrossReferences() : EEList is do
-		//TODO: implement operation eCrossReferences
+		//result := extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eCrossReferences(self)
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eGet(feature : EStructuralFeature) : EJavaObject is do
-		//TODO: implement operation eGet
+		// result := extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eGet(self, feature)		
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
-	operation eGetResolve(feature : EStructuralFeature, resolve : EBoolean) : EJavaObject is do
-		//TODO: implement operation eGet
+	operation eGet2(feature : EStructuralFeature, resolve : EBoolean) : EJavaObject is do
+		// result := extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eGet2(self, feature, resolve)		
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eSet(feature : EStructuralFeature, newValue : EJavaObject) : kermeta::standard::~Void is do
-		//TODO: implement operation eSet
+		// extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eSet(self, feature, newValue)		
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eIsSet(feature : EStructuralFeature) : EBoolean is do
-		//TODO: implement operation eIsSet
+		// result ?= extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eIsSet(self, feature)		
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 	operation eUnset(feature : EStructuralFeature) : kermeta::standard::~Void is do
-		//TODO: implement operation eUnset
+		// extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eUnSet(self, feature)
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
 }
@@ -280,7 +276,7 @@ class EParameter inherits ETypedElement
 class EReference inherits EStructuralFeature
 {
 	attribute containment : EBoolean
-	attribute container : EBoolean
+	attribute container : EBoolean	// conflicts with Object.container() reflection
 	attribute resolveProxies : EBoolean
 	reference eOpposite : EReference
 	property eReferenceType : EClass[1..1]
@@ -292,6 +288,19 @@ class EReference inherits EStructuralFeature
 			//TODO: implement setter for derived property eReferenceType
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
+    
+    // due to inner reflction problems with Object.container(), the
+    // 'container' property can only be accessed through a getter
+	operation getContainerValue() : EBoolean is do
+		var cls : kermeta::reflection::ClassDefinition
+		cls ?= self.getMetaClass.typeDefinition
+		result ?= self.get(cls.ownedAttribute.detect{p | p.name == "container"})
+	end
+	operation setContainerValue(booleanValue  : EBoolean) is do
+		var cls : kermeta::reflection::ClassDefinition
+		cls ?= self.getMetaClass.typeDefinition
+		self.~set(cls.ownedAttribute.detect{p | p.name == "container"}, booleanValue)
+	end
 }
 abstract class EStructuralFeature inherits ETypedElement
 {

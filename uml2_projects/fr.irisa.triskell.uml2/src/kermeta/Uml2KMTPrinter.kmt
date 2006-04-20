@@ -1,0 +1,91 @@
+package uml2;
+
+
+require kermeta
+require "printer.kmt"
+
+using kermeta::language::structure
+using kermeta::language::behavior
+using kermeta::standard
+
+class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
+{
+	
+    /**
+	 * Overwriting of the operation visit from the KM2KMT PrettyPrinter,
+	 * because we only have the text of the operation body, in a "body" tag.
+	 */
+	method visitOperation(node : kermeta::language::structure::Operation, context : Integer) : String is do
+		result := ""
+		result.append(visitTagSet(node.tag, context))
+		if (node.superOperation != void) then result.append(indent + "method ")
+		else result.append(indent + "operation ") 
+		end
+		// node name
+		result.append(node.name)
+		// type parameters of operation
+		if (node.typeParameter.size() > 0) then
+			result.append( "<")
+			result.append( self.visitTypeVariableSet(node.typeParameter, context))
+			result.append( ">")
+		end
+		// arguments
+		result.append( "(")
+		result.append( self.visitTypeParameters(node.ownedParameter, context))
+		result.append( ")")
+		if(node.type != void) then
+			result.append( " : " + pp.ppTypeFromMultiplicityElement(node))
+		end
+	 
+		if (node.superOperation != void) then
+			result.append( " from " + node.superOperation.owningClass.qualifiedName )
+		end
+		if (node.raisedException.size > 0) then
+			result.append( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
+		end
+		if node.tag != void then
+			result.append( " is\n")
+			var body : String
+			from var it : Iterator<kermeta::reflection::Tag> init node.tag.iterator
+			until it.isOff
+			loop
+				var next : Tag
+				next ?= it.next
+				// the body of each operation has been stored in a "km_body" tag
+	    		if next.name == "km_body" then
+	    			pushIndent()
+					result.append(self.visitTag(next, context))
+					popIndent
+				end
+			end
+		else 
+			if (node.isAbstract) then
+				result.append( " is abstract")
+			else 
+				result.append( " is do\n")
+				pushIndent()
+				result.append( indent + "//TODO: implement operation " + node.name + "\n") 
+				popIndent()
+				result.append( indent + "end")
+			end
+		end
+	end
+	
+	/** we need to rewrite this method to avoid operation body to be processed here */
+    method visitTagSet( tags : kermeta::standard::Set<kermeta::reflection::Tag>, context : Integer) : String is do
+    	result := ""
+		from var it : Iterator<kermeta::reflection::Tag> init tags.iterator
+		until it.isOff
+		loop
+			var next : Tag
+			next ?= it.next
+			// the body of each operation has been stored in a "km_body" tag
+			// which is processed inside the "visitOperation" method
+    		if next.name != "km_body" then
+				result.append(self.accept(next, context))
+				result.append("\n")
+			end
+		end
+    end
+
+}

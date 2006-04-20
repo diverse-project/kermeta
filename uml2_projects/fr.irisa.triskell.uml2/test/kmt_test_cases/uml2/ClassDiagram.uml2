@@ -11,7 +11,33 @@
       <eAnnotations xmi:id="_ce4-MMYWEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
         <details xmi:id="_ce4-McYWEdqnU4rvBMdn4Q" key="uuid" value="11444010663872"/>
       </eAnnotations>
-      <body>This diagram intends to represents a general classes sample. It must cover a large part of UML2 class diagram possibilities, in order to test the UML2 tranformation tools provided in the present package.</body>
+      <body>This diagram intends to represents a general classes sample.
+It must cover a large part of UML2 class diagram possibilities,
+in order to test the UML2 tranformation tools provided
+in the present package.</body>
+    </ownedComment>
+    <ownedComment xmi:id="_2Vs1odBSEdq6zpbyIcleMg" annotatedElement="_LAW1UMYXEdqnU4rvBMdn4Q">
+      <eAnnotations xmi:id="_-hLpUNBSEdq6zpbyIcleMg" source="http://www.topcased.org/uuid">
+        <details xmi:id="_-hMQYNBSEdq6zpbyIcleMg" key="uuid" value="11455265762299"/>
+      </eAnnotations>
+      <body>Example of a class comment</body>
+    </ownedComment>
+    <ownedComment xmi:id="_WvN6oNBTEdq6zpbyIcleMg" annotatedElement="_Y5vKgMYYEdqnU4rvBMdn4Q">
+      <eAnnotations xmi:id="_07vjoNBTEdq6zpbyIcleMg" source="http://www.topcased.org/uuid">
+        <details xmi:id="_07vjodBTEdq6zpbyIcleMg" key="uuid" value="114552694140212"/>
+      </eAnnotations>
+      <body>do
+	// Operation code for Kermeta
+	// must begin with &quot;do&quot; and terminate with &quot;end&quot;
+	var g : GClass init GClass.new
+	result := g
+end</body>
+    </ownedComment>
+    <ownedComment xmi:id="_QTO_wdCBEdqLBpNqO5TAEw" annotatedElement="_Y5vKgMYYEdqnU4rvBMdn4Q">
+      <eAnnotations xmi:id="_V3Pa4NCBEdqLBpNqO5TAEw" source="http://www.topcased.org/uuid">
+        <details xmi:id="_V3Pa4dCBEdqLBpNqO5TAEw" key="uuid" value="114554648974115"/>
+      </eAnnotations>
+      <body>An ordinary operation comment</body>
     </ownedComment>
     <ownedMember xmi:type="uml:Class" xmi:id="_CNU5cMYXEdqnU4rvBMdn4Q" name="AClass" isAbstract="true">
       <eAnnotations xmi:id="_RPRZMMYYEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
@@ -152,11 +178,6 @@
           </eAnnotations>
         </lowerValue>
       </ownedEnd>
-    </ownedMember>
-    <ownedMember xmi:type="uml:Class" xmi:id="_iDo40MYZEdqnU4rvBMdn4Q">
-      <eAnnotations xmi:id="_iu4OMMYZEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
-        <details xmi:id="_iu4OMcYZEdqnU4rvBMdn4Q" key="uuid" value="114440239681981"/>
-      </eAnnotations>
     </ownedMember>
     <ownedMember xmi:type="uml:Association" xmi:id="_vlJ9EMYZEdqnU4rvBMdn4Q" name="BnG" memberEnd="_vlJ9EcYZEdqnU4rvBMdn4Q _vlKkIMYZEdqnU4rvBMdn4Q">
       <eAnnotations xmi:id="_4SJiYMYZEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">

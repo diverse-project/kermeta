@@ -1,0 +1,103 @@
+package uml2kmt_visitors;
+
+
+require kermeta
+require "Uml2.kmt"
+require "TopDownVisitor.kmt"
+require "KmBuilder.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using km_builder
+
+class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
+{
+    attribute output : kermeta::utils::Hashtable<uml2::Element, Object>
+    attribute rootPackage : Package
+    
+    operation initialize(outputKm : kermeta::utils::Hashtable<uml2::Element, Object>) is do
+    	output := outputKm
+    	rootPackage := void
+    end
+    
+	// the second pass knows the package which represents the root of the kermeta code
+    operation codeRoot() : Package is do
+    	result := rootPackage
+    end
+    
+    method visitComment(visitable : uml2::Comment) is do
+    	// the comments need only to rely to their owner
+    	var tag : Tag 
+		tag ?= output.getValue(visitable)
+		if visitable.annotatedElement.size > 0 then
+			visitable.annotatedElement.each{ e |
+				var obj : Object init output.getValue(e)
+				tag.object.add(obj)
+			}
+		else
+			// the comment concerns the Model
+			tag.object.add(rootPackage)
+		end
+    	super(visitable)
+    end
+    
+    method visitClass(visitable : uml2::Class) is do
+    	var cldef : ClassDefinition
+    	cldef ?= output.getValue(visitable)
+    	visitable.ownedOperation.each{ o |
+    		var op : Operation
+    		op ?= output.getValue(o)
+    		cldef.ownedOperation.add(op)
+    	}
+    	super(visitable)
+    end
+    
+    /* visit Attributes, Properties, ... */
+    method visitProperty(visitable : uml2::Property) is do
+    	// TODO
+    	super(visitable)
+    end
+    
+    method visitOperation(visitable : uml2::Operation) is do
+    	// TODO
+    	super(visitable)
+    end
+    
+    method visitParameter(visitable : uml2::Parameter) is do
+    	// TODO
+    	super(visitable)
+    end
+    
+    method visitPackage(visitable : uml2::Package) is do
+    	var p : Package
+    	p ?= output.getValue(visitable)
+    	
+    	// the first package to be processed is the root package
+    	// (the visitPackage operation is the entry point for a model)
+    	if rootPackage == void then rootPackage := p end
+    	
+    	// attach the elements which belong to a package
+    	visitable.ownedMember.each{ e |
+	    	var obj : TypeDefinition
+	    	obj ?= output.getValue(e)
+	    	if obj != void then p.ownedTypeDefinition.add(obj) end
+    	}
+    	
+    	super(visitable)
+    end
+    
+    method visitDataType(visitable : uml2::DataType) is do
+    	// TODO
+    	super(visitable)
+    end
+    
+    method visitGeneralization(visitable : uml2::Generalization) is do
+    	//
+    	super(visitable)
+    end
+    
+    method visitAssociation(visitable : uml2::Association) is do
+    	// TODO
+    	super(visitable)
+    end
+}

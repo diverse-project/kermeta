@@ -693,7 +693,7 @@ abstract class Classifier inherits Namespace, Type, RedefinableElement
 		//TODO: implement operation general_equals_parents
 		raise kermeta::exceptions::NotImplementedException.new 
 	end
-	method conformsTo(other : Classifier) : Boolean is do
+	method conformsTo(other : uml2::Type) : Boolean is do
 		//TODO: implement operation conformsTo
 		raise kermeta::exceptions::NotImplementedException.new 
 	end

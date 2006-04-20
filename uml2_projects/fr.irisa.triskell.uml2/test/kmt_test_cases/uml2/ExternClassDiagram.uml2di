@@ -15,7 +15,7 @@
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.uml2.classdiagram">
       <element href="ExternClassDiagram.uml2#_tPOCIqLHEdqkGMDvm75SlQ"/>
     </semanticModel>
-    <contained xsi:type="di:GraphNode" position="181,42" size="373,64">
+    <contained xsi:type="di:GraphNode" position="181,42" size="461,69">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ExternClassDiagram.uml2#_YE1YQMYXEdqnU4rvBMdn4Q"/>
       </semanticModel>

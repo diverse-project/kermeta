@@ -1,0 +1,119 @@
+package uml2kmt_visitors;
+
+require kermeta
+require "Uml2.kmt"
+require "TopDownVisitor.kmt"
+require "KmBuilder.kmt"
+
+using kermeta::standard
+using kermeta::language::structure
+using km_builder
+
+class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
+{
+    attribute output : kermeta::utils::Hashtable<uml2::Element, Object>
+    attribute build : KmBuilder
+    
+    operation initialize(outputKm : kermeta::utils::Hashtable<uml2::Element, Object>) is do
+    	output := outputKm
+    	build := KmBuilder.new
+    end
+    
+    method visitComment(visitable : uml2::Comment) is do
+    	// it is a UML2 comment, which becomes a tag in transition structure
+    	// Operations' comments will become their bodies in final Kermeta code
+    	var tag : Tag init build.createTag()
+//    	if visitable.container.getMetaClass.equals(uml2::Operation) then
+   		tag.name := "kdoc"
+		if visitable.annotatedElement.size > 0 then
+			visitable.annotatedElement.each{ e |
+				// only operation comments which start with "do" and finish with "end"
+				// are taken as Kermeta code for the operation body
+				if e.getMetaClass.equals(uml2::Operation)
+					and visitable.body.substring(0,2).equals("do")
+					and visitable.body.substring(visitable.body.size - 3,visitable.body.size).equals("end") then
+	    				tag.name := "km_body"
+    			end
+    		}
+    	end
+    	tag.~value := visitable.body
+    	output.put(visitable, tag)
+    	super(visitable)
+    end
+    
+    method visitClass(visitable : uml2::Class) is do
+    	// a Uml2 class is a "ClassDefinition" in Kermeta
+    	var cl : ClassDefinition
+    	cl := build.createClassDefinition()
+    	cl.name := visitable.name
+    	output.put(visitable, cl)
+    	cl.isAbstract := visitable.isAbstract
+    	super(visitable)
+    end
+    
+    /* visit Attributes, Properties, ... */
+    method visitProperty(visitable : uml2::Property) is do
+    	// the Uml2 attributes, properties and association' ends all become "Property" in Kermeta
+    	var prop : Property init build.createProperty()
+    	prop.name := visitable.name
+    	output.put(visitable, prop)
+    	super(visitable)
+    end
+    
+    method visitOperation(visitable : uml2::Operation) is do
+    	// a Uml2 operation is also an operation in Kermeta
+    	var op : Operation init build.createOperation()
+    	op.name := visitable.name
+    	output.put(visitable, op)
+    	super(visitable)
+    end
+    
+    method visitParameter(visitable : uml2::Parameter) is do
+    	// Uml2 has 4 types of operation parameters : "In", "In Out", 'Out" and "Return"
+    	// but Kermeta makes only between passed parameters and return type for operations
+    	if visitable.direction == uml2::ParameterDirectionKind.return then
+    		// which type is the result the operation returns, represented by a Class in Kermeta
+    		var type : Class init build.createClass()
+    		output.put(visitable, type)
+    	else
+    		var par : Parameter init build.createParameter()
+    		par.type := build.createClass()
+    		par.name := visitable.name
+    		output.put(visitable, par)
+    	end
+    	super(visitable)
+    end
+    
+    method visitPackage(visitable : uml2::Package) is do
+    	// a Uml2 package is also a package in Kermeta
+    	var pack : Package init build.createPackage()
+    	pack.name := visitable.name
+    	output.put(visitable, pack)
+    	super(visitable)
+    end
+    
+    method visitDataType(visitable : uml2::DataType) is do
+    	// DataType are defined thru ClassDefinition in Kermeta
+    	var dt : DataType
+    	dt := build.createDataType()
+    	dt.name := visitable.name
+    	output.put(visitable, dt)
+    	super(visitable)
+    end
+    
+    method visitGeneralization(visitable : uml2::Generalization) is do
+    	// the Uml2 generalization corresponds to a "Class" typing in Kermeta
+    	var cl : Class init build.createClass()
+    	output.put(visitable, cl)
+    	super(visitable)
+    end
+    
+    method visitAssociation(visitable : uml2::Association) is do
+    	// TODO
+    	// it is the most complex transformation to manage
+    	// because the structure of representations differs
+    	// from UML2 to Kermeta depending on the association cases
+    	// 
+    	super(visitable)
+    end
+}
