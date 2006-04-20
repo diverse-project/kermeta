@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.4 2006-04-10 17:31:15 zdrey Exp $
+/* $Id: OperationChecker.java,v 1.5 2006-04-20 15:08:20 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -265,7 +265,7 @@ public class OperationChecker extends AbstractChecker {
 		{
 			isConform = isConformType(t1, t2);
 		}
-		if (op1.getType()!=null && op1.getType()!=null)
+		else if (op1.getType()!=null && op2.getType()!=null)
 			message += "<"+pprinter.accept(op1.getType()) + "> != <" + pprinter.accept(op2.getType())+">"
 			+ op1.getType() + " != " + op2.getType() + "op1:" + op1.getName();
 		if (!isConform) addProblem(ERROR, message, op1);
