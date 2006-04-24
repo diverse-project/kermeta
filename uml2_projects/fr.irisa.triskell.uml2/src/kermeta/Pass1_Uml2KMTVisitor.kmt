@@ -21,9 +21,13 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     
     method visitComment(visitable : uml2::Comment) is do
     	// it is a UML2 comment, which becomes a tag in transition structure
-    	// Operations' comments will become their bodies in final Kermeta code
+    	// Operations' comments may become their bodies in final Kermeta code
+    	
+    	// Note : may be we should subclassify the Comment UML object,
+    	// as it must not add semantics to its annotated elements
+    	// (see UML2 Superstructure  - 1.2 Kernel - the Root Diagram)
+    	
     	var tag : Tag init build.createTag()
-//    	if visitable.container.getMetaClass.equals(uml2::Operation) then
    		tag.name := "kdoc"
 		if visitable.annotatedElement.size > 0 then
 			visitable.annotatedElement.each{ e |
@@ -43,19 +47,44 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     
     method visitClass(visitable : uml2::Class) is do
     	// a Uml2 class is a "ClassDefinition" in Kermeta
+    	// (the Kermeta "Class" is only for typing purposes)
     	var cl : ClassDefinition
     	cl := build.createClassDefinition()
     	cl.name := visitable.name
     	output.put(visitable, cl)
     	cl.isAbstract := visitable.isAbstract
+    	
+    	// DEBUG
+    	stdio.writeln("DEBUG - visitClass() : name = "+visitable.name+"  -> "+visitable.toString())
+    	
     	super(visitable)
     end
     
     /* visit Attributes, Properties, ... */
     method visitProperty(visitable : uml2::Property) is do
-    	// the Uml2 attributes, properties and association' ends all become "Property" in Kermeta
+    	// the Uml2 attributes, properties and associations' ends all become "Property" in Kermeta
     	var prop : Property init build.createProperty()
     	prop.name := visitable.name
+    	prop.isDerived := visitable.isDerived
+    	prop.isReadOnly := visitable.isReadOnly
+    	prop.isOrdered := visitable.isOrdered
+    	prop.isUnique := visitable.isUnique
+    	prop.lower := lowerValue(visitable.lowerValue)
+    	prop.upper := upperValue(visitable.upperValue)
+    	
+		// needed by PrettyPrinter
+//    	prop.default := visitable.default	// derived value
+//    	prop.isComposite := visitable.isComposite	// derived value
+		prop.isComposite := false	// FIXME : manage this value in a correct way
+		
+    	// we need to manage the Type class of the property,
+    	// in case of external package reference
+    	visitable.type.accept(self)
+    	
+    	
+    	// DEBUG
+    	stdio.writeln("DEBUG - visitProperty() : Type name = "+visitable.type.name+"  -> "+visitable.type.toString())
+    	
     	output.put(visitable, prop)
     	super(visitable)
     end
@@ -64,13 +93,14 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	// a Uml2 operation is also an operation in Kermeta
     	var op : Operation init build.createOperation()
     	op.name := visitable.name
+    	op.isAbstract := visitable.isAbstract
     	output.put(visitable, op)
     	super(visitable)
     end
     
     method visitParameter(visitable : uml2::Parameter) is do
     	// Uml2 has 4 types of operation parameters : "In", "In Out", 'Out" and "Return"
-    	// but Kermeta makes only between passed parameters and return type for operations
+    	// but Kermeta distinguishes only passed parameters and return type for operations
     	if visitable.direction == uml2::ParameterDirectionKind.return then
     		// which type is the result the operation returns, represented by a Class in Kermeta
     		var type : Class init build.createClass()
@@ -93,27 +123,102 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitDataType(visitable : uml2::DataType) is do
-    	// DataType are defined thru ClassDefinition in Kermeta
-    	var dt : DataType
-    	dt := build.createDataType()
-    	dt.name := visitable.name
-    	output.put(visitable, dt)
+    	// detects and manages Kermeta primitive types
+    	var o : Object
+
+    	if visitable.name == "String"
+    	  or visitable.name == "Integer"
+    	  or visitable.name == "Character"
+    	  or visitable.name == "Boolean"
+//    	  or visitable.name == "Real"	// FIXME : not yet implemented in Kermeta
+    	then
+    		if visitable.name == "String"
+    		then
+    			var s : String init ""
+    			o := s.getMetaClass
+    			output.put(visitable, o)
+    		end
+    		if visitable.name == "Integer"
+    		then
+    			var i : Integer init 1
+    			o := i.getMetaClass
+    			output.put(visitable, o)
+    		end
+    		if visitable.name == "Character"
+    		then
+    			var c : Character
+    			c := "c".elementAt(0)
+    			o := c.getMetaClass
+    			output.put(visitable, o)
+    		end
+    		if visitable.name == "Boolean"
+    		then
+    			var b : Boolean init true
+    			o := b.getMetaClass
+    			output.put(visitable, o)
+    		end
+//    		if visitable.name == "Real"
+//    		then
+//    			var r : Real init '3.14'
+//    			o := r.getMetaClass
+//   			output.put(visitable, o)
+//    		end
+    	else
+	    	// DataType are defined thru ClassDefinition in Kermeta
+	    	var dt : DataType
+	    	dt := build.createDataType()
+	    	dt.name := visitable.name
+	    	output.put(visitable, dt)
+    	end
+    	
+    	
+    	// DEBUG
+    	stdio.writeln("DEBUG - visitDataType() : name = "+visitable.name+"  -> "+visitable.toString())
+    	
     	super(visitable)
     end
     
     method visitGeneralization(visitable : uml2::Generalization) is do
-    	// the Uml2 generalization corresponds to a "Class" typing in Kermeta
+    	// the Uml2 generalization instance corresponds to a typing "Class" in Kermeta
     	var cl : Class init build.createClass()
     	output.put(visitable, cl)
     	super(visitable)
     end
     
     method visitAssociation(visitable : uml2::Association) is do
-    	// TODO
     	// it is the most complex transformation to manage
     	// because the structure of representations differs
     	// from UML2 to Kermeta depending on the association cases
     	// 
+    	// TODO
     	super(visitable)
+    end
+    
+    /**
+     * method for extract integer value from UML2 ValueSpecification objects
+     */
+    operation lowerValue(valueSpec : uml2::ValueSpecification) : Integer is do
+    	// if not defined, the lowerBound must be at least equal or greater than zero
+    	// (see UML2 Superstructure  - 1.4 Kernel - the Multiplicities Diagram)
+    	result := 0
+    	var int : uml2::LiteralInteger
+    	int ?= valueSpec
+    	if int != void then
+    		result := int.~value
+    	end
+    end
+    
+    /**
+     * method for extract integer value from UML2 ValueSpecification objects
+     */
+    operation upperValue(valueSpec : uml2::ValueSpecification) : Integer is do
+    	// if not defined, the upperBound must be at least greater than zero
+    	// (see UML2 Superstructure  - 1.4 Kernel - the Multiplicities Diagram)
+    	result := 1
+    	var int : uml2::LiteralInteger
+    	int ?= valueSpec
+    	if int != void then
+    		result := int.~value
+    	end
     end
 }

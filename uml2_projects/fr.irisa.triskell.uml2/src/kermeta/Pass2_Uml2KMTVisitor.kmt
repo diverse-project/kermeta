@@ -49,12 +49,35 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     		op ?= output.getValue(o)
     		cldef.ownedOperation.add(op)
     	}
+    	visitable.ownedAttribute.each{ a |
+    		var prop : Property
+    		prop ?= output.getValue(a)
+    		// associations' ends must not be referenced
+    		if a.association == void then
+    			cldef.ownedAttribute.add(prop)
+    		end
+    	}
+    	// TODO : 
     	super(visitable)
     end
     
     /* visit Attributes, Properties, ... */
     method visitProperty(visitable : uml2::Property) is do
-    	// TODO
+		
+    	// we need to manage the Type class of the property,
+    	// in case of external package reference
+    	visitable.type.accept(self)
+    	
+    	var prop : Property
+    	prop ?= output.getValue(visitable)
+    	var cl : Class
+    	cl ?= output.getValue(visitable.type)
+    	
+    	// DEBUG
+    	stdio.writeln("DEBUG - visitProperty() : name of Type = "+visitable.type.name+"  -> "+visitable.type.toString())
+    	var ob : Object init output.getValue(visitable.type)
+    	
+    	prop.type := cl
     	super(visitable)
     end
     
@@ -80,7 +103,14 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	visitable.ownedMember.each{ e |
 	    	var obj : TypeDefinition
 	    	obj ?= output.getValue(e)
-	    	if obj != void then p.ownedTypeDefinition.add(obj) end
+	    	if obj != void
+	    	then
+	    		/* we don't reference DataTypes in the package
+	    		  (used for typing parameters and properties) */
+	    		var dt : DataType
+	    		dt ?= obj
+	    		if dt.isVoid() then p.ownedTypeDefinition.add(obj) end
+			end
     	}
     	
     	super(visitable)

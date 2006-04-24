@@ -43,7 +43,8 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 		if (node.raisedException.size > 0) then
 			result.append( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
 		end
-		if node.tag != void then
+//		if node.tag != void then
+		if node.tag.size > 0 then
 			result.append( " is\n")
 			var body : String
 			from var it : Iterator<kermeta::reflection::Tag> init node.tag.iterator
@@ -55,18 +56,21 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 	    		if next.name == "km_body" then
 	    			pushIndent()
 					result.append(self.visitTag(next, context))
-					popIndent
+					popIndent()
 				end
 			end
 		else 
 			if (node.isAbstract) then
 				result.append( " is abstract")
 			else 
-				result.append( " is do\n")
+				result.append( " is\n")
 				pushIndent()
-				result.append( indent + "//TODO: implement operation " + node.name + "\n") 
-				popIndent()
+				result.append( indent + "do\n")
+					pushIndent()
+					result.append( indent + "//TODO: implement operation " + node.name + "\n") 
+					popIndent()
 				result.append( indent + "end")
+				popIndent()
 			end
 		end
 	end
@@ -88,4 +92,31 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 		end
     end
 
+	/**
+	 * needed because in Kermeta language the main package syntax differs from subpackages
+	 */
+	operation visitRootPackage(node : kermeta::language::structure::Package, context : Integer) : String is do
+		result := ""
+		result.append(visitTagSet(node.tag, context))
+		
+		result.append("package " + node.qualifiedName + ";\n\n")
+		
+		// TODO : manage nested packages and references to external diagrams
+		result.append("require kermeta\n\n")
+		result.append("using kermeta::standard\n\n")
+		
+		var old_cname : String init current_pname
+		var current_pname : String init node.qualifiedName
+//		pushIndent()
+		typedef := true
+		if (node.ownedTypeDefinition.size > 0) then
+			result.append( self.visitExpressionSet(node.ownedTypeDefinition, context, "\n"))
+		end
+		if (node.nestedPackage.size > 0) then
+			result.append( self.visitExpressionSet(node.nestedPackage, context, "\n"))
+		end
+//		popIndent()
+		current_pname := old_cname
+		result.append("\n")
+	end
 }

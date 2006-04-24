@@ -27,10 +27,10 @@ in the present package.</body>
         <details xmi:id="_07vjodBTEdq6zpbyIcleMg" key="uuid" value="114552694140212"/>
       </eAnnotations>
       <body>do
-	// Operation code for Kermeta
-	// must begin with &quot;do&quot; and terminate with &quot;end&quot;
-	var g : GClass init GClass.new
-	result := g
+    // Operation code in Kermeta language !
+    // Must start with &quot;do&quot; and finish with &quot;end&quot;
+    var g : GClass init GClass.new
+    result := g
 end</body>
     </ownedComment>
     <ownedComment xmi:id="_QTO_wdCBEdqLBpNqO5TAEw" annotatedElement="_Y5vKgMYYEdqnU4rvBMdn4Q">

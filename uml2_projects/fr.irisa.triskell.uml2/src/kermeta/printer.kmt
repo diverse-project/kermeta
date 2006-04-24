@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.1 2006-04-20 15:28:02 vmahe Exp $
+/* $Id: printer.kmt,v 1.2 2006-04-24 14:08:47 vmahe Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : GPL
@@ -198,7 +198,8 @@ class BasicPrettyPrinter inherits
 			result.append("abstract ")
 		end
 	    
-		result.append("class " + node.qualifiedName)
+//		result.append("class " + node.qualifiedName)
+		result.append("class " + node.name)
 		var s : Set<kermeta::reflection::TypeVariable>
 		var it : Iterator<kermeta::reflection::TypeVariable>
 		it := 	node.typeParameter.iterator
@@ -308,7 +309,16 @@ class BasicPrettyPrinter inherits
 	end
 	
 	method visitDataType(node : DataType, context : Integer) : String is do
-		result := "[DataType]"
+		if node.name == "String"
+		  or node.name == "Integer"
+		  or node.name == "Boolean"
+		  or node.name == "Real"
+		  or node.name == "Character"
+		then
+			result := node.name
+		else
+			result := "[DataType : the \"" + node.name + "\" type doesn't exist in Kermeta !]"
+		end
 	end
 	
 	method visitEnumeration(node : Enumeration, context : Integer) : String is do
@@ -734,7 +744,7 @@ class BasicPrettyPrinter inherits
 				//
 				// the default result is the name of the element (it applies well to
 				// features like "String", "Integer", ....
-				stdio.writeln("DEBUG : accept feature out of kermeta::language -> "+node_qname)
+				stdio.writeln("DEBUG : no accept() for feature out of kermeta::language -> "+node_qname)
 				result := node_name
 			end
 		end
@@ -814,7 +824,11 @@ class PrintHelper
 		var ctype : Type
 		ctype ?= elem.type
 
-		result.append( pprinter.visitType(ctype, 0))
+		if not ctype.isVoid then
+			result.append( pprinter.visitType(ctype, 0))
+		else
+			result.append("void")
+		end
 		
 		if (elem.lower != 0 or elem.upper  != 1) then
 			result.append( "[" + elem.lower.toString + "..")
