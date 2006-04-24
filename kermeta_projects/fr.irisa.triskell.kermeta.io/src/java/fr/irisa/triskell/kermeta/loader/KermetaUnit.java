@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.54 2006-04-06 09:50:44 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.55 2006-04-24 09:11:52 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -846,6 +846,10 @@ public abstract class KermetaUnit {
 		return result;
 	}
 
+	/**
+	 * Get all the packages stored in all the loaded kermeta units.
+	 * @return the list of all the packages in all the loaded kermeta units
+	 */
 	public ArrayList<Package> getAllPackages() {
 		ArrayList<Package> result = new ArrayList<Package>();
 		result.addAll(packages.values());
@@ -918,7 +922,8 @@ public abstract class KermetaUnit {
 	}
 	
 	/**
-	 * Save Kermeta model
+	 * Save Kermeta model. Saving the Kermeta model consists on adding each package of the kermeta unit
+	 * in the resource (the main containers)
 	 * @param file_path the xmi file. the extension of the file should be .km
 	 */
 	public void saveAsXMIModel(String file_path) {
@@ -951,7 +956,7 @@ public abstract class KermetaUnit {
 	 * Add the given tag to resource. Used in the KMT2KMPass7.java, to add tag in resource without
 	 * adding it to a container (since a tag can be linked to one or more elements, and unlinked as well).
 	 */
-	public void addFTagsToResource(Resource resource, ArrayList pTags)
+	public static void addFTagsToResource(Resource resource, ArrayList pTags)
 	{   
 	    int tagsize = pTags.size();
 	    for (int i=0; i<tagsize; i++)
@@ -997,7 +1002,7 @@ public abstract class KermetaUnit {
 	 * @param myTags The tags to be added to the XMI resource
 	 * @return the list of myTags, completed
 	 */
-	public ArrayList fixPackageTags(Package p, ArrayList myTags)
+	public static ArrayList fixPackageTags(Package p, ArrayList myTags)
 	{
 	    TreeIterator it = p.eAllContents();
 		while(it.hasNext()) {
@@ -1010,9 +1015,9 @@ public abstract class KermetaUnit {
 	}
 	
 	/**
-	 * Define a container for each element of the root package
+	 * Define a container for each element of the root package.
 	 */
-	public void fixTypeContainement(Package p) {
+	public static void fixTypeContainement(Package p) {
 		TreeIterator it = p.eAllContents();
 		TypeContainementFixer fixer = new TypeContainementFixer();
 		while(it.hasNext()) {
