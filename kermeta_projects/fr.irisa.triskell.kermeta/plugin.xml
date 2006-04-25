@@ -179,7 +179,9 @@
          id="kermetaProjectBuilder"
          name="Kermeta Project Builder"
          point="org.eclipse.core.resources.builders">
-      <builder hasNature="true">
+      <builder
+            hasNature="true"
+            isConfigurable="true">
          <run class="fr.irisa.triskell.kermeta.builders.KermetaProjectBuilder"/>
       </builder>
    </extension>
@@ -190,7 +192,7 @@
       <runtime>
          <run class="fr.irisa.triskell.kermeta.builders.KermetaNature"/>
       </runtime>
-      <builder id="fr.irisa.triskell.kermeta.kermetaCheckerBuilder"/>
+      <builder id="fr.irisa.triskell.kermeta.kermetaProjectBuilder"/>
    </extension>
    <extension
          id="kermetaProblem"
