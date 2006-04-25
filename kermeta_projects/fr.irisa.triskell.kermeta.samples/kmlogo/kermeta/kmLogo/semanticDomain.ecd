@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="semanticDomain" size="893,482" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain" metadata="emf-1.0" initialized="true" tag="5" key="32303035303930362066722E69726973612E747269736B656C6C2E6B65726D6574612E73616D706C6573">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.1 //@children.1/@sourceConnections.0 //@children.1/@sourceConnections.1" name="Point" location="230,340" size="145,121" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Point" runTimeClassModel=" getDelta(dx: Integer, dy: Integer): Point,y, toString(): String,x">
+    <children xsi:type="editmodel:CompartmentEditModel" size="64,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="x" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Point/x">
+        <model href="../kmLogo.ecore#//semanticDomain/Point/x"/>
+      </children>
+      <children xsi:type="editmodel:AttributeEditModel" name="y" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Point/y">
+        <model href="../kmLogo.ecore#//semanticDomain/Point/y"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="122,36">
+      <children xsi:type="editmodel:MethodEditModel" name="getDelta" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Point/getDelta">
+        <model href="../kmLogo.ecore#//semanticDomain/Point/getDelta"/>
+      </children>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Point/toString">
+        <model href="../kmLogo.ecore#//semanticDomain/Point/toString"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <model href="../kmLogo.ecore#//semanticDomain/Point"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.0" name="Segment" location="390,80" size="131,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Segment" runTimeClassModel=" make(orig: Point, dest: Point)">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="108,18">
+      <children xsi:type="editmodel:MethodEditModel" name="make" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Segment/make">
+        <model href="../kmLogo.ecore#//semanticDomain/Segment/make"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.1" target="//@children.0" targetEnd="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="origin" location="99,0" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Segment/origin" multiplicityLabel="//@children.1/@sourceConnections.0/@children.0/@children.0" roleLabel="//@children.1/@sourceConnections.0/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="336,319" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="origin" location="296,319" size="26,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//semanticDomain/Segment/origin"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,57" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.1" target="//@children.0" targetEnd="//@children.1/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="destination" location="145,48" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Segment/destination" multiplicityLabel="//@children.1/@sourceConnections.1/@children.0/@children.0" roleLabel="//@children.1/@sourceConnections.1/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="382,367" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="destination" location="382,395" size="52,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//semanticDomain/Segment/destination"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="89,67" attachSource="true"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//semanticDomain/Segment"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Turtle" location="54,0" size="152,175" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Turtle" runTimeClassModel=" rotate(angle: Integer), setPenUp(b: Boolean), reset(), move(dx: Integer, dy: Integer), forward(steps: Integer),penUp,heading">
+    <children xsi:type="editmodel:CompartmentEditModel" size="96,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="heading" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Turtle/heading">
+        <model href="../kmLogo.ecore#//semanticDomain/Turtle/heading"/>
+      </children>
+      <children xsi:type="editmodel:AttributeEditModel" name="penUp" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Turtle/penUp">
+        <model href="../kmLogo.ecore#//semanticDomain/Turtle/penUp"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="129,90">
+      <children xsi:type="editmodel:MethodEditModel" name="forward" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Turtle/forward">
+        <model href="../kmLogo.ecore#//semanticDomain/Turtle/forward"/>
+      </children>
+      <children xsi:type="editmodel:MethodEditModel" name="move" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Turtle/move">
+        <model href="../kmLogo.ecore#//semanticDomain/Turtle/move"/>
+      </children>
+      <children xsi:type="editmodel:MethodEditModel" name="reset" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Turtle/reset">
+        <model href="../kmLogo.ecore#//semanticDomain/Turtle/reset"/>
+      </children>
+      <children xsi:type="editmodel:MethodEditModel" name="rotate" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Turtle/rotate">
+        <model href="../kmLogo.ecore#//semanticDomain/Turtle/rotate"/>
+      </children>
+      <children xsi:type="editmodel:MethodEditModel" name="setPenUp" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Turtle/setPenUp">
+        <model href="../kmLogo.ecore#//semanticDomain/Turtle/setPenUp"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="drawings" location="0,33" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Turtle/drawings" multiplicityLabel="//@children.2/@sourceConnections.0/@children.0/@children.0" roleLabel="//@children.2/@sourceConnections.0/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="379,120" size="4,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="drawings" location="337,92" size="46,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//semanticDomain/Turtle/drawings"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="152,113" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" source="//@children.2" target="//@children.0" targetEnd="//@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="position" location="0,10" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//semanticDomain/Turtle/position" multiplicityLabel="//@children.2/@sourceConnections.1/@children.0/@children.0" roleLabel="//@children.2/@sourceConnections.1/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="205,329" size="18,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="position" location="186,357" size="37,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//semanticDomain/Turtle/position"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="142,175" attachSource="true"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//semanticDomain/Turtle"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <model href="../kmLogo.ecore#//semanticDomain"/>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="10,10" gridOrigin="0,0" rulerUnit="pixel">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:EMFClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true"/>
+</editmodel:ClassDiagramEditModel>

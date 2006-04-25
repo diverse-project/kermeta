@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="abstractSyntax" size="893,1071" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax" metadata="emf-1.0" initialized="true" zoom="0.75" tag="5" key="32303035303930362066722E69726973612E747269736B656C6C2E6B65726D6574612E73616D706C6573">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.8/@sourceConnections.0" name="Instruction" location="1100,30" size="147,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Instruction">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="124,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Instruction/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/Instruction/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="instructions" location="147,30" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Block/instructions" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.0/@children.0/@children.0" roleLabel="//@children.0/@sourceConnections.0/@children.0/@children.1" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="1253,67" size="4,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="instructions" location="1253,39" size="56,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/Block/instructions"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="enclosingBlock" location="221,-2" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Instruction/enclosingBlock" multiplicityLabel="//@children.0/@sourceConnections.0/@children.1/@children.0" roleLabel="//@children.0/@sourceConnections.0/@children.1/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="1507,143" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="enclosingBlock" location="1527,143" size="72,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/Instruction/enclosingBlock"/>
+      </children>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Instruction"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.7/@sourceConnections.3 //@children.0/@sourceConnections.0 //@children.4/@sourceConnections.1 //@children.4/@sourceConnections.2 //@children.3/@sourceConnections.0 //@children.5/@sourceConnections.0" name="Block" location="1299,164" size="275,100" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Block">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Block/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/Block/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.1" target="//@children.8/@sourceConnections.0" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="137,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="36,67"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Block"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0 //@children.3/@sourceConnections.1 //@children.5/@sourceConnections.1" name="ControlStructure" location="1740,166" size="226,29" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ControlStructure">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.2" target="//@children.8/@sourceConnections.0" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="167,-1" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="58,67"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.2" target="//@children.8" targetEnd="//@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="condition" location="171,69" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ControlStructure/condition" multiplicityLabel="//@children.2/@sourceConnections.1/@children.0/@children.0" roleLabel="//@children.2/@sourceConnections.1/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="747,244" size="18,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="condition" location="747,195" size="43,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/ControlStructure/condition"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="-1,22" attachSource="true"/>
+      <bendpoints secondRelativeDimension="560,239" firstRelativeDimension="-373,256"/>
+      <bendpoints secondRelativeDimension="245,244" firstRelativeDimension="-667,262"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/ControlStructure"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Repeat" location="1580,550" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Repeat">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Repeat/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/Repeat/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.3" target="//@children.1" targetEnd="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="block" location="169,100" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Repeat/block" multiplicityLabel="//@children.3/@sourceConnections.0/@children.0/@children.0" roleLabel="//@children.3/@sourceConnections.0/@children.0/@children.1" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="1475,271" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="block" location="1436,271" size="25,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/Repeat/block"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="-1,26" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.3" target="//@children.2" targetEnd="//@children.3/@sourceConnections.1/@children.1" sourceEnd="//@children.3/@sourceConnections.1/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="228,-1" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="172,28" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Repeat"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="If" location="1630,330" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/If">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/If/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/If/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.4" target="//@children.2" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="192,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="82,29" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.4" target="//@children.1" targetEnd="//@children.4/@sourceConnections.1/@children.0" sourceEnd="//@children.4/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="elsePart" location="274,40" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/If/elsePart" multiplicityLabel="//@children.4/@sourceConnections.1/@children.0/@children.0" roleLabel="//@children.4/@sourceConnections.1/@children.0/@children.1" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1581,211" size="18,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="elsePart" location="1581,183" size="39,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/If/elsePart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="-1,46" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.4" target="//@children.1" targetEnd="//@children.4/@sourceConnections.2/@children.0" sourceEnd="//@children.4/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="thenPart" location="274,23" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/If/thenPart" multiplicityLabel="//@children.4/@sourceConnections.2/@children.0/@children.0" roleLabel="//@children.4/@sourceConnections.2/@children.0/@children.1" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="1581,194" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="thenPart" location="1581,166" size="40,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/If/thenPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="-1,22" attachSource="true"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/If"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="While" location="1550,450" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/While">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/While/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/While/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.5" target="//@children.1" targetEnd="//@children.5/@sourceConnections.0/@children.0" sourceEnd="//@children.5/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="block" location="222,100" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/While/block" multiplicityLabel="//@children.5/@sourceConnections.0/@children.0/@children.0" roleLabel="//@children.5/@sourceConnections.0/@children.0/@children.1" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="1527,271" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="block" location="1488,271" size="25,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/While/block"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,31" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.5" target="//@children.2" targetEnd="//@children.5/@sourceConnections.1/@children.1" sourceEnd="//@children.5/@sourceConnections.1/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="219,-1" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="172,28" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/While"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.7/@sourceConnections.1" name="ProcCall" location="879,164" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ProcCall">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ProcCall/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/ProcCall/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.6" target="//@children.8/@sourceConnections.0" targetEnd="//@children.6/@sourceConnections.0/@children.1" sourceEnd="//@children.6/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="137,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="51,67"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/ProcCall"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="ProcDeclaration" location="1070,330" size="275,85" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ProcDeclaration">
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ProcDeclaration/name">
+        <model href="../kmLogo.ecore#//abstractSyntax/ProcDeclaration/name"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ProcDeclaration/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/ProcDeclaration/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.7" target="//@children.8/@sourceConnections.0" targetEnd="//@children.7/@sourceConnections.0/@children.1" sourceEnd="//@children.7/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="137,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,33"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" source="//@children.7" target="//@children.6" targetEnd="//@children.7/@sourceConnections.1/@children.1" sourceEnd="//@children.7/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="declaration" location="41,0" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ProcCall/declaration" attachSource="true" multiplicityLabel="//@children.7/@sourceConnections.1/@children.0/@children.0" roleLabel="//@children.7/@sourceConnections.1/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="1097,308" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="declaration" location="1117,308" size="53,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/ProcCall/declaration"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="procCall" location="232,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ProcDeclaration/procCall" multiplicityLabel="//@children.7/@sourceConnections.1/@children.1/@children.0" roleLabel="//@children.7/@sourceConnections.1/@children.1/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="1099,237" size="4,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="procCall" location="1117,237" size="39,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/ProcDeclaration/procCall"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" source="//@children.7" target="//@children.10" targetEnd="//@children.7/@sourceConnections.2/@children.0" sourceEnd="//@children.7/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="args" location="232,0" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ProcDeclaration/args" multiplicityLabel="//@children.7/@sourceConnections.2/@children.0/@children.0" roleLabel="//@children.7/@sourceConnections.2/@children.0/@children.1" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="1099,597" size="4,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="args" location="1117,597" size="22,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/ProcDeclaration/args"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="41,85" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.7" target="//@children.1" targetEnd="//@children.7/@sourceConnections.3/@children.1" sourceEnd="//@children.7/@sourceConnections.3/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="procDeclaration" location="239,-1" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Block/procDeclaration" attachSource="true" multiplicityLabel="//@children.7/@sourceConnections.3/@children.0/@children.0" roleLabel="//@children.7/@sourceConnections.3/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="1295,308" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="procDeclaration" location="1315,308" size="76,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/Block/procDeclaration"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="block" location="10,100" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/ProcDeclaration/block" multiplicityLabel="//@children.7/@sourceConnections.3/@children.1/@children.0" roleLabel="//@children.7/@sourceConnections.3/@children.1/@children.1" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1283,271" size="18,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="block" location="1315,271" size="25,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/ProcDeclaration/block"/>
+      </children>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/ProcDeclaration"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.9/@sourceConnections.2 //@children.9/@sourceConnections.0 //@children.9/@sourceConnections.1 //@children.10/@sourceConnections.0 //@children.11/@sourceConnections.0 //@children.2/@sourceConnections.1" name="Expression" location="569,147" size="171,109" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Expression">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.7/@sourceConnections.0 //@children.2/@sourceConnections.0 //@children.12/@sourceConnections.0 //@children.1/@sourceConnections.0 //@children.6/@sourceConnections.0" autoLocated="true" source="//@children.8" target="//@children.0" targetEnd="//@children.8/@sourceConnections.0/@children.1" sourceEnd="//@children.8/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="83,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="73,67" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Expression"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="BinaryExp" location="699,489" size="275,85" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/BinaryExp">
+    <children xsi:type="editmodel:CompartmentEditModel" size="94,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="operator" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/BinaryExp/operator">
+        <model href="../kmLogo.ecore#//abstractSyntax/BinaryExp/operator"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/BinaryExp/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/BinaryExp/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.9" target="//@children.8" targetEnd="//@children.9/@sourceConnections.0/@children.0" sourceEnd="//@children.9/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="rhs" location="122,107" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/BinaryExp/rhs" multiplicityLabel="//@children.9/@sourceConnections.0/@children.0/@children.0" roleLabel="//@children.9/@sourceConnections.0/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="697,263" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="rhs" location="667,263" size="16,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/BinaryExp/rhs"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="157,0" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.9" target="//@children.8" targetEnd="//@children.9/@sourceConnections.1/@children.0" sourceEnd="//@children.9/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="lhs" location="148,107" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/BinaryExp/lhs" multiplicityLabel="//@children.9/@sourceConnections.1/@children.0/@children.0" roleLabel="//@children.9/@sourceConnections.1/@children.0/@children.1" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="723,263" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="lhs" location="695,263" size="14,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="../kmLogo.ecore#//abstractSyntax/BinaryExp/lhs"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="181,0" attachSource="true"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.9" target="//@children.8" targetEnd="//@children.9/@sourceConnections.2/@children.1" sourceEnd="//@children.9/@sourceConnections.2/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="137,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="48,107" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/BinaryExp"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.7/@sourceConnections.2" name="Variable" location="879,615" size="275,85" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Variable">
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Variable/name">
+        <model href="../kmLogo.ecore#//abstractSyntax/Variable/name"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Variable/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/Variable/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.10" target="//@children.8" targetEnd="//@children.10/@sourceConnections.0/@children.1" sourceEnd="//@children.10/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="137,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="47,109" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Variable"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Constant" location="600,619" size="275,85" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Constant">
+    <children xsi:type="editmodel:CompartmentEditModel" size="100,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="myValue" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Constant/myValue">
+        <model href="../kmLogo.ecore#//abstractSyntax/Constant/myValue"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Constant/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/Constant/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.11" target="//@children.8" targetEnd="//@children.11/@sourceConnections.0/@children.1" sourceEnd="//@children.11/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="16,-1" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="47,109" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Constant"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.16/@sourceConnections.0" name="Primitive" location="203,146" size="192,29" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Primitive">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.12" target="//@children.8/@sourceConnections.0" targetEnd="//@children.12/@sourceConnections.0/@children.1" sourceEnd="//@children.12/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="95,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="12,67"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Primitive"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Left" location="290,980" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Left">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Left/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/Left/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.13" target="//@children.16/@sourceConnections.0" targetEnd="//@children.13/@sourceConnections.0/@children.1" sourceEnd="//@children.13/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="243,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="59,29"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Left"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="PenDown" location="120,739" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/PenDown">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/PenDown/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/PenDown/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.14" target="//@children.16/@sourceConnections.0" targetEnd="//@children.14/@sourceConnections.0/@children.1" sourceEnd="//@children.14/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="256,-1" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="85,29"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/PenDown"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Right" location="60,649" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Right">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Right/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/Right/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.15" target="//@children.16/@sourceConnections.0" targetEnd="//@children.15/@sourceConnections.0/@children.1" sourceEnd="//@children.15/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="236,-1" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="38,29"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Right"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Clear" location="10,550" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Clear">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Clear/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/Clear/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.15/@sourceConnections.0 //@children.17/@sourceConnections.0 //@children.14/@sourceConnections.0 //@children.19/@sourceConnections.0 //@children.13/@sourceConnections.0 //@children.18/@sourceConnections.0" autoLocated="true" source="//@children.16" target="//@children.12" targetEnd="//@children.16/@sourceConnections.0/@children.1" sourceEnd="//@children.16/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="137,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="95,29" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Clear"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="PenUp" location="189,819" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/PenUp">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/PenUp/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/PenUp/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.17" target="//@children.16/@sourceConnections.0" targetEnd="//@children.17/@sourceConnections.0/@children.1" sourceEnd="//@children.17/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="233,-1" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,29"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/PenUp"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Forward" location="340,1060" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Forward">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Forward/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/Forward/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.18" target="//@children.16/@sourceConnections.0" targetEnd="//@children.18/@sourceConnections.0/@children.1" sourceEnd="//@children.18/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="248,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="45,29"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Forward"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Back" location="239,899" size="275,67" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Back">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="252,18">
+      <children xsi:type="editmodel:MethodEditModel" name="traverse" id="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.ecore#//abstractSyntax/Back/traverse">
+        <model href="../kmLogo.ecore#//abstractSyntax/Back/traverse"/>
+      </children>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" source="//@children.19" target="//@children.16/@sourceConnections.0" targetEnd="//@children.19/@sourceConnections.0/@children.1" sourceEnd="//@children.19/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="245,-1" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,27"/>
+    </sourceConnections>
+    <model href="../kmLogo.ecore#//abstractSyntax/Back"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <model href="../kmLogo.ecore#//abstractSyntax"/>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="10,10" gridOrigin="0,0" rulerUnit="pixel">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:EMFClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true"/>
+</editmodel:ClassDiagramEditModel>

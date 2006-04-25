@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kmLogo" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.kmt" nsPrefix="kmLogo">
+  <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
+  <eSubpackages name="semanticDomain" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.kmt#//semanticDomain" nsPrefix="semanticDomain">
+    <eClassifiers xsi:type="ecore:EClass" name="Turtle">
+      <eOperations name="reset" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.position := kmLogo::semanticDomain::Point.new&#xA;&#x9;self.position.x := 0&#xA;&#x9;self.position.y := 0&#xA;&#x9;self.heading := 0&#xA;&#x9;self.drawings := void&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="setPenUp" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.penUp := b&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="b" eType="//Boolean"/>
+      </eOperations>
+      <eOperations name="rotate" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.heading := self.heading.plus(angle)&#xA;&#x9;if self.heading.isLower(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.heading := self.heading.plus(360)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if self.heading.isGreater(360) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.heading := self.heading.minus(360)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="angle" eType="//Integer"/>
+      </eOperations>
+      <eOperations name="move" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var newPos : kmLogo::semanticDomain::Point&#xA;&#x9;newPos := self.position.getDelta(dx, dy)&#xA;&#x9;if self.penUp then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;Tortue se deplace en &quot;.plus(newPos.toString))&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;Tortue trace vers &quot;.plus(newPos.toString))&#xA;&#x9;&#x9;&#x9;var trace : kmLogo::semanticDomain::Segment init kmLogo::semanticDomain::Segment.new&#xA;&#x9;&#x9;&#x9;trace.make(self.position, newPos)&#xA;&#x9;&#x9;&#x9;self.drawings.add(trace)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;self.position := newPos&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="dx" eType="//Integer"/>
+        <eParameters name="dy" eType="//Integer"/>
+      </eOperations>
+      <eOperations name="forward" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;if self.heading.equals(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.move(0, steps)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if self.heading.equals(90) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.move(steps, 0)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if self.heading.equals(180) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.move(0, steps.uminus)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if self.heading.equals(270) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.move(steps.uminus, 0)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="steps" eType="//Integer"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="position" eType="//semanticDomain/Point"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="drawings" upperBound="-1" eType="//semanticDomain/Segment"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="heading" eType="//Integer"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="penUp" eType="//Boolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Point">
+      <eOperations name="getDelta" eType="//semanticDomain/Point">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := kmLogo::semanticDomain::Point.new&#xA;&#x9;result.x := self.x.plus(dx)&#xA;&#x9;result.y := self.y.plus(dy)&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="dx" eType="//Integer"/>
+        <eParameters name="dy" eType="//Integer"/>
+      </eOperations>
+      <eOperations name="toString" eType="//String">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;result := &quot;[&quot;.plus(self.x.toString).plus(&quot;,&quot;).plus(self.y.toString).plus(&quot;]&quot;)&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="x" eType="//Integer"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="y" eType="//Integer"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Segment">
+      <eOperations name="make" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.origin := orig&#xA;&#x9;self.destination := dest&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="orig" eType="//semanticDomain/Point"/>
+        <eParameters name="dest" eType="//semanticDomain/Point"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="origin" lowerBound="1" eType="//semanticDomain/Point"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="destination" lowerBound="1" eType="//semanticDomain/Point"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="abstractSyntax" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.kmt#//abstractSyntax" nsPrefix="abstractSyntax">
+    <eClassifiers xsi:type="ecore:EClass" name="Instruction">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="enclosingBlock" lowerBound="1" eType="//abstractSyntax/Block" eOpposite="//abstractSyntax/Block/instructions"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Primitive" eSuperTypes="//abstractSyntax/Instruction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Back" eSuperTypes="//abstractSyntax/Primitive">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitBack(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="steps" lowerBound="1" eType="//abstractSyntax/Expression"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Forward" eSuperTypes="//abstractSyntax/Primitive">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitForward(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="steps" lowerBound="1" eType="//abstractSyntax/Expression"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Left" eSuperTypes="//abstractSyntax/Primitive">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitLeft(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Right" eSuperTypes="//abstractSyntax/Primitive">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitRight(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PenDown" eSuperTypes="//abstractSyntax/Primitive">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitPenDown(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PenUp" eSuperTypes="//abstractSyntax/Primitive">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitPenUp(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Clear" eSuperTypes="//abstractSyntax/Primitive">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitClear(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="//abstractSyntax/Instruction"/>
+    <eClassifiers xsi:type="ecore:EClass" name="BinaryExp" eSuperTypes="//abstractSyntax/Expression">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitBinaryExp(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="//String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="//abstractSyntax/Expression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1" eType="//abstractSyntax/Expression"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="//abstractSyntax/Expression">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitConstant(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="myValue" eType="//Integer"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ProcCall" eSuperTypes="//abstractSyntax/Instruction">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitProcCall(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actualArgs" upperBound="-1" eType="//abstractSyntax/Expression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" lowerBound="1" eType="//abstractSyntax/ProcDeclaration" eOpposite="//abstractSyntax/ProcDeclaration/procCall"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ProcDeclaration" eSuperTypes="//abstractSyntax/Instruction">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitProcDeclaration(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="args" upperBound="-1" eType="//abstractSyntax/Variable" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" eType="//abstractSyntax/Block" containment="true" eOpposite="//abstractSyntax/Block/procDeclaration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="procCall" upperBound="-1" eType="//abstractSyntax/ProcCall" eOpposite="//abstractSyntax/ProcCall/declaration"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="//abstractSyntax/Instruction">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitBlock(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="instructions" upperBound="-1" eType="//abstractSyntax/Instruction" containment="true" eOpposite="//abstractSyntax/Instruction/enclosingBlock"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="procDeclaration" lowerBound="1" eType="//abstractSyntax/ProcDeclaration" eOpposite="//abstractSyntax/ProcDeclaration/block"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="If" eSuperTypes="//abstractSyntax/ControlStructure">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitIf(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="thenPart" lowerBound="1" eType="//abstractSyntax/Block" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="elsePart" eType="//abstractSyntax/Block" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ControlStructure" eSuperTypes="//abstractSyntax/Instruction">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="//abstractSyntax/Expression"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="//abstractSyntax/ControlStructure">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitRepeat(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="//abstractSyntax/Block" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="While" eSuperTypes="//abstractSyntax/ControlStructure">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitWhile(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="//abstractSyntax/Block" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="//abstractSyntax/Expression">
+      <eOperations name="traverse" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;v.visitVariable(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//abstractSyntax/Instruction/traverse">
+          <details key="SuperOperation" value="kmLogo::abstractSyntax::Instruction"/>
+        </eAnnotations>
+        <eParameters name="v" eType="//actions/AbstractVisitor"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="actions" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.kmt#//actions" nsPrefix="actions">
+    <eClassifiers xsi:type="ecore:EClass" name="AbstractVisitor">
+      <eOperations name="visitBack" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Back"/>
+      </eOperations>
+      <eOperations name="visitForward" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Forward"/>
+      </eOperations>
+      <eOperations name="visitLeft" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Left"/>
+      </eOperations>
+      <eOperations name="visitRight" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Right"/>
+      </eOperations>
+      <eOperations name="visitPenDown" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/PenDown"/>
+      </eOperations>
+      <eOperations name="visitPenUp" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/PenUp"/>
+      </eOperations>
+      <eOperations name="visitClear" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Clear"/>
+      </eOperations>
+      <eOperations name="visitBinaryExp" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/BinaryExp"/>
+      </eOperations>
+      <eOperations name="visitConstant" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Constant"/>
+      </eOperations>
+      <eOperations name="visitProcCall" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/ProcCall"/>
+      </eOperations>
+      <eOperations name="visitProcDeclaration" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/ProcDeclaration"/>
+      </eOperations>
+      <eOperations name="visitBlock" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Block"/>
+      </eOperations>
+      <eOperations name="visitIf" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/If"/>
+      </eOperations>
+      <eOperations name="visitRepeat" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Repeat"/>
+      </eOperations>
+      <eOperations name="visitWhile" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/While"/>
+      </eOperations>
+      <eOperations name="visitVariable" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Variable"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Interpreter" eSuperTypes="//actions/AbstractVisitor">
+      <eOperations name="initialize" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.turtle := t&#xA;&#x9;self.stack := kermeta::utils::Stack&lt;kmLogo::actions::Bindings>.new&#xA;end"/>
+        </eAnnotations>
+        <eParameters name="t" eType="//semanticDomain/Turtle"/>
+      </eOperations>
+      <eOperations name="visitBack" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;node.steps.traverse(self)&#xA;&#x9;self.turtle.forward(self.accumulator.uminus)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitBack">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Back"/>
+      </eOperations>
+      <eOperations name="visitForward" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;node.steps.traverse(self)&#xA;&#x9;self.turtle.forward(self.accumulator)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitForward">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Forward"/>
+      </eOperations>
+      <eOperations name="visitLeft" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.turtle.rotate(90.uminus)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitLeft">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Left"/>
+      </eOperations>
+      <eOperations name="visitRight" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.turtle.rotate(90)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitRight">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Right"/>
+      </eOperations>
+      <eOperations name="visitPenDown" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;pendown&quot;)&#xA;&#x9;self.turtle.setPenUp(false)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitPenDown">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/PenDown"/>
+      </eOperations>
+      <eOperations name="visitPenUp" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.turtle.setPenUp(true)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitPenUp">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/PenUp"/>
+      </eOperations>
+      <eOperations name="visitClear" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.turtle.reset&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitClear">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Clear"/>
+      </eOperations>
+      <eOperations name="visitBinaryExp" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;visitBinExp&quot;.plus(self.accumulator.toString))&#xA;&#x9;var left : kermeta::standard::Integer&#xA;&#x9;node.lhs.traverse(self)&#xA;&#x9;left := self.accumulator&#xA;&#x9;node.rhs.traverse(self)&#xA;&#x9;if node.operator.equals(&quot;+&quot;) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.accumulator := left.plus(self.accumulator)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if node.operator.equals(&quot;-&quot;) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.accumulator := left.minus(self.accumulator)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if node.operator.equals(&quot;*&quot;) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.accumulator := left.mult(self.accumulator)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if node.operator.equals(&quot;/&quot;) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.accumulator := left.div(self.accumulator)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if node.operator.equals(&quot;=&quot;) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;if left.equals(self.accumulator) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.accumulator := 1&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.accumulator := 0&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if node.operator.equals(&quot;&lt;&quot;) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;if left.isLower(self.accumulator) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.accumulator := 1&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.accumulator := 0&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if node.operator.equals(&quot;>&quot;) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;if left.isGreater(self.accumulator) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.accumulator := 1&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;self.accumulator := 0&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitBinaryExp">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/BinaryExp"/>
+      </eOperations>
+      <eOperations name="visitConstant" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.accumulator := node.myValue&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitConstant">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Constant"/>
+      </eOperations>
+      <eOperations name="visitProcCall" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var frame : kmLogo::actions::Bindings init kmLogo::actions::Bindings.new&#xA;&#x9;self.stack.push(frame)&#xA;&#x9;stdio.writeln(&quot;node.actualArgs.size=&quot;.plus(node.actualArgs.size.toString))&#xA;&#x9;from var i : kermeta::standard::Integer init 0&#xA;&#x9;until i.isGreaterOrEqual(node.actualArgs.size)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;node.actualArgs.elementAt(i).traverse(self)&#xA;&#x9;&#x9;&#x9;frame.put(node.declaration.args.elementAt(i).name, self.accumulator)&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;accumulator=&quot;.plus(self.accumulator.toString))&#xA;&#x9;&#x9;&#x9;i := i.plus(1)&#xA;&#x9;&#x9;end&#x9;end&#xA;&#x9;node.declaration.block.traverse(self)&#xA;&#x9;self.stack.pop&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitProcCall">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/ProcCall"/>
+      </eOperations>
+      <eOperations name="visitProcDeclaration" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitProcDeclaration">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/ProcDeclaration"/>
+      </eOperations>
+      <eOperations name="visitBlock" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;node.instructions.each{i | do&#xA;&#x9;&#x9;&#x9;i.traverse(self)&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitBlock">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Block"/>
+      </eOperations>
+      <eOperations name="visitIf" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;node.condition.traverse(self)&#xA;&#x9;if self.accumulator.isNotEqual(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;node.thenPart.traverse(self)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;node.elsePart.traverse(self)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitIf">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/If"/>
+      </eOperations>
+      <eOperations name="visitRepeat" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;node.condition.traverse(self)&#xA;&#x9;from var i : kermeta::standard::Integer init self.accumulator&#xA;&#x9;until i.isLower(1)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;node.block.traverse(self)&#xA;&#x9;&#x9;&#x9;i := i.minus(1)&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitRepeat">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Repeat"/>
+      </eOperations>
+      <eOperations name="visitWhile" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;from node.condition.traverse(self)&#xA;&#x9;until self.accumulator.equals(0)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;node.block.traverse(self)&#xA;&#x9;&#x9;&#x9;node.condition.traverse(self)&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitWhile">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/While"/>
+      </eOperations>
+      <eOperations name="visitVariable" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;self.accumulator := self.stack.first.getValue(node.name)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitVariable">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Variable"/>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="turtle" eType="//semanticDomain/Turtle"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="stack" containment="true">
+        <eType xsi:type="ecore:EClass" href="null/framework.ecore#//utils/Stack"/>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="accumulator" eType="//Integer"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PrettyPrinter" eSuperTypes="//actions/AbstractVisitor">
+      <eOperations name="visitBack" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.write(&quot;back &quot;)&#xA;&#x9;node.steps.traverse(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitBack">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Back"/>
+      </eOperations>
+      <eOperations name="visitForward" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.write(&quot;forward &quot;)&#xA;&#x9;node.steps.traverse(self)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitForward">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Forward"/>
+      </eOperations>
+      <eOperations name="visitLeft" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.write(&quot;left &quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitLeft">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Left"/>
+      </eOperations>
+      <eOperations name="visitRight" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.write(&quot;right &quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitRight">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Right"/>
+      </eOperations>
+      <eOperations name="visitPenDown" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.write(&quot;pendown &quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitPenDown">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/PenDown"/>
+      </eOperations>
+      <eOperations name="visitPenUp" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.write(&quot;penup &quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitPenUp">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/PenUp"/>
+      </eOperations>
+      <eOperations name="visitClear" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;clear &quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitClear">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Clear"/>
+      </eOperations>
+      <eOperations name="visitBinaryExp" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;node.lhs.traverse(self)&#xA;&#x9;stdio.write(node.operator)&#xA;&#x9;node.rhs.traverse(self)&#xA;&#x9;stdio.write(&quot; &quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitBinaryExp">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/BinaryExp"/>
+      </eOperations>
+      <eOperations name="visitConstant" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.write(node.myValue.toString.plus(&quot; &quot;))&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitConstant">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Constant"/>
+      </eOperations>
+      <eOperations name="visitProcCall" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.write(node.declaration.name.plus(&quot; &quot;))&#xA;&#x9;node.actualArgs.each{e | do&#xA;&#x9;&#x9;&#x9;e.traverse(self)&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitProcCall">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/ProcCall"/>
+      </eOperations>
+      <eOperations name="visitProcDeclaration" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot; &quot;)&#xA;&#x9;stdio.write(&quot;to &quot;.plus(node.name).plus(&quot; &quot;))&#xA;&#x9;node.args.each{arg | do&#xA;&#x9;&#x9;&#x9;arg.traverse(self)&#xA;&#x9;&#x9;end}&#xA;&#x9;stdio.writeln(&quot; &quot;)&#xA;&#x9;node.block.traverse(self)&#xA;&#x9;stdio.writeln(&quot;end&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitProcDeclaration">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/ProcDeclaration"/>
+      </eOperations>
+      <eOperations name="visitBlock" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;node.instructions.each{i | do&#xA;&#x9;&#x9;&#x9;i.traverse(self)&#xA;&#x9;&#x9;end}&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitBlock">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Block"/>
+      </eOperations>
+      <eOperations name="visitIf" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitIf">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/If"/>
+      </eOperations>
+      <eOperations name="visitRepeat" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.write(&quot;repeat &quot;)&#xA;&#x9;node.condition.traverse(self)&#xA;&#x9;stdio.write(&quot; [ &quot;)&#xA;&#x9;node.block.traverse(self)&#xA;&#x9;stdio.writeln(&quot; ]&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitRepeat">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Repeat"/>
+      </eOperations>
+      <eOperations name="visitWhile" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitWhile">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/While"/>
+      </eOperations>
+      <eOperations name="visitVariable" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.write(&quot;:&quot;.plus(node.name).plus(&quot; &quot;))&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="KermetaSuperOperations" references="//actions/AbstractVisitor/visitVariable">
+          <details key="SuperOperation" value="kmLogo::actions::AbstractVisitor"/>
+        </eAnnotations>
+        <eParameters name="node" eType="//abstractSyntax/Variable"/>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Bindings"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Main">
+      <eOperations name="pointille" eType="//abstractSyntax/Instruction">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var cst3 : kmLogo::abstractSyntax::Constant init kmLogo::abstractSyntax::Constant.new&#xA;&#x9;var cst4 : kmLogo::abstractSyntax::Constant init kmLogo::abstractSyntax::Constant.new&#xA;&#x9;var fo1 : kmLogo::abstractSyntax::Forward init kmLogo::abstractSyntax::Forward.new&#xA;&#x9;var fo2 : kmLogo::abstractSyntax::Forward init kmLogo::abstractSyntax::Forward.new&#xA;&#x9;var penup : kmLogo::abstractSyntax::PenUp init kmLogo::abstractSyntax::PenUp.new&#xA;&#x9;var pendown : kmLogo::abstractSyntax::PenDown init kmLogo::abstractSyntax::PenDown.new&#xA;&#x9;var block : kmLogo::abstractSyntax::Block init kmLogo::abstractSyntax::Block.new&#xA;&#x9;var repeat : kmLogo::abstractSyntax::Repeat init kmLogo::abstractSyntax::Repeat.new&#xA;&#x9;cst3.myValue := 3&#xA;&#x9;cst4.myValue := 4&#xA;&#x9;fo1.steps := cst3&#xA;&#x9;fo2.steps := cst4&#xA;&#x9;block.instructions.add(pendown)&#xA;&#x9;block.instructions.add(fo1)&#xA;&#x9;block.instructions.add(penup)&#xA;&#x9;block.instructions.add(fo2)&#xA;&#x9;repeat.condition := cst3&#xA;&#x9;repeat.block := block&#xA;&#x9;result := repeat&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="square" eType="//abstractSyntax/Instruction">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var varwidth : kmLogo::abstractSyntax::Variable init kmLogo::abstractSyntax::Variable.new&#xA;&#x9;varwidth.name := &quot;width&quot;&#xA;&#x9;var forward : kmLogo::abstractSyntax::Forward init kmLogo::abstractSyntax::Forward.new&#xA;&#x9;forward.steps := varwidth&#xA;&#x9;var right : kmLogo::abstractSyntax::Right init kmLogo::abstractSyntax::Right.new&#xA;&#x9;var block : kmLogo::abstractSyntax::Block init kmLogo::abstractSyntax::Block.new&#xA;&#x9;block.instructions.add(forward)&#xA;&#x9;block.instructions.add(right)&#xA;&#x9;var cst4 : kmLogo::abstractSyntax::Constant init kmLogo::abstractSyntax::Constant.new&#xA;&#x9;cst4.myValue := 4&#xA;&#x9;var repeat : kmLogo::abstractSyntax::Repeat init kmLogo::abstractSyntax::Repeat.new&#xA;&#x9;repeat.condition := cst4&#xA;&#x9;repeat.block := block&#xA;&#x9;var squareblock : kmLogo::abstractSyntax::Block init kmLogo::abstractSyntax::Block.new&#xA;&#x9;squareblock.instructions.add(repeat)&#xA;&#x9;var squaredecl : kmLogo::abstractSyntax::ProcDeclaration init kmLogo::abstractSyntax::ProcDeclaration.new&#xA;&#x9;squaredecl.name := &quot;square&quot;&#xA;&#x9;squaredecl.block := squareblock&#xA;&#x9;squaredecl.args.add(varwidth)&#xA;&#x9;var pendown : kmLogo::abstractSyntax::PenDown init kmLogo::abstractSyntax::PenDown.new&#xA;&#x9;var squarecall : kmLogo::abstractSyntax::ProcCall init kmLogo::abstractSyntax::ProcCall.new&#xA;&#x9;var cst10 : kmLogo::abstractSyntax::Constant init kmLogo::abstractSyntax::Constant.new&#xA;&#x9;cst10.myValue := 10&#xA;&#x9;var binexp : kmLogo::abstractSyntax::BinaryExp init kmLogo::abstractSyntax::BinaryExp.new&#xA;&#x9;binexp.operator := &quot;*&quot;&#xA;&#x9;binexp.lhs := cst10&#xA;&#x9;binexp.rhs := cst10&#xA;&#x9;squarecall.declaration := squaredecl&#xA;&#x9;squarecall.actualArgs.add(binexp)&#xA;&#x9;var fullprog : kmLogo::abstractSyntax::Block init kmLogo::abstractSyntax::Block.new&#xA;&#x9;fullprog.instructions.add(squaredecl)&#xA;&#x9;fullprog.instructions.add(pendown)&#xA;&#x9;fullprog.instructions.add(squarecall)&#xA;&#x9;result := fullprog&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="main" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var pp : kmLogo::actions::PrettyPrinter init kmLogo::actions::PrettyPrinter.new&#xA;&#x9;var interp : kmLogo::actions::Interpreter init kmLogo::actions::Interpreter.new&#xA;&#x9;var tortue : kmLogo::semanticDomain::Turtle init kmLogo::semanticDomain::Turtle.new&#xA;&#x9;var root : kmLogo::abstractSyntax::Instruction&#xA;&#x9;tortue.reset&#xA;&#x9;interp.initialize(tortue)&#xA;&#x9;root := self.square&#xA;&#x9;root.traverse(pp)&#xA;&#x9;stdio.writeln(&quot; --- &quot;)&#xA;&#x9;root.traverse(interp)&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>
