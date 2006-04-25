@@ -54,6 +54,12 @@ public class Class {
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject other) {
 		fr.irisa.triskell.kermeta.language.structure.Class req = (fr.irisa.triskell.kermeta.language.structure.Class)self.getData().get("kcoreObject");
 		fr.irisa.triskell.kermeta.language.structure.Class pro = (fr.irisa.triskell.kermeta.language.structure.Class)other.getData().get("kcoreObject");
+		// If the objects are equals in java memory, then we don't need to make complex equality tests.
+		// Especially, if the runtime object tested is an instance of the metaclass Class, as an instance, 
+		// TypeEqualityChecker is not able to test it, since it is based on the underlying model representation
+		// (RuntimeObject.getData().get("kcoreObject"), which refers to a model element).
+		// Though, an instance (M1 level :)) has no model element associatied to it.
+		if (self == other) return self.getFactory().getMemory().trueINSTANCE;
 		
 		if (pro == null) return self.getFactory().getMemory().falseINSTANCE;
 		
