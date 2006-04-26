@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
   <model href="simpleModel.uml2#_tPOCIaLHEdqkGMDvm75SlQ"/>
-  <diagrams position="0,0" size="100,100" name="simpleModel" viewport="0,0">
+  <diagrams position="0,0" size="100,100" name="simpleModel" viewport="0,80">
     <property key="org.topcased.modeler.di.typeName" value="Class Diagram"/>
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
@@ -15,7 +15,8 @@
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.uml2.classdiagram">
       <element href="simpleModel.uml2#_tPOCIqLHEdqkGMDvm75SlQ"/>
     </semanticModel>
-    <contained xsi:type="di:GraphNode" position="115,152" size="216,-1">
+    <contained xsi:type="di:GraphNode" position="115,152" size="289,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.3"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="simpleModel.uml2#_0-QU4NRgEdqBbJSGMey_DQ"/>
       </semanticModel>
@@ -30,14 +31,10 @@
         <semanticModel xsi:type="di:EMFSemanticModelBridge">
           <element href="simpleModel.uml2#_0-QU4NRgEdqBbJSGMey_DQ"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="simpleModel.uml2#_16zcsNRgEdqBbJSGMey_DQ"/>
-          </semanticModel>
-        </contained>
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="134,269" size="100,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.3"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="simpleModel.uml2#_1c6m0NRgEdqBbJSGMey_DQ"/>
       </semanticModel>
@@ -53,6 +50,33 @@
           <element href="simpleModel.uml2#_1c6m0NRgEdqBbJSGMey_DQ"/>
         </semanticModel>
       </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="438,208" size="100,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="simpleModel.uml2#_DiersdUDEdqlMe7go0Vwgg"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="35"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="simpleModel.uml2#_DiersdUDEdqlMe7go0Vwgg"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="36"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="simpleModel.uml2#_DiersdUDEdqlMe7go0Vwgg"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="simpleModel.uml2#_4y2cENUJEdqlMe7go0Vwgg"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

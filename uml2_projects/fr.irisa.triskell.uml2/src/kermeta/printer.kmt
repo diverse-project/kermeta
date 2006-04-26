@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.3 2006-04-26 07:48:30 vmahe Exp $
+/* $Id: printer.kmt,v 1.4 2006-04-26 11:36:19 vmahe Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : GPL
@@ -80,39 +80,39 @@ class BasicPrettyPrinter inherits
 	 * Generates full code lines.
 	 */
 	method visitOperation(node : Operation, context : Integer) : String is do
-		var line : String init ""
-		line.append(indent)
-		line.append(visitTagSet(node.tag, context))
-		if (node.superOperation != void) then line.append( "method ")
-		else line.append("operation ") 
+		out.write(indent)
+		out.write(visitTagSet(node.tag, context))
+		if (node.superOperation != void) then out.write( "method ")
+		else out.write("operation ") 
 		end
 		// node name
-		line.append( node.name)
+		out.write( node.name)
 		// type parameters of operation
 		if (node.typeParameter.size() > 0) then
-			line.append( "<")
-			line.append( self.visitTypeVariableSet(node.typeParameter, context))
-			line.append( ">")
+			out.write( "<")
+			self.visitTypeVariableSet(node.typeParameter, context)
+			out.write( ">")
 		end
 		// arguments
-		line.append( "(")
-		line.append( self.visitTypeParameters(node.ownedParameter, context))
-		line.append( ")")
+		out.write( "(")
+		out.write( self.visitTypeParameters(node.ownedParameter, context))
+		out.write( ")")
 		if(node.type != void) then
-			line.append( " : " + pp.ppTypeFromMultiplicityElement(node))
+//			out.write( " : " + pp.ppTypeFromMultiplicityElement(node))
+			var typ : Type
+			typ ?= node.type
+			out.write( " : " + visitType(typ, context))
 		end
 	 
 		if (node.superOperation != void) then
-			line.append( " from " + node.superOperation.owningClass.qualifiedName )
+			out.write( " from " + node.superOperation.owningClass.qualifiedName )
 		end
 		if (node.raisedException.size > 0) then
-			line.append( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
+			out.write( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
 		end
 		if (node.body != void) then
-			line.append( " is\n")
-			out.writeln(line)
+			out.write( " is\n")
 			pushIndent()
-//			out.write(self.accept(node.body, context))
 			out.write(self.accept(node.body, context))
 			popIndent()
 		
@@ -165,7 +165,6 @@ class BasicPrettyPrinter inherits
 		end
 		
 		// print the attribute def
-		out.write(indent)
 		out.write(node.name + " : " + pp.ppTypeFromMultiplicityElement(node))
 		
 		if (node.opposite != void) then
@@ -267,7 +266,13 @@ class BasicPrettyPrinter inherits
 			pt ?= node
 			result := self.accept(pt.instanceType, context)
 		else
-			result := node.toString 
+			if Class.isInstance(node) then
+				var cl : Class
+				cl ?= node
+				result := cl.typeDefinition.qualifiedName
+			else
+				result := node.toString
+			end
 		end
 	end
 	
@@ -361,7 +366,10 @@ class BasicPrettyPrinter inherits
 	end
 	
 	method visitParameter(node : Parameter, context : Integer) : String is do
-		result := "[param]"
+		// node name
+		out.write( node.name)
+    	out.write(" : " + pp.ppTypeFromMultiplicityElement(node))
+		result := ""
     end
     
     
@@ -655,10 +663,7 @@ class BasicPrettyPrinter inherits
 		loop
 			var inext : Parameter
 			inext ?= it.next
-	    	//stdio.write("-->" + inext.toString)
-			// TODO : a real visit..
-			out.write(inext.name)
-//			out.write(self.accept(cnext, context))
+			self.accept(inext, context)
 			if (it.hasNext) then
 				out.write(", ")
 			end
@@ -708,10 +713,6 @@ class BasicPrettyPrinter inherits
 		loop
 			var next : TypeVariable 
 			next ?= it.next
-			
-			//DEBUG
-			stdio.writeln("DEBUG : param next = "+next.toString)
-			
 			out.write(next.name)
 			if (it.hasNext) then
 				out.write(", ")

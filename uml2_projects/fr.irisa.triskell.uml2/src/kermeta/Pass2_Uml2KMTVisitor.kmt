@@ -82,20 +82,12 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitOperation(visitable : uml2::Operation) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG : visitOp = "+visitable.toString)
-    	
     	// completes the operation
     	var op : Operation
     	op ?= output.getValue(visitable)
     	
     	// the return type if exists
 		visitable.returnResult.each{e | 
-    	
-    	//DEBUG
-    	stdio.writeln("    - return = "+e.toString)
-    	
 		   	var cl : Class init Class.new
 	    	var cdef : ClassDefinition
 	    	cdef ?= output.getValue(e.type)
@@ -104,15 +96,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 		}
 			
     	// all other parameters
-		visitable.formalParameter.each{e | 
-    	
-    	//DEBUG
-    	stdio.writeln("    - param = "+e.toString)
-    	stdio.writeln("    - param.type = "+e.type.toString)
-    	
-		   	var tv : TypeVariable
-	    	tv ?= output.getValue(e.type)
-			op.typeParameter.add(tv)
+		visitable.formalParameter.each{e |
+			var par : Parameter
+			par ?= output.getValue(e)
+			op.ownedParameter.add(par)
 		}
     	
     	super(visitable)
@@ -122,18 +109,17 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	// associates the type of parameter to the ClassDefinition of this type
     	var p : Parameter
     	p ?= output.getValue(visitable)
-    	var cl : Class init Class.new
-    	var cdef : ClassDefinition
-    	cdef ?= output.getValue(visitable.type)
-    	cl.typeDefinition := cdef
-    	p.type := cl
-    	
-    	// we must add the new Class "cl" to the objects storage
-    	output.put(uml2::Parameter.new, cl)
-    	
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG : visitParam : p = "+p.toString)
+    	var type : Object
+    	type := output.getValue(visitable.type)
+		if ClassDefinition.isInstance(type) then
+	    	var cl : Class init Class.new
+	    	cl.typeDefinition ?= type
+	    	p.type := cl
+	    	// we must add the new Class "cl" to the objects storage
+	    	output.put(uml2::Parameter.new, cl)
+	    else
+			p.type ?= type
+    	end
     	
     	super(visitable)
     end

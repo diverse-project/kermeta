@@ -23,6 +23,7 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 		end
 		// node name
 		out.write(node.name)
+		
 		// type parameters of operation
 		if (node.typeParameter.size() > 0) then
 			out.write( "<")
@@ -95,15 +96,21 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 	/**
 	 * needed because in Kermeta language the main package syntax differs from subpackages
 	 */
-	operation visitRootPackage(node : kermeta::language::structure::Package, context : Integer) : String is do
+	operation visitRootPackage(node : kermeta::language::structure::Package,
+	  others : Set<kermeta::language::structure::Package>,
+	  context : Integer) : String is do
 		result := ""
 		out.write(visitTagSet(node.tag, context))
 		
 		out.write("package " + node.qualifiedName + ";\n\n")
 		
-		// TODO : manage nested packages and references to external diagrams
-		out.write("require kermeta\n\n")
-		out.write("using kermeta::standard\n\n")
+		out.write("require kermeta\n")
+		// manage references to external diagrams
+		others.each{ p |
+			out.write("require " + node.qualifiedName + "\n")
+		}
+		
+		out.write("\nusing kermeta::standard\n\n")
 		
 		var old_cname : String init current_pname
 		var current_pname : String init node.qualifiedName

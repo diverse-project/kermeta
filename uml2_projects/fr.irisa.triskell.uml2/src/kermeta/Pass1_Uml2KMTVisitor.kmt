@@ -74,8 +74,9 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 //    	prop.isComposite := visitable.isComposite	// derived value
 		prop.isComposite := false	// FIXME : manage this value in a correct way
 		
-    	// we need to manage the Type class of the property,
+    	// we need to manage the Type class of the attributes,
     	// in case of external package reference
+//    	if visitable.association.isVoid then visitable.type.accept(self) end
     	visitable.type.accept(self)
     	
     	output.put(visitable, prop)
@@ -105,9 +106,10 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 		par.name := visitable.name
 		output.put(visitable, par)
     	
-    	//DEBUG
-    	stdio.writeln("DEBUG : visitParam = "+visitable.toString)
-    	stdio.writeln("           par = "+par.toString)
+    	par.isOrdered := visitable.isOrdered
+    	par.isUnique := visitable.isUnique
+    	par.lower := lowerValue(visitable.lowerValue)
+    	par.upper := upperValue(visitable.upperValue)
     	
 		// need to visit its Type
 		visitable.type.accept(self)

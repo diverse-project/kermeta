@@ -29,7 +29,7 @@ in the present package.</body>
       <body>do
     // Operation code in Kermeta language !
     // Must start with &quot;do&quot; and finish with &quot;end&quot;
-    var g : GClass init GClass.new
+    var g : ExternClassDiagram::GClass init ExternClassDiagram::GClass.new
     result := g
 end</body>
     </ownedComment>

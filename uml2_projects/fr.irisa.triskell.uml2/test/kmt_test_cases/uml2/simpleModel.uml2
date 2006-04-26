@@ -11,26 +11,51 @@
       <eAnnotations xmi:id="_351VMNRgEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
         <details xmi:id="_351VMdRgEdqBbJSGMey_DQ" key="uuid" value="11459723494432"/>
       </eAnnotations>
-      <ownedOperation xmi:id="_16zcsNRgEdqBbJSGMey_DQ" name="Operation1" type="_1c6m0NRgEdqBbJSGMey_DQ">
-        <eAnnotations xmi:id="_3518QNRgEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
-          <details xmi:id="_3518QdRgEdqBbJSGMey_DQ" key="uuid" value="11459723494443"/>
-        </eAnnotations>
-        <returnResult xmi:id="_3GmhcNRgEdqBbJSGMey_DQ" type="_1c6m0NRgEdqBbJSGMey_DQ">
-          <eAnnotations xmi:id="_352jUNRgEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
-            <details xmi:id="_352jUdRgEdqBbJSGMey_DQ" key="uuid" value="11459723494454"/>
-          </eAnnotations>
-        </returnResult>
-        <ownedParameter xmi:id="_EmG54NRpEdqBbJSGMey_DQ" name="cl2" type="_1c6m0NRgEdqBbJSGMey_DQ">
-          <eAnnotations xmi:id="_GAJO8NRpEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
-            <details xmi:id="_GAJO8dRpEdqBbJSGMey_DQ" key="uuid" value="114597588003115"/>
-          </eAnnotations>
-        </ownedParameter>
-      </ownedOperation>
     </ownedMember>
     <ownedMember xmi:type="uml:Class" xmi:id="_1c6m0NRgEdqBbJSGMey_DQ" name="Class2">
       <eAnnotations xmi:id="_352jUtRgEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
         <details xmi:id="_352jU9RgEdqBbJSGMey_DQ" key="uuid" value="11459723494455"/>
       </eAnnotations>
+    </ownedMember>
+    <ownedMember xmi:type="uml:DataType" xmi:id="_DiersdUDEdqlMe7go0Vwgg" name="String">
+      <eAnnotations xmi:id="_GwZZMNUDEdqlMe7go0Vwgg" source="http://www.topcased.org/uuid">
+        <details xmi:id="_GwZZMdUDEdqlMe7go0Vwgg" key="uuid" value="114604202758722"/>
+      </eAnnotations>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Association" xmi:id="_4y2cENUJEdqlMe7go0Vwgg" name="Association1" memberEnd="_4y44UNUJEdqlMe7go0Vwgg _4y44UdUJEdqlMe7go0Vwgg">
+      <eAnnotations xmi:id="_5Ug-sNUJEdqlMe7go0Vwgg" source="http://www.topcased.org/uuid">
+        <details xmi:id="_5Ug-sdUJEdqlMe7go0Vwgg" key="uuid" value="114604494389915"/>
+      </eAnnotations>
+      <ownedEnd xmi:id="_4y44UNUJEdqlMe7go0Vwgg" name="source" type="_0-QU4NRgEdqBbJSGMey_DQ" association="_4y2cENUJEdqlMe7go0Vwgg" aggregation="composite">
+        <eAnnotations xmi:id="_5UhlwNUJEdqlMe7go0Vwgg" source="http://www.topcased.org/uuid">
+          <details xmi:id="_5UhlwdUJEdqlMe7go0Vwgg" key="uuid" value="114604494390016"/>
+        </eAnnotations>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NdUgANUKEdqlMe7go0Vwgg" value="1">
+          <eAnnotations xmi:id="_OmhjwNUKEdqlMe7go0Vwgg" source="http://www.topcased.org/uuid">
+            <details xmi:id="_OmhjwdUKEdqlMe7go0Vwgg" key="uuid" value="114604508671621"/>
+          </eAnnotations>
+        </upperValue>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NdT48NUKEdqlMe7go0Vwgg" value="1">
+          <eAnnotations xmi:id="_OmhjwtUKEdqlMe7go0Vwgg" source="http://www.topcased.org/uuid">
+            <details xmi:id="_Omhjw9UKEdqlMe7go0Vwgg" key="uuid" value="114604508671622"/>
+          </eAnnotations>
+        </lowerValue>
+      </ownedEnd>
+      <ownedEnd xmi:id="_4y44UdUJEdqlMe7go0Vwgg" name="target" type="_1c6m0NRgEdqBbJSGMey_DQ" association="_4y2cENUJEdqlMe7go0Vwgg">
+        <eAnnotations xmi:id="_5UhlwtUJEdqlMe7go0Vwgg" source="http://www.topcased.org/uuid">
+          <details xmi:id="_5Uhlw9UJEdqlMe7go0Vwgg" key="uuid" value="114604494390017"/>
+        </eAnnotations>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NdWVMNUKEdqlMe7go0Vwgg" value="-1">
+          <eAnnotations xmi:id="_OmhjxNUKEdqlMe7go0Vwgg" source="http://www.topcased.org/uuid">
+            <details xmi:id="_OmhjxdUKEdqlMe7go0Vwgg" key="uuid" value="114604508671626"/>
+          </eAnnotations>
+        </upperValue>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NdVuINUKEdqlMe7go0Vwgg">
+          <eAnnotations xmi:id="_OmhjxtUKEdqlMe7go0Vwgg" source="http://www.topcased.org/uuid">
+            <details xmi:id="_Omhjx9UKEdqlMe7go0Vwgg" key="uuid" value="114604508671627"/>
+          </eAnnotations>
+        </lowerValue>
+      </ownedEnd>
     </ownedMember>
   </ownedMember>
 </uml:Model>
