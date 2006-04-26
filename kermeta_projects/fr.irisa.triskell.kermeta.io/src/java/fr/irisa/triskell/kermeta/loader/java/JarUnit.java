@@ -1,4 +1,4 @@
-/* $Id: JarUnit.java,v 1.1 2006-04-26 16:49:12 dvojtise Exp $
+/* $Id: JarUnit.java,v 1.2 2006-04-26 21:48:39 dvojtise Exp $
 * Project : Kermeta.io
 * File : EcoreUnit.java
 * License : EPL
@@ -34,6 +34,8 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.emfatic.ECore2KMPass;
+import fr.irisa.triskell.kermeta.loader.emfatic.ECore2KMPass1;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 
 /**
@@ -41,9 +43,9 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
  */
 public class JarUnit extends KermetaUnit {
 
-	protected URLClassLoader cl=null;
-	protected URI platformURI;
-	protected URI localURI;    // localized version of the URI	
+	public URLClassLoader cl=null;
+	public URI platformURI;
+	public URI localURI;    // localized version of the URI	
 	
     /**
      * @param uri
@@ -60,8 +62,7 @@ public class JarUnit extends KermetaUnit {
 
     	platformURI = URI.createURI(this.uri);
     	localURI = CommonPlugin.asLocalURI(platformURI);    // localized version of the URI	
-    	URIConverter converter = new URIConverterImpl();		
-		try{
+    	try{
 	    	
 			URL url = new URL(localURI.toString());
 	    	
@@ -90,7 +91,7 @@ public class JarUnit extends KermetaUnit {
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadImportedUnits()
      */
     public void loadImportedUnits() {
-        // Nothing to do, a Jar cannot define imported units
+        // Nothing special to do, a Jar cannot define imported units
     	// eventually we may use the information in the jar manifest in order to know which other jar
     	// are needed by this one, but I think we cannot rely on this information to build the kermeta
     	// view on the jar.
@@ -100,83 +101,16 @@ public class JarUnit extends KermetaUnit {
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadTypeDefinitions()
      */
     public void loadTypeDefinitions() {
-    	
-    	/// read the jar entries/files	
-    	URIConverter converter = new URIConverterImpl();				
-    	try
-    	{
-	    	//converter.
-    		InputStream stream = converter.createInputStream(platformURI);
-    				
-	    	//JarInputStream jis = new JarInputStream(urls[0].openStream());
-	    	JarInputStream jis = new JarInputStream(stream);
-			JarEntry jentry = jis.getNextJarEntry();
-	    	while(jentry !=null){
-	    		if(jentry.isDirectory()){
-	    			//internalLog.debug("JAR : directory "+jentry.getName());
-	    		}
-	    		else {
-	    			String fileName = jentry.getName();
-	    			if(fileName.endsWith(".class")){
-	    				internalLog.debug("JAR : file "+jentry.getName());
-	    				String pqname = getPackageQualifiedName(jentry);
-	    				String cname = getClassName(jentry);
-	    				String qname = pqname + "::" + cname; 
-	    				if (this.typeDefinitionLookup(qname) != null) {
-	    					// This is an error : the type already exists
-	    					this.messages.addMessage(new KMTUnitLoadError("A type definition for '" + qname + "' already exists.",null));
-	    					break;
-	    				}
-	    				else {
-	    					Package theEnclosingPackage = getOrCreatePackage(pqname);
-		    				ClassDefinition c = this.struct_factory.createClassDefinition();
-		    				//this.storeTrace(c, node);
-		    				c.setName(getClassName(jentry));
-		    				theEnclosingPackage.getOwnedTypeDefinition().add(c);
-		    				this.typeDefs.put(qname, c);
-	    				}
-	
-	    				//Class c = cl.loadClass(fileName);
-	    				//c.getDeclaredMethods()
-	    			}
-	    		}
-	    		jentry = jis.getNextJarEntry();
-	    	}
-	    	stream.close();
-    	} catch (IOException e) {
-			internalLog.error("IOException reading jar file "+platformURI.toFileString() ,e);
-			this.messages.addMessage(new KMTUnitLoadError("IOException reading jar file "+platformURI.toFileString(),null));
-			
-		}
+    	Jar2KMPass pass = new Jar2KMPass2(this);
+		pass.process();
     }
 
     /* (non-Javadoc)
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadStructuralFeatures()
      */
     public void loadStructuralFeatures() {
-    	if (cl==null) return;	// load has failed : do nothing
-    	Enumeration<String> typeQualifiedNames = typeDefs.keys();
-    	while(typeQualifiedNames.hasMoreElements()){
-    		String typeQualifiedName = typeQualifiedNames.nextElement();
-    		String javaQualifiedName = typeQualifiedName.replaceAll("::",".");
-    		ClassDefinition currentClassDef = (ClassDefinition)typeDefs.get(typeQualifiedName);
-    		try {
-				Class c = cl.loadClass(javaQualifiedName);
-				Class theSuperClass = c.getSuperclass();
-				if (theSuperClass != null){
-					TypeDefinition parentTypeDef = typeDefs.get(getQualifiedName(theSuperClass));
-					if(parentTypeDef != null){
-						currentClassDef.getSuperType().add(parentTypeDef);
-					}
-				}
-				//c.getDeclaredMethods()
-			} catch (ClassNotFoundException e) {
-				internalLog.error("ClassNotFound in jar "+platformURI.toFileString() +" looking for "+javaQualifiedName ,e);
-				
-			}    		
-    	}
-    	
-
+    	Jar2KMPass pass = new Jar2KMPass3(this);
+		pass.process();
     }
 
     /* (non-Javadoc)
@@ -203,63 +137,8 @@ public class JarUnit extends KermetaUnit {
 
     }
 
-    /**
-     * @param jentry
-     * @return the class name for the given JavaEntry, return null if the entry is not a class
-     */
-    public String getClassName(JarEntry jentry){
-    	String fileName = jentry.getName();
-		if(fileName.endsWith(".class")){
-			fileName = fileName.substring(0, fileName.length()-6);
-			// the current name use an OS format
-			fileName = fileName.substring(fileName.lastIndexOf("/")+1);
-			return fileName;
-		}
-		else return null;
-    }
-    /**
-     * @param jentry
-     * @return the package qualified name for the given JavaEntry class, return null if the entry is not a class
-     */
-    public String getPackageQualifiedName(JarEntry jentry){
-    	String fileName = jentry.getName();
-		if(fileName.endsWith(".class")){
-			// strip extension
-			fileName = fileName.substring(0, fileName.length()-6);
-			// get the package name in operating system format
-			fileName = fileName.substring(0,fileName.lastIndexOf("/"));
-			// now in kermeta
-			fileName = fileName.replaceAll("/","::");
-			return fileName;
-		}
-		else return null;
-    }
+
     
-    
-    public String getQualifiedName(Class c){    	
-    	return c.getCanonicalName().replaceAll(".","::");
-    }
-    
-	protected fr.irisa.triskell.kermeta.language.structure.Package getOrCreatePackage(String qualified_name) {
-		fr.irisa.triskell.kermeta.language.structure.Package result = this.packageLookup(qualified_name);
-		if (result != null) return result;
-		if (qualified_name.indexOf("::")>=0) {
-			String name = qualified_name.substring(qualified_name.lastIndexOf("::") + 2);
-			String parent_name = qualified_name.substring(0, qualified_name.lastIndexOf("::"));
-			Package parent = getOrCreatePackage(parent_name);
-			result = this.struct_factory.createPackage();
-			//this.storeTrace(result, node);
-			result.setName(name);
-			parent.getNestedPackage().add(result);
-		}
-		else {
-			// this is a new root package
-			result = this.struct_factory.createPackage();
-			result.setName(qualified_name);
-			//TODO: result.setFUri(). What to put here ?
-		}
-		this.packages.put(this.getQualifiedName(result), result);
-		return result;
-	}
+	
     
 }
