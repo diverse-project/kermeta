@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass3.java,v 1.4 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: ECore2KMPass3.java,v 1.5 2006-04-26 21:46:26 dvojtise Exp $
  * Project : Kermeta 
  * File : ECore2KMPass3.java
  * License : EPL
@@ -65,11 +65,9 @@ public class ECore2KMPass3 extends ECore2KMPass {
 		return super.beginVisit(node);
 	}
 	public boolean beginVisit(Annotation node) {
-		// TODO Auto-generated method stub
 		return super.beginVisit(node);
 	}
 	public boolean beginVisit(Annotations node) {
-		// TODO Auto-generated method stub
 		return super.beginVisit(node);
 	}
 	public boolean beginVisit(Attribute node) {
@@ -121,7 +119,7 @@ public class ECore2KMPass3 extends ECore2KMPass {
 			for(int i=0; i<sts.length; i++) {
 				if (sts[i] instanceof QualifiedID) {
 					Type t = getFTypeByID((QualifiedID)sts[i]);
-					if (t == null) builder.messages.addError("Cannot resulve type " + qualifiedIDAsString((QualifiedID)sts[i]), null);
+					if (t == null) builder.messages.addError("Cannot resolve type " + qualifiedIDAsString((QualifiedID)sts[i]), null);
 					else builder.current_class.getSuperType().add(t);
 				}
 			}
