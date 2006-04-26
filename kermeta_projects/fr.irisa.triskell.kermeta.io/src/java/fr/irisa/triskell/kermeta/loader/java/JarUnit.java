@@ -1,4 +1,4 @@
-/* $Id: JarUnit.java,v 1.2 2006-04-26 21:48:39 dvojtise Exp $
+/* $Id: JarUnit.java,v 1.3 2006-04-26 21:49:32 dvojtise Exp $
 * Project : Kermeta.io
 * File : EcoreUnit.java
 * License : EPL
@@ -13,30 +13,15 @@
 
 package fr.irisa.triskell.kermeta.loader.java;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.List;
-import java.util.jar.JarEntry;
-import java.util.jar.JarInputStream;
 
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.emfatic.ECore2KMPass;
-import fr.irisa.triskell.kermeta.loader.emfatic.ECore2KMPass1;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 
 /**
  * KermetaUnit dedicated to handle java a Jar as a Unit
