@@ -1,4 +1,4 @@
-/* $Id: CreateKermetaProjectWizard.java,v 1.6 2005-08-26 16:01:17 zdrey Exp $
+/* $Id: CreateKermetaProjectWizard.java,v 1.7 2006-04-26 12:24:43 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: CreateKermetaProjectWizard.java
  * License: GPL
@@ -11,6 +11,7 @@ package fr.irisa.triskell.kermeta.runner.wizards;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResourceStatus;
@@ -33,6 +34,7 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
 import fr.irisa.triskell.kermeta.KermetaMessages;
+import fr.irisa.triskell.kermeta.builders.KermetaProjectBuilder;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 /**
@@ -76,10 +78,14 @@ public class CreateKermetaProjectWizard extends Wizard {
             newPath = null;
         IWorkspace workspace = ResourcesPlugin.getWorkspace();
         final IProjectDescription description = workspace.newProjectDescription(newProjectHandle.getName());
-        
         description.setLocation(newPath);
         description.setNatureIds(new String[] {"fr.irisa.triskell.kermeta.runner.kermetanature"});
-        
+        // Set the command for project auto build
+		ICommand[] newCommands = new ICommand[1];
+		ICommand command = description.newCommand();
+		command.setBuilderName(KermetaProjectBuilder.BUILDER_ID);
+		newCommands[0] = command;
+		description.setBuildSpec(newCommands);
         
         // define the operation to create a new project
         WorkspaceModifyOperation op = new WorkspaceModifyOperation() {
