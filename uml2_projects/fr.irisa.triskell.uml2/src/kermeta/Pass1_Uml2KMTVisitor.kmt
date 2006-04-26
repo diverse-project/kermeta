@@ -54,9 +54,6 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	output.put(visitable, cl)
     	cl.isAbstract := visitable.isAbstract
     	
-    	// DEBUG
-    	stdio.writeln("DEBUG - visitClass() : name = "+visitable.name+"  -> "+visitable.toString())
-    	
     	super(visitable)
     end
     
@@ -81,10 +78,6 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	// in case of external package reference
     	visitable.type.accept(self)
     	
-    	
-    	// DEBUG
-    	stdio.writeln("DEBUG - visitProperty() : Type name = "+visitable.type.name+"  -> "+visitable.type.toString())
-    	
     	output.put(visitable, prop)
     	super(visitable)
     end
@@ -95,22 +88,30 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	op.name := visitable.name
     	op.isAbstract := visitable.isAbstract
     	output.put(visitable, op)
+    	
+    	op.isOrdered := visitable.isOrdered
+    	op.isUnique := visitable.isUnique
+    	op.lower := lowerValue(visitable.lowerValue)
+    	op.upper := upperValue(visitable.upperValue)
+    	
     	super(visitable)
     end
     
     method visitParameter(visitable : uml2::Parameter) is do
     	// Uml2 has 4 types of operation parameters : "In", "In Out", 'Out" and "Return"
     	// but Kermeta distinguishes only passed parameters and return type for operations
-    	if visitable.direction == uml2::ParameterDirectionKind.return then
-    		// which type is the result the operation returns, represented by a Class in Kermeta
-    		var type : Class init build.createClass()
-    		output.put(visitable, type)
-    	else
-    		var par : Parameter init build.createParameter()
-    		par.type := build.createClass()
-    		par.name := visitable.name
-    		output.put(visitable, par)
-    	end
+		var par : Parameter
+		par := build.createParameter()
+		par.name := visitable.name
+		output.put(visitable, par)
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG : visitParam = "+visitable.toString)
+    	stdio.writeln("           par = "+par.toString)
+    	
+		// need to visit its Type
+		visitable.type.accept(self)
+    	
     	super(visitable)
     end
     
@@ -171,10 +172,6 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 	    	output.put(visitable, dt)
     	end
     	
-    	
-    	// DEBUG
-    	stdio.writeln("DEBUG - visitDataType() : name = "+visitable.name+"  -> "+visitable.toString())
-    	
     	super(visitable)
     end
     
@@ -182,6 +179,11 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	// the Uml2 generalization instance corresponds to a typing "Class" in Kermeta
     	var cl : Class init build.createClass()
     	output.put(visitable, cl)
+     	
+    	// we need to manage the general's relations,
+    	// in case of external package reference
+    	visitable.general.accept(self)
+    	
     	super(visitable)
     end
     

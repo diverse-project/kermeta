@@ -19,7 +19,7 @@ The obtained code fo the main classes should refer to this diagram code.</body>
       <eAnnotations xmi:id="_BFvJ0MYYEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
         <details xmi:id="_BFvJ0cYYEdqnU4rvBMdn4Q" key="uuid" value="11444017415483"/>
       </eAnnotations>
-      <ownedAttribute xmi:id="_zwPvYMYXEdqnU4rvBMdn4Q" name="target" type="_xqgK4MYXEdqnU4rvBMdn4Q" association="_zwNTIMYXEdqnU4rvBMdn4Q">
+      <ownedAttribute xmi:id="_zwPvYMYXEdqnU4rvBMdn4Q" name="target" association="_zwNTIMYXEdqnU4rvBMdn4Q">
         <eAnnotations xmi:id="_BFvJ0sYYEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
           <details xmi:id="_BFvJ08YYEdqnU4rvBMdn4Q" key="uuid" value="11444017415494"/>
         </eAnnotations>
@@ -44,11 +44,6 @@ The obtained code fo the main classes should refer to this diagram code.</body>
           <details xmi:id="_WVbv0cYaEdqnU4rvBMdn4Q" key="uuid" value="114440274311624"/>
         </eAnnotations>
       </ownedOperation>
-    </ownedMember>
-    <ownedMember xmi:type="uml:Class" xmi:id="_xqgK4MYXEdqnU4rvBMdn4Q" name="FClass">
-      <eAnnotations xmi:id="_BFvw5MYYEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
-        <details xmi:id="_BFvw5cYYEdqnU4rvBMdn4Q" key="uuid" value="11444017415507"/>
-      </eAnnotations>
     </ownedMember>
     <ownedMember xmi:type="uml:Association" xmi:id="_zwNTIMYXEdqnU4rvBMdn4Q" name="has" memberEnd="_zwPIUMYXEdqnU4rvBMdn4Q _zwPvYMYXEdqnU4rvBMdn4Q">
       <eAnnotations xmi:id="_BFwX8MYYEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
@@ -83,7 +78,7 @@ The obtained code fo the main classes should refer to this diagram code.</body>
         <eAnnotations xmi:id="_WVdlAMYaEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
           <details xmi:id="_WVdlAcYaEdqnU4rvBMdn4Q" key="uuid" value="114440274311844"/>
         </eAnnotations>
-        <ownedParameter xmi:id="_tq7SwMYeEdqnU4rvBMdn4Q" name="f" type="_xqgK4MYXEdqnU4rvBMdn4Q">
+        <ownedParameter xmi:id="_tq7SwMYeEdqnU4rvBMdn4Q" name="f">
           <eAnnotations xmi:id="_ugYUEMYeEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
             <details xmi:id="_ugYUEcYeEdqnU4rvBMdn4Q" key="uuid" value="114440462331351"/>
           </eAnnotations>

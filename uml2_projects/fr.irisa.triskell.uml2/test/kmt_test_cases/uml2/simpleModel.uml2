@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:uml="http://www.eclipse.org/uml2/1.0.0/UML" xmi:id="_tPOCIaLHEdqkGMDvm75SlQ" name="main">
+  <eAnnotations xmi:id="_350HENRgEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
+    <details xmi:id="_350HEdRgEdqBbJSGMey_DQ" key="uuid" value="11459723494410"/>
+  </eAnnotations>
+  <ownedMember xmi:type="uml:Package" xmi:id="_tPOCIqLHEdqkGMDvm75SlQ" name="simpleModel">
+    <eAnnotations xmi:id="_350uINRgEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
+      <details xmi:id="_350uIdRgEdqBbJSGMey_DQ" key="uuid" value="11459723494421"/>
+    </eAnnotations>
+    <ownedMember xmi:type="uml:Class" xmi:id="_0-QU4NRgEdqBbJSGMey_DQ" name="Class1">
+      <eAnnotations xmi:id="_351VMNRgEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
+        <details xmi:id="_351VMdRgEdqBbJSGMey_DQ" key="uuid" value="11459723494432"/>
+      </eAnnotations>
+      <ownedOperation xmi:id="_16zcsNRgEdqBbJSGMey_DQ" name="Operation1" type="_1c6m0NRgEdqBbJSGMey_DQ">
+        <eAnnotations xmi:id="_3518QNRgEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
+          <details xmi:id="_3518QdRgEdqBbJSGMey_DQ" key="uuid" value="11459723494443"/>
+        </eAnnotations>
+        <returnResult xmi:id="_3GmhcNRgEdqBbJSGMey_DQ" type="_1c6m0NRgEdqBbJSGMey_DQ">
+          <eAnnotations xmi:id="_352jUNRgEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
+            <details xmi:id="_352jUdRgEdqBbJSGMey_DQ" key="uuid" value="11459723494454"/>
+          </eAnnotations>
+        </returnResult>
+        <ownedParameter xmi:id="_EmG54NRpEdqBbJSGMey_DQ" name="cl2" type="_1c6m0NRgEdqBbJSGMey_DQ">
+          <eAnnotations xmi:id="_GAJO8NRpEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
+            <details xmi:id="_GAJO8dRpEdqBbJSGMey_DQ" key="uuid" value="114597588003115"/>
+          </eAnnotations>
+        </ownedParameter>
+      </ownedOperation>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Class" xmi:id="_1c6m0NRgEdqBbJSGMey_DQ" name="Class2">
+      <eAnnotations xmi:id="_352jUtRgEdqBbJSGMey_DQ" source="http://www.topcased.org/uuid">
+        <details xmi:id="_352jU9RgEdqBbJSGMey_DQ" key="uuid" value="11459723494455"/>
+      </eAnnotations>
+    </ownedMember>
+  </ownedMember>
+</uml:Model>

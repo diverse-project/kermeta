@@ -42,13 +42,18 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitClass(visitable : uml2::Class) is do
+    	// UML2 Class is a ClassDefinition in Kermeta
     	var cldef : ClassDefinition
     	cldef ?= output.getValue(visitable)
+    	
+    	// links all class' operations
     	visitable.ownedOperation.each{ o |
     		var op : Operation
     		op ?= output.getValue(o)
     		cldef.ownedOperation.add(op)
     	}
+    	
+    	// links all class' attributes
     	visitable.ownedAttribute.each{ a |
     		var prop : Property
     		prop ?= output.getValue(a)
@@ -57,7 +62,7 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     			cldef.ownedAttribute.add(prop)
     		end
     	}
-    	// TODO : 
+    	
     	super(visitable)
     end
     
@@ -72,22 +77,64 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	prop ?= output.getValue(visitable)
     	var cl : Class
     	cl ?= output.getValue(visitable.type)
-    	
-    	// DEBUG
-    	stdio.writeln("DEBUG - visitProperty() : name of Type = "+visitable.type.name+"  -> "+visitable.type.toString())
-    	var ob : Object init output.getValue(visitable.type)
-    	
     	prop.type := cl
     	super(visitable)
     end
     
     method visitOperation(visitable : uml2::Operation) is do
-    	// TODO
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG : visitOp = "+visitable.toString)
+    	
+    	// completes the operation
+    	var op : Operation
+    	op ?= output.getValue(visitable)
+    	
+    	// the return type if exists
+		visitable.returnResult.each{e | 
+    	
+    	//DEBUG
+    	stdio.writeln("    - return = "+e.toString)
+    	
+		   	var cl : Class init Class.new
+	    	var cdef : ClassDefinition
+	    	cdef ?= output.getValue(e.type)
+	    	cl.typeDefinition := cdef
+			op.type := cl
+		}
+			
+    	// all other parameters
+		visitable.formalParameter.each{e | 
+    	
+    	//DEBUG
+    	stdio.writeln("    - param = "+e.toString)
+    	stdio.writeln("    - param.type = "+e.type.toString)
+    	
+		   	var tv : TypeVariable
+	    	tv ?= output.getValue(e.type)
+			op.typeParameter.add(tv)
+		}
+    	
     	super(visitable)
     end
     
     method visitParameter(visitable : uml2::Parameter) is do
-    	// TODO
+    	// associates the type of parameter to the ClassDefinition of this type
+    	var p : Parameter
+    	p ?= output.getValue(visitable)
+    	var cl : Class init Class.new
+    	var cdef : ClassDefinition
+    	cdef ?= output.getValue(visitable.type)
+    	cl.typeDefinition := cdef
+    	p.type := cl
+    	
+    	// we must add the new Class "cl" to the objects storage
+    	output.put(uml2::Parameter.new, cl)
+    	
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG : visitParam : p = "+p.toString)
+    	
     	super(visitable)
     end
     
@@ -122,8 +169,20 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitGeneralization(visitable : uml2::Generalization) is do
-    	//
-    	super(visitable)
+    	// we must add the "general" type to the "source" object
+    	var general : ClassDefinition
+    	general ?= output.getValue(visitable.general)
+   		var spec : ClassDefinition
+   		spec ?= output.getValue(visitable.specific)
+   		var cl : Class
+   		cl ?= output.getValue(visitable)
+   		cl.typeDefinition := general
+   		if not spec.superType.exists{ k | k.oid == cl.oid }
+   		then
+	   		spec.superType.add(cl)
+   		end
+   		
+     	super(visitable)
     end
     
     method visitAssociation(visitable : uml2::Association) is do

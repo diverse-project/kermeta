@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.2 2006-04-24 14:08:47 vmahe Exp $
+/* $Id: printer.kmt,v 1.3 2006-04-26 07:48:30 vmahe Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : GPL
@@ -41,6 +41,8 @@ class BasicPrettyPrinter inherits
  	attribute indent : String
  	attribute typedef : Boolean
  	attribute current_pname : String
+ 	/** the output of produced code, which could be a file or stdio */
+ 	attribute out : kermeta::io::StdIO
  	
  	operation initialize() is do
  		pp := PrintHelper.new
@@ -48,14 +50,23 @@ class BasicPrettyPrinter inherits
  		indent := ""
  		typedef := false
  		current_pname := ""
+ 		// default output
+ 		out := stdio
+ 	end
+ 	
+ 	operation setOutput(output : kermeta::io::StdIO) is do
+ 		out := output
  	end
  	 
-    /** visit a class and transcript it in the Kermeta Text format */
+    /**
+     * visit a class and transcript it in the Kermeta Text format.
+     * Doesn't realize a code line in itself, just transmits a textual complete name.
+     */
     method visitClass(node : Class, context : Integer) : String is do
     	// TODO : do not print qualified name if class belongs to current package
     	result := node.typeDefinition.qualifiedName
 		if (node.typeParamBinding.size > 0) then
-			result.append("<" + self.visitTypeVariableBindingSet(node.typeParamBinding, context) + ">")
+			out.write("<" + self.visitTypeVariableBindingSet(node.typeParamBinding, context) + ">")
 		end
     end
     
@@ -66,67 +77,71 @@ class BasicPrettyPrinter inherits
     
     /**
 	 * Visit a property (attribute, reference, property)
+	 * Generates full code lines.
 	 */
 	method visitOperation(node : Operation, context : Integer) : String is do
-		result := ""
-		result.append(indent)
-		result.append(visitTagSet(node.tag, context))
-		if (node.superOperation != void) then result.append( "method ")
-		else result.append("operation ") 
+		var line : String init ""
+		line.append(indent)
+		line.append(visitTagSet(node.tag, context))
+		if (node.superOperation != void) then line.append( "method ")
+		else line.append("operation ") 
 		end
 		// node name
-		result.append( node.name)
+		line.append( node.name)
 		// type parameters of operation
 		if (node.typeParameter.size() > 0) then
-			result.append( "<")
-			result.append( self.visitTypeVariableSet(node.typeParameter, context))
-			result.append( ">")
+			line.append( "<")
+			line.append( self.visitTypeVariableSet(node.typeParameter, context))
+			line.append( ">")
 		end
 		// arguments
-		result.append( "(")
-		result.append( self.visitTypeParameters(node.ownedParameter, context))
-		result.append( ")")
+		line.append( "(")
+		line.append( self.visitTypeParameters(node.ownedParameter, context))
+		line.append( ")")
 		if(node.type != void) then
-			result.append( " : " + pp.ppTypeFromMultiplicityElement(node))
+			line.append( " : " + pp.ppTypeFromMultiplicityElement(node))
 		end
 	 
 		if (node.superOperation != void) then
-			result.append( " from " + node.superOperation.owningClass.qualifiedName )
+			line.append( " from " + node.superOperation.owningClass.qualifiedName )
 		end
 		if (node.raisedException.size > 0) then
-			result.append( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
+			line.append( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
 		end
 		if (node.body != void) then
-			result.append( " is\n")
+			line.append( " is\n")
+			out.writeln(line)
 			pushIndent()
-			result.append(self.accept(node.body, context))
+//			out.write(self.accept(node.body, context))
+			out.write(self.accept(node.body, context))
 			popIndent()
 		
 		else 
-			if (node.isAbstract) then result.append( " is abstract")
+			if (node.isAbstract) then out.write( " is abstract")
 
 			else 
-				result.append( " is do\n")
+				out.write( " is do\n")
 				pushIndent()
-				result.append( indent + "//TODO: implement operation " + node.name + "\n") 
+				out.write( indent + "//TODO: implement operation " + node.name + "\n") 
 				popIndent()
-				result.append( indent + "end")
+				out.write( indent + "end")
 			end
 		end
+		result := ""
 	end
 	
 	/** inserts the "kdoc" tags as comments in Kermeta code */
 	method visitTag(node : Tag, context : Integer) : String is do 
 	    result := ""
 	    if node.name == "kdoc" then
-	    	result.append(indent + "/**\n")
-	    	result.append(pp.processTagCRLF(node, indent + " * "))
-	    	result.append("\n" + indent + " */")
+	    	out.write(indent + "/**\n")
+	    	out.write(pp.processTagCRLF(node, indent + " * "))
+	    	out.write("\n" + indent + " */")
 	    else if node.name == "km_body" then
 	    	// must indent the code (from the tag value)
-	    	result.append(pp.processTagCRLF(node, indent))
+	    	out.write(pp.processTagCRLF(node, indent))
 	    else
-	    	result.append(indent + "@" + node.name + " \"" + node.~value + "\"")
+	    	out.write(indent + "@" + node.name + " \"" + node.~value + "\"")
 	    end end
 	end
 	
@@ -135,94 +150,94 @@ class BasicPrettyPrinter inherits
 	 */
 	method visitProperty(node : Property, context : Integer) : String is do
 		result := "" // weird behavior when we directly write : result := indent???
-		result.append(indent)
+		out.write(indent)
 		if (node.isDerived) then
-			result.append( "property " )
+			out.write( "property " )
 		else 
 			if (node.isComposite) then 
-				result.append("attribute ")
+				out.write("attribute ")
 			else 
-				result.append("reference ")
+				out.write("reference ")
 			end
 		end
 			
-		if (node.isReadOnly) then result.append("readonly ")
+		if (node.isReadOnly) then out.write("readonly ")
 		end
 		
 		// print the attribute def
-		result.append(indent)
-		result.append(node.name + " : " + pp.ppTypeFromMultiplicityElement(node))
+		out.write(indent)
+		out.write(node.name + " : " + pp.ppTypeFromMultiplicityElement(node))
 		
 		if (node.opposite != void) then
-			result.append("#" + node.opposite.name)
+			out.write("#" + node.opposite.name)
 		end
 		
 		if (node.isDerived) then
 			pushIndent()
-			result.append("\n" + indent + "getter is " )
+			out.write("\n" + indent + "getter is " )
 			if (node.getterBody != void) then
-				//result.append(node.getterbody.acceptKMExpressionVisitor(self, node.getterbody))
+				//out.write(node.getterbody.acceptKMExpressionVisitor(self, node.getterbody))
 			else
-				result.append("do\n")
+				out.write("do\n")
 				pushIndent()
-				result.append(indent + "//TODO: implement getter for derived property " + node.name + "\n") 
+				out.write(indent + "//TODO: implement getter for derived property " + node.name + "\n") 
 				popIndent()
-				result.append(indent + "end")
+				out.write(indent + "end")
 			end
 			
 			if (not node.isReadOnly) then
-				result.append("\n" + indent + "setter is ")
+				out.write("\n" + indent + "setter is ")
 				if (node.getterBody != void) then 
-					//result.append(node.getterbody.acceptKMExpressionVisitor(self, node.getterbody))
+					//out.write(node.getterbody.acceptKMExpressionVisitor(self, node.getterbody))
 				else 
-					result.append("do\n")
+					out.write("do\n")
 					pushIndent()
-					result.append(indent + "//TODO: implement setter for derived property " + node.name + "\n")
+					out.write(indent + "//TODO: implement setter for derived property " + node.name + "\n")
 					popIndent()
-					result.append(indent + "end")
+					out.write(indent + "end")
 				end
 			end
 			popIndent()
 		end
-		result.append("\n")
+		out.write("\n")
 
 	end
 	
 	method visitClassDefinition(node : ClassDefinition, context : Integer) : String from kermeta::language::structure::KMStructureVisitor is do
 	    var a : String
 		result := ""
-		result.append(visitTagSet(node.tag, context))
+		out.write(visitTagSet(node.tag, context))
 		
-		result.append(indent)
+		out.write(indent)
 	    if (node.isAbstract) then 
-			result.append("abstract ")
+			out.write("abstract ")
 		end
 	    
-//		result.append("class " + node.qualifiedName)
-		result.append("class " + node.name)
+//		out.write("class " + node.qualifiedName)
+		out.write("class " + node.name)
 		var s : Set<kermeta::reflection::TypeVariable>
 		var it : Iterator<kermeta::reflection::TypeVariable>
 		it := 	node.typeParameter.iterator
 		
 		
 		if (node.typeParameter.size > 0) then
-			result.append("<"+self.visitTypeVariableSet(node.typeParameter, context)+">")
+			out.write("<"+self.visitTypeVariableSet(node.typeParameter, context)+">")
 		end
-		
+    	
 		if (node.superType.size > 0) then
-			result.append(" inherits ")
-			result.append(self.visitClassSet(node.superType, context, ", "))
+			out.write(" inherits ")
+			out.write(self.visitClassSet(node.superType, context, ", "))
 		end
 		
 		// print the attributes
-		result.append("\n"+self.indent+"{\n")
+		out.write("\n"+self.indent+"{\n")
 		self.pushIndent()
-		result.append(self.visitFeatures(node.ownedAttribute, context))
+		out.write(self.visitFeatures(node.ownedAttribute, context))
 		
 		// print the operations
-		result.append(self.visitFeatures(node.ownedOperation, context))
+		out.write(self.visitFeatures(node.ownedOperation, context))
 		self.popIndent()
-		result.append("\n"+self.indent+"}\n")
+		out.write("\n"+self.indent+"}\n")
 	end
 	
 	method visitTypedElement(node : TypedElement, context : Integer) : String is do
@@ -281,22 +296,22 @@ class BasicPrettyPrinter inherits
 	
 	method visitPackage(node : Package, context : Integer) : String is do
 		result := ""
-		result.append(visitTagSet(node.tag, context))
-		result.append("package " + node.qualifiedName) // TODO : the ppIdentifier of the Java KM2KMTPrettyPrinter
-		result.append( indent + "{\n")
+		out.write(visitTagSet(node.tag, context))
+		out.write("package " + node.qualifiedName) // TODO : the ppIdentifier of the Java KM2KMTPrettyPrinter
+		out.write( indent + "{\n")
 		var old_cname : String init current_pname
 		var current_pname : String init node.qualifiedName
 		pushIndent()
 		typedef := true
 		if (node.ownedTypeDefinition.size > 0) then
-			result.append( self.visitExpressionSet(node.ownedTypeDefinition, context, "\n"))
+			out.write( self.visitExpressionSet(node.ownedTypeDefinition, context, "\n"))
 		end
 		if (node.nestedPackage.size > 0) then
-			result.append( self.visitExpressionSet(node.nestedPackage, context, "\n"))
+			out.write( self.visitExpressionSet(node.nestedPackage, context, "\n"))
 		end
 		popIndent()
 		current_pname := old_cname
-		result.append( indent + "\n}\n")
+		out.write( indent + "\n}\n")
 		
 	end
 	
@@ -325,12 +340,12 @@ class BasicPrettyPrinter inherits
 		result := ""
 		if (typedef == true) then
 			typedef := false
-			result.append("enumeration " + pp.ppIdentifier(node.name) + "\n")
-			result.append( indent + "{\n")
+			out.write("enumeration " + pp.ppIdentifier(node.name) + "\n")
+			out.write( indent + "{\n")
 			pushIndent()
-			result.append( self.accept(node.ownedLiteral, context)) 
+			out.write( self.accept(node.ownedLiteral, context)) 
 			popIndent() 
-			result.append( indent + "}")
+			out.write( indent + "}")
 			typedef := true
 		
 		else 
@@ -369,19 +384,19 @@ class BasicPrettyPrinter inherits
      
      method visitBlock(node : kermeta::language::behavior::Block, context : Integer) : String is do
      	result := ""
-     	result.append(indent)
-     	result.append("do\n")
+     	out.write(indent)
+     	out.write("do\n")
 		pushIndent()
-		result.append(self.visitExpressionSet(node.statement, context, "\n"+indent))
+		out.write(self.visitExpressionSet(node.statement, context, "\n"+indent))
 		popIndent()
 		from var it : Iterator<Rescue> init node.rescueBlock.iterator
 		until it.isOff
 		loop 
 			var resc : Rescue
 			resc := it.next
-			result.append(indent + self.accept(resc, context) + "\n") 
+			out.write(indent + self.accept(resc, context) + "\n") 
 		end
-		result.append("\n" + indent + "end\n")
+		out.write("\n" + indent + "end\n")
      end
     
 	method visitAssignment(node : Assignment, context : Integer) : String is do
@@ -399,20 +414,20 @@ class BasicPrettyPrinter inherits
 	method visitCallFeature(node : CallFeature, context : Integer) : String is do
 		result := "" 
 		if (node.target != void) then 
-			result.append( self.accept(node.target, context))
+			out.write( self.accept(node.target, context))
 		else
-			result.append( "self")
+			out.write( "self")
 		end
 		
-		result.append( "." + node.name)
+		out.write( "." + node.name)
 		// handle the special case where there is 1 parameter, and when This
 		// parameter is a lambdaPostFix
 		if (node.parameters.size==1 and LambdaExpression.isInstance(node.parameters.one )) then
-	   		result.append(self.visitExpressionSet(node.parameters, context, ", "))
+	   		out.write(self.visitExpressionSet(node.parameters, context, ", "))
 		// the classic case : a list of parameters
 		else 
 			if (node.parameters.size> 0) then
-				result.append( "(" + self.visitExpressionSet(node.parameters, context, ", ")+ ")")
+				out.write( "(" + self.visitExpressionSet(node.parameters, context, ", ")+ ")")
 			end 
 		end
 		rescue kermeta::exceptions::EmptyCollection 
@@ -422,34 +437,34 @@ class BasicPrettyPrinter inherits
 	
 	method visitCallSuperOperation(node : CallSuperOperation, context : Integer) : String is do
 		result := "super("
-		result.append( self.visitExpressionSet(node.parameters, context, ", "))
-		result.append( ")")
+		out.write( self.visitExpressionSet(node.parameters, context, ", "))
+		out.write( ")")
 	end
 	
 	method visitCallVariable(node : CallVariable, context : Integer) : String is do
 		result := node.name
 		if (node.parameters.size> 0) then
-			result.append("(" + visitExpressionSet(node.parameters, context, ", ") + ")")
+			out.write("(" + visitExpressionSet(node.parameters, context, ", ") + ")")
 		end
 	end
 
 	method visitConditional(node : Conditional, context : Integer) : String is do 
 		result := ""
-		result.append("if " + self.accept(node.condition, context) + " then\n")
+		out.write("if " + self.accept(node.condition, context) + " then\n")
 		pushIndent()
 		if (node.thenBody != void) then
-			result.append(self.accept(node.thenBody, context) + "\n")
+			out.write(self.accept(node.thenBody, context) + "\n")
 		end
 		popIndent()
 		// TODO : this condition is not perfect : elseBody is in fact never void, even if
 		// there is no ;..body in elseBody....
 		if (node.elseBody != void) then
-			result.append( indent + "else\n")
+			out.write( indent + "else\n")
 			pushIndent()
-			result.append(self.accept(node.elseBody, context) + "\n")
+			out.write(self.accept(node.elseBody, context) + "\n")
 			popIndent()
 		end
-		result.append(indent + "end")
+		out.write(indent + "end")
 	end
 	
 	method visitEmptyExpression(node : EmptyExpression, context : Integer) : String is do
@@ -477,13 +492,13 @@ class BasicPrettyPrinter inherits
 	
 	method visitLoop(node : Loop, context : Integer) : String is do
 		result := "from "
-		result.append( self.accept(node.initialization, context) + "\n")
-		result.append( indent + "until " + self.accept(node.stopCondition, context) + "\n")
-		result.append( indent +"loop\n") 
+		out.write( self.accept(node.initialization, context) + "\n")
+		out.write( indent + "until " + self.accept(node.stopCondition, context) + "\n")
+		out.write( indent +"loop\n") 
 		pushIndent()
-		result.append( self.accept(node.body, context))
+		out.write( self.accept(node.body, context))
 		popIndent()
-		result.append( indent +"end")
+		out.write( indent +"end")
 	end
 	
 	method visitSelfExpression(node : SelfExpression, context : Integer) : String is do 
@@ -494,7 +509,7 @@ class BasicPrettyPrinter inherits
 		result := "var" + node.identifier + " : " + self.accept(node.type, context)
 		
 		if (node.initialization != void) then
-			result.append(" init " + self.accept(node.initialization, context))
+			out.write(" init " + self.accept(node.initialization, context))
 		end
 	end 
 	
@@ -505,35 +520,35 @@ class BasicPrettyPrinter inherits
 	method visitRescue(node : Rescue, context : Integer) : String is do 
 		result := "rescue "
 		if (node.exceptionName != void) then
-			result.append( "(" + node.exceptionName + " : " + self.accept(node.exceptionType, context) + ")")
+			out.write( "(" + node.exceptionName + " : " + self.accept(node.exceptionType, context) + ")")
 		end
-		result.append("\n")
+		out.write("\n")
 		pushIndent()
-		result.append(self.visitExpressionSet(node.body, context, "\n"+indent))
+		out.write(self.visitExpressionSet(node.body, context, "\n"+indent))
 		popIndent()
 	end
 	
 	method visitJavaStaticCall(node : JavaStaticCall, context : Integer) : String is do 
 		result := "extern "
-		result.append(node.jclass + "." + node.jmethod + "(")
-		result.append(self.visitExpressionSet( node.parameters, context, ", "))
-		result.append(")")
+		out.write(node.jclass + "." + node.jmethod + "(")
+		out.write(self.visitExpressionSet( node.parameters, context, ", "))
+		out.write(")")
 	end
 	
 	method visitLambdaExpression(node : LambdaExpression, context : Integer) : String is do 
 		result := "{"
-		result.append(self.visitExpressionSet(node.parameters, context, ", "))
-		result.append(" | ")
+		out.write(self.visitExpressionSet(node.parameters, context, ", "))
+		out.write(" | ")
 		pushIndent()
-		result.append(self.accept(node.body, context))
+		out.write(self.accept(node.body, context))
 		popIndent()
-		result.append("}")
+		out.write("}")
 	end
 	
 	method visitLambdaParameter(node : LambdaParameter, context : Integer) : String is do
 		result := node.name 
 		if (node.type != void) then
-			result.append(" : " + self.accept(node.type, context))
+			out.write(" : " + self.accept(node.type, context))
 		end
     end
 
@@ -554,10 +569,10 @@ class BasicPrettyPrinter inherits
 			var cnext : Type
 			cnext ?= next
 			// TODO : a real visit..
-			result.append(cnext.toString)
-//			result.append(self.accept(cnext, context))
+			out.write(cnext.toString)
+//			out.write(self.accept(cnext, context))
 			if (it.hasNext) then
-				result.append(", ")
+				out.write(", ")
 			end
 		end
     end
@@ -576,13 +591,12 @@ class BasicPrettyPrinter inherits
 		until it.isOff
 		loop
 			var next : kermeta::reflection::Type init it.next
-			var cnext : Type
+			var cnext : Class
 			cnext ?= next
 			// TODO : a real visit..
-			result.append(cnext.toString)
-//			result.append(self.accept(cnext, context))
+			out.write(cnext.typeDefinition.qualifiedName)
 			if (it.hasNext) then
-				result.append(", ")
+				out.write(", ")
 			end
 		end
     end
@@ -600,9 +614,9 @@ class BasicPrettyPrinter inherits
 			var next : AbstractType init it.next
 			var cnext : ConcreteType
 			//cnext ?= next
-			result.append(self.accept(cnext, context))
+			out.write(self.accept(cnext, context))
 			if (it.hasNext) then
-				result.append(sep)
+				out.write(sep)
 			end
 		end
     end
@@ -615,14 +629,14 @@ class BasicPrettyPrinter inherits
     	(pset : Set<BExpression>, context : Integer, sep : String) : String is do
     	result := ""
     	// FIXME : quite dirty that...
-    	if (sep.equals("\n"+indent)) then result.append(indent) end
+    	if (sep.equals("\n"+indent)) then out.write(indent) end
 		from var it : Iterator<BExpression> init pset.iterator
 		until it.isOff
 		loop
 			var next : BExpression init it.next
-			result.append(self.accept(next, context))
+			out.write(self.accept(next, context))
 			if (it.hasNext) then
-				result.append(sep) 
+				out.write(sep) 
 			end
 		end
     end
@@ -643,10 +657,10 @@ class BasicPrettyPrinter inherits
 			inext ?= it.next
 	    	//stdio.write("-->" + inext.toString)
 			// TODO : a real visit..
-			result.append(inext.name)
-//			result.append(self.accept(cnext, context))
+			out.write(inext.name)
+//			out.write(self.accept(cnext, context))
 			if (it.hasNext) then
-				result.append(", ")
+				out.write(", ")
 			end
 		end
     end
@@ -665,9 +679,9 @@ class BasicPrettyPrinter inherits
 		loop
 			var cnext : TypeVariableBinding  
 			cnext ?= it.next
-			result.append(self.accept(cnext, context))
+			out.write(self.accept(cnext, context))
 			if (it.hasNext) then
-				result.append(", ")
+				out.write(", ")
 			end
 		end
     end
@@ -680,8 +694,8 @@ class BasicPrettyPrinter inherits
 		loop
 			var next : Tag
 			next ?= it.next
-			result.append(self.accept(next, context))
-			result.append("\n"+indent)
+			out.write(self.accept(next, context))
+			out.write("\n"+indent)
 		end
     end
     
@@ -694,9 +708,13 @@ class BasicPrettyPrinter inherits
 		loop
 			var next : TypeVariable 
 			next ?= it.next
-			result.append(next.name)
+			
+			//DEBUG
+			stdio.writeln("DEBUG : param next = "+next.toString)
+			
+			out.write(next.name)
 			if (it.hasNext) then
-				result.append(", ")
+				out.write(", ")
 			end
 		end
 	end
@@ -712,7 +730,7 @@ class BasicPrettyPrinter inherits
 		until it.isOff
 		loop
 			var next : T init it.next
-			result.append(next.acceptKMStructureVisitor(self, context ))
+			out.write(next.acceptKMStructureVisitor(self, context ))
 			
 		end
     end

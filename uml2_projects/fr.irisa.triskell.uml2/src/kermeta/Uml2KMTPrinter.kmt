@@ -17,35 +17,35 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 	 */
 	method visitOperation(node : kermeta::language::structure::Operation, context : Integer) : String is do
 		result := ""
-		result.append(visitTagSet(node.tag, context))
-		if (node.superOperation != void) then result.append(indent + "method ")
-		else result.append(indent + "operation ") 
+		out.write(visitTagSet(node.tag, context))
+		if (node.superOperation != void) then out.write(indent + "method ")
+		else out.write(indent + "operation ") 
 		end
 		// node name
-		result.append(node.name)
+		out.write(node.name)
 		// type parameters of operation
 		if (node.typeParameter.size() > 0) then
-			result.append( "<")
-			result.append( self.visitTypeVariableSet(node.typeParameter, context))
-			result.append( ">")
+			out.write( "<")
+			out.write( self.visitTypeVariableSet(node.typeParameter, context))
+			out.write( ">")
 		end
 		// arguments
-		result.append( "(")
-		result.append( self.visitTypeParameters(node.ownedParameter, context))
-		result.append( ")")
+		out.write( "(")
+		out.write( self.visitTypeParameters(node.ownedParameter, context))
+		out.write( ")")
 		if(node.type != void) then
-			result.append( " : " + pp.ppTypeFromMultiplicityElement(node))
+			out.write( " : " + pp.ppTypeFromMultiplicityElement(node))
 		end
 	 
 		if (node.superOperation != void) then
-			result.append( " from " + node.superOperation.owningClass.qualifiedName )
+			out.write( " from " + node.superOperation.owningClass.qualifiedName )
 		end
 		if (node.raisedException.size > 0) then
-			result.append( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
+			out.write( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
 		end
 //		if node.tag != void then
 		if node.tag.size > 0 then
-			result.append( " is\n")
+			out.write( " is\n")
 			var body : String
 			from var it : Iterator<kermeta::reflection::Tag> init node.tag.iterator
 			until it.isOff
@@ -55,21 +55,21 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 				// the body of each operation has been stored in a "km_body" tag
 	    		if next.name == "km_body" then
 	    			pushIndent()
-					result.append(self.visitTag(next, context))
+					out.write(self.visitTag(next, context))
 					popIndent()
 				end
 			end
 		else 
 			if (node.isAbstract) then
-				result.append( " is abstract")
+				out.write( " is abstract")
 			else 
-				result.append( " is\n")
+				out.write( " is\n")
 				pushIndent()
-				result.append( indent + "do\n")
+				out.write( indent + "do\n")
 					pushIndent()
-					result.append( indent + "//TODO: implement operation " + node.name + "\n") 
+					out.write( indent + "//TODO: implement operation " + node.name + "\n") 
 					popIndent()
-				result.append( indent + "end")
+				out.write( indent + "end")
 				popIndent()
 			end
 		end
@@ -86,8 +86,8 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 			// the body of each operation has been stored in a "km_body" tag
 			// which is processed inside the "visitOperation" method
     		if next.name != "km_body" then
-				result.append(self.accept(next, context))
-				result.append("\n")
+				out.write(self.accept(next, context))
+				out.write("\n")
 			end
 		end
     end
@@ -97,26 +97,26 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 	 */
 	operation visitRootPackage(node : kermeta::language::structure::Package, context : Integer) : String is do
 		result := ""
-		result.append(visitTagSet(node.tag, context))
+		out.write(visitTagSet(node.tag, context))
 		
-		result.append("package " + node.qualifiedName + ";\n\n")
+		out.write("package " + node.qualifiedName + ";\n\n")
 		
 		// TODO : manage nested packages and references to external diagrams
-		result.append("require kermeta\n\n")
-		result.append("using kermeta::standard\n\n")
+		out.write("require kermeta\n\n")
+		out.write("using kermeta::standard\n\n")
 		
 		var old_cname : String init current_pname
 		var current_pname : String init node.qualifiedName
 //		pushIndent()
 		typedef := true
 		if (node.ownedTypeDefinition.size > 0) then
-			result.append( self.visitExpressionSet(node.ownedTypeDefinition, context, "\n"))
+			out.write( self.visitExpressionSet(node.ownedTypeDefinition, context, "\n"))
 		end
 		if (node.nestedPackage.size > 0) then
-			result.append( self.visitExpressionSet(node.nestedPackage, context, "\n"))
+			out.write( self.visitExpressionSet(node.nestedPackage, context, "\n"))
 		end
 //		popIndent()
 		current_pname := old_cname
-		result.append("\n")
+		out.write("\n")
 	end
 }

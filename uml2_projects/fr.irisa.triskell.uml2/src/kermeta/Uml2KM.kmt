@@ -19,47 +19,60 @@ using uml2kmt_visitors
  */
 class Main
 {
-    reference inputModel : uml2::Package
+    reference mainModel : uml2::Package
+    reference allModels : Set<uml2::Package>
     reference rootPackage : uml2::Package
-    reference objectsModel : kermeta::utils::Hashtable<uml2::Element, Object>
+    reference objectsStore : kermeta::utils::Hashtable<uml2::Element, Object>
     
     operation initialize(input_uri : String, input_mm_uri : String) is do
-    	// load the given model
+    	// load the given UML2 resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var inputResource : kermeta::persistence::EMFResource
     	inputResource ?= inputRepository.createResource(input_uri, input_mm_uri)
     	inputResource.load()
-    	inputModel ?= inputResource.instances.one
     	
-    	//DEBUG
-    	var o : Object init inputResource.instances
+    	// we get the main package for the targeted code tree
+    	mainModel ?= inputResource.instances.one
     	
-    	// creates the objects storage
-	    objectsModel := kermeta::utils::Hashtable<uml2::Element, Object>.new
-	    rootPackage ?= inputModel.ownedMember.one
+    	// we must parse all the included models, for extra models references
+    	allModels := Set<uml2::Package>.new
+    	inputResource.allRootContents.each{ o |
+    		var p : uml2::Package
+    		p ?= o
+	    	if not p.isVoid then allModels.add(p) end
+    	}
+    	
+    	// creates the Kermeta objects' storage
+	    objectsStore := kermeta::utils::Hashtable<uml2::Element, Object>.new
+	    rootPackage ?= mainModel.ownedMember.one
     end
     
     operation main() : Void is do 
-    	stdio.writeln("\n\n>>>>-------------> initializing the model !\n")
+    	stdio.writeln("\n>>>>-------------> initializing the model !\n")
         // the UML2 model to be transformed
-        initialize("../../test/kmt_test_cases/uml2/ClassDiagram.uml2", "../ecore/UML2.ecore")
-//        initialize("../../test/kmt_test_cases/uml2/simpleClass.uml2", "../ecore/UML2.ecore")
+//        initialize("../../test/kmt_test_cases/uml2/ClassDiagram.uml2", "../ecore/UML2.ecore")
+        initialize("../../test/kmt_test_cases/uml2/simpleModel.uml2", "../ecore/UML2.ecore")
         
     	stdio.writeln("\n>>>>-------------> running Pass 1 !\n")
         // the first Pass creates the KM objects
         var pass1 : Pass1_Uml2KMTVisitor init Pass1_Uml2KMTVisitor.new
-        pass1.initialize(objectsModel)
-        pass1.visitPackage(rootPackage)
+        pass1.initialize(objectsStore)
+        // we pass all the model, for creating all references
+		allModels.each{ p |
+			pass1.visitPackage(p)
+		}
         
     	stdio.writeln("\n>>>>-------------> running Pass 2 !\n")
         // the second Pass links the KM objects
         var pass2 : Pass2_Uml2KMTVisitor init Pass2_Uml2KMTVisitor.new
-        pass2.initialize(objectsModel)
-        pass2.visitPackage(rootPackage)
+        pass2.initialize(objectsStore)
+		allModels.each{ p |
+			pass2.visitPackage(p)
+		}
         
         // DEBUG
 /*      var tree : kermeta::language::structure::Package
-		tree ?= objectsModel.getValue(rootPackage)
+		tree ?= objectsStore.getValue(rootPackage)
     	var resRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var resResource : kermeta::persistence::EMFResource
     	resResource ?= resRepository.createResource("../../test/kmt_test_cases/uml2/ClassDiagramOutput.km", "../ecore/kermeta.ecore")
@@ -70,8 +83,9 @@ class Main
     	stdio.writeln("\n>>>>-------------> running Km2Kmt pretty printer !\n")
         var upp : uml2::Uml2KMTPrinter init uml2::Uml2KMTPrinter.new
         upp.initialize()
-        // the second pass knows the package which represents the root of the kermeta code
-	    stdio.writeln(upp.visitRootPackage(pass2.codeRoot(), 0))
+		var tree : kermeta::language::structure::Package
+		tree ?= objectsStore.getValue(rootPackage)
+	    stdio.writeln(upp.visitRootPackage(tree, 0))
 	    
 	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
      end
