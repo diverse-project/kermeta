@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.14 2006-02-22 09:33:45 zdrey Exp $
+/* $Id: KermetaUnitFactory.java,v 1.15 2006-04-26 16:48:05 dvojtise Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -21,14 +21,16 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import fr.irisa.triskell.kermeta.error.KermetaLoaderError;
 import fr.irisa.triskell.kermeta.loader.ecore.KMLoaderModuleECore;
 import fr.irisa.triskell.kermeta.loader.emfatic.KMLoaderModuleEmfatic;
+import fr.irisa.triskell.kermeta.loader.java.KMLoaderModuleJar;
 import fr.irisa.triskell.kermeta.loader.km.KMLoaderModuleKM;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMLoaderModuleMCT;
 
 
 /**
- * 
- * 
+ * This class is used to provide the LoaderModule that are able to crea KermetaUnit 
+ * from various formats.
+ * Supported formats are : kmt, km, emf, ecore, jar
  */
 public class KermetaUnitFactory {
     
@@ -37,10 +39,11 @@ public class KermetaUnitFactory {
 	public static KermetaUnitFactory getDefaultLoader() {
 		if (defaultLoader == null) {
 			defaultLoader = new KermetaUnitFactory();
-			defaultLoader.loadModules.put("emf", new KMLoaderModuleEmfatic());
-			defaultLoader.loadModules.put("km", new KMLoaderModuleKM());
-			defaultLoader.loadModules.put("kmt", new KMLoaderModuleMCT());
+			defaultLoader.loadModules.put("emf",   new KMLoaderModuleEmfatic());
+			defaultLoader.loadModules.put("km",    new KMLoaderModuleKM());
+			defaultLoader.loadModules.put("kmt",   new KMLoaderModuleMCT());
 			defaultLoader.loadModules.put("ecore", new KMLoaderModuleECore());
+			defaultLoader.loadModules.put("jar",   new KMLoaderModuleJar());
 		}
 		return defaultLoader;
 	}
@@ -50,13 +53,13 @@ public class KermetaUnitFactory {
      * The MetaCore load modules indexed by the file 
      * extention they are able to load
      */
-    protected Hashtable loadModules;
+    protected Hashtable<String,KermetaLoaderModule> loadModules;
     
     /**
      * Loaded units are kept in order to avoid loading twice the
      * same program
      */
-    protected Hashtable loadedUnits;
+    protected Hashtable<String,KermetaUnit> loadedUnits;
     
     /**
      * MetaCore Path entries 
@@ -72,8 +75,8 @@ public class KermetaUnitFactory {
      */
     public KermetaUnitFactory() {
         super();
-        loadModules = new Hashtable();
-        loadedUnits = new Hashtable();
+        loadModules = new Hashtable<String,KermetaLoaderModule>();
+        loadedUnits = new Hashtable<String,KermetaUnit>();
         kmPath = new Hashtable();
     }
     
@@ -102,16 +105,13 @@ public class KermetaUnitFactory {
     	
     	// resolve the URI if it is in the KMPath
     	if (kmPath.containsKey(uri)) uri = (String)kmPath.get(uri);
-    	
-    	boolean std = false;
-    	
+    	    	
     	// check if it is the stdlib
     	if (uri.equals("kermeta")) {
     	    if (KermetaUnit.STD_LIB_URI == null) {
     	        KermetaUnit.internalLog.error("  **** CRITICAL : Cannot find kermeta standard library");
     	        KermetaUnit.internalLog.error("  **** CRITICAL : Please update KermetaUnit.STD_LIB_URI variable");
     	    }
-    	    std = true;
     	    uri = KermetaUnit.STD_LIB_URI;
     	    //if (standard_lib != null) return standard_lib;
     	}
