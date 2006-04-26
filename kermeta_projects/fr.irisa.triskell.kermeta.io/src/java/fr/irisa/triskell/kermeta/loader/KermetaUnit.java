@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.55 2006-04-24 09:11:52 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.56 2006-04-26 16:42:19 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -263,14 +263,14 @@ public abstract class KermetaUnit {
 	/**
 	 * The Package objects by qualified names
 	 */
-	public Hashtable packages = new Hashtable();
+	public Hashtable<String,Package> packages = new Hashtable<String,Package>();
 	
 	/**
 	 * Pre loaded operation bodies as strings
 	 * key = operation qualified name
 	 * value = body of the op as a string 
 	 */
-	public Hashtable operation_bodies = new Hashtable();
+	public Hashtable<String, String> operation_bodies = new Hashtable<String, String>();
 	
 	/**
 	 * This tables store the mapping between Metacore model elements
@@ -452,14 +452,14 @@ public abstract class KermetaUnit {
 	 * (This table is filled by a first pass).
 	 * Qualified_name -> TypeDefinition
 	 */
-	public Hashtable typeDefs = new Hashtable();
+	public Hashtable<String,TypeDefinition> typeDefs = new Hashtable<String,TypeDefinition>();
 	
 	/**
 	 * A list of strings representing names of packages that are
 	 * used in the unit.
 	 * It allows writing short names instead of fully qualified names
 	 */
-	public ArrayList usings = new ArrayList();
+	public ArrayList<String> usings = new ArrayList<String>();
 	
 	
 /*	public String getMessagesAsString() {
@@ -642,6 +642,7 @@ public abstract class KermetaUnit {
 		URIConverter c = new URIConverterImpl();
 		if (uri.fileExtension() != null && uri.isRelative() && this.uri != null) {
 			str_uri = uri.resolve(c.normalize(URI.createURI(this.uri))).toString();
+			
 			
 		}
 
