@@ -1,4 +1,4 @@
-/* $Id: JarUnit.java,v 1.3 2006-04-26 21:49:32 dvojtise Exp $
+/* $Id: JarUnit.java,v 1.4 2006-04-27 20:58:32 dvojtise Exp $
 * Project : Kermeta.io
 * File : EcoreUnit.java
 * License : EPL
@@ -25,6 +25,9 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
  * KermetaUnit dedicated to handle java a Jar as a Unit
+ * most of this work was done using the information from these sites :
+ * http://java.sun.com/docs/books/tutorial/deployment/jar/jarclassloader.html
+ * http://java.sun.com/docs/books/tutorial/reflect/index.html
  */
 public class JarUnit extends KermetaUnit {
 
@@ -123,7 +126,7 @@ public class JarUnit extends KermetaUnit {
     }
 
 
-    
+	
 	
     
 }
