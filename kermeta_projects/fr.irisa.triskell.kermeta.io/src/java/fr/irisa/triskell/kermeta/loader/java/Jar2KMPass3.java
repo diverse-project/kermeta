@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.1 2006-04-26 21:48:39 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.2 2006-04-27 06:31:18 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -15,6 +15,7 @@ import java.util.Enumeration;
 
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 
@@ -122,8 +123,51 @@ public class Jar2KMPass3 extends Jar2KMPass {
 			// owningClass :
 			classDef.getOwnedOperation().add(builder.current_operation);
 			// ownedParameter added while visiting  containement
-			// TODO
-			//methods[i].getGenericParameterTypes()
+			java.lang.reflect.Type[] paramTypes = methods[i].getGenericParameterTypes();
+			for (int j = 0 ; j < paramTypes.length; j++){
+				// TODO
+				//	Create the parameter :
+				Parameter res = builder.struct_factory.createParameter();
+//				 return type : try to see if it is a collection
+				if(paramTypes[j] instanceof Class){
+					Class paramClassType = (Class)paramTypes[j];
+					if(paramClassType.isArray()){
+					//builder.storeTrace(res, node);
+						// Name
+						res.setName(paramClassType.getName());
+						// isOrdered :
+						res.setIsOrdered(true);
+						// isUnique :
+						res.setIsUnique(false);
+						// upper :
+						res.setUpper(-1);
+						// lower :
+						res.setLower(0);
+						// type :
+						String typeName = getQualifiedName(paramClassType);
+						typeName = typeName.substring(0, typeName.length()-2); //
+						res.setType(getTypeByID(typeName));
+					}
+					else{
+						res.setName(paramClassType.getName());
+						// isOrdered :
+						res.setIsOrdered(false);
+						// isUnique :
+						res.setIsUnique(false);
+						// upper :
+						res.setUpper(1);
+						// lower :
+						res.setLower(0);
+						// type :
+						res.setType(getTypeByID(getQualifiedName(paramClassType)));
+					}
+				}
+				else{
+					// TODO must deal with GenericArrayType, ParameterizedType, TypeVariable<D>, WildcardType
+				}
+				// Operation:
+				builder.current_operation.getOwnedParameter().add(res);
+			}
 		}
 	}
 }
