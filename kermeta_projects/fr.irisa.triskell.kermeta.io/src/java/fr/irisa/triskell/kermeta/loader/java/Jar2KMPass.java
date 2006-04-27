@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.1 2006-04-26 21:48:39 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.2 2006-04-27 20:56:50 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -10,6 +10,7 @@
  */
 package fr.irisa.triskell.kermeta.loader.java;
 
+import java.util.Hashtable;
 import java.util.jar.JarEntry;
 
 import org.apache.log4j.Logger;
@@ -82,7 +83,11 @@ public abstract class Jar2KMPass {
 		if (name.equals("void")) {
 			return builder.struct_factory.createVoidType();
 		}
-			
+		if (primitive_types_mapping.containsKey(name)) {
+        	name = (String)primitive_types_mapping.get(name);
+        }
+        //TypeDefinition type = builder.typeDefinitionLookup(name);
+        
 	    TypeDefinition typeDef = builder.getTypeDefinitionByName(name);
 	    if (typeDef == null) {
 	        builder.messages.addError("Cannot resolve type '"+name+"'" ,null);
@@ -96,5 +101,17 @@ public abstract class Jar2KMPass {
 	        result.setTypeDefinition(cd);
 	        return result;
 	    }
+	}
+    
+    public static Hashtable<String,String> primitive_types_mapping;
+	
+	static {
+		primitive_types_mapping = new Hashtable<String,String>();
+		primitive_types_mapping.put("int", 					"kermeta::standard::Integer");
+		primitive_types_mapping.put("java::lang::Integer", 	"kermeta::standard::Integer");
+		primitive_types_mapping.put("boolean", 				"kermeta::standard::Boolean");
+		primitive_types_mapping.put("java::lang::Boolean", 	"kermeta::standard::Boolean");
+		primitive_types_mapping.put("java::lang::String", 	"kermeta::standard::String");
+		primitive_types_mapping.put("Object", 				"kermeta::standard::Object");
 	}
 }
