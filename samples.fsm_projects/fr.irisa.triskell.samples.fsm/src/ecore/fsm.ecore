@@ -8,34 +8,24 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="currentState" eType="//State"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State">
-    <eOperations name="step">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eParameters name="c">
-        <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </eParameters>
+    <eOperations name="step" eType="//String">
+      <eParameters name="c" eType="//String"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningFSM" lowerBound="1" eType="//FSM" eOpposite="//FSM/ownedState"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTransition" upperBound="-1" eType="//Transition" containment="true" eOpposite="//Transition/source"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTransition" eType="//Transition" eOpposite="//Transition/target"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
-    <eOperations name="fire">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eOperations>
+    <eOperations name="fire" eType="//String"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1" eType="//State" eOpposite="//State/outgoingTransition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1" eType="//State" eOpposite="//State/incomingTransition"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output">
-      <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="input" eType="//String"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="output" eType="//String"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FSMException"/>
   <eClassifiers xsi:type="ecore:EClass" name="NonDeterminism" eSuperTypes="//FSMException"/>
   <eClassifiers xsi:type="ecore:EClass" name="NoTransition" eSuperTypes="//FSMException"/>
   <eClassifiers xsi:type="ecore:EClass" name="NoInitialStateException" eSuperTypes="//FSMException"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
 </ecore:EPackage>
