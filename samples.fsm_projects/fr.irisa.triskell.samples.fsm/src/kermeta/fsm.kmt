@@ -1,4 +1,4 @@
-/* $Id: fsm.kmt,v 1.3 2005-10-04 13:15:09 waqas Exp $
+/* $Id: fsm.kmt,v 1.4 2006-04-27 09:22:55 dvojtise Exp $
  * Project    : fr.irisa.triskell.samples.fsm
  * File       : fsm.kmt
  * License    : EPL
@@ -34,20 +34,19 @@ class Main
 		var theFSM : FSM init createFSM()
 		printFSM(theFSM)
 		theFSM.run()
-		printFSM(theFSM)
 	end
 	
 	operation mainload() is do
 		var theFSM : FSM init loadfsm()
 		printFSM(theFSM)
 		theFSM.run()
-		printFSM(theFSM)
 			
 	end
 	
 	operation loadfsm() : FSM is do
 		var res : EMFRepository init EMFRepository.new
-        var resource : EMFResource init res.createResource("../ecore/fsm1.xmi", "../ecore/fsm.ecore")
+        var resource : EMFResource 
+        resource ?= res.createResource("../ecore/fsm1.xmi", "../ecore/fsm.ecore")
         stdio.writeln("before loading")
         resource.load()
        	stdio.writeln("after loading")

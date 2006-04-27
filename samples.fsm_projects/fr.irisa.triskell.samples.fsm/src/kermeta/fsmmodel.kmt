@@ -31,8 +31,8 @@ class FSM
 		from var str : String init "init"
 		until str == "quit"
 		loop
-			stdio.writeln("etat courrant : " + currentState.name)
-			str := stdio.read("entrez une chaine : ")
+			stdio.writeln("Current state : " + currentState.name)
+			str := stdio.read("give me a transition : ")
 			if str == "quit" then
 				stdio.writeln("")
 				stdio.writeln("quitting ...")
@@ -43,7 +43,7 @@ class FSM
 				else	
 					stdio.writeln(str)			
 					stdio.writeln("stepping...")
-					stdio.writeln("chaine produite : " + currentState.step(str))
+					stdio.writeln("string produced : " + currentState.step(str))
 				end
 			end
 		end
