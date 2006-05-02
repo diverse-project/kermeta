@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: printer.kmt,v 1.4 2006-04-26 11:36:19 vmahe Exp $
+/* $Id: printer.kmt,v 1.5 2006-05-02 15:34:42 vmahe Exp $
  * Project : Kermeta samples
  * File : printer.kmt
  * License : GPL
@@ -110,12 +110,12 @@ class BasicPrettyPrinter inherits
 		if (node.raisedException.size > 0) then
 			out.write( " raises " + self.visitTypeSet(node.raisedException, context, ", "))
 		end
+		
 		if (node.body != void) then
 			out.write( " is\n")
 			pushIndent()
 			out.write(self.accept(node.body, context))
 			popIndent()
-		
 		else 
 			if (node.isAbstract) then out.write( " is abstract")
 
@@ -271,7 +271,13 @@ class BasicPrettyPrinter inherits
 				cl ?= node
 				result := cl.typeDefinition.qualifiedName
 			else
-				result := node.toString
+				if DataType.isInstance(node) then
+					var dt : DataType
+					dt ?= node
+					result := self.accept(dt, context)
+				else
+					result := "ERROR : unknown type "+ node.toString +" !"
+				end
 			end
 		end
 	end
@@ -849,7 +855,7 @@ class PrintHelper
 			result.append("void")
 		end
 		
-		if (elem.lower != 0 or elem.upper  != 1) then
+		if (elem.lower > 1 or elem.upper  != 1) then
 			result.append( "[" + elem.lower.toString + "..")
 			if (elem.upper<0) then result.append("*") else result.append(elem.upper.toString) end
 			result.append( "]")

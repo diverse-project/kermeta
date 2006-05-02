@@ -12,8 +12,8 @@ using km_builder
 
 class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 {
-    attribute output : kermeta::utils::Hashtable<uml2::Element, Object>
-    attribute rootPackage : Package
+    reference output : kermeta::utils::Hashtable<uml2::Element, Object>
+    reference rootPackage : Package
     
     operation initialize(outputKm : kermeta::utils::Hashtable<uml2::Element, Object>) is do
     	output := outputKm
@@ -51,16 +51,16 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     		var op : Operation
     		op ?= output.getValue(o)
     		cldef.ownedOperation.add(op)
+    		
+	   		// manage the inherited properties and operations (if redefined in specific class)
+	   		op.superOperation := superOperation(op.name, visitable.generalization)
     	}
     	
     	// links all class' attributes
-    	visitable.ownedAttribute.each{ a |
+    	visitable.ownedAttribute.each{ att |
     		var prop : Property
-    		prop ?= output.getValue(a)
-    		// associations' ends must not be referenced
-    		if a.association == void then
-    			cldef.ownedAttribute.add(prop)
-    		end
+    		prop ?= output.getValue(att)
+			cldef.ownedAttribute.add(prop)
     	}
     	
     	super(visitable)
@@ -71,13 +71,25 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 		
     	// we need to manage the Type class of the property,
     	// in case of external package reference
-    	visitable.type.accept(self)
+//    	visitable.type.accept(self)
     	
     	var prop : Property
     	prop ?= output.getValue(visitable)
-    	var cl : Class
-    	cl ?= output.getValue(visitable.type)
-    	prop.type := cl
+    	
+    	var type : Object
+    	type := output.getValue(visitable.type)
+		if ClassDefinition.isInstance(type) then
+		   	var cl : Class init Class.new
+	    	var cdef : ClassDefinition
+	    	cdef ?= type
+	    	cl.typeDefinition := cdef
+			prop.type := cl
+		else
+			var t : Type
+			t ?= type
+			prop.type := t
+		end
+    	
     	super(visitable)
     end
     
@@ -88,11 +100,19 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	
     	// the return type if exists
 		visitable.returnResult.each{e | 
-		   	var cl : Class init Class.new
-	    	var cdef : ClassDefinition
-	    	cdef ?= output.getValue(e.type)
-	    	cl.typeDefinition := cdef
-			op.type := cl
+	    	var type : Object
+	    	type := output.getValue(visitable.type)
+			if ClassDefinition.isInstance(type) then
+			   	var cl : Class init Class.new
+		    	var cdef : ClassDefinition
+		    	cdef ?= output.getValue(e.type)
+		    	cl.typeDefinition := cdef
+				op.type := cl
+			else
+				var t : Type
+				t ?= type
+				op.type := t
+			end
 		}
 			
     	// all other parameters
@@ -101,6 +121,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 			par ?= output.getValue(e)
 			op.ownedParameter.add(par)
 		}
+		
+		// TODO : manage inheritance from inherited class(es) => GENERALIZATION level
+		
+		// TODO : manage polymorphism (operations with same name) => CLASS level
     	
     	super(visitable)
     end
@@ -156,13 +180,13 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     
     method visitGeneralization(visitable : uml2::Generalization) is do
     	// we must add the "general" type to the "source" object
-    	var general : ClassDefinition
-    	general ?= output.getValue(visitable.general)
+    	var gen : ClassDefinition
+    	gen ?= output.getValue(visitable.general)
    		var spec : ClassDefinition
    		spec ?= output.getValue(visitable.specific)
    		var cl : Class
    		cl ?= output.getValue(visitable)
-   		cl.typeDefinition := general
+   		cl.typeDefinition := gen
    		if not spec.superType.exists{ k | k.oid == cl.oid }
    		then
 	   		spec.superType.add(cl)
@@ -172,7 +196,102 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitAssociation(visitable : uml2::Association) is do
-    	// TODO
+    	// the structure of representations differs
+    	// from UML2 to Kermeta depending on the association cases
+    	//
+    	// We only have two main cases in Kermeta
+    	//  - 1 diamond-ed end => containance relation thru "attribute" keyword
+    	//    This case is managed in Pass1.visitProperty().
+    	//  - others cases (including white diamonds) => "reference" keyword
+    	//    Nothing to do (will be ordinary properties)
+    	// 
+    	// Navigation thru the association demand a "Navigable" tag in UML2
+    	// and named association's ends in Kermeta, so we need them both
+    	// Rem : the 2 ends must be navigable to be concerned by Kermeta "Opposite"
+    	// (note than Pass1 has disqualified associations with more than 2 members)
+    	if visitable.ownedEnd.size == 0  then
+    		var it : Iterator<uml2::Property> init visitable.memberEnd.iterator
+    		// get the first end
+			var end1 : uml2::Property init it.next
+			var p1 : Property
+			p1 ?= output.getValue(end1)
+    		// get the second end
+			var end2 : uml2::Property init it.next
+			var p2 : Property
+			p2 ?= output.getValue(end2)
+    		// link the opposites
+    		p1.opposite := p2
+    		p2.opposite := p1
+    	end
+    	
+    	// UML2 and Kermeta store in inverted places the "composite" property
+		var it : Iterator<uml2::Property> init visitable.memberEnd.iterator
+		// get the first end
+		var end1 : uml2::Property init it.next
+		var p1 : Property
+		p1 ?= output.getValue(end1)
+		// get the second end
+		var end2 : uml2::Property init it.next
+		var p2 : Property
+		p2 ?= output.getValue(end2)
+		
+		// link the opposites
+		var b : Boolean init p2.isComposite
+		p2.isComposite := p1.isComposite
+		p1.isComposite := b
+    	
     	super(visitable)
     end
+    
+	method visitInterface(visitable : uml2::Interface) is do
+		// Interface doesn(t exists as concept in Kermeta
+		// so interfaces must be processed as Uml2 abstract classes
+		
+    	// UML2 Interface is a ClassDefinition in Kermeta
+    	var cldef : ClassDefinition
+    	cldef ?= output.getValue(visitable)
+    	
+    	// links all class' operations
+    	visitable.ownedOperation.each{ o |
+    		var op : Operation
+    		op ?= output.getValue(o)
+    		cldef.ownedOperation.add(op)
+    	}
+    	
+    	// links all class' attributes
+    	visitable.ownedAttribute.each{ att |
+    		var prop : Property
+    		prop ?= output.getValue(att)
+			cldef.ownedAttribute.add(prop)
+    	}
+		
+    	super(visitable)
+	end
+	
+	/**
+	 * recursive method to obtain the nearest super Operation,
+	 * for a given operation name, if it exists in the given generalization
+	 */
+	 operation superOperation(name : String, genSet : Set<uml2::Generalization>) : Operation is do
+	 	result := void
+	 	
+   		// Take note that a method redefined deeper than one level of inheritance
+   		// would not be processed, as UML2 doesn't give any recursive access to superclasses,
+   		// so Kermeta interpreter will raise a error on it
+   		genSet.each{ gen |
+	   		var superClass : uml2::Class
+	   		superClass ?= gen.general
+   			superClass.ownedOperation.each{ supOp |
+   				if supOp.name == name then
+   					// inherited operation
+   					var genOp : Operation
+   					result ?=output.getValue(supOp)
+   				end
+   			}
+   			// recursive exploration of super super classes
+   			if result.isVoid then
+   				result := superOperation(name, superClass.generalization)
+   			end
+   		}
+	 end
 }

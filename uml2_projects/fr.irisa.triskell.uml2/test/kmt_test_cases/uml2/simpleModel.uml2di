@@ -15,8 +15,9 @@
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.uml2.classdiagram">
       <element href="simpleModel.uml2#_tPOCIqLHEdqkGMDvm75SlQ"/>
     </semanticModel>
-    <contained xsi:type="di:GraphNode" position="115,152" size="289,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.3"/>
+    <contained xsi:type="di:GraphNode" position="263,136" size="289,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.4 //@diagrams.0/@contained.5"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.4"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="simpleModel.uml2#_0-QU4NRgEdqBbJSGMey_DQ"/>
       </semanticModel>
@@ -33,8 +34,8 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="134,269" size="100,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.3"/>
+    <contained xsi:type="di:GraphNode" position="252,401" size="100,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.5"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="simpleModel.uml2#_1c6m0NRgEdqBbJSGMey_DQ"/>
       </semanticModel>
@@ -51,32 +52,56 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="438,208" size="100,-1">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="simpleModel.uml2#_DiersdUDEdqlMe7go0Vwgg"/>
+        <element href="simpleModel.uml2#_4y2cENUJEdqlMe7go0Vwgg"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="33" vDistance="-8"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="470,289" size="100,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="simpleModel.uml2#_QVfysNXpEdqEYsJv1C_XwA"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="35"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="simpleModel.uml2#_DiersdUDEdqlMe7go0Vwgg"/>
+          <element href="simpleModel.uml2#_QVfysNXpEdqEYsJv1C_XwA"/>
         </semanticModel>
       </contained>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="36"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="simpleModel.uml2#_DiersdUDEdqlMe7go0Vwgg"/>
+          <element href="simpleModel.uml2#_QVfysNXpEdqEYsJv1C_XwA"/>
         </semanticModel>
       </contained>
     </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="simpleModel.uml2#_cAM6wNXzEdqEYsJv1C_XwA"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="23" vDistance="20"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="43" vDistance="-5"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+    </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="simpleModel.uml2#_4y2cENUJEdqlMe7go0Vwgg"/>
+        <element href="simpleModel.uml2#_01EPoNYAEdqXe9xbgJnx2A"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
       <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+      <waypoints>[-145, 0, -40, -265]</waypoints>
+      <waypoints>[-254, 0, -149, -265]</waypoints>
+      <waypoints>[-254, 265, -149, 0]</waypoints>
+      <waypoints>[-156, 265, -51, 0]</waypoints>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

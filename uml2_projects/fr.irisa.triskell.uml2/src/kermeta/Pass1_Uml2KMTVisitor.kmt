@@ -4,6 +4,7 @@ require kermeta
 require "Uml2.kmt"
 require "TopDownVisitor.kmt"
 require "KmBuilder.kmt"
+require "keyword_list.kmt"
 
 using kermeta::standard
 using kermeta::language::structure
@@ -13,10 +14,13 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 {
     attribute output : kermeta::utils::Hashtable<uml2::Element, Object>
     attribute build : KmBuilder
+    attribute kwList : kermeta::language::KeyWordList
     
     operation initialize(outputKm : kermeta::utils::Hashtable<uml2::Element, Object>) is do
     	output := outputKm
     	build := KmBuilder.new
+    	kwList := kermeta::language::KeyWordList.new
+    	kwList.initialize
     end
     
     method visitComment(visitable : uml2::Comment) is do
@@ -46,22 +50,34 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitClass(visitable : uml2::Class) is do
-    	// a Uml2 class is a "ClassDefinition" in Kermeta
-    	// (the Kermeta "Class" is only for typing purposes)
-    	var cl : ClassDefinition
-    	cl := build.createClassDefinition()
-    	cl.name := visitable.name
-    	output.put(visitable, cl)
-    	cl.isAbstract := visitable.isAbstract
-    	
-    	super(visitable)
+		
+		// we need to brake infinite recursivity thru Type
+		var o : Object init output.getValue(visitable)
+		if o.isVoid
+		then
+	    	// a Uml2 class is a "ClassDefinition" in Kermeta
+	    	// (the Kermeta "Class" is only for typing purposes)
+	    	var cl : ClassDefinition
+	    	cl := build.createClassDefinition()
+	    	cl.name := validName(visitable.name)
+	    	output.put(visitable, cl)
+	    	cl.isAbstract := visitable.isAbstract
+	    	
+	    	super(visitable)
+    	end
     end
     
     /* visit Attributes, Properties, ... */
     method visitProperty(visitable : uml2::Property) is do
+    	// tests UML2 model correctness
+    	if visitable.type.isVoid then
+    		raise "Uml2Kmt - PASS1 : " + "the property \""+visitable.name+"\" of the class \""
+    			+ visitable.class_.name+"\" must be typed !"
+    	end
+    	
     	// the Uml2 attributes, properties and associations' ends all become "Property" in Kermeta
     	var prop : Property init build.createProperty()
-    	prop.name := visitable.name
+    	prop.name := validName(visitable.name)
     	prop.isDerived := visitable.isDerived
     	prop.isReadOnly := visitable.isReadOnly
     	prop.isOrdered := visitable.isOrdered
@@ -70,23 +86,16 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	prop.upper := upperValue(visitable.upperValue)
     	
 		// needed by PrettyPrinter
-//    	prop.default := visitable.default	// derived value
-//    	prop.isComposite := visitable.isComposite	// derived value
-		prop.isComposite := false	// FIXME : manage this value in a correct way
+		prop.isComposite := (visitable.aggregation == uml2::AggregationKind.composite)
 		
-    	// we need to manage the Type class of the attributes,
-    	// in case of external package reference
-//    	if visitable.association.isVoid then visitable.type.accept(self) end
-    	visitable.type.accept(self)
-    	
     	output.put(visitable, prop)
-    	super(visitable)
+    	super(visitable) 
     end
     
     method visitOperation(visitable : uml2::Operation) is do
     	// a Uml2 operation is also an operation in Kermeta
     	var op : Operation init build.createOperation()
-    	op.name := visitable.name
+    	op.name := validName(visitable.name)
     	op.isAbstract := visitable.isAbstract
     	output.put(visitable, op)
     	
@@ -99,6 +108,12 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitParameter(visitable : uml2::Parameter) is do
+    	// tests UML2 model correctness
+    	if visitable.type.isVoid then
+			raise "Uml2Kmt - PASS1 : " + "the parameter \""+visitable.name+"\" of the operation \""
+    			+ visitable.~operation.name+"\" must be typed !"
+    	end
+    	
     	// Uml2 has 4 types of operation parameters : "In", "In Out", 'Out" and "Return"
     	// but Kermeta distinguishes only passed parameters and return type for operations
 		var par : Parameter
@@ -111,16 +126,13 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	par.lower := lowerValue(visitable.lowerValue)
     	par.upper := upperValue(visitable.upperValue)
     	
-		// need to visit its Type
-		visitable.type.accept(self)
-    	
     	super(visitable)
     end
     
     method visitPackage(visitable : uml2::Package) is do
     	// a Uml2 package is also a package in Kermeta
     	var pack : Package init build.createPackage()
-    	pack.name := visitable.name
+    	pack.name := validName(visitable.name)
     	output.put(visitable, pack)
     	super(visitable)
     end
@@ -170,7 +182,7 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 	    	// DataType are defined thru ClassDefinition in Kermeta
 	    	var dt : DataType
 	    	dt := build.createDataType()
-	    	dt.name := visitable.name
+	    	dt.name := validName(visitable.name)
 	    	output.put(visitable, dt)
     	end
     	
@@ -184,20 +196,42 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
      	
     	// we need to manage the general's relations,
     	// in case of external package reference
-    	visitable.general.accept(self)
+//    	visitable.general.accept(self)
     	
     	super(visitable)
     end
     
     method visitAssociation(visitable : uml2::Association) is do
-    	// it is the most complex transformation to manage
-    	// because the structure of representations differs
-    	// from UML2 to Kermeta depending on the association cases
-    	// 
-    	// TODO
+    	// no object to build as Kermeta links directly classes
+    	
+    	// FIXME : how to manage associations between more than 2 classes
+    	if visitable.ownedEnd.size > 2 then
+    		var msg : String
+    		msg := "Uml2Kmt - PASS1 : " + "the association \""+visitable.name+"\" have more than 2 ends !\n"
+    		visitable.memberEnd.each{ u | 
+    			msg.append("   - Class : "+u.name+"\n")
+    		}
+    		raise msg
+    	end
+    	
     	super(visitable)
     end
     
+	method visitInterface(visitable : uml2::Interface) is do
+		// Interface doesn(t exists as concept in Kermeta
+		// so interfaces must be processed as Uml2 abstract classes
+		
+    	// a Uml2 interface is a "ClassDefinition" in Kermeta
+    	// (the Kermeta "Class" is only for typing purposes)
+    	var cl : ClassDefinition
+    	cl := build.createClassDefinition()
+    	cl.name := validName(visitable.name)
+    	output.put(visitable, cl)
+    	cl.isAbstract := true
+		
+    	super(visitable)
+	end
+	    
     /**
      * method for extract integer value from UML2 ValueSpecification objects
      */
@@ -219,10 +253,22 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	// if not defined, the upperBound must be at least greater than zero
     	// (see UML2 Superstructure  - 1.4 Kernel - the Multiplicities Diagram)
     	result := 1
-    	var int : uml2::LiteralInteger
-    	int ?= valueSpec
-    	if int != void then
-    		result := int.~value
+    	var uint : uml2::LiteralUnlimitedNatural
+    	uint ?= valueSpec
+    	if uint != void then
+    		result := uint.~value
+    	end
+    end
+    
+    /**
+     * method which avoid use of Kermeta key words
+     */
+    operation validName(name : String) : String is do
+    	result := ""
+    	if kwList.isKeyword(name) then
+    		result.append("~" +name)
+    	else
+    		result.append(name)
     	end
     end
 }

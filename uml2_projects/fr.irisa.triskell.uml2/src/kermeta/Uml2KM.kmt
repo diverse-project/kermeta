@@ -20,7 +20,7 @@ using uml2kmt_visitors
 class Main
 {
     reference mainModel : uml2::Package
-    reference allModels : Set<uml2::Package>
+    reference externModels : OrderedSet<uml2::Package>
     reference rootPackage : uml2::Package
     reference objectsStore : kermeta::utils::Hashtable<uml2::Element, Object>
     
@@ -31,15 +31,20 @@ class Main
     	inputResource ?= inputRepository.createResource(input_uri, input_mm_uri)
     	inputResource.load()
     	
-    	// we get the main package for the targeted code tree
+    	// "instances" only gives the main diagramm package for the targeted code tree
     	mainModel ?= inputResource.instances.one
     	
     	// we must parse all the included models, for extra models references
-    	allModels := Set<uml2::Package>.new
+    	externModels := OrderedSet<uml2::Package>.new
     	inputResource.allRootContents.each{ o |
-    		var p : uml2::Package
-    		p ?= o
-	    	if not p.isVoid then allModels.add(p) end
+    		// the upper root of UML2 model tree is the first package
+    		var model : uml2::Package
+    		model ?= o
+	    	if not model.equals(mainModel) then
+	    		var p : uml2::Package
+	    		p ?= model.ownedMember.one
+		    	if not p.isVoid then externModels.add(p) end
+	    	end
     	}
     	
     	// creates the Kermeta objects' storage
@@ -50,15 +55,18 @@ class Main
     operation main() : Void is do 
     	stdio.writeln("\n>>>>-------------> initializing the model !\n")
         // the UML2 model to be transformed
-        initialize("../../test/kmt_test_cases/uml2/ClassDiagram.uml2", "../ecore/UML2.ecore")
+//        initialize("../../test/kmt_test_cases/uml2/ClassDiagram.uml2", "../ecore/UML2.ecore")
 //        initialize("../../test/kmt_test_cases/uml2/simpleModel.uml2", "../ecore/UML2.ecore")
+        initialize("../../test/kmt_test_cases/uml2/rts.uml2", "../ecore/UML2.ecore")
         
     	stdio.writeln("\n>>>>-------------> running Pass 1 !\n")
         // the first Pass creates the KM objects
         var pass1 : Pass1_Uml2KMTVisitor init Pass1_Uml2KMTVisitor.new
         pass1.initialize(objectsStore)
+        
+		pass1.visitPackage(rootPackage)
         // we pass all the model, for creating all references
-		allModels.each{ p |
+		externModels.each{ p |
 			pass1.visitPackage(p)
 		}
         
@@ -66,7 +74,10 @@ class Main
         // the second Pass links the KM objects
         var pass2 : Pass2_Uml2KMTVisitor init Pass2_Uml2KMTVisitor.new
         pass2.initialize(objectsStore)
-		allModels.each{ p |
+        
+		pass2.visitPackage(rootPackage)
+        // we pass all the model, for creating all references
+		externModels.each{ p |
 			pass2.visitPackage(p)
 		}
         
@@ -85,7 +96,15 @@ class Main
         upp.initialize()
 		var tree : kermeta::language::structure::Package
 		tree ?= objectsStore.getValue(rootPackage)
-	    stdio.writeln(upp.visitRootPackage(tree, 0))
+		// external references to other diagramms
+		var extRef : OrderedSet<kermeta::language::structure::Package>
+		  init OrderedSet<kermeta::language::structure::Package>.new
+		externModels.each{ p |
+			var pack : kermeta::language::structure::Package
+			pack ?= objectsStore.getValue(p)
+			extRef.add(pack)
+		}
+	    stdio.writeln(upp.visitRootPackage(tree, extRef, 0))
 	    
 	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
      end
