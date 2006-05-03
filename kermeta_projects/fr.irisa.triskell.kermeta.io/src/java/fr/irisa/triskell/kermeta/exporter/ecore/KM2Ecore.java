@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.11 2006-05-03 20:44:56 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.12 2006-05-03 21:17:08 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Package;
@@ -68,6 +69,13 @@ public class KM2Ecore {
 	protected String ecoreGenDirectory = null;
 	/** The list of available ecore resources provided by the user */
 	protected List<String> ecoreFileList;
+	
+	/**
+	 * The list of unit messages.
+	 * This contains typically errors and warnings detected while building the model
+	 */
+	public KMUnitMessageManager messages;	
+	
 
 	/**
 	 * <code>kmt2ecoremapping</code> is a trace mapping. 
@@ -111,6 +119,7 @@ public class KM2Ecore {
 	public KM2Ecore(Resource resource, KermetaUnit kunit) {
 		ecoreResource = resource;
 		kermetaUnit   = kunit;
+		messages = new KMUnitMessageManager(kermetaUnit);
 	}
 	
 	public KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit) {

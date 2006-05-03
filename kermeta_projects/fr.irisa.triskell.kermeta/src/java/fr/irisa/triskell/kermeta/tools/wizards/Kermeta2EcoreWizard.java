@@ -1,4 +1,4 @@
-/* $Id: Kermeta2EcoreWizard.java,v 1.2 2006-02-15 18:19:18 zdrey Exp $
+/* $Id: Kermeta2EcoreWizard.java,v 1.3 2006-05-03 21:17:11 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -24,9 +24,14 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.console.MessageConsoleStream;
 
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 
 /**
  * Pretty print of kmt files from a KermetaUnit.
@@ -115,6 +120,12 @@ public class Kermeta2EcoreWizard extends UnitExporterWizard{
 	    else exporter = new KM2Ecore(resource, builder, gendir, ecorelist);
 	
 		exporter.exportPackage(builder.rootPackage);
+		//		 display eventual warnings
+		if(exporter.messages.getAllWarnings().size() > 0){
+			MessageConsoleStream mcs = KermetaPlugin.getDefault().getConsole().newMessageStream();
+        	mcs.setColor(new Color(null, 255,170,0));
+        	mcs.println(exporter.messages.getAllMessagesAsString());        	
+		}
 		
 	    // Save Ecore structure	
 		try {

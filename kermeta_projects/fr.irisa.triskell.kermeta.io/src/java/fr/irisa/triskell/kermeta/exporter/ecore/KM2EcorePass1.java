@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.9 2006-05-03 20:50:16 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.10 2006-05-03 21:17:08 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -317,6 +317,9 @@ public class KM2EcorePass1 extends KermetaVisitor{
 				// Ecore primitive types cannot be EReference we need to translate it into EAttribute
 				// even if the notion of containment is not respected
 				//	attribute
+				ecoreExporter.messages.addWarning("The reference to type "+ KMTHelper.getTypeQualifiedName(node.getType()) +" need to be translated into an Ecore data type and then must be put into an EAttribute.\n"+ 
+						"A roundtrip back to kermeta will not produce your original file.\n"+
+						"Please consider using attribute instead of reference.",node);
 				KermetaUnit.internalLog.warn("a reference to type "+ KMTHelper.getTypeQualifiedName(node.getType()) +" need to be translated into an Ecore data type and must be put into an EAttribute.\n"+ 
 						"a roundtrip back to kermeta will not produce your original file.", null);
 				EAttribute newEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
