@@ -1,4 +1,4 @@
-/* $Id: KMUnit.java,v 1.12 2006-04-10 17:35:50 zdrey Exp $
+/* $Id: KMUnit.java,v 1.13 2006-05-03 15:04:11 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : 	KMUnit.java
 * License : EPL
@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
