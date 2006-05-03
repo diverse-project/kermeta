@@ -35,13 +35,11 @@ import org.topcased.modeler.figures.IEdgeObjectFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureEdgeObjectConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructureEditPolicyConstants;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructureConfiguration;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.EditPartUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.PropertyEditPartCommonInterface;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.PropertyFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.PropertyLabelEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.TagLinkEdgeCreationEditPolicy;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaConstants;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
@@ -58,6 +56,10 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 	 * Decoration of the edges (diamong, arrow, or nothing) -- topcased
 	 */
 	private RotatableDecoration srcDecor, targetDecor;
+	
+	/**
+	 * 
+	 */
 
 	/**
 	 * The opposite property linked to the one represented
@@ -73,7 +75,7 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 	 * Contains the String related to the label to edit
 	 */
 	protected String labelToEdit;
-	
+
 	/**
 	 * Constructor
 	 * <!-- begin-user-doc -->
@@ -101,6 +103,12 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 		installEditPolicy(
 				ModelerEditPolicyConstants.EDGE_OBJECTS_UV_EDITPOLICY,
 				new PropertyLabelEditPolicy());
+		
+		// We have to extends the LabelDirectEditPolicy, ILabelFeatureProvider, ChangeLabelTextCommand
+		// if we want to be able to edit directly elements like the multiplicity. 
+		// We have to link to that a special syntax (saying things like :
+		// multiplicity := <Integer>..<Integer|\*>
+		// opposite := #<String>
 		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE,
 				new LabelDirectEditPolicy());
 
@@ -159,6 +167,8 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 		super.setSelected(value);
 		getPropertyFigure().getNameLabel().setSelected(
 				value == 0 ? false : true);
+		getPropertyFigure().getMultiplicityLabel().setSelected(
+				value == 0 ? false : true);
 	}
 
 	/**
@@ -182,8 +192,7 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 		updateSourceDecoration();
 		updateTargetDecoration();
 		updateNameLabel();
-		updateTargetCount();
-		updateTargetName();
+		updateMultiplicityLabel();
 	}
 
 	/**
@@ -193,7 +202,7 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 	 * @generated NOT
 	 */
 	private void updateNameLabel() {
-		((Label) ((PropertyFigure) getFigure()).getNameLabel())
+		getPropertyFigure().getNameLabel()
 				.setText(((Property) getEObject()).getName());
 	}
 
@@ -218,16 +227,16 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 	 * <!-- end-user-doc -->
 	 * @param  requestLoc the location of the cursor
 	 * @return true if the cursor is over the EditableLabel
-	 * @generated
+	 * @generated NOT (because customized)
 	 */
 	private boolean directEditHitTest(Point requestLoc) {
+		Point save_rl = requestLoc.getCopy();
 		Label nameName = (Label) ((PropertyFigure) getFigure())
 				.getNameLabel();
 		if (nameName != null) {
 			labelToEdit = StructureEdgeObjectConstants.NAME_LABEL_ID;
 			nameName.translateToRelative(requestLoc);
 			if (nameName.containsPoint(requestLoc))
-				
 				return true;
 			labelToEdit = null;
 		}
@@ -236,7 +245,8 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 		.getMultiplicityLabel();
 		if (nameName != null) {
 			labelToEdit = StructureEdgeObjectConstants.MULTIPLICITY_LABEL_ID;
-			nameName.translateToRelative(requestLoc);
+			// translating twice generates a wrong position of requestLoc point
+			//nameName.translateToRelative(requestLoc);
 			if (nameName.containsPoint(requestLoc))
 				return true;
 			labelToEdit = null;
@@ -277,7 +287,7 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 			}
 			multiplicityManager.show();
 		}
-		
+
 	}
 
 	/*
@@ -296,22 +306,22 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 			throw new BoundsFormatException("LowerBound must be [0..n]");
 		if (upper < -1)
 			throw new BoundsFormatException("UpperBound must be [-1..n]");
-		if (upper < lower)
+		if (upper < lower && upper != -1)
 			throw new BoundsFormatException("Upper must be > Lower");
 		return lower + ".." + (upper == -1 ? "*" : "" + upper);
 
 	}
 
 	/**
-	 * Update the multiplicity view 
+	 * Update the multiplicity view  
 	 */
-	protected void updateTargetCount() {
-		Label targetCount = getPropertyFigure().getMultiplicityLabel();
+	protected void updateMultiplicityLabel() {
+		Label targetMultiplicity = getPropertyFigure().getMultiplicityLabel();
 		try {
-			targetCount.setText(createCountString(getProperty()));
-			targetCount.setLabelAlignment(PositionConstants.LEFT);
+			targetMultiplicity.setText(createCountString(getProperty()));
+			targetMultiplicity.setLabelAlignment(PositionConstants.LEFT);
 		} catch (BoundsFormatException e) {
-			targetCount.setText("error");
+			targetMultiplicity.setText("error");
 			IStatus status = new Status(IStatus.ERROR, StructurePlugin
 					.getDefault().getBundle().getSymbolicName(), IStatus.ERROR,
 					e.getMessage(), null);
@@ -328,16 +338,41 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 			return;
 		if (opposite != null)
 			opposite.eAdapters().remove(getModelListener());
+		opposite = opp;
+		if (opposite != null)
+            opposite.eAdapters().add(getModelListener());
 	}
+	
+    private void updateSourceCount()
+    {
+/*        if (getProperty().getOpposite() != null)
+        {
+            if (getProperty().isIsComposite())
+            {
+                if (srcCount != null)
+                {
+                    getConnection().remove(srcCount);
+                    srcCount = null;
+                }
+            }
+            else
+            {
+                if (srcCount == null)
+                {
+                    srcCount = new Label();
+                    srcCount.setForegroundColor(ColorConstants.blue);
+                    getConnection().add(srcCount, srcCountLocator);
+                }
+                srcCount.setText(createCountString(getEReference().getEOpposite()));
+            }
+        }
+        else if (srcCount != null)
+        {
+            getConnection().remove(srcCount);
+            srcCount = null;
+        }*/
+    }
 
-	/**
-	 * Update the name of the property 
-	 * property.name
-	 */
-	protected void updateTargetName() {
-
-		getPropertyFigure().getNameLabel().setText(getProperty().getName());
-	}
 
 	/* -------------------------------------------------------------------------
 	 * 
@@ -485,7 +520,7 @@ public class PropertyEditPart extends EMFGraphEdgeEditPart implements
 			break;
 		case StructurePackage.PROPERTY__LOWER:
 		case StructurePackage.PROPERTY__UPPER:
-			updateTargetCount();
+			updateMultiplicityLabel();
 		case StructurePackage.PROPERTY__NAME:
 		//updateTargetDecoration();
 		case StructurePackage.PROPERTY__OPPOSITE:
