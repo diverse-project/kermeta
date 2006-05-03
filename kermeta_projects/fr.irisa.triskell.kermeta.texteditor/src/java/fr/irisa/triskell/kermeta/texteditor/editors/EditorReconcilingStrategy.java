@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.13 2006-03-30 09:28:35 zdrey Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.14 2006-05-03 14:34:51 zdrey Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -22,10 +22,10 @@ import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
-import fr.irisa.triskell.kermeta.loader.KMUnitParseError;
-import fr.irisa.triskell.kermeta.loader.KMUnitWarning;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitWarning;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
@@ -42,12 +42,13 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 	
     public EditorReconcilingStrategy(Editor editor)
     {
+    	System.err.println("Bonjour cher Editor reconciling strategy");
         _editor = editor;
     }
 
     public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion)
     {
-    	System.out.println("reconcile(DirtyRegion dirtyRegion, IRegion subRegion)");
+    	System.err.println("reconcile(DirtyRegion dirtyRegion, IRegion subRegion)");
         try
         {
         	KermetaUnit unit = parse();
@@ -62,11 +63,12 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 
     public void reconcile(IRegion partition)
     {
-    	System.out.println("reconcile(DirtyRegion dirtyRegion, IRegion subRegion)");
+    	System.err.println("[partition] reconcile(DirtyRegion dirtyRegion, IRegion subRegion)");
         try
         {
         	KermetaUnit unit = parse();
               _editor.setMcunit(unit);
+              
         }
         catch(Exception ex)
         {
@@ -107,9 +109,9 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
 	        result.parseString(_document.get().replace('\t', ' '));
 	        result.load();
-	        
 	        result.typeCheck(null);
-
+	        // this constraintCheck is now done only when user wants to save its kermeta file.
+	        // see Editor class
 	        result.constraintCheck(null);
 	        
         }
