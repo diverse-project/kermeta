@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.2 2006-04-10 17:41:04 zdrey Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.3 2006-05-03 15:13:14 zdrey Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -25,10 +25,12 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.topcased.modeler.editor.Modeler;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
-import fr.irisa.triskell.kermeta.loader.KMUnitParseError;
-import fr.irisa.triskell.kermeta.loader.KMUnitWarning;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
+import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitWarning;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
@@ -47,11 +49,13 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
     {
     }
     
-    
+    /**
+     * Parses the given resource. This consists on loading a KermetaUnit for it. *
+     * Note : we don't type-check it, nor constraint-check!
+     * */
     public static KermetaUnit parse(Resource resource)
     {
         KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
-    	
     	org.eclipse.core.resources.IFile file = KermetaPlugin.getIFileFromString(resource.getURI().toString());
     	String uri = "platform:/resource" + file.getFullPath().toString();
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
@@ -60,14 +64,8 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
        // System.out.println("file.getFullPath().toOSString() : " + file.getFullPath().toOSString());
         try {
         	result = (KMUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
-        	// Parse...
         	result.setResource(resource);
 	        result.load();
-	        
-	        result.typeCheck(null);
-
-	        result.constraintCheck(null);
-	        
         }
         catch(Throwable e) {
             KermetaUnit.internalLog.error("load error ", e);
@@ -78,12 +76,22 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         	else if (!result.messages.unitHasError)
         		result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null, null));
         }
-        
         EditorReconcilingStrategy.createMarkers(file, result);
         return result;
     }
     
-    
+    /**
+     * Parses and checks the given resource!
+     */
+    public static KermetaUnit parseAndCheck(Resource resource)
+    {
+    	KermetaUnit result = parse(resource);
+        // Set type_check boolean to false so that we can check again 
+        result.setType_checked(false);
+        result.typeCheck(null);
+        result.constraintCheck(null);
+        return result;
+    }
     
     public static void clearMarkers(IFile file) {
         try {
