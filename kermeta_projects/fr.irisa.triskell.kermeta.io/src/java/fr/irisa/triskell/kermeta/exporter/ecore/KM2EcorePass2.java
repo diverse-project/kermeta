@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.8 2006-03-20 15:32:12 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.9 2006-05-03 20:44:56 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -512,9 +512,19 @@ public class KM2EcorePass2 extends KermetaVisitor{
 			}						
 		}
 		else { 
-			// reference 
-			newEReference = (EReference)newEStructuralFeature;
-			
+			if (ecoreExporter.isPrimitiveEcoreType(node.getType())){
+				// Ecore primitive types cannot be EReference we need to translate it into EAttribute
+				// even if the notion of containment is not respected
+				//	attribute
+				newEAttribute = (EAttribute)newEStructuralFeature;
+				//KermetaUnit.internalLog.warn("reference to type "+ node.getType() +" need to be translated into an Ecore data type and must be put into an EAttribute.\n"+ 
+		    	//			"a roundtrip back to kermeta will not produce your original file.", null);
+				
+			}
+			else {
+					// 	reference 
+				newEReference = (EReference)newEStructuralFeature;
+			}
 		}
 		if(newEReference != null)
 		{

@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.7 2006-03-20 15:32:12 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.8 2006-05-03 20:44:56 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -40,6 +40,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
@@ -312,11 +313,23 @@ public class KM2EcorePass1 extends KermetaVisitor{
 			}
 		}
 		else { 
-			// reference 
-			EReference newEReference =EcoreFactory.eINSTANCE.createEReference();
-			newEStructuralFeature = newEReference;
-				
-			newEReference.setContainment(false);
+			if (ecoreExporter.isPrimitiveEcoreType(node.getType())){
+				// Ecore primitive types cannot be EReference we need to translate it into EAttribute
+				// even if the notion of containment is not respected
+				//	attribute
+				KermetaUnit.internalLog.warn("a reference to type "+ KMTHelper.getTypeQualifiedName(node.getType()) +" need to be translated into an Ecore data type and must be put into an EAttribute.\n"+ 
+						"a roundtrip back to kermeta will not produce your original file.", null);
+				EAttribute newEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
+				newEStructuralFeature = newEAttribute;
+				newEAttribute.setID(node.isIsID());
+			}
+			else {
+				// reference 
+				EReference newEReference =EcoreFactory.eINSTANCE.createEReference();
+				newEStructuralFeature = newEReference;
+					
+				newEReference.setContainment(false);
+			}
 			
 		}
 		

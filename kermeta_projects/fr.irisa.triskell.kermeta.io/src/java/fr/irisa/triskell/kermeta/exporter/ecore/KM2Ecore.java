@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.10 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.11 2006-05-03 20:44:56 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -151,46 +151,6 @@ public class KM2Ecore {
 		return result;
 	}
 	
-	//public EClassifier getETypeForFType(FType ftype) {
-		//if(ftype.)
-    	/*
-    	FTypeDefinition def = null;
-    	
-    	if (etype == null) {
-    	    def = unit.typeDefinitionLookup("kermeta::standard::Void");
-    	}
-    	
-    	if (def == null) {
-    	
-	    	if (etype.eResource() != resource) {
-	    		def = unit.typeDefinitionLookup(getQualifiedName(etype));
-	    		if (def == null) {
-	    			// import the unit
-	    			unit.importedUnits.add(new EcoreUnit(etype.eResource(), unit.packages));
-	    		}
-	    		def = unit.typeDefinitionLookup(getQualifiedName(etype));
-	    	}
-	    	else {
-	    		def = (FTypeDefinition)types.get(etype);
-	    	}
-	    	
-    	}
-    	
-    	if (def == null) return null;
-    	if (def instanceof FType) return (FType)def;
-    	
-    	FClassDefinition cd = (FClassDefinition)def;
-    	
-    	FClass fc = (FClass)classes.get(cd);
-    	if (fc == null) {
-    		fc = unit.struct_factory.createFClass();
-    		fc.setFClassDefinition(cd);
-    		classes.put(cd, fc);
-    	}
-    	return fc;
-    	*/
-	//	return null;
-    //}
 	/**
 	 * add the given info in the annotation, eventually create it
 	 * @param annotedModelElement
@@ -228,8 +188,22 @@ public class KM2Ecore {
 
 	/** tells wether this FType can be used in an ecore Attribute */
 	public boolean isTypeValidForAttibute(Type type){
-		String type_def_name="";
 		// the type maybe either a class or a datatype
+		if(isPrimitiveEcoreType(type)) return true;
+		else if (type instanceof PrimitiveType){
+			// primitivetype are aliases, and will be translated into EDataType and then are valid Attibute
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Indicates wether this type correspond to an Ecore primitive type
+	 * @param type
+	 * @return
+	 */
+	public boolean isPrimitiveEcoreType(Type type){
+		String type_def_name="";
 		if(type instanceof fr.irisa.triskell.kermeta.language.structure.Class){
 			// retreive the qualified name of the definition of this class
 			fr.irisa.triskell.kermeta.language.structure.Class fClass = (fr.irisa.triskell.kermeta.language.structure.Class)type;
@@ -237,10 +211,6 @@ public class KM2Ecore {
 			if (KM2Ecore.primitive_types_mapping.containsKey(type_def_name)) {
 				return true;
 			}
-		}
-		else if (type instanceof PrimitiveType){
-			// primitivetype are aliases, and will be translated into EDataType and then are valid Attibute
-			return true;
 		}
 		return false;
 	}
