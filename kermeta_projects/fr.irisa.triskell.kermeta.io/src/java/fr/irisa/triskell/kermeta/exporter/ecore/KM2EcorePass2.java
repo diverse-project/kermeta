@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.9 2006-05-03 20:44:56 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.10 2006-05-03 20:50:16 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -512,7 +512,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 			}						
 		}
 		else { 
-			if (ecoreExporter.isPrimitiveEcoreType(node.getType())){
+			if (ecoreExporter.isTypeValidForAttibute(node.getType())){
 				// Ecore primitive types cannot be EReference we need to translate it into EAttribute
 				// even if the notion of containment is not respected
 				//	attribute
