@@ -1,4 +1,4 @@
-/* $Id: EmfaticUnit.java,v 1.5 2005-11-28 12:32:50 dvojtise Exp $
+/* $Id: EmfaticUnit.java,v 1.6 2006-05-03 15:03:17 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : EmfaticUnit.java
  * License : EPL
@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import com.ibm.eclipse.emfatic.core.parser.EmfaticLexer;
 import com.ibm.eclipse.emfatic.core.parser.EmfaticParser;
 
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 
 /**
  * 

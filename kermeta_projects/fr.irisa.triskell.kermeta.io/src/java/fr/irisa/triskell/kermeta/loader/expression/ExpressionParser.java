@@ -1,4 +1,4 @@
-/* $Id: ExpressionParser.java,v 1.8 2006-04-10 17:32:03 zdrey Exp $
+/* $Id: ExpressionParser.java,v 1.9 2006-05-03 15:04:23 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -17,11 +17,11 @@ import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
 import fr.irisa.triskell.kermeta.ast.PrimitiveExpression;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPrimitiveExpressionBuilder;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
 

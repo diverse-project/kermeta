@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.5 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.6 2006-05-03 15:04:23 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -22,11 +22,11 @@ import antlr.TokenStreamException;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
-import fr.irisa.triskell.kermeta.loader.KMUnitMessageManager;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMExperessionBuilder;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;

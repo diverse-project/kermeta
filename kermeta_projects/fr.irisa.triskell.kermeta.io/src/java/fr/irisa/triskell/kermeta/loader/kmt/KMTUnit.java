@@ -1,4 +1,4 @@
-/* $Id: KMTUnit.java,v 1.21 2006-04-13 15:20:13 zdrey Exp $
+/* $Id: KMTUnit.java,v 1.22 2006-05-03 15:04:00 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMTUnit.java
  * License : EPL
@@ -23,8 +23,8 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.ast.CompUnit;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.loader.KMUnitParseError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitParseError;
 import fr.irisa.triskell.kermeta.parser.KermetaLexer;
 import fr.irisa.triskell.kermeta.parser.KermetaParser;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;

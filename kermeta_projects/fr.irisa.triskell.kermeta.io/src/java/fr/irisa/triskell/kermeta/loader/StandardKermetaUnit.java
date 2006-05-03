@@ -1,4 +1,4 @@
-/* $Id: StandardKermetaUnit.java,v 1.9 2005-11-28 12:32:50 dvojtise Exp $
+/* $Id: StandardKermetaUnit.java,v 1.10 2006-05-03 15:02:43 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMUnitMessageManager.java
  * License    : EPL
@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 
 
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
 import fr.irisa.triskell.kermeta.utils.UserDirURI;
 

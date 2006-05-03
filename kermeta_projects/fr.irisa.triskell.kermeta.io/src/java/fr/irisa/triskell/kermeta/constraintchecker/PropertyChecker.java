@@ -1,4 +1,4 @@
-/* $Id: PropertyChecker.java,v 1.2 2006-03-31 17:12:52 zdrey Exp $
+/* $Id: PropertyChecker.java,v 1.3 2006-05-03 15:02:22 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : propertyChecker.java
  * License    : EPL
@@ -22,8 +22,8 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitMessage;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 
 /**

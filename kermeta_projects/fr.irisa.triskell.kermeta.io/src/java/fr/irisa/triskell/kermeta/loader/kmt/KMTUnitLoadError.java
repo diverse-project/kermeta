@@ -1,4 +1,4 @@
-/* $Id: KMTUnitLoadError.java,v 1.2 2005-11-28 12:32:50 dvojtise Exp $
+/* $Id: KMTUnitLoadError.java,v 1.3 2006-05-03 15:04:00 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : KMTLoadError.java
 * License : GPL
@@ -11,7 +11,7 @@
 package fr.irisa.triskell.kermeta.loader.kmt;
 
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 
 /**
  * @author Franck Fleurey

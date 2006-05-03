@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.56 2006-04-26 16:42:19 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.57 2006-05-03 15:02:43 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -45,12 +45,11 @@ import fr.irisa.triskell.kermeta.constraintchecker.KermetaCycleConstraintChecker
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
-// import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -414,7 +413,7 @@ public abstract class KermetaUnit {
 	 * This is the list of unit directly imported by this one
 	 * @see getAllImportedUnits 
 	 */
-	public ArrayList importedUnits = new ArrayList();
+	public ArrayList<KermetaUnit> importedUnits = new ArrayList();
 	
 	/**
 	 * Allows to retreive the node that has defined each of the imported units
@@ -866,7 +865,12 @@ public abstract class KermetaUnit {
 	    }  
 		return result;
 	}
-		
+	
+	/**
+	 * Get all the operations that are not a redefinition of a super operation.
+	 * @param cls
+	 * @return
+	 */
 	private ArrayList getAllOperationsOnRootType(ClassDefinition cls) {
 		ArrayList result = new ArrayList();
 		Iterator it = cls.getOwnedOperation().iterator();
