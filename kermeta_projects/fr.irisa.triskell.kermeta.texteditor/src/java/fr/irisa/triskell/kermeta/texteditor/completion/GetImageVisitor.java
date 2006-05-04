@@ -7,6 +7,7 @@ package fr.irisa.triskell.kermeta.texteditor.completion;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -16,6 +17,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
 import fr.irisa.triskell.kermeta.texteditor.icons.green.KermetaIconsGreen;
 import fr.irisa.triskell.kermeta.texteditor.icons.red.KermetaIconsRed;
+import fr.irisa.triskell.kermeta.texteditor.icons.yellow.KermetaIconsYellow;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
@@ -41,6 +43,12 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 */
 	public Object visitClassDefinition(ClassDefinition arg0) {
 		return KermetaIconsRed.CLASS;
+	}
+	/**
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Constraint)
+	 */
+	public Object visitConstraint(Constraint arg0) {
+		return KermetaIconsYellow.CLASS;
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)

@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.graphics.Image;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -68,6 +69,12 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	    }
 	    
 		
+	}
+	/**
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Constraint)
+	 */
+	public Object visitConstraint(Constraint arg0) {
+	   	return KermetaIconsYellow.CLASS;	
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)

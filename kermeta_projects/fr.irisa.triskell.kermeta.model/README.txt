@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.8 2006-03-16 10:38:58 jmottu Exp $
+$Id: README.txt,v 1.9 2006-05-04 15:40:07 jmottu Exp $
 
 
 Leaders :
@@ -24,6 +24,7 @@ How to build this project :
    you only have get emf_libraries_linux.userlibraries in this_folder/conf/, and modify
    the <archive paths> where the specified plugin' jars (common.jar and so on) are installed.
      * Then, modify eclipse_dir <property> in the ecore_build.xml in this folder.
+     * create a folder "java" in the folder build
 
 1) Run ant build on ecore_build.xml : it creates the ecore models of kermeta in build/ecore
 
@@ -47,6 +48,9 @@ How to build this project :
 History :
 ---------
 $Log: not supported by cvs2svn $
+Revision 1.8  2006/03/16 10:38:58  jmottu
+improvement
+
 Revision 1.7  2006/03/03 15:22:58  dvojtise
 Refactoring of Kermeta metamodel (removed the F prefix) (merge of the refactoring branch)
 

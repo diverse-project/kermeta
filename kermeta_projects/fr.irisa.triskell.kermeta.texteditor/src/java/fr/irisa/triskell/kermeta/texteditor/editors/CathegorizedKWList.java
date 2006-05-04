@@ -55,6 +55,10 @@ public class CathegorizedKWList {
 		addKeyword("using", specialKW);
 		addKeyword("inherits", structKW);
 		addKeyword("class", structKW);
+		addKeyword("@pre", operatorKW); //doesn't work properly, probably because the @ is processed firstly
+		addKeyword("pre", specialKW);
+		addKeyword("post", specialKW);
+		addKeyword("inv", specialKW);
 		addKeyword("abstract", structKW);
 		//addKeyword("Self", typeKW);
 		addKeyword("Void", typeKW);

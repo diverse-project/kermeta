@@ -6,7 +6,7 @@
 
 	<!-- CLASSPATH AND LIBRARY : Change that to fit your config -->
 	<!--<property name="eclipse_dir" location="/home/apps/eclipse3"/>-->
-	<property name="eclipse_dir" location="C:\eclipse3.1.1\eclipse"/>
+	<property name="eclipse_dir" location="C:\eclipse\eclipse3.1.1"/>
 	
 	<property name="libdir" location="./lib"/>
 	

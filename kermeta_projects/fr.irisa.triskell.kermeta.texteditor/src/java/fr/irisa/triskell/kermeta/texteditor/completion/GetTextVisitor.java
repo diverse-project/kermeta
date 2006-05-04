@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
@@ -81,6 +82,13 @@ class GetTextVisitor extends KermetaOptimizedVisitor {
 	
 	public Object visitTypeVariable(TypeVariable arg0) {
 		return arg0.getName();
+	}
+	/**
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Constraint)
+	 */
+	public Object visitConstraint(Constraint node) {
+		String result = node.getName() + node.getStereotype().getName();		
+		return result;
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)

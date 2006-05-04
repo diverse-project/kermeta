@@ -1,0 +1,248 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: ParameterizedTypeImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ */
+package fr.irisa.triskell.kermeta.language.structure.impl;
+
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ParameterizedType;
+import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Parameterized Type</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl#getTypeParamBinding <em>Type Param Binding</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl#getTypeDefinition <em>Type Definition</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public abstract class ParameterizedTypeImpl extends TypeImpl implements ParameterizedType {
+	/**
+	 * The cached value of the '{@link #getTypeParamBinding() <em>Type Param Binding</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeParamBinding()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList typeParamBinding = null;
+
+	/**
+	 * The cached value of the '{@link #getTypeDefinition() <em>Type Definition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeDefinition()
+	 * @generated
+	 * @ordered
+	 */
+	protected GenericTypeDefinition typeDefinition = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterizedTypeImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EClass eStaticClass() {
+		return StructurePackage.eINSTANCE.getParameterizedType();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getTypeParamBinding() {
+		if (typeParamBinding == null) {
+			typeParamBinding = new EObjectContainmentEList(TypeVariableBinding.class, this, StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
+		}
+		return typeParamBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GenericTypeDefinition getTypeDefinition() {
+		if (typeDefinition != null && typeDefinition.eIsProxy()) {
+			GenericTypeDefinition oldTypeDefinition = typeDefinition;
+			typeDefinition = (GenericTypeDefinition)eResolveProxy((InternalEObject)typeDefinition);
+			if (typeDefinition != oldTypeDefinition) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION, oldTypeDefinition, typeDefinition));
+			}
+		}
+		return typeDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GenericTypeDefinition basicGetTypeDefinition() {
+		return typeDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeDefinition(GenericTypeDefinition newTypeDefinition) {
+		GenericTypeDefinition oldTypeDefinition = typeDefinition;
+		typeDefinition = newTypeDefinition;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION, oldTypeDefinition, typeDefinition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
+		if (featureID >= 0) {
+			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
+				case StructurePackage.PARAMETERIZED_TYPE__TAG:
+					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
+				default:
+					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
+			}
+		}
+		if (eContainer != null)
+			msgs = eBasicRemoveFromContainer(msgs);
+		return eBasicSetContainer(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
+		if (featureID >= 0) {
+			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
+				case StructurePackage.PARAMETERIZED_TYPE__TAG:
+					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
+				case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
+					return ((InternalEList)getTypeParamBinding()).basicRemove(otherEnd, msgs);
+				default:
+					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
+			}
+		}
+		return eBasicSetContainer(null, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
+		switch (eDerivedStructuralFeatureID(eFeature)) {
+			case StructurePackage.PARAMETERIZED_TYPE__TAG:
+				return getTag();
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
+				return getTypeParamBinding();
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
+				if (resolve) return getTypeDefinition();
+				return basicGetTypeDefinition();
+		}
+		return eDynamicGet(eFeature, resolve);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eSet(EStructuralFeature eFeature, Object newValue) {
+		switch (eDerivedStructuralFeatureID(eFeature)) {
+			case StructurePackage.PARAMETERIZED_TYPE__TAG:
+				getTag().clear();
+				getTag().addAll((Collection)newValue);
+				return;
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
+				getTypeParamBinding().clear();
+				getTypeParamBinding().addAll((Collection)newValue);
+				return;
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
+				setTypeDefinition((GenericTypeDefinition)newValue);
+				return;
+		}
+		eDynamicSet(eFeature, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void eUnset(EStructuralFeature eFeature) {
+		switch (eDerivedStructuralFeatureID(eFeature)) {
+			case StructurePackage.PARAMETERIZED_TYPE__TAG:
+				getTag().clear();
+				return;
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
+				getTypeParamBinding().clear();
+				return;
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
+				setTypeDefinition((GenericTypeDefinition)null);
+				return;
+		}
+		eDynamicUnset(eFeature);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean eIsSet(EStructuralFeature eFeature) {
+		switch (eDerivedStructuralFeatureID(eFeature)) {
+			case StructurePackage.PARAMETERIZED_TYPE__TAG:
+				return tag != null && !tag.isEmpty();
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
+				return typeParamBinding != null && !typeParamBinding.isEmpty();
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
+				return typeDefinition != null;
+		}
+		return eDynamicIsSet(eFeature);
+	}
+
+} //ParameterizedTypeImpl
