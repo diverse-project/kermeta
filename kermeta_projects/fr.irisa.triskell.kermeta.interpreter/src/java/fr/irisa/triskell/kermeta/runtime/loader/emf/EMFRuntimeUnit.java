@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.13 2006-05-04 15:15:28 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.14 2006-05-04 15:27:04 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -176,17 +176,11 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		try {
 			
 			// Get URI of the unit correpsonding to the model to be loaded
-			String kunit_uri = kunit.getUri();
-	        String kunit_uripath = kunit_uri.substring(0, kunit_uri.lastIndexOf("/")+1);
-	        URI u = unit.resolveURI(unit.getUriAsString(), kunit_uripath);
-	    	/*URIConverterImpl.URI_MAP.put(URI.createURI("platform:/plugin/fr.irisa.triskell.kermeta/"),
-	    			URI.createURI("file:/C:/eclipse3.0.2/eclipse/plugins/fr.irisa.triskell.kermeta_0.0.16/"));
-	    	URIConverterImpl.URI_MAP.put(URI.createURI("truc/"),
-	    			URI.createURI("machin/"));
-	    	String s = URIConverterImpl.URI_MAP.toString();*/
-
+			URI u = createURI(unit.getUriAsString());
+			
 			// register the extension of this uri into EMF
-			registerEMFextensionToFactoryMap(kunit_uri);
+			registerEMFextensionToFactoryMap(kunit.getUri());
+			
 			//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
 			ResourceSet resourceset = new ResourceSetImpl();
 
@@ -338,6 +332,9 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		// exception in the user console when save process fails
 	    RuntimeMemory memory =this.getContentMap().getFactory().getMemory();
     	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
+    	// KermetaUnit is used just to detect the directory of which the given file_path is relative
+    	// (it corresponds to the unit of the kermeta program from where user asked for a resource save.
+    	KermetaUnit kunit =  this.getContentMap().getFactory().getMemory().getUnit();
         
         // Get and load the resource of the ECore MetaModel of which the model that we want to save is an instance
         if (this.getMetaModelUri() != null && this.getMetaModelUri().length()>0)
@@ -356,25 +353,24 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         }
         else // if metaModelResource is null 
         {
-            //throw new KermetaRaisedException(null, null);
+            //TODO throw new KermetaRaisedException(null, null);
         }
-        try {
-        	// Create an URI for the resource that is going to be saved
-        	String unit_uri = this.getContentMap().getFactory().getMemory().getUnit().getUri();
-        	String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
-        	URI u = this.resolveURI(file_path, unit_uripath);
-        	KermetaUnit.internalLog.info("URI created for model to save : "+u);
+        
+        // Create an URI for the resource that is going to be saved
+        URI u = createURI(file_path);
+        KermetaUnit.internalLog.info("URI created for model to save : "+u);
+        
+        // Add the extension of the file to save into the resource registry, so that EMF won't complain
+        registerEMFextensionToFactoryMap(kunit.getUri());
+        
+        // Create the resource, and fill it (done in updateEMFModel)
+        ResourceSet resource_set = new ResourceSetImpl();
+        Runtime2EMF r2e = new Runtime2EMF(this, resource_set.createResource(u));
+        r2e.updateEMFModel();
+        
+        // And save the created resource!
+        try {	
         	
-        	// Add the extension of the file to save into the resource registry, so that EMF won't complain
-        	String ext = file_path.substring(file_path.lastIndexOf(".")+1);
-        	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
-        	
-        	// Create the resource, and fill it (done in updateEMFModel)
-        	ResourceSet resource_set = new ResourceSetImpl();
-        	Runtime2EMF r2e = new Runtime2EMF(this, resource_set.createResource(u));
-        	r2e.updateEMFModel();
-        	
-        	// And save the created resource!
         	r2e.getResource().save(null);
         	
 		} catch (IOException e) {
@@ -555,6 +551,19 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			{	entry = (RuntimeObject)content_table.get(next); }
 		}
 		return entry;
+	}
+	
+	/**
+	 * Create an URI for the given file_path
+	 * @param file_path
+	 * @return
+	 */
+	public URI createURI(String file_path)
+	{
+		String unit_uri = this.getContentMap().getFactory().getMemory().getUnit().getUri();
+    	String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
+    	URI u = this.resolveURI(file_path, unit_uripath);
+    	return u;
 	}
 
 	public void loadMetaModelResource(String mm_uri){
