@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.12 2006-04-06 16:04:31 dvojtise Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.13 2006-05-04 15:15:28 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -174,8 +174,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	XMLResource resource=null;
 	    KermetaUnit kunit =  unit.getContentMap().getFactory().getMemory().getUnit();
 		try {
-        	// Load resource
-
 			
 			// Get URI of the unit correpsonding to the model to be loaded
 			String kunit_uri = kunit.getUri();
@@ -254,8 +252,10 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 						memory,
 						null);
 			}
-	    	EMF2Runtime emf2Runtime = new EMF2Runtime(resourceset, resource);
-	    	emf2Runtime.loadunit(unit, resource);
+			
+			// Now, process the conversion of EMF model into Runtime representation so that kermeta can interprete it.
+	    	EMF2Runtime emf2Runtime = new EMF2Runtime(unit, resource);
+	    	emf2Runtime.loadunit();
 		}
 		catch (IOException e){
 			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUriAsString() + " : " + e.getMessage(), e);			
@@ -333,13 +333,15 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * @param file_path the xmi file. the extension of the file should be .km
 	 */
 	public void save(String file_path) {
-	    Runtime2EMF r2e = new Runtime2EMF(this);
-		RuntimeMemory memory =this.getContentMap().getFactory().getMemory();
+		
+		// Get the runtime memory and the interpreter -- mainly used to print 
+		// exception in the user console when save process fails
+	    RuntimeMemory memory =this.getContentMap().getFactory().getMemory();
     	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
-        System.err.println(" metamodel uri : " + this.getMetaModelUri());
-        // Get and load the resource of the ECore MetaModel wanted
+        
+        // Get and load the resource of the ECore MetaModel of which the model that we want to save is an instance
         if (this.getMetaModelUri() != null && this.getMetaModelUri().length()>0)
-        {	// resolve
+        {
         	try {
         		this.metaModelResource = this.loadMetaModelAsEcore(this.getMetaModelUri());
         	}
@@ -352,26 +354,29 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 						e); 
 			}
         }
-        else // metaModelResource is null 
+        else // if metaModelResource is null 
         {
             //throw new KermetaRaisedException(null, null);
         }
-        // Initialize the resource of the EMF model to save
-        String unit_uri = this.getContentMap().getFactory().getMemory().getUnit().getUri();
-        String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
-    	URI u = this.resolveURI(file_path, unit_uripath);
-    	KermetaUnit.internalLog.info("URI created for model to save : "+u);
-        String ext = file_path.substring(file_path.lastIndexOf(".")+1);
-        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
-	    ResourceSet resource_set = new ResourceSetImpl();
-	    r2e.resource = resource_set.createResource(u);
-	    // Update all the instance of the EMF Model
-	    r2e.updateEMFModel(r2e.resource);
-	    
-	    try {
-	        /* For tests purpose : java.io.OutputStream out = new BufferedOutputStream(System.out);
-	        resource.save(out, null); */
-	        r2e.resource.save(null);
+        try {
+        	// Create an URI for the resource that is going to be saved
+        	String unit_uri = this.getContentMap().getFactory().getMemory().getUnit().getUri();
+        	String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
+        	URI u = this.resolveURI(file_path, unit_uripath);
+        	KermetaUnit.internalLog.info("URI created for model to save : "+u);
+        	
+        	// Add the extension of the file to save into the resource registry, so that EMF won't complain
+        	String ext = file_path.substring(file_path.lastIndexOf(".")+1);
+        	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(ext,new XMIResourceFactoryImpl());
+        	
+        	// Create the resource, and fill it (done in updateEMFModel)
+        	ResourceSet resource_set = new ResourceSetImpl();
+        	Runtime2EMF r2e = new Runtime2EMF(this, resource_set.createResource(u));
+        	r2e.updateEMFModel();
+        	
+        	// And save the created resource!
+        	r2e.getResource().save(null);
+        	
 		} catch (IOException e) {
 		    Throwable t = e.getCause();
 		    KermetaUnit.internalLog.error("Error saving EMF model " + this.getUriAsString() + " : " + e.getMessage(), e);

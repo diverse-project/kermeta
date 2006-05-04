@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.35 2006-04-04 12:21:19 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.36 2006-05-04 15:15:28 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -71,21 +71,21 @@ public class EMF2Runtime {
      */
     protected Hashtable runtime_objects_map; // { eobject : robject }
     
-    public ResourceSet resource_set=null;
-    public Resource root_resource=null;
+    public Resource resource;
+    public EMFRuntimeUnit unit;
     	
     /**
      * Constructor
-     * @param newresource_set contains the resource to save, plus the ones on which 
-     * it depends
+     * @param newunit the emf runtime unit that contains some methods useful for loading
+     * and saving EMF models.
      * @param newroot_resource contains the main resource to save.
      */
-    public EMF2Runtime(ResourceSet newresource_set, Resource newroot_resource) {
+    public EMF2Runtime(EMFRuntimeUnit newunit, Resource newroot_resource) {
         super();
         typedef_cache = new Hashtable();
         runtime_objects_map = new Hashtable();
-        resource_set = newresource_set;
-        root_resource = newroot_resource;
+        resource = newroot_resource;
+        unit = newunit;
     }
     
 	/**
@@ -161,7 +161,7 @@ public class EMF2Runtime {
     	}
 	}
 	
-	protected void createRuntimeObjects(EMFRuntimeUnit unit, Resource resource)
+	protected void createRuntimeObjects()
 	{		
 		EList resList = findDependentResources(resource);
 		Iterator resIt = resList.iterator();
@@ -199,11 +199,11 @@ public class EMF2Runtime {
 			}
 		}
 	}
-	public void loadunit(EMFRuntimeUnit unit, Resource resource)
+	public void loadunit()
 	{
 		try {
 			// pre-create the runtime objects
-			createRuntimeObjects(unit, resource);
+			createRuntimeObjects();
 			
 			internalLog.debug("all RuntimeObjects have been created");
 			
@@ -541,7 +541,7 @@ public class EMF2Runtime {
         if(rovalue==null)
         {
         	// troubles in the auto resolve 
-        	EObject obj = EcoreUtil.resolve(fvalue, this.resource_set);
+        	EObject obj = EcoreUtil.resolve(fvalue, resource.getResourceSet());
         	if(fvalue.eIsProxy() && obj.eIsProxy())
 			{   	// ie. was a proxy and the proxy was not resolved
 					String objectURI = fvalue.eResource().getURIFragment(fvalue);			            	

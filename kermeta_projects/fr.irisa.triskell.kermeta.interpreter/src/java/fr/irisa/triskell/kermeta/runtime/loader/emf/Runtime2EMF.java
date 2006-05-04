@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.25 2006-04-04 12:21:19 dvojtise Exp $
+/* $Id: Runtime2EMF.java,v 1.26 2006-05-04 15:15:28 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -26,6 +27,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -48,33 +51,30 @@ public class Runtime2EMF {
 	 * attributes.
 	 * @param unit the EMFRuntimeUnit that hosts the contents of the model to save 
 	 */
-    public Runtime2EMF(EMFRuntimeUnit unit) {
+    public Runtime2EMF(EMFRuntimeUnit p_unit, Resource p_resource) {
         this.updatedRuntimeObjects = new ArrayList();
-        this.unit = unit;
+        this.unit = p_unit;
+        this.resource = p_resource;
     }
-    
-    
-    /** The root objects (with no container) are stored in this list */
-    protected ArrayList root_map;
     
     /**
      * Update the EMFModel from the attribute RuntimeUnit <code>unit</code>.
      * This is the main method called for the EMF model update.
      * @param resource
      */
-    public void updateEMFModel(Resource resource)
-    {        
+    public void updateEMFModel()
+    {   
         // Get the instances RuntimeObject
     	// On save process, unit.getContentMap actually contains the "instances" collection (which
     	// equals contentMap entry "rootContents". There is an operation
     	// naming problem, or an homogeinisation problem in the runtime objects (i.e the collection of object to save)
     	// access!
-        ArrayList instances = Collection.getArrayList(unit.getContentMap());
+        ArrayList<RuntimeObject> instances = Collection.getArrayList(unit.getContentMap());
         // instances should only contain the root elements
-        Iterator it = instances.iterator();
+        Iterator<RuntimeObject> it = instances.iterator();
         internalLog.debug("Updating EMF Objects  (number of instances : "+ instances.size()+")");
         // Get each instance and translate it in EMF (EObject)
-        root_map = new ArrayList();
+        ArrayList<RuntimeObject> root_map = new ArrayList<RuntimeObject>();
         while(it.hasNext()) {
             RuntimeObject ro = (RuntimeObject)it.next();
             // Find or create the EMF Object attached to our RuntimeObject
@@ -82,10 +82,7 @@ public class Runtime2EMF {
             //  - the object already exists since it is loaded from an existing XMI resource
             //  - it does not exist, so we create one
             EObject o = (EObject)getOrCreateObjectFromRuntimeObject(ro, null);
-            if (o.eContainer() == null) 
-                root_map.add(ro);
-            else { // TODO : an object with a container in the instances att. should be forbidden 
-                }
+            root_map.add(ro);
             findEMFObjectsForRuntimeObjectsForRoot(ro, null);
         }
         
@@ -95,7 +92,7 @@ public class Runtime2EMF {
         it = updatedRuntimeObjects.iterator();
         while(it.hasNext())
         {
-            RuntimeObject ro = (RuntimeObject)it.next();
+            RuntimeObject ro = it.next();
             simpleUpdatePropertyForObject(ro);
         }
         
@@ -486,6 +483,22 @@ public class Runtime2EMF {
     	RuntimeObject roName = (RuntimeObject)rObject.getProperties().get("name");
         return  roName == null ? "" : (String)roName.getData().get("StringValue");
     }
+
+	/**
+	 * @return Returns the resource.
+	 */
+	public Resource getResource() {
+		return resource;
+	}
+
+	/**
+	 * @param resource The resource to set.
+	 */
+	public void setResource(Resource resource) {
+		this.resource = resource;
+	}
+    
+    
 }
 
 
