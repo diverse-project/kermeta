@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
+    nsURI="http://ftm" nsPrefix="ftm">
+  <eSubpackages name="structure">
+    <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//structure/NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="body" ordered="false"
+          lowerBound="1" eType="#//behavior/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="stereotype" eType="#//structure/ConstraintType"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//structure/ConstraintLanguage"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ConstraintLanguage" instanceClassName="">
+      <eLiterals name="kermeta"/>
+      <eLiterals name="ocl" value="1"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inv" upperBound="-1"
+          eType="#//structure/Constraint" defaultValueLiteral="" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="pre" upperBound="-1"
+          eType="#//structure/Constraint" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="post" upperBound="-1"
+          eType="#//structure/Constraint" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ConstraintType">
+      <eLiterals name="inv"/>
+      <eLiterals name="pre" value="1"/>
+      <eLiterals name="post" value="2"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Object">
+      <eOperations name="checkInvariants" eType="#//structure/Boolean"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
+  </eSubpackages>
+  <eSubpackages name="behavior">
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+  </eSubpackages>
+</ecore:EPackage>
