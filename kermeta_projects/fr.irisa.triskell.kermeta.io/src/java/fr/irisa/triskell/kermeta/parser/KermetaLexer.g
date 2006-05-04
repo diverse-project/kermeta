@@ -33,6 +33,7 @@ BANG    : '!';
 DOLLAR  : '$';
 HASH    : '#';
 AT      : '@';
+ATPRE	: "@pre";
 
 DOT_DOT  : "..";
 MINUS_GT : "->";
@@ -40,6 +41,7 @@ GT_LT    : "><";
 LT_GT    : "<>";
 COL_COL  : "::";
 PIPE	 : "|";
+
 
 /*CASTEQ : "?=";
 ASSIGNEQ : ":=";
@@ -124,7 +126,3 @@ MULTI_LINE_COMMENT :
 
 
 
-//
-//
-//WS : (' ' | '\t' | '\f' | '\r' | '\n' )+ //{newline();}
-//{ $setType(Token.SKIP); };

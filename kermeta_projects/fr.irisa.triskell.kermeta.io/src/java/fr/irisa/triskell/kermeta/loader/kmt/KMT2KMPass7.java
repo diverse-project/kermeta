@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.17 2006-04-13 15:20:13 zdrey Exp $
+/* $Id: KMT2KMPass7.java,v 1.18 2006-05-04 15:28:24 jmottu Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -43,6 +43,7 @@ import fr.irisa.triskell.kermeta.ast.ContextMultiLineComment;
 import fr.irisa.triskell.kermeta.ast.EnumLiteral;
 import fr.irisa.triskell.kermeta.ast.FAssignement;
 import fr.irisa.triskell.kermeta.ast.FBlock;
+import fr.irisa.triskell.kermeta.ast.Invariant;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
@@ -113,12 +114,18 @@ public class KMT2KMPass7 extends KMT2KMPass {
             e = builder.findOperationByName(builder.current_class, name);
             builder.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation) e;
         }
-        else
+        else if (annNode instanceof Property)
         {	
        	    name = ((Property)annNode).getName().getText();
             e = builder.findPropertyByName(builder.current_class, name);
             builder.current_property = (fr.irisa.triskell.kermeta.language.structure.Property) e;
         }
+        else if (annNode instanceof Invariant) {
+        	
+        	// TODO : add anotations on Invs
+        	
+        }
+        
         if (e != null) // we should have found the object however...
             processAnnotations(annLst, e);
         return super.beginVisit(node);

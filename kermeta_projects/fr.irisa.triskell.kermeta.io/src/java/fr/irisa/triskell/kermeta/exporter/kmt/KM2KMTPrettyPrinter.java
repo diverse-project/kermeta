@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.25 2006-04-19 12:23:54 dvojtise Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.26 2006-05-04 15:27:01 jmottu Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -47,9 +47,8 @@ import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
@@ -66,6 +65,7 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
@@ -124,6 +124,27 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		result += ppCRSeparatedNode(p.getOwnedTypeDefinition());
 		typedef = false;
 		result += ppCRSeparatedNode(p.getNestedPackage());
+		return result;
+	}
+	
+	/**
+	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Constraint)
+	 */
+	public Object visit(Constraint node) {
+		String result = node.getStereotype().toString();
+		result += node.getName()!=null ? " "+node.getName():"";
+		result += " is\n";
+		if (node.getBody() != null) {
+			pushPrefix();
+			result += getPrefix() + this.accept(node.getBody());
+			popPrefix();
+		}
+		else {
+			pushPrefix();
+			result += getPrefix() + "//TODO: implement constraint\n"; 
+			result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
+			popPrefix();
+		}
 		return result;
 	}
 	
@@ -293,6 +314,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		}
 		result += "\n" + getPrefix() + "{\n";
 		pushPrefix();
+		result += ppCRSeparatedNode(node.getInv());
 		result += ppCRSeparatedNode(node.getOwnedAttribute());
 		result += ppCRSeparatedNode(node.getOwnedOperation());
 		popPrefix();
@@ -501,19 +523,24 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		}
 		if (node.getRaisedException().size() > 0) {
 			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());
-		}
+		} 
 		if (node.getBody() != null) {
 			result += " is\n";
 			pushPrefix();
+			result += ppCRSeparatedNode(node.getPre());
 			result += getPrefix() + this.accept(node.getBody());
+			result += "\n" + ppCRSeparatedNode(node.getPost());
 			popPrefix();
 		}
 		else if (node.isIsAbstract()) result += " is abstract";
 		else {
-			result += " is do\n";
+			result += " is\n";
+			result += ppCRSeparatedNode(node.getPre());
+			result += getPrefix() + "do\n";
 			pushPrefix();
 			result += getPrefix() + "//TODO: implement operation " + node.getName() + "\n"; 
 			result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
+			result += ppCRSeparatedNode(node.getPost());
 			popPrefix();
 			result += getPrefix() + "end";
 		}

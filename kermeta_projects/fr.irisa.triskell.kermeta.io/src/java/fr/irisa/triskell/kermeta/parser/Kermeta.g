@@ -271,7 +271,15 @@ classMemberDecl returns [ ClassMemberDecl retVal = null ]
 :
   ( retVal=operation
   | retVal=property
+  | retVal=invariant
   )
+;
+
+invariant returns [ Invariant retVal = null ]
+:
+{ FExpression body = null; }
+  inv_KW:"inv" name:ID is_KW:"is" body=fExpression 
+{ retVal = new Invariant(inv_KW, name, is_KW, body); }
 ;
 
 property returns [ Property retVal = null ]
@@ -320,9 +328,9 @@ setterBody returns [ SetterBody retVal = null ]
 
 operation returns [ Operation retVal = null ]
 :
-{ OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; OperationBody operationBody = null; }
-  operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( from_KW:"from" superSelection=qualifiedID )? ( raises_KW:"raises" exceptions=typelst )? is_KW:"is" operationBody=operationBody 
-{ retVal = new Operation(operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, operationBody); }
+{ OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; Precondition precondition = null; OperationBody operationBody = null; Postcondition postcondition = null; }
+  operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( from_KW:"from" superSelection=qualifiedID )? ( raises_KW:"raises" exceptions=typelst )? is_KW:"is" ( precondition=precondition )? operationBody=operationBody ( postcondition=postcondition )? 
+{ retVal = new Operation(operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, precondition, operationBody, postcondition); }
 ;
 
 operationKind returns [ OperationKind retVal = null ]
@@ -331,6 +339,20 @@ operationKind returns [ OperationKind retVal = null ]
   | "method"
   )
 { retVal = new OperationKind(tok); }
+;
+
+precondition returns [ Precondition retVal = null ]
+:
+{ FExpression body = null; }
+  pre_KW:"pre" name:ID is_KW:"is" body=fExpression 
+{ retVal = new Precondition(pre_KW, name, is_KW, body); }
+;
+
+postcondition returns [ Postcondition retVal = null ]
+:
+{ FExpression body = null; }
+  post_KW:"post" name:ID is_KW:"is" body=fExpression 
+{ retVal = new Postcondition(post_KW, name, is_KW, body); }
 ;
 
 operationBody returns [ OperationBody retVal = null ]
@@ -787,8 +809,8 @@ fVoidLiteral returns [ FVoidLiteral retVal = null ]
 fTypeOrVarLiteral returns [ FTypeOrVarLiteral retVal = null ]
 :
 { Type literal = null; }
-  literal=type 
-{ retVal = new FTypeOrVarLiteral(literal); }
+  literal=type ( atpre:ATPRE )? 
+{ retVal = new FTypeOrVarLiteral(literal, atpre); }
 ;
 
 
@@ -827,6 +849,7 @@ BANG    : '!';
 DOLLAR  : '$';
 HASH    : '#';
 AT      : '@';
+ATPRE	: "@pre";
 
 DOT_DOT  : "..";
 MINUS_GT : "->";
@@ -834,6 +857,7 @@ GT_LT    : "><";
 LT_GT    : "<>";
 COL_COL  : "::";
 PIPE	 : "|";
+
 
 /*CASTEQ : "?=";
 ASSIGNEQ : ":=";
@@ -861,7 +885,7 @@ ID options { testLiterals=true; }
 
 // INT_LITERAL completed on 08/04/2005
 // INT_LITERAL : (DIGIT)+ ;
-INT_LITERAL	:	('-')? (DIGIT)+	;
+INT_LITERAL	:	('-')?(DIGIT)+	;
 
 protected
 REAL_LITERAL  : INT_LITERAL '.' INT_LITERAL (EXPONENT)? ;
@@ -892,12 +916,11 @@ CONTEXT_MULTI_LINE_COMMENT :
 		|	'\r'	
 		|	'\n'	
 		|	~('*'|'\n'|'\r')
-	)*
-	"*/"
+		)*
+		"*/"
 ;
 
-EMPTY_LINE_COMMENT : "/**/";
-
+EMPTY_LINE_COMMENT : "/**/"
 MULTI_LINE_COMMENT : 
 	EMPTY_LINE_COMMENT 
 	|
@@ -910,13 +933,12 @@ MULTI_LINE_COMMENT :
 			|	'\r'	   
 			|	'\n'	  
 			|	~('*'|'\n'|'\r')
-		)*
-		"*/"
+			)*
+			"*/"
 		{$setType(Token.SKIP);}
 	)
 ;
 
-//
-//
-//WS : (' ' | '\t' | '\f' | '\r' | '\n' )+ //{newline();}
-//{ $setType(Token.SKIP); };
+
+
+

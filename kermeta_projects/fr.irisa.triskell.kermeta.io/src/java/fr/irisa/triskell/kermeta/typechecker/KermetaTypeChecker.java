@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.8 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: KermetaTypeChecker.java,v 1.9 2006-05-04 15:30:33 jmottu Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -15,6 +15,7 @@ import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
@@ -91,6 +92,23 @@ public class KermetaTypeChecker {
             checkDerivedProperty(prop);
         }
         
+        it = clsdef.getInv().iterator();
+        while(it.hasNext()) {
+            Constraint c = (Constraint)it.next();
+            checkConstraint(c);
+        }
+        
+    }
+    
+    public void checkConstraint(Constraint c)
+    { 
+           context.init((ClassDefinition)c.eContainer());
+           ExpressionChecker.typeCheckExpression(c.getBody(), unit, context);
+           
+           if(!getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.BooleanType)) {
+   				unit.messages.addError("TYPE-CHECKER : The type of a constraint should be Boolean", c.getBody());
+   		    }
+           
     }
     
     /**

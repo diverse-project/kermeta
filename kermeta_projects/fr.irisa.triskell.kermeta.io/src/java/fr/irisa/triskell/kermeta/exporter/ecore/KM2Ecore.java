@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.12 2006-05-03 21:17:08 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.13 2006-05-04 15:25:38 jmottu Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -105,6 +105,9 @@ public class KM2Ecore {
     public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS = "RaisedException";
     public final static String KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS = "isAbstract";
     public final static String KMT2ECORE_ANNOTATION_BODY_DETAILS = "body";
+    public final static String KMT2ECORE_ANNOTATION_PRE_DETAILS = "pre";
+    public final static String KMT2ECORE_ANNOTATION_POST_DETAILS = "post";
+    public final static String KMT2ECORE_ANNOTATION_INV_DETAILS = "inv";
     public final static String KMT2ECORE_ANNOTATION_TYPEPARAMETER = "KermetaTypeParameters";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY = "KermetaDerivedProperty";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISDERIVED = "isDerived";

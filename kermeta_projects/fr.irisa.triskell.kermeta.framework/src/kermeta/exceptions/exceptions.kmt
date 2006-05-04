@@ -93,3 +93,11 @@ class IndexOutOfBound inherits Exception {}
 class EmptyCollection inherits Exception {}
 
 class IteratorIsOff inherits Exception {}
+
+/*****************************************************************************
+ * 4-Constraints related errors 
+ *****************************************************************************/ 
+class ConstraintViolatedPre inherits Exception {}
+class ConstraintViolatedPost inherits Exception {}
+class ConstraintViolatedInv inherits Exception {}
+

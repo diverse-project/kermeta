@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.7 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: KMT2KMPass6.java,v 1.8 2006-05-04 15:28:06 jmottu Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -17,13 +17,18 @@ import java.util.Iterator;
 
 import fr.irisa.triskell.kermeta.ast.ClassDecl;
 import fr.irisa.triskell.kermeta.ast.GetterBody;
+import fr.irisa.triskell.kermeta.ast.Invariant;
 import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.OperationEmptyBody;
 import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
+import fr.irisa.triskell.kermeta.ast.Postcondition;
+import fr.irisa.triskell.kermeta.ast.Precondition;
 import fr.irisa.triskell.kermeta.ast.SetterBody;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 //import fr.irisa.triskell.kermeta.language.structure.FOperation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 //import fr.irisa.triskell.kermeta.language.structure.FProperty;
@@ -120,6 +125,51 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		return false;
 	}
 	
+	/**
+	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Invariant)
+	 */
+	public boolean beginVisit(Invariant invariant) {
+		
+		Constraint c = builder.struct_factory.createConstraint();
+		c.setStereotype(ConstraintType.INV_LITERAL);
+		c.setBody(KMT2KMExperessionBuilder.process(invariant.getBody(), builder));
+		c.setName(getTextForID(invariant.getName()));
+		
+		builder.current_class.getInv().add(c);
+		
+		return false;
+	}
+	
+	/**
+	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Precondition)
+	 */
+	public boolean beginVisit(Precondition pre) {
+		
+		Constraint c = builder.struct_factory.createConstraint();
+		c.setStereotype(ConstraintType.PRE_LITERAL);
+		c.setBody(KMT2KMExperessionBuilder.process(pre.getBody(), builder));
+		c.setName(getTextForID(pre.getName()));
+		
+		builder.current_operation.getPre().add(c);
+		
+		return false;
+	}
+	
+	/**
+	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.Postcondition)
+	 */
+	public boolean beginVisit(Postcondition post) {
+		
+		Constraint c = builder.struct_factory.createConstraint();
+		c.setStereotype(ConstraintType.POST_LITERAL);
+		c.setBody(KMT2KMExperessionBuilder.process(post.getBody(), builder));
+		c.setName(getTextForID(post.getName()));
+		
+		builder.current_operation.getPost().add(c);
+		
+		return false;
+	}
+
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.GetterBody)
 	 */

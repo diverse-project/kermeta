@@ -65,7 +65,9 @@ list classMemberDecls : annotableClassMemberDecl * ;
 
 sequence annotableClassMemberDecl : annotations classMemberDecl;
 
-abstract classMemberDecl : operation | property; //attribute | reference | operation ;
+abstract classMemberDecl : operation | property | invariant; //attribute | reference | operation ;
+
+sequence invariant : "inv" name=ID "is" body=fExpression ;
 
 //sequence attribute : MINUS modifiers typeRef name=ID (EQUALS defaultValueExpr)? SEMI ;
 //abstract property : normalProperty | derivedProperty;
@@ -81,10 +83,13 @@ sequence propertyBody : getterBody (setterBody)? ;
 sequence getterBody : "getter" "is" getterbody = fExpression ;
 sequence setterBody : "setter" "is" setterbody = fExpression ;
 
-sequence operation : operationKind name=ID (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)?  ("from" superSelection=qualifiedID)? ("raises" exceptions=typelst)? "is" operationBody;
+sequence operation : operationKind name=ID (LT typeVarDecllst GT)? LPAREN (params)? RPAREN (COLON typeRef)?  ("from" superSelection=qualifiedID)? ("raises" exceptions=typelst)? "is" (precondition)? operationBody (postcondition)?;
 token operationKind : "operation" | "method" ;
 
-abstract operationBody : operationEmptyBody | operationExpressionBody ;
+sequence precondition : "pre" name=ID "is" body=fExpression ;
+sequence postcondition : "post" name=ID "is" body=fExpression ;
+
+abstract operationBody : operationEmptyBody | operationExpressionBody  ;
 sequence operationExpressionBody : bodyAnnotations=annotations fExpression ;
 sequence  operationEmptyBody : "abstract" ;
 
@@ -188,8 +193,8 @@ abstract fLiteral : fStringLiteral | fBooleanLiteral | fIntegerLiteral | fVoidLi
 sequence fBooleanLiteral : trueOrFalse ;
 token trueOrFalse : "true" | "false" ;
 sequence fIntegerLiteral : INT_LITERAL ;
-sequence fStringLiteral : STRING_LITERAL ;
+sequence fStringLiteral : STRING_LITERAL;
 sequence fVoidLiteral : "void" ;
 
-sequence fTypeOrVarLiteral : literal=type ; // this can be a variable a method or an attribute !!!!!!
+sequence fTypeOrVarLiteral : literal=type (ATPRE)?; // this can be a variable a method or an attribute !!!!!!
 

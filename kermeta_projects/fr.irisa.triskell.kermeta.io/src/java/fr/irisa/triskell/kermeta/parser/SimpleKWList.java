@@ -76,7 +76,10 @@ public class SimpleKWList {
 		addKeyword("false");
 		addKeyword("void");
 		addKeyword("value");
-
+		addKeyword("inv");
+		addKeyword("@pre");
+		addKeyword("pre");
+		addKeyword("post");
 	}
 
 	public void addKeyword(String kw) {

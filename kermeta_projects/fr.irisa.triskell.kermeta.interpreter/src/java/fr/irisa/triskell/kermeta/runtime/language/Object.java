@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.7 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: Object.java,v 1.8 2006-05-04 15:23:38 jmottu Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -16,6 +16,13 @@ package fr.irisa.triskell.kermeta.runtime.language;
 
 import java.util.Iterator;
 
+import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
@@ -44,6 +51,60 @@ public class Object {
 		if (self.getContainer() == null) return self.getFactory().getMemory().voidINSTANCE;
 		return self.getContainer();
 	}
+	
+    // Implementation of method container called as :
+	// extern fr::irisa::triskell::kermeta::runtime::language::Object.container()
+	public static RuntimeObject checkInvariants(RuntimeObject self) {
+		
+		 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
+	     ClassDefinition classDef = (ClassDefinition)metaClass.getTypeDefinition();
+	     Iterator it = classDef.getInv().iterator();
+	     java.lang.String message = "";
+	     while(it.hasNext()) {
+	    	 Constraint c = (Constraint)it.next();
+	    	 if (!checkConstraint(c.getBody(), classDef, self)) {
+    			 message += "Inv " + c.getName() + " of class " + classDef.getName() + " violated";
+    			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
+ 	        			message,
+ 						self.getFactory().getMemory().getCurrentInterpreter(),
+ 						self.getFactory().getMemory(),
+ 						null);
+    		 }
+	     }
+	     checkInheritedInvariants(classDef , self);
+         return self.getFactory().getMemory().trueINSTANCE; //if the constraints don't raise any constraint's exception then it means that the constraints are true
+	}
+	protected static RuntimeObject checkInheritedInvariants(ClassDefinition cd , RuntimeObject self) {
+		 Iterator itParents = cd.getSuperType().iterator();
+	     while(itParents.hasNext()) {
+	    	 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)itParents.next();
+		     ClassDefinition parent = (ClassDefinition)metaClass.getTypeDefinition();
+	    	 
+	    	 Iterator it = parent.getInv().iterator();
+		     java.lang.String message = "";
+		     while(it.hasNext()) {
+		    	 Constraint c = (Constraint)it.next();
+		    	 if (!checkConstraint(c.getBody(), parent, self)) {
+	    			 message += "Inv " + c.getName() + " of superclass " + parent.getName() + " violated";
+	    			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
+	 	        			message,
+	 						self.getFactory().getMemory().getCurrentInterpreter(),
+	 						self.getFactory().getMemory(),
+	 						null);
+	    		 }
+		     }
+		     
+	    	 checkInheritedInvariants(parent,self);
+	     }
+		return self.getFactory().getMemory().trueINSTANCE;
+	}
+	protected static boolean checkConstraint(Expression exp, ClassDefinition cls, RuntimeObject obj) {
+		DynamicExpressionUnit deu = new DynamicExpressionUnit(obj.getFactory().getMemory().getUnit().getPackages(), exp, cls);
+		ExpressionInterpreter interp = obj.getFactory().getMemory().getCurrentInterpreter();
+		ExpressionCallFrame ecf = new ExpressionCallFrame(interp.getInterpreterContext(), deu, obj);
+		return ecf.eval(interp) == obj.getFactory().getMemory().trueINSTANCE;
+	}
+	
 
 	// Implementation of method equals called as :
 	// extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(element)

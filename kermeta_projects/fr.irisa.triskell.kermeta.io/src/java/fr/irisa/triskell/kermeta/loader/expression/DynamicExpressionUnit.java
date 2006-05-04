@@ -1,4 +1,4 @@
-/* $Id: DynamicExpressionUnit.java,v 1.6 2006-05-03 15:04:23 zdrey Exp $
+/* $Id: DynamicExpressionUnit.java,v 1.7 2006-05-04 15:27:43 jmottu Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpressionUnit.java
 * License : EPL
@@ -51,6 +51,13 @@ public class DynamicExpressionUnit extends KermetaUnit {
     public DynamicExpressionUnit(Hashtable packages) {
         super("", packages);
         this.pushContext();
+    }
+    
+    public DynamicExpressionUnit(Hashtable packages, Expression expression, ClassDefinition context) {
+        super("", packages);
+        this.pushContext();
+        this.expression = expression;
+        this.context = context;
     }
     
     public void resetMessages() {

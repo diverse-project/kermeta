@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.5 2006-03-31 17:12:52 zdrey Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.6 2006-05-04 15:25:13 jmottu Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -25,6 +25,8 @@ import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -41,7 +43,8 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
     final static public Logger internalLog = LogConfigurationHelper.getLogger("ConstraintChecker");
    
     public static final String NAME_ERROR = "An element is unnamed";
-	
+	public static final String CONSTRAINT_ERROR = "The stereotype of a constraint is erroneous";
+    
 	/**
 	 * The KermetaUnit that will be build so that we can constraint check more easily the model
 	 * hosted by the resource stored in <code>inputFile</code>.
@@ -91,7 +94,55 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		builder.current_class = class_definition;
 		return super.visitClassDefinition(class_definition);
 	}
-
+		/**
+	 * Checked constraints :
+	 *   - The stereotype must conform to the right constrained class.
+	 * 
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitConstraint(fr.irisa.triskell.kermeta.language.structure.Constraint)
+	 */
+	public Object visitConstraint(Constraint node) {
+		builder.current_constraint = node;
+		Boolean result = false;
+		// stereotype = Constraint implies container is a ClassDefinition
+		if ((node.getStereotype() == ConstraintType.INV_LITERAL && node.eContainer() instanceof ClassDefinition) ||
+				(node.getStereotype()== ConstraintType.PRE_LITERAL && isPre(node)) ||
+				(node.getStereotype()== ConstraintType.POST_LITERAL && isPost(node)))
+		{
+			result = true;
+		}else{
+			addProblem(CONSTRAINT_ERROR, node);
+		}
+		return result;
+		//return super.visitConstraint(node);
+	}
+/**
+	 * @param node
+	 * @return true if the constrained class is an operation and if the node is one pre of this last 
+	 */
+	private boolean isPre(Constraint node){
+		if(node.eContainer() instanceof Operation){
+			Iterator it = ((Operation)node.eContainer()).getPre().iterator();
+			while(it.hasNext()){
+				if(node == it.next())
+					return true;
+			}
+		}
+		return false;
+	}
+	/**
+	 * @param node
+	 * @return true if the constrained class is an operation and if the node is one post of this last
+	 */
+	private boolean isPost(Constraint node){
+		if(node.eContainer() instanceof Operation){
+			Iterator it = ((Operation)node.eContainer()).getPost().iterator();
+			while(it.hasNext()){
+				if(node == it.next())
+					return true;
+			}
+		}
+		return false;
+	}
 	/**
 	 * Constraints:
 	 *   - an operation cannot be defined twice in the same class 

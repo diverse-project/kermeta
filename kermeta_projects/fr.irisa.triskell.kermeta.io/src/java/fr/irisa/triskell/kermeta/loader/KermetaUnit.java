@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.57 2006-05-03 15:02:43 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.58 2006-05-04 15:27:24 jmottu Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -47,6 +47,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
@@ -252,7 +253,7 @@ public abstract class KermetaUnit {
 	public Property current_property;
 	public Enumeration current_enum;
 	public Assignment current_assignment;
-	
+	public Constraint current_constraint;
 	
 	/**
 	 * The root package of the model being built

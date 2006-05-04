@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.10 2006-05-03 21:17:08 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.11 2006-05-04 15:26:22 jmottu Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -185,6 +186,18 @@ public class KM2EcorePass1 extends KermetaVisitor{
 				else
 					internalLog.warn(loggerTabs + "accept of a getFOwnedOperation returned null !");				
 			}
+			
+			// Create an annotation to hold the operation inv	
+			Iterator itinv = node.getInv().iterator();
+			while(itinv.hasNext()){
+				String invString = (String)new KM2KMTPrettyPrinter().accept((Constraint)itinv.next());
+				ecoreExporter.addAnnotation( 
+					newEClass,
+					KM2Ecore.KMT2ECORE_ANNOTATION,
+					KM2Ecore.KMT2ECORE_ANNOTATION_INV_DETAILS,
+					invString,
+					null);
+			}
 		}
 		catch(Exception e)
 		{
@@ -232,6 +245,30 @@ public class KM2EcorePass1 extends KermetaVisitor{
 					KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS,
 					bodyString,
 					null);	
+		}
+		
+		// Create an annotation to hold the operation pre	
+		Iterator itpre = node.getPre().iterator();
+		while(itpre.hasNext()){
+			String preString = (String)new KM2KMTPrettyPrinter().accept((Constraint)itpre.next());
+			ecoreExporter.addAnnotation( 
+					newEOperation,
+					KM2Ecore.KMT2ECORE_ANNOTATION,
+					KM2Ecore.KMT2ECORE_ANNOTATION_PRE_DETAILS,
+					preString,
+					null);
+		}
+			
+		// Create an annotation to hold the operation post
+		Iterator itpost = node.getPre().iterator();
+		while(itpost.hasNext()){
+			String postString = (String)new KM2KMTPrettyPrinter().accept((Constraint)itpost.next());
+			ecoreExporter.addAnnotation( 
+					newEOperation,
+					KM2Ecore.KMT2ECORE_ANNOTATION,
+					KM2Ecore.KMT2ECORE_ANNOTATION_POST_DETAILS,
+					postString,
+					null);
 		}
 		
 		// Annotations

@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.16 2006-04-05 11:49:10 dvojtise Exp $
+/* $Id: reflection.kmt,v 1.17 2006-05-04 15:22:42 jmottu Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -22,6 +22,7 @@ abstract class Object
 	reference tag : set Tag[0..*]#object
 	operation getMetaClass() : Class is abstract
 	operation container() : Object is abstract
+	operation checkInvariants() : Boolean is abstract
 	operation equals(element : Object) : Boolean is abstract
 	operation isNotEqual(element : Object) : Boolean is abstract
 	operation get(~property : Property) : Object is abstract
@@ -93,10 +94,16 @@ abstract class MultiplicityElement inherits TypedElement
 	attribute lower : Integer
 	attribute upper : UnlimitedNatural
 }
+abstract class Constraint inherits NamedElement
+{
+}
+
 abstract class Operation inherits MultiplicityElement
 {
 	attribute isAbstract : Boolean
-
+	attribute ~pre : set Constraint[0..*]
+	attribute ~post : set Constraint[0..*]
+	
 	reference superOperation : Operation
 	reference owningClass : ClassDefinition#ownedOperation
 	reference typeParameter : set TypeVariable[0..*]
@@ -132,6 +139,8 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	attribute isAbstract : Boolean
 	attribute ownedAttribute : set Property[0..*]#owningClass
 	attribute ownedOperation : set Operation[0..*]#owningClass
+	attribute ~inv : set Constraint[0..*]
+	
 	reference superType : set Class[0..*]
 
 	/** returns all the attributes of this classDefinition including the inherited ones and the derived ones */

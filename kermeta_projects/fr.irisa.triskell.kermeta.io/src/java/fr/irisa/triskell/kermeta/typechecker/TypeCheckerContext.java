@@ -1,4 +1,4 @@
-/* $Id: TypeCheckerContext.java,v 1.15 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: TypeCheckerContext.java,v 1.16 2006-05-04 15:31:37 jmottu Exp $
 * Project : Kermeta (First iteration)
 * File : TypeCheckerContext.java
 * License : EPL
@@ -227,6 +227,16 @@ public class TypeCheckerContext {
 	
 	/**
 	 * Initialize the context with a class definition
+	 */
+	public void init(ClassDefinition cls) {
+		selfClass = cls;
+		selfType = null;
+		contexts = new Stack();
+		pushContext();
+	}
+	
+	/**
+	 * Initialize the context with a DynamicExpressionUnit
 	 */
 	public void init(DynamicExpressionUnit deu) {
 		selfClass = deu.getContext();

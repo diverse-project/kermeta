@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.22 2006-04-03 09:51:27 zdrey Exp $
+/* $Id: structure.kmt,v 1.23 2006-05-04 15:22:31 jmottu Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -25,6 +25,10 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	
 	method container() : kermeta::reflection::Object from kermeta::reflection::Object is do
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
+	end
+	
+	method checkInvariants() : kermeta::standard::Boolean from kermeta::reflection::Object is do
+		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)
 	end
 	
 	method equals(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
@@ -133,6 +137,27 @@ class MultiplicityElement inherits TypedElement, kermeta::reflection::Multiplici
 		do
 			result := visitor.visitMultiplicityElement(self, context)
 		end
+}
+class Constraint inherits NamedElement,kermeta::reflection::Operation, KMStructureVisitable
+{
+	attribute language : ConstraintLanguage
+	attribute stereotype : ConstraintType
+	
+	reference body : kermeta::language::behavior::Expression
+	
+	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
+		do
+			result := visitor.visitConstraint(self, context)
+		end
+}
+enumeration ConstraintLanguage {
+	kermeta;
+	ocl;
+}
+enumeration ConstraintType {
+	~pre;
+    ~post;
+    ~inv;
 }
 class Operation inherits MultiplicityElement, kermeta::reflection::Operation, KMStructureVisitable
 {
@@ -366,6 +391,7 @@ abstract class KMStructureVisitor<ContextType, ResultType>
 	operation visitParameterizedType(node : ParameterizedType, context : ContextType) : ResultType is abstract
 	operation visitModelType(node : ModelType, context : ContextType) : ResultType is abstract
 	operation visitTypeDefinitionContainer(node : TypeDefinitionContainer, context : ContextType) : ResultType is abstract
+	operation visitConstraint(node : Constraint, context : ContextType) : ResultType is abstract
 	
 }
 abstract class KMStructureVisitable
