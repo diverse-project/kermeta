@@ -56,8 +56,8 @@ class Main
     	stdio.writeln("\n>>>>-------------> initializing the model !\n")
         // the UML2 model to be transformed
 //        initialize("../../test/kmt_test_cases/uml2/ClassDiagram.uml2", "../ecore/UML2.ecore")
-//        initialize("../../test/kmt_test_cases/uml2/simpleModel.uml2", "../ecore/UML2.ecore")
-        initialize("../../test/kmt_test_cases/uml2/rts.uml2", "../ecore/UML2.ecore")
+        initialize("../../test/kmt_test_cases/uml2/simpleModel.uml2", "../ecore/UML2.ecore")
+//        initialize("../../test/kmt_test_cases/uml2/rts.uml2", "../ecore/UML2.ecore")
         
     	stdio.writeln("\n>>>>-------------> running Pass 1 !\n")
         // the first Pass creates the KM objects

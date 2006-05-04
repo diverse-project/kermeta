@@ -121,10 +121,6 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 			par ?= output.getValue(e)
 			op.ownedParameter.add(par)
 		}
-		
-		// TODO : manage inheritance from inherited class(es) => GENERALIZATION level
-		
-		// TODO : manage polymorphism (operations with same name) => CLASS level
     	
     	super(visitable)
     end

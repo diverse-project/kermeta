@@ -1,0 +1,351 @@
+/* $Id: polymorphism.kmt,v 1.1 2006-05-04 07:14:14 vmahe Exp $
+ * Creation date: May 3, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "uml2::polymorphism::Polymorphism"
+@mainOperation "main"
+
+package uml2::polymorphism;
+
+require kermeta
+require "Uml2.kmt"
+
+using kermeta::standard
+using kermeta::reflection
+
+/*
+ * The problematic beyond Polymorphism is that Kermeta forbiddes two operations
+ * with the same name, and also forbiddes a property and an operation with the
+ * same name. So we need to process any input UML2 model and rename polymorphic
+ * operations. The difficulty remain in that inheritance transmit operations of
+ * super classes to specific classes,
+ * 
+ * FIRST STEP : extract inheritance families.
+ * All homonyms must be renamed inside a inheritance tree, and distinct families
+ * must not share the same renaming process (no inheritance means no polymorphism)
+ * 
+ * SECOND STEP : detect and class, for each family, polymorph operations.
+ * One name may means as many collections as different signatures exist. One
+ * signature could group many classes.
+ * 
+ * THIRD STEP : renamed operations when more than one signature.
+ * The first signature is let as it, and must be the attribute if exists. Other
+ * names get a increment number (the same for all the classes within a signature
+ * group.
+ */
+
+/** define the choices for processing polymorphism inside a model */
+enumeration Process { prettyprint ; rename ; }
+
+class Polymorphism
+{
+    reference model : uml2::Package
+    reference families : Set<Set<uml2::Class>>
+    
+    reference homonyms : Set<HomonymColl>
+    
+    operation initialize(m : uml2::Package) is do
+    	// load the given UML2 model
+    	model := m
+    	
+    	//initialize storages
+    	families := Set<Set<uml2::Class>>.new
+    end
+    
+    operation pass1() is do
+    	// we first make a family for each Class of the model
+    	model.ownedMember.each{ elem |
+    		if uml2::Class.isInstance(elem) then
+    			var family : Set<uml2::Class> init Set<uml2::Class>.new
+    			var cl : uml2::Class
+    			cl ?= elem
+    			family.add(cl)
+    			families.add(family)
+    		end
+    	}
+    	// we process each generalization to group classes by inheritance
+    	model.ownedMember.each{ elem |
+    		if uml2::Class.isInstance(elem) then
+    			var family : Set<uml2::Class> init Set<uml2::Class>.new
+    			var child : uml2::Class
+    			child ?= elem
+    			// find the family of the current "child"
+    			var childFamily : Set<uml2::Class> init getFamily(child)
+    			
+    			// parents' families join the child family
+    			child.generalization.each{ gen |
+    				var supClass : uml2::Class
+					supClass ?= gen.general
+    				var supFamily : Set<uml2::Class> init getFamily(supClass)
+    				if supFamily != childFamily then
+    					// we join the two families
+    					childFamily.addAll(supFamily)
+    					families.remove(supFamily)
+    				end
+    			}
+    		end
+    	}
+    	// Now, we have got distinct inheritance families of Classes so
+    	// we may process each family to extract polymorphic operations
+    end
+    
+    operation pass2(family : Set<uml2::Class>) is do
+    	// initialize the list of all homonyms (void at the beginning)
+    	// It's a tree of different HomonymColl's which have SignColl's
+    	homonyms := Set<HomonymColl>.new
+    	
+    	family.each{ cl | 
+    		// a family is a set of UML2 classes
+    		cl.ownedAttribute.each{ att |
+				var found : Boolean init false
+				homonyms.each{ homonym | 
+					if homonym.belongsTo(att) then found := true end
+				}
+				if not found then
+					// non referenced signature
+					var homonym : HomonymColl init HomonymColl.new
+					homonym.create(att.name, att)
+					homonyms.add(homonym)
+				end
+			}
+    		cl.ownedOperation.each{ op |
+				var found : Boolean init false
+				homonyms.each{ homonym | 
+					if homonym.belongsTo(op) then found := true end
+				}
+				if not found then
+					// non referenced signature
+					var homonym : HomonymColl init HomonymColl.new
+					homonym.create(op.name, op)
+					homonyms.add(homonym)
+				end
+			}
+    	}
+    	// we obtain a set of attributes/operations names,
+    	// subclassed in signatures.
+    end
+    
+    operation pass3(mode : Process) is do
+    	homonyms.each{ homColl | 
+    		if homColl.list.size > 1 then
+    			// more than one signature for a same name
+    			// means polymorphic attribute/operations
+    			// so we must process the SignColls.isVoid
+    			
+    			if mode == Process.rename then
+    				// the first occurence name remains
+    				// and other occurrences are postfixed
+    				// with ther rank number
+    				var i : Integer init 0
+    				homColl.list.each{ signColl | 
+    					// we let unchanged  the first occurence
+    					if i > 0 then
+    						signColl.list.each{ elem | 
+    							if uml2::Property.isInstance(elem) then
+    								// it's an attribute
+    								var att : uml2::Property
+    								att ?= elem
+    								att.name.append(i.toString)
+    							else
+    								// it's an operation
+    								var op : uml2::Operation
+    								op ?= elem
+    								op.name.append(i.toString)
+    							end
+    						}
+    					end
+    					i := i + 1
+    				}
+    			else
+    				// prettyprint of found polymorphismes
+    				stdio.writeln("Polymorphism found on \"" + homColl.name + "\" name :")
+    				homColl.list.each{ signColl | 
+    					stdio.writeln("   " + signColl.signature + "       found in the classes :")
+    					signColl.list.each{ element | 
+							if uml2::Property.isInstance(element) then
+								// it's an attribute
+								var att : uml2::Property
+								att ?= element
+								stdio.writeln("     - "+ att.class_.name )
+							else
+								// it's an operation
+								var op : uml2::Operation
+								op ?= element
+								stdio.writeln("     - "+ op.class_.name )
+							end
+    					}
+    				}
+    			end
+    		end
+    	}
+    end
+    
+    operation getFamily(cl : uml2::Class) : Set<uml2::Class> is do
+    	// FIXME : could optimization be done with iterators (stop when found) ???
+    	result := void
+		families.each{ family |
+			var found : Boolean init false
+			family.each{ clas |
+				if clas.equals(cl) then
+					found := true
+				end
+			}
+			if found then result := family end
+		}
+    end
+    
+    operation processPolymorphism(mode : Process) is do
+    	// we separe inheritance trees
+    	pass1()
+    	
+    	//DEBUG
+    	var m : Object init model
+    	var f : Object init families
+    	
+    	// then we process each family
+    	families.each{ family |
+    		// the pass2 dispatches the operation
+    		// and attributes of the family
+    		pass2(family)
+    		// the pass3 processes the result of pass2
+    		pass3(mode)
+    	}
+    end
+    
+    operation main() : Void is do 
+        // only for tests purpose
+        
+        stdio.writeln("\n>>>>----> loading the model")
+    	// load the given UML2 resource
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createResource("../../test/kmt_test_cases/uml2/PolymorphicTestModel.uml2", "../ecore/UML2.ecore")
+    	inputResource.load()
+    	
+    	// "instances" only gives the main diagramm package for the targeted code tree
+    	var mod : uml2::Package
+    	mod ?= inputResource.instances.one
+    	// we get the first package
+    	mod ?= mod.ownedMember.one
+    	initialize(mod)
+    	
+        stdio.writeln("\n>>>>----> prettyprinting polymorphic operations")
+    	processPolymorphism(Process.prettyprint)
+        
+        stdio.writeln("\n>>>>----> renaming polymorphs in the model")
+    	processPolymorphism(Process.rename)
+    	
+        stdio.writeln("\n>>>>----> saving the renamed model")
+    	inputResource.save()
+    end
+}
+
+/**
+ * This class collect all the homonyms of an operation which have the same signature.
+ * From a correctly formed UML2 model, each item of the collection relies
+ * to a different class.
+ */
+class SignColl {
+	reference list : Set<uml2::Element>
+	reference name : String
+	reference signature : String
+	
+	operation create(opName : String, element : uml2::Element) is do
+		name := opName
+		list := Set<uml2::Element>.new
+		list.add(element)
+		signature := getSignature(element)
+	end
+	
+	operation getSignature(element : uml2::Element) : String is do
+		result := ""
+		if uml2::StructuralFeature.isInstance(element) then
+			// its an attribute
+			var prop : uml2::Property
+			prop ?= element
+			result.append(prop.name + " : " + prop.type.name)
+		else
+			// its an operation
+			var op : uml2::Operation
+			op ?= element
+			result.append(op.name +"(")
+			op.ownedParameter.each{ p | 
+				result.append(" " + p.type.name)
+			}
+			result.append(" )")
+			if not op.type.isVoid then
+				result.append(" : "+ op.type.name)
+			end
+		end
+	end
+	/** test the signature and add the Element if it has the good signature */
+	operation belongsTo(element : uml2::Element) : Boolean is do
+		result := false
+		if signature == getSignature(element) then
+			result := true
+			list.add(element)
+		end
+	end
+}
+
+/**
+ * This class collect all the homonyms of an operation which have the same name.
+ * Inside this colection of Elements with the same name, operations are dispatched
+ * between SignColl lists, depending upon their signature.
+ */
+class HomonymColl {
+	reference list : OrderedSet<SignColl>
+	reference name : String
+	
+	operation create(opName : String, element : uml2::Element) is do
+		name := opName
+		list := OrderedSet<SignColl>.new
+		name := getName(element)
+		var signColl : SignColl init SignColl.new
+		signColl.create(name, element)
+		list.add(signColl)
+	end
+	
+	operation getName(element : uml2::Element) : String is do
+		result := ""
+		if uml2::StructuralFeature.isInstance(element) then
+			// its an attribute
+			var prop : uml2::Property
+			prop ?= element
+			result.append(prop.name)
+		else
+			// its an operation
+			var op : uml2::Operation
+			op ?= element
+			result.append(op.name)
+		end
+	end
+	/** test the signature and add the Element if it has the good name */
+	operation belongsTo(element : uml2::Element) : Boolean is do
+		result := false
+		if name == getName(element) then
+			result := true
+			// we must classify the Element upon its signature
+			var found : Boolean init false
+			list.each{ sign | 
+				if sign.belongsTo(element) then found := true end
+			}
+			if not found then
+				// non referenced signature
+				var sign : SignColl init SignColl.new
+				sign.create(name, element)
+				if uml2::Property.isInstance(element) then
+					// the attribute collection must be the first
+					// (we choosed to let attributes unchanged
+					// because they are structural in Kermeta
+					// against the behavior which can be changed.
+					list.addAt(0, sign)
+				else
+					list.add(sign)
+				end
+			end
+		end
+	end
+}
