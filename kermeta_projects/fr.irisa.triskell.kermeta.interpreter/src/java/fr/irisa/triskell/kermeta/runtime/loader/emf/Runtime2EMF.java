@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.26 2006-05-04 15:15:28 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.27 2006-05-04 15:50:09 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -324,26 +324,13 @@ public class Runtime2EMF {
         
         internalLog.debug("createEObjectFromRuntimeObject for RuntimeObject: " + getRONameProp(rObject) + " "+ rObject  + rObject.getProperties());
         EClass eclass = null;
-        if (classifier == null)
-        {
-            eclass = this.getEClassFromFQualifiedName(kqname, this.unit.getMetaModelResource());
-        }
-        else
-        {
-        	if(((EClass)classifier).isAbstract() || ((EClass)classifier).isInterface()){
-        		internalLog.debug("   The type for the new EObject is not concrete !");     
-        		
-        		eclass = this.getEClassFromFQualifiedName(kqname, classifier.eResource());
-        		//eclass = this.getEClassFromFQualifiedName(kqname, this.metaModelResource, unit);
-        	}
-        	else
-        	{
-        		//eclass = (EClass)classifier; // in fact this was wrong! the given classifier is the
-        		// static type of the feature to which given object "belongs" (instance of this type or one of
-        		// its subtypes), not the real type of the object.
-        		eclass = this.getEClassFromFQualifiedName(kqname, classifier.eResource());
-        	}
-        }
+        Resource metamodel_resource = null;
+        // TODO : check if this test is useful!
+        if (classifier == null) metamodel_resource = this.unit.getMetaModelResource();
+        else metamodel_resource = classifier.eResource();
+        
+        eclass = this.getEClassFromFQualifiedName(kqname, metamodel_resource);
+        
         if (eclass != null) // If we did not find the Eclass (it means that kqname is the name of a primitive type)
         {
             result = EcoreUtil.create(eclass);
