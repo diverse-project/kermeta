@@ -1,0 +1,127 @@
+/* $Id: 041_testDynamicExpression.main.kmt,v 1.1 2006-05-05 21:50:15 dvojtise Exp $
+ * Creation date: May 5, 2006
+ * License: EPL
+ * Copyright: INRIA / IRISA
+ * Authors: Didier Vojtisek
+ */
+@mainClass "testDynamicExpression::TestDynamicExpression"
+@mainOperation "test1"
+
+
+package testDynamicExpression;
+
+
+require kermeta
+
+using kermeta::interpreter
+using kermeta::utils
+using kermeta::standard
+
+class TestDynamicExpression inherits kermeta::kunit::Test 
+{
+    operation test1() : Void is do 
+        var tester : TesterClass1 init TesterClass1.new
+        tester.testDynExpOnSelf
+    end
+    
+    operation test2() : Void is do     
+       var tester2 : TesterClass1 init TesterClass1.new
+       tester2.testDynExpOnSelf2
+    end
+    
+    operation test3() : Void is do 
+        var tester3 : TesterClass1 init TesterClass1.new
+        tester3.testDynExpOnVariable
+    end
+   
+   
+   /** this test that a wrong dynamic expresion is correctly reported */
+   operation test5() : Void is do 
+        var dynExpr : DynamicExpression init DynamicExpression.new
+        dynExpr.initializeDefaults()
+        var res : Boolean init dynExpr.parse("anOperationthatdoesnexist")
+        assertFalseWithMsg(res,"the wrong expression was not correctly detected and did not return false")
+        dynExpr.errors.each{ kerror | stdio.writeln(kerror.toString)}
+        assertTrueWithMsg(dynExpr.errors.size>0,"parse did not report any error message for this wrong expression")
+        var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+        //params.put("a", self)
+        dynExpr.execute(self, params)
+    end 
+    
+    
+    
+}
+
+/**  */
+class TesterClass1 inherits kermeta::kunit::Test
+{
+	attribute wasTestTotoLaunched : Boolean
+	
+	operation TestToto() is do
+        stdio.writeln("I launched TestToto!")
+        self.wasTestTotoLaunched := true
+    end
+
+    operation testDynExpOnSelf() is do
+        var dynExpr : DynamicExpression init DynamicExpression.new
+        wasTestTotoLaunched := false
+        dynExpr.initializeDefaults()
+
+        self.getMetaClass.ownedOperation.select{op| not( op.name.indexOf("Test")==-1) and op.name.indexOf("All")==-1}
+			.collect{op|op.name}.each{opName|
+                    stdio.writeln("trying to launch self."+opName)
+                    dynExpr.initializeDefaults
+                    // set the type of self in order to parse correctly
+                    dynExpr.selfClass ?= self.getMetaClass.typeDefinition
+                    var res : Boolean init dynExpr.parse("self."+opName)
+                    if not res then stdio.writeln("parse failed...") end
+                    dynExpr.errors.each{ kerror | stdio.writeln(kerror.toString)}
+                    var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+                    dynExpr.execute(self, params)
+            }
+        // verify that the dynamic expression was correctly launched
+        assertTrueWithMsg(wasTestTotoLaunched, "TesterClass didn't succed to launch its dynamic expression on self")
+    end
+    operation testDynExpOnSelf2() is do
+        var dynExpr : DynamicExpression init DynamicExpression.new
+        wasTestTotoLaunched := false
+        dynExpr.initializeDefaults()
+
+        self.getMetaClass.ownedOperation.select{op| not( op.name.indexOf("Test")==-1) and op.name.indexOf("All")==-1}
+			.collect{op|op.name}.each{opName|
+                    stdio.writeln("trying to launch "+opName+ " on self")
+                    dynExpr.initializeDefaults
+                    // set the type of self in order to parse correctly
+                    dynExpr.selfClass ?= self.getMetaClass.typeDefinition
+                    var res : Boolean init dynExpr.parse(opName)
+                    if not res then stdio.writeln("parse failed...") end
+                    dynExpr.errors.each{ kerror | stdio.writeln(kerror.toString)}
+                    var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+                    dynExpr.execute(self, params)
+            }
+        // verify that the dynamic expression was correctly launched
+        assertTrueWithMsg(wasTestTotoLaunched, "TesterClass didn't succed to launch its dynamic expression on self")
+    end
+	operation testDynExpOnVariable() is do
+        var dynExpr : DynamicExpression init DynamicExpression.new
+        wasTestTotoLaunched := false
+        dynExpr.initializeDefaults()
+
+        self.getMetaClass.ownedOperation.select{op| not( op.name.indexOf("Test")==-1) and op.name.indexOf("All")==-1}
+			.collect{op|op.name}.each{opName|
+                    stdio.writeln("trying to launch "+opName+ " on a variable ")
+                    dynExpr.initializeDefaults
+                    // set the type of self in order to parse correctly
+                    dynExpr.selfClass ?= self.getMetaClass.typeDefinition
+                    dynExpr.formalParameters.put("a", TesterClass1)
+                    var res : Boolean init dynExpr.parse("a."+opName)
+                    if not res then stdio.writeln("parse failed...") end
+                    dynExpr.errors.each{ kerror | stdio.writeln(kerror.toString)}
+                    var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+                    params.put("a", self)
+                    dynExpr.execute(self, params)
+            }
+        // verify that the dynamic expression was correctly launched
+        assertTrueWithMsg(wasTestTotoLaunched, "TesterClass didn't succed to launch its dynamic expression on self")
+    end
+}

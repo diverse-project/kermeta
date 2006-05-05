@@ -1,4 +1,10 @@
-
+/* $Id: 041_testSimpleEval.main.kmt,v 1.2 2006-05-05 21:50:15 dvojtise Exp $
+ * Creation date: May 5, 2006
+ * License: EPL
+ * Copyright: INRIA / IRISA
+ * Authors: Didier Vojtisek
+ */
+ 
 @mainClass "testSimpleEval::TestEx"
 @mainOperation "test1"
 
