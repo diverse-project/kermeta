@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.36 2006-05-04 15:15:28 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.37 2006-05-05 11:11:39 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -35,6 +35,7 @@ import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
@@ -104,8 +105,9 @@ public class EMF2Runtime {
 	}
 	/**
 	 * recursive part of the findDependentResources method
-	 * @param list
-	 * @param resource
+	 * @param list A list&lt;Resource&gt; that contains the resources of which 
+	 * the given <code>resource</code> depends.
+	 * @param resource The emf resource that EMF2Runtime has to load. 
 	 */
 	protected void findDependentResources(EList list, Resource resource)
 	{
@@ -126,30 +128,51 @@ public class EMF2Runtime {
 			    while (it.hasNext())
 			    {
 			        EStructuralFeature feature = (EStructuralFeature)it.next();
+			        // Handle the particular case of an EObject which type is EClass : 
+			        //    If an EClass has (accidentally) an instanceClassName value (which is illegal?), set it to null
+			        //    Indeed, such a case (which leads to a malformed model) can appear when user load an ecore model created 
+			        //    with EMF reflexive editor, which sometimes creates EClass elements with an 
+			        //    instanceClassName that equals "". I guess this is a bug of EMF editor, but not sure :)
+			        //    An instanceClassName=="" leads to a ClassNotFoundException since EMF underlying code looks
+			        //    for a java class which name is thus "" -> unconsistent!
+			        if (eobj instanceof EClass)
+			        {
+			        	 String instance_class_name = ((EClass)eobj).getInstanceClassName();
+			        	 if (instance_class_name != null && instance_class_name.length() == 0)
+			        		 ((EClass)eobj).setInstanceClassName(null);
+			        }
+			        
+			        // Get the feature value of given object (the type of this feature value is either an EList or an EObject)  
 			        Object fvalue = eobj.eGet(feature);
+			        // If this feature is an EList,
 			        if (fvalue instanceof EList)
 			        {
-			        	//rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
 			        	Iterator it2 = ((EList)fvalue).iterator();
-			    	    // Transform the EObjects into RuntimeObject and add them in our collection
+			    	    // Then, for each object of this EList-feature, add its hosting resource 
+			        	// into the list of dependent resources
 			    	    while (it2.hasNext())
 			    	    {
 			    	        Object sfeature = it2.next();
 			    	        if (sfeature instanceof EObject)
 			    	        	addObjectResourceToList(list,(EObject)sfeature);
-			    	        // ignore other cases (Datatypes)
 			    	    }
 			        }
-			        // Get the RO-repr of this EObject
+			        //If this feature is an EObject, add its hosting resource into the list of dependent resources.
 			        else if (fvalue instanceof EObject)
 			        {   
 			        	addObjectResourceToList(list,(EObject)fvalue);			        	
 			        }
-			        // ignore other cases (Datatypes)
 			    }
 			}
 		}
 	}
+	
+	/**
+	 * Adds the resource of the given EObject (using obj.eResource() call) to the
+	 * list <code>list</code>
+	 * @param list The list&lt;Resource&gt;
+	 * @param obj The object for which we are looking the hosting Resource
+	 */
 	protected void addObjectResourceToList(EList list, EObject obj)
 	{
 		if((obj.eResource() != null) && (!list.contains(obj.eResource())))
@@ -161,10 +184,18 @@ public class EMF2Runtime {
     	}
 	}
 	
+	/**
+	 * Create all the runtime objects corresponding to the elements hosted by the 
+	 * Resource (EMF2Runtime.resource). This method also creates the runtime objects 
+	 * for the EObjects used/referenced in the resource, but that are hosted by 
+	 * external resources
+	 */
 	protected void createRuntimeObjects()
 	{		
+		// Find all the resources on which our resource depend.
 		EList resList = findDependentResources(resource);
 		Iterator resIt = resList.iterator();
+		// For each resource, create the ROs for its hosted EObjects.
 		while(resIt.hasNext())
 		{
 			Resource res = (Resource)resIt.next();
@@ -199,6 +230,18 @@ public class EMF2Runtime {
 			}
 		}
 	}
+	
+	/**
+	 * Load the EMFRuntimeUnit. This consists on first creating all the RuntimeObjects 
+	 * necessary for the interpreter, then, loading the metamodel of the loaded model
+	 * if user did not provide one (when calling the load method on an EMFResource in 
+	 * the kermeta side), and, finally, fill the "contentMap" (a RuntimeObject) attribute of
+	 * the RuntimeUnit that is the RuntimeObject that correspond to the object that will be 
+	 * "sent" to the user (see EMFResource.contentMap attribute in Kermeta side -- 
+	 * persistence/resource.kmt). 
+	 * 
+	 * @see fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit
+	 */
 	public void loadunit()
 	{
 		try {
@@ -233,10 +276,12 @@ public class EMF2Runtime {
 			    new_runtime_objects.add(rObject);
 			    
 			}
-			// Now that RO are populated, we can add the instances
+			// Now that RO are populated, we can fill the contentMap attribute of RuntimeUnit.
+			// contentMap is a RuntimeObject that will be "sent" to the Kermeta side, and that contains
+			// a set of derived properties that can be used by the user to retrieve the EObjects hosted
+			// by the resource that we loaded.
 			Iterator nit = this.runtime_objects_map.keySet().iterator();
-			//Iterator nit = new_runtime_objects.iterator();
-		    // only add the roots
+			// 
 			while (nit.hasNext())
 			{ 	
 			    eObject = (EObject)nit.next();
@@ -293,6 +338,12 @@ public class EMF2Runtime {
         
 	}
 	
+	/**
+	 * Set the RuntimeObject corresponding to the given primitive type value.
+	 * @param unit
+	 * @param fvalue
+	 * @return
+	 */
     public RuntimeObject setRuntimeObjectForPrimitiveTypeValue(EMFRuntimeUnit unit, Object fvalue)
     {
         RuntimeObjectFactory rofactory = unit.getContentMap().getFactory();
@@ -322,6 +373,11 @@ public class EMF2Runtime {
     	else if (fvalue instanceof Character) 
     	{    
     		rovalue = fr.irisa.triskell.kermeta.runtime.basetypes.Character.create(((Character)fvalue).charValue(), rofactory);    		
+    	}
+    	else if (fvalue instanceof Class) // This case occurs if user has in its ecore model a DataType relating to a java Class
+    	{
+    		internalLog.warn("TODO : The type of <"+fvalue+"> has not been handled yet. Replaced by Void. "+fvalue.getClass());
+    		// rovalue = // create a runtimeObject that would be able to embedd a java class?
     	}
     	else // should never happen
     	{

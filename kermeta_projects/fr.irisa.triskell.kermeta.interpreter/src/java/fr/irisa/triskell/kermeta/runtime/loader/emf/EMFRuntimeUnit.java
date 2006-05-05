@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.14 2006-05-04 15:27:04 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.15 2006-05-05 11:11:39 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -132,12 +132,9 @@ public class EMFRuntimeUnit extends RuntimeUnit {
      */
     public Resource loadMetaModelAsEcore(String p_metamodel_uri)
     {        
-        String unit_uri = contentMap.getFactory().getMemory().getUnit().getUri();
-        String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
-        // resolve uri
-        internalLog.debug("URI : " + unit_uripath +  "; meta : " + p_metamodel_uri);
-    	URI u = this.resolveURI(p_metamodel_uri, unit_uripath);
-        // load resource
+        internalLog.debug("URI : " + contentMap.getFactory().getMemory().getUnit().getUri() +  "; meta : " + p_metamodel_uri);
+    	URI u = createURI(p_metamodel_uri);
+        // Load resource
     	logEMFRegistryContent();
     	Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
     	ResourceSet resource_set = new ResourceSetImpl();
@@ -183,7 +180,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			
 			//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
 			ResourceSet resourceset = new ResourceSetImpl();
-
 	        
 	    	if(ENABLE_EMF_DIAGNOSTIC) {
 		    	Map map = URIConverterImpl.URI_MAP;
@@ -225,7 +221,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    		resource = (XMLResource)resourceset.getResource(u, true); // on demand load ...
 	    	}
 	    	
-	    	// finding unresolved proxies also resolves all the content, so a getAllcontent on the resource set now work !
+	    	// Finding unresolved proxies also resolves all the content, so a getAllcontent on the resource set now work !
 	    	Map unresolvedReferences = EcoreUtil.UnresolvedProxyCrossReferencer.find(resourceset);;
 			Iterator unresolvedMapIt = unresolvedReferences.entrySet().iterator();
 			while(unresolvedMapIt.hasNext()) {
@@ -357,7 +353,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         }
         
         // Create an URI for the resource that is going to be saved
-        URI u = createURI(file_path);
+        URI u = createURI(file_path); 
         KermetaUnit.internalLog.info("URI created for model to save : "+u);
         
         // Add the extension of the file to save into the resource registry, so that EMF won't complain
@@ -415,9 +411,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 		Registry registry = resourceset.getPackageRegistry();
      	// metamodel_uri!
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
-		String unit_uri = this.getContentMap().getFactory().getMemory().getUnit().getUri();
-	    String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
-	    URI u = this.resolveURI(metamodel_uri, unit_uripath);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
+	    URI u = createURI(metamodel_uri);
 		Resource resource = resourceset.createResource(u);
 		try 
 		{
@@ -561,7 +556,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	public URI createURI(String file_path)
 	{
 		String unit_uri = this.getContentMap().getFactory().getMemory().getUnit().getUri();
-    	String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1); 
+    	String unit_uripath = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1);
     	URI u = this.resolveURI(file_path, unit_uripath);
     	return u;
 	}

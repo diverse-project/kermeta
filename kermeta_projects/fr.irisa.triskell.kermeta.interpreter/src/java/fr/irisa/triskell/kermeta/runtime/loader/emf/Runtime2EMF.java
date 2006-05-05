@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.27 2006-05-04 15:50:09 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.28 2006-05-05 11:11:39 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -325,10 +325,7 @@ public class Runtime2EMF {
         internalLog.debug("createEObjectFromRuntimeObject for RuntimeObject: " + getRONameProp(rObject) + " "+ rObject  + rObject.getProperties());
         EClass eclass = null;
         Resource metamodel_resource = null;
-        // TODO : check if this test is useful!
-        if (classifier == null) metamodel_resource = this.unit.getMetaModelResource();
-        else metamodel_resource = classifier.eResource();
-        
+        metamodel_resource = this.unit.getMetaModelResource(); // equiv. to classifier.eResource provided it classifier!=null :-P
         eclass = this.getEClassFromFQualifiedName(kqname, metamodel_resource);
         
         if (eclass != null) // If we did not find the Eclass (it means that kqname is the name of a primitive type)
