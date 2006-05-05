@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kermeta" nsURI="./framework.ecore" nsPrefix="kermeta">
-  <eSubpackages name="standard">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kermeta" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km" nsPrefix="kermeta">
+  <eSubpackages name="standard" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//standard" nsPrefix="standard">
     <eClassifiers xsi:type="ecore:EClass" name="Void">
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * The class Void &#xD;&#xA; * By convention it is a sub-type of everything&#xD;&#xA; */"/>
@@ -960,7 +960,7 @@
       </eOperations>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="language">
+  <eSubpackages name="language" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//language" nsPrefix="language">
     <eClassifiers xsi:type="ecore:EClass" name="ReflectiveCollection" eSuperTypes="//standard/Set">
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * ReflectiveCollection&#xD;&#xA; */"/>
@@ -1048,7 +1048,7 @@
         <eParameters name="index" eType="//standard/Integer"/>
       </eOperations>
     </eClassifiers>
-    <eSubpackages name="structure">
+    <eSubpackages name="structure" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//language/structure" nsPrefix="structure">
       <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
       <eClassifiers xsi:type="ecore:EClass" name="Object" eSuperTypes="//reflection/Object //language/structure/KMStructureVisitable">
         <eOperations name="getMetaClass" eType="//reflection/Class">
@@ -1064,6 +1064,14 @@
             <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)&#xA;end"/>
           </eAnnotations>
           <eAnnotations source="KermetaSuperOperations" references="//reflection/Object/container">
+            <details key="SuperOperation" value="kermeta::reflection::Object"/>
+          </eAnnotations>
+        </eOperations>
+        <eOperations name="checkInvariants" eType="//standard/Boolean">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaSuperOperations" references="//reflection/Object/checkInvariants">
             <details key="SuperOperation" value="kermeta::reflection::Object"/>
           </eAnnotations>
         </eOperations>
@@ -1092,7 +1100,7 @@
           <eAnnotations source="KermetaSuperOperations" references="//reflection/Object/get">
             <details key="SuperOperation" value="kermeta::reflection::Object"/>
           </eAnnotations>
-          <eParameters name="property" eType="//reflection/Property"/>
+          <eParameters name="~property" eType="//reflection/Property"/>
         </eOperations>
         <eOperations name="set">
           <eAnnotations source="kermeta">
@@ -1101,7 +1109,7 @@
           <eAnnotations source="KermetaSuperOperations" references="//reflection/Object/set">
             <details key="SuperOperation" value="kermeta::reflection::Object"/>
           </eAnnotations>
-          <eParameters name="property" eType="//reflection/Property"/>
+          <eParameters name="~property" eType="//reflection/Property"/>
           <eParameters name="element" eType="//reflection/Object"/>
         </eOperations>
         <eOperations name="isSet" eType="//language/structure/Boolean">
@@ -1111,7 +1119,7 @@
           <eAnnotations source="KermetaSuperOperations" references="//reflection/Object/isSet">
             <details key="SuperOperation" value="kermeta::reflection::Object"/>
           </eAnnotations>
-          <eParameters name="property" eType="//reflection/Property"/>
+          <eParameters name="~property" eType="//reflection/Property"/>
         </eOperations>
         <eOperations name="unset">
           <eAnnotations source="kermeta">
@@ -1120,7 +1128,7 @@
           <eAnnotations source="KermetaSuperOperations" references="//reflection/Object/unset">
             <details key="SuperOperation" value="kermeta::reflection::Object"/>
           </eAnnotations>
-          <eParameters name="property" eType="//reflection/Property"/>
+          <eParameters name="~property" eType="//reflection/Property"/>
         </eOperations>
         <eOperations name="oid" eType="//language/structure/Integer">
           <eAnnotations source="kermeta">
@@ -1132,7 +1140,7 @@
         </eOperations>
         <eOperations name="toString" eType="//language/structure/String">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := &quot;[&quot;.plus(self.getMetaClass.classDefinition.qualifiedName).plus(&quot;:&quot;).plus(self.oid.toString).plus(&quot;]&quot;)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := &quot;[&quot;.plus(self.getMetaClass.typeDefinition.qualifiedName).plus(&quot;:&quot;).plus(self.oid.toString).plus(&quot;]&quot;)&#xA;end"/>
           </eAnnotations>
           <eAnnotations source="KermetaSuperOperations" references="//reflection/Object/toString">
             <details key="SuperOperation" value="kermeta::reflection::Object"/>
@@ -1165,7 +1173,39 @@
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
       <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
-      <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//language/structure/Type //reflection/Class //language/structure/KMStructureVisitable">
+      <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" eSuperTypes="//language/structure/Type //reflection/ParameterizedType //language/structure/KMStructureVisitable">
+        <eOperations name="acceptKMStructureVisitor">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := visitor.visitParameterizedType(self, context)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaSuperOperations" references="//language/structure/KMStructureVisitable/acceptKMStructureVisitor">
+            <details key="SuperOperation" value="kermeta::language::structure::KMStructureVisitable"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaTypeParameters">
+            <details key="ContextType" value="ContextType"/>
+            <details key="ResultType" value="ResultType"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="//language/structure/KMStructureVisitor"/>
+          <eParameters name="context"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="//language/structure/ParameterizedType //reflection/ModelType //language/structure/KMStructureVisitable">
+        <eOperations name="acceptKMStructureVisitor">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := visitor.visitModelType(self, context)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaSuperOperations" references="//language/structure/KMStructureVisitable/acceptKMStructureVisitor">
+            <details key="SuperOperation" value="kermeta::language::structure::KMStructureVisitable"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaTypeParameters">
+            <details key="ContextType" value="ContextType"/>
+            <details key="ResultType" value="ResultType"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="//language/structure/KMStructureVisitor"/>
+          <eParameters name="context"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//language/structure/ParameterizedType //reflection/Class //language/structure/KMStructureVisitable">
         <eOperations name="new" eType="//reflection/Object">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := extern fr::irisa::triskell::kermeta::runtime::language::Class.newObject(self)&#xA;end"/>
@@ -1199,7 +1239,7 @@
           <eAnnotations source="KermetaSuperOperations" references="//reflection/Type/isInstance">
             <details key="SuperOperation" value="kermeta::reflection::Type"/>
           </eAnnotations>
-          <eParameters name="object" eType="//language/structure/Object"/>
+          <eParameters name="object" eType="//reflection/Object"/>
         </eOperations>
         <eOperations name="isSubType" eType="//language/structure/Boolean">
           <eAnnotations source="kermeta">
@@ -1217,7 +1257,7 @@
           <eAnnotations source="KermetaSuperOperations" references="//language/structure/Object/equals">
             <details key="SuperOperation" value="kermeta::language::structure::Object"/>
           </eAnnotations>
-          <eParameters name="other" eType="//language/structure/Object"/>
+          <eParameters name="other" eType="//reflection/Object"/>
         </eOperations>
         <eOperations name="acceptKMStructureVisitor">
           <eAnnotations source="kermeta">
@@ -1249,6 +1289,25 @@
           <eParameters name="visitor" eType="//language/structure/KMStructureVisitor"/>
           <eParameters name="context"/>
         </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="//language/structure/NamedElement //reflection/Operation //language/structure/KMStructureVisitable">
+        <eOperations name="acceptKMStructureVisitor">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := visitor.visitConstraint(self, context)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaSuperOperations" references="//language/structure/KMStructureVisitable/acceptKMStructureVisitor">
+            <details key="SuperOperation" value="kermeta::language::structure::KMStructureVisitable"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaTypeParameters">
+            <details key="ContextType" value="ContextType"/>
+            <details key="ResultType" value="ResultType"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="//language/structure/KMStructureVisitor"/>
+          <eParameters name="context"/>
+        </eOperations>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="language" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="stereotype" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//language/behavior/Expression"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="//language/structure/MultiplicityElement //reflection/Operation //language/structure/KMStructureVisitable">
         <eOperations name="acceptKMStructureVisitor">
@@ -1298,14 +1357,46 @@
           <eParameters name="visitor" eType="//language/structure/KMStructureVisitor"/>
           <eParameters name="context"/>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="getterbody" eType="//language/behavior/Expression" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="setterbody" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="getterBody" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="setterBody" eType="//language/behavior/Expression" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" eSuperTypes="//language/structure/Object //reflection/TypeContainer"/>
-      <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="//language/structure/TypeContainer //language/structure/TypeDefinition //reflection/ClassDefinition //language/structure/KMStructureVisitable">
+      <eClassifiers xsi:type="ecore:EClass" name="GenericTypeDefinition" eSuperTypes="//language/structure/TypeDefinition //reflection/GenericTypeDefinition //language/structure/KMStructureVisitable">
+        <eOperations name="acceptKMStructureVisitor">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := visitor.visitGenericTypeDefinition(self, context)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaSuperOperations" references="//language/structure/KMStructureVisitable/acceptKMStructureVisitor">
+            <details key="SuperOperation" value="kermeta::language::structure::KMStructureVisitable"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaTypeParameters">
+            <details key="ContextType" value="ContextType"/>
+            <details key="ResultType" value="ResultType"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="//language/structure/KMStructureVisitor"/>
+          <eParameters name="context"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="//language/structure/TypeContainer //language/structure/GenericTypeDefinition //reflection/ClassDefinition //language/structure/KMStructureVisitable">
         <eOperations name="acceptKMStructureVisitor">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := visitor.visitClassDefinition(self, context)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaSuperOperations" references="//language/structure/KMStructureVisitable/acceptKMStructureVisitor">
+            <details key="SuperOperation" value="kermeta::language::structure::KMStructureVisitable"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaTypeParameters">
+            <details key="ContextType" value="ContextType"/>
+            <details key="ResultType" value="ResultType"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="//language/structure/KMStructureVisitor"/>
+          <eParameters name="context"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="ModelTypeDefinition" eSuperTypes="//language/structure/GenericTypeDefinition //language/structure/TypeDefinitionContainer //reflection/ModelTypeDefinition //language/structure/KMStructureVisitable">
+        <eOperations name="acceptKMStructureVisitor">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := visitor.visitModelTypeDefinition(self, context)&#xA;end"/>
           </eAnnotations>
           <eAnnotations source="KermetaSuperOperations" references="//language/structure/KMStructureVisitable/acceptKMStructureVisitor">
             <details key="SuperOperation" value="kermeta::language::structure::KMStructureVisitable"/>
@@ -1467,10 +1558,16 @@
           <eParameters name="context"/>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="SelfType" eSuperTypes="//language/structure/Type //reflection/SelfType //language/structure/KMStructureVisitable">
+      <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer" eSuperTypes="//language/structure/NamedElement //reflection/TypeDefinitionContainer //language/structure/KMStructureVisitable">
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/**&#xD;&#xA;class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable&#xD;&#xA;{&#xD;&#xA; method acceptKMStructureVisitor&lt;ContextType, ResultType>(visitor : KMStructureVisitor&lt;ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is&#xD;&#xA;  do&#xD;&#xA;   result := visitor.visitSelfType(self, context)&#xD;&#xA;  end&#xD;&#xA;} */"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/**&#xD;&#xA;class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable&#xD;&#xA;{&#xD;&#xA; method acceptKMStructureVisitor&lt;ContextType, ResultType>(visitor : KMStructureVisitor&lt;ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is&#xD;&#xA;  do&#xD;&#xA;   result := visitor.visitSelfType(self, context)&#xD;&#xA;  end&#xD;&#xA;} */"/>
+        </eAnnotations>
         <eOperations name="acceptKMStructureVisitor">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := visitor.visitSelfType(self, context)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := visitor.visitTypeDefinitionContainer(self, context)&#xA;end"/>
           </eAnnotations>
           <eAnnotations source="KermetaSuperOperations" references="//language/structure/KMStructureVisitable/acceptKMStructureVisitor">
             <details key="SuperOperation" value="kermeta::language::structure::KMStructureVisitable"/>
@@ -1483,7 +1580,7 @@
           <eParameters name="context"/>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="//language/structure/NamedElement //reflection/Package //language/structure/KMStructureVisitable">
+      <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="//language/structure/TypeDefinitionContainer //reflection/Package //language/structure/KMStructureVisitable">
         <eOperations name="acceptKMStructureVisitor">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := visitor.visitPackage(self, context)&#xA;end"/>
@@ -1721,13 +1818,6 @@
           <eParameters name="node" eType="//language/structure/NamedElement"/>
           <eParameters name="context"/>
         </eOperations>
-        <eOperations name="visitSelfType">
-          <eAnnotations source="kermeta">
-            <details key="isAbstract" value="true"/>
-          </eAnnotations>
-          <eParameters name="node" eType="//language/structure/SelfType"/>
-          <eParameters name="context"/>
-        </eOperations>
         <eOperations name="visitPackage">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
@@ -1777,6 +1867,48 @@
           <eParameters name="node" eType="//language/structure/Parameter"/>
           <eParameters name="context"/>
         </eOperations>
+        <eOperations name="visitGenericTypeDefinition">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="node" eType="//language/structure/GenericTypeDefinition"/>
+          <eParameters name="context"/>
+        </eOperations>
+        <eOperations name="visitModelTypeDefinition">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="node" eType="//language/structure/ModelTypeDefinition"/>
+          <eParameters name="context"/>
+        </eOperations>
+        <eOperations name="visitParameterizedType">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="node" eType="//language/structure/ParameterizedType"/>
+          <eParameters name="context"/>
+        </eOperations>
+        <eOperations name="visitModelType">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="node" eType="//language/structure/ModelType"/>
+          <eParameters name="context"/>
+        </eOperations>
+        <eOperations name="visitTypeDefinitionContainer">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="node" eType="//language/structure/TypeDefinitionContainer"/>
+          <eParameters name="context"/>
+        </eOperations>
+        <eOperations name="visitConstraint">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="node" eType="//language/structure/Constraint"/>
+          <eParameters name="context"/>
+        </eOperations>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="KMStructureVisitable">
         <eOperations name="acceptKMStructureVisitor">
@@ -1792,7 +1924,7 @@
         </eOperations>
       </eClassifiers>
     </eSubpackages>
-    <eSubpackages name="behavior">
+    <eSubpackages name="behavior" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//language/behavior" nsPrefix="behavior">
       <eClassifiers xsi:type="ecore:EClass" name="CallExpression" eSuperTypes="//language/behavior/Expression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false" upperBound="-1" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//reflection/String"/>
@@ -1833,6 +1965,7 @@
           <eParameters name="context"/>
         </eOperations>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation" eType="//language/structure/Operation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="staticEnumLiteral" eType="//language/structure/EnumerationLiteral"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty" eType="//language/structure/Property"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//language/behavior/Expression" containment="true"/>
       </eClassifiers>
@@ -1868,10 +2001,26 @@
           <eParameters name="context"/>
         </eOperations>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Assignement" eSuperTypes="//language/behavior/Expression //language/behavior/KMExpressionVisitable">
+      <eClassifiers xsi:type="ecore:EClass" name="CallValue" eSuperTypes="//language/behavior/CallExpression //language/behavior/KMExpressionVisitable">
         <eOperations name="acceptKMExpressionVisitor">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := visitor.visitAssignement(self, context)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := visitor.visitCallValue(self, context)&#xA;end"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaSuperOperations" references="//language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
+            <details key="SuperOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
+          </eAnnotations>
+          <eAnnotations source="KermetaTypeParameters">
+            <details key="ContextType" value="ContextType"/>
+            <details key="ResultType" value="ResultType"/>
+          </eAnnotations>
+          <eParameters name="visitor" eType="//language/behavior/KMExpressionVisitor"/>
+          <eParameters name="context"/>
+        </eOperations>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="//language/behavior/Expression //language/behavior/KMExpressionVisitable">
+        <eOperations name="acceptKMExpressionVisitor">
+          <eAnnotations source="kermeta">
+            <details key="body" value="do&#xA;&#x9;result := visitor.visitAssignment(self, context)&#xA;end"/>
           </eAnnotations>
           <eAnnotations source="KermetaSuperOperations" references="//language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
             <details key="SuperOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
@@ -1905,10 +2054,10 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="statement" ordered="false" lowerBound="1" upperBound="-1" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="rescueBlock" ordered="false" upperBound="-1" eType="//language/behavior/Rescue" containment="true"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="Conditionnal" eSuperTypes="//language/behavior/Expression //language/behavior/KMExpressionVisitable">
+      <eClassifiers xsi:type="ecore:EClass" name="Conditional" eSuperTypes="//language/behavior/Expression //language/behavior/KMExpressionVisitable">
         <eOperations name="acceptKMExpressionVisitor">
           <eAnnotations source="kermeta">
-            <details key="body" value="do&#xA;&#x9;result := visitor.visitConditionnal(self, context)&#xA;end"/>
+            <details key="body" value="do&#xA;&#x9;result := visitor.visitConditional(self, context)&#xA;end"/>
           </eAnnotations>
           <eAnnotations source="KermetaSuperOperations" references="//language/behavior/KMExpressionVisitable/acceptKMExpressionVisitor">
             <details key="SuperOperation" value="kermeta::language::behavior::KMExpressionVisitable"/>
@@ -2056,7 +2205,7 @@
           <eParameters name="visitor" eType="//language/behavior/KMExpressionVisitor"/>
           <eParameters name="context"/>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="initiatization" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="initialization" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="stopCondition" eType="//language/behavior/Expression" containment="true"/>
       </eClassifiers>
@@ -2219,11 +2368,18 @@
           <eParameters name="node" eType="//language/behavior/CallResult"/>
           <eParameters name="context"/>
         </eOperations>
-        <eOperations name="visitAssignement">
+        <eOperations name="visitCallValue">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
           </eAnnotations>
-          <eParameters name="node" eType="//language/behavior/Assignement"/>
+          <eParameters name="node" eType="//language/behavior/CallValue"/>
+          <eParameters name="context"/>
+        </eOperations>
+        <eOperations name="visitAssignment">
+          <eAnnotations source="kermeta">
+            <details key="isAbstract" value="true"/>
+          </eAnnotations>
+          <eParameters name="node" eType="//language/behavior/Assignment"/>
           <eParameters name="context"/>
         </eOperations>
         <eOperations name="visitBlock">
@@ -2233,11 +2389,11 @@
           <eParameters name="node" eType="//language/behavior/Block"/>
           <eParameters name="context"/>
         </eOperations>
-        <eOperations name="visitConditionnal">
+        <eOperations name="visitConditional">
           <eAnnotations source="kermeta">
             <details key="isAbstract" value="true"/>
           </eAnnotations>
-          <eParameters name="node" eType="//language/behavior/Conditionnal"/>
+          <eParameters name="node" eType="//language/behavior/Conditional"/>
           <eParameters name="context"/>
         </eOperations>
         <eOperations name="visitEmptyExpression">
@@ -2361,7 +2517,7 @@
       </eClassifiers>
     </eSubpackages>
   </eSubpackages>
-  <eSubpackages name="reflection">
+  <eSubpackages name="reflection" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//reflection" nsPrefix="reflection">
     <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
     <eClassifiers xsi:type="ecore:EClass" name="Object">
       <eOperations name="getMetaClass" eType="//reflection/Class">
@@ -2370,6 +2526,11 @@
         </eAnnotations>
       </eOperations>
       <eOperations name="container" eType="//reflection/Object">
+        <eAnnotations source="kermeta">
+          <details key="isAbstract" value="true"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="checkInvariants" eType="//reflection/Boolean">
         <eAnnotations source="kermeta">
           <details key="isAbstract" value="true"/>
         </eAnnotations>
@@ -2390,26 +2551,26 @@
         <eAnnotations source="kermeta">
           <details key="isAbstract" value="true"/>
         </eAnnotations>
-        <eParameters name="property" eType="//reflection/Property"/>
+        <eParameters name="~property" eType="//reflection/Property"/>
       </eOperations>
       <eOperations name="set">
         <eAnnotations source="kermeta">
           <details key="isAbstract" value="true"/>
         </eAnnotations>
-        <eParameters name="property" eType="//reflection/Property"/>
+        <eParameters name="~property" eType="//reflection/Property"/>
         <eParameters name="element" eType="//reflection/Object"/>
       </eOperations>
       <eOperations name="isSet" eType="//reflection/Boolean">
         <eAnnotations source="kermeta">
           <details key="isAbstract" value="true"/>
         </eAnnotations>
-        <eParameters name="property" eType="//reflection/Property"/>
+        <eParameters name="~property" eType="//reflection/Property"/>
       </eOperations>
       <eOperations name="unset">
         <eAnnotations source="kermeta">
           <details key="isAbstract" value="true"/>
         </eAnnotations>
-        <eParameters name="property" eType="//reflection/Property"/>
+        <eParameters name="~property" eType="//reflection/Property"/>
       </eOperations>
       <eOperations name="oid" eType="//reflection/Integer">
         <eAnnotations source="kermeta">
@@ -2440,7 +2601,11 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
     <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//reflection/Type">
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" eSuperTypes="//reflection/Type">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typeDefinition" lowerBound="1" eType="//reflection/GenericTypeDefinition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" ordered="false" upperBound="-1" eType="//reflection/TypeVariableBinding" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="//reflection/ParameterizedType">
       <eOperations name="new" eType="//reflection/Object">
         <eAnnotations source="kermeta">
           <details key="isAbstract" value="true"/>
@@ -2448,46 +2613,53 @@
       </eOperations>
       <eOperations name="toString" eType="//reflection/String">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;result := self.classDefinition.name&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;result := self.typeDefinition.name&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="KermetaSuperOperations" references="//reflection/Object/toString">
           <details key="SuperOperation" value="kermeta::reflection::Object"/>
         </eAnnotations>
       </eOperations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="classDefinition" lowerBound="1" eType="//reflection/ClassDefinition"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="typeParamBinding" ordered="false" upperBound="-1" eType="//reflection/TypeVariableBinding" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" ordered="false" upperBound="-1" eType="//reflection/Property" changeable="false" volatile="true" transient="true" derived="true" containment="true">
         <eAnnotations source="KermetaDerivedProperty">
           <details key="isDerived" value="true"/>
-          <details key="getter.body" value="do&#xA;&#x9;result := self.classDefinition.ownedAttributes&#xA;end"/>
+          <details key="getter.body" value="do&#xA;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;cDef ?= self.typeDefinition&#xA;&#x9;result := cDef.ownedAttribute&#xA;end"/>
           <details key="isReadOnly" value="true"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false" upperBound="-1" eType="//reflection/Operation" changeable="false" volatile="true" transient="true" derived="true" containment="true">
         <eAnnotations source="KermetaDerivedProperty">
           <details key="isDerived" value="true"/>
-          <details key="getter.body" value="do&#xA;&#x9;result := self.classDefinition.ownedOperation&#xA;end"/>
+          <details key="getter.body" value="do&#xA;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;cDef ?= self.typeDefinition&#xA;&#x9;result := cDef.ownedOperation&#xA;end"/>
           <details key="isReadOnly" value="true"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" ordered="false" upperBound="-1" eType="//reflection/Class" changeable="false" volatile="true" transient="true" derived="true" containment="true">
         <eAnnotations source="KermetaDerivedProperty">
           <details key="isDerived" value="true"/>
-          <details key="getter.body" value="do&#xA;&#x9;result := self.classDefinition.superType&#xA;end"/>
+          <details key="getter.body" value="do&#xA;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;cDef ?= self.typeDefinition&#xA;&#x9;result := cDef.superType&#xA;end"/>
           <details key="isReadOnly" value="true"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//reflection/Boolean" changeable="false" volatile="true" transient="true" derived="true">
         <eAnnotations source="KermetaDerivedProperty">
           <details key="isDerived" value="true"/>
-          <details key="getter.body" value="do&#xA;&#x9;result := self.classDefinition.isAbstract&#xA;end"/>
+          <details key="getter.body" value="do&#xA;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;cDef ?= self.typeDefinition&#xA;&#x9;result := cDef.isAbstract&#xA;end"/>
           <details key="isReadOnly" value="true"/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//reflection/String" changeable="false" volatile="true" transient="true" derived="true">
         <eAnnotations source="KermetaDerivedProperty">
           <details key="isDerived" value="true"/>
-          <details key="getter.body" value="do&#xA;&#x9;result := self.classDefinition.name&#xA;end"/>
+          <details key="getter.body" value="do&#xA;&#x9;result := self.typeDefinition.name&#xA;end"/>
+          <details key="isReadOnly" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelType" eSuperTypes="//reflection/ParameterizedType">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypeDefinition" ordered="false" upperBound="-1" eType="//reflection/TypeDefinition" changeable="false" volatile="true" transient="true" derived="true" containment="true">
+        <eAnnotations source="KermetaDerivedProperty">
+          <details key="isDerived" value="true"/>
+          <details key="getter.body" value="do&#xA;&#x9;var mtDef : kermeta::reflection::ModelTypeDefinition&#xA;&#x9;mtDef ?= self.typeDefinition&#xA;&#x9;result := mtDef.ownedTypeDefinition&#xA;end"/>
           <details key="isReadOnly" value="true"/>
         </eAnnotations>
       </eStructuralFeatures>
@@ -2498,8 +2670,11 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="lower" eType="//reflection/Integer"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="upper" eType="//reflection/UnlimitedNatural"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="//reflection/NamedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="//reflection/MultiplicityElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//reflection/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="pre" ordered="false" upperBound="-1" eType="//reflection/Constraint" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="post" ordered="false" upperBound="-1" eType="//reflection/Constraint" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="superOperation" eType="//reflection/Operation"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="//reflection/ClassDefinition" eOpposite="//reflection/ClassDefinition/ownedOperation"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" ordered="false" upperBound="-1" eType="//reflection/TypeVariable"/>
@@ -2512,7 +2687,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="//reflection/String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="//reflection/MultiplicityElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="//reflection/ClassDefinition" eOpposite="//reflection/ClassDefinition/ownedAttributes"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="//reflection/ClassDefinition" eOpposite="//reflection/ClassDefinition/ownedAttribute"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="//reflection/Property"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReadOnly" eType="//reflection/Boolean"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="default" eType="//reflection/String"/>
@@ -2523,20 +2698,24 @@
     <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" eSuperTypes="//reflection/Object">
       <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" ordered="false" upperBound="-1" eType="//reflection/Type" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="//reflection/TypeContainer //reflection/TypeDefinition">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//reflection/Boolean"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttributes" ordered="false" upperBound="-1" eType="//reflection/Property" containment="true" eOpposite="//reflection/Property/owningClass"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false" upperBound="-1" eType="//reflection/Operation" containment="true" eOpposite="//reflection/Operation/owningClass"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="superType" ordered="false" upperBound="-1" eType="//reflection/Class"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GenericTypeDefinition" eSuperTypes="//reflection/TypeDefinition">
       <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameter" ordered="false" upperBound="-1" eType="//reflection/TypeVariable" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="allOwnedAttributes" ordered="false" upperBound="-1" eType="//reflection/Property" changeable="false" volatile="true" transient="true" derived="true" containment="true">
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="//reflection/TypeContainer //reflection/GenericTypeDefinition">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//reflection/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" ordered="false" upperBound="-1" eType="//reflection/Property" containment="true" eOpposite="//reflection/Property/owningClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" ordered="false" upperBound="-1" eType="//reflection/Operation" containment="true" eOpposite="//reflection/Operation/owningClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inv" ordered="false" upperBound="-1" eType="//reflection/Constraint" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="superType" ordered="false" upperBound="-1" eType="//reflection/Class"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="allOwnedAttribute" ordered="false" upperBound="-1" eType="//reflection/Property" changeable="false" volatile="true" transient="true" derived="true" containment="true">
         <eAnnotations source="KermetaDerivedProperty">
           <details key="isDerived" value="true"/>
-          <details key="getter.body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;result.addAll(self.ownedAttributes)&#xA;&#x9;self.superType.each{t | do&#xA;&#x9;&#x9;&#x9;t.classDefinition.allOwnedAttributes.each{p | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if p.isDerived.~not then&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(p)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;end}&#xA;end"/>
+          <details key="getter.body" value="do&#xA;&#x9;result := kermeta::standard::Set&lt;kermeta::reflection::Property>.new&#xA;&#x9;result.addAll(self.ownedAttribute)&#xA;&#x9;self.superType.each{t | do&#xA;&#x9;&#x9;&#x9;var cDef : kermeta::reflection::ClassDefinition&#xA;&#x9;&#x9;&#x9;cDef ?= t.typeDefinition&#xA;&#x9;&#x9;&#x9;cDef.allOwnedAttribute.each{p | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(p)&#xA;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;end}&#xA;end"/>
           <details key="isReadOnly" value="true"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ModelTypeDefinition" eSuperTypes="//reflection/GenericTypeDefinition //reflection/TypeDefinitionContainer"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="//reflection/TypeContainer //reflection/NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//reflection/Type"/>
     </eClassifiers>
@@ -2584,8 +2763,10 @@
         <details key="kdoc" value="/**&#xD;&#xA; * DEPRECATED&#xD;&#xA; */"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="//reflection/NamedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="TypeDefinitionContainer" eSuperTypes="//reflection/NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypeDefinition" ordered="false" upperBound="-1" eType="//reflection/TypeDefinition" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="//reflection/TypeDefinitionContainer">
       <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPackage" ordered="false" upperBound="-1" eType="//reflection/Package" containment="true" eOpposite="//reflection/Package/nestingPackage"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="nestingPackage" eType="//reflection/Package" eOpposite="//reflection/Package/nestedPackage"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="//reflection/String"/>
@@ -2608,7 +2789,7 @@
       </eAnnotations>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="kunit">
+  <eSubpackages name="kunit" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//kunit" nsPrefix="kunit">
     <eClassifiers xsi:type="ecore:EClass" name="AssertionFailedError" eSuperTypes="//exceptions/Exception">
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * AssertionViolatedException are raised when assertions are violated&#xD;&#xA; */"/>
@@ -2616,32 +2797,51 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Assert">
       <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * The abstract class assert defines a set of convinient operations&#xD;&#xA; * to assert expected behavior&#xD;&#xA; */"/>
+        <details key="kdoc" value="/**&#xD;&#xA; * The abstract class assert defines a set of convinient operations&#xD;&#xA; * to assert expected behavior and give the rank of failed assert&#xD;&#xA; */"/>
       </eAnnotations>
       <eOperations name="assert">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;if bool.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.fail(&quot;assert failed&quot;)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.order&#xA;&#x9;if bool.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.fail(&quot;assert number &quot;.plus(number.toString).plus(&quot; failed&quot;))&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * raises an exception if bool is false&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/**&#xD;&#xA;  * will fail if bool is false&#xD;&#xA;  * DEPRECATED : correct use is &quot;assertTrue(bool : Boolean)&quot; or &quot;assertFalse(bool : Boolean)&quot;&#xD;&#xA;  */"/>
         </eAnnotations>
         <eParameters name="bool" eType="//standard/Boolean"/>
       </eOperations>
       <eOperations name="assertTrue">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;if bool.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.fail(&quot;assertTrue failed&quot;)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.order&#xA;&#x9;if bool.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.fail(&quot;assertTrue number &quot;.plus(number.toString).plus(&quot; failed&quot;))&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * raises an exception if bool is false&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/**&#xD;&#xA;  * will fail if bool is false&#xD;&#xA;  */"/>
         </eAnnotations>
         <eParameters name="bool" eType="//standard/Boolean"/>
       </eOperations>
       <eOperations name="assertTrueWithMsg">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;if bool.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.fail(msg)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.order&#xA;&#x9;if bool.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.fail(&quot;assertTrueWithMsg number &quot;.plus(number.toString).plus(&quot; failed : &quot;).plus(msg))&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * raises an exception if bool is false&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/**&#xD;&#xA;  * will fail if bool is false&#xD;&#xA;  */"/>
+        </eAnnotations>
+        <eParameters name="bool" eType="//standard/Boolean"/>
+        <eParameters name="msg" eType="//standard/String"/>
+      </eOperations>
+      <eOperations name="assertFalse">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.order&#xA;&#x9;if bool then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.fail(&quot;assertTrue number &quot;.plus(number.toString).plus(&quot; failed&quot;))&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/**&#xD;&#xA;  * will fail if bool is true&#xD;&#xA;  */"/>
+        </eAnnotations>
+        <eParameters name="bool" eType="//standard/Boolean"/>
+      </eOperations>
+      <eOperations name="assertFalseWithMsg">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.order&#xA;&#x9;if bool then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.fail(&quot;assertTrueWithMsg number &quot;.plus(number.toString).plus(&quot; failed : &quot;).plus(msg))&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/**&#xD;&#xA;  * will fail if bool is true&#xD;&#xA;  */"/>
         </eAnnotations>
         <eParameters name="bool" eType="//standard/Boolean"/>
         <eParameters name="msg" eType="//standard/String"/>
@@ -2655,6 +2855,15 @@
         </eAnnotations>
         <eParameters name="msg" eType="//standard/String"/>
       </eOperations>
+      <eOperations name="order" eType="//standard/Integer">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;if self.rank.isVoid then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.rank := 0&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;self.rank := self.rank.plus(1)&#xA;&#x9;result := self.rank&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/**&#xD;&#xA;  * give the order number of the failed assert&#xD;&#xA;  */"/>
+        </eAnnotations>
+      </eOperations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="rank" eType="//standard/Integer"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Test" eSuperTypes="//kunit/Assert">
       <eAnnotations source="kermeta">
@@ -2718,7 +2927,7 @@
       </eOperations>
       <eOperations name="run">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;if r.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;r := self.createDefaultTestResult&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;r.startTest(self)&#xA;&#x9;self.setUp&#xA;&#x9;self.runTest&#xA;rescue(e : kermeta::kunit::AssertionFailedError)&#xA;&#x9;r.addFailure(self, e)&#xA;&#xA;rescue(e : kermeta::exceptions::RuntimeError)&#xA;&#x9;r.addError(self, e)&#xA;&#x9;self.tearDown&#xA;&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;if r.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;r := self.createDefaultTestResult&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;r.startTest(self)&#xA;&#x9;self.runTest&#xA;rescue(e : kermeta::kunit::AssertionFailedError)&#xA;&#x9;r.addFailure(self, e)&#xA;&#xA;rescue(e : kermeta::exceptions::RuntimeError)&#xA;&#x9;r.addError(self, e)&#xA;&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="KermetaSuperOperations" references="//kunit/Test/run">
           <details key="SuperOperation" value="kermeta::kunit::Test"/>
@@ -2727,7 +2936,7 @@
       </eOperations>
       <eOperations name="runTest">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;if self.getMetaClass.classDefinition.ownedOperation.detect{o | do&#xA;&#x9;&#x9;&#x9;o.name.equals(self.name)&#xA;&#x9;&#x9;end}.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new&#xA;&#x9;&#x9;&#x9;de.initializeDefaults&#xA;&#x9;&#x9;&#x9;var selfClassName : kermeta::standard::String init self.getMetaClass.classDefinition.qualifiedName&#xA;&#x9;&#x9;&#x9;de.parse(selfClassName.plus(&quot;.new.&quot;).plus(self.name))&#xA;&#x9;&#x9;&#x9;de.execute(void, kermeta::utils::Hashtable&lt;kermeta::standard::String, alias Object : kermeta::language::structure::Object;>.new)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;var cDef : kermeta::language::structure::ClassDefinition&#xA;&#x9;cDef ?= self.getMetaClass.typeDefinition&#xA;&#x9;if cDef.ownedOperation.detect{o | do&#xA;&#x9;&#x9;&#x9;o.name.equals(self.name)&#xA;&#x9;&#x9;end}.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;var de : kermeta::interpreter::DynamicExpression init kermeta::interpreter::DynamicExpression.new&#xA;&#x9;&#x9;&#x9;de.initializeDefaults&#xA;&#x9;&#x9;&#x9;var selfClassName : kermeta::standard::String init cDef.qualifiedName&#xA;&#x9;&#x9;&#x9;de.parse(&quot;do var test : &quot;.plus(selfClassName).plus(&quot; init &quot;).plus(selfClassName).plus(&quot;.new&#xA;&quot;).plus(&quot;test.setUp &quot;).plus(&quot;&#xA;test.&quot;).plus(self.name).plus(&quot;&#xA;test.tearDown end&quot;))&#xA;&#x9;&#x9;&#x9;de.execute(void, kermeta::utils::Hashtable&lt;kermeta::standard::String, alias Object : kermeta::language::structure::Object;>.new)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="KermetaSuperOperations" references="//kunit/Test/runTest">
           <details key="SuperOperation" value="kermeta::kunit::Test"/>
@@ -2769,7 +2978,7 @@
           <details key="kdoc" value="/** Adds a failed test to the list of failed tests */"/>
         </eAnnotations>
         <eParameters name="test" eType="//kunit/Test"/>
-        <eParameters name="e" eType="//exceptions/Exception"/>
+        <eParameters name="e" eType="//kunit/AssertionFailedError"/>
       </eOperations>
       <eOperations name="addError">
         <eAnnotations source="kermeta">
@@ -2859,7 +3068,7 @@
       </eOperations>
       <eOperations name="run" ordered="false" upperBound="0">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;var test_loader : kermeta::kunit::TestLoader init self.createTestLoader&#xA;&#x9;self.testResult := self.createTestResult&#xA;&#x9;if test_class.superClass.contains(kermeta::kunit::TestCase).~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;var msg : kermeta::standard::String init &quot;ERROR : the given class '&quot;.plus(test_class.classDefinition.name).plus(&quot;' should inherit TestCase&quot;)&#xA;&#x9;&#x9;&#x9;stdio.writeln(msg)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;var test_ops : kermeta::standard::Set&lt;kermeta::kunit::Test> init test_loader.loadTestMethodsFromTestCase(test_class)&#xA;&#x9;&#x9;&#x9;var test_suite : kermeta::kunit::TestSuite init kermeta::kunit::TestSuite.new&#xA;&#x9;&#x9;&#x9;test_suite.tests.addAll(test_ops)&#xA;&#x9;&#x9;&#x9;test_suite.run(self.testResult)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;var test_loader : kermeta::kunit::TestLoader init self.createTestLoader&#xA;&#x9;self.testResult := self.createTestResult&#xA;&#x9;if test_class.superClass.contains(kermeta::kunit::TestCase).~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;var msg : kermeta::standard::String init &quot;ERROR : the given class '&quot;.plus(test_class.typeDefinition.name).plus(&quot;' should inherit TestCase&quot;)&#xA;&#x9;&#x9;&#x9;stdio.writeln(msg)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;var test_ops : kermeta::standard::Set&lt;kermeta::kunit::Test> init test_loader.loadTestMethodsFromTestCase(test_class)&#xA;&#x9;&#x9;&#x9;var test_suite : kermeta::kunit::TestSuite init kermeta::kunit::TestSuite.new&#xA;&#x9;&#x9;&#x9;test_suite.tests.addAll(test_ops)&#xA;&#x9;&#x9;&#x9;test_suite.run(self.testResult)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/** Run a test suite from the given test case (test_class should be a class&#xD;&#xA;  * that inherits TestCase&#xD;&#xA;  */"/>
@@ -2868,7 +3077,7 @@
       </eOperations>
       <eOperations name="printTestResult" ordered="false" upperBound="0">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;&#xA;================================== TEST RESULTS ==================================&#xA;&quot;)&#xA;&#x9;stdio.writeln(&quot; Number of launched tests : &quot;.plus(self.testResult.runtests.toString))&#xA;&#x9;stdio.writeln(&quot; Number of failures : &quot;.plus(self.testResult.failures.size.toString))&#xA;&#x9;stdio.writeln(&quot; Number of errors : &quot;.plus(self.testResult.errors.size.toString))&#xA;&#x9;stdio.writeln(&quot;&#xA; Failed : &quot;)&#xA;&#x9;self.testResult.failures.each{f | do&#xA;&#x9;&#x9;&#x9;var tc : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;tc ?= f.failedTest&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;    ->&quot;.plus(tc.name).plus(&quot;( raised : &quot;).plus(f.raised.toString).plus(&quot;)&quot;))&#xA;&#x9;&#x9;end}&#xA;&#x9;stdio.writeln(&quot; Errors : &quot;)&#xA;&#x9;self.testResult.errors.each{e | do&#xA;&#x9;&#x9;&#x9;var tc : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;tc ?= e.failedTest&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;    -> &quot;.plus(tc.name).plus(&quot;( raised : &quot;).plus(e.raised.toString).plus(&quot;)&quot;))&#xA;&#x9;&#x9;end}&#xA;&#x9;stdio.writeln(&quot;&#xA;==================================================================================&#xA;&quot;)&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;&#xA;================================== TEST RESULTS ==================================&#xA;&quot;)&#xA;&#x9;stdio.writeln(&quot; Number of launched tests : &quot;.plus(self.testResult.runtests.toString))&#xA;&#x9;stdio.writeln(&quot; Number of failures : &quot;.plus(self.testResult.failures.size.toString))&#xA;&#x9;stdio.writeln(&quot; Number of errors : &quot;.plus(self.testResult.errors.size.toString))&#xA;&#x9;stdio.writeln(&quot;&#xA; Failed : &quot;)&#xA;&#x9;self.testResult.failures.each{f | do&#xA;&#x9;&#x9;&#x9;var tc : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;tc ?= f.failedTest&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;    ->&quot;.plus(tc.name).plus(&quot;( raised : &quot;).plus(f.raised.message).plus(&quot;)&quot;))&#xA;&#x9;&#x9;end}&#xA;&#x9;stdio.writeln(&quot; Errors : &quot;)&#xA;&#x9;self.testResult.errors.each{e | do&#xA;&#x9;&#x9;&#x9;var tc : kermeta::kunit::TestCase&#xA;&#x9;&#x9;&#x9;tc ?= e.failedTest&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;    -> &quot;.plus(tc.name).plus(&quot;( raised : &quot;).plus(e.raised.toString).plus(&quot;)&quot;))&#xA;&#x9;&#x9;end}&#xA;&#x9;stdio.writeln(&quot;&#xA;==================================================================================&#xA;&quot;)&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Prints in a text format the result of the tests launches &#xD;&#xA;  * TODO : a specific set of class that inherit TestResult and display&#xD;&#xA;  * it according to a specific format&#xD;&#xA;  */"/>
@@ -2878,7 +3087,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="testResult" eType="//kunit/TestResult"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="utils">
+  <eSubpackages name="utils" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//utils" nsPrefix="utils">
     <eClassifiers xsi:type="ecore:EClass" name="Hashtable">
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * An implementation of hashtable&#xD;&#xA; */"/>
@@ -2928,7 +3137,7 @@
           <details key="kdoc" value="/**&#xD;&#xA;  * Adds a entry in the Hashtable&#xD;&#xA;  */"/>
         </eAnnotations>
         <eParameters name="key"/>
-        <eParameters name="value"/>
+        <eParameters name="~value"/>
       </eOperations>
       <eOperations name="remove">
         <eAnnotations source="kermeta">
@@ -2998,7 +3207,7 @@
       </eOperations>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="io">
+  <eSubpackages name="io" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//io" nsPrefix="io">
     <eClassifiers xsi:type="ecore:EClass" name="StdIO">
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * An implementation of StdIO : standard input/output&#xD;&#xA; */"/>
@@ -3032,7 +3241,7 @@
       </eOperations>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="exceptions">
+  <eSubpackages name="exceptions" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//exceptions" nsPrefix="exceptions">
     <eClassifiers xsi:type="ecore:EClass" name="Exception">
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/*****************************************************************************&#xD;&#xA; * $Id:&#xD;&#xA; * Project : Kermeta (First iteration)&#xD;&#xA; * Creation date :  &#xD;&#xA; * File : testSuite.skel&#xD;&#xA; * License : GPL&#xD;&#xA; * Copyright : IRISA / Universite de Rennes 1&#xD;&#xA; * Creation date : Mar 14, 2005&#xD;&#xA; * Author : zdrey&#xD;&#xA; * Description :  &#xD;&#xA; *      Contains the main exceptions from which all the others inherit&#xD;&#xA; *&#xD;&#xA; ****************************************************************************/"/>
@@ -3076,12 +3285,19 @@
     <eClassifiers xsi:type="ecore:EClass" name="IndexOutOfBound" eSuperTypes="//exceptions/Exception"/>
     <eClassifiers xsi:type="ecore:EClass" name="EmptyCollection" eSuperTypes="//exceptions/Exception"/>
     <eClassifiers xsi:type="ecore:EClass" name="IteratorIsOff" eSuperTypes="//exceptions/Exception"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintViolatedPre" eSuperTypes="//exceptions/Exception">
+      <eAnnotations source="kermeta">
+        <details key="kdoc" value="/*****************************************************************************&#xD;&#xA; * 4-Constraints related errors &#xD;&#xA; *****************************************************************************/"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintViolatedPost" eSuperTypes="//exceptions/Exception"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintViolatedInv" eSuperTypes="//exceptions/Exception"/>
   </eSubpackages>
-  <eSubpackages name="interpreter">
+  <eSubpackages name="interpreter" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//interpreter" nsPrefix="interpreter">
     <eClassifiers xsi:type="ecore:EClass" name="DynamicExpression">
       <eOperations name="initializeDefaults" ordered="false" upperBound="0">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;self.formalParameters := kermeta::utils::Hashtable&lt;kermeta::standard::String, kermeta::language::structure::Type>.new&#xA;&#x9;self.selfClass := kermeta::reflection::Object.classDefinition&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;self.formalParameters := kermeta::utils::Hashtable&lt;kermeta::standard::String, kermeta::language::structure::Type>.new&#xA;&#x9;self.selfClass ?= kermeta::reflection::Object.typeDefinition&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * initialise the formalParameters with an empty set of parameters&#xD;&#xA;  * and the self type with void&#xD;&#xA;  */"/>
@@ -3129,7 +3345,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="ParseError" eSuperTypes="//interpreter/KermetaError"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypeError" eSuperTypes="//interpreter/KermetaError"/>
   </eSubpackages>
-  <eSubpackages name="persistence">
+  <eSubpackages name="persistence" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//persistence" nsPrefix="persistence">
     <eClassifiers xsi:type="ecore:EClass" name="Resource">
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/*****************************************************************************&#xD;&#xA; * $Id$&#xD;&#xA; * Project : Kermeta (First iteration)&#xD;&#xA; * Creation date :  &#xD;&#xA; * File : resource.kmt&#xD;&#xA; * License : GPL&#xD;&#xA; * Copyright : IRISA / Universite de Rennes 1&#xD;&#xA; * Creation date : Mar 14, 2005&#xD;&#xA; * Author : zdrey&#xD;&#xA; * Description :  &#xD;&#xA; *      This file contains the classes that handle the serialization of models.&#xD;&#xA; *&#xD;&#xA; *&#xD;&#xA; ****************************************************************************/"/>
@@ -3189,47 +3405,49 @@
         </eAnnotations>
         <eParameters name="instance" eType="//standard/Object"/>
       </eOperations>
-      <eOperations name="getRootElements" eType="//standard/Set">
-        <eAnnotations source="kermeta">
-          <details key="isAbstract" value="true"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * return the root elements of the resource. Root elements are elements&#xD;&#xA;  * that have no container&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Get the root element(s) of the EMF model loaded in this resource&#xD;&#xA;  */"/>
-        </eAnnotations>
-      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="uri" eType="//standard/String"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="metaModelURI" eType="//standard/String"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="includedResources" ordered="false" upperBound="-1" eType="//standard/String"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="instances" ordered="false" upperBound="-1" eType="//standard/Object"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="repository" eType="//persistence/Repository" eOpposite="//persistence/Repository/resources"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="contentMap" eType="//utils/Hashtable"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="rootContents" ordered="false" upperBound="-1" eType="//standard/Object" changeable="false" volatile="true" transient="true" derived="true">
+        <eAnnotations source="KermetaDerivedProperty">
+          <details key="isDerived" value="true"/>
+          <details key="getter.body" value="do&#xA;&#x9;result := self.contentMap.getValue(&quot;rootContents&quot;)&#xA;end"/>
+          <details key="isReadOnly" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="allRootContents" ordered="false" upperBound="-1" eType="//standard/Object" changeable="false" volatile="true" transient="true" derived="true">
+        <eAnnotations source="KermetaDerivedProperty">
+          <details key="isDerived" value="true"/>
+          <details key="getter.body" value="do&#xA;&#x9;result := self.contentMap.getValue(&quot;allRootContents&quot;)&#xA;end"/>
+          <details key="isReadOnly" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="contents" ordered="false" upperBound="-1" eType="//standard/Object" changeable="false" volatile="true" transient="true" derived="true">
+        <eAnnotations source="KermetaDerivedProperty">
+          <details key="isDerived" value="true"/>
+          <details key="getter.body" value="do&#xA;&#x9;result := self.contentMap.getValue(&quot;contents&quot;)&#xA;end"/>
+          <details key="isReadOnly" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="allContents" ordered="false" upperBound="-1" eType="//standard/Object" changeable="false" volatile="true" transient="true" derived="true">
+        <eAnnotations source="KermetaDerivedProperty">
+          <details key="isDerived" value="true"/>
+          <details key="getter.body" value="do&#xA;&#x9;result := self.contentMap.getValue(&quot;allContents&quot;)&#xA;end"/>
+          <details key="isReadOnly" value="true"/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EMFResource" eSuperTypes="//persistence/Resource">
-      <eOperations name="initialize_3" ordered="false" upperBound="0">
+      <eOperations name="initializeContentMap" ordered="false" upperBound="0">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;self.uri := model_uri&#xA;&#x9;self.metaModelURI := mm_uri&#xA;&#x9;self.includedResources := inc_resources&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;self.contentMap := kermeta::utils::Hashtable&lt;kermeta::standard::String, kermeta::standard::Set&lt;alias Object : kermeta::language::structure::Object;>>.new&#xA;&#x9;self.contentMap.put(&quot;rootContents&quot;, kermeta::standard::Set&lt;alias Object : kermeta::language::structure::Object;>.new)&#xA;&#x9;self.contentMap.put(&quot;allRootContents&quot;, kermeta::standard::Set&lt;alias Object : kermeta::language::structure::Object;>.new)&#xA;&#x9;self.contentMap.put(&quot;contents&quot;, kermeta::standard::Set&lt;alias Object : kermeta::language::structure::Object;>.new)&#xA;&#x9;self.contentMap.put(&quot;allContents&quot;, kermeta::standard::Set&lt;alias Object : kermeta::language::structure::Object;>.new)&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Constructor &quot;patch&quot; TODO : only one should be needed&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/** &#xD;&#xA;  * Create an hashtable with appropriates keys and empty collections. This method &#xD;&#xA;  * should not be called by the end-user&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eParameters name="model_uri" eType="//standard/String"/>
-        <eParameters name="mm_uri" eType="//standard/String"/>
-        <eParameters name="inc_resources" eType="//standard/Set"/>
-      </eOperations>
-      <eOperations name="initialize_2" ordered="false" upperBound="0">
-        <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;self.uri := model_uri&#xA;&#x9;self.includedResources := inc_resources&#xA;end"/>
-        </eAnnotations>
-        <eParameters name="model_uri" eType="//standard/String"/>
-        <eParameters name="inc_resources" eType="//standard/Set"/>
-      </eOperations>
-      <eOperations name="initialize" ordered="false" upperBound="0">
-        <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;self.uri := model_uri&#xA;&#x9;self.metaModelURI := &quot;&quot;&#xA;end"/>
-        </eAnnotations>
-        <eParameters name="model_uri" eType="//standard/String"/>
       </eOperations>
       <eOperations name="saveWithNewURI">
         <eAnnotations source="kermeta">
@@ -3250,7 +3468,7 @@
       </eOperations>
       <eOperations name="load">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;var e : kermeta::persistence::ResourceLoadException init kermeta::persistence::ResourceLoadException.new&#xA;&#x9;var inst_set : kermeta::standard::Set&lt;alias Object : kermeta::language::structure::Object;> init kermeta::standard::Set&lt;alias Object : kermeta::language::structure::Object;>.new&#xA;&#x9;inst_set ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(self.uri, self.metaModelURI, &quot;EMF&quot;, inst_set)&#xA;&#x9;if inst_set.size.equals(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;Resource load failed!&quot;)&#xA;&#x9;&#x9;&#x9;raise e&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;alias Object : kermeta::language::structure::Object;> init inst_set.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;self.instances.add(it.next)&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;var e : kermeta::persistence::ResourceLoadException init kermeta::persistence::ResourceLoadException.new&#xA;&#x9;self.contentMap ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(self.uri, self.metaModelURI, &quot;EMF&quot;, self.contentMap)&#xA;&#x9;if self.contentMap.getValue(&quot;allRootContents&quot;).size.equals(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;Resource load failed!&quot;)&#xA;&#x9;&#x9;&#x9;raise e&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;self.instances.clear&#xA;&#x9;self.instances.addAll(self.rootContents)&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="KermetaSuperOperations" references="//persistence/Resource/load">
           <details key="SuperOperation" value="kermeta::persistence::Resource"/>
@@ -3276,7 +3494,7 @@
       </eOperations>
       <eOperations name="isConform" eType="//standard/Boolean">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;var valid_instance : alias Object : kermeta::language::structure::Object; init self.instances.one&#xA;&#x9;var o : alias Object : kermeta::language::structure::Object; init valid_instance.getMetaClass.classDefinition&#xA;&#x9;var container : alias Object : kermeta::language::structure::Object;&#xA;&#x9;var i : kermeta::standard::Integer init 0&#xA;&#x9;from var b : kermeta::standard::Boolean init true&#xA;&#x9;until o.container.equals(void).~or(i.equals(10))&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;o := o.container&#xA;&#x9;&#x9;end&#x9;end&#xA;&#x9;var p : kermeta::language::structure::Package&#xA;&#x9;p ?= o&#xA;&#x9;result := self.isInTypeDefSet(p.ownedTypeDefinition, instance)&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;var valid_instance : alias Object : kermeta::language::structure::Object; init self.instances.one&#xA;&#x9;var o : alias Object : kermeta::language::structure::Object; init valid_instance.getMetaClass.typeDefinition&#xA;&#x9;var container : alias Object : kermeta::language::structure::Object;&#xA;&#x9;var i : kermeta::standard::Integer init 0&#xA;&#x9;from var b : kermeta::standard::Boolean init true&#xA;&#x9;until o.container.equals(void)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;o := o.container&#xA;&#x9;&#x9;end&#x9;end&#xA;&#x9;var p : kermeta::language::structure::Package&#xA;&#x9;p ?= o&#xA;&#x9;result := self.isInTypeDefSet(p.ownedTypeDefinition, instance)&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/** &#xD;&#xA;  * Return true if instance type is conform to the metamodel of the model loaded,&#xD;&#xA;  * false otherwise &#xD;&#xA;  */"/>
@@ -3285,7 +3503,7 @@
       </eOperations>
       <eOperations name="isInTypeDefSet" eType="//standard/Boolean">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;result := false&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;kermeta::reflection::TypeDefinition> init tparams.iterator&#xA;&#x9;until it.isOff.~or(result.equals(true))&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;var next : kermeta::language::structure::TypeDefinition&#xA;&#x9;&#x9;&#x9;next ?= it.next&#xA;&#x9;&#x9;&#x9;if next.qualifiedName.equals(new_instance.getMetaClass.classDefinition.qualifiedName) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result := true&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;result := false&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;kermeta::reflection::TypeDefinition> init tparams.iterator&#xA;&#x9;until it.isOff.~or(result.equals(true))&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;var next : kermeta::language::structure::TypeDefinition&#xA;&#x9;&#x9;&#x9;next ?= it.next&#xA;&#x9;&#x9;&#x9;if next.qualifiedName.equals(new_instance.getMetaClass.typeDefinition.qualifiedName) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result := true&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Helper that returns true if new_instance type is in the tparam Set, false otherwise&#xD;&#xA;  * FIXME : Loop-and-cast done in order to temporarily get round the type &#xD;&#xA;  * system limits for reflection&#xD;&#xA; */"/>
@@ -3293,17 +3511,9 @@
         <eParameters name="tparams" eType="//standard/Set"/>
         <eParameters name="new_instance" eType="//standard/Object"/>
       </eOperations>
-      <eOperations name="getRootElements" eType="//standard/Set">
-        <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;alias Object : kermeta::language::structure::Object;> init self.instances.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;var o : alias Object : kermeta::language::structure::Object; init it.next&#xA;&#x9;&#x9;&#x9;if o.container.equals(void) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(o)&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="KermetaSuperOperations" references="//persistence/Resource/getRootElements">
-          <details key="SuperOperation" value="kermeta::persistence::Resource"/>
-        </eAnnotations>
-      </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="KMResource" eSuperTypes="//persistence/Resource">
-      <eOperations name="save" eType="//standard/Void">
+      <eOperations name="save">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;end"/>
         </eAnnotations>
@@ -3311,7 +3521,7 @@
           <details key="SuperOperation" value="kermeta::persistence::Resource"/>
         </eAnnotations>
       </eOperations>
-      <eOperations name="load" eType="//standard/Void">
+      <eOperations name="load">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;end"/>
         </eAnnotations>
@@ -3347,17 +3557,20 @@
           <details key="kdoc" value="/**&#xD;&#xA;  * Create a resource with given uri. &#xD;&#xA;  * params : &#xD;&#xA;  *    - uri : the uri where to save the model handled by the resource&#xD;&#xA;  *    - mm_uri : the uri of the metamodel of which model is an instance&#xD;&#xA;  * User must provide the mm_uri if he creates a new model from scratch.&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Create a new empty resource from the given uri, which meta-model is stored&#xD;&#xA;  * in file given by mm_uri&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/**&#xD;&#xA;  * Create a new empty resource from the model given by its uri, &#xD;&#xA;  * which meta-model is stored in file given by mm_uri&#xD;&#xA;  */"/>
         </eAnnotations>
         <eParameters name="uri" eType="//standard/String"/>
         <eParameters name="mm_uri" eType="//standard/String"/>
       </eOperations>
       <eOperations name="getResource" eType="//persistence/Resource">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;kermeta::persistence::Resource> init self.resources.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;var next : kermeta::persistence::Resource init it.next&#xA;&#x9;&#x9;&#x9;if uri.equals(next.uri) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result := next&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#x9;end&#xA;&#x9;if result.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result := self.createResource(uri, &quot;&quot;)&#xA;&#x9;&#x9;&#x9;result.load&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;kermeta::persistence::Resource> init self.resources.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;var next : kermeta::persistence::Resource init it.next&#xA;&#x9;&#x9;&#x9;if uri.equals(next.uri) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result := next&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#x9;end&#xA;&#x9;if result.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;Warning : resource + &lt;&quot;.plus(uri).plus(&quot;> does not exist yet. Trying to create one.&quot;))&#xA;&#x9;&#x9;&#x9;result := self.createResource(uri, &quot;&quot;)&#xA;&#x9;&#x9;&#x9;result.load&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Get the resource of model that is stored in the given uri. Silently create&#xD;&#xA;  * a new one if a resource with this uri was not found.&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/**&#xD;&#xA;  * Get the resource of model that is stored in the given uri. Silently create&#xD;&#xA;  * and load a new one if a resource with this uri was not found.&#xD;&#xA;  */"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/**&#xD;&#xA;  * Get the resource of model that is stored in the given uri. Silently create&#xD;&#xA;  * and load a new one if a resource with this uri was not found.&#xD;&#xA;  */"/>
         </eAnnotations>
         <eParameters name="uri" eType="//standard/String"/>
       </eOperations>
@@ -3367,9 +3580,9 @@
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * Repository that stores and manages resources that come from EMF&#xD;&#xA; */"/>
       </eAnnotations>
-      <eOperations name="createResource" eType="//persistence/EMFResource">
+      <eOperations name="createResource" eType="//persistence/Resource">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;var new_resource : kermeta::persistence::EMFResource init kermeta::persistence::EMFResource.new&#xA;&#x9;new_resource.uri := uri&#xA;&#x9;new_resource.metaModelURI := mm_uri&#xA;&#x9;new_resource.repository := self&#xA;&#x9;result := new_resource&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;var new_resource : kermeta::persistence::EMFResource init kermeta::persistence::EMFResource.new&#xA;&#x9;new_resource.uri := uri&#xA;&#x9;new_resource.metaModelURI := mm_uri&#xA;&#x9;new_resource.repository := self&#xA;&#x9;new_resource.initializeContentMap&#xA;&#x9;result := new_resource&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="KermetaSuperOperations" references="//persistence/Repository/createResource">
           <details key="SuperOperation" value="kermeta::persistence::Repository"/>
@@ -3377,9 +3590,9 @@
         <eParameters name="uri" eType="//standard/String"/>
         <eParameters name="mm_uri" eType="//standard/String"/>
       </eOperations>
-      <eOperations name="getResource" eType="//persistence/EMFResource">
+      <eOperations name="getResource" eType="//persistence/Resource">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;result ?= super(uri)&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;result := super(uri)&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="KermetaSuperOperations" references="//persistence/Repository/getResource">
           <details key="SuperOperation" value="kermeta::persistence::Repository"/>
@@ -3391,7 +3604,7 @@
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * Repository that stores and manages XMI files representing Kermeta models&#xD;&#xA; */"/>
       </eAnnotations>
-      <eOperations name="createResource" eType="//persistence/KMResource">
+      <eOperations name="createResource" eType="//persistence/Resource">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;end"/>
         </eAnnotations>
