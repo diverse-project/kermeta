@@ -34,6 +34,9 @@
       <library name="lib/model_kermeta.jar">
          <export name="*"/>
       </library>
+      <library name="lib/cu_kermeta.jar">
+         <export name="*"/>
+      </library>
    </runtime>
    <requires>
      <import plugin="org.eclipse.ui" optional="true"/>
@@ -176,13 +179,22 @@
             uri="http://kermeta_language_structure/kermeta.ecore"/>
    </extension>
    <extension
+         point="org.eclipse.emf.ecore.generated_package">
+      <package
+            class="fr.irisa.triskell.kermeta.compilationunit.CompilationunitPackage"
+            uri="http://kermeta/compilationunit.ecore"/>
+   </extension>
+   <extension
          id="kermetaProjectBuilder"
          name="Kermeta Project Builder"
          point="org.eclipse.core.resources.builders">
       <builder
-            hasNature="true"
-            isConfigurable="true">
-         <run class="fr.irisa.triskell.kermeta.builders.KermetaProjectBuilder"/>
+            hasNature="true">
+         <run class="fr.irisa.triskell.kermeta.builders.KermetaProjectBuilder">
+            <parameter
+                  name="optimize"
+                  value="true"/>
+         </run>
       </builder>
    </extension>
    <extension
