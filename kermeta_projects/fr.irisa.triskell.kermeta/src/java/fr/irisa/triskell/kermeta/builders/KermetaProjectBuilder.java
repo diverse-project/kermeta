@@ -15,41 +15,58 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.compilationunit.CompilationUnitManager;;
+
 public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 
+	protected CompilationUnitManager compileManager; 
+	
+	public KermetaProjectBuilder() 
+	{
+		super();
+		// Create the compilation unit manager
+		compileManager = new CompilationUnitManager();
+	}
+	
 	class DeltaVisitor implements IResourceDeltaVisitor {
-		/*
-		 * (non-Javadoc)
-		 * 
+		/**
 		 * @see org.eclipse.core.resources.IResourceDeltaVisitor#visit(org.eclipse.core.resources.IResourceDelta)
 		 */
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			IResource resource = delta.getResource();
-			switch (delta.getKind()) {
-			case IResourceDelta.ADDED:
-				// handle added resource
+			System.out.println("DELTA :"+delta);
+			if (delta.getKind() == IResourceDelta.ADDED)
 				checkResource(resource);
-				break;
-			case IResourceDelta.REMOVED:
-				// handle removed resource
-				break;
-			case IResourceDelta.CHANGED:
+			else if (delta.getKind() == IResourceDelta.REMOVED)
+			{ // handle removed resource 
+			}
+			else if (delta.getKind() == IResourceDelta.CHANGED)
+			{
 				// handle changed resource
+				
+//				System.err.println("Le fichier qui a changé c'est celui là  : " + resource.getFullPath().toString() );
 				checkResource(resource);
-				break;
 			}
 			//return true to continue visiting children.
 			return true;
 		}
+		
+		
 	}
 
 	class ResourceVisitor implements IResourceVisitor {
 		public boolean visit(IResource resource) {
+			System.err.println("Le fichier qui a bougé c'est celui là  : " + resource.getFullPath().toString() );
 			checkResource(resource);
 			//return true to continue visiting children.
 			return true;
@@ -110,26 +127,37 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	 */
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
 			throws CoreException {
+		System.out.println("The build method is colllllld");
 		if (kind == FULL_BUILD) {
+			System.out.println("full build: " );
 			fullBuild(monitor);
 		} else {
 			IResourceDelta delta = getDelta(getProject());
+			System.out.println("delta: " + delta);
 			if (delta == null) {
+				System.out.println("fbuild? " + kind);
 				fullBuild(monitor);
 			} else {
+				System.out.println("ibuild? " + kind);
 				incrementalBuild(delta, monitor);
 			}
 		}
-		return null;
+		return new IProject[] { getProject() };
 	}
 
+	/** (was parseXML in the example)
+	 * */
 	void checkResource(IResource resource) {
-		if (resource instanceof IFile && resource.getName().endsWith(".xml")) {
+		System.err.println("Coucou!!!! Le project builder ben il marche!!!");
+		// Check kermeta!!)
+		//String extension = resource.getFileExtension();
+		if (resource instanceof IFile && resource.getName().endsWith(".kmt")) {
 			IFile file = (IFile) resource;
 			deleteMarkers(file);
-			XMLErrorHandler reporter = new XMLErrorHandler(file);
+// ex:			XMLErrorHandler reporter = new XMLErrorHandler(file);
 			try {
-				getParser().parse(file.getContents(), reporter);
+				
+// ex:			getParser().parse(file.getContents(), reporter);
 			} catch (Exception e1) {
 			}
 		}
@@ -145,11 +173,12 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	protected void fullBuild(final IProgressMonitor monitor)
 			throws CoreException {
 		try {
+			System.out.println("Full Build!!! : " + getProject());
 			getProject().accept(new ResourceVisitor());
 		} catch (CoreException e) {
 		}
 	}
-
+/*
 	private SAXParser getParser() throws ParserConfigurationException,
 			SAXException {
 		if (parserFactory == null) {
@@ -157,10 +186,69 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 		}
 		return parserFactory.newSAXParser();
 	}
-
+*/
+	
 	protected void incrementalBuild(IResourceDelta delta,
 			IProgressMonitor monitor) throws CoreException {
+		System.err.println("incrementalBuild method call in KermetaProjectBuilder.java");
 		// the visitor does the work.
 		delta.accept(new DeltaVisitor());
+		// delta.getResource().getRawLocation();
 	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.core.resources.IncrementalProjectBuilder#startupOnInitialize()
+	 */
+	@Override
+	protected void startupOnInitialize() {
+		System.out.println("Starskyyyyy etttt Hutch!! lalalalala");
+		// TODO Auto-generated method stub
+		super.startupOnInitialize();
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.core.resources.IncrementalProjectBuilder#setInitializationData(org.eclipse.core.runtime.IConfigurationElement, java.lang.String, java.lang.Object)
+	 */
+	@Override
+	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) throws CoreException {
+		// TODO Auto-generated method stub
+		System.out.println("Initializeation");
+		super.setInitializationData(config, propertyName, data);
+	}
+	
+	/** 
+	 * This method has a duplicate here : EditorReconcilingStrategy.parse in fr.irisa.triskell.kermeta.texteditor
+	 * project
+	 * Compile the file (previously saved)
+	 * @return a KermetaUnit
+	 */
+	protected KermetaUnit compile(IFile file)
+    {
+        KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
+    	String uri = "platform:/resource" + file.getFullPath().toString();
+    	KermetaUnitFactory.getDefaultLoader().unloadAll();
+    	KMTUnit result = null;
+        deleteMarkers(file);
+        try {
+        	// Create the CompilationUnit for the given file
+        	if (compileManager.exists(file.getFullPath().toString()))
+        	{
+        		System.err.println("IFile has a resource!");
+        	}
+	        //file.getFullPath().toString();
+        }
+        catch(Throwable e) {
+            KermetaUnit.internalLog.error("load error ", e);
+        	if (result == null) {
+        		e.printStackTrace();
+        		return null;
+        	}
+        	else if (!result.messages.unitHasError)
+        		result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null, null));
+        }
+        // createMarkers(file)
+        return result;
+    }
+	
+	
 }
