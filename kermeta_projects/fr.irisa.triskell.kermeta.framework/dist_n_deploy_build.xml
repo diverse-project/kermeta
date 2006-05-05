@@ -1,11 +1,11 @@
-<!-- $Id: dist_n_deploy_build.xml,v 1.13 2006-05-05 14:54:46 vmahe Exp $ -->
+<!-- $Id: dist_n_deploy_build.xml,v 1.14 2006-05-05 15:29:03 dvojtise Exp $ -->
 <project name="kermeta_framework" default="all" basedir=".">
 	
 	<description>
         Deploy the dist jar to the projects that use it
     </description>
 	
-	<property name="eclipse_dir" location="/udd/vmahe/eclipse"/>
+	<property name="eclipse_dir" location="../.."/>
 	
 	<property name="kermeta.framework.jar" location="dist/framework.jar"/>
 	<property name="kermeta.framework.km" location="dist/framework.km"/>
