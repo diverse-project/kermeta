@@ -5,12 +5,12 @@
 	<classpathentry sourcepath="ECLIPSE_HOME/plugins/org.eclipse.jdt.source_3.0.0/src/org.junit_3.8.1/junitsrc.zip" kind="var" path="JUNIT_HOME/junit.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/thirdparty/log4j.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/emf_libraries"/>
 	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.io/src/java" kind="lib" path="lib/io_kermeta.jar"/>
 	<classpathentry sourcepath="lib/model_kermeta.jar" kind="lib" path="lib/model_kermeta.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/antlr.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/emfatic-core.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/ldt-core.jar"/>
 	<classpathentry kind="lib" path="lib/traceability.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/emf"/>
 	<classpathentry kind="output" path="build/class"/>
 </classpath>
