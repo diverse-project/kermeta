@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.8 2006-05-04 15:23:38 jmottu Exp $
+/* $Id: Object.java,v 1.9 2006-05-05 18:05:38 jmottu Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -68,11 +68,12 @@ public class Object {
  	        			message,
  						self.getFactory().getMemory().getCurrentInterpreter(),
  						self.getFactory().getMemory(),
+ 						c.getBody(),
  						null);
     		 }
 	     }
 	     checkInheritedInvariants(classDef , self);
-         return self.getFactory().getMemory().trueINSTANCE; //if the constraints don't raise any constraint's exception then it means that the constraints are true
+         return self.getFactory().getMemory().trueINSTANCE; //if the constraints don't raise any constraint exception then it means that the constraints are true
 	}
 	protected static RuntimeObject checkInheritedInvariants(ClassDefinition cd , RuntimeObject self) {
 		 Iterator itParents = cd.getSuperType().iterator();
