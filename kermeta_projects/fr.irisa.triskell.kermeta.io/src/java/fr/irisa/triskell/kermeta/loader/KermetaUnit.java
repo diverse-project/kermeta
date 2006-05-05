@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.58 2006-05-04 15:27:24 jmottu Exp $
+/* $Id: KermetaUnit.java,v 1.59 2006-05-05 12:34:31 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -255,6 +255,7 @@ public abstract class KermetaUnit {
 	public Assignment current_assignment;
 	public Constraint current_constraint;
 	
+	
 	/**
 	 * The root package of the model being built
 	 */
@@ -428,7 +429,7 @@ public abstract class KermetaUnit {
 	 * retreives all the imported unit recursively
 	 * @return a list of unique units imported by this one
 	 */
-	public ArrayList getAllImportedUnits()
+	public ArrayList<KermetaUnit> getAllImportedUnits()
 	{
 		ArrayList<KermetaUnit> result = new ArrayList<KermetaUnit>();
 		getAllImportedUnits(result);
@@ -1109,6 +1110,7 @@ public abstract class KermetaUnit {
 		//		System.out.println("loadAllTypeDefinitions " + uri);
 		if (doneLoadTypeDefinitions) return;
 		loading = true;
+		
 		doneLoadTypeDefinitions = true;
 		// load imported units
 		for(int i=0; i<importedUnits.size(); i++) {
