@@ -14,10 +14,12 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 {
     reference output : kermeta::utils::Hashtable<uml2::Element, Object>
     reference rootPackage : Package
+    reference resourceObjects : Set<Object>
     
     operation initialize(outputKm : kermeta::utils::Hashtable<uml2::Element, Object>) is do
     	output := outputKm
     	rootPackage := void
+    	resourceObjects := Set<Object>.new
     end
     
 	// the second pass knows the package which represents the root of the kermeta code
@@ -38,6 +40,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 			// the comment concerns the Model
 			tag.object.add(rootPackage)
 		end
+		// as Class/DataType/Tag are not linked thru composition
+		// we must add them in the resulting KM resource
+		resourceObjects.add(tag)
+		
     	super(visitable)
     end
     
@@ -89,6 +95,9 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 			t ?= type
 			prop.type := t
 		end
+		// as Class/DataType/Tag are not linked thru composition
+		// we must add them in the resulting KM resource
+		resourceObjects.add(prop.type)
     	
     	super(visitable)
     end
@@ -113,6 +122,17 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 				t ?= type
 				op.type := t
 			end
+			// as Class/DataType/Tag are not linked thru composition
+			// we must add them in the resulting KM resource
+			
+			//DEBUG
+			stdio.writeln("DEBUG visitOperation : "+op.name)
+			stdio.writeln("           - result type : "+op.type.toString)
+			
+			resourceObjects.add(op.type)
+			
+			//DEBUG
+			stdio.writeln("        visitOperation : resourceObjects.add() passed")
 		}
 			
     	// all other parameters
@@ -140,6 +160,9 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 	    else
 			p.type ?= type
     	end
+		// as Class/DataType/Tag are not linked thru composition
+		// we must add them in the resulting KM resource
+//		resourceObjects.add(p.type)
     	
     	super(visitable)
     end
@@ -180,13 +203,15 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	gen ?= output.getValue(visitable.general)
    		var spec : ClassDefinition
    		spec ?= output.getValue(visitable.specific)
-   		var cl : Class
-   		cl ?= output.getValue(visitable)
+   		var cl : Class init Class.new
    		cl.typeDefinition := gen
    		if not spec.superType.exists{ k | k.oid == cl.oid }
    		then
 	   		spec.superType.add(cl)
    		end
+		// as Class/DataType/Tag are not linked thru composition
+		// we must add them in the resulting KM resource
+//		resourceObjects.add(cl)
    		
      	super(visitable)
     end

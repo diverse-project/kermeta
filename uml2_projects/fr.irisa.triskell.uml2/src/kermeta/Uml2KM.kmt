@@ -81,21 +81,30 @@ class Main
 			pass2.visitPackage(p)
 		}
         
-        // DEBUG
-/*      var tree : kermeta::language::structure::Package
-		tree ?= objectsStore.getValue(rootPackage)
-    	var resRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
-    	var resResource : kermeta::persistence::EMFResource
-    	resResource ?= resRepository.createResource("../../test/kmt_test_cases/uml2/ClassDiagramOutput.km", "../ecore/kermeta.ecore")
-    	resResource.instances.add(tree)
-    	resResource.save()
-*/
-        // the Kermeta PrettyPrinter transforms the KM tree to code
-    	stdio.writeln("\n>>>>-------------> running Km2Kmt pretty printer !\n")
-        var upp : uml2::Uml2KMTPrinter init uml2::Uml2KMTPrinter.new
-        upp.initialize()
 		var tree : kermeta::language::structure::Package
 		tree ?= objectsStore.getValue(rootPackage)
+		
+    	stdio.writeln("\n>>>>-------------> saving the KM program structure !\n")
+		var resRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+		var resResource : kermeta::persistence::EMFResource
+		resResource ?= resRepository.createResource("../../test/kmt_test_cases/uml2/ClassDiagramOutput.km", "../ecore/kermeta_java.ecore")
+		resResource.instances.add(tree)
+		// we add external referenced models
+		externModels.each{ p |
+			tree ?= objectsStore.getValue(p)
+			resResource.instances.add(tree)
+		}
+		// we also add the objects not composed in the tree
+		pass2.resourceObjects.each{ o | 
+			resResource.instances.add(o)
+		}
+		
+//		resResource.save()
+
+        // the Kermeta PrettyPrinter transforms the KM tree to code
+/*    	stdio.writeln("\n>>>>-------------> running Km2Kmt pretty printer !\n")
+        var upp : uml2::Uml2KMTPrinter init uml2::Uml2KMTPrinter.new
+        upp.initialize()
 		// external references to other diagramms
 		var extRef : OrderedSet<kermeta::language::structure::Package>
 		  init OrderedSet<kermeta::language::structure::Package>.new
@@ -105,7 +114,7 @@ class Main
 			extRef.add(pack)
 		}
 	    stdio.writeln(upp.visitRootPackage(tree, extRef, 0))
-	    
+*/	    
 	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
      end
 }

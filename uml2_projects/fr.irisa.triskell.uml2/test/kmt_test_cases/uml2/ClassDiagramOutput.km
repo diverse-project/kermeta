@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore#//language/structure">
+  <kermeta_language_structure:Package name="simpleModel">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Class1">
+      <ownedAttribute name="Property1" type="/2" upper="1"/>
+      <ownedOperation tag="/1" name="Operation1" type="/3" upper="1"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Class2" superType="/5">
+      <ownedOperation name="Operation2" upper="1"/>
+    </ownedTypeDefinition>
+  </kermeta_language_structure:Package>
+  <kermeta_language_structure:Tag name="kdoc" value="Comment1" object="/0/@ownedTypeDefinition.0/@ownedOperation.0"/>
+  <kermeta_language_structure:Class typeDefinition="/0/@ownedTypeDefinition.0"/>
+  <kermeta_language_structure:Class typeDefinition="/0/@ownedTypeDefinition.0"/>
+  <kermeta_language_structure:Class typeDefinition="/0/@ownedTypeDefinition.0"/>
+  <kermeta_language_structure:Class typeDefinition="/0/@ownedTypeDefinition.0"/>
+</xmi:XMI>
