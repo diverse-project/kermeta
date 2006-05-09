@@ -1,4 +1,4 @@
-/* $Id: KermetaTypeChecker.java,v 1.9 2006-05-04 15:30:33 jmottu Exp $
+/* $Id: KermetaTypeChecker.java,v 1.10 2006-05-09 16:31:08 jmottu Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaTypeChecker.java
 * License : GPL
@@ -102,9 +102,12 @@ public class KermetaTypeChecker {
     
     public void checkConstraint(Constraint c)
     { 
+    	if (c.eContainer() instanceof ClassDefinition)
            context.init((ClassDefinition)c.eContainer());
+    	else
+    		context.init(((Operation)c.eContainer()).getOwningClass(),(Operation) c.eContainer());
+    	
            ExpressionChecker.typeCheckExpression(c.getBody(), unit, context);
-           
            if(!getTypeOfExpression(c.getBody()).isSubTypeOf(TypeCheckerContext.BooleanType)) {
    				unit.messages.addError("TYPE-CHECKER : The type of a constraint should be Boolean", c.getBody());
    		    }
@@ -125,6 +128,18 @@ public class KermetaTypeChecker {
         // check the body of the operation if it is not abstract
         if (op.getBody() != null)
             ExpressionChecker.typeCheckExpression(op.getBody(), unit, context);
+        
+        Iterator it = op.getPre().iterator();
+        while(it.hasNext()) {
+            Constraint c = (Constraint)it.next();
+            checkConstraint(c);
+        }
+        
+        it = op.getPost().iterator();
+        while(it.hasNext()) {
+            Constraint c = (Constraint)it.next();
+            checkConstraint(c);
+        }
         
         // THIS IS JUST FOR TESTING PURPOSES
         if (error_count != unit.messages.getMessages().size()) wrongOperations.add(op.getName());

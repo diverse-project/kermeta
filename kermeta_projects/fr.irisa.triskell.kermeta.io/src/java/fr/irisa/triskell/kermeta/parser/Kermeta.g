@@ -328,9 +328,9 @@ setterBody returns [ SetterBody retVal = null ]
 
 operation returns [ Operation retVal = null ]
 :
-{ OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; Precondition precondition = null; OperationBody operationBody = null; Postcondition postcondition = null; }
-  operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( from_KW:"from" superSelection=qualifiedID )? ( raises_KW:"raises" exceptions=typelst )? is_KW:"is" ( precondition=precondition )? operationBody=operationBody ( postcondition=postcondition )? 
-{ retVal = new Operation(operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, precondition, operationBody, postcondition); }
+{ OperationKind operationKind = null; TypeVarDecllst typeVarDecllst = null; Params params = null; TypeRef typeRef = null; QualifiedID superSelection = null; Typelst exceptions = null; Preconditions preconditions = null; OperationBody operationBody = null; Postconditions postconditions = null; }
+  operationKind=operationKind name:ID ( lt:LT typeVarDecllst=typeVarDecllst gt:GT )? lparen:LPAREN ( params=params )? rparen:RPAREN ( colon:COLON typeRef=typeRef )? ( from_KW:"from" superSelection=qualifiedID )? ( raises_KW:"raises" exceptions=typelst )? is_KW:"is" preconditions=preconditions operationBody=operationBody postconditions=postconditions 
+{ retVal = new Operation(operationKind, name, lt, typeVarDecllst, gt, lparen, params, rparen, colon, typeRef, from_KW, superSelection, raises_KW, exceptions, is_KW, preconditions, operationBody, postconditions); }
 ;
 
 operationKind returns [ OperationKind retVal = null ]
@@ -339,6 +339,18 @@ operationKind returns [ OperationKind retVal = null ]
   | "method"
   )
 { retVal = new OperationKind(tok); }
+;
+
+preconditions returns [ Preconditions retVal = new Preconditions() ]
+:
+{ Precondition precondition = null; }
+  ( precondition=precondition { retVal.addChild(precondition); } )*
+;
+
+postconditions returns [ Postconditions retVal = new Postconditions() ]
+:
+{ Postcondition postcondition = null; }
+  ( postcondition=postcondition { retVal.addChild(postcondition); } )*
 ;
 
 precondition returns [ Precondition retVal = null ]
@@ -808,9 +820,16 @@ fVoidLiteral returns [ FVoidLiteral retVal = null ]
 
 fTypeOrVarLiteral returns [ FTypeOrVarLiteral retVal = null ]
 :
-{ Type literal = null; }
-  literal=type ( atpre:ATPRE )? 
-{ retVal = new FTypeOrVarLiteral(literal, atpre); }
+{ Type literal = null; AtpreOp atp = null; }
+  literal=type ( atp=atpreOp )? 
+{ retVal = new FTypeOrVarLiteral(literal, atp); }
+;
+
+atpreOp returns [ AtpreOp retVal = null ]
+{ Token tok = LT(1); }
+: ( ATPRE
+  )
+{ retVal = new AtpreOp(tok); }
 ;
 
 

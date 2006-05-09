@@ -1,4 +1,4 @@
-/* $Id: KermetaConstraintChecker.java,v 1.6 2006-05-04 15:25:13 jmottu Exp $
+/* $Id: KermetaConstraintChecker.java,v 1.7 2006-05-09 16:31:51 jmottu Exp $
 * Project : Kermeta IO
 * File : KermetaConstraintChecker.java
 * License : EPL
@@ -22,6 +22,7 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
@@ -44,6 +45,8 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
    
     public static final String NAME_ERROR = "An element is unnamed";
 	public static final String CONSTRAINT_ERROR = "The stereotype of a constraint is erroneous";
+	public static final String ATPRE_IN_POST_ERROR = "@pre must be contained by a post condition";
+	public static final String ATPRE_PROPERTY_ERROR = "@pre must only be associated to a property";
     
 	/**
 	 * The KermetaUnit that will be build so that we can constraint check more easily the model
@@ -112,8 +115,8 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		}else{
 			addProblem(CONSTRAINT_ERROR, node);
 		}
-		return result;
-		//return super.visitConstraint(node);
+		//return result;
+		return super.visitConstraint(node);
 	}
 /**
 	 * @param node
@@ -159,8 +162,31 @@ public class KermetaConstraintChecker extends KermetaOptimizedVisitor{
 		//current_operation = operation;
 		builder.current_operation = operation;
 		Boolean result = new OperationChecker(builder, operation, builder.current_class).check();
+		//return result;
+		return super.visitOperation(operation);
+	}
+	/**
+	 * Checked constraints :
+	 *   - Only CallFeature contained in postcondition can have isIsAtPre == true.
+	 * 
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitConstraint(fr.irisa.triskell.kermeta.language.structure.Constraint)
+	 */
+	public Object visitCallFeature(CallFeature node) {
+		builder.current_callFeature = node;
+		if (node.isIsAtpre() && !isContainerPost(node))
+			addProblem(ATPRE_IN_POST_ERROR, node);
+		if (node.isIsAtpre() && node.getStaticProperty() == null)
+			addProblem(ATPRE_PROPERTY_ERROR, node);	
+		return super.visitCallFeature(node);
+	}
+	
+	private Boolean isContainerPost(EObject node) {
+		if (node instanceof fr.irisa.triskell.kermeta.language.structure.Package)
+			return false;
+		
+		boolean result = (node.eContainer() instanceof Constraint && ((Constraint)node.eContainer()).getStereotype() == ConstraintType.POST_LITERAL)
+							|| (node.eContainer() != null && isContainerPost(node.eContainer()));
 		return result;
-		//return super.visitOperation(operation);
 	}
 
 	/**
