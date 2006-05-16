@@ -212,12 +212,12 @@ He operate the nearest switch to power off the light bulb.</body>
         <details xmi:id="_3KWsQOQHEdqhtPy9-FJGiw" key="uuid" value="1147693337859114"/>
       </eAnnotations>
     </ownedMember>
-    <ownedMember xmi:type="uml:UseCase" xmi:id="_iaDGEOQHEdqhtPy9-FJGiw" name="entrance" subject="_H8SPAOQhEdqhtPy9-FJGiw">
+    <ownedMember xmi:type="uml:UseCase" xmi:id="_iaDGEOQHEdqhtPy9-FJGiw" name="entrance">
       <eAnnotations xmi:id="_3KXTUOQHEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
         <details xmi:id="_3KXTUeQHEdqhtPy9-FJGiw" key="uuid" value="1147693337860115"/>
       </eAnnotations>
     </ownedMember>
-    <ownedMember xmi:type="uml:UseCase" xmi:id="_mw_4MOQHEdqhtPy9-FJGiw" name="exit" subject="_H8SPAOQhEdqhtPy9-FJGiw">
+    <ownedMember xmi:type="uml:UseCase" xmi:id="_mw_4MOQHEdqhtPy9-FJGiw" name="exit">
       <eAnnotations xmi:id="_3KXTUuQHEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
         <details xmi:id="_3KXTU-QHEdqhtPy9-FJGiw" key="uuid" value="1147693337861116"/>
       </eAnnotations>
@@ -257,16 +257,11 @@ He operate the nearest switch to power off the light bulb.</body>
         <details xmi:id="_G0bPEeQhEdqhtPy9-FJGiw" key="uuid" value="1147704180353150"/>
       </eAnnotations>
     </ownedMember>
-    <ownedMember xmi:type="uml:Class" xmi:id="_H8SPAOQhEdqhtPy9-FJGiw" name="Operator" redefinedClassifier="_W8GcEOQHEdqhtPy9-FJGiw" useCase="_iaDGEOQHEdqhtPy9-FJGiw _mw_4MOQHEdqhtPy9-FJGiw">
-      <eAnnotations xmi:id="_bANL4OQhEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
-        <details xmi:id="_bANy8OQhEdqhtPy9-FJGiw" key="uuid" value="1147704315806153"/>
-      </eAnnotations>
-    </ownedMember>
     <ownedMember xmi:type="uml:Association" xmi:id="_gx5dsOQhEdqhtPy9-FJGiw" name="OperateSwitch" memberEnd="_gx7S4OQhEdqhtPy9-FJGiw _gx758OQhEdqhtPy9-FJGiw">
       <eAnnotations xmi:id="_sZB44OQhEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
         <details xmi:id="_sZB44eQhEdqhtPy9-FJGiw" key="uuid" value="1147704432492156"/>
       </eAnnotations>
-      <ownedEnd xmi:id="_gx7S4OQhEdqhtPy9-FJGiw" name="operator" type="_H8SPAOQhEdqhtPy9-FJGiw" association="_gx5dsOQhEdqhtPy9-FJGiw">
+      <ownedEnd xmi:id="_gx7S4OQhEdqhtPy9-FJGiw" name="operator" type="_W8GcEOQHEdqhtPy9-FJGiw" association="_gx5dsOQhEdqhtPy9-FJGiw">
         <eAnnotations xmi:id="_sZCf8OQhEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
           <details xmi:id="_sZCf8eQhEdqhtPy9-FJGiw" key="uuid" value="1147704432495157"/>
         </eAnnotations>
@@ -285,12 +280,12 @@ He operate the nearest switch to power off the light bulb.</body>
         <eAnnotations xmi:id="_sZDHBOQhEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
           <details xmi:id="_sZDHBeQhEdqhtPy9-FJGiw" key="uuid" value="1147704432496160"/>
         </eAnnotations>
-        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_plWQUOQhEdqhtPy9-FJGiw" value="1">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_plWQUOQhEdqhtPy9-FJGiw" value="2">
           <eAnnotations xmi:id="_sZDHBuQhEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
             <details xmi:id="_sZDHB-QhEdqhtPy9-FJGiw" key="uuid" value="1147704432496161"/>
           </eAnnotations>
         </upperValue>
-        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_plVpQOQhEdqhtPy9-FJGiw" value="1">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_plVpQOQhEdqhtPy9-FJGiw" value="2">
           <eAnnotations xmi:id="_sZDuEOQhEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
             <details xmi:id="_sZDuEeQhEdqhtPy9-FJGiw" key="uuid" value="1147704432497162"/>
           </eAnnotations>
@@ -342,9 +337,9 @@ He operate the nearest switch to power off the light bulb.</body>
         </value>
       </slot>
     </ownedMember>
-    <ownedMember xmi:type="uml:InstanceSpecification" xmi:id="_tTBmgOQiEdqhtPy9-FJGiw" name="aMan" classifier="_H8SPAOQhEdqhtPy9-FJGiw">
-      <eAnnotations xmi:id="_7d37oOQiEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
-        <details xmi:id="_7d37oeQiEdqhtPy9-FJGiw" key="uuid" value="1147704963162186"/>
+    <ownedMember xmi:type="uml:InstanceSpecification" xmi:id="_xDtJ8OS-Edq6cpYOwfrT1A" name="aMan" classifier="_W8GcEOQHEdqhtPy9-FJGiw">
+      <eAnnotations xmi:id="_02-AMOS-Edq6cpYOwfrT1A" source="http://www.topcased.org/uuid">
+        <details xmi:id="_02-AMeS-Edq6cpYOwfrT1A" key="uuid" value="1147771920307201"/>
       </eAnnotations>
     </ownedMember>
   </ownedMember>
