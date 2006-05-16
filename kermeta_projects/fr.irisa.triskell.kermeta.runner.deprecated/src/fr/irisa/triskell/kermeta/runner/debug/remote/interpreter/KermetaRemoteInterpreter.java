@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteInterpreter.java,v 1.10 2005-12-16 09:54:19 zdrey Exp $
+/* $Id: KermetaRemoteInterpreter.java,v 1.11 2006-05-16 15:35:59 jmottu Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteInterpreter.java
  * License   : EPL
@@ -107,7 +107,7 @@ public class KermetaRemoteInterpreter extends UnicastRemoteObject implements IKe
 	{
 		//Instanciate the debug remoteInterpreter
 		kermetaInterpreter = KermetaLauncher.getDefault().runKermeta(
-        		startfile, classname, opname, args, true) ; //, null);//debugCondition);
+        		startfile, classname, opname, args, true, true) ; //, null);//debugCondition);
         interpreter = (DebugInterpreter)kermetaInterpreter.getMemory().getCurrentInterpreter();
         
 	}

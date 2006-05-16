@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfigTabGroup.java,v 1.12 2006-01-25 16:06:21 dvojtise Exp $
+/* $Id: KermetaLaunchConfigTabGroup.java,v 1.13 2006-05-16 15:35:59 jmottu Exp $
  * Project: Kermeta.runner
  * File: KermetaLaunchConfigTabGroup.java
  * License: EPL
@@ -24,7 +24,7 @@ public class KermetaLaunchConfigTabGroup extends
 {
     /**
      * Create the tabs needed to configure the launch of a Kermeta program.
-     * Thess tabs appear in configuration dialog open after a clikc on "Run..." or "Debug..."
+     * These tabs appear in configuration dialog open after a clikc on "Run..." or "Debug..."
      * @see org.eclipse.debug.ui.ILaunchConfigurationTabGroup#createTabs(org.eclipse.debug.ui.ILaunchConfigurationDialog, java.lang.String)
      */
     public void createTabs(ILaunchConfigurationDialog dialog, String mode)
@@ -49,5 +49,6 @@ public class KermetaLaunchConfigTabGroup extends
             };
         }
         setTabs(tabs);
+        
     }
 }

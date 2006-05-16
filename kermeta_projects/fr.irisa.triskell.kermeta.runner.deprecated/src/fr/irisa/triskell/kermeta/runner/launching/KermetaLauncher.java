@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.10 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.11 2006-05-16 15:35:59 jmottu Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -84,7 +84,7 @@ public class KermetaLauncher
             if (argv[i].equals("-args") && argv[i+1]!="")
             {  args = argv[i+1];i+=1;}
         }
-        getDefault().runKermeta(startFile, className, opName, args, false);
+        getDefault().runKermeta(startFile, className, opName, args, false, false);
     }
 
     /**
@@ -101,7 +101,7 @@ public class KermetaLauncher
     		String fileNameString, 
     		String classQualifiedNameString, 
     		String operationString, 
-    		String argsString, boolean isDebugMode)
+    		String argsString, boolean isDebugMode, boolean isConstraintMode)
     {
         IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
 	    if (iresource instanceof IFile)
@@ -135,7 +135,8 @@ public class KermetaLauncher
             interpreter.setKStream(console);     
             if (isDebugMode == false)
             {
-                interpreter.launch();
+            	if (isConstraintMode) interpreter.launchConstraint();
+            	else interpreter.launch();
     	        interpreter.setKStream(null);
     	        interpreter.freeJavaMemory();
     	        KermetaUnitFactory.resetDefaultLoader();

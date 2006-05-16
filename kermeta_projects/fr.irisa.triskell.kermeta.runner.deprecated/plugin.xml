@@ -124,6 +124,13 @@
           modes="run, debug"
           id="KermetaLaunchConfiguration">
     </launchConfigurationType>
+    <launchConfigurationType
+          delegate="fr.irisa.triskell.kermeta.runner.launching.ConstraintLaunchConfiguration"
+          id="ConstraintLaunchConfiguration"
+          modes="run"
+          name="Kermeta Constraint Application"
+          public="true"
+          sourceLocatorId="kermetaSourceLocator"/>
    </extension>
 
 	<!-- Tab groups for the launch configuration manager -->
@@ -142,6 +149,19 @@
                mode="debug"
                perspective="org.eclipse.debug.ui.DebugPerspective"/>
       </launchConfigurationTabGroup>
+      <launchConfigurationTabGroup
+            class="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfigTabGroup"
+            description="kermeta interpreter with constraints"
+            id="ConstraintTabGroup"
+            type="ConstraintLaunchConfiguration">
+         <launchMode
+               description="run mode with constraint interpretation"
+               mode="run"/>
+         <launchMode
+               description="Debug configuration"
+               mode="debug"
+               perspective="org.eclipse.debug.ui.DebugPerspective"/>
+      </launchConfigurationTabGroup> 
    </extension> 
  
    <!-- Perspective -->
@@ -168,6 +188,61 @@
                image="icons/full/ctool16/run_exc.gif"
                id="org.eclipse.debug.ui.launchGroup.run"/>
       -->         
+      </extension>
+     <extension
+            point="org.eclipse.debug.ui.launchShortcuts">
+         <shortcut
+               label="Kermeta App"
+               class="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchShortcut"
+               icon="icons/kermeta_logo.gif"
+               id="fr.irisa.triskell.kermeta.runner.kermetashortcut"
+               modes="run">
+            <contextualLaunch>
+               <contextLabel
+                     label="Kermeta App"
+                     mode="run"/>
+			   <enablement>
+	              <with
+	                    variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               		<iterate operator="or">
+                 		<or>
+                   			<test property="org.eclipse.debug.ui.matchesPattern" value="*.kmt"/>
+                   			<test property="org.eclipse.debug.ui.matchesPattern" value="*.km"/>
+                 		</or>
+               		</iterate>
+               </with>
+            </enablement>
+            </contextualLaunch>
+         </shortcut> 
+         <shortcut
+               label="Kermeta Constraint"
+               class="fr.irisa.triskell.kermeta.runner.launching.ConstraintLaunchShortcut"
+               icon="icons/kermeta_logo.gif"
+               id="fr.irisa.triskell.kermeta.runner.constraintshortcut"
+               modes="run">
+            <contextualLaunch>
+               <contextLabel
+                     label="Kermeta App with constraints"
+                     mode="run"/>
+			   <enablement>
+	              <with
+	                    variable="selection">
+                  <count
+                        value="1">
+                  </count>
+               		<iterate operator="or">
+                 		<or>
+                   			<test property="org.eclipse.debug.ui.matchesPattern" value="*.kmt"/>
+                   			<test property="org.eclipse.debug.ui.matchesPattern" value="*.km"/>
+                 		</or>
+               		</iterate>
+               </with>
+            </enablement>
+            </contextualLaunch>
+         </shortcut> 
       </extension>
       <extension
             point="org.eclipse.ui.newWizards">
@@ -224,35 +299,6 @@
          </actionSet>
       </extension>
       <!-- Kermeta launch short cut -->
-     <extension
-            point="org.eclipse.debug.ui.launchShortcuts">
-         <shortcut
-               label="Kermeta App"
-               class="fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchShortcut"
-               icon="icons/kermeta_logo.gif"
-               id="fr.irisa.triskell.kermeta.runner.kermetashortcut"
-               modes="run">
-            <contextualLaunch>
-               <contextLabel
-                     label="Kermeta App"
-                     mode="run"/>
-			   <enablement>
-	              <with
-	                    variable="selection">
-                  <count
-                        value="1">
-                  </count>
-               		<iterate operator="or">
-                 		<or>
-                   			<test property="org.eclipse.debug.ui.matchesPattern" value="*.kmt"/>
-                   			<test property="org.eclipse.debug.ui.matchesPattern" value="*.km"/>
-                 		</or>
-               		</iterate>
-               </with>
-            </enablement>
-            </contextualLaunch>
-         </shortcut> 
-      </extension>
      <extension
            point="org.eclipse.ui.importWizards">
      </extension>

@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.10 2006-01-12 16:46:58 zdrey Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.11 2006-05-16 15:35:59 jmottu Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -178,7 +178,7 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 			// Is one of them corresponding to our current file?
 			for (int i= 0; i < configs.length; i++) {
 				ILaunchConfiguration config= configs[i];
-				if (!(config.getAttribute(KermetaLaunchConfiguration.KM_FILENAME, "").equals("")) && //$NON-NLS-1$
+				if ((config.getAttribute(KermetaLaunchConfiguration.KM_FILENAME, "").equals("")) && //$NON-NLS-1$
 					!(config.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, "").equals("")) && //$NON-NLS-1$
 					!(config.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,"").equals("")))  //$NON-NLS-1$
 				{  //$NON-NLS-1$
