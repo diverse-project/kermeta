@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm" nsURI="http://ftm" nsPrefix="ftm">
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ftm"
+    nsURI="http://ftm" nsPrefix="ftm">
   <eSubpackages name="behavior" nsPrefix="">
-    <eClassifiers xsi:type="ecore:EClass" name="CallExpression" abstract="true" eSuperTypes="//behavior/Expression">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1" eType="//behavior/Expression" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//structure/String"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CallExpression" abstract="true" eSuperTypes="#//behavior/Expression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+          eType="#//behavior/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//structure/String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
-    <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="//behavior/CallExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="CallFeature" eSuperTypes="//behavior/CallExpression">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//behavior/Expression" containment="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="#//behavior/CallExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CallFeature" eSuperTypes="#//behavior/CallExpression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//behavior/Expression"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CallSuperOperation" eSuperTypes="//behavior/CallExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="CallResult" eSuperTypes="//behavior/CallVariable"/>
-    <eClassifiers xsi:type="ecore:EClass" name="CallValue" eSuperTypes="//behavior/CallExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CallSuperOperation" eSuperTypes="#//behavior/CallExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CallResult" eSuperTypes="#//behavior/CallVariable"/>
+    <eClassifiers xsi:type="ecore:EClass" name="CallValue" eSuperTypes="#//behavior/CallExpression"/>
   </eSubpackages>
   <eSubpackages name="structure" nsPrefix="ftm/structure">
     <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
