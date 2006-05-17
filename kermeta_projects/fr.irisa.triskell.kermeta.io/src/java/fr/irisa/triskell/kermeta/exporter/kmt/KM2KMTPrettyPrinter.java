@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.26 2006-05-04 15:27:01 jmottu Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.27 2006-05-17 12:20:54 zdrey Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -68,6 +68,7 @@ import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 
@@ -75,7 +76,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 /**
  *
  */
-public class KM2KMTPrettyPrinter extends KermetaVisitor {
+public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 
 	protected ArrayList usings = new ArrayList();
 	protected ArrayList imports = new ArrayList();
@@ -130,7 +131,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Constraint)
 	 */
-	public Object visit(Constraint node) {
+	public Object visitConstraint(Constraint node) {
 		String result = node.getStereotype().toString();
 		result += node.getName()!=null ? " "+node.getName():"";
 		result += " is\n";
@@ -151,7 +152,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FAssignement)
 	 */
-	public Object visit(Assignment node) {
+	public Object visitAssignment(Assignment node) {
 		String left = this.accept(node.getTarget()).toString();
 		String right = this.accept(node.getValue()).toString();
 		String op = (node.isIsCast())?"?":":";
@@ -161,7 +162,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Block)
 	 */
-	public Object visit(Block node) {
+	public Object visitBlock(Block node) {
 		String result = "do\n";
 		pushPrefix();
 		result += ppCRSeparatedNode(node.getStatement());
@@ -178,7 +179,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Rescue)
 	 */
-	public Object visit(Rescue node) {
+	public Object visitRescue(Rescue node) {
 		String result = "rescue";
 		if (node.getExceptionName() != null) {
 			result += "(" + node.getExceptionName() + " : " + this.accept(node.getExceptionType()) + ")";
@@ -204,14 +205,14 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.BooleanLiteral)
 	 */
-	public Object visit(BooleanLiteral node) {
+	public Object visitBooleanLiteral(BooleanLiteral node) {
 		return ""+node.isValue();
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.CallSuperOperation)
 	 */
-	public Object visit(CallSuperOperation node) {
+	public Object visitCallSuperOperation(CallSuperOperation node) {
 		String result = "super(";
 		result += ppComaSeparatedNodes(node.getParameters());
 		result += ")";
@@ -247,7 +248,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(ModelType node) {
+	public Object visitModelType(ModelType node) {
 		String qname = KMTHelper.getQualifiedName(node.getTypeDefinition());
 		String name = KMTHelper.getMangledIdentifier(node.getTypeDefinition().getName());
 		String result = ppTypeName(qname, name);
@@ -288,14 +289,14 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.TypeVariableBinding)
 	 */
-	public Object visit(TypeVariableBinding node) {
+	public Object visitTypeVariableBinding(TypeVariableBinding node) {
 		return this.accept(node.getType());
 	}
 	
 	/** 
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
-	public Object visit(ClassDefinition node) {
+	public Object visitClassDefinition(ClassDefinition node) {
 		typedef = false;
 		String result = "";
 
@@ -328,7 +329,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
-	public Object visit(PrimitiveType node) {
+	public Object visitPrimitiveType(PrimitiveType node) {
 		if (typedef == true) {
 			typedef = false;
 			String result = "alias " + node.getName() + " : " + this.accept(node.getInstanceType()) + ";";
@@ -368,7 +369,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FConditionnal)
 	 */
-	public Object visit(Conditional node) {
+	public Object visitConditional(Conditional node) {
 		String result = "if " + this.accept(node.getCondition()) + " then\n";
 		pushPrefix();
 		if (node.getThenBody() != null) result += getPrefix() + this.accept(node.getThenBody()) + "\n";
@@ -386,7 +387,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)
 	 */
-	public Object visit(Enumeration node) {
+	public Object visitEnumeration(Enumeration node) {
 		if (typedef == true) {
 			typedef = false;
 			String result = "enumeration " + KMTHelper.getMangledIdentifier(node.getName()) + "\n";
@@ -409,28 +410,28 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.EnumerationLiteral)
 	 */
-	public Object visit(EnumerationLiteral node) {
+	public Object visitEnumerationLiteral(EnumerationLiteral node) {
 		return KMTHelper.getMangledIdentifier(node.getName()) + ";";
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FunctionType)
 	 */
-	public Object visit(FunctionType node) {
+	public Object visitFunctionType(FunctionType node) {
 		return "< " + this.accept(node.getLeft()) + "->" + this.accept(node.getRight()) + " >";
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.IntegerLiteral)
 	 */
-	public Object visit(IntegerLiteral node) {
+	public Object visitIntegerLiteral(IntegerLiteral node) {
 		return "" + node.getValue();
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.JavaStaticCall)
 	 */
-	public Object visit(JavaStaticCall node) {
+	public Object visitJavaStaticCall(JavaStaticCall node) {
 		String result = "extern " + node.getJclass() + "." + KMTHelper.getMangledIdentifier(node.getJmethod()) + "(";
 		result += ppComaSeparatedNodes(node.getParameters());
 		result += ")";
@@ -442,7 +443,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	 * - a CallFeature (a parameter)
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.LambdaExpression)
 	 */
-	public Object visit(LambdaExpression node) {
+	public Object visitLambdaExpression(LambdaExpression node) {
 		String result = "{";
 		result += ppComaSeparatedNodes(node.getParameters());
 		result += " | ";
@@ -455,7 +456,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.LambdaParameter)
 	 */
-	public Object visit(LambdaParameter node) {
+	public Object visitLambdaParameter(LambdaParameter node) {
 		String result = KMTHelper.getMangledIdentifier(node.getName());
 		if (node.getType() != null) {
 			result += " : " + this.accept(node.getType());
@@ -465,7 +466,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Loop)
 	 */
-	public Object visit(Loop node) {
+	public Object visitLoop(Loop node) {
 		String result = "from " ; 
 		result += this.accept(node.getInitialization()) + "\n";
 		result += getPrefix() + "until " + this.accept(node.getStopCondition()) + "\n";
@@ -477,7 +478,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		return result;
 	}
 	
-	public Object visit(ModelTypeDefinition node) {
+	public Object visitModelTypeDefinition(ModelTypeDefinition node) {
 		String result = ppTags(node.getTag());
 		result += "modeltype " + KMTHelper.getMangledIdentifier(node.getName());
 		if (node.getTypeParameter().size() > 0) {
@@ -501,7 +502,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visit(Operation node) {
+	public Object visitOperation(Operation node) {
 		String result = ppTags(node.getTag());
 		if (node.getSuperOperation() != null) result += "method ";
 		else result += "operation ";
@@ -550,7 +551,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Parameter)
 	 */
-	public Object visit(Parameter node) {
+	public Object visitParameter(Parameter node) {
 		return KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
 	}
 	
@@ -577,7 +578,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
-	public Object visit(Package node) {
+	public Object visitPackage(Package node) {
 	    
 		String result = ppTags(node.getTag());
 		result += "package " + KMTHelper.getMangledIdentifier(node.getName()) + "\n";
@@ -597,7 +598,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ProductType)
 	 */
-	public Object visit(ProductType node) {
+	public Object visitProductType(ProductType node) {
 		String result = "[" + ppComaSeparatedNodes(node.getType()) + "]";
 		return result;
 	}
@@ -605,7 +606,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
-	public Object visit(Property node) {
+	public Object visitProperty(Property node) {
 	    String result = ppTags(node.getTag());
 		if (node.isIsDerived()) result += "property ";
 		else if (node.isIsComposite()) result += "attribute ";
@@ -645,45 +646,45 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Raise)
 	 */
-	public Object visit(Raise node) {
+	public Object visitRaise(Raise node) {
 		return "raise " + this.accept(node.getExpression());
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.SelfExpression)
 	 */
-	public Object visit(SelfExpression node) {
+	public Object visitSelfExpression(SelfExpression node) {
 		return "self";
 	}
 
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.StringLiteral)
 	 */
-	public Object visit(StringLiteral node) {
+	public Object visitStringLiteral(StringLiteral node) {
 		return "\"" + node.getValue() +"\""; //TODO : escape characters ?
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeLiteral)
 	 */
-	public Object visit(TypeLiteral node) {
+	public Object visitTypeLiteral(TypeLiteral node) {
 		return this.accept(node.getTyperef());
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeReference)
 	 */
-	public Object visit(TypeReference node) {
+	public Object visitTypeReference(TypeReference node) {
 	    return ppTypeFromMultiplicityElement(node);
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.TypeVariable)
 	 */
-	public Object visit(TypeVariable node) {
+	public Object visitTypeVariable(TypeVariable node) {
 		return KMTHelper.getMangledIdentifier(node.getName());
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.VariableDecl)
 	 */
-	public Object visit(VariableDecl node) {
+	public Object visitVariableDecl(VariableDecl node) {
 		String result = "var " + KMTHelper.getMangledIdentifier(node.getIdentifier()) + " : " + this.accept(node.getType());
 		if (node.getInitialization() != null)
 			result += " init " + this.accept(node.getInitialization());
@@ -692,20 +693,20 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.VoidLiteral)
 	 */
-	public Object visit(VoidLiteral node) {
+	public Object visitVoidLiteral(VoidLiteral node) {
 		return "void";
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.VoidType)
 	 */
-	public Object visit(VoidType node) {
+	public Object visitVoidType(VoidType node) {
 		return "Void";
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.CallFeature)
 	 */
-	public Object visit(CallFeature node) {
+	public Object visitCallFeature(CallFeature node) {
 		String result = "";
 		if (node.getTarget() != null) result += this.accept(node.getTarget());
 		else result += "self";
@@ -729,13 +730,13 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 	/**
 	 * @see kermeta.visitor.KermetaVisitor#visit(kermeta.behavior.CallResult)
 	 */
-	public Object visit(CallResult node) {
+	public Object visitCallResult(CallResult node) {
 		return "result";
 	}
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.CallVariable)
 	 */
-	public Object visit(CallVariable node) {
+	public Object visitCallVariable(CallVariable node) {
 		String result = KMTHelper.getMangledIdentifier(node.getName());
 		if (node.getParameters().size()> 0) {
 			result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
@@ -747,7 +748,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
      * Tag is used to store comments in the source code.
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.language.structure.Tag)
      */
-    public Object visit(Tag node)
+    public Object visitTag(Tag node)
     {
         String result = "";
         // User can choose to add a "@kdoc" tag
@@ -899,6 +900,7 @@ public class KM2KMTPrettyPrinter extends KermetaVisitor {
 		}
 		return result;
     }
+	
 	
 }
 
