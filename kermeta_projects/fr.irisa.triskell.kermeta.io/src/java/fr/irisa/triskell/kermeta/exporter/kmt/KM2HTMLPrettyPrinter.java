@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.1 2006-05-17 09:58:46 zdrey Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.2 2006-05-17 14:34:26 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2HTMLPrettyPrinter.java
  * License    : EPL
@@ -41,6 +41,7 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -61,13 +62,14 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	public static final String KEY_MODULE    = "Modules";
 	public static final String KEY_CLASS     = "Classes";
+	public static final String KEY_ATTRIBUTE    = "Attributes";
 	public static final String KEY_FUNCTION  = "Functions";
 	public static final String KEY_METHOD    = "Methods";
 	public static final String KEY_VALUE     = "Values";
 	public static final String MOD_INHERITED = "Inherited";
 	public static final String[] KEYS_ORDER = new String[] {KEY_MODULE, KEY_CLASS, KEY_METHOD, KEY_FUNCTION, KEY_VALUE};
 
-	public static Hashtable<String, String>	COMPACT;
+	public static Hashtable<String, String>	COMPACT; // this is unused yet - could largely reduce the output html file size 
 	// "(.*)"\s*: "(.*)", -> COMPACT.put("$1", "$2");
 	static {
 		COMPACT = new Hashtable<String, String>();
@@ -86,10 +88,10 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 
 	public Package rootPackage;
 	public String inputFile; // the kermeta program file.
+	protected KermetaUnit kmunit;
 	
 	/** True if a visit call must return a "signature" of the object, false in the "html" representation case */
 	protected boolean _as_signature;
-	protected boolean _as_list = false;
 	
 	/*
 	 *  HELPER METHODS FOR HTML PRETTY PRINT.
@@ -100,11 +102,10 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		// init
 		_contents = new Hashtable<String, String>();
 		_descriptions = new ArrayList<String>(); 
-		
 		codePrinter = new KM2KMTPrettyPrinter();
 		inputFile ="/udd/zdrey/Workspaces/KMNewWorkspace/fr.irisa.triskell.kermeta/lib/framework.km";
-		System.out.println("Trying to load : " + inputFile);
-		KMUnit kmunit = (KMUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(inputFile);
+		
+		kmunit = (KMUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(inputFile);
 		kmunit.load();
 		rootPackage = kmunit.getRootPackage();
 	}
@@ -132,23 +133,27 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	public String ppHTMLAll()
 	{
-		// Visit the entire kermeta model
+		// Visit the entire kermeta model. This methods assigns _packagesNavigation, _descriptions, _contents, etc.
 		ppNestedPackages(rootPackage);
-		
-		
 		// Get the results and display them in an HTML code
 		String result = "";
 		result += ppHTMLHeader();
 		result += ppHTMLJavaScript();
-		result += ppHTMLBody(_packagesNavigation, join(_descriptions), join(_contents.values()), _contents.keys().nextElement());
+		result += ppHTMLBody(_packagesNavigation, join(_descriptions,""), join(_contents.values(),""), "");
 		return result;
 	}
 	
-	public String join(Collection<String> l)
+	/**
+	 * Helper - join the strings of list l, delimited by delimiter
+	 * @param l
+	 * @param delimiter
+	 * @return
+	 */
+	public String join(Collection<String> l, String delimiter)
 	{
 		String result = "";
-		for (String s : l) { result += s; }
-		return result;
+		for (String s : l) { result += s + delimiter; }
+		return result.substring(0, result.length()-delimiter.length());
 	}
 	
 	/**
@@ -159,7 +164,6 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		return  "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"" +
 	    "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
 	    "<html lang=\"fr\" xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"fr\">";
-
 	}
 	
 	/**
@@ -186,10 +190,8 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 			 }
 			 r.close();
 		 } catch (FileNotFoundException e) {
-			 // TODO Auto-generated catch block
 			 e.printStackTrace();
 		 } catch (IOException e) {
-			 // TODO Auto-generated catch block
 			 e.printStackTrace();
 		 }
 		return result.toString(); 
@@ -199,7 +201,7 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	public String ppHTMLBody(String packages, String descriptions, String content, String main)
 	{
 		String result = 
-		"<body onLoad=\"javascript:documentElement('"+ main + "');\">" +
+		"<body>" +  // onLoad=\"javascript:documentElement('"+ main + "');\">" +
 
 		"<div id=\"body\">" +
 		"<div id=\"header\">" +
@@ -231,23 +233,34 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		"<!-- hidden-snip -->" +
 		"<!-- hidden nodes will be moved here -->" +
 		"</div>" +
-		"</div>" + // close div id=body
+		"</div>" + // close <div id=body>
+		
 		"</body>" +
+		ppHTMLFoot() + 
 		"</html>";
 		return result;
+	}
+	
+	public String ppHTMLFoot()
+	{
+		return "<div align='right' style='" +
+			"margin-top: 30pt; clear:both; color: #a0a0a0;'>"+
+			"<small>API generated with <a href=\"http://www.ivy.fr/sdoc\">SDoc</a> for Java!</small></div>" +
+			"</div>";
 	}
 	
 	public void ppNestedPackages(Package node)
 	{
 		// And now print the nested packages
-		Iterator<Package> it = node.getNestedPackage().iterator();
+		Iterator<Package> it = kmunit.getAllPackages().iterator();//node.getNestedPackage().iterator();
 		// this.document(node.getName(), node, 0);
 
 		while (it.hasNext())
 		{
 			node = it.next();
+			// Visit the packages in order to document their children
 			this.accept(node);
-			this.document(node.getName(), node);
+
 			String this_id = String.valueOf(node.hashCode());
 			// Construct the list of package names from which user will browse the code documentation
 			if (this._packagesNavigation!=null)
@@ -265,11 +278,9 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	 *  element is a NamedElement (operation, class, attributes, packages!) */
 	public String representation(NamedElement node)
 	{	
-		String result = "";
 		_as_signature = true; // a kind of context
-		if (node instanceof Operation)
-			result = "<code>" + this.accept(node) + "</code>";
-		return result;
+		String result = (String) this.accept(node);
+		return (result!=null && result!="")?"<code>" + result + "</code>":"";
 	}
 
 	/** 
@@ -292,7 +303,7 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		result += "<div class='docstring'>";
 		// Does this node contains annotation?
 		if (node.getTag().size()>0)
-			result += codePrinter.ppTags(node.getTag());
+			result += visitEList(node.getTag(),"");
 		else
 			result += "<span class='undocumented'>Undocumented</span>";
 		result += "</div></div>";
@@ -364,7 +375,6 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitOperation(fr.irisa.triskell.kermeta.language.structure.Operation)
 	 */
 	public Object visitOperation(Operation node) {
-		String this_id = String.valueOf(node.hashCode());
 		if (_as_signature == false)
 		{	
 			return documentFeature(node);
@@ -374,7 +384,6 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	
 	public String visitEList(EList nodes, String node_type)
 	{	
-		//if not group_printed:
 		String result = "<div class='title'>" + node_type + "</div class='title'><div class='group'>" ;
 		Iterator it = nodes.iterator();
 		while (it.hasNext())
@@ -392,17 +401,33 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitClassDefinition(fr.irisa.triskell.kermeta.language.structure.ClassDefinition)
 	 */
 	public Object visitClassDefinition(ClassDefinition node) {
+		
+		// If we want to print only a signature (see method "representation")
+		if (_as_signature == true)
+		{
+			String signature = KMTHelper.getQualifiedName(node);
+			if (node.getSuperType().size() > 0) {
+				signature += " inherits "
+					   + codePrinter.ppComaSeparatedNodes(node.getSuperType());
+			}
+			return signature;
+		}
+		
 		String this_id = String.valueOf(node.hashCode());
 		String result = "";
+		// Constructs the hyperlinked name of a Class with a ref to its description, and the list of associated operations
 		result += "<div id='" + this_id + "' class='" + "true" + "'>";
 		result += "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
 		_as_signature = false;
-		// operation visit return the hyper-linked-name of an operation, and fills its contents
+		// For each operation : construct the hyper-linked-name of an operation, with a ref of its description
 		result += this.visitEList(node.getOwnedOperation(), KEY_METHOD);
+		_as_signature = false;
+		result += this.visitEList(node.getOwnedAttribute(), KEY_ATTRIBUTE);
 		result += "</div>";
-		this._contents.put(this_id, result);//documentFeature(node)
-		
-		return documentFeature(node); //+ result;
+		// Store the constructed content
+		this._contents.put(this_id, result);
+		// Returns the hyperlinked name of this class with a ref to its description
+		return documentFeature(node);
 	}
 	
 	/**
@@ -415,16 +440,18 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitPackage(fr.irisa.triskell.kermeta.language.structure.Package)
 	 */
 	public Object visitPackage(Package node) {
+
+		if (_as_signature == true) return KMTHelper.getQualifiedName(node);
+		this.document(node.getName(), node);
 		String this_id = String.valueOf(node.hashCode());
-		
 		
 		// Construct the list of class definitions that belong to this package
 		String result = "<div id='" + this_id + "' class='" + "true" + "'>";
 		result += "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
-		_as_signature = false;
+		_as_signature = false; 
+		// use this because visitor of operation can be used for two purposes : one to print the signature, one to print the documentation
 		// class definition visit return the hyper-linked-name of a class, and fills its contents
 		result += this.visitEList(node.getOwnedTypeDefinition(), KEY_CLASS);
-		
 		result += "</div>";
 		
 		this._contents.put(this_id, result);
@@ -435,14 +462,30 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitProperty(fr.irisa.triskell.kermeta.language.structure.Property)
 	 */
 	public Object visitProperty(Property node) {
-		return "visited property '" + node.getName() + "'";
+		if (_as_signature == false)
+		{	
+			return documentFeature(node);
+		}
+		else return node.getName() + ": " + codePrinter.accept(node.getType());
 	}
 
 	/**
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitTag(fr.irisa.triskell.kermeta.language.structure.Tag)
 	 */
 	public Object visitTag(Tag node) {
-		return "visited tag '" + node.getName() + "'";
+		String result = (String) codePrinter.accept(node);
+		int begin_i = 0; int end_i = 0;
+		if (result.startsWith("/**")) begin_i = 2;
+		if (result.endsWith("*/")) end_i = result.length()-2;
+		ArrayList<String> lresult = new ArrayList<String>();
+		String[] lines = result.substring(begin_i, end_i).split("\\n");
+		for (int i = 0; i<lines.length; i++)
+		{
+			String nline = lines[i].replaceFirst("\\s*\\*?(.*)", "$1");
+			// nline.matches("\\s*\\*?(.*)"));
+			lresult.add(nline);
+		}
+		return join(lresult,"\n<br>");
 	}
 	
 
