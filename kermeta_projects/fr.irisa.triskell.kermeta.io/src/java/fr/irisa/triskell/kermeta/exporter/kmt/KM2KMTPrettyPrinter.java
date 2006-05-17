@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.27 2006-05-17 12:20:54 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.28 2006-05-17 12:55:42 zdrey Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -234,7 +234,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.Class node) {
+	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
 		String qname = KMTHelper.getQualifiedName(node.getTypeDefinition());
 		String name = KMTHelper.getMangledIdentifier(node.getTypeDefinition().getName());
 		if(qname == null || name == null){
