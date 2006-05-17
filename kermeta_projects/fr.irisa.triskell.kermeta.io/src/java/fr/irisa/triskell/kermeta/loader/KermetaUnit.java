@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.59 2006-05-05 12:34:31 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.60 2006-05-17 15:46:44 jmottu Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -38,6 +38,7 @@ import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
+import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
@@ -253,8 +254,8 @@ public abstract class KermetaUnit {
 	public Property current_property;
 	public Enumeration current_enum;
 	public Assignment current_assignment;
-	public Constraint current_constraint;
-	
+	public Constraint current_constraint; //JMM ask the utility of these
+	public CallFeature current_callFeature;
 	
 	/**
 	 * The root package of the model being built
@@ -1110,7 +1111,6 @@ public abstract class KermetaUnit {
 		//		System.out.println("loadAllTypeDefinitions " + uri);
 		if (doneLoadTypeDefinitions) return;
 		loading = true;
-		
 		doneLoadTypeDefinitions = true;
 		// load imported units
 		for(int i=0; i<importedUnits.size(); i++) {
@@ -1210,6 +1210,7 @@ public abstract class KermetaUnit {
 	 */
 	public abstract void loadBodies();
 	private boolean doneLoadBodies = false;
+
 	
 	/**
 	 * @return Returns the error from this unit. If there is an error in imported unit, 

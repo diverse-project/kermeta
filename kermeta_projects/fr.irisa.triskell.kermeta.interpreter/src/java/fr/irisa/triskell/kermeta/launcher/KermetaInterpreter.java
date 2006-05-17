@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.21 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: KermetaInterpreter.java,v 1.22 2006-05-17 15:42:10 jmottu Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -24,6 +24,7 @@ import org.apache.log4j.Logger;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
+import fr.irisa.triskell.kermeta.interpreter.ConstraintInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 
@@ -249,8 +250,23 @@ public class KermetaInterpreter {
 	 */
 	public void launch() {
 	    // Create the expression interpreter
-	    ExpressionInterpreter exp_interpreter = new ExpressionInterpreter(memory);
-	    // Instanciate the first object
+		
+		ExpressionInterpreter exp_interpreter = new ExpressionInterpreter(memory);
+	    // FIXME : this should be corrected to allow generic types as entre type
+	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getTypeDefinition()));
+	    // Execute the operation
+	    exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
+	}
+	
+	
+	/**
+	 * Create the entry object and launch the interpreter with the verification of the pre and post conditions
+	 */
+	public void launchConstraint() {
+	    // Create the expression interpreter
+		
+		System.err.println("launch_constraint");
+		ExpressionInterpreter exp_interpreter = new ConstraintInterpreter(memory);// Instanciate the first object
 	    // FIXME : this should be corrected to allow generic types as entre type
 	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getTypeDefinition()));
 	    // Execute the operation
