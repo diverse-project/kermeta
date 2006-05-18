@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.60 2006-05-17 15:46:44 jmottu Exp $
+/* $Id: KermetaUnit.java,v 1.61 2006-05-18 08:05:57 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -256,6 +256,7 @@ public abstract class KermetaUnit {
 	public Assignment current_assignment;
 	public Constraint current_constraint; //JMM ask the utility of these
 	public CallFeature current_callFeature;
+	
 	
 	/**
 	 * The root package of the model being built
@@ -1111,6 +1112,7 @@ public abstract class KermetaUnit {
 		//		System.out.println("loadAllTypeDefinitions " + uri);
 		if (doneLoadTypeDefinitions) return;
 		loading = true;
+		
 		doneLoadTypeDefinitions = true;
 		// load imported units
 		for(int i=0; i<importedUnits.size(); i++) {
@@ -1210,7 +1212,6 @@ public abstract class KermetaUnit {
 	 */
 	public abstract void loadBodies();
 	private boolean doneLoadBodies = false;
-
 	
 	/**
 	 * @return Returns the error from this unit. If there is an error in imported unit, 
@@ -1270,6 +1271,8 @@ public abstract class KermetaUnit {
 
     /** @return the packages available in this KermetaUnit */
     public Hashtable getPackages() { return packages; }
+    
+    public Package getRootPackage() { return rootPackage; }
 
 
 	/**
