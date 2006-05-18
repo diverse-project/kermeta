@@ -1,14 +1,13 @@
 @mainClass "uml2km::Main"
 @mainOperation "main"
 
-
 package uml2km;
-
 
 require kermeta
 require "Uml2.kmt"
 require "Pass1_Uml2KMTVisitor.kmt"
 require "Pass2_Uml2KMTVisitor.kmt"
+require "Pass3_Uml2KMVisitor.kmt"
 require "Uml2KMTPrinter.kmt"
 
 using kermeta::standard
@@ -81,10 +80,18 @@ class Main
 			pass2.visitPackage(p)
 		}
         
+    	stdio.writeln("\n>>>>-------------> running Pass 3 !\n")
+        // the second Pass links the KM objects
+        var pass3 : Pass3_Uml2KMTVisitor init Pass3_Uml2KMTVisitor.new
+        pass3.initialize(objectsStore)
+        
+		pass3.visitPackage(rootPackage)
+        
+    	stdio.writeln("\n>>>>-------------> saving the KM program structure !\n")
+        // storage of the generated KM model
 		var tree : kermeta::language::structure::Package
 		tree ?= objectsStore.getValue(rootPackage)
 		
-    	stdio.writeln("\n>>>>-------------> saving the KM program structure !\n")
 		var resRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
 		var resResource : kermeta::persistence::EMFResource
 		resResource ?= resRepository.createResource("../../test/kmt_test_cases/uml2/ClassDiagramOutput.km", "../ecore/kermeta_java.ecore")
@@ -99,10 +106,11 @@ class Main
 			resResource.instances.add(o)
 		}
 		
+		/////////// suspended waiting correction of "pre" & "post" problems
 //		resResource.save()
 
         // the Kermeta PrettyPrinter transforms the KM tree to code
-/*    	stdio.writeln("\n>>>>-------------> running Km2Kmt pretty printer !\n")
+    	stdio.writeln("\n>>>>-------------> running Km2Kmt pretty printer !\n")
         var upp : uml2::Uml2KMTPrinter init uml2::Uml2KMTPrinter.new
         upp.initialize()
 		// external references to other diagramms
@@ -114,7 +122,19 @@ class Main
 			extRef.add(pack)
 		}
 	    stdio.writeln(upp.visitRootPackage(tree, extRef, 0))
-*/	    
+	    
 	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
      end
 }
+/*
+class KMLoaderModuleUML inherits KermetaLoaderModule {
+
+	operation createKermetaUnit(uri : String, packages : Hashtable) : KermetaUnit is do
+//		result := UMLUnit(uri, packages); 
+	end
+}
+
+class UMLUnit inherits KermetaUnit {
+	
+}
+*/

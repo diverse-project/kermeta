@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
   <model href="ClassDiagram.uml2#_tPOCIaLHEdqkGMDvm75SlQ"/>
-  <diagrams position="0,0" size="100,100" name="ClassDiagram" viewport="0,122">
+  <diagrams position="0,0" size="100,100" name="ClassDiagram" viewport="0,0">
     <property key="org.topcased.modeler.di.typeName" value="Class Diagram"/>
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
@@ -49,7 +49,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="50,233" size="169,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.3 //@diagrams.0/@contained.7 //@diagrams.0/@contained.11 //@diagrams.0/@contained.15 //@diagrams.0/@contained.17"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.3 //@diagrams.0/@contained.7 //@diagrams.0/@contained.9 //@diagrams.0/@contained.13 //@diagrams.0/@contained.15"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ClassDiagram.uml2#_GDAxkMYXEdqnU4rvBMdn4Q"/>
       </semanticModel>
@@ -110,7 +110,7 @@
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
     <contained xsi:type="di:GraphNode" position="371,233" size="133,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.9 //@diagrams.0/@contained.13"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.11"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ClassDiagram.uml2#_LAW1UMYXEdqnU4rvBMdn4Q"/>
       </semanticModel>
@@ -142,40 +142,8 @@
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="571,124" size="187,58">
-      <anchorage graphEdge="//@diagrams.0/@contained.9"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="file:/udd/vmahe/Projets/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ExternClassDiagram.uml2#_vYfsAMYXEdqnU4rvBMdn4Q"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="40"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="file:/udd/vmahe/Projets/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ExternClassDiagram.uml2#_vYfsAMYXEdqnU4rvBMdn4Q"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="file:/udd/vmahe/Projets/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ExternClassDiagram.uml2#_zwPvYMYXEdqnU4rvBMdn4Q"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="45"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="file:/udd/vmahe/Projets/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ExternClassDiagram.uml2#_vYfsAMYXEdqnU4rvBMdn4Q"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.8/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="ClassDiagram.uml2#_xuMioMYYEdqnU4rvBMdn4Q"/>
-      </semanticModel>
-      <waypoints>[0, -26, -214, 49]</waypoints>
-      <waypoints>[0, -7, -214, 68]</waypoints>
-      <waypoints>[214, -7, 0, 68]</waypoints>
-      <waypoints>[214, -46, 0, 29]</waypoints>
-    </contained>
     <contained xsi:type="di:GraphNode" position="79,383" size="110,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.11"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.9"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ClassDiagram.uml2#_poySAMYpEdqnU4rvBMdn4Q"/>
       </semanticModel>
@@ -192,7 +160,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.10/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.8/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ClassDiagram.uml2#_q75fsMYpEdqnU4rvBMdn4Q"/>
       </semanticModel>
@@ -203,30 +171,30 @@
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
     <contained xsi:type="di:GraphNode" position="460,308" size="196,31">
-      <anchorage graphEdge="//@diagrams.0/@contained.13"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.11"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ClassDiagram.uml2#_2Vs1odBSEdq6zpbyIcleMg"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.10/@anchorage.0 //@diagrams.0/@contained.6/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="CommentLink EditPolicy"/>
     </contained>
     <contained xsi:type="di:GraphNode" position="311,352" size="484,117">
-      <anchorage graphEdge="//@diagrams.0/@contained.15"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.13"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ClassDiagram.uml2#_WvN6oNBTEdq6zpbyIcleMg"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.14/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="CommentLink EditPolicy"/>
     </contained>
     <contained xsi:type="di:GraphNode" position="177,492" size="210,31">
-      <anchorage graphEdge="//@diagrams.0/@contained.17"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.15"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ClassDiagram.uml2#_QTO_wdCBEdqLBpNqO5TAEw"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.14/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="CommentLink EditPolicy"/>
     </contained>
   </diagrams>

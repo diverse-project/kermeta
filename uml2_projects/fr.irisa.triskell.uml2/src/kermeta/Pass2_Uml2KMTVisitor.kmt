@@ -1,12 +1,12 @@
 package uml2kmt_visitors;
 
-
 require kermeta
 require "Uml2.kmt"
 require "TopDownVisitor.kmt"
 require "KmBuilder.kmt"
 
 using kermeta::standard
+using kermeta::interpreter
 using kermeta::language::structure
 using km_builder
 
@@ -42,7 +42,12 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 		end
 		// as Class/DataType/Tag are not linked thru composition
 		// we must add them in the resulting KM resource
-		resourceObjects.add(tag)
+		if tag.name != "km_body" then
+			resourceObjects.add(tag)
+		else
+			// except for the body of operations, parsed in Pass3
+			output.remove(visitable)
+		end
 		
     	super(visitable)
     end
@@ -124,15 +129,7 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 			end
 			// as Class/DataType/Tag are not linked thru composition
 			// we must add them in the resulting KM resource
-			
-			//DEBUG
-			stdio.writeln("DEBUG visitOperation : "+op.name)
-			stdio.writeln("           - result type : "+op.type.toString)
-			
 			resourceObjects.add(op.type)
-			
-			//DEBUG
-			stdio.writeln("        visitOperation : resourceObjects.add() passed")
 		}
 			
     	// all other parameters
@@ -155,15 +152,16 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 	    	var cl : Class init Class.new
 	    	cl.typeDefinition ?= type
 	    	p.type := cl
-	    	// we must add the new Class "cl" to the objects storage
-	    	output.put(uml2::Parameter.new, cl)
 	    else
 			p.type ?= type
     	end
 		// as Class/DataType/Tag are not linked thru composition
 		// we must add them in the resulting KM resource
-//		resourceObjects.add(p.type)
+		resourceObjects.add(p.type)
     	
+    	//DEBUG
+    	stdio.writeln("DEBUG - visitParameter : visitable.type = "+visitable.type.toString)
+	    	
     	super(visitable)
     end
     
@@ -211,7 +209,7 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
    		end
 		// as Class/DataType/Tag are not linked thru composition
 		// we must add them in the resulting KM resource
-//		resourceObjects.add(cl)
+		resourceObjects.add(cl)
    		
      	super(visitable)
     end

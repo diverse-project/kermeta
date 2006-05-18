@@ -58,11 +58,11 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 		then
 	    	// a Uml2 class is a "ClassDefinition" in Kermeta
 	    	// (the Kermeta "Class" is only for typing purposes)
-	    	var cl : ClassDefinition
-	    	cl := build.createClassDefinition()
-	    	cl.name := validName(visitable.name)
-	    	output.put(visitable, cl)
-	    	cl.isAbstract := visitable.isAbstract
+	    	var cldef : ClassDefinition
+	    	cldef := build.createClassDefinition()
+	    	cldef.name := validName(visitable.name)
+	    	output.put(visitable, cldef)
+	    	cldef.isAbstract := visitable.isAbstract
 	    	
 	    	super(visitable)
     	end
@@ -125,8 +125,11 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	par.isOrdered := visitable.isOrdered
     	par.isUnique := visitable.isUnique
     	par.lower := lowerValue(visitable.lowerValue)
-    	par.upper := upperValue(visitable.upperValue)
+		par.upper := upperValue(visitable.upperValue)
     	
+    	//DEBUG
+    	stdio.writeln("DEBUG - visitParameter : visitable.type = " + visitable.type.name.toString)
+	    	
     	super(visitable)
     end
     

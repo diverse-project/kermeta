@@ -5,12 +5,10 @@
       <ownedAttribute name="Property1" type="/2" upper="1"/>
       <ownedOperation tag="/1" name="Operation1" type="/3" upper="1"/>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Class2" superType="/5">
-      <ownedOperation name="Operation2" upper="1"/>
-    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Class2" superType="/5"/>
   </kermeta_language_structure:Package>
-  <kermeta_language_structure:Tag name="kdoc" value="Comment1" object="/0/@ownedTypeDefinition.0/@ownedOperation.0"/>
-  <kermeta_language_structure:Class typeDefinition="/0/@ownedTypeDefinition.0"/>
+  <kermeta_language_structure:Tag name="km_body" value="do&#xA;    stdio.writeln(new.toString)&#xA;    result := new&#xA;end" object="/0/@ownedTypeDefinition.0/@ownedOperation.0"/>
+  <kermeta_language_structure:Class typeDefinition="/0/@ownedTypeDefinition.1"/>
   <kermeta_language_structure:Class typeDefinition="/0/@ownedTypeDefinition.0"/>
   <kermeta_language_structure:Class typeDefinition="/0/@ownedTypeDefinition.0"/>
   <kermeta_language_structure:Class typeDefinition="/0/@ownedTypeDefinition.0"/>

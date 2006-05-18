@@ -11,91 +11,86 @@
     <property key="diagramBottomMargin" value="20"/>
     <property key="diagramLeftMargin" value="20"/>
     <property key="diagramRightMargin" value="20"/>
-    <property key="orientation" value="landscape"/>
+    <property key="orientation" value="portrait"/>
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.uml2.classdiagram">
       <element href="simpleModel.uml2#_tPOCIqLHEdqkGMDvm75SlQ"/>
     </semanticModel>
-    <contained xsi:type="di:GraphNode" position="249,162" size="139,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.4 //@diagrams.0/@contained.5"/>
+    <contained xsi:type="di:GraphNode" position="226,174" size="254,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.4"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="simpleModel.uml2#_35wHMdtnEdqWFqrgLUDEVQ"/>
+        <element href="simpleModel.uml2#_FLCmoOAUEdq4a-d_PdcwFg"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="40"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="simpleModel.uml2#_35wHMdtnEdqWFqrgLUDEVQ"/>
+          <element href="simpleModel.uml2#_FLCmoOAUEdq4a-d_PdcwFg"/>
         </semanticModel>
         <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
           <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="simpleModel.uml2#_fGL4MNttEdqWFqrgLUDEVQ"/>
+            <element href="simpleModel.uml2#_dFlVIODNEdqFFc0fRrLHZQ"/>
           </semanticModel>
         </contained>
       </contained>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="45"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="simpleModel.uml2#_35wHMdtnEdqWFqrgLUDEVQ"/>
+          <element href="simpleModel.uml2#_FLCmoOAUEdq4a-d_PdcwFg"/>
         </semanticModel>
         <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
           <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="simpleModel.uml2#_iNtcENtoEdqWFqrgLUDEVQ"/>
+            <element href="simpleModel.uml2#_TLJO4OAVEdq4a-d_PdcwFg"/>
           </semanticModel>
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="287,294" size="157,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.5"/>
+    <contained xsi:type="di:GraphNode" position="138,294" size="138,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.2"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="simpleModel.uml2#_7MqCYNtnEdqWFqrgLUDEVQ"/>
+        <element href="simpleModel.uml2#_TCQOEOAUEdq4a-d_PdcwFg"/>
       </semanticModel>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="40"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="simpleModel.uml2#_7MqCYNtnEdqWFqrgLUDEVQ"/>
+          <element href="simpleModel.uml2#_TCQOEOAUEdq4a-d_PdcwFg"/>
         </semanticModel>
       </contained>
       <contained xsi:type="di:GraphNode">
         <property key="eStructuralFeatureID" value="45"/>
         <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="simpleModel.uml2#_7MqCYNtnEdqWFqrgLUDEVQ"/>
+          <element href="simpleModel.uml2#_TCQOEOAUEdq4a-d_PdcwFg"/>
         </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="simpleModel.uml2#_j23Y8NttEdqWFqrgLUDEVQ"/>
-          </semanticModel>
-        </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="435,143" size="100,-1">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="simpleModel.uml2#_EhiHENtoEdqWFqrgLUDEVQ"/>
+        <element href="simpleModel.uml2#_3dETYeAWEdq7UoGkqKXgLg"/>
       </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="35"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="simpleModel.uml2#_EhiHENtoEdqWFqrgLUDEVQ"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="36"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="simpleModel.uml2#_EhiHENtoEdqWFqrgLUDEVQ"/>
-        </semanticModel>
-      </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="115,86" size="150,25">
+    <contained xsi:type="di:GraphNode" position="369,289" size="199,101">
       <anchorage graphEdge="//@diagrams.0/@contained.4"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="simpleModel.uml2#_MzPFQNttEdqWFqrgLUDEVQ"/>
+        <element href="simpleModel.uml2#_DG6rYOAXEdq7UoGkqKXgLg"/>
       </semanticModel>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="CommentLink EditPolicy"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+    <contained xsi:type="di:GraphNode" position="62,91" size="100,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="simpleModel.uml2#_Wu8gcNttEdqWFqrgLUDEVQ"/>
+        <element href="simpleModel.uml2#_Su_VwODCEdqPT_G8XcEdnQ"/>
       </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="35"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="simpleModel.uml2#_Su_VwODCEdqPT_G8XcEdnQ"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="36"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="simpleModel.uml2#_Su_VwODCEdqPT_G8XcEdnQ"/>
+        </semanticModel>
+      </contained>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

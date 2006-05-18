@@ -1,0 +1,57 @@
+/* $Id: Pass3_Uml2KMVisitor.kmt,v 1.1 2006-05-18 07:29:02 vmahe Exp $
+ * Creation date: May 10, 2006
+ * License:
+ * Copyright:
+ * Authors: vmahe@irisa.fr
+ */
+package uml2kmt_visitors;
+
+require kermeta
+require "Uml2.kmt"
+require "TopDownVisitor.kmt"
+require "KmBuilder.kmt"
+
+using kermeta::standard
+using kermeta::interpreter
+using kermeta::language::structure
+using km_builder
+
+class Pass3_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
+{
+    reference output : kermeta::utils::Hashtable<uml2::Element, Object>
+    
+    operation initialize(outputKm : kermeta::utils::Hashtable<uml2::Element, Object>) is do
+    	output := outputKm
+    end
+    
+    // each UML2 operation needs its body to be parsed
+    method visitOperation(visitable : uml2::Operation) is do
+    	// completes the operation
+    	var op : Operation
+    	op ?= output.getValue(visitable)
+    	
+    	// the dynamic expression for parsing
+    	var de : DynamicExpression init DynamicExpression.new
+    	de.initializeDefaults
+		
+    	// all other parameters
+		op.ownedParameter.each{e |
+			var t : Type
+			t ?= e.type
+			
+			de.formalParameters.put(e.name, t)
+		}
+		
+		op.tag.each{ t |
+			if t.name == "km_body" then
+				de.parse(t.~value)
+				// we don't need the tag now
+				op.tag.remove(t)
+			end
+		}
+		
+		op.body := de.expression
+    	
+    	super(visitable)
+    end
+}

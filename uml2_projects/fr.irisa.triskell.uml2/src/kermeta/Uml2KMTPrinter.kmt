@@ -15,7 +15,7 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 	 * Overwriting of the operation visit from the KM2KMT PrettyPrinter,
 	 * because we only have the text of the operation body, in a "body" tag.
 	 */
-	method visitOperation(node : kermeta::language::structure::Operation, context : Integer) : String is do
+/*	method visitOperation(node : kermeta::language::structure::Operation, context : Integer) : String is do
 		result := ""
 		out.write(visitTagSet(node.tag, context))
 		if (node.superOperation != void) then out.write(indent + "method ")
@@ -74,10 +74,10 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 				popIndent()
 			end
 		end
-	end
+	end		*/
 	
 	/** we need to rewrite this method to avoid operation body to be processed here */
-    method visitTagSet( tags : kermeta::standard::Set<kermeta::reflection::Tag>, context : Integer) : String is do
+/*    method visitTagSet( tags : kermeta::standard::Set<kermeta::reflection::Tag>, context : Integer) : String is do
     	result := ""
 		from var it : Iterator<kermeta::reflection::Tag> init tags.iterator
 		until it.isOff
@@ -91,7 +91,7 @@ class Uml2KMTPrinter inherits kermeta::utils::BasicPrettyPrinter
 				out.write("\n")
 			end
 		end
-    end
+    end		*/
 
 	/**
 	 * needed because in Kermeta language the main package syntax differs from subpackages
