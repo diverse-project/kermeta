@@ -11,5 +11,6 @@
 	<classpathentry kind="src" path="test/junit"/>
 	<classpathentry kind="lib" path="lib/thirdparty/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/traceability.jar"/>
+	<classpathentry kind="lib" path="/fr.irisa.triskell.kermeta/lib/cu_kermeta.jar"/>
 	<classpathentry kind="output" path="build/class"/>
 </classpath>
