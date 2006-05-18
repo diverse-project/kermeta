@@ -11,6 +11,7 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -59,7 +60,6 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	 */
 	public Object visitClassDefinition(ClassDefinition arg0) {
 		ArrayList result = new ArrayList();
-		
 		if (outline.prefInheritanceFlattening()) {
 		    Iterator it = InheritanceSearch.callableProperties(InheritanceSearch.getFClassForClassDefinition(arg0)).iterator();
 		    while(it.hasNext()) {
@@ -74,10 +74,27 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 		        if (cop.getFclass().getTypeDefinition() != arg0)
 		            result.add(new OutlineItem(cop.getTypeBoundedOperation(), item, outline));
 		    }
+		    
+		    it = arg0.getSuperType().iterator();
+		    while(it.hasNext()){
+		    	 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
+			     ClassDefinition parent = (ClassDefinition)metaClass.getTypeDefinition();
+			     Iterator it2 = parent.getInv().iterator();
+		    	 while (it2.hasNext()){
+		    		Constraint ci = (Constraint)it2.next();
+			        result.add(new OutlineItem(ci, item, outline));
+		    	 }
+		    }
 		
 		}
 
-	    Iterator it = arg0.getOwnedAttribute().iterator();
+		Iterator it = arg0.getInv().iterator();
+	    while(it.hasNext()) {
+	    	Constraint ci = (Constraint)it.next();
+	        result.add(new OutlineItem(ci, item, outline));
+	    }
+	    
+	    it = arg0.getOwnedAttribute().iterator();
 	    while(it.hasNext()) {
 	        Property p = (Property)it.next();
 	        result.add(new OutlineItem(p, item, outline));
@@ -88,13 +105,17 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	        Operation op = (Operation)it.next();
 	        result.add(new OutlineItem(op, item, outline));
 	    }
-		    
-		    
-		
-		
+	    
 		if (outline.prefSortedOutline())
 		    Collections.sort(result);
 		return result.toArray();
+	}
+	
+	/**
+	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
+	 */
+	public Object visitConstraint(Constraint arg0) {
+		return new Object[0];
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)
@@ -124,7 +145,39 @@ public class GetChildrenVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visitOperation(Operation arg0) {
-		return new Object[0];
+		ArrayList result = new ArrayList();
+
+		if (outline.prefInheritanceFlattening() && arg0.getSuperOperation() != null) {
+			Iterator itpre = arg0.getSuperOperation().getPre().iterator();
+			while(itpre.hasNext()) {
+		    	Constraint ci = (Constraint)itpre.next();
+		        result.add(new OutlineItem(ci, item, outline));
+			}
+		}
+		
+		Iterator it = arg0.getPre().iterator();
+	    while(it.hasNext()) {
+	    	Constraint ci = (Constraint)it.next();
+	        result.add(new OutlineItem(ci, item, outline));
+	    }
+	    
+	    it = arg0.getPost().iterator();
+	    while(it.hasNext()) {
+	    	Constraint ci = (Constraint)it.next();
+	        result.add(new OutlineItem(ci, item, outline));
+	    }
+	    
+	    if (outline.prefInheritanceFlattening() && arg0.getSuperOperation() != null) {
+	    	it = arg0.getSuperOperation().getPost().iterator();
+			while(it.hasNext()) {
+		    	Constraint ci = (Constraint)it.next();
+		        result.add(new OutlineItem(ci, item, outline));
+		    }
+	    }
+	    
+		if (outline.prefSortedOutline())
+		    Collections.sort(result);
+		return result.toArray();
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Package)

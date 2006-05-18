@@ -15,6 +15,7 @@ import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.texteditor.icons.blue.KermetaIconsBlue;
+import fr.irisa.triskell.kermeta.texteditor.icons.KermetaSpecialIcons;
 import fr.irisa.triskell.kermeta.texteditor.icons.green.KermetaIconsGreen;
 import fr.irisa.triskell.kermeta.texteditor.icons.red.KermetaIconsRed;
 import fr.irisa.triskell.kermeta.texteditor.icons.yellow.KermetaIconsYellow;
@@ -48,7 +49,7 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Constraint)
 	 */
 	public Object visitConstraint(Constraint arg0) {
-		return KermetaIconsYellow.CLASS;
+		return KermetaSpecialIcons.CONSTRAINT;
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)

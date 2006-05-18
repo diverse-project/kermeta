@@ -74,7 +74,7 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Constraint)
 	 */
 	public Object visitConstraint(Constraint arg0) {
-	   	return KermetaIconsYellow.CLASS;	
+	   	return KermetaSpecialIcons.CONSTRAINT;	
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)

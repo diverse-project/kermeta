@@ -64,6 +64,7 @@ class GetTextVisitor extends KermetaOptimizedVisitor {
 			result += " -> ";
 			result += ppComaSeparatedNodes(node.getSuperType());
 		}
+		
 		return result;
 	}
 	
@@ -86,7 +87,7 @@ class GetTextVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Constraint)
 	 */
 	public Object visitConstraint(Constraint node) {
-		String result = node.getName() + node.getStereotype().getName();		
+		String result = node.getName() + " : " + node.getStereotype().getName();		
 		return result;
 	}
 	/**
