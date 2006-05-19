@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.12 2006-05-19 07:17:19 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.13 2006-05-19 13:49:59 jmottu Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -262,7 +262,7 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		}
 			
 		// Create an annotation to hold the operation post
-		Iterator itpost = node.getPre().iterator();
+		Iterator itpost = node.getPost().iterator();
 		while(itpost.hasNext()){
 			String postString = (String)new KM2KMTPrettyPrinter().accept((Constraint)itpost.next());
 			ecoreExporter.addAnnotation( 
