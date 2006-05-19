@@ -27,10 +27,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
-import fr.irisa.triskell.kermeta.language.behavior.CallExpression;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
+
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
@@ -44,19 +44,13 @@ import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
-/*
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.TypeContainementFixer;
-import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-*/
 /**
  * This class is a singleton, that is only created once (it is a "static"
  * class, in the meaning that it never changes through the execution process
@@ -110,7 +104,9 @@ public class KermetaUtils {
 		if (kermetaUtils == null)
 		{
 			kermetaUtils = new KermetaUtils();
+			
 		}
+		kermetaUtils.prettyPrinter = new KM2KMTPrettyPrinter();
 		return kermetaUtils;
 	}
 	
@@ -165,10 +161,16 @@ public class KermetaUtils {
 		for (Iterator<Package> it = pkg.getNestedPackage().iterator(); it.hasNext(); )
 		{
 			for (Iterator<TypeDefinition> sit = it.next().getOwnedTypeDefinition().iterator(); sit.hasNext(); )
-				result.add(createTypeForTypeDefinition(sit.next()));
+			{
+				Type t = createTypeForTypeDefinition(sit.next());
+				if (t!=null) result.add(t);
+			}
 		}
 		for (Iterator<TypeDefinition> it = pkg.getOwnedTypeDefinition().iterator(); it.hasNext();)
-			result.add(createTypeForTypeDefinition(it.next()));
+		{
+			Type t = createTypeForTypeDefinition(it.next());
+			if (t!=null) result.add(t);
+		}
 		// Now add the Kermeta standard library classifiers
 		result.addAll(getStdLibTypes());
 		return result;
@@ -218,6 +220,7 @@ public class KermetaUtils {
 	 */
 	public List<TypeDefinition> getStdLibTypeDefinitions()
 	{
+		//return new ArrayList<TypeDefinition>();
 		return standardUnit.getAllTypeDefinitions();
 	}
 	
@@ -229,7 +232,10 @@ public class KermetaUtils {
 	{
 		List<Type> result = new ArrayList<Type>();
 		for (Iterator<TypeDefinition> it = getStdLibTypeDefinitions().iterator(); it.hasNext();)
-			result.add(createTypeForTypeDefinition(it.next()));
+		{
+			Type t = createTypeForTypeDefinition(it.next());
+			if (t != null) result.add(t);
+		}
 		return result;
 	}
 
@@ -252,7 +258,8 @@ public class KermetaUtils {
         	type_name = type==null?"<Null>":type.toString();
         	//throw new Error("FTYPE : Not implemented error : createTypeForTypeDefinition -- Enumeration type is not handled yet. (" + type + ")");
         }
-        return type_name;
+		// FIXME : getName return sometimes null, which is unconsistent
+		return (type_name!=null)?type_name:"<Unset>";
 	}
 	
 	public String getLabelForTypeVariable(TypeVariable var)
@@ -267,20 +274,21 @@ public class KermetaUtils {
         if (typedef instanceof ClassDefinition)
         {
         	//type = StructureFactory.eINSTANCE.createfr.irisa.triskell.kermeta.language.structure.Class();
-        	type = standardUnit.struct_factory.createClass();
+        	type = StructureFactory.eINSTANCE.createClass();
         	((fr.irisa.triskell.kermeta.language.structure.Class)type).setTypeDefinition((ClassDefinition)typedef);
         	//type = ((ClassDefinition)_returnType).()
         }
-        else if (typedef instanceof PrimitiveType)
+/*        else if (typedef instanceof PrimitiveType) // PrimitiveType inherits DataType which inherits TypeDefinition
         {
         	type = StructureFactory.eINSTANCE.createPrimitiveType();
         	((PrimitiveType)type).setInstanceType(null); // TODO
         	
         }
-        else if (typedef instanceof Enumeration)
+        else if (typedef instanceof Enumeration) // Enumeration inherits DataType which inherits TypeDefinition
         {
-        	throw new Error("Not implemented error : createTypeForTypeDefinition -- Enumeration type is not handled yet. (" + typedef + ")");
-        }
+        	type = StructureFactory.eINSTANCE.createEnumeration();
+        	//throw new Error("Not implemented error : createTypeForTypeDefinition -- Enumeration type is not handled yet. (" + typedef + ")");
+        }*/
         return type;
 	}
 	
@@ -392,10 +400,10 @@ public class KermetaUtils {
 			typedef = ((fr.irisa.triskell.kermeta.language.structure.Class)type).getTypeDefinition();
 			typedef_qname = KMTHelper.getQualifiedName(typedef);
 		}
-		else if (type instanceof TypeDefinition) // case of PrimitiveTypes!
+		else if (!(type instanceof VoidType))
 		{
-			typedef = (TypeDefinition) type;
-			typedef_qname = KMTHelper.getQualifiedName(typedef);
+			// do not throw an error but just print a message in a dialog box
+			// throw new Error("Not implemented exception : a model element has an unhandled type yet : " + type);
 		}
 		// FIXME : this does not seem to work!! seems to be 2 frameworks loaded in memory, but
 		// where???
@@ -403,7 +411,8 @@ public class KermetaUtils {
 		// Typedef is null when type is note fr.irisa.triskell.kermeta.language.structure.Class or not TypeDefinition....
 		if (typedef_qname!=null)
 		{
-			isstandardtype = standardUnit.getTypeDefinitionByName(typedef_qname)!=null;
+			isstandardtype = standardUnit.getTypeDefinitionByName(typedef_qname)!=null ||
+							 type instanceof VoidType ; // FIXME dirty patch
 		}
 		return isstandardtype;
 	}

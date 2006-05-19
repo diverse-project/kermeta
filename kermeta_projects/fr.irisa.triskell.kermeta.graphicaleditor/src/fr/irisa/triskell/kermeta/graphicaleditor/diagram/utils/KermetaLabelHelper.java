@@ -1,4 +1,4 @@
-/* $Id: KermetaLabelHelper.java,v 1.2 2006-04-18 13:38:28 zdrey Exp $
+/* $Id: KermetaLabelHelper.java,v 1.3 2006-05-19 16:20:01 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : KermetaLabelHelper.java
  * License    : EPL
@@ -84,8 +84,10 @@ public class KermetaLabelHelper extends LabelHelper {
 			cpt++;
 		}
 		if (childEObject instanceof Property)
+			// if the object has no type yet
+			if (((Property)childEObject).getType()!=null)
 			result = KermetaUtils.getDefault().getLabelForType(((Property)childEObject).getType()).toLowerCase();
-		else
+		if (result == null || result.length() == 0)
 			result = childEObject.eClass().getName().toLowerCase();
 		return result + cpt;
 	}
@@ -115,7 +117,7 @@ public class KermetaLabelHelper extends LabelHelper {
 				if (childEObject instanceof Property)
 					nameToMatch = KermetaUtils.getDefault().getLabelForType(((Property)childEObject).getType()).toLowerCase() + currentCpt;
 				else
-					nameToMatch = child.eClass().getName() + currentCpt;
+					nameToMatch = childEObject.eClass().getName() + currentCpt;
 				if (nameToMatch.equals(getName(editDomain, child)))
 				{
 					return false;
@@ -134,7 +136,9 @@ public class KermetaLabelHelper extends LabelHelper {
 		if (eObject instanceof Property && ((Property)eObject).getType()!=null)
 			result = KermetaUtils.getDefault().getLabelForType(((Property)eObject).getType()).toLowerCase() ;
 		else
+		{
 			result = eObject.eClass().getName();
+		}
 		return result;
 			
 	}

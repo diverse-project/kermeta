@@ -1,4 +1,4 @@
-/* $Id: OperationDataStructure.java,v 1.3 2006-04-11 17:29:35 zdrey Exp $
+/* $Id: OperationDataStructure.java,v 1.4 2006-05-19 16:20:01 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -7,7 +7,7 @@
  * Creation date : Feb 20, 2006
  * Authors       : zdrey
  */
-/* $Id: OperationDataStructure.java,v 1.3 2006-04-11 17:29:35 zdrey Exp $
+/* $Id: OperationDataStructure.java,v 1.4 2006-05-19 16:20:01 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : OperationDataStructure.java
  * License   : EPL
@@ -33,8 +33,14 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 /**
- * Provide a structure for handling Operation data <br>
- * Used for the popup-property that defines an operation (parameters, return type)  
+ * Provide a structure for handling some of the Operation datas, that is, the
+ * parameters, the type parameters, and the operation body. They are handled
+ * in a specific structure since they need a more complex handling than 
+ * the other elements of the operation, that is, its name, its return type, and its
+ * super operation, that do not require specific computation (like removal, adding,
+ * reparsing)<br>
+ * Used for the popup-property that defines an operation (parameters, type parameters, return type...)
+ * 
  * @generated NOT
  */
 public class OperationDataStructure
@@ -83,7 +89,7 @@ public class OperationDataStructure
      */
     public void addOwnedParameter(Parameter parameter)
     {
-   		_dataOwnedParameters.add(new ParameterObject(parameter.getName(), parameter.getType()));
+    	_dataOwnedParameters.add(new ParameterObject(parameter.getName(), parameter.getType()));
     }
 
     /**
