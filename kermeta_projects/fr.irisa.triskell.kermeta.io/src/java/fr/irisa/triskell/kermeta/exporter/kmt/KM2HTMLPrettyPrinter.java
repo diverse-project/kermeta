@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.2 2006-05-17 14:34:26 zdrey Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.3 2006-05-19 15:55:11 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2HTMLPrettyPrinter.java
  * License    : EPL
@@ -136,11 +136,12 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		// Visit the entire kermeta model. This methods assigns _packagesNavigation, _descriptions, _contents, etc.
 		ppNestedPackages(rootPackage);
 		// Get the results and display them in an HTML code
-		String result = "";
-		result += ppHTMLHeader();
-		result += ppHTMLJavaScript();
-		result += ppHTMLBody(_packagesNavigation, join(_descriptions,""), join(_contents.values(),""), "");
-		return result;
+		StringBuffer result = new StringBuffer();
+		
+		result.append(ppHTMLHeader());
+		result.append(ppHTMLJavaScript());
+		result.append(ppHTMLBody(_packagesNavigation, join(_descriptions,""), join(_contents.values(),""), ""));
+		return result.toString();
 	}
 	
 	/**
@@ -200,8 +201,9 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	/** This is the method that prints the whole html body*/
 	public String ppHTMLBody(String packages, String descriptions, String content, String main)
 	{
-		String result = 
-		"<body>" +  // onLoad=\"javascript:documentElement('"+ main + "');\">" +
+		StringBuffer result = new StringBuffer();
+		
+		result.append("<body>" +  // onLoad=\"javascript:documentElement('"+ main + "');\">" +
 
 		"<div id=\"body\">" +
 		"<div id=\"header\">" +
@@ -237,8 +239,8 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		
 		"</body>" +
 		ppHTMLFoot() + 
-		"</html>";
-		return result;
+		"</html>");
+		return result.toString();
 	}
 	
 	public String ppHTMLFoot()
@@ -355,7 +357,7 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		else 
 		{
 			hash_code = ((ClassDefinition)node).eContainer().hashCode();
-			System.err.println("Help:" + ((ClassDefinition)node).eContainer() );
+			//System.err.println("Help:" + ((ClassDefinition)node).eContainer() );
 		}
 		
 		String this_id = String.valueOf(hash_code); // fixme : parent_id is a better name
