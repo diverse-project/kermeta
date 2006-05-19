@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.topcased.modeler.editor.GraphElementCreationFactory;
 import org.topcased.modeler.editor.ICreationUtils;
 
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 
@@ -76,11 +77,11 @@ public class ExtendedGraphElementCreationFactory extends
 	 */
 	public EObject getNewModelObject() {
 		EObject result = super.getNewModelObject();
-		//result.
 		// We would like to express initializations like :
 		// "((Property)%object%).setType(%stringrepresentingaprimitivetype%)
 		// FIXME : dirty temporary test.
-		((Property)result).setType(StructureFactory.eINSTANCE.createPrimitiveType());
+		// Create the "String" type.
+		((Property)result).setType(StructureFactory.eINSTANCE.createVoidType());
 		return result;
 	}
 
