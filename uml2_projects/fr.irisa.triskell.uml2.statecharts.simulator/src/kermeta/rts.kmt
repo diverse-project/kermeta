@@ -1,14 +1,349 @@
-@mainClass "RTS::Main"
-@mainOperation "main"
-
-
-package RTS;
-
+package rts;
 
 require kermeta
-class Main
+
+using kermeta::standard
+
+class TimeManager inherits rts::Activable
 {
-    operation main() : Void is do 
-        // TODO: implement 'main' operation
+    reference date : rts::Date
+    reference timer_list : set rts::Timer[1..*]
+    operation make() is do
+        //TODO: implement operation make
+    end    operation reset(d : kermeta::standard::Integer) is do
+        //TODO: implement operation reset
+    end    method nb_transitions() : kermeta::standard::Integer from rts::Activable is do
+        //TODO: implement operation nb_transitions
+    end    method guards(n : kermeta::standard::Integer) : kermeta::standard::Boolean from rts::Activable is do
+        //TODO: implement operation guards
+    end    method labels(n : kermeta::standard::Integer) : kermeta::standard::String from rts::Activable is do
+        //TODO: implement operation labels
+    end    method action(n : kermeta::standard::Integer) from rts::Activable is do
+        //TODO: implement operation action
+    end    operation has(t : rts::Timer) : kermeta::standard::Boolean is do
+        //TODO: implement operation has
+    end    operation remove(t : rts::Timer) is do
+        //TODO: implement operation remove
+    end    operation put(t : rts::Timer) is do
+        //TODO: implement operation put
     end
 }
+
+abstract class Activable
+{
+    reference identity : rts::Identity
+    operation nb_transitions() : kermeta::standard::Integer is abstract    operation labels(n : kermeta::standard::Integer) : kermeta::standard::String is abstract    operation action(n : kermeta::standard::Integer) is abstract    operation guards(n : kermeta::standard::Integer) : kermeta::standard::Boolean is abstract    operation init_activable(name : kermeta::standard::String) is do
+        //TODO: implement operation init_activable
+    end
+}
+
+abstract class Reactive
+{
+    operation receive(e : rts::Event) is abstract
+}
+
+abstract class StateMachine inherits rts::Reactive
+{
+    operation entry() is do
+        //TODO: implement operation entry
+    end    operation exit() is do
+        //TODO: implement operation exit
+    end    operation completion() is do
+        //TODO: implement operation completion
+    end    operation enter(new_state : rts::StateMachine) is do
+        //TODO: implement operation enter
+    end    operation leave(old_state : rts::StateMachine) is do
+        //TODO: implement operation leave
+    end    operation oclInState(other : rts::StateMachine) is do
+        //TODO: implement operation oclInState
+    end
+}
+
+class Timer inherits rts::TimeManagerAccessor
+{
+    reference label : kermeta::standard::String
+    reference deadline : kermeta::standard::Integer
+    reference target : rts::Reactive
+    reference alarm : rts::Alarm
+    operation make(reactor : rts::Reactive) is do
+        //TODO: implement operation make
+    end    operation ~set_all(reactor : rts::Reactive, signal : rts::Alarm, delay : kermeta::standard::Integer, new_label : kermeta::standard::String) is do
+        //TODO: implement operation ~set
+    end    operation current_date() : kermeta::standard::Integer is do
+        //TODO: implement operation current_date
+    end    operation is_running() : kermeta::standard::Boolean is do
+        //TODO: implement operation is_running
+    end    operation is_ringing() : kermeta::standard::Boolean is do
+        //TODO: implement operation is_ringing
+    end    operation is_equal(other : rts::Timer) : kermeta::standard::Boolean is do
+        //TODO: implement operation is_equal
+    end    operation reset() is do
+        //TODO: implement operation reset
+    end    operation reschedule(new_delay : kermeta::standard::Integer, new_label : kermeta::standard::String) is do
+        //TODO: implement operation reschedule
+    end    operation fire() is do
+        //TODO: implement operation fire
+    end    operation infix(other : rts::Timer) : kermeta::standard::Boolean is do
+        //TODO: implement operation infix "<"
+    end
+}
+
+class Identity
+{
+    reference out : kermeta::standard::String
+    operation default_create() is do
+        //TODO: implement operation default_create
+    end    operation set_out(new_out : kermeta::standard::String) is do
+        //TODO: implement operation set_out
+    end    operation deep_twin() : rts::Identity is do
+        //TODO: implement operation deep_twin
+    end    operation is_deep_equal(other : rts::Identity) : kermeta::standard::Boolean is do
+        //TODO: implement operation is_deep_equal
+    end    operation identity_counter() : rts::INTEGER_REF is do
+        //TODO: implement operation identity_counter
+    end
+}
+
+abstract class Event
+{
+    reference arguments : set rts::Any[0..*]
+    reference event_name : kermeta::standard::String
+    reference out : kermeta::standard::String
+    operation make() is do
+        //TODO: implement operation make
+    end    operation send_to(target : rts::Any) is do
+        //TODO: implement operation send_to
+    end    operation dispatch_to(target : rts::Any) is abstract    operation label() : kermeta::standard::String is do
+        //TODO: implement operation label
+    end    operation label_for_arguments() : kermeta::standard::String is do
+        //TODO: implement operation label_for_arguments
+    end
+}
+
+class TimeEvent inherits rts::Event
+{
+
+}
+
+abstract class ActiveStateMachine inherits rts::Activable, rts::StateMachine
+{
+    reference message_queue : set rts::Event[0..*]
+    method init_activable(name : kermeta::standard::String) from rts::Activable is do
+        //TODO: implement operation init_activable
+    end    method receive(e : rts::Event) from rts::Reactive is do
+        //TODO: implement operation receive
+    end    operation dispatch() is do
+        //TODO: implement operation dispatch
+    end    method nb_transitions() : kermeta::standard::Integer from rts::Activable is do
+        //TODO: implement operation nb_transitions
+    end    method labels(n : kermeta::standard::Integer) : kermeta::standard::String from rts::Activable is do
+        //TODO: implement operation labels
+    end    method guards(n : kermeta::standard::Integer) : kermeta::standard::Boolean from rts::Activable is do
+        //TODO: implement operation guards
+    end    method action(n : kermeta::standard::Integer) from rts::Activable is do
+        //TODO: implement operation action
+    end    operation completion_n(n : kermeta::standard::Integer) from rts::StateMachine is do
+        //TODO: implement operation completion
+    end    operation message_queue_capacity() : kermeta::standard::Integer is do
+        //TODO: implement operation message_queue_capacity
+    end
+}
+
+abstract class PassiveStateMachine inherits rts::StateMachine
+{
+    method receive(e : rts::Event) from rts::Reactive is do
+        //TODO: implement operation receive
+    end
+}
+
+class TimeManagerAccessor
+{
+    operation manager() : rts::TimeManager is do
+        //TODO: implement operation manager
+    end
+}
+
+class Memory
+{
+
+}
+
+class Exceptions
+{
+
+}
+
+abstract class CADPSimulator inherits rts::TimeManagerAccessor, rts::Memory, rts::Exceptions
+{
+    reference _nb_exported_configurations_since_last_gc : kermeta::standard::Integer
+    reference current_configuration : rts::Configuration
+    reference exported_configurations : set rts::Configuration[0..*]
+    reference exported_labels : rts::Dictionnary
+    operation make_CADP_simulator() is do
+        //TODO: implement operation make_CADP_simulator
+    end    operation initial_configuration() : rts::Configuration is abstract    operation eiffel_start_state(START : rts::POINTER) is do
+        //TODO: implement operation eiffel_start_state
+    end    operation eiffel_compare_state(s1 : rts::Configuration, s2 : rts::Configuration) : kermeta::standard::Boolean is do
+        //TODO: implement operation eiffel_compare_state
+    end    operation eiffel_compare_label(L1 : kermeta::standard::String, L2 : kermeta::standard::String) : kermeta::standard::Boolean is do
+        //TODO: implement operation eiffel_compare_label
+    end    operation eiffel_iterate_state(SP1 : rts::POINTER, LP : rts::POINTER, SP3 : rts::POINTER, F : rts::POINTER) is do
+        //TODO: implement operation eiffel_iterate_state
+    end    operation finalize_configuration(configuration : rts::Configuration) is do
+        //TODO: implement operation finalize_configuration
+    end    operation export_configuration(configuration : rts::Configuration) is do
+        //TODO: implement operation export_configuration
+    end    operation label_for_export(label : kermeta::standard::String) : kermeta::standard::String is do
+        //TODO: implement operation label_for_export
+    end    operation assertion_violation_configuration() is do
+        //TODO: implement operation assertion_violation_configuration
+    end    operation nb_exported_configurations_since_last_gc() : kermeta::standard::Integer is do
+        //TODO: implement operation nb_exported_configurations_since_last_gc
+    end
+}
+
+class Configuration
+{
+    reference process_table : set rts::Activable[0..*]
+    reference out : kermeta::standard::String
+    operation hash() : kermeta::standard::Integer is do
+        //TODO: implement operation hash
+    end    operation make() is do
+        //TODO: implement operation make
+    end    operation register(new_process : rts::Activable) is do
+        //TODO: implement operation register
+    end
+}
+
+class Dictionnary
+{
+
+}
+
+class Port inherits rts::StateMachine, rts::Activable
+{
+    reference fifo : set rts::Event[0..*]
+    reference server : rts::Any
+    operation initialize() is do
+        //TODO: implement operation initialize
+    end    operation connect(new_server : rts::Any) is do
+        //TODO: implement operation connect
+    end    method receive(e : rts::Event) from rts::Reactive is do
+        //TODO: implement operation receive
+    end    operation enqueue(e : rts::Event) is do
+        //TODO: implement operation enqueue
+    end    method nb_transitions() : kermeta::standard::Integer from rts::Activable is do
+        //TODO: implement operation nb_transitions
+    end    method labels(n : kermeta::standard::Integer) : kermeta::standard::String from rts::Activable is do
+        //TODO: implement operation labels
+    end    method guards(n : kermeta::standard::Integer) : kermeta::standard::Boolean from rts::Activable is do
+        //TODO: implement operation guards
+    end    method action(n : kermeta::standard::Integer) from rts::Activable is do
+        //TODO: implement operation action
+    end
+}
+
+class Any
+{
+
+}
+
+abstract class Proxy inherits rts::Any
+{
+    reference server : rts::Any
+    operation connect(new_server : rts::Any) is do
+        //TODO: implement operation connect
+    end    operation send(e : rts::Event) is do
+        //TODO: implement operation send
+    end    operation initialize() is do
+        //TODO: implement operation initialize
+    end
+}
+
+class ObjectSnapshot
+{
+    reference identity : rts::Identity
+
+}
+
+abstract class Enumeration inherits rts::Any
+{
+    reference out : kermeta::standard::String
+    operation make() is do
+        //TODO: implement operation make
+    end    operation ~enumeration() : kermeta::standard::String is do
+        //TODO: implement operation ~enumeration
+    end    operation ~value() : rts::Enumeration is do
+        //TODO: implement operation ~value
+    end    operation is_initialized() : kermeta::standard::Boolean is do
+        //TODO: implement operation is_initialized
+    end    operation is_valid_enumeration(enum_name : kermeta::standard::String) : kermeta::standard::Boolean is do
+        //TODO: implement operation is_valid_enumeration
+    end    operation value_of(enum_name : kermeta::standard::String) : rts::Enumeration is do
+        //TODO: implement operation value_of
+    end    operation from_string(str : kermeta::standard::String) is do
+        //TODO: implement operation from_string
+    end    operation set_image(new_image : kermeta::standard::String) is do
+        //TODO: implement operation set_image
+    end    operation all_images() is abstract    operation set_by_name(str : kermeta::standard::String) is do
+        //TODO: implement operation set_by_name
+    end    operation ~set_enum(new_enum : rts::Enumeration) is do
+        //TODO: implement operation ~set
+    end
+}
+
+class Linked_queue
+{
+    operation array_item() is do
+        //TODO: implement operation array_item
+    end    operation array_put() is do
+        //TODO: implement operation array_put
+    end    operation array_remove() is do
+        //TODO: implement operation array_remove
+    end    operation item() is do
+        //TODO: implement operation item
+    end    operation put() is do
+        //TODO: implement operation put
+    end    operation remove() is do
+        //TODO: implement operation remove
+    end    operation out() : kermeta::standard::String is do
+        //TODO: implement operation out
+    end
+}
+
+class Sorted_two_way_list
+{
+    operation start() is do
+        //TODO: implement operation start
+    end    operation prune(x : rts::Comparable) is do
+        //TODO: implement operation prune
+    end    operation extend(new : rts::Comparable) is do
+        //TODO: implement operation extend
+    end
+}
+
+abstract class Comparable
+{
+
+}
+
+class Alarm inherits rts::Event
+{
+
+}
+
+class POINTER
+{
+
+}
+
+class INTEGER_REF
+{
+
+}
+
+class Date
+{
+
+}
+
