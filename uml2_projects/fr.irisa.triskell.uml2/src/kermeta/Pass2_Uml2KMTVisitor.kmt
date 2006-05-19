@@ -53,6 +53,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitClass(visitable : uml2::Class) is do
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG visitClass - visitable = "+visitable.name)
+    	
     	// UML2 Class is a ClassDefinition in Kermeta
     	var cldef : ClassDefinition
     	cldef ?= output.getValue(visitable)
@@ -79,7 +83,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     
     /* visit Attributes, Properties, ... */
     method visitProperty(visitable : uml2::Property) is do
-		
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG visitProperty - visitable = "+visitable.name)
+    	
     	// we need to manage the Type class of the property,
     	// in case of external package reference
 //    	visitable.type.accept(self)
@@ -108,6 +115,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitOperation(visitable : uml2::Operation) is do
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG visitOperation - visitable = "+visitable.name)
+    	
     	// completes the operation
     	var op : Operation
     	op ?= output.getValue(visitable)
@@ -143,6 +154,11 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitParameter(visitable : uml2::Parameter) is do
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG visitParameter - visitable = "+visitable.name)
+    	stdio.writeln("       visitParameter : visitable.type = "+visitable.type.toString)
+    	
     	// associates the type of parameter to the ClassDefinition of this type
     	var p : Parameter
     	p ?= output.getValue(visitable)
@@ -157,6 +173,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	end
 		// as Class/DataType/Tag are not linked thru composition
 		// we must add them in the resulting KM resource
+    	
+    	//DEBUG
+    	stdio.writeln("       visitParameter : type = "+type.toString)
+	    	
 		resourceObjects.add(p.type)
     	
     	//DEBUG
@@ -166,6 +186,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitPackage(visitable : uml2::Package) is do
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG visitPackage - visitable = "+visitable.name)
+    	
     	var p : Package
     	p ?= output.getValue(visitable)
     	
@@ -191,11 +215,19 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitDataType(visitable : uml2::DataType) is do
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG visitDataType - visitable = "+visitable.name)
+    	
     	// TODO
     	super(visitable)
     end
     
     method visitGeneralization(visitable : uml2::Generalization) is do
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG visitGeneralization")
+    	
     	// we must add the "general" type to the "source" object
     	var gen : ClassDefinition
     	gen ?= output.getValue(visitable.general)
@@ -215,6 +247,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitAssociation(visitable : uml2::Association) is do
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG visitAssociation - visitable = "+visitable.name)
+    	
     	// the structure of representations differs
     	// from UML2 to Kermeta depending on the association cases
     	//
@@ -263,6 +299,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
 	method visitInterface(visitable : uml2::Interface) is do
+    	
+    	//DEBUG
+    	stdio.writeln("DEBUG visitInterface - visitable = "+visitable.name)
+    	
 		// Interface doesn(t exists as concept in Kermeta
 		// so interfaces must be processed as Uml2 abstract classes
 		

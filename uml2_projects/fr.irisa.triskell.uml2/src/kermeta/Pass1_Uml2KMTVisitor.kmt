@@ -126,9 +126,6 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	par.isUnique := visitable.isUnique
     	par.lower := lowerValue(visitable.lowerValue)
 		par.upper := upperValue(visitable.upperValue)
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG - visitParameter : visitable.type = " + visitable.type.name.toString)
 	    	
     	super(visitable)
     end
