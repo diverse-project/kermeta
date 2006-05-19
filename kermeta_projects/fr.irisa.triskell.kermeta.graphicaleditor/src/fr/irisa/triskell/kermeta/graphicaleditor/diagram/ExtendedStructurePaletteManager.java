@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.gef.palette.CreationToolEntry;
 import org.eclipse.gef.requests.CreationFactory;
+import org.topcased.modeler.editor.GraphElementCreationFactory;
 import org.topcased.modeler.editor.ICreationUtils;
 import org.topcased.modeler.editor.palette.ModelerCreationToolEntry;
 

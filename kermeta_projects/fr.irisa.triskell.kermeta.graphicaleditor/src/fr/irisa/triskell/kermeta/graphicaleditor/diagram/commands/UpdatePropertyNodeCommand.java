@@ -1,4 +1,4 @@
-/* $Id: UpdatePropertyNodeCommand.java,v 1.4 2006-04-14 15:06:26 zdrey Exp $
+/* $Id: UpdatePropertyNodeCommand.java,v 1.5 2006-05-19 16:17:50 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -22,7 +22,9 @@ import org.eclipse.gef.commands.Command;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.dialogs.PropertyEditDialog;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.VoidType;
 
 /**
  * Class that create a command in order to update the "Operation" elements.
@@ -49,6 +51,8 @@ public class UpdatePropertyNodeCommand extends Command
     /** Multiplicity, (textual, i.e "[x..y]") of the property */
     private String _multiplicity;
 
+	private VoidType _voidType;
+
     /**
      * Create a command for updating parameters on a given property
      * 
@@ -56,15 +60,20 @@ public class UpdatePropertyNodeCommand extends Command
      * @param data
      */
     public UpdatePropertyNodeCommand(Property property, Map data)
-    {
+    {	
     	// Store old data
         _oldName = property.getName();
         _oldType = _type;
         _oldMultiplicity = getMultiplicityText(property); // ?
+        _voidType = StructureFactory.eINSTANCE.createVoidType();
+        
         _property = property;
+        
         // Store new data
         _name = (String) data.get(PropertyEditDialog.Property_NAME);
         _type = (Type) data.get(PropertyEditDialog.Property_TYPE);
+        
+        
        
         // We handle the case user didnot provide a correct format
         _multiplicity = (String) data.get(PropertyEditDialog.Property_MULTIPLICITY);
@@ -96,14 +105,13 @@ public class UpdatePropertyNodeCommand extends Command
      */
     public void execute()
     {
+    	_property.getContainedType().clear();
     	// The property name
         _property.setName(_name);
         //Type ftype = KermetaUtils.getDefault().createTypeForTypeDefinition(_type);
         // TypeDefinition is ClassDefinition or DataType
         // The return type
-        _property.setType(_type);
-        // Perform update for property type
-        _property.getContainedType().clear();
+        _property.setType(_type==null?_voidType:_type);
         
         // Update the property multiplicity
         String lower_str = _multiplicity.substring(1, _multiplicity.indexOf("."));

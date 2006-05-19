@@ -1,4 +1,4 @@
-/* $Id: UpdateOperationCommand.java,v 1.6 2006-04-20 15:06:37 zdrey Exp $
+/* $Id: UpdateOperationCommand.java,v 1.7 2006-05-19 16:17:50 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : UpdateOperationCommand.java
  * License   : EPL
@@ -32,6 +32,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 
@@ -48,23 +49,18 @@ public class UpdateOperationCommand extends Command
 
     /** Old values */
     private String _oldName;
-
     private Type _oldReturnType;
-    
     private fr.irisa.triskell.kermeta.language.structure.Class _oldSuperOperation;
-
-    private OperationDataStructure _oldInputTypes;
+    private OperationDataStructure _oldDataStructure;
 
     /** New values */
     private String _name;
-
-    /** Returned type TypeDefinition */
     private Type _returnType;
-    private fr.irisa.triskell.kermeta.language.structure.Class _superTypeOperation;
-    private Type _voidType;
-    private boolean _isAbstract;
-    
+    private fr.irisa.triskell.kermeta.language.structure.Class _superOperation;
     private OperationDataStructure _dataStructure;
+
+    private Type _voidType;
+    
 
     /**
      * Create a command for updating parameters on a given operation
@@ -77,14 +73,15 @@ public class UpdateOperationCommand extends Command
     	// Store old data
         _oldName = operation.getName();
         _oldReturnType = _returnType;
-        _oldSuperOperation = _superTypeOperation;
-        _oldInputTypes = new OperationDataStructure(operation);
+        _oldSuperOperation = _superOperation;
+        _oldDataStructure = new OperationDataStructure(operation);
         
         _operation = operation;
+        
         // Store new data
         _name = (String) data.get(OperationEditDialog.Operation_NAME);
         _returnType = (Type) data.get(OperationEditDialog.Operation_RETURN_TYPE);
-        _superTypeOperation = (fr.irisa.triskell.kermeta.language.structure.Class) data.get(OperationEditDialog.Operation_SUPER_OPERATION);
+        _superOperation = (fr.irisa.triskell.kermeta.language.structure.Class) data.get(OperationEditDialog.Operation_SUPER_OPERATION);
         _dataStructure = (OperationDataStructure) data.get(OperationEditDialog.Operation_INPUTS);
         _voidType = StructureFactory.eINSTANCE.createVoidType();
     }
@@ -111,49 +108,42 @@ public class UpdateOperationCommand extends Command
     	
     	// The operation name
         _operation.setName(_name);
-        //Type ftype = KermetaUtils.getDefault().createTypeForTypeDefinition(_returnType);
-        // TypeDefinition is ClassDefinition or DataType
+        
         // The return type
         _operation.setType(_returnType==null?_voidType:_returnType);
         
-        if (_superTypeOperation!=null)
+        if (_superOperation!=null)
         	_operation.setSuperOperation(KermetaUtils.getDefault().getOperationByName(
         			_operation.getName(), 
-        			_superTypeOperation));
+        			_superOperation));
         
-        //_operation.setIsAbstract(true);
-        
-        // Perform update for input parameters
-       
+        // Perform update for type parameters
         _operation.getTypeParameter().clear();
         // Perform update for type parameters
         for (Iterator<ParameterObject> iterator = _dataStructure.getDataTypeParameters().iterator(); iterator.hasNext();)
         {
-            ParameterObject object = iterator.next();
-            String name = _dataStructure.getDisplayName(object);
+            ParameterObject param_object = iterator.next();
             //TypeDefinition type = _inputTypes.getTypeDefinition(object);
             TypeVariable tvar = StructureFactory.eINSTANCE.createTypeVariable();
-            tvar.setName(name);
-            if (object.getType() != null)
-            	tvar.setSupertype(object.getType());
+            tvar.setName(_dataStructure.getDisplayName(param_object));
+            if (param_object.getType() != null) tvar.setSupertype(param_object.getType());
             _operation.getTypeParameter().add(tvar);
         }
         
+        // Perform update for parameters        
         _operation.getOwnedParameter().clear();
-
         for (Iterator<ParameterObject> iterator = _dataStructure.getDataOwnedParameters().iterator(); iterator.hasNext();)
         {
-            ParameterObject object = iterator.next();
-            String name = _dataStructure.getDisplayName(object);
+            ParameterObject param_object = iterator.next();
             //TypeDefinition type = _inputTypes.getTypeDefinition(object);
             Parameter parameter = StructureFactory.eINSTANCE.createParameter();
-            parameter.setName(name); 
-            if (object.getType() != null)
+            parameter.setName(_dataStructure.getDisplayName(param_object)); 
+            if (param_object.getType() != null)
             {
-            	parameter.setType(object.getType());
+            	parameter.setType(param_object.getType());
             	// We have to update the container (typeFixer is not appropriated for that:
             	// since we remove all the parameters -> fixme! -- to update them more easily)
-            	parameter.getContainedType().add(object.getType());
+            	parameter.getContainedType().add(param_object.getType());
             }
             else // temp patch if user did not set a type. TODO : by default, impose the VoidType in the graphical editor
             {
@@ -162,14 +152,19 @@ public class UpdateOperationCommand extends Command
             _operation.getOwnedParameter().add(parameter);
             
         }
-        _operation.setBody(ExpressionParser.parse_operation2body(
+        
+        if (_dataStructure.getOperationBody() != null)
+        {
+        	_operation.setBody(ExpressionParser.parse_operation2body(
         		EditorReconcilingStrategy.parse(_operation.eResource()), 
         		_dataStructure.getOperationBody()));
+        }
         
         // Ugly
-        KermetaUnit.fixTypeContainement((Package)_operation.getOwningClass().eContainer());
+        KermetaUtils.getDefault().getTypeFixer().accept(_operation);
+//        KermetaUnit.fixTypeContainement((Package)_operation.getOwningClass().eContainer());
         // Fix the type containments once the Operation element is complete -> not optimal
-        //KermetaUtils.getDefault().getTypeFixer().accept(_operation);
+        //
         
     }
 
@@ -182,6 +177,11 @@ public class UpdateOperationCommand extends Command
         String tempString = _name;
         _name = _oldName;
         _oldName = tempString;
+        
+        // Reverse old and new value for
+        fr.irisa.triskell.kermeta.language.structure.Class tempOp = _superOperation;
+        _superOperation = _oldSuperOperation;
+        _oldSuperOperation = tempOp;
 
         // Reverse old and new values for type
         Type tempType = _returnType;
@@ -190,8 +190,8 @@ public class UpdateOperationCommand extends Command
 
         // Reverse old and new values for inputType
         OperationDataStructure tempCollection = _dataStructure;
-        _dataStructure = _oldInputTypes;
-        _oldInputTypes = tempCollection;
+        _dataStructure = _oldDataStructure;
+        _oldDataStructure = tempCollection;
 
         execute();
     }

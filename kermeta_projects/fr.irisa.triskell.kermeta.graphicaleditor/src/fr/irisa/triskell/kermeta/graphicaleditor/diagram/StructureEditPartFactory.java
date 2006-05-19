@@ -9,7 +9,6 @@ import org.topcased.modeler.di.model.GraphEdge;
 import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.di.model.SimpleSemanticModelElement;
 import org.topcased.modeler.di.model.util.DIUtils;
-import org.topcased.modeler.edit.EListEditPart;
 import org.topcased.modeler.edit.EMFGraphEdgeEditPart;
 import org.topcased.modeler.edit.EMFGraphNodeEditPart;
 import org.topcased.modeler.edit.GraphEdgeEditPart;
@@ -22,7 +21,6 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.InheritanceEditPar
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.NamedElementEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.OperationEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PackageEditPart;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PrimitiveTypeEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PropertyAsNodeEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PropertyEditPart;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.PropertyEditPartNode;
@@ -34,7 +32,6 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.util.StructureSwitch;
@@ -48,15 +45,16 @@ import fr.irisa.triskell.kermeta.language.structure.util.StructureSwitch;
 public class StructureEditPartFactory implements EditPartFactory {
 	/**
 	 * <!-- begin-user-doc -->
+	 * Initially generated but needed adaptation.
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.gef.EditPartFactory#createEditPart(org.eclipse.gef.EditPart,java.lang.Object)
-	 * @generated
+	 * @generated NOT
 	 */
 	public EditPart createEditPart(EditPart context, Object model) {
 		if (model instanceof Diagram) {
 			return new StructureDiagramEditPart((Diagram) model);
 		} else if (model instanceof GraphNode) {
-			return createEditPartForNode(context, (GraphNode)model);
+			return createEditPartForNode(context, (GraphNode) model);
 		} else if (model instanceof GraphEdge) {
 			final GraphEdge edge = (GraphEdge) model;
 			EObject element = Utils.getElement(edge);
@@ -114,7 +112,7 @@ public class StructureEditPartFactory implements EditPartFactory {
 	public EditPart createEditPartForNode(EditPart context, GraphNode model) {
 		EObject element = Utils.getElement(model);
 		final GraphNode node = model; // anonymous class requirement
-		
+
 		if (element != null) {
 			Object editPart = new StructureSwitch() {
 				public Object casePackage(Package object) {
@@ -159,7 +157,6 @@ public class StructureEditPartFactory implements EditPartFactory {
 		}
 
 		if (node.getSemanticModel() instanceof SimpleSemanticModelElement) {
-			System.err.println("Get semantic model");
 			if (((SimpleSemanticModelElement) node.getSemanticModel())
 					.getTypeInfo()
 					.equals(

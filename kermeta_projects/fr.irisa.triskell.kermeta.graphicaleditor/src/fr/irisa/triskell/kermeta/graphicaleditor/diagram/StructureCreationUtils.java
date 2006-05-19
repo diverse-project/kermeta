@@ -61,9 +61,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 				// The constraint according to which property is a node 
 				// (if its type is a PrimitiveType) or an edge (otherwise).
 				// TODO : check that object type's type is always fr.irisa.triskell.kermeta.language.structure.Class
-				if (KermetaUtils.getDefault().isStandardType(object.getType())
-						|| KermetaUtils.getDefault().isPrimitiveType(
-								object.getType())) {
+				if (KermetaUtils.getDefault().isStandardType(object.getType())) {
 					return createGraphElementPropertyNode((Property) object);
 				} else
 					return createGraphElementPropertyEdge((Property) object);
@@ -117,6 +115,7 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 		
 		GraphNode foperation = createGraphNode(element,
 				StructurePackage.CLASS_DEFINITION__OWNED_OPERATION);
+		
 		foperation.setContainer(nodeParent);
 
 		return nodeParent;
@@ -166,15 +165,16 @@ public class StructureCreationUtils extends AbstractCreationUtils {
 		EdgeObjectUV edgeObject = DiagramInterchangeFactory.eINSTANCE
 				.createEdgeObjectUV();
 		edgeObject.setId(StructureEdgeObjectConstants.MULTIPLICITY_LABEL_ID);
-		edgeObject.setUDistance(20);
-		edgeObject.setVDistance(-20);
-		edgeObject.setContainer(graphEdge);
+		edgeObject.setUDistance(10);
+		edgeObject.setVDistance(-10);
+		//edgeObject.setContainer(graphEdge);
 		graphEdge.getContained().add(edgeObject);
 
 		edgeObject = DiagramInterchangeFactory.eINSTANCE.createEdgeObjectUV();
 		edgeObject.setId(StructureEdgeObjectConstants.NAME_LABEL_ID);
-		edgeObject.setUDistance(20);
-		edgeObject.setVDistance(20);
+		edgeObject.setUDistance(10);
+		edgeObject.setVDistance(10);
+		//edgeObject.setContainer(graphEdge);
 		graphEdge.getContained().add(edgeObject);
 	}
 
