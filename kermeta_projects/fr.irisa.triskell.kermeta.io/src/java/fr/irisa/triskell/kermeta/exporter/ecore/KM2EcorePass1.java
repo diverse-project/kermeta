@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.11 2006-05-04 15:26:22 jmottu Exp $
+/* $Id: KM2EcorePass1.java,v 1.12 2006-05-19 07:17:19 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -17,6 +17,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -45,6 +46,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
+import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 /**
@@ -101,7 +103,7 @@ public class KM2EcorePass1 extends KermetaVisitor{
 		
 		EPackage newEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		newEPackage.setNsPrefix(current_pname);
-		newEPackage.setNsURI(ecoreExporter.getKermetaUnit().getUri() + (p==root_p?"":"#/") + current_ppath);
+		newEPackage.setNsURI(ecoreResource.getURI().toString() + (p==root_p?"":"#/") + current_ppath);
 		newEPackage.setName(current_pname);
 		ecoreResource.getContents().add(newEPackage);
 		km2ecoremapping.put(p,newEPackage);
