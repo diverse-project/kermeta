@@ -1,4 +1,4 @@
-/* $Id: OperationEditDialog.java,v 1.5 2006-04-20 15:07:35 zdrey Exp $
+/* $Id: OperationEditDialog.java,v 1.6 2006-05-19 16:04:58 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -22,6 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -51,6 +53,8 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.OperationDataStru
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorStyleListener;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.SyntaxManager;
+import fr.irisa.triskell.kermeta.language.behavior.Assignment;
+import fr.irisa.triskell.kermeta.language.behavior.Block;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
@@ -115,7 +119,11 @@ public class OperationEditDialog extends Dialog
 	
 	// Get the tab item to update its label when errors appear or not
 	protected TabItem errorItem;
-	protected StyledText errorView ;
+	protected StyledText errorView;
+	
+	// Boolean set to true if user modified in the text editor the body of an operation
+	protected boolean isModified;
+	protected EditDialogHelper _dialogHelper;
 	
 	/**
 	 * Create the dialog for a given operation
@@ -126,9 +134,16 @@ public class OperationEditDialog extends Dialog
 	public OperationEditDialog(Operation operation, Shell parentShell)
 	{
 		super(parentShell);
+		// Allow user to do something else while the operation dialog is poped-up
 		setBlockOnOpen(true);
+		
 		_operation = operation;
+		isModified = false;
+		// Used to construct a list of types
+		_dialogHelper = new EditDialogHelper(operation.getOwningClass());
 		dataStructure = new OperationDataStructure(_operation);
+		
+		initializeData();		
 		initializeTypes();
 		initializeSuperTypes();
 		setShellStyle(getShellStyle() | SWT.RESIZE);
@@ -144,22 +159,26 @@ public class OperationEditDialog extends Dialog
 	}
 	
 	/**
+	 * Initialize the data dictionary, that contains the input parameters, input type parameters,
+	 * and the body of the operation (not the best place to store it in the latter case..).
+	 */
+	protected void initializeData()
+	{
+		// Initialize the hashmap..
+		_data = new HashMap<String, Object>();
+		_data.put(OperationEditDialog.Operation_NAME, _operation.getName());
+        _data.put(OperationEditDialog.Operation_RETURN_TYPE, _operation.getType());
+        _data.put(OperationEditDialog.Operation_SUPER_OPERATION, _operation.getSuperOperation());
+        _data.put(OperationEditDialog.Operation_INPUTS, dataStructure);
+	}
+	
+	/**
 	 * Initialize attributes about types that model currently contains
 	 */
 	private void initializeTypes()
-	{
-		// get the types available in the package owning the class of the given operation.
-		_types = KermetaUtils.getDefault().getOwnedTypes(_operation.getOwningClass());
-		_typeNames = new ArrayList<String>(_types.size());
-		
-		for (Iterator<Type> iterator = _types.iterator(); iterator.hasNext();)
-		{
-			Type next = iterator.next();
-			// Display a proper name
-			String name = KermetaUtils.getDefault().getLabelForType(next);
-			name = (name==null)?"<unset type>":name;
-			_typeNames.add(name);
-		}
+	{	// get the types available in the package owning the class of the given operation.
+		_types = _dialogHelper.getSortedTypes();
+		_typeNames = _dialogHelper.getSortedTypeNames();
 	}
 	
 	private void initializeSuperTypes()
@@ -229,7 +248,6 @@ public class OperationEditDialog extends Dialog
 		{
 			// Items are Strings -> this was 
 			// _returnTypeComboBox.select(_types.indexOf(_operation.getType()) + 1);
-			// If it is a simple type
 			String type_name = KermetaUtils.getDefault().getLabelForType(_operation.getType());
 			_returnTypeComboBox.select(_typeNames.indexOf(type_name) + 1);
 		}
@@ -345,16 +363,8 @@ public class OperationEditDialog extends Dialog
 		final Color red = Display.getDefault().getSystemColor(SWT.COLOR_RED);
 		
 		int styles = SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER;
-		
-		/*_codeViewer = new SourceViewer(composite, null, styles);
-		_codeViewer.setEditable(true);
-		IDocument doc = new Document();
-	    _codeViewer.setDocument(doc);
-	    SyntaxDocument doc = new SyntaxDocument();
-	    doc.setTokenMarker(new KermetaTokenMarker());*/
-		
+
 	    errorView = new StyledText(composite, styles);
-	    
 
 	    // Add the syntax coloring handler
 	    errorView.addLineStyleListener(
@@ -375,13 +385,6 @@ public class OperationEditDialog extends Dialog
 		
 		int styles = SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER;
 		
-		/*_codeViewer = new SourceViewer(composite, null, styles);
-		_codeViewer.setEditable(true);
-		IDocument doc = new Document();
-	    _codeViewer.setDocument(doc);
-	    SyntaxDocument doc = new SyntaxDocument();
-	    doc.setTokenMarker(new KermetaTokenMarker());*/
-		
 	    styledText = new StyledText(composite, styles);
 
 	    // Add the syntax coloring handler
@@ -393,8 +396,7 @@ public class OperationEditDialog extends Dialog
 	    styledText.setText((String)KermetaUtils.getDefault().getPrettyPrinter().accept(_operation));
 	    styledText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
-				// Is it useful to do something when text is modified?
-				//dataStructure.setOperationBody(styledText.getText());
+				isModified = true;
 			}	    	
 	    });
 	    // To add a special modif : do it through the commented method, below
@@ -421,14 +423,21 @@ public class OperationEditDialog extends Dialog
 			{
 				// translate and inject
 				String textError = "";
+				//_operation.eResource().load ?
+				KermetaUnit unit = EditorReconcilingStrategy.parse(_operation.eResource());
+				// FIXME : when we try to type check here the kermetaunit unit, it fails because twice the same
+				// objects in memory seem to be present...
+				dataStructure.setOperationBody(styledText.getText());
+				// Try to check the size of a resource...
+				//TreeIterator it = _operation.eResource().getAllContents();
 				try
 				{
-					dataStructure.setOperationBody(styledText.getText());
 					_operation.setBody(ExpressionParser.parse_operation2body(
-		        		EditorReconcilingStrategy.parse(_operation.eResource()), 
+		        		unit, 
 		        		dataStructure.getOperationBody()));
-				//System.out.println("parse body : " + new KM2KMTPrettyPrinter().accept(_operation.getBody()));
-				//System.err.println("Parsing now the operation : " + _operation.eResource().getURI().toString() + styledText.getText());
+					unit.setType_checked(false);
+			        unit.typeCheck(null);
+			        unit.constraintCheck(null);
 				}
 				// Try to catch a parse error
 				catch (Error error)
@@ -439,17 +448,11 @@ public class OperationEditDialog extends Dialog
 					error.getMessage() + 
 					"\n" + error.getCause();
 				}
-				
-				KermetaUnit unit = EditorReconcilingStrategy.parse(_operation.eResource());
-				
 				errorView.setText("");
 				System.err.println("errors?:" + unit.messages.getAllMessages().size() + " messages.");
-				if (unit.messages.getAllErrors().size() == 0)
+				if (unit.messages.getAllErrors().size() == 0 && textError.length()==0)
 				{
-					// reset the errorView
 					errorItem.setImage(StructureImageRegistry.getImage("NOERROR"));
-					// get OPERATION_INPUTS that contains body, owned parameters and onwed type params
-					dataStructure.setOperationBody(styledText.getText());
 				}
 				else
 				{

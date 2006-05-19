@@ -1,4 +1,4 @@
-/* $Id: PropertyEditDialog.java,v 1.2 2006-04-11 17:29:35 zdrey Exp $
+/* $Id: PropertyEditDialog.java,v 1.3 2006-05-19 16:04:58 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.graphicaleditor (First iteration)
  * File      : ClassDefinitionEditDialog.java
  * License   : EPL
@@ -62,8 +62,6 @@ public class PropertyEditDialog extends Dialog
 	private Text _multiplicityText;
 
 	
-	// types data
-	private List<String> _typeNames;
 	//public PropertyDataStructure dataStructure;
 	
 	/**
@@ -77,6 +75,8 @@ public class PropertyEditDialog extends Dialog
 	 * or FunctionTypes)
 	 */
 	private List<Type> _types;
+	private List<String> _typeNames;
+	
 	private Map<String, Object> _data;
 	
 	// Constants
@@ -85,18 +85,22 @@ public class PropertyEditDialog extends Dialog
 	public static final String Property_MULTIPLICITY = "Property multiplicity";
 	private static final String VOID_TYPE = "Void";
 	
+	/** A helper that provides some useful methods to get lists of objects. */
+	public EditDialogHelper _dialogHelper;
 	/**
 	 * Create the dialog for a given operation
 	 * 
 	 * @param operation
 	 * @param parentShell
 	 */
-	public PropertyEditDialog(Property operation, Shell parentShell)
+	public PropertyEditDialog(Property property, Shell parentShell)
 	{
 		super(parentShell);
 		setBlockOnOpen(true);
-		_property = operation;
+		_property = property;
+		_dialogHelper = new EditDialogHelper(property.getOwningClass());
 		// dataStructure = new PropertyDataStructure(_property);
+		initializeData();
 		initializeTypes();
 		setShellStyle(getShellStyle() | SWT.RESIZE);
 	}
@@ -110,6 +114,8 @@ public class PropertyEditDialog extends Dialog
 		super.configureShell(newShell);
 	}
 	
+	
+	
 	/**
 	 * Initialize attributes about *primitive types* (and only primitive types!)
 	 * that model currently contains
@@ -117,25 +123,21 @@ public class PropertyEditDialog extends Dialog
 	 */
 	private void initializeTypes()
 	{
-		int index = 0;
-		// get the types available in the package owning the class of the given operation.
-		// _types = KermetaUtils.getDefault().getOwnedTypes(_property.getOwningClass());
-		
-		// Another option : get only types available in the standard stuff
-		_types = KermetaUtils.getDefault().getStdLibTypes();
-		_typeNames = new ArrayList<String>(_types.size());
-		
-		for (Iterator<Type> iterator = _types.iterator(); iterator.hasNext();)
-		{
-			Type next = iterator.next();
-			// Display a proper name
-			String name = KermetaUtils.getDefault().getLabelForType(next);
-			name = (name==null)?"":name;
-			//_typeNames[index] = name;
-			if (name.length()>0) // Do not give user the possibility to set an unanmed type
-				_typeNames.add(name);
-			//index++;
-		}
+		_types = _dialogHelper.getSortedTypes();
+		_typeNames = _dialogHelper.getSortedTypeNames();
+//		 get the types available in the package owning the class of the given operation.
+	}
+	
+	/**
+	 * Initialize the data dictionary, that contains the input parameters, input type parameters,
+	 * and the body of the operation (not the best place to store it in the latter case..).
+	 */
+	protected void initializeData()
+	{
+		// Initialize the hashmap..
+		_data = new HashMap<String, Object>();
+		_data.put(PropertyEditDialog.Property_NAME, _property.getName());
+        _data.put(PropertyEditDialog.Property_TYPE, _property.getType());
 	}
 	
 	/**
@@ -159,7 +161,7 @@ public class PropertyEditDialog extends Dialog
 		_propertyNameText = new Text(composite, SWT.BORDER);
 		_propertyNameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		
-		new Label(composite, SWT.NONE).setText("Return Type");
+		new Label(composite, SWT.NONE).setText("Type");
 		
 		_typeComboBox = new Combo(composite, SWT.READ_ONLY);
 		_typeComboBox.setItems(_typeNames.toArray(new String[] {}));
@@ -188,9 +190,6 @@ public class PropertyEditDialog extends Dialog
 		// Set the type params field
 		if (_property.getType() != null)
 		{
-			// Items are Strings -> this was 
-			// _returnTypeComboBox.select(_types.indexOf(_operation.getType()) + 1);
-			// If it is a simple type
 			String type_name = KermetaUtils.getDefault().getLabelForType(_property.getType());
 			_typeComboBox.select(_typeNames.indexOf(type_name) + 1);
 		}
@@ -237,7 +236,7 @@ public class PropertyEditDialog extends Dialog
 	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
 	 */
 	protected void okPressed()
-	{
+	{   
 		_data = new HashMap<String, Object>();
 		_data.put(Property_NAME, _propertyNameText.getText());
 		if (_typeComboBox.getSelectionIndex() != 0)
