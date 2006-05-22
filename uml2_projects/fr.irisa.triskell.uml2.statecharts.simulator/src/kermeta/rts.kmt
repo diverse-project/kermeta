@@ -6,8 +6,8 @@ using kermeta::standard
 
 class TimeManager inherits rts::Activable
 {
-    reference date : rts::Date
-    reference timer_list : set rts::Timer[1..*]
+    reference date : kermeta::standard::Integer
+    reference timer_list : set rts::Timer[0..*]
     operation make() is do
         //TODO: implement operation make
     end    operation reset(d : kermeta::standard::Integer) is do
@@ -48,8 +48,6 @@ abstract class StateMachine inherits rts::Reactive
         //TODO: implement operation entry
     end    operation exit() is do
         //TODO: implement operation exit
-    end    operation completion() is do
-        //TODO: implement operation completion
     end    operation enter(new_state : rts::StateMachine) is do
         //TODO: implement operation enter
     end    operation leave(old_state : rts::StateMachine) is do
@@ -67,7 +65,7 @@ class Timer inherits rts::TimeManagerAccessor
     reference alarm : rts::Alarm
     operation make(reactor : rts::Reactive) is do
         //TODO: implement operation make
-    end    operation ~set_all(reactor : rts::Reactive, signal : rts::Alarm, delay : kermeta::standard::Integer, new_label : kermeta::standard::String) is do
+    end    operation setSignal(reactor : rts::Reactive, signal : rts::Alarm, delay : kermeta::standard::Integer, new_label : kermeta::standard::String) is do
         //TODO: implement operation ~set
     end    operation current_date() : kermeta::standard::Integer is do
         //TODO: implement operation current_date
@@ -83,8 +81,6 @@ class Timer inherits rts::TimeManagerAccessor
         //TODO: implement operation reschedule
     end    operation fire() is do
         //TODO: implement operation fire
-    end    operation infix(other : rts::Timer) : kermeta::standard::Boolean is do
-        //TODO: implement operation infix "<"
     end
 }
 
@@ -108,7 +104,6 @@ abstract class Event
 {
     reference arguments : set rts::Any[0..*]
     reference event_name : kermeta::standard::String
-    reference out : kermeta::standard::String
     operation make() is do
         //TODO: implement operation make
     end    operation send_to(target : rts::Any) is do
@@ -117,6 +112,8 @@ abstract class Event
         //TODO: implement operation label
     end    operation label_for_arguments() : kermeta::standard::String is do
         //TODO: implement operation label_for_arguments
+    end    operation out() : kermeta::standard::String is do
+        //TODO: implement operation out
     end
 }
 
@@ -142,10 +139,8 @@ abstract class ActiveStateMachine inherits rts::Activable, rts::StateMachine
         //TODO: implement operation guards
     end    method action(n : kermeta::standard::Integer) from rts::Activable is do
         //TODO: implement operation action
-    end    operation completion_n(n : kermeta::standard::Integer) from rts::StateMachine is do
+    end    operation completion(n : kermeta::standard::Integer) from rts::StateMachine is do
         //TODO: implement operation completion
-    end    operation message_queue_capacity() : kermeta::standard::Integer is do
-        //TODO: implement operation message_queue_capacity
     end
 }
 
@@ -179,6 +174,7 @@ abstract class CADPSimulator inherits rts::TimeManagerAccessor, rts::Memory, rts
     reference current_configuration : rts::Configuration
     reference exported_configurations : set rts::Configuration[0..*]
     reference exported_labels : rts::Dictionnary
+    reference nb_exported_configurations_since_last_gc : kermeta::standard::Integer
     operation make_CADP_simulator() is do
         //TODO: implement operation make_CADP_simulator
     end    operation initial_configuration() : rts::Configuration is abstract    operation eiffel_start_state(START : rts::POINTER) is do
@@ -197,8 +193,6 @@ abstract class CADPSimulator inherits rts::TimeManagerAccessor, rts::Memory, rts
         //TODO: implement operation label_for_export
     end    operation assertion_violation_configuration() is do
         //TODO: implement operation assertion_violation_configuration
-    end    operation nb_exported_configurations_since_last_gc() : kermeta::standard::Integer is do
-        //TODO: implement operation nb_exported_configurations_since_last_gc
     end
 }
 
@@ -287,7 +281,7 @@ abstract class Enumeration inherits rts::Any
         //TODO: implement operation set_image
     end    operation all_images() is abstract    operation set_by_name(str : kermeta::standard::String) is do
         //TODO: implement operation set_by_name
-    end    operation ~set_enum(new_enum : rts::Enumeration) is do
+    end    operation setEnum(new_enum : rts::Enumeration) is do
         //TODO: implement operation ~set
     end
 }
@@ -346,4 +340,3 @@ class Date
 {
 
 }
-
