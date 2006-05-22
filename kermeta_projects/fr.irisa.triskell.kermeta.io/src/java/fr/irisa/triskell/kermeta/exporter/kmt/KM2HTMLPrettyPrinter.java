@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.3 2006-05-19 15:55:11 zdrey Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.4 2006-05-22 16:43:03 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2HTMLPrettyPrinter.java
  * License    : EPL
@@ -33,11 +33,16 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
@@ -203,43 +208,43 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	{
 		StringBuffer result = new StringBuffer();
 		
-		result.append("<body>" +  // onLoad=\"javascript:documentElement('"+ main + "');\">" +
+		result.append("<body>"); // +  // onLoad=\"javascript:documentElement('"+ main + "');\">" +
 
-		"<div id=\"body\">" +
-		"<div id=\"header\">" +
-		"<ul>" +
-		"<li><a href='http://www.kermeta.org'><b>[Kermeta Website]</b></a></li>" +
-		//"<li><a href='examples.html'>examples</a></li>" +
-		//"<!--<li><a href='guide.html'>guide</a></li>-->" +
-		"<li><a href='api.html'>api</a></li>" +
-		"</ul>" +
-		"</div>" +
-		"<div id=\"content\">" +
-		"<h1 style=\"margin:0;\">Kermeta API Documentation</h1>" +
-		"<!-- body -->" +
-		"<div id='modules'>" +
-		"  <!-- packages-snip -->" +
-		   packages +
-		"  <!-- packages-snip -->" +
-		"  <div id='descriptions'>" +
+		result.append("<div id=\"body\">");
+		result.append("<div id=\"header\">");
+		result.append("<ul>");
+		result.append("<li><a href='http://www.kermeta.org'><b>[Kermeta Website]</b></a></li>");
+		//result.append(//"<li><a href='examples.html'>examples</a></li>");
+		//result.append(//"<!--<li><a href='guide.html'>guide</a></li>-->");
+		result.append("<li><a href='api.html'>api</a></li>");
+		result.append("</ul>");
+		result.append("</div>");
+		result.append("<div id=\"content\">");
+		result.append("<h1 style=\"margin:0;\">Kermeta API Documentation</h1>");
+		result.append("<!-- body -->");
+		result.append("<div id='modules'>");
+		result.append("  <!-- packages-snip -->");
+		result.append(packages);
+		result.append("  <!-- packages-snip -->");
+		result.append("  <div id='descriptions'>");
 		
-		"  <!-- descriptions-snip -->" +
-		   descriptions +
-		"  <!-- descriptions-snip -->" +
-		"  </div>" +
-		"</div>" +
-		"<div id='api'><!-- main element will be displayed here --></div>" +
-		"<div id='hidden'>" +
-		"<!-- hidden-snip -->" +
-		content +
-		"<!-- hidden-snip -->" +
-		"<!-- hidden nodes will be moved here -->" +
-		"</div>" +
-		"</div>" + // close <div id=body>
+		result.append("  <!-- descriptions-snip -->");
+		result.append(descriptions);
+		result.append("  <!-- descriptions-snip -->");
+		result.append("  </div>");
+		result.append("</div>");
+		result.append("<div id='api'><!-- main element will be displayed here --></div>");
+		result.append("<div id='hidden'>");
+		result.append("<!-- hidden-snip -->");
+		result.append(content);
+		result.append("<!-- hidden-snip -->");
+		result.append("<!-- hidden nodes will be moved here -->");
+		result.append("</div>");
+		result.append("</div>"); // close <div id=body>
 		
-		"</body>" +
-		ppHTMLFoot() + 
-		"</html>");
+		result.append("</body>");
+		result.append(ppHTMLFoot()); 
+		result.append("</html>");
 		return result.toString();
 	}
 	
@@ -294,7 +299,7 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	 * */
 	public String describe(NamedElement node)
 	{
-		String result = null;
+		String result = "";
 		String this_id = "d_" + String.valueOf(node.hashCode());
 		if (this._contents.containsKey(this_id)) return this._contents.get(this_id);
 		result = "<div id='" + this_id + "' class='description'>";
@@ -354,11 +359,11 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		if (node instanceof Operation) hash_code = ((Operation)node).getOwningClass().hashCode();
 		else if (node instanceof Property) hash_code = ((Property)node).getOwningClass().hashCode();
 		// classdefinition -> container should be of type Package
-		else 
-		{
-			hash_code = ((ClassDefinition)node).eContainer().hashCode();
+		else if (node instanceof TypeDefinition)
+			hash_code = ((TypeDefinition)node).eContainer().hashCode();
 			//System.err.println("Help:" + ((ClassDefinition)node).eContainer() );
-		}
+		else 
+			hash_code = node.hashCode();
 		
 		String this_id = String.valueOf(hash_code); // fixme : parent_id is a better name
 		String child_id = String.valueOf(node.hashCode());
@@ -390,10 +395,67 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		Iterator it = nodes.iterator();
 		while (it.hasNext())
 		{
-			result += this.accept((EObject)it.next());
+			EObject next = (EObject)it.next();
+			result += this.accept(next);
+		//	if (this.accept(next)==null) System.out.println("ELIST : " + next);
 		}
 		result+="</div>";
 		return result;
+	}
+	
+	public Object visitEnumeration(Enumeration node)
+	{
+		if (_as_signature == true)
+			return codePrinter.visitEnumeration(node);
+		else return "";
+			
+	}
+	
+	public String getClassHREFForPrimitiveType(Type node)
+	{
+		if (node instanceof ClassImpl)
+		{
+			TypeDefinition typedef = ((ClassImpl)node).getTypeDefinition();
+			Package container = (Package)typedef.eContainer();
+			return "(see <a href='javascript:documentElement(\"" + 
+			container.hashCode() + "\", \""+ 
+			typedef.hashCode() + "\")'>" + typedef.getName() + "</a>)";
+		}
+		else
+		{
+			return "";
+		}
+	
+	}
+	
+	public Object visitPrimitiveType(PrimitiveType node)
+	{
+		if (_as_signature == true)
+			return codePrinter.visitPrimitiveType(node) + (String)getClassHREFForPrimitiveType(node.getInstanceType());
+		else
+		{
+			String this_id = String.valueOf(node.hashCode());
+			this._contents.put(this_id,"");
+			String result = "";
+			// Constructs the hyperlinked name of a Class with a ref to its description, and the list of associated operations
+			result += "<div id='" + this_id + "' class='" + "container" + "'>";
+			result += "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
+			_as_signature = false;
+			// For each operation : construct the hyper-linked-name of an operation, with a ref of its description
+/*			Type type = node.getInstanceType();
+			if (type instanceof ClassImpl)
+			{
+				ClassDefinition cdef = (ClassDefinition)((ClassImpl)type).getTypeDefinition();
+				result += this.visitEList(cdef.getOwnedOperation(), KEY_METHOD);
+				_as_signature = false;
+				result += this.visitEList(cdef.getOwnedAttribute(), KEY_ATTRIBUTE);
+			}*/
+			result += "</div>";
+			// Store the constructed content
+			this._contents.put(this_id, result);
+			// Returns the hyperlinked name of this class with a ref to its description
+			return documentFeature(node);
+		} 
 	}
 	
 	/**
@@ -418,7 +480,8 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		String this_id = String.valueOf(node.hashCode());
 		String result = "";
 		// Constructs the hyperlinked name of a Class with a ref to its description, and the list of associated operations
-		result += "<div id='" + this_id + "' class='" + "true" + "'>";
+		
+		result += "<div id='" + this_id + "' class='" + "container" + "'>";
 		result += "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
 		_as_signature = false;
 		// For each operation : construct the hyper-linked-name of an operation, with a ref of its description
@@ -448,7 +511,7 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		String this_id = String.valueOf(node.hashCode());
 		
 		// Construct the list of class definitions that belong to this package
-		String result = "<div id='" + this_id + "' class='" + "true" + "'>";
+		String result = "<div id='" + this_id + "' class='" + "root" + "'>";
 		result += "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
 		_as_signature = false; 
 		// use this because visitor of operation can be used for two purposes : one to print the signature, one to print the documentation
