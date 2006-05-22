@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.2">
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
   <model href="Reified_ThreeWaySwitchPIM.uml2#_tPOCIaLHEdqkGMDvm75SlQ"/>
-  <diagrams position="0,0" size="100,100" name="Light classes" viewport="0,0">
+  <diagrams position="0,0" size="100,100" name="Light classes" viewport="0,290">
     <property key="org.topcased.modeler.di.typeName" value="Class Diagram"/>
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
@@ -15,39 +15,6 @@
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.uml2.classdiagram">
       <element href="Reified_ThreeWaySwitchPIM.uml2#_tPOCIqLHEdqkGMDvm75SlQ"/>
     </semanticModel>
-    <contained xsi:type="di:GraphNode" position="310,27" size="138,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.8 //@diagrams.0/@contained.9"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_waJcYOZ7Edq6cpYOwfrT1A"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="40"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="Reified_ThreeWaySwitchPIM.uml2#_waJcYOZ7Edq6cpYOwfrT1A"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="Reified_ThreeWaySwitchPIM.uml2#_ydNgUOZ7Edq6cpYOwfrT1A"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="45"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="Reified_ThreeWaySwitchPIM.uml2#_waJcYOZ7Edq6cpYOwfrT1A"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="Reified_ThreeWaySwitchPIM.uml2#_5KxkgOZ7Edq6cpYOwfrT1A"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="Reified_ThreeWaySwitchPIM.uml2#_6KxB4OZ7Edq6cpYOwfrT1A"/>
-          </semanticModel>
-        </contained>
-      </contained>
-    </contained>
     <contained xsi:type="di:GraphNode" position="3,1075" size="100,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_z4X2wOZ7Edq6cpYOwfrT1A"/>
@@ -66,7 +33,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="7,33" size="226,221">
-      <anchorage graphEdge="//@diagrams.0/@contained.7"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.6"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="../../../fr.irisa.triskell.uml2.statecharts.simulator/src/uml2/rts.uml2#_CqwowLjkEdqvkM3QB-v4GA"/>
       </semanticModel>
@@ -134,7 +101,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="542,30" size="171,107">
-      <anchorage graphEdge="//@diagrams.0/@contained.10"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.7"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="../../../fr.irisa.triskell.uml2.statecharts.simulator/src/uml2/rts.uml2#_sGcGQLjuEdqvkM3QB-v4GA"/>
       </semanticModel>
@@ -172,7 +139,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="317,316" size="100,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.11 //@diagrams.0/@contained.40 //@diagrams.0/@contained.41"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.8 //@diagrams.0/@contained.37 //@diagrams.0/@contained.38"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_CrE2EOZ8Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -205,7 +172,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="61,298" size="158,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.8 //@diagrams.0/@contained.11 //@diagrams.0/@contained.13 //@diagrams.0/@contained.14 //@diagrams.0/@contained.19 //@diagrams.0/@contained.20"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.6 //@diagrams.0/@contained.8 //@diagrams.0/@contained.10 //@diagrams.0/@contained.11 //@diagrams.0/@contained.16 //@diagrams.0/@contained.17 //@diagrams.0/@contained.40"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_OwE5AOZ8Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -245,10 +212,15 @@
             <element href="Reified_ThreeWaySwitchPIM.uml2#_ngz80OZ-Edq6cpYOwfrT1A"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="Reified_ThreeWaySwitchPIM.uml2#_Ui_HMOdKEdqlVNOkBUCcag"/>
+          </semanticModel>
+        </contained>
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="485,190" size="284,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.9 //@diagrams.0/@contained.10"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.41"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_RDE2YOZ8Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -295,7 +267,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_Tp0PIOZ8Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -304,30 +276,12 @@
       <waypoints>[-28, -39, 0, 137]</waypoints>
       <waypoints>[-28, -65, 0, 111]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_T50aAOZ8Edq6cpYOwfrT1A"/>
-      </semanticModel>
-      <waypoints>[0, -60, -239, 230]</waypoints>
-      <waypoints>[0, -72, -239, 218]</waypoints>
-      <waypoints>[239, -72, 0, 218]</waypoints>
-      <waypoints>[239, -249, 0, 41]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_UNNQEOZ8Edq6cpYOwfrT1A"/>
-      </semanticModel>
-      <waypoints>[0, -20, 156, 159]</waypoints>
-      <waypoints>[0, -81, 156, 98]</waypoints>
-      <waypoints>[-156, -81, 0, 98]</waypoints>
-      <waypoints>[-156, -138, 0, 41]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_UYprEOZ8Edq6cpYOwfrT1A"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.4/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_BbSzwOZ9Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -337,8 +291,8 @@
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="107,451" size="147,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.13 //@diagrams.0/@contained.14 //@diagrams.0/@contained.17 //@diagrams.0/@contained.18"/>
+    <contained xsi:type="di:GraphNode" position="107,466" size="147,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.10 //@diagrams.0/@contained.11 //@diagrams.0/@contained.14 //@diagrams.0/@contained.15"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_Oswp0OZ9Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -365,12 +319,16 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.5/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.9/@anchorage.0 //@diagrams.0/@contained.4/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_RubrEOZ9Edq6cpYOwfrT1A"/>
       </semanticModel>
+      <waypoints>[0, -35, 40, 99]</waypoints>
+      <waypoints>[0, -42, 40, 92]</waypoints>
+      <waypoints>[-40, -42, 0, 92]</waypoints>
+      <waypoints>[-40, -64, 0, 70]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.12/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.9/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_Z7B5EOZ9Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -379,13 +337,13 @@
       <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
-      <waypoints>[-80, 0, -120, -128]</waypoints>
-      <waypoints>[-101, 0, -141, -128]</waypoints>
-      <waypoints>[-101, 128, -141, 0]</waypoints>
-      <waypoints>[-34, 128, -74, 0]</waypoints>
+      <waypoints>[-80, 2, -120, -132]</waypoints>
+      <waypoints>[-101, 2, -141, -132]</waypoints>
+      <waypoints>[-101, 134, -141, 0]</waypoints>
+      <waypoints>[-34, 134, -74, 0]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="22,590" size="140,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.17 //@diagrams.0/@contained.20"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.14 //@diagrams.0/@contained.17"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_x_FvAOZ9Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -433,7 +391,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="198,591" size="140,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.18 //@diagrams.0/@contained.19"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.15 //@diagrams.0/@contained.16"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_2CYlUOZ9Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -480,17 +438,17 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.12/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.12/@anchorage.0 //@diagrams.0/@contained.9/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_QST14OZ-Edq6cpYOwfrT1A"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.16/@anchorage.0 //@diagrams.0/@contained.12/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.13/@anchorage.0 //@diagrams.0/@contained.9/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_QglicOZ-Edq6cpYOwfrT1A"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.16/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.13/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_NgKB4OZ_Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -503,7 +461,7 @@
       <waypoints>[160, 92, 32, -214]</waypoints>
       <waypoints>[139, 232, 11, -74]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.15/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.12/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_OBnwMOZ_Edq6cpYOwfrT1A"/>
       </semanticModel>
@@ -519,7 +477,7 @@
       <waypoints>[22, 365, 70, 60]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="398,610" size="186,175">
-      <anchorage graphEdge="//@diagrams.0/@contained.25 //@diagrams.0/@contained.26 //@diagrams.0/@contained.27 //@diagrams.0/@contained.31 //@diagrams.0/@contained.32 //@diagrams.0/@contained.33"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.22 //@diagrams.0/@contained.23 //@diagrams.0/@contained.24 //@diagrams.0/@contained.28 //@diagrams.0/@contained.29 //@diagrams.0/@contained.30"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="../../../fr.irisa.triskell.uml2.statecharts.simulator/src/uml2/rts.uml2#_bielsLjjEdqvkM3QB-v4GA"/>
       </semanticModel>
@@ -577,7 +535,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="251,812" size="219,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.25"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.22"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_AzVUgOaAEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -595,7 +553,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="252,867" size="219,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.26"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.23"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_HXCSEOaAEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -613,7 +571,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="252,920" size="220,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.27"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.24"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_NNSTwOaAEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -630,35 +588,35 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.22/@anchorage.0 //@diagrams.0/@contained.21/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.19/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_ZgLBsOaAEdq6cpYOwfrT1A"/>
       </semanticModel>
-      <waypoints>[0, -20, -193, 116]</waypoints>
-      <waypoints>[0, -26, -193, 110]</waypoints>
-      <waypoints>[193, -26, 0, 110]</waypoints>
-      <waypoints>[193, -48, 0, 88]</waypoints>
+      <waypoints>[0, -20, -131, 115]</waypoints>
+      <waypoints>[0, -27, -131, 108]</waypoints>
+      <waypoints>[131, -27, 0, 108]</waypoints>
+      <waypoints>[131, -47, 0, 88]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.23/@anchorage.0 //@diagrams.0/@contained.21/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.20/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_Z0nnsOaAEdq6cpYOwfrT1A"/>
       </semanticModel>
-      <waypoints>[0, -20, -192, 171]</waypoints>
-      <waypoints>[0, -30, -192, 161]</waypoints>
-      <waypoints>[192, -30, 0, 161]</waypoints>
-      <waypoints>[192, -103, 0, 88]</waypoints>
+      <waypoints>[0, -20, -130, 170]</waypoints>
+      <waypoints>[0, -29, -130, 161]</waypoints>
+      <waypoints>[130, -29, 0, 161]</waypoints>
+      <waypoints>[130, -102, 0, 88]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.24/@anchorage.0 //@diagrams.0/@contained.21/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.21/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_aNdlgOaAEdq6cpYOwfrT1A"/>
       </semanticModel>
-      <waypoints>[0, -20, -191, 224]</waypoints>
-      <waypoints>[0, -29, -191, 215]</waypoints>
-      <waypoints>[191, -29, 0, 215]</waypoints>
-      <waypoints>[191, -156, 0, 88]</waypoints>
+      <waypoints>[0, -20, -129, 223]</waypoints>
+      <waypoints>[0, -28, -129, 215]</waypoints>
+      <waypoints>[129, -28, 0, 215]</waypoints>
+      <waypoints>[129, -155, 0, 88]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="252,972" size="220,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.31"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.28"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_JVLkUOaBEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -676,7 +634,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="253,1026" size="219,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.32"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.29"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_NYK4oOaBEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -694,7 +652,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="253,1081" size="219,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.33"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.30"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_UAJ5QOaBEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -711,32 +669,32 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.28/@anchorage.0 //@diagrams.0/@contained.21/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.25/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_Xhn04OaBEdq6cpYOwfrT1A"/>
       </semanticModel>
-      <waypoints>[0, -20, -191, 276]</waypoints>
-      <waypoints>[0, -28, -191, 268]</waypoints>
-      <waypoints>[191, -28, 0, 268]</waypoints>
-      <waypoints>[191, -208, 0, 88]</waypoints>
+      <waypoints>[0, -20, -129, 275]</waypoints>
+      <waypoints>[0, -27, -129, 268]</waypoints>
+      <waypoints>[129, -27, 0, 268]</waypoints>
+      <waypoints>[129, -207, 0, 88]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.29/@anchorage.0 //@diagrams.0/@contained.21/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.26/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_YE46AOaBEdq6cpYOwfrT1A"/>
       </semanticModel>
-      <waypoints>[0, -20, -191, 330]</waypoints>
-      <waypoints>[0, -27, -191, 323]</waypoints>
-      <waypoints>[191, -27, 0, 323]</waypoints>
-      <waypoints>[191, -262, 0, 88]</waypoints>
+      <waypoints>[0, -20, -129, 329]</waypoints>
+      <waypoints>[0, -29, -129, 320]</waypoints>
+      <waypoints>[129, -29, 0, 320]</waypoints>
+      <waypoints>[129, -261, 0, 88]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.30/@anchorage.0 //@diagrams.0/@contained.21/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.27/@anchorage.0 //@diagrams.0/@contained.18/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_YVlocOaBEdq6cpYOwfrT1A"/>
       </semanticModel>
-      <waypoints>[0, -20, -191, 385]</waypoints>
-      <waypoints>[0, -29, -191, 376]</waypoints>
-      <waypoints>[191, -29, 0, 376]</waypoints>
-      <waypoints>[191, -317, 0, 88]</waypoints>
+      <waypoints>[0, -20, -129, 384]</waypoints>
+      <waypoints>[0, -28, -129, 376]</waypoints>
+      <waypoints>[129, -28, 0, 376]</waypoints>
+      <waypoints>[129, -316, 0, 88]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="597,825" size="160,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
@@ -811,8 +769,8 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="581,401" size="147,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.40"/>
+    <contained xsi:type="di:GraphNode" position="581,401" size="189,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.37"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_qs-aAOaCEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -830,7 +788,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="481,497" size="195,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.41"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.38"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_wf3lsOaCEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -847,7 +805,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.38/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.35/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_0SNO4OaCEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -857,18 +815,54 @@
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.39/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.36/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_0k1P8OaCEdq6cpYOwfrT1A"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="20"/>
       <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="-2" vDistance="14"/>
       <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="9"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
+    <contained xsi:type="di:GraphNode" position="333,60" size="50,41">
+      <anchorage graphEdge="//@diagrams.0/@contained.40 //@diagrams.0/@contained.41"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_XtN04OcFEdq6cpYOwfrT1A"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="Reified_ThreeWaySwitchPIM.uml2#_XtN04OcFEdq6cpYOwfrT1A"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="Reified_ThreeWaySwitchPIM.uml2#_XtN04OcFEdq6cpYOwfrT1A"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.39/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_53icQOmOEdqeN-KbvaEvBQ"/>
+      </semanticModel>
+      <waypoints>[0, -69, -218, 218]</waypoints>
+      <waypoints>[0, -80, -218, 207]</waypoints>
+      <waypoints>[218, -80, 0, 207]</waypoints>
+      <waypoints>[218, -266, 0, 21]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.39/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_6QJwkOmOEdqeN-KbvaEvBQ"/>
+      </semanticModel>
+      <waypoints>[0, -73, 269, 110]</waypoints>
+      <waypoints>[0, -93, 269, 90]</waypoints>
+      <waypoints>[-269, -93, 0, 90]</waypoints>
+      <waypoints>[-269, -162, 0, 21]</waypoints>
+    </contained>
   </diagrams>
-  <diagrams position="0,0" size="100,100" name="Switch classes" viewport="0,0">
+  <diagrams position="0,0" size="100,100" name="Switch classes" viewport="0,174">
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
     <property key="diagramHeight" value="1188"/>
@@ -882,7 +876,7 @@
       <element href="Reified_ThreeWaySwitchPIM.uml2#_tPOCIqLHEdqkGMDvm75SlQ"/>
     </semanticModel>
     <contained xsi:type="di:GraphNode" position="18,40" size="226,221">
-      <anchorage graphEdge="//@diagrams.1/@contained.10"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.9"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="../../../fr.irisa.triskell.uml2.statecharts.simulator/src/uml2/rts.uml2#_CqwowLjkEdqvkM3QB-v4GA"/>
       </semanticModel>
@@ -950,7 +944,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="596,20" size="171,107">
-      <anchorage graphEdge="//@diagrams.1/@contained.13"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.10"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="../../../fr.irisa.triskell.uml2.statecharts.simulator/src/uml2/rts.uml2#_sGcGQLjuEdqvkM3QB-v4GA"/>
       </semanticModel>
@@ -987,39 +981,6 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="312,49" size="100,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.11 //@diagrams.1/@contained.12"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_G6t9gOcEEdq6cpYOwfrT1A"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="40"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="Reified_ThreeWaySwitchPIM.uml2#_G6t9gOcEEdq6cpYOwfrT1A"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="Reified_ThreeWaySwitchPIM.uml2#_atyfYOcEEdq6cpYOwfrT1A"/>
-          </semanticModel>
-        </contained>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="45"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="Reified_ThreeWaySwitchPIM.uml2#_G6t9gOcEEdq6cpYOwfrT1A"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="Reified_ThreeWaySwitchPIM.uml2#_f6tQMOcEEdq6cpYOwfrT1A"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="Reified_ThreeWaySwitchPIM.uml2#_hI4TgOcEEdq6cpYOwfrT1A"/>
-          </semanticModel>
-        </contained>
-      </contained>
-    </contained>
     <contained xsi:type="di:GraphNode" position="15,1074" size="100,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_b8g8UOcEEdq6cpYOwfrT1A"/>
@@ -1037,8 +998,8 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="97,307" size="100,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.7 //@diagrams.1/@contained.8 //@diagrams.1/@contained.10 //@diagrams.1/@contained.11 //@diagrams.1/@contained.15 //@diagrams.1/@contained.20 //@diagrams.1/@contained.21"/>
+    <contained xsi:type="di:GraphNode" position="95,300" size="100,-1">
+      <anchorage graphEdge="//@diagrams.1/@contained.6 //@diagrams.1/@contained.7 //@diagrams.1/@contained.9 //@diagrams.1/@contained.12 //@diagrams.1/@contained.17 //@diagrams.1/@contained.18 //@diagrams.1/@contained.43"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_jfyggOcEEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1078,10 +1039,15 @@
             <element href="Reified_ThreeWaySwitchPIM.uml2#_AmxBQOcGEdq6cpYOwfrT1A"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="Reified_ThreeWaySwitchPIM.uml2#_P3qAgOdKEdqlVNOkBUCcag"/>
+          </semanticModel>
+        </contained>
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="359,312" size="100,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.7 //@diagrams.1/@contained.41 //@diagrams.1/@contained.42"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.6 //@diagrams.1/@contained.38 //@diagrams.1/@contained.39"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_XtN04OcFEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1099,7 +1065,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="359,398" size="100,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.8 //@diagrams.1/@contained.39 //@diagrams.1/@contained.40"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.7 //@diagrams.1/@contained.36 //@diagrams.1/@contained.37"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_Z3vywOcFEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1116,7 +1082,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.4/@anchorage.0 //@diagrams.1/@contained.5/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.3/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_DRrIUOcGEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1126,7 +1092,7 @@
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.4/@anchorage.0 //@diagrams.1/@contained.6/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.3/@anchorage.0 //@diagrams.1/@contained.5/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_DowyoOcGEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1137,7 +1103,7 @@
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
     <contained xsi:type="di:GraphNode" position="529,178" size="252,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.12 //@diagrams.1/@contained.13"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.10 //@diagrams.1/@contained.44"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_EwLtsOcGEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1184,36 +1150,18 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.4/@anchorage.0 //@diagrams.1/@contained.0/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.3/@anchorage.0 //@diagrams.1/@contained.0/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_zvmsIOcGEdq6cpYOwfrT1A"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.4/@anchorage.0 //@diagrams.1/@contained.2/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_0CM4AOcGEdq6cpYOwfrT1A"/>
-      </semanticModel>
-      <waypoints>[0, -60, -215, 217]</waypoints>
-      <waypoints>[0, -75, -215, 202]</waypoints>
-      <waypoints>[215, -75, 0, 202]</waypoints>
-      <waypoints>[215, -236, 0, 41]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.9/@anchorage.0 //@diagrams.1/@contained.2/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_0XbhIOcGEdq6cpYOwfrT1A"/>
-      </semanticModel>
-      <waypoints>[0, -64, 318, 89]</waypoints>
-      <waypoints>[0, -84, 318, 69]</waypoints>
-      <waypoints>[-318, -84, 0, 69]</waypoints>
-      <waypoints>[-318, -112, 0, 41]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.9/@anchorage.0 //@diagrams.1/@contained.1/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.8/@anchorage.0 //@diagrams.1/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_0ploIOcGEdq6cpYOwfrT1A"/>
       </semanticModel>
     </contained>
     <contained xsi:type="di:GraphNode" position="2,466" size="121,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.15 //@diagrams.1/@contained.18 //@diagrams.1/@contained.19"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.12 //@diagrams.1/@contained.15 //@diagrams.1/@contained.16"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_zfQGgOcHEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1240,7 +1188,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.4/@anchorage.0 //@diagrams.1/@contained.14/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.3/@anchorage.0 //@diagrams.1/@contained.11/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_579EMOcHEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1249,12 +1197,12 @@
       <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="9"/>
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="23" vDistance="-9"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject" offset="-57,-43"/>
-      <waypoints>[-51, 0, 34, -134]</waypoints>
-      <waypoints>[-85, 0, 0, -134]</waypoints>
-      <waypoints>[-85, 98, 0, -36]</waypoints>
+      <waypoints>[-51, 0, 32, -132]</waypoints>
+      <waypoints>[-83, 0, 0, -132]</waypoints>
+      <waypoints>[-83, 96, 0, -36]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="70,576" size="111,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.18 //@diagrams.1/@contained.20"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.15 //@diagrams.1/@contained.17"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_IAt_cOcIEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1302,7 +1250,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="6,738" size="111,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.19 //@diagrams.1/@contained.21"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.16 //@diagrams.1/@contained.18"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_a4FHAOcIEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1349,7 +1297,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.16/@anchorage.0 //@diagrams.1/@contained.14/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.13/@anchorage.0 //@diagrams.1/@contained.11/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_l8Yh8OcIEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1358,7 +1306,7 @@
       <waypoints>[-82, -86, 0, 61]</waypoints>
       <waypoints>[-82, -111, 0, 36]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.17/@anchorage.0 //@diagrams.1/@contained.14/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.14/@anchorage.0 //@diagrams.1/@contained.11/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_mWGCcOcIEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1367,7 +1315,7 @@
       <waypoints>[-82, -84, 0, 230]</waypoints>
       <waypoints>[-82, -278, 0, 36]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.4/@anchorage.0 //@diagrams.1/@contained.16/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.3/@anchorage.0 //@diagrams.1/@contained.13/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_p-gTkOcIEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1380,7 +1328,7 @@
       <waypoints>[32, 125, 35, -156]</waypoints>
       <waypoints>[14, 207, 17, -74]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.4/@anchorage.0 //@diagrams.1/@contained.17/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.3/@anchorage.0 //@diagrams.1/@contained.14/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_qRVwAOcIEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1395,7 +1343,7 @@
       <waypoints>[53, 406, 56, -42]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="226,497" size="186,175">
-      <anchorage graphEdge="//@diagrams.1/@contained.29 //@diagrams.1/@contained.30 //@diagrams.1/@contained.31 //@diagrams.1/@contained.32 //@diagrams.1/@contained.33 //@diagrams.1/@contained.34"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.26 //@diagrams.1/@contained.27 //@diagrams.1/@contained.28 //@diagrams.1/@contained.29 //@diagrams.1/@contained.30 //@diagrams.1/@contained.31"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="../../../fr.irisa.triskell.uml2.statecharts.simulator/src/uml2/rts.uml2#_bielsLjjEdqvkM3QB-v4GA"/>
       </semanticModel>
@@ -1453,7 +1401,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="337,708" size="201,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.29"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.26"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_RdFWwOcJEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1471,7 +1419,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="336,766" size="204,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.30"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.27"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_W3WnEOcJEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1489,7 +1437,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="337,828" size="203,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.31"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.28"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_arr0UOcJEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1507,7 +1455,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="338,890" size="203,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.32"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.29"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_ehVQMOcJEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1525,7 +1473,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="338,957" size="201,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.33"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.30"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_3gLkUOcSEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1543,7 +1491,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="339,1022" size="201,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.34"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.31"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_-xTBgOcSEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1560,7 +1508,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.23/@anchorage.0 //@diagrams.1/@contained.22/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.20/@anchorage.0 //@diagrams.1/@contained.19/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_DOj3AOcTEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1569,7 +1517,7 @@
       <waypoints>[-117, -27, 0, 109]</waypoints>
       <waypoints>[-117, -48, 0, 88]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.24/@anchorage.0 //@diagrams.1/@contained.22/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.21/@anchorage.0 //@diagrams.1/@contained.19/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_DavR0OcTEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1578,7 +1526,7 @@
       <waypoints>[-119, -28, 0, 174]</waypoints>
       <waypoints>[-119, -114, 0, 88]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.25/@anchorage.0 //@diagrams.1/@contained.22/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.22/@anchorage.0 //@diagrams.1/@contained.19/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_DzODQOcTEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1587,7 +1535,7 @@
       <waypoints>[-119, -31, 0, 233]</waypoints>
       <waypoints>[-119, -176, 0, 88]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.26/@anchorage.0 //@diagrams.1/@contained.22/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.23/@anchorage.0 //@diagrams.1/@contained.19/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_EBxcoOcTEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1596,7 +1544,7 @@
       <waypoints>[-120, -30, 0, 296]</waypoints>
       <waypoints>[-120, -238, 0, 88]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.27/@anchorage.0 //@diagrams.1/@contained.22/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.24/@anchorage.0 //@diagrams.1/@contained.19/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_ERt9IOcTEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1605,7 +1553,7 @@
       <waypoints>[-119, -34, 0, 359]</waypoints>
       <waypoints>[-119, -305, 0, 88]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.28/@anchorage.0 //@diagrams.1/@contained.22/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.25/@anchorage.0 //@diagrams.1/@contained.19/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_EilqsOcTEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1615,7 +1563,7 @@
       <waypoints>[-120, -370, 0, 88]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="618,339" size="161,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.42"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.39"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_K5_hkOcnEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1633,7 +1581,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="566,404" size="164,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.41"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.38"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_Pd6_wOcnEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1651,7 +1599,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="543,464" size="182,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.40"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.37"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_Ssf0kOcnEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1669,7 +1617,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="456,528" size="215,-1">
-      <anchorage graphEdge="//@diagrams.1/@contained.39"/>
+      <anchorage graphEdge="//@diagrams.1/@contained.36"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_WWAR4OcnEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1686,7 +1634,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.38/@anchorage.0 //@diagrams.1/@contained.6/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.35/@anchorage.0 //@diagrams.1/@contained.5/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_ZtYdYOcnEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1696,7 +1644,7 @@
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.37/@anchorage.0 //@diagrams.1/@contained.6/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.34/@anchorage.0 //@diagrams.1/@contained.5/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_Z6z1YOcnEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1706,7 +1654,7 @@
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.36/@anchorage.0 //@diagrams.1/@contained.5/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.33/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_aJntcOcnEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1716,7 +1664,7 @@
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="-14" vDistance="11"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.35/@anchorage.0 //@diagrams.1/@contained.5/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.32/@anchorage.0 //@diagrams.1/@contained.4/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_aYzY8OcnEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1760,8 +1708,55 @@
         </semanticModel>
       </contained>
     </contained>
+    <contained xsi:type="di:GraphNode" position="329,47" size="95,82">
+      <anchorage graphEdge="//@diagrams.1/@contained.43 //@diagrams.1/@contained.44"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_CrE2EOZ8Edq6cpYOwfrT1A"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="Reified_ThreeWaySwitchPIM.uml2#_CrE2EOZ8Edq6cpYOwfrT1A"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="Reified_ThreeWaySwitchPIM.uml2#_FPKjcOZ8Edq6cpYOwfrT1A"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="Reified_ThreeWaySwitchPIM.uml2#_CrE2EOZ8Edq6cpYOwfrT1A"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="Reified_ThreeWaySwitchPIM.uml2#_Hs_30OZ8Edq6cpYOwfrT1A"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="Reified_ThreeWaySwitchPIM.uml2#_JxbNsOZ8Edq6cpYOwfrT1A"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.3/@anchorage.0 //@diagrams.1/@contained.42/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_HUVYkOmPEdqeN-KbvaEvBQ"/>
+      </semanticModel>
+      <waypoints>[0, -69, -231, 212]</waypoints>
+      <waypoints>[0, -77, -231, 204]</waypoints>
+      <waypoints>[231, -77, 0, 204]</waypoints>
+      <waypoints>[231, -240, 0, 41]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.1/@contained.8/@anchorage.0 //@diagrams.1/@contained.42/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_HlPiYOmPEdqeN-KbvaEvBQ"/>
+      </semanticModel>
+    </contained>
   </diagrams>
-  <diagrams position="0,0" size="100,100" name="Inhabitant classes" viewport="0,245">
+  <diagrams position="0,0" size="100,100" name="Inhabitant classes" viewport="0,13">
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
     <property key="diagramHeight" value="1188"/>
@@ -1775,7 +1770,7 @@
       <element href="Reified_ThreeWaySwitchPIM.uml2#_tPOCIqLHEdqkGMDvm75SlQ"/>
     </semanticModel>
     <contained xsi:type="di:GraphNode" position="26,32" size="226,221">
-      <anchorage graphEdge="//@diagrams.2/@contained.8"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.5"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="../../../fr.irisa.triskell.uml2.statecharts.simulator/src/uml2/rts.uml2#_CqwowLjkEdqvkM3QB-v4GA"/>
       </semanticModel>
@@ -1843,7 +1838,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="608,29" size="171,107">
-      <anchorage graphEdge="//@diagrams.2/@contained.11"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.6"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="../../../fr.irisa.triskell.uml2.statecharts.simulator/src/uml2/rts.uml2#_sGcGQLjuEdqvkM3QB-v4GA"/>
       </semanticModel>
@@ -1881,7 +1876,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="248,705" size="186,175">
-      <anchorage graphEdge="//@diagrams.2/@contained.20 //@diagrams.2/@contained.21"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.15 //@diagrams.2/@contained.16"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="../../../fr.irisa.triskell.uml2.statecharts.simulator/src/uml2/rts.uml2#_bielsLjjEdqvkM3QB-v4GA"/>
       </semanticModel>
@@ -1938,36 +1933,8 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="298,40" size="100,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.9 //@diagrams.2/@contained.10"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_WVXjQOcoEdq6cpYOwfrT1A"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="40"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="Reified_ThreeWaySwitchPIM.uml2#_WVXjQOcoEdq6cpYOwfrT1A"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="45"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="Reified_ThreeWaySwitchPIM.uml2#_WVXjQOcoEdq6cpYOwfrT1A"/>
-        </semanticModel>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="Reified_ThreeWaySwitchPIM.uml2#_c4QBcOcoEdq6cpYOwfrT1A"/>
-          </semanticModel>
-        </contained>
-        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
-          <semanticModel xsi:type="di:EMFSemanticModelBridge">
-            <element href="Reified_ThreeWaySwitchPIM.uml2#_hUGhsOcoEdq6cpYOwfrT1A"/>
-          </semanticModel>
-        </contained>
-      </contained>
-    </contained>
     <contained xsi:type="di:GraphNode" position="55,286" size="168,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.6 //@diagrams.2/@contained.8 //@diagrams.2/@contained.9 //@diagrams.2/@contained.15 //@diagrams.2/@contained.16 //@diagrams.2/@contained.17"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.5 //@diagrams.2/@contained.10 //@diagrams.2/@contained.11 //@diagrams.2/@contained.12 //@diagrams.2/@contained.22 //@diagrams.2/@contained.24"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_oG2A0OcoEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -1987,38 +1954,15 @@
             <element href="Reified_ThreeWaySwitchPIM.uml2#_EROL4OcpEdq6cpYOwfrT1A"/>
           </semanticModel>
         </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="Reified_ThreeWaySwitchPIM.uml2#_N710EOdKEdqlVNOkBUCcag"/>
+          </semanticModel>
+        </contained>
       </contained>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="408,350" size="100,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.6 //@diagrams.2/@contained.24 //@diagrams.2/@contained.25"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_pq3YUOcoEdq6cpYOwfrT1A"/>
-      </semanticModel>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="40"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="Reified_ThreeWaySwitchPIM.uml2#_pq3YUOcoEdq6cpYOwfrT1A"/>
-        </semanticModel>
-      </contained>
-      <contained xsi:type="di:GraphNode">
-        <property key="eStructuralFeatureID" value="45"/>
-        <semanticModel xsi:type="di:EMFSemanticModelBridge">
-          <element href="Reified_ThreeWaySwitchPIM.uml2#_pq3YUOcoEdq6cpYOwfrT1A"/>
-        </semanticModel>
-      </contained>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.4/@anchorage.0 //@diagrams.2/@contained.5/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_sYBiIOcoEdq6cpYOwfrT1A"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="11" vDistance="-3"/>
-      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="6" vDistance="5"/>
-      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
     <contained xsi:type="di:GraphNode" position="560,176" size="222,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.10 //@diagrams.2/@contained.11"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.6 //@diagrams.2/@contained.21"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_yyWhQOcoEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2045,7 +1989,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.4/@anchorage.0 //@diagrams.2/@contained.0/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.3/@anchorage.0 //@diagrams.2/@contained.0/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_05YfMOcoEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2054,25 +1998,7 @@
       <waypoints>[-25, -34, 0, 131]</waypoints>
       <waypoints>[-25, -54, 0, 111]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.4/@anchorage.0 //@diagrams.2/@contained.3/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_1RVFIOcoEdq6cpYOwfrT1A"/>
-      </semanticModel>
-      <waypoints>[0, -26, -209, 211]</waypoints>
-      <waypoints>[0, -36, -209, 201]</waypoints>
-      <waypoints>[209, -36, 0, 201]</waypoints>
-      <waypoints>[209, -201, 0, 36]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.7/@anchorage.0 //@diagrams.2/@contained.3/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#_1m2pMOcoEdq6cpYOwfrT1A"/>
-      </semanticModel>
-      <waypoints>[0, -20, 311, 92]</waypoints>
-      <waypoints>[0, -32, 311, 80]</waypoints>
-      <waypoints>[-311, -32, 0, 80]</waypoints>
-      <waypoints>[-311, -76, 0, 36]</waypoints>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.7/@anchorage.0 //@diagrams.2/@contained.1/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.4/@anchorage.0 //@diagrams.2/@contained.1/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_12MswOcoEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2082,7 +2008,7 @@
       <waypoints>[34, -51, 0, 54]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="61,392" size="157,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.14 //@diagrams.2/@contained.15 //@diagrams.2/@contained.16"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.9 //@diagrams.2/@contained.10 //@diagrams.2/@contained.11"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_ap2awOcpEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2110,7 +2036,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="65,509" size="148,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.14 //@diagrams.2/@contained.17"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.9 //@diagrams.2/@contained.12"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_ed5UIOcpEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2152,17 +2078,17 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.13/@anchorage.0 //@diagrams.2/@contained.12/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.8/@anchorage.0 //@diagrams.2/@contained.7/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_z_JPEOcpEdq6cpYOwfrT1A"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.12/@anchorage.0 //@diagrams.2/@contained.4/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.7/@anchorage.0 //@diagrams.2/@contained.3/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_0KfjcOcpEdq6cpYOwfrT1A"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.4/@anchorage.0 //@diagrams.2/@contained.12/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.3/@anchorage.0 //@diagrams.2/@contained.7/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_7UaMcOcpEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2176,7 +2102,7 @@
       <waypoints>[94, 146, 94, 31]</waypoints>
       <waypoints>[79, 141, 79, 26]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.4/@anchorage.0 //@diagrams.2/@contained.13/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.3/@anchorage.0 //@diagrams.2/@contained.8/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_7jSV8OcpEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2191,7 +2117,7 @@
       <waypoints>[74, 242, 74, -19]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="60,924" size="224,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.20"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.15"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_oYtiAOcqEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2209,7 +2135,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="60,990" size="225,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.21"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.16"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_sk2LQOcqEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2226,22 +2152,22 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.18/@anchorage.0 //@diagrams.2/@contained.2/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.13/@anchorage.0 //@diagrams.2/@contained.2/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_wgMmgOcqEdq6cpYOwfrT1A"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.19/@anchorage.0 //@diagrams.2/@contained.2/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.14/@anchorage.0 //@diagrams.2/@contained.2/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_w1cdwOcqEdq6cpYOwfrT1A"/>
       </semanticModel>
-      <waypoints>[0, -20, -222, 194]</waypoints>
-      <waypoints>[0, -32, -222, 182]</waypoints>
-      <waypoints>[222, -32, 0, 182]</waypoints>
-      <waypoints>[222, -126, 0, 88]</waypoints>
+      <waypoints>[0, -20, -169, 198]</waypoints>
+      <waypoints>[0, -34, -169, 184]</waypoints>
+      <waypoints>[169, -34, 0, 184]</waypoints>
+      <waypoints>[169, -130, 0, 88]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="563,423" size="212,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.24"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.25"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_6JuFgOcqEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2259,7 +2185,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="437,515" size="229,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.25"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.26"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_ThreeWaySwitchPIM.uml2#_8o3BcOcqEdq6cpYOwfrT1A"/>
       </semanticModel>
@@ -2276,24 +2202,125 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.22/@anchorage.0 //@diagrams.2/@contained.5/@anchorage.0">
+    <contained xsi:type="di:GraphNode" position="584,1063" size="100,-1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#__gG7YOcqEdq6cpYOwfrT1A"/>
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_I_t8gOdDEdqlVNOkBUCcag"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="-1" vDistance="9"/>
-      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="17" vDistance="-1"/>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="35"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="Reified_ThreeWaySwitchPIM.uml2#_I_t8gOdDEdqlVNOkBUCcag"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="36"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="Reified_ThreeWaySwitchPIM.uml2#_I_t8gOdDEdqlVNOkBUCcag"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="455,55" size="66,41">
+      <anchorage graphEdge="//@diagrams.2/@contained.21 //@diagrams.2/@contained.22"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_Z3vywOcFEdq6cpYOwfrT1A"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="Reified_ThreeWaySwitchPIM.uml2#_Z3vywOcFEdq6cpYOwfrT1A"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="Reified_ThreeWaySwitchPIM.uml2#_Do58kOcGEdq6cpYOwfrT1A"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="Reified_ThreeWaySwitchPIM.uml2#_Z3vywOcFEdq6cpYOwfrT1A"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.4/@anchorage.0 //@diagrams.2/@contained.20/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_RBZTwOmPEdqeN-KbvaEvBQ"/>
+      </semanticModel>
+      <waypoints>[0, -35, 183, 101]</waypoints>
+      <waypoints>[0, -44, 183, 92]</waypoints>
+      <waypoints>[-183, -44, 0, 92]</waypoints>
+      <waypoints>[-183, -115, 0, 21]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.3/@anchorage.0 //@diagrams.2/@contained.20/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_RszBMOmPEdqeN-KbvaEvBQ"/>
+      </semanticModel>
+      <waypoints>[0, -35, -349, 211]</waypoints>
+      <waypoints>[0, -43, -349, 203]</waypoints>
+      <waypoints>[349, -43, 0, 203]</waypoints>
+      <waypoints>[349, -225, 0, 21]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="378,373" size="95,82">
+      <anchorage graphEdge="//@diagrams.2/@contained.24 //@diagrams.2/@contained.25 //@diagrams.2/@contained.26"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_CrE2EOZ8Edq6cpYOwfrT1A"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="Reified_ThreeWaySwitchPIM.uml2#_CrE2EOZ8Edq6cpYOwfrT1A"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="Reified_ThreeWaySwitchPIM.uml2#_FPKjcOZ8Edq6cpYOwfrT1A"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="Reified_ThreeWaySwitchPIM.uml2#_CrE2EOZ8Edq6cpYOwfrT1A"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="Reified_ThreeWaySwitchPIM.uml2#_Hs_30OZ8Edq6cpYOwfrT1A"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="Reified_ThreeWaySwitchPIM.uml2#_JxbNsOZ8Edq6cpYOwfrT1A"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.3/@anchorage.0 //@diagrams.2/@contained.23/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_a1lxsOmPEdqeN-KbvaEvBQ"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="18" vDistance="-2"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.23/@anchorage.0 //@diagrams.2/@contained.5/@anchorage.0">
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.17/@anchorage.0 //@diagrams.2/@contained.23/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="Reified_ThreeWaySwitchPIM.uml2#__vEkcOcqEdq6cpYOwfrT1A"/>
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_bTZIAOmPEdqeN-KbvaEvBQ"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" vDistance="6"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="6" vDistance="-3"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="9" vDistance="2"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.18/@anchorage.0 //@diagrams.2/@contained.23/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="Reified_ThreeWaySwitchPIM.uml2#_bh43AOmPEdqeN-KbvaEvBQ"/>
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="10" vDistance="10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="23" vDistance="-4"/>
-      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="2" vDistance="-5"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="5" vDistance="14"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="12" vDistance="-7"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="3" vDistance="11"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
   </diagrams>

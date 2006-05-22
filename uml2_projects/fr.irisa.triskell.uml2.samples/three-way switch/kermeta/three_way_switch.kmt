@@ -1,0 +1,69 @@
+/* $Id: three_way_switch.kmt,v 1.1 2006-05-22 15:49:27 vmahe Exp $
+ * Creation date: May 19, 2006
+ * License:
+ * Copyright:
+ * Authors: vmahe@irisa.fr
+ */
+
+package test_purpose;
+
+
+require kermeta
+require "rts.kmt"
+
+using kermeta::standard
+using rts
+
+abstract class Light {
+	operation powerOn() is abstract
+	operation powerOff() is abstract
+}
+
+abstract class Switch {
+	reference up : Boolean
+	operation switchUp() is abstract
+	operation switchDown() is abstract
+}
+
+abstract class Inhabitant {
+}
+
+class Light_impl inherits Light, ActiveStateMachine {
+	reference illuminated : Boolean
+	reference switch : Switch[2..2]
+	reference light_top_state : Light_top_state
+	method powerOn() is do
+		//Empty. See proxy class
+	end
+	method powerOff() is do
+		//Empty. See proxy class
+	end
+	operation set_illuminated(new_illuminated:Boolean) is do
+		illuminated := new_illuminated
+	end
+	operation add_switch(new_switch:Switch) is do
+		if switch == void then
+			switch := OrderedSet<Switch>.new
+		end
+		switch.add(new_switch)
+	end
+}
+
+class Light_top_state inherits Light_impl {
+	method entry() is do
+		// Empty
+	end
+	method exit() is do
+		// Empty
+	end
+}
+
+class Light_in_On inherits Light_top_state {
+	method entry() is do
+		// Empty
+	end
+	method exit() is do
+		// Empty
+	end
+}
+

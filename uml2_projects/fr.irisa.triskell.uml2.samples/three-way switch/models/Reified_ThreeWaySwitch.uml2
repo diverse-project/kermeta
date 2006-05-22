@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:uml="http://www.eclipse.org/uml2/1.0.0/UML" xmi:id="_tPOCIaLHEdqkGMDvm75SlQ" name="main">
-  <ownedMember xmi:type="uml:Package" xmi:id="_tPOCIqLHEdqkGMDvm75SlQ" name="Reified_ThreeWaySwitch"/>
-</uml:Model>
