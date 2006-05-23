@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.4 2006-05-22 16:43:03 zdrey Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.5 2006-05-23 07:43:10 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2HTMLPrettyPrinter.java
  * License    : EPL
@@ -227,7 +227,6 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		result.append(packages);
 		result.append("  <!-- packages-snip -->");
 		result.append("  <div id='descriptions'>");
-		
 		result.append("  <!-- descriptions-snip -->");
 		result.append(descriptions);
 		result.append("  <!-- descriptions-snip -->");
@@ -265,6 +264,10 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		while (it.hasNext())
 		{
 			node = it.next();
+			String qname = KMTHelper.getQualifiedName(node);
+			String path ="";
+			if (qname.contains("::"))
+				path = qname.substring(0, (qname.length()-node.getName().length())); 
 			// Visit the packages in order to document their children
 			this.accept(node);
 
@@ -276,7 +279,8 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 				this._packagesNavigation = "API : ";
 			
 			this._packagesNavigation += 
-			  "<a href='javascript:documentElement(\"" + this_id + "\");'>" + node.getName() + "</a>";
+			 
+			path + "<a href='javascript:documentElement(\"" + this_id + "\");'>" + node.getName() + "</a>";
 		}
 		
 	}
@@ -383,9 +387,7 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitOperation(Operation node) {
 		if (_as_signature == false)
-		{	
 			return documentFeature(node);
-		}
 		else return node.getName() + "(" + codePrinter.ppComaSeparatedNodes(node.getOwnedParameter()) + ")\n";
 	}
 	
@@ -422,9 +424,7 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 			typedef.hashCode() + "\")'>" + typedef.getName() + "</a>)";
 		}
 		else
-		{
 			return "";
-		}
 	
 	}
 	
@@ -480,7 +480,6 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		String this_id = String.valueOf(node.hashCode());
 		String result = "";
 		// Constructs the hyperlinked name of a Class with a ref to its description, and the list of associated operations
-		
 		result += "<div id='" + this_id + "' class='" + "container" + "'>";
 		result += "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
 		_as_signature = false;
@@ -509,7 +508,6 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		if (_as_signature == true) return KMTHelper.getQualifiedName(node);
 		this.document(node.getName(), node);
 		String this_id = String.valueOf(node.hashCode());
-		
 		// Construct the list of class definitions that belong to this package
 		String result = "<div id='" + this_id + "' class='" + "root" + "'>";
 		result += "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
@@ -528,9 +526,7 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitProperty(Property node) {
 		if (_as_signature == false)
-		{	
 			return documentFeature(node);
-		}
 		else return node.getName() + ": " + codePrinter.accept(node.getType());
 	}
 
@@ -552,18 +548,4 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		return join(lresult,"\n<br>");
 	}
-	
-
-	/** Prettyprint the annotations */
-	public String ppTags(EList tagList)
-	{
-	    String result = "";
-	    for (int i=0; i< tagList.size(); i++)
-	    {
-	        result += this.accept((EObject)tagList.get(i));
-	    }
-	    return result;
-	}
-
-
 }
