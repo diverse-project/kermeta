@@ -2,8 +2,8 @@ package kermeta::persistence;
 
 using kermeta::standard
 
-/*****************************************************************************
- * $Id: resource.kmt,v 1.14 2006-04-03 09:51:27 zdrey Exp $
+/* ****************************************************************************
+ * $Id: resource.kmt,v 1.15 2006-05-23 09:50:39 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -15,7 +15,7 @@ using kermeta::standard
  *      This file contains the classes that handle the serialization of models.
  *
  *
- ****************************************************************************/
+ *************************************************************************** */
 
 /**
  * The main class that handle a loaded/saved model.
@@ -141,16 +141,9 @@ class EMFResource inherits Resource
 	
 
 
-	/** Add an instance to the Resource*/
+	/** Add an instance to the Resource ( this is only a shortcut to instances.add call)*/
 	method add(instance : Object) : Void is do
-		// Exception
-		var e : ResourceUnconformityException init ResourceUnconformityException.new
-		// Is the object conform to the metamodel?
-		if self.isConform(instance) then
-			instances.add(instance)
-		else
-			raise e
-		end
+		instances.add(instance)
 	end
 	
 	/** Remove an instance from the Resource */
@@ -161,29 +154,6 @@ class EMFResource inherits Resource
 		else
 			result := void
 		end
-	end
-	
-	/** 
-	 * Return true if instance type is conform to the metamodel of the model loaded,
-	 * false otherwise 
-	 */
-	operation isConform(instance : Object) : Boolean is do
-		// Get on eof the isntances loaded (supposed to be conform!)
-		var valid_instance : Object init instances.one
-		// We use reflection to get the meta model classes .. 
-		var o : Object init valid_instance.getMetaClass.typeDefinition
-		var container : Object
-		var i : Integer init 0
-		from var b : Boolean init true //(cdef.container != void or i<=10)
-		 // *very* temporary patch for unexp. infinite loop : invalid models?
-		until o.container == void
-		loop
-			o := o.container
-		end
-		// TODO : a robustness test? o instnaceof Package?
-		var p : kermeta::language::structure::Package
-		p ?= o
-		result := isInTypeDefSet(p.ownedTypeDefinition, instance)
 	end
 	
 	/**

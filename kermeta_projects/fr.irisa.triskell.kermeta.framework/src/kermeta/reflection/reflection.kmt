@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.17 2006-05-04 15:22:42 jmottu Exp $
+/* $Id: reflection.kmt,v 1.18 2006-05-23 09:50:39 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -44,40 +44,60 @@ abstract class ParameterizedType inherits Type
 }
 abstract class Class inherits ParameterizedType
 {
+	/** Returns the attributes, references, and derived properties owned by
+	 *  the classDefinition of this class.
+	 */
 	property readonly ownedAttribute : set Property[0..*]
 		getter is do
 			var cDef : ClassDefinition
 			cDef ?= typeDefinition
 			result := cDef.ownedAttribute
 		end
+		
+	/** Returns the operations owned by the classDefinition of this class.
+	 */
 	property readonly ownedOperation : set Operation[0..*]
 		getter is do
 			var cDef : ClassDefinition
 			cDef ?= typeDefinition
 			result := cDef.ownedOperation
 		end
+		
+	/** Returns the Classes of which the classDefinition of this class inherits.
+	 */
 	property readonly superClass : set Class[0..*]
 		getter is do
 			var cDef : ClassDefinition
 			cDef ?= typeDefinition
 			result := cDef.superType
 		end
+		
+	/** Returns true if the classDefinition of this class is abstract.
+	 */ 
 	property readonly isAbstract : Boolean
 		getter is do
 			var cDef : ClassDefinition
 			cDef ?= typeDefinition
 			result := cDef.isAbstract
 		end
+	
+	/** Returns the name of the classDefinition of this class
+	 */
 	property readonly name : String
 		getter is do
 			result := typeDefinition.name
 		end
 	operation new() : Object is abstract
 	
+	/** Returns the String representation of this class. 
+	 *  Note : throws an exception if this class has no classDefinition
+	 *  or if the classDefinition is not well constructed.
+	 */
 	method toString() : String is do
 		result := self.typeDefinition.name
 	end
 }
+
 abstract class ModelType inherits ParameterizedType
 {
 	property readonly ownedTypeDefinition : set TypeDefinition[0..*]
@@ -137,13 +157,24 @@ abstract class GenericTypeDefinition inherits TypeDefinition
 abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 {
 	attribute isAbstract : Boolean
+	
+	/** Returns the attributes, references, and derived properties owned by
+	 *  this class definition.
+	 */
 	attribute ownedAttribute : set Property[0..*]#owningClass
+	
+	/** Returns the operations owned by this class definition.
+	 */
 	attribute ownedOperation : set Operation[0..*]#owningClass
 	attribute ~inv : set Constraint[0..*]
 	
+	/** Returns the Classes of which this class definition inherits.
+	 */
 	reference superType : set Class[0..*]
 
-	/** returns all the attributes of this classDefinition including the inherited ones and the derived ones */
+	/** Returns all the attributes, references, derived properties of this 
+	 *  class definition including the inherited ones
+	 */
 	property readonly allOwnedAttribute : set Property[0..*]
 		getter is do
  		    result := kermeta::standard::Set<Property>.new
@@ -195,6 +226,10 @@ abstract class NamedElement inherits Object
 {
 	attribute name : String
 	
+	/** Returns the qualified name of this named element. Qualified name is 
+	 * the list of the names of the packages hierarchically ordered, delimited by
+	 * a "::", followed by the name of this named element.
+	 */
 	operation qualifiedName() : String is do
 		var elem : NamedElement init self
 		result := self.name

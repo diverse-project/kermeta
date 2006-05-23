@@ -2,7 +2,7 @@ package kermeta::exceptions;
 require "../Standard.kmt"
 using kermeta::standard
 using kermeta::utils
-/*****************************************************************************
+/* ****************************************************************************
  * $Id:
  * Project : Kermeta (First iteration)
  * Creation date :  
@@ -14,7 +14,7 @@ using kermeta::utils
  * Description :  
  *      Contains the main exceptions from which all the others inherit
  *
- ****************************************************************************/
+ *************************************************************************** */
 
 /**
  * The main class from which all the exception inherit
