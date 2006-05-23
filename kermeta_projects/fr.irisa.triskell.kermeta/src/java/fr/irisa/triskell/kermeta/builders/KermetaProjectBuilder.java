@@ -44,7 +44,7 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 		 */
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			IResource resource = delta.getResource();
-			System.out.println("DELTA :"+delta);
+			//System.out.println("DELTA :"+delta);
 			if (delta.getKind() == IResourceDelta.ADDED)
 				checkResource(resource);
 			else if (delta.getKind() == IResourceDelta.REMOVED)
@@ -66,7 +66,7 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 
 	class ResourceVisitor implements IResourceVisitor {
 		public boolean visit(IResource resource) {
-			System.err.println("Le fichier qui a bougé c'est celui là  : " + resource.getFullPath().toString() );
+			//System.err.println("Le fichier qui a bougé c'est celui là  : " + resource.getFullPath().toString() );
 			checkResource(resource);
 			//return true to continue visiting children.
 			return true;
@@ -129,16 +129,16 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 			throws CoreException {
 		System.out.println("The build method is colllllld");
 		if (kind == FULL_BUILD) {
-			System.out.println("full build: " );
+			//System.out.println("full build: " );
 			fullBuild(monitor);
 		} else {
 			IResourceDelta delta = getDelta(getProject());
-			System.out.println("delta: " + delta);
+			//System.out.println("delta: " + delta);
 			if (delta == null) {
-				System.out.println("fbuild? " + kind);
+				//System.out.println("fbuild? " + kind);
 				fullBuild(monitor);
 			} else {
-				System.out.println("ibuild? " + kind);
+				//System.out.println("ibuild? " + kind);
 				incrementalBuild(delta, monitor);
 			}
 		}
@@ -148,8 +148,6 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	/** (was parseXML in the example)
 	 * */
 	void checkResource(IResource resource) {
-		System.err.println("Coucou!!!! Le project builder ben il marche!!!");
-		// Check kermeta!!)
 		//String extension = resource.getFileExtension();
 		if (resource instanceof IFile && resource.getName().endsWith(".kmt")) {
 			IFile file = (IFile) resource;
@@ -173,7 +171,7 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	protected void fullBuild(final IProgressMonitor monitor)
 			throws CoreException {
 		try {
-			System.out.println("Full Build!!! : " + getProject());
+			//System.out.println("Full Build!!! : " + getProject());
 			getProject().accept(new ResourceVisitor());
 		} catch (CoreException e) {
 		}
@@ -201,7 +199,6 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	 */
 	@Override
 	protected void startupOnInitialize() {
-		System.out.println("Starskyyyyy etttt Hutch!! lalalalala");
 		// TODO Auto-generated method stub
 		super.startupOnInitialize();
 	}
@@ -211,8 +208,7 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	 */
 	@Override
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) throws CoreException {
-		// TODO Auto-generated method stub
-		System.out.println("Initializeation");
+		
 		super.setInitializationData(config, propertyName, data);
 	}
 	
@@ -233,7 +229,7 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
         	// Create the CompilationUnit for the given file
         	if (compileManager.exists(file.getFullPath().toString()))
         	{
-        		System.err.println("IFile has a resource!");
+        		//System.err.println("IFile has a resource!");
         	}
 	        //file.getFullPath().toString();
         }
