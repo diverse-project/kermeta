@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.61 2006-05-18 08:05:57 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.62 2006-05-23 07:38:01 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -1166,8 +1166,12 @@ public abstract class KermetaUnit {
 	}
 	
 	private void loadAllAnnotations() {
+		// since loading is used for all loads, recursion makes it unconsistant - for standard 
+		// package in particular, they are loaded twice if no "doneLoadAnnotation test" is done 
+		if (doneLoadAnnotations) return;
 	    loading = true;
 	    loadAnnotations();
+	    doneLoadAnnotations = true;
 	    for (int i=0; i<importedUnits.size(); i++) {
 	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
 	        if (!iu.loading) iu.loadAllAnnotations();
@@ -1184,7 +1188,7 @@ public abstract class KermetaUnit {
 	 * Loads annotations : attach annotation to the corresponding Kermeta elements
 	 */
 	public abstract void loadAnnotations();
-	
+	private boolean doneLoadAnnotations = false;
 	/**
 	 * Loads dependencies ( handles require, using, ...)
 	 */
