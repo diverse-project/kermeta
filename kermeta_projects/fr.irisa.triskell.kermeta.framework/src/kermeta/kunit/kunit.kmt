@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * $Id: kunit.kmt,v 1.16 2006-04-03 09:14:26 vmahe Exp $
+ * $Id: kunit.kmt,v 1.17 2006-05-23 09:49:56 zdrey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -37,8 +37,7 @@ abstract class Assert
 	attribute rank : Integer
 	
 	/**
-	 * will fail if bool is false
-	 * DEPRECATED : correct use is "assertTrue(bool : Boolean)" or "assertFalse(bool : Boolean)"
+	 * Fails if bool is false
 	 */
 	operation assert(bool : Boolean) : Void is do
 		var number : Integer init order()
