@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.5 2006-05-23 07:43:10 zdrey Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.6 2006-05-23 12:43:54 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2HTMLPrettyPrinter.java
  * License    : EPL
@@ -21,6 +21,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -114,7 +115,6 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		kmunit.load();
 		rootPackage = kmunit.getRootPackage();
 	}
-
 	
 	public static void main(String[] args)
 	{
@@ -180,7 +180,6 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	{
 		 String str_uri = "file:///udd/zdrey/Workspaces/KMNewWorkspace/fr.irisa.triskell.kermeta/lib/thirdparty/header.html";
 		 StringBuffer result = new StringBuffer();
-		 
 		 try 
 		 {
 			 URI _uri = URI.createURI(str_uri);
@@ -273,13 +272,10 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 
 			String this_id = String.valueOf(node.hashCode());
 			// Construct the list of package names from which user will browse the code documentation
-			if (this._packagesNavigation!=null)
-				this._packagesNavigation += " &bull; ";
-			else
-				this._packagesNavigation = "API : ";
+			if (this._packagesNavigation!=null) this._packagesNavigation += " &bull; ";
+			else this._packagesNavigation = "API : ";
 			
-			this._packagesNavigation += 
-			 
+			this._packagesNavigation +=
 			path + "<a href='javascript:documentElement(\"" + this_id + "\");'>" + node.getName() + "</a>";
 		}
 		
@@ -386,14 +382,36 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitOperation(fr.irisa.triskell.kermeta.language.structure.Operation)
 	 */
 	public Object visitOperation(Operation node) {
+		String result = "";
 		if (_as_signature == false)
-			return documentFeature(node);
-		else return node.getName() + "(" + codePrinter.ppComaSeparatedNodes(node.getOwnedParameter()) + ")\n";
+			result = documentFeature(node);
+		else
+		{ // duplicate code with km2kmt
+			result += (node.getSuperOperation() != null)?"method ":"operation ";
+			result += KMTHelper.getMangledIdentifier(node.getName());
+			if (node.getTypeParameter().size() > 0) {
+				result += "<";
+				result += codePrinter.ppTypeVariableDeclaration(node.getTypeParameter());
+				result += ">";
+			}
+			result += "(";
+			result += codePrinter.ppComaSeparatedNodes(node.getOwnedParameter());
+			result += ")";
+			result += node.getType() != null?(" : " + codePrinter.ppTypeFromMultiplicityElement(node)):" : Void";
+			if (node.getSuperOperation() != null) {
+				result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()));
+			}
+		}
+		return result;
 	}
 	
 	public String visitEList(EList nodes, String node_type)
 	{	
 		String result = "<div class='title'>" + node_type + "</div class='title'><div class='group'>" ;
+		// First, sort the nodes
+		
+		
+		// Then, document them
 		Iterator it = nodes.iterator();
 		while (it.hasNext())
 		{
@@ -527,7 +545,16 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 	public Object visitProperty(Property node) {
 		if (_as_signature == false)
 			return documentFeature(node);
-		else return node.getName() + ": " + codePrinter.accept(node.getType());
+		else 
+		{
+			String signature = "";
+			signature += node.isIsComposite()?"attribute ":(node.isIsDerived()?"property ":"reference ");
+			signature += node.getName() + ": " + codePrinter.ppTypeFromMultiplicityElement(node);
+			signature += node.isIsReadOnly()?" readonly ":"";
+			if (node.getOpposite() != null) 
+				signature += "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName());
+			return signature;
+		}
 	}
 
 	/**
@@ -548,4 +575,5 @@ public class KM2HTMLPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		return join(lresult,"\n<br>");
 	}
+	
 }
