@@ -1,4 +1,4 @@
-/* $Id: ExpressionCallFrame.java,v 1.7 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: ExpressionCallFrame.java,v 1.8 2006-05-23 13:30:28 jmottu Exp $
 * Project : Kermeta (First iteration)
 * File : ExpressionCallFrame.java
 * License : GPL
@@ -30,6 +30,7 @@ public class ExpressionCallFrame extends CallFrame {
 
     DynamicExpressionUnit unit;
     RuntimeObject selfObj;
+    CallFrame cf; //not null if this expression is an invariant, thus its value is the previous CallFrame in the stack
     
     /**
      * @param pContext
@@ -39,6 +40,22 @@ public class ExpressionCallFrame extends CallFrame {
         this.unit = unit;
         this.selfObj = selfObj;
         this.pushExpressionContext();
+        this.cf = null;
+    }
+    
+    /**
+     * @param pContext
+     * @param isInvariant : value is true if the expression is related to an invariant
+     */
+    public ExpressionCallFrame(InterpreterContext pContext, DynamicExpressionUnit unit, RuntimeObject selfObj, Boolean isInvariant) {
+        super(pContext);
+        this.unit = unit;
+        this.selfObj = selfObj;
+        this.pushExpressionContext();
+        if (isInvariant)
+        	this.cf = pContext.peekCallFrame();
+        else
+        	this.cf = null;
     }
 
     /**

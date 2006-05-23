@@ -1,4 +1,4 @@
-/* $Id: LambdaCallFrame.java,v 1.9 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: LambdaCallFrame.java,v 1.10 2006-05-23 13:30:49 jmottu Exp $
 * Project : Kermeta (First iteration)
 * File : LambdaCallFrame.java
 * License : GPL
@@ -54,7 +54,10 @@ public class LambdaCallFrame extends CallFrame {
             nestingOperationCallFrame = ((LambdaCallFrame)nestingCallFrame).nestingOperationCallFrame;
         }
         else if (nestingCallFrame instanceof ExpressionCallFrame) {
-        	
+        	if (((ExpressionCallFrame)nestingCallFrame).cf != null // so it is an invariant
+        			&& ((ExpressionCallFrame)nestingCallFrame).cf instanceof OperationCallFrame){
+        		nestingOperationCallFrame = (OperationCallFrame) ((ExpressionCallFrame)nestingCallFrame).cf; // récupéré le parent dans la pile
+        	}
         }
         // copy the context
         nestingExpressionContext = new Stack();

@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.9 2006-05-05 18:05:38 jmottu Exp $
+/* $Id: Object.java,v 1.10 2006-05-23 13:31:26 jmottu Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -102,7 +102,7 @@ public class Object {
 	protected static boolean checkConstraint(Expression exp, ClassDefinition cls, RuntimeObject obj) {
 		DynamicExpressionUnit deu = new DynamicExpressionUnit(obj.getFactory().getMemory().getUnit().getPackages(), exp, cls);
 		ExpressionInterpreter interp = obj.getFactory().getMemory().getCurrentInterpreter();
-		ExpressionCallFrame ecf = new ExpressionCallFrame(interp.getInterpreterContext(), deu, obj);
+		ExpressionCallFrame ecf = new ExpressionCallFrame(interp.getInterpreterContext(), deu, obj, true);
 		return ecf.eval(interp) == obj.getFactory().getMemory().trueINSTANCE;
 	}
 	
