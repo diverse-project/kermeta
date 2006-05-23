@@ -1,3 +1,4 @@
+/** The root package. See the other packages if you want to browse the classes of Kermeta api. */
 package kermeta;
 
 /*

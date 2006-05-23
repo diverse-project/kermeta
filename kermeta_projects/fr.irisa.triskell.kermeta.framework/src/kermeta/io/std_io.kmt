@@ -1,3 +1,6 @@
+/**
+ * Contains Input/Output related classes. 
+ */
 package kermeta::io;
 
 require "../Standard.kmt"

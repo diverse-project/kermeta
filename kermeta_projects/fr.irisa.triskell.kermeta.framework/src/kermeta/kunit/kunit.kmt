@@ -1,17 +1,17 @@
 /* *****************************************************************************
- * $Id: kunit.kmt,v 1.17 2006-05-23 09:49:56 zdrey Exp $
+ * $Id: kunit.kmt,v 1.18 2006-05-23 12:26:46 zdrey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
  * Distributed under the terms of the GPL licence
- *
- * Implementation of a unit test tool. This is a clone of
+ */
+ 
+/**
+ * Contains the implementation of a unit test tool. This is a clone of
  * JUnit architecture.
  * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm
  *
- * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.
-
- **************************************************************************** */
+ * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.*/
 package kermeta::kunit;
 
 require "../Standard.kmt"

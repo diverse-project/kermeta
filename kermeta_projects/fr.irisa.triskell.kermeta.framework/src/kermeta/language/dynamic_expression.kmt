@@ -1,4 +1,7 @@
-
+/**
+ * Contains a set of classes whose function is to evaluate a kermeta 
+ * expression written as a string.
+ */
 package kermeta::interpreter;
 
 require "../Standard.kmt"
@@ -6,6 +9,19 @@ require "../Standard.kmt"
 using kermeta::standard
 using kermeta::utils
 
+/**
+ * DynamicExpression is a class used to make dynamic calls, i.e dynamic evaluation
+ * of Kermeta statements represented in a string.
+ * 
+ * An example :
+ *   var de : DynamicExpression init DynamicExpression.new
+ *   de.initializeDefaults
+ *   de.formalParameters.put("a", String)
+ *   de.parse("stdio.writeln(a)") // note: to execute a list of statements, you have to surround them with do..end
+ *   var params : Hashtable<String, Object> init Hashtable<String, Object>.new
+ *   params.put("a", "hello world!")
+ *   de.execute(void, params)
+ */
 class DynamicExpression
 {
 	/**

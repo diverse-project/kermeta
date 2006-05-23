@@ -1,9 +1,13 @@
+/**
+ * Contains the classes that handle the serialization of models, in particular
+ * EMF models.
+ */
 package kermeta::persistence;
 
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.15 2006-05-23 09:50:39 zdrey Exp $
+ * $Id: resource.kmt,v 1.16 2006-05-23 12:26:46 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -11,11 +15,8 @@ using kermeta::standard
  * Copyright : IRISA / Universite de Rennes 1
  * Creation date : Mar 14, 2005
  * Author : zdrey
- * Description :  
- *      This file contains the classes that handle the serialization of models.
- *
- *
- *************************************************************************** */
+ */
+
 
 /**
  * The main class that handle a loaded/saved model.

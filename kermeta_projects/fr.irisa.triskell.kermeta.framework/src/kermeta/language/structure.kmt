@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.23 2006-05-04 15:22:31 jmottu Exp $
+/* $Id: structure.kmt,v 1.24 2006-05-23 12:26:46 zdrey Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -9,6 +9,11 @@
  *  Franck Fleurey  ffleurey@irisa.fr 
  *  Zoe Drey 		zdrey@irisa.fr
  *  Jean-Philippe Thibault 		jpthibault@irisa.fr
+ */
+ 
+/**
+ * Contains the concrete implementation (including the operation bodies) 
+ * of the classes of the kermeta::reflection package.
  */
 package kermeta::language::structure; 
 

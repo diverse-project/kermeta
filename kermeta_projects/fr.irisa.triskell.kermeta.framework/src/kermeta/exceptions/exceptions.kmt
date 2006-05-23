@@ -1,3 +1,6 @@
+/** 
+ * Contains the definition of a Kermeta exception and a few basic exceptions.
+ */
 package kermeta::exceptions;
 require "../Standard.kmt"
 using kermeta::standard

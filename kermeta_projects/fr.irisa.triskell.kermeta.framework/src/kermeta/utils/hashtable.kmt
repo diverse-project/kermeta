@@ -1,3 +1,7 @@
+/** 
+ * Contains special classes (Hashtable, Stack) that are not contained in Kermeta
+ * metamodel
+ */
 package kermeta::utils;
 
 require "../Standard.kmt"

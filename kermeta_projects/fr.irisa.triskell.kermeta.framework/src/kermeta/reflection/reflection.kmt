@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.18 2006-05-23 09:50:39 zdrey Exp $
+/* $Id: reflection.kmt,v 1.19 2006-05-23 12:26:46 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -9,8 +9,11 @@
  *		Franck Fleurey <ffleurey@irisa.fr>
  *		Zoé Drey <zdrey@irisa.fr>
  * 		Didier Vojtisek <dvojtise@irisa.fr>
- * Description :
- * 		Contains all the classes used in the reflection mecanism. It is used by kermeta.language.structure
+ */
+ 
+/**
+ * Contains all the abstract classes used in the reflection mecanism. Implements the derived
+ * properties contained in the classes. It is used by kermeta.language.structure.
  */
 package kermeta::reflection;
 
@@ -25,6 +28,25 @@ abstract class Object
 	operation checkInvariants() : Boolean is abstract
 	operation equals(element : Object) : Boolean is abstract
 	operation isNotEqual(element : Object) : Boolean is abstract
+	
+	/** 
+	 * Returns the instances of the given property for this Object.
+	 *
+	 * Example : 
+	 * <code>class A { reference attr : String }
+	 * 
+	 * operation getAProp() is do
+	 *    var a : A
+	 *    var s : String
+	 *    s ?= a.get("attr")
+	 * end
+	 * </code>
+	 * The user has to cast
+	 * the result of this method according to the type and the upper multiplicity
+	 * of this property. If upper multiplicity > 1, than the effective type of the 
+	 * result is a Sequence<ThePropertyName>. Otherwise, the type corresponds to 
+	 * the name of the given Property (i.e the type of the property instance).
+	 */
 	operation get(~property : Property) : Object is abstract
 	operation ~set(~property : Property, element : Object) : Void is abstract
 	operation isSet(~property : Property) : Boolean is abstract

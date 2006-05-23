@@ -1,3 +1,7 @@
+/**
+ * Contains Collections and primitive types, i.e the base types like String, 
+ * Integer, etc.
+ */
 package kermeta::standard;
 
 require "primitive_types.kmt"
