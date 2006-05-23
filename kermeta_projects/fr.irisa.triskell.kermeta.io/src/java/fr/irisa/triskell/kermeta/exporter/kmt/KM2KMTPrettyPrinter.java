@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.28 2006-05-17 12:55:42 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.29 2006-05-23 13:35:37 zdrey Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -74,7 +74,7 @@ import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
 
 /**
- *
+ * PrettyPrinter that prints a Kermeta program in its concrete syntax. 
  */
 public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 
@@ -83,6 +83,9 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	protected String root_pname;
 	protected String current_pname;
 	
+	/** If the visitor (i.e This printer:)) is currently visiting a typedefinition, this
+	 *  boolean is set to true (this allows the visitor to print differently some things
+	 *  according to the context inside which it is (i.e typeDefintion or not typeDefinition) */
 	protected boolean typedef = true;
 	
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KM2KMT");
@@ -900,6 +903,18 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		return result;
     }
+
+	/**
+	 * Set the printing context. Printing kermeta programs changes if we are inside a classdefinition or not.
+	 * In particular, this context boolean is used when printing Enumeration or PrimitiveType : 
+	 * if they are defined as type of an attribute, it is printed as "String",
+	 * otherwise, it is printed as "alias String : blablab")
+	 * @param typedef The typedef to set.
+	 */
+	public void setTypedef(boolean typedef) {
+		this.typedef = typedef;
+	}
+	
 	
 	
 }
