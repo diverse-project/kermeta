@@ -102,13 +102,13 @@ class Identity
 
 abstract class Event
 {
-    reference arguments : set rts::Any[0..*]
-    reference event_name : kermeta::standard::String
+    reference arguments : oset Object[0..*]
+    operation event_name() : kermeta::standard::String is abstract
     operation make() is do
         //TODO: implement operation make
-    end    operation send_to(target : rts::Any) is do
+    end    operation send_to(target : Object) is do
         //TODO: implement operation send_to
-    end    operation dispatch_to(target : rts::Any) is abstract    operation label() : kermeta::standard::String is do
+    end    operation dispatch_to(target : Object) is abstract    operation label() : kermeta::standard::String is do
         //TODO: implement operation label
     end    operation label_for_arguments() : kermeta::standard::String is do
         //TODO: implement operation label_for_arguments
@@ -125,6 +125,7 @@ class TimeEvent inherits rts::Event
 abstract class ActiveStateMachine inherits rts::Activable, rts::StateMachine
 {
     reference message_queue : set rts::Event[0..*]
+    reference events_from_action : String
     method init_activable(name : kermeta::standard::String) from rts::Activable is do
         //TODO: implement operation init_activable
     end    method receive(e : rts::Event) from rts::Reactive is do
@@ -141,6 +142,9 @@ abstract class ActiveStateMachine inherits rts::Activable, rts::StateMachine
         //TODO: implement operation action
     end    operation completion(n : kermeta::standard::Integer) from rts::StateMachine is do
         //TODO: implement operation completion
+    end
+    operation reset_events_from_action() is do
+    	events_from_action := ""
     end
 }
 
@@ -217,10 +221,10 @@ class Dictionnary
 class Port inherits rts::StateMachine, rts::Activable
 {
     reference fifo : set rts::Event[0..*]
-    reference server : rts::Any
+    reference server : Object
     operation initialize() is do
         //TODO: implement operation initialize
-    end    operation connect(new_server : rts::Any) is do
+    end    operation connect(new_server : Object) is do
         //TODO: implement operation connect
     end    method receive(e : rts::Event) from rts::Reactive is do
         //TODO: implement operation receive
@@ -242,15 +246,27 @@ class Any
 
 }
 
-abstract class Proxy inherits rts::Any
+abstract class Proxy
 {
-    reference server : rts::Any
-    operation connect(new_server : rts::Any) is do
+    reference server : Object
+    operation connect(new_server : Object) is do
         //TODO: implement operation connect
     end    operation send(e : rts::Event) is do
         //TODO: implement operation send
     end    operation initialize() is do
         //TODO: implement operation initialize
+    end
+    operation append_ASM_action_events(serverActiveStateMachine : ActiveStateMachine, event : Event) is do
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
     end
 }
 
@@ -260,7 +276,7 @@ class ObjectSnapshot
 
 }
 
-abstract class Enumeration inherits rts::Any
+abstract class Enumeration
 {
     reference out : kermeta::standard::String
     operation make() is do

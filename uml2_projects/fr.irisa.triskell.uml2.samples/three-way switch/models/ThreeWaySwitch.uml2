@@ -46,6 +46,56 @@ He operate the nearest switch to power off the light bulb.</body>
           <details xmi:id="_QsWVQeQHEdqhtPy9-FJGiw" key="uuid" value="11476930797005"/>
         </eAnnotations>
       </ownedOperation>
+      <nestedClassifier xmi:type="uml:StateMachine" xmi:id="_QaPhAOo7Edq6QuEhfzZ4lg" name="SwitchStateMachine">
+        <eAnnotations xmi:id="_0xgBYOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+          <details xmi:id="_0xgBYepQEdq6QuEhfzZ4lg" key="uuid" value="114838438207027"/>
+        </eAnnotations>
+        <region xmi:id="_R6snIOo7Edq6QuEhfzZ4lg">
+          <eAnnotations xmi:id="_0xgocOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+            <details xmi:id="_0xgocepQEdq6QuEhfzZ4lg" key="uuid" value="114838438207128"/>
+          </eAnnotations>
+          <subvertex xmi:type="uml:State" xmi:id="_gEyuUOo7Edq6QuEhfzZ4lg" name="Up" outgoing="_5ImKAOo7Edq6QuEhfzZ4lg" incoming="_lmTPEOo7Edq6QuEhfzZ4lg">
+            <eAnnotations xmi:id="_0xhPgOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_0xhPgepQEdq6QuEhfzZ4lg" key="uuid" value="114838438207229"/>
+            </eAnnotations>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_j7LKAOo7Edq6QuEhfzZ4lg" name="Down" outgoing="_lmTPEOo7Edq6QuEhfzZ4lg" incoming="_5ImKAOo7Edq6QuEhfzZ4lg">
+            <eAnnotations xmi:id="_0xjEsOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_0xjEsepQEdq6QuEhfzZ4lg" key="uuid" value="114838438207330"/>
+            </eAnnotations>
+          </subvertex>
+          <transition xmi:id="_lmTPEOo7Edq6QuEhfzZ4lg" name="switchUp" source="_j7LKAOo7Edq6QuEhfzZ4lg" target="_gEyuUOo7Edq6QuEhfzZ4lg">
+            <eAnnotations xmi:id="_0xjrwOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_0xjrwepQEdq6QuEhfzZ4lg" key="uuid" value="114838438207631"/>
+            </eAnnotations>
+            <guard xmi:id="_rW9mIOo7Edq6QuEhfzZ4lg" name="upIsFalse" constrainedElement="_re41kOQFEdqhtPy9-FJGiw">
+              <eAnnotations xmi:id="_0xkS0OpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+                <details xmi:id="_0xkS0epQEdq6QuEhfzZ4lg" key="uuid" value="114838438207732"/>
+              </eAnnotations>
+              <specification xmi:type="uml:LiteralBoolean" xmi:id="_yvZzUOo7Edq6QuEhfzZ4lg" type="_uz8F0OQFEdqhtPy9-FJGiw">
+                <eAnnotations xmi:id="_0xk54OpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+                  <details xmi:id="_0xk54epQEdq6QuEhfzZ4lg" key="uuid" value="114838438207833"/>
+                </eAnnotations>
+              </specification>
+            </guard>
+          </transition>
+          <transition xmi:id="_5ImKAOo7Edq6QuEhfzZ4lg" name="switchDown" source="_gEyuUOo7Edq6QuEhfzZ4lg" target="_j7LKAOo7Edq6QuEhfzZ4lg">
+            <eAnnotations xmi:id="_0xk54upQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_0xk54-pQEdq6QuEhfzZ4lg" key="uuid" value="114838438207834"/>
+            </eAnnotations>
+            <guard xmi:id="_8lXL0Oo7Edq6QuEhfzZ4lg" name="upIsTrue" constrainedElement="_re41kOQFEdqhtPy9-FJGiw">
+              <eAnnotations xmi:id="_0xlg8OpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+                <details xmi:id="_0xlg8epQEdq6QuEhfzZ4lg" key="uuid" value="114838438207935"/>
+              </eAnnotations>
+              <specification xmi:type="uml:LiteralBoolean" xmi:id="__7L4IOo7Edq6QuEhfzZ4lg" type="_uz8F0OQFEdqhtPy9-FJGiw" value="true">
+                <eAnnotations xmi:id="_0xmIAOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+                  <details xmi:id="_0xmIAepQEdq6QuEhfzZ4lg" key="uuid" value="114838438208036"/>
+                </eAnnotations>
+              </specification>
+            </guard>
+          </transition>
+        </region>
+      </nestedClassifier>
     </ownedMember>
     <ownedMember xmi:type="uml:DataType" xmi:id="_uz8F0OQFEdqhtPy9-FJGiw" name="Boolean">
       <eAnnotations xmi:id="_QsW8UOQHEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
@@ -61,6 +111,56 @@ He operate the nearest switch to power off the light bulb.</body>
           <details xmi:id="_QsYKceQHEdqhtPy9-FJGiw" key="uuid" value="11476930797038"/>
         </eAnnotations>
       </ownedAttribute>
+      <nestedClassifier xmi:type="uml:StateMachine" xmi:id="_JgYQwOo8Edq6QuEhfzZ4lg" name="LightStateMachine">
+        <eAnnotations xmi:id="_0xmIAupQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+          <details xmi:id="_0xmIA-pQEdq6QuEhfzZ4lg" key="uuid" value="114838438208046"/>
+        </eAnnotations>
+        <region xmi:id="_KzAWQOo8Edq6QuEhfzZ4lg">
+          <eAnnotations xmi:id="_0xmIBOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+            <details xmi:id="_0xmIBepQEdq6QuEhfzZ4lg" key="uuid" value="114838438208047"/>
+          </eAnnotations>
+          <subvertex xmi:type="uml:State" xmi:id="_NymT4Oo8Edq6QuEhfzZ4lg" name="On" incoming="_RRW5wOo8Edq6QuEhfzZ4lg">
+            <eAnnotations xmi:id="_0xmIBupQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_0xmIB-pQEdq6QuEhfzZ4lg" key="uuid" value="114838438208048"/>
+            </eAnnotations>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_Pw5zoOo8Edq6QuEhfzZ4lg" name="Off" outgoing="_RRW5wOo8Edq6QuEhfzZ4lg">
+            <eAnnotations xmi:id="_0xmICOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_0xmICepQEdq6QuEhfzZ4lg" key="uuid" value="114838438208049"/>
+            </eAnnotations>
+          </subvertex>
+          <transition xmi:id="_RRW5wOo8Edq6QuEhfzZ4lg" name="powerOn" source="_Pw5zoOo8Edq6QuEhfzZ4lg" target="_NymT4Oo8Edq6QuEhfzZ4lg">
+            <eAnnotations xmi:id="_0xmICupQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_0xmIC-pQEdq6QuEhfzZ4lg" key="uuid" value="114838438208050"/>
+            </eAnnotations>
+            <guard xmi:id="_VNVnIOo8Edq6QuEhfzZ4lg" name="illuminatedIsFalse" constrainedElement="_5TKdwOQFEdqhtPy9-FJGiw">
+              <eAnnotations xmi:id="_0xmIDOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+                <details xmi:id="_0xmIDepQEdq6QuEhfzZ4lg" key="uuid" value="114838438208051"/>
+              </eAnnotations>
+              <specification xmi:type="uml:LiteralBoolean" xmi:id="_dJdwMOo8Edq6QuEhfzZ4lg" type="_uz8F0OQFEdqhtPy9-FJGiw">
+                <eAnnotations xmi:id="_0xmvEOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+                  <details xmi:id="_0xmvEepQEdq6QuEhfzZ4lg" key="uuid" value="114838438208152"/>
+                </eAnnotations>
+              </specification>
+            </guard>
+          </transition>
+          <transition xmi:id="_kgoLAOo8Edq6QuEhfzZ4lg" name="powerOff">
+            <eAnnotations xmi:id="_0xmvEupQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+              <details xmi:id="_0xmvE-pQEdq6QuEhfzZ4lg" key="uuid" value="114838438208153"/>
+            </eAnnotations>
+            <guard xmi:id="_m3acMOo8Edq6QuEhfzZ4lg" name="illuminatedIsTrue" constrainedElement="_5TKdwOQFEdqhtPy9-FJGiw">
+              <eAnnotations xmi:id="_0xmvFOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+                <details xmi:id="_0xmvFepQEdq6QuEhfzZ4lg" key="uuid" value="114838438208154"/>
+              </eAnnotations>
+              <specification xmi:type="uml:LiteralBoolean" xmi:id="_qq_bgOo8Edq6QuEhfzZ4lg" type="_uz8F0OQFEdqhtPy9-FJGiw" value="true">
+                <eAnnotations xmi:id="_0xnWIOpQEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
+                  <details xmi:id="_0xnWIepQEdq6QuEhfzZ4lg" key="uuid" value="114838438208255"/>
+                </eAnnotations>
+              </specification>
+            </guard>
+          </transition>
+        </region>
+      </nestedClassifier>
     </ownedMember>
     <ownedMember xmi:type="uml:Association" xmi:id="_Fz0h8OQGEdqhtPy9-FJGiw" name="ThreeWireCable" memberEnd="_Fz5acOQGEdqhtPy9-FJGiw _Fz7PoOQGEdqhtPy9-FJGiw">
       <eAnnotations xmi:id="_QsYxgOQHEdqhtPy9-FJGiw" source="http://www.topcased.org/uuid">
