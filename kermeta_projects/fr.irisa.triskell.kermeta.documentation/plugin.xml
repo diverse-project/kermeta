@@ -2,8 +2,10 @@
 <?eclipse version="3.0"?>
 <plugin name="KerMeta documentation" id="fr.irisa.triskell.kermeta.documentation" version="0.0.9" provider-name="IRISA/INRIA">
    <requires>
+      <import plugin="fr.irisa.triskell.kermeta" export="false"/>
       <import plugin="org.eclipse.core.runtime.compatibility"/>
       <import plugin="org.eclipse.help"/>
+      <import plugin="org.eclipse.emf.ecore"/>
    </requires>
   <extension point="org.eclipse.help.toc">
 	<toc file="toc.xml" primary="true"/>
