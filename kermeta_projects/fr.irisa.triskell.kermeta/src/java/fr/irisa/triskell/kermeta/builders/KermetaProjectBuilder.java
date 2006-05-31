@@ -44,7 +44,6 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 		 */
 		public boolean visit(IResourceDelta delta) throws CoreException {
 			IResource resource = delta.getResource();
-			//System.out.println("DELTA :"+delta);
 			if (delta.getKind() == IResourceDelta.ADDED)
 				checkResource(resource);
 			else if (delta.getKind() == IResourceDelta.REMOVED)
@@ -66,7 +65,6 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 
 	class ResourceVisitor implements IResourceVisitor {
 		public boolean visit(IResource resource) {
-			//System.err.println("Le fichier qui a bougé c'est celui là  : " + resource.getFullPath().toString() );
 			checkResource(resource);
 			//return true to continue visiting children.
 			return true;
@@ -127,7 +125,6 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	 */
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor)
 			throws CoreException {
-		System.out.println("The build method is colllllld");
 		if (kind == FULL_BUILD) {
 			//System.out.println("full build: " );
 			fullBuild(monitor);
@@ -188,25 +185,22 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 	
 	protected void incrementalBuild(IResourceDelta delta,
 			IProgressMonitor monitor) throws CoreException {
-		System.err.println("incrementalBuild method call in KermetaProjectBuilder.java");
 		// the visitor does the work.
 		delta.accept(new DeltaVisitor());
 		// delta.getResource().getRawLocation();
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see org.eclipse.core.resources.IncrementalProjectBuilder#startupOnInitialize()
 	 */
-	@Override
 	protected void startupOnInitialize() {
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		super.startupOnInitialize();
 	}
 
-	/* (non-Javadoc)
+	/** (non-Javadoc)
 	 * @see org.eclipse.core.resources.IncrementalProjectBuilder#setInitializationData(org.eclipse.core.runtime.IConfigurationElement, java.lang.String, java.lang.Object)
 	 */
-	@Override
 	public void setInitializationData(IConfigurationElement config, String propertyName, Object data) throws CoreException {
 		
 		super.setInitializationData(config, propertyName, data);
