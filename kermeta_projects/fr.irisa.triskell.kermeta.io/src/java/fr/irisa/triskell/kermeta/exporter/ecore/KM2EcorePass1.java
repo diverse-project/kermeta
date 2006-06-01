@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.15 2006-06-01 08:50:03 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.16 2006-06-01 16:29:18 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -460,6 +460,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
 			newEClassifier.setInstanceClassName(KM2Ecore.primitive_types_mapping.get(type_name));
 		}
+		// Give a default class...
 		else {
 			newEClassifier.setInstanceClassName("java.lang.Object");
 			ecoreExporter.addAnnotation( 

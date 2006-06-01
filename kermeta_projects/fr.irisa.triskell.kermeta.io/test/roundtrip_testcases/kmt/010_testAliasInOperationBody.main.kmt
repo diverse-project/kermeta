@@ -2,11 +2,10 @@ package testAliasInOperationBody;
 
 require kermeta
 using kermeta::standard
-
+alias AliasB : B;
 abstract class A
 {
-	attribute name : String
-	operation accept(paramb : B) : set kermeta::standard::~Void[0..0] is
+	operation accept(paramb : B)  is
 	do
 		var varb : B init paramb
 	end

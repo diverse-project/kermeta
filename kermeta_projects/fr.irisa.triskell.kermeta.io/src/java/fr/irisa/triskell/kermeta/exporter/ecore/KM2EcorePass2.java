@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.12 2006-06-01 08:50:03 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.13 2006-06-01 16:29:18 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -322,7 +322,6 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			ecore_path = ecore_path.replaceAll("::", "/");
 			// We are looking from an object given its key, (it is redundant but avoids
 			// conflicts if "duplicate" loads in memory)
-			System.err.println("---> : " + owning_typedef_qname + " - test in : " + ku.getUri());
 			if (ku.typeDefs.containsKey(owning_typedef_qname))
 			{	// KermetaUnit type is EcoreUnit, if the underlying loaded resource was an .ecore file  
 				if (ku instanceof EcoreUnit)
@@ -636,12 +635,6 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 					setterBody,
 					null);
 		}
-		ecoreExporter.addAnnotation( 
-				newEStructuralFeature,
-				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISDERIVED,
-				new Boolean(true).toString(),
-				null);
 		ecoreExporter.addAnnotation( 
 				newEStructuralFeature,
 				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,

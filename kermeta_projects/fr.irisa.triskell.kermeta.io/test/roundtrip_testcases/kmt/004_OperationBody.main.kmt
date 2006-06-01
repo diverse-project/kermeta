@@ -7,7 +7,7 @@ class Main
 	// Test operation body conversion in Ecore, using parameters.
 	operation testParam0() is
 		do
-			stdio.writeln("-----------------------------------------")
+			stdio.writeln("Coucou")
 		end
 		
 	operation testParam1(a : A) is do

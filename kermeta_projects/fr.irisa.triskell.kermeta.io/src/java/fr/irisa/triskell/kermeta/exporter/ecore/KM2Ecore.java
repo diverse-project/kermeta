@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.14 2006-06-01 08:22:29 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.15 2006-06-01 16:29:18 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -110,7 +110,6 @@ public class KM2Ecore {
     public final static String KMT2ECORE_ANNOTATION_INV_DETAILS = "inv";
     public final static String KMT2ECORE_ANNOTATION_TYPEPARAMETER = "KermetaTypeParameters";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY = "KermetaDerivedProperty";
-    public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISDERIVED = "isDerived";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY = "isReadOnly";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY = "getter.body";
     public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY = "setter.body";
@@ -157,6 +156,7 @@ public class KM2Ecore {
 	public Object exportPackage(Package root_package) {
 		root_pname = KMTHelper.getQualifiedName(root_package);
 		KM2EcorePass1 pass1 =  new KM2EcorePass1(ecoreResource, km2ecoremapping, this);
+		System.err.println("-> ?? -> " + ecoreResource + "map : " + km2ecoremapping + "this: " + this);
 		KM2EcorePass2 pass2 =  new KM2EcorePass2(ecoreResource, km2ecoremapping, this);
 		Object result =  pass1.exportPackage(root_package);
 		pass2.exportPackage(root_package);
