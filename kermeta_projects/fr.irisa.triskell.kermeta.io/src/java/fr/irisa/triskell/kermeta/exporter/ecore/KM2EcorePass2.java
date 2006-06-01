@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.10 2006-05-03 20:50:16 dvojtise Exp $
+/* $Id: KM2EcorePass2.java,v 1.11 2006-06-01 08:22:29 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -24,6 +24,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -48,6 +49,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
@@ -58,16 +60,17 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
 import fr.irisa.triskell.kermeta.utils.URIMapUtil;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
+import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
  * Exports KM or KMT to Ecore.
  */
-public class KM2EcorePass2 extends KermetaVisitor{
+public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass2");
 	protected ArrayList usings = new ArrayList();
@@ -107,7 +110,6 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	public Object exportPackage(Package root_package) {
 		root_pname = KMTHelper.getQualifiedName(root_package);
 		root_p = root_package;
-		
 		return accept(root_package);
 	}
 	
@@ -115,52 +117,39 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	/** 
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
-	public Object visit(ClassDefinition node) {
+	public Object visitClassDefinition(ClassDefinition node) {
 		EClass newEClass=null;
 		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ node.getName());
 		loggerTabs.increment();
 		
-		
-		// search the Eclass from previous pass
+		// Search the Eclass from previous pass
 		newEClass = (EClass)kmt2ecoremapping.get(node);
 		
+		// Search the super types of EClass
 		Iterator it = node.getSuperType().iterator();
-		if (it.hasNext()) internalLog.debug(loggerTabs + "Supertypes: ");
 		while(it.hasNext()) {
 			Object o = accept((EObject)it.next());
 			if (o != null)
 				newEClass.getESuperTypes().add(o);
-			else
-				internalLog.warn(loggerTabs + "accept of a getFSuperType returned null !"); 
-				
+			else // FIXME When this case does occur?
+				internalLog.warn(loggerTabs + "Problem : accept of a getFSuperType returned null : " + o);
 		}
 		
-		// deal with TypeParameters
+		// Visit TypeParameters (accept is called insite typeparamaterAnnotation)
 		it = node.getTypeParameter().iterator();
 		while(it.hasNext()) {
-			// use the KMTprettyPrinter to output in the annotation
-			// one annotation per type parameter
+			// One annotation per type parameter
 			TypeVariable tv = (TypeVariable)it.next();
-			String typeParameterString = tv.getName();			
-			if (tv.getSupertype() != null) typeParameterString += " : " + new KM2KMTPrettyPrinter().accept(tv.getSupertype());
-			ecoreExporter.addAnnotation( 
-					newEClass,
-					KM2Ecore.KMT2ECORE_ANNOTATION_TYPEPARAMETER,
-					tv.getName(),
-					typeParameterString,
-					null);						
+			setTypeVariableAnnotation(tv, newEClass);
 		}
 		
-		//		 owned Attributes
+		// Visit owned attributes
 		it = node.getOwnedAttribute().iterator();
-		while(it.hasNext()) {
-			accept((EObject)it.next());
-		}
-		//		 owned operations
+		while(it.hasNext()) { accept((EObject)it.next()); }
+
+		// Visit owned operations
 		it = node.getOwnedOperation().iterator();
-		while(it.hasNext()) {
-			 accept((EObject)it.next());				
-		}
+		while(it.hasNext()) { accept((EObject)it.next()); }
 		
 		loggerTabs.decrement();
 		return newEClass;
@@ -169,7 +158,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
-	public Object visit(Operation node) {
+	public Object visitOperation(Operation node) {
 		EOperation newEOperation=null;
 		current_pname = node.getName();
 		internalLog.debug(loggerTabs + "Visiting Operation: "+ current_pname);
@@ -189,63 +178,40 @@ public class KM2EcorePass2 extends KermetaVisitor{
 			newEOperation.setEType((EClassifier)accept((EObject)node.getType()));
 		}
 		
-		// superoperation
+		// -------------- Create annotations for Kermeta elements that are not ECORE-compatibles
+		
+		// Superoperation
 		if (node.getSuperOperation() != null)
-		{
-			ecoreExporter.addAnnotation( 
-					newEOperation,
-					KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION,
-					KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS,
-					KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()),
-					
-					(EObject)accept(node.getSuperOperation()));
-			
-		}
+			setSuperOperationAnnotation(node.getSuperOperation(), newEOperation);
 
 		it = node.getRaisedException().iterator();
 		while (it.hasNext()) {
 			fr.irisa.triskell.kermeta.language.structure.Class  anException = (fr.irisa.triskell.kermeta.language.structure.Class)it.next();
-			EClassifier exceptionEClassifier =  (EClassifier)accept(anException);
-			ecoreExporter.addAnnotation( 
-					newEOperation,
-					KM2Ecore.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION,
-					KM2Ecore.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS,
-					KMTHelper.getQualifiedName(anException.getTypeDefinition()),
-					exceptionEClassifier);
+			setRaisedExceptionAnnotation(anException, newEOperation);
 		}
 		
-		//		 deal with TypeParameters
+		// TypeParameters
 		it = node.getTypeParameter().iterator();
 		while(it.hasNext()) {
 			// use the KMTprettyPrinter to output in the annotation
 			// one annotation per type parameter
 			TypeVariable tv = (TypeVariable)it.next();
-			String typeParameterString = tv.getName();			
-			if (tv.getSupertype() != null) typeParameterString += " : " + new KM2KMTPrettyPrinter().accept(tv.getSupertype());
-			ecoreExporter.addAnnotation( 
-					newEOperation,
-					KM2Ecore.KMT2ECORE_ANNOTATION_TYPEPARAMETER,
-					tv.getName(),
-					typeParameterString,
-					null);						
+			setTypeVariableAnnotation(tv, newEOperation);			
 		}
 		loggerTabs.decrement();
 		return newEOperation;
 	}
-
-
-
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Parameter)
 	 */
-	public Object visit(Parameter node) {
+	public Object visitParameter(Parameter node) {
 		internalLog.debug(loggerTabs + "Visiting Parameter: "+ node.getName());
 		loggerTabs.increment();
 		
-		//		 search the EParameter from previous pass
+		// Search the EParameter from previous pass
 		EParameter newEParameter = (EParameter)getEObjectForKMObject(node);
-		// If it is not found in kmt2ecoremapping?
-		
+		// TODO If it is not found in kmt2ecoremapping?
 		newEParameter.setEType(	(EClassifier)accept(node.getType()));
 		
 		loggerTabs.decrement();
@@ -255,10 +221,8 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(fr.irisa.triskell.kermeta.language.structure.Class)
 	 */
-	public Object visit(fr.irisa.triskell.kermeta.language.structure.Class node) {
+	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
 		EClassifier newEClassifier=null;		
-		internalLog.debug(loggerTabs + "Visiting Class: "+ node.getName() + "->"+node.getTypeDefinition().getName());
-		loggerTabs.increment();
 		
 		newEClassifier = (EClassifier)kmt2ecoremapping.get(node.getTypeDefinition());
 		if (newEClassifier ==  null)
@@ -288,7 +252,6 @@ public class KM2EcorePass2 extends KermetaVisitor{
 			internalLog.info("TODO: deal with parametrized classes");
 		}
 		
-		loggerTabs.decrement();
 		return newEClassifier;
 	}
 	
@@ -350,7 +313,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	 */
 	protected EObject getEObjectForQualifiedName(String object_qname, String owning_typedef_qname)
 	{
-
+		System.err.println("CLE : " + owning_typedef_qname + " - test in : " + ecoreExporter.getKermetaUnit().getUri());
 		String ecoreDir = ecoreExporter.ecoreGenDirectory;
 		if (ecoreDir == null)
 			ecoreDir = ecoreExporter.getKermetaUnit().getUri().substring(0, ecoreExporter.getKermetaUnit().getUri().lastIndexOf("/"));
@@ -364,6 +327,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 			ecore_path = ecore_path.replaceAll("::", "/");
 			// We are looking from an object given its key, (it is redundant but avoids
 			// conflicts if "duplicate" loads in memory)
+			System.err.println("---> : " + owning_typedef_qname + " - test in : " + ku.getUri());
 			if (ku.typeDefs.containsKey(owning_typedef_qname))
 			{	// KermetaUnit type is EcoreUnit, if the underlying loaded resource was an .ecore file  
 				if (ku instanceof EcoreUnit)
@@ -379,19 +343,27 @@ public class KM2EcorePass2 extends KermetaVisitor{
 					// Get the directory where main resource is located
 					String path = ecoreDir; //ecoreResource.getURI().toString();
 					String kmpath = ku.getUri();
-					String savepath = path.substring(0, path.lastIndexOf("/")) + kmpath.substring(kmpath.lastIndexOf("/"), kmpath.lastIndexOf(".km")) + ".ecore";
+					String savepath = path + "/" + kmpath.substring(kmpath.lastIndexOf("/"), kmpath.lastIndexOf(".km")) + ".ecore";
 					// Create the ecore resource corresponding to kermeta unit on which 
 					if (!savedFiles.containsKey(savepath))
+					{
+						System.err.println("Add '" + savepath + "' in files to generate!");
 						// Create the ecore resource corresponding to kermeta unit on which 
 						depResource = writeEcore(ku, savepath, true);
+					}
 					else
 					{
+						System.err.println("DONT ADD '" + savepath + "' in files to generate!");
 						depResource = savedFiles.get(savepath);
 						try { depResource.load(null); }
 						catch (IOException e) { e.printStackTrace(); }
 					}
 					
 					result = depResource.getEObject("//"+ ecore_path);
+				}
+				else
+				{
+					System.err.println("HEEEEE");
 				}
 			}
 		}
@@ -439,6 +411,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	protected void resolveETypeForEStructuralFeature(Property node, EStructuralFeature enode, String ecoreDir, List<String> ecoreList) {
 		// robustness test -- may be removed later.
 		EClassifier etype = null;
+		System.err.println("RESOLVE : " + node.getName());
 		//assert(ecoreDir!=null && ecoreList.size()>0);
 		if (ecoreDir != null) etype = resolveETypeForEStructuralFeature(node, enode, ecoreDir);
 		// If ecoreDir is null, and ecoreList as well, generate by default in currentDir!
@@ -489,7 +462,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
-	public Object visit(Property node) {
+	public Object visitProperty(Property node) {
 		internalLog.debug(loggerTabs + "Visiting Property: "+ node.getName());
 		loggerTabs.increment();
 		
@@ -535,54 +508,20 @@ public class KM2EcorePass2 extends KermetaVisitor{
 			
 		}
 		if (node.isIsDerived()) {
-			internalLog.warn(loggerTabs + "TODO: derived property not implemented yet ");			
-			//			 DerivedProperty
-			ecoreExporter.addAnnotation( 
-						newEStructuralFeature,
-						KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-						KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISDERIVED,
-						new Boolean(true).toString(),
-						null);
-			String getterBody;
+			// DerivedProperty
+			String getterBody = null; String setterBody = null;
 			if (node.getGetterBody() != null) 
 				getterBody = (String)new KM2KMTPrettyPrinter().accept(node.getGetterBody());
 			else
-			{
-				getterBody = "do\n";
-				getterBody += "   //TODO: implement getter for derived property " + node.getName() + "\n";
-				getterBody += "   raise kermeta::exceptions::NotImplementedException.new \n";
-				getterBody += "end";
-			}
-			ecoreExporter.addAnnotation( 
-					newEStructuralFeature,
-					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY,
-					getterBody,
-					null);
-			ecoreExporter.addAnnotation( 
-					newEStructuralFeature,
-					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY,
-					new Boolean(node.isIsReadOnly()).toString(),
-					null);
+				getterBody = propertyAccessor(node.getName(), "getter");
+			
 			if (! node.isIsReadOnly()) {
-				String setterBody;
-				
 				if (node.getSetterBody() != null) 
 					setterBody = (String)new KM2KMTPrettyPrinter().accept(node.getSetterBody());
-				else {
-					setterBody = "do\n";
-					setterBody += "   //TODO: implement getter for derived property " + node.getName() + "\n";
-					setterBody += "   raise kermeta::exceptions::NotImplementedException.new \n";
-					setterBody += "end";
-				}
-				ecoreExporter.addAnnotation( 
-						newEStructuralFeature,
-						KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-						KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY,
-						setterBody,
-						null);
+				else
+					setterBody = propertyAccessor(node.getName(), "setter");
 			}
+			setDerivedPropertyAnnotation(node, newEStructuralFeature, getterBody, setterBody);
 		}
 		
 		//newEStructuralFeature.setEType((EClassifier)kmt2ecoremapping.get(node.getFType()));
@@ -594,7 +533,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		else
 		{
 			// Perhaps this type is in another resource?
-			internalLog.debug(loggerTabs + "type of this property is null/void");
+			internalLog.debug(loggerTabs + "type of this property is null/void: " + node.getName());
 			resolveETypeForEStructuralFeature(node, newEStructuralFeature, ecoreExporter.getEcoreGenDirectory(), ecoreExporter.getEcoreFileList());
 		}
 		
@@ -605,7 +544,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.StringLiteral)
 	 */
-	public Object visit(StringLiteral node) {
+	public Object visitStringLiteral(StringLiteral node) {
 		internalLog.debug(loggerTabs + "Visiting StringLiteral: "+ node.getValue());		
 		return node.getValue(); 
 	}
@@ -613,7 +552,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeLiteral)
 	 */
-	public Object visit(TypeLiteral node) {
+	public Object visitTypeLiteral(TypeLiteral node) {
 		internalLog.debug(loggerTabs + "Visiting TypeLiteral");
 		loggerTabs.increment();
 		Object o = this.accept(node.getTyperef());
@@ -624,7 +563,7 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.TypeReference)
 	 */
-	public Object visit(TypeReference node) {
+	public Object visitTypeReference(TypeReference node) {
 		internalLog.debug(loggerTabs + "Visiting TypeReference: "+ node.getName());
 		loggerTabs.increment();
 		Object o = this.accept(node.getType());
@@ -635,14 +574,14 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.VoidType)
 	 */
-	public Object visit(VoidType node) {
+	public Object visitVoidType(VoidType node) {
 		return null;
 	}
 	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(PrimitiveType)
 	 */
-	public Object visit(PrimitiveType node) {
+	public Object visitPrimitiveType(PrimitiveType node) {
 		internalLog.debug(loggerTabs + "Visiting PrimitiveType: "+ node.getName()+ " "+ KMTHelper.getQualifiedName(node));
 		internalLog.debug(loggerTabs + "                       : "+ node);
 		
@@ -680,7 +619,6 @@ public class KM2EcorePass2 extends KermetaVisitor{
 	    // Create Ecore structure
 	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 	    URI u = URI.createURI(file);
-    	KermetaUnit.internalLog.info("URI created for model to save : "+u);
     	URIConverter c = new URIConverterImpl();
     	u = c.normalize(u);
     	Resource resource = ecoreResourceSet.createResource(u);
@@ -700,5 +638,95 @@ public class KM2EcorePass2 extends KermetaVisitor{
 		}
 
 		return resource;
+	}
+	
+	/** 
+	 * @param name the name of the derived property
+	 * @param acc_type the type  of the accessor ("getter"/"setter") 
+	 */
+	public String propertyAccessor(String name, String acc_type)
+	{
+		return "do\n" +
+		"   //TODO: implement " + acc_type + "for derived property " + name + "\n" +
+		"   raise kermeta::exceptions::NotImplementedException.new \n" +
+		"end";
+	}
+	
+	/*
+	 * 
+	 *  HELPER METHODS THAT SET THE ANNOTATIONS
+	 * 
+	 */
+	protected void setDerivedPropertyAnnotation(Property node, EStructuralFeature newEStructuralFeature, String getterBody, String setterBody) 
+	{
+		
+		if (! node.isIsReadOnly())
+		{
+			ecoreExporter.addAnnotation( 
+					newEStructuralFeature,
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY,
+					setterBody,
+					null);
+		}
+		ecoreExporter.addAnnotation( 
+				newEStructuralFeature,
+				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
+				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISDERIVED,
+				new Boolean(true).toString(),
+				null);
+		ecoreExporter.addAnnotation( 
+				newEStructuralFeature,
+				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
+				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY,
+				getterBody,
+				null);
+		ecoreExporter.addAnnotation( 
+				newEStructuralFeature,
+				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
+				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY,
+				new Boolean(node.isIsReadOnly()).toString(),
+				null);
+	}
+	
+	public void setSuperOperationAnnotation(Operation superOperation, EOperation newEOperation) {
+		ecoreExporter.addAnnotation( 
+				newEOperation,
+				KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION,
+				KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS,
+				KMTHelper.getQualifiedName(superOperation.getOwningClass()),
+				(EObject)accept(superOperation));		
+	}
+	
+	/**
+	 * 
+	 * @param anException
+	 * @param newEOperation
+	 */
+	public void setRaisedExceptionAnnotation(fr.irisa.triskell.kermeta.language.structure.Class anException, EOperation newEOperation) {
+		EClassifier exceptionEClassifier =  (EClassifier)accept(anException);
+		ecoreExporter.addAnnotation( 
+				newEOperation,
+				KM2Ecore.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION,
+				KM2Ecore.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS,
+				KMTHelper.getQualifiedName(anException.getTypeDefinition()),
+				exceptionEClassifier);		
+	}
+
+	/**
+	 * Visit type parameters
+	 * @param tv
+	 * @param newEObject EClass or EOperation (thone only types concerned by type parameters)
+	 */
+	protected void setTypeVariableAnnotation(TypeVariable tv, EModelElement newEObject) {
+		String typeParameterString = tv.getName();			
+		if (tv.getSupertype() != null) 
+			typeParameterString += " : " + new KM2KMTPrettyPrinter().accept(tv.getSupertype());
+		ecoreExporter.addAnnotation( 
+				newEObject,
+				KM2Ecore.KMT2ECORE_ANNOTATION_TYPEPARAMETER,
+				tv.getName(),
+				typeParameterString,
+				null);					
 	}
 }

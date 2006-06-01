@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.13 2006-05-04 15:25:38 jmottu Exp $
+/* $Id: KM2Ecore.java,v 1.14 2006-06-01 08:22:29 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -245,6 +245,13 @@ public class KM2Ecore {
 	 */
 	public String getEcoreGenDirectory() {
 		return ecoreGenDirectory;
+	}
+
+	/**
+	 * @param ecoreGenDirectory The ecoreGenDirectory to set.
+	 */
+	public void setEcoreGenDirectory(String ecoreGenDirectory) {
+		this.ecoreGenDirectory = ecoreGenDirectory;
 	}
 	
 	
