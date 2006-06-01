@@ -1,4 +1,4 @@
-/* $Id: DynamicExpression.java,v 1.4 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: DynamicExpression.java,v 1.5 2006-06-01 08:40:15 vmahe Exp $
 * Project : Kermeta (First iteration)
 * File : DynamicExpression.java
 * License : GPL
@@ -15,12 +15,14 @@ import java.util.Hashtable;
 
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Map;
 import fr.irisa.triskell.kermeta.runtime.basetypes.String;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.runtime.language.ReflectiveCollection;
 
 /*
  * Implementation  of kermeta::language::DynamicExpression 
@@ -68,11 +70,23 @@ public class DynamicExpression {
 	        RuntimeObject parsed_expression = self.getFactory().getMemory().getRuntimeObjectForFObject(deu.getExpression());
 	        self.getProperties().put("expression", parsed_expression);
 	        return self.getFactory().getMemory().trueINSTANCE;
+	    }else{
+		    // add errors to self runtime objets
+	    	// First : get the collection which will receive found errors
+		    RuntimeObject errors = (RuntimeObject)self.getProperties().get("errors");
+		    
+		    for (java.util.Iterator iter = deu.messages.getAllErrors().iterator(); iter.hasNext();) {
+		    	KMUnitError er = (KMUnitError)iter.next();
+		    	RuntimeObject pe = self.getFactory().createObjectFromClassName("kermeta::interpreter::ParseError");
+		    	RuntimeObject s = String.create(er.getMessage(), self.getFactory());
+		    	pe.getProperties().put("message", s);
+		    	
+		    	// adding found ParseError to the DynamicExpression collection
+		    	ReflectiveCollection.add(errors, pe);
+			}
+		    
+		    return self.getFactory().getMemory().falseINSTANCE;
 	    }
-	    // FIXME: add errors to self runtime objets
-	    System.err.println("NOT IMPLEMENTED : add errors to self runtime objets");
-	    System.err.println(deu.messages.getAllMessagesAsString());
-	    return self.getFactory().getMemory().falseINSTANCE;
 	}
 
 	//result := extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.execute(self, selfObj, actualParams)
