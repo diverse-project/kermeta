@@ -20,8 +20,8 @@ import java.io.IOException;
 public class GenerateJUnitTestSuite {
 
 
-	protected static String[] folders = {"test/roundtrip_testcases/ecore", "test/roundtrip_testcases/kmt"} ;
-	protected static String[] filetypes = {"main.ecore", "main.kmt"};
+	protected static String[] folders = {"test/roundtrip_testcases/ecore", "test/roundtrip_testcases/kmt", "test/roundtrip_testcases/km"} ;
+	protected static String[] filetypes = {"main.ecore", "main.kmt", "main.km"};
 	
 	protected static String template = null;
 	protected static String getTemplate() {
