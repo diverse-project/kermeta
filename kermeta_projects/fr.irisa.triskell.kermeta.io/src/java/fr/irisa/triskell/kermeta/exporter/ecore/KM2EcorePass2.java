@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.11 2006-06-01 08:22:29 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.12 2006-06-01 08:50:03 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -12,7 +12,6 @@
  */
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -46,21 +45,14 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
-import fr.irisa.triskell.kermeta.language.structure.Class;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.Type;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
-import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
@@ -68,17 +60,22 @@ import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
- * Exports KM or KMT to Ecore.
+ * Exports KM or KMT to Ecore, pass 2.
+ * This pass :
+ * - Set the types of all the typed elements
+ * - Convert non-compatible Ecore *typed* elements into annotations. Examples : 
+ *    - the super types of operations
+ *    - the type paramaters of operations and class definition
+ * - Convert the opposite of properties
+ * - Convert the body of derived properties
+ *  
  */
 public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore.pass2");
-	protected ArrayList usings = new ArrayList();
-	protected ArrayList imports = new ArrayList();
-	protected String root_pname;
-	public	Package root_p;
-	protected String current_pname;
 	protected TextTabs loggerTabs =  new TextTabs("   ","");
+	
+	public	Package root_p;
 	protected KM2Ecore ecoreExporter;
 	
 	// the resource to populate
@@ -88,11 +85,14 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	/** Contains the string uris of the resources already saved during this pass */
 	protected Hashtable<String, Resource> savedFiles = null;
 	
-	// mapping to look for ecore objects created during pass1
+	/** Contains the hashtable of KM2EcorePass1 */
 	protected Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> kmt2ecoremapping;
 	
 	/**
 	 * @param resource : the resource to populate
+	 * @param mapping : the hashtable that contains the { Object, EObject } mappings
+	 * @param anExporter : the km2ecore exporter; it contains a reference to the KermetaUnit of the Kmt file to
+	 * convert.
 	 */
 	public KM2EcorePass2(Resource resource, Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> mapping, KM2Ecore anEcoreExporter) {
 		ecoreResource = resource;
@@ -108,7 +108,6 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 * @return the equivalent root_package in the Ecore ressource
 	 */
 	public Object exportPackage(Package root_package) {
-		root_pname = KMTHelper.getQualifiedName(root_package);
 		root_p = root_package;
 		return accept(root_package);
 	}
@@ -160,22 +159,18 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 */
 	public Object visitOperation(Operation node) {
 		EOperation newEOperation=null;
-		current_pname = node.getName();
-		internalLog.debug(loggerTabs + "Visiting Operation: "+ current_pname);
+		internalLog.debug(loggerTabs + "Visiting Operation: "+ node.getName());
 		loggerTabs.increment();
 		
-		// search the EOperation from previous pass // FIXME : sometimes newEOperation is not found!!!
-		//newEOperation = (EOperation)kmt2ecoremapping.get(node);
+		// search the EOperation from previous pass
 		newEOperation = (EOperation)getEObjectForKMObject(node);
 		// Parameters
 		Iterator it = node.getOwnedParameter().iterator();
-		while(it.hasNext()) {
-			accept((EObject)it.next());				
-		}
+		while(it.hasNext()) { this.accept((EObject)it.next()); }
 		
 		// Return type
 		if(node.getType() != null) {
-			newEOperation.setEType((EClassifier)accept((EObject)node.getType()));
+			newEOperation.setEType((EClassifier)this.accept((EObject)node.getType()));
 		}
 		
 		// -------------- Create annotations for Kermeta elements that are not ECORE-compatibles
@@ -466,47 +461,21 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		internalLog.debug(loggerTabs + "Visiting Property: "+ node.getName());
 		loggerTabs.increment();
 		
-		EStructuralFeature newEStructuralFeature;
+		EStructuralFeature newEStructuralFeature = null;
 		EReference newEReference = null;
 		EAttribute newEAttribute = null;
 		// search the Eclass from previous pass
 		newEStructuralFeature = (EStructuralFeature)kmt2ecoremapping.get(node);
+		// If property is composite or derived we have to check the type (primitive type or not)
+		if(ecoreExporter.isTypeValidForAttibute(node.getType()))
+			newEAttribute = (EAttribute)newEStructuralFeature;
+		else
+			newEReference = (EReference)newEStructuralFeature;
+		// Retrieve the opposite (only valable if node is a ereference)
+		if(newEReference != null && node.getOpposite() != null)
+			newEReference.setEOpposite((EReference)kmt2ecoremapping.get(node.getOpposite()));
 		
-		if (node.isIsComposite() || node.isIsDerived())
-		{	// if this is composite we have to check the type
-			// same for derived properties, it may have to be an attribute
-			if(ecoreExporter.isTypeValidForAttibute(node.getType())){
-				//attribute
-				newEAttribute = (EAttribute)newEStructuralFeature;
-			}
-			else
-			{	// a reference
-				newEReference = (EReference)newEStructuralFeature;			
-			}						
-		}
-		else { 
-			if (ecoreExporter.isTypeValidForAttibute(node.getType())){
-				// Ecore primitive types cannot be EReference we need to translate it into EAttribute
-				// even if the notion of containment is not respected
-				//	attribute
-				newEAttribute = (EAttribute)newEStructuralFeature;
-				//KermetaUnit.internalLog.warn("reference to type "+ node.getType() +" need to be translated into an Ecore data type and must be put into an EAttribute.\n"+ 
-		    	//			"a roundtrip back to kermeta will not produce your original file.", null);
-				
-			}
-			else {
-					// 	reference 
-				newEReference = (EReference)newEStructuralFeature;
-			}
-		}
-		if(newEReference != null)
-		{
-			if (node.getOpposite() != null) 
-			{   // retreive the opposite
-				newEReference.setEOpposite((EReference)kmt2ecoremapping.get(node.getOpposite()));
-			}
-			
-		}
+		// Convert the bodies of derived properties
 		if (node.isIsDerived()) {
 			// DerivedProperty
 			String getterBody = null; String setterBody = null;
@@ -531,9 +500,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			newEStructuralFeature.setEType(type);
 		}
 		else
-		{
-			// Perhaps this type is in another resource?
-			internalLog.debug(loggerTabs + "type of this property is null/void: " + node.getName());
+		{	// Perhaps this type is in another resource?
 			resolveETypeForEStructuralFeature(node, newEStructuralFeature, ecoreExporter.getEcoreGenDirectory(), ecoreExporter.getEcoreFileList());
 		}
 		
