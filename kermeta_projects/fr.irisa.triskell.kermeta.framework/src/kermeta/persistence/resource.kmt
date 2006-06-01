@@ -7,7 +7,7 @@ package kermeta::persistence;
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.16 2006-05-23 12:26:46 zdrey Exp $
+ * $Id: resource.kmt,v 1.17 2006-06-01 08:56:37 cfaucher Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -62,22 +62,22 @@ abstract class Resource
 	 */
 	 reference contentMap : kermeta::utils::Hashtable<String, Set<Object>>
 	
-	/**
-	 * Description of the derived properties :
+ 	/**
 	 *  - returns the rootContents of the model saved in/loaded from the given uri, excluding
 	 *  the models from the dependent resources
-	 ** - returns the rootContents of the model saved in/loaded from the given uri, including
-	 *  the models from the dependent resources
- 	 ** - returns all the model elements hosted by this resource, excluding elements from the
- 	 * dependent resources
- 	 ** - returns all the model elements hosted by this resource, including elements from the
- 	 * dependent resources */
+	 */
 	property readonly rootContents : set Object[0..*]
 		getter is do result:=contentMap.getValue("rootContents") end
+	/** - returns the rootContents of the model saved in/loaded from the given uri, including
+	 *  the models from the dependent resources */
 	property readonly allRootContents : set Object[0..*] 
 		getter is do result:=contentMap.getValue("allRootContents") end
+    /** - returns all the model elements hosted by this resource, excluding elements from the
+ 	 * dependent resources */
 	property readonly contents : set Object[0..*] 
 		getter is do result:=contentMap.getValue("contents") end
+    /** - returns all the model elements hosted by this resource, including elements from the
+ 	 * dependent resources */
 	property readonly allContents : set Object[0..*] 
 		getter is do result:=contentMap.getValue("allContents") end
 	
