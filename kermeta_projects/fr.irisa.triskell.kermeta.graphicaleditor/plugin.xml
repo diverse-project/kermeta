@@ -30,7 +30,6 @@
       <import plugin="fr.irisa.triskell.kermeta.texteditor"/>
       <import plugin="org.eclipse.ui.editors"/>
       <import plugin="org.eclipse.jface.text"/>
-      <import plugin="org.topcased.ocl"/>
       <import plugin="org.eclipse.emf.validation"/>
    </requires>
 
@@ -41,7 +40,7 @@
             class="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
             icon="icons/Structure.png"
             default="true"
-            name="kmEditor"
+            name="Kermeta GUI Editor"
             id="fr.irisa.triskell.kermeta.graphicaleditor.editor.StructureEditor"
             contributorClass="fr.irisa.triskell.kermeta.graphicaleditor.actions.StructureEditorActionBarContributor"
             extensions="kmdi">
@@ -55,7 +54,7 @@
             class="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
             icon="icons/ClassDiagram.png"
             id="fr.irisa.triskell.kermeta.graphicaleditor.wizards.NewStructureDiagrams"
-            name="Structure Diagram">
+            name="Kermeta Diagram">
          <selection class="org.eclipse.core.resources.IResource"/>
       </wizard>
    </extension>
@@ -108,5 +107,16 @@
             id="fr.irisa.triskell.kermeta.graphicaleditor.createChildMenu"
             name="createChildMenu"/>
    </extension> 
+<!--    <extension
+          id="validators"
+          name="Validator"
+          point="org.topcased.validation.core.validators">
+       <validator
+             class="fr.irisa.triskell.kermeta.graphicaleditor.validation.KermetaModelValidator"
+             id="fr.irisa.triskell.kermeta.graphicaleditor.validation.KermetaModelValidator"
+             name="Kermeta model validator">
+          <description>Kermeta basic model validator</description>
+       </validator>
+   </extension> -->
 
 </plugin>
