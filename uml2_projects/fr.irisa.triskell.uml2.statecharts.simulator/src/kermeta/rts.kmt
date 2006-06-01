@@ -7,7 +7,7 @@ using kermeta::standard
 class TimeManager inherits rts::Activable
 {
     reference date : kermeta::standard::Integer
-    reference timer_list : oset rts::Timer[0..*]
+    reference timer_list : Linked_queue<rts::Timer>
     operation make() is do
         date := 0
     end
@@ -70,12 +70,13 @@ abstract class StateMachine inherits rts::Reactive
         //Empty in Eiffel code
     end
     operation enter(new_state : rts::StateMachine) is do
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
         // FIXME : in Eiffel code, a hack replaces current state
         // with the new_state, using the same object ID
         new_state.entry
     end
     operation leave(old_state : rts::StateMachine) is do
-        //sam hack than enter() method
+        //same hack than enter() method
         old_state.exit
     end
     operation oclInState(other : rts::StateMachine) : Boolean is do
@@ -110,7 +111,7 @@ class Timer inherits rts::TimeManagerAccessor
     operation is_ringing() : kermeta::standard::Boolean is do
         result := current_date >= deadline
     end
-    // FIXME : Kermeta does not have infix operations !!!!
+    // Kermeta does not have infix operations !!!!
 //    operation infix "<"(other : rts::Timer) : kermeta::standard::Boolean is do
 //        if other != void then
 //        	result := deadline < other.deadline
@@ -140,29 +141,27 @@ class Timer inherits rts::TimeManagerAccessor
 
 class Identity
 {
-	// FIXME : use a static structure for identities storage
-	//         and Kermeta has no static capability
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	// FIXME : Eiffel code uses a static structure for identities storage
+	//         but Kermeta has no static capability
     reference out : kermeta::standard::String
     operation default_create() is do
         //TODO: implement operation default_create
     end
     operation set_out(new_out : kermeta::standard::String) is do
-        //TODO: implement operation set_out
+        out := new_out
     end
     operation deep_twin() : rts::Identity is do
-        //TODO: implement operation deep_twin
+        result := self
     end
     operation is_deep_equal(other : rts::Identity) : kermeta::standard::Boolean is do
-        //TODO: implement operation is_deep_equal
-    end
-    operation identity_counter() : rts::INTEGER_REF is do
-        //TODO: implement operation identity_counter
+        result := out == other.out
     end
 }
 
 abstract class Event
 {
-    reference arguments : oset Object[0..*]
+    reference arguments : Linked_queue<Object>
     operation event_name() : kermeta::standard::String is abstract
     operation make() is do
         //Empty. Nothing to do
@@ -214,24 +213,23 @@ class TimeEvent inherits rts::Event
 
 abstract class ActiveStateMachine inherits rts::Activable, rts::StateMachine
 {
-//    reference message_queue : set rts::Event[0..*]
-    reference message_queue : rts::Linked_queue<rts::Event>
+    reference message_queue : Linked_queue<rts::Event>
+//    reference message_queue : rts::Linked_queue<rts::Event>
     reference events_from_action : String
     method init_activable(name : kermeta::standard::String) from rts::Activable is do
-        message_queue.with_capacity(message_queue_capacity, 0)
         super(name)
     end
     method receive(e : rts::Event) from rts::Reactive is do
-        if message_queue.count >= message_queue_capacity then
+        if message_queue.size >= message_queue_capacity then
            raise "QUEUE_FULL"
         else
-           message_queue.put(e)
+           message_queue.add(e)
         end
     end
     operation dispatch() is do
         var current_event : rts::Event
-        current_event := message_queue.item
-        message_queue.remove
+        current_event := message_queue.one
+        message_queue.remove(message_queue.one)
         current_event.dispatch_to(self)
     end
     method nb_transitions() : kermeta::standard::Integer from rts::Activable is do
@@ -240,7 +238,7 @@ abstract class ActiveStateMachine inherits rts::Activable, rts::StateMachine
         end
     end
     method labels(n : kermeta::standard::Integer) : kermeta::standard::String from rts::Activable is do
-        result := "?" + message_queue.item.label
+        result := "?" + message_queue.one.label
     end
     method guards(n : kermeta::standard::Integer) : kermeta::standard::Boolean from rts::Activable is do
         result := true
@@ -280,30 +278,21 @@ abstract class PassiveStateMachine inherits rts::StateMachine
     end
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// FIXME : this class is a singleton => how code it in Kermeta
 class TimeManagerAccessor
 {
 	reference timeManager : rts::TimeManager
     operation manager() : rts::TimeManager is do
-        if timeManager == void then
-        	timeManager := TimeManager.new
-        	timeManager.make
-        end
+//        if timeManager == void then
+//        	timeManager := TimeManager.new
+//        	timeManager.make
+//        end
     end
 }
 
-class Memory
+abstract class CADPSimulator inherits rts::TimeManagerAccessor
 {
-
-}
-
-class Exceptions
-{
-
-}
-
-abstract class CADPSimulator inherits rts::TimeManagerAccessor, rts::Memory, rts::Exceptions
-{
-    reference _nb_exported_configurations_since_last_gc : kermeta::standard::Integer
     reference current_configuration : rts::Configuration
     reference exported_configurations : set rts::Configuration[0..*]
     reference exported_labels : kermeta::utils::Hashtable<String, String>
@@ -312,40 +301,13 @@ abstract class CADPSimulator inherits rts::TimeManagerAccessor, rts::Memory, rts
         nb_exported_configurations_since_last_gc := 0
     end
     operation initial_configuration() : rts::Configuration is abstract
-    operation eiffel_start_state(START : rts::POINTER) is do
-        //TODO: implement operation eiffel_start_state
-    end
-    operation eiffel_compare_state(s1 : rts::Configuration, s2 : rts::Configuration) : kermeta::standard::Boolean is do
-        //TODO: implement operation eiffel_compare_state
-    end
-    operation eiffel_compare_label(L1 : kermeta::standard::String, L2 : kermeta::standard::String) : kermeta::standard::Boolean is do
-        //TODO: implement operation eiffel_compare_label
-    end
-    operation eiffel_iterate_state(SP1 : rts::POINTER, LP : rts::POINTER, SP3 : rts::POINTER, F : rts::POINTER) is do
-        //TODO: implement operation eiffel_iterate_state
-    end
-    operation finalize_configuration(configuration : rts::Configuration) is do
-        //TODO: implement operation finalize_configuration
-    end
-    operation export_configuration(configuration : rts::Configuration) is do
-        //TODO: implement operation export_configuration
-    end
-    operation label_for_export(label : kermeta::standard::String) : kermeta::standard::String is do
-        //TODO: implement operation label_for_export
-    end
-    reference avc : Configuration
-    operation assertion_violation_configuration() : Configuration is do
-        if avc == void then
-        	avc := Configuration.new
-        	avc.make
-        end
-        result := avc
-    end
+    /////////////////////////////////////////////////////////////////////////////////////////////
+    //TODO : implement SIMULATOR
 }
 
 class Configuration
 {
-    reference process_table : oset rts::Activable[0..*]
+    reference process_table : Linked_queue<rts::Activable>
     operation out() : kermeta::standard::String is do
         var i : Integer
         var l : Integer
@@ -376,9 +338,9 @@ class Configuration
         loop
         	a ?= process_table.elementAt(i)
         	if a != void then
-        		l := a.message_queue.count + 1
+        		l := a.message_queue.size + 1
         		if l > 1 then
-        			m := a.message_queue.item
+        			m := a.message_queue.one
         			e := m.oid
         		else
         			e := 1
@@ -400,7 +362,8 @@ class Configuration
 
 class Port inherits rts::StateMachine, rts::Activable
 {
-    reference fifo : Linked_queue<rts::Event>
+    reference fifo : set rts::Event[0..*]
+//    reference fifo : Linked_queue<rts::Event>
     reference server : Object
     operation initialize() is do
         // Empty. Nothing to do
@@ -412,7 +375,7 @@ class Port inherits rts::StateMachine, rts::Activable
         enqueue(e)
     end
     operation enqueue(e : rts::Event) is do
-        fifo.put(e)
+        fifo.add(e)
     end
     method nb_transitions() : kermeta::standard::Integer from rts::Activable is do
         result := 0
@@ -421,15 +384,15 @@ class Port inherits rts::StateMachine, rts::Activable
         end
     end
     method labels(n : kermeta::standard::Integer) : kermeta::standard::String from rts::Activable is do
-        result := fifo.item.label
+        result := fifo.one.label
     end
     method guards(n : kermeta::standard::Integer) : kermeta::standard::Boolean from rts::Activable is do
         result := true
     end
     method action(n : kermeta::standard::Integer) from rts::Activable is do
         // unqueue message in the fifo and pass it to the upper layer
-        fifo.item.send_to(server)
-        fifo.remove
+        fifo.one.send_to(server)
+        fifo.remove(fifo.one)
     end
 }
 
@@ -465,16 +428,9 @@ abstract class Proxy
     end
 }
 
-class ObjectSnapshot
-{
-    reference identity : rts::Identity
-
-}
-
-/***************************************************************************************
- * FIXME : the general goal of this class needs to be understand before implementing it
- * NOTA BENE : the Enumeration type is not used in RTS package
- ***************************************************************************************/
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// FIXME : the general goal of this class needs to be understand before implementing it
+// NOTA BENE : the Enumeration type is not used in RTS package
 abstract class Enumeration
 {
     reference out : kermeta::standard::String
@@ -515,95 +471,22 @@ abstract class Enumeration
     end
 }
 
-class Linked_queue<E>
+class Linked_queue<E> inherits OrderedSet<E>
 {
-	/** minimum of index */
-	reference lower : Integer
-	/** maximum of index */
-	reference upper : Integer
-	attribute  storage : Sequence<E>
-    operation array_item(i : Integer) : E is do
-        result := storage.elementAt(i-lower)
-    end
-    operation array_put(element : E, i : Integer) is do
-        storage.addAt(i - lower, element)
-    end
-    operation array_remove(i : Integer) is do
-        storage.removeAt(i-lower)
-    end
-    operation item() : E is do
-        result := storage.first
-    end
-    operation put(element : E) is do
-    	// add as last
-        storage.addAt(count+lower, element)
-    end
-    method remove() is do
-    	// we remove the first element
-        array_remove(lower)
-        // FIXME : the Eiffel ARRAY class seems to need such a forced push
-        // Must we need it in Kermeta ???
-        storage.addAt(count, void)
-    end
     operation out() : kermeta::standard::String is do
         var s : String init "There are "
-        s.append(count.toString)
+        s.append(size.toString)
         s.append(" queued messages :\n")
-        from var i : Integer init lower
-        until i > upper
+        from var i : Integer init 0
+        until i > size
         loop
-        	s.append(storage.elementAt(i-lower).toString + "\n")
+        	s.append(elementAt(i).toString + "\n")
         	i := i + 1
         end
         result := s
     end
-    operation count() : Integer is do
-    	result := storage.size
-    end
-    operation with_capacity(max : Integer, min : Integer) is do
-    	lower := min
-    	upper := max
-    end
-    operation empty() : Boolean is do
-    	result := storage.empty
-    end
-}
-
-/** FIXME Is this class needed & used ??? */
-class Sorted_two_way_list
-{
-    operation start() is do
-        //Empty in Eiffel code
-    end
-    operation prune(x : rts::Comparable) is do
-        //TODO: implement operation prune
-    end
-    operation extend(new : rts::Comparable) is do
-        //TODO: implement operation extend
-    end
-}
-
-abstract class Comparable inherits kermeta::standard::Comparable
-{
-
 }
 
 class Alarm inherits rts::Event
 {
-
-}
-
-class POINTER
-{
-
-}
-
-class INTEGER_REF
-{
-
-}
-
-class Date
-{
-
 }
