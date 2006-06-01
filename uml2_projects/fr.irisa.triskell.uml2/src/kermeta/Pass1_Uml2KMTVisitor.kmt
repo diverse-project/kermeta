@@ -111,8 +111,7 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     method visitParameter(visitable : uml2::Parameter) is do
     	// tests UML2 model correctness
     	if visitable.type.isVoid then
-			raise "Uml2Kmt - PASS1 : " + "the parameter \""+visitable.name+"\" of the operation \""
-    			+ visitable.~operation.name+"\" must be typed !"
+			raise "Uml2Kmt - PASS1 : an operation have a parameter \""+visitable.name+"\" which must be typed !"
     	end
     	
     	// Uml2 has 4 types of operation parameters : "In", "In Out", 'Out" and "Return"

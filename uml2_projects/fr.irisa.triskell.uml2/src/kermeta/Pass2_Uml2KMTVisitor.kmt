@@ -53,10 +53,6 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitClass(visitable : uml2::Class) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG visitClass - visitable = "+visitable.name)
-    	
     	// UML2 Class is a ClassDefinition in Kermeta
     	var cldef : ClassDefinition
     	cldef ?= output.getValue(visitable)
@@ -83,10 +79,6 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     
     /* visit Attributes, Properties, ... */
     method visitProperty(visitable : uml2::Property) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG visitProperty - visitable = "+visitable.name)
-    	
     	// we need to manage the Type class of the property,
     	// in case of external package reference
 //    	visitable.type.accept(self)
@@ -115,10 +107,6 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitOperation(visitable : uml2::Operation) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG visitOperation - visitable = "+visitable.name)
-    	
     	// completes the operation
     	var op : Operation
     	op ?= output.getValue(visitable)
@@ -154,11 +142,6 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitParameter(visitable : uml2::Parameter) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG visitParameter - visitable = "+visitable.name)
-    	stdio.writeln("       visitParameter : visitable.type = "+visitable.type.toString)
-    	
     	// associates the type of parameter to the ClassDefinition of this type
     	var p : Parameter
     	p ?= output.getValue(visitable)
@@ -173,23 +156,12 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     	end
 		// as Class/DataType/Tag are not linked thru composition
 		// we must add them in the resulting KM resource
-    	
-    	//DEBUG
-    	stdio.writeln("       visitParameter : type = "+type.toString)
-	    	
 		resourceObjects.add(p.type)
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG - visitParameter : visitable.type = "+visitable.type.toString)
 	    	
     	super(visitable)
     end
     
     method visitPackage(visitable : uml2::Package) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG visitPackage - visitable = "+visitable.name)
-    	
     	var p : Package
     	p ?= output.getValue(visitable)
     	
@@ -215,19 +187,10 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitDataType(visitable : uml2::DataType) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG visitDataType - visitable = "+visitable.name)
-    	
-    	// TODO
     	super(visitable)
     end
     
     method visitGeneralization(visitable : uml2::Generalization) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG visitGeneralization")
-    	
     	// we must add the "general" type to the "source" object
     	var gen : ClassDefinition
     	gen ?= output.getValue(visitable.general)
@@ -247,23 +210,20 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
     method visitAssociation(visitable : uml2::Association) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG visitAssociation - visitable = "+visitable.name)
-    	
-    	// the structure of representations differs
-    	// from UML2 to Kermeta depending on the association cases
-    	//
-    	// We only have two main cases in Kermeta
-    	//  - 1 diamond-ed end => containance relation thru "attribute" keyword
-    	//    This case is managed in Pass1.visitProperty().
-    	//  - others cases (including white diamonds) => "reference" keyword
-    	//    Nothing to do (will be ordinary properties)
-    	// 
-    	// Navigation thru the association demand a "Navigable" tag in UML2
-    	// and named association's ends in Kermeta, so we need them both
-    	// Rem : the 2 ends must be navigable to be concerned by Kermeta "Opposite"
-    	// (note than Pass1 has disqualified associations with more than 2 members)
+    	/* the structure of representations differs
+    	 * from UML2 to Kermeta depending on the association cases
+    	 *
+    	 * We only have two main cases in Kermeta
+    	 *  - 1 diamond-ed end => containance relation thru "attribute" keyword
+    	 *    This case is managed in Pass1.visitProperty().
+    	 *  - others cases (including white diamonds) => "reference" keyword
+    	 *    Nothing to do (will be ordinary properties)
+    	 * 
+    	 * Navigation thru the association demand a "Navigable" tag in UML2
+    	 * and named association's ends in Kermeta, so we need them both
+    	 * Rem : the 2 ends must be navigable to be concerned by Kermeta "Opposite"
+    	 * (note than Pass1 has disqualified associations with more than 2 members)
+    	 */
     	if visitable.ownedEnd.size == 0  then
     		var it : Iterator<uml2::Property> init visitable.memberEnd.iterator
     		// get the first end
@@ -299,10 +259,6 @@ class Pass2_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
     end
     
 	method visitInterface(visitable : uml2::Interface) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG visitInterface - visitable = "+visitable.name)
-    	
 		// Interface doesn(t exists as concept in Kermeta
 		// so interfaces must be processed as Uml2 abstract classes
 		
