@@ -1,4 +1,4 @@
-/* $Id: three_way_switch.kmt,v 1.3 2006-06-01 09:54:30 vmahe Exp $
+/* $Id: three_way_switch.kmt,v 1.4 2006-06-01 09:59:15 vmahe Exp $
  * Creation date: May 19, 2006
  * License:
  * Copyright:
@@ -9,7 +9,7 @@ package three_way_switch;
 
 
 require kermeta
-require "rts.kmt"
+require "../../../fr.irisa.triskell.uml2.statecharts.simulator/src/kermeta/rts.kmt"
 
 using kermeta::standard
 using rts
