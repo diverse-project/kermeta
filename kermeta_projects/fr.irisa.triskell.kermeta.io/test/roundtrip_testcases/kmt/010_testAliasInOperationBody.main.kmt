@@ -1,0 +1,17 @@
+package testAliasInOperationBody;
+
+require kermeta
+using kermeta::standard
+
+abstract class A
+{
+	attribute name : String
+	operation accept(paramb : B) : set kermeta::standard::~Void[0..0] is
+	do
+		var varb : B init paramb
+	end
+}
+
+abstract class B
+{
+}

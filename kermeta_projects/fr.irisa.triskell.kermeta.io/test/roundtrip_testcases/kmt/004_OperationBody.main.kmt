@@ -1,0 +1,22 @@
+package operationBody;
+
+require kermeta
+
+class Main
+{
+	// Test operation body conversion in Ecore, using parameters.
+	operation testParam0() is
+		do
+			stdio.writeln("-----------------------------------------")
+		end
+		
+	operation testParam1(a : A) is do
+		do
+			var a : A init A.new
+		end
+	end
+}
+
+class A 
+{
+}

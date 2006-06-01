@@ -1,0 +1,10 @@
+package testAlias;
+
+using kermeta::standard
+
+alias String : kermeta::language::structure::String;
+
+class A
+{
+	reference s : String
+}

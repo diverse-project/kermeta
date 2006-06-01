@@ -1,0 +1,7 @@
+package testAlias;
+
+alias Alias : kermeta::language::structure::Object;
+class A
+{
+	attribute s : Alias
+}
