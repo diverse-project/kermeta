@@ -1,0 +1,29 @@
+package derivedPropertyBody;
+
+require kermeta
+
+class Main
+{
+	property readonly d1 : A 
+		getter is do
+			var a : A
+			result := A
+		end
+		
+	property readonly d1broken : A 
+		getter is do
+			var a : A
+		end
+		
+	property d1rw : A 
+		getter is do
+			var a : A
+		end
+		setter is do
+//			value := A.new
+		end
+}
+
+class A 
+{
+}
