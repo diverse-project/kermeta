@@ -68,6 +68,15 @@ class DynamicExpression
     		raise e
     	end
         result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)
+        
+    	if errors.size != 0 then
+    		var e : DynamicExpressionException init DynamicExpressionException.new
+    		e.message := "parse result - expression contains errors"
+    		errors.each{ error |
+    			e.message.append("\n"+error.message)
+    		}
+    		raise e
+    	end
     end
     
     /**
