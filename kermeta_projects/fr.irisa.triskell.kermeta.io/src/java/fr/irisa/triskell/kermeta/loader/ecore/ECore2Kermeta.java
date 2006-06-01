@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.17 2006-04-19 12:23:54 dvojtise Exp $
+/* $Id: ECore2Kermeta.java,v 1.18 2006-06-01 16:30:08 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -46,8 +47,11 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolVariable;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
+import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
@@ -99,7 +103,7 @@ public class ECore2Kermeta extends EcoreVisitor {
 	public static void loadunit(EcoreUnit unit, Resource resource) {
 		try {
 			ECore2Kermeta visitor = new ECore2Kermeta(unit, resource);
-			// pre-create types
+			// pre-create types, properties, operations
 			TreeIterator it = resource.getAllContents();
 			while(it.hasNext()) {
 				EObject obj = (EObject)it.next();
@@ -114,6 +118,13 @@ public class ECore2Kermeta extends EcoreVisitor {
 					visitor.types.put(obj, unit.struct_factory.createPrimitiveType());
 					
 				}
+				else if (obj instanceof EOperation) {
+					visitor.operations.put((EOperation)obj, unit.struct_factory.createOperation());
+				}
+				/*else if (obj instanceof EStructuralFeature)
+				{
+					visitor.properties.put((EStructuralFeature)obj, unit.struct_factory.createProperty());
+				}*/
 			}
 			// visit the metamodel
 			Iterator pkgs = resource.getContents().iterator();
@@ -124,13 +135,28 @@ public class ECore2Kermeta extends EcoreVisitor {
 				}
 			}
 			
-			// Once the all metamodel is converted, we can set the details, that is, visit the operations
-			// and set their corresponding super operations.
+			// We visit the operations of ClassDefinitions after the other elements because 
+			// the body of operation needs to know all the types that it can use.
+			// idem for the super types of operations.
+			Iterator cit = visitor.types.keySet().iterator();
+			while (cit.hasNext())
+			{
+				EObject node = (EObject)cit.next();
+				if (node instanceof EClass)
+				{
+					visitor.current_classdef = (ClassDefinition)visitor.types.get(node);
+					visitor.acceptList(((EClass)node).getEStructuralFeatures());
+					visitor.acceptList(((EClass)node).getEOperations());
+				}
+			}
+			
+			// Once the operations are defined we can set their superOperation property
 			Iterator<EOperation> ops = visitor.operations.keySet().iterator(); 
 			while (ops.hasNext())
 			{
 				EOperation node = ops.next(); 
-//				has the operation an "implicit" super operation (not defined in the KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS...)?
+				// TODO Has the operation an "implicit" super operation
+				// (not defined in the KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS...)?
 				// FIXME This slows the conversion...
 				visitor.current_op = visitor.operations.get(node);
 				// it could have been resolved from the EAnnotation visit
@@ -288,9 +314,9 @@ public class ECore2Kermeta extends EcoreVisitor {
 		// Class annotations
 		acceptList(node.getEAnnotations());
 		
-		// properties and operations:
-		acceptList(node.getEStructuralFeatures());
-		acceptList(node.getEOperations());
+		// Visit properties
+		//acceptList(node.getEStructuralFeatures());
+		//acceptList(node.getEOperations());
 		
 		unit.typeDefs.put(getQualifiedName(node), current_classdef);
 		
@@ -299,7 +325,7 @@ public class ECore2Kermeta extends EcoreVisitor {
 	
 	public Object visit(EAttribute node) {
 		Property prop = unit.struct_factory.createProperty();
-		
+		current_prop = prop;
 		prop.setName(node.getName());
 		prop.setIsComposite(true);
 		
@@ -329,17 +355,18 @@ public class ECore2Kermeta extends EcoreVisitor {
 	 * used to set opposites
 	 */
 	private Hashtable properties = new Hashtable();
+	protected Property current_prop;
 	
 	public Object visit(EReference node) {
 		Property prop = (Property)properties.get(getQualifiedName(node));
 		if (prop == null) {
 			prop = unit.struct_factory.createProperty();
 			properties.put(getQualifiedName(node), prop);
+			current_prop = prop;
 		}
 		
 		prop.setName(node.getName());
 		prop.setIsComposite(node.isContainment());
-		
 		prop.setIsOrdered(node.isOrdered());
 		prop.setIsUnique(node.isUnique());
 		prop.setUpper(node.getUpperBound());
@@ -367,10 +394,17 @@ public class ECore2Kermeta extends EcoreVisitor {
 			prop.setOpposite(oprop);
 		}
 		
+		// Get the derived properties bodies
+		if (node.isDerived() == true)
+		{
+			acceptList(node.getEAnnotations());
+		}
+		
 		return prop;
 	}
 	
 	public Object visit(EOperation node) {
+		System.out.println("OPERAIOTN");
 		// FIXME : handle super operations
 		// FIXME : handle raised exceptions
 		isClassTypeOwner = false;
@@ -542,10 +576,17 @@ public class ECore2Kermeta extends EcoreVisitor {
 			}
 		}
         String type_name = node.getInstanceClassName();
-  
+        // Find "type_name" in the primitive types hashtable
+        // Important note : instanceClassName must be a java type!
         if (primitive_types_mapping.containsKey(type_name)) {
         	type_name = (String)primitive_types_mapping.get(type_name);
         }
+        // If not found, we try to find the alias definition in the annotations.
+     /*   else 
+        {	
+        	type_name = (String)this.accept(node.getEAnnotation(KM2Ecore.KMT2ECORE_ANNOTATION));
+        }*/
+        // If still not found, than we replace the type by the basic kermeta type "Object"
         TypeDefinition type = unit.typeDefinitionLookup(type_name);
         if (type == null) {
         	unit.messages.addWarning("cannot find instance class " + type_name + " for primitive type " + getQualifiedName(node) + " (replaced by Object)", null);
@@ -590,13 +631,10 @@ public class ECore2Kermeta extends EcoreVisitor {
 		if (node.getDetails().containsKey(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS))
 		{	
 			result = (String)node.getDetails().get(KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS);
-			// Set the context necessary for the operation to be parsed properly (at least, put the parameters
-			// in the symbol list.
-			
 			// Parse and inject
+			System.err.println("Parsed body : " + result);
 			this.current_op.setBody(ExpressionParser.parse(unit, result));
 		}
-		
 		else if (node.getSource().equals(KM2Ecore.KMT2ECORE_ANNOTATION_TYPEPARAMETER))
 		{	
 			EMap map = node.getDetails();
@@ -622,6 +660,34 @@ public class ECore2Kermeta extends EcoreVisitor {
 			
 			// Parse and inject
 			this.current_op.setSuperOperation((Operation)ExpressionParser.parse(unit, result));
+		}
+		// Handle alias
+		else if (node.getDetails().containsKey(KM2Ecore.KMT2ECORE_ANNOTATION_PRIMITIVETYPEALIAS))
+		{
+			result = (String)node.getDetails().get(KM2Ecore.KMT2ECORE_ANNOTATION_PRIMITIVETYPEALIAS);
+		}
+		// Handle body of derived properties getter/setters
+		else if (node.getSource().equals(KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY))
+		{	
+			System.out.println("CALZERAZEOPIAZPEOAIZPEOIAZPEOIAZEPOAZIEPOAZIEPOAZIep");
+			String getter = (String)node.getDetails().get(
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY);
+			String setter = (String)node.getDetails().get(
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY);
+			String readonly = (String)node.getDetails().get(
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY);
+			if (getter!=null)
+				this.current_prop.setGetterBody(ExpressionParser.parse(unit, getter));
+			if (readonly.equals("false")) {
+				this.current_prop.setSetterBody(ExpressionParser.parse(unit, setter));
+				this.current_prop.setIsReadOnly(false);
+			}
+			// Boolean.getBoolean(readonly) -> foireux
+			else
+			{
+				this.current_prop.setIsReadOnly(true);
+			}
+			
 		}
 		return result;
 	}
@@ -658,14 +724,33 @@ public class ECore2Kermeta extends EcoreVisitor {
 	
 	public void getSymbols(KermetaUnit builder)
 	{
-		builder.pushContext();
+		//builder.pushContext();
 		// add type variable
 		Iterator tvs = builder.current_operation.getTypeParameter().iterator();
 		while(tvs.hasNext()) builder.addTypeVar((TypeVariable)tvs.next());
 		// add parameters
 		Iterator params = builder.current_operation.getOwnedParameter().iterator();
 		while(params.hasNext()) builder.addSymbol(new KMSymbolParameter((Parameter)params.next()));
-		builder.popContext();
+		//builder.popContext();
+	}
+	
+	public void setContextForOperationBody()
+	{
+/*		Enumeration e = formalParams.keys();
+        while(e.hasMoreElements()) {
+            String var_name = (String)e.nextElement();
+            Type var_type = (Type)formalParams.get(var_name);
+            VariableDecl var = this.behav_factory.createVariableDecl();
+            var.setIdentifier(var_name);
+            
+            TypeReference tref = this.behav_factory.createTypeReference();
+            tref.setType(var_type);
+            tref.setUpper(1);
+            
+            var.setType(tref);
+            variables.add(var);
+            this.addSymbol(new KMSymbolVariable(var));
+        }*/
 	}
 }
 
