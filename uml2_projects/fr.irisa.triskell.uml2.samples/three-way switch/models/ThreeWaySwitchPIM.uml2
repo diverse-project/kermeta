@@ -25,6 +25,36 @@ He operates the nearest switch to power off the light bulb.</body>
       <eAnnotations xmi:id="_YOlbwOmmEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
         <details xmi:id="_YOlbwemmEdq6QuEhfzZ4lg" key="uuid" value="11483111760602"/>
       </eAnnotations>
+      <ownedStateMachine xmi:id="_UGTdsPF7EdqXP5gHMCBEHQ" name="switchStateMachine">
+        <eAnnotations xmi:id="_1ah3cPF7EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+          <details xmi:id="_1ah3cfF7EdqXP5gHMCBEHQ" key="uuid" value="114917251287015"/>
+        </eAnnotations>
+        <region xmi:id="_VlDToPF7EdqXP5gHMCBEHQ">
+          <eAnnotations xmi:id="_1ajFkPF7EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+            <details xmi:id="_1ajFkfF7EdqXP5gHMCBEHQ" key="uuid" value="114917251287316"/>
+          </eAnnotations>
+          <subvertex xmi:type="uml:State" xmi:id="_m-GDEPF7EdqXP5gHMCBEHQ" name="Off" outgoing="_pAAQcPF7EdqXP5gHMCBEHQ" incoming="_ofu08PF7EdqXP5gHMCBEHQ">
+            <eAnnotations xmi:id="_1akTsPF7EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+              <details xmi:id="_1akTsfF7EdqXP5gHMCBEHQ" key="uuid" value="114917251287417"/>
+            </eAnnotations>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_n6uqcPF7EdqXP5gHMCBEHQ" name="On" outgoing="_ofu08PF7EdqXP5gHMCBEHQ" incoming="_pAAQcPF7EdqXP5gHMCBEHQ">
+            <eAnnotations xmi:id="_1akTsvF7EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+              <details xmi:id="_1akTs_F7EdqXP5gHMCBEHQ" key="uuid" value="114917251287518"/>
+            </eAnnotations>
+          </subvertex>
+          <transition xmi:id="_ofu08PF7EdqXP5gHMCBEHQ" name="powerOff" source="_n6uqcPF7EdqXP5gHMCBEHQ" target="_m-GDEPF7EdqXP5gHMCBEHQ">
+            <eAnnotations xmi:id="_1alh0PF7EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+              <details xmi:id="_1alh0fF7EdqXP5gHMCBEHQ" key="uuid" value="114917251287719"/>
+            </eAnnotations>
+          </transition>
+          <transition xmi:id="_pAAQcPF7EdqXP5gHMCBEHQ" name="powerOn" source="_m-GDEPF7EdqXP5gHMCBEHQ" target="_n6uqcPF7EdqXP5gHMCBEHQ">
+            <eAnnotations xmi:id="_1alh0vF7EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+              <details xmi:id="_1amI4PF7EdqXP5gHMCBEHQ" key="uuid" value="114917251287720"/>
+            </eAnnotations>
+          </transition>
+        </region>
+      </ownedStateMachine>
       <ownedAttribute xmi:id="_H36IQOmmEdq6QuEhfzZ4lg" name="illuminated" type="_JknhsOmmEdq6QuEhfzZ4lg">
         <eAnnotations xmi:id="_YOnQ8OmmEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
           <details xmi:id="_YOnQ8emmEdq6QuEhfzZ4lg" key="uuid" value="11483111760623"/>
@@ -50,6 +80,36 @@ He operates the nearest switch to power off the light bulb.</body>
       <eAnnotations xmi:id="_YOofEOmmEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
         <details xmi:id="_YOofEemmEdq6QuEhfzZ4lg" key="uuid" value="11483111760656"/>
       </eAnnotations>
+      <ownedStateMachine xmi:id="_-CgZ4PF7EdqXP5gHMCBEHQ">
+        <eAnnotations xmi:id="_IY7bIPF8EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+          <details xmi:id="_IY7bIfF8EdqXP5gHMCBEHQ" key="uuid" value="114917264021048"/>
+        </eAnnotations>
+        <region xmi:id="_--LX8PF7EdqXP5gHMCBEHQ">
+          <eAnnotations xmi:id="_IY8pQPF8EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+            <details xmi:id="_IY8pQfF8EdqXP5gHMCBEHQ" key="uuid" value="114917264021249"/>
+          </eAnnotations>
+          <subvertex xmi:type="uml:State" xmi:id="__mgjQPF7EdqXP5gHMCBEHQ" name="Up" outgoing="_BCv3wPF8EdqXP5gHMCBEHQ" incoming="_AemB0PF8EdqXP5gHMCBEHQ">
+            <eAnnotations xmi:id="_IY9QUPF8EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+              <details xmi:id="_IY9QUfF8EdqXP5gHMCBEHQ" key="uuid" value="114917264021350"/>
+            </eAnnotations>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_AAIkMPF8EdqXP5gHMCBEHQ" name="Down" outgoing="_AemB0PF8EdqXP5gHMCBEHQ" incoming="_BCv3wPF8EdqXP5gHMCBEHQ">
+            <eAnnotations xmi:id="_IY93YPF8EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+              <details xmi:id="_IY93YfF8EdqXP5gHMCBEHQ" key="uuid" value="114917264021451"/>
+            </eAnnotations>
+          </subvertex>
+          <transition xmi:id="_AemB0PF8EdqXP5gHMCBEHQ" name="switchUp" source="_AAIkMPF8EdqXP5gHMCBEHQ" target="__mgjQPF7EdqXP5gHMCBEHQ">
+            <eAnnotations xmi:id="_IY-ecPF8EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+              <details xmi:id="_IY-ecfF8EdqXP5gHMCBEHQ" key="uuid" value="114917264021552"/>
+            </eAnnotations>
+          </transition>
+          <transition xmi:id="_BCv3wPF8EdqXP5gHMCBEHQ" name="switchDown" source="__mgjQPF7EdqXP5gHMCBEHQ" target="_AAIkMPF8EdqXP5gHMCBEHQ">
+            <eAnnotations xmi:id="_IY_FgPF8EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+              <details xmi:id="_IY_FgfF8EdqXP5gHMCBEHQ" key="uuid" value="114917264021653"/>
+            </eAnnotations>
+          </transition>
+        </region>
+      </ownedStateMachine>
       <ownedAttribute xmi:id="_-r_LQOmlEdq6QuEhfzZ4lg" name="light" type="_5L_tcemlEdq6QuEhfzZ4lg" association="_-r8H8OmlEdq6QuEhfzZ4lg">
         <eAnnotations xmi:id="_YOpGIOmmEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
           <details xmi:id="_YOpGIemmEdq6QuEhfzZ4lg" key="uuid" value="11483111760667"/>
@@ -85,6 +145,11 @@ He operates the nearest switch to power off the light bulb.</body>
       <eAnnotations xmi:id="_YOswgOmmEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
         <details xmi:id="_YOswgemmEdq6QuEhfzZ4lg" key="uuid" value="114831117607113"/>
       </eAnnotations>
+      <generalization xmi:id="_fd7n0PF8EdqXP5gHMCBEHQ" general="_-9CXoOmoEdq6QuEhfzZ4lg">
+        <eAnnotations xmi:id="_pLjjsPF8EdqXP5gHMCBEHQ" source="http://www.topcased.org/uuid">
+          <details xmi:id="_pLjjsfF8EdqXP5gHMCBEHQ" key="uuid" value="114917286026787"/>
+        </eAnnotations>
+      </generalization>
       <ownedAttribute xmi:id="_-3fQoOmlEdq6QuEhfzZ4lg" name="switch" type="_7zWxQOmlEdq6QuEhfzZ4lg" isOrdered="true" association="_-3dbcOmlEdq6QuEhfzZ4lg">
         <eAnnotations xmi:id="_YOswgummEdq6QuEhfzZ4lg" source="http://www.topcased.org/uuid">
           <details xmi:id="_YOtXkOmmEdq6QuEhfzZ4lg" key="uuid" value="114831117607214"/>
