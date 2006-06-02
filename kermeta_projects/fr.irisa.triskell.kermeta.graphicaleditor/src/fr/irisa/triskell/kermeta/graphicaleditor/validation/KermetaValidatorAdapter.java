@@ -1,4 +1,4 @@
-/* $Id: KermetaValidatorAdapter.java,v 1.6 2006-04-10 17:41:36 zdrey Exp $
+/* $Id: KermetaValidatorAdapter.java,v 1.7 2006-06-02 09:05:20 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ExtendedKermetaValidatorAdapter.java
  * License    : EPL
@@ -17,32 +17,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
-//import org.eclipse.emf.ocl.query.QueryFactory;
 import org.eclipse.emf.validation.internal.EMFModelValidationPlugin;
 import org.eclipse.emf.validation.internal.EMFModelValidationStatusCodes;
-import org.eclipse.emf.validation.internal.emfadapter.EMFValidationContextAdapter;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IPageLayout;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.views.markers.internal.ProblemView;
-import org.topcased.modeler.editor.Modeler;
 
+import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin;
 import fr.irisa.triskell.kermeta.graphicaleditor.editor.EditorReconcilingStrategy;
-import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
-import fr.irisa.triskell.kermeta.loader.KMUnitMessage;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;

@@ -1,4 +1,4 @@
-/* $Id: KermetaValidator.java,v 1.3 2006-04-05 18:58:54 zdrey Exp $
+/* $Id: KermetaValidator.java,v 1.4 2006-06-02 09:05:20 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : KermetaValidator.java
  * License    : EPL
@@ -12,14 +12,8 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.validation;
 
 import java.util.Collection;
-import java.util.Map;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.service.IValidator;
 
