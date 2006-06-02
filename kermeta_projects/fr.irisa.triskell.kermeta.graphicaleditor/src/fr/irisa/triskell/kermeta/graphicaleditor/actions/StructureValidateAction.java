@@ -1,4 +1,4 @@
-/* $Id: StructureValidateAction.java,v 1.3 2006-04-05 18:58:55 zdrey Exp $
+/* $Id: StructureValidateAction.java,v 1.4 2006-06-02 09:04:48 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ValidateAction.java
  * License    : EPL
@@ -71,7 +71,6 @@ public class StructureValidateAction extends ModelerValidateAction {
         setText(StructureActionConstants.VALIDATE_TEXT);
         
         IEditorInput editorInput = ((Modeler)getWorkbenchPart()).getEditorInput();
-        System.err.println("Editor input : " + editorInput);
         inputFile = ((IFileEditorInput)editorInput).getFile();
     }
 
