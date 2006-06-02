@@ -23,11 +23,9 @@ import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.PropertyRestor
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.commands.UpdatePropertyNodeCommand;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.dialogs.PropertyEditDialog;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.edit.utils.PropertyEditPartCommonInterface;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.OperationFigure;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.figures.PropertyFigureNode;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies.ClassDefinitionLayoutEditPolicy;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 
 /**
@@ -147,7 +145,9 @@ public class PropertyEditPartNode extends MultiplicityElementEditPart implements
 			PropertyEditDialog propertyDlg = new PropertyEditDialog(
 					getModelProperty(), ModelerPlugin
 							.getActiveWorkbenchShell()); 
-			if (propertyDlg.open() == Window.OK) {
+			int isOk = propertyDlg.open();
+			if (isOk == Window.OK)
+			{
 				UpdatePropertyNodeCommand command = new UpdatePropertyNodeCommand(
 						getModelProperty(), propertyDlg.getData());
 				getViewer().getEditDomain().getCommandStack().execute(command);
@@ -161,7 +161,7 @@ public class PropertyEditPartNode extends MultiplicityElementEditPart implements
 	/**
 	 * Thanks to topcased source code
 	 * @see org.topcased.modeler.edit.EMFGraphNodeEditPart#performRequest(Request)
-	 * @generated NOT NOT
+	 * @generated NOT
 	 */
 	protected void updateLabel(Label label) {
 		String text = "";

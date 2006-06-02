@@ -187,9 +187,10 @@ public class ClassDefinitionEditPart extends NamedElementEditPart {
 		// Get the class container (it is always a Package -- until we have the Model notion :p)
 		Package owningPackage = (Package) getModelClassDefinition()
 				.eContainer();
-
+		//FIXME Sometimes getParent() returns null! why? and sometimes getParent().getModel() is not a diagram...
+		
 		// check if the class is not included in the EPackage of the current diagram
-		if (getModelClassDefinition().eContainer() != null
+		if (getParent() != null && getParent().getModel() instanceof Diagram && getModelClassDefinition().eContainer() != null
 				&& getModelClassDefinition().eContainer() != Utils
 						.getElement(((Diagram) getParent().getModel())
 								.getSemanticModel().getGraphElement())) {
