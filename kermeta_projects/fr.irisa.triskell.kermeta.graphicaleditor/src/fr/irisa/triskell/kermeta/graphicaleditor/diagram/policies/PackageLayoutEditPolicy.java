@@ -16,7 +16,6 @@ import org.topcased.modeler.di.model.GraphNode;
 import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
 import org.topcased.modeler.utils.Utils;
 
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 
 /**
@@ -52,7 +51,7 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 	 */
 	protected Command getCreateCommand(GraphNode parent, GraphNode child,
 			Point loc, Dimension dim, int pos, boolean needModelUpdate) {
-		
+
 		if (parent != null && child != null) {
 			EditDomain domain = getHost().getViewer().getEditDomain();
 
@@ -64,7 +63,8 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 			// 1- Parent and Child cannot be null and must the child should be
 			// contained by the parent (isValid checks that the two params are not null
 			if (isValid(childEObject, parentEObject)) {
-				if (childEObject instanceof Tag) System.err.println("create a tag? " + childEObject);
+				if (childEObject instanceof Tag)
+					System.err.println("create a tag? " + childEObject);
 				// ----------------------------------
 				// 2- Check if this object does not already belong to this
 				// container
@@ -111,13 +111,12 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 					if (eRef.getEReferenceType().isInstance(childEObject)) {
 						referencesList.add(eRef);
 						Tag mytag = null;
-						if (childEObject instanceof Tag)
-						{
-							mytag = (Tag)childEObject;
-							
+						if (childEObject instanceof Tag) {
+							mytag = (Tag) childEObject;
+
 							/*System.err.println("Get EObject : " + mytag);
-							System.out.println("Tag container:"+ parentEObject.eResource()
-							);*/
+							 System.out.println("Tag container:"+ parentEObject.eResource()
+							 );*/
 							parentEObject.eResource().getContents().add(mytag);
 						}
 					}
@@ -132,12 +131,13 @@ public class PackageLayoutEditPolicy extends ModelerLayoutEditPolicy {
 		}
 		return UnexecutableCommand.INSTANCE;
 	}
-	
+
 	/** (non-Javadoc)
 	 * @see org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy#isSeveralDisplayAllowed(org.topcased.modeler.di.model.GraphNode, org.topcased.modeler.di.model.GraphNode, boolean)
 	 */
-	protected boolean isSeveralDisplayAllowed(GraphNode parent, GraphNode child, boolean needModelUpdate) {
-		return false; 
+	protected boolean isSeveralDisplayAllowed(GraphNode parent,
+			GraphNode child, boolean needModelUpdate) {
+		return false;
 	}
 
 }

@@ -1,4 +1,4 @@
-/* $Id: EditorCompletion.java,v 1.1 2006-04-05 19:00:14 zdrey Exp $
+/* $Id: EditorCompletion.java,v 1.2 2006-06-02 09:02:25 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : EditorCompletion.java
  * License    : EPL
@@ -28,15 +28,10 @@ import fr.irisa.triskell.kermeta.ast.ParamPostfix;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
-import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 import fr.irisa.triskell.kermeta.texteditor.completion.CallOperationCompletionItem;
 import fr.irisa.triskell.kermeta.texteditor.completion.CallPropertyCompletionItem;
 import fr.irisa.triskell.kermeta.texteditor.completion.CompletionItem;
-import fr.irisa.triskell.kermeta.texteditor.completion.TypeCompletionItem;
-import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;

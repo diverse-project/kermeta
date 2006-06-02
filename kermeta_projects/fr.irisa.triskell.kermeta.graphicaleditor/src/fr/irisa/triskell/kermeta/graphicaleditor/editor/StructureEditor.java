@@ -1,41 +1,15 @@
 package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.Resource.IOWrappedException;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.DanglingHREFException;
-import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.PartInitException;
-import org.topcased.modeler.ModelerPlugin;
 import org.topcased.modeler.documentation.EAnnotationDocPage;
 import org.topcased.modeler.documentation.IDocPage;
 import org.topcased.modeler.editor.Modeler;
-import org.topcased.modeler.utils.ModelerURIConverter;
-import org.topcased.modeler.utils.ResourceUtils;
 
 import fr.irisa.triskell.kermeta.graphicaleditor.StructurePlugin;
 import fr.irisa.triskell.kermeta.graphicaleditor.actions.StructureKm2KmtAction;
@@ -43,9 +17,6 @@ import fr.irisa.triskell.kermeta.graphicaleditor.actions.StructureValidateAction
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructureCreationUtils;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructureEditPartFactory;
 import fr.irisa.triskell.kermeta.graphicaleditor.diagram.StructurePaletteManager;
-import fr.irisa.triskell.kermeta.graphicaleditor.diagram.utils.KermetaUtils;
-import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.texteditor.editors.EditorConfiguration;
 
 /**
  * Generated Model editor
@@ -62,14 +33,14 @@ public class StructureEditor extends Modeler {
 	private StructureCreationUtils creationUtils;
 
 	protected SourceViewerConfiguration configuration;
-	
+
 	/**
 	 * 
 	 */
 	public StructureEditor() {
 		super();
 	}
-	
+
 	/**
 	 * @see org.topcased.modeler.editor.Modeler#getAdapterFactories()
 	 * <!-- begin-user-doc -->
@@ -143,26 +114,26 @@ public class StructureEditor extends Modeler {
 		registry.registerAction(action);
 	}
 
-    /**
-     * Method and javadoc copied from Modeler class, and adapted because of some special stuff in kermeta model :
-     * 
-     *   - the contained types
-     *   - the tags
-     *   
-     * Effective save action : <br>
-     * <ol>
-     * <li> Save the models in temporary files
-     * <li> Read the saved model
-     * <li> Save the models in the right files
-     * </ol>
-     * If one of these tasks fails, the save is cancelled and a message is send
-     * to the user.
-     * 
-     * @see org.topcased.modeler.editor.Modeler#doSave(org.eclipse.core.runtime.IProgressMonitor)
-     * @see org.eclipse.ui.ISaveablePart#doSave(org.eclipse.core.runtime.IProgressMonitor)
-     */
-    /*public void doSave(IProgressMonitor monitor)
-    {
-    }*/
-	
+	/**
+	 * Method and javadoc copied from Modeler class, and adapted because of some special stuff in kermeta model :
+	 * 
+	 *   - the contained types
+	 *   - the tags
+	 *   
+	 * Effective save action : <br>
+	 * <ol>
+	 * <li> Save the models in temporary files
+	 * <li> Read the saved model
+	 * <li> Save the models in the right files
+	 * </ol>
+	 * If one of these tasks fails, the save is cancelled and a message is send
+	 * to the user.
+	 * 
+	 * @see org.topcased.modeler.editor.Modeler#doSave(org.eclipse.core.runtime.IProgressMonitor)
+	 * @see org.eclipse.ui.ISaveablePart#doSave(org.eclipse.core.runtime.IProgressMonitor)
+	 */
+	/*public void doSave(IProgressMonitor monitor)
+	 {
+	 }*/
+
 }

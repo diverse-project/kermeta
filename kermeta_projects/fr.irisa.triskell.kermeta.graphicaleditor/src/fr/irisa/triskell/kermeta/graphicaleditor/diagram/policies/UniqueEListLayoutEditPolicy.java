@@ -1,4 +1,4 @@
-/* $Id: UniqueEListLayoutEditPolicy.java,v 1.2 2006-04-18 13:38:07 zdrey Exp $
+/* $Id: UniqueEListLayoutEditPolicy.java,v 1.3 2006-06-02 09:02:50 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : UniqueEListLayoutEditPolicy.java
  * License    : EPL
@@ -141,7 +141,7 @@ public class UniqueEListLayoutEditPolicy extends EListLayoutEditPolicy {
                     if (isValid(childEObject, parentEObject))
                     {
                         // create the command associated with these parameters
-                        command.add(new CreateGraphNodeCommand(domain, childGraphNode, parentGraphNode, new Point(),
+                        command.add(new ExtendedCreateGraphNodeCommand(domain, childGraphNode, parentGraphNode, new Point(),
                                 new Dimension(), referencesList, false));
                     }
                 }

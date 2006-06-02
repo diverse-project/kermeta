@@ -1,4 +1,4 @@
-/* $Id: EditorTextHover.java,v 1.1 2006-04-05 19:00:14 zdrey Exp $
+/* $Id: EditorTextHover.java,v 1.2 2006-06-02 09:02:25 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : EditorTextHover.java
  * License    : EPL
@@ -14,8 +14,6 @@ package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
@@ -25,23 +23,11 @@ import org.eclipse.jface.text.ITextHoverExtension;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.texteditor.MarkerUtilities;
 
-import fr.irisa.triskell.kermeta.ast.CompUnit;
-import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
-import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
-import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
-import fr.irisa.triskell.kermeta.texteditor.editors.Editor;
-import fr.irisa.triskell.kermeta.texteditor.editors.EditorReconcilingStrategy;
-import fr.irisa.triskell.kermeta.texteditor.editors.KermetaEditorEventListener;
 import fr.irisa.triskell.kermeta.texteditor.editors.KermetaInformationControl;
-import fr.irisa.triskell.kermeta.typechecker.SimpleType;
-import fr.irisa.triskell.kermeta.typechecker.Type;
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 public class EditorTextHover implements ITextHover, ITextHoverExtension, IInformationControlCreator {
 

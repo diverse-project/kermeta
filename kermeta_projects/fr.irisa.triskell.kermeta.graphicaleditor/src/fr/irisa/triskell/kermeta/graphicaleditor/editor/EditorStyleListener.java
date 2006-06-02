@@ -1,4 +1,4 @@
-/* $Id: EditorStyleListener.java,v 1.1 2006-04-05 19:00:14 zdrey Exp $
+/* $Id: EditorStyleListener.java,v 1.2 2006-06-02 09:02:25 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : EditorStyleListener.java
  * License    : EPL
@@ -11,10 +11,14 @@
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.editor;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.*;
+import org.eclipse.swt.custom.LineStyleEvent;
+import org.eclipse.swt.custom.LineStyleListener;
+import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
 

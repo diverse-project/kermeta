@@ -1,4 +1,4 @@
-/* $Id: RemovableUncontainedElementEditPolicy.java,v 1.1 2006-04-05 18:58:53 zdrey Exp $
+/* $Id: RemovableUncontainedElementEditPolicy.java,v 1.2 2006-06-02 09:02:50 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : RemovableUncontainedElementEditPolicy.java
  * License    : EPL
@@ -11,9 +11,6 @@
  */
 package fr.irisa.triskell.kermeta.graphicaleditor.diagram.policies;
 
-import org.eclipse.gef.EditPart;
-import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.editpolicies.ComponentEditPolicy;
