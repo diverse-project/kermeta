@@ -91,7 +91,7 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 				factory, StructureImageRegistry.getImageDescriptor("PACKAGE"),
 				null, 70, 50, 70, 50);
 		entries.add(objectTool);
-		newObjTxt = "Class";
+		newObjTxt = "ClassDefinition";
 		factory = new GraphElementCreationFactory(creationUtils,
 				StructurePackage.eINSTANCE.getClassDefinition());
 		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
