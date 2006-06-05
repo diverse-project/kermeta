@@ -5,6 +5,7 @@ package fr.irisa.triskell.kermeta.ecore.wrapper;
 import org.eclipse.emf.ecore.EObject;
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 import fr.irisa.triskell.kermeta.runtime.loader.emf.Runtime2EMF;
 
 public class EObjectWrapper {
@@ -19,7 +20,7 @@ public class EObjectWrapper {
 		// runtime2emf parameter is not useful for our purpose here.
 		// but this is quite dirty so perhaps we should later move some helper
 		// methods from runtime2emf to another "sharing" class?
-		Runtime2EMF runtime2emf = new Runtime2EMF(null);
+		Runtime2EMF runtime2emf = new Runtime2EMF(null, null);
 		EObject eObject = (EObject)runtime2emf.getOrCreateObjectFromRuntimeObject(self, null);
 		RuntimeObject result = EcoreWrapper.setRuntimeObjectForEObject(eObject.eClass(), self.getFactory().getMemory());
 		//RuntimeObject result = EcoreWrapper.findRuntimeObjectForEObject(eObject, self.getFactory().getMemory());
