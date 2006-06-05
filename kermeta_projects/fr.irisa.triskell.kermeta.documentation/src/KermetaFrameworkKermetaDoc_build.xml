@@ -1,0 +1,50 @@
+<project name="KermetaFramework" default="all">
+	<!-- configuration properties -->
+	
+	<!-- project configuration -->
+	<property name="project.base.dir" location=".."/>
+	<property name="project.name" value="KermetaFramework"/>
+	<property name="build.dir" location="${project.base.dir}/build"/>
+	<!--<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\triskell\\softwares\\kermeta\\docs"/>-->
+	<property name="deployment.dest" location="\\\\jersey\\triskell\\www\\kermeta.org\\docs"/>
+	
+	<target name="all" depends="compile,kdoc">
+	</target>
+	
+	<target name="compile">
+		<javac srcdir="java"
+			 destdir="${build.dir}/class"
+			classpath="../../fr.irisa.triskell.kermeta/lib/io_kermeta.jar;
+			        	../../fr.irisa.triskell.kermeta/lib/model_kermeta.jar;
+						../../fr.irisa.triskell.kermeta.documentation/lib/org.eclipse.emf.common_2.1.0.jar;
+			        	../../fr.irisa.triskell.kermeta.documentation/lib/org.eclipse.emf.ecore_2.1.0.jar;
+			        	../../fr.irisa.triskell.kermeta.documentation/lib/org.eclipse.emf.ecore.xmi_2.1.0.jar;
+						../../fr.irisa.triskell.kermeta/lib/thirdparty/log4j.jar" 
+			>
+		</javac>
+	</target>
+	
+	<target name="kdoc">
+		<property name="KermetaFramework.output" value="${build.dir}/html/KermetaFramework/"/>
+		<mkdir dir="${KermetaFramework.output}"/>
+        <java
+        	classpath="
+        	../lib/xercesImpl.jar;
+        	../../fr.irisa.triskell.kermeta/lib/io_kermeta.jar;
+        	../../fr.irisa.triskell.kermeta/lib/model_kermeta.jar;
+        	../../fr.irisa.triskell.kermeta.documentation/lib/org.eclipse.emf.common_2.1.0.jar;
+        	../../fr.irisa.triskell.kermeta.documentation/lib/org.eclipse.emf.ecore_2.1.0.jar;
+        	../../fr.irisa.triskell.kermeta.documentation/lib/org.eclipse.emf.ecore.xmi_2.1.0.jar;
+			../../fr.irisa.triskell.kermeta/lib/thirdparty/log4j.jar;
+        	../build/class/" 
+        	classname="fr.irisa.triskell.kermeta.docutils.KM2HTMLMain"
+        	>
+        	<arg value="${KermetaFramework.output}" />
+		</java>
+       	<copy todir="${KermetaFramework.output}" >
+       		<fileset file="../src/html/screen.css"></fileset>
+		</copy>
+    </target>
+
+	
+</project>
