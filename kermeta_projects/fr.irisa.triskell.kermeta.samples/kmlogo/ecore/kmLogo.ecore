@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kmLogo" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.kmt" nsPrefix="kmLogo">
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="kmLogo" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/ecore/kmLogo.ecore" nsPrefix="kmLogo">
   <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="java.lang.Integer"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="java.lang.Boolean"/>
   <eClassifiers xsi:type="ecore:EDataType" name="String" instanceClassName="java.lang.String"/>
-  <eSubpackages name="semanticDomain" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.kmt#//semanticDomain" nsPrefix="semanticDomain">
+  <eSubpackages name="semanticDomain" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/ecore/kmLogo.ecore#//semanticDomain" nsPrefix="semanticDomain">
     <eClassifiers xsi:type="ecore:EClass" name="Turtle">
       <eOperations name="reset" ordered="false" upperBound="0">
         <eAnnotations source="kermeta">
@@ -68,7 +68,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="destination" lowerBound="1" eType="//semanticDomain/Point"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="abstractSyntax" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.kmt#//abstractSyntax" nsPrefix="abstractSyntax">
+  <eSubpackages name="abstractSyntax" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/ecore/kmLogo.ecore#//abstractSyntax" nsPrefix="abstractSyntax">
     <eClassifiers xsi:type="ecore:EClass" name="Instruction">
       <eOperations name="traverse" ordered="false" upperBound="0">
         <eAnnotations source="kermeta">
@@ -170,8 +170,8 @@
         <eParameters name="v" eType="//actions/AbstractVisitor"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="//String"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="//abstractSyntax/Expression"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1" eType="//abstractSyntax/Expression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="lhs" lowerBound="1" eType="//abstractSyntax/Expression" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="rhs" lowerBound="1" eType="//abstractSyntax/Expression" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Constant" eSuperTypes="//abstractSyntax/Expression">
       <eOperations name="traverse" ordered="false" upperBound="0">
@@ -195,7 +195,7 @@
         </eAnnotations>
         <eParameters name="v" eType="//actions/AbstractVisitor"/>
       </eOperations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="actualArgs" upperBound="-1" eType="//abstractSyntax/Expression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="actualArgs" upperBound="-1" eType="//abstractSyntax/Expression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" lowerBound="1" eType="//abstractSyntax/ProcDeclaration" eOpposite="//abstractSyntax/ProcDeclaration/procCall"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ProcDeclaration" eSuperTypes="//abstractSyntax/Instruction">
@@ -240,7 +240,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="elsePart" eType="//abstractSyntax/Block" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ControlStructure" eSuperTypes="//abstractSyntax/Instruction">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="//abstractSyntax/Expression"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="//abstractSyntax/Expression" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Repeat" eSuperTypes="//abstractSyntax/ControlStructure">
       <eOperations name="traverse" ordered="false" upperBound="0">
@@ -279,7 +279,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//String"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="actions" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/kermeta/kmLogo.kmt#//actions" nsPrefix="actions">
+  <eSubpackages name="actions" nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples/kmlogo/ecore/kmLogo.ecore#//actions" nsPrefix="actions">
     <eClassifiers xsi:type="ecore:EClass" name="AbstractVisitor">
       <eOperations name="visitBack" ordered="false" upperBound="0">
         <eAnnotations source="kermeta">
@@ -530,10 +530,7 @@
         <eParameters name="node" eType="//abstractSyntax/Variable"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="turtle" eType="//semanticDomain/Turtle"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="stack" containment="true">
-        <eType xsi:type="ecore:EClass" href="null/framework.ecore#//utils/Stack"/>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="accumulator" eType="//Integer"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="accumulator" eType="//Integer"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrettyPrinter" eSuperTypes="//actions/AbstractVisitor">
       <eOperations name="visitBack" ordered="false" upperBound="0">
@@ -690,12 +687,33 @@
       </eOperations>
       <eOperations name="square" eType="//abstractSyntax/Instruction">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;var varwidth : kmLogo::abstractSyntax::Variable init kmLogo::abstractSyntax::Variable.new&#xA;&#x9;varwidth.name := &quot;width&quot;&#xA;&#x9;var forward : kmLogo::abstractSyntax::Forward init kmLogo::abstractSyntax::Forward.new&#xA;&#x9;forward.steps := varwidth&#xA;&#x9;var right : kmLogo::abstractSyntax::Right init kmLogo::abstractSyntax::Right.new&#xA;&#x9;var block : kmLogo::abstractSyntax::Block init kmLogo::abstractSyntax::Block.new&#xA;&#x9;block.instructions.add(forward)&#xA;&#x9;block.instructions.add(right)&#xA;&#x9;var cst4 : kmLogo::abstractSyntax::Constant init kmLogo::abstractSyntax::Constant.new&#xA;&#x9;cst4.myValue := 4&#xA;&#x9;var repeat : kmLogo::abstractSyntax::Repeat init kmLogo::abstractSyntax::Repeat.new&#xA;&#x9;repeat.condition := cst4&#xA;&#x9;repeat.block := block&#xA;&#x9;var squareblock : kmLogo::abstractSyntax::Block init kmLogo::abstractSyntax::Block.new&#xA;&#x9;squareblock.instructions.add(repeat)&#xA;&#x9;var squaredecl : kmLogo::abstractSyntax::ProcDeclaration init kmLogo::abstractSyntax::ProcDeclaration.new&#xA;&#x9;squaredecl.name := &quot;square&quot;&#xA;&#x9;squaredecl.block := squareblock&#xA;&#x9;squaredecl.args.add(varwidth)&#xA;&#x9;var pendown : kmLogo::abstractSyntax::PenDown init kmLogo::abstractSyntax::PenDown.new&#xA;&#x9;var squarecall : kmLogo::abstractSyntax::ProcCall init kmLogo::abstractSyntax::ProcCall.new&#xA;&#x9;var cst10 : kmLogo::abstractSyntax::Constant init kmLogo::abstractSyntax::Constant.new&#xA;&#x9;cst10.myValue := 10&#xA;&#x9;var binexp : kmLogo::abstractSyntax::BinaryExp init kmLogo::abstractSyntax::BinaryExp.new&#xA;&#x9;binexp.operator := &quot;*&quot;&#xA;&#x9;binexp.lhs := cst10&#xA;&#x9;binexp.rhs := cst10&#xA;&#x9;squarecall.declaration := squaredecl&#xA;&#x9;squarecall.actualArgs.add(binexp)&#xA;&#x9;var fullprog : kmLogo::abstractSyntax::Block init kmLogo::abstractSyntax::Block.new&#xA;&#x9;fullprog.instructions.add(squaredecl)&#xA;&#x9;fullprog.instructions.add(pendown)&#xA;&#x9;fullprog.instructions.add(squarecall)&#xA;&#x9;result := fullprog&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;var varwidth : kmLogo::abstractSyntax::Variable init kmLogo::abstractSyntax::Variable.new&#xA;&#x9;varwidth.name := &quot;width&quot;&#xA;&#x9;var forward : kmLogo::abstractSyntax::Forward init kmLogo::abstractSyntax::Forward.new&#xA;&#x9;forward.steps := varwidth&#xA;&#x9;var right : kmLogo::abstractSyntax::Right init kmLogo::abstractSyntax::Right.new&#xA;&#x9;var block : kmLogo::abstractSyntax::Block init kmLogo::abstractSyntax::Block.new&#xA;&#x9;block.instructions.add(forward)&#xA;&#x9;block.instructions.add(right)&#xA;&#x9;var cst4 : kmLogo::abstractSyntax::Constant init kmLogo::abstractSyntax::Constant.new&#xA;&#x9;cst4.myValue := 4&#xA;&#x9;var repeat : kmLogo::abstractSyntax::Repeat init kmLogo::abstractSyntax::Repeat.new&#xA;&#x9;repeat.condition := cst4&#xA;&#x9;repeat.block := block&#xA;&#x9;var squareblock : kmLogo::abstractSyntax::Block init kmLogo::abstractSyntax::Block.new&#xA;&#x9;squareblock.instructions.add(repeat)&#xA;&#x9;var squaredecl : kmLogo::abstractSyntax::ProcDeclaration init kmLogo::abstractSyntax::ProcDeclaration.new&#xA;&#x9;squaredecl.name := &quot;square&quot;&#xA;&#x9;squaredecl.block := squareblock&#xA;&#x9;squaredecl.args.add(varwidth)&#xA;&#x9;var pendown : kmLogo::abstractSyntax::PenDown init kmLogo::abstractSyntax::PenDown.new&#xA;&#x9;var squarecall : kmLogo::abstractSyntax::ProcCall init kmLogo::abstractSyntax::ProcCall.new&#xA;&#x9;var cst10a : kmLogo::abstractSyntax::Constant init kmLogo::abstractSyntax::Constant.new&#xA;&#x9;cst10a.myValue := 10&#xA;&#x9;var cst10b : kmLogo::abstractSyntax::Constant init kmLogo::abstractSyntax::Constant.new&#xA;&#x9;cst10b.myValue := 10&#xA;&#x9;var binexp : kmLogo::abstractSyntax::BinaryExp init kmLogo::abstractSyntax::BinaryExp.new&#xA;&#x9;binexp.operator := &quot;*&quot;&#xA;&#x9;binexp.lhs := cst10a&#xA;&#x9;binexp.rhs := cst10b&#xA;&#x9;squarecall.declaration := squaredecl&#xA;&#x9;squarecall.actualArgs.add(binexp)&#xA;&#x9;var fullprog : kmLogo::abstractSyntax::Block init kmLogo::abstractSyntax::Block.new&#xA;&#x9;fullprog.instructions.add(squaredecl)&#xA;&#x9;fullprog.instructions.add(pendown)&#xA;&#x9;fullprog.instructions.add(squarecall)&#xA;&#x9;result := fullprog&#xA;end"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="main" ordered="false" upperBound="0">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;var pp : kmLogo::actions::PrettyPrinter init kmLogo::actions::PrettyPrinter.new&#xA;&#x9;var interp : kmLogo::actions::Interpreter init kmLogo::actions::Interpreter.new&#xA;&#x9;var tortue : kmLogo::semanticDomain::Turtle init kmLogo::semanticDomain::Turtle.new&#xA;&#x9;var root : kmLogo::abstractSyntax::Instruction&#xA;&#x9;tortue.reset&#xA;&#x9;interp.initialize(tortue)&#xA;&#x9;root := self.square&#xA;&#x9;root.traverse(pp)&#xA;&#x9;stdio.writeln(&quot; --- &quot;)&#xA;&#x9;root.traverse(interp)&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="loadSquareProg" eType="//abstractSyntax/Instruction">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;stdio.writeln(&quot;Loading square prog...&quot;)&#xA;&#x9;var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new&#xA;&#x9;repository.getResource(&quot;../models/squareProg.xmi&quot;)&#xA;&#x9;var resource : kermeta::persistence::Resource&#xA;&#x9;resource := repository.createResource(&quot;../models/squareProg.xmi&quot;, &quot;../ecore/kmLogo.ecore&quot;)&#xA;&#x9;resource.load&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;alias Object : kermeta::language::structure::Object;> init resource.instances.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;var next : alias Object : kermeta::language::structure::Object; init it.next&#xA;&#x9;&#x9;&#x9;if kmLogo::abstractSyntax::Instruction.isInstance(next) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result ?= next&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#x9;end&#xA;&#x9;stdio.writeln(&quot;Square prog loaded&quot;)&#xA;end"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="saveSquareProg" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var root : kmLogo::abstractSyntax::Instruction&#xA;&#x9;root := self.square&#xA;&#x9;var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new&#xA;&#x9;var resource : kermeta::persistence::EMFResource&#xA;&#x9;resource ?= repository.createResource(&quot;../models/squareProg.xmi&quot;, &quot;../ecore/kmLogo.ecore&quot;)&#xA;&#x9;resource.instances.add(root)&#xA;&#x9;resource.save&#xA;&#x9;stdio.writeln(&quot;Square prog saved&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/** used to create the same square prog but in xmi format */"/>
+        </eAnnotations>
+      </eOperations>
+      <eOperations name="savePointille" ordered="false" upperBound="0">
+        <eAnnotations source="kermeta">
+          <details key="body" value="do&#xA;&#x9;var root : kmLogo::abstractSyntax::Instruction&#xA;&#x9;root := self.pointille&#xA;&#x9;var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new&#xA;&#x9;var resource : kermeta::persistence::EMFResource&#xA;&#x9;resource ?= repository.createResource(&quot;../models/pointilleProg.xmi&quot;, &quot;../ecore/kmLogo.ecore&quot;)&#xA;&#x9;resource.instances.add(root)&#xA;&#x9;resource.save&#xA;&#x9;stdio.writeln(&quot;Pointille prog saved&quot;)&#xA;end"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/** used to create the same square prog but in xmi format */"/>
         </eAnnotations>
       </eOperations>
     </eClassifiers>

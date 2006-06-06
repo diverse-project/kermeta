@@ -1,4 +1,4 @@
-/* $Id: kmLogo.kmt,v 1.4 2006-01-11 15:59:11 dvojtise Exp $
+/* $Id: kmLogo.kmt,v 1.5 2006-06-06 14:40:13 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.samples
  * File       : kmLogo.kmt
  * License    : EPL
@@ -18,6 +18,7 @@ package kmLogo;
 require kermeta
 using kermeta::standard
 using kermeta::utils
+using kermeta::persistence
 
 package semanticDomain
 {
@@ -157,9 +158,9 @@ package abstractSyntax
 	class BinaryExp inherits Expression
 	{
 		attribute operator : String
-		reference lhs : Expression[1..1]
-		reference rhs : Expression[1..1]
-		method traverse(v : actions::AbstractVisitor) : kermeta::standard::~Void is do
+		attribute lhs : Expression[1..1]
+		attribute rhs : Expression[1..1]
+		method traverse(v : actions::AbstractVisitor) is do
 			//TODO: implement method traverse
 			v.visitBinaryExp(self)
 		end
@@ -167,16 +168,16 @@ package abstractSyntax
 	class Constant inherits Expression
 	{
 		attribute myValue : Integer
-		method traverse(v : actions::AbstractVisitor) : kermeta::standard::~Void is do
+		method traverse(v : actions::AbstractVisitor)  is do
 			//TODO: implement method traverse
 			v.visitConstant(self)
 		end
 	}
 	class ProcCall inherits Instruction
 	{
-		reference actualArgs : Expression[0..*]
+		attribute actualArgs : Expression[0..*]
 		reference declaration : ProcDeclaration[1..1]#procCall
-		method traverse(v : actions::AbstractVisitor) : kermeta::standard::~Void is do
+		method traverse(v : actions::AbstractVisitor)  is do
 			//TODO: implement method traverse
 			v.visitProcCall(self)
 		end
@@ -187,7 +188,7 @@ package abstractSyntax
 		attribute args : Variable[0..*]
 		attribute block : Block#procDeclaration
 		reference procCall : ProcCall[0..*]#declaration
-		method traverse(v : actions::AbstractVisitor) : kermeta::standard::~Void is do
+		method traverse(v : actions::AbstractVisitor)  is do
 			//TODO: implement method traverse
 			v.visitProcDeclaration(self)
 		end
@@ -196,7 +197,7 @@ package abstractSyntax
 	{
 		attribute instructions : Instruction[0..*]#enclosingBlock
 		reference procDeclaration : ProcDeclaration[1..1]#block
-		method traverse(v : actions::AbstractVisitor) : kermeta::standard::~Void is do
+		method traverse(v : actions::AbstractVisitor)  is do
 			//TODO: implement method traverse
 			v.visitBlock(self)
 		end
@@ -205,19 +206,19 @@ package abstractSyntax
 	{
 		attribute thenPart : Block[1..1]
 		attribute elsePart : Block
-		method traverse(v : actions::AbstractVisitor) : kermeta::standard::~Void is do
+		method traverse(v : actions::AbstractVisitor) is do
 			//TODO: implement method traverse
 			v.visitIf(self)
 		end
 	}
 	abstract class ControlStructure inherits Instruction
 	{
-		reference condition : Expression
+		attribute condition : Expression
 	}
 	class Repeat inherits ControlStructure
 	{
 		attribute block : Block[1..1]
-		method traverse(v : actions::AbstractVisitor) : kermeta::standard::~Void is do
+		method traverse(v : actions::AbstractVisitor) is do
 			//TODO: implement method traverse
 			v.visitRepeat(self)
 		end
@@ -225,7 +226,7 @@ package abstractSyntax
 	class While inherits ControlStructure
 	{
 		attribute block : Block[1..1]
-		method traverse(v : actions::AbstractVisitor) : kermeta::standard::~Void is do
+		method traverse(v : actions::AbstractVisitor) is do
 			//TODO: implement method traverse
 			v.visitWhile(self)
 		end
@@ -233,7 +234,7 @@ package abstractSyntax
 	class Variable inherits Expression
 	{
 		attribute name : String
-		method traverse(v : actions::AbstractVisitor) : kermeta::standard::~Void is do
+		method traverse(v : actions::AbstractVisitor)  is do
 			//TODO: implement method traverse
 			v.visitVariable(self)
 		end
@@ -266,7 +267,7 @@ package actions
 	{
 		reference turtle : semanticDomain::Turtle
 		attribute stack : Stack<Bindings>
-		reference accumulator : Integer
+		attribute accumulator : Integer
 		operation initialize (t : semanticDomain::Turtle) is do
 			turtle := t
 			stack := Stack<Bindings>.new()
@@ -494,12 +495,14 @@ package actions
 			squaredecl.args.add(varwidth)
 			var pendown : abstractSyntax::PenDown init abstractSyntax::PenDown.new()
 			var squarecall : abstractSyntax::ProcCall init abstractSyntax::ProcCall.new()
-			var cst10 : abstractSyntax::Constant init abstractSyntax::Constant.new()
-			cst10.myValue := 10
+			var cst10a : abstractSyntax::Constant init abstractSyntax::Constant.new()
+			cst10a.myValue := 10
+			var cst10b : abstractSyntax::Constant init abstractSyntax::Constant.new()
+			cst10b.myValue := 10
 			var binexp : abstractSyntax::BinaryExp init abstractSyntax::BinaryExp.new()
 			binexp.operator := "*"
-			binexp.lhs := cst10
-			binexp.rhs := cst10
+			binexp.lhs := cst10a
+			binexp.rhs := cst10b
 			squarecall.declaration := squaredecl
 			squarecall.actualArgs.add(binexp)
 			var fullprog : abstractSyntax::Block init abstractSyntax::Block.new()
@@ -528,6 +531,63 @@ package actions
 			// run interpretor
 			stdio.writeln(" --- ")
 			root.traverse(interp) 
+		end
+		
+		operation loadSquareProg(): abstractSyntax::Instruction is do
+	 	   stdio.writeln("Loading square prog...")
+		   var repository : EMFRepository init EMFRepository.new
+	   	   // var resource : Resource init  repository.getResource("../models/squareProg.xmi")
+	   	   //var resource : Resource
+		   //resource :=	repository.createResource("../models/squareProg.xmi",
+           //                                         "../ecore/kmLogo.ecore")
+           var resource : EMFResource
+           resource ?= repository.getResource("../models/squareProg.xmi")
+	       resource.load()
+
+	       from var it : Iterator<Object> init resource.instances.iterator
+	       until it.isOff
+	       loop
+	           var next : Object init it.next
+	           if (abstractSyntax::Instruction.isInstance(next)) then
+	           		result ?= next
+	           end
+	       end
+
+	 		stdio.writeln("Square prog loaded")
+		end
+		
+		/** used to create the same square prog but in xmi format */
+		operation saveSquareProg() is do
+			var root : abstractSyntax::Instruction
+			root := square()
+
+			var repository : EMFRepository init EMFRepository.new
+        	var resource : EMFResource
+			resource ?=	repository.createResource("../models/squareProg.xmi",
+        							  "../ecore/kmLogo.ecore")
+	 		// Define a Root ...
+	 		resource.instances.add(root)
+
+	 		resource.save()
+	 		stdio.writeln("Square prog saved")
+
+		end
+		/** used to create the same square prog but in xmi format */
+		operation savePointille() is do
+			var root : abstractSyntax::Instruction
+			root := pointille()
+			//root := square()
+
+			var repository : EMFRepository init EMFRepository.new
+        	var resource : EMFResource
+			resource ?=	repository.createResource("../models/pointilleProg.xmi",
+        							  "../ecore/kmLogo.ecore")
+	 		// Define a Root ...
+	 		resource.instances.add(root)
+
+	 		resource.save()
+	 		stdio.writeln("Pointille prog saved")
+
 		end
 	}
 }
