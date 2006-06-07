@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.29 2006-05-23 13:35:37 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.30 2006-06-07 16:42:01 zdrey Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -32,6 +32,7 @@ import fr.irisa.triskell.kermeta.language.behavior.BooleanLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.CallFeature;
 import fr.irisa.triskell.kermeta.language.behavior.CallResult;
 import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
+import fr.irisa.triskell.kermeta.language.behavior.CallValue;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.behavior.Conditional;
 import fr.irisa.triskell.kermeta.language.behavior.IntegerLiteral;
@@ -55,6 +56,7 @@ import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -64,6 +66,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.TypedElement;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -82,6 +85,8 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	protected ArrayList imports = new ArrayList();
 	protected String root_pname;
 	protected String current_pname;
+	
+	protected NamedElement parent_node;
 	
 	/** If the visitor (i.e This printer:)) is currently visiting a typedefinition, this
 	 *  boolean is set to true (this allows the visitor to print differently some things
@@ -198,9 +203,8 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		String result = "";
 		Iterator it = expressions.iterator();
 		while(it.hasNext()) {
-		    
-			result += getPrefix() + this.accept((EObject)it.next()) + "\n";
-			
+		    EObject next = (EObject)it.next();
+			result += getPrefix() + this.accept(next) + "\n";
 		}
 		return result;
 	}
@@ -300,6 +304,8 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
 	public Object visitClassDefinition(ClassDefinition node) {
+		parent_node = node;
+
 		typedef = false;
 		String result = "";
 
@@ -333,6 +339,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
 	public Object visitPrimitiveType(PrimitiveType node) {
+		parent_node = node;
 		if (typedef == true) {
 			typedef = false;
 			String result = "alias " + node.getName() + " : " + this.accept(node.getInstanceType()) + ";";
@@ -506,6 +513,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visitOperation(Operation node) {
+		parent_node = node;
 		String result = ppTags(node.getTag());
 		if (node.getSuperOperation() != null) result += "method ";
 		else result += "operation ";
@@ -517,9 +525,12 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		result += "(";
 		result += ppComaSeparatedNodes(node.getOwnedParameter());
-		result += ")";
+		result += ")"; 
 		if(node.getType() != null) {
 			result += " : " + ppTypeFromMultiplicityElement(node);
+		}
+		else {
+			result += " : kermeta::standard::~Void" ;
 		}
 	
 		if (node.getSuperOperation() != null) {
@@ -555,6 +566,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Parameter)
 	 */
 	public Object visitParameter(Parameter node) {
+		parent_node = node;
 		return KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
 	}
 	
@@ -582,7 +594,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
 	public Object visitPackage(Package node) {
-	    
+	    parent_node = node;
 		String result = ppTags(node.getTag());
 		result += "package " + KMTHelper.getMangledIdentifier(node.getName()) + "\n";
 		result += getPrefix() + "{\n";
@@ -610,6 +622,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
 	public Object visitProperty(Property node) {
+		parent_node = node;
 	    String result = ppTags(node.getTag());
 		if (node.isIsDerived()) result += "property ";
 		else if (node.isIsComposite()) result += "attribute ";
@@ -622,23 +635,13 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			result += "\n" + getPrefix() + "getter is " ;
 			if (node.getGetterBody() != null) result += this.accept(node.getGetterBody());
 			else {
-				result += "do\n";
-				pushPrefix();
-				result += getPrefix() + "//TODO: implement getter for derived property " + node.getName() + "\n"; 
-				result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
-				popPrefix();
-				result += getPrefix() + "end";
+				result += getEmptyDerivedPropertyBody(node, "getter");
 			}
 			if (! node.isIsReadOnly()) {
 				result += "\n" + getPrefix() + "setter is ";
 				if (node.getSetterBody() != null) result += this.accept(node.getSetterBody());
 				else {
-					result += "do\n";
-					pushPrefix();
-					result += getPrefix() + "//TODO: implement setter for derived property " + node.getName() + "\n"; 
-					result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
-					popPrefix();
-					result += getPrefix() + "end";
+					result += getEmptyDerivedPropertyBody(node, "getter");
 				}
 			}
 			popPrefix();
@@ -646,6 +649,16 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		return result;
 	}
 	
+	protected String getEmptyDerivedPropertyBody(Property node, String body_type) {
+		String result = "do\n";
+		pushPrefix();
+		result += getPrefix() + "//TODO: implement "+ body_type + " for derived property " + node.getName() + "\n"; 
+		result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
+		popPrefix();
+		result += getPrefix() + "end";
+		return result;
+	}
+
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Raise)
 	 */
@@ -730,12 +743,14 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	
-	/**
-	 * @see kermeta.visitor.KermetaVisitor#visit(kermeta.behavior.CallResult)
+	/** @see kermeta.visitor.KermetaVisitor#visit(kermeta.behavior.CallResult) */
+	public Object visitCallResult(CallResult node) { return "result"; }
+	
+	/** 
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitCallValue(fr.irisa.triskell.kermeta.language.behavior.CallValue)
 	 */
-	public Object visitCallResult(CallResult node) {
-		return "result";
-	}
+	public Object visitCallValue(CallValue node) { return "value"; }
+
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.CallVariable)
 	 */
