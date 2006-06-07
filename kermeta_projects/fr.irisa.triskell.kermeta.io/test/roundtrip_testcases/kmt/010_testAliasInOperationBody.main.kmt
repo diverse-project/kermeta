@@ -1,11 +1,9 @@
 package testAliasInOperationBody;
 
-require kermeta
-using kermeta::standard
 alias AliasB : B;
 abstract class A
 {
-	operation accept(paramb : B)  is
+	operation accept(paramb : B) is
 	do
 		var varb : B init paramb
 	end

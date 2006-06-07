@@ -1,20 +1,22 @@
-@mainClass "root_package::Main"
-@mainOperation "main"
-
-
 package testPropertyConversion;
 
-require kermeta
-require "011b_testStringConversionInEcore.kmt"
+require "../km/framework.main.km"
+require "./011b_testStringConversionInEcore.kmt"
 
-/** This class is used to test the conversion of KMT 2 Ecore 
+/* This class is used to test the conversion of KMT 2 Ecore 
  *  Notice : when we declare "using kermeta::language::structure", the alias String is used, instead of the real
  *  Class String. This leads to a wrong Ecore conversion
  */
 class TestProperty
 {
 	reference testStringMain : testString::Main
-    operation main(a : kermeta::interpreter::DynamicExpression) : Void is do 
+}
+
+class TestPropertyAndOperation
+{
+	reference testStringMain : testString::Main
+
+    operation main(a : kermeta::interpreter::DynamicExpression) is do 
 		var b :  kermeta::interpreter::DynamicExpression
 		b := a
 		var testDependency : testString::Main init testString::Main.new

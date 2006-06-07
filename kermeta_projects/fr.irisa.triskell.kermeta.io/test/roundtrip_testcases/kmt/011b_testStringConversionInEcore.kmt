@@ -1,4 +1,4 @@
-@mainClass "root_package::Main"
+@mainClass "testString::Main"
 @mainOperation "main"
 
 
@@ -13,21 +13,5 @@ require kermeta
  */
 class Main
 {
-	/** Test the use of the String class */
-    operation main(a : kermeta::standard::String) : Void is do 
-		var b : kermeta::standard::String
-		b := a
-    end
-    
-    /** Test the use of the String primitive type (kermeta::language::structure::String) */
-    operation testStringAsPrimitiveType(a : kermeta::language::structure::String) : Void is do
-    	var b : kermeta::language::structure::String
-    	b := a
-    end
-    
-    /** Test the use of the String as a class and a primitive type at the same time */
-    operation testStringTwice(a : kermeta::standard::String) : Void is do
-    	var b : kermeta::language::structure::String
-    	b := a
-    end
+
 }

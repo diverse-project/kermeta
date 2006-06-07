@@ -1,0 +1,10 @@
+package aPackage;
+
+require kermeta
+require "/udd/zdrey/Workspaces/KMNewWorkspace/fr.irisa.triskell.kermeta.io/test/roundtrip_testcases/kmt/006_PropertyWithEcoreTypes.mainecore.kmt"
+class A
+{
+	attribute aString : ecore::EString
+	reference BnotContained : ecore::EParameter
+	attribute BContained : ecore::EClass
+}

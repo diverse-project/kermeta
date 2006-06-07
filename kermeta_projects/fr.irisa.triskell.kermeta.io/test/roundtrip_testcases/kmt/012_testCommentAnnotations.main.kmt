@@ -1,0 +1,8 @@
+package testCommentAnnotations;
+
+/** This is an annotation for 'class A' */
+class A
+{
+	/** This is an annotation for 'reference s'*/
+	reference s : kermeta::standard::String
+}
