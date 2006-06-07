@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.4 2006-06-01 16:31:31 zdrey Exp $
+/* $Id: JunitTestSuite.java,v 1.5 2006-06-07 16:40:32 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -20,31 +20,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.ecore.ECore2Kermeta;
-import fr.irisa.triskell.kermeta.loader.km.KMUnit;
-import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
+import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 
 
 /**
@@ -62,6 +55,19 @@ public class JunitTestSuite extends TestCase {
 		printer = new KM2KMTPrettyPrinter();
 	    // INIT TYPE CHECKER
 	  //  TypeCheckerContext.initializeTypeChecker(KermetaUnit.getStdLib());
+		
+		File file = new File("uri.map");
+		if (file.exists())
+		{
+			// if this file exists, load its content as a uri.map, this map is used by EMF while loading indirect files
+			URIConverterImpl.URI_MAP.putAll(URIMapUtil.readMapFile(file));
+			URI u = URI.createURI(file.getName());
+	    	if (u.isRelative()) {
+	    		URIConverter c = new URIConverterImpl();
+	    		u = u.resolve(c.normalize(URI.createURI(file.getName())));    			
+	    	}
+			System.out.println("Loading URI_MAP from file: " + u.toFileString());
+		}
 		
 	}
 	
@@ -144,6 +150,22 @@ public void testkmt_011_testPropertyConversionInEcore() throws Exception {
 testkmtFile("test/roundtrip_testcases/kmt","011_testPropertyConversionInEcore.main.kmt" );
 }
 
+public void testkmt_framework() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","framework.main.km" );
+}
+
+public void testkmt_009_testRequireFramework() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","009_testRequireFramework.main.kmt" );
+}
+
+public void testkmt_006_PropertyWithEcoreTypes() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","006_PropertyWithEcoreTypes.main.kmt" );
+}
+
+public void testkmt_012_testCommentAnnotations() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt" );
+}
+
 public void testkm_rdl() throws Exception {
 testkmFile("test/roundtrip_testcases/km","rdl.main.km" );
 }
@@ -173,11 +195,13 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ecore_input_file);
 		try {
 		builder.load();
-		} catch(Exception e ) {if (!builder.messages.hasError()) throw e;};
+		} catch(Exception e ) {/*if (!builder.messages.hasError())*/ throw e;};
 		
 		if (builder.messages.getAllErrors().size() > 0) {
 			assertTrue(builder.messages.getAllMessagesAsString(), false);
 		}
+		System.err.println("Messages for ecore conv. :" + builder.messages.getAllMessagesAsString());
+		
 		// Enable quick fixer
 		ECore2Kermeta.isQuickFixEnabled = true;
 		
@@ -189,6 +213,7 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 		//output_file = "platform:/resource/fr.irisa.triskell.kermeta.io/"+ output_file;
 		
 		System.out.println("Write kmt output : "+ output_file);
+		//printer.ppPackage(output_file)
 		writeKMTUnit(builder, output_file);
 		System.out.println("output written");
 		
@@ -220,12 +245,12 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 	    // LOAD THE UNIT (this call the KMUnit method loader)
 	    String kmext = kermeta_input_file.substring(kermeta_input_file.lastIndexOf(".")+1);
 	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(kermeta_input_file);
-		try {builder.load();} catch (Exception e) { e.printStackTrace(); throw e; }
+		try {builder.load();} catch (Exception e) { throw e; }
 		
 		// Check that there are not internal errors related to KermetaUnit building. 
-		if (builder.messages.getAllErrors().size() > 0) {
+	/*	if (builder.messages.getAllErrors().size() > 0) {
 			assertTrue(builder.messages.getAllMessagesAsString(), false);
-		}
+		}*/
 		
 		String ecore_output_file = dir + "/output/" + input_file.replaceAll("\\."+ kmext, ".ecore");
 		// Save the generated ecore from the kmt
@@ -240,7 +265,6 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 		// Load the EcoreUnit from output_file
 		KermetaUnitFactory.getDefaultLoader().unloadAll();
 		builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ecore_output_file);
-		
 		try {builder.load();} catch (Exception e) { e.printStackTrace(); throw e;}
 		
 		assert (km_ext.equals("km")||km_ext.equals("kmt"));
@@ -289,7 +313,7 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 	        Package p = (Package)it.next();
 	        KermetaUnit.fixTypeContainement(p);
 	        // We don't want to add framework.km elements.
-	        if (!p.eResource().getURI().toString().endsWith("framework.km") )
+	        if (p.eResource()==null || !p.eResource().getURI().toString().endsWith("framework.km") )
 	        {
 	        	resource.getContents().add(p);
 			    resource_tags = KermetaUnit.fixPackageTags(p, resource_tags);
@@ -308,36 +332,37 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 	 * @param ifile
 	 * @throws Exception
 	 */
-	public void writeKMTUnit(KermetaUnit builder, String file) throws Exception  {
+	public String writeKMTUnit(KermetaUnit builder, String file) throws Exception  {
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		
 		BufferedWriter w = new BufferedWriter(new FileWriter(new File(file)));
 		String pkg_name = "package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n";
 		System.out.println("PACKAGE\n\n\n\n" + pkg_name);
 		w.write("package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n");
-	
+		//w.write("require kermeta\n");
 		/* imported units needed to recognize the imported classes...*/
 		Iterator it = builder.importedUnits.iterator();
 		while(it.hasNext()) {
 			KermetaUnit iu = (KermetaUnit)it.next();
-			if (iu.rootPackage != builder.rootPackage) {
-				
-				if (iu instanceof KMTUnit || iu instanceof KMUnit)
-					w.write("require \"" + iu.getUri() + "\"\n");
-				else {
-					String f = file.replace("\\.kmt$", iu.rootPackage.getName() + ".kmt");
+			
+			System.err.println("WRITE KERMETA UNIT : " + iu.getUri());
+			
+			if (iu.rootPackage != builder.rootPackage)
+			// Do this if you don't want to convert the depending units in kmt
+	/*			w.write("require \"" + iu.getUri() + "\"\n");*/
+			// Do this otherwise
+		/*	else */{
+					String f = file.replace(".kmt", iu.rootPackage.getName() + ".kmt");
 					writeKMTUnit(iu, f);
 					w.write("require \"" + f + "\"\n");
-				}
+					
 			}
 		}
-		System.err.println("BOUILDER : " + builder  + "size:"+ builder.rootPackage.eContents().size() + "\n\n ------ \n"
-				+ file);
 		String str_kmt = pp.ppPackage(builder.rootPackage);
-		System.err.println("BOULDOZEUR : " + str_kmt);
 		// Do not write again the package declaration..
 		w.write(str_kmt.substring(pkg_name.length()));
 		w.close();
+		return str_kmt;
 	}
 	
 	/**
@@ -348,11 +373,12 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 	 */
 	public void writeEcore(String input_file, String output_file) throws Exception
 	{   // Looad the EcoreUnit for the given file
+		KermetaUnitFactory.getDefaultLoader().unloadAll();
 	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(input_file);
-		builder.load();
-	/*	if (builder.messages.getAllErrors().size() > 0) {
+		try {builder.load();} catch (Exception e) { throw e;}
+		if (builder.messages.getAllErrors().size() > 0) {
 			assertTrue(builder.messages.getAllMessagesAsString(), false);
-		}*/
+		}
 	    // Create Ecore structure
 	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
@@ -360,8 +386,9 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 	    Resource resource = resource_set.createResource(u);
 	    // KMT2ECORE
 	    KM2Ecore exporter;
-	    exporter = new KM2Ecore(resource, builder);
-	    exporter.setEcoreGenDirectory("./output/dep/");
+	    KermetaUnitFactory.getDefaultLoader().unloadAll();
+	    exporter = new KM2Ecore(resource, builder,output_file.substring(0, output_file.lastIndexOf("/"))+"/dep/",null);
+	    exporter.setEcoreGenDirectory(output_file.substring(0, output_file.lastIndexOf("/"))+"/dep/");
 		exporter.exportPackage(builder.rootPackage);
 	    // Save Ecore structure	
 		try {
@@ -379,55 +406,41 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 	 * @param output_file
 	 * @throws IOException
 	 */
-	public void assertEcoreFilesEquality(String input_file, String output_file) throws IOException
+	public void assertEcoreFilesEquality(String input_file, String output_file) throws Exception
 	{
-	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
-	    ResourceSet resource_set = new ResourceSetImpl();
-	    // Create and load the resources for input and output files
-	    Resource i_resource = createAndLoadResource(resource_set, input_file);
-	    Resource o_resource = createAndLoadResource(resource_set, output_file);
-	    
-	    // Check if each object of input resource exist in output resource
-	    TreeIterator it1 = i_resource.getAllContents();
-	    TreeIterator it2 = o_resource.getAllContents();
-	    int input_size = 0; int output_size = 0;
-	    while (it1.hasNext()) { input_size += 1 ; it1.next(); }
-	    while (it2.hasNext()) { input_size += 1 ; it2.next(); }
-	    assert input_size == output_size;
-	    
-	    TreeIterator it = i_resource.getAllContents();
-	    while (it.hasNext())
-	    {
-	        EObject next = (EObject)it.next();
-	        String frag = EcoreUtil.getURI(next).fragment();
-	        if (o_resource.getEObject(frag)==null) System.err.println("EObject not found in output model:"+ frag);
-	        assertTrue(o_resource.getEObject(EcoreUtil.getURI(next).fragment())!=null);
-	    }
-	    
+	    assertKMFilesEquality(input_file, output_file);
 	}
 	
 	/** Compare each object of input file with each object of output file.
 	 * The comparison is made through the pretty printed representations of 
 	 * input and output , since they are more reliable than testing through the 
 	 * objects URIs.
+	 * TODO : we don't check the equality of the input and output file dependencies.
+	 * So this verification is only partly reliable.
 	 * */
 	public void assertKMFilesEquality(String input_file, String output_file) throws Exception
 	{
-		// Load ifile and ofile kunits
-		KermetaUnit.internalLog.info("KermetaUnit input : " + input_file);
-		KermetaUnit.internalLog.info("KermetaUnit output : " + output_file);
+		// IMPORTANT : do not forget to reinitialize the KermetaUnitFactory before! (done with unloadAll)
+		
 	    // Load and pretty print the input unit
+		KermetaUnitFactory.getDefaultLoader().unloadAll();
 		KermetaUnit i_unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(input_file);
 	    try {i_unit.load();} catch (Exception e) { throw e; }
-	    KermetaUnit.internalLog.info("Input unit root package : " + i_unit.rootPackage);
 	    String i_repr = printer.ppPackage(i_unit.rootPackage);
+	    
 	    // Load and pretty print the output unit
 	    KermetaUnitFactory.getDefaultLoader().unloadAll();
 	    KermetaUnit o_unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(output_file);
-	    o_unit.load();
-	    KermetaUnit.internalLog.info("Output unit root package : " + o_unit.rootPackage);
+	    try{o_unit.load();} catch (Exception e) { throw e; }
+	    //o_unit.saveAsXMIModel(output_file.substring(0, output_file.lastIndexOf("/"))+"/dep/" 
+	    //		+ output_file.substring(output_file.lastIndexOf("/")) +  ".d.km");
 	    String o_repr = printer.ppPackage(o_unit.rootPackage);
+	    System.out.println("INPUT : ");
+	    System.out.println(i_repr);
+	    System.out.println("------------------------ OUTPUT : ------------------ ");
+	    System.out.println(o_repr);
 	    // Check if the 2 pretty printed representations are equals
+	    // This is not totally reliable -> example : see test 001_Simple.main.kmt 
 	    assertTrue(i_repr.equals(o_repr));
 	}
 	
