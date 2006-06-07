@@ -7,7 +7,7 @@ package kermeta::persistence;
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.17 2006-06-01 08:56:37 cfaucher Exp $
+ * $Id: resource.kmt,v 1.18 2006-06-07 13:26:45 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -85,9 +85,15 @@ abstract class Resource
 	 * Overrides the old version.
 	 */
 	operation save() : Void is abstract
+	
+	/** Save a resource in a file referenced by this new uri. 
+	    This allows to save the result of a transformation without changing the original file. */
 	operation saveWithNewURI(new_uri : String) : Void is do end
+	
+	/** Loads a resource. Once loaded, you'll be able to query the resource for its content.  */	
 	operation load() : Void is abstract
-	/** add an instance, return it if success, otherwise return null */
+	/** add an instance, return it if success, otherwise return null
+	    You need to do that for every Object that must be placed in the root of the resource when you'll save it */
 	operation add(instance : Object) : Void is abstract  
 	/** remove the instance, return it if success, otherwise return null */
 	operation remove(instance : Object) : Object is abstract
@@ -111,21 +117,22 @@ class EMFResource inherits Resource
 	 	contentMap.put("allContents", Set<Object>.new)
 	 end
 
-	/** Save a resource in the uri associated to it */
+	/** Save a resource in a file referenced by this new uri. 
+	    This allows to save the result of a transformation without changing the original file. */
 	method saveWithNewURI(new_uri : String) : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			new_uri, metaModelURI, "EMF", instances
 		)
 	end
 	
-	/** Save a resource in the uri given by its 'uri' attribute. */
+	/** Save a resource in a file referenced by the uri associated to the resource */
 	method save() : Void is do
 		extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.save(
 			self.uri, metaModelURI, "EMF", instances
 		)
 	end
 	
-	/** Loads a resource */
+	/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  */
 	method load() : Void is do
 		var e : ResourceLoadException init ResourceLoadException.new
 		contentMap ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Resource.load(
@@ -206,9 +213,12 @@ abstract class Repository
 	 * User must provide the mm_uri if he creates a new model from scratch.
 	 */
 	operation createResource(uri : String, mm_uri : String) : Resource is abstract
+	
 	/**
-	 * Get the resource of model that is stored in the given uri. Silently create
-	 * and load a new one if a resource with this uri was not found.
+	 * Get the resource of model that is stored in the given uri. 
+	 * This suppose that this URI resource was already created in this Repository.
+	 * If this resource wasn't already created it will silently create
+	 * and load a new one. In this case, the 
 	 */
 	operation getResource(uri : String) : Resource is do
 		from var it : Iterator<Resource> init resources.iterator
@@ -224,7 +234,7 @@ abstract class Repository
 		// a serialized model stored at the given URI 
 		// NOT TESTED YET!
 		if result == void then
-			stdio.writeln("Warning : resource + <"+uri+"> does not exist yet. Trying to create one.")
+			//stdio.writeln("Warning : you haven't created a resource for the given uri <"+uri+"> in this Repository. Trying to create one. (you should consider using the createResource method first)")
 			result := self.createResource(uri, "")
 			result.load()
 		end
@@ -237,8 +247,10 @@ abstract class Repository
 class EMFRepository inherits Repository
 {
 	/**
-	 * Create a new empty resource from the model given by its uri, 
+	 * Create a new resource for a model given by its uri, 
 	 * which meta-model is stored in file given by mm_uri
+	 * If file already exists, you'll be able to call the load method to concretly load the model
+	 * otherwise, you can only call the save method
 	 */
 	method createResource(uri : String, mm_uri : String) : Resource is do
 		var new_resource : EMFResource init EMFResource.new
