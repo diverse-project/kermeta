@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.15 2006-06-01 16:29:18 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.16 2006-06-07 16:41:43 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -51,8 +51,8 @@ import fr.irisa.triskell.traceability.helper.Tracer;
 public class KM2Ecore {
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT2Ecore");
-	protected ArrayList usings = new ArrayList();
-	protected ArrayList imports = new ArrayList();
+	final static public String ECORE_NSURI = "http://www.eclipse.org/emf/2002/Ecore"; 
+	
 	protected String root_pname;
 	
 	// The kermeta unit corresponding to the <model> to convert in Ecore format.
@@ -99,6 +99,7 @@ public class KM2Ecore {
     }
 	
     public final static String KMT2ECORE_ANNOTATION = "kermeta";
+    public final static String KMT2ECORE_ANNOTATION_ISCOMPOSITE_DETAILS = "isComposite";
     public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION = "KermetaSuperOperations";
     public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS = "SuperOperation";
     public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION = "KermetaRaisedExceptions";
@@ -122,6 +123,8 @@ public class KM2Ecore {
 		ecoreResource = resource;
 		kermetaUnit   = kunit;
 		messages = new KMUnitMessageManager(kermetaUnit);
+		ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/")+1);
+		System.err.println("UNIT URI : " + ecoreGenDirectory);
 	}
 	
 	public KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit) {
@@ -135,8 +138,12 @@ public class KM2Ecore {
 	 */
 	public KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit, String edir, List<String> elist) {
 		this(resource, traceresource, kunit);
-		ecoreFileList = elist;
+		ecoreFileList = (elist==null)?new ArrayList<String>():elist;
 		ecoreGenDirectory = edir;
+		
+		if (ecoreFileList.size() ==0 && ecoreGenDirectory == null)
+			ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/")+1);
+		System.err.println("UNIT URI : " + ecoreGenDirectory);
 	}
 	
 	/**
@@ -146,6 +153,8 @@ public class KM2Ecore {
 		this(resource, kunit);
 		ecoreGenDirectory = edir + "/";
 		ecoreFileList = (elist==null)?new ArrayList<String>():elist;
+		if (ecoreFileList.size() == 0 && ecoreGenDirectory == null)
+			ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/"));
 	}
 	
 	/**

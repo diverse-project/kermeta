@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.13 2006-06-01 16:29:18 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.14 2006-06-07 16:41:43 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EModelElement;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
@@ -46,14 +47,17 @@ import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypedElement;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
+import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.utils.TextTabs;
 import fr.irisa.triskell.kermeta.utils.URIMapUtil;
@@ -159,7 +163,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 */
 	public Object visitOperation(Operation node) {
 		EOperation newEOperation=null;
-		internalLog.debug(loggerTabs + "Visiting Operation: "+ node.getName());
+		//internalLog.debug(loggerTabs + "Visiting Operation: "+ node.getName());
 		loggerTabs.increment();
 		
 		// search the EOperation from previous pass
@@ -193,6 +197,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			TypeVariable tv = (TypeVariable)it.next();
 			setTypeVariableAnnotation(tv, newEOperation);			
 		}
+		
 		loggerTabs.decrement();
 		return newEOperation;
 	}
@@ -201,14 +206,19 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Parameter)
 	 */
 	public Object visitParameter(Parameter node) {
-		internalLog.debug(loggerTabs + "Visiting Parameter: "+ node.getName());
+		//internalLog.debug(loggerTabs + "Visiting Parameter: "+ node.getName());
 		loggerTabs.increment();
-		
 		// Search the EParameter from previous pass
+		//EParameter newEParameter = (EParameter)kmt2ecoremapping.get(node);
 		EParameter newEParameter = (EParameter)getEObjectForKMObject(node);
 		// TODO If it is not found in kmt2ecoremapping?
-		newEParameter.setEType(	(EClassifier)accept(node.getType()));
-		
+		EClassifier type = (EClassifier)accept(node.getType());
+		if(type == null)
+		{   // Perhaps this type is in another resource?
+			type = resolveETypeForEStructuralFeature(node);
+		}
+		newEParameter.setEType(type);
+		//if (type == null) throw new KM2ECoreConversionException("FUCK");
 		loggerTabs.decrement();
 		return newEParameter;
 	}
@@ -227,7 +237,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			String type_name = KMTHelper.getQualifiedName(node.getTypeDefinition());
 			  
 			if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
-				internalLog.debug(loggerTabs + "Creating DataType: "+ node.getTypeDefinition().getName());
+				//internalLog.debug(loggerTabs + "Creating DataType: "+ node.getTypeDefinition().getName());
 				type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
 				// we need to create a new datatype for it and connect it to the root package
 				newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
@@ -308,13 +318,18 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 */
 	protected EObject getEObjectForQualifiedName(String object_qname, String owning_typedef_qname)
 	{
-		System.err.println("CLE : " + owning_typedef_qname + " - test in : " + ecoreExporter.getKermetaUnit().getUri());
+		// Handle the case of EObject from Ecore metamodel
+		System.err.println(object_qname + "CLE : " + owning_typedef_qname + " - test in : " + ecoreExporter.getKermetaUnit().getUri());
 		String ecoreDir = ecoreExporter.ecoreGenDirectory;
 		if (ecoreDir == null)
 			ecoreDir = ecoreExporter.getKermetaUnit().getUri().substring(0, ecoreExporter.getKermetaUnit().getUri().lastIndexOf("/"));
 		EObject result = null;
 		Resource depResource = null;
-		Iterator<KermetaUnit> allunits_it = ecoreExporter.getKermetaUnit().getAllImportedUnits().iterator();
+		
+		ArrayList<KermetaUnit> allunits = new ArrayList<KermetaUnit>(ecoreExporter.getKermetaUnit().getAllImportedUnits());
+		// Find in framework.km also -> its unit is not in imported units..
+		//allunits.add(KermetaUnit.getStdLib());
+		Iterator<KermetaUnit> allunits_it = allunits.iterator();
 		while (allunits_it.hasNext() && result==null)
 		{
 			KermetaUnit ku = allunits_it.next();
@@ -326,6 +341,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			{	// KermetaUnit type is EcoreUnit, if the underlying loaded resource was an .ecore file  
 				if (ku instanceof EcoreUnit)
 				{
+					// Does the searched type definition belong to??
 					URI u = URI.createURI(ku.getUri());
 					depResource = ecoreResourceSet.getResource(u, true);
 					result = depResource.getEObject("//" + ecore_path);
@@ -338,26 +354,36 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 					String path = ecoreDir; //ecoreResource.getURI().toString();
 					String kmpath = ku.getUri();
 					String savepath = path + "/" + kmpath.substring(kmpath.lastIndexOf("/"), kmpath.lastIndexOf(".km")) + ".ecore";
-					// Create the ecore resource corresponding to kermeta unit on which 
-					if (!savedFiles.containsKey(savepath))
+					
+					// Does the searched type definition belong to Ecore metamodel?
+					if (ku.rootPackage.getName().equals("ecore"))
+					{   // FIXME : is there a better way to get ECORE URI???
+						URI u = URI.createURI(KM2Ecore.ECORE_NSURI);
+						depResource = ecoreResourceSet.getResource(u, true);
+					}
+					// Does the searched type definition belong to??
+				/*	else if (ku.rootPackage.getName().equals("kermeta"))
 					{
-						System.err.println("Add '" + savepath + "' in files to generate!");
-						// Create the ecore resource corresponding to kermeta unit on which 
+						System.out.println("KMFRAM: " );
+						URI u = URI.createURI(ku.getUri());
+						depResource = ecoreResourceSet.getResource(u, true);
+					}*/
+					// Else : create the ecore resource corresponding to kermeta unit on which
+					else if (!savedFiles.containsKey(savepath))
+					{	// Create the ecore resource corresponding to kermeta unit on which 
 						depResource = writeEcore(ku, savepath, true);
 					}
 					else
 					{
-						System.err.println("DONT ADD '" + savepath + "' in files to generate!");
 						depResource = savedFiles.get(savepath);
 						try { depResource.load(null); }
 						catch (IOException e) { e.printStackTrace(); }
 					}
-					
 					result = depResource.getEObject("//"+ ecore_path);
-				}
-				else
-				{
-					System.err.println("HEEEEE");
+				}// "Robustness" test? -> would occur if there was a new KermetaUnit kind
+				else {
+					throw new KM2ECoreConversionException("Handle for this kind of unit is not implemented : " + ku + "; " +
+							"Please send an email to kermeta-developers :}");
 				}
 			}
 		}
@@ -367,91 +393,18 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	
 	/**
 	 * Find the EClassifier of the specified <code>enode</code>
-	 * */
-	protected EClassifier resolveETypeForEStructuralFeature(Property node, EStructuralFeature enode, String ecoreDir)
-	{
-		EClassifier result = null;
-		// Find the unit from which given class come from.
-		List allunits = ecoreExporter.getKermetaUnit().getAllImportedUnits();
-		// The resource where to find the external type -- TODO : store loaded resources.
-		Resource depResource;
-		String type = KMTHelper.getTypeQualifiedName(node.getType());
-		String short_type = type.contains(":")?type.substring(type.indexOf(":")+2):type;
-		EObject etype = null;
-		// We are looking for the type given its qualified name "type", which corresponding
-		// TypeDefinition exists and which qualified would be "type" (since TypeQualifiedName is the
-		// TypeDefinition qualified name provided the type has got a type definition (not the case 
-		// of function types for example...)
-		result = (EClassifier)getEObjectForQualifiedName(type,type);
-		return result;
-	}
-	
-	/**
-	 * Try to find the EClassifier corresponding to the given structure feature.
-	 * The principle is as following : 
-	 * - if the user chose the "Generate all files" option, then all the dependencies for
-	 * the file to convert will be generated in the specified directory
-	 * - if the user unchecked the "Generate all files" options, then he will have to specify 
-	 * manually which dependencies he wants to use. However, if an element was not found in the user dependencies,
-	 * the required dependencies will be generated in the base directory that user first specified in the first wizard
-	 * dialog.
-	 * (Note : this is not a recursive operation)
-	 * @param classDefinition
-	 * @param ecoreDir the directory where to generate the ecore dependencies. If ecoreList is null,
-	 * it must be set, otherwise it must be null.
-	 * @param  ecoreList the list of ecore dependencies that user manually specified. If it is
-	 * set, then ecoreDir must be null.
 	 */
-	protected void resolveETypeForEStructuralFeature(Property node, EStructuralFeature enode, String ecoreDir, List<String> ecoreList) {
-		// robustness test -- may be removed later.
-		EClassifier etype = null;
-		System.err.println("RESOLVE : " + node.getName());
-		//assert(ecoreDir!=null && ecoreList.size()>0);
-		if (ecoreDir != null) etype = resolveETypeForEStructuralFeature(node, enode, ecoreDir);
-		// If ecoreDir is null, and ecoreList as well, generate by default in currentDir!
-		else if (ecoreList==null)
-		{
-			String ecoreDefaultDir = ecoreExporter.getKermetaUnit().getUri().substring(0, ecoreExporter.getKermetaUnit().getUri().lastIndexOf("/"));
-			etype = resolveETypeForEStructuralFeature(node, enode, ecoreDefaultDir);
-		}
-		else if (ecoreList!=null) etype = resolveETypeForEStructuralFeature(node, enode, ecoreList);
-		// If user did not provide neither an dir for generated ecore or a list of existing ecore, 
-		// set an ecore gen dir by default.
-		
-		enode.setEType(etype);
-	}
-	
-	
-	/** 
-	 * Try to find the searched types in the given ecoreList. 
-	**/
-	protected EClassifier resolveETypeForEStructuralFeature(Property node, EStructuralFeature enode, List<String> ecoreList)
+	protected EClassifier resolveETypeForEStructuralFeature(TypedElement node)
 	{
-		// Get the type and short_types
 		String type = KMTHelper.getTypeQualifiedName(node.getType());
-		String short_type = type.contains(":")?type.substring(type.indexOf(":")+2):type;
-		short_type = short_type.replaceAll("::", "/");
-		
-		EClassifier result = null;
-		Resource depResource = null;
-		Iterator<String> it = ecoreList.iterator();
-		while (it.hasNext() && result==null)
-		{
-			String ustr = it.next();
-			// load the corresponding resource
-			URI u = URIMapUtil.resolveURI("/resource/" + ustr, "platform:/");
-			depResource = ecoreResourceSet.getResource(u, true);
-			result = (EClassifier)depResource.getEObject("//" + short_type);
-		}
-		// if we did not find the type in the user defined resources, than, try to generate
-		// the required resources. This is not a recursive call!!
-		if (result == null)
-		{ 
-			result = resolveETypeForEStructuralFeature(node, enode, ecoreResource.getURI().toString());
-		}
+		EClassifier result = (EClassifier)getEObjectForQualifiedName(type,type);
 		return result;
 	}
-	//
+	
+	public EClassifier getEObjectFromEcoreMetamodel(EStructuralFeature enode) {
+		EClassifier etype = enode.getEType();
+		return etype;
+	}
 
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Property)
@@ -484,7 +437,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				getterBody = propertyAccessor(node.getName(), "getter");
 			
 			if (! node.isIsReadOnly()) {
-				if (node.getSetterBody() != null) 
+				if (node.getSetterBody() != null)
 					setterBody = (String)new KM2KMTPrettyPrinter().accept(node.getSetterBody());
 				else
 					setterBody = propertyAccessor(node.getName(), "setter");
@@ -492,17 +445,12 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			setDerivedPropertyAnnotation(node, newEStructuralFeature, getterBody, setterBody);
 		}
 		
-		//newEStructuralFeature.setEType((EClassifier)kmt2ecoremapping.get(node.getFType()));
 		EClassifier type = (EClassifier)accept(node.getType());
-		if(type != null)
-		{
-			newEStructuralFeature.setEType(type);
-		}
-		else
+		if(type == null)	
 		{	// Perhaps this type is in another resource?
-			resolveETypeForEStructuralFeature(node, newEStructuralFeature, ecoreExporter.getEcoreGenDirectory(), ecoreExporter.getEcoreFileList());
+			type = resolveETypeForEStructuralFeature(node);
 		}
-		
+		newEStructuralFeature.setEType(type);
 		loggerTabs.decrement();		
 		return newEStructuralFeature;
 	}
@@ -548,9 +496,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 * @see kermeta.visitor.MetacoreVisitor#visit(PrimitiveType)
 	 */
 	public Object visitPrimitiveType(PrimitiveType node) {
-		internalLog.debug(loggerTabs + "Visiting PrimitiveType: "+ node.getName()+ " "+ KMTHelper.getQualifiedName(node));
-		internalLog.debug(loggerTabs + "                       : "+ node);
-		
+		//internalLog.debug(loggerTabs + "Visiting PrimitiveType: "+ node.getName()+ " : "+ node.getInstanceType());
+		//internalLog.debug(loggerTabs + "                       : "+ node);
 		String type_name = KMTHelper.getQualifiedName(node);
 		EClassifier newEClassifier=null; 
 		newEClassifier = (EClassifier)kmt2ecoremapping.get(node);
@@ -623,31 +570,40 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 *  HELPER METHODS THAT SET THE ANNOTATIONS
 	 * 
 	 */
+	/**
+	 * Set the annotations corresponding to the bodies of a derived property
+	 * Important note : we do not add those annotation in Ecore "generated metamodel"...
+	 */
 	protected void setDerivedPropertyAnnotation(Property node, EStructuralFeature newEStructuralFeature, String getterBody, String setterBody) 
 	{
-		
-		if (! node.isIsReadOnly())
-		{
+		// Do not handle the ecore metamodel case!
+		// We know that : EStructuralFeature container type : EClass
+		// EClass container type : EPackage.
+/*		if (!((ENamedElement)newEStructuralFeature.eContainer().eContainer()).getName().equals("ecore"))
+		{*/	
+			if (! node.isIsReadOnly())
+			{
+				ecoreExporter.addAnnotation( 
+						newEStructuralFeature,
+						KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
+						KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY,
+						setterBody,
+						null);
+			}
 			ecoreExporter.addAnnotation( 
 					newEStructuralFeature,
 					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY,
-					setterBody,
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY,
+					getterBody,
+					null);
+			ecoreExporter.addAnnotation( 
+					newEStructuralFeature,
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
+					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY,
+					new Boolean(node.isIsReadOnly()).toString(),
 					null);
 		}
-		ecoreExporter.addAnnotation( 
-				newEStructuralFeature,
-				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY,
-				getterBody,
-				null);
-		ecoreExporter.addAnnotation( 
-				newEStructuralFeature,
-				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY,
-				new Boolean(node.isIsReadOnly()).toString(),
-				null);
-	}
+/*	}*/
 	
 	public void setSuperOperationAnnotation(Operation superOperation, EOperation newEOperation) {
 		ecoreExporter.addAnnotation( 

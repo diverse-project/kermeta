@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.16 2006-06-01 16:29:18 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.17 2006-06-07 16:41:43 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -162,7 +162,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	public Object visitClassDefinition(ClassDefinition node) {
 		EClass newEClass=null;
 		current_name = node.getName();
-		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ current_name);
+		//internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ current_name);
 		loggerTabs.increment();
 		
 		try{
@@ -332,6 +332,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		newEOperation.setOrdered(node.isIsOrdered());
 		newEOperation.setUnique(node.isIsUnique());
 		newEOperation.setLowerBound(node.getLower());
+		if (node.getUpper() == 0) System.err.println("Upper is O!!!!!!!!!!!!");
 		newEOperation.setUpperBound(node.getUpper());
 		
 		// Parameters
@@ -406,10 +407,17 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			if (ecoreExporter.isTypeValidForAttibute(node.getType()) && isContainment == false){
 				//	attribute
 				ecoreExporter.messages.addWarning(
-						"The reference to type "+ KMTHelper.getTypeQualifiedName(node.getType()) +" needs to be translated into an Ecore data type and then must be put into an EAttribute.\n"+ 
-						"A roundtrip back to kermeta will not produce your original file.\n"+
-						"Please consider using attribute instead of reference.",node);
+						"The reference to type '"+ KMTHelper.getTypeQualifiedName(node.getType()) + 
+						"' needs to be translated into an Ecore data type and then must be put into an EAttribute.\n"
+						,node);
 			}
+			// Add an Annotation so that it will be correctly back translated to km.
+			ecoreExporter.addAnnotation( 
+					newEAttribute,
+					KM2Ecore.KMT2ECORE_ANNOTATION,
+					KM2Ecore.KMT2ECORE_ANNOTATION_ISCOMPOSITE_DETAILS,
+					isContainment?"true":"false",
+					null);
 		}
 		
 		// Set the new StructuralFeature values
@@ -453,6 +461,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	 * @see kermeta.visitor.MetacoreVisitor#visit(PrimitiveType)
 	 */
 	public Object visitPrimitiveType(PrimitiveType node) {
+		
 		internalLog.debug(loggerTabs + "Visiting PrimitiveType: "+ node.getName() + "; instance:"+ node.getInstanceType());
 		String type_name = KMTHelper.getTypeQualifiedName(node.getInstanceType());
 		EClassifier newEClassifier = EcoreFactory.eINSTANCE.createEDataType();
