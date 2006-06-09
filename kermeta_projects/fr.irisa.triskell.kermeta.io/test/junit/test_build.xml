@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.8 2006-03-03 15:22:19 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.9 2006-06-09 08:47:48 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -6,7 +6,7 @@
     </description>
 	
     <property name="report.dir" location="./reports"/>
-	<property name="eclipse.home" location="c:/eclipse3.1/eclipse"/>
+	<property name="eclipse.home" location="c:/eclipse3.1.1/eclipse"/>
 	<property name="cobertura.dir" location="\\jersey\triskell\bin\multiplatform\cobertura-1.7"/>
 		
 	<property name="build.bin" location="../../build/class"/>
@@ -28,6 +28,7 @@
 	<property name="antlr.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\antlr.jar"/>
 	<property name="ldt-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\ldt-core.jar"/>
 	<property name="emfatic-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\emfatic-core.jar"/>
+	<property name="cu_kermeta.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\cu_kermeta.jar"/>
 	
     <property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.1.0.jar"/>
     <property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
@@ -37,6 +38,7 @@
 	<path id="io.class.path">
 	    <pathelement location="${kermeta.model.jar}"/>
 	    <pathelement location="${traceability.jar}"/>
+	    <pathelement location="${cu_kermeta.jar}"/>
 	    <pathelement location="${emf.common.jar}"/>
 	    <pathelement location="${emf.ecore.jar}"/>
 	    <pathelement location="${emf.ecore.xmi.jar}"/>
