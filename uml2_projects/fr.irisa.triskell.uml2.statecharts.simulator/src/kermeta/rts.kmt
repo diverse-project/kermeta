@@ -413,8 +413,8 @@ abstract class Proxy
     operation initialize() is do
         //Empty. Nothing to do
     end
-    /** code factorisation for ActiveStateMachine actions */
-    operation append_ASM_action_events(serverActiveStateMachine : ActiveStateMachine, event : Event) is do
+    /* code factorisation for ActiveStateMachine actions */
+/*    operation append_ASM_action_events(serverActiveStateMachine : ActiveStateMachine, event : Event) is do
 		if serverActiveStateMachine != void then
 			if serverActiveStateMachine.events_from_action == void then
 				serverActiveStateMachine.reset_events_from_action()
@@ -425,7 +425,7 @@ abstract class Proxy
 			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
 			serverActiveStateMachine.events_from_action.append(event.label)
 		end
-    end
+    end */
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -484,6 +484,12 @@ class Linked_queue<E> inherits OrderedSet<E>
         	i := i + 1
         end
         result := s
+    end
+    operation is_empty() : Boolean is do
+    	result := size == 0
+    end
+    operation item() : E is do
+    	result := last
     end
 }
 

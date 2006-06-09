@@ -1,4 +1,4 @@
-/* $Id: three_way_switch.kmt,v 1.4 2006-06-01 09:59:15 vmahe Exp $
+/* $Id: three_way_switch.kmt,v 1.5 2006-06-09 08:55:15 vmahe Exp $
  * Creation date: May 19, 2006
  * License:
  * Copyright:
@@ -16,32 +16,30 @@ using rts
 
 abstract class Light {
 	reference illuminated : Boolean
-	reference switch : Switch[2..2]
-	operation powerOn() is abstract
-	operation powerOff() is abstract
+	reference inhabitant : oset Inhabitant[1..*]
+	operation switch() is abstract
 	operation get_illuminated() : Boolean is abstract
-	operation get_switch(order : Integer) : Switch is abstract
+	operation get_inhabitant(order : Integer) : Inhabitant is abstract
 	operation set_illuminated(new_illuminated : Boolean) is abstract
-	operation add_switch(new_switch : Switch) is abstract
+	operation add_inhabitant(new_inhabitant : Inhabitant) is abstract
 }
 
 abstract class Switch {
 	reference up : Boolean
 	reference light : Light
-	reference operator : Inhabitant
-	operation switchUp() is abstract
-	operation switchDown() is abstract
+	operation changePosition() is abstract
 	operation get_up() : Boolean is abstract
 	operation get_light() : Light is abstract
-	operation get_operator() : Inhabitant is abstract
 	operation set_up(new_up : Boolean) is abstract
 	operation set_light(new_light : Light) is abstract
-	operation set_operator(new_operator : Inhabitant) is abstract
 }
 
 abstract class Inhabitant {
+	reference isEnlighted : Boolean
 	reference switch : oset Switch[2..2]
+	operation get_isEnlighted() : Boolean is abstract
 	operation get_switch(order : Integer) : Switch is abstract
+	operation set_isEnlighted(new_isEnlighted : Boolean) is abstract
 	operation add_switch(new_switch : Switch) is abstract
 }
 
@@ -49,29 +47,24 @@ class Light_impl inherits Light, ActiveStateMachine {
 	reference light_top_state : Light_top_state
 	reference light_in_On : Light_in_On
 	reference light_in_Off : Light_in_Off
-	method powerOn() is do
-		//Empty. For state change, see proxy class
-	end
-	method powerOff() is do
+	method switch() is do
 		//Empty. For state change, see proxy class
 	end
 	method get_illuminated() : Boolean is do
 		result := illuminated
 	end
-	method get_switch(order : Integer) : Switch is do
-		result := switch.elementAt(order)
+	method get_inhabitant(order : Integer) : Inhabitant is do
+		result := inhabitant.elementAt(order)
 	end
 	method set_illuminated(new_illuminated:Boolean) is do
 		illuminated := new_illuminated
 	end
-	method add_switch(new_switch:Switch) is do
-		if switch == void then
-			switch := OrderedSet<Switch>.new
-		end
-		switch.add(new_switch)
+	method add_inhabitant(new_inhabitant : Inhabitant) is do
+		inhabitant.add(new_inhabitant)
 	end
 	operation make() is do
 		illuminated := false
+		inhabitant := OrderedSet<Inhabitant>.new
 		light_top_state := Light_top_state.new
 		light_in_On := Light_in_On.new
 		light_in_Off := Light_in_Off.new
@@ -80,12 +73,9 @@ class Light_impl inherits Light, ActiveStateMachine {
 
 class Switch_impl inherits Switch, ActiveStateMachine {
 	reference switch_top_state : Switch_top_state
-	reference switch_in_up : Switch_in_up
-	reference switch_in_down : Switch_in_down
-	method switchUp() is do
-		// Empty. For state change, see proxy class
-	end
-	method switchDown() is do
+	reference switch_in_Up : Switch_in_Up
+	reference switch_in_Down : Switch_in_Down
+	method changePosition() is do
 		// Empty. For state change, see proxy class
 	end
 	method get_up() : Boolean is do
@@ -94,23 +84,17 @@ class Switch_impl inherits Switch, ActiveStateMachine {
 	method get_light() : Light is do
 		result := light
 	end
-	method get_operator() : Inhabitant is do
-		result := operator
-	end
 	method set_up(new_up : Boolean) is do
 		up := new_up
 	end
 	method set_light(new_light : Light) is do
 		light := new_light
 	end
-	method set_operator(new_operator : Inhabitant) is do
-		operator := new_operator
-	end
 	operation make() is do
 		up := false
 		switch_top_state := Switch_top_state.new
-		switch_in_up := Switch_in_up.new
-		switch_in_down := Switch_in_down.new
+		switch_in_Up := Switch_in_Up.new
+		switch_in_Down := Switch_in_Down.new
 	end
 }
 
@@ -140,24 +124,20 @@ class Light_top_state inherits Light_impl {
 
 class Light_in_On inherits Light_top_state {
 	method entry() is do
-		// Empty
+		// Empty ???? FIXME : What about pre-conditions ???
 	end
 	method exit() is do
-		// Empty
+		// Empty ???? What about post-conditions ???
 	end
-	method powerOn() is do
-		// Nothing to do
- 	end
-	method powerOff() is do
-		leave(light_in_On)
-		powerOff
-		enter(light_in_Off)
-	end
-	method nb_transitions() : Integer is do
-		// TODO ??
-	end
-	method labels(n : Integer) : String is do
-		// TODO ??
+	method switch() is do
+		if	// guard of statechart's transition
+			illuminated == true
+		then
+			leave(light_in_On)
+			// action code of statechart's transition
+			self.inhabitant.each{e|e.isEnlighted:=true}
+			enter(light_in_Off)
+		end
 	end
 }
 
@@ -168,19 +148,15 @@ class Light_in_Off inherits Light_top_state {
 	method exit() is do
 		// Empty
 	end
-	method powerOn() is do
-		leave(light_in_Off)
-		powerOn
-		enter(light_in_On)
-	end
-	method powerOff() is do
-		// Nothing to do
-	end
-	method nb_transitions() : Integer is do
-		// TODO ??
-	end
-	method labels(n : Integer) : String is do
-		// TODO ??
+	method switch() is do
+		if	// guard of statechart's transition
+			illuminated == false
+		then
+			leave(light_in_Off)
+			// action code of statechart's transition
+			self.inhabitant.each{e|e.isEnlighted:=true}
+			enter(light_in_On)
+		end
 	end
 }
 
@@ -193,229 +169,356 @@ class Switch_top_state inherits Switch_impl {
 	end
 }
 
-class Switch_in_up inherits Switch_top_state {
+class Switch_in_Up inherits Switch_top_state {
 	method entry() is do
 		// Empty
 	end
 	method exit() is do
 		// Empty
 	end
-	method switchUp() is do
-		// Nothing to do
+	method changePosition() is do
+		if	// guard of statechart's transition
+			up == true
+		then
+			leave(switch_in_Up)
+			// action code of statechart's transition
+			light.switch
+			enter(switch_in_Down)
+		end
 	end
-	method switchDown() is do
-		leave(switch_in_up)
-		switchDown
-		enter(switch_in_down)
+}
+
+class Switch_in_Down inherits Switch_top_state {
+	method entry() is do
+		// Empty
+	end
+	method exit() is do
+		// Empty
+	end
+	method changePosition() is do
+		if	// guard of statechart's transition
+			up == false
+		then
+			leave(switch_in_Down)
+			// action code of statechart's transition
+			light.switch
+			enter(switch_in_Up)
+		end
+	end
+}
+
+class Inhabitant_top_state inherits Inhabitant_impl {
+	method entry() is do
+		// Empty
+	end
+	method exit() is do
+		// Empty
+	end
+}
+
+class Inhabitant_in_idle inherits Inhabitant_top_state {
+	method entry() is do
+		// Empty
+	end
+	method exit() is do
+		// Empty
 	end
 	method nb_transitions() : Integer is do
-		// TODO ??
+		result := 2
+		if not message_queue.is_empty then result := result + 1 end
 	end
 	method labels(n : Integer) : String is do
-		// TODO ??
+		if n < 2 then	// sequences begin at 0 in Kermeta
+			var str : OrderedSet<String>
+			str.add("switch.elementAt(0).changePosition")
+			str.add("switch.elementAt(1).changePosition")
+			result := "!" + str.elementAt(n)
+		else
+			result := message_queue.item.label
+		end
 	end
-}
-
-class Switch_in_down inherits Switch_top_state {
-	method entry() is do
-		// Empty
-	end
-	method exit() is do
-		// Empty
-	end
-	method switchUp() is do
-		leave(switch_in_down)
-		switchUp
-		enter(switch_in_up)
-	end
-	method switchDown() is do
-		// Nothing to do
-	end
-	method nb_transitions() : Integer is do
-		// TODO ??
-	end
-	method labels(n : Integer) : String is do
-		// TODO ??
-	end
-}
-
-class Inhabitant_top_state {
-	method entry() is do
-		// Empty
-	end
-	method exit() is do
-		// Empty
-	end
-}
-
-class Inhabitant_in_idle {
-	method entry() is do
-		// Empty
-	end
-	method exit() is do
-		// Empty
-	end
-	method get_switch(order : Integer) : Switch is do
-		// Empty
-	end
-	method add_switch(new_switch : Switch) is do
-		// Empty
+	method completion(n : Integer) is do
+		leave(inhabitant_in_idle)
+		if n == 0 then
+			switch.elementAt(0).changePosition
+			enter(inhabitant_in_idle)
+		else
+		if n == 1 then
+			switch.elementAt(1).changePosition
+			enter(inhabitant_in_idle)
+		end
+		end
 	end
 }
 
 class Light_proxy inherits Light, Proxy {
-	method powerOn() is do
-		var event : Light_powerOn_call_event init Light_powerOn_call_event.new
+	method switch() is do
+		var event : Light_switch_call_event init Light_switch_call_event.new
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		// factorisation of common code in Proxy class, unlike old UMLAUT
-		append_ASM_action_events(serverActiveStateMachine, event)
-		send(event)
-	end
-	method powerOff() is do
-		var event : Light_powerOff_call_event init Light_powerOff_call_event.new
-		var serverActiveStateMachine : ActiveStateMachine
-		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
 	end
 	method get_illuminated() : Boolean is do
 		var event : Light_get_illuminated_call_event init Light_get_illuminated_call_event.new
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
 		var illuminated : Boolean
 		illuminated ?= event.arguments.last
 		result := illuminated
 	end
-	method get_switch(order : Integer) : Switch is do
-		var event : Light_get_switch_call_event init Light_get_switch_call_event.new
+	method get_inhabitant(order : Integer) : Inhabitant is do
+		var event : Light_get_inhabitant_call_event init Light_get_inhabitant_call_event.new
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
-		var switch : Switch
-		switch ?= event.arguments.elementAt(order)
-		result := switch
+		var inhabitant : Inhabitant
+		inhabitant ?= event.arguments.elementAt(order)
+		result := inhabitant
 	end
 	method set_illuminated(new_illuminated : Boolean) is do
 		var event : Light_set_illuminated_call_event init Light_set_illuminated_call_event.new
 		event.arguments.add(new_illuminated)
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
 	end
-	method add_switch(new_switch : Switch) is do
-		var event : Light_add_switch_call_event init Light_add_switch_call_event.new
-		event.arguments.add(new_switch)
+	method add_inhabitant(new_inhabitant : Inhabitant) is do
+		var event : Light_add_inhabitant_call_event init Light_add_inhabitant_call_event.new
+		event.arguments.add(new_inhabitant)
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
 	end
 }
 
 class Switch_proxy inherits Switch, Proxy {
-	method switchUp() is do
-		var event : Switch_switchUp_call_event init Switch_switchUp_call_event.new
+	method changePosition() is do
+		var event : Switch_changePosition_call_event init Switch_changePosition_call_event.new
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		// factorisation of common code in Proxy class, unlike old UMLAUT
-		append_ASM_action_events(serverActiveStateMachine, event)
-		send(event)
-	end
-	method switchDown() is do
-		var event : Switch_switchDown_call_event init Switch_switchDown_call_event.new
-		var serverActiveStateMachine : ActiveStateMachine
-		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
 	end
 	method get_light() : Light is do
 		var event : Switch_get_light_call_event init Switch_get_light_call_event.new
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
 		var light : Light
 		light ?= event.arguments.last
 		result := light
 	end
-	method get_operator() : Inhabitant is do
-		var event : Switch_get_operator_call_event init Switch_get_operator_call_event.new
+	method get_up() : Boolean is do
+		var event : Switch_get_up_call_event init Switch_get_up_call_event.new
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
-		var operator : Inhabitant
-		operator ?= event.arguments.last
-		result := operator
+		var up : Boolean
+		up ?= event.arguments.last
+		result := up
 	end
 	method set_light(new_light : Light) is do
 		var event : Switch_set_light_call_event init Switch_set_light_call_event.new
 		event.arguments.add(new_light)
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
 	end
-	method set_operator(new_operator : Inhabitant) is do
-		var event : Switch_set_operator_call_event init Switch_set_operator_call_event.new
-		event.arguments.add(new_operator)
+	method set_up(new_up : Boolean) is do
+		var event : Switch_set_up_call_event init Switch_set_up_call_event.new
+		event.arguments.add(new_up)
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
 	end
 }
 
 class Inhabitant_proxy inherits Inhabitant, Proxy {
+	method get_isEnlighted() : Boolean is do
+		var event : Inhabitant_get_isEnlighted_call_event init Inhabitant_get_isEnlighted_call_event.new
+		var serverActiveStateMachine : ActiveStateMachine
+		serverActiveStateMachine ?= server
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
+		send(event)
+		var isEnlighted : Boolean
+		isEnlighted ?= event.arguments.last
+		result := isEnlighted
+	end
 	method get_switch(order : Integer) : Switch is do
 		var event : Inhabitant_get_switch_call_event init Inhabitant_get_switch_call_event.new
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
 		var switch : Switch
 		switch ?= event.arguments.elementAt(order)
 		result := switch
+	end
+	method set_isEnlighted(new_isEnlighted : Boolean) is do
+		var event : Inhabitant_set_isEnlighted_call_event init Inhabitant_set_isEnlighted_call_event.new
+		event.arguments.add(new_isEnlighted)
+		var serverActiveStateMachine : ActiveStateMachine
+		serverActiveStateMachine ?= server
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
+		send(event)
 	end
 	method add_switch(new_switch : Switch) is do
 		var event : Inhabitant_add_switch_call_event init Inhabitant_add_switch_call_event.new
 		event.arguments.add(new_switch)
 		var serverActiveStateMachine : ActiveStateMachine
 		serverActiveStateMachine ?= server
-		append_ASM_action_events(serverActiveStateMachine, event)
+		if serverActiveStateMachine != void then
+			if serverActiveStateMachine.events_from_action == void then
+				serverActiveStateMachine.reset_events_from_action()
+			end
+			if serverActiveStateMachine.events_from_action != "" then
+				serverActiveStateMachine.events_from_action.append(";")
+			end
+			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
+			serverActiveStateMachine.events_from_action.append(event.label)
+		end
 		send(event)
 	end
 }
 
-class Light_powerOn_call_event inherits Event {
+class Light_switch_call_event inherits Event {
 	method dispatch_to(target : Object) is do
 		var target_as_Light : Light
 		target_as_Light ?= target
-		target_as_Light.powerOn
+		target_as_Light.switch
 	end
 	method event_name() : String is do
-		result := "powerOn"
+		result := "switch"
 	end
 }
-class Light_powerOn_signal {
-}
-
-class Light_powerOff_call_event inherits Event {
-	method dispatch_to(target : Object) is do
-		var target_as_Light : Light
-		target_as_Light ?= target
-		target_as_Light.powerOff
-	end
-	method event_name() : String is do
-		result := "powerOff"
-	end
-}
-class Light_powerOff_signal {
+class Light_switch_signal {
 }
 
 class Light_get_illuminated_call_event inherits Event {
@@ -432,21 +535,21 @@ class Light_get_illuminated_signal {
 	reference ~result : Boolean
 }
 
-class Light_get_switch_call_event inherits Event {
+class Light_get_inhabitant_call_event inherits Event {
 	method dispatch_to(target : Object) is do
 		var target_as_Light : Light
 		target_as_Light ?= target
 		var arg0 : Integer
 		arg0 ?= arguments.elementAt(0)
-		target_as_Light.get_switch(arg0)
+		target_as_Light.get_inhabitant(arg0)
 	end
 	method event_name() : String is do
-		result := "get_switch"
+		result := "get_inhabitant"
 	end
 }
-class Light_get_switch_signal {
+class Light_get_inhabitant_signal {
 	reference order : Integer
-	reference ~result : Switch
+	reference ~result : Inhabitant
 }
 
 class Light_set_illuminated_call_event inherits Event {
@@ -465,46 +568,33 @@ class Light_set_illuminated_signal {
 	reference new_illuminated : Boolean
 }
 
-class Light_add_switch_call_event inherits Event {
+class Light_add_inhabitant_call_event inherits Event {
 	method dispatch_to(target : Object) is do
 		var target_as_Light : Light
 		target_as_Light ?= target
-		var arg0 : Switch
+		var arg0 : Inhabitant
 		arg0 ?= arguments.elementAt(0)
-		target_as_Light.add_switch(arg0)
+		target_as_Light.add_inhabitant(arg0)
 	end
 	method event_name() : String is do
-		result := "add_switch"
+		result := "add_inhabitant"
 	end
 }
-class Light_add_switch_signal {
-	reference new_switch : Switch
+class Light_add_inhabitant_signal {
+	reference new_inhabitant : Inhabitant
 }
 
-class Switch_switchUp_call_event inherits Event {
+class Switch_changePosition_call_event inherits Event {
 	method dispatch_to(target : Object) is do
 		var target_as_Switch : Switch
 		target_as_Switch ?= target
-		target_as_Switch.switchUp
+		target_as_Switch.changePosition
 	end
 	method event_name() : String is do
-		result := "switchUp"
+		result := "changePosition"
 	end
 }
-class Switch_switchUp_signal {
-}
-
-class Switch_switchDown_call_event inherits Event {
-	method dispatch_to(target : Object) is do
-		var target_as_Switch : Switch
-		target_as_Switch ?= target
-		target_as_Switch.switchDown
-	end
-	method event_name() : String is do
-		result := "switchDown"
-	end
-}
-class Switch_switchDown_signal {
+class Switch_changePosition_signal {
 }
 
 class Switch_get_light_call_event inherits Event {
@@ -521,18 +611,18 @@ class Switch_get_light_signal {
 	reference ~result : Light
 }
 
-class Switch_get_operator_call_event inherits Event {
+class Switch_get_up_call_event inherits Event {
 	method dispatch_to(target : Object) is do
 		var target_as_Switch : Switch
 		target_as_Switch ?= target
-		target_as_Switch.get_operator
+		target_as_Switch.get_up
 	end
 	method event_name() : String is do
-		result := "get_operator"
+		result := "get_up"
 	end
 }
-class Switch_get_operator_signal {
-	reference ~result : Inhabitant
+class Switch_get_up_signal {
+	reference ~result : Boolean
 }
 
 class Switch_set_light_call_event inherits Event {
@@ -551,20 +641,34 @@ class Switch_set_light_signal {
 	reference new_light : Light
 }
 
-class Switch_set_operator_call_event inherits Event {
+class Switch_set_up_call_event inherits Event {
 	method dispatch_to(target : Object) is do
 		var target_as_Switch : Switch
 		target_as_Switch ?= target
-		var arg0 : Inhabitant
+		var arg0 : Boolean
 		arg0 ?= arguments.elementAt(0)
-		target_as_Switch.set_operator(arg0)
+		target_as_Switch.set_up(arg0)
 	end
 	method event_name() : String is do
-		result := "set_operator"
+		result := "set_up"
 	end
 }
-class Switch_set_operator_signal {
-	reference new_operator : Inhabitant
+class Switch_set_up_signal {
+	reference new_up : Boolean
+}
+
+class Inhabitant_get_isEnlighted_call_event inherits Event {
+	method dispatch_to(target : Object) is do
+		var target_as_Inhabitant : Inhabitant
+		target_as_Inhabitant ?= target
+		target_as_Inhabitant.isEnlighted
+	end
+	method event_name() : String is do
+		result := "get_isEnlighted"
+	end
+}
+class Inhabitant_get_isEnlighted_signal {
+	reference ~result : Boolean
 }
 
 class Inhabitant_get_switch_call_event inherits Event {
@@ -582,6 +686,22 @@ class Inhabitant_get_switch_call_event inherits Event {
 class Inhabitant_get_switch_signal {
 	reference order : Integer
 	reference ~result : Switch
+}
+
+class Inhabitant_set_isEnlighted_call_event inherits Event {
+	method dispatch_to(target : Object) is do
+		var target_as_Inhabitant : Inhabitant
+		target_as_Inhabitant ?= target
+		var arg0 : Boolean
+		arg0 ?= arguments.elementAt(0)
+		target_as_Inhabitant.set_isEnlighted(arg0)
+	end
+	method event_name() : String is do
+		result := "set_isEnlighted"
+	end
+}
+class Inhabitant_set_isEnlighted_signal {
+	reference new_isEnlighted : Boolean
 }
 
 class Inhabitant_add_switch_call_event inherits Event {
@@ -627,13 +747,10 @@ class ThreeWaySwitch inherits CADPSimulator {
 	reference aBulb : Light_impl
 	// -- association instances
 	reference aMan_first_proxy : Switch_proxy
-	reference first_aMan_proxy : Inhabitant_proxy
 	reference aMan_second_proxy : Switch_proxy
-	reference second_aMan_proxy : Inhabitant_proxy
 	reference first_aBulb_proxy : Light_proxy
 	reference second_aBulb_proxy : Light_proxy
-	reference aBulb_first_proxy : Switch_proxy
-	reference aBulb_second_proxy : Switch_proxy
+	reference aBulb_aMan_proxy : Inhabitant_proxy
 	method initial_configuration() : Configuration is do
 		// create implemens
 		aMan := Inhabitant_impl.new
@@ -654,45 +771,39 @@ class ThreeWaySwitch inherits CADPSimulator {
 		
 		// create proxies
 		aMan_first_proxy := Switch_proxy.new
-		first_aMan_proxy := Inhabitant_proxy.new
 		aMan_second_proxy := Switch_proxy.new
-		second_aMan_proxy := Inhabitant_proxy.new
 		first_aBulb_proxy := Light_proxy.new
 		second_aBulb_proxy := Light_proxy.new
-		aBulb_first_proxy := Switch_proxy.new
-		aBulb_second_proxy := Switch_proxy.new
+		aBulb_aMan_proxy := Inhabitant_proxy.new
 		
 		// set links
 		aMan.add_switch(aMan_first_proxy)
-		set_proxy_on(first_aMan_proxy, aMan, false)
-		first.set_operator(first_aMan_proxy)
 		set_proxy_on(aMan_first_proxy, first, false)
 		
 		aMan.add_switch(aMan_second_proxy)
-		set_proxy_on(second_aMan_proxy, aMan, false)
-		second.set_operator(second_aMan_proxy)
 		set_proxy_on(aMan_second_proxy, second, false)
 		
 		first.set_light(first_aBulb_proxy)
-		set_proxy_on(aBulb_first_proxy, first, false)
-		aBulb.add_switch(aBulb_first_proxy)
 		set_proxy_on(first_aBulb_proxy, aBulb, false)
 		
 		second.set_light(second_aBulb_proxy)
-		set_proxy_on(aBulb_second_proxy, second, false)
-		aBulb.add_switch(aBulb_second_proxy)
 		set_proxy_on(second_aBulb_proxy, aBulb, false)
+		
+		aBulb.add_inhabitant(aBulb_aMan_proxy)
+		set_proxy_on(aBulb_aMan_proxy, aMan, false)
 		
 		// -- set attributes
 		first.set_up(true)
 		second.set_up(false)
 		aBulb.set_illuminated(false)
+		aMan.set_isEnlighted(false)
 		
 		// -- register the instances
-		var configuration : Configuration
+		var configuration : Configuration init Configuration.new
 		configuration.register(aMan)
 		configuration.register(first)
 		configuration.register(second)
 		configuration.register(aBulb)
+		result := configuration
 	end
 }

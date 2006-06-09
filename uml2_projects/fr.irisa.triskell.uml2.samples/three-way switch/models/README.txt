@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.1 2006-05-15 12:47:31 vmahe Exp $
+$Id: README.txt,v 1.2 2006-06-09 08:55:14 vmahe Exp $
 
 Description :
 -------------
@@ -20,6 +20,5 @@ Models that rely on this project:
  
 1) xmi model :
  This model is an draft of the states charts and instances
- diagrams, for illustration purposes, designed within Umbrello
- software (note it use UML 1.3 syntax, as UML2 has not been
- implemented in it).
+ diagrams, for illustration purposes, designed within Poseidon
+ UML2 tool.
