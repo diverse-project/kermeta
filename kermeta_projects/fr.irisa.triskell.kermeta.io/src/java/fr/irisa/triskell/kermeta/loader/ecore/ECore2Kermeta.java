@@ -1,4 +1,4 @@
-/* $Id: ECore2Kermeta.java,v 1.19 2006-06-07 16:44:36 zdrey Exp $
+/* $Id: ECore2Kermeta.java,v 1.20 2006-06-09 08:38:16 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -125,67 +125,6 @@ public class ECore2Kermeta extends EcoreVisitor {
 		this.datatypes = new Hashtable<EDataType, PrimitiveType>();
 		this.classes = new Hashtable<ClassDefinition, fr.irisa.triskell.kermeta.language.structure.Class>();
 		this.properties = new Hashtable<String, Property>();
-	}
-	
-	/** Return the package currently visited */
-	protected Package getCurrentPackage() {
-		if (current_pack.size() == 0) return null;
-		return (Package)current_pack.peek();
-	}
-	
-	/** Get the kermeta type corresponding to this EType */
-	protected Type createTypeForEClassifier(EClassifier etype) {
-		
-		TypeDefinition def = null;
-		if (etype == null)
-		{ 
-			def = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::standard::Void");
-		}
-		else def = unit.typeDefinitionLookup(getQualifiedName(etype));
-		if (def == null) {
-			// Ignore ecore types : we cannot create a kermeta unit since the URI of the ecore metamodel
-			// does not reflect a real path in the user file system. We will handle it separately
-			isEcoreType = ((ENamedElement)etype.eContainer()).getName().equals("ecore");
-			// Try to find the given element in the loaded kermeta units
-			// If not found, load a kermeta unit for the resource of the given element
-			if (etype.eResource() != resource)
-			{
-				String etype_qname = getQualifiedName(etype);
-				String dep_uri = etype.eResource().getURI().toString();
-				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
-				// this unit is not related to a real file in the user file system
-				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), new Hashtable());
-				dep_unit.load();
-				unit.importedUnits.add(dep_unit);
-				//def = dep_unit.typeDefinitionLookup(etype_qname);
-				def = dep_unit.typeDefs.get(etype_qname);
-			}
-			else
-				def = (TypeDefinition)types.get(etype); // this is the same as unit.typeDefinitionLookUp
-		}
-		
-		if (def == null) throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion : type '" + getQualifiedName(etype) + "' not found." );
-		
-		// It can be a Type if the element is a EEnum or a EDatatype (inherits Type and TypeDefinition)
-		if (def instanceof Type) return (Type)def;
-		// Otherwise it is always a ClassDefinition
-		ClassDefinition cd = (ClassDefinition)def;
-		fr.irisa.triskell.kermeta.language.structure.Class fc = classes.get(cd);
-		if (fc == null) {
-			fc = unit.struct_factory.createClass();
-			fc.setTypeDefinition(cd);
-			classes.put(cd, fc);
-		}
-		return fc;
-	}
-	
-	/** Call visitor on a list of elements */
-	protected void acceptList(EList l) {
-		Iterator it = l.iterator();
-		while (it.hasNext()) {
-			EObject o = (EObject)it.next();
-			this.accept(o);
-		}
 	}
 	
 	/** Visit EPackage : visit the owned classifiers and the sub packages */
@@ -315,11 +254,12 @@ public class ECore2Kermeta extends EcoreVisitor {
 		return prop;
 	}
 	
+	/** Converts an EOperation into kermeta type Operation. This method constructs the Operation
+	 *  and sets its type. */
 	public Object visit(EOperation node) {
 		isClassTypeOwner = false;
 		current_op = unit.struct_factory.createOperation();
 		current_op.setName(node.getName());
-		
 		current_op.setIsOrdered(node.isOrdered());
 		current_op.setIsUnique(node.isUnique());
 		current_op.setLower(node.getLowerBound());
@@ -400,8 +340,6 @@ public class ECore2Kermeta extends EcoreVisitor {
 	{
 		EOperation result = null; 
 		EClass owningclass = node.getEContainingClass();
-		
-		//Iterator it = owningclass.getESuperTypes().iterator();
 		result = findOperationInSuperTypes(owningclass.getESuperTypes(), node);
 		return result;
 	}
@@ -650,6 +588,66 @@ public class ECore2Kermeta extends EcoreVisitor {
 			types.put(node, result);
 		}
 		return result;
+	}
+	
+	
+	/** Return the package currently visited */
+	protected Package getCurrentPackage() {
+		if (current_pack.size() == 0) return null;
+		return (Package)current_pack.peek();
+	}
+	
+	/** Get the kermeta type corresponding to this EType */
+	protected Type createTypeForEClassifier(EClassifier etype) {
+		
+		TypeDefinition def = null;
+		if (etype == null)
+		{ 
+			def = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::standard::Void");
+		}
+		else def = unit.typeDefinitionLookup(getQualifiedName(etype));
+		if (def == null) {
+			// Ignore ecore types : we cannot create a kermeta unit since the URI of the ecore metamodel
+			// does not reflect a real path in the user file system. We will handle it separately
+			// Try to find the given element in the loaded kermeta units
+			// If not found, load a kermeta unit for the resource of the given element
+			if (etype.eResource() != resource)
+			{
+				String etype_qname = getQualifiedName(etype);
+				String dep_uri = etype.eResource().getURI().toString();
+				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
+				// this unit is not related to a real file in the user file system
+				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), new Hashtable());
+				dep_unit.load();
+				unit.importedUnits.add(dep_unit);
+				def = dep_unit.typeDefs.get(etype_qname);
+			}
+			else
+				def = (TypeDefinition)types.get(etype); // this does the same as unit.typeDefinitionLookUp
+		}
+		
+		if (def == null) throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion : type '" + getQualifiedName(etype) + "' not found." );
+		
+		// It can be a Type if the element is a EEnum or a EDatatype (inherits Type and TypeDefinition)
+		if (def instanceof Type) return (Type)def;
+		// Otherwise it is always a ClassDefinition
+		ClassDefinition cd = (ClassDefinition)def;
+		fr.irisa.triskell.kermeta.language.structure.Class fc = classes.get(cd);
+		if (fc == null) {
+			fc = unit.struct_factory.createClass();
+			fc.setTypeDefinition(cd);
+			classes.put(cd, fc);
+		}
+		return fc;
+	}
+	
+	/** Call visitor on a list of elements */
+	protected void acceptList(EList l) {
+		Iterator it = l.iterator();
+		while (it.hasNext()) {
+			EObject o = (EObject)it.next();
+			this.accept(o);
+		}
 	}
 }
 
