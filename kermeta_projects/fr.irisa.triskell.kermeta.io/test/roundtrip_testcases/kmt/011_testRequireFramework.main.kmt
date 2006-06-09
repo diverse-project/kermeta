@@ -1,0 +1,7 @@
+package testRequireFramework;
+
+using kermeta::language::structure
+
+class MyClassDefinition inherits ClassDefinition
+{
+}
