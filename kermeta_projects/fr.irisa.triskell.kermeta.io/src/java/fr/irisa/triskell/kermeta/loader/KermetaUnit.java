@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.62 2006-05-23 07:38:01 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.63 2006-06-12 13:16:44 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -1085,7 +1085,7 @@ public abstract class KermetaUnit {
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
-	            messages.addError("INTERNAL ERROR : " + t.getMessage(), null);
+	            messages.addError("Unexpected load error : " + t.getMessage(), null);
 	        }
 	    }
 	}

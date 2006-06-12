@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.15 2006-04-26 16:48:05 dvojtise Exp $
+/* $Id: KermetaUnitFactory.java,v 1.16 2006-06-12 13:16:44 zdrey Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -148,10 +148,8 @@ public class KermetaUnitFactory {
     	if (u.fileExtension() != null) 
         	loader = (KermetaLoaderModule)loadModules.get(u.fileExtension());
         if (loader == null) {
-        	// TODO : generate an error
-            KermetaUnit.internalLog.error("TODO: manage this error : loader is null for UNIT "+u);
-        	//result.error.add(new KMUnitError("Unable to load resource " + uri + " : no loader registered.", null));
-        	//return result;
+            KermetaLoaderError klerr = new KermetaLoaderError("Invalid require : '"+u + "' is not a valid use for require");
+    	    throw klerr;
         }
         result = loader.createKermetaUnit(u.toString(), packages);
         loadedUnits.put(u.toString(), result);
