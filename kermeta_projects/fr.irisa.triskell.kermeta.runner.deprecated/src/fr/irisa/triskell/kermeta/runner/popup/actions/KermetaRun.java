@@ -1,4 +1,4 @@
-/* $Id: KermetaRun.java,v 1.10 2005-08-16 11:21:16 zdrey Exp $
+/* $Id: KermetaRun.java,v 1.11 2006-06-13 12:01:37 zdrey Exp $
  * Project : Kermeta.runner
  * File : KermetaRun.java
  * License : GPL
@@ -83,11 +83,8 @@ public class KermetaRun implements IObjectActionDelegate {
 		    if (code != InputDialog.CANCEL)
 		    {
 		        //		  	Launch the console
-	            KermetaConsole console = new KermetaConsole();
-	            // Remove the preceding consoles
-	            console.removeCurrentConsole();
-	            // Add a MessageConsole
-	            console.addConsole();	
+	            KermetaConsole console = new KermetaConsole("KermetaConsole");
+	
 		        try
 		        {
 		            // 	Get the values given by the user in the runPopupDialog

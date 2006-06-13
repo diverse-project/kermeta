@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.11 2006-05-16 15:35:59 jmottu Exp $
+/* $Id: KermetaLauncher.java,v 1.12 2006-06-13 12:01:14 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -16,6 +16,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPluginDescriptor;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.internal.ui.actions.DebugContextualLaunchAction;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -109,7 +110,9 @@ public class KermetaLauncher
 	    else
 	      throw (new Error("File not found! - "+ fileNameString));
 	    
-	    KermetaConsole console = createKermetaConsole();
+	    String shortname = fileNameString.contains("/")?fileNameString.substring(fileNameString.lastIndexOf("/")):fileNameString;
+	    
+	    KermetaConsole console = createKermetaConsole(shortname + ": "+ classQualifiedNameString + "::" + operationString);
         
 	    KermetaInterpreter interpreter = null;
         try
@@ -140,6 +143,8 @@ public class KermetaLauncher
     	        interpreter.setKStream(null);
     	        interpreter.freeJavaMemory();
     	        KermetaUnitFactory.resetDefaultLoader();
+    	        //console.removeCurrentConsole();
+    	        console.disposeCurrentConsole();
     	        return null;
             }
             else  // We launch an interpreter with a special "condition"
@@ -181,11 +186,11 @@ public class KermetaLauncher
     	else return runKermeta(f, c, o, a, true, debug_condition);
     }*/
     
-    protected KermetaConsole createKermetaConsole()
+    protected KermetaConsole createKermetaConsole(String name)
     {
     	// Create a KermetaConsole where the interpreter will print the errors
     	// and outputs.
-        KermetaConsole console = KermetaConsole.getSingletonConsole();
+        KermetaConsole console = new KermetaConsole(name);
         
         if ( ! console.isInitialized())
         {   // Add a MessageConsole

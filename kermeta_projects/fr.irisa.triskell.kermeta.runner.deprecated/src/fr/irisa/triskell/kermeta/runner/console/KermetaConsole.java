@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.13 2006-01-10 12:25:44 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.14 2006-06-13 11:57:09 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.internal.ui.launchConfigurations.LaunchConfigurationManager;
 //import org.eclipse.debug.internal.ui.views.console.ProcessConsole;
 import org.eclipse.jface.dialogs.InputDialog;
 
@@ -45,8 +47,9 @@ import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
  */
 public class KermetaConsole extends KermetaIOStream implements IConsoleListener
 {
+
 	protected final static int MAX_BYTES = 10000;
-    protected IOConsole messageConsole = null;
+    protected InternalIOConsole messageConsole = null;
     //protected ProcessConsole messageConsole = null;
 	protected IOConsoleOutputStream outputStream = null;
 	protected IOConsoleInputStream inputStream = null;
@@ -58,18 +61,17 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     protected InputStreamDialog inputDialog = null;
     static protected KermetaConsole theConsole = null;
     protected InputDialogThread theInputThread = null;
+    protected String consoleName;
+    protected boolean isDisposed;
     
-    public KermetaConsole()
+    public KermetaConsole(String name)
     {
         ConsolePlugin plugin = ConsolePlugin.getDefault();
+        consoleName = name;
+        isDisposed = false;
 	    consoleManager = plugin.getConsoleManager();
 	    consoleManager.addConsoleListener(this);
-    }
-    
-    static public KermetaConsole getSingletonConsole()
-    {
-    	if (theConsole == null) {theConsole = new KermetaConsole();}
-    	return theConsole;
+	    addConsole();
     }
     
     public boolean isInitialized()
@@ -98,19 +100,7 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
 			//inputStream.reset();
 			inputStream.setColor(new Color(null, 200,30,240));
 			result = new BufferedReader(new InputStreamReader(inputStream)).readLine();
-		
-			// In comment : old version of command line with a popup dialog
-			/*    	InputDialogThread thread;
-			 if (theInputThread == null)	
-			 theInputThread = new InputDialogThread(prompt);
-			 else 
-			 theInputThread.setPrompt(prompt);
-			 Display.getDefault().syncExec(theInputThread);
-			 
-			 return theInputThread.inputStr;
-			 */   
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (result == null) result = " ";
@@ -123,7 +113,6 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
      */
     public void reset()
     {
-        // stream = messageConsole.newMessageStream();
     	outputStream = messageConsole.newOutputStream();
     	inputStream = messageConsole.getInputStream();
     }
@@ -185,10 +174,23 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
         
     }
     
-    /** Remove all the existing consoles [temporary patch]*/
-    public void removeCurrentConsole() {
-        consoleManager.removeConsoles(consoleManager.getConsoles());
-        
+    /** Dispose the current console. If disposed, it will be removed as soon as another console
+     * is initialised */
+    public void disposeCurrentConsole()
+    {
+    	messageConsole.isDisposed = true;
+    	messageConsole.destroy();
+    	consoleManager.removeConsoleListener(this);
+    }
+    
+    private void removeDisposedConsoles()
+    {
+    	IConsole[] consoles = consoleManager.getConsoles();
+    	for (int i=0; i<consoles.length; i++)
+    	{
+    		InternalIOConsole c = (InternalIOConsole)consoles[i];
+    		if (c.isDisposed == true) consoleManager.removeConsoles(new IConsole[] {c});
+    	}
     }
     
     /**
@@ -197,24 +199,14 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
      * method. (Please don't remove the comment notes yet)
      */
     public void addConsole() {
-    	messageConsole = new IOConsole("KermetaConsole", null);
+    	// Check the disposed consoles in ConsoleManager, and remove them (useless!)
+    	removeDisposedConsoles();
+    	
+    	messageConsole = new InternalIOConsole(consoleName + "[" +  consoleManager.getConsoles().length + "]", null, null, true);
         outputStream = messageConsole.newOutputStream(); //messageConsole.newMessageStream();
         inputStream = messageConsole.getInputStream();
-        IConsoleView consoleView = null;
-        //messageConsole.createPage(RunnerPlugin.getDefault().get) //console.addView("org.eclipse.ui.console.ConsoleView");
-        try {
-			consoleView = RunnerPlugin.getDefault().getConsoleView();
-			//fPage.getSite().getPage().findView(IConsoleConstants.ID_CONSOLE_VIEW);
-		} catch (CoreException e) {
-			// if a coreException was catched, than try something else...
-		}
-		finally
-		{
-			if (consoleView != null)
-				messageConsole.createPage(consoleView);
-			consoleManager.addConsoles( new IConsole[]{messageConsole});
-			consoleManager.showConsoleView(messageConsole);
-		}
+		consoleManager.addConsoles( new IConsole[]{messageConsole});
+		consoleManager.showConsoleView(messageConsole);
     }
     
     /**

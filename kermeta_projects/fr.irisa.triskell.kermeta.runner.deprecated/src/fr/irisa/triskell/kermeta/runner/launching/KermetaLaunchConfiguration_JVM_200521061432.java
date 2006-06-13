@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.3 2005-08-26 16:01:16 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.4 2006-06-13 12:01:14 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -326,11 +326,8 @@ public class KermetaLaunchConfiguration_JVM_200521061432 extends AbstractJavaLau
 		    else
 		    {  // TODO : throw an exception!
 		    }
-            KermetaConsole console = new KermetaConsole();
-            // Remove the preceding consoles
-            console.removeCurrentConsole();
-            // Add a MessageConsole
-            console.addConsole();	
+            KermetaConsole console = new KermetaConsole("KermetaConsole");
+            	
 	        try
 	        {
 	            
@@ -342,6 +339,7 @@ public class KermetaLaunchConfiguration_JVM_200521061432 extends AbstractJavaLau
 	            interpreter.setEntryPoint(classQualifiedNameString, operationString);
 	            interpreter.setKStream(console);     
     	        interpreter.launch();
+    	        console.disposeCurrentConsole();
     	
 	        }
 	        catch (KermetaRaisedException kerror)
