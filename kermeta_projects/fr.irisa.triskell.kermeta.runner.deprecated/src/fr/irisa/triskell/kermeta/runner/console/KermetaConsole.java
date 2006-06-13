@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.14 2006-06-13 11:57:09 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.15 2006-06-13 11:58:22 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -183,6 +183,8 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     	consoleManager.removeConsoleListener(this);
     }
     
+    /** Remove all the consoles which isDisposed attribute is set to true.
+     * Only called when a new console is created for interpretation */
     private void removeDisposedConsoles()
     {
     	IConsole[] consoles = consoleManager.getConsoles();
