@@ -13,6 +13,9 @@
  *       Launching Kermeta File for Finite State Machine Sample
  *		 Use mainload method as entering point for loading XMI based file  
  */
+@mainClass "fsm::Main"
+@mainOperation "mainload"
+
 package fsm;
 
 require kermeta
@@ -45,7 +48,7 @@ class Main
 		var res : EMFRepository init EMFRepository.new
         var resource : EMFResource 
         resource ?= res.createResource("../models/sample1.fsm", "../metamodels/fsm.ecore")
-        // sample2.fsm
+        // *.fsm
         stdio.writeln("before loading")
         resource.load()
        	stdio.writeln("after loading")

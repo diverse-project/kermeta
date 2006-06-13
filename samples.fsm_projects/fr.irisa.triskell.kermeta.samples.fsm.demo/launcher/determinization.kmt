@@ -4,13 +4,12 @@
   
 package fsm;
 
-require "../kermeta/fsm.kmt"
-
-require kermeta
-
 using fsm
 using kermeta::standard
 using kermeta::persistence
+
+require kermeta
+require "../kermeta/fsm.kmt"
  
 class Determinization 
 { 
