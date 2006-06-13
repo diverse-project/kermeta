@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmModelWizardID"
+      name = "%_UI_FsmModelWizard_label"
+      class = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/FsmModelFile.gif">
+      <description>%_UI_FsmModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmEditorID"
+        name = "%_UI_FsmEditor_label"
+        icon = "icons/full/obj16/FsmModelFile.gif"
+        extensions = "fsm"
+        class = "fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmEditor" 
+        contributorClass="fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmActionBarContributor" >
+    </editor>
+  </extension>    
+</plugin>
