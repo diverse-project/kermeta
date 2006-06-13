@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurator:EditorConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:configurator="http://www.topcased.org/configurator/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="FsmGraphicalEditor" projectName="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor" prefix="FsmEditor" extension="fsm" extensionDiagram="fsmdi" pluginVersion="0.8.0">
+  <genModel href="../metamodels/fsm.genmodel#/"/>
+  <diagrams id="fsmdiagram" name="Fsm_Diagram" package="diagram" prefix="FsmDiagram">
+    <palette name="Palette">
+      <paletteCategories name="Objects">
+        <items name="State" part="//@diagrams.0/@parts.1"/>
+        <items name="Transition" part="//@diagrams.0/@parts.2"/>
+      </paletteCategories>
+    </palette>
+    <parts xsi:type="configurator:NodePartConfiguration" object="//@objects.0" childElements="//@diagrams.0/@parts.1" minimumWidth="200" minimumHeight="200"/>
+    <parts xsi:type="configurator:NodePartConfiguration" object="//@objects.1" type="State" defaultWidth="60" defaultHeight="40"/>
+    <parts xsi:type="configurator:EdgePartConfiguration" object="//@objects.2" targetDecoration="ARROW">
+      <sourceTargetCouple containerType="SOURCE" autoRef="true" sourceNode="//@diagrams.0/@parts.1" targetNode="//@diagrams.0/@parts.1">
+        <containerObject href="../metamodels/fsm.genmodel#//fsm/State"/>
+        <containerRef xsi:type="ecore:EReference" href="../metamodels/fsm.ecore#//State/outgoingTransition"/>
+        <refSourceToEdge xsi:type="ecore:EReference" href="../metamodels/fsm.ecore#//State/outgoingTransition"/>
+        <refEdgeToSource xsi:type="ecore:EReference" href="../metamodels/fsm.ecore#//Transition/source"/>
+        <refTargetToEdge xsi:type="ecore:EReference" href="../metamodels/fsm.ecore#//State/incomingTransition"/>
+        <refEdgeToTarget xsi:type="ecore:EReference" href="../metamodels/fsm.ecore#//Transition/target"/>
+      </sourceTargetCouple>
+      <edgeObjects type="Middle" id="input">
+        <eStructuralFeature xsi:type="ecore:EAttribute" href="../metamodels/fsm.ecore#//Transition/input"/>
+      </edgeObjects>
+    </parts>
+  </diagrams>
+  <objects xsi:type="configurator:ModelObjectConfiguration">
+    <genClass href="../metamodels/fsm.genmodel#//fsm/FSM"/>
+    <diagrams diagram="//@diagrams.0"/>
+  </objects>
+  <objects xsi:type="configurator:ModelObjectConfiguration">
+    <genClass href="../metamodels/fsm.genmodel#//fsm/State"/>
+  </objects>
+  <objects xsi:type="configurator:ModelObjectConfiguration">
+    <genClass href="../metamodels/fsm.genmodel#//fsm/Transition"/>
+  </objects>
+</configurator:EditorConfiguration>
