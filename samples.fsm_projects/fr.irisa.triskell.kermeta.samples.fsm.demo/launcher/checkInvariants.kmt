@@ -4,30 +4,31 @@
  * Copyright:
  * Authors:
  */
-@mainClass "root_package::Main"
+@mainClass "fsm::InvariantChecker"
 @mainOperation "main"
 
 
-package root_package;
-using kermeta::persistence
+package fsm;
+
 require kermeta
 require "fsmLauncher.kmt"
 
-class Main
+using kermeta::persistence
+
+class InvariantChecker
 {
     operation main() : Void is do 
        var res : EMFRepository init EMFRepository.new
         var resource : EMFResource 
         resource ?= res.createResource("../models/sample1.fsm", "../metamodels/fsm.ecore")
-        // sample2.fsm
+        // *.fsm
         stdio.writeln("before loading")
         resource.load()
        	stdio.writeln("after loading")
         var theFSM : FSM
         theFSM ?= resource.instances.one  
-        result  := theFSM
         
         // Uncomment to check the invariant properties : WFR
-        checkWFR(result)
+        Main.new.checkWFR(theFSM)
     end
 }
