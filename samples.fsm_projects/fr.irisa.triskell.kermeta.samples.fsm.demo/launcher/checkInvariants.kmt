@@ -1,0 +1,33 @@
+/* $Id: KermetaNewFileWizard.java,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
+ * Creation date: May 24, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+using kermeta::persistence
+require kermeta
+require "fsmLauncher.kmt"
+
+class Main
+{
+    operation main() : Void is do 
+       var res : EMFRepository init EMFRepository.new
+        var resource : EMFResource 
+        resource ?= res.createResource("../models/sample1.fsm", "../metamodels/fsm.ecore")
+        // sample2.fsm
+        stdio.writeln("before loading")
+        resource.load()
+       	stdio.writeln("after loading")
+        var theFSM : FSM
+        theFSM ?= resource.instances.one  
+        result  := theFSM
+        
+        // Uncomment to check the invariant properties : WFR
+        checkWFR(result)
+    end
+}

@@ -1,0 +1,166 @@
+/* $Id: fsm.kmt,v 1.4 2006/04/27 09:22:55 dvojtise Exp $
+ * Project    : fr.irisa.triskell.samples.fsm
+ * File       : fsm.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 juil. 2005
+ * Modified By : 
+ *        Waqas Ahmed Saeed <wahmedsa@irisa.fr>
+ * Modified By : 
+ *        Cyril Faucher <cfaucher@irisa.fr>
+ * Description : 
+ *       Launching Kermeta File for Finite State Machine Sample
+ *		 Use mainload method as entering point for loading XMI based file  
+ */
+package fsm;
+
+require kermeta
+require "../kermeta/fsm.kmt"
+
+using fsm
+using kermeta::standard
+using kermeta::persistence
+using kermeta::exceptions
+
+class Main 
+{	
+	operation mainload() is do
+		var theFSM : FSM init loadfsm()
+		printFSM(theFSM)
+		self.run(theFSM)	
+	end
+	
+	operation mainloadpostviolated() is do
+		var theFSM : FSM init loadfsmpostviolated()
+		printFSM(theFSM)
+		self.run(theFSM)	
+	end
+	
+	/**
+	 * Load the FSM model from a xmi file
+	 * It's an instance of the FSM metamodel
+	 */
+	operation loadfsm() : FSM is do
+		var res : EMFRepository init EMFRepository.new
+        var resource : EMFResource 
+        resource ?= res.createResource("../models/sample1.fsm", "../metamodels/fsm.ecore")
+        // sample2.fsm
+        stdio.writeln("before loading")
+        resource.load()
+       	stdio.writeln("after loading")
+        var theFSM : FSM
+        theFSM ?= resource.instances.one  
+        result  := theFSM
+        
+        // Uncomment to check the invariant properties : WFR
+        checkWFR(result)
+	end
+	
+	operation loadfsmpostviolated() : FSM is do
+		var res : EMFRepository init EMFRepository.new
+        var resource : EMFResource 
+        resource ?= res.createResource("../models/sample1postv.fsm", "../metamodels/fsm.ecore")
+        // sample2.fsm
+        stdio.writeln("before loading")
+        resource.load()
+       	stdio.writeln("after loading")
+        var theFSM : FSM
+        theFSM ?= resource.instances.one  
+        result  := theFSM
+        
+        // Uncomment to check the invariant properties : WFR
+        checkWFR(result)
+	end
+
+	/**
+	 * For all states, we check the WFR
+	 */
+	operation checkWFR(theFSM : FSM) is do
+		stdio.writeln("Check WFR : ")
+		theFSM.ownedState.each{ s | 
+			do
+				// Call the invariant verification
+				stdio.writeln(" - " + s.checkInvariants.toString)
+				rescue (err : ConstraintViolatedInv)
+		            stdio.writeln(err.toString)
+		            stdio.write(err.message)
+		            stdio.writeln(" on " + s.name)
+		    end
+		}
+	end
+	
+// Semantique operationnelle
+	operation run(fsm : FSM) : Void raises FSMException is do  
+		// reset if there is no current state
+		if fsm.currentState == void then fsm.currentState := fsm.initialState end
+		self
+		from var str : String init "init"
+		until str == "quit"
+		loop
+			stdio.writeln("Current state : " + fsm.currentState.name)
+			str := stdio.read("give me a letter : ")
+			if str == "quit" then
+				stdio.writeln("")
+				stdio.writeln("quitting ...")
+			else 
+				if str == "print" then
+					stdio.writeln("")
+					//serializer.printFSM(self)
+				else	
+					stdio.writeln(str)			
+					stdio.writeln("stepping...")
+					do
+						var textRes : String
+						textRes := fsm.currentState.step(str)
+						if( textRes == void or textRes == "" )
+						then
+							textRes := "NC"
+						end
+						
+						stdio.writeln("string produced : " + textRes)
+					
+						rescue (err : ConstraintViolatedPre)
+		            		stdio.writeln(err.toString)
+		            		stdio.writeln(err.message)
+		            		str := "quit"
+		            	rescue (err : ConstraintViolatedPost)
+	            			stdio.writeln(err.toString)
+	            			stdio.writeln(err.message)
+	            			str := "quit"
+	            		
+						rescue(err : NonDeterminism)
+							stdio.writeln(err.toString)
+							str := "quit"	
+						rescue(err : NoTransition)
+							stdio.writeln(err.toString)
+							str := "quit"
+	            	end
+				end
+			end
+		end
+	end
+	
+	
+	/**
+	 * Print the FSM on the standard output
+	 */
+	operation printFSM(fsm : FSM) is do
+		fsm.ownedState.each 
+		{ s | 
+			stdio.writeln("State : " + s.name)
+			s.outgoingTransition.each { t | 
+				var outputText : String
+				if( t.output != void and t.output != "" )
+					then outputText := t.output
+					else outputText := "NC"
+				end
+				stdio.writeln("  Transition : " + t.source.name + "-(" + t.input + "/" + outputText + ")->" + t.target.name)
+			}
+		}
+	end
+
+}
+
+
+

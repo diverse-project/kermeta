@@ -1,0 +1,111 @@
+@mainClass "fsm::Determinization"
+@mainOperation "main"
+    
+  
+package fsm;
+
+require "../kermeta/fsm.kmt"
+
+require kermeta
+
+using fsm
+using kermeta::standard
+using kermeta::persistence
+ 
+class Determinization 
+{ 
+	reference processed_states : Set<State>
+	reference repository : EMFRepository
+	reference helper : AutomatonHelper
+	
+    operation main(input_automaton : String) : Void is do 
+    
+    	// Input automaton (non-determinist)
+    	var input : FSM
+		var output : FSM init FSM.new
+		var output_path : String
+		// Initialize attributes
+		processed_states := Set<State>.new
+		repository := EMFRepository.new
+		helper := AutomatonHelper.new 
+		 
+		// The input automaton to determinize
+		input :=  helper.loadEMFAutomaton(repository, input_automaton, "../metamodels/fsm.ecore")
+		output_path := input_automaton.substring(0, input_automaton.size-3)+"det.fsm"
+
+	   	output.initialize(input.initialState, true)
+
+    	determinize(input, output, output.initialState)
+
+	    // Define the final states : q' intersection initial Final states is void
+	    output.finalState.addAll
+	    ( 
+			AutomatonHelper.new.seqToSet( output.ownedState.select { 
+		e | e.combination.detect{ a | 
+		    input.finalState.contains(a) } != void  } )
+		)
+		
+    	// We don't need combination to be stored
+    	output.ownedState.each { e | e.combination.clear } 
+    	helper.dotprint(output)
+    	// Save the automaton
+    	helper.saveEMFAutomaton(repository, output, output_path, "../metamodels/fsm.ecore")
+
+    end
+    
+    operation determinize(input : FSM, output : FSM, output_state : State) is do
+    
+    	if not processed_states.contains(output_state) then
+   			processed_states.add(output_state)
+	    	// For each letter of the alphabet
+	    	input.alphabet.each { nextl |
+    			// There exists a state x of q' (where q' is a P(Q))
+    			// and state-y from Q so that : x --l-->  y belongs to input.transitionSet
+		    	var newq : State init State.new
+				newq.combination := helper.seqToSet(
+    				input.ownedTransition.select { e | e.input.equals(nextl) }.
+    				select { a | 
+    					output_state.name == a.source.name
+    					or
+    					output_state.combination.detect { i | 
+    						i.name==a.source.name } != void }.collect { b | 
+    							b.target }  
+    				)
+    				
+    			newq.name := join(newq.combination.collect{ a | a.name })
+
+    			// Add the state to the output automaton if we found one
+    			if (newq.name.size > 0) then  
+					// Add the new state
+					if (output.ownedState.detect { e | newq.name == e.name } == void) then  
+						output.ownedState.add(newq)
+					else
+						newq := output.ownedState.detect { e | e.name == newq.name }
+					end
+					// Add the new transition
+					var newt : Transition init helper.createTransition(output_state, newq, nextl)  
+					output.ownedTransition.add(newt)
+					self.determinize(input, output, newq)
+	    		end
+			}	// End of Loop
+    	end  
+    end
+   
+    operation join( str_seq : Collection<String>) : String is do
+    	result := ""
+		from var it : Iterator<String> init str_seq.iterator
+		until it.isOff
+		loop
+			result.append(it.next)
+		end
+    end
+    
+}
+/*
+Algorithme: on part d'un automate non-déterministe . On construit l'automate déterministe ayant
+
+   1. comme états les parties de Q
+   2. comme état initial I
+   3. comme transitions: (U,a,V) si V est l'ensemble des états atteignables depuis U par une transition a
+   4. comme états terminaux les états dont la combinaison contient l'état final de l'automate de départ
+   */

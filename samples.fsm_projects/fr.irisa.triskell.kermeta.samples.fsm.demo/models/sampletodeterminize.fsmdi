@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="sampletodeterminize.fsm#/"/>
+  <diagrams position="0,0" size="100,100" name="sample2" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fsmdiagram">
+      <element href="sampletodeterminize.fsm#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="180,134" size="50,50">
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3 //@diagrams.0/@contained.4"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="sampletodeterminize.fsm#//@ownedState.0"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="180,244" size="50,50">
+      <anchorage graphEdge="//@diagrams.0/@contained.4"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="sampletodeterminize.fsm#//@ownedState.1"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.1">
+      <property key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="sampletodeterminize.fsm#//@ownedState.0/@outgoingTransition.1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="8,-18"/>
+      <waypoints>[-26, 12, -26, 12]</waypoints>
+      <waypoints>[-43, 12, -43, 12]</waypoints>
+      <waypoints>[-43, -41, -43, -41]</waypoints>
+      <waypoints>[13, -41, 13, -41]</waypoints>
+      <waypoints>[13, -26, 13, -26]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.1">
+      <property key="router" value="Rectilinear"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="sampletodeterminize.fsm#//@ownedState.0/@outgoingTransition.2"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="-4,-24"/>
+      <waypoints>[25, -7, 25, -7]</waypoints>
+      <waypoints>[49, -7, 49, -7]</waypoints>
+      <waypoints>[49, 9, 49, 9]</waypoints>
+      <waypoints>[25, 9, 25, 9]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="sampletodeterminize.fsm#//@ownedState.0/@outgoingTransition.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>
