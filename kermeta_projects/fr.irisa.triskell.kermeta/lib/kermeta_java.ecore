@@ -34,6 +34,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CallFeature" eSuperTypes="#//language/behavior/CallExpression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//language/behavior/Expression"
             containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty" eType="#//language/structure/Property"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation" eType="#//language/structure/Operation"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticEnumLiteral"
@@ -148,6 +149,7 @@
         <eOperations name="unset">
           <eParameters name="property" eType="#//language/structure/Property"/>
         </eOperations>
+        <eOperations name="checkInvariants" eType="#//language/structure/Boolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="tag" upperBound="-1"
             eType="#//language/structure/Tag" eOpposite="#//language/structure/Tag/object"/>
       </eClassifiers>
@@ -158,6 +160,10 @@
             eType="#//language/structure/Type"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
             eType="#//language/structure/Parameter" containment="true" eOpposite="#//language/structure/Parameter/operation"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="pre" upperBound="-1"
+            eType="#//language/structure/Constraint" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="post" upperBound="-1"
+            eType="#//language/structure/Constraint" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//language/behavior/Expression"
             containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="superOperation" eType="#//language/structure/Operation"/>
@@ -236,7 +242,19 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="object" lowerBound="1"
             upperBound="-1" eType="#//language/structure/Object" eOpposite="#//language/structure/Object/tag"/>
       </eClassifiers>
+      <eClassifiers xsi:type="ecore:EClass" name="Constraint" eSuperTypes="#//language/structure/NamedElement">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="body" ordered="false"
+            lowerBound="1" eType="#//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="stereotype" eType="#//language/structure/ConstraintType"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//language/structure/ConstraintLanguage"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="ConstraintLanguage" instanceClassName="">
+        <eLiterals name="kermeta"/>
+        <eLiterals name="ocl" value="1"/>
+      </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//language/structure/TypeContainer #//language/structure/GenericTypeDefinition">
+        <eStructuralFeatures xsi:type="ecore:EReference" name="inv" upperBound="-1"
+            eType="#//language/structure/Constraint" defaultValueLiteral="" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//language/structure/Boolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
             eType="#//language/structure/Property" containment="true" eOpposite="#//language/structure/Property/owningClass"/>
@@ -244,6 +262,11 @@
             eType="#//language/structure/Operation" containment="true" eOpposite="#//language/structure/Operation/owningClass"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="superType" upperBound="-1"
             eType="#//language/structure/Type"/>
+      </eClassifiers>
+      <eClassifiers xsi:type="ecore:EEnum" name="ConstraintType">
+        <eLiterals name="inv"/>
+        <eLiterals name="pre" value="1"/>
+        <eLiterals name="post" value="2"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeVariable" eSuperTypes="#//language/structure/TypeContainer #//language/structure/Type #//language/structure/NamedElement">
         <eStructuralFeatures xsi:type="ecore:EReference" name="supertype" eType="#//language/structure/Type"/>
