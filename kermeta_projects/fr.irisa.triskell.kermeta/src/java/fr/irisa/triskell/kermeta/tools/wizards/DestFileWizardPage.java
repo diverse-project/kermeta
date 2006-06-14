@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.5 2006-02-13 17:22:11 zdrey Exp $
+/* $Id: DestFileWizardPage.java,v 1.6 2006-06-14 15:37:12 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -53,7 +53,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.ContainerGenerator;
-//import org.eclipse.ui.help.WorkbenchHelp;
+// import org.eclipse.ui.help.WorkbenchHelp;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 import org.eclipse.ui.internal.ide.dialogs.CreateLinkedResourceGroup;
 import org.eclipse.ui.internal.ide.misc.ResourceAndContainerGroup;
@@ -69,82 +69,111 @@ import fr.irisa.triskell.kermeta.KermetaMessages;
  */
 public class DestFileWizardPage extends WizardPage implements Listener {
 	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
+
 	// the current resource selection
-	protected	IStructuredSelection currentSelection;
-	
+	protected IStructuredSelection currentSelection;
+
 	// cache of newly-created file
 	protected IFile newFile;
+
 	protected IPath linkTargetPath;
 
 	// widgets
 	protected ResourceAndContainerGroup resourceGroup;
+
 	protected Button advancedButton;
+
 	protected CreateLinkedResourceGroup linkedResourceGroup;
+
 	protected Composite linkedResourceParent;
+
 	protected Composite linkedResourceComposite;
+
 	protected Group fileExistsGroup;
+
 	protected Button forbidFileExistRadio;
+
 	protected Button askIfFileExistRadio;
+
 	protected Button overwriteIfFileExistRadio;
-		
+
 	// initial value stores
 	protected String initialFileName;
+
 	protected IPath initialContainerFullPath;
+
 	/**
-	 * Height of the "advanced" linked resource group. Set when the
-	 * advanced group is first made visible. 
+	 * Height of the "advanced" linked resource group. Set when the advanced
+	 * group is first made visible.
 	 */
 	protected int linkedResourceGroupHeight = -1;
+
 	/**
 	 * First time the advanced group is validated.
-	 */	
+	 */
 	private boolean firstLinkCheck = true;
-	
+
 	protected Composite topLevel;
 
-
 	/**
-	 * selects a destination file wizard page. If the initial resource selection 
-	 * contains exactly one container resource then it will be used as the default
-	 * container resource.
-	 *
-	 * @param pageName the name of the page
-	 * @param selection the current resource selection
+	 * selects a destination file wizard page. If the initial resource selection
+	 * contains exactly one container resource then it will be used as the
+	 * default container resource.
+	 * 
+	 * @param pageName
+	 *            the name of the page
+	 * @param selection
+	 *            the current resource selection
 	 */
 	public DestFileWizardPage(String pageName, IStructuredSelection selection) {
 		super(pageName);
 		setPageComplete(false);
 		this.currentSelection = selection;
 	}
-	
-	// FIXME : Temporary static strings, since we used to use 
+
+	// FIXME : Temporary static strings, since we used to use
 	// IDEWorkbenchMessages.getString which is not available anymore.
-	public static final String NEW_FILE_MSG = KermetaMessages.getString("Kermeta.NEWFILE");
-    private static final String FILE_CREATION_ERROR = KermetaMessages.getString("Kermeta.CREATION_PB");
-    private static final String HIDE_ADVANCED_MSG = KermetaMessages.getString("Kermeta.HIDE_ADVANCED");
-    private static final String SHOW_ADVANCED_MSG = KermetaMessages.getString("Kermeta.SHOW_ADVANCED");
-    private static final String INTERNAL_ERROR_MSG = KermetaMessages.getString("Kermeta.INT_ERR");
-    private static final String INTERNAL_ERROR_TITLE = KermetaMessages.getString("Kermeta.CREATION_PB");
-    protected static final String FILE_CREATION_PROGRESS_MSG = KermetaMessages.getString("Kermeta.NEWFILE_PROGRESS");
-	
-	
+	public static final String NEW_FILE_MSG = KermetaMessages
+			.getString("Kermeta.NEWFILE");
+
+	private static final String FILE_CREATION_ERROR = KermetaMessages
+			.getString("Kermeta.CREATION_PB");
+
+	private static final String HIDE_ADVANCED_MSG = KermetaMessages
+			.getString("Kermeta.HIDE_ADVANCED");
+
+	private static final String SHOW_ADVANCED_MSG = KermetaMessages
+			.getString("Kermeta.SHOW_ADVANCED");
+
+	private static final String INTERNAL_ERROR_MSG = KermetaMessages
+			.getString("Kermeta.INT_ERR");
+
+	private static final String INTERNAL_ERROR_TITLE = KermetaMessages
+			.getString("Kermeta.CREATION_PB");
+
+	protected static final String FILE_CREATION_PROGRESS_MSG = KermetaMessages
+			.getString("Kermeta.NEWFILE_PROGRESS");
+
 	/**
 	 * Creates the widget for advanced options.
-	 *  
-	 * @param parent the parent composite
+	 * 
+	 * @param parent
+	 *            the parent composite
 	 */
 	protected void createAdvancedControls(Composite parent) {
-		Preferences preferences = ResourcesPlugin.getPlugin().getPluginPreferences();
-		
+		Preferences preferences = ResourcesPlugin.getPlugin()
+				.getPluginPreferences();
+
 		if (preferences.getBoolean(ResourcesPlugin.PREF_DISABLE_LINKING) == false) {
 			linkedResourceParent = new Composite(parent, SWT.NONE);
 			linkedResourceParent.setFont(parent.getFont());
-			linkedResourceParent.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+			linkedResourceParent.setLayoutData(new GridData(
+					GridData.FILL_HORIZONTAL));
 			GridLayout layout = new GridLayout();
 			layout.marginHeight = 0;
 			layout.marginWidth = 0;
 			linkedResourceParent.setLayout(layout);
-	
+
 			advancedButton = new Button(linkedResourceParent, SWT.PUSH);
 			advancedButton.setFont(linkedResourceParent.getFont());
 			advancedButton.setText(SHOW_ADVANCED_MSG);
@@ -157,68 +186,72 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 				}
 			});
 		}
-		linkedResourceGroup = new CreateLinkedResourceGroup(
-			IResource.FILE,
-			new Listener() {
-				public void handleEvent(Event e) {
-					setPageComplete(validatePage());
-					firstLinkCheck = false;					
-				}
-			});	
+		// TODO In order to compliant with Eclipse 3.2, you must uncomment the third parameter "null"
+		linkedResourceGroup = new CreateLinkedResourceGroup(IResource.FILE,
+				new Listener() {
+					public void handleEvent(Event e) {
+						setPageComplete(validatePage());
+						firstLinkCheck = false;
+					}
+				}/* , null */);
 	}
-	/** (non-Javadoc)
-	 * Method declared on IDialogPage.
+
+	/**
+	 * (non-Javadoc) Method declared on IDialogPage.
 	 */
 	public void createControl(Composite parent) {
 		initializeDialogUnits(parent);
 		// top level group
-		topLevel = new Composite(parent,SWT.NONE);
+		topLevel = new Composite(parent, SWT.NONE);
 		topLevel.setLayout(new GridLayout());
-		topLevel.setLayoutData(new GridData(
-			GridData.VERTICAL_ALIGN_FILL | GridData.HORIZONTAL_ALIGN_FILL));
+		topLevel.setLayoutData(new GridData(GridData.VERTICAL_ALIGN_FILL
+				| GridData.HORIZONTAL_ALIGN_FILL));
 		topLevel.setFont(parent.getFont());
-		//WorkbenchHelp.setHelp(topLevel, IHelpContextIds.NEW_FILE_WIZARD_PAGE);
-		
+		// WorkbenchHelp.setHelp(topLevel,
+		// IHelpContextIds.NEW_FILE_WIZARD_PAGE);
+
 		createPreControls(topLevel);
-		
-	
+
 		// resource and container group
-		resourceGroup = new ResourceAndContainerGroup(topLevel, this, getNewFileLabel(), NEW_FILE_MSG, false, SIZING_CONTAINER_GROUP_HEIGHT); //$NON-NLS-1$
+		resourceGroup = new ResourceAndContainerGroup(topLevel, this,
+				getNewFileLabel(), NEW_FILE_MSG, false,
+				SIZING_CONTAINER_GROUP_HEIGHT); //$NON-NLS-1$
 		resourceGroup.setAllowExistingResources(false);
 		initialPopulateContainerNameField();
 		createFileExistsBehaviorControls(topLevel);
 		createAdvancedControls(topLevel);
 		if (initialFileName != null)
 			resourceGroup.setResource(initialFileName);
-		
+
 		// Show description on opening
 		setErrorMessage(null);
 		setMessage(null);
 		setControl(topLevel);
 		validatePage();
-		
+
 	}
-	
+
 	/**
 	 * creates controls that fit before the main controls
+	 * 
 	 * @param parent
 	 */
 	protected void createPreControls(Composite parent) {
 		// nothing special here, placeholder for children classes
 	}
-	
+
 	/**
 	 * @param parent
 	 */
 	protected void createFileExistsBehaviorControls(Composite parent) {
 		Font font = parent.getFont();
-        // Advanced group
-        fileExistsGroup = new Group(parent, SWT.NONE);
-        GridLayout layout = new GridLayout(2,false);
-        fileExistsGroup.setLayout(layout);
-        fileExistsGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-        fileExistsGroup.setFont(font);
-        fileExistsGroup.setText("Behavior if file exists:");         
+		// Advanced group
+		fileExistsGroup = new Group(parent, SWT.NONE);
+		GridLayout layout = new GridLayout(2, false);
+		fileExistsGroup.setLayout(layout);
+		fileExistsGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		fileExistsGroup.setFont(font);
+		fileExistsGroup.setText("Behavior if file exists:");
 
 		Label label = new Label(fileExistsGroup, SWT.NULL);
 		label.setText("Do not owerwrite existing file ");
@@ -229,14 +262,13 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 				handleFileExistsButtonSelect();
 			}
 		});
-/*		label = new Label(fileExistsGroup, SWT.NULL);
-		label.setText("Ask ");
-		askIfFileExistRadio = new Button(fileExistsGroup, SWT.RADIO);
-		askIfFileExistRadio.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				handleFileExistsButtonSelect();
-			}
-		}); */
+		/*
+		 * label = new Label(fileExistsGroup, SWT.NULL); label.setText("Ask ");
+		 * askIfFileExistRadio = new Button(fileExistsGroup, SWT.RADIO);
+		 * askIfFileExistRadio.addSelectionListener(new SelectionAdapter() {
+		 * public void widgetSelected(SelectionEvent e) {
+		 * handleFileExistsButtonSelect(); } });
+		 */
 		label = new Label(fileExistsGroup, SWT.NULL);
 		label.setText("Overwrite existing file ");
 		overwriteIfFileExistRadio = new Button(fileExistsGroup, SWT.RADIO);
@@ -245,191 +277,215 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 				handleFileExistsButtonSelect();
 			}
 		});
-		
+
 	}
+
 	/**
 	 * Creates a file resource given the file handle and contents.
-	 *
-	 * @param fileHandle the file handle to create a file resource with
-	 * @param contents the initial contents of the new file resource, or
-	 *   <code>null</code> if none (equivalent to an empty stream)
-	 * @param monitor the progress monitor to show visual progress with
-	 * @exception CoreException if the operation fails
-	 * @exception OperationCanceledException if the operation is canceled
+	 * 
+	 * @param fileHandle
+	 *            the file handle to create a file resource with
+	 * @param contents
+	 *            the initial contents of the new file resource, or
+	 *            <code>null</code> if none (equivalent to an empty stream)
+	 * @param monitor
+	 *            the progress monitor to show visual progress with
+	 * @exception CoreException
+	 *                if the operation fails
+	 * @exception OperationCanceledException
+	 *                if the operation is canceled
 	 */
-	protected void createFile(IFile fileHandle, InputStream contents, IProgressMonitor monitor) throws CoreException {
+	protected void createFile(IFile fileHandle, InputStream contents,
+			IProgressMonitor monitor) throws CoreException {
 		if (contents == null)
 			contents = new ByteArrayInputStream(new byte[0]);
-	
+
 		try {
 			// Create a new file resource in the workspace
-			if (linkTargetPath != null) 
-				fileHandle.createLink(linkTargetPath, IResource.ALLOW_MISSING_LOCAL, monitor);
+			if (linkTargetPath != null)
+				fileHandle.createLink(linkTargetPath,
+						IResource.ALLOW_MISSING_LOCAL, monitor);
 			else
 				fileHandle.create(contents, false, monitor);
-		}
-		catch (CoreException e) {
+		} catch (CoreException e) {
 			// If the file already existed locally, just refresh to get contents
 			if (e.getStatus().getCode() == IResourceStatus.PATH_OCCUPIED)
 				fileHandle.refreshLocal(IResource.DEPTH_ZERO, null);
 			else
 				throw e;
 		}
-	
+
 		if (monitor.isCanceled())
 			throw new OperationCanceledException();
 	}
+
 	/**
-	 * Creates a file resource handle for the file with the given workspace path.
-	 * This method does not create the file resource; this is the responsibility
-	 * of <code>createFile</code>.
-	 *
-	 * @param filePath the path of the file resource to create a handle for
+	 * Creates a file resource handle for the file with the given workspace
+	 * path. This method does not create the file resource; this is the
+	 * responsibility of <code>createFile</code>.
+	 * 
+	 * @param filePath
+	 *            the path of the file resource to create a handle for
 	 * @return the new file resource handle
 	 * @see #createFile
 	 */
 	protected IFile createFileHandle(IPath filePath) {
-		return IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(filePath);
+		return IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(
+				filePath);
 	}
+
 	/**
-	 * Creates the link target path if a link target has been specified. 
+	 * Creates the link target path if a link target has been specified.
 	 */
 	protected void createLinkTarget() {
 		String linkTarget = linkedResourceGroup.getLinkTarget();
 		if (linkTarget != null) {
 			linkTargetPath = new Path(linkTarget);
-		}
-		else {
+		} else {
 			linkTargetPath = null;
 		}
 	}
+
 	/**
-	 * Creates a new file resource in the selected container and with the selected
-	 * name. Creates any missing resource containers along the path; does nothing if
-	 * the container resources already exist.
+	 * Creates a new file resource in the selected container and with the
+	 * selected name. Creates any missing resource containers along the path;
+	 * does nothing if the container resources already exist.
 	 * <p>
-	 * In normal usage, this method is invoked after the user has pressed Finish on
-	 * the wizard; the enablement of the Finish button implies that all controls on 
-	 * on this page currently contain valid values.
+	 * In normal usage, this method is invoked after the user has pressed Finish
+	 * on the wizard; the enablement of the Finish button implies that all
+	 * controls on on this page currently contain valid values.
 	 * </p>
 	 * <p>
 	 * Note that this page caches the new file once it has been successfully
-	 * created; subsequent invocations of this method will answer the same
-	 * file resource without attempting to create it again.
+	 * created; subsequent invocations of this method will answer the same file
+	 * resource without attempting to create it again.
 	 * </p>
 	 * <p>
-	 * This method should be called within a workspace modify operation since
-	 * it creates resources.
+	 * This method should be called within a workspace modify operation since it
+	 * creates resources.
 	 * </p>
-	 *
-	 * @return the created file resource, or <code>null</code> if the file
-	 *    was not created
+	 * 
+	 * @return the created file resource, or <code>null</code> if the file was
+	 *         not created
 	 */
 	public IFile createNewFile() {
 		if (newFile != null)
 			return newFile;
-	
+
 		// create the new file and cache it if successful
-	
+
 		final IPath containerPath = resourceGroup.getContainerFullPath();
 		IPath newFilePath = containerPath.append(resourceGroup.getResource());
 		final IFile newFileHandle = createFileHandle(newFilePath);
 		final InputStream initialContents = getInitialContents();
-		
+
 		createLinkTarget();
 		WorkspaceModifyOperation op = new WorkspaceModifyOperation(null) {
-			protected void execute(IProgressMonitor monitor) throws CoreException,
-				InterruptedException
-			{
+			protected void execute(IProgressMonitor monitor)
+					throws CoreException, InterruptedException {
 				try {
 					monitor.beginTask(FILE_CREATION_PROGRESS_MSG, 2000); //$NON-NLS-1$
-					ContainerGenerator generator = new ContainerGenerator(containerPath);
-					generator.generateContainer(new SubProgressMonitor(monitor, 1000));
-					createFile(newFileHandle,initialContents, new SubProgressMonitor(monitor, 1000));
+					ContainerGenerator generator = new ContainerGenerator(
+							containerPath);
+					generator.generateContainer(new SubProgressMonitor(monitor,
+							1000));
+					createFile(newFileHandle, initialContents,
+							new SubProgressMonitor(monitor, 1000));
 				} finally {
 					monitor.done();
 				}
 			}
 		};
-	
+
 		try {
 			getContainer().run(true, true, op);
 		} catch (InterruptedException e) {
 			return null;
 		} catch (InvocationTargetException e) {
 			if (e.getTargetException() instanceof CoreException) {
-				ErrorDialog.openError(
-					getContainer().getShell(), // Was Utilities.getFocusShell()
-					FILE_CREATION_ERROR,  //$NON-NLS-1$
-					null,	// no special message
-					((CoreException) e.getTargetException()).getStatus());
-			}
-			else {
-				// CoreExceptions are handled above, but unexpected runtime exceptions and errors may still occur.
-				IDEWorkbenchPlugin.log(MessageFormat.format("Exception in {0}.getNewFile(): {1}", new Object[] {getClass().getName(), e.getTargetException()}));
-				MessageDialog.openError(getContainer().getShell(), INTERNAL_ERROR_TITLE, INTERNAL_ERROR_MSG+": "+e.getTargetException().getMessage()); 
+				ErrorDialog.openError(getContainer().getShell(), // Was
+																	// Utilities.getFocusShell()
+						FILE_CREATION_ERROR, //$NON-NLS-1$
+						null, // no special message
+						((CoreException) e.getTargetException()).getStatus());
+			} else {
+				// CoreExceptions are handled above, but unexpected runtime
+				// exceptions and errors may still occur.
+				IDEWorkbenchPlugin
+						.log(MessageFormat.format(
+								"Exception in {0}.getNewFile(): {1}",
+								new Object[] { getClass().getName(),
+										e.getTargetException() }));
+				MessageDialog.openError(getContainer().getShell(),
+						INTERNAL_ERROR_TITLE, INTERNAL_ERROR_MSG + ": "
+								+ e.getTargetException().getMessage());
 			}
 			return null;
 		}
-	
+
 		newFile = newFileHandle;
-	
+
 		return newFile;
 	}
+
 	/**
-	 * Returns the current full path of the containing resource as entered or 
+	 * Returns the current full path of the containing resource as entered or
 	 * selected by the user, or its anticipated initial value.
-	 *
-	 * @return the container's full path, anticipated initial value, 
-	 *   or <code>null</code> if no path is known
+	 * 
+	 * @return the container's full path, anticipated initial value, or
+	 *         <code>null</code> if no path is known
 	 */
 	public IPath getContainerFullPath() {
 		return resourceGroup.getContainerFullPath();
 	}
+
 	/**
 	 * Returns the current file name as entered by the user, or its anticipated
 	 * initial value.
-	 *
-	 * @return the file name, its anticipated initial value, or <code>null</code>
-	 *   if no file name is known
+	 * 
+	 * @return the file name, its anticipated initial value, or
+	 *         <code>null</code> if no file name is known
 	 */
 	public String getFileName() {
 		if (resourceGroup == null)
 			return initialFileName;
-			
+
 		return resourceGroup.getResource();
 	}
+
 	/**
-	 * Returns a stream containing the initial contents to be given to new file resource
-	 * instances.  <b>Subclasses</b> may wish to override.  This default implementation
-	 * provides no initial contents.
-	 *
+	 * Returns a stream containing the initial contents to be given to new file
+	 * resource instances. <b>Subclasses</b> may wish to override. This default
+	 * implementation provides no initial contents.
+	 * 
 	 * @return initial contents to be given to new file resource instances
 	 */
 	protected InputStream getInitialContents() {
 		return null;
 	}
+
 	/**
 	 * Returns the label to display in the file name specification visual
 	 * component group.
 	 * <p>
 	 * Subclasses may reimplement.
 	 * </p>
-	 *
+	 * 
 	 * @return the label to display in the file name specification visual
-	 *     component group
+	 *         component group
 	 */
 	protected String getNewFileLabel() {
 		return "Fi&le name"; //$NON-NLS-1$
 	}
+
 	/**
-	 * Shows/hides the advanced option widgets. 
+	 * Shows/hides the advanced option widgets.
 	 */
 	protected void handleAdvancedButtonSelect() {
 		Shell shell = getShell();
 		Point shellSize = shell.getSize();
 		Composite composite = (Composite) getControl();
-		
+
 		if (linkedResourceComposite != null) {
 			linkedResourceComposite.dispose();
 			linkedResourceComposite = null;
@@ -437,9 +493,11 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 			shell.setSize(shellSize.x, shellSize.y - linkedResourceGroupHeight);
 			advancedButton.setText(SHOW_ADVANCED_MSG); //$NON-NLS-1$
 		} else {
-			linkedResourceComposite = linkedResourceGroup.createContents(linkedResourceParent);
+			linkedResourceComposite = linkedResourceGroup
+					.createContents(linkedResourceParent);
 			if (linkedResourceGroupHeight == -1) {
-				Point groupSize = linkedResourceComposite.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);		
+				Point groupSize = linkedResourceComposite.computeSize(
+						SWT.DEFAULT, SWT.DEFAULT, true);
 				linkedResourceGroupHeight = groupSize.y;
 			}
 			shell.setSize(shellSize.x, shellSize.y + linkedResourceGroupHeight);
@@ -447,26 +505,29 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 			advancedButton.setText(HIDE_ADVANCED_MSG); //$NON-NLS-1$
 		}
 	}
-	
+
 	/**
-	 * Behavior when selecting FileExistButton. 
-	 * It enables and disables file exist error
+	 * Behavior when selecting FileExistButton. It enables and disables file
+	 * exist error
 	 */
 	protected void handleFileExistsButtonSelect() {
-		resourceGroup.setAllowExistingResources(!forbidFileExistRadio.getSelection());
+		resourceGroup.setAllowExistingResources(!forbidFileExistRadio
+				.getSelection());
 		Event trucEvent = new Event();
-		
+
 		resourceGroup.handleEvent(trucEvent);
 		setPageComplete(validatePage());
 	}
+
 	/**
-	 * The <code>DestFileWizardPage</code> implementation of this 
-	 * <code>Listener</code> method handles all events and enablements for controls
-	 * on this page. Subclasses may extend.
+	 * The <code>DestFileWizardPage</code> implementation of this
+	 * <code>Listener</code> method handles all events and enablements for
+	 * controls on this page. Subclasses may extend.
 	 */
 	public void handleEvent(Event event) {
 		setPageComplete(validatePage());
 	}
+
 	/**
 	 * Sets the initial contents of the container name entry field, based upon
 	 * either a previously-specified initial value or the ability to determine
@@ -481,24 +542,28 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 				Object object = enumeration.next();
 				IResource selectedResource = null;
 				if (object instanceof IResource) {
-					selectedResource = (IResource)object;
+					selectedResource = (IResource) object;
 				} else if (object instanceof IAdaptable) {
-					selectedResource = (IResource)((IAdaptable)object).getAdapter(IResource.class);
+					selectedResource = (IResource) ((IAdaptable) object)
+							.getAdapter(IResource.class);
 				}
 				if (selectedResource != null) {
 					if (selectedResource.getType() == IResource.FILE)
 						selectedResource = selectedResource.getParent();
 					if (selectedResource.isAccessible())
-						resourceGroup.setContainerFullPath(selectedResource.getFullPath());
+						resourceGroup.setContainerFullPath(selectedResource
+								.getFullPath());
 				}
 			}
 		}
 	}
+
 	/**
-	 * Sets the value of this page's container name field, or stores
-	 * it for future use if this page's controls do not exist yet.
-	 *
-	 * @param path the full path to the container
+	 * Sets the value of this page's container name field, or stores it for
+	 * future use if this page's controls do not exist yet.
+	 * 
+	 * @param path
+	 *            the full path to the container
 	 */
 	public void setContainerFullPath(IPath path) {
 		if (resourceGroup == null)
@@ -506,11 +571,13 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		else
 			resourceGroup.setContainerFullPath(path);
 	}
+
 	/**
-	 * Sets the value of this page's file name field, or stores
-	 * it for future use if this page's controls do not exist yet.
-	 *
-	 * @param value new file name
+	 * Sets the value of this page's file name field, or stores it for future
+	 * use if this page's controls do not exist yet.
+	 * 
+	 * @param value
+	 *            new file name
 	 */
 	public void setFileName(String value) {
 		if (resourceGroup == null)
@@ -518,71 +585,74 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 		else
 			resourceGroup.setResource(value);
 	}
+
 	/**
-	 * Checks whether the linked resource target is valid.
-	 * Sets the error message accordingly and returns the status.
-	 *  
+	 * Checks whether the linked resource target is valid. Sets the error
+	 * message accordingly and returns the status.
+	 * 
 	 * @return IStatus validation result from the CreateLinkedResourceGroup
 	 */
 	protected IStatus validateLinkedResource() {
 		IPath containerPath = resourceGroup.getContainerFullPath();
 		IPath newFilePath = containerPath.append(resourceGroup.getResource());
 		IFile newFileHandle = createFileHandle(newFilePath);
-		IStatus status = linkedResourceGroup.validateLinkLocation(newFileHandle);
-	
+		IStatus status = linkedResourceGroup
+				.validateLinkLocation(newFileHandle);
+
 		if (status.getSeverity() == IStatus.ERROR) {
 			if (firstLinkCheck)
 				setMessage(status.getMessage());
 			else
-				setErrorMessage(status.getMessage());		
+				setErrorMessage(status.getMessage());
 		} else if (status.getSeverity() == IStatus.WARNING) {
 			setMessage(status.getMessage(), WARNING);
-			setErrorMessage(null);		
-		}		
-		return status;	
+			setErrorMessage(null);
+		}
+		return status;
 	}
+
 	/**
-	 * Returns whether this page's controls currently all contain valid 
-	 * values.
-	 *
+	 * Returns whether this page's controls currently all contain valid values.
+	 * 
 	 * @return <code>true</code> if all controls are valid, and
-	 *   <code>false</code> if at least one is invalid
+	 *         <code>false</code> if at least one is invalid
 	 */
 	protected boolean validatePage() {
 		boolean valid = true;
-		
+
 		if (!resourceGroup.areAllValuesValid()) {
 			// if blank name then fail silently
 			if (resourceGroup.getProblemType() == ResourceAndContainerGroup.PROBLEM_RESOURCE_EMPTY
-				|| resourceGroup.getProblemType() == ResourceAndContainerGroup.PROBLEM_CONTAINER_EMPTY) {
+					|| resourceGroup.getProblemType() == ResourceAndContainerGroup.PROBLEM_CONTAINER_EMPTY) {
 				setMessage(resourceGroup.getProblemMessage());
-				setErrorMessage(null);			
+				setErrorMessage(null);
 			} else
 				setErrorMessage(resourceGroup.getProblemMessage());
 			valid = false;
 		}
-		
+
 		IStatus linkedResourceStatus = null;
 		if (valid) {
 			linkedResourceStatus = validateLinkedResource();
 			if (linkedResourceStatus.getSeverity() == IStatus.ERROR)
 				valid = false;
-		}		
+		}
 		// validateLinkedResource sets messages itself
-		if (valid && (linkedResourceStatus == null || linkedResourceStatus.isOK())) {
+		if (valid
+				&& (linkedResourceStatus == null || linkedResourceStatus.isOK())) {
 			setMessage(null);
 			setErrorMessage(null);
 		}
 		return valid;
 	}
+
 	/*
 	 * @see DialogPage.setVisible(boolean)
 	 */
 	public void setVisible(boolean visible) {
 		super.setVisible(visible);
-		if(visible)
+		if (visible)
 			resourceGroup.setFocus();
 	}
-	    
-    
+
 }
