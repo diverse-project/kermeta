@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            class="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.editor.FsmEditorEditor"
+            icon="icons/FsmEditor.gif"
+            default="true"
+            name="FsmGraphicalEditor"
+            id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.editor.FsmEditorEditor"
+            contributorClass="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.actions.FsmEditorEditorActionBarContributor"
+            extensions="fsmdi">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.newWizards">
+      <wizard
+            icon="icons/FsmEditor.gif"
+            class="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.wizards.NewFsmEditorDiagrams"
+            category="org.topcased.facilities.newWizards/org.topcased.modeler.newdiagram"
+            name="FsmEditor Diagram"
+            id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.wizards.NewFsmEditorDiagrams">
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+   
+   <extension point="org.topcased.modeler.templates">
+      <template
+            di="templates/template1/%name%.fsmdi"
+            model="templates/template1/%name%.fsm"
+            name="FsmEditor - Fsm_Diagram"
+            id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.templates.diagram"
+            editorId="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.editor.FsmEditorEditor"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.topcased.modeler.perspective">
+         <newWizardShortcut id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.wizards.NewFsmEditorDiagrams"/>
+      </perspectiveExtension>
+   </extension>
+   
+   <extension point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.topcased.modeler.preferences.ModelerPreferencePage"
+            class="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.preferences.FsmEditorPreferencePage"
+            id="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.preferences.FsmEditorPreferencePage"
+            name="FsmEditor"/>
+   </extension>
+   
+   <extension point="org.topcased.modeler.diagrams">    
+      <diagram
+            configuration="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.FsmDiagramConfiguration"
+            id="fsmdiagram"
+            name="Fsm_Diagram">
+         <enableFor class="fr.irisa.triskell.kermeta.samples.fsm.FSM"/>
+      </diagram>
+	</extension>
+   
+</plugin>
