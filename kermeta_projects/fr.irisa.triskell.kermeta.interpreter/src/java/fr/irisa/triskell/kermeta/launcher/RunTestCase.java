@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.7 2005-05-30 11:48:18 zdrey Exp $
+/* $Id: RunTestCase.java,v 1.8 2006-06-15 07:33:56 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : GPL
@@ -7,9 +7,11 @@
  * Creation date : Mar 14, 2005
  * Authors : 
  * 		dvojtise	<dvojtise@irisa.fr>
+ * 		zdrey 		<zdrey@irisa.fr>
  * Description :  	
  * 	see class javadoc.	
  * History :
+ * 		- added detection of Kermeta assertion so it can be translated into JUnit failure
  * 		- interpreterInstance has become a static attribute of Run 
  * 		- splitted main method in smaller ones
  */
@@ -19,6 +21,7 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -37,9 +40,6 @@ public class RunTestCase extends TestCase {
     private RunJunitFactory containerTestSuite;
     
     private static KermetaInterpreter interpreter = null;
-
-    // workaround about static fileds in Run.java
-    private static RunJunitFactory containerTestSuitePreviouslyRun = null;
 
     public RunTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite)
 
@@ -99,9 +99,23 @@ public class RunTestCase extends TestCase {
      * means that we have to execute all the operation prefixed by
      * <code>test</code>. Otherwise, there should be a "mainOperation" to
      * launch (which name is defined in the <code>mainOperation</code> tag
+     * @throws Exception 
      */
-    public void runTest() {
-        interpreter.launch();
+    public void runTest() throws KermetaRaisedException {
+    	try{
+    		interpreter.launch();
+    	}
+    	catch(KermetaRaisedException e){
+    		// If this is a kermeta assertion that failed, then the Test must fail
+    		fr.irisa.triskell.kermeta.language.structure.Class t_target=(fr.irisa.triskell.kermeta.language.structure.Class)e.raised_object.getMetaclass().getData().get("kcoreObject");        	
+    		String exceptionTypeName = t_target.getTypeDefinition().getName();
+    		if(exceptionTypeName.compareTo("AssertionFailedError") == 0){
+    			fail(e.toString());
+    		}
+    		//	 otherwise it must be an error, so just forward the exception
+    		else throw e;
+    		
+    	}
     }
 
 }
