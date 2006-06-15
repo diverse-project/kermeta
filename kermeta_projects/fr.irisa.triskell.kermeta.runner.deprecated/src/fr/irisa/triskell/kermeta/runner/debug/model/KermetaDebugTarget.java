@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.17 2006-06-13 12:00:56 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.18 2006-06-15 13:03:22 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -18,6 +18,7 @@ import org.eclipse.debug.core.IBreakpointManager;
 
 import org.eclipse.debug.core.ILaunch;
 
+import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IProcess;
@@ -25,6 +26,7 @@ import org.eclipse.debug.core.model.IThread;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 
+import fr.irisa.triskell.kermeta.runner.debug.process.KermetaDebugProcess;
 import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
 import fr.irisa.triskell.kermeta.runner.debug.util.KermetaStepHandler;
@@ -45,13 +47,23 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     /** Can be RunnerConstants.RESUME, TERMINATE, SUSPEND */
     protected String state;
     
+    
+    
     /**
+	 * @param target
+	 */
+	public KermetaDebugTarget(IDebugTarget target) {
+		super(target);
+		this.target = target; 
+	}
+
+	/**
      * Constructor
      * @param launch the launch handled by this debug target.
      */
     public KermetaDebugTarget(ILaunch plaunch) { 
-    	
-        launch = plaunch;
+    	super(plaunch.getDebugTarget());
+    	launch = plaunch;
         target = this;
         breakpoints = new ArrayList();
         stepHandler = new KermetaStepHandler(this);
@@ -109,7 +121,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	{
     		threads[i].resume();
     	}
-        fireResumeEvent(this);
+        fireResumeEvent(DebugEvent.RESUME);
     }
     
     /** suspend command called by Eclipse when user clicks on the suspend button */
@@ -119,7 +131,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     	{
     		threads[i].suspend();
     	} 
-    	fireSuspendEvent(this);
+    	fireSuspendEvent(DebugEvent.SUSPEND);
     }
     
     /** terminate command called by Eclipse when user clicks on the stop button */
@@ -248,45 +260,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 				breakpointAdded(bps[i]);
 			}
 		}
-/*
-		IBreakpointManager manager= DebugPlugin.getDefault().getBreakpointManager();
-		manager.addBreakpointListener(this);
-		IBreakpoint[] bps = manager.getBreakpoints(KermetaBreakpoint.KERMETA_BREAKPOINT_ID);
-		for (int i = 0; i < bps.length; i++) {
-			if (bps[i] instanceof IBreakpoint) { // FIXME : KermetaBreakPoint instead of IBreakPoint
-				breakpointAdded(bps[i]);
-			}
-		}
-		IProject projects[] = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-		System.out.println("I have a project : " + projects);
-		
-//		 now, register all the breakpoints in all projects
-        projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-        //for (IProject project : projects) {
-        for (int i=0; i<projects.length; i++)
-        {
-        	IProject project = projects[i];
-        	if(!project.isOpen()){
-        		continue;
-        	}
-            
-            try {
-                IMarker[] markers = project.findMarkers(KermetaBreakpoint.KERMETA_BREAKPOINT_ID, true, IResource.DEPTH_INFINITE);
-                IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
-                
-                for (int marker_count=0; marker_count<markers.length; marker_count++) {
-                	IMarker marker = markers[marker_count];
-                    KermetaBreakpoint brk = (KermetaBreakpoint) breakpointManager.getBreakpoint(marker);
-                    
-                    if (brk.isEnabled()) {
-                    	// send the command telling a marker is added and enabled.
-                    }
-                }
-            } catch (Throwable t) {
-                RunnerPlugin.errorDialog("Error setting breakpoints ("+ t + ")");
-            }
-        }
-		*/
 	}
 
 	/**
@@ -356,8 +329,8 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	public void createThread() {
 		threads = new KermetaDebugThread[1];
 		threads[0] = new KermetaDebugThread(this, "default thread");
-		fireCreationEvent(threads[0]);
-		fireResumeEvent(this);
+		fireCreationEvent();
+		fireResumeEvent(DebugEvent.CREATE);
 	} 
 	
 	

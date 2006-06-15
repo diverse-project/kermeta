@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.11 2006-01-25 16:06:21 dvojtise Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.12 2006-06-15 13:03:22 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -22,27 +22,35 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchListener;
+import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
+import fr.irisa.triskell.kermeta.runner.debug.process.KermetaProcess;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 
 
 /**
- * TODO : replace KermetaDebugElement from which this class inherits into Eclipse3.1
- * new DebugElement helper. 
+ * Abstract Kermeta Target 
  */
-public abstract class AbstractKermetaTarget extends KermetaDebugElement implements
+public abstract class AbstractKermetaTarget extends DebugElement implements
 		IDebugTarget, ILaunchListener {
 	 
-    protected ILaunch launch;
+    public AbstractKermetaTarget(IDebugTarget target) {
+		super(target);
+	}
+    
+
+    protected IDebugTarget target;
+	protected ILaunch launch;
     protected IPath workingDir;
     protected String startFile;
 	protected String processName = "";
@@ -134,11 +142,6 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
 		    //RunnerPlugin.logError("Problem loading LaunchConfiguration attributes.",ce);
 		}
 		
-		/*IProject prj =
-			RunnerPlugin.getWorkspace().getRoot().getProject(prjName);
-		mProjectDir = prj.getLocation();
-		IPath path = mProjectDir.append(startfile);*/
-		
 		// The IPath for this file
 		path = getIPathFromString(startFile);
 		projectName = RunnerPlugin.getWorkspace().getRoot().findMember(startFile).getProject().getName();
@@ -208,7 +211,12 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      */
     public IProcess getProcess()
     {
-    	return process; 
+    	if (process == null)
+    	{
+    		//process = DebugPlugin.newProcess(getLaunch(), getKermetaProcess(), "Kermeta");
+    		//process = new KermetaRuntimeProcess(getLaunch(), getKermetaProcess(), "Kermeta", null);
+    	}
+    	return process;
     }
 
     /** @see org.eclipse.debug.core.model.IDebugTarget#getName() */
@@ -235,12 +243,10 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
      */
     public boolean canTerminate() { return false; }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.model.ITerminate#isTerminated()
      */
-    public boolean isTerminated() {
-        return false;
-    }
+    public boolean isTerminated() { return false; }
 
     /* (non-Javadoc)
      * @see org.eclipse.debug.core.model.ITerminate#terminate()
@@ -347,8 +353,7 @@ public abstract class AbstractKermetaTarget extends KermetaDebugElement implemen
     }
     
     /** This method is launched when starting the interpreter */
-    public void start()
-    {}
+    public void start() { }
 
     /*
      * 

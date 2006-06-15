@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugThread.java,v 1.14 2006-03-03 15:23:35 dvojtise Exp $
+/* $Id: KermetaDebugThread.java,v 1.15 2006-06-15 13:03:22 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaThread.java
  * License   : GPL
@@ -42,15 +42,10 @@ import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 /**
  * A thread in the eclipse debug meaning... This class delegates all its
  * operation to KermetaDebugTarget The IThread interface implements the step
- * etc. commands Herite de KermetaDebugElement aurait eviter de recreer les
- * methodes fire pour chaque implementation d'un objet de type IDebugElement
- * (IThread, IDebugTarget, et les autres heritent tous de la class
- * IDebugElement. C'est pas clair????)
+ * etc. commands 
  */
 public class KermetaDebugThread extends DebugElement implements IThread//, IDebugEventSetListener 
 {
-	// protected KermetaDebugTarget target; // si extends KermetaDebugElement,
-	// alors pas utile.
 	protected String name;
 	
 	protected KermetaDebugTarget target;

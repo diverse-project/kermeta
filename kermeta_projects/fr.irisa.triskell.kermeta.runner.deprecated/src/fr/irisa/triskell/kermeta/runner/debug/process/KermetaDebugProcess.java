@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.irisa.triskell.kermeta.runner.debug.model;
+package fr.irisa.triskell.kermeta.runner.debug.process;
 
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
@@ -39,7 +39,7 @@ public class KermetaDebugProcess extends KermetaProcess {
 	 * 
 	 */
 	public KermetaDebugProcess(String f, String c, String o, String a, IKermetaRemoteDebugUI debug_platform) {
-		super();
+		super(c+o);
 		this.file = f;
 		this.classname = c;
 		this.opname = o;

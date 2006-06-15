@@ -1,4 +1,4 @@
-/* $Id: InternalIOConsole.java,v 1.1 2006-06-13 11:54:19 zdrey Exp $
+/* $Id: InternalIOConsole.java,v 1.2 2006-06-15 13:03:22 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.runner
  * File       : MessageConsole.java
  * License    : EPL
@@ -11,37 +11,33 @@
  */
 package fr.irisa.triskell.kermeta.runner.console;
 
+import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.debug.internal.ui.views.console.ProcessConsole;
+import org.eclipse.debug.ui.console.IConsoleColorProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.console.IOConsole;
+import org.eclipse.ui.console.MessageConsole;
 
 /** Extends io console with a boolean indicating if console is disposed (ie not used anymore)
  * or not */
-public class InternalIOConsole extends IOConsole {
+public class InternalIOConsole extends IOConsole
+{ //extends ProcessConsole {
 
 	public boolean isDisposed;
 	
-	public InternalIOConsole(String name, String consoleType,
-			ImageDescriptor imageDescriptor, boolean autoLifecycle) {
-		super(name, consoleType, imageDescriptor, autoLifecycle);
-		isDisposed = false;
-	}
-
-	public InternalIOConsole(String name, String consoleType,
-			ImageDescriptor imageDescriptor, String encoding,
-			boolean autoLifecycle) {
-		super(name, consoleType, imageDescriptor, encoding, autoLifecycle);
-		isDisposed = false;
-	}
-
-	public InternalIOConsole(String name, String consoleType,
-			ImageDescriptor imageDescriptor) {
-		super(name, consoleType, imageDescriptor);
-		isDisposed = false;
-	}
-
 	public InternalIOConsole(String name, ImageDescriptor imageDescriptor) {
 		super(name, imageDescriptor);
 		isDisposed = false;
 	}
-
+	
+	// This is for ProcessConsole extension
+	/* public InternalIOConsole(IProcess process, IConsoleColorProvider colorProvider, String encoding) {
+		super(process, colorProvider, encoding);
+		isDisposed = false;
+	}
+	*/
+	public void dispose()
+	{
+		super.dispose();
+	}
 }

@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.12 2006-06-13 12:01:14 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.13 2006-06-15 13:03:22 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -12,12 +12,16 @@ package fr.irisa.triskell.kermeta.runner.launching;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.sound.midi.SysexMessage;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPluginDescriptor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.internal.ui.actions.DebugContextualLaunchAction;
+import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -36,6 +40,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
+import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
 import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
@@ -111,8 +116,8 @@ public class KermetaLauncher
 	      throw (new Error("File not found! - "+ fileNameString));
 	    
 	    String shortname = fileNameString.contains("/")?fileNameString.substring(fileNameString.lastIndexOf("/")):fileNameString;
-	    
-	    KermetaConsole console = createKermetaConsole(shortname + ": "+ classQualifiedNameString + "::" + operationString);
+	    String consolename = shortname + ": "+ classQualifiedNameString + "::" + operationString;
+	    KermetaConsole console = new KermetaConsole(consolename);
         
 	    KermetaInterpreter interpreter = null;
         try
@@ -144,7 +149,7 @@ public class KermetaLauncher
     	        interpreter.freeJavaMemory();
     	        KermetaUnitFactory.resetDefaultLoader();
     	        //console.removeCurrentConsole();
-    	        console.disposeCurrentConsole();
+    	        console.dispose();
     	        return null;
             }
             else  // We launch an interpreter with a special "condition"
@@ -179,30 +184,6 @@ public class KermetaLauncher
         
     }
     
-    /** adapt the runKermeta Method for the debug mode */
- /*   public KermetaInterpreter runKermeta(String f, String c, String o, String a, boolean debug_mode, IKermetaDebugCondition debug_condition)
-    {
-    	if (debug_mode == false) return runKermeta(f, c, o, a, false, null);
-    	else return runKermeta(f, c, o, a, true, debug_condition);
-    }*/
-    
-    protected KermetaConsole createKermetaConsole(String name)
-    {
-    	// Create a KermetaConsole where the interpreter will print the errors
-    	// and outputs.
-        KermetaConsole console = new KermetaConsole(name);
-        
-        if ( ! console.isInitialized())
-        {   // Add a MessageConsole
-        	console.addConsole();
-        }
-        else
-        {	System.out.println("reusing already initilized KermetaConsole");
-            console.reset();
-        }
-        return console;
-    }
-    
     /** Create a tracer (from traceability module) so that we can get easier the informations
      *  relative to the elements of the program to debug. */
     protected Tracer createTracer()
@@ -220,4 +201,88 @@ public class KermetaLauncher
 		return new Tracer(trace_resource);
     }
     
+    
+    public KermetaInterpreter runKermeta(
+    		String fileNameString, 
+    		String classQualifiedNameString, 
+    		String operationString, 
+    		String argsString, boolean isDebugMode, boolean isConstraintMode,
+    		KermetaIOStream console)
+    {
+        IResource iresource = RunnerPlugin.getWorkspace().getRoot().findMember(fileNameString);
+	    if (iresource instanceof IFile)
+	        selectedFile = (IFile) iresource;
+	    else
+	      throw (new Error("File not found! - "+ fileNameString));
+
+	    KermetaInterpreter interpreter = null;
+        try
+        {
+        	String uri = "platform:/resource/" + selectedFile.getFullPath().toString();
+            //  be sure this value is correctly set        
+            KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
+            
+            Tracer tracer = isDebugMode?createTracer():null;
+            
+            interpreter = new KermetaInterpreter(uri, tracer);
+
+            interpreter.setEntryPoint(classQualifiedNameString, operationString);
+            ArrayList interpreter_params =  new ArrayList();
+            
+            String[] params_table = argsString.split(" ");
+            
+            for (int i=0; i<params_table.length; i++) { 
+            	interpreter_params.add(
+            			fr.irisa.triskell.kermeta.runtime.basetypes.String.create(params_table[i],interpreter.getMemory().getROFactory()));
+            }
+            interpreter.setEntryParameters(interpreter_params);
+//          init the console
+            console.initialize();
+
+            interpreter.setKStream(console);
+            
+            if (isDebugMode == false)
+            {
+            	if (isConstraintMode) interpreter.launchConstraint();
+            	else interpreter.launch();
+    	        interpreter.setKStream(null);
+    	        interpreter.freeJavaMemory();
+    	        KermetaUnitFactory.resetDefaultLoader();
+    	        console.dispose();
+    	        return null;
+            }
+            else  // We launch an interpreter with a special "condition"
+            {
+            	interpreter.launch_debug();
+            }
+            
+		    
+        }
+        catch (KermetaRaisedException kerror)
+        {
+            console.initialize();
+            console.print(kerror.getMessage());
+            console.print("\n"+kerror.toString());
+        }
+        catch (KermetaInterpreterError ierror)
+        {
+            console.initialize();
+            console.print("Kermeta interpreter could not be launched :\n");
+            console.print(ierror.getMessage());
+        }
+        catch (Throwable e)
+        {
+            //console.initialize();
+            console.print("\nKermetaInterpreter internal error \n" +
+            		"-------------------------------------------\n");
+            console.print("Reported java error : "+e);
+            console.print(e.getMessage());
+            e.printStackTrace();
+        }
+        console.print("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+        // this console is not used any more
+        //console.removeConsoleListener();
+        return interpreter;
+        
+    }
 }

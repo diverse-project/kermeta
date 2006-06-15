@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.4 2006-06-13 12:01:14 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration_JVM_200521061432.java,v 1.5 2006-06-15 13:03:22 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: GPL
@@ -339,7 +339,7 @@ public class KermetaLaunchConfiguration_JVM_200521061432 extends AbstractJavaLau
 	            interpreter.setEntryPoint(classQualifiedNameString, operationString);
 	            interpreter.setKStream(console);     
     	        interpreter.launch();
-    	        console.disposeCurrentConsole();
+    	        console.dispose();
     	
 	        }
 	        catch (KermetaRaisedException kerror)

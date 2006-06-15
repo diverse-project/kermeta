@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.11 2006-05-16 15:35:59 jmottu Exp $
+/* $Id: KermetaRunTarget.java,v 1.12 2006-06-15 13:03:22 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: EPL
@@ -16,18 +16,30 @@ package fr.irisa.triskell.kermeta.runner.launching;
 
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleListener;
+import org.eclipse.ui.console.IOConsole;
 
+import fr.irisa.triskell.kermeta.runner.RunnerConstants;
+import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
+import fr.irisa.triskell.kermeta.runner.debug.process.KermetaProcess;
+import fr.irisa.triskell.kermeta.runner.debug.process.KermetaRunProcess;
 
 /**
  * Target that is launched in run mode
  */
-public class KermetaRunTarget extends AbstractKermetaTarget {
+public class KermetaRunTarget extends AbstractKermetaTarget
+{
     
+	
+	public KermetaConsole console;
 	
     public KermetaRunTarget(ILaunch p_launch)
     {
+    	super(p_launch.getDebugTarget());
     	launch = p_launch;
     	launch.getLaunchConfiguration();
     }
@@ -35,34 +47,55 @@ public class KermetaRunTarget extends AbstractKermetaTarget {
 
     public void start()
     {
-        //startKermetaProcess();
-
-        
-        initPath();
-    	kermeta_process = new KermetaRunProcess(startFile, className, opName, args, "Kermeta Run Thread", false);
+    	initPath();
+    	initConsole();
+    	kermeta_process = new KermetaRunProcess(startFile, className, opName, args, "Kermeta Run Thread", false, console);
     	//ClassLoader previousClassLoader = kermeta_process.getContextClassLoader();
     	kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute);
     	kermeta_process.start();
-       /* new Thread() {
-	        public void run() {
-	            this.setName("Kermeta Run Thread");
-	        	// Run in a thread --> is it really useful??
-	            initPath();
-	            ClassLoader cl = this.getContextClassLoader();
-	           // cl.getResourceAsStream()
-	            KermetaLauncher.getDefault().runKermeta(startFile, className, opName, args, false);
-			}
-	    }.start();*/
-    	// restore classloader
-
-    	//kermeta_process.setContextClassLoader( previousClassLoader);
     }
-    
-    
-
 
 	public IThread[] getThreads() throws DebugException {
 		return threads;
 	}
+	
+	/** Initialize the run console for the Run mode. This method is not 
+	 * defined in AbstractKermetaTarget, since we only need to create a specific console in Run mode.
+	 */
+	public void initConsole()
+	{
+		String shortname = startFile.contains("/")?startFile.substring(startFile.lastIndexOf("/")):startFile;
+	    String consolename = shortname + ": "+ className + "::" + opName;
+	    console = new KermetaConsole(consolename, this);
+	}
+
+
+	/**
+	 * @see fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget#terminate()
+	 */
+	public void terminate() throws DebugException {
+		System.err.println("Terminate on Kermeta run Target");
+		kermeta_process.state = KermetaProcess.STATE_TERMINATED;
+
+/*		if (process != null)
+		{
+			process.terminate();
+		}	
+		else
+			System.err.println("Process is null");*/
+		
+		// setState(RunnerConstants.TERMINATE);
+		fireTerminateEvent();
+	}
+
+
+	/** (non-Javadoc)
+	 * @see fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget#isTerminated()
+	 */
+	public boolean isTerminated() {
+		System.out.println("IS TERMINATED");
+		return process == null || kermeta_process.state == KermetaProcess.STATE_TERMINATED;
+	}
     
+	public boolean canTerminate() {return true; }//System.err.println("KermetaRunTarget.canTerminate");return (kermeta_process.state!=KermetaProcess.STATE_TERMINATED); }
 }
