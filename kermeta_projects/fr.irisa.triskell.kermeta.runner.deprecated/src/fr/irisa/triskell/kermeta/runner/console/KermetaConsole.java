@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.16 2006-06-15 13:03:22 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.17 2006-06-15 13:21:24 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -103,19 +103,15 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     {
 		String result = "";
     	try
-    	{	
-    		//inputStream.reset();
-    		System.out.println("READ INPUT:");
+    	{
     		messageConsole.activate();
     		inputStream = messageConsole.getInputStream();
-    		inputStream.setColor(new Color(null, 200,30,240));
+    		// This lead to a thread access error.
+    		// inputStream.setColor(new Color(null, 200,30,240));
 			if (bufferedReader == null)
-			//InputStreamReader inputreader =new InputStreamReader(inputStream);
 				bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+			result = bufferedReader.readLine();
 			
-			result = bufferedReader.readLine(); //
-			//reader.close();
-			//inputStream.read();
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(2);
@@ -154,15 +150,8 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
      *  @see fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream#dispose()*/
     public void dispose()
     {
-    	System.err.println("KermetaConsole : dispose");
     	messageConsole.isDisposed = true;
-    	messageConsole.dispose();
- /*   	try {
-			target.terminate();//FIXME ::: the places of this method call is very ugly
-		} catch (DebugException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/ 
+    	//messageConsole.dispose();
     	// messageConsole.destroy(); // throws an exception
     	consoleManager.removeConsoleListener(this);
     }

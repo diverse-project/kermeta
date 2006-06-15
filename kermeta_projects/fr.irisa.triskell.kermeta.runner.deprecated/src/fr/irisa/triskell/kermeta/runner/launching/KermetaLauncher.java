@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.13 2006-06-15 13:03:22 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.14 2006-06-15 13:21:24 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -148,7 +148,6 @@ public class KermetaLauncher
     	        interpreter.setKStream(null);
     	        interpreter.freeJavaMemory();
     	        KermetaUnitFactory.resetDefaultLoader();
-    	        //console.removeCurrentConsole();
     	        console.dispose();
     	        return null;
             }

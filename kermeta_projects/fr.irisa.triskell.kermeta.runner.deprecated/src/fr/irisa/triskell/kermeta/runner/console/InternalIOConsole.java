@@ -1,4 +1,4 @@
-/* $Id: InternalIOConsole.java,v 1.2 2006-06-15 13:03:22 zdrey Exp $
+/* $Id: InternalIOConsole.java,v 1.3 2006-06-15 13:21:24 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.runner
  * File       : MessageConsole.java
  * License    : EPL
@@ -29,15 +29,10 @@ public class InternalIOConsole extends IOConsole
 		super(name, imageDescriptor);
 		isDisposed = false;
 	}
-	
 	// This is for ProcessConsole extension
 	/* public InternalIOConsole(IProcess process, IConsoleColorProvider colorProvider, String encoding) {
 		super(process, colorProvider, encoding);
 		isDisposed = false;
 	}
 	*/
-	public void dispose()
-	{
-		super.dispose();
-	}
 }
