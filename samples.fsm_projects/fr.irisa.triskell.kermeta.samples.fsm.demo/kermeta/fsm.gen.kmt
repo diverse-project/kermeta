@@ -6,6 +6,16 @@ class FSM
 	reference initialState : State[1..1]
 	reference currentState : State
 	reference finalState : State[1..*]
+	operation run() : kermeta::standard::~Void is
+	do
+		//TODO: implement operation run
+		raise kermeta::exceptions::NotImplementedException.new 
+	end
+	operation reset() : kermeta::standard::~Void is
+	do
+		//TODO: implement operation reset
+		raise kermeta::exceptions::NotImplementedException.new 
+	end
 }
 class State
 {

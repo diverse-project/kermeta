@@ -4,7 +4,23 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fsm"
     nsURI="platform:/resource/fr.irisa.triskell.kermeta.samples.fsm/src/metamodels/fsm.ecore"
     nsPrefix="fsm">
+  <eAnnotations source="http://www.topcased.org/uuid">
+    <details key="uuid" value="11503571983260"/>
+  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="FSM">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="11503571983261"/>
+    </eAnnotations>
+    <eOperations name="run">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11503571983262"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="reset">
+      <eAnnotations source="http://www.topcased.org/uuid">
+        <details key="uuid" value="11503571983263"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" upperBound="-1"
         eType="#//State" containment="true" eOpposite="#//State/owningFSM">
       <eAnnotations source="http://www.topcased.org/uuid">
@@ -30,6 +46,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="State">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="115035719832616"/>
+    </eAnnotations>
     <eOperations name="step" eType="#//String">
       <eAnnotations source="http://www.topcased.org/uuid">
         <details key="uuid" value="11491501338099"/>
@@ -65,6 +84,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transition">
+    <eAnnotations source="http://www.topcased.org/uuid">
+      <details key="uuid" value="115035719832635"/>
+    </eAnnotations>
     <eOperations name="fire" eType="#//String">
       <eAnnotations source="http://www.topcased.org/uuid">
         <details key="uuid" value="114915013382416"/>
