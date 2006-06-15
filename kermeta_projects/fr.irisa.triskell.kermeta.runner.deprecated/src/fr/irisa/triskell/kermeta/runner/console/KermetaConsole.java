@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.17 2006-06-15 13:21:24 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.18 2006-06-15 13:23:11 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -114,7 +114,6 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
 			
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.exit(2);
 		}
 		if (result == null) result = " ";
 		return result;
@@ -185,9 +184,6 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
      * method. (Please don't remove the comment notes yet)
      */
     public void initialize() {
-	    System.err.println("Target : " + target);
-	    System.err.println("Process : " + target.getProcess());
-	    System.err.println("Launch : " + target.getLaunch());
     	// Check the disposed consoles in ConsoleManager, and remove them (useless!)
     	removeDisposedConsoles();
     	// NOTE : the ISO-8859-1 VALUE IS VITAL.
@@ -241,7 +237,6 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     
     protected void finalize() throws Throwable {
         super.finalize();
-        System.err.println("FINALIZE KermetaConsole");
     }
 
 	/**
