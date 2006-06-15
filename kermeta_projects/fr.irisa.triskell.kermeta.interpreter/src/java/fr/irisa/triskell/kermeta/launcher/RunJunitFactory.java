@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.13 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.14 2006-06-15 21:44:19 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -73,9 +73,10 @@ public class RunJunitFactory implements Test {
             unit.typeCheck(null);
             
             if (unit.messages.hasError()) {
-            	System.err.println("Unit " + unit.getUri() + " contains errors");
+            	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)");
             	System.err.println(unit.messages.getAllMessagesAsString());
-            	theTestCase = new FailedTestCase("Unit " + unit.getUri() + " contains errors", null);
+            	theTestCase = new FailedTestCase("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)", 
+            		new Exception(unit.messages.getAllMessagesAsString()));
                 return theTestCase;
             }
             
