@@ -5,9 +5,6 @@
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * The class Void &#xD;&#xA; * By convention it is a sub-type of everything&#xD;&#xA; */"/>
       </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * The class Void &#xD;&#xA; * By convention it is a sub-type of everything&#xD;&#xA; */"/>
-      </eAnnotations>
       <eOperations name="isVoid" eType="//standard/Boolean">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;result := true&#xA;end"/>
@@ -23,32 +20,14 @@
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * The abstract class ValueType does not contain any feature&#xD;&#xA; * but any instance of a sub-class of ValueType will be passed by value &#xD;&#xA; * instead of by reference for any other objects.&#xD;&#xA; */"/>
       </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * The abstract class ValueType does not contain any feature&#xD;&#xA; * but any instance of a sub-class of ValueType will be passed by value &#xD;&#xA; * instead of by reference for any other objects.&#xD;&#xA; */"/>
-      </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Comparable">
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * The abstract class Comparable defines a set of operation&#xD;&#xA; * to compare instances of a class.&#xD;&#xA; * Sub-classes only has to implement abstract operation compareTo.&#xD;&#xA; * All other methods are defined w.r.t. the compareTo operation&#xD;&#xA; */"/>
-      </eAnnotations>
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * The abstract class Comparable defines a set of operation&#xD;&#xA; * to compare instances of a class.&#xD;&#xA; * Sub-classes only has to implement abstract operation compareTo.&#xD;&#xA; * All other methods are defined w.r.t. the compareTo operation&#xD;&#xA; */"/>
       </eAnnotations>
       <eOperations name="compareTo" eType="//standard/Integer">
         <eAnnotations source="kermeta">
           <details key="isAbstract" value="true"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * This method should be implemented by any class that inherits&#xD;&#xA;  * from Comparable.&#xD;&#xA;  * returns 0 if self = other&#xD;&#xA;  * returns > 0 if  self > other&#xD;&#xA;  * returns &lt; 0 if  self &lt; other&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Comparison&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Comparaison&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Comparaison&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * This method should be implemented by any class that inherits&#xD;&#xA;  * from Comparable.&#xD;&#xA;  * returns 0 if self = other&#xD;&#xA;  * returns > 0 if  self > other&#xD;&#xA;  * returns &lt; 0 if  self &lt; other&#xD;&#xA;  */"/>
@@ -74,23 +53,11 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * return true if self > other&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * return true if self > other&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * return true if self > other&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="other" eType="//standard/Object"/>
       </eOperations>
       <eOperations name="isLower" eType="//standard/Boolean">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;self.compareTo(other).isLower(0)&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * return true if self &lt; other&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * return true if self &lt; other&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * return true if self &lt; other&#xD;&#xA;  */"/>
@@ -110,12 +77,6 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * return true if self &lt;= other&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * return true if self &lt;= other&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * return true if self &lt;= other&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="other" eType="//standard/Object"/>
       </eOperations>
       <eOperations name="isGreaterOrEqual" eType="//standard/Boolean">
@@ -128,20 +89,11 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * return true if self >= other&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * return true if self >= other&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * return true if self >= other&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="other" eType="//standard/Object"/>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NotComparableException" eSuperTypes="//exceptions/Exception"/>
     <eClassifiers xsi:type="ecore:EClass" name="Boolean">
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * The Boolean type&#xD;&#xA; */"/>
-      </eAnnotations>
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * The Boolean type&#xD;&#xA; */"/>
       </eAnnotations>
@@ -178,23 +130,14 @@
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * The abstract class Numeric is the root class for all&#xD;&#xA; * numeric types&#xD;&#xA; */"/>
       </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * The abstract class Numeric is the root class for all&#xD;&#xA; * numeric types&#xD;&#xA; */"/>
-      </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Integer" eSuperTypes="//standard/Numeric">
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * The class Integer&#xD;&#xA; */"/>
-      </eAnnotations>
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * The class Integer&#xD;&#xA; */"/>
       </eAnnotations>
       <eOperations name="times">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;from var i : kermeta::standard::Integer init 0&#xA;&#x9;until i.equals(self)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;body(i)&#xA;&#x9;&#x9;&#x9;i := i.plus(1)&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Iteration&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Iteration&#xD;&#xA;  */"/>
@@ -226,17 +169,11 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns self + other&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns self + other&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="other" eType="//standard/Integer"/>
       </eOperations>
       <eOperations name="minus" eType="//standard/Integer">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;if other.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.minus(self, other)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns self - other&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns self - other&#xD;&#xA;  */"/>
@@ -250,17 +187,11 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns self * other&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns self * other&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="other" eType="//standard/Integer"/>
       </eOperations>
       <eOperations name="div" eType="//standard/Integer">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;if other.equals(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::DivisionByZero.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;if other.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.div(self, other)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns self / other&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns self / other&#xD;&#xA;  */"/>
@@ -274,9 +205,6 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns self modulo other&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns self modulo other&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="other" eType="//standard/Integer"/>
       </eOperations>
       <eOperations name="uminus" eType="//standard/Integer">
@@ -286,16 +214,10 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns -self&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns -self&#xD;&#xA;  */"/>
-        </eAnnotations>
       </eOperations>
       <eOperations name="toReal" eType="//standard/Real">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer.toReal(self)&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Convert self as a Real&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Convert self as a Real&#xD;&#xA;  */"/>
@@ -350,15 +272,9 @@
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * class Real&#xD;&#xA; */"/>
       </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * class Real&#xD;&#xA; */"/>
-      </eAnnotations>
       <eOperations name="plus" eType="//standard/Integer">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;if other.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.plus(self, other)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns self + other&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns self + other&#xD;&#xA;  */"/>
@@ -372,17 +288,11 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns self - other&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns self - other&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="other" eType="//standard/Numeric"/>
       </eOperations>
       <eOperations name="mult" eType="//standard/Integer">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;if other.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Real.times(self, other)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns self * other&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns self * other&#xD;&#xA;  */"/>
@@ -396,9 +306,6 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns self / other&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns self / other&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="other" eType="//standard/Numeric"/>
       </eOperations>
       <eOperations name="toInteger" eType="//standard/Integer">
@@ -408,16 +315,10 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Convert self as a Real&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Convert self as a Real&#xD;&#xA;  */"/>
-        </eAnnotations>
       </eOperations>
       <eOperations name="uminus" eType="//standard/Numeric">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;result := 0.toReal.minus(self)&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns -self&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns -self&#xD;&#xA;  */"/>
@@ -433,9 +334,6 @@
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Character" eSuperTypes="//standard/ValueType //standard/Comparable">
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * The class Character&#xD;&#xA; */"/>
-      </eAnnotations>
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * The class Character&#xD;&#xA; */"/>
       </eAnnotations>
@@ -470,9 +368,6 @@
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * The class String&#xD;&#xA; */"/>
       </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * The class String&#xD;&#xA; */"/>
-      </eAnnotations>
       <eOperations name="compareTo" eType="//standard/Integer">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;if other.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.compareTo(self, other)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
@@ -498,17 +393,11 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns a new string self + other&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns a new string self + other&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="other" eType="//standard/String"/>
       </eOperations>
       <eOperations name="append">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;if other.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::CallOnVoidTarget.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::String.append(self, other)&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Appends other at the end of self&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Appends other at the end of self&#xD;&#xA;  */"/>
@@ -522,9 +411,6 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns the character at index in the String&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns the character at index in the String&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="index" eType="//standard/Integer"/>
       </eOperations>
       <eOperations name="indexOf" eType="//standard/Integer">
@@ -534,17 +420,11 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns the index within this string of the first &#xD;&#xA;  * occurrence of the specified substring&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns the index within this string of the first &#xD;&#xA;  * occurrence of the specified substring&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="str" eType="//standard/String"/>
       </eOperations>
       <eOperations name="substring" eType="//standard/String">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;if startIndex.isGreaterOrEqual(0).~and(startIndex.isLowerOrEqual(self.size)).~and(endIndex.isLowerOrEqual(self.size)).~and(endIndex.isGreaterOrEqual(startIndex)) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::String.substring(self, startIndex, endIndex)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::StringIndexOutOfBound.new&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns a new string that is a substring of this string&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns a new string that is a substring of this string&#xD;&#xA;  */"/>
@@ -574,10 +454,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Collection">
       <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * Collection is the root class for all metacore collections&#xD;&#xA; */"/>
-      </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * Collection is the root class for all metacore collections&#xD;&#xA; */"/>
+        <details key="kdoc" value="/**&#xD;&#xA; * Collection is the root abstract class for all kermeta collections&#xD;&#xA; */"/>
       </eAnnotations>
       <eAnnotations source="KermetaTypeParameters">
         <details key="G" value="G"/>
@@ -596,22 +473,13 @@
           <details key="kdoc" value="/**&#xD;&#xA;  * Select the method add from Set&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Add an element in the collection&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * The method 'add' adds the element in the Set&#xD;&#xA;  * only if it is not yet in the set&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Select the method add from Set&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/** Add an element to this collection and update its opposite property if it exists. */"/>
         </eAnnotations>
         <eParameters name="element"/>
       </eOperations>
       <eOperations name="remove">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;var elem : G init self.detect{e | do&#xA;&#x9;&#x9;&#x9;e.equals(element)&#xA;&#x9;&#x9;end}&#xA;&#x9;if elem.isNotEqual(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.remove(self, elem)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Remove an element from the collection&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Remove an element from the collection&#xD;&#xA;  */"/>
@@ -625,16 +493,10 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Remove all elements from the collection&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Remove all elements from the collection&#xD;&#xA;  */"/>
-        </eAnnotations>
       </eOperations>
       <eOperations name="addAll">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;elements.each{element | do&#xA;&#x9;&#x9;&#x9;self.add(element)&#xA;&#x9;&#x9;end}&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Add all elements from the collection elements in the collection&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Add all elements from the collection elements in the collection&#xD;&#xA;  */"/>
@@ -648,17 +510,11 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns true if the collection contains element&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns true if the collection contains element&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="element"/>
       </eOperations>
       <eOperations name="size" eType="//standard/Integer">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.size(self)&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns the number of elements in the collection&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns the number of elements in the collection&#xD;&#xA;  */"/>
@@ -671,16 +527,10 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns true if the collection is empty&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns true if the collection is empty&#xD;&#xA;  */"/>
-        </eAnnotations>
       </eOperations>
       <eOperations name="iterator" eType="//standard/Iterator">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Collection.iterator(self)&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns an iterator on the collection&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns an iterator on the collection&#xD;&#xA;  */"/>
@@ -693,16 +543,10 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns an element from the collection or void&#xD;&#xA;  * if the collection is empty&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns an element from the collection or void&#xD;&#xA;  * if the collection is empty&#xD;&#xA;  */"/>
-        </eAnnotations>
       </eOperations>
       <eOperations name="each">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;func(it.next)&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * runs func on each element of the collection&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * runs func on each element of the collection&#xD;&#xA;  */"/>
@@ -716,9 +560,6 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * checks that the condition is true on all the element of the collection&#xD;&#xA;  * returns true if the collection is empty&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * checks that the condition is true on all the element of the collection&#xD;&#xA;  * returns true if the collection is empty&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="func"/>
       </eOperations>
       <eOperations name="exists" eType="//standard/Boolean">
@@ -728,17 +569,11 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * checks that the condition is true for at least one element of the collection&#xD;&#xA;  * returns false if the collection is empty&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * checks that the condition is true for at least one element of the collection&#xD;&#xA;  * returns false if the collection is empty&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="func"/>
       </eOperations>
       <eOperations name="collect" eType="//standard/Sequence">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;result := kermeta::standard::Sequence&lt;T>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;result.add(collector(it.next))&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns a new Collection with the results of running collector &#xD;&#xA;  * once for every element in self.&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns a new Collection with the results of running collector &#xD;&#xA;  * once for every element in self.&#xD;&#xA;  */"/>
@@ -755,17 +590,11 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Passes each element of the collection to detector. &#xD;&#xA;  * Returns the first element for which detector is not false. &#xD;&#xA;  * Returns void if no object matches.&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Passes each element of the collection to detector. &#xD;&#xA;  * Returns the first element for which detector is not false. &#xD;&#xA;  * Returns void if no object matches.&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="detector"/>
       </eOperations>
       <eOperations name="select" eType="//standard/Sequence">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;var elem : G&#xA;&#x9;result := kermeta::standard::Sequence&lt;G>.new&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;G> init self.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;elem := it.next&#xA;&#x9;&#x9;&#x9;if selector(elem) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result.add(elem)&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Passes each element of the collection to selector. &#xD;&#xA;  * returns a Collection for all elements for which selector is true&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Passes each element of the collection to selector. &#xD;&#xA;  * returns a Collection for all elements for which selector is true&#xD;&#xA;  */"/>
@@ -779,16 +608,10 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Passes each element of the collection to rejector. &#xD;&#xA;  * returns a Collection for all elements for which rejector is false&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Passes each element of the collection to rejector. &#xD;&#xA;  * returns a Collection for all elements for which rejector is false&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="rejector"/>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Set" eSuperTypes="//standard/Collection">
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * A Set is a collection that contains distinct elements&#xD;&#xA; */"/>
-      </eAnnotations>
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * A Set is a collection that contains distinct elements&#xD;&#xA; */"/>
       </eAnnotations>
@@ -807,16 +630,16 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Bag" eSuperTypes="//standard/Collection">
       <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * A Bag is a Collection&#xD;&#xA; */"/>
-      </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * A Bag is a Collection&#xD;&#xA; */"/>
+        <details key="kdoc" value="/**&#xD;&#xA; * A Bag is a concrete implementation of a Collection&#xD;&#xA; */"/>
       </eAnnotations>
       <eAnnotations source="KermetaTypeParameters">
         <details key="G" value="G"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OrderedCollection" eSuperTypes="//standard/Collection">
+      <eAnnotations source="kermeta">
+        <details key="kdoc" value="/**&#xD;&#xA; * An OrderedCollection is the root abstract class for all ordered Collections.&#xD;&#xA; */"/>
+      </eAnnotations>
       <eAnnotations source="KermetaTypeParameters">
         <details key="G" value="G"/>
       </eAnnotations>
@@ -828,13 +651,7 @@
           <details key="kdoc" value="/**&#xD;&#xA;  * adds element in the OrderedCollection at index&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * overides addAt to ensure element uniqueness&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * adds element in the OrderedCollection at index&#xD;&#xA;  */"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * overides addAt to ensure element uniqueness&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/**&#xD;&#xA;  * Overrides addAt to ensure element uniqueness&#xD;&#xA;  */"/>
         </eAnnotations>
         <eParameters name="index" eType="//standard/Integer"/>
         <eParameters name="element"/>
@@ -842,9 +659,6 @@
       <eOperations name="removeAt">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;if index.isLower(0).~or(index.isGreater(self.size.minus(1))) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::IndexOutOfBound.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;extern fr::irisa::triskell::kermeta::runtime::basetypes::OrderedCollection.removeAt(self, index)&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * removes the element at index of the OrderedCollection&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * removes the element at index of the OrderedCollection&#xD;&#xA;  */"/>
@@ -858,28 +672,28 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns the element at index in the OrderedCollection&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns the element at index in the OrderedCollection&#xD;&#xA;  */"/>
-        </eAnnotations>
         <eParameters name="index" eType="//standard/Integer"/>
       </eOperations>
       <eOperations name="first">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;if self.size.equals(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::EmptyCollection.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;result := self.elementAt(0)&#xA;end"/>
         </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/** returns the first element in the OrderedCollection */"/>
+        </eAnnotations>
       </eOperations>
       <eOperations name="last">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;if self.size.equals(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise kermeta::exceptions::EmptyCollection.new&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;result := self.elementAt(self.size.minus(1))&#xA;end"/>
         </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/** returns the last element in the OrderedCollection */"/>
+        </eAnnotations>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OrderedSet" eSuperTypes="//standard/Set //standard/OrderedCollection">
       <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * class OrderedSet&#xD;&#xA; */"/>
-      </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * class OrderedSet&#xD;&#xA; */"/>
+        <details key="kdoc" value="/**&#xD;&#xA; * an OrderedSet is a Set that contained ordered distinct elements, accessible by&#xD;&#xA; * their index. (see AddAt method)&#xD;&#xA; */"/>
       </eAnnotations>
       <eAnnotations source="KermetaTypeParameters">
         <details key="G" value="G"/>
@@ -906,19 +720,13 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Sequence" eSuperTypes="//standard/Bag //standard/OrderedCollection">
       <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * class Sequence&#xD;&#xA; */"/>
-      </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * class Sequence&#xD;&#xA; */"/>
+        <details key="kdoc" value="/**&#xD;&#xA; * A Sequence is an ordered collection of elements&#xD;&#xA; */"/>
       </eAnnotations>
       <eAnnotations source="KermetaTypeParameters">
         <details key="G" value="G"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Iterator">
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * Iterator&#xD;&#xA; */"/>
-      </eAnnotations>
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * Iterator&#xD;&#xA; */"/>
       </eAnnotations>
@@ -932,16 +740,10 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Returns true if the iterator is on the last element&#xD;&#xA;  * i.e. returns not self.hasNext()&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Returns true if the iterator is on the last element&#xD;&#xA;  * i.e. returns not self.hasNext()&#xD;&#xA;  */"/>
-        </eAnnotations>
       </eOperations>
       <eOperations name="hasNext" eType="//standard/Boolean">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::basetypes::Iterator.hasNext(self)&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns true if the iterator has a next element&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns true if the iterator has a next element&#xD;&#xA;  */"/>
@@ -954,16 +756,13 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * returns the next element of the iterator&#xD;&#xA;  */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * returns the next element of the iterator&#xD;&#xA;  */"/>
-        </eAnnotations>
       </eOperations>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="language" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//language" nsPrefix="language">
     <eClassifiers xsi:type="ecore:EClass" name="ReflectiveCollection" eSuperTypes="//standard/Set">
       <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * ReflectiveCollection&#xD;&#xA; */"/>
+        <details key="kdoc" value="/**&#xD;&#xA; * ReflectiveCollection is a special collection that is used to define the type &#xD;&#xA; * of attributes that have an upper multiplicity > 1 in a class. It indeed handles&#xD;&#xA; * the update of opposite property if such an attribute has got one.&#xD;&#xA; */"/>
       </eAnnotations>
       <eAnnotations source="KermetaTypeParameters">
         <details key="G" value="G"/>
@@ -997,7 +796,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ReflectiveSequence" eSuperTypes="//standard/OrderedSet //language/ReflectiveCollection">
       <eAnnotations source="kermeta">
-        <details key="kdoc" value="/**&#xD;&#xA; * ReflectiveSequence&#xD;&#xA; */"/>
+        <details key="kdoc" value="/**&#xD;&#xA; * ReflectiveSequence is an ordered ReflectiveCollection.&#xD;&#xA; */"/>
       </eAnnotations>
       <eAnnotations source="KermetaTypeParameters">
         <details key="G" value="G"/>
@@ -1562,9 +1361,6 @@
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable&#xD;&#xA;{&#xD;&#xA; method acceptKMStructureVisitor&lt;ContextType, ResultType>(visitor : KMStructureVisitor&lt;ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is&#xD;&#xA;  do&#xD;&#xA;   result := visitor.visitSelfType(self, context)&#xD;&#xA;  end&#xD;&#xA;} */"/>
         </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;class SelfType inherits Type, kermeta::reflection::SelfType, KMStructureVisitable&#xD;&#xA;{&#xD;&#xA; method acceptKMStructureVisitor&lt;ContextType, ResultType>(visitor : KMStructureVisitor&lt;ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is&#xD;&#xA;  do&#xD;&#xA;   result := visitor.visitSelfType(self, context)&#xD;&#xA;  end&#xD;&#xA;} */"/>
-        </eAnnotations>
         <eOperations name="acceptKMStructureVisitor">
           <eAnnotations source="kermeta">
             <details key="body" value="do&#xA;&#x9;result := visitor.visitTypeDefinitionContainer(self, context)&#xA;end"/>
@@ -1967,6 +1763,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation" eType="//language/structure/Operation"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticEnumLiteral" eType="//language/structure/EnumerationLiteral"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty" eType="//language/structure/Property"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="//reflection/Boolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//language/behavior/Expression" containment="true"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="CallSuperOperation" eSuperTypes="//language/behavior/CallExpression //language/behavior/KMExpressionVisitable">
@@ -2551,6 +2348,9 @@
         <eAnnotations source="kermeta">
           <details key="isAbstract" value="true"/>
         </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/** &#xD;&#xA;  * Returns the instances of the given property for this Object.&#xD;&#xA;  *&#xD;&#xA;  * Example : &#xD;&#xA;  * &lt;code>class A { reference attr : String }&#xD;&#xA;  * &#xD;&#xA;  * operation getAProp() is do&#xD;&#xA;  *    var a : A&#xD;&#xA;  *    var s : String&#xD;&#xA;  *    s ?= a.get(&quot;attr&quot;)&#xD;&#xA;  * end&#xD;&#xA;  * &lt;/code>&#xD;&#xA;  * The user has to cast&#xD;&#xA;  * the result of this method according to the type and the upper multiplicity&#xD;&#xA;  * of this property. If upper multiplicity > 1, than the effective type of the &#xD;&#xA;  * result is a Sequence&lt;ThePropertyName>. Otherwise, the type corresponds to &#xD;&#xA;  * the name of the given Property (i.e the type of the property instance).&#xD;&#xA;  */"/>
+        </eAnnotations>
         <eParameters name="~property" eType="//reflection/Property"/>
       </eOperations>
       <eOperations name="set">
@@ -2580,6 +2380,9 @@
       <eOperations name="toString" eType="//reflection/String">
         <eAnnotations source="kermeta">
           <details key="isAbstract" value="true"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/** Returns the String representation of this class. &#xD;&#xA;  *  Note : throws an exception if this class has no classDefinition&#xD;&#xA;  *  or if the classDefinition is not well constructed.&#xD;&#xA;  */"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="isFrozen" eType="//reflection/Boolean">
@@ -2755,6 +2558,9 @@
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;var elem : kermeta::reflection::NamedElement init self&#xA;&#x9;result := self.name&#xA;&#x9;from elem ?= elem.container&#xA;&#x9;until elem.equals(void)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;result := elem.name.plus(&quot;::&quot;).plus(result)&#xA;&#x9;&#x9;&#x9;elem ?= elem.container&#xA;&#x9;&#x9;end&#x9;end&#xA;end"/>
         </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/** Returns the qualified name of this named element. Qualified name is &#xD;&#xA;  * the list of the names of the packages hierarchically ordered, delimited by&#xD;&#xA;  * a &quot;::&quot;, followed by the name of this named element.&#xD;&#xA;  */"/>
+        </eAnnotations>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="//reflection/String"/>
     </eClassifiers>
@@ -2804,7 +2610,7 @@
           <details key="body" value="do&#xA;&#x9;var number : kermeta::standard::Integer init self.order&#xA;&#x9;if bool.~not then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.fail(&quot;assert number &quot;.plus(number.toString).plus(&quot; failed&quot;))&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * will fail if bool is false&#xD;&#xA;  * DEPRECATED : correct use is &quot;assertTrue(bool : Boolean)&quot; or &quot;assertFalse(bool : Boolean)&quot;&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/**&#xD;&#xA;  * Fails if bool is false&#xD;&#xA;  */"/>
         </eAnnotations>
         <eParameters name="bool" eType="//standard/Boolean"/>
       </eOperations>
@@ -3244,12 +3050,6 @@
   <eSubpackages name="exceptions" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//exceptions" nsPrefix="exceptions">
     <eClassifiers xsi:type="ecore:EClass" name="Exception">
       <eAnnotations source="kermeta">
-        <details key="kdoc" value="/*****************************************************************************&#xD;&#xA; * $Id:&#xD;&#xA; * Project : Kermeta (First iteration)&#xD;&#xA; * Creation date :  &#xD;&#xA; * File : testSuite.skel&#xD;&#xA; * License : GPL&#xD;&#xA; * Copyright : IRISA / Universite de Rennes 1&#xD;&#xA; * Creation date : Mar 14, 2005&#xD;&#xA; * Author : zdrey&#xD;&#xA; * Description :  &#xD;&#xA; *      Contains the main exceptions from which all the others inherit&#xD;&#xA; *&#xD;&#xA; ****************************************************************************/"/>
-      </eAnnotations>
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/*****************************************************************************&#xD;&#xA; * 1-General errors&#xD;&#xA; *****************************************************************************/"/>
-      </eAnnotations>
-      <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * Generic exceptions&#xD;&#xA; * The main class from which all the exception inherit&#xD;&#xA; */"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="//standard/String"/>
@@ -3257,9 +3057,6 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="stackTrace" eType="//standard/String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RuntimeError" eSuperTypes="//exceptions/Exception">
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/*****************************************************************************&#xD;&#xA; * 2-Runtime errors&#xD;&#xA; *****************************************************************************/"/>
-      </eAnnotations>
       <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * Abstract exception for interpreter exceptions&#xD;&#xA; */"/>
       </eAnnotations>
@@ -3275,26 +3072,21 @@
         <details key="kdoc" value="/**&#xD;&#xA; * Use this exception whenyou want to forbid the access to an unimplemented operation &#xD;&#xA; * and invite to implement it&#xD;&#xA; */"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DivisionByZero" eSuperTypes="//exceptions/Exception">
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/*****************************************************************************&#xD;&#xA; * 3-Standard library related errors&#xD;&#xA; *****************************************************************************/"/>
-      </eAnnotations>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DivisionByZero" eSuperTypes="//exceptions/Exception"/>
     <eClassifiers xsi:type="ecore:EClass" name="OverflowError" eSuperTypes="//exceptions/Exception"/>
     <eClassifiers xsi:type="ecore:EClass" name="StringIndexOutOfBound" eSuperTypes="//exceptions/Exception"/>
     <eClassifiers xsi:type="ecore:EClass" name="IndexOutOfBound" eSuperTypes="//exceptions/Exception"/>
     <eClassifiers xsi:type="ecore:EClass" name="EmptyCollection" eSuperTypes="//exceptions/Exception"/>
     <eClassifiers xsi:type="ecore:EClass" name="IteratorIsOff" eSuperTypes="//exceptions/Exception"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ConstraintViolatedPre" eSuperTypes="//exceptions/Exception">
-      <eAnnotations source="kermeta">
-        <details key="kdoc" value="/*****************************************************************************&#xD;&#xA; * 4-Constraints related errors &#xD;&#xA; *****************************************************************************/"/>
-      </eAnnotations>
-    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintViolatedPre" eSuperTypes="//exceptions/Exception"/>
     <eClassifiers xsi:type="ecore:EClass" name="ConstraintViolatedPost" eSuperTypes="//exceptions/Exception"/>
     <eClassifiers xsi:type="ecore:EClass" name="ConstraintViolatedInv" eSuperTypes="//exceptions/Exception"/>
   </eSubpackages>
   <eSubpackages name="interpreter" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//interpreter" nsPrefix="interpreter">
     <eClassifiers xsi:type="ecore:EClass" name="DynamicExpression">
+      <eAnnotations source="kermeta">
+        <details key="kdoc" value="/**&#xD;&#xA; * DynamicExpression is a class used to make dynamic calls, i.e dynamic evaluation&#xD;&#xA; * of Kermeta statements represented in a string.&#xD;&#xA; * &#xD;&#xA; * An example :&#xD;&#xA; *   var de : DynamicExpression init DynamicExpression.new&#xD;&#xA; *   de.initializeDefaults&#xD;&#xA; *   de.formalParameters.put(&quot;a&quot;, String)&#xD;&#xA; *   de.parse(&quot;stdio.writeln(a)&quot;) // note: to execute a list of statements, you have to surround them with do..end&#xD;&#xA; *   var params : Hashtable&lt;String, Object> init Hashtable&lt;String, Object>.new&#xD;&#xA; *   params.put(&quot;a&quot;, &quot;hello world!&quot;)&#xD;&#xA; *   de.execute(void, params)&#xD;&#xA; */"/>
+      </eAnnotations>
       <eOperations name="initializeDefaults" ordered="false" upperBound="0">
         <eAnnotations source="kermeta">
           <details key="body" value="do&#xA;&#x9;self.formalParameters := kermeta::utils::Hashtable&lt;kermeta::standard::String, kermeta::language::structure::Type>.new&#xA;&#x9;self.selfClass ?= kermeta::reflection::Object.typeDefinition&#xA;end"/>
@@ -3305,7 +3097,7 @@
       </eOperations>
       <eOperations name="parse" eType="//standard/Boolean">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;self.errors.clear&#xA;&#x9;if self.formalParameters.equals(void).~or(self.selfClass.equals(void)) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;var e : kermeta::interpreter::DynamicExpressionException init kermeta::interpreter::DynamicExpressionException.new&#xA;&#x9;&#x9;&#x9;e.message := &quot;parse precondition - formalParameters or selfType is void&quot;&#xA;&#x9;&#x9;&#x9;raise e&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;self.errors.clear&#xA;&#x9;if self.formalParameters.equals(void).~or(self.selfClass.equals(void)) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;var e : kermeta::interpreter::DynamicExpressionException init kermeta::interpreter::DynamicExpressionException.new&#xA;&#x9;&#x9;&#x9;e.message := &quot;parse precondition - formalParameters or selfType is void&quot;&#xA;&#x9;&#x9;&#x9;raise e&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;&#x9;result ?= extern fr::irisa::triskell::kermeta::runtime::language::DynamicExpression.parse(self, expression)&#xA;&#x9;if self.errors.size.isNotEqual(0) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;var e : kermeta::interpreter::DynamicExpressionException init kermeta::interpreter::DynamicExpressionException.new&#xA;&#x9;&#x9;&#x9;e.message := &quot;parse result - expression contains errors&quot;&#xA;&#x9;&#x9;&#x9;self.errors.each{error | do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;e.message.append(&quot;&#xA;&quot;.plus(error.message))&#xA;&#x9;&#x9;&#x9;&#x9;end}&#xA;&#x9;&#x9;&#x9;raise e&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Parse the expression as a string&#xD;&#xA;  * and updates the expression field and errors&#xD;&#xA;  * Returns true if the expression was parssed sucessfuly&#xD;&#xA;  */"/>
@@ -3348,9 +3140,6 @@
   <eSubpackages name="persistence" nsURI="platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km#//persistence" nsPrefix="persistence">
     <eClassifiers xsi:type="ecore:EClass" name="Resource">
       <eAnnotations source="kermeta">
-        <details key="kdoc" value="/*****************************************************************************&#xD;&#xA; * $Id$&#xD;&#xA; * Project : Kermeta (First iteration)&#xD;&#xA; * Creation date :  &#xD;&#xA; * File : resource.kmt&#xD;&#xA; * License : GPL&#xD;&#xA; * Copyright : IRISA / Universite de Rennes 1&#xD;&#xA; * Creation date : Mar 14, 2005&#xD;&#xA; * Author : zdrey&#xD;&#xA; * Description :  &#xD;&#xA; *      This file contains the classes that handle the serialization of models.&#xD;&#xA; *&#xD;&#xA; *&#xD;&#xA; ****************************************************************************/"/>
-      </eAnnotations>
-      <eAnnotations source="kermeta">
         <details key="kdoc" value="/**&#xD;&#xA; * The main class that handle a loaded/saved model.&#xD;&#xA; * There are a few important things to note for the developper :&#xD;&#xA; * &#xD;&#xA; * - load a Resource : this loads a Collection of instances corresponding to the&#xD;&#xA; *   objects in the loaded model. If the Collection of instances is empty, than &#xD;&#xA; *  a ResourceLoadException is raised&#xD;&#xA; *&#xD;&#xA; * - save a Resource : this saves the collection of instances in a new file. This can&#xD;&#xA; *   be correctly done if and only if the instances saved are conform to the metamodel&#xD;&#xA; *   linked to this resource (this link does not need to be explicit. It is normally retrieved&#xD;&#xA; *   through the EMF model -- see Java wrapping &quot;Resource.java&quot;).&#xD;&#xA; * &#xD;&#xA; * - add/remove an instance to the Resource : this adds an element in the resource. It cannot&#xD;&#xA; *   be &quot;simply&quot; added because of the following potential errors :&#xD;&#xA; *&#xD;&#xA; *   - The object added is not conform to the metamodel -> Error&#xD;&#xA; *   - The object was already added in the resource -> Not a real error : we do nothing&#xD;&#xA; *   - The object to remove does not exist -> redirect to a collection-specific error&#xD;&#xA; *   - The object to remove is attached to an object in the collection -> &quot;dependency-violation&quot; exception?&#xD;&#xA;&#xD;&#xA; */"/>
       </eAnnotations>
       <eOperations name="save">
@@ -3361,7 +3150,7 @@
           <details key="kdoc" value="/** Save a model instance, in the file specified by the initial uri &#xD;&#xA;  * Overrides the old version.&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/** Save a resource in the uri given by its 'uri' attribute. */"/>
+          <details key="kdoc" value="/** Save a resource in a file referenced by the uri associated to the resource */"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="saveWithNewURI">
@@ -3369,7 +3158,10 @@
           <details key="body" value="do&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/** Save a resource in the uri associated to it */"/>
+          <details key="kdoc" value="/** Save a resource in a file referenced by this new uri. &#xD;&#xA;     This allows to save the result of a transformation without changing the original file. */"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/** Save a resource in a file referenced by this new uri. &#xD;&#xA;     This allows to save the result of a transformation without changing the original file. */"/>
         </eAnnotations>
         <eParameters name="new_uri" eType="//standard/String"/>
       </eOperations>
@@ -3378,7 +3170,10 @@
           <details key="isAbstract" value="true"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/** Loads a resource */"/>
+          <details key="kdoc" value="/** Loads a resource. Once loaded, you'll be able to query the resource for its content.  */"/>
+        </eAnnotations>
+        <eAnnotations source="kermeta">
+          <details key="kdoc" value="/** Loads a resource. Once loaded, you'll be able to query the resource for its instances.  */"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="add">
@@ -3386,10 +3181,10 @@
           <details key="isAbstract" value="true"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/** add an instance, return it if success, otherwise return null */"/>
+          <details key="kdoc" value="/** add an instance, return it if success, otherwise return null&#xD;&#xA;     You need to do that for every Object that must be placed in the root of the resource when you'll save it */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/** Add an instance to the Resource*/"/>
+          <details key="kdoc" value="/** Add an instance to the Resource ( this is only a shortcut to instances.add call)*/"/>
         </eAnnotations>
         <eParameters name="instance" eType="//standard/Object"/>
       </eOperations>
@@ -3476,7 +3271,7 @@
       </eOperations>
       <eOperations name="add">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;var e : kermeta::persistence::ResourceUnconformityException init kermeta::persistence::ResourceUnconformityException.new&#xA;&#x9;if self.isConform(instance) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;self.instances.add(instance)&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;raise e&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;self.instances.add(instance)&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="KermetaSuperOperations" references="//persistence/Resource/add">
           <details key="SuperOperation" value="kermeta::persistence::Resource"/>
@@ -3489,15 +3284,6 @@
         </eAnnotations>
         <eAnnotations source="KermetaSuperOperations" references="//persistence/Resource/remove">
           <details key="SuperOperation" value="kermeta::persistence::Resource"/>
-        </eAnnotations>
-        <eParameters name="instance" eType="//standard/Object"/>
-      </eOperations>
-      <eOperations name="isConform" eType="//standard/Boolean">
-        <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;var valid_instance : alias Object : kermeta::language::structure::Object; init self.instances.one&#xA;&#x9;var o : alias Object : kermeta::language::structure::Object; init valid_instance.getMetaClass.typeDefinition&#xA;&#x9;var container : alias Object : kermeta::language::structure::Object;&#xA;&#x9;var i : kermeta::standard::Integer init 0&#xA;&#x9;from var b : kermeta::standard::Boolean init true&#xA;&#x9;until o.container.equals(void)&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;o := o.container&#xA;&#x9;&#x9;end&#x9;end&#xA;&#x9;var p : kermeta::language::structure::Package&#xA;&#x9;p ?= o&#xA;&#x9;result := self.isInTypeDefSet(p.ownedTypeDefinition, instance)&#xA;end"/>
-        </eAnnotations>
-        <eAnnotations source="kermeta">
-          <details key="kdoc" value="/** &#xD;&#xA;  * Return true if instance type is conform to the metamodel of the model loaded,&#xD;&#xA;  * false otherwise &#xD;&#xA;  */"/>
         </eAnnotations>
         <eParameters name="instance" eType="//standard/Object"/>
       </eOperations>
@@ -3557,17 +3343,17 @@
           <details key="kdoc" value="/**&#xD;&#xA;  * Create a resource with given uri. &#xD;&#xA;  * params : &#xD;&#xA;  *    - uri : the uri where to save the model handled by the resource&#xD;&#xA;  *    - mm_uri : the uri of the metamodel of which model is an instance&#xD;&#xA;  * User must provide the mm_uri if he creates a new model from scratch.&#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Create a new empty resource from the model given by its uri, &#xD;&#xA;  * which meta-model is stored in file given by mm_uri&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/**&#xD;&#xA;  * Create a new resource for a model given by its uri, &#xD;&#xA;  * which meta-model is stored in file given by mm_uri&#xD;&#xA;  * If file already exists, you'll be able to call the load method to concretly load the model&#xD;&#xA;  * otherwise, you can only call the save method&#xD;&#xA;  */"/>
         </eAnnotations>
         <eParameters name="uri" eType="//standard/String"/>
         <eParameters name="mm_uri" eType="//standard/String"/>
       </eOperations>
       <eOperations name="getResource" eType="//persistence/Resource">
         <eAnnotations source="kermeta">
-          <details key="body" value="do&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;kermeta::persistence::Resource> init self.resources.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;var next : kermeta::persistence::Resource init it.next&#xA;&#x9;&#x9;&#x9;if uri.equals(next.uri) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result := next&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#x9;end&#xA;&#x9;if result.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;stdio.writeln(&quot;Warning : resource + &lt;&quot;.plus(uri).plus(&quot;> does not exist yet. Trying to create one.&quot;))&#xA;&#x9;&#x9;&#x9;result := self.createResource(uri, &quot;&quot;)&#xA;&#x9;&#x9;&#x9;result.load&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
+          <details key="body" value="do&#xA;&#x9;from var it : kermeta::standard::Iterator&lt;kermeta::persistence::Resource> init self.resources.iterator&#xA;&#x9;until it.isOff&#xA;&#x9;loop&#xA;do&#xA;&#x9;&#x9;&#x9;var next : kermeta::persistence::Resource init it.next&#xA;&#x9;&#x9;&#x9;if uri.equals(next.uri) then&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;result := next&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;&#x9;end&#xA;&#x9;&#x9;end&#x9;end&#xA;&#x9;if result.equals(void) then&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;&#x9;result := self.createResource(uri, &quot;&quot;)&#xA;&#x9;&#x9;&#x9;result.load&#xA;&#x9;&#x9;end&#xA;&#x9;else&#xA;&#x9;&#x9;do&#xA;&#x9;&#x9;end&#xA;&#x9;end&#xA;end"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
-          <details key="kdoc" value="/**&#xD;&#xA;  * Get the resource of model that is stored in the given uri. Silently create&#xD;&#xA;  * and load a new one if a resource with this uri was not found.&#xD;&#xA;  */"/>
+          <details key="kdoc" value="/**&#xD;&#xA;  * Get the resource of model that is stored in the given uri. &#xD;&#xA;  * This suppose that this URI resource was already created in this Repository.&#xD;&#xA;  * If this resource wasn't already created it will silently create&#xD;&#xA;  * and load a new one. In this case, the &#xD;&#xA;  */"/>
         </eAnnotations>
         <eAnnotations source="kermeta">
           <details key="kdoc" value="/**&#xD;&#xA;  * Get the resource of model that is stored in the given uri. Silently create&#xD;&#xA;  * and load a new one if a resource with this uri was not found.&#xD;&#xA;  */"/>
