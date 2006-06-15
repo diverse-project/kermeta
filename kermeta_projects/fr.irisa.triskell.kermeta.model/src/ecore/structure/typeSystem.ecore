@@ -9,15 +9,6 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypedElement"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//structure/GenericTypeDefinition">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//structure/Boolean"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
-          eType="#//structure/Property" containment="true" eOpposite="#//structure/Property/owningClass"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
-          eType="#//structure/Operation" containment="true" eOpposite="#//structure/Operation/owningClass"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="superType" upperBound="-1"
-          eType="#//structure/Type"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Property">
       <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="#//structure/ClassDefinition"
           eOpposite="#//structure/ClassDefinition/ownedAttribute"/>
@@ -25,6 +16,13 @@
     <eClassifiers xsi:type="ecore:EClass" name="Operation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="#//structure/ClassDefinition"
           eOpposite="#//structure/ClassDefinition/ownedOperation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//structure/GenericTypeDefinition">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="#//structure/Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="#//structure/Property" containment="true" eOpposite="#//structure/Property/owningClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1" eType="#//structure/Operation" containment="true" eOpposite="#//structure/Operation/owningClass"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="superType" upperBound="-1"
+          eType="#//structure/Type"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
     <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//structure/ParameterizedType"/>
