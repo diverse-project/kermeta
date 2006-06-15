@@ -1,4 +1,4 @@
-/* $Id: KermetaIOStream.java,v 1.3 2005-05-20 12:57:04 zdrey Exp $
+/* $Id: KermetaIOStream.java,v 1.4 2006-06-15 13:04:53 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaIOStream.java
  * License: GPL
@@ -19,7 +19,6 @@ public abstract class KermetaIOStream {
      */
     public KermetaIOStream() {
         super();
-        // TODO Auto-generated constructor stub
     }
     
     public abstract void print(Object outputString);
@@ -28,7 +27,13 @@ public abstract class KermetaIOStream {
     {
         System.err.println("ERROR : read method is Not implemented");
         return null;
-        
     }
+    
+    /** Disconnect the console */
+    public void dispose() {}
+    
+    /** Initialize the console. This method should only be called once the
+     * interpretation process has been started */
+    public void initialize() {}
 
 }
