@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: BehaviorPackage.java,v 1.2 2006-06-15 08:45:46 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model kind="package"
  * @generated
  */
-public interface BehaviorPackage extends EPackage {
+public interface BehaviorPackage extends EPackage{
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -464,13 +464,22 @@ public interface BehaviorPackage extends EPackage {
 	int CALL_FEATURE__TARGET = CALL_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Atpre</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CALL_FEATURE__IS_ATPRE = CALL_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Static Property</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE__STATIC_PROPERTY = CALL_EXPRESSION_FEATURE_COUNT + 1;
+	int CALL_FEATURE__STATIC_PROPERTY = CALL_EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Static Operation</b></em>' reference.
@@ -479,7 +488,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE__STATIC_OPERATION = CALL_EXPRESSION_FEATURE_COUNT + 2;
+	int CALL_FEATURE__STATIC_OPERATION = CALL_EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Static Enum Literal</b></em>' reference.
@@ -488,7 +497,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE__STATIC_ENUM_LITERAL = CALL_EXPRESSION_FEATURE_COUNT + 3;
+	int CALL_FEATURE__STATIC_ENUM_LITERAL = CALL_EXPRESSION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the the '<em>Call Feature</em>' class.
@@ -497,7 +506,7 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CALL_FEATURE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 4;
+	int CALL_FEATURE_FEATURE_COUNT = CALL_EXPRESSION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallSuperOperationImpl <em>Call Super Operation</em>}' class.
@@ -1895,6 +1904,17 @@ public interface BehaviorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCallFeature_Target();
+
+	/**
+	 * Returns the meta object for the attribute '{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature#isIsAtpre <em>Is Atpre</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Atpre</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.behavior.CallFeature#isIsAtpre()
+	 * @see #getCallFeature()
+	 * @generated
+	 */
+	EAttribute getCallFeature_IsAtpre();
 
 	/**
 	 * Returns the meta object for the reference '{@link fr.irisa.triskell.kermeta.language.behavior.CallFeature#getStaticProperty <em>Static Property</em>}'.

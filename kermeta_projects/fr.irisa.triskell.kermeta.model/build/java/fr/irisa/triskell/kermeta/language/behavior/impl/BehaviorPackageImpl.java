@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackageImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: BehaviorPackageImpl.java,v 1.2 2006-06-15 08:45:46 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -457,8 +457,8 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCallFeature_StaticProperty() {
-		return (EReference)callFeatureEClass.getEStructuralFeatures().get(1);
+	public EAttribute getCallFeature_IsAtpre() {
+		return (EAttribute)callFeatureEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -466,7 +466,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCallFeature_StaticOperation() {
+	public EReference getCallFeature_StaticProperty() {
 		return (EReference)callFeatureEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -475,8 +475,17 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCallFeature_StaticEnumLiteral() {
+	public EReference getCallFeature_StaticOperation() {
 		return (EReference)callFeatureEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCallFeature_StaticEnumLiteral() {
+		return (EReference)callFeatureEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -924,6 +933,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 
 		callFeatureEClass = createEClass(CALL_FEATURE);
 		createEReference(callFeatureEClass, CALL_FEATURE__TARGET);
+		createEAttribute(callFeatureEClass, CALL_FEATURE__IS_ATPRE);
 		createEReference(callFeatureEClass, CALL_FEATURE__STATIC_PROPERTY);
 		createEReference(callFeatureEClass, CALL_FEATURE__STATIC_OPERATION);
 		createEReference(callFeatureEClass, CALL_FEATURE__STATIC_ENUM_LITERAL);
@@ -1070,6 +1080,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 
 		initEClass(callFeatureEClass, CallFeature.class, "CallFeature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCallFeature_Target(), this.getExpression(), null, "target", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCallFeature_IsAtpre(), theStructurePackage.getBoolean(), "isAtpre", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCallFeature_StaticProperty(), theStructurePackage.getProperty(), null, "staticProperty", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCallFeature_StaticOperation(), theStructurePackage.getOperation(), null, "staticOperation", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCallFeature_StaticEnumLiteral(), theStructurePackage.getEnumerationLiteral(), null, "staticEnumLiteral", null, 0, 1, CallFeature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
