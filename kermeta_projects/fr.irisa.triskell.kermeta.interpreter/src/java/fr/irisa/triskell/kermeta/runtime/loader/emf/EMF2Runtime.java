@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.37 2006-05-05 11:11:39 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.38 2006-06-15 06:23:17 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -128,22 +128,23 @@ public class EMF2Runtime {
 			    while (it.hasNext())
 			    {
 			        EStructuralFeature feature = (EStructuralFeature)it.next();
-			        // Handle the particular case of an EObject which type is EClass : 
+			        //    Workaround for an EMF bug
+			        //    Handle the particular case of an EObject which type is EClassifier : 
 			        //    If an EClass has (accidentally) an instanceClassName value (which is illegal?), set it to null
 			        //    Indeed, such a case (which leads to a malformed model) can appear when user load an ecore model created 
 			        //    with EMF reflexive editor, which sometimes creates EClass elements with an 
 			        //    instanceClassName that equals "". I guess this is a bug of EMF editor, but not sure :)
 			        //    An instanceClassName=="" leads to a ClassNotFoundException since EMF underlying code looks
 			        //    for a java class which name is thus "" -> unconsistent!
-			        if (eobj instanceof EClass)
+			        if (eobj instanceof EClassifier)
 			        {
-			        	 String instance_class_name = ((EClass)eobj).getInstanceClassName();
+			        	 String instance_class_name = ((EClassifier)eobj).getInstanceClassName();
 			        	 if (instance_class_name != null && instance_class_name.length() == 0)
-			        		 ((EClass)eobj).setInstanceClassName(null);
+			        		 ((EClassifier)eobj).setInstanceClassName(null);
 			        }
 			        
-			        // Get the feature value of given object (the type of this feature value is either an EList or an EObject)  
 			        Object fvalue = eobj.eGet(feature);
+			       
 			        // If this feature is an EList,
 			        if (fvalue instanceof EList)
 			        {
