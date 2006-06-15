@@ -7,7 +7,7 @@ package kermeta::persistence;
 using kermeta::standard
 
 /* ****************************************************************************
- * $Id: resource.kmt,v 1.18 2006-06-07 13:26:45 dvojtise Exp $
+ * $Id: resource.kmt,v 1.19 2006-06-15 14:24:28 zdrey Exp $
  * Project : Kermeta (First iteration)
  * Creation date :  
  * File : resource.kmt
@@ -103,6 +103,9 @@ abstract class Resource
 	end*/
 }
 
+/**
+ * Extension of the Resource class definition that is specific to EMF Repository.
+ */
 class EMFResource inherits Resource
 {
 	/** 
@@ -201,6 +204,10 @@ class KMResource inherits Resource
 		result := void
 	end
 }
+
+/** Abstract resource container, that contains a list of available loaded resources, 
+ * and methods to create or get a resource given an URI.
+ */
 abstract class Repository
 {
 	/** The resources created by this repository */
