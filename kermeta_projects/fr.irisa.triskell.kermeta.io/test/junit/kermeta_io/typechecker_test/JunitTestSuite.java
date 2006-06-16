@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.16 2005-12-06 13:43:05 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.17 2006-06-16 23:09:10 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -64,6 +64,7 @@ public class JunitTestSuite extends TestCase {
 	}
 	*/
 	// do not modify this comment
+
 
 
 
@@ -147,6 +148,10 @@ public void testinvalid_2_ClassSubTypingWithGenerics() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","2_ClassSubTypingWithGenerics.kmt" );
 }
 
+public void testinvalid_5_failtestExternPackageCall() throws Exception {
+testinvalidFile("test/typechecher_tests/invalid","5_failtestExternPackageCall.kmt" );
+}
+
 public void testinvalid_ClassSubTypingWithGenericOperations() throws Exception {
 testinvalidFile("test/typechecher_tests/invalid","ClassSubTypingWithGenericOperations.kmt" );
 }
@@ -216,6 +221,7 @@ testinvalidFile("test/typechecher_tests/invalid","test_clone.kmt" );
 		}
 	}
 	
+	/** Testing invalid file means that we are looking for one error per operation of the given file */
 	public void testinvalidFile(String dir, String file) throws Exception {
 	    
 	    KermetaUnitFactory.getDefaultLoader().unloadAll();
@@ -226,10 +232,12 @@ testinvalidFile("test/typechecher_tests/invalid","test_clone.kmt" );
 		builder.load();
 		} catch(Exception e ) {if (builder.messages.getErrors().size() == 0) throw e;};
 		
-		if (builder.messages.getAllErrors().size() > 0) {
+/*		DVK: removed assertion since the fact that matters is that we have 1
+ *        error per opertion in the file
+  		if (builder.messages.getAllErrors().size() > 0) {
 			assertTrue(builder.messages.getAllMessagesAsString(), false);
 		}
-		
+*/		
 		
 		
 		KermetaTypeChecker tc = builder.typeCheck(null);

@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.23 2006-06-16 22:06:29 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.24 2006-06-16 23:09:10 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -62,6 +62,8 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
+
 /*** BEGIN GENERATED TESTS ***/
 public void testpuzzle() throws Exception {
 testWithFile("test/ecore_testcases","puzzle.ecore" );
@@ -71,9 +73,9 @@ public void testSimple() throws Exception {
 testWithFile("test/ecore_testcases","Simple.ecore" );
 }
 
-/*public void testUML2() throws Exception {
+public void testUML2() throws Exception {
 testWithFile("test/ecore_testcases","UML2.ecore" );
-}*/
+}
 
 public void testemof() throws Exception {
 testWithFile("test/emfatic_testcases","emof.emf" );
@@ -101,10 +103,6 @@ testWithFile("test/kmt_testcases","3_testOpCall.kmt" );
 
 public void test4_testOpOpCall() throws Exception {
 testWithFile("test/kmt_testcases","4_testOpOpCall.kmt" );
-}
-
-public void test5_failtestExternPackageCall() throws Exception {
-testWithFile("test/kmt_testcases","5_failtestExternPackageCall.kmt" );
 }
 
 public void test5_testExternPackageCall() throws Exception {
