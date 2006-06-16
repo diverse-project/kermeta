@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.22 2006-03-03 15:22:19 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.23 2006-06-16 22:06:29 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -365,6 +365,8 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 	public void testWithFile(String dir, String file) throws Exception {
 	//	MetaCoreUnit builder = new MetaCoreUnit();
 	//	builder.loadMCT(new File(baseDir + file));
+		
+		// phase 1 : test that it load correctly
 		KermetaUnitFactory.getDefaultLoader().unloadAll();
 		KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
 		try {
@@ -376,17 +378,33 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		}
 		else {	
 			
-		// the xmi :
-		builder.saveAsXMIModel(dir + "/" + "output/" + file.replace('.', '_') + ".km");
+		// phase 2 : verify that it can be save as an xmi (km file)
+		try {	
+			Iterator it = builder.importedUnits.iterator();
+			while(it.hasNext()){
+				KermetaUnit importedKU = (KermetaUnit)it.next();
+				System.out.println("Need to export importedUnit :" + 
+						importedKU.getUri() + " " +
+						importedKU.getRootPackage().getName()+ ".km");
+				importedKU.saveAsXMIModel(dir + "/" + "output/" + importedKU.getRootPackage().getName()+ ".km");
+			}
+			builder.saveAsXMIModel(dir + "/" + "output/" + file.replace('.', '_') + ".km");
+		}
+		catch (Throwable t){
+			fail("file "+file+" didn't serialize correctly into km; "+t.getMessage());
+		}
+		
+		// phase 3 :
 		// try to pretty-print the result in another file
 		URI userLocatedPpfile=UserDirURI.createURI(dir + "/output/"  + file.replace('.', '_') + ".kmt",null,true);
 		String ppfile =userLocatedPpfile.toString();
 		//builder.prettyPrint(ppfile);
 		
-		ppUnit(builder, userLocatedPpfile.toFileString());
+		ppUnit(builder, userLocatedPpfile.toFileString(), dir);
 		
 		KermetaUnitFactory.getDefaultLoader().unloadAll();
 		
+		// phase 3 bis, check that the prettyprinted version can be parsed 
 		// try to re-parse the pretty-printed version
 		KermetaUnit builder2 = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ppfile);
 		try {
@@ -398,7 +416,7 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		}
 	}
 	
-	public void ppUnit(KermetaUnit builder, String file) throws Exception  {
+	public void ppUnit(KermetaUnit builder, String file, String dir) throws Exception  {
 		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
 		
 		BufferedWriter w = new BufferedWriter(new FileWriter(new File(file)));
@@ -411,13 +429,13 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		while(it.hasNext()) {
 			KermetaUnit iu = (KermetaUnit)it.next();
 			if (iu.rootPackage != builder.rootPackage) {
-				
+				URI baseURI = UserDirURI.createURI(dir + "/output/", null, true);
 				if (iu instanceof KMTUnit || iu instanceof KMUnit)
 					w.write("require \"" + iu.getUri() + "\"\n");
 				else {
-					String f = file.replaceAll(".kmt", iu.rootPackage.getName() + ".kmt");
-					ppUnit(iu, f);
-					w.write("require \"" + f + "\"\n");
+					String f = dir + "/" + "output/" + iu.getRootPackage().getName()+ ".kmt";
+					ppUnit(iu, f, dir);
+					w.write("require \"" + iu.getRootPackage().getName()+ ".kmt" + "\"\n");
 				}
 			}
 		}
