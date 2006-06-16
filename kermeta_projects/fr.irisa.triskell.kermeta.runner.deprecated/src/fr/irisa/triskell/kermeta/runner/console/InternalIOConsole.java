@@ -1,4 +1,4 @@
-/* $Id: InternalIOConsole.java,v 1.3 2006-06-15 13:21:24 zdrey Exp $
+/* $Id: InternalIOConsole.java,v 1.4 2006-06-16 09:33:16 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.runner
  * File       : MessageConsole.java
  * License    : EPL
@@ -29,6 +29,21 @@ public class InternalIOConsole extends IOConsole
 		super(name, imageDescriptor);
 		isDisposed = false;
 	}
+
+	/**
+	 * @return Returns the isDisposed.
+	 */
+	public boolean isDisposed() {
+		return isDisposed;
+	}
+
+	/**
+	 * @param isDisposed The isDisposed to set.
+	 */
+	public void setDisposed(boolean isDisposed) {
+		this.isDisposed = isDisposed;
+	}
+	
 	// This is for ProcessConsole extension
 	/* public InternalIOConsole(IProcess process, IConsoleColorProvider colorProvider, String encoding) {
 		super(process, colorProvider, encoding);

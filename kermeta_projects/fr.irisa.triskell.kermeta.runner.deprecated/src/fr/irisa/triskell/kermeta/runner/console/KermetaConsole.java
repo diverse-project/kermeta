@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.18 2006-06-15 13:23:11 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.19 2006-06-16 09:33:16 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -149,9 +149,8 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
      *  @see fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream#dispose()*/
     public void dispose()
     {
-    	messageConsole.isDisposed = true;
-    	//messageConsole.dispose();
-    	// messageConsole.destroy(); // throws an exception
+    	messageConsole.setDisposed(true);
+    	messageConsole.destroy(); // throws an exception
     	consoleManager.removeConsoleListener(this);
     }
 
