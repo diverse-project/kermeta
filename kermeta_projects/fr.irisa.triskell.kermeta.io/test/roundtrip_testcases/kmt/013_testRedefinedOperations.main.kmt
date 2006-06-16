@@ -1,0 +1,27 @@
+package testRedefinedOperations;
+
+class A
+{
+	operation f() is do
+	end
+}
+
+
+class B inherits A
+{
+	method f() is do
+	end
+}
+
+class C inherits B
+{
+	method f() is do
+	end
+}
+
+
+class D inherits B, A
+{
+	method f() from A is do
+	end	
+}
