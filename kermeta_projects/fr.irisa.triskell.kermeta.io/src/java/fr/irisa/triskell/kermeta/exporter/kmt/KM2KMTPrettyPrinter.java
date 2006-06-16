@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.30 2006-06-07 16:42:01 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.31 2006-06-16 11:56:51 zdrey Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -525,7 +525,8 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		result += "(";
 		result += ppComaSeparatedNodes(node.getOwnedParameter());
-		result += ")"; 
+		result += ")";
+		// Type of operation is allowed to be null..
 		if(node.getType() != null) {
 			result += " : " + ppTypeFromMultiplicityElement(node);
 		}
@@ -628,7 +629,18 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		else if (node.isIsComposite()) result += "attribute ";
 		else result += "reference ";
 		if (node.isIsReadOnly()) result += "readonly ";
-		result += KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
+		result += KMTHelper.getMangledIdentifier(node.getName());
+		// FIXME : It should not be the role of KMTPrettyPrinter to handle this case! :
+		// Type of Property should be mandatory (with a multiplicity [1..1]!).. at least
+		// in framework.km, not in kermeta.ecore which would not be conform to MOF if we
+		// changed there the multiplicity?
+		if(node.getType() != null) {
+			result += " : " + ppTypeFromMultiplicityElement(node);
+		}
+		else {
+			result += " : kermeta::standard::~Void" ;
+		}
+		
 		if (node.getOpposite() != null) result += "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName());
 		if (node.isIsDerived()) {
 			pushPrefix();
