@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.12 2006-06-15 13:03:22 zdrey Exp $
+/* $Id: KermetaRunTarget.java,v 1.13 2006-06-16 08:51:44 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: EPL
@@ -39,9 +39,7 @@ public class KermetaRunTarget extends AbstractKermetaTarget
 	
     public KermetaRunTarget(ILaunch p_launch)
     {
-    	super(p_launch.getDebugTarget());
-    	launch = p_launch;
-    	launch.getLaunchConfiguration();
+    	super(p_launch);
     }
     
 
@@ -98,4 +96,5 @@ public class KermetaRunTarget extends AbstractKermetaTarget
 	}
     
 	public boolean canTerminate() {return true; }//System.err.println("KermetaRunTarget.canTerminate");return (kermeta_process.state!=KermetaProcess.STATE_TERMINATED); }
+
 }

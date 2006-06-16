@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.12 2006-06-15 13:03:22 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.13 2006-06-16 08:51:44 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -12,11 +12,15 @@ package fr.irisa.triskell.kermeta.runner.debug.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.internal.runtime.InternalPlatform;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
@@ -24,9 +28,11 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchListener;
 import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IBreakpoint;
+import org.eclipse.debug.core.model.IDebugElement;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.debug.core.model.IStepFilters;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
@@ -41,14 +47,9 @@ import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 /**
  * Abstract Kermeta Target 
  */
-public abstract class AbstractKermetaTarget extends DebugElement implements
+public abstract class AbstractKermetaTarget implements IDebugElement,
 		IDebugTarget, ILaunchListener {
-	 
-    public AbstractKermetaTarget(IDebugTarget target) {
-		super(target);
-	}
-    
-
+	
     protected IDebugTarget target;
 	protected ILaunch launch;
     protected IPath workingDir;
@@ -78,6 +79,12 @@ public abstract class AbstractKermetaTarget extends DebugElement implements
     protected int requestPort;
     
     protected ArrayList breakpoints;
+    
+    public AbstractKermetaTarget(ILaunch launch) {
+		this.launch = launch;
+        target = this;
+	}
+    
     /*
      *
      * 
@@ -269,12 +276,11 @@ public abstract class AbstractKermetaTarget extends DebugElement implements
     	System.err.println("TODO : implement (AbstractKermetaTarget.java)");
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.eclipse.debug.core.IBreakpointListener#breakpointAdded(org.eclipse.debug.core.model.IBreakpoint)
      */
     public void breakpointAdded(IBreakpoint breakpoint) 
     {
-    	System.err.println("A breakpoint is added");
     	try {
     		if (breakpoint instanceof KermetaBreakpoint && ((KermetaBreakpoint)breakpoint).isEnabled()) {
     			KermetaBreakpoint b = (KermetaBreakpoint)breakpoint;
@@ -483,8 +489,121 @@ public abstract class AbstractKermetaTarget extends DebugElement implements
 		}
 	}
 
-	public Object getAdapter(Class adapter)
-	{
-		return super.getAdapter(adapter);
+	/* -------------------------------------------------------------------------
+	 * 
+	 * IDebugElement related stuffs
+	 * 
+	 * -------------------------------------------------------------------------
+	 */
+
+    /* (non-Javadoc)
+     * @see org.eclipse.core.runtime.IAdaptable#getAdapter(java.lang.Class)
+     */
+    public Object getAdapter(Class adapter) {
+		if (adapter == IDebugElement.class) {
+			return this;
+		}
+		if (adapter == IStepFilters.class) {
+			return getDebugTarget();
+		}
+		if (adapter == IDebugTarget.class) {
+			return getDebugTarget();
+		}
+		if (adapter == ILaunch.class) {
+		    return getLaunch();
+		}
+		if (adapter == IProcess.class) {
+		    return getDebugTarget().getProcess();
+		}
+		if (adapter == IDebugElement.class) {
+  			return this;
+  		}
+		return
+  		InternalPlatform.getDefault().getAdapterManager().getAdapter(this, adapter);
+    }
+
+	/**
+	 * Fires a debug event.
+	 * 
+	 * @param event debug event to fire
+	 */
+	public void fireEvent(DebugEvent event) {
+		DebugPlugin.getDefault().fireDebugEventSet(new DebugEvent[] {event});
+	}    
+
+	/**
+	 * Fires a change event for this debug element
+	 * with the specified detail code.
+	 * 
+	 * @param detail detail code for the change event,
+	 *  such as <code>DebugEvent.STATE</code> or <code>DebugEvent.CONTENT</code>
+	 */
+	public void fireChangeEvent(int detail) {
+		fireEvent(new DebugEvent(this, DebugEvent.CHANGE, detail));
+	}
+	
+	/**
+	 * Fires a creation event for this debug element.
+	 */
+    public void fireCreationEvent() {
+		fireEvent(new DebugEvent(this, DebugEvent.CREATE));
+	}	
+	
+	/**
+	 * Fires a resume for this debug element with
+	 * the specified detail code.
+	 * 
+	 * @param detail detail code for the resume event, such 
+	 *  as <code>DebugEvent.STEP_OVER</code>
+	 */
+    public void fireResumeEvent(int detail) {
+		fireEvent(new DebugEvent(this, DebugEvent.RESUME, detail));
+	}
+	
+	/**
+	 * Fires a suspend event for this debug element with
+	 * the specified detail code.
+	 * 
+	 * @param detail detail code for the suspend event, such
+	 *  as <code>DebugEvent.BREAKPOINT</code>
+	 */
+    public void fireSuspendEvent(int detail) {
+		fireEvent(new DebugEvent(this, DebugEvent.SUSPEND, detail));
+	}	
+	
+	/**
+	 * Fires a terminate event for this debug element.
+	 */
+    public void fireTerminateEvent() {
+		fireEvent(new DebugEvent(this, DebugEvent.TERMINATE));
+	}
+    
+    /** Weird method but mandatory.. */
+	public IDebugTarget getDebugTarget() {
+		return this;
+	}
+	
+	/**
+	 * Throws a debug exception with a status code of <code>TARGET_REQUEST_FAILED</code>.
+	 * 
+	 * @param message exception message
+	 * @param e underlying exception or <code>null</code>
+	 * @throws DebugException
+	 */
+	protected void requestFailed(String message, Throwable e) throws DebugException {
+		throw new DebugException(new Status(IStatus.ERROR, DebugPlugin.getUniqueIdentifier(), 
+				DebugException.TARGET_REQUEST_FAILED, message, e));
+	}
+	
+	/**
+	 * Throws a debug exception with a status code of <code>NOT_SUPPORTED</code>.
+	 * 
+	 * @param message exception message
+	 * @param e underlying exception or <code>null</code>
+	 * @throws DebugException
+	 */
+	protected void notSupported(String message, Throwable e) throws DebugException {
+		throw new DebugException(new Status(IStatus.ERROR, DebugPlugin.getUniqueIdentifier(), 
+				DebugException.NOT_SUPPORTED, message, e));
 	}
 }

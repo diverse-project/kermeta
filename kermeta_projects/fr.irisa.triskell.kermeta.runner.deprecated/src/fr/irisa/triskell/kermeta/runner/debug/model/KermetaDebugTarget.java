@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.18 2006-06-15 13:03:22 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.19 2006-06-16 08:51:43 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -47,24 +47,12 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
     /** Can be RunnerConstants.RESUME, TERMINATE, SUSPEND */
     protected String state;
     
-    
-    
-    /**
-	 * @param target
-	 */
-	public KermetaDebugTarget(IDebugTarget target) {
-		super(target);
-		this.target = target; 
-	}
-
 	/**
      * Constructor
      * @param launch the launch handled by this debug target.
      */
-    public KermetaDebugTarget(ILaunch plaunch) { 
-    	super(plaunch.getDebugTarget());
-    	launch = plaunch;
-        target = this;
+    public KermetaDebugTarget(ILaunch launch) { 
+    	super(launch);
         breakpoints = new ArrayList();
         stepHandler = new KermetaStepHandler(this);
         this.name = "Kermeta Debug Target";

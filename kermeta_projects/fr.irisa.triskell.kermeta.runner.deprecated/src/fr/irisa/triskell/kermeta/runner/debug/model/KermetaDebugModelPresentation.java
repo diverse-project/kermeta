@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugModelPresentation.java,v 1.7 2005-12-14 17:19:55 zdrey Exp $
+/* $Id: KermetaDebugModelPresentation.java,v 1.8 2006-06-16 08:51:44 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugModelPresentation.java
  * License   : EPL
@@ -44,7 +44,6 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
 	
 	public KermetaDebugModelPresentation()
 	{
-		System.err.println("Kermeta Debug Model Presentation");
 	}
     /** (non-Javadoc)
      * @see org.eclipse.debug.ui.IDebugModelPresentation#setAttribute(java.lang.String, java.lang.Object)
@@ -170,7 +169,6 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#addListener(org.eclipse.jface.viewers.ILabelProviderListener)
      */
     public void addListener(ILabelProviderListener listener) {
-    	System.err.println("I added a listener in KermetaDebugModelPresentation.");
     	listeners.add(listener);
     }
 
@@ -178,8 +176,7 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
      */
     public void dispose() {
-        // TODO Auto-generated method stub
-    	System.err.println("I disposed in KermetaDebugModelPresentation.");
+    	// System.err.println("I disposed in KermetaDebugModelPresentation.");
     }
 
     /* (non-Javadoc)

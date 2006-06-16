@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpointAction.java,v 1.6 2006-03-03 15:23:35 dvojtise Exp $
+/* $Id: KermetaBreakpointAction.java,v 1.7 2006-06-16 08:51:44 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaBreakpointAction.java
  * License   : EPL
@@ -271,7 +271,6 @@ public class KermetaBreakpointAction extends Action implements IUpdate {
 			if (askForLabel) {
 				if (!askForLabel(attributes))
 					return; }*/
-			System.err.println("RESOURCE : " + resource);
 	//		MarkerUtilities.createMarker(resource, map, KermetaBreakpoint.KERMETA_BREAKPOINT_MARKER);
 			
 			
