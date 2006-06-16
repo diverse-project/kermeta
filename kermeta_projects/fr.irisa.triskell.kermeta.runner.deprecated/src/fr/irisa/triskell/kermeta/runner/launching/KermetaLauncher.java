@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.15 2006-06-16 08:51:44 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.16 2006-06-16 09:33:33 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -162,11 +162,13 @@ public class KermetaLauncher
         {
             console.print(kerror.getMessage());
             console.print("\n"+kerror.toString());
+            console.dispose();
         }
         catch (KermetaInterpreterError ierror)
         {
             console.print("Kermeta interpreter could not be launched :\n");
             console.print(ierror.getMessage());
+            console.dispose();
         }
         catch (Throwable e)
         {
@@ -174,9 +176,11 @@ public class KermetaLauncher
             		"-------------------------------------------\n");
             console.print("Reported java error : "+e);
             console.print(e.getMessage());
+            console.dispose();
             e.printStackTrace();
         }
         console.print("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+        
         // this console is not used any more
         //console.removeConsoleListener();
         return interpreter;
