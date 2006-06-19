@@ -16,6 +16,7 @@ package fr.irisa.triskell.ecore.visitor;
 import java.lang.reflect.*;
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.emf.ecore.impl.EcorePackageImpl;
 
@@ -72,6 +73,16 @@ public class EcoreVisitor {
 				    throw new Error(e);
 				}
 				return result;
+			}
+			
+			
+			/** Call visitor on a list of elements */
+			protected void acceptList(EList l) {
+				Iterator it = l.iterator();
+				while (it.hasNext()) {
+					EObject o = (EObject)it.next();
+					this.accept(o);
+				}
 			}
 
 	public Object visit(EAttribute node) {

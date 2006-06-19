@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.15 2006-06-08 16:22:11 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.16 2006-06-19 13:40:29 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -618,21 +618,21 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		{
 			ecoreExporter.addAnnotation( 
 					newEStructuralFeature,
-					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-					KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY,
+					KM2Ecore.ANNOTATION_DERIVEDPROPERTY,
+					KM2Ecore.ANNOTATION_DERIVEDPROPERTY_SETTERBODY,
 					setterBody,
 					null);
 		}
 		ecoreExporter.addAnnotation( 
 				newEStructuralFeature,
-				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY,
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY,
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_GETTERBODY,
 				getterBody,
 				null);
 		ecoreExporter.addAnnotation( 
 				newEStructuralFeature,
-				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY,
-				KM2Ecore.KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY,
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY,
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_ISREADONLY,
 				new Boolean(node.isIsReadOnly()).toString(),
 				null);
 	}
@@ -641,8 +641,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	public void setSuperOperationAnnotation(Operation superOperation, EOperation newEOperation) {
 		ecoreExporter.addAnnotation( 
 				newEOperation,
-				KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION,
-				KM2Ecore.KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS,
+				KM2Ecore.ANNOTATION_SUPEROPERATION,
+				KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS,
 				KMTHelper.getQualifiedName(superOperation.getOwningClass()),
 				(EObject)accept(superOperation));		
 	}
@@ -656,8 +656,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		EClassifier exceptionEClassifier =  (EClassifier)accept(anException);
 		ecoreExporter.addAnnotation( 
 				newEOperation,
-				KM2Ecore.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION,
-				KM2Ecore.KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS,
+				KM2Ecore.ANNOTATION_RAISEDEXCEPTION,
+				KM2Ecore.ANNOTATION_RAISEDEXCEPTION_DETAILS,
 				KMTHelper.getQualifiedName(anException.getTypeDefinition()),
 				exceptionEClassifier);		
 	}
@@ -673,7 +673,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			typeParameterString += " : " + new KM2KMTPrettyPrinter().accept(tv.getSupertype());
 		ecoreExporter.addAnnotation( 
 				newEObject,
-				KM2Ecore.KMT2ECORE_ANNOTATION_TYPEPARAMETER,
+				KM2Ecore.ANNOTATION_TYPEPARAMETER,
 				tv.getName(),
 				typeParameterString,
 				null);					

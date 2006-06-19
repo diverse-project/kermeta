@@ -1,4 +1,4 @@
-/* $Id: EcoreUnit.java,v 1.5 2006-06-09 08:38:16 zdrey Exp $
+/* $Id: EcoreUnit.java,v 1.6 2006-06-19 13:41:22 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : EcoreUnit.java
 * License : GPL
@@ -49,7 +49,7 @@ public class EcoreUnit extends KermetaUnit {
      */
     public EcoreUnit(String uri, Hashtable packages) {
         super(uri, packages);
-        ECore2Kermeta.isQuickFixEnabled = true;
+        ECore2KMPass1.isQuickFixEnabled = true;
     }
     
     public EcoreUnit(Resource resource, Hashtable packages) {
@@ -71,7 +71,7 @@ public class EcoreUnit extends KermetaUnit {
     
 	public void load(Resource resource) {
 		try {
-			ECore2Kermeta visitor = new ECore2Kermeta(this, resource);
+			ECore2KMPass1 visitor1 = new ECore2KMPass1(this, resource);
 
 			// Visit the metamodel : we visit the packages, which imply the visit of 
 			// the classdefinitions and sub packages
@@ -79,76 +79,11 @@ public class EcoreUnit extends KermetaUnit {
 			while(pkgs.hasNext()) {
 				EObject obj = (EObject)pkgs.next();
 				if (obj instanceof EPackage) {
-					visitor.accept(obj);
+					visitor1.accept(obj);
 				}
 			}
-			
-			// Then, visit the datatypes -> the instanceType property of a datatype/primitivetype
-			// refer to a typedefinition that, so, must have been previously listed.
-			for (EDataType node : visitor.datatypes.keySet()) {
-				visitor.current_primitivetype = (PrimitiveType)visitor.datatypes.get(node); 
-				// Get the instance class name of node
-				String type_name = ((EDataType)node).getInstanceClassName();
-				// primitive_types_mapping : { javatype : kermetatype }
-				if (visitor.primitive_types_mapping.containsKey(type_name)) {
-					type_name = (String)visitor.primitive_types_mapping.get(type_name);
-				}
-				else if (node.getEAnnotation(KM2Ecore.KMT2ECORE_ANNOTATION)!=null) {// IMPORTANT!
-					type_name = (String)visitor.accept(node.getEAnnotation(KM2Ecore.KMT2ECORE_ANNOTATION));
-				}
-				// Try to find in the current unit if the given type_name can be found
-				TypeDefinition type = this.typeDefinitionLookup(type_name);
-				// FIXME : standard library is not browsable anymore?
-				if (type == null) type = KermetaUnit.getStdLib().typeDefinitionLookup(type_name);
-				// FIXME : If type is still null, replacing by the basic Object type of Kermeta. 
-				// Not the best way to process. Idea: annotate Kermeta alias with an extern "instanceClassName"?
-				if (type == null) {
-					this.messages.addWarning("cannot find instance class " + type_name + " for primitive type " + 
-							visitor.getQualifiedName((EDataType)node) + " (replaced by Object)", null);
-					type = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::language::structure::Object");
-				}
-				visitor.current_primitivetype.setInstanceType(
-						visitor.createInstanceTypeForTypeDefinition(type));
-			}
-			
-			// Visit the operations   
-			// the body of operation needs to know all the types that it can use.
-			// idem for the super types of operations and for the return type of operation!
-			for (EObject node : visitor.types.keySet()) 
-			{
-				if (node instanceof EClass)
-				{
-					visitor.current_classdef = (ClassDefinition)visitor.types.get(node);
-					// Set the super types
-					Iterator sit = ((EClass)node).getESuperTypes().iterator();
-					while (sit.hasNext()) {
-						EClassifier st = (EClassifier)sit.next();
-						Type t = visitor.createTypeForEClassifier(st);
-						if (t == null || !(t instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
-							throw new KM2ECoreConversionException(
-							"Internal error of ecore2kermeta :" +
-							" supertypes of class " + visitor.getQualifiedName((EClass)node) + " : "+ visitor.getQualifiedName(st) +" not found");
-						}
-						visitor.current_classdef.getSuperType().add(t);
-					}
-					visitor.acceptList(((EClass)node).getEStructuralFeatures());
-					visitor.acceptList(((EClass)node).getEOperations());
-					visitor.acceptList(((EClass)node).getEAnnotations());
-				}
-			}
-			
-			// Once the operations are defined we can set their superOperation property
-			for (EOperation node : visitor.operations.keySet()) {
-				// TODO Has the operation an "implicit" super operation? if yes, we have to set it
-				// (not defined in the KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS...)?
-				visitor.current_op = visitor.operations.get(node);
-				// it could have been resolved from the EAnnotation visit
-				if (visitor.current_op.getSuperOperation()==null)
-				{
-					EOperation superop = visitor.findSuperOperation(node);
-					if (superop != null) visitor.current_op.setSuperOperation(visitor.operations.get(superop));
-				}
-			}
+			Ecore2KMPass2 visitor2 = new Ecore2KMPass2(this, resource, visitor1);
+			visitor2.convertUnit();
 			
 		} catch (Throwable e) {
 			this.messages.addError("Error loading ECore model " + this.getUri() + " : " + e, null);
@@ -190,5 +125,7 @@ public class EcoreUnit extends KermetaUnit {
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadBodies()
      */
     public void loadBodies() {}
+    
+    
 
 }

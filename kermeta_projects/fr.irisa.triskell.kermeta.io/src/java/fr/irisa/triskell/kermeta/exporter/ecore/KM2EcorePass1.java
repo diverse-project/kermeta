@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.17 2006-06-07 16:41:43 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.18 2006-06-19 13:40:29 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -120,9 +120,6 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		newEPackage.setNsURI(ecoreResource.getURI().toString() + (node==root_p?"":"#/") + current_ppath);
 		newEPackage.setName(current_name);
 		
-		// Visit the tags of package and convert them into EAnnotations
-		setTagAnnotations(node, newEPackage);
-		
 		if (ecoreExporter.tracer != null)
 		    ecoreExporter.tracer.addMappingTrace(node,newEPackage,node.getName() + " is mapped to " + newEPackage.getName());
 
@@ -150,6 +147,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		// and all the ecore elements have a direct or undirect containment relationship 
 		// with EPackages. And we only need to add the root elements to the resource contents.
 		ecoreResource.getContents().add(newEPackage);
+		// Visit the tags of package and convert them into EAnnotations
+		setTagAnnotations(node, newEPackage);
 		// Add the created EPackage to km2ecoremapping
 		km2ecoremapping.put(node,newEPackage);
 		loggerTabs.decrement();
@@ -202,8 +201,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 				String invString = (String)prettyPrinter.accept((Constraint)itinv.next());
 				ecoreExporter.addAnnotation( 
 					newEClass,
-					KM2Ecore.KMT2ECORE_ANNOTATION,
-					KM2Ecore.KMT2ECORE_ANNOTATION_INV_DETAILS,
+					KM2Ecore.ANNOTATION,
+					KM2Ecore.ANNOTATION_INV_DETAILS,
 					invString,
 					null);
 			}
@@ -236,6 +235,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		current_eenum = newEEnum;
 		// Awful cast : we KNOW that type of object is EnumerationLiteral
 		for (Object o : node.getOwnedLiteral()) { this.accept((EnumerationLiteral)o); }
+		setTagAnnotations(node, newEEnum);
 		return newEEnum;
 	}
 	
@@ -281,8 +281,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			Boolean b = new Boolean(node.isIsAbstract());
 			ecoreExporter.addAnnotation( 
 					newEOperation,
-					KM2Ecore.KMT2ECORE_ANNOTATION,
-					KM2Ecore.KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS,
+					KM2Ecore.ANNOTATION,
+					KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS,
 					b.toString(),
 					null);	
 		}
@@ -295,8 +295,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			String bodyString = (String)prettyPrinter.accept(node.getBody());
 			ecoreExporter.addAnnotation( 
 					newEOperation,
-					KM2Ecore.KMT2ECORE_ANNOTATION,
-					KM2Ecore.KMT2ECORE_ANNOTATION_BODY_DETAILS,
+					KM2Ecore.ANNOTATION,
+					KM2Ecore.ANNOTATION_BODY_DETAILS,
 					bodyString,
 					null);	
 		}
@@ -307,8 +307,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			String preString = (String)prettyPrinter.accept((Constraint)itpre.next());
 			ecoreExporter.addAnnotation( 
 					newEOperation,
-					KM2Ecore.KMT2ECORE_ANNOTATION,
-					KM2Ecore.KMT2ECORE_ANNOTATION_PRE_DETAILS,
+					KM2Ecore.ANNOTATION,
+					KM2Ecore.ANNOTATION_PRE_DETAILS,
 					preString,
 					null);
 		}
@@ -319,24 +319,21 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			String postString = (String)prettyPrinter.accept((Constraint)itpost.next());
 			ecoreExporter.addAnnotation( 
 					newEOperation,
-					KM2Ecore.KMT2ECORE_ANNOTATION,
-					KM2Ecore.KMT2ECORE_ANNOTATION_POST_DETAILS,
+					KM2Ecore.ANNOTATION,
+					KM2Ecore.ANNOTATION_POST_DETAILS,
 					postString,
 					null);
 		}
 		
-		// Annotations
-		Iterator it = node.getTag().iterator();
-		setTagAnnotations(node, newEOperation);
-		
 		newEOperation.setOrdered(node.isIsOrdered());
 		newEOperation.setUnique(node.isIsUnique());
 		newEOperation.setLowerBound(node.getLower());
-		if (node.getUpper() == 0) System.err.println("Upper is O!!!!!!!!!!!!");
 		newEOperation.setUpperBound(node.getUpper());
+		// upper = O for operation is meaningless 
+		if (node.getUpper() == 0) newEOperation.setUpperBound(1);
 		
 		// Parameters
-		it = node.getOwnedParameter().iterator();
+		Iterator it = node.getOwnedParameter().iterator();
 		while(it.hasNext()) {
 			Object o = accept((EObject)it.next());
 			if (o != null)
@@ -344,7 +341,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			else
 				throw new KM2ECoreConversionException("A tag in '"+node.getName() + "' could not be resolved");				
 		}
-		
+		setTagAnnotations(node, newEOperation);
 		km2ecoremapping.put(node,newEOperation);
 		loggerTabs.decrement();
 		return newEOperation;
@@ -414,8 +411,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			// Add an Annotation so that it will be correctly back translated to km.
 			ecoreExporter.addAnnotation( 
 					newEAttribute,
-					KM2Ecore.KMT2ECORE_ANNOTATION,
-					KM2Ecore.KMT2ECORE_ANNOTATION_ISCOMPOSITE_DETAILS,
+					KM2Ecore.ANNOTATION,
+					KM2Ecore.ANNOTATION_ISCOMPOSITE_DETAILS,
 					isContainment?"true":"false",
 					null);
 		}
@@ -434,6 +431,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		newEStructuralFeature.setUpperBound(node.getUpper());
 		newEStructuralFeature.setDefaultValueLiteral(node.getDefault());
 		// newEStructuralFeature.setDefaultValue() -> no default value
+		setTagAnnotations(node, newEStructuralFeature);
 		
 		km2ecoremapping.put(node,newEStructuralFeature);
 		loggerTabs.decrement();		
@@ -449,7 +447,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		current_name = node.getName();
 		
 		newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-		newEAnnotation.setSource(KM2Ecore.KMT2ECORE_ANNOTATION);
+		newEAnnotation.setSource(KM2Ecore.ANNOTATION);
 		newEAnnotation.getDetails().put(current_name, KMTHelper.formatTagValue(node.getValue()));
 		
 		km2ecoremapping.put(node,newEAnnotation);
@@ -474,12 +472,12 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			newEClassifier.setInstanceClassName("java.lang.Object");
 			ecoreExporter.addAnnotation( 
 					newEClassifier,
-					KM2Ecore.KMT2ECORE_ANNOTATION,
-					KM2Ecore.KMT2ECORE_ANNOTATION_PRIMITIVETYPEALIAS,
+					KM2Ecore.ANNOTATION,
+					KM2Ecore.ANNOTATION_ALIAS_DETAILS,
 					type_name,
 					null);
 		}
-		
+		setTagAnnotations(node, newEClassifier);
 		km2ecoremapping.put(node,newEClassifier);
 		return newEClassifier;
 	}	

@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.16 2006-06-07 16:41:43 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.17 2006-06-19 13:40:29 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
@@ -98,23 +99,24 @@ public class KM2Ecore {
     	
     }
 	
-    public final static String KMT2ECORE_ANNOTATION = "kermeta";
-    public final static String KMT2ECORE_ANNOTATION_ISCOMPOSITE_DETAILS = "isComposite";
-    public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION = "KermetaSuperOperations";
-    public final static String KMT2ECORE_ANNOTATION_SUPEROPERATION_DETAILS = "SuperOperation";
-    public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION = "KermetaRaisedExceptions";
-    public final static String KMT2ECORE_ANNOTATION_RAISEDEXCEPTION_DETAILS = "RaisedException";
-    public final static String KMT2ECORE_ANNOTATION_ISABSTRACT_DETAILS = "isAbstract";
-    public final static String KMT2ECORE_ANNOTATION_BODY_DETAILS = "body";
-    public final static String KMT2ECORE_ANNOTATION_PRE_DETAILS = "pre";
-    public final static String KMT2ECORE_ANNOTATION_POST_DETAILS = "post";
-    public final static String KMT2ECORE_ANNOTATION_INV_DETAILS = "inv";
-    public final static String KMT2ECORE_ANNOTATION_TYPEPARAMETER = "KermetaTypeParameters";
-    public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY = "KermetaDerivedProperty";
-    public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_ISREADONLY = "isReadOnly";
-    public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_GETTERBODY = "getter.body";
-    public final static String KMT2ECORE_ANNOTATION_DERIVEDPROPERTY_SETTERBODY = "setter.body";
-    public final static String KMT2ECORE_ANNOTATION_PRIMITIVETYPEALIAS = "alias";
+    public final static String ANNOTATION = "kermeta";
+    public final static String ANNOTATION_ISCOMPOSITE_DETAILS = "isComposite";
+    public final static String ANNOTATION_KDOC_DETAILS = KMT2KMPass7.KERMETADOC;
+    public final static String ANNOTATION_SUPEROPERATION = "KermetaSuperOperations";
+    public final static String ANNOTATION_SUPEROPERATION_DETAILS = "SuperOperation";
+    public final static String ANNOTATION_RAISEDEXCEPTION = "KermetaRaisedExceptions";
+    public final static String ANNOTATION_RAISEDEXCEPTION_DETAILS = "RaisedException";
+    public final static String ANNOTATION_ISABSTRACT_DETAILS = "isAbstract";
+    public final static String ANNOTATION_BODY_DETAILS = "body";
+    public final static String ANNOTATION_PRE_DETAILS = "pre";
+    public final static String ANNOTATION_POST_DETAILS = "post";
+    public final static String ANNOTATION_INV_DETAILS = "inv";
+    public final static String ANNOTATION_TYPEPARAMETER = "KermetaTypeParameters";
+    public final static String ANNOTATION_DERIVEDPROPERTY = "KermetaDerivedProperty";
+    public final static String ANNOTATION_DERIVEDPROPERTY_ISREADONLY = "isReadOnly";
+    public final static String ANNOTATION_DERIVEDPROPERTY_GETTERBODY = "getter.body";
+    public final static String ANNOTATION_DERIVEDPROPERTY_SETTERBODY = "setter.body";
+    public final static String ANNOTATION_ALIAS_DETAILS = "alias";
     
 	/**
 	 * @param resource : the resource to populate
