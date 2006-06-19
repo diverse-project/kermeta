@@ -1,4 +1,4 @@
-/* $Id: Ecore2KermetaQuickFixWizardPage.java,v 1.2 2005-07-21 20:52:21 dvojtise Exp $
+/* $Id: Ecore2KermetaQuickFixWizardPage.java,v 1.3 2006-06-19 14:23:53 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
-import fr.irisa.triskell.kermeta.loader.ecore.ECore2Kermeta;
+import fr.irisa.triskell.kermeta.loader.ecore.ECore2KMPass1;
 
 /**
  * The Quick fix page allows to enable or disable some simple 
@@ -118,9 +118,9 @@ public class Ecore2KermetaQuickFixWizardPage extends WizardPage implements Liste
 		isOpPropertyEnabledCheckBox = new Button(operationPropertyGroup, SWT.CHECK);
 		isOpPropertyEnabledCheckBox.setSelection(true);
         createLabel(operationPropertyGroup, "Operation prefix ", true, font);
-        methodRenamePrefixText = createText(operationPropertyGroup, true, font, ECore2Kermeta.methodRenamePrefix);
+        methodRenamePrefixText = createText(operationPropertyGroup, true, font, ECore2KMPass1.methodRenamePrefix);
         createLabel(operationPropertyGroup, "Operation postfix ", true, font);
-        methodRenamePostfixText = createText(operationPropertyGroup, true, font, ECore2Kermeta.methodRenamePostfix);
+        methodRenamePostfixText = createText(operationPropertyGroup, true, font, ECore2KMPass1.methodRenamePostfix);
     }
     
     /**
