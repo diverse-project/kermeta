@@ -31,13 +31,13 @@ class Main
 	operation mainload() is do
 		var theFSM : FSM init loadfsm()
 		printFSM(theFSM)
-		self.run(theFSM)	
+		theFSM.run()	
 	end
 	
 	operation mainloadpostviolated() is do
 		var theFSM : FSM init loadfsmpostviolated()
 		printFSM(theFSM)
-		self.run(theFSM)	
+		theFSM.run()	
 	end
 	
 	/**
@@ -91,57 +91,6 @@ class Main
 		            stdio.writeln(" on " + s.name)
 		    end
 		}
-	end
-	
-// Semantique operationnelle
-	operation run(fsm : FSM) : Void raises FSMException is do  
-		// reset if there is no current state
-		if fsm.currentState == void then fsm.currentState := fsm.initialState end
-		self
-		from var str : String init "init"
-		until str == "quit"
-		loop
-			stdio.writeln("Current state : " + fsm.currentState.name)
-			str := stdio.read("give me a letter : ")
-			if str == "quit" then
-				stdio.writeln("")
-				stdio.writeln("quitting ...")
-			else 
-				if str == "print" then
-					stdio.writeln("")
-					//serializer.printFSM(self)
-				else	
-					stdio.writeln(str)			
-					stdio.writeln("stepping...")
-					do
-						var textRes : String
-						textRes := fsm.currentState.step(str)
-						if( textRes == void or textRes == "" )
-						then
-							textRes := "NC"
-						end
-						
-						stdio.writeln("string produced : " + textRes)
-					
-						rescue (err : ConstraintViolatedPre)
-		            		stdio.writeln(err.toString)
-		            		stdio.writeln(err.message)
-		            		str := "quit"
-		            	rescue (err : ConstraintViolatedPost)
-	            			stdio.writeln(err.toString)
-	            			stdio.writeln(err.message)
-	            			str := "quit"
-	            		
-						rescue(err : NonDeterminism)
-							stdio.writeln(err.toString)
-							str := "quit"	
-						rescue(err : NoTransition)
-							stdio.writeln(err.toString)
-							str := "quit"
-	            	end
-				end
-			end
-		end
 	end
 	
 	

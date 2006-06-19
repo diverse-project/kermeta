@@ -46,6 +46,57 @@ class FSM
 		
 		end
 	
+	// Semantique operationnelle
+	operation run() : Void raises FSMException is do  
+		// reset if there is no current state
+		if self.currentState == void then self.currentState := self.initialState end
+		self
+		from var str : String init "init"
+		until str == "quit"
+		loop
+			stdio.writeln("Current state : " + self.currentState.name)
+			str := stdio.read("give me a letter : ")
+			if str == "quit" then
+				stdio.writeln("")
+				stdio.writeln("quitting ...")
+			else 
+				if str == "print" then
+					stdio.writeln("")
+					//serializer.printFSM(self)
+				else	
+					stdio.writeln(str)			
+					stdio.writeln("stepping...")
+					do
+						var textRes : String
+						textRes := self.currentState.step(str)
+						if( textRes == void or textRes == "" )
+						then
+							textRes := "NC"
+						end
+						
+						stdio.writeln("string produced : " + textRes)
+					
+						rescue (err : ConstraintViolatedPre)
+		            		stdio.writeln(err.toString)
+		            		stdio.writeln(err.message)
+		            		str := "quit"
+		            	rescue (err : ConstraintViolatedPost)
+	            			stdio.writeln(err.toString)
+	            			stdio.writeln(err.message)
+	            			str := "quit"
+	            		
+						rescue(err : NonDeterminism)
+							stdio.writeln(err.toString)
+							str := "quit"	
+						rescue(err : NoTransition)
+							stdio.writeln(err.toString)
+							str := "quit"
+	            	end
+				end
+			end
+		end
+	end
+	
 	/** Initialize a new automaton from an existing one 
 	 *  param :
 	 *    initState : the initial state
@@ -79,6 +130,7 @@ class State {
 	
 	reference combination : Set<State>
 	
+	// Go to the next state
 	operation step(c : String) : String raises FSMException is
 	
 	pre notVoidInput is
@@ -99,8 +151,7 @@ class State {
 	post notVoidOutput is
 		result != void and result != ""
 	
-	
-	/** Create a new state from self state. */
+	// Create a new state from self state
 	method copy() : State is do
 		result := State.new
 		result.name := String.clone(name)
@@ -115,6 +166,7 @@ class Transition
 	attribute input : String
 	attribute output : String
 	
+	// Fire the transition
 	operation fire() : String is do
 		// update FSM current state
 		source.owningFSM.currentState := target

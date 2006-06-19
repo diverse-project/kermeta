@@ -21,7 +21,7 @@
         <element href="sampletodeterminize.fsm#//@ownedState.0"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="180,244" size="50,50">
+    <contained xsi:type="di:GraphNode" position="287,244" size="50,50">
       <anchorage graphEdge="//@diagrams.0/@contained.4"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="sampletodeterminize.fsm#//@ownedState.1"/>
