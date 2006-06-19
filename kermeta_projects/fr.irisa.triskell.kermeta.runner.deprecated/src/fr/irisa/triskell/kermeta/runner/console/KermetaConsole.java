@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.19 2006-06-16 09:33:16 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.20 2006-06-19 13:36:50 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -77,6 +77,7 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
         target = t;
         consoleManager = plugin.getConsoleManager();
 	    consoleManager.addConsoleListener(this);
+	    initialize();
 	}
 
 	public void setProcess(IProcess process) { this.process = process; }
@@ -104,7 +105,7 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
 		String result = "";
     	try
     	{
-    		messageConsole.activate();
+    		//messageConsole.activate();
     		inputStream = messageConsole.getInputStream();
     		// This lead to a thread access error.
     		// inputStream.setColor(new Color(null, 200,30,240));
@@ -150,8 +151,8 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     public void dispose()
     {
     	messageConsole.setDisposed(true);
-    	messageConsole.destroy(); // throws an exception
-    	consoleManager.removeConsoleListener(this);
+    	// messageConsole.destroy(); // throws an exception
+    	//consoleManager.removeConsoleListener(this);
     }
 
 
@@ -162,8 +163,14 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     	IConsole[] consoles = consoleManager.getConsoles();
     	for (int i=0; i<consoles.length; i++)
     	{
-    		InternalIOConsole c = (InternalIOConsole)consoles[i];
-    		if (c.isDisposed == true) consoleManager.removeConsoles(new IConsole[] {c});
+    		if ( consoles[i] instanceof InternalIOConsole)
+    		{
+    			InternalIOConsole c = (InternalIOConsole)consoles[i];
+    			if (c.isDisposed == true) 
+    			{	consoleManager.removeConsoleListener(this);
+    				consoleManager.removeConsoles(new IConsole[] {c});
+    			}
+    		}
     	}
     }
     
@@ -191,7 +198,6 @@ public class KermetaConsole extends KermetaIOStream implements IConsoleListener
     		//new InternalIOConsole(target.getProcess(), new ConsoleColorProvider(), "ISO-8859-1") ; //consoleName + "[" +  consoleManager.getConsoles().length + "]");
     	inputStream = messageConsole.getInputStream();
     	outputStream = messageConsole.newOutputStream(); //messageConsole.newMessageStream();
-
     	consoleManager.addConsoles( new IConsole[]{messageConsole});
 		consoleManager.showConsoleView(messageConsole);
     }

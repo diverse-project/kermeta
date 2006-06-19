@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.16 2006-06-16 09:33:33 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.17 2006-06-19 13:36:50 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -148,7 +148,6 @@ public class KermetaLauncher
     	        interpreter.setKStream(null);
     	        interpreter.freeJavaMemory();
     	        KermetaUnitFactory.resetDefaultLoader();
-    	        console.dispose();
     	        return null;
             }
             else  // We launch an interpreter with a special "condition"
@@ -217,8 +216,6 @@ public class KermetaLauncher
 	        selectedFile = (IFile) iresource;
 	    else
 	      throw (new Error("File not found! - "+ fileNameString));
-	    // init the console
-        console.initialize();
 	    KermetaInterpreter interpreter = null;
         try
         {
@@ -241,7 +238,8 @@ public class KermetaLauncher
             }
             interpreter.setEntryParameters(interpreter_params);
 
-
+    	    // init the console
+            // console.initialize();
             interpreter.setKStream(console);
             
             if (isDebugMode == false)
@@ -265,11 +263,13 @@ public class KermetaLauncher
         {
             console.print(kerror.getMessage());
             console.print("\n"+kerror.toString());
+            console.dispose();
         }
         catch (KermetaInterpreterError ierror)
         {
             console.print("Kermeta interpreter could not be launched :\n");
             console.print(ierror.getMessage());
+            console.dispose();
         }
         catch (Throwable e)
         {
@@ -277,6 +277,7 @@ public class KermetaLauncher
             		"-------------------------------------------\n");
             console.print("Reported java error : "+e);
             console.print(e.getMessage());
+            console.dispose();
             e.printStackTrace();
         }
         console.print("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");

@@ -1,4 +1,4 @@
-/** $Id: KermetaRunProcess.java,v 1.1 2006-06-15 13:03:22 zdrey Exp $
+/** $Id: KermetaRunProcess.java,v 1.2 2006-06-19 13:36:50 zdrey Exp $
  * Project   : Kermeta Runner
  * File      : KermetaRunProcess.java
  * License   : EPL
@@ -61,7 +61,6 @@ public class KermetaRunProcess extends KermetaProcess {
 	 * @see java.lang.Runnable#run()
 	 */
 	public void run() {
-		System.out.println("Run kermeta with a console");
 		KermetaLauncher.getDefault().runKermeta(file, className, opName, args, false, isConstraintMode, console);
 	}
 	
