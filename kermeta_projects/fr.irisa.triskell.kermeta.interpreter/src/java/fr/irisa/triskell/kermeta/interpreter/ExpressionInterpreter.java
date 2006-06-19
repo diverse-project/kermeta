@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.37 2006-04-05 17:00:46 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.38 2006-06-19 12:28:49 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -15,6 +15,8 @@
 package fr.irisa.triskell.kermeta.interpreter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URL;
+//import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -64,6 +66,7 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import java.net.URLClassLoader;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
@@ -925,14 +928,33 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	
 			// Invoke the java method
 			Class jclass = null;
+			ClassLoader cl = Thread.currentThread().getContextClassLoader();
 	        try {
-	        	ClassLoader cl = Thread.currentThread().getContextClassLoader();
+	        	
 	        	//jclass = Class.forName(jclassName);
 	        	// The Thread ClassLoader also includes the user jars
-	        	jclass = Class.forName(jclassName,true, cl);
-	        } catch (ClassNotFoundException e) {	        	
+	        	if(cl instanceof URLClassLoader){
+	        		URLClassLoader ucl=(URLClassLoader)cl;
+	        		jclass = ucl.loadClass(jclassName);
+	        	} else jclass = cl.loadClass(jclassName);
+	        	//jclass = Class.forName(jclassName,true, cl);
+	        } catch (ClassNotFoundException e) {
+	        	String additionalInfo = "";
+	        	if(cl instanceof URLClassLoader){
+	        		URLClassLoader ucl=(URLClassLoader)cl;
+	        		URL[] urls = ucl.getURLs();
+	        		additionalInfo += "Current URLs in the URLClassLoader : \n";
+					for (int index = 0; index < urls.length; index++) {
+						additionalInfo += "\t" + urls[index].toExternalForm() + "\n";
+					}
+	        	}
 	            internalLog.error("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName + " => Throwing KermetaInterpreterError !!!");
-				throw	new KermetaVisitorError("ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName  ,e);
+				throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+						"ClassNotFoundException invoking "+ jmethodName + " on Class " +jclassName + ". Please verify your java classpath in the kermeta run target. \n"+additionalInfo,
+						this,
+						memory,
+						node,
+						e);
 	        }
 	        Method jmethod = null;
 	        try {
