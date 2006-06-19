@@ -1,4 +1,4 @@
-/* $Id: KermetaProcess.java,v 1.1 2006-06-15 13:03:22 zdrey Exp $
+/* $Id: KermetaProcess.java,v 1.2 2006-06-19 12:34:39 dvojtise Exp $
  * Project   : Kermeta runner
  * File      : KermetaProcess.java
  * License   : EPL
@@ -86,18 +86,21 @@ public class KermetaProcess //extends Process
 					// entry1.toString();
 					if (entry1.getLocation() != null) {
 						if (entry1.getType() == IRuntimeClasspathEntry.ARCHIVE) {
-							urlsV.add(new URL("file://" + entry1.getLocation().replaceAll("/", "//")));
+							// deal with jar url
+							urlsV.add(new URL("file:///" + entry1.getLocation()));
+							RunnerPlugin.pluginLog.debug("added " + "file:///" + entry1.getLocation()
+									+ " in Thread Class Loader " + this.thread.getName());
 						} else {
-							urlsV.add(new URL("file://" +entry1.getLocation().replaceAll("/", "//")
-									+ "//"));
+							// deal with project url
+							urlsV.add(new URL("file://" +entry1.getLocation() + "//"));
+							RunnerPlugin.pluginLog.debug("added " + "file:///" + entry1.getLocation()+ "//"
+									+ " in Thread Class Loader " + this.thread.getName());
 						}
-						RunnerPlugin.pluginLog.debug("added " + "file://" + entry1.getLocation().replaceAll("/", "//")
-								+ " in Thread Class Loader " + this.thread.getName());
 					}
 				} catch (MalformedURLException e) {
 					RunnerPlugin.pluginLog.warn(
 							"problem with an entry of the classpath, "
-									+ "file:/" + entry1.getLocation()
+									+ "file:///" + entry1.getLocation()
 									+ " cannot be added in classloader", e);
 				}
 				// IRuntimeClasspathEntryResolver
