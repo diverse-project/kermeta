@@ -6,16 +6,8 @@ class FSM
 	reference initialState : State[1..1]
 	reference currentState : State
 	reference finalState : State[1..*]
-	operation run() : kermeta::standard::~Void is
-	do
-		//TODO: implement operation run
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation reset() : kermeta::standard::~Void is
-	do
-		//TODO: implement operation reset
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
+	operation run() : kermeta::standard::~Void is abstract
+	operation reset() : kermeta::standard::~Void is abstract
 }
 class State
 {
@@ -23,11 +15,7 @@ class State
 	attribute name : String
 	attribute outgoingTransition : Transition[0..*]#source
 	reference incomingTransition : Transition[0..*]#target
-	operation step(c : String) : String is
-	do
-		//TODO: implement operation step
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
+	operation step(c : String) : String is abstract
 }
 class Transition
 {
@@ -35,11 +23,7 @@ class Transition
 	reference target : State[1..1]#incomingTransition
 	attribute input : String
 	attribute output : String
-	operation fire() : String is
-	do
-		//TODO: implement operation fire
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
+	operation fire() : String is abstract
 }
 class FSMException
 {
