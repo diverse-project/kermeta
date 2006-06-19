@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.19 2006-06-16 08:51:43 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.20 2006-06-19 15:47:17 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -11,21 +11,18 @@ package fr.irisa.triskell.kermeta.runner.debug.model;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
-
 import org.eclipse.debug.core.ILaunch;
-
-import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
-
 import fr.irisa.triskell.kermeta.runner.debug.process.KermetaDebugProcess;
 import fr.irisa.triskell.kermeta.runner.debug.remote.KermetaRemoteDebugUI;
 import fr.irisa.triskell.kermeta.runner.debug.remote.interpreter.IKermetaRemoteInterpreter;
@@ -96,7 +93,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	public synchronized void startRemoteInterpreterProcess()
 	{
 		kermeta_process = new KermetaDebugProcess(getStartFile(), getClassName(), getOpName(), getArgs(), remotePlatform);
-		kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute);    	
+		kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectPath());    	
 		kermeta_process.start();
 	}
 	

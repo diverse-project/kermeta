@@ -1,4 +1,4 @@
-/* $Id: KermetaProcess.java,v 1.2 2006-06-19 12:34:39 dvojtise Exp $
+/* $Id: KermetaProcess.java,v 1.3 2006-06-19 15:47:17 dvojtise Exp $
  * Project   : Kermeta runner
  * File      : KermetaProcess.java
  * License   : EPL
@@ -11,7 +11,6 @@
 package fr.irisa.triskell.kermeta.runner.debug.process;
 
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,11 +20,8 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.debug.core.model.RuntimeProcess;
 import org.eclipse.jdt.launching.IRuntimeClasspathEntry;
 import org.eclipse.jdt.launching.JavaRuntime;
-
-import sun.awt.RepaintArea;
 
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -72,7 +68,7 @@ public class KermetaProcess //extends Process
 	}
 
 	/** Update the classLoader for this thread */
-	public void updateThreadClassLoader(List pathAttribute) {
+	public void updateThreadClassLoader(List pathAttribute, String currentProjectPath) {
 		Vector<URL> urlsV = new Vector<URL>();
 
 		for (int i = 0; i < pathAttribute.size(); i++) {
@@ -110,6 +106,15 @@ public class KermetaProcess //extends Process
 						e);
 				RunnerPlugin.log(e);
 				return;
+			}
+		}
+		if(currentProjectPath != null){
+			try {
+				urlsV.add(new URL("file://" +currentProjectPath + "//"));
+			} catch (MalformedURLException e) {
+				RunnerPlugin.pluginLog.warn("Current project cannot be added to classpath",
+						e);
+				RunnerPlugin.log(e);
 			}
 		}
 		URL[] urls = new URL[urlsV.size()];

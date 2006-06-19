@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.13 2006-06-16 08:51:44 zdrey Exp $
+/* $Id: KermetaRunTarget.java,v 1.14 2006-06-19 15:47:16 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: EPL
@@ -14,6 +14,12 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IDebugTarget;
@@ -48,10 +54,11 @@ public class KermetaRunTarget extends AbstractKermetaTarget
     	initPath();
     	initConsole();
     	kermeta_process = new KermetaRunProcess(startFile, className, opName, args, "Kermeta Run Thread", false, console);
-    	//ClassLoader previousClassLoader = kermeta_process.getContextClassLoader();
-    	kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute);
+    	    	
+    	kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectPath());
     	kermeta_process.start();
     }
+
 
 	public IThread[] getThreads() throws DebugException {
 		return threads;
