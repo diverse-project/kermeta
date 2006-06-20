@@ -1,0 +1,33 @@
+package testParameterizedClass;
+
+class A<P1>
+{
+
+/*	operation f<P1>() is do
+	end*/
+}
+
+class B
+{
+}
+
+class C<P1 : B>
+{
+}
+
+class XusesA
+{
+	operation main() : kermeta::standard::~Void is do
+		var a : A<kermeta::standard::String> init A<kermeta::standard::String>.new
+	end
+}
+
+class X
+{
+	operation main() : kermeta::standard::~Void is abstract
+}
+
+class Y inherits X
+{
+	method main()  is abstract
+}
