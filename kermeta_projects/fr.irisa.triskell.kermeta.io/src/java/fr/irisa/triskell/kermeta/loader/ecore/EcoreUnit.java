@@ -1,4 +1,4 @@
-/* $Id: EcoreUnit.java,v 1.6 2006-06-19 13:41:22 zdrey Exp $
+/* $Id: EcoreUnit.java,v 1.7 2006-06-20 09:07:58 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : EcoreUnit.java
 * License : GPL
@@ -49,7 +49,7 @@ public class EcoreUnit extends KermetaUnit {
      */
     public EcoreUnit(String uri, Hashtable packages) {
         super(uri, packages);
-        ECore2KMPass1.isQuickFixEnabled = true;
+        Ecore2KM.isQuickFixEnabled = true;
     }
     
     public EcoreUnit(Resource resource, Hashtable packages) {
@@ -71,20 +71,7 @@ public class EcoreUnit extends KermetaUnit {
     
 	public void load(Resource resource) {
 		try {
-			ECore2KMPass1 visitor1 = new ECore2KMPass1(this, resource);
-
-			// Visit the metamodel : we visit the packages, which imply the visit of 
-			// the classdefinitions and sub packages
-			Iterator pkgs = resource.getContents().iterator();
-			while(pkgs.hasNext()) {
-				EObject obj = (EObject)pkgs.next();
-				if (obj instanceof EPackage) {
-					visitor1.accept(obj);
-				}
-			}
-			Ecore2KMPass2 visitor2 = new Ecore2KMPass2(this, resource, visitor1);
-			visitor2.convertUnit();
-			
+			new Ecore2KM(resource, this).export();
 		} catch (Throwable e) {
 			this.messages.addError("Error loading ECore model " + this.getUri() + " : " + e, null);
 			KermetaUnit.internalLog.error("Error loading ECore model " + this.getUri() + " : " + e, e);

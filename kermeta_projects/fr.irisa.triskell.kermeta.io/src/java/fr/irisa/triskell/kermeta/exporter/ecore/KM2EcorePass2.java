@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.16 2006-06-19 13:40:29 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.17 2006-06-20 09:07:45 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -641,7 +641,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	public void setSuperOperationAnnotation(Operation superOperation, EOperation newEOperation) {
 		ecoreExporter.addAnnotation( 
 				newEOperation,
-				KM2Ecore.ANNOTATION_SUPEROPERATION,
+				KM2Ecore.ANNOTATION,
 				KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS,
 				KMTHelper.getQualifiedName(superOperation.getOwningClass()),
 				(EObject)accept(superOperation));		

@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.17 2006-06-19 13:40:29 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.18 2006-06-20 09:07:45 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -98,25 +98,32 @@ public class KM2Ecore {
     	primitive_types_mapping.put("kermeta::standard::Object",	"java.lang.Object");
     	
     }
-	
+	// Annotation.getSource() == "kermeta" 
     public final static String ANNOTATION = "kermeta";
+    /** Used only in EDatatypes */
+    public final static String ANNOTATION_ALIAS_DETAILS = "alias";
+    /** Used only in EAttributes */
     public final static String ANNOTATION_ISCOMPOSITE_DETAILS = "isComposite";
-    public final static String ANNOTATION_KDOC_DETAILS = KMT2KMPass7.KERMETADOC;
-    public final static String ANNOTATION_SUPEROPERATION = "KermetaSuperOperations";
-    public final static String ANNOTATION_SUPEROPERATION_DETAILS = "SuperOperation";
-    public final static String ANNOTATION_RAISEDEXCEPTION = "KermetaRaisedExceptions";
-    public final static String ANNOTATION_RAISEDEXCEPTION_DETAILS = "RaisedException";
+    /** Used only in EOperation */
     public final static String ANNOTATION_ISABSTRACT_DETAILS = "isAbstract";
+    /** Kermeta documentation */
+    public final static String ANNOTATION_KDOC_DETAILS = KMT2KMPass7.KERMETADOC;
+    /** Used only in EOperation */
+    public final static String ANNOTATION_SUPEROPERATION_DETAILS = "superOperation";
     public final static String ANNOTATION_BODY_DETAILS = "body";
     public final static String ANNOTATION_PRE_DETAILS = "pre";
     public final static String ANNOTATION_POST_DETAILS = "post";
     public final static String ANNOTATION_INV_DETAILS = "inv";
+	// Annotation.getSource() == "KermetaRaisedExceptions"
+    public final static String ANNOTATION_RAISEDEXCEPTION = "KermetaRaisedExceptions";
+    public final static String ANNOTATION_RAISEDEXCEPTION_DETAILS = "raisedException";
+	// Annotation.getSource() == "KermetaTypeParameters"
     public final static String ANNOTATION_TYPEPARAMETER = "KermetaTypeParameters";
+	// Annotation.getSource() == "KermetaDerivedProperty"
     public final static String ANNOTATION_DERIVEDPROPERTY = "KermetaDerivedProperty";
     public final static String ANNOTATION_DERIVEDPROPERTY_ISREADONLY = "isReadOnly";
     public final static String ANNOTATION_DERIVEDPROPERTY_GETTERBODY = "getter.body";
     public final static String ANNOTATION_DERIVEDPROPERTY_SETTERBODY = "setter.body";
-    public final static String ANNOTATION_ALIAS_DETAILS = "alias";
     
 	/**
 	 * @param resource : the resource to populate
@@ -126,7 +133,7 @@ public class KM2Ecore {
 		kermetaUnit   = kunit;
 		messages = new KMUnitMessageManager(kermetaUnit);
 		ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/")+1);
-		System.err.println("UNIT URI : " + ecoreGenDirectory);
+		internalLog.info("Directory for ecore generation : " + ecoreGenDirectory);
 	}
 	
 	public KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit) {
@@ -145,7 +152,7 @@ public class KM2Ecore {
 		
 		if (ecoreFileList.size() ==0 && ecoreGenDirectory == null)
 			ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/")+1);
-		System.err.println("UNIT URI : " + ecoreGenDirectory);
+		internalLog.info("Directory for ecore generation : " + ecoreGenDirectory);
 	}
 	
 	/**
@@ -167,7 +174,6 @@ public class KM2Ecore {
 	public Object exportPackage(Package root_package) {
 		root_pname = KMTHelper.getQualifiedName(root_package);
 		KM2EcorePass1 pass1 =  new KM2EcorePass1(ecoreResource, km2ecoremapping, this);
-		System.err.println("-> ?? -> " + ecoreResource + "map : " + km2ecoremapping + "this: " + this);
 		KM2EcorePass2 pass2 =  new KM2EcorePass2(ecoreResource, km2ecoremapping, this);
 		Object result =  pass1.exportPackage(root_package);
 		pass2.exportPackage(root_package);

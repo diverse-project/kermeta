@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.1 2006-06-19 13:41:05 zdrey Exp $
+/* $Id: Ecore2KMPass2.java,v 1.2 2006-06-20 09:07:58 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -12,6 +12,7 @@
 package fr.irisa.triskell.kermeta.loader.ecore;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
@@ -36,19 +38,25 @@ import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass6;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 
 public class Ecore2KMPass2 extends EcoreVisitor {
 
 	protected ECore2KMPass1 visitorPass1;
+	protected Ecore2KM exporter;
 	protected EcoreUnit unit;
+	protected Resource resource;
 	
 	/** true if the visit concerns type setting, otherwise false.
 	 * mainly used since operation visit needs 2 passes : 
@@ -57,16 +65,18 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	protected boolean isTypeSettingMode;
 		
 	/** 
-	 * 
 	 * @param unit
 	 * @param resource
 	 * @param visitor
 	 */
-	public Ecore2KMPass2(EcoreUnit unit, Resource resource, ECore2KMPass1 visitor)
+	public Ecore2KMPass2(ECore2KMPass1 visitor, Ecore2KM exporter)
 	{
 		this.visitorPass1 = visitor;
-		this.unit = unit;
+		this.unit = exporter.unit;
+		this.resource = exporter.resource;
 		this.isTypeSettingMode = false;
+		this.exporter = exporter;
+		
 	}
 		
 	public void convertUnit()
@@ -94,26 +104,36 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		PrimitiveType result = (PrimitiveType)visitorPass1.datatypes.get(node); 
 		// Get the instance class name of node
 		String type_name = ((EDataType)node).getInstanceClassName();
-		// primitive_types_mapping : { javatype : kermetatype }
-		if (visitorPass1.primitive_types_mapping.containsKey(type_name)) {
-			type_name = (String)visitorPass1.primitive_types_mapping.get(type_name);
-		} // Find in alias
-		else if (node.getEAnnotation(KM2Ecore.ANNOTATION)!=null) {// IMPORTANT!
-			type_name = (String)accept(node.getEAnnotation(KM2Ecore.ANNOTATION));
-		}
+		
+		if (node.getEAnnotation(KM2Ecore.ANNOTATION)!=null) {// IMPORTANT!
+			type_name = (String)node.getEAnnotation(KM2Ecore.ANNOTATION).getDetails()
+						.get(KM2Ecore.ANNOTATION_ALIAS_DETAILS);
+		}//			 primitive_types_mapping : { javatype : kermetatype }
+		else if (Ecore2KM.primitive_types_mapping.containsKey(type_name)) {
+				type_name = (String)Ecore2KM.primitive_types_mapping.get(type_name);
+			} // Find in alias // EDataType visit : handle alias
 		// Try to find in the current unit if the given type_name can be found
-		TypeDefinition type = unit.typeDefinitionLookup(type_name);
-		// FIXME : standard library is not browsable anymore?
-		if (type == null) type = KermetaUnit.getStdLib().typeDefinitionLookup(type_name);
-		// FIXME : If type is still null, replacing by the basic Object type of Kermeta. 
-		// Not the best way to process. Idea: annotate Kermeta alias with an extern "instanceClassName"?
-		if (type == null) {
-			unit.messages.addWarning("cannot find instance class " + type_name + " for primitive type " + 
-					visitorPass1.getQualifiedName((EDataType)node) + " (replaced by Object)", null);
-			type = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::language::structure::Object");
+		TypeDefinition type = null;
+		if (type_name == null || type_name.equals(""))
+		{
+			unit.messages.addWarning("Instance class seems to be unset for EDatatype '" + 
+					Ecore2KM.getQualifiedName((EDataType)node) + "' : replaced by Object", null);
+			type = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::language::structure::Object"); 
 		}
-		result.setInstanceType(
-			visitorPass1.createInstanceTypeForTypeDefinition(type));
+		else
+		{
+			type = unit.typeDefinitionLookup(type_name);
+			// FIXME : standard library is not browsable anymore?
+			if (type == null) type = KermetaUnit.getStdLib().typeDefinitionLookup(type_name);
+			// FIXME : If type is still null, replacing by the basic Object type of Kermeta. 
+			// Not the best way to process. Idea: annotate Kermeta alias with an extern "instanceClassName"?
+			if (type == null) {
+				unit.messages.addWarning("cannot find instance class " + type_name + " for primitive type " + 
+						Ecore2KM.getQualifiedName((EDataType)node) + " (replaced by Object)", null);
+				type = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::language::structure::Object");
+			}
+		}
+		result.setInstanceType(createInstanceTypeForTypeDefinition(type));
 		return result;
 	}
 	
@@ -128,24 +148,25 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	 */
 	public Object visit(EClass node)
 	{
-		visitorPass1.current_classdef = (ClassDefinition)visitorPass1.types.get(node);
+		exporter.current_classdef = (ClassDefinition)visitorPass1.types.get(node);
+		visitorPass1.isClassTypeOwner = true;
 		// First of all, set the super types
 		Iterator sit = ((EClass)node).getESuperTypes().iterator();
 		while (sit.hasNext()) {
 			EClassifier st = (EClassifier)sit.next();
-			Type t = visitorPass1.createTypeForEClassifier(st, node);
+			Type t = createTypeForEClassifier(st, node);
 			if (t == null || !(t instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 				throw new KM2ECoreConversionException(
 						"Internal error of ecore2kermeta :" +
-						" supertypes of class " + visitorPass1.getQualifiedName((EClass)node) + " : "+ visitorPass1.getQualifiedName(st) +" not found");
+						" supertypes of class " + Ecore2KM.getQualifiedName((EClass)node) + " : "+ Ecore2KM.getQualifiedName(st) +" not found");
 			}
-			visitorPass1.current_classdef.getSuperType().add(t);
+			exporter.current_classdef.getSuperType().add(t);
 		}
-		// Then, visit the features
+		// Order important here! annotation above all.
+		acceptList(((EClass)node).getEAnnotations());
 		acceptList(((EClass)node).getEStructuralFeatures());
 		acceptList(((EClass)node).getEOperations());
-		acceptList(((EClass)node).getEAnnotations());
-		return visitorPass1.current_classdef;
+		return exporter.current_classdef;
 	}
 	
 	
@@ -160,15 +181,14 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	{	// Important note : the EType of an operation is not required to be defined.
 		// User indeed naturally doesn't set it if he doesn't need a return type
 		// FIXME : WE HAVE TO FIX A STRICT PHILOSOPHY ABOUT EXPLICIT OR IMPLICIT RETURN TYPE!!!
-		visitorPass1.current_op = visitorPass1.operations.get(node);
-		
+		exporter.current_op = visitorPass1.operations.get(node);
 		if (isTypeSettingMode == true)
 		{
 			// Set the type of the operation
 			if (node.getEType() != null) 
 			{
-				Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
-				visitorPass1.current_op.setType(t);
+				Type t = createTypeForEClassifier(node.getEType(), node);
+				exporter.current_op.setType(t);
 			}
 
 			// Set the parameters
@@ -178,14 +198,19 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 			// hosted in the operation annotation can be parsed and type checked correctly.
 			unit.pushContext();
 			// add type variable
-			Iterator tvs = visitorPass1.current_op.getTypeParameter().iterator();
+			Iterator tvs = exporter.current_op.getTypeParameter().iterator();
 			while(tvs.hasNext()) unit.addTypeVar((TypeVariable)tvs.next());
+			/*TypeVariableBinding bind = unit.struct_factory.createTypeVariableBinding();
+			bind.setVariable((TypeVariable) visitorPass1.current_classdef.getTypeParameter().get(i));
+			bind.setType(actual_params[i]);
+			res.getTypeParamBinding().add(bind);*/
 			// add parameters
-			Iterator params = visitorPass1.current_op.getOwnedParameter().iterator();
+			Iterator params = exporter.current_op.getOwnedParameter().iterator();
 			while(params.hasNext()) unit.addSymbol(new KMSymbolParameter((Parameter)params.next()));
 		
 			// Is operation abstract? : we can know it already if the given operation contains no annotation
-			visitorPass1.current_op.setIsAbstract(node.getEAnnotation(KM2Ecore.ANNOTATION)==null);
+			exporter.current_op.setIsAbstract(node.getEAnnotation(KM2Ecore.ANNOTATION)==null);
+			visitorPass1.isClassTypeOwner=false;
 			// Visit the annotations, except for ecore metamodel elements
 			if (!((ENamedElement)node.eContainer().eContainer()).getName().equals("ecore"))
 				acceptList(node.getEAnnotations());
@@ -198,18 +223,11 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 			// have been defined, since findSuperOperation algorithm needs to find "implicit" supertypes
 			// through the super types of the owning class.
 			// it could have been resolved from the EAnnotation visit
-			if (node.getEAnnotation(KM2Ecore.ANNOTATION_SUPEROPERATION)!=null)
-				accept(node.getEAnnotation(KM2Ecore.ANNOTATION_SUPEROPERATION));
-			// TODO Has the operation an "implicit" super operation? if yes, we have to set it
-			// (not defined in the KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS...)?
-			if (visitorPass1.current_op.getSuperOperation()==null)
-			{
-				EOperation superop = findSuperOperation(node);
-				if (superop != null) visitorPass1.current_op.setSuperOperation(visitorPass1.operations.get(superop));
-			}
+			Operation superop = findSuperOperation(node);
+			if (superop != null) exporter.current_op.setSuperOperation(superop);
 		}
 
-		return visitorPass1.current_op;
+		return exporter.current_op;
 	}
 
 
@@ -217,33 +235,26 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EAttribute)
 	 */
 	
-	public Object visit(EAttribute node) {
-		Property prop = visitorPass1.current_prop = (Property)visitorPass1.properties.get(visitorPass1.getQualifiedName(node));
-		// Set the type of this property
-		Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
-		prop.setType(t);
-		// Get the derived properties bodies, 
-		// removed test : node.isDerived() == true && 
-		if (!(((ENamedElement)node.eContainer().eContainer()).getName().equals("ecore"))) {
-			acceptList(node.getEAnnotations());
-		}
-		return prop;
-	}
+	public Object visit(EAttribute node) { return visitEStructuralFeature(node); }
 
 	/**
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EReference)
 	 */
-	public Object visit(EReference node) {
-		Property prop = visitorPass1.current_prop = (Property)visitorPass1.properties.get(visitorPass1.getQualifiedName(node));
+	public Object visit(EReference node) { return visitEStructuralFeature(node); }
+	
+	/** */
+	public Property visitEStructuralFeature(EStructuralFeature node)
+	{
+		exporter.current_prop = (Property)visitorPass1.properties.get(Ecore2KM.getQualifiedName(node));
 		// Set the type of this property
-		Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
-		prop.setType(t);
-		// Get the derived properties bodies, 
-		// removed test : node.isDerived() == true && 
+		Type t = createTypeForEClassifier(node.getEType(), node);
+		exporter.current_prop.setType(t);
+		// Get the derived properties bodies and other stuffs
 		if (!(((ENamedElement)node.eContainer().eContainer()).getName().equals("ecore"))) {
 			acceptList(node.getEAnnotations());
 		}
-		return prop;
+		
+		return exporter.current_prop;
 	}
 
 	/**
@@ -257,11 +268,11 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		param.setIsUnique(node.isUnique());
 		param.setUpper(node.getUpperBound());
 		param.setLower(node.getLowerBound());
-		param.setOperation(visitorPass1.current_op);
+		param.setOperation(exporter.current_op);
 		// Set its type
-		Type t = visitorPass1.createTypeForEClassifier(node.getEType(), node);
+		Type t = createTypeForEClassifier(node.getEType(), node);
 		param.setType(t);
-		visitorPass1.current_op.getOwnedParameter().add(param);
+		exporter.current_op.getOwnedParameter().add(param);
 		return param;
 	}
 
@@ -276,7 +287,27 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	public Object visit(EAnnotation node)
 	{	
 		String result = "";
-		// EOperation or EClass visit
+		// EStructuralFeature visit : handle body of derived properties getter/setters
+		if (node.getSource().equals(KM2Ecore.ANNOTATION_DERIVEDPROPERTY))
+		{	
+			visitDerivedPropertySpecificEAnnotation(node);
+		}
+		if (node.getSource().equals(KM2Ecore.ANNOTATION))
+		{
+			// Visit annotation details that are dedicated to operation
+			visitOperationSpecificEAnnotation(node);
+			// Visit common annotation - create a Tag for given EAnnotation if its type is kdoc
+			if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_KDOC_DETAILS))
+			{
+				result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_KDOC_DETAILS);
+				Tag tag = unit.struct_factory.createTag();
+				tag.setName(KM2Ecore.ANNOTATION_KDOC_DETAILS);
+				tag.setValue(result);
+				fr.irisa.triskell.kermeta.language.structure.Object o = visitorPass1.getObjectForEModelElement(node.getEModelElement()); 
+				if (o!=null) o.getTag().add(tag);
+			}
+		}
+		// Visit annotation specific to EOperation or EClass
 		if (node.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER))
 		{	
 			EMap map = node.getDetails();
@@ -285,83 +316,29 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 			while (it.hasNext())
 			{
 				String name = it.next();
-				TypeVariable tv = unit.struct_factory.createTypeVariable();
+				TypeVariable tv = unit.struct_factory.createTypeVariable(); 
 				tv.setName(name);
+				// detail can be " A : Anothertype" -> means that A must inherit Anothertype
+				String detail = (String)map.get(name); 
+				if (detail.indexOf(":")>0)
+				{
+					detail = detail.replaceAll(" ", ""); // strip spaces
+					String str_cdef = detail.substring(detail.indexOf(":")+1);
+					ClassDefinition cdef = (ClassDefinition)unit.typeDefinitionLookup(str_cdef);
+					fr.irisa.triskell.kermeta.language.structure.Class type = 
+						StructureFactory.eINSTANCE.createClass();
+			        type.setTypeDefinition((ClassDefinition)cdef);
+					tv.setSupertype(type);
+				}
 				params.add(tv);
 			} 
 			// for current_class - add the parameter to the class
-			if (visitorPass1.isClassTypeOwner==true) visitorPass1.current_classdef.getTypeParameter().addAll(params);
+			if (visitorPass1.isClassTypeOwner==true) {
+				exporter.current_classdef.getTypeParameter().addAll(params);
+			}
 			// for current_op
-			else visitorPass1.current_op.getTypeParameter().addAll(params);
-		}
-		// EOperation visit
-		else if (node.getSource().equals(KM2Ecore.ANNOTATION_SUPEROPERATION))
-		{
-			// Is there an annotation for SuperOperation? "SuperOperation -> apackage::AClass"
-			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS);
-			// Find the class definition owning this operation
-			ClassDefinition cdef = (ClassDefinition)unit.typeDefinitionLookup(result);
-			// We never know...
-			if (cdef == null)
-			{
-				throw new KM2ECoreConversionException(
-						"ECore2KM : ClassDefinition '" + result + "' not found during parsing of " + 
-						KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS + " EAnnotation of '" +
-						visitorPass1.current_op.getName() + "' operation");	
-			}
 			else
-			{
-				Operation superop    = (Operation)unit.getOperationByName(cdef, visitorPass1.current_op.getName());
-				visitorPass1.current_op.setSuperOperation(superop);
-			}
-		}
-		// EStructuralFeature visit : handle body of derived properties getter/setters
-		else if (node.getSource().equals(KM2Ecore.ANNOTATION_DERIVEDPROPERTY))
-		{	
-			String getter = (String)node.getDetails().get(
-					KM2Ecore.ANNOTATION_DERIVEDPROPERTY_GETTERBODY);
-			String setter = (String)node.getDetails().get(
-					KM2Ecore.ANNOTATION_DERIVEDPROPERTY_SETTERBODY);
-			String readonly = (String)node.getDetails().get(
-					KM2Ecore.ANNOTATION_DERIVEDPROPERTY_ISREADONLY);
-			if (getter!=null)
-				visitorPass1.current_prop.setGetterBody(ExpressionParser.parse(unit, getter));
-			if (readonly.equals("false")) {
-				visitorPass1.current_prop.setSetterBody(ExpressionParser.parse(unit, setter));
-				visitorPass1.current_prop.setIsReadOnly(false);
-			}
-			// Boolean.getBoolean(readonly) -> foireux
-			else {
-				visitorPass1.current_prop.setIsReadOnly(true);
-			}
-		}
-		// EOperation visit
-		else if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_BODY_DETAILS))
-		{	
-			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_BODY_DETAILS);
-			// Parse and inject
-			visitorPass1.current_op.setBody(ExpressionParser.parse(unit, result));
-		} 
-		// EDataType visit : handle alias
-		else if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_ALIAS_DETAILS))
-		{
-			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_ALIAS_DETAILS);
-		}
-		// EOperation visit
-		else if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS))
-		{	// only current_op is concerned by 
-			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS);
-			visitorPass1.current_op.setIsAbstract(result.equals("true")?true:false);
-		}
-		// Create a Tag for given EAnnotation if its type is kdoc
-		else if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_KDOC_DETAILS))
-		{
-			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_KDOC_DETAILS);
-			Tag tag = unit.struct_factory.createTag();
-			tag.setName(KM2Ecore.ANNOTATION_KDOC_DETAILS);
-			tag.setValue(result);
-			fr.irisa.triskell.kermeta.language.structure.Object o = visitorPass1.getObjectForEModelElement(node.getEModelElement()); 
-			if (o!=null) o.getTag().add(tag);
+				exporter.current_op.getTypeParameter().addAll(params);
 		}
 		return result;
 	}	
@@ -377,13 +354,40 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	 * @param node
 	 * @return false if a super operation was not found, true otherwise 
 	 */
-	protected EOperation findSuperOperation(EOperation node)
+	protected Operation findSuperOperation(EOperation node)
 	{
-		EOperation result = null; 
-		// If not provided, then find a default one in the inherited classes
-		EClass owningclass = node.getEContainingClass();
-		result = findOperationInSuperTypes(owningclass.getESuperTypes(), node);
-		return result;
+		Operation superop = null; EOperation eoperation = null;
+		EAnnotation ann = node.getEAnnotation(KM2Ecore.ANNOTATION);
+		if (ann != null && ann.getDetails().containsKey(KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS))
+		{ 
+			// Is there an annotation for SuperOperation? "superOperation -> apackage::AClass"
+			String str_result = (String)ann.getDetails().get(KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS);
+			System.err.println("STRRES: " + str_result);
+			// Find the class definition owning this operation
+			ClassDefinition cdef = (ClassDefinition)unit.typeDefinitionLookup(str_result);
+			// We never know...
+			if (cdef == null)
+			{
+				throw new KM2ECoreConversionException(
+						"ECore2KM : ClassDefinition '" + str_result + "' not found during parsing of " + 
+						KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS + " EAnnotation of '" +
+						exporter.current_op.getName() + "' operation");	
+			}
+			else
+			{
+				superop = (Operation)unit.getOperationByName(cdef, exporter.current_op.getName()); 
+				exporter.current_op.setSuperOperation(superop);
+			}
+		}
+		if (superop == null)
+		{
+			// If not provided, then find a default one in the inherited classes
+			EClass owningclass = node.getEContainingClass();
+			eoperation = findOperationInSuperTypes(owningclass.getESuperTypes(), node);
+			if (eoperation != null)
+				superop = visitorPass1.operations.get(eoperation);
+		}
+		return superop;
 	}
 	
 	/**
@@ -423,4 +427,138 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		return result;
 	}
 	
+	/** Visit the special "KM2Ecore.ANNOTATION"*/
+	protected void visitOperationSpecificEAnnotation(EAnnotation node)
+	{
+		String result = "";
+		// EOperation visit
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_BODY_DETAILS))
+		{	
+			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_BODY_DETAILS);
+			// Parse and inject 
+			// FIXME parse method call is not sufficient at all -> type variable binding are omitted.
+			exporter.current_op.setBody(ExpressionParser.parse(unit, result));
+		}
+		// EOperation visit
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS))
+		{	// only current_op is concerned by 
+			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS);
+			exporter.current_op.setIsAbstract(result.equals("true")?true:false);
+		}
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_INV_DETAILS))
+		{
+			// TODO
+		}
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_PRE_DETAILS))
+		{
+			// TODO
+		}
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_POST_DETAILS))
+		{
+			// TODO
+		}
+	}
+	
+	protected void visitDerivedPropertySpecificEAnnotation(EAnnotation node)
+	{
+		String getter = (String)node.getDetails().get(
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_GETTERBODY);
+		String setter = (String)node.getDetails().get(
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_SETTERBODY);
+		String readonly = (String)node.getDetails().get(
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_ISREADONLY);
+		if (getter!=null)
+			exporter.current_prop.setGetterBody(ExpressionParser.parse(unit, getter));
+		if (readonly.equals("false")) {
+			exporter.current_prop.setSetterBody(ExpressionParser.parse(unit, setter));
+			exporter.current_prop.setIsReadOnly(false);
+		}
+		// Boolean.getBoolean(readonly) -> foireux
+		else {
+			exporter.current_prop.setIsReadOnly(true);
+		}
+	}
+	
+	/** Create a type for given type definition */
+	public Type createInstanceTypeForTypeDefinition(TypeDefinition type) {
+		Type iType = null;
+		// Translation : if type is a DataType or an Enumeration (those
+		// types implement both Type and TypeDefinition
+        if (type instanceof Type) { iType = (Type)type; }
+        else if (type instanceof ClassDefinition)
+        { 
+        	ClassDefinition cd = (ClassDefinition)type;
+        	fr.irisa.triskell.kermeta.language.structure.Class fc = 
+        		(fr.irisa.triskell.kermeta.language.structure.Class)visitorPass1.classes.get(cd);
+        	if (fc == null) {
+        		fc = unit.struct_factory.createClass();
+        		fc.setTypeDefinition(cd);
+        		visitorPass1.classes.put(cd, fc);
+        	}
+        	iType = fc;
+        }
+        else
+        {	throw new Error("INTERNAL ERROR : type should be a ClassDefinition, not a " + type.getClass().getName());}
+    	
+        if (type==null) throw new KM2ECoreConversionException("Ecore2KM exception : instance type is null for '" + type.getName() + "'");
+        return iType;
+	}
+
+	/**
+	 * Get the kermeta type corresponding to this EType
+	 * @param node is only used to get the node for which this class were called 
+	 * */
+	protected Type createTypeForEClassifier(EClassifier etype, ENamedElement node) {
+		Type result = null;
+		TypeDefinition def = null;
+		if (etype == null)
+		{ 
+			def = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::standard::Void");
+		}
+		else def = unit.typeDefinitionLookup(Ecore2KM.getQualifiedName(etype));
+		if (def == null) {
+			// Ignore ecore types : we cannot create a kermeta unit since the URI of the ecore metamodel
+			// does not reflect a real path in the user file system. We will handle it separately
+			// Try to find the given element in the loaded kermeta units
+			// If not found, load a kermeta unit for the resource of the given element
+			if (etype.eResource() != resource)
+			{
+				String etype_qname = Ecore2KM.getQualifiedName(etype);
+				String dep_uri = etype.eResource().getURI().toString();
+				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
+				// this unit is not related to a real file in the user file system
+				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), new Hashtable());
+				dep_unit.load();
+				unit.importedUnits.add(dep_unit);
+				def = dep_unit.typeDefs.get(etype_qname);
+			}
+			else
+				def = (TypeDefinition)visitorPass1.types.get(etype)!=null?
+						visitorPass1.types.get(etype):visitorPass1.datatypes.get(etype); // this does the same as unit.typeDefinitionLookUp
+		}
+		
+		if (def == null) throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion : type '" + Ecore2KM.getQualifiedName(etype) + "' not found." );
+		// It can be a Type if the element is a EEnum (inherits datatype) or a EDatatype (inherits Type and TypeDefinition)
+		if (def instanceof Type)
+			result = (Type)def;
+		else
+		{
+			// Otherwise it is always a ClassDefinition
+			ClassDefinition cd = (ClassDefinition)def;
+			fr.irisa.triskell.kermeta.language.structure.Class fc = visitorPass1.classes.get(cd);
+			if (fc == null) {
+				fc = unit.struct_factory.createClass();
+				fc.setTypeDefinition(cd);
+				visitorPass1.classes.put(cd, fc);
+			}
+			result = fc;
+		}
+		// Type should never be null
+		if (result == null) {
+			throw new Error("Internal error of ecore2kermeta transfo : type " +
+					"of '" + node.getName() + node.eClass().getName() + ":" + etype.getName() + "' not found " +
+							"in Kermeta side");
+		}
+		return result;
+	}
 }
