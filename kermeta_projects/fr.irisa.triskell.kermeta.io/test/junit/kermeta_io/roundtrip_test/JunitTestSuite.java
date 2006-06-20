@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.5 2006-06-07 16:40:32 zdrey Exp $
+/* $Id: JunitTestSuite.java,v 1.6 2006-06-20 09:08:53 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -36,7 +36,7 @@ import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.ecore.ECore2Kermeta;
+import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
 import fr.irisa.triskell.kermeta.utils.URIMapUtil;
 
 
@@ -114,6 +114,10 @@ public void testecore_006_PropertyWithEcoreTypes() throws Exception {
 testecoreFile("test/roundtrip_testcases/ecore","006_PropertyWithEcoreTypes.main.ecore" );
 }
 
+public void testecore_010_twopackages() throws Exception {
+testecoreFile("test/roundtrip_testcases/ecore","010_twopackages.main.ecore" );
+}
+
 public void testkmt_001_Simple() throws Exception {
 testkmtFile("test/roundtrip_testcases/kmt","001_Simple.main.kmt" );
 }
@@ -166,6 +170,18 @@ public void testkmt_012_testCommentAnnotations() throws Exception {
 testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt" );
 }
 
+public void testkmt_011_testRequireFramework() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","011_testRequireFramework.main.kmt" );
+}
+
+public void testkmt_013_testRedefinedOperations() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","013_testRedefinedOperations.main.kmt" );
+}
+
+public void testkmt_014_testParameterizedClass() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","014_testParameterizedClass.main.kmt" );
+}
+
 public void testkm_rdl() throws Exception {
 testkmFile("test/roundtrip_testcases/km","rdl.main.km" );
 }
@@ -203,7 +219,7 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 		System.err.println("Messages for ecore conv. :" + builder.messages.getAllMessagesAsString());
 		
 		// Enable quick fixer
-		ECore2Kermeta.isQuickFixEnabled = true;
+		Ecore2KM.isQuickFixEnabled = true;
 		
 		// Create ecore2km visitor -- output_file
 		String output_file = dir + "/output/" + file.replaceAll("\\.ecore", ".kmt");
@@ -248,9 +264,9 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 		try {builder.load();} catch (Exception e) { throw e; }
 		
 		// Check that there are not internal errors related to KermetaUnit building. 
-	/*	if (builder.messages.getAllErrors().size() > 0) {
+		if (builder.messages.getAllErrors().size() > 0) {
 			assertTrue(builder.messages.getAllMessagesAsString(), false);
-		}*/
+		}
 		
 		String ecore_output_file = dir + "/output/" + input_file.replaceAll("\\."+ kmext, ".ecore");
 		// Save the generated ecore from the kmt
@@ -265,7 +281,7 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 		// Load the EcoreUnit from output_file
 		KermetaUnitFactory.getDefaultLoader().unloadAll();
 		builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ecore_output_file);
-		try {builder.load();} catch (Exception e) { e.printStackTrace(); throw e;}
+		try {builder.load();} catch (Exception e) { throw e;}
 		
 		assert (km_ext.equals("km")||km_ext.equals("kmt"));
 		
