@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.65 2006-06-21 16:40:46 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.66 2006-06-21 16:41:35 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -886,12 +886,10 @@ public abstract class KermetaUnit {
 	 * @param file_path the xmi file. the extension of the file should be .km
 	 */
 	public void saveAsXMIModel(String file_path) {
-		System.err.println("Save as XMI : " + file_path);
 	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("km",new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
 	    ArrayList resource_tags = new ArrayList();
 	    Resource resource = resource_set.createResource(URI.createFileURI(file_path));
-	    System.err.println("Save as XMI : " + packages.size());
 	    Iterator it = packages.values().iterator();
 	    while(it.hasNext()) {
 	    	
