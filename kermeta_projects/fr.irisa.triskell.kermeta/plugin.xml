@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta"
    name="Kermeta Workbench"
-   version="0.2.1"
+   version="0.2.2"
    provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.plugin.KermetaPlugin">
    <runtime>
