@@ -99,21 +99,8 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 						.getImageDescriptor("CLASSDEFINITION"), null, 70, 40,
 				70, 70);
 		entries.add(objectTool);
-		newObjTxt = "Operation";
-		factory = new GraphElementCreationFactory(creationUtils,
-				StructurePackage.eINSTANCE.getOperation());
-		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
-				factory,
-				StructureImageRegistry.getImageDescriptor("OPERATION"), null,
-				-1, -1, 0, 0);
-		entries.add(objectTool);
-		newObjTxt = "Tag";
-		factory = new GraphElementCreationFactory(creationUtils,
-				StructurePackage.eINSTANCE.getTag());
-		objectTool = new ModelerCreationToolEntry(newObjTxt, newObjTxt,
-				factory, StructureImageRegistry.getImageDescriptor("TAG"),
-				null, 70, 50, 70, 50);
-		entries.add(objectTool);
+		
+		
 
 		basicDrawer.addAll(entries);
 		getRoot().add(basicDrawer);
@@ -151,13 +138,14 @@ public class StructurePaletteManager extends ModelerPaletteManager {
 						.getImageDescriptor("INHERITANCE"), null);
 		entries.add(connectionTool);
 
-		newObjTxt = "TagLink";
+		/*newObjTxt = "TagLink";
 		factory = new GraphElementCreationFactory(creationUtils,
 				StructureEditPolicyConstants.TAGLINK_EDITPOLICY, false);
 		connectionTool = new ModelerConnectionCreationToolEntry(newObjTxt,
 				newObjTxt, factory, StructureImageRegistry
 						.getImageDescriptor("TAGLINK"), null);
-		entries.add(connectionTool);
+		entries.add(connectionTool);*/
+		
 		// below : only generated for test purposes
 	/*	newObjTxt = "PropertyAsNode";
 		factory = new GraphElementCreationFactory(creationUtils,
