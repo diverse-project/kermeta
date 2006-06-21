@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.22 2006-06-09 08:41:29 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.23 2006-06-21 17:00:11 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -155,6 +155,15 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/kmt_testcases","044_testFrameworkModelConformance.main.kmt" );
 
 		testWithFile("test/kmt_testcases","046_testClassEquals.main.kmt" );
+
+		testWithFile("test/kmt_testcases","047_testLoadEcoreSplittedModel.main.kmt" );
+
+		testWithFile("test/kmt_testcases","048_testLoadEcoreSplittedModel_withCyclicref.main.kmt" );
+
+		testWithFile("test/kmt_testcases","049_testSplittedMetaModel.main.kmt" );
+
+		testWithFile("test/kmt_testcases","050_testChunkedModel.main.kmt" );
+
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
