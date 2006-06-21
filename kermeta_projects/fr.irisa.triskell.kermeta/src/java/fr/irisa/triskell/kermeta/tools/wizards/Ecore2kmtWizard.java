@@ -1,4 +1,4 @@
-/* $Id: Ecore2kmtWizard.java,v 1.5 2006-06-19 14:24:04 zdrey Exp $
+/* $Id: Ecore2kmtWizard.java,v 1.6 2006-06-21 14:28:39 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : Wizard.java
  * License    : EPL
@@ -16,6 +16,7 @@ import org.eclipse.ui.INewWizard;
 
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.ecore.ECore2KMPass1;
+import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
 
 /**
  * This wizard specializes the KmtPrinterWizard by adding special features
@@ -47,11 +48,11 @@ public class Ecore2kmtWizard extends KmtPrinterWizard implements INewWizard {
 	 */
 	public KermetaUnit createUnit() {
 		
-        ECore2KMPass1.isQuickFixEnabled = quickFixPage.isQuickFixEnabled();
-        ECore2KMPass1.isMethodPropertyNameOverlapSafe = quickFixPage.isOpPropertyFixEnabled();
-        ECore2KMPass1.isMethodNameOverlapSafe = quickFixPage.isOperationFixEnabled();
-        ECore2KMPass1.methodRenamePrefix = quickFixPage.getOpPrefixString();
-        ECore2KMPass1.methodRenamePostfix = quickFixPage.getOpPostfixString();
+        Ecore2KM.isQuickFixEnabled = quickFixPage.isQuickFixEnabled();
+        Ecore2KM.isMethodPropertyNameOverlapSafe = quickFixPage.isOpPropertyFixEnabled();
+        Ecore2KM.isMethodNameOverlapSafe = quickFixPage.isOperationFixEnabled();
+        Ecore2KM.methodRenamePrefix = quickFixPage.getOpPrefixString();
+        Ecore2KM.methodRenamePostfix = quickFixPage.getOpPostfixString();
         
 		return super.createUnit();
 	}
