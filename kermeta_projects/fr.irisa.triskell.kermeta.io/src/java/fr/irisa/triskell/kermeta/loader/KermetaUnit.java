@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.63 2006-06-12 13:16:44 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.64 2006-06-21 12:00:51 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -464,42 +464,6 @@ public abstract class KermetaUnit {
 	 */
 	public ArrayList<String> usings = new ArrayList<String>();
 	
-	
-/*	public String getMessagesAsString() {
-		String result = "";
-		Iterator it = getError().iterator();
-		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
-		it = warning.iterator();
-		while(it.hasNext()) result += ((KMUnitMessage)it.next()).getMessage() + "\n";
-		return result;
-	}*/
-	
-	/**
-	 * Return all the error messages as a string
-	 * @return
-	 */
-/*	public String getAllMessagesAsString() {
-		String result = "";
-		KMUnitMessage kmumessage;
-		fr.irisa.triskell.kermeta.language.structure.FObject fo;
-		KermetaUnit ku = null;
-		Iterator it = getAllErrors().iterator();
-		while(it.hasNext()) { 
-			kmumessage = (KMUnitMessage)it.next();
-			result += kmumessage.getMessage() + "\n";
-			result += "->   " + getLocationAsString(kmumessage.getNode()) + "\n";					
-		}
-		it = warning.iterator();
-		while(it.hasNext()) {
-			kmumessage = (KMUnitMessage)it.next();
-			result += kmumessage.getMessage() + "\n";
-			result += "->   " + getLocationAsString(kmumessage.getNode()) + "\n";
-		}
-		return result;
-	}*/
-	
-	//protected boolean visited = false;
-	
 	/**
 	 * Get a package by its qualified name
 	 * Returns null is not found
@@ -524,24 +488,8 @@ public abstract class KermetaUnit {
 	 * then in the imported Metacore models
 	 * returns null if type not found
 	 */
-	public TypeDefinition typeDefinitionLookup(String fully_qualified_name) {
-	/*
-//	  System.out.println("typeDefinitionLookup " + uri + " " +fully_qualified_name);
-		FTypeDefinition result = (FTypeDefinition)typeDefs.get(fully_qualified_name);
-		if (result == null) {
-			visited = true;
-		    for (int i=0; i<importedUnits.size(); i++) {
-		        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-		        if (!iu.visited) result = iu.typeDefinitionLookup(fully_qualified_name);
-		        if (result != null) break;
-		    }
-		    visited = false;
-		}
-		//System.out.println("typeDefinitionLookup " + uri + " " +fully_qualified_name + " -> " + result);
-		return result;
-	    */
-	    // Get the package:
-	    
+	public TypeDefinition typeDefinitionLookup(String fully_qualified_name) 
+	{
 	    if (fully_qualified_name.lastIndexOf("::") < 0) return null;
 	    
 	    String tdef_container_name = fully_qualified_name.substring(0, fully_qualified_name.lastIndexOf("::"));
@@ -594,7 +542,7 @@ public abstract class KermetaUnit {
 		TypeDefinition result = typeDefinitionLookup(name);
 		if (result == null && current_modeltype != null) result = typeDefinitionLookup(getQualifiedName(current_modeltype) + "::" + name);
 		if (result == null && current_package != null) result = typeDefinitionLookup(getQualifiedName(current_package) + "::" + name);
-		if (result == null) result = typeDefinitionLookup(getQualifiedName(rootPackage) + "::" + name);
+		if (result == null)	result = typeDefinitionLookup(getQualifiedName(rootPackage) + "::" + name);
 		for(int i=0; i<usings.size() && result == null; i++) {
 			result = typeDefinitionLookup(usings.get(i) + "::" + name);
 		}
@@ -657,7 +605,9 @@ public abstract class KermetaUnit {
 		else {
 			KermetaUnit unit;
 			// This is a normal behavior
-			unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri, packages);
+			// zoe comment 20/06/06
+			//unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri, packages);
+			unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri); //, new Hashtable());
 			if (messages.unitHasError) {
 				messages.addError("Errors in imported model " + str_uri + " : \n" +  unit.messages.getAllMessagesAsString(), null);
 			}
@@ -1094,7 +1044,6 @@ public abstract class KermetaUnit {
 	
 	
 	private void loadAllImportedUnits() {
-		//System.out.println("loadAllImportedUnits " + uri);
 		if (doneLoadImportedUnits) return;
 		loading = true;
 		// load imported units
