@@ -1,4 +1,4 @@
-/* $Id: CreateOptimizedVisitor.java,v 1.2 2006-06-21 10:51:11 zdrey Exp $
+/* $Id: CreateOptimizedVisitor.java,v 1.3 2006-06-21 14:56:15 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -28,6 +28,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+
+import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 
 
 /**
@@ -118,6 +121,16 @@ public class CreateOptimizedVisitor {
 	protected static String visitCmdClassTemplate;
 	protected static String visitInitCmdTemplate;
 	
+	protected static String getParentAttributeAccessors() {
+		String result =
+			" \n  public void setParent(fr.irisa.triskell.kermeta.language.structure.Object parent) {\n";
+		result += "    this.parent = parent; }\n";
+		result +=
+			" \n  public fr.irisa.triskell.kermeta.language.structure.Object getParent() {\n";
+		result += "    return parent; }\n";
+		return result;
+	}
+	
 	protected static String getvisitMethodTemplate() {
 		if (visitMethodTemplate == null) {
 			visitMethodTemplate = "	public Object visitXNodeClassNameX(fr.irisa.triskell.XNodeTypeNameX node) {\n";
@@ -162,7 +175,8 @@ public class CreateOptimizedVisitor {
 			classTemplate += "import org.eclipse.emf.ecore.EObject;\n";
 			classTemplate += "import org.apache.log4j.Logger;\n";
 			classTemplate += "import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;\n";
-
+			classTemplate += "import fr.irisa.triskell.kermeta.language.structure.NamedElement;\n";
+			classTemplate += "import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;\n";
 
 			classTemplate += "public class XclassNameX {\n";
 
@@ -170,9 +184,9 @@ public class CreateOptimizedVisitor {
 			classTemplate += "			.getLogger(\"KMT.model\");\n";
 
 			classTemplate += "  /** The parent of the node currently visited. */\n";
-			classTemplate += "  protected fr.irisa.triskell.kermeta.language.structure.Object parent\n;";
+			classTemplate += "  protected fr.irisa.triskell.kermeta.language.structure.Object parent;\n";
 			classTemplate += "	private static Hashtable acceptCmds = null;\n";
-
+			classTemplate += getParentAttributeAccessors();
 			classTemplate += "	private static AcceptCommand getAcceptCmd(EObject node) {\n";
 			classTemplate += "		if (acceptCmds == null) {\n";
 			classTemplate += "			acceptCmds = new Hashtable();\n";
@@ -196,7 +210,12 @@ public class CreateOptimizedVisitor {
 
 			classTemplate += "		// Throw an error if the node is null\n";
 			classTemplate += "		if (node == null) {\n";
-			classTemplate += "			throw new Error(\"Error in visitor : the node to visit is null in \" + parent);\n";
+			classTemplate += "          String msg = \"Error in visitor : the node to visit is null in \" + parent;\n";
+			classTemplate += "          if (parent!=null) {\n";
+			classTemplate += "              msg += \"   (when visiting parent '\" + parent.getClass().getName() + \"'\";\n";
+			classTemplate += "	            if (parent instanceof NamedElement) msg += \" named: '\" + ((NamedElement)parent).getName() + \"')\";\n";
+			classTemplate += "              else if (parent instanceof VariableDecl) msg += \" named: '\" + ((VariableDecl)parent).getIdentifier() + \"')\";\n }\n";
+			classTemplate += "			throw new Error(msg);\n";
 			classTemplate += "		}\n";
 
 			classTemplate += "		// Get the accept command\n";
@@ -204,9 +223,13 @@ public class CreateOptimizedVisitor {
 
 			classTemplate += "		// Throw an error is the command is null\n";
 			classTemplate += "		if (cmd == null) {\n";
-			classTemplate += "			throw new Error(\n";
-			classTemplate += "					\"Error in visitor : no strategy to handle node of type \"\n";
-			classTemplate += "							+ node.getClass().getName());\n";
+			classTemplate += "         String msg = \"Error in visitor : no strategy to handle node of type \"\n";
+			classTemplate += "							+ node.getClass().getName();";
+			classTemplate += "         if (parent!=null) {\n";
+			classTemplate += "             msg += \"   (when visiting parent '\" + parent.getClass().getName() + \"'\";\n";
+			classTemplate += "	           if (parent instanceof NamedElement) msg += \" named: '\" + ((NamedElement)parent).getName() + \"')\";\n";
+			classTemplate += "             else if (parent instanceof VariableDecl) msg += \" named: '\" + ((VariableDecl)parent).getIdentifier() + \"')\";\n }\n";
+			classTemplate += "		   throw new Error(msg);\n";
 			classTemplate += "		}\n";
 
 			classTemplate += "		// accept the node\n";
