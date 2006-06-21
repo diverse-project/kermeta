@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.18 2006-06-19 13:40:29 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.19 2006-06-21 12:01:28 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -12,11 +12,8 @@
  */
 package fr.irisa.triskell.kermeta.exporter.ecore;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
-
-import javax.sound.midi.SysexMessage;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -38,7 +35,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
-import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
@@ -124,9 +120,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		    ecoreExporter.tracer.addMappingTrace(node,newEPackage,node.getName() + " is mapped to " + newEPackage.getName());
 
 		// Visit the nested packages
-		Iterator it = node.getNestedPackage().iterator();
-		while(it.hasNext()) {
-			Package next = (Package)it.next();
+		for (Object p : node.getNestedPackage()) {
+			Package next = (Package)p;
 			current_ppath += "/" + next.getName();
 			newEPackage.getESubpackages().add(accept(next));
 			int cl = current_ppath.length();
@@ -134,9 +129,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 		
 		// Visit the type definitions
-		it = node.getOwnedTypeDefinition().iterator();
-		while(it.hasNext()) {
-			Object o = accept((EObject)it.next());
+		for (Object next : node.getOwnedTypeDefinition()) {
+			Object o = accept((EObject)next);
 			if (o != null)
 				newEPackage.getEClassifiers().add(o);
 			else
@@ -176,9 +170,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			setTagAnnotations((NamedElement)node, (EModelElement)newEClass);
 			
 			// Owned Attributes
-			Iterator it = node.getOwnedAttribute().iterator();
-			while(it.hasNext()) {
-				Object o = accept((EObject)it.next());
+			for (Object next : node.getOwnedAttribute()) {
+				Object o = accept((EObject)next);
 				if (o != null)
 					newEClass.getEStructuralFeatures().add(o);
 				else
@@ -186,9 +179,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			}
 			
 			// Owned operations
-			it = node.getOwnedOperation().iterator();
-			while(it.hasNext()) {
-				Object o = accept((EObject)it.next());
+			for (Object next : node.getOwnedOperation()) {
+				Object o = accept((EObject)next);
 				if (o != null)
 					newEClass.getEOperations().add(o);
 				else
@@ -196,9 +188,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			}
 			
 			// Create an annotation to hold the operation inv	
-			Iterator itinv = node.getInv().iterator();
-			while(itinv.hasNext()){
-				String invString = (String)prettyPrinter.accept((Constraint)itinv.next());
+			for (Object next : node.getInv()) {
+				String invString = (String)prettyPrinter.accept((Constraint)next);
 				ecoreExporter.addAnnotation( 
 					newEClass,
 					KM2Ecore.ANNOTATION,
@@ -255,9 +246,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	 * @param newEModelElement the ecore element that corresponds to the given kermeta node 
 	 */
 	protected void setTagAnnotations(NamedElement node, EModelElement newEModelElement) {
-		Iterator it = node.getTag().iterator();
-		while(it.hasNext()) {
-			Object o = accept((EObject)it.next());
+		for (Object next : node.getTag()) {
+			Object o = accept((EObject)next);
 			if (o != null)
 				newEModelElement.getEAnnotations().add(o);
 			else
@@ -302,9 +292,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 		
 		// Create an annotation to hold the operation pre	
-		Iterator itpre = node.getPre().iterator();
-		while(itpre.hasNext()){
-			String preString = (String)prettyPrinter.accept((Constraint)itpre.next());
+		for (Object next : node.getPre()){
+			String preString = (String)prettyPrinter.accept((Constraint)next);
 			ecoreExporter.addAnnotation( 
 					newEOperation,
 					KM2Ecore.ANNOTATION,
@@ -314,9 +303,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 			
 		// Create an annotation to hold the operation post
-		Iterator itpost = node.getPost().iterator();
-		while(itpost.hasNext()){
-			String postString = (String)prettyPrinter.accept((Constraint)itpost.next());
+		for (Object next : node.getPost()){
+			String postString = (String)prettyPrinter.accept((Constraint)next);
 			ecoreExporter.addAnnotation( 
 					newEOperation,
 					KM2Ecore.ANNOTATION,
@@ -333,9 +321,9 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		if (node.getUpper() == 0) newEOperation.setUpperBound(1);
 		
 		// Parameters
-		Iterator it = node.getOwnedParameter().iterator();
-		while(it.hasNext()) {
-			Object o = accept((EObject)it.next());
+		for (Object next : node.getOwnedParameter())
+		{
+			Object o = accept((EObject)next);
 			if (o != null)
 				newEOperation.getEParameters().add(o);
 			else
@@ -459,11 +447,12 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	 * @see kermeta.visitor.MetacoreVisitor#visit(PrimitiveType)
 	 */
 	public Object visitPrimitiveType(PrimitiveType node) {
-		
-		internalLog.debug(loggerTabs + "Visiting PrimitiveType: "+ node.getName() + "; instance:"+ node.getInstanceType());
 		String type_name = KMTHelper.getTypeQualifiedName(node.getInstanceType());
 		EClassifier newEClassifier = EcoreFactory.eINSTANCE.createEDataType();
 		newEClassifier.setName(node.getName());
+		if (type_name == null) 
+			throw new KM2ECoreConversionException(
+			"KM2Ecore error : could not find InstanceType for '" + node.getName() +"' PrimitiveType");
 		if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
 			newEClassifier.setInstanceClassName(KM2Ecore.primitive_types_mapping.get(type_name));
 		}
