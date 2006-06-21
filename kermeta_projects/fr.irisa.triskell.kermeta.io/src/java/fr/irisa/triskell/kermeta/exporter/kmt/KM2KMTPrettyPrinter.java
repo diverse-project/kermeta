@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.31 2006-06-16 11:56:51 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.32 2006-06-21 12:01:09 zdrey Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -85,8 +85,6 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	protected ArrayList imports = new ArrayList();
 	protected String root_pname;
 	protected String current_pname;
-	
-	protected NamedElement parent_node;
 	
 	/** If the visitor (i.e This printer:)) is currently visiting a typedefinition, this
 	 *  boolean is set to true (this allows the visitor to print differently some things
@@ -304,7 +302,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.ClassDefinition)
 	 */
 	public Object visitClassDefinition(ClassDefinition node) {
-		parent_node = node;
+		//setParent(node);
 
 		typedef = false;
 		String result = "";
@@ -339,7 +337,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.PrimitiveType)
 	 */
 	public Object visitPrimitiveType(PrimitiveType node) {
-		parent_node = node;
+		setParent(node);
 		if (typedef == true) {
 			typedef = false;
 			String result = "alias " + node.getName() + " : " + this.accept(node.getInstanceType()) + ";";
@@ -513,7 +511,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visitOperation(Operation node) {
-		parent_node = node;
+		setParent(node);
 		String result = ppTags(node.getTag());
 		if (node.getSuperOperation() != null) result += "method ";
 		else result += "operation ";
@@ -567,7 +565,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Parameter)
 	 */
 	public Object visitParameter(Parameter node) {
-		parent_node = node;
+		setParent(node);
 		return KMTHelper.getMangledIdentifier(node.getName()) + " : " + ppTypeFromMultiplicityElement(node);
 	}
 	
@@ -595,7 +593,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Package)
 	 */
 	public Object visitPackage(Package node) {
-	    parent_node = node;
+	    setParent(node);
 		String result = ppTags(node.getTag());
 		result += "package " + KMTHelper.getMangledIdentifier(node.getName()) + "\n";
 		result += getPrefix() + "{\n";
@@ -623,7 +621,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Property)
 	 */
 	public Object visitProperty(Property node) {
-		parent_node = node;
+		setParent(node);
 	    String result = ppTags(node.getTag());
 		if (node.isIsDerived()) result += "property ";
 		else if (node.isIsComposite()) result += "attribute ";
@@ -713,6 +711,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.VariableDecl)
 	 */
 	public Object visitVariableDecl(VariableDecl node) {
+		setParent(node);
 		String result = "var " + KMTHelper.getMangledIdentifier(node.getIdentifier()) + " : " + this.accept(node.getType());
 		if (node.getInitialization() != null)
 			result += " init " + this.accept(node.getInitialization());
@@ -735,6 +734,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.CallFeature)
 	 */
 	public Object visitCallFeature(CallFeature node) {
+		setParent(node);
 		String result = "";
 		if (node.getTarget() != null) result += this.accept(node.getTarget());
 		else result += "self";
@@ -784,7 +784,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
         // User can choose to add a "@kdoc" tag
         if (node.getName().equals(KMT2KMPass7.KERMETADOC) && !node.getValue().startsWith("/**"))
         {
-            result = node.getValue() + "\n";
+            result = "/**" + node.getValue() + "*/\n";
         }
         // Or simple comment /** */ delimitor TODO also remove pretty "*" 
         else if (node.getValue().startsWith("/**"))
