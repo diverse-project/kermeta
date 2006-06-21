@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.1 2006-06-20 09:07:58 zdrey Exp $
+/* $Id: Ecore2KM.java,v 1.2 2006-06-21 12:00:38 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -79,6 +79,7 @@ public class Ecore2KM {
 			if (obj instanceof EPackage) {
 				visitor1.accept(obj);
 			}
+			
 		}
 		// Second pass : visit the operation and properties and set their types
 		Ecore2KMPass2 visitor2 = new Ecore2KMPass2(visitor1, this);

@@ -1,4 +1,4 @@
-/* $Id: EcoreUnit.java,v 1.7 2006-06-20 09:07:58 zdrey Exp $
+/* $Id: EcoreUnit.java,v 1.8 2006-06-21 12:00:38 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : EcoreUnit.java
 * License : GPL
@@ -34,6 +34,7 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.km.KMLoader;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 
 /**
@@ -56,7 +57,10 @@ public class EcoreUnit extends KermetaUnit {
         this(resource.getURI().toString(), packages);
     }
     
-    public void load() {
+    /**
+     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#preLoad()
+     */
+    public void preLoad() {
 		try {
 			// Load ressource
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
@@ -78,10 +82,6 @@ public class EcoreUnit extends KermetaUnit {
 		}
 	}
 	
-    /**
-     * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#preLoad()
-     */
-    public void preLoad() {}
 
     /**
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadAnnotations()

@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.2 2006-06-20 09:07:58 zdrey Exp $
+/* $Id: Ecore2KMPass2.java,v 1.3 2006-06-21 12:00:38 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -72,7 +72,7 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	public Ecore2KMPass2(ECore2KMPass1 visitor, Ecore2KM exporter)
 	{
 		this.visitorPass1 = visitor;
-		this.unit = exporter.unit;
+		this.unit = visitorPass1.unit;
 		this.resource = exporter.resource;
 		this.isTypeSettingMode = false;
 		this.exporter = exporter;
@@ -151,9 +151,8 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		exporter.current_classdef = (ClassDefinition)visitorPass1.types.get(node);
 		visitorPass1.isClassTypeOwner = true;
 		// First of all, set the super types
-		Iterator sit = ((EClass)node).getESuperTypes().iterator();
-		while (sit.hasNext()) {
-			EClassifier st = (EClassifier)sit.next();
+		for (Object next : ((EClass)node).getESuperTypes()) {
+			EClassifier st = (EClassifier)next;
 			Type t = createTypeForEClassifier(st, node);
 			if (t == null || !(t instanceof fr.irisa.triskell.kermeta.language.structure.Class)) {
 				throw new KM2ECoreConversionException(
@@ -198,15 +197,10 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 			// hosted in the operation annotation can be parsed and type checked correctly.
 			unit.pushContext();
 			// add type variable
-			Iterator tvs = exporter.current_op.getTypeParameter().iterator();
-			while(tvs.hasNext()) unit.addTypeVar((TypeVariable)tvs.next());
-			/*TypeVariableBinding bind = unit.struct_factory.createTypeVariableBinding();
-			bind.setVariable((TypeVariable) visitorPass1.current_classdef.getTypeParameter().get(i));
-			bind.setType(actual_params[i]);
-			res.getTypeParamBinding().add(bind);*/
+			for (Object next : exporter.current_op.getTypeParameter()) unit.addTypeVar((TypeVariable)next);
+			
 			// add parameters
-			Iterator params = exporter.current_op.getOwnedParameter().iterator();
-			while(params.hasNext()) unit.addSymbol(new KMSymbolParameter((Parameter)params.next()));
+			for (Object next : exporter.current_op.getOwnedParameter()) unit.addSymbol(new KMSymbolParameter((Parameter)next));
 		
 			// Is operation abstract? : we can know it already if the given operation contains no annotation
 			exporter.current_op.setIsAbstract(node.getEAnnotation(KM2Ecore.ANNOTATION)==null);
@@ -310,16 +304,14 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		// Visit annotation specific to EOperation or EClass
 		if (node.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER))
 		{	
-			EMap map = node.getDetails();
 			List<TypeVariable> params = new ArrayList<TypeVariable>();
-			Iterator<String> it = map.keySet().iterator();
-			while (it.hasNext())
+			for (Object next :  node.getDetails().keySet())
 			{
-				String name = it.next();
+				String name = (String)next;
 				TypeVariable tv = unit.struct_factory.createTypeVariable(); 
 				tv.setName(name);
 				// detail can be " A : Anothertype" -> means that A must inherit Anothertype
-				String detail = (String)map.get(name); 
+				String detail = (String)node.getDetails().get(name); 
 				if (detail.indexOf(":")>0)
 				{
 					detail = detail.replaceAll(" ", ""); // strip spaces
@@ -362,7 +354,6 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		{ 
 			// Is there an annotation for SuperOperation? "superOperation -> apackage::AClass"
 			String str_result = (String)ann.getDetails().get(KM2Ecore.ANNOTATION_SUPEROPERATION_DETAILS);
-			System.err.println("STRRES: " + str_result);
 			// Find the class definition owning this operation
 			ClassDefinition cdef = (ClassDefinition)unit.typeDefinitionLookup(str_result);
 			// We never know...
@@ -417,10 +408,8 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		}
 		if (result == null)
 		{
-			it = supertypes.iterator();
-			while (it.hasNext())
-			{
-				List next = ((EClass)it.next()).getESuperTypes();
+			for (Object type : supertypes) {
+				List next = ((EClass)type).getESuperTypes();
 				result =  findOperationInSuperTypes(next, node);
 			}
 		}

@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass1.java,v 1.2 2006-06-20 09:07:58 zdrey Exp $
+/* $Id: ECore2KMPass1.java,v 1.3 2006-06-21 12:00:38 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -106,7 +106,6 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	public Object visit(EPackage node) 
 	{
 		Package pack = unit.packageLookup(Ecore2KM.getQualifiedName(node));
-		
 		if (pack == null) {
 			pack = unit.struct_factory.createPackage();
 			pack.setName(node.getName());
@@ -116,6 +115,7 @@ public class ECore2KMPass1 extends EcoreVisitor {
 			else
 				unit.rootPackage = pack;
 			unit.packages.put(Ecore2KM.getQualifiedName(node), pack);
+			
 		}
 		
 		current_pack.push(pack);
@@ -153,7 +153,6 @@ public class ECore2KMPass1 extends EcoreVisitor {
 		
 		acceptList(((EClass)node).getEStructuralFeatures());
 		acceptList(((EClass)node).getEOperations());
-		acceptList(((EClass)node).getEAnnotations());
 		
 		return exporter.current_classdef;
 	}
@@ -389,11 +388,9 @@ public class ECore2KMPass1 extends EcoreVisitor {
 		List<TypeVariable> params = new ArrayList<TypeVariable>();
 		if (node.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER))
 		{	
-			EMap map = node.getDetails();
-			Iterator<String> it = map.keySet().iterator();
-			while (it.hasNext())
+			for (Object oname : node.getDetails().keySet())
 			{
-				String name = it.next();
+				String name = (String)oname;
 				TypeVariable tv = unit.struct_factory.createTypeVariable();
 				tv.setName(name);
 				params.add(tv);

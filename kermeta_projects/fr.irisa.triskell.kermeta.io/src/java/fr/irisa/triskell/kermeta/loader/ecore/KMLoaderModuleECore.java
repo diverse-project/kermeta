@@ -30,7 +30,6 @@ public class KMLoaderModuleECore extends KermetaLoaderModule {
    
 
 	public KermetaUnit createKermetaUnit(String uri, Hashtable packages) {
-	    KermetaUnit.internalLog.debug("KMLoaderModuleECore.createKermetaUnit " + uri);
 		return new EcoreUnit(uri, packages);
 	}
 }
