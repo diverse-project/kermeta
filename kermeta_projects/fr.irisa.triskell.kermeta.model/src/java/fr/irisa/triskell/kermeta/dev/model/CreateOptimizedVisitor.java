@@ -1,4 +1,4 @@
-/* $Id: CreateOptimizedVisitor.java,v 1.1 2005-08-31 14:12:49 ffleurey Exp $
+/* $Id: CreateOptimizedVisitor.java,v 1.2 2006-06-21 10:51:11 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -166,9 +166,11 @@ public class CreateOptimizedVisitor {
 
 			classTemplate += "public class XclassNameX {\n";
 
-			classTemplate += "final static public Logger internalLog = LogConfigurationHelper\n";
+			classTemplate += "  final static public Logger internalLog = LogConfigurationHelper\n";
 			classTemplate += "			.getLogger(\"KMT.model\");\n";
 
+			classTemplate += "  /** The parent of the node currently visited. */\n";
+			classTemplate += "  protected fr.irisa.triskell.kermeta.language.structure.Object parent\n;";
 			classTemplate += "	private static Hashtable acceptCmds = null;\n";
 
 			classTemplate += "	private static AcceptCommand getAcceptCmd(EObject node) {\n";
@@ -194,7 +196,7 @@ public class CreateOptimizedVisitor {
 
 			classTemplate += "		// Throw an error if the node is null\n";
 			classTemplate += "		if (node == null) {\n";
-			classTemplate += "			throw new Error(\"Error in visitor : the node to visit is null\");\n";
+			classTemplate += "			throw new Error(\"Error in visitor : the node to visit is null in \" + parent);\n";
 			classTemplate += "		}\n";
 
 			classTemplate += "		// Get the accept command\n";
