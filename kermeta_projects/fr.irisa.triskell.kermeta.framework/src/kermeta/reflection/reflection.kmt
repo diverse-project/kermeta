@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.19 2006-05-23 12:26:46 zdrey Exp $
+/* $Id: reflection.kmt,v 1.20 2006-06-21 15:30:08 cfaucher Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -25,7 +25,8 @@ abstract class Object
 	reference tag : set Tag[0..*]#object
 	operation getMetaClass() : Class is abstract
 	operation container() : Object is abstract
-	operation checkInvariants() : Boolean is abstract
+	operation checkInvariants() : Void is abstract
+	operation checkAllInvariants() : Void is abstract
 	operation equals(element : Object) : Boolean is abstract
 	operation isNotEqual(element : Object) : Boolean is abstract
 	

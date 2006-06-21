@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.24 2006-05-23 12:26:46 zdrey Exp $
+/* $Id: structure.kmt,v 1.25 2006-06-21 15:30:08 cfaucher Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -32,8 +32,40 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 		result := extern fr::irisa::triskell::kermeta::runtime::language::Object.container(self)
 	end
 	
-	method checkInvariants() : kermeta::standard::Boolean from kermeta::reflection::Object is do
-		result ?= extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)
+	method checkInvariants() : Void from kermeta::reflection::Object is do
+		extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants(self)
+	end
+	
+	method checkAllInvariants() : Void from kermeta::reflection::Object is do
+		if(self!=void) then
+			do
+				// Call the invariant verification
+				//stdio.writeln(" -- " + self.toString)
+				self.checkInvariants
+				rescue (err : kermeta::exceptions::ConstraintViolatedInv)
+					stdio.writeln(err.toString)
+					stdio.write("--> " + err.message)
+					stdio.writeln(" on " + self.toString)
+			end
+			
+			self.getMetaClass.ownedAttribute.each{ subObj |
+				if( subObj.isComposite) then
+					if( self.get(subObj).getMetaClass.toString.equals("ReflectiveSequence") or self.get(subObj).getMetaClass.toString.equals("ReflectiveCollection") ) then
+						//stdio.writeln(" -> " + subObj.type.toString + " - " + subObj.name)
+						
+						var subObjInstances : kermeta::standard::Collection<kermeta::reflection::Object>
+						subObjInstances ?= self.get(subObj)
+						
+						subObjInstances.each{ aSubObjInstances | 
+							aSubObjInstances.checkAllInvariants
+						}
+					end
+					if(self.get(subObj).getMetaClass.toString.equals("Property")) then
+						self.get(subObj).checkAllInvariants
+					end
+				end
+			}
+		end
 	end
 	
 	method equals(element : kermeta::reflection::Object) : Boolean from kermeta::reflection::Object is do
