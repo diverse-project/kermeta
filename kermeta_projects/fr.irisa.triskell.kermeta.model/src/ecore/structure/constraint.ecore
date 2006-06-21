@@ -33,7 +33,8 @@
       <eLiterals name="post" value="2"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Object">
-      <eOperations name="checkInvariants" eType="#//structure/Boolean"/>
+      <eOperations name="checkInvariants"/>
+      <eOperations name="checkAllInvariants"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EDataType" name="Boolean" instanceClassName="boolean"/>
   </eSubpackages>
