@@ -11,6 +11,8 @@
     <eAnnotations source="http://www.topcased.org/uuid">
       <details key="uuid" value="11491501338091"/>
     </eAnnotations>
+    <eOperations name="run"/>
+    <eOperations name="reset"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedState" upperBound="-1"
         eType="#//State" containment="true" eOpposite="#//State/owningFSM">
       <eAnnotations source="http://www.topcased.org/uuid">
