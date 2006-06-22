@@ -3,7 +3,7 @@
 <plugin
    id="fr.irisa.triskell.kermeta.runner"
    name="Kermeta Runner Plug-in"
-   version="0.2.1"
+   version="0.2.2"
    provider-name="IRISA/INRIA"
    class="fr.irisa.triskell.kermeta.runner.RunnerPlugin">
 
@@ -171,6 +171,10 @@
                icon="icons/kermeta_logo.gif"
                configTypeID="KermetaLaunchConfiguration"
                id="fr.irisa.triskell.kermeta.runner.launchConfigurationTypeImage1"/>
+         <launchConfigurationTypeImage
+               configTypeID="ConstraintLaunchConfiguration"
+               icon="icons/kermeta_logo.gif"
+               id="fr.irisa.triskell.kermeta.runner.launchConfigurationTypeImage2"/>
       </extension>
       <extension
             point="org.eclipse.debug.ui.launchGroups">

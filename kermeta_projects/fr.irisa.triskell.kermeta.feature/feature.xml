@@ -2,18 +2,22 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="0.2.1"
-      provider-name="IRISA/Triskell"
+      version="0.2.2"
+      provider-name="IRISA/INRIA"
       image="images/kmt_32.gif">
    <install-handler/>
 
    <description url="http://www.kermeta.org/">
-      KerMeta is an ObjectOriented meta-modeling language developed
-by the Triskell team at IRISA.
+      KerMeta workbench and most of its plugins are distributed under
+the terms of the EPL licence.
+Special note:
+KerMeta TouchGraph plugin is distributed under the terms of the
+GPL license.
    </description>
 
    <copyright url="http://www.kermeta.org/">
-      KerMeta workbench and most of its plugins are distributed under the terms of the EPL licence.
+      KerMeta workbench and most of its plugins are distributed under
+the terms of the EPL licence.
 Special note:
 KerMeta TouchGraph plugin is distributed under the terms of the
 GPL license.
@@ -28,7 +32,7 @@ GPL license.
 
    <url>
       <update label="Kermeta update site on Triskell" url="http://www.kermeta.org//update"/>
-      <discovery label="Kermeta discovery site on Triskell" url="http://www.kermeta.org//update"/>
+      <discovery label="Kermeta discovery site on Triskell" url="http://www.kermeta.org/update"/>
    </url>
 
    <requires>
@@ -74,19 +78,19 @@ GPL license.
          id="fr.irisa.triskell.kermeta.runner"
          download-size="360"
          install-size="700"
-         version="0.2.1"/>
+         version="0.2.2"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta"
          download-size="2500"
          install-size="4570"
-         version="0.2.1"/>
+         version="0.2.2"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.texteditor"
          download-size="200"
          install-size="1400"
-         version="0.2.0"/>
+         version="0.2.2"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.touchnavigator"
@@ -96,23 +100,17 @@ GPL license.
          unpack="false"/>
 
    <plugin
-         id="fr.irisa.triskell.kermeta.graphicaleditor"
-         download-size="200"
-         install-size="200"
-         version="0.0.2"/>
-
-   <plugin
          id="fr.irisa.triskell.kermeta.model.edit"
          download-size="430"
          install-size="430"
-         version="0.2.0"
+         version="0.2.2"
          unpack="false"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.documentation"
          download-size="2837"
          install-size="2837"
-         version="0.0.9"
+         version="0.2.2"
          unpack="false"/>
 
 </feature>

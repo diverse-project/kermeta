@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="fr.irisa.triskell.kermeta.graphical.feature"
+      label="Kermeta Graphical Editor"
+      version="0.2.2"
+      provider-name="IRISA/INRIA">
+
+   <description url="http://www.kermeta.org/">
+      This is the graphical elements (graphical editors, ...) for Kermeta. This is a separate feature in order to have a lightweight version of the workbench since this editor is optionnal.
+   </description>
+
+   <copyright url="http://www.kermeta.org/">
+      Kermeta workbench and most of its plugins are distributed under
+the terms of the EPL licence.
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <url>
+      <update label="Kermeta update site" url="http://www.kermeta.org/update"/>
+   </url>
+
+   <requires>
+      <import feature="fr.irisa.triskell.kermeta" version="0.2.1"/>
+   </requires>
+
+   <plugin
+         id="fr.irisa.triskell.kermeta.graphicaleditor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
