@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RaiseItemProvider.java,v 1.1 2006-03-28 15:37:56 zdrey Exp $
+ * $Id: RaiseItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -131,6 +131,16 @@ public class RaiseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getRaise_Expression(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getRaise_Expression(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getRaise_Expression(),
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -152,16 +162,6 @@ public class RaiseItemProvider
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getRaise_Expression(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRaise_Expression(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRaise_Expression(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

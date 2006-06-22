@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionItemProvider.java,v 1.1 2006-03-28 15:37:56 zdrey Exp $
+ * $Id: ClassDefinitionItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -145,6 +145,7 @@ public class ClassDefinitionItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StructurePackage.eINSTANCE.getGenericTypeDefinition_TypeParameter());
+			childrenFeatures.add(StructurePackage.eINSTANCE.getClassDefinition_Inv());
 			childrenFeatures.add(StructurePackage.eINSTANCE.getClassDefinition_OwnedAttribute());
 			childrenFeatures.add(StructurePackage.eINSTANCE.getClassDefinition_OwnedOperation());
 		}
@@ -202,6 +203,7 @@ public class ClassDefinitionItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+			case StructurePackage.CLASS_DEFINITION__INV:
 			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
 			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -224,6 +226,11 @@ public class ClassDefinitionItemProvider
 			(createChildParameter
 				(StructurePackage.eINSTANCE.getGenericTypeDefinition_TypeParameter(),
 				 StructureFactory.eINSTANCE.createTypeVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.eINSTANCE.getClassDefinition_Inv(),
+				 StructureFactory.eINSTANCE.createConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter

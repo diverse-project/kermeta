@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorItemProviderAdapterFactory.java,v 1.1 2006-03-28 15:37:56 zdrey Exp $
+ * $Id: BehaviorItemProviderAdapterFactory.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -73,6 +73,50 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
 		supportedTypes.add(IItemPropertySource.class);		
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.behavior.Assignment} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AssignmentItemProvider assignmentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.behavior.Assignment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createAssignmentAdapter() {
+		if (assignmentItemProvider == null) {
+			assignmentItemProvider = new AssignmentItemProvider(this);
+		}
+
+		return assignmentItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.behavior.Block} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BlockItemProvider blockItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.behavior.Block}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Adapter createBlockAdapter() {
+		if (blockItemProvider == null) {
+			blockItemProvider = new BlockItemProvider(this);
+		}
+
+		return blockItemProvider;
 	}
 
 	/**
@@ -183,50 +227,6 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 		}
 
 		return callValueItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.behavior.Assignment} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected AssignmentItemProvider assignmentItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.behavior.Assignment}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createAssignmentAdapter() {
-		if (assignmentItemProvider == null) {
-			assignmentItemProvider = new AssignmentItemProvider(this);
-		}
-
-		return assignmentItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link fr.irisa.triskell.kermeta.language.behavior.Block} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BlockItemProvider blockItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link fr.irisa.triskell.kermeta.language.behavior.Block}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Adapter createBlockAdapter() {
-		if (blockItemProvider == null) {
-			blockItemProvider = new BlockItemProvider(this);
-		}
-
-		return blockItemProvider;
 	}
 
 	/**
@@ -677,13 +677,13 @@ public class BehaviorItemProviderAdapterFactory extends BehaviorAdapterFactory i
 	 * @generated
 	 */
 	public void dispose() {
+		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
+		if (blockItemProvider != null) blockItemProvider.dispose();
 		if (callVariableItemProvider != null) callVariableItemProvider.dispose();
 		if (callFeatureItemProvider != null) callFeatureItemProvider.dispose();
 		if (callSuperOperationItemProvider != null) callSuperOperationItemProvider.dispose();
 		if (callResultItemProvider != null) callResultItemProvider.dispose();
 		if (callValueItemProvider != null) callValueItemProvider.dispose();
-		if (assignmentItemProvider != null) assignmentItemProvider.dispose();
-		if (blockItemProvider != null) blockItemProvider.dispose();
 		if (conditionalItemProvider != null) conditionalItemProvider.dispose();
 		if (raiseItemProvider != null) raiseItemProvider.dispose();
 		if (rescueItemProvider != null) rescueItemProvider.dispose();

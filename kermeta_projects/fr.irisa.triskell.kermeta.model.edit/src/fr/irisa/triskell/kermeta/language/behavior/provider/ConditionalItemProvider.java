@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConditionalItemProvider.java,v 1.1 2006-03-28 15:37:56 zdrey Exp $
+ * $Id: ConditionalItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -149,6 +149,16 @@ public class ConditionalItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -170,16 +180,6 @@ public class ConditionalItemProvider
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -249,6 +249,16 @@ public class ConditionalItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -270,16 +280,6 @@ public class ConditionalItemProvider
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -349,6 +349,16 @@ public class ConditionalItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -370,16 +380,6 @@ public class ConditionalItemProvider
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

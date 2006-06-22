@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpressionItemProvider.java,v 1.1 2006-03-28 15:37:56 zdrey Exp $
+ * $Id: LambdaExpressionItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -152,6 +152,16 @@ public class LambdaExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -173,16 +183,6 @@ public class LambdaExpressionItemProvider
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

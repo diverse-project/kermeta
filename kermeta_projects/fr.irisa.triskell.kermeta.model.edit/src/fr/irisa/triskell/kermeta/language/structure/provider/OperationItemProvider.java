@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationItemProvider.java,v 1.1 2006-03-28 15:37:56 zdrey Exp $
+ * $Id: OperationItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -168,6 +168,8 @@ public class OperationItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(StructurePackage.eINSTANCE.getOperation_OwnedParameter());
+			childrenFeatures.add(StructurePackage.eINSTANCE.getOperation_Pre());
+			childrenFeatures.add(StructurePackage.eINSTANCE.getOperation_Post());
 			childrenFeatures.add(StructurePackage.eINSTANCE.getOperation_Body());
 		}
 		return childrenFeatures;
@@ -223,6 +225,8 @@ public class OperationItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case StructurePackage.OPERATION__OWNED_PARAMETER:
+			case StructurePackage.OPERATION__PRE:
+			case StructurePackage.OPERATION__POST:
 			case StructurePackage.OPERATION__BODY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -244,6 +248,26 @@ public class OperationItemProvider
 			(createChildParameter
 				(StructurePackage.eINSTANCE.getOperation_OwnedParameter(),
 				 StructureFactory.eINSTANCE.createParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.eINSTANCE.getOperation_Pre(),
+				 StructureFactory.eINSTANCE.createConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.eINSTANCE.getOperation_Post(),
+				 StructureFactory.eINSTANCE.createConstraint()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.eINSTANCE.getOperation_Body(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.eINSTANCE.getOperation_Body(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -269,16 +293,6 @@ public class OperationItemProvider
 			(createChildParameter
 				(StructurePackage.eINSTANCE.getOperation_Body(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -344,6 +358,28 @@ public class OperationItemProvider
 			(createChildParameter
 				(StructurePackage.eINSTANCE.getOperation_Body(),
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == StructurePackage.eINSTANCE.getOperation_Pre() ||
+			childFeature == StructurePackage.eINSTANCE.getOperation_Post();
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 	/**

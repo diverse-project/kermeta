@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyItemProvider.java,v 1.1 2006-03-28 15:37:56 zdrey Exp $
+ * $Id: PropertyItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
@@ -288,6 +288,16 @@ public class PropertyItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.eINSTANCE.getProperty_GetterBody(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.eINSTANCE.getProperty_GetterBody(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.eINSTANCE.getProperty_GetterBody(),
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -309,16 +319,6 @@ public class PropertyItemProvider
 			(createChildParameter
 				(StructurePackage.eINSTANCE.getProperty_GetterBody(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.eINSTANCE.getProperty_GetterBody(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.eINSTANCE.getProperty_GetterBody(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -388,6 +388,16 @@ public class PropertyItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StructurePackage.eINSTANCE.getProperty_SetterBody(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.eINSTANCE.getProperty_SetterBody(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StructurePackage.eINSTANCE.getProperty_SetterBody(),
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -409,16 +419,6 @@ public class PropertyItemProvider
 			(createChildParameter
 				(StructurePackage.eINSTANCE.getProperty_SetterBody(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.eINSTANCE.getProperty_SetterBody(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StructurePackage.eINSTANCE.getProperty_SetterBody(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

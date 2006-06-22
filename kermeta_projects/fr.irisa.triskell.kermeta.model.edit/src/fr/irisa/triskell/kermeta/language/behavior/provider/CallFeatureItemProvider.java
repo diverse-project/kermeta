@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureItemProvider.java,v 1.1 2006-03-28 15:37:56 zdrey Exp $
+ * $Id: CallFeatureItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -25,6 +25,7 @@ import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -61,11 +62,32 @@ public class CallFeatureItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addIsAtprePropertyDescriptor(object);
 			addStaticPropertyPropertyDescriptor(object);
 			addStaticOperationPropertyDescriptor(object);
 			addStaticEnumLiteralPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Is Atpre feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIsAtprePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_CallFeature_isAtpre_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_CallFeature_isAtpre_feature", "_UI_CallFeature_type"),
+				 BehaviorPackage.eINSTANCE.getCallFeature_IsAtpre(),
+				 true,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -178,6 +200,9 @@ public class CallFeatureItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(CallFeature.class)) {
+			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case BehaviorPackage.CALL_FEATURE__TARGET:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -194,6 +219,16 @@ public class CallFeatureItemProvider
 	 */
 	protected void collectNewChildDescriptors(Collection newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -219,16 +254,6 @@ public class CallFeatureItemProvider
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter

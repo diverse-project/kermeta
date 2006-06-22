@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoopItemProvider.java,v 1.1 2006-03-28 15:37:56 zdrey Exp $
+ * $Id: LoopItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -149,6 +149,16 @@ public class LoopItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -170,16 +180,6 @@ public class LoopItemProvider
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -249,6 +249,16 @@ public class LoopItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getLoop_Body(),
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -270,16 +280,6 @@ public class LoopItemProvider
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getLoop_Body(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -349,6 +349,16 @@ public class LoopItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				 BehaviorFactory.eINSTANCE.createAssignment()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				 BehaviorFactory.eINSTANCE.createBlock()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
@@ -370,16 +380,6 @@ public class LoopItemProvider
 			(createChildParameter
 				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
 				 BehaviorFactory.eINSTANCE.createCallValue()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
-				 BehaviorFactory.eINSTANCE.createAssignment()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
-				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
