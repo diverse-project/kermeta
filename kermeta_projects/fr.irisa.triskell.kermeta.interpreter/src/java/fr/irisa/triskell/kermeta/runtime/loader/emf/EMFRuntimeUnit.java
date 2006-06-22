@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.15 2006-05-05 11:11:39 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.16 2006-06-22 14:10:17 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -44,7 +44,6 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
-//import fr.irisa.triskell.kermeta.language.structure.FObject;
 
 /**
  * FIXME : Check that we work with all qualified names of Classes.
@@ -467,24 +466,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     	String unit_uri_path = unit_uri.substring(0, unit_uri.lastIndexOf("/")+1);
         return this.resolveURI(this.getUriAsString(), unit_uri_path);
     }
-    
-    
-    /**
-     * @param runtime_objects_map
-     */
-    public void setRuntimeObjectsMap(Hashtable p_runtime_objects_map) {
-        runtime_objects_map = p_runtime_objects_map;
-    }
-    
-    
-
-    /**
-     * @return Returns the runtime_objects_map.
-     */
-    public Hashtable getRuntimeObjectsMap() {
-        return runtime_objects_map;
-    }
-    
 	
 	/**
 	 * (Helper)
@@ -531,6 +512,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	
 	/**
 	 * Get the contentMapEntry which key is the RuntimeObject representing the given string.
+	 * contentMap is the RuntimeObject that is passed to Kermeta side, and that contains a hashtable
+	 * which contains the RuntimeObjects resulting from the EMFRuntime loading
 	 * @param str a key in contentMap
 	 * @return the runtimeObject representation of the collection associated to given key
 	 */
@@ -595,6 +578,5 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         }
         return result;
     }
-    
 }
 
