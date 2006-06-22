@@ -4,32 +4,54 @@
  * Copyright:
  * Authors:
  */
-package root_package;
+package help;
 
 require "../kermeta/fsm.kmt"
 require kermeta
 using fsm
 using kermeta::exceptions
+using kermeta::language
+using kermeta::standard
+using kermeta::reflection
+
 class Helper
 {
-
-	operation checkAllInvariants(theFSM : FSM) is do
-		theFSM.getMetaClass.ownedAttribute.each{ oA |
+	// @deprecated
+	// Method body to design the checkAllInvariants method
+	operation checkAllInvariants(obj : kermeta::reflection::Object) is do
 	
-		if( oA.isComposite) then
-			if( theFSM.get(oA).getMetaClass.toString.equals("ReflectiveSequence") ) then
-				stdio.writeln(" -> " + oA.type.toString + " - " + oA.name)
-				
-				//var sType : String init oA.type.toString
-				
-				//var aRS : oset<stype>
-				//oA.collect{ a | a }
-				//checkInvariants
+		if(obj!=void) then
+			do
+				// Call the invariant verification
+				stdio.writeln(" -- " + obj.toString)
+				obj.checkInvariants
+				rescue (err : ConstraintViolatedInv)
+					stdio.writeln(err.toString)
+					stdio.write(err.message)
+					stdio.writeln(" on " + obj.toString)
 			end
+			
+			obj.getMetaClass.ownedAttribute.each{ subObj |
+				if( subObj.isComposite) then
+					if( obj.get(subObj).getMetaClass.toString.equals("ReflectiveSequence") or obj.get(subObj).getMetaClass.toString.equals("ReflectiveCollection") ) then
+						//stdio.writeln(" -> " + subObj.type.toString + " - " + subObj.name)
+						
+						var subObjInstances : Collection<kermeta::reflection::Object>
+						subObjInstances ?= obj.get(subObj)
+						
+						subObjInstances.each{ aSubObjInstances | 
+							checkAllInvariants(aSubObjInstances)
+						}
+					end
+					if(obj.get(subObj).getMetaClass.toString.equals("Property")) then
+						checkAllInvariants(obj.get(subObj))
+					end
+				end
+			}
 		end
-		}
 	end
   
+
 	/**
 	 * Create a sample FSM
 	 */
@@ -51,7 +73,7 @@ class Helper
 			t12.output := "b"	t12.target := s2
 		
 		do
-			stdio.writeln(s1.checkInvariants.toString)
+			s1.checkInvariants
 			rescue (err : ConstraintViolatedInv)
 	            stdio.writeln(err.toString)
 	            stdio.writeln(err.message)
@@ -74,7 +96,7 @@ class Helper
 		
 		// Uncomment to check the invariant properties
 		do
-			stdio.writeln(s1.checkInvariants.toString)
+			s1.checkInvariants
 			rescue (err : ConstraintViolatedInv)
 	            stdio.writeln(err.toString)
 	            stdio.writeln(err.message)

@@ -22,6 +22,7 @@ require kermeta
 require "../kermeta/fsm.kmt"
 
 using fsm
+using help
 using kermeta::standard
 using kermeta::persistence
 using kermeta::exceptions
@@ -48,7 +49,8 @@ class Main
 		var res : EMFRepository init EMFRepository.new
         var resource : EMFResource 
         resource ?= res.createResource("../models/sample1.fsm", "../metamodels/fsm.ecore")
-        // *.fsm
+        // sample1.fsm
+        // exampledemo.fsm
         stdio.writeln("before loading")
         resource.load()
        	stdio.writeln("after loading")
@@ -57,7 +59,10 @@ class Main
         result  := theFSM
         
         // Uncomment to check the invariant properties : WFR
-        checkWFR(result)
+        // To check all contained elements by "result"
+        result.checkAllInvariants
+        // To check only the states that are contained in "result"
+        //checkWFR(result)
 	end
 	
 	operation loadfsmpostviolated() : FSM is do
@@ -73,7 +78,10 @@ class Main
         result  := theFSM
         
         // Uncomment to check the invariant properties : WFR
-        checkWFR(result)
+        // To check all contained elements by "result"
+        result.checkAllInvariants
+        // To check only the states that are contained in "result"
+        //checkWFR(result)
 	end
 
 	/**
@@ -84,7 +92,7 @@ class Main
 		theFSM.ownedState.each{ s | 
 			do
 				// Call the invariant verification
-				stdio.writeln(" - " + s.checkInvariants.toString)
+				stdio.writeln(" - " + s.checkInvariants)
 				rescue (err : ConstraintViolatedInv)
 		            stdio.writeln(err.toString)
 		            stdio.write(err.message)

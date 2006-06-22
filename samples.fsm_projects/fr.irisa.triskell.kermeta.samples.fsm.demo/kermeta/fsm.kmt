@@ -46,6 +46,12 @@ class FSM
 		
 		end
 	
+	inv invFSM is
+	do
+		stdio.writeln("checkin deterministic FSM")
+		true
+	end
+	
 	// Semantique operationnelle
 	operation run() : Void raises FSMException is do  
 		// reset if there is no current state
@@ -120,7 +126,6 @@ class State {
 	// Declaration of the invariant : deterministicTransition
 	inv deterministicTransition is
 	do
-		stdio.writeln("checkin deterministic")
 		self.outgoingTransition.forAll{tr1 |
             self.outgoingTransition.forAll{ tr2 |
                 ( tr2.input==tr1.input ) == (tr1==tr2)
@@ -161,6 +166,13 @@ class State {
 
 class Transition 
 {	
+// Declaration of the invariant : deterministicTransition
+	inv invTransition is
+	do
+		stdio.writeln("checkin deterministic Transition")
+		true
+	end
+	
 	reference source : State[1..1]#outgoingTransition
 	reference target : State[1..1]#incomingTransition
 	attribute input : String
