@@ -157,9 +157,4 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 				.setForegroundColor(new Color(null, 0, 0, 180));
 	}
 
-	@Override
-	protected Color getDefaultBackgroundColor() {
-		return new Color(null, 180, 240, 240);
-	}
-
 }
