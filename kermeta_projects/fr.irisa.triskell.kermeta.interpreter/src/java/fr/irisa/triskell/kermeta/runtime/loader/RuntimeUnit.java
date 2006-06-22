@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnit.java,v 1.3 2006-02-09 12:04:57 zdrey Exp $
+/* $Id: RuntimeUnit.java,v 1.4 2006-06-22 14:10:38 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnit.java
  * License   : GPL
@@ -9,6 +9,8 @@
  */
 package fr.irisa.triskell.kermeta.runtime.loader;
 
+import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 
 /**
@@ -52,5 +54,18 @@ public abstract class RuntimeUnit {
      */
     public void setFactory(RuntimeUnitFactory factory) {
         this.factory = factory;
+    }
+    
+    
+    /** Helper method: get the runtime memory of the interpreter (runtimememory = the memory 
+     * that contains the RuntimeObjects) */
+    public RuntimeMemory getRuntimeMemory()
+    {
+    	return this.getContentMap().getFactory().getMemory();	
+    }
+    /** Helper method: get the kermeta unit of the file in which the resource loading is asked */
+    public KermetaUnit getKermetaUnit()
+    {
+    	return getRuntimeMemory().getUnit();
     }
 }
