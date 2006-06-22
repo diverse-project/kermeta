@@ -1,11 +1,11 @@
-$Id: readme.txt,v 1.1 2005-05-12 09:50:11 dvojtise Exp $
+$Id: readme.txt,v 1.2 2006-06-22 09:41:40 jsteel Exp $
 
 this project is used to provide the product aspects of kermeta workbench
 this includes:
 - about informations
-- optionnally splash screen, ..
+- optionally splash screen, ..
 
 This WILL include:
 - the KerMeta perspective
 
-NOTE: the version in the about.mapping file must currently be changed mannually.
+NOTE: the version in the about.mapping file must currently be changed manually.
