@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.39 2006-06-22 14:10:17 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.40 2006-06-22 18:01:01 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -201,7 +201,8 @@ public class EMF2Runtime {
 				}
 				else
 				{
-					throw new RuntimeUnitError("Found unknown object in Resource '"+ ((Resource)res).getURI().toString() + "' : "+ obj);
+					unit.throwKermetaRaisedExceptionOnLoad(
+					"Found unknown object in Resource '"+ ((Resource)res).getURI().toString() + "' : "+ obj, null);
 				}
 			}
 		}
@@ -359,10 +360,15 @@ public class EMF2Runtime {
 	        if (unit_uriextension.compareTo("km")==0)
 	        {
 	        	etype_cdef = unit.getRuntimeMemory().getUnit().getTypeDefinitionByName("kermeta::language::" +eclassifier_name);
+	        	// If still null : search in kermeta::standard...
+	        	//if (etype_cdef == null)
 	        }
-	        else
-	        {
-	        	throw new RuntimeUnitError("Could not load element from given URI : " + unit_uri + "\n");
+	        // If after that, etype class definition is still null...
+	        if (etype_cdef == null)
+	        {   
+	        	String msg = "Could not load EClassifier element '" + eclassifier_name + "'" + "from given URI : '" + unit_uri + "'\n  ("
+	        	 + "EClassifier : " + eclassifier + "\n - Please mail kermeta-users list with your metamodel and instance :) )";
+	        	unit.throwKermetaRaisedExceptionOnSave(msg, null);
 	        }
         }
         
@@ -451,11 +457,7 @@ public class EMF2Runtime {
 	    		{
 	    			String errmsg = "NotImplemented Error : The type <"+feature_type+"> has not been handled yet. Trying to set "+
 	    			fvalue+" into "+rObject;	
-	    			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-	    					errmsg,
-	    					interpreter,
-	    					memory,
-	    					null);
+	    			unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
 	    		}
 	    		// If we instanciated a RuntimeObject value, we can set the properties for the object
 	    		// reminder : rovalue is null if fvalue was an instance of EFactory
@@ -472,13 +474,8 @@ public class EMF2Runtime {
 	    			String errmsg = "Exception received. Trying to set on " + 
 	    			 	rObject  + " this property: " + prop +" / " + feature.getName() + " with value: "+
 	    				fvalue;
-	    			internalLog.error(errmsg);
 	    			e.printStackTrace();
-	    			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-	    					errmsg,
-	    					interpreter,
-	    					memory,
-	    					e);
+	    			unit.throwKermetaRaisedExceptionOnLoad(errmsg, e);
 	    		}
 	    	}
 	    } // End of while
@@ -517,13 +514,7 @@ public class EMF2Runtime {
 			{ errmsg += ((Property)prop).getName() + ", "; }
 			errmsg += "\n in class \"" + classDef.getName() +"\"";
 			errmsg += "\nwith feature == " + feature;
-			internalLog.error(errmsg); 
-			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-					errmsg,
-					unit.getRuntimeMemory().getCurrentInterpreter(),
-					unit.getRuntimeMemory(),
-					null);
-    		
+			unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
     	}
     	
     	return result;
@@ -543,22 +534,17 @@ public class EMF2Runtime {
 	{
 		RuntimeObject rovalue = null;
         rovalue = (RuntimeObject)this.runtime_objects_map.get(fvalue);
-        if(rovalue==null)
+        if(rovalue==null) // If this case occurs, throws a kermeta raised exception.
         {
+        	String errmsg = "";
         	// troubles in the auto resolve 
         	EObject obj = EcoreUtil.resolve(fvalue, resource.getResourceSet());
         	if(fvalue.eIsProxy() && obj.eIsProxy())
 			{   	// ie. was a proxy and the proxy was not resolved
 					String objectURI = fvalue.eResource().getURIFragment(fvalue);			            	
-					String errmsg = "Not able to resolve proxy for value: " + fvalue 
+					errmsg = "Not able to resolve proxy for value: " + fvalue 
 						+ " for object: "+rObject +" of type: "+feature.getEType()+
 						"\nTry to load the file containing this URI: "+objectURI;
-					internalLog.error(errmsg);
-					throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-		        		errmsg,
-						interpreter,
-						memory,
-						null);
 			}
 			else
 			{
@@ -567,18 +553,11 @@ public class EMF2Runtime {
         		// this is in fact too late to create the runtime object for an EObject, !!! 
         		// concurrent exception !
 				Resource eresource = fvalue.eResource();
-				String errmsg = "Not able to find RuntimeObject in runtime_objects_map for value on type "+feature.getEType()
+				errmsg = "Not able to find RuntimeObject in runtime_objects_map for value on type "+feature.getEType()
 					+"Trying to set "+ fvalue+" into "+rObject; 
 				if (eresource!=null) errmsg += "\nBe sure to load the file containing this URI: "+eresource.getURIFragment(fvalue);
-            	internalLog.error(errmsg);
-            	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-		        		errmsg,
-						interpreter,
-						memory,
-						null);
-    			// RuntimeObject ro = this.setRuntimeObjectForEObject(unit, obj);
-    			// this.runtime_objects_map.put(obj, ro);	
         	}
+        	unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
         }
         rObject.getProperties().put(feature.getName(), rovalue);
         // FIXME the set method needs to be reviewed (for model instances?)
@@ -657,13 +636,8 @@ public class EMF2Runtime {
 		    			"in loaded libraries. Please check your require statements.\n";
 		    	if (metaclass.eResource()!=null) errmsg += " The eclass Resource is : "+metaclass.eResource();
 		    	memory.getUnit().messages.addError(errmsg, null);
-		        // Stop after the first error: throw a Kermeta Exception ...
-	        	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();        	
-		        throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-		        		errmsg,
-						interpreter,
-						memory,
-						null);
+		        // Stop after the first error
+	        	unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
 	        }
 	        else {
 	        	fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;

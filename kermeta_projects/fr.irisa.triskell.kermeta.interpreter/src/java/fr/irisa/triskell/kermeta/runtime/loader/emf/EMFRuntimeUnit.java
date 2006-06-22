@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.16 2006-06-22 14:10:17 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.17 2006-06-22 18:01:01 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -43,24 +44,43 @@ import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
+import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitError;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  * FIXME : Check that we work with all qualified names of Classes.
  */
 public class EMFRuntimeUnit extends RuntimeUnit {
-		    
+		
+	/**
+	 * Used by getEQualifiedName method to map Ecore EDatatypes refering to base
+	 * types to Kermeta base types { "javatype" : "kermetatype" }
+	 * */
+	protected static Hashtable<String, String> primitive_types_mapping;
+	
+	static {
+		primitive_types_mapping = new Hashtable<String, String>();
+		primitive_types_mapping.put("int", 					"kermeta::standard::Integer");
+		primitive_types_mapping.put("java.lang.Integer", 	"kermeta::standard::Integer");
+		primitive_types_mapping.put("boolean", 				"kermeta::standard::Boolean");
+		primitive_types_mapping.put("java.lang.Boolean", 	"kermeta::standard::Boolean");
+		primitive_types_mapping.put("java.lang.String", 	"kermeta::standard::String");
+		primitive_types_mapping.put("Object", 				"kermeta::standard::Object");
+		primitive_types_mapping.put("java.lang.Object", 	"kermeta::standard::Object");
+	}
+	
 	 /**
      * Set this to true if you want to have more diagnostic info from EMF
      * Comment for <code>ENABLE_EMF_DIAGNOSTIC</code>
      */
     public static boolean ENABLE_EMF_DIAGNOSTIC =true;
     
-    /** temporary attribute for the */
+    /** URI of the metamodel to which the model to save is conform. This attribute is
+     * mandatory */
     public String metamodel_uri;
     protected fr.irisa.triskell.kermeta.language.structure.Object kermeta_mm;
     /** { EObject : RuntimeObject } */
-    private Hashtable runtime_objects_map;
+    private Hashtable<EObject, RuntimeObject> runtime_objects_map;
     
     /** this hashtable is used to store the qualified name of the element with the given nsuri.
      * used only on the metamodel via getEQualifiedName()
@@ -70,7 +90,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     public Hashtable<String,String> nsUri_QualifiedName_map = new Hashtable<String,String>();
     
 
-    /** used to store the metamodel
+    /** Mandatory attribute used to store the metamodel
      * in the case of the load , it is used when there is generated classes. This is because in this case, the container chain doesn't contains
      * the full package tree of the metamodel
      * we need to be able to recontitute it from the metamodel the user has given
@@ -210,10 +230,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    		else
 	    		{
 	    			String errmsg ="Not able to create a resource for URI: "+u ;
-	    			internalLog.error(errmsg );
 	    	    	logEMFRegistryContent();
-	    			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-		        			errmsg,	interpreter, memory, null);
+	    			throwKermetaRaisedExceptionOnLoad(errmsg, null);
 	    		}
 	    	}
 	    	else {
@@ -234,12 +252,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 				String errmsg = "EMF reports unresolved reference(s): You must load the corresponding files before trying to load this model."+
 					"\n  First unresolved proxy is: "+unresolvedMapIt.next()+
 					"\n  a new URI_MAP entry may solve your problem";
-				KermetaUnit.internalLog.error(errmsg);
-				throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-	        			errmsg,
-						interpreter,
-						memory,
-						null);
+				throwKermetaRaisedExceptionOnLoad(errmsg, null);
 			}
 			
 			// Now, process the conversion of EMF model into Runtime representation so that kermeta can interprete it.
@@ -247,12 +260,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	emf2Runtime.loadunit();
 		}
 		catch (IOException e){
-			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUriAsString() + " : " + e.getMessage(), e);			
-			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-        			e.getMessage(),
-					interpreter,
-					memory,
-					e); 
+			String msg = "Error loading EMF model " + unit.getUriAsString() + " :\n   " + e.getMessage();
+			throwKermetaRaisedExceptionOnLoad(e.getMessage(), e);
 		}
 		catch (WrappedException e){
 
@@ -265,11 +274,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 					KermetaUnit.internalLog.error("EMF diagnostic: "+errorDiag.getMessage());
 				}
 			}
-        	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-        			e.exception().getMessage(),
-					interpreter,
-					memory,
-					e);        	
+			throwKermetaRaisedExceptionOnLoad(e.exception().getMessage(), e);    	
 		}
 		finally
 		{
@@ -339,16 +344,12 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         	}
         	catch (WrappedException e){
         		KermetaUnit.internalLog.error("Error loading EMF model " + this.getUriAsString() + " : " + e.exception().getMessage(), e);
-    			throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
-	        			e.exception().getMessage(),
-						interpreter,
-						memory,
-						e); 
+        		throwKermetaRaisedExceptionOnLoad(e.exception().getMessage(), e);
 			}
         }
         else // if metaModelResource is null 
         {
-            //TODO throw new KermetaRaisedException(null, null);
+            throwKermetaRaisedExceptionOnSave("Metamodel for the instance to save was not found or provided.", null);
         }
         
         // Create an URI for the resource that is going to be saved
@@ -374,29 +375,15 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         	if (t instanceof Resource.IOWrappedException)
 		    {	
 		        Resource.IOWrappedException we = (Resource.IOWrappedException)t;
-		        //we.getMessage();
-		        throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
-				        we.getWrappedException().getMessage(),
-						interpreter,
-						memory,
-						we);
+		        throwKermetaRaisedExceptionOnSave(we.getWrappedException().getMessage(), we);
 		    }
         	else if (t instanceof DanglingHREFException)
 		    {
 		    	DanglingHREFException we = (DanglingHREFException)t;
-		        we.getMessage();
-		        throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
-	        			we.getMessage(),
-						interpreter,
-						memory,
-						we); 
+		        throwKermetaRaisedExceptionOnSave(we.getMessage(), we);
 		    }
 		    e.printStackTrace();
-		    throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
-        			e.getMessage(),
-					interpreter,
-					memory,
-					e); 
+		    throwKermetaRaisedExceptionOnSave(e.getMessage(), e); 
 		}
     }
 	
@@ -472,13 +459,31 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * Get the qualified name of the given ENamedElement in a Kermeta representation.
 	 * This is a recursive method,
 	 * that parses the successive containers of an element and return their qualified names.
+	 * This method is uncomplete! : TODO :
+	 *    - handle EEnum type
+	 *    - handle EDataTypes that contains links to java type that have no equivalence in Kermeta
+	 *    (ex: EBigDecimal)
 	 * @param obj
 	 * @return the qualified name of the given object
 	 */
 	public String getEQualifiedName(ENamedElement obj) {
 	    String result = obj.getName();
 	    EObject cont = obj.eContainer();
-	    if (cont != null &&cont instanceof ENamedElement) {
+	    // Special case: if obj is a EDataType, refering to a java type (like String), 
+	    // search the equivalent type in kermeta.
+	    if (obj instanceof EDataType)
+	    {
+	    	String icn = ((EDataType)obj).getInstanceClassName();
+	    	if (icn != null && primitive_types_mapping.containsKey(icn)) 
+	    		result = primitive_types_mapping.get(icn);
+	    	else // Throw an error!
+	    	{
+	    		String msg = "Sorry, we could not save your model : it contains types that have no equivalence in kermeta : '" + obj.getName() + "';";
+	    		msg += "\n - Please mail kermeta-users list with your metamodel and instance :) )";
+	        	throwKermetaRaisedExceptionOnSave(msg, null);
+	    	}
+	    }
+	    else if (cont != null &&cont instanceof ENamedElement) {
 	        result = getEQualifiedName((ENamedElement)cont) + "::" + result;
 	    }
 	    else if(!(obj.getClass().getName().compareTo("org.eclipse.emf.ecore.impl.EPackageImpl")==0)){
@@ -578,5 +583,29 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         }
         return result;
     }
+    
+    /** Helper method to make the code more readable :
+     * @return a KermetaRaisedException telling that save process failed */
+    protected void throwKermetaRaisedExceptionOnSave(String message, Throwable javacause)
+    {
+    	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceSaveException",
+    			message,
+    			getRuntimeMemory().getCurrentInterpreter(),
+    			getRuntimeMemory(),
+    			javacause);
+    }
+    
+    /** Helper method to make the code more readable :
+     * @return a KermetaRaisedException telling that load process failed */
+    protected void throwKermetaRaisedExceptionOnLoad(String message, Throwable javacause)
+    {
+    	throw KermetaRaisedException.createKermetaException("kermeta::persistence::ResourceLoadException",
+    			message,
+    			getRuntimeMemory().getCurrentInterpreter(),
+    			getRuntimeMemory(),
+    			javacause);
+    }
+    
+    
 }
 
