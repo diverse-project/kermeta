@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.1 2006-05-30 08:32:18 zdrey Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.2 2006-06-22 12:39:50 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2HTMLPrettyPrinter.java
  * License    : EPL
@@ -27,6 +27,8 @@ import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -81,7 +83,12 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	public static final String KEY_VALUE     = "Values";
 	public static final String MOD_INHERITED = "Inherited";
 	public static final String[] KEYS_ORDER = new String[] {KEY_MODULE, KEY_CLASS, KEY_METHOD, KEY_FUNCTION, KEY_VALUE};
-
+	// the list of html keywords that are interpreted by this km2html prettyprinter -> only in lower case!
+	public static String[] ALLOWED_HTML_KEYWORDS;
+	static {
+		ALLOWED_HTML_KEYWORDS = new String[] { "pre", "code", "b", "a", "i" };
+	}
+	
 	public static Hashtable<String, String>	COMPACT; // this is unused yet - could largely reduce the output html file size 
 	// "(.*)"\s*: "(.*)", -> COMPACT.put("$1", "$2");
 	static {
@@ -123,6 +130,8 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	public void ppKermetaFile(String output_file) {
 		// Pretty print the Kermeta file in HTML		
 		String html_doc = ppHTMLAll();
+		/*for (Entry<String, String> tuple : COMPACT.entrySet()) {
+			html_doc = html_doc.replaceAll("='"+tuple.getKey()+"'","='"+tuple.getValue()+"'");}*/
 		// Store it in the output_file
 		try {
 			BufferedWriter w = new BufferedWriter(new FileWriter(new File(output_file)));
@@ -279,7 +288,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		String result = "";
 		String this_id = "d_" + String.valueOf(node.hashCode());
 		if (this._contents.containsKey(this_id)) return this._contents.get(this_id);
-		result = "<div id='" + this_id + "' class='description'>";
+		result += "<div id='" + this_id + "' class='description'>";
 		result += "<h1>" + this.describeType(node) + "</h1>";
 		result += "<div class='representation'>";
 		result += this.representation(node);
@@ -288,6 +297,8 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		// Does this node contains annotation?
 		if (node.getTag().size()>0)
 			result += visitEList(node.getTag(),"");
+		else if (node instanceof ClassDefinition && ((ClassDefinition)node).getSuperType().size()>0)
+			result += "<span class='undocumented'>See inherited classes.</span>";
 		else
 			result += "<span class='undocumented'>Undocumented</span>";
 		result += "</div></div>";
@@ -430,7 +441,6 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		else
 		{
 			String this_id = String.valueOf(node.hashCode());
-			this._contents.put(this_id,"");
 			String result = "";
 			// Constructs the hyperlinked name of a Class with a ref to its description, and the list of associated operations
 			result += "<div id='" + this_id + "' class='" + "container" + "'>";
@@ -452,6 +462,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	public Object visitClassDefinition(ClassDefinition node) {
 		typedef = false;
 		String signature = KMTHelper.getQualifiedName(node);
+		Package container = (Package)node.eContainer();
 		// If we want to print only a signature (see method "representation")
 		if (_as_signature == true)
 		{	
@@ -471,7 +482,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		String result = "";
 		// Constructs the hyperlinked name of a Class with a ref to its description, and the list of associated operations
 		result += "<div id='" + this_id + "' class='" + "container" + "'>";
-		result += "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
+		result += "<div class='name'>"+ container.getName() +"::<a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
 		_as_signature = false;
 		// For each operation : construct the hyper-linked-name of an operation, with a ref of its description
 		result += this.visitEList(node.getOwnedOperation(), KEY_METHOD);
@@ -562,14 +573,28 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 			nline = html(nline);
 			lresult.add(nline);
 		}
-		return join(lresult,"\n<br>");
+		result = join(lresult,"\n<br>");
+		return result;
 	}
 	
 	/** Replace protected html chars ( &lt; becomes <code>&lt;</code> ) */
 	public String html(String str)
-	{
-		String result = str.replaceAll("<", "&lt;");
-		result = result.replaceAll(">", "&gt;");
+	{	String result = str;
+		String result3 = "";
+		// first, protect allowed html keywords
+		for (String k : ALLOWED_HTML_KEYWORDS) { // pre/code/b/i
+			result = result.replaceAll("<" + k + ">", "--" + k + "--")
+				.replaceAll("</" + k + ">", "--/" + k + "--")
+				.replaceAll("<" + k + "(\\s+[^>]*)>", "--" + k + "$1--")
+				.replaceAll("<" + k + "([^>]*)/>", "--" + k + "$1/--");
+		}
+		result = result.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+		for (String k : ALLOWED_HTML_KEYWORDS) {
+			result = result.replaceAll("--" + k + "--", "<" + k + ">" )
+				.replaceAll("--/" + k + "--", "</" + k + ">")
+				.replaceAll("--" + k + "(\\s+[^>]*)--", "<" + k + "$1>")
+				.replaceAll("--" + k + "([^>]*)/--", "<" + k + "$1/>");
+		}
 		return result;
 	}
 	
