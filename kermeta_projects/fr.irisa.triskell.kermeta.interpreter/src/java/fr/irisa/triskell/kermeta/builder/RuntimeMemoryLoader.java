@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.11 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.12 2006-06-22 14:08:23 zdrey Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -112,14 +112,15 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
         while(it.hasNext()) {
             Package p = (Package)it.next();
             Iterator tit = p.getOwnedTypeDefinition().iterator();
+            // For each type definition, create the associated RuntimeObject
             while(tit.hasNext()) {
+            	// TypeDefinition can be a ClassDefinition or a ModelTypeDefinition
                 TypeDefinition td = (TypeDefinition)tit.next();
                 RuntimeObject ro =  new KCoreRuntimeObject(memory.getROFactory(), null, td);
-                //ro.getData().put("kcoreObject", td);
-                //System.out.println("Load type : "+unit.getQualifiedName(td)+" -> "+td+"ro:"+ro);
                 typeDefinitions.put(unit.getQualifiedName(td), ro);
                 objects.put(td, ro);
-                
+                // If the type definition is a *classDefinition* than, create the complete runtime object, for the 
+                // class definition itself, AND for all its properties.
                 if (td instanceof ClassDefinition) {
                     Iterator pit = ((ClassDefinition)td).getOwnedAttribute().iterator();
                     while (pit.hasNext()) {
