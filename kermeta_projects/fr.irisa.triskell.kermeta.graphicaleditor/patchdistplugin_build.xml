@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="fr.irisa.triskell.kermeta.graphicaleditor" default="gather.bin.parts" basedir=".">
+
+	<!-- This script patches the way the plugin is created, otherwise some files are not added in the distribution and make it incorrect 
+		typically, all the classes in fr/irisa/triskell/kermeta/graphicaleditor/diagram/policies/extension/
+		and we get a in the PDE error log : java.lang.NoClassDefFoundError: fr/irisa/triskell/kermeta/graphicaleditor/diagram/policies/extension/ExtendedPropertyEdgeCreationEditPolicy
+	-->
+	<target name="gather.bin.parts" >
+		<mkdir dir="mytemp/fr.irisa.triskell.kermeta.graphicaleditor_0.0.3"/>
+		<copy todir="mytemp/fr.irisa.triskell.kermeta.graphicaleditor_0.0.3" failonerror="true" overwrite="true">
+			<fileset dir="@dot" includes="**"			/>
+		</copy>
+		<copy todir="mytemp/fr.irisa.triskell.kermeta.graphicaleditor_0.0.3" failonerror="true" overwrite="false">
+			<fileset dir="." includes="plugin.xml,templates,icons/,templates/,META-INF/,null"			/>
+		</copy>
+		<zip destfile="fr.irisa.triskell.kermeta.graphicaleditor_0.0.3.jar" basedir="mytemp/fr.irisa.triskell.kermeta.graphicaleditor_0.0.3" filesonly="false" whenempty="skip" update="false"/>
+				
+	</target>
+
+</project>
