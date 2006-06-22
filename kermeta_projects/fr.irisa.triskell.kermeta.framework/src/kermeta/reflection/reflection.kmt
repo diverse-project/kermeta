@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.20 2006-06-21 15:30:08 cfaucher Exp $
+/* $Id: reflection.kmt,v 1.21 2006-06-22 10:02:24 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -12,14 +12,19 @@
  */
  
 /**
- * Contains all the abstract classes used in the reflection mecanism. Implements the derived
- * properties contained in the classes. It is used by kermeta.language.structure.
+ * Contains all the abstract classes used in the reflection mecanism. Implements the <b>derived
+ * properties</b> contained in the classes; declares the abstract operations.
+ * Concrete implementation is in kermeta.language.structure.
  */
 package kermeta::reflection;
 
 require "../standard/collections.kmt"
 
 alias String : kermeta::standard::String;
+
+/** 
+ * Object type : all entities of Kermeta metamodel explicitely inherit Object.
+ */
 abstract class Object
 {
 	reference tag : set Tag[0..*]#object
@@ -58,13 +63,20 @@ abstract class Object
 	operation freeze() : Void is abstract
 	operation isVoid() : Boolean is abstract
 }
+
+/** Alias for kermeta::standard::Boolean */
 alias Boolean : kermeta::standard::Boolean;
+/** Alias for kermeta::standard::Integer */
 alias Integer : kermeta::standard::Integer;
+
+/** Abstraction for Parameterized types, namely, Class and ModelType*/
 abstract class ParameterizedType inherits Type
 {
 	reference typeDefinition : GenericTypeDefinition[1..1]
 	attribute typeParamBinding : set TypeVariableBinding[0..*]
 }
+/** Type corresponding to the <b>use</b> of a ClassDefinition (see ClassDefinition)
+ */
 abstract class Class inherits ParameterizedType
 {
 	/** Returns the attributes, references, and derived properties owned by
@@ -120,7 +132,7 @@ abstract class Class inherits ParameterizedType
 		result := self.typeDefinition.name
 	end
 }
-
+/** Type corresponding to the <b>use</b> of a ModelTypeDefinition */
 abstract class ModelType inherits ParameterizedType
 {
 	property readonly ownedTypeDefinition : set TypeDefinition[0..*]
@@ -130,6 +142,7 @@ abstract class ModelType inherits ParameterizedType
 			result := mtDef.ownedTypeDefinition
 		end
 }
+/** Element with a multiplicity [lower..upper] */
 abstract class MultiplicityElement inherits TypedElement
 {
 	attribute isOrdered : Boolean
@@ -137,10 +150,11 @@ abstract class MultiplicityElement inherits TypedElement
 	attribute lower : Integer
 	attribute upper : UnlimitedNatural
 }
+/** Class representing the constraint definition */
 abstract class Constraint inherits NamedElement
 {
 }
-
+/** Class representing the operation definition */
 abstract class Operation inherits MultiplicityElement
 {
 	attribute isAbstract : Boolean
@@ -153,12 +167,17 @@ abstract class Operation inherits MultiplicityElement
 	reference raisedException : set Type[0..*]
 	attribute ownedParameter : set Parameter[0..*]#~operation
 }
+/** Class representing the tag definition */
 abstract class Tag inherits Object
 {
 	reference object : set Object[1..*]#tag
 	attribute name : String
 	attribute ~value : String
 }
+/** Class representing the property definition. Kermeta-Ecore equivalence:
+ *  - Property with isComposite == true or with type is a base type (String, Integer, Boolean)  : EAttribute
+ *  - Property with isComposite == false : EReference
+ */
 abstract class Property inherits MultiplicityElement
 {
 	reference owningClass : ClassDefinition#ownedAttribute
@@ -169,14 +188,34 @@ abstract class Property inherits MultiplicityElement
 	attribute isDerived : Boolean
 	attribute isID : Boolean
 }
+/** Phantom class : EMF reflexive editors need that any element of a metamodel 
+ * has a direct or indirect containment relationship with the root model element of
+ * the metamodel. This class resolves this technical requirement.
+ */
 abstract class TypeContainer inherits Object
 {
 	attribute containedType : set Type[0..*]
 }
+/** 
+ * Abstracts the definition of generic type definitions (i.e. type definitions that
+ * can be parameterized), namely, for ClassDefinition and ModelTypeDefinition.
+ */
 abstract class GenericTypeDefinition inherits TypeDefinition
 {
 	attribute typeParameter : set TypeVariable[0..*]
 }
+/** Defines a ClassDefinition. 
+ *  <code>class A
+ *{ 
+ *   attribute s : String
+ *}
+ *   </code> is a class definition
+ * in :
+ * <code>
+ * main() : A is do end
+ * </code>
+ * A is a Class : it is the use of the class definition of A
+ */
 abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 {
 	attribute isAbstract : Boolean
@@ -211,13 +250,20 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 			}
 		end
 }
+/** Definition of a model type */
 abstract class ModelTypeDefinition inherits GenericTypeDefinition, TypeDefinitionContainer
 {
 }
+/** Abstraction of the notion of typed element : each element 
+ * that is typed inherits this class. */
 abstract class TypedElement inherits TypeContainer, NamedElement
-{
+{   
+    /** The type of this model element */
 	reference type : Type
 }
+/** Definition of a type variable for generic types :  
+ * in class definition <pre>class AClass<X,Y> {}</pre>, X and Y are type variables.
+ */
 abstract class TypeVariable inherits TypeContainer, Type, NamedElement
 {
 	reference supertype : Type
@@ -226,11 +272,30 @@ abstract class ProductType inherits TypeContainer, Type
 {
 	reference type : set Type[1..*]
 }
+/**
+ * Type used to define the use of lambda expressions.
+ *  Uses :
+ *  <code>operation forAll(func : <G -> Boolean>) : Boolean is do
+ *      var test : Boolean init true
+ *      from var it : Iterator<G> init iterator
+ *      until it.isOff
+ *      loop
+ *         test := test and func(it.next)
+ *      end
+ *      result := test
+ *  end
+ *  </code>end
+ *
+ *  In the above example, &lt;G -> Boolean&gt; is a function type f(G) -&gt; 
+ *  Boolean, with a parameter of type G and a return type of type Boolean
+ *  The operation <pre>forAll</pre> takes a lambda expression as parameter.
+ */
 abstract class FunctionType inherits TypeContainer, Type
 {
 	reference left : Type
 	reference right : Type
 }
+
 abstract class Type inherits Object
 {
 	operation isInstance(element : Object) : Boolean is abstract
@@ -241,12 +306,17 @@ abstract class TypeVariableBinding inherits TypeContainer, Object
 	reference variable : TypeVariable[1..1]
 	reference type : Type[1..1]
 }
+/** The class definition for kermeta aliases. */
 abstract class PrimitiveType inherits TypeContainer, DataType
 {
 	reference instanceType : Type
 }
+/** The class definition of which others inherit when they represent a model element with a 
+ * name (example : Operation, Property) 
+ */
 abstract class NamedElement inherits Object
-{
+{   
+    /** Name of this named element */
 	attribute name : String
 	
 	/** Returns the qualified name of this named element. Qualified name is 
@@ -267,41 +337,59 @@ abstract class NamedElement inherits Object
 }
 
 /**
- * DEPRECATED
+ * Self type : DEPRECATED
  */
 abstract class SelfType inherits Type
 {
 }
+/** 
+ * Abstraction of the notion of containment for type definitions. Now, kermeta metamodel contains one container
+ * element, that is Package. In a later release, ModelTypeDefinition will be the main container for type and
+ * package definition.
+ */
 abstract class TypeDefinitionContainer inherits NamedElement
 {
 	attribute ownedTypeDefinition : set TypeDefinition[0..*]
 }
+/**
+ * Package in kermeta. Each kermeta model must have a root package. 
+ */
 abstract class Package inherits TypeDefinitionContainer
 {
 	attribute nestedPackage : set Package[0..*]#nestingPackage
 	reference nestingPackage : Package#nestedPackage
 	attribute uri : String
 }
+/**
+ * Abstraction for type definitions (ClassDefinition, ModelTypeDefinition, DataType inherit
+ * this class)
+ */
 abstract class TypeDefinition inherits NamedElement
 {
 }
+/** Class definition for the <pre>Void</pre> type */
 abstract class VoidType inherits Type
 {
 }
+/** Special type definition for Enumeration, PrimitiveType  */
 abstract class DataType inherits TypeDefinition, Type
 {
 }
+/** Definition for enumeration */
 abstract class Enumeration inherits DataType
-{
+{   /** Owned item in enumeration */
 	attribute ownedLiteral : set EnumerationLiteral[0..*]#~enumeration
 }
+/** Item definition for enumeration */
 abstract class EnumerationLiteral inherits NamedElement
-{
+{   /* Owning enumeration */
 	reference ~enumeration : Enumeration#ownedLiteral
 }
+/** Definition for operation parameter */
 abstract class Parameter inherits MultiplicityElement
-{
+{   /** Owning operation */
 	reference ~operation : Operation#ownedParameter
 }
+/** Alias for kermeta::standard::UnlimitedNatural */
 alias UnlimitedNatural : kermeta::standard::UnlimitedNatural;
 
