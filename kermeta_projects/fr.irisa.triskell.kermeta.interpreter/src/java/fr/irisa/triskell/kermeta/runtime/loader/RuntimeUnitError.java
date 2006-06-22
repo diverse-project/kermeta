@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnitError.java,v 1.1 2006-06-21 13:10:56 zdrey Exp $
+/* $Id: RuntimeUnitError.java,v 1.2 2006-06-22 18:01:37 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RuntimeUnitError.java
  * License    : EPL
@@ -13,6 +13,10 @@
  * 
  */
 package fr.irisa.triskell.kermeta.runtime.loader;
+
+import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 
 /**
  * @author zdrey
@@ -31,7 +35,7 @@ public class RuntimeUnitError extends Error {
 	 * @param message
 	 */
 	public RuntimeUnitError(String message) {
-		super("RuntimeUnit error while try to load a model:\n    " + message);
+		
 	}
 
 	/**
@@ -48,5 +52,11 @@ public class RuntimeUnitError extends Error {
 	public RuntimeUnitError(Throwable cause) {
 		super(cause);
 	}
+	
+	public static void createRuntimeUnitError(String msg, ExpressionInterpreter interpreter, RuntimeMemory memory, Throwable we)
+	{
+	}
+//	super("RuntimeUnit error while try to load a model:\n    " + message);
+ 
 
 }
