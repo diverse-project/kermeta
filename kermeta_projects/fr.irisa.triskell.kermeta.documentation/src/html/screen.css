@@ -124,16 +124,16 @@ hr {
 }
 
 #content {
-	padding: 30px;
+	padding: 2px;
 }
 
 #content h1, #content h2{
 }
 
 #content pre {
-	padding: 5pt;
-	border-left:  1px dashed #dc967b;
-	padding-left: 20pt;
+	padding: 0;
+	border-left:  1px dotted #dc967b;
+	padding-left: 2pt;
 	background-color: rgb(250,250,250);
 }
 

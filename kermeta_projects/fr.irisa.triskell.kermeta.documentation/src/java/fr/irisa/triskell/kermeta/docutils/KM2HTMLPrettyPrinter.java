@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.2 2006-06-22 12:39:50 zdrey Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.3 2006-06-22 13:22:57 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2HTMLPrettyPrinter.java
  * License    : EPL
@@ -573,7 +573,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 			nline = html(nline);
 			lresult.add(nline);
 		}
-		result = join(lresult,"\n<br>");
+		result = join(lresult,"\n");
 		return result;
 	}
 	
