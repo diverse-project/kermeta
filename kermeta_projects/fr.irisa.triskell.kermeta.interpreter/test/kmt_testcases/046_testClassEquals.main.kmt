@@ -1,3 +1,13 @@
+/* $Id: 046_testClassEquals.main.kmt,v 1.2 2006-06-22 15:18:57 dvojtise Exp $
+ * Project   : fr.irisa.triskell.kermeta.interpreter
+ * File      : 046_testClassEquals.main.kmt
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mar 14, 2006
+ * Authors       : 
+ * 		
+ */
 @mainClass "testClassEquals::TestClassEquals"
 @mainOperation "operation1"
 
