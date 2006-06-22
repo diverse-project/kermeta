@@ -6,10 +6,42 @@
 
 <body>
 <!--
-$Id: history.html,v 1.12 2006-04-24 19:12:44 dvojtise Exp $
+$Id: history.html,v 1.13 2006-06-22 15:05:00 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
+<h2 class="Heading">V0.2.2 (22/06/2006)</h2>
+<h3>New features</h3>
+<ul>
+  <li>#146;	<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=146&group_id=32&atid=208">Contract support in Kermeta</a> Jean-Marie and Cyril have developped the first version of contracts
+for Kermeta. It currently uses only Kermeta surface syntax. It
+fully supports pre/post when calling operations, and provides
+checkInvariant methods on Object.
+However, the metamodel is ready to support OCL syntax in the
+future.
+The control on pre/post verification is very basic (on/off) and
+may be improved later</li>
+  <li>#520;	<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=520&group_id=32&atid=208">Multiple Consoles for different Kermeta App Instances</a> </li>
+<h3>Bug fixed</h3>
+<ul>
+	<li>#222; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=222&group_id=32&atid=205">console frozen after &quot;generate ecore&quot;.</a> Now there is one console per running program.</li>	
+	<li>#245; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=245&group_id=32&atid=205">aliases not correctly exported to ecore</a></li>	
+	<li>#486; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=486&group_id=32&atid=205">pb with kdoc annotations in generated ecore file</a></li>	
+	<li>#313; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=613&group_id=32&atid=205">kmt2ecore produces non-conform ecore files</a></li>	
+	<li>#619; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=619&group_id=32&atid=205">ecore2kmt doesn't take into account the isAbstract annotation on operations</a></li>	
+	<li>#775; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=775&group_id=32&atid=205">ecore2kmt and kmt2ecore: problems with redefined operations</a></li>	
+	<li>#808; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=808&group_id=32&atid=205">the "contains" method doesn't work on Class.superType collection</a></li>	
+	<li>#843; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=843&group_id=32&atid=205">Bug when loading a model that is an instance of the Ecore.ecore model</a></li>	
+	<li>#924; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=924&group_id=32&atid=205">kmt2ecore: problem with inheritance</a></li>	
+	<li>#952; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=952&group_id=32&atid=205">The editor tells me about a "INTERNAL ERROR : null" on the first line without any syntax mistake</a></li>	
+
+</ul>
+
+We have also improved the distribution packages. Now, if you want to install Kermeta, the update site provides Kermeta and all its dependent plugins (we have mirrored them).
+The installation is much simplier: Download Java5 and Eclipse, install Java, unzip eclipse, set up the update site and install everything from there...
+
+The graphical editor has also been separated so you may use kermeta even without all the plugins related to this (Topcased and all its dependecies).
+
 <h2 class="Heading">V0.2.1 (19/04/2006)</h2>
 <h3>Bug fixed</h3>
 <ul>
