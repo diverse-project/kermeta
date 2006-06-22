@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.14 2006-06-19 15:47:16 dvojtise Exp $
+/* $Id: KermetaRunTarget.java,v 1.15 2006-06-22 08:04:14 dvojtise Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: EPL
@@ -69,8 +69,9 @@ public class KermetaRunTarget extends AbstractKermetaTarget
 	 */
 	public void initConsole()
 	{
-		String shortname = startFile.contains("/")?startFile.substring(startFile.lastIndexOf("/")):startFile;
-	    String consolename = shortname + ": "+ className + "::" + opName;
+		String shortname = startFile.contains("/")?startFile.substring(startFile.lastIndexOf("/")+1):startFile;
+	    String consolename = shortname + " - "+ className + "::" + opName;
+	    if(this instanceof ConstraintRunTarget) consolename += " (pre/post activated)";
 	    console = new KermetaConsole(consolename, this);
 	}
 
