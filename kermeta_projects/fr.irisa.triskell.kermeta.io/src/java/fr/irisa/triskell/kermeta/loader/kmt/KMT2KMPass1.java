@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.4 2005-11-28 12:32:50 dvojtise Exp $
+/* $Id: KMT2KMPass1.java,v 1.5 2006-06-23 14:31:16 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : GPL
@@ -62,6 +62,18 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	public boolean beginVisit(UsingStmt usingStmt) {
 		builder.addUsing(qualifiedIDAsString(usingStmt.getName()));
 		return false;
+	}
+	
+	/**
+	 * @see fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor#beginVisit(fr.irisa.triskell.kermeta.ast.TopLevelDecls)
+	 */
+	public boolean beginVisit(TopLevelDecls decls)
+	{
+		if (decls.getChildCount()== 0)
+			builder.messages.addError(
+			"PASS 1 : Either 'using' declaration is misplaced (should be put after 'require'), " +
+			"or there is no element defined in your file.", null);
+		return super.beginVisit(decls);
 	}
 	
 }
