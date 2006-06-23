@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launchConfiguration type="KermetaLaunchConfiguration">
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_PROJECTNAME" value="fr.irisa.triskell.kermeta.samples.fsm.demo"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_CLASSQNAME" value="fsm::InvariantChecker"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_FILENAME" value="\fr.irisa.triskell.kermeta.samples.fsm.demo\launcher\checkInvariants.kmt"/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_ARGUMENTS" value=""/>
+<stringAttribute key="fr.irisa.triskell.kermeta.launching.KM_OPERATIONNAME" value="main"/>
+</launchConfiguration>
