@@ -3,8 +3,7 @@
 
 package fsm;
 
-require "../kermeta/fsmmodel.kmt"
-
+require "../kermeta/fsm.kmt"
 require kermeta
 
 using fsm

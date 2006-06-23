@@ -1,15 +1,13 @@
-@mainClass "fsm::Determinization"
-@mainOperation "main"
-    
-  
+
 package fsm;
+
+require kermeta
+require "../kermeta/fsm.kmt"
 
 using fsm
 using kermeta::standard
 using kermeta::persistence
 
-require kermeta
-require "../kermeta/fsm.kmt"
  
 class Determinization 
 { 
