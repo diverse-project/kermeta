@@ -4,8 +4,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -80,6 +78,7 @@ public class KermetaPlugin extends AbstractUIPlugin {
 		}
 		if(KermetaUnit.STD_LIB_URI == null)
 			KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
+		
 	}
 
 	/**
@@ -244,7 +243,10 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	
 	/**
 	 * Convenience method that finds the IFile element corresponding to the uri 
-	 * given by <code>filepath</code>
+	 * given by <code>filepath</code>. The filepath must refer to a file
+	 * that exists in the user workspace. Please use method 
+	 * IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile() if the 
+	 * given path does not refer to an existing file. 
 	 * @param filepath The file path, ideally represented 
 	 * as <code>platform:/resource/path_relative_to_the_current_workspace</code>
 	 * @return the corresponding IFile in the current workspace. 
