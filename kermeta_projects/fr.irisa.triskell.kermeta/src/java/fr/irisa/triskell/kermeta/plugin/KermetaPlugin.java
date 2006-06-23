@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -78,7 +80,6 @@ public class KermetaPlugin extends AbstractUIPlugin {
 		}
 		if(KermetaUnit.STD_LIB_URI == null)
 			KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
-		
 	}
 
 	/**
@@ -251,7 +252,10 @@ public class KermetaPlugin extends AbstractUIPlugin {
 	public static IFile getIFileFromString(String filepath)
 	{
 	    IFile selectedFile = null;
-	    IResource iresource = getWorkspaceRoot().findMember(filepath);
+	    String newpath = filepath;
+	    if (filepath!=null && filepath.startsWith("platform:/resource/"))
+    		newpath = filepath.toString().substring(19); 
+	    IResource iresource = getWorkspaceRoot().findMember(newpath);
 	    if (iresource instanceof IFile)
 	        selectedFile = (IFile) iresource;
 	    return selectedFile;
