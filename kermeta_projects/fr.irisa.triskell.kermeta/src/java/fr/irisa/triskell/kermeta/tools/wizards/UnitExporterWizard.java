@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.11 2006-04-19 15:24:25 dvojtise Exp $
+/* $Id: UnitExporterWizard.java,v 1.12 2006-06-23 09:12:39 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -20,7 +20,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-//import org.eclipse.emf.ecore.resource.URIConverter;
+// import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -41,181 +41,229 @@ import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
- * Pretty print of kmt files from a KermetaUnit.
- * It may be subclassed in order to add new pages or customize the messages.
+ * Pretty print of kmt files from a KermetaUnit. It may be subclassed in order
+ * to add new pages or customize the messages.
  */
-public class UnitExporterWizard extends Wizard{
-	
+public class UnitExporterWizard extends Wizard {
+
 	protected IStructuredSelection selection;
-    protected IWorkbench workbench;
-    
-    protected IFile inputFile;
-    protected IFile outputFile;
-    protected KermetaUnit unit;
+
+	protected IWorkbench workbench;
+
+	protected IFile inputFile;
+
+	protected IFile outputFile;
+
+	protected KermetaUnit unit;
+
 	protected ResourceSet trace_resource_set;
+
 	protected Resource trace_resource = null;
+
 	protected IFile traceFile;
+
 	protected Tracer tracer;
-    
-    public DestFileWizardPage outputPage;
-    public ActivableDestFileWizardPage tracePage;
-    public Kermeta2EcoreResolveWizardPage resolvePage;
-	
-    public String defaultOutputExtension = "xmi";
-    public String defaultTraceExtension = "traceability";
-    
-	 /**
-	 * <code>isInputKM</code> indicates weither the input unit is a km unit. 
-	 * Ie. it tells if the input references are directly loaded or 
-	 * parsed/transformed from another format. 
+
+	public DestFileWizardPage outputPage;
+
+	public ActivableDestFileWizardPage tracePage;
+
+	public Kermeta2EcoreResolveWizardPage resolvePage;
+
+	public String defaultOutputExtension = "xmi";
+
+	public String defaultTraceExtension = "traceability";
+
+	/**
+	 * <code>isInputKM</code> indicates weither the input unit is a km unit.
+	 * Ie. it tells if the input references are directly loaded or
+	 * parsed/transformed from another format.
 	 */
-	public boolean isInputKM =  false;
-	public boolean isOutputKM =  true;
-	
-     
-    // some constants
-    /** pagenames */
-    public static final String OUTPUTFILE_PAGENAME = "OutputFile";
-    public static final String TRACEFILE_PAGENAME = "TraceFile";
-    
+	public boolean isInputKM = false;
+
+	public boolean isOutputKM = true;
+
+	// some constants
+	/** pagenames */
+	public static final String OUTPUTFILE_PAGENAME = "OutputFile";
+
+	public static final String TRACEFILE_PAGENAME = "TraceFile";
+
 	/**
 	 * Constructor for Km2kmtWizard.
 	 */
-    public UnitExporterWizard()
-    {
+	public UnitExporterWizard() {
 		super();
 		setNeedsProgressMonitor(true);
-    }
-    
+	}
+
 	/**
 	 * Adding the pages to the wizard.
 	 */
 	public void addPages() {
-		
-		DestFileWizardPage newfilepage = new DestFileWizardPage(OUTPUTFILE_PAGENAME,selection);
+
+		DestFileWizardPage newfilepage = new DestFileWizardPage(
+				OUTPUTFILE_PAGENAME, selection);
 		newfilepage.setTitle("Export to XMI / Destination file selection");
-		newfilepage.setDescription("This wizard exports your file into a XMI file.\nPlease specify the output file name.");
+		newfilepage
+				.setDescription("This wizard exports your file into a XMI file.\nPlease specify the output file name.");
 		
 		// use the input file name with a xmi extension as default
-		IFile kmtfile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(inputFile.getFullPath().removeFileExtension().addFileExtension(defaultOutputExtension));		
-		newfilepage.setFileName(kmtfile.getName());
-		outputPage = newfilepage;
+		IFile kmtfile;
+		kmtfile = KermetaPlugin.getIFileFromString(inputFile.getFullPath()
+				.removeFileExtension().addFileExtension(defaultOutputExtension)
+				.toString());
 		
-		addPage(newfilepage);
-		
-		// add the page for the ecore generation philosophy -- only for Kermeta2Ecore wizard in fact!
-		if (this instanceof Kermeta2EcoreWizard)
-		{
-			resolvePage = new Kermeta2EcoreResolveWizardPage(OUTPUTFILE_PAGENAME, selection);
-			addPage(resolvePage);
+		if (kmtfile == null) {
+			kmtfile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot()
+					.getFile(
+							inputFile.getFullPath().removeFileExtension()
+									.addFileExtension(defaultOutputExtension));
 		}
 		
+		newfilepage.setFileName(kmtfile.getName());
+		outputPage = newfilepage;
+
+		addPage(newfilepage);
+
+		// add the page for the ecore generation philosophy -- only for
+		// Kermeta2Ecore wizard in fact!
+		if (this instanceof Kermeta2EcoreWizard) {
+			resolvePage = new Kermeta2EcoreResolveWizardPage(
+					OUTPUTFILE_PAGENAME, selection);
+			addPage(resolvePage);
+		}
+
 		tracePage = new ActivableDestFileWizardPage(TRACEFILE_PAGENAME,
-				selection,
-				"Save trace file ");
+				selection, "Save trace file ");
 		tracePage.setTitle("Trace file selection");
-		tracePage.setDescription("Trace file contain traceability informations generated by this transformation.");
-		
+		tracePage
+				.setDescription("Trace file contain traceability informations generated by this transformation.");
+
 		// use the input file name with a xmi extension as default
-		IFile tracefile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(inputFile.getFullPath().removeFileExtension().addFileExtension(defaultTraceExtension));		
+		IFile tracefile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot()
+				.getFile(
+						inputFile.getFullPath().removeFileExtension()
+								.addFileExtension(defaultTraceExtension));
 		tracePage.setFileName(tracefile.getName());
-		
+
 		addPage(tracePage);
 	}
-    
+
 	/**
 	 * output to the given file using default format: XMI
+	 * 
 	 * @param builder
 	 * @param ifile
 	 * @throws Exception
 	 */
-	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception  {	    
-		
-	    builder.saveAsXMIModel(ifile.getLocation().toOSString());
-        
-	    ifile.refreshLocal(1, null);
-    }
-	
-	public void writeTrace() throws Exception  {
-		if (!isInputKM && !isOutputKM)
-		{
-			// trace will be correctly saved only if the km is saved too
-			//			 traces must be optimized before being saved. This is because emf cannot save references to 
-			// non serialized object. here, kermeta FObject are not serialized when parsed form kmt files
-			//tracer.optimizeTraces();
+	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception {
 
-			IFile traceKmFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(traceFile.getFullPath().addFileExtension("km"));	
+		builder.saveAsXMIModel(ifile.getLocation().toOSString());
+
+		ifile.refreshLocal(1, null);
+	}
+
+	public void writeTrace() throws Exception {
+		if (!isInputKM && !isOutputKM) {
+			// trace will be correctly saved only if the km is saved too
+			// traces must be optimized before being saved. This is because emf
+			// cannot save references to
+			// non serialized object. here, kermeta FObject are not serialized
+			// when parsed form kmt files
+			// tracer.optimizeTraces();
+
+			IFile traceKmFile = IDEWorkbenchPlugin.getPluginWorkspace()
+					.getRoot().getFile(
+							traceFile.getFullPath().addFileExtension("km"));
 			unit.saveAsXMIModel(traceKmFile.getLocation().toOSString());
-	        
+
 			traceKmFile.refreshLocal(1, null);
 		}
-		//		 Save trace	
+		// Save trace
 		try {
 			trace_resource.save(null);
 		} catch (IOException e) {
-			KermetaUnit.internalLog.error("cannot save trace ressource, due to: " + e.getMessage(), e);
-			throw new Error("Cannot save ecore ressource (" + traceFile.getName() + "), due to: "+ e.getMessage(), e);
+			KermetaUnit.internalLog
+					.error("cannot save trace ressource, due to: "
+							+ e.getMessage(), e);
+			throw new Error("Cannot save ecore ressource ("
+					+ traceFile.getName() + "), due to: " + e.getMessage(), e);
 		}
 		traceFile.refreshLocal(1, null);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.jface.wizard.IWizard#performFinish()
 	 */
 	public boolean performFinish() {
 		KermetaPlugin.getDefault().newConsole();
-		KermetaPlugin.getDefault().getConsoleStream().println("Loading " + inputFile.getName()  );
-		
-		//DestFileWizardPage outputPage = (DestFileWizardPage)this.getPage(OUTPUTFILE_PAGENAME);
+		KermetaPlugin.getDefault().getConsoleStream().println(
+				"Loading " + inputFile.getName());
+
+		// DestFileWizardPage outputPage =
+		// (DestFileWizardPage)this.getPage(OUTPUTFILE_PAGENAME);
 		outputPage.getFileName();
-		
-		outputFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(outputPage.getContainerFullPath().append(outputPage.getFileName()));
-		traceFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(outputPage.getContainerFullPath().append(tracePage.getFileName()));
+
+		outputFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(
+				outputPage.getContainerFullPath().append(
+						outputPage.getFileName()));
+		traceFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(
+				outputPage.getContainerFullPath().append(
+						tracePage.getFileName()));
 		unit = createUnit();
-        unit.load();
-        
-        if (unit.messages.hasError()) {
-        	Shell theShell = this.getContainer().getShell();
-        	MessageDialog.openError(theShell,"Error loading file", "The source file contains errors: "+ unit.messages.getAllMessagesAsString());
-        	
-        	MessageConsoleStream mcs = KermetaPlugin.getDefault().getConsole().newMessageStream();
-        	mcs.setColor(new Color(null, 255,0,0));
-        	mcs.println(unit.messages.getAllMessagesAsString());
-        	
-        }
-		else
-		{
+		unit.load();
+
+		if (unit.messages.hasError()) {
+			Shell theShell = this.getContainer().getShell();
+			MessageDialog.openError(theShell, "Error loading file",
+					"The source file contains errors: "
+							+ unit.messages.getAllMessagesAsString());
+
+			MessageConsoleStream mcs = KermetaPlugin.getDefault().getConsole()
+					.newMessageStream();
+			mcs.setColor(new Color(null, 255, 0, 0));
+			mcs.println(unit.messages.getAllMessagesAsString());
+
+		} else {
 			try {
-				
-				outputFile = outputPage.createNewFile();				
-			    
+
+				outputFile = outputPage.createNewFile();
+
 				// display eventual warnings
-				if(unit.messages.getAllWarnings().size() > 0){
-					MessageConsoleStream mcs = KermetaPlugin.getDefault().getConsole().newMessageStream();
-		        	mcs.setColor(new Color(null, 255,170,0));
-		        	mcs.println(unit.messages.getAllMessagesAsString());        	
+				if (unit.messages.getAllWarnings().size() > 0) {
+					MessageConsoleStream mcs = KermetaPlugin.getDefault()
+							.getConsole().newMessageStream();
+					mcs.setColor(new Color(null, 255, 170, 0));
+					mcs.println(unit.messages.getAllMessagesAsString());
 				}
-				
-			    KermetaPlugin.getDefault().getConsoleStream().println("Writing " + outputFile.getName()  );
-				
-				writeUnit(unit, outputFile );
-				if(tracePage.enableFileDestinationButton.getSelection()){
-					if(tracePage.askIfFileExistRadio.getSelection() && traceFile.exists()){
+
+				KermetaPlugin.getDefault().getConsoleStream().println(
+						"Writing " + outputFile.getName());
+
+				writeUnit(unit, outputFile);
+				if (tracePage.enableFileDestinationButton.getSelection()) {
+					if (tracePage.askIfFileExistRadio.getSelection()
+							&& traceFile.exists()) {
 						Shell shell = new Shell();
-			            if (!MessageDialog.openQuestion(shell, "File already exists", "Do you want to overwrite exiting file: \n" + traceFile.getFullPath().toString()))
-			                return true;
-			        }
-				    else traceFile = tracePage.createNewFile();
+						if (!MessageDialog.openQuestion(shell,
+								"File already exists",
+								"Do you want to overwrite exiting file: \n"
+										+ traceFile.getFullPath().toString()))
+							return true;
+					} else
+						traceFile = tracePage.createNewFile();
 					writeTrace();
 				}
-			}
-			catch (Throwable e)
-			{
+			} catch (Throwable e) {
 				Shell theShell = this.getContainer().getShell();
-	        	MessageDialog.openError(theShell,"Error writing file", "errors: "+ e.getMessage());
-	        		        	
+				MessageDialog.openError(theShell, "Error writing file",
+						"errors: " + e.getMessage());
+
 				e.printStackTrace();
-				
+
 				KermetaPlugin.getDefault().consolePrintStackTrace(e);
 			}
 		}
@@ -225,52 +273,53 @@ public class UnitExporterWizard extends Wizard{
 
 	/**
 	 * Default Unit creation.
+	 * 
 	 * @return KermetaUnit
 	 */
 	public KermetaUnit createUnit() {
-		
-		String inputFile_uri = "platform:/resource" + inputFile.getFullPath().toString();
-        
-        KermetaUnitFactory.getDefaultLoader().unloadAll();
-        
-        unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(inputFile_uri);
-        if(tracePage.enableFileDestinationButton.getSelection()){        		
-	        if(!isInputKM)
-	        { // this is not an xmi load, we need to trace the loading process too       
-	        	initTraces();
-	        	unit.setTracer(tracer);
-	        } 
-        }
+
+		String inputFile_uri = "platform:/resource"
+				+ inputFile.getFullPath().toString();
+
+		KermetaUnitFactory.getDefaultLoader().unloadAll();
+
+		unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(
+				inputFile_uri);
+		if (tracePage.enableFileDestinationButton.getSelection()) {
+			if (!isInputKM) { // this is not an xmi load, we need to trace the
+				// loading process too
+				initTraces();
+				unit.setTracer(tracer);
+			}
+		}
 		return unit;
 	}
 
-	protected void initTraces()
-	{
-		//	 create Trace structure
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("traceability",new XMIResourceFactoryImpl());
+	protected void initTraces() {
+		// create Trace structure
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+				"traceability", new XMIResourceFactoryImpl());
 		trace_resource_set = new ResourceSetImpl();
 		URI u = URI.createURI(traceFile.getFullPath().toString());
-    	u = new URIConverterImpl().normalize(u);
-		//traceFile = IDEWorkbenchPlugin.getPluginWorkspace().getRoot().getFile(traceFile.getFullPath().removeFileExtension().addFileExtension("traceability"));				
+		u = new URIConverterImpl().normalize(u);
 		trace_resource = trace_resource_set.createResource(u);
 		tracer = new Tracer(trace_resource);
 	}
 
 	/**
-	 * We will accept the selection in the workbench to see if
-	 * we can initialize from it.
+	 * We will accept the selection in the workbench to see if we can initialize
+	 * from it.
+	 * 
 	 * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
 	 */
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		this.workbench = workbench;
-		if (selection instanceof StructuredSelection)
-		{
+		if (selection instanceof StructuredSelection) {
 			// the selection should be a single *.km file
 			Iterator it = selection.iterator();
-
-			while(it.hasNext()) {
-				inputFile = (IFile)it.next();
+			while (it.hasNext()) {
+				inputFile = (IFile) it.next();
 			}
 		}
 	}
