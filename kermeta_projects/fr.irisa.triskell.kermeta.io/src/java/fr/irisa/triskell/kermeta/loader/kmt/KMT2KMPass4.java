@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.13 2006-06-23 13:34:30 zdrey Exp $
+/* $Id: KMT2KMPass4.java,v 1.14 2006-06-23 13:46:57 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -94,26 +94,20 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		}
 		String base_msg = "PASS 4 : An operation named '" + builder.current_operation.getName() + "' is already inherited from class '";
 		String end_msg = " If you want redefinition, please use \"method\" keyword.";
-		// If not, is there already an operation in the common *implicit* super type object?
-		ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::reflection::Object"));
-		if (object_classdef != null) // robustness test -> kermeta::reflection::Object type should already have been parsed!
-		{
-			if (builder.findOperationByName(object_classdef, builder.current_operation.getName())!=null)
-			builder.messages.addMessage(new KMTUnitLoadError(
-					base_msg + "kermeta::reflection::Object'. (implicit inheritance!)" + end_msg,
-					operation));
-				return false;
-		}
-		if ((builder.findOperationByName(builder.current_class, builder.current_operation.getName())) != null)
-		{
-			builder.messages.addMessage(new KMTUnitLoadError(base_msg + builder.current_class.getName() + "'." + end_msg,
-					operation));
-			return false;
-		}	
 		// Is there already an operation in the super types of this class?
 		EList superclasses = builder.current_class.getSuperType();
 		if (operation.getOperationKind().getText().equals("operation")) {
-			 // the operation should not have been defined in any super class
+			// If not, is there already an operation in the common *implicit* super type object?
+			ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::reflection::Object"));
+			if (object_classdef != null) // robustness test -> kermeta::reflection::Object type should already have been parsed!
+			{
+				if (builder.findOperationByName(object_classdef, builder.current_operation.getName())!=null)
+				builder.messages.addMessage(new KMTUnitLoadError(
+						base_msg + "kermeta::reflection::Object'. (implicit inheritance!)" + end_msg,
+						operation));
+					return false;
+			}
+			// the operation should not have been defined in any super class
 			for (int i=0; i<superclasses.size(); i++) {
 				ClassDefinition sc = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)superclasses.get(i)).getTypeDefinition();
 				if (builder.findOperationByName(sc, builder.current_operation.getName()) != null) {
