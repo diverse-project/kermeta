@@ -1,4 +1,4 @@
-/* $Id: StructureKm2KmtAction.java,v 1.3 2006-06-14 15:11:48 cfaucher Exp $
+/* $Id: StructureKm2KmtAction.java,v 1.4 2006-06-23 08:13:50 cfaucher Exp $
  * Project    : fr.irisa.triskell.kermeta.graphicaleditor
  * File       : ValidateAction.java
  * License    : EPL
@@ -36,6 +36,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.tools.wizards.KmtPrinterWizard;
+import fr.irisa.triskell.kermeta.tools.wizards.UnitExporterWizard;
 
 /**
  * Action that validates the constraints using ConstraintChecker
@@ -124,9 +125,10 @@ public class StructureKm2KmtAction extends WorkbenchPartAction {
 		// Call the check constraint visitor on it!
 		KmtPrinterWizard km2kmtWizard = new KmtPrinterWizard();
 
-		IStructuredSelection currentSelection = createDummySelection(getModelURI()
-				.toString());
+		IStructuredSelection currentSelection = createDummySelection();
+		
 		km2kmtWizard.init(PlatformUI.getWorkbench(), currentSelection);
+		
 		WizardDialog wizDialog = new org.eclipse.jface.wizard.WizardDialog(
 				shell, km2kmtWizard);
 		wizDialog.setTitle("PrettyPrint this km file into kmt file");
@@ -140,15 +142,19 @@ public class StructureKm2KmtAction extends WorkbenchPartAction {
 	 * @param unit_uri
 	 * @return
 	 */
-	public IStructuredSelection createDummySelection(String unit_uri) {
+	public IStructuredSelection createDummySelection() {
 		IStructuredSelection selection = null;
 		// remove the platform:/resource chunk
+		int prefix_size = "platform:/resource".length();
+		System.err.println("ModelURI : " + getModelURI());
+/*		IFile file = KermetaPlugin.getIFileFromString(this.getModelURI()
+				.toString());*/
 		IFile file = KermetaPlugin.getIFileFromString(this.getModelURI()
-				.toString().substring(19));
+				.toString().substring(prefix_size));
 		System.err.println("file : " + file);
 		if (file != null)
 			selection = new StructuredSelection(file);
-
+		System.err.println("file : " + file + "; selection : " + selection);
 		return selection;
 	}
 
