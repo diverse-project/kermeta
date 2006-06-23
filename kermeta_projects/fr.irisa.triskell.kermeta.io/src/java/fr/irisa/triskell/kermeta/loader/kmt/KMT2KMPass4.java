@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.12 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: KMT2KMPass4.java,v 1.13 2006-06-23 13:34:30 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -19,6 +19,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -28,6 +29,7 @@ import fr.irisa.triskell.kermeta.ast.Property;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 //import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 //import fr.irisa.triskell.kermeta.language.structure.Operation;
 //import fr.irisa.triskell.kermeta.language.structure.Property;
 
@@ -85,24 +87,43 @@ public class KMT2KMPass4 extends KMT2KMPass {
 	public boolean beginVisit(Operation operation) {
 		builder.current_operation = (fr.irisa.triskell.kermeta.language.structure.Operation)builder.getModelElementByNode(operation);
 		if (builder.findPropertyByName(builder.current_class, builder.current_operation.getName()) != null) {
-			builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :A operation named '"+builder.current_operation.getName()+
-					"' is already inherited by class '"+builder.current_class.getName()+"'."+
-					" If you want redefinition, please use method keyword."
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : A property named '"+builder.current_operation.getName()+
+					"' is already inherited by class '"+builder.current_class.getName()+"'."
 					, operation));
 			return false;
 		}
-		
+		String base_msg = "PASS 4 : An operation named '" + builder.current_operation.getName() + "' is already inherited from class '";
+		String end_msg = " If you want redefinition, please use \"method\" keyword.";
+		// If not, is there already an operation in the common *implicit* super type object?
+		ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::reflection::Object"));
+		if (object_classdef != null) // robustness test -> kermeta::reflection::Object type should already have been parsed!
+		{
+			if (builder.findOperationByName(object_classdef, builder.current_operation.getName())!=null)
+			builder.messages.addMessage(new KMTUnitLoadError(
+					base_msg + "kermeta::reflection::Object'. (implicit inheritance!)" + end_msg,
+					operation));
+				return false;
+		}
+		if ((builder.findOperationByName(builder.current_class, builder.current_operation.getName())) != null)
+		{
+			builder.messages.addMessage(new KMTUnitLoadError(base_msg + builder.current_class.getName() + "'." + end_msg,
+					operation));
+			return false;
+		}	
+		// Is there already an operation in the super types of this class?
 		EList superclasses = builder.current_class.getSuperType();
-		
 		if (operation.getOperationKind().getText().equals("operation")) {
 			 // the operation should not have been defined in any super class
 			for (int i=0; i<superclasses.size(); i++) {
 				ClassDefinition sc = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)superclasses.get(i)).getTypeDefinition();
 				if (builder.findOperationByName(sc, builder.current_operation.getName()) != null) {
-					builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :An operation named '"+builder.current_operation.getName()+"' is already inherited from class '"+sc.getName()+"'.", operation));
+					builder.messages.addMessage(new KMTUnitLoadError(base_msg
+							+ sc.getName() + "'." + end_msg,
+							operation));
 					return false;
 				}
 			}
+
 		}
 		else if (operation.getOperationKind().getText().equals("method")) {
 			// the op should be defined in a superclass
