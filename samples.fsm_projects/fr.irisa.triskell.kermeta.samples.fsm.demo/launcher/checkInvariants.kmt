@@ -29,6 +29,9 @@ class InvariantChecker
         theFSM ?= resource.instances.one  
         
         // Uncomment to check the invariant properties : WFR
+        // To check all contained elements by "theFSM"
+        theFSM.checkAllInvariants
+        // To check only the states that are contained in "theFSM"
         Main.new.checkWFR(theFSM)
-    end
+	end
 }

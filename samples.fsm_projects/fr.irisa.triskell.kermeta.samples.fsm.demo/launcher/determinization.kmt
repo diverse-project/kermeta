@@ -1,3 +1,5 @@
+@mainClass "fsm::Determinization"
+@mainOperation "main"
 
 package fsm;
 

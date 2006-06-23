@@ -88,17 +88,18 @@ class Main
 	 * For all states, we check the WFR
 	 */
 	operation checkWFR(theFSM : FSM) is do
-		stdio.writeln("Check WFR : ")
+		stdio.writeln("Check WFR : start")
 		theFSM.ownedState.each{ s | 
 			do
 				// Call the invariant verification
-				stdio.writeln(" - " + s.checkInvariants)
+				s.checkInvariants
 				rescue (err : ConstraintViolatedInv)
 		            stdio.writeln(err.toString)
 		            stdio.write(err.message)
 		            stdio.writeln(" on " + s.name)
 		    end
 		}
+		stdio.writeln("Check WFR : end")
 	end
 	
 	

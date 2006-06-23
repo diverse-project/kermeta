@@ -110,7 +110,7 @@ class Helper
 		
 		// Uncomment to check the invariant properties	
 		//do
-		//	stdio.writeln(s1.checkInvariants.toString)
+		//	s1.checkInvariants
 		//	rescue (err : ConstraintViolatedInv)
 	    //        stdio.writeln(err.toString)
 	    //        stdio.writeln(err.message)
