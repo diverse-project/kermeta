@@ -43,10 +43,10 @@ class MyTestCase inherits kermeta::kunit::TestCase
     operation testCompareTo() : Void is do
     	var comp : kermeta::standard::Integer
     	comp := cString.compareTo("String")
-    	assert(comp != 0)
+    	assertTrueWithMsg(comp !=0,"cString is not equal to \"String\"")
     	comp := cString.compareTo("Strongl")
     	stdio.writeln("testCompareTo : " + comp.toString)
-    	assert(comp !=0)
+    	assertTrueWithMsg(comp !=0,"cString is not equal to \"Strong1\"")
     end
 
   
@@ -72,7 +72,7 @@ class MyTestCase inherits kermeta::kunit::TestCase
 	 * occurrence of the specified substring
 	 */
 	operation testindexOf() : Void is do
-		assert("bonjour".indexOf("jou")==3)
+		assertTrueWithMsg("bonjour".indexOf("jou")==3,"the string jou is not at index 3 of bonjour")
 	end
 	
 	
