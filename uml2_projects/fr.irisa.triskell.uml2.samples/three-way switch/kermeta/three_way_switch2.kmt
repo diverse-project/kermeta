@@ -1,4 +1,4 @@
-/* $Id: three_way_switch.kmt,v 1.6 2006-06-26 16:15:46 vmahe Exp $
+/* $Id: three_way_switch2.kmt,v 1.1 2006-06-26 16:15:46 vmahe Exp $
  * Creation date: May 19, 2006
  * License:
  * Copyright:
@@ -96,6 +96,10 @@ class Inhabitant_impl inherits Inhabitant, ActiveStateMachine {
 		result := isEnlighted
 	end
 	method set_isEnlighted(new_isEnlighted : Boolean) is do
+	
+//		stdio.writeln("DEBUG Inhab_impl.set_isEnl : self = "+self.toString+ "\n - type = "+self.getMetaClass.toString+"\n - new_isEnl = "+new_isEnlighted.toString)
+//		if new_isEnlighted.isVoid then raise "DEBUG - new_isEnlighted is void !!" end
+	
 		isEnlighted := new_isEnlighted
 	end
 	method get_switch(order : Integer) : Switch is do
@@ -251,9 +255,9 @@ class Inhabitant_in_idle inherits Inhabitant_top_state {
 		end
 		end
 	end
-	method set_isEnlighted(new_isEnlighted : Boolean) is do
-		isEnlighted := new_isEnlighted
-	end
+//	method set_isEnlighted(new_isEnlighted : Boolean) is do
+//		isEnlighted := new_isEnlighted
+//	end
 }
 
 class Light_proxy inherits Light, Proxy {
@@ -577,8 +581,6 @@ class Inhabitant_set_isEnlighted_call_event inherits Event {
 		target_as_Inhabitant ?= target
 		var arg0 : Boolean
 		arg0 ?= arguments.elementAt(0)
-		///////////////////////////////////////////////////////////////////////////
-		// FIXME : the instance (aMan) must be change in place of current state
 		target_as_Inhabitant.set_isEnlighted(arg0)
 	end
 	method event_name() : String is do
@@ -626,29 +628,38 @@ class ThreeWaySwitch inherits CADPSimulator {
 	end
 	// features specific to ThreeWaySwitch
 	// -- class instances
-	reference aMan : Inhabitant_impl
+	reference aMan1 : Inhabitant_impl
+	reference aMan2 : Inhabitant_impl
 	reference first : Switch_impl
 	reference second : Switch_impl
 	reference aBulb : Light_impl
 	// -- association instances
-	reference aMan_first_proxy : Switch_proxy
-	reference aMan_second_proxy : Switch_proxy
+	reference aMan1_first_proxy : Switch_proxy
+	reference aMan1_second_proxy : Switch_proxy
+	reference aMan2_first_proxy : Switch_proxy
+	reference aMan2_second_proxy : Switch_proxy
 	reference first_aBulb_proxy : Light_proxy
 	reference second_aBulb_proxy : Light_proxy
-	reference aBulb_aMan_proxy : Inhabitant_proxy
+	reference aBulb_aMan1_proxy : Inhabitant_proxy
+	reference aBulb_aMan2_proxy : Inhabitant_proxy
+	
 	method initial_configuration() : Configuration is do
 		// -- register the instances
 		var configuration : Configuration init Configuration.new
 		configuration.make
 		
 		// create implemens
-		aMan := Inhabitant_impl.new
-		configuration.register(aMan)
-		// register is needed for give context to the instance
-		// before make() uses 'context' within "enter()" call.
-		aMan.make
-		aMan.init_activable("aMan")
-		aMan.inhabitant_in_idle.context := configuration
+		aMan1 := Inhabitant_impl.new
+		configuration.register(aMan1)
+		aMan1.make
+		aMan1.init_activable("aMan1")
+		aMan1.inhabitant_in_idle.context := configuration
+		
+		aMan2 := Inhabitant_impl.new
+		configuration.register(aMan2)
+		aMan2.make
+		aMan2.init_activable("aMan2")
+		aMan2.inhabitant_in_idle.context := configuration
 		
 		first := Switch_impl.new
 		configuration.register(first)
@@ -672,18 +683,27 @@ class ThreeWaySwitch inherits CADPSimulator {
 		aBulb.light_in_Off.context := configuration
 		
 		// create proxies
-		aMan_first_proxy := Switch_proxy.new
-		aMan_second_proxy := Switch_proxy.new
+		aMan1_first_proxy := Switch_proxy.new
+		aMan1_second_proxy := Switch_proxy.new
+		aMan2_first_proxy := Switch_proxy.new
+		aMan2_second_proxy := Switch_proxy.new
 		first_aBulb_proxy := Light_proxy.new
 		second_aBulb_proxy := Light_proxy.new
-		aBulb_aMan_proxy := Inhabitant_proxy.new
+		aBulb_aMan1_proxy := Inhabitant_proxy.new
+		aBulb_aMan2_proxy := Inhabitant_proxy.new
 		
 		// set links
-		aMan.add_switch(aMan_first_proxy)
-		set_proxy_on(aMan_first_proxy, first, false)
+		aMan1.add_switch(aMan1_first_proxy)
+		set_proxy_on(aMan1_first_proxy, first, false)
 		
-		aMan.add_switch(aMan_second_proxy)
-		set_proxy_on(aMan_second_proxy, second, false)
+		aMan1.add_switch(aMan1_second_proxy)
+		set_proxy_on(aMan1_second_proxy, second, false)
+		
+		aMan2.add_switch(aMan2_first_proxy)
+		set_proxy_on(aMan2_first_proxy, first, false)
+		
+		aMan2.add_switch(aMan2_second_proxy)
+		set_proxy_on(aMan2_second_proxy, second, false)
 		
 		first.set_light(first_aBulb_proxy)
 		set_proxy_on(first_aBulb_proxy, aBulb, false)
@@ -691,11 +711,16 @@ class ThreeWaySwitch inherits CADPSimulator {
 		second.set_light(second_aBulb_proxy)
 		set_proxy_on(second_aBulb_proxy, aBulb, false)
 		
-		aBulb.add_inhabitant(aBulb_aMan_proxy)
-		set_proxy_on(aBulb_aMan_proxy, aMan, false)
+		aBulb.add_inhabitant(aBulb_aMan1_proxy)
+		set_proxy_on(aBulb_aMan1_proxy, aMan1, false)
+		
+		aBulb.add_inhabitant(aBulb_aMan2_proxy)
+		set_proxy_on(aBulb_aMan2_proxy, aMan2, false)
 		
 		// -- set attributes
-		aMan.set_isEnlighted(false)
+		aMan1.set_isEnlighted(false)
+		
+		aMan2.set_isEnlighted(false)
 		
 		result := configuration
 	end
