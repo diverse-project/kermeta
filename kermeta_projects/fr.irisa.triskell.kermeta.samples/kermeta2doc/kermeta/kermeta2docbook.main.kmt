@@ -6,7 +6,7 @@ package kermeta2docbook;
 
 
 require kermeta
-require "./kermeta.ecore"
+require "platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore"
 require "./kermeta2docbook.kmt"
 using kermeta::language::structure
 using kermeta::language::behavior
@@ -20,10 +20,10 @@ class Main
         
         var transfo : Kermeta2DocbookVisitor init Kermeta2DocbookVisitor.new
 
-      //  transfo.initialize()
+		transfo.initialize()
         
         stdio.write("Begin\n")
-       // inputModel.each{ p | transfo.accept(p,0) }
+       	inputModel.each{ p | stdio.writeln(transfo.accept(p,0)) }
         stdio.write("\nEnd\n")        
         
       /*  var tranfo : Class2RDBMS init Class2RDBMS.new
@@ -42,9 +42,12 @@ class Main
     
     operation loadClassModel() : Set<Package> is do             
    		var repository : EMFRepository init EMFRepository.new             
-   		var resource : Resource init repository.getResource("../../kmlogo/kermeta/kmLogo.km")
-       	resource.load()      
+   		var resource : Resource init repository.createResource("../../kmlogo/kermeta/kmLogo.km","platform:/plugin/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
        
+       stdio.writeln("Loading resource...")
+       resource.load()      
+       stdio.writeln("Resource loaded...")
+       result := Set<Package>.new
        from var it : Iterator<Object> init resource.instances.iterator
        until it.isOff
        loop

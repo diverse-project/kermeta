@@ -1,6 +1,6 @@
 //@mainClass "kermeta::utils::PrettyPrinter"
 //@mainmethod "visit"
-/* $Id: kermeta2docbook.kmt,v 1.1 2005-09-15 13:26:15 dvojtise Exp $
+/* $Id: kermeta2docbook.kmt,v 1.2 2006-06-26 14:58:20 dvojtise Exp $
  * Project : Kermeta samples
  * File : kermeta2docbook.kmt
  * License : EPL
@@ -53,7 +53,7 @@ class Kermeta2DocbookVisitor inherits
     /** visit a class and transcript it in the Kermeta Text format */
     method visitClass(node : Class, context : Integer) : String is do
     	// TODO : do not print qualified name if class belongs to current package
-    	result := node.classDefinition.qualifiedName
+    	result := node.typeDefinition.qualifiedName
 		if (node.typeParamBinding.size > 0) then
 			result.append("<" + self.visitTypeVariableBindingSet(node.typeParamBinding, context) + ">")
 		end
@@ -150,7 +150,7 @@ class Kermeta2DocbookVisitor inherits
 		if (node.isDerived) then
 			pushIndent()
 			result.append("\n" + indent + "getter is " )
-			if (node.getterbody != void) then
+			if (node.getterBody != void) then
 				//result.append(node.getterbody.acceptKMExpressionVisitor(self, node.getterbody))
 			else
 				result.append("do\n")
@@ -162,7 +162,7 @@ class Kermeta2DocbookVisitor inherits
 			
 			if (not node.isReadOnly) then
 				result.append("\n" + indent + "setter is ")
-				if (node.getterbody != void) then 
+				if (node.getterBody != void) then 
 					//result.append(node.getterbody.acceptKMExpressionVisitor(self, node.getterbody))
 				else 
 					result.append("do\n")
@@ -198,13 +198,16 @@ class Kermeta2DocbookVisitor inherits
 		
 		if (node.superType.size > 0) then
 			result.append(" inherits ")
-			result.append(self.visitSet(node.superType, context, ", "))
+			var tset : Set<kermeta::reflection::Type> init Set<kermeta::reflection::Type>.new
+			//tset.addAll(node.superType) // typesystem need to be fixed to allow this. This implies introducing the union type : "Any x"
+			node.superType.each{e | tset.add(e)}
+			result.append(self.visitSet(tset, context, ", "))
 		end
 		
 		// print the attributes
 		result.append("\n"+self.indent+"{\n")
 		self.pushIndent()
-		result.append(self.visitFeatures(node.ownedAttributes, context))
+		result.append(self.visitFeatures(node.ownedAttribute, context))
 		
 		// print the operations
 		result.append(self.visitFeatures(node.ownedOperation, context))
@@ -254,7 +257,7 @@ class Kermeta2DocbookVisitor inherits
 			result := "alias " + node.name + " : " + self.accept(node.instanceType, context) + ";"
 			typedef := true
 		else 
-			result := node.getMetaClass.classDefinition.qualifiedName
+			result := node.getMetaClass.typeDefinition.qualifiedName
 		end
 	end
 	
@@ -262,9 +265,6 @@ class Kermeta2DocbookVisitor inherits
 		result := "[named element]"
 	end
 	
-	method visitSelfType(node : SelfType, context : Integer) : String is do
-		result := "self"
-	end
 	
 	method visitPackage(node : Package, context : Integer) : String is do
 		result := "package " + node.qualifiedName // TODO : the ppIdentifier of the Java KM2KMTPrettyPrinter
@@ -288,6 +288,17 @@ class Kermeta2DocbookVisitor inherits
 	
 	method visitTypeDefinition(node : TypeDefinition, context : Integer) : String is do
 		result := node.name
+	end
+	
+	method visitGenericTypeDefinition( node : GenericTypeDefinition, context : Integer) : String is do
+		result := node.name
+		if node.typeParameter.size > 0 then
+			result := result + "<"
+			var separator : String init ""
+			node.typeParameter.each{ tp | result := result + separator + tp.name 
+				separator := ", " }
+			result := result + ">"
+		end
 	end
 	
 	method visitVoidType(node : VoidType, context : Integer) : String is do
@@ -331,7 +342,7 @@ class Kermeta2DocbookVisitor inherits
      * Helper
     */
     operation getQualifiedName(node : Object) : String is do
-    	result := node.getMetaClass.classDefinition.qualifiedName
+    	result := node.getMetaClass.typeDefinition.qualifiedName
     end
     
     /*
@@ -361,7 +372,7 @@ class Kermeta2DocbookVisitor inherits
 		result.append("\n" + indent + "end\n")
      end
     
-	method visitAssignement(node : Assignement, context : Integer) : String is do
+	method visitAssignment(node : Assignment, context : Integer) : String is do
 		var left : String init self.accept(node.target, context).toString
 		var right : String init self.accept(node.~value, context).toString
 		var op : String
@@ -410,7 +421,7 @@ class Kermeta2DocbookVisitor inherits
 		end
 	end
 
-	method visitConditionnal(node : Conditionnal, context : Integer) : String is do 
+	method visitConditional(node : Conditional, context : Integer) : String is do 
 		result := ""
 		result.append("if " + self.accept(node.condition, context) + " then\n")
 		pushIndent()
@@ -454,7 +465,7 @@ class Kermeta2DocbookVisitor inherits
 	
 	method visitLoop(node : Loop, context : Integer) : String is do
 		result := "from "
-		result.append( self.accept(node.initiatization, context) + "\n")
+		result.append( self.accept(node.initialization, context) + "\n")
 		result.append( indent + "until " + self.accept(node.stopCondition, context) + "\n")
 		result.append( indent +"loop\n") 
 		pushIndent()
@@ -678,8 +689,8 @@ class Kermeta2DocbookVisitor inherits
 		var snode : KMStructureVisitable init void
 		var enode : KMExpressionVisitable init void
 		
-		var node_qname : String init node.getMetaClass.classDefinition.qualifiedName
-		var node_name : String init node.getMetaClass.classDefinition.name
+		var node_qname : String init node.getMetaClass.typeDefinition.qualifiedName
+		var node_name : String init node.getMetaClass.typeDefinition.name
 		var diff_size : Integer init node_qname.size-node_name.size
 		//stdio.writeln(node_name+"->"+node_qname)
 		// FIXME : ok until isInstance "works"
