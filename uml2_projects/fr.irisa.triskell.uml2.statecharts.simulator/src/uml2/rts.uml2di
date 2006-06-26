@@ -1069,7 +1069,7 @@
       <waypoints>[551, 98, -134, 224]</waypoints>
       <waypoints>[672, -105, -13, 21]</waypoints>
     </contained>
-    <contained xsi:type="di:GraphNode" position="352,744" size="279,59">
+    <contained xsi:type="di:GraphNode" position="356,754" size="279,59">
       <anchorage graphEdge="//@diagrams.0/@contained.46"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="rts.uml2#_RSMOMOmiEdqheopTo6kF6Q"/>

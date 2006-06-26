@@ -1,6 +1,7 @@
 package rts;
 
 require kermeta
+require "simulator.kmt"
 
 using kermeta::standard
 
@@ -47,9 +48,11 @@ abstract class Activable
     reference identity : rts::Identity
     operation nb_transitions() : kermeta::standard::Integer is abstract
     operation labels(n : kermeta::standard::Integer) : kermeta::standard::String is abstract
+    operation completion(n : kermeta::standard::Integer) is abstract
     operation action(n : kermeta::standard::Integer) is abstract
     operation guards(n : kermeta::standard::Integer) : kermeta::standard::Boolean is abstract
     operation init_activable(name : kermeta::standard::String) is do
+    	identity := rts::Identity.new
         if name != void and name != "" then
         	identity.set_out(name)
         end
@@ -63,25 +66,37 @@ abstract class Reactive
 
 abstract class StateMachine inherits rts::Reactive
 {
-    operation entry() is do
-        //Empty in Eiffel code
-    end
-    operation exit() is do
-        //Empty in Eiffel code
-    end
+	// needed for state change
+	reference instanceCurrentState : rts::StateMachine
+	reference context : rts::Configuration
+	reference machine : StateMachine
+	
+    operation entry() is abstract
+    operation exit() is abstract
     operation enter(new_state : rts::StateMachine) is do
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // FIXME : in Eiffel code, a hack replaces current state
-        // with the new_state, using the same object ID
+        // tells the simulator about the next state
+        
+        // as the transitions manipulate objects through proxies
+        // which point directly onto instances, we need to give
+        // the new state the values of all attributes of the
+        // corresponding instance (which is the current object).
+        var currentState : ActiveStateMachine
+        if machine != void then
+        	// we are in a state were the corresponding instance has been referenced
+	        context.swap(machine.instanceCurrentState, new_state)
+ 	    	machine.instanceCurrentState := new_state
+ 	    	new_state.instanceCurrentState := new_state
+	    end
+
+        // we then execute the entering code
         new_state.entry
     end
     operation leave(old_state : rts::StateMachine) is do
-        //same hack than enter() method
-        old_state.exit
+        // we just execute the exiting code
+        if not old_state.isVoid then old_state.exit end
     end
     operation oclInState(other : rts::StateMachine) : Boolean is do
-    	// FIXME : no conforms_to() method in StateMachine !!!
-//        result := self.conforms_to(other)
+        result := self.getMetaClass.isInstance(other)
     end
 }
 
@@ -111,12 +126,6 @@ class Timer inherits rts::TimeManagerAccessor
     operation is_ringing() : kermeta::standard::Boolean is do
         result := current_date >= deadline
     end
-    // Kermeta does not have infix operations !!!!
-//    operation infix "<"(other : rts::Timer) : kermeta::standard::Boolean is do
-//        if other != void then
-//        	result := deadline < other.deadline
-//        end
-//    end
     operation is_equal(other : rts::Timer) : kermeta::standard::Boolean is do
         if other != void then
         	result := deadline == other.deadline
@@ -141,13 +150,7 @@ class Timer inherits rts::TimeManagerAccessor
 
 class Identity
 {
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	// FIXME : Eiffel code uses a static structure for identities storage
-	//         but Kermeta has no static capability
     reference out : kermeta::standard::String
-    operation default_create() is do
-        //TODO: implement operation default_create
-    end
     operation set_out(new_out : kermeta::standard::String) is do
         out := new_out
     end
@@ -164,42 +167,45 @@ abstract class Event
     reference arguments : Linked_queue<Object>
     operation event_name() : kermeta::standard::String is abstract
     operation make() is do
-        //Empty. Nothing to do
+        arguments := Linked_queue<Object>.new
     end
     operation send_to(target : Object) is do
+    	// the reactive object we must send to the event is the current state
+    	var machine : StateMachine
+    	machine ?= target
         var reactive : Reactive
-        reactive ?= target
+        reactive := machine.instanceCurrentState
         if reactive != void then
         	reactive.receive(self)
         end
     end
     operation dispatch_to(target : Object) is abstract
     operation label() : kermeta::standard::String is do
-        result := event_name + label_for_arguments
+        result := event_name
+        result.append(label_for_arguments)
     end
     operation label_for_arguments() : kermeta::standard::String is do
         var arg : Integer
         var act : Activable
         var res : String init ""
         if arguments != void then
-        	if arguments.size > 0 then
-        		res.append("(")
-        		from arg := 0
-        		until arg == arguments.size
-        		loop
-        			act ?= arguments.elementAt(arg)
-        			if act != void then
-        				res.append(act.identity.out)
-        			else
-        				// the argument type is not Activable known type so
-        				// we must use Kermeta Object toString() method
-        				res.append(arguments.elementAt(arg).toString)
-        			end
-        			res.append(",")
-        			arg := arg + 1
-        		end
-        	end
+    		res.append("(")
+    		from arg := 0
+    		until arg == arguments.size
+    		loop
+    			if arg > 0 then res.append(", ") end
+    			act ?= arguments.elementAt(arg)
+    			if act != void then
+    				res.append(act.identity.out)
+    			else
+    				// the argument type is not Activable known type so
+    				// we must use Kermeta Object toString() method
+    				res.append(arguments.elementAt(arg).toString)
+    			end
+    			arg := arg + 1
+    		end
         end
+        result := res
     end
     operation out() : kermeta::standard::String is do
         result := label
@@ -214,16 +220,20 @@ class TimeEvent inherits rts::Event
 abstract class ActiveStateMachine inherits rts::Activable, rts::StateMachine
 {
     reference message_queue : Linked_queue<rts::Event>
-//    reference message_queue : rts::Linked_queue<rts::Event>
     reference events_from_action : String
     method init_activable(name : kermeta::standard::String) from rts::Activable is do
+    	message_queue := Linked_queue<rts::Event>.new
         super(name)
     end
     method receive(e : rts::Event) from rts::Reactive is do
         if message_queue.size >= message_queue_capacity then
-           raise "QUEUE_FULL"
+           var s : String init "QUEUE_FULL"
+           s.append(" (former "+message_queue.size.toString +" messages for a capacity of "+message_queue_capacity.toString+")")
+           raise s
         else
            message_queue.add(e)
+           //// FIXME : attempt to rise the action (nothing like that in UMLAUT)
+           dispatch
         end
     end
     operation dispatch() is do
@@ -233,18 +243,24 @@ abstract class ActiveStateMachine inherits rts::Activable, rts::StateMachine
         current_event.dispatch_to(self)
     end
     method nb_transitions() : kermeta::standard::Integer from rts::Activable is do
+    	result := 0
         if not message_queue.empty then
         	result := 1
         end
     end
     method labels(n : kermeta::standard::Integer) : kermeta::standard::String from rts::Activable is do
-        result := "?" + message_queue.one.label
+        result := "?"
+        if message_queue.size == 1 then
+        	result.append(message_queue.one.label)
+        else
+        	result.append("  ERROR in ActiveStateMachine.labels() - no message in the message_queue !!")
+        end
     end
     method guards(n : kermeta::standard::Integer) : kermeta::standard::Boolean from rts::Activable is do
         result := true
     end
     method action(n : kermeta::standard::Integer) from rts::Activable is do
-        // actions associated with fireable transistions
+        // actions associated with fireable transitions
         var nb_completion : Integer
         var is_discarded : Boolean
 //        if not is_discarded then
@@ -259,7 +275,7 @@ abstract class ActiveStateMachine inherits rts::Activable, rts::StateMachine
         	end
 //        end
     end
-    operation completion(n : kermeta::standard::Integer) from rts::StateMachine is do
+    method completion(n : kermeta::standard::Integer) from rts::Activable is do
         // actions associated with spontaneus transitions
         // Empty (would be rewrited in state instances)
     end
@@ -279,7 +295,7 @@ abstract class PassiveStateMachine inherits rts::StateMachine
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-// FIXME : this class is a singleton => how code it in Kermeta
+// FIXME : this class is a singleton => how code it in Kermeta, without static methods
 class TimeManagerAccessor
 {
 	reference timeManager : rts::TimeManager
@@ -288,86 +304,285 @@ class TimeManagerAccessor
 //        	timeManager := TimeManager.new
 //        	timeManager.make
 //        end
+//        result := timeManager
     end
 }
 
-abstract class CADPSimulator inherits rts::TimeManagerAccessor
+abstract class CADPSimulator inherits rts::TimeManagerAccessor, simulator::core::Simulator
 {
     reference current_configuration : rts::Configuration
-    reference exported_configurations : set rts::Configuration[0..*]
-    reference exported_labels : kermeta::utils::Hashtable<String, String>
-    reference nb_exported_configurations_since_last_gc : kermeta::standard::Integer
+    reference tuples_table : oset TransitionTuple[1..*]
     operation make_CADP_simulator() is do
-        nb_exported_configurations_since_last_gc := 0
+        // nothing to do
     end
     operation initial_configuration() : rts::Configuration is abstract
+    
     /////////////////////////////////////////////////////////////////////////////////////////////
     //TODO : implement SIMULATOR
-}
-
-class Configuration
-{
-    reference process_table : Linked_queue<rts::Activable>
-    operation out() : kermeta::standard::String is do
-        var i : Integer
-        var l : Integer
-        var a : ActiveStateMachine
-        result := "There are " + process_table.size.toString
-        result.append(" activable objects :\n")
-        from i := 0
-        until i >= process_table.size
-        loop
-        	result.append(i.toString + " -> ")
-        	result.append(process_table.elementAt(i).getMetaClass.name + "\n")
-        	a ?= process_table.elementAt(i)
-        	if a != void then
-    			result.append(a.message_queue.out)
+    method setInitialConfiguration(configuration : simulator::core::Configuration) is do
+    	current_configuration ?= configuration
+    	// we need to force a complete copy of attributes from implementations
+    	// to their beginning state to fully all the current states
+    	current_configuration.process_table.each{ r | 
+    		var impl : ActiveStateMachine
+    		impl ?= r
+    		current_configuration.swap(impl, impl.instanceCurrentState)
+    	}
+    end
+    
+    //////////////////////////////////////////////////////////////////////
+    //FIXME : remove the run() method from here and use the simulator generic one
+    method run() is do	// a first really simple one
+    	stdio.writeln("\n .... Running the simulator ....\n")
+    	var quit : Boolean init false
+    	from 0
+    	until quit
+    	loop
+    		stdio.writeln(current_configuration.getStatus)
+    		tuples_table.clear
+    		// get & display fireable transitions
+    		var iter : Integer init 0
+    		stdio.writeln("Fireable transitions :")
+    		current_configuration.process_table.each{ p |
+    			// we need to get the current state of each instance
+    			var active : ActiveStateMachine
+    			active ?= p
+    			var state : ActiveStateMachine
+    			state ?= active.instanceCurrentState
+    			var n : Integer init state.nb_transitions
+    			from var j : Integer init 0
+    			until j == n
+    			loop
+    				var t : TransitionTuple init TransitionTuple.new
+    				t.num := j
+    				t.activable := state
+    				stdio.writeln("   -- " + iter.toString + " -- "+ active.identity.out + " -> " + state.labels(j))
+    				tuples_table.add(t)
+     				iter := iter + 1
+     				j := j + 1
+    			end
+    		}
+    		// getting the user's choice
+    		var nTrans : Integer
+    		nTrans := string2Integer(stdio.read("  --> give the choosen transition number ( 'q' for quit) : "))
+    		if nTrans >=0 then
+	    		// firing the choosen transition
+	    		if nTrans < tuples_table.size then
+	    			stdio.writeln("\n   You choose the '" + nTrans.toString + "' transition")
+	    			tuples_table.elementAt(nTrans).activable.completion(tuples_table.elementAt(nTrans).num)
+	    		else
+	    			stdio.writeln("   There is only " + tuples_table.size.toString + " transitions")
+	    		end
+    		else
+    			stdio.writeln("\nExiting the simulator")
+    			quit := true
     		end
-    		i := i + 1
     	end
     end
-    operation hash() : kermeta::standard::Integer is do
-        var i : Integer
-        var l : Integer
-        var e : Integer
-        var m : Event
-        var res : Integer init 0
-        var a : ActiveStateMachine
-        from i := 0
-        until i >= process_table.size
-        loop
-        	a ?= process_table.elementAt(i)
-        	if a != void then
-        		l := a.message_queue.size + 1
-        		if l > 1 then
-        			m := a.message_queue.one
-        			e := m.oid
-        		else
-        			e := 1
-        		end
-       		else
-       			l := 1
-       			e := 1
-        	end
-        	res := res + i * l * e * a.oid
-        end
+    
+    /** Ugly hack to be able to get the order of choosen transition */
+    operation string2Integer(n : String) : Integer is do
+    	var nSize : Integer init n.size
+    	var res : Integer init 0
+    	from var i : Integer init 0
+    	until i == nSize
+    	loop
+    		var x : Integer
+    		var c : String
+    		c := n.elementAt(i).toString
+    		if c == "0" then x := 0 end
+    		if c == "1" then x := 1 end
+    		if c == "2" then x := 2 end
+    		if c == "3" then x := 3 end
+    		if c == "4" then x := 4 end
+    		if c == "5" then x := 5 end
+    		if c == "6" then x := 6 end
+    		if c == "7" then x := 7 end
+    		if c == "8" then x := 8 end
+    		if c == "9" then x := 9 end
+    		if c == "q" or c == "Q" then x := -10000 end
+    		if x.isVoid then x := 0 end
+    		from var j : Integer init nSize - i - 1
+    		until j == 0
+    		loop
+    			x := x * 10
+    			j := j - 1
+    		end
+    		res := res + x
+    		i := i + 1
+    	end
+    	result := res
     end
+}
+/** this class is needed for storage and firing of transitions inside CADPSimulator */
+class TransitionTuple
+{
+	reference activable : Activable
+	reference num : Integer
+}
+
+class Configuration inherits simulator::core::Configuration
+{
+    reference process_table : Linked_queue<rts::Activable>
     operation make() is do
-        // Empty (should initialize process_table, but not need for that in Kermeta)
+    	process_table := Linked_queue<rts::Activable>.new
     end
     operation register(new_process : rts::Activable) is do
-        process_table.addAt(process_table.size, new_process)
+    	// implements the SIMULATOR references
+        process_table.add(new_process)
+        // need to force the type to StateMachine for managing copy in enter() method
+        var sm : ActiveStateMachine
+        sm ?= new_process
+        sm.context := self
     end
+    operation superSwap(modelPack : kermeta::language::structure::Package,
+    					sClass : kermeta::reflection::Class,
+    					origin : rts::StateMachine,
+    					dest : rts::StateMachine) is do
+    	var pack : kermeta::language::structure::Package
+    	pack ?= sClass.typeDefinition.container
+    	if pack == modelPack then
+			sClass.ownedAttribute.each{ p |
+				getSet(origin, dest, p)
+			}
+			// recursive call, for exploring all inherited attributes
+			// (Class_in_State -|> Class_top_state -|> Class_impl -|> Class)
+			var sc : kermeta::reflection::Class
+			var sd : kermeta::reflection::ClassDefinition
+			sd ?= sClass.typeDefinition
+			sd.superType.each{ st |
+				if not st.isVoid then
+					superSwap(modelPack, st, origin, dest)
+				end
+			}
+			
+		end
+    end
+	operation swap(origin : rts::StateMachine, dest : rts::StateMachine) is do
+		// the getSet() can't copy multiple properties of a state on itself
+		if dest.oid != origin.oid then
+			// hard copy of instance current state attributes to the next state
+			// for replacing the current state by the next state as instance
+			// in the simulator. Links to this object in other instances
+			// must also be change to point on next state.
+	    	var pack : kermeta::language::structure::Package
+	    	pack ?= origin.getMetaClass.typeDefinition.container
+			superSwap(pack, origin.getMetaClass, origin, dest)
+			
+			// links of other instances on current instance|state
+			process_table.each{ i |
+				// browses reflexivly the direct links of other instances
+				// for replacing current state by next
+				var inst : ActiveStateMachine
+				inst ?= i
+				if i != origin then
+					i.getMetaClass.ownedAttribute.each{ p | 
+						if inst.get(p) == origin.instanceCurrentState then
+							inst.~set(p, dest)
+						end
+					}
+					inst.getMetaClass.superClass.each{ s |
+						if s.name != "ActiveStateMachine" then
+							s.ownedAttribute.each{ p |
+								if inst.get(p).oid == origin.instanceCurrentState.oid then
+									inst.~set(p, dest)
+								end
+							}
+						end
+					}
+				end
+			}
+		end
+	end
+	method getStatus() : String is do
+		// As the current state object the only one which attributes change
+		// we get the list of them in the impl but their value in the state.
+		var res : String init ""
+		res.append("\n===================================\n")
+		res.append("    Current state of the system    \n")
+		res.append("===================================\n\n")
+		process_table.each{ i |
+			// browses reflexivly attributes of the meta class
+			// (we are on the "_impl" of the model class)
+			var inst : ActiveStateMachine
+			inst ?= i
+			var state : ActiveStateMachine
+			state ?= inst.instanceCurrentState
+			res.append(" * object '"+i.identity.out + "'  (in state : " +state.identity.out+") :\n")
+			
+			i.getMetaClass.superClass.each{ s |
+				if s.name != "ActiveStateMachine" then	// no need for RTS inherited attributes
+					s.ownedAttribute.each{ p |
+						if p.upper == 1 then
+							res.append("     - "+p.name + " = ")
+							var active : Activable
+							active ?= state.get(p)
+							if active != void then
+								res.append(active.identity.out)
+							else
+								var proxy : Proxy
+								proxy ?= state.get(p)
+								if proxy != void then
+									var act : Activable
+									act ?= proxy.server
+									if act != void then
+										res.append("proxy to '"+act.identity.out+"'")
+									else
+										res.append(state.get(p).toString)
+									end
+								else
+									res.append(state.get(p).toString)
+								end
+							end
+							res.append("\n")
+						else
+							var collP : Collection<kermeta::reflection::Object>
+							collP ?= state.get(p)
+							var j : Integer init 0
+							collP.each{ k |
+								res.append("     - "+p.name + "("+j.toString+") = ")
+								var proxy : Proxy
+								proxy ?= k
+								if proxy != void then
+									res.append("proxy to '")
+									var active : Activable
+									active ?= proxy.server
+									if active != void then
+										res.append(active.identity.out)
+									else
+										res.append(proxy.server.toString)
+									end
+								else
+									res.append(k.toString)
+								end
+									res.append("'\n")
+								j := j + 1
+							}
+						end
+					}
+				end
+			}
+		}
+		result := res
+	end
+	operation getSet(orig : StateMachine, dest : Object, prop : kermeta::reflection::Property) is do
+		if prop.upper != 1 then
+			var collOrig : Collection<kermeta::reflection::Object>
+			collOrig ?= orig.get(prop)
+			var collDest : Collection<kermeta::reflection::Object>
+			collDest ?= dest.get(prop)
+			collDest.clear
+			collDest.addAll(collOrig)
+		else
+			dest.~set(prop, orig.get(prop))
+		end
+	end
 }
 
 class Port inherits rts::StateMachine, rts::Activable
 {
     reference fifo : set rts::Event[0..*]
-//    reference fifo : Linked_queue<rts::Event>
     reference server : Object
-    operation initialize() is do
-        // Empty. Nothing to do
-    end
     operation connect(new_server : Object) is do
         server := new_server
     end
@@ -394,6 +609,9 @@ class Port inherits rts::StateMachine, rts::Activable
         fifo.one.send_to(server)
         fifo.remove(fifo.one)
     end
+    operation initialize() is do
+    	// nothing to do
+    end
 }
 
 class Any
@@ -409,65 +627,6 @@ abstract class Proxy
     end
     operation send(e : rts::Event) is do
         e.send_to(server)
-    end
-    operation initialize() is do
-        //Empty. Nothing to do
-    end
-    /* code factorisation for ActiveStateMachine actions */
-/*    operation append_ASM_action_events(serverActiveStateMachine : ActiveStateMachine, event : Event) is do
-		if serverActiveStateMachine != void then
-			if serverActiveStateMachine.events_from_action == void then
-				serverActiveStateMachine.reset_events_from_action()
-			end
-			if serverActiveStateMachine.events_from_action != "" then
-				serverActiveStateMachine.events_from_action.append(";")
-			end
-			serverActiveStateMachine.events_from_action.append(serverActiveStateMachine.identity.out)
-			serverActiveStateMachine.events_from_action.append(event.label)
-		end
-    end */
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-// FIXME : the general goal of this class needs to be understand before implementing it
-// NOTA BENE : the Enumeration type is not used in RTS package
-abstract class Enumeration
-{
-    reference out : kermeta::standard::String
-    operation make() is do
-        out := ""
-    end
-    operation ~enumeration() : kermeta::standard::String is do
-    	// Returns the ennumeration name of the current value
-        result := out
-    end
-    operation ~value() : rts::Enumeration is do
-        result := self
-    end
-    operation is_initialized() : kermeta::standard::Boolean is do
-        result := out != ""
-    end
-    operation is_valid_enumeration(enum_name : kermeta::standard::String) : kermeta::standard::Boolean is do
-        result := all_images.getValue(enum_name) != void
-    end
-    operation value_of(enum_name : kermeta::standard::String) : rts::Enumeration is do
-    	// FIXME : the Eiffel version of this operation
-    	// seems replacing the current object by a new one
-    	from_string(enum_name)
-    	result :=  self
-    end
-    operation from_string(str : kermeta::standard::String) is do
-        set_by_name(str)
-    end
-    operation set_image(new_image : kermeta::standard::String) is do
-        out := new_image
-    end
-    reference all_images : kermeta::utils::Hashtable<String,Enumeration>
-    operation set_by_name(str : kermeta::standard::String) is do
-        //TODO : implement operation 
-    end
-    operation setEnum(new_enum : rts::Enumeration) is do
-        //TODO: implement operation ~set
     end
 }
 
