@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.14 2006-06-23 13:46:57 zdrey Exp $
+/* $Id: KMT2KMPass4.java,v 1.15 2006-06-26 15:06:11 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -92,7 +92,7 @@ public class KMT2KMPass4 extends KMT2KMPass {
 					, operation));
 			return false;
 		}
-		String base_msg = "PASS 4 : An operation named '" + builder.current_operation.getName() + "' is already inherited from class '";
+		String base_msg = "PASS 4 : An operation named '" + builder.current_operation.getName() + "' on class "+ builder.current_class.getName()+ " is already inherited from class '";
 		String end_msg = " If you want redefinition, please use \"method\" keyword.";
 		// Is there already an operation in the super types of this class?
 		EList superclasses = builder.current_class.getSuperType();
@@ -101,7 +101,9 @@ public class KMT2KMPass4 extends KMT2KMPass {
 			ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::reflection::Object"));
 			if (object_classdef != null) // robustness test -> kermeta::reflection::Object type should already have been parsed!
 			{
-				if (builder.findOperationByName(object_classdef, builder.current_operation.getName())!=null)
+				if (builder.findOperationByName(object_classdef, builder.current_operation.getName())!=null && 
+						builder.current_class != object_classdef && // ignore "kermeta::reflection::Object" itself ...
+						!builder.getQualifiedName(builder.current_class).equals("kermeta::language::structure::KMStructureVisitable")) // the concret implementation of Object inherits from KMStructureVisitable
 				builder.messages.addMessage(new KMTUnitLoadError(
 						base_msg + "kermeta::reflection::Object'. (implicit inheritance!)" + end_msg,
 						operation));
