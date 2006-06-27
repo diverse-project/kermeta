@@ -1,4 +1,4 @@
-/* $Id: KermetaRaisedException.java,v 1.11 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: KermetaRaisedException.java,v 1.12 2006-06-27 12:31:25 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : KermetaRaisedException.java
 * License : EPL
@@ -95,7 +95,6 @@ public class KermetaRaisedException extends Error {
 	    CallableProperty cproperty = target.getPropertyByName("message");
 	    
 	    
-	    
 	    if (cproperty != null) // it may be null if we throw object that doesn't inherit from kermeta::exceptions::Exception
 	    {
 	    	RuntimeObject ro_property = interpreter.memory.getRuntimeObjectForFObject(cproperty.getProperty());
@@ -114,6 +113,10 @@ public class KermetaRaisedException extends Error {
         else {
         	result += "\n Kermeta stack context not available";
         }
+    	if ( this.getCause() != null)
+    	{
+    		result += "\nUnderlying java exception cause : " + this.getCause().getMessage();
+    	}
     	return result;
     }
     
