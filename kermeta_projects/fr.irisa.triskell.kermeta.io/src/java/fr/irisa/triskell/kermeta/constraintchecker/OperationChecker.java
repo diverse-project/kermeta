@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.6 2006-05-03 15:02:22 zdrey Exp $
+/* $Id: OperationChecker.java,v 1.7 2006-06-29 07:05:15 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.TypeConformanceChecker;
@@ -88,8 +89,16 @@ public class OperationChecker extends AbstractChecker {
 	{
 		boolean result = false;
 		Object found = null;
-		// Get all operations, including the inherited ones
-		Operation next = operation.getSuperOperation();
+		Operation next = null;
+		// Get the kermeta::reflection::Object *implicitly* inherited super operation
+		ClassDefinition object_classdef = ((ClassDefinition)builder.getTypeDefinitionByName("kermeta::reflection::Object"));
+		if (object_classdef != null) // robustness test -> kermeta::reflection::Object type should already have been parsed!
+		{
+			next = builder.findOperationByName(object_classdef, operation.getName());
+		}
+		// If this operation was not found in implicitly inherited Object
+		// then get all operations, including the inherited ones
+		if (next == null) next = operation.getSuperOperation();
 		if (next!=null)
 		{
 			result = checkParameters(operation, next) &&
