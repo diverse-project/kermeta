@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.40 2006-06-22 18:01:01 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.41 2006-06-29 14:38:13 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -105,7 +105,8 @@ public class EMF2Runtime {
 		return result;
 	}
 	/**
-	 * recursive part of the findDependentResources method
+	 * Looks in the given resource the list of hosted objects, and
+	 * Recursive part of the findDependentResources method
 	 * @param list A list&lt;Resource&gt; that contains the resources of which 
 	 * the given <code>resource</code> depends.
 	 * @param resource The emf resource that EMF2Runtime has to load. 
@@ -148,7 +149,12 @@ public class EMF2Runtime {
 			        {   // Then, for each object of this EList-feature, add its hosting resource 
 			        	// into the list of dependent resources
 			    	    for (Object sfeature : ((EList)fvalue)) 
-			    	    {  	addObjectResourceToList(list,(EObject)sfeature); }
+			    	    {
+			    	    	// Ignore values which type is a base type (String,...) : we don't need to 
+			    	    	// precreate a runtime object for them. (will be created "on the fly")
+			    	    	if (sfeature instanceof EObject)
+			    	    		addObjectResourceToList(list,(EObject)sfeature); 
+			    	    }
 			        }
 			        //If this feature is an EObject, add its hosting resource into the list of dependent resources.
 			        else if (fvalue instanceof EObject)   

@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.17 2006-06-22 18:01:01 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.18 2006-06-29 14:38:13 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -171,11 +171,12 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 
     /** print the content of the EMF Registry */
 	public void logEMFRegistryContent() {
-		internalLog.debug("Factory.Registry known extensions are :");
+		String msg = "";
     	Iterator it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
     	while(it.hasNext()) {
-    		internalLog.debug("  "+it.next().toString());
+    		msg += " | "+it.next().toString();
     	}
+    	internalLog.debug("Factory.Registry known extensions are :" + msg);
 	}
     
     /**
@@ -462,7 +463,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * This method is uncomplete! : TODO :
 	 *    - handle EEnum type
 	 *    - handle EDataTypes that contains links to java type that have no equivalence in Kermeta
-	 *    (ex: EBigDecimal)
+	 *    (ex: EBigDecimal, EJavaClass, etc.)
 	 * @param obj
 	 * @return the qualified name of the given object
 	 */
@@ -476,32 +477,30 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	String icn = ((EDataType)obj).getInstanceClassName();
 	    	if (icn != null && primitive_types_mapping.containsKey(icn)) 
 	    		result = primitive_types_mapping.get(icn);
-	    	else // Throw an error!
+	    	else // Throw an error? --> For Ecore metamodel, we need to accept types...
 	    	{
-	    		String msg = "Sorry, we could not save your model : it contains types that have no equivalence in kermeta : '" + obj.getName() + "';";
-	    		msg += "\n - Please mail kermeta-users list with your metamodel and instance :) )";
-	        	throwKermetaRaisedExceptionOnSave(msg, null);
+	    		String msg = "Sorry, your model probably won't be saved properly : it contains types that have no equivalence in kermeta : '" + obj.getName() + "';";
+	    		//msg += "\n - Please mail kermeta-users list with your metamodel and instance :) )";
+	    		result = primitive_types_mapping.get("java.lang.Object");
+	        	// throwKermetaRaisedExceptionOnSave(msg, null);
 	    	}
 	    }
 	    else if (cont != null &&cont instanceof ENamedElement) {
 	        result = getEQualifiedName((ENamedElement)cont) + "::" + result;
 	    }
 	    else if(!(obj.getClass().getName().compareTo("org.eclipse.emf.ecore.impl.EPackageImpl")==0)){
-	    	//internalLog.debug("Root container is an EPackageImpl, verifying that it is really toplevel" + obj.getClass().getName() + " || "+ obj.toString() );
 	    	// optimization : use of an hashtable
 	    	String nsuri = ((EPackage)obj).getNsURI();
 	    	String packageQualifiedName = this.nsUri_QualifiedName_map.get(nsuri);
 	    	if( packageQualifiedName == null)
 	    	{   // optimization failed, need to load the metamodel and retreive the qualified name
-	    		internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() + " || "+ obj.toString() );
+	    		// internalLog.warn("patching EMF problem about generated java EPackage. We are not sure that this package is really toplevel..." + obj.getClass().getName() + " || "+ obj.toString() );
 		    	// lazy load of the metamodel 	
 		    	loadMetaModelResource(metamodel_uri);
 		    	// look into the mm if the given object can be retreived, then get its real qualified name
 		    	EPackage mmPackage = getEPackageFromNsUri(nsuri);
-		    	if (mmPackage == null) {
-		    		internalLog.warn("Not able to retreive nsuri: " + nsuri + " into metamodel "+ metamodel_uri);		    		
-		    	}
-		    	else {
+		    	if (mmPackage != null)
+		    	{
 		    		result = getEQualifiedName(mmPackage);
 		    		this.nsUri_QualifiedName_map.put(nsuri,result);	// for optimization
 		    	}
