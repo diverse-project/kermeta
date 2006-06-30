@@ -21,7 +21,7 @@ public class EObjectWrapper {
 		// but this is quite dirty so perhaps we should later move some helper
 		// methods from runtime2emf to another "sharing" class?
 		Runtime2EMF runtime2emf = new Runtime2EMF(null, null);
-		EObject eObject = (EObject)runtime2emf.getOrCreateObjectFromRuntimeObject(self, null);
+		EObject eObject = (EObject)runtime2emf.getOrCreateEObjectFromRuntimeObject(self);
 		RuntimeObject result = EcoreWrapper.setRuntimeObjectForEObject(eObject.eClass(), self.getFactory().getMemory());
 		//RuntimeObject result = EcoreWrapper.findRuntimeObjectForEObject(eObject, self.getFactory().getMemory());
 		return result;
