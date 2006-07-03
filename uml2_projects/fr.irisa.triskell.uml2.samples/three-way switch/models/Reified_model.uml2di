@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
   <model href="Reified_model.uml2#_tPOCIaLHEdqkGMDvm75SlQ"/>
-  <diagrams position="0,0" size="100,100" name="Reified_model" viewport="0,399">
+  <diagrams position="0,0" size="100,100" name="Reified_model" viewport="0,794">
     <property key="org.topcased.modeler.di.typeName" value="Class Diagram"/>
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
@@ -519,10 +519,10 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_model.uml2#_MiBpMPY3EdqtYpBtdBxBeA"/>
       </semanticModel>
-      <waypoints>[0, -64, -114, 76]</waypoints>
-      <waypoints>[0, -69, -114, 71]</waypoints>
-      <waypoints>[114, -69, 0, 71]</waypoints>
-      <waypoints>[114, -86, 0, 54]</waypoints>
+      <waypoints>[0, -45, -100, 77]</waypoints>
+      <waypoints>[0, -50, -100, 72]</waypoints>
+      <waypoints>[100, -50, 0, 72]</waypoints>
+      <waypoints>[100, -68, 0, 54]</waypoints>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.11/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
@@ -767,7 +767,7 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="4"/>
       <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="-26" vDistance="26"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="-3" vDistance="7"/>
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="6" vDistance="-1"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject" offset="-75,65"/>
       <waypoints>[-10, 45, -73, -56]</waypoints>
@@ -896,7 +896,7 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="-3" vDistance="-5"/>
       <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="11"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="26"/>
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="-6" vDistance="-30"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject" offset="-86,-29"/>
       <waypoints>[-66, 21, -17, -80]</waypoints>
@@ -949,10 +949,10 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="Reified_model.uml2#_ajqlsPY8EdqtYpBtdBxBeA"/>
       </semanticModel>
-      <waypoints>[0, -35, 41, 69]</waypoints>
-      <waypoints>[0, -35, 41, 69]</waypoints>
-      <waypoints>[-41, -35, 0, 69]</waypoints>
-      <waypoints>[-41, -59, 0, 45]</waypoints>
+      <waypoints>[0, -35, 41, 79]</waypoints>
+      <waypoints>[0, -56, 41, 58]</waypoints>
+      <waypoints>[-41, -56, 0, 58]</waypoints>
+      <waypoints>[-41, -78, 0, 36]</waypoints>
     </contained>
     <contained xsi:type="di:GraphNode" position="604,629" size="115,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.48 //@diagrams.0/@contained.51"/>
@@ -1054,7 +1054,7 @@
       </semanticModel>
       <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="-3" vDistance="-1"/>
       <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="8" vDistance="-10"/>
-      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="-96" vDistance="-39"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="-60" vDistance="-34"/>
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="3" vDistance="-2"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
       <waypoints>[-9, 21, -88, -59]</waypoints>
