@@ -46,12 +46,6 @@ class FSM
 		
 		end
 	
-	inv invFSM is
-	do
-		stdio.writeln("checkin deterministic FSM")
-		true
-	end
-	
 	// Semantique operationnelle
 	operation run() : Void raises FSMException is do  
 		// reset if there is no current state
@@ -138,6 +132,7 @@ class State {
 	// Go to the next state
 	operation step(c : String) : String raises FSMException is
 	
+	// Declaration of the pre-condition
 	pre notVoidInput is
 		c != void and c != ""
 		
@@ -153,6 +148,7 @@ class State {
 		result := validTransitions.one.fire
 	end
 		
+	// Declaration of the post-condition
 	post notVoidOutput is
 		result != void and result != ""
 	
@@ -166,13 +162,6 @@ class State {
 
 class Transition 
 {	
-// Declaration of the invariant : deterministicTransition
-	inv invTransition is
-	do
-		stdio.writeln("checkin deterministic Transition")
-		true
-	end
-	
 	reference source : State[1..1]#outgoingTransition
 	reference target : State[1..1]#incomingTransition
 	attribute input : String
