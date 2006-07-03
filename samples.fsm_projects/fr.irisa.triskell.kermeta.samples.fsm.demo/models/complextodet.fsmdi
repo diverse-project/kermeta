@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
+  <model href="complextodet.fsm#/"/>
+  <diagrams position="0,0" size="100,100" name="complextodet" viewport="0,0">
+    <property key="pageFormatName" value="A4"/>
+    <property key="diagramWidth" value="840"/>
+    <property key="diagramHeight" value="1188"/>
+    <property key="pageMarginName" value="Small Margin"/>
+    <property key="diagramTopMargin" value="20"/>
+    <property key="diagramBottomMargin" value="20"/>
+    <property key="diagramLeftMargin" value="20"/>
+    <property key="diagramRightMargin" value="20"/>
+    <property key="orientation" value="portrait"/>
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fsmdiagram">
+      <element href="complextodet.fsm#/"/>
+    </semanticModel>
+    <contained xsi:type="di:GraphNode" position="81,97" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.5 //@diagrams.0/@contained.6 //@diagrams.0/@contained.7 //@diagrams.0/@contained.14 //@diagrams.0/@contained.17 //@diagrams.0/@contained.18"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.0"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="220,100" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.8 //@diagrams.0/@contained.9 //@diagrams.0/@contained.16 //@diagrams.0/@contained.18"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.1"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="275,182" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.10 //@diagrams.0/@contained.11 //@diagrams.0/@contained.12 //@diagrams.0/@contained.13 //@diagrams.0/@contained.14 //@diagrams.0/@contained.15 //@diagrams.0/@contained.16"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.2"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="373,97" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.8 //@diagrams.0/@contained.9 //@diagrams.0/@contained.10 //@diagrams.0/@contained.11 //@diagrams.0/@contained.15 //@diagrams.0/@contained.17"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.3"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="43,226" size="60,40">
+      <anchorage graphEdge="//@diagrams.0/@contained.5 //@diagrams.0/@contained.6 //@diagrams.0/@contained.12 //@diagrams.0/@contained.13"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.4"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.0/@outgoingTransition.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.4/@outgoingTransition.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="12,-20"/>
+      <waypoints>[-7, -21, -45, 108]</waypoints>
+      <waypoints>[-40, -129, -78, 0]</waypoints>
+      <waypoints>[7, -129, -31, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.0/@outgoingTransition.1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="7,-13"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.1/@outgoingTransition.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.3/@outgoingTransition.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="10,8"/>
+      <waypoints>[-31, -17, 122, -20]</waypoints>
+      <waypoints>[-80, -44, 73, -47]</waypoints>
+      <waypoints>[-123, -17, 30, -20]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.3/@outgoingTransition.1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+      <waypoints>[-26, 20, 72, -65]</waypoints>
+      <waypoints>[-50, 39, 48, -46]</waypoints>
+      <waypoints>[-77, 64, 21, -21]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.2/@outgoingTransition.0"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="-13,-11"/>
+      <waypoints>[30, 0, -68, 85]</waypoints>
+      <waypoints>[98, 0, 0, 85]</waypoints>
+      <waypoints>[98, -65, 0, 20]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.4/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.4/@outgoingTransition.1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+      <waypoints>[30, -10, -202, 34]</waypoints>
+      <waypoints>[138, -44, -94, 0]</waypoints>
+      <waypoints>[201, -44, -31, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.4/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.2/@outgoingTransition.1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+      <waypoints>[-31, 20, 201, -24]</waypoints>
+      <waypoints>[-66, 44, 166, 0]</waypoints>
+      <waypoints>[-202, 44, 30, 0]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.0/@outgoingTransition.2"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.3/@anchorage.0 //@diagrams.0/@contained.2/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.3/@outgoingTransition.2"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="48,-14"/>
+      <waypoints>[30, 0, 128, -85]</waypoints>
+      <waypoints>[39, 0, 137, -85]</waypoints>
+      <waypoints>[-1, 120, 97, 35]</waypoints>
+      <waypoints>[-68, 96, 30, 11]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.2/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.2/@outgoingTransition.2"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.0/@anchorage.0 //@diagrams.0/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.0/@outgoingTransition.3"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="-32,13"/>
+      <waypoints>[0, -21, -292, -21]</waypoints>
+      <waypoints>[0, -74, -292, -74]</waypoints>
+      <waypoints>[292, -74, 0, -74]</waypoints>
+      <waypoints>[292, -21, 0, -21]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="complextodet.fsm#//@ownedState.1/@outgoingTransition.1"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="-9,-12"/>
+      <waypoints>[-31, -18, 108, -15]</waypoints>
+      <waypoints>[-78, -44, 61, -41]</waypoints>
+      <waypoints>[-109, -24, 30, -21]</waypoints>
+    </contained>
+  </diagrams>
+</diagrams:Diagrams>

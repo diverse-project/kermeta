@@ -14,13 +14,13 @@
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fsmdiagram">
       <element href="sample1postv.fsm#/"/>
     </semanticModel>
-    <contained xsi:type="di:GraphNode" position="65,64" size="50,50">
+    <contained xsi:type="di:GraphNode" position="190,84" size="50,50">
       <anchorage graphEdge="//@diagrams.0/@contained.2"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="sample1postv.fsm#//@ownedState.0"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="227,63" size="50,50">
+    <contained xsi:type="di:GraphNode" position="327,182" size="50,50">
       <anchorage graphEdge="//@diagrams.0/@contained.2 //@diagrams.0/@contained.3"/>
       <anchorage graphEdge="//@diagrams.0/@contained.3"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
@@ -31,13 +31,17 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="sample1postv.fsm#//@ownedState.0/@outgoingTransition.0"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="-8,9"/>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.1/@anchorage.0 //@diagrams.0/@contained.1/@anchorage.1">
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="sample1postv.fsm#//@ownedState.1/@outgoingTransition.0"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="10,14"/>
+      <waypoints>[25, 3, 25, 3]</waypoints>
+      <waypoints>[87, 12, 87, 12]</waypoints>
+      <waypoints>[13, 87, 13, 87]</waypoints>
+      <waypoints>[3, 25, 3, 25]</waypoints>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

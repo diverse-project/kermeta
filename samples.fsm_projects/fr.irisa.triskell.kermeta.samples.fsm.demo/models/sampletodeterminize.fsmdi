@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <diagrams:Diagrams xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.topcased.org/DI/1.0" xmlns:diagrams="http://www.topcased.org/Diagrams/1.0" activeDiagram="//@diagrams.0">
   <model href="sampletodeterminize.fsm#/"/>
-  <diagrams position="0,0" size="100,100" name="sample2" viewport="0,0">
+  <diagrams position="0,0" size="100,100" name="sample2" viewport="0,86">
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
     <property key="diagramHeight" value="1188"/>
@@ -21,7 +21,7 @@
         <element href="sampletodeterminize.fsm#//@ownedState.0"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="287,244" size="50,50">
+    <contained xsi:type="di:GraphNode" position="180,244" size="50,50">
       <anchorage graphEdge="//@diagrams.0/@contained.4"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="sampletodeterminize.fsm#//@ownedState.1"/>
@@ -54,7 +54,7 @@
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="sampletodeterminize.fsm#//@ownedState.0/@outgoingTransition.0"/>
       </semanticModel>
-      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="10,-2"/>
     </contained>
   </diagrams>
 </diagrams:Diagrams>
