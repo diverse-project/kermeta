@@ -1,10 +1,10 @@
 package uml2kmt_visitors;
 
 require kermeta
-require "Uml2.kmt"
-require "TopDownVisitor.kmt"
+require "../Uml2.kmt"
+require "../TopDownVisitor.kmt"
+require "../keyword_list.kmt"
 require "KmBuilder.kmt"
-require "keyword_list.kmt"
 
 using kermeta::standard
 using kermeta::language::structure

@@ -1,4 +1,4 @@
-/* $Id: polymorphism.kmt,v 1.1 2006-05-04 07:14:14 vmahe Exp $
+/* $Id: polymorphism.kmt,v 1.2 2006-07-03 14:54:38 vmahe Exp $
  * Creation date: May 3, 2006
  * License:
  * Copyright:
@@ -200,10 +200,6 @@ class Polymorphism
     	// we separe inheritance trees
     	pass1()
     	
-    	//DEBUG
-    	var m : Object init model
-    	var f : Object init families
-    	
     	// then we process each family
     	families.each{ family |
     		// the pass2 dispatches the operation
@@ -231,14 +227,17 @@ class Polymorphism
     	mod ?= mod.ownedMember.one
     	initialize(mod)
     	
+    	// first ability offered : tell the user what is wrong (console warnings)
         stdio.writeln("\n>>>>----> prettyprinting polymorphic operations")
     	processPolymorphism(Process.prettyprint)
         
+        // second ability : correct the model then save it
         stdio.writeln("\n>>>>----> renaming polymorphs in the model")
     	processPolymorphism(Process.rename)
-    	
         stdio.writeln("\n>>>>----> saving the renamed model")
     	inputResource.save()
+    	
+        stdio.writeln("\n  ... end of the process  <----<<<<")
     end
 }
 

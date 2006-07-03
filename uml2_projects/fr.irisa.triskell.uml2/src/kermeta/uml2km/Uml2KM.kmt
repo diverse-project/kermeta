@@ -4,11 +4,11 @@
 package uml2km;
 
 require kermeta
-require "Uml2.kmt"
+require "../Uml2.kmt"
 require "Pass1_Uml2KMTVisitor.kmt"
 require "Pass2_Uml2KMTVisitor.kmt"
 require "Pass3_Uml2KMVisitor.kmt"
-require "Uml2KMTPrinter.kmt"
+//require "Uml2KMTPrinter.kmt"
 
 using kermeta::standard
 using uml2kmt_visitors
@@ -107,9 +107,9 @@ class Main
 		}
 		
 		/////////// suspended waiting correction of "pre" & "post" problems
-//		resResource.save()
+		resResource.save()
 
-        // the Kermeta PrettyPrinter transforms the KM tree to code
+/*        // the Kermeta PrettyPrinter transforms the KM tree to code
     	stdio.writeln("\n>>>>-------------> running Km2Kmt pretty printer !\n")
         var upp : uml2::Uml2KMTPrinter init uml2::Uml2KMTPrinter.new
         upp.initialize()
@@ -122,7 +122,7 @@ class Main
 			extRef.add(pack)
 		}
 	    stdio.writeln(upp.visitRootPackage(tree, extRef, 0))
-	    
+	    		*/
 	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
      end
 }

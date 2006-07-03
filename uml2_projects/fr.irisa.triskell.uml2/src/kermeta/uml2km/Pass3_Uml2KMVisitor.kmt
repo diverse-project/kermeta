@@ -1,4 +1,4 @@
-/* $Id: Pass3_Uml2KMVisitor.kmt,v 1.1 2006-05-18 07:29:02 vmahe Exp $
+/* $Id: Pass3_Uml2KMVisitor.kmt,v 1.1 2006-07-03 14:54:38 vmahe Exp $
  * Creation date: May 10, 2006
  * License:
  * Copyright:
@@ -7,8 +7,8 @@
 package uml2kmt_visitors;
 
 require kermeta
-require "Uml2.kmt"
-require "TopDownVisitor.kmt"
+require "../Uml2.kmt"
+require "../TopDownVisitor.kmt"
 require "KmBuilder.kmt"
 
 using kermeta::standard

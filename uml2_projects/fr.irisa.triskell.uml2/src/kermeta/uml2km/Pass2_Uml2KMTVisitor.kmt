@@ -1,8 +1,8 @@
 package uml2kmt_visitors;
 
 require kermeta
-require "Uml2.kmt"
-require "TopDownVisitor.kmt"
+require "../Uml2.kmt"
+require "../TopDownVisitor.kmt"
 require "KmBuilder.kmt"
 
 using kermeta::standard

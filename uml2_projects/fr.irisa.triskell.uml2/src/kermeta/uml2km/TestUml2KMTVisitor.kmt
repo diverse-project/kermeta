@@ -37,7 +37,7 @@ class TestUml2KMTVisitor
     		kmtFile.writeln("package xxxxxx;\n")
     		
     		kmtFile.writeln("require kermeta")
-    		kmtFile.writeln("require \"Uml2.kmt\"")
+    		kmtFile.writeln("require \"../Uml2.kmt\"")
     		kmtFile.writeln("")
     		kmtFile.writeln("using kermeta::standard")
     		kmtFile.writeln("using uml2")
@@ -50,7 +50,7 @@ class TestUml2KMTVisitor
      */
     operation main() is do
     	stdio.writeln(">>>>-------------> initializing the model !")
-    	initialize("../../test/kmt_test_cases/uml2/ClassDiagram.uml2", "../ecore/UML2.ecore")
+    	initialize("../../../test/kmt_test_cases/uml2/ClassDiagram.uml2", "../../ecore/UML2.ecore")
     	stdio.writeln(">>>>-------------> running uml2kmt tool !")
     	uml2kmt()
     	stdio.writeln("<-------------<<<< end of the programm.")

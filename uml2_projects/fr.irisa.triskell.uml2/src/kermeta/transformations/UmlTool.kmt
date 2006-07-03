@@ -1,0 +1,19 @@
+/* $Id: UmlTool.kmt,v 1.1 2006-07-03 14:54:38 vmahe Exp $
+ * Creation date: June 29, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package uml2::transformations;
+
+
+require kermeta
+
+class UmlTool
+{
+	// enumerations can't embed figures so string are used
+	// like "2.0", "2.1"
+	// Rem : first version of tools have been written for UML 2.0
+	reference umlVersion : kermeta::standard::String
+}

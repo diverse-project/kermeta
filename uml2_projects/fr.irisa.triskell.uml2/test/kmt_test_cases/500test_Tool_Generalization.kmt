@@ -1,0 +1,29 @@
+@mainClass "root_package::ToolGeneralizationTestCase"
+@mainOperation "main"
+
+package root_package;
+
+require kermeta
+require "../../src/ecore/UML2.ecore"
+
+using uml2
+
+class ToolGeneralizationTestCase inherits kermeta::kunit::TestCase
+{
+	attribute bClass : Classifier
+	attribute cClass : Classifier
+	
+	method setUp() is do
+    	
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    // the added generalization must be present in th model
+    operation testGeneralization() is do
+    	assertTrueWithMsg(true,
+    		"xxxxxxx mut yyyyyyyyyy")
+    end
+}
