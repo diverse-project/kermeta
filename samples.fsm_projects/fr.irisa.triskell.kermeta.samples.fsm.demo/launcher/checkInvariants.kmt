@@ -37,8 +37,10 @@ class InvariantChecker
         
         // Uncomment to check the invariant properties : WFR
         // To check all contained elements by "theFSM"
+        stdio.writeln("> call of the checkAllInvariants method")
         theFSM.checkAllInvariants
         // To check only the states that are contained in "theFSM"
+        stdio.writeln("> call of the checkInvariants method")
         Main.new.checkWFR(theFSM)
 	end
 }

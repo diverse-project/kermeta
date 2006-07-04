@@ -28,14 +28,14 @@ using kermeta::exceptions
 
 class Main
 {
-	operation mainloadFSM() is do
-		var theFSM : FSM init loadfsm()
+	operation mainloadFSM(input_automaton : String) is do
+		var theFSM : FSM init loadfsm(input_automaton)
 		printFSM(theFSM)
 		theFSM.run()
 	end
 	
-	operation mainloadpostviolated() is do
-		var theFSM : FSM init loadfsmpostviolated()
+	operation mainloadpostviolated(input_automaton : String) is do
+		var theFSM : FSM init loadfsmpostviolated(input_automaton)
 		printFSM(theFSM)
 		theFSM.run()	
 	end
@@ -45,10 +45,10 @@ class Main
 	 * It's an instance of the FSM metamodel
 	 * "../models/sample1.fsm"
 	 */
-	operation loadfsm() : FSM is do
+	operation loadfsm(input_automaton : String) : FSM is do
 		var res : EMFRepository init EMFRepository.new
         var resource : EMFResource 
-        resource ?= res.createResource("../models/sample1.fsm", "../metamodels/fsm.ecore")
+        resource ?= res.createResource(input_automaton, "../metamodels/fsm.ecore")
         
         stdio.writeln("before loading")
         // loading
@@ -60,15 +60,15 @@ class Main
         
         // Uncomment to check the invariant properties : WFR
         // To check all contained elements by "result"
-        result.checkAllInvariants
+        //result.checkAllInvariants
         // To check only the states that are contained in "result"
         //checkWFR(result)
 	end
 	
-	operation loadfsmpostviolated() : FSM is do
+	operation loadfsmpostviolated(input_automaton : String) : FSM is do
 		var res : EMFRepository init EMFRepository.new
         var resource : EMFResource 
-        resource ?= res.createResource("../models/sample1postv.fsm", "../metamodels/fsm.ecore")
+        resource ?= res.createResource(input_automaton, "../metamodels/fsm.ecore")
         // sample2.fsm
         stdio.writeln("before loading")
         resource.load()
