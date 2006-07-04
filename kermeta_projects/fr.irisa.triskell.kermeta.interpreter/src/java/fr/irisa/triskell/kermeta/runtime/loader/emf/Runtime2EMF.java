@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.30 2006-06-29 14:38:13 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.31 2006-07-04 14:18:07 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -55,6 +55,7 @@ public class Runtime2EMF {
 	 * The constructor, that initialize <code>unit</code> and <code>updatedRuntimeObjects</code>
 	 * attributes.
 	 * @param unit the EMFRuntimeUnit that hosts the contents of the model to save 
+	 * @param p_resource the resource that hosts the model to save. It is actually empty...
 	 */
     public Runtime2EMF(EMFRuntimeUnit p_unit, Resource p_resource) {
         this.updatedRuntimeObjects = new ArrayList();
@@ -232,7 +233,7 @@ public class Runtime2EMF {
         if (rObject.getData().containsKey("emfObject"))
             result = rObject.getData().get("emfObject");
         else // createEObjectFromRuntimeObject also updates the emfObject entry
-            result = createEObjectFromRuntimeObject(rObject);
+        	result = createEObjectFromRuntimeObject(rObject);
         return result;
     }
 
@@ -250,11 +251,13 @@ public class Runtime2EMF {
         // a EDataType?
         else if (getPrimitiveTypeValueFromRuntimeObject(rProperty) !=null)
             result = getPrimitiveTypeValueFromRuntimeObject(rProperty);
-        // by default, an EObject
+        // by default, an EObject instance of an EClass
         else if (feature.getEType() instanceof EClass)
-        {
-        	result = EcoreUtil.create((EClass)feature.getEType()); // an EObject
-    		rProperty.getData().put("emfObject", result);
+        {	// Important note: once the objects are created (using the metamodel given by the user in kermeta side)
+        	// we have to use the metamodel hosted by the resource (eobject.eResource()) 
+        	// implicitely loaded by EMF instead of our own resource (unit.getMetamodelResource)
+        	// please do not modify this (it is *intentional* now :P).
+        	result = createEObjectFromRuntimeObjectWithResource(rProperty, feature.getEType().eResource());
         }
         else
         {
@@ -274,17 +277,20 @@ public class Runtime2EMF {
         return new BasicEList(arraylist);
     }
 
-
     /**
      * Create an eObject corresponding to the given RuntimeObject. Update the emfObject
-     * entry in the RuntimeObject
+     * entry in the RuntimeObject. The object is created using the metamodel given by the user
+     * when he calls <code>repository.createResource("<model_url>", "<metamodel_url>")</code>
      * @param rObject the runtimeObject that we want to serialize
      * @return the eObject corresponding to this rObject
      */
     protected EObject createEObjectFromRuntimeObject(RuntimeObject rObject)
     {
-    	internalLog.debug("createEObjectFromRuntimeObject for RuntimeObject: " + 
-    			getRONameProp(rObject) + " "+ rObject  + rObject.getProperties());
+    	return createEObjectFromRuntimeObjectWithResource(rObject, unit.getMetaModelResource());
+    }
+    
+    protected EObject createEObjectFromRuntimeObjectWithResource(RuntimeObject rObject, Resource p_resource)
+    {
         EObject result =  null;
         // Get the meta class of the instance hosted by given runtime object
         fr.irisa.triskell.kermeta.language.structure.Class metaclass = 
@@ -294,7 +300,7 @@ public class Runtime2EMF {
                 metaclass.getTypeDefinition());
         
         // Equiv. to classifier.eResource if the eclassifier corresponding to the meta class of the runtime object were provided.. 
-        EClass eclass = this.getEClassFromFQualifiedName(kqname);
+        EClass eclass = this.getEClassFromFQualifiedName(kqname, p_resource);
         
         if (eclass != null) // If we did not find the Eclass, then it means that kqname is the name of a primitive type..
         {
@@ -307,26 +313,17 @@ public class Runtime2EMF {
     /**
      * Get the EClass corresponding to the kermeta qualified name 
      * @param kqname the name of which we look for the corresponding in Ecore meta-model
-     * @param p_resource the resource of the meta-model
+     * @param res the resource of the meta-model of the model to save. if null, the one given by
+     * the user is taken
      * @param unit the RuntimeUnit that contain the correspondance table between kermeta object names
      * and emf serialised object names.
      * @return the EClass in the ecore meta-model given by the user for serialization of its model
      */
-    protected EClass getEClassFromFQualifiedName(String kqname)
+    protected EClass getEClassFromFQualifiedName(String kqname, Resource res)
     {
         EClass result = null;
-        TreeIterator it = null; 
-        // Try to find the meta model by reflexivity (eClass...) on the model hosted by resource
-        if (resource.getContents().size() > 0)
-        {
-            EPackage mmpkg = ((EObject)resource.getContents().get(0)).eClass().getEPackage();
-            it = mmpkg.eAllContents();
-        }
-        // Otherwise, look inside the meta model resource
-        else
-        {
-              it = unit.getMetaModelResource().getAllContents();
-        }     
+        TreeIterator it = res.getAllContents();
+        
         while (it.hasNext() && result == null)
         {
             EObject obj = (EObject)it.next();
