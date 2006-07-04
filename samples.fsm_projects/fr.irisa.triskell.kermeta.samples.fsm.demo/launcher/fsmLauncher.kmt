@@ -13,7 +13,7 @@
  *		 Use mainloadFSM method as entering point for loading XMI based file  
  */
 @mainClass "fsm::Main"
-@mainOperation "mainload"
+@mainOperation "mainloadFSM"
 
 package fsm;
 
@@ -34,12 +34,6 @@ class Main
 		theFSM.run()
 	end
 	
-	operation mainloadpostviolated(input_automaton : String) is do
-		var theFSM : FSM init loadfsmpostviolated(input_automaton)
-		printFSM(theFSM)
-		theFSM.run()	
-	end
-	
 	 /**
 	 * Load the FSM model from the xmi file sample1.fsm
 	 * It's an instance of the FSM metamodel
@@ -47,8 +41,7 @@ class Main
 	 */
 	operation loadfsm(input_automaton : String) : FSM is do
 		var res : EMFRepository init EMFRepository.new
-        var resource : EMFResource 
-        resource ?= res.createResource(input_automaton, "../metamodels/fsm.ecore")
+        var resource : Resource init res.createResource(input_automaton, "../metamodels/fsm.ecore")
         
         stdio.writeln("before loading")
         // loading
@@ -61,25 +54,6 @@ class Main
         // Uncomment to check the invariant properties : WFR
         // To check all contained elements by "result"
         //result.checkAllInvariants
-        // To check only the states that are contained in "result"
-        //checkWFR(result)
-	end
-	
-	operation loadfsmpostviolated(input_automaton : String) : FSM is do
-		var res : EMFRepository init EMFRepository.new
-        var resource : EMFResource 
-        resource ?= res.createResource(input_automaton, "../metamodels/fsm.ecore")
-        // sample2.fsm
-        stdio.writeln("before loading")
-        resource.load()
-       	stdio.writeln("after loading")
-        var theFSM : FSM
-        theFSM ?= resource.instances.one  
-        result  := theFSM
-        
-        // Uncomment to check the invariant properties : WFR
-        // To check all contained elements by "result"
-        result.checkAllInvariants
         // To check only the states that are contained in "result"
         //checkWFR(result)
 	end
