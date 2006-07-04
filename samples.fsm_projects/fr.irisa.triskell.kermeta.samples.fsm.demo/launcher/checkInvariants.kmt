@@ -18,15 +18,16 @@ package fsm;
 require kermeta
 require "fsmLauncher.kmt"
 
+using kermeta::standard
 using kermeta::persistence
 
 
 class InvariantChecker
 {
-    operation main() : Void is do 
+    operation main(input_automaton : String) : Void is do 
        var res : EMFRepository init EMFRepository.new
         var resource : EMFResource 
-        resource ?= res.createResource("../models/sample1.fsm", "../metamodels/fsm.ecore")
+        resource ?= res.createResource(input_automaton, "../metamodels/fsm.ecore")
         // *.fsm
         stdio.writeln("before loading")
         resource.load()
