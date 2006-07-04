@@ -1,8 +1,13 @@
 /* $Id: KermetaNewFileWizard.java,v 1.9 2006/04/08 13:32:03 dvojtise Exp $
- * Creation date: May 24, 2006
- * License:
- * Copyright:
+ * Project    : fr.irisa.triskell.kermeta.samples.fsm.demo
+ * File       : checkInvariants.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+  * Creation date: May 24, 2006
  * Authors:
+ *      Cyril Faucher <cfaucher@irisa.fr>
+ * Description : 
  */
 @mainClass "fsm::InvariantChecker"
 @mainOperation "main"
@@ -14,6 +19,7 @@ require kermeta
 require "fsmLauncher.kmt"
 
 using kermeta::persistence
+
 
 class InvariantChecker
 {

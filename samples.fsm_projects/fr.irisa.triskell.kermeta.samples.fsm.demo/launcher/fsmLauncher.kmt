@@ -1,17 +1,16 @@
 /* $Id: fsm.kmt,v 1.4 2006/04/27 09:22:55 dvojtise Exp $
- * Project    : fr.irisa.triskell.samples.fsm
- * File       : fsm.kmt
+ * Project    : fr.irisa.triskell.kermeta.samples.fsm.demo
+ * File       : fsmLauncher.kmt
  * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
  * Creation date : 27 juil. 2005
  * Modified By : 
  *        Waqas Ahmed Saeed <wahmedsa@irisa.fr>
- * Modified By : 
  *        Cyril Faucher <cfaucher@irisa.fr>
  * Description : 
  *       Launching Kermeta File for Finite State Machine Sample
- *		 Use mainload method as entering point for loading XMI based file  
+ *		 Use mainloadFSM method as entering point for loading XMI based file  
  */
 @mainClass "fsm::Main"
 @mainOperation "mainload"
@@ -27,12 +26,12 @@ using kermeta::standard
 using kermeta::persistence
 using kermeta::exceptions
 
-class Main 
-{	
-	operation mainload() is do
+class Main
+{
+	operation mainloadFSM() is do
 		var theFSM : FSM init loadfsm()
 		printFSM(theFSM)
-		theFSM.run()	
+		theFSM.run()
 	end
 	
 	operation mainloadpostviolated() is do
@@ -41,17 +40,18 @@ class Main
 		theFSM.run()	
 	end
 	
-	/**
-	 * Load the FSM model from a xmi file
+	 /**
+	 * Load the FSM model from the xmi file sample1.fsm
 	 * It's an instance of the FSM metamodel
+	 * "../models/sample1.fsm"
 	 */
 	operation loadfsm() : FSM is do
 		var res : EMFRepository init EMFRepository.new
         var resource : EMFResource 
         resource ?= res.createResource("../models/sample1.fsm", "../metamodels/fsm.ecore")
-        // sample1.fsm
-        // exampledemo.fsm
+        
         stdio.writeln("before loading")
+        // loading
         resource.load()
        	stdio.writeln("after loading")
         var theFSM : FSM
@@ -85,7 +85,7 @@ class Main
 	end
 
 	/**
-	 * For all states, we check the WFR
+	 * For all states, we check the Well-Formedness rules
 	 */
 	operation checkWFR(theFSM : FSM) is do
 		stdio.writeln("Check WFR : start")

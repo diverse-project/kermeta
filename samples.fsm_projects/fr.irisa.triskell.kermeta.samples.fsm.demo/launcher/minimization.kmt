@@ -1,3 +1,17 @@
+/* $Id: fsm.kmt,v 1.4 2006/04/27 09:22:55 dvojtise Exp $
+ * Project    : fr.irisa.triskell.kermeta.samples.fsm.demo
+ * File       : minimization.kmt
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 27 juil. 2005
+ * Modified By : 
+ *        Waqas Ahmed Saeed <wahmedsa@irisa.fr>
+ *        Cyril Faucher <cfaucher@irisa.fr>
+ * Description : 
+ *       Launching Kermeta File for Finite State Machine minimization
+ *		 Use main method as entering point for choosing the file to minimize and then launching the minimization
+ */
 @mainClass "fsm::Minimization"
 @mainOperation "main"
 

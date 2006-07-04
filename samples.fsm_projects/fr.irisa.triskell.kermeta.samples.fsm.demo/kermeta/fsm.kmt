@@ -7,7 +7,6 @@
  * Creation date : 03 October. 2005
  * Modified By : 
  *        Waqas Ahmed Saeed <wahmedsa@irisa.fr>
- * Modified By : 
  *        Cyril Faucher <cfaucher@irisa.fr>
  * Description : 
  *       Finite State Machine Sample with Behaviour implemented in Kermeta
@@ -99,8 +98,8 @@ class FSM
 	
 	/** Initialize a new automaton from an existing one 
 	 *  param :
-	 *    initState : the initial state
-	 *    initComb
+	 *    p_state : the initial state
+	 *    isInitComb
 	 */
 	operation initialize(p_state : State, isInitComb : Boolean) is do
 		var initState : State init p_state.copy
@@ -175,7 +174,9 @@ class Transition
 	end
 }
 
-
+// -------------------------------------------------------------------
+//              END OF DEFINITION OF FSM METAMODEL
+// -------------------------------------------------------------------
 
 
 abstract class FSMException {}
@@ -276,7 +277,7 @@ class AutomatonHelper
      * Interactive commands
      */
     operation ask_dotprint() is do
-    	dotprint(ask_emfmodel("Entrez un modele EMF de l'automate à 'dot-printer' : "))
+    	dotprint(ask_emfmodel("Enter an EMF model representing an automata to 'dot-printer' : "))
     end
     
     operation ask_emfmodel(prompt : String) : FSM is do
