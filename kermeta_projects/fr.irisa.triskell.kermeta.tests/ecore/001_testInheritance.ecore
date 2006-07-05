@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="testattr" nsURI="platform:/resource/fr.irisa.triskell.kermeta.tests/ecore/001_testInheritance.ecore" nsPrefix="testattr">
+  <eAnnotations source="kermeta">
+    <details key="mainClass" value=""/>
+  </eAnnotations>
+  <eAnnotations source="kermeta">
+    <details key="mainOperation" value=""/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="A"/>
+  <eClassifiers xsi:type="ecore:EClass" name="B" eSuperTypes="//A"/>
+  <eClassifiers xsi:type="ecore:EClass" name="C" eSuperTypes="//A">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x" upperBound="-1" eType="//A" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Main">
+    <eOperations name="main" ordered="false">
+      <eAnnotations source="kermeta">
+        <details key="body" value="do&#xA;&#x9;var c : testattr::C init testattr::C.new&#xA;&#x9;var b : testattr::B init testattr::B.new&#xA;&#x9;c.x.add(b)&#xA;&#x9;var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new&#xA;&#x9;var resource : kermeta::persistence::EMFResource&#xA;&#x9;resource ?= repository.createResource(&quot;./instances/test_inheritance.xmi&quot;, &quot;015_testInheritance.ecore&quot;)&#xA;&#x9;resource.instances.add(c)&#xA;&#x9;resource.save&#xA;end"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+</ecore:EPackage>
