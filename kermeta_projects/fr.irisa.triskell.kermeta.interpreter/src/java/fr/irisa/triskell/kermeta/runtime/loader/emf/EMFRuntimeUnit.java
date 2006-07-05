@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.18 2006-06-29 14:38:13 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.19 2006-07-05 13:05:20 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -185,9 +185,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
      */
     public void load() 
     {	
+    	String emf_msg = "";
     	EMFRuntimeUnit unit = this;
-    	RuntimeMemory memory =unit.getContentMap().getFactory().getMemory();
-    	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
     	XMLResource resource=null;
 	    KermetaUnit kunit =  unit.getContentMap().getFactory().getMemory().getUnit();
 		try {
@@ -240,7 +239,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	    	}
 	    	
 	    	// Finding unresolved proxies also resolves all the content, so a getAllcontent on the resource set now work !
-	    	Map unresolvedReferences = EcoreUtil.UnresolvedProxyCrossReferencer.find(resourceset);;
+	    	// Commented because this part of code generates a ClassCastException (inside EMF code..)
+	    /*	Map unresolvedReferences = EcoreUtil.UnresolvedProxyCrossReferencer.find(resourceset);
 			Iterator unresolvedMapIt = unresolvedReferences.entrySet().iterator();
 			while(unresolvedMapIt.hasNext()) {
 				// print EMF diagnostic even if it loaded, there may be some warning ?
@@ -254,53 +254,42 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 					"\n  First unresolved proxy is: "+unresolvedMapIt.next()+
 					"\n  a new URI_MAP entry may solve your problem";
 				throwKermetaRaisedExceptionOnLoad(errmsg, null);
-			}
+			}*/
 			
 			// Now, process the conversion of EMF model into Runtime representation so that kermeta can interprete it.
 	    	EMF2Runtime emf2Runtime = new EMF2Runtime(unit, resource);
 	    	emf2Runtime.loadunit();
 		}
 		catch (IOException e){
-			String msg = "Error loading EMF model " + unit.getUriAsString() + " :\n   " + e.getMessage();
-			throwKermetaRaisedExceptionOnLoad(e.getMessage(), e);
+			emf_msg = "I/O error loading EMF model " + unit.getUriAsString() + ";" + (e.getMessage()!=null?(" :\n " + e.getMessage()):"");
+			if (resource!=null && resource.getErrors().size()>0)
+			{
+				emf_msg += "\nEMF reported errors: ";
+				for (Object errorDiag : resource.getErrors()) 
+ 					emf_msg += "\n    - " + ((Resource.Diagnostic)errorDiag).getMessage();
+			}
+			throwKermetaRaisedExceptionOnLoad(emf_msg, e);
 		}
 		catch (WrappedException e){
-
-			KermetaUnit.internalLog.error("Error loading EMF model " + unit.getUriAsString() + " : " + e.exception().getMessage(), e);
-			kunit.messages.addError("EMF persistence error : could not load the given model :\n"+ e.exception().getMessage(), (fr.irisa.triskell.kermeta.language.structure.Object)unit.getContentMap().getData().get("kcoreObject"));
-			if(resource != null){ // do that even if there where an exception
-				Iterator it = resource.getErrors().iterator();
-				while(it.hasNext()) {
-					Resource.Diagnostic errorDiag =  (Resource.Diagnostic) it.next();
-					KermetaUnit.internalLog.error("EMF diagnostic: "+errorDiag.getMessage());
-				}
+			emf_msg += "EMF persistence error: could not load the given model "+ (e.exception().getMessage()!=null?(": " + e.exception().getMessage()):"");
+			if(resource != null && resource.getErrors().size()>0)
+			{
+				emf_msg += "\nEMF reported errors: ";
+				for (Object errorDiag : resource.getErrors())
+					emf_msg += "\n    - " + ((Resource.Diagnostic)errorDiag).getMessage();
 			}
-			throwKermetaRaisedExceptionOnLoad(e.exception().getMessage(), e);    	
+			throwKermetaRaisedExceptionOnLoad(emf_msg, e);    	
 		}
 		finally
 		{
 			if(ENABLE_EMF_DIAGNOSTIC && resource != null){
-	    		// print as much diagnostic as possible
-				Iterator errorIt = resource.getErrors().iterator();
-				resource.getWarnings();
-				while(errorIt.hasNext()) {
-					// print EMF diagnostic even if it loaded, there may be some warning ?
-					Resource.Diagnostic errorDiag =  (Resource.Diagnostic) errorIt.next();
-					internalLog.error("EMF error diagnostic: "+errorDiag.getMessage());
-				}
-				Iterator warningIt = resource.getWarnings().iterator();
-				while(warningIt.hasNext()) {
-					// print EMF diagnostic even if it loaded, there may be some warning ?
-					Resource.Diagnostic errorDiag =  (Resource.Diagnostic) warningIt.next();
-					internalLog.error("EMF warning diagnostic: "+errorDiag.getMessage());
-				}
+				for (Object errorDiag : resource.getErrors()) 
+					internalLog.error("EMF error diagnostic: "+((Resource.Diagnostic)errorDiag).getMessage());
+				for (Object errorDiag : resource.getWarnings())
+					internalLog.error("EMF warning diagnostic: "+((Resource.Diagnostic)errorDiag).getMessage());
 				Map extensionmap = resource.getEObjectToExtensionMap();
-				Iterator mapIt = extensionmap.entrySet().iterator();
-				while(mapIt.hasNext()) {
-					// print EMF diagnostic even if it loaded, there may be some warning ?
-					Object o = mapIt.next();					
+				for (Object o : extensionmap.entrySet())			
 					internalLog.error("EMF reports unknown feature: "+o + "; " + extensionmap.get(o));
-				}
 			}
 		}
     }

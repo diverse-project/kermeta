@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.31 2006-07-04 14:18:07 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.32 2006-07-05 13:05:20 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -6,8 +6,11 @@
  * ----------------------------------------------------------------------------
  * Creation date : Jul 20, 2005
  * Authors       : zdrey, dvojtise
- * NOTE : how to use resources :
- * 		The objects that you serialize must be added to the resource in a specific order
+ * NOTES : 
+ *   - how to use resources :
+ * 		To serialize the model, add all the element that have no eContainer to the resource to save.
+ *   - Note: there is an r2e.emfObject entry associated to RuntimeObjects, available through
+ *   the hashtable RuntimeObject.getData. It is used for eObject retrieval during the save process.
  */
 package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
@@ -25,6 +28,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -77,17 +81,18 @@ public class Runtime2EMF {
         // Get each instance and convert it in an EObject
         // (Instances only contain the root elements of the resource to save)
         for (RuntimeObject ro : instances )
-        {   findEObjectForRuntimeObject(ro); }
+        {	findEObjectForRuntimeObject(ro); }
         // Now that we have the complete list of runtime objects, we can update 
         // the properties of each of those runtime objects. The mapping between 
         // RuntimeObject and EObject to update is done through the
-        // entry { "emfObject" : EObject } in RuntimeObject.data hashtable.
+        // entry { "r2e.emfObject" : EObject } in RuntimeObject.data hashtable.
         for (RuntimeObject ro : updatedRuntimeObjects)
-        {   setEObjectPropertiesFromRuntimeObject(ro); }
+        {	setEObjectPropertiesFromRuntimeObject(ro); }
         
         // Add the root elements to the XMI resource
-        for (RuntimeObject ro : instances)
-        {   resource.getContents().add(ro.getData().get("emfObject")); }
+        // Note: emfObject2 entry is only used for eObject retrieval during the save process!
+        for (RuntimeObject o : instances)
+        {	resource.getContents().add(o.getData().get("r2e.emfObject")); }
     }
     
     /**
@@ -97,9 +102,9 @@ public class Runtime2EMF {
      * we don't yet update completely each object. A second pass is done for this
      * purpose in the method simpleUpdateProperty
      */
-    protected void findEObjectForRuntimeObject(RuntimeObject rObject)
+    protected EObject findEObjectForRuntimeObject(RuntimeObject rObject)
     {
-        // Already created normally, in the first recursive pass
+        // Create the EObject for given runtime object
     	EObject result = (EObject)this.getOrCreateEObjectFromRuntimeObject(rObject);
         
         // Add the runtime object parsed
@@ -116,6 +121,7 @@ public class Runtime2EMF {
             // - if it embedds an EList (a prop. with upperBound>1) : for each one, do the same as above case
             findEObjectForProperty(result, prop_name, property);
         }
+        return result;
     }
     
     /**
@@ -156,7 +162,7 @@ public class Runtime2EMF {
      */
     protected void setEObjectPropertiesFromRuntimeObject(RuntimeObject rObject)
     {
-        EObject eObject = (EObject)rObject.getData().get("emfObject");
+        EObject eObject = (EObject)rObject.getData().get("r2e.emfObject");
         // Get all the Structural features of requested eObject
         for (Object next : rObject.getProperties().keySet())
         {
@@ -171,11 +177,11 @@ public class Runtime2EMF {
             {
             	if(!feature.isChangeable())
             	{
-            		internalLog.warn("feature " + prop_name + " is not changeable: ignored(may be the other end has been correctly set). The feature was applied to "+ eObject  + " "+ rObject);
+            		internalLog.warn("feature " + prop_name + " is not changeable: ignored(maybe the other end has been correctly set). The feature was applied to "+ eObject  + " "+ rObject);
             	}
             	else
             	{	// Unset the old value of feature
-	                eObject.eUnset(feature);
+            		eObject.eUnset(feature);
 	                Object property_eObject = getOrCreatePropertyFromRuntimeObject(property, feature);
 	                
 	                // If the feature is a collection of Objects
@@ -188,9 +194,13 @@ public class Runtime2EMF {
 	                        // Get the type of the feature, if it is an EClass
 	                        //if (feature.getEType() instanceof EObject)
 	                        Object p_o = getOrCreatePropertyFromRuntimeObject(r_o, feature);
+	                        
 	                        // Otherwise, 
 	                        internalLog.debug("      feature: " + feature.getName() + ";\n      eObject: "+ eObject + "; p_o: " + p_o);
-	                        if (p_o!=null) ((EList)eObject.eGet(feature)).add(p_o);
+	                        if (p_o!=null)
+	                        {
+	                        	((EList)eObject.eGet(feature)).add(p_o);
+	                        }
 	                    }
 	                }
 	                // If property is an EObject 
@@ -203,6 +213,10 @@ public class Runtime2EMF {
 	                {
 	                    property_eObject = getPrimitiveTypeValueFromRuntimeObject(property);
 	                    eObject.eSet(feature, property_eObject);
+	                }
+	                else if (feature.getEType() instanceof EClass)
+	                {   // if the property_eObject is in fact an EClass
+	                	eObject.eSet(feature, property_eObject);
 	                }
 	                else
 	                {
@@ -230,8 +244,8 @@ public class Runtime2EMF {
     {
         Object result = null;
         // try to get emfObject : it exists if and only if the rObject was not created by the kerdeveloper
-        if (rObject.getData().containsKey("emfObject"))
-            result = rObject.getData().get("emfObject");
+        if (rObject.getData().containsKey("r2e.emfObject"))
+            result = rObject.getData().get("r2e.emfObject");
         else // createEObjectFromRuntimeObject also updates the emfObject entry
         	result = createEObjectFromRuntimeObject(rObject);
         return result;
@@ -257,7 +271,7 @@ public class Runtime2EMF {
         	// we have to use the metamodel hosted by the resource (eobject.eResource()) 
         	// implicitely loaded by EMF instead of our own resource (unit.getMetamodelResource)
         	// please do not modify this (it is *intentional* now :P).
-        	result = createEObjectFromRuntimeObjectWithResource(rProperty, feature.getEType().eResource());
+       		result = createEObjectFromRuntimeObjectWithResource(rProperty, feature.getEType().eResource());
         }
         else
         {
@@ -296,17 +310,20 @@ public class Runtime2EMF {
         fr.irisa.triskell.kermeta.language.structure.Class metaclass = 
         	(fr.irisa.triskell.kermeta.language.structure.Class)rObject.getMetaclass().getData().get("kcoreObject");
         // Get the qualified name of this meta class
-        String kqname = rObject.getFactory().getMemory().getUnit().getQualifiedName(
-                metaclass.getTypeDefinition());
+        String kqname = unit.getKermetaUnit().getQualifiedName(metaclass.getTypeDefinition());
         
-        // Equiv. to classifier.eResource if the eclassifier corresponding to the meta class of the runtime object were provided.. 
-        EClass eclass = this.getEClassFromFQualifiedName(kqname, p_resource);
-        
-        if (eclass != null) // If we did not find the Eclass, then it means that kqname is the name of a primitive type..
+        if (rObject.getData().get("r2e.emfObject")==null)
         {
-            result = EcoreUtil.create(eclass);
-            rObject.getData().put("emfObject", result);
+        	EClass eclass = this.getEClassFromFQualifiedName(kqname, p_resource);
+        	 // If we did not find the Eclass, then it means that kqname is the name of a primitive type..
+            if (eclass != null)
+            {
+            	result = EcoreUtil.create(eclass);
+            	rObject.getData().put("r2e.emfObject", result);
+            }
         }
+        else
+        	result=(EObject)rObject.getData().get("r2e.emfObject");
         return result;
     }
     
