@@ -1,0 +1,43 @@
+/* $Id: 003_testEnum.kmt,v 1.1 2006-07-05 17:39:54 zdrey Exp $
+ * Creation date: June 30, 2006
+ * License:
+ * Copyright:
+ * Authors: Pierre-Yves pillain
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+require "../ecore/MMEnum.ecore"
+require kermeta
+using kermeta::persistence
+
+/*enumeration AccesVariableEnumeration
+{
+	public;
+	private;
+}
+class Test
+{
+	attribute a : MDK::AccesVariableEnumeration
+}*/
+class Main
+{
+    operation main() : Void is do 
+  	//var acc : MDK::AccesVariableEnumeration
+    var test : MDK::Test init MDK::Test.new
+	//acc := MDK::AccesVariableEnumeration.accPublic
+	test.a := MDK::AccesVariableEnumeration.accPublic
+	if test.a == MDK::AccesVariableEnumeration.accPublic then
+    	var repository : EMFRepository init EMFRepository.new
+    	var ressource : EMFResource 
+    	ressource ?= repository.createResource("./Enum.xmi",
+     				"../ecore/MMEnum.ecore")
+     	ressource.instances.add( test)
+     	ressource.save()
+	end
+        
+    end
+}

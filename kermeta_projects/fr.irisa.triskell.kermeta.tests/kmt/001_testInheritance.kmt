@@ -1,0 +1,42 @@
+/* $Id: 001_testInheritance.kmt,v 1.1 2006-07-05 17:39:54 zdrey Exp $
+ * Creation date: June 30, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+@mainClass "testattr::Main"
+@mainOperation "main"
+
+
+package testattr;
+
+
+require kermeta
+using kermeta::persistence
+
+class A {}
+class B inherits A {}
+class C inherits A
+{
+	attribute x : A[0..*]
+} 
+
+class Main
+{
+	operation main() is do
+		var c : C init C.new
+		var b : B init B.new
+		c.x.add(b)
+		
+		var repository : EMFRepository init EMFRepository.new
+    	var resource : EMFResource 
+    	resource ?= repository.createResource("../instances/test_inheritance.xmi", "../ecore/001_testInheritance.ecore")
+    	resource.instances.add(c)
+    	resource.save()
+//    	resource.saveWithNewURI("test_inheritance.out.xmi") 
+	end
+	
+	
+}
+
+
