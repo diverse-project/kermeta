@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.5 2006-06-23 14:31:16 zdrey Exp $
+/* $Id: KMT2KMPass1.java,v 1.6 2006-07-05 14:45:42 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : GPL
@@ -23,6 +23,8 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  * PASS 1 : Collect imports and usings
  */
 public class KMT2KMPass1 extends KMT2KMPass {
+	
+	protected Boolean existUsing = false;
 	
 	/**
 	 * @param builder
@@ -61,6 +63,7 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(UsingStmt usingStmt) {
 		builder.addUsing(qualifiedIDAsString(usingStmt.getName()));
+		existUsing = true;
 		return false;
 	}
 	
@@ -69,7 +72,7 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	 */
 	public boolean beginVisit(TopLevelDecls decls)
 	{
-		if (decls.getChildCount()== 0)
+		if (decls.getChildCount()== 0 && existUsing == true)
 			builder.messages.addError(
 			"PASS 1 : Either 'using' declaration is misplaced (should be put after 'require'), " +
 			"or there is no element defined in your file.", null);
