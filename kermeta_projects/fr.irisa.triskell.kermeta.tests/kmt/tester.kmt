@@ -1,0 +1,29 @@
+@mainClass "test_package::Tester"
+@mainOperation "main"
+
+package test_package;
+
+require kermeta
+require "./testEMFLoad.kmt"
+require "./testAB.kmt"
+require "./testABTypes.kmt"
+
+using root_package
+
+class Tester
+{
+    operation main() : Void is do 
+	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new 
+		// Here, we run our test case
+		// TestString must inherit TestCase
+/*		testRunner.run(TestAB)
+		testRunner.printTestResult
+	
+		// Test the operations related to super type
+		testRunner.run(TestABTypes)
+		testRunner.printTestResult*/ 
+		
+		testRunner.run(emfLoadPackage::TestEMFLoad) 
+		testRunner.printTestResult
+    end 
+}

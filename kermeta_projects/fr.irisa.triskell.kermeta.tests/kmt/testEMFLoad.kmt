@@ -1,0 +1,124 @@
+package emfLoadPackage;
+
+require "serializer.kmt"
+require "../ecore/EEnum.ecore" 
+require "../ecore/AB01_stringlist.ecore"
+require "./001_testInheritance.kmt"
+require kermeta
+using kermeta::standard 
+using kermeta::persistence
+using root
+using serializer
+
+/** 
+ * This test suite tests mainly operations on EClass elements, related to the structural features
+*/
+class TestEMFLoad inherits kermeta::kunit::TestCase
+{
+	reference resource : kermeta::persistence::EMFResource
+	reference root : ecore::EPackage
+	reference aclaz : ecore::EClass
+	reference bclaz : ecore::EClass
+	reference s : Serializer
+	attribute str : String
+ 	
+	method setUp() is do
+		s := Serializer.new 
+		s.__init__()
+	end
+	
+	method tearDown() is do
+	end
+	
+    operation testab01_stringlist() is do
+    	stdio.writeln("Begin : stringlist test -- for serializing a set of elements of type String (set String[0..*])")
+    	var o : ab01_stringlist::AWithString
+        o ?= s.loadModelWithClass("../instances/AWithString.xmi", "../ecore/AB01_stringlist.ecore")
+		// Test the content
+		assert (o.isVoid == false)
+		assert (o.strs.size == 1)
+		assert (o.strs.one == "string1")
+		
+        o.strs.add("coucou")
+        s._resource.saveWithNewURI("../instances/AWithString.out.xmi")
+        // Now, reload and test the content of the saved resource!
+        o ?= s.loadModelWithClass("../instances/AWithString.out.xmi", "../ecore/AB01_stringlist.ecore")
+        assert(o.strs.size == 2)
+        assert(o.strs.contains("string1"))
+        assert(o.strs.contains("coucou"))
+    end
+    
+    /** Simply check if instance with enumeration is correctly loaded and saved */
+    operation testeenum() is do
+    	stdio.writeln("test eenum")
+    	var o : eenum::A
+    	var p : eenum::A
+    	o ?= s.loadModelWithClass("../instances/eenumA1.xmi", "../ecore/EEnum.ecore")
+    	assert(o != void)
+    	s._resource.saveWithNewURI("../instances/eenumA1.out.xmi")
+    	p ?= s.loadModelWithClass("../instances/eenumA1.out.xmi", "../ecore/EEnum.ecore")
+    	// test if the enumeration contains what we expect
+    	assert(p.refenum.eLiterals.one.~value==1)
+    	assert(p.refenum.eLiterals.one.name=="a1")
+    end
+    
+    /** 
+     * 
+    */
+    operation testInheritanceFromScratch() is do
+   		var c : testattr::C init testattr::C.new
+		var b : testattr::B init testattr::B.new
+		c.x.add(b)
+		var repository : EMFRepository init EMFRepository.new 
+    	var resource : EMFResource 
+    	resource ?= repository.createResource("../instances/test_inheritance.xmi", "../ecore/001_testInheritance.ecore")
+    	resource.instances.add(c)
+    	resource.save()
+    end
+    
+    operation testInheritanceNotFromScratch() is do
+    	var c : testattr::C init testattr::C.new
+		var b : testattr::B init testattr::B.new 
+		var b2 : testattr::B init testattr::B.new 
+		
+		var repository : EMFRepository init EMFRepository.new 
+    	var resource : EMFResource 
+    	resource ?= repository.createResource("../instances/test_inheritance.xmi", "../ecore/001_testInheritance.ecore")
+    	resource.load()
+    	// Test if the previously added c element is still there
+    	c ?= resource.instances.one
+    	assert(c.isVoid == false)
+    	stdio.writeln(c.x.size.toString + " -> " + c.x.one.toString)
+    	assert(c.x.size == 1)
+ //   	stdio.writeln(c.x.size.toString + " -> " + c.x.one.toString)
+//    	assert(c.x.one.getMetaClass.typeDefinition.name == "testattr::B")
+    	
+    	// Try to re-save..
+    	c.x.add(b2)
+    	resource.saveWithNewURI("../instances/test_inheritance.out.xmi")
+    	// Reload and test the instance contents!
+/*    	resource.load() c ?= resource.instances.one
+    	assert(c.x.size == 2)
+    	assert(c.x.one.getMetaClass.name == "testattr::B")
+    	assert(c.x.last.getMetaClass.name == "testattr::C")
+    	stdio.writeln("end : test InheritanceNotFromScratch" )*/
+    end 
+/*    
+    operation testInheritance_kmt() is do
+   		var c : testattr::C init testattr::C.new
+		var b : testattr::B init testattr::B.new
+		c.x.add(b)
+		
+		var repository : EMFRepository init EMFRepository.new 
+    	var resource : EMFResource 
+    	resource ?= repository.createResource("test_inheritance.xmi", "./015_testInheritance.kmt")
+    	resource.instances.add(c)
+    	resource.save()
+    end
+    */
+    
+}
+
+enumeration Color
+{
+}
