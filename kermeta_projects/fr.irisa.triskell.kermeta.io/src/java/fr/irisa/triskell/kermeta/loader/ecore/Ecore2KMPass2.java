@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.3 2006-06-21 12:00:38 zdrey Exp $
+/* $Id: Ecore2KMPass2.java,v 1.4 2006-07-11 07:52:20 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -516,7 +516,8 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 				String dep_uri = etype.eResource().getURI().toString();
 				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
 				// this unit is not related to a real file in the user file system
-				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), new Hashtable());
+				// note: unit.packages argument: the list of found packages is added to this [main unit] hashtable.
+				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), unit.packages);
 				dep_unit.load();
 				unit.importedUnits.add(dep_unit);
 				def = dep_unit.typeDefs.get(etype_qname);
