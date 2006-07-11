@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.19 2006-07-05 13:05:20 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.20 2006-07-11 17:31:42 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -317,16 +317,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 	 * @param file_path the xmi file. the extension of the file should be .km
 	 */
 	public void save(String file_path) {
-		
-		// Get the runtime memory and the interpreter -- mainly used to print 
-		// exception in the user console when save process fails
-	    RuntimeMemory memory =this.getContentMap().getFactory().getMemory();
-    	ExpressionInterpreter interpreter = memory.getCurrentInterpreter();
-    	// KermetaUnit is used just to detect the directory of which the given file_path is relative
-    	// (it corresponds to the unit of the kermeta program from where user asked for a resource save.
-    	KermetaUnit kunit =  this.getContentMap().getFactory().getMemory().getUnit();
-        
-        // Get and load the resource of the ECore MetaModel of which the model that we want to save is an instance
+		// Get and load the resource of the ECore MetaModel of which the model that we want to save is an instance
         if (this.getMetaModelUri() != null && this.getMetaModelUri().length()>0)
         {
         	try {
@@ -347,7 +338,7 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         KermetaUnit.internalLog.info("URI created for model to save : "+u);
         
         // Add the extension of the file to save into the resource registry, so that EMF won't complain
-        registerEMFextensionToFactoryMap(kunit.getUri());
+        registerEMFextensionToFactoryMap(getKermetaUnit().getUri());
         
         // Create the resource, and fill it (done in updateEMFModel)
         ResourceSet resource_set = new ResourceSetImpl();

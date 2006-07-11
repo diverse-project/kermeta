@@ -1,4 +1,4 @@
-/* $Id: EcoreUnit.java,v 1.8 2006-06-21 12:00:38 zdrey Exp $
+/* $Id: EcoreUnit.java,v 1.9 2006-07-11 17:33:37 zdrey Exp $
 * Project : Kermeta (First iteration)
 * File : EcoreUnit.java
 * License : GPL
@@ -66,23 +66,13 @@ public class EcoreUnit extends KermetaUnit {
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl()); 
 			ResourceSet resource_set = new ResourceSetImpl();
 			Resource resource = resource_set.getResource(URI.createURI(this.getUri()), true);
-			this.load(resource);
-		} catch (Throwable e) {
-			this.messages.addError("Error loading ECore model " + this.getUri() + " : " + e, null);
-			KermetaUnit.internalLog.error("Error loading ECore model " + this.getUri() + " : " + e, e);
-		}
-	}
-    
-	public void load(Resource resource) {
-		try {
 			new Ecore2KM(resource, this).export();
 		} catch (Throwable e) {
 			this.messages.addError("Error loading ECore model " + this.getUri() + " : " + e, null);
 			KermetaUnit.internalLog.error("Error loading ECore model " + this.getUri() + " : " + e, e);
 		}
 	}
-	
-
+    
     /**
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadAnnotations()
      */

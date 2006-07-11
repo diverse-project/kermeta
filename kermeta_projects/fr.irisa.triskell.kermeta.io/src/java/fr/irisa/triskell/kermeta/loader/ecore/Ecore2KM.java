@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.2 2006-06-21 12:00:38 zdrey Exp $
+/* $Id: Ecore2KM.java,v 1.3 2006-07-11 17:33:37 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -51,7 +51,7 @@ public class Ecore2KM {
 	static {
 		primitive_types_mapping = new Hashtable<String, String>();
 		primitive_types_mapping.put("int", 					"kermeta::standard::Integer");
-		primitive_types_mapping.put("java.lang.Integer", 	"kermeta::standard::Integer");
+		primitive_types_mapping.put("java.lang.Integer", 	"kermeta::standard::Integer"); // Fixme : UnlimiteNatural not handled
 		primitive_types_mapping.put("boolean", 				"kermeta::standard::Boolean");
 		primitive_types_mapping.put("java.lang.Boolean", 	"kermeta::standard::Boolean");
 		primitive_types_mapping.put("java.lang.String", 	"kermeta::standard::String");

@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.32 2006-07-05 13:05:20 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.33 2006-07-11 17:31:42 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -16,7 +16,6 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
@@ -26,20 +25,20 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
-//import fr.irisa.triskell.kermeta.language.structure.FClass;
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
@@ -62,7 +61,7 @@ public class Runtime2EMF {
 	 * @param p_resource the resource that hosts the model to save. It is actually empty...
 	 */
     public Runtime2EMF(EMFRuntimeUnit p_unit, Resource p_resource) {
-        this.updatedRuntimeObjects = new ArrayList();
+        this.updatedRuntimeObjects = new ArrayList<RuntimeObject>();
         this.unit = p_unit;
         this.resource = p_resource;
     }
@@ -91,8 +90,8 @@ public class Runtime2EMF {
         
         // Add the root elements to the XMI resource
         // Note: emfObject2 entry is only used for eObject retrieval during the save process!
-        for (RuntimeObject o : instances)
-        {	resource.getContents().add(o.getData().get("r2e.emfObject")); }
+        for (RuntimeObject o : instances) 
+        { resource.getContents().add(o.getData().get("r2e.emfObject")); }
     }
     
     /**
@@ -104,6 +103,7 @@ public class Runtime2EMF {
      */
     protected EObject findEObjectForRuntimeObject(RuntimeObject rObject)
     {
+    	
         // Create the EObject for given runtime object
     	EObject result = (EObject)this.getOrCreateEObjectFromRuntimeObject(rObject);
         
@@ -141,7 +141,8 @@ public class Runtime2EMF {
                 RuntimeObject r_o =(RuntimeObject)next; 
                 if (!updatedRuntimeObjects.contains(r_o))
                 {
-                	if(getPrimitiveTypeValueFromRuntimeObject(r_o)==null)
+                	if(getPrimitiveTypeValueFromRuntimeObject(r_o)==null
+                		|| isanEEnumLiteral(r_o)==false)
                 		findEObjectForRuntimeObject(r_o); 
                 }
             }
@@ -151,7 +152,8 @@ public class Runtime2EMF {
         {
     		// If property's type is a primitive type (String, Integer), we don't have to 
         	// "parse" it contents, obviously, so, nor to add it in updatedRuntimeObject
-        	if(getPrimitiveTypeValueFromRuntimeObject(property)==null)
+        	if(getPrimitiveTypeValueFromRuntimeObject(property)==null
+        			|| isanEEnumLiteral(property)==false)
         		findEObjectForRuntimeObject(property);
         }
     }
@@ -162,6 +164,7 @@ public class Runtime2EMF {
      */
     protected void setEObjectPropertiesFromRuntimeObject(RuntimeObject rObject)
     {
+    	// If the object is an instance of eClass :
         EObject eObject = (EObject)rObject.getData().get("r2e.emfObject");
         // Get all the Structural features of requested eObject
         for (Object next : rObject.getProperties().keySet())
@@ -183,19 +186,13 @@ public class Runtime2EMF {
             	{	// Unset the old value of feature
             		eObject.eUnset(feature);
 	                Object property_eObject = getOrCreatePropertyFromRuntimeObject(property, feature);
-	                
 	                // If the feature is a collection of Objects
 	                if (property_eObject instanceof EList)
 	                {
 	                    // For each feature of the collection of features
 	                    for (Object rcoll : ((ArrayList)property.getData().get("CollectionArrayList")))
 	                    {
-	                        RuntimeObject r_o =(RuntimeObject)rcoll;
-	                        // Get the type of the feature, if it is an EClass
-	                        //if (feature.getEType() instanceof EObject)
-	                        Object p_o = getOrCreatePropertyFromRuntimeObject(r_o, feature);
-	                        
-	                        // Otherwise, 
+	                        Object p_o = getOrCreatePropertyFromRuntimeObject((RuntimeObject)rcoll, feature);
 	                        internalLog.debug("      feature: " + feature.getName() + ";\n      eObject: "+ eObject + "; p_o: " + p_o);
 	                        if (p_o!=null)
 	                        {
@@ -203,27 +200,18 @@ public class Runtime2EMF {
 	                        }
 	                    }
 	                }
-	                // If property is an EObject 
-	                else if ( property_eObject instanceof EObject)
+	                else // EObject, EClass, EDataType
 	                {
-	                    eObject.eSet(feature, property_eObject);
-	                }
-	                // If property type is a datatype, than its value is not EObject, but String,Integer,or alike.
-	                else if (feature.getEType() instanceof EDataType)
-	                {
-	                    property_eObject = getPrimitiveTypeValueFromRuntimeObject(property);
-	                    eObject.eSet(feature, property_eObject);
-	                }
-	                else if (feature.getEType() instanceof EClass)
-	                {   // if the property_eObject is in fact an EClass
 	                	eObject.eSet(feature, property_eObject);
 	                }
-	                else
+	                /*// TODO : before uncommenting this, we have to check if "null" is a legal value for property_eObject
+	                if (property_eObject==null)
 	                {
 	                    unit.throwKermetaRaisedExceptionOnSave(
 	                    		"NotImplementedError : This type is not recognized :" + feature.getEType() +
+	                    		";\n - perhaps a require is missing (like Ecore.ecore?)" +
 	                    		";\n - Please mail kermeta-users list :}", null);
-	                }
+	                }*/
             	}
             }
         }
@@ -265,6 +253,8 @@ public class Runtime2EMF {
         // a EDataType?
         else if (getPrimitiveTypeValueFromRuntimeObject(rProperty) !=null)
             result = getPrimitiveTypeValueFromRuntimeObject(rProperty);
+        else if (isanEEnumLiteral(rProperty) == true)
+        	result = createEEnumLiteralFromRuntimeObjectWithResource(rProperty, feature.getEType().eResource());
         // by default, an EObject instance of an EClass
         else if (feature.getEType() instanceof EClass)
         {	// Important note: once the objects are created (using the metamodel given by the user in kermeta side)
@@ -273,11 +263,22 @@ public class Runtime2EMF {
         	// please do not modify this (it is *intentional* now :P).
        		result = createEObjectFromRuntimeObjectWithResource(rProperty, feature.getEType().eResource());
         }
+        // - If it is an EDatatype that is not a "PrimitiveType" (see getPrimitiveTypeValue)?
+        // - Example of case handled here : (see 003_testEnum.kmt in fr.irisa.triskell.kermeta.tests)
+        //   rProperty : [ecore::EEnumLiteral : 841] into an EMF type.
+        //   feature.getEType() == org.eclipse.emf.ecore.impl.EDataTypeImpl@7af3e0
+        //          (name: EEnumerator)
+        // 			(instanceClassName: org.eclipse.emf.common.util.Enumerator)
+        //          (serializable: false))
+        else if (feature.getEType() instanceof EDataType)
+        {
+        	result = rProperty.getData().get("r2e.emfObject");
+        }
         else
         {
         	String msg = "could not convert : " + rProperty + " into an EMF type. (classifier : " + feature.getEType() + ")";
-        	unit.getKermetaUnit().messages.addWarning(msg, null);
-        	//unit.throwKermetaRaisedExceptionOnSave(msg , null);
+        	// unit.getKermetaUnit().messages.addWarning(msg, null);
+        	unit.throwKermetaRaisedExceptionOnSave(msg , null);
         }
         return result;
     }
@@ -315,7 +316,13 @@ public class Runtime2EMF {
         if (rObject.getData().get("r2e.emfObject")==null)
         {
         	EClass eclass = this.getEClassFromFQualifiedName(kqname, p_resource);
-        	 // If we did not find the Eclass, then it means that kqname is the name of a primitive type..
+        	 // If we did not find the Eclass, then we could try to find it in the ecore metamodel resource
+            if (eclass == null && kqname.startsWith("ecore"))
+            {	// this is a patch-like solution :/ for handling ecore metamodel types
+                URI u = URI.createURI(KM2Ecore.ECORE_NSURI);
+                Resource ecore_resource = resource.getResourceSet().getResource(u, true);
+                eclass = getEClassFromFQualifiedName(kqname, ecore_resource);
+            }
             if (eclass != null)
             {
             	result = EcoreUtil.create(eclass);
@@ -324,6 +331,26 @@ public class Runtime2EMF {
         }
         else
         	result=(EObject)rObject.getData().get("r2e.emfObject");
+        return result;
+    }
+    
+    protected EEnumLiteral createEEnumLiteralFromRuntimeObjectWithResource(RuntimeObject rObject, Resource p_resource)
+    {
+    	EEnumLiteral result = null;
+    	// FIXME :"enumeration" element is not set correctly on runtime object representing an enumeration literal!
+    	//for (Object e : rObject.getProperties().keySet()) {System.out.println("KEY:" + e + "; VALUE:"+ rObject.getProperties().get(e));
+    	//RuntimeObject en = (RuntimeObject)rObject.getProperties().get("enumeration");
+    	//(String)getPrimitiveTypeValueFromRuntimeObject((RuntimeObject)en.getProperties().get("name"));
+    	// Get the name of the enumeration literal element
+    	// Get the qualified name of this meta class
+        if (rObject.getData().get("r2e.emfObject")==null)
+        {
+        	String enum_literal_name = (String)getPrimitiveTypeValueFromRuntimeObject((RuntimeObject)rObject.getProperties().get("name"));
+        	result = getEEnumLiteralFromFQualifiedName(enum_literal_name, p_resource);
+        	rObject.getData().put("r2e.emfObject", result);
+        }
+        else
+        	result = (EEnumLiteral)rObject.getData().get("r2e.emfObject");
         return result;
     }
     
@@ -352,7 +379,28 @@ public class Runtime2EMF {
         }
         return result;
     }
-   
+    
+    /** Special method to find an enumeration in meta model that contains an enumeration literal
+     * which name is kqname */
+    protected EEnumLiteral getEEnumLiteralFromFQualifiedName(String kqname, Resource res)
+    {
+        EEnumLiteral result = null;
+        TreeIterator it = res.getAllContents();
+        
+        while (it.hasNext() && result == null)
+        {
+            EObject obj = (EObject)it.next();
+			if (obj instanceof EEnum)
+			{
+				for (Object o : ((EEnum)obj).getELiterals()) {
+					EEnumLiteral elit = (EEnumLiteral)o;
+					if (elit.getName().equals(kqname))
+						result = elit;
+				}
+			}
+        }
+        return result;
+    }
     
     /**
      * Get the value linked to the given RuntimeObject, provided this object wraps
@@ -387,6 +435,15 @@ public class Runtime2EMF {
         return b;
     }
     
+    public boolean isanEEnumLiteral(RuntimeObject robject)
+    {	
+        boolean b = false;
+        ClassDefinition coll_cd = (ClassDefinition)unit.getKermetaUnit().getTypeDefinitionByName("kermeta::language::structure::EnumerationLiteral");  
+        fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class)robject.getMetaclass().getData().get("kcoreObject");
+        if (coll_cd.equals(c.getTypeDefinition())) b = true;
+        return b;
+    }
+    
     /**
      * Get the EStructuralFeature in given <code>eObject</code> from the feature <code>p_name</code>
      * given in parameters
@@ -394,7 +451,7 @@ public class Runtime2EMF {
      * @param p_name the name of the wanted feature
      * @return an EStructuralFeature corresponding to eObject.p_name
      */
-    protected EStructuralFeature getEStructuralFeatureByName(EObject eObject, String p_name)
+    public static EStructuralFeature getEStructuralFeatureByName(EObject eObject, String p_name)
     {
         // Get the structural features
         EList features = eObject.eClass().getEAllStructuralFeatures();
