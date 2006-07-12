@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.15 2006-07-12 13:34:23 barais Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.16 2006-07-12 13:38:17 cfaucher Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -49,7 +49,6 @@ import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
  */
 public abstract class AbstractKermetaTarget implements IDebugElement,
 		IDebugTarget, ILaunchListener, IStepFilters {
-	 org.eclipse.debug.internal.ui.actions.context.StepFiltersAdapter a;
 	 
 	
     protected IDebugTarget target;
