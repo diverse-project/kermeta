@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.14 2006-06-19 15:47:17 dvojtise Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.15 2006-07-12 13:34:23 barais Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -48,7 +48,9 @@ import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
  * Abstract Kermeta Target 
  */
 public abstract class AbstractKermetaTarget implements IDebugElement,
-		IDebugTarget, ILaunchListener {
+		IDebugTarget, ILaunchListener, IStepFilters {
+	 org.eclipse.debug.internal.ui.actions.context.StepFiltersAdapter a;
+	 
 	
     protected IDebugTarget target;
 	protected ILaunch launch;
@@ -626,4 +628,24 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 		throw new DebugException(new Status(IStatus.ERROR, DebugPlugin.getUniqueIdentifier(), 
 				DebugException.NOT_SUPPORTED, message, e));
 	}
+	protected boolean stepFilter  =false;
+	
+	public boolean isStepFiltersEnabled() {
+	
+		return stepFilter;
+	}
+
+
+	public void setStepFiltersEnabled(boolean enabled) {
+		stepFilter = enabled;
+		
+	}
+
+
+	public boolean supportsStepFilters() {
+		
+		return stepFilter;
+	}
+
+	
 }
