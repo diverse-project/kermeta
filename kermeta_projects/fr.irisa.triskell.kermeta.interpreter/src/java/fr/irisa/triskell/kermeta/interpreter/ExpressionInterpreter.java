@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.38 2006-06-19 12:28:49 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.39 2006-07-13 07:46:55 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -146,6 +146,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitVariableDecl(VariableDecl node)
 	{
+		if (node!=null) setParent(node);
 		RuntimeObject ro_init = memory.voidINSTANCE;
 		// is it a classic case?
 		// TODO : compare qualified names otherwise this test could be sometimes false
@@ -166,6 +167,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	
     public Object visitTypeLiteral(TypeLiteral arg0) {
         RuntimeObject result = null;
+        if (arg0!=null) setParent(arg0);
         Type t = ((SimpleType)TypeCheckerContext.getTypeFromMultiplicityElement(arg0.getTyperef())).getType();
        
         if (t instanceof fr.irisa.triskell.kermeta.language.structure.Class) {
@@ -234,7 +236,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Assignment)
 	 */
 	public Object visitAssignment(Assignment node) {
-	    
+		if (node!=null) setParent(node);
 		// The name of the call
 		String lhs_name = node.getTarget().getName();
 		
@@ -408,6 +410,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
      */
     public Object visitCallSuperOperation(CallSuperOperation node)
     {
+    	if (node!=null) setParent(node);
         RuntimeObject result = null;
         // Current call frame is uniquely a LambdaCallFrame, or an OperationCallFrame. Other types are forbidden!
         Operation current_op = this.interpreterContext.peekCallFrame().getOperation();
@@ -438,6 +441,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitLambdaExpression(LambdaExpression node)
 	{   	    
+		if (node!=null) setParent(node);
 	    RuntimeObject result = new RuntimeLambdaObject(node, memory.getROFactory(),this.interpreterContext.peekCallFrame(), this.interpreterContext);
 	    return result;
 	}
@@ -583,7 +587,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FClass)
 	 */
 	public Object visitClass(fr.irisa.triskell.kermeta.language.structure.Class node) {
-	    throw new Error("INTERPRETER INTERNAL ERROR : visit a FClass");
+	    throw new Error("INTERPRETER INTERNAL ERROR : visit a Class");
 	}
 	
 	/**
@@ -591,7 +595,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.Conditional)
 	 */
 	public Object visitConditional(Conditional node) {
-	    
+		if (node!=null) setParent(node);
 	    // The result returned by the visit
 	    RuntimeObject result = null;
 		// Stops the interpretation.
@@ -642,6 +646,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitLoop(Loop node)
 	{
+		if (node!=null) setParent(node);
 		RuntimeObject result = memory.voidINSTANCE;
         // Push a new expressionContext in the current CallFrame. 
         interpreterContext.peekCallFrame().pushExpressionContext();
@@ -668,7 +673,6 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		            cond_value = ((Boolean)cond_result.getData().get("BooleanValue")).booleanValue();
 		        else
 		        {
-		        	System.err.println("Loop : evaluation of the condition part does not result in a boolean value.");
 		        	throw new Error("INTERPRETER INTERNAL ERROR : Loop : evaluation of the condition part does not result in a boolean value.");
 		        }
 		        
@@ -693,7 +697,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
 	 */
 	public Object visitOperation(Operation node) {
-	    
+		if (node!=null) setParent(node);
 	    RuntimeObject result = memory.voidINSTANCE;
 	    // push expression context
 	    interpreterContext.peekCallFrame().pushExpressionContext();
@@ -735,7 +739,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     
     
 	public Object visitCallFeature(CallFeature node) {
-	    
+		if (node!=null) setParent(node);
 	    // Handle call to enumeration literals :
 	    if (node.getStaticEnumLiteral() != null) {
 	        return memory.getRuntimeObjectForFObject(node.getStaticEnumLiteral());
@@ -755,7 +759,6 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    else {
 	        ro_target = (RuntimeObject)this.accept(node.getTarget());
 	    }
-	    
 	    
 	    if (ro_target == null) {
 	        internalLog.error("INTERPRETER INTERNAL ERROR : Call on a null target");
@@ -799,7 +802,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		        raiseCallOnVoidTargetException(node, additionalMsg);		        
 		    }
 		    
-//		  This should never happend is the type checker has checked the program
+//		  This should never happen if the type checker has checked the program
 			if (operation == null) {
 			    String msg = "INTERPRETER INTERNAL ERROR : unable to find a feature : "
 				    + "\noperation : '"+node.getName()+"' not found for an object of kind : "+ target_type;
@@ -832,9 +835,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		    
 //		  This should never happen is the type checker has checked the program
 			if (property == null) {
-			    internalLog.error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getName() + "in type : " + target_type);
-			    internalLog.error("May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developpers");		        
-		        throw new Error("INTERPRETER INTERNAL ERROR : unable to find a feature : " + node.getName());
+				String err = "INTERPRETER INTERNAL ERROR : unable to find a feature : '" + node.getName() + "' in type : " + target_type;
+			    err += "\n( May be the code was not successfully typechecked; If the typechecker has no error, please contact kermeta developers )";
+		        throw new Error(err);
 			}
 			
 //			 Get the runtime object corresponding to the property
@@ -842,9 +845,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		    
 		    // This is just a debbuging check. It should never occur
 		    if (ro_property == null) {
-			    internalLog.error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
-			    internalLog.error("May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developpers");
-		        throw new Error("INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property " + property.getName());
+			    String err = "INTERPRETER INTERNAL ERROR : Unable to find runtime object corresponding to property '" + property.getName() + "'";
+			    err += "\n( May be the code was not successfully typechecked ? If the typechecker has no error, please contact kermeta developers )";
+			    throw new Error(err);
 			}
 		    
 		    if (!property.getProperty().isIsDerived())
@@ -992,8 +995,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			        {
 			            internalLog.error("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName , e2);
 			            internalLog.error("The cause : "  + cause.getClass());
-			            
-						throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName  ,e2);
+			            throw	new KermetaVisitorError("InvocationTargetException invoking "+ jmethodName + " on Class " +jclassName 
+			            		+ "\n The cause: " + cause.getClass(),e2);
 			        }
 	            
 	        } catch (Throwable e2) {
@@ -1047,6 +1050,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitClassDefinition(ClassDefinition node)
 	{
+		if (node!=null) setParent(node);
 	    // Get the qualified name of this class
 	    String qname = memory.getUnit().getQualifiedName(node);
 	    RuntimeObject result = memory.getROFactory().getTypeDefinitionByName(qname);
