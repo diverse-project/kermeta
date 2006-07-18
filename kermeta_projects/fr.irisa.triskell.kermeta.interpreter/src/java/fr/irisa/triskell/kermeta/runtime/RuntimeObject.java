@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.13 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: RuntimeObject.java,v 1.14 2006-07-18 11:37:33 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -60,7 +60,7 @@ public class RuntimeObject {
 	 * The values of properties. 
 	 * Indexed by the name of the property : { a_string : a_runtime_object }
 	 */
-	private Hashtable properties = new Hashtable();
+	private Hashtable<String, RuntimeObject> properties = new Hashtable<String, RuntimeObject>();
 	
 	/**
 	 * Data contained in the object
@@ -224,7 +224,7 @@ public class RuntimeObject {
 	 * <pre>{ "y" : a_RuntimeObject_as_instance_of_Y, "z" : a_RuntimeObject_as_instance_of_z }</pre>
 	 * @return Returns the properties.
 	 */
-	public Hashtable getProperties() {
+	public Hashtable<String, RuntimeObject> getProperties() {
 		return properties;
 	}
 	
