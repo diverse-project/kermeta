@@ -1,0 +1,76 @@
+/* $Id: 601test_Tool_GOFStatePattern.kmt,v 1.1 2006-07-18 15:10:45 vmahe Exp $
+ * Creation date: July 6, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package tools_tests;
+
+
+require kermeta
+require "../../src/kermeta/transformations/GOFStatePatternTool.kmt"
+
+using uml2
+using uml2::transformations
+
+class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
+{
+	reference tool : GOFStatePatternTool
+	reference model : Model
+	reference aClass : Classifier
+	reference s0 : Pseudostate
+	reference s1 : State
+	reference s2 : State
+	reference f : FinalState
+	reference sm : StateMachine
+	reference t01 : Transition
+	reference t12 : Transition
+	reference t21 : Transition
+	reference t2f : Transition
+	
+	method setUp() is do
+		//creating neede instances
+		model := Model.new
+		aClass := Class.new
+		aClass.name := "AClass"
+		model.member.add(aClass)
+		s0 := Pseudostate.new
+		model.member.add(s0)
+		s1 := State.new
+		s1.name := "Off"
+		model.member.add(s1)
+		s2 := State.new
+		s2.name := "On"
+		model.member.add(s2)
+		f := FinalState.new
+		f.name := "final"
+		model.member.add(f)
+		t01 := Transition.new
+		t01.source := s0
+		t01.target := s1
+		model.member.add(t01)
+		t12 := Transition.new
+		t12.source := s1
+		t12.target := s2
+		model.member.add(t12)
+		t21 := Transition.new
+		t21.source := s2
+		t21.target := s1
+		model.member.add(t21)
+		t2f := Transition.new
+		t2f.source := s2
+		t2f.target := f
+		model.member.add(t2f)
+		
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    operation test_GOFStateTool_ReifiedStates() is do
+    	assertTrueWithMsg(false,
+    		"xxxxxxx")
+    end
+}

@@ -1,0 +1,52 @@
+@mainClass "test_package::MyTestClass" 
+@mainOperation "main"
+
+
+package test_package;
+
+require kermeta
+require "701test_CloneTool_Package.kmt"
+require "702test_CloneTool_Class.kmt"
+require "703test_CloneTool_Operation.kmt"
+require "704test_CloneTool_Parameter.kmt"
+require "705test_CloneTool_Property.kmt"
+require "706test_CloneTool_ValueSpecification.kmt"
+require "707test_CloneTool_Association.kmt"
+
+require "750test_CloneTool_StaticDiagram.kmt"
+
+using tools_tests
+
+class MyTestClass
+{
+    operation main() : Void is do 
+	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+/*		
+		testRunner.run(ToolClonePackageTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolCloneClassTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolCloneOperationTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolCloneParameterTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolClonePropertyTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolCloneValueSpecificationTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolCloneAssociationTestCase)
+		testRunner.printTestResult
+	*/	
+		
+		///////// tests on diagram cloning //////////
+		
+		testRunner.run(ToolCloneStaticDiagramTestCase)
+		testRunner.printTestResult
+    end 
+}

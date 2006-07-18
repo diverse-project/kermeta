@@ -16,7 +16,7 @@
       <element href="transformations.uml2#_tPOCIqLHEdqkGMDvm75SlQ"/>
     </semanticModel>
     <contained xsi:type="di:GraphNode" position="301,58" size="140,-1">
-      <anchorage graphEdge="//@diagrams.0/@contained.5 //@diagrams.0/@contained.7 //@diagrams.0/@contained.12"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.5 //@diagrams.0/@contained.7 //@diagrams.0/@contained.12 //@diagrams.0/@contained.18"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="transformations.uml2#_hZzU0QgIEduUXL83dpLUlw"/>
       </semanticModel>
@@ -55,7 +55,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="168,191" size="157,-1">
+    <contained xsi:type="di:GraphNode" position="150,191" size="157,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.4 //@diagrams.0/@contained.5 //@diagrams.0/@contained.10"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="transformations.uml2#_orVBsAgIEduUXL83dpLUlw"/>
@@ -87,7 +87,7 @@
         <element href="transformations.uml2#_PT2moAgJEduUXL83dpLUlw"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="441,191" size="146,-1">
+    <contained xsi:type="di:GraphNode" position="462,190" size="146,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.14"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="transformations.uml2#_QeTnkAgJEduUXL83dpLUlw"/>
@@ -110,7 +110,7 @@
         <element href="transformations.uml2#_jJtWwAgJEduUXL83dpLUlw"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="123,275" size="247,-1">
+    <contained xsi:type="di:GraphNode" position="105,275" size="247,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.10"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="transformations.uml2#_usUOYApmEduUXL83dpLUlw"/>
@@ -192,7 +192,7 @@
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.11/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="CommentLink EditPolicy"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="395,273" size="239,-1">
+    <contained xsi:type="di:GraphNode" position="416,272" size="239,-1">
       <anchorage graphEdge="//@diagrams.0/@contained.14 //@diagrams.0/@contained.16"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="transformations.uml2#_B3_C8ApwEduUXL83dpLUlw"/>
@@ -258,6 +258,81 @@
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.15/@anchorage.0 //@diagrams.0/@contained.13/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="CommentLink EditPolicy"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="215,512" size="313,-1">
+      <anchorage graphEdge="//@diagrams.0/@contained.18"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_-s4bAA2zEdu1hoDIAv_DkQ"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_-s4bAA2zEdu1hoDIAv_DkQ"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_c3weMA20Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_gefUUA20Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_mMDUEA20Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_-s4bAA2zEdu1hoDIAv_DkQ"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_ERR3sA20Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_27xZsA20Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_K61wMA21Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_olQxsA21Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.17/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_Ba12EA20Edu1hoDIAv_DkQ"/>
+      </semanticModel>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="649,531" size="100,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_w6UNkA20Edu1hoDIAv_DkQ"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_w6UNkA20Edu1hoDIAv_DkQ"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_w6UNkA20Edu1hoDIAv_DkQ"/>
+        </semanticModel>
+      </contained>
     </contained>
   </diagrams>
   <diagrams position="0,0" size="100,100" name="Uml2" viewport="0,0">
@@ -502,8 +577,25 @@
         </semanticModel>
       </contained>
     </contained>
+    <contained xsi:type="di:GraphNode" position="515,199" size="100,-1">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_Jdh6IA20Edu1hoDIAv_DkQ"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_Jdh6IA20Edu1hoDIAv_DkQ"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_Jdh6IA20Edu1hoDIAv_DkQ"/>
+        </semanticModel>
+      </contained>
+    </contained>
   </diagrams>
-  <diagrams position="0,0" size="100,100" name="State pattern &amp; Interface samples" viewport="0,0">
+  <diagrams position="0,0" size="100,100" name="Valooder extracts" viewport="0,0">
     <property key="pageFormatName" value="A4"/>
     <property key="diagramWidth" value="840"/>
     <property key="diagramHeight" value="1188"/>
@@ -512,7 +604,7 @@
     <property key="diagramBottomMargin" value="20"/>
     <property key="diagramLeftMargin" value="20"/>
     <property key="diagramRightMargin" value="20"/>
-    <property key="orientation" value="portrait"/>
+    <property key="orientation" value="landscape"/>
     <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="org.topcased.modeler.uml2.classdiagram">
       <element href="transformations.uml2#_hJMuAApuEduUXL83dpLUlw"/>
     </semanticModel>
@@ -575,7 +667,7 @@
       </contained>
     </contained>
     <contained xsi:type="di:GraphNode" position="63,300" size="235,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.2"/>
+      <anchorage graphEdge="//@diagrams.2/@contained.2 //@diagrams.2/@contained.13"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="transformations.uml2#_qJHPUApuEduUXL83dpLUlw"/>
       </semanticModel>
@@ -607,8 +699,8 @@
         <element href="transformations.uml2#_uARHEApuEduUXL83dpLUlw"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="542,283" size="220,-1">
-      <anchorage graphEdge="//@diagrams.2/@contained.5 //@diagrams.2/@contained.8 //@diagrams.2/@contained.9"/>
+    <contained xsi:type="di:GraphNode" position="712,280" size="220,-1">
+      <anchorage graphEdge="//@diagrams.2/@contained.5 //@diagrams.2/@contained.8 //@diagrams.2/@contained.9 //@diagrams.2/@contained.14"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="transformations.uml2#_2Okd4ApxEduUXL83dpLUlw"/>
       </semanticModel>
@@ -645,7 +737,7 @@
         </contained>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="542,35" size="220,183">
+    <contained xsi:type="di:GraphNode" position="712,32" size="220,183">
       <anchorage graphEdge="//@diagrams.2/@contained.5"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="transformations.uml2#_B3_C8ApwEduUXL83dpLUlw"/>
@@ -703,13 +795,13 @@
         <element href="transformations.uml2#_KkVAoApzEduUXL83dpLUlw"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="416,301" size="89,27">
+    <contained xsi:type="di:GraphNode" position="979,288" size="89,27">
       <anchorage graphEdge="//@diagrams.2/@contained.9"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="transformations.uml2#_RIQnsApzEduUXL83dpLUlw"/>
       </semanticModel>
     </contained>
-    <contained xsi:type="di:GraphNode" position="416,401" size="118,25">
+    <contained xsi:type="di:GraphNode" position="962,398" size="118,25">
       <anchorage graphEdge="//@diagrams.2/@contained.8"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="transformations.uml2#_XV7q4ApzEduUXL83dpLUlw"/>
@@ -720,6 +812,133 @@
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.6/@anchorage.0 //@diagrams.2/@contained.3/@anchorage.0">
       <semanticModel xsi:type="di:SimpleSemanticModelElement" typeInfo="CommentLink EditPolicy"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="332,216" size="142,-1">
+      <anchorage graphEdge="//@diagrams.2/@contained.12"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_EcqdwQ2zEdu1hoDIAv_DkQ"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_EcqdwQ2zEdu1hoDIAv_DkQ"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_EcqdwQ2zEdu1hoDIAv_DkQ"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="400,374" size="216,-1">
+      <anchorage graphEdge="//@diagrams.2/@contained.12 //@diagrams.2/@contained.13 //@diagrams.2/@contained.14 //@diagrams.2/@contained.16"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_I85HsA2zEdu1hoDIAv_DkQ"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_I85HsA2zEdu1hoDIAv_DkQ"/>
+        </semanticModel>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_I85HsA2zEdu1hoDIAv_DkQ"/>
+        </semanticModel>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.11/@anchorage.0 //@diagrams.2/@contained.10/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_NOrtAA2zEdu1hoDIAv_DkQ"/>
+      </semanticModel>
+      <waypoints>[0, -20, 105, 138]</waypoints>
+      <waypoints>[0, -95, 105, 63]</waypoints>
+      <waypoints>[-105, -95, 0, 63]</waypoints>
+      <waypoints>[-105, -137, 0, 21]</waypoints>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.11/@anchorage.0 //@diagrams.2/@contained.1/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_UqQGsA2zEdu1hoDIAv_DkQ"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="6"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" uDistance="10" vDistance="10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.11/@anchorage.0 //@diagrams.2/@contained.3/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_VIe60A2zEdu1hoDIAv_DkQ"/>
+      </semanticModel>
+      <contained xsi:type="di:EdgeObjectUV" id="srcNameEdgeObject" uDistance="8"/>
+      <contained xsi:type="di:EdgeObjectUV" id="srcCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetNameEdgeObject" vDistance="5"/>
+      <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
+      <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
+    </contained>
+    <contained xsi:type="di:GraphNode" position="391,17" size="309,175">
+      <anchorage graphEdge="//@diagrams.2/@contained.16"/>
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_-s4bAA2zEdu1hoDIAv_DkQ"/>
+      </semanticModel>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="40"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_-s4bAA2zEdu1hoDIAv_DkQ"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_c3weMA20Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_gefUUA20Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_mMDUEA20Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+      </contained>
+      <contained xsi:type="di:GraphNode">
+        <property key="eStructuralFeatureID" value="45"/>
+        <semanticModel xsi:type="di:EMFSemanticModelBridge">
+          <element href="transformations.uml2#_-s4bAA2zEdu1hoDIAv_DkQ"/>
+        </semanticModel>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_ERR3sA20Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_27xZsA20Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_K61wMA21Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+        <contained xsi:type="di:GraphNode" position="0,0" size="0,0">
+          <semanticModel xsi:type="di:EMFSemanticModelBridge">
+            <element href="transformations.uml2#_olQxsA21Edu1hoDIAv_DkQ"/>
+          </semanticModel>
+        </contained>
+      </contained>
+    </contained>
+    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.2/@contained.11/@anchorage.0 //@diagrams.2/@contained.15/@anchorage.0">
+      <semanticModel xsi:type="di:EMFSemanticModelBridge">
+        <element href="transformations.uml2#_JCkxkA22Edu1hoDIAv_DkQ"/>
+      </semanticModel>
+      <waypoints>[0, -20, -37, 270]</waypoints>
+      <waypoints>[0, -95, -37, 195]</waypoints>
+      <waypoints>[37, -95, 0, 195]</waypoints>
+      <waypoints>[37, -202, 0, 88]</waypoints>
     </contained>
   </diagrams>
 </diagrams:Diagrams>

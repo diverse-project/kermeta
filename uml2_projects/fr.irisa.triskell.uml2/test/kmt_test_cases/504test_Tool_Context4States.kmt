@@ -1,0 +1,50 @@
+package tools_tests;
+
+require kermeta
+require "../../src/kermeta/transformations/BehaviorTools.kmt"
+
+using uml2
+using uml2::transformations
+
+class ToolContext4StateTestCase inherits kermeta::kunit::TestCase
+{
+    reference Aclass : BehavioredClassifier
+    reference Sstate : State
+    reference ct : Context4States_Tool
+    reference Rregion : Region
+    reference  SMmachine : StateMachine
+	
+	method setUp() is do
+    	ct := Context4States_Tool.new
+    	Aclass := Class.new
+    	Aclass.name := "A"
+    	Rregion := Region.new
+    	SMmachine := StateMachine.new
+    	Sstate := State.new
+    	Sstate.name := "S"
+//    	Aclass.classifierBehavior := sm		// classifierBehavior has no opposite in UML2 metamodel
+    	Aclass.ownedBehavior.add(SMmachine)
+    	SMmachine.region.add(Rregion)
+    	Rregion.subvertex.add(Sstate)
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    operation testContext4StatesTool_Classifier() is do
+    	assertTrueWithMsg(ct.contextClassifier(Sstate) == Aclass,
+    		"The Context4States_Tool fails to give the classifier of the given state")
+    end
+    operation testContext4StatesTool_Submachine() is do
+    	var r : Region init Region.new
+    	var s : State init State.new
+    	SMmachine.region.remove(Rregion)
+    	SMmachine.region.add(r)
+    	r.subvertex.add(s)
+    	s.region.add(Rregion)
+    	
+    	assertTrueWithMsg(ct.contextClassifier(Sstate) == Aclass,
+    		"The Context4States_Tool fails to give the classifier of the given state")
+    end
+}

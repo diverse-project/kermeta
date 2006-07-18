@@ -1,0 +1,47 @@
+@mainClass "root_package::ToolGeneralizationTestCase"
+@mainOperation "main"
+
+package tools_tests;
+
+require kermeta
+require "../../src/kermeta/transformations/StaticTools.kmt"
+
+using uml2
+using uml2::transformations
+
+class ToolAccessorTestCase inherits kermeta::kunit::TestCase
+{
+    reference Aclass : Class
+	
+	method setUp() is do
+    	Aclass := Class.new
+    	Aclass.name := "A"
+    	var attr : Property init Property.new
+    	attr.name := "attr"
+    	attr.type := Aclass
+    	Aclass.ownedAttribute.add(attr)
+    	
+     	var acc : Accessor_Tool init Accessor_Tool.new
+     	acc.addGettersSetters(Aclass)
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+	
+    operation testAccessorTool_Getters() is do
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_attr"}.size == 1,
+    		"The class must have the right getters on its attributes")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_attr"}
+    			.one.returnResult.one.type == Aclass,
+		    "The getter must return the right type for attribute")
+    end
+	
+    operation testAccessorTool_Setters() is do
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_attr"}.size == 1,
+    		"The class must have the right setters on its attributes")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_attr"}
+    			.one.ownedParameter.one.type == Aclass,
+		    "The setter must take the right type parameter for attribute")
+    end
+}

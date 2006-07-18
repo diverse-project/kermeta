@@ -1,0 +1,36 @@
+@mainClass "test_package::MyTestClass" 
+@mainOperation "main"
+
+
+package test_package;
+
+require kermeta
+require "500test_Tool_Generalization.kmt"
+require "501test_Tool_Interface.kmt"
+require "502test_Tool_Accessor.kmt"
+require "503test_Tool_Transition.kmt"
+require "504test_Tool_Context4States.kmt"
+
+using tools_tests
+
+class MyTestClass
+{
+    operation main() : Void is do 
+	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		
+		testRunner.run(ToolGeneralizationTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolInterfaceTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolAccessorTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolTransitionTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolContext4StateTestCase)
+		testRunner.printTestResult
+    end 
+}

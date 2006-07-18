@@ -1,0 +1,37 @@
+/* $Id: IOElementsTable.kmt,v 1.1 2006-07-18 15:10:45 vmahe Exp $
+ * Creation date: July 17, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package uml2::transformations;
+
+
+require kermeta
+require "../Uml2.kmt"
+
+using uml2
+
+class IOElementsTable
+{
+	reference table : kermeta::utils::Hashtable<kermeta::standard::Object, Element>
+	
+    operation initialize() : Void is do 
+        table := kermeta::utils::Hashtable<kermeta::standard::Object, Element>.new
+    end
+    
+    operation initializeIdentity(pack : Package) : Void is do
+    	initialize
+        table.put(pack, pack)
+        pack.ownedMember.each{ m | table.put(m, m) }
+    end
+    
+    operation putValue(in : kermeta::standard::Object, out : Element) is do
+    	table.put(in, out)
+    end
+    
+    operation getValue(in : kermeta::standard::Object) : Element is do
+    	result := table.getValue(in)
+    end
+}

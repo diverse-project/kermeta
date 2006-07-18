@@ -1,0 +1,152 @@
+/* $Id: StaticTools.kmt,v 1.1 2006-07-18 15:10:45 vmahe Exp $
+ * Creation date: July 3, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package uml2::transformations;
+
+require "UmlTool.kmt"
+
+using uml2
+
+/** Class dedicated to add a generalization between 2 classifiers */
+class Generalization_Tool
+{
+    operation addGeneralization(ancestor : Classifier, heir : Classifier) : Void is do 
+        var gene : Generalization init Generalization.new
+        gene.general := ancestor
+        gene.specific := heir
+        // NB : Generalization is not a packageableElement
+        // so we can't add it to the heir package
+    end
+}
+
+/** Class dedicated to add a generalization between 2 classifiers */
+class Interface_Tool
+{
+	reference implementation : Class
+	
+    operation extractInterface(concrete : Class) : Interface is do
+    	implementation := concrete
+        var ifce : Interface init Interface.new
+        
+        // rename the elements
+        var name : kermeta::standard::String init concrete.name
+        implementation.name := nameForImplementation(name)
+        ifce.name := nameForInterface(name)
+        ifce.visibility := implementation.visibility
+        
+        // add generalisation
+        var gt : Generalization_Tool init Generalization_Tool.new
+        gt.addGeneralization(ifce, implementation)
+        
+        // put the attributes in the interface ...
+        implementation.ownedAttribute.each{ u |
+        	ifce.ownedAttribute.add(u)
+        }
+        // ... and erase them form concrete class
+        implementation.ownedAttribute.clear
+        
+        // the operations of the concrete class became those of interface
+        var factory : UmlCloneFactory init UmlCloneFactory.new
+        implementation.ownedOperation.each{ u |
+	    	var op : Operation init Operation.new
+	    	op := factory.cloneOperation(u)
+	    	op.isAbstract := true
+	    	ifce.ownedOperation.add(op)
+	    	if u.isAbstract then
+	    		u.isAbstract := false
+	    		///////////////////////////////////////////////////////////////////
+	    		//FIXME : is there a need for body, since we are at UML model ???
+	    	end
+        }
+        result := ifce
+    end
+    // prefixes & suffixes for (re)naming the elements
+    operation prefixForInterface() : kermeta::standard::String is do result := "I" end
+    operation suffixForInterface() : kermeta::standard::String is do result := "" end
+    operation nameForInterface(name : kermeta::standard::String) : kermeta::standard::String is do
+    	result := prefixForInterface + name + suffixForInterface
+    end
+    operation prefixForImplementation() : kermeta::standard::String is do result := "" end
+    operation suffixForImplementation() : kermeta::standard::String is do result := "" end
+    operation nameForImplementation(name : kermeta::standard::String) : kermeta::standard::String is do
+    	result := prefixForImplementation + name + suffixForImplementation
+    end
+}
+
+/** Class dedicated to add get & set operations for each attibute of a class */
+class Accessor_Tool
+{
+	operation addGettersSetters(cl : Class) is do
+		cl.ownedAttribute.each{ u |
+			cl.ownedOperation.add(createGetter(u))
+			cl.ownedOperation.add(createSetter(u))
+		}
+	end
+	operation addGetterSetter(cl : Class, prop : Property) is do
+		cl.ownedOperation.add(createGetter(prop))
+		cl.ownedOperation.add(createSetter(prop))
+	end
+	operation createGetter(attr : Property) : Operation is do
+		var op : Operation init Operation.new
+		op.name := nameForGetter(attr.name)
+		op.visibility := VisibilityKind.public
+		var par : Parameter init Parameter.new
+		par.name := nameForReturn(attr.name)
+		par.type := attr.type
+		par.direction := ParameterDirectionKind.return
+		op.returnResult.add(par)
+		
+		// defined code for result of the getter operation
+		var code : Comment init Comment.new
+		code.body := "do\n\t"
+		code.body.append("result := "+attr.name)
+		code.body.append("\nend")
+		code.annotatedElement.add(op)
+		
+		result := op
+	end
+	operation createSetter(attr : Property) : Operation is do
+		var op : Operation init Operation.new
+		op.name := nameForSetter(attr.name)
+		op.visibility := VisibilityKind.public
+		var par : uml2::Parameter init Parameter.new
+		par.name := nameForInput(attr.name)
+		par.type := attr.type
+		par.direction := ParameterDirectionKind.in
+		op.ownedParameter.add(par)
+		
+		// defined code for affectation to the setter operation
+		var code : Comment init Comment.new
+		code.body := "do\n\t"
+		code.body.append(attr.name + " := " + nameForInput(attr.name))
+		code.body.append("\nend")
+		code.annotatedElement.add(op)
+		
+		result := op
+	end
+    // prefixes & suffixes for (re)naming the elements
+    operation prefixForGetter() : kermeta::standard::String is do result := "get_" end
+    operation suffixForGetter() : kermeta::standard::String is do result := "" end
+    operation nameForGetter(name : kermeta::standard::String) : kermeta::standard::String is do
+    	result := prefixForGetter + name + suffixForGetter
+    end
+    operation prefixForSetter() : kermeta::standard::String is do result := "set_" end
+    operation suffixForSetter() : kermeta::standard::String is do result := "" end
+    operation nameForSetter(name : kermeta::standard::String) : kermeta::standard::String is do
+    	result := prefixForSetter + name + suffixForSetter
+    end
+    operation prefixForReturn() : kermeta::standard::String is do result := "" end
+    operation suffixForReturn() : kermeta::standard::String is do result := "" end
+    operation nameForReturn(name : kermeta::standard::String) : kermeta::standard::String is do
+    	result := prefixForReturn + name + suffixForReturn
+    end
+    operation prefixForInput() : kermeta::standard::String is do result := "new_" end
+    operation suffixForInput() : kermeta::standard::String is do result := "" end
+    operation nameForInput(name : kermeta::standard::String) : kermeta::standard::String is do
+    	result := prefixForInput + name + suffixForInput
+    end
+}

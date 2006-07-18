@@ -1,0 +1,35 @@
+@mainClass "test_package::MyTestClass" 
+@mainOperation "main"
+
+
+package test_package;
+
+require kermeta
+require "001test_AbstractClass.kmt"
+require "002test_ClassInheritance.kmt"
+require "002test_Composition.kmt"
+require "003test_MultipleReference.kmt"
+require "003test_Reference.kmt"
+require "004test_OperationParameter.kmt"
+require "004test_OperationReturn.kmt"
+require "005test_ExternalInheritance.kmt"
+
+using uml2_tests
+
+class MyTestClass
+{
+    operation main() : Void is do 
+	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
+		// Here, we run our test case
+		// TestString must inherit TestCase
+		testRunner.run(AbstractClassTestCase)
+		testRunner.run(ClassInheritanceTestCase)
+		testRunner.run(CompositionTestCase)
+		testRunner.run(MultipleReferenceTestCase)
+		testRunner.run(ReferenceTestCase)
+		testRunner.run(OperationParameterTestCase)
+		testRunner.run(OperationReturnTestCase)
+		testRunner.run(ExternalInheritanceTestCase)
+		testRunner.printTestResult
+    end 
+}

@@ -1,0 +1,112 @@
+/* $Id: BehaviorTools.kmt,v 1.1 2006-07-18 15:10:45 vmahe Exp $
+ * Creation date: July 3, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package uml2::transformations;
+
+require "UmlTool.kmt"
+
+using uml2
+
+/** class for converting a transition characterisitics into a equivalent kermeta code */
+class Transition_Tool
+{
+	reference transition : Transition
+	
+	/** First version of this tool had been designed in spite of being useful to the Valooder 2006,
+	  * close to its needs. If the tool appears not as generic as it could be,
+	  * then please transfer the current code to an inherited tool in the Valooder package
+	  * before any refactoring of it. */
+	operation transition2code(trans : Transition) : kermeta::standard::String is do
+		transition := trans
+		var code : kermeta::standard::String init ""
+		// adding the constraint (demanded)
+		if transition.guard != void then
+			// adding the condition of transition to the code
+			code.append("\t" + "if " +guardIntoOperation + " then" + "\n")
+		else
+			code.append("\t" + "if true then" + "\n")
+		end
+			// doing the state leaving
+			code.append("\t" + sourceIntoOperation)
+			if transition.effect != void then
+				if transition.effect.body != void then
+					// inserting activity code
+					code.append("\t" + transition.effect.body)
+				else
+					var message : kermeta::standard::String
+					message := "Transition '"+ transition.name+"' must have a body in its an activity (effect) to be transformed"
+					raise message
+				end
+			else
+				var message : kermeta::standard::String
+				message := "Transition '"+ transition.name+"' must have an activity (effect) to be transformed"
+				raise message
+			end
+			//doing the state entering
+			code.append("\t"+ targetIntoOperation)
+		// ending the conditional statement
+		code.append("\t" + "end")
+		result := code
+	end
+	
+	operation guardIntoOperation() : kermeta::standard::String is do
+		result := ""
+		
+		var bool : LiteralBoolean
+		bool ?= transition.guard.specification
+		if bool != void then result := bool.~value.toString end
+		var expr : Expression
+		expr ?= transition.guard.specification
+		if expr != void then
+			///// FIXME : we don't know for the moment how to translate an UML2 expression tree into kermeta
+		end
+		var opexpr : OpaqueExpression
+		opexpr ?= transition.guard.specification
+		if opexpr != void then if opexpr.language == "kermeta" then
+			result := opexpr.body
+		end end
+	end
+	operation sourceIntoOperation() : kermeta::standard::String is do
+		if transition.source != void then
+			result := "\t// TODO : write the code when leaving the '"+transition.source.name+"' state"
+		else
+			var message : kermeta::standard::String
+			message := "Transition '"+ transition.name+"' must have a source state to be transformed"
+			raise message
+		end
+	end
+	operation targetIntoOperation() : kermeta::standard::String is do
+		if transition.target != void then
+			result := "\t// TODO : write the code when entering the '"+transition.target.name+"' state"
+		else
+			var message : kermeta::standard::String
+			message := "Transition '"+ transition.name+"' must have a target state to be transformed"
+			raise message
+		end
+	end
+}
+
+/** class for search the class owning a given state, because UML2 State doesn't know it */
+class Context4States_Tool
+{
+	operation contextClassifier(s : State) : Classifier is do
+		var context : Classifier
+		var reg : Region
+		reg ?= s.container
+		if reg.stateMachine != void then
+			context := reg.stateMachine.context
+		else
+			if reg.state != void then
+				// we are in a submachine so do recursive search
+				context := contextClassifier(reg.state)
+			else
+				raise " a region must be contained at least by a STateMachine or a State !"
+			end
+		end
+		result := context
+	end
+}

@@ -1,0 +1,453 @@
+/* $Id: UmlCloneFactory.kmt,v 1.1 2006-07-18 15:10:45 vmahe Exp $
+ * Creation date: July 5, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package uml2::transformations;
+
+
+require kermeta
+require "../Uml2.kmt"
+require "DiagramsClonePass.kmt"
+require "IOElementsTable.kmt"
+
+using uml2
+
+class UmlCloneFactory
+{
+	reference ioTable : IOElementsTable
+	
+	operation initialize() is do
+		ioTable := IOElementsTable.new
+	end
+
+///////////////////////// MAIN DIAGRAMS CLONING ///////////////////////
+// these operations offer cloning of a complete UML2 diagram in once //
+///////////////////////////////////////////////////////////////////////
+
+	operation cloneStaticDiagram(node : Package) : Package is do
+		// first pass clones classes, operations, parameters
+		var pass1 : StaticDiagramClonePass1 init StaticDiagramClonePass1.new
+		pass1.initialize(node, ioTable, self)
+		
+		// second pass clones links and change parameters'type to the type clone
+		var pass2 : StaticDiagramClonePass2 init StaticDiagramClonePass2.new
+		pass2.initialize(node, ioTable, self)
+		
+		// give the cloned top package as resulting model (without non static UML2 elements)
+		result ?= ioTable.getValue(node)
+	end
+
+///////////////////////////// SINGLE ELEMENTS CL0NING ////////////////////
+// REM: as we clone UML model elements, we don't need to explore        //
+//      the inherited properties like it would be for their instances.  //
+//////////////////////////////////////////////////////////////////////////
+
+    operation clonePackage(element : Package) : Package is do 
+        var clone : Package init Package.new
+        // superclasses
+        affectNamespace(element, clone)
+        affectPackageableElement(element, clone)
+        //specific properties : none
+        result := clone
+    end
+
+    operation cloneClass(element : Class) : Class is do 
+        var clone : Class init Class.new
+        affectBehavioredClassifier(element, clone)
+        affectEncapsulatedClassifier(element, clone)
+        clone.isActive := element.isActive
+        element.ownedOperation.each{ u | clone.ownedOperation.add(cloneOperation(u)) }
+        //nested classifiers will be top/down visited or must be clone through a explicit demand
+        //ownedReception : TODO
+        result := clone
+    end
+
+    operation cloneOperation(element : Operation) : Operation is do 
+        var clone : Operation init Operation.new
+    	// super classes properties
+    	affectMultiplicityElement(element, clone)
+    	affectTypedElement(element, clone)
+    	affectParameterableElement(element, clone)
+    	affectBehavioralFeature(element, clone)
+    	// specific properties
+        element.ownedParameter.each{ u |
+        	var par : Parameter init cloneParameter(u)
+        	clone.ownedParameter.add(par)
+        	par.~operation := clone
+        }
+        result := clone
+    end
+    
+    /** return a clone of the parameter but with the same Type instance */
+    operation cloneParameter(element : Parameter) : Parameter is do
+    	var clone : Parameter init Parameter.new
+    	// super classes properties
+    	affectMultiplicityElement(element, clone)
+    	affectTypedElement(element, clone)
+    	affectConnectableElement(element, clone)
+    	// specific properties
+    	clone.direction := element.direction
+    	clone.effect := element.effect
+    	clone.isException := element.isException
+    	clone.isStream := element.isStream
+    	clone.defaultValue := cloneValueSpecification(element.defaultValue)
+    	// rem : the "operation" attribute must be fixed by its owning operation
+    	result := clone
+    end
+    
+    /** return a clone of the parameter but with the same Type instance */
+    operation cloneProperty(element : Property) : Property is do
+    	var clone : Property init Property.new
+    	// super classes properties
+    	affectMultiplicityElement(element, clone)
+    	affectStructuralFeature(element, clone)
+    	affectConnectableElement(element, clone)
+    	affectDeploymentTarget(element, clone)
+    	// specific properties
+    	clone.defaultValue := cloneValueSpecification(element.defaultValue)
+        clone.isDerived := element.isDerived
+        clone.isReadOnly := element.isReadOnly
+        clone.isDerivedUnion := element.isDerivedUnion
+        clone.aggregation := element.aggregation	//TODO : enforced it, seeing the VisibilityKind treatment
+        clone.association := element.association	// NB : not a clone of the association but the original one
+    	// rem : the "owningAssociation" attribute must be fixed by its owning association
+    	// redefinedProperty : TODO
+    	// subsettedProperty : TODO
+    	// rem : the "associationEnd" attribute must be fixed by the property (of an association) which own the qualifier
+    	// qualifier : TODO (should fixed the opposite "associationEnd)
+    	
+    	result := clone
+    end
+    
+    /** return a clone of the ValueSpecification with the same value */
+    operation cloneValueSpecification(element : ValueSpecification) : ValueSpecification is do
+    	// we need to clone the element depending on its type
+    	if element != void then
+	    	var expr : Expression
+	    	var opexpr : OpaqueExpression
+	    	var bool : LiteralBoolean
+	    	var int : LiteralInteger
+	    	var str : LiteralString
+	    	var un : LiteralUnlimitedNatural
+	    	var zero : LiteralNull
+	    	var inst : InstanceValue
+	    	expr ?= element
+	    	opexpr ?= element
+	    	bool ?= element
+	    	int ?= element
+	    	str ?= element
+	    	un ?= element
+	    	zero ?= element
+	    	inst ?= element
+	    	if expr != void then
+	    		var clone : Expression init Expression.new
+	    		clone.symbol := expr.symbol
+	    		result := clone
+	    	else if opexpr != void then
+	    		var clone : OpaqueExpression init OpaqueExpression.new
+	    		clone.body := opexpr.body
+	    		clone.language := opexpr.language
+	    		result := clone
+	    	else if bool != void then
+	    		var clone : LiteralBoolean init LiteralBoolean.new
+	    		clone.~value := bool.~value
+	    		result := clone
+	    	else if int != void then
+	    		var clone : LiteralInteger init LiteralInteger.new
+	    		clone.~value := int.~value
+	    		result := clone
+	    	else if str != void then
+	    		var clone : LiteralString init LiteralString.new
+	    		clone.~value := str.~value
+	    		result := clone
+	    	else if un != void then
+	    		var clone : LiteralUnlimitedNatural init LiteralUnlimitedNatural.new
+	    		clone.~value := un.~value
+	    		result := clone
+	    	else if zero != void then
+	    		var clone : LiteralNull init LiteralNull.new
+	    		result := clone
+	    	else if inst != void then
+	    		var clone : InstanceValue init InstanceValue.new
+	    		clone.instance := inst.instance
+	    		result := clone
+	    	else
+	    		raise "Incorrect non void ValueSpecification for cloning method"
+	    	end end end end end end end end
+	    end
+	    // superclasses
+	    var cl : ValueSpecification
+	    cl := result
+	    affectTypedElement(element, cl)
+	    affectParameterableElement(element, cl)
+	    // specific properties : none (excepting the ones dedicated to each subtype)
+    end
+    
+    /** return a clone of the Comment with the same value */
+    operation cloneComment(element : Comment) : Comment is do
+    	var clone : Comment init Comment.new
+    	affectTemplateableElement(element, clone)
+    	//annotatedElement	: not cloned (must be linked by user)
+    	clone.body := element.body
+    	// FIXME :
+//    	clone.bodyExpression := cloneExpression(element.bodyExpression)
+    	result := clone
+    end
+    
+    /** return a clone of the Association with the same value */
+    operation cloneAssociation(element : Association) : Association is do
+    	var clone : Association init Association.new
+    	// superclasses
+    	affectClassifier(element, clone)
+    	affectRelationship(element, clone)
+    	// specific properties
+    	clone.isDerived := element.isDerived
+    	//memberEnd		: not cloned (must be linked by user)
+    	element.ownedEnd.each{ e |
+    		clone.ownedEnd.add(cloneProperty(e))
+    	}
+    	result := clone
+    end
+    
+    /** return a clone of the ElementImport with the same value */
+    operation cloneElementImport(element : ElementImport) : ElementImport is do
+    	var clone : ElementImport init ElementImport.new
+    	affectDirectedRelationship(element, clone)
+    	clone.~alias := element.~alias
+    	clone.visibility := element.visibility
+    	clone.importedElement := element.importedElement
+    	// rem : the "importingNamespace" attribute must be fixed by its owning namespace
+    	result := clone
+    end
+    
+    operation cloneDataType(element : DataType) : DataType is do
+    	var clone : DataType init DataType.new
+    	affectClassifier(element, clone)
+        //ownedAttribute	: not cloned (must be linked by user)
+        //ownedOperation	: not cloned (must be linked by user)
+    end
+    
+    operation cloneGeneralization(element : Generalization) : Generalization is do
+    	var clone : Generalization init Generalization.new
+    	affectDirectedRelationship(element, clone)
+    	clone.general := element.general
+    	//generalizationSet	: not cloned (must be linked by user)
+    	clone.isSubstitutable := element.isSubstitutable
+    	clone.specific := element.specific
+    end
+    
+    operation cloneInterface(element : Interface) : Interface is do
+    	var clone : Interface init Interface.new
+    	affectClassifier(element, clone)
+        //nestedClassifier	: not cloned (must be linked by user)
+        element.ownedAttribute.each{ u | clone.ownedAttribute.add(cloneProperty(u)) }
+        element.ownedOperation.each{ u | clone.ownedOperation.add(cloneOperation(u)) }
+        //ownedReception : TODO
+    	//protocolStateMachine : not processed because outside static UML (unlike Interface elements)
+    	//         Must be processed by user through the corresponding visitor (in a case of statemachine diagram visit)
+        element.redefinedInterface.each{ u | clone.redefinedInterface.add(cloneInterface(u)) }
+    end
+    
+    ////////////////////// GENERIC AFFECTATIONS FOR ABSTRACT CLASSES ////////////////////////
+    // we centralize affectations of properties inherited from abstract high level classes //
+    /////////////////////////////////////////////////////////////////////////////////////////
+    
+    operation affectBehavioredClassifier(element : BehavioredClassifier, clone : BehavioredClassifier) is do
+    	// superclasses
+    	affectClassifier(element, clone)
+    	// specific properties
+		//classifierBehavior	// not cloned (must be done by user)
+		//implementation		// not cloned (must be done by user)
+		//ownedTrigger			// not cloned (must be done by user)
+		//ownedStateMachine		// not cloned (must be done by user)
+    end
+    
+	operation affectEncapsulatedClassifier(element : EncapsulatedClassifier, clone : EncapsulatedClassifier) is do
+		// superclasses
+		affectStructuredClassifier(element, clone)
+    	// specific properties
+		//ownedPort				// not cloned (must be done by user)
+	end
+	
+    operation affectClassifier(element : Classifier, clone : Classifier) is do
+    	// superclasses
+    	affectNamespace(element, clone)
+    	affectType(element, clone)
+    	affectRedefinableElement(element, clone)
+    	// SPecific properties
+    	//generalization		// not cloned (must be done by user)
+    	clone.isAbstract := element.isAbstract
+    	//occurrence			// not cloned (must be done by user)
+    	//ownedUseCase			// not cloned (must be done by user)
+    	//powertypeExtent		// not cloned (must be done by user)
+    	//redefinedClassifier	// not cloned (must be done by user)
+    	//representation		// not cloned (must be done by user)
+    	//substitution			// not cloned (must be done by user)
+    	//useCase				// not cloned (must be done by user)
+    end
+    
+    operation affectStructuredClassifier(element : StructuredClassifier, clone : StructuredClassifier) is do
+    	// superclasses
+    	affectClassifier(element, clone)
+    	// specific properties
+    	element.ownedAttribute.each{ u | clone.ownedAttribute.add(cloneProperty(u)) }
+    end
+    
+    operation affectElement(element : Element, clone : Element) is do
+    	element.ownedComment.each{ c |
+    		clone.ownedComment.add(cloneComment(c))
+    	}
+    end
+    
+    operation affectBehavioralFeature(element : BehavioralFeature, clone : BehavioralFeature) is do
+    	// superclasses
+    	affectNamespace(element, clone)
+    	affectFeature(element, clone)
+    	// specific properties
+    	clone.concurrency := element.concurrency
+    	// we must complete the "operation" attribute for any Parameter (if the BehavioralFeature is an Operation)
+    	var op : Operation
+    	op ?= clone
+        element.formalParameter.each{ u |
+        	var par : Parameter init cloneParameter(u)
+	        clone.formalParameter.add(par)
+        	par.~operation := op
+        }
+        clone.isAbstract := element.isAbstract
+        element.returnResult.each{ u |
+        	var par : Parameter init cloneParameter(u)
+	        clone.returnResult.add(par)
+//        	par.~operation := op	// FIXME : it destroys the parameter in returnResult
+        }
+        // the raised exceptions are direct types and we don't clone referenced types
+        element.raisedException.each{ u | clone.raisedException.add(u) }
+    end
+    
+    operation affectFeature(element : Feature, clone : Feature) is do
+    	// superclasses
+    	affectRedefinableElement(element, clone)
+    	// specific properties
+    	clone.isStatic := element.isStatic
+    end
+    
+    operation affectTemplateableElement(element : TemplateableElement, clone : TemplateableElement) is do
+    	// superclasses
+    	affectElement(element, clone)
+    	// specific properties
+    	// TODO
+    end
+    
+    operation affectNamedElement(element : NamedElement, clone : NamedElement) is do
+    	// superclasses
+    	affectTemplateableElement(element, clone)
+    	// specific properties
+    	clone.name := element.name
+    	
+/* ******************************* FIXME **************************************
+        if element.visibility == VisibilityKind.public then
+        	clone.visibility := VisibilityKind.public
+        else if element.visibility == VisibilityKind.private then
+        	clone.visibility := VisibilityKind.private
+        else if element.visibility == VisibilityKind.protected then
+        	clone.visibility := VisibilityKind.protected
+        else if element.visibility == VisibilityKind.~package then
+        	clone.visibility := VisibilityKind.~package
+        end end end end
+    ******************************* OR ******************************* */
+        clone.visibility := element.visibility
+    end
+    
+    operation affectPackageableElement(element : PackageableElement, clone : PackageableElement) is do
+    	// superclasses
+    	affectNamedElement(element, clone)
+    	affectParameterableElement(element, clone)
+    	// specific properties
+    	clone.packageableElement_visibility := element.packageableElement_visibility
+    end
+    
+    operation affectTypedElement(element : TypedElement, clone : TypedElement) is do
+    	// superclasses
+    	affectNamedElement(element, clone)
+    	// specific properties
+    	clone.type := element.type
+    end
+    
+    operation affectRedefinableElement(element : RedefinableElement, clone : RedefinableElement) is do
+    	// superclasses
+    	affectNamedElement(element, clone)
+    	// specific properties
+    	clone.isLeaf := element.isLeaf	// NB : not a clone of the type but the original one
+    end
+    
+    operation affectNamespace(element : Namespace, clone : Namespace) is do
+    	// superclasses
+    	affectNamedElement(element, clone)
+    	// specific properties
+    	element.elementImport.each{ ei |
+    		clone.elementImport.add(cloneElementImport(ei))
+    	}
+    end
+    
+    operation affectConnectableElement(element : ConnectableElement, clone : ConnectableElement) is do
+    	// superclasses
+    	affectNamedElement(element, clone)
+    	affectParameterableElement(element, clone)
+    	// specific properties
+    	///////////// FIXME : what could be the right way tp process that ?? ////////
+    	// clone.~end := element.~end
+    end
+    
+    operation affectParameterableElement(element : ParameterableElement, clone : ParameterableElement) is do
+    	// superclasses
+    	affectElement(element, clone)
+    	// specific properties
+    	// TODO
+    end
+    
+    operation affectMultiplicityElement(element : MultiplicityElement, clone : MultiplicityElement) is do
+    	// superclasses
+    	affectElement(element, clone)
+    	// specific properties
+    	clone.isOrdered := element.isOrdered
+        clone.isUnique := element.isUnique
+    	clone.lowerValue := cloneValueSpecification(element.lowerValue)
+    	clone.upperValue := cloneValueSpecification(element.upperValue)
+    end
+    
+    operation affectRelationship(element : Relationship, clone : Relationship) is do
+    	//superclasses
+    	affectElement(element, clone)
+    	// specific properties : none
+    end
+    
+    operation affectDirectedRelationship(element : DirectedRelationship, clone : DirectedRelationship) is do
+    	//superclasses
+    	affectRelationship(element, clone)
+    	// specific properties : none
+    end
+    
+    operation affectType(element : Type, clone : Type) is do
+    	// superclasses
+    	affectParameterableElement(element, clone)
+    	// specific properties : none
+    end
+    
+    operation affectStructuralFeature(element : StructuralFeature, clone : StructuralFeature) is do
+    	//superclasses
+    	affectFeature(element, clone)
+    	affectTypedElement(element, clone)
+    	affectMultiplicityElement(element, clone)
+    	// specific properties
+    	clone.isReadOnly := element.isReadOnly
+    end
+    
+    operation affectDeploymentTarget(element : DeploymentTarget, clone : DeploymentTarget) is do
+    	//superclasses
+    	affectNamedElement(element, clone)
+    	//specific properties
+    	// deployment : TODO
+    end
+}

@@ -1,4 +1,4 @@
-/* $Id: UmlTool.kmt,v 1.1 2006-07-03 14:54:38 vmahe Exp $
+/* $Id: UmlTool.kmt,v 1.2 2006-07-18 15:10:45 vmahe Exp $
  * Creation date: June 29, 2006
  * License:
  * Copyright:
@@ -9,6 +9,9 @@ package uml2::transformations;
 
 
 require kermeta
+require "UmlCloneFactory.kmt"
+
+using uml2
 
 class UmlTool
 {
@@ -16,4 +19,12 @@ class UmlTool
 	// like "2.0", "2.1"
 	// Rem : first version of tools have been written for UML 2.0
 	reference umlVersion : kermeta::standard::String
+	
+	reference inputRootPackage : Package
+	reference outputRootPackage : Package
+	
+	operation initialize(input : Package, output : Package) is do
+		inputRootPackage := input
+		outputRootPackage := output
+	end
 }

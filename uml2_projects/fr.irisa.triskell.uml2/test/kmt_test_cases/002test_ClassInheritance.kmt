@@ -1,7 +1,7 @@
 @mainClass "root_package::ClassInheritanceTestCase"
 @mainOperation "main"
 
-package root_package;
+package uml2_tests;
 
 require kermeta
 require "ClassDiagram.kmt"

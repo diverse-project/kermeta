@@ -1,4 +1,4 @@
-@mainClass "uml2km::Main"
+@mainClass "uml2km::Uml2KM"
 @mainOperation "main"
 
 package uml2km;
@@ -8,7 +8,7 @@ require "../Uml2.kmt"
 require "Pass1_Uml2KMTVisitor.kmt"
 require "Pass2_Uml2KMTVisitor.kmt"
 require "Pass3_Uml2KMVisitor.kmt"
-//require "Uml2KMTPrinter.kmt"
+require "Uml2KMTPrinter.kmt"
 
 using kermeta::standard
 using uml2kmt_visitors
@@ -16,12 +16,14 @@ using uml2kmt_visitors
 /**
  * Root of the UML2 to KM transformation tool.
  */
-class Main
+class Uml2KM
 {
     reference mainModel : uml2::Package
     reference externModels : OrderedSet<uml2::Package>
     reference rootPackage : uml2::Package
     reference objectsStore : kermeta::utils::Hashtable<uml2::Element, Object>
+    reference resourceObjects : Set<Object>
+    reference uncomposedObjects : Set<Object>
     
     operation initialize(input_uri : String, input_mm_uri : String) is do
     	// load the given UML2 resource
@@ -51,13 +53,18 @@ class Main
 	    rootPackage ?= mainModel.ownedMember.one
     end
     
-    operation main() : Void is do 
+    operation main() : Void is do
     	stdio.writeln("\n>>>>-------------> initializing the model !\n")
         // the UML2 model to be transformed
-//        initialize("../../test/kmt_test_cases/uml2/ClassDiagram.uml2", "../ecore/UML2.ecore")
-        initialize("../../test/kmt_test_cases/uml2/simpleModel.uml2", "../ecore/UML2.ecore")
-//        initialize("../../test/kmt_test_cases/uml2/rts.uml2", "../ecore/UML2.ecore")
-        
+        initialize("../../../test/kmt_test_cases/uml2/ClassDiagram.uml2", "../ecore/UML2.ecore")
+//        initialize("../../../test/kmt_test_cases/uml2/simpleModel.uml2", "../ecore/UML2.ecore")
+//        initialize("../../../test/kmt_test_cases/uml2/rts.uml2", "../ecore/UML2.ecore")
+		uml2km()
+		saveKm("../../test/kmt_test_cases/uml2/ClassDiagramOutput.km", "../ecore/kermeta_java.ecore")
+		
+	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
+    end
+    operation uml2km() is do
     	stdio.writeln("\n>>>>-------------> running Pass 1 !\n")
         // the first Pass creates the KM objects
         var pass1 : Pass1_Uml2KMTVisitor init Pass1_Uml2KMTVisitor.new
@@ -79,6 +86,9 @@ class Main
 		externModels.each{ p |
 			pass2.visitPackage(p)
 		}
+		pass2.resourceObjects.each{ o | 
+			uncomposedObjects.add(o)
+		}
         
     	stdio.writeln("\n>>>>-------------> running Pass 3 !\n")
         // the second Pass links the KM objects
@@ -86,7 +96,8 @@ class Main
         pass3.initialize(objectsStore)
         
 		pass3.visitPackage(rootPackage)
-        
+    end
+    operation saveKm(output_uri : String, output_mm_uri : String) is do
     	stdio.writeln("\n>>>>-------------> saving the KM program structure !\n")
         // storage of the generated KM model
 		var tree : kermeta::language::structure::Package
@@ -94,7 +105,7 @@ class Main
 		
 		var resRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
 		var resResource : kermeta::persistence::EMFResource
-		resResource ?= resRepository.createResource("../../test/kmt_test_cases/uml2/ClassDiagramOutput.km", "../ecore/kermeta_java.ecore")
+		resResource ?= resRepository.createResource(output_uri, output_mm_uri)
 		resResource.instances.add(tree)
 		// we add external referenced models
 		externModels.each{ p |
@@ -102,14 +113,18 @@ class Main
 			resResource.instances.add(tree)
 		}
 		// we also add the objects not composed in the tree
-		pass2.resourceObjects.each{ o | 
+		uncomposedObjects.each{ o | 
 			resResource.instances.add(o)
 		}
 		
 		/////////// suspended waiting correction of "pre" & "post" problems
 		resResource.save()
+	end
+	operation prettyPrintKmt() is do
+		var tree : kermeta::language::structure::Package
+		tree ?= objectsStore.getValue(rootPackage)
 
-/*        // the Kermeta PrettyPrinter transforms the KM tree to code
+        // the Kermeta PrettyPrinter transforms the KM tree to code
     	stdio.writeln("\n>>>>-------------> running Km2Kmt pretty printer !\n")
         var upp : uml2::Uml2KMTPrinter init uml2::Uml2KMTPrinter.new
         upp.initialize()
@@ -122,8 +137,6 @@ class Main
 			extRef.add(pack)
 		}
 	    stdio.writeln(upp.visitRootPackage(tree, extRef, 0))
-	    		*/
-	   	stdio.writeln("\n<-------------<<<< end of the programm.\n")
      end
 }
 /*
