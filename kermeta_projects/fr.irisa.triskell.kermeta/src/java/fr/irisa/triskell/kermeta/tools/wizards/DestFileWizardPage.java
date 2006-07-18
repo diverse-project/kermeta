@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.6 2006-06-14 15:37:12 cfaucher Exp $
+/* $Id: DestFileWizardPage.java,v 1.7 2006-07-18 07:15:26 cfaucher Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -186,14 +186,14 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 				}
 			});
 		}
-		// TODO In order to compliant with Eclipse 3.2, you must uncomment the third parameter "null"
+		
 		linkedResourceGroup = new CreateLinkedResourceGroup(IResource.FILE,
 				new Listener() {
 					public void handleEvent(Event e) {
 						setPageComplete(validatePage());
 						firstLinkCheck = false;
 					}
-				}/* , null */);
+				} , null );
 	}
 
 	/**
