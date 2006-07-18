@@ -1,4 +1,4 @@
-/* $Id: TestJavaCall.java,v 1.7 2005-05-25 17:42:54 ffleurey Exp $
+/* $Id: TestJavaCall.java,v 1.8 2006-07-18 11:28:09 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
  * License    : GPL
@@ -8,7 +8,7 @@
  * Authors : 
  *        dvojtise <dvojtise@irisa.fr>
  * Description : 
- *        see javadoc  
+ *   see : fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/014_testExternJavaCall.main.kmt  
  */
 package fr.irisa.triskell.kermeta.interpreter.test;
 
@@ -23,9 +23,10 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
- * Implementation of the java prt for a JavaCall from Kermeta
+ * Implementation of the java part for an extern JavaCall from Kermeta.
+ * Related test : fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/014_testExternJavaCall.main.kmt
+ * 
  * @author dvojtise
- *
  */
 public class TestJavaCall extends TestCase{
     
