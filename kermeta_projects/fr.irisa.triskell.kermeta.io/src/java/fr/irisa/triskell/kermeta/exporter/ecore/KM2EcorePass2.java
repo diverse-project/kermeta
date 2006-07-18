@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.17 2006-06-20 09:07:45 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.18 2006-07-18 12:19:47 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -47,6 +47,8 @@ import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
@@ -455,7 +457,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		// search the Eclass from previous pass
 		newEStructuralFeature = (EStructuralFeature)getEObjectForKMObject(node);
 		// If property is composite or derived we have to check the type (primitive type or not)
-		if(ecoreExporter.isTypeValidForAttibute(node.getType()))
+		if(ecoreExporter.isTypeValidForEAttibute(node.getType()))
 			newEAttribute = (EAttribute)newEStructuralFeature;
 		else
 			newEReference = (EReference)newEStructuralFeature;
@@ -482,10 +484,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		}
 		
 		EClassifier type = (EClassifier)accept(node.getType());
-		if(type == null)	
-		{	// Perhaps this type is in another resource?
-			type = resolveETypeForType(node.getType());
-		}
+		if(type == null)
+		{	type = resolveETypeForType(node.getType());}
 		newEStructuralFeature.setEType(type);
 		loggerTabs.decrement();		
 		return newEStructuralFeature;
@@ -526,6 +526,15 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 */
 	public Object visitVoidType(VoidType node) {
 		return null;
+	}
+	
+	
+	
+	/**
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitEnumeration(fr.irisa.triskell.kermeta.language.structure.Enumeration)
+	 */
+	public Object visitEnumeration(Enumeration node) {
+		return kmt2ecoremapping.get(node);
 	}
 	
 	/**

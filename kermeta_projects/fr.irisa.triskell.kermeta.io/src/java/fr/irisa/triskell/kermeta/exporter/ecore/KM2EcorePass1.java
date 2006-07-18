@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.19 2006-06-21 12:01:28 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.20 2006-07-18 12:19:47 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -227,6 +227,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		// Awful cast : we KNOW that type of object is EnumerationLiteral
 		for (Object o : node.getOwnedLiteral()) { this.accept((EnumerationLiteral)o); }
 		setTagAnnotations(node, newEEnum);
+		km2ecoremapping.put(node, newEEnum);
 		return newEEnum;
 	}
 	
@@ -370,7 +371,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		
 		// If this is composite we have to check the type
 		// same for derived properties, it may have to be an attribute
-		if(ecoreExporter.isTypeValidForAttibute(node.getType())){//attribute
+		if(ecoreExporter.isTypeValidForEAttibute(node.getType())){
 			newEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
 			newEStructuralFeature = newEAttribute;
 			newEAttribute.setID(node.isIsID());				
@@ -389,7 +390,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 		else
 		{
-			if (ecoreExporter.isTypeValidForAttibute(node.getType()) && isContainment == false){
+			if (ecoreExporter.isTypeValidForEAttibute(node.getType()) && isContainment == false){
 				//	attribute
 				ecoreExporter.messages.addWarning(
 						"The reference to type '"+ KMTHelper.getTypeQualifiedName(node.getType()) + 
@@ -452,7 +453,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		newEClassifier.setName(node.getName());
 		if (type_name == null) 
 			throw new KM2ECoreConversionException(
-			"KM2Ecore error : could not find InstanceType for '" + node.getName() +"' PrimitiveType");
+			"KM2Ecore error : could not find InstanceType for '" + node.getName() +"' PrimitiveType; ( getInstanceType: " +
+			node.getInstanceType().toString() + ")");
 		if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
 			newEClassifier.setInstanceClassName(KM2Ecore.primitive_types_mapping.get(type_name));
 		}

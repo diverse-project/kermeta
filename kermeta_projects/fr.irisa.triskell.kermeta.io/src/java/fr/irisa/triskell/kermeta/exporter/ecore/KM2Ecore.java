@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.18 2006-06-20 09:07:45 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.19 2006-07-18 12:19:47 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -28,6 +28,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Type;
@@ -90,12 +91,12 @@ public class KM2Ecore {
     	primitive_types_mapping = new Hashtable<String,String>();
     	primitive_types_mapping.put("kermeta::standard::Character", "char");
     	primitive_types_mapping.put("kermeta::standard::Character",	"java.lang.Character");
-    	primitive_types_mapping.put("kermeta::standard::Integer", 	"int");
     	primitive_types_mapping.put("kermeta::standard::Integer",	"java.lang.Integer");
     	primitive_types_mapping.put("kermeta::standard::Boolean",	"boolean");
     	primitive_types_mapping.put("kermeta::standard::Boolean",	"java.lang.Boolean");
     	primitive_types_mapping.put("kermeta::standard::String",	"java.lang.String");
     	primitive_types_mapping.put("kermeta::standard::Object",	"java.lang.Object");
+    	primitive_types_mapping.put("kermeta::standard::UnlimitedNatural",	"java.lang.Integer");
     	
     }
 	// Annotation.getSource() == "kermeta" 
@@ -216,14 +217,8 @@ public class KM2Ecore {
 	}
 
 	/** tells wether this FType can be used in an ecore Attribute */
-	public boolean isTypeValidForAttibute(Type type){
-		// the type maybe either a class or a datatype
-		if(isPrimitiveEcoreType(type)) return true;
-		else if (type instanceof PrimitiveType){
-			// primitivetype are aliases, and will be translated into EDataType and then are valid Attibute
-			return true;
-		}
-		return false;
+	public boolean isTypeValidForEAttibute(Type type){
+		return (isPrimitiveEcoreType(type)||Enumeration.class.isInstance(type)||PrimitiveType.class.isInstance(type));
 	}
 	
 	/**
