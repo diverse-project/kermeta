@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.14 2006-07-18 11:37:33 zdrey Exp $
+/* $Id: RuntimeObject.java,v 1.15 2006-07-18 14:12:37 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -138,6 +138,8 @@ public class RuntimeObject {
     }
     
 	/**
+	 * quick fix patch for #bug 137 
+	 * see http://gforge.inria.fr/tracker/index.php?func=detail&aid=137&group_id=32&atid=205
 	 * @return Returns the container in the mof meaning (black diamond).
 	 */
 	public RuntimeObject getContainer() {
@@ -147,6 +149,10 @@ public class RuntimeObject {
 		if (name.equals("kermeta::standard::Boolean")) return null;
 		if (name.equals("kermeta::standard::Integer")) return null;
 		if (name.equals("kermeta::standard::String")) return null;
+		// FIXME : itou, except that Enumeration type does not inherits from ValueType in metamodel
+		// Well, actually, Enumeration is a big exception : enumerationLiteral is an instance-like of Enumeartion,
+		// but its metaclass is set as "EnumerationLiteral"
+		if (name.equals("kermeta::language::structure::EnumerationLiteral")) return null;
 		return container;
 	}
 	/**
