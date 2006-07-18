@@ -55,3 +55,81 @@ class Test_assignment inherits kermeta::kunit::Test {
     end
 }
 
+// An enumeration for Test_assignment_behavior::testAssignmentEnum
+enumeration AccesVariableEnumeration
+{
+	accPublic;
+	accPrivate;
+}
+
+class ATest 
+{
+	reference a : AccesVariableEnumeration
+}
+
+class B
+{
+	reference name : kermeta::standard::String
+}
+
+class Test_assignment_behavior inherits kermeta::kunit::TestCase
+{
+	operation testAssignmentEnum() : Void is do 
+   		stdio.writeln("hello : " + AccesVariableEnumeration.accPublic.~enumeration.toString)
+	    var atest : ATest init ATest.new
+	    stdio.writeln("accPublic before assignment: " + AccesVariableEnumeration.accPublic.~enumeration.toString)	    				
+   	    assert(AccesVariableEnumeration.accPublic.~enumeration != void)
+	    atest.a := AccesVariableEnumeration.accPublic
+	    assert(AccesVariableEnumeration.accPublic.~enumeration != void)
+	    assert(atest.a.~enumeration != void)
+	end
+	
+	operation testAssignmentB() is do
+		var b : B init B.new
+		var b1 : B init B.new
+		b.name := "hello"
+		b1.name := "hi"
+		b := b1
+		b1.name := "hi again"
+		stdio.writeln("b name : " + b.name)
+         // ------> b.name becomes "hi again"
+	end
+	
+	operation testAssignmentString() is do
+		//String
+		var s : String init "titi"
+		var s1 : String init "titi2"
+		
+		s := s1		
+		s1 := "toto"
+		stdio.writeln("s name :" + s )
+        // ------> s is "titi2" whereas expected to be "toto"? 
+        assert(s == "toto") //       assert (s != "titi2")
+	end
+	
+	operation testAssignmentInteger() is do
+		//Integer
+		var i1 : Integer init 1
+		var i2: Integer init 2
+		
+		i1 := i2
+		i2 := 4
+		stdio.writeln("i1 value :" + i1.toString + "; i2 value :" + i2.toString)
+        // ------> i1 is 4 whereas expected to be 2? 
+        assert( i2 == 2)
+        assert( i1 == 1 )
+	end
+	
+	operation testAssignmentBoolean() is do
+		//Integer
+		var i1 : Boolean init true
+		var i2: Boolean init false
+		
+		i1 := i2
+		i2 := true
+        assert( i2 == true)
+        assert( i1 == false )
+	end
+
+}
+
