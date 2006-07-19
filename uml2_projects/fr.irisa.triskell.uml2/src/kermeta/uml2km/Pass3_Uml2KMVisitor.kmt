@@ -1,4 +1,4 @@
-/* $Id: Pass3_Uml2KMVisitor.kmt,v 1.1 2006-07-03 14:54:38 vmahe Exp $
+/* $Id: Pass3_Uml2KMVisitor.kmt,v 1.2 2006-07-19 11:44:41 vmahe Exp $
  * Creation date: May 10, 2006
  * License:
  * Copyright:
@@ -44,7 +44,8 @@ class Pass3_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 		
 		op.tag.each{ t |
 			if t.name == "km_body" then
-				de.parse(t.~value)
+				//FIXME : some work to do with code parsing of DynamicExpression
+//				de.parse(t.~value)
 				// we don't need the tag now
 				op.tag.remove(t)
 			end

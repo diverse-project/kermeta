@@ -62,7 +62,7 @@ end</body>
         <eAnnotations xmi:id="_bvRNMMYYEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
           <details xmi:id="_bvRNMcYYEdqnU4rvBMdn4Q" key="uuid" value="114440192038721"/>
         </eAnnotations>
-        <type xmi:type="uml:DataType" href="file:/udd/vmahe/KermetaCVS-Projects/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ExternClassDiagram.uml2#_mSHSIMYeEdqnU4rvBMdn4Q"/>
+        <type xmi:type="uml:DataType" href="ExternClassDiagram.uml2#_mSHSIMYeEdqnU4rvBMdn4Q"/>
       </ownedAttribute>
       <ownedOperation xmi:id="_IQMScciWEdq6BfZN5KFyjA" name="aOperation" isAbstract="true">
         <eAnnotations xmi:id="_SG544MiWEdq6BfZN5KFyjA" source="http://www.topcased.org/uuid">
@@ -143,7 +143,7 @@ end</body>
         <eAnnotations xmi:id="_bvTCYMYYEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
           <details xmi:id="_bvTCYcYYEdqnU4rvBMdn4Q" key="uuid" value="114440192039057"/>
         </eAnnotations>
-        <type xmi:type="uml:DataType" href="file:/udd/vmahe/KermetaCVS-Projects/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ExternClassDiagram.uml2#_mSHSIMYeEdqnU4rvBMdn4Q"/>
+        <type xmi:type="uml:DataType" href="ExternClassDiagram.uml2#_mSHSIMYeEdqnU4rvBMdn4Q"/>
       </ownedAttribute>
     </ownedMember>
     <ownedMember xmi:type="uml:Association" xmi:id="_LHuMIMYYEdqnU4rvBMdn4Q" name="composition" memberEnd="_LHwBUMYYEdqnU4rvBMdn4Q _LHwBUcYYEdqnU4rvBMdn4Q">
@@ -189,7 +189,7 @@ end</body>
         <eAnnotations xmi:id="_4SKwhMYZEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
           <details xmi:id="_4SKwhcYZEdqnU4rvBMdn4Q" key="uuid" value="114440254144888"/>
         </eAnnotations>
-        <type xmi:type="uml:Class" href="file:/udd/vmahe/KermetaCVS-Projects/fr.irisa.triskell.uml2/test/kmt_test_cases/uml2/ExternClassDiagram.uml2#_qUTHcMYZEdqnU4rvBMdn4Q"/>
+        <type xmi:type="uml:Class" href="ExternClassDiagram.uml2#_qUTHcMYZEdqnU4rvBMdn4Q"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3pRkgMYZEdqnU4rvBMdn4Q" value="-1">
           <eAnnotations xmi:id="_4SKwhsYZEdqnU4rvBMdn4Q" source="http://www.topcased.org/uuid">
             <details xmi:id="_4SLXkMYZEdqnU4rvBMdn4Q" key="uuid" value="114440254144889"/>

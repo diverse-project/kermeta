@@ -1,4 +1,4 @@
-/* $Id: 750test_CloneTool_StaticDiagram.kmt,v 1.1 2006-07-18 15:10:45 vmahe Exp $
+/* $Id: 750test_CloneTool_StaticDiagram.kmt,v 1.2 2006-07-19 11:44:41 vmahe Exp $
  * Creation date: July 6, 2006
  * License:
  * Copyright:
@@ -27,9 +27,9 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
 		origModelName := "uml2/ClassDiagram.uml2"
 		
     	// load the given UML2 resource
-    	var repository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var inputResource : kermeta::persistence::EMFResource
-    	inputResource ?= repository.createResource(origModelName, "../../src/ecore/UML2.ecore")
+    	inputResource ?= inputRepository.createResource(origModelName, "../../src/ecore/UML2.ecore")
     	inputResource.load()
     	
     	// "instances" only gives the main diagramm package for the targeted code tree
@@ -39,13 +39,15 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
 		cloneModel := factory.clonePackage(origModel)
 		
 		cloneModelName := "uml2/ClassDiagram_Clone.uml2"
+    	var outputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var outputResource : kermeta::persistence::EMFResource
-    	outputResource ?= repository.createResource(cloneModelName, "../../src/ecore/UML2.ecore")
+    	outputResource ?= outputRepository.createResource(cloneModelName, "../../src/ecore/UML2.ecore")
     	outputResource.instances.add(cloneModel)
     	outputResource.save()
     	
+    	var testRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var testResource : kermeta::persistence::EMFResource
-    	testResource ?= repository.createResource(cloneModelName, "../../src/ecore/UML2.ecore")
+    	testResource ?= testRepository.createResource(cloneModelName, "../../src/ecore/UML2.ecore")
     	testResource.load()
     	
     	// "instances" only gives the main diagramm package for the targeted code tree

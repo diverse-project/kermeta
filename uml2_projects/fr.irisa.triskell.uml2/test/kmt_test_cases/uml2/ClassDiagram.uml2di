@@ -170,7 +170,7 @@
       <contained xsi:type="di:EdgeObjectUV" id="targetCountEdgeObject" uDistance="10" vDistance="-10"/>
       <contained xsi:type="di:EdgeObjectOffset" id="middleNameEdgeObject"/>
     </contained>
-    <contained xsi:type="di:GraphNode" position="460,308" size="196,31">
+    <contained xsi:type="di:GraphNode" position="480,302" size="196,31">
       <anchorage graphEdge="//@diagrams.0/@contained.11"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ClassDiagram.uml2#_2Vs1odBSEdq6zpbyIcleMg"/>

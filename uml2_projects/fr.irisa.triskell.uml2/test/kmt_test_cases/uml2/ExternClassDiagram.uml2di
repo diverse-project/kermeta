@@ -92,7 +92,7 @@
         </semanticModel>
       </contained>
     </contained>
-    <contained xsi:type="di:GraphNode" position="221,342" size="146,41">
+    <contained xsi:type="di:GraphNode" position="215,340" size="146,41">
       <anchorage graphEdge="//@diagrams.0/@contained.5"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="ExternClassDiagram.uml2#_4TcYsNUIEdqlMe7go0Vwgg"/>
