@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass1.java,v 1.3 2006-06-21 12:00:38 zdrey Exp $
+/* $Id: ECore2KMPass1.java,v 1.4 2006-07-19 12:31:09 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -12,12 +12,9 @@ package fr.irisa.triskell.kermeta.loader.ecore;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -27,10 +24,8 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -42,17 +37,11 @@ import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
-import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
-import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
@@ -75,7 +64,7 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	protected Hashtable<EOperation, Operation> operations;
 	/** dictionary of types : { EClassifier : TypeDefinition } - EObject is put, but real type of stored 
 	 * instances inherits EClassifier - we avoid cast syntax...*/
-	protected Hashtable<EClassifier, TypeDefinition> types;
+	protected Hashtable<EClassifier, TypeDefinition> eclassifier_typedefinition_map;
 	protected Hashtable<EDataType, PrimitiveType> datatypes;
 	/** dictionary of classdefinitions : { ClassDefinition : Class } */
 	protected Hashtable<ClassDefinition, fr.irisa.triskell.kermeta.language.structure.Class> classes;
@@ -95,7 +84,7 @@ public class ECore2KMPass1 extends EcoreVisitor {
 		this.unit = exporter.unit;
 		this.resource = exporter.resource;
 		this.operations = new Hashtable<EOperation, Operation>();
-		this.types = new Hashtable<EClassifier, TypeDefinition>();
+		this.eclassifier_typedefinition_map = new Hashtable<EClassifier, TypeDefinition>();
 		this.datatypes = new Hashtable<EDataType, PrimitiveType>();
 		this.classes = new Hashtable<ClassDefinition, fr.irisa.triskell.kermeta.language.structure.Class>();
 		this.properties = new Hashtable<String, Property>();
@@ -258,10 +247,10 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	}
 	
 	public Object visit(EEnum node) {
-		if (types.containsKey(node)) current_enum = (Enumeration)types.get(node);
+		if (eclassifier_typedefinition_map.containsKey(node)) current_enum = (Enumeration)eclassifier_typedefinition_map.get(node);
 		else { 
 			current_enum = unit.struct_factory.createEnumeration();
-			types.put(node, current_enum);
+			eclassifier_typedefinition_map.put(node, current_enum);
 		}
 		current_enum.setName(node.getName());
 		getCurrentPackage().getOwnedTypeDefinition().add(current_enum);
@@ -284,7 +273,7 @@ public class ECore2KMPass1 extends EcoreVisitor {
         current_primitivetype = result;
         // BEGIN HORRIBLE TEMPORARY PATCH (the if)
         // This condition is used because we use the visitor for the definition of the type of model
-        // elements.
+        // elements, and sometimes, current package is null
         if (getCurrentPackage()!=null)
         {
         	getCurrentPackage().getOwnedTypeDefinition().add(result);
@@ -326,7 +315,7 @@ public class ECore2KMPass1 extends EcoreVisitor {
 		if (element instanceof EPackage) result = getCurrentPackage();
 		if (element instanceof EClassifier)
 		{// I wish we could select {e| e instanceof EDatatype } more easily EDataTypes...
-			result = types.get(element)!=null?types.get(element):datatypes.get(element);
+			result = eclassifier_typedefinition_map.get(element)!=null?eclassifier_typedefinition_map.get(element):datatypes.get(element);
 		}
 		if (element instanceof EStructuralFeature)	result = exporter.current_prop;
 		if (element instanceof EOperation) result = operations.get(element);
@@ -365,13 +354,13 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	/** Get and complete the classDefinition equivalence for the given eclass */
 	public ClassDefinition createClassDefinitionForEClass(EClass node)
 	{	
-		ClassDefinition result = (ClassDefinition)types.get(node);
+		ClassDefinition result = (ClassDefinition)eclassifier_typedefinition_map.get(node);
 		if (result == null)
 		{
 			result = unit.struct_factory.createClassDefinition();
 			result.setName(node.getName());
 			result.setIsAbstract(node.isAbstract() || node.isInterface());
-			types.put(node, result);
+			eclassifier_typedefinition_map.put(node, result);
 		}
 		return result;
 	}

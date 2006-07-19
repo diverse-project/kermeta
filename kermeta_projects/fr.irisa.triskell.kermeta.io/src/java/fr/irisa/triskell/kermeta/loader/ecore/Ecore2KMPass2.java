@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.4 2006-07-11 07:52:20 zdrey Exp $
+/* $Id: Ecore2KMPass2.java,v 1.5 2006-07-19 12:34:09 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -86,7 +86,7 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		for (EDataType node : visitorPass1.datatypes.keySet()) { accept(node); }
 		// Visit all the EClasses (their substructure, i.e operations and properties)
 		isTypeSettingMode = true;
-		for (EObject node : visitorPass1.types.keySet()) { // do not visit again datatypes?
+		for (EObject node : visitorPass1.eclassifier_typedefinition_map.keySet()) { // do not visit again datatypes?
 			if (node instanceof EClass) accept(node); 
 		}
 		// Visit again all the EOperations in order to set their super operations
@@ -148,7 +148,7 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	 */
 	public Object visit(EClass node)
 	{
-		exporter.current_classdef = (ClassDefinition)visitorPass1.types.get(node);
+		exporter.current_classdef = (ClassDefinition)visitorPass1.eclassifier_typedefinition_map.get(node);
 		visitorPass1.isClassTypeOwner = true;
 		// First of all, set the super types
 		for (Object next : ((EClass)node).getESuperTypes()) {
@@ -523,8 +523,8 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 				def = dep_unit.typeDefs.get(etype_qname);
 			}
 			else
-				def = (TypeDefinition)visitorPass1.types.get(etype)!=null?
-						visitorPass1.types.get(etype):visitorPass1.datatypes.get(etype); // this does the same as unit.typeDefinitionLookUp
+				def = (TypeDefinition)visitorPass1.eclassifier_typedefinition_map.get(etype)!=null?
+						visitorPass1.eclassifier_typedefinition_map.get(etype):visitorPass1.datatypes.get(etype); // this does the same as unit.typeDefinitionLookUp
 		}
 		
 		if (def == null) throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion : type '" + Ecore2KM.getQualifiedName(etype) + "' not found." );
