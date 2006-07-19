@@ -1,4 +1,4 @@
-/* $Id: RuntimeMemoryLoader.java,v 1.12 2006-06-22 14:08:23 zdrey Exp $
+/* $Id: RuntimeMemoryLoader.java,v 1.13 2006-07-19 11:21:57 zdrey Exp $
 * Project : kermeta.interpreter
 * File : RuntimeMemoryLoader.java
 * License : EPL
@@ -82,7 +82,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
         RuntimeObject result = (RuntimeObject)typeDefinitions.get(qname);
         // should never happen robustness
         if (result == null) {
-            throw new Error("INTERNAL ERROR : unable to find type " + qname );
+            throw new Error("INTERNAL ERROR (when trying to load the runtime memory): unable to find type " + qname );
         }
         
         // The type is not loaded yet as a runtime object
@@ -105,7 +105,7 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
     
     
     /**
-     * Pre-create runtime objects for types
+     * Pre-create runtime objects for type definitions
      */
     private void _1_loadTypes() {
         Iterator it = unit.packages.values().iterator();
@@ -250,7 +250,6 @@ import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 		// Create the object
 		RuntimeObject result;
 		if (kcoreObject instanceof TypeDefinition) {
-		    //System.err.println("Load type definition " + unit.getQualifiedName((TypeDefinition)kcoreObject));
 		    result = (RuntimeObject)typeDefinitions.get(unit.getQualifiedName((TypeDefinition)kcoreObject));
 		}
 		else if (kcoreObject instanceof Property) result = (RuntimeObject)properties.get(unit.getQualifiedName((Property)kcoreObject));
