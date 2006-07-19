@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.39 2006-07-13 07:46:55 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.40 2006-07-19 09:52:59 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -1163,63 +1163,6 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			return "~" + id;
 		else return id;
 	}
-	
-  
-    
-    /**
-     * Get the super operation or the super attribute in super classes of classDef 
-     * @param classDef
-     * @return the ecore object representing this super op or super attr.
-     */
-    public Object getSuperFeatureType(ClassDefinition classDef, CallFeature feature)
-    {
-        Object result = null;
-        Iterator st_it = classDef.getSuperType().iterator();
-        while (st_it.hasNext() && result == null)
-        {
-            ClassDefinition next = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)st_it.next()).getTypeDefinition();
-            result = getFlatFeatureType(next, feature);
-            // If we still have not found them, find in super types! 
-            if (result == null)
-            {
-                result = getSuperFeatureType(next, feature);
-            }
-        }
-        return result;
-    }
-    
-    /**
-     * Get the type of the <b>feature</b> given as argument in the <b>type</b>. Return null if 
-     * the feature is not defined <i>directly<i> in the given type.
-     * @param type
-     * @param feature
-     * @return
-     */
-    protected Object getFlatFeatureType(ClassDefinition type, CallFeature feature)
-    {
-        Object result = null; Object elt = null; 
-        EList operations = type.getOwnedOperation();
-        int i = 0;
-        while (i < operations.size() && result == null)
-        {	
-            elt = operations.get(i);
-            if (((Operation)operations.get(i)).getName().equals(feature.getName()))
-                result = elt;
-            i++;
-        }
-        if (result == null)
-        {
-            EList attributes = type.getOwnedAttribute();
-            i=0;
-            while (i < attributes.size() && result == null)
-            {
-                elt = attributes.get(i);
-                if (((Property)attributes.get(i++)).getName().equals(feature.getName()))
-                    result = elt;
-            }   
-        }
-        return result;
-    }
 
     /**
      * 
