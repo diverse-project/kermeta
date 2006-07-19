@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.22 2006-06-22 12:40:20 zdrey Exp $
+/* $Id: reflection.kmt,v 1.23 2006-07-19 11:38:57 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -39,12 +39,16 @@ abstract class Object
 	 * Returns the instances of the given property for this Object.
 	 *
 	 * Example : 
-	 * <pre>class A { reference attr : String }
-	 * 
+	 * <pre>
+	 * class A { reference attr : String }
+	 * </pre>
+	 * Using A :
+	 * <pre>
 	 * operation getAProp() is do
 	 *    var a : A
 	 *    var s : String
-	 *    s ?= a.get("attr")
+	 *    var the_attr : Property init self.getMetaClass.ownedAttribute.one
+	 *    s ?= a.get(the_attr)
 	 * end
 	 * </pre>
 	 * The user has to cast
