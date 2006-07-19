@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * $Id: kunit.kmt,v 1.18 2006-05-23 12:26:46 zdrey Exp $
+ * $Id: kunit.kmt,v 1.19 2006-07-19 11:37:43 zdrey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -15,7 +15,6 @@
 package kermeta::kunit;
 
 require "../Standard.kmt"
-//require kermeta
 using kermeta::standard
 using kermeta::language::structure
 using kermeta::utils
@@ -149,7 +148,7 @@ class TestCase inherits Test
 //		tearDown()
 		rescue (e : AssertionFailedError)
 			r.addFailure(self, e)
-		rescue (e : kermeta::exceptions::RuntimeError)
+		rescue (e : kermeta::exceptions::Exception)
 			r.addError(self, e)
 	end
 	
