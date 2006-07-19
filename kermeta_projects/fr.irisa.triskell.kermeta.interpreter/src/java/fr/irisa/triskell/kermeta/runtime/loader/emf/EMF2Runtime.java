@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.43 2006-07-19 11:21:09 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.44 2006-07-19 14:45:18 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -517,6 +517,8 @@ public class EMF2Runtime {
 	{
 		String propName = feature.getName();
 		String tmp_propName = "";
+		// If we can get the value of the specified property, put propertyExists to true.
+		boolean propertyExists = false;
 		// Patch for bug #595
 		// http://gforge.inria.fr/tracker/index.php?func=detail&aid=595&group_id=32&atid=205
 		// deal with special properties cases - ecore special structural feature
@@ -524,23 +526,29 @@ public class EMF2Runtime {
 		// Patch for bug #595
 		// http://gforge.inria.fr/tracker/index.php?func=detail&aid=595&group_id=32&atid=205
 		// deal with special properties cases - ecore special structural feature
-		if (getEcoreKermetaMap().containsKey(eclass.getName()+"."+propName)) 
+		if (getEcoreKermetaMap().containsKey(eclass.getName()+"."+propName))
+		{
 			tmp_propName = getEcoreKermetaMap().get(eclass.getName()+"."+propName);
-		if (tmp_propName.length() != 0) propName = tmp_propName;
+			if (tmp_propName.length() != 0)
+			{ propName = tmp_propName; propertyExists = true; }
+		}
+		else propertyExists = true;
+		if (propertyExists == true)
+		{
+			result = unit.getKermetaUnit().findPropertyByName(classDef, propName);
+			// If result is still null, send an exception
+			if (result == null)
+			{
+				String errmsg = "EMF loading error : property set failed.\n  Not able to find '"+ propName+"' property on class " + classDef.getName() +
+				" ; known properties are : ";
+				for ( Object prop : unit.getKermetaUnit().getAllProperties(classDef)) 
+				{ errmsg += ((Property)prop).getName() + ", "; }
+				errmsg += "\n in class \"" + classDef.getName() +"\"";
+				errmsg += "\nwith feature == " + feature;
+				unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
+			}
+		}
 		
-		result = unit.getKermetaUnit().findPropertyByName(classDef, propName);
-    	// If result is still null, send an exception
-    	if (result == null)
-    	{
-    		String errmsg = "EMF loading error : property set failed.\n  Not able to find '"+ propName+"' property on class " + classDef.getName() +
-			" ; known properties are : ";
-			for ( Object prop : unit.getKermetaUnit().getAllProperties(classDef)) 
-			{ errmsg += ((Property)prop).getName() + ", "; }
-			errmsg += "\n in class \"" + classDef.getName() +"\"";
-			errmsg += "\nwith feature == " + feature;
-			unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
-    	}
-    	
     	return result;
 	}
 	
