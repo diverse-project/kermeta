@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.42 2006-07-11 17:31:42 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.43 2006-07-19 11:21:09 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -15,43 +15,29 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EFactory;
-import org.eclipse.emf.ecore.EModelElement;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
-import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
-import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
-import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.loader.ecore.EcoreUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
-import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnitError;
 import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -70,10 +56,10 @@ public class EMF2Runtime {
     final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.EMF2Runtime");
 
     /**
-     * Hashtable that contains the RuntimeObjects for the class Definitions of the metamodel.
-     * entry is { name_of_the_class : corresponding Runtime Object}
+     * Hashtable that contains the RuntimeObjects that host the Types of the metamodel.
+     * entry is { name_of_the_type : corresponding Runtime Object}
      */
-    protected Hashtable<String, RuntimeObject> typedef_cache;
+    protected Hashtable<String, RuntimeObject> type_cache;
     
     /**
      * The list of runtimeObjects that represent the EMF instances
@@ -87,15 +73,21 @@ public class EMF2Runtime {
     	if (ecore_kermeta_map == null)
     	{
     		ecore_kermeta_map = new Hashtable<String, String>();
-    		ecore_kermeta_map.put("EPackage", "Package");
-    		ecore_kermeta_map.put("EClass", "ClassDefinition");
-    		ecore_kermeta_map.put("EEnum", "Enumeration");
-    		ecore_kermeta_map.put("EEnumLiteral", "EnumerationLiteral");
-    		ecore_kermeta_map.put("EAttribute", "Property");
-    		ecore_kermeta_map.put("EReference", "Property");
-    		ecore_kermeta_map.put("EOperation", "Operation");
-    		ecore_kermeta_map.put("EParameter", "Parameter");
-    		ecore_kermeta_map.put("EAnnotation", "Tag");
+    		ecore_kermeta_map.put("ecore::EEnum", "kermeta::language::structure::Enumeration");
+    		ecore_kermeta_map.put("ecore::EEnumLiteral", "kermeta::language::structure::EnumerationLiteral");
+    		// Map for the properties of EEnumLiteral for EnumerationLiteral
+    		ecore_kermeta_map.put("EEnumLiteral.eEnum", "enumeration");
+    		ecore_kermeta_map.put("EEnumLiteral.name", "name");
+    		ecore_kermeta_map.put("EEnumLiteral.value", "");
+    		ecore_kermeta_map.put("EEnumLiteral.instance", "");
+    		ecore_kermeta_map.put("EEnumLiteral.eAnnotations", "tag");
+    		ecore_kermeta_map.put("EEnum.eAnnotations", "tag");
+    		ecore_kermeta_map.put("EEnum.eLiterals", "ownedLiteral");
+    		ecore_kermeta_map.put("EEnum.instanceClassName", "");
+    		ecore_kermeta_map.put("EEnum.instanceClass", "");
+    		ecore_kermeta_map.put("EEnum.defaultValue", "");
+    		ecore_kermeta_map.put("EEnum.ePackage", "");
+    		ecore_kermeta_map.put("EEnum.serializable", "");
     	}
     	return ecore_kermeta_map;
     }
@@ -111,7 +103,7 @@ public class EMF2Runtime {
      */
     public EMF2Runtime(EMFRuntimeUnit newunit, Resource newroot_resource) {
         super();
-        typedef_cache = new Hashtable<String, RuntimeObject>();
+        type_cache = new Hashtable<String, RuntimeObject>();
         runtime_objects_map = new Hashtable<EObject, RuntimeObject>();
         
         resource = newroot_resource;
@@ -227,7 +219,6 @@ public class EMF2Runtime {
 			while(treeIt.hasNext())
 			{
 				Object obj = treeIt.next();
-				// TODO : Convert EEnum
 				if(obj instanceof EObject)
 				{
 					EObject eobj = (EObject)obj;
@@ -378,27 +369,20 @@ public class EMF2Runtime {
 	 * @return the kermeta type corresponding to the given EClassifier. It cannot be null.
 	 * If null, an exception is thrown and "sent" to the kermeta user.
 	 */
-	protected Type getMetaClassByName(EClassifier eclassifier)
+	protected Type getTypeFromEClassifier(EClassifier eclassifier)
 	{
 	    Type ftype = null;
 	    // Find type definition for the given name, and get or create a type for it
 	    String eclassifier_name = unit.getEQualifiedName(eclassifier);
-	    TypeDefinition etype_cdef = unit.getRuntimeMemory().getUnit().getTypeDefinitionByName(eclassifier_name);
-	    Boolean isEcoreMetamodelType = getEcoreKermetaMap().containsKey(eclassifier.getName());
-		// Special case: an ecore eclassifier to convert into kermeta:
-	/*	if (isEcoreMetamodelType == true)
-		{
-			System.err.println("SPECIAL TYPE: " + eclassifier.getName());
-			etype_cdef = unit.getRuntimeMemory().getUnit().getTypeDefinitionByName(
-					"kermeta::language::structure::"+ecore_kermeta_map.get(eclassifier.getName())
-					);
-		}
-		else
-		{
-			System.err.println("NORMAL TYPE :  " + eclassifier.getName());
-		}*/
-
-	    // If type definition was not found, maybe we can try to find it in Kermeta framework? 
+	    ftype = getTypeFromName(eclassifier_name);
+        return ftype; 
+	}
+	
+	protected Type getTypeFromName(String type_name)
+	{
+		Type ftype = null;
+		TypeDefinition etype_cdef = unit.getKermetaUnit().getTypeDefinitionByName(type_name);
+		// If type definition was not found, maybe we can try to find it in Kermeta framework? 
         if (etype_cdef == null)
         {
         	String unit_uri = unit.getUriAsString();
@@ -407,7 +391,7 @@ public class EMF2Runtime {
 	        // -> generated code for kermeta metamodel ignore the packages that do not contain classes.
 	        if (unit_uriextension.compareTo("km")==0)
 	        {
-	        	etype_cdef = unit.getRuntimeMemory().getUnit().getTypeDefinitionByName("kermeta::language::" +eclassifier_name);
+	        	etype_cdef = unit.getKermetaUnit().getTypeDefinitionByName("kermeta::language::" +type_name);
 	        }
         }
         // If type definition was found
@@ -426,13 +410,12 @@ public class EMF2Runtime {
 	    }
         if (ftype == null)
         {
-	    	String errmsg = "EMF loading error : could not find a class (" + eclassifier_name + ") " +
+	    	String errmsg = "EMF loading error : could not find a class (" + type_name + ") " +
 	    			"in loaded libraries. Please check your require statements.\n";
-	    	if (eclassifier.eResource()!=null) errmsg += "  The eclass Resource is : "+eclassifier.eResource();
 	    	// Stop after the first error
         	unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
         }
-        return ftype; 
+        return ftype;
 	}
 	
 	/**
@@ -444,72 +427,83 @@ public class EMF2Runtime {
 	protected void populateRuntimeObject(RuntimeObject rObject)
 	{
 	    EObject eObject = (EObject)rObject.getData().get("emfObject");
+	    fr.irisa.triskell.kermeta.language.structure.Class kclass = null;
 	    // Get the meta class in Ecore repr. (EClass) of the RuntimeObject to populate
 	    EClass eclass = eObject.eClass();
-	    // Get the Kermeta Class for EClass
-	    fr.irisa.triskell.kermeta.language.structure.Class kclass = 
-	    	(fr.irisa.triskell.kermeta.language.structure.Class)getMetaClassByName(eclass);
-
+	    if (getEcoreKermetaMap().containsKey(unit.getEQualifiedName(eclass))) 
+	    {
+	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(unit.getEQualifiedName(eclass));
+	    	kclass = (fr.irisa.triskell.kermeta.language.structure.Class)getTypeFromName(kermeta_metaclass_name);
+	    }
+	    else
+	    {
+	    	kclass = (fr.irisa.triskell.kermeta.language.structure.Class)getTypeFromEClassifier(eclass);
+	    }
 	    // For each feature, get the value and add it to the properties hashtable
 	    for (Object next : eclass.getEAllStructuralFeatures())
-	    {
+	    {	
 	    	EStructuralFeature feature = (EStructuralFeature)next;
 	    	EClassifier feature_type = feature.getEType();
-	    	
-	    	Type ftype = getMetaClassByName(feature_type);
+	    	Type ftype = getTypeFromEClassifier(feature_type);
 	    	// Find the property corresponding to the given feature
 	    	// Note : if it is not found, this method throws a KermetaRaisedException.
-	    	Property prop = getPropertyForEStructuralFeature((ClassDefinition) kclass.getTypeDefinition(), feature);
-	    	RuntimeObject roprop = unit.getRuntimeMemory().getRuntimeObjectForFObject(prop);
-	    	
-	    	// eGet can return an elist of features
-	    	Object fvalue = eObject.eGet(feature);
-	    	RuntimeObject rovalue = null;
-	    	
-	    	try {
-	    		// A feature with multiplicity
-	    		if (fvalue instanceof EList)
+	    	Property prop = getPropertyForEStructuralFeature((ClassDefinition) kclass.getTypeDefinition(), feature, eclass);
+	    	// Means that prop does not exist in kermeta side, so do nothing
+	    	if (prop != null)
+	    	{	
+	    		RuntimeObject roprop = unit.getRuntimeMemory().getRuntimeObjectForFObject(prop);
+	    		// eGet can return an elist of features
+	    		Object fvalue = eObject.eGet(feature);
+	    		RuntimeObject rovalue = null;
+	    		try
 	    		{
-	    			rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
-	    		}
-	    		// Get the RO-repr of this EObject
-	    		else if (fvalue instanceof EObject)
-	    		{   
-	    			// EFactory is not saved in the model, neither does it refer to a saved element in the model (at the opposite
-	    			// of all the other transient features), so it will not be loaded
-	    			// Indeed, EFactory is a typical ecore case that is used for Java compliance..Unusable in kermeta.
-	    			if (!(fvalue instanceof EFactory))
-	    				rovalue = createRuntimeObjectForEObject(rObject, (EObject)fvalue, feature);
-	    		}
-	    		// equivalent test : fvalue instanceof EString, EInt, etc.
-	    		else if (EDataType.class.isInstance(feature_type))
-	    		{
-	    			rovalue = createRuntimeObjectForPrimitiveTypeValue(fvalue);
-	    			fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
-	    		}
-	    		else if (fvalue == null)
-	    		{    
-	    			fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
-	    		}
-	    		else // Enum?
-	    		{
-	    			String errmsg = "NotImplemented Error : The type <"+feature_type+"> has not been handled yet. Trying to set "+
-	    			fvalue+" into "+rObject;	
-	    			unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
-	    		}
-	    		// If we instanciated a RuntimeObject value, we can set the properties for the object
-	    		// reminder : rovalue is null if fvalue was an instance of EFactory
-	    		if (fvalue != null && rovalue != null) rovalue.getData().put("emfObject", fvalue);
-	    	} // Catch any unhandled raised exception
-	    	catch (Exception e) {
-	    		String errmsg = "Exception received. Trying to set on " + 
-	    		rObject  + " this property: " + prop +" / " + feature.getName() + " with value: "+
-	    		fvalue;
-	    		e.printStackTrace();
-	    		unit.throwKermetaRaisedExceptionOnLoad(errmsg, e);
-	    	}
-	    }// End of while
+	    			// A feature with multiplicity
+	    			if (fvalue instanceof EList)
+	    			{
+	    				rovalue = createRuntimeObjectForCollection((EList)fvalue, ftype, unit, rObject, roprop);
+	    			}
+	    			// Get the RO-repr of this EObject
+	    			else if (fvalue instanceof EObject)
+	    			{   // EFactory is not saved in the model, neither does it refer to a saved element in the model (at the opposite
+	    				// of all the other transient features), so it will not be loaded
+	    				// Indeed, EFactory is a typical ecore case that is used for Java compliance..Unusable in kermeta.
+	    				if (!(fvalue instanceof EFactory))
+	    				{
+	    					rovalue = createRuntimeObjectForEObject(rObject, (EObject)fvalue, feature);
+	    					rObject.getProperties().put(prop.getName(), rovalue);
+	    				}
+	    			} // equivalent test : fvalue instanceof EString, EInt, etc.
+	    			else if (EDataType.class.isInstance(feature_type))
+	    			{
+	    				rovalue = createRuntimeObjectForPrimitiveTypeValue(fvalue);
+	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
+	    			}
+	    			else if (fvalue == null)
+	    			{    
+	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
+	    			}
+	    			else // Enum?
+	    			{
+	    				String errmsg = "NotImplemented Error : The type <"+feature_type+"> has not been handled yet. Trying to set "+
+	    				fvalue+" into "+rObject;	
+	    				unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
+	    			}
+	    			// If we instanciated a RuntimeObject value, we can set the properties for the object
+	    			// reminder : rovalue is null if fvalue was an instance of EFactory
+	    			if (fvalue != null && rovalue != null) rovalue.getData().put("emfObject", fvalue);
+	    		} // Catch any unhandled raised exception
+	    		catch (Exception e) {
+	    			String errmsg = "Exception received. Trying to set on " +  rObject  + " this property: " + prop +" / " + feature.getName() + " with value: "+ fvalue;
+	    			e.printStackTrace();
+	    			unit.throwKermetaRaisedExceptionOnLoad(errmsg, e);
+	    		} 
+	    	} 
+	    }
 	} 
+
+	protected void populateRuntimeObjectForEnumeration(RuntimeObject rObject)
+	{
+	}
 	
 	/**
 	 * retreives the property from its names.
@@ -519,24 +513,26 @@ public class EMF2Runtime {
 	 * @param propName
 	 * @return
 	 */
-	private Property getPropertyForEStructuralFeature(ClassDefinition classDef, EStructuralFeature feature)
+	private Property getPropertyForEStructuralFeature(ClassDefinition classDef, EStructuralFeature feature, EClass eclass)
 	{
 		String propName = feature.getName();
-		Property result = unit.getKermetaUnit().findPropertyByName(classDef, propName);
-    	if (result == null)
-    	{
-			// Patch for bug #595
-    		// http://gforge.inria.fr/tracker/index.php?func=detail&aid=595&group_id=32&atid=205
-    		// deal with special properties cases - ecore special structural feature
-    		if(propName.compareTo("eAnnotations")==0)
-    		{	// in kermeta, annotation are stored into tag
-    			result = unit.getKermetaUnit().findPropertyByName(classDef, "tag");
-    		}
-    	}
+		String tmp_propName = "";
+		// Patch for bug #595
+		// http://gforge.inria.fr/tracker/index.php?func=detail&aid=595&group_id=32&atid=205
+		// deal with special properties cases - ecore special structural feature
+		Property result = null;
+		// Patch for bug #595
+		// http://gforge.inria.fr/tracker/index.php?func=detail&aid=595&group_id=32&atid=205
+		// deal with special properties cases - ecore special structural feature
+		if (getEcoreKermetaMap().containsKey(eclass.getName()+"."+propName)) 
+			tmp_propName = getEcoreKermetaMap().get(eclass.getName()+"."+propName);
+		if (tmp_propName.length() != 0) propName = tmp_propName;
+		
+		result = unit.getKermetaUnit().findPropertyByName(classDef, propName);
     	// If result is still null, send an exception
     	if (result == null)
     	{
-    		String errmsg = "EMF loading error : property set failed.\n  Not able to find "+ propName+" property on class " + classDef.getName() +
+    		String errmsg = "EMF loading error : property set failed.\n  Not able to find '"+ propName+"' property on class " + classDef.getName() +
 			" ; known properties are : ";
 			for ( Object prop : unit.getKermetaUnit().getAllProperties(classDef)) 
 			{ errmsg += ((Property)prop).getName() + ", "; }
@@ -547,6 +543,7 @@ public class EMF2Runtime {
     	
     	return result;
 	}
+	
 	/**
 	 * Create a runtime object corresponding to the given fvalue. This <code>fvalue</code> corresponds to a structural feature "extracted" from
 	 * the eObject to which the given Runtime object <code>rObject</code> correspond.
@@ -585,7 +582,6 @@ public class EMF2Runtime {
         	}
         	unit.throwKermetaRaisedExceptionOnLoad(errmsg, null);
         }
-        rObject.getProperties().put(feature.getName(), rovalue);
         // FIXME the set method needs to be reviewed (for model instances?)
         //fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
         return rovalue;
@@ -618,13 +614,13 @@ public class EMF2Runtime {
 	            rovalue = createRuntimeObjectForPrimitiveTypeValue(sfeature);
 	        // RuntimeObject ri = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, memory.getROFactory());
 	        // ReflectiveSequence.addAt(result, ri, rovalue); i+=1;
-	        // FIXME : ReflectiveSequence addAt and ReflectiveCollection add 
-	        // handle differently the containment of the added element. (see their code!)
 	        // ReflectiveCollection.add(result, rovalue);
+	        // FIXME : ReflectiveSequence.addAt and ReflectiveCollection.add handle differently and weirdly 
+	        // the containment of the added element. (see their code!). That's why we use the simple Collection.add method
 	        rovalue.getData().put("emfObject", sfeature);
 	        Collection.add(result, rovalue);
 	    }
-	    rObject.getProperties().put(((RuntimeObject)roprop.getProperties().get("name")).getData().get("StringValue"), result);
+	    rObject.getProperties().put((String)((RuntimeObject)roprop.getProperties().get("name")).getData().get("StringValue"), result);
 	    // FIXME : the set method handles the containment, but it seems to be not appropriated for 
 	    // model instances. Containment is observed even if we simply use Collection.add to add instances
 	    // since result is still a reflective collection.
@@ -644,16 +640,30 @@ public class EMF2Runtime {
 	{
 	    RuntimeObject result = null;
 	    String metaclass_name = unit.getEQualifiedName(metaclass);
-	    if (this.typedef_cache.containsKey(metaclass_name)) 
+	    // If the given metaclass is an EEnum (ecore), we have to "convert" it in Enumeration (kermeta)
+	    if (getEcoreKermetaMap().containsKey(metaclass_name)) 
 	    {
-	        result = (RuntimeObject)this.typedef_cache.get(metaclass_name);
+	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(metaclass_name);
+	    	if (this.type_cache.containsKey(kermeta_metaclass_name)) 
+		        result = (RuntimeObject)this.type_cache.get(kermeta_metaclass_name);
+	    	else
+	    	{	
+	    		Type ftype = this.getTypeFromName(kermeta_metaclass_name);
+	    		fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
+	    		result = unit.getRuntimeMemory().getRuntimeObjectForFObject(ftype);
+	    		this.type_cache.put(metaclass_name, result);
+	    	}
+	    }
+	    else if (this.type_cache.containsKey(metaclass_name)) 
+	    {
+	        result = (RuntimeObject)this.type_cache.get(metaclass_name);
 	    }
 	    else
 	    {   
-	    	Type ftype = this.getMetaClassByName(metaclass);
+	    	Type ftype = this.getTypeFromEClassifier(metaclass);
 	        fr.irisa.triskell.kermeta.language.structure.Class fclass = (fr.irisa.triskell.kermeta.language.structure.Class)ftype;
 	        result = unit.getRuntimeMemory().getROFactory().createMetaClass(fclass);
-	        this.typedef_cache.put(metaclass_name, result);
+	        this.type_cache.put(metaclass_name, result);
 	    }
 	    return result;
 	}
