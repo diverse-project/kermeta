@@ -1,4 +1,4 @@
-/* $Id: Traceback.java,v 1.10 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: Traceback.java,v 1.11 2006-07-20 09:05:44 zdrey Exp $
  * Project   : Kermeta Interpreter
  * File      : Traceback.java
  * License   : EPL
@@ -80,7 +80,7 @@ public class Traceback {
             	}
         }
         // And the first info :
-        stack_trace = getContextForFObject(null, cause_object) + stack_trace;
+        stack_trace = "Trace: \n" + getContextForFObject(null, cause_object) + stack_trace;
         return stack_trace;
     }
 
