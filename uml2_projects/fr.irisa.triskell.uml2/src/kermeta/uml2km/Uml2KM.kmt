@@ -4,7 +4,6 @@
 package uml2km;
 
 require kermeta
-require "../Uml2.kmt"
 require "Pass1_Uml2KMTVisitor.kmt"
 require "Pass2_Uml2KMTVisitor.kmt"
 require "Pass3_Uml2KMVisitor.kmt"
