@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.44 2006-07-19 14:45:18 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.45 2006-07-20 06:47:12 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -295,7 +295,7 @@ public class EMF2Runtime {
 			}
 		}
 		catch (Exception e) {
-		    e.printStackTrace();
+			internalLog.error("loadUnit failed due to " + e.getMessage(), e);
 		    unit.throwKermetaRaisedExceptionOnLoad(
 		    		"Error loading EMF model at '" + unit.getUriAsString() +
 		    		"' :\n   " + e.getMessage() + "  (" + e.getStackTrace()[0] + ")", e);
