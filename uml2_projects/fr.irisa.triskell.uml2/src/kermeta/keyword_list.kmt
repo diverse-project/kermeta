@@ -1,4 +1,4 @@
-/* $Id: keyword_list.kmt,v 1.1 2006-05-02 15:34:42 vmahe Exp $
+/* $Id: keyword_list.kmt,v 1.2 2006-07-20 08:38:27 vmahe Exp $
  * Creation date: May 2, 2006
  * License: E.P.L.
  * Copyright:
@@ -71,6 +71,10 @@ class KeyWordList
 		keywords.put("false","false")
 		keywords.put("void","void")
 		keywords.put("value","value")
+		keywords.put("pre","pre")
+		keywords.put("post","post")
+		keywords.put("inv","inv")
+//		keywords.put("@pre","@pre")
     end
     
     operation isKeyword(str : String) : Boolean is do
