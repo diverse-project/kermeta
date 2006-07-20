@@ -36,13 +36,13 @@ import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.Variable;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
-import fr.irisa.triskell.kermeta.loader.KMUnitError;
+import fr.irisa.triskell.kermeta.loader.message.KMUnitError;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 
 public class KermetaConsole extends Console implements KermetaIOStream {
 
@@ -52,7 +52,7 @@ public class KermetaConsole extends Console implements KermetaIOStream {
 	
 	ExpressionInterpreter exp_interpreter;
 	DynamicExpressionUnit unit;
-	FClassDefinition v;
+	ClassDefinition v;
 	ExpressionCallFrame f;
 	
 	public KermetaConsole() {
@@ -93,7 +93,7 @@ public class KermetaConsole extends Console implements KermetaIOStream {
 		i.setKStream(this);
 		
 		unit = new DynamicExpressionUnit(std.packages);
-		v = (FClassDefinition)std.typeDefinitionLookup("kermeta::standard::Void");
+		v = (ClassDefinition)std.typeDefinitionLookup("kermeta::standard::Void");
 	    f =  new ExpressionCallFrame(exp_interpreter.getInterpreterContext(), unit, i.getMemory().voidINSTANCE);
 	    addUsing("kermeta::standard");
 	    prompt();
@@ -101,13 +101,7 @@ public class KermetaConsole extends Console implements KermetaIOStream {
 	
 	public ArrayList getVariables() {
 		ArrayList result = new ArrayList();
-		Hashtable table = f.getVariables();
-		Iterator it = table.values().iterator();
-		Variable var;
-		while(it.hasNext()) {
-			var = (Variable)it.next();
-			result.add(var);
-		}
+		for (Object o_var : f.getVariables()) { result.add((Variable)o_var); }
 		return result;
 	}
 	
@@ -116,8 +110,8 @@ public class KermetaConsole extends Console implements KermetaIOStream {
 		try {
 		KermetaUnit u = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri, unit.packages);
 		u.load();
-		u.forceTypeCheck();
-		exp_interpreter.getMemory().refresh();
+		u.typeCheckAllUnits();
+		exp_interpreter.getMemory().freeJavaMemory();
 		write("done.\n");
 		}
 		catch(Throwable e) {
@@ -216,4 +210,11 @@ public class KermetaConsole extends Console implements KermetaIOStream {
     	f.pack();
     	f.show();
     }
+
+
+
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
 }

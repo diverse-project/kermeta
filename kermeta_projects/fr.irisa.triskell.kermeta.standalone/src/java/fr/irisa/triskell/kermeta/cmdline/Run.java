@@ -18,7 +18,7 @@ import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
-import fr.irisa.triskell.kermeta.structure.FClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.typechecker.KermetaTypeChecker;
 
 /**
@@ -39,7 +39,7 @@ public class Run {
 		ExpressionInterpreter exp_interpreter = new ExpressionInterpreter(i.getMemory());
 
 		DynamicExpressionUnit unit = new DynamicExpressionUnit(std.packages);
-		FClassDefinition v = (FClassDefinition)std.typeDefinitionLookup("kermeta::standard::Void");
+		ClassDefinition v = (ClassDefinition)std.typeDefinitionLookup("kermeta::standard::Void");
 	    ExpressionCallFrame f =  new ExpressionCallFrame(exp_interpreter.getInterpreterContext(), unit, i.getMemory().voidINSTANCE);
 
 	
