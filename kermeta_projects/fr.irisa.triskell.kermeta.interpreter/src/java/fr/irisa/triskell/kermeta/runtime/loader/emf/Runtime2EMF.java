@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.35 2006-07-20 07:33:58 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.36 2006-07-20 09:04:50 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -17,31 +17,21 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
-import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
-import fr.irisa.triskell.kermeta.exporter.ecore.KM2EcorePass1;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
-import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -72,7 +62,7 @@ public class Runtime2EMF {
     		kermeta_ecore_map = new Hashtable<String, String>();
     		kermeta_ecore_map.put("kermeta::language::structure::Enumeration", "ecore::EEnum");
     		kermeta_ecore_map.put("kermeta::language::structure::EnumerationLiteral", "ecore::EEnumLiteral");
-    		// Map for the properties of EEnumLiteral for EnumerationLiteral
+    		// Map for the properties of EEnumLiteral for EnumerationLiteral FIXME : deprecated
     		kermeta_ecore_map.put("enumeration", "eEnum");
     		kermeta_ecore_map.put("name", "name");
     		kermeta_ecore_map.put("tag", "eAnnotations");
@@ -187,24 +177,32 @@ public class Runtime2EMF {
     }
     
     /**
-     * Set the values previously retrieved by findEMFObject... to their owning eobjects. 
+     * Set the values previously retrieved by findEMFObject... to their owning eobjects.
+     * rObject should never be a reference to a primitive type.
      * @param rObject
      */
     protected void setEObjectPropertiesFromRuntimeObject(RuntimeObject rObject)
     {
-    	// If the object is an instance of eClass :
-        EObject eObject = (EObject)rObject.getData().get("r2e.emfObject");
         // Object must not be an enumeartion:
         if (!isanEnumeration(rObject) && !isanEnumerationLiteral(rObject))
         {
+        	// If the object is an instance of eClass :
+            EObject eObject = (EObject)rObject.getData().get("r2e.emfObject");
         	// Get all the Structural features of requested eObject
         	for (Object next : rObject.getProperties().keySet())
         	{
+                // eObject cannot be null, if rObject refers to a primitive type
+                if (eObject == null)
+                    unit.throwKermetaRaisedExceptionOnSave("Could not find an EObject for : " + rObject
+                    + "\n   properties : " + rObject.getProperties() + ";" 
+                    + "\n   possible reason : the RuntimeObject has a weird type? ", null);
+
         		String prop_name = (String)next;
         		String eprop_name = prop_name;
         		// Special handling for Enumeration -> convert Enumeration from kermeta into EEnum from Ecore
         		// if rObject is _the_ EnumerationLiteral type handled here:
-        		
+                // Handle crash-case
+
         		RuntimeObject property = (RuntimeObject)rObject.getProperties().get(prop_name);
         		if (getKermetaEcoreMap().containsValue(unit.getEQualifiedName(eObject.eClass())))
         			eprop_name = getKermetaEcoreMap().get(prop_name);
@@ -238,17 +236,8 @@ public class Runtime2EMF {
         						}
         					}
         				}
-        				else if (feature.getEType() instanceof EEnum)
-        				{
-        					System.err.println("FEATURE TYPE : " + feature + "; " + feature.getEType() + "; " + eObject.eGet(feature).getClass());
-        					// if feature type is EEnum, then, eObject.eGet(feature) type is EEnumLiteral (you can display it in Sysout to check it!)
-        					//EEnum f = (EEnum)eObject.eGet(feature);
-        					
-        					eObject.eSet(feature, ((EEnumLiteral)property_eObject));
-        				}
         				else // EObject, EClass, EDataType
         				{
-        					System.err.println("2)FEATURE TYPE : " + feature + "; " + feature.getEType() + "; " + eObject.eGet(feature).getClass());
         					eObject.eSet(feature, property_eObject);
         				}
         				/*// TODO : before uncommenting this, we have to check if "null" is a legal value for property_eObject
@@ -383,7 +372,8 @@ public class Runtime2EMF {
             		rObject.getData().put("r2e.emfObject", result);
             	}
             }
-            // else : null eclass occurs when the object type is a primitive type or an enumeration 
+            // else : null eclass occurs when the object type is a primitive type or an enumeration , or a special type,
+            // like ecore::EAnnotation, which is not handled properly
         }
         else
         	result=(EObject)rObject.getData().get("r2e.emfObject");
@@ -433,88 +423,6 @@ public class Runtime2EMF {
 			}
         }
         // If it was not found, maybe it is an Ecore Type? (like EEnum, EEnumeration literal....)
-        return result;
-    }
-    
-/*    protected EEnum getOrCreateEEnumFromRuntimeObject(RuntimeObject ro_enumeration, Resource p_resource)
-    {
-    	EEnum result = null;
-    	String enumeration_name = (String)ro_enumeration.getProperties().get("name").getData().get("StringValue");
-    	ArrayList enumeration_literals = (ArrayList)ro_enumeration.getProperties().get("ownedLiteral").getData().get("CollectionArrayList"); 
-    	if (eenum_map.containsKey(enumeration_name))
-    		result = eenum_map.get(enumeration_name);
-    	else
-    	{
-    		// result = EcoreFactory.eINSTANCE.createEEnum();
-    		result = getEEnumFromQualifiedName(enumeration_name, p_resource);
-    		System.out.println("result.literals: " + result.getELiterals().size());
-    		if (result == null)
-    		{
-    			System.out.println("result no ok : " );
-    			result = EcoreFactory.eINSTANCE.createEEnum();
-    			result.setName(enumeration_name);
-    			result.setInstanceClass(null);
-    			result.setInstanceClassName(null);
-    			result.setSerializable(true); // this property does not exist in kermeta Enumeration...
-    			
-    			for (Object o : enumeration_literals) 
-    			{ 
-    				RuntimeObject ro_elit = (RuntimeObject)o;
-    				EEnumLiteral elit = EcoreFactory.eINSTANCE.createEEnumLiteral();
-    				elit.setName((String)ro_elit.getProperties().get("name").getData().get("StringValue"));
-    				elit.setValue(result.getELiterals().size()-1);
-    				result.getELiterals().add(elit);
-    			}
-    		}
-    		System.out.println("result.literals: " + result.getELiterals().size());
-    		eenum_map.put(enumeration_name, result);
-    	}
-    	return result;
-    }*/
-    
-    /** Special method to find an enumeration in meta model that contains an enumeration literal
-     * which name is kqname */
-    protected EEnumLiteral getEEnumLiteralFromQualifiedName(String kqname, String enum_name, Resource res)
-    {
-        EEnumLiteral result = null;
-        //TreeIterator it = res.getAllContents();
-        TreeIterator it = unit.getMetaModelResource().getAllContents();
-        // Is the enum literal available in the metamodel?
-        while (it.hasNext() && result == null)
-        {
-            EObject obj = (EObject)it.next();
-			if (obj instanceof EEnum)
-			{
-				EEnum eenum = (EEnum)obj;
-				// FIXME : enum_name must be "qualified" (with its owning package
-				if (eenum.getName().equals(enum_name))
-				{
-					for (Object o : eenum.getELiterals()) {
-						EEnumLiteral elit = (EEnumLiteral)o;
-						if (elit.getName().equals(kqname))
-							result = elit;
-					}
-				}
-			}
-        }
-        // Is it available in the model itself?
-        if (result == null)
-        {
-        	Iterator<Map.Entry<String, EEnum>> it_eenum = eenum_map.entrySet().iterator();
-        	while (it_eenum.hasNext())
-        	{
-				Map.Entry<String, EEnum> next = it_eenum.next(); 
-        		if (next.getValue().getName().equals(enum_name))
-        		{
-        			System.err.println("NULL ENUMLITERAL : " + next.getValue().getELiterals().size());
-        			for (Object o : next.getValue().getELiterals()) {
-        				EEnumLiteral elit = (EEnumLiteral)o;
-        				if (elit.getName().equals(kqname))
-        					result = elit;
-        			}
-				}
-        	}
-        }
         return result;
     }
     
