@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.1 2005-04-28 10:01:28 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.2 2006-07-20 11:34:52 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -71,7 +71,7 @@ public class JunitTestSuite extends TestSuite {
 	
 	public void testWithFile(String dir, String file)  {
 		//Run.main(new String[] {dir+"/"+file} );
-	    addTest((new RunJunitFactory(new String[] {dir+"/"+file})).getTest() );
+	    addTest(new RunJunitFactory().getTest() );
 	    
 	}
 	
