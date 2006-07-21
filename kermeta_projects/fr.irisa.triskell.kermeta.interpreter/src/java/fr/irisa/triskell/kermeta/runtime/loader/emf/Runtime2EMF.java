@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.36 2006-07-20 09:04:50 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.37 2006-07-21 12:23:21 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -44,7 +45,7 @@ public class Runtime2EMF {
 
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KMT.Runtime2EMF");
 	final static public String ECORE_NSURI = "http://www.eclipse.org/emf/2002/Ecore"; 
-
+	final static public String KERMETA_NSURI = "http://kermeta/kermeta.ecore";
     // Put in this list all the RuntimeObject that were already updated
     protected ArrayList<RuntimeObject> updatedRuntimeObjects;
     protected EMFRuntimeUnit unit;
@@ -353,7 +354,8 @@ public class Runtime2EMF {
         if (rObject.getData().get("r2e.emfObject")==null)
         {
         	 // If we did not find the Eclass, then we could try to find it in the ecore metamodel resource
-            if (getKermetaEcoreMap().containsKey(kqname))
+            if (getKermetaEcoreMap().containsKey(kqname) 
+            		&& (!((EPackage)p_resource.getContents().get(0)).getNsURI().contains(KERMETA_NSURI)))
             {	// this is a patch-like solution :/ for handling ecore metamodel types
             	if (getKermetaEcoreMap().get(kqname).equals("ecore::EEnum"))
             	{
