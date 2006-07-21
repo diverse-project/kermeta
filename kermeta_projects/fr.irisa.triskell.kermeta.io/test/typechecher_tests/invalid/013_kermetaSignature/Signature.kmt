@@ -20,7 +20,7 @@ class Up
 	operation cv(t : Top) : String is do
 		result := "Up"
 	end
-	operation inv(m : Middle) : String is do
+	operation ~inv(m : Middle) : String is do
 		result := "Up"
 	end
 	operation ctv(b : Bottom) : String is do
@@ -30,14 +30,14 @@ class Up
 
 class Down inherits Up
 {
-	method cv(m : Middle) : String is do
+	method cv(m : Top) : String is do // parameter cannot be of type Middle due to invariance
 	// m.triggerError() // pour déclencher l'erreur de type
 		result := "Down"
 	end
-	method inv(m : Middle) : String is do
+	method ~inv(m : Middle) : String is do
 		result := "Down"
 	end
-	method ctv(m : Middle) : String is do
+	method ctv(m : Bottom) : String is do // parameter cannot be of type Middle due to invariance
 		result := "Down"
 	end
 }

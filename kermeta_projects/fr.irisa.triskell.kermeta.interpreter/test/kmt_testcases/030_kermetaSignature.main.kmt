@@ -1,7 +1,7 @@
-@mainClass "helloworld::Main"
+@mainClass "opsignature::Main"
 @mainOperation "testSignature"
 
-package helloworld;
+package opsignature;
 
 using kermeta::standard
 using kermeta::io
@@ -29,29 +29,30 @@ class Main inherits kermeta::kunit::Test
         stdio.writeln(u.cv(b)) 
         assert(u.cv(b) == "Up")
         stdio.writeln("Compilation error")//u.inv(t)
-        stdio.writeln(u.inv(m))        
-        assert(u.inv(m) == "Up")
-        stdio.writeln(u.inv(b))
-        assert(u.inv(b) == "Up")
-        stdio.writeln("Compilation error")//u.ctv(t)
-        stdio.writeln("Compilation error")//u.ctv(m)
+        stdio.writeln(u.~inv(m))        
+        assert(u.~inv(m) == "Up")
+        stdio.writeln(u.~inv(b))
+        assert(u.~inv(b) == "Up")
+        stdio.writeln("Compilation error: u.ctv(t)")//u.ctv(t)
+        stdio.writeln("Compilation error: u.ctv(m)")//u.ctv(m)
         stdio.writeln(u.ctv(b))
         assert(u.ctv(b) == "Up")
         
         stdio.writeln("*** Second column (d) ***")
-        stdio.writeln("Compilation error")//d.cv(t) // comme C++
+        stdio.writeln("Compilation error: d.cv(t)")//d.cv(t) // comme C++
+        stdio.writeln(d.cv(t))
+        assertTrueWithMsg(d.cv(t)=="Down","d.cv(t)")
         stdio.writeln(d.cv(m))
         assert(d.cv(m) == "Down")
         stdio.writeln(d.cv(b))
         assert(d.cv(b) == "Down")
-        stdio.writeln("Compilation error")//d.inv(t)
-        stdio.writeln(d.inv(m))
-        assert(d.inv(m) == "Down")
-        stdio.writeln(d.inv(b))
-        assert(d.inv(b) == "Down")
-        stdio.writeln("Compilation error")//d.ctv(t)
-        stdio.writeln(d.ctv(m))
-        assert(d.ctv(m) == "Down")
+        stdio.writeln("Compilation error: d.inv(t)")//d.inv(t)
+        stdio.writeln(d.~inv(m))
+        assert(d.~inv(m) == "Down")
+        stdio.writeln(d.~inv(b))
+        assert(d.~inv(b) == "Down")
+        stdio.writeln("Compilation error: d.ctv(t)")//d.ctv(t)
+        stdio.writeln("Compilation error: d.ctv(m)")//d.ctv(m)
         stdio.writeln(d.ctv(b))
         assert(d.ctv(b) == "Down")
         
@@ -63,10 +64,10 @@ class Main inherits kermeta::kunit::Test
         stdio.writeln(ud.cv(b))
         assert(ud.cv(b) == "Down")
         stdio.writeln("Compilation error")//ud.inv(t)
-        stdio.writeln(ud.inv(m))
-        assert(ud.inv(m) == "Down")
-        stdio.writeln(ud.inv(b))
-        assert(ud.inv(b) == "Down")
+        stdio.writeln(ud.~inv(m))
+        assert(ud.~inv(m) == "Down")
+        stdio.writeln(ud.~inv(b))
+        assert(ud.~inv(b) == "Down")
         stdio.writeln("Compilation error")//ud.ctv(t)
         stdio.writeln("Compilation error")//ud.ctv(m)
         stdio.writeln(ud.ctv(b))
@@ -88,7 +89,7 @@ class Up
 	operation cv(t : Top) : String is do
 		result := "Up"
 	end
-	operation inv(m : Middle) : String is do
+	operation ~inv(m : Middle) : String is do
 		result := "Up"
 	end
 	operation ctv(b : Bottom) : String is do
@@ -98,14 +99,14 @@ class Up
 
 class Down inherits Up
 {
-	method cv(m : Middle) : String is do
+	method cv(m : Top) : String is do // parameter cannot be of type Middle due to invariance
 	// m.triggerError() // pour déclencher l'erreur de type
 		result := "Down"
 	end
-	method inv(m : Middle) : String is do
+	method ~inv(m : Middle) : String is do
 		result := "Down"
 	end
-	method ctv(m : Middle) : String is do
+	method ctv(m : Bottom) : String is do // parameter cannot be of type Middle due to invariance
 		result := "Down"
 	end
 }

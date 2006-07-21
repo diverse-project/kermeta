@@ -29,49 +29,49 @@ class Main inherits kermeta::kunit::Test
         stdio.writeln(u.cv(t))  
         stdio.writeln(u.cv(m)) 
         stdio.writeln(u.cv(b)) 
-        u.inv(t)	// must have an error here
+        u.~inv(t)	// must have an error here
    end
    operation testSignature02() : Void is do
         
-        stdio.writeln(u.inv(m))  
-        stdio.writeln(u.inv(b))
+        stdio.writeln(u.~inv(m))  
+        stdio.writeln(u.~inv(b))
         u.ctv(t)	// must have an error here
    end
    operation testSignature03() : Void is do
    		u.ctv(m)	// must have an error here
         stdio.writeln(u.ctv(b))
         
-   end
-   operation testSignature04() : Void is do
         stdio.writeln("*** Second column (d) ***")
-        d.cv(t) // comme C++ // must have an error here
+        stdio.writeln(d.cv(t)) 
         stdio.writeln(d.cv(m))
         stdio.writeln(d.cv(b))
    end
    operation testSignature05() : Void is do
-        d.inv(t)	// must have an error here
-        stdio.writeln(d.inv(m))
-        stdio.writeln(d.inv(b))
+        d.~inv(t)	// must have an error here
+        stdio.writeln(d.~inv(m))
+        stdio.writeln(d.~inv(b))
    end
    operation testSignature06() : Void is do
         d.ctv(t)	// must have an error here
-        stdio.writeln(d.ctv(m))
+   end
+   operation testSignature07() : Void is do
+        d.ctv(m) // must have an error here
         stdio.writeln(d.ctv(b))
         
    end
-   operation testSignature07() : Void is do
+   operation testSignature08() : Void is do
         stdio.writeln("*** Third column (ud) ***")
         stdio.writeln(ud.cv(t))
         stdio.writeln(ud.cv(m))
         stdio.writeln(ud.cv(b))
-        ud.inv(t)	// must have an error here
-        stdio.writeln(ud.inv(m))
-        stdio.writeln(ud.inv(b))
-   end
-   operation testSignature08() : Void is do
-        ud.ctv(t)	// must have an error here
+        ud.~inv(t)	// must have an error here
+        stdio.writeln(ud.~inv(m))
+        stdio.writeln(ud.~inv(b))
    end
    operation testSignature09() : Void is do
+        ud.ctv(t)	// must have an error here
+   end
+   operation testSignature10() : Void is do
         ud.ctv(m)	// must have an error here
         stdio.writeln(ud.ctv(b))
     end
