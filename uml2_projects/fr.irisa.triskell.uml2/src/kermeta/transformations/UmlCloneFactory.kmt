@@ -1,4 +1,4 @@
-/* $Id: UmlCloneFactory.kmt,v 1.2 2006-07-20 08:54:22 vmahe Exp $
+/* $Id: UmlCloneFactory.kmt,v 1.3 2006-07-21 14:36:43 vmahe Exp $
  * Creation date: July 5, 2006
  * License:
  * Copyright:
@@ -21,20 +21,23 @@ class UmlCloneFactory
 	
 	operation initialize() is do
 		ioTable := IOElementsTable.new
+		ioTable.initialize
 	end
 
 ///////////////////////// MAIN DIAGRAMS CLONING ///////////////////////
 // these operations offer cloning of a complete UML2 diagram in once //
 ///////////////////////////////////////////////////////////////////////
 
-	operation cloneStaticDiagram(node : Package) : Package is do
+	operation cloneStaticDiagram(node : Model) : Model is do
 		// first pass clones classes, operations, parameters
 		var pass1 : StaticDiagramClonePass1 init StaticDiagramClonePass1.new
 		pass1.initialize(node, ioTable, self)
+		pass1.visitModel(node)
 		
 		// second pass clones links and change parameters'type to the type clone
 		var pass2 : StaticDiagramClonePass2 init StaticDiagramClonePass2.new
 		pass2.initialize(node, ioTable, self)
+		pass2.visitModel(node)
 		
 		// give the cloned top package as resulting model (without non static UML2 elements)
 		result ?= ioTable.getValue(node)
@@ -45,12 +48,18 @@ class UmlCloneFactory
 //      the inherited properties like it would be for their instances.  //
 //////////////////////////////////////////////////////////////////////////
 
+    operation cloneModel(element : Model) : Model is do
+        var clone : Model init Model.new
+        // superclasses
+        affectPackage(element, clone)
+        //specific properties
+        clone.viewpoint := element.viewpoint
+        result := clone
+    end
+
     operation clonePackage(element : Package) : Package is do 
         var clone : Package init Package.new
-        // superclasses
-        affectNamespace(element, clone)
-        affectPackageableElement(element, clone)
-        //specific properties : none
+        affectPackage(element, clone)
         result := clone
     end
 
@@ -93,7 +102,7 @@ class UmlCloneFactory
     	clone.effect := element.effect
     	clone.isException := element.isException
     	clone.isStream := element.isStream
-    	clone.defaultValue := cloneValueSpecification(element.defaultValue)
+    	if element.defaultValue != void then clone.defaultValue := cloneValueSpecification(element.defaultValue) end
     	// rem : the "operation" attribute must be fixed by its owning operation
     	result := clone
     end
@@ -107,17 +116,25 @@ class UmlCloneFactory
     	affectConnectableElement(element, clone)
     	affectDeploymentTarget(element, clone)
     	// specific properties
-    	clone.defaultValue := cloneValueSpecification(element.defaultValue)
+    	if element.defaultValue != void then clone.defaultValue := cloneValueSpecification(element.defaultValue) end
         clone.isDerived := element.isDerived
         clone.isReadOnly := element.isReadOnly
         clone.isDerivedUnion := element.isDerivedUnion
-        clone.aggregation := element.aggregation	//TODO : enforced it, seeing the VisibilityKind treatment
         clone.association := element.association	// NB : not a clone of the association but the original one
     	// rem : the "owningAssociation" attribute must be fixed by its owning association
     	// redefinedProperty : TODO
     	// subsettedProperty : TODO
     	// rem : the "associationEnd" attribute must be fixed by the property (of an association) which own the qualifier
     	// qualifier : TODO (should fixed the opposite "associationEnd)
+    	
+    	// specific treatment of AggregationKind
+        if element.aggregation == AggregationKind.none then
+        	clone.aggregation := AggregationKind.none
+        else if element.aggregation == AggregationKind.composite then
+        	clone.aggregation := AggregationKind.composite
+        else if element.aggregation == AggregationKind.shared then
+        	clone.aggregation := AggregationKind.shared
+        end end end
     	
     	result := clone
     end
@@ -193,7 +210,7 @@ class UmlCloneFactory
     	//annotatedElement	: not cloned (must be linked by user)
     	clone.body := element.body
     	// FIXME :
-//    	clone.bodyExpression := cloneExpression(element.bodyExpression)
+//    	if element.bodyExpression != void then clone.bodyExpression := cloneExpression(element.bodyExpression) end
     	result := clone
     end
     
@@ -217,7 +234,15 @@ class UmlCloneFactory
     	var clone : ElementImport init ElementImport.new
     	affectDirectedRelationship(element, clone)
     	clone.~alias := element.~alias
-    	clone.visibility := element.visibility
+        if element.visibility == VisibilityKind.public then
+        	clone.visibility := VisibilityKind.public
+        else if element.visibility == VisibilityKind.private then
+        	clone.visibility := VisibilityKind.private
+        else if element.visibility == VisibilityKind.protected then
+        	clone.visibility := VisibilityKind.protected
+        else if element.visibility == VisibilityKind.~package then
+        	clone.visibility := VisibilityKind.~package
+        end end end end
     	clone.importedElement := element.importedElement
     	// rem : the "importingNamespace" attribute must be fixed by its owning namespace
     	result := clone
@@ -254,6 +279,13 @@ class UmlCloneFactory
     ////////////////////// GENERIC AFFECTATIONS FOR ABSTRACT CLASSES ////////////////////////
     // we centralize affectations of properties inherited from abstract high level classes //
     /////////////////////////////////////////////////////////////////////////////////////////
+
+    operation affectPackage(element : Package, clone : Package) is do 
+        // superclasses
+        affectNamespace(element, clone)
+        affectPackageableElement(element, clone)
+        //specific properties : none
+    end
     
     operation affectBehavioredClassifier(element : BehavioredClassifier, clone : BehavioredClassifier) is do
     	// superclasses
@@ -345,8 +377,6 @@ class UmlCloneFactory
     	affectTemplateableElement(element, clone)
     	// specific properties
     	clone.name := element.name
-    	
-/* ******************************* FIXME **************************************
         if element.visibility == VisibilityKind.public then
         	clone.visibility := VisibilityKind.public
         else if element.visibility == VisibilityKind.private then
@@ -356,8 +386,6 @@ class UmlCloneFactory
         else if element.visibility == VisibilityKind.~package then
         	clone.visibility := VisibilityKind.~package
         end end end end
-    ******************************* OR ******************************* */
-        clone.visibility := element.visibility
     end
     
     operation affectPackageableElement(element : PackageableElement, clone : PackageableElement) is do
@@ -365,7 +393,15 @@ class UmlCloneFactory
     	affectNamedElement(element, clone)
     	affectParameterableElement(element, clone)
     	// specific properties
-    	clone.packageableElement_visibility := element.packageableElement_visibility
+        if element.packageableElement_visibility == VisibilityKind.public then
+        	clone.packageableElement_visibility := VisibilityKind.public
+        else if element.packageableElement_visibility == VisibilityKind.private then
+        	clone.packageableElement_visibility := VisibilityKind.private
+        else if element.packageableElement_visibility == VisibilityKind.protected then
+        	clone.packageableElement_visibility := VisibilityKind.protected
+        else if element.packageableElement_visibility == VisibilityKind.~package then
+        	clone.packageableElement_visibility := VisibilityKind.~package
+        end end end end
     end
     
     operation affectTypedElement(element : TypedElement, clone : TypedElement) is do
@@ -413,8 +449,8 @@ class UmlCloneFactory
     	// specific properties
     	clone.isOrdered := element.isOrdered
         clone.isUnique := element.isUnique
-    	clone.lowerValue := cloneValueSpecification(element.lowerValue)
-    	clone.upperValue := cloneValueSpecification(element.upperValue)
+    	if element.lowerValue != void then clone.lowerValue := cloneValueSpecification(element.lowerValue) end
+    	if element.upperValue != void then clone.upperValue := cloneValueSpecification(element.upperValue) end
     end
     
     operation affectRelationship(element : Relationship, clone : Relationship) is do

@@ -1,4 +1,4 @@
-/* $Id: 750test_CloneTool_StaticDiagram.kmt,v 1.3 2006-07-20 08:54:22 vmahe Exp $
+/* $Id: 750test_CloneTool_StaticDiagram.kmt,v 1.4 2006-07-21 14:37:37 vmahe Exp $
  * Creation date: July 6, 2006
  * License:
  * Copyright:
@@ -18,26 +18,33 @@ using uml2::transformations
 class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
 {
 	reference origModelName : kermeta::standard::String
-	reference origModel : Package
+	reference origModel : Model
 	reference cloneModelName : kermeta::standard::String
-	reference cloneModel : Package
-	reference testModel : Package
+	reference cloneModel : Model
+	reference testModel : Model
 	
 	method setUp() is do
 		//creating needed instances
-		origModelName := "./uml2/ClassDiagram.uml2"
+//		origModelName := "./uml2/ClassDiagram.uml2"
+//		origModelName := "./uml2/ClassDiagram.uml"
+		origModelName := "./uml2/test3.2.uml"
 		
     	// load the given UML2 resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var inputResource : kermeta::persistence::EMFResource
     	inputResource ?= inputRepository.createResource(origModelName, "../../src/ecore/UML2.ecore")
+//    	inputResource ?= inputRepository.createResource(origModelName, "../../src/ecore/UML.ecore")
     	inputResource.load()
     	
     	// "instances" only gives the main diagramm package for the targeted code tree
     	origModel ?= inputResource.instances.one
 		
 		var factory : UmlCloneFactory init UmlCloneFactory.new
-		cloneModel := factory.clonePackage(origModel)
+		factory.initialize
+		cloneModel := factory.cloneStaticDiagram(origModel)
+		
+		//DEBUG
+		stdio.writeln("DEBUG ------ save")
 		
 		cloneModelName := "./uml2/ClassDiagram_Clone.uml2"
     	var outputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
@@ -60,10 +67,10 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
 	end
     
     operation test_CloneTool_StaticDiagram() is do
-    	assertTrueWithMsg(cloneModel != void,
+    	assertTrueWithMsg(testModel != void,
     		"the cloneModel() method must return something")
-    	assertTrueWithMsg(Package.isInstance(cloneModel),
-    		"the object returned by cloneModel() method must be a Package")
+    	assertTrueWithMsg(Model.isInstance(testModel),
+    		"the object returned by cloneModel() method must be a Model")
     	assertTrueWithMsg(testModel != origModel,
     		"the clone object must be different than the original")
     end
