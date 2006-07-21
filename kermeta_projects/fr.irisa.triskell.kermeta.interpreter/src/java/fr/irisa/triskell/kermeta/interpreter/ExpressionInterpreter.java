@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.40 2006-07-19 09:52:59 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.41 2006-07-21 15:01:21 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -48,6 +48,7 @@ import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
+import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.runtime.FrameworkExternCommand;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
@@ -829,7 +830,10 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        
 //			 Check that target is not void
 		    if (property == null && ro_target == memory.voidINSTANCE) {
-		        internalLog.debug(" >> INTERPRETER REPORTS Call of '"+ node.getName() +"' property on a void target. Exception raised.");
+		        internalLog.debug(" >> INTERPRETER REPORTS Call of '"+ node.getName() +"' property on a void target. Exception raised. ");
+		        KM2KMTPrettyPrinter pp  = new KM2KMTPrettyPrinter();
+		        internalLog.debug(" >>    node prettyprint: "+ pp.accept(node));
+		        internalLog.debug(" >>    container prettyprint: "+ pp.accept(node.eContainer()));
 		        raiseCallOnVoidTargetException(node,"");
 		    }
 		    
