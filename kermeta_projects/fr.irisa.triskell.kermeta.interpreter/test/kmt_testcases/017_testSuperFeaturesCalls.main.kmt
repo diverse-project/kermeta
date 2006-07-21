@@ -67,17 +67,17 @@ class TestSuperFeatures inherits kermeta::kunit::Test
      	assert (c.ci==1)
      	assert (c.ai==3)
      	stdio.writeln("c.getAttribute()=="+c.getAttribute().toString)
-     	assert(c.getAttribute()==3)
+     	assertTrueWithMsg(c.getAttribute()==2,"c.getAttribute()==2 failed") // should be 2 !!?
      	c.setAttribute(7)
-     	assert(c.getAttribute()==7)
-     	assert (d.ai==7)
+     	assertTrueWithMsg(c.getAttribute()==2,"c.getAttribute()==2")
+     	assertTrueWithMsg (d.ai==7,"d.ai==7")
      	b := d
-     	assert(b.getAttribute()==2)
+     	assertTrueWithMsg(b.getAttribute()==2,"b.getAttribute()==2")
      	b.setAttribute(9)
-     	assert(d.bi==9)
+     	assertTrueWithMsg(d.ai==9,"d.ai==9")
      	b.ai := 11
      	a := d
-     	assert(a.getAttribute()==11) 
+     	assertTrueWithMsg(a.getAttribute()==2,"a.getAttribute()==2") 
 
      end
      
