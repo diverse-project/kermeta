@@ -1,5 +1,6 @@
-@mainClass "root_package::Main"
-@mainOperation "main"
+/* $Id: 025_testParametricOperations.main.kmt,v 1.4 2006-07-21 10:22:26 dvojtise Exp $*/
+@mainClass "root_package::TestParametricOperations"
+//@mainOperation "main"
 /**
  * IMPORTANT NOTES ABOUT THIS TEST FILE.
  * => There are syntactic error detected by the interpreter type checker, but we
@@ -22,6 +23,7 @@ class TestParametricOperations inherits kermeta::kunit::TestCase
 	reference aString : String
 	
 	method setUp() is do
+		stdio.writeln("setUp called")
 		tester := ParametricOperationTester.new
 		aString := "I am a parameter"
 	end
@@ -29,7 +31,7 @@ class TestParametricOperations inherits kermeta::kunit::TestCase
 	 * Using "basic" type parameters
 	 *
 	 */
- 	operation test_callParametred1Param() is do
+ 	operation test_callParametred1Param() is do 	
  		var p : String init "I am the test 1"
  		tester.callParametred1Param(p)
  	end
@@ -40,18 +42,40 @@ class TestParametricOperations inherits kermeta::kunit::TestCase
     	tester.callParametred2Param1(s, i)
     end
     
-    /** Should fail since return type is unbound*/
+    /** Should fail since return type is unbound
+     * Note: this test should probably be done directly during 
+     * the typechecking and then we should move that test
+     */
     operation testfail_callParametred2Param2() is do
     	var s1 : String init "I am first param of test 2"
     	var s2 : String init "I am second param of test 2"
-    	//tester.callParametred2Param2(s1, s2)
+    	
+    	//DVK : temprorary disable this test due to bug 108
+    	raise "Test not able to be run correctly, due to bug #108"
+    	
+    	var exceptionRaised : Boolean init false
+		do
+	    	//tester.callParametred2Param2(s1, s2)
+    	rescue ( e : kermeta::exceptions::RuntimeError)
+    		exceptionRaised := true
+    	end
+    	assert(exceptionRaised)
     end
     
    
-	/** A parametric operation with unbound type variable : should fail*/
+	/** A parametric operation with unbound type variable : should raise an exception	 
+     * Note: this test should probably be done directly during 
+     * the typechecking and then we should move that test
+	 */
 	@forbidden "yes"
-	operation testfail_callParametred1UnboundParam() is do
-    	tester.callParametred1UnboundParam()
+	operation testfail_callParametred1UnboundParam() is do	
+		var exceptionRaised : Boolean init false
+		do
+	    	tester.callParametred1UnboundParam()
+    	rescue ( e : kermeta::exceptions::RuntimeError)
+    		exceptionRaised := true
+    	end
+    	assert(exceptionRaised)
 	end
 	
 	/** A parametric operation with unbound type variable, but used in result type
