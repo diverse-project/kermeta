@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.20 2006-06-19 13:36:50 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.21 2006-07-21 12:49:24 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -38,7 +38,7 @@ import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
  * and where the user can write data (input)
  * TODO : implement Listener
  */
-public class KermetaConsole extends KermetaIOStream implements IConsoleListener
+public class KermetaConsole implements KermetaIOStream, IConsoleListener
 {
 
 	protected final static int MAX_BYTES = 10000;
