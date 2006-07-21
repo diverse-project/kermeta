@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta_language_behavior/kermeta.ecore" xmlns:kermeta_language_structure="http://kermeta_language_structure/kermeta.ecore">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore#//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore#//language/structure">
   <kermeta_language_structure:Package name="uml2">
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="Integer" instanceType="/0/@ownedTypeDefinition.0/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class">
@@ -94,70 +94,16 @@
       <ownedAttribute name="ownedComment" type="/0/@ownedTypeDefinition.6/@ownedAttribute.2/@containedType.0" upper="-1" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.13"/>
       </ownedAttribute>
-      <ownedOperation name="not_own_self" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="not_own_self" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.6/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="has_owner" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="has_owner" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.6/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="allOwnedElements" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.6/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="mustBeOwned" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.6/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
+      <ownedOperation name="allOwnedElements" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="mustBeOwned" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="MultiplicityElement" isAbstract="true" superType="/0/@ownedTypeDefinition.7/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.6"/>
@@ -225,200 +171,39 @@
       <ownedAttribute name="lowerValue" type="/0/@ownedTypeDefinition.7/@ownedAttribute.5/@containedType.0" isOrdered="true" upper="1" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.11"/>
       </ownedAttribute>
-      <ownedOperation name="lowerBound" type="/0/@ownedTypeDefinition.0" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="upperBound" type="/0/@ownedTypeDefinition.3" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="isMultivalued" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="includesCardinality" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="lowerBound" type="/0/@ownedTypeDefinition.0" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="upperBound" type="/0/@ownedTypeDefinition.3" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="isMultivalued" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="includesCardinality" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="C" type="/0/@ownedTypeDefinition.0" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="includesMultiplicity" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="includesMultiplicity" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="M" type="/0/@ownedTypeDefinition.7/@ownedOperation.4/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.7"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.4/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="upper_gt_0" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="upper_gt_0" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.5/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="lower_ge_0" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="lower_ge_0" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.6/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="upper_ge_lower" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="upper_ge_lower" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.7/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="lower_eq_lowerbound" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="lower_eq_lowerbound" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.8/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="upper_eq_upperbound" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="upper_eq_upperbound" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.9/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="op_lower" type="/0/@ownedTypeDefinition.0" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.10/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="op_upper" type="/0/@ownedTypeDefinition.3" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.7/@ownedOperation.11/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
+      <ownedOperation name="op_lower" type="/0/@ownedTypeDefinition.0" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="op_upper" type="/0/@ownedTypeDefinition.3" isOrdered="true" upper="1" isAbstract="true"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="NamedElement" isAbstract="true" superType="/0/@ownedTypeDefinition.8/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.135"/>
@@ -458,122 +243,28 @@
       <ownedAttribute name="nameExpression" type="/0/@ownedTypeDefinition.8/@ownedAttribute.4/@containedType.0" isOrdered="true" upper="1" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.136"/>
       </ownedAttribute>
-      <ownedOperation name="no_name" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="no_name" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.8/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="qualified_name" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="qualified_name" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.8/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="allNamespaces" type="/0/@ownedTypeDefinition.4" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.8/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="isDistinguishableFrom" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="allNamespaces" type="/0/@ownedTypeDefinition.4" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="isDistinguishableFrom" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="n" type="/0/@ownedTypeDefinition.8/@ownedOperation.3/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.8"/>
         </ownedParameter>
         <ownedParameter name="ns" type="/0/@ownedTypeDefinition.8/@ownedOperation.3/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.9"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.8/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="separator" type="/0/@ownedTypeDefinition.2" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.8/@ownedOperation.4/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="op_qualifiedName" type="/0/@ownedTypeDefinition.2" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.8/@ownedOperation.5/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="visibility_needs_ownership" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="separator" type="/0/@ownedTypeDefinition.2" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="op_qualifiedName" type="/0/@ownedTypeDefinition.2" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="visibility_needs_ownership" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.8/@ownedOperation.6/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Namespace" isAbstract="true" superType="/0/@ownedTypeDefinition.9/@containedType.0">
@@ -645,119 +336,26 @@
       <ownedAttribute name="packageImport" type="/0/@ownedTypeDefinition.9/@ownedAttribute.4/@containedType.0" upper="-1" opposite="/0/@ownedTypeDefinition.46/@ownedAttribute.2" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.46"/>
       </ownedAttribute>
-      <ownedOperation name="members_are_distinguishable" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="members_are_distinguishable" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.9/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="getNamesOfMember" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
+      <ownedOperation name="getNamesOfMember" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="element" type="/0/@ownedTypeDefinition.9/@ownedOperation.1/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.8"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.9/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="membersAreDistinguishable" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.9/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="importedMember_derived" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="membersAreDistinguishable" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="importedMember_derived" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.9/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="op_importedMember" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.9/@ownedOperation.4/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="importMembers" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
+      <ownedOperation name="op_importedMember" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="importMembers" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="imps" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.9/@ownedOperation.5/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="excludeCollisions" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
+      <ownedOperation name="excludeCollisions" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="imps" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.9/@ownedOperation.6/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="OpaqueExpression" superType="/0/@ownedTypeDefinition.10/@containedType.0">
@@ -800,96 +398,12 @@
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ValueSpecification" isAbstract="true" superType="/0/@ownedTypeDefinition.11/@containedType.0 /0/@ownedTypeDefinition.11/@containedType.1">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.20"/>
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.137"/>
-      <ownedOperation name="isComputable" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.11/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="integerValue" type="/0/@ownedTypeDefinition.0" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.11/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="booleanValue" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.11/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="stringValue" type="/0/@ownedTypeDefinition.2" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.11/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="unlimitedValue" type="/0/@ownedTypeDefinition.3" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.11/@ownedOperation.4/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="isNull" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.11/@ownedOperation.5/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
+      <ownedOperation name="isComputable" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="integerValue" type="/0/@ownedTypeDefinition.0" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="booleanValue" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="stringValue" type="/0/@ownedTypeDefinition.2" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="unlimitedValue" type="/0/@ownedTypeDefinition.3" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="isNull" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Expression" superType="/0/@ownedTypeDefinition.12/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.10"/>
@@ -1104,23 +618,10 @@
           </statement>
         </setterBody>
       </ownedAttribute>
-      <ownedOperation name="conformsTo" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="conformsTo" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="other" type="/0/@ownedTypeDefinition.17/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.17"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.17/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Property" superType="/0/@ownedTypeDefinition.18/@containedType.0 /0/@ownedTypeDefinition.18/@containedType.1 /0/@ownedTypeDefinition.18/@containedType.2">
@@ -1242,156 +743,38 @@
       <ownedAttribute name="associationEnd" type="/0/@ownedTypeDefinition.18/@ownedAttribute.14/@containedType.0" isOrdered="true" upper="1" opposite="/0/@ownedTypeDefinition.18/@ownedAttribute.13">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.18"/>
       </ownedAttribute>
-      <ownedOperation name="opposite_is_other_end" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="opposite_is_other_end" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.18/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="op_opposite" type="/0/@ownedTypeDefinition.18/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="op_opposite" type="/0/@ownedTypeDefinition.18/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.18"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.18/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="multiplicity_of_composite" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="multiplicity_of_composite" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.18/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="subsetting_context" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="subsetting_context" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.18/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="navigable_property_redefinition" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="navigable_property_redefinition" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.18/@ownedOperation.4/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="subsetting_rules" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="subsetting_rules" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.18/@ownedOperation.5/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="navigable_readonly" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="navigable_readonly" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.18/@ownedOperation.6/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="derivedUnion_is_derived" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="derivedUnion_is_derived" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.18/@ownedOperation.7/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="subsettingContext" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.18/@ownedOperation.8/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
+      <ownedOperation name="subsettingContext" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Operation" superType="/0/@ownedTypeDefinition.19/@containedType.0 /0/@ownedTypeDefinition.19/@containedType.1 /0/@ownedTypeDefinition.19/@containedType.2 /0/@ownedTypeDefinition.19/@containedType.3">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.37"/>
@@ -1420,85 +803,18 @@
       <ownedAttribute name="bodyCondition" type="/0/@ownedTypeDefinition.19/@ownedAttribute.7/@containedType.0" isOrdered="true" upper="1">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.29"/>
       </ownedAttribute>
-      <ownedOperation name="type_of_result" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="type_of_result" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.19/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="isOrdered2" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.19/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="isUnique2" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.19/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="type2" type="/0/@ownedTypeDefinition.19/@ownedOperation.3/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="op_isOrdered" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="op_isUnique" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="op_type" type="/0/@ownedTypeDefinition.19/@ownedOperation.3/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.27"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.19/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="only_body_for_query" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="only_body_for_query" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.19/@ownedOperation.4/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="TypedElement" isAbstract="true" superType="/0/@ownedTypeDefinition.20/@containedType.0">
@@ -1655,55 +971,15 @@
       <ownedAttribute name="packageExtension" type="/0/@ownedTypeDefinition.22/@ownedAttribute.6/@containedType.0" upper="-1" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.48"/>
       </ownedAttribute>
-      <ownedOperation name="elements_public_or_private" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="elements_public_or_private" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.22/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="visibleMembers" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.22/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="makesVisible" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="visibleMembers" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="makesVisible" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="el" type="/0/@ownedTypeDefinition.22/@ownedOperation.2/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.8"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.22/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Enumeration" superType="/0/@ownedTypeDefinition.23/@containedType.0">
@@ -1875,236 +1151,49 @@
       <ownedAttribute name="occurrence" type="/0/@ownedTypeDefinition.27/@ownedAttribute.12/@containedType.0" upper="-1" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.102"/>
       </ownedAttribute>
-      <ownedOperation name="allFeatures" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="no_cycles_in_generalization" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="allFeatures" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="no_cycles_in_generalization" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="specialize_type" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="specialize_type" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="inherited_member" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="inherited_member" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="op_inheritedMember" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.4/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="parents" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.5/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="allParents" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.6/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="inheritableMembers" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
+      <ownedOperation name="op_inheritedMember" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="parents" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="allParents" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="inheritableMembers" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="c" type="/0/@ownedTypeDefinition.27/@ownedOperation.7/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.27"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.7/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="hasVisibilityOf" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="hasVisibilityOf" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="n" type="/0/@ownedTypeDefinition.27/@ownedOperation.8/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.8"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.8/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="inherit" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
+      <ownedOperation name="inherit" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="inhs" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.9/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="maySpecializeType" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="maySpecializeType" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="c" type="/0/@ownedTypeDefinition.27/@ownedOperation.10/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.27"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.10/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="op_general" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.11/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="general_equals_parents" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="op_general" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="general_equals_parents" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.12/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="conformsTo" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" superOperation="/0/@ownedTypeDefinition.17/@ownedOperation.0">
+      <ownedOperation name="conformsTo" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true" superOperation="/0/@ownedTypeDefinition.17/@ownedOperation.0">
         <ownedParameter name="other" type="/0/@ownedTypeDefinition.27/@ownedOperation.13/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
-          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.27"/>
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.17"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.27/@ownedOperation.13/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Feature" isAbstract="true" superType="/0/@ownedTypeDefinition.28/@containedType.0">
@@ -2180,22 +1269,9 @@
       <ownedAttribute name="constrainedElement" type="/0/@ownedTypeDefinition.29/@ownedAttribute.3/@containedType.0" isOrdered="true" upper="-1">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.6"/>
       </ownedAttribute>
-      <ownedOperation name="not_apply_to_self" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="not_apply_to_self" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.29/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:Enumeration" name="VisibilityKind">
@@ -2292,39 +1368,13 @@
       <ownedAttribute name="specification" type="/0/@ownedTypeDefinition.39/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="1" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.11"/>
       </ownedAttribute>
-      <ownedOperation name="slots_are_defined" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="slots_are_defined" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.39/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="no_duplicate_slots" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="no_duplicate_slots" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.39/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Slot" superType="/0/@ownedTypeDefinition.40/@containedType.0">
@@ -2377,75 +1427,23 @@
         </setterBody>
       </ownedAttribute>
       <ownedAttribute name="isLeaf" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isComposite="true"/>
-      <ownedOperation name="redefinition_context_valid" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="redefinition_context_valid" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.42/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="redefinition_consistent" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="redefinition_consistent" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.42/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="isConsistentWith" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="isConsistentWith" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="redefinee" type="/0/@ownedTypeDefinition.42/@ownedOperation.2/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.42"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.42/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="isRedefinitionContextValid" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="isRedefinitionContextValid" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="redefinable" type="/0/@ownedTypeDefinition.42/@ownedOperation.3/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.42"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.42/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Generalization" superType="/0/@ownedTypeDefinition.43/@containedType.0">
@@ -2476,55 +1474,15 @@
       <ownedAttribute name="importingNamespace" type="/0/@ownedTypeDefinition.45/@ownedAttribute.3/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="/0/@ownedTypeDefinition.9/@ownedAttribute.3">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.9"/>
       </ownedAttribute>
-      <ownedOperation name="visibility_public_or_private" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="visibility_public_or_private" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.45/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="imported_element_is_public" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="imported_element_is_public" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.45/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="getName" type="/0/@ownedTypeDefinition.2" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.45/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
+      <ownedOperation name="getName" type="/0/@ownedTypeDefinition.2" isOrdered="true" upper="1" isAbstract="true"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="PackageImport" superType="/0/@ownedTypeDefinition.46/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.14"/>
@@ -2535,22 +1493,9 @@
       <ownedAttribute name="importingNamespace" type="/0/@ownedTypeDefinition.46/@ownedAttribute.2/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="/0/@ownedTypeDefinition.9/@ownedAttribute.4">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.9"/>
       </ownedAttribute>
-      <ownedOperation name="public_or_private" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1">
+      <ownedOperation name="public_or_private" type="/0/@ownedTypeDefinition.1" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="diagnostics" type="/1/@ownedTypeDefinition.28" isOrdered="true" upper="1"/>
         <ownedParameter name="context" type="/1/@ownedTypeDefinition.43" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.46/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Association" superType="/0/@ownedTypeDefinition.47/@containedType.0 /0/@ownedTypeDefinition.47/@containedType.1">
@@ -3937,21 +2882,7 @@
       <ownedAttribute name="ownedTemplateSignature" type="/0/@ownedTypeDefinition.135/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="1" opposite="/0/@ownedTypeDefinition.133/@ownedAttribute.4" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.133"/>
       </ownedAttribute>
-      <ownedOperation name="parameterableElements" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/0/@ownedTypeDefinition.135/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
+      <ownedOperation name="parameterableElements" type="/0/@ownedTypeDefinition.5" isOrdered="true" upper="1" isAbstract="true"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="StringExpression" superType="/0/@ownedTypeDefinition.136/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/0/@ownedTypeDefinition.135"/>
@@ -5345,90 +4276,24 @@
       <ownedAttribute name="eStructuralFeatures" type="/1/@ownedTypeDefinition.2/@ownedAttribute.13/@containedType.0" isOrdered="true" upper="-1" opposite="/1/@ownedTypeDefinition.15/@ownedAttribute.7" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.15"/>
       </ownedAttribute>
-      <ownedOperation name="isSuperTypeOf" type="/1/@ownedTypeDefinition.20" isOrdered="true" upper="1">
+      <ownedOperation name="isSuperTypeOf" type="/1/@ownedTypeDefinition.20" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="someClass" type="/1/@ownedTypeDefinition.2/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.2"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.2/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="getFeatureCount" type="/1/@ownedTypeDefinition.37" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.2/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="getEStructuralFeature" type="/1/@ownedTypeDefinition.2/@ownedOperation.2/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="getFeatureCount" type="/1/@ownedTypeDefinition.37" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="getEStructuralFeature" type="/1/@ownedTypeDefinition.2/@ownedOperation.2/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.15"/>
         <ownedParameter name="featureID" type="/1/@ownedTypeDefinition.37" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.2/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="getFeatureID" type="/1/@ownedTypeDefinition.37" isOrdered="true" upper="1">
+      <ownedOperation name="getFeatureID" type="/1/@ownedTypeDefinition.37" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="feature" type="/1/@ownedTypeDefinition.2/@ownedOperation.3/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.15"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.2/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="getEStructuralFeature2" type="/1/@ownedTypeDefinition.2/@ownedOperation.4/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="getEStructuralFeature2" type="/1/@ownedTypeDefinition.2/@ownedOperation.4/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.15"/>
         <ownedParameter name="featureName" type="/1/@ownedTypeDefinition.48" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.2/@ownedOperation.4/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EClassifier" isAbstract="true" superType="/1/@ownedTypeDefinition.3/@containedType.0">
@@ -5439,37 +4304,10 @@
       <ownedAttribute name="ePackage" type="/1/@ownedTypeDefinition.3/@ownedAttribute.3/@containedType.0" isOrdered="true" upper="1" opposite="/1/@ownedTypeDefinition.12/@ownedAttribute.3">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.12"/>
       </ownedAttribute>
-      <ownedOperation name="isInstance" type="/1/@ownedTypeDefinition.20" isOrdered="true" upper="1">
+      <ownedOperation name="isInstance" type="/1/@ownedTypeDefinition.20" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="object" type="/1/@ownedTypeDefinition.40" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.3/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="getClassifierID" type="/1/@ownedTypeDefinition.37" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.3/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
+      <ownedOperation name="getClassifierID" type="/1/@ownedTypeDefinition.37" isOrdered="true" upper="1" isAbstract="true"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EDataType" superType="/1/@ownedTypeDefinition.4/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.3"/>
@@ -5480,39 +4318,13 @@
       <ownedAttribute name="eLiterals" type="/1/@ownedTypeDefinition.5/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="-1" opposite="/1/@ownedTypeDefinition.6/@ownedAttribute.2" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.6"/>
       </ownedAttribute>
-      <ownedOperation name="getEEnumLiteral" type="/1/@ownedTypeDefinition.5/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="getEEnumLiteral" type="/1/@ownedTypeDefinition.5/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.6"/>
         <ownedParameter name="name" type="/1/@ownedTypeDefinition.48" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.5/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="getEEnumLiteral2" type="/1/@ownedTypeDefinition.5/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="getEEnumLiteral2" type="/1/@ownedTypeDefinition.5/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.6"/>
         <ownedParameter name="value" type="/1/@ownedTypeDefinition.37" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.5/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EEnumLiteral" superType="/1/@ownedTypeDefinition.6/@containedType.0">
@@ -5528,62 +4340,23 @@
       <ownedAttribute name="ePackage" type="/1/@ownedTypeDefinition.7/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="/1/@ownedTypeDefinition.12/@ownedAttribute.2">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.12"/>
       </ownedAttribute>
-      <ownedOperation name="create" type="/1/@ownedTypeDefinition.7/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="create" type="/1/@ownedTypeDefinition.7/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.10"/>
         <ownedParameter name="eClass" type="/1/@ownedTypeDefinition.7/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.2"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.7/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="createFromString" type="/1/@ownedTypeDefinition.40" isOrdered="true" upper="1">
+      <ownedOperation name="createFromString" type="/1/@ownedTypeDefinition.40" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="eDataType" type="/1/@ownedTypeDefinition.7/@ownedOperation.1/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.4"/>
         </ownedParameter>
         <ownedParameter name="literalValue" type="/1/@ownedTypeDefinition.48" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.7/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="convertToString" type="/1/@ownedTypeDefinition.48" isOrdered="true" upper="1">
+      <ownedOperation name="convertToString" type="/1/@ownedTypeDefinition.48" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="eDataType" type="/1/@ownedTypeDefinition.7/@ownedOperation.2/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.4"/>
         </ownedParameter>
         <ownedParameter name="instanceValue" type="/1/@ownedTypeDefinition.40" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.7/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EModelElement" isAbstract="true" superType="/1/@ownedTypeDefinition.8/@containedType.0">
@@ -5591,22 +4364,9 @@
       <ownedAttribute name="eAnnotations" type="/1/@ownedTypeDefinition.8/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="-1" opposite="/1/@ownedTypeDefinition.1/@ownedAttribute.2" isComposite="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.1"/>
       </ownedAttribute>
-      <ownedOperation name="getEAnnotation" type="/1/@ownedTypeDefinition.8/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="getEAnnotation" type="/1/@ownedTypeDefinition.8/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.1"/>
         <ownedParameter name="source" type="/1/@ownedTypeDefinition.48" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.8/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ENamedElement" isAbstract="true" superType="/1/@ownedTypeDefinition.9/@containedType.0">
@@ -5614,183 +4374,35 @@
       <ownedAttribute name="name" type="/1/@ownedTypeDefinition.48" isOrdered="true" upper="1" isComposite="true"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EObject">
-      <ownedOperation name="eClass" type="/1/@ownedTypeDefinition.10/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="eClass" type="/1/@ownedTypeDefinition.10/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.2"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="eIsProxy" type="/1/@ownedTypeDefinition.20" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="eResource" type="/1/@ownedTypeDefinition.44" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.2/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="eContainer" type="/1/@ownedTypeDefinition.10/@ownedOperation.3/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="eIsProxy" type="/1/@ownedTypeDefinition.20" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="eResource" type="/1/@ownedTypeDefinition.44" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="eContainer" type="/1/@ownedTypeDefinition.10/@ownedOperation.3/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.10"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.3/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="eContainingFeature" type="/1/@ownedTypeDefinition.10/@ownedOperation.4/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="eContainingFeature" type="/1/@ownedTypeDefinition.10/@ownedOperation.4/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.15"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.4/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="eContainmentFeature" type="/1/@ownedTypeDefinition.10/@ownedOperation.5/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="eContainmentFeature" type="/1/@ownedTypeDefinition.10/@ownedOperation.5/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.14"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.5/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="eContents" type="/1/@ownedTypeDefinition.31" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.6/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="eAllContents" type="/1/@ownedTypeDefinition.49" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.7/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="eCrossReferences" type="/1/@ownedTypeDefinition.31" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.8/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="eGet" type="/1/@ownedTypeDefinition.40" isOrdered="true" upper="1">
+      <ownedOperation name="eContents" type="/1/@ownedTypeDefinition.31" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="eAllContents" type="/1/@ownedTypeDefinition.49" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="eCrossReferences" type="/1/@ownedTypeDefinition.31" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="eGet" type="/1/@ownedTypeDefinition.40" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="feature" type="/1/@ownedTypeDefinition.10/@ownedOperation.9/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.15"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.9/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="eGet2" type="/1/@ownedTypeDefinition.40" isOrdered="true" upper="1">
+      <ownedOperation name="eGet2" type="/1/@ownedTypeDefinition.40" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="feature" type="/1/@ownedTypeDefinition.10/@ownedOperation.10/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.15"/>
         </ownedParameter>
         <ownedParameter name="resolve" type="/1/@ownedTypeDefinition.20" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.10/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="eSet" type="/1/@ownedTypeDefinition.10/@ownedOperation.11/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="eSet" type="/1/@ownedTypeDefinition.10/@ownedOperation.11/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
         </containedType>
@@ -5798,58 +4410,19 @@
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.15"/>
         </ownedParameter>
         <ownedParameter name="newValue" type="/1/@ownedTypeDefinition.40" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.11/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="eIsSet" type="/1/@ownedTypeDefinition.20" isOrdered="true" upper="1">
+      <ownedOperation name="eIsSet" type="/1/@ownedTypeDefinition.20" isOrdered="true" upper="1" isAbstract="true">
         <ownedParameter name="feature" type="/1/@ownedTypeDefinition.10/@ownedOperation.12/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.15"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.12/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
-      <ownedOperation name="eUnset" type="/1/@ownedTypeDefinition.10/@ownedOperation.13/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="eUnset" type="/1/@ownedTypeDefinition.10/@ownedOperation.13/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class">
           <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
         </containedType>
         <ownedParameter name="feature" type="/1/@ownedTypeDefinition.10/@ownedOperation.13/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
           <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.15"/>
         </ownedParameter>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.10/@ownedOperation.13/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EOperation" superType="/1/@ownedTypeDefinition.11/@containedType.0">
@@ -5880,22 +4453,9 @@
       <ownedAttribute name="eSuperPackage" type="/1/@ownedTypeDefinition.12/@ownedAttribute.5/@containedType.0" isOrdered="true" upper="1" opposite="/1/@ownedTypeDefinition.12/@ownedAttribute.4">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.12"/>
       </ownedAttribute>
-      <ownedOperation name="getEClassifier" type="/1/@ownedTypeDefinition.12/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1">
+      <ownedOperation name="getEClassifier" type="/1/@ownedTypeDefinition.12/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" isAbstract="true">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.3"/>
         <ownedParameter name="name" type="/1/@ownedTypeDefinition.48" isOrdered="true" upper="1"/>
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.12/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
       </ownedOperation>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="EParameter" superType="/1/@ownedTypeDefinition.13/@containedType.0">
@@ -5954,36 +4514,8 @@
       <ownedAttribute name="eContainingClass" type="/1/@ownedTypeDefinition.15/@ownedAttribute.7/@containedType.0" isOrdered="true" upper="1" opposite="/1/@ownedTypeDefinition.2/@ownedAttribute.13">
         <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.2"/>
       </ownedAttribute>
-      <ownedOperation name="getFeatureID" type="/1/@ownedTypeDefinition.37" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.15/@ownedOperation.0/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
-      <ownedOperation name="getContainerClass" type="/1/@ownedTypeDefinition.39" isOrdered="true" upper="1">
-        <body xsi:type="kermeta_language_behavior:Block">
-          <statement xsi:type="kermeta_language_behavior:Raise">
-            <expression xsi:type="kermeta_language_behavior:CallFeature" name="new">
-              <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                <typeref type="/1/@ownedTypeDefinition.15/@ownedOperation.1/@body/@statement.0/@expression/@target/@typeref/@containedType.0" upper="1">
-                  <containedType xsi:type="kermeta_language_structure:Class">
-                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.6/@ownedTypeDefinition.3"/>
-                  </containedType>
-                </typeref>
-              </target>
-            </expression>
-          </statement>
-        </body>
-      </ownedOperation>
+      <ownedOperation name="getFeatureID" type="/1/@ownedTypeDefinition.37" isOrdered="true" upper="1" isAbstract="true"/>
+      <ownedOperation name="getContainerClass" type="/1/@ownedTypeDefinition.39" isOrdered="true" upper="1" isAbstract="true"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ETypedElement" isAbstract="true" superType="/1/@ownedTypeDefinition.16/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="/1/@ownedTypeDefinition.9"/>
@@ -6111,10 +4643,8 @@
         <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.1/@nestedPackage.0/@ownedTypeDefinition.1"/>
       </containedType>
     </ownedTypeDefinition>
-    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EJavaObject" instanceType="/1/@ownedTypeDefinition.40/@containedType.0">
-      <containedType xsi:type="kermeta_language_structure:Class">
-        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.1/@nestedPackage.0/@ownedTypeDefinition.1"/>
-      </containedType>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="EJavaObject">
+      <instanceType href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.11"/>
     </ownedTypeDefinition>
     <ownedTypeDefinition xsi:type="kermeta_language_structure:PrimitiveType" name="ELong" instanceType="/1/@ownedTypeDefinition.41/@containedType.0">
       <containedType xsi:type="kermeta_language_structure:Class">
