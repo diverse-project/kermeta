@@ -1,4 +1,4 @@
-/* $Id: KermetaIOStream.java,v 1.4 2006-06-15 13:04:53 zdrey Exp $
+/* $Id: KermetaIOStream.java,v 1.5 2006-07-21 10:40:02 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaIOStream.java
  * License: GPL
@@ -12,28 +12,17 @@ package fr.irisa.triskell.kermeta.runtime.io;
 /**
  * 
  */
-public abstract class KermetaIOStream {
-
-    /**
-     * 
-     */
-    public KermetaIOStream() {
-        super();
-    }
-    
+public interface KermetaIOStream {
+ 
     public abstract void print(Object outputString);
     
-    public Object read(String prompt)
-    {
-        System.err.println("ERROR : read method is Not implemented");
-        return null;
-    }
+    public abstract Object read(String prompt);
     
     /** Disconnect the console */
-    public void dispose() {}
+    public abstract void dispose();
     
     /** Initialize the console. This method should only be called once the
      * interpretation process has been started */
-    public void initialize() {}
+    public abstract void initialize();
 
 }
