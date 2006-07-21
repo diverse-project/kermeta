@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.22 2006-05-17 15:42:10 jmottu Exp $
+/* $Id: KermetaInterpreter.java,v 1.23 2006-07-21 06:59:40 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -67,6 +67,9 @@ public class KermetaInterpreter {
 	
 	// The memory of the interpreter
 	RuntimeMemory memory;
+	
+	/** If true, the launch will be preceded by a call to setUp, and followed by tearDown operationnif they exist */
+	public boolean isTestSuite = false;
 	
 	/**
 	 * Constructor for a kermeta unit
@@ -247,6 +250,7 @@ public class KermetaInterpreter {
 	
 	/**
 	 * Create the entry object and launch the interpreter
+	 * plus, run eventual setUp and tearDown method if we this launch is a test
 	 */
 	public void launch() {
 	    // Create the expression interpreter
@@ -254,10 +258,24 @@ public class KermetaInterpreter {
 		ExpressionInterpreter exp_interpreter = new ExpressionInterpreter(memory);
 	    // FIXME : this should be corrected to allow generic types as entre type
 	    RuntimeObject entryObject = memory.getROFactory().createObjectFromClassDefinition(memory.getRuntimeObjectForFObject(entryClass.getTypeDefinition()));
+	    
+	    if(isTestSuite) callOperation(exp_interpreter, entryObject, "setUp");
+	    
 	    // Execute the operation
 	    exp_interpreter.invoke(entryObject, entryOperation, entryParameters);
+	    
+	    if(isTestSuite) callOperation(exp_interpreter, entryObject, "tearDown");	    
 	}
-	
+
+	/** call the given operation 
+	 * do nothing if the operation doesn't exist*/
+	private void callOperation(ExpressionInterpreter exp_interpreter, RuntimeObject entryObject, String opName) {
+		CallableOperation co = new SimpleType(entryClass).getOperationByName(opName); 
+		if (co != null) {
+			Operation setUpOp = co.getOperation();
+			exp_interpreter.invoke(entryObject, setUpOp, null);
+		}
+	}
 	
 	/**
 	 * Create the entry object and launch the interpreter with the verification of the pre and post conditions

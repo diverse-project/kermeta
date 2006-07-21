@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.14 2006-06-15 21:44:19 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.15 2006-07-21 06:59:40 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -37,7 +37,7 @@ public class RunJunitFactory implements Test {
     private TestSuite theTestSuite = null;
     private TestCase theTestCase = null;
     
-    
+    public boolean isTestSuite = false; // this part of a KermetaTestSuite
     
    // private String unit_uri;
     
@@ -60,11 +60,15 @@ public class RunJunitFactory implements Test {
 
         
         if(root_unit == null) {
+        	KermetaUnit.unloadStdLib();
+        	KermetaUnitFactory.resetDefaultLoader();
             root_unit = KermetaUnit.getStdLib();
             TypeCheckerContext.initializeTypeChecker(root_unit);
         }
-        
+        //KermetaUnitFactory.resetDefaultLoader(); // each test must be run in its own environment
+        //KermetaUnitFactory.
         KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(unit_uri);
+        
         
         
         try {
@@ -89,7 +93,7 @@ public class RunJunitFactory implements Test {
 
             
             // get the main class to see if it inherits from class kermeta::kunit::Test
-            boolean isTestSuite = false;
+            isTestSuite = false;
             String main_class = null;
             String main_operation = null;
             Iterator it = unit.rootPackage.getTag().iterator();
@@ -101,13 +105,16 @@ public class RunJunitFactory implements Test {
     	            main_operation = tag.getValue(); //remove the " to memorize value
             }
             if (main_class != null) {
-                ClassDefinition cd = (ClassDefinition)unit.typeDefinitionLookup(main_class);
-                ClassDefinition class_test = (ClassDefinition)unit.typeDefinitionLookup("kermeta::kunit::Test");
+            	
+                ClassDefinition cd = (ClassDefinition)unit.typeDefinitionLookup(main_class);                
+                if(cd != null){
+                	ClassDefinition class_test = (ClassDefinition)unit.typeDefinitionLookup("kermeta::kunit::Test");
             
-                SimpleType kunit_test_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(class_test));
-                SimpleType main_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(cd));
-                
-                if (main_type.isSubTypeOf(kunit_test_type)) isTestSuite = true;
+	                SimpleType kunit_test_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(class_test));
+	                SimpleType main_type = new SimpleType(InheritanceSearch.getFClassForClassDefinition(cd));
+	                
+	                if (main_type.isSubTypeOf(kunit_test_type)) isTestSuite = true;
+                }
             }
             
             // Display the errors stored in the unit that is checked

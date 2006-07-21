@@ -1,4 +1,4 @@
-/* $Id: RunTestCase.java,v 1.8 2006-06-15 07:33:56 dvojtise Exp $
+/* $Id: RunTestCase.java,v 1.9 2006-07-21 06:59:40 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : RunTestCase.java
  * License : GPL
@@ -39,7 +39,7 @@ public class RunTestCase extends TestCase {
 
     private RunJunitFactory containerTestSuite;
     
-    private static KermetaInterpreter interpreter = null;
+    private KermetaInterpreter interpreter = null;
 
     public RunTestCase(String themainClassValue, String themainOperationValue, RunJunitFactory thecontainerTestSuite)
 
@@ -62,7 +62,7 @@ public class RunTestCase extends TestCase {
             System.err.println("Memory after interpreter : " + Runtime.getRuntime().totalMemory());
         }
         
-        interpreter.setEntryPoint(mainClassValue, mainOperationValue);
+        //interpreter.setEntryPoint(mainClassValue, mainOperationValue);
 
     }
     
@@ -88,7 +88,7 @@ public class RunTestCase extends TestCase {
         System.out.println("    * #ro total       : " + RuntimeObject.getInstanceCounter());
         System.out.println("    * time (ms)       : " + time);
         System.out.println("    ************************************************");
-        
+        interpreter = null;
        
         
     }
@@ -102,8 +102,12 @@ public class RunTestCase extends TestCase {
      * @throws Exception 
      */
     public void runTest() throws KermetaRaisedException {
-    	try{
+    	try{    		
+    			
+    		interpreter.setEntryPoint(mainClassValue, mainOperationValue);
+    		interpreter.isTestSuite = containerTestSuite.isTestSuite;
     		interpreter.launch();
+    		    		
     	}
     	catch(KermetaRaisedException e){
     		// If this is a kermeta assertion that failed, then the Test must fail
