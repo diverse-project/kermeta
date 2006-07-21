@@ -23,26 +23,19 @@ class TestEx inherits kermeta::kunit::Test {
 	end	
 	
 	operation test2() is do
-		var str : String init "str1"
+		var str : String init "str1"				
 		
 		do
-			assert(str == "str1")
-			var str : String init "str2"
-			assert(str == "str2")
-		end
-		
-		assert(str == "str1")
-		
-		do
-			var str : String init "str2"
-			assert(str == "str2")
 			titi
-			assert(false)
-		rescue
-			assert(str == "str1")
+			str := "str2"
+			assert(str == "str2")
+			assertTrueWithMsg(false, "should have not passed here because of the raised exception")
+		rescue (raisedstr : String)
+			assertTrueWithMsg(str == "str1","the str value was changed to " + str)
+			str := "str3"
 		end
-		assert(str == "str1")
-	end	
+		assertTrueWithMsg(str == "str3","was not rescued")
+	end		
 	
 	operation test3() is do
 		var o : Object 
