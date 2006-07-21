@@ -1,4 +1,4 @@
-/* $Id: SystemIOStream.java,v 1.2 2005-05-20 12:04:58 zdrey Exp $
+/* $Id: SystemIOStream.java,v 1.3 2006-07-21 10:41:20 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: SystemIOStream.java
  * License: GPL
@@ -17,7 +17,7 @@ import java.io.InputStreamReader;
 /**
  * 
  */
-public class SystemIOStream extends KermetaIOStream {
+public class SystemIOStream implements KermetaIOStream {
 
     /**
      * 
@@ -50,5 +50,15 @@ public class SystemIOStream extends KermetaIOStream {
 		}
         return input;
     }
+
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
