@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.37 2006-07-21 12:23:21 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.38 2006-07-21 13:42:54 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -355,7 +355,8 @@ public class Runtime2EMF {
         {
         	 // If we did not find the Eclass, then we could try to find it in the ecore metamodel resource
             if (getKermetaEcoreMap().containsKey(kqname) 
-            		&& (!((EPackage)p_resource.getContents().get(0)).getNsURI().contains(KERMETA_NSURI)))
+            		//&& (!((EPackage)p_resource.getContents().get(0)).getNsURI().contains(KERMETA_NSURI)))
+            		&& !((EPackage)p_resource.getContents().get(0)).getName().equals("kermeta"))
             {	// this is a patch-like solution :/ for handling ecore metamodel types
             	if (getKermetaEcoreMap().get(kqname).equals("ecore::EEnum"))
             	{
