@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.6 2006-06-20 09:08:53 zdrey Exp $
+/* $Id: JunitTestSuite.java,v 1.7 2006-07-24 14:38:29 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -98,20 +98,20 @@ public void testecore_004_Enum() throws Exception {
 testecoreFile("test/roundtrip_testcases/ecore","004_Enum.main.ecore" );
 }
 
-public void testecore_009_Operation() throws Exception {
-testecoreFile("test/roundtrip_testcases/ecore","009_Operation.main.ecore" );
-}
-
 public void testecore_005_Property() throws Exception {
 testecoreFile("test/roundtrip_testcases/ecore","005_Property.main.ecore" );
+}
+
+public void testecore_006_PropertyWithEcoreTypes() throws Exception {
+testecoreFile("test/roundtrip_testcases/ecore","006_PropertyWithEcoreTypes.main.ecore" );
 }
 
 public void testecore_007_PropertyWithDataTypes() throws Exception {
 testecoreFile("test/roundtrip_testcases/ecore","007_PropertyWithDataTypes.main.ecore" );
 }
 
-public void testecore_006_PropertyWithEcoreTypes() throws Exception {
-testecoreFile("test/roundtrip_testcases/ecore","006_PropertyWithEcoreTypes.main.ecore" );
+public void testecore_009_Operation() throws Exception {
+testecoreFile("test/roundtrip_testcases/ecore","009_Operation.main.ecore" );
 }
 
 public void testecore_010_twopackages() throws Exception {
@@ -134,6 +134,14 @@ public void testkmt_004_OperationBody() throws Exception {
 testkmtFile("test/roundtrip_testcases/kmt","004_OperationBody.main.kmt" );
 }
 
+public void testkmt_005_DerivedPropertyBody() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","005_DerivedPropertyBody.main.kmt" );
+}
+
+public void testkmt_006_PropertyWithEcoreTypes() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","006_PropertyWithEcoreTypes.main.kmt" );
+}
+
 public void testkmt_007_testAlias() throws Exception {
 testkmtFile("test/roundtrip_testcases/kmt","007_testAlias.main.kmt" );
 }
@@ -142,36 +150,24 @@ public void testkmt_008_testAlias() throws Exception {
 testkmtFile("test/roundtrip_testcases/kmt","008_testAlias.main.kmt" );
 }
 
-public void testkmt_010_testAliasInOperationBody() throws Exception {
-testkmtFile("test/roundtrip_testcases/kmt","010_testAliasInOperationBody.main.kmt" );
+public void testkmt_009_testRequireFramework() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","009_testRequireFramework.main.kmt" );
 }
 
-public void testkmt_005_DerivedPropertyBody() throws Exception {
-testkmtFile("test/roundtrip_testcases/kmt","005_DerivedPropertyBody.main.kmt" );
+public void testkmt_010_testAliasInOperationBody() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","010_testAliasInOperationBody.main.kmt" );
 }
 
 public void testkmt_011_testPropertyConversionInEcore() throws Exception {
 testkmtFile("test/roundtrip_testcases/kmt","011_testPropertyConversionInEcore.main.kmt" );
 }
 
-public void testkmt_framework() throws Exception {
-testkmtFile("test/roundtrip_testcases/kmt","framework.main.km" );
-}
-
-public void testkmt_009_testRequireFramework() throws Exception {
-testkmtFile("test/roundtrip_testcases/kmt","009_testRequireFramework.main.kmt" );
-}
-
-public void testkmt_006_PropertyWithEcoreTypes() throws Exception {
-testkmtFile("test/roundtrip_testcases/kmt","006_PropertyWithEcoreTypes.main.kmt" );
+public void testkmt_011_testRequireFramework() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","011_testRequireFramework.main.kmt" );
 }
 
 public void testkmt_012_testCommentAnnotations() throws Exception {
 testkmtFile("test/roundtrip_testcases/kmt","012_testCommentAnnotations.main.kmt" );
-}
-
-public void testkmt_011_testRequireFramework() throws Exception {
-testkmtFile("test/roundtrip_testcases/kmt","011_testRequireFramework.main.kmt" );
 }
 
 public void testkmt_013_testRedefinedOperations() throws Exception {
@@ -182,16 +178,8 @@ public void testkmt_014_testParameterizedClass() throws Exception {
 testkmtFile("test/roundtrip_testcases/kmt","014_testParameterizedClass.main.kmt" );
 }
 
-public void testkm_rdl() throws Exception {
-testkmFile("test/roundtrip_testcases/km","rdl.main.km" );
-}
-
-public void testkm_framework() throws Exception {
-testkmFile("test/roundtrip_testcases/km","framework.main.km" );
-}
-
-public void testkm_general() throws Exception {
-testkmFile("test/roundtrip_testcases/km","general.main.km" );
+public void testkmt_015_testEnumerationAsProperty() throws Exception {
+testkmtFile("test/roundtrip_testcases/kmt","015_testEnumerationAsProperty.main.kmt" );
 }
 
 /*** END GENERATED TESTS ***/
@@ -226,7 +214,7 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 		// Save the kmt generated file
 		
 		output_file = new URIConverterImpl().normalize(URI.createURI(output_file)).toFileString();
-		//output_file = "platform:/resource/fr.irisa.triskell.kermeta.io/"+ output_file;
+		//output_file = "platform:/resource/fr.irisa.triskell.kermeta.io/"+ output_file;		
 		
 		System.out.println("Write kmt output : "+ output_file);
 		//printer.ppPackage(output_file)
@@ -240,7 +228,18 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 		System.out.println("ecore output written");
 		
 		// Test the equality
-		assertEcoreFilesEquality(ecore_input_file, ecore_output_file);
+		/* windows specific patch */
+		String eifile ;
+		if(ecore_input_file.contains("\\")) 
+			eifile = "file:/" + ecore_input_file.replaceAll("\\\\","/");
+		else
+			eifile = ecore_input_file;
+		String eofile ;
+		if(ecore_output_file.contains("\\")) 
+			eofile = "file:/" + ecore_output_file.replaceAll("\\\\","/");
+		else
+			eofile = ecore_output_file;
+		assertEcoreFilesEquality(eifile, eofile);
 	}
 	
 	/**
@@ -271,8 +270,14 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 		String ecore_output_file = dir + "/output/" + input_file.replaceAll("\\."+ kmext, ".ecore");
 		// Save the generated ecore from the kmt
 		ecore_output_file = new URIConverterImpl().normalize(URI.createURI(ecore_output_file)).toFileString();
+		/* windows specific patch */
+		String eofileURI;
+		if(ecore_output_file.contains("\\")) 
+			eofileURI = "file:/" + ecore_output_file.replaceAll("\\\\","/");
+		else eofileURI = ecore_output_file;
+		
 		System.out.println("Write ecore output :" + ecore_output_file +", from kmt : "+ kermeta_input_file);
-		writeEcore(kermeta_input_file,  ecore_output_file);
+		writeEcore(kermeta_input_file,  eofileURI);
 		System.out.println("ecore output written");
 		
 		// Create ecore2km visitor -- output_file
@@ -280,7 +285,7 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 		System.out.println("Write km output : "+ kermeta_output_file);
 		// Load the EcoreUnit from output_file
 		KermetaUnitFactory.getDefaultLoader().unloadAll();
-		builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ecore_output_file);
+		builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(eofileURI);
 		try {builder.load();} catch (Exception e) { throw e;}
 		
 		assert (km_ext.equals("km")||km_ext.equals("kmt"));
@@ -296,7 +301,11 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 			writeKMTUnit(builder, kermeta_output_file);
 		
 		// Test the equality of all the elements (we use the km2kmt pretty printer :}) 
-		assertKMFilesEquality(kermeta_input_file, kermeta_output_file);
+		String kofileURI;
+		if(kermeta_output_file.contains("\\")) 
+			kofileURI = "file:/" + kermeta_output_file.replaceAll("\\\\","/");
+		else kofileURI = kermeta_output_file;
+		assertKMFilesEquality(kermeta_input_file, kofileURI);
 		
 		return builder;
 	}
@@ -370,6 +379,10 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 		/*	else */{
 					String f = file.replace(".kmt", iu.rootPackage.getName() + ".kmt");
 					writeKMTUnit(iu, f);
+
+					/* windows specific patch */
+					if(f.contains("\\")) 
+						f = "file:/" + f.replaceAll("\\\\","/");
 					w.write("require \"" + f + "\"\n");
 					
 			}
@@ -390,7 +403,19 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 	public void writeEcore(String input_file, String output_file) throws Exception
 	{   // Looad the EcoreUnit for the given file
 		KermetaUnitFactory.getDefaultLoader().unloadAll();
-	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(input_file);
+
+		/* windows specific patch */
+		String ifile ;
+		if(input_file.contains("\\")) 
+			ifile = "file:/" + input_file.replaceAll("\\\\","/");
+		else
+			ifile = input_file;
+		String ofile ;
+		if(output_file.contains("\\")) 
+			ofile = "file:/" + output_file.replaceAll("\\\\","/");
+		else
+			ofile = output_file;
+	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ifile);
 		try {builder.load();} catch (Exception e) { throw e;}
 		if (builder.messages.getAllErrors().size() > 0) {
 			assertTrue(builder.messages.getAllMessagesAsString(), false);
@@ -398,13 +423,13 @@ testkmFile("test/roundtrip_testcases/km","general.main.km" );
 	    // Create Ecore structure
 	    Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
 	    ResourceSet resource_set = new ResourceSetImpl();
-    	URI u = new URIConverterImpl().normalize(URI.createURI(output_file));
+    	URI u = new URIConverterImpl().normalize(URI.createURI(ofile));
 	    Resource resource = resource_set.createResource(u);
 	    // KMT2ECORE
 	    KM2Ecore exporter;
 	    KermetaUnitFactory.getDefaultLoader().unloadAll();
-	    exporter = new KM2Ecore(resource, builder,output_file.substring(0, output_file.lastIndexOf("/"))+"/dep/",null);
-	    exporter.setEcoreGenDirectory(output_file.substring(0, output_file.lastIndexOf("/"))+"/dep/");
+	    exporter = new KM2Ecore(resource, builder,ofile.substring(0, ofile.lastIndexOf("/"))+"/dep/",null);
+	    exporter.setEcoreGenDirectory(ofile.substring(0, ofile.lastIndexOf("/"))+"/dep/");
 		exporter.exportPackage(builder.rootPackage);
 	    // Save Ecore structure	
 		try {
