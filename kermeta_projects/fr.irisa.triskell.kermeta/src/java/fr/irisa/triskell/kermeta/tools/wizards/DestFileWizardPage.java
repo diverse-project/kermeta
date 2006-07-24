@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.7 2006-07-18 07:15:26 cfaucher Exp $
+/* $Id: DestFileWizardPage.java,v 1.8 2006-07-24 08:51:40 dtouzet Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -68,7 +68,7 @@ import fr.irisa.triskell.kermeta.KermetaMessages;
  * 
  */
 public class DestFileWizardPage extends WizardPage implements Listener {
-	private static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
+	protected static final int SIZING_CONTAINER_GROUP_HEIGHT = 250;
 
 	// the current resource selection
 	protected IStructuredSelection currentSelection;
