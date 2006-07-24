@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.45 2006-07-20 06:47:12 dvojtise Exp $
+/* $Id: EMF2Runtime.java,v 1.46 2006-07-24 13:10:56 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -33,6 +34,7 @@ import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
@@ -61,6 +63,8 @@ public class EMF2Runtime {
      */
     protected Hashtable<String, RuntimeObject> type_cache;
     
+    protected Hashtable<String, RuntimeObject> special_primitive_types;
+    
     /**
      * The list of runtimeObjects that represent the EMF instances
      */
@@ -83,6 +87,7 @@ public class EMF2Runtime {
     		ecore_kermeta_map.put("EEnumLiteral.eAnnotations", "tag");
     		ecore_kermeta_map.put("EEnum.eAnnotations", "tag");
     		ecore_kermeta_map.put("EEnum.eLiterals", "ownedLiteral");
+    		ecore_kermeta_map.put("EEnumLiteral.literal", "");
     		ecore_kermeta_map.put("EEnum.instanceClassName", "");
     		ecore_kermeta_map.put("EEnum.instanceClass", "");
     		ecore_kermeta_map.put("EEnum.defaultValue", "");
@@ -105,7 +110,7 @@ public class EMF2Runtime {
         super();
         type_cache = new Hashtable<String, RuntimeObject>();
         runtime_objects_map = new Hashtable<EObject, RuntimeObject>();
-        
+        special_primitive_types = new Hashtable<String, RuntimeObject>();
         resource = newroot_resource;
         unit = newunit;
     }
@@ -310,7 +315,7 @@ public class EMF2Runtime {
 	public RuntimeObject createEmptyRuntimeObjectForEObject(EObject eObject)
 	{
 	    // Define the RO-metaclass of the given EObject
-	    RuntimeObject ro_metaclass = this.getRuntimeObjectForMetaClass(eObject.eClass());
+		RuntimeObject ro_metaclass = this.getRuntimeObjectForMetaClass(eObject.eClass());
 	    // Define the RO-instance of the given EObject, with the above given RO-metaclass
 	    RuntimeObject result = new RuntimeObject(unit.getRuntimeMemory().getROFactory(), ro_metaclass);
         result.getData().put("emfObject", eObject);
@@ -319,13 +324,15 @@ public class EMF2Runtime {
 	
 	/**
 	 * Set the RuntimeObject corresponding to the given primitive type value.
+	 * If the fvalue is not "recognized" by kermeta as a primitive value, create
+	 * a primitive type with an alias to Object.
 	 * @param unit
 	 * @param fvalue
 	 * @return
 	 */
     public RuntimeObject createRuntimeObjectForPrimitiveTypeValue(Object fvalue)
     {
-        RuntimeObjectFactory rofactory = unit.getContentMap().getFactory();
+    	RuntimeObjectFactory rofactory = unit.getContentMap().getFactory();
         RuntimeObject rovalue = rofactory.getMemory().voidINSTANCE;
         // Boolean
     	if (fvalue instanceof Boolean) {
@@ -350,17 +357,18 @@ public class EMF2Runtime {
     	}
     	else if (fvalue instanceof Class) // This case occurs if user has in its ecore model a DataType relating to a java Class
     	{
-    		internalLog.warn("TODO : The type of <"+fvalue+"> has not been handled yet. Replaced by Void. "+fvalue.getClass());
-    		// rovalue = // create a runtimeObject that would be able to embedd a java class?
+    		internalLog.warn("TODO : The type of <"+fvalue+"> has not been handled yet. Replaced by null. ");
+    		// create a runtimeObject that would be able to embedd a java class?
     		rovalue = rofactory.getMemory().voidINSTANCE;
     	}
     	else // should never happen
     	{
-    		internalLog.warn("The type of <"+fvalue+"> has not been handled yet. Replaced by Void. "+fvalue.getClass());
+    		internalLog.warn("The type of <"+fvalue+"> has not been handled yet. Replaced by Void.");
     		rovalue = rofactory.getMemory().voidINSTANCE;
     	}
     	return rovalue;
     }
+    
 	
 	/**
 	 * Return the Class corresponding to the given name. Looks inside the loaded
@@ -430,7 +438,8 @@ public class EMF2Runtime {
 	    fr.irisa.triskell.kermeta.language.structure.Class kclass = null;
 	    // Get the meta class in Ecore repr. (EClass) of the RuntimeObject to populate
 	    EClass eclass = eObject.eClass();
-	    if (getEcoreKermetaMap().containsKey(unit.getEQualifiedName(eclass))) 
+	    if (getEcoreKermetaMap().containsKey(unit.getEQualifiedName(eclass)) &&
+	    		!((EPackage)eclass.eContainer()).getName().equals("ecore")) 
 	    {
 	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(unit.getEQualifiedName(eclass));
 	    	kclass = (fr.irisa.triskell.kermeta.language.structure.Class)getTypeFromName(kermeta_metaclass_name);
@@ -474,7 +483,7 @@ public class EMF2Runtime {
 	    				}
 	    			} // equivalent test : fvalue instanceof EString, EInt, etc.
 	    			else if (EDataType.class.isInstance(feature_type))
-	    			{
+	    			{   // EJavaClass -> rovalue null
 	    				rovalue = createRuntimeObjectForPrimitiveTypeValue(fvalue);
 	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, rovalue);
 	    			}
@@ -526,7 +535,8 @@ public class EMF2Runtime {
 		// Patch for bug #595
 		// http://gforge.inria.fr/tracker/index.php?func=detail&aid=595&group_id=32&atid=205
 		// deal with special properties cases - ecore special structural feature
-		if (getEcoreKermetaMap().containsKey(eclass.getName()+"."+propName))
+		if (getEcoreKermetaMap().containsKey(eclass.getName()+"."+propName)
+				&& !((EPackage)eclass.eContainer()).getName().equals("ecore"))
 		{
 			tmp_propName = getEcoreKermetaMap().get(eclass.getName()+"."+propName);
 			if (tmp_propName.length() != 0)
@@ -535,6 +545,7 @@ public class EMF2Runtime {
 		else propertyExists = true;
 		if (propertyExists == true)
 		{
+			//System.out.println("feature name : " + eclass.getName()+ "."+ feature.getName());
 			result = unit.getKermetaUnit().findPropertyByName(classDef, propName);
 			// If result is still null, send an exception
 			if (result == null)
@@ -617,14 +628,18 @@ public class EMF2Runtime {
 	    {
 	        RuntimeObject rovalue;
 	        if (sfeature instanceof EObject)
-	            rovalue = this.runtime_objects_map.get(sfeature); 
+	        {
+	            rovalue = this.runtime_objects_map.get(sfeature);
+	        }
 	        else // it is a Datatype
 	            rovalue = createRuntimeObjectForPrimitiveTypeValue(sfeature);
 	        // RuntimeObject ri = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create(i, memory.getROFactory());
 	        // ReflectiveSequence.addAt(result, ri, rovalue); i+=1;
 	        // ReflectiveCollection.add(result, rovalue);
-	        // FIXME : ReflectiveSequence.addAt and ReflectiveCollection.add handle differently and weirdly 
+	        // NOTE 1 : FIXME : ReflectiveSequence.addAt and ReflectiveCollection.add handle differently and weirdly 
 	        // the containment of the added element. (see their code!). That's why we use the simple Collection.add method
+	        // NOTE 2 : sometimes createRuntimeObjectForPrimitiveTypeValue can return null if the "sfeature"
+	        // is not kermeta compliant, ex: the edatatype EJavaClass.
 	        rovalue.getData().put("emfObject", sfeature);
 	        Collection.add(result, rovalue);
 	    }
@@ -649,7 +664,8 @@ public class EMF2Runtime {
 	    RuntimeObject result = null;
 	    String metaclass_name = unit.getEQualifiedName(metaclass);
 	    // If the given metaclass is an EEnum (ecore), we have to "convert" it in Enumeration (kermeta)
-	    if (getEcoreKermetaMap().containsKey(metaclass_name)) 
+	    if (getEcoreKermetaMap().containsKey(metaclass_name) &&
+	    		!((EPackage)metaclass.eContainer()).getName().equals("ecore")) 
 	    {
 	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(metaclass_name);
 	    	if (this.type_cache.containsKey(kermeta_metaclass_name)) 
