@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.24 2006-06-16 23:09:10 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.25 2006-07-24 07:47:59 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -18,6 +18,7 @@ package kermeta_io.test;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import junit.framework.TestCase;
@@ -360,22 +361,24 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 /*** END GENERATED TESTS ***/
 	// do not modify this comment
 	
-	public void testWithFile(String dir, String file) throws Exception {
+public void testWithFile(String dir, String file) throws Exception {
 	//	MetaCoreUnit builder = new MetaCoreUnit();
 	//	builder.loadMCT(new File(baseDir + file));
-		
-		// phase 1 : test that it load correctly
-		KermetaUnitFactory.getDefaultLoader().unloadAll();
-		KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
-		try {
+	
+	// phase 1 : test that it load correctly
+	KermetaUnit.unloadStdLib();
+	KermetaUnitFactory.resetDefaultLoader();
+	KermetaUnitFactory.getDefaultLoader().unloadAll();
+	KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(dir + "/" + file);
+	try {
 		builder.load();
-		} catch(Exception e ) {if (!builder.messages.hasError()) throw e;};
+	} catch(Exception e ) {if (!builder.messages.hasError()) throw e;};
+	
+	if (builder.messages.getAllErrors().size() > 0) {
+		assertTrue(builder.messages.getAllMessagesAsString(), false);
+	}
+	else {	
 		
-		if (builder.messages.getAllErrors().size() > 0) {
-			assertTrue(builder.messages.getAllMessagesAsString(), false);
-		}
-		else {	
-			
 		// phase 2 : verify that it can be save as an xmi (km file)
 		try {	
 			Iterator it = builder.importedUnits.iterator();
@@ -392,6 +395,7 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 			fail("file "+file+" didn't serialize correctly into km; "+t.getMessage());
 		}
 		
+		
 		// phase 3 :
 		// try to pretty-print the result in another file
 		URI userLocatedPpfile=UserDirURI.createURI(dir + "/output/"  + file.replace('.', '_') + ".kmt",null,true);
@@ -400,18 +404,53 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 		
 		ppUnit(builder, userLocatedPpfile.toFileString(), dir);
 		
-		KermetaUnitFactory.getDefaultLoader().unloadAll();
 		
-		// phase 3 bis, check that the prettyprinted version can be parsed 
-		// try to re-parse the pretty-printed version
-		KermetaUnit builder2 = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ppfile);
-		try {
-		builder2.load();
-		} catch(Exception e ) {if (!builder2.messages.hasError()) throw e;};
-		if (builder2.messages.getErrors().size() > 0) {
+		// Phase 3 bis cannot be run on a per file basis if there is a cycle in the file dependencies
+		// this should be run globally, currently, just ignore this phase
+		// test for require cycles
+		if(!hasDependencyCycle(builder)){
+			
+			KermetaUnitFactory.getDefaultLoader().unloadAll();
+			
+			// phase 3 bis, check that the prettyprinted version can be parsed 
+			// try to re-parse the pretty-printed version
+			KermetaUnit.unloadStdLib();
+			KermetaUnitFactory.resetDefaultLoader();
+			KermetaUnitFactory.getDefaultLoader().unloadAll();
+			KermetaUnit builder2 = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ppfile);
+			try {
+				builder2.load();
+			} 
+			catch(Exception e ) {
+				if (!builder2.messages.hasError()) throw e;
+			}
+			
+			if (builder2.messages.getErrors().size() > 0) {
 				assertTrue("RE-PARSE : " + builder2.messages.getMessagesAsString(), false);
 			}
+		}	
+		else
+		{
+			System.out.println("Ignoring phase 3bis of " + builder.getUri() + ", due to a cycle in its require statements. \n (in this case a per file basis test cannot be applied)");
 		}
+	}
+}
+
+	protected boolean hasDependencyCycle(KermetaUnit ku){
+		ArrayList<KermetaUnit> kuList = ku.getAllImportedUnits();
+		boolean hasDependencyCycle = false;
+		Iterator it = kuList.iterator();
+		while(!hasDependencyCycle && it.hasNext()){
+			KermetaUnit importedKU = (KermetaUnit)it.next();
+			ArrayList<KermetaUnit> kuSubList = importedKU.getAllImportedUnits();
+			Iterator subIt = kuSubList.iterator();
+			while(!hasDependencyCycle && subIt.hasNext()){
+				if(subIt.next() == ku) hasDependencyCycle = true; 
+		
+			}
+		}
+			
+		return hasDependencyCycle;	
 	}
 	
 	public void ppUnit(KermetaUnit builder, String file, String dir) throws Exception  {
