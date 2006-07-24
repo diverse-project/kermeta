@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.3 2005-12-20 12:15:04 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.4 2006-07-24 11:51:56 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : EPL
@@ -51,9 +51,18 @@ public class JunitTestSuite extends TestCase {
 
 
 
+
 /*** BEGIN GENERATED TESTS ***/
 public void testvalid_003_associations() throws Exception {
 testvalidFile("test/constraintchecker_tests/valid","003_associations.kmt" );
+}
+
+public void testvalid_005_operations() throws Exception {
+testvalidFile("test/constraintchecker_tests/valid","005_operations.kmt" );
+}
+
+public void testvalid_005_operations_dep() throws Exception {
+testvalidFile("test/constraintchecker_tests/valid","005_operations_dep.kmt" );
 }
 
 public void testinvalid_001_cyclicinheritance_01() throws Exception {
@@ -92,12 +101,24 @@ public void testinvalid_003_associations_06() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","003_associations_06.kmt" );
 }
 
+public void testinvalid_003_associations_07() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","003_associations_07.kmt" );
+}
+
 public void testinvalid_004_cyclicCompositions_01() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_01.kmt" );
 }
 
 public void testinvalid_004_cyclicCompositions_02() throws Exception {
 testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_02.kmt" );
+}
+
+public void testinvalid_004_cyclicCompositions_03() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_03.kmt" );
+}
+
+public void testinvalid_004_cyclicCompositions_04() throws Exception {
+testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_04.kmt" );
 }
 
 /*** END GENERATED TESTS ***/
@@ -142,20 +163,27 @@ testinvalidFile("test/constraintchecker_tests/invalid","004_cyclicCompositions_0
 		builder.load();
 		} catch(Exception e ) {if (builder.messages.getErrors().size() == 0) throw e;};
 		
+		boolean inheritanceCycleDetected = false;
 		if (builder.messages.getAllErrors().size() > 0) {
-			assertTrue(builder.messages.getAllMessagesAsString(), false);
+			
+			// Patch: the inheritance cycle detection is done in the loader...
+			String msg = builder.messages.getMessagesAsString();
+			if( msg.contains("Cycle in the inheritance tree"))
+				inheritanceCycleDetected = true;
+			else assertTrue(builder.messages.getAllMessagesAsString(), false);
 			// loader test must not be done in this test suite
 		}
 		
 		
-		
-		builder.typeCheck(null);
-		builder.constraintCheck(null);
-		builder.cycleConstraintCheck(null);
-		
-		
-		if (builder.messages.getAllErrors().size() == 0) {
-			assertTrue("Looking for a constraint error but none found", false);
+		if(!inheritanceCycleDetected) {
+			builder.typeCheck(null);
+			builder.constraintCheck(null);
+			builder.cycleConstraintCheck(null);
+			
+			
+			if (builder.messages.getAllErrors().size() == 0) {
+				assertTrue("Looking for a constraint error but none found", false);
+			}
 		}
 	}
 }
