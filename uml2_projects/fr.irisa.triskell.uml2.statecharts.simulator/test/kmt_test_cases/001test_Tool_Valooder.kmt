@@ -1,0 +1,110 @@
+/* $Id: 001test_Tool_Valooder.kmt,v 1.1 2006-07-25 15:34:27 vmahe Exp $
+ * Creation date: July 6, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
+
+package tools_tests;
+
+/*
+require kermeta
+require "../../src/kermeta/transformations/GOFStatePatternTool.kmt"
+
+using uml2
+using uml2::transformations
+
+class ToolValooderTestCase inherits kermeta::kunit::TestCase
+{
+	reference tool : GOFStatePatternTool
+	reference model : Model
+	reference aClass : Class
+	reference sm : StateMachine
+	reference reg : Region
+	reference s0 : Pseudostate
+	reference s1 : State
+	reference s2 : State
+	reference f : FinalState
+	reference t01 : Transition
+	reference t12 : Transition
+	reference t21 : Transition
+	reference t2f : Transition
+	
+	method setUp() is do
+		//creating needed instances
+		model := Model.new
+		aClass := Class.new
+		aClass.name := "AClass"
+		model.ownedMember.add(aClass)
+		
+		sm := StateMachine.new
+		aClass.ownedStateMachine.add(sm)
+		reg := Region.new
+		sm.region.add(reg)
+		
+		s0 := Pseudostate.new
+		reg.subvertex.add(s0)
+		
+		s1 := State.new
+		s1.name := "Off"
+		reg.subvertex.add(s1)
+		
+		s2 := State.new
+		s2.name := "On"
+		reg.subvertex.add(s2)
+		
+		f := FinalState.new
+		f.name := "final"
+		reg.subvertex.add(f)
+		
+		t01 := Transition.new
+		t01.source := s0
+		t01.target := s1
+		reg.transitions.add(t01)
+		
+		t12 := Transition.new
+		t12.source := s1
+		t12.target := s2
+		reg.transitions.add(t12)
+		
+		t21 := Transition.new
+		t21.source := s2
+		t21.target := s1
+		reg.transitions.add(t21)
+		
+		t2f := Transition.new
+		t2f.source := s2
+		t2f.target := f
+		reg.transitions.add(t2f)
+		
+		var gofState : GOFStatePatternTool init GOFStatePatternTool.new
+		gofState.applyPattern(sm, model, model)
+	end
+	
+	method tearDown() is do
+		// We don't need to tearDown anything in this test case.
+	end
+    
+    operation test_GOFStateTool_Context() is do
+    	assertTrueWithMsg(aClass.ownedAttribute.select{ u | u.name == "state" }.size == 1,
+    		"The 'Context' class must have a 'state' link to current state")
+    	assertTrueWithMsg(State.isInstance(aClass.ownedAttribute.select{ u | u.name == "state" }.one.type),
+    		"The Context 'state' link class must be a 'State' class")
+    		
+    	assertTrueWithMsg(aClass.ownedOperation.select{ u | u.name == "request" }.size == 1,
+    		"The 'Context' class must have a 'request()' operation")
+    	var op : Operation init aClass.ownedOperation.select{ u | u.name == "request" }.one
+    	assertTrueWithMsg(op.ownedComment.select{ u | u.body == "do\n\tstate.handle\nend" }.size == 1,
+    		"The Context 'request()' operation must have a correct body (stored in an Comment)")
+    end
+    
+    operation test_GOFStateTool_AbstractState() is do
+    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == "AClass_State" }.size == 1,
+    		"the model must now have a sabstract state class for 'AClass'")
+    end
+    
+    operation test_GOFStateTool_ConcreteStates() is do
+    	assertTrueWithMsg(false,
+    		"xxxxxxx")
+    end		*/
+}
