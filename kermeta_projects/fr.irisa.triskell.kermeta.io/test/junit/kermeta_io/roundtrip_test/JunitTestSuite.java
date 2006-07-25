@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.7 2006-07-24 14:38:29 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.8 2006-07-25 15:59:14 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -38,6 +38,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.ecore.Ecore2KM;
 import fr.irisa.triskell.kermeta.utils.URIMapUtil;
+import fr.irisa.triskell.kermeta.utils.UserDirURI;
 
 
 /**
@@ -195,6 +196,7 @@ testkmtFile("test/roundtrip_testcases/kmt","015_testEnumerationAsProperty.main.k
 	    
 	    KermetaUnitFactory.getDefaultLoader().unloadAll();
 	    String ecore_input_file = dir + "/" + file;
+	    UserDirURI.createDirFromName(dir+"/output/");
 	    // LOAD THE UNIT (this calls the EcoreUnit method loader)
 	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(ecore_input_file);
 		try {
@@ -257,6 +259,8 @@ testkmtFile("test/roundtrip_testcases/kmt","015_testEnumerationAsProperty.main.k
 	{
 		KermetaUnitFactory.getDefaultLoader().unloadAll();
 	    String kermeta_input_file = dir + "/" + input_file;
+	    UserDirURI.createDirFromName(dir+"/output/");
+		
 	    // LOAD THE UNIT (this call the KMUnit method loader)
 	    String kmext = kermeta_input_file.substring(kermeta_input_file.lastIndexOf(".")+1);
 	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(kermeta_input_file);

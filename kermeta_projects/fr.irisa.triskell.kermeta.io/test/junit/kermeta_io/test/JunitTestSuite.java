@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.25 2006-07-24 07:47:59 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.26 2006-07-25 16:03:53 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : JunitTestSuite.java
  * License    : GPL
@@ -58,14 +58,8 @@ public class JunitTestSuite extends TestCase {
 	
 	// do not modify this comment
 
-
-
-
-
-
-
-
 /*** BEGIN GENERATED TESTS ***/
+
 public void testpuzzle() throws Exception {
 testWithFile("test/ecore_testcases","puzzle.ecore" );
 }
@@ -362,6 +356,7 @@ testWithFile("test/kmtbodies_testcases","testExtOperation.kmt" );
 	// do not modify this comment
 	
 public void testWithFile(String dir, String file) throws Exception {
+	UserDirURI.createDirFromName(dir+"/output/");
 	//	MetaCoreUnit builder = new MetaCoreUnit();
 	//	builder.loadMCT(new File(baseDir + file));
 	
