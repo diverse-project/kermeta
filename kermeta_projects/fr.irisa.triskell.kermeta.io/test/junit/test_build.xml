@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.9 2006-06-09 08:47:48 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.10 2006-07-25 13:36:28 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -30,10 +30,9 @@
 	<property name="emfatic-core.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\thirdparty\emfatic-core.jar"/>
 	<property name="cu_kermeta.jar" location="..\..\..\fr.irisa.triskell.kermeta\lib\cu_kermeta.jar"/>
 	
-    <property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.1.0.jar"/>
-    <property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.1.0.jar"/>
-    <property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.1.0.jar"/>
-
+	<property name="emf.common.jar" location="${eclipse.home}/plugins/org.eclipse.emf.common_2.2.0.v200606271057.jar"/>
+	<property name="emf.ecore.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore_2.2.0.v200606271057.jar"/>
+	<property name="emf.ecore.xmi.jar" location="${eclipse.home}/plugins/org.eclipse.emf.ecore.xmi_2.2.0.v200606271057.jar"/>
 	
 	<path id="io.class.path">
 	    <pathelement location="${kermeta.model.jar}"/>
