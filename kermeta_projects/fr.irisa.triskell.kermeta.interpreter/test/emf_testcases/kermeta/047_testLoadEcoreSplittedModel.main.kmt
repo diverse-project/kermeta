@@ -7,7 +7,6 @@ package testLoadEcoreSplittedModel;
 
 
 require kermeta
-//require "./input_test_models/ecore.kmt"
 require "platform:/resource/fr.irisa.triskell.kermeta/lib/ecore.kmt"
 using kermeta::persistence
 using kermeta::standard
@@ -48,8 +47,10 @@ class Main inherits kermeta::kunit::Test
     
     operation loadClassModel() : Set<EPackage> is do             
    		var repository : EMFRepository init EMFRepository.new             
-   		var resource : Resource init repository.createResource("../test/kmt_testcases/input_test_models/047_crossreference1.ecore","../test/kmt_testcases/input_test_models/Ecore.ecore")
-   		//var resource : Resource init repository.createResource("../kmt_testcases/input_test_models/047_crossreference1.ecore","../kmt_testcases/input_test_models/Ecore.ecore")
+   		// the ".." path represents "fr.irisa.triskell.kermeta.interpreter" directory!
+   		var resource : Resource init repository.createResource(
+   		"../test/emf_testcases/instances/047_crossreference1.ecore",
+   		"../test/emf_testcases/instances/Ecore.ecore")
    		resource.load()      
        
        	result := Set<EPackage>.new

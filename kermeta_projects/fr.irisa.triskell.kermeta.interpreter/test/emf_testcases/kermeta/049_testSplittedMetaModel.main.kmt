@@ -7,8 +7,7 @@ package testSplittedMetamodel;
 
 
 require kermeta
-//require "./input_test_models/ecore.kmt"
-require "input_test_metamodels/049_simple_splittedMM1.ecore"
+require "../metamodels/049_simple_splittedMM1.ecore"
 using kermeta::persistence
 using kermeta::standard
 
@@ -30,7 +29,7 @@ class Main inherits kermeta::kunit::Test
         var c3 : P3::C3 
 		c3 := c2.aC3
 		assertTrueWithMsg(c3 !=  void, "didn't find c3")
-        stdio.write("Begin\n")
+        stdio.write("End of simple splitted MM1\n")
         
       
     end
@@ -38,8 +37,9 @@ class Main inherits kermeta::kunit::Test
     
     operation loadClassModel() : Set<P1::C1> is do             
    		var repository : EMFRepository init EMFRepository.new             
-   		//var resource : Resource init repository.createResource("input_test_models/049_simplemodel_C1.xmi","input_test_metamodels/049_simple_splittedMM1.ecore")
-   		var resource : Resource init repository.createResource("../test/kmt_testcases/input_test_models/049_simplemodel_C1.xmi","../test/kmt_testcases/input_test_metamodels/049_simple_splittedMM1.ecore")
+   		var resource : Resource init repository.createResource(
+   		"../test/emf_testcases/instances/049_simplemodel_C1.xmi",
+   		"../test/emf_testcases/metamodels/049_simple_splittedMM1.ecore")
    		resource.load()      
        
        	result := Set<P1::C1>.new
@@ -53,14 +53,6 @@ class Main inherits kermeta::kunit::Test
            		//stdio.writeln(aPackage.name)
            		result.add(aC1)
            end
-       	end     
-   end
-   
-   
-   operation createSplittedModel() is do
-      var repository : EMFRepository init EMFRepository.new             
-   	  var resource : Resource init repository.createResource("input_test_models/","input_test_metamodels/049_simple_splittedMM1.ecore")
-   		
-   end
-    
+       	end
+   end   
 }
