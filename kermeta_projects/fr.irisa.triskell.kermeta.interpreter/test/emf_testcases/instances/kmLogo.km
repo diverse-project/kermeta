@@ -1,0 +1,2479 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kermeta_language_structure:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta_language_behavior/kermeta.ecore" xmlns:kermeta_language_structure="http://kermeta_language_structure/kermeta.ecore" name="kmLogo">
+  <nestedPackage name="semanticDomain">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Turtle">
+      <ownedAttribute name="position" type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="drawings" type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="-1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.2"/>
+      </ownedAttribute>
+      <ownedAttribute name="heading" type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute name="penUp" type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.3/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.4"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedOperation name="reset">
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="position">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.1"/>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="x">
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="position">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </target>
+            <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="y">
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="position">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </target>
+            <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="drawings">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:VoidLiteral"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="setPenUp">
+        <ownedParameter name="b" type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.1/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.4"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="penUp">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="b"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="rotate">
+        <ownedParameter name="angle" type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.2/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="angle"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="360"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    </target>
+                  </value>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="isLower">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" name="minus">
+                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="360"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    </target>
+                  </value>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="isGreater">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="360"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="move">
+        <ownedParameter name="dx" type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+          </containedType>
+        </ownedParameter>
+        <ownedParameter name="dy" type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="newPos">
+            <type type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@body/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.1"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="getDelta">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="dx"/>
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="dy"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="position">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:StringLiteral" value="Tortue se deplace en "/>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:StringLiteral" value="Tortue trace vers "/>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="trace">
+                  <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+                    <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                      <typeref type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@body/@statement.2/@elseBody/@statement.0/@statement.1/@initialization/@target/@typeref/@containedType.0" upper="1">
+                        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.2"/>
+                      </typeref>
+                    </target>
+                  </initialization>
+                  <type type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@body/@statement.2/@elseBody/@statement.0/@statement.1/@type/@containedType.0" isOrdered="true" upper="1">
+                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.2"/>
+                  </type>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="make">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="position">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  </parameters>
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="trace"/>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="trace"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="drawings">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                </statement>
+              </statement>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="penUp">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="position">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="forward">
+        <ownedParameter name="steps" type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.4/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
+                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="90"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="180"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
+                  </parameters>
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="270"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Point">
+      <ownedAttribute name="x" type="//@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute name="y" type="//@nestedPackage.0/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedOperation name="getDelta" type="//@nestedPackage.0/@ownedTypeDefinition.1/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.1"/>
+        <ownedParameter name="dx" type="//@nestedPackage.0/@ownedTypeDefinition.1/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+          </containedType>
+        </ownedParameter>
+        <ownedParameter name="dy" type="//@nestedPackage.0/@ownedTypeDefinition.1/@ownedOperation.0/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+          </containedType>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.0/@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.0/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.1"/>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="x">
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="dx"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="x">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="y">
+              <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:CallVariable" name="dy"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="y">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="toString" type="//@nestedPackage.0/@ownedTypeDefinition.1/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.9"/>
+        </containedType>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="]"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="y">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=","/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="x">
+                        <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                      </target>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:StringLiteral" value="["/>
+                  </target>
+                </target>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Segment">
+      <ownedAttribute name="origin" type="//@nestedPackage.0/@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedAttribute name="destination" type="//@nestedPackage.0/@ownedTypeDefinition.2/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.1"/>
+      </ownedAttribute>
+      <ownedOperation name="make">
+        <ownedParameter name="orig" type="//@nestedPackage.0/@ownedTypeDefinition.2/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.1"/>
+        </ownedParameter>
+        <ownedParameter name="dest" type="//@nestedPackage.0/@ownedTypeDefinition.2/@ownedOperation.0/@ownedParameter.1/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.1"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="origin">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="orig"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="destination">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="dest"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </nestedPackage>
+  <nestedPackage name="abstractSyntax">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Instruction" isAbstract="true">
+      <ownedAttribute name="enclosingBlock" type="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="//@nestedPackage.1/@ownedTypeDefinition.14/@ownedAttribute.0">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+      </ownedAttribute>
+      <ownedOperation name="traverse" isAbstract="true">
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Primitive" isAbstract="true" superType="//@nestedPackage.1/@ownedTypeDefinition.1/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.0"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Back" superType="//@nestedPackage.1/@ownedTypeDefinition.2/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.1"/>
+      <ownedAttribute name="steps" type="//@nestedPackage.1/@ownedTypeDefinition.2/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.9"/>
+      </ownedAttribute>
+      <ownedOperation name="traverse" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.2/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitBack">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Forward" superType="//@nestedPackage.1/@ownedTypeDefinition.3/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.1"/>
+      <ownedAttribute name="steps" type="//@nestedPackage.1/@ownedTypeDefinition.3/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.9"/>
+      </ownedAttribute>
+      <ownedOperation name="traverse" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.3/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitForward">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Left" superType="//@nestedPackage.1/@ownedTypeDefinition.4/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.1"/>
+      <ownedOperation name="traverse" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.4/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitLeft">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Right" superType="//@nestedPackage.1/@ownedTypeDefinition.5/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.1"/>
+      <ownedOperation name="traverse" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.5/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitRight">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="PenDown" superType="//@nestedPackage.1/@ownedTypeDefinition.6/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.1"/>
+      <ownedOperation name="traverse" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.6/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitPenDown">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="PenUp" superType="//@nestedPackage.1/@ownedTypeDefinition.7/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.1"/>
+      <ownedOperation name="traverse" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.7/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitPenUp">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Clear" superType="//@nestedPackage.1/@ownedTypeDefinition.8/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.1"/>
+      <ownedOperation name="traverse" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.8/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitClear">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Expression" isAbstract="true" superType="//@nestedPackage.1/@ownedTypeDefinition.9/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.0"/>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="BinaryExp" superType="//@nestedPackage.1/@ownedTypeDefinition.10/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.9"/>
+      <ownedAttribute name="operator" type="//@nestedPackage.1/@ownedTypeDefinition.10/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.9"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute name="lhs" type="//@nestedPackage.1/@ownedTypeDefinition.10/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.9"/>
+      </ownedAttribute>
+      <ownedAttribute name="rhs" type="//@nestedPackage.1/@ownedTypeDefinition.10/@ownedAttribute.2/@containedType.0" isOrdered="true" lower="1" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.9"/>
+      </ownedAttribute>
+      <ownedOperation name="traverse" type="//@nestedPackage.1/@ownedTypeDefinition.10/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.10/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitBinaryExp">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Constant" superType="//@nestedPackage.1/@ownedTypeDefinition.11/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.9"/>
+      <ownedAttribute name="value" type="//@nestedPackage.1/@ownedTypeDefinition.11/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedOperation name="traverse" type="//@nestedPackage.1/@ownedTypeDefinition.11/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.11/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitConstant">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ProcCall" superType="//@nestedPackage.1/@ownedTypeDefinition.12/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.0"/>
+      <ownedAttribute name="actualArgs" type="//@nestedPackage.1/@ownedTypeDefinition.12/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="-1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.9"/>
+      </ownedAttribute>
+      <ownedAttribute name="declaration" type="//@nestedPackage.1/@ownedTypeDefinition.12/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="//@nestedPackage.1/@ownedTypeDefinition.13/@ownedAttribute.3">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.13"/>
+      </ownedAttribute>
+      <ownedOperation name="traverse" type="//@nestedPackage.1/@ownedTypeDefinition.12/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.12/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitProcCall">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ProcDeclaration" superType="//@nestedPackage.1/@ownedTypeDefinition.13/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.0"/>
+      <ownedAttribute name="name" type="//@nestedPackage.1/@ownedTypeDefinition.13/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.9"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute name="args" type="//@nestedPackage.1/@ownedTypeDefinition.13/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="-1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.19"/>
+      </ownedAttribute>
+      <ownedAttribute name="block" type="//@nestedPackage.1/@ownedTypeDefinition.13/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="1" opposite="//@nestedPackage.1/@ownedTypeDefinition.14/@ownedAttribute.1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+      </ownedAttribute>
+      <ownedAttribute name="procCall" type="//@nestedPackage.1/@ownedTypeDefinition.13/@ownedAttribute.3/@containedType.0" isOrdered="true" upper="-1" opposite="//@nestedPackage.1/@ownedTypeDefinition.12/@ownedAttribute.1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.12"/>
+      </ownedAttribute>
+      <ownedOperation name="traverse" type="//@nestedPackage.1/@ownedTypeDefinition.13/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.13/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitProcDeclaration">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Block" superType="//@nestedPackage.1/@ownedTypeDefinition.14/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.0"/>
+      <ownedAttribute name="instructions" type="//@nestedPackage.1/@ownedTypeDefinition.14/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="-1" opposite="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedAttribute.0" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.0"/>
+      </ownedAttribute>
+      <ownedAttribute name="procDeclaration" type="//@nestedPackage.1/@ownedTypeDefinition.14/@ownedAttribute.1/@containedType.0" isOrdered="true" lower="1" upper="1" opposite="//@nestedPackage.1/@ownedTypeDefinition.13/@ownedAttribute.2">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.13"/>
+      </ownedAttribute>
+      <ownedOperation name="traverse" type="//@nestedPackage.1/@ownedTypeDefinition.14/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.14/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitBlock">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="If" superType="//@nestedPackage.1/@ownedTypeDefinition.15/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.16"/>
+      <ownedAttribute name="thenPart" type="//@nestedPackage.1/@ownedTypeDefinition.15/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+      </ownedAttribute>
+      <ownedAttribute name="elsePart" type="//@nestedPackage.1/@ownedTypeDefinition.15/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+      </ownedAttribute>
+      <ownedOperation name="traverse" type="//@nestedPackage.1/@ownedTypeDefinition.15/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.15/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitIf">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="ControlStructure" isAbstract="true" superType="//@nestedPackage.1/@ownedTypeDefinition.16/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.0"/>
+      <ownedAttribute name="condition" type="//@nestedPackage.1/@ownedTypeDefinition.16/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.9"/>
+      </ownedAttribute>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Repeat" superType="//@nestedPackage.1/@ownedTypeDefinition.17/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.16"/>
+      <ownedAttribute name="block" type="//@nestedPackage.1/@ownedTypeDefinition.17/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+      </ownedAttribute>
+      <ownedOperation name="traverse" type="//@nestedPackage.1/@ownedTypeDefinition.17/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.17/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitRepeat">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="While" superType="//@nestedPackage.1/@ownedTypeDefinition.18/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.16"/>
+      <ownedAttribute name="block" type="//@nestedPackage.1/@ownedTypeDefinition.18/@ownedAttribute.0/@containedType.0" isOrdered="true" lower="1" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+      </ownedAttribute>
+      <ownedOperation name="traverse" type="//@nestedPackage.1/@ownedTypeDefinition.18/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.18/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitWhile">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Variable" superType="//@nestedPackage.1/@ownedTypeDefinition.19/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.9"/>
+      <ownedAttribute name="name" type="//@nestedPackage.1/@ownedTypeDefinition.19/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.9"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedOperation name="traverse" type="//@nestedPackage.1/@ownedTypeDefinition.19/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1" superOperation="//@nestedPackage.1/@ownedTypeDefinition.0/@ownedOperation.0">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </containedType>
+        <ownedParameter name="v" type="//@nestedPackage.1/@ownedTypeDefinition.19/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="visitVariable">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="v"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </nestedPackage>
+  <nestedPackage name="actions">
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="AbstractVisitor" isAbstract="true">
+      <ownedOperation name="visitBack" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.2"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitForward" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.1/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.3"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitLeft" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.2/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.4"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitRight" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.3/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.5"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitPenDown" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.4/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.6"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitPenUp" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.5/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.7"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitClear" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.6/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.8"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitBinaryExp" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.7/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.10"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitConstant" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.8/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitProcCall" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.9/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.12"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitProcDeclaration" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.10/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.13"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitBlock" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.11/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitIf" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.12/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.15"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitRepeat" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.13/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.17"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitWhile" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.14/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.18"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation name="visitVariable" isAbstract="true">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.15/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.19"/>
+        </ownedParameter>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Interpreter" superType="//@nestedPackage.2/@ownedTypeDefinition.1/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+      <ownedAttribute name="turtle" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.0"/>
+      </ownedAttribute>
+      <ownedAttribute name="stack" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0" isOrdered="true" upper="1" isComposite="true">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeParamBinding type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedAttribute.1/@containedType.0/@typeParamBinding.0/@containedType.0">
+            <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.3"/>
+            <variable href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1/@typeParameter.0"/>
+          </typeParamBinding>
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedAttribute name="accumulator" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedAttribute.2/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class">
+          <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+        </containedType>
+      </ownedAttribute>
+      <ownedOperation name="initialize">
+        <ownedParameter name="t" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.0"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="stack">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.1/@value/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class">
+                    <typeParamBinding type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.1/@value/@target/@typeref/@containedType.0/@typeParamBinding.0/@containedType.0">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.3"/>
+                      <variable href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1/@typeParameter.0"/>
+                    </typeParamBinding>
+                    <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.1"/>
+                  </containedType>
+                </typeref>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitBack" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.0">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.1/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.2"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="steps">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="forward">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitForward" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.1">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.2/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.3"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="steps">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="forward">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitLeft" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.2">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.3/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.4"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="rotate">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
+              <target xsi:type="kermeta_language_behavior:IntegerLiteral" value="90"/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitRight" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.3">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.4/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.5"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="rotate">
+            <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="90"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitPenDown" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.4">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.5/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.6"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="pendown"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="setPenUp">
+            <parameters xsi:type="kermeta_language_behavior:BooleanLiteral"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitPenUp" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.5">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.6/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.7"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="setPenUp">
+            <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" value="true"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitClear" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.6">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.7/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.8"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="reset">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitBinaryExp" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.7">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.8/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.10"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                </target>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:StringLiteral" value="visitBinExp"/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="left">
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.8/@body/@statement.1/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class">
+                <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+              </containedType>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="lhs">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="rhs">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                  </value>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="+"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" name="minus">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                  </value>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="-"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" name="mult">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                  </value>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="*"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  </target>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" name="div">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                  </value>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="/"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Conditional">
+                  <thenBody xsi:type="kermeta_language_behavior:Block">
+                    <statement xsi:type="kermeta_language_behavior:Block">
+                      <statement xsi:type="kermeta_language_behavior:Assignment">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                        </target>
+                        <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
+                      </statement>
+                    </statement>
+                  </thenBody>
+                  <elseBody xsi:type="kermeta_language_behavior:Block">
+                    <statement xsi:type="kermeta_language_behavior:Block">
+                      <statement xsi:type="kermeta_language_behavior:Assignment">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                        </target>
+                        <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                      </statement>
+                    </statement>
+                  </elseBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                  </condition>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="="/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Conditional">
+                  <thenBody xsi:type="kermeta_language_behavior:Block">
+                    <statement xsi:type="kermeta_language_behavior:Block">
+                      <statement xsi:type="kermeta_language_behavior:Assignment">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                        </target>
+                        <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
+                      </statement>
+                    </statement>
+                  </thenBody>
+                  <elseBody xsi:type="kermeta_language_behavior:Block">
+                    <statement xsi:type="kermeta_language_behavior:Block">
+                      <statement xsi:type="kermeta_language_behavior:Assignment">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                        </target>
+                        <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                      </statement>
+                    </statement>
+                  </elseBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="isLower">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                  </condition>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="&lt;"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+              </target>
+            </condition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Conditional">
+                  <thenBody xsi:type="kermeta_language_behavior:Block">
+                    <statement xsi:type="kermeta_language_behavior:Block">
+                      <statement xsi:type="kermeta_language_behavior:Assignment">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                        </target>
+                        <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
+                      </statement>
+                    </statement>
+                  </thenBody>
+                  <elseBody xsi:type="kermeta_language_behavior:Block">
+                    <statement xsi:type="kermeta_language_behavior:Block">
+                      <statement xsi:type="kermeta_language_behavior:Assignment">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                        </target>
+                        <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                      </statement>
+                    </statement>
+                  </elseBody>
+                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="isGreater">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                  </condition>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block"/>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=">"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+              </target>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitConstant" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.8">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.9/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="value">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitProcCall" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.9">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.10/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.12"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="frame">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.10/@body/@statement.0/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.3"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.10/@body/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.3"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="push">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="frame"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="stack">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="size">
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="actualArgs">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                  </target>
+                </target>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:StringLiteral" value="node.actualArgs.size="/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Loop">
+            <initialization xsi:type="kermeta_language_behavior:VariableDecl" identifier="i">
+              <initialization xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+              <type type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.10/@body/@statement.3/@initialization/@type/@containedType.0" isOrdered="true" upper="1">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+                </containedType>
+              </type>
+            </initialization>
+            <body xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="elementAt">
+                    <parameters xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="actualArgs">
+                      <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                    </target>
+                  </target>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="put">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="elementAt">
+                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="args">
+                        <target xsi:type="kermeta_language_behavior:CallFeature" name="declaration">
+                          <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                        </target>
+                      </target>
+                    </target>
+                  </parameters>
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="frame"/>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                        <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                      </target>
+                    </parameters>
+                    <target xsi:type="kermeta_language_behavior:StringLiteral" value="accumulator="/>
+                  </parameters>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                  </value>
+                </statement>
+              </statement>
+            </body>
+            <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="isGreaterOrEqual">
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" name="size">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="actualArgs">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                </target>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+            </stopCondition>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="declaration">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+              </target>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="pop">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="stack">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitProcDeclaration" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.10">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.11/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.13"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block"/>
+      </ownedOperation>
+      <ownedOperation name="visitBlock" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.11">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.12/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="i"/>
+              <body xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                  </statement>
+                </statement>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitIf" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.12">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.13/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.15"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="condition">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Conditional">
+            <thenBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="thenPart">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                  </target>
+                </statement>
+              </statement>
+            </thenBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="elsePart">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                  </target>
+                </statement>
+              </statement>
+            </elseBody>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </condition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitRepeat" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.13">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.14/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.17"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="condition">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Loop">
+            <initialization xsi:type="kermeta_language_behavior:VariableDecl" identifier="i">
+              <initialization xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </initialization>
+              <type type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.14/@body/@statement.1/@initialization/@type/@containedType.0" isOrdered="true" upper="1">
+                <containedType xsi:type="kermeta_language_structure:Class">
+                  <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+                </containedType>
+              </type>
+            </initialization>
+            <body xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                  </target>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                  <value xsi:type="kermeta_language_behavior:CallFeature" name="minus">
+                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                  </value>
+                </statement>
+              </statement>
+            </body>
+            <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="isLower">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+            </stopCondition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitWhile" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.14">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.15/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.18"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Loop">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+              <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="condition">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+              </target>
+            </initialization>
+            <body xsi:type="kermeta_language_behavior:Block">
+              <statement xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                  </target>
+                </statement>
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="condition">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                  </target>
+                </statement>
+              </statement>
+            </body>
+            <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+              <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+              </target>
+            </stopCondition>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitVariable" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.15">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.16/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.19"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="getValue">
+              <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+              </parameters>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="first">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="stack">
+                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                </target>
+              </target>
+            </value>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="PrettyPrinter" superType="//@nestedPackage.2/@ownedTypeDefinition.2/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.0"/>
+      <ownedOperation name="visitBack" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.0">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.0/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.2"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="back "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="steps">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitForward" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.1">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.1/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.3"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="forward "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="steps">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitLeft" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.2">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.2/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.4"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="left "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitRight" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.3">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.3/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.5"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="right "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitPenDown" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.4">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.4/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.6"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="pendown "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitPenUp" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.5">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.5/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.7"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="penup "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitClear" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.6">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.6/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.8"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="clear "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitBinaryExp" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.7">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.7/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.10"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="lhs">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="operator">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="rhs">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitConstant" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.8">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.8/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" "/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="value">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                </target>
+              </target>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitProcCall" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.9">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.9/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.12"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" "/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="declaration">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                </target>
+              </target>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="e"/>
+              <body xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="e"/>
+                  </statement>
+                </statement>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="actualArgs">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitProcDeclaration" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.10">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.10/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.13"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" "/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:StringLiteral" value="to "/>
+              </target>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="arg"/>
+              <body xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="arg"/>
+                  </statement>
+                </statement>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="args">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="end"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitBlock" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.11">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.11/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="each">
+            <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
+              <parameters name="i"/>
+              <body xsi:type="kermeta_language_behavior:Block">
+                <statement xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                  </statement>
+                </statement>
+              </body>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitIf" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.12">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.12/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.15"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block"/>
+      </ownedOperation>
+      <ownedOperation name="visitRepeat" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.13">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.13/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.17"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="repeat "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="condition">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" [ "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" ]"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="visitWhile" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.14">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.14/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.18"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block"/>
+      </ownedOperation>
+      <ownedOperation name="visitVariable" superOperation="//@nestedPackage.2/@ownedTypeDefinition.0/@ownedOperation.15">
+        <ownedParameter name="node" type="//@nestedPackage.2/@ownedTypeDefinition.2/@ownedOperation.15/@ownedParameter.0/@containedType.0" isOrdered="true" upper="1">
+          <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.19"/>
+        </ownedParameter>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="write">
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+              <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" "/>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:StringLiteral" value=":"/>
+              </target>
+            </parameters>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Bindings" superType="//@nestedPackage.2/@ownedTypeDefinition.3/@containedType.0">
+      <containedType xsi:type="kermeta_language_structure:Class">
+        <typeParamBinding type="//@nestedPackage.2/@ownedTypeDefinition.3/@containedType.0/@typeParamBinding.0/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.9"/>
+          </containedType>
+          <variable href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.0"/>
+        </typeParamBinding>
+        <typeParamBinding type="//@nestedPackage.2/@ownedTypeDefinition.3/@containedType.0/@typeParamBinding.1/@containedType.0">
+          <containedType xsi:type="kermeta_language_structure:Class">
+            <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
+          </containedType>
+          <variable href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0/@typeParameter.1"/>
+        </typeParamBinding>
+        <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.4/@ownedTypeDefinition.0"/>
+      </containedType>
+    </ownedTypeDefinition>
+    <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Main">
+      <ownedOperation name="pointille" type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.0"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="cst3">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.0/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="cst4">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.1/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.1/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="fo1">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.2/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.3"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.2/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.3"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="fo2">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.3/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.3"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.3/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.3"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="penup">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.4/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.7"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.4/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.7"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="pendown">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.5/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.6"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.5/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.6"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="block">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.6/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.6/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="repeat">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.7/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.17"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.0/@body/@statement.7/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.17"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="value">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="cst3"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="3"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="value">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="cst4"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="4"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="steps">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="fo1"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="cst3"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="steps">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="fo2"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="cst4"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="pendown"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="block"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="fo1"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="block"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="penup"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="block"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="fo2"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="block"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="condition">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="repeat"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="cst3"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="repeat"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="block"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="repeat"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="square" type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@containedType.0" isOrdered="true" upper="1">
+        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.0"/>
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="varwidth">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.0/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.19"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.19"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="name">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="varwidth"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:StringLiteral" value="width"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="forward">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.2/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.3"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.2/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.3"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="steps">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="forward"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="varwidth"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="right">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.4/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.5"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.4/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.5"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="block">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.5/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.5/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="forward"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="block"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="right"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="block"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="cst4">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.8/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.8/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="value">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="cst4"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="4"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="repeat">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.10/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.17"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.10/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.17"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="condition">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="repeat"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="cst4"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="repeat"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="block"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="squareblock">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.13/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.13/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="repeat"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="squareblock"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="squaredecl">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.15/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.13"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.15/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.13"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="name">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="squaredecl"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:StringLiteral" value="square"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="squaredecl"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="squareblock"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="varwidth"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="args">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="squaredecl"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="pendown">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.19/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.6"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.19/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.6"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="squarecall">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.20/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.12"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.20/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.12"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="cst10">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.21/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.21/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.11"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="value">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="cst10"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="10"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="binexp">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.23/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.10"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.23/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.10"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="binexp"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:StringLiteral" value="*"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="lhs">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="binexp"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="cst10"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="rhs">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="binexp"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="cst10"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="declaration">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="squarecall"/>
+            </target>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="squaredecl"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="binexp"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="actualArgs">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="squarecall"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="fullprog">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.29/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.1/@body/@statement.29/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.14"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="squaredecl"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="fullprog"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="pendown"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="fullprog"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="squarecall"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="instructions">
+              <target xsi:type="kermeta_language_behavior:CallVariable" name="fullprog"/>
+            </target>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallResult" name="result"/>
+            <value xsi:type="kermeta_language_behavior:CallVariable" name="fullprog"/>
+          </statement>
+        </body>
+      </ownedOperation>
+      <ownedOperation name="main">
+        <body xsi:type="kermeta_language_behavior:Block">
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="pp">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.2/@body/@statement.0/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.2"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.2/@body/@statement.0/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.2"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="interp">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.2/@body/@statement.1/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.1"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.2/@body/@statement.1/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.2/@ownedTypeDefinition.1"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="tortue">
+            <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+              <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                <typeref type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.2/@body/@statement.2/@initialization/@target/@typeref/@containedType.0" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.0"/>
+                </typeref>
+              </target>
+            </initialization>
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.2/@body/@statement.2/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.0"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="root">
+            <type type="//@nestedPackage.2/@ownedTypeDefinition.4/@ownedOperation.2/@body/@statement.3/@type/@containedType.0" isOrdered="true" upper="1">
+              <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.1/@ownedTypeDefinition.0"/>
+            </type>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="reset">
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="tortue"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="initialize">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="tortue"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="interp"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:Assignment">
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="root"/>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="square">
+              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+            </value>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="pp"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="root"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+            <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=" --- "/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+          </statement>
+          <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+            <parameters xsi:type="kermeta_language_behavior:CallVariable" name="interp"/>
+            <target xsi:type="kermeta_language_behavior:CallVariable" name="root"/>
+          </statement>
+        </body>
+      </ownedOperation>
+    </ownedTypeDefinition>
+  </nestedPackage>
+</kermeta_language_structure:Package>
