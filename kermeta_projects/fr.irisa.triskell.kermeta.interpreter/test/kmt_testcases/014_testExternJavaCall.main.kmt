@@ -1,4 +1,4 @@
-/* $Id: 014_testExternJavaCall.main.kmt,v 1.7 2005-05-16 17:39:15 ffleurey Exp $
+/* $Id: 014_testExternJavaCall.main.kmt,v 1.8 2006-07-25 07:58:19 dvojtise Exp $
  * Project : Kermeta.interpreter. test
  * License : GPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -7,7 +7,13 @@
  * Authors : 
  * 		Didier Vojtisek (dvojtise@irisa.fr)
  * Description :  	
- * 	see class javadoc.	 
+ * 	see class javadoc.
+ *   important note:
+ *		In this test suite, some of the java call change the original value or the passed parameter.
+ *		On integer, and String this still work but according to their type (primitive),
+ *		this is normally impossible in kermeta. (see test suit 052) 
+ *		But here, as we change the literal itself this works.
+ *		On Boolean, even that hack cannot work, because boolean values are singleton
  */
 @mainClass "testExternJavaCall::Test_ExternJavaCall"
 @mainOperation "run2"
@@ -31,6 +37,10 @@ class Test_ExternJavaCall  inherits kermeta::kunit::Test {
         //test3IntegersParams()
       //  test3Integers2Strings1BooleanParams()
         result := 0
+    end
+    
+    method setUp() : Void is do
+    	extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.initialize(self)
     end
     
     // simple tests
@@ -101,13 +111,29 @@ class Test_ExternJavaCall  inherits kermeta::kunit::Test {
         assertTrueWithMsg((intValue1 == 178), "test3IntegersParams failed (2)")
         assertTrueWithMsg(intValue2 == 278, "test3IntegersParams failed (3)")
         assertTrueWithMsg(intValue3 == 378, "test3IntegersParams failed (4)")
-        
+        extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.assertMethodWasCalled() 
     end 
+    
+    /** tester l'appel a TestJavaCall.call3IntegersParams mais en passant plusieurs fois le même int */
+    operation test3SameIntegersParams() : Void is do	
+		
+		var intValue : kermeta::standard::Integer
+		var returnedintvalue : kermeta::standard::Integer
+        
+        intValue := 777
+        returnedintvalue ?= extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.call3IntegersParams(intValue,intValue, intValue)
+
+        assertTrueWithMsg((returnedintvalue == 780), "returnedintvalue == 780 ; but == " +returnedintvalue.toString)
+        assertTrueWithMsg((intValue == 780), "intValue == 780; but == " + intValue.toString)
+        extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.assertMethodWasCalled() 
+        
+	end	
     
     operation test3Integers2Strings1BooleanParams() : Void is do
         var intValue1 : kermeta::standard::Integer
         var intValue2 : kermeta::standard::Integer
         var intValue3 : kermeta::standard::Integer
+        var stringLit : kermeta::standard::String
         var stringValue1 : kermeta::standard::String
         var stringValue2 : kermeta::standard::String   
         var boolValue1 : kermeta::standard::Boolean              
@@ -115,11 +141,12 @@ class Test_ExternJavaCall  inherits kermeta::kunit::Test {
         intValue1 := 177
         intValue2 := 277
         intValue3 := 377
-        stringValue1 := "s1"
+        stringLit := "s1"
+        stringValue1 := stringLit
         stringValue2 := "s2"  
         boolValue1 := false      
         
-        returnedboolvalue ?= extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.call3Integers2Strings1BooleanParams(self, intValue1,intValue2,intValue3,stringValue1,stringValue2,boolValue1)
+        returnedboolvalue ?= extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.call3Integers2Strings1BooleanParams(intValue1,intValue2,intValue3,stringValue1,stringValue2,boolValue1)
         
         assertTrueWithMsg(returnedboolvalue, "test3Integers2Strings1BooleanParams failed (1)")
         assertTrueWithMsg((intValue1 == 178), "test3Integers2Strings1BooleanParams failed (2)")
@@ -127,9 +154,9 @@ class Test_ExternJavaCall  inherits kermeta::kunit::Test {
         assertTrueWithMsg(intValue3 == 378, "test3Integers2Strings1BooleanParams failed (4)")
         assertTrueWithMsg(stringValue1.compareTo("s11")==0, "test3Integers2Strings1BooleanParams failed (5)")
         assertTrueWithMsg(stringValue2.compareTo("s21")==0, "test3Integers2Strings1BooleanParams failed (6)")
-        assertTrueWithMsg(boolValue1, "test3Integers2Strings1BooleanParams failed (7)")
+        assertTrueWithMsg(not boolValue1, "test3Integers2Strings1BooleanParams failed (7)") // boolean cannot be changed
         
-        //extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.assertMethodWasCalled()        
+        extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.assertMethodWasCalled()        
     end    
 
 	// tests passing variables to external call        

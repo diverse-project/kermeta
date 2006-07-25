@@ -1,4 +1,4 @@
-/* $Id: TestJavaCall.java,v 1.8 2006-07-18 11:28:09 zdrey Exp $
+/* $Id: TestJavaCall.java,v 1.9 2006-07-25 07:58:19 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : TestJavaCall.java
  * License    : GPL
@@ -25,6 +25,12 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 /**
  * Implementation of the java part for an extern JavaCall from Kermeta.
  * Related test : fr.irisa.triskell.kermeta.interpreter/test/kmt_testcases/014_testExternJavaCall.main.kmt
+ *   important note:
+ *		In this test suite, some of the java call change the original value or the passed parameter.
+ *		On integer, and String this still work but according to their type (primitive),
+ *		this is normally impossible in kermeta. (see test suit 052) 
+ *		But here, as we change the literal itself this works (however I'm not sure there isn't any side effect ...).
+ *		On Boolean, even that hack cannot work, because boolean values are singleton
  * 
  * @author dvojtise
  */
@@ -43,6 +49,10 @@ public class TestJavaCall extends TestCase{
         roFactory = pFactory;
     }
     
+    public static void initialize(RuntimeObject param0){
+    	roFactory = param0.getFactory();
+    }
+    
     /**  Implementation of method simple called as : <br>
 	 * extern fr::irisa::triskell::kermeta::interpreter::test::TestJavaCall.simpleCall();
 	 */
@@ -50,14 +60,16 @@ public class TestJavaCall extends TestCase{
         internalLog.info("simpleCall was called");
         callCounter++;
 	}
-    /*
+    
+    // it cal bee called without parameter if the roFactory was initialized first
     public static RuntimeObject callBooleanReturn() {
         internalLog.info("callBooleanReturn was called");
 
         callCounter++;
-        return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(true,roFactory);
+        return roFactory.getMemory().getRuntimeObjectForBoolean(true);
+        //return fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.create(true,roFactory);
 	}
-	*/
+	
     public static RuntimeObject callIntegerReturn() {
         internalLog.info("callIntegerReturn was called");
         //  Long way
@@ -107,8 +119,17 @@ public class TestJavaCall extends TestCase{
         return intparam1;
     }
     
+    /** 
+     * 
+     * @param intparam1 will be incremented by 1
+     * @param intparam2 will be incremented by 1
+     * @param intparam3 will be incremented by 1
+     * @param stringparam1 will be appended with "1"
+     * @param stringparam2 will be appended with "1"
+     * @param boolparam1 must be true in all case
+     * @return
+     */
     public static RuntimeObject call3Integers2Strings1BooleanParams(
-            RuntimeObject self,
             RuntimeObject intparam1,
             RuntimeObject intparam2,
             RuntimeObject intparam3,
@@ -124,9 +145,16 @@ public class TestJavaCall extends TestCase{
         String.setValue(stringparam1, String.getValue(stringparam1).concat("1"));
         String.setValue(stringparam2, String.getValue(stringparam2).concat("1"));
       
-        //Boolean.setValue(boolparam1, true);
+        // As Boolean values are singleton in the system, we cannot hack a change of the value
+        // so we test only one thing : that we correctly receive true
+        // all the following commented code doesn't work
+        //fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.setValue(boolparam1, true);
+        //boolparam1 = roFactory.getMemory().getRuntimeObjectForBoolean(true);
+        //fr.irisa.triskell.kermeta.runtime.language.Object.set(ro_target,ro_property,rhs_value);
+        assert(fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(boolparam1));
+        
         callCounter++;
-        return boolparam1;
+        return roFactory.getMemory().getRuntimeObjectForBoolean(true);
     }
     
     public static RuntimeObject callCollectionReturn() {
@@ -142,18 +170,18 @@ public class TestJavaCall extends TestCase{
 
     
     public static void callOneCollectionParam() {
-        internalLog.info("simpleCall was called");
+        internalLog.info("callOneCollectionParam was called");
 	}
     public static void callOneSetParam() {
-        internalLog.info("simpleCall was called");
+        internalLog.info("callOneSetParam was called");
 	}
     
     public static void callTwoParams() {
-        internalLog.info("simpleCall was called");
+        internalLog.info("callTwoParams was called");
 	}
     
     public static void callOneParamAndReturn() {
-        internalLog.info("simpleCall was called");
+        internalLog.info("callOneParamAndReturn was called");
 	}
     
     
