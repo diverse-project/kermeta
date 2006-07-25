@@ -234,7 +234,7 @@ abstract class EModelElement inherits EObject
 	end
 	
 	operation getAllProps() : Collection<Property> is do
-		var cd : ClassDefinition init self.getMetaClass.classDefinition
+		var cd : ClassDefinition init getClassDef(self.getMetaClass)
 		result := getAllPropertiesOfClass(cd) 
 	end
 	
@@ -246,11 +246,11 @@ abstract class EModelElement inherits EObject
 	operation getAllPropertiesOfClass(cd : ClassDefinition) : Collection<Property> is do
 			result := Set<Property>.new
 			
-			result.addAll(cd.ownedAttributes) 
+			result.addAll(cd.ownedAttribute) 
 			
 			cd.superType.each{ t | 
 				var sc : Class		sc := t
-				getAllPropertiesOfClass(sc.classDefinition).each{ p | 
+				getAllPropertiesOfClass(getClassDef(sc)).each{ p | 
 					if not result.contains(p) then
 						result.add(p)
 					end
@@ -258,7 +258,10 @@ abstract class EModelElement inherits EObject
 			}
 			 
 			result := result.select{ k | not k.isDerived }
-
+	end
+	
+	operation getClassDef(c : Class) : ClassDefinition is do
+		result ?= c.typeDefinition
 	end
 	
 }

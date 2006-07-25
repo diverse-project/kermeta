@@ -14,11 +14,13 @@ using ecore
 class Main
 {
   operation main() : Void is do 
+
         var model1 : EPackage init loadECoreModel("../models/Model1.ecore")
         var model2 : EPackage init loadECoreModel("../models/Model2.ecore")
         
         stdio.writeln("Input model 1 : ")
         printModel(model1) 
+        
         
         
         stdio.writeln("\nInput model 2 : ")
@@ -36,27 +38,22 @@ class Main
         //merged := EPackage.clone(model1)
         
         printModel(merged) 
+        
+        var resource : kermeta::persistence::EMFResource             
+   		var repository : EMFRepository init EMFRepository.new
+   		resource ?= repository.createResource("../models/Result.ecore", "../metamodel/ecore.ecore")
+       // resource.instances.add(merged)
+        resource.save
         // */
-      
         
     end
     
-    operation loadECoreModel(path : String) : EPackage is do             
+    operation loadECoreModel(path : String) : EPackage is do
+    	var resource : kermeta::persistence::EMFResource             
    		var repository : EMFRepository init EMFRepository.new             
-   		var resource : Resource init repository.getResource(path) 
-       	resource.load()
-      
-       // result ?= resource.instances.one
-       
-       from var it : Iterator<Object> init resource.instances.iterator
-       until it.isOff
-       loop
-           var next : Object init it.next
-           if (EPackage.isInstance(next)) then                 
-           		result ?= next
-           end
-       end
-       
+       	resource ?= repository.createResource(path, "../metamodel/ecore.ecore")
+        resource.load
+       result ?= resource.instances.one
    end
     
     operation printModel(p : EPackage) is do
