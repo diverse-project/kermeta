@@ -1,0 +1,179 @@
+/* $Id: 044_testFrameworkModelConformance.main.kmt,v 1.2 2006/04/06 16:04:31 dvojtise Exp $
+ * Project   : fr.irisa.triskell.kermeta.interpreter
+ * File      : 044_testFrameworkModelConformance.kmt
+ * License   : EPL
+ * Copyright : IRISA / INRIA / Universite de Rennes 1
+ * ----------------------------------------------------------------------------
+ * Creation date : Mar 14, 2006
+ * Authors       : 
+ * 		Didier Vojtisek <dvojtise@irisa.fr>
+ */
+@mainClass "testFrameworkModelConformance::Main"
+@mainOperation "testmain"
+
+
+package testFrameworkModelConformance;
+
+
+require kermeta
+require "platform:/resource/fr.irisa.triskell.kermeta/lib/ecore.kmt"
+using kermeta::persistence
+using kermeta::standard
+using kermeta::language::structure
+using ecore
+
+/**
+ * the purpose of this test is to verify that the model of kermeta is the same if viewed 
+ * from ecore or viewed from the reflexivity
+ * it must check all classes and their attributes
+ */
+class Main inherits kermeta::kunit::Test
+{
+    operation testmain() : Void is do 
+        var kermetaPackageFromModel : ecore::EPackage init getKermetaPackageFromModel
+        
+        var kermetaPackageFromRef : kermeta::language::structure::Package init getKermetaPackageFromReflection
+        
+
+        
+        stdio.writeln("Begin checking")        
+        //inputModel.each{ p | printPackageContent(p) }
+        stdio.writeln("EPackage " + kermetaPackageFromModel.toString + " " + kermetaPackageFromModel.name)
+        stdio.writeln("Package " + kermetaPackageFromRef.toString + " " + kermetaPackageFromRef.name)
+        checkPackage(kermetaPackageFromModel, kermetaPackageFromRef)
+        stdio.writeln("End")        
+        
+      
+    end
+    
+    /**
+     * Verify that the Package tree are equivalent
+     */
+    operation checkPackage(ePackage : EPackage, kPackage : Package)  is do 
+    	assertTrueWithMsg( not kPackage.isVoid, 
+    		"assert failed: the EPackage " + ePackage.name + " has no equivalent in the framework")	// the given 
+  		assertTrueWithMsg(ePackage.name.equals(kPackage.name), 
+    		"assert failed: the EPackage " + ePackage.name + " has no equivalent in the framework")
+  		stdio.writeln("EPackage " + ePackage.name + " retreived")
+  		
+  		// checks that each subpackage of the Ecore package exists into its Kermeta version
+  		ePackage.eSubpackages.each{ eSubPackage | 
+  			var theKSubPackage : Package
+			theKSubPackage ?= kPackage.nestedPackage.detect{kSubPackage | kSubPackage.name.equals(eSubPackage.name)}
+			checkPackage(eSubPackage, theKSubPackage)			
+  		}
+  		// print known type in the framework
+  		stdio.writeln("  Known classes:")
+  		kPackage.ownedTypeDefinition.each{ c | stdio.writeln("    " + c.name) }
+		ePackage.eClassifiers.each{ eClassifier | stdio.writeln("h: " + eClassifier.toString) }
+  		ePackage.eClassifiers.each{ eClassifer | 
+  			var thekTypeDefinition : TypeDefinition
+  			stdio.writeln("zoe: " + eClassifer.name )
+			thekTypeDefinition ?= kPackage.ownedTypeDefinition.detect{kTypeDefinition | kTypeDefinition.name.equals(eClassifer.name)}
+			checkClassifier(eClassifer, thekTypeDefinition)			
+  		}
+    end
+    
+    /**
+     * Verify that we have all the classes form the model into the framework
+     */
+    operation checkClassifier(eClassifier : EClassifier, kTypeDefinition : TypeDefinition) is do
+    	var eClass : EClass
+    	eClass ?= eClassifier
+    	var kClassDef : ClassDefinition
+    	kClassDef ?= kTypeDefinition 
+    	var eDataType : EDataType
+    	eDataType ?= eClassifier   	
+    	var kDataType : DataType
+    	kDataType ?= kTypeDefinition
+    	if (not eClass.isVoid) and (not kClassDef.isVoid) then    		
+    		checkClass(eClass, kClassDef)
+    	else if (not eDataType.isVoid) and (not kDataType.isVoid)then
+    			stdio.writeln("    data type " + eDataType.name + " retreived")
+    		
+    	else
+    		//stdio.writeln("  pb on TypeDefinition " + kTypeDefinition.toString + " " + kTypeDefinition.name)       
+    		fail("EClassifier " + eClassifier.name + " "+ eClassifier.toString + " has no equivalent in the framework")
+    	end end
+    end
+    
+    operation checkClass(eClass : EClass, kClass : ClassDefinition) is do
+    	assertTrueWithMsg( not kClass.isVoid, 
+    		"assert failed: the EClass " + eClass.name + " has no equivalent in the framework")	// the given 
+  		assertTrueWithMsg(eClass.name.equals(kClass.name), 
+    		"assert failed: the EClass " + eClass.name + " has no equivalent in the framework")
+  		stdio.writeln("  EClass " + eClass.name + " retreived")
+  		
+  		// print known type in the framework
+  		stdio.writeln("  Known properies:")
+  		kClass.allOwnedAttribute.each{ c | stdio.writeln("     " + kClass.name+ "." + c.name) }
+  		eClass.eStructuralFeatures.each{ eFeature | 
+  			var thekProperty : Property
+  			thekProperty ?= kClass.allOwnedAttribute.detect{kProperty | kProperty.name.equals(eFeature.name)}
+			checkProperty(eFeature, thekProperty)			
+  		}
+    end
+    
+    
+    operation checkProperty(eStructuralFeature : EStructuralFeature, kProperty : Property) is do
+    	assertTrueWithMsg( not kProperty.isVoid, 
+    		"assert failed: the EStructuralFeature " + eStructuralFeature.eContainingClass.name + "." + eStructuralFeature.name + " has no equivalent in the framework")	// the given 
+  		assertTrueWithMsg(eStructuralFeature.name.equals(kProperty.name), 
+    		"assert failed: the EStructuralFeature " + eStructuralFeature.name + " has no equivalent in the framework")
+  		
+    end
+    
+ 
+    
+    /** 
+     * Retreives the Kermeta root package by reflexivity
+     */
+    operation getKermetaPackageFromReflection() : kermeta::language::structure::Package is do
+    	var selfPackage : Package 
+    	//selfPackage ?= self.getMetaClass.classDefinition // this is the definition of this class : Main
+    	//stdio.writeln("selfPackage " + selfPackage.toString +" "+ selfPackage.name)
+    	
+    	selfPackage ?= self.getMetaClass.typeDefinition.getMetaClass.typeDefinition.container
+    	//stdio.writeln("selfPackage " + selfPackage.toString +" "+ selfPackage.name)
+    	
+    	var topPackage : Package
+    	from var currentPackage : Package init selfPackage
+        until currentPackage.container.isVoid
+        loop
+            topPackage ?= currentPackage.container
+            currentPackage := topPackage
+        end
+    	result := topPackage
+    end
+    
+    /**
+     * Retreives the EPackage named "kermeta" in the model
+     */ 
+    operation getKermetaPackageFromModel() : EPackage is do
+    	result := loadClassModel().detect{p | p.name.equals("kermeta")}
+    end
+    
+    /**
+     * Load the kermeta metamodel from the main plugin
+     * platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore
+     */
+    operation loadClassModel() : Set<EPackage> is do             
+   		var repository : EMFRepository init EMFRepository.new       
+   		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore","../test/kmt_testcases/input_test_models/Ecore.ecore")
+   		resource.load()      
+       
+       	result := Set<EPackage>.new
+       	from var it : Iterator<Object> init resource.instances.iterator
+       	until it.isOff
+       	loop
+           var next : Object init it.next
+           if (EPackage.isInstance(next)) then 
+           		var aPackage : EPackage 
+           		aPackage ?= next
+           		//stdio.writeln(aPackage.name)
+           		result.add(aPackage)
+           end
+       	end     
+   end
+    
+}
