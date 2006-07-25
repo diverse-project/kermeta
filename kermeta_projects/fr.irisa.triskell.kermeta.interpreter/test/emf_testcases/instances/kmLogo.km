@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<kermeta_language_structure:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta_language_behavior/kermeta.ecore" xmlns:kermeta_language_structure="http://kermeta_language_structure/kermeta.ecore" name="kmLogo">
+<kermeta_language_structure:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:kermeta_language_behavior="http://kermeta/kermeta.ecore#//language/behavior" xmlns:kermeta_language_structure="http://kermeta/kermeta.ecore#//language/structure" name="kmLogo">
   <nestedPackage name="semanticDomain">
     <ownedTypeDefinition xsi:type="kermeta_language_structure:ClassDefinition" name="Turtle">
       <ownedAttribute name="position" type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedAttribute.0/@containedType.0" isOrdered="true" upper="1">
@@ -21,9 +21,7 @@
       <ownedOperation name="reset">
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="position">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="position"/>
             <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
               <target xsi:type="kermeta_language_behavior:TypeLiteral">
                 <typeref type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.0/@body/@statement.0/@value/@target/@typeref/@containedType.0" upper="1">
@@ -34,30 +32,22 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Assignment">
             <target xsi:type="kermeta_language_behavior:CallFeature" name="x">
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="position">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="position"/>
             </target>
             <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Assignment">
             <target xsi:type="kermeta_language_behavior:CallFeature" name="y">
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="position">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="position"/>
             </target>
             <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
             <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="drawings">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="drawings"/>
             <value xsi:type="kermeta_language_behavior:VoidLiteral"/>
           </statement>
         </body>
@@ -70,9 +60,7 @@
         </ownedParameter>
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="penUp">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="penUp"/>
             <value xsi:type="kermeta_language_behavior:CallVariable" name="b"/>
           </statement>
         </body>
@@ -85,66 +73,42 @@
         </ownedParameter>
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
             <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" name="angle"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
             </value>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Assignment">
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  </target>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
-                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="360"/>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    </target>
-                  </value>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="360"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
+                </value>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="isLower">
               <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
             </condition>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Assignment">
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  </target>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" name="minus">
-                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="360"/>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    </target>
-                  </value>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="minus">
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="360"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
+                </value>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="isGreater">
               <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="360"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
             </condition>
           </statement>
         </body>
@@ -171,71 +135,57 @@
             <value xsi:type="kermeta_language_behavior:CallFeature" name="getDelta">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" name="dx"/>
               <parameters xsi:type="kermeta_language_behavior:CallVariable" name="dy"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="position">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="position"/>
             </value>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
-                      <target xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:StringLiteral" value="Tortue se deplace en "/>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
                   </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
-                </statement>
+                  <target xsi:type="kermeta_language_behavior:StringLiteral" value="Tortue se deplace en "/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
               </statement>
             </thenBody>
             <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
-                      <target xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:StringLiteral" value="Tortue trace vers "/>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
                   </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="trace">
-                  <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
-                    <target xsi:type="kermeta_language_behavior:TypeLiteral">
-                      <typeref type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@body/@statement.2/@elseBody/@statement.0/@statement.1/@initialization/@target/@typeref/@containedType.0" upper="1">
-                        <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.2"/>
-                      </typeref>
-                    </target>
-                  </initialization>
-                  <type type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@body/@statement.2/@elseBody/@statement.0/@statement.1/@type/@containedType.0" isOrdered="true" upper="1">
-                    <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.2"/>
-                  </type>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="make">
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="position">
-                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  </parameters>
-                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" name="trace"/>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
-                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="trace"/>
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="drawings">
-                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:StringLiteral" value="Tortue trace vers "/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:VariableDecl" identifier="trace">
+                <initialization xsi:type="kermeta_language_behavior:CallFeature" name="new">
+                  <target xsi:type="kermeta_language_behavior:TypeLiteral">
+                    <typeref type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@body/@statement.2/@elseBody/@statement.1/@initialization/@target/@typeref/@containedType.0" upper="1">
+                      <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.2"/>
+                    </typeref>
                   </target>
-                </statement>
+                </initialization>
+                <type type="//@nestedPackage.0/@ownedTypeDefinition.0/@ownedOperation.3/@body/@statement.2/@elseBody/@statement.1/@type/@containedType.0" isOrdered="true" upper="1">
+                  <containedType xsi:type="kermeta_language_structure:Class" typeDefinition="//@nestedPackage.0/@ownedTypeDefinition.2"/>
+                </type>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="make">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="position"/>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="trace"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="add">
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" name="trace"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="drawings"/>
               </statement>
             </elseBody>
-            <condition xsi:type="kermeta_language_behavior:CallFeature" name="penUp">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </condition>
+            <condition xsi:type="kermeta_language_behavior:CallFeature" name="penUp"/>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="position">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="position"/>
             <value xsi:type="kermeta_language_behavior:CallVariable" name="newPos"/>
           </statement>
         </body>
@@ -249,86 +199,58 @@
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
-                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
-                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
+                <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
             </condition>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
-                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
-                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
+                <parameters xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
+                <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="90"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
             </condition>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
-                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
-                  </parameters>
-                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
+                <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
+                </parameters>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="180"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
             </condition>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
-                  </parameters>
-                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="move">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="steps"/>
+                </parameters>
+                <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="270"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="heading"/>
             </condition>
           </statement>
         </body>
@@ -374,9 +296,7 @@
             </target>
             <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" name="dx"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="x">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="x"/>
             </value>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Assignment">
@@ -385,9 +305,7 @@
             </target>
             <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
               <parameters xsi:type="kermeta_language_behavior:CallVariable" name="dy"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="y">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="y"/>
             </value>
           </statement>
         </body>
@@ -403,17 +321,13 @@
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="]"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                 <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="y">
-                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  </target>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="y"/>
                 </parameters>
                 <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                   <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=","/>
                   <target xsi:type="kermeta_language_behavior:CallFeature" name="plus">
                     <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
-                      <target xsi:type="kermeta_language_behavior:CallFeature" name="x">
-                        <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                      </target>
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="x"/>
                     </parameters>
                     <target xsi:type="kermeta_language_behavior:StringLiteral" value="["/>
                   </target>
@@ -440,15 +354,11 @@
         </ownedParameter>
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="origin">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="origin"/>
             <value xsi:type="kermeta_language_behavior:CallVariable" name="orig"/>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="destination">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="destination"/>
             <value xsi:type="kermeta_language_behavior:CallVariable" name="dest"/>
           </statement>
         </body>
@@ -903,15 +813,11 @@
         </ownedParameter>
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle"/>
             <value xsi:type="kermeta_language_behavior:CallVariable" name="t"/>
           </statement>
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="stack">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="stack"/>
             <value xsi:type="kermeta_language_behavior:CallFeature" name="new">
               <target xsi:type="kermeta_language_behavior:TypeLiteral">
                 <typeref type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.0/@body/@statement.1/@value/@target/@typeref/@containedType.0" upper="1">
@@ -941,13 +847,9 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="forward">
             <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
             </parameters>
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle"/>
           </statement>
         </body>
       </ownedOperation>
@@ -963,12 +865,8 @@
             </target>
           </statement>
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="forward">
-            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </parameters>
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle"/>
           </statement>
         </body>
       </ownedOperation>
@@ -981,9 +879,7 @@
             <parameters xsi:type="kermeta_language_behavior:CallFeature" name="uminus">
               <target xsi:type="kermeta_language_behavior:IntegerLiteral" value="90"/>
             </parameters>
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle"/>
           </statement>
         </body>
       </ownedOperation>
@@ -994,9 +890,7 @@
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="rotate">
             <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="90"/>
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle"/>
           </statement>
         </body>
       </ownedOperation>
@@ -1011,9 +905,7 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="setPenUp">
             <parameters xsi:type="kermeta_language_behavior:BooleanLiteral"/>
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle"/>
           </statement>
         </body>
       </ownedOperation>
@@ -1024,9 +916,7 @@
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="setPenUp">
             <parameters xsi:type="kermeta_language_behavior:BooleanLiteral" value="true"/>
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle"/>
           </statement>
         </body>
       </ownedOperation>
@@ -1036,9 +926,7 @@
         </ownedParameter>
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="reset">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="turtle"/>
           </statement>
         </body>
       </ownedOperation>
@@ -1050,9 +938,7 @@
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
             <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
               <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
-                <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                </target>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
               </parameters>
               <target xsi:type="kermeta_language_behavior:StringLiteral" value="visitBinExp"/>
             </parameters>
@@ -1073,9 +959,7 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Assignment">
             <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
-            <value xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </value>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
           </statement>
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
             <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
@@ -1085,23 +969,15 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Assignment">
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  </target>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
-                  </value>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                </value>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="+"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
@@ -1111,23 +987,15 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Assignment">
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  </target>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" name="minus">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
-                  </value>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="minus">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                </value>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="-"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
@@ -1137,23 +1005,15 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Assignment">
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  </target>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" name="mult">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
-                  </value>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="mult">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                </value>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="*"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
@@ -1163,23 +1023,15 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Assignment">
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  </target>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" name="div">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
-                  </value>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="div">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                </value>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="/"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
@@ -1189,40 +1041,26 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Conditional">
-                  <thenBody xsi:type="kermeta_language_behavior:Block">
-                    <statement xsi:type="kermeta_language_behavior:Block">
-                      <statement xsi:type="kermeta_language_behavior:Assignment">
-                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                        </target>
-                        <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
-                      </statement>
-                    </statement>
-                  </thenBody>
-                  <elseBody xsi:type="kermeta_language_behavior:Block">
-                    <statement xsi:type="kermeta_language_behavior:Block">
-                      <statement xsi:type="kermeta_language_behavior:Assignment">
-                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                        </target>
-                        <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-                      </statement>
-                    </statement>
-                  </elseBody>
-                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
-                  </condition>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:Conditional">
+                <thenBody xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:Assignment">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                    <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
+                  </statement>
+                </thenBody>
+                <elseBody xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:Assignment">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                    <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                  </statement>
+                </elseBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                </condition>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="="/>
               <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
@@ -1232,40 +1070,26 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Conditional">
-                  <thenBody xsi:type="kermeta_language_behavior:Block">
-                    <statement xsi:type="kermeta_language_behavior:Block">
-                      <statement xsi:type="kermeta_language_behavior:Assignment">
-                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                        </target>
-                        <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
-                      </statement>
-                    </statement>
-                  </thenBody>
-                  <elseBody xsi:type="kermeta_language_behavior:Block">
-                    <statement xsi:type="kermeta_language_behavior:Block">
-                      <statement xsi:type="kermeta_language_behavior:Assignment">
-                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                        </target>
-                        <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-                      </statement>
-                    </statement>
-                  </elseBody>
-                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="isLower">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
-                  </condition>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:Conditional">
+                <thenBody xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:Assignment">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                    <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
+                  </statement>
+                </thenBody>
+                <elseBody xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:Assignment">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                    <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                  </statement>
+                </elseBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" name="isLower">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                </condition>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" value="&lt;"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
@@ -1275,40 +1099,26 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Conditional">
-                  <thenBody xsi:type="kermeta_language_behavior:Block">
-                    <statement xsi:type="kermeta_language_behavior:Block">
-                      <statement xsi:type="kermeta_language_behavior:Assignment">
-                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                        </target>
-                        <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
-                      </statement>
-                    </statement>
-                  </thenBody>
-                  <elseBody xsi:type="kermeta_language_behavior:Block">
-                    <statement xsi:type="kermeta_language_behavior:Block">
-                      <statement xsi:type="kermeta_language_behavior:Assignment">
-                        <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                          <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                        </target>
-                        <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-                      </statement>
-                    </statement>
-                  </elseBody>
-                  <condition xsi:type="kermeta_language_behavior:CallFeature" name="isGreater">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                      <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
-                  </condition>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:Conditional">
+                <thenBody xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:Assignment">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                    <value xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
+                  </statement>
+                </thenBody>
+                <elseBody xsi:type="kermeta_language_behavior:Block">
+                  <statement xsi:type="kermeta_language_behavior:Assignment">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                    <value xsi:type="kermeta_language_behavior:IntegerLiteral"/>
+                  </statement>
+                </elseBody>
+                <condition xsi:type="kermeta_language_behavior:CallFeature" name="isGreater">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="left"/>
+                </condition>
               </statement>
             </thenBody>
-            <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block"/>
-            </elseBody>
+            <elseBody xsi:type="kermeta_language_behavior:Block"/>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:StringLiteral" value=">"/>
               <target xsi:type="kermeta_language_behavior:CallFeature" name="operator">
@@ -1324,9 +1134,7 @@
         </ownedParameter>
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
             <value xsi:type="kermeta_language_behavior:CallFeature" name="value">
               <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
             </value>
@@ -1352,9 +1160,7 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="push">
             <parameters xsi:type="kermeta_language_behavior:CallVariable" name="frame"/>
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="stack">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="stack"/>
           </statement>
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
             <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
@@ -1379,50 +1185,44 @@
               </type>
             </initialization>
             <body xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
-                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="elementAt">
+                  <parameters xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                  <target xsi:type="kermeta_language_behavior:CallFeature" name="actualArgs">
+                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                  </target>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="put">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
                   <target xsi:type="kermeta_language_behavior:CallFeature" name="elementAt">
                     <parameters xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
-                    <target xsi:type="kermeta_language_behavior:CallFeature" name="actualArgs">
-                      <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="args">
+                      <target xsi:type="kermeta_language_behavior:CallFeature" name="declaration">
+                        <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                      </target>
                     </target>
                   </target>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="put">
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
-                    <target xsi:type="kermeta_language_behavior:CallFeature" name="elementAt">
-                      <parameters xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
-                      <target xsi:type="kermeta_language_behavior:CallFeature" name="args">
-                        <target xsi:type="kermeta_language_behavior:CallFeature" name="declaration">
-                          <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
-                        </target>
-                      </target>
-                    </target>
+                </parameters>
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="frame"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
+                <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
+                    <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
                   </parameters>
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                    <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" name="frame"/>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="writeln">
-                  <parameters xsi:type="kermeta_language_behavior:CallFeature" name="plus">
-                    <parameters xsi:type="kermeta_language_behavior:CallFeature" name="toString">
-                      <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                        <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                      </target>
-                    </parameters>
-                    <target xsi:type="kermeta_language_behavior:StringLiteral" value="accumulator="/>
-                  </parameters>
-                  <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment">
+                  <target xsi:type="kermeta_language_behavior:StringLiteral" value="accumulator="/>
+                </parameters>
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="stdio"/>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" name="plus">
-                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
-                  </value>
-                </statement>
+                </value>
               </statement>
             </body>
             <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="isGreaterOrEqual">
@@ -1443,9 +1243,7 @@
             </target>
           </statement>
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="pop">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="stack">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="stack"/>
           </statement>
         </body>
       </ownedOperation>
@@ -1464,11 +1262,9 @@
             <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
               <parameters name="i"/>
               <body xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Block">
-                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
-                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
-                  </statement>
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
                 </statement>
               </body>
             </parameters>
@@ -1491,30 +1287,24 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Conditional">
             <thenBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
-                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="thenPart">
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
-                  </target>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="thenPart">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                </target>
               </statement>
             </thenBody>
             <elseBody xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
-                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="elsePart">
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
-                  </target>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="elsePart">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                </target>
               </statement>
             </elseBody>
             <condition xsi:type="kermeta_language_behavior:CallFeature" name="isNotEqual">
               <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
             </condition>
           </statement>
         </body>
@@ -1532,9 +1322,7 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Loop">
             <initialization xsi:type="kermeta_language_behavior:VariableDecl" identifier="i">
-              <initialization xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </initialization>
+              <initialization xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
               <type type="//@nestedPackage.2/@ownedTypeDefinition.1/@ownedOperation.14/@body/@statement.1/@initialization/@type/@containedType.0" isOrdered="true" upper="1">
                 <containedType xsi:type="kermeta_language_structure:Class">
                   <typeDefinition xsi:type="kermeta_language_structure:ClassDefinition" href="platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km#/0/@nestedPackage.0/@ownedTypeDefinition.6"/>
@@ -1542,20 +1330,18 @@
               </type>
             </initialization>
             <body xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
-                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
-                  </target>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:Assignment">
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:Assignment">
+                <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
+                <value xsi:type="kermeta_language_behavior:CallFeature" name="minus">
+                  <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
                   <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
-                  <value xsi:type="kermeta_language_behavior:CallFeature" name="minus">
-                    <parameters xsi:type="kermeta_language_behavior:IntegerLiteral" value="1"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
-                  </value>
-                </statement>
+                </value>
               </statement>
             </body>
             <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="isLower">
@@ -1578,26 +1364,22 @@
               </target>
             </initialization>
             <body xsi:type="kermeta_language_behavior:Block">
-              <statement xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
-                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
-                  </target>
-                </statement>
-                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
-                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
-                  <target xsi:type="kermeta_language_behavior:CallFeature" name="condition">
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
-                  </target>
-                </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="block">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                </target>
+              </statement>
+              <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="condition">
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
+                </target>
               </statement>
             </body>
             <stopCondition xsi:type="kermeta_language_behavior:CallFeature" name="equals">
               <parameters xsi:type="kermeta_language_behavior:IntegerLiteral"/>
-              <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-                <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-              </target>
+              <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
             </stopCondition>
           </statement>
         </body>
@@ -1608,17 +1390,13 @@
         </ownedParameter>
         <body xsi:type="kermeta_language_behavior:Block">
           <statement xsi:type="kermeta_language_behavior:Assignment">
-            <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </target>
+            <target xsi:type="kermeta_language_behavior:CallFeature" name="accumulator"/>
             <value xsi:type="kermeta_language_behavior:CallFeature" name="getValue">
               <parameters xsi:type="kermeta_language_behavior:CallFeature" name="name">
                 <target xsi:type="kermeta_language_behavior:CallVariable" name="node"/>
               </parameters>
               <target xsi:type="kermeta_language_behavior:CallFeature" name="first">
-                <target xsi:type="kermeta_language_behavior:CallFeature" name="stack">
-                  <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-                </target>
+                <target xsi:type="kermeta_language_behavior:CallFeature" name="stack"/>
               </target>
             </value>
           </statement>
@@ -1783,11 +1561,9 @@
             <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
               <parameters name="e"/>
               <body xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Block">
-                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
-                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="e"/>
-                  </statement>
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="e"/>
                 </statement>
               </body>
             </parameters>
@@ -1822,11 +1598,9 @@
             <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
               <parameters name="arg"/>
               <body xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Block">
-                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
-                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="arg"/>
-                  </statement>
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="arg"/>
                 </statement>
               </body>
             </parameters>
@@ -1859,11 +1633,9 @@
             <parameters xsi:type="kermeta_language_behavior:LambdaExpression">
               <parameters name="i"/>
               <body xsi:type="kermeta_language_behavior:Block">
-                <statement xsi:type="kermeta_language_behavior:Block">
-                  <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
-                    <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
-                    <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
-                  </statement>
+                <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
+                  <parameters xsi:type="kermeta_language_behavior:SelfExpression"/>
+                  <target xsi:type="kermeta_language_behavior:CallVariable" name="i"/>
                 </statement>
               </body>
             </parameters>
@@ -2456,9 +2228,7 @@
           </statement>
           <statement xsi:type="kermeta_language_behavior:Assignment">
             <target xsi:type="kermeta_language_behavior:CallVariable" name="root"/>
-            <value xsi:type="kermeta_language_behavior:CallFeature" name="square">
-              <target xsi:type="kermeta_language_behavior:SelfExpression"/>
-            </value>
+            <value xsi:type="kermeta_language_behavior:CallFeature" name="square"/>
           </statement>
           <statement xsi:type="kermeta_language_behavior:CallFeature" name="traverse">
             <parameters xsi:type="kermeta_language_behavior:CallVariable" name="pp"/>
