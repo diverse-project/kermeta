@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.2 2006-06-09 08:55:14 vmahe Exp $
+$Id: README.txt,v 1.3 2006-07-25 15:30:47 vmahe Exp $
 
 Description :
 -------------
@@ -18,7 +18,7 @@ Models that rely on this project:
  diagrams have been included in the model by hand, in
  Eclipse IDE.
  
-1) xmi model :
+1) zu model :
  This model is an draft of the states charts and instances
  diagrams, for illustration purposes, designed within Poseidon
  UML2 tool.
