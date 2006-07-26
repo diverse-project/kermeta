@@ -52,7 +52,7 @@
          <perspective
                class="fr.irisa.triskell.kermeta.runner.perspective.KermetaPerspective"
                icon="icons/kermeta_logo.gif"
-               name="Kermeta Perspective"
+               name="Kermeta Metamodeling"
                id="kermetaPerspective"/>
       </extension>
       <extension
