@@ -1,4 +1,4 @@
-<!-- $Id: test_build.xml,v 1.10 2006-07-25 14:37:43 dvojtise Exp $ -->
+<!-- $Id: test_build.xml,v 1.11 2006-07-26 12:09:49 dvojtise Exp $ -->
 <project name="run interpreter tests" default="all" basedir=".">
 	
 	<description>
@@ -158,6 +158,9 @@
 
 		  <test name="kermeta_interpreter.test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-interpreter-result">
 		    <formatter type="xml"/>
+		  </test>
+		  <test name="kermeta_interpreter.emf_test.JunitTestSuite" haltonfailure="no" todir="${report.dir}" outfile="TEST-emf-result">
+			<formatter type="xml"/>
 		  </test>
 		  <!--<batchtest todir="${reports.xml.dir}" unless="testcase">
 			<fileset dir="${src}">
