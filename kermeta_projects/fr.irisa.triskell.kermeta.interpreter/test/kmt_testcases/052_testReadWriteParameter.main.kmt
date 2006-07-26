@@ -1,0 +1,197 @@
+/* $Id: 052_testReadWriteParameter.main.kmt,v 1.1 2006-07-26 15:17:01 dvojtise Exp $
+ * Creation date: July 25, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ * This test suite checks how the parameter behaves. Typically checking if the original value changed or not
+ * this is important due to the behavior of the assignment
+ */
+@mainClass "readWriteParameterTests::Main"
+@mainOperation "main"
+
+
+package readWriteParameterTests;
+
+
+require kermeta
+using kermeta::standard
+
+class Main inherits kermeta::kunit::Test
+{
+    operation main() : Void is do 
+        // TODO: implement 'main' operation
+    end
+    
+    /** checks that the original bool is not changed */
+    operation testBoolParameter() : Void is do	
+		var bool : kermeta::standard::Boolean init true
+		assert(bool)
+		subtestBoolParameter(bool)
+		assert( bool)
+		
+	end
+	
+	operation subtestBoolParameter(bool : kermeta::standard::Boolean) : Void is do	
+		bool := not bool
+		
+	end
+	
+	/** checks that the original Integer is not changed */    
+	operation testIntegerParameter() : Void is do	
+		var int : kermeta::standard::Integer init 1
+		assert(int==1)
+		subtestIntegerParameter(int)
+		assert( int == 1)
+		
+	end
+	operation subtestIntegerParameter(int : kermeta::standard::Integer) : Void is do	
+		int := int +1
+		assert(int == 2)
+	end
+	
+	/** checks that the original String is not changed 
+	 */    
+	operation testStringParameter() : Void is do	
+		var s : kermeta::standard::String init "hello"
+		assert(s=="hello")
+		subtestStringParameter(s)
+		assert( s == "hello")
+		
+	end
+	operation subtestStringParameter(s : kermeta::standard::String) : Void is do	
+		s := s + " world"
+		assert(s == "hello world")
+	end
+	
+	/** checks that the original String is changed 
+	 *  if we use the method append on the parameter
+	 */    
+	operation testStringAppendParameter() : Void is do	
+		var s : kermeta::standard::String init "hello"
+		assert(s=="hello")
+		subtestStringAppendParameter(s)
+		assert( s == "hello world")
+		
+	end
+	operation subtestStringAppendParameter(s : kermeta::standard::String) : Void is do	
+		s.append(" world")
+		assert(s == "hello world")
+	end
+
+	operation testEnumParameter() : Void is do	
+		// TODO idem with enum	
+		var c : Couleur init Couleur.rouge
+		subtestEnumParameter(c)
+		assert(c == Couleur.rouge)
+	end
+	operation subtestEnumParameter(c : Couleur) : Void is do	
+		c := Couleur.vert
+		assert(c == Couleur.vert)
+	end
+	
+	/** the content of the class is effectively changed */
+	operation testUserClassParameter() : Void is do	
+		var a : A init A.new
+		a.name := "hello"
+		subtestUserClassParameter(a)
+		assert( a.name == "hello world")
+	end
+	
+	operation subtestUserClassParameter(a : A) : Void is do	
+		a.name := "hello world"		
+	end
+	
+	// TODO test with one value passed 2 times into 2 parameter
+		// Boolean, Integer, String, Enum, user class
+	operation test2BoolParameters() : Void is do	
+		// TODO idem with 2 enum	
+		var bool : kermeta::standard::Boolean init true
+		assert(bool)
+		subtest2BoolParameter(bool, bool)
+		assert( bool)
+	end	
+	// bool1 and bool2 must be true
+	operation subtest2BoolParameter(bool1 : kermeta::standard::Boolean, bool2 : kermeta::standard::Boolean) : Void is do	
+		bool1 := not bool1
+		assert(not bool1)
+		bool2 := not bool2
+		assert(not bool2) // bool2 is a copy
+		
+	end
+	
+	operation test2IntegerParameters() : Void is do	
+		// TODO idem with 2 integer	
+		var int : kermeta::standard::Integer init 1
+		assert(int==1)
+		subtest2IntegerParameter(int, int)
+		assert( int == 1)
+		
+	end
+	operation subtest2IntegerParameter(int1 : kermeta::standard::Integer, int2 : kermeta::standard::Integer) : Void is do	
+		int1 := int1 +1	
+		assert(int1 == 2)
+			
+		assert(int2 == 1)
+		int2 := int2 +1		
+		assert(int1 == 2)	
+		assert(int2 == 2)
+	end	
+	operation test2StringParameters() : Void is do	
+		var s : kermeta::standard::String init "hello"
+		assert(s=="hello")
+		subtest2StringParameter(s,s)
+		assert( s == "hello")
+		
+	end
+	operation subtest2StringParameter(s1 : kermeta::standard::String, s2 : kermeta::standard::String) : Void is do	
+		s1 := s1 + " world"
+		assert(s1 == "hello world")
+		assert(s2 == "hello")
+		s2 := s2 + " world"	// original s2 was not modified by the assignment of s1 (copy)
+		assertTrueWithMsg(s2 == "hello world",s2) 
+	end
+	
+	/** checks that the original String is changed 
+	 *  if we use the method append on the parameter
+	 */    
+	operation test2StringAppendParameter() : Void is do	
+		var s : kermeta::standard::String init "hello"
+		assert(s=="hello")
+		subtest2StringAppendParameter(s,s)
+		assert( s == "hello world world")
+		
+	end
+	operation subtest2StringAppendParameter(s1 : kermeta::standard::String, s2 : kermeta::standard::String) : Void is do	
+		s1.append(" world")
+		assert(s1 == "hello world")		
+		s2.append(" world")
+		assert(s2 == "hello world world")
+	end
+	
+	operation test2EnumParameter() : Void is do	
+		// TODO idem with enum	
+		var c : Couleur init Couleur.rouge
+		raise "test temporarily disabled due to bug #108"
+		//subtest2EnumParameter(c,c)
+		assert(c == Couleur.rouge)
+	end
+	operation subtest2EnumParameter(c1 : Couleur, c2 : Couleur) : Void is do	
+		c1 := Couleur.vert
+		assert(c1 == Couleur.vert)
+		c2 := Couleur.bleu
+		assert(c2 == Couleur.vert)
+		assert(c1 == Couleur.vert)
+	end
+	
+}
+
+enumeration Couleur {
+	jaune;
+	bleu;
+	vert;
+	rouge;
+}
+
+class A {
+	attribute name : String
+}

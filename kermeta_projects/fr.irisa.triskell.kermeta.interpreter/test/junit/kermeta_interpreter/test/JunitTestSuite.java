@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.24 2006-07-26 12:10:47 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.25 2006-07-26 15:17:01 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -114,10 +114,6 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","026_testMetaClass.main.kmt" );
 
-		testWithFile("test/kmt_testcases","027_testRuntimeModelImport.main.kmt" );
-
-		testWithFile("test/kmt_testcases","028_testLoadEcoreFile.main.kmt" );
-
 		testWithFile("test/kmt_testcases","029_testClone1.main.kmt" );
 
 		testWithFile("test/kmt_testcases","029_testClone2.main.kmt" );
@@ -152,21 +148,11 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","043_testUML2km.main.kmt" );
 
-		testWithFile("test/kmt_testcases","044_testFrameworkModelConformance.main.kmt" );
-
 		testWithFile("test/kmt_testcases","046_testClassEquals.main.kmt" );
-
-		testWithFile("test/kmt_testcases","047_testLoadEcoreSplittedModel.main.kmt" );
-
-		testWithFile("test/kmt_testcases","048_testLoadEcoreSplittedModel_withCyclicref.main.kmt" );
-
-		testWithFile("test/kmt_testcases","049_testSplittedMetaModel.main.kmt" );
-
-		testWithFile("test/kmt_testcases","050_testChunkedModel.main.kmt" );
 
 		testWithFile("test/kmt_testcases","051_scopeVisibility.main.kmt" );
 
-		testWithFile("test/kmt_testcases","new_file_Vincent_bug931.main.kmt" );
+		testWithFile("test/kmt_testcases","052_testReadWriteParameter.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
