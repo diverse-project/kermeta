@@ -1,6 +1,6 @@
 package testExternPackage;
 
-require "6_testExternPackageCall2.kmt"
+require "006_testExternPackageCall2.kmt"
 
 alias Integer : kermeta::standard::Integer;
 //alias Test_opcall2 : testExternPackage2::Test_opcall;
