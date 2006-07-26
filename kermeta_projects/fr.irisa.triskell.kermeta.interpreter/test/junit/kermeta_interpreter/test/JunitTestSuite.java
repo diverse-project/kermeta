@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.23 2006-06-21 17:00:11 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.24 2006-07-26 12:10:47 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -164,6 +164,9 @@ public class JunitTestSuite extends TestSuite {
 
 		testWithFile("test/kmt_testcases","050_testChunkedModel.main.kmt" );
 
+		testWithFile("test/kmt_testcases","051_scopeVisibility.main.kmt" );
+
+		testWithFile("test/kmt_testcases","new_file_Vincent_bug931.main.kmt" );
 
 /*** END GENERATED TESTS ***/
 		// do not modify this comment
@@ -180,7 +183,8 @@ public class JunitTestSuite extends TestSuite {
 	}
 	
 	public void testWithFile(String dir, String file)  {
-	    addTest(runfactory.addTestsForUnit(dir+"/"+file));
+	    //addTest(runfactory.addTestsForUnit(dir+"/"+file));
+		addTest(new RunJunitFactory().addTestsForUnit(dir+"/"+file));
 	}
 	
 	public static void main(String[] args) {
