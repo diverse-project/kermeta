@@ -2,9 +2,12 @@
 #
 #"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.1.1/eclipse/plugins/fr.irisa.triskell.kermeta_0.1.1/"
 
+#"platform:/plugin/fr.irisa.triskell.kermeta/"		"file:/C:/eclipse3.1.1/eclipse/workspace_integration/fr.irisa.triskell.kermeta/"
+#"platform:/resource/"								"file:/C:/eclipse3.1.1/eclipse/workspace_integration/"
+
 # This is the values that are correct for daily build
 # You probably have to change it to match your configuration
 # but, please do not commit them it into the CVS
 "platform:/plugin/fr.irisa.triskell.kermeta/"		"file://tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta/"
-"platform:/resource/fr.irisa.triskell.kermeta/"		"file://tmp/kermeta_build/kermeta_projects/fr.irisa.triskell.kermeta/"
+"platform:/resource/"		"file://tmp/kermeta_build/kermeta_projects/"
 
