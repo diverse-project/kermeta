@@ -1,0 +1,51 @@
+/* $Id: 053_savingKM.main.kmt,v 1.1 2006-07-26 12:11:58 dvojtise Exp $
+ * Creation date: June 14, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ *		vmahe
+ *		dvojtise
+ * This test is related to bug931
+ */
+@mainClass "savingKM::Main"
+@mainOperation "testmain"
+
+
+package savingKM;
+
+
+require kermeta
+
+using kermeta::interpreter
+using kermeta::standard
+using kermeta::persistence
+
+class Main inherits kermeta::kunit::Test
+{
+    operation testmain() : Void is do 
+        // prog expressing the KM saving bug
+        var ope : kermeta::language::structure::Operation init kermeta::language::structure::Operation.new
+        ope.type := String		// needed to make the program fail
+        var cl : kermeta::language::structure::ClassDefinition init kermeta::language::structure::ClassDefinition.new
+        var pack : kermeta::language::structure::Package init kermeta::language::structure::Package.new
+        cl.ownedOperation.add(ope)
+        pack.ownedTypeDefinition.add(cl)
+        
+		var resRepository : EMFRepository init EMFRepository.new
+		
+		/*stdio.writeln("Loading framework.km")
+		var resResource2 : kermeta::persistence::EMFResource
+		resResource2 ?= resRepository.createResource("platform:/resource/fr.irisa.triskell.kermeta/lib/framework.km", "platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+		resResource2.load
+		*/
+		stdio.writeln("Creating pb_EnregKM.km")
+		var resResource : kermeta::persistence::EMFResource
+		resResource ?= resRepository.createResource("pb_EnregKM.km", "platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore")
+		resResource.instances.add(pack)
+
+		stdio.writeln("Saving pb_EnregKM.km")		
+		resResource.save
+        
+        stdio.writeln("program fails to fail !!")
+    end
+}
