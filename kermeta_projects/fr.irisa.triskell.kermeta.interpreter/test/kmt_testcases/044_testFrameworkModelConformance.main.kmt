@@ -1,4 +1,4 @@
-/* $Id: 044_testFrameworkModelConformance.main.kmt,v 1.2 2006-04-06 16:04:31 dvojtise Exp $
+/* $Id: 044_testFrameworkModelConformance.main.kmt,v 1.3 2006-07-26 07:27:16 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.interpreter
  * File      : 044_testFrameworkModelConformance.kmt
  * License   : EPL
@@ -50,6 +50,8 @@ class Main inherits kermeta::kunit::Test
      * Verify that the Package tree are equivalent
      */
     operation checkPackage(ePackage : EPackage, kPackage : Package)  is do 
+        assertTrueWithMsg( not ePackage.isVoid, "Strange... tried to check a void ePackage")
+        assertTrueWithMsg( not ePackage.name.equals(""), "Strange... tried to check a ePackage without name")
     	assertTrueWithMsg( not kPackage.isVoid, 
     		"assert failed: the EPackage " + ePackage.name + " has no equivalent in the framework")	// the given 
   		assertTrueWithMsg(ePackage.name.equals(kPackage.name), 
@@ -63,13 +65,16 @@ class Main inherits kermeta::kunit::Test
 			checkPackage(eSubPackage, theKSubPackage)			
   		}
   		// print known type in the framework
-  		stdio.writeln("  Known classes:")
+  		stdio.writeln("  Known classes of " + ePackage.name)
   		kPackage.ownedTypeDefinition.each{ c | stdio.writeln("    " + c.name) }
-			
+		
+		var i : Integer init 0	
   		ePackage.eClassifiers.each{ eClassifer | 
   			var thekTypeDefinition : TypeDefinition
+  			stdio.writeln("   Debug"+i.toString+" : Package="+ePackage.name+"; "+ eClassifer.toString) 
 			thekTypeDefinition ?= kPackage.ownedTypeDefinition.detect{kTypeDefinition | kTypeDefinition.name.equals(eClassifer.name)}
-			checkClassifier(eClassifer, thekTypeDefinition)			
+			checkClassifier(eClassifer, thekTypeDefinition)	
+			i := i +1		
   		}
     end
     
@@ -104,7 +109,7 @@ class Main inherits kermeta::kunit::Test
   		stdio.writeln("  EClass " + eClass.name + " retreived")
   		
   		// print known type in the framework
-  		stdio.writeln("  Known properies:")
+  		stdio.writeln("  Known properties:")
   		kClass.allOwnedAttribute.each{ c | stdio.writeln("     " + kClass.name+ "." + c.name) }
   		eClass.eStructuralFeatures.each{ eFeature | 
   			var thekProperty : Property
@@ -159,6 +164,7 @@ class Main inherits kermeta::kunit::Test
     operation loadClassModel() : Set<EPackage> is do             
    		var repository : EMFRepository init EMFRepository.new             
    		var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore","../test/kmt_testcases/input_test_models/Ecore.ecore")
+   		//var resource : Resource init repository.createResource("platform:/resource/fr.irisa.triskell.kermeta/lib/kermeta_java.ecore","../../test/kmt_testcases/input_test_models/Ecore.ecore")
    		resource.load()      
        
        	result := Set<EPackage>.new
