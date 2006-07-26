@@ -15,7 +15,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-//import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
@@ -140,7 +140,7 @@ public abstract class AbstractExampleWizard extends Wizard
 		String zipLocation = descriptor.getZipLocation();
 		String projectName = descriptor.getProjectName();
 		
-		URL interpreterZipUrl = Platform.find(Platform.getBundle(bundleName), new Path(zipLocation), null);
+		URL interpreterZipUrl = FileLocator.find(Platform.getBundle(bundleName), new Path(zipLocation), null);
 		
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
 		
