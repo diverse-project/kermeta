@@ -62,13 +62,13 @@ public class TransitionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTargetPropertyDescriptor(object);
+			addTargetPropertyDescriptor(object);			
 			addInputPropertyDescriptor(object);
 			addOutputPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
-
+	
 	/**
 	 * This adds a property descriptor for the Target feature.
 	 * <!-- begin-user-doc -->

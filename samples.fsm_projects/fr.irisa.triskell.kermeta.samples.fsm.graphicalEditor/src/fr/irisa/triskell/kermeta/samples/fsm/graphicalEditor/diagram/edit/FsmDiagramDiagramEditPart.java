@@ -23,16 +23,14 @@ import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.policies.Fs
 
 /**
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class FsmDiagramDiagramEditPart extends DiagramEditPart {
 
 	/**
-	 * The Constructor <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param model
-	 *            the root model element
+	 * The Constructor
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param model the root model element
 	 * @generated
 	 */
 	public FsmDiagramDiagramEditPart(Diagram model) {
@@ -41,7 +39,6 @@ public class FsmDiagramDiagramEditPart extends DiagramEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.edit.DiagramEditPart#getLayoutEditPolicy()
 	 * @generated
 	 */
@@ -51,7 +48,6 @@ public class FsmDiagramDiagramEditPart extends DiagramEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.edit.DiagramEditPart#createBodyFigure()
 	 * @generated
 	 */

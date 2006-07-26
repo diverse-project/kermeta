@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="fr.irisa.triskell.kermeta.samples.category"
+            name="Kermeta samples"
+            parentCategory="org.eclipse.ui.Examples"/>
+      <wizard
+            canFinishEarly="true"
+            category="org.eclipse.ui.Examples/fr.irisa.triskell.kermeta.samples.category"
+            class="fr.irisa.triskell.kermeta.samples.fsm.wizards.FsmSampleExampleWizard"
+            finalPerspective="kermetaPerspective"
+            hasPages="false"
+            icon="icons/newkermetafile.png"
+            id="fr.irisa.triskell.kermeta.samples.fsm.wizard"
+            name="FSM Demo"
+            preferredPerspectives="org.eclipse.ui.resourcePerspective"/>
+   </extension>
+
+</plugin>

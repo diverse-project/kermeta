@@ -16,16 +16,16 @@ import org.eclipse.draw2d.Graphics;
 
 /**
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class StateFigure extends org.topcased.draw2d.figures.StateFigure {
 	/**
-	 * Constructor <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Constructor
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public StateFigure() {
+
 		super();
 	}
 

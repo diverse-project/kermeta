@@ -27,16 +27,15 @@ import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.commands.FS
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.FSMFigure;
 
 /**
- * The FSM object controller <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * The FSM object controller
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class FSMEditPart extends EMFGraphNodeEditPart {
 	/**
-	 * Constructor <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param obj
-	 *            the graph node
+	 * Constructor
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param obj the graph node
 	 * @generated
 	 */
 	public FSMEditPart(GraphNode obj) {
@@ -44,9 +43,9 @@ public class FSMEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * Creates edit policies and associates these with roles <!-- begin-user-doc
+	 * Creates edit policies and associates these with roles
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void createEditPolicies() {
@@ -69,7 +68,6 @@ public class FSMEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 * @generated
 	 */
@@ -80,7 +78,6 @@ public class FSMEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getMinimumWidth()
 	 * @generated
 	 */
@@ -90,12 +87,10 @@ public class FSMEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getMinimumHeight()
 	 * @generated
 	 */
 	public int getMinimumHeight() {
 		return 200;
 	}
-
 }

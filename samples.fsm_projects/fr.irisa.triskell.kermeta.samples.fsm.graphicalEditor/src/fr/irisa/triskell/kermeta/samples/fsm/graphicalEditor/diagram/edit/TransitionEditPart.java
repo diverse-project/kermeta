@@ -33,16 +33,14 @@ import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.Tra
 /**
  * Transition controller <br>
  * <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class TransitionEditPart extends EMFGraphEdgeEditPart {
 
 	/**
-	 * Constructor <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param model
-	 *            the graph object
+	 * Constructor
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param model the graph object
 	 * @generated
 	 */
 	public TransitionEditPart(GraphEdge model) {
@@ -65,7 +63,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @return the Figure
 	 * @generated
 	 */
@@ -79,22 +76,18 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param connection
-	 *            the PolylineConnection
+	 * @param connection the PolylineConnection
 	 * @generated
 	 */
 	private void createSourceDecoration(PolylineConnection connection) {
 
-		// no decoration
+		// no decoration                
 
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param connection
-	 *            the PolylineConnection
+	 * @param connection the PolylineConnection
 	 * @generated
 	 */
 	private void createTargetDecoration(PolylineConnection connection) {
@@ -107,7 +100,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getEdgeObjectFigure(org.topcased.modeler.di.model.EdgeObject)
 	 * @generated
 	 */
@@ -121,7 +113,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getDefaultRouter(org.eclipse.gmf.runtime.draw2d.ui.internal.figures.ConnectionLayerEx)
 	 * @generated
 	 */
@@ -131,7 +122,6 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#refreshEdgeObjects()
 	 * @generated
 	 */

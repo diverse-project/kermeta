@@ -27,20 +27,18 @@ import org.topcased.modeler.requests.RestoreConnectionsRequest;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmEditorEditPolicyConstants;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.commands.StateRestoreConnectionCommand;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.StateFigure;
-//import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.FinalStateFigure;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.policies.TransitionEdgeCreationEditPolicy;
 
 /**
- * The State object controller <!-- begin-user-doc --> <!-- end-user-doc -->
- * 
+ * The State object controller
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
  * @generated
  */
 public class StateEditPart extends EMFGraphNodeEditPart {
 	/**
-	 * Constructor <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param obj
-	 *            the graph node
+	 * Constructor
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @param obj the graph node
 	 * @generated
 	 */
 	public StateEditPart(GraphNode obj) {
@@ -48,9 +46,9 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * Creates edit policies and associates these with roles <!-- begin-user-doc
+	 * Creates edit policies and associates these with roles
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void createEditPolicies() {
@@ -76,24 +74,16 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 * @generated
 	 */
 	protected IFigure createFigure() {
-		/*IFigure aIfig;
-		if (isFinal()) {
-			aIfig = new FinalStateFigure();
-		} else {
-			aIfig = new StateFigure();
-		}
-		return aIfig;*/
+
 		return new StateFigure();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultWidth()
 	 * @generated
 	 */
@@ -103,7 +93,6 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultHeight()
 	 * @generated
 	 */
