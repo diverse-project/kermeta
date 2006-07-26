@@ -6,13 +6,12 @@
 		and we get a in the PDE error log : java.lang.NoClassDefFoundError: fr/irisa/triskell/kermeta/graphicaleditor/diagram/policies/extension/ExtendedPropertyEdgeCreationEditPolicy
 	-->
 	<target name="gather.bin.parts" >
-		<!--<mkdir dir="mytemp/demo"/>
-		<copy todir="mytemp/demo" failonerror="true" overwrite="true">
-			<fileset dir="." includes="**"/>
-		</copy>-->
-		<mkdir dir="../../fsmWorkspace/fr.irisa.triskell.kermeta.samples.fsm/zips"/>
-		<zip destfile="../../fsmWorkspace/fr.irisa.triskell.kermeta.samples.fsm/zips/fr.irisa.triskell.kermeta.samples.fsm.demo.zip" basedir="." includes="**" excludes="*zip_build.xml" filesonly="false" whenempty="skip" update="false"/>
-		<!--<delete dir="mytemp"/>-->
+		<mkdir dir="mytemp"/>
+		<copy todir="mytemp" failonerror="true" overwrite="true">
+			<fileset dir="." includes="**" excludes="*zip_build.xml,*mytemp"/>
+		</copy>
+		<zip destfile="fr.irisa.triskell.kermeta.samples.fsm.demo.zip" basedir="mytemp" includes="**" filesonly="false" whenempty="skip" update="false"/>
+		<delete dir="mytemp"/>
 	</target>
 
 </project>
