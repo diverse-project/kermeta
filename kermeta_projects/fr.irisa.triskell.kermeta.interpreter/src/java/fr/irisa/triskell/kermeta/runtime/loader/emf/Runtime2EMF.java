@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.39 2006-07-27 07:51:09 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.40 2006-07-27 09:21:39 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -291,6 +291,8 @@ public class Runtime2EMF {
 						}
 						else // EObject, EClass, EDataType
 						{
+							System.err.println("FEATURE : " + feature);
+							System.err.println("PROPERTY : " + property_eObject);
 							eObject.eSet(feature, property_eObject);
 						}
 					}
