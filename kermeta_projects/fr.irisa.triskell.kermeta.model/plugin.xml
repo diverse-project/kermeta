@@ -6,7 +6,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: plugin.xml,v 1.4 2006-01-26 16:30:03 zdrey Exp $
+ * $Id: plugin.xml,v 1.5 2006-07-27 11:10:23 dtouzet Exp $
  */
 -->
 
@@ -21,7 +21,6 @@
     <import plugin="org.eclipse.emf.ecore" export="true"/>
     <import plugin="org.eclipse.emf.ecore.xmi"/>
     <import plugin="org.eclipse.emf.common.ui"/>
-    <import plugin="org.eclipse.emf.doc"/>
   </requires>
 
   <runtime>
