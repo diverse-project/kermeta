@@ -5,6 +5,7 @@
 package test_package;
 
 require kermeta
+
 require "701test_CloneTool_Package.kmt"
 require "702test_CloneTool_Class.kmt"
 require "703test_CloneTool_Operation.kmt"
@@ -21,7 +22,9 @@ class MyTestClass
 {
     operation main() : Void is do 
 	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
-/*		
+		
+		///////// tests on UML2 elements cloning //////////
+		
 		testRunner.run(ToolClonePackageTestCase)
 		testRunner.printTestResult
 		
@@ -42,9 +45,8 @@ class MyTestClass
 		
 		testRunner.run(ToolCloneAssociationTestCase)
 		testRunner.printTestResult
-	*/	
 		
-		///////// tests on diagram cloning //////////
+		///////// tests on UML2 diagrams cloning //////////
 		
 		testRunner.run(ToolCloneStaticDiagramTestCase)
 		testRunner.printTestResult

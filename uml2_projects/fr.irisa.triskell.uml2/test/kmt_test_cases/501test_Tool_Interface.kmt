@@ -58,6 +58,8 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
 	
     operation testExtractInterfaceTool_HasInterface() is do
     	// first asserts the generalization collection is not empty (uncatched exception)
+    	assertTrueWithMsg(Aclass.generalization != void,
+    		"The given class must have a generalisation")
     	assertTrueWithMsg(Aclass.generalization.size != 0,
     		"The given class must inherit its new interface")
     		
@@ -69,6 +71,7 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
     operation testExtractInterfaceTool_InterfaceHasAttributes() is do
     	assertTrueWithMsg(Aclass.ownedAttribute.size == 0,
     		"The given class must have no attributes")
+    	
     	var interf : Interface
     	interf ?= Aclass.generalization.one.general
     	assertTrueWithMsg(interf.ownedAttribute.size == 1,
@@ -77,6 +80,8 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
 	
     operation testExtractInterfaceTool_InterfaceHasAllOperations() is do
     	// first asserts the generalization collection is not empty (uncatched exception)
+    	assertTrueWithMsg(Aclass.generalization != void,
+    		"The given class must have a generalisation")
     	assertTrueWithMsg(Aclass.generalization.size != 0,
     		"The given class must inherit its new interface")
     		

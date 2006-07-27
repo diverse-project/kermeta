@@ -1,4 +1,4 @@
-/* $Id: UmlCloneFactory.kmt,v 1.3 2006-07-21 14:36:43 vmahe Exp $
+/* $Id: UmlCloneFactory.kmt,v 1.4 2006-07-27 13:34:21 vmahe Exp $
  * Creation date: July 5, 2006
  * License:
  * Copyright:
@@ -68,7 +68,11 @@ class UmlCloneFactory
         affectBehavioredClassifier(element, clone)
         affectEncapsulatedClassifier(element, clone)
         clone.isActive := element.isActive
-        element.ownedOperation.each{ u | clone.ownedOperation.add(cloneOperation(u)) }
+        element.ownedOperation.each{ u |
+        	var opClone : Operation init cloneOperation(u)
+        	ioTable.putValue(u, opClone)
+        	clone.ownedOperation.add(opClone)
+        }
         //nested classifiers will be top/down visited or must be clone through a explicit demand
         //ownedReception : TODO
         result := clone
@@ -84,6 +88,7 @@ class UmlCloneFactory
     	// specific properties
         element.ownedParameter.each{ u |
         	var par : Parameter init cloneParameter(u)
+        	ioTable.putValue(u, par)
         	clone.ownedParameter.add(par)
         	par.~operation := clone
         }
@@ -135,7 +140,6 @@ class UmlCloneFactory
         else if element.aggregation == AggregationKind.shared then
         	clone.aggregation := AggregationKind.shared
         end end end
-    	
     	result := clone
     end
     
@@ -223,8 +227,10 @@ class UmlCloneFactory
     	// specific properties
     	clone.isDerived := element.isDerived
     	//memberEnd		: not cloned (must be linked by user)
-    	element.ownedEnd.each{ e |
-    		clone.ownedEnd.add(cloneProperty(e))
+    	element.ownedEnd.each{ e |	// ends not possessed by a Class
+    		var eClone : Property init cloneProperty(e)
+    		ioTable.putValue(e, eClone)
+    		clone.ownedEnd.add(eClone)
     	}
     	result := clone
     end
@@ -258,22 +264,36 @@ class UmlCloneFactory
     operation cloneGeneralization(element : Generalization) : Generalization is do
     	var clone : Generalization init Generalization.new
     	affectDirectedRelationship(element, clone)
-    	clone.general := element.general
+    	//general			: not cloned (must be linked by user)
     	//generalizationSet	: not cloned (must be linked by user)
     	clone.isSubstitutable := element.isSubstitutable
-    	clone.specific := element.specific
+		//specific			: not cloned (must be linked by user)
+        
+        result := clone
     end
     
     operation cloneInterface(element : Interface) : Interface is do
     	var clone : Interface init Interface.new
     	affectClassifier(element, clone)
         //nestedClassifier	: not cloned (must be linked by user)
-        element.ownedAttribute.each{ u | clone.ownedAttribute.add(cloneProperty(u)) }
-        element.ownedOperation.each{ u | clone.ownedOperation.add(cloneOperation(u)) }
+        element.ownedAttribute.each{ u |
+        	var pClone : Property init cloneProperty(u)
+        	ioTable.putValue(u, pClone)
+        	clone.ownedAttribute.add(pClone)
+        }
+        element.ownedOperation.each{ u |
+        	var opClone : Operation init cloneOperation(u)
+        	ioTable.putValue(u, opClone)
+        	clone.ownedOperation.add(opClone)
+        }
         //ownedReception : TODO
     	//protocolStateMachine : not processed because outside static UML (unlike Interface elements)
     	//         Must be processed by user through the corresponding visitor (in a case of statemachine diagram visit)
-        element.redefinedInterface.each{ u | clone.redefinedInterface.add(cloneInterface(u)) }
+        element.redefinedInterface.each{ u |
+        	var ifClone : Interface init cloneInterface(u)
+        	ioTable.putValue(u, ifClone)
+        	clone.redefinedInterface.add(ifClone)
+        }
     end
     
     ////////////////////// GENERIC AFFECTATIONS FOR ABSTRACT CLASSES ////////////////////////
@@ -325,13 +345,18 @@ class UmlCloneFactory
     	// superclasses
     	affectClassifier(element, clone)
     	// specific properties
-    	element.ownedAttribute.each{ u | clone.ownedAttribute.add(cloneProperty(u)) }
+    	element.ownedAttribute.each{ u |
+    		var pClone : Property init cloneProperty(u)
+    		ioTable.putValue(u, pClone)
+    		clone.ownedAttribute.add(pClone)
+    	}
     end
     
     operation affectElement(element : Element, clone : Element) is do
-    	element.ownedComment.each{ c |
+    		//imply 3 clones of each comment (and the link is manage through Comment.annotatedElement)
+/*    	element.ownedComment.each{ c |
     		clone.ownedComment.add(cloneComment(c))
-    	}
+    	}	*/
     end
     
     operation affectBehavioralFeature(element : BehavioralFeature, clone : BehavioralFeature) is do
@@ -345,12 +370,14 @@ class UmlCloneFactory
     	op ?= clone
         element.formalParameter.each{ u |
         	var par : Parameter init cloneParameter(u)
+        	ioTable.putValue(u, par)
 	        clone.formalParameter.add(par)
         	par.~operation := op
         }
         clone.isAbstract := element.isAbstract
         element.returnResult.each{ u |
         	var par : Parameter init cloneParameter(u)
+        	ioTable.putValue(u, par)
 	        clone.returnResult.add(par)
 //        	par.~operation := op	// FIXME : it destroys the parameter in returnResult
         }
@@ -408,7 +435,15 @@ class UmlCloneFactory
     	// superclasses
     	affectNamedElement(element, clone)
     	// specific properties
-    	clone.type := element.type
+    	var dt : DataType
+    	dt ?= element.type
+    	if dt != void then
+    		var dtClone : DataType init cloneDataType(dt)
+    		ioTable.putValue(dt, dtClone)
+    		clone.type := dtClone
+    	else
+    		clone.type := element.type
+    	end
     end
     
     operation affectRedefinableElement(element : RedefinableElement, clone : RedefinableElement) is do
@@ -423,7 +458,9 @@ class UmlCloneFactory
     	affectNamedElement(element, clone)
     	// specific properties
     	element.elementImport.each{ ei |
-    		clone.elementImport.add(cloneElementImport(ei))
+    		var eiClone : ElementImport init cloneElementImport(ei)
+    		ioTable.putValue(ei, eiClone)
+    		clone.elementImport.add(eiClone)
     	}
     end
     

@@ -1,2 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/1.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/1.0.0/UML ../../../src/ecore/UML2.ecore" xmi:id="_hUVzEBfMEdu36YnHMeVMRA" name="main"/>
+<uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/1.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/1.0.0/UML ../../../src/ecore/UML2.ecore" xmi:id="_HkKywBvAEdud0qtL93MIFw" name="main">
+  <ownedMember xmi:type="uml:Package" xmi:id="_HkLZ0BvAEdud0qtL93MIFw" name="ClassDiagram">
+    <ownedMember xmi:type="uml:Class" xmi:id="_HkMA4BvAEdud0qtL93MIFw" name="AClass" isAbstract="true">
+      <ownedAttribute xmi:id="_HkMA4RvAEdud0qtL93MIFw" name="target" type="_HkMA7BvAEdud0qtL93MIFw" association="_HkMn8BvAEdud0qtL93MIFw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HkMA4hvAEdud0qtL93MIFw" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HkMA4xvAEdud0qtL93MIFw"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_HkMA5BvAEdud0qtL93MIFw" name="aProperty"/>
+      <ownedOperation xmi:id="_HkMA5RvAEdud0qtL93MIFw" name="aOperation" isAbstract="true"/>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Class" xmi:id="_HkMA5hvAEdud0qtL93MIFw" name="BClass">
+      <generalization xmi:id="_HkMA5xvAEdud0qtL93MIFw" general="_HkMA4BvAEdud0qtL93MIFw"/>
+      <ownedAttribute xmi:id="_HkMA6BvAEdud0qtL93MIFw" name="target" type="_HkMn9BvAEdud0qtL93MIFw" association="_HkMn9hvAEdud0qtL93MIFw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HkMA6RvAEdud0qtL93MIFw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HkMA6hvAEdud0qtL93MIFw" value="1"/>
+      </ownedAttribute>
+      <ownedOperation xmi:id="_HkMA6xvAEdud0qtL93MIFw" name="bOperation"/>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Class" xmi:id="_HkMA7BvAEdud0qtL93MIFw" name="CClass">
+      <ownedOperation xmi:id="_HkMA7RvAEdud0qtL93MIFw" name="cOperation">
+        <ownedParameter xmi:id="_HkMA7hvAEdud0qtL93MIFw" name="in"/>
+      </ownedOperation>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Association" xmi:id="_HkMn8BvAEdud0qtL93MIFw" name="cCollection" memberEnd="_HkMA4RvAEdud0qtL93MIFw _HkMn8RvAEdud0qtL93MIFw">
+      <ownedEnd xmi:id="_HkMn8RvAEdud0qtL93MIFw" name="source" type="_HkMA4BvAEdud0qtL93MIFw" association="_HkMn8BvAEdud0qtL93MIFw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HkMn8hvAEdud0qtL93MIFw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HkMn8xvAEdud0qtL93MIFw" value="1"/>
+      </ownedEnd>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Class" xmi:id="_HkMn9BvAEdud0qtL93MIFw" name="DClass">
+      <ownedAttribute xmi:id="_HkMn9RvAEdud0qtL93MIFw" name="dProperty"/>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Association" xmi:id="_HkMn9hvAEdud0qtL93MIFw" name="composition" memberEnd="_HkMA6BvAEdud0qtL93MIFw _HkMn9xvAEdud0qtL93MIFw">
+      <ownedEnd xmi:id="_HkMn9xvAEdud0qtL93MIFw" name="source" type="_HkMA5hvAEdud0qtL93MIFw" association="_HkMn9hvAEdud0qtL93MIFw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HkMn-BvAEdud0qtL93MIFw" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HkMn-RvAEdud0qtL93MIFw" value="1"/>
+      </ownedEnd>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Association" xmi:id="_HkMn-hvAEdud0qtL93MIFw" name="BnG" memberEnd="_HkMn-xvAEdud0qtL93MIFw _HkMn_hvAEdud0qtL93MIFw">
+      <ownedEnd xmi:id="_HkMn-xvAEdud0qtL93MIFw" name="source" type="_HkMA5hvAEdud0qtL93MIFw" association="_HkMn-hvAEdud0qtL93MIFw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HkMn_BvAEdud0qtL93MIFw" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HkMn_RvAEdud0qtL93MIFw"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_HkMn_hvAEdud0qtL93MIFw" name="target" association="_HkMn-hvAEdud0qtL93MIFw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HkMn_xvAEdud0qtL93MIFw" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HkMoABvAEdud0qtL93MIFw"/>
+      </ownedEnd>
+    </ownedMember>
+    <ownedMember xmi:type="uml:Class" xmi:id="_HkMoARvAEdud0qtL93MIFw" name="HClass"/>
+    <ownedMember xmi:type="uml:Association" xmi:id="_HkMoAhvAEdud0qtL93MIFw" name="bNh" memberEnd="_HkMoAxvAEdud0qtL93MIFw _HkMoBhvAEdud0qtL93MIFw">
+      <ownedEnd xmi:id="_HkMoAxvAEdud0qtL93MIFw" name="b" type="_HkMA5hvAEdud0qtL93MIFw" association="_HkMoAhvAEdud0qtL93MIFw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HkMoBBvAEdud0qtL93MIFw" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HkMoBRvAEdud0qtL93MIFw"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_HkMoBhvAEdud0qtL93MIFw" name="h" type="_HkMoARvAEdud0qtL93MIFw" association="_HkMoAhvAEdud0qtL93MIFw">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HkMoBxvAEdud0qtL93MIFw" value="-1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HkMoCBvAEdud0qtL93MIFw"/>
+      </ownedEnd>
+    </ownedMember>
+  </ownedMember>
+</uml:Model>

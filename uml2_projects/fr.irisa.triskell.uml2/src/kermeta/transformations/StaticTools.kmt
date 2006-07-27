@@ -1,4 +1,4 @@
-/* $Id: StaticTools.kmt,v 1.1 2006-07-18 15:10:45 vmahe Exp $
+/* $Id: StaticTools.kmt,v 1.2 2006-07-27 13:34:21 vmahe Exp $
  * Creation date: July 3, 2006
  * License:
  * Copyright:
@@ -19,7 +19,7 @@ class Generalization_Tool
         gene.general := ancestor
         gene.specific := heir
         // NB : Generalization is not a packageableElement
-        // so we can't add it to the heir package
+        // so we don't have to add it to the heir package
     end
 }
 
@@ -46,11 +46,12 @@ class Interface_Tool
         implementation.ownedAttribute.each{ u |
         	ifce.ownedAttribute.add(u)
         }
-        // ... and erase them form concrete class
+        // ... and erase them from concrete class
         implementation.ownedAttribute.clear
         
         // the operations of the concrete class became those of interface
         var factory : UmlCloneFactory init UmlCloneFactory.new
+        factory.initialize
         implementation.ownedOperation.each{ u |
 	    	var op : Operation init Operation.new
 	    	op := factory.cloneOperation(u)
@@ -149,4 +150,92 @@ class Accessor_Tool
     operation nameForInput(name : kermeta::standard::String) : kermeta::standard::String is do
     	result := prefixForInput + name + suffixForInput
     end
+}
+
+/** Class dedicated to add some associations between 2 classes */
+class Association_Tool
+{
+	////////////////// non navigable links ///////////////////
+	
+    operation addSimpleAssociation(firstClass : Class,
+		                           secondClass : Class,
+		                           associationName : kermeta::standard::String,
+		                           firstEndName : kermeta::standard::String,
+		                           secondEndName : kermeta::standard::String) : Association is do 
+        var assoc : Association init Association.new
+        
+        /// TODO
+        
+        result := assoc
+    end
+    operation addSimpleComposition(container : Class,
+		                           component : Class,
+		                           associationName : kermeta::standard::String,
+		                           componentEndName : kermeta::standard::String) : Association is do 
+        var assoc : Association init addSimpleAssociation(container, component, associationName, "", componentEndName)
+        
+        /// TODO
+        
+        result := assoc
+    end
+    operation addSimpleAggregation(container : Class,
+		                           component : Class,
+		                           associationName : kermeta::standard::String,
+		                           componentEndName : kermeta::standard::String) : Association is do 
+        var assoc : Association init addSimpleAssociation(container, component, associationName, "", componentEndName)
+        
+        /// TODO
+        
+        result := assoc
+    end
+    
+	////////////////// one side navigable links ///////////////////
+	
+    operation addOneSideNavigableAssociation(owningClass : Class,
+		                           navigatedClass : Class,
+		                           associationName : kermeta::standard::String,
+		                           ownerEndName : kermeta::standard::String,
+		                           navigableEndName : kermeta::standard::String) : Association is do 
+        var assoc : Association init Association.new
+        assoc.name := associationName
+        
+        // the navigable side of the association is given to the owning class
+        var classEnd : Property init Property.new
+        classEnd.name := navigableEndName
+        classEnd.type := navigatedClass
+        owningClass.ownedAttribute.add(classEnd)
+        
+        // the non navigable side of the association is for the association
+        var assocEnd : Property init Property.new
+        assocEnd.name := ownerEndName
+        assocEnd.type := owningClass
+        assoc.ownedEnd.add(assocEnd)
+        
+        result := assoc
+    end
+    operation addNavigableComposition(container : Class,
+    	                           component : Class,
+		                           associationName : kermeta::standard::String,
+    	                           compositionName : kermeta::standard::String) : Association is do 
+        var assoc : Association init addOneSideNavigableAssociation(container, component, associationName, "", compositionName)
+        
+        // the navigable end of the association must be a composite one
+        container.ownedAttribute.one.aggregation := AggregationKind.composite
+        
+        result := assoc
+    end
+    operation addNavigableAggregation(container : Class,
+    	                           component : Class,
+		                           associationName : kermeta::standard::String,
+    	                           compositionName : kermeta::standard::String) : Association is do 
+        var assoc : Association init addOneSideNavigableAssociation(container, component, associationName, "", compositionName)
+        
+        // the navigable end of the association must be a aggregative one
+        container.ownedAttribute.one.aggregation := AggregationKind.shared
+        
+        result := assoc
+    end
+    
+	////////////////// two side navigable links ///////////////////
+	
 }

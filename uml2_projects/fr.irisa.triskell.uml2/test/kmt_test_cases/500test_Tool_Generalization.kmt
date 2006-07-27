@@ -39,6 +39,8 @@ class ToolGeneralizationTestCase inherits kermeta::kunit::TestCase
     end		*/
     
     operation testGeneralizationTool_Heir() is do
+    	assertTrueWithMsg(Bclass.generalization.size == 1,
+    		"The heir Class must have a generalization")
     	assertTrueWithMsg(Bclass.generalization.one.general == Aclass,
     		"The heir Class must have the right ancestor")
     end

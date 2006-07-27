@@ -10,6 +10,7 @@ require "501test_Tool_Interface.kmt"
 require "502test_Tool_Accessor.kmt"
 require "503test_Tool_Transition.kmt"
 require "504test_Tool_Context4States.kmt"
+require "505test_Tool_Association.kmt"
 
 using tools_tests
 
@@ -31,6 +32,9 @@ class MyTestClass
 		testRunner.printTestResult
 		
 		testRunner.run(ToolContext4StateTestCase)
+		testRunner.printTestResult
+		
+		testRunner.run(ToolAssociationTestCase)
 		testRunner.printTestResult
     end 
 }

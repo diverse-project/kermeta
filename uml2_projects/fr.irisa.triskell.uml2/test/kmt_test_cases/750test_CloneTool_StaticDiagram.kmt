@@ -1,4 +1,4 @@
-/* $Id: 750test_CloneTool_StaticDiagram.kmt,v 1.4 2006-07-21 14:37:37 vmahe Exp $
+/* $Id: 750test_CloneTool_StaticDiagram.kmt,v 1.5 2006-07-27 13:34:21 vmahe Exp $
  * Creation date: July 6, 2006
  * License:
  * Copyright:
@@ -24,16 +24,18 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
 	reference testModel : Model
 	
 	method setUp() is do
+		
+		//DEBUG
+		stdio.writeln("DEBUG ------ setUp() beginning")
+		
 		//creating needed instances
-//		origModelName := "./uml2/ClassDiagram.uml2"
-//		origModelName := "./uml2/ClassDiagram.uml"
-		origModelName := "./uml2/test3.2.uml"
+		origModelName := "./uml2/ClassDiagram.uml2"
+//		origModelName := "./uml2/test3.2.uml"
 		
     	// load the given UML2 resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var inputResource : kermeta::persistence::EMFResource
     	inputResource ?= inputRepository.createResource(origModelName, "../../src/ecore/UML2.ecore")
-//    	inputResource ?= inputRepository.createResource(origModelName, "../../src/ecore/UML.ecore")
     	inputResource.load()
     	
     	// "instances" only gives the main diagramm package for the targeted code tree
@@ -52,6 +54,10 @@ class ToolCloneStaticDiagramTestCase inherits kermeta::kunit::TestCase
     	outputResource ?= outputRepository.createResource(cloneModelName, "../../src/ecore/UML2.ecore")
     	outputResource.instances.add(cloneModel)
     	outputResource.save()
+		
+		//DEBUG
+		stdio.writeln("DEBUG ------ saved")
+		
     	
     	var testRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
     	var testResource : kermeta::persistence::EMFResource
