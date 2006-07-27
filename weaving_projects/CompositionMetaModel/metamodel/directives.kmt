@@ -1,0 +1,116 @@
+package composition;
+
+require kermeta
+require "ecore.kmt"
+
+using kermeta::standard
+using kermeta::utils
+using kermeta::reflection
+using ecore
+
+alias String : kermeta::standard::String;
+alias Boolean : kermeta::standard::Boolean;
+alias Integer : kermeta::standard::Integer;
+
+abstract class ElementDirective inherits CompositionDirective
+{
+	operation execute() : kermeta::standard::~Void is abstract
+}
+abstract class CompositionDirective
+{
+	reference context : Context[1..1]
+}
+class Remove inherits Change
+{
+}
+class Add inherits Change
+{
+}
+class Create inherits ElementDirective
+{
+	attribute className : String
+	attribute identifier : String
+}
+
+class Set inherits Change
+{
+	method execute() is do
+		// resolve the target object
+		var targetObj : EModelElement
+		targetObj ?= target.getElement
+		// find the property
+		var mclass : ClassDefinition
+		mclass ?= targetObj.getMetaClass.typeDefinition
+		// TODO: check that property exists
+		var prop : Property init 
+		  mclass.allOwnedAttribute.select{ p | 
+		    p.name == propertyName 
+		  }.one
+		// TODO: check that property upper is 1
+		// get the value
+		var val : Object init ~value.getElement
+		//TODO: check that the type of the value is correct
+		// set the value
+		targetObj.~set(prop, val)
+	end
+}
+abstract class ElementRef
+{
+	operation getElement() : Object is abstract
+}
+
+class NameRef inherits ElementRef
+{
+	attribute qname : ecore::EString
+}
+class IDRef inherits ElementRef
+{
+	attribute identifier : ecore::EString
+}
+abstract class Change inherits ElementDirective
+{
+
+	operation resolveTarget() : EModelElement is do
+		result ?= target.getElement
+		if result == void then end 
+	end
+
+	attribute propertyName : String
+	reference target : ElementRef[1..1]
+	reference ~value : ElementRef[1..1]
+}
+class Literal inherits ElementRef
+{
+}
+class StringLiteral inherits Literal
+{
+	attribute ~value : String
+}
+class BooleanLiteral inherits Literal
+{
+	attribute ~value : Boolean
+}
+class IntegerLiteral inherits Literal
+{
+	attribute ~value : Integer
+}
+
+class VoidLiteral inherits Literal
+{
+}
+class Context
+{
+	reference model : EPackage
+	reference variables : Hashtable<String, Object>
+}
+
+/* Exception that can be raised when directives are executed */
+class DirectiveRuntimeException {
+	reference directive : CompositionDirective
+}
+
+class TargetNotFoundException inherits DirectiveRuntimeException {
+	property ChangeDirective : Change 
+		getter is do result ?= directive end
+		setter is do directive := value end
+}
