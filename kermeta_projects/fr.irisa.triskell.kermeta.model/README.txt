@@ -1,4 +1,4 @@
-$Id: README.txt,v 1.9 2006-05-04 15:40:07 jmottu Exp $
+$Id: README.txt,v 1.10 2006-07-28 12:20:47 cfaucher Exp $
 
 
 Leaders :
@@ -36,7 +36,8 @@ How to build this project :
 		(the wizard name is EMF modeling framework/EMF models)
 	b) set the 'Model Directory' of  kermeta.genmodel to '/fr.irisa.triskell.kermeta.model/build/java' (in Properties tab)
 	c) set the Kermeta package 'Base Package' to 'fr.irisa.triskell' (in Properties tab)
-	d) 'Generate model code' from  kermeta.genmodel
+	d) set the Kermeta package 'Prefix' to 'Km' (in Properties tab)
+	e) 'Generate model code' from  kermeta.genmodel
 
 3) Check that java source code generated in src/java compiles correctly
 
@@ -48,6 +49,9 @@ How to build this project :
 History :
 ---------
 $Log: not supported by cvs2svn $
+Revision 1.9  2006/05/04 15:40:07  jmottu
+added support for constraints in kermeta
+
 Revision 1.8  2006/03/16 10:38:58  jmottu
 improvement
 
