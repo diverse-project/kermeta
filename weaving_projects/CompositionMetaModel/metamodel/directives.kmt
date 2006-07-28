@@ -22,33 +22,77 @@ abstract class CompositionDirective
 }
 class Remove inherits Change
 {
+	method execute() is do
+		// resolve the target object
+		var targetObj : EModelElement init resolveTarget
+		// find the property
+		var prop : Property init getProperty(targetObj)
+		// get value
+		var val : Object init resolveValue
+		
+		//TODO: check that the type of the value is correct
+		// add the value
+		var c : Collection<kermeta::reflection::Object> 
+		c ?= targetObj.get(prop)
+		c.remove(val)
+	end
 }
 class Add inherits Change
 {
+	method execute() is do
+		// resolve the target object
+		var targetObj : EModelElement init resolveTarget
+		// find the property
+		var prop : Property init getProperty(targetObj)
+		// get value
+		var val : Object init resolveValue
+		
+		//TODO: check that the type of the value is correct
+		// add the value
+		var c : Collection<kermeta::reflection::Object> 
+		c ?= targetObj.get(prop)
+		c.add(val)
+	end
 }
 class Create inherits ElementDirective
 {
 	attribute className : String
 	attribute identifier : String
+	
+	method execute() is do
+		// initialize the class factory
+		var classes : Hashtable<String, Class> init Hashtable<String, Class>.new
+		classes.put("Package", EPackage)
+		classes.put("Class", EClass)
+		classes.put("Attribute", EAttribute)
+		classes.put("Reference", EReference)
+		classes.put("Operation", EOperation)
+		classes.put("Parameter", EParameter)
+		// get the class
+		var cls : Class init classes.getValue(className)
+		// raise an exception if the class was not found
+		if cls == void then 
+			var ex : ClassNotFoundException init ClassNotFoundException.new
+			ex.createDirective := self
+			raise ex
+		end
+		// create the object
+		var obj : Object init cls.new
+		// add the object to the context
+		context.setVariable(identifier, obj)
+	end
 }
 
 class Set inherits Change
 {
 	method execute() is do
 		// resolve the target object
-		var targetObj : EModelElement
-		targetObj ?= target.getElement
+		var targetObj : EModelElement init resolveTarget
 		// find the property
-		var mclass : ClassDefinition
-		mclass ?= targetObj.getMetaClass.typeDefinition
-		// TODO: check that property exists
-		var prop : Property init 
-		  mclass.allOwnedAttribute.select{ p | 
-		    p.name == propertyName 
-		  }.one
-		// TODO: check that property upper is 1
-		// get the value
-		var val : Object init ~value.getElement
+		var prop : Property init getProperty(targetObj)
+		// get value
+		var val : Object init resolveValue
+		
 		//TODO: check that the type of the value is correct
 		// set the value
 		targetObj.~set(prop, val)
@@ -56,43 +100,163 @@ class Set inherits Change
 }
 abstract class ElementRef
 {
-	operation getElement() : Object is abstract
+	operation getElement(c: Context) : Object is abstract
 }
 
 class NameRef inherits ElementRef
 {
-	attribute qname : ecore::EString
+	attribute qname : String
+	
+	method getElement(c: Context) : Object is do
+		// Split the qualified name 
+		var names : Sequence<String> init Sequence<String>.new
+		var str : String
+		from  str := qname
+		until str.indexOf("::") < 0
+		loop
+			names.add(str.substring(0, str.indexOf("::")))
+			str := str.substring(str.indexOf("::")+2, str.size-1)
+		end
+		names.add(str)
+		
+		// check the name of the first package
+		if names.elementAt(0) != c.model.name then
+		 	var ex : ElementNotResolvedException init ElementNotResolvedException.new
+			ex.elementRef := self
+			raise ex
+		end
+		names.removeAt(0)
+		
+		// iterate on names
+		var ne : ENamedElement 
+		var cur : ENamedElement
+		var found : Boolean
+		
+		names.each{ n |
+			found := false
+			getContents(cur).each{ e | 
+				ne ?= e
+				if ne != void then
+					if ne.name == n then 
+						cur := ne
+						found := true
+					end
+				end
+			}
+			if not found then 
+				var ex : ElementNotResolvedException init ElementNotResolvedException.new
+				ex.elementRef := self
+				raise ex
+			end
+		}
+		result := cur
+	rescue 
+		result := void
+	end
+	
+	/** get all the objects containes by the object c */
+	operation getContents(c : Object) : Collection<Object> is do
+		// get the meta class
+		var mclass : ClassDefinition
+		mclass ?= c.getMetaClass.typeDefinition
+		//select composite properties
+		var props : seq Property[*] init 
+			mclass.allOwnedAttribute.select{ p | 
+		    	p.isComposite
+			}
+		var objs : Collection<kermeta::reflection::Object>
+		props.each{ p | 
+			if p.upper == 1 then
+				result.add(c.get(p))
+			else
+				objs ?= c.get(p)
+				objs.each{ o | result.add(o) }
+			end	
+		}
+	end
 }
+
 class IDRef inherits ElementRef
 {
-	attribute identifier : ecore::EString
+	attribute identifier : String
+	
+	method getElement(c: Context) : Object is do
+		result := c.getVariable(identifier)
+	end
+	
 }
 abstract class Change inherits ElementDirective
 {
-
-	operation resolveTarget() : EModelElement is do
-		result ?= target.getElement
-		if result == void then end 
-	end
-
 	attribute propertyName : String
 	reference target : ElementRef[1..1]
 	reference ~value : ElementRef[1..1]
+	
+	/* resolve the target models element */
+	operation resolveTarget() : EModelElement is do
+		result ?= target.getElement(context)
+		if result == void then 
+			var ex : TargetNotFoundException init TargetNotFoundException.new
+			ex.changeDirective := self
+			raise ex
+		end 
+	end
+	
+	/* resolve the value */
+	operation resolveValue() : Object is do
+		result := target.getElement(context)
+		if result == void then 
+			var ex : ValueNotFoundException init ValueNotFoundException.new
+			ex.changeDirective := self
+			raise ex
+		end 
+	end
+	
+	/* Get the property in the targetObject */
+	operation getProperty(targetObj : EModelElement) : Property is do
+		// get the meta class
+		var mclass : ClassDefinition
+		mclass ?= targetObj.getMetaClass.typeDefinition
+		//select the property
+		var prop : seq Property[*] init 
+			mclass.allOwnedAttribute.select{ p | 
+		    	p.name == propertyName 
+			}
+		// check that it exists
+		if prop.size == 0 then
+			var ex : PropertyNotFoundException init PropertyNotFoundException.new
+			ex.changeDirective := self 
+			raise ex
+		end
+		result := prop.one
+	end
+
 }
-class Literal inherits ElementRef
+abstract class Literal inherits ElementRef
 {
 }
 class StringLiteral inherits Literal
 {
 	attribute ~value : String
+	
+	method getElement(c: Context) : Object is do
+		result := ~value
+	end
 }
 class BooleanLiteral inherits Literal
 {
 	attribute ~value : Boolean
+	
+	method getElement(c: Context) : Object is do
+		result := ~value
+	end
 }
 class IntegerLiteral inherits Literal
 {
 	attribute ~value : Integer
+	
+	method getElement(c: Context) : Object is do
+		result := ~value
+	end
 }
 
 class VoidLiteral inherits Literal
@@ -102,15 +266,66 @@ class Context
 {
 	reference model : EPackage
 	reference variables : Hashtable<String, Object>
+	
+	operation initialize(model : EPackage) is do
+		self.model := model
+		variables := Hashtable<String, Object>.new
+	end
+	
+	operation getVariable(name : String) : Object is do
+		result := variables.getValue(name)
+	end
+	
+	operation setVariable(name : String, val : Object) is do
+		variables.put(name, val)
+	end
 }
 
 /* Exception that can be raised when directives are executed */
-class DirectiveRuntimeException {
+abstract class DirectiveRuntimeException inherits kermeta::exceptions::Exception {
 	reference directive : CompositionDirective
+	
+	method toString() : String is do
+		result := "An exception was raised while executing directive " + directive.toString
+	end
 }
 
-class TargetNotFoundException inherits DirectiveRuntimeException {
-	property ChangeDirective : Change 
+/* Eception raised if and element cannot be resolved */
+class ElementNotResolvedException inherits DirectiveRuntimeException {
+	reference elementRef : ElementRef
+}
+
+/* The target for a Change directive was not found */
+class TargetNotFoundException inherits ElementNotResolvedException {
+	property changeDirective : Change 
+		getter is do result ?= directive end
+		setter is do directive := value elementRef := value.target end
+	
+	method toString() : String from DirectiveRuntimeException is do
+		result := super + "\nTarget object "+ elementRef.toString +" could not be resolved"
+	end
+}
+
+/* The value for a Change directive was not found */
+class ValueNotFoundException inherits ElementNotResolvedException {
+	property changeDirective : Change 
+		getter is do result ?= directive end
+		setter is do directive := value elementRef := value.~value end
+		
+	method toString() : String from DirectiveRuntimeException is do
+		result := super + "\nValue object "+ elementRef.toString +" could not be resolved"
+	end
+}
+
+/* The property could not be found */
+class PropertyNotFoundException inherits DirectiveRuntimeException {
+	property changeDirective : Change 
+		getter is do result ?= directive end
+		setter is do directive := value end
+}
+
+class ClassNotFoundException inherits DirectiveRuntimeException {
+	property createDirective : Create 
 		getter is do result ?= directive end
 		setter is do directive := value end
 }
