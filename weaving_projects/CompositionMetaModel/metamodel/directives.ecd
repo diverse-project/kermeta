@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="812,650" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#/" metadata="emf-1.0" initialized="true" tag="10" key="323030363034313120436F6D706F736974696F6E4D6574614D6F64656C">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="directives" size="812,650" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#/" metadata="emf-1.0" initialized="true" tag="10" key="323030363034313120436F6D706F736974696F6E4D6574614D6F64656C">
   <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0" name="ElementDirective" location="120,90" size="148,70" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//ElementDirective" runTimeClassModel=" execute()">
     <children xsi:type="editmodel:CompartmentEditModel"/>
-    <children xsi:type="editmodel:CompartmentEditModel">
+    <children xsi:type="editmodel:CompartmentEditModel" size="48,19">
       <children xsi:type="editmodel:MethodEditModel" name="execute" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//ElementDirective/execute">
         <model href="directives.ecore#//ElementDirective/execute"/>
       </children>
@@ -53,7 +53,7 @@
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
   <children xsi:type="editmodel:ClassEditModel" name="Create" location="80,222" size="106,79" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Create" runTimeClassModel="identifier,className">
-    <children xsi:type="editmodel:CompartmentEditModel">
+    <children xsi:type="editmodel:CompartmentEditModel" size="86,38">
       <children xsi:type="editmodel:AttributeEditModel" name="className" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Create/className">
         <model href="directives.ecore#//Create/className"/>
       </children>
@@ -83,7 +83,7 @@
   </children>
   <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.11/@sourceConnections.0 //@children.10/@sourceConnections.1 //@children.10/@sourceConnections.2" name="ElementRef" location="425,132" size="106,81" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//ElementRef" runTimeClassModel=" getElement()">
     <children xsi:type="editmodel:CompartmentEditModel"/>
-    <children xsi:type="editmodel:CompartmentEditModel">
+    <children xsi:type="editmodel:CompartmentEditModel" size="65,19">
       <children xsi:type="editmodel:MethodEditModel" name="getElement" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//ElementRef/getElement">
         <model href="directives.ecore#//ElementRef/getElement"/>
       </children>
@@ -96,7 +96,7 @@
     <model href="directives.ecore#//String"/>
   </children>
   <children xsi:type="editmodel:ClassEditModel" name="NameRef" location="344,287" size="94,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//NameRef" runTimeClassModel="qname">
-    <children xsi:type="editmodel:CompartmentEditModel">
+    <children xsi:type="editmodel:CompartmentEditModel" size="74,19">
       <children xsi:type="editmodel:AttributeEditModel" name="qname" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//NameRef/qname">
         <model href="directives.ecore#//NameRef/qname"/>
       </children>
@@ -111,7 +111,7 @@
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
   <children xsi:type="editmodel:ClassEditModel" name="IDRef" location="517,287" size="101,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//IDRef" runTimeClassModel="identifier">
-    <children xsi:type="editmodel:CompartmentEditModel">
+    <children xsi:type="editmodel:CompartmentEditModel" size="81,19">
       <children xsi:type="editmodel:AttributeEditModel" name="identifier" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//IDRef/identifier">
         <model href="directives.ecore#//IDRef/identifier"/>
       </children>
@@ -126,7 +126,7 @@
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
   <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.0" name="Change" location="220,222" size="123,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//PropertyDirective" runTimeClassModel="propertyName">
-    <children xsi:type="editmodel:CompartmentEditModel">
+    <children xsi:type="editmodel:CompartmentEditModel" size="103,19">
       <children xsi:type="editmodel:AttributeEditModel" name="propertyName" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Modify/propertyName">
         <model href="directives.ecore#//Change/propertyName"/>
       </children>
@@ -168,7 +168,7 @@
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
   <children xsi:type="editmodel:ClassEditModel" name="StringLiteral" location="289,440" size="97,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//String.1" runTimeClassModel="value">
-    <children xsi:type="editmodel:CompartmentEditModel">
+    <children xsi:type="editmodel:CompartmentEditModel" size="59,19">
       <children xsi:type="editmodel:AttributeEditModel" name="value" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//StringLiteral/value">
         <model href="directives.ecore#//StringLiteral/value"/>
       </children>
@@ -183,7 +183,7 @@
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
   <children xsi:type="editmodel:ClassEditModel" name="BooleanLiteral" location="395,440" size="111,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//BooleanLiteral" runTimeClassModel="value">
-    <children xsi:type="editmodel:CompartmentEditModel">
+    <children xsi:type="editmodel:CompartmentEditModel" size="70,19">
       <children xsi:type="editmodel:AttributeEditModel" name="value" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//BooleanLiteral/value">
         <model href="directives.ecore#//BooleanLiteral/value"/>
       </children>
@@ -198,7 +198,7 @@
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
   <children xsi:type="editmodel:ClassEditModel" name="IntegerLiteral" location="515,440" size="102,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//IntegerLiteral" runTimeClassModel="value">
-    <children xsi:type="editmodel:CompartmentEditModel">
+    <children xsi:type="editmodel:CompartmentEditModel" size="65,19">
       <children xsi:type="editmodel:AttributeEditModel" name="value" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//IntegerLiteral/value">
         <model href="directives.ecore#//IntegerLiteral/value"/>
       </children>
@@ -229,7 +229,7 @@
     <model href="directives.ecore#//VoidLiteral"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0" name="Context" location="13,109" size="68,31" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Context">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0" name="Context" location="13,109" size="68,31" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Context" runTimeClassModel="">
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>

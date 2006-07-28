@@ -12,6 +12,21 @@ alias String : kermeta::standard::String;
 alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
 
+class Composer {
+	reference predirectives : seq ElementDirective[*]
+	reference postdirectives : seq ElementDirective[*]
+	
+	operation executePreDirectives(model : EPackage) is do
+		// create the context
+		var context : Context init Context.new
+		context.initialize(model)
+		predirectives.each{ d | 
+			d.context := context
+			d.execute
+		}
+	end
+}
+
 abstract class ElementDirective inherits CompositionDirective
 {
 	operation execute() : kermeta::standard::~Void is abstract
@@ -119,6 +134,11 @@ class NameRef inherits ElementRef
 		end
 		names.add(str)
 		
+		stdio.write("the aulified name is : ")
+		names.each{ n | stdio.write("#" + n + "# ") }
+		stdio.writeln("")
+		stdio.writeln("model name is " + c.model.name)
+		
 		// check the name of the first package
 		if names.elementAt(0) != c.model.name then
 		 	var ex : ElementNotResolvedException init ElementNotResolvedException.new
@@ -129,7 +149,7 @@ class NameRef inherits ElementRef
 		
 		// iterate on names
 		var ne : ENamedElement 
-		var cur : ENamedElement
+		var cur : ENamedElement init c.model
 		var found : Boolean
 		
 		names.each{ n |
@@ -203,7 +223,7 @@ abstract class Change inherits ElementDirective
 	
 	/* resolve the value */
 	operation resolveValue() : Object is do
-		result := target.getElement(context)
+		result := ~value.getElement(context)
 		if result == void then 
 			var ex : ValueNotFoundException init ValueNotFoundException.new
 			ex.changeDirective := self

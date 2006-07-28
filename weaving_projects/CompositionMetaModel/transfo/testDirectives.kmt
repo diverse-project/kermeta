@@ -1,54 +1,66 @@
+/* $Id: testDirectives.kmt,v 1.1 2006-07-28 23:26:01 ffleurey Exp $
+ * Creation date: July 28, 2006
+ * License:
+ * Copyright:
+ * Authors:
+ */
 @mainClass "composition::Main"
 @mainOperation "main"
 
 
 package composition;
 
+
 require kermeta
-require "../metamodel/ecore.kmt"
+require "../metamodel/directives.kmt"
 
 using kermeta::standard
 using kermeta::persistence
 using ecore
 
+
 class Main
 {
-  operation main() : Void is do 
 
+	operation createDirectives() : Composer is do
+		var comp : Composer init Composer.new
+		
+		// Create Class as c
+		var createC : Create init Create.new	comp.predirectives.add(createC)
+		createC.className := "Class"	createC.identifier := "c"
+		
+		// $c name = "C"
+		var setCName : Set init Set.new		comp.predirectives.add(setCName)
+		setCName.propertyName := "name"		
+		var setCNameT : IDRef init IDRef.new 	setCNameT.identifier := "c"
+		setCName.target := setCNameT
+		var setCNameV : StringLiteral init StringLiteral.new	setCNameV.~value := "C"
+		setCName.~value := setCNameV
+		
+		// Package eClassifiers + $c 
+		var addC : Add init Add.new		comp.predirectives.add(addC)
+		addC.propertyName := "eClassifiers"		
+		var addCT : NameRef init NameRef.new 	addCT.qname := "Package"
+		addC.target := addCT
+		var addCV : IDRef init IDRef.new 	addCV.identifier := "c"
+		addC.~value := addCV
+		
+		result := comp
+		
+	end
+
+    operation main() : Void is do 
         var model1 : EPackage init loadECoreModel("../models/Model1.ecore")
-        var model2 : EPackage init loadECoreModel("../models/Model2.ecore")
-        
-        stdio.writeln("Input model 1 : ")
-        printModel(model1) 
-        
-        
-        
-        stdio.writeln("\nInput model 2 : ")
-        printModel(model2)
-        
-        
-        var ec : EClass init EClass.new
-        
-        
-        var merged : EPackage
-        stdio.writeln("\nMerging... ")
-        merged ?= model1.merge(model2)
-        stdio.writeln("\nMerged model: " + merged.toString)
-        
-        //merged := EPackage.clone(model1)
-        
-        printModel(merged) 
-        
-        var resource : kermeta::persistence::EMFResource             
-   		var repository : EMFRepository init EMFRepository.new
-   		resource ?= repository.createResource("../models/Result.ecore", "../metamodel/ecore.ecore")
-       // resource.instances.add(merged)
-        resource.save
-        // */
+        printModel(model1)
+        stdio.writeln("execute pre directives")
+        createDirectives.executePreDirectives(model1)
+        stdio.writeln("here is the result")
+        printModel(model1)
         
     end
     
-   operation loadECoreModel(path : String) : EPackage is do
+    
+    operation loadECoreModel(path : String) : EPackage is do
     	var resource : kermeta::persistence::EMFResource             
    		var repository : EMFRepository init EMFRepository.new             
        	resource ?= repository.createResource(path, "../metamodel/ecore.ecore")
@@ -103,5 +115,4 @@ class Main
     	}
     
     end
-    
 }
