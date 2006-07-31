@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass1.java,v 1.4 2006-07-19 12:31:09 zdrey Exp $
+/* $Id: ECore2KMPass1.java,v 1.5 2006-07-31 12:52:36 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -215,33 +215,6 @@ public class ECore2KMPass1 extends EcoreVisitor {
 		exporter.current_op.setLower(node.getLowerBound());
 		exporter.current_op.setUpper(node.getUpperBound());
 		
-		if (Ecore2KM.isQuickFixEnabled)
-		{
-			// Quickfix to handle operation named like properties
-			if (Ecore2KM.isMethodPropertyNameOverlapSafe)
-			{
-				Property prop = unit.getPropertyByName(exporter.current_classdef, exporter.current_op.getName());
-				if (prop != null) {
-					String newName = Ecore2KM.methodRenamePrefix + exporter.current_op.getName() +Ecore2KM.methodRenamePostfix;
-					unit.messages.addWarning("Quickfix used to rename duplicate operation due to a the property with the same name: " + exporter.current_op.getName() + " renamed into " + newName, null);		        	
-				
-					exporter.current_op.setName(newName);
-				}
-			}
-			// Quickfix to avoid two operations with the same name
-			if (Ecore2KM.isMethodNameOverlapSafe)
-			{
-				Operation op = unit.getOperationByName(exporter.current_classdef, exporter.current_op.getName());        	
-				int i = 2;
-				String newName;
-				while (op != null) {
-					newName = exporter.current_op.getName() + i;
-					unit.messages.addWarning("Quickfix used to rename duplicate operation: " + exporter.current_op.getName() + " renamed into " + newName, null);		        	
-					exporter.current_op.setName(newName);
-					op = unit.getOperationByName(exporter.current_classdef, exporter.current_op.getName());
-				}
-			}
-		}
 		exporter.current_op.setOwningClass(exporter.current_classdef);		
 		return exporter.current_op;
 	}

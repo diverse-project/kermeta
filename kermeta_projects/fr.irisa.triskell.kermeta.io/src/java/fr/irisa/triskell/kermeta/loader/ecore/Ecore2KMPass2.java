@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.5 2006-07-19 12:34:09 zdrey Exp $
+/* $Id: Ecore2KMPass2.java,v 1.6 2006-07-31 12:52:36 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -51,6 +51,10 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass6;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 
+/**
+ * @author dtouzet
+ *
+ */
 public class Ecore2KMPass2 extends EcoreVisitor {
 
 	protected ECore2KMPass1 visitorPass1;
@@ -63,6 +67,12 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	 * first, setting the type of operation, second, setting the super operations
 	 * of operation. */
 	protected boolean isTypeSettingMode;
+	
+	/**
+	 * Hashtable that is dedicated to encode links between a method and the set of
+	 * methods that overload it (in subclasses) when the QuickFix option is activated.
+	 */
+	protected Hashtable opTable;
 		
 	/** 
 	 * @param unit
@@ -77,9 +87,10 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		this.isTypeSettingMode = false;
 		this.exporter = exporter;
 		
+		this.opTable = new Hashtable();
 	}
 		
-	public void convertUnit()
+	public Hashtable convertUnit()
 	{
 		// Visit all the EDatatypes: the instanceType property of a datatype/primitivetype
 		// refer to a typedefinition that, so, must have been previously listed.
@@ -94,6 +105,11 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		for (EOperation node : visitorPass1.operations.keySet()) {
 			accept(node);
 		}
+		
+		// Return the Hashtable (filled by the "visit(EOperation)" method) that contains 
+		// links between each method and the "submethods" that overload it (empty if
+		// QuickFix is disabled). 
+		return opTable;
 	}
 	
 	/**
@@ -181,6 +197,7 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 		// User indeed naturally doesn't set it if he doesn't need a return type
 		// FIXME : WE HAVE TO FIX A STRICT PHILOSOPHY ABOUT EXPLICIT OR IMPLICIT RETURN TYPE!!!
 		exporter.current_op = visitorPass1.operations.get(node);
+		
 		if (isTypeSettingMode == true)
 		{
 			// Set the type of the operation
@@ -219,6 +236,27 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 			// it could have been resolved from the EAnnotation visit
 			Operation superop = findSuperOperation(node);
 			if (superop != null) exporter.current_op.setSuperOperation(superop);
+			
+			
+			if (Ecore2KM.isQuickFixEnabled) {
+
+				// If QuickFix enabled:
+				// Build a hashtable providing the list of "submethods" of each
+				// method that is overloaded
+				if(superop != null) {
+					if( opTable.containsKey(superop) ) {
+						ArrayList ar = (ArrayList) opTable.get(superop);
+						ar.add(exporter.current_op);
+						opTable.put(superop, ar);
+					}
+					else {
+						ArrayList ar = new ArrayList();
+						ar.add(exporter.current_op);
+						opTable.put(superop, ar);
+					}
+				}
+			}
+			
 		}
 
 		return exporter.current_op;
