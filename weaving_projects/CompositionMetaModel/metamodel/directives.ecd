@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="directives" size="812,650" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#/" metadata="emf-1.0" initialized="true" tag="10" key="323030363034313120436F6D706F736974696F6E4D6574614D6F64656C">
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0" name="ElementDirective" location="120,90" size="148,70" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//ElementDirective" runTimeClassModel=" execute()">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="directives" size="1357,783" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#/" metadata="emf-1.0" initialized="true" scrolledX="15" scrolledY="37" tag="5" key="323030353032323820436F6D706F736974696F6E4D6574614D6F64656C">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0 //@children.19/@sourceConnections.1 //@children.19/@sourceConnections.0" name="ElementDirective" location="254,140" size="148,70" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//ElementDirective" runTimeClassModel=" execute()">
     <children xsi:type="editmodel:CompartmentEditModel"/>
-    <children xsi:type="editmodel:CompartmentEditModel" size="48,19">
+    <children xsi:type="editmodel:CompartmentEditModel" size="66,19">
       <children xsi:type="editmodel:MethodEditModel" name="execute" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//ElementDirective/execute">
         <model href="directives.ecore#//ElementDirective/execute"/>
       </children>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="74,0" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="78,31"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="73,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="77,32"/>
     </sourceConnections>
     <model href="directives.ecore#//ElementDirective"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.0" name="CompositionDirective" location="116,20" size="156,31" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//CompositionDirective" runTimeClassModel="">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.0" name="CompositionDirective" location="250,70" size="172,32" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//CompositionDirective" runTimeClassModel="">
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.1" target="//@children.18" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="0,21" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" name="context" location="42,0" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//CompositionDirective/context" multiplicityLabel="//@children.1/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.1/@sourceConnections.0/@children.1/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name="context" location="14,85" size="34,17" fontInfo="Arial-8-0" anchorKind="LastPart"/>
-        <children xsi:type="editmodel:LabelEditModel" name="1" location="62,85" size="6,17" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,17" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="context" location="90,17" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//CompositionDirective/context" multiplicityLabel="//@children.1/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.1/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="context" location="155,65" size="35,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="155,94" size="7,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
         <model href="directives.ecore#//CompositionDirective/context"/>
       </children>
     </sourceConnections>
     <model href="directives.ecore#//CompositionDirective"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Remove" location="267,370" size="71,31" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Remove" runTimeClassModel="">
+  <children xsi:type="editmodel:ClassEditModel" name="Remove" location="404,420" size="92,32" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Remove" runTimeClassModel="">
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.2" target="//@children.5/@sourceConnections.0" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="35,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="45,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="89,-27" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <model href="directives.ecore#//Remove"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Add" location="200,370" size="46,31" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Add" runTimeClassModel="">
+  <children xsi:type="editmodel:ClassEditModel" name="Add" location="334,420" size="68,32" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Add" runTimeClassModel="">
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.3" target="//@children.5/@sourceConnections.0" targetEnd="//@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.3/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="23,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="34,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="-2,-35" anchorKind="FixedAtEdge" attachSource="true"/>
     </sourceConnections>
     <model href="directives.ecore#//Add"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Create" location="80,222" size="106,79" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Create" runTimeClassModel="identifier,className">
-    <children xsi:type="editmodel:CompartmentEditModel" size="86,38">
+  <children xsi:type="editmodel:ClassEditModel" name="Create" location="214,272" size="126,79" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Create" runTimeClassModel="identifier,className">
+    <children xsi:type="editmodel:CompartmentEditModel" size="103,38">
       <children xsi:type="editmodel:AttributeEditModel" name="className" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Create/className">
         <model href="directives.ecore#//Create/className"/>
       </children>
@@ -64,26 +64,26 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.10/@sourceConnections.0" source="//@children.4" target="//@children.0" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="53,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="62,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="74,70" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <model href="directives.ecore#//Create"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Set" location="130,370" size="40,31" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Set" runTimeClassModel="">
+  <children xsi:type="editmodel:ClassEditModel" name="Set" location="264,420" size="62,32" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Set" runTimeClassModel="">
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.3/@sourceConnections.0 //@children.2/@sourceConnections.0" autoLocated="true" source="//@children.5" target="//@children.10" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="20,0" anchorKind="FixedAtEdge" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="61,60" anchorKind="FixedAtEdge"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="30,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="69,60" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <model href="directives.ecore#//Set"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.11/@sourceConnections.0 //@children.10/@sourceConnections.1 //@children.10/@sourceConnections.2" name="ElementRef" location="425,132" size="106,81" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//ElementRef" runTimeClassModel=" getElement()">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.11/@sourceConnections.0 //@children.10/@sourceConnections.1 //@children.10/@sourceConnections.2" name="ElementRef" location="559,182" size="111,81" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//ElementRef" runTimeClassModel=" getElement()">
     <children xsi:type="editmodel:CompartmentEditModel"/>
-    <children xsi:type="editmodel:CompartmentEditModel" size="65,19">
+    <children xsi:type="editmodel:CompartmentEditModel" size="82,19">
       <children xsi:type="editmodel:MethodEditModel" name="getElement" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//ElementRef/getElement">
         <model href="directives.ecore#//ElementRef/getElement"/>
       </children>
@@ -92,11 +92,11 @@
     <model href="directives.ecore#//ElementRef"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:PrimitiveTypeEditModel" name="String" location="306,62" size="73,48" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//String">
+  <children xsi:type="editmodel:PrimitiveTypeEditModel" name="String" location="440,112" size="79,48" stereotype="datatype" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//String">
     <model href="directives.ecore#//String"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="NameRef" location="344,287" size="94,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//NameRef" runTimeClassModel="qname">
-    <children xsi:type="editmodel:CompartmentEditModel" size="74,19">
+  <children xsi:type="editmodel:ClassEditModel" name="NameRef" location="478,337" size="115,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//NameRef" runTimeClassModel="qname">
+    <children xsi:type="editmodel:CompartmentEditModel" size="92,19">
       <children xsi:type="editmodel:AttributeEditModel" name="qname" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//NameRef/qname">
         <model href="directives.ecore#//NameRef/qname"/>
       </children>
@@ -104,14 +104,14 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.8" target="//@children.11/@sourceConnections.0" targetEnd="//@children.8/@sourceConnections.0/@children.1" sourceEnd="//@children.8/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="47,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="57,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="-106,-26" anchorKind="FixedAtEdge" attachSource="true"/>
     </sourceConnections>
     <model href="directives.ecore#//NameRef"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="IDRef" location="517,287" size="101,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//IDRef" runTimeClassModel="identifier">
-    <children xsi:type="editmodel:CompartmentEditModel" size="81,19">
+  <children xsi:type="editmodel:ClassEditModel" name="IDRef" location="677,337" size="122,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//IDRef" runTimeClassModel="identifier">
+    <children xsi:type="editmodel:CompartmentEditModel" size="99,19">
       <children xsi:type="editmodel:AttributeEditModel" name="identifier" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//IDRef/identifier">
         <model href="directives.ecore#//IDRef/identifier"/>
       </children>
@@ -119,56 +119,56 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.9" target="//@children.11/@sourceConnections.0" targetEnd="//@children.9/@sourceConnections.0/@children.1" sourceEnd="//@children.9/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="50,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="60,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="-82,-25" anchorKind="FixedAtEdge" attachSource="true"/>
     </sourceConnections>
     <model href="directives.ecore#//IDRef"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.0" name="Change" location="220,222" size="123,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//PropertyDirective" runTimeClassModel="propertyName">
-    <children xsi:type="editmodel:CompartmentEditModel" size="103,19">
-      <children xsi:type="editmodel:AttributeEditModel" name="propertyName" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Modify/propertyName">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.0" name="Change" location="354,272" size="141,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Change" runTimeClassModel="propertyName">
+    <children xsi:type="editmodel:CompartmentEditModel" size="118,19">
+      <children xsi:type="editmodel:AttributeEditModel" name="propertyName" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Change/propertyName">
         <model href="directives.ecore#//Change/propertyName"/>
       </children>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.10" target="//@children.4/@sourceConnections.0" targetEnd="//@children.10/@sourceConnections.0/@children.1" sourceEnd="//@children.10/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="61,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="69,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="122,-61" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.10" target="//@children.6" targetEnd="//@children.10/@sourceConnections.1/@children.1" sourceEnd="//@children.10/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="108,0" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" name="value" location="0,68" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Change/value" multiplicityLabel="//@children.10/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.10/@sourceConnections.1/@children.1/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name="value" location="393,176" size="25,17" fontInfo="Arial-8-0" anchorKind="LastPart"/>
-        <children xsi:type="editmodel:LabelEditModel" name="1" location="412,207" size="6,17" fontInfo="Arial-8-0" anchorKind="LastPart"/>
-        <model href="directives.ecore#//Change/value"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="97,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="target" location="0,16" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Change/target" multiplicityLabel="//@children.10/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.10/@sourceConnections.1/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="target" location="524,176" size="28,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="545,205" size="7,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="directives.ecore#//Change/target"/>
       </children>
     </sourceConnections>
     <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.10" target="//@children.6" targetEnd="//@children.10/@sourceConnections.2/@children.1" sourceEnd="//@children.10/@sourceConnections.2/@children.0" connectionRouterKind="Manhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="85,0" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" name="target" location="0,16" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Change/target" multiplicityLabel="//@children.10/@sourceConnections.2/@children.1/@children.1" roleLabel="//@children.10/@sourceConnections.2/@children.1/@children.0" navigable="true">
-        <children xsi:type="editmodel:LabelEditModel" name="target" location="390,124" size="28,17" fontInfo="Arial-8-0" anchorKind="LastPart"/>
-        <children xsi:type="editmodel:LabelEditModel" name="1" location="412,155" size="6,17" fontInfo="Arial-8-0" anchorKind="LastPart"/>
-        <model href="directives.ecore#//Change/target"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="123,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="value" location="0,68" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Change/value" multiplicityLabel="//@children.10/@sourceConnections.2/@children.1/@children.1" roleLabel="//@children.10/@sourceConnections.2/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="value" location="526,228" size="26,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="545,257" size="7,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="directives.ecore#//Change/value"/>
       </children>
     </sourceConnections>
     <model href="directives.ecore#//Change"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.12/@sourceConnections.0" name="Literal" location="448,286" size="59,31" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Literal" runTimeClassModel="">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.12/@sourceConnections.0" name="Literal" location="595,336" size="80,32" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Literal" runTimeClassModel="">
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.9/@sourceConnections.0 //@children.8/@sourceConnections.0" autoLocated="true" source="//@children.11" target="//@children.6" targetEnd="//@children.11/@sourceConnections.0/@children.1" sourceEnd="//@children.11/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="29,0" anchorKind="FixedAtEdge" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="52,80" anchorKind="FixedAtEdge"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="39,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="54,80" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <model href="directives.ecore#//Literal"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="StringLiteral" location="289,440" size="97,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//String.1" runTimeClassModel="value">
-    <children xsi:type="editmodel:CompartmentEditModel" size="59,19">
+  <children xsi:type="editmodel:ClassEditModel" name="StringLiteral" location="428,490" size="116,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//StringLiteral" runTimeClassModel="value">
+    <children xsi:type="editmodel:CompartmentEditModel" size="78,19">
       <children xsi:type="editmodel:AttributeEditModel" name="value" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//StringLiteral/value">
         <model href="directives.ecore#//StringLiteral/value"/>
       </children>
@@ -176,14 +176,14 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.13/@sourceConnections.0 //@children.14/@sourceConnections.0 //@children.17/@sourceConnections.0" autoLocated="true" source="//@children.12" target="//@children.11" targetEnd="//@children.12/@sourceConnections.0/@children.1" sourceEnd="//@children.12/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="48,0" anchorKind="FixedAtEdge" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="29,31" anchorKind="FixedAtEdge"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="57,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="39,31" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <model href="directives.ecore#//StringLiteral"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="BooleanLiteral" location="395,440" size="111,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//BooleanLiteral" runTimeClassModel="value">
-    <children xsi:type="editmodel:CompartmentEditModel" size="70,19">
+  <children xsi:type="editmodel:ClassEditModel" name="BooleanLiteral" location="546,490" size="130,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//BooleanLiteral" runTimeClassModel="value">
+    <children xsi:type="editmodel:CompartmentEditModel" size="90,19">
       <children xsi:type="editmodel:AttributeEditModel" name="value" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//BooleanLiteral/value">
         <model href="directives.ecore#//BooleanLiteral/value"/>
       </children>
@@ -191,14 +191,14 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.13" target="//@children.12/@sourceConnections.0" targetEnd="//@children.13/@sourceConnections.0/@children.1" sourceEnd="//@children.13/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="55,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="64,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="63,-50" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <model href="directives.ecore#//BooleanLiteral"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="IntegerLiteral" location="515,440" size="102,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//IntegerLiteral" runTimeClassModel="value">
-    <children xsi:type="editmodel:CompartmentEditModel" size="65,19">
+  <children xsi:type="editmodel:ClassEditModel" name="IntegerLiteral" location="678,490" size="122,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//IntegerLiteral" runTimeClassModel="value">
+    <children xsi:type="editmodel:CompartmentEditModel" size="84,19">
       <children xsi:type="editmodel:AttributeEditModel" name="value" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//IntegerLiteral/value">
         <model href="directives.ecore#//IntegerLiteral/value"/>
       </children>
@@ -206,34 +206,57 @@
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.14" target="//@children.12/@sourceConnections.0" targetEnd="//@children.14/@sourceConnections.0/@children.1" sourceEnd="//@children.14/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="51,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="60,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="113,-42" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <model href="directives.ecore#//IntegerLiteral"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:PrimitiveTypeEditModel" name="Boolean" location="480,62" size="73,48" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Boolean">
+  <children xsi:type="editmodel:PrimitiveTypeEditModel" name="Boolean" location="614,112" size="93,48" stereotype="datatype" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Boolean">
     <model href="directives.ecore#//Boolean"/>
   </children>
-  <children xsi:type="editmodel:PrimitiveTypeEditModel" name="Integer" location="390,62" size="73,48" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Integer">
+  <children xsi:type="editmodel:PrimitiveTypeEditModel" name="Integer" location="524,112" size="85,48" stereotype="datatype" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Integer">
     <model href="directives.ecore#//Integer"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="VoidLiteral" location="185,440" size="88,31" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//VoidLiteral" runTimeClassModel="">
+  <children xsi:type="editmodel:ClassEditModel" name="VoidLiteral" location="319,490" size="107,32" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//VoidLiteral" runTimeClassModel="">
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" source="//@children.17" target="//@children.12/@sourceConnections.0" targetEnd="//@children.17/@sourceConnections.0/@children.1" sourceEnd="//@children.17/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
-      <children xsi:type="editmodel:AssociationEndEditModel" location="44,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="53,0" anchorKind="FixedAtEdge" attachSource="true"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="135,-84" anchorKind="FixedAtEdge"/>
     </sourceConnections>
     <model href="directives.ecore#//VoidLiteral"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0" name="Context" location="13,109" size="68,31" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Context" runTimeClassModel="">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0" name="Context" location="58,70" size="90,32" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Context" runTimeClassModel="">
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <children xsi:type="editmodel:CompartmentEditModel"/>
     <model href="directives.ecore#//Context"/>
+    <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Composer" location="60,231" size="106,32" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Composer" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.19" target="//@children.0" targetEnd="//@children.19/@sourceConnections.0/@children.1" sourceEnd="//@children.19/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="20,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="postdirectives" location="0,15" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Composer/postdirectives" multiplicityLabel="//@children.19/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.19/@sourceConnections.0/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="postdirectives" location="183,133" size="64,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="242,162" size="5,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="directives.ecore#//Composer/postdirectives"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" source="//@children.19" target="//@children.0" targetEnd="//@children.19/@sourceConnections.1/@children.1" sourceEnd="//@children.19/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="composer" location="49,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="predirectives" location="0,60" id="platform:/resource/CompositionMetaModel/metamodel/directives.ecore#//Composer/predirectives" multiplicityLabel="//@children.19/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.19/@sourceConnections.1/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="predirectives" location="188,178" size="59,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="242,207" size="5,15" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <model href="directives.ecore#//Composer/predirectives"/>
+      </children>
+    </sourceConnections>
+    <model href="directives.ecore#//Composer"/>
     <classifierPreferences xsi:type="editmodel:EMFClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural"/>
   </children>
   <model href="directives.ecore#/"/>

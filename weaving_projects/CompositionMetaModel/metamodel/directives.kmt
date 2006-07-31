@@ -13,8 +13,8 @@ alias Boolean : kermeta::standard::Boolean;
 alias Integer : kermeta::standard::Integer;
 
 class Composer {
-	reference predirectives : seq ElementDirective[*]
-	reference postdirectives : seq ElementDirective[*]
+	attribute predirectives : seq ElementDirective[*]
+	attribute postdirectives : seq ElementDirective[*]
 	
 	operation executePreDirectives(model : EPackage) is do
 		// create the context
@@ -208,8 +208,8 @@ class IDRef inherits ElementRef
 abstract class Change inherits ElementDirective
 {
 	attribute propertyName : String
-	reference target : ElementRef[1..1]
-	reference ~value : ElementRef[1..1]
+	attribute target : ElementRef[1..1]
+	attribute ~value : ElementRef[1..1]
 	
 	/* resolve the target models element */
 	operation resolveTarget() : EModelElement is do
