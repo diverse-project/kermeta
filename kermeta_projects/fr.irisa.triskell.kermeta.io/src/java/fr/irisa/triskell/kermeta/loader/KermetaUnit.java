@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.67 2006-08-01 12:47:52 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.68 2006-08-01 15:15:26 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.Stack;
 
 import org.apache.log4j.Logger;
@@ -43,6 +44,7 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaConstraintChecker;
 import fr.irisa.triskell.kermeta.constraintchecker.KermetaCycleConstraintChecker;
+import fr.irisa.triskell.kermeta.error.KermetaLoaderError;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbol;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolInterpreterVariable;
@@ -605,7 +607,13 @@ public abstract class KermetaUnit {
 		else {
 			KermetaUnit unit;
 			// This is a normal behavior
-			unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri, packages);
+			try{
+				unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri, packages);
+			}
+			catch(KermetaLoaderError e){
+				unit = new DummyUnit(str_uri, packages);
+				unit.messages.addError(e.getMessage(),null);
+			}
 			// zoe comment 20/06/06
 			//unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(str_uri); //, new Hashtable());
 			if (messages.unitHasError) {
@@ -1066,6 +1074,7 @@ public abstract class KermetaUnit {
 	        messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
 	    }
 	    catch(Throwable t) {
+	    	Set s = traceImportedUnits.keySet();
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
 	            messages.addError("Unexpected load error : " + t.getMessage(), null);
