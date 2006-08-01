@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.66 2006-06-21 16:41:35 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.67 2006-08-01 12:47:52 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -1033,6 +1033,10 @@ public abstract class KermetaUnit {
 	        loadAllBodies();
 	        loadAllAnnotations();
 	    }
+	    catch(NoClassDefFoundError ncdfe){
+            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
+            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
+	    }
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
@@ -1045,88 +1049,159 @@ public abstract class KermetaUnit {
 	
 	
 	private void loadAllImportedUnits() {
-		if (doneLoadImportedUnits) return;
-		loading = true;
-		// load imported units
-		preLoad();
-		loadImportedUnits();
-		doneLoadImportedUnits = true;
-		for(int i=0; i<importedUnits.size(); i++) {
-			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-			if (!iu.loading) iu.loadAllImportedUnits();
-		}
-		loading = false;
+		try{
+			if (doneLoadImportedUnits) return;
+			loading = true;
+			// load imported units
+			preLoad();
+			loadImportedUnits();
+			doneLoadImportedUnits = true;
+			for(int i=0; i<importedUnits.size(); i++) {
+				KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+				if (!iu.loading) iu.loadAllImportedUnits();
+			}
+			loading = false;}
+	    catch(NoClassDefFoundError ncdfe){
+	        KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
+	        messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
+	    }
+	    catch(Throwable t) {
+	        if (!messages.hasError()) {
+	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	        }
+	    }
 	}
 	
 	private void loadAllTypeDefinitions() {
-		//		System.out.println("loadAllTypeDefinitions " + uri);
-		if (doneLoadTypeDefinitions) return;
-		loading = true;
-		
-		doneLoadTypeDefinitions = true;
-		// load imported units
-		for(int i=0; i<importedUnits.size(); i++) {
-			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-			if (!iu.loading) iu.loadAllTypeDefinitions();
+		try{
+			//		System.out.println("loadAllTypeDefinitions " + uri);
+			if (doneLoadTypeDefinitions) return;
+			loading = true;
+			
+			doneLoadTypeDefinitions = true;
+			// load imported units
+			for(int i=0; i<importedUnits.size(); i++) {
+				KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+				if (!iu.loading) iu.loadAllTypeDefinitions();
+			}
+			loadTypeDefinitions();
+			loading = false;
 		}
-		loadTypeDefinitions();
-		loading = false;
+	    catch(NoClassDefFoundError ncdfe){
+            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
+            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
+	    }
+	    catch(Throwable t) {
+	        if (!messages.hasError()) {
+	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	        }
+	    }
 	}
 	
 	private void loadAllStructuralFeatures() {
-		//		System.out.println("loadAllStructuralFeatures " + uri);
-		if (doneLoadStructuralFeatures) return;
-		loading = true;
-		// load imported units
-		loadStructuralFeatures();
-		doneLoadStructuralFeatures = true;
-		for(int i=0; i<importedUnits.size(); i++) {
-			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-			if (!iu.loading) iu.loadAllStructuralFeatures();
+		try{
+			//		System.out.println("loadAllStructuralFeatures " + uri);
+			if (doneLoadStructuralFeatures) return;
+			loading = true;
+			// load imported units
+			loadStructuralFeatures();
+			doneLoadStructuralFeatures = true;
+			for(int i=0; i<importedUnits.size(); i++) {
+				KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+				if (!iu.loading) iu.loadAllStructuralFeatures();
+			}
+			loading = false;
 		}
-		loading = false;
+	    catch(NoClassDefFoundError ncdfe){
+            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
+            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
+	    }
+	    catch(Throwable t) {
+	        if (!messages.hasError()) {
+	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	        }
+	    }
 	}
 	
 	private void loadAllOppositeProperties() {
-		//	System.out.println("loadAllOppositeProperties " + uri);
-		if (doneLoadOppositeProperties) return;
-		loading = true;
-		// load imported units
-		loadOppositeProperties();
-		doneLoadOppositeProperties = true;
-		for(int i=0; i<importedUnits.size(); i++) {
-			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-			if (!iu.loading) iu.loadAllOppositeProperties();
+		try{
+			//	System.out.println("loadAllOppositeProperties " + uri);
+			if (doneLoadOppositeProperties) return;
+			loading = true;
+			// load imported units
+			loadOppositeProperties();
+			doneLoadOppositeProperties = true;
+			for(int i=0; i<importedUnits.size(); i++) {
+				KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+				if (!iu.loading) iu.loadAllOppositeProperties();
+			}
+			loading = false;
 		}
-		loading = false;
+	    catch(NoClassDefFoundError ncdfe){
+            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
+            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
+	    }
+	    catch(Throwable t) {
+	        if (!messages.hasError()) {
+	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	        }
+	    }
 	}
 	
 	private void loadAllBodies() {
-		//	System.out.println("loadAllBodies " + uri);
-		if (doneLoadBodies) return;
-		loading = true;
-		// load imported units
-		loadBodies();
-		doneLoadBodies = true;
-		for(int i=0; i<importedUnits.size(); i++) {
-			KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-			if (!iu.loading) iu.loadAllBodies();
+		try{
+			//	System.out.println("loadAllBodies " + uri);
+			if (doneLoadBodies) return;
+			loading = true;
+			// load imported units
+			loadBodies();
+			doneLoadBodies = true;
+			for(int i=0; i<importedUnits.size(); i++) {
+				KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+				if (!iu.loading) iu.loadAllBodies();
+			}
+			loading = false;
 		}
-		loading = false;
+	    catch(NoClassDefFoundError ncdfe){
+            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
+            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
+	    }
+	    catch(Throwable t) {
+	        if (!messages.hasError()) {
+	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	        }
+	    }
 	}
 	
 	private void loadAllAnnotations() {
-		// since loading is used for all loads, recursion makes it unconsistant - for standard 
-		// package in particular, they are loaded twice if no "doneLoadAnnotation test" is done 
-		if (doneLoadAnnotations) return;
-	    loading = true;
-	    loadAnnotations();
-	    doneLoadAnnotations = true;
-	    for (int i=0; i<importedUnits.size(); i++) {
-	        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
-	        if (!iu.loading) iu.loadAllAnnotations();
+		try{
+			// since loading is used for all loads, recursion makes it unconsistant - for standard 
+			// package in particular, they are loaded twice if no "doneLoadAnnotation test" is done 
+			if (doneLoadAnnotations) return;
+		    loading = true;
+		    loadAnnotations();
+		    doneLoadAnnotations = true;
+		    for (int i=0; i<importedUnits.size(); i++) {
+		        KermetaUnit iu = (KermetaUnit)importedUnits.get(i);
+		        if (!iu.loading) iu.loadAllAnnotations();
+		    }
+		    loading = false;
+		}
+	    catch(NoClassDefFoundError ncdfe){
+            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
+            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
 	    }
-	    loading = false;
+	    catch(Throwable t) {
+	        if (!messages.hasError()) {
+	            KermetaUnit.internalLog.error("Unexpected load error", t);
+	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	        }
+	    }
 	}
 	
 	/**
