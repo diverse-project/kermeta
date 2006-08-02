@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.48 2006-08-02 11:46:28 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.49 2006-08-02 11:50:18 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -117,79 +117,6 @@ public class EMF2Runtime {
     }
     
 	/**
-	 * returns the list of resources that are linked to the elements of this resources
-	 *  it doesn't returns the metamodel resources.
-	 * (this is because the getAllContents() on a resource set alos return the metamodel ...)
-	 * result includes the input resources
-	 * @return EList of Resource
-	 */
-	public EList findDependentResources(Resource resource)
-	{
-		EList result = new BasicEList();
-		result.add(resource);
-		findDependentResources(result, resource);
-		return result;
-	}
-	/**
-	 * Looks in the given resource the list of hosted objects, and
-	 * Recursive part of the findDependentResources method
-	 * @param list A list&lt;Resource&gt; that contains the resources of which 
-	 * the given <code>resource</code> depends.
-	 * @param resource The emf resource that EMF2Runtime has to load. 
-	 */
-	protected void findDependentResources(EList list, Resource resource)
-	{
-		TreeIterator treeIt = resource.getAllContents();
-		while(treeIt.hasNext())
-		{
-			Object obj = treeIt.next();
-			if(obj instanceof EObject)
-			{
-				EObject eobj = (EObject)obj;
-				EClass eClass = eobj.eClass();
-			    // Get the structural features
-			    EList features = eClass.getEAllStructuralFeatures(); 
-			    // For each feature, get the value and and check if its resource is in the list
-			    for (Object next : features)
-			    {
-			        EStructuralFeature feature = (EStructuralFeature)next;
-			        // Workaround for an EMF bug
-			        // -------------------------------------------------------------------------
-			        // Handle the particular case of an EObject which type is EClassifier : 
-			        // If an EClass has (accidentally) an instanceClassName value, set it to null
-			        // Indeed, such a case (which leads to a malformed model) can appear when user 
-			        // loads an ecore model created with EMF reflexive editor, which sometimes 
-			        // creates EClass elements with an instanceClassName that equals "". 
-			        // An instanceClassName=="" leads to a ClassNotFoundException since EMF underlying code looks
-			        // for a java class which name is thus "" -> unconsistent!
-			        if (eobj instanceof EClassifier)
-			        {
-			        	 String instance_class_name = ((EClassifier)eobj).getInstanceClassName();
-			        	 if (instance_class_name != null && instance_class_name.length() == 0)
-			        		 ((EClassifier)eobj).setInstanceClassName(null);
-			        }
-			        Object fvalue = eobj.eGet(feature);
-			        // If this feature is an EList,
-			        if (fvalue instanceof EList)
-			        {   // Then, for each object of this EList-feature, add its hosting resource 
-			        	// into the list of dependent resources
-			    	    for (Object sfeature : ((EList)fvalue)) 
-			    	    {
-			    	    	// Ignore values which type is a base type (String,...) : we don't need to 
-			    	    	// precreate a runtime object for them. (will be created "on the fly")
-			    	    	if (sfeature instanceof EObject)
-			    	    		addObjectResourceToList(list,(EObject)sfeature); 
-			    	    }
-			        }
-			        //If this feature is an EObject, add its hosting resource into the list of dependent resources.
-			        else if (fvalue instanceof EObject)   
-			        	addObjectResourceToList(list,(EObject)fvalue);
-			    }
-			}
-		}
-	}
-	
-	/**
 	 * Adds the resource of the given EObject (using obj.eResource() call) to the
 	 * list <code>list</code>
 	 * @param list The list&lt;Resource&gt;
@@ -202,7 +129,7 @@ public class EMF2Runtime {
 			list.add(obj.eResource());
 			internalLog.debug("Resource added : "+ obj.eResource().getURI() );
     		// recursively add the resources
-			findDependentResources(list,obj.eResource());
+			unit.findDependentResources(list,obj.eResource());
     	}
 	}
 	
@@ -219,7 +146,7 @@ public class EMF2Runtime {
 		// Find all the resources on which our resource depend,
 		// and for each resource, create the ROs for its hosted EObjects.
 		// (We know that the list returned findDependentResources contains only Resources:))
-		for (Object res : findDependentResources(resource))
+		for (Object res : unit.findDependentResources(resource))
 		{
 			TreeIterator treeIt = ((Resource)res).getAllContents();
 			while(treeIt.hasNext())
