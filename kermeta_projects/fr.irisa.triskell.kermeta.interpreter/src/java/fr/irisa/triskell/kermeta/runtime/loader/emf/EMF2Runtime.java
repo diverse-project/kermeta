@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.47 2006-07-27 07:51:09 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.48 2006-08-02 11:46:28 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -15,6 +15,7 @@ package fr.irisa.triskell.kermeta.runtime.loader.emf;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
@@ -438,8 +439,9 @@ public class EMF2Runtime {
 	    fr.irisa.triskell.kermeta.language.structure.Class kclass = null;
 	    // Get the meta class in Ecore repr. (EClass) of the RuntimeObject to populate
 	    EClass eclass = eObject.eClass();
-	    if (getEcoreKermetaMap().containsKey(unit.getEQualifiedName(eclass)) &&
-	    		!((EPackage)eclass.eContainer()).getName().equals("ecore")) 
+	    // Get the Type corresponding to the given class. If it is an ecore type to convert (EEnum, EEnumLiteral, EAnnotation)
+	    // then, convert it in its kermeta compliant version (Enumeration, EnumerationLiteral, Tag) 
+	    if (getEcoreKermetaMap().containsKey(unit.getEQualifiedName(eclass)) && !unit.isFromEcoreMetaModel())
 	    {
 	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(unit.getEQualifiedName(eclass));
 	    	kclass = (fr.irisa.triskell.kermeta.language.structure.Class)getTypeFromName(kermeta_metaclass_name);
@@ -491,7 +493,7 @@ public class EMF2Runtime {
 	    			{    
 	    				fr.irisa.triskell.kermeta.runtime.language.Object.set(rObject, roprop, unit.getRuntimeMemory().voidINSTANCE);
 	    			}
-	    			else // Enum?
+	    			else
 	    			{
 	    				String errmsg = "NotImplemented Error : The type <"+feature_type+"> has not been handled yet. Trying to set "+
 	    				fvalue+" into "+rObject;	
@@ -535,8 +537,7 @@ public class EMF2Runtime {
 		// Patch for bug #595
 		// http://gforge.inria.fr/tracker/index.php?func=detail&aid=595&group_id=32&atid=205
 		// deal with special properties cases - ecore special structural feature
-		if (getEcoreKermetaMap().containsKey(eclass.getName()+"."+propName)
-				&& !((EPackage)eclass.eContainer()).getName().equals("ecore"))
+		if (getEcoreKermetaMap().containsKey(eclass.getName()+"."+propName) && !unit.isFromEcoreMetaModel())
 		{
 			tmp_propName = getEcoreKermetaMap().get(eclass.getName()+"."+propName);
 			if (tmp_propName.length() != 0)
@@ -675,8 +676,7 @@ public class EMF2Runtime {
 	    RuntimeObject result = null;
 	    String metaclass_name = unit.getEQualifiedName(metaclass);
 	    // If the given metaclass is an EEnum (ecore), we have to "convert" it in Enumeration (kermeta)
-	    if (getEcoreKermetaMap().containsKey(metaclass_name) &&
-	    		!((EPackage)metaclass.eContainer()).getName().equals("ecore")) 
+	    if (getEcoreKermetaMap().containsKey(metaclass_name) && !unit.isFromEcoreMetaModel()) 
 	    {
 	    	String kermeta_metaclass_name = (String)getEcoreKermetaMap().get(metaclass_name);
 	    	if (this.type_cache.containsKey(kermeta_metaclass_name)) 
@@ -702,7 +702,7 @@ public class EMF2Runtime {
 	    }
 	    return result;
 	}
-	
+
 	/**
 	 * Fill in the content map entry which key is <code>key</code> : the value of this entry is the RO
 	 * representation of a Collection, so the given <code>rObject</code> will be added to this

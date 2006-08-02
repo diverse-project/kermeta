@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.21 2006-07-27 07:51:09 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.22 2006-08-02 11:46:28 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -680,6 +680,22 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     			javacause);
     }
     
-    
+	/**
+	 * Test if the metamodel given by the user on load is ecore metamodel or not.
+	 * @return true if user metamodel is the Ecore one or not
+	 * Developer note: testing only through the uri of the metamodel resource is not reliable
+	 */
+	public boolean isFromEcoreMetaModel()
+	{
+		boolean result = false;
+		Iterator mmroots_iterator = this.getMetaModelResource().getContents().iterator();
+		while (mmroots_iterator.hasNext() && result == false)
+		{
+			Object mmroot = mmroots_iterator.next();
+			result = ((mmroot instanceof EPackage) && ((EPackage)mmroot).getName().equals("ecore"));
+		}
+		return result;
+	}
+	   
 }
 
