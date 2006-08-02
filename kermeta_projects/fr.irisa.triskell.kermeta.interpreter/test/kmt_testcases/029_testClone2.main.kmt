@@ -1,13 +1,14 @@
-@mainClass "root_package::Main"
-@mainOperation "testMain"
+@mainClass "testClone2::Main"
+@mainOperation "testClone1"
 
 
-package root_package;
+package testClone2;
 
 
 require kermeta
+using kermeta::standard
 
-Class Person 
+class Person 
 {
     attribute name : String
 }
@@ -52,9 +53,9 @@ class Main inherits kermeta::kunit::Test
     operation testClone1() is
     do
         var p1 : Person init Person.new
-        p1.name := “Robert”
+        p1.name := "Robert"
 
-        var P2 : Person init Person.new
+        var p2 : Person init Person.new
         // ERR p2.name := p1.name
         p2.name := String.clone(p1.name)
     end
