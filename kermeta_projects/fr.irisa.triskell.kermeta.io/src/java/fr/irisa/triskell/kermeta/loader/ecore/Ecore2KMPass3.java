@@ -1,3 +1,15 @@
+/* $Id: Ecore2KMPass3.java,v 1.2 2006-08-02 07:19:13 dvojtise Exp $
+ * Project    : fr.irisa.triskell.kermeta.io
+ * File       : Ecore2KMPass3.java
+ * License    : EPL
+ * Copyright  : IRISA / INRIA / Universite de Rennes 1
+ * -------------------------------------------------------------------
+ * Creation date : 1 Aug. 2006
+ * Authors : 
+ *        dtouzet <dtouzet@irisa.fr>
+ * Description : 
+ *   This pass apply the quick fixes that are necessary to obtain correct kermeta models from many ecore models  
+ */
 /**
  * 
  */
