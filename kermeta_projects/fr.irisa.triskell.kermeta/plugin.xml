@@ -52,6 +52,7 @@
       <import plugin="org.eclipse.team.core"/>
       <import plugin="org.eclipse.ui.console"/>
       <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.ui.views.properties.tabbed"/>
    </requires>
    <extension
          point="org.eclipse.ui.popupMenus">
@@ -238,6 +239,14 @@
          point="org.eclipse.core.resources.markers">
       <super type="org.eclipse.core.resources.problemmarker"/>
       <persistent value="true"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            class="fr.irisa.triskell.kermeta.view.KermetaView"
+            id="fr.irisa.triskell.kermeta.view1"
+            name="Kermeta"/>
    </extension>
 
 </plugin>
