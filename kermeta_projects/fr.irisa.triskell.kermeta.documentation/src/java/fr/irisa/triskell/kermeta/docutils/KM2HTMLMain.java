@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLMain.java,v 1.3 2006-08-03 09:50:45 zdrey Exp $
+/* $Id: KM2HTMLMain.java,v 1.4 2006-08-03 15:42:14 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLMain.java
  * License    : EPL
@@ -29,12 +29,12 @@ public class KM2HTMLMain {
 					"the output directory for generated doc");
 		else
 		{
-			output_directory = args[0]; // build/html/KermetaFramework
+			output_directory = args[0]; // build/html/KermetaFramework/
 		}
 		
 		KM2HTMLPrettyPrinter html_printer = new KM2HTMLPrettyPrinter(framework_path);
 		html_printer.ppKermetaFile(
-		  output_directory + 
+		  output_directory + "/" +
 		  html_printer.inputFile.substring(framework_path.lastIndexOf("/") + 1)
 		  + ".html");
 	}
