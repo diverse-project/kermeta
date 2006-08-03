@@ -1,4 +1,4 @@
-/* $Id: EMF2Runtime.java,v 1.49 2006-08-02 11:50:18 zdrey Exp $
+/* $Id: EMF2Runtime.java,v 1.50 2006-08-03 15:33:47 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMF2Runtime.java
  * License   : EPL
@@ -213,18 +213,18 @@ public class EMF2Runtime {
 			    	rObject.setContainer(runtime_objects_map.get(eObject.eContainer()));
 			    	// Set Content map entry "contents" for the resource that user asked to load
 			        if (eObject.eResource().getURI().toString().equals(unit.getResolvedUri().toString())) 
-			        	addContentMapEntry(unit, "contents", rObject);
+			        	fillContentMapEntry("contents", rObject);
 			    }
 			    else
 			    {
 			        rObject.setContainer(null);
 			        // Set Content map entry "contents"
 			        if (eObject.eResource().getURI().toString().equals(unit.getResolvedUri().toString())) 
-			        	addContentMapEntry(unit, "rootContents", rObject);
+			        	fillContentMapEntry("rootContents", rObject);
 			        // Fill in the contentMap that will be returned by the extern load method call
-			        addContentMapEntry(unit, "allRootContents", rObject);
+			        fillContentMapEntry("allRootContents", rObject);
 			    }
-			    addContentMapEntry(unit, "allContents", rObject);
+			    fillContentMapEntry("allContents", rObject);
 			}
 		}
 		catch (Exception e) {
@@ -631,14 +631,14 @@ public class EMF2Runtime {
 	}
 
 	/**
-	 * Fill in the content map entry which key is <code>key</code> : the value of this entry is the RO
-	 * representation of a Collection, so the given <code>rObject</code> will be added to this
-	 * collection 
+	 * Complete the contentMap dictionary accessed with <code>unit.getContentMap()</code>
+	 * method call, by modifying the entry ({key : value}) whose key is <code>key</code>. The
+	 * modification will consist on getting  the value of this entry, which is the Runtime Object
+	 * representation of a Collection, and then, add to this collection the given <code>rObject</code>.
 	 * @param key Key in contentMap a value among "contents", "rootContents", "allRootContents", "allContents"
-	 * @param coll the value corresponding to key. It is a collection 
-	 * @param rObject the object to add the collection <code>coll</code>
+	 * @param rObject the object to add the collection-value corresponding to the given <code>key</code>
 	 */
-	protected void addContentMapEntry(EMFRuntimeUnit unit, String key, RuntimeObject rObject)
+	protected void fillContentMapEntry(String key, RuntimeObject rObject)
 	{
 		// Set the entry to put { RuntimeObjectString , (RuntimeObject)content_table} in contentMap
 		RuntimeObject collection_entry = unit.getContentMapEntryFromString(key); 

@@ -1,4 +1,4 @@
-/* $Id: EMFRuntimeUnit.java,v 1.22 2006-08-02 11:46:28 zdrey Exp $
+/* $Id: EMFRuntimeUnit.java,v 1.23 2006-08-03 15:33:47 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : EMFRuntimeUnit.java
  * License   : GPL
@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicEList;
@@ -133,7 +135,6 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         this.uri = pUri;
         contentMap = emptyInstances;
         this.factory = pFactory;
-        //this.load();
     }
       
     public URI resolveURI(String uri, String rel_path)
@@ -175,13 +176,14 @@ public class EMFRuntimeUnit extends RuntimeUnit {
     }
 
     /** print the content of the EMF Registry */
-	public void logEMFRegistryContent() {
+	public String logEMFRegistryContent() {
 		String msg = "";
     	Iterator it = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().iterator();
     	while(it.hasNext()) {
     		msg += " | "+it.next().toString();
     	}
     	internalLog.debug("Factory.Registry known extensions are :" + msg);
+    	return msg;
 	}
     
     /**
@@ -201,89 +203,43 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			
 			// register the extension of this uri into EMF
 			registerEMFextensionToFactoryMap(kunit.getUri());
-			
-			//Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
+			// Special options for uri.map -> mapping platform:/... uris to os-dependent urls.
+			HashMap options = new HashMap();
 			ResourceSet resourceset = new ResourceSetImpl();
 	        
-	    	if(ENABLE_EMF_DIAGNOSTIC) {
-		    	Map map = URIConverterImpl.URI_MAP;
-		    	Iterator mapIt = map.entrySet().iterator();
-		    	KermetaUnit.internalLog.debug("EMF current URI_MAP:");
-				while(mapIt.hasNext()) {
-					// print EMF diagnostic even if it loaded, there may be some warning ?
-					Object o = mapIt.next();					
-					KermetaUnit.internalLog.debug("___URI_MAP entry: "+o + "; " + map.get(o));
-				}
-	    	}
-	    	HashMap options = new HashMap();
-	    	//options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
+			// If EMF Diagnostic is enabled
 	    	if(ENABLE_EMF_DIAGNOSTIC)
-	    	{	// allow to record unknwon feature
+	    	{
+		    	String msg = "EMF current URI_MAP entries :\n";
+		    	for (Object o : URIConverterImpl.URI_MAP.entrySet())
+		    		msg += "    "+o + "; " + URIConverterImpl.URI_MAP.get(o) + "\n";
+		    	KermetaUnit.internalLog.debug(msg);
+		    	//options.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
+	    		// allow to record unknwon feature
 	    		options.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
 	    	}
 	    	else
 	    		options.put(XMLResource.NIL, Boolean.TRUE);
 	    	
-	    	// Refer to http://www.w3.org/TR/2004/PER-xmlschema-0-20040318/#ipo.xml
-	    	if(true)
-	    	{
-	    		// -> does not work // loadMetamodel(resourceset, options);
-	    		resource = 	(XMLResource)resourceset.createResource(u);
-	    		if(resource != null) {
-	    			resource.load(options);
-	    		}
-	    		else
-	    		{
-	    			String errmsg ="Not able to create a resource for URI: "+u ;
-	    	    	logEMFRegistryContent();
-	    			throwKermetaRaisedExceptionOnLoad(errmsg, null);
-	    		}
-	    	}
-	    	else {
-	    		resource = (XMLResource)resourceset.getResource(u, true); // on demand load ...
-	    	}
-	    	
-	    	// Finding unresolved proxies also resolves all the content, so a getAllcontent on the resource set now work !
-	    	// Commented because this part of code generates a ClassCastException (inside EMF code..)
-	    /*	Map unresolvedReferences = EcoreUtil.UnresolvedProxyCrossReferencer.find(resourceset);
-			Iterator unresolvedMapIt = unresolvedReferences.entrySet().iterator();
-			while(unresolvedMapIt.hasNext()) {
-				// print EMF diagnostic even if it loaded, there may be some warning ?
-				Object o = unresolvedMapIt.next();					
-				internalLog.error("EMF reports unresolved reference: "+o + "; " + unresolvedReferences.get(o));
-			}
-			if(!unresolvedReferences.isEmpty())
-			{
-				unresolvedMapIt = unresolvedReferences.entrySet().iterator();
-				String errmsg = "EMF reports unresolved reference(s): You must load the corresponding files before trying to load this model."+
-					"\n  First unresolved proxy is: "+unresolvedMapIt.next()+
-					"\n  a new URI_MAP entry may solve your problem";
-				throwKermetaRaisedExceptionOnLoad(errmsg, null);
-			}*/
-			
+	    	// Try to create the resource specified by "u"
+    		resource = 	(XMLResource)resourceset.createResource(u);
+    		if(resource != null)
+    			resource.load(options);
+    		else
+    			throwKermetaRaisedExceptionOnLoad(
+    			"Not able to create a resource for URI: "+ u + "\n    " + logEMFRegistryContent(), null);
+
 			// Now, process the conversion of EMF model into Runtime representation so that kermeta can interprete it.
 	    	EMF2Runtime emf2Runtime = new EMF2Runtime(unit, resource);
 	    	emf2Runtime.loadunit();
 		}
 		catch (IOException e){
 			emf_msg = "I/O error loading EMF model " + unit.getUriAsString() + ";" + (e.getMessage()!=null?(" :\n " + e.getMessage()):"");
-			if (resource!=null && resource.getErrors().size()>0)
-			{
-				emf_msg += "\nEMF reported errors: ";
-				for (Object errorDiag : resource.getErrors()) 
- 					emf_msg += "\n    - " + ((Resource.Diagnostic)errorDiag).getMessage();
-			}
-			throwKermetaRaisedExceptionOnLoad(emf_msg, e);
+			throwKermetaRaisedExceptionOnLoad(emf_msg + getResourceErrors(resource), e);
 		}
 		catch (WrappedException e){
 			emf_msg += "EMF persistence error: could not load the given model "+ (e.exception().getMessage()!=null?(": " + e.exception().getMessage()):"");
-			if(resource != null && resource.getErrors().size()>0)
-			{
-				emf_msg += "\nEMF reported errors: ";
-				for (Object errorDiag : resource.getErrors())
-					emf_msg += "\n    - " + ((Resource.Diagnostic)errorDiag).getMessage();
-			}
-			throwKermetaRaisedExceptionOnLoad(emf_msg, e);    	
+			throwKermetaRaisedExceptionOnLoad(emf_msg + getResourceErrors(resource), e);
 		}
 		finally
 		{
@@ -298,12 +254,24 @@ public class EMFRuntimeUnit extends RuntimeUnit {
 			}
 		}
     }
+    
+    /** Return the errors registered in the given resource. If resource is null, return empty string */
+    protected String getResourceErrors(Resource resource)
+    {
+    	String emf_msg = "";
+    	if (resource!=null && resource.getErrors().size()>0)
+		{
+			emf_msg += "\nEMF reported errors: ";
+			for (Object errorDiag : resource.getErrors()) 
+					emf_msg += "\n    - " + ((Resource.Diagnostic)errorDiag).getMessage();
+		}
+    	return emf_msg;
+    }
 
 	private void registerEMFextensionToFactoryMap(String kunit_uri) {
 		String ext = kunit_uri.substring(kunit_uri.lastIndexOf(".")+1);
 		internalLog.debug("registering extension:" + ext);
 		logEMFRegistryContent();
-		
 		//
 		if (! Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().keySet().contains(ext)){
 			internalLog.debug("registering extension: " + ext);		
@@ -329,8 +297,8 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         		this.metaModelResource = this.loadMetaModelAsEcore(this.getMetaModelUri());
         	}
         	catch (WrappedException e){
-        		KermetaUnit.internalLog.error("Error loading EMF model " + this.getUriAsString() + " : " + e.exception().getMessage(), e);
-        		throwKermetaRaisedExceptionOnLoad(e.exception().getMessage(), e);
+        		throwKermetaRaisedExceptionOnLoad(
+        		"Error loading EMF model '" + this.getUriAsString() + "' : " + e.exception().getMessage(), e);
 			}
         }
         else // if metaModelResource is null 
@@ -351,66 +319,17 @@ public class EMFRuntimeUnit extends RuntimeUnit {
         r2e.updateEMFModel();
         
         // And save the created resource!
-        try {	
-        	
-        	r2e.getResource().save(null);
-        	
-		}
+        try { r2e.getResource().save(null); }
         catch (IOException e) {
+        	// "t" can be of type Resource.IOWrappedException or DanglingHREFException
 		    Throwable t = e.getCause();
-		    KermetaUnit.internalLog.error("Error saving EMF model " + this.getUriAsString() + " : " + e.getMessage(), e);
-        	if (t instanceof Resource.IOWrappedException)
-		    {	
-		        Resource.IOWrappedException we = (Resource.IOWrappedException)t;
-		        throwKermetaRaisedExceptionOnSave(we.getWrappedException().getMessage(), we);
-		    }
-        	else if (t instanceof DanglingHREFException)
-		    {
-		    	DanglingHREFException we = (DanglingHREFException)t;
-		        throwKermetaRaisedExceptionOnSave(we.getMessage(), we);
-		    }
+		    String msg = "Error saving EMF model '" + this.getUriAsString() + "'" +
+		    " :\n Error : \n    " + e.getMessage() + ((t!=null)?"\n Cause : \n    "+ t.getMessage():"");
 		    e.printStackTrace();
-		    throwKermetaRaisedExceptionOnSave(e.getMessage(), e); 
+		    throwKermetaRaisedExceptionOnSave(msg, e); 
 		}
     }
-	
-    /**
-     * Try to load the metamodel given by the metamodel_uri attribute
-     * Not used yet
-     * @param options options to be put to the instance/model resource.load method
-     * */
-	public void loadMetamodel(ResourceSet resourceset, Map options)
-	{
-		Registry registry = resourceset.getPackageRegistry();
-     	// metamodel_uri!
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore",new XMIResourceFactoryImpl());
-	    URI u = createURI(metamodel_uri);
-		Resource resource = resourceset.createResource(u);
-		try 
-		{
-			XMLResource.XMLMap xmlMap = new XMLMapImpl();
-			resource.load(null);
-			TreeIterator it = resource.getAllContents();
-			while (it.hasNext()) 
-			{
-				EObject n = (EObject)it.next();
-				if (n instanceof EPackage)
-				{
-					xmlMap.setNoNamespacePackage((EPackage)n);
-					registry.put("//"+((EPackage)n).getName(),(EPackage)n);
-				}
-			}
-			// There is probably something to do with this option
-			options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-			options.put(XMLResource.OPTION_XML_MAP, xmlMap);
-		} 
-		catch (IOException e) 
-		{
-			e.printStackTrace();
-		}
-	}
-	
+		
    /*
     * ACCESSORS
     *
