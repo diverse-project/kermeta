@@ -37,6 +37,9 @@
       <library name="lib/cu_kermeta.jar">
          <export name="*"/>
       </library>
+      <library name="lib/thirdparty/junit.jar">
+         <export name="*"/>
+      </library>
    </runtime>
    <requires>
      <import plugin="org.eclipse.ui" optional="true"/>
