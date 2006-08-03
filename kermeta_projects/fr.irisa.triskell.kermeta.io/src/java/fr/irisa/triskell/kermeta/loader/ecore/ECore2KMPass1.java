@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass1.java,v 1.5 2006-07-31 12:52:36 dtouzet Exp $
+/* $Id: ECore2KMPass1.java,v 1.6 2006-08-03 09:27:31 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -98,7 +98,10 @@ public class ECore2KMPass1 extends EcoreVisitor {
 		if (pack == null) {
 			pack = unit.struct_factory.createPackage();
 			pack.setName(node.getName());
-			pack.setUri(node.getNsURI());
+			// FIXME : we have to test if URI is valid as a file path or not!
+			// Was : pack.setUri(node.getNsURI());
+			// node.getNsURI() is not always valid, so by default, we will take unit.getUri();
+			pack.setUri(unit.getUri());
 			if (getCurrentPackage() != null)
 				pack.setNestingPackage(getCurrentPackage());
 			else
