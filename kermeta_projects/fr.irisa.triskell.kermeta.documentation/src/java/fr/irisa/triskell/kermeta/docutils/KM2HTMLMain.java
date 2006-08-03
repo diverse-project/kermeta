@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLMain.java,v 1.2 2006-06-05 14:43:36 zdrey Exp $
+/* $Id: KM2HTMLMain.java,v 1.3 2006-08-03 09:50:45 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.documentation
  * File       : KM2HTMLMain.java
  * License    : EPL
@@ -24,8 +24,8 @@ public class KM2HTMLMain {
 		
 		String framework_path = "../fr.irisa.triskell.kermeta/lib/framework.km";
 		String output_directory = "";
-		if (args.length < 0 || args.length > 1)
-			throw new Error("KM2HTMLMain must be called with 1 argument, that will be" +
+		if (args.length <= 0 || args.length > 1)
+			throw new Error("KM2HTMLMain must be called with 1 argument, that will be " +
 					"the output directory for generated doc");
 		else
 		{
