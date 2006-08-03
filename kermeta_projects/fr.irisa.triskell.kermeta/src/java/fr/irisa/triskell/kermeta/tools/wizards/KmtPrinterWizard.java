@@ -1,4 +1,4 @@
-/* $Id: KmtPrinterWizard.java,v 1.6 2006-06-16 18:19:17 dvojtise Exp $
+/* $Id: KmtPrinterWizard.java,v 1.7 2006-08-03 09:28:44 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -76,24 +76,24 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 		String pkg_name = "package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n";
 		
 		w.write("package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n");
-	
 		/* imported units needed to recognize the imported classes...*/
-		Iterator it = builder.importedUnits.iterator();
-		while(it.hasNext()) {
-			KermetaUnit iu = (KermetaUnit)it.next();
+		for (KermetaUnit iu : builder.importedUnits)
+		{
 			if (iu.rootPackage != builder.rootPackage && builder.rootPackage.getUri() != null)
-				if(!builder.rootPackage.getUri().equals(iu.getUri())) { // maybe we are serializing ecore, just forget about this require
-				
+			{
+				if(!builder.rootPackage.getUri().equals(iu.getUri()))
+				{
+					// maybe we are serializing ecore, just forget about this require
 					if (iu instanceof KMTUnit || iu instanceof KMUnit)
 						w.write("require \"" + iu.getUri() + "\"\n");
 					else {
-						
 						IFile importedfile = ifile.getProject().getFile(ifile.getProjectRelativePath().removeFileExtension().removeLastSegments(1).append(iu.rootPackage.getName()).addFileExtension("kmt"));
 						
 						
 						writeUnit(iu, importedfile);
 						w.write("require \"" + iu.rootPackage.getName() + ".kmt\"\n");
 					}
+				}
 			}
 		}
 		
