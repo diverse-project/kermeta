@@ -9,5 +9,7 @@
 		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.interpreter/lib/"/>
 		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta.framework/lib/"/>
 		<copy file="dist/model_kermeta.jar" todir="../fr.irisa.triskell.kermeta/lib/"/>
+		<copy file="build/ecore/kermeta_java.ecore" todir="../fr.irisa.triskell.kermeta/lib/"/>
+		<copy file="build/ecore/kermeta_java.ecore" tofile="../fr.irisa.triskell.kermeta/lib/kermeta.ecore"/>
 	</target>
 </project>
