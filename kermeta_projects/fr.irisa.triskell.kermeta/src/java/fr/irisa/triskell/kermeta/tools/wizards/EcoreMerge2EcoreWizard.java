@@ -1,4 +1,4 @@
-/* $Id: EcoreMerge2EcoreWizard.java,v 1.1 2006-01-17 08:46:04 barais Exp $
+/* $Id: EcoreMerge2EcoreWizard.java,v 1.2 2006-08-04 15:31:50 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -201,31 +201,14 @@ public class EcoreMerge2EcoreWizard extends Wizard {
 		// unit.load();
 		try {
 
-			if (outputPage.askIfFileExistRadio.getSelection()
-					&& outputFile.exists()) {
-				Shell shell = new Shell();
-				if (!MessageDialog.openQuestion(shell, "File already exists",
-						"Do you want to overwrite exiting file: \n"
-								+ outputFile.getFullPath().toString()))
-					return true;
-			} else
-				outputFile = outputPage.createNewFile();
+			outputFile = outputPage.createNewFile();
 
 			KermetaPlugin.getDefault().getConsoleStream().println(
 					"Writing " + outputFile.getName());
 
 			writeUnit(outputFile);
 			if (tracePage.enableFileDestinationButton.getSelection()) {
-				if (tracePage.askIfFileExistRadio.getSelection()
-						&& traceFile.exists()) {
-					Shell shell = new Shell();
-					if (!MessageDialog.openQuestion(shell,
-							"File already exists",
-							"Do you want to overwrite exiting file: \n"
-									+ traceFile.getFullPath().toString()))
-						return true;
-				} else
-					traceFile = tracePage.createNewFile();
+				traceFile = tracePage.createNewFile();
 				writeTrace();
 			}
 		} catch (Throwable e) {

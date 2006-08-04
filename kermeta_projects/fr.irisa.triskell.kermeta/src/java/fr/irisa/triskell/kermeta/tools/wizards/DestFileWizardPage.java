@@ -1,4 +1,4 @@
-/* $Id: DestFileWizardPage.java,v 1.8 2006-07-24 08:51:40 dtouzet Exp $
+/* $Id: DestFileWizardPage.java,v 1.9 2006-08-04 15:31:50 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaNewFileWizardPage.java
  * License: EPL
@@ -92,8 +92,6 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 	protected Group fileExistsGroup;
 
 	protected Button forbidFileExistRadio;
-
-	protected Button askIfFileExistRadio;
 
 	protected Button overwriteIfFileExistRadio;
 
@@ -262,13 +260,6 @@ public class DestFileWizardPage extends WizardPage implements Listener {
 				handleFileExistsButtonSelect();
 			}
 		});
-		/*
-		 * label = new Label(fileExistsGroup, SWT.NULL); label.setText("Ask ");
-		 * askIfFileExistRadio = new Button(fileExistsGroup, SWT.RADIO);
-		 * askIfFileExistRadio.addSelectionListener(new SelectionAdapter() {
-		 * public void widgetSelected(SelectionEvent e) {
-		 * handleFileExistsButtonSelect(); } });
-		 */
 		label = new Label(fileExistsGroup, SWT.NULL);
 		label.setText("Overwrite existing file ");
 		overwriteIfFileExistRadio = new Button(fileExistsGroup, SWT.RADIO);

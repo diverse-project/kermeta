@@ -1,4 +1,4 @@
-/* $Id: UnitExporterWizard.java,v 1.12 2006-06-23 09:12:39 cfaucher Exp $
+/* $Id: UnitExporterWizard.java,v 1.13 2006-08-04 15:31:50 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -245,16 +245,7 @@ public class UnitExporterWizard extends Wizard {
 
 				writeUnit(unit, outputFile);
 				if (tracePage.enableFileDestinationButton.getSelection()) {
-					if (tracePage.askIfFileExistRadio.getSelection()
-							&& traceFile.exists()) {
-						Shell shell = new Shell();
-						if (!MessageDialog.openQuestion(shell,
-								"File already exists",
-								"Do you want to overwrite exiting file: \n"
-										+ traceFile.getFullPath().toString()))
-							return true;
-					} else
-						traceFile = tracePage.createNewFile();
+					traceFile = tracePage.createNewFile();
 					writeTrace();
 				}
 			} catch (Throwable e) {
