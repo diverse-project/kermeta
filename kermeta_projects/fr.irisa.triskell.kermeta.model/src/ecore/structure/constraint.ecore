@@ -9,6 +9,12 @@
           lowerBound="1" eType="#//behavior/Expression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="stereotype" eType="#//structure/ConstraintType"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="#//structure/ConstraintLanguage"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="invOwner" eType="#//structure/ClassDefinition"
+          eOpposite="#//structure/ClassDefinition/inv"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="preOwner" eType="#//structure/Operation"
+          eOpposite="#//structure/Operation/pre"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="postOwner" eType="#//structure/Operation"
+          eOpposite="#//structure/Operation/post"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -19,13 +25,14 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition">
       <eStructuralFeatures xsi:type="ecore:EReference" name="inv" upperBound="-1"
-          eType="#//structure/Constraint" defaultValueLiteral="" containment="true"/>
+          eType="#//structure/Constraint" defaultValueLiteral="" containment="true"
+          eOpposite="#//structure/Constraint/invOwner"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Operation">
       <eStructuralFeatures xsi:type="ecore:EReference" name="pre" upperBound="-1"
-          eType="#//structure/Constraint" containment="true"/>
+          eType="#//structure/Constraint" containment="true" eOpposite="#//structure/Constraint/preOwner"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="post" upperBound="-1"
-          eType="#//structure/Constraint" containment="true"/>
+          eType="#//structure/Constraint" containment="true" eOpposite="#//structure/Constraint/postOwner"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ConstraintType">
       <eLiterals name="inv"/>
