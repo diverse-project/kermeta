@@ -1,5 +1,5 @@
 package ecore;
- 
+
 //require kermeta
 
 /** This class refers to any EDataType feature*/
@@ -30,56 +30,72 @@ class EClass inherits EClassifier
 	attribute eStructuralFeatures : EStructuralFeature[0..*]#eContainingClass
 	reference eSuperTypes : EClass[0..*]
 	attribute eOperations : EOperation[0..*]#eContainingClass
-	
-	property readonly eAllAttributes : EAttribute[0..*]
-		getter is do 
+	property eAllAttributes : EAttribute[0..*]
+		getter is do
 	 		result := kermeta::standard::OrderedSet<EAttribute>.new
 			self.eAllSuperTypes.each{ t | result.addAll(t.eAttributes) }
 		end
-		
-	property readonly eAllReferences : EReference[0..*]
-		getter is do	 		
+		setter is do
+			//TODO: implement getter for derived property eAllAttributes
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property eAllReferences : EReference[0..*]
+		getter is do
 	 		result := kermeta::standard::OrderedSet<EReference>.new 
 			self.eAllSuperTypes.each{ t | result.addAll(t.eReferences) }
 		end
-		
-	property readonly eReferences : EReference[0..*]
+		setter is do
+			//TODO: implement getter for derived property eAllReferences
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property eReferences : EReference[0..*]
 		getter is do
 			result := kermeta::standard::OrderedSet<EReference>.new
 			self.eStructuralFeatures.each { f | if EReference.isInstance(f) then var a : EReference a ?= f result.add(a) end }
 		end
-
-	property readonly eAttributes : EAttribute[0..*]
+		setter is do
+			//TODO: implement getter for derived property eReferences
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property eAttributes : EAttribute[0..*]
 		getter is do
 			result := kermeta::standard::OrderedSet<EAttribute>.new
 			self.eStructuralFeatures.each { f | if EAttribute.isInstance(f) then var a : EAttribute a ?= f result.add(a) end }
 		end
-		
+		setter is do
+			//TODO: implement getter for derived property eAttributes
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
 	property eAllContainments : EReference[0..*]
 		getter is do
 	 		result := kermeta::standard::OrderedSet<EReference>.new 
 	 		stdio.writeln("contaimnet : " + self.eAllReferences.one.containment.toString)
 	 		result.addAll(self.eAllReferences.select { r | r.containment == true } )
 		end
-		setter is do		
+		setter is do
 			//TODO: implement setter for derived property eAllContainments
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
-		
-	property readonly eAllOperations : EOperation[0..*]
+	property eAllOperations : EOperation[0..*]
 		getter is do
 	 		result := kermeta::standard::OrderedSet<EOperation>.new 
 	 		result.addAll(eOperations)
 			self.eAllSuperTypes.each{ t | result.addAll(t.eOperations) }
 		end
-
-	property readonly eAllStructuralFeatures : EStructuralFeature[0..*]
+		setter is do
+			//TODO: implement getter for derived property eAllOperations
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property eAllStructuralFeatures : EStructuralFeature[0..*]
 		getter is do
 	 		result := kermeta::standard::OrderedSet<EStructuralFeature>.new
 	 		if (eStructuralFeatures != void) then result.addAll(eStructuralFeatures) end
 			self.eAllSuperTypes.each{ t | result.addAll(t.eStructuralFeatures) }
 		end
-		
+		setter is do
+			//TODO: implement getter for derived property eAllStructuralFeatures
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
 	property eAllSuperTypes : EClass[0..*]
 		getter is do
 			result := kermeta::standard::OrderedSet<EClass>.new 
@@ -90,7 +106,6 @@ class EClass inherits EClassifier
 			//TODO: implement setter for derived property eAllSuperTypes
 			raise kermeta::exceptions::NotImplementedException.new 
 		end
-
 	property eIDAttribute : EAttribute
 		getter is do
 			//TODO: implement getter for derived property eIDAttribute
@@ -131,17 +146,27 @@ class EClass inherits EClassifier
 abstract class EClassifier inherits ENamedElement
 {
 	attribute instanceClassName : EString
-	attribute instanceClass : EJavaClass
-	attribute defaultValue : EJavaObject
+	property instanceClass : EJavaClass
+		getter is do
+			//TODO: implement getter for derived property instanceClass
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property instanceClass
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property defaultValue : EJavaObject
+		getter is do
+			//TODO: implement getter for derived property defaultValue
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property defaultValue
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
 	reference ePackage : EPackage#eClassifiers
-	operation isInstance(object : EJavaObject) : EBoolean is do
-		//TODO: implement operation isInstance
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation getClassifierID() : EInt is do
-		//TODO: implement operation getClassifierID
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
+	operation isInstance(object : EJavaObject) : EBoolean is abstract
+	operation getClassifierID() : EInt is abstract
 }
 class EDataType inherits EClassifier
 {
@@ -158,30 +183,21 @@ class EEnum inherits EDataType
 	operation getEEnumLiteral2(~value : EInt) : EEnumLiteral is do
 		result := eLiterals.detect { e | e.~value == ~value } 
 	end
+	operation getEEnumLiteralByLiteral(literal : EString) : EEnumLiteral is abstract
 }
 class EEnumLiteral inherits ENamedElement
 {
 	attribute ~value : EInt
 	attribute instance : EEnumerator
+	attribute literal : EString
 	reference eEnum : EEnum#eLiterals
 }
-
 class EFactory inherits EModelElement
 {
 	reference ePackage : EPackage[1..1]#eFactoryInstance
-	operation create(eClass : EClass) : EObject is do
-		// result := eClass.new result.setMetaClass...
-		//TODO: implement operation create
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation createFromString(eDataType : EDataType, literalValue : EString) : EJavaObject is do
-		//TODO: implement operation createFromString
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation convertToString(eDataType : EDataType, instanceValue : EJavaObject) : EString is do
-		//TODO: implement operation convertToString
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
+	operation create(eClass : EClass) : EObject is abstract
+	operation createFromString(eDataType : EDataType, literalValue : EString) : EJavaObject is abstract
+	operation convertToString(eDataType : EDataType, instanceValue : EJavaObject) : EString is abstract
 }
 abstract class EModelElement inherits EObject
 {
@@ -190,7 +206,6 @@ abstract class EModelElement inherits EObject
 		result := eAnnotations.detect { a | a.source == source }
 	end
 }
-
 abstract class ENamedElement inherits EModelElement
 {
 	attribute name : EString
@@ -209,46 +224,16 @@ class EObject
 	operation eContainer() : EObject is do
 		result ?= self.container
 	end
-	operation eContainingFeature() : EStructuralFeature is do
-		// result ?= extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eContainingFeature(self)
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation eContainmentFeature() : EReference is do
-		// result ?= extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eContainmentFeature(self)
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation eContents() : EEList is do
-		// result := extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eContents(self)
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation eAllContents() : ETreeIterator is do
-		// result := extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eContents(self) 
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation eCrossReferences() : EEList is do
-		//result := extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eCrossReferences(self)
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation eGet(feature : EStructuralFeature) : EJavaObject is do
-		// result := extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eGet(self, feature)		
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation eGet2(feature : EStructuralFeature, resolve : EBoolean) : EJavaObject is do
-		// result := extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eGet2(self, feature, resolve)		
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation eSet(feature : EStructuralFeature, newValue : EJavaObject) : kermeta::standard::~Void is do
-		// extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eSet(self, feature, newValue)		
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation eIsSet(feature : EStructuralFeature) : EBoolean is do
-		// result ?= extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eIsSet(self, feature)		
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation eUnset(feature : EStructuralFeature) : kermeta::standard::~Void is do
-		// extern fr::irisa::triskell::ecore::wrapper::EObjectWrapper.eUnSet(self, feature)
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
+	operation eContainingFeature() : EStructuralFeature is abstract
+	operation eContainmentFeature() : EReference is abstract
+	operation eContents() : EEList is abstract
+	operation eAllContents() : ETreeIterator is abstract
+	operation eCrossReferences() : EEList is abstract
+	operation op_eGet(feature : EStructuralFeature) : EJavaObject is abstract
+	operation eGet(feature : EStructuralFeature, resolve : EBoolean) : EJavaObject is abstract
+	operation eSet(feature : EStructuralFeature, newValue : EJavaObject) : kermeta::standard::~Void is abstract
+	operation eIsSet(feature : EStructuralFeature) : EBoolean is abstract
+	operation eUnset(feature : EStructuralFeature) : kermeta::standard::~Void is abstract
 }
 class EOperation inherits ETypedElement
 {
@@ -264,10 +249,7 @@ class EPackage inherits ENamedElement
 	attribute eClassifiers : EClassifier[0..*]#ePackage
 	attribute eSubpackages : EPackage[0..*]#eSuperPackage
 	reference eSuperPackage : EPackage#eSubpackages
-	operation getEClassifier(name : EString) : EClassifier is do
-		//TODO: implement operation getEClassifier
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
+	operation getEClassifier(name : EString) : EClassifier is abstract
 }
 class EParameter inherits ETypedElement
 {
@@ -308,18 +290,20 @@ abstract class EStructuralFeature inherits ETypedElement
 	attribute volatile : EBoolean
 	attribute transient : EBoolean
 	attribute defaultValueLiteral : EString
-	attribute defaultValue : EJavaObject
+	property defaultValue : EJavaObject
+		getter is do
+			//TODO: implement getter for derived property defaultValue
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property defaultValue
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
 	attribute unsettable : EBoolean
 	attribute derived : EBoolean
 	reference eContainingClass : EClass#eStructuralFeatures
-	operation getFeatureID() : EInt is do
-		//TODO: implement operation getFeatureID
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
-	operation getContainerClass() : EJavaClass is do
-		//TODO: implement operation getContainerClass
-		raise kermeta::exceptions::NotImplementedException.new 
-	end
+	operation getFeatureID() : EInt is abstract
+	operation getContainerClass() : EJavaClass is abstract
 }
 abstract class ETypedElement inherits ENamedElement
 {
@@ -327,14 +311,25 @@ abstract class ETypedElement inherits ENamedElement
 	attribute unique : EBoolean
 	attribute lowerBound : EInt
 	attribute upperBound : EInt
-	attribute many : EBoolean
-	attribute required : EBoolean
+	property many : EBoolean
+		getter is do
+			//TODO: implement getter for derived property many
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property many
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+	property required : EBoolean
+		getter is do
+			//TODO: implement getter for derived property required
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
+		setter is do
+			//TODO: implement getter for derived property required
+			raise kermeta::exceptions::NotImplementedException.new 
+		end
 	reference eType : EClassifier
-}
-class EStringToStringMapEntry
-{
-	attribute key : EString
-	attribute ~value : EString
 }
 alias EBigDecimal : kermeta::language::structure::Object;
 alias EBigInteger : kermeta::language::structure::Object;
@@ -358,7 +353,7 @@ alias EFloatObject : kermeta::language::structure::Object;
 alias EInt : kermeta::standard::Integer;
 alias EIntegerObject : kermeta::standard::Integer;
 alias EJavaClass : kermeta::language::structure::Object;
-alias EJavaObject : kermeta::language::structure::Object;
+alias EJavaObject : kermeta::standard::Object;
 alias ELong : kermeta::language::structure::Object;
 alias ELongObject : kermeta::language::structure::Object;
 alias EMap : kermeta::language::structure::Object;
@@ -367,4 +362,9 @@ alias EResourceSet : kermeta::language::structure::Object;
 alias EShort : kermeta::language::structure::Object;
 alias EShortObject : kermeta::language::structure::Object;
 alias EString : kermeta::standard::String;
+class EStringToStringMapEntry
+{
+	attribute key : EString
+	attribute ~value : EString
+}
 alias ETreeIterator : kermeta::language::structure::Object;
