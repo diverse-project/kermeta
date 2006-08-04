@@ -19,18 +19,35 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
 
+/**
+ * Reflective collection is the java side (wrapper for add/remove/clear base methods
+ * related to collection handling) of Kermeta reflective collections. A reflective
+ * Collection is only used for properties (attributes/references) which type is
+ * a (or a subtype of) collection.
+ */
 public class ReflectiveCollection {
 
-	// Implementation of method add called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(element)
+	/** Implementation of method add called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(element)
+	*/
 	public static RuntimeObject add(RuntimeObject self, RuntimeObject param0) {
 		add(self, param0, true);
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 	
 	/**
-	 *  A review is needed for this method
+	 * Add method that takes into account the opposite property if the 3rd 
+	 * argument (handle_opposite) is set to true. This method should not be called
+	 * by the Kermeta user.
 	 * 
+	 * @param self the RuntimeObject representation of self object -- in kermeta side -- 
+	 * that is a reflective collection, to which <code>param0</code> entity is added.
+	 * @param param0 the RuntimeObject to add on self collection.
+	 * @param handle_opposite if true, handle the opposite property, i.e add the given element
+	 * to the opposite property and remove it from the "old" opposite property, otherwise ignore
+	 * opposites.
+	 * A review is needed for this method : it does not contain exactly the same body
+	 * as the method addAt in ReflectiveSequence
 	 */	
 	public static void add(RuntimeObject self, RuntimeObject param0, boolean handle_opposite) {
 		// add the new object
@@ -53,13 +70,26 @@ public class ReflectiveCollection {
 		}
 	}
 
-	// Implementation of method remove called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(element)
+	/** Implementation of method remove called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.remove(element)
+	 */
 	public static RuntimeObject remove(RuntimeObject self, RuntimeObject param0) {
 		remove(self, param0, true);
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 	
+	/**
+	 * Remove method that takes into account the opposite property if the 3rd 
+	 * argument (handle_opposite) is set to true. This method should not be called
+	 * by the Kermeta user.
+	 * 
+	 * @param self the RuntimeObject representation of self object -- in kermeta side -- 
+	 * that is a reflective collection, from which <code>param0</code> entity is removed.
+	 * @param param0 the RuntimeObject to remove from self collection.
+	 * @param handle_opposite if true, handle the opposite property, i.e remove the given element
+	 * to the opposite property and remove it from the "old" opposite property, otherwise ignore
+	 * opposites.
+	 */
 	public static void remove(RuntimeObject self, RuntimeObject param0, boolean handle_opposite) {
 		// get rid of the object
 		Collection.remove(self, param0);
@@ -80,13 +110,19 @@ public class ReflectiveCollection {
 		
 	}
 
-	// Implementation of method clear called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear()
+	/** Implementation of method clear called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.clear() */
 	public static RuntimeObject clear(RuntimeObject self) {
 		clear(self, true);
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 	
+	/**
+	 * Clear method that takes in account and clear the opposite property if there is one
+	 * @param self RuntimeObject representation of the kermeta collection on which user 
+	 * asked to call <code>clear</code> method. 
+	 * @param handle_opposite if true, also clear the content of opposite property.
+	 */
 	public static void clear(RuntimeObject self, boolean handle_opposite) {
 		Iterator it = ((ArrayList)Collection.getArrayList(self).clone()).iterator();
 		while(it.hasNext()) {
@@ -96,20 +132,19 @@ public class ReflectiveCollection {
 	}
 	
 	/**
-	 * Cache : ClassDefinition cd -> RuntimeObject of kermeta::language::ReflectiveCollection<cd>
-	 */
-	//private static Hashtable cache_reflec_coll_class = new Hashtable();
-	
-	/**
-	 * Please see the comments in ReflectiveSequence java class, in the method 
+	 * Create the RuntimeObject representation of a reflective collection which 
+	 * type parameter is the type of the given <code>property</code> (repr. as a 
+	 * RuntimeObject), which "owner" object is the given <code>object</code>.
+	 * Please see the javadoc+comments in ReflectiveSequence java class, in the method 
 	 * <code>createReflectiveSequence</code>.
-	 * @param object
-	 * @param property
-	 * @return
+	 * @see ReflectiveSequence#createReflectiveSequence(RuntimeObject, RuntimeObject)
+	 * @param object object for which we set the property value 
+	 * @param property property which value to set is the returned RuntimeObject
+	 * @return the RuntimeObject representation of a reflective collection
 	 */
 	public static RuntimeObject createReflectiveCollection(RuntimeObject object, RuntimeObject property)
 	{
-	    
+		// Cache : ClassDefinition cd -> RuntimeObject of kermeta::language::ReflectiveCollection<cd>
 	    Hashtable cache_reflec_coll_class = object.getFactory().cache_reflec_coll_class;
 	    
 	    fr.irisa.triskell.kermeta.language.structure.Class self_class = (fr.irisa.triskell.kermeta.language.structure.Class)object.getMetaclass().getData().get("kcoreObject");
@@ -174,7 +209,9 @@ public class ReflectiveCollection {
 	    // reflective_collection.getData().get("RProperty") --> null;
 		return Boolean.getValue((RuntimeObject)((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("isComposite"));
 	}
-	
+	/** Get the opposite property of the kermeta object hosted by the given runtime object
+	 * @param reflective_collection The runtime object for which we look for the opposite. It must be a ReflectiveCollection
+	 * or a ReflectiveSequence */
 	public static RuntimeObject getOppositeProperty(RuntimeObject reflective_collection) {
 		return (RuntimeObject)((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("opposite");
 	}
