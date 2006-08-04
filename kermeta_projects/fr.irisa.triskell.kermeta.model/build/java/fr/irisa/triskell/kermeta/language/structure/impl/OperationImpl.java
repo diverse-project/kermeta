@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: OperationImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -162,7 +162,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getOperation();
+		return StructurePackage.Literals.OPERATION;
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	public EList getPre() {
 		if (pre == null) {
-			pre = new EObjectContainmentEList(Constraint.class, this, StructurePackage.OPERATION__PRE);
+			pre = new EObjectContainmentWithInverseEList(Constraint.class, this, StructurePackage.OPERATION__PRE, StructurePackage.CONSTRAINT__PRE_OWNER);
 		}
 		return pre;
 	}
@@ -229,7 +229,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	public EList getPost() {
 		if (post == null) {
-			post = new EObjectContainmentEList(Constraint.class, this, StructurePackage.OPERATION__POST);
+			post = new EObjectContainmentWithInverseEList(Constraint.class, this, StructurePackage.OPERATION__POST, StructurePackage.CONSTRAINT__POST_OWNER);
 		}
 		return post;
 	}
@@ -284,8 +284,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	public Operation getSuperOperation() {
 		if (superOperation != null && superOperation.eIsProxy()) {
-			Operation oldSuperOperation = superOperation;
-			superOperation = (Operation)eResolveProxy((InternalEObject)superOperation);
+			InternalEObject oldSuperOperation = (InternalEObject)superOperation;
+			superOperation = (Operation)eResolveProxy(oldSuperOperation);
 			if (superOperation != oldSuperOperation) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.OPERATION__SUPER_OPERATION, oldSuperOperation, superOperation));
@@ -322,7 +322,17 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 */
 	public ClassDefinition getOwningClass() {
 		if (eContainerFeatureID != StructurePackage.OPERATION__OWNING_CLASS) return null;
-		return (ClassDefinition)eContainer;
+		return (ClassDefinition)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningClass(ClassDefinition newOwningClass, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningClass, StructurePackage.OPERATION__OWNING_CLASS, msgs);
+		return msgs;
 	}
 
 	/**
@@ -331,15 +341,15 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * @generated
 	 */
 	public void setOwningClass(ClassDefinition newOwningClass) {
-		if (newOwningClass != eContainer || (eContainerFeatureID != StructurePackage.OPERATION__OWNING_CLASS && newOwningClass != null)) {
+		if (newOwningClass != eInternalContainer() || (eContainerFeatureID != StructurePackage.OPERATION__OWNING_CLASS && newOwningClass != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningClass))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (eContainer != null)
+			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningClass != null)
 				msgs = ((InternalEObject)newOwningClass).eInverseAdd(this, StructurePackage.CLASS_DEFINITION__OWNED_OPERATION, ClassDefinition.class, msgs);
-			msgs = eBasicSetContainer((InternalEObject)newOwningClass, StructurePackage.OPERATION__OWNING_CLASS, msgs);
+			msgs = basicSetOwningClass(newOwningClass, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
@@ -363,24 +373,20 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.OPERATION__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				case StructurePackage.OPERATION__OWNED_PARAMETER:
-					return ((InternalEList)getOwnedParameter()).basicAdd(otherEnd, msgs);
-				case StructurePackage.OPERATION__OWNING_CLASS:
-					if (eContainer != null)
-						msgs = eBasicRemoveFromContainer(msgs);
-					return eBasicSetContainer(otherEnd, StructurePackage.OPERATION__OWNING_CLASS, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.OPERATION__OWNED_PARAMETER:
+				return ((InternalEList)getOwnedParameter()).basicAdd(otherEnd, msgs);
+			case StructurePackage.OPERATION__PRE:
+				return ((InternalEList)getPre()).basicAdd(otherEnd, msgs);
+			case StructurePackage.OPERATION__POST:
+				return ((InternalEList)getPost()).basicAdd(otherEnd, msgs);
+			case StructurePackage.OPERATION__OWNING_CLASS:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningClass((ClassDefinition)otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -388,28 +394,20 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.OPERATION__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.OPERATION__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				case StructurePackage.OPERATION__OWNED_PARAMETER:
-					return ((InternalEList)getOwnedParameter()).basicRemove(otherEnd, msgs);
-				case StructurePackage.OPERATION__PRE:
-					return ((InternalEList)getPre()).basicRemove(otherEnd, msgs);
-				case StructurePackage.OPERATION__POST:
-					return ((InternalEList)getPost()).basicRemove(otherEnd, msgs);
-				case StructurePackage.OPERATION__BODY:
-					return basicSetBody(null, msgs);
-				case StructurePackage.OPERATION__OWNING_CLASS:
-					return eBasicSetContainer(null, StructurePackage.OPERATION__OWNING_CLASS, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.OPERATION__OWNED_PARAMETER:
+				return ((InternalEList)getOwnedParameter()).basicRemove(otherEnd, msgs);
+			case StructurePackage.OPERATION__PRE:
+				return ((InternalEList)getPre()).basicRemove(otherEnd, msgs);
+			case StructurePackage.OPERATION__POST:
+				return ((InternalEList)getPost()).basicRemove(otherEnd, msgs);
+			case StructurePackage.OPERATION__BODY:
+				return basicSetBody(null, msgs);
+			case StructurePackage.OPERATION__OWNING_CLASS:
+				return basicSetOwningClass(null, msgs);
 		}
-		return eBasicSetContainer(null, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -417,16 +415,12 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eBasicRemoveFromContainer(NotificationChain msgs) {
-		if (eContainerFeatureID >= 0) {
-			switch (eContainerFeatureID) {
-				case StructurePackage.OPERATION__OWNING_CLASS:
-					return eContainer.eInverseRemove(this, StructurePackage.CLASS_DEFINITION__OWNED_OPERATION, ClassDefinition.class, msgs);
-				default:
-					return eDynamicBasicRemoveFromContainer(msgs);
-			}
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case StructurePackage.OPERATION__OWNING_CLASS:
+				return eInternalContainer().eInverseRemove(this, StructurePackage.CLASS_DEFINITION__OWNED_OPERATION, ClassDefinition.class, msgs);
 		}
-		return eContainer.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - eContainerFeatureID, null, msgs);
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -434,25 +428,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.OPERATION__TAG:
-				return getTag();
-			case StructurePackage.OPERATION__NAME:
-				return getName();
-			case StructurePackage.OPERATION__CONTAINED_TYPE:
-				return getContainedType();
-			case StructurePackage.OPERATION__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
-			case StructurePackage.OPERATION__IS_ORDERED:
-				return isIsOrdered() ? Boolean.TRUE : Boolean.FALSE;
-			case StructurePackage.OPERATION__IS_UNIQUE:
-				return isIsUnique() ? Boolean.TRUE : Boolean.FALSE;
-			case StructurePackage.OPERATION__LOWER:
-				return new Integer(getLower());
-			case StructurePackage.OPERATION__UPPER:
-				return new Integer(getUpper());
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.OPERATION__IS_ABSTRACT:
 				return isIsAbstract() ? Boolean.TRUE : Boolean.FALSE;
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
@@ -473,7 +450,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				return getTypeParameter();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -481,34 +458,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.OPERATION__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case StructurePackage.OPERATION__NAME:
-				setName((String)newValue);
-				return;
-			case StructurePackage.OPERATION__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
-			case StructurePackage.OPERATION__TYPE:
-				setType((Type)newValue);
-				return;
-			case StructurePackage.OPERATION__IS_ORDERED:
-				setIsOrdered(((Boolean)newValue).booleanValue());
-				return;
-			case StructurePackage.OPERATION__IS_UNIQUE:
-				setIsUnique(((Boolean)newValue).booleanValue());
-				return;
-			case StructurePackage.OPERATION__LOWER:
-				setLower(((Integer)newValue).intValue());
-				return;
-			case StructurePackage.OPERATION__UPPER:
-				setUpper(((Integer)newValue).intValue());
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.OPERATION__IS_ABSTRACT:
 				setIsAbstract(((Boolean)newValue).booleanValue());
 				return;
@@ -542,7 +493,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				getTypeParameter().addAll((Collection)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -550,32 +501,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.OPERATION__TAG:
-				getTag().clear();
-				return;
-			case StructurePackage.OPERATION__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case StructurePackage.OPERATION__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
-			case StructurePackage.OPERATION__TYPE:
-				setType((Type)null);
-				return;
-			case StructurePackage.OPERATION__IS_ORDERED:
-				setIsOrdered(IS_ORDERED_EDEFAULT);
-				return;
-			case StructurePackage.OPERATION__IS_UNIQUE:
-				setIsUnique(IS_UNIQUE_EDEFAULT);
-				return;
-			case StructurePackage.OPERATION__LOWER:
-				setLower(LOWER_EDEFAULT);
-				return;
-			case StructurePackage.OPERATION__UPPER:
-				setUpper(UPPER_EDEFAULT);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.OPERATION__IS_ABSTRACT:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
@@ -604,7 +531,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 				getTypeParameter().clear();
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -612,24 +539,8 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.OPERATION__TAG:
-				return tag != null && !tag.isEmpty();
-			case StructurePackage.OPERATION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case StructurePackage.OPERATION__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
-			case StructurePackage.OPERATION__TYPE:
-				return type != null;
-			case StructurePackage.OPERATION__IS_ORDERED:
-				return isOrdered != IS_ORDERED_EDEFAULT;
-			case StructurePackage.OPERATION__IS_UNIQUE:
-				return isUnique != IS_UNIQUE_EDEFAULT;
-			case StructurePackage.OPERATION__LOWER:
-				return lower != LOWER_EDEFAULT;
-			case StructurePackage.OPERATION__UPPER:
-				return upper != UPPER_EDEFAULT;
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.OPERATION__IS_ABSTRACT:
 				return isAbstract != IS_ABSTRACT_EDEFAULT;
 			case StructurePackage.OPERATION__RAISED_EXCEPTION:
@@ -649,7 +560,7 @@ public class OperationImpl extends MultiplicityElementImpl implements Operation 
 			case StructurePackage.OPERATION__TYPE_PARAMETER:
 				return typeParameter != null && !typeParameter.isEmpty();
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

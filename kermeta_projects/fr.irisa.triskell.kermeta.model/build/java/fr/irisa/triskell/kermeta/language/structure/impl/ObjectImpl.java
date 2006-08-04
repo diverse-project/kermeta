@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ObjectImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -64,7 +64,7 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getObject();
+		return StructurePackage.Literals.OBJECT;
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean checkInvariants() {
+	public void checkInvariants() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -172,18 +172,10 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.OBJECT__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+	public void checkAllInvariants() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -191,16 +183,12 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.OBJECT__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.OBJECT__TAG:
+				return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
 		}
-		return eBasicSetContainer(null, featureID, msgs);
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -208,12 +196,25 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.OBJECT__TAG:
+				return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
 				return getTag();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -221,14 +222,14 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
 				getTag().clear();
 				getTag().addAll((Collection)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -236,13 +237,13 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
 				getTag().clear();
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -250,12 +251,12 @@ public class ObjectImpl extends EObjectImpl implements fr.irisa.triskell.kermeta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.OBJECT__TAG:
 				return tag != null && !tag.isEmpty();
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 } //ObjectImpl

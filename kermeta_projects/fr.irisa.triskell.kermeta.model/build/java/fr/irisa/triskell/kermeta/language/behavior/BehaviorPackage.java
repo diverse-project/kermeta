@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.2 2006-06-15 08:45:46 dvojtise Exp $
+ * $Id: BehaviorPackage.java,v 1.3 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model kind="package"
  * @generated
  */
-public interface BehaviorPackage extends EPackage{
+public interface BehaviorPackage extends EPackage {
 	/**
 	 * The package name.
 	 * <!-- begin-user-doc -->
@@ -99,7 +99,7 @@ public interface BehaviorPackage extends EPackage{
 	int EXPRESSION__STATIC_TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the the '<em>Expression</em>' class.
+	 * The number of structural features of the '<em>Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -172,7 +172,7 @@ public interface BehaviorPackage extends EPackage{
 	int ASSIGNMENT__IS_CAST = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the the '<em>Assignment</em>' class.
+	 * The number of structural features of the '<em>Assignment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -245,7 +245,7 @@ public interface BehaviorPackage extends EPackage{
 	int CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the the '<em>Call Expression</em>' class.
+	 * The number of structural features of the '<em>Call Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -309,7 +309,7 @@ public interface BehaviorPackage extends EPackage{
 	int BLOCK__RESCUE_BLOCK = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the the '<em>Block</em>' class.
+	 * The number of structural features of the '<em>Block</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -382,7 +382,7 @@ public interface BehaviorPackage extends EPackage{
 	int CALL_VARIABLE__STATIC_TYPE_VARIABLE_BINDINGS = CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS;
 
 	/**
-	 * The number of structural features of the the '<em>Call Variable</em>' class.
+	 * The number of structural features of the '<em>Call Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -500,7 +500,7 @@ public interface BehaviorPackage extends EPackage{
 	int CALL_FEATURE__STATIC_ENUM_LITERAL = CALL_EXPRESSION_FEATURE_COUNT + 4;
 
 	/**
-	 * The number of structural features of the the '<em>Call Feature</em>' class.
+	 * The number of structural features of the '<em>Call Feature</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -573,7 +573,7 @@ public interface BehaviorPackage extends EPackage{
 	int CALL_SUPER_OPERATION__STATIC_TYPE_VARIABLE_BINDINGS = CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS;
 
 	/**
-	 * The number of structural features of the the '<em>Call Super Operation</em>' class.
+	 * The number of structural features of the '<em>Call Super Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -646,7 +646,7 @@ public interface BehaviorPackage extends EPackage{
 	int CALL_RESULT__STATIC_TYPE_VARIABLE_BINDINGS = CALL_VARIABLE__STATIC_TYPE_VARIABLE_BINDINGS;
 
 	/**
-	 * The number of structural features of the the '<em>Call Result</em>' class.
+	 * The number of structural features of the '<em>Call Result</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -719,7 +719,7 @@ public interface BehaviorPackage extends EPackage{
 	int CALL_VALUE__STATIC_TYPE_VARIABLE_BINDINGS = CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS;
 
 	/**
-	 * The number of structural features of the the '<em>Call Value</em>' class.
+	 * The number of structural features of the '<em>Call Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -792,7 +792,7 @@ public interface BehaviorPackage extends EPackage{
 	int CONDITIONAL__CONDITION = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the the '<em>Conditional</em>' class.
+	 * The number of structural features of the '<em>Conditional</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -847,7 +847,7 @@ public interface BehaviorPackage extends EPackage{
 	int RAISE__EXPRESSION = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Raise</em>' class.
+	 * The number of structural features of the '<em>Raise</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -902,7 +902,7 @@ public interface BehaviorPackage extends EPackage{
 	int RESCUE__EXCEPTION_NAME = StructurePackage.OBJECT_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the the '<em>Rescue</em>' class.
+	 * The number of structural features of the '<em>Rescue</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -993,7 +993,7 @@ public interface BehaviorPackage extends EPackage{
 	int TYPE_REFERENCE__UPPER = StructurePackage.MULTIPLICITY_ELEMENT__UPPER;
 
 	/**
-	 * The number of structural features of the the '<em>Type Reference</em>' class.
+	 * The number of structural features of the '<em>Type Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1039,7 +1039,7 @@ public interface BehaviorPackage extends EPackage{
 	int LITERAL__STATIC_TYPE = EXPRESSION__STATIC_TYPE;
 
 	/**
-	 * The number of structural features of the the '<em>Literal</em>' class.
+	 * The number of structural features of the '<em>Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1085,7 +1085,7 @@ public interface BehaviorPackage extends EPackage{
 	int EMPTY_EXPRESSION__STATIC_TYPE = EXPRESSION__STATIC_TYPE;
 
 	/**
-	 * The number of structural features of the the '<em>Empty Expression</em>' class.
+	 * The number of structural features of the '<em>Empty Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1158,7 +1158,7 @@ public interface BehaviorPackage extends EPackage{
 	int JAVA_STATIC_CALL__JMETHOD = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the the '<em>Java Static Call</em>' class.
+	 * The number of structural features of the '<em>Java Static Call</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1222,7 +1222,7 @@ public interface BehaviorPackage extends EPackage{
 	int LAMBDA_EXPRESSION__BODY = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the the '<em>Lambda Expression</em>' class.
+	 * The number of structural features of the '<em>Lambda Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1268,7 +1268,7 @@ public interface BehaviorPackage extends EPackage{
 	int LAMBDA_PARAMETER__TYPE = StructurePackage.OBJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the the '<em>Lambda Parameter</em>' class.
+	 * The number of structural features of the '<em>Lambda Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1323,7 +1323,7 @@ public interface BehaviorPackage extends EPackage{
 	int INTEGER_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Integer Literal</em>' class.
+	 * The number of structural features of the '<em>Integer Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1378,7 +1378,7 @@ public interface BehaviorPackage extends EPackage{
 	int STRING_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>String Literal</em>' class.
+	 * The number of structural features of the '<em>String Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1433,7 +1433,7 @@ public interface BehaviorPackage extends EPackage{
 	int BOOLEAN_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Boolean Literal</em>' class.
+	 * The number of structural features of the '<em>Boolean Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1488,7 +1488,7 @@ public interface BehaviorPackage extends EPackage{
 	int TYPE_LITERAL__TYPEREF = LITERAL_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Type Literal</em>' class.
+	 * The number of structural features of the '<em>Type Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1534,7 +1534,7 @@ public interface BehaviorPackage extends EPackage{
 	int VOID_LITERAL__STATIC_TYPE = LITERAL__STATIC_TYPE;
 
 	/**
-	 * The number of structural features of the the '<em>Void Literal</em>' class.
+	 * The number of structural features of the '<em>Void Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1607,7 +1607,7 @@ public interface BehaviorPackage extends EPackage{
 	int LOOP__STOP_CONDITION = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the the '<em>Loop</em>' class.
+	 * The number of structural features of the '<em>Loop</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1653,7 +1653,7 @@ public interface BehaviorPackage extends EPackage{
 	int SELF_EXPRESSION__STATIC_TYPE = EXPRESSION__STATIC_TYPE;
 
 	/**
-	 * The number of structural features of the the '<em>Self Expression</em>' class.
+	 * The number of structural features of the '<em>Self Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1726,7 +1726,7 @@ public interface BehaviorPackage extends EPackage{
 	int VARIABLE_DECL__TYPE = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the the '<em>Variable Decl</em>' class.
+	 * The number of structural features of the '<em>Variable Decl</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2421,5 +2421,584 @@ public interface BehaviorPackage extends EPackage{
 	 * @generated
 	 */
 	BehaviorFactory getBehaviorFactory();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Defines literals for the meta objects that represent
+	 * <ul>
+	 *   <li>each class,</li>
+	 *   <li>each feature of each class,</li>
+	 *   <li>each enum,</li>
+	 *   <li>and each data type</li>
+	 * </ul>
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	interface Literals  {
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.AssignmentImpl <em>Assignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.AssignmentImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getAssignment()
+		 * @generated
+		 */
+		EClass ASSIGNMENT = eINSTANCE.getAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSIGNMENT__TARGET = eINSTANCE.getAssignment_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSIGNMENT__VALUE = eINSTANCE.getAssignment_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Cast</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ASSIGNMENT__IS_CAST = eINSTANCE.getAssignment_IsCast();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.ExpressionImpl <em>Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.ExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getExpression()
+		 * @generated
+		 */
+		EClass EXPRESSION = eINSTANCE.getExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXPRESSION__STATIC_TYPE = eINSTANCE.getExpression_StaticType();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallExpressionImpl <em>Call Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallExpression()
+		 * @generated
+		 */
+		EClass CALL_EXPRESSION = eINSTANCE.getCallExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_EXPRESSION__PARAMETERS = eINSTANCE.getCallExpression_Parameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALL_EXPRESSION__NAME = eINSTANCE.getCallExpression_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Type Variable Bindings</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_EXPRESSION__STATIC_TYPE_VARIABLE_BINDINGS = eINSTANCE.getCallExpression_StaticTypeVariableBindings();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.BlockImpl <em>Block</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BlockImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getBlock()
+		 * @generated
+		 */
+		EClass BLOCK = eINSTANCE.getBlock();
+
+		/**
+		 * The meta object literal for the '<em><b>Statement</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BLOCK__STATEMENT = eINSTANCE.getBlock_Statement();
+
+		/**
+		 * The meta object literal for the '<em><b>Rescue Block</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BLOCK__RESCUE_BLOCK = eINSTANCE.getBlock_RescueBlock();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallVariableImpl <em>Call Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallVariableImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallVariable()
+		 * @generated
+		 */
+		EClass CALL_VARIABLE = eINSTANCE.getCallVariable();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl <em>Call Feature</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallFeatureImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallFeature()
+		 * @generated
+		 */
+		EClass CALL_FEATURE = eINSTANCE.getCallFeature();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__TARGET = eINSTANCE.getCallFeature_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Atpre</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CALL_FEATURE__IS_ATPRE = eINSTANCE.getCallFeature_IsAtpre();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__STATIC_PROPERTY = eINSTANCE.getCallFeature_StaticProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__STATIC_OPERATION = eINSTANCE.getCallFeature_StaticOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Static Enum Literal</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CALL_FEATURE__STATIC_ENUM_LITERAL = eINSTANCE.getCallFeature_StaticEnumLiteral();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallSuperOperationImpl <em>Call Super Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallSuperOperationImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallSuperOperation()
+		 * @generated
+		 */
+		EClass CALL_SUPER_OPERATION = eINSTANCE.getCallSuperOperation();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallResultImpl <em>Call Result</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallResultImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallResult()
+		 * @generated
+		 */
+		EClass CALL_RESULT = eINSTANCE.getCallResult();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.CallValueImpl <em>Call Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.CallValueImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getCallValue()
+		 * @generated
+		 */
+		EClass CALL_VALUE = eINSTANCE.getCallValue();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.ConditionalImpl <em>Conditional</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.ConditionalImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getConditional()
+		 * @generated
+		 */
+		EClass CONDITIONAL = eINSTANCE.getConditional();
+
+		/**
+		 * The meta object literal for the '<em><b>Then Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONDITIONAL__THEN_BODY = eINSTANCE.getConditional_ThenBody();
+
+		/**
+		 * The meta object literal for the '<em><b>Else Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONDITIONAL__ELSE_BODY = eINSTANCE.getConditional_ElseBody();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONDITIONAL__CONDITION = eINSTANCE.getConditional_Condition();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.RaiseImpl <em>Raise</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.RaiseImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getRaise()
+		 * @generated
+		 */
+		EClass RAISE = eINSTANCE.getRaise();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RAISE__EXPRESSION = eINSTANCE.getRaise_Expression();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.RescueImpl <em>Rescue</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.RescueImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getRescue()
+		 * @generated
+		 */
+		EClass RESCUE = eINSTANCE.getRescue();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RESCUE__BODY = eINSTANCE.getRescue_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Exception Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RESCUE__EXCEPTION_TYPE = eINSTANCE.getRescue_ExceptionType();
+
+		/**
+		 * The meta object literal for the '<em><b>Exception Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESCUE__EXCEPTION_NAME = eINSTANCE.getRescue_ExceptionName();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.TypeReferenceImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getTypeReference()
+		 * @generated
+		 */
+		EClass TYPE_REFERENCE = eINSTANCE.getTypeReference();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.LiteralImpl <em>Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.LiteralImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getLiteral()
+		 * @generated
+		 */
+		EClass LITERAL = eINSTANCE.getLiteral();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.EmptyExpressionImpl <em>Empty Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.EmptyExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getEmptyExpression()
+		 * @generated
+		 */
+		EClass EMPTY_EXPRESSION = eINSTANCE.getEmptyExpression();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.JavaStaticCallImpl <em>Java Static Call</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.JavaStaticCallImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getJavaStaticCall()
+		 * @generated
+		 */
+		EClass JAVA_STATIC_CALL = eINSTANCE.getJavaStaticCall();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JAVA_STATIC_CALL__PARAMETERS = eINSTANCE.getJavaStaticCall_Parameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Jclass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JAVA_STATIC_CALL__JCLASS = eINSTANCE.getJavaStaticCall_Jclass();
+
+		/**
+		 * The meta object literal for the '<em><b>Jmethod</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JAVA_STATIC_CALL__JMETHOD = eINSTANCE.getJavaStaticCall_Jmethod();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.LambdaExpressionImpl <em>Lambda Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.LambdaExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getLambdaExpression()
+		 * @generated
+		 */
+		EClass LAMBDA_EXPRESSION = eINSTANCE.getLambdaExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LAMBDA_EXPRESSION__PARAMETERS = eINSTANCE.getLambdaExpression_Parameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LAMBDA_EXPRESSION__BODY = eINSTANCE.getLambdaExpression_Body();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.LambdaParameterImpl <em>Lambda Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.LambdaParameterImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getLambdaParameter()
+		 * @generated
+		 */
+		EClass LAMBDA_PARAMETER = eINSTANCE.getLambdaParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LAMBDA_PARAMETER__NAME = eINSTANCE.getLambdaParameter_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LAMBDA_PARAMETER__TYPE = eINSTANCE.getLambdaParameter_Type();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.IntegerLiteralImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getIntegerLiteral()
+		 * @generated
+		 */
+		EClass INTEGER_LITERAL = eINSTANCE.getIntegerLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INTEGER_LITERAL__VALUE = eINSTANCE.getIntegerLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.StringLiteralImpl <em>String Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.StringLiteralImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getStringLiteral()
+		 * @generated
+		 */
+		EClass STRING_LITERAL = eINSTANCE.getStringLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_LITERAL__VALUE = eINSTANCE.getStringLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BooleanLiteralImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getBooleanLiteral()
+		 * @generated
+		 */
+		EClass BOOLEAN_LITERAL = eINSTANCE.getBooleanLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BOOLEAN_LITERAL__VALUE = eINSTANCE.getBooleanLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.TypeLiteralImpl <em>Type Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.TypeLiteralImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getTypeLiteral()
+		 * @generated
+		 */
+		EClass TYPE_LITERAL = eINSTANCE.getTypeLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Typeref</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_LITERAL__TYPEREF = eINSTANCE.getTypeLiteral_Typeref();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.VoidLiteralImpl <em>Void Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.VoidLiteralImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getVoidLiteral()
+		 * @generated
+		 */
+		EClass VOID_LITERAL = eINSTANCE.getVoidLiteral();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.LoopImpl <em>Loop</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.LoopImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getLoop()
+		 * @generated
+		 */
+		EClass LOOP = eINSTANCE.getLoop();
+
+		/**
+		 * The meta object literal for the '<em><b>Initialization</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOOP__INITIALIZATION = eINSTANCE.getLoop_Initialization();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOOP__BODY = eINSTANCE.getLoop_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Stop Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOOP__STOP_CONDITION = eINSTANCE.getLoop_StopCondition();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.SelfExpressionImpl <em>Self Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.SelfExpressionImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getSelfExpression()
+		 * @generated
+		 */
+		EClass SELF_EXPRESSION = eINSTANCE.getSelfExpression();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.VariableDeclImpl <em>Variable Decl</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.VariableDeclImpl
+		 * @see fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl#getVariableDecl()
+		 * @generated
+		 */
+		EClass VARIABLE_DECL = eINSTANCE.getVariableDecl();
+
+		/**
+		 * The meta object literal for the '<em><b>Initialization</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_DECL__INITIALIZATION = eINSTANCE.getVariableDecl_Initialization();
+
+		/**
+		 * The meta object literal for the '<em><b>Identifier</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VARIABLE_DECL__IDENTIFIER = eINSTANCE.getVariableDecl_Identifier();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_DECL__TYPE = eINSTANCE.getVariableDecl_Type();
+
+	}
 
 } //BehaviorPackage

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PrimitiveTypeImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: PrimitiveTypeImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -77,7 +77,7 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getPrimitiveType();
+		return StructurePackage.Literals.PRIMITIVE_TYPE;
 	}
 
 	/**
@@ -99,8 +99,8 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 	 */
 	public Type getInstanceType() {
 		if (instanceType != null && instanceType.eIsProxy()) {
-			Type oldInstanceType = instanceType;
-			instanceType = (Type)eResolveProxy((InternalEObject)instanceType);
+			InternalEObject oldInstanceType = (InternalEObject)instanceType;
+			instanceType = (Type)eResolveProxy(oldInstanceType);
 			if (instanceType != oldInstanceType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.PRIMITIVE_TYPE__INSTANCE_TYPE, oldInstanceType, instanceType));
@@ -135,18 +135,12 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.PRIMITIVE_TYPE__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.PRIMITIVE_TYPE__CONTAINED_TYPE:
+				return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -154,38 +148,15 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.PRIMITIVE_TYPE__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.PRIMITIVE_TYPE__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PRIMITIVE_TYPE__TAG:
-				return getTag();
-			case StructurePackage.PRIMITIVE_TYPE__NAME:
-				return getName();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.PRIMITIVE_TYPE__CONTAINED_TYPE:
 				return getContainedType();
 			case StructurePackage.PRIMITIVE_TYPE__INSTANCE_TYPE:
 				if (resolve) return getInstanceType();
 				return basicGetInstanceType();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -193,15 +164,8 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PRIMITIVE_TYPE__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case StructurePackage.PRIMITIVE_TYPE__NAME:
-				setName((String)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.PRIMITIVE_TYPE__CONTAINED_TYPE:
 				getContainedType().clear();
 				getContainedType().addAll((Collection)newValue);
@@ -210,7 +174,7 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 				setInstanceType((Type)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -218,14 +182,8 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PRIMITIVE_TYPE__TAG:
-				getTag().clear();
-				return;
-			case StructurePackage.PRIMITIVE_TYPE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.PRIMITIVE_TYPE__CONTAINED_TYPE:
 				getContainedType().clear();
 				return;
@@ -233,7 +191,7 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 				setInstanceType((Type)null);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -241,18 +199,14 @@ public class PrimitiveTypeImpl extends DataTypeImpl implements PrimitiveType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PRIMITIVE_TYPE__TAG:
-				return tag != null && !tag.isEmpty();
-			case StructurePackage.PRIMITIVE_TYPE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.PRIMITIVE_TYPE__CONTAINED_TYPE:
 				return containedType != null && !containedType.isEmpty();
 			case StructurePackage.PRIMITIVE_TYPE__INSTANCE_TYPE:
 				return instanceType != null;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

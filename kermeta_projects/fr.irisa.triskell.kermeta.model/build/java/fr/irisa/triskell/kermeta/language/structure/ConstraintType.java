@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintType.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ConstraintType.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -75,7 +75,7 @@ public final class ConstraintType extends AbstractEnumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final ConstraintType INV_LITERAL = new ConstraintType(INV, "inv");
+	public static final ConstraintType INV_LITERAL = new ConstraintType(INV, "inv", "inv");
 
 	/**
 	 * The '<em><b>Pre</b></em>' literal object.
@@ -85,7 +85,7 @@ public final class ConstraintType extends AbstractEnumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final ConstraintType PRE_LITERAL = new ConstraintType(PRE, "pre");
+	public static final ConstraintType PRE_LITERAL = new ConstraintType(PRE, "pre", "pre");
 
 	/**
 	 * The '<em><b>Post</b></em>' literal object.
@@ -95,7 +95,7 @@ public final class ConstraintType extends AbstractEnumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final ConstraintType POST_LITERAL = new ConstraintType(POST, "post");
+	public static final ConstraintType POST_LITERAL = new ConstraintType(POST, "post", "post");
 
 	/**
 	 * An array of all the '<em><b>Constraint Type</b></em>' enumerators.
@@ -119,15 +119,15 @@ public final class ConstraintType extends AbstractEnumerator {
 	public static final List VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-	 * Returns the '<em><b>Constraint Type</b></em>' literal with the specified name.
+	 * Returns the '<em><b>Constraint Type</b></em>' literal with the specified literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static ConstraintType get(String name) {
+	public static ConstraintType get(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			ConstraintType result = VALUES_ARRAY[i];
-			if (result.toString().equals(name)) {
+			if (result.toString().equals(literal)) {
 				return result;
 			}
 		}
@@ -135,7 +135,23 @@ public final class ConstraintType extends AbstractEnumerator {
 	}
 
 	/**
-	 * Returns the '<em><b>Constraint Type</b></em>' literal with the specified value.
+	 * Returns the '<em><b>Constraint Type</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static ConstraintType getByName(String name) {
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			ConstraintType result = VALUES_ARRAY[i];
+			if (result.getName().equals(name)) {
+				return result;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the '<em><b>Constraint Type</b></em>' literal with the specified integer value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -155,8 +171,8 @@ public final class ConstraintType extends AbstractEnumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private ConstraintType(int value, String name) {
-		super(value, name);
+	private ConstraintType(int value, String name, String literal) {
+		super(value, name, literal);
 	}
 
 } //ConstraintType

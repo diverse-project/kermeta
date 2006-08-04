@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IntegerLiteralImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: IntegerLiteralImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -73,7 +73,7 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return BehaviorPackage.eINSTANCE.getIntegerLiteral();
+		return BehaviorPackage.Literals.INTEGER_LITERAL;
 	}
 
 	/**
@@ -102,57 +102,12 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.INTEGER_LITERAL__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.INTEGER_LITERAL__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.INTEGER_LITERAL__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.INTEGER_LITERAL__TAG:
-				return getTag();
-			case BehaviorPackage.INTEGER_LITERAL__CONTAINED_TYPE:
-				return getContainedType();
-			case BehaviorPackage.INTEGER_LITERAL__STATIC_TYPE:
-				if (resolve) return getStaticType();
-				return basicGetStaticType();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case BehaviorPackage.INTEGER_LITERAL__VALUE:
 				return new Integer(getValue());
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -160,24 +115,13 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.INTEGER_LITERAL__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.INTEGER_LITERAL__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.INTEGER_LITERAL__STATIC_TYPE:
-				setStaticType((Type)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case BehaviorPackage.INTEGER_LITERAL__VALUE:
 				setValue(((Integer)newValue).intValue());
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -185,22 +129,13 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.INTEGER_LITERAL__TAG:
-				getTag().clear();
-				return;
-			case BehaviorPackage.INTEGER_LITERAL__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
-			case BehaviorPackage.INTEGER_LITERAL__STATIC_TYPE:
-				setStaticType((Type)null);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.INTEGER_LITERAL__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -208,18 +143,12 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.INTEGER_LITERAL__TAG:
-				return tag != null && !tag.isEmpty();
-			case BehaviorPackage.INTEGER_LITERAL__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
-			case BehaviorPackage.INTEGER_LITERAL__STATIC_TYPE:
-				return staticType != null;
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.INTEGER_LITERAL__VALUE:
 				return value != VALUE_EDEFAULT;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

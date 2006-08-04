@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: StructurePackage.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -81,7 +81,7 @@ public interface StructurePackage extends EPackage {
 	int OBJECT__TAG = 0;
 
 	/**
-	 * The number of structural features of the the '<em>Object</em>' class.
+	 * The number of structural features of the '<em>Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -109,7 +109,7 @@ public interface StructurePackage extends EPackage {
 	int TYPE__TAG = OBJECT__TAG;
 
 	/**
-	 * The number of structural features of the the '<em>Type</em>' class.
+	 * The number of structural features of the '<em>Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -155,7 +155,7 @@ public interface StructurePackage extends EPackage {
 	int PARAMETERIZED_TYPE__TYPE_DEFINITION = TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the the '<em>Parameterized Type</em>' class.
+	 * The number of structural features of the '<em>Parameterized Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -246,7 +246,7 @@ public interface StructurePackage extends EPackage {
 	int CLASS__NAME = PARAMETERIZED_TYPE_FEATURE_COUNT + 4;
 
 	/**
-	 * The number of structural features of the the '<em>Class</em>' class.
+	 * The number of structural features of the '<em>Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -283,7 +283,7 @@ public interface StructurePackage extends EPackage {
 	int NAMED_ELEMENT__NAME = OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Named Element</em>' class.
+	 * The number of structural features of the '<em>Named Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -338,7 +338,7 @@ public interface StructurePackage extends EPackage {
 	int TYPED_ELEMENT__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the the '<em>Typed Element</em>' class.
+	 * The number of structural features of the '<em>Typed Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -429,7 +429,7 @@ public interface StructurePackage extends EPackage {
 	int MULTIPLICITY_ELEMENT__UPPER = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the the '<em>Multiplicity Element</em>' class.
+	 * The number of structural features of the '<em>Multiplicity Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -601,7 +601,7 @@ public interface StructurePackage extends EPackage {
 	int OPERATION__TYPE_PARAMETER = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
-	 * The number of structural features of the the '<em>Operation</em>' class.
+	 * The number of structural features of the '<em>Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -773,7 +773,7 @@ public interface StructurePackage extends EPackage {
 	int PROPERTY__OWNING_CLASS = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
-	 * The number of structural features of the the '<em>Property</em>' class.
+	 * The number of structural features of the '<em>Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -810,7 +810,7 @@ public interface StructurePackage extends EPackage {
 	int TYPE_CONTAINER__CONTAINED_TYPE = OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Type Container</em>' class.
+	 * The number of structural features of the '<em>Type Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -856,7 +856,7 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION_LITERAL__ENUMERATION = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Enumeration Literal</em>' class.
+	 * The number of structural features of the '<em>Enumeration Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -893,7 +893,7 @@ public interface StructurePackage extends EPackage {
 	int DATA_TYPE__NAME = TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Data Type</em>' class.
+	 * The number of structural features of the '<em>Data Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -939,7 +939,7 @@ public interface StructurePackage extends EPackage {
 	int ENUMERATION__OWNED_LITERAL = DATA_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Enumeration</em>' class.
+	 * The number of structural features of the '<em>Enumeration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1012,7 +1012,7 @@ public interface StructurePackage extends EPackage {
 	int PACKAGE__URI = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the the '<em>Package</em>' class.
+	 * The number of structural features of the '<em>Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1112,7 +1112,7 @@ public interface StructurePackage extends EPackage {
 	int PARAMETER__OPERATION = MULTIPLICITY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Parameter</em>' class.
+	 * The number of structural features of the '<em>Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1167,7 +1167,7 @@ public interface StructurePackage extends EPackage {
 	int PRIMITIVE_TYPE__INSTANCE_TYPE = DATA_TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the the '<em>Primitive Type</em>' class.
+	 * The number of structural features of the '<em>Primitive Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1222,7 +1222,7 @@ public interface StructurePackage extends EPackage {
 	int TAG__OBJECT = OBJECT_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the the '<em>Tag</em>' class.
+	 * The number of structural features of the '<em>Tag</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1286,13 +1286,40 @@ public interface StructurePackage extends EPackage {
 	int CONSTRAINT__LANGUAGE = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the the '<em>Constraint</em>' class.
+	 * The feature id for the '<em><b>Inv Owner</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int CONSTRAINT__INV_OWNER = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Pre Owner</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__PRE_OWNER = NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Post Owner</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT__POST_OWNER = NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRAINT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
@@ -1386,7 +1413,7 @@ public interface StructurePackage extends EPackage {
 	int CLASS_DEFINITION__SUPER_TYPE = TYPE_CONTAINER_FEATURE_COUNT + 6;
 
 	/**
-	 * The number of structural features of the the '<em>Class Definition</em>' class.
+	 * The number of structural features of the '<em>Class Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1441,7 +1468,7 @@ public interface StructurePackage extends EPackage {
 	int TYPE_VARIABLE__SUPERTYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the the '<em>Type Variable</em>' class.
+	 * The number of structural features of the '<em>Type Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1487,7 +1514,7 @@ public interface StructurePackage extends EPackage {
 	int PRODUCT_TYPE__TYPE = TYPE_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Product Type</em>' class.
+	 * The number of structural features of the '<em>Product Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1542,7 +1569,7 @@ public interface StructurePackage extends EPackage {
 	int FUNCTION_TYPE__RIGHT = TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the the '<em>Function Type</em>' class.
+	 * The number of structural features of the '<em>Function Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1597,7 +1624,7 @@ public interface StructurePackage extends EPackage {
 	int TYPE_VARIABLE_BINDING__TYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the the '<em>Type Variable Binding</em>' class.
+	 * The number of structural features of the '<em>Type Variable Binding</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1634,7 +1661,7 @@ public interface StructurePackage extends EPackage {
 	int TYPE_DEFINITION__NAME = NAMED_ELEMENT__NAME;
 
 	/**
-	 * The number of structural features of the the '<em>Type Definition</em>' class.
+	 * The number of structural features of the '<em>Type Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1662,7 +1689,7 @@ public interface StructurePackage extends EPackage {
 	int VOID_TYPE__TAG = TYPE__TAG;
 
 	/**
-	 * The number of structural features of the the '<em>Void Type</em>' class.
+	 * The number of structural features of the '<em>Void Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1708,7 +1735,7 @@ public interface StructurePackage extends EPackage {
 	int GENERIC_TYPE_DEFINITION__TYPE_PARAMETER = TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Generic Type Definition</em>' class.
+	 * The number of structural features of the '<em>Generic Type Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1763,7 +1790,7 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE_DEFINITION__OWNED_TYPE_DEFINITION = GENERIC_TYPE_DEFINITION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Model Type Definition</em>' class.
+	 * The number of structural features of the '<em>Model Type Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1809,7 +1836,7 @@ public interface StructurePackage extends EPackage {
 	int MODEL_TYPE__TYPE_DEFINITION = PARAMETERIZED_TYPE__TYPE_DEFINITION;
 
 	/**
-	 * The number of structural features of the the '<em>Model Type</em>' class.
+	 * The number of structural features of the '<em>Model Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1855,7 +1882,7 @@ public interface StructurePackage extends EPackage {
 	int TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the the '<em>Type Definition Container</em>' class.
+	 * The number of structural features of the '<em>Type Definition Container</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2576,6 +2603,39 @@ public interface StructurePackage extends EPackage {
 	EAttribute getConstraint_Language();
 
 	/**
+	 * Returns the meta object for the container reference '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner <em>Inv Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Inv Owner</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner()
+	 * @see #getConstraint()
+	 * @generated
+	 */
+	EReference getConstraint_InvOwner();
+
+	/**
+	 * Returns the meta object for the container reference '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner <em>Pre Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Pre Owner</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner()
+	 * @see #getConstraint()
+	 * @generated
+	 */
+	EReference getConstraint_PreOwner();
+
+	/**
+	 * Returns the meta object for the container reference '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner <em>Post Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Post Owner</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner()
+	 * @see #getConstraint()
+	 * @generated
+	 */
+	EReference getConstraint_PostOwner();
+
+	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition <em>Class Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2929,5 +2989,863 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	StructureFactory getStructureFactory();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Defines literals for the meta objects that represent
+	 * <ul>
+	 *   <li>each class,</li>
+	 *   <li>each feature of each class,</li>
+	 *   <li>each enum,</li>
+	 *   <li>and each data type</li>
+	 * </ul>
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	interface Literals  {
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl <em>Class</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getClass_()
+		 * @generated
+		 */
+		EClass CLASS = eINSTANCE.getClass_();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Attribute</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS__OWNED_ATTRIBUTE = eINSTANCE.getClass_OwnedAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Operation</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS__OWNED_OPERATION = eINSTANCE.getClass_OwnedOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Class</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS__SUPER_CLASS = eINSTANCE.getClass_SuperClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS__IS_ABSTRACT = eINSTANCE.getClass_IsAbstract();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS__NAME = eINSTANCE.getClass_Name();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ObjectImpl <em>Object</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ObjectImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getObject()
+		 * @generated
+		 */
+		EClass OBJECT = eINSTANCE.getObject();
+
+		/**
+		 * The meta object literal for the '<em><b>Tag</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OBJECT__TAG = eINSTANCE.getObject_Tag();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.OperationImpl <em>Operation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.OperationImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getOperation()
+		 * @generated
+		 */
+		EClass OPERATION = eINSTANCE.getOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION__IS_ABSTRACT = eINSTANCE.getOperation_IsAbstract();
+
+		/**
+		 * The meta object literal for the '<em><b>Raised Exception</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__RAISED_EXCEPTION = eINSTANCE.getOperation_RaisedException();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Parameter</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__OWNED_PARAMETER = eINSTANCE.getOperation_OwnedParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Pre</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__PRE = eINSTANCE.getOperation_Pre();
+
+		/**
+		 * The meta object literal for the '<em><b>Post</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__POST = eINSTANCE.getOperation_Post();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__BODY = eINSTANCE.getOperation_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__SUPER_OPERATION = eINSTANCE.getOperation_SuperOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__OWNING_CLASS = eINSTANCE.getOperation_OwningClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Parameter</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION__TYPE_PARAMETER = eINSTANCE.getOperation_TypeParameter();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PropertyImpl <em>Property</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.PropertyImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getProperty()
+		 * @generated
+		 */
+		EClass PROPERTY = eINSTANCE.getProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Opposite</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY__OPPOSITE = eINSTANCE.getProperty_Opposite();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Read Only</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__IS_READ_ONLY = eINSTANCE.getProperty_IsReadOnly();
+
+		/**
+		 * The meta object literal for the '<em><b>Default</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__DEFAULT = eINSTANCE.getProperty_Default();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Composite</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__IS_COMPOSITE = eINSTANCE.getProperty_IsComposite();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Derived</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__IS_DERIVED = eINSTANCE.getProperty_IsDerived();
+
+		/**
+		 * The meta object literal for the '<em><b>Is ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__IS_ID = eINSTANCE.getProperty_IsID();
+
+		/**
+		 * The meta object literal for the '<em><b>Getter Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY__GETTER_BODY = eINSTANCE.getProperty_GetterBody();
+
+		/**
+		 * The meta object literal for the '<em><b>Setter Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY__SETTER_BODY = eINSTANCE.getProperty_SetterBody();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Class</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY__OWNING_CLASS = eINSTANCE.getProperty_OwningClass();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeImpl <em>Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getType()
+		 * @generated
+		 */
+		EClass TYPE = eINSTANCE.getType();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeContainerImpl <em>Type Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeContainerImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeContainer()
+		 * @generated
+		 */
+		EClass TYPE_CONTAINER = eINSTANCE.getTypeContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Contained Type</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_CONTAINER__CONTAINED_TYPE = eINSTANCE.getTypeContainer_ContainedType();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.EnumerationLiteralImpl <em>Enumeration Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.EnumerationLiteralImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getEnumerationLiteral()
+		 * @generated
+		 */
+		EClass ENUMERATION_LITERAL = eINSTANCE.getEnumerationLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Enumeration</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUMERATION_LITERAL__ENUMERATION = eINSTANCE.getEnumerationLiteral_Enumeration();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.MultiplicityElementImpl <em>Multiplicity Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.MultiplicityElementImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getMultiplicityElement()
+		 * @generated
+		 */
+		EClass MULTIPLICITY_ELEMENT = eINSTANCE.getMultiplicityElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Ordered</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MULTIPLICITY_ELEMENT__IS_ORDERED = eINSTANCE.getMultiplicityElement_IsOrdered();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Unique</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MULTIPLICITY_ELEMENT__IS_UNIQUE = eINSTANCE.getMultiplicityElement_IsUnique();
+
+		/**
+		 * The meta object literal for the '<em><b>Lower</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MULTIPLICITY_ELEMENT__LOWER = eINSTANCE.getMultiplicityElement_Lower();
+
+		/**
+		 * The meta object literal for the '<em><b>Upper</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MULTIPLICITY_ELEMENT__UPPER = eINSTANCE.getMultiplicityElement_Upper();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl <em>Data Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.DataTypeImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getDataType()
+		 * @generated
+		 */
+		EClass DATA_TYPE = eINSTANCE.getDataType();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.EnumerationImpl <em>Enumeration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.EnumerationImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getEnumeration()
+		 * @generated
+		 */
+		EClass ENUMERATION = eINSTANCE.getEnumeration();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Literal</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUMERATION__OWNED_LITERAL = eINSTANCE.getEnumeration_OwnedLiteral();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.NamedElementImpl <em>Named Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.NamedElementImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getNamedElement()
+		 * @generated
+		 */
+		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PackageImpl <em>Package</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.PackageImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getPackage()
+		 * @generated
+		 */
+		EClass PACKAGE = eINSTANCE.getPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Nested Package</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE__NESTED_PACKAGE = eINSTANCE.getPackage_NestedPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Nesting Package</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE__NESTING_PACKAGE = eINSTANCE.getPackage_NestingPackage();
+
+		/**
+		 * The meta object literal for the '<em><b>Uri</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PACKAGE__URI = eINSTANCE.getPackage_Uri();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterImpl <em>Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ParameterImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getParameter()
+		 * @generated
+		 */
+		EClass PARAMETER = eINSTANCE.getParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Operation</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETER__OPERATION = eINSTANCE.getParameter_Operation();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.PrimitiveTypeImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getPrimitiveType()
+		 * @generated
+		 */
+		EClass PRIMITIVE_TYPE = eINSTANCE.getPrimitiveType();
+
+		/**
+		 * The meta object literal for the '<em><b>Instance Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PRIMITIVE_TYPE__INSTANCE_TYPE = eINSTANCE.getPrimitiveType_InstanceType();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypedElementImpl <em>Typed Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypedElementImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypedElement()
+		 * @generated
+		 */
+		EClass TYPED_ELEMENT = eINSTANCE.getTypedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPED_ELEMENT__TYPE = eINSTANCE.getTypedElement_Type();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TagImpl <em>Tag</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.TagImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTag()
+		 * @generated
+		 */
+		EClass TAG = eINSTANCE.getTag();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TAG__NAME = eINSTANCE.getTag_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TAG__VALUE = eINSTANCE.getTag_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Object</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TAG__OBJECT = eINSTANCE.getTag_Object();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl <em>Constraint</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getConstraint()
+		 * @generated
+		 */
+		EClass CONSTRAINT = eINSTANCE.getConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINT__BODY = eINSTANCE.getConstraint_Body();
+
+		/**
+		 * The meta object literal for the '<em><b>Stereotype</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTRAINT__STEREOTYPE = eINSTANCE.getConstraint_Stereotype();
+
+		/**
+		 * The meta object literal for the '<em><b>Language</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONSTRAINT__LANGUAGE = eINSTANCE.getConstraint_Language();
+
+		/**
+		 * The meta object literal for the '<em><b>Inv Owner</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINT__INV_OWNER = eINSTANCE.getConstraint_InvOwner();
+
+		/**
+		 * The meta object literal for the '<em><b>Pre Owner</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINT__PRE_OWNER = eINSTANCE.getConstraint_PreOwner();
+
+		/**
+		 * The meta object literal for the '<em><b>Post Owner</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONSTRAINT__POST_OWNER = eINSTANCE.getConstraint_PostOwner();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl <em>Class Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ClassDefinitionImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getClassDefinition()
+		 * @generated
+		 */
+		EClass CLASS_DEFINITION = eINSTANCE.getClassDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Inv</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DEFINITION__INV = eINSTANCE.getClassDefinition_Inv();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS_DEFINITION__IS_ABSTRACT = eINSTANCE.getClassDefinition_IsAbstract();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Attribute</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DEFINITION__OWNED_ATTRIBUTE = eINSTANCE.getClassDefinition_OwnedAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Operation</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DEFINITION__OWNED_OPERATION = eINSTANCE.getClassDefinition_OwnedOperation();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Type</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DEFINITION__SUPER_TYPE = eINSTANCE.getClassDefinition_SuperType();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableImpl <em>Type Variable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeVariable()
+		 * @generated
+		 */
+		EClass TYPE_VARIABLE = eINSTANCE.getTypeVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Supertype</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_VARIABLE__SUPERTYPE = eINSTANCE.getTypeVariable_Supertype();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ProductTypeImpl <em>Product Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ProductTypeImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getProductType()
+		 * @generated
+		 */
+		EClass PRODUCT_TYPE = eINSTANCE.getProductType();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PRODUCT_TYPE__TYPE = eINSTANCE.getProductType_Type();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.FunctionTypeImpl <em>Function Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.FunctionTypeImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getFunctionType()
+		 * @generated
+		 */
+		EClass FUNCTION_TYPE = eINSTANCE.getFunctionType();
+
+		/**
+		 * The meta object literal for the '<em><b>Left</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FUNCTION_TYPE__LEFT = eINSTANCE.getFunctionType_Left();
+
+		/**
+		 * The meta object literal for the '<em><b>Right</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FUNCTION_TYPE__RIGHT = eINSTANCE.getFunctionType_Right();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl <em>Type Variable Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeVariableBinding()
+		 * @generated
+		 */
+		EClass TYPE_VARIABLE_BINDING = eINSTANCE.getTypeVariableBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_VARIABLE_BINDING__VARIABLE = eINSTANCE.getTypeVariableBinding_Variable();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_VARIABLE_BINDING__TYPE = eINSTANCE.getTypeVariableBinding_Type();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl <em>Type Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinition()
+		 * @generated
+		 */
+		EClass TYPE_DEFINITION = eINSTANCE.getTypeDefinition();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.VoidTypeImpl <em>Void Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.VoidTypeImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getVoidType()
+		 * @generated
+		 */
+		EClass VOID_TYPE = eINSTANCE.getVoidType();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl <em>Parameterized Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getParameterizedType()
+		 * @generated
+		 */
+		EClass PARAMETERIZED_TYPE = eINSTANCE.getParameterizedType();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Param Binding</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETERIZED_TYPE__TYPE_PARAM_BINDING = eINSTANCE.getParameterizedType_TypeParamBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETERIZED_TYPE__TYPE_DEFINITION = eINSTANCE.getParameterizedType_TypeDefinition();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.GenericTypeDefinitionImpl <em>Generic Type Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.GenericTypeDefinitionImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getGenericTypeDefinition()
+		 * @generated
+		 */
+		EClass GENERIC_TYPE_DEFINITION = eINSTANCE.getGenericTypeDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Parameter</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GENERIC_TYPE_DEFINITION__TYPE_PARAMETER = eINSTANCE.getGenericTypeDefinition_TypeParameter();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeDefinitionImpl <em>Model Type Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeDefinitionImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelTypeDefinition()
+		 * @generated
+		 */
+		EClass MODEL_TYPE_DEFINITION = eINSTANCE.getModelTypeDefinition();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl <em>Model Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.ModelTypeImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getModelType()
+		 * @generated
+		 */
+		EClass MODEL_TYPE = eINSTANCE.getModelType();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionContainerImpl <em>Type Definition Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.TypeDefinitionContainerImpl
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getTypeDefinitionContainer()
+		 * @generated
+		 */
+		EClass TYPE_DEFINITION_CONTAINER = eINSTANCE.getTypeDefinitionContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Type Definition</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION = eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.ConstraintLanguage <em>Constraint Language</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.ConstraintLanguage
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getConstraintLanguage()
+		 * @generated
+		 */
+		EEnum CONSTRAINT_LANGUAGE = eINSTANCE.getConstraintLanguage();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.ConstraintType <em>Constraint Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.ConstraintType
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getConstraintType()
+		 * @generated
+		 */
+		EEnum CONSTRAINT_TYPE = eINSTANCE.getConstraintType();
+
+		/**
+		 * The meta object literal for the '<em>String</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.String
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getString()
+		 * @generated
+		 */
+		EDataType STRING = eINSTANCE.getString();
+
+		/**
+		 * The meta object literal for the '<em>Boolean</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getBoolean()
+		 * @generated
+		 */
+		EDataType BOOLEAN = eINSTANCE.getBoolean();
+
+		/**
+		 * The meta object literal for the '<em>Integer</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getInteger()
+		 * @generated
+		 */
+		EDataType INTEGER = eINSTANCE.getInteger();
+
+		/**
+		 * The meta object literal for the '<em>Unlimited Natural</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.language.structure.impl.StructurePackageImpl#getUnlimitedNatural()
+		 * @generated
+		 */
+		EDataType UNLIMITED_NATURAL = eINSTANCE.getUnlimitedNatural();
+
+	}
 
 } //StructurePackage

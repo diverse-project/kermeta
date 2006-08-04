@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ClassDefinitionImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -160,7 +160,7 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getClassDefinition();
+		return StructurePackage.Literals.CLASS_DEFINITION;
 	}
 
 	/**
@@ -203,7 +203,7 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 */
 	public EList getInv() {
 		if (inv == null) {
-			inv = new EObjectContainmentEList(Constraint.class, this, StructurePackage.CLASS_DEFINITION__INV);
+			inv = new EObjectContainmentWithInverseEList(Constraint.class, this, StructurePackage.CLASS_DEFINITION__INV, StructurePackage.CONSTRAINT__INV_OWNER);
 		}
 		return inv;
 	}
@@ -270,22 +270,16 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.CLASS_DEFINITION__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
-					return ((InternalEList)getOwnedAttribute()).basicAdd(otherEnd, msgs);
-				case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
-					return ((InternalEList)getOwnedOperation()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.CLASS_DEFINITION__INV:
+				return ((InternalEList)getInv()).basicAdd(otherEnd, msgs);
+			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
+				return ((InternalEList)getOwnedAttribute()).basicAdd(otherEnd, msgs);
+			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
+				return ((InternalEList)getOwnedOperation()).basicAdd(otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -293,26 +287,18 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.CLASS_DEFINITION__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
-					return ((InternalEList)getTypeParameter()).basicRemove(otherEnd, msgs);
-				case StructurePackage.CLASS_DEFINITION__INV:
-					return ((InternalEList)getInv()).basicRemove(otherEnd, msgs);
-				case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
-					return ((InternalEList)getOwnedAttribute()).basicRemove(otherEnd, msgs);
-				case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
-					return ((InternalEList)getOwnedOperation()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
+				return ((InternalEList)getTypeParameter()).basicRemove(otherEnd, msgs);
+			case StructurePackage.CLASS_DEFINITION__INV:
+				return ((InternalEList)getInv()).basicRemove(otherEnd, msgs);
+			case StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE:
+				return ((InternalEList)getOwnedAttribute()).basicRemove(otherEnd, msgs);
+			case StructurePackage.CLASS_DEFINITION__OWNED_OPERATION:
+				return ((InternalEList)getOwnedOperation()).basicRemove(otherEnd, msgs);
 		}
-		return eBasicSetContainer(null, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -320,12 +306,8 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CLASS_DEFINITION__TAG:
-				return getTag();
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				return getContainedType();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__NAME:
 				return getName();
 			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
@@ -341,7 +323,7 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 			case StructurePackage.CLASS_DEFINITION__SUPER_TYPE:
 				return getSuperType();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -349,16 +331,8 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CLASS_DEFINITION__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__NAME:
 				setName((String)newValue);
 				return;
@@ -386,7 +360,7 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 				getSuperType().addAll((Collection)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -394,14 +368,8 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CLASS_DEFINITION__TAG:
-				getTag().clear();
-				return;
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -424,7 +392,7 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 				getSuperType().clear();
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -432,12 +400,8 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CLASS_DEFINITION__TAG:
-				return tag != null && !tag.isEmpty();
-			case StructurePackage.CLASS_DEFINITION__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.CLASS_DEFINITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case StructurePackage.CLASS_DEFINITION__TYPE_PARAMETER:
@@ -453,7 +417,7 @@ public class ClassDefinitionImpl extends TypeContainerImpl implements ClassDefin
 			case StructurePackage.CLASS_DEFINITION__SUPER_TYPE:
 				return superType != null && !superType.isEmpty();
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

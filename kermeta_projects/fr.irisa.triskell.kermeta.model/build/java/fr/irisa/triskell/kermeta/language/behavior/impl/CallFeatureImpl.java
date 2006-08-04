@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureImpl.java,v 1.2 2006-06-15 08:45:46 dvojtise Exp $
+ * $Id: CallFeatureImpl.java,v 1.3 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -121,7 +121,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return BehaviorPackage.eINSTANCE.getCallFeature();
+		return BehaviorPackage.Literals.CALL_FEATURE;
 	}
 
 	/**
@@ -195,8 +195,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 */
 	public Property getStaticProperty() {
 		if (staticProperty != null && staticProperty.eIsProxy()) {
-			Property oldStaticProperty = staticProperty;
-			staticProperty = (Property)eResolveProxy((InternalEObject)staticProperty);
+			InternalEObject oldStaticProperty = (InternalEObject)staticProperty;
+			staticProperty = (Property)eResolveProxy(oldStaticProperty);
 			if (staticProperty != oldStaticProperty) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CALL_FEATURE__STATIC_PROPERTY, oldStaticProperty, staticProperty));
@@ -233,8 +233,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 */
 	public Operation getStaticOperation() {
 		if (staticOperation != null && staticOperation.eIsProxy()) {
-			Operation oldStaticOperation = staticOperation;
-			staticOperation = (Operation)eResolveProxy((InternalEObject)staticOperation);
+			InternalEObject oldStaticOperation = (InternalEObject)staticOperation;
+			staticOperation = (Operation)eResolveProxy(oldStaticOperation);
 			if (staticOperation != oldStaticOperation) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CALL_FEATURE__STATIC_OPERATION, oldStaticOperation, staticOperation));
@@ -271,8 +271,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 */
 	public EnumerationLiteral getStaticEnumLiteral() {
 		if (staticEnumLiteral != null && staticEnumLiteral.eIsProxy()) {
-			EnumerationLiteral oldStaticEnumLiteral = staticEnumLiteral;
-			staticEnumLiteral = (EnumerationLiteral)eResolveProxy((InternalEObject)staticEnumLiteral);
+			InternalEObject oldStaticEnumLiteral = (InternalEObject)staticEnumLiteral;
+			staticEnumLiteral = (EnumerationLiteral)eResolveProxy(oldStaticEnumLiteral);
 			if (staticEnumLiteral != oldStaticEnumLiteral) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL, oldStaticEnumLiteral, staticEnumLiteral));
@@ -307,18 +307,12 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.CALL_FEATURE__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.CALL_FEATURE__TARGET:
+				return basicSetTarget(null, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -326,44 +320,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.CALL_FEATURE__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.CALL_FEATURE__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.CALL_FEATURE__PARAMETERS:
-					return ((InternalEList)getParameters()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.CALL_FEATURE__TARGET:
-					return basicSetTarget(null, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.CALL_FEATURE__TAG:
-				return getTag();
-			case BehaviorPackage.CALL_FEATURE__CONTAINED_TYPE:
-				return getContainedType();
-			case BehaviorPackage.CALL_FEATURE__STATIC_TYPE:
-				if (resolve) return getStaticType();
-				return basicGetStaticType();
-			case BehaviorPackage.CALL_FEATURE__PARAMETERS:
-				return getParameters();
-			case BehaviorPackage.CALL_FEATURE__NAME:
-				return getName();
-			case BehaviorPackage.CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS:
-				return getStaticTypeVariableBindings();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case BehaviorPackage.CALL_FEATURE__TARGET:
 				return getTarget();
 			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
@@ -378,7 +336,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 				if (resolve) return getStaticEnumLiteral();
 				return basicGetStaticEnumLiteral();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -386,30 +344,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.CALL_FEATURE__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.CALL_FEATURE__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.CALL_FEATURE__STATIC_TYPE:
-				setStaticType((Type)newValue);
-				return;
-			case BehaviorPackage.CALL_FEATURE__PARAMETERS:
-				getParameters().clear();
-				getParameters().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.CALL_FEATURE__NAME:
-				setName((String)newValue);
-				return;
-			case BehaviorPackage.CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS:
-				getStaticTypeVariableBindings().clear();
-				getStaticTypeVariableBindings().addAll((Collection)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case BehaviorPackage.CALL_FEATURE__TARGET:
 				setTarget((Expression)newValue);
 				return;
@@ -426,7 +362,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 				setStaticEnumLiteral((EnumerationLiteral)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -434,26 +370,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.CALL_FEATURE__TAG:
-				getTag().clear();
-				return;
-			case BehaviorPackage.CALL_FEATURE__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
-			case BehaviorPackage.CALL_FEATURE__STATIC_TYPE:
-				setStaticType((Type)null);
-				return;
-			case BehaviorPackage.CALL_FEATURE__PARAMETERS:
-				getParameters().clear();
-				return;
-			case BehaviorPackage.CALL_FEATURE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case BehaviorPackage.CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS:
-				getStaticTypeVariableBindings().clear();
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.CALL_FEATURE__TARGET:
 				setTarget((Expression)null);
 				return;
@@ -470,7 +388,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 				setStaticEnumLiteral((EnumerationLiteral)null);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -478,20 +396,8 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.CALL_FEATURE__TAG:
-				return tag != null && !tag.isEmpty();
-			case BehaviorPackage.CALL_FEATURE__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
-			case BehaviorPackage.CALL_FEATURE__STATIC_TYPE:
-				return staticType != null;
-			case BehaviorPackage.CALL_FEATURE__PARAMETERS:
-				return parameters != null && !parameters.isEmpty();
-			case BehaviorPackage.CALL_FEATURE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case BehaviorPackage.CALL_FEATURE__STATIC_TYPE_VARIABLE_BINDINGS:
-				return staticTypeVariableBindings != null && !staticTypeVariableBindings.isEmpty();
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.CALL_FEATURE__TARGET:
 				return target != null;
 			case BehaviorPackage.CALL_FEATURE__IS_ATPRE:
@@ -503,7 +409,7 @@ public class CallFeatureImpl extends CallExpressionImpl implements CallFeature {
 			case BehaviorPackage.CALL_FEATURE__STATIC_ENUM_LITERAL:
 				return staticEnumLiteral != null;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

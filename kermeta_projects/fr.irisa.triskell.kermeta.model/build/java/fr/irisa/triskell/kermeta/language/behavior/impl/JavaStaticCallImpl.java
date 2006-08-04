@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCallImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: JavaStaticCallImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -109,7 +109,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return BehaviorPackage.eINSTANCE.getJavaStaticCall();
+		return BehaviorPackage.Literals.JAVA_STATIC_CALL;
 	}
 
 	/**
@@ -171,18 +171,12 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.JAVA_STATIC_CALL__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
+				return ((InternalEList)getParameters()).basicRemove(otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -190,36 +184,8 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.JAVA_STATIC_CALL__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.JAVA_STATIC_CALL__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
-					return ((InternalEList)getParameters()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.JAVA_STATIC_CALL__TAG:
-				return getTag();
-			case BehaviorPackage.JAVA_STATIC_CALL__CONTAINED_TYPE:
-				return getContainedType();
-			case BehaviorPackage.JAVA_STATIC_CALL__STATIC_TYPE:
-				if (resolve) return getStaticType();
-				return basicGetStaticType();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
 				return getParameters();
 			case BehaviorPackage.JAVA_STATIC_CALL__JCLASS:
@@ -227,7 +193,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 			case BehaviorPackage.JAVA_STATIC_CALL__JMETHOD:
 				return getJmethod();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -235,19 +201,8 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.JAVA_STATIC_CALL__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.JAVA_STATIC_CALL__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.JAVA_STATIC_CALL__STATIC_TYPE:
-				setStaticType((Type)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection)newValue);
@@ -259,7 +214,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 				setJmethod((String)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -267,17 +222,8 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.JAVA_STATIC_CALL__TAG:
-				getTag().clear();
-				return;
-			case BehaviorPackage.JAVA_STATIC_CALL__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
-			case BehaviorPackage.JAVA_STATIC_CALL__STATIC_TYPE:
-				setStaticType((Type)null);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
 				getParameters().clear();
 				return;
@@ -288,7 +234,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 				setJmethod(JMETHOD_EDEFAULT);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -296,14 +242,8 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.JAVA_STATIC_CALL__TAG:
-				return tag != null && !tag.isEmpty();
-			case BehaviorPackage.JAVA_STATIC_CALL__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
-			case BehaviorPackage.JAVA_STATIC_CALL__STATIC_TYPE:
-				return staticType != null;
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.JAVA_STATIC_CALL__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 			case BehaviorPackage.JAVA_STATIC_CALL__JCLASS:
@@ -311,7 +251,7 @@ public class JavaStaticCallImpl extends ExpressionImpl implements JavaStaticCall
 			case BehaviorPackage.JAVA_STATIC_CALL__JMETHOD:
 				return JMETHOD_EDEFAULT == null ? jmethod != null : !JMETHOD_EDEFAULT.equals(jmethod);
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

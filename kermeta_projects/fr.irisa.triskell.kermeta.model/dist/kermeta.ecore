@@ -22,6 +22,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="CallVariable" eSuperTypes="//language/behavior/CallExpression"/>
       <eClassifiers xsi:type="ecore:EClass" name="CallFeature" eSuperTypes="//language/behavior/CallExpression">
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="//language/behavior/Expression" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAtpre" eType="//language/structure/Boolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticProperty" eType="//language/structure/Property"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticOperation" eType="//language/structure/Operation"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="staticEnumLiteral" eType="//language/structure/EnumerationLiteral"/>
@@ -113,7 +114,8 @@
         <eOperations name="unset">
           <eParameters name="property" eType="//language/structure/Property"/>
         </eOperations>
-        <eOperations name="checkInvariants" eType="//language/structure/Boolean"/>
+        <eOperations name="checkInvariants"/>
+        <eOperations name="checkAllInvariants"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="tag" upperBound="-1" eType="//language/structure/Tag" eOpposite="//language/structure/Tag/object"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EDataType" name="Integer" instanceClassName="kermeta::standard::Integer"/>
@@ -121,8 +123,8 @@
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//language/structure/Boolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="raisedException" upperBound="-1" eType="//language/structure/Type"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1" eType="//language/structure/Parameter" containment="true" eOpposite="//language/structure/Parameter/operation"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="pre" upperBound="-1" eType="//language/structure/Constraint" containment="true"/>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="post" upperBound="-1" eType="//language/structure/Constraint" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="pre" upperBound="-1" eType="//language/structure/Constraint" containment="true" eOpposite="//language/structure/Constraint/preOwner"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="post" upperBound="-1" eType="//language/structure/Constraint" containment="true" eOpposite="//language/structure/Constraint/postOwner"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="superOperation" eType="//language/structure/Operation"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="owningClass" eType="//language/structure/ClassDefinition" eOpposite="//language/structure/ClassDefinition/ownedOperation"/>
@@ -187,13 +189,16 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="body" ordered="false" lowerBound="1" eType="//language/behavior/Expression" containment="true"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="stereotype" eType="//language/structure/ConstraintType"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="language" eType="//language/structure/ConstraintLanguage"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="invOwner" eType="//language/structure/ClassDefinition" eOpposite="//language/structure/ClassDefinition/inv"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="preOwner" eType="//language/structure/Operation" eOpposite="//language/structure/Operation/pre"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="postOwner" eType="//language/structure/Operation" eOpposite="//language/structure/Operation/post"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EEnum" name="ConstraintLanguage" instanceClassName="kermeta::standard::ConstraintLanguage">
         <eLiterals name="kermeta"/>
         <eLiterals name="ocl" value="1"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="//language/structure/TypeContainer //language/structure/GenericTypeDefinition">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="inv" upperBound="-1" eType="//language/structure/Constraint" defaultValueLiteral="" containment="true"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="inv" upperBound="-1" eType="//language/structure/Constraint" defaultValueLiteral="" containment="true" eOpposite="//language/structure/Constraint/invOwner"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//language/structure/Boolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="//language/structure/Property" containment="true" eOpposite="//language/structure/Property/owningClass"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1" eType="//language/structure/Operation" containment="true" eOpposite="//language/structure/Operation/owningClass"/>

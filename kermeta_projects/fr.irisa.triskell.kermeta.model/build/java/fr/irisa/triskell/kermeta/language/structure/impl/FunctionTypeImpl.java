@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionTypeImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: FunctionTypeImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -73,7 +73,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getFunctionType();
+		return StructurePackage.Literals.FUNCTION_TYPE;
 	}
 
 	/**
@@ -83,8 +83,8 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 */
 	public Type getLeft() {
 		if (left != null && left.eIsProxy()) {
-			Type oldLeft = left;
-			left = (Type)eResolveProxy((InternalEObject)left);
+			InternalEObject oldLeft = (InternalEObject)left;
+			left = (Type)eResolveProxy(oldLeft);
 			if (left != oldLeft) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.FUNCTION_TYPE__LEFT, oldLeft, left));
@@ -121,8 +121,8 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 */
 	public Type getRight() {
 		if (right != null && right.eIsProxy()) {
-			Type oldRight = right;
-			right = (Type)eResolveProxy((InternalEObject)right);
+			InternalEObject oldRight = (InternalEObject)right;
+			right = (Type)eResolveProxy(oldRight);
 			if (right != oldRight) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.FUNCTION_TYPE__RIGHT, oldRight, right));
@@ -168,50 +168,8 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.FUNCTION_TYPE__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.FUNCTION_TYPE__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.FUNCTION_TYPE__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.FUNCTION_TYPE__TAG:
-				return getTag();
-			case StructurePackage.FUNCTION_TYPE__CONTAINED_TYPE:
-				return getContainedType();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__LEFT:
 				if (resolve) return getLeft();
 				return basicGetLeft();
@@ -219,7 +177,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 				if (resolve) return getRight();
 				return basicGetRight();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -227,16 +185,8 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.FUNCTION_TYPE__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case StructurePackage.FUNCTION_TYPE__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__LEFT:
 				setLeft((Type)newValue);
 				return;
@@ -244,7 +194,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 				setRight((Type)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -252,14 +202,8 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.FUNCTION_TYPE__TAG:
-				getTag().clear();
-				return;
-			case StructurePackage.FUNCTION_TYPE__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__LEFT:
 				setLeft((Type)null);
 				return;
@@ -267,7 +211,7 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 				setRight((Type)null);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -275,18 +219,14 @@ public class FunctionTypeImpl extends TypeContainerImpl implements FunctionType 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.FUNCTION_TYPE__TAG:
-				return tag != null && !tag.isEmpty();
-			case StructurePackage.FUNCTION_TYPE__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.FUNCTION_TYPE__LEFT:
 				return left != null;
 			case StructurePackage.FUNCTION_TYPE__RIGHT:
 				return right != null;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 } //FunctionTypeImpl

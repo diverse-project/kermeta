@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ClassImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -127,7 +127,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getClass_();
+		return StructurePackage.Literals.CLASS;
 	}
 
 	/**
@@ -200,53 +200,8 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.CLASS__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.CLASS__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.CLASS__TYPE_PARAM_BINDING:
-					return ((InternalEList)getTypeParamBinding()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CLASS__TAG:
-				return getTag();
-			case StructurePackage.CLASS__TYPE_PARAM_BINDING:
-				return getTypeParamBinding();
-			case StructurePackage.CLASS__TYPE_DEFINITION:
-				if (resolve) return getTypeDefinition();
-				return basicGetTypeDefinition();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.CLASS__OWNED_ATTRIBUTE:
 				return getOwnedAttribute();
 			case StructurePackage.CLASS__OWNED_OPERATION:
@@ -258,7 +213,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 			case StructurePackage.CLASS__NAME:
 				return getName();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -266,56 +221,8 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CLASS__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case StructurePackage.CLASS__TYPE_PARAM_BINDING:
-				getTypeParamBinding().clear();
-				getTypeParamBinding().addAll((Collection)newValue);
-				return;
-			case StructurePackage.CLASS__TYPE_DEFINITION:
-				setTypeDefinition((GenericTypeDefinition)newValue);
-				return;
-		}
-		eDynamicSet(eFeature, newValue);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CLASS__TAG:
-				getTag().clear();
-				return;
-			case StructurePackage.CLASS__TYPE_PARAM_BINDING:
-				getTypeParamBinding().clear();
-				return;
-			case StructurePackage.CLASS__TYPE_DEFINITION:
-				setTypeDefinition((GenericTypeDefinition)null);
-				return;
-		}
-		eDynamicUnset(eFeature);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CLASS__TAG:
-				return tag != null && !tag.isEmpty();
-			case StructurePackage.CLASS__TYPE_PARAM_BINDING:
-				return typeParamBinding != null && !typeParamBinding.isEmpty();
-			case StructurePackage.CLASS__TYPE_DEFINITION:
-				return typeDefinition != null;
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.CLASS__OWNED_ATTRIBUTE:
 				return ownedAttribute != null && !ownedAttribute.isEmpty();
 			case StructurePackage.CLASS__OWNED_OPERATION:
@@ -327,7 +234,7 @@ public class ClassImpl extends ParameterizedTypeImpl implements fr.irisa.triskel
 			case StructurePackage.CLASS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

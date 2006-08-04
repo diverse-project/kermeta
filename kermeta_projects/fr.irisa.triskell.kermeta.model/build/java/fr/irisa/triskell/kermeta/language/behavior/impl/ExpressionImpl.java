@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ExpressionImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ExpressionImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -81,7 +81,7 @@ public abstract class ExpressionImpl extends ObjectImpl implements Expression {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return BehaviorPackage.eINSTANCE.getExpression();
+		return BehaviorPackage.Literals.EXPRESSION;
 	}
 
 	/**
@@ -103,8 +103,8 @@ public abstract class ExpressionImpl extends ObjectImpl implements Expression {
 	 */
 	public Type getStaticType() {
 		if (staticType != null && staticType.eIsProxy()) {
-			Type oldStaticType = staticType;
-			staticType = (Type)eResolveProxy((InternalEObject)staticType);
+			InternalEObject oldStaticType = (InternalEObject)staticType;
+			staticType = (Type)eResolveProxy(oldStaticType);
 			if (staticType != oldStaticType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BehaviorPackage.EXPRESSION__STATIC_TYPE, oldStaticType, staticType));
@@ -139,18 +139,12 @@ public abstract class ExpressionImpl extends ObjectImpl implements Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.EXPRESSION__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.EXPRESSION__CONTAINED_TYPE:
+				return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -158,36 +152,15 @@ public abstract class ExpressionImpl extends ObjectImpl implements Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.EXPRESSION__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.EXPRESSION__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.EXPRESSION__TAG:
-				return getTag();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case BehaviorPackage.EXPRESSION__CONTAINED_TYPE:
 				return getContainedType();
 			case BehaviorPackage.EXPRESSION__STATIC_TYPE:
 				if (resolve) return getStaticType();
 				return basicGetStaticType();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -195,12 +168,8 @@ public abstract class ExpressionImpl extends ObjectImpl implements Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.EXPRESSION__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case BehaviorPackage.EXPRESSION__CONTAINED_TYPE:
 				getContainedType().clear();
 				getContainedType().addAll((Collection)newValue);
@@ -209,7 +178,7 @@ public abstract class ExpressionImpl extends ObjectImpl implements Expression {
 				setStaticType((Type)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -217,11 +186,8 @@ public abstract class ExpressionImpl extends ObjectImpl implements Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.EXPRESSION__TAG:
-				getTag().clear();
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.EXPRESSION__CONTAINED_TYPE:
 				getContainedType().clear();
 				return;
@@ -229,7 +195,7 @@ public abstract class ExpressionImpl extends ObjectImpl implements Expression {
 				setStaticType((Type)null);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -237,16 +203,14 @@ public abstract class ExpressionImpl extends ObjectImpl implements Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.EXPRESSION__TAG:
-				return tag != null && !tag.isEmpty();
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.EXPRESSION__CONTAINED_TYPE:
 				return containedType != null && !containedType.isEmpty();
 			case BehaviorPackage.EXPRESSION__STATIC_TYPE:
 				return staticType != null;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

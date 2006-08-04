@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: NamedElementImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: NamedElementImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -71,7 +71,7 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getNamedElement();
+		return StructurePackage.Literals.NAMED_ELEMENT;
 	}
 
 	/**
@@ -100,50 +100,12 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.NAMED_ELEMENT__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.NAMED_ELEMENT__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.NAMED_ELEMENT__TAG:
-				return getTag();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.NAMED_ELEMENT__NAME:
 				return getName();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -151,17 +113,13 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.NAMED_ELEMENT__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.NAMED_ELEMENT__NAME:
 				setName((String)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -169,16 +127,13 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.NAMED_ELEMENT__TAG:
-				getTag().clear();
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.NAMED_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -186,14 +141,12 @@ public abstract class NamedElementImpl extends ObjectImpl implements NamedElemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.NAMED_ELEMENT__TAG:
-				return tag != null && !tag.isEmpty();
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.NAMED_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

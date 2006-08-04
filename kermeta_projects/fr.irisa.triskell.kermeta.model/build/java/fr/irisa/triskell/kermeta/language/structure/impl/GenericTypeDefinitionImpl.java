@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinitionImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: GenericTypeDefinitionImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -62,7 +62,7 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getGenericTypeDefinition();
+		return StructurePackage.Literals.GENERIC_TYPE_DEFINITION;
 	}
 
 	/**
@@ -82,18 +82,12 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.GENERIC_TYPE_DEFINITION__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
+				return ((InternalEList)getTypeParameter()).basicRemove(otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -101,35 +95,12 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.GENERIC_TYPE_DEFINITION__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
-					return ((InternalEList)getTypeParameter()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.GENERIC_TYPE_DEFINITION__TAG:
-				return getTag();
-			case StructurePackage.GENERIC_TYPE_DEFINITION__NAME:
-				return getName();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
 				return getTypeParameter();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -137,21 +108,14 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.GENERIC_TYPE_DEFINITION__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case StructurePackage.GENERIC_TYPE_DEFINITION__NAME:
-				setName((String)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
 				getTypeParameter().clear();
 				getTypeParameter().addAll((Collection)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -159,19 +123,13 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.GENERIC_TYPE_DEFINITION__TAG:
-				getTag().clear();
-				return;
-			case StructurePackage.GENERIC_TYPE_DEFINITION__NAME:
-				setName(NAME_EDEFAULT);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
 				getTypeParameter().clear();
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -179,16 +137,12 @@ public abstract class GenericTypeDefinitionImpl extends TypeDefinitionImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.GENERIC_TYPE_DEFINITION__TAG:
-				return tag != null && !tag.isEmpty();
-			case StructurePackage.GENERIC_TYPE_DEFINITION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER:
 				return typeParameter != null && !typeParameter.isEmpty();
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 } //GenericTypeDefinitionImpl

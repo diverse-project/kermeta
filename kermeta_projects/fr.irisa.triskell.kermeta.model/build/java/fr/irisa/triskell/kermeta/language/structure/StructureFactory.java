@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactory.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: StructureFactory.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -23,7 +23,7 @@ public interface StructureFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	StructureFactory eINSTANCE = new fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl();
+	StructureFactory eINSTANCE = fr.irisa.triskell.kermeta.language.structure.impl.StructureFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Class</em>'.

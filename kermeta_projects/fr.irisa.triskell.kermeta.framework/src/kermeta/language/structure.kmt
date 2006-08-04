@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.25 2006-06-21 15:30:08 cfaucher Exp $
+/* $Id: structure.kmt,v 1.26 2006-08-04 13:34:04 dvojtise Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -175,12 +175,12 @@ class MultiplicityElement inherits TypedElement, kermeta::reflection::Multiplici
 			result := visitor.visitMultiplicityElement(self, context)
 		end
 }
-class Constraint inherits NamedElement,kermeta::reflection::Operation, KMStructureVisitable
+class Constraint inherits kermeta::reflection::Constraint,NamedElement,kermeta::reflection::Operation, KMStructureVisitable
 {
 	attribute language : ConstraintLanguage
 	attribute stereotype : ConstraintType
 	
-	reference body : kermeta::language::behavior::Expression
+	attribute body : kermeta::language::behavior::Expression
 	
 	method acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::structure::KMStructureVisitable is
 		do

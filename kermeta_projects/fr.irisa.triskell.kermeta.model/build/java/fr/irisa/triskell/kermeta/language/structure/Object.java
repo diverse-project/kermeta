@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Object.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: Object.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -104,9 +104,17 @@ public interface Object extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model dataType="fr.irisa.triskell.kermeta.language.structure.Boolean"
+	 * @model
 	 * @generated
 	 */
-	boolean checkInvariants();
+	void checkInvariants();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void checkAllInvariants();
 
 } // Object

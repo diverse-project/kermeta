@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactoryImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: StructureFactoryImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -34,7 +34,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,6 +47,25 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
  * @generated
  */
 public class StructureFactoryImpl extends EFactoryImpl implements StructureFactory {
+	/**
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static StructureFactory init() {
+		try {
+			StructureFactory theStructureFactory = (StructureFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore#//language/structure"); 
+			if (theStructureFactory != null) {
+				return theStructureFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new StructureFactoryImpl();
+	}
+
 	/**
 	 * Creates an instance of the factory.
 	 * <!-- begin-user-doc -->
@@ -94,16 +117,10 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 */
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case StructurePackage.CONSTRAINT_LANGUAGE: {
-				ConstraintLanguage result = ConstraintLanguage.get(initialValue);
-				if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-				return result;
-			}
-			case StructurePackage.CONSTRAINT_TYPE: {
-				ConstraintType result = ConstraintType.get(initialValue);
-				if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-				return result;
-			}
+			case StructurePackage.CONSTRAINT_LANGUAGE:
+				return createConstraintLanguageFromString(eDataType, initialValue);
+			case StructurePackage.CONSTRAINT_TYPE:
+				return createConstraintTypeFromString(eDataType, initialValue);
 			case StructurePackage.STRING:
 				return createStringFromString(eDataType, initialValue);
 			case StructurePackage.BOOLEAN:
@@ -125,9 +142,9 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
 			case StructurePackage.CONSTRAINT_LANGUAGE:
-				return instanceValue == null ? null : instanceValue.toString();
+				return convertConstraintLanguageToString(eDataType, instanceValue);
 			case StructurePackage.CONSTRAINT_TYPE:
-				return instanceValue == null ? null : instanceValue.toString();
+				return convertConstraintTypeToString(eDataType, instanceValue);
 			case StructurePackage.STRING:
 				return convertStringToString(eDataType, instanceValue);
 			case StructurePackage.BOOLEAN:
@@ -359,6 +376,46 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	public ModelType createModelType() {
 		ModelTypeImpl modelType = new ModelTypeImpl();
 		return modelType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstraintLanguage createConstraintLanguageFromString(EDataType eDataType, String initialValue) {
+		ConstraintLanguage result = ConstraintLanguage.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertConstraintLanguageToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstraintType createConstraintTypeFromString(EDataType eDataType, String initialValue) {
+		ConstraintType result = ConstraintType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertConstraintTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

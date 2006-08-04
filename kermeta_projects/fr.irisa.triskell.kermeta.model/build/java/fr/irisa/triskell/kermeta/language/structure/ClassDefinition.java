@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinition.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ClassDefinition.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -32,6 +32,7 @@ public interface ClassDefinition extends TypeContainer, GenericTypeDefinition {
 	/**
 	 * Returns the value of the '<em><b>Inv</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner <em>Inv Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Inv</em>' containment reference list isn't clear,
@@ -40,7 +41,8 @@ public interface ClassDefinition extends TypeContainer, GenericTypeDefinition {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inv</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getClassDefinition_Inv()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" containment="true"
+	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="invOwner" containment="true"
 	 * @generated
 	 */
 	EList getInv();

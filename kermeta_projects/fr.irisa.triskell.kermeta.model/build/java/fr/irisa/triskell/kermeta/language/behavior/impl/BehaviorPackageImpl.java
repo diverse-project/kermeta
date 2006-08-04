@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackageImpl.java,v 1.2 2006-06-15 08:45:46 dvojtise Exp $
+ * $Id: BehaviorPackageImpl.java,v 1.3 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -1027,7 +1027,7 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		StructurePackageImpl theStructurePackage = (StructurePackageImpl)EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI);
+		StructurePackage theStructurePackage = (StructurePackage)EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI);
 
 		// Add supertypes to classes
 		assignmentEClass.getESuperTypes().add(this.getExpression());

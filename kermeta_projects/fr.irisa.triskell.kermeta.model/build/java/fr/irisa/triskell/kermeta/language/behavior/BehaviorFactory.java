@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactory.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: BehaviorFactory.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -23,7 +23,7 @@ public interface BehaviorFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	BehaviorFactory eINSTANCE = new fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorFactoryImpl();
+	BehaviorFactory eINSTANCE = fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Assignment</em>'.

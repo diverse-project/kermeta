@@ -2,15 +2,17 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConstraintImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ConstraintImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintLanguage;
 import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
 import java.util.Collection;
@@ -24,6 +26,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -36,6 +40,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl#getBody <em>Body</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl#getStereotype <em>Stereotype</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl#getLanguage <em>Language</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl#getInvOwner <em>Inv Owner</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl#getPreOwner <em>Pre Owner</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.ConstraintImpl#getPostOwner <em>Post Owner</em>}</li>
  * </ul>
  * </p>
  *
@@ -107,7 +114,7 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getConstraint();
+		return StructurePackage.Literals.CONSTRAINT;
 	}
 
 	/**
@@ -200,18 +207,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.CONSTRAINT__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+	public ClassDefinition getInvOwner() {
+		if (eContainerFeatureID != StructurePackage.CONSTRAINT__INV_OWNER) return null;
+		return (ClassDefinition)eContainer();
 	}
 
 	/**
@@ -219,18 +217,9 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.CONSTRAINT__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.CONSTRAINT__BODY:
-					return basicSetBody(null, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
+	public NotificationChain basicSetInvOwner(ClassDefinition newInvOwner, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newInvOwner, StructurePackage.CONSTRAINT__INV_OWNER, msgs);
+		return msgs;
 	}
 
 	/**
@@ -238,20 +227,184 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CONSTRAINT__TAG:
-				return getTag();
-			case StructurePackage.CONSTRAINT__NAME:
-				return getName();
+	public void setInvOwner(ClassDefinition newInvOwner) {
+		if (newInvOwner != eInternalContainer() || (eContainerFeatureID != StructurePackage.CONSTRAINT__INV_OWNER && newInvOwner != null)) {
+			if (EcoreUtil.isAncestor(this, newInvOwner))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newInvOwner != null)
+				msgs = ((InternalEObject)newInvOwner).eInverseAdd(this, StructurePackage.CLASS_DEFINITION__INV, ClassDefinition.class, msgs);
+			msgs = basicSetInvOwner(newInvOwner, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.CONSTRAINT__INV_OWNER, newInvOwner, newInvOwner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation getPreOwner() {
+		if (eContainerFeatureID != StructurePackage.CONSTRAINT__PRE_OWNER) return null;
+		return (Operation)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetPreOwner(Operation newPreOwner, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newPreOwner, StructurePackage.CONSTRAINT__PRE_OWNER, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPreOwner(Operation newPreOwner) {
+		if (newPreOwner != eInternalContainer() || (eContainerFeatureID != StructurePackage.CONSTRAINT__PRE_OWNER && newPreOwner != null)) {
+			if (EcoreUtil.isAncestor(this, newPreOwner))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newPreOwner != null)
+				msgs = ((InternalEObject)newPreOwner).eInverseAdd(this, StructurePackage.OPERATION__PRE, Operation.class, msgs);
+			msgs = basicSetPreOwner(newPreOwner, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.CONSTRAINT__PRE_OWNER, newPreOwner, newPreOwner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation getPostOwner() {
+		if (eContainerFeatureID != StructurePackage.CONSTRAINT__POST_OWNER) return null;
+		return (Operation)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetPostOwner(Operation newPostOwner, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newPostOwner, StructurePackage.CONSTRAINT__POST_OWNER, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPostOwner(Operation newPostOwner) {
+		if (newPostOwner != eInternalContainer() || (eContainerFeatureID != StructurePackage.CONSTRAINT__POST_OWNER && newPostOwner != null)) {
+			if (EcoreUtil.isAncestor(this, newPostOwner))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newPostOwner != null)
+				msgs = ((InternalEObject)newPostOwner).eInverseAdd(this, StructurePackage.OPERATION__POST, Operation.class, msgs);
+			msgs = basicSetPostOwner(newPostOwner, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.CONSTRAINT__POST_OWNER, newPostOwner, newPostOwner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.CONSTRAINT__INV_OWNER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetInvOwner((ClassDefinition)otherEnd, msgs);
+			case StructurePackage.CONSTRAINT__PRE_OWNER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetPreOwner((Operation)otherEnd, msgs);
+			case StructurePackage.CONSTRAINT__POST_OWNER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetPostOwner((Operation)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.CONSTRAINT__BODY:
+				return basicSetBody(null, msgs);
+			case StructurePackage.CONSTRAINT__INV_OWNER:
+				return basicSetInvOwner(null, msgs);
+			case StructurePackage.CONSTRAINT__PRE_OWNER:
+				return basicSetPreOwner(null, msgs);
+			case StructurePackage.CONSTRAINT__POST_OWNER:
+				return basicSetPostOwner(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case StructurePackage.CONSTRAINT__INV_OWNER:
+				return eInternalContainer().eInverseRemove(this, StructurePackage.CLASS_DEFINITION__INV, ClassDefinition.class, msgs);
+			case StructurePackage.CONSTRAINT__PRE_OWNER:
+				return eInternalContainer().eInverseRemove(this, StructurePackage.OPERATION__PRE, Operation.class, msgs);
+			case StructurePackage.CONSTRAINT__POST_OWNER:
+				return eInternalContainer().eInverseRemove(this, StructurePackage.OPERATION__POST, Operation.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.CONSTRAINT__BODY:
 				return getBody();
 			case StructurePackage.CONSTRAINT__STEREOTYPE:
 				return getStereotype();
 			case StructurePackage.CONSTRAINT__LANGUAGE:
 				return getLanguage();
+			case StructurePackage.CONSTRAINT__INV_OWNER:
+				return getInvOwner();
+			case StructurePackage.CONSTRAINT__PRE_OWNER:
+				return getPreOwner();
+			case StructurePackage.CONSTRAINT__POST_OWNER:
+				return getPostOwner();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -259,15 +412,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CONSTRAINT__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case StructurePackage.CONSTRAINT__NAME:
-				setName((String)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.CONSTRAINT__BODY:
 				setBody((Expression)newValue);
 				return;
@@ -277,8 +423,17 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			case StructurePackage.CONSTRAINT__LANGUAGE:
 				setLanguage((ConstraintLanguage)newValue);
 				return;
+			case StructurePackage.CONSTRAINT__INV_OWNER:
+				setInvOwner((ClassDefinition)newValue);
+				return;
+			case StructurePackage.CONSTRAINT__PRE_OWNER:
+				setPreOwner((Operation)newValue);
+				return;
+			case StructurePackage.CONSTRAINT__POST_OWNER:
+				setPostOwner((Operation)newValue);
+				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -286,14 +441,8 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CONSTRAINT__TAG:
-				getTag().clear();
-				return;
-			case StructurePackage.CONSTRAINT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.CONSTRAINT__BODY:
 				setBody((Expression)null);
 				return;
@@ -303,8 +452,17 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 			case StructurePackage.CONSTRAINT__LANGUAGE:
 				setLanguage(LANGUAGE_EDEFAULT);
 				return;
+			case StructurePackage.CONSTRAINT__INV_OWNER:
+				setInvOwner((ClassDefinition)null);
+				return;
+			case StructurePackage.CONSTRAINT__PRE_OWNER:
+				setPreOwner((Operation)null);
+				return;
+			case StructurePackage.CONSTRAINT__POST_OWNER:
+				setPostOwner((Operation)null);
+				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -312,20 +470,22 @@ public class ConstraintImpl extends NamedElementImpl implements Constraint {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.CONSTRAINT__TAG:
-				return tag != null && !tag.isEmpty();
-			case StructurePackage.CONSTRAINT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.CONSTRAINT__BODY:
 				return body != null;
 			case StructurePackage.CONSTRAINT__STEREOTYPE:
 				return stereotype != STEREOTYPE_EDEFAULT;
 			case StructurePackage.CONSTRAINT__LANGUAGE:
 				return language != LANGUAGE_EDEFAULT;
+			case StructurePackage.CONSTRAINT__INV_OWNER:
+				return getInvOwner() != null;
+			case StructurePackage.CONSTRAINT__PRE_OWNER:
+				return getPreOwner() != null;
+			case StructurePackage.CONSTRAINT__POST_OWNER:
+				return getPostOwner() != null;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

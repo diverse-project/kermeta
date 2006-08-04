@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeLiteralImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: TypeLiteralImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -64,7 +64,7 @@ public class TypeLiteralImpl extends LiteralImpl implements TypeLiteral {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return BehaviorPackage.eINSTANCE.getTypeLiteral();
+		return BehaviorPackage.Literals.TYPE_LITERAL;
 	}
 
 	/**
@@ -115,18 +115,12 @@ public class TypeLiteralImpl extends LiteralImpl implements TypeLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.TYPE_LITERAL__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.TYPE_LITERAL__TYPEREF:
+				return basicSetTyperef(null, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -134,40 +128,12 @@ public class TypeLiteralImpl extends LiteralImpl implements TypeLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.TYPE_LITERAL__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.TYPE_LITERAL__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.TYPE_LITERAL__TYPEREF:
-					return basicSetTyperef(null, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.TYPE_LITERAL__TAG:
-				return getTag();
-			case BehaviorPackage.TYPE_LITERAL__CONTAINED_TYPE:
-				return getContainedType();
-			case BehaviorPackage.TYPE_LITERAL__STATIC_TYPE:
-				if (resolve) return getStaticType();
-				return basicGetStaticType();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case BehaviorPackage.TYPE_LITERAL__TYPEREF:
 				return getTyperef();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -175,24 +141,13 @@ public class TypeLiteralImpl extends LiteralImpl implements TypeLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.TYPE_LITERAL__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.TYPE_LITERAL__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.TYPE_LITERAL__STATIC_TYPE:
-				setStaticType((Type)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case BehaviorPackage.TYPE_LITERAL__TYPEREF:
 				setTyperef((TypeReference)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -200,22 +155,13 @@ public class TypeLiteralImpl extends LiteralImpl implements TypeLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.TYPE_LITERAL__TAG:
-				getTag().clear();
-				return;
-			case BehaviorPackage.TYPE_LITERAL__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
-			case BehaviorPackage.TYPE_LITERAL__STATIC_TYPE:
-				setStaticType((Type)null);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.TYPE_LITERAL__TYPEREF:
 				setTyperef((TypeReference)null);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -223,18 +169,12 @@ public class TypeLiteralImpl extends LiteralImpl implements TypeLiteral {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.TYPE_LITERAL__TAG:
-				return tag != null && !tag.isEmpty();
-			case BehaviorPackage.TYPE_LITERAL__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
-			case BehaviorPackage.TYPE_LITERAL__STATIC_TYPE:
-				return staticType != null;
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.TYPE_LITERAL__TYPEREF:
 				return typeref != null;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 } //TypeLiteralImpl

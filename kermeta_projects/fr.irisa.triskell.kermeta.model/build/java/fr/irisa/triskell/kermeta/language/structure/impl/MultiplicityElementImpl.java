@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElementImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: MultiplicityElementImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -135,7 +135,7 @@ public class MultiplicityElementImpl extends TypedElementImpl implements Multipl
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getMultiplicityElement();
+		return StructurePackage.Literals.MULTIPLICITY_ELEMENT;
 	}
 
 	/**
@@ -227,55 +227,8 @@ public class MultiplicityElementImpl extends TypedElementImpl implements Multipl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.MULTIPLICITY_ELEMENT__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.MULTIPLICITY_ELEMENT__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.MULTIPLICITY_ELEMENT__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.MULTIPLICITY_ELEMENT__TAG:
-				return getTag();
-			case StructurePackage.MULTIPLICITY_ELEMENT__NAME:
-				return getName();
-			case StructurePackage.MULTIPLICITY_ELEMENT__CONTAINED_TYPE:
-				return getContainedType();
-			case StructurePackage.MULTIPLICITY_ELEMENT__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
 				return isIsOrdered() ? Boolean.TRUE : Boolean.FALSE;
 			case StructurePackage.MULTIPLICITY_ELEMENT__IS_UNIQUE:
@@ -285,7 +238,7 @@ public class MultiplicityElementImpl extends TypedElementImpl implements Multipl
 			case StructurePackage.MULTIPLICITY_ELEMENT__UPPER:
 				return new Integer(getUpper());
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -293,22 +246,8 @@ public class MultiplicityElementImpl extends TypedElementImpl implements Multipl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.MULTIPLICITY_ELEMENT__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case StructurePackage.MULTIPLICITY_ELEMENT__NAME:
-				setName((String)newValue);
-				return;
-			case StructurePackage.MULTIPLICITY_ELEMENT__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
-			case StructurePackage.MULTIPLICITY_ELEMENT__TYPE:
-				setType((Type)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
 				setIsOrdered(((Boolean)newValue).booleanValue());
 				return;
@@ -322,7 +261,7 @@ public class MultiplicityElementImpl extends TypedElementImpl implements Multipl
 				setUpper(((Integer)newValue).intValue());
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -330,20 +269,8 @@ public class MultiplicityElementImpl extends TypedElementImpl implements Multipl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.MULTIPLICITY_ELEMENT__TAG:
-				getTag().clear();
-				return;
-			case StructurePackage.MULTIPLICITY_ELEMENT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case StructurePackage.MULTIPLICITY_ELEMENT__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
-			case StructurePackage.MULTIPLICITY_ELEMENT__TYPE:
-				setType((Type)null);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
 				setIsOrdered(IS_ORDERED_EDEFAULT);
 				return;
@@ -357,7 +284,7 @@ public class MultiplicityElementImpl extends TypedElementImpl implements Multipl
 				setUpper(UPPER_EDEFAULT);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -365,16 +292,8 @@ public class MultiplicityElementImpl extends TypedElementImpl implements Multipl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.MULTIPLICITY_ELEMENT__TAG:
-				return tag != null && !tag.isEmpty();
-			case StructurePackage.MULTIPLICITY_ELEMENT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case StructurePackage.MULTIPLICITY_ELEMENT__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
-			case StructurePackage.MULTIPLICITY_ELEMENT__TYPE:
-				return type != null;
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.MULTIPLICITY_ELEMENT__IS_ORDERED:
 				return isOrdered != IS_ORDERED_EDEFAULT;
 			case StructurePackage.MULTIPLICITY_ELEMENT__IS_UNIQUE:
@@ -384,7 +303,7 @@ public class MultiplicityElementImpl extends TypedElementImpl implements Multipl
 			case StructurePackage.MULTIPLICITY_ELEMENT__UPPER:
 				return upper != UPPER_EDEFAULT;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Operation.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: Operation.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -98,6 +98,7 @@ public interface Operation extends MultiplicityElement {
 	/**
 	 * Returns the value of the '<em><b>Pre</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner <em>Pre Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Pre</em>' containment reference list isn't clear,
@@ -106,7 +107,8 @@ public interface Operation extends MultiplicityElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Pre</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Pre()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" containment="true"
+	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="preOwner" containment="true"
 	 * @generated
 	 */
 	EList getPre();
@@ -114,6 +116,7 @@ public interface Operation extends MultiplicityElement {
 	/**
 	 * Returns the value of the '<em><b>Post</b></em>' containment reference list.
 	 * The list contents are of type {@link fr.irisa.triskell.kermeta.language.structure.Constraint}.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner <em>Post Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Post</em>' containment reference list isn't clear,
@@ -122,7 +125,8 @@ public interface Operation extends MultiplicityElement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Post</em>' containment reference list.
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getOperation_Post()
-	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" containment="true"
+	 * @see fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner
+	 * @model type="fr.irisa.triskell.kermeta.language.structure.Constraint" opposite="postOwner" containment="true"
 	 * @generated
 	 */
 	EList getPost();

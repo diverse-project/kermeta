@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.23 2006-07-19 11:38:57 zdrey Exp $
+/* $Id: reflection.kmt,v 1.24 2006-08-04 13:34:04 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -157,13 +157,16 @@ abstract class MultiplicityElement inherits TypedElement
 /** Class representing the constraint definition */
 abstract class Constraint inherits NamedElement
 {
+	reference invOwner : ClassDefinition[0..1]#~inv
+	reference preOwner : Operation[0..1]#~pre
+	reference postOwner : Operation[0..1]#~post
 }
 /** Class representing the operation definition */
 abstract class Operation inherits MultiplicityElement
 {
 	attribute isAbstract : Boolean
-	attribute ~pre : set Constraint[0..*]
-	attribute ~post : set Constraint[0..*]
+	attribute ~pre : set Constraint[0..*]#preOwner
+	attribute ~post : set Constraint[0..*]#postOwner
 	
 	reference superOperation : Operation
 	reference owningClass : ClassDefinition#ownedOperation
@@ -232,7 +235,7 @@ abstract class ClassDefinition inherits TypeContainer, GenericTypeDefinition
 	/** Returns the operations owned by this class definition.
 	 */
 	attribute ownedOperation : set Operation[0..*]#owningClass
-	attribute ~inv : set Constraint[0..*]
+	attribute ~inv : set Constraint[0..*]#invOwner
 	
 	/** Returns the Classes of which this class definition inherits.
 	 */

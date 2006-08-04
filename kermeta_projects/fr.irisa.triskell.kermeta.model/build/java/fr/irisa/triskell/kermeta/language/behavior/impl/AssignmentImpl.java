@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: AssignmentImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -97,7 +97,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return BehaviorPackage.eINSTANCE.getAssignment();
+		return BehaviorPackage.Literals.ASSIGNMENT;
 	}
 
 	/**
@@ -212,18 +212,14 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.ASSIGNMENT__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.ASSIGNMENT__TARGET:
+				return basicSetTarget(null, msgs);
+			case BehaviorPackage.ASSIGNMENT__VALUE:
+				return basicSetValue(null, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -231,38 +227,8 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.ASSIGNMENT__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.ASSIGNMENT__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.ASSIGNMENT__TARGET:
-					return basicSetTarget(null, msgs);
-				case BehaviorPackage.ASSIGNMENT__VALUE:
-					return basicSetValue(null, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.ASSIGNMENT__TAG:
-				return getTag();
-			case BehaviorPackage.ASSIGNMENT__CONTAINED_TYPE:
-				return getContainedType();
-			case BehaviorPackage.ASSIGNMENT__STATIC_TYPE:
-				if (resolve) return getStaticType();
-				return basicGetStaticType();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case BehaviorPackage.ASSIGNMENT__TARGET:
 				return getTarget();
 			case BehaviorPackage.ASSIGNMENT__VALUE:
@@ -270,7 +236,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 			case BehaviorPackage.ASSIGNMENT__IS_CAST:
 				return isIsCast() ? Boolean.TRUE : Boolean.FALSE;
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -278,19 +244,8 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.ASSIGNMENT__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.ASSIGNMENT__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.ASSIGNMENT__STATIC_TYPE:
-				setStaticType((Type)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case BehaviorPackage.ASSIGNMENT__TARGET:
 				setTarget((CallExpression)newValue);
 				return;
@@ -301,7 +256,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 				setIsCast(((Boolean)newValue).booleanValue());
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -309,17 +264,8 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.ASSIGNMENT__TAG:
-				getTag().clear();
-				return;
-			case BehaviorPackage.ASSIGNMENT__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
-			case BehaviorPackage.ASSIGNMENT__STATIC_TYPE:
-				setStaticType((Type)null);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.ASSIGNMENT__TARGET:
 				setTarget((CallExpression)null);
 				return;
@@ -330,7 +276,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 				setIsCast(IS_CAST_EDEFAULT);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -338,14 +284,8 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.ASSIGNMENT__TAG:
-				return tag != null && !tag.isEmpty();
-			case BehaviorPackage.ASSIGNMENT__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
-			case BehaviorPackage.ASSIGNMENT__STATIC_TYPE:
-				return staticType != null;
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.ASSIGNMENT__TARGET:
 				return target != null;
 			case BehaviorPackage.ASSIGNMENT__VALUE:
@@ -353,7 +293,7 @@ public class AssignmentImpl extends ExpressionImpl implements Assignment {
 			case BehaviorPackage.ASSIGNMENT__IS_CAST:
 				return isCast != IS_CAST_EDEFAULT;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

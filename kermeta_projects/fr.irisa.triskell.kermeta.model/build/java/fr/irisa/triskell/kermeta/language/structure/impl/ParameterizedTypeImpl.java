@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedTypeImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ParameterizedTypeImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -77,7 +77,7 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getParameterizedType();
+		return StructurePackage.Literals.PARAMETERIZED_TYPE;
 	}
 
 	/**
@@ -99,8 +99,8 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 */
 	public GenericTypeDefinition getTypeDefinition() {
 		if (typeDefinition != null && typeDefinition.eIsProxy()) {
-			GenericTypeDefinition oldTypeDefinition = typeDefinition;
-			typeDefinition = (GenericTypeDefinition)eResolveProxy((InternalEObject)typeDefinition);
+			InternalEObject oldTypeDefinition = (InternalEObject)typeDefinition;
+			typeDefinition = (GenericTypeDefinition)eResolveProxy(oldTypeDefinition);
 			if (typeDefinition != oldTypeDefinition) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION, oldTypeDefinition, typeDefinition));
@@ -135,18 +135,12 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.PARAMETERIZED_TYPE__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
+				return ((InternalEList)getTypeParamBinding()).basicRemove(otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -154,36 +148,15 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.PARAMETERIZED_TYPE__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
-					return ((InternalEList)getTypeParamBinding()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PARAMETERIZED_TYPE__TAG:
-				return getTag();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				return getTypeParamBinding();
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
 				if (resolve) return getTypeDefinition();
 				return basicGetTypeDefinition();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -191,12 +164,8 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PARAMETERIZED_TYPE__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				getTypeParamBinding().clear();
 				getTypeParamBinding().addAll((Collection)newValue);
@@ -205,7 +174,7 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 				setTypeDefinition((GenericTypeDefinition)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -213,11 +182,8 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PARAMETERIZED_TYPE__TAG:
-				getTag().clear();
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				getTypeParamBinding().clear();
 				return;
@@ -225,7 +191,7 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 				setTypeDefinition((GenericTypeDefinition)null);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -233,16 +199,14 @@ public abstract class ParameterizedTypeImpl extends TypeImpl implements Paramete
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PARAMETERIZED_TYPE__TAG:
-				return tag != null && !tag.isEmpty();
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING:
 				return typeParamBinding != null && !typeParamBinding.isEmpty();
 			case StructurePackage.PARAMETERIZED_TYPE__TYPE_DEFINITION:
 				return typeDefinition != null;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 } //ParameterizedTypeImpl

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConditionalImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: ConditionalImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -86,7 +86,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return BehaviorPackage.eINSTANCE.getConditional();
+		return BehaviorPackage.Literals.CONDITIONAL;
 	}
 
 	/**
@@ -223,18 +223,16 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.CONDITIONAL__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BehaviorPackage.CONDITIONAL__THEN_BODY:
+				return basicSetThenBody(null, msgs);
+			case BehaviorPackage.CONDITIONAL__ELSE_BODY:
+				return basicSetElseBody(null, msgs);
+			case BehaviorPackage.CONDITIONAL__CONDITION:
+				return basicSetCondition(null, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -242,40 +240,8 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case BehaviorPackage.CONDITIONAL__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.CONDITIONAL__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				case BehaviorPackage.CONDITIONAL__THEN_BODY:
-					return basicSetThenBody(null, msgs);
-				case BehaviorPackage.CONDITIONAL__ELSE_BODY:
-					return basicSetElseBody(null, msgs);
-				case BehaviorPackage.CONDITIONAL__CONDITION:
-					return basicSetCondition(null, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
-		}
-		return eBasicSetContainer(null, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.CONDITIONAL__TAG:
-				return getTag();
-			case BehaviorPackage.CONDITIONAL__CONTAINED_TYPE:
-				return getContainedType();
-			case BehaviorPackage.CONDITIONAL__STATIC_TYPE:
-				if (resolve) return getStaticType();
-				return basicGetStaticType();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case BehaviorPackage.CONDITIONAL__THEN_BODY:
 				return getThenBody();
 			case BehaviorPackage.CONDITIONAL__ELSE_BODY:
@@ -283,7 +249,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 			case BehaviorPackage.CONDITIONAL__CONDITION:
 				return getCondition();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -291,19 +257,8 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.CONDITIONAL__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.CONDITIONAL__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
-			case BehaviorPackage.CONDITIONAL__STATIC_TYPE:
-				setStaticType((Type)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case BehaviorPackage.CONDITIONAL__THEN_BODY:
 				setThenBody((Expression)newValue);
 				return;
@@ -314,7 +269,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 				setCondition((Expression)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -322,17 +277,8 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.CONDITIONAL__TAG:
-				getTag().clear();
-				return;
-			case BehaviorPackage.CONDITIONAL__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
-			case BehaviorPackage.CONDITIONAL__STATIC_TYPE:
-				setStaticType((Type)null);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.CONDITIONAL__THEN_BODY:
 				setThenBody((Expression)null);
 				return;
@@ -343,7 +289,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 				setCondition((Expression)null);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -351,14 +297,8 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case BehaviorPackage.CONDITIONAL__TAG:
-				return tag != null && !tag.isEmpty();
-			case BehaviorPackage.CONDITIONAL__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
-			case BehaviorPackage.CONDITIONAL__STATIC_TYPE:
-				return staticType != null;
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case BehaviorPackage.CONDITIONAL__THEN_BODY:
 				return thenBody != null;
 			case BehaviorPackage.CONDITIONAL__ELSE_BODY:
@@ -366,7 +306,7 @@ public class ConditionalImpl extends ExpressionImpl implements Conditional {
 			case BehaviorPackage.CONDITIONAL__CONDITION:
 				return condition != null;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 } //ConditionalImpl

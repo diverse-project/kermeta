@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PropertyImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: PropertyImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -194,7 +194,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getProperty();
+		return StructurePackage.Literals.PROPERTY;
 	}
 
 	/**
@@ -204,8 +204,8 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 */
 	public Property getOpposite() {
 		if (opposite != null && opposite.eIsProxy()) {
-			Property oldOpposite = opposite;
-			opposite = (Property)eResolveProxy((InternalEObject)opposite);
+			InternalEObject oldOpposite = (InternalEObject)opposite;
+			opposite = (Property)eResolveProxy(oldOpposite);
 			if (opposite != oldOpposite) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StructurePackage.PROPERTY__OPPOSITE, oldOpposite, opposite));
@@ -433,7 +433,17 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 */
 	public ClassDefinition getOwningClass() {
 		if (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS) return null;
-		return (ClassDefinition)eContainer;
+		return (ClassDefinition)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningClass(ClassDefinition newOwningClass, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningClass, StructurePackage.PROPERTY__OWNING_CLASS, msgs);
+		return msgs;
 	}
 
 	/**
@@ -442,15 +452,15 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * @generated
 	 */
 	public void setOwningClass(ClassDefinition newOwningClass) {
-		if (newOwningClass != eContainer || (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS && newOwningClass != null)) {
+		if (newOwningClass != eInternalContainer() || (eContainerFeatureID != StructurePackage.PROPERTY__OWNING_CLASS && newOwningClass != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningClass))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (eContainer != null)
+			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningClass != null)
 				msgs = ((InternalEObject)newOwningClass).eInverseAdd(this, StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE, ClassDefinition.class, msgs);
-			msgs = eBasicSetContainer((InternalEObject)newOwningClass, StructurePackage.PROPERTY__OWNING_CLASS, msgs);
+			msgs = basicSetOwningClass(newOwningClass, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
@@ -462,22 +472,14 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.PROPERTY__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				case StructurePackage.PROPERTY__OWNING_CLASS:
-					if (eContainer != null)
-						msgs = eBasicRemoveFromContainer(msgs);
-					return eBasicSetContainer(otherEnd, StructurePackage.PROPERTY__OWNING_CLASS, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.PROPERTY__OWNING_CLASS:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningClass((ClassDefinition)otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -485,24 +487,16 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.PROPERTY__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.PROPERTY__CONTAINED_TYPE:
-					return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-				case StructurePackage.PROPERTY__GETTER_BODY:
-					return basicSetGetterBody(null, msgs);
-				case StructurePackage.PROPERTY__SETTER_BODY:
-					return basicSetSetterBody(null, msgs);
-				case StructurePackage.PROPERTY__OWNING_CLASS:
-					return eBasicSetContainer(null, StructurePackage.PROPERTY__OWNING_CLASS, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.PROPERTY__GETTER_BODY:
+				return basicSetGetterBody(null, msgs);
+			case StructurePackage.PROPERTY__SETTER_BODY:
+				return basicSetSetterBody(null, msgs);
+			case StructurePackage.PROPERTY__OWNING_CLASS:
+				return basicSetOwningClass(null, msgs);
 		}
-		return eBasicSetContainer(null, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -510,16 +504,12 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eBasicRemoveFromContainer(NotificationChain msgs) {
-		if (eContainerFeatureID >= 0) {
-			switch (eContainerFeatureID) {
-				case StructurePackage.PROPERTY__OWNING_CLASS:
-					return eContainer.eInverseRemove(this, StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE, ClassDefinition.class, msgs);
-				default:
-					return eDynamicBasicRemoveFromContainer(msgs);
-			}
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case StructurePackage.PROPERTY__OWNING_CLASS:
+				return eInternalContainer().eInverseRemove(this, StructurePackage.CLASS_DEFINITION__OWNED_ATTRIBUTE, ClassDefinition.class, msgs);
 		}
-		return eContainer.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - eContainerFeatureID, null, msgs);
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -527,25 +517,8 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PROPERTY__TAG:
-				return getTag();
-			case StructurePackage.PROPERTY__NAME:
-				return getName();
-			case StructurePackage.PROPERTY__CONTAINED_TYPE:
-				return getContainedType();
-			case StructurePackage.PROPERTY__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
-			case StructurePackage.PROPERTY__IS_ORDERED:
-				return isIsOrdered() ? Boolean.TRUE : Boolean.FALSE;
-			case StructurePackage.PROPERTY__IS_UNIQUE:
-				return isIsUnique() ? Boolean.TRUE : Boolean.FALSE;
-			case StructurePackage.PROPERTY__LOWER:
-				return new Integer(getLower());
-			case StructurePackage.PROPERTY__UPPER:
-				return new Integer(getUpper());
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.PROPERTY__OPPOSITE:
 				if (resolve) return getOpposite();
 				return basicGetOpposite();
@@ -566,7 +539,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 			case StructurePackage.PROPERTY__OWNING_CLASS:
 				return getOwningClass();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -574,34 +547,8 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PROPERTY__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case StructurePackage.PROPERTY__NAME:
-				setName((String)newValue);
-				return;
-			case StructurePackage.PROPERTY__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
-				return;
-			case StructurePackage.PROPERTY__TYPE:
-				setType((Type)newValue);
-				return;
-			case StructurePackage.PROPERTY__IS_ORDERED:
-				setIsOrdered(((Boolean)newValue).booleanValue());
-				return;
-			case StructurePackage.PROPERTY__IS_UNIQUE:
-				setIsUnique(((Boolean)newValue).booleanValue());
-				return;
-			case StructurePackage.PROPERTY__LOWER:
-				setLower(((Integer)newValue).intValue());
-				return;
-			case StructurePackage.PROPERTY__UPPER:
-				setUpper(((Integer)newValue).intValue());
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.PROPERTY__OPPOSITE:
 				setOpposite((Property)newValue);
 				return;
@@ -630,7 +577,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 				setOwningClass((ClassDefinition)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -638,32 +585,8 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PROPERTY__TAG:
-				getTag().clear();
-				return;
-			case StructurePackage.PROPERTY__NAME:
-				setName(NAME_EDEFAULT);
-				return;
-			case StructurePackage.PROPERTY__CONTAINED_TYPE:
-				getContainedType().clear();
-				return;
-			case StructurePackage.PROPERTY__TYPE:
-				setType((Type)null);
-				return;
-			case StructurePackage.PROPERTY__IS_ORDERED:
-				setIsOrdered(IS_ORDERED_EDEFAULT);
-				return;
-			case StructurePackage.PROPERTY__IS_UNIQUE:
-				setIsUnique(IS_UNIQUE_EDEFAULT);
-				return;
-			case StructurePackage.PROPERTY__LOWER:
-				setLower(LOWER_EDEFAULT);
-				return;
-			case StructurePackage.PROPERTY__UPPER:
-				setUpper(UPPER_EDEFAULT);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.PROPERTY__OPPOSITE:
 				setOpposite((Property)null);
 				return;
@@ -692,7 +615,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 				setOwningClass((ClassDefinition)null);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -700,24 +623,8 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PROPERTY__TAG:
-				return tag != null && !tag.isEmpty();
-			case StructurePackage.PROPERTY__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case StructurePackage.PROPERTY__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
-			case StructurePackage.PROPERTY__TYPE:
-				return type != null;
-			case StructurePackage.PROPERTY__IS_ORDERED:
-				return isOrdered != IS_ORDERED_EDEFAULT;
-			case StructurePackage.PROPERTY__IS_UNIQUE:
-				return isUnique != IS_UNIQUE_EDEFAULT;
-			case StructurePackage.PROPERTY__LOWER:
-				return lower != LOWER_EDEFAULT;
-			case StructurePackage.PROPERTY__UPPER:
-				return upper != UPPER_EDEFAULT;
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.PROPERTY__OPPOSITE:
 				return opposite != null;
 			case StructurePackage.PROPERTY__IS_READ_ONLY:
@@ -737,7 +644,7 @@ public class PropertyImpl extends MultiplicityElementImpl implements Property {
 			case StructurePackage.PROPERTY__OWNING_CLASS:
 				return getOwningClass() != null;
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

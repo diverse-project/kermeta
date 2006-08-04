@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Constraint.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: Constraint.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -19,6 +19,9 @@ import fr.irisa.triskell.kermeta.language.behavior.Expression;
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getBody <em>Body</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getStereotype <em>Stereotype</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getLanguage <em>Language</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner <em>Inv Owner</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner <em>Pre Owner</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner <em>Post Owner</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,5 +113,89 @@ public interface Constraint extends NamedElement {
 	 * @generated
 	 */
 	void setLanguage(ConstraintLanguage value);
+
+	/**
+	 * Returns the value of the '<em><b>Inv Owner</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getInv <em>Inv</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Inv Owner</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Inv Owner</em>' container reference.
+	 * @see #setInvOwner(ClassDefinition)
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_InvOwner()
+	 * @see fr.irisa.triskell.kermeta.language.structure.ClassDefinition#getInv
+	 * @model opposite="inv"
+	 * @generated
+	 */
+	ClassDefinition getInvOwner();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getInvOwner <em>Inv Owner</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Inv Owner</em>' container reference.
+	 * @see #getInvOwner()
+	 * @generated
+	 */
+	void setInvOwner(ClassDefinition value);
+
+	/**
+	 * Returns the value of the '<em><b>Pre Owner</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Operation#getPre <em>Pre</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Pre Owner</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Pre Owner</em>' container reference.
+	 * @see #setPreOwner(Operation)
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_PreOwner()
+	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getPre
+	 * @model opposite="pre"
+	 * @generated
+	 */
+	Operation getPreOwner();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPreOwner <em>Pre Owner</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Pre Owner</em>' container reference.
+	 * @see #getPreOwner()
+	 * @generated
+	 */
+	void setPreOwner(Operation value);
+
+	/**
+	 * Returns the value of the '<em><b>Post Owner</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.Operation#getPost <em>Post</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Post Owner</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Post Owner</em>' container reference.
+	 * @see #setPostOwner(Operation)
+	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getConstraint_PostOwner()
+	 * @see fr.irisa.triskell.kermeta.language.structure.Operation#getPost
+	 * @model opposite="post"
+	 * @generated
+	 */
+	Operation getPostOwner();
+
+	/**
+	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Constraint#getPostOwner <em>Post Owner</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Post Owner</em>' container reference.
+	 * @see #getPostOwner()
+	 * @generated
+	 */
+	void setPostOwner(Operation value);
 
 } // Constraint

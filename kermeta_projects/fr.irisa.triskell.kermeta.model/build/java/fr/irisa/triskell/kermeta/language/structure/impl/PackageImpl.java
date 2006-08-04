@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageImpl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: PackageImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -100,7 +100,7 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return StructurePackage.eINSTANCE.getPackage();
+		return StructurePackage.Literals.PACKAGE;
 	}
 
 	/**
@@ -134,7 +134,17 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 */
 	public fr.irisa.triskell.kermeta.language.structure.Package getNestingPackage() {
 		if (eContainerFeatureID != StructurePackage.PACKAGE__NESTING_PACKAGE) return null;
-		return (fr.irisa.triskell.kermeta.language.structure.Package)eContainer;
+		return (fr.irisa.triskell.kermeta.language.structure.Package)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetNestingPackage(fr.irisa.triskell.kermeta.language.structure.Package newNestingPackage, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newNestingPackage, StructurePackage.PACKAGE__NESTING_PACKAGE, msgs);
+		return msgs;
 	}
 
 	/**
@@ -143,15 +153,15 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 * @generated
 	 */
 	public void setNestingPackage(fr.irisa.triskell.kermeta.language.structure.Package newNestingPackage) {
-		if (newNestingPackage != eContainer || (eContainerFeatureID != StructurePackage.PACKAGE__NESTING_PACKAGE && newNestingPackage != null)) {
+		if (newNestingPackage != eInternalContainer() || (eContainerFeatureID != StructurePackage.PACKAGE__NESTING_PACKAGE && newNestingPackage != null)) {
 			if (EcoreUtil.isAncestor(this, newNestingPackage))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (eContainer != null)
+			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newNestingPackage != null)
 				msgs = ((InternalEObject)newNestingPackage).eInverseAdd(this, StructurePackage.PACKAGE__NESTED_PACKAGE, fr.irisa.triskell.kermeta.language.structure.Package.class, msgs);
-			msgs = eBasicSetContainer((InternalEObject)newNestingPackage, StructurePackage.PACKAGE__NESTING_PACKAGE, msgs);
+			msgs = basicSetNestingPackage(newNestingPackage, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
@@ -184,24 +194,16 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.PACKAGE__TAG:
-					return ((InternalEList)getTag()).basicAdd(otherEnd, msgs);
-				case StructurePackage.PACKAGE__NESTED_PACKAGE:
-					return ((InternalEList)getNestedPackage()).basicAdd(otherEnd, msgs);
-				case StructurePackage.PACKAGE__NESTING_PACKAGE:
-					if (eContainer != null)
-						msgs = eBasicRemoveFromContainer(msgs);
-					return eBasicSetContainer(otherEnd, StructurePackage.PACKAGE__NESTING_PACKAGE, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.PACKAGE__NESTED_PACKAGE:
+				return ((InternalEList)getNestedPackage()).basicAdd(otherEnd, msgs);
+			case StructurePackage.PACKAGE__NESTING_PACKAGE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetNestingPackage((fr.irisa.triskell.kermeta.language.structure.Package)otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -209,22 +211,16 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case StructurePackage.PACKAGE__TAG:
-					return ((InternalEList)getTag()).basicRemove(otherEnd, msgs);
-				case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
-					return ((InternalEList)getOwnedTypeDefinition()).basicRemove(otherEnd, msgs);
-				case StructurePackage.PACKAGE__NESTED_PACKAGE:
-					return ((InternalEList)getNestedPackage()).basicRemove(otherEnd, msgs);
-				case StructurePackage.PACKAGE__NESTING_PACKAGE:
-					return eBasicSetContainer(null, StructurePackage.PACKAGE__NESTING_PACKAGE, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
+				return ((InternalEList)getOwnedTypeDefinition()).basicRemove(otherEnd, msgs);
+			case StructurePackage.PACKAGE__NESTED_PACKAGE:
+				return ((InternalEList)getNestedPackage()).basicRemove(otherEnd, msgs);
+			case StructurePackage.PACKAGE__NESTING_PACKAGE:
+				return basicSetNestingPackage(null, msgs);
 		}
-		return eBasicSetContainer(null, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -232,16 +228,12 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eBasicRemoveFromContainer(NotificationChain msgs) {
-		if (eContainerFeatureID >= 0) {
-			switch (eContainerFeatureID) {
-				case StructurePackage.PACKAGE__NESTING_PACKAGE:
-					return eContainer.eInverseRemove(this, StructurePackage.PACKAGE__NESTED_PACKAGE, fr.irisa.triskell.kermeta.language.structure.Package.class, msgs);
-				default:
-					return eDynamicBasicRemoveFromContainer(msgs);
-			}
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case StructurePackage.PACKAGE__NESTING_PACKAGE:
+				return eInternalContainer().eInverseRemove(this, StructurePackage.PACKAGE__NESTED_PACKAGE, fr.irisa.triskell.kermeta.language.structure.Package.class, msgs);
 		}
-		return eContainer.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - eContainerFeatureID, null, msgs);
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -249,12 +241,8 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PACKAGE__TAG:
-				return getTag();
-			case StructurePackage.PACKAGE__NAME:
-				return getName();
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 				return getOwnedTypeDefinition();
 			case StructurePackage.PACKAGE__NESTED_PACKAGE:
@@ -264,7 +252,7 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 			case StructurePackage.PACKAGE__URI:
 				return getUri();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -272,15 +260,8 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PACKAGE__TAG:
-				getTag().clear();
-				getTag().addAll((Collection)newValue);
-				return;
-			case StructurePackage.PACKAGE__NAME:
-				setName((String)newValue);
-				return;
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 				getOwnedTypeDefinition().clear();
 				getOwnedTypeDefinition().addAll((Collection)newValue);
@@ -296,7 +277,7 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 				setUri((String)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -304,14 +285,8 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PACKAGE__TAG:
-				getTag().clear();
-				return;
-			case StructurePackage.PACKAGE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 				getOwnedTypeDefinition().clear();
 				return;
@@ -325,7 +300,7 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 				setUri(URI_EDEFAULT);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -333,12 +308,8 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
-			case StructurePackage.PACKAGE__TAG:
-				return tag != null && !tag.isEmpty();
-			case StructurePackage.PACKAGE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case StructurePackage.PACKAGE__OWNED_TYPE_DEFINITION:
 				return ownedTypeDefinition != null && !ownedTypeDefinition.isEmpty();
 			case StructurePackage.PACKAGE__NESTED_PACKAGE:
@@ -348,7 +319,7 @@ public class PackageImpl extends NamedElementImpl implements fr.irisa.triskell.k
 			case StructurePackage.PACKAGE__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**
