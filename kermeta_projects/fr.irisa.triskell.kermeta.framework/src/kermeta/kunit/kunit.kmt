@@ -1,5 +1,5 @@
 /* *****************************************************************************
- * $Id: kunit.kmt,v 1.19 2006-07-19 11:37:43 zdrey Exp $
+ * $Id: kunit.kmt,v 1.20 2006-08-07 09:17:30 zdrey Exp $
  * Zoe Drey - 14/02/2005
  * Triskell Research Group
  * IRISA / INRIA / University of Rennes 1 (France)
@@ -11,7 +11,9 @@
  * JUnit architecture.
  * Reference : http://junit.sourceforge.net/doc/cookstour/cookstour.htm
  *
- * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.*/
+ * Usage example of kunit can be found in fr.irisa.triskell.kermeta.samples project.
+ * You can also find a little example if you go to TestRunner documentation.
+ */
 package kermeta::kunit;
 
 require "../Standard.kmt"
@@ -297,11 +299,14 @@ class TestLoader
 
 /** 
  * User instanciates this class to run a test suite/case 
- * Usage : 
- * Create a file, and add in the headers :
- *    require "the_file_that_contains_the_tests.kmt"
- * Create a class, which will be the one that you will launch :
  * 
+ * Usage : 
+ * 
+ * Create a file, and add in the "require" place :
+ * <pre>require "the_file_that_contains_the_tests.kmt"</pre>
+ *
+ * Create a class, which will be the one that you will launch :
+ * <pre>
  * class MyTesterClass
  * {
  *   operation main() is do
@@ -313,6 +318,7 @@ class TestLoader
  *	   testRunner.printTestResult
  *	end
  * }
+ * </pre>
  */
 class TestRunner
 {
