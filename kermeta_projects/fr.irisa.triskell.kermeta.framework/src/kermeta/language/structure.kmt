@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.26 2006-08-04 13:34:04 dvojtise Exp $
+/* $Id: structure.kmt,v 1.27 2006-08-07 09:13:49 zdrey Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -38,29 +38,18 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 	
 	method checkAllInvariants() : Void from kermeta::reflection::Object is do
 		if(self!=void) then
-			do
-				// Call the invariant verification
-				//stdio.writeln(" -- " + self.toString)
-				self.checkInvariants
-				rescue (err : kermeta::exceptions::ConstraintViolatedInv)
-					stdio.writeln(err.toString)
-					stdio.write("--> " + err.message)
-					stdio.writeln(" on " + self.toString)
-			end
-			
-			self.getMetaClass.ownedAttribute.each{ subObj |
-				if( subObj.isComposite) then
-					if( self.get(subObj).getMetaClass.toString.equals("ReflectiveSequence") or self.get(subObj).getMetaClass.toString.equals("ReflectiveCollection") ) then
-						//stdio.writeln(" -> " + subObj.type.toString + " - " + subObj.name)
-						
+			// Call the invariant verification
+			self.checkInvariants
+			// Invariant checking on each value of self properties			
+			self.getMetaClass.ownedAttribute.each { subObj |
+				if ( subObj.isComposite) then
+					if ( self.get(subObj).getMetaClass.toString.equals("ReflectiveSequence") or self.get(subObj).getMetaClass.toString.equals("ReflectiveCollection") ) then
+
 						var subObjInstances : kermeta::standard::Collection<kermeta::reflection::Object>
 						subObjInstances ?= self.get(subObj)
-						
-						subObjInstances.each{ aSubObjInstances | 
-							aSubObjInstances.checkAllInvariants
-						}
+						subObjInstances.each { aSubObjInstances | aSubObjInstances.checkAllInvariants }
 					end
-					if(self.get(subObj).getMetaClass.toString.equals("Property")) then
+					if ( self.get(subObj).getMetaClass.toString.equals("Property")) then
 						self.get(subObj).checkAllInvariants
 					end
 				end
@@ -435,4 +424,3 @@ abstract class KMStructureVisitable
 {
 	operation acceptKMStructureVisitor<ContextType, ResultType>(visitor : KMStructureVisitor<ContextType, ResultType>, context : ContextType) : ResultType is abstract
 }
-
