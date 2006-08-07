@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass3.java,v 1.8 2006-03-03 15:22:18 dvojtise Exp $
+/* $Id: KMT2KMPass3.java,v 1.9 2006-08-07 15:45:21 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass3.java
  * License : EPL
@@ -24,6 +24,7 @@ import fr.irisa.triskell.kermeta.ast.DataTypeDecl;
 import fr.irisa.triskell.kermeta.ast.EnumDecl;
 import fr.irisa.triskell.kermeta.ast.EnumLiteral;
 import fr.irisa.triskell.kermeta.ast.KermetaASTNode;
+import fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor;
 import fr.irisa.triskell.kermeta.ast.ModelTypeDecl;
 import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.OperationBody;
@@ -34,6 +35,7 @@ import fr.irisa.triskell.kermeta.ast.PropertyKind;
 import fr.irisa.triskell.kermeta.ast.ReadOnlyModifier;
 import fr.irisa.triskell.kermeta.ast.Type;
 import fr.irisa.triskell.kermeta.ast.TypeVarDecl;
+import fr.irisa.triskell.kermeta.ast.UsingStmt;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 //import fr.irisa.triskell.kermeta.language.structure.FClass;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
@@ -52,8 +54,9 @@ import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
  * Distributed under the terms of the GPL license
  * 
  * PASS 3 :
- * The entire structure should be build at the end of this pass
- * 
+ *  - the usings are checked
+ *  - The entire structure should be build at the end of this pass
+ *  
  * Except :
  * For ops : body / abstract / superOp
  * For props : opposites / accessors
@@ -409,4 +412,18 @@ public class KMT2KMPass3 extends KMT2KMPass {
 		pt.setInstanceType(KMT2KMTypeBuilder.process(node.getInstanceClass(), builder));
 		return false;
 	}
+
+	/**
+	 * @see KermetaASTNodeVisitor#beginVisit(UsingStmt)
+	 */
+	public boolean beginVisit(UsingStmt usingStmt) {
+		String u = qualifiedIDAsString(usingStmt.getName());
+		if (builder.getPackages().containsKey(u) == false) {
+			builder.messages.addMessage(new KMTUnitLoadError("PASS 3 : Wrong using - package '"+u+"' does not exist", usingStmt));
+			return false;
+		}
+		return super.beginVisit(usingStmt);
+	}
+	
+	
 }

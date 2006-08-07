@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.6 2006-07-05 14:45:42 zdrey Exp $
+/* $Id: KMT2KMPass1.java,v 1.7 2006-08-07 15:45:21 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : GPL
@@ -75,7 +75,7 @@ public class KMT2KMPass1 extends KMT2KMPass {
 		if (decls.getChildCount()== 0 && existUsing == true)
 			builder.messages.addError(
 			"PASS 1 : Either 'using' declaration is misplaced (should be put after 'require'), " +
-			"or there is no element defined in your file.", null);
+			"or there is a 'using' declaration, but no element defined in your file.", null);
 		return super.beginVisit(decls);
 	}
 	

@@ -25,7 +25,6 @@ public class KMT2KMPass5 extends KMT2KMPass {
 	 */
 	public KMT2KMPass5(KermetaUnit builder) {
 		super(builder);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
