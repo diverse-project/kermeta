@@ -1,4 +1,4 @@
-/* $Id: structure.kmt,v 1.27 2006-08-07 09:13:49 zdrey Exp $
+/* $Id: structure.kmt,v 1.28 2006-08-07 15:42:31 zdrey Exp $
  * Project : framework
  * File : structure.kmt
  * License : EPL
@@ -43,13 +43,13 @@ class Object inherits kermeta::reflection::Object, KMStructureVisitable
 			// Invariant checking on each value of self properties			
 			self.getMetaClass.ownedAttribute.each { subObj |
 				if ( subObj.isComposite) then
-					if ( self.get(subObj).getMetaClass.toString.equals("ReflectiveSequence") or self.get(subObj).getMetaClass.toString.equals("ReflectiveCollection") ) then
+					if ( self.get(subObj).getMetaClass.typeDefinition.name.equals("ReflectiveSequence") 
+						or self.get(subObj).getMetaClass.typeDefinition.name.equals("ReflectiveCollection") ) then
 
 						var subObjInstances : kermeta::standard::Collection<kermeta::reflection::Object>
 						subObjInstances ?= self.get(subObj)
 						subObjInstances.each { aSubObjInstances | aSubObjInstances.checkAllInvariants }
-					end
-					if ( self.get(subObj).getMetaClass.toString.equals("Property")) then
+					else
 						self.get(subObj).checkAllInvariants
 					end
 				end
