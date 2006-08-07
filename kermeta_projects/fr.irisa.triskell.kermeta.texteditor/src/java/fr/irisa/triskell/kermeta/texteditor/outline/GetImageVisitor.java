@@ -9,6 +9,7 @@ import org.eclipse.swt.graphics.Image;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
@@ -74,7 +75,13 @@ public class GetImageVisitor extends KermetaOptimizedVisitor {
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Constraint)
 	 */
 	public Object visitConstraint(Constraint arg0) {
-	   	return KermetaSpecialIcons.CONSTRAINT;	
+		switch (arg0.getStereotype().getValue()) {
+        case ConstraintType.INV:  return KermetaSpecialIcons.INV_CONSTRAINT;
+        case ConstraintType.PRE:  return KermetaSpecialIcons.PRE_CONSTRAINT;
+        case ConstraintType.POST:  return KermetaSpecialIcons.POST_CONSTRAINT;
+        default: return KermetaSpecialIcons.CONSTRAINT;
+		}
+		
 	}
 	/**
 	 * @see metacore.visitor.MetacoreVisitor#visit(metacore.structure.Enumeration)

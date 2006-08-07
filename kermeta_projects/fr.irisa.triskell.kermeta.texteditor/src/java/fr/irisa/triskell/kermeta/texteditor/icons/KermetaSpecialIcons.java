@@ -1,4 +1,4 @@
-/* $Id: KermetaSpecialIcons.java,v 1.3 2006-05-18 12:17:59 jmottu Exp $
+/* $Id: KermetaSpecialIcons.java,v 1.4 2006-08-07 09:18:17 dvojtise Exp $
 * Project : Kermeta (First iteration)
 * File : ButtonIcons.java
 * License : GPL
@@ -30,5 +30,11 @@ public class KermetaSpecialIcons {
     public static Image KERMETA_LOGO = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/kermeta_logo.gif").createImage();
 
     public static Image CONSTRAINT = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/constraint.png").createImage();
+    
+    public static Image INV_CONSTRAINT = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/inv.png").createImage();
+    
+    public static Image PRE_CONSTRAINT = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/pre.png").createImage();
+    
+    public static Image POST_CONSTRAINT = ImageDescriptor.createFromFile(KermetaSpecialIcons.class, "/fr/irisa/triskell/kermeta/texteditor/icons/post.png").createImage();
 
 }
