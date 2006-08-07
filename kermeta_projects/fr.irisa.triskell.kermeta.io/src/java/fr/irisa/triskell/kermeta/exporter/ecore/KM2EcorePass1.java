@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.20 2006-07-18 12:19:47 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.21 2006-08-07 14:11:59 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -99,7 +99,13 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	public Object exportPackage(Package root_package) {
 		root_p = root_package;
 		current_ppath = "";
-		return accept(root_package);
+		Object epackage = accept(root_p);
+		// Add the created package into the ecoreResource (we just need to add the 
+		// root package). EPackage is Ecore metamodel root ("Model object") in our case, 
+		// and all the ecore elements have a direct or undirect containment relationship 
+		// with EPackages. And we only need to add the root elements to the resource contents.
+		ecoreResource.getContents().add(epackage);
+		return epackage;
 	}
 	
 	/**
@@ -136,11 +142,6 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			else
 				throw new KM2ECoreConversionException("A type definition in package '"+node.getName() + "' could not be resolved (" + o + ")");
 		}
-		// Add the created package into the ecoreResource (we just need to add the 
-		// root package). EPackage is Ecore metamodel root ("Model object") in our case, 
-		// and all the ecore elements have a direct or undirect containment relationship 
-		// with EPackages. And we only need to add the root elements to the resource contents.
-		ecoreResource.getContents().add(newEPackage);
 		// Visit the tags of package and convert them into EAnnotations
 		setTagAnnotations(node, newEPackage);
 		// Add the created EPackage to km2ecoremapping
@@ -237,6 +238,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	public Object visitEnumerationLiteral(EnumerationLiteral node) {
 		EEnumLiteral lit = EcoreFactory.eINSTANCE.createEEnumLiteral();
 		lit.setName(node.getName());
+		lit.setLiteral(node.getName());
 		current_eenum.getELiterals().add(lit);
 		lit.setValue(current_eenum.getELiterals().size()-1);
 		return lit;
