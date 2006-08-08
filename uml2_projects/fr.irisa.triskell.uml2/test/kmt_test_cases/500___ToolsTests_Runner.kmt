@@ -5,12 +5,12 @@
 package test_package;
 
 require kermeta
-require "500test_Tool_Generalization.kmt"
-require "501test_Tool_Interface.kmt"
-require "502test_Tool_Accessor.kmt"
-require "503test_Tool_Transition.kmt"
-require "504test_Tool_Context4States.kmt"
-require "505test_Tool_Association.kmt"
+require "500test_Tool_Generalization.main.kmt"
+require "501test_Tool_Interface.main.kmt"
+require "502test_Tool_Accessor.main.kmt"
+require "503test_Tool_Transition.main.kmt"
+require "504test_Tool_Context4States.main.kmt"
+require "505test_Tool_Association.main.kmt"
 
 using tools_tests
 

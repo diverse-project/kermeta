@@ -1,9 +1,5 @@
-/* $Id: 701test_CloneTool_Package.kmt,v 1.1 2006-07-18 15:10:45 vmahe Exp $
- * Creation date: July 6, 2006
- * License:
- * Copyright:
- * Authors:
- */
+@mainClass "tools_tests::ToolCloneParameterTestCase"
+@mainOperation "test_CloneTool_Parameter"
 
 package tools_tests;
 
@@ -14,38 +10,37 @@ require "../../src/kermeta/transformations/UmlCloneFactory.kmt"
 using uml2
 using uml2::transformations
 
-class ToolClonePackageTestCase inherits kermeta::kunit::TestCase
+class ToolCloneParameterTestCase inherits kermeta::kunit::TestCase
 {
-	reference orig : Package
-	reference clone : Package
+	reference orig : Parameter
+	reference clone : Parameter
 	
 	method setUp() is do
 		//creating needed instances
-		orig := Package.new
+		orig := Parameter.new
 		orig.name := "pack"
 		orig.visibility := VisibilityKind.private
 		
 		var factory : UmlCloneFactory init UmlCloneFactory.new
-		clone := factory.clonePackage(orig)
+		clone := factory.cloneParameter(orig)
 	end
 	
 	method tearDown() is do
 		// We don't need to tearDown anything in this test case.
 	end
     
-    operation test_CloneTool_Package() is do
+    operation test_CloneTool_Parameter() is do
     	assertTrueWithMsg(clone != void,
-    		"the clonePackage() method must return something")
-    	assertTrueWithMsg(Package.isInstance(clone),
-    		"the object returned by clonePackage() method must be a Package")
+    		"the cloneParameter() method must return something")
+    	assertTrueWithMsg(Parameter.isInstance(clone),
+    		"the object returned by cloneParameter() method must be a Parameter")
     	assertTrueWithMsg(clone != orig,
     		"the clone object must be different than the original")
     end
-    operation test_CloneTool_PackageProperties() is do
+    operation test_CloneTool_ParameterProperties() is do
     	assertTrueWithMsg(clone.name == orig.name,
     		"the clone must be have the same name than the original")
-    	// as visibility is an attribute, must not erased orig's one
-    	assertTrueWithMsg(clone.visibility == orig.visibility,
+    	assertTrueWithMsg(clone.visibility == VisibilityKind.private,
     		"the clone must be have the same visibility than the original")
     end
 }

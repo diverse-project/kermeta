@@ -1,4 +1,4 @@
-/* $Id: DiagramsClonePass.kmt,v 1.4 2006-07-27 13:34:21 vmahe Exp $
+/* $Id: DiagramsClonePass.kmt,v 1.5 2006-08-08 06:57:46 vmahe Exp $
  * Creation date: July 7, 2006
  * License:
  * Copyright:
@@ -68,10 +68,6 @@ class StaticDiagramClonePass1 inherits DiagramClonePass
     end
     
     method visitComment(visitable : Comment) is do
-		
-		//DEBUG
-		stdio.writeln("DEBUG pass1.visitComment() - body =  "+visitable.body)
-		
     	// we must put only one clone
     	// (passed three times : from package, from annotated element, third unknown)
 //		var o : Element init table.getValue(visitable)
@@ -93,10 +89,6 @@ class StaticDiagramClonePass1 inherits DiagramClonePass
     end
     
     method visitAssociation(visitable : Association) is do
-		
-		//DEBUG
-		visitable.memberEnd.each{u|stdio.writeln("DEBUG pass1.assoc("+visitable.name+") - memberEnd =  "+u.name+" - "+u.toString)}
-		
     	table.putValue(visitable, factory.cloneAssociation(visitable))
     	super(visitable)
     end
@@ -166,19 +158,10 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
     end
     
     method visitComment(visitable : Comment) is do
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG pass2.visitComment : "+visitable.body)
-    	
         var clone : Comment
         clone ?= table.getValue(visitable)
         currentPackage.ownedComment.add(clone)
     	visitable.annotatedElement.each{u |
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG pass2.visitComment : annotatedElement = "+u.toString)
-    	stdio.writeln("DEBUG pass2.visitComment : annotatedElement clone = "+table.getValue(u).toString)
-    	
     		clone.annotatedElement.add(table.getValue(u))
     	}
     	//  Comment uncloned properties : none
@@ -206,20 +189,10 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
         clone ?= table.getValue(visitable)
         var specVal : Classifier
         specVal ?= table.getValue(visitable.specific)
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG - pass2.visitGene("+visitable.toString+") : specific = "+visitable.specific.toString)
-    	stdio.writeln("DEBUG - pass2.visitGene("+visitable.toString+") : specific clone = "+specVal.toString)
-    	
         clone.specific := specVal
         
         var genVal : Classifier
         genVal ?= table.getValue(visitable.general)
-    	
-    	//DEBUG
-    	stdio.writeln("DEBUG - pass2.visitGene("+visitable.toString+") : general = "+visitable.general.toString)
-    	stdio.writeln("DEBUG - pass2.visitGene("+visitable.toString+") : general clone = "+genVal.toString)
-    	
         clone.general := genVal
         
        /* FIXME : not available for the moment
@@ -233,20 +206,11 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
     end
     
     method visitAssociation(visitable : Association) is do
-		
-		//DEBUG
-		stdio.writeln("DEBUG pass2.assoc("+visitable.name+")")
-		
         var clone : Association
         clone ?= table.getValue(visitable)
         visitable.memberEnd.each{ u |
 			var uVal : Property
 			uVal ?= table.getValue(u)
-		
-		//DEBUG
-		stdio.writeln("DEBUG pass2.assoc("+visitable.name+") - memberEnd =  "+u.name+" - "+u.toString)
-		stdio.writeln("DEBUG pass2.assoc("+visitable.name+") - memberEnd clone = "+uVal.toString)
-		
 			if uVal != void then	//////FIXME : defensive programming
 				clone.memberEnd.add(uVal)
 			end
@@ -281,10 +245,6 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
     method visitParameter(visitable : Parameter) is do
     	var clone : Parameter
         clone ?= table.getValue(visitable)
-        
-        //DEBUG
-        stdio.writeln("DEBUG pass2.visitPar("+visitable.name+" - "+visitable.toString+") : clone = "+clone.toString)
-        
         var cl : Classifier
         cl ?=table.getValue(visitable.type)
         clone.type := cl
@@ -293,10 +253,6 @@ class StaticDiagramClonePass2 inherits DiagramClonePass
     method visitProperty(visitable : Property) is do
     	var clone : Property
         clone ?= table.getValue(visitable)
-        
-        //DEBUG
-        stdio.writeln("DEBUG pass2.visitProp("+visitable.name+" - "+visitable.toString+") : clone = "+clone.toString)
-        
         var cl : Classifier
         cl ?=table.getValue(visitable.type)
         clone.type := cl

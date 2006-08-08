@@ -1,9 +1,5 @@
-/* $Id: 601test_Tool_GOFStatePattern.kmt,v 1.2 2006-07-27 13:34:21 vmahe Exp $
- * Creation date: July 6, 2006
- * License:
- * Copyright:
- * Authors:
- */
+@mainClass "tools_tests::ToolGOFStateTestCase"
+@mainOperation "test_GOFStateTool_Context"
 
 package tools_tests;
 

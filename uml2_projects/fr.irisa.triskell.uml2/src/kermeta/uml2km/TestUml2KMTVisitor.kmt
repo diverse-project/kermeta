@@ -5,7 +5,6 @@ package uml2kmt_visitor;
 
 
 require kermeta
-//require "../ecore/UML2.ecore"
 
 using kermeta::standard
 using kermeta::language::structure

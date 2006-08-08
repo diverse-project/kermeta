@@ -1,5 +1,6 @@
 package uml2;
 
+//require "ecore.kmt"
 require "ecore.kmt"
 require kermeta
 

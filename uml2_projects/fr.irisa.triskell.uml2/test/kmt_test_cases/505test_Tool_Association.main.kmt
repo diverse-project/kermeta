@@ -1,5 +1,5 @@
-@mainClass "root_package::ToolGeneralizationTestCase"
-@mainOperation "main"
+@mainClass "tools_tests::ToolAssociationTestCase"
+@mainOperation "testAssociationTool_SimpleAssociation"
 
 package tools_tests;
 
@@ -33,7 +33,7 @@ class ToolAssociationTestCase inherits kermeta::kunit::TestCase
 	end
     
     operation testAssociationTool_SimpleAssociation() is do
-    	model.ownedMember.add(assocTool.addSimpleAssociation(Aclass, Bclass, "association", "source", "target"))
+//    	model.ownedMember.add(assocTool.addSimpleAssociation(Aclass, Bclass, "association", "source", "target"))
     	
     	assertTrueWithMsg(false,
     		"TODO")
@@ -61,14 +61,14 @@ class ToolAssociationTestCase inherits kermeta::kunit::TestCase
     end
     
     operation testAssociationTool_SimpleComposition() is do
-    	model.ownedMember.add(assocTool.addSimpleComposition(Aclass, Bclass, "association", "target"))
+//    	model.ownedMember.add(assocTool.addSimpleComposition(Aclass, Bclass, "association", "target"))
     	
     	assertTrueWithMsg(false,
     		"TODO")
     end
     
     operation testAssociationTool_SimpleAggregation() is do
-    	model.ownedMember.add(assocTool.addSimpleAggregation(Aclass, Bclass, "association", "target"))
+//    	model.ownedMember.add(assocTool.addSimpleAggregation(Aclass, Bclass, "association", "target"))
     	
     	assertTrueWithMsg(false,
     		"TODO")

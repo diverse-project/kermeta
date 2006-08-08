@@ -1,5 +1,5 @@
-@mainClass "root_package::ToolGeneralizationTestCase"
-@mainOperation "main"
+@mainClass "tools_tests::ToolAccessorTestCase"
+@mainOperation "testAccessorTool_Getters"
 
 package tools_tests;
 
@@ -35,6 +35,9 @@ class ToolAccessorTestCase inherits kermeta::kunit::TestCase
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_attr"}
     			.one.returnResult.one.type == Aclass,
 		    "The getter must return the right type for attribute")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_attr"}
+    			.one.isAbstract == false,
+		    "The getter must be an concrete operation")
     end
 	
     operation testAccessorTool_Setters() is do
@@ -43,5 +46,8 @@ class ToolAccessorTestCase inherits kermeta::kunit::TestCase
     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_attr"}
     			.one.ownedParameter.one.type == Aclass,
 		    "The setter must take the right type parameter for attribute")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_attr"}
+    			.one.isAbstract == false,
+		    "The setter must be an concrete operation")
     end
 }

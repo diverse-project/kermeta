@@ -1,3 +1,6 @@
+@mainClass "tools_tests::ToolContext4StateTestCase"
+@mainOperation "testContext4StatesTool_Classifier"
+
 package tools_tests;
 
 require kermeta

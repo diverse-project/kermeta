@@ -1,9 +1,5 @@
-/* $Id: 750test_CloneTool_StaticDiagram.kmt,v 1.5 2006-07-27 13:34:21 vmahe Exp $
- * Creation date: July 6, 2006
- * License:
- * Copyright:
- * Authors:
- */
+@mainClass "tools_tests::ToolCloneStaticDiagramTestCase"
+@mainOperation "test_CloneTool_StaticDiagram"
 
 package tools_tests;
 

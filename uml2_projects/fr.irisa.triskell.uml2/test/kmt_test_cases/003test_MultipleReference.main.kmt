@@ -1,5 +1,5 @@
-@mainClass "root_package::ReferenceTestCase"
-@mainOperation "main"
+@mainClass "uml2_tests::MultipleReferenceTestCase"
+@mainOperation "testBSideOfAssociation"
 
 package uml2_tests;
 

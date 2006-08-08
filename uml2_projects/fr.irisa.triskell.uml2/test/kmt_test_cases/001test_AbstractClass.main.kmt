@@ -1,5 +1,5 @@
-@mainClass "root_package::AbstractClassTestCase"
-@mainOperation "main"
+@mainClass "uml2_tests::AbstractClassTestCase"
+@mainOperation "testAbstractClass"
 
 package uml2_tests;
 
@@ -40,8 +40,8 @@ class AbstractClassTestCase inherits kermeta::kunit::TestCase
     // the AClass must have a collection of CClasses
     operation testAClassAssociation() is do
     	var cClass : CClass init CClass.new
-    	aClass.CCollection.add(cClass)
-    	assertTrueWithMsg(aClass.CCollection.size == 1,
+    	aClass.cCollection.add(cClass)
+    	assertTrueWithMsg(aClass.cCollection.size == 1,
     		"The AClass can manage a collection of CClasses")
     end
 }

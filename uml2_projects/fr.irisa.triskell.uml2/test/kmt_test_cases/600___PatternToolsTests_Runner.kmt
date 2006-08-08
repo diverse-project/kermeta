@@ -5,7 +5,7 @@
 package test_package;
 
 require kermeta
-require "601test_Tool_GOFStatePattern.kmt"
+require "601test_Tool_GOFStatePattern.main.kmt"
 
 using tools_tests
 

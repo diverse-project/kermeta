@@ -1,4 +1,4 @@
-/* $Id: GOFStatePatternTool.kmt,v 1.2 2006-07-27 13:34:21 vmahe Exp $
+/* $Id: GOFStatePatternTool.kmt,v 1.3 2006-08-08 06:57:46 vmahe Exp $
  * Creation date: July 6, 2006
  * License:
  * Copyright:
@@ -10,7 +10,7 @@ package uml2::transformations;
 
 require "StaticTools.kmt"
 require "UmlCloneFactory.kmt"
-require "../TopDownVisitor.kmt"
+require "../TopDownVisitor.km"
 
 using uml2
 
@@ -51,7 +51,9 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
     	// for a root state machine, the GOF State context class corresponds to the statemachine owning Class.
     	ioTable.putValue(visitable, visitable.context)
     	
-    	visitable.context.ownedOperation.add(getRequestOperation(visitable.context.name))
+		var context : Class
+		context ?= visitable.context
+    	context.ownedOperation.add(getRequestOperation)
     	
     	// FIXME : in this version, multiple regions are not processed
 		if visitable.region.size != 1 then
@@ -67,8 +69,6 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
 		var assocTool : Association_Tool init Association_Tool.new
 		var abstractState : Class
 		abstractState ?= ioTable.getValue(visitable.region.one)
-		var context : Class
-		context ?= visitable.context
 		currentPackage.ownedMember.add(assocTool.addNavigableAggregation(context, abstractState, "", nameForCurrentStateLink))
     end
     
@@ -78,7 +78,7 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
 		abstractState.isAbstract := true
 		var contextName : kermeta::standard::String
 	
-    	abstractState.ownedOperation.add(getHandleOperation("xxxx"))
+    	abstractState.ownedOperation.add(getHandleOperation)
     	
     	///////////////////////////////////// TODO : properties and "handle()" operation
     	

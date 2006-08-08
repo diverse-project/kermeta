@@ -1,4 +1,4 @@
-/* $Id: StaticTools.kmt,v 1.2 2006-07-27 13:34:21 vmahe Exp $
+/* $Id: StaticTools.kmt,v 1.3 2006-08-08 06:57:46 vmahe Exp $
  * Creation date: July 3, 2006
  * License:
  * Copyright:
@@ -91,6 +91,14 @@ class Accessor_Tool
 		cl.ownedOperation.add(createGetter(prop))
 		cl.ownedOperation.add(createSetter(prop))
 	end
+	operation addGetter(cl : Class, prop : Property) is do
+		cl.ownedOperation.add(createGetter(prop))
+	end
+	operation addSetter(cl : Class, prop : Property) is do
+		cl.ownedOperation.add(createSetter(prop))
+	end
+	
+	///////// utilities (builders) /////////////
 	operation createGetter(attr : Property) : Operation is do
 		var op : Operation init Operation.new
 		op.name := nameForGetter(attr.name)
@@ -100,6 +108,7 @@ class Accessor_Tool
 		par.type := attr.type
 		par.direction := ParameterDirectionKind.return
 		op.returnResult.add(par)
+		op.isAbstract := false
 		
 		// defined code for result of the getter operation
 		var code : Comment init Comment.new
@@ -119,6 +128,7 @@ class Accessor_Tool
 		par.type := attr.type
 		par.direction := ParameterDirectionKind.in
 		op.ownedParameter.add(par)
+		op.isAbstract := false
 		
 		// defined code for affectation to the setter operation
 		var code : Comment init Comment.new
@@ -165,6 +175,7 @@ class Association_Tool
         var assoc : Association init Association.new
         
         /// TODO
+        raise kermeta::exceptions::NotImplementedException
         
         result := assoc
     end
@@ -175,6 +186,7 @@ class Association_Tool
         var assoc : Association init addSimpleAssociation(container, component, associationName, "", componentEndName)
         
         /// TODO
+        raise kermeta::exceptions::NotImplementedException
         
         result := assoc
     end
@@ -185,6 +197,7 @@ class Association_Tool
         var assoc : Association init addSimpleAssociation(container, component, associationName, "", componentEndName)
         
         /// TODO
+        raise kermeta::exceptions::NotImplementedException
         
         result := assoc
     end

@@ -5,14 +5,14 @@
 package test_package;
 
 require kermeta
-require "001test_AbstractClass.kmt"
-require "002test_ClassInheritance.kmt"
-require "002test_Composition.kmt"
-require "003test_MultipleReference.kmt"
-require "003test_Reference.kmt"
-require "004test_OperationParameter.kmt"
-require "004test_OperationReturn.kmt"
-require "005test_ExternalInheritance.kmt"
+require "001test_AbstractClass.main.kmt"
+require "002test_ClassInheritance.main.kmt"
+require "002test_Composition.main.kmt"
+require "003test_MultipleReference.main.kmt"
+require "003test_Reference.main.kmt"
+require "004test_OperationParameter.main.kmt"
+require "004test_OperationReturn.main.kmt"
+require "005test_ExternalInheritance.main.kmt"
 
 using uml2_tests
 

@@ -1,5 +1,5 @@
-@mainClass "root_package::ExternalInheritanceTestCase"
-@mainOperation "main"
+@mainClass "uml2_tests::ExternalInheritanceTestCase"
+@mainOperation "testUsedClasses"
 
 package uml2_tests;
 

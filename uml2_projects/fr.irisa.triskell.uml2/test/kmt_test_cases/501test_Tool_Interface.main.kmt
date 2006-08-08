@@ -1,5 +1,5 @@
-@mainClass "root_package::ToolGeneralizationTestCase"
-@mainOperation "main"
+@mainClass "tools_tests::ToolInterfaceTestCase"
+@mainOperation "testExtractInterfaceTool_HasInterface"
 
 package tools_tests;
 

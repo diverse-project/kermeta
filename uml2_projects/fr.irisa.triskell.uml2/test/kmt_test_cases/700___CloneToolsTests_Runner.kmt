@@ -6,15 +6,15 @@ package test_package;
 
 require kermeta
 
-require "701test_CloneTool_Package.kmt"
-require "702test_CloneTool_Class.kmt"
-require "703test_CloneTool_Operation.kmt"
-require "704test_CloneTool_Parameter.kmt"
-require "705test_CloneTool_Property.kmt"
-require "706test_CloneTool_ValueSpecification.kmt"
-require "707test_CloneTool_Association.kmt"
+require "701test_CloneTool_Package.main.kmt"
+require "702test_CloneTool_Class.main.kmt"
+require "703test_CloneTool_Operation.main.kmt"
+require "704test_CloneTool_Parameter.main.kmt"
+require "705test_CloneTool_Property.main.kmt"
+require "706test_CloneTool_ValueSpecification.main.kmt"
+require "707test_CloneTool_Association.main.kmt"
 
-require "750test_CloneTool_StaticDiagram.kmt"
+require "750test_CloneTool_StaticDiagram.main.kmt"
 
 using tools_tests
 

@@ -1,4 +1,4 @@
-/* $Id: UmlCloneFactory.kmt,v 1.4 2006-07-27 13:34:21 vmahe Exp $
+/* $Id: UmlCloneFactory.kmt,v 1.5 2006-08-08 06:57:46 vmahe Exp $
  * Creation date: July 5, 2006
  * License:
  * Copyright:
@@ -9,7 +9,6 @@ package uml2::transformations;
 
 
 require kermeta
-//require "../Uml2.kmt"
 require "DiagramsClonePass.kmt"
 require "IOElementsTable.kmt"
 

@@ -1,5 +1,5 @@
-@mainClass "root_package::OperationReturnTestCase"
-@mainOperation "main"
+@mainClass "uml2_tests::OperationReturnTestCase"
+@mainOperation "testOperationReturn"
 
 package uml2_tests;
 
