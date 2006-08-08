@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.18 2006-07-18 12:19:47 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.19 2006-08-08 13:25:07 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -167,15 +167,19 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	}
 	
 	/**
-	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.FOperation)
+	 * @see KermetaOptimizedVisitor#visitOperation(Operation)
 	 */
 	public Object visitOperation(Operation node) {
 		EOperation newEOperation=null;
-		//internalLog.debug(loggerTabs + "Visiting Operation: "+ node.getName());
+		internalLog.debug(loggerTabs + "Visiting Operation: "+ node.getName());
 		loggerTabs.increment();
 		
 		// search the EOperation from previous pass
 		newEOperation = (EOperation)getEObjectForKMObject(node);
+		if (newEOperation == null)
+			throw new KM2ECoreConversionException("KM2Ecore exception : could not find" 
+					+ " an operation with this qualified name :\n    "
+					+ KMTHelper.getQualifiedName(node));
 		// Parameters
 		Iterator it = node.getOwnedParameter().iterator();
 		while(it.hasNext()) { this.accept((EObject)it.next()); }

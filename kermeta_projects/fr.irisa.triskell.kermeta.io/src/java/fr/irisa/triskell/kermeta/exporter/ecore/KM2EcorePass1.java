@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.21 2006-08-07 14:11:59 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.22 2006-08-08 13:25:07 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -44,6 +44,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -99,11 +100,16 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	public Object exportPackage(Package root_package) {
 		root_p = root_package;
 		current_ppath = "";
-		Object epackage = accept(root_p);
+		
 		// Add the created package into the ecoreResource (we just need to add the 
 		// root package). EPackage is Ecore metamodel root ("Model object") in our case, 
 		// and all the ecore elements have a direct or undirect containment relationship 
 		// with EPackages. And we only need to add the root elements to the resource contents.
+		
+		// If the root package corresponds in fact to a sub package (for example, when it comes
+		// from a KMT file which package "declaration" is "package foo::bar;", we have to precreate
+		// its sup-packages?
+		Object epackage = accept(KermetaUnit.getRootPackageForSerialization(root_p));
 		ecoreResource.getContents().add(epackage);
 		return epackage;
 	}
@@ -135,6 +141,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 		
 		// Visit the type definitions
+		System.err.println("node.getOwnedTypeDef : " + node.getOwnedTypeDefinition().size());
 		for (Object next : node.getOwnedTypeDefinition()) {
 			Object o = accept((EObject)next);
 			if (o != null)
