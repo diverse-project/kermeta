@@ -1,0 +1,157 @@
+/* $Id: vehicules_improvement.kmt,v 1.1 2006-08-08 07:02:08 vmahe Exp $
+ * Creation date: August 4, 2006
+ * License: GPL
+ * Copyright: irisa.fr
+ * Authors: vmahe@irisa.fr
+ */
+@mainClass "vehicules::Main"
+@mainOperation "main"
+
+
+package vehicules;
+
+
+require kermeta
+require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/StaticTools.kmt"
+require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/UmlCloneFactory.kmt"
+
+class Main
+{
+	reference origModelName : kermeta::standard::String
+	reference origModel : uml2::Model
+	reference cloneModelName : kermeta::standard::String
+	reference cloneModel : uml2::Model
+	reference root_package : uml2::Package
+	
+	/**
+	 * This sample program will preserve the given sample model
+	 * in order to be reused as many times as you want.
+	 * So the program loads the model, clones it,
+	 * and then does the transformations on the clone.
+	 * You can then open the resulting model in the Ecore editor
+	 * or use a graphical editor (like TopCased) to draw it.
+	 */
+    operation main() : Void is do
+    	 
+		stdio.writeln(" >>>------> loading the original model")
+		
+		//creating needed instances
+		origModelName := "../models/vehicules.uml2"
+		
+    	// load the given UML2 resource
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createResource(origModelName, "../ecore/UML2.ecore")
+    	inputResource.load()
+    	
+    	// "instances" only gives the main diagramm package for the targeted code tree
+    	origModel ?= inputResource.instances.one
+		
+		stdio.writeln(" >>>------> cloning the original model (kept virgin) into a new one")
+		
+		var factory : uml2::transformations::UmlCloneFactory init uml2::transformations::UmlCloneFactory.new
+		factory.initialize
+		cloneModel := factory.cloneStaticDiagram(origModel)
+		
+		stdio.writeln(" >>>------> transforming the cloned model")
+		
+		// we need the package containing the classes
+		root_package ?= cloneModel.ownedMember.select{ e | e.name == "vehicules" }.one
+		
+		addGetterOnWattsPower
+		addEngineInterface
+		addCarEngineComposition
+		addEngineGeneralisation
+		
+		stdio.writeln(" >>>------> saving the transformed model")
+		
+		cloneModelName := "../models/improved_vehicules.uml2"
+    	var outputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var outputResource : kermeta::persistence::EMFResource
+    	outputResource ?= outputRepository.createResource(cloneModelName, "../ecore/UML2.ecore")
+    	outputResource.instances.add(cloneModel)
+    	outputResource.save()
+		
+		stdio.writeln(" <------<<< model saved")
+    end
+    
+    /////////////  code for transformations //////////////////
+	operation addGetterOnWattsPower() is do
+		// we get the "GasEngine" class (before this class will loose its attributes, passed to the interface)
+		var cl : uml2::Class
+		cl ?= root_package.ownedMember.select{ e | e.name == "GasEngine" }.one
+		
+		// we need the accessors tool for transformation
+		var accTool : uml2::transformations::Accessor_Tool init uml2::transformations::Accessor_Tool.new
+		
+		// we make the getter corresponding to each property of the class
+		cl.ownedAttribute.each{ prop |
+			// we add the getter operation corresponding to the property
+			accTool.addGetter(cl, prop)
+		}
+	end
+	operation addEngineInterface() is do
+		// we get the "GasEngine" class to generalize it in a "IEngine" interface
+		var cl : uml2::Class
+		cl ?= root_package.ownedMember.select{ e | e.name == "GasEngine" }.one
+		
+		// we need the interface tool for extraction
+		var ifTool : SpecializedEngineInterface_Tool init SpecializedEngineInterface_Tool.new
+		
+		// we get then the interface
+		var ifc : uml2::Interface
+		ifc := ifTool.extractInterface(cl)
+		
+		// we add the new interface to the resulting model
+		root_package.ownedMember.add(ifc)
+		// Rem: the generalization between the interface and the (original)
+		// concrete class doesn't need to be added to the model
+		// (it is owned by the concrete class)
+	end
+	operation addCarEngineComposition() is do
+		// we get the "GasEngine" class to generalize it in a "IEngine" interface
+		var clEngine : uml2::Class
+		clEngine ?= root_package.ownedMember.select{ e | e.name == "GasEngine" }.one
+		
+		// we get the "GasEngine" class to generalize it in a "IEngine" interface
+		var clCar : uml2::Class
+		clCar ?= root_package.ownedMember.select{ e | e.name == "Car" }.one
+		
+		// we need the association tool for transformation
+		var assocTool : uml2::transformations::Association_Tool init uml2::transformations::Association_Tool.new
+		
+		// we then get the new composition
+		var assoc : uml2::Association init uml2::Association.new
+		assoc := assocTool.addNavigableComposition(clCar, clEngine, "poweredBy", "engine")
+		
+		// we add the new association to the resulting model
+		root_package.ownedMember.add(assoc)
+	end
+	operation addEngineGeneralisation() is do
+		// we get the "ElectricEngine" class
+		var cl : uml2::Class
+		cl ?= root_package.ownedMember.select{ e | e.name == "ElectricEngine" }.one
+		
+		// we get then the "IEngine" interface
+		var ifc : uml2::Interface
+		ifc ?= root_package.ownedMember.select{ e | e.name == "IEngine" }.one
+		
+		// we need the generalization tool for transformation
+		var geneTool : uml2::transformations::Generalization_Tool init uml2::transformations::Generalization_Tool.new
+		
+		// we make the inheritance
+		geneTool.addGeneralization(ifc, cl)
+		// Rem: the generalization between the interface and a
+		// concrete class doesn't need to be added to the model
+		// (it is owned by the concrete class)
+	end
+}
+	
+////////////// class for overwrite interface method for name
+class SpecializedEngineInterface_Tool inherits uml2::transformations::Interface_Tool
+{
+	/** overwrite the original method */
+	method nameForInterface(name : kermeta::standard::String) : kermeta::standard::String is do
+    	result := "IEngine"
+    end
+}

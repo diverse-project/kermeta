@@ -1,0 +1,147 @@
+/* $Id: prototype.kmt,v 1.1 2006-08-08 07:02:07 vmahe Exp $
+ * Creation date: August 7, 2006
+ * License: GPL
+ * Copyright: irisa.fr
+ * Authors: vmahe@irisa.fr
+ */
+@mainClass "bank::Main"
+@mainOperation "main"
+
+package bank;
+
+require kermeta
+require "bank.km"	// link to the executable model
+require "utilities.kmt"
+
+class Main
+{
+	reference customers : kermeta::standard::OrderedSet<bank::Customer>
+	
+    operation main() : Void is do
+    	// create our "Bank" :-)
+		 customers := kermeta::standard::OrderedSet<bank::Customer>.new
+    	
+        // launche the interface
+        var ui : UserInterface init UserInterface.new
+        ui.initialize(customers)
+        
+		stdio.writeln("\n === Welcome to the 'BankOfMine' ===\n")
+		
+		// main loop
+        var exit : kermeta::standard::Boolean
+        from exit := false
+		until exit
+        loop
+            exit := ui.exec()
+        end
+        
+        // exiting
+        stdio.writeln("\n === Thank you for using 'BankOfMine' services ===\n")
+    end
+}
+
+class Bank
+{
+	operation initialize() is do
+	end
+}
+
+class UserInterface
+{
+	reference customers : oset bank::Customer[1..*]
+	reference utility : utilities::StringConverter
+	
+	operation initialize(new_bank : kermeta::standard::OrderedSet<bank::Customer>) is do
+		customers := new_bank
+		utility := utilities::StringConverter.new
+	end
+	
+	operation exec() : kermeta::standard::Boolean is do
+		printMenu
+		var command : kermeta::standard::String init stdio.read("   what is your choice ? : ")
+		if command == "A" then
+			self.addAccount
+			result := false
+		else if command == "C" then
+			self.addCustomer
+			result := false
+		else if command == "D" then
+			self.deposit
+			result := false
+		else if command == "P" then
+			self.print
+			result := false
+		else if command == "W" then
+			self.withdraw
+			result := false
+		else if command == "Q" then
+			result := true
+		else
+			stdio.writeln("\n >>>> You enter a wrong code <<<<<")
+			result := false
+		end end end end end end
+	end
+	
+	// interfacing operations
+	operation printMenu() is do
+		stdio.writeln("\nAvailable operations:")
+		stdio.writeln("  A - Add a new account")
+		stdio.writeln("  C - Add a new customer")
+		stdio.writeln("  D - Make a deposit")
+		stdio.writeln("  P - Print the current amount of an account")
+		stdio.writeln("  W - Make a withdrawal")
+		stdio.writeln("  Q - quit the 'BankOfMine'")
+	end
+	operation choiceCustomer() : bank::Customer is do
+		var num : kermeta::standard::Integer init 0
+		customers.each{ c |
+			stdio.writeln("  "+c.name+" - n° "+num.toString)
+			num := num + 1
+		}
+		num := utility.string2Integer(stdio.read("    give the n° of the customer : "))
+		result := customers.elementAt(num)
+	end
+	operation choiceAccount() : bank::Account is do
+		var customer : bank::Customer init choiceCustomer()
+		var num : kermeta::standard::Integer init 0
+		customer.account.each{ acc |
+			stdio.writeln("  "+customer.name+" account n° "+num.toString)
+			num := num + 1
+		}
+		num := utility.string2Integer(stdio.read("    give the n° of the account : "))
+		result := customer.account.elementAt(num)
+	end
+	operation getAmount() : kermeta::standard::Integer is do
+		result := utility.string2Integer(stdio.read("    give the amount to be processed : "))
+	end
+	
+	// acting operations
+	operation addAccount() is do
+		var customer : bank::Customer init choiceCustomer
+		if customer.account == void then
+			customer.account := kermeta::standard::OrderedSet<Account>.new
+		end
+		var account : bank::Account init bank::Account.new
+		account.amount := 0
+		customer.account.add(account)
+	end
+	operation addCustomer() is do
+		var name : kermeta::standard::String
+		name := stdio.read("    enter the customer name : ")
+		var newCustomer : bank::Customer init bank::Customer.new
+		newCustomer.name := name
+		customers.add(newCustomer)
+	end
+	operation deposit() is do
+		var account : bank::Account init choiceAccount()
+		account.deposit(getAmount)
+	end
+	operation print() is do
+		var account : bank::Account init choiceAccount()
+		stdio.writeln("      amount = "+account.printAmount)
+	end
+	operation withdraw() is do
+		var account : bank::Account init choiceAccount()
+		stdio.writeln("      you got "+account.withdraw(getAmount).toString+" of money!")
+	end
+}
