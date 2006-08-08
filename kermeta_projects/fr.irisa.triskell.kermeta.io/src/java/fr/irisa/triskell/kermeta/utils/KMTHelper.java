@@ -1,4 +1,4 @@
-/* $Id: KMTHelper.java,v 1.5 2006-06-01 08:51:33 zdrey Exp $
+/* $Id: KMTHelper.java,v 1.6 2006-08-08 14:27:16 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMTHelper.java
  * License    : EPL
@@ -107,12 +107,12 @@ public class KMTHelper {
 		String[] lines = result.substring(begin_i, end_i).split("\\n");
 		for (int i = 0; i<lines.length; i++)
 		{
-			String nline = lines[i].replaceFirst("\\s*\\*?(.*)", "$1");
+			String nline = lines[i].replaceFirst("(\\s*)\\*?(.*)", "$1$2");
 			// nline.matches("\\s*\\*?(.*)"));
 			nline = KMTHelper.html(nline);
 			lresult.add(nline);
 		}
-		return KMTHelper.join(lresult,"\n<br>");
+		return KMTHelper.join(lresult,"\n");
     }
 	
 }
