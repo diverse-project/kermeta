@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.68 2006-08-01 15:15:26 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.69 2006-08-09 08:52:58 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -941,25 +941,27 @@ public abstract class KermetaUnit {
 	 * @param containedPackage
 	 * @return
 	 */
-	public Package getRootPackageForSerialization(Package containedPackage) {
+	public static Package getRootPackageForSerialization(Package containedPackage) {
 		
 		Package container = containedPackage.getNestingPackage();
-		if (container == null) return containedPackage;
-		Package newContainer = copyPackageStructure(container);
+		if (container == null)
+			return containedPackage;
+		while (container.getNestingPackage()!=null) container = container.getNestingPackage();
+		/*Package newContainer = copyPackageStructure(container);
 		newContainer.getNestedPackage().add(containedPackage);
-		Package result = newContainer;
-		while(result.getNestingPackage() != null) result = result.getNestingPackage();
-		return result;
+		while(newContainer.getNestingPackage() != null) newContainer = newContainer.getNestingPackage();
+		return newContainer;*/
+		return container;
 	}
 	
 	/**
 	 * Create and return a copy of the given package
 	 */
-	private Package copyPackageStructure(Package toCopy) {
+	private Package copyPackageStructure(Package pkg) {
 		Package result = struct_factory.createPackage();
-		result.setName(toCopy.getName());
-		if (toCopy.eContainer() != null) {
-			result.setNestingPackage(copyPackageStructure(toCopy.getNestingPackage()));
+		result.setName(pkg.getName());
+		if (pkg.eContainer() != null) {
+			result.setNestingPackage(copyPackageStructure(pkg.getNestingPackage()));
 		}
 		return result;
 	}
