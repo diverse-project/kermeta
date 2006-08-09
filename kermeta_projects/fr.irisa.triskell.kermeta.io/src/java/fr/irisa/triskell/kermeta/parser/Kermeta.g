@@ -121,9 +121,36 @@ importStmts returns [ ImportStmts retVal = new ImportStmts() ]
 
 importStmt returns [ ImportStmt retVal = null ]
 :
-{ StringLiteralOrQualifiedID uri = null; }
-  require_KW:"require" uri=stringLiteralOrQualifiedID 
-{ retVal = new ImportStmt(require_KW, uri); }
+{ StringLiteralOrQualifiedID uri = null; ExcludeFilter excludeFilter = null; IncludeFilter includeFilter = null; }
+  require_KW:"require" uri=stringLiteralOrQualifiedID ( excludeFilter=excludeFilter )? ( includeFilter=includeFilter )? 
+{ retVal = new ImportStmt(require_KW, uri, excludeFilter, includeFilter); }
+;
+
+excludeFilter returns [ ExcludeFilter retVal = null ]
+:
+{ Filters filters = null; }
+  excludeFilter_KW:"excludeFilter" lparen:LPAREN ( filters=filters )? rparen:RPAREN 
+{ retVal = new ExcludeFilter(excludeFilter_KW, lparen, filters, rparen); }
+;
+
+includeFilter returns [ IncludeFilter retVal = null ]
+:
+{ Filters filters = null; }
+  includeFilter_KW:"includeFilter" lparen:LPAREN ( filters=filters )? rparen:RPAREN 
+{ retVal = new IncludeFilter(includeFilter_KW, lparen, filters, rparen); }
+;
+
+filters returns [ Filters retVal = new Filters() ]
+:
+{ Filter f1 = null; Filter fn = null; }
+  f1=filter { retVal.addChild(f1); } 
+  ( comma:COMMA fn=filter { retVal.addChild(comma); retVal.addChild(fn); } )*
+;
+
+filter returns [ Filter retVal = null ]
+:
+  string_literal:STRING_LITERAL 
+{ retVal = new Filter(string_literal); }
 ;
 
 usingStmts returns [ UsingStmts retVal = new UsingStmts() ]

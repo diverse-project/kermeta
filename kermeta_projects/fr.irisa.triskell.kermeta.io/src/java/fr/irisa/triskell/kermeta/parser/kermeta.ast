@@ -31,7 +31,12 @@ sequence contextMultiLineComment : CONTEXT_MULTI_LINE_COMMENT ;
 //sequence keyEqualsValue : key=stringLiteralOrQualifiedID EQUALS value=stringLiteralOrQualifiedID ;
 
 list importStmts : importStmt* ;
-sequence importStmt : "require" uri=stringLiteralOrQualifiedID ;
+sequence importStmt : "require" uri=stringLiteralOrQualifiedID (excludeFilter)? (includeFilter)?;
+
+sequence excludeFilter : "excludeFilter" LPAREN (filters)? RPAREN;
+sequence includeFilter : "includeFilter" LPAREN (filters)? RPAREN;
+list filters : f1=filter (COMMA fn=filter)*;
+sequence filter : STRING_LITERAL;
 
 list usingStmts : usingStmt* ;
 sequence usingStmt : "using" name=qualifiedID ;
