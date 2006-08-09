@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass1.java,v 1.6 2006-08-03 09:27:31 zdrey Exp $
+/* $Id: ECore2KMPass1.java,v 1.7 2006-08-09 08:42:31 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -95,6 +95,7 @@ public class ECore2KMPass1 extends EcoreVisitor {
 	public Object visit(EPackage node) 
 	{
 		Package pack = unit.packageLookup(Ecore2KM.getQualifiedName(node));
+		
 		if (pack == null) {
 			pack = unit.struct_factory.createPackage();
 			pack.setName(node.getName());
@@ -102,13 +103,11 @@ public class ECore2KMPass1 extends EcoreVisitor {
 			// Was : pack.setUri(node.getNsURI());
 			// node.getNsURI() is not always valid, so by default, we will take unit.getUri();
 			pack.setUri(unit.getUri());
-			if (getCurrentPackage() != null)
-				pack.setNestingPackage(getCurrentPackage());
-			else
-				unit.rootPackage = pack;
 			unit.packages.put(Ecore2KM.getQualifiedName(node), pack);
-			
 		}
+
+		if (getCurrentPackage() != null) pack.setNestingPackage(getCurrentPackage());
+		else unit.rootPackage = pack;
 		
 		current_pack.push(pack);
 		
