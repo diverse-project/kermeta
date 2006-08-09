@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.2 2006-04-27 20:56:50 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.3 2006-08-09 13:44:38 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -16,6 +16,7 @@ import java.util.jar.JarEntry;
 import org.apache.log4j.Logger;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
@@ -74,12 +75,17 @@ public abstract class Jar2KMPass {
     }
     
     /** returns the kermeta qualified name of a given java Class */
-    public String getQualifiedName(Class c){    	
-    	return c.getCanonicalName().replaceAll("\\.","::");
+    public String getQualifiedName(Class c){ 
+    	String cname = c.getCanonicalName();
+    	if(cname == null) {
+    		internalLog.error("not able to retreive canonical name for class " +c.toString());
+    		c.getCanonicalName();
+    	}
+    	return cname.replaceAll("\\.","::");
     }
     
     protected Type getTypeByID(String name) {
-	    
+	    boolean isUnknwonJavaObject = false;
 		if (name.equals("void")) {
 			return builder.struct_factory.createVoidType();
 		}
@@ -90,14 +96,29 @@ public abstract class Jar2KMPass {
         
 	    TypeDefinition typeDef = builder.getTypeDefinitionByName(name);
 	    if (typeDef == null) {
-	        builder.messages.addError("Cannot resolve type '"+name+"'" ,null);
-			return null;
+	        typeDef = builder.getTypeDefinitionByName("kermeta::standard::UnknownJavaObject");
+	        if(typeDef != null){
+	        	builder.messages.addWarning("Cannot resolve type '"+name+"', replaced by kermeta::standard::UnknownJavaObject" ,null);
+	        	isUnknwonJavaObject = true;
+	        }
+	        else{
+	        	builder.messages.addError("Cannot resolve type '"+name+"'" ,null);
+	        	return null;
+	        }
 	    }
 	    if (typeDef instanceof Type) return (Type)typeDef;
 	    else {
 	        ClassDefinition cd = (ClassDefinition)typeDef;
 	        fr.irisa.triskell.kermeta.language.structure.Class result = builder.struct_factory.createClass();
 	        //result.setFName(cd.getFName());
+	        if (isUnknwonJavaObject){
+	        	// add a tag so we can retrieve the original object type name
+	        	// question : maybe it would be better to have a real type UnknownJavaObject instead of a simple alias ?
+	        	Tag tag = builder.struct_factory.createTag();
+	        	tag.setName("UnknownJavaObject");
+	        	tag.setValue(name);
+	        	result.getTag().add(tag);
+	        }
 	        result.setTypeDefinition(cd);
 	        return result;
 	    }
@@ -108,10 +129,13 @@ public abstract class Jar2KMPass {
 	static {
 		primitive_types_mapping = new Hashtable<String,String>();
 		primitive_types_mapping.put("int", 					"kermeta::standard::Integer");
+		primitive_types_mapping.put("long", 				"kermeta::standard::Integer");
+		primitive_types_mapping.put("byte", 				"kermeta::standard::Integer");
 		primitive_types_mapping.put("java::lang::Integer", 	"kermeta::standard::Integer");
 		primitive_types_mapping.put("boolean", 				"kermeta::standard::Boolean");
 		primitive_types_mapping.put("java::lang::Boolean", 	"kermeta::standard::Boolean");
 		primitive_types_mapping.put("java::lang::String", 	"kermeta::standard::String");
+		primitive_types_mapping.put("char", 				"kermeta::standard::Character");
 		primitive_types_mapping.put("Object", 				"kermeta::standard::Object");
 	}
 }

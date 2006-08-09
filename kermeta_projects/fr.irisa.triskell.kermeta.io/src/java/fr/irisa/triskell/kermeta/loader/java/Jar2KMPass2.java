@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass2.java,v 1.1 2006-04-26 21:48:39 dvojtise Exp $
+/* $Id: Jar2KMPass2.java,v 1.2 2006-08-09 13:44:38 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass2.java
  * License : EPL
@@ -13,20 +13,20 @@
  */
 package fr.irisa.triskell.kermeta.loader.java;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
-import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
-import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
 /**
  *  Jar2KM PASS 2 : creates packages and collects types
@@ -60,37 +60,87 @@ public class Jar2KMPass2 extends Jar2KMPass {
 	    		else {
 	    			String fileName = jentry.getName();
 	    			if(fileName.endsWith(".class")){
-	    				internalLog.debug("JAR : file "+jentry.getName());
 	    				String pqname = getPackageQualifiedName(jentry);
 	    				String cname = getClassName(jentry);
-	    				String qname = pqname + "::" + cname; 
-	    				if (builder.typeDefinitionLookup(qname) != null) {
-	    					// This is an error : the type already exists
-	    					builder.messages.addMessage(new KMTUnitLoadError("A type definition for '" + qname + "' already exists.",null));
-	    					break;
+	    				if(!cname.contains("$")){ // ignore inner class
+		    				String qname = pqname + "::" + cname;
+		    				// apply exclusion /inclusion rules
+		    				if(builder.excludeFilters.size()==0){
+		    					if(builder.includeFilters.size() == 0){
+		    						// no filter
+				    				internalLog.debug("JAR : file "+jentry.getName());
+		    						addClass(jentry, pqname, qname);
+		    					}
+		    					else {
+		    						// select only those in the include filter
+		    						if(isInFilter(pqname, builder.includeFilters)) {
+					    				internalLog.debug("JAR : file "+jentry.getName());
+		    							addClass(jentry, pqname, qname);
+		    						}
+		    					}
+		    				}
+		    				else {
+		    					//	select only those not in the exclude filter
+	    						if(! isInFilter(pqname, builder.excludeFilters)) {
+				    				internalLog.debug("JAR : file "+jentry.getName());
+	    							addClass(jentry, pqname, qname);
+	    						}
+	    						else if(builder.includeFilters.size() != 0){
+		    						// if it is in the include filter it may rescued and added
+		    						if(isInFilter(pqname, builder.includeFilters)) {
+					    				internalLog.debug("JAR : file "+jentry.getName());
+		    							addClass(jentry, pqname, qname);
+		    						}
+		    					}
+		    				}
+		    					
 	    				}
-	    				else {
-	    					Package theEnclosingPackage = getOrCreatePackage(pqname);
-		    				ClassDefinition c = builder.struct_factory.createClassDefinition();
-		    				//this.storeTrace(c, node);
-		    				c.setName(getClassName(jentry));
-		    				theEnclosingPackage.getOwnedTypeDefinition().add(c);
-		    				builder.typeDefs.put(qname, c);
-	    				}
-	
-	    				//Class c = cl.loadClass(fileName);
-	    				//c.getDeclaredMethods()
+	    				//else internalLog.debug("JAR : ignored inner class "+jentry.getName() );
 	    			}
 	    		}
 	    		jentry = jis.getNextJarEntry();
 	    	}
 	    	stream.close();
+    	} catch (FileNotFoundException fe) {
+			internalLog.error("File not found "+builder.platformURI.toFileString() ,fe);
+			builder.messages.addMessage(new KMTUnitLoadError("File not found "+fe.getMessage(),null));
+					
     	} catch (IOException e) {
 			internalLog.error("IOException reading jar file "+builder.platformURI.toFileString() ,e);
-			builder.messages.addMessage(new KMTUnitLoadError("IOException reading jar file "+builder.platformURI.toFileString(),null));
+			builder.messages.addMessage(new KMTUnitLoadError("IOException reading jar file "+builder.platformURI.toFileString() + " " + e.getMessage(),null));
 			
 		}
 
+	}
+
+	/**
+	 * look for the given name in the filter,
+	 * @param pqname
+	 * @param includeFilters
+	 * @return true if if one on the filter values in a substring of the given name
+	 */
+	private boolean isInFilter(String pqname, ArrayList<String> includeFilters) {		
+		Iterator<String> it = includeFilters.iterator();
+		while(it.hasNext()){
+			if(pqname.startsWith(it.next())) return true;
+		}
+		return false;
+	}
+
+	private void addClass(JarEntry jentry, String packageqname, String classqname) {
+		if (builder.typeDefinitionLookup(classqname) != null) {
+			// This is an error : the type already exists
+			builder.messages.addMessage(new KMTUnitLoadError("A type definition for '" + classqname + "' already exists.",null));
+			
+		}
+		else {
+			Package theEnclosingPackage = getOrCreatePackage(packageqname);
+			ClassDefinition c = builder.struct_factory.createClassDefinition();
+			//this.storeTrace(c, node);
+			c.setName(getClassName(jentry));
+			theEnclosingPackage.getOwnedTypeDefinition().add(c);
+			builder.typeDefs.put(classqname, c);
+		}
 	}
 	
 	protected fr.irisa.triskell.kermeta.language.structure.Package getOrCreatePackage(String qualified_name) {

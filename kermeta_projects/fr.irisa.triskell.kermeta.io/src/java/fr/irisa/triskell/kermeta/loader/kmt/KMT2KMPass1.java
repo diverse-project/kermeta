@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass1.java,v 1.7 2006-08-07 15:45:21 zdrey Exp $
+/* $Id: KMT2KMPass1.java,v 1.8 2006-08-09 13:44:38 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass1.java
  * License : GPL
@@ -26,6 +26,9 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	
 	protected Boolean existUsing = false;
 	
+	protected KermetaUnit currentImportedUnit;
+	protected boolean isExcludeFilter;
+	
 	/**
 	 * @param builder
 	 */
@@ -44,19 +47,37 @@ public class KMT2KMPass1 extends KMT2KMPass {
 	public boolean beginVisit(ImportStmt importStmt) {
 		StringLiteralOrQualifiedID node = importStmt.getUri();
 		if (node instanceof QualifiedID) {
+			currentImportedUnit = builder.importModelFromID(qualifiedIDAsString((QualifiedID)node)); 
 			builder.traceImportedUnits.put(
-					builder.importModelFromID(qualifiedIDAsString((QualifiedID)node)),
+					currentImportedUnit,
 					node);
 		}
 		else {
 			String uri = ((StringLiteralContainer)node).getString_literal().getText();
 			uri = uri.substring(1, uri.length()-1);
+			currentImportedUnit = builder.importModelFromURI(uri);
 			builder.traceImportedUnits.put(
-					builder.importModelFromURI(uri), 
+					currentImportedUnit, 
 					node);
 		}
+		isExcludeFilter= true;
+		if(importStmt.getExcludeFilter() != null)
+			visit(importStmt.getExcludeFilter().getFilters());
+		isExcludeFilter = false;
+		if(importStmt.getIncludeFilter() != null)
+			visit(importStmt.getIncludeFilter().getFilters());
 		return false;
 	}
+	
+	public boolean beginVisit(Filter filter) {
+		String filterText = filter.getString_literal().getText();
+		// trim leading and trailing "
+		filterText = filterText.substring(1, filterText.length()-2);
+		if (isExcludeFilter) currentImportedUnit.excludeFilters.add(filterText);
+		else currentImportedUnit.includeFilters.add(filterText);
+		return false;
+	}
+	
 	
 	/**
 	 * @see kermeta.ast.MetacoreASTNodeVisitor#beginVisit(metacore.ast.UsingStmt)

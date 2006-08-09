@@ -1,4 +1,4 @@
-/* $Id: JarUnit.java,v 1.4 2006-04-27 20:58:32 dvojtise Exp $
+/* $Id: JarUnit.java,v 1.5 2006-08-09 13:44:38 dvojtise Exp $
 * Project : Kermeta.io
 * File : EcoreUnit.java
 * License : EPL
@@ -57,6 +57,8 @@ public class JarUnit extends KermetaUnit {
 			URL[] urls = new URL[1];
 	    	urls[0] = url; //new URL(nuri.toFileString());
 	    	
+	    	// add the kermeta runtime lib for an eventual use of RuntimeObject
+	    	
 	    	cl = new URLClassLoader(urls);
 	    	
 	    	//com.sun.jdi.ClassLoaderReference clref = com.sun.jdi.ReferenceType.classLoader();
@@ -97,8 +99,8 @@ public class JarUnit extends KermetaUnit {
      * @see fr.irisa.triskell.kermeta.loader.KermetaUnit#loadStructuralFeatures()
      */
     public void loadStructuralFeatures() {
-    	Jar2KMPass pass = new Jar2KMPass3(this);
-		pass.process();
+    	Jar2KMPass pass3 = new Jar2KMPass3(this);
+		pass3.process();
     }
 
     /* (non-Javadoc)
