@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.19 2006-07-18 12:19:47 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.20 2006-08-09 14:53:31 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -134,6 +134,7 @@ public class KM2Ecore {
 		kermetaUnit   = kunit;
 		messages = new KMUnitMessageManager(kermetaUnit);
 		ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/")+1);
+		ecoreFileList = new ArrayList<String>();
 		internalLog.info("Directory for ecore generation : " + ecoreGenDirectory);
 	}
 	
@@ -147,13 +148,9 @@ public class KM2Ecore {
 	 * @param ecoregendir The directory where to generate ecore dependencies
 	 */
 	public KM2Ecore(Resource resource, Resource traceresource, KermetaUnit kunit, String edir, List<String> elist) {
-		this(resource, traceresource, kunit);
-		ecoreFileList = (elist==null)?new ArrayList<String>():elist;
-		ecoreGenDirectory = edir;
-		
-		if (ecoreFileList.size() ==0 && ecoreGenDirectory == null)
-			ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/")+1);
-		internalLog.info("Directory for ecore generation : " + ecoreGenDirectory);
+		this(resource, kunit, edir, elist);
+		traceResource = traceresource;
+		tracer = new Tracer(traceResource);
 	}
 	
 	/**
@@ -161,10 +158,11 @@ public class KM2Ecore {
 	 */
 	public KM2Ecore(Resource resource, KermetaUnit kunit, String edir, List<String> elist) {
 		this(resource, kunit);
-		ecoreGenDirectory = edir + "/";
+		ecoreGenDirectory = (edir==null)?null:edir+"/";
 		ecoreFileList = (elist==null)?new ArrayList<String>():elist;
-		if (ecoreFileList.size() == 0 && ecoreGenDirectory == null)
+		if (ecoreFileList.size() == 0 && edir == null)
 			ecoreGenDirectory = kunit.getUri().substring(0, kunit.getUri().lastIndexOf("/"));
+		internalLog.info("Directory for ecore generation : " + ecoreGenDirectory);
 	}
 	
 	/**
