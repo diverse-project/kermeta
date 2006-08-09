@@ -1,4 +1,4 @@
-/* $Id: CreateOptimizedVisitor.java,v 1.3 2006-06-21 14:56:15 zdrey Exp $
+/* $Id: CreateOptimizedVisitor.java,v 1.4 2006-08-09 16:19:56 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : CreateGenericVisitor.java
  * License    : GPL
@@ -210,11 +210,11 @@ public class CreateOptimizedVisitor {
 
 			classTemplate += "		// Throw an error if the node is null\n";
 			classTemplate += "		if (node == null) {\n";
-			classTemplate += "          String msg = \"Error in visitor : the node to visit is null in \" + parent;\n";
+			classTemplate += "          String msg = \"Error in visitor: ";
 			classTemplate += "          if (parent!=null) {\n";
-			classTemplate += "              msg += \"   (when visiting parent '\" + parent.getClass().getName() + \"'\";\n";
-			classTemplate += "	            if (parent instanceof NamedElement) msg += \" named: '\" + ((NamedElement)parent).getName() + \"')\";\n";
-			classTemplate += "              else if (parent instanceof VariableDecl) msg += \" named: '\" + ((VariableDecl)parent).getIdentifier() + \"')\";\n }\n";
+			classTemplate += "              msg += \"   (when visiting parent\n    '\" + parent.getClass().getName() + \"'\";\n";
+			classTemplate += "	            if (parent instanceof NamedElement) msg += \"\n    parent's name: '\" + ((NamedElement)parent).getName() + \"')\n\";\n";
+			classTemplate += "              else if (parent instanceof VariableDecl) msg += \"\n    parent's name (it's a variable): '\" + ((VariableDecl)parent).getIdentifier() + \"')\n\";\n }\n";
 			classTemplate += "			throw new Error(msg);\n";
 			classTemplate += "		}\n";
 
