@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.69 2006-08-09 08:52:58 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.70 2006-08-09 13:45:49 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -85,6 +85,12 @@ public abstract class KermetaUnit {
 	
 	protected boolean constraint_checked = false;
 	public boolean cycle_constraint_checked = false;
+	
+	/**
+	 * those filters are used only in the case of jar unit
+	 */
+	public ArrayList<String> excludeFilters = new ArrayList<String>();
+	public ArrayList<String> includeFilters = new ArrayList<String>();
 	
 	public static KermetaUnit getStdLib() {
 		if (std_lib == null) {
@@ -1043,14 +1049,10 @@ public abstract class KermetaUnit {
 	        loadAllBodies();
 	        loadAllAnnotations();
 	    }
-	    catch(NoClassDefFoundError ncdfe){
-            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
-            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
-	    }
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
-	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	            messages.addError("Unexpected load error : "+ t.getClass().getName()+ " " + t.getMessage(), null);
 	        }
 	    }
 	}
@@ -1071,15 +1073,10 @@ public abstract class KermetaUnit {
 				if (!iu.loading) iu.loadAllImportedUnits();
 			}
 			loading = false;}
-	    catch(NoClassDefFoundError ncdfe){
-	        KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
-	        messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
-	    }
-	    catch(Throwable t) {
-	    	Set s = traceImportedUnits.keySet();
+	    catch(Throwable t) {	    	
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
-	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	            messages.addError("Unexpected load error : " + t.getClass().getName()+" " + t.getMessage(), null);
 	        }
 	    }
 	}
@@ -1099,14 +1096,10 @@ public abstract class KermetaUnit {
 			loadTypeDefinitions();
 			loading = false;
 		}
-	    catch(NoClassDefFoundError ncdfe){
-            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
-            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
-	    }
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
-	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	            messages.addError("Unexpected load error : " +t.getClass().getName()+ " " + t.getMessage(), null);
 	        }
 	    }
 	}
@@ -1125,14 +1118,10 @@ public abstract class KermetaUnit {
 			}
 			loading = false;
 		}
-	    catch(NoClassDefFoundError ncdfe){
-            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
-            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
-	    }
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
-	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	            messages.addError("Unexpected load error : " +t.getClass().getName()+ " " + t.getMessage(), null);
 	        }
 	    }
 	}
@@ -1151,14 +1140,10 @@ public abstract class KermetaUnit {
 			}
 			loading = false;
 		}
-	    catch(NoClassDefFoundError ncdfe){
-            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
-            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
-	    }
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
-	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	            messages.addError("Unexpected load error : " +t.getClass().getName()+ " " + t.getMessage(), null);
 	        }
 	    }
 	}
@@ -1177,14 +1162,10 @@ public abstract class KermetaUnit {
 			}
 			loading = false;
 		}
-	    catch(NoClassDefFoundError ncdfe){
-            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
-            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
-	    }
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
-	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	            messages.addError("Unexpected load error : " +t.getClass().getName()+ " " + t.getMessage(), null);
 	        }
 	    }
 	}
@@ -1203,14 +1184,10 @@ public abstract class KermetaUnit {
 		    }
 		    loading = false;
 		}
-	    catch(NoClassDefFoundError ncdfe){
-            KermetaUnit.internalLog.error("Unexpected load error", ncdfe);
-            messages.addError("Unexpected load error : NoClassDefFoundError " + ncdfe.getMessage(), null);	    	
-	    }
 	    catch(Throwable t) {
 	        if (!messages.hasError()) {
 	            KermetaUnit.internalLog.error("Unexpected load error", t);
-	            messages.addError("Unexpected load error : " + t.getMessage(), null);
+	            messages.addError("Unexpected load error : " +t.getClass().getName()+ " " + t.getMessage(), null);
 	        }
 	    }
 	}
