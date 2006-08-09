@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.3 2006-08-09 13:44:38 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.4 2006-08-09 15:30:18 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -102,7 +102,7 @@ public abstract class Jar2KMPass {
 	        	isUnknwonJavaObject = true;
 	        }
 	        else{
-	        	builder.messages.addError("Cannot resolve type '"+name+"'" ,null);
+	        	builder.messages.addError("Cannot resolve type '"+name+"' nor type kermeta::standard::UnknownJavaObject; is the framework uptodate ?" ,null);
 	        	return null;
 	        }
 	    }
