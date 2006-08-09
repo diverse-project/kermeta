@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.7 2006-06-29 07:05:15 zdrey Exp $
+/* $Id: OperationChecker.java,v 1.8 2006-08-09 13:45:17 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -268,16 +268,20 @@ public class OperationChecker extends AbstractChecker {
 			message += " is null : " + new KM2KMTPrettyPrinter().accept(op1.getType()==null?op2:op1);
 			isConform = false;
 		}
-		else if (t1 instanceof TypeVariable && t2 instanceof TypeVariable) // TypeVariable?
+		else if (t1 instanceof TypeVariable && t2 instanceof TypeVariable) {// TypeVariable?
 			isConform = checkTypeVariables((TypeVariable)op1.getType(), (TypeVariable)op2.getType());
+			if(!isConform) message += " uses incompatible typeVariables ";
+		}
 		else if (t1 instanceof ClassImpl && t2 instanceof ClassImpl)
 		{
 			isConform = isConformType(t1, t2);
+			if(!isConform) message += " uses incompatible classImpls ";
 		}
 		else if (op1.getType()!=null && op2.getType()!=null)
 			message += "<"+pprinter.accept(op1.getType()) + "> != <" + pprinter.accept(op2.getType())+">"
 			+ op1.getType() + " != " + op2.getType() + "op1:" + op1.getName();
-		if (!isConform) addProblem(ERROR, message, op1);
+		if (!isConform) 
+			addProblem(ERROR, message, op1);
 		return isConform;
 	}
 	
