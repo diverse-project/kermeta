@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.20 2006-08-09 14:54:12 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.21 2006-08-10 12:38:53 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -46,6 +46,7 @@ import fr.irisa.triskell.kermeta.loader.km.KMUnit;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnit;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
+import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -123,7 +124,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		loggerTabs.increment();
 		
 		// Search the Eclass from the pass 1
-		newEClass = (EClass)getEObjectForKMObject(node);
+		newEClass = (EClass)kmt2ecoremapping.get(node);
 		
 		// Search the super types of EClass
 		for ( Object next : node.getSuperType()) {
@@ -158,7 +159,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		loggerTabs.increment();
 		
 		// Search the EOperation from pass 1
-		newEOperation = (EOperation)getEObjectForKMObject(node);
+		newEOperation = getEObjectForOperation(node);
 		
 		if (newEOperation == null)
 			throw new KM2ECoreConversionException("KM2Ecore exception : could not find" 
@@ -200,7 +201,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 */
 	public Object visitParameter(Parameter node) {
 		// Search the EParameter from previous pass 1, then set its type
-		EParameter newEParameter = (EParameter)getEObjectForKMObject(node);
+		EParameter newEParameter = getEObjectForParameter(node);
 		EClassifier type = (EClassifier)accept(node.getType());
 		if (type == null ) // null type forbidden for parameter type
 			throw new KM2ECoreConversionException( 
@@ -261,7 +262,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		EReference newEReference = null;
 		EAttribute newEAttribute = null;
 		// search the Eclass from previous pass
-		newEStructuralFeature = (EStructuralFeature)getEObjectForKMObject(node);
+		newEStructuralFeature = (EStructuralFeature)getEObjectForProperty(node);
+		
 		// If property is composite or derived we have to check the type (primitive type or not)
 		if(ecoreExporter.isTypeValidForEAttibute(node.getType()))
 			newEAttribute = (EAttribute)newEStructuralFeature;
@@ -269,7 +271,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 			newEReference = (EReference)newEStructuralFeature;
 		// Retrieve the opposite (only valable if node is a ereference)
 		if(newEReference != null && node.getOpposite() != null)
-			newEReference.setEOpposite((EReference)getEObjectForKMObject(node.getOpposite()));
+			newEReference.setEOpposite((EReference)getEObjectForProperty(node.getOpposite()));
 		
 		// Convert the bodies of derived properties
 		if (node.isIsDerived()) {
@@ -290,8 +292,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		}
 		
 		EClassifier type = (EClassifier)accept(node.getType());
-		if (type == null )
-			// null type forbidden for parameter type
+		if (type == null ) // null type forbidden for parameter type
 			throw new KM2ECoreConversionException( 
 			"Problem : type not found for a property '"+ node.getName()+ "' in class definition : " +
 			KMTHelper.getQualifiedName(node.getOwningClass()));
@@ -322,16 +323,46 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	}
 	
 	/**
+	 * TODO!
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitFunctionType(fr.irisa.triskell.kermeta.language.structure.FunctionType)
+	 */
+	public Object visitFunctionType(FunctionType node) {
+		return this.accept(node.getRight());
+	}
+	
+	/**
+	 * TODO!
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitTypeVariable(fr.irisa.triskell.kermeta.language.structure.TypeVariable)
+	 */
+	public Object visitTypeVariable(TypeVariable node) {
+		return getEObjectForQualifiedName("kermeta::standard::Object","kermeta::standard::Object");
+	}
+
+	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.VoidType)
 	 */
 	public Object visitVoidType(VoidType node) { return null; }
 	
+	
+	
+	/**
+	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitType(fr.irisa.triskell.kermeta.language.structure.Type)
+	 */
+	public Object visitType(Type node) {
+		internalLog.info("TODO : this type is not properly handled : " + node);
+		Object result = kmt2ecoremapping.get(node);
+		if (result == null) result = getEObjectForType(node);
+		return result;
+	}
+
 	/**
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitEnumeration(fr.irisa.triskell.kermeta.language.structure.Enumeration)
 	 */
 	public Object visitEnumeration(Enumeration node)
 	{ 
-		return getEObjectForKMObject(node);
+		Object eenum = kmt2ecoremapping.get(node);
+		if( eenum == null) eenum = getEObjectForType(node); 
+		return eenum ;
 	}
 	
 	/**
@@ -339,32 +370,24 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 */
 	public Object visitPrimitiveType(PrimitiveType node)
 	{
-		return getEObjectForKMObject(node);
-	}
-	
-	/**
-	 * Find the EObject in the km2ecore mapping hashtable. If not found, than try to 
-	 * find it in the resources that depend on the km file that is being converted.
-	 * @param obj
-	 * @return
-	 */
-	protected EObject getEObjectForKMObject(fr.irisa.triskell.kermeta.language.structure.Object obj)
-	{
-		EObject result = null;
-		result = kmt2ecoremapping.get(obj);
-		// If we did not find the mapped EObject, than find it in depending resources.
-		if (result==null)
+		String type_name = KMTHelper.getQualifiedName(node);
+		EClassifier newEClassifier = (EClassifier)kmt2ecoremapping.get(node);
+		if (newEClassifier ==  null)
 		{
-			if (obj instanceof Operation)
-				result = getEObjectForOperation((Operation)obj);
-			if (obj instanceof Property)
-				result = getEObjectForProperty((Property)obj);
-			if (obj instanceof Parameter) // This case should not occur
-				result = getEObjectForParameter((Parameter)obj);
-			if (obj instanceof Type)
-				result = getEObjectForType((Type)obj);
+			if (KM2Ecore.primitive_types_mapping.containsKey(type_name)) {
+				internalLog.debug(loggerTabs + "Creating DataType: "+ node.getName());
+				type_name = (String)KM2Ecore.primitive_types_mapping.get(type_name);
+				// we need to create a new datatype for it and connect it to the root package
+				newEClassifier  = EcoreFactory.eINSTANCE.createEDataType();
+				newEClassifier.setName(node.getName());
+				newEClassifier.setInstanceClassName(type_name);
+				EPackage root_EPackage = (EPackage)kmt2ecoremapping.get(root_p);
+				root_EPackage.getEClassifiers().add(newEClassifier);
+				kmt2ecoremapping.put(node,newEClassifier);
+			}
 		}
-		return result;
+		if (newEClassifier==null) newEClassifier = getEObjectForType(node);
+		return newEClassifier;
 	}
 	
 	/**
@@ -374,7 +397,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	{ 
 		// Get the type and short_types
 		String qtype = KMTHelper.getTypeQualifiedName(node);
-		if (qtype.equals(""))
+		if (qtype.equals("") || node instanceof FunctionType || node instanceof TypeVariable)
 		{
 			ecoreExporter.getKermetaUnit().messages.addWarning("The kind of type " + node.getClass() + 
 					"is not handled yet. Kept to 'kermeta::standard::Object' until handled.", node);
@@ -388,23 +411,32 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 * we look for a Type or an Operation -- NamedElement) 
 	 * @return
 	 */
-	protected EObject getEObjectForOperation(Operation node)
+	protected EOperation getEObjectForOperation(Operation node)
 	{
-		return getEObjectForQualifiedName(
+		if (kmt2ecoremapping.containsKey(node))
+			return (EOperation) kmt2ecoremapping.get(node);
+		else
+			return (EOperation)getEObjectForQualifiedName(
 				KMTHelper.getQualifiedName(node),
 				KMTHelper.getQualifiedName(node.getOwningClass()));
 	}
 	
-	protected EObject getEObjectForProperty(Property node)
+	protected EStructuralFeature getEObjectForProperty(Property node)
 	{
-		return getEObjectForQualifiedName(
+		if (kmt2ecoremapping.containsKey(node))
+			return (EStructuralFeature) kmt2ecoremapping.get(node);
+		else
+			return (EStructuralFeature)getEObjectForQualifiedName(
 				KMTHelper.getQualifiedName(node),
 				KMTHelper.getQualifiedName(node.getOwningClass()));
 	}
 	
-	protected EObject getEObjectForParameter(Parameter node)
+	protected EParameter getEObjectForParameter(Parameter node)
 	{
-		return getEObjectForQualifiedName(
+		if (kmt2ecoremapping.containsKey(node))
+			return (EParameter) kmt2ecoremapping.get(node);
+		else
+			return (EParameter)getEObjectForQualifiedName(
 				KMTHelper.getQualifiedName(node),
 				KMTHelper.getQualifiedName(node.getOperation().getOwningClass()));
 	}
