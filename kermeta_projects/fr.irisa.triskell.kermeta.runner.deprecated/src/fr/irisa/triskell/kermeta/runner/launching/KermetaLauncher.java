@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.17 2006-06-19 13:36:50 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.18 2006-08-10 08:55:02 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -173,8 +173,7 @@ public class KermetaLauncher
         {
             console.print("\nKermetaInterpreter internal error \n" +
             		"-------------------------------------------\n");
-            console.print("Reported java error : "+e);
-            console.print(e.getMessage());
+            console.print("Reported java error :\n "+e);
             console.dispose();
             e.printStackTrace();
         }
