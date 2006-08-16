@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.41 2006-08-02 11:46:28 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.42 2006-08-16 14:25:36 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -218,9 +218,10 @@ public class Runtime2EMF {
 				// eObject cannot be null, if rObject refers to a primitive type
 				if (eObject == null)
 					unit.throwKermetaRaisedExceptionOnSave(
-					"Could not find an EObject for : " + rObject
+					"Could not find an EClass for RuntimeObject : " + rObject
 					+ "\n   properties : "	+ rObject.getProperties() + ";"
-					+ "\n   possible reason : the RuntimeObject has a weird type? ",
+					+ "\n   possible reason : the RuntimeObject has a weird type? Please check '"
+					+ unit.getMetaModelUri() + "'",
 					null);
 
 				String prop_name = (String) next;
@@ -412,8 +413,7 @@ public class Runtime2EMF {
 					rObject.getData().put("r2e.emfObject", result);
 				}
 			}
-			if (rObject.getData().get("r2e.emfObject") == null)
-			System.err.println("PROBLEM: " + kqname);
+			// if (rObject.getData().get("r2e.emfObject") == null)
 			// else : null eclass occurs when the object type is a primitive
 			// type or an enumeration , or a special type,
 			// like ecore::EAnnotation, which is not handled properly
