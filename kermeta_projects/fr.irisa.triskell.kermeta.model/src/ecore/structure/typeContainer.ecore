@@ -6,7 +6,7 @@
   <eSubpackages name="structure" nsPrefix="ftm/structure">
     <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true" eSuperTypes="#//structure/Object">
       <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" upperBound="-1"
-          eType="#//structure/Type" containment="true"/>
+          eType="#//structure/Type" containment="true" eOpposite="#//structure/Type/typeContainer"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="#//structure/TypeContainer"/>
     <eClassifiers xsi:type="ecore:EClass" name="TypedElement" eSuperTypes="#//structure/TypeContainer"/>
@@ -14,7 +14,10 @@
     <eClassifiers xsi:type="ecore:EClass" name="ProductType" eSuperTypes="#//structure/TypeContainer"/>
     <eClassifiers xsi:type="ecore:EClass" name="FunctionType" eSuperTypes="#//structure/TypeContainer"/>
     <eClassifiers xsi:type="ecore:EClass" name="Object"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Type"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Type">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="typeContainer" lowerBound="1"
+          eType="#//structure/ClassDefinition" eOpposite="#//structure/TypeContainer/containedType"/>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypeVariableBinding" eSuperTypes="#//structure/TypeContainer"/>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//structure/TypeContainer"/>
   </eSubpackages>

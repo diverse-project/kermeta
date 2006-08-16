@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: StructurePackage.java,v 1.3 2006-08-16 09:09:06 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -109,13 +109,22 @@ public interface StructurePackage extends EPackage {
 	int TYPE__TAG = OBJECT__TAG;
 
 	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__TYPE_CONTAINER = OBJECT_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 0;
+	int TYPE_FEATURE_COUNT = OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ParameterizedTypeImpl <em>Parameterized Type</em>}' class.
@@ -135,6 +144,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETERIZED_TYPE__TAG = TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
@@ -181,6 +199,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS__TAG = PARAMETERIZED_TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__TYPE_CONTAINER = PARAMETERIZED_TYPE__TYPE_CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
@@ -884,6 +911,15 @@ public interface StructurePackage extends EPackage {
 	int DATA_TYPE__TAG = TYPE__TAG;
 
 	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -919,6 +955,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION__TAG = DATA_TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION__TYPE_CONTAINER = DATA_TYPE__TYPE_CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1138,6 +1183,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_TYPE__TAG = DATA_TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__TYPE_CONTAINER = DATA_TYPE__TYPE_CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1450,13 +1504,22 @@ public interface StructurePackage extends EPackage {
 	int TYPE_VARIABLE__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_VARIABLE__TYPE_CONTAINER = TYPE_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE__NAME = TYPE_CONTAINER_FEATURE_COUNT + 0;
+	int TYPE_VARIABLE__NAME = TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Supertype</b></em>' reference.
@@ -1465,7 +1528,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE__SUPERTYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
+	int TYPE_VARIABLE__SUPERTYPE = TYPE_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Type Variable</em>' class.
@@ -1474,7 +1537,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_VARIABLE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
+	int TYPE_VARIABLE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.ProductTypeImpl <em>Product Type</em>}' class.
@@ -1505,13 +1568,22 @@ public interface StructurePackage extends EPackage {
 	int PRODUCT_TYPE__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRODUCT_TYPE__TYPE_CONTAINER = TYPE_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRODUCT_TYPE__TYPE = TYPE_CONTAINER_FEATURE_COUNT + 0;
+	int PRODUCT_TYPE__TYPE = TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Product Type</em>' class.
@@ -1520,7 +1592,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRODUCT_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 1;
+	int PRODUCT_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.FunctionTypeImpl <em>Function Type</em>}' class.
@@ -1551,13 +1623,22 @@ public interface StructurePackage extends EPackage {
 	int FUNCTION_TYPE__CONTAINED_TYPE = TYPE_CONTAINER__CONTAINED_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FUNCTION_TYPE__TYPE_CONTAINER = TYPE_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Left</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_TYPE__LEFT = TYPE_CONTAINER_FEATURE_COUNT + 0;
+	int FUNCTION_TYPE__LEFT = TYPE_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' reference.
@@ -1566,7 +1647,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_TYPE__RIGHT = TYPE_CONTAINER_FEATURE_COUNT + 1;
+	int FUNCTION_TYPE__RIGHT = TYPE_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Function Type</em>' class.
@@ -1575,7 +1656,7 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 2;
+	int FUNCTION_TYPE_FEATURE_COUNT = TYPE_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableBindingImpl <em>Type Variable Binding</em>}' class.
@@ -1687,6 +1768,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int VOID_TYPE__TAG = TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VOID_TYPE__TYPE_CONTAINER = TYPE__TYPE_CONTAINER;
 
 	/**
 	 * The number of structural features of the '<em>Void Type</em>' class.
@@ -1816,6 +1906,15 @@ public interface StructurePackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_TYPE__TAG = PARAMETERIZED_TYPE__TAG;
+
+	/**
+	 * The feature id for the '<em><b>Type Container</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__TYPE_CONTAINER = PARAMETERIZED_TYPE__TYPE_CONTAINER;
 
 	/**
 	 * The feature id for the '<em><b>Type Param Binding</b></em>' containment reference list.
@@ -2261,6 +2360,17 @@ public interface StructurePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getType();
+
+	/**
+	 * Returns the meta object for the container reference '{@link fr.irisa.triskell.kermeta.language.structure.Type#getTypeContainer <em>Type Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Type Container</em>'.
+	 * @see fr.irisa.triskell.kermeta.language.structure.Type#getTypeContainer()
+	 * @see #getType()
+	 * @generated
+	 */
+	EReference getType_TypeContainer();
 
 	/**
 	 * Returns the meta object for class '{@link fr.irisa.triskell.kermeta.language.structure.TypeContainer <em>Type Container</em>}'.
@@ -3244,6 +3354,14 @@ public interface StructurePackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE = eINSTANCE.getType();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Container</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE__TYPE_CONTAINER = eINSTANCE.getType_TypeContainer();
 
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeContainerImpl <em>Type Container</em>}' class.

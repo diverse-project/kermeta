@@ -2,13 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: TypeVariableImpl.java,v 1.3 2006-08-16 09:09:06 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
+import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 
 import java.util.Collection;
@@ -22,6 +24,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -31,6 +35,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableImpl#getTypeContainer <em>Type Container</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypeVariableImpl#getSupertype <em>Supertype</em>}</li>
  * </ul>
@@ -85,6 +90,47 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	 */
 	protected EClass eStaticClass() {
 		return StructurePackage.Literals.TYPE_VARIABLE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassDefinition getTypeContainer() {
+		if (eContainerFeatureID != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER) return null;
+		return (ClassDefinition)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTypeContainer(ClassDefinition newTypeContainer, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newTypeContainer, StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeContainer(ClassDefinition newTypeContainer) {
+		if (newTypeContainer != eInternalContainer() || (eContainerFeatureID != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER && newTypeContainer != null)) {
+			if (EcoreUtil.isAncestor(this, newTypeContainer))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newTypeContainer != null)
+				msgs = ((InternalEObject)newTypeContainer).eInverseAdd(this, StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE, TypeContainer.class, msgs);
+			msgs = basicSetTypeContainer(newTypeContainer, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER, newTypeContainer, newTypeContainer));
 	}
 
 	/**
@@ -162,8 +208,51 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetTypeContainer((ClassDefinition)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
+				return basicSetTypeContainer(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
+				return eInternalContainer().eInverseRemove(this, StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE, TypeContainer.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
+				return getTypeContainer();
 			case StructurePackage.TYPE_VARIABLE__NAME:
 				return getName();
 			case StructurePackage.TYPE_VARIABLE__SUPERTYPE:
@@ -180,6 +269,9 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
+				setTypeContainer((ClassDefinition)newValue);
+				return;
 			case StructurePackage.TYPE_VARIABLE__NAME:
 				setName((String)newValue);
 				return;
@@ -197,6 +289,9 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
+				setTypeContainer((ClassDefinition)null);
+				return;
 			case StructurePackage.TYPE_VARIABLE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -214,6 +309,8 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
+				return getTypeContainer() != null;
 			case StructurePackage.TYPE_VARIABLE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case StructurePackage.TYPE_VARIABLE__SUPERTYPE:
@@ -230,6 +327,7 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
 		if (baseClass == Type.class) {
 			switch (derivedFeatureID) {
+				case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER: return StructurePackage.TYPE__TYPE_CONTAINER;
 				default: return -1;
 			}
 		}
@@ -250,6 +348,7 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
 		if (baseClass == Type.class) {
 			switch (baseFeatureID) {
+				case StructurePackage.TYPE__TYPE_CONTAINER: return StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER;
 				default: return -1;
 			}
 		}

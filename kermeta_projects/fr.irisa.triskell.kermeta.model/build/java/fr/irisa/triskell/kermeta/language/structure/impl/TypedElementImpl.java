@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypedElementImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: TypedElementImpl.java,v 1.3 2006-08-16 09:09:06 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -87,7 +88,7 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 	 */
 	public EList getContainedType() {
 		if (containedType == null) {
-			containedType = new EObjectContainmentEList(Type.class, this, StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE);
+			containedType = new EObjectContainmentWithInverseEList(Type.class, this, StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
 		}
 		return containedType;
 	}
@@ -128,6 +129,19 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.TYPED_ELEMENT__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE:
+				return ((InternalEList)getContainedType()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

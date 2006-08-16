@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackageImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: StructurePackageImpl.java,v 1.3 2006-08-16 09:09:06 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -635,6 +635,15 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 	 */
 	public EClass getType() {
 		return typeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getType_TypeContainer() {
+		return (EReference)typeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1310,6 +1319,7 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		createEReference(propertyEClass, PROPERTY__OWNING_CLASS);
 
 		typeEClass = createEClass(TYPE);
+		createEReference(typeEClass, TYPE__TYPE_CONTAINER);
 
 		typeContainerEClass = createEClass(TYPE_CONTAINER);
 		createEReference(typeContainerEClass, TYPE_CONTAINER__CONTAINED_TYPE);
@@ -1535,12 +1545,13 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEReference(getProperty_OwningClass(), this.getClassDefinition(), this.getClassDefinition_OwnedAttribute(), "owningClass", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getType_TypeContainer(), this.getClassDefinition(), this.getTypeContainer_ContainedType(), "typeContainer", null, 1, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(typeEClass, this.getBoolean(), "isInstance", 0, 1);
 		addEParameter(op, this.getObject(), "element", 0, 1);
 
 		initEClass(typeContainerEClass, TypeContainer.class, "TypeContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeContainer_ContainedType(), this.getType(), null, "containedType", null, 0, -1, TypeContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeContainer_ContainedType(), this.getType(), this.getType_TypeContainer(), "containedType", null, 0, -1, TypeContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(enumerationLiteralEClass, EnumerationLiteral.class, "EnumerationLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumerationLiteral_Enumeration(), this.getEnumeration(), this.getEnumeration_OwnedLiteral(), "enumeration", null, 0, 1, EnumerationLiteral.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
