@@ -1,4 +1,4 @@
-/* $Id: UserDirURI.java,v 1.5 2006-08-10 14:21:33 zdrey Exp $
+/* $Id: UserDirURI.java,v 1.6 2006-08-16 09:38:29 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : UserDirURI.java
  * License : GPL
@@ -27,6 +27,25 @@ public class UserDirURI
 {
 	public static String userDir=System.getProperty("user.dir")+'/';
 	
+	
+	public static void createDirFromName(String dirname){
+		String filenameWithSlashes=dirname.replaceAll("\\\\","/");
+		if (filenameWithSlashes.startsWith("file:"))
+			filenameWithSlashes=filenameWithSlashes.substring(5,filenameWithSlashes.length());
+		int fileIndex=filenameWithSlashes.lastIndexOf('/');
+		int curSlash=filenameWithSlashes.indexOf('/');
+		boolean reached=false;
+		do {
+			if (curSlash==fileIndex) reached=true;
+			String directory=filenameWithSlashes.substring(0,curSlash);
+			File dir=new File(directory);
+			if (! dir.exists()) {
+				System.out.println("creating directory "+directory+" ...");
+				dir.mkdir();
+			}
+			curSlash=curSlash+1+filenameWithSlashes.substring(curSlash+1).indexOf('/');
+		} while (! reached);
+	}
 	public static File createFileFromFileName(String filename) {
 	
 		String filenameWithSlashes=filename.replaceAll("\\\\","/");
