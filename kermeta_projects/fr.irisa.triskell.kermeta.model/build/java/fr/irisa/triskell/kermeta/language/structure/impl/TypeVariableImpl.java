@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableImpl.java,v 1.3 2006-08-16 09:09:06 dvojtise Exp $
+ * $Id: TypeVariableImpl.java,v 1.4 2006-08-16 11:20:48 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -97,9 +97,9 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDefinition getTypeContainer() {
+	public TypeContainer getTypeContainer() {
 		if (eContainerFeatureID != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER) return null;
-		return (ClassDefinition)eContainer();
+		return (TypeContainer)eContainer();
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTypeContainer(ClassDefinition newTypeContainer, NotificationChain msgs) {
+	public NotificationChain basicSetTypeContainer(TypeContainer newTypeContainer, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newTypeContainer, StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER, msgs);
 		return msgs;
 	}
@@ -117,7 +117,7 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTypeContainer(ClassDefinition newTypeContainer) {
+	public void setTypeContainer(TypeContainer newTypeContainer) {
 		if (newTypeContainer != eInternalContainer() || (eContainerFeatureID != StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER && newTypeContainer != null)) {
 			if (EcoreUtil.isAncestor(this, newTypeContainer))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -213,7 +213,7 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTypeContainer((ClassDefinition)otherEnd, msgs);
+				return basicSetTypeContainer((TypeContainer)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -270,7 +270,7 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
-				setTypeContainer((ClassDefinition)newValue);
+				setTypeContainer((TypeContainer)newValue);
 				return;
 			case StructurePackage.TYPE_VARIABLE__NAME:
 				setName((String)newValue);
@@ -290,7 +290,7 @@ public class TypeVariableImpl extends TypeContainerImpl implements TypeVariable 
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE_VARIABLE__TYPE_CONTAINER:
-				setTypeContainer((ClassDefinition)null);
+				setTypeContainer((TypeContainer)null);
 				return;
 			case StructurePackage.TYPE_VARIABLE__NAME:
 				setName(NAME_EDEFAULT);

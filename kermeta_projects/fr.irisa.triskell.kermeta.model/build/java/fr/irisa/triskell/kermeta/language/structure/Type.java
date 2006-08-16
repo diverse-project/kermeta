@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Type.java,v 1.2 2006-08-16 09:09:06 dvojtise Exp $
+ * $Id: Type.java,v 1.3 2006-08-16 11:20:48 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -26,6 +26,7 @@ package fr.irisa.triskell.kermeta.language.structure;
 public interface Type extends fr.irisa.triskell.kermeta.language.structure.Object {
 	/**
 	 * Returns the value of the '<em><b>Type Container</b></em>' container reference.
+	 * The default value is <code>""</code>.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.TypeContainer#getContainedType <em>Contained Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -34,13 +35,13 @@ public interface Type extends fr.irisa.triskell.kermeta.language.structure.Objec
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type Container</em>' container reference.
-	 * @see #setTypeContainer(ClassDefinition)
+	 * @see #setTypeContainer(TypeContainer)
 	 * @see fr.irisa.triskell.kermeta.language.structure.StructurePackage#getType_TypeContainer()
 	 * @see fr.irisa.triskell.kermeta.language.structure.TypeContainer#getContainedType
 	 * @model opposite="containedType" required="true"
 	 * @generated
 	 */
-	ClassDefinition getTypeContainer();
+	TypeContainer getTypeContainer();
 
 	/**
 	 * Sets the value of the '{@link fr.irisa.triskell.kermeta.language.structure.Type#getTypeContainer <em>Type Container</em>}' container reference.
@@ -50,7 +51,7 @@ public interface Type extends fr.irisa.triskell.kermeta.language.structure.Objec
 	 * @see #getTypeContainer()
 	 * @generated
 	 */
-	void setTypeContainer(ClassDefinition value);
+	void setTypeContainer(TypeContainer value);
 
 	/**
 	 * <!-- begin-user-doc -->

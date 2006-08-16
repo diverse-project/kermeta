@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeImpl.java,v 1.3 2006-08-16 09:09:06 dvojtise Exp $
+ * $Id: TypeImpl.java,v 1.4 2006-08-16 11:20:48 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -64,9 +64,9 @@ public class TypeImpl extends ObjectImpl implements Type {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDefinition getTypeContainer() {
+	public TypeContainer getTypeContainer() {
 		if (eContainerFeatureID != StructurePackage.TYPE__TYPE_CONTAINER) return null;
-		return (ClassDefinition)eContainer();
+		return (TypeContainer)eContainer();
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class TypeImpl extends ObjectImpl implements Type {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTypeContainer(ClassDefinition newTypeContainer, NotificationChain msgs) {
+	public NotificationChain basicSetTypeContainer(TypeContainer newTypeContainer, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newTypeContainer, StructurePackage.TYPE__TYPE_CONTAINER, msgs);
 		return msgs;
 	}
@@ -84,7 +84,7 @@ public class TypeImpl extends ObjectImpl implements Type {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTypeContainer(ClassDefinition newTypeContainer) {
+	public void setTypeContainer(TypeContainer newTypeContainer) {
 		if (newTypeContainer != eInternalContainer() || (eContainerFeatureID != StructurePackage.TYPE__TYPE_CONTAINER && newTypeContainer != null)) {
 			if (EcoreUtil.isAncestor(this, newTypeContainer))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -121,7 +121,7 @@ public class TypeImpl extends ObjectImpl implements Type {
 			case StructurePackage.TYPE__TYPE_CONTAINER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTypeContainer((ClassDefinition)otherEnd, msgs);
+				return basicSetTypeContainer((TypeContainer)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -173,7 +173,7 @@ public class TypeImpl extends ObjectImpl implements Type {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.TYPE__TYPE_CONTAINER:
-				setTypeContainer((ClassDefinition)newValue);
+				setTypeContainer((TypeContainer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -187,7 +187,7 @@ public class TypeImpl extends ObjectImpl implements Type {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.TYPE__TYPE_CONTAINER:
-				setTypeContainer((ClassDefinition)null);
+				setTypeContainer((TypeContainer)null);
 				return;
 		}
 		super.eUnset(featureID);

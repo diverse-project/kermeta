@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductTypeImpl.java,v 1.3 2006-08-16 09:09:06 dvojtise Exp $
+ * $Id: ProductTypeImpl.java,v 1.4 2006-08-16 11:20:48 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -79,9 +79,9 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ClassDefinition getTypeContainer() {
+	public TypeContainer getTypeContainer() {
 		if (eContainerFeatureID != StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER) return null;
-		return (ClassDefinition)eContainer();
+		return (TypeContainer)eContainer();
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTypeContainer(ClassDefinition newTypeContainer, NotificationChain msgs) {
+	public NotificationChain basicSetTypeContainer(TypeContainer newTypeContainer, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newTypeContainer, StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER, msgs);
 		return msgs;
 	}
@@ -99,7 +99,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTypeContainer(ClassDefinition newTypeContainer) {
+	public void setTypeContainer(TypeContainer newTypeContainer) {
 		if (newTypeContainer != eInternalContainer() || (eContainerFeatureID != StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER && newTypeContainer != null)) {
 			if (EcoreUtil.isAncestor(this, newTypeContainer))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -148,7 +148,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetTypeContainer((ClassDefinition)otherEnd, msgs);
+				return basicSetTypeContainer((TypeContainer)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -202,7 +202,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
-				setTypeContainer((ClassDefinition)newValue);
+				setTypeContainer((TypeContainer)newValue);
 				return;
 			case StructurePackage.PRODUCT_TYPE__TYPE:
 				getType().clear();
@@ -220,7 +220,7 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case StructurePackage.PRODUCT_TYPE__TYPE_CONTAINER:
-				setTypeContainer((ClassDefinition)null);
+				setTypeContainer((TypeContainer)null);
 				return;
 			case StructurePackage.PRODUCT_TYPE__TYPE:
 				getType().clear();
