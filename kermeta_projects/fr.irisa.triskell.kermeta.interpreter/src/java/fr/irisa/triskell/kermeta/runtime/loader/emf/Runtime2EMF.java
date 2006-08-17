@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.42 2006-08-16 14:25:36 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.43 2006-08-17 14:55:08 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -246,7 +246,16 @@ public class Runtime2EMF {
 				{
 					if (feature.isChangeable())
 					{ // Unset the old value of feature
-						eObject.eUnset(feature);
+						try{
+							eObject.eUnset(feature);
+						}
+						catch(UnsupportedOperationException uoe ){
+							unit.throwKermetaRaisedExceptionOnSave(
+									"UnsupportedOperationException, Problem unsetting : " + feature
+									+ "\n   on "	+ eObject + ";"
+									+ "\n   possible reason : bug in EMF, maybe inverting some inheritance in your metamodel may solve it",
+									uoe);
+						}
 						Object property_eObject = getOrCreatePropertyFromRuntimeObject(property, feature);
 						// If the feature is a collection of Objects
 						if (property_eObject instanceof EList)
