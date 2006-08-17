@@ -162,7 +162,7 @@ function documentElement( from_id, to_id )
                 {
                         var hiding_id = displays.pop()
                         var hiding_el = document.getElementById(hiding_id);
-                        if ( hiding_el )
+                        if ( hiding_el != element)
                         {
                                 hiding_el.parentNode.removeChild(hiding_el);
                                 hidden.appendChild(hiding_el);
