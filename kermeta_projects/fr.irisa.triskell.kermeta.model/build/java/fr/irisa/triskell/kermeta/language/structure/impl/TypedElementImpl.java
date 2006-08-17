@@ -2,10 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypedElementImpl.java,v 1.3 2006-08-16 09:09:06 dvojtise Exp $
+ * $Id: TypedElementImpl.java,v 1.4 2006-08-17 14:30:25 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
@@ -35,23 +36,33 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypedElementImpl#getContainedType <em>Contained Type</em>}</li>
+ *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypedElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.irisa.triskell.kermeta.language.structure.impl.TypedElementImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class TypedElementImpl extends NamedElementImpl implements TypedElement {
+public abstract class TypedElementImpl extends TypeContainerImpl implements TypedElement {
 	/**
-	 * The cached value of the '{@link #getContainedType() <em>Contained Type</em>}' containment reference list.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContainedType()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList containedType = null;
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
@@ -86,11 +97,20 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList getContainedType() {
-		if (containedType == null) {
-			containedType = new EObjectContainmentWithInverseEList(Type.class, this, StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE, StructurePackage.TYPE__TYPE_CONTAINER);
-		}
-		return containedType;
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StructurePackage.TYPED_ELEMENT__NAME, oldName, name));
 	}
 
 	/**
@@ -136,36 +156,10 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE:
-				return ((InternalEList)getContainedType()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE:
-				return ((InternalEList)getContainedType()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE:
-				return getContainedType();
+			case StructurePackage.TYPED_ELEMENT__NAME:
+				return getName();
 			case StructurePackage.TYPED_ELEMENT__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
@@ -180,9 +174,8 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 	 */
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE:
-				getContainedType().clear();
-				getContainedType().addAll((Collection)newValue);
+			case StructurePackage.TYPED_ELEMENT__NAME:
+				setName((String)newValue);
 				return;
 			case StructurePackage.TYPED_ELEMENT__TYPE:
 				setType((Type)newValue);
@@ -198,8 +191,8 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 	 */
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE:
-				getContainedType().clear();
+			case StructurePackage.TYPED_ELEMENT__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 			case StructurePackage.TYPED_ELEMENT__TYPE:
 				setType((Type)null);
@@ -215,8 +208,8 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 	 */
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE:
-				return containedType != null && !containedType.isEmpty();
+			case StructurePackage.TYPED_ELEMENT__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case StructurePackage.TYPED_ELEMENT__TYPE:
 				return type != null;
 		}
@@ -229,9 +222,9 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 	 * @generated
 	 */
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class baseClass) {
-		if (baseClass == TypeContainer.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-				case StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE: return StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE;
+				case StructurePackage.TYPED_ELEMENT__NAME: return StructurePackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
@@ -244,13 +237,28 @@ public abstract class TypedElementImpl extends NamedElementImpl implements Typed
 	 * @generated
 	 */
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class baseClass) {
-		if (baseClass == TypeContainer.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-				case StructurePackage.TYPE_CONTAINER__CONTAINED_TYPE: return StructurePackage.TYPED_ELEMENT__CONTAINED_TYPE;
+				case StructurePackage.NAMED_ELEMENT__NAME: return StructurePackage.TYPED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //TypedElementImpl

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypedElement.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: TypedElement.java,v 1.2 2006-08-17 14:30:25 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -23,7 +23,7 @@ package fr.irisa.triskell.kermeta.language.structure;
  * @model abstract="true"
  * @generated
  */
-public interface TypedElement extends NamedElement, TypeContainer {
+public interface TypedElement extends TypeContainer, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->

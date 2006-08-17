@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorSwitch.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: BehaviorSwitch.java,v 1.2 2006-08-17 14:30:25 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.util;
 
@@ -208,8 +208,8 @@ public class BehaviorSwitch {
 				Object result = caseTypeReference(typeReference);
 				if (result == null) result = caseMultiplicityElement(typeReference);
 				if (result == null) result = caseTypedElement(typeReference);
-				if (result == null) result = caseNamedElement(typeReference);
 				if (result == null) result = caseTypeContainer(typeReference);
+				if (result == null) result = caseNamedElement(typeReference);
 				if (result == null) result = caseObject(typeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

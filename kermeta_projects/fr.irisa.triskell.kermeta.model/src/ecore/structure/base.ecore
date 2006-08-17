@@ -48,7 +48,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//structure/DataType">
       <eStructuralFeatures xsi:type="ecore:EReference" name="instanceType" eType="#//structure/Type"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="#//structure/NamedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="#//structure/TypeContainer #//structure/NamedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//structure/Type"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//structure/MultiplicityElement">
@@ -104,5 +104,6 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//structure/String"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//structure/String"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true"/>
   </eSubpackages>
 </ecore:EPackage>

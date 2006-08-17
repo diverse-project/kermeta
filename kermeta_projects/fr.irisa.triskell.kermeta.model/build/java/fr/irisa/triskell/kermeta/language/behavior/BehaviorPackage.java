@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.3 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: BehaviorPackage.java,v 1.4 2006-08-17 14:30:25 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -930,15 +930,6 @@ public interface BehaviorPackage extends EPackage {
 	int TYPE_REFERENCE__TAG = StructurePackage.MULTIPLICITY_ELEMENT__TAG;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_REFERENCE__NAME = StructurePackage.MULTIPLICITY_ELEMENT__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Contained Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -946,6 +937,15 @@ public interface BehaviorPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_REFERENCE__CONTAINED_TYPE = StructurePackage.MULTIPLICITY_ELEMENT__CONTAINED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_REFERENCE__NAME = StructurePackage.MULTIPLICITY_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.

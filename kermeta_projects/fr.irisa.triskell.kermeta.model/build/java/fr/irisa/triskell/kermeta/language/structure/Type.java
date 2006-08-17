@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Type.java,v 1.3 2006-08-16 11:20:48 dvojtise Exp $
+ * $Id: Type.java,v 1.4 2006-08-17 14:30:25 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -26,7 +26,6 @@ package fr.irisa.triskell.kermeta.language.structure;
 public interface Type extends fr.irisa.triskell.kermeta.language.structure.Object {
 	/**
 	 * Returns the value of the '<em><b>Type Container</b></em>' container reference.
-	 * The default value is <code>""</code>.
 	 * It is bidirectional and its opposite is '{@link fr.irisa.triskell.kermeta.language.structure.TypeContainer#getContainedType <em>Contained Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>

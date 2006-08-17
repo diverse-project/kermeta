@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureSwitch.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: StructureSwitch.java,v 1.2 2006-08-17 14:30:25 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.util;
 
@@ -133,8 +133,8 @@ public class StructureSwitch {
 				Object result = caseOperation(operation);
 				if (result == null) result = caseMultiplicityElement(operation);
 				if (result == null) result = caseTypedElement(operation);
-				if (result == null) result = caseNamedElement(operation);
 				if (result == null) result = caseTypeContainer(operation);
+				if (result == null) result = caseNamedElement(operation);
 				if (result == null) result = caseObject(operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -144,8 +144,8 @@ public class StructureSwitch {
 				Object result = caseProperty(property);
 				if (result == null) result = caseMultiplicityElement(property);
 				if (result == null) result = caseTypedElement(property);
-				if (result == null) result = caseNamedElement(property);
 				if (result == null) result = caseTypeContainer(property);
+				if (result == null) result = caseNamedElement(property);
 				if (result == null) result = caseObject(property);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -176,8 +176,8 @@ public class StructureSwitch {
 				MultiplicityElement multiplicityElement = (MultiplicityElement)theEObject;
 				Object result = caseMultiplicityElement(multiplicityElement);
 				if (result == null) result = caseTypedElement(multiplicityElement);
-				if (result == null) result = caseNamedElement(multiplicityElement);
 				if (result == null) result = caseTypeContainer(multiplicityElement);
+				if (result == null) result = caseNamedElement(multiplicityElement);
 				if (result == null) result = caseObject(multiplicityElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -224,8 +224,8 @@ public class StructureSwitch {
 				Object result = caseParameter(parameter);
 				if (result == null) result = caseMultiplicityElement(parameter);
 				if (result == null) result = caseTypedElement(parameter);
-				if (result == null) result = caseNamedElement(parameter);
 				if (result == null) result = caseTypeContainer(parameter);
+				if (result == null) result = caseNamedElement(parameter);
 				if (result == null) result = caseObject(parameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -245,8 +245,8 @@ public class StructureSwitch {
 			case StructurePackage.TYPED_ELEMENT: {
 				TypedElement typedElement = (TypedElement)theEObject;
 				Object result = caseTypedElement(typedElement);
-				if (result == null) result = caseNamedElement(typedElement);
 				if (result == null) result = caseTypeContainer(typedElement);
+				if (result == null) result = caseNamedElement(typedElement);
 				if (result == null) result = caseObject(typedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
