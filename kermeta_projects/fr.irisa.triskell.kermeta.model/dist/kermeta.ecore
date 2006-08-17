@@ -145,7 +145,7 @@
         <eOperations name="isInstance" eType="//language/structure/Boolean">
           <eParameters name="element" eType="//language/structure/Object"/>
         </eOperations>
-        <eStructuralFeatures xsi:type="ecore:EReference" name="typeContainer" lowerBound="1" eType="//language/structure/TypeContainer" defaultValueLiteral="" eOpposite="//language/structure/TypeContainer/containedType"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="typeContainer" lowerBound="1" eType="//language/structure/TypeContainer" eOpposite="//language/structure/TypeContainer/containedType"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="TypeContainer" abstract="true" eSuperTypes="//language/structure/Object">
         <eStructuralFeatures xsi:type="ecore:EReference" name="containedType" upperBound="-1" eType="//language/structure/Type" containment="true" eOpposite="//language/structure/Type/typeContainer"/>
@@ -177,7 +177,7 @@
       <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="//language/structure/DataType //language/structure/TypeContainer">
         <eStructuralFeatures xsi:type="ecore:EReference" name="instanceType" eType="//language/structure/Type"/>
       </eClassifiers>
-      <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="//language/structure/NamedElement //language/structure/TypeContainer">
+      <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="//language/structure/TypeContainer //language/structure/NamedElement">
         <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="//language/structure/Type"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EDataType" name="UnlimitedNatural" instanceClassName="kermeta::standard::UnlimitedNatural"/>
@@ -199,7 +199,7 @@
         <eLiterals name="ocl" value="1"/>
       </eClassifiers>
       <eClassifiers xsi:type="ecore:EClass" name="ClassDefinition" eSuperTypes="//language/structure/TypeContainer //language/structure/GenericTypeDefinition">
-        <eStructuralFeatures xsi:type="ecore:EReference" name="inv" upperBound="-1" eType="//language/structure/Constraint" defaultValueLiteral="" containment="true" eOpposite="//language/structure/Constraint/invOwner"/>
+        <eStructuralFeatures xsi:type="ecore:EReference" name="inv" upperBound="-1" eType="//language/structure/Constraint" containment="true" eOpposite="//language/structure/Constraint/invOwner"/>
         <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAbstract" eType="//language/structure/Boolean"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1" eType="//language/structure/Property" containment="true" eOpposite="//language/structure/Property/owningClass"/>
         <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1" eType="//language/structure/Operation" containment="true" eOpposite="//language/structure/Operation/owningClass"/>
