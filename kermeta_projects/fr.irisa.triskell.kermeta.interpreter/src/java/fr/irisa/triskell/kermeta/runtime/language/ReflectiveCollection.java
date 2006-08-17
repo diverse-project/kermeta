@@ -23,15 +23,17 @@ import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
  * Reflective collection is the java side (wrapper for add/remove/clear base methods
  * related to collection handling) of Kermeta reflective collections. A reflective
  * Collection is only used for properties (attributes/references) which type is
- * a (or a subtype of) collection.
+ * a (or a subtype of) set.
  */
 public class ReflectiveCollection {
 
 	/** Implementation of method add called as :
 	 * extern fr::irisa::triskell::kermeta::runtime::language::ReflectiveCollection.add(element)
 	*/
-	public static RuntimeObject add(RuntimeObject self, RuntimeObject param0) {
-		add(self, param0, true);
+	public static RuntimeObject add(RuntimeObject self, RuntimeObject element) {
+		// Take care of this case : self is a Set or Set subtype, i.e with distinct elements
+		if (!isaSet(self) || !contains(self, element))
+			add(self, element, true);
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 	
@@ -49,23 +51,23 @@ public class ReflectiveCollection {
 	 * A review is needed for this method : it does not contain exactly the same body
 	 * as the method addAt in ReflectiveSequence
 	 */	
-	public static void add(RuntimeObject self, RuntimeObject param0, boolean handle_opposite) {
+	public static void add(RuntimeObject self, RuntimeObject element, boolean handle_opposite) {
 		// add the new object
-		Collection.add(self, param0);
+		Collection.add(self, element);
 		// set the new objects container if needed
 		if (isaContainer(self)) {
 		    // FIXME : We remove from self container an object that we just precedingly added??
-		    if (param0.getContainer() != null) {
-		        Object.removeObjectFromItsContainer(param0);
+		    if (element.getContainer() != null) {
+		        Object.removeObjectFromItsContainer(element);
 		    }
 		    
-		    param0.setContainer(getObject(self));
+		    element.setContainer(getObject(self));
 		}
 		// take care of the opposite
 		if(handle_opposite) {
 			RuntimeObject oproperty = getOppositeProperty(self);
 			if (oproperty != null) {
-				Object.handleOppositeProperySet(param0, oproperty, getObject(self));
+				Object.handleOppositeProperySet(element, oproperty, getObject(self));
 			}
 		}
 	}
@@ -138,7 +140,7 @@ public class ReflectiveCollection {
 	 * Please see the javadoc+comments in ReflectiveSequence java class, in the method 
 	 * <code>createReflectiveSequence</code>.
 	 * @see ReflectiveSequence#createReflectiveSequence(RuntimeObject, RuntimeObject)
-	 * @param object object for which we set the property value 
+	 * @param object object for which we initialize the property value 
 	 * @param property property which value to set is the returned RuntimeObject
 	 * @return the RuntimeObject representation of a reflective collection
 	 */
@@ -201,7 +203,7 @@ public class ReflectiveCollection {
 	}
 	
 	public static boolean isaSet(RuntimeObject reflective_collection) {
-		return Boolean.getValue((RuntimeObject)((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("unique"));
+		return Boolean.getValue((RuntimeObject)((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("isUnique"));
 	}
 	
 	public static boolean isaContainer(RuntimeObject reflective_collection) {
@@ -214,6 +216,12 @@ public class ReflectiveCollection {
 	 * or a ReflectiveSequence */
 	public static RuntimeObject getOppositeProperty(RuntimeObject reflective_collection) {
 		return (RuntimeObject)((RuntimeObject)reflective_collection.getData().get("RProperty")).getProperties().get("opposite");
+	}
+	
+	/** Returns true if the Collection handled by the given runtime object already contains the given
+	 * element, false otherwise */
+	public static boolean contains(RuntimeObject reflective_collection, RuntimeObject element) {
+		return Collection.getArrayList(reflective_collection).contains(element);
 	}
 
 }

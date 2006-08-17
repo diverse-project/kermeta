@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.10 2006-05-23 13:31:26 jmottu Exp $
+/* $Id: Object.java,v 1.11 2006-08-17 10:02:21 zdrey Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -39,21 +39,21 @@ import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
  */
 public class Object {
 
-	// Implementation of method getMetaClass called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass()
+	/** Implementation of method getMetaClass called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.getMetaClass() */
 	public static RuntimeObject getMetaClass(RuntimeObject self) {
 		return self.getMetaclass();
 	}
 
-	// Implementation of method container called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.container()
+	/** Implementation of method container called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.container() */
 	public static RuntimeObject container(RuntimeObject self) {
 		if (self.getContainer() == null) return self.getFactory().getMemory().voidINSTANCE;
 		return self.getContainer();
 	}
 	
-    // Implementation of method container called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.container()
+    /** Implementation of method container called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.container() */
 	public static RuntimeObject checkInvariants(RuntimeObject self) {
 		
 		 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
@@ -107,16 +107,16 @@ public class Object {
 	}
 	
 
-	// Implementation of method equals called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(element)
+	/** Implementation of method equals called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.equals(element) */
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
 		if(self == param0) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 
 
-	// Implementation of method get called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property)
+	/** Implementation of method get called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.get(~property) */
 	public static RuntimeObject get(RuntimeObject self, RuntimeObject param0) {
 		RuntimeObject result;
 		result = (RuntimeObject)self.getProperties().get(getPropertyName(param0));
@@ -126,6 +126,7 @@ public class Object {
 		else {
 			if (result == null) {
 				// TODO : Find something to manage uniqueness of properties
+				// Note : uniqueness of properties with upper>1 is checked in ReflectiveCollection
 				if (!isPropertyOrdered(param0)) result =  ReflectiveCollection.createReflectiveCollection(self, param0);
 				else result =  ReflectiveSequence.createReflectiveSequence(self, param0);
 				self.getProperties().put(getPropertyName(param0), result);
@@ -134,10 +135,11 @@ public class Object {
 		return result;
 	}
 
-	// Implementation of method set called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(~property, element)
-	// param0 : this RuntimeObject corresponds to a FProperty : 
-	// param1 : this RuntimeObject corresponds to the value of the property for self instance (self.getProperties().get(name_of_param0))
+	/** Implementation of method set called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.~set(~property, element)
+	 * @param param0 : this RuntimeObject corresponds to a FProperty : 
+	 * @param param1 : this RuntimeObject corresponds to the value of the property for self instance (self.getProperties().get(name_of_param0)) 
+	 */
 	public static RuntimeObject set(RuntimeObject self, RuntimeObject param0, RuntimeObject param1) {
 		set(self, param0, param1, true);
 		return self.getFactory().getMemory().voidINSTANCE;
@@ -206,20 +208,20 @@ public class Object {
         
     }
 
-    // Implementation of method container called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.oid()
+    /** Implementation of method container called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.oid() */
 	public static RuntimeObject oid(RuntimeObject self) {
 		return Integer.create((int)self.getOId(), self.getFactory());
 	}
-//	 Implementation of method container called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.oid()
+	/** Implementation of method container called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.oid() */
 	public static RuntimeObject freeze(RuntimeObject self) {
 		self.setFrozen(true);
 		return self.getFactory().getMemory().voidINSTANCE;
 	}
 	
-//	 Implementation of method container called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.oid()
+	/** Implementation of method container called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.oid() */
 	public static RuntimeObject isFrozen(RuntimeObject self) {
 		if (self.isFrozen()) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;
@@ -240,8 +242,8 @@ public class Object {
 		}
 	}
 
-	// Implementation of method isSet called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(~property)
+	/** Implementation of method isSet called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.isSet(~property) */
 	public static RuntimeObject isSet(RuntimeObject self, RuntimeObject param0) {
 	    
 		if (self.getProperties().get(getPropertyName(param0)) != null) 
@@ -249,8 +251,8 @@ public class Object {
 		else return self.getFactory().getMemory().falseINSTANCE;
 	}
 
-	// Implementation of method unSet called as :
-	// extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(~property)
+	/** Implementation of method unSet called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.unSet(~property) */
 	public static RuntimeObject unSet(RuntimeObject self, RuntimeObject param0) {
 		unSet(self,param0, true);
 		return self.getFactory().getMemory().voidINSTANCE;
