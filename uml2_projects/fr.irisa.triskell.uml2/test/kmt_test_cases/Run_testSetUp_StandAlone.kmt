@@ -5,14 +5,14 @@
 package test_package;
 
 require kermeta
-require "601test_Tool_GOFStatePattern.kmt"
+require "707test_CloneTool_Association.main.kmt"
 
 using tools_tests
 
 class MyTestClass
 {
     operation main() : Void is do 
-	    var testRunner : ToolGOFStateTestCase init ToolGOFStateTestCase.new
+	    var testRunner : ToolCloneAssociationTestCase init ToolCloneAssociationTestCase.new
 	
 		testRunner.setUp
     end 

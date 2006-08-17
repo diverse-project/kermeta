@@ -58,6 +58,7 @@ class ToolCloneOperationTestCase inherits kermeta::kunit::TestCase
 		orig.returnResult.add(ret)
 		
 		var factory : UmlCloneFactory init UmlCloneFactory.new
+		factory.initialize
 		clone := factory.cloneOperation(orig)
 	end
 	
@@ -94,11 +95,6 @@ class ToolCloneOperationTestCase inherits kermeta::kunit::TestCase
     		"the clone parameters must be have the same type than the original")
     end
     operation test_CloneTool_OperationReturn() is do
-    
-    //DEBUG
-    clone.returnResult.each{ p |
-    stdio.writeln("DEBUG - test Oper : clone.returnResult = "+p.toString)}
-    
     	assertTrueWithMsg(clone.returnResult.size == 1,
     		"the clone must be have the parameters of the original")
     	assertTrueWithMsg(clone.returnResult.elementAt(0).name == "ret",

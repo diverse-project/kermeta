@@ -34,7 +34,7 @@ class CompositionTestCase inherits kermeta::kunit::TestCase
     // the BClass must be composed of one DClass
     operation testBClassInheritedAssociation() is do
     	bClass.composition := dClass
-    	assertTrueWithMsg(bClass.composition == dClass,
+    	assertTrueWithMsg(DClass.isInstance(bClass.composition),
     		"The BClass must be composed of one DClass")
     end
 }

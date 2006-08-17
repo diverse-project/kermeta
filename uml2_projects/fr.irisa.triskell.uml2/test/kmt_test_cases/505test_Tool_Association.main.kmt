@@ -36,7 +36,7 @@ class ToolAssociationTestCase inherits kermeta::kunit::TestCase
 //    	model.ownedMember.add(assocTool.addSimpleAssociation(Aclass, Bclass, "association", "source", "target"))
     	
     	assertTrueWithMsg(false,
-    		"TODO")
+    		"TODO : feature not implemented")
     end
     
     operation testAssociationTool_OneSideNavigableAssociation() is do
@@ -64,14 +64,14 @@ class ToolAssociationTestCase inherits kermeta::kunit::TestCase
 //    	model.ownedMember.add(assocTool.addSimpleComposition(Aclass, Bclass, "association", "target"))
     	
     	assertTrueWithMsg(false,
-    		"TODO")
+    		"TODO : feature not implemented")
     end
     
     operation testAssociationTool_SimpleAggregation() is do
 //    	model.ownedMember.add(assocTool.addSimpleAggregation(Aclass, Bclass, "association", "target"))
     	
     	assertTrueWithMsg(false,
-    		"TODO")
+    		"TODO : feature not implemented")
     end
     
     operation testAssociationTool_NavigableComposition() is do

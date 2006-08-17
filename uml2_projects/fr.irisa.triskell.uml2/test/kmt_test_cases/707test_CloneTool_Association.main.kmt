@@ -16,6 +16,7 @@ class ToolCloneAssociationTestCase inherits kermeta::kunit::TestCase
 	reference clone : Association
 	reference prop0 : Property
 	reference prop1 : Property
+	reference factory : UmlCloneFactory
 	
 	method setUp() is do
 		//creating needed instances
@@ -31,8 +32,14 @@ class ToolCloneAssociationTestCase inherits kermeta::kunit::TestCase
 		orig.memberEnd.addAt(1, prop1)
 		orig.ownedEnd.add(prop0)
 		
-		var factory : UmlCloneFactory init UmlCloneFactory.new
+		factory := UmlCloneFactory.new
+		factory.initialize
 		clone := factory.cloneAssociation(orig)
+		// ends must be linked after the cloning process (second pass)
+    		
+    		//DEBUG
+    		var o : kermeta::standard::Object init clone
+    		stdio.writeln("xxx")
 	end
 	
 	method tearDown() is do
@@ -56,18 +63,15 @@ class ToolCloneAssociationTestCase inherits kermeta::kunit::TestCase
     		"the clone must be have the same visibility than the original")
     end
     operation test_CloneTool_AssociationEnds() is do
-    
-    //DEBUG
-    stdio.writeln("DEBUG - test assoc : clone.memberEnd.size = "+clone.memberEnd.size.toString)
-    
     	assertTrueWithMsg(clone.memberEnd.size == 2,
     		"the clone must be have the same number of ends than the original")
-    	assertTrueWithMsg(clone.memberEnd.elementAt(0) == prop0
-    		and clone.memberEnd.elementAt(1) == prop1,
-    		"the clone must be have the same ends instances than the original")
+    	assertTrueWithMsg(clone.memberEnd.select{ u | u == prop1 }.size == 1,
+    		"the clone must be have the same ends than the original")
+    	assertTrueWithMsg(clone.memberEnd.elementAt(0) == clone.ownedEnd.elementAt(0),
+    		"the clone must be have the equivalent ends of the original")
     	assertTrueWithMsg(clone.ownedEnd.size == 1,
     		"the clone must be have the same number of owned ends than the original")
-    	assertTrueWithMsg(clone.ownedEnd.elementAt(0) == prop0,
+    	assertTrueWithMsg(clone.ownedEnd.elementAt(0) == factory.ioTable.getValue(prop0),
     		"the clone must be have the same owned ends instances than the original")
     end
 }

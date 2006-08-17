@@ -1,4 +1,4 @@
-/* $Id: UmlCloneFactory.kmt,v 1.5 2006-08-08 06:57:46 vmahe Exp $
+/* $Id: UmlCloneFactory.kmt,v 1.6 2006-08-17 14:49:05 vmahe Exp $
  * Creation date: July 5, 2006
  * License:
  * Copyright:
@@ -53,12 +53,18 @@ class UmlCloneFactory
         affectPackage(element, clone)
         //specific properties
         clone.viewpoint := element.viewpoint
+        
+        // store the clone before going back
+        ioTable.putValue(element, clone)
         result := clone
     end
 
     operation clonePackage(element : Package) : Package is do 
         var clone : Package init Package.new
         affectPackage(element, clone)
+        
+        // store the clone before going back
+        ioTable.putValue(element, clone)
         result := clone
     end
 
@@ -74,6 +80,9 @@ class UmlCloneFactory
         }
         //nested classifiers will be top/down visited or must be clone through a explicit demand
         //ownedReception : TODO
+        
+        // store the clone before going back
+        ioTable.putValue(element, clone)
         result := clone
     end
 
@@ -91,6 +100,9 @@ class UmlCloneFactory
         	clone.ownedParameter.add(par)
         	par.~operation := clone
         }
+        
+        // store the clone before going back
+        ioTable.putValue(element, clone)
         result := clone
     end
     
@@ -108,6 +120,9 @@ class UmlCloneFactory
     	clone.isStream := element.isStream
     	if element.defaultValue != void then clone.defaultValue := cloneValueSpecification(element.defaultValue) end
     	// rem : the "operation" attribute must be fixed by its owning operation
+        
+        // store the clone before going back
+        ioTable.putValue(element, clone)
     	result := clone
     end
     
@@ -139,6 +154,9 @@ class UmlCloneFactory
         else if element.aggregation == AggregationKind.shared then
         	clone.aggregation := AggregationKind.shared
         end end end
+        
+        // store the clone before going back
+        ioTable.putValue(element, clone)
     	result := clone
     end
     
@@ -204,6 +222,9 @@ class UmlCloneFactory
 	    affectTypedElement(element, cl)
 	    affectParameterableElement(element, cl)
 	    // specific properties : none (excepting the ones dedicated to each subtype)
+        
+        // store the clone before going back
+        ioTable.putValue(element, result)
     end
     
     /** return a clone of the Comment with the same value */
@@ -214,6 +235,9 @@ class UmlCloneFactory
     	clone.body := element.body
     	// FIXME :
 //    	if element.bodyExpression != void then clone.bodyExpression := cloneExpression(element.bodyExpression) end
+        
+        // store the clone before going back
+        ioTable.putValue(element, clone)
     	result := clone
     end
     
@@ -225,12 +249,21 @@ class UmlCloneFactory
     	affectRelationship(element, clone)
     	// specific properties
     	clone.isDerived := element.isDerived
-    	//memberEnd		: not cloned (must be linked by user)
     	element.ownedEnd.each{ e |	// ends not possessed by a Class
     		var eClone : Property init cloneProperty(e)
     		ioTable.putValue(e, eClone)
     		clone.ownedEnd.add(eClone)
+			clone.memberEnd.add(eClone)
     	}
+    	//memberEnd		: not cloned except those owned.
+		element.memberEnd.each{ u |
+			if not element.ownedEnd.contains(u) then
+				clone.memberEnd.add(u)
+			end
+		}
+        
+        // store the clone before going back
+        ioTable.putValue(element, clone)
     	result := clone
     end
     
@@ -250,6 +283,9 @@ class UmlCloneFactory
         end end end end
     	clone.importedElement := element.importedElement
     	// rem : the "importingNamespace" attribute must be fixed by its owning namespace
+        
+        // store the clone before going back
+        ioTable.putValue(element, clone)
     	result := clone
     end
     
@@ -268,6 +304,8 @@ class UmlCloneFactory
     	clone.isSubstitutable := element.isSubstitutable
 		//specific			: not cloned (must be linked by user)
         
+        // store the clone before going back
+        ioTable.putValue(element, clone)
         result := clone
     end
     

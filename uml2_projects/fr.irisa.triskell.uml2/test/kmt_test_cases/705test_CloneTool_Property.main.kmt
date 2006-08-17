@@ -31,6 +31,7 @@ class ToolClonePropertyTestCase inherits kermeta::kunit::TestCase
 		orig.defaultValue := LiteralString.new
 		
 		factory := UmlCloneFactory.new
+		factory.initialize
 		clone := factory.cloneProperty(orig)
 	end
 	

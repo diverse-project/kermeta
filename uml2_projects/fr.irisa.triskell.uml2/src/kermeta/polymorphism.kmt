@@ -1,4 +1,4 @@
-/* $Id: polymorphism.kmt,v 1.3 2006-08-08 06:57:46 vmahe Exp $
+/* $Id: polymorphism.kmt,v 1.4 2006-08-17 14:49:05 vmahe Exp $
  * Creation date: May 3, 2006
  * License:
  * Copyright:
@@ -11,7 +11,7 @@ package uml2::polymorphism;
 
 require kermeta
 //require "Uml2.kmt"
-require "Uml2.km"
+require "Uml2.kmt"
 
 using kermeta::standard
 using kermeta::reflection

@@ -52,6 +52,7 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
 		sm.region.add(smReg)
 		
 		s0 := Pseudostate.new
+		s0.kind := PseudostateKind.initial
 		smReg.subvertex.add(s0)
 		
 		s1 := State.new
@@ -68,15 +69,15 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
 		
 		// S1 sub state machine
 		s1reg := Region.new
-		s1reg.name := "s1reg"
+		s1reg.name := "S1reg"
 		s1.region.add(s1reg)
 		
 		s1a := State.new
-		s1a.name := "s1a"
+		s1a.name := "S1a"
 		s1reg.subvertex.add(s1a)
 		
 		s1b := State.new
-		s1b.name := "s1b"
+		s1b.name := "S1b"
 		s1reg.subvertex.add(s1b)
 		
 		var gofState : GOFStatePatternTool init GOFStatePatternTool.new
@@ -93,14 +94,21 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
     		
     	assertTrueWithMsg(aClass.ownedOperation.select{ u | u.name == "request" }.size == 1,
     		"The 'Context' class must have a 'request()' operation")
+    	
     	var op : Operation init aClass.ownedOperation.select{ u | u.name == "request" }.one
-    	assertTrueWithMsg(op.ownedComment.select{ u | u.body == "do\n\tstate.handle\nend" }.size == 1,
-    		"The Context 'request()' operation must have a correct body (stored in an Comment)")
+    	assertTrueWithMsg(model.ownedComment.one.annotatedElement.select{ u | u == op }.size == 1,
+    		"The model must have a Comment for Context 'request()' operation")
+    	var comment : Comment
+    	comment := model.ownedComment.select{ u | u.annotatedElement.contains(op) }.one
+    	assertTrueWithMsg(comment.body != void,
+    		"The comment for the 'request()' operation must have a body")
+    	assertTrueWithMsg(comment.body == "do\n\tstate.handle()\nend",
+    		"The comment for the 'request()' operation must have a correct body")
     end
     
     operation test_GOFStateTool_AbstractState() is do
     	assertTrueWithMsg(model.ownedMember.select{ u | u.name == aClass.name + "_State" }.size == 1,
-    		"the model must now have as abstract state class for 'AClass'")
+    		"the model must now have an abstract state class for 'AClass'")
     	
     	var stateClass : Class
     	stateClass ?= model.ownedMember.select{ u | u.name == aClass.name + "_State" }.one
@@ -115,11 +123,11 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
     end
     
     operation test_GOFStateTool_ConcretePseudoState() is do
-    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == aClass.name + "ConcreteState" }.size == 1,
-    		"the model must now have as 'ConcreteState' state class for 'AClass'")
+    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == "ConcreteState" }.size == 1,
+    		"the model must now have a 'ConcreteState' state class for 'AClass'")
     	
     	var stateClass : Class
-    	stateClass ?= model.ownedMember.select{ u | u.name == aClass.name + "ConcreteState" }.one
+    	stateClass ?= model.ownedMember.select{ u | u.name == "ConcreteState" }.one
     	assertTrueWithMsg(not stateClass.isAbstract,
     		"the abstract State class must be not abstract")
     	
@@ -131,11 +139,11 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
     end
     
     operation test_GOFStateTool_ConcreteStates() is do
-    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == aClass.name + "ConcreteStateS1" }.size == 1,
-    		"the model must now have as 'ConcreteStateS1' state class for 'AClass'")
+    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == "ConcreteStateS1" }.size == 1,
+    		"the model must now have a 'ConcreteStateS1' state class for 'AClass'")
     	
     	var stateClass : Class
-    	stateClass ?= model.ownedMember.select{ u | u.name == aClass.name + "ConcreteStateS1" }.one
+    	stateClass ?= model.ownedMember.select{ u | u.name == "ConcreteStateS1" }.one
     	assertTrueWithMsg(not stateClass.isAbstract,
     		"the ConcreteState class must be not abstract")
     	
@@ -145,11 +153,11 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
     	assertTrueWithMsg(not op.isAbstract,
     		"The ConcreteStateS1 class 'handle()' operation must not be abstract")
     		
-    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == aClass.name + "ConcreteStateS2" }.size == 1,
-    		"the model must now have as 'ConcreteState'S2 state class for 'AClass'")
+    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == "ConcreteStateS2" }.size == 1,
+    		"the model must now have a 'ConcreteState'S2 state class for 'AClass'")
     	
     	var stateClassS2 : Class
-    	stateClassS2 ?= model.ownedMember.select{ u | u.name == aClass.name + "ConcreteStateS2" }.one
+    	stateClassS2 ?= model.ownedMember.select{ u | u.name == "ConcreteStateS2" }.one
     	assertTrueWithMsg(not stateClass.isAbstract,
     		"the ConcreteStateS2 class must be not abstract")
     	
@@ -161,11 +169,11 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
     end
     
     operation test_GOFStateTool_ConcreteFinalState() is do
-    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == aClass.name + "ConcreteStateFinal" }.size == 1,
-    		"the model must now have as 'ConcreteStateFinal' state class for 'AClass'")
+    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == "ConcreteStateFinal" }.size == 1,
+    		"the model must now have a 'ConcreteStateFinal' state class for 'AClass'")
     	
     	var stateClass : Class
-    	stateClass ?= model.ownedMember.select{ u | u.name == aClass.name + "ConcreteStateFinal" }.one
+    	stateClass ?= model.ownedMember.select{ u | u.name == "ConcreteStateFinal" }.one
     	assertTrueWithMsg(not stateClass.isAbstract,
     		"the ConcreteStateFinal class must be not abstract")
     	
@@ -176,11 +184,11 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
     		"The ConcreteStateFinal class 'handle()' operation must not be abstract")
     end
     operation test_GOFStateTool_SubStateAbstractState() is do
-    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == s1.name + "_State" }.size == 1,
-    		"the model must now have as abstract state class for 'S1'")
+    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == "ConcreteState" + s1.name + "_State" }.size == 1,
+    		"the model must now have an abstract state class for 'S1'")
     	
     	var stateClass : Class
-    	stateClass ?= model.ownedMember.select{ u | u.name == s1.name + "_State" }.one
+    	stateClass ?= model.ownedMember.select{ u | u.name == "ConcreteState" + s1.name + "_State" }.one
     	assertTrueWithMsg(stateClass.isAbstract,
     		"the abstract State class must be abstract")
     	
@@ -192,11 +200,11 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
     end
     
     operation test_GOFStateTool_SubStateConcreteStates() is do
-    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == aClass.name + "ConcreteStateS1a" }.size == 1,
-    		"the model must now have as 'ConcreteStateS1a' state class for S1'")
+    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == "ConcreteStateS1a" }.size == 1,
+    		"the model must now have a 'ConcreteStateS1a' state class for S1'")
     	
     	var stateClass : Class
-    	stateClass ?= model.ownedMember.select{ u | u.name == aClass.name + "ConcreteStateS1a" }.one
+    	stateClass ?= model.ownedMember.select{ u | u.name == "ConcreteStateS1a" }.one
     	assertTrueWithMsg(not stateClass.isAbstract,
     		"the ConcreteState class must be not abstract")
     	
@@ -206,11 +214,11 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
     	assertTrueWithMsg(not op.isAbstract,
     		"The ConcreteStateS1a class 'handle()' operation must not be abstract")
     		
-    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == aClass.name + "ConcreteStateS1b" }.size == 1,
-    		"the model must now have as 'ConcreteState'S1b state class for 'S1'")
+    	assertTrueWithMsg(model.ownedMember.select{ u | u.name == "ConcreteStateS1b" }.size == 1,
+    		"the model must now have a 'ConcreteState'S1b state class for 'S1'")
     	
     	var stateClassS2 : Class
-    	stateClassS2 ?= model.ownedMember.select{ u | u.name == aClass.name + "ConcreteStateS1b" }.one
+    	stateClassS2 ?= model.ownedMember.select{ u | u.name == "ConcreteStateS1b" }.one
     	assertTrueWithMsg(not stateClass.isAbstract,
     		"the ConcreteStateS1b class must be not abstract")
     	

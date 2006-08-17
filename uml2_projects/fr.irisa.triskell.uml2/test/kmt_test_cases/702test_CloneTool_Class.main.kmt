@@ -28,6 +28,7 @@ class ToolCloneClassTestCase inherits kermeta::kunit::TestCase
 		orig.ownedAttribute.add(attr)
 		
 		var factory : UmlCloneFactory init UmlCloneFactory.new
+		factory.initialize
 		clone := factory.cloneClass(orig)
 	end
 	

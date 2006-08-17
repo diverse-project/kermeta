@@ -16,6 +16,7 @@ class ToolCloneValueSpecificationTestCase inherits kermeta::kunit::TestCase
 	
 	method setUp() is do
 		factory := UmlCloneFactory.new
+		factory.initialize
 	end
 	
 	method tearDown() is do

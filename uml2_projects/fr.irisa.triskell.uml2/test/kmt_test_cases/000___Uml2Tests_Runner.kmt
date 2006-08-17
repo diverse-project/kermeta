@@ -23,12 +23,26 @@ class MyTestClass
 		// Here, we run our test case
 		// TestString must inherit TestCase
 		testRunner.run(AbstractClassTestCase)
+		testRunner.printTestResult
+		
 		testRunner.run(ClassInheritanceTestCase)
+		testRunner.printTestResult
+		
 		testRunner.run(CompositionTestCase)
+		testRunner.printTestResult
+		
 		testRunner.run(MultipleReferenceTestCase)
+		testRunner.printTestResult
+		
 		testRunner.run(ReferenceTestCase)
+		testRunner.printTestResult
+		
 		testRunner.run(OperationParameterTestCase)
+		testRunner.printTestResult
+		
 		testRunner.run(OperationReturnTestCase)
+		testRunner.printTestResult
+		
 		testRunner.run(ExternalInheritanceTestCase)
 		testRunner.printTestResult
     end 

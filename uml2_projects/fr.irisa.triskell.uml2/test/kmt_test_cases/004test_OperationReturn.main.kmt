@@ -25,7 +25,8 @@ class OperationReturnTestCase inherits kermeta::kunit::TestCase
     // test if the bOperation of the BClass returns a GClass
     operation testOperationReturn() is do
     	gClass := bClass.bOperation()
-    	assertTrueWithMsg(gClass.getMetaClass == ExternClassDiagram::GClass,
+    	assertTrueWithMsg(false, "an operation return value can't be tested on a model !!!")
+    	assertTrueWithMsg(ExternClassDiagram::GClass.isInstance(gClass),
     		"The bOperation of the BClass must return a GClass")
     end
 }

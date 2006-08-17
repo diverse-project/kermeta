@@ -1,4 +1,4 @@
-/* $Id: GOFStatePatternTool.kmt,v 1.3 2006-08-08 06:57:46 vmahe Exp $
+/* $Id: GOFStatePatternTool.kmt,v 1.4 2006-08-17 14:49:05 vmahe Exp $
  * Creation date: July 6, 2006
  * License:
  * Copyright:
@@ -10,7 +10,7 @@ package uml2::transformations;
 
 require "StaticTools.kmt"
 require "UmlCloneFactory.kmt"
-require "../TopDownVisitor.km"
+require "../TopDownVisitor.kmt"
 
 using uml2
 
@@ -26,7 +26,7 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
 	  *     in order to give it the reified states as links (recursive composites)
 	  * @parameter input : the package where the state machine is
 	  *     for correspondance through the hash table
-	  * @parameter output : the same package, but playing its clone
+	  * @parameter outputTable : the table containing its clone
 	  *     (needed as the pattern involves a visitor approach) */
 	operation applyPattern(machine : StateMachine, input : Package, outputTable : IOElementsTable) is do
 		// The outputTable must contain the output elements corresponding to all input package elements.
@@ -76,19 +76,51 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
 		// states will retrieve their abstract state class through their owning region (state 'container' property)
 		var abstractState : Class init Class.new
 		abstractState.isAbstract := true
-		var contextName : kermeta::standard::String
-	
-    	abstractState.ownedOperation.add(getHandleOperation)
+		
+		// add the name of the abstract state class
+		var context : Class
+		context ?= ioTable.getValue(visitable.stateMachine)
+		if context == void then context ?= ioTable.getValue(visitable.state) end
+		abstractState.name := nameForIAbstractState(context.name)
+		
+    	// add "handle()" operation
+    	abstractState.ownedOperation.add(getHandleOperation(true))
     	
-    	///////////////////////////////////// TODO : properties and "handle()" operation
-    	
-			ioTable.putValue(visitable, abstractState)
+		ioTable.putValue(visitable, abstractState)
+		currentPackage.ownedMember.add(abstractState)
         super(visitable)
     end
     
     method visitState(visitable : State) : Void is do
+    	preProcessState(visitable)
+        super(visitable)
+    	postProcessState(visitable)
+    end
+    
+    method visitFinalState(visitable : FinalState) : Void is do
+    	preProcessState(visitable)
+        super(visitable)
+    	postProcessState(visitable)
+    end
+    
+    method visitPseudostate(visitable : Pseudostate) : Void is do 
+        if visitable.kind == PseudostateKind.initial then
+	    	var concreteState : Class init concreteVertex(visitable)
+	    	// add it to the table and the model
+	    	ioTable.putValue(visitable, concreteState)
+			currentPackage.ownedMember.add(concreteState)
+        else
+        	// others pseudostates don't concern GOF State pattern
+        end
+        super(visitable)
+    end
+    
+    //////////////// methods used both by visitors and applyPattern ////////////////
+    
+    operation preProcessState(visitable : State) : Void is do
     	var concreteState : Class init concreteVertex(visitable)
     	ioTable.putValue(visitable, concreteState)
+		currentPackage.ownedMember.add(concreteState)
     	
     	// substate machine (if exist)
     	if visitable.region.size > 1 then
@@ -96,39 +128,42 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
 			e.message := "GOF State Pattern tool : multiple regions are not processed"
 			raise e
 		end
-		
-        super(visitable)
+	end
         
-		// region(s) has been processed since the "super" call 
-		// so we can link the abstract state class to its context
-    	if visitable.region.size > 1 then
+    operation postProcessState(visitable : State) : Void is do
+    	var concreteState : Class
+    	concreteState ?= ioTable.getValue(visitable)
+		// subregion(s) has been processed since the "super" call
+		// so we can link the submachine abstract state class to its context
+    	if visitable.region.size == 1 then
 			var assocTool : Association_Tool init Association_Tool.new
 			var abstractState : Class
 			abstractState ?= ioTable.getValue(visitable.region.one)
-			// the current concreteState is one level higher than the abstractState which sees it as its context class
+			// link between the context class and its abstract state class
+			// the current concreteState is one level higher than the abstractState which sees it as its CONTEXT CLASS
 			currentPackage.ownedMember.add(assocTool.addNavigableAggregation(concreteState, abstractState, "", nameForCurrentStateLink))
 		end
     end
     
-    method visitPseudostate(visitable : Pseudostate) : Void is do 
-        if visitable.kind == PseudostateKind.initial then
-	    	var concreteState : Class init concreteVertex(visitable)
-        else
-        	// others don't concern GOF State pattern
-        end
-        super(visitable)
-    end
-    
-    //////////////// methods used both by visitors and applyPattern ////////////////
-    
+    /**
+     * process any UML2 vertex (vertices are states, pseudo and final states).
+     * It is a factorization of the operation for states and pseudo states visits.
+     */
     operation concreteVertex(vertex : Vertex) : Class is do
     	var concreteVertex : Class init Class.new
+		
+		// add the name of the abstract state class
+		concreteVertex.name := nameForConcreteState(vertex.name)
+		concreteVertex.isAbstract := false
     	
-    	////////////////// TODO : properties and "handle()" operation
+    	// add "handle()" operation
+    	concreteVertex.ownedOperation.add(getHandleOperation(false))
     	
     	var geneTool : Generalization_Tool init Generalization_Tool.new
     	// we add a generalisation between the new concrete state and the corresponding
     	// abstract state class which is stored under the current state's region in ioTable
+    	// See Umlaut-Architecture-guide for more informations on the use of IOElementsTable
+    	// in the GoF State Pattern tool.
     	var abstractState : Class
     	abstractState ?= ioTable.getValue(vertex.container)
     	geneTool.addGeneralization(abstractState, concreteVertex)
@@ -136,10 +171,11 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
     	result := concreteVertex
     end
     
-    operation getHandleOperation() : Operation is do
+    operation getHandleOperation(isAbstract : kermeta::standard::Boolean) : Operation is do
     	// "handle()" operation
     	var handleOp : Operation init Operation.new
     	handleOp.name := nameForHandleMethod
+    	handleOp.isAbstract := isAbstract
     	result := handleOp
     end
     
@@ -147,7 +183,17 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
     	// "request()" operation
     	var requestOp : Operation init Operation.new
     	requestOp.name := nameForRequestMethod
+    	requestOp.isAbstract := false
     	result := requestOp
+    	
+    	// code of request() op => parameterized "handle()" call :
+    	//      do
+    	//         state.handle()
+    	//      end
+    	var code : Comment init Comment.new
+    	code.body := "do\n\t" + nameForCurrentStateLink + "." + nameForHandleMethod + "()\nend"
+    	code.annotatedElement.add(requestOp)
+    	currentPackage.ownedComment.add(code)
     end
     
     // prefixes & suffixes for (re)naming the elements
@@ -155,6 +201,15 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
     operation suffixForAbstractState() : kermeta::standard::String is do result := "_State" end
     operation nameForIAbstractState(name : kermeta::standard::String) : kermeta::standard::String is do
     	result := prefixForAbstractState + name + suffixForAbstractState
+    end
+    operation prefixForConcreteState() : kermeta::standard::String is do result := "ConcreteState" end
+    operation suffixForConcreteState() : kermeta::standard::String is do result := "" end
+    operation nameForConcreteState(name : kermeta::standard::String) : kermeta::standard::String is do
+    	if name != void then
+	    	result := prefixForConcreteState + name + suffixForConcreteState
+    	else	// pseudo states generaly don't have name
+	    	result := prefixForConcreteState + suffixForConcreteState
+    	end
     end
     operation nameForCurrentStateLink() : kermeta::standard::String is do result := "state" end
     operation nameForRequestMethod() : kermeta::standard::String is do result := "request" end
