@@ -72,7 +72,13 @@ class CallOnVoidTarget inherits RuntimeError {}
  * Use this exception whenyou want to forbid the access to an unimplemented operation 
  * and invite to implement it
  */
-class NotImplementedException inherits Exception {}
+class NotImplementedException inherits RuntimeError {}
+
+/** 
+ * Use this exception when user tries to add an element to a property which type is collection
+ * which has an upper bound != -1 ( ie *)
+ */
+class UpperBoundReachedError inherits RuntimeError {}
 
 /* ****************************************************************************
  * 3-Standard library related errors
