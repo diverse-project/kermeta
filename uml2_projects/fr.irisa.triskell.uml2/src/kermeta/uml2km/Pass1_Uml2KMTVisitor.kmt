@@ -34,11 +34,17 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
    		tag.name := "kdoc"
 		if visitable.annotatedElement.size > 0 then
 			visitable.annotatedElement.each{ e |
-				// only operation comments which start with "do" and finish with "end"
+/*				// only operation comments which start with "do" and finish with "end"
 				// are taken as Kermeta code for the operation body
 				if e.getMetaClass.equals(uml2::Operation)
 					and visitable.body.substring(0,2).equals("do")
 					and visitable.body.substring(visitable.body.size - 3,visitable.body.size).equals("end") then
+	    				tag.name := "km_body"
+    			end	*/
+				// only operation comments which start with '@language "kermeta"'
+				// are taken as Kermeta code for the operation body
+				if e.getMetaClass.equals(uml2::Operation)
+					and visitable.body.substring(0,18).equals("@language \"kermeta\"") then
 	    				tag.name := "km_body"
     			end
     		}

@@ -102,7 +102,7 @@ class ToolGOFStateTestCase inherits kermeta::kunit::TestCase
     	comment := model.ownedComment.select{ u | u.annotatedElement.contains(op) }.one
     	assertTrueWithMsg(comment.body != void,
     		"The comment for the 'request()' operation must have a body")
-    	assertTrueWithMsg(comment.body == "do\n\tstate.handle()\nend",
+    	assertTrueWithMsg(comment.body == "@language \"kermeta\"\ndo\n\tstate.handle()\nend",
     		"The comment for the 'request()' operation must have a correct body")
     end
     
