@@ -1,4 +1,4 @@
-/* $Id: GOFStatePatternTool.kmt,v 1.4 2006-08-17 14:49:05 vmahe Exp $
+/* $Id: GOFStatePatternTool.kmt,v 1.5 2006-08-18 12:54:13 vmahe Exp $
  * Creation date: July 6, 2006
  * License:
  * Copyright:
@@ -191,7 +191,8 @@ class GOFStatePatternTool inherits UmlTool, topdown_visitor::TopDownVisitor
     	//         state.handle()
     	//      end
     	var code : Comment init Comment.new
-    	code.body := "do\n\t" + nameForCurrentStateLink + "." + nameForHandleMethod + "()\nend"
+    	code.body := "@language \"kermeta\"\n"	// identification for containers of Kermeta code
+    	code.body.append("do\n\t" + nameForCurrentStateLink + "." + nameForHandleMethod + "()\nend")
     	code.annotatedElement.add(requestOp)
     	currentPackage.ownedComment.add(code)
     end
