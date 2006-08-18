@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.4 2006-08-09 13:44:38 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.5 2006-08-18 09:21:18 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -27,6 +27,7 @@ import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
@@ -415,6 +416,15 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					// Operation:
 					builder.current_operation.getOwnedParameter().add(res);
 				}
+				//	this is a constructor add a tag so the interpreter can recognize it and work with it
+				Tag tag = builder.struct_factory.createTag();
+				tag.setName(INITOPERATION_TAG_NAME);
+				tag.setValue(c.getName());
+				builder.current_operation.getTag().add(tag);
+				tag = builder.struct_factory.createTag();
+				tag.setName(JAVAOPERATION_TAG_NAME);
+				tag.setValue(c.getName());
+				builder.current_operation.getTag().add(tag);
 			}
 		}
 	}
@@ -548,6 +558,10 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					}
 					// Operation:
 					builder.current_operation.getOwnedParameter().add(res);
+					Tag tag = builder.struct_factory.createTag();
+					tag.setName(JAVAOPERATION_TAG_NAME);
+					tag.setValue(methods[i].getName());
+					builder.current_operation.getTag().add(tag);
 				}
 			}
 		}

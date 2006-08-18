@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass2.java,v 1.2 2006-08-09 13:44:38 dvojtise Exp $
+/* $Id: Jar2KMPass2.java,v 1.3 2006-08-18 09:21:18 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass2.java
  * License : EPL
@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Package;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 
 /**
@@ -140,6 +141,12 @@ public class Jar2KMPass2 extends Jar2KMPass {
 			c.setName(getClassName(jentry));
 			theEnclosingPackage.getOwnedTypeDefinition().add(c);
 			builder.typeDefs.put(classqname, c);
+			
+			// this is a java definition add a tag so the interpreter can recognize it and work with it
+			Tag tag = builder.struct_factory.createTag();
+			tag.setName(JARUNIT_TAG_NAME);
+			tag.setValue(builder.getUri());
+			c.getTag().add(tag);
 		}
 	}
 	

@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.4 2006-08-09 15:30:18 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.5 2006-08-18 09:21:18 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -30,6 +30,10 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 public abstract class Jar2KMPass {
 	protected JarUnit builder;
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("Jar2KM");
+	
+	final static public String JARUNIT_TAG_NAME = "IsProxyForJar";
+	final static public String INITOPERATION_TAG_NAME = "IsInitOperation";
+	final static public String JAVAOPERATION_TAG_NAME = "IsJavaOperation";
 	
 	
 	/** the constructor */

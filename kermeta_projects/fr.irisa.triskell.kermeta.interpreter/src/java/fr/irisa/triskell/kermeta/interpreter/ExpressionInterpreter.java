@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.41 2006-07-21 15:01:21 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.42 2006-08-18 09:19:35 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -51,6 +51,7 @@ import fr.irisa.triskell.kermeta.error.KermetaVisitorError;
 import fr.irisa.triskell.kermeta.exporter.kmt.KM2KMTPrettyPrinter;
 import fr.irisa.triskell.kermeta.parser.SimpleKWList;
 import fr.irisa.triskell.kermeta.runtime.FrameworkExternCommand;
+import fr.irisa.triskell.kermeta.runtime.RuntimeHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeLambdaObject;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
@@ -63,10 +64,13 @@ import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.loader.java.Jar2KMPass;
+
 import java.net.URLClassLoader;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
 import fr.irisa.triskell.kermeta.typechecker.CallableProperty;
@@ -746,6 +750,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	        return memory.getRuntimeObjectForFObject(node.getStaticEnumLiteral());
 	    }
 	    
+	    
 	    // It is a real operation / property call
 	    
 	    fr.irisa.triskell.kermeta.language.structure.Class t_target = null; // Type of the "callee"
@@ -777,7 +782,12 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 
 		// Get the feature
 	    SimpleType target_type = new SimpleType(t_target);
-	    
+	    //	  if this is a java object proxy some more initialization are needed
+	    boolean isJarProxy = ro_target.getData().containsKey("isJarProxy");
+	    /*if(RuntimeHelper.isJarProxy(target_type.getTypeDefinition())){
+	    	// this is a proxy to a jar must invoke it
+	    	throw new Error("don't know how to invoke " + node.getName()+ " on jar proxy for " + target_type);
+	    }*/
 	    if (node.getStaticOperation() == null && node.getStaticProperty() == null) {
 	    	node.getStaticOperation();
 	    	node.getStaticProperty();
@@ -816,9 +826,15 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			// Create a context for this operation call, setting self object to ro_target
 			interpreterContext.pushOperationCallFrame(ro_target, operation, parameters, node);
 			try {
-				// Resolve this operation call
-				result = (RuntimeObject)this.accept(operation.getOperation());
-				// After operation has been evaluated, pop its context
+				if(isJarProxy){
+					// invoke the java operation
+					result = invokeOperationOnProxy(operation.getOperation());
+				}
+				else{ // normal interpeter call
+					// Resolve this operation call
+					result = (RuntimeObject)this.accept(operation.getOperation());
+					// After operation has been evaluated, pop its context
+				}
 			} finally {
 			    interpreterContext.popCallFrame();
 			}
@@ -868,7 +884,49 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		
 		return result;
 	}
-    /**
+	
+	/** special code for dealing with java proxies
+	 * 
+	 * @param operation
+	 * @return
+	 */
+    protected RuntimeObject invokeOperationOnProxy(Operation node) {
+    	
+    	if (node!=null) setParent(node);
+	    RuntimeObject result = memory.voidINSTANCE;
+	    // push expression context
+	    interpreterContext.peekCallFrame().pushExpressionContext();
+	    interpreterContext.peekCallFrame().peekExpressionContext().setStatement(node.getBody());
+	    try {
+		    // if the operation is not an initialize function and the object is not initialized then fail
+	    	RuntimeObject roSelf = interpreterContext.peekCallFrame().getSelf();
+	    	if(!RuntimeHelper.isInitOperation(node) && !roSelf.getData().containsKey("javaObject")){
+	    		 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
+	    	        		"This is a proxy for a java object but this java object was not initialized",
+	    					this,
+	    					memory,
+	    					node,
+	    					null);
+	    	}
+	    	// run  the operation
+	    	// find the java object
+	    	// retreive the method
+	    	//
+	    	// TODO
+		    // Set the result
+		    result = interpreterContext.peekCallFrame().getOperationResult();
+	    	// if the operation is an initialize function
+	    	// 		use its result to set the javaObject
+		    // TODO
+	    }
+	    finally {
+		    // Pop the expressionContext
+		    interpreterContext.peekCallFrame().popExpressionContext();
+	    }
+		return result;    	
+	}
+
+	/**
      * Visit a JavaStaticCall : 
      * 		extern a::b::c.d()
      * We use java reflection to visit a JavaStaticCall.
@@ -1227,7 +1285,6 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     {
     	return getCurrentState().equals(DEBUG_TERMINATE);
     }
-	
-    
+	    
     
 }

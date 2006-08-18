@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectFactory.java,v 1.12 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: RuntimeObjectFactory.java,v 1.13 2006-08-18 09:19:35 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : GPL
@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.EList;
 
 import fr.irisa.triskell.kermeta.builder.RuntimeMemory;
 import fr.irisa.triskell.kermeta.runtime.KCoreRuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeHelper;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Integer;
@@ -216,6 +217,13 @@ public class RuntimeObjectFactory {
 	public RuntimeObject createRuntimeObjectFromClass(RuntimeObject meta_class) {
 	    createRuntimeObjectFromClass_count++;
 		RuntimeObject result = new RuntimeObject(this, meta_class);
+		if(meta_class.getData().get("kcoreObject") instanceof fr.irisa.triskell.kermeta.language.structure.Class){
+			ClassDefinition class_def = (ClassDefinition)((fr.irisa.triskell.kermeta.language.structure.Class)meta_class.getData().get("kcoreObject")).getTypeDefinition();
+			//		 if this comes from a jar unit, create it in a special way
+	        if(RuntimeHelper.isJarProxy(class_def)){
+	        	result.getData().put("isJarProxy", true);
+	        }
+		}
 //		TODO : take care of default values here ?
 		//result.setData(new Hashtable());
 		return result;
@@ -628,8 +636,13 @@ public class RuntimeObjectFactory {
         result = createRuntimeObjectFromClass(getClassClass());
         result.getProperties().put("typeDefinition", roclassdef);
         fr.irisa.triskell.kermeta.language.structure.Class fclass = struct_factory.createClass();
-        fclass.setTypeDefinition((ClassDefinition)roclassdef.getData().get("kcoreObject"));
+        fclass.setTypeDefinition(class_def);
         result.getData().put("kcoreObject", fclass);
+        
+        // if this comes from a jar unit, create it in a special way
+        if(RuntimeHelper.isJarProxy(class_def)){
+        	result.getData().put("isJarProxy", true);
+        }
         
         non_parametric_metaclass_cache.put(class_def, result);
         
