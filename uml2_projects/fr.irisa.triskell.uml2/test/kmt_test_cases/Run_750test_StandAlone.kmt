@@ -5,7 +5,7 @@
 package test_package;
 
 require kermeta
-require "750test_CloneTool_StaticDiagram.kmt"
+require "750test_CloneTool_StaticDiagram.main.kmt"
 
 using tools_tests
 
