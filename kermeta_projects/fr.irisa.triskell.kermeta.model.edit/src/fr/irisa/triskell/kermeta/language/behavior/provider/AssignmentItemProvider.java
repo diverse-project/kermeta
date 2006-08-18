@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AssignmentItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: AssignmentItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -82,8 +82,10 @@ public class AssignmentItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Assignment_isCast_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Assignment_isCast_feature", "_UI_Assignment_type"),
-				 BehaviorPackage.eINSTANCE.getAssignment_IsCast(),
+				 BehaviorPackage.Literals.ASSIGNMENT__IS_CAST,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
@@ -100,8 +102,8 @@ public class AssignmentItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getAssignment_Target());
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getAssignment_Value());
+			childrenFeatures.add(BehaviorPackage.Literals.ASSIGNMENT__TARGET);
+			childrenFeatures.add(BehaviorPackage.Literals.ASSIGNMENT__VALUE);
 		}
 		return childrenFeatures;
 	}
@@ -125,7 +127,7 @@ public class AssignmentItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Assignment");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Assignment"));
 	}
 
 	/**
@@ -173,127 +175,127 @@ public class AssignmentItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Target(),
+				(BehaviorPackage.Literals.ASSIGNMENT__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Target(),
+				(BehaviorPackage.Literals.ASSIGNMENT__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Target(),
+				(BehaviorPackage.Literals.ASSIGNMENT__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Target(),
+				(BehaviorPackage.Literals.ASSIGNMENT__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Target(),
+				(BehaviorPackage.Literals.ASSIGNMENT__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getAssignment_Value(),
+				(BehaviorPackage.Literals.ASSIGNMENT__VALUE,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
@@ -308,8 +310,8 @@ public class AssignmentItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == BehaviorPackage.eINSTANCE.getAssignment_Target() ||
-			childFeature == BehaviorPackage.eINSTANCE.getAssignment_Value();
+			childFeature == BehaviorPackage.Literals.ASSIGNMENT__TARGET ||
+			childFeature == BehaviorPackage.Literals.ASSIGNMENT__VALUE;
 
 		if (qualify) {
 			return getString
@@ -326,7 +328,7 @@ public class AssignmentItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

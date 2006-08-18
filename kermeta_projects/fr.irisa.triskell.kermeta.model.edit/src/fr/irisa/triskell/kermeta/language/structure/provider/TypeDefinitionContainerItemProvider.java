@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeDefinitionContainerItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: TypeDefinitionContainerItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -77,7 +79,7 @@ public class TypeDefinitionContainerItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition());
+			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
 		}
 		return childrenFeatures;
 	}
@@ -125,27 +127,27 @@ public class TypeDefinitionContainerItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition(),
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createEnumeration()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition(),
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createPrimitiveType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition(),
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createClassDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition(),
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createTypeDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition(),
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createModelTypeDefinition()));
 	}
 
@@ -156,7 +158,7 @@ public class TypeDefinitionContainerItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

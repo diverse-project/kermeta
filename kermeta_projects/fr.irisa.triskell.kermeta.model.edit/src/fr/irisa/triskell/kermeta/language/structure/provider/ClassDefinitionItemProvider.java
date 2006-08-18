@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassDefinitionItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: ClassDefinitionItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -86,8 +88,10 @@ public class ClassDefinitionItemProvider
 				 getResourceLocator(),
 				 getString("_UI_NamedElement_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
-				 StructurePackage.eINSTANCE.getNamedElement_Name(),
+				 StructurePackage.Literals.NAMED_ELEMENT__NAME,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -106,8 +110,10 @@ public class ClassDefinitionItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ClassDefinition_isAbstract_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ClassDefinition_isAbstract_feature", "_UI_ClassDefinition_type"),
-				 StructurePackage.eINSTANCE.getClassDefinition_IsAbstract(),
+				 StructurePackage.Literals.CLASS_DEFINITION__IS_ABSTRACT,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
@@ -126,7 +132,9 @@ public class ClassDefinitionItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ClassDefinition_superType_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ClassDefinition_superType_feature", "_UI_ClassDefinition_type"),
-				 StructurePackage.eINSTANCE.getClassDefinition_SuperType(),
+				 StructurePackage.Literals.CLASS_DEFINITION__SUPER_TYPE,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -144,10 +152,10 @@ public class ClassDefinitionItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.eINSTANCE.getGenericTypeDefinition_TypeParameter());
-			childrenFeatures.add(StructurePackage.eINSTANCE.getClassDefinition_Inv());
-			childrenFeatures.add(StructurePackage.eINSTANCE.getClassDefinition_OwnedAttribute());
-			childrenFeatures.add(StructurePackage.eINSTANCE.getClassDefinition_OwnedOperation());
+			childrenFeatures.add(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
+			childrenFeatures.add(StructurePackage.Literals.CLASS_DEFINITION__INV);
+			childrenFeatures.add(StructurePackage.Literals.CLASS_DEFINITION__OWNED_ATTRIBUTE);
+			childrenFeatures.add(StructurePackage.Literals.CLASS_DEFINITION__OWNED_OPERATION);
 		}
 		return childrenFeatures;
 	}
@@ -171,7 +179,7 @@ public class ClassDefinitionItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/ClassDefinition");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ClassDefinition"));
 	}
 
 	/**
@@ -224,22 +232,22 @@ public class ClassDefinitionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getGenericTypeDefinition_TypeParameter(),
+				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
 				 StructureFactory.eINSTANCE.createTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getClassDefinition_Inv(),
+				(StructurePackage.Literals.CLASS_DEFINITION__INV,
 				 StructureFactory.eINSTANCE.createConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getClassDefinition_OwnedAttribute(),
+				(StructurePackage.Literals.CLASS_DEFINITION__OWNED_ATTRIBUTE,
 				 StructureFactory.eINSTANCE.createProperty()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getClassDefinition_OwnedOperation(),
+				(StructurePackage.Literals.CLASS_DEFINITION__OWNED_OPERATION,
 				 StructureFactory.eINSTANCE.createOperation()));
 	}
 
@@ -254,8 +262,8 @@ public class ClassDefinitionItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == StructurePackage.eINSTANCE.getTypeContainer_ContainedType() ||
-			childFeature == StructurePackage.eINSTANCE.getGenericTypeDefinition_TypeParameter();
+			childFeature == StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE ||
+			childFeature == StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER;
 
 		if (qualify) {
 			return getString
@@ -272,7 +280,7 @@ public class ClassDefinitionItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

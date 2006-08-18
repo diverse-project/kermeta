@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: ObjectItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -79,7 +81,9 @@ public class ObjectItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Object_tag_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Object_tag_feature", "_UI_Object_type"),
-				 StructurePackage.eINSTANCE.getObject_Tag(),
+				 StructurePackage.Literals.OBJECT__TAG,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -93,7 +97,7 @@ public class ObjectItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Object");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Object"));
 	}
 
 	/**
@@ -136,7 +140,7 @@ public class ObjectItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

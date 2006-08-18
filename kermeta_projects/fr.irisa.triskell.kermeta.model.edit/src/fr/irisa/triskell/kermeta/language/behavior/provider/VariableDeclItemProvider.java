@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDeclItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: VariableDeclItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -82,8 +82,10 @@ public class VariableDeclItemProvider
 				 getResourceLocator(),
 				 getString("_UI_VariableDecl_identifier_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_VariableDecl_identifier_feature", "_UI_VariableDecl_type"),
-				 BehaviorPackage.eINSTANCE.getVariableDecl_Identifier(),
+				 BehaviorPackage.Literals.VARIABLE_DECL__IDENTIFIER,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -100,8 +102,8 @@ public class VariableDeclItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization());
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getVariableDecl_Type());
+			childrenFeatures.add(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION);
+			childrenFeatures.add(BehaviorPackage.Literals.VARIABLE_DECL__TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -125,7 +127,7 @@ public class VariableDeclItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/VariableDecl");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/VariableDecl"));
 	}
 
 	/**
@@ -175,107 +177,107 @@ public class VariableDeclItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Initialization(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getVariableDecl_Type(),
+				(BehaviorPackage.Literals.VARIABLE_DECL__TYPE,
 				 BehaviorFactory.eINSTANCE.createTypeReference()));
 	}
 
@@ -286,7 +288,7 @@ public class VariableDeclItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

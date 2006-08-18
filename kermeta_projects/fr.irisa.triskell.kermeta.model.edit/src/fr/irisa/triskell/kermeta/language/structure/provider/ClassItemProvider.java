@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ClassItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: ClassItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -84,7 +86,9 @@ public class ClassItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Class_ownedAttribute_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Class_ownedAttribute_feature", "_UI_Class_type"),
-				 StructurePackage.eINSTANCE.getClass_OwnedAttribute(),
+				 StructurePackage.Literals.CLASS__OWNED_ATTRIBUTE,
+				 false,
+				 false,
 				 false,
 				 null,
 				 null,
@@ -104,7 +108,9 @@ public class ClassItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Class_ownedOperation_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Class_ownedOperation_feature", "_UI_Class_type"),
-				 StructurePackage.eINSTANCE.getClass_OwnedOperation(),
+				 StructurePackage.Literals.CLASS__OWNED_OPERATION,
+				 false,
+				 false,
 				 false,
 				 null,
 				 null,
@@ -124,7 +130,9 @@ public class ClassItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Class_superClass_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Class_superClass_feature", "_UI_Class_type"),
-				 StructurePackage.eINSTANCE.getClass_SuperClass(),
+				 StructurePackage.Literals.CLASS__SUPER_CLASS,
+				 false,
+				 false,
 				 false,
 				 null,
 				 null,
@@ -144,7 +152,9 @@ public class ClassItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Class_isAbstract_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Class_isAbstract_feature", "_UI_Class_type"),
-				 StructurePackage.eINSTANCE.getClass_IsAbstract(),
+				 StructurePackage.Literals.CLASS__IS_ABSTRACT,
+				 false,
+				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
@@ -164,7 +174,9 @@ public class ClassItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Class_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Class_name_feature", "_UI_Class_type"),
-				 StructurePackage.eINSTANCE.getClass_Name(),
+				 StructurePackage.Literals.CLASS__NAME,
+				 false,
+				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
@@ -178,7 +190,7 @@ public class ClassItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Class");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Class"));
 	}
 
 	/**
@@ -231,7 +243,7 @@ public class ClassItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

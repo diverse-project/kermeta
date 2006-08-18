@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StringLiteralItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: StringLiteralItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -79,8 +79,10 @@ public class StringLiteralItemProvider
 				 getResourceLocator(),
 				 getString("_UI_StringLiteral_value_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_StringLiteral_value_feature", "_UI_StringLiteral_type"),
-				 BehaviorPackage.eINSTANCE.getStringLiteral_Value(),
+				 BehaviorPackage.Literals.STRING_LITERAL__VALUE,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -93,7 +95,7 @@ public class StringLiteralItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/StringLiteral");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/StringLiteral"));
 	}
 
 	/**
@@ -145,7 +147,7 @@ public class StringLiteralItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

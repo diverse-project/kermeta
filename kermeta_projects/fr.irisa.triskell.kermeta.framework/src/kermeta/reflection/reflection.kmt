@@ -1,4 +1,4 @@
-/* $Id: reflection.kmt,v 1.24 2006-08-04 13:34:04 dvojtise Exp $
+/* $Id: reflection.kmt,v 1.25 2006-08-18 09:18:20 dvojtise Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : reflection.kmt
  * License   : EPL
@@ -201,7 +201,7 @@ abstract class Property inherits MultiplicityElement
  */
 abstract class TypeContainer inherits Object
 {
-	attribute containedType : set Type[0..*]
+	attribute containedType : set Type[0..*]#typeContainer
 }
 /** 
  * Abstracts the definition of generic type definitions (i.e. type definitions that
@@ -305,6 +305,7 @@ abstract class FunctionType inherits TypeContainer, Type
 
 abstract class Type inherits Object
 {
+	reference typeContainer : TypeContainer[1..1]#containedType
 	operation isInstance(element : Object) : Boolean is abstract
 	operation isSubType(element : Type) : Boolean is abstract
 }

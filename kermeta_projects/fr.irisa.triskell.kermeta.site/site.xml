@@ -9,11 +9,9 @@
    <feature url="features/fr.irisa.triskell.kermeta.graphical.feature_0.2.2.jar" id="fr.irisa.triskell.kermeta.graphical.feature" version="0.2.2">
       <category name="Kermeta"/>
    </feature>
-   <feature url="features/fr.irisa.triskell.kermeta_0.2.2.jar" id="fr.irisa.triskell.kermeta" version="0.2.2">
+   <feature url="features/fr.irisa.triskell.kermeta_0.3.0.jar" id="fr.irisa.triskell.kermeta" version="0.3.0">
       <category name="Kermeta"/>
    </feature>
-   
-   <!-- Topcased features -->
    <feature url="features/edu.cmu.sei.osate-frontend_0.0.0.jar" id="edu.cmu.sei.osate-frontend" version="1.1.1">
       <category name="Topcased"/>
    </feature>
@@ -47,8 +45,6 @@
    <feature url="features/org.topcased.toolkit_0.8.0.jar" id="org.topcased.toolkit" version="0.8.0">
       <category name="Topcased"/>
    </feature>
-   
-   <!-- EMF features -->
    <feature url="features/org.eclipse.emf.ecore.sdo_2.1.1.jar" id="org.eclipse.emf.ecore.sdo" version="2.1.1">
       <category name="EMF"/>
    </feature>
@@ -58,32 +54,27 @@
    <feature url="features/org.eclipse.emf_2.1.2.jar" id="org.eclipse.emf_2.1.2.jar" version="2.1.2">
       <category name="EMF"/>
    </feature>
-   
-   <!-- GEF features -->
    <feature url="features/org.eclipse.gef_3.1.1.jar" id="org.eclipse.gef_3.1.1.jar" version="3.1.1">
       <category name="GEF"/>
    </feature>
-   
-   
    <category-def name="Kermeta" label="Kermeta and its MDKs">
       <description>
          provided by Triskell team
       </description>
    </category-def>
    <category-def name="Topcased" label="Topcased">
-      <description>  
-      Topcased runtime       
+      <description>
+         Topcased runtime
       </description>
-   </category-def>  
-   
-   <category-def name="EMF" label="EMF runtime (doesn't include documentation">
-      <description>         
-      EMF runtime (doesn't include documentation
+   </category-def>
+   <category-def name="EMF" label="EMF runtime (doesn&apos;t include documentation">
+      <description>
+         EMF runtime (doesn&apos;t include documentation
       </description>
-   </category-def> 
-   <category-def name="GEF" label="GEF runtime (doesn't include documentation">
-      <description>       
-      GEF runtime (doesn't include documentation  
+   </category-def>
+   <category-def name="GEF" label="GEF runtime (doesn&apos;t include documentation">
+      <description>
+         GEF runtime (doesn&apos;t include documentation
       </description>
-   </category-def> 
+   </category-def>
 </site>

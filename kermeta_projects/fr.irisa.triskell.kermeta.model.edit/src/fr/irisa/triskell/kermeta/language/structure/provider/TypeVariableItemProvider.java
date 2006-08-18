@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: TypeVariableItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -82,8 +84,10 @@ public class TypeVariableItemProvider
 				 getResourceLocator(),
 				 getString("_UI_NamedElement_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
-				 StructurePackage.eINSTANCE.getNamedElement_Name(),
+				 StructurePackage.Literals.NAMED_ELEMENT__NAME,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -102,7 +106,9 @@ public class TypeVariableItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TypeVariable_supertype_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TypeVariable_supertype_feature", "_UI_TypeVariable_type"),
-				 StructurePackage.eINSTANCE.getTypeVariable_Supertype(),
+				 StructurePackage.Literals.TYPE_VARIABLE__SUPERTYPE,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -116,7 +122,7 @@ public class TypeVariableItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/TypeVariable");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypeVariable"));
 	}
 
 	/**
@@ -168,7 +174,7 @@ public class TypeVariableItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

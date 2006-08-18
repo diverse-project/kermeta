@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumerationItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: EnumerationItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -77,7 +79,7 @@ public class EnumerationItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.eINSTANCE.getEnumeration_OwnedLiteral());
+			childrenFeatures.add(StructurePackage.Literals.ENUMERATION__OWNED_LITERAL);
 		}
 		return childrenFeatures;
 	}
@@ -89,7 +91,7 @@ public class EnumerationItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Enumeration");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Enumeration"));
 	}
 
 	/**
@@ -135,7 +137,7 @@ public class EnumerationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getEnumeration_OwnedLiteral(),
+				(StructurePackage.Literals.ENUMERATION__OWNED_LITERAL,
 				 StructureFactory.eINSTANCE.createEnumerationLiteral()));
 	}
 
@@ -146,7 +148,7 @@ public class EnumerationItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

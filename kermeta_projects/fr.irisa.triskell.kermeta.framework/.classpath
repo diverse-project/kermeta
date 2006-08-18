@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="lib/thirdparty/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/traceability.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/emf_libraries"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/fr.irisa.triskell.kermeta"/>
 	<classpathentry kind="output" path="build/class"/>
 </classpath>

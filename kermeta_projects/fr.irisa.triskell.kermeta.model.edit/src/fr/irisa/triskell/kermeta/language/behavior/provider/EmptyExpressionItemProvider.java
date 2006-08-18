@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EmptyExpressionItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: EmptyExpressionItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -66,7 +66,7 @@ public class EmptyExpressionItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/EmptyExpression");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/EmptyExpression"));
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class EmptyExpressionItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

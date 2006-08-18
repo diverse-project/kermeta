@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TagItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: TagItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -83,8 +85,10 @@ public class TagItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Tag_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Tag_name_feature", "_UI_Tag_type"),
-				 StructurePackage.eINSTANCE.getTag_Name(),
+				 StructurePackage.Literals.TAG__NAME,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -103,8 +107,10 @@ public class TagItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Tag_value_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Tag_value_feature", "_UI_Tag_type"),
-				 StructurePackage.eINSTANCE.getTag_Value(),
+				 StructurePackage.Literals.TAG__VALUE,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -123,7 +129,9 @@ public class TagItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Tag_object_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Tag_object_feature", "_UI_Tag_type"),
-				 StructurePackage.eINSTANCE.getTag_Object(),
+				 StructurePackage.Literals.TAG__OBJECT,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -137,7 +145,7 @@ public class TagItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Tag");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Tag"));
 	}
 
 	/**
@@ -190,7 +198,7 @@ public class TagItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

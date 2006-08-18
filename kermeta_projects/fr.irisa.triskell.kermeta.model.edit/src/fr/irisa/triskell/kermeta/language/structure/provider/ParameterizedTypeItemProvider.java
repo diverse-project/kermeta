@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ParameterizedTypeItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: ParameterizedTypeItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -81,7 +83,9 @@ public class ParameterizedTypeItemProvider
 				 getResourceLocator(),
 				 getString("_UI_ParameterizedType_typeDefinition_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_ParameterizedType_typeDefinition_feature", "_UI_ParameterizedType_type"),
-				 StructurePackage.eINSTANCE.getParameterizedType_TypeDefinition(),
+				 StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_DEFINITION,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -99,7 +103,7 @@ public class ParameterizedTypeItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.eINSTANCE.getParameterizedType_TypeParamBinding());
+			childrenFeatures.add(StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING);
 		}
 		return childrenFeatures;
 	}
@@ -144,7 +148,7 @@ public class ParameterizedTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getParameterizedType_TypeParamBinding(),
+				(StructurePackage.Literals.PARAMETERIZED_TYPE__TYPE_PARAM_BINDING,
 				 StructureFactory.eINSTANCE.createTypeVariableBinding()));
 	}
 
@@ -155,7 +159,7 @@ public class ParameterizedTypeItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

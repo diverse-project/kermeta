@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BlockItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: BlockItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -77,8 +77,8 @@ public class BlockItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getBlock_Statement());
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getBlock_RescueBlock());
+			childrenFeatures.add(BehaviorPackage.Literals.BLOCK__STATEMENT);
+			childrenFeatures.add(BehaviorPackage.Literals.BLOCK__RESCUE_BLOCK);
 		}
 		return childrenFeatures;
 	}
@@ -102,7 +102,7 @@ public class BlockItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Block");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Block"));
 	}
 
 	/**
@@ -146,107 +146,107 @@ public class BlockItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_Statement(),
+				(BehaviorPackage.Literals.BLOCK__STATEMENT,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getBlock_RescueBlock(),
+				(BehaviorPackage.Literals.BLOCK__RESCUE_BLOCK,
 				 BehaviorFactory.eINSTANCE.createRescue()));
 	}
 
@@ -257,7 +257,7 @@ public class BlockItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

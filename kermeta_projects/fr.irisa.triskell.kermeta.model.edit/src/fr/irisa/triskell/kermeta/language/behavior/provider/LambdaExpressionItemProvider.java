@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaExpressionItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: LambdaExpressionItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -77,8 +77,8 @@ public class LambdaExpressionItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getLambdaExpression_Parameters());
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getLambdaExpression_Body());
+			childrenFeatures.add(BehaviorPackage.Literals.LAMBDA_EXPRESSION__PARAMETERS);
+			childrenFeatures.add(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY);
 		}
 		return childrenFeatures;
 	}
@@ -102,7 +102,7 @@ public class LambdaExpressionItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/LambdaExpression");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/LambdaExpression"));
 	}
 
 	/**
@@ -146,107 +146,107 @@ public class LambdaExpressionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Parameters(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createLambdaParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaExpression_Body(),
+				(BehaviorPackage.Literals.LAMBDA_EXPRESSION__BODY,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
@@ -257,7 +257,7 @@ public class LambdaExpressionItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

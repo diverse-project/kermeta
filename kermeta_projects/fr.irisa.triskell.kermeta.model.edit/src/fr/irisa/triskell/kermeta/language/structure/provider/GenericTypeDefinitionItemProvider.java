@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: GenericTypeDefinitionItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: GenericTypeDefinitionItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -77,7 +79,7 @@ public class GenericTypeDefinitionItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.eINSTANCE.getGenericTypeDefinition_TypeParameter());
+			childrenFeatures.add(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER);
 		}
 		return childrenFeatures;
 	}
@@ -125,7 +127,7 @@ public class GenericTypeDefinitionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getGenericTypeDefinition_TypeParameter(),
+				(StructurePackage.Literals.GENERIC_TYPE_DEFINITION__TYPE_PARAMETER,
 				 StructureFactory.eINSTANCE.createTypeVariable()));
 	}
 
@@ -136,7 +138,7 @@ public class GenericTypeDefinitionItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

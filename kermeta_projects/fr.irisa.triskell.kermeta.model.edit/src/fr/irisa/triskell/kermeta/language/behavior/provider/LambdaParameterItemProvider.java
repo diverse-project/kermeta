@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LambdaParameterItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: LambdaParameterItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -82,8 +82,10 @@ public class LambdaParameterItemProvider
 				 getResourceLocator(),
 				 getString("_UI_LambdaParameter_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_LambdaParameter_name_feature", "_UI_LambdaParameter_type"),
-				 BehaviorPackage.eINSTANCE.getLambdaParameter_Name(),
+				 BehaviorPackage.Literals.LAMBDA_PARAMETER__NAME,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -100,7 +102,7 @@ public class LambdaParameterItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getLambdaParameter_Type());
+			childrenFeatures.add(BehaviorPackage.Literals.LAMBDA_PARAMETER__TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -112,7 +114,7 @@ public class LambdaParameterItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/LambdaParameter");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/LambdaParameter"));
 	}
 
 	/**
@@ -161,7 +163,7 @@ public class LambdaParameterItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLambdaParameter_Type(),
+				(BehaviorPackage.Literals.LAMBDA_PARAMETER__TYPE,
 				 BehaviorFactory.eINSTANCE.createTypeReference()));
 	}
 
@@ -172,7 +174,7 @@ public class LambdaParameterItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

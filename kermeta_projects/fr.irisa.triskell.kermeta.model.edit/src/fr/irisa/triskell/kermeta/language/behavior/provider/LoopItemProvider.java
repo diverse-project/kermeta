@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: LoopItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: LoopItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -77,9 +77,9 @@ public class LoopItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getLoop_Initialization());
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getLoop_Body());
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getLoop_StopCondition());
+			childrenFeatures.add(BehaviorPackage.Literals.LOOP__INITIALIZATION);
+			childrenFeatures.add(BehaviorPackage.Literals.LOOP__BODY);
+			childrenFeatures.add(BehaviorPackage.Literals.LOOP__STOP_CONDITION);
 		}
 		return childrenFeatures;
 	}
@@ -103,7 +103,7 @@ public class LoopItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Loop");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Loop"));
 	}
 
 	/**
@@ -148,302 +148,302 @@ public class LoopItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Initialization(),
+				(BehaviorPackage.Literals.LOOP__INITIALIZATION,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_Body(),
+				(BehaviorPackage.Literals.LOOP__BODY,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getLoop_StopCondition(),
+				(BehaviorPackage.Literals.LOOP__STOP_CONDITION,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
@@ -458,9 +458,9 @@ public class LoopItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == BehaviorPackage.eINSTANCE.getLoop_Initialization() ||
-			childFeature == BehaviorPackage.eINSTANCE.getLoop_Body() ||
-			childFeature == BehaviorPackage.eINSTANCE.getLoop_StopCondition();
+			childFeature == BehaviorPackage.Literals.LOOP__INITIALIZATION ||
+			childFeature == BehaviorPackage.Literals.LOOP__BODY ||
+			childFeature == BehaviorPackage.Literals.LOOP__STOP_CONDITION;
 
 		if (qualify) {
 			return getString
@@ -477,7 +477,7 @@ public class LoopItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

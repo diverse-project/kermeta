@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PackageItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: PackageItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -83,8 +85,10 @@ public class PackageItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Package_uri_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Package_uri_feature", "_UI_Package_type"),
-				 StructurePackage.eINSTANCE.getPackage_Uri(),
+				 StructurePackage.Literals.PACKAGE__URI,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -101,8 +105,8 @@ public class PackageItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition());
-			childrenFeatures.add(StructurePackage.eINSTANCE.getPackage_NestedPackage());
+			childrenFeatures.add(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION);
+			childrenFeatures.add(StructurePackage.Literals.PACKAGE__NESTED_PACKAGE);
 		}
 		return childrenFeatures;
 	}
@@ -126,7 +130,7 @@ public class PackageItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Package");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Package"));
 	}
 
 	/**
@@ -176,32 +180,32 @@ public class PackageItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition(),
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createEnumeration()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition(),
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createPrimitiveType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition(),
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createClassDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition(),
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createTypeDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeDefinitionContainer_OwnedTypeDefinition(),
+				(StructurePackage.Literals.TYPE_DEFINITION_CONTAINER__OWNED_TYPE_DEFINITION,
 				 StructureFactory.eINSTANCE.createModelTypeDefinition()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getPackage_NestedPackage(),
+				(StructurePackage.Literals.PACKAGE__NESTED_PACKAGE,
 				 StructureFactory.eINSTANCE.createPackage()));
 	}
 
@@ -212,7 +216,7 @@ public class PackageItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

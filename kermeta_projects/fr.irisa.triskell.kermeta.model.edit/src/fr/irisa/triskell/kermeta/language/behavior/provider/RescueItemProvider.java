@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RescueItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: RescueItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -84,8 +84,10 @@ public class RescueItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Rescue_exceptionName_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Rescue_exceptionName_feature", "_UI_Rescue_type"),
-				 BehaviorPackage.eINSTANCE.getRescue_ExceptionName(),
+				 BehaviorPackage.Literals.RESCUE__EXCEPTION_NAME,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -102,8 +104,8 @@ public class RescueItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getRescue_Body());
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getRescue_ExceptionType());
+			childrenFeatures.add(BehaviorPackage.Literals.RESCUE__BODY);
+			childrenFeatures.add(BehaviorPackage.Literals.RESCUE__EXCEPTION_TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -127,7 +129,7 @@ public class RescueItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Rescue");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Rescue"));
 	}
 
 	/**
@@ -177,107 +179,107 @@ public class RescueItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_Body(),
+				(BehaviorPackage.Literals.RESCUE__BODY,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getRescue_ExceptionType(),
+				(BehaviorPackage.Literals.RESCUE__EXCEPTION_TYPE,
 				 BehaviorFactory.eINSTANCE.createTypeReference()));
 	}
 
@@ -288,7 +290,7 @@ public class RescueItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

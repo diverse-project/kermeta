@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallFeatureItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: CallFeatureItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -83,8 +83,10 @@ public class CallFeatureItemProvider
 				 getResourceLocator(),
 				 getString("_UI_CallFeature_isAtpre_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_CallFeature_isAtpre_feature", "_UI_CallFeature_type"),
-				 BehaviorPackage.eINSTANCE.getCallFeature_IsAtpre(),
+				 BehaviorPackage.Literals.CALL_FEATURE__IS_ATPRE,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
@@ -103,7 +105,9 @@ public class CallFeatureItemProvider
 				 getResourceLocator(),
 				 getString("_UI_CallFeature_staticProperty_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_CallFeature_staticProperty_feature", "_UI_CallFeature_type"),
-				 BehaviorPackage.eINSTANCE.getCallFeature_StaticProperty(),
+				 BehaviorPackage.Literals.CALL_FEATURE__STATIC_PROPERTY,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -123,7 +127,9 @@ public class CallFeatureItemProvider
 				 getResourceLocator(),
 				 getString("_UI_CallFeature_staticOperation_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_CallFeature_staticOperation_feature", "_UI_CallFeature_type"),
-				 BehaviorPackage.eINSTANCE.getCallFeature_StaticOperation(),
+				 BehaviorPackage.Literals.CALL_FEATURE__STATIC_OPERATION,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -143,7 +149,9 @@ public class CallFeatureItemProvider
 				 getResourceLocator(),
 				 getString("_UI_CallFeature_staticEnumLiteral_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_CallFeature_staticEnumLiteral_feature", "_UI_CallFeature_type"),
-				 BehaviorPackage.eINSTANCE.getCallFeature_StaticEnumLiteral(),
+				 BehaviorPackage.Literals.CALL_FEATURE__STATIC_ENUM_LITERAL,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -161,7 +169,7 @@ public class CallFeatureItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getCallFeature_Target());
+			childrenFeatures.add(BehaviorPackage.Literals.CALL_FEATURE__TARGET);
 		}
 		return childrenFeatures;
 	}
@@ -173,7 +181,7 @@ public class CallFeatureItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/CallFeature");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/CallFeature"));
 	}
 
 	/**
@@ -222,102 +230,102 @@ public class CallFeatureItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getCallFeature_Target(),
+				(BehaviorPackage.Literals.CALL_FEATURE__TARGET,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
@@ -332,8 +340,8 @@ public class CallFeatureItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == BehaviorPackage.eINSTANCE.getCallExpression_Parameters() ||
-			childFeature == BehaviorPackage.eINSTANCE.getCallFeature_Target();
+			childFeature == BehaviorPackage.Literals.CALL_EXPRESSION__PARAMETERS ||
+			childFeature == BehaviorPackage.Literals.CALL_FEATURE__TARGET;
 
 		if (qualify) {
 			return getString
@@ -350,7 +358,7 @@ public class CallFeatureItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

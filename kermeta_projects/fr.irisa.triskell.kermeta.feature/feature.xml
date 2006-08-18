@@ -2,7 +2,7 @@
 <feature
       id="fr.irisa.triskell.kermeta"
       label="Kermeta Workbench"
-      version="0.2.2"
+      version="0.3.0"
       provider-name="IRISA/INRIA"
       image="images/kmt_32.gif">
    <install-handler/>
@@ -75,40 +75,40 @@ GPL license.
          id="fr.irisa.triskell.kermeta.runner"
          download-size="360"
          install-size="700"
-         version="0.2.2"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta"
          download-size="2500"
          install-size="4570"
-         version="0.2.2"/>
+         version="0.0.0"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.texteditor"
          download-size="200"
          install-size="1400"
-         version="0.2.2"/>
+         version="0.0.0"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.touchnavigator"
          download-size="200"
          install-size="200"
-         version="0.0.2"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.model.edit"
          download-size="430"
          install-size="430"
-         version="0.2.2"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin
          id="fr.irisa.triskell.kermeta.documentation"
          download-size="2837"
          install-size="2837"
-         version="0.2.2"
+         version="0.0.0"
          unpack="false"/>
 
    <plugin

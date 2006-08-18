@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallResultItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: CallResultItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -68,7 +68,7 @@ public class CallResultItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/CallResult");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/CallResult"));
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class CallResultItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

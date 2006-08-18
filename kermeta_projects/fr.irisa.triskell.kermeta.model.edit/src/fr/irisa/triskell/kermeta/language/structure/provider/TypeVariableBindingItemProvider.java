@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeVariableBindingItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: TypeVariableBindingItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -79,7 +81,9 @@ public class TypeVariableBindingItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TypeVariableBinding_variable_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TypeVariableBinding_variable_feature", "_UI_TypeVariableBinding_type"),
-				 StructurePackage.eINSTANCE.getTypeVariableBinding_Variable(),
+				 StructurePackage.Literals.TYPE_VARIABLE_BINDING__VARIABLE,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -99,7 +103,9 @@ public class TypeVariableBindingItemProvider
 				 getResourceLocator(),
 				 getString("_UI_TypeVariableBinding_type_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_TypeVariableBinding_type_feature", "_UI_TypeVariableBinding_type"),
-				 StructurePackage.eINSTANCE.getTypeVariableBinding_Type(),
+				 StructurePackage.Literals.TYPE_VARIABLE_BINDING__TYPE,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -113,7 +119,7 @@ public class TypeVariableBindingItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/TypeVariableBinding");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypeVariableBinding"));
 	}
 
 	/**
@@ -156,7 +162,7 @@ public class TypeVariableBindingItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

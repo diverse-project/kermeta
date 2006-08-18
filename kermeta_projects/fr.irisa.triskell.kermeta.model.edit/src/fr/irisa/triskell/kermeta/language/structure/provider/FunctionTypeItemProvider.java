@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionTypeItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: FunctionTypeItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -79,7 +81,9 @@ public class FunctionTypeItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FunctionType_left_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FunctionType_left_feature", "_UI_FunctionType_type"),
-				 StructurePackage.eINSTANCE.getFunctionType_Left(),
+				 StructurePackage.Literals.FUNCTION_TYPE__LEFT,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -99,7 +103,9 @@ public class FunctionTypeItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FunctionType_right_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FunctionType_right_feature", "_UI_FunctionType_type"),
-				 StructurePackage.eINSTANCE.getFunctionType_Right(),
+				 StructurePackage.Literals.FUNCTION_TYPE__RIGHT,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -113,7 +119,7 @@ public class FunctionTypeItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/FunctionType");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FunctionType"));
 	}
 
 	/**
@@ -156,7 +162,7 @@ public class FunctionTypeItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

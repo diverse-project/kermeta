@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ModelTypeItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: ModelTypeItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -68,7 +70,7 @@ public class ModelTypeItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/ModelType");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ModelType"));
 	}
 
 	/**
@@ -111,7 +113,7 @@ public class ModelTypeItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: MultiplicityElementItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: MultiplicityElementItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -84,8 +86,10 @@ public class MultiplicityElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_MultiplicityElement_isOrdered_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_MultiplicityElement_isOrdered_feature", "_UI_MultiplicityElement_type"),
-				 StructurePackage.eINSTANCE.getMultiplicityElement_IsOrdered(),
+				 StructurePackage.Literals.MULTIPLICITY_ELEMENT__IS_ORDERED,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
@@ -104,8 +108,10 @@ public class MultiplicityElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_MultiplicityElement_isUnique_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_MultiplicityElement_isUnique_feature", "_UI_MultiplicityElement_type"),
-				 StructurePackage.eINSTANCE.getMultiplicityElement_IsUnique(),
+				 StructurePackage.Literals.MULTIPLICITY_ELEMENT__IS_UNIQUE,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
@@ -124,8 +130,10 @@ public class MultiplicityElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_MultiplicityElement_lower_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_MultiplicityElement_lower_feature", "_UI_MultiplicityElement_type"),
-				 StructurePackage.eINSTANCE.getMultiplicityElement_Lower(),
+				 StructurePackage.Literals.MULTIPLICITY_ELEMENT__LOWER,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
@@ -144,8 +152,10 @@ public class MultiplicityElementItemProvider
 				 getResourceLocator(),
 				 getString("_UI_MultiplicityElement_upper_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_MultiplicityElement_upper_feature", "_UI_MultiplicityElement_type"),
-				 StructurePackage.eINSTANCE.getMultiplicityElement_Upper(),
+				 StructurePackage.Literals.MULTIPLICITY_ELEMENT__UPPER,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
@@ -158,7 +168,7 @@ public class MultiplicityElementItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/MultiplicityElement");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/MultiplicityElement"));
 	}
 
 	/**
@@ -213,7 +223,7 @@ public class MultiplicityElementItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

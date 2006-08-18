@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ConditionalItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: ConditionalItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -77,9 +77,9 @@ public class ConditionalItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getConditional_ThenBody());
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getConditional_ElseBody());
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getConditional_Condition());
+			childrenFeatures.add(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY);
+			childrenFeatures.add(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY);
+			childrenFeatures.add(BehaviorPackage.Literals.CONDITIONAL__CONDITION);
 		}
 		return childrenFeatures;
 	}
@@ -103,7 +103,7 @@ public class ConditionalItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Conditional");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Conditional"));
 	}
 
 	/**
@@ -148,302 +148,302 @@ public class ConditionalItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ThenBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__THEN_BODY,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_ElseBody(),
+				(BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getConditional_Condition(),
+				(BehaviorPackage.Literals.CONDITIONAL__CONDITION,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
@@ -458,9 +458,9 @@ public class ConditionalItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == BehaviorPackage.eINSTANCE.getConditional_ThenBody() ||
-			childFeature == BehaviorPackage.eINSTANCE.getConditional_ElseBody() ||
-			childFeature == BehaviorPackage.eINSTANCE.getConditional_Condition();
+			childFeature == BehaviorPackage.Literals.CONDITIONAL__THEN_BODY ||
+			childFeature == BehaviorPackage.Literals.CONDITIONAL__ELSE_BODY ||
+			childFeature == BehaviorPackage.Literals.CONDITIONAL__CONDITION;
 
 		if (qualify) {
 			return getString
@@ -477,7 +477,7 @@ public class ConditionalItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JavaStaticCallItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: JavaStaticCallItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -81,8 +81,10 @@ public class JavaStaticCallItemProvider
 				 getResourceLocator(),
 				 getString("_UI_JavaStaticCall_jclass_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_JavaStaticCall_jclass_feature", "_UI_JavaStaticCall_type"),
-				 BehaviorPackage.eINSTANCE.getJavaStaticCall_Jclass(),
+				 BehaviorPackage.Literals.JAVA_STATIC_CALL__JCLASS,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -101,8 +103,10 @@ public class JavaStaticCallItemProvider
 				 getResourceLocator(),
 				 getString("_UI_JavaStaticCall_jmethod_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_JavaStaticCall_jmethod_feature", "_UI_JavaStaticCall_type"),
-				 BehaviorPackage.eINSTANCE.getJavaStaticCall_Jmethod(),
+				 BehaviorPackage.Literals.JAVA_STATIC_CALL__JMETHOD,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -119,7 +123,7 @@ public class JavaStaticCallItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters());
+			childrenFeatures.add(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS);
 		}
 		return childrenFeatures;
 	}
@@ -131,7 +135,7 @@ public class JavaStaticCallItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/JavaStaticCall");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/JavaStaticCall"));
 	}
 
 	/**
@@ -181,102 +185,102 @@ public class JavaStaticCallItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getJavaStaticCall_Parameters(),
+				(BehaviorPackage.Literals.JAVA_STATIC_CALL__PARAMETERS,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
@@ -287,7 +291,7 @@ public class JavaStaticCallItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

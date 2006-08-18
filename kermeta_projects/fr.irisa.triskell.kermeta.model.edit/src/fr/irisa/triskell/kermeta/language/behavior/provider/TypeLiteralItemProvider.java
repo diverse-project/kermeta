@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypeLiteralItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: TypeLiteralItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -75,7 +75,7 @@ public class TypeLiteralItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BehaviorPackage.eINSTANCE.getTypeLiteral_Typeref());
+			childrenFeatures.add(BehaviorPackage.Literals.TYPE_LITERAL__TYPEREF);
 		}
 		return childrenFeatures;
 	}
@@ -87,7 +87,7 @@ public class TypeLiteralItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/TypeLiteral");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypeLiteral"));
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class TypeLiteralItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BehaviorPackage.eINSTANCE.getTypeLiteral_Typeref(),
+				(BehaviorPackage.Literals.TYPE_LITERAL__TYPEREF,
 				 BehaviorFactory.eINSTANCE.createTypeReference()));
 	}
 
@@ -141,7 +141,7 @@ public class TypeLiteralItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

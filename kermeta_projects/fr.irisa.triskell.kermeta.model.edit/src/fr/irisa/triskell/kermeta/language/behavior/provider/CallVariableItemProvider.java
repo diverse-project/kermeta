@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: CallVariableItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: CallVariableItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -68,7 +68,7 @@ public class CallVariableItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/CallVariable");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/CallVariable"));
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class CallVariableItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

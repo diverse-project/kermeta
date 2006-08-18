@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: IntegerLiteralItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: IntegerLiteralItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
@@ -79,8 +79,10 @@ public class IntegerLiteralItemProvider
 				 getResourceLocator(),
 				 getString("_UI_IntegerLiteral_value_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_IntegerLiteral_value_feature", "_UI_IntegerLiteral_type"),
-				 BehaviorPackage.eINSTANCE.getIntegerLiteral_Value(),
+				 BehaviorPackage.Literals.INTEGER_LITERAL__VALUE,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
@@ -93,7 +95,7 @@ public class IntegerLiteralItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/IntegerLiteral");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/IntegerLiteral"));
 	}
 
 	/**
@@ -143,7 +145,7 @@ public class IntegerLiteralItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

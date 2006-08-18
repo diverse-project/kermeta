@@ -2,12 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: OperationItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: OperationItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -89,8 +91,10 @@ public class OperationItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Operation_isAbstract_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_isAbstract_feature", "_UI_Operation_type"),
-				 StructurePackage.eINSTANCE.getOperation_IsAbstract(),
+				 StructurePackage.Literals.OPERATION__IS_ABSTRACT,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
@@ -109,7 +113,9 @@ public class OperationItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Operation_raisedException_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_raisedException_feature", "_UI_Operation_type"),
-				 StructurePackage.eINSTANCE.getOperation_RaisedException(),
+				 StructurePackage.Literals.OPERATION__RAISED_EXCEPTION,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -129,7 +135,9 @@ public class OperationItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Operation_superOperation_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_superOperation_feature", "_UI_Operation_type"),
-				 StructurePackage.eINSTANCE.getOperation_SuperOperation(),
+				 StructurePackage.Literals.OPERATION__SUPER_OPERATION,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -149,7 +157,9 @@ public class OperationItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Operation_typeParameter_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Operation_typeParameter_feature", "_UI_Operation_type"),
-				 StructurePackage.eINSTANCE.getOperation_TypeParameter(),
+				 StructurePackage.Literals.OPERATION__TYPE_PARAMETER,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -167,10 +177,10 @@ public class OperationItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.eINSTANCE.getOperation_OwnedParameter());
-			childrenFeatures.add(StructurePackage.eINSTANCE.getOperation_Pre());
-			childrenFeatures.add(StructurePackage.eINSTANCE.getOperation_Post());
-			childrenFeatures.add(StructurePackage.eINSTANCE.getOperation_Body());
+			childrenFeatures.add(StructurePackage.Literals.OPERATION__OWNED_PARAMETER);
+			childrenFeatures.add(StructurePackage.Literals.OPERATION__PRE);
+			childrenFeatures.add(StructurePackage.Literals.OPERATION__POST);
+			childrenFeatures.add(StructurePackage.Literals.OPERATION__BODY);
 		}
 		return childrenFeatures;
 	}
@@ -194,7 +204,7 @@ public class OperationItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Operation");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Operation"));
 	}
 
 	/**
@@ -246,117 +256,117 @@ public class OperationItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_OwnedParameter(),
+				(StructurePackage.Literals.OPERATION__OWNED_PARAMETER,
 				 StructureFactory.eINSTANCE.createParameter()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Pre(),
+				(StructurePackage.Literals.OPERATION__PRE,
 				 StructureFactory.eINSTANCE.createConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Post(),
+				(StructurePackage.Literals.OPERATION__POST,
 				 StructureFactory.eINSTANCE.createConstraint()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getOperation_Body(),
+				(StructurePackage.Literals.OPERATION__BODY,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
@@ -371,8 +381,8 @@ public class OperationItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == StructurePackage.eINSTANCE.getOperation_Pre() ||
-			childFeature == StructurePackage.eINSTANCE.getOperation_Post();
+			childFeature == StructurePackage.Literals.OPERATION__PRE ||
+			childFeature == StructurePackage.Literals.OPERATION__POST;
 
 		if (qualify) {
 			return getString
@@ -389,7 +399,7 @@ public class OperationItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

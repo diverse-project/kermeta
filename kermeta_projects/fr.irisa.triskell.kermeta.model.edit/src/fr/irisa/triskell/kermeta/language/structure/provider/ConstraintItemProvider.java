@@ -9,6 +9,8 @@ package fr.irisa.triskell.kermeta.language.structure.provider;
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
 
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
+
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
@@ -84,8 +86,10 @@ public class ConstraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Constraint_stereotype_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Constraint_stereotype_feature", "_UI_Constraint_type"),
-				 StructurePackage.eINSTANCE.getConstraint_Stereotype(),
+				 StructurePackage.Literals.CONSTRAINT__STEREOTYPE,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -104,8 +108,10 @@ public class ConstraintItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Constraint_language_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Constraint_language_feature", "_UI_Constraint_type"),
-				 StructurePackage.eINSTANCE.getConstraint_Language(),
+				 StructurePackage.Literals.CONSTRAINT__LANGUAGE,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -122,7 +128,7 @@ public class ConstraintItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.eINSTANCE.getConstraint_Body());
+			childrenFeatures.add(StructurePackage.Literals.CONSTRAINT__BODY);
 		}
 		return childrenFeatures;
 	}
@@ -134,7 +140,7 @@ public class ConstraintItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Constraint");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Constraint"));
 	}
 
 	/**
@@ -184,102 +190,102 @@ public class ConstraintItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createAssignment()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createBlock()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallFeature()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallSuperOperation()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallResult()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createCallValue()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createConditional()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createRaise()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createEmptyExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createJavaStaticCall()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createLambdaExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createIntegerLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createStringLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createBooleanLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createTypeLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createVoidLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createLoop()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createSelfExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getConstraint_Body(),
+				(StructurePackage.Literals.CONSTRAINT__BODY,
 				 BehaviorFactory.eINSTANCE.createVariableDecl()));
 	}
 
@@ -290,7 +296,7 @@ public class ConstraintItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }

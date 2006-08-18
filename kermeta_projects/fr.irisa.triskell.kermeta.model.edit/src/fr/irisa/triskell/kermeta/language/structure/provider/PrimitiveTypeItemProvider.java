@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: PrimitiveTypeItemProvider.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: PrimitiveTypeItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
+
+import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
 
@@ -81,7 +83,9 @@ public class PrimitiveTypeItemProvider
 				 getResourceLocator(),
 				 getString("_UI_PrimitiveType_instanceType_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_PrimitiveType_instanceType_feature", "_UI_PrimitiveType_type"),
-				 StructurePackage.eINSTANCE.getPrimitiveType_InstanceType(),
+				 StructurePackage.Literals.PRIMITIVE_TYPE__INSTANCE_TYPE,
+				 true,
+				 false,
 				 true,
 				 null,
 				 null,
@@ -99,7 +103,7 @@ public class PrimitiveTypeItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(StructurePackage.eINSTANCE.getTypeContainer_ContainedType());
+			childrenFeatures.add(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -111,7 +115,7 @@ public class PrimitiveTypeItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/PrimitiveType");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/PrimitiveType"));
 	}
 
 	/**
@@ -157,47 +161,47 @@ public class PrimitiveTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeContainer_ContainedType(),
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeContainer_ContainedType(),
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createClass()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeContainer_ContainedType(),
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createEnumeration()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeContainer_ContainedType(),
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createPrimitiveType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeContainer_ContainedType(),
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createTypeVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeContainer_ContainedType(),
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createProductType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeContainer_ContainedType(),
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createFunctionType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeContainer_ContainedType(),
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createVoidType()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(StructurePackage.eINSTANCE.getTypeContainer_ContainedType(),
+				(StructurePackage.Literals.TYPE_CONTAINER__CONTAINED_TYPE,
 				 StructureFactory.eINSTANCE.createModelType()));
 	}
 
@@ -208,7 +212,7 @@ public class PrimitiveTypeItemProvider
 	 * @generated
 	 */
 	public ResourceLocator getResourceLocator() {
-		return KermetaEditPlugin.INSTANCE;
+		return Kermeta_javaEditPlugin.INSTANCE;
 	}
 
 }
