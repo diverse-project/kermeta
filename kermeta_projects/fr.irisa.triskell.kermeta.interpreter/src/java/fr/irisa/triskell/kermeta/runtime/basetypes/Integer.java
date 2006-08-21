@@ -1,4 +1,4 @@
-/* $Id: Integer.java,v 1.7 2005-08-30 14:26:13 zdrey Exp $ 
+/* $Id: Integer.java,v 1.8 2006-08-21 08:56:01 zdrey Exp $ 
  * Implementation of Kermeta base type Integer 
  */
 
@@ -13,20 +13,19 @@ import fr.irisa.triskell.kermeta.runtime.factory.RuntimeObjectFactory;
 /**
  * Implementation of Integer methods for kermeta 
  * @author Franck Fleurey
- * @author Zoé Drey
  */
 public class Integer {
     
-	// Implementation of method compareTo called as :
-	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::compareTo(other)
+	/** Implementation of method compareTo called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::compareTo(other)*/
 	public static RuntimeObject compareTo(RuntimeObject self, RuntimeObject param0) {
 		RuntimeObject result = self.getFactory().createObjectFromClassName("kermeta::standard::Integer");
 		Integer.setValue(result, ((java.lang.Integer)self.getData().get("NumericValue")).compareTo((java.lang.Integer)param0.getData().get("NumericValue")));
 		return result;
 	}
 
-	// Implementation of method equals called as :
-	// extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::equals(element)
+	/** Implementation of method equals called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::basetypes::Integer::equals(element) */
 	public static RuntimeObject equals(RuntimeObject self, RuntimeObject param0) {
 		if(getValue(self)==getValue(param0)) return self.getFactory().getMemory().trueINSTANCE;
 		else return self.getFactory().getMemory().falseINSTANCE;

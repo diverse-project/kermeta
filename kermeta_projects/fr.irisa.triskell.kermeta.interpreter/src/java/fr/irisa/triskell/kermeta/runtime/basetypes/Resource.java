@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.6 2006-02-15 10:54:06 dvojtise Exp $
+/* $Id: Resource.java,v 1.7 2006-08-21 08:56:01 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : GPL
@@ -51,7 +51,8 @@ public class Resource {
      * @param mmUri the uri of the Ecore meta-model of which EMF model is an 
      *        instance; it can be an empty string. In such a case, the meta model uri
      * 		  is retrieved from the model.
-     * @param resourceType the resource type ("EMF", "MDR")
+     * @param resourceType the resource type represented as a String (precisely, 
+     * a RuntimeObject embedding a String) ("EMF", "MDR")
      * @param emptyInstances the runtimeObject representing the collection of instances
      * @param cmap the content map pre-initialized in kermeta source code.
      * of the EMF Model, once loaded

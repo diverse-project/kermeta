@@ -1,4 +1,4 @@
-/* $Id: String.java,v 1.6 2005-10-14 14:58:57 dvojtise Exp $
+/* $Id: String.java,v 1.7 2006-08-21 08:56:01 zdrey Exp $
 * Project : Kermeta interpreter
 * File : String.java
 * License : EPL
@@ -103,7 +103,6 @@ public class String {
 	 * @param value
 	 */
 	public static void setValue(RuntimeObject str, java.lang.String value) {
-	    
 		// DVK : removed the replace all,
 		// I don't know why string should be transformed here
 		// if this is for the parser, then the parser must do it
