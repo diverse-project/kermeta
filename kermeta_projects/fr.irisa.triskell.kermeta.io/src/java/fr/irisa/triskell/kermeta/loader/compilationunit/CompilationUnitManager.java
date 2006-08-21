@@ -1,4 +1,4 @@
-/* $Id: CompilationUnitManager.java,v 1.1 2006-05-05 12:40:46 zdrey Exp $
+/* $Id: CompilationUnitManager.java,v 1.2 2006-08-21 09:06:41 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KermetaUnitManager.java
  * License    : EPL
@@ -17,7 +17,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+/*
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -40,9 +40,10 @@ import fr.irisa.triskell.kermeta.compilationunit.impl.CompilationunitPackageImpl
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-
+*/
 
 /**
+ * FIXME : SOrry for the big comment, but this code is unfinished. Either removal or completion required :]
  * This class is intended to manage whole the kermeta units, represented as EMF objects in memory, that
  * gather any necessary information of the model (kermeta program) to be interpreted correctly, by "optimizing"
  * the load/unload/reload/typecheck process, executing them only when useful.
@@ -54,38 +55,38 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
  */
 public class CompilationUnitManager {
 
-	public static final String KMCU_FILE_EXTENSION = ".kmcu";
+	/*public static final String KMCU_FILE_EXTENSION = ".kmcu";
 	public static final String KM_FILE_EXTENSION = ".km";
 	public static final String KMT_FILE_EXTENSION = ".kmt";
 	
-	/** The current relative path, used to know according which edited file the required uri
-	 * must be resolved. */
+	*//** The current relative path, used to know according which edited file the required uri
+	 * must be resolved. *//*
 	protected String relativePath; 
-	/** The uri of the file that is being edited */
+	*//** The uri of the file that is being edited *//*
 	protected String currentKermetaFileURI;
 	
-	/** A resource set of KermetaUnit EMF instances. */
+	*//** A resource set of KermetaUnit EMF instances. *//*
 	protected ResourceSet resourceSet;
 	
-	/**
+	*//**
 	 * CompilationUnitBuilder 
-	 */
+	 *//*
 	CompilationUnitBuilder builder; 
 	
-	/** 
+	*//** 
 	 * Hashtable which key is an (absolute?) URI of the .km/.kmt file that has to be compiled
 	 * and value is the URI of the associated compilationUnit (.kmcu file).
-	 */
+	 *//*
 	protected Hashtable<String, String> map_km2kmcu;
-	/** the inverted representation of map_km2kmcu*/
+	*//** the inverted representation of map_km2kmcu*//*
 	protected Hashtable<String, String> map_kmcu2km;
 	
 	protected Hashtable<KermetaUnit, CompilationUnit> MapKermetaUnit2CompilationUnit;
 	
-	/**
+	*//**
 	 * Main for testing!
 	 * 
-	 */
+	 *//*
 	public static void main(String[] argv)
 	{
 		
@@ -102,9 +103,9 @@ public class CompilationUnitManager {
 		// Get the directory of current file for relative paths
 		CompilationUnitManager manager = new CompilationUnitManager();
 		URI km_u2 = manager.resolveURI(km_uri_test, "");
-/*
+
 		URI km_u4 = manager.resolveURI(km_uri4, "");
-		URI km_u5 = manager.resolveURI(km_uri5, "");*/
+		URI km_u5 = manager.resolveURI(km_uri5, "");
 		//System.out.println("getURI Fragment :  " + u2.path());
 		manager.relativePath = root_uri;
 		manager.currentKermetaFileURI = km_uri_test;
@@ -113,10 +114,10 @@ public class CompilationUnitManager {
 		System.err.println("...Done!");
 	}
 	
-	/**
+	*//**
 	 * Constructor.
 	 * Initialize a resource set
-	 */
+	 *//*
 	public CompilationUnitManager()
 	{	// "kmcu"?
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("xmi",new XMIResourceFactoryImpl());
@@ -145,12 +146,12 @@ public class CompilationUnitManager {
 		return resource;
 	}
 	
-	/**
+	*//**
 	 * Get the Kermeta file corresponding to the CompilationUnit given its uri. Used
 	 * to find the Kermeta files that depend on the returned one.
 	 * @param kmcu_uri_str
 	 * @return
-	 */
+	 *//*
 	public String getKMFileForCompileUnit(String kmcu_uri_str)
 	{
 		String str = null;
@@ -163,10 +164,10 @@ public class CompilationUnitManager {
 		return str;
 	}
 
-	/**
+	*//**
 	 * Create all the compilation unit resources. 
 	 * This methods build all the compilation units on which the first one
-	 */
+	 *//*
 	public void createAllCompilationUnitResources(String km_file_uri)
 	{
 		// Build a new compilation unit for the given kermeta file.
@@ -186,11 +187,11 @@ public class CompilationUnitManager {
 		}
 	}
 	
-	/**
+	*//**
 	 * Creates a compilation unit from scratch. Try to load an existing one (and then, clear it)
 	 * and if it does not exist, create a new one.
 	 * This method is called by createAllCompilationUnitResources
-	 */
+	 *//*
 	public Resource createCompilationUnitResourceForKMFile(String km_uri_str)
 	{
 		// Get the kmcu_uri that would correspond to this km_uri:
@@ -219,12 +220,12 @@ public class CompilationUnitManager {
 	}
 	
 	
-	/**
+	*//**
 	 * Loads a whole KermetaUnit given its URI (as a String, ideally "platform:/resource")
 	 * If it does not exists, do not create it, and return null.
 	 * @return the resource of the compilation unit for the given Kermeta file, or null if it does not
 	 * exist yet.
-	 */
+	 *//*
 	public Resource loadCompileUnitForKMFile(String km_uri_str)
 	{
 		String kmcu_uri_str = getKMCUPathForKMPath(km_uri_str);
@@ -240,7 +241,7 @@ public class CompilationUnitManager {
 		return resourceSet.getResource(resolveURI(km_uri, ""), false)!=null;
 	}
 	
-	/*
+	
 	 * Update a model element in the KermetaUnit given by its URI...
 	 * In fact, it should be done automatically if we have a permanent access to a resource....
 	 *
@@ -248,20 +249,20 @@ public class CompilationUnitManager {
 	public void updateModelElement(EObject elementToUpdate, String km_uri)
 	{
 		
-	}*/
+	}
 	
-	/*
+	
 	 * 
 	 *  HELPER METHODS TO LOAD CORRECTLY ALL THE CHANGED RESOURCES.
 	 * 
 	 * 
-	 */
+	 
 	
 	
-	/**
+	*//**
 	 * create a compilation unit for all the km file specified in the given file_list.
 	 * (Used for example by a kermeta project (project in the Eclipse meaning))
-	 */
+	 *//*
 	public void createCompileUnitForKMFileList(List<String> flist)
 	{
 		for (String km_uri_str : flist) {
@@ -269,10 +270,10 @@ public class CompilationUnitManager {
 		}
 	}
 	
-	/**
+	*//**
 	 * Create is not the best word.
 	 * Find all the 
-	 */
+	 *//*
 	public void createAllRequiredCompileUnits(String kmcu_uri)
 	{
 		// By the way, build all the depending compilation units!
@@ -283,13 +284,13 @@ public class CompilationUnitManager {
 
 	}
 	
-	/**
+	*//**
 	 * Find the Compile Unit resources that depends on the resource located at the given uri.
 	 * Returns an empty list if no resources depend on it.
 	 * @param the URI (must be a "canonical" one -> TODO!)
 	 * @return an empty list if no resources depend on it, otherwhise the list of 
 	 * the uris of the depending resources.
-	 */
+	 *//*
 	protected List<Resource> findDependingResourcesFromKMCU(String kmcu_uri)
 	{
 		// Get the km uri for the given kmcu_uri
@@ -311,12 +312,12 @@ public class CompilationUnitManager {
 		return result;
 	}
 	
-	/**
+	*//**
 	 * 
 	 * @param path
 	 * @param paths
 	 * @return true if the given path is contained in the list of paths.
-	 */
+	 *//*
 	protected boolean isContainedPathInPathList(String path, List<String> paths)
 	{
 		boolean eq = false;
@@ -326,12 +327,12 @@ public class CompilationUnitManager {
 		return eq;
 	}
 	
-	/**
+	*//**
 	 * 
 	 * @param path1
 	 * @param path2
 	 * @return
-	 */
+	 *//*
 	protected boolean comparePaths(String path1, String path2)
 	{
 		System.out.println("-> compare: '" + resolveURI(path1, relativePath) + "' to '" + path2 + "' (resolved : " + resolveURI(path2,relativePath) + ")");
@@ -343,9 +344,9 @@ public class CompilationUnitManager {
 		// CommonPlugin.asLocalURI()
 	}
 	
-	/**
+	*//**
 	 * Find the requires textual representation, resolve them, 
-	 */
+	 *//*
 	protected synchronized List<String> findRequiresInResource(Resource resource)
 	{
 		List<String> result = new ArrayList<String>();
@@ -365,10 +366,10 @@ public class CompilationUnitManager {
 		return result;
 	}
 	
-	/**
+	*//**
 	 * 
 	 * @return the list of requires. Returns an empty list if not filled
-	 */
+	 *//*
 	public List<String> get_requires(EObject cunit)
 	{
 		List<String> requires = new ArrayList<String>();
@@ -383,13 +384,13 @@ public class CompilationUnitManager {
 		return requires;
 	}
 	
-	/**
+	*//**
 	 * This method already exists in EMFRuntimeUnit.java
 	 * If there is no associated File with this URI, than create a FileURI
 	 * @param uri
 	 * @param rel_path
 	 * @return
-	 */
+	 *//*
 	 public URI resolveURI(String uri, String rel_path)
 	 {   // hem -> because file:/ is not equal to file:///
 		 uri = uri.replaceAll("///", "/");
@@ -409,10 +410,10 @@ public class CompilationUnitManager {
 		 return resourceSet;
 	 }
 	 
-	 /**
+	 *//**
 	  * 
 	  *
-	  */
+	  *//*
 	 public String getKMCUPathForKMPath(String km_uri)
 	 {
 		 String result = "";
@@ -438,9 +439,9 @@ public class CompilationUnitManager {
 		 return result;
 	 }
 	 
-	 /**
+	 *//**
 	  * 
-	  */
+	  *//*
 	 public String getNormalizedURI(String uri)
 	 {
 		 String result = resolveURI(uri, "").toString();
@@ -459,20 +460,20 @@ public class CompilationUnitManager {
 		 System.out.println(" }");
 	 }
 
-	/**
+	*//**
 	 * @return Returns the relativePath.
-	 */
+	 *//*
 	public String getRelativePath() {
 		return relativePath;
 	}
 
-	/**
+	*//**
 	 * @param relativePath The relativePath to set.
-	 */
+	 *//*
 	public void setRelativePath(String relativePath) {
 		this.relativePath = relativePath;
 	}
-
+*/
 	 
 	 
 }
