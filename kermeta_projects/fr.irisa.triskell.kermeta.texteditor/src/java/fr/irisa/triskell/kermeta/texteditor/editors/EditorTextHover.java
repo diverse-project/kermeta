@@ -130,12 +130,12 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
     
 	/**
 	 * @see org.eclipse.jface.text.ITextHover#getHoverInfo(org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion)
+	 * @returns the String that appears in the popup bubble on an element focused
+	 * by the cursor. 
 	 */
 	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
-	    
-	    
-	    
-		try {
+		
+	    try {
 			IMarker[] markers = editor.getFile().findMarkers(EditorReconcilingStrategy.getMarkerType(), true, 2);
 			for (int i=0; i<markers.length; i++) {
 				int start = MarkerUtilities.getCharStart(markers[i]);
@@ -147,18 +147,14 @@ public class EditorTextHover implements ITextHover, ITextHoverExtension, IInform
 			TexteditorPlugin.pluginLog.warn("error computing hover info", e);
 		}
 		
-		//TexteditorPlugin.pluginLog.info("\n *** START HOVER *** offset=" + hoverRegion.getOffset()  + " length=" + hoverRegion.getLength());
-		
 		if (editor.mcunit != null && ((KMTUnit)editor.mcunit).getMctAST() != null) {
 		    CompUnit unit = ((KMTUnit)editor.mcunit).getMctAST();
 		    KermetaASTNode astnode = (KermetaASTNode)unit.getNodeAt(hoverRegion.getOffset(), hoverRegion.getLength());
-		   // TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
+		    // TexteditorPlugin.pluginLog.info(" * unit -> " + unit);
 		    if (astnode != null) {
-		        
 		        //TexteditorPlugin.pluginLog.info(" * astnode -> " + astnode);
 		        fr.irisa.triskell.kermeta.language.structure.Object fobj = editor.getFObjectForNode(astnode);
 		        String ftags = "";
-		        
 
 		        // Notify other plugin of this event
 		        Iterator it = TexteditorPlugin.getDefault().kermetaEditorEventListeners.iterator();
