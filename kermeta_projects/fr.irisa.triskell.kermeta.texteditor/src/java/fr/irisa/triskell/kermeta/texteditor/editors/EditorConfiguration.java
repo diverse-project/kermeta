@@ -26,7 +26,10 @@ import fr.irisa.triskell.kermeta.texteditor.completion.EditorCompletion;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
+ * 
+ * The class that instanciates/sets all the classes necessary to manage the source-view,
+ * (like automatic completion (EditorCompletion), syntactic coloration (EditorScanner), etc.)
  */
 public class EditorConfiguration extends SourceViewerConfiguration {
 
@@ -43,6 +46,7 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 	}
 
 	/**
+	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getPresentationReconciler(ISourceViewer)
 	 * Define reconciler for MyEditor
 	 */
 	public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
@@ -53,6 +57,11 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		return reconciler;
 	}
 	
+	
+	/**
+	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getContentAssistant(org.eclipse.jface.text.source.ISourceViewer)
+	 * Set the editor completion manager
+	 */
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 		ContentAssistant assistant = new ContentAssistant();
 		assistant.setContentAssistProcessor(new EditorCompletion(editor), IDocument.DEFAULT_CONTENT_TYPE);
@@ -72,15 +81,19 @@ public class EditorConfiguration extends SourceViewerConfiguration {
 		return reconciler;
 	}
 	
+	/**
+	 * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getTextHover(ISourceViewer, String)
+	 */
     public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType)
     {
         return texthover;
     }
 	
-	 public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType, int stateMask)
-     {
-        return texthover;
-     }
+    /** @see org.eclipse.jface.text.source.SourceViewerConfiguration#getTextHover(ISourceViewer, String) */
+    public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType, int stateMask)
+    {
+    	return texthover;
+    }
 	 
 	 
 }
