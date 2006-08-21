@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.6 2006-07-31 12:52:36 dtouzet Exp $
+/* $Id: Ecore2KMPass2.java,v 1.7 2006-08-21 16:13:03 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -34,6 +33,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -43,12 +43,9 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
-import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
-import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
-import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass6;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 
 /**
@@ -339,6 +336,12 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 				if (o!=null) o.getTag().add(tag);
 			}
 		}
+		// Visit the Invariants. Dedicated to EClass/ClassDefinition
+		if (node.getSource().equals(KM2Ecore.ANNOTATION_INV))
+		{
+			// Visit annotation details that are dedicated to operation
+			visitClassDefinitionSpecificEAnnotation(node);
+		}
 		// Visit annotation specific to EOperation or EClass
 		if (node.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER))
 		{	
@@ -472,17 +475,28 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS);
 			exporter.current_op.setIsAbstract(result.equals("true")?true:false);
 		}
-		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_INV_DETAILS))
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_PRE))
 		{
 			// TODO
 		}
-		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_PRE_DETAILS))
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_PRE))
 		{
 			// TODO
 		}
-		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_POST_DETAILS))
-		{
-			// TODO
+	}
+	
+	/** Visit the following annotations, dedicated to ClassDefinition : 
+	 *  - annotation.getSource() == "kermeta.inv"
+	 *  That's it for the moment
+	 */
+	protected void visitClassDefinitionSpecificEAnnotation(EAnnotation node)
+	{
+		for ( Object inv_name : node.getDetails().keySet() )
+		{ 
+			Constraint inv = unit.struct_factory.createConstraint();
+			inv.setName((String)inv_name);
+			inv.setBody(ExpressionParser.parse(unit, (String)node.getDetails().get(inv_name)));
+			exporter.current_classdef.getInv().add(inv);
 		}
 	}
 	

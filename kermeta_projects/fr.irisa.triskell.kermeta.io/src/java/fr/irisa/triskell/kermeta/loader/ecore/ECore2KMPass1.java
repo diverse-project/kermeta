@@ -1,4 +1,4 @@
-/* $Id: ECore2KMPass1.java,v 1.7 2006-08-09 08:42:31 zdrey Exp $
+/* $Id: ECore2KMPass1.java,v 1.8 2006-08-21 16:13:03 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ECore2Kermeta.java
  * License : EPL
@@ -259,7 +259,7 @@ public class ECore2KMPass1 extends EcoreVisitor {
     }
 	
 	/**
-	 * annotation.getSource() => "kermeta" if the ann. is intended to be owned by kermeta code
+	 * annotation.getSource() => "kermeta" or "kermeta.<smthg>" if the ann. is intended to be owned by kermeta code
 	 * annotation.getDetails() => hashtable, with { "body" : <body_content> } for body operations
 	 * This visit method only handle the details of EAnnotations that could be shared by any
 	 */
