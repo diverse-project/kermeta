@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.32 2006-06-21 12:01:09 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.33 2006-08-21 13:06:47 zdrey Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -379,13 +379,16 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitConditional(Conditional node) {
 		String result = "if " + this.accept(node.getCondition()) + " then\n";
-		pushPrefix();
-		if (node.getThenBody() != null) result += getPrefix() + this.accept(node.getThenBody()) + "\n";
+		pushPrefix(); 
+		// Both type of ThenBody and ElseBody are "Block" (see also KMT2KMPrimitiveExpressionBuilder)
+		// And block textual syntax is already represented by "then..else..end"
+		if (node.getThenBody() != null) 
+			result += this.ppCRSeparatedNode(((Block)node.getThenBody()).getStatement()) + "\n";
 		popPrefix();
 		if (node.getElseBody() != null) {
 			result += getPrefix() + "else\n";
 			pushPrefix();
-			result +=  getPrefix() + this.accept(node.getElseBody()) + "\n";
+			result += this.ppCRSeparatedNode(((Block)node.getElseBody()).getStatement()) + "\n";
 			popPrefix();
 		}
 		result += getPrefix() + "end";
@@ -480,7 +483,9 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		result += getPrefix() + "until " + this.accept(node.getStopCondition()) + "\n";
 		result += getPrefix() +"loop\n";
 		pushPrefix();
-		result += this.accept(node.getBody());
+		// Precise type of Loop is always "Block" (see also KMT2KMPrimitiveExpressionBuilder)
+		// And block textual syntax is already represented by "loop..end"
+		result += this.ppCRSeparatedNode(((Block)node.getBody()).getStatement());
 		popPrefix();
 		result += getPrefix() +"end";
 		return result;
