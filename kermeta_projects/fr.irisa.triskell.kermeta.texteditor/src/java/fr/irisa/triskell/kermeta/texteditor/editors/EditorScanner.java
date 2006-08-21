@@ -27,6 +27,10 @@ import org.eclipse.swt.widgets.Display;
  * @author Franck Fleurey
  * IRISA / University of rennes 1
  * Distributed under the terms of the GPL license
+ * 
+ * Create rules for different kinds of syntactic elements :
+ * - comments
+ * - keywords
  */
 public class EditorScanner extends RuleBasedScanner {
 

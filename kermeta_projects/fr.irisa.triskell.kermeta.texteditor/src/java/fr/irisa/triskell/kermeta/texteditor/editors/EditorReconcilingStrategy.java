@@ -1,4 +1,4 @@
-/* $Id: EditorReconcilingStrategy.java,v 1.14 2006-05-03 14:34:51 zdrey Exp $
+/* $Id: EditorReconcilingStrategy.java,v 1.15 2006-08-21 15:26:57 zdrey Exp $
  * Project : Kermeta texteditor
  * File : EditorReconcilingStrategy.java
  * License : EPL
@@ -33,6 +33,11 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMTUnitLoadError;
 
 /**
  * @author Franck Fleurey
+ * 
+ * @see IReconcilingStrategy for documentation
+ * Rebuild the KermetaUnit in background ("background thread" is handled by 
+ * jface itself).
+ * TODO This has to be modified to optimize the edition.
  */
 public class EditorReconcilingStrategy implements IReconcilingStrategy {
 
@@ -42,29 +47,36 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
 	
     public EditorReconcilingStrategy(Editor editor)
     {
-    	System.err.println("Bonjour cher Editor reconciling strategy");
         _editor = editor;
     }
 
+    
+    /**
+	 * @see org.eclipse.jface.text.reconciler.IReconcilingStrategy#reconcile(org.eclipse.jface.text.reconciler.DirtyRegion, org.eclipse.jface.text.IRegion)
+	 */	
     public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion)
     {
-    	System.err.println("reconcile(DirtyRegion dirtyRegion, IRegion subRegion)");
-        try
-        {
+    	try
+    	{ 
         	KermetaUnit unit = parse();
              _editor.setMcunit(unit);
         }
         catch(Exception ex)
         {
         	ex.printStackTrace();
+        	// TODO : if it is null, we should at least take in account the last
+        	// valid KermetaUnit (for example : by creating a KermetaUnit
+        	// when user saved a valid kermeta model).
             _editor.setMcunit(null);
         }
     }
-
+    
+    /**
+	 * @see org.eclipse.jface.text.reconciler.IReconcilingStrategy#reconcile(IRegion)
+	 */
     public void reconcile(IRegion partition)
     {
-    	System.err.println("[partition] reconcile(DirtyRegion dirtyRegion, IRegion subRegion)");
-        try
+    	try
         {
         	KermetaUnit unit = parse();
               _editor.setMcunit(unit);
@@ -77,6 +89,10 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         }
     }
 
+    
+    /**
+	 * @see org.eclipse.jface.text.reconciler.IReconcilingStrategy#setDocument(org.eclipse.jface.text.IDocument)
+	 */
     public void setDocument(IDocument document)
     {
         try
@@ -92,28 +108,28 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         }
     }
 
+    /**
+     * Parse the kermeta unit from the file that is currently edited.
+     * Also set the markers (namely, the tips when an element is focused by the 
+     * cursor) (uses the methods clearMarkers and createMarkers) 
+     * 
+     * @return a KermetaUnit of the "compiled" file.
+     */
     private KermetaUnit parse()
     {
         KermetaUnit.STD_LIB_URI = "platform:/plugin/fr.irisa.triskell.kermeta/lib/framework.km";
-    	
-    	//StructurePackageImpl.init();
-    	//BehaviorPackageImpl.init();
-    	
     	org.eclipse.core.resources.IFile file = _editor.getFile();
     	String uri = "platform:/resource" + file.getFullPath().toString();
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
     	KMTUnit result = null;
         EditorReconcilingStrategy.clearMarkers(file);
-       // System.out.println("file.getFullPath().toOSString() : " + file.getFullPath().toOSString());
         try {
         	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
 	        result.parseString(_document.get().replace('\t', ' '));
 	        result.load();
 	        result.typeCheck(null);
-	        // this constraintCheck is now done only when user wants to save its kermeta file.
-	        // see Editor class
-	        result.constraintCheck(null);
-	        
+	        // FIXME : some time constraint checking returns weird results. See where...
+	        //result.constraintCheck(null);
         }
         catch(Throwable e) {
             KermetaUnit.internalLog.error("load error ", e);
@@ -125,10 +141,16 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         		result.messages.addMessage(new KMUnitError("INTERNAL ERROR : " + e, null, null));
         }
         
-        EditorReconcilingStrategy.createMarker(file, result);
+        EditorReconcilingStrategy.createMarkers(file, result);
         return result;
     }
     
+    /**
+     *  Clear previous marker in the given file; in the texteditor, markers
+     *  display messages/warning/errors icons at begining of lines in 
+     *  the text editors and underline elements that are concerned by those
+     *  messages (for example, invalid calls).
+     */
     public static void clearMarkers(IFile file) {
         try {
             file.deleteMarkers(getMarkerType(), true, 2);
@@ -137,14 +159,24 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         }
     }
     
-    private static void createMarker(IFile file, KermetaUnit unit)
+    /**
+     *  Create markers for showing to the user the elements that are errored, or
+     *  that are subjects to warnings.
+     */
+    private static void createMarkers(IFile file, KermetaUnit unit)
     {
-    	Iterator it = unit.messages.getErrors().iterator();
-    	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next(), (KMTUnit)unit);
-    	it = unit.messages.getWarnings().iterator();
-    	while(it.hasNext()) createMarker(file, (KMUnitMessage)it.next(), (KMTUnit)unit);
+    	for (Object next : unit.messages.getErrors()) createMarker(file, (KMUnitMessage)next, (KMTUnit)unit);
+    	for (Object next : unit.messages.getWarnings()) createMarker(file, (KMUnitMessage)next, (KMTUnit)unit);
     }
 
+    /**
+     *  Create a marker for showing to the user the elements that are errored, or
+     *  that are subjects to warnings.
+     *  @param file the file currently edited
+     *  @param message contains the message/warning/error, and the node that 
+     *  contains the given message/warning/error
+     *  @param unit the kermeta unit for the given file
+     */
     private static void createMarker(IFile file, KMUnitMessage message, KMTUnit unit)
     {
         HashMap map = new HashMap();
@@ -198,12 +230,18 @@ public class EditorReconcilingStrategy implements IReconcilingStrategy {
         }
     }
     
+    /**
+     * The marker type : must correspond to the type that is
+     * declared in the extension "org.eclipse.core.resources.markers"
+     * in fr.irisa.triskell.kermeta/plugin.xml
+     *  (super type="org.eclipse.core.resources.problemmarker")
+     */
     public static String getMarkerType()
     {
         return "org.eclipse.core.resources.problemmarker";
     }
 	
-    /** split message so that it is displayed in many lines instead of only one */
+    /** Split message so that it is displayed in many lines instead of only one */
     public static String formatMessage(String message)
     {
     	String result = "";

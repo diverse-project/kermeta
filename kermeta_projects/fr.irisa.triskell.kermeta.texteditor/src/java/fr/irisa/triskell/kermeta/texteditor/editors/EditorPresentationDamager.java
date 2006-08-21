@@ -14,18 +14,16 @@ import org.eclipse.jface.text.presentation.IPresentationDamager;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
+ * 
+ * @see IPresentationDamager for documentation about this class.
  */
 public class EditorPresentationDamager implements IPresentationDamager {
 
 	protected IDocument doc;
 	
-	/**
-	 * 
-	 */
 	public EditorPresentationDamager() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
