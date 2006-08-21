@@ -6,10 +6,31 @@
 
 <body>
 <!--
-$Id: history.html,v 1.13 2006-06-22 15:05:00 dvojtise Exp $
+$Id: history.html,v 1.14 2006-08-21 09:39:49 dvojtise Exp $
 -->
 <!-- please follow the template ... -->
 <h1>History of Kermeta development</h1>
+<h2 class="Heading">V0.3.0 (19/08/2006)</h2>
+<h3>New features</h3>
+<ul>
+  <li>This version works with Eclipse 3.2 and EMF 2.2.0, doesn't work correctly anymore with previous versions of EMF</li>
+</ul>
+<h3>Bug fixed</h3>
+<ul>
+	<li>#302; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=302&group_id=32&atid=205">More static constraints: redefinition</a></li>	
+   	<li>#317; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=317&group_id=32&atid=205">{using} before {require} is not detected and execution crashes with no error messages</a></li>	
+   	<li>#349; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=349&group_id=32&atid=205">detection of wrong require statement</a></li>	
+   	<li>#351; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=351&group_id=32&atid=205">String pointed as reference : obscure error message</a></li>	
+   	<li>#353; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=353&group_id=32&atid=205">No exceptions on EMFResource.createresource with non-existing ecore</a></li>	
+   	<li>#586; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=586&group_id=32&atid=205">package path  non complete in generated ecore file</a></li>
+    <li>#617; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=617&group_id=32&atid=205">some tests in the interpreter test suite cannot be run in the same time</a></li>
+   	<li>#931; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=931&group_id=32&atid=205">The saving of a executable model in KM form fails on Operation classes</a></li>
+   	<li>#951; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=951&group_id=32&atid=205">behaviour of redefinition of &quot;native&quot; operations (example: toString)</a></li>
+   	<li>#1017; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1017&group_id=32&atid=205">KUnit fails to intercept some exceptions</a></li>
+   	<li>#1069; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=1069&group_id=32&atid=205">ecore2kmt quickfixe doesn't succeed to find a problem in case of multiple inheritance</a></li>
+
+</li>			
+</ul>
 <h2 class="Heading">V0.2.2 (22/06/2006)</h2>
 <h3>New features</h3>
 <ul>
@@ -22,6 +43,7 @@ future.
 The control on pre/post verification is very basic (on/off) and
 may be improved later</li>
   <li>#520;	<a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=520&group_id=32&atid=208">Multiple Consoles for different Kermeta App Instances</a> </li>
+</ul>  
 <h3>Bug fixed</h3>
 <ul>
 	<li>#222; <a href="http://gforge.inria.fr/tracker/index.php?func=detail&aid=222&group_id=32&atid=205">console frozen after &quot;generate ecore&quot;.</a> Now there is one console per running program.</li>	
