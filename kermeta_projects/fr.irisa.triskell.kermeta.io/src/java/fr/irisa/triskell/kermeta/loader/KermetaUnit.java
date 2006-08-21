@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.70 2006-08-09 13:45:49 dvojtise Exp $
+/* $Id: KermetaUnit.java,v 1.71 2006-08-21 16:12:33 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -71,7 +71,9 @@ import fr.irisa.triskell.kermeta.utils.OperationBodyLoader;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 /**
- * A unit is related to the physical file that has loaded a bunch of kermeta definitons
+ * A kermeta unit is an entity that embeds the model
+ * of a Kermeta program, and provides a set of methods that are aimed at helping
+ * the access to the model object
  */
 public abstract class KermetaUnit {
 	
@@ -106,9 +108,6 @@ public abstract class KermetaUnit {
 		}
 		return std_lib;
 	}
-	
-	
-	
 	
     protected void finalize() throws Throwable {
     	internalLog.debug("Finalise kermeta unit " + this + " " + uri);
@@ -839,7 +838,7 @@ public abstract class KermetaUnit {
 	 * @param cls
 	 * @return
 	 */
-	private ArrayList getAllOperationsOnRootType(ClassDefinition cls) {
+	public ArrayList getAllOperationsOnRootType(ClassDefinition cls) {
 		ArrayList result = new ArrayList();
 		Iterator it = cls.getOwnedOperation().iterator();
 		while(it.hasNext()) {
@@ -1350,4 +1349,3 @@ public abstract class KermetaUnit {
 
     
 }
-
