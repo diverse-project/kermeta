@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.20 2006-08-09 14:53:31 zdrey Exp $
+/* $Id: KM2Ecore.java,v 1.21 2006-08-21 16:26:29 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -112,9 +112,10 @@ public class KM2Ecore {
     /** Used only in EOperation */
     public final static String ANNOTATION_SUPEROPERATION_DETAILS = "superOperation";
     public final static String ANNOTATION_BODY_DETAILS = "body";
-    public final static String ANNOTATION_PRE_DETAILS = "pre";
-    public final static String ANNOTATION_POST_DETAILS = "post";
-    public final static String ANNOTATION_INV_DETAILS = "inv";
+    // Annotation.getSource() == "kermeta.inv"
+    public final static String ANNOTATION_INV = ANNOTATION + ".inv";
+    public final static String ANNOTATION_PRE = ANNOTATION + ".pre";
+    public final static String ANNOTATION_POST = ANNOTATION + ".post";
 	// Annotation.getSource() == "KermetaRaisedExceptions"
     public final static String ANNOTATION_RAISEDEXCEPTION = "KermetaRaisedExceptions";
     public final static String ANNOTATION_RAISEDEXCEPTION_DETAILS = "raisedException";
@@ -182,7 +183,7 @@ public class KM2Ecore {
 	/**
 	 * add the given info in the annotation, eventually create it
 	 * @param annotedModelElement
-	 * @param annotationName
+	 * @param annotationName the name of the annotation "source"
 	 * @param annotationDetailKey (optional)
 	 * @param annotationDetailValue
 	 * @param referedFObject the object that may be refered. can be null

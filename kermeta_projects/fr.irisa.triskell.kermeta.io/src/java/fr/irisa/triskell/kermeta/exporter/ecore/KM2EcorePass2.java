@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.21 2006-08-10 12:38:53 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.22 2006-08-21 16:26:29 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -90,7 +90,8 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	
 	/** Contains the hashtable of KM2EcorePass1 */
 	protected Hashtable<fr.irisa.triskell.kermeta.language.structure.Object,EObject> kmt2ecoremapping;
-	
+	/** Contains the list of ClassDefinition that "have passed" pass 2*/
+	protected ArrayList<ClassDefinition> pass2done_mapping;
 	/**
 	 * @param resource : the resource to populate
 	 * @param mapping : the hashtable that contains the { Object, EObject } mappings
@@ -103,6 +104,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		kmt2ecoremapping = mapping;	
 		ecoreExporter = anEcoreExporter;
 		savedFiles = new Hashtable<String, Resource>();
+		pass2done_mapping = new ArrayList<ClassDefinition>();
 	}
 	
 	/**
@@ -128,25 +130,22 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		
 		// Search the super types of EClass
 		for ( Object next : node.getSuperType()) {
-			Object o = accept((Type)next);
-			if (o != null)
-				newEClass.getESuperTypes().add(o);
+			Object o = accept((Type)next); 
+			if (o != null) newEClass.getESuperTypes().add(o);
 			else // FIXME When this case does occur?
 				throw new KM2ECoreConversionException( "Problem : accept of a getFSuperType on '"+ node.getName()+ "' returned null -- " + next);
 		}
-		
-		// Visit TypeParameters - One annotation per type parameter
+			// Visit TypeParameters - One annotation per type parameter
 		for ( Object tv : node.getTypeParameter() ) {
 			setTypeVariableAnnotation((TypeVariable)tv, newEClass);
 		}
-		
 		// Visit owned attributes
 		for (Object next : node.getOwnedAttribute() ) { accept((EObject)next); }
-
 		// Visit owned operations
 		for (Object next : node.getOwnedOperation() ) { accept((EObject)next); }
 		
 		loggerTabs.decrement();
+		
 		return newEClass;
 	}
 	
@@ -154,12 +153,11 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	 * @see KermetaOptimizedVisitor#visitOperation(Operation)
 	 */
 	public Object visitOperation(Operation node) {
-		EOperation newEOperation=null;
 		internalLog.debug(loggerTabs + "Visiting Operation: "+ node.getName());
 		loggerTabs.increment();
 		
 		// Search the EOperation from pass 1
-		newEOperation = getEObjectForOperation(node);
+		EOperation newEOperation = getEObjectForOperation(node);
 		
 		if (newEOperation == null)
 			throw new KM2ECoreConversionException("KM2Ecore exception : could not find" 
@@ -218,8 +216,6 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 	{
 		// Find the class from pass 1
 		EClassifier newEClassifier = (EClassifier)kmt2ecoremapping.get(node.getTypeDefinition());
-		// Is it an external type?
-		if (newEClassifier == null) newEClassifier = getEObjectForType(node);
 		
 		if (newEClassifier ==  null)
 		{	// maybe this is new reference to a primitive type or a class defined in another file
@@ -239,6 +235,10 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 				kmt2ecoremapping.put(node.getTypeDefinition(),newEClassifier);
 			}
 		}
+		// Is it an external type?
+		if (newEClassifier == null) newEClassifier = getEObjectForType(node);
+		
+		
 		if (node.getTypeParamBinding().size() > 0) {
 			// we must deal with binding : 
 			// TODO find a correct ecore representation for class binding 

@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.22 2006-08-08 13:25:07 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.23 2006-08-21 16:26:29 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -141,7 +141,6 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 		
 		// Visit the type definitions
-		System.err.println("node.getOwnedTypeDef : " + node.getOwnedTypeDefinition().size());
 		for (Object next : node.getOwnedTypeDefinition()) {
 			Object o = accept((EObject)next);
 			if (o != null)
@@ -163,9 +162,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	public Object visitClassDefinition(ClassDefinition node) {
 		EClass newEClass=null;
 		current_name = node.getName();
-		//internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ current_name);
+		internalLog.debug(loggerTabs + "Visiting ClassDefinition: "+ current_name);
 		loggerTabs.increment();
-		
 		try{
 			newEClass = EcoreFactory.eINSTANCE.createEClass();
 			newEClass.setName(current_name);
@@ -197,16 +195,16 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			
 			// Create an annotation to hold the operation inv	
 			for (Object next : node.getInv()) {
-				String invString = (String)prettyPrinter.accept((Constraint)next);
+				String invBody = (String)prettyPrinter.accept(((Constraint)next).getBody());
+				String invName = ((Constraint)next).getName();
 				ecoreExporter.addAnnotation( 
-					newEClass,
-					KM2Ecore.ANNOTATION,
-					KM2Ecore.ANNOTATION_INV_DETAILS,
-					invString,
-					null);
+					newEClass, KM2Ecore.ANNOTATION_INV, invName, invBody, null);
 			}
-			// Add the created EPackage to km2ecoremapping
-			km2ecoremapping.put(node,newEClass);
+			if (!ecoreExporter.getKermetaUnit().typeDefs.containsKey(node))
+			{
+				// Add the created EClass to km2ecoremapping
+				km2ecoremapping.put(node,newEClass);
+			}
 		}
 		catch(Exception e)
 		{
@@ -307,7 +305,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			ecoreExporter.addAnnotation( 
 					newEOperation,
 					KM2Ecore.ANNOTATION,
-					KM2Ecore.ANNOTATION_PRE_DETAILS,
+					KM2Ecore.ANNOTATION_PRE,
 					preString,
 					null);
 		}
@@ -318,7 +316,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			ecoreExporter.addAnnotation( 
 					newEOperation,
 					KM2Ecore.ANNOTATION,
-					KM2Ecore.ANNOTATION_POST_DETAILS,
+					KM2Ecore.ANNOTATION_POST,
 					postString,
 					null);
 		}
