@@ -1,4 +1,4 @@
-/* $Id: RuntimeObject.java,v 1.15 2006-07-18 14:12:37 zdrey Exp $
+/* $Id: RuntimeObject.java,v 1.16 2006-08-21 08:56:22 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : RuntimeObject.java
  * License : EPL
@@ -164,20 +164,22 @@ public class RuntimeObject {
 	/**
 	 * Returns the data, which contains different kinds of objects according to
 	 * the Kermeta type that is represented.
-	 * Here is the currently exhaustive list of available keys in this hashtable 
+	 * Here is the currently exhaustive list of available keys in this hashtable, and a description
+	 * of the corresponding values: 
 	 * (i.e : How to access the internal structure of a RuntimeObject):
 	 *  
-	 *   - <b>kcoreObject</b> : the FObject represented by this runtime object. Note that if the runtime object is an 
-	 *     <em>instance</em> (by opposition to a model) than there is no kcoreObject.<br>
-	 *     Examples of common uses :<br>
-	 *     - <code>FClass a_fclass = (FClass)a_runtimeobject.getMetaclass().getData().get("kcoreObject")</code>;
+	 *   - <b>kcoreObject</b> : the Kermeta Object represented by this runtime object. Note that if the runtime object is an 
+	 *     <em>instance</em> (by opposition to a model) then there is no kcoreObject.<br>
+	 *     Common uses of data :<br>
+	 *     - <code>Class a_fclass = (Class)a_runtimeobject.getMetaclass().getData().get("kcoreObject")</code>;
 	 *     gets the class (in its "model representation") of which the given runtimeobject is an instance.
-	 *     - <code>FProperty a_fprop = (FProperty)a_ro_property.getData().get("kcoreObject")</code>;
+	 *     - <cod0e>Property a_fprop = (Property)a_ro_property.getData().get("kcoreObject")</code>;
 	 *     gets the model representation of the given runtime property.
 	 *   - <b>[String|Numeric|Boolean|Character]Value</b> : the java primitive type corresponding to this
 	 *     RuntimeObject. Only provided for runtime object that represents primitive types!
-	 *   - <b>emfObject</b> : used during the serialization of a Kermeta model : represents the EObject 
-	 *   represented by this runtime object.  
+	 *   - <b>CollectionArrayList</b> : if the RuntimeObject represents a Collection (Set, OrderedSet or any inheriting
+	 *   class of Collection in kermeta side), then this entry's value is a java Collection of RuntimeObjects.
+	 *   (Collection&lt;RuntimeObject&gt;)
 	 *   
 	 * @return Returns the data represented by this runtime object.
 	 */
