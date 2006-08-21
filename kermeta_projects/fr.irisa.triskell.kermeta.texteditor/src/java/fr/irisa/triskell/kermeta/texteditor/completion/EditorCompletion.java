@@ -39,15 +39,14 @@ import fr.irisa.triskell.kermeta.typechecker.Type;
 /**
  * @author Franck Fleurey
  * IRISA / University of rennes 1
- * Distributed under the terms of the GPL license
+ * Distributed under the terms of the EPL license
+ * 
+ * Manages the automatic completion that assists the user.
  */
 public class EditorCompletion implements IContentAssistProcessor {
 	
 	protected Editor editor;
 	
-	/**
-	 * 
-	 */
 	public EditorCompletion(Editor editor) {
 		super();
 		this.editor = editor;
@@ -55,6 +54,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 
 	/**
 	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#computeCompletionProposals(org.eclipse.jface.text.ITextViewer, int)
+	 * Find completions proposals according to the cursor position.
 	 */
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		
@@ -64,27 +64,30 @@ public class EditorCompletion implements IContentAssistProcessor {
 		
 		if (editor.getMcunit() == null) return null;
 		
+		// Get the token between the cursor and last character reliable for completion
+		// "." -> should be followed by call feature
+		// ":" -> should be followed by package or class
 		String qualifier = getQualifier(doc, offset);
 		
 		TexteditorPlugin.pluginLog.info(" * Completion -> qualifier = " + qualifier);
 		
-		
+		// ":" -> should be followed by package (todo) or class (done)
 		if (qualifier.startsWith(":")) {
 		    addPrposalsForTypes(doc, offset, propList, qualifier.substring(1));
 		}
+		// "." -> should be followed by call feature
 		else if (qualifier.startsWith(".")) {
 		    
 		    CompUnit unit = ((KMTUnit)editor.getMcunit()).getMctAST();
 			TexteditorPlugin.pluginLog.info(" * Completion unit -> " + unit);
-			
+			// If the kermeta program was correctly parsed
 		    if (unit != null) {
+		    	// Find the AST node behind the ".", using infos from the AST
 		        KermetaASTNode astnode = getNodeForOffset(doc, offset, qualifier);
 		        TexteditorPlugin.pluginLog.info(" * Completion astnode -> " + astnode);
-		        
 		        if (astnode != null) {
 		            fr.irisa.triskell.kermeta.language.structure.Object obj = getFObjectForNode(astnode);
 		            TexteditorPlugin.pluginLog.info(" * Completion FObject -> " + obj);
-		            
 		            
 		            if (obj != null && obj instanceof LambdaExpression) {
 		                LambdaExpression lexp = (LambdaExpression)obj;
@@ -92,38 +95,25 @@ public class EditorCompletion implements IContentAssistProcessor {
 		                TexteditorPlugin.pluginLog.info(" * -> Completion FObject -> " + obj);
 		            }
 		            
-		            
 		            if (obj != null && obj instanceof Expression && ((Expression)obj).getStaticType() != null) {
 		                Type t = new SimpleType(((Expression)obj).getStaticType());
 		                TexteditorPlugin.pluginLog.info(" * Completion for type -> " + t);
 		                if (t != null) {
 	//		                if (((SimpleType)t).getType() instanceof FunctionType) {
 	//		                    t = t.getFunctionTypeRight();
-	//		                    TexteditorPlugin.pluginLog.info(" * Completion for type -> " + t);
 	//		                }
-		                
-		                
 		                    addPrposalsForFeatureCalls(doc, offset, propList, qualifier.substring(1), t);
 		                }
 		            }
-		            
 		        }
-		        
 		    }
-		    
 		}
-		
 		/*
-		if (qualifier.equals("")) {
-			addPrposalsForKW(doc, offset, propList, qualifier);
-		}
-		else if(qualifier.charAt(0) == '.') {
-			addPrposalsForFeatureCalls(doc, offset, propList, qualifier.substring(1));
-		}
-		else if(qualifier.charAt(0) == ':') {
-			addPrposalsForTypes(doc, offset, propList, qualifier.substring(1));
-		}
+		if (qualifier.equals("")) { addPrposalsForKW(doc, offset, propList, qualifier); }
+		else if(qualifier.charAt(0) == '.') { addPrposalsForFeatureCalls(doc, offset, propList, qualifier.substring(1)); }
+		else if(qualifier.charAt(0) == ':') { addPrposalsForTypes(doc, offset, propList, qualifier.substring(1)); }
 		*/
+		
 		// Create completion proposal array
 		ICompletionProposal[] proposals = new ICompletionProposal[propList.size()];
 		// and fill with list elements
@@ -132,6 +122,7 @@ public class EditorCompletion implements IContentAssistProcessor {
 		return proposals;
 	}
 	
+	/** Get the node at the specified offset */
 	private KermetaASTNode getNodeForOffset(IDocument doc, int offset, String qualifier) {
 	    CompUnit unit = ((KMTUnit)editor.getMcunit()).getMctAST();
 	    if (unit == null) return null;
@@ -144,15 +135,16 @@ public class EditorCompletion implements IContentAssistProcessor {
 	    return result;
 	}
 	
-	 private fr.irisa.triskell.kermeta.language.structure.Object getFObjectForNode(KermetaASTNode node) {
-	        KermetaASTNode currentNode = node;
-	        fr.irisa.triskell.kermeta.language.structure.Object result = null;
-	        while (result == null && currentNode != null) { 
-	            result = (fr.irisa.triskell.kermeta.language.structure.Object)editor.getMcunit().getModelElementByNode(currentNode);
-	            currentNode = (KermetaASTNode)currentNode.getParent();
-	        }
-	        return result;
-	    }
+	/** Get the object in the model of kermeta program that is represented by the given AST-node */
+	private fr.irisa.triskell.kermeta.language.structure.Object getFObjectForNode(KermetaASTNode node) {
+		KermetaASTNode currentNode = node;
+		fr.irisa.triskell.kermeta.language.structure.Object result = null;
+		while (result == null && currentNode != null) { 
+			result = (fr.irisa.triskell.kermeta.language.structure.Object)editor.getMcunit().getModelElementByNode(currentNode);
+			currentNode = (KermetaASTNode)currentNode.getParent();
+		}
+		return result;
+	}
 
 	/**
 	 * @see org.eclipse.jface.text.contentassist.IContentAssistProcessor#computeContextInformation(org.eclipse.jface.text.ITextViewer, int)
@@ -193,7 +185,11 @@ public class EditorCompletion implements IContentAssistProcessor {
 		return null;
 	}
 	
-	
+	/**
+	 * Get, from the position of the cursor given by documentOffset, 
+	 * the last token between the place where the cursor is located, and 
+	 * the first "special" character (i.e ".", ":") that was found
+	 * */
     private String getQualifier(IDocument doc, int documentOffset)
     {
        // Use string buffer to collect characters
@@ -214,7 +210,6 @@ public class EditorCompletion implements IContentAssistProcessor {
                 white = true;
                 continue;
              }
-             
              
              // Start of tag or attribute value. Return qualifier
              if (c == '.' || c == ':')
@@ -237,19 +232,18 @@ public class EditorCompletion implements IContentAssistProcessor {
     }
     
     private void addPrposalsForFeatureCalls(IDocument doc, int offset, ArrayList props, String begining, Type type) {
-        Iterator it = type.callableProperties().iterator();
-        while(it.hasNext()) {
-            CallableProperty cp = (CallableProperty)it.next();
+        for (Object next : type.callableProperties())
+        {
+            CallableProperty cp = (CallableProperty)next;
             CompletionItem ci = new CallPropertyCompletionItem(cp);
             if (ci.getCompletionText().toLowerCase().startsWith(begining.toLowerCase())) {
                 props.add(ci.getCompletionProposal(offset - begining.length(), begining.length()));
-                
             }
         }
         
-        it = type.callableOperations().iterator();
-        while(it.hasNext()) {
-            CallableOperation cp = (CallableOperation)it.next();
+        for (Object next : type.callableOperations())
+        {
+            CallableOperation cp = (CallableOperation)next;
             CompletionItem ci = new CallOperationCompletionItem(cp);
             if (ci.getCompletionText().toLowerCase().startsWith(begining.toLowerCase())) {
                 props.add(ci.getCompletionProposal(offset - begining.length(), begining.length()));
@@ -258,6 +252,7 @@ public class EditorCompletion implements IContentAssistProcessor {
         }
         //Collections.sort(props);
     }
+    
     /*
     private void addPrposalsForKW(IDocument doc, int offset, ArrayList props, String begining) {
     	// find possible methods :
