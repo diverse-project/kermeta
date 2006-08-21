@@ -29,13 +29,13 @@ import fr.irisa.triskell.kermeta.loader.compilationunit.CompilationUnitManager;;
 
 public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 
-	protected CompilationUnitManager compileManager; 
+	//protected CompilationUnitManager compileManager; 
 	
 	public KermetaProjectBuilder() 
 	{
 		super();
 		// Create the compilation unit manager
-		compileManager = new CompilationUnitManager();
+		//compileManager = new CompilationUnitManager();
 	}
 	
 	class DeltaVisitor implements IResourceDeltaVisitor {
@@ -51,9 +51,7 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
 			}
 			else if (delta.getKind() == IResourceDelta.CHANGED)
 			{
-				// handle changed resource
-				
-//				System.err.println("Le fichier qui a changé c'est celui là  : " + resource.getFullPath().toString() );
+				// handle changed resource (when user saves, we arrive here)
 				checkResource(resource);
 			}
 			//return true to continue visiting children.
@@ -221,10 +219,10 @@ public class KermetaProjectBuilder extends IncrementalProjectBuilder {
         deleteMarkers(file);
         try {
         	// Create the CompilationUnit for the given file
-        	if (compileManager.exists(file.getFullPath().toString()))
+/*        	if (compileManager.exists(file.getFullPath().toString()))
         	{
         		//System.err.println("IFile has a resource!");
-        	}
+        	}*/
 	        //file.getFullPath().toString();
         }
         catch(Throwable e) {
