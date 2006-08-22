@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.5 2006-08-18 09:21:18 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.6 2006-08-22 12:51:05 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -372,6 +372,8 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				//				 Name
 				// duplicate operation name treatment will be done during next pass 
 				builder.current_operation.setName("initialize");
+				
+				builder.cachedJavaConstructors.put(builder.current_operation, constructors[i]);
 			
 				//	 return type : the type of the class itself in order to ease the writing
 				builder.current_operation.setIsOrdered(false);
@@ -475,6 +477,8 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				//	Create the operation:
 				builder.current_operation = builder.struct_factory.createOperation();
 				//builder.storeTrace(builder.current_operation, node);
+				
+				builder.cachedJavaMethods.put(builder.current_operation, methods[i]);
 				
 				// Name
 				// duplicate operation name treatment will be done during next pass 

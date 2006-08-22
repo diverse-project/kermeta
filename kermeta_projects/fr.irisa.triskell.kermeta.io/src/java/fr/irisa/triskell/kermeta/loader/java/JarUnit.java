@@ -1,4 +1,4 @@
-/* $Id: JarUnit.java,v 1.5 2006-08-09 13:44:38 dvojtise Exp $
+/* $Id: JarUnit.java,v 1.6 2006-08-22 12:51:05 dvojtise Exp $
 * Project : Kermeta.io
 * File : EcoreUnit.java
 * License : EPL
@@ -13,6 +13,8 @@
 
 package fr.irisa.triskell.kermeta.loader.java;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -21,6 +23,7 @@ import java.util.Hashtable;
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
 
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -34,6 +37,11 @@ public class JarUnit extends KermetaUnit {
 	public URLClassLoader cl=null;
 	public URI platformURI;
 	public URI localURI;    // localized version of the URI	
+	
+	// structure used to optimize the retreival of java methods from a kermeta operation
+	public Hashtable<Operation,Method> cachedJavaMethods = new Hashtable<Operation,Method>();
+	// structure used to optimize the retreival of java methods from a kermeta operation
+	public Hashtable<Operation,Constructor> cachedJavaConstructors =  new Hashtable<Operation,Constructor>();
 	
     /**
      * @param uri
