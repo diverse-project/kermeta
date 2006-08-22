@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass2.java,v 1.7 2006-08-21 16:13:03 zdrey Exp $
+/* $Id: Ecore2KMPass2.java,v 1.8 2006-08-22 11:51:30 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -47,6 +47,7 @@ import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * @author dtouzet
@@ -292,7 +293,10 @@ public class Ecore2KMPass2 extends EcoreVisitor {
 	public Object visit(EParameter node) {
 		// Create a Parameter
 		Parameter param = unit.struct_factory.createParameter();
-		param.setName(node.getName());
+		
+		// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
+		param.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+		
 		param.setIsOrdered(node.isOrdered());
 		param.setIsUnique(node.isUnique());
 		param.setUpper(node.getUpperBound());
