@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.42 2006-08-18 09:19:35 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.43 2006-08-22 12:51:51 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -13,6 +13,7 @@
  * 	see class javadoc.	 
  */
 package fr.irisa.triskell.kermeta.interpreter;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -63,13 +64,16 @@ import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 //import fr.irisa.triskell.kermeta.language.structure.FObject;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
+import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.java.Jar2KMPass;
+import fr.irisa.triskell.kermeta.loader.java.JarUnit;
 
 import java.net.URLClassLoader;
 import fr.irisa.triskell.kermeta.typechecker.CallableOperation;
@@ -78,6 +82,7 @@ import fr.irisa.triskell.kermeta.typechecker.InheritanceSearch;
 import fr.irisa.triskell.kermeta.typechecker.SimpleType;
 import fr.irisa.triskell.kermeta.typechecker.TypeCheckerContext;
 import fr.irisa.triskell.kermeta.typechecker.TypeVariableEnforcer;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 
 /**
@@ -828,7 +833,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			try {
 				if(isJarProxy){
 					// invoke the java operation
-					result = invokeOperationOnProxy(operation.getOperation());
+					result = invokeOperationOnProxy(operation.getOperation(), parameters);
 				}
 				else{ // normal interpeter call
 					// Resolve this operation call
@@ -890,35 +895,89 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * @param operation
 	 * @return
 	 */
-    protected RuntimeObject invokeOperationOnProxy(Operation node) {
+    protected RuntimeObject invokeOperationOnProxy(Operation node, ArrayList pParameters) {
     	
     	if (node!=null) setParent(node);
 	    RuntimeObject result = memory.voidINSTANCE;
 	    // push expression context
 	    interpreterContext.peekCallFrame().pushExpressionContext();
 	    interpreterContext.peekCallFrame().peekExpressionContext().setStatement(node.getBody());
+	    internalLog.debug(" Invoking java proxy for " + node.getName());
+	       
 	    try {
 		    // if the operation is not an initialize function and the object is not initialized then fail
 	    	RuntimeObject roSelf = interpreterContext.peekCallFrame().getSelf();
 	    	if(!RuntimeHelper.isInitOperation(node) && !roSelf.getData().containsKey("javaObject")){
 	    		 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
 	    	        		"This is a proxy for a java object but this java object was not initialized",
-	    					this,
-	    					memory,
-	    					node,
+	    					this, memory, node,
 	    					null);
-	    	}
+	    	}	    	
 	    	// run  the operation
-	    	// find the java object
-	    	// retreive the method
-	    	//
-	    	// TODO
-		    // Set the result
-		    result = interpreterContext.peekCallFrame().getOperationResult();
-	    	// if the operation is an initialize function
-	    	// 		use its result to set the javaObject
-		    // TODO
-	    }
+	    	if(RuntimeHelper.isInitOperation(node)){
+	    		// this is a creation
+	    		// retreives the constructor
+	    		Constructor constructor = getJavaConstructor(node);
+	    		// build the parameters
+	    		Object[] args = buildJavaArgs(pParameters, constructor.getParameterTypes());
+	    		Object newInstance = constructor.newInstance(args);
+	    		// this is an initialize function, use its result to set the javaObject
+	    		roSelf.getData().put("javaObject", newInstance);
+	    		result = roSelf;
+	    	}
+	    	else {
+		    	// find the java object
+	    		Object self = roSelf.getData().get("javaObject");
+		    	// retreive the method
+	    		Method method = getJavaMethod(node);
+	    		Object[] args = buildJavaArgs(pParameters, method.getParameterTypes());
+	    		Object returnedObject = method.invoke(self, args);
+	    		
+			    // Set the result
+	    		RuntimeObject returnType = this.getMemory().getRuntimeObjectForFObject(node.getType());
+	    		//RuntimeObject stringType = this.getMemory().getTypeDefinitionAsRuntimeObject("kermeta::standard::String");
+	    		String returnTypeQName = KMTHelper.getTypeQualifiedName((Type) returnType.getData().get("kcoreObject"));
+	    		if("kermeta::standard::String".equals(returnTypeQName)){
+	    			result = fr.irisa.triskell.kermeta.runtime.basetypes.String.create((String)returnedObject, getMemory().getROFactory())	;    			
+	    		}
+	    		else if("kermeta::standard::Integer".equals(returnTypeQName)){
+	    			result = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create((Integer)returnedObject, getMemory().getROFactory());
+	    		}
+	    		else if("kermeta::standard::Boolean".equals(returnTypeQName)){
+	    			if((Boolean)returnedObject) result = getMemory().trueINSTANCE;
+	    			else result = getMemory().falseINSTANCE;
+	    		}
+	    		else if("kermeta::standard::Void".equals(returnTypeQName)){
+	    			result = getMemory().voidINSTANCE;
+	    		}
+	    		else{
+	    			result = this.getMemory().getROFactory().createObjectFromClassDefinition(returnType);
+		    		result.getData().put("javaObject", returnedObject);
+		    		
+	    		}
+	    	}
+	    	
+	    } catch (IllegalArgumentException e) {
+	    	 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+ 	        		"Problem calling java operation or constructor " + node.getName(),
+ 					this, memory, node,
+ 					e);
+		} catch (InstantiationException e) {
+	    	 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+	 	        		"Problem calling java operation or constructor " + node.getName(),
+	 					this, memory, node,
+	 					e);
+		} catch (IllegalAccessException e) {
+	    	 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+	 	        		"Problem calling java operation or constructor " + node.getName(),
+	 					this, memory, node,
+	 					e);
+		} catch (InvocationTargetException e) {
+	    	 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+	 	        		"Problem calling java operation or constructor " + node.getName(),
+	 					this, memory, node,
+	 					e);
+		}
 	    finally {
 		    // Pop the expressionContext
 		    interpreterContext.peekCallFrame().popExpressionContext();
@@ -926,6 +985,74 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		return result;    	
 	}
 
+    /** build java arguments from kermeta parameters 
+     * 
+     * @param parameters
+     * @param javaTypes 
+     * @return
+     */
+    private Object[] buildJavaArgs(ArrayList parameters, Class[] javaTypeParams) {
+		Object[] result = new Object[parameters.size()];
+		for(int i = 0; i < parameters.size(); i++){
+			RuntimeObject fparam = (RuntimeObject)parameters.get(i);
+			String typename = javaTypeParams[i].getName();
+			if(typename.equals("java.lang.String")){
+				result[i] = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(fparam);
+			}
+			else if(typename.equals("java.lang.Integer")){
+				result[i] = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(fparam);
+			}
+			else if(typename.equals("int")){
+				result[i] = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.getValue(fparam);
+			}
+			else if(typename.equals("boolean")){
+				result[i] = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(fparam);
+			}
+			else{
+				result[i] = null;
+			}
+		}
+		return result;
+	}
+
+	/** retrieves the java constructor for a given operation
+     * 
+     * @param operation
+     * @return
+     */
+    protected Constructor getJavaConstructor(Operation operation){
+    	Constructor constructor = null;
+		Iterator it = memory.getUnit().getAllImportedUnits().iterator();
+    	while(it.hasNext()){
+    		KermetaUnit unit = (KermetaUnit) it.next();
+    		if(unit instanceof JarUnit){
+    			JarUnit jarunit = (JarUnit)unit;
+    			constructor = jarunit.cachedJavaConstructors.get(operation);
+    			if (constructor != null ) return constructor;
+    		}
+    	}
+    	return null;
+    }
+    
+    /** retrieves the java method for a given operation
+     * 
+     * @param operation
+     * @return
+     */
+    protected Method getJavaMethod(Operation operation){
+    	Method method = null;
+		Iterator it = memory.getUnit().getAllImportedUnits().iterator();
+    	while(it.hasNext()){
+    		KermetaUnit unit = (KermetaUnit) it.next();
+    		if(unit instanceof JarUnit){
+    			JarUnit jarunit = (JarUnit)unit;
+    			method = jarunit.cachedJavaMethods.get(operation);
+    			if (method != null ) return method;
+    		}
+    	}
+    	return null;
+    }
+    
 	/**
      * Visit a JavaStaticCall : 
      * 		extern a::b::c.d()
