@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.23 2006-08-21 16:26:29 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.24 2006-08-22 09:57:02 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -126,7 +126,9 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		EPackage newEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		newEPackage.setNsPrefix(current_name);
 		newEPackage.setNsURI(ecoreResource.getURI().toString() + (node==root_p?"":"#/") + current_ppath);
-		newEPackage.setName(current_name);
+		
+		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
+		newEPackage.setName( KMTHelper.getUnescapedIdentifier(current_name) );
 		
 		if (ecoreExporter.tracer != null)
 		    ecoreExporter.tracer.addMappingTrace(node,newEPackage,node.getName() + " is mapped to " + newEPackage.getName());
@@ -166,7 +168,10 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		loggerTabs.increment();
 		try{
 			newEClass = EcoreFactory.eINSTANCE.createEClass();
-			newEClass.setName(current_name);
+			
+			// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
+			newEClass.setName( KMTHelper.getUnescapedIdentifier(current_name) );
+			
 			newEClass.setAbstract(node.isIsAbstract());
 			
 			if (ecoreExporter.tracer != null) // null if user did not want a serializ. of trace
@@ -224,7 +229,10 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 	 */
 	public Object visitEnumeration(Enumeration node) {
 		EEnum newEEnum = EcoreFactory.eINSTANCE.createEEnum();
-		newEEnum.setName(node.getName());
+		
+		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
+		newEEnum.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
+		
 		newEEnum.setInstanceClass(null);
 		newEEnum.setInstanceClassName(null);
 		newEEnum.setSerializable(true); // this property does not exist in kermeta Enumeration...
@@ -272,7 +280,9 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		loggerTabs.increment();
 		
 		EOperation newEOperation = EcoreFactory.eINSTANCE.createEOperation();
-		newEOperation.setName(current_name);
+		
+		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
+		newEOperation.setName( KMTHelper.getUnescapedIdentifier(current_name) );
 		
 		// Create an annotation to hold the isAbstract boolean
 		if (node.isIsAbstract()) { 
@@ -351,8 +361,10 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		loggerTabs.increment();
 		
 		EParameter newEParameter = EcoreFactory.eINSTANCE.createEParameter();
-		// Was node.getName(), but this removes the necessary "~" for protecting keywords
-		newEParameter.setName(KMTHelper.getMangledIdentifier(node.getName()));
+		
+		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
+		newEParameter.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
+		
 		newEParameter.setLowerBound(node.getLower());
 		newEParameter.setUpperBound(node.getUpper());
 		newEParameter.setOrdered(node.isIsOrdered());
@@ -414,7 +426,10 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 		
 		// Set the new StructuralFeature values
-		newEStructuralFeature.setName(node.getName());
+
+		// Patch that removes the escape characters ('~') used to avoid collisions with the KerMeta keywords. 
+		newEStructuralFeature.setName( KMTHelper.getUnescapedIdentifier(node.getName()) );
+		
 		newEStructuralFeature.setDerived(node.isIsDerived());
 		if (node.isIsDerived()){
 			newEStructuralFeature.setTransient(true);
