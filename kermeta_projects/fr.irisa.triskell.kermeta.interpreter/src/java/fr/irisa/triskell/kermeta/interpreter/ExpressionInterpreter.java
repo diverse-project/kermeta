@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.43 2006-08-22 12:51:51 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.44 2006-08-22 14:56:58 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -14,6 +14,7 @@
  */
 package fr.irisa.triskell.kermeta.interpreter;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
@@ -71,6 +72,7 @@ import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
+import fr.irisa.triskell.kermeta.language.structure.TypedElement;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.java.Jar2KMPass;
 import fr.irisa.triskell.kermeta.loader.java.JarUnit;
@@ -877,8 +879,15 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		    
 		    if (!property.getProperty().isIsDerived())
 		    {
-		        // Get the value of the property
-		        result = fr.irisa.triskell.kermeta.runtime.language.Object.get(ro_target, ro_property);
+		    	if(isJarProxy){
+					// invoke the java operation
+					result = getPropertyOnProxy(ro_target, ro_property, property.getProperty());
+				}
+				else{ // normal interpeter call
+					//					 Get the value of the property
+			        result = fr.irisa.triskell.kermeta.runtime.language.Object.get(ro_target, ro_property);
+				}
+		        
 		    }
 		    else
 		    {
@@ -889,7 +898,40 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		
 		return result;
 	}
-	
+	/** special code for dealing with java proxies
+	 * @param property 
+	 * 
+	 * @param operation
+	 * @return
+	 */
+	private RuntimeObject getPropertyOnProxy(RuntimeObject roSelf, RuntimeObject ro_property, Property node) {
+		if(!roSelf.getData().containsKey("javaObject")){
+   		 	throw KermetaRaisedException.createKermetaException("kermeta::exceptions::CallOnVoidTarget",
+   	        		"This is a proxy for a java object but this java object was not initialized",
+   					this, memory, node,
+   					null);
+		}
+		RuntimeObject result = memory.voidINSTANCE;
+		try {
+
+			Object self = roSelf.getData().get("javaObject");    	
+			Field field = getJavaField(node);
+			Object returnedObject = field.get(self);
+    		result = convertJavaObjectToRuntimeObject(node,returnedObject);
+		} catch (IllegalArgumentException e) {
+			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+	 	        		"Problem calling java operation or constructor " + node.getName(),
+	 					this, memory, node,
+	 					e);
+		} catch (IllegalAccessException e) {
+			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+	 	        		"Problem calling java operation or constructor " + node.getName(),
+	 					this, memory, node,
+	 					e);
+		}
+		return result;
+	}
+
 	/** special code for dealing with java proxies
 	 * 
 	 * @param operation
@@ -933,28 +975,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    		Object[] args = buildJavaArgs(pParameters, method.getParameterTypes());
 	    		Object returnedObject = method.invoke(self, args);
 	    		
-			    // Set the result
-	    		RuntimeObject returnType = this.getMemory().getRuntimeObjectForFObject(node.getType());
-	    		//RuntimeObject stringType = this.getMemory().getTypeDefinitionAsRuntimeObject("kermeta::standard::String");
-	    		String returnTypeQName = KMTHelper.getTypeQualifiedName((Type) returnType.getData().get("kcoreObject"));
-	    		if("kermeta::standard::String".equals(returnTypeQName)){
-	    			result = fr.irisa.triskell.kermeta.runtime.basetypes.String.create((String)returnedObject, getMemory().getROFactory())	;    			
-	    		}
-	    		else if("kermeta::standard::Integer".equals(returnTypeQName)){
-	    			result = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create((Integer)returnedObject, getMemory().getROFactory());
-	    		}
-	    		else if("kermeta::standard::Boolean".equals(returnTypeQName)){
-	    			if((Boolean)returnedObject) result = getMemory().trueINSTANCE;
-	    			else result = getMemory().falseINSTANCE;
-	    		}
-	    		else if("kermeta::standard::Void".equals(returnTypeQName)){
-	    			result = getMemory().voidINSTANCE;
-	    		}
-	    		else{
-	    			result = this.getMemory().getROFactory().createObjectFromClassDefinition(returnType);
-		    		result.getData().put("javaObject", returnedObject);
-		    		
-	    		}
+	    		result = convertJavaObjectToRuntimeObject(node,returnedObject);
 	    	}
 	    	
 	    } catch (IllegalArgumentException e) {
@@ -984,6 +1005,39 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    }
 		return result;    	
 	}
+    
+    /** creates the appropriate object depending on the required returntype
+     * 
+     * @param typedElement
+     * @param returnedObject
+     * @return
+     */ 
+    private RuntimeObject convertJavaObjectToRuntimeObject(TypedElement typedElement,Object returnedObject){
+    	RuntimeObject result = memory.voidINSTANCE;
+    	//    	 Set the result
+		RuntimeObject returnType = this.getMemory().getRuntimeObjectForFObject(typedElement.getType());
+		//RuntimeObject stringType = this.getMemory().getTypeDefinitionAsRuntimeObject("kermeta::standard::String");
+		String returnTypeQName = KMTHelper.getTypeQualifiedName((Type) returnType.getData().get("kcoreObject"));
+		if("kermeta::standard::String".equals(returnTypeQName)){
+			result = fr.irisa.triskell.kermeta.runtime.basetypes.String.create((String)returnedObject, getMemory().getROFactory())	;    			
+		}
+		else if("kermeta::standard::Integer".equals(returnTypeQName)){
+			result = fr.irisa.triskell.kermeta.runtime.basetypes.Integer.create((Integer)returnedObject, getMemory().getROFactory());
+		}
+		else if("kermeta::standard::Boolean".equals(returnTypeQName)){
+			if((Boolean)returnedObject) result = getMemory().trueINSTANCE;
+			else result = getMemory().falseINSTANCE;
+		}
+		else if("kermeta::standard::Void".equals(returnTypeQName)){
+			result = getMemory().voidINSTANCE;
+		}
+		else{
+			result = this.getMemory().getROFactory().createObjectFromClassDefinition(returnType);
+    		result.getData().put("javaObject", returnedObject);
+    		
+		}
+		return result;
+    }
 
     /** build java arguments from kermeta parameters 
      * 
@@ -1052,7 +1106,24 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     	}
     	return null;
     }
-    
+    /** retrieves the java field for a given property
+     * 
+     * @param operation
+     * @return
+     */
+    protected Field getJavaField(Property prop){
+    	Field field = null;
+		Iterator it = memory.getUnit().getAllImportedUnits().iterator();
+    	while(it.hasNext()){
+    		KermetaUnit unit = (KermetaUnit) it.next();
+    		if(unit instanceof JarUnit){
+    			JarUnit jarunit = (JarUnit)unit;
+    			field = jarunit.cachedJavaFields.get(prop);
+    			if (field != null ) return field;
+    		}
+    	}
+    	return null;
+    }
 	/**
      * Visit a JavaStaticCall : 
      * 		extern a::b::c.d()
