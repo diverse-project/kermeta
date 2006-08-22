@@ -52,6 +52,8 @@ public class CathegorizedKWList {
 		
 		addKeyword("package", structKW);
 		addKeyword("require", specialKW);
+		addKeyword("includeFilter", specialKW);
+		addKeyword("excludeFilter", specialKW);
 		addKeyword("using", specialKW);
 		addKeyword("inherits", structKW);
 		addKeyword("class", structKW);

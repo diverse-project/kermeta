@@ -29,6 +29,8 @@ public class SimpleKWList {
 		keywords = new Hashtable();
 		addKeyword("package");
 		addKeyword("require");
+		addKeyword("includeFilter");
+		addKeyword("excludeFilter");
 		addKeyword("using");
 		addKeyword("inherits");
 		addKeyword("class");
