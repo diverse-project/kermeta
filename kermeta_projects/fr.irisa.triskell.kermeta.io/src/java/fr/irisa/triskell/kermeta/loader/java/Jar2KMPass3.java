@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.6 2006-08-22 12:51:05 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.7 2006-08-22 14:56:10 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -314,6 +314,7 @@ public class Jar2KMPass3 extends Jar2KMPass {
 			if(Modifier.isPublic(fields[i].getModifiers())){
 				//	Create the Property:
 				Property res = builder.struct_factory.createProperty();
+				builder.cachedJavaFields.put(res, fields[i]);
 				// name :
 				res.setName(fields[i].getName());
 				// default : (no default for a reference)
