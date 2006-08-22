@@ -13,6 +13,8 @@ import org.eclipse.jface.text.presentation.IPresentationDamager;
 
 /**
  * @author Franck Fleurey
+ * @author Zoé Drey
+ * @author Cyril Faucher
  * IRISA / University of rennes 1
  * Distributed under the terms of the EPL license
  * 
@@ -42,7 +44,12 @@ public class EditorPresentationDamager implements IPresentationDamager {
 			// TODO : this is really unefficient, but it does work :-(
 			String document = doc.get();
 			int start = event.getOffset();
-			int stop = start + event.getText().length();
+			
+			int stop = start;
+			if (event.getText() != null) { // Resolve the Contol-D bug (Bugs item #1154)
+				stop += event.getText().length();
+			}
+			
 			while( start > 0) {
 				if (start >= document.length() - 2 ) {
 					start--;
