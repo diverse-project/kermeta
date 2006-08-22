@@ -1,4 +1,4 @@
-/* $Id: KMTHelper.java,v 1.6 2006-08-08 14:27:16 zdrey Exp $
+/* $Id: KMTHelper.java,v 1.7 2006-08-22 09:45:56 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMTHelper.java
  * License    : EPL
@@ -63,6 +63,18 @@ public class KMTHelper {
 		if (SimpleKWList.getInstance().isKeyword(id))
 			return "~" + id;
 		else return id;
+	}
+	
+	/**
+	 * @param id
+	 * @return the identifier with its eventual escape character (~) removed
+	 */
+	public static String getUnescapedIdentifier(String id) {
+		if (id == null) return id;
+		if(id.startsWith("~"))
+			return id.substring(1);
+		else
+			return id;
 	}
 	
 	/*
