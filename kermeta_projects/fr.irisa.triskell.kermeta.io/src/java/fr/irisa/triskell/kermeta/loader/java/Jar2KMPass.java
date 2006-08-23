@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.5 2006-08-18 09:21:18 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.6 2006-08-23 15:42:56 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -34,6 +34,7 @@ public abstract class Jar2KMPass {
 	final static public String JARUNIT_TAG_NAME = "IsProxyForJar";
 	final static public String INITOPERATION_TAG_NAME = "IsInitOperation";
 	final static public String JAVAOPERATION_TAG_NAME = "IsJavaOperation";
+	final static public String IS_PROXY_FOR_JAVA_TYPE = "IsProxyForJavaType";
 	
 	
 	/** the constructor */
@@ -89,7 +90,7 @@ public abstract class Jar2KMPass {
     }
     
     protected Type getTypeByID(String name) {
-	    boolean isUnknwonJavaObject = false;
+	    boolean isUnknownJavaObject = false;
 		if (name.equals("void")) {
 			return builder.struct_factory.createVoidType();
 		}
@@ -103,7 +104,7 @@ public abstract class Jar2KMPass {
 	        typeDef = builder.getTypeDefinitionByName("kermeta::standard::UnknownJavaObject");
 	        if(typeDef != null){
 	        	builder.messages.addWarning("Cannot resolve type '"+name+"', replaced by kermeta::standard::UnknownJavaObject" ,null);
-	        	isUnknwonJavaObject = true;
+	        	isUnknownJavaObject = true;
 	        }
 	        else{
 	        	builder.messages.addError("Cannot resolve type '"+name+"' nor type kermeta::standard::UnknownJavaObject; is the framework uptodate ?" ,null);
@@ -115,11 +116,11 @@ public abstract class Jar2KMPass {
 	        ClassDefinition cd = (ClassDefinition)typeDef;
 	        fr.irisa.triskell.kermeta.language.structure.Class result = builder.struct_factory.createClass();
 	        //result.setFName(cd.getFName());
-	        if (isUnknwonJavaObject){
+	        if (isUnknownJavaObject){
 	        	// add a tag so we can retrieve the original object type name
 	        	// question : maybe it would be better to have a real type UnknownJavaObject instead of a simple alias ?
 	        	Tag tag = builder.struct_factory.createTag();
-	        	tag.setName("UnknownJavaObject");
+	        	tag.setName(IS_PROXY_FOR_JAVA_TYPE);
 	        	tag.setValue(name);
 	        	result.getTag().add(tag);
 	        }
@@ -133,8 +134,6 @@ public abstract class Jar2KMPass {
 	static {
 		primitive_types_mapping = new Hashtable<String,String>();
 		primitive_types_mapping.put("int", 					"kermeta::standard::Integer");
-		primitive_types_mapping.put("long", 				"kermeta::standard::Integer");
-		primitive_types_mapping.put("byte", 				"kermeta::standard::Integer");
 		primitive_types_mapping.put("java::lang::Integer", 	"kermeta::standard::Integer");
 		primitive_types_mapping.put("boolean", 				"kermeta::standard::Boolean");
 		primitive_types_mapping.put("java::lang::Boolean", 	"kermeta::standard::Boolean");

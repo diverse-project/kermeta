@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.7 2006-08-22 14:56:10 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.8 2006-08-23 15:42:56 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -20,18 +20,17 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 
-
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
+import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
-import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
-import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  *  Jar2KM PASS 4 : 
@@ -123,13 +122,15 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				if(conflictingOperations.size()!=0){
 					// for each of the operations in conflict: rename them (and their whole implementation tree)
 					// except the operation without parameter
-					Integer i = 1;
-					renameOperationTree(op, "_"+(i++).toString());
+					Integer i = 1;					
+					renameOperationTree(op, calculateOperationPostFix(op, i++));
 					Iterator<Operation> conlictingOpIt = conflictingOperations.iterator();
 					while(conlictingOpIt.hasNext()){
 						Operation conflictingOp = conlictingOpIt.next();
 						if(conflictingOp.getOwnedParameter().size()>0){
-							renameOperationTree(conflictingOp, "_"+(i++).toString());
+							if(conflictingOp.getName().contains("_"))
+								internalLog.debug("strange renaming an operation allready containing _");
+							renameOperationTree(conflictingOp, calculateOperationPostFix(conflictingOp, i++));
 						}
 					}
 				}
@@ -140,6 +141,39 @@ public class Jar2KMPass3 extends Jar2KMPass {
 			fixReturnTypeOnChildren(this.getTopOperation(op),this.getTopOperation(op).getType());
 		}
 	}
+
+	/**
+	 * determine the strategy for the postfix of the given operation
+	 * can be a simple number increment in case of many multiple parameter, or simplyt the name of the type of the parameter
+	 * @param op
+	 * @param integer
+	 * @return
+	 */
+	private String calculateOperationPostFix(Operation op, Integer integer) {
+		StringBuffer result = new StringBuffer("_");
+		if(op.getOwnedParameter().size() > 2){
+			// default strategy use a number because there are too much parameters ...
+			result.append((integer).toString());
+		}
+		else {
+			// try to use parameter type names
+			Iterator it = op.getOwnedParameter().iterator();
+			while(it.hasNext()){
+				Type pt = ((Parameter)it.next()).getType();
+				
+				String paramTName =KMTHelper.getTypeName(pt);
+				if(paramTName.equals("UnknownJavaObject")){
+					// not possible to use param type name
+					// reset post fix to number
+					result = new StringBuffer("_").append((integer).toString());
+					break; // forget about other params if any
+				}
+				else result.append(paramTName);
+			}
+		}
+		return result.toString();
+	}
+
 
 	/** recursively change the return type on this operation and all its methods
 	 * 
@@ -266,7 +300,8 @@ public class Jar2KMPass3 extends Jar2KMPass {
 						while(itParam1.hasNext()){
 							Type t1 = itParam1.next().getType();
 							Type t2 = itParam2.next().getType();
-							if(!TypeEqualityChecker.equals(t1,t2)) allParamsAreTheSame= false;
+							if(!TypeEqualityChecker.equals(t1,t2)) 
+								allParamsAreTheSame= false;
 							// TODO check the special case of UnknownJavaClass
 						}
 					} else allParamsAreTheSame= false;
