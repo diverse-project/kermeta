@@ -1,4 +1,4 @@
-/* $Id: KMTHelper.java,v 1.7 2006-08-22 09:45:56 dtouzet Exp $
+/* $Id: KMTHelper.java,v 1.8 2006-08-23 15:51:55 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMTHelper.java
  * License    : EPL
@@ -50,6 +50,26 @@ public class KMTHelper {
 		{
 			ClassImpl fClass = (ClassImpl)type;
 			return getQualifiedName(fClass.getTypeDefinition());
+		}
+		return "";
+	}
+	/**
+	 * Get thename of FType 
+	 * as the concrete types usually inherit from NamedElement
+	 * or is a FClass. In the later case, returns the class definition name
+	 */
+	public static String getTypeName(Type type)
+	{
+		if(type instanceof NamedElement)
+		{
+			NamedElement fNamedElement = (NamedElement)type;
+
+			return fNamedElement.getName(); 	
+		}
+		else if (type instanceof fr.irisa.triskell.kermeta.language.structure.Class)
+		{
+			ClassImpl fClass = (ClassImpl)type;
+			return fClass.getTypeDefinition().getName();
 		}
 		return "";
 	}
