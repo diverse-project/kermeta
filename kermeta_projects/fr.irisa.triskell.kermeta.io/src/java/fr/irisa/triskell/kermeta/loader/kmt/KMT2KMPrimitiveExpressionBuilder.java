@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.12 2006-05-17 15:47:21 jmottu Exp $
+/* $Id: KMT2KMPrimitiveExpressionBuilder.java,v 1.13 2006-08-24 14:41:30 dtouzet Exp $
  * Project : Kermeta io
  * File : KMT2KMExpressionBuilder.java
  * License : EPL
@@ -16,6 +16,7 @@ import fr.irisa.triskell.kermeta.ast.Basictype;
 import fr.irisa.triskell.kermeta.ast.FBlock;
 import fr.irisa.triskell.kermeta.ast.FBooleanLiteral;
 import fr.irisa.triskell.kermeta.ast.FConditional;
+import fr.irisa.triskell.kermeta.ast.FExpression;
 import fr.irisa.triskell.kermeta.ast.FExpressionLst;
 import fr.irisa.triskell.kermeta.ast.FIntegerLiteral;
 import fr.irisa.triskell.kermeta.ast.FJavaStaticCall;
@@ -113,7 +114,15 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		builder.storeTrace(cond,fConditional);
 		cond.setCondition(KMT2KMExperessionBuilder.process(fConditional.getCondition(), builder));
 		cond.setThenBody(createBlock(fConditional.getIfblock()));
-		cond.setElseBody(createBlock(fConditional.getElseblock()));
+		
+		// Patch that avoids to create an empty else block if the conditional statement
+		// does not contain an else part.
+		// OLD: cond.setElseBody(createBlock(fConditional.getElseblock()));
+		if(fConditional.getElseblock() != null)
+			cond.setElseBody(createBlock(fConditional.getElseblock()));
+		else
+			cond.setElseBody(null);
+		
 		result = cond;
 		return false;
 	}
@@ -318,7 +327,20 @@ public class KMT2KMPrimitiveExpressionBuilder extends KMT2KMPass {
 		builder.storeTrace(current_le,fLambdaExpression);
 		builder.pushContext();
 		fLambdaExpression.getParams().accept(this);
-		current_le.setBody(createBlock(fLambdaExpression.getExpression()));
+		
+		// Patch that avoids to create a Block element in case the body of the lambda expression
+		// contains a single expression.
+		//OLD: current_le.setBody(createBlock(fLambdaExpression.getExpression()));
+		if(fLambdaExpression.getExpression().getChildCount() > 1) {
+			current_le.setBody( createBlock(fLambdaExpression.getExpression()) );
+		}
+		else {
+			FExpression fExp = (FExpression) fLambdaExpression.getExpression().getChild(0);
+			fr.irisa.triskell.kermeta.language.behavior.Expression expr =  builder.behav_factory.createEmptyExpression();
+			builder.storeTrace(expr, fExp);
+			current_le.setBody( KMT2KMExperessionBuilder.process(fExp, builder) );
+		}
+
 		result = current_le;
 		builder.popContext();
 		return false;

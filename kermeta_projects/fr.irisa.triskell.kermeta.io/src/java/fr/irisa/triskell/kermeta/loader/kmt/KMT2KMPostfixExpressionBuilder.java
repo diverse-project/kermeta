@@ -6,6 +6,7 @@ package fr.irisa.triskell.kermeta.loader.kmt;
 
 import fr.irisa.triskell.kermeta.ast.ActualParameter;
 import fr.irisa.triskell.kermeta.ast.CallPostfix;
+import fr.irisa.triskell.kermeta.ast.FExpression;
 import fr.irisa.triskell.kermeta.ast.FExpressionLst;
 import fr.irisa.triskell.kermeta.ast.LambdaPostfix;
 import fr.irisa.triskell.kermeta.ast.LambdaPostfixParam;
@@ -88,7 +89,20 @@ public class KMT2KMPostfixExpressionBuilder extends KMT2KMPass {
 			builder.storeTrace(current_le,lambdaPostfix);
 			builder.pushContext();
 			lambdaPostfix.getParams().accept(this);
-			current_le.setBody(createBlock(lambdaPostfix.getExpression()));
+			
+			// Patch that avoids to create a Block element in case the body of the lambda expression
+			// contains a single expression.
+			//OLD: current_le.setBody(createBlock(lambdaPostfix.getExpression()));
+			if(lambdaPostfix.getExpression().getChildCount() > 1) {
+				current_le.setBody( createBlock(lambdaPostfix.getExpression()) );
+			}
+			else {
+				FExpression fExp = (FExpression) lambdaPostfix.getExpression().getChild(0);
+				fr.irisa.triskell.kermeta.language.behavior.Expression expr =  builder.behav_factory.createEmptyExpression();
+				builder.storeTrace(expr, fExp);
+				current_le.setBody( KMT2KMExperessionBuilder.process(fExp, builder) );
+			}
+			
 			((CallExpression)result).getParameters().add(current_le);
 			builder.popContext();
 		}
