@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.33 2006-08-21 13:06:47 zdrey Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.34 2006-08-24 14:37:59 dtouzet Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -161,6 +161,11 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	public Object visitAssignment(Assignment node) {
 		String left = this.accept(node.getTarget()).toString();
 		String right = this.accept(node.getValue()).toString();
+		
+		// Patch that adds the 'function' keyword in case the assigned value is a function
+		if(node.getValue() instanceof LambdaExpression)
+			right = "function " + right;
+		
 		String op = (node.isIsCast())?"?":":";
 		return left + " " + op + "= " + right;
 	}
