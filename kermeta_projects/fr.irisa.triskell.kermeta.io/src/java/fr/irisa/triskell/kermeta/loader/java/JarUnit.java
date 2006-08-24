@@ -1,4 +1,4 @@
-/* $Id: JarUnit.java,v 1.7 2006-08-22 14:56:10 dvojtise Exp $
+/* $Id: JarUnit.java,v 1.8 2006-08-24 11:51:09 dvojtise Exp $
 * Project : Kermeta.io
 * File : EcoreUnit.java
 * License : EPL
@@ -20,12 +20,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
 
+import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 
 /**
@@ -140,7 +143,19 @@ public class JarUnit extends KermetaUnit {
     }
 
 
-	
+    /** retrieves the underlying java type name 
+	 * 
+	 * @param p
+	 * @return
+	 */
+	public static String getUnderlyingJavaTypeName(Class p) {
+		Iterator it = p.getTag().iterator();
+		while(it.hasNext()){
+			Tag tag = (Tag)it.next();
+			if (tag.getName().equals(Jar2KMPass.IS_PROXY_FOR_JAVA_TYPE)) return tag.getValue();
+		}
+		return "";
+	}
 	
     
 }

@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass3.java,v 1.8 2006-08-23 15:42:56 dvojtise Exp $
+/* $Id: Jar2KMPass3.java,v 1.9 2006-08-24 11:51:09 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass3.java
  * License : EPL
@@ -10,17 +10,20 @@
  */
 package fr.irisa.triskell.kermeta.loader.java;
 
+import java.io.Writer;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
@@ -28,6 +31,7 @@ import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.impl.ClassImpl;
 import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
 import fr.irisa.triskell.kermeta.typechecker.TypeEqualityChecker;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -118,7 +122,7 @@ public class Jar2KMPass3 extends Jar2KMPass {
 				// only operations with parameter are renamed 
 				// look for operations with the same name but with a different 
 				// signature in the inheritance tree
-				Vector<Operation> conflictingOperations = findConflictingOperations(op, null);
+				HashSet<Operation> conflictingOperations = findConflictingOperations(op, null);
 				if(conflictingOperations.size()!=0){
 					// for each of the operations in conflict: rename them (and their whole implementation tree)
 					// except the operation without parameter
@@ -128,8 +132,11 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					while(conlictingOpIt.hasNext()){
 						Operation conflictingOp = conlictingOpIt.next();
 						if(conflictingOp.getOwnedParameter().size()>0){
-							if(conflictingOp.getName().contains("_"))
+							if(conflictingOp.getName().contains("_")){
 								internalLog.debug("strange renaming an operation allready containing _");
+
+								HashSet<Operation> conflictingOperations_bis = findConflictingOperations(op, null);
+							}
 							renameOperationTree(conflictingOp, calculateOperationPostFix(conflictingOp, i++));
 						}
 					}
@@ -159,14 +166,27 @@ public class Jar2KMPass3 extends Jar2KMPass {
 			// try to use parameter type names
 			Iterator it = op.getOwnedParameter().iterator();
 			while(it.hasNext()){
-				Type pt = ((Parameter)it.next()).getType();
+				Parameter parameter = (Parameter)it.next();
+				Type pt = parameter.getType();
 				
 				String paramTName =KMTHelper.getTypeName(pt);
+				if(parameter.getUpper()!=1) 
+					paramTName+="s"; // this is a collection, add a "s" to the end of the typename
 				if(paramTName.equals("UnknownJavaObject")){
-					// not possible to use param type name
-					// reset post fix to number
-					result = new StringBuffer("_").append((integer).toString());
-					break; // forget about other params if any
+					// retreive the original name
+					if (pt instanceof fr.irisa.triskell.kermeta.language.structure.Class)
+					{
+						ClassImpl fClass = (ClassImpl)pt;
+						paramTName = JarUnit.getUnderlyingJavaTypeName(fClass);
+						
+						result.append(paramTName.substring(paramTName.lastIndexOf(":")+1));
+					}
+					else {
+						// not possible to use param type name
+						// reset post fix to number
+						result = new StringBuffer("_").append((integer).toString());
+						break; // forget about other params if any
+					}
 				}
 				else result.append(paramTName);
 			}
@@ -201,10 +221,10 @@ public class Jar2KMPass3 extends Jar2KMPass {
 	 * @return
 	 * @throws Exception 
 	 */
-	private Vector<Operation> findConflictingOperations(Operation op, ClassDefinition cd) throws Exception {
+	private HashSet<Operation> findConflictingOperations(Operation op, ClassDefinition cd) throws Exception {
 		if (cd == null) cd = op.getOwningClass();
 		Operation topOperation = this.getTopOperation(op);
-		Vector<Operation> result = new Vector<Operation>();
+		HashSet<Operation> result = new HashSet<Operation>();
 		Iterator<Operation> itOp = cd.getOwnedOperation().iterator();
 		while(itOp.hasNext()){
 			Operation testedOp = getTopOperation(itOp.next());
@@ -435,12 +455,12 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					//	return type : try to see if it is a collection
 					if(paramTypes[j] instanceof Class){
 						Class paramClassType = (Class)paramTypes[j];
-						setMultiplicityFromClass(res, paramClassType);
+						setTypeFromClass(res, paramClassType);
 					}
 					else if(paramTypes[j] instanceof ParameterizedType){
 						ParameterizedType pt = (ParameterizedType)paramTypes[j];
 						Class rawType = (Class)pt.getRawType();
-						setMultiplicityFromClass(res, rawType);
+						setTypeFromClass(res, rawType);
 						java.lang.reflect.Type[] typeArguments =pt.getActualTypeArguments();
 						for( int k = 0; k <typeArguments.length; k++ ){
 						//	res.getContainedType().add();
@@ -473,7 +493,7 @@ public class Jar2KMPass3 extends Jar2KMPass {
 	 * @param param
 	 * @param paramClassType
 	 */
-	private void setMultiplicityFromClass(Parameter param, Class paramClassType) {
+	private void setTypeFromClass(Parameter param, Class paramClassType) {
 		if(paramClassType.isArray()){
 		//builder.storeTrace(res, node);
 			// isOrdered :
@@ -508,8 +528,8 @@ public class Jar2KMPass3 extends Jar2KMPass {
 	public void processOperations(ClassDefinition classDef, Class c){
 		Method[] methods = c.getDeclaredMethods();
 		for (int i = 0 ; i < methods.length; i++){
-			// create it only if public
-			if(Modifier.isPublic(methods[i].getModifiers())){
+			// create it only if public and not synthetic (ie. introduced by the compiler
+			if(Modifier.isPublic(methods[i].getModifiers()) && !methods[i].isSynthetic()){
 				//	Create the operation:
 				builder.current_operation = builder.struct_factory.createOperation();
 				//builder.storeTrace(builder.current_operation, node);
@@ -580,12 +600,12 @@ public class Jar2KMPass3 extends Jar2KMPass {
 					//	return type : try to see if it is a collection
 					if(paramTypes[j] instanceof Class){
 						Class paramClassType = (Class)paramTypes[j];
-						setMultiplicityFromClass(res, paramClassType);
+						setTypeFromClass(res, paramClassType);
 					}
 					else if(paramTypes[j] instanceof ParameterizedType){
 						ParameterizedType pt = (ParameterizedType)paramTypes[j];
 						Class rawType = (Class)pt.getRawType();
-						setMultiplicityFromClass(res, rawType);
+						setTypeFromClass(res, rawType);
 						java.lang.reflect.Type[] typeArguments =pt.getActualTypeArguments();
 						for( int k = 0; k <typeArguments.length; k++ ){
 						//	res.getContainedType().add();

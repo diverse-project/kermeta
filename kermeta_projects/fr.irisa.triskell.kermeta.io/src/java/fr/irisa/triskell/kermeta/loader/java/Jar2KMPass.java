@@ -1,4 +1,4 @@
-/* $Id: Jar2KMPass.java,v 1.6 2006-08-23 15:42:56 dvojtise Exp $
+/* $Id: Jar2KMPass.java,v 1.7 2006-08-24 11:51:09 dvojtise Exp $
  * Project : fr.irisa.triskell.kermeta.io
  * File : Jar2KMPass.java
  * License : EPL
@@ -140,5 +140,6 @@ public abstract class Jar2KMPass {
 		primitive_types_mapping.put("java::lang::String", 	"kermeta::standard::String");
 		primitive_types_mapping.put("char", 				"kermeta::standard::Character");
 		primitive_types_mapping.put("Object", 				"kermeta::standard::Object");
+		primitive_types_mapping.put("java::lang::Object", 	"kermeta::standard::Object");
 	}
 }
