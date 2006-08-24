@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.44 2006-08-22 14:56:58 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.45 2006-08-24 11:49:30 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -972,10 +972,15 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    		Object self = roSelf.getData().get("javaObject");
 		    	// retreive the method
 	    		Method method = getJavaMethod(node);
-	    		Object[] args = buildJavaArgs(pParameters, method.getParameterTypes());
-	    		Object returnedObject = method.invoke(self, args);
-	    		
-	    		result = convertJavaObjectToRuntimeObject(node,returnedObject);
+	    		if(method !=  null ){
+	    			Object[] args = buildJavaArgs(pParameters, method.getParameterTypes());
+	    			Object returnedObject = method.invoke(self, args);	    				    		
+	    			result = convertJavaObjectToRuntimeObject(node,returnedObject);
+	    		}
+	    		else{
+	    			// this is in fact an operation defined on Object
+	    			result = (RuntimeObject)this.accept(node);
+	    		}
 	    	}
 	    	
 	    } catch (IllegalArgumentException e) {
@@ -1018,7 +1023,11 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		RuntimeObject returnType = this.getMemory().getRuntimeObjectForFObject(typedElement.getType());
 		//RuntimeObject stringType = this.getMemory().getTypeDefinitionAsRuntimeObject("kermeta::standard::String");
 		String returnTypeQName = KMTHelper.getTypeQualifiedName((Type) returnType.getData().get("kcoreObject"));
-		if("kermeta::standard::String".equals(returnTypeQName)){
+		if (returnedObject ==  null){
+			result = getMemory().voidINSTANCE;
+		}	
+		else if("kermeta::standard::String".equals(returnTypeQName)){
+		
 			result = fr.irisa.triskell.kermeta.runtime.basetypes.String.create((String)returnedObject, getMemory().getROFactory())	;    			
 		}
 		else if("kermeta::standard::Integer".equals(returnTypeQName)){
@@ -1049,6 +1058,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 		Object[] result = new Object[parameters.size()];
 		for(int i = 0; i < parameters.size(); i++){
 			RuntimeObject fparam = (RuntimeObject)parameters.get(i);
+			Object javaObject = fparam.getData().get("javaObject");
 			String typename = javaTypeParams[i].getName();
 			if(typename.equals("java.lang.String")){
 				result[i] = fr.irisa.triskell.kermeta.runtime.basetypes.String.getValue(fparam);
@@ -1061,6 +1071,9 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 			}
 			else if(typename.equals("boolean")){
 				result[i] = fr.irisa.triskell.kermeta.runtime.basetypes.Boolean.getValue(fparam);
+			}
+			else if(javaObject != null){
+				result[i] = javaObject;
 			}
 			else{
 				result[i] = null;
