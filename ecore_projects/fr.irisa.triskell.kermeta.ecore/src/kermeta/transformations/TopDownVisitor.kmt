@@ -1,4 +1,4 @@
-/* $Id: TopDownVisitor.kmt,v 1.4 2006-04-19 14:15:46 vmahe Exp $
+/* $Id: TopDownVisitor.kmt,v 1.5 2006-08-28 06:59:39 vmahe Exp $
  * File : TopDownVisitor.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -16,6 +16,7 @@ package TopDownVisitor;
 require "Visitors.kmt"
 require kermeta
 require "../ecore.kmt"
+require "../keyword_list.kmt"
 require "../helpers/EcoreHelper.kmt"
 require "Tools.kmt"
 
@@ -27,6 +28,12 @@ using EcoreVisitors
 class TopDownVisitorPattern inherits VisitorPattern
 {
 	reference mainVisitor : EClass
+	reference keyWordList : kermeta::language::KeyWordList
+	
+	method initialize() is do
+		super()
+		keyWordList := kermeta::language::KeyWordList.new
+	end
 	
 	// the main method to be rewrited from Visitor class
 	/**
@@ -133,22 +140,7 @@ class TopDownVisitorPattern inherits VisitorPattern
     // references with a name corresponding to a Kermeta reserved word
     //  must be prefixed by a "~"
     operation reservedName(name : String) : String is do
-    	if     name == "abstract"
-	    	or name == "class"
-	    	or name == "do"
-	    	or name == "else"
-	    	or name == "end"
-	    	or name == "if"
-	    	or name == "method"
-	    	or name == "operation"
-	    	or name == "package"
-	    	or name == "property"
-	    	or name == "reference"
-	    	or name == "result"
-	    	or name == "then"
-	    	or name == "value"
-	    	or name == "var"
-	    	
+    	if keyWordList.isKeyword(name)
 			then name := "~" + name
 		end
     	result := name

@@ -1,4 +1,4 @@
-/* $Id: Visitors.kmt,v 1.2 2006-04-06 09:04:44 vmahe Exp $
+/* $Id: Visitors.kmt,v 1.3 2006-08-28 06:59:39 vmahe Exp $
  * File : Visitors.kmt
  * License : EPL
  * Copyright : IRISA / INRIA / Universite de Rennes 1
@@ -38,8 +38,8 @@ class VisitorPattern
     operation initialize() is do
 		helper := EcoreHelpers::EcoreHelper.new
     	helper.initialize
-    	generateJavaCode := true
-    	generateKermetaCode := true
+    	generateJavaCode := false	// not implemented
+    	generateKermetaCode := true	// default value, can be changed
     	
     	tools := EcoreTools::Tools.new
     	
@@ -74,6 +74,16 @@ class VisitorPattern
         applyPattern(pack, visitableInterface, abstractVisitor, visitReturnType)
 		
 		result := specPack
+    end
+    
+    operation applyPattern(pack : EPackage, visitableInterface : EClass, abstractVisitor : EClass,
+			visitReturnType : EClassifier) is do
+        // add the visitable interface to the package classes
+        addVisitableSupertype(pack, visitableInterface, abstractVisitor)
+        
+         //implements 'accept' methods on visitable classes
+        // and the corresponding 'visit' method in the abstract Visitor
+		addAcceptMethods(pack, visitableInterface, abstractVisitor, visitReturnType)        
     end
      
     operation addAcceptOperation(visitableClass : EClass, abstractVisitor : EClass,
@@ -123,16 +133,6 @@ class VisitorPattern
         abstractVisitor.interface := false
         abstractVisitor.~abstract := true
         result := abstractVisitor
-    end
-    
-    operation applyPattern(pack : EPackage, visitableInterface : EClass, abstractVisitor : EClass,
-			visitReturnType : EClassifier) is do
-        // add the visitable interface to the package classes
-        addVisitableSupertype(pack, visitableInterface, abstractVisitor)
-        
-         //implements 'accept' methods on visitable classes
-        // and the corresponding 'visit' method in the abstract Visitor
-		addAcceptMethods(pack, visitableInterface, abstractVisitor, visitReturnType)        
     end
     
     operation addVisitableSupertype(pack : EPackage, visitableInterface : EClass, abstractVisitor : EClass) is do
