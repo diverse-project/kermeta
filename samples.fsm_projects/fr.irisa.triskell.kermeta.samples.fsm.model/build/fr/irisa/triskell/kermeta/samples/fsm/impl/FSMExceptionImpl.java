@@ -38,7 +38,7 @@ public class FSMExceptionImpl extends EObjectImpl implements FSMException {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return FsmPackage.eINSTANCE.getFSMException();
+		return FsmPackage.Literals.FSM_EXCEPTION;
 	}
 
 } //FSMExceptionImpl

@@ -10,24 +10,15 @@
  *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
  ******************************************************************************/
 
-package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures;
-
+package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram;
 
 /**
+ * An interface defining EdgeObject Constants.<br>
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StateFigure extends org.topcased.draw2d.figures.StateFigure {
-	/**
-	 * Constructor
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StateFigure() {
-
-		super();
-	}
-
+public interface FsmEdgeObjectConstants {
+	/** Public constant defining the input EdgeObject id. */
+	String INPUT_EDGE_OBJECT_ID = "inputEdgeObject";
 }

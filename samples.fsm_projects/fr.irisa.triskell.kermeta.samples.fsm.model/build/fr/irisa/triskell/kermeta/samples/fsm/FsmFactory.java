@@ -23,7 +23,7 @@ public interface FsmFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	FsmFactory eINSTANCE = new fr.irisa.triskell.kermeta.samples.fsm.impl.FsmFactoryImpl();
+	FsmFactory eINSTANCE = fr.irisa.triskell.kermeta.samples.fsm.impl.FsmFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>FSM</em>'.

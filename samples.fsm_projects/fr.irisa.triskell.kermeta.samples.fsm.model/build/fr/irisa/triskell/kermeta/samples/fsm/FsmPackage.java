@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see fr.irisa.triskell.kermeta.samples.fsm.FsmFactory
  * @model kind="package"
+ *        annotation="http://www.topcased.org/uuid uuid='11491501337930'"
  * @generated
  */
 public interface FsmPackage extends EPackage {
@@ -107,7 +108,7 @@ public interface FsmPackage extends EPackage {
 	int FSM__FINAL_STATE = 3;
 
 	/**
-	 * The number of structural features of the the '<em>FSM</em>' class.
+	 * The number of structural features of the '<em>FSM</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -162,7 +163,7 @@ public interface FsmPackage extends EPackage {
 	int STATE__INCOMING_TRANSITION = 3;
 
 	/**
-	 * The number of structural features of the the '<em>State</em>' class.
+	 * The number of structural features of the '<em>State</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -217,7 +218,7 @@ public interface FsmPackage extends EPackage {
 	int TRANSITION__OUTPUT = 3;
 
 	/**
-	 * The number of structural features of the the '<em>Transition</em>' class.
+	 * The number of structural features of the '<em>Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -236,7 +237,7 @@ public interface FsmPackage extends EPackage {
 	int FSM_EXCEPTION = 3;
 
 	/**
-	 * The number of structural features of the the '<em>FSM Exception</em>' class.
+	 * The number of structural features of the '<em>FSM Exception</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -255,7 +256,7 @@ public interface FsmPackage extends EPackage {
 	int NON_DETERMINISM = 4;
 
 	/**
-	 * The number of structural features of the the '<em>Non Determinism</em>' class.
+	 * The number of structural features of the '<em>Non Determinism</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -274,7 +275,7 @@ public interface FsmPackage extends EPackage {
 	int NO_TRANSITION = 5;
 
 	/**
-	 * The number of structural features of the the '<em>No Transition</em>' class.
+	 * The number of structural features of the '<em>No Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -293,7 +294,7 @@ public interface FsmPackage extends EPackage {
 	int NO_INITIAL_STATE_EXCEPTION = 6;
 
 	/**
-	 * The number of structural features of the the '<em>No Initial State Exception</em>' class.
+	 * The number of structural features of the '<em>No Initial State Exception</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -534,5 +535,196 @@ public interface FsmPackage extends EPackage {
 	 * @generated
 	 */
 	FsmFactory getFsmFactory();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * Defines literals for the meta objects that represent
+	 * <ul>
+	 *   <li>each class,</li>
+	 *   <li>each feature of each class,</li>
+	 *   <li>each enum,</li>
+	 *   <li>and each data type</li>
+	 * </ul>
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	interface Literals {
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.FSMImpl <em>FSM</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FSMImpl
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getFSM()
+		 * @generated
+		 */
+		EClass FSM = eINSTANCE.getFSM();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned State</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FSM__OWNED_STATE = eINSTANCE.getFSM_OwnedState();
+
+		/**
+		 * The meta object literal for the '<em><b>Initial State</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FSM__INITIAL_STATE = eINSTANCE.getFSM_InitialState();
+
+		/**
+		 * The meta object literal for the '<em><b>Current State</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FSM__CURRENT_STATE = eINSTANCE.getFSM_CurrentState();
+
+		/**
+		 * The meta object literal for the '<em><b>Final State</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FSM__FINAL_STATE = eINSTANCE.getFSM_FinalState();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.StateImpl <em>State</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.StateImpl
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getState()
+		 * @generated
+		 */
+		EClass STATE = eINSTANCE.getState();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning FSM</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE__OWNING_FSM = eINSTANCE.getState_OwningFSM();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATE__NAME = eINSTANCE.getState_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Outgoing Transition</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE__OUTGOING_TRANSITION = eINSTANCE.getState_OutgoingTransition();
+
+		/**
+		 * The meta object literal for the '<em><b>Incoming Transition</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATE__INCOMING_TRANSITION = eINSTANCE.getState_IncomingTransition();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.TransitionImpl <em>Transition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.TransitionImpl
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getTransition()
+		 * @generated
+		 */
+		EClass TRANSITION = eINSTANCE.getTransition();
+
+		/**
+		 * The meta object literal for the '<em><b>Source</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITION__SOURCE = eINSTANCE.getTransition_Source();
+
+		/**
+		 * The meta object literal for the '<em><b>Target</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSITION__TARGET = eINSTANCE.getTransition_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Input</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSITION__INPUT = eINSTANCE.getTransition_Input();
+
+		/**
+		 * The meta object literal for the '<em><b>Output</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TRANSITION__OUTPUT = eINSTANCE.getTransition_Output();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.FSMExceptionImpl <em>FSM Exception</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FSMExceptionImpl
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getFSMException()
+		 * @generated
+		 */
+		EClass FSM_EXCEPTION = eINSTANCE.getFSMException();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.NonDeterminismImpl <em>Non Determinism</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.NonDeterminismImpl
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getNonDeterminism()
+		 * @generated
+		 */
+		EClass NON_DETERMINISM = eINSTANCE.getNonDeterminism();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.NoTransitionImpl <em>No Transition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.NoTransitionImpl
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getNoTransition()
+		 * @generated
+		 */
+		EClass NO_TRANSITION = eINSTANCE.getNoTransition();
+
+		/**
+		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.samples.fsm.impl.NoInitialStateExceptionImpl <em>No Initial State Exception</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.NoInitialStateExceptionImpl
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getNoInitialStateException()
+		 * @generated
+		 */
+		EClass NO_INITIAL_STATE_EXCEPTION = eINSTANCE.getNoInitialStateException();
+
+		/**
+		 * The meta object literal for the '<em>String</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.lang.String
+		 * @see fr.irisa.triskell.kermeta.samples.fsm.impl.FsmPackageImpl#getString()
+		 * @generated
+		 */
+		EDataType STRING = eINSTANCE.getString();
+
+	}
 
 } //FsmPackage

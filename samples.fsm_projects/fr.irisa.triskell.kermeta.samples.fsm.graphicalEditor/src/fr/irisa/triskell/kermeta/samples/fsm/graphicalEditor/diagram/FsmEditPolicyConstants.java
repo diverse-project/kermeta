@@ -10,24 +10,23 @@
  *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
  ******************************************************************************/
 
-package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures;
-
+package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram;
 
 /**
+ * A collection of Roles. Each identifier is used to key the EditPolicy.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StateFigure extends org.topcased.draw2d.figures.StateFigure {
-	/**
-	 * Constructor
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StateFigure() {
+public interface FsmEditPolicyConstants {
 
-		super();
-	}
+	/** The key used to install an <i>FSM</i> EditPolicy. */
+	String FSM_EDITPOLICY = "FSM EditPolicy";
+
+	/** The key used to install an <i>State</i> EditPolicy. */
+	String STATE_EDITPOLICY = "State EditPolicy";
+
+	/** The key used to install an <i>Transition</i> EditPolicy. */
+	String TRANSITION_EDITPOLICY = "Transition EditPolicy";
 
 }

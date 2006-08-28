@@ -19,7 +19,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -102,7 +101,7 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return FsmPackage.eINSTANCE.getState();
+		return FsmPackage.Literals.STATE;
 	}
 
 	/**
@@ -112,7 +111,17 @@ public class StateImpl extends EObjectImpl implements State {
 	 */
 	public FSM getOwningFSM() {
 		if (eContainerFeatureID != FsmPackage.STATE__OWNING_FSM) return null;
-		return (FSM)eContainer;
+		return (FSM)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningFSM(FSM newOwningFSM, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningFSM, FsmPackage.STATE__OWNING_FSM, msgs);
+		return msgs;
 	}
 
 	/**
@@ -121,15 +130,15 @@ public class StateImpl extends EObjectImpl implements State {
 	 * @generated
 	 */
 	public void setOwningFSM(FSM newOwningFSM) {
-		if (newOwningFSM != eContainer || (eContainerFeatureID != FsmPackage.STATE__OWNING_FSM && newOwningFSM != null)) {
+		if (newOwningFSM != eInternalContainer() || (eContainerFeatureID != FsmPackage.STATE__OWNING_FSM && newOwningFSM != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningFSM))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (eContainer != null)
+			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningFSM != null)
 				msgs = ((InternalEObject)newOwningFSM).eInverseAdd(this, FsmPackage.FSM__OWNED_STATE, FSM.class, msgs);
-			msgs = eBasicSetContainer((InternalEObject)newOwningFSM, FsmPackage.STATE__OWNING_FSM, msgs);
+			msgs = basicSetOwningFSM(newOwningFSM, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
@@ -197,24 +206,18 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case FsmPackage.STATE__OWNING_FSM:
-					if (eContainer != null)
-						msgs = eBasicRemoveFromContainer(msgs);
-					return eBasicSetContainer(otherEnd, FsmPackage.STATE__OWNING_FSM, msgs);
-				case FsmPackage.STATE__OUTGOING_TRANSITION:
-					return ((InternalEList)getOutgoingTransition()).basicAdd(otherEnd, msgs);
-				case FsmPackage.STATE__INCOMING_TRANSITION:
-					return ((InternalEList)getIncomingTransition()).basicAdd(otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FsmPackage.STATE__OWNING_FSM:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningFSM((FSM)otherEnd, msgs);
+			case FsmPackage.STATE__OUTGOING_TRANSITION:
+				return ((InternalEList)getOutgoingTransition()).basicAdd(otherEnd, msgs);
+			case FsmPackage.STATE__INCOMING_TRANSITION:
+				return ((InternalEList)getIncomingTransition()).basicAdd(otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -222,20 +225,16 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case FsmPackage.STATE__OWNING_FSM:
-					return eBasicSetContainer(null, FsmPackage.STATE__OWNING_FSM, msgs);
-				case FsmPackage.STATE__OUTGOING_TRANSITION:
-					return ((InternalEList)getOutgoingTransition()).basicRemove(otherEnd, msgs);
-				case FsmPackage.STATE__INCOMING_TRANSITION:
-					return ((InternalEList)getIncomingTransition()).basicRemove(otherEnd, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FsmPackage.STATE__OWNING_FSM:
+				return basicSetOwningFSM(null, msgs);
+			case FsmPackage.STATE__OUTGOING_TRANSITION:
+				return ((InternalEList)getOutgoingTransition()).basicRemove(otherEnd, msgs);
+			case FsmPackage.STATE__INCOMING_TRANSITION:
+				return ((InternalEList)getIncomingTransition()).basicRemove(otherEnd, msgs);
 		}
-		return eBasicSetContainer(null, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -243,16 +242,12 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eBasicRemoveFromContainer(NotificationChain msgs) {
-		if (eContainerFeatureID >= 0) {
-			switch (eContainerFeatureID) {
-				case FsmPackage.STATE__OWNING_FSM:
-					return eContainer.eInverseRemove(this, FsmPackage.FSM__OWNED_STATE, FSM.class, msgs);
-				default:
-					return eDynamicBasicRemoveFromContainer(msgs);
-			}
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case FsmPackage.STATE__OWNING_FSM:
+				return eInternalContainer().eInverseRemove(this, FsmPackage.FSM__OWNED_STATE, FSM.class, msgs);
 		}
-		return eContainer.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - eContainerFeatureID, null, msgs);
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -260,8 +255,8 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case FsmPackage.STATE__OWNING_FSM:
 				return getOwningFSM();
 			case FsmPackage.STATE__NAME:
@@ -271,7 +266,7 @@ public class StateImpl extends EObjectImpl implements State {
 			case FsmPackage.STATE__INCOMING_TRANSITION:
 				return getIncomingTransition();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -279,8 +274,8 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case FsmPackage.STATE__OWNING_FSM:
 				setOwningFSM((FSM)newValue);
 				return;
@@ -296,7 +291,7 @@ public class StateImpl extends EObjectImpl implements State {
 				getIncomingTransition().addAll((Collection)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -304,8 +299,8 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case FsmPackage.STATE__OWNING_FSM:
 				setOwningFSM((FSM)null);
 				return;
@@ -319,7 +314,7 @@ public class StateImpl extends EObjectImpl implements State {
 				getIncomingTransition().clear();
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -327,8 +322,8 @@ public class StateImpl extends EObjectImpl implements State {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case FsmPackage.STATE__OWNING_FSM:
 				return getOwningFSM() != null;
 			case FsmPackage.STATE__NAME:
@@ -338,7 +333,7 @@ public class StateImpl extends EObjectImpl implements State {
 			case FsmPackage.STATE__INCOMING_TRANSITION:
 				return incomingTransition != null && !incomingTransition.isEmpty();
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**

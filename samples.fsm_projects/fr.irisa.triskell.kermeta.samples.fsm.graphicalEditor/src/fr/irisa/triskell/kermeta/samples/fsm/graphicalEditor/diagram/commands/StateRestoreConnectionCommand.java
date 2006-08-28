@@ -119,6 +119,7 @@ public class StateRestoreConnectionCommand extends
 					if (!isAlreadyPresent(existing, edgeObject)) {
 						ICreationUtils factory = getModeler()
 								.getActiveConfiguration().getCreationUtils();
+						// restore the link with its default presentation
 						GraphElement edge = factory
 								.createGraphElement(edgeObject);
 						if (edge instanceof GraphEdge) {

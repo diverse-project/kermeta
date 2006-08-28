@@ -10,24 +10,18 @@
  *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
  ******************************************************************************/
 
-package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures;
-
+package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram;
 
 /**
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * 
+ * A Set of properties that are used for the graphical objects that are not
+ * associated with a model object. Each name is used as the typeInfo attribute
+ * in the DI file.
+ * 
+ * Creation : 11 may 2006
+ * 
  * @generated
  */
-public class StateFigure extends org.topcased.draw2d.figures.StateFigure {
-	/**
-	 * Constructor
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StateFigure() {
-
-		super();
-	}
-
+public interface FsmSimpleObjectConstants {
 }

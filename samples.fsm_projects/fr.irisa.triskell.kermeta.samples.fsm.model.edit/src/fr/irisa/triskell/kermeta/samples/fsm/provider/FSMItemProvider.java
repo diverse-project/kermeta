@@ -82,8 +82,10 @@ public class FSMItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FSM_initialState_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FSM_initialState_feature", "_UI_FSM_type"),
-				 FsmPackage.eINSTANCE.getFSM_InitialState(),
+				 FsmPackage.Literals.FSM__INITIAL_STATE,
 				 true,
+				 false,
+				 false,
 				 null,
 				 null,
 				 null));
@@ -102,8 +104,10 @@ public class FSMItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FSM_currentState_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FSM_currentState_feature", "_UI_FSM_type"),
-				 FsmPackage.eINSTANCE.getFSM_CurrentState(),
+				 FsmPackage.Literals.FSM__CURRENT_STATE,
 				 true,
+				 false,
+				 false,
 				 null,
 				 null,
 				 null));
@@ -122,8 +126,10 @@ public class FSMItemProvider
 				 getResourceLocator(),
 				 getString("_UI_FSM_finalState_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_FSM_finalState_feature", "_UI_FSM_type"),
-				 FsmPackage.eINSTANCE.getFSM_FinalState(),
+				 FsmPackage.Literals.FSM__FINAL_STATE,
 				 true,
+				 false,
+				 false,
 				 null,
 				 null,
 				 null));
@@ -140,7 +146,7 @@ public class FSMItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FsmPackage.eINSTANCE.getFSM_OwnedState());
+			childrenFeatures.add(FsmPackage.Literals.FSM__OWNED_STATE);
 		}
 		return childrenFeatures;
 	}
@@ -152,7 +158,7 @@ public class FSMItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/FSM");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FSM"));
 	}
 
 	/**
@@ -195,7 +201,7 @@ public class FSMItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FsmPackage.eINSTANCE.getFSM_OwnedState(),
+				(FsmPackage.Literals.FSM__OWNED_STATE,
 				 FsmFactory.eINSTANCE.createState()));
 	}
 

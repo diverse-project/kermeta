@@ -10,23 +10,23 @@
  *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
  ******************************************************************************/
 
-package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures;
+package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.policies;
 
+import org.topcased.modeler.edit.policies.ModelerLayoutEditPolicy;
 
 /**
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StateFigure extends org.topcased.draw2d.figures.StateFigure {
+public class FsmDiagramLayoutEditPolicy extends ModelerLayoutEditPolicy {
 	/**
-	 * Constructor
+	 * Default contructor. 
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StateFigure() {
-
+	public FsmDiagramLayoutEditPolicy() {
 		super();
 	}
 

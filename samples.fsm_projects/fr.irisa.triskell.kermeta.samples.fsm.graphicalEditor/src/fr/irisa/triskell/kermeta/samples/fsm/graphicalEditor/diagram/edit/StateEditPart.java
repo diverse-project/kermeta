@@ -24,20 +24,22 @@ import org.topcased.modeler.edit.policies.LabelDirectEditPolicy;
 import org.topcased.modeler.edit.policies.RestoreEditPolicy;
 import org.topcased.modeler.requests.RestoreConnectionsRequest;
 
-import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmEditorEditPolicyConstants;
+import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.FsmEditPolicyConstants;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.commands.StateRestoreConnectionCommand;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.StateFigure;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.policies.TransitionEdgeCreationEditPolicy;
 
 /**
  * The State object controller
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
  * @generated
  */
 public class StateEditPart extends EMFGraphNodeEditPart {
 	/**
 	 * Constructor
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param obj the graph node
 	 * @generated
 	 */
@@ -47,14 +49,14 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 
 	/**
 	 * Creates edit policies and associates these with roles
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
 
-		installEditPolicy(FsmEditorEditPolicyConstants.TRANSITION_EDITPOLICY,
+		installEditPolicy(FsmEditPolicyConstants.TRANSITION_EDITPOLICY,
 				new TransitionEdgeCreationEditPolicy());
 
 		installEditPolicy(ModelerEditPolicyConstants.RESTORE_EDITPOLICY,
@@ -73,7 +75,8 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.eclipse.gef.editparts.AbstractGraphicalEditPart#createFigure()
 	 * @generated
 	 */
@@ -83,24 +86,6 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultWidth()
-	 * @generated
-	 */
-	protected int getDefaultWidth() {
-		return 60;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see org.topcased.modeler.edit.GraphNodeEditPart#getDefaultHeight()
-	 * @generated
-	 */
-	protected int getDefaultHeight() {
-		return 40;
-	}
-
-	/*
 	 * @generated NOT
 	 */
 	@Override
@@ -118,7 +103,7 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 		return theColor;
 	}
 
-	/*
+	/**
 	 * @generated NOT
 	 */
 	@Override
@@ -136,9 +121,10 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 		return theColor;
 	}
 
-	/*
+	/**
 	 * Check if the state is initial @return boolean - true if the state is
-	 * initial, false if the state is not initial @generated NOT
+	 * initial, false if the state is not initial
+	 * @generated NOT
 	 */
 	private boolean isInitial() {
 		fr.irisa.triskell.kermeta.samples.fsm.State theState = (fr.irisa.triskell.kermeta.samples.fsm.State) this
@@ -152,9 +138,10 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 		}
 	}
 
-	/*
+	/**
 	 * Check if the state is final @return boolean - true if the state is final,
-	 * false if the state is not final @generated NOT
+	 * false if the state is not final
+	 * @generated NOT
 	 */
 	private boolean isFinal() {
 		fr.irisa.triskell.kermeta.samples.fsm.State theState = (fr.irisa.triskell.kermeta.samples.fsm.State) this
@@ -177,9 +164,11 @@ public class StateEditPart extends EMFGraphNodeEditPart {
 		return false;
 	}
 
+	/**
+	 * @generated NOT
+	 */
 	@Override
 	protected void refreshVisuals() {
 		super.refreshVisuals();
 	}
-
 }

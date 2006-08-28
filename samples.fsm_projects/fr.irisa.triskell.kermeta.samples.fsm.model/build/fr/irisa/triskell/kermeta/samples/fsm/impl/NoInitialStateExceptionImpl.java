@@ -36,7 +36,7 @@ public class NoInitialStateExceptionImpl extends FSMExceptionImpl implements NoI
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return FsmPackage.eINSTANCE.getNoInitialStateException();
+		return FsmPackage.Literals.NO_INITIAL_STATE_EXCEPTION;
 	}
 
 } //NoInitialStateExceptionImpl

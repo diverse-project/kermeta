@@ -10,24 +10,16 @@
  *   Nicolas Lalevée (Anyware Technologies) - initial API and implementation 
  ******************************************************************************/
 
-package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures;
+package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.actions;
 
+import org.topcased.modeler.actions.ModelerActionBarContributor;
 
 /**
+ * Generated Actions
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StateFigure extends org.topcased.draw2d.figures.StateFigure {
-	/**
-	 * Constructor
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StateFigure() {
-
-		super();
-	}
-
+public class FsmEditorActionBarContributor extends ModelerActionBarContributor {
+	// TODO defined customized actions
 }

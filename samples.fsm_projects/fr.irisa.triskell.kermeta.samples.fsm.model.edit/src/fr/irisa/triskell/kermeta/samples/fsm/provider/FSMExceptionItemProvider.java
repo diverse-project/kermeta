@@ -67,7 +67,7 @@ public class FSMExceptionItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/FSMException");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FSMException"));
 	}
 
 	/**

@@ -12,11 +12,9 @@
 
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.edit;
 
-import org.eclipse.draw2d.ConnectionRouter;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.PolylineConnection;
 import org.eclipse.draw2d.PolylineDecoration;
-import org.eclipse.gmf.runtime.draw2d.ui.internal.figures.ConnectionLayerEx;
 import org.eclipse.swt.graphics.Color;
 import org.topcased.draw2d.figures.Label;
 import org.topcased.modeler.ModelerEditPolicyConstants;
@@ -27,19 +25,21 @@ import org.topcased.modeler.edit.policies.EdgeObjectOffsetEditPolicy;
 import org.topcased.modeler.figures.IEdgeObjectFigure;
 
 import fr.irisa.triskell.kermeta.samples.fsm.Transition;
-import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.FsmEditorEdgeObjectConstants;
+import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.FsmEdgeObjectConstants;
 import fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures.TransitionFigure;
 
 /**
  * Transition controller <br>
- * <!-- begin-user-doc --> <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
  * @generated
  */
 public class TransitionEditPart extends EMFGraphEdgeEditPart {
 
 	/**
 	 * Constructor
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param model the graph object
 	 * @generated
 	 */
@@ -48,13 +48,15 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * 
 	 * @see org.eclipse.gef.editparts.AbstractEditPart#createEditPolicies()
 	 * @generated
 	 */
 	protected void createEditPolicies() {
 		super.createEditPolicies();
+
 		installEditPolicy(
 				ModelerEditPolicyConstants.EDGE_OBJECTS_OFFSET_EDITPOLICY,
 				new EdgeObjectOffsetEditPolicy());
@@ -62,7 +64,8 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the Figure
 	 * @generated
 	 */
@@ -75,7 +78,8 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param connection the PolylineConnection
 	 * @generated
 	 */
@@ -86,7 +90,8 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param connection the PolylineConnection
 	 * @generated
 	 */
@@ -99,12 +104,13 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getEdgeObjectFigure(org.topcased.modeler.di.model.EdgeObject)
 	 * @generated
 	 */
 	public IEdgeObjectFigure getEdgeObjectFigure(EdgeObject edgeObject) {
-		if (FsmEditorEdgeObjectConstants.INPUT_EDGE_OBJECT_ID.equals(edgeObject
+		if (FsmEdgeObjectConstants.INPUT_EDGE_OBJECT_ID.equals(edgeObject
 				.getId())) {
 			return ((TransitionFigure) getFigure()).getInputEdgeObjectFigure();
 		}
@@ -112,16 +118,8 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#getDefaultRouter(org.eclipse.gmf.runtime.draw2d.ui.internal.figures.ConnectionLayerEx)
-	 * @generated
-	 */
-	protected ConnectionRouter getDefaultRouter(ConnectionLayerEx cLayer) {
-		return cLayer.getObliqueRouter();
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.topcased.modeler.edit.GraphEdgeEditPart#refreshEdgeObjects()
 	 * @generated
 	 */
@@ -146,5 +144,4 @@ public class TransitionEditPart extends EMFGraphEdgeEditPart {
 		((Label) ((TransitionFigure) getFigure()).getInputEdgeObjectFigure())
 				.setForegroundColor(new Color(null, 0, 0, 180));
 	}
-
 }

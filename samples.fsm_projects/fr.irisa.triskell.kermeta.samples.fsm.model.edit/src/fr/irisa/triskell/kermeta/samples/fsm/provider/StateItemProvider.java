@@ -82,8 +82,10 @@ public class StateItemProvider
 				 getResourceLocator(),
 				 getString("_UI_State_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_State_name_feature", "_UI_State_type"),
-				 FsmPackage.eINSTANCE.getState_Name(),
+				 FsmPackage.Literals.STATE__NAME,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -102,8 +104,10 @@ public class StateItemProvider
 				 getResourceLocator(),
 				 getString("_UI_State_incomingTransition_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_State_incomingTransition_feature", "_UI_State_type"),
-				 FsmPackage.eINSTANCE.getState_IncomingTransition(),
+				 FsmPackage.Literals.STATE__INCOMING_TRANSITION,
 				 true,
+				 false,
+				 false,
 				 null,
 				 null,
 				 null));
@@ -120,7 +124,7 @@ public class StateItemProvider
 	public Collection getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(FsmPackage.eINSTANCE.getState_OutgoingTransition());
+			childrenFeatures.add(FsmPackage.Literals.STATE__OUTGOING_TRANSITION);
 		}
 		return childrenFeatures;
 	}
@@ -132,7 +136,7 @@ public class StateItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/State");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/State"));
 	}
 
 	/**
@@ -181,7 +185,7 @@ public class StateItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(FsmPackage.eINSTANCE.getState_OutgoingTransition(),
+				(FsmPackage.Literals.STATE__OUTGOING_TRANSITION,
 				 FsmFactory.eINSTANCE.createTransition()));
 	}
 

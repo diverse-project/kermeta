@@ -36,7 +36,7 @@ public class NonDeterminismImpl extends FSMExceptionImpl implements NonDetermini
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return FsmPackage.eINSTANCE.getNonDeterminism();
+		return FsmPackage.Literals.NON_DETERMINISM;
 	}
 
 } //NonDeterminismImpl

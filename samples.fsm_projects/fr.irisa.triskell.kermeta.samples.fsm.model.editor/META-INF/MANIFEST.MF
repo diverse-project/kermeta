@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: fr.irisa.triskell.kermeta.samples.fsm.editor; singleton:=true
-Bundle-Version: 0.0.1
+Bundle-Version: 1.0.0
 Bundle-ClassPath: .
 Bundle-Activator: fr.irisa.triskell.kermeta.samples.fsm.presentation.FsmEditorPlugin$Implementation
 Bundle-Vendor: %providerName
@@ -10,9 +10,8 @@ Bundle-Localization: plugin
 Export-Package: fr.irisa.triskell.kermeta.samples.fsm.presentation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources;visibility:=reexport,
+ fr.irisa.triskell.kermeta.samples.fsm.edit;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.edit.ui;visibility:=reexport,
- org.eclipse.ui.ide;visibility:=reexport,
- fr.irisa.triskell.kermeta.samples.fsm,
- fr.irisa.triskell.kermeta.samples.fsm.edit
-Eclipse-AutoStart: true
+ org.eclipse.ui.ide;visibility:=reexport
+Eclipse-LazyStart: true

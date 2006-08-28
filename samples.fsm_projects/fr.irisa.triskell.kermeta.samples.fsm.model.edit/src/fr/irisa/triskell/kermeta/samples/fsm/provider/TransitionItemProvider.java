@@ -62,13 +62,13 @@ public class TransitionItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTargetPropertyDescriptor(object);			
+			addTargetPropertyDescriptor(object);
 			addInputPropertyDescriptor(object);
 			addOutputPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
-	
+
 	/**
 	 * This adds a property descriptor for the Target feature.
 	 * <!-- begin-user-doc -->
@@ -82,8 +82,10 @@ public class TransitionItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Transition_target_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Transition_target_feature", "_UI_Transition_type"),
-				 FsmPackage.eINSTANCE.getTransition_Target(),
+				 FsmPackage.Literals.TRANSITION__TARGET,
 				 true,
+				 false,
+				 false,
 				 null,
 				 null,
 				 null));
@@ -102,8 +104,10 @@ public class TransitionItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Transition_input_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Transition_input_feature", "_UI_Transition_type"),
-				 FsmPackage.eINSTANCE.getTransition_Input(),
+				 FsmPackage.Literals.TRANSITION__INPUT,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -122,8 +126,10 @@ public class TransitionItemProvider
 				 getResourceLocator(),
 				 getString("_UI_Transition_output_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_Transition_output_feature", "_UI_Transition_type"),
-				 FsmPackage.eINSTANCE.getTransition_Output(),
+				 FsmPackage.Literals.TRANSITION__OUTPUT,
 				 true,
+				 false,
+				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
@@ -136,7 +142,7 @@ public class TransitionItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/Transition");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/Transition"));
 	}
 
 	/**

@@ -66,7 +66,7 @@ public class NoTransitionItemProvider
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return getResourceLocator().getImage("full/obj16/NoTransition");
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/NoTransition"));
 	}
 
 	/**

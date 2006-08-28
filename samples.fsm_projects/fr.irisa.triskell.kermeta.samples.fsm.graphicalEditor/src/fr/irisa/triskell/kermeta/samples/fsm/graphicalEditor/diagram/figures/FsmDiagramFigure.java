@@ -12,22 +12,14 @@
 
 package fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.diagram.figures;
 
+import org.topcased.modeler.figures.DiagramFigure;
 
 /**
+ * The figure to display a Fsm Diagram.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StateFigure extends org.topcased.draw2d.figures.StateFigure {
-	/**
-	 * Constructor
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public StateFigure() {
-
-		super();
-	}
+public class FsmDiagramFigure extends DiagramFigure {
 
 }

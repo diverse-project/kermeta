@@ -36,7 +36,7 @@ public class NoTransitionImpl extends FSMExceptionImpl implements NoTransition {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return FsmPackage.eINSTANCE.getNoTransition();
+		return FsmPackage.Literals.NO_TRANSITION;
 	}
 
 } //NoTransitionImpl

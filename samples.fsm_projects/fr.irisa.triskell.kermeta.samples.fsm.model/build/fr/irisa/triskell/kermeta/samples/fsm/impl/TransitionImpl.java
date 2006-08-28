@@ -14,7 +14,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -104,7 +103,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return FsmPackage.eINSTANCE.getTransition();
+		return FsmPackage.Literals.TRANSITION;
 	}
 
 	/**
@@ -114,7 +113,17 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 */
 	public State getSource() {
 		if (eContainerFeatureID != FsmPackage.TRANSITION__SOURCE) return null;
-		return (State)eContainer;
+		return (State)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSource(State newSource, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newSource, FsmPackage.TRANSITION__SOURCE, msgs);
+		return msgs;
 	}
 
 	/**
@@ -123,15 +132,15 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * @generated
 	 */
 	public void setSource(State newSource) {
-		if (newSource != eContainer || (eContainerFeatureID != FsmPackage.TRANSITION__SOURCE && newSource != null)) {
+		if (newSource != eInternalContainer() || (eContainerFeatureID != FsmPackage.TRANSITION__SOURCE && newSource != null)) {
 			if (EcoreUtil.isAncestor(this, newSource))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (eContainer != null)
+			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newSource != null)
 				msgs = ((InternalEObject)newSource).eInverseAdd(this, FsmPackage.STATE__OUTGOING_TRANSITION, State.class, msgs);
-			msgs = eBasicSetContainer((InternalEObject)newSource, FsmPackage.TRANSITION__SOURCE, msgs);
+			msgs = basicSetSource(newSource, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
@@ -145,8 +154,8 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 */
 	public State getTarget() {
 		if (target != null && target.eIsProxy()) {
-			State oldTarget = target;
-			target = (State)eResolveProxy((InternalEObject)target);
+			InternalEObject oldTarget = (InternalEObject)target;
+			target = (State)eResolveProxy(oldTarget);
 			if (target != oldTarget) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FsmPackage.TRANSITION__TARGET, oldTarget, target));
@@ -256,24 +265,18 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case FsmPackage.TRANSITION__SOURCE:
-					if (eContainer != null)
-						msgs = eBasicRemoveFromContainer(msgs);
-					return eBasicSetContainer(otherEnd, FsmPackage.TRANSITION__SOURCE, msgs);
-				case FsmPackage.TRANSITION__TARGET:
-					if (target != null)
-						msgs = ((InternalEObject)target).eInverseRemove(this, FsmPackage.STATE__INCOMING_TRANSITION, State.class, msgs);
-					return basicSetTarget((State)otherEnd, msgs);
-				default:
-					return eDynamicInverseAdd(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FsmPackage.TRANSITION__SOURCE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetSource((State)otherEnd, msgs);
+			case FsmPackage.TRANSITION__TARGET:
+				if (target != null)
+					msgs = ((InternalEObject)target).eInverseRemove(this, FsmPackage.STATE__INCOMING_TRANSITION, State.class, msgs);
+				return basicSetTarget((State)otherEnd, msgs);
 		}
-		if (eContainer != null)
-			msgs = eBasicRemoveFromContainer(msgs);
-		return eBasicSetContainer(otherEnd, featureID, msgs);
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -281,18 +284,14 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, Class baseClass, NotificationChain msgs) {
-		if (featureID >= 0) {
-			switch (eDerivedStructuralFeatureID(featureID, baseClass)) {
-				case FsmPackage.TRANSITION__SOURCE:
-					return eBasicSetContainer(null, FsmPackage.TRANSITION__SOURCE, msgs);
-				case FsmPackage.TRANSITION__TARGET:
-					return basicSetTarget(null, msgs);
-				default:
-					return eDynamicInverseRemove(otherEnd, featureID, baseClass, msgs);
-			}
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FsmPackage.TRANSITION__SOURCE:
+				return basicSetSource(null, msgs);
+			case FsmPackage.TRANSITION__TARGET:
+				return basicSetTarget(null, msgs);
 		}
-		return eBasicSetContainer(null, featureID, msgs);
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -300,16 +299,12 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain eBasicRemoveFromContainer(NotificationChain msgs) {
-		if (eContainerFeatureID >= 0) {
-			switch (eContainerFeatureID) {
-				case FsmPackage.TRANSITION__SOURCE:
-					return eContainer.eInverseRemove(this, FsmPackage.STATE__OUTGOING_TRANSITION, State.class, msgs);
-				default:
-					return eDynamicBasicRemoveFromContainer(msgs);
-			}
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID) {
+			case FsmPackage.TRANSITION__SOURCE:
+				return eInternalContainer().eInverseRemove(this, FsmPackage.STATE__OUTGOING_TRANSITION, State.class, msgs);
 		}
-		return eContainer.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - eContainerFeatureID, null, msgs);
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -317,8 +312,8 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object eGet(EStructuralFeature eFeature, boolean resolve) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
 			case FsmPackage.TRANSITION__SOURCE:
 				return getSource();
 			case FsmPackage.TRANSITION__TARGET:
@@ -329,7 +324,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 			case FsmPackage.TRANSITION__OUTPUT:
 				return getOutput();
 		}
-		return eDynamicGet(eFeature, resolve);
+		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
@@ -337,8 +332,8 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eSet(EStructuralFeature eFeature, Object newValue) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
 			case FsmPackage.TRANSITION__SOURCE:
 				setSource((State)newValue);
 				return;
@@ -352,7 +347,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 				setOutput((String)newValue);
 				return;
 		}
-		eDynamicSet(eFeature, newValue);
+		super.eSet(featureID, newValue);
 	}
 
 	/**
@@ -360,8 +355,8 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void eUnset(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public void eUnset(int featureID) {
+		switch (featureID) {
 			case FsmPackage.TRANSITION__SOURCE:
 				setSource((State)null);
 				return;
@@ -375,7 +370,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 				setOutput(OUTPUT_EDEFAULT);
 				return;
 		}
-		eDynamicUnset(eFeature);
+		super.eUnset(featureID);
 	}
 
 	/**
@@ -383,8 +378,8 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean eIsSet(EStructuralFeature eFeature) {
-		switch (eDerivedStructuralFeatureID(eFeature)) {
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
 			case FsmPackage.TRANSITION__SOURCE:
 				return getSource() != null;
 			case FsmPackage.TRANSITION__TARGET:
@@ -394,7 +389,7 @@ public class TransitionImpl extends EObjectImpl implements Transition {
 			case FsmPackage.TRANSITION__OUTPUT:
 				return OUTPUT_EDEFAULT == null ? output != null : !OUTPUT_EDEFAULT.equals(output);
 		}
-		return eDynamicIsSet(eFeature);
+		return super.eIsSet(featureID);
 	}
 
 	/**
