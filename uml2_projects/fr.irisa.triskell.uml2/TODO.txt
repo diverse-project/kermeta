@@ -1,0 +1,40 @@
+TODO
+----
+
+Bugs :
+- uml2km fails to save ".km" files
+- 
+
+From UML 2.0 to 2.1 :
+====================
+The UMLAUT 2006 has been designed for the 2.0 version of UML.
+As Kermeta switched to Eclipse 3.2 and TopCased switch to new XMI and UML 2.1,
+we need to embed this versions into UMLAUT
+
+ 1 - produce the Uml2.1.kmt file :
+	- take the new UML.ecore file (in the good XMI version)
+	- apply to it the TopDownVisitor from 
+		fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations
+		(in the "ecore_projects" of the Kermeta gForge)
+	- transform the modified UML.ecore into "kmt"
+	- extract from it the TopDownVisitor part in the "TopDownVisitor.kmt" file
+
+ 2 - search for the UML elements attributes which name has changed between the
+two versions
+
+ 3 - make the (we hope few) changes inside the code :
+		some attributes names have changed, like :
+			Model.ownedMember -> Model.ownedPackage
+
+ 4 - run all unit tests
+
+Other :
+======
+ 1 - write unit tests for the uml2km tool
+ 2 - write unit tests for the valooder transformation
+
+History :
+---------
+
+
+
