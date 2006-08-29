@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.34 2006-08-24 14:37:59 dtouzet Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.35 2006-08-29 08:23:11 dtouzet Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -35,6 +35,7 @@ import fr.irisa.triskell.kermeta.language.behavior.CallSuperOperation;
 import fr.irisa.triskell.kermeta.language.behavior.CallValue;
 import fr.irisa.triskell.kermeta.language.behavior.CallVariable;
 import fr.irisa.triskell.kermeta.language.behavior.Conditional;
+import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.behavior.IntegerLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.JavaStaticCall;
 import fr.irisa.triskell.kermeta.language.behavior.LambdaExpression;
@@ -53,6 +54,7 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
+import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
@@ -64,10 +66,14 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
 import fr.irisa.triskell.kermeta.language.structure.TypedElement;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
+import fr.irisa.triskell.kermeta.language.structure.Class;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
 import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -92,6 +98,31 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	protected boolean typedef = true;
 	
 	final static public Logger internalLog = LogConfigurationHelper.getLogger("KM2KMT");
+	
+	
+	public KM2KMTPrettyPrinter() {
+	}
+	
+	/**
+	 * 
+	 */
+	public KM2KMTPrettyPrinter(String uri) {
+	    //KermetaUnitFactory.getDefaultLoader().unloadAll();
+
+	    // LOAD THE UNIT
+	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
+		try {
+			builder.load();
+		}
+		catch(Exception e ) {
+			/*
+			if (builder.messages.getErrors().size() == 0)
+				throw e;
+			*/
+		};
+
+		builder.typeCheck(null);
+	}
 	
 	
 	public void ppPackage(Package p, File file) {
@@ -744,6 +775,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.CallFeature)
 	 */
 	public Object visitCallFeature(CallFeature node) {
+		/*
 		setParent(node);
 		String result = "";
 		if (node.getTarget() != null) result += this.accept(node.getTarget());
@@ -759,6 +791,167 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		// the classic case : a list of parameters
 		else if (node.getParameters().size()> 0) {
 			result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
+		}
+		
+		return result;
+		*/
+		
+		setParent(node);
+		String result = "";
+		String fName = node.getName();
+		
+		// Feature calls that correspond to primitive types operators have specific
+		// serialization scheme. As an example, calling the feature "not" onto a boolean
+		// is serialized as "not boolVariable" instead of "boolVariable.not"
+		Expression tgt = node.getTarget();
+		if(tgt != null) {
+			
+			if(fName == "not" && isBooleanTypeDef(tgt.getStaticType())) {
+					result += "not (";
+					result += this.accept(tgt);
+					result += ")";
+				}
+			else if(fName == "and" && isBooleanTypeDef(tgt.getStaticType())) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " and ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "or" && isBooleanTypeDef(tgt.getStaticType())) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " or ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "plus" && isNumericalTypeDef(tgt.getStaticType())) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " + ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "minus" && isNumericalTypeDef(tgt.getStaticType())) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " - ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "mult" && isNumericalTypeDef(tgt.getStaticType())) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " * ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "div" && isNumericalTypeDef(tgt.getStaticType())) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " / ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "isGreater" && isNumericalTypeDef(tgt.getStaticType())) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " > ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "isLower" && isNumericalTypeDef(tgt.getStaticType())) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " < ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "isGreaterOrEqual" && isNumericalTypeDef(tgt.getStaticType())) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " >= ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "isLowerOrEqual" && isNumericalTypeDef(tgt.getStaticType())) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " <= ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "equals" && (isBooleanTypeDef(tgt.getStaticType()) || isNumericalTypeDef(tgt.getStaticType()))) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " == ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else if(fName == "isNotEqual" && (isBooleanTypeDef(tgt.getStaticType()) || isNumericalTypeDef(tgt.getStaticType()))) {
+				result += "(";
+				result += this.accept(tgt);
+				result += ")";
+				result += " != ";
+				result += "(";
+				result += ppComaSeparatedNodes(node.getParameters());
+				result += ")";
+			}
+			else {
+				// Other feature calls...
+				result += this.accept(tgt);
+				result += "." + KMTHelper.getMangledIdentifier(node.getName());
+				
+				// handle the special case where there is 1 parameter, and when This
+				// parameter is a lambdaPostFix
+				//	TODO : throw an exception if type is not a LambdaExpression
+				if (node.getParameters().size()==1 && LambdaExpression.class.isInstance(node.getParameters().get(0))) {
+				   result+= ppComaSeparatedNodes(node.getParameters());
+				}
+				// the classic case : a list of parameters
+				else if (node.getParameters().size()> 0) {
+					result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
+				}
+			}
+		}
+		else {
+			result += "self";
+			result += "." + KMTHelper.getMangledIdentifier(node.getName());
+			
+			// handle the special case where there is 1 parameter, and when This
+			// parameter is a lambdaPostFix
+			//	TODO : throw an exception if type is not a LambdaExpression
+			if (node.getParameters().size()==1 && LambdaExpression.class.isInstance(node.getParameters().get(0)))
+			{
+			   result+= ppComaSeparatedNodes(node.getParameters());
+			}
+			// the classic case : a list of parameters
+			else if (node.getParameters().size()> 0) {
+				result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
+			}
+			
 		}
 		
 		return result;
@@ -950,6 +1143,44 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public void setTypedef(boolean typedef) {
 		this.typedef = typedef;
+	}
+	
+	
+	/**
+	 * Tests whether the Type t corresponds to a Kermeta numerical type, which can be encoded
+	 * either as the Integer/Real PrimitiveType or the Integer/Real class.
+	 * @param t
+	 * @return
+	 */
+	protected boolean isNumericalTypeDef(Type t) {
+		String tName = null;
+		if(t instanceof Class) {
+			tName = ((Class) t).getTypeDefinition().getName();
+			return tName.equals("Integer") || tName.equals("Real");
+		}
+		else if(t instanceof PrimitiveType) {
+			tName = ((PrimitiveType) t).getName();
+			return tName.equals("Integer") || tName.equals("Real");
+		}
+		else
+			return false;
+	}
+	
+	/**
+	 * Tests whether the Type t corresponds to the Kermeta Boolean type, which can be encoded
+	 * either as the Boolean PrimitiveType or the Boolean class.
+	 * @param t
+	 * @return
+	 */
+	protected boolean isBooleanTypeDef(Type t) {
+		if(t instanceof Class) {
+			return ((Class) t).getTypeDefinition().getName().equals("Boolean");
+		}
+		else if(t instanceof PrimitiveType) {
+			return ((PrimitiveType) t).getName().equals("Boolean");
+		}
+		else
+			return false;
 	}
 	
 	
