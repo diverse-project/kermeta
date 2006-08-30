@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass6.java,v 1.8 2006-05-04 15:28:06 jmottu Exp $
+/* $Id: KMT2KMPass6.java,v 1.9 2006-08-30 10:16:05 jmottu Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass6.java
  * Package : fr.irisa.triskell
@@ -135,6 +135,8 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		c.setBody(KMT2KMExperessionBuilder.process(invariant.getBody(), builder));
 		c.setName(getTextForID(invariant.getName()));
 		
+		builder.storeTrace(c, invariant);
+		builder.current_constraint = c;
 		builder.current_class.getInv().add(c);
 		
 		return false;
@@ -150,6 +152,8 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		c.setBody(KMT2KMExperessionBuilder.process(pre.getBody(), builder));
 		c.setName(getTextForID(pre.getName()));
 		
+		builder.storeTrace(c, pre);
+		builder.current_constraint = c;
 		builder.current_operation.getPre().add(c);
 		
 		return false;
@@ -165,6 +169,8 @@ public class KMT2KMPass6 extends KMT2KMPass {
 		c.setBody(KMT2KMExperessionBuilder.process(post.getBody(), builder));
 		c.setName(getTextForID(post.getName()));
 		
+		builder.storeTrace(c, post);
+		builder.current_constraint = c;
 		builder.current_operation.getPost().add(c);
 		
 		return false;
