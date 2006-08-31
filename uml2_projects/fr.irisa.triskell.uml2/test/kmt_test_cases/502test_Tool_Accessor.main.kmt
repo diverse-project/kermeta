@@ -16,10 +16,19 @@ class ToolAccessorTestCase inherits kermeta::kunit::TestCase
 	method setUp() is do
     	Aclass := Class.new
     	Aclass.name := "A"
+    	
     	var attr : Property init Property.new
     	attr.name := "attr"
     	attr.type := Aclass
     	Aclass.ownedAttribute.add(attr)
+    	
+    	var mult : Property init Property.new
+    	mult.name := "mult"
+    	mult.type := Aclass
+    	Aclass.ownedAttribute.add(mult)
+    	var upperMult : LiteralInteger init LiteralInteger.new
+    	upperMult.~value := -1
+    	mult.upperValue := upperMult
     	
      	var acc : Accessor_Tool init Accessor_Tool.new
      	acc.addGettersSetters(Aclass)
@@ -30,23 +39,69 @@ class ToolAccessorTestCase inherits kermeta::kunit::TestCase
 	end
 	
     operation testAccessorTool_Getters() is do
-    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_attr"}.size == 1,
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr"}.size == 1,
     		"The class must have the right getters on its attributes")
-    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_attr"}
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr"}
     			.one.returnResult.one.type == Aclass,
 		    "The getter must return the right type for attribute")
-    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_attr"}
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr"}
+    			.one.ownedParameter.size == 0,
+		    "The getter must have no parameter other than return for attribute")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Attr"}
     			.one.isAbstract == false,
 		    "The getter must be an concrete operation")
     end
 	
     operation testAccessorTool_Setters() is do
-    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_attr"}.size == 1,
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_Attr"}.size == 1,
     		"The class must have the right setters on its attributes")
-    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_attr"}
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_Attr"}
     			.one.ownedParameter.one.type == Aclass,
 		    "The setter must take the right type parameter for attribute")
-    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_attr"}
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_Attr"}
+    			.one.isAbstract == false,
+		    "The setter must be an concrete operation")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_Attr"}
+    			.one.ownedParameter.size == 1,
+		    "The setter must have one parameter")
+     	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_Attr"}
+    			.one.ownedParameter.one.name == "new_Attr",
+		    "The setter must have an 'new_Attr' parameter")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_Attr"}
+    			.one.ownedParameter.one.direction == ParameterDirectionKind.in,
+		    "The setter must have an incoming parameter")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "set_Attr"}
+    			.one.ownedParameter.one.name == "new_Attr",
+		    "The setter must have an 'new_Attr' parameter")
+    end
+	
+    operation testAccessorTool_GettersOnMultiple() is do
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Mult"}.size == 1,
+    		"The class must have the right getters on its attributes")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Mult"}
+    			.one.returnResult.one.type == Aclass,
+		    "The getter must return the right type for attribute")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Mult"}
+    			.one.ownedParameter.size == 1,
+		    "The getter must have one parameter (other than return type) for attribute")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Mult"}
+    			.one.ownedParameter.select{ par | par.name == "order"}.size == 1,
+		    "The getter must have an 'order' parameter for attribute")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Mult"}
+    			.one.ownedParameter.select{ par | par.name == "order"}.one.direction == ParameterDirectionKind.in,
+		    "The 'order' parameter of getter must be an incoming one")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "get_Mult"}
+    			.one.isAbstract == false,
+		    "The getter must be an concrete operation")
+    end
+	
+    operation testAccessorTool_SettersOnMultiple() is do
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "add_Mult"}.size == 1,
+    		"The class must have the right setter 'add_Mult' on its attribute")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "add_Mult"}
+    			.one.ownedParameter.one.type == Aclass,
+		    "The setter must take the right type parameter for attribute")
+    	assertTrueWithMsg(Aclass.ownedOperation.select{ op | op.name == "add_Mult"}
     			.one.isAbstract == false,
 		    "The setter must be an concrete operation")
     end

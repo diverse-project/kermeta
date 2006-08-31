@@ -18,11 +18,11 @@ class ToolInterfaceTestCase inherits kermeta::kunit::TestCase
 	method setUp() is do
     	model := Model.new
     	Aclass := Class.new
-    	Aclass.name := "A"
+    	Aclass.name := "Aclass"
     	model.ownedMember.add(Aclass)
     	
     	Bclass := Class.new
-    	Bclass.name := "B"
+    	Bclass.name := "Bclass"
     	Bclass.isAbstract := true
     	model.ownedMember.add(Bclass)
     	

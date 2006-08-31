@@ -44,7 +44,7 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
 				// only operation comments which start with '@language "kermeta"'
 				// are taken as Kermeta code for the operation body
 				if e.getMetaClass.equals(uml2::Operation)
-					and visitable.body.substring(0,18).equals("@language \"kermeta\"") then
+					and visitable.body.substring(0,19).equals("@language \"kermeta\"") then
 	    				tag.name := "km_body"
     			end
     		}
@@ -265,10 +265,12 @@ class Pass1_Uml2KMTVisitor inherits topdown_visitor::TopDownVisitor
      */
     operation validName(name : String) : String is do
     	result := ""
-    	if kwList.isKeyword(name) then
-    		result.append("~" +name)
-    	else
-    		result.append(name)
+    	if name != void then
+	    	if kwList.isKeyword(name) then
+	    		result.append("~" +name)
+	    	else
+	    		result.append(name)
+	    	end
     	end
     end
 }

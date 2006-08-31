@@ -36,7 +36,7 @@ class ToolContext4StateTestCase inherits kermeta::kunit::TestCase
 	end
     
     operation testContext4StatesTool_Classifier() is do
-    	assertTrueWithMsg(ct.contextClassifier(Sstate) == Aclass,
+    	assertTrueWithMsg(ct.contextOfSubstate(Sstate) == Aclass,
     		"The Context4States_Tool fails to give the classifier of the given state")
     end
     operation testContext4StatesTool_Submachine() is do
@@ -47,7 +47,7 @@ class ToolContext4StateTestCase inherits kermeta::kunit::TestCase
     	r.subvertex.add(s)
     	s.region.add(Rregion)
     	
-    	assertTrueWithMsg(ct.contextClassifier(Sstate) == Aclass,
+    	assertTrueWithMsg(ct.contextOfSubstate(Sstate) == Aclass,
     		"The Context4States_Tool fails to give the classifier of the given state")
     end
 }

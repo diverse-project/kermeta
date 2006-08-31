@@ -1,4 +1,4 @@
-/* $Id: UmlCloneFactory.kmt,v 1.6 2006-08-17 14:49:05 vmahe Exp $
+/* $Id: UmlCloneFactory.kmt,v 1.7 2006-08-31 07:23:39 vmahe Exp $
  * Creation date: July 5, 2006
  * License:
  * Copyright:
@@ -114,8 +114,8 @@ class UmlCloneFactory
     	affectTypedElement(element, clone)
     	affectConnectableElement(element, clone)
     	// specific properties
-    	clone.direction := element.direction
-    	clone.effect := element.effect
+    	clone.direction := giveParameterDirectionKind(element.direction)
+    	clone.effect := giveParameterEffectKind(element.effect)
     	clone.isException := element.isException
     	clone.isStream := element.isStream
     	if element.defaultValue != void then clone.defaultValue := cloneValueSpecification(element.defaultValue) end
@@ -136,6 +136,7 @@ class UmlCloneFactory
     	affectDeploymentTarget(element, clone)
     	// specific properties
     	if element.defaultValue != void then clone.defaultValue := cloneValueSpecification(element.defaultValue) end
+        clone.aggregation := giveAggregationKind(element.aggregation)
         clone.isDerived := element.isDerived
         clone.isReadOnly := element.isReadOnly
         clone.isDerivedUnion := element.isDerivedUnion
@@ -145,15 +146,6 @@ class UmlCloneFactory
     	// subsettedProperty : TODO
     	// rem : the "associationEnd" attribute must be fixed by the property (of an association) which own the qualifier
     	// qualifier : TODO (should fixed the opposite "associationEnd)
-    	
-    	// specific treatment of AggregationKind
-        if element.aggregation == AggregationKind.none then
-        	clone.aggregation := AggregationKind.none
-        else if element.aggregation == AggregationKind.composite then
-        	clone.aggregation := AggregationKind.composite
-        else if element.aggregation == AggregationKind.shared then
-        	clone.aggregation := AggregationKind.shared
-        end end end
         
         // store the clone before going back
         ioTable.putValue(element, clone)
@@ -272,15 +264,7 @@ class UmlCloneFactory
     	var clone : ElementImport init ElementImport.new
     	affectDirectedRelationship(element, clone)
     	clone.~alias := element.~alias
-        if element.visibility == VisibilityKind.public then
-        	clone.visibility := VisibilityKind.public
-        else if element.visibility == VisibilityKind.private then
-        	clone.visibility := VisibilityKind.private
-        else if element.visibility == VisibilityKind.protected then
-        	clone.visibility := VisibilityKind.protected
-        else if element.visibility == VisibilityKind.~package then
-        	clone.visibility := VisibilityKind.~package
-        end end end end
+        clone.visibility := giveVisibilityKind(element.visibility)
     	clone.importedElement := element.importedElement
     	// rem : the "importingNamespace" attribute must be fixed by its owning namespace
         
@@ -294,6 +278,10 @@ class UmlCloneFactory
     	affectClassifier(element, clone)
         //ownedAttribute	: not cloned (must be linked by user)
         //ownedOperation	: not cloned (must be linked by user)
+        
+        // store the clone before going back
+        ioTable.putValue(element, clone)
+    	result := clone
     end
     
     operation cloneGeneralization(element : Generalization) : Generalization is do
@@ -401,7 +389,7 @@ class UmlCloneFactory
     	affectNamespace(element, clone)
     	affectFeature(element, clone)
     	// specific properties
-    	clone.concurrency := element.concurrency
+    	clone.concurrency := giveCallConcurrencyKind(element.concurrency)
     	// we must complete the "operation" attribute for any Parameter (if the BehavioralFeature is an Operation)
     	var op : Operation
     	op ?= clone
@@ -441,15 +429,7 @@ class UmlCloneFactory
     	affectTemplateableElement(element, clone)
     	// specific properties
     	clone.name := element.name
-        if element.visibility == VisibilityKind.public then
-        	clone.visibility := VisibilityKind.public
-        else if element.visibility == VisibilityKind.private then
-        	clone.visibility := VisibilityKind.private
-        else if element.visibility == VisibilityKind.protected then
-        	clone.visibility := VisibilityKind.protected
-        else if element.visibility == VisibilityKind.~package then
-        	clone.visibility := VisibilityKind.~package
-        end end end end
+        clone.visibility := giveVisibilityKind(element.visibility)
     end
     
     operation affectPackageableElement(element : PackageableElement, clone : PackageableElement) is do
@@ -457,15 +437,7 @@ class UmlCloneFactory
     	affectNamedElement(element, clone)
     	affectParameterableElement(element, clone)
     	// specific properties
-        if element.packageableElement_visibility == VisibilityKind.public then
-        	clone.packageableElement_visibility := VisibilityKind.public
-        else if element.packageableElement_visibility == VisibilityKind.private then
-        	clone.packageableElement_visibility := VisibilityKind.private
-        else if element.packageableElement_visibility == VisibilityKind.protected then
-        	clone.packageableElement_visibility := VisibilityKind.protected
-        else if element.packageableElement_visibility == VisibilityKind.~package then
-        	clone.packageableElement_visibility := VisibilityKind.~package
-        end end end end
+        clone.packageableElement_visibility := giveVisibilityKind(element.packageableElement_visibility)
     end
     
     operation affectTypedElement(element : TypedElement, clone : TypedElement) is do
@@ -475,6 +447,7 @@ class UmlCloneFactory
     	var dt : DataType
     	dt ?= element.type
     	if dt != void then
+    		// FIXME : test if the DataType clone exists !!!!
     		var dtClone : DataType init cloneDataType(dt)
     		ioTable.putValue(dt, dtClone)
     		clone.type := dtClone
@@ -559,5 +532,50 @@ class UmlCloneFactory
     	affectNamedElement(element, clone)
     	//specific properties
     	// deployment : TODO
+    end
+    
+    /////////////////////// specific operations for enumerations ///////////////////////////
+    
+    operation giveCallConcurrencyKind(kind : CallConcurrencyKind) : CallConcurrencyKind is do
+    	if kind == CallConcurrencyKind.concurrent then result := CallConcurrencyKind.concurrent
+    	else if kind == CallConcurrencyKind.guarded then result := CallConcurrencyKind.guarded
+    	else if kind == CallConcurrencyKind.sequential then result := CallConcurrencyKind.sequential
+    	else result := CallConcurrencyKind.concurrent //raise "CallConcurrencyKind error during cloning!!"
+    	end end end
+    end
+    
+    operation giveAggregationKind(kind : AggregationKind) : AggregationKind is do
+    	if kind == AggregationKind.none then result := AggregationKind.none
+    	else if kind == AggregationKind.composite then result := AggregationKind.composite
+    	else if kind == AggregationKind.shared then result := AggregationKind.shared
+    	else result := AggregationKind.none //raise "AggregationKind error during cloning!!"
+    	end end end
+    end
+    
+    operation giveVisibilityKind(kind : VisibilityKind) : VisibilityKind is do
+    	if kind == VisibilityKind.public then result := VisibilityKind.public
+    	else if kind == VisibilityKind.private then result := VisibilityKind.private
+    	else if kind == VisibilityKind.protected then result := VisibilityKind.protected
+    	else if kind == VisibilityKind.~package then result := VisibilityKind.~package
+    	else result := VisibilityKind.public //raise "VisibilityKind error during cloning!!"
+    	end end end end
+    end
+    
+    operation giveParameterDirectionKind(kind : ParameterDirectionKind) : ParameterDirectionKind is do
+    	if kind == ParameterDirectionKind.in then result := ParameterDirectionKind.in
+    	else if kind == ParameterDirectionKind.inout then result := ParameterDirectionKind.inout
+    	else if kind == ParameterDirectionKind.out then result := ParameterDirectionKind.out
+    	else if kind == ParameterDirectionKind.return then result := ParameterDirectionKind.return
+    	else result := ParameterDirectionKind.in //raise "ParameterDirectionKind error during cloning!!"
+    	end end end end
+    end
+    
+    operation giveParameterEffectKind(kind : ParameterEffectKind) : ParameterEffectKind is do
+    	if kind == ParameterEffectKind.create then result := ParameterEffectKind.create
+    	else if kind == ParameterEffectKind.delete then result := ParameterEffectKind.delete
+    	else if kind == ParameterEffectKind.read then result := ParameterEffectKind.read
+    	else if kind == ParameterEffectKind.update then result := ParameterEffectKind.update
+    	else result := ParameterEffectKind.update //raise "ParameterEffectKind error during cloning!!"
+    	end end end end
     end
 }

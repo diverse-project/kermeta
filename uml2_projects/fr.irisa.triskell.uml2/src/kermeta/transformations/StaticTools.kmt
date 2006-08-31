@@ -1,4 +1,4 @@
-/* $Id: StaticTools.kmt,v 1.3 2006-08-08 06:57:46 vmahe Exp $
+/* $Id: StaticTools.kmt,v 1.4 2006-08-31 07:23:39 vmahe Exp $
  * Creation date: July 3, 2006
  * License:
  * Copyright:
@@ -23,36 +23,34 @@ class Generalization_Tool
     end
 }
 
-/** Class dedicated to add a generalization between 2 classifiers */
+/** Class dedicated to extract a interface from a classifier */
 class Interface_Tool
 {
-	reference implementation : Class
-	
+	/** given a concrete class, this method generates the corresponding Interface */
     operation extractInterface(concrete : Class) : Interface is do
-    	implementation := concrete
         var ifce : Interface init Interface.new
         
         // rename the elements
         var name : kermeta::standard::String init concrete.name
-        implementation.name := nameForImplementation(name)
+        concrete.name := nameForImplementation(name)
         ifce.name := nameForInterface(name)
-        ifce.visibility := implementation.visibility
+        ifce.visibility := concrete.visibility
         
         // add generalisation
         var gt : Generalization_Tool init Generalization_Tool.new
-        gt.addGeneralization(ifce, implementation)
+        gt.addGeneralization(ifce, concrete)
         
         // put the attributes in the interface ...
-        implementation.ownedAttribute.each{ u |
+        concrete.ownedAttribute.each{ u |
         	ifce.ownedAttribute.add(u)
         }
         // ... and erase them from concrete class
-        implementation.ownedAttribute.clear
+        concrete.ownedAttribute.clear
         
         // the operations of the concrete class became those of interface
         var factory : UmlCloneFactory init UmlCloneFactory.new
         factory.initialize
-        implementation.ownedOperation.each{ u |
+        concrete.ownedOperation.each{ u |
 	    	var op : Operation init Operation.new
 	    	op := factory.cloneOperation(u)
 	    	op.isAbstract := true
@@ -66,99 +64,288 @@ class Interface_Tool
         result := ifce
     end
     // prefixes & suffixes for (re)naming the elements
+	/** overwrite this method to change resulting name of the accessor */
     operation prefixForInterface() : kermeta::standard::String is do result := "I" end
+	/** overwrite this method to change resulting name of the accessor */
     operation suffixForInterface() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
     operation nameForInterface(name : kermeta::standard::String) : kermeta::standard::String is do
-    	result := prefixForInterface + name + suffixForInterface
+    	var tool : Tools init Tools.new
+    	result := prefixForInterface + tool.upperFirstChar(name) + suffixForInterface
     end
+	/** overwrite this method to change resulting name of the accessor */
     operation prefixForImplementation() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
     operation suffixForImplementation() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
     operation nameForImplementation(name : kermeta::standard::String) : kermeta::standard::String is do
-    	result := prefixForImplementation + name + suffixForImplementation
+    	var tool : Tools init Tools.new
+    	result := prefixForImplementation + tool.upperFirstChar(name) + suffixForImplementation
+    end
+	
+	/** given a class, this method transform it in an abstract class
+	 * and generates the corresponding concrete class */
+    operation concreteFromAbstract(classToAbstract : Class) : Class is do
+        var factory : UmlCloneFactory init UmlCloneFactory.new
+        factory.initialize
+        
+        var concrete : Class init factory.cloneClass(classToAbstract)
+        
+        // rename the elements
+        var name : kermeta::standard::String init classToAbstract.name
+        concrete.name := nameForNewConcrete(name)
+        classToAbstract.name := nameForAbstract(name)
+        concrete.visibility := classToAbstract.visibility
+        
+        // add generalisation
+        var gt : Generalization_Tool init Generalization_Tool.new
+        gt.addGeneralization(classToAbstract, concrete)
+        
+        // as all the attributes are in the abstract class ...
+        // ... we must erase them from concrete class (clone)
+        clearAttributes(concrete)
+        
+        // the class to abstract must now be abstract
+         classToAbstract.isAbstract := true
+        // the operations of the abstract class must be abstract
+        classToAbstract.ownedOperation.each{ u |
+	    	u.isAbstract := true
+	    	//////////////////////////////////////////////////////////////////////////////////////
+	    	//FIXME : is there a need for transfer an existing body, since we are at UML model ???
+	    }
+        // the concrete class must be concrete
+        concrete.isAbstract := false
+        // the operations of the concrete class must be concrete
+        concrete.ownedOperation.each{ u |
+	    	u.isAbstract := false
+	    	///////////////////////////////////////////////////////////////////
+	    	//FIXME : is there a need for body, since we are at UML model ???
+        }
+        result := concrete
+    end
+    
+    /** this operation authorize the Valooder to erase attributes only after a specific work on them */
+    operation clearAttributes(concrete : Class) is do
+    	concrete.ownedAttribute.clear
+    end
+    
+    // prefixes & suffixes for (re)naming the elements
+	/** overwrite this method to change resulting name of the accessor */
+    operation prefixForAbstract() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation suffixForAbstract() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation nameForAbstract(name : kermeta::standard::String) : kermeta::standard::String is do
+    	var tool : Tools init Tools.new
+    	result := prefixForAbstract + tool.upperFirstChar(name) + suffixForAbstract
+    end
+	/** overwrite this method to change resulting name of the accessor */
+    operation prefixForNewConcrete() : kermeta::standard::String is do result := "concrete" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation suffixForNewConcrete() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation nameForNewConcrete(name : kermeta::standard::String) : kermeta::standard::String is do
+    	var tool : Tools init Tools.new
+    	result := prefixForNewConcrete + tool.upperFirstChar(name) + suffixForNewConcrete
     end
 }
 
 /** Class dedicated to add get & set operations for each attibute of a class */
 class Accessor_Tool
 {
+	/** for each attribute of the class,
+	 * add corresponding accessors to the class */
 	operation addGettersSetters(cl : Class) is do
 		cl.ownedAttribute.each{ u |
-			cl.ownedOperation.add(createGetter(u))
-			cl.ownedOperation.add(createSetter(u))
+			addGetterSetter(cl, u)
 		}
 	end
+	
+	/** transform each public attribute of the class in a private one,
+	 * adding corresponding accessors to the class */
+	operation addPublicGettersSetters(cl : Class) is do
+		cl.ownedAttribute.each{ u |
+			if u.visibility == VisibilityKind.public then
+				addGetterSetter(cl, u)
+				u.visibility := VisibilityKind.private
+			end
+		}
+	end
+	
+	/** take a class and one of ITS attributes and
+	 * add the corresponding accessors to the class */
 	operation addGetterSetter(cl : Class, prop : Property) is do
 		cl.ownedOperation.add(createGetter(prop))
 		cl.ownedOperation.add(createSetter(prop))
 	end
+	
+	/** take a class and one of ITS attributes and
+	 * add the corresponding Getter to the class */
 	operation addGetter(cl : Class, prop : Property) is do
 		cl.ownedOperation.add(createGetter(prop))
 	end
+	
+	/** take a class and one of ITS attributes and
+	 * add the corresponding Setter to the class */
 	operation addSetter(cl : Class, prop : Property) is do
 		cl.ownedOperation.add(createSetter(prop))
 	end
 	
 	///////// utilities (builders) /////////////
+	/** private builder - don't use it directly */
 	operation createGetter(attr : Property) : Operation is do
 		var op : Operation init Operation.new
 		op.name := nameForGetter(attr.name)
 		op.visibility := VisibilityKind.public
-		var par : Parameter init Parameter.new
-		par.name := nameForReturn(attr.name)
-		par.type := attr.type
-		par.direction := ParameterDirectionKind.return
-		op.returnResult.add(par)
+		var returnPar : Parameter init Parameter.new
+		returnPar.name := nameForReturn(attr.name)
+		returnPar.type := attr.type
+		returnPar.direction := ParameterDirectionKind.return
+		op.returnResult.add(returnPar)
 		op.isAbstract := false
 		
+		// reading the upper value of the multiplicity
+		var lun : LiteralUnlimitedNatural
+		lun ?=attr.upperValue
+		var li : LiteralInteger
+		li ?=attr.upperValue
+		var multVal : kermeta::standard::Integer init 1
+		if lun != void then multVal := lun.~value
+		else
+			if li != void then
+				multVal := li.~value
+			end
+		end
 		// defined code for result of the getter operation
 		var code : Comment init Comment.new
-		code.body := "do\n\t"
-		code.body.append("result := "+attr.name)
-		code.body.append("\nend")
-		code.annotatedElement.add(op)
+		code.body := "do\n"
+		if multVal == 0 or multVal == 1 then
+			code.body.append("\tresult := "+attr.name+"\n")
+		else	// multiple items for 'attr'
+			var inPar : Parameter init Parameter.new
+			inPar.name := nameForMultipleGetterInput(attr.name)
+			var in : Class init Class.new
+			in.name := "Integer"
+			inPar.type := in
+			inPar.direction := ParameterDirectionKind.in
+			op.ownedParameter.add(inPar)
+			
+			code.body.append("\tresult := "+attr.name+ "("+nameForMultipleGetterInput(attr.name)+")\n")
+		end
+		code.body.append("end")
+		// we don't know the package which will contain the class of the operation
+		// so we must put the code comment into the operation
+//		code.annotatedElement.add(op)
+		op.ownedComment.add(code)
 		
 		result := op
 	end
+	/** private builder - don't use it directly */
 	operation createSetter(attr : Property) : Operation is do
 		var op : Operation init Operation.new
-		op.name := nameForSetter(attr.name)
 		op.visibility := VisibilityKind.public
-		var par : uml2::Parameter init Parameter.new
-		par.name := nameForInput(attr.name)
-		par.type := attr.type
-		par.direction := ParameterDirectionKind.in
-		op.ownedParameter.add(par)
 		op.isAbstract := false
+		var inPar : uml2::Parameter init Parameter.new
+		inPar.type := attr.type
+		inPar.direction := ParameterDirectionKind.in
+		inPar.name := nameForSetterInput(attr.name)
+		op.ownedParameter.add(inPar)
+		
+		// reading the upper value of the multiplicity
+		var lun : LiteralUnlimitedNatural
+		lun ?=attr.upperValue
+		var li : LiteralInteger
+		li ?=attr.upperValue
+		var multVal : kermeta::standard::Integer init 1
+		if lun != void then multVal := lun.~value
+		else
+			if li != void then
+				multVal := li.~value
+			end
+		end
 		
 		// defined code for affectation to the setter operation
 		var code : Comment init Comment.new
-		code.body := "do\n\t"
-		code.body.append(attr.name + " := " + nameForInput(attr.name))
-		code.body.append("\nend")
-		code.annotatedElement.add(op)
+		code.body := "do\n"
+		if multVal == 0 or multVal == 1 then
+			op.name := nameForSetter(attr.name)
+			code.body.append("\t"+attr.name + " := " + nameForSetterInput(attr.name)+"\n")
+		else
+			op.name := nameForSetterOnMultiple(attr.name)
+			code.body.append("\t"+attr.name + ".add(" + nameForInputOnMultiple(attr.name) + ")\n")
+		end
+		code.body.append("end")
+		// we don't know the package which will contain the class of the operation
+		// so we must put the code comment into the operation
+//		code.annotatedElement.add(op)
+		op.ownedComment.add(code)
 		
 		result := op
 	end
     // prefixes & suffixes for (re)naming the elements
+	/** overwrite this method to change resulting name of the accessor */
     operation prefixForGetter() : kermeta::standard::String is do result := "get_" end
+	/** overwrite this method to change resulting name of the accessor */
     operation suffixForGetter() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
     operation nameForGetter(name : kermeta::standard::String) : kermeta::standard::String is do
-    	result := prefixForGetter + name + suffixForGetter
+    	var tool : Tools init Tools.new
+    	result := prefixForGetter + tool.upperFirstChar(name) + suffixForGetter
     end
-    operation prefixForSetter() : kermeta::standard::String is do result := "set_" end
-    operation suffixForSetter() : kermeta::standard::String is do result := "" end
-    operation nameForSetter(name : kermeta::standard::String) : kermeta::standard::String is do
-    	result := prefixForSetter + name + suffixForSetter
-    end
+	/** overwrite this method to change resulting name of the accessor */
     operation prefixForReturn() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
     operation suffixForReturn() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
     operation nameForReturn(name : kermeta::standard::String) : kermeta::standard::String is do
-    	result := prefixForReturn + name + suffixForReturn
+    	var tool : Tools init Tools.new
+    	result := prefixForReturn + tool.upperFirstChar(name) + suffixForReturn
     end
-    operation prefixForInput() : kermeta::standard::String is do result := "new_" end
-    operation suffixForInput() : kermeta::standard::String is do result := "" end
-    operation nameForInput(name : kermeta::standard::String) : kermeta::standard::String is do
-    	result := prefixForInput + name + suffixForInput
+	/** overwrite this method to change resulting name of the accessor */
+//    operation prefixForMultipleGetterInput() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
+//    operation suffixForMultipleGetterInput() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation nameForMultipleGetterInput(name : kermeta::standard::String) : kermeta::standard::String is do
+    	result := "order"
+    end
+    
+	/** overwrite this method to change resulting name of the accessor */
+    operation prefixForSetter() : kermeta::standard::String is do result := "set_" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation suffixForSetter() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation nameForSetter(name : kermeta::standard::String) : kermeta::standard::String is do
+    	var tool : Tools init Tools.new
+    	result := prefixForSetter + tool.upperFirstChar(name) + suffixForSetter
+    end
+	/** overwrite this method to change resulting name of the accessor */
+    operation prefixForSetterInput() : kermeta::standard::String is do result := "new_" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation suffixForSetterInput() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation nameForSetterInput(name : kermeta::standard::String) : kermeta::standard::String is do
+    	var tool : Tools init Tools.new
+    	result := prefixForSetterInput + tool.upperFirstChar(name) + suffixForSetterInput
+    end
+    
+	/** overwrite this method to change resulting name of the accessor */
+    operation prefixForSetterOnMultiple() : kermeta::standard::String is do result := "add_" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation suffixForSetterOnMultiple() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation nameForSetterOnMultiple(name : kermeta::standard::String) : kermeta::standard::String is do
+    	var tool : Tools init Tools.new
+    	result := prefixForSetterOnMultiple + tool.upperFirstChar(name) + suffixForSetterOnMultiple
+    end
+	/** overwrite this method to change resulting name of the accessor */
+    operation prefixForInputOnMultiple() : kermeta::standard::String is do result := "new_" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation suffixForInputOnMultiple() : kermeta::standard::String is do result := "" end
+	/** overwrite this method to change resulting name of the accessor */
+    operation nameForInputOnMultiple(name : kermeta::standard::String) : kermeta::standard::String is do
+    	var tool : Tools init Tools.new
+    	result := prefixForInputOnMultiple + tool.upperFirstChar(name) + suffixForInputOnMultiple
     end
 }
 
@@ -217,11 +404,13 @@ class Association_Tool
         classEnd.name := navigableEndName
         classEnd.type := navigatedClass
         owningClass.ownedAttribute.add(classEnd)
+        assoc.memberEnd.add(classEnd)
         
         // the non navigable side of the association is for the association
         var assocEnd : Property init Property.new
         assocEnd.name := ownerEndName
         assocEnd.type := owningClass
+        assoc.memberEnd.add(assocEnd)
         assoc.ownedEnd.add(assocEnd)
         
         result := assoc
@@ -233,7 +422,8 @@ class Association_Tool
         var assoc : Association init addOneSideNavigableAssociation(container, component, associationName, "", compositionName)
         
         // the navigable end of the association must be a composite one
-        container.ownedAttribute.one.aggregation := AggregationKind.composite
+        var prop : Property init container.ownedAttribute.select{ u | u.name == compositionName }.one
+        prop.aggregation := AggregationKind.composite
         
         result := assoc
     end
@@ -244,11 +434,58 @@ class Association_Tool
         var assoc : Association init addOneSideNavigableAssociation(container, component, associationName, "", compositionName)
         
         // the navigable end of the association must be a aggregative one
-        container.ownedAttribute.one.aggregation := AggregationKind.shared
+        var prop : Property init container.ownedAttribute.select{ u | u.name == compositionName }.one
+        prop.aggregation := AggregationKind.shared
         
         result := assoc
     end
     
 	////////////////// two side navigable links ///////////////////
 	
+}
+
+class Tools
+{
+	reference table : kermeta::utils::Hashtable<kermeta::standard::String,kermeta::standard::String>
+	operation initialize() is do
+		table := kermeta::utils::Hashtable<kermeta::standard::String,kermeta::standard::String>.new
+		table.put("a", "A")
+		table.put("b", "B")
+		table.put("c", "C")
+		table.put("d", "D")
+		table.put("e", "E")
+		table.put("f", "F")
+		table.put("g", "G")
+		table.put("h", "H")
+		table.put("i", "I")
+		table.put("j", "J")
+		table.put("k", "K")
+		table.put("l", "L")
+		table.put("m", "M")
+		table.put("n", "N")
+		table.put("o", "O")
+		table.put("p", "P")
+		table.put("q", "Q")
+		table.put("r", "R")
+		table.put("s", "S")
+		table.put("t", "T")
+		table.put("u", "U")
+		table.put("v", "V")
+		table.put("w", "W")
+		table.put("x", "X")
+		table.put("y", "Y")
+		table.put("z", "Z")
+	end
+	operation upperFirstChar(name : kermeta::standard::String) : kermeta::standard::String is do
+		self.initialize
+		result := upperChar(name.substring(0,1)) + name.substring(1,name.size)
+	end
+	operation upperChar(char : kermeta::standard::String) : kermeta::standard::String is do
+		var upperizedChar : kermeta::standard::String init table.getValue(char)
+		if upperizedChar != void then
+			result := upperizedChar
+		else
+			result := char
+		end
+	end
 }

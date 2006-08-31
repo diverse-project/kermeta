@@ -36,10 +36,6 @@ class ToolCloneAssociationTestCase inherits kermeta::kunit::TestCase
 		factory.initialize
 		clone := factory.cloneAssociation(orig)
 		// ends must be linked after the cloning process (second pass)
-    		
-    		//DEBUG
-    		var o : kermeta::standard::Object init clone
-    		stdio.writeln("xxx")
 	end
 	
 	method tearDown() is do
@@ -63,12 +59,16 @@ class ToolCloneAssociationTestCase inherits kermeta::kunit::TestCase
     		"the clone must be have the same visibility than the original")
     end
     operation test_CloneTool_AssociationEnds() is do
+    	// test the "memberEnds" attribute
     	assertTrueWithMsg(clone.memberEnd.size == 2,
     		"the clone must be have the same number of ends than the original")
+    	assertTrueWithMsg(clone.memberEnd.select{ u | u == prop0 }.size == 1,
+    		"the clone must be have the same 'prop0' end than the original")
     	assertTrueWithMsg(clone.memberEnd.select{ u | u == prop1 }.size == 1,
-    		"the clone must be have the same ends than the original")
+    		"the clone must be have the same 'prop1' end than the original")
     	assertTrueWithMsg(clone.memberEnd.elementAt(0) == clone.ownedEnd.elementAt(0),
     		"the clone must be have the equivalent ends of the original")
+    	// test the "ownedEnds" attribute
     	assertTrueWithMsg(clone.ownedEnd.size == 1,
     		"the clone must be have the same number of owned ends than the original")
     	assertTrueWithMsg(clone.ownedEnd.elementAt(0) == factory.ioTable.getValue(prop0),

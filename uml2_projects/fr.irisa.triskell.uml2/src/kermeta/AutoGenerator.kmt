@@ -1,0 +1,49 @@
+/* $Id: AutoGenerator.kmt,v 1.1 2006-08-31 07:23:39 vmahe Exp $
+ * Creation date: August 25, 2006
+ * License: GPL
+ * Copyright: irisa.fr
+ * Authors: vmahe@irisa.fr
+ */
+@mainClass "uml2::Generator"
+@mainOperation "main"
+
+
+package uml2;
+
+
+require kermeta
+require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/transformations/PrettyPrinter.kmt"
+require "../../../fr.irisa.triskell.kermeta.ecore/src/kermeta/ecore.kmt"
+
+class Generator
+{
+    operation main() : Void is do 
+    	stdio.writeln("\n>>>>-------------> initializing the metamodel !\n")
+        // the metamodel to be transformed
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createResource("../ecore/UML2.ecore", "../../../fr.irisa.triskell.kermeta.ecore/src/ecore/Ecore.ecore")
+    	inputResource.load()
+    	
+    	// "instances" only gives the main diagramm package for the targeted code tree
+    	var mainModel : ecore::EPackage
+    	mainModel ?= inputResource.instances.one
+    	
+    	var ppGenerator : TopDownVisitor::PrettyPrinter
+    	ppGenerator := TopDownVisitor::PrettyPrinter.new
+    	ppGenerator.initialize
+        
+    	stdio.writeln("\n>>>>-------------> generating the PrettyPrinter !\n")
+        ppGenerator.addVisitor(mainModel, void)	// needed for the pattern but can be remove in the ".kmt" file
+        ppGenerator.applyPattern(mainModel, void, void, void)
+        
+    	stdio.writeln("\n>>>>-------------> saving the PrettyPrinter !\n")
+    	var outputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var outputResource : kermeta::persistence::EMFResource
+    	outputResource ?= outputRepository.createResource("../ecore/UmlPrettyPrinter.ecore", "../../../fr.irisa.triskell.kermeta.ecore/src/ecore/Ecore.ecore")
+    	outputResource.instances.add(ppGenerator.specPack)
+    	outputResource.save()
+        
+    	stdio.writeln("\n<-------------<<<< The End !\n")
+    end
+}

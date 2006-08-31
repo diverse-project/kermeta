@@ -13,6 +13,7 @@ require "704test_CloneTool_Parameter.main.kmt"
 require "705test_CloneTool_Property.main.kmt"
 require "706test_CloneTool_ValueSpecification.main.kmt"
 require "707test_CloneTool_Association.main.kmt"
+require "708test_CloneTool_DataType.main.kmt"
 
 require "750test_CloneTool_StaticDiagram.main.kmt"
 
@@ -25,30 +26,43 @@ class MyTestClass
 		
 		///////// tests on UML2 elements cloning //////////
 		
+		stdio.writeln("   ... testing ToolClonePackageTestCase ...")
 		testRunner.run(ToolClonePackageTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("   ... testing ToolCloneClassTestCase ...")
 		testRunner.run(ToolCloneClassTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("   ... testing ToolCloneOperationTestCase ...")
 		testRunner.run(ToolCloneOperationTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("   ... testing ToolCloneParameterTestCase ...")
 		testRunner.run(ToolCloneParameterTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("   ... testing ToolClonePropertyTestCase ...")
 		testRunner.run(ToolClonePropertyTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("   ... testing ToolCloneValueSpecificationTestCase ...")
 		testRunner.run(ToolCloneValueSpecificationTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("   ... testing ToolCloneAssociationTestCase ...")
 		testRunner.run(ToolCloneAssociationTestCase)
+		testRunner.printTestResult
+		
+		stdio.writeln("   ... testing ToolCloneDataTypeTestCase ...")
+		testRunner.run(ToolCloneDataTypeTestCase)
 		testRunner.printTestResult
 		
 		///////// tests on UML2 diagrams cloning //////////
 		
+		stdio.writeln("   ... testing ToolCloneStaticDiagramTestCase ...")
 		testRunner.run(ToolCloneStaticDiagramTestCase)
 		testRunner.printTestResult
+		
     end 
 }

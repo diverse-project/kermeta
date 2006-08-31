@@ -7,7 +7,9 @@ package test_package;
 require kermeta
 require "500test_Tool_Generalization.main.kmt"
 require "501test_Tool_Interface.main.kmt"
+require "501test_Tool_InterfaceAbstract.main.kmt"
 require "502test_Tool_Accessor.main.kmt"
+require "502test_Tool_Accessor_Public.main.kmt"
 require "503test_Tool_Transition.main.kmt"
 require "504test_Tool_Context4States.main.kmt"
 require "505test_Tool_Association.main.kmt"
@@ -19,21 +21,35 @@ class MyTestClass
     operation main() : Void is do 
 	    var testRunner : kermeta::kunit::TestRunner init kermeta::kunit::TestRunner.new
 		
+		stdio.writeln("  ... testing ToolGeneralizationTestCase ...")
 		testRunner.run(ToolGeneralizationTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("  ... testing ToolInterfaceTestCase ...")
 		testRunner.run(ToolInterfaceTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("  ... testing ToolInterfaceAbstractTestCase ...")
+		testRunner.run(ToolInterfaceAbstractTestCase)
+		testRunner.printTestResult
+		
+		stdio.writeln("  ... testing ToolAccessorTestCase ...")
 		testRunner.run(ToolAccessorTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("  ... testing ToolAccessorPublicTestCase ...")
+		testRunner.run(ToolAccessorPublicTestCase)
+		testRunner.printTestResult
+		
+		stdio.writeln("  ... testing ToolTransitionTestCase ...")
 		testRunner.run(ToolTransitionTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("  ... testing ToolContext4StateTestCase ...")
 		testRunner.run(ToolContext4StateTestCase)
 		testRunner.printTestResult
 		
+		stdio.writeln("  ... testing ToolAssociationTestCase ...")
 		testRunner.run(ToolAssociationTestCase)
 		testRunner.printTestResult
     end 

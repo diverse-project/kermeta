@@ -5,14 +5,14 @@
 package test_package;
 
 require kermeta
-require "707test_CloneTool_Association.main.kmt"
+require "501test_Tool_InterfaceAbstract.main.kmt"
 
 using tools_tests
 
 class MyTestClass
 {
     operation main() : Void is do 
-	    var testRunner : ToolCloneAssociationTestCase init ToolCloneAssociationTestCase.new
+	    var testRunner : ToolInterfaceAbstractTestCase init ToolInterfaceAbstractTestCase.new
 	
 		testRunner.setUp
     end 
