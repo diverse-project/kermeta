@@ -1,4 +1,4 @@
-/* $Id: valooder.kmt,v 1.1 2006-08-31 07:26:02 vmahe Exp $
+/* $Id: valooder.kmt,v 1.2 2006-08-31 16:29:43 vmahe Exp $
  * Creation date: August 21, 2006
  * License: GPL
  * Copyright: IRISA (http://irisa.fr)
@@ -22,7 +22,8 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 	reference association_Tool : uml2::transformations::Association_Tool
 	reference generalization_Tool : uml2::transformations::Generalization_Tool
 	reference interface_Tool : ValooderInterface_Tool
-	reference transition_Tool : uml2::transformations::Transition_Tool
+	reference transition_Tool : ValooderTransition_Tool
+	reference tools : uml2::transformations::Tools
 	
 	reference rtsPackage : Package
 	reference rtsActiveStateMachine : Class
@@ -45,7 +46,8 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 		association_Tool := uml2::transformations::Association_Tool.new
 		generalization_Tool := uml2::transformations::Generalization_Tool.new
 		interface_Tool := ValooderInterface_Tool.new
-		transition_Tool := uml2::transformations::Transition_Tool.new
+		transition_Tool := ValooderTransition_Tool.new
+		tools := uml2::transformations::Tools.new
 		
     	// load the RTS UML2 resource
     	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
@@ -132,14 +134,19 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 		
 		// renaming the concrete class only after its states have been reified under the old name
 		concreteClass.name := concreteClass.name + "_impl"
+		
+		// adding the code of operations of the implementation class
+		// getters and setters have been coded by the Accessor_Tool
+		// the "make()" operation is added in the "visitRegion()" method
 	end
 	
     method visitRegion(visitable : Region) : Void is do
     	// as the same owning class must be processed multiple times,
     	// we test the existance of the abstractState in the memory
     	if ioTable.getValue(visitable) == void then
- 	        super(visitable)
-			// add the name of the abstract state class
+ 	        super(visitable)	// implies the states have been processed
+ 	        
+			// need some work to be done on the context of the states
 			var context : Class
 			// the region owner could be a statemachine ...
 			context ?= ioTable.getValue(visitable.stateMachine)
@@ -150,7 +157,91 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 			topState ?= ioTable.getValue(visitable)
 			generalization_Tool.addGeneralization(context, topState)
 			// the topState has no operations on its own.
-			topState.ownedOperation.clear
+//			topState.ownedOperation.clear
+			
+			// concrete operations needed in the "top_state" (are abstract in rts::[Active]StateMachine)
+			var entry : Operation init Operation.new
+			entry.name := "entry"
+			var entryCode : Comment init Comment.new
+			entryCode.body := "do\n\t// Empty (nothing to do)\nend"
+			entry.ownedComment.add(entryCode)
+			
+			var exit : Operation init Operation.new
+			exit.name := "exit"
+			var exitCode : Comment init Comment.new
+			exitCode.body := "do\n\t// Empty (nothing to do)\nend"
+			exit.ownedComment.add(exitCode)
+			
+			// we must built here the "make()" operation of the "_impl" class
+			// FIXME : see if it mus be done also on substates contex (which is a reified up state)
+			var make : Operation init Operation.new
+			make.name := "make"
+			context.ownedOperation.add(make)
+			var code : kermeta::standard::String init ""
+			// we need first to initialize sets of attributes (those of the model)
+			var abstractClass : Class
+			abstractClass ?= context.generalization.select{sup|sup.general.name == context.name}.one.general
+			abstractClass.ownedAttribute.each{attr|
+				var int : kermeta::standard::Integer init 1
+				var lun : LiteralUnlimitedNatural
+				lun ?= attr.upperValue
+				var li : LiteralInteger
+				li ?= attr.upperValue
+				if lun != void then int := lun.~value
+				else if li != void then int := li.~value end end
+				if int == -1 then
+					if attr.isUnique then
+						if attr.isOrdered then
+							code.append("\t" + attr.name + " := kermeta::standard::OrderedSet<"+ attr.type.name + ">.new")
+						else
+							code.append("\t" + attr.name + " := kermeta::standard::Set<"+ attr.type.name + ">.new")
+						end
+					else
+						if attr.isOrdered then
+							code.append("\t" + attr.name + " := kermeta::standard::Sequence<"+ attr.type.name + ">.new")
+						else
+							code.append("\t" + attr.name + " := kermeta::standard::Bag<"+ attr.type.name + ">.new")
+						end
+					end
+				end
+			}
+			// then we must init each concrete state class (linked in the context class)
+			visitable.subvertex.each{vertex|
+				// for each processed state, we add initialisation code
+				var concreteState : Class
+				concreteState ?= ioTable.getValue(vertex)
+				if concreteState != void then
+					// code to initialize the state class
+					code.append("\t" + nameForConcreteStateLink(vertex) + " := " + nameForConcreteState(vertex) + ".new\n")
+					// code to activate the state class
+					code.append("\t" + nameForConcreteStateLink(vertex) + ".init_activable(\"" + nameForConcreteState(vertex) + "\")\n")
+					// code to link the state class with the "_impl" (ActiveStateMachine)
+					// REM : it is needed by Kermeta simulator (not needed in Eiffel for CADP)
+					code.append("\t" + nameForConcreteStateLink(vertex) + ".machine := self\n")
+					
+					// we add the link from the "_impl" class to the state class
+					var link : Property init Property.new
+					link.name := nameForConcreteStateLink(vertex)
+					link.type := concreteState
+					context.ownedAttribute.add(link)
+				end
+			}
+			// specify the initial state to the "ActiveStateMachine"
+			var initial : Vertex init initialState(visitable)
+			if initial != void then
+				code.append("\tinstanceCurrentState := " + tools.lowerFirstChar(nameForConcreteStateLink(initial)) + "\n")
+			else
+				code.append("\t// #### no initial state has been found in the region ####\n")
+				code.append("//\tinstanceCurrentState := void\n")
+			end
+			// rely the code to the "make()" operation
+			var makeCode : Comment init Comment.new
+			makeCode.body := "do\n" + code + "end"
+			make.ownedComment.add(makeCode)
+			
+			// the transitions can be processed only after all "source" state
+			// have been processed so we can't use the "visitTransition()" method
+			visitable.transition.each{ trans | createTransitionOperation(trans) }
 		end
     end
 	
@@ -161,6 +252,9 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
     method nameForConcreteState(vertex : Vertex) : kermeta::standard::String is do
     	result := context(vertex).name + "_in_" + vertex.name
     end
+    operation nameForConcreteStateLink(vertex : Vertex) : kermeta::standard::String is do
+    	result := tools.lowerFirstChar(nameForConcreteState(vertex))
+    end
     method addHandleOperation(concreteVertex : Class, isAbstract : kermeta::standard::Boolean) is do
     	// we don't need any "handle()" operation in Valooder
     end
@@ -169,8 +263,8 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
     	// we don't need any "request()" operation in Valooder
     end
     method postProcessState(visitable : Vertex) : Void is do
-    	// after a vertex (state, final state, or pseudo state)
-    	// has been processed, we must rely it to its "context" class
+    	// after a vertex (state, final state, or pseudo state) has been processed,
+    	// we must rely it to its "context" class
     	var concreteState : Class
     	concreteState ?= ioTable.getValue(visitable)
 		// create a link between the context class and the concrete state
@@ -182,6 +276,33 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 	
 	
 	//////////////// useful internal operations ///////////////////
+    
+    operation createTransitionOperation(visitable : Transition) is do
+    
+    //DEBUG
+    stdio.writeln("DEBUG Valooder.createTransOp() : transition = "+visitable.name)
+    stdio.writeln("DEBUG Valooder.createTransOp() : transition.source = "+visitable.source.toString)
+    stdio.writeln("DEBUG Valooder.createTransOp() : transition.source class = "+ioTable.getValue(visitable.source).toString)
+    
+/*    	////////// code corresponding to the static classes of the model (non Actors)
+    	// we add to the source state the operation corresponding to the transition
+    	var sourceState : Class
+    	sourceState ?= ioTable.getValue(visitable.source)
+    	var op : Operation init Operation.new
+    	op.name := visitable.name
+    	sourceState.ownedOperation.add(op)
+    	var opCode : Comment init Comment.new
+    	// we use the transition tool to get the code of the transition
+    	opCode.body := transition_Tool.transition2code(visitable)
+    	op.ownedComment.add(opCode)
+    	
+    	/////////// TODO : distinguish between Actors and non Actors
+    	///////////        - generate the code for Actors : 
+    	///////////             - "nb_transitions()"
+    	///////////             - "labels()"
+    	///////////             - "completion()"
+*/
+    end
 	
 	operation createCallEvent(op : Operation) : Class is do
 		result := Class.new
@@ -189,14 +310,62 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 		// the call event has the RTS Event type
 		generalization_Tool.addGeneralization(rtsEvent, result)
 		
-		///////// TODO : generate the corresponding code for operations "dispatch" & "event_name"
-		var dispatchOp : Operation init Operation.new
-		dispatchOp.name := "dispatch"
-		result.ownedOperation.add(dispatchOp)
+		///////// TODO : generate the corresponding code for Event operations
+		// which, for a Xxx main class with a xOp(y : Yyy) operation, must seems like :
+		/*class Xxx_xOp_call_event
+			method dispatch_to(target : kermeta::standard::Object) is
+			do
+				var target_as_Xxxx : Xxx
+				target_as_Xxx ?= target
+				var arg0 : Yyy
+				arg0 ?= arguments.elementAt(0)
+				target_as_Xxx.xOp(arg0)
+			end
+			method event_name() is
+			do
+				result := "xOp"
+			end
+		*/
 		
+		///// generate the corresponding code for operation "dispatch_to"
+		var dispatchOp : Operation init Operation.new
+		dispatchOp.name := "dispatch_to"
+		result.ownedOperation.add(dispatchOp)
+		// add the "target" parameter
+		var target : Parameter init Parameter.new
+		target.name := "target"
+		var o : Class init Class.new
+		o.name := "kermeta::standard::Object"
+		target.type := o
+		dispatchOp.ownedParameter.add(target)
+		// generate the code
+		var dispatchOpCode : Comment init Comment.new
+		dispatchOpCode.body := "do\n"
+		dispatchOpCode.body.append("\ttarget_as_"+op.class_.name+ " : "+ op.class_.name+"\n")
+		dispatchOpCode.body.append("\ttarget_as_"+op.class_.name+ " ?= target\n")
+		var count : kermeta::standard::Integer init 0
+		op.ownedParameter.each{ par|
+			dispatchOpCode.body.append("\tvar arg"+count.toString+ " : " +par.type.name+"\n")
+			count := count + 1
+		}
+		dispatchOpCode.body.append("\ttarget_as_"+op.class_.name+ "."+op.name+"(")	// begin of the call
+		count := 0
+		op.ownedParameter.each{ par|
+			if count > 0 then dispatchOpCode.body.append(", ") end
+			dispatchOpCode.body.append("arg"+count.toString)
+			count := count + 1
+		}
+		dispatchOpCode.body.append(")\n")	// end of the call
+		dispatchOpCode.body.append("end")
+		dispatchOp.ownedComment.add(dispatchOpCode)
+		
+		// generate the corresponding code for operation "event_name"
 		var nameOp : Operation init Operation.new
 		nameOp.name := "event_name"
 		result.ownedOperation.add(nameOp)
+		var nameOpCode : Comment init Comment.new
+		nameOpCode.body := "do\n\tresult := \"" + op.name + "\"\nend"
+		nameOp.ownedComment.add(nameOpCode)
 	end
 	
 	operation createSignal(op : Operation) : Class is do
@@ -262,6 +431,21 @@ class Valood inherits uml2::transformations::GOFStatePatternTool
 		prop.name := name
 		signal.ownedAttribute.add(prop)
 	end
+	
+	operation initialState(region : Region) : Vertex is do
+		var initial : Vertex
+		if region.subvertex.size == 1 then
+			initial := region.subvertex.one
+		else
+			region.subvertex.each{v|
+				var pseudo : Pseudostate
+				pseudo ?= v
+				if pseudo != void then
+					if pseudo.kind == PseudostateKind.initial then initial := v end
+				end
+			}
+		end
+	end
 }
 
 /** redefine the naming of abstract and concrete classes */
@@ -282,4 +466,29 @@ class ValooderAccessor_Tool inherits uml2::transformations::Accessor_Tool
 	method prefixForGetter() : kermeta::standard::String is do result := "get" end
 	method prefixForSetter() : kermeta::standard::String is do result := "set" end
 	method prefixForSetterOnMultiple() : kermeta::standard::String is do result := "add" end
+}
+
+/** redefine the code for leave source and enter target (others stay unchanged) */
+class ValooderTransition_Tool inherits uml2::transformations::Transition_Tool
+{
+	method sourceIntoOperation() : kermeta::standard::String is do
+		if transition.source != void then
+			var tools : uml2::transformations::Tools init uml2::transformations::Tools.new
+			result := "\tleave("+tools.lowerFirstChar(transition.source.name)+")"
+		else
+			var message : kermeta::standard::String
+			message := "Transition '"+ transition.name+"' must have a source state to be transformed"
+			raise message
+		end
+	end
+	method targetIntoOperation() : kermeta::standard::String is do
+		if transition.target != void then
+			var tools : uml2::transformations::Tools init uml2::transformations::Tools.new
+			result := "\tenter("+tools.lowerFirstChar(transition.target.name)+")"
+		else
+			var message : kermeta::standard::String
+			message := "Transition '"+ transition.name+"' must have a target state to be transformed"
+			raise message
+		end
+	end
 }
