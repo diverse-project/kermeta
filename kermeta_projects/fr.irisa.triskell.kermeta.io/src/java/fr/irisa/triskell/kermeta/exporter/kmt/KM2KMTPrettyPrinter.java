@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.36 2006-08-31 12:18:28 dtouzet Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.37 2006-08-31 15:03:32 dtouzet Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -77,6 +77,8 @@ import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
 import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
+
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 
 
@@ -572,7 +574,9 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 	
 		if (node.getSuperOperation() != null) {
-			result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()));
+			ClassDefinition cDef = node.getSuperOperation().getOwningClass();
+			if(! KMTHelper.getQualifiedName(cDef).equals("kermeta::reflection::Object"))
+				result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()));
 		}
 		if (node.getRaisedException().size() > 0) {
 			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());

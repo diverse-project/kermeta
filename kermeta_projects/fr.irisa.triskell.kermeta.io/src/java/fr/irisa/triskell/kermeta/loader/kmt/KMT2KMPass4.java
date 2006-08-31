@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass4.java,v 1.15 2006-06-26 15:06:11 dvojtise Exp $
+/* $Id: KMT2KMPass4.java,v 1.16 2006-08-31 15:03:32 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPass4.java
  * License : GPL
@@ -123,61 +123,58 @@ public class KMT2KMPass4 extends KMT2KMPass {
 		}
 		else if (operation.getOperationKind().getText().equals("method")) {
 			// the op should be defined in a superclass
-			for (int i=0; i<superclasses.size(); i++) {
-				ClassDefinition sc = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)superclasses.get(i)).getTypeDefinition();
-				// potential super ops
-				Hashtable superops = getSupersForMethod(builder.current_class, builder.current_operation.getName());
-				if (superops.size() == 0) { // Error, no super operation
-					builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :No super operation found for method '"+builder.current_operation.getName()+"'.", operation));
-					return false;
-				}
-				else if (superops.size() == 1) { // No problem
-					String scname = (String)superops.keys().nextElement();
-					builder.current_operation.setSuperOperation((fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(scname));
-					if (operation.getSuperSelection() != null) {
-						String provided_name = qualifiedIDAsString(operation.getSuperSelection());
-						if (!provided_name.equals(scname)) {
-							builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Wrong super operation selection directive '"+provided_name+"', super operation selected from class '"+scname+"'.", operation));
-						}
+			// potential super ops
+			Hashtable superops = getSupersForMethod(builder.current_class, builder.current_operation.getName());
+			if (superops.size() == 0) { // Error, no super operation
+				builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :No super operation found for method '"+builder.current_operation.getName()+"'.", operation));
+				return false;
+			}
+			else if (superops.size() == 1) { // No problem
+				String scname = (String)superops.keys().nextElement();
+				builder.current_operation.setSuperOperation((fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(scname));
+				if (operation.getSuperSelection() != null) {
+					String provided_name = qualifiedIDAsString(operation.getSuperSelection());
+					if (!provided_name.equals(scname)) {
+						builder.messages.addMessage(new KMTUnitLoadError("PASS 4 : Wrong super operation selection directive '"+provided_name+"', super operation selected from class '"+scname+"'.", operation));
 					}
 				}
-				// FIXED : superoperation finding is not correct
-				else { // the super method has to be chosen
-				    
-					String possible_selection = "";
-					Enumeration e = superops.keys();
-					while (e.hasMoreElements()) {
-						possible_selection += e.nextElement() + ", ";
-					}
-					possible_selection = possible_selection.substring(0, possible_selection.length()-2);
-					if (operation.getSuperSelection() != null) { // the user has chosen
-						String provided_name = qualifiedIDAsString(operation.getSuperSelection());
-						fr.irisa.triskell.kermeta.language.structure.Operation superop = null;
-						superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(provided_name);
-						
-						if (superop == null) superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(builder.getQualifiedName(builder.rootPackage) + "::" + provided_name);
-						
-						if (superop == null) {
-							Iterator uit = builder.usings.iterator();
-							while(uit.hasNext()) {
-								superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(uit.next() + "::" + provided_name);
-								if (superop != null) break;
-							}
-						}
-						
-						if (superop != null) { 
-							builder.current_operation.setSuperOperation(superop);
-						}
-						
-						else {
-							builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :Wrong super operation selection directive '"+provided_name+"', expecting one of "+possible_selection+".", operation.getSuperSelection()));
-							return false;
+			}
+			// FIXED : superoperation finding is not correct
+			else { // the super method has to be chosen
+			    
+				String possible_selection = "";
+				Enumeration e = superops.keys();
+				while (e.hasMoreElements()) {
+					possible_selection += e.nextElement() + ", ";
+				}
+				possible_selection = possible_selection.substring(0, possible_selection.length()-2);
+				if (operation.getSuperSelection() != null) { // the user has chosen
+					String provided_name = qualifiedIDAsString(operation.getSuperSelection());
+					fr.irisa.triskell.kermeta.language.structure.Operation superop = null;
+					superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(provided_name);
+					
+					if (superop == null) superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(builder.getQualifiedName(builder.rootPackage) + "::" + provided_name);
+					
+					if (superop == null) {
+						Iterator uit = builder.usings.iterator();
+						while(uit.hasNext()) {
+							superop = (fr.irisa.triskell.kermeta.language.structure.Operation)superops.get(uit.next() + "::" + provided_name);
+							if (superop != null) break;
 						}
 					}
-					else { // error
-						builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :Several super operation found for method '"+builder.current_operation.getName()+"', : "+possible_selection+".", operation));
+					
+					if (superop != null) { 
+						builder.current_operation.setSuperOperation(superop);
+					}
+					
+					else {
+						builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :Wrong super operation selection directive '"+provided_name+"', expecting one of "+possible_selection+".", operation.getSuperSelection()));
 						return false;
 					}
+				}
+				else { // error
+					builder.messages.addMessage(new KMTUnitLoadError("PASS 4 :Several super operation found for method '"+builder.current_operation.getName()+"', : "+possible_selection+".", operation));
+					return false;
 				}
 			}
 		}
