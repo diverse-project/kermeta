@@ -1,0 +1,285 @@
+/* $Id: valooder.kmt,v 1.1 2006-08-31 07:26:02 vmahe Exp $
+ * Creation date: August 21, 2006
+ * License: GPL
+ * Copyright: IRISA (http://irisa.fr)
+ * Authors: vmahe@irisa.fr
+ */
+package valood;
+
+
+require kermeta
+require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/BehaviorTools.kmt"
+require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/GOFStatePatternTool.kmt"
+require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/StaticTools.kmt"
+require "../../../fr.irisa.triskell.uml2/src/kermeta/transformations/UmlCloneFactory.kmt"
+
+using uml2
+
+class Valood inherits uml2::transformations::GOFStatePatternTool
+{
+	reference factory : uml2::transformations::UmlCloneFactory
+	reference accessor_Tool : ValooderAccessor_Tool
+	reference association_Tool : uml2::transformations::Association_Tool
+	reference generalization_Tool : uml2::transformations::Generalization_Tool
+	reference interface_Tool : ValooderInterface_Tool
+	reference transition_Tool : uml2::transformations::Transition_Tool
+	
+	reference rtsPackage : Package
+	reference rtsActiveStateMachine : Class
+	reference rtsProxy : Class
+	reference rtsEvent : Class
+	
+	method initialize(input : Package, output : Package) is do
+		// UmlTool initialization
+		super(input, output)
+		// GOFState initialization
+		currentPackage := input
+		
+		// initialization of the cloning tool
+		factory := uml2::transformations::UmlCloneFactory.new
+		factory.initialize
+		ioTable := factory.ioTable
+		
+		// initialization of other tools
+		accessor_Tool := ValooderAccessor_Tool.new
+		association_Tool := uml2::transformations::Association_Tool.new
+		generalization_Tool := uml2::transformations::Generalization_Tool.new
+		interface_Tool := ValooderInterface_Tool.new
+		transition_Tool := uml2::transformations::Transition_Tool.new
+		
+    	// load the RTS UML2 resource
+    	var inputRepository : kermeta::persistence::EMFRepository init kermeta::persistence::EMFRepository.new
+    	var inputResource : kermeta::persistence::EMFResource
+    	inputResource ?= inputRepository.createResource("../uml2/rts.uml2", "../../../fr.irisa.triskell.uml2/src/ecore/UML2.ecore")
+    	inputResource.load()
+    	
+    	// catching the needed classes inside the RTS library
+		var rtsLibrary : Package
+    	rtsLibrary ?= inputResource.instances.one
+    	rtsPackage ?= rtsLibrary.ownedMember.select{ u | u.name == "rts" }.one
+    	rtsActiveStateMachine ?= rtsPackage.ownedMember.select{ u | u.name == "ActiveStateMachine" }.one
+    	rtsEvent ?= rtsPackage.ownedMember.select{ u | u.name == "Event" }.one
+    	rtsProxy ?= rtsPackage.ownedMember.select{ u | u.name == "Proxy" }.one
+	end
+	
+	operation valooder() is do
+		var model : Model
+		model ?= inputRootPackage
+		
+		// clone the input model
+		outputRootPackage := factory.cloneStaticDiagram(model)
+		
+		//DEBUG
+		var cloneModel : kermeta::standard::Object init outputRootPackage
+		
+		// transform the model
+		visitModel(model)
+		
+		// add reference to the RTS model/library
+		var importPack : PackageImport init PackageImport.new
+		importPack.importedPackage := rtsPackage
+		outputRootPackage.packageImport.add(importPack)
+		var importASM : ElementImport init ElementImport.new
+		importASM.importedElement := rtsActiveStateMachine
+		outputRootPackage.elementImport.add(importASM)
+		var importEvent : ElementImport init ElementImport.new
+		importEvent.importedElement := rtsEvent
+		outputRootPackage.elementImport.add(importEvent)
+		var importProxy : ElementImport init ElementImport.new
+		importProxy.importedElement := rtsProxy
+		outputRootPackage.elementImport.add(importProxy)
+	end
+	
+	method visitClass(visitable : Class) is do
+		// getting the clone to make the modifications on it
+		var clone : Class
+		clone ?= ioTable.getValue(visitable)
+		
+		// the old valooder did reify association ends (UML 1.x)
+		// In UML 2.0, navigable associations are embedded as properties
+		// so we don't need to reify them !!
+		
+		// then make the given class an abstract class, extracting the corresponding implementation, ...
+		var concreteClass : Class init interface_Tool.concreteFromAbstract(clone)
+		currentOutPackage.ownedMember.add(concreteClass)
+		
+		// the accessors must be created first, ...
+		accessor_Tool.addGettersSetters(concreteClass)
+		
+		// we disabled the "clearAttributes() in the Association_Tool
+		// to be able to process geters and setters so we must clear now
+		concreteClass.ownedAttribute.clear
+		
+		// the new implementation replaces the clone as the destination of links with states
+		ioTable.putValue(visitable, concreteClass)
+		
+		// then the call_event and signal classes, ...
+		clone.ownedOperation.each{ op |
+			currentOutPackage.ownedMember.add(createCallEvent(op))
+			currentOutPackage.ownedMember.add(createSignal(op))
+		}
+		
+		// ... and then the proxies
+		currentOutPackage.ownedMember.add(createProxy(clone, concreteClass))
+		
+		// the concrete class has the RTS ActiveStateMachine type
+		if visitable.ownedStateMachine.size == 1 then
+			generalization_Tool.addGeneralization(rtsActiveStateMachine, concreteClass)
+		end
+		
+		// apply the GoFState pattern :-)
+		super(visitable)
+		
+		// renaming the concrete class only after its states have been reified under the old name
+		concreteClass.name := concreteClass.name + "_impl"
+	end
+	
+    method visitRegion(visitable : Region) : Void is do
+    	// as the same owning class must be processed multiple times,
+    	// we test the existance of the abstractState in the memory
+    	if ioTable.getValue(visitable) == void then
+ 	        super(visitable)
+			// add the name of the abstract state class
+			var context : Class
+			// the region owner could be a statemachine ...
+			context ?= ioTable.getValue(visitable.stateMachine)
+			// ... or a state having sub states
+			if context == void then context ?= ioTable.getValue(visitable.state) end
+			
+			var topState : Class
+			topState ?= ioTable.getValue(visitable)
+			generalization_Tool.addGeneralization(context, topState)
+			// the topState has no operations on its own.
+			topState.ownedOperation.clear
+		end
+    end
+	
+	
+	/////////// overwrite GoFStatePattern methods //////////////////
+	
+    method suffixForAbstractState() : kermeta::standard::String is do result := "_top_state" end
+    method nameForConcreteState(vertex : Vertex) : kermeta::standard::String is do
+    	result := context(vertex).name + "_in_" + vertex.name
+    end
+    method addHandleOperation(concreteVertex : Class, isAbstract : kermeta::standard::Boolean) is do
+    	// we don't need any "handle()" operation in Valooder
+    end
+    
+    method addRequestOperation(context : Class) is do
+    	// we don't need any "request()" operation in Valooder
+    end
+    method postProcessState(visitable : Vertex) : Void is do
+    	// after a vertex (state, final state, or pseudo state)
+    	// has been processed, we must rely it to its "context" class
+    	var concreteState : Class
+    	concreteState ?= ioTable.getValue(visitable)
+		// create a link between the context class and the concrete state
+		var prop : Property init Property.new
+		prop.type := concreteState
+		prop.name := concreteState.name
+		context(visitable).ownedAttribute.add(prop)
+    end
+	
+	
+	//////////////// useful internal operations ///////////////////
+	
+	operation createCallEvent(op : Operation) : Class is do
+		result := Class.new
+		result.name := nameForCallEvent(op)
+		// the call event has the RTS Event type
+		generalization_Tool.addGeneralization(rtsEvent, result)
+		
+		///////// TODO : generate the corresponding code for operations "dispatch" & "event_name"
+		var dispatchOp : Operation init Operation.new
+		dispatchOp.name := "dispatch"
+		result.ownedOperation.add(dispatchOp)
+		
+		var nameOp : Operation init Operation.new
+		nameOp.name := "event_name"
+		result.ownedOperation.add(nameOp)
+	end
+	
+	operation createSignal(op : Operation) : Class is do
+		var signal : Class init Class.new
+		signal.name := nameForSignal(op)
+		
+		// generate the attribute corresponding to each operation's parameter
+		// for this version, we don't manage multiple return parameters
+		// (no information on compatibility with the I/O-LTS approach)
+		if op.returnResult.size == 1 then createSignalParameter(signal, op.returnResult.one, "result") end
+		
+		op.ownedParameter.each{ par | createSignalParameter(signal, par, par.name)}
+		
+		result := signal
+	end
+	
+	operation createProxy(cl : Class, cl_impl : Class) : Class is do
+		result := Class.new
+		result.name := nameForProxy(cl.name)
+		// the concrete class proxy has the RTS Proxy type
+		generalization_Tool.addGeneralization(rtsProxy, result)
+		generalization_Tool.addGeneralization(cl, result)
+		
+		// TODO : generate the corresponding code for inherited operations of the implementation
+		cl_impl.ownedOperation.each{ op |
+			result.ownedOperation.add(factory.cloneOperation(op))
+			
+			///////////////////////////////
+		}
+		
+		
+	end
+	
+	operation context(vertex : Vertex) : Class is do
+    	var region : Region
+    	region ?= vertex.container
+    	var context : Class
+    	
+		// the region owner could be a statemachine ...
+		context ?= ioTable.getValue(region.stateMachine)
+		// ... or a state having sub states
+		if context == void then context ?= ioTable.getValue(region.state) end
+		
+		result := context
+	end
+	
+	operation nameForCallEvent(op : Operation) : kermeta::standard::String is do
+		result := op.class_.name + "_" + op.name + "_call_event"
+	end
+	
+	operation nameForSignal(op : Operation) : kermeta::standard::String is do
+		result := op.class_.name + "_" + op.name + "_signal"
+	end
+	
+	operation nameForProxy(className : kermeta::standard::String) : kermeta::standard::String is do
+		result := className + "_proxy"
+	end
+	
+	operation createSignalParameter(signal : Class, param : Parameter, name : kermeta::standard::String) is do
+		// create a link between the signal and the parameter's type class
+		var prop : Property init Property.new
+		prop.type := param.type
+		prop.name := name
+		signal.ownedAttribute.add(prop)
+	end
+}
+
+/** redefine the naming of abstract and concrete classes */
+class ValooderInterface_Tool inherits uml2::transformations::Interface_Tool
+{
+    method prefixForAbstract() : kermeta::standard::String is do result := "" end
+    method suffixForAbstract() : kermeta::standard::String is do result := "" end
+    method prefixForNewConcrete() : kermeta::standard::String is do result := "" end
+    // the renaming of the implementation class is differed, waiting its states being processed
+    method suffixForNewConcrete() : kermeta::standard::String is do result := "" end
+/** disable the "clearAttributes() method */
+    method clearAttributes(concrete : Class) is do  end
+}
+
+/** redefine the naming of some getters and setters (others stay unchanged) */
+class ValooderAccessor_Tool inherits uml2::transformations::Accessor_Tool
+{
+	method prefixForGetter() : kermeta::standard::String is do result := "get" end
+	method prefixForSetter() : kermeta::standard::String is do result := "set" end
+	method prefixForSetterOnMultiple() : kermeta::standard::String is do result := "add" end
+}
