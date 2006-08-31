@@ -30,8 +30,7 @@ two versions
 
 Other :
 ======
- 1 - write unit tests for the uml2km tool
- 2 - write unit tests for the valooder transformation
+ - write unit tests for the uml2km tool
 
 History :
 ---------
