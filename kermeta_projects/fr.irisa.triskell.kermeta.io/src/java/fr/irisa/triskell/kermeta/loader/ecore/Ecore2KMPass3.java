@@ -1,17 +1,13 @@
-/* $Id: Ecore2KMPass3.java,v 1.2 2006-08-02 07:19:13 dvojtise Exp $
+/* $Id: Ecore2KMPass3.java,v 1.3 2006-08-31 12:18:28 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
- * File       : Ecore2KMPass3.java
+ * File       : Ecore2KMPass2.java
  * License    : EPL
  * Copyright  : IRISA / INRIA / Universite de Rennes 1
  * -------------------------------------------------------------------
- * Creation date : 1 Aug. 2006
+ * Creation date : Jun 19, 2006
  * Authors : 
- *        dtouzet <dtouzet@irisa.fr>
- * Description : 
- *   This pass apply the quick fixes that are necessary to obtain correct kermeta models from many ecore models  
- */
-/**
- * 
+ *    zdrey <zdrey@irisa.fr>
+ * Contributors :
  */
 package fr.irisa.triskell.kermeta.loader.ecore;
 
@@ -22,201 +18,361 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.ecore.visitor.EcoreVisitor;
 import fr.irisa.triskell.kermeta.exporter.ecore.KM2Ecore;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
 import fr.irisa.triskell.kermeta.language.structure.Property;
+import fr.irisa.triskell.kermeta.language.structure.StructureFactory;
+import fr.irisa.triskell.kermeta.language.structure.Tag;
+import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypeDefinition;
+import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
+import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.expression.ExpressionParser;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolOperation;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolParameter;
+import fr.irisa.triskell.kermeta.loader.kmt.KMSymbolProperty;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
-
+import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 /**
  * @author dtouzet
  *
  */
 public class Ecore2KMPass3 extends EcoreVisitor {
-	
-	
+
 	protected ECore2KMPass1 visitorPass1;
 	protected Ecore2KM exporter;
 	protected EcoreUnit unit;
 	protected Resource resource;
-	protected Hashtable opTable;
 	
-
+	/** true if the visit concerns type setting, otherwise false.
+	 * mainly used since operation visit needs 2 passes : 
+	 * first, setting the type of operation, second, setting the super operations
+	 * of operation. */
+	protected boolean isTypeSettingMode;
+	
 	/**
-	 * 
+	 * Hashtable that is dedicated to encode links between a method and the set of
+	 * methods that overload it (in subclasses) when the QuickFix option is activated.
 	 */
-	public Ecore2KMPass3(ECore2KMPass1 visitor, Hashtable t, Ecore2KM exporter) {
+	protected Hashtable opTable;
+		
+	/** 
+	 * @param unit
+	 * @param resource
+	 * @param visitor
+	 */
+	public Ecore2KMPass3(ECore2KMPass1 visitor, Ecore2KM exporter)
+	{
 		this.visitorPass1 = visitor;
 		this.unit = visitorPass1.unit;
+		this.resource = exporter.resource;
+		this.isTypeSettingMode = false;
 		this.exporter = exporter;
-		this.opTable = t;
+		
+		this.opTable = new Hashtable();
 	}
-	
+		
+	public Hashtable convertUnit()
+	{
+		// Visit all the EClasses (their substructure, i.e operations and properties)
+		isTypeSettingMode = true;
+		for (EObject node : visitorPass1.eclassifier_typedefinition_map.keySet()) { // do not visit again datatypes?
+			if (node instanceof EClass) accept(node); 
+		}
+		// Visit again all the EOperations in order to set their super operations
+		isTypeSettingMode = false;
+		for (EOperation node : visitorPass1.operations.keySet()) {
+			accept(node);
+		}
+		
+		// Return the Hashtable (filled by the "visit(EOperation)" method) that contains 
+		// links between each method and the "submethods" that overload it (empty if
+		// QuickFix is disabled). 
+		return opTable;
+	}
+
 	
 	/**
-	 * 
-	 */
-	public void fixUnit() {
-		for (EObject node : visitorPass1.eclassifier_typedefinition_map.keySet()) {
-			if (node instanceof EClass) {
-				accept(node); 
-			}
-		}
-	}
-	
-	
-	/* (non-Javadoc)
+	 * Construct the Class corresponding to given EClass:
+	 *  - the structural features types
+	 *  - the operations types
+	 *  - the annotations
+	 *  
 	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EClass)
 	 */
 	public Object visit(EClass node)
 	{
 		exporter.current_classdef = (ClassDefinition)visitorPass1.eclassifier_typedefinition_map.get(node);
 		visitorPass1.isClassTypeOwner = true;
+		
+		// Patch that allows to refer to current class attributes/operations in the operation body
+		// without requiring them to be prefixed by "self."
+		unit.pushContext();
+		addSymbolContext( exporter.current_classdef );
+		
+		// Order important here! annotation above all.
+		acceptList(((EClass)node).getEAnnotations());
+		acceptList(((EClass)node).getEStructuralFeatures());
 		acceptList(((EClass)node).getEOperations());
-
+		
+		// Pop previously pushed context
+		unit.popContext();
+		
 		return exporter.current_classdef;
 	}
 	
 	
-	/* (non-Javadoc)
-	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EOperation)
+	/**
+	 * Method that adds in the symbols table all the symbols that should be visible from the
+	 * current class:
+	 *  - attributes/operations defined in the current class
+	 *  - attributes/operations defined in superclasses
+	 * @param cDef
 	 */
-	public Object visit(EOperation node) {
+	protected void addSymbolContext(ClassDefinition cDef) {
+		// Adding the attribute names to the symbols table
+		EList l = cDef.getOwnedAttribute();
+		Iterator it = l.iterator();
+		while(it.hasNext()) {
+			Property p = (Property) it.next();
+			unit.addSymbol( new KMSymbolProperty(p) );
+		}
+		// Adding the operation names to the symbols table
+		l = cDef.getOwnedOperation();
+		it = l.iterator();
+		while(it.hasNext()) {
+			Operation p = (Operation) it.next();
+			unit.addSymbol( new KMSymbolOperation(p) );
+		}
+		
+		// Adding context inherited from superclasses
+		l = cDef.getSuperType();
+		it = l.iterator();
+		while(it.hasNext()) {
+			fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) it.next();
+			addSymbolContext( (ClassDefinition) c.getTypeDefinition() );
+		}
+	}
+	
+	
+	/** Visit the operations and set :
+	 * If isTypeSettingMode attribute is true:
+	 *  - super type
+	 *  - parameters types
+	 * If false:
+	 *  - its super operation
+	 */
+	public Object visit(EOperation node)
+	{	// Important note : the EType of an operation is not required to be defined.
+		// User indeed naturally doesn't set it if he doesn't need a return type
+		// FIXME : WE HAVE TO FIX A STRICT PHILOSOPHY ABOUT EXPLICIT OR IMPLICIT RETURN TYPE!!!
 		exporter.current_op = visitorPass1.operations.get(node);
 		
-		if (Ecore2KM.isQuickFixEnabled) {
-			
-			// Quickfix to handle operation named like properties
-			if (Ecore2KM.isMethodPropertyNameOverlapSafe) {
-				Property prop = unit.findPropertyByName(exporter.current_classdef, exporter.current_op.getName());
-				if (prop != null) {
-					String newName = Ecore2KM.methodRenamePrefix + exporter.current_op.getName() +Ecore2KM.methodRenamePostfix;
-					unit.messages.addWarning("Quickfix used to rename duplicate operation due to a the property with the same name: " + exporter.current_op.getName() + " renamed into " + newName, null);		        	
-				
-					exporter.current_op.setName(newName);
-					
-					propagateRenaming(exporter.current_op);
-				}
+		if (isTypeSettingMode == true)
+		{
+			// Set the type of the operation
+			if (node.getEType() != null) 
+			{
+				Type t = createTypeForEClassifier(node.getEType(), node);
+				exporter.current_op.setType(t);
 			}
+
+			// Set the parameters
+			acceptList(node.getEParameters());
 			
+			// put the parameters and the parameters types in the current context so the operation body that is
+			// hosted in the operation annotation can be parsed and type checked correctly.
+			unit.pushContext();
+			// add type variable
+			for (Object next : exporter.current_op.getTypeParameter()) unit.addTypeVar((TypeVariable)next);
+			
+			// add parameters
+			for (Object next : exporter.current_op.getOwnedParameter()) unit.addSymbol(new KMSymbolParameter((Parameter)next));
+		
+			// Is operation abstract? : we can know it already if the given operation contains no annotation
+			exporter.current_op.setIsAbstract(node.getEAnnotation(KM2Ecore.ANNOTATION)==null);
+			visitorPass1.isClassTypeOwner=false;
+			// Visit the annotations, except for ecore metamodel elements
+			if (!((ENamedElement)node.eContainer().eContainer()).getName().equals("ecore"))
+				acceptList(node.getEAnnotations());
+			
+			unit.popContext();
 
-			if (Ecore2KM.isMethodNameOverlapSafe) {
-				
-				// Quickfix to avoid two operations with the same name in the same class (even with different parameters)
-				Operation op = unit.getOperationByName(exporter.current_classdef, exporter.current_op.getName());
+		}
+		else
+		{	// Super operation can only be defined once the super types of all the ClassDefinitions
+			// have been defined, since findSuperOperation algorithm needs to find "implicit" supertypes
+			// through the super types of the owning class.
+			// it could have been resolved from the EAnnotation visit
+			Operation superop = findSuperOperation(node);
+			if (superop != null) exporter.current_op.setSuperOperation(superop);
+			
+			
+			if (Ecore2KM.isQuickFixEnabled) {
 
-				int i = 2;
-				String newName;
-				while ((op != null) && (op != exporter.current_op)) {
-					newName = exporter.current_op.getName() + i;
-					unit.messages.addWarning("Quickfix used to rename duplicate operation: " + exporter.current_op.getName() + " renamed into " + newName, null);		        	
-					exporter.current_op.setName(newName);
-					
-					op = unit.getOperationByName(exporter.current_classdef, exporter.current_op.getName());
-					
-					propagateRenaming(exporter.current_op);
-				}
-				
-				
-				// Quickfix to avoid 2 operations with the same name but different parameters in a single inheritance tree
-				EList refParams = exporter.current_op.getOwnedParameter();
-
-				ArrayList opList = exporter.unit.getAllOperations(exporter.current_classdef);
-				Iterator it = opList.iterator();
-				
-				boolean match = true;
-				while(it.hasNext() && match) {
-					Operation crtOp = (Operation) it.next();
-					
-					if((crtOp.getName().equals(exporter.current_op.getName())) && (crtOp != exporter.current_op)) {
-						EList crtParams = crtOp.getOwnedParameter();
-						
-						// Check the nb of parameters of the respective methods 
-						if(refParams.size() != crtParams.size()) {
-							match = false;
-						}
-						else {
-							// Same number of parameters:
-							// Check whether parameters of both methods have the same type
-							Iterator refIt = refParams.iterator();
-							Iterator crtIt = crtParams.iterator();
-							while(crtIt.hasNext() && match) {
-								Parameter p1 = (Parameter) crtIt.next();
-								Parameter p2 = (Parameter) refIt.next();
-								match = (p1.getType() == p2.getType());
-							}
-						}
+				// If QuickFix enabled:
+				// Build a hashtable providing the list of "submethods" of each
+				// method that is overloaded
+				if(superop != null) {
+					if( opTable.containsKey(superop) ) {
+						ArrayList ar = (ArrayList) opTable.get(superop);
+						ar.add(exporter.current_op);
+						opTable.put(superop, ar);
+					}
+					else {
+						ArrayList ar = new ArrayList();
+						ar.add(exporter.current_op);
+						opTable.put(superop, ar);
 					}
 				}
-
-				if(! match) {
-					newName = Ecore2KM.methodRenamePrefix + exporter.current_op.getName() +Ecore2KM.methodRenamePostfix;
-					unit.messages.addWarning("Quickfix used to rename duplicate operation due to a the property with the same name: " + exporter.current_op.getName() + " renamed into " + newName, null);		        	
-
-					exporter.current_op.setName(newName);
-					// Propagate renaming only to submethods (link to the supermethod is deleted)
-					exporter.current_op.setSuperOperation(null);
-					topDownPropagation(exporter.current_op.getName(), exporter.current_op);
-				}
 			}
+			
 		}
-		
+
 		return exporter.current_op;
 	}
-	
-	
+
+
 	/**
-	 * Progagate method renaming to supermethods (from superclasses) and submethods
-	 * (from subclasses) of the mmethod "op".
-	 * @param op
+	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EAttribute)
 	 */
-	protected void propagateRenaming(Operation op) {
-		topDownPropagation(op.getName(), op);
-		downTopPropagation(op.getName(), op);
+	
+	public Object visit(EAttribute node) { return visitEStructuralFeature(node); }
+
+	/**
+	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EReference)
+	 */
+	public Object visit(EReference node) { return visitEStructuralFeature(node); }
+	
+	/** */
+	public Property visitEStructuralFeature(EStructuralFeature node)
+	{
+		exporter.current_prop = (Property)visitorPass1.properties.get(Ecore2KM.getQualifiedName(node));
+		// Set the type of this property
+		Type t = createTypeForEClassifier(node.getEType(), node);
+		exporter.current_prop.setType(t);
+		// Get the derived properties bodies and other stuffs
+		if (!(((ENamedElement)node.eContainer().eContainer()).getName().equals("ecore"))) {
+			acceptList(node.getEAnnotations());
+		}
+		
+		return exporter.current_prop;
 	}
 
+	/**
+	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EParameter)
+	 */
+	public Object visit(EParameter node) {
+		// Create a Parameter
+		Parameter param = unit.struct_factory.createParameter();
+		
+		// Patch that escapes (with '~') Ecore names that corrresponds to KerMeta keywords.
+		param.setName( KMTHelper.getMangledIdentifier(node.getName()) );
+		
+		param.setIsOrdered(node.isOrdered());
+		param.setIsUnique(node.isUnique());
+		param.setUpper(node.getUpperBound());
+		param.setLower(node.getLowerBound());
+		param.setOperation(exporter.current_op);
+		// Set its type
+		Type t = createTypeForEClassifier(node.getEType(), node);
+		param.setType(t);
+		exporter.current_op.getOwnedParameter().add(param);
+		return param;
+	}
 
 	/**
-	 * Recursively progagate method renaming (new name is "opName") to submethods
-	 * (from subclasses) of method "op".
-	 * @param opName
-	 * @param op
+	 * @see fr.irisa.triskell.ecore.visitor.EcoreVisitor#visit(org.eclipse.emf.ecore.EAnnotation)
+	 *
+	 
+	 **
+	 * annotation.getSource() => "kermeta" if the ann. is intended to be owned by kermeta code
+	 * annotation.getDetails() => hashtable, with { "body" : <body_content> } for body operations
 	 */
-	protected void topDownPropagation(String opName, Operation op) {
-		if( opTable.containsKey(op) ) {
-			ArrayList ar = (ArrayList) opTable.get(op);
-			Iterator it = ar.iterator();
-			while(it.hasNext()) {
-				Operation subOp = (Operation) it.next();
-				subOp.setName(opName);
-				topDownPropagation(opName, subOp);
+	public Object visit(EAnnotation node)
+	{	
+		String result = "";
+		// EStructuralFeature visit : handle body of derived properties getter/setters
+		if (node.getSource().equals(KM2Ecore.ANNOTATION_DERIVEDPROPERTY))
+		{	
+			visitDerivedPropertySpecificEAnnotation(node);
+		}
+		if (node.getSource().equals(KM2Ecore.ANNOTATION))
+		{
+			// Visit annotation details that are dedicated to operation
+			visitOperationSpecificEAnnotation(node);
+			// Visit common annotation - create a Tag for given EAnnotation if its type is kdoc
+			if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_KDOC_DETAILS))
+			{
+				result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_KDOC_DETAILS);
+				Tag tag = unit.struct_factory.createTag();
+				tag.setName(KM2Ecore.ANNOTATION_KDOC_DETAILS);
+				tag.setValue(result);
+				fr.irisa.triskell.kermeta.language.structure.Object o = visitorPass1.getObjectForEModelElement(node.getEModelElement()); 
+				if (o!=null) o.getTag().add(tag);
 			}
 		}
-	}
-	
-	
-	/**
-	 * Recursively progagate method renaming (new name is "opName") to supermethods
-	 * (from superclasses) of method "op".
-	 * @param opName
-	 * @param op
-	 */
-	protected void downTopPropagation(String opName, Operation op) {
-		Operation sOp = op.getSuperOperation();
-		if(sOp != null) {
-			sOp.setName(opName);
-			downTopPropagation(opName, sOp);
+		// Visit the Invariants. Dedicated to EClass/ClassDefinition
+		if (node.getSource().equals(KM2Ecore.ANNOTATION_INV))
+		{
+			// Visit annotation details that are dedicated to operation
+			visitClassDefinitionSpecificEAnnotation(node);
 		}
-	}
+		// Visit annotation specific to EOperation or EClass
+		if (node.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER))
+		{	
+			List<TypeVariable> params = new ArrayList<TypeVariable>();
+			for (Object next :  node.getDetails().keySet())
+			{
+				String name = (String)next;
+				TypeVariable tv = unit.struct_factory.createTypeVariable(); 
+				tv.setName(name);
+				// detail can be " A : Anothertype" -> means that A must inherit Anothertype
+				String detail = (String)node.getDetails().get(name); 
+				if (detail.indexOf(":")>0)
+				{
+					detail = detail.replaceAll(" ", ""); // strip spaces
+					String str_cdef = detail.substring(detail.indexOf(":")+1);
+					ClassDefinition cdef = (ClassDefinition)unit.typeDefinitionLookup(str_cdef);
+					fr.irisa.triskell.kermeta.language.structure.Class type = 
+						StructureFactory.eINSTANCE.createClass();
+			        type.setTypeDefinition((ClassDefinition)cdef);
+					tv.setSupertype(type);
+				}
+				params.add(tv);
+			} 
+			// for current_class - add the parameter to the class
+			if (visitorPass1.isClassTypeOwner==true) {
+				exporter.current_classdef.getTypeParameter().addAll(params);
+			}
+			// for current_op
+			else
+				exporter.current_op.getTypeParameter().addAll(params);
+		}
+		return result;
+	}	
 	
+	/*
+	 *
+	 * Helper for super operations
+	 *
+	 */
 	
 	/**
 	 * Search if a super operation of the given operation exists in the super classes of the operation owning  class
@@ -292,5 +448,128 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		}
 		return result;
 	}
+	
+	/** Visit the special "KM2Ecore.ANNOTATION"*/
+	protected void visitOperationSpecificEAnnotation(EAnnotation node)
+	{
+		String result = "";
+		// EOperation visit
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_BODY_DETAILS))
+		{	
+			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_BODY_DETAILS);
+			// Parse and inject 
+			// FIXME parse method call is not sufficient at all -> type variable binding are omitted.
+			exporter.current_op.setBody(ExpressionParser.parse(unit, result));
+		}
+		// EOperation visit
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS))
+		{	// only current_op is concerned by 
+			result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_ISABSTRACT_DETAILS);
+			exporter.current_op.setIsAbstract(result.equals("true")?true:false);
+		}
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_PRE))
+		{
+			// TODO
+		}
+		if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_PRE))
+		{
+			// TODO
+		}
+	}
+	
+	/** Visit the following annotations, dedicated to ClassDefinition : 
+	 *  - annotation.getSource() == "kermeta.inv"
+	 *  That's it for the moment
+	 */
+	protected void visitClassDefinitionSpecificEAnnotation(EAnnotation node)
+	{
+		for ( Object inv_name : node.getDetails().keySet() )
+		{ 
+			Constraint inv = unit.struct_factory.createConstraint();
+			inv.setName((String)inv_name);
+			
+			inv.setBody(ExpressionParser.parse(unit, (String)node.getDetails().get(inv_name)));
+			exporter.current_classdef.getInv().add(inv);
+		}
+	}
+	
+	protected void visitDerivedPropertySpecificEAnnotation(EAnnotation node)
+	{
+		String getter = (String)node.getDetails().get(
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_GETTERBODY);
+		String setter = (String)node.getDetails().get(
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_SETTERBODY);
+		String readonly = (String)node.getDetails().get(
+				KM2Ecore.ANNOTATION_DERIVEDPROPERTY_ISREADONLY);
+		if (getter!=null)
+			exporter.current_prop.setGetterBody(ExpressionParser.parse(unit, getter));
+		if (readonly.equals("false")) {
+			exporter.current_prop.setSetterBody(ExpressionParser.parse(unit, setter));
+			exporter.current_prop.setIsReadOnly(false);
+		}
+		// Boolean.getBoolean(readonly) -> foireux
+		else {
+			exporter.current_prop.setIsReadOnly(true);
+		}
+	}
+	
 
+	/**
+	 * Get the kermeta type corresponding to this EType
+	 * @param node is only used to get the node for which this class were called 
+	 * */
+	protected Type createTypeForEClassifier(EClassifier etype, ENamedElement node) {
+		Type result = null;
+		TypeDefinition def = null;
+		if (etype == null)
+		{ 
+			def = KermetaUnit.getStdLib().typeDefinitionLookup("kermeta::standard::Void");
+		}
+		else def = unit.typeDefinitionLookup(Ecore2KM.getQualifiedName(etype));
+		if (def == null) {
+			// Ignore ecore types : we cannot create a kermeta unit since the URI of the ecore metamodel
+			// does not reflect a real path in the user file system. We will handle it separately
+			// Try to find the given element in the loaded kermeta units
+			// If not found, load a kermeta unit for the resource of the given element
+			if (etype.eResource() != resource)
+			{
+				String etype_qname = Ecore2KM.getQualifiedName(etype);
+				String dep_uri = etype.eResource().getURI().toString();
+				// We create EcoreUnit this way (not using the KermetaUnitFactory) because
+				// this unit is not related to a real file in the user file system
+				// note: unit.packages argument: the list of found packages is added to this [main unit] hashtable.
+				EcoreUnit dep_unit = new EcoreUnit(etype.eResource(), unit.packages);
+				dep_unit.load();
+				unit.importedUnits.add(dep_unit);
+				def = dep_unit.typeDefs.get(etype_qname);
+			}
+			else
+				def = (TypeDefinition)visitorPass1.eclassifier_typedefinition_map.get(etype)!=null?
+						visitorPass1.eclassifier_typedefinition_map.get(etype):visitorPass1.datatypes.get(etype); // this does the same as unit.typeDefinitionLookUp
+		}
+		
+		if (def == null) throw new KM2ECoreConversionException("Internal error of Ecore2KM conversion : type '" + Ecore2KM.getQualifiedName(etype) + "' not found." );
+		// It can be a Type if the element is a EEnum (inherits datatype) or a EDatatype (inherits Type and TypeDefinition)
+		if (def instanceof Type)
+			result = (Type)def;
+		else
+		{
+			// Otherwise it is always a ClassDefinition
+			ClassDefinition cd = (ClassDefinition)def;
+			fr.irisa.triskell.kermeta.language.structure.Class fc = visitorPass1.classes.get(cd);
+			if (fc == null) {
+				fc = unit.struct_factory.createClass();
+				fc.setTypeDefinition(cd);
+				visitorPass1.classes.put(cd, fc);
+			}
+			result = fc;
+		}
+		// Type should never be null
+		if (result == null) {
+			throw new Error("Internal error of ecore2kermeta transfo : type " +
+					"of '" + node.getName() + node.eClass().getName() + ":" + etype.getName() + "' not found " +
+							"in Kermeta side");
+		}
+		return result;
+	}
 }

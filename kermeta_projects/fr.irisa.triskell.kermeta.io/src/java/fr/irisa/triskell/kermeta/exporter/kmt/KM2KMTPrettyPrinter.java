@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.35 2006-08-29 08:23:11 dtouzet Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.36 2006-08-31 12:18:28 dtouzet Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -54,7 +54,6 @@ import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.EnumerationLiteral;
 import fr.irisa.triskell.kermeta.language.structure.FunctionType;
-import fr.irisa.triskell.kermeta.language.structure.GenericTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
@@ -69,7 +68,6 @@ import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.language.structure.Type;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariable;
 import fr.irisa.triskell.kermeta.language.structure.TypeVariableBinding;
-import fr.irisa.triskell.kermeta.language.structure.TypedElement;
 import fr.irisa.triskell.kermeta.language.structure.VoidType;
 import fr.irisa.triskell.kermeta.language.structure.Class;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
@@ -937,8 +935,11 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			}
 		}
 		else {
+			/*
 			result += "self";
 			result += "." + KMTHelper.getMangledIdentifier(node.getName());
+			*/
+			result += KMTHelper.getMangledIdentifier(node.getName());
 			
 			// handle the special case where there is 1 parameter, and when This
 			// parameter is a lambdaPostFix
