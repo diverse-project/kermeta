@@ -1,4 +1,4 @@
-/* $Id: StaticTools.kmt,v 1.4 2006-08-31 07:23:39 vmahe Exp $
+/* $Id: StaticTools.kmt,v 1.5 2006-08-31 16:31:28 vmahe Exp $
  * Creation date: July 3, 2006
  * License:
  * Copyright:
@@ -446,44 +446,83 @@ class Association_Tool
 
 class Tools
 {
-	reference table : kermeta::utils::Hashtable<kermeta::standard::String,kermeta::standard::String>
+	reference tableUp : kermeta::utils::Hashtable<kermeta::standard::String,kermeta::standard::String>
+	reference tableLow : kermeta::utils::Hashtable<kermeta::standard::String,kermeta::standard::String>
 	operation initialize() is do
-		table := kermeta::utils::Hashtable<kermeta::standard::String,kermeta::standard::String>.new
-		table.put("a", "A")
-		table.put("b", "B")
-		table.put("c", "C")
-		table.put("d", "D")
-		table.put("e", "E")
-		table.put("f", "F")
-		table.put("g", "G")
-		table.put("h", "H")
-		table.put("i", "I")
-		table.put("j", "J")
-		table.put("k", "K")
-		table.put("l", "L")
-		table.put("m", "M")
-		table.put("n", "N")
-		table.put("o", "O")
-		table.put("p", "P")
-		table.put("q", "Q")
-		table.put("r", "R")
-		table.put("s", "S")
-		table.put("t", "T")
-		table.put("u", "U")
-		table.put("v", "V")
-		table.put("w", "W")
-		table.put("x", "X")
-		table.put("y", "Y")
-		table.put("z", "Z")
+		tableUp := kermeta::utils::Hashtable<kermeta::standard::String,kermeta::standard::String>.new
+		tableUp.put("a", "A")
+		tableUp.put("b", "B")
+		tableUp.put("c", "C")
+		tableUp.put("d", "D")
+		tableUp.put("e", "E")
+		tableUp.put("f", "F")
+		tableUp.put("g", "G")
+		tableUp.put("h", "H")
+		tableUp.put("i", "I")
+		tableUp.put("j", "J")
+		tableUp.put("k", "K")
+		tableUp.put("l", "L")
+		tableUp.put("m", "M")
+		tableUp.put("n", "N")
+		tableUp.put("o", "O")
+		tableUp.put("p", "P")
+		tableUp.put("q", "Q")
+		tableUp.put("r", "R")
+		tableUp.put("s", "S")
+		tableUp.put("t", "T")
+		tableUp.put("u", "U")
+		tableUp.put("v", "V")
+		tableUp.put("w", "W")
+		tableUp.put("x", "X")
+		tableUp.put("y", "Y")
+		tableUp.put("z", "Z")
+		tableLow := kermeta::utils::Hashtable<kermeta::standard::String,kermeta::standard::String>.new
+		tableLow.put("A", "a")
+		tableLow.put("B", "b")
+		tableLow.put("C", "c")
+		tableLow.put("D", "d")
+		tableLow.put("F", "f")
+		tableLow.put("G", "g")
+		tableLow.put("H", "h")
+		tableLow.put("I", "i")
+		tableLow.put("J", "j")
+		tableLow.put("K", "k")
+		tableLow.put("L", "l")
+		tableLow.put("M", "m")
+		tableLow.put("N", "n")
+		tableLow.put("O", "o")
+		tableLow.put("P", "p")
+		tableLow.put("Q", "q")
+		tableLow.put("R", "r")
+		tableLow.put("S", "s")
+		tableLow.put("T", "t")
+		tableLow.put("U", "u")
+		tableLow.put("V", "v")
+		tableLow.put("W", "w")
+		tableLow.put("X", "x")
+		tableLow.put("Y", "y")
+		tableLow.put("Z", "z")
 	end
 	operation upperFirstChar(name : kermeta::standard::String) : kermeta::standard::String is do
 		self.initialize
 		result := upperChar(name.substring(0,1)) + name.substring(1,name.size)
 	end
 	operation upperChar(char : kermeta::standard::String) : kermeta::standard::String is do
-		var upperizedChar : kermeta::standard::String init table.getValue(char)
+		var upperizedChar : kermeta::standard::String init tableUp.getValue(char)
 		if upperizedChar != void then
 			result := upperizedChar
+		else
+			result := char
+		end
+	end
+	operation lowerFirstChar(name : kermeta::standard::String) : kermeta::standard::String is do
+		self.initialize
+		result := lowerChar(name.substring(0,1)) + name.substring(1,name.size)
+	end
+	operation lowerChar(char : kermeta::standard::String) : kermeta::standard::String is do
+		var lowerizedChar : kermeta::standard::String init tableLow.getValue(char)
+		if lowerizedChar != void then
+			result := lowerizedChar
 		else
 			result := char
 		end
