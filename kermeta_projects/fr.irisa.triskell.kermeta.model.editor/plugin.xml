@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.1 2006-09-01 07:00:58 dvojtise Exp $
+-->
+
+<plugin>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "fr.irisa.triskell.kermeta.presentation.KmModelWizardID"
+      name = "%_UI_KmModelWizard_label"
+      class = "fr.irisa.triskell.kermeta.presentation.KmModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/KmModelFile.gif">
+      <description>%_UI_KmModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "fr.irisa.triskell.kermeta.presentation.KmEditorID"
+        name = "%_UI_KmEditor_label"
+        icon = "icons/full/obj16/KmModelFile.gif"
+        extensions = "km"
+        class = "fr.irisa.triskell.kermeta.presentation.KmEditor" 
+        contributorClass="fr.irisa.triskell.kermeta.presentation.KmActionBarContributor" >
+    </editor>
+  </extension>    
+
+
+
+
+</plugin>
