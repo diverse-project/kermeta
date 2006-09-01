@@ -2,14 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ObjectItemProvider.java,v 1.4 2006-09-01 11:29:55 dvojtise Exp $
+ * $Id: DummyClassItemProvider.java,v 1.1 2006-09-01 11:29:55 dvojtise Exp $
  */
-package fr.irisa.triskell.kermeta.language.structure.provider;
+package fr.irisa.triskell.kermeta.provider;
 
-
-import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
-
-import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +15,6 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
@@ -28,12 +23,12 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.structure.Object} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.DummyClass} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ObjectItemProvider
+public class DummyClassItemProvider
 	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
@@ -47,7 +42,7 @@ public class ObjectItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ObjectItemProvider(AdapterFactory adapterFactory) {
+	public DummyClassItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -61,41 +56,18 @@ public class ObjectItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addTagPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Tag feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addTagPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Object_tag_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Object_tag_feature", "_UI_Object_type"),
-				 StructurePackage.Literals.OBJECT__TAG,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This returns Object.gif.
+	 * This returns DummyClass.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Object"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DummyClass"));
 	}
 
 	/**
@@ -105,7 +77,7 @@ public class ObjectItemProvider
 	 * @generated
 	 */
 	public String getText(Object object) {
-		return getString("_UI_Object_type");
+		return getString("_UI_DummyClass_type");
 	}
 
 	/**

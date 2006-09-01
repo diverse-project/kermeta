@@ -2,28 +2,28 @@
  * <copyright>
  * </copyright>
  *
- * $Id$
+ * $Id: Kermeta_javaEditPlugin.java,v 1.1 2006-09-01 11:29:55 dvojtise Exp $
  */
-package fr.irisa.triskell.kermeta.language.behavior.provider;
+package fr.irisa.triskell.kermeta.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
 /**
- * This is the central singleton for the Kermeta edit plugin.
+ * This is the central singleton for the Kermeta_java edit plugin.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public final class KermetaEditPlugin extends EMFPlugin {
+public final class Kermeta_javaEditPlugin extends EMFPlugin {
 	/**
 	 * Keep track of the singleton.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final KermetaEditPlugin INSTANCE = new KermetaEditPlugin();
+	public static final Kermeta_javaEditPlugin INSTANCE = new Kermeta_javaEditPlugin();
 
 	/**
 	 * Keep track of the singleton.
@@ -39,7 +39,7 @@ public final class KermetaEditPlugin extends EMFPlugin {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KermetaEditPlugin() {
+	public Kermeta_javaEditPlugin() {
 		super
 		  (new ResourceLocator [] {
 		   });

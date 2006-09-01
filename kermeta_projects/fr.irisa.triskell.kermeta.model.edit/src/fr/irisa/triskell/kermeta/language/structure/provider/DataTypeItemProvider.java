@@ -2,17 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DataTypeItemProvider.java,v 1.3 2006-08-18 09:25:33 dvojtise Exp $
+ * $Id: DataTypeItemProvider.java,v 1.4 2006-09-01 11:29:55 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.provider;
 
 
-import fr.irisa.triskell.kermeta.language.behavior.provider.Kermeta_javaEditPlugin;
-
-import fr.irisa.triskell.kermeta.language.behavior.provider.KermetaEditPlugin;
-
 import fr.irisa.triskell.kermeta.language.structure.DataType;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
+
+import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
 
 import java.util.Collection;
 import java.util.List;

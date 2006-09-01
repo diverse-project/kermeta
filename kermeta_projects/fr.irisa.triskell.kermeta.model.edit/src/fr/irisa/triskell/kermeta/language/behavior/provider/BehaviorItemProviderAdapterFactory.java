@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorItemProviderAdapterFactory.java,v 1.2 2006-06-22 11:20:29 cfaucher Exp $
+ * $Id: BehaviorItemProviderAdapterFactory.java,v 1.3 2006-09-01 11:29:55 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 
