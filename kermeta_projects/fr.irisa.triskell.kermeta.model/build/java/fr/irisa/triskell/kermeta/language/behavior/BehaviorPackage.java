@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.4 2006-08-17 14:30:25 dvojtise Exp $
+ * $Id: BehaviorPackage.java,v 1.5 2006-09-01 09:32:52 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -43,7 +43,7 @@ public interface BehaviorPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://kermeta/kermeta.ecore#//language/behavior";
+	String eNS_URI = "http://kermeta/kermeta.ecore//language/behavior";
 
 	/**
 	 * The package namespace name.

@@ -2,9 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackageImpl.java,v 1.5 2006-08-17 14:30:25 dvojtise Exp $
+ * $Id: StructurePackageImpl.java,v 1.6 2006-09-01 09:32:53 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
+
+import fr.irisa.triskell.kermeta.KmPackage;
+
+import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 
@@ -360,14 +364,17 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		KmPackageImpl theKmPackage = (KmPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) instanceof KmPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) : KmPackage.eINSTANCE);
 		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(BehaviorPackage.eNS_URI) : BehaviorPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theStructurePackage.createPackageContents();
+		theKmPackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theStructurePackage.initializePackageContents();
+		theKmPackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
@@ -1651,9 +1658,6 @@ public class StructurePackageImpl extends EPackageImpl implements StructurePacka
 		initEDataType(booleanEDataType, boolean.class, "Boolean", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(integerEDataType, int.class, "Integer", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(unlimitedNaturalEDataType, int.class, "UnlimitedNatural", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-
-		// Create resource
-		createResource(eNS_URI);
 	}
 
 } //StructurePackageImpl

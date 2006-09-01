@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: fr.irisa.triskell.kermeta.model; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: fr.irisa.triskell.kermeta,
+ fr.irisa.triskell.kermeta.impl,
+ fr.irisa.triskell.kermeta.language.behavior,
+ fr.irisa.triskell.kermeta.language.behavior.impl,
+ fr.irisa.triskell.kermeta.language.behavior.util,
+ fr.irisa.triskell.kermeta.language.structure,
+ fr.irisa.triskell.kermeta.language.structure.impl,
+ fr.irisa.triskell.kermeta.language.structure.util,
+ fr.irisa.triskell.kermeta.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi
+Eclipse-LazyStart: true

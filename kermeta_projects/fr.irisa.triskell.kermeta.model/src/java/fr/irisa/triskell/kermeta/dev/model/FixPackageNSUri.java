@@ -1,4 +1,4 @@
-/* $Id: FixPackageNSUri.java,v 1.3 2006-03-20 17:54:40 zdrey Exp $
+/* $Id: FixPackageNSUri.java,v 1.4 2006-09-01 09:32:53 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : FixPackageNSUri.java
  * License    : EPL
@@ -85,7 +85,7 @@ public class FixPackageNSUri {
 	 */
 	public static void processPackage(EPackage p) {
 		String prefix = getPrefix(p);
-		String suffix = p.getName().equals("kermeta")?"":"#//"+getPackageNsPath(p);
+		String suffix = p.getName().equals("kermeta")?"":"//"+getPackageNsPath(p);
 		System.out.println("Package " + p.getName() + "; nsPrefix = "+ prefix + "; nsURI = " + BaseNsURI+suffix);
 		p.setNsURI(BaseNsURI + suffix);
 		p.setNsPrefix(prefix);

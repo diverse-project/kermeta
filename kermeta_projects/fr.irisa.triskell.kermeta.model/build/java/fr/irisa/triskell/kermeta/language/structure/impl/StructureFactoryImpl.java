@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureFactoryImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: StructureFactoryImpl.java,v 1.3 2006-09-01 09:32:53 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
@@ -55,7 +55,7 @@ public class StructureFactoryImpl extends EFactoryImpl implements StructureFacto
 	 */
 	public static StructureFactory init() {
 		try {
-			StructureFactory theStructureFactory = (StructureFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore#//language/structure"); 
+			StructureFactory theStructureFactory = (StructureFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore//language/structure"); 
 			if (theStructureFactory != null) {
 				return theStructureFactory;
 			}

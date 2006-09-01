@@ -2,9 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackageImpl.java,v 1.3 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: BehaviorPackageImpl.java,v 1.4 2006-09-01 09:32:52 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
+
+import fr.irisa.triskell.kermeta.KmPackage;
+
+import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
 
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
@@ -292,14 +296,17 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		isInited = true;
 
 		// Obtain or create and register interdependencies
+		KmPackageImpl theKmPackage = (KmPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) instanceof KmPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) : KmPackage.eINSTANCE);
 		StructurePackageImpl theStructurePackage = (StructurePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI) : StructurePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theBehaviorPackage.createPackageContents();
+		theKmPackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theBehaviorPackage.initializePackageContents();
+		theKmPackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
@@ -1148,9 +1155,6 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 		initEReference(getVariableDecl_Initialization(), this.getExpression(), null, "initialization", null, 1, 1, VariableDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getVariableDecl_Identifier(), theStructurePackage.getString(), "identifier", null, 0, 1, VariableDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVariableDecl_Type(), this.getTypeReference(), null, "type", null, 0, 1, VariableDecl.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		// Create resource
-		createResource(eNS_URI);
 	}
 
 } //BehaviorPackageImpl

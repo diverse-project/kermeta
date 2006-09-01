@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactoryImpl.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: BehaviorFactoryImpl.java,v 1.3 2006-09-01 09:32:52 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
@@ -32,7 +32,7 @@ public class BehaviorFactoryImpl extends EFactoryImpl implements BehaviorFactory
 	 */
 	public static BehaviorFactory init() {
 		try {
-			BehaviorFactory theBehaviorFactory = (BehaviorFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore#//language/behavior"); 
+			BehaviorFactory theBehaviorFactory = (BehaviorFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore//language/behavior"); 
 			if (theBehaviorFactory != null) {
 				return theBehaviorFactory;
 			}

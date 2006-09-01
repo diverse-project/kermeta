@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructurePackage.java,v 1.4 2006-08-17 14:30:25 dvojtise Exp $
+ * $Id: StructurePackage.java,v 1.5 2006-09-01 09:32:52 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure;
 
@@ -43,7 +43,7 @@ public interface StructurePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://kermeta/kermeta.ecore#//language/structure";
+	String eNS_URI = "http://kermeta/kermeta.ecore//language/structure";
 
 	/**
 	 * The package namespace name.
