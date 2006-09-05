@@ -2,15 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ProductTypeImpl.java,v 1.4 2006-08-16 11:20:48 dvojtise Exp $
+ * $Id: ProductTypeImpl.java,v 1.5 2006-09-05 07:19:38 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.structure.impl;
 
-import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.ProductType;
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 import fr.irisa.triskell.kermeta.language.structure.Type;
-
 import fr.irisa.triskell.kermeta.language.structure.TypeContainer;
 
 import java.util.Collection;
@@ -21,15 +19,12 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -118,11 +113,11 @@ public class ProductTypeImpl extends TypeContainerImpl implements ProductType {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList getType() {
 		if (type == null) {
-			type = new EObjectResolvingEList(Type.class, this, StructurePackage.PRODUCT_TYPE__TYPE);
+			type = new fr.irisa.triskell.kermeta.util.NonUniqueEObjectResolvingEList(Type.class, this, StructurePackage.PRODUCT_TYPE__TYPE);
 		}
 		return type;
 	}
