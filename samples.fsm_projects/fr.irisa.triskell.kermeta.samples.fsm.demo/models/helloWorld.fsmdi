@@ -11,7 +11,7 @@
     <property key="diagramLeftMargin" value="20"/>
     <property key="diagramRightMargin" value="20"/>
     <property key="orientation" value="portrait"/>
-    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fsmdiagram">
+    <semanticModel xsi:type="di:EMFSemanticModelBridge" presentation="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor">
       <element href="helloWorld.fsm#/"/>
     </semanticModel>
     <contained xsi:type="di:GraphNode" position="92,101" size="33,26">
