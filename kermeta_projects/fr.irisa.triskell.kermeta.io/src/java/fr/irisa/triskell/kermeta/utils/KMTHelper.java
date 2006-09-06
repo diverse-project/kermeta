@@ -1,4 +1,4 @@
-/* $Id: KMTHelper.java,v 1.8 2006-08-23 15:51:55 dvojtise Exp $
+/* $Id: KMTHelper.java,v 1.9 2006-09-06 14:06:51 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KMTHelper.java
  * License    : EPL
@@ -132,7 +132,8 @@ public class KMTHelper {
     public static String formatTagValue(String comment)
     {
     	String result = comment;
-    	int begin_i = 0; int end_i = 0;
+    	int begin_i = 0;
+    	int end_i = comment.length();
 		if (result.startsWith("/**")) begin_i = 2;
 		if (result.endsWith("*/")) end_i = result.length()-2;
 		ArrayList<String> lresult = new ArrayList<String>();
