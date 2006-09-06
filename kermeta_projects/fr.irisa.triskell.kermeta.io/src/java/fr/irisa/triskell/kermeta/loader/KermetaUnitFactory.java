@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.16 2006-06-12 13:16:44 zdrey Exp $
+/* $Id: KermetaUnitFactory.java,v 1.17 2006-09-06 07:39:38 dtouzet Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -15,6 +15,7 @@ import java.util.Hashtable;
 
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.URIConverterImpl;
 
@@ -147,6 +148,14 @@ public class KermetaUnitFactory {
     	KermetaLoaderModule loader = null;
     	if (u.fileExtension() != null) 
         	loader = (KermetaLoaderModule)loadModules.get(u.fileExtension());
+    	
+    	// In case file loading fails, tests whether the uri is registered into the EMF regitry
+    	if(loader == null) {
+    		if(Registry.INSTANCE.containsKey(uri)) {
+    			loader = (KermetaLoaderModule)loadModules.get("ecore");
+    		}
+    	}
+    	
         if (loader == null) {
             KermetaLoaderError klerr = new KermetaLoaderError("Invalid require : '"+u + "' is not a valid use for require");
     	    throw klerr;
