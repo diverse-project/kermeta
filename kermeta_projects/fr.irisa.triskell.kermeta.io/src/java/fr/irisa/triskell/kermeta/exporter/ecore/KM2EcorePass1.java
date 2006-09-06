@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.25 2006-08-29 08:23:11 dtouzet Exp $
+/* $Id: KM2EcorePass1.java,v 1.26 2006-09-06 15:33:51 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -45,6 +45,7 @@ import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Tag;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
+import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KM2ECoreConversionException;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
@@ -179,6 +180,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			
 			// Create annotations for Comments
 			setTagAnnotations((NamedElement)node, (EModelElement)newEClass);
+			
 			
 			// Owned Attributes
 			for (Object next : node.getOwnedAttribute()) {
@@ -456,11 +458,18 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
     public Object visitTag(Tag node) {
     	EAnnotation newEAnnotation=null;
 		current_name = node.getName();
-		
 		newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
-		newEAnnotation.setSource(KM2Ecore.ANNOTATION);
-		newEAnnotation.getDetails().put(current_name, KMTHelper.formatTagValue(node.getValue()));
-		
+				
+		if(KMT2KMPass7.KERMETADOC.equals(current_name)){
+			//	deal with special case of documentation
+			newEAnnotation.setSource(KM2Ecore.ANNOTATION_DOCUMENTATION);
+			newEAnnotation.getDetails().put(KM2Ecore.ANNOTATION_DOCUMENTATION_DETAILS, KMTHelper.formatTagValue(node.getValue()));
+		}
+		else{
+			// normal annotations
+			newEAnnotation.setSource(KM2Ecore.ANNOTATION);
+			newEAnnotation.getDetails().put(current_name, KMTHelper.formatTagValue(node.getValue()));
+		}
 		km2ecoremapping.put(node,newEAnnotation);
 		return newEAnnotation;
     }

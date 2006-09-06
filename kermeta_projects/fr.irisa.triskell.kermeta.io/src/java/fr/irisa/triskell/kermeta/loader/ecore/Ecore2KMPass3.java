@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.3 2006-08-31 12:18:28 dtouzet Exp $
+/* $Id: Ecore2KMPass3.java,v 1.4 2006-09-06 15:33:51 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -321,6 +321,17 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_KDOC_DETAILS))
 			{
 				result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_KDOC_DETAILS);
+				Tag tag = unit.struct_factory.createTag();
+				tag.setName(KM2Ecore.ANNOTATION_KDOC_DETAILS);
+				tag.setValue(result);
+				fr.irisa.triskell.kermeta.language.structure.Object o = visitorPass1.getObjectForEModelElement(node.getEModelElement()); 
+				if (o!=null) o.getTag().add(tag);
+			}
+		}
+		if (node.getSource().equals(KM2Ecore.ANNOTATION_DOCUMENTATION)){
+			if (node.getDetails().containsKey(KM2Ecore.ANNOTATION_DOCUMENTATION_DETAILS))
+			{
+				result = (String)node.getDetails().get(KM2Ecore.ANNOTATION_DOCUMENTATION_DETAILS);
 				Tag tag = unit.struct_factory.createTag();
 				tag.setName(KM2Ecore.ANNOTATION_KDOC_DETAILS);
 				tag.setValue(result);
