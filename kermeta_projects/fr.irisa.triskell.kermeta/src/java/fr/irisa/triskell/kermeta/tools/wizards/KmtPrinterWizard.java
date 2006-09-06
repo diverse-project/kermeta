@@ -1,4 +1,4 @@
-/* $Id: KmtPrinterWizard.java,v 1.8 2006-08-18 09:16:22 dvojtise Exp $
+/* $Id: KmtPrinterWizard.java,v 1.9 2006-09-06 07:26:56 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : KmtPrinter.java
  * License    : EPL
@@ -70,7 +70,7 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 	 */
 	public void writeUnit(KermetaUnit builder, IFile ifile) throws Exception  {	    
 	    
-		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter();
+		KM2KMTPrettyPrinter pp = new KM2KMTPrettyPrinter( builder.getUri() );
 		
 		BufferedWriter w = new BufferedWriter(new FileWriter(ifile.getLocation().toFile()));
 		String pkg_name = "package " + builder.getQualifiedName(builder.rootPackage) + ";\n\n";
@@ -88,11 +88,17 @@ public class KmtPrinterWizard extends UnitExporterWizard{
 						w.write("require \"" + iu.getUri() + "\"\n");
 					else {
 						
-						IFile importedfile = ifile.getProject().getFile(ifile.getProjectRelativePath().removeFileExtension().removeLastSegments(1).append(iu.rootPackage.getName()).addFileExtension("kmt"));
-						
-						
-						writeUnit(iu, importedfile);
-						w.write("require \"" + iu.rootPackage.getName() + ".kmt\"\n");
+						// When the Ecore unit is required, the link is directly set to the Ecore.kmt file
+						// contained by the Kermeta main plugin -> no need to generate ecore.kmt!
+						if(iu.rootPackage.getUri().equals("http://www.eclipse.org/emf/2002/Ecore")) {
+							w.write("require \"" + "platform:/plugin/fr.irisa.triskell.kermeta/lib/ecore.kmt" + "\"\n");
+						}
+						else {
+							IFile importedfile = ifile.getProject().getFile(ifile.getProjectRelativePath().removeFileExtension().removeLastSegments(1).append(iu.rootPackage.getName()).addFileExtension("kmt"));
+							
+							writeUnit(iu, importedfile);
+							w.write("require \"" + iu.rootPackage.getName() + ".kmt\"\n");
+						}
 					}
 			}
 		}
