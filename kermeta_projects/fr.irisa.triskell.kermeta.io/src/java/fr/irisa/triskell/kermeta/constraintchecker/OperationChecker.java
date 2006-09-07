@@ -1,4 +1,4 @@
-/* $Id: OperationChecker.java,v 1.8 2006-08-09 13:45:17 dvojtise Exp $
+/* $Id: OperationChecker.java,v 1.9 2006-09-07 07:37:46 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta
  * File       : OperationChecker.java
  * License    : EPL
@@ -195,7 +195,7 @@ public class OperationChecker extends AbstractChecker {
 				}
 				ind2 += 1;
 			}
-			message = "'" + op1.getName() + "' is not well redefined : parameters " + pprinter.ppComaSeparatedNodes(op1.getOwnedParameter())
+			message = "'" +op1.getOwningClass().getName()+"."+ op1.getName() + "' is not well redefined : parameters " + pprinter.ppComaSeparatedNodes(op1.getOwnedParameter())
 			+ " (expected [" + pprinter.ppComaSeparatedNodes(op2.getOwnedParameter()) + "]";
 		}
 		if (isConform==false) addProblem(ERROR, message, op1);
