@@ -21,7 +21,6 @@ require kermeta
 require "../kermeta/fsm.kmt"
 
 using fsm
-using help
 using kermeta::standard
 using kermeta::persistence
 using kermeta::exceptions
