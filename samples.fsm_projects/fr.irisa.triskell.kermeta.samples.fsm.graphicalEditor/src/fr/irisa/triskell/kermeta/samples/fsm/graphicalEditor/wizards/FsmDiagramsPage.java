@@ -87,8 +87,8 @@ public class FsmDiagramsPage extends DiagramsPage {
 	 * @generated
 	 */
 	public String getDefaultTemplateId() {
-		// TODO return the corresponding ID of the default template
-		return "";
+		// ID of the default template
+		return "fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.templates.diagram";
 
 	}
 
