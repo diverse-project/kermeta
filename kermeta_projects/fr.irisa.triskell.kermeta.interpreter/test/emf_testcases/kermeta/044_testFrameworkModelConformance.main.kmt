@@ -93,7 +93,9 @@ class Main inherits kermeta::kunit::Test
     		
     	else
     		//stdio.writeln("  pb on TypeDefinition " + kTypeDefinition.toString + " " + kTypeDefinition.name)       
-    		fail("EClassifier " + eClassifier.name + " "+ eClassifier.toString + " has no equivalent in the framework")
+    		if not eClassifier.name.equals("DummyClass") then
+	    		fail("EClassifier " + eClassifier.name + " "+ eClassifier.toString + " has no equivalent in the framework")
+	    	end
     	end end
     end
     
@@ -105,7 +107,7 @@ class Main inherits kermeta::kunit::Test
   		stdio.writeln("  EClass " + eClass.name + " retreived")
   		
   		// print known type in the framework
-  		stdio.writeln("  Known properies:")
+  		stdio.writeln("  Known properties:")
   		kClass.allOwnedAttribute.each{ c | stdio.writeln("     " + kClass.name+ "." + c.name) }
   		eClass.eStructuralFeatures.each{ eFeature | 
   			var thekProperty : Property
