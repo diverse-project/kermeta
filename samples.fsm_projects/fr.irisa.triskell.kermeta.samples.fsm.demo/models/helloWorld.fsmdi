@@ -15,53 +15,40 @@
       <element href="helloWorld.fsm#/"/>
     </semanticModel>
     <contained xsi:type="di:GraphNode" position="92,101" size="33,26">
-      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.8 //@diagrams.0/@contained.9"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.6 //@diagrams.0/@contained.7"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="helloWorld.fsm#//@ownedState.0"/>
       </semanticModel>
     </contained>
     <contained xsi:type="di:GraphNode" position="173,101" size="33,26">
-      <anchorage graphEdge="//@diagrams.0/@contained.9 //@diagrams.0/@contained.10"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.7 //@diagrams.0/@contained.8"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="helloWorld.fsm#//@ownedState.1"/>
       </semanticModel>
     </contained>
     <contained xsi:type="di:GraphNode" position="253,101" size="33,26">
-      <anchorage graphEdge="//@diagrams.0/@contained.10 //@diagrams.0/@contained.11"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.8 //@diagrams.0/@contained.9"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="helloWorld.fsm#//@ownedState.2"/>
       </semanticModel>
     </contained>
     <contained xsi:type="di:GraphNode" position="328,101" size="33,26">
-      <anchorage graphEdge="//@diagrams.0/@contained.11 //@diagrams.0/@contained.12"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.9 //@diagrams.0/@contained.10"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="helloWorld.fsm#//@ownedState.3"/>
       </semanticModel>
     </contained>
     <contained xsi:type="di:GraphNode" position="405,101" size="33,26">
-      <anchorage graphEdge="//@diagrams.0/@contained.12 //@diagrams.0/@contained.13"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.10 //@diagrams.0/@contained.11"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="helloWorld.fsm#//@ownedState.4"/>
       </semanticModel>
     </contained>
     <contained xsi:type="di:GraphNode" position="486,101" size="33,26">
-      <anchorage graphEdge="//@diagrams.0/@contained.8 //@diagrams.0/@contained.13"/>
+      <anchorage graphEdge="//@diagrams.0/@contained.6 //@diagrams.0/@contained.11"/>
       <semanticModel xsi:type="di:EMFSemanticModelBridge">
         <element href="helloWorld.fsm#//@ownedState.5"/>
       </semanticModel>
-    </contained>
-    <contained xsi:type="di:GraphNode" position="38,101" size="29,26">
-      <property key="backgroundColor" value="0,0,0"/>
-      <anchorage graphEdge="//@diagrams.0/@contained.7"/>
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="helloWorld.fsm#//@ownedState.6"/>
-      </semanticModel>
-    </contained>
-    <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.6/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
-      <semanticModel xsi:type="di:EMFSemanticModelBridge">
-        <element href="helloWorld.fsm#//@ownedState.6/@outgoingTransition.0"/>
-      </semanticModel>
-      <contained xsi:type="di:EdgeObjectOffset" id="inputEdgeObject" offset="2,-68"/>
     </contained>
     <contained xsi:type="di:GraphEdge" anchor="//@diagrams.0/@contained.5/@anchorage.0 //@diagrams.0/@contained.0/@anchorage.0">
       <property key="foregroundColor" value="0,0,0"/>
