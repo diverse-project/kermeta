@@ -15,7 +15,7 @@
    
    <extension point="org.eclipse.ui.newWizards">
       <wizard
-            icon="icons/Fsm.gif"
+            icon="icons/FSM.png"
             class="fr.irisa.triskell.kermeta.samples.fsm.graphicalEditor.wizards.NewFsmDiagrams"
             category="org.topcased.facilities.newWizards/org.topcased.modeler.newdiagram"
             name="Fsm Diagram"
