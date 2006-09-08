@@ -1,4 +1,4 @@
-/* $Id: RunJunitFactory.java,v 1.15 2006-07-21 06:59:40 dvojtise Exp $
+/* $Id: RunJunitFactory.java,v 1.16 2006-09-08 12:31:11 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.interpreter
  * File       : RunJunit.java
  * License    : EPL
@@ -68,6 +68,7 @@ public class RunJunitFactory implements Test {
         //KermetaUnitFactory.resetDefaultLoader(); // each test must be run in its own environment
         //KermetaUnitFactory.
         KermetaUnit unit = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(unit_uri);
+
         
         
         
@@ -75,6 +76,10 @@ public class RunJunitFactory implements Test {
             
             unit.load();
             unit.typeCheck(null);
+        
+            // copy imported unit to the root unit
+            // DVK: needed to make sure the seamlaess java works ...
+            root_unit.importedUnits.addAll(unit.importedUnits);
             
             if (unit.messages.hasError()) {
             	System.err.println("Unit " + unit.getUri() + " contains errors (ie. didn't load or typecheck correctly)");
