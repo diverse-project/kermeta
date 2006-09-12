@@ -16,6 +16,7 @@ package fsm;
 
 require kermeta
 
+using fsm
 using kermeta::standard
 using kermeta::persistence
 using kermeta::exceptions
@@ -152,7 +153,7 @@ class State {
 		result != void and result != ""
 	
 	// Create a new state from self state
-	method copy() : State is do
+	operation copy() : State is do
 		result := State.new
 		result.name := String.clone(name)
 		result.combination := Set<State>.new
@@ -239,8 +240,7 @@ class AutomatonHelper
 	 */  
     operation saveEMFAutomaton(repository : EMFRepository, a : FSM, uri : String, mmuri : String) : FSM is do
 		if AutomatonHelper.new.conformityChecker(a) == true then 
-	    	var resource : EMFResource 
-		    resource ?= repository.createResource(uri , mmuri)
+	    	var resource : Resource init repository.createResource(uri , mmuri)
 	    	resource.instances.add(a)
 	    	//a.stateSet.each { z | resource.instances.add(z)}
 	    	resource.save()
@@ -251,8 +251,7 @@ class AutomatonHelper
     end
     
      operation loadEMFAutomaton(repository : EMFRepository, uri : String, mmuri : String) : FSM is do
-    	var resource : EMFResource 
-		resource ?= repository.createResource(uri , mmuri)
+    	var resource : Resource init repository.createResource(uri , mmuri)
     	resource.load
     	var roots : Set<Object> init resource.rootContents
     	result ?= roots.one
