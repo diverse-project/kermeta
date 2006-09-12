@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VariableDecl.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: VariableDecl.java,v 1.2 2006-09-12 12:59:22 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 

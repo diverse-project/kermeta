@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package fr.irisa.triskell.kermeta;
+package fr.irisa.triskell.kermeta.language;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-model-doc -->
  *
  *
- * @see fr.irisa.triskell.kermeta.KmPackage#getDummyClass()
+ * @see fr.irisa.triskell.kermeta.language.LanguagePackage#getDummyClass()
  * @model abstract="true"
  * @generated
  */

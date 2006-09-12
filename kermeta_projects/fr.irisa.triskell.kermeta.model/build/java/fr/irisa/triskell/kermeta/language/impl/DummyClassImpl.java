@@ -4,10 +4,10 @@
  *
  * $Id$
  */
-package fr.irisa.triskell.kermeta.impl;
+package fr.irisa.triskell.kermeta.language.impl;
 
-import fr.irisa.triskell.kermeta.DummyClass;
-import fr.irisa.triskell.kermeta.KmPackage;
+import fr.irisa.triskell.kermeta.language.DummyClass;
+import fr.irisa.triskell.kermeta.language.LanguagePackage;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -38,7 +38,7 @@ public abstract class DummyClassImpl extends EObjectImpl implements DummyClass {
 	 * @generated
 	 */
 	protected EClass eStaticClass() {
-		return KmPackage.Literals.DUMMY_CLASS;
+		return LanguagePackage.Literals.DUMMY_CLASS;
 	}
 
 } //DummyClassImpl

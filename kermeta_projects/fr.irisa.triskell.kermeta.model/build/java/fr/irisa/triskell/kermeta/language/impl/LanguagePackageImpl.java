@@ -4,19 +4,19 @@
  *
  * $Id$
  */
-package fr.irisa.triskell.kermeta.impl;
+package fr.irisa.triskell.kermeta.language.impl;
 
-import fr.irisa.triskell.kermeta.DummyClass;
-import fr.irisa.triskell.kermeta.KmFactory;
 import fr.irisa.triskell.kermeta.KmPackage;
 
+import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
+
+import fr.irisa.triskell.kermeta.language.DummyClass;
+import fr.irisa.triskell.kermeta.language.LanguageFactory;
 import fr.irisa.triskell.kermeta.language.LanguagePackage;
 
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
 
 import fr.irisa.triskell.kermeta.language.behavior.impl.BehaviorPackageImpl;
-
-import fr.irisa.triskell.kermeta.language.impl.LanguagePackageImpl;
 
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * <!-- end-user-doc -->
  * @generated
  */
-public class KmPackageImpl extends EPackageImpl implements KmPackage {
+public class LanguagePackageImpl extends EPackageImpl implements LanguagePackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -52,12 +52,12 @@ public class KmPackageImpl extends EPackageImpl implements KmPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see fr.irisa.triskell.kermeta.KmPackage#eNS_URI
+	 * @see fr.irisa.triskell.kermeta.language.LanguagePackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private KmPackageImpl() {
-		super(eNS_URI, KmFactory.eINSTANCE);
+	private LanguagePackageImpl() {
+		super(eNS_URI, LanguageFactory.eINSTANCE);
 	}
 
 	/**
@@ -89,35 +89,35 @@ public class KmPackageImpl extends EPackageImpl implements KmPackage {
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static KmPackage init() {
-		if (isInited) return (KmPackage)EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI);
+	public static LanguagePackage init() {
+		if (isInited) return (LanguagePackage)EPackage.Registry.INSTANCE.getEPackage(LanguagePackage.eNS_URI);
 
 		// Obtain or create and register package
-		KmPackageImpl theKmPackage = (KmPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof KmPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new KmPackageImpl());
+		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(eNS_URI) : new LanguagePackageImpl());
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LanguagePackage.eNS_URI) : LanguagePackage.eINSTANCE);
+		KmPackageImpl theKmPackage = (KmPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) instanceof KmPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) : KmPackage.eINSTANCE);
 		BehaviorPackageImpl theBehaviorPackage = (BehaviorPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(BehaviorPackage.eNS_URI) instanceof BehaviorPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(BehaviorPackage.eNS_URI) : BehaviorPackage.eINSTANCE);
 		StructurePackageImpl theStructurePackage = (StructurePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI) : StructurePackage.eINSTANCE);
 
 		// Create package meta-data objects
-		theKmPackage.createPackageContents();
 		theLanguagePackage.createPackageContents();
+		theKmPackage.createPackageContents();
 		theBehaviorPackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 
 		// Initialize created meta-data
-		theKmPackage.initializePackageContents();
 		theLanguagePackage.initializePackageContents();
+		theKmPackage.initializePackageContents();
 		theBehaviorPackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theKmPackage.freeze();
+		theLanguagePackage.freeze();
 
-		return theKmPackage;
+		return theLanguagePackage;
 	}
 
 	/**
@@ -134,8 +134,8 @@ public class KmPackageImpl extends EPackageImpl implements KmPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KmFactory getKmFactory() {
-		return (KmFactory)getEFactoryInstance();
+	public LanguageFactory getLanguageFactory() {
+		return (LanguageFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -184,18 +184,17 @@ public class KmPackageImpl extends EPackageImpl implements KmPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		LanguagePackage theLanguagePackage = (LanguagePackage)EPackage.Registry.INSTANCE.getEPackage(LanguagePackage.eNS_URI);
+		BehaviorPackage theBehaviorPackage = (BehaviorPackage)EPackage.Registry.INSTANCE.getEPackage(BehaviorPackage.eNS_URI);
+		StructurePackage theStructurePackage = (StructurePackage)EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI);
 
 		// Add subpackages
-		getESubpackages().add(theLanguagePackage);
+		getESubpackages().add(theBehaviorPackage);
+		getESubpackages().add(theStructurePackage);
 
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(dummyClassEClass, DummyClass.class, "DummyClass", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		// Create resource
-		createResource(eNS_URI);
 	}
 
-} //KmPackageImpl
+} //LanguagePackageImpl

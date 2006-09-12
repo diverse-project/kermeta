@@ -1,4 +1,4 @@
-/* $Id: FixPackageNSUri.java,v 1.4 2006-09-01 09:32:53 dvojtise Exp $
+/* $Id: FixPackageNSUri.java,v 1.5 2006-09-12 12:58:57 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.model
  * File       : FixPackageNSUri.java
  * License    : EPL
@@ -17,6 +17,8 @@ import java.util.Iterator;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -89,6 +91,18 @@ public class FixPackageNSUri {
 		System.out.println("Package " + p.getName() + "; nsPrefix = "+ prefix + "; nsURI = " + BaseNsURI+suffix);
 		p.setNsURI(BaseNsURI + suffix);
 		p.setNsPrefix(prefix);
+		
+		// fix EMF bug about empty packages : insert a dummy class
+		if(p.getEClassifiers().isEmpty()){
+			EClass newEClass = EcoreFactory.eINSTANCE.createEClass();
+			newEClass.setName("DummyClass");
+			newEClass.setAbstract(true);
+			EAnnotation newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+			newEAnnotation.setSource("http://www.eclipse.org/emf/2002/GenModel");
+			newEAnnotation.getDetails().put("documentation","This class is used to workaround an EMF bug, it doesn't really belong to Kermeta metamodel");
+			newEClass.getEAnnotations().add(newEAnnotation);
+			p.getEClassifiers().add(newEClass);
+		}
 	}
 	
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EmptyExpression.java,v 1.1 2006-05-04 15:40:07 jmottu Exp $
+ * $Id: EmptyExpression.java,v 1.2 2006-09-12 12:59:23 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 

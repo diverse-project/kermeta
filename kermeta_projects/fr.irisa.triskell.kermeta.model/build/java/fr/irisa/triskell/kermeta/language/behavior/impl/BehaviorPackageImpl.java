@@ -2,13 +2,15 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackageImpl.java,v 1.4 2006-09-01 09:32:52 dvojtise Exp $
+ * $Id: BehaviorPackageImpl.java,v 1.5 2006-09-12 12:59:25 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.impl;
 
 import fr.irisa.triskell.kermeta.KmPackage;
 
 import fr.irisa.triskell.kermeta.impl.KmPackageImpl;
+
+import fr.irisa.triskell.kermeta.language.LanguagePackage;
 
 import fr.irisa.triskell.kermeta.language.behavior.Assignment;
 import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
@@ -38,6 +40,8 @@ import fr.irisa.triskell.kermeta.language.behavior.TypeLiteral;
 import fr.irisa.triskell.kermeta.language.behavior.TypeReference;
 import fr.irisa.triskell.kermeta.language.behavior.VariableDecl;
 import fr.irisa.triskell.kermeta.language.behavior.VoidLiteral;
+
+import fr.irisa.triskell.kermeta.language.impl.LanguagePackageImpl;
 
 import fr.irisa.triskell.kermeta.language.structure.StructurePackage;
 
@@ -297,16 +301,19 @@ public class BehaviorPackageImpl extends EPackageImpl implements BehaviorPackage
 
 		// Obtain or create and register interdependencies
 		KmPackageImpl theKmPackage = (KmPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) instanceof KmPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(KmPackage.eNS_URI) : KmPackage.eINSTANCE);
+		LanguagePackageImpl theLanguagePackage = (LanguagePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(LanguagePackage.eNS_URI) instanceof LanguagePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(LanguagePackage.eNS_URI) : LanguagePackage.eINSTANCE);
 		StructurePackageImpl theStructurePackage = (StructurePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI) instanceof StructurePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(StructurePackage.eNS_URI) : StructurePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theBehaviorPackage.createPackageContents();
 		theKmPackage.createPackageContents();
+		theLanguagePackage.createPackageContents();
 		theStructurePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theBehaviorPackage.initializePackageContents();
 		theKmPackage.initializePackageContents();
+		theLanguagePackage.initializePackageContents();
 		theStructurePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed

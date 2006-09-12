@@ -4,9 +4,9 @@
  *
  * $Id$
  */
-package fr.irisa.triskell.kermeta.impl;
+package fr.irisa.triskell.kermeta.language.impl;
 
-import fr.irisa.triskell.kermeta.*;
+import fr.irisa.triskell.kermeta.language.*;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -22,24 +22,24 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * <!-- end-user-doc -->
  * @generated
  */
-public class KmFactoryImpl extends EFactoryImpl implements KmFactory {
+public class LanguageFactoryImpl extends EFactoryImpl implements LanguageFactory {
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static KmFactory init() {
+	public static LanguageFactory init() {
 		try {
-			KmFactory theKmFactory = (KmFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore"); 
-			if (theKmFactory != null) {
-				return theKmFactory;
+			LanguageFactory theLanguageFactory = (LanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://kermeta/kermeta.ecore//language"); 
+			if (theLanguageFactory != null) {
+				return theLanguageFactory;
 			}
 		}
 		catch (Exception exception) {
 			EcorePlugin.INSTANCE.log(exception);
 		}
-		return new KmFactoryImpl();
+		return new LanguageFactoryImpl();
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class KmFactoryImpl extends EFactoryImpl implements KmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KmFactoryImpl() {
+	public LanguageFactoryImpl() {
 		super();
 	}
 
@@ -69,8 +69,8 @@ public class KmFactoryImpl extends EFactoryImpl implements KmFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KmPackage getKmPackage() {
-		return (KmPackage)getEPackage();
+	public LanguagePackage getLanguagePackage() {
+		return (LanguagePackage)getEPackage();
 	}
 
 	/**
@@ -79,8 +79,8 @@ public class KmFactoryImpl extends EFactoryImpl implements KmFactory {
 	 * @deprecated
 	 * @generated
 	 */
-	public static KmPackage getPackage() {
-		return KmPackage.eINSTANCE;
+	public static LanguagePackage getPackage() {
+		return LanguagePackage.eINSTANCE;
 	}
 
-} //KmFactoryImpl
+} //LanguageFactoryImpl

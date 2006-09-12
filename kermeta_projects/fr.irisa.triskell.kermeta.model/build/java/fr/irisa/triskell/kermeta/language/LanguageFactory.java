@@ -4,7 +4,7 @@
  *
  * $Id$
  */
-package fr.irisa.triskell.kermeta;
+package fr.irisa.triskell.kermeta.language;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -13,17 +13,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see fr.irisa.triskell.kermeta.KmPackage
+ * @see fr.irisa.triskell.kermeta.language.LanguagePackage
  * @generated
  */
-public interface KmFactory extends EFactory {
+public interface LanguageFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	KmFactory eINSTANCE = fr.irisa.triskell.kermeta.impl.KmFactoryImpl.init();
+	LanguageFactory eINSTANCE = fr.irisa.triskell.kermeta.language.impl.LanguageFactoryImpl.init();
 
 	/**
 	 * Returns the package supported by this factory.
@@ -32,6 +32,6 @@ public interface KmFactory extends EFactory {
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	KmPackage getKmPackage();
+	LanguagePackage getLanguagePackage();
 
-} //KmFactory
+} //LanguageFactory

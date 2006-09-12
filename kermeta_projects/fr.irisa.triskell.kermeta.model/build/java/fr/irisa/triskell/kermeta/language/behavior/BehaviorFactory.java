@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorFactory.java,v 1.2 2006-08-04 13:31:36 dvojtise Exp $
+ * $Id: BehaviorFactory.java,v 1.3 2006-09-12 12:59:23 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 

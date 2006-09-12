@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorPackage.java,v 1.5 2006-09-01 09:32:52 dvojtise Exp $
+ * $Id: BehaviorPackage.java,v 1.6 2006-09-12 12:59:23 dvojtise Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior;
 
@@ -2434,7 +2434,7 @@ public interface BehaviorPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	interface Literals  {
+	interface Literals {
 		/**
 		 * The meta object literal for the '{@link fr.irisa.triskell.kermeta.language.behavior.impl.AssignmentImpl <em>Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
