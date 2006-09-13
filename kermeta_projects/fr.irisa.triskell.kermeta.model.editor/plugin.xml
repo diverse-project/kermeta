@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.1 2006-09-01 07:00:58 dvojtise Exp $
+ $Id: plugin.xml,v 1.2 2006-09-13 16:49:00 cfaucher Exp $
 -->
 
 <plugin>
@@ -39,7 +39,87 @@
     </editor>
   </extension>    
 
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "fr.irisa.triskell.kermeta.language.presentation.LanguageModelWizardID"
+      name = "%_UI_LanguageModelWizard_label"
+      class = "fr.irisa.triskell.kermeta.language.presentation.LanguageModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/LanguageModelFile.gif">
+      <description>%_UI_LanguageModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
 
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "fr.irisa.triskell.kermeta.language.presentation.LanguageEditorID"
+        name = "%_UI_LanguageEditor_label"
+        icon = "icons/full/obj16/LanguageModelFile.gif"
+        extensions = "language"
+        class = "fr.irisa.triskell.kermeta.language.presentation.LanguageEditor" 
+        contributorClass="fr.irisa.triskell.kermeta.language.presentation.LanguageActionBarContributor" >
+    </editor>
+  </extension>    
 
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "fr.irisa.triskell.kermeta.language.behavior.presentation.BehaviorModelWizardID"
+      name = "%_UI_BehaviorModelWizard_label"
+      class = "fr.irisa.triskell.kermeta.language.behavior.presentation.BehaviorModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/BehaviorModelFile.gif">
+      <description>%_UI_BehaviorModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
 
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "fr.irisa.triskell.kermeta.language.behavior.presentation.BehaviorEditorID"
+        name = "%_UI_BehaviorEditor_label"
+        icon = "icons/full/obj16/BehaviorModelFile.gif"
+        extensions = "behavior"
+        class = "fr.irisa.triskell.kermeta.language.behavior.presentation.BehaviorEditor" 
+        contributorClass="fr.irisa.triskell.kermeta.language.behavior.presentation.BehaviorActionBarContributor" >
+    </editor>
+  </extension>    
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "fr.irisa.triskell.kermeta.language.structure.presentation.StructureModelWizardID"
+      name = "%_UI_StructureModelWizard_label"
+      class = "fr.irisa.triskell.kermeta.language.structure.presentation.StructureModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/StructureModelFile.gif">
+      <description>%_UI_StructureModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "fr.irisa.triskell.kermeta.language.structure.presentation.StructureEditorID"
+        name = "%_UI_StructureEditor_label"
+        icon = "icons/full/obj16/StructureModelFile.gif"
+        extensions = "structure"
+        class = "fr.irisa.triskell.kermeta.language.structure.presentation.StructureEditor" 
+        contributorClass="fr.irisa.triskell.kermeta.language.structure.presentation.StructureActionBarContributor" >
+    </editor>
+  </extension>    
 </plugin>

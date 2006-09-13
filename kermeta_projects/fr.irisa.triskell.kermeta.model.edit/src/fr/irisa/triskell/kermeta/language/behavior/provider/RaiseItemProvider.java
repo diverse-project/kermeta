@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: RaiseItemProvider.java,v 1.4 2006-09-01 11:29:55 dvojtise Exp $
+ * $Id: RaiseItemProvider.java,v 1.5 2006-09-13 16:49:43 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.provider;
 

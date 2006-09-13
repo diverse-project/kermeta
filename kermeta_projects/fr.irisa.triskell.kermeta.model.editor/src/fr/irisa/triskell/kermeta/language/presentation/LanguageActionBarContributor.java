@@ -2,9 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmActionBarContributor.java,v 1.2 2006-09-13 16:49:00 cfaucher Exp $
+ * $Id: LanguageActionBarContributor.java,v 1.1 2006-09-13 16:49:00 cfaucher Exp $
  */
-package fr.irisa.triskell.kermeta.presentation;
+package fr.irisa.triskell.kermeta.language.presentation;
+
+import fr.irisa.triskell.kermeta.presentation.Kermeta_javaEditorPlugin;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,12 +47,12 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 
 /**
- * This is the action bar contributor for the Km model editor.
+ * This is the action bar contributor for the Language model editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class KmActionBarContributor
+public class LanguageActionBarContributor
 	extends EditingDomainActionBarContributor
 	implements ISelectionChangedListener {
 	/**
@@ -150,7 +152,7 @@ public class KmActionBarContributor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KmActionBarContributor() {
+	public LanguageActionBarContributor() {
 		super(ADDITIONS_LAST_STYLE);
 		loadResourceAction = new LoadResourceAction();
 		validateAction = new ValidateAction();
@@ -164,8 +166,8 @@ public class KmActionBarContributor
 	 * @generated
 	 */
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
-		toolBarManager.add(new Separator("km-settings"));
-		toolBarManager.add(new Separator("km-additions"));
+		toolBarManager.add(new Separator("language-settings"));
+		toolBarManager.add(new Separator("language-additions"));
 	}
 
 	/**
@@ -178,7 +180,7 @@ public class KmActionBarContributor
 	public void contributeToMenu(IMenuManager menuManager) {
 		super.contributeToMenu(menuManager);
 
-		IMenuManager submenuManager = new MenuManager(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_KmEditor_menu"), "fr.irisa.triskell.kermetaMenuID");
+		IMenuManager submenuManager = new MenuManager(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_LanguageEditor_menu"), "fr.irisa.triskell.kermeta.languageMenuID");
 		menuManager.insertAfter("additions", submenuManager);
 		submenuManager.add(new Separator("settings"));
 		submenuManager.add(new Separator("actions"));

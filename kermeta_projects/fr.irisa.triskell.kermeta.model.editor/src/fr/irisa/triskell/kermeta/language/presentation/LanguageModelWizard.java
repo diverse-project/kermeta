@@ -2,9 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorModelWizard.java,v 1.2 2006-09-13 16:49:00 cfaucher Exp $
+ * $Id: LanguageModelWizard.java,v 1.1 2006-09-13 16:49:00 cfaucher Exp $
  */
-package fr.irisa.triskell.kermeta.language.behavior.presentation;
+package fr.irisa.triskell.kermeta.language.presentation;
 
 
 import java.util.ArrayList;
@@ -71,8 +71,8 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ISetSelectionTarget;
 
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorFactory;
-import fr.irisa.triskell.kermeta.language.behavior.BehaviorPackage;
+import fr.irisa.triskell.kermeta.language.LanguageFactory;
+import fr.irisa.triskell.kermeta.language.LanguagePackage;
 import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
 
 
@@ -95,14 +95,14 @@ import org.eclipse.ui.PartInitException;
  * <!-- end-user-doc -->
  * @generated
  */
-public class BehaviorModelWizard extends Wizard implements INewWizard {
+public class LanguageModelWizard extends Wizard implements INewWizard {
 	/**
 	 * This caches an instance of the model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BehaviorPackage behaviorPackage = BehaviorPackage.eINSTANCE;
+	protected LanguagePackage languagePackage = LanguagePackage.eINSTANCE;
 
 	/**
 	 * This caches an instance of the model factory.
@@ -110,7 +110,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BehaviorFactory behaviorFactory = behaviorPackage.getBehaviorFactory();
+	protected LanguageFactory languageFactory = languagePackage.getLanguageFactory();
 
 	/**
 	 * This is the file creation page.
@@ -118,7 +118,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BehaviorModelWizardNewFileCreationPage newFileCreationPage;
+	protected LanguageModelWizardNewFileCreationPage newFileCreationPage;
 
 	/**
 	 * This is the initial object creation page.
@@ -126,7 +126,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BehaviorModelWizardInitialObjectCreationPage initialObjectCreationPage;
+	protected LanguageModelWizardInitialObjectCreationPage initialObjectCreationPage;
 
 	/**
 	 * Remember the selection during initialization for populating the default container.
@@ -162,7 +162,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 		this.workbench = workbench;
 		this.selection = selection;
 		setWindowTitle(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_Wizard_label"));
-		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(Kermeta_javaEditorPlugin.INSTANCE.getImage("full/wizban/NewBehavior")));
+		setDefaultPageImageDescriptor(ExtendedImageRegistry.INSTANCE.getImageDescriptor(Kermeta_javaEditorPlugin.INSTANCE.getImage("full/wizban/NewLanguage")));
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 	protected Collection getInitialObjectNames() {
 		if (initialObjectNames == null) {
 			initialObjectNames = new ArrayList();
-			for (Iterator classifiers = behaviorPackage.getEClassifiers().iterator(); classifiers.hasNext(); ) {
+			for (Iterator classifiers = languagePackage.getEClassifiers().iterator(); classifiers.hasNext(); ) {
 				EClassifier eClassifier = (EClassifier)classifiers.next();
 				if (eClassifier instanceof EClass) {
 					EClass eClass = (EClass)eClassifier;
@@ -195,8 +195,8 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 	 * @generated
 	 */
 	protected EObject createInitialModel() {
-		EClass eClass = (EClass)behaviorPackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
-		EObject rootObject = behaviorFactory.create(eClass);
+		EClass eClass = (EClass)languagePackage.getEClassifier(initialObjectCreationPage.getInitialObjectName());
+		EObject rootObject = languageFactory.create(eClass);
 		return rootObject;
 	}
 
@@ -295,14 +295,14 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public class BehaviorModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
+	public class LanguageModelWizardNewFileCreationPage extends WizardNewFileCreationPage {
 		/**
 		 * Pass in the selection.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public BehaviorModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
+		public LanguageModelWizardNewFileCreationPage(String pageId, IStructuredSelection selection) {
 			super(pageId, selection);
 		}
 
@@ -314,9 +314,9 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 		 */
 		protected boolean validatePage() {
 			if (super.validatePage()) {
-				// Make sure the file ends in ".behavior".
+				// Make sure the file ends in ".language".
 				//
-				String requiredExt = Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_BehaviorEditorFilenameExtension");
+				String requiredExt = Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_LanguageEditorFilenameExtension");
 				String enteredExt = new Path(getFileName()).getFileExtension();
 				if (enteredExt == null || !enteredExt.equals(requiredExt)) {
 					setErrorMessage(Kermeta_javaEditorPlugin.INSTANCE.getString("_WARN_FilenameExtension", new Object [] { requiredExt }));
@@ -347,7 +347,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public class BehaviorModelWizardInitialObjectCreationPage extends WizardPage {
+	public class LanguageModelWizardInitialObjectCreationPage extends WizardPage {
 		/**
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -375,7 +375,7 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public BehaviorModelWizardInitialObjectCreationPage(String pageId) {
+		public LanguageModelWizardInitialObjectCreationPage(String pageId) {
 			super(pageId);
 		}
 
@@ -559,10 +559,10 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 	public void addPages() {
 		// Create a page, set the title, and the initial model file name.
 		//
-		newFileCreationPage = new BehaviorModelWizardNewFileCreationPage("Whatever", selection);
-		newFileCreationPage.setTitle(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_BehaviorModelWizard_label"));
-		newFileCreationPage.setDescription(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_BehaviorModelWizard_description"));
-		newFileCreationPage.setFileName(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_BehaviorEditorFilenameDefaultBase") + "." + Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_BehaviorEditorFilenameExtension"));
+		newFileCreationPage = new LanguageModelWizardNewFileCreationPage("Whatever", selection);
+		newFileCreationPage.setTitle(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_LanguageModelWizard_label"));
+		newFileCreationPage.setDescription(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_LanguageModelWizard_description"));
+		newFileCreationPage.setFileName(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_LanguageEditorFilenameDefaultBase") + "." + Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_LanguageEditorFilenameExtension"));
 		addPage(newFileCreationPage);
 
 		// Try and get the resource selection to determine a current directory for the file dialog.
@@ -588,8 +588,8 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 
 					// Make up a unique new name here.
 					//
-					String defaultModelBaseFilename = Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_BehaviorEditorFilenameDefaultBase");
-					String defaultModelFilenameExtension = Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_BehaviorEditorFilenameExtension");
+					String defaultModelBaseFilename = Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_LanguageEditorFilenameDefaultBase");
+					String defaultModelFilenameExtension = Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_LanguageEditorFilenameExtension");
 					String modelFilename = defaultModelBaseFilename + "." + defaultModelFilenameExtension;
 					for (int i = 1; ((IContainer)selectedResource).findMember(modelFilename) != null; ++i) {
 						modelFilename = defaultModelBaseFilename + i + "." + defaultModelFilenameExtension;
@@ -598,8 +598,8 @@ public class BehaviorModelWizard extends Wizard implements INewWizard {
 				}
 			}
 		}
-		initialObjectCreationPage = new BehaviorModelWizardInitialObjectCreationPage("Whatever2");
-		initialObjectCreationPage.setTitle(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_BehaviorModelWizard_label"));
+		initialObjectCreationPage = new LanguageModelWizardInitialObjectCreationPage("Whatever2");
+		initialObjectCreationPage.setTitle(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_LanguageModelWizard_label"));
 		initialObjectCreationPage.setDescription(Kermeta_javaEditorPlugin.INSTANCE.getString("_UI_Wizard_initial_object_description"));
 		addPage(initialObjectCreationPage);
 	}

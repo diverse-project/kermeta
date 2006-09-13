@@ -2,11 +2,11 @@
  * <copyright>
  * </copyright>
  *
- * $Id: KmItemProviderAdapterFactory.java,v 1.2 2006-09-13 16:49:43 cfaucher Exp $
+ * $Id: LanguageItemProviderAdapterFactory.java,v 1.1 2006-09-13 16:49:43 cfaucher Exp $
  */
-package fr.irisa.triskell.kermeta.provider;
+package fr.irisa.triskell.kermeta.language.provider;
 
-import fr.irisa.triskell.kermeta.util.KmAdapterFactory;
+import fr.irisa.triskell.kermeta.language.util.LanguageAdapterFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,7 +36,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class KmItemProviderAdapterFactory extends KmAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class LanguageItemProviderAdapterFactory extends LanguageAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class KmItemProviderAdapterFactory extends KmAdapterFactory implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public KmItemProviderAdapterFactory() {
+	public LanguageItemProviderAdapterFactory() {
 		supportedTypes.add(IEditingDomainItemProvider.class);
 		supportedTypes.add(IStructuredItemContentProvider.class);
 		supportedTypes.add(ITreeItemContentProvider.class);

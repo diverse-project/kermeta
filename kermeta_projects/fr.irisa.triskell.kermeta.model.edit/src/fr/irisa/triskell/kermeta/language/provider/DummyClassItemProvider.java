@@ -2,9 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: VoidLiteralItemProvider.java,v 1.5 2006-09-13 16:49:43 cfaucher Exp $
+ * $Id: DummyClassItemProvider.java,v 1.1 2006-09-13 16:49:43 cfaucher Exp $
  */
-package fr.irisa.triskell.kermeta.language.behavior.provider;
+package fr.irisa.triskell.kermeta.language.provider;
 
 
 import fr.irisa.triskell.kermeta.provider.Kermeta_javaEditPlugin;
@@ -22,15 +22,16 @@ import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 
 /**
- * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.behavior.VoidLiteral} object.
+ * This is the item provider adapter for a {@link fr.irisa.triskell.kermeta.language.DummyClass} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class VoidLiteralItemProvider
-	extends LiteralItemProvider
+public class DummyClassItemProvider
+	extends ItemProviderAdapter
 	implements	
 		IEditingDomainItemProvider,	
 		IStructuredItemContentProvider,	
@@ -43,7 +44,7 @@ public class VoidLiteralItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VoidLiteralItemProvider(AdapterFactory adapterFactory) {
+	public DummyClassItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,13 +63,13 @@ public class VoidLiteralItemProvider
 	}
 
 	/**
-	 * This returns VoidLiteral.gif.
+	 * This returns DummyClass.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/VoidLiteral"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DummyClass"));
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class VoidLiteralItemProvider
 	 * @generated
 	 */
 	public String getText(Object object) {
-		return getString("_UI_VoidLiteral_type");
+		return getString("_UI_DummyClass_type");
 	}
 
 	/**

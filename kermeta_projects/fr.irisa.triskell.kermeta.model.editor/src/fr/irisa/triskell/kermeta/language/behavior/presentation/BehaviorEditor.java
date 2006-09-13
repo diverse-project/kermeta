@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorEditor.java,v 1.1 2006-09-01 07:00:59 dvojtise Exp $
+ * $Id: BehaviorEditor.java,v 1.2 2006-09-13 16:49:00 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.presentation;
 
@@ -157,6 +157,8 @@ import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.BehaviorItemProviderAdapterFactory;
+
+import fr.irisa.triskell.kermeta.language.provider.LanguageItemProviderAdapterFactory;
 
 import fr.irisa.triskell.kermeta.language.structure.provider.StructureItemProviderAdapterFactory;
 
@@ -682,6 +684,7 @@ public class BehaviorEditor
 		List factories = new ArrayList();
 		factories.add(new ResourceItemProviderAdapterFactory());
 		factories.add(new KmItemProviderAdapterFactory());
+		factories.add(new LanguageItemProviderAdapterFactory());
 		factories.add(new BehaviorItemProviderAdapterFactory());
 		factories.add(new StructureItemProviderAdapterFactory());
 		factories.add(new ReflectiveItemProviderAdapterFactory());

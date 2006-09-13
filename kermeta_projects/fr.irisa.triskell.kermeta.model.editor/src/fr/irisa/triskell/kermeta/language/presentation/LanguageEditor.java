@@ -2,9 +2,9 @@
  * <copyright>
  * </copyright>
  *
- * $Id: StructureEditor.java,v 1.2 2006-09-13 16:49:01 cfaucher Exp $
+ * $Id: LanguageEditor.java,v 1.1 2006-09-13 16:49:00 cfaucher Exp $
  */
-package fr.irisa.triskell.kermeta.language.structure.presentation;
+package fr.irisa.triskell.kermeta.language.presentation;
 
 
 import java.io.IOException;
@@ -156,11 +156,11 @@ import org.eclipse.emf.edit.ui.util.EditUIMarkerHelper;
 
 import org.eclipse.emf.edit.ui.view.ExtendedPropertySheetPage;
 
-import fr.irisa.triskell.kermeta.language.structure.provider.StructureItemProviderAdapterFactory;
+import fr.irisa.triskell.kermeta.language.provider.LanguageItemProviderAdapterFactory;
 
 import fr.irisa.triskell.kermeta.language.behavior.provider.BehaviorItemProviderAdapterFactory;
 
-import fr.irisa.triskell.kermeta.language.provider.LanguageItemProviderAdapterFactory;
+import fr.irisa.triskell.kermeta.language.structure.provider.StructureItemProviderAdapterFactory;
 
 import fr.irisa.triskell.kermeta.presentation.Kermeta_javaEditorPlugin;
 
@@ -170,12 +170,12 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 
 /**
- * This is an example of a Structure model editor.
+ * This is an example of a Language model editor.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StructureEditor
+public class LanguageEditor
 	extends MultiPageEditorPart
 	implements IEditingDomainProvider, ISelectionProvider, IMenuListener, IViewerProvider, IGotoMarker {
 	/**
@@ -337,18 +337,18 @@ public class StructureEditor
 			public void partActivated(IWorkbenchPart p) {
 				if (p instanceof ContentOutline) {
 					if (((ContentOutline)p).getCurrentPage() == contentOutlinePage) {
-						getActionBarContributor().setActiveEditor(StructureEditor.this);
+						getActionBarContributor().setActiveEditor(LanguageEditor.this);
 
 						setCurrentViewer(contentOutlineViewer);
 					}
 				}
 				else if (p instanceof PropertySheet) {
 					if (((PropertySheet)p).getCurrentPage() == propertySheetPage) {
-						getActionBarContributor().setActiveEditor(StructureEditor.this);
+						getActionBarContributor().setActiveEditor(LanguageEditor.this);
 						handleActivate();
 					}
 				}
-				else if (p == StructureEditor.this) {
+				else if (p == LanguageEditor.this) {
 					handleActivate();
 				}
 			}
@@ -506,8 +506,8 @@ public class StructureEditor
 								getSite().getShell().getDisplay().asyncExec
 									(new Runnable() {
 										 public void run() {
-											 getSite().getPage().closeEditor(StructureEditor.this, false);
-											 StructureEditor.this.dispose();
+											 getSite().getPage().closeEditor(LanguageEditor.this, false);
+											 LanguageEditor.this.dispose();
 										 }
 									 });
 							}
@@ -515,7 +515,7 @@ public class StructureEditor
 
 						if (!visitor.getChangedResources().isEmpty()) {
 							changedResources.addAll(visitor.getChangedResources());
-							if (getSite().getPage().getActiveEditor() == StructureEditor.this) {
+							if (getSite().getPage().getActiveEditor() == LanguageEditor.this) {
 								getSite().getShell().getDisplay().asyncExec
 									(new Runnable() {
 										 public void run() {
@@ -551,8 +551,8 @@ public class StructureEditor
 
 		if (!removedResources.isEmpty()) {
 			if (handleDirtyConflict()) {
-				getSite().getPage().closeEditor(StructureEditor.this, false);
-				StructureEditor.this.dispose();
+				getSite().getPage().closeEditor(LanguageEditor.this, false);
+				LanguageEditor.this.dispose();
 			}
 			else {
 				removedResources.clear();
@@ -676,7 +676,7 @@ public class StructureEditor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StructureEditor() {
+	public LanguageEditor() {
 		super();
 
 		// Create an adapter factory that yields item providers.
@@ -980,7 +980,7 @@ public class StructureEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), StructureEditor.this) {
+					new ViewerPane(getSite().getPage(), LanguageEditor.this) {
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
 							TreeViewer newTreeViewer = new TreeViewer(tree);
@@ -1011,7 +1011,7 @@ public class StructureEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), StructureEditor.this) {
+					new ViewerPane(getSite().getPage(), LanguageEditor.this) {
 						public Viewer createViewer(Composite composite) {
 							Tree tree = new Tree(composite, SWT.MULTI);
 							TreeViewer newTreeViewer = new TreeViewer(tree);
@@ -1038,7 +1038,7 @@ public class StructureEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), StructureEditor.this) {
+					new ViewerPane(getSite().getPage(), LanguageEditor.this) {
 						public Viewer createViewer(Composite composite) {
 							return new ListViewer(composite);
 						}
@@ -1061,7 +1061,7 @@ public class StructureEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), StructureEditor.this) {
+					new ViewerPane(getSite().getPage(), LanguageEditor.this) {
 						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
 						}
@@ -1086,7 +1086,7 @@ public class StructureEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), StructureEditor.this) {
+					new ViewerPane(getSite().getPage(), LanguageEditor.this) {
 						public Viewer createViewer(Composite composite) {
 							return new TableViewer(composite);
 						}
@@ -1127,7 +1127,7 @@ public class StructureEditor
 			//
 			{
 				ViewerPane viewerPane =
-					new ViewerPane(getSite().getPage(), StructureEditor.this) {
+					new ViewerPane(getSite().getPage(), LanguageEditor.this) {
 						public Viewer createViewer(Composite composite) {
 							return new TreeViewer(composite);
 						}
@@ -1330,8 +1330,8 @@ public class StructureEditor
 			propertySheetPage =
 				new ExtendedPropertySheetPage(editingDomain) {
 					public void setSelectionToViewer(List selection) {
-						StructureEditor.this.setSelectionToViewer(selection);
-						StructureEditor.this.setFocus();
+						LanguageEditor.this.setSelectionToViewer(selection);
+						LanguageEditor.this.setFocus();
 					}
 
 					public void setActionBars(IActionBars actionBars) {

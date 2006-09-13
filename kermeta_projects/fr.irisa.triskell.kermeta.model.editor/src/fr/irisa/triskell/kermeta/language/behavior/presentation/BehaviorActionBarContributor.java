@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BehaviorActionBarContributor.java,v 1.1 2006-09-01 07:00:59 dvojtise Exp $
+ * $Id: BehaviorActionBarContributor.java,v 1.2 2006-09-13 16:49:00 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.language.behavior.presentation;
 

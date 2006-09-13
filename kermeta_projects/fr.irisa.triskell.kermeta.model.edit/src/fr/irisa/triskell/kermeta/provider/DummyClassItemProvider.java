@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: DummyClassItemProvider.java,v 1.1 2006-09-01 11:29:55 dvojtise Exp $
+ * $Id: DummyClassItemProvider.java,v 1.2 2006-09-13 16:49:43 cfaucher Exp $
  */
 package fr.irisa.triskell.kermeta.provider;
 
