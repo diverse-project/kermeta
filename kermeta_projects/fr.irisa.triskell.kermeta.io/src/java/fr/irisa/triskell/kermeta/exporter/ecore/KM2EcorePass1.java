@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.26 2006-09-06 15:33:51 dvojtise Exp $
+/* $Id: KM2EcorePass1.java,v 1.27 2006-09-13 15:17:23 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -16,6 +16,7 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -202,10 +203,32 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 			
 			// Create an annotation to hold the operation inv	
 			for (Object next : node.getInv()) {
-				String invBody = (String)prettyPrinter.accept(((Constraint)next).getBody());
-				String invName = ((Constraint)next).getName();
-				ecoreExporter.addAnnotation( 
-					newEClass, KM2Ecore.ANNOTATION_INV, invName, invBody, null);
+				Constraint inv = (Constraint) next;
+				
+				// Patch David:
+				// Dealing with the annotations of the current invariant
+				String invBody = (String) prettyPrinter.accept(inv.getBody());
+				String invName = inv.getName();
+				EAnnotation eAnnot = 
+					ecoreExporter.addConstraintAnnotation( 
+							newEClass,
+							KM2Ecore.ANNOTATION_INV,
+							invName,
+							invBody,
+							null);
+
+				for (Object nextTag : inv.getTag()) {
+					Tag t = (Tag) nextTag;
+					String tagKey = t.getName();
+					String tagValue = t.getValue();
+					ecoreExporter.addConstraintAnnotation(
+						newEClass,
+						KM2Ecore.ANNOTATION_INV_DOC,
+						tagKey,
+						tagValue,
+						eAnnot);
+				}
+				
 			}
 			if (!ecoreExporter.getKermetaUnit().typeDefs.containsKey(node))
 			{

@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.18 2006-05-04 15:28:24 jmottu Exp $
+/* $Id: KMT2KMPass7.java,v 1.19 2006-09-13 15:17:23 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -121,9 +121,9 @@ public class KMT2KMPass7 extends KMT2KMPass {
             builder.current_property = (fr.irisa.triskell.kermeta.language.structure.Property) e;
         }
         else if (annNode instanceof Invariant) {
-        	
-        	// TODO : add anotations on Invs
-        	
+        	name = ((Invariant)annNode).getName().getText();
+        	e = builder.findConstraintByName(builder.current_class, name);
+        	builder.current_constraint = (fr.irisa.triskell.kermeta.language.structure.Constraint) e;
         }
         
         if (e != null) // we should have found the object however...

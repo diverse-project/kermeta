@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.5 2006-08-31 12:18:28 dtouzet Exp $
+/* $Id: Ecore2KM.java,v 1.6 2006-09-13 15:17:23 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -14,12 +14,14 @@ package fr.irisa.triskell.kermeta.loader.ecore;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
+import fr.irisa.triskell.kermeta.language.structure.Constraint;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
 import fr.irisa.triskell.kermeta.language.structure.Property;
@@ -58,6 +60,14 @@ public class Ecore2KM {
 		primitive_types_mapping.put("Object", 				"kermeta::standard::Object");
 		primitive_types_mapping.put("java.lang.Object", 	"kermeta::standard::Object");
 	}
+	
+	/**
+	 * Hashtable used to manage the invariants annotations that are encoded in Ecore as annotations
+	 * that refer the annotation containing the invariant.
+	 * The structure enbales to map the visited "invariants annotations" EAnnotations to the allocated
+	 *  Tag elements.
+	 */
+	public Hashtable<EAnnotation,Constraint> invs_mapping = new Hashtable<EAnnotation,Constraint>();
 	
 	public Ecore2KM(Resource resource, EcoreUnit unit)
 	{

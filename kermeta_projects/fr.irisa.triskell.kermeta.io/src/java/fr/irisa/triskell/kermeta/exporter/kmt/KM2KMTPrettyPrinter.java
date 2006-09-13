@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.37 2006-08-31 15:03:32 dtouzet Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.38 2006-09-13 15:17:23 dtouzet Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -57,7 +57,6 @@ import fr.irisa.triskell.kermeta.language.structure.FunctionType;
 import fr.irisa.triskell.kermeta.language.structure.ModelType;
 import fr.irisa.triskell.kermeta.language.structure.ModelTypeDefinition;
 import fr.irisa.triskell.kermeta.language.structure.MultiplicityElement;
-import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 import fr.irisa.triskell.kermeta.language.structure.Operation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.Parameter;
@@ -76,9 +75,7 @@ import fr.irisa.triskell.kermeta.loader.kmt.KMT2KMPass7;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor;
-import fr.irisa.triskell.kermeta.visitor.KermetaVisitor;
 
-import fr.irisa.triskell.kermeta.utils.KMTHelper;
 
 
 
@@ -107,7 +104,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * 
 	 */
 	public KM2KMTPrettyPrinter(String uri) {
-	    //KermetaUnitFactory.getDefaultLoader().unloadAll();
+	    KermetaUnitFactory.getDefaultLoader().unloadAll();
 
 	    // LOAD THE UNIT
 	    KermetaUnit builder = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
@@ -115,10 +112,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			builder.load();
 		}
 		catch(Exception e ) {
-			/*
-			if (builder.messages.getErrors().size() == 0)
-				throw e;
-			*/
+			//if (builder.messages.getErrors().size() == 0) throw e;
 		};
 
 		builder.typeCheck(null);
@@ -139,7 +133,8 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	public String ppPackage(Package p) {
 		root_pname = KMTHelper.getQualifiedName(p);
 		String result = "package " + root_pname + ";\n\n";
-		for(int i=0; i<imports.size();i++) result += "require \"" + imports.get(i) + "\"\n";
+		for(int i=0; i<imports.size();i++)
+			result += "require \"" + imports.get(i) + "\"\n";
 		if (imports.size()>0) result += "\n";
 		for(int i=0; i<usings.size();i++) result += "using " + usings.get(i) + "\n";
 		if (usings.size()>0) result += "\n";
@@ -169,7 +164,8 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.structure.Constraint)
 	 */
 	public Object visitConstraint(Constraint node) {
-		String result = node.getStereotype().toString();
+		String result = ppTags(node.getTag());
+		result += node.getStereotype().toString();
 		result += node.getName()!=null ? " "+node.getName():"";
 		result += " is\n";
 		if (node.getBody() != null) {
@@ -956,9 +952,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			else if (node.getParameters().size()> 0) {
 				result += "(" + ppComaSeparatedNodes(node.getParameters()) + ")";
 			}
-			
 		}
-		
 		return result;
 	}
 	
@@ -1187,8 +1181,4 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		else
 			return false;
 	}
-	
-	
-	
 }
-

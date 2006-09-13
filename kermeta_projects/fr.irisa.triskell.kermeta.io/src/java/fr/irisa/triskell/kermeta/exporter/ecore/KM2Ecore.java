@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.22 2006-09-06 15:25:50 dvojtise Exp $
+/* $Id: KM2Ecore.java,v 1.23 2006-09-13 15:17:23 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -116,6 +116,8 @@ public class KM2Ecore {
     public final static String ANNOTATION_BODY_DETAILS = "body";
     // Annotation.getSource() == "kermeta.inv"
     public final static String ANNOTATION_INV = ANNOTATION + ".inv";
+    // Next corresponds to constraints annotations
+    public final static String ANNOTATION_INV_DOC = ANNOTATION_INV + ".doc";
     public final static String ANNOTATION_PRE = ANNOTATION + ".pre";
     public final static String ANNOTATION_POST = ANNOTATION + ".post";
 	// Annotation.getSource() == "KermetaRaisedExceptions"
@@ -214,9 +216,47 @@ public class KM2Ecore {
 		{
 			internalLog.debug(" adding annotation reference for " +annotationDetailKey + " = " + annotationDetailValue);
 			newEAnnotation.getReferences().add(referedEObject);
-		}	
+		}
+	}
+	
+
+	/**
+	 * Create an annotation with the given detailled info.
+	 * Compared to the 'addAnnotation' method, this one does not test whether a corresponding
+	 * annotation already exists, but systematically create a new one.
+	 * Used for managing the constraints annotations.
+	 * @param annotedModelElement
+	 * @param annotationName
+	 * @param annotationDetailKey
+	 * @param annotationDetailValue
+	 * @param referedEObject
+	 * @return the generated EAnnotation element
+	 */
+	public EAnnotation addConstraintAnnotation(
+			EModelElement annotedModelElement,
+			String annotationName,
+			String annotationDetailKey,
+			String annotationDetailValue,
+			EObject referedEObject
+			) {
+		// find the Annotation or create a new one
+		EAnnotation	newEAnnotation = EcoreFactory.eINSTANCE.createEAnnotation();
+		newEAnnotation.setSource(annotationName);
+		ecoreResource.getContents().add(newEAnnotation);
+		annotedModelElement.getEAnnotations().add(newEAnnotation);
+		// add the info in the Details map
+		if (annotationDetailKey != null)
+			newEAnnotation.getDetails().put(annotationDetailKey, annotationDetailValue);
+		// try a direct link additionnaly to the detail map. 
+		if (referedEObject != null) 
+		{
+			internalLog.debug(" adding annotation reference for " +annotationDetailKey + " = " + annotationDetailValue);
+			newEAnnotation.getReferences().add(referedEObject);
+		}
+		return newEAnnotation;
 	}
 
+	
 	/** tells wether this FType can be used in an ecore Attribute */
 	public boolean isTypeValidForEAttibute(Type type){
 		return (isPrimitiveEcoreType(type)||Enumeration.class.isInstance(type)||PrimitiveType.class.isInstance(type));

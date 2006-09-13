@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.4 2006-09-06 15:33:51 dvojtise Exp $
+/* $Id: Ecore2KMPass3.java,v 1.5 2006-09-13 15:17:23 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -345,6 +345,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			// Visit annotation details that are dedicated to operation
 			visitClassDefinitionSpecificEAnnotation(node);
 		}
+		
 		// Visit annotation specific to EOperation or EClass
 		if (node.getSource().equals(KM2Ecore.ANNOTATION_TYPEPARAMETER))
 		{	
@@ -501,6 +502,8 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			
 			inv.setBody(ExpressionParser.parse(unit, (String)node.getDetails().get(inv_name)));
 			exporter.current_classdef.getInv().add(inv);
+			
+			exporter.invs_mapping.put(node, inv);
 		}
 	}
 	

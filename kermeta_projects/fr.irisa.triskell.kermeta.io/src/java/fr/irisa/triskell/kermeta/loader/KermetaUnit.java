@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.71 2006-08-21 16:12:33 zdrey Exp $
+/* $Id: KermetaUnit.java,v 1.72 2006-09-13 15:17:23 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -704,6 +704,23 @@ public abstract class KermetaUnit {
 		return null;
 	}
 	
+	
+	/**
+	 * Get a Constraint by its name in ClassDef c
+	 * @param c
+	 * @param name
+	 * @return
+	 */
+	public Constraint getConstraintByName(ClassDefinition c, String name) {
+		EList invs = c.getInv();
+		for (int i=0; i<invs.size(); i++) {
+			Constraint inv = (Constraint) invs.get(i);
+			if(inv.getName().equals(name))
+				return inv;
+		}
+		return null;
+	}
+	
 	/**
 	 * Get an operation by its name. search in the inheritance tree
 	 */
@@ -731,6 +748,26 @@ public abstract class KermetaUnit {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * Get a Constraint by its name in ClassDef c and its inheritance tree
+	 * @param c
+	 * @param name
+	 * @return
+	 */
+	public Constraint findConstraintByName(ClassDefinition c, String name) {
+		Constraint result = getConstraintByName(c, name);
+		if (result != null) return result;
+		EList superclasses = c.getSuperType();
+		for(int i=0; i<superclasses.size();i++) {
+			ClassDefinition sc = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)superclasses.get(i)).getTypeDefinition();
+			result = findConstraintByName(sc, name);
+			if (result != null) return result;
+		}
+		return null;
+	}
+	
 	
 	/**
 	 * Return true if supercls is a super class of cls
