@@ -1,4 +1,4 @@
-/* $Id: Object.java,v 1.11 2006-08-17 10:02:21 zdrey Exp $
+/* $Id: Object.java,v 1.12 2006-09-13 07:23:47 cfaucher Exp $
  * Project   : Kermeta interpreter
  * File      : Object.java
  * License   : EPL
@@ -16,12 +16,16 @@ package fr.irisa.triskell.kermeta.runtime.language;
 
 import java.util.Iterator;
 
+import org.eclipse.emf.common.util.EList;
+
 import fr.irisa.triskell.kermeta.interpreter.ExpressionCallFrame;
 import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
 import fr.irisa.triskell.kermeta.language.behavior.Expression;
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.language.structure.Constraint;
+import fr.irisa.triskell.kermeta.language.structure.ConstraintLanguage;
+import fr.irisa.triskell.kermeta.language.structure.ConstraintType;
 import fr.irisa.triskell.kermeta.loader.expression.DynamicExpressionUnit;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Boolean;
@@ -52,55 +56,60 @@ public class Object {
 		return self.getContainer();
 	}
 	
-    /** Implementation of method container called as :
-	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.container() */
+    /** Implementation of method checkInvariants called as :
+	 * extern fr::irisa::triskell::kermeta::runtime::language::Object.checkInvariants() */
 	public static RuntimeObject checkInvariants(RuntimeObject self) {
 		
 		 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)self.getMetaclass().getData().get("kcoreObject");
 	     ClassDefinition classDef = (ClassDefinition)metaClass.getTypeDefinition();
-	     Iterator it = classDef.getInv().iterator();
-	     java.lang.String message = "";
-	     while(it.hasNext()) {
-	    	 Constraint c = (Constraint)it.next();
-	    	 if (!checkConstraint(c.getBody(), classDef, self)) {
-    			 message += "Inv " + c.getName() + " of class " + classDef.getName() + " violated";
-    			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
- 	        			message,
- 						self.getFactory().getMemory().getCurrentInterpreter(),
- 						self.getFactory().getMemory(),
- 						c.getBody(),
- 						null);
-    		 }
-	     }
+	     
+	     checkConstraintAndPrintMes(classDef, self);
 	     checkInheritedInvariants(classDef , self);
          return self.getFactory().getMemory().trueINSTANCE; //if the constraints don't raise any constraint exception then it means that the constraints are true
 	}
-	protected static RuntimeObject checkInheritedInvariants(ClassDefinition cd , RuntimeObject self) {
-		 Iterator itParents = cd.getSuperType().iterator();
+	
+	/**
+	 * Search the inherited invariants for a given class defifition 
+	 * and call the constraint checking for them
+	 * @param cd
+	 * @param self
+	 * @return
+	 */
+	protected static RuntimeObject checkInheritedInvariants(ClassDefinition classDef , RuntimeObject self) {
+		 Iterator itParents = classDef.getSuperType().iterator();
 	     while(itParents.hasNext()) {
 	    	 fr.irisa.triskell.kermeta.language.structure.Class metaClass = (fr.irisa.triskell.kermeta.language.structure.Class)itParents.next();
 		     ClassDefinition parent = (ClassDefinition)metaClass.getTypeDefinition();
 	    	 
-	    	 Iterator it = parent.getInv().iterator();
-		     java.lang.String message = "";
-		     while(it.hasNext()) {
-		    	 Constraint c = (Constraint)it.next();
-		    	 if (!checkConstraint(c.getBody(), parent, self)) {
-	    			 message += "Inv " + c.getName() + " of superclass " + parent.getName() + " violated";
-	    			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
-	 	        			message,
-	 						self.getFactory().getMemory().getCurrentInterpreter(),
-	 						self.getFactory().getMemory(),
-	 						null);
-	    		 }
-		     }
-		     
+		     checkConstraintAndPrintMes(parent, self);		     
 	    	 checkInheritedInvariants(parent,self);
 	     }
 		return self.getFactory().getMemory().trueINSTANCE;
 	}
-	protected static boolean checkConstraint(Expression exp, ClassDefinition cls, RuntimeObject obj) {
-		DynamicExpressionUnit deu = new DynamicExpressionUnit(obj.getFactory().getMemory().getUnit().getPackages(), exp, cls);
+	
+	/**
+	 * Check the constraints for a given class definition and print a message if a constraint is violated
+	 * @param classDef
+	 * @param self
+	 */
+	private static void checkConstraintAndPrintMes(ClassDefinition classDef, RuntimeObject self) {
+		java.lang.String message = "";
+	     for(Iterator it = classDef.getInv().iterator(); it.hasNext();) {
+	    	 Constraint c = (Constraint)it.next();
+	    	 if (!checkConstraint(c.getBody(), classDef, self)) {
+   			 message += "Inv " + c.getName() + " of class " + classDef.getName() + " violated";
+   			 throw KermetaRaisedException.createKermetaException("kermeta::exceptions::ConstraintViolatedInv",
+	        			message,
+						self.getFactory().getMemory().getCurrentInterpreter(),
+						self.getFactory().getMemory(),
+						c.getBody(),
+						null);
+   		 }
+	     }
+	}
+	
+	protected static boolean checkConstraint(Expression exp, ClassDefinition classDef, RuntimeObject obj) {
+		DynamicExpressionUnit deu = new DynamicExpressionUnit(obj.getFactory().getMemory().getUnit().getPackages(), exp, classDef);
 		ExpressionInterpreter interp = obj.getFactory().getMemory().getCurrentInterpreter();
 		ExpressionCallFrame ecf = new ExpressionCallFrame(interp.getInterpreterContext(), deu, obj, true);
 		return ecf.eval(interp) == obj.getFactory().getMemory().trueINSTANCE;
