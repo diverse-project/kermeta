@@ -1,4 +1,4 @@
-/* $Id: KermetaSourceLocator.java,v 1.16 2005-12-20 08:55:56 zdrey Exp $
+/* $Id: KermetaSourceLocator.java,v 1.17 2006-09-13 08:49:29 cfaucher Exp $
  * Project: Kermeta.runner
  * File: KermetaSourceLocator.java
  * License: EPL
@@ -19,7 +19,6 @@ import org.eclipse.ui.IEditorInput;
 
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaStackFrame;
-import fr.irisa.triskell.kermeta.texteditor.TexteditorPlugin;
 
 /**
  * Eclipse doc reminders : 
