@@ -1,4 +1,4 @@
-/* $Id: JunitTestSuite.java,v 1.2 2006-09-12 09:01:08 dvojtise Exp $
+/* $Id: JunitTestSuite.java,v 1.3 2006-09-14 14:49:37 dvojtise Exp $
  * Project : Kermeta.interpreter
  * File : JunitTestSuite.java
  * License : GPL
@@ -79,6 +79,8 @@ public class JunitTestSuite extends TestSuite {
 		testWithFile("test/emf_testcases/kermeta","050_testChunkedModel.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","051_testSaveEcoreSplittedXRefModel.main.kmt" );
+
+		testWithFile("test/emf_testcases/kermeta","052_testSaveEcoreSplittedModel.main.kmt" );
 
 		testWithFile("test/emf_testcases/kermeta","053_savingKM.main.kmt" );
 
