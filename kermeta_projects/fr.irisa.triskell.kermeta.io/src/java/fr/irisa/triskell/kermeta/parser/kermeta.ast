@@ -93,8 +93,8 @@ token operationKind : "operation" | "method" ;
 
 list preconditions : precondition*;
 list postconditions : postcondition*;
-sequence precondition : "pre" name=ID "is" body=fExpression ;
-sequence postcondition : "post" name=ID "is" body=fExpression ;
+sequence precondition : annotations "pre" name=ID "is" body=fExpression ;
+sequence postcondition : annotations "post" name=ID "is" body=fExpression ;
 
 abstract operationBody : operationEmptyBody | operationExpressionBody  ;
 sequence operationExpressionBody : bodyAnnotations=annotations fExpression ;

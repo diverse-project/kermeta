@@ -382,16 +382,16 @@ postconditions returns [ Postconditions retVal = new Postconditions() ]
 
 precondition returns [ Precondition retVal = null ]
 :
-{ FExpression body = null; }
-  pre_KW:"pre" name:ID is_KW:"is" body=fExpression 
-{ retVal = new Precondition(pre_KW, name, is_KW, body); }
+{ Annotations annotations = null; FExpression body = null; }
+  annotations=annotations pre_KW:"pre" name:ID is_KW:"is" body=fExpression 
+{ retVal = new Precondition(annotations, pre_KW, name, is_KW, body); }
 ;
 
 postcondition returns [ Postcondition retVal = null ]
 :
-{ FExpression body = null; }
-  post_KW:"post" name:ID is_KW:"is" body=fExpression 
-{ retVal = new Postcondition(post_KW, name, is_KW, body); }
+{ Annotations annotations = null; FExpression body = null; }
+  annotations=annotations post_KW:"post" name:ID is_KW:"is" body=fExpression 
+{ retVal = new Postcondition(annotations, post_KW, name, is_KW, body); }
 ;
 
 operationBody returns [ OperationBody retVal = null ]
