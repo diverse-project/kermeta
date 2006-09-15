@@ -254,6 +254,10 @@
    </extension>
    <extension
          point="org.eclipse.ui.views">
+      <category
+            name="Kermeta"
+            id="fr.irisa.triskell.kermeta.touchnavigator">
+      </category>
       <view
             allowMultiple="false"
             class="fr.irisa.triskell.kermeta.view.KermetaView"
