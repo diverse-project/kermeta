@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass3.java,v 1.6 2006-09-18 13:33:12 dtouzet Exp $
+/* $Id: Ecore2KMPass3.java,v 1.7 2006-09-18 15:20:12 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass2.java
  * License    : EPL
@@ -211,8 +211,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 			exporter.current_op.setIsAbstract(node.getEAnnotation(KM2Ecore.ANNOTATION)==null);
 			visitorPass1.isClassTypeOwner=false;
 			// Visit the annotations, except for ecore metamodel elements
-			if (!((ENamedElement)node.eContainer().eContainer()).getName().equals("ecore"))
-				acceptList(node.getEAnnotations());
+			acceptList(node.getEAnnotations());
 			
 			unit.popContext();
 
@@ -269,9 +268,7 @@ public class Ecore2KMPass3 extends EcoreVisitor {
 		Type t = createTypeForEClassifier(node.getEType(), node);
 		exporter.current_prop.setType(t);
 		// Get the derived properties bodies and other stuffs
-		if (!(((ENamedElement)node.eContainer().eContainer()).getName().equals("ecore"))) {
-			acceptList(node.getEAnnotations());
-		}
+		acceptList(node.getEAnnotations());
 		
 		return exporter.current_prop;
 	}
