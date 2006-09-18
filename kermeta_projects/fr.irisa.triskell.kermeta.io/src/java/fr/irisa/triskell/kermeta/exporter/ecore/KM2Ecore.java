@@ -1,4 +1,4 @@
-/* $Id: KM2Ecore.java,v 1.23 2006-09-13 15:17:23 dtouzet Exp $
+/* $Id: KM2Ecore.java,v 1.24 2006-09-18 10:10:16 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -31,7 +31,9 @@ import fr.irisa.triskell.kermeta.loader.message.KMUnitMessageManager;
 import fr.irisa.triskell.kermeta.language.structure.Enumeration;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
+import fr.irisa.triskell.kermeta.language.structure.Property;
 import fr.irisa.triskell.kermeta.language.structure.Type;
+import fr.irisa.triskell.kermeta.language.structure.TypedElement;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 import fr.irisa.triskell.kermeta.utils.KMTHelper;
 import fr.irisa.triskell.traceability.helper.Tracer;
@@ -257,8 +259,9 @@ public class KM2Ecore {
 	}
 
 	
-	/** tells wether this FType can be used in an ecore Attribute */
-	public boolean isTypeValidForEAttibute(Type type){
+	/** tells wether the type of this property can be used in an ecore Attribute */
+	public boolean isPropertyValidForEAttribute(Property property){
+		Type type = property.getType();
 		return (isPrimitiveEcoreType(type)||Enumeration.class.isInstance(type)||PrimitiveType.class.isInstance(type));
 	}
 	

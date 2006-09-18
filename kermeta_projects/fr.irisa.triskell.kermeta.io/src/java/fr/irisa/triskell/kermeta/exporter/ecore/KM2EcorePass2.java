@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass2.java,v 1.22 2006-08-21 16:26:29 zdrey Exp $
+/* $Id: KM2EcorePass2.java,v 1.23 2006-09-18 10:10:16 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -265,7 +265,7 @@ public class KM2EcorePass2 extends KermetaOptimizedVisitor{
 		newEStructuralFeature = (EStructuralFeature)getEObjectForProperty(node);
 		
 		// If property is composite or derived we have to check the type (primitive type or not)
-		if(ecoreExporter.isTypeValidForEAttibute(node.getType()))
+		if(ecoreExporter.isPropertyValidForEAttribute(node))
 			newEAttribute = (EAttribute)newEStructuralFeature;
 		else
 			newEReference = (EReference)newEStructuralFeature;

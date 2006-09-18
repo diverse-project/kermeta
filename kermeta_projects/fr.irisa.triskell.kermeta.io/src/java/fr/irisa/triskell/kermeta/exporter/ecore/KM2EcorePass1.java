@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.27 2006-09-13 15:17:23 dtouzet Exp $
+/* $Id: KM2EcorePass1.java,v 1.28 2006-09-18 10:10:16 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -415,7 +415,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		
 		// If this is composite we have to check the type
 		// same for derived properties, it may have to be an attribute
-		if(ecoreExporter.isTypeValidForEAttibute(node.getType())){
+		if(ecoreExporter.isPropertyValidForEAttribute(node))
+		{
 			newEAttribute = EcoreFactory.eINSTANCE.createEAttribute();
 			newEStructuralFeature = newEAttribute;
 			newEAttribute.setID(node.isIsID());				
@@ -427,14 +428,14 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 		}
 		
 		// If the EStructuralFeature that is created is an EReference
-		boolean isContainment = node.isIsComposite() || node.isIsDerived();
 		if (newEReference!= null)
 		{
-			newEReference.setContainment(isContainment);
+			if (node.isIsDerived()) newEReference.setContainment(false);
+			newEReference.setContainment(node.isIsComposite());
 		}
 		else
 		{
-			if (ecoreExporter.isTypeValidForEAttibute(node.getType()) && isContainment == false){
+			if (ecoreExporter.isPropertyValidForEAttribute(node) && !node.isIsComposite()){
 				//	attribute
 				ecoreExporter.messages.addWarning(
 						"The reference to type '"+ KMTHelper.getTypeQualifiedName(node.getType()) + 
@@ -446,7 +447,7 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 					newEAttribute,
 					KM2Ecore.ANNOTATION,
 					KM2Ecore.ANNOTATION_ISCOMPOSITE_DETAILS,
-					isContainment?"true":"false",
+					node.isIsComposite()?"true":"false",
 					null);
 		}
 		
