@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchShortcut.java,v 1.11 2006-05-16 15:35:59 jmottu Exp $
+/* $Id: KermetaLaunchShortcut.java,v 1.12 2006-09-18 10:59:46 ftanguy Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLaunchShortcut.java
  * License   : EPL
@@ -9,13 +9,12 @@
  */
 package fr.irisa.triskell.kermeta.runner.launching;
 
+import org.eclipse.jface.viewers.StructuredSelection;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugPlugin;
@@ -43,13 +42,110 @@ import fr.irisa.triskell.kermeta.KermetaMessages;
  * A launch method cannot have any parameter in this iteration yet.
  */
 public class KermetaLaunchShortcut implements ILaunchShortcut {
-
+	
     private static final String ID_KERMETA_APPLICATION = "KermetaLaunchConfiguration";
-    private String ID_GROUP = "KermetaLaunchGroup";
-
-    public KermetaLaunchShortcut()
-    {}
+    //private String ID_GROUP = "KermetaLaunchGroup"; commented because it is of no use. See launchSelectedFile method.
+	
+	
+    ILaunchManager launchManager;
+    ILaunchConfigurationType configurationType;
     
+    public KermetaLaunchShortcut()
+    {
+    	launchManager	= 	DebugPlugin.getDefault().getLaunchManager();
+    	configurationType = launchManager.getLaunchConfigurationType(ID_KERMETA_APPLICATION);	
+    }
+	
+    /**
+     * Find every existing launch configuration which its project name corresponds to projectName, 
+     * 												its file name corresponds to fileName, 
+     * 												its class name corresponds to className and
+     * 												its operation name corresponds to operationName.  
+    @author François Tanguy
+    @param projectName The name of the project.
+    @param fileName The name of the file.
+    @param className The name of the class.
+    @param operationName The name of the operation.
+    @return List<ILaunchConfiguration> A list of launch configuration with the same project name, file name, class name and operation name.
+    */
+    List<ILaunchConfiguration> findLaunchConfigurations(String projectName, String fileName, String className, String operationName) {
+
+    	List<ILaunchConfiguration> existingLaunchConfigurations = new ArrayList<ILaunchConfiguration>();
+
+		try	{
+			
+			ILaunchConfiguration[]	tab	=	launchManager.getLaunchConfigurations(configurationType);
+			int		index	=	0;
+    		
+			while	(	index < tab.length	) 	{
+				// getting the launch configuration's attributes
+				java.util.Map attributes	=	tab[index].getAttributes();		
+				if (
+						(attributes.get(KermetaLaunchConfiguration.KM_PROJECTNAME).toString().equals(projectName))
+					&&	(attributes.get(KermetaLaunchConfiguration.KM_FILENAME).toString().equals(fileName))
+					&& 	(attributes.get(KermetaLaunchConfiguration.KM_CLASSQNAME).toString().equals(className))
+					&& 	(attributes.get(KermetaLaunchConfiguration.KM_OPERATIONNAME).toString().equals(operationName))
+					)	{				
+					existingLaunchConfigurations.add(tab[index]);
+				}
+				index++;
+			}
+		// catch exceptions from getLaunchConfigurations and getAttributes methods.				
+    	}	catch	(CoreException ce)	{
+    		System.err.println("TODO : catch properly this core exception");
+    		ce.printStackTrace();
+    	}
+    	
+    	return existingLaunchConfigurations;
+  
+    }
+    
+    
+    /**
+     * Create a configuration for the specified arguments that define the given project.
+     * @param project
+     * @param fileName the selected file
+     * @param className
+     * @param opName
+     * @return
+     */
+	protected ILaunchConfiguration createConfiguration(
+			String projectName, String fileName, String className, 
+			String opName) {
+				
+		ILaunchConfiguration config= null;
+		try {
+			String configIdentifier = fileName+"_"+className+"_"+opName;
+			configIdentifier = configIdentifier.replaceAll(":","__");  // replace the : that are not correctly handled by Eclipse generateUniqueLaunchConfigurationNameFrom
+			ILaunchConfigurationWorkingCopy wc = configurationType.newInstance(
+			        null, launchManager.generateUniqueLaunchConfigurationNameFrom(
+			        		configIdentifier)); 
+			
+			wc.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, fileName);
+			wc.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, className);
+			wc.setAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, opName);
+			wc.setAttribute(KermetaLaunchConfiguration.KM_PROJECTNAME, projectName);
+			
+			config= wc.doSave();
+		} catch (CoreException ce) {
+		    System.err.println("TODO : catch properly this core exception");
+			ce.printStackTrace();
+		}
+		return config;
+	}
+    
+	
+	/**
+	 * Launch the configuration given in parameters in the given mode
+	 * @param mode run, or debug
+	 * @param config a KermetaLaunchConfiguration
+	 */
+	protected void launchConfiguration(String mode, ILaunchConfiguration config) {
+		if (config != null) {
+			DebugUITools.launch(config, mode);	
+		}
+	}
+	
     /* (non-Javadoc)
      * @see org.eclipse.debug.ui.ILaunchShortcut#launch(org.eclipse.jface.viewers.ISelection, java.lang.String)
      */
@@ -114,96 +210,6 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 
     }
     
-    /**
-     * Create a configuration for the specified arguments that define the given project.
-     * @param project
-     * @param fileName the selected file
-     * @param className
-     * @param opName
-     * @return
-     */
-	protected ILaunchConfiguration createConfiguration(
-			IProject project, String fileName, String className, 
-			String opName) {
-				
-		ILaunchConfiguration config= null;
-		try {
-			ILaunchConfigurationType configType= getKermetaLaunchConfigurationType();
-			String configIdentifier = fileName+"_"+className+"_"+opName;
-			configIdentifier = configIdentifier.replaceAll(":","__");  // replace the : that are not correctly handled by Eclipse generateUniqueLaunchConfigurationNameFrom
-			ILaunchConfigurationWorkingCopy wc = configType.newInstance(
-			        null, getLaunchManager().generateUniqueLaunchConfigurationNameFrom(
-			        		configIdentifier)); 
-			
-			wc.setAttribute(KermetaLaunchConfiguration.KM_FILENAME, fileName);
-			wc.setAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, className);
-			wc.setAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME, opName);
-			
-			config= wc.doSave();
-		} catch (CoreException ce) {
-		    System.err.println("TODO : catch properly this core exception");
-			ce.printStackTrace();
-		}
-		return config;
-	}
-
-	/**
-	 * Launch the configuration given in parameters in the given mode
-	 * @param mode run, or debug
-	 * @param config a KermetaLaunchConfiguration
-	 */
-	protected void launchConfiguration(String mode, ILaunchConfiguration config) {
-		if (config != null) {
-			DebugUITools.launch(config, mode);
-			
-		}
-	}
-
-	/**
-	 * Find an existing configuration given the parameters
-	 * Note : thanks to Junit plugin sources.
-	 * @param mode
-	 * @param filePath
-	 * @param className
-	 * @param opName
-	 * @return
-	 */
-	private ILaunchConfiguration findLaunchConfiguration(String mode, String filePath, String className, String opName) {
-		ILaunchConfigurationType configType= getKermetaLaunchConfigurationType();
-		List candidateConfigs= Collections.EMPTY_LIST;
-		try {
-		    // Get the existing configs previously created by the user
-			ILaunchConfiguration[] configs= getLaunchManager().getLaunchConfigurations(configType);
-			candidateConfigs= new ArrayList(configs.length);
-			// Is one of them corresponding to our current file?
-			for (int i= 0; i < configs.length; i++) {
-				ILaunchConfiguration config= configs[i];
-				if ((config.getAttribute(KermetaLaunchConfiguration.KM_FILENAME, "").equals("")) && //$NON-NLS-1$
-					!(config.getAttribute(KermetaLaunchConfiguration.KM_CLASSQNAME, "").equals("")) && //$NON-NLS-1$
-					!(config.getAttribute(KermetaLaunchConfiguration.KM_OPERATIONNAME,"").equals("")))  //$NON-NLS-1$
-				{  //$NON-NLS-1$
-						candidateConfigs.add(config);
-				}
-			}
-		} catch (CoreException e) {
-			System.err.println("TODO : implement core exception handling");
-		}
-		
-		// If there are no existing configs associated with the IType, create one.
-		// If there is exactly one config associated with the IType, return it.
-		// Ignore the other case, i.e more than one config.
-		int candidateCount= candidateConfigs.size();
-		if (candidateCount < 1) {
-		    
-			return null;
-		} else if (candidateCount == 1) {
-			return (ILaunchConfiguration) candidateConfigs.get(0);
-		} else {
-		    System.err.println("It looks like there is more than one available config! We'll create a new default one.");
-		}
-		return null;
-	}
-	
 	/***
 	 * Basic launch : Launch the file with the default tags contained in this file.
 	 * (in this iteration, the tags are associated to the root package. Later, we will
@@ -220,61 +226,48 @@ public class KermetaLaunchShortcut implements ILaunchShortcut {
 	    {
 	        // Get the @mainClass and @mainOperation tags (if they exist)
 	        ArrayList point  = KermetaRunHelper.findEntryPoint(unit);
-	        String mainClass = (String)point.get(0);
-	        String mainOp    = (String)point.get(1);
+	        String className = (String)point.get(0);
+	        String operationName    = (String)point.get(1);
 	        // FIXME : wrong path (not file system path)
 	        String fileName  = ifile.getFullPath().makeAbsolute().toOSString(); 
+	        String projectName = ifile.getProject().getName();
 	        
-	        ILaunchConfiguration config = findLaunchConfiguration(
-	                mode, 
-	                fileName,
-	                mainClass,
-	                mainOp
-	        );
+	        List<ILaunchConfiguration> launchConfigurations = findLaunchConfigurations(projectName, fileName, className, operationName);
+	        ILaunchConfiguration launchConfiguration = null;
 	        
-	        if (config == null ) {
-	            config= createConfiguration(
-	                    ifile.getProject(),
-	                    fileName,
-	                    mainClass,
-	                    mainOp
-	            );
+	        switch (launchConfigurations.size()) {
+	        
+	        case 0	:	
+	        	// If no launch configuration found, let us use a new one.
+        		launchConfiguration= createConfiguration(
+    					projectName,
+    					fileName,
+    					className,
+    					operationName
+        		);	
+        		launchConfiguration(mode, launchConfiguration);
+        		break;
+	        case 1	:
+	        	// If one launch configuration found, let us use it.
+	        	launchConfiguration = launchConfigurations.get(0);
+	        	launchConfiguration(mode, launchConfiguration);
+	        	break;
+	        default :
+	        	// If more than one launch configuration found, let us ask the user which one to use.
+	        	// openLaunchConfigurationDialogOnGroup requires a string used as a group identifier.
+	        	// Here we use "org.eclipse.debug.ui.launchGroup.run" because ID_GROUP = "KermetaLaunchGroup" does not work.
+	        	DebugUITools.openLaunchConfigurationDialogOnGroup(new Shell(),
+                         new StructuredSelection(launchConfigurations.get(0)),
+                         "org.eclipse.debug.ui.launchGroup.run");
+	        	break;
 	        }
-
-	        // Open configuration handler if mainClass and mainOp are not provided
 	        
-	        if (mainClass.equals("") || mainOp.equals(""))
-	        {
-	            //FIXME : new Shell() -> 
-	            DebugUITools.openLaunchConfigurationDialog(new Shell(), config, ID_GROUP, null );
-	        }
-	        
-	        launchConfiguration(mode, config);
 	    }
 	    // Thrown by findEntryPoint
 	    catch (Throwable e)
 	    {
+	    	e.printStackTrace();
 	        MessageDialog.openError(new Shell(), "Kermeta interpreter error",e.getMessage());
 	    }
 	}
-
-	
-	
-    /**
-     * Get the Kermeta configuration type (there is only one..)
-     * @return
-     */
-    protected ILaunchConfigurationType getKermetaLaunchConfigurationType()
-    {
-		ILaunchManager lm= DebugPlugin.getDefault().getLaunchManager();
-		return lm.getLaunchConfigurationType(ID_KERMETA_APPLICATION);
-    }
-	
-	protected ILaunchManager getLaunchManager()
-	{
-	    return DebugPlugin.getDefault().getLaunchManager();
-	}
-
-	
-	
 }
