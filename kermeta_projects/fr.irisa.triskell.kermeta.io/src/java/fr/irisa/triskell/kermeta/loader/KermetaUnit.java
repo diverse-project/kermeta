@@ -1,4 +1,4 @@
-/* $Id: KermetaUnit.java,v 1.72 2006-09-13 15:17:23 dtouzet Exp $
+/* $Id: KermetaUnit.java,v 1.73 2006-09-18 13:33:12 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : KermetaUnit.java
  * License : EPL
@@ -711,7 +711,7 @@ public abstract class KermetaUnit {
 	 * @param name
 	 * @return
 	 */
-	public Constraint getConstraintByName(ClassDefinition c, String name) {
+	public Constraint getInvariantByName(ClassDefinition c, String name) {
 		EList invs = c.getInv();
 		for (int i=0; i<invs.size(); i++) {
 			Constraint inv = (Constraint) invs.get(i);
@@ -720,6 +720,41 @@ public abstract class KermetaUnit {
 		}
 		return null;
 	}
+	
+	
+	/**
+	 * Get a PreCondition by its name in Operation op
+	 * @param op
+	 * @param name
+	 * @return
+	 */
+	public Constraint getPreConditionByName(Operation op, String name) {
+		EList preConds = op.getPre();
+		for (int i=0; i<preConds.size(); i++) {
+			Constraint pre = (Constraint) preConds.get(i);
+			if(pre.getName().equals(name))
+				return pre;
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Get a PostCondition by its name in Operation op
+	 * @param op
+	 * @param name
+	 * @return
+	 */
+	public Constraint getPostConditionByName(Operation op, String name) {
+		EList postConds = op.getPost();
+		for (int i=0; i<postConds.size(); i++) {
+			Constraint post = (Constraint) postConds.get(i);
+			if(post.getName().equals(name))
+				return post;
+		}
+		return null;
+	}
+	
 	
 	/**
 	 * Get an operation by its name. search in the inheritance tree
@@ -756,14 +791,52 @@ public abstract class KermetaUnit {
 	 * @param name
 	 * @return
 	 */
-	public Constraint findConstraintByName(ClassDefinition c, String name) {
-		Constraint result = getConstraintByName(c, name);
+	public Constraint findInvariantByName(ClassDefinition c, String name) {
+		Constraint result = getInvariantByName(c, name);
 		if (result != null) return result;
 		EList superclasses = c.getSuperType();
 		for(int i=0; i<superclasses.size();i++) {
 			ClassDefinition sc = (ClassDefinition) ((fr.irisa.triskell.kermeta.language.structure.Class)superclasses.get(i)).getTypeDefinition();
-			result = findConstraintByName(sc, name);
+			result = findInvariantByName(sc, name);
 			if (result != null) return result;
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Get a PreCondition by its name in Operation op and its superoperations
+	 * @param op
+	 * @param name
+	 * @return
+	 */
+	public Constraint findPreConditionByName(Operation op, String name) {
+		Constraint result = getPreConditionByName(op, name);
+		if (result != null) return result;
+		
+		Operation superOp = op.getSuperOperation();
+		if(superOp != null) {
+			result = findPreConditionByName(superOp, name);
+			if(result != null) return result;
+		}
+		return null;
+	}
+	
+	
+	/**
+	 * Get a PostCondition by its name in Operation op and its superoperations
+	 * @param op
+	 * @param name
+	 * @return
+	 */
+	public Constraint findPostConditionByName(Operation op, String name) {
+		Constraint result = getPostConditionByName(op, name);
+		if (result != null) return result;
+		
+		Operation superOp = op.getSuperOperation();
+		if(superOp != null) {
+			result = findPostConditionByName(superOp, name);
+			if(result != null) return result;
 		}
 		return null;
 	}

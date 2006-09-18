@@ -1,4 +1,4 @@
-/* $Id: Ecore2KM.java,v 1.6 2006-09-13 15:17:23 dtouzet Exp $
+/* $Id: Ecore2KM.java,v 1.7 2006-09-18 13:33:12 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KM.java
  * License    : EPL
@@ -67,7 +67,7 @@ public class Ecore2KM {
 	 * The structure enbales to map the visited "invariants annotations" EAnnotations to the allocated
 	 *  Tag elements.
 	 */
-	public Hashtable<EAnnotation,Constraint> invs_mapping = new Hashtable<EAnnotation,Constraint>();
+	public Hashtable<EAnnotation,Constraint> constraints_mapping = new Hashtable<EAnnotation,Constraint>();
 	
 	public Ecore2KM(Resource resource, EcoreUnit unit)
 	{

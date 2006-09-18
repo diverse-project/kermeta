@@ -1,4 +1,4 @@
-/* $Id: KMT2KMPass7.java,v 1.19 2006-09-13 15:17:23 dtouzet Exp $
+/* $Id: KMT2KMPass7.java,v 1.20 2006-09-18 13:33:12 dtouzet Exp $
  * Project : Kermeta (First iteration)
  * File : KMT2KMPrettyPrinter.java
  * License : GPL
@@ -49,6 +49,8 @@ import fr.irisa.triskell.kermeta.ast.Operation;
 import fr.irisa.triskell.kermeta.ast.OperationExpressionBody;
 import fr.irisa.triskell.kermeta.ast.PackageDecl;
 import fr.irisa.triskell.kermeta.ast.Param;
+import fr.irisa.triskell.kermeta.ast.Postcondition;
+import fr.irisa.triskell.kermeta.ast.Precondition;
 import fr.irisa.triskell.kermeta.ast.Property;
 import fr.irisa.triskell.kermeta.ast.Tag;
 import fr.irisa.triskell.kermeta.ast.TopLevelDecl;
@@ -60,8 +62,7 @@ import fr.irisa.triskell.kermeta.language.structure.NamedElement;
 //import fr.irisa.triskell.kermeta.language.structure.FOperation;
 import fr.irisa.triskell.kermeta.language.structure.Package;
 import fr.irisa.triskell.kermeta.language.structure.PrimitiveType;
-//import fr.irisa.triskell.kermeta.language.structure.FProperty;
-//import fr.irisa.triskell.kermeta.language.structure.Tag;
+
 
 /**
  * Pass that adds the comments (annotations) as tags of a model element (class, assignment,
@@ -122,13 +123,45 @@ public class KMT2KMPass7 extends KMT2KMPass {
         }
         else if (annNode instanceof Invariant) {
         	name = ((Invariant)annNode).getName().getText();
-        	e = builder.findConstraintByName(builder.current_class, name);
+        	e = builder.findInvariantByName(builder.current_class, name);
         	builder.current_constraint = (fr.irisa.triskell.kermeta.language.structure.Constraint) e;
         }
         
         if (e != null) // we should have found the object however...
             processAnnotations(annLst, e);
         return super.beginVisit(node);
+    }
+    
+    
+    /* (non-Javadoc)
+     * @see fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor#beginVisit(fr.irisa.triskell.kermeta.ast.Precondition)
+     */
+    public boolean beginVisit(Precondition node) {
+        Annotations annLst = node.getAnnotations();
+        fr.irisa.triskell.kermeta.language.structure.Constraint c = null;
+        String name = node.getName().getText();
+        c = builder.findPreConditionByName(builder.current_operation, name);
+        builder.current_constraint = c;
+
+        if (c != null) // we should have found the object however...
+            processAnnotations(annLst, c);
+        return false;
+    }
+    
+    
+    /* (non-Javadoc)
+     * @see fr.irisa.triskell.kermeta.ast.KermetaASTNodeVisitor#beginVisit(fr.irisa.triskell.kermeta.ast.Postcondition)
+     */
+    public boolean beginVisit(Postcondition node) {
+        Annotations annLst = node.getAnnotations();
+        fr.irisa.triskell.kermeta.language.structure.Constraint c = null;
+        String name = node.getName().getText();
+        c = builder.findPostConditionByName(builder.current_operation, name);
+        builder.current_constraint = c;
+
+        if (c != null) // we should have found the object however...
+            processAnnotations(annLst, c);
+        return false;
     }
  
     

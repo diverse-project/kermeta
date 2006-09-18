@@ -1,4 +1,4 @@
-/* $Id: KM2KMTPrettyPrinter.java,v 1.38 2006-09-13 15:17:23 dtouzet Exp $
+/* $Id: KM2KMTPrettyPrinter.java,v 1.39 2006-09-18 13:33:12 dtouzet Exp $
  * Project   : Kermeta.io
  * File      : KM2KMTPrettyPrinter.java
  * License   : EPL
@@ -89,6 +89,11 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	protected String root_pname;
 	protected String current_pname;
 	
+	/**
+	 * Boolean variable used to manage the prefix printing 
+	 */
+	protected boolean alreadyPrefixed = false;
+	
 	/** If the visitor (i.e This printer:)) is currently visiting a typedefinition, this
 	 *  boolean is set to true (this allows the visitor to print differently some things
 	 *  according to the context inside which it is (i.e typeDefintion or not typeDefinition) */
@@ -165,7 +170,12 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitConstraint(Constraint node) {
 		String result = ppTags(node.getTag());
-		result += node.getStereotype().toString();
+		
+		if(alreadyPrefixed)
+			result += node.getStereotype().toString();
+		else
+			result += getPrefix() + node.getStereotype().toString();
+
 		result += node.getName()!=null ? " "+node.getName():"";
 		result += " is\n";
 		if (node.getBody() != null) {
@@ -202,6 +212,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitBlock(Block node) {
 		String result = "do\n";
+		alreadyPrefixed = false;
 		pushPrefix();
 		result += ppCRSeparatedNode(node.getStatement());
 		
@@ -229,13 +240,25 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		return result;
 	}
 	
+
 	public String ppCRSeparatedNode(EList expressions) {
 		String result = "";
-		Iterator it = expressions.iterator();
-		while(it.hasNext()) {
-		    EObject next = (EObject)it.next();
-			result += getPrefix() + this.accept(next) + "\n";
+		int expNb = expressions.size();
+		for(int i=0; i<expNb; i++) {
+			if((i==0) && (alreadyPrefixed) && (!prefix.equals(prefixTab))) {
+				result += this.accept((EObject)expressions.get(i)) + "\n";
+			}
+			else if((i==0) && (!alreadyPrefixed)) {
+				alreadyPrefixed = true;
+				result += getPrefix() + this.accept((EObject)expressions.get(i)) + "\n";
+			}
+			else {
+				alreadyPrefixed = true;
+				result += getPrefix() + this.accept((EObject)expressions.get(i)) + "\n";
+			}
 		}
+
+		if(expNb > 0) alreadyPrefixed = false;
 		return result;
 	}
 	
@@ -354,6 +377,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		result += "\n" + getPrefix() + "{\n";
 		pushPrefix();
+		
 		result += ppCRSeparatedNode(node.getInv());
 		result += ppCRSeparatedNode(node.getOwnedAttribute());
 		result += ppCRSeparatedNode(node.getOwnedOperation());
@@ -397,15 +421,26 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	}
 	
 	/** Prettyprint the annotations */
-	public String ppTags(EList tagList)
-	{
-	    String result = "";
-	    for (int i=0; i< tagList.size(); i++)
-	    {
-	        result += this.accept((EObject)tagList.get(i));
-	    }
+	public String ppTags(EList tagList) {
+		String result = "";
+	    
+		int tagNb = tagList.size();
+		for(int i=0; i<tagNb; i++) {
+			if((i==0) && (alreadyPrefixed)) {
+				result += this.accept((EObject)tagList.get(i)) + "\n";
+			}
+			else if((i==0) && (!alreadyPrefixed)) {
+				alreadyPrefixed = true;
+				result += getPrefix() + this.accept((EObject)tagList.get(i)) + "\n";
+			}
+			else {
+				result += getPrefix() + this.accept((EObject)tagList.get(i)) + "\n";
+			}
+		}
+		if(tagNb > 0) alreadyPrefixed = false;
 	    return result;
 	}
+	
 	/**
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.FConditionnal)
 	 */
@@ -414,6 +449,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		pushPrefix(); 
 		// Both type of ThenBody and ElseBody are "Block" (see also KMT2KMPrimitiveExpressionBuilder)
 		// And block textual syntax is already represented by "then..else..end"
+		alreadyPrefixed = false;
 		if (node.getThenBody() != null) 
 			result += this.ppCRSeparatedNode(((Block)node.getThenBody()).getStatement()) + "\n";
 		popPrefix();
@@ -514,6 +550,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		result += this.accept(node.getInitialization()) + "\n";
 		result += getPrefix() + "until " + this.accept(node.getStopCondition()) + "\n";
 		result += getPrefix() +"loop\n";
+		alreadyPrefixed = false;
 		pushPrefix();
 		// Precise type of Loop is always "Block" (see also KMT2KMPrimitiveExpressionBuilder)
 		// And block textual syntax is already represented by "loop..end"
@@ -550,8 +587,14 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	public Object visitOperation(Operation node) {
 		setParent(node);
 		String result = ppTags(node.getTag());
-		if (node.getSuperOperation() != null) result += "method ";
-		else result += "operation ";
+		
+		if(!alreadyPrefixed) result += getPrefix();
+		
+		if (node.getSuperOperation() != null)
+			result += "method ";
+		else
+			result += "operation ";
+		
 		result += KMTHelper.getMangledIdentifier(node.getName());
 		if (node.getTypeParameter().size() > 0) {
 			result += "<";
@@ -576,27 +619,31 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 		}
 		if (node.getRaisedException().size() > 0) {
 			result += " raises " + ppComaSeparatedNodes(node.getRaisedException());
-		} 
-		if (node.getBody() != null) {
-			result += " is\n";
-			pushPrefix();
-			result += ppCRSeparatedNode(node.getPre());
-			result += getPrefix() + this.accept(node.getBody());
-			result += "\n" + ppCRSeparatedNode(node.getPost());
-			popPrefix();
 		}
-		else if (node.isIsAbstract()) result += " is abstract";
+		
+		result += " is\n";
+		pushPrefix();
+		alreadyPrefixed = false;
+		result += ppCRSeparatedNode(node.getPre());
+		
+		if (node.getBody() != null) {
+			result += getPrefix() + this.accept(node.getBody()) + "\n";
+			result += ppCRSeparatedNode(node.getPost());
+		}
+		else if (node.isIsAbstract()) {
+			result += getPrefix() + "abstract\n";
+			result += ppCRSeparatedNode(node.getPost());
+		}
 		else {
-			result += " is\n";
-			result += ppCRSeparatedNode(node.getPre());
 			result += getPrefix() + "do\n";
 			pushPrefix();
 			result += getPrefix() + "//TODO: implement operation " + node.getName() + "\n"; 
-			result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new \n";
+			result += getPrefix() + "raise kermeta::exceptions::NotImplementedException.new\n";
 			result += ppCRSeparatedNode(node.getPost());
 			popPrefix();
-			result += getPrefix() + "end";
+			result += getPrefix() + "end\n";
 		}
+		popPrefix();
 		return result;
 	}
 	
@@ -662,7 +709,10 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	public Object visitProperty(Property node) {
 		setParent(node);
 	    String result = ppTags(node.getTag());
-		if (node.isIsDerived()) result += "property ";
+	    
+	    if(!alreadyPrefixed) result += getPrefix();
+		
+	    if (node.isIsDerived()) result += "property ";
 		else if (node.isIsComposite()) result += "attribute ";
 		else result += "reference ";
 		if (node.isIsReadOnly()) result += "readonly ";
@@ -695,6 +745,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 			}
 			popPrefix();
 		}
+		result += "\n";
 		return result;
 	}
 	
@@ -980,13 +1031,12 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
      * Tag is used to store comments in the source code.
      * @see fr.irisa.triskell.kermeta.visitor.KermetaVisitor#visit(fr.irisa.triskell.kermeta.language.structure.Tag)
      */
-    public Object visitTag(Tag node)
-    {
+    public Object visitTag(Tag node) {
         String result = "";
         // User can choose to add a "@kdoc" tag
         if (node.getName().equals(KMT2KMPass7.KERMETADOC) && !node.getValue().startsWith("/**"))
         {
-            result = "/**" + node.getValue() + "*/\n";
+            result = "/**" + node.getValue() + "*/";
         }
         // Or simple comment /** */ delimitor TODO also remove pretty "*" 
         else if (node.getValue().startsWith("/**"))
@@ -995,7 +1045,7 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
         }
         else
         {
-            result = "@"+node.getName()+" \""+node.getValue()+"\"\n";
+            result = "@"+node.getName()+" \""+node.getValue()+"\"";
         }
         return result;
     }
@@ -1036,7 +1086,6 @@ public class KM2KMTPrettyPrinter extends KermetaOptimizedVisitor {
 	 */
 	public Tag[] getFTagsByName(EList ftagList, String name)
 	{
-	    
 	    Iterator it = ftagList.iterator();
 	    Tag[] result_tagArray = new Tag[10];
 	    int i = 0;

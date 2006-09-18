@@ -1,4 +1,4 @@
-/* $Id: Ecore2KMPass4.java,v 1.2 2006-09-13 15:17:23 dtouzet Exp $
+/* $Id: Ecore2KMPass4.java,v 1.3 2006-09-18 13:33:12 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : Ecore2KMPass3.java
  * License    : EPL
@@ -83,8 +83,8 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	{
 		exporter.current_classdef = (ClassDefinition)visitorPass1.eclassifier_typedefinition_map.get(node);
 		visitorPass1.isClassTypeOwner = true;
-		acceptList(((EClass)node).getEOperations());
 		
+		acceptList(((EClass)node).getEOperations());
 		acceptList(((EClass)node).getEAnnotations());
 
 		return exporter.current_classdef;
@@ -96,13 +96,14 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	 */
 	public Object visit(EAnnotation node) {
 
-		// Visit annotation details that are dedicated to operation
+		// Visit annotation details that are dedicated to operation:
+		//  - operation pre and post conditions 
 		if (node.getSource().equals(KM2Ecore.ANNOTATION_INV_DOC)) {
 			EList refs = node.getReferences();
 			
 			if(! refs.isEmpty()) {
 				EAnnotation tgtAnnot = (EAnnotation) refs.get(0);
-				Constraint tgtInv = exporter.invs_mapping.get(tgtAnnot);
+				Constraint tgtInv = exporter.constraints_mapping.get(tgtAnnot);
 
 				for ( Object annot_name : node.getDetails().keySet() ) {
 					Tag tag = unit.struct_factory.createTag();
@@ -121,6 +122,9 @@ public class Ecore2KMPass4 extends EcoreVisitor {
 	 */
 	public Object visit(EOperation node) {
 		exporter.current_op = visitorPass1.operations.get(node);
+		
+		// Visit operation annotations
+		acceptList(((EOperation)node).getEAnnotations());
 		
 		if (Ecore2KM.isQuickFixEnabled) {
 			

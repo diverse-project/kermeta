@@ -1,4 +1,4 @@
-/* $Id: KM2EcorePass1.java,v 1.28 2006-09-18 10:10:16 zdrey Exp $
+/* $Id: KM2EcorePass1.java,v 1.29 2006-09-18 13:33:12 dtouzet Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2EcoreExporter.java
  * License    : EPL
@@ -201,12 +201,11 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 					throw new KM2ECoreConversionException("An operation in package '"+node.getName() + "' could not be resolved");				
 			}
 			
-			// Create an annotation to hold the operation inv	
+			// Create an annotation to hold the class inv	
 			for (Object next : node.getInv()) {
 				Constraint inv = (Constraint) next;
 				
-				// Patch David:
-				// Dealing with the annotations of the current invariant
+				// Dealing with the current invariant (=> saved as an annotation)
 				String invBody = (String) prettyPrinter.accept(inv.getBody());
 				String invName = inv.getName();
 				EAnnotation eAnnot = 
@@ -217,6 +216,8 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 							invBody,
 							null);
 
+				// Dealing with the annotations of the current invariant
+				// (=> saved as annotations referring the invariant annotation)
 				for (Object nextTag : inv.getTag()) {
 					Tag t = (Tag) nextTag;
 					String tagKey = t.getName();
@@ -334,26 +335,60 @@ public class KM2EcorePass1 extends KermetaOptimizedVisitor{
 					null);	
 		}
 		
-		// Create an annotation to hold the operation pre	
+		// Create an annotation to hold the pre operations	
 		for (Object next : node.getPre()){
-			String preString = (String)prettyPrinter.accept((Constraint)next);
-			ecoreExporter.addAnnotation( 
+			Constraint preCond = (Constraint) next;
+			String preBody = (String) prettyPrinter.accept(preCond.getBody());
+			String preName = preCond.getName();
+			EAnnotation eAnnot =
+				ecoreExporter.addConstraintAnnotation( 
 					newEOperation,
-					KM2Ecore.ANNOTATION,
 					KM2Ecore.ANNOTATION_PRE,
-					preString,
+					preName,
+					preBody,
 					null);
+			
+			// Dealing with the annotations of the current precond
+			// (=> saved as annotations referring the precond annotation)
+			for (Object nextTag : preCond.getTag()) {
+				Tag t = (Tag) nextTag;
+				String tagKey = t.getName();
+				String tagValue = t.getValue();
+				ecoreExporter.addConstraintAnnotation(
+					newEOperation,
+					KM2Ecore.ANNOTATION_INV_DOC,
+					tagKey,
+					tagValue,
+					eAnnot);
+			}
 		}
 			
-		// Create an annotation to hold the operation post
+		// Create an annotation to hold the post operations
 		for (Object next : node.getPost()){
-			String postString = (String)prettyPrinter.accept((Constraint)next);
-			ecoreExporter.addAnnotation( 
+			Constraint postCond = (Constraint) next;
+			String postBody = (String) prettyPrinter.accept(postCond.getBody());
+			String postName = postCond.getName();
+			EAnnotation eAnnot =
+				ecoreExporter.addConstraintAnnotation( 
 					newEOperation,
-					KM2Ecore.ANNOTATION,
 					KM2Ecore.ANNOTATION_POST,
-					postString,
+					postName,
+					postBody,
 					null);
+
+			// Dealing with the annotations of the current postcond
+			// (=> saved as annotations referring the postcond annotation)
+			for (Object nextTag : postCond.getTag()) {
+				Tag t = (Tag) nextTag;
+				String tagKey = t.getName();
+				String tagValue = t.getValue();
+				ecoreExporter.addConstraintAnnotation(
+					newEOperation,
+					KM2Ecore.ANNOTATION_INV_DOC,
+					tagKey,
+					tagValue,
+					eAnnot);
+			}
 		}
 		
 		newEOperation.setOrdered(node.isIsOrdered());
