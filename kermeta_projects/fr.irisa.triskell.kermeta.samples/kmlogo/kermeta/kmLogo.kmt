@@ -1,4 +1,4 @@
-/* $Id: kmLogo.kmt,v 1.5 2006-06-06 14:40:13 dvojtise Exp $
+/* $Id: kmLogo.kmt,v 1.6 2006-09-18 14:36:29 dvojtise Exp $
  * Project    : fr.irisa.triskell.kermeta.samples
  * File       : kmLogo.kmt
  * License    : EPL
@@ -29,23 +29,23 @@ package semanticDomain
 		reference drawings : Segment[0..*]
 		attribute heading : Integer
 		attribute penUp : Boolean
-		method reset() is do
+		operation reset() is do
 			position := Point.new
 			position.x := 0
 			position.y := 0
 			heading := 0
 			drawings := void
 		end
-		method setPenUp(b : Boolean) is do
+		operation setPenUp(b : Boolean) is do
 			penUp := b
 		end
-		method rotate(angle : Integer) is do
+		operation rotate(angle : Integer) is do
 			heading := heading + angle
 			// let's approxiamte a modulo
 			if heading < 0 then heading := heading + 360 end
 			if heading > 360 then heading := heading - 360 end
 		end
-		method move(dx : Integer, dy : Integer)  is do
+		operation move(dx : Integer, dy : Integer)  is do
 			var newPos : Point
 			newPos := position.getDelta(dx,dy)
 			if penUp then
@@ -58,7 +58,7 @@ package semanticDomain
 			end
 			position := newPos
 		end
-		method forward(steps : Integer)  is do
+		operation forward(steps : Integer)  is do
 		// let's approximate sin/cos for square moves only
 			if heading == 0 then move (0,steps) end
 			if heading == 90 then move (steps,0) end
@@ -70,7 +70,7 @@ package semanticDomain
 	{
 		attribute x : Integer
 		attribute y : Integer
-		method getDelta(dx : Integer, dy : Integer) : Point is do
+		operation getDelta(dx : Integer, dy : Integer) : Point is do
 			result := Point.new
 			result.x := x + dx
 			result.y := y + dy			
@@ -83,7 +83,7 @@ package semanticDomain
 	{
 		reference origin : Point[1..1]
 		reference destination : Point[1..1]
-		method make (orig : Point, dest : Point) is do
+		operation make (orig : Point, dest : Point) is do
 			origin := orig
 			destination := dest
 		end
@@ -245,22 +245,22 @@ package actions
 {
 	abstract class AbstractVisitor
 	{
-		method visitBack(node : abstractSyntax::Back) is abstract
-		method visitForward(node : abstractSyntax::Forward) is abstract
-		method visitLeft(node : abstractSyntax::Left) is abstract
-		method visitRight(node : abstractSyntax::Right) is abstract
-		method visitPenDown(node : abstractSyntax::PenDown) is abstract
-		method visitPenUp(node : abstractSyntax::PenUp) is abstract
-		method visitClear(node : abstractSyntax::Clear) is abstract
-		method visitBinaryExp(node : abstractSyntax::BinaryExp) is abstract
-		method visitConstant(node : abstractSyntax::Constant) is abstract
-		method visitProcCall(node : abstractSyntax::ProcCall) is abstract
-		method visitProcDeclaration(node : abstractSyntax::ProcDeclaration) is abstract
-		method visitBlock(node : abstractSyntax::Block) is abstract
-		method visitIf(node : abstractSyntax::If) is abstract
-		method visitRepeat(node : abstractSyntax::Repeat) is abstract
-		method visitWhile(node : abstractSyntax::While) is abstract
-		method visitVariable(node : abstractSyntax::Variable) is abstract
+		operation visitBack(node : abstractSyntax::Back) is abstract
+		operation visitForward(node : abstractSyntax::Forward) is abstract
+		operation visitLeft(node : abstractSyntax::Left) is abstract
+		operation visitRight(node : abstractSyntax::Right) is abstract
+		operation visitPenDown(node : abstractSyntax::PenDown) is abstract
+		operation visitPenUp(node : abstractSyntax::PenUp) is abstract
+		operation visitClear(node : abstractSyntax::Clear) is abstract
+		operation visitBinaryExp(node : abstractSyntax::BinaryExp) is abstract
+		operation visitConstant(node : abstractSyntax::Constant) is abstract
+		operation visitProcCall(node : abstractSyntax::ProcCall) is abstract
+		operation visitProcDeclaration(node : abstractSyntax::ProcDeclaration) is abstract
+		operation visitBlock(node : abstractSyntax::Block) is abstract
+		operation visitIf(node : abstractSyntax::If) is abstract
+		operation visitRepeat(node : abstractSyntax::Repeat) is abstract
+		operation visitWhile(node : abstractSyntax::While) is abstract
+		operation visitVariable(node : abstractSyntax::Variable) is abstract
 		
 	}
 	class Interpreter inherits AbstractVisitor
