@@ -1,4 +1,4 @@
-/* $Id: InternalIOConsole.java,v 1.5 2006-09-19 14:35:01 zdrey Exp $
+/* $Id: InternalIOConsole.java,v 1.6 2006-09-19 14:37:55 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.runner
  * File       : MessageConsole.java
  * License    : EPL
@@ -57,7 +57,6 @@ public class InternalIOConsole extends IOConsole implements IDebugEventSetListen
 
 	public void handleDebugEvents(DebugEvent[] events) {
 		// TODO Auto-generated method stub
-		System.err.println("debug event is sent:  " + events);
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
