@@ -1,4 +1,4 @@
-/* $Id: KermetaInterpreter.java,v 1.23 2006-07-21 06:59:40 dvojtise Exp $
+/* $Id: KermetaInterpreter.java,v 1.24 2006-09-19 14:46:00 zdrey Exp $
  * Project : Kermeta.interpreter
  * File : Run.java
  * License : EPL
@@ -235,7 +235,8 @@ public class KermetaInterpreter {
 	
 	public void setKStream(KermetaIOStream stream)
 	{
-	    memory.getROFactory().setKermetaIOStream(stream);
+		memory.getROFactory().setKermetaIOStream(stream);
+	    stream.setKermetaInterpreter(this);
 	}
 	
 	public KermetaIOStream getKStream() { return memory.getROFactory().getKermetaIOStream();} 

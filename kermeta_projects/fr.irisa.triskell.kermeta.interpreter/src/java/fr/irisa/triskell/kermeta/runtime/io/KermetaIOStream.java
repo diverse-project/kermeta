@@ -1,4 +1,4 @@
-/* $Id: KermetaIOStream.java,v 1.5 2006-07-21 10:40:02 zdrey Exp $
+/* $Id: KermetaIOStream.java,v 1.6 2006-09-19 14:44:42 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaIOStream.java
  * License: GPL
@@ -9,11 +9,14 @@
  */
 package fr.irisa.triskell.kermeta.runtime.io;
 
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+
 /**
  * 
  */
 public interface KermetaIOStream {
  
+	
     public abstract void print(Object outputString);
     
     public abstract Object read(String prompt);
@@ -24,5 +27,7 @@ public interface KermetaIOStream {
     /** Initialize the console. This method should only be called once the
      * interpretation process has been started */
     public abstract void initialize();
+   
+    public abstract void setKermetaInterpreter(KermetaInterpreter ki);
 
 }

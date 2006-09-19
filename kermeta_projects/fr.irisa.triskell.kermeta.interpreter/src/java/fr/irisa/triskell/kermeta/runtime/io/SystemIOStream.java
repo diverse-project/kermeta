@@ -1,4 +1,4 @@
-/* $Id: SystemIOStream.java,v 1.3 2006-07-21 10:41:20 zdrey Exp $
+/* $Id: SystemIOStream.java,v 1.4 2006-09-19 14:44:42 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: SystemIOStream.java
  * License: GPL
@@ -13,15 +13,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+
 
 /**
  * 
  */
 public class SystemIOStream implements KermetaIOStream {
 
-    /**
-     * 
-     */
+	protected KermetaInterpreter kermetaInterpreter;
+
     public SystemIOStream() {
         super();
         // TODO Auto-generated constructor stub
@@ -57,6 +58,18 @@ public class SystemIOStream implements KermetaIOStream {
 	}
 
 	public void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void setKermetaInterpreter(KermetaInterpreter kInterpreter)
+	{
+		kermetaInterpreter = kInterpreter;
+	}
+
+	public KermetaInterpreter getKermetaInterpreter() { return kermetaInterpreter; }
+
+	public void setKermetaInterpreter() {
 		// TODO Auto-generated method stub
 		
 	}
