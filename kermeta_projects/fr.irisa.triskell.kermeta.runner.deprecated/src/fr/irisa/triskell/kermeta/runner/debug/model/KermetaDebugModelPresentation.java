@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugModelPresentation.java,v 1.9 2006-09-13 08:49:29 cfaucher Exp $
+/* $Id: KermetaDebugModelPresentation.java,v 1.10 2006-09-19 14:38:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugModelPresentation.java
  * License   : EPL
@@ -50,9 +50,6 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
     public void setAttribute(String attribute, Object value) {
     	if (attribute.equals(IDebugModelPresentation.DISPLAY_VARIABLE_TYPE_NAMES))
     		displayVariableTypeNames = ((Boolean)value).booleanValue();
-    	else
-    		System.err.println("setattribute?");
-
     }
 
     /**
@@ -175,7 +172,6 @@ public class KermetaDebugModelPresentation implements IDebugModelPresentation {
      * @see org.eclipse.jface.viewers.IBaseLabelProvider#dispose()
      */
     public void dispose() {
-    	// System.err.println("I disposed in KermetaDebugModelPresentation.");
     }
 
     /* (non-Javadoc)

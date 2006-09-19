@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.18 2006-08-10 08:55:02 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.19 2006-09-19 14:39:48 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -145,6 +145,7 @@ public class KermetaLauncher
             {
             	if (isConstraintMode) interpreter.launchConstraint();
             	else interpreter.launch();
+            	interpreter.getKStream().dispose();
     	        interpreter.setKStream(null);
     	        interpreter.freeJavaMemory();
     	        KermetaUnitFactory.resetDefaultLoader();
@@ -245,10 +246,9 @@ public class KermetaLauncher
             {
             	if (isConstraintMode) interpreter.launchConstraint();
             	else interpreter.launch();
-    	        interpreter.setKStream(null);
+            	console.dispose();
     	        interpreter.freeJavaMemory();
     	        KermetaUnitFactory.resetDefaultLoader();
-    	        console.dispose();
     	        return null;
             }
             else  // We launch an interpreter with a special "condition"

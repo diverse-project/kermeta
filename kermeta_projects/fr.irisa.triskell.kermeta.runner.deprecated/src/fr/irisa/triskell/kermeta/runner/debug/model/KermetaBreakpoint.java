@@ -1,4 +1,4 @@
-/* $Id: KermetaBreakpoint.java,v 1.10 2005-12-15 18:41:45 zdrey Exp $
+/* $Id: KermetaBreakpoint.java,v 1.11 2006-09-19 14:38:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaBreakpoint.java
  * License   : EPL
@@ -12,12 +12,7 @@ package fr.irisa.triskell.kermeta.runner.debug.model;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.model.LineBreakpoint;
-import org.eclipse.debug.internal.core.BreakpointManager;
-import org.eclipse.ui.texteditor.MarkerUtilities;
-
-import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 
 /**
  * @author zdrey

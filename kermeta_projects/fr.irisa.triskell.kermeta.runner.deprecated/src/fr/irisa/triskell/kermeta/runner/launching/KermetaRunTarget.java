@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.15 2006-06-22 08:04:14 dvojtise Exp $
+/* $Id: KermetaRunTarget.java,v 1.16 2006-09-19 14:39:48 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: EPL
@@ -28,6 +28,8 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleListener;
 import org.eclipse.ui.console.IOConsole;
 
+import fr.irisa.triskell.kermeta.interpreter.DebugInterpreter;
+import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
@@ -39,10 +41,6 @@ import fr.irisa.triskell.kermeta.runner.debug.process.KermetaRunProcess;
  */
 public class KermetaRunTarget extends AbstractKermetaTarget
 {
-    
-	
-	public KermetaConsole console;
-	
     public KermetaRunTarget(ILaunch p_launch)
     {
     	super(p_launch);
@@ -54,7 +52,6 @@ public class KermetaRunTarget extends AbstractKermetaTarget
     	initPath();
     	initConsole();
     	kermeta_process = new KermetaRunProcess(startFile, className, opName, args, "Kermeta Run Thread", false, console);
-    	    	
     	kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectPath());
     	kermeta_process.start();
     }
@@ -63,34 +60,17 @@ public class KermetaRunTarget extends AbstractKermetaTarget
 	public IThread[] getThreads() throws DebugException {
 		return threads;
 	}
-	
-	/** Initialize the run console for the Run mode. This method is not 
-	 * defined in AbstractKermetaTarget, since we only need to create a specific console in Run mode.
-	 */
-	public void initConsole()
-	{
-		String shortname = startFile.contains("/")?startFile.substring(startFile.lastIndexOf("/")+1):startFile;
-	    String consolename = shortname + " - "+ className + "::" + opName;
-	    if(this instanceof ConstraintRunTarget) consolename += " (pre/post activated)";
-	    console = new KermetaConsole(consolename, this);
-	}
 
 
 	/**
 	 * @see fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget#terminate()
 	 */
 	public void terminate() throws DebugException {
-		System.err.println("Terminate on Kermeta run Target");
 		kermeta_process.state = KermetaProcess.STATE_TERMINATED;
-
-/*		if (process != null)
-		{
-			process.terminate();
-		}	
-		else
-			System.err.println("Process is null");*/
-		
-		// setState(RunnerConstants.TERMINATE);
+		ExpressionInterpreter interpreter = console.getKermetaInterpreter().getMemory().getCurrentInterpreter();
+		// this condition is verified when the interpretation process terminates naturally
+		if (interpreter != null)
+			interpreter.setCurrentState(ExpressionInterpreter.DEBUG_TERMINATE);
 		fireTerminateEvent();
 	}
 
@@ -99,10 +79,10 @@ public class KermetaRunTarget extends AbstractKermetaTarget
 	 * @see fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget#isTerminated()
 	 */
 	public boolean isTerminated() {
-		System.out.println("IS TERMINATED");
 		return process == null || kermeta_process.state == KermetaProcess.STATE_TERMINATED;
 	}
     
-	public boolean canTerminate() {return true; }//System.err.println("KermetaRunTarget.canTerminate");return (kermeta_process.state!=KermetaProcess.STATE_TERMINATED); }
-
+	public boolean canTerminate() {
+		return kermeta_process.state != KermetaProcess.STATE_TERMINATED;
+	}
 }

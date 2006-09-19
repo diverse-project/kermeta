@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.16 2006-07-12 13:38:17 cfaucher Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.17 2006-09-19 14:38:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -39,7 +39,9 @@ import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
+import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.debug.process.KermetaProcess;
+import fr.irisa.triskell.kermeta.runner.launching.ConstraintRunTarget;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLaunchConfiguration;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 
@@ -49,7 +51,8 @@ import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
  */
 public abstract class AbstractKermetaTarget implements IDebugElement,
 		IDebugTarget, ILaunchListener, IStepFilters {
-	 
+
+	public KermetaConsole console;
 	
     protected IDebugTarget target;
 	protected ILaunch launch;
@@ -484,6 +487,21 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 			System.err.println("Problem when getting path of the file that is currently executed");
 		}
 		return null;
+	}
+	/*
+	 *  Some custom initializations
+	 * 
+	 */
+	
+	/** Initialize the run console for the Run mode. This method is not 
+	 * defined in AbstractKermetaTarget, since we only need to create a specific console in Run mode.
+	 */
+	public void initConsole()
+	{
+		String shortname = startFile.contains("/")?startFile.substring(startFile.lastIndexOf("/")+1):startFile;
+	    String consolename = shortname + " - "+ className + "::" + opName;
+	    if(this instanceof ConstraintRunTarget) consolename += " (pre/post activated)";
+	    console = new KermetaConsole(consolename, this);
 	}
 	
 

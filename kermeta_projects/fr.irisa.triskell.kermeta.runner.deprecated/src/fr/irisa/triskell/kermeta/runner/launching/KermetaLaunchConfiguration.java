@@ -1,4 +1,4 @@
-/* $Id: KermetaLaunchConfiguration.java,v 1.22 2006-06-15 13:03:22 zdrey Exp $
+/* $Id: KermetaLaunchConfiguration.java,v 1.23 2006-09-19 14:39:48 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaLaunchConfiguration.java
  * License: EPL
@@ -87,6 +87,7 @@ public class KermetaLaunchConfiguration implements ILaunchConfigurationDelegate
 	            // Start interpreter
 	            target.start();
 	            // Terminate the run target
+
 	            launch.removeDebugTarget(target);
 	            DebugPlugin.getDefault().getLaunchManager().removeLaunch(launch);
 	        }

@@ -1,4 +1,4 @@
-/* $Id: KermetaStackFrame.java,v 1.7 2005-12-01 18:29:06 zdrey Exp $
+/* $Id: KermetaStackFrame.java,v 1.8 2006-09-19 14:38:55 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaStackFrame.java
  * License   : GPL
@@ -92,7 +92,6 @@ public class KermetaStackFrame extends DebugElement implements IStackFrame {
      * @see org.eclipse.debug.core.model.IStackFrame#hasVariables()
      */
     public boolean hasVariables() throws DebugException {
-     System.err.println("do I have variables?");
        return (variables != null && variables.length > 0);
     }
 

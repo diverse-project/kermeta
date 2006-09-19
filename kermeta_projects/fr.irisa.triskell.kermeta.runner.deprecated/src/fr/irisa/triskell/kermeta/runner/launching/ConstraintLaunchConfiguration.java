@@ -1,4 +1,4 @@
-/* $Id: ConstraintLaunchConfiguration.java,v 1.1 2006-05-16 15:35:59 jmottu Exp $
+/* $Id: ConstraintLaunchConfiguration.java,v 1.2 2006-09-19 14:39:48 zdrey Exp $
  * Project: Kermeta (Second iteration)
  * File: ConstraintLaunchConfiguration.java
  * License: EPL
@@ -19,6 +19,7 @@ import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
+import fr.irisa.triskell.kermeta.error.KermetaError;
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
