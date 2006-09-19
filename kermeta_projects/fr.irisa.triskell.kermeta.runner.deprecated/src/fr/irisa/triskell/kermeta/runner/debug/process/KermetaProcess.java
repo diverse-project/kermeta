@@ -1,4 +1,4 @@
-/* $Id: KermetaProcess.java,v 1.3 2006-06-19 15:47:17 dvojtise Exp $
+/* $Id: KermetaProcess.java,v 1.4 2006-09-19 14:39:15 zdrey Exp $
  * Project   : Kermeta runner
  * File      : KermetaProcess.java
  * License   : EPL
@@ -140,9 +140,7 @@ public class KermetaProcess //extends Process
 
 	/** Terminates properly the interpreter */
 	public synchronized void terminate() {
-		System.out.println("Someone terminates?");
 		state = STATE_TERMINATED; 
-		RunnerPlugin.pluginLog.debug("KermetaProcess terminates");
 	}
 
 	/** Run method of implemented Runnable interface (actually defined in 
@@ -152,6 +150,7 @@ public class KermetaProcess //extends Process
 	/* ----------------------------------------------------------------------
 	 *  
 	 *  Implementation of java.lang.Process methods.
+	 *  Deprecated
 	 * 
 	 * ----------------------------------------------------------------------
 	 */
