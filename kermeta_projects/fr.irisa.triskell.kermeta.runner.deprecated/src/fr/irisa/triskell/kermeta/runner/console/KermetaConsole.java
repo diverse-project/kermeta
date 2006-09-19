@@ -1,4 +1,4 @@
-/* $Id: KermetaConsole.java,v 1.21 2006-07-21 12:49:24 zdrey Exp $
+/* $Id: KermetaConsole.java,v 1.22 2006-09-19 14:35:01 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaConsole.java
  * License: GPL
@@ -29,10 +29,12 @@ import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.IOConsoleInputStream;
 import org.eclipse.ui.console.IOConsoleOutputStream;
 
+import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
+import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
 import fr.irisa.triskell.kermeta.runner.dialogs.InputStreamDialog;
 import fr.irisa.triskell.kermeta.runner.launching.KermetaRunTarget;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
-//import org.eclipse.ui.internal.console.IOConsolePage;
+
 /**
  * The console on which the results of an operation are printed (output),
  * and where the user can write data (input)
@@ -58,7 +60,8 @@ public class KermetaConsole implements KermetaIOStream, IConsoleListener
     // The process being launched
     protected IProcess process;
     protected ILaunch launch;
-    protected KermetaRunTarget target;
+    protected AbstractKermetaTarget target;
+    protected KermetaInterpreter kermetaInterpreter;
     
     public KermetaConsole(String name)
     {
@@ -70,7 +73,7 @@ public class KermetaConsole implements KermetaIOStream, IConsoleListener
 	    initialize();
     }
     
-    public KermetaConsole(String name, KermetaRunTarget t) {
+    public KermetaConsole(String name, AbstractKermetaTarget t) {
 		ConsolePlugin plugin = ConsolePlugin.getDefault();
         consoleName = name;
         isDisposed = false;
@@ -151,7 +154,13 @@ public class KermetaConsole implements KermetaIOStream, IConsoleListener
     public void dispose()
     {
     	messageConsole.setDisposed(true);
-    	// messageConsole.destroy(); // throws an exception
+    	try {
+			target.terminate();
+		} catch (DebugException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// messageConsole.destroy(); // dont do this : this throws an exception
     	//consoleManager.removeConsoleListener(this);
     }
 
@@ -174,15 +183,10 @@ public class KermetaConsole implements KermetaIOStream, IConsoleListener
     	}
     }
     
-    
-    
-    
     /**
 	 * @return Returns the target.
 	 */
-	public KermetaRunTarget getTarget() {
-		return target;
-	}
+	public AbstractKermetaTarget getTarget() { return target; }
 
 	/**
      * Add an internal IO console. This implicitely open the console
@@ -196,6 +200,7 @@ public class KermetaConsole implements KermetaIOStream, IConsoleListener
     	messageConsole = new InternalIOConsole(consoleName + "[" +  consoleManager.getConsoles().length + "]", null);
     		// This is for ProcessConsole extension
     		//new InternalIOConsole(target.getProcess(), new ConsoleColorProvider(), "ISO-8859-1") ; //consoleName + "[" +  consoleManager.getConsoles().length + "]");
+    	messageConsole.setKermetaConsole(this);
     	inputStream = messageConsole.getInputStream();
     	outputStream = messageConsole.newOutputStream(); //messageConsole.newMessageStream();
     	consoleManager.addConsoles( new IConsole[]{messageConsole});
@@ -210,35 +215,6 @@ public class KermetaConsole implements KermetaIOStream, IConsoleListener
     {
 	    consoleManager.removeConsoleListener(this);
     }
-    
-//    private final boolean TRACE_ENABLED = Boolean.valueOf(Platform.getDebugOption("org.maven.ide.eclipse/console")).booleanValue();
-//
-//    public boolean isTraceEnabled() {
-//      return TRACE_ENABLED;
-//    }
-//
-//    public void consolesAdded(IConsole[] consoles) {
-//      Tracer.trace(this, "consolesAdded()");
-//      for (int i = 0; i < consoles.length; i++) {
-//        IConsole console = consoles[i];
-//        if (console == Maven2Console.this) {
-//          init();
-//        }
-//      }
-//
-//    }
-//    public void consolesRemoved(IConsole[] consoles) {
-//      Tracer.trace(this, "consolesRemoved()");
-//      for (int i = 0; i < consoles.length; i++) {
-//        IConsole console = consoles[i];
-//        if (console == Maven2Console.this) {
-//          ConsolePlugin.getDefault().getConsoleManager().removeConsoleListener(this);
-//          dispose();
-//        }
-//      }
-//    }
-
-
     
     protected void finalize() throws Throwable {
         super.finalize();
@@ -257,5 +233,11 @@ public class KermetaConsole implements KermetaIOStream, IConsoleListener
 	public IOConsoleOutputStream getOutputStream() {
 		return outputStream;
 	}
+	
+	public void setKermetaInterpreter(KermetaInterpreter kInterpreter)
+	{
+		kermetaInterpreter = kInterpreter;
+	}
 
+	public KermetaInterpreter getKermetaInterpreter() { return kermetaInterpreter; }
 }

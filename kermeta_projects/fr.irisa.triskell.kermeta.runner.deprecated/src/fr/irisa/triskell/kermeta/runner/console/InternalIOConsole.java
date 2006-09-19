@@ -1,4 +1,4 @@
-/* $Id: InternalIOConsole.java,v 1.4 2006-06-16 09:33:16 zdrey Exp $
+/* $Id: InternalIOConsole.java,v 1.5 2006-09-19 14:35:01 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.runner
  * File       : MessageConsole.java
  * License    : EPL
@@ -11,25 +11,36 @@
  */
 package fr.irisa.triskell.kermeta.runner.console;
 
-import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.debug.internal.ui.views.console.ProcessConsole;
-import org.eclipse.debug.ui.console.IConsoleColorProvider;
+import org.eclipse.core.runtime.Preferences.IPropertyChangeListener;
+import org.eclipse.core.runtime.Preferences.PropertyChangeEvent;
+import org.eclipse.debug.core.DebugEvent;
+import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.console.IOConsole;
-import org.eclipse.ui.console.MessageConsole;
 
 /** Extends io console with a boolean indicating if console is disposed (ie not used anymore)
  * or not */
-public class InternalIOConsole extends IOConsole
+public class InternalIOConsole extends IOConsole implements IDebugEventSetListener, IPropertyChangeListener
 { //extends ProcessConsole {
 
 	public boolean isDisposed;
+	protected KermetaConsole kermetaConsole;
 	
 	public InternalIOConsole(String name, ImageDescriptor imageDescriptor) {
 		super(name, imageDescriptor);
 		isDisposed = false;
 	}
+	
+	public void setKermetaConsole(KermetaConsole kconsole)
+	{
+		kermetaConsole = kconsole;
+	}
 
+	public KermetaConsole getKermetaConsole()
+	{
+		return kermetaConsole;
+	}
+	
 	/**
 	 * @return Returns the isDisposed.
 	 */
@@ -43,11 +54,13 @@ public class InternalIOConsole extends IOConsole
 	public void setDisposed(boolean isDisposed) {
 		this.isDisposed = isDisposed;
 	}
-	
-	// This is for ProcessConsole extension
-	/* public InternalIOConsole(IProcess process, IConsoleColorProvider colorProvider, String encoding) {
-		super(process, colorProvider, encoding);
-		isDisposed = false;
+
+	public void handleDebugEvents(DebugEvent[] events) {
+		// TODO Auto-generated method stub
+		System.err.println("debug event is sent:  " + events);
 	}
-	*/
+
+	public void propertyChange(PropertyChangeEvent event) {
+		// TODO Auto-generated method stub
+	}
 }
