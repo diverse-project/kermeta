@@ -1,4 +1,4 @@
-/* $Id: KermetaLauncher.java,v 1.19 2006-09-19 14:39:48 zdrey Exp $
+/* $Id: KermetaLauncher.java,v 1.20 2006-09-19 15:00:51 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaLauncher.java
  * License   : GPL
@@ -10,18 +10,9 @@
 package fr.irisa.triskell.kermeta.runner.launching;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.sound.midi.SysexMessage;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IPluginDescriptor;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.debug.core.DebugPlugin;
-import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.debug.internal.ui.actions.DebugContextualLaunchAction;
-import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -31,17 +22,13 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.internal.ide.IDEWorkbenchPlugin;
 
 import fr.irisa.triskell.kermeta.error.KermetaInterpreterError;
-import fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter;
 import fr.irisa.triskell.kermeta.interpreter.KermetaRaisedException;
-//import fr.irisa.triskell.kermeta.interpreter.debug.IKermetaDebugCondition;
 import fr.irisa.triskell.kermeta.launcher.KermetaInterpreter;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
 import fr.irisa.triskell.kermeta.loader.KermetaUnitFactory;
-import fr.irisa.triskell.kermeta.plugin.KermetaPlugin;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
 import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runtime.io.KermetaIOStream;
-import fr.irisa.triskell.kermeta.runtime.io.SystemIOStream;
 import fr.irisa.triskell.traceability.helper.Tracer;
 
 
@@ -146,7 +133,6 @@ public class KermetaLauncher
             	if (isConstraintMode) interpreter.launchConstraint();
             	else interpreter.launch();
             	interpreter.getKStream().dispose();
-    	        interpreter.setKStream(null);
     	        interpreter.freeJavaMemory();
     	        KermetaUnitFactory.resetDefaultLoader();
     	        return null;

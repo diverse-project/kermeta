@@ -1,4 +1,4 @@
-/* $Id: KermetaRunTarget.java,v 1.16 2006-09-19 14:39:48 zdrey Exp $
+/* $Id: KermetaRunTarget.java,v 1.17 2006-09-19 15:00:51 zdrey Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunTarget.java
  * License: EPL
@@ -67,10 +67,15 @@ public class KermetaRunTarget extends AbstractKermetaTarget
 	 */
 	public void terminate() throws DebugException {
 		kermeta_process.state = KermetaProcess.STATE_TERMINATED;
-		ExpressionInterpreter interpreter = console.getKermetaInterpreter().getMemory().getCurrentInterpreter();
-		// this condition is verified when the interpretation process terminates naturally
-		if (interpreter != null)
-			interpreter.setCurrentState(ExpressionInterpreter.DEBUG_TERMINATE);
+		// This condition is verified if KermetaInterpreter could not be instanciated
+		// for example, when there are parse errors.
+		if (console.getKermetaInterpreter()!=null)
+		{
+			ExpressionInterpreter interpreter = console.getKermetaInterpreter().getMemory().getCurrentInterpreter();
+			// this condition is verified when the interpretation process terminates naturally
+			if (interpreter != null)
+				interpreter.setCurrentState(ExpressionInterpreter.DEBUG_TERMINATE);
+		}
 		fireTerminateEvent();
 	}
 
