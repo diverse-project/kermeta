@@ -1,4 +1,4 @@
-/* $Id: KermetaRunHelper.java,v 1.16 2006-03-03 15:23:35 dvojtise Exp $
+/* $Id: KermetaRunHelper.java,v 1.17 2006-09-19 12:39:59 ftanguy Exp $
  * Project: Kermeta (First iteration)
  * File: KermetaRunHelper.java
  * License: EPL
@@ -52,9 +52,9 @@ public class KermetaRunHelper {
     	BehaviorPackageImpl.init();
     	String uri = "platform:/resource" + file.getFullPath().toString();
     	KermetaUnitFactory.getDefaultLoader().unloadAll();
-    	KMTUnit result = null;
-        try {
-        	result = (KMTUnit)KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
+        KermetaUnit result = null;
+    	try {
+        	result = KermetaUnitFactory.getDefaultLoader().createKermetaUnit(uri);
 	        result.load();
 	        
 	        result.typeCheck(null);
