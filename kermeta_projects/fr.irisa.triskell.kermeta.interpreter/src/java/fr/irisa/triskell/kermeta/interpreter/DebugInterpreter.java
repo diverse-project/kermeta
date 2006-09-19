@@ -1,4 +1,4 @@
-/* $Id: DebugInterpreter.java,v 1.16 2006-03-03 15:21:47 dvojtise Exp $
+/* $Id: DebugInterpreter.java,v 1.17 2006-09-19 14:43:47 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : DebugInterpreter.java
  * License   : EPL
@@ -115,7 +115,6 @@ public class DebugInterpreter extends ExpressionInterpreter {
 		
 		// Resolve this operation call
 		result = (RuntimeObject)this.accept(entryOperation);
-		System.out.println("operation invoked!");
 		
 		// finally block removed
 		// {
@@ -125,7 +124,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 		// Remote side of the interpreter reads this attribute and act accordingly
 		currentState = DEBUG_TERMINATE;
 		// Run a last time the debug command that tests if we can interrupt.....laborious
-		if (shouldTerminate()) return result;
+		shouldTerminate();
 		processDebugCommand(entryOperation);
 		// }
 		return result;
@@ -151,7 +150,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
      */
     public Object visitAssignment(Assignment node) {
     	Object result = memory.voidINSTANCE;
-    	if (shouldTerminate()) return result;
+    	shouldTerminate();
     	processDebugCommand(node);
     	result = super.visitAssignment(node);
         processPostCommand(node);
@@ -164,7 +163,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
     public Object visitCallFeature(CallFeature node) {
     	Object result = memory.voidINSTANCE;
     	// (Simple test to terminate)
-    	//if (shouldTerminate()) return result;
+    	//shouldTerminate();
     	processDebugCommand(node);
     	result = super.visitCallFeature(node);
     	processPostCommand(node);
@@ -182,14 +181,14 @@ public class DebugInterpreter extends ExpressionInterpreter {
      * We just need to stop the execution
      */
     public Object visitBlock(Block node)  {
-    	if (shouldTerminate()) return memory.voidINSTANCE;
+    	shouldTerminate();
     	return super.visitBlock(node);
     }
     /**
 	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitConditional(fr.irisa.triskell.kermeta.behavior.Conditional)
 	 */
 	public Object visitConditional(Conditional node) {
-		if (shouldTerminate()) return memory.voidINSTANCE;
+		shouldTerminate();
 		return super.visitConditional(node);
 	}
 
@@ -197,7 +196,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 * @see fr.irisa.triskell.kermeta.interpreter.ExpressionInterpreter#visitLoop(fr.irisa.triskell.kermeta.behavior.Loop)
 	 */
 	public Object visitLoop(Loop node) {
-		if (shouldTerminate()) return memory.voidINSTANCE;
+		shouldTerminate();
 		return super.visitLoop(node);
 	}
 
@@ -206,7 +205,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
 	public Object visitCallSuperOperation(CallSuperOperation node) {
 		Object result = memory.voidINSTANCE;
-		if (shouldTerminate()) return result;
+		shouldTerminate();
 		processDebugCommand(node);
 		result = super.visitCallSuperOperation(node);
 		processPostCommand(node);
@@ -220,7 +219,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
 	public Object visitJavaStaticCall(JavaStaticCall node) {
 		Object result = memory.voidINSTANCE;
-		if (shouldTerminate()) return result;
+		shouldTerminate();
 		processDebugCommand(node);
 		result = super.visitJavaStaticCall(node);
 		processPostCommand(node);
@@ -235,7 +234,7 @@ public class DebugInterpreter extends ExpressionInterpreter {
 	 */
 	public Object visitVariableDecl(VariableDecl node) {
 		Object result = memory.voidINSTANCE;
-		if (shouldTerminate()) return result;
+		shouldTerminate();
 		processDebugCommand(node);
 		result = super.visitVariableDecl(node);
 		processPostCommand(node);

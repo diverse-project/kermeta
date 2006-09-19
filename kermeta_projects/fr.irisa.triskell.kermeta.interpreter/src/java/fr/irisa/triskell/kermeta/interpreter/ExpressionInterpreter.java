@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.45 2006-08-24 11:49:30 dvojtise Exp $
+/* $Id: ExpressionInterpreter.java,v 1.46 2006-09-19 14:43:47 zdrey Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -147,6 +147,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         finally {
 	        // After operation has been evaluated, pop its context
 	        interpreterContext.popCallFrame();
+	        setCurrentState(DEBUG_TERMINATE);
         }
 		return result;
 	}
@@ -160,12 +161,12 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	{
 		if (node!=null) setParent(node);
 		RuntimeObject ro_init = memory.voidINSTANCE;
+		shouldTerminate();
 		// is it a classic case?
 		// TODO : compare qualified names otherwise this test could be sometimes false
 		if (FunctionType.class.isInstance(node.getType().getType()))
 		{
 		    internalLog.info("Type of variable declaration : "+node.getType().getName());
-		
 		}
 		if (node.getInitialization()!=null)
 		   ro_init = (RuntimeObject)this.accept(node.getInitialization());
@@ -249,6 +250,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public Object visitAssignment(Assignment node) {
 		if (node!=null) setParent(node);
+		shouldTerminate();
 		// The name of the call
 		String lhs_name = node.getTarget().getName();
 		
@@ -423,7 +425,8 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     public Object visitCallSuperOperation(CallSuperOperation node)
     {
     	if (node!=null) setParent(node);
-        RuntimeObject result = null;
+        RuntimeObject result = memory.voidINSTANCE;
+        shouldTerminate();
         // Current call frame is uniquely a LambdaCallFrame, or an OperationCallFrame. Other types are forbidden!
         Operation current_op = this.interpreterContext.peekCallFrame().getOperation();
         RuntimeObject ro_target = this.interpreterContext.peekCallFrame().getSelf();
@@ -544,7 +547,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 
 	    RuntimeObject result = memory.voidINSTANCE;
 		// Stops the interpretation.
-	    if (shouldTerminate()) return result;
+	    shouldTerminate();
 		
 	    // process the statements
 	    try {
@@ -611,7 +614,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	    // The result returned by the visit
 	    RuntimeObject result = null;
 		// Stops the interpretation.
-	    if (shouldTerminate()) return result;
+	    shouldTerminate();
 	    
         Expression cond = node.getCondition();
 
@@ -663,7 +666,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
         // Push a new expressionContext in the current CallFrame. 
         interpreterContext.peekCallFrame().pushExpressionContext();
         // Stops the interpretation.
-	    if (shouldTerminate()) return result;
+	    shouldTerminate();
 	    // Else
         try {
         	
@@ -1147,7 +1150,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 * @see kermeta.visitor.MetacoreVisitor#visit(metacore.behavior.JavaStaticCall)
 	 */
 	public Object visitJavaStaticCall(JavaStaticCall node) {
-	    
+		shouldTerminate();
 		String cmdID = node.getJclass() + "_" + node.getJmethod() + "_" + node.getParameters().size();
 		cmdID = cmdID.replaceAll(":", "_");
 		FrameworkExternCommand cmd = FrameworkExternCommand.getCommand(cmdID);
@@ -1489,12 +1492,18 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
     /** @return the current command being executed by the debuginterpreter */
 	public String getCurrentState() {	return currentState; }
 	/** set the current command being executed by the debuginterpreter */
-	public void setCurrentState(String command) {	currentState = command;}
+	public void setCurrentState(String command) { currentState = command;}
 
     /** @return true if the interpretation should terminate. */
-    public boolean shouldTerminate()
+    public void shouldTerminate()
     {
-    	return getCurrentState().equals(DEBUG_TERMINATE);
+    	if (getCurrentState().equals(DEBUG_TERMINATE)) 
+    		throw KermetaRaisedException.createKermetaException("kermeta::exceptions::RuntimeError",
+        		"Program terminated by the user",
+				this,
+				memory,
+				this.getParent(),
+				null);
     }
 	    
     

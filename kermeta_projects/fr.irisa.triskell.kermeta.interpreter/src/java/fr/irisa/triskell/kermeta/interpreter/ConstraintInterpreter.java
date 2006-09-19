@@ -98,8 +98,8 @@ public class ConstraintInterpreter extends ExpressionInterpreter {
 		
 		// The result returned by the visit
 		RuntimeObject result = null;
-		// Stops the interpretation.
-		if (shouldTerminate()) return result;
+		// Stops the interpretation if asked by user.
+		shouldTerminate();
 		
 		Expression constraintBody = node.getBody();
 		
