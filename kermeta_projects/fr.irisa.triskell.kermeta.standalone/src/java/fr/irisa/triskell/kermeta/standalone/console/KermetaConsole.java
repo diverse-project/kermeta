@@ -214,7 +214,10 @@ public class KermetaConsole extends Console implements KermetaIOStream {
 
 
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		// Nothing to do for this particular console
+	}
+
+	public void setKermetaInterpreter(KermetaInterpreter ki) {
+		// Nothing to do for this particular console
 	}
 }
