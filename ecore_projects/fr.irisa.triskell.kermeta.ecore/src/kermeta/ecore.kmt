@@ -7,12 +7,23 @@ class EAttribute inherits EStructuralFeature
 {
 	attribute iD : EBoolean
 	property eAttributeType : EDataType[1..1]
-		getter is do
-			result ?= eType
+		getter is do			
+ 			if eType.getMetaClass == EDataType then
+				result ?= eType
+			else
+				var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+				exception.message := "The EClassifer pointed by this EAttribute must be of type EDataType"
+				raise exception
+			end
 		end
 		setter is do
-			//TODO: implement setter for derived property eAttributeType
-			raise kermeta::exceptions::NotImplementedException.new 
+			if eType.getMetaClass == EDataType then				
+				eType := value
+			else
+				var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+				exception.message := "The EClassifer pointed by this EAttribute must be of type EDataType"
+				raise exception
+			end
 		end
 }
 class EAnnotation inherits EModelElement
@@ -263,12 +274,22 @@ class EReference inherits EStructuralFeature
 	reference eOpposite : EReference
 	property eReferenceType : EClass[1..1]
 		getter is do
-			//TODO: implement getter for derived property eReferenceType
-			raise kermeta::exceptions::NotImplementedException.new 
+ 			if eType.getMetaClass == EClass then
+				result ?= eType
+			else
+				var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+				exception.message := "The EClassifer pointed by this EReference must be of type EClass"
+				raise exception
+			end
 		end
 		setter is do
-			//TODO: implement setter for derived property eReferenceType
-			raise kermeta::exceptions::NotImplementedException.new 
+			if eType.getMetaClass == EClass then				
+				eType := value
+			else
+				var exception : kermeta::exceptions::Exception init kermeta::exceptions::Exception.new
+				exception.message := "The EClassifer pointed by this EReference must be of type EClass"
+				raise exception
+			end
 		end
     
     // due to inner reflction problems with Object.container(), the
