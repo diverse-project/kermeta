@@ -54,7 +54,6 @@ public class ConsoleTerminateAction extends Action implements IUpdate {
 		try {
 			IDebugTarget target = fConsole.getKermetaConsole().getTarget();
             target.terminate();
-            setEnabled(false);
 		} catch (DebugException e) {
 			// TODO: report exception
 		}

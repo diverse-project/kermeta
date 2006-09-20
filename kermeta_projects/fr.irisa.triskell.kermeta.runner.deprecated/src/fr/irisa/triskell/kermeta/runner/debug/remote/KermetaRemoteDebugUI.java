@@ -1,4 +1,4 @@
-/* $Id: KermetaRemoteDebugUI.java,v 1.12 2005-12-20 08:55:56 zdrey Exp $
+/* $Id: KermetaRemoteDebugUI.java,v 1.13 2006-09-20 07:40:59 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.runner (First iteration)
  * File      : KermetaRemoteDebugUI.java
  * License   : EPL
@@ -31,6 +31,7 @@ import org.eclipse.debug.core.model.IVariable;
 
 import fr.irisa.triskell.kermeta.runner.RunnerConstants;
 import fr.irisa.triskell.kermeta.runner.RunnerPlugin;
+import fr.irisa.triskell.kermeta.runner.console.KermetaConsole;
 import fr.irisa.triskell.kermeta.runner.debug.model.AbstractKermetaTarget;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaBreakpoint;
 import fr.irisa.triskell.kermeta.runner.debug.model.KermetaDebugTarget;

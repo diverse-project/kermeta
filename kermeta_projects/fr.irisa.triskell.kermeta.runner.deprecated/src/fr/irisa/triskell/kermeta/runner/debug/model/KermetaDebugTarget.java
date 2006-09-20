@@ -1,4 +1,4 @@
-/* $Id: KermetaDebugTarget.java,v 1.21 2006-09-19 14:38:55 zdrey Exp $
+/* $Id: KermetaDebugTarget.java,v 1.22 2006-09-20 07:40:59 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : KermetaDebugTarget.java
  * License   : GPL
@@ -59,7 +59,6 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 		this.threads = new IThread[0];
         // Do not set to stateDisconnected
         setState(RunnerConstants.RESUME);
-        
 
 		initialize();
         
@@ -94,6 +93,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	 */
 	public synchronized void startRemoteInterpreterProcess()
 	{
+		// initialize the process for interpretation (in fact, this process is a thread)
 		kermeta_process = new KermetaDebugProcess(getStartFile(), getClassName(), getOpName(), getArgs(), remotePlatform);
 		kermeta_process.updateThreadClassLoader( this.javaClassPathAttribute, getCurrentProjectPath());    	
 		kermeta_process.start();
@@ -229,6 +229,7 @@ public class KermetaDebugTarget extends AbstractKermetaTarget
 	 */
 	public synchronized void initialize() {
 		initPath();
+		initConsole();
 		initializeBreakpoints();
 		setState(RunnerConstants.RESUME);
 	}

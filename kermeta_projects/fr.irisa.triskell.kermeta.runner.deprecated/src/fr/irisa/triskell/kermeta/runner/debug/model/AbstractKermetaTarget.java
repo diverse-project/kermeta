@@ -1,4 +1,4 @@
-/* $Id: AbstractKermetaTarget.java,v 1.17 2006-09-19 14:38:55 zdrey Exp $
+/* $Id: AbstractKermetaTarget.java,v 1.18 2006-09-20 07:40:59 zdrey Exp $
  * Project   : Kermeta (First iteration)
  * File      : AbstractKermetaTarget.java
  * License   : EPL
@@ -52,7 +52,7 @@ import fr.irisa.triskell.kermeta.runner.launching.KermetaLauncher;
 public abstract class AbstractKermetaTarget implements IDebugElement,
 		IDebugTarget, ILaunchListener, IStepFilters {
 
-	public KermetaConsole console;
+	protected KermetaConsole console;
 	
     protected IDebugTarget target;
 	protected ILaunch launch;
@@ -88,33 +88,6 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 		this.launch = launch;
         target = this;
 	}
-    
-    /*
-     *
-     * 
-     *  CUSTOM METHODS
-     * 
-     *  
-     */
-    /** 
-     * Start the Kermeta process in a thread. This is the default start
-     * If you run Kermeta in a new JVM, it is this method that you have to change. 
-     * (Or inherits AbstractKermetaTarget class and overwrite it...)
-     */
-	/*public void startKermetaProcess()
-	{
-	    new Thread() {
-	        public void run() {
-	            this.setName("Kermeta Run Thread");
-	        	// Run in a thread --> is it really useful??
-	            initPath();
-	            ClassLoader cl = this.getContextClassLoader();
-	           // cl.getResourceAsStream()
-	            KermetaLauncher.getDefault().runKermeta(startFile, className, opName, args, false);
-			}
-	    }.start();
-	}*/
-	
 	
 	/**
 	 * [EPIC inspired] Initialize the path of the Kermeta program to Launch
@@ -160,49 +133,6 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 		//startFile = path.lastSegment();
 		startFile = RunnerPlugin.getWorkspace().getRoot().findMember(startFile).getFullPath().toString();
 	}
-
-	/*public void updateClassLoader(List pathAttribute){
-		for (int i = 0; i < pathAttribute.size(); i++) {
-            String memento1 = (String)pathAttribute.get(i);
-            try {
-                IRuntimeClasspathEntry entry1 = 
-                   JavaRuntime.newRuntimeClasspathEntry(memento1);                
-                // resolve this classpath entry
-                org.eclipse.jdt.launching.StandardClasspathProvider resolver;
-                try {
-					URL url = new URL(entry1.getLocation());
-				} catch (MalformedURLException e) {
-					RunnerPlugin.pluginLog.warn("problem with an entry of the classpath",e);
-				}
-                // IRuntimeClasspathEntryResolver
-              //  this.getIPathFromString()
-            } catch (CoreException e) {
-            	RunnerPlugin.pluginLog.warn("Problem reading classpath entry", e);
-                RunnerPlugin.log(e);
-            	return ;
-            }
-        }
-    }*/
-	/*
-	private void processClassPathAttribute(List pathAttribute){
-		for (int i = 0; i < pathAttribute.size(); i++) {
-            String memento1 = (String)pathAttribute.get(i);
-            try {
-                IRuntimeClasspathEntry entry1 = 
-                   JavaRuntime.newRuntimeClasspathEntry(memento1);
-                org.eclipse.jdt.launching.StandardClasspathProvider resolver;
-                
-                // resolve this classpath entry
-                // IRuntimeClasspathEntryResolver
-              //  this.getIPathFromString()
-            } catch (CoreException e) {
-            	RunnerPlugin.pluginLog.warn("Problem reading classpath entry", e);
-                RunnerPlugin.log(e);
-            	return ;
-            }
-        }
-	}*/
-
 	/** retrieve the path of the project is this is a java project */ 
 	protected String getCurrentProjectPath() {
 		IWorkspaceRoot myWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
@@ -662,6 +592,20 @@ public abstract class AbstractKermetaTarget implements IDebugElement,
 	public boolean supportsStepFilters() {
 		
 		return stepFilter;
+	}
+
+	/**
+	 * @return the console
+	 */
+	public KermetaConsole getConsole() {
+		return console;
+	}
+
+	/**
+	 * @param console the console to set
+	 */
+	public void setConsole(KermetaConsole console) {
+		this.console = console;
 	}
 
 	
