@@ -1,4 +1,4 @@
-/* $Id: RuntimeObjectHelper.java,v 1.1 2006-09-20 12:07:13 dvojtise Exp $
+/* $Id: RuntimeObjectHelper.java,v 1.2 2006-09-20 12:08:18 dvojtise Exp $
  * Project   : Kermeta 
  * File      : RuntimeObjectHelper.java
  * License   : EPL
@@ -11,8 +11,6 @@ package fr.irisa.triskell.kermeta.runtime;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.loader.KermetaUnit;
-import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
-import fr.irisa.triskell.kermeta.runtime.loader.emf.EMFRuntimeUnit;
 
 /**
  * this class contains many static operation that helps to deal with runtime object
