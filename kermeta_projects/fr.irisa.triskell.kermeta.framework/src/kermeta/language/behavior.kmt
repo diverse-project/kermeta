@@ -1,4 +1,4 @@
-/* $Id: behavior.kmt,v 1.13 2006-06-15 14:22:11 dvojtise Exp $
+/* $Id: behavior.kmt,v 1.14 2006-09-20 14:44:05 zdrey Exp $
  * Project   : fr.irisa.triskell.kermeta.framework
  * File      : behavior.kmt
  * License   : EPL
@@ -13,13 +13,23 @@
  */
 
 /**
- * Contains all the classes used for the behavior of Kermeta (i.e the model representation
- * of operation bodies)
+ * Contains all the classes that define the behavior of Kermeta (i.e the model representation
+ * of operation bodies). It is the definition, in kermeta language, of the behavior part of the kermeta 
+ * metamodel, viewed as a model.
+ * You can also find some information about the behavior package here : <a href="http://www.kermeta.org/documents/manual/html.single">KermetaManual</a>
  */
 package kermeta::language::behavior;
 
 require "structure.kmt"
 
+/**
+ * Any callable expression inherits this class, e.g : 
+ *   - variable call
+ *   - feature call ( <code>a.b</code> : b is a feature call)
+ *
+ * <img alt=""  height="90%" width="90%"  src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_call_expressions.png" />
+ *
+*/
 abstract class CallExpression inherits Expression
 {
 	attribute parameters : set Expression[0..*]
@@ -27,10 +37,19 @@ abstract class CallExpression inherits Expression
 	
 	reference staticTypeVariableBindings : kermeta::language::structure::Type[*]
 }
+
+/**
+ * The base class for every entity used to define a behavior in operation body.
+ */
 abstract class Expression inherits kermeta::reflection::Object, kermeta::reflection::TypeContainer 
 {
 	reference staticType : kermeta::language::structure::Type
 }
+
+/**
+ * We call "CallVariable" the use of a variable in a statement.
+ * in <code>i := j + 1</code>, i and j are 2 CallVariables.
+ */
 class CallVariable inherits CallExpression, KMExpressionVisitable
 {
 	/** Implementation of the visitor design pattern on CallFeature objects */
@@ -39,6 +58,11 @@ class CallVariable inherits CallExpression, KMExpressionVisitable
 			result := visitor.visitCallVariable(self, context)
 		end
 }
+/**
+ * CallFeature is the model element that refers to the use of a feature, i.e either 
+ * a property or an operation in a statement. In <code>stdio.writeln("hello")</code>, 
+ * <code>writeln</code> is a CallFeature.
+*/
 class CallFeature inherits CallExpression, KMExpressionVisitable
 {
 	
@@ -89,6 +113,11 @@ class CallResult inherits CallVariable, KMExpressionVisitable
 			result := visitor.visitCallResult(self, context)
 		end
 }
+
+/**
+ * CallValue refers to the use of the <code>value</code> reserved keyword. This keyword is
+ * only used in the body of the <code>setter</code> part of derived properties.
+*/
 class CallValue inherits CallExpression, KMExpressionVisitable
 {
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
@@ -96,6 +125,11 @@ class CallValue inherits CallExpression, KMExpressionVisitable
 			result := visitor.visitCallValue(self, context)
 		end
 }
+
+/**
+ * Assignment is the model-element representation of the assignment statement <code>x := y</code>
+ * <img alt="" src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_assign_expressions.png"/>
+*/
 class Assignment inherits Expression, KMExpressionVisitable
 {
 	attribute target : CallExpression[1..1]
@@ -108,6 +142,9 @@ class Assignment inherits Expression, KMExpressionVisitable
 			result := visitor.visitAssignment(self, context)
 		end
 }
+/**
+ * Block is the model-element representation for the <code>do...end</code> block.
+ */
 class Block inherits Expression, KMExpressionVisitable
 {
 	attribute statement : set Expression[1..*]
@@ -119,6 +156,9 @@ class Block inherits Expression, KMExpressionVisitable
 			result := visitor.visitBlock(self, context)
 		end
 }
+/**
+ * Condition is the model-element representation for the <code></code> 
+ */
 class Conditional inherits Expression, KMExpressionVisitable
 {
 	attribute thenBody : Expression
@@ -131,6 +171,9 @@ class Conditional inherits Expression, KMExpressionVisitable
 			result := visitor.visitConditional(self, context)
 		end
 }
+/**
+ * Literal refers to String values, Integer values, etc.
+ */
 abstract class Literal inherits Expression
 {
 }
@@ -192,10 +235,13 @@ class TypeLiteral inherits Literal, KMExpressionVisitable
 	attribute typeref : TypeReference[1..1]
 	/** Implementation of the visitor design pattern on TypeLiteral objects */	
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
-		do
-			result := visitor.visitTypeLiteral(self, context)
-		end
+	do
+		result := visitor.visitTypeLiteral(self, context)
+	end
 }
+/**
+ * TypeReference refers to the type used in a variable declaration
+*/
 class TypeReference inherits kermeta::reflection::MultiplicityElement, KMExpressionVisitable
 {
 	/** Implementation of the visitor design pattern on BooleanLiteral objects */		
@@ -213,6 +259,9 @@ class VoidLiteral inherits Literal, KMExpressionVisitable
 			result := visitor.visitVoidLiteral(self, context)
 		end
 }
+/**
+ * Loop refers to <code>from var x : X init a until booleanCondition loop ... end</code>
+*/
 class Loop inherits Expression, KMExpressionVisitable
 {
 	attribute initialization : Expression
@@ -223,6 +272,9 @@ class Loop inherits Expression, KMExpressionVisitable
 			result := visitor.visitLoop(self, context)
 		end
 }
+/**
+ * refers to <code>self</code> use
+ */
 class SelfExpression inherits Expression, KMExpressionVisitable
 {
 	method acceptKMExpressionVisitor<ContextType, ResultType>(visitor : KMExpressionVisitor<ContextType, ResultType>, context : ContextType) : ResultType from kermeta::language::behavior::KMExpressionVisitable is
@@ -230,6 +282,10 @@ class SelfExpression inherits Expression, KMExpressionVisitable
 			result := visitor.visitSelfExpression(self, context)
 		end
 }
+/**
+ * refers to variable declaration <code>var x : X init a</code>
+ * <img alt="" src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_var_expressions.png"/>
+ */
 class VariableDecl inherits Expression, KMExpressionVisitable
 {
 	attribute initialization : Expression[1..1]
@@ -240,6 +296,9 @@ class VariableDecl inherits Expression, KMExpressionVisitable
 			result := visitor.visitVariableDecl(self, context)
 		end
 }
+/**
+ * refers to raise exception block
+*/
 class Raise inherits Expression, KMExpressionVisitable
 {
 	attribute expression : Expression[1..1]
@@ -248,6 +307,9 @@ class Raise inherits Expression, KMExpressionVisitable
 			result := visitor.visitRaise(self, context)
 		end
 }
+/**
+ * refers to rescue exception block
+*/
 class Rescue inherits kermeta::reflection::Object, KMExpressionVisitable
 {
 	attribute body : set Expression[1..*]
@@ -271,6 +333,10 @@ class JavaStaticCall inherits Expression, KMExpressionVisitable
 			result := visitor.visitJavaStaticCall(self, context)
 		end
 }
+/**
+ * Refers to lambda expression definition (<code>function { e | stdio.writeln(e.toString) }</code>)
+ * <img alt="" src="http://www.kermeta.org/docs/html.single/KerMeta-Manual/KerMeta-Manual_figures/kermeta_lambda_expressions.png"/>
+ */
 class LambdaExpression inherits Expression, KMExpressionVisitable
 {
 	attribute parameters : set LambdaParameter[0..*]
@@ -280,6 +346,9 @@ class LambdaExpression inherits Expression, KMExpressionVisitable
 			result := visitor.visitLambdaExpression(self, context)
 		end
 }
+/**
+ * Refers to parameter definition in lambda expression
+ */
 class LambdaParameter inherits kermeta::reflection::Object, KMExpressionVisitable
 {
 	attribute name : kermeta::reflection::String
