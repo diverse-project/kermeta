@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/fr.irisa.triskell.kermeta.model/src"
+    modelPluginID="fr.irisa.triskell.kermeta.model" modelName="Kermeta_structure"
+    importerID="org.eclipse.emf.importer.ecore">
+  <foreignModel>kermeta_structure.ecore</foreignModel>
+  <genPackages prefix="Structure" basePackage="fr.irisa.triskell.kermeta.language"
+      disposableProviderFactory="true" ecorePackage="kermeta_structure.ecore#/">
+    <genEnums ecoreEnum="kermeta_structure.ecore#//ConstraintLanguage">
+      <genEnumLiterals ecoreEnumLiteral="kermeta_structure.ecore#//ConstraintLanguage/kermeta"/>
+      <genEnumLiterals ecoreEnumLiteral="kermeta_structure.ecore#//ConstraintLanguage/ocl"/>
+    </genEnums>
+    <genEnums ecoreEnum="kermeta_structure.ecore#//ConstraintType">
+      <genEnumLiterals ecoreEnumLiteral="kermeta_structure.ecore#//ConstraintType/inv"/>
+      <genEnumLiterals ecoreEnumLiteral="kermeta_structure.ecore#//ConstraintType/pre"/>
+      <genEnumLiterals ecoreEnumLiteral="kermeta_structure.ecore#//ConstraintType/post"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="kermeta_structure.ecore#//String"/>
+    <genDataTypes ecoreDataType="kermeta_structure.ecore#//Boolean"/>
+    <genDataTypes ecoreDataType="kermeta_structure.ecore#//Integer"/>
+    <genDataTypes ecoreDataType="kermeta_structure.ecore#//UnlimitedNatural"/>
+    <genClasses ecoreClass="kermeta_structure.ecore#//Class">
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Class/ownedAttribute"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Class/ownedOperation"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Class/superClass"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Class/isAbstract"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Class/name"/>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Class/_new"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//Object">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Object/tag"/>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Object/getMetaClass"/>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Object/container"/>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Object/_equals">
+        <genParameters ecoreParameter="kermeta_structure.ecore#//Object/_equals/element"/>
+      </genOperations>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Object/get">
+        <genParameters ecoreParameter="kermeta_structure.ecore#//Object/get/property"/>
+      </genOperations>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Object/set">
+        <genParameters ecoreParameter="kermeta_structure.ecore#//Object/set/property"/>
+        <genParameters ecoreParameter="kermeta_structure.ecore#//Object/set/element"/>
+      </genOperations>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Object/isSet">
+        <genParameters ecoreParameter="kermeta_structure.ecore#//Object/isSet/property"/>
+      </genOperations>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Object/unset">
+        <genParameters ecoreParameter="kermeta_structure.ecore#//Object/unset/property"/>
+      </genOperations>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Object/checkInvariants"/>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Object/checkAllInvariants"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Operation/isAbstract"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Operation/raisedException"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Operation/ownedParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Operation/pre"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Operation/post"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Operation/body"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Operation/superOperation"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Operation/owningClass"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Operation/typeParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//Property">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Property/opposite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Property/isReadOnly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Property/default"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Property/isComposite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Property/isDerived"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Property/isID"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Property/getterBody"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Property/setterBody"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Property/owningClass"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//Type">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Type/typeContainer"/>
+      <genOperations ecoreOperation="kermeta_structure.ecore#//Type/isInstance">
+        <genParameters ecoreParameter="kermeta_structure.ecore#//Type/isInstance/element"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kermeta_structure.ecore#//TypeContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//TypeContainer/containedType"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//EnumerationLiteral">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//EnumerationLiteral/enumeration"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//MultiplicityElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//MultiplicityElement/isOrdered"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//MultiplicityElement/isUnique"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//MultiplicityElement/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//MultiplicityElement/upper"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kermeta_structure.ecore#//DataType"/>
+    <genClasses ecoreClass="kermeta_structure.ecore#//Enumeration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Enumeration/ownedLiteral"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kermeta_structure.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//NamedElement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//Package">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Package/nestedPackage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Package/nestingPackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Package/uri"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//Parameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Parameter/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//PrimitiveType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//PrimitiveType/instanceType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kermeta_structure.ecore#//TypedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//TypedElement/type"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//Tag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Tag/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Tag/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Tag/object"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//Constraint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Constraint/body"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Constraint/stereotype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//Constraint/language"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Constraint/invOwner"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Constraint/preOwner"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kermeta_structure.ecore#//Constraint/postOwner"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//ClassDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//ClassDefinition/inv"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kermeta_structure.ecore#//ClassDefinition/isAbstract"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//ClassDefinition/ownedAttribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//ClassDefinition/ownedOperation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//ClassDefinition/superType"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//TypeVariable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//TypeVariable/supertype"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//ProductType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//ProductType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//FunctionType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//FunctionType/left"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//FunctionType/right"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//TypeVariableBinding">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//TypeVariableBinding/variable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//TypeVariableBinding/type"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//TypeDefinition"/>
+    <genClasses ecoreClass="kermeta_structure.ecore#//VoidType"/>
+    <genClasses image="false" ecoreClass="kermeta_structure.ecore#//ParameterizedType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//ParameterizedType/typeParamBinding"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//ParameterizedType/typeDefinition"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kermeta_structure.ecore#//GenericTypeDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//GenericTypeDefinition/typeParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="kermeta_structure.ecore#//ModelTypeDefinition"/>
+    <genClasses ecoreClass="kermeta_structure.ecore#//ModelType"/>
+    <genClasses image="false" ecoreClass="kermeta_structure.ecore#//TypeDefinitionContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kermeta_structure.ecore#//TypeDefinitionContainer/ownedTypeDefinition"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

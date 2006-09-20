@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagramconfigurator:DiagramConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:diagramconfigurator="http://www.topcased.org/diagramconfigurator/0.10" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" projectName="fr.irisa.triskell.kermeta.graphicaleditor3" name="Kermeta class diagram" package="diag" prefix="structure" forceOverwrite="true" copyrightText="" pluginVersion="0.0.3" provider="IRISA/INRIA">
+  <palette name="Palette">
+    <paletteCategories name="Node">
+      <items name="Package" part="//@parts.0"/>
+      <items name="ClassDefinition" part="//@parts.1"/>
+      <items name="Operation" part="//@parts.2"/>
+    </paletteCategories>
+    <paletteCategories name="Edge">
+      <items name="Inheritance link" part="//@parts.3"/>
+      <items name="Reference" part="//@parts.4"/>
+    </paletteCategories>
+  </palette>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.0" defaultFont="Tahoma-regular-8" type="Package" childElements="//@parts.0 //@parts.1" defaultBackgroundColor="0,0,0" container="true" defaultWidth="20"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.1" defaultFont="Tahoma-regular-8" type="Class" childElements="//@parts.2" resizing="WIDTH" container="true" layout="ClassLayout" defaultWidth="-1" defaultHeight="-1"/>
+  <parts xsi:type="diagramconfigurator:NodePartConfiguration" object="//@objects.3" type="Label"/>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" object="//@objects.4" targetDecoration="TRIANGLE">
+    <sourceTargetCouple containerType="SOURCE" sourceNode="//@parts.1" targetNode="//@parts.1">
+      <containerObject href="kermeta_structure.genmodel#//structure/ClassDefinition"/>
+    </sourceTargetCouple>
+  </parts>
+  <parts xsi:type="diagramconfigurator:EdgePartConfiguration" object="//@objects.2" targetDecoration="ARROW">
+    <sourceTargetCouple containerType="SOURCE" sourceNode="//@parts.1" targetNode="//@parts.1">
+      <containerObject href="kermeta_structure.genmodel#//structure/ClassDefinition"/>
+      <containerRef xsi:type="ecore:EReference" href="kermeta_structure.ecore#//ClassDefinition/ownedAttribute"/>
+      <refSourceToEdge xsi:type="ecore:EReference" href="kermeta_structure.ecore#//ClassDefinition/ownedAttribute"/>
+      <refEdgeToSource xsi:type="ecore:EReference" href="kermeta_structure.ecore#//Property/owningClass"/>
+    </sourceTargetCouple>
+    <edgeObjects id="name" type="Target">
+      <eStructuralFeature xsi:type="ecore:EAttribute" href="kermeta_structure.ecore#//NamedElement/name"/>
+    </edgeObjects>
+  </parts>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/Package"/>
+    <diagrams diagram="/"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/ClassDefinition"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/Property"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:ModelObjectConfiguration">
+    <genClass href="kermeta_structure.genmodel#//structure/Operation"/>
+  </objects>
+  <objects xsi:type="diagramconfigurator:SimpleObjectConfiguration" name="Inheritance"/>
+  <genModel href="kermeta_structure.genmodel#/"/>
+  <templateRootObject href="kermeta_structure.genmodel#//structure/Package"/>
+  <editorConfigurator href="kermeta.editorconfigurator#/"/>
+</diagramconfigurator:DiagramConfiguration>
