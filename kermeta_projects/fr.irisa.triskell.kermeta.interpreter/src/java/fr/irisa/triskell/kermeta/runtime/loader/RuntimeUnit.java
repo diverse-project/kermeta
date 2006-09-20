@@ -1,4 +1,4 @@
-/* $Id: RuntimeUnit.java,v 1.4 2006-06-22 14:10:38 zdrey Exp $
+/* $Id: RuntimeUnit.java,v 1.5 2006-09-20 13:38:26 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : RuntimeUnit.java
  * License   : GPL
@@ -27,6 +27,9 @@ public abstract class RuntimeUnit {
     protected String uri;
     // The factory that created this runtime unit
     protected RuntimeUnitFactory factory;
+    
+    /** This is the resource that is the origin of this runtimeUnit */
+    public RuntimeObject associatedResource = null;
     
 
     /** This is called in the constructor of the concrete RuntimeUnit

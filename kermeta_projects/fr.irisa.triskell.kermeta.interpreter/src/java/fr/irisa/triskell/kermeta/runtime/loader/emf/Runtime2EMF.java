@@ -1,4 +1,4 @@
-/* $Id: Runtime2EMF.java,v 1.44 2006-09-18 12:02:45 zdrey Exp $
+/* $Id: Runtime2EMF.java,v 1.45 2006-09-20 13:38:26 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Runtime2EMF.java
  * License   : EPL
@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import fr.irisa.triskell.kermeta.language.structure.ClassDefinition;
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
+import fr.irisa.triskell.kermeta.runtime.RuntimeObjectHelper;
 import fr.irisa.triskell.kermeta.runtime.basetypes.Collection;
 import fr.irisa.triskell.kermeta.util.LogConfigurationHelper;
 
@@ -141,9 +142,9 @@ public class Runtime2EMF {
 	protected void fillRuntimeObjectList(RuntimeObject rObject)
 	{
 		if ( !(runtimeObjects.contains(rObject) || 
-				  getPrimitiveTypeValueFromRuntimeObject(rObject) != null
-					|| isanEnumerationLiteral(rObject)
-					|| isanEnumeration(rObject)) )
+				RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rObject) != null
+					|| RuntimeObjectHelper.isanEnumerationLiteral(rObject)
+					|| RuntimeObjectHelper.isanEnumeration(rObject)) )
 		{
 			runtimeObjects.add(rObject);
 			// Now, get the RO repr. of the properties of this object
@@ -251,12 +252,12 @@ public class Runtime2EMF {
 	protected Object getOrCreatePropertyFromRuntimeObject(RuntimeObject rProperty, EStructuralFeature feature)
 	{
 		Object result = null;
-		if (isaCollection(rProperty))
+		if (RuntimeObjectHelper.isaCollection(rProperty))
 			result = createEListFromRuntimeObject(rProperty);
 		// a EDataType?
-		else if (getPrimitiveTypeValueFromRuntimeObject(rProperty) != null)
-			result = getPrimitiveTypeValueFromRuntimeObject(rProperty);
-		else if (isanEnumerationLiteral(rProperty) == true)
+		else if (RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rProperty) != null)
+			result = RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject(rProperty);
+		else if (RuntimeObjectHelper.isanEnumerationLiteral(rProperty) == true)
 			result = createEEnumLiteralFromRuntimeObjectWithResource(rProperty,
 					feature.getEType().eResource());
 		// by default, an EObject instance of an EClass
@@ -371,7 +372,7 @@ public class Runtime2EMF {
 		// 2) get its eenum ecore equivalence
 		EEnum current_eenum = getEEnumFromQualifiedName(ro_enumeration_name, p_resource);
 		// Get the name of the enumeration literal element
-		String enum_literal_name = (String) getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) rObject
+		String enum_literal_name = (String) RuntimeObjectHelper.getPrimitiveTypeValueFromRuntimeObject((RuntimeObject) rObject
 				.getProperties().get("name"));
 		result = getEEnumLiteralFromQualifiedNameInEnumeration(
 				enum_literal_name, current_eenum);
@@ -448,68 +449,10 @@ public class Runtime2EMF {
 		return result;
 	}
 
-	/**
-	 * Get the value linked to the given RuntimeObject, provided this object
-	 * wraps a primitive type. Returns a String, Boolean, or Int value according
-	 * to the primitive type wrapped by this runtime object.
-	 * 
-	 * @param robject
-	 *            The runtime object of which we want the value
-	 * @return the value of the primitive type wrapped by robject
-	 */
-	public Object getPrimitiveTypeValueFromRuntimeObject(RuntimeObject robject) {
-		String[] s_primitive_types = new String[] { "StringValue",
-				"BooleanValue", "NumericValue", "CharacterValue" };
-		for (int i = 0; i < s_primitive_types.length; i++)
-			if (robject.getData().containsKey(s_primitive_types[i]))
-				return robject.getData().get(s_primitive_types[i]);
-		return null;
-	}
+	
 
-	/**
-	 * Returns true if the given RuntimeObject is a collection (Collection,
-	 * ReflectiveCollection, ReflectiveSequence), false otherwise. We use this
-	 * method since Collections that are void do not have a
-	 * "CollectionArrayList" entry in their associated data hashtable (see
-	 * RuntimeObject doc), so we can't test with this
-	 * 
-	 * @param robject
-	 *            the object to test
-	 * @return true if robject type is Collection, false otherwise
-	 */
-	public boolean isaCollection(RuntimeObject robject) {
-		boolean b = false;
-		ClassDefinition coll_cd = (ClassDefinition) unit.getKermetaUnit()
-				.getTypeDefinitionByName("kermeta::standard::Collection");
-		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
-				.getMetaclass().getData().get("kcoreObject");
-		if (unit.getKermetaUnit().isSuperClass(coll_cd,
-				(ClassDefinition) c.getTypeDefinition()))
-			b = true;
-		return b;
-	}
 
-	public boolean isanEnumerationLiteral(RuntimeObject robject) {
-		boolean b = false;
-		ClassDefinition coll_cd = (ClassDefinition) unit.getKermetaUnit().getTypeDefinitionByName("kermeta::language::structure::EnumerationLiteral");
-		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
-				.getMetaclass().getData().get("kcoreObject");
-		if (coll_cd.equals(c.getTypeDefinition()))
-			b = true;
-		return b;
-	}
 
-	public boolean isanEnumeration(RuntimeObject robject) {
-		boolean b = false;
-		ClassDefinition coll_cd = (ClassDefinition) unit.getKermetaUnit()
-				.getTypeDefinitionByName(
-						"kermeta::language::structure::Enumeration");
-		fr.irisa.triskell.kermeta.language.structure.Class c = (fr.irisa.triskell.kermeta.language.structure.Class) robject
-				.getMetaclass().getData().get("kcoreObject");
-		if (coll_cd.equals(c.getTypeDefinition()))
-			b = true;
-		return b;
-	}
 
 	/**
 	 * tool function

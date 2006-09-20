@@ -1,4 +1,4 @@
-/* $Id: Resource.java,v 1.7 2006-08-21 08:56:01 zdrey Exp $
+/* $Id: Resource.java,v 1.8 2006-09-20 13:38:26 dvojtise Exp $
  * Project   : Kermeta (First iteration)
  * File      : Resource.java
  * License   : GPL
@@ -8,6 +8,7 @@
  * Authors       : zdrey
  */
 package fr.irisa.triskell.kermeta.runtime.basetypes;
+
 
 import fr.irisa.triskell.kermeta.runtime.RuntimeObject;
 import fr.irisa.triskell.kermeta.runtime.loader.RuntimeUnit;
@@ -31,13 +32,19 @@ public class Resource {
      * otherwise, we save the resource in it.
      * @return void instance
      */
-    public static RuntimeObject save(RuntimeObject newUri, RuntimeObject mmUri, RuntimeObject resourceType, RuntimeObject instances)
+    public static RuntimeObject save(
+    		RuntimeObject self,
+    		RuntimeObject newUri, 
+    		RuntimeObject mmUri, 
+    		RuntimeObject resourceType, 
+    		RuntimeObject instances)
     {
         // runtime unit handles the transformation Kermeta2EMFInstance
         java.lang.String str_uri = String.getValue(newUri);
         RuntimeUnit runtime_unit = RuntimeUnitLoader.getDefaultLoader().
         	getConcreteFactory(String.getValue(resourceType)).
         	createRuntimeUnit(str_uri, String.getValue(mmUri), instances);
+        runtime_unit.associatedResource = self;
 	    runtime_unit.save(str_uri);
         return instances.getFactory().getMemory().voidINSTANCE;
     }
@@ -70,4 +77,5 @@ public class Resource {
         runtime_unit.load();
         return runtime_unit.getContentMap();
     }
+    
 }
