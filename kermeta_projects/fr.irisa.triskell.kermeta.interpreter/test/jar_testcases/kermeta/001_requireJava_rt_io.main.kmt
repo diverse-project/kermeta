@@ -1,4 +1,4 @@
-/* $Id: 001_requireJava_rt_io.main.kmt,v 1.1 2006-08-24 12:00:16 dvojtise Exp $
+/* $Id: 001_requireJava_rt_io.main.kmt,v 1.2 2006-09-20 16:01:16 dvojtise Exp $
  * Creation date: April 24, 2006
  * License:
  * Copyright:
@@ -15,7 +15,8 @@ require kermeta
 //require "new_file.kmt" 
 //require "test.jar"
 
-require "file:/C:/Program Files/Java/jdk1.5.0_05/jre/lib/rt.jar" includeFilter ("java::io") 
+//require "file:/C:/Program Files/Java/jdk1.5.0_08/jre/lib/rt.jar" includeFilter ("java::io") 
+require rt_jar includeFilter ("java::io")
 
 using java::io
 class testRequireJava inherits kermeta::kunit::Test
