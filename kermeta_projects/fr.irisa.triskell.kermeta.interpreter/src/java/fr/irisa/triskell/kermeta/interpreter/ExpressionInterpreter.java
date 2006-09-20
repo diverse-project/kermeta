@@ -1,4 +1,4 @@
-/* $Id: ExpressionInterpreter.java,v 1.46 2006-09-19 14:43:47 zdrey Exp $
+/* $Id: ExpressionInterpreter.java,v 1.47 2006-09-20 13:35:37 dvojtise Exp $
  * Project : Kermeta (First iteration)
  * File : ExpressionInterpreter.java
  * License : EPL
@@ -132,6 +132,7 @@ public class ExpressionInterpreter extends KermetaOptimizedVisitor {
 	 */
 	public Object invoke(RuntimeObject ro_target,Operation foperation,ArrayList arguments) {
 		RuntimeObject result=null;
+		setCurrentState(DEBUG_RESUME);
 		RuntimeObjectFactory roFactory = memory.getROFactory(); 
 		
 		fr.irisa.triskell.kermeta.language.structure.Class self_type = (fr.irisa.triskell.kermeta.language.structure.Class)ro_target.getMetaclass().getData().get("kcoreObject");
