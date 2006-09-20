@@ -10,7 +10,8 @@
 	<classpathentry sourcepath="/fr.irisa.triskell.kermeta.model/src/java" kind="lib" path="lib/model_kermeta.jar"/>
 	<classpathentry kind="lib" path="lib/thirdparty/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/traceability.jar"/>
+	<classpathentry kind="lib" path="lib/interpreter_kermeta.jar"/>
+	<classpathentry kind="lib" path="lib/thirdparty/junit.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/emf_libraries"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/fr.irisa.triskell.kermeta"/>
 	<classpathentry kind="output" path="build/class"/>
 </classpath>
