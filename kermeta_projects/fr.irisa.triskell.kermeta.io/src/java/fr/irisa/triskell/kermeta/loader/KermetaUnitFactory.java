@@ -1,4 +1,4 @@
-/* $Id: KermetaUnitFactory.java,v 1.17 2006-09-06 07:39:38 dtouzet Exp $
+/* $Id: KermetaUnitFactory.java,v 1.18 2006-09-20 15:59:32 dvojtise Exp $
  * Project: Kermeta.io
  * File: KermetaUnitFactory.java
  * License: EPL
@@ -115,6 +115,13 @@ public class KermetaUnitFactory {
     	    }
     	    uri = KermetaUnit.STD_LIB_URI;
     	    //if (standard_lib != null) return standard_lib;
+    	}
+    	else if (uri.equals("java_rt_jar")){
+    		// if this is java declaration that are required
+    		String javahome = System.getProperty("java.home");
+    		javahome = javahome.replace("\\", "/");
+    		uri = "file:/"+javahome+"/lib/rt.jar";
+    		
     	}
     	
     	// resolve uri
