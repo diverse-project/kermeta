@@ -1,4 +1,4 @@
-/* $Id: KM2HTMLPrettyPrinter.java,v 1.4 2006-08-03 15:42:14 zdrey Exp $
+/* $Id: KM2HTMLPrettyPrinter.java,v 1.5 2006-09-20 12:34:36 zdrey Exp $
  * Project    : fr.irisa.triskell.kermeta.io
  * File       : KM2HTMLPrettyPrinter.java
  * License    : EPL
@@ -27,8 +27,6 @@ import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -63,30 +61,31 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	 * classes, properties). Once this list is filled, we join it in a single string. Each
 	 * description points to the @kdoc annotations (stored in the _contents attribute) 
 	 * of those elements through a href link. */
-	protected List<String> _descriptions;
+	protected List<StringBuffer> _descriptions;
 	
 	/**
 	 * Contains all the @kdoc annotations of the elements of Kermeta source/
 	 */
-	protected Hashtable<String, String> _contents;
+	protected Hashtable<String, StringBuffer> _contents;
 	
 	/**
 	 * Contains the list of all the packages. Each of them is a href-link to its package content.
 	 */
 	protected String _packagesNavigation;
 	
-	public static final String KEY_MODULE    = "Modules";
+	public static final String KEY_MODULE    = "Packages";
 	public static final String KEY_CLASS     = "Classes";
 	public static final String KEY_ATTRIBUTE    = "Attributes";
 	public static final String KEY_FUNCTION  = "Functions";
 	public static final String KEY_METHOD    = "Methods";
+	public static final String KEY_INHERITED_METHOD    = "Inherited methods";
 	public static final String KEY_VALUE     = "Values";
 	public static final String MOD_INHERITED = "Inherited";
 	public static final String[] KEYS_ORDER = new String[] {KEY_MODULE, KEY_CLASS, KEY_METHOD, KEY_FUNCTION, KEY_VALUE};
 	// the list of html keywords that are interpreted by this km2html prettyprinter -> only in lower case!
 	public static String[] ALLOWED_HTML_KEYWORDS;
 	static {
-		ALLOWED_HTML_KEYWORDS = new String[] { "pre", "code", "b", "a", "i" };
+		ALLOWED_HTML_KEYWORDS = new String[] { "pre", "code", "b", "a", "i", "img" };
 	}
 	
 	public static Hashtable<String, String>	COMPACT; // this is unused yet - could largely reduce the output html file size 
@@ -105,6 +104,14 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		COMPACT.put("undocumented","u");
 		}
 	//	RE_SPACES = re.compile("\s*\n\s*\n+")
+	public static String compactHTMLString(String html_string)
+	{
+		String result = html_string;
+		for (String word : COMPACT.keySet()) {
+			result = result.replaceAll("class='"+ word, "class='" + COMPACT.get(word));
+		}
+		return result;
+	}
 
 	public String inputFile; // the kermeta program file.
 	protected KermetaUnit kmunit;
@@ -116,8 +123,8 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	public KM2HTMLPrettyPrinter(String inputfile)
 	{
 		// init
-		_contents = new Hashtable<String, String>();
-		_descriptions = new ArrayList<String>();
+		_contents = new Hashtable<String, StringBuffer>();
+		_descriptions = new ArrayList<StringBuffer>();
 		inputFile = inputfile;
 		// Load the KermetaUnit for the given file (only needed to get the rootPackage :} of the km(t) file and
 		// the list of its nested packages) 
@@ -128,8 +135,9 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	/** Pretty prints the file given as input in KM2HTMLPrettyPrinter constructor and
 	 *  store it in the given output file */
 	public void ppKermetaFile(String output_file) {
-		// Pretty print the Kermeta file in HTML		
+		// Pretty print the Kermeta file in HTML
 		String html_doc = ppHTMLAll();
+		html_doc = compactHTMLString(html_doc);
 		/*for (Entry<String, String> tuple : COMPACT.entrySet()) {
 			html_doc = html_doc.replaceAll("='"+tuple.getKey()+"'","='"+tuple.getValue()+"'");}*/
 		// Store it in the output_file
@@ -272,7 +280,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	public String representation(NamedElement node)
 	{	
 		_as_signature = true;
-		String result = (String) this.accept(node);
+		String result = (String) this.accept(node).toString();
 		return (result!=null && result!="")?"<code>" + result + "</code>":"";
 	}
 
@@ -283,25 +291,25 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	 * text.
 	 * @param node the node that contains a doc - either classDefinition, operation, attribute.
 	 * */
-	public String describe(NamedElement node)
+	public StringBuffer describe(NamedElement node)
 	{
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		String this_id = "d_" + String.valueOf(node.hashCode());
 		if (this._contents.containsKey(this_id)) return this._contents.get(this_id);
-		result += "<div id='" + this_id + "' class='description'>";
-		result += "<h1>" + this.describeType(node) + "</h1>";
-		result += "<div class='representation'>";
-		result += this.representation(node);
-		result += "</div>";
-		result += "<div class='docstring'>";
+		result.append( "<div id='" + this_id + "' class='description'>" );
+		result.append( "<h1>" + this.describeType(node) + "</h1>" );
+		result.append( "<div class='representation'>" );
+		result.append( this.representation(node) );
+		result.append( "</div>" );
+		result.append( "<div class='docstring'>" );
 		// Does this node contains annotation?
 		if (node.getTag().size()>0)
-			result += visitEList(node.getTag(),"");
+			result.append( visitEList(node.getTag(),"") );
 		else if (node instanceof ClassDefinition && ((ClassDefinition)node).getSuperType().size()>0)
-			result += "<span class='undocumented'>See inherited classes.</span>";
+			result.append( "<span class='undocumented'>See inherited classes.</span>" );
 		else
-			result += "<span class='undocumented'>Undocumented</span>";
-		result += "</div></div>";
+			result.append( "<span class='undocumented'>Undocumented</span>" );
+		result.append( "</div></div>" );
 		_as_signature = false;
 		this._contents.put(this_id, result);
 		return result;
@@ -333,9 +341,9 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	}
 	
 	/** Prints a href-link for the given node and document it. */
-	protected String documentFeature(NamedElement node)
+	protected StringBuffer documentFeature(NamedElement node)
 	{
-		String result;
+		StringBuffer result = new StringBuffer();
 		int hash_code = 0;
 		// Get the id of the feature
 		if (node instanceof Operation) hash_code = ((Operation)node).getOwningClass().hashCode();
@@ -353,7 +361,7 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		// Set the html display of the feature as in a list
 		String link = "href='javascript:documentElement(\""+ this_id + "\",\"" + child_id + "\");'";
 		boolean is_documented = node.getTag().size()>0;
-		result = "<span class='"+ is_documented + "'><a " + link + ">" +  node.getName() + "</a></span><br />";
+		result.append( "<span class='"+ is_documented + "'><a " + link + ">" +  node.getName() + "</a></span><br />" );
 		
 		this.document(node);
 		
@@ -364,30 +372,30 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	 * @see fr.irisa.triskell.kermeta.visitor.KermetaOptimizedVisitor#visitOperation(fr.irisa.triskell.kermeta.language.structure.Operation)
 	 */
 	public Object visitOperation(Operation node) {
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		if (_as_signature == false)
-			result = documentFeature(node);
+			result.append( documentFeature(node) );
 		else
 		{ // duplicate code with km2kmtprettyprinter
-			result += (node.getSuperOperation() != null)?"method ":"operation ";
-			result += KMTHelper.getMangledIdentifier(node.getName());
+			result.append ( (node.getSuperOperation() != null)?"method ":"operation " );
+			result.append ( KMTHelper.getMangledIdentifier(node.getName()) );
 			if (node.getTypeParameter().size() > 0) {
-				result += "&lt;";
-				result += ppTypeVariableDeclaration(node.getTypeParameter());
-				result += "&gt;";
+				result.append( "&lt;" );
+				result.append( ppTypeVariableDeclaration(node.getTypeParameter()) );
+				result.append( "&gt;" );
 			}
-			result += "(";
-			result += ppComaSeparatedNodes(node.getOwnedParameter());
-			result += ")";
-			result += node.getType() != null?(" : " + ppTypeFromMultiplicityElement(node)):" : Void";
+			result.append( "(" );
+			result.append( ppComaSeparatedNodes(node.getOwnedParameter()));
+			result.append( ")");
+			result.append( node.getType() != null?(" : " + ppTypeFromMultiplicityElement(node)):" : Void");
 			if (node.getSuperOperation() != null) {
-				result += " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass()));
+				result.append( " from " + KMTHelper.getMangledIdentifier(KMTHelper.getQualifiedName(node.getSuperOperation().getOwningClass())) );
 			}
 		}
 		return result;
 	}
 	
-	public String visitEList(EList nodes, String node_type)
+	public String visitEList(List nodes, String node_type)
 	{	
 		String result = "<div class='title'>" + node_type + "</div><div class='group'>" ;
 		// First, sort the nodes, provided they are named elements. (which should always be the case in this code context)
@@ -441,11 +449,11 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		else
 		{
 			String this_id = String.valueOf(node.hashCode());
-			String result = "";
+			StringBuffer result = new StringBuffer();
 			// Constructs the hyperlinked name of a Class with a ref to its description, and the list of associated operations
-			result += "<div id='" + this_id + "' class='" + "container" + "'>";
-			result += "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
-			result += "</div>";
+			result.append( "<div id='" + this_id + "' class='" + "container" + "'>" );
+			result.append( "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>" );
+			result.append( "</div>" );
 			// Store the constructed content
 			this._contents.put(this_id, result);
 			// Returns the hyperlinked name of this class with a ref to its description
@@ -479,16 +487,19 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		}
 		
 		String this_id = String.valueOf(node.hashCode());
-		String result = "";
+		StringBuffer result = new StringBuffer();
 		// Constructs the hyperlinked name of a Class with a ref to its description, and the list of associated operations
-		result += "<div id='" + this_id + "' class='" + "container" + "'>";
-		result += "<div class='name'>"+ container.getName() +"::<a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
+		result.append( "<div id='" + this_id + "' class='" + "container" + "'>" );
+		result.append( "<div class='name'>"+ container.getName() +"::<a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>");
 		_as_signature = false;
 		// For each operation : construct the hyper-linked-name of an operation, with a ref of its description
-		result += this.visitEList(node.getOwnedOperation(), KEY_METHOD);
+		result.append( this.visitEList(node.getOwnedOperation(), KEY_METHOD));
 		_as_signature = false;
-		result += this.visitEList(node.getOwnedAttribute(), KEY_ATTRIBUTE);
-		result += "</div>";
+		// This makes the program too slow!
+/*		result += this.visitEList(kmunit.getAllOwnedOperation(), KEY_INHERITED_METHOD);
+		_as_signature = false;*/
+		result.append(  this.visitEList(node.getOwnedAttribute(), KEY_ATTRIBUTE));
+		result.append(  "</div>" );
 		// Store the constructed content
 		this._contents.put(this_id, result);
 		typedef = true;
@@ -503,11 +514,11 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 			internalLog.error("Problem visiting a Class node with TypeDefinition name == null" );
 			return "";
 		}
-		String result = ppTypeName(qname, name);
-		result = result.substring(0, result.length() - name.length());
-		result += getClassHREFForType(node);
+		StringBuffer result = new StringBuffer( ppTypeName(qname, name) );
+		result = new StringBuffer( result.substring(0, result.length() - name.length()) );
+		result.append( getClassHREFForType(node) );
 		if (node.getTypeParamBinding().size() > 0) {
-			result += "&lt;" + ppComaSeparatedNodes(node.getTypeParamBinding()) + "&gt;";
+			result.append( "&lt;" + ppComaSeparatedNodes(node.getTypeParamBinding()) + "&gt;" );
 		}
 		return result;
 	}
@@ -527,13 +538,13 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		this.document(node);
 		String this_id = String.valueOf(node.hashCode());
 		// Construct the list of class definitions that belong to this package
-		String result = "<div id='" + this_id + "' class='" + "root" + "'>";
-		result += "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>";
+		StringBuffer result = new StringBuffer( "<div id='" + this_id + "' class='" + "root" + "'>" );
+		result.append( "<div class='name'><a href='javascript:describeElement(\""+ this_id + "\");'>" + node.getName() + "</a></div>" );
 		_as_signature = false; 
 		// use this because visitor of operation can be used for two purposes : one to print the signature, one to print the documentation
 		// class definition visit return the hyper-linked-name of a class, and fills its contents
-		result += this.visitEList(node.getOwnedTypeDefinition(), KEY_CLASS);
-		result += "</div>";
+		result.append( this.visitEList(node.getOwnedTypeDefinition(), KEY_CLASS) );
+		result.append( "</div>" );
 		this._contents.put(this_id, result);
 		return result;
 	}
@@ -546,11 +557,11 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 			return documentFeature(node);
 		else 
 		{
-			String signature = node.isIsComposite()?"attribute ":(node.isIsDerived()?"property ":"reference ");
-			signature += node.getName() + ": " + ppTypeFromMultiplicityElement(node);
-			signature += node.isIsReadOnly()?" readonly ":"";
+			StringBuffer signature = new StringBuffer(node.isIsComposite()?"attribute ":(node.isIsDerived()?"property ":"reference ") );
+			signature.append( node.getName() + ": " + ppTypeFromMultiplicityElement(node) );
+			signature.append( node.isIsReadOnly()?" readonly ":"" );
 			if (node.getOpposite() != null) 
-				signature += "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName());
+				signature.append ( "#" + KMTHelper.getMangledIdentifier(node.getOpposite().getName()) );
 			return signature;
 		}
 	}
@@ -564,14 +575,14 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 		int begin_i = 0; int end_i = 0;
 		if (result.startsWith("/**")) begin_i = 2;
 		if (result.endsWith("*/")) end_i = result.length()-2;
-		ArrayList<String> lresult = new ArrayList<String>();
+		ArrayList<StringBuffer> lresult = new ArrayList<StringBuffer>();
 		String[] lines = result.substring(begin_i, end_i).split("\\n");
 		for (int i = 0; i<lines.length; i++)
 		{
 			String nline = lines[i].replaceFirst("\\s*\\*?(.*)", "$1");
 			// nline.matches("\\s*\\*?(.*)"));
 			nline = html(nline);
-			lresult.add(nline);
+			lresult.add(new StringBuffer(nline));
 		}
 		result = join(lresult,"<br/>");
 		return result;
@@ -580,7 +591,6 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	/** Replace protected html chars ( &lt; becomes <code>&lt;</code> ) */
 	public String html(String str)
 	{	String result = str;
-		String result3 = "";
 		// first, protect allowed html keywords
 		for (String k : ALLOWED_HTML_KEYWORDS) { // pre/code/b/i
 			result = result.replaceAll("<" + k + ">", "--" + k + "--")
@@ -611,16 +621,16 @@ public class KM2HTMLPrettyPrinter extends KM2KMTPrettyPrinter {
 	 * @param delimiter the delimiter
 	 * @return
 	 */
-	public String join(Collection<String> l, String delimiter)
+	public String join(Collection<StringBuffer> l, String delimiter)
 	{
-		String result = "";
-		for (String s : l) { result += s + delimiter; }
+		StringBuffer result = new StringBuffer();
+		for (StringBuffer s : l) { result.append( s + delimiter ); }
 		return result.substring(0, result.length()-delimiter.length());
 	}
 	
 	/** Sorts the given list of elements. Their type should always be NamedElement. Otherwise,
 	 * raises a ClassCastException ... */
-	public List<NamedElement> sortNamedElements(EList nodes)
+	public List<NamedElement> sortNamedElements(List nodes)
 	{
 		// EList is not easily modifiable
 		List<NamedElement> result = new ArrayList<NamedElement>();
